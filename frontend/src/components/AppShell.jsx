@@ -42,6 +42,22 @@ export default function AppShell() {
           <NotificationsBell />
         </header>
 
+        {user?.role_status === "pending_review" && (
+          <div
+            className="mx-5 lg:mx-10 mt-4 mb-2 bg-equine-navy border-l-4 border-equine-lilac p-4 flex items-start gap-3 text-equine-platinum text-sm font-body tracking-wide rounded-r-md"
+            data-testid="pending-review-banner"
+          >
+            <span className="inline-block mt-0.5 w-2 h-2 rounded-full bg-equine-lilac" />
+            <div>
+              <div className="font-medium text-equine-ivory mb-0.5">Your account is awaiting verification.</div>
+              <div className="text-equine-platinum/75 text-[13px]">
+                We review every trainer, barn and service provider before unlocking the
+                full directory experience. You can complete your profile and explore in the meantime.
+              </div>
+            </div>
+          </div>
+        )}
+
         <main className="flex-1 overflow-y-auto scrollbar-luxe px-5 lg:px-10 py-8 animate-fade-in">
           <Outlet />
         </main>

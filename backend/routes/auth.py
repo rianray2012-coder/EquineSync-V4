@@ -53,7 +53,16 @@ from core import audit
 logger = logging.getLogger(__name__)
 
 ROLES = ["admin", "barn_manager", "trainer", "groom", "working_student",
-         "horse_owner", "rider", "parent", "veterinarian", "farrier"]
+         "horse_owner", "rider", "parent", "veterinarian", "farrier",
+         "barn_owner", "service_provider"]
+
+# Marketplace signup roles (Equine Sync public signup flow).
+# horse_owner + rider auto-approve. trainer/barn_owner/service_provider are
+# flagged pending_review for admin verification; they still get a session
+# (login-with-banner UX) but their role-status is recorded explicitly.
+MARKETPLACE_ROLES = ["horse_owner", "rider", "trainer", "barn_owner", "service_provider"]
+MARKETPLACE_PENDING_REVIEW_ROLES = {"trainer", "barn_owner", "service_provider"}
+MARKETPLACE_TIERS = {"free", "owner_rider", "trainer_provider", "barn_facility"}
 
 
 # ---------------- helpers ----------------
@@ -177,6 +186,23 @@ class ResendVerificationBody(BaseModel):
     email: EmailStr
 
 
+class MarketplaceSignupBody(BaseModel):
+    """Public marketplace signup payload — distinct from /auth/register.
+
+    /auth/register stays locked to PUBLIC_REGISTRATION_ROLE per Security Patch 2E.
+    /auth/signup is the consumer-facing onboarding flow that accepts the five
+    marketplace roles and an optional profile blob.
+    """
+    email: EmailStr
+    password: str
+    full_name: str
+    role: str
+    phone: Optional[str] = None
+    location: Optional[str] = None
+    tier: Optional[str] = None  # free | owner_rider | trainer_provider | barn_facility
+    profile: Optional[dict] = None  # role-specific skippable fields
+
+
 # ---------------- transactional email helpers ----------------
 
 async def _send_verification_email(user: dict, raw: str, ttl_hours: int):
@@ -272,6 +298,77 @@ def build_router(db) -> APIRouter:
             "user": user_safe(user),
         }
         # Dev convenience only — never leak the raw token in production.
+        if not is_production():
+            resp["dev_verification_token"] = raw_verify
+        return resp
+
+    @router.post("/auth/signup", dependencies=[Depends(auth_rate_limiter)])
+    async def marketplace_signup(request: Request, body: MarketplaceSignupBody):
+        """Equine Sync public marketplace signup (riders, owners, trainers,
+        barns, service providers). Distinct from /auth/register — that path
+        remains role-locked per Security Patch 2E. Privileged marketplace
+        roles get role_status='pending_review' for admin verification.
+        """
+        role = (body.role or "").strip().lower()
+        if role not in MARKETPLACE_ROLES:
+            raise HTTPException(400, f"Invalid role. Choose one of {MARKETPLACE_ROLES}.")
+        if body.tier and body.tier not in MARKETPLACE_TIERS:
+            raise HTTPException(400, f"Invalid tier. Choose one of {sorted(MARKETPLACE_TIERS)}.")
+        if len(body.password) < 8:
+            raise HTTPException(400, "Password must be at least 8 characters")
+        existing = await db.users.find_one({"email": body.email.lower()})
+        if existing:
+            raise HTTPException(400, "Email already registered")
+        role_status = "pending_review" if role in MARKETPLACE_PENDING_REVIEW_ROLES else "active"
+        user = {
+            "id": new_id(),
+            "email": body.email.lower(),
+            "full_name": body.full_name,
+            "role": role,
+            "role_status": role_status,
+            "barn_id": PRIMARY_BARN_ID,
+            "password_hash": hash_pwd(body.password),
+            "email_verified": False,
+            "phone": body.phone,
+            "location": body.location,
+            "profile": body.profile or {},
+            "membership_tier": body.tier or "free",
+            "subscription_status": "free" if (body.tier or "free") == "free" else "incomplete",
+            "signup_source": "marketplace",
+            "created_at": now_iso(),
+        }
+        await db.users.insert_one(user)
+        # Best-effort verification email (never blocks signup).
+        verify_ttl = email_verify_ttl_hours()
+        raw_verify = await issue_token(db, user["id"], PURPOSE_EMAIL_VERIFY, verify_ttl)
+        await _send_verification_email(user, raw_verify, verify_ttl)
+
+        # Per user direction: allow full login but mark with a banner — so we
+        # always issue a session here (email-verify gate still respected if ON).
+        if not should_issue_session_on_register(user["email_verified"], enforce_email_verification()):
+            resp = {
+                "pending_verification": True,
+                "message": "Account created. Please verify your email before signing in.",
+                "user": user_safe(user),
+            }
+            if not is_production():
+                resp["dev_verification_token"] = raw_verify
+            return resp
+
+        token = create_token(user["id"], user["role"], resolve_barn_id(user))
+        ua, ip = await client_meta(request)
+        refresh = await issue_refresh_token(db, user["id"], user_agent=ua, ip=ip)
+        await audit.record(
+            action="auth.marketplace_signup", user=user, request=request,
+            resource_type="user", resource_id=user["id"],
+            metadata={"role": role, "role_status": role_status, "tier": user["membership_tier"]},
+        )
+        resp = {
+            "token": token,
+            "refresh_token": refresh,
+            "expires_in_seconds": JWT_EXP_HOURS * 3600,
+            "user": user_safe(user),
+        }
         if not is_production():
             resp["dev_verification_token"] = raw_verify
         return resp

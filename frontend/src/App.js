@@ -8,6 +8,9 @@ import { ROLE_GROUPS, canAccessRole } from "./lib/permissions";
 
 import AppShell from "./components/AppShell";
 import Login from "./pages/Login";
+import Landing from "./pages/Landing";
+import Signup from "./pages/Signup";
+import SignupSuccess from "./pages/SignupSuccess";
 import Forbidden from "./pages/Forbidden";
 import Dashboard from "./pages/Dashboard";
 import Horses from "./pages/Horses";
@@ -91,12 +94,15 @@ function App() {
         <AuthProvider>
           <Toaster position="top-right" theme="dark" />
           <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signup/success" element={<SignupSuccess />} />
             <Route path="/login" element={<Login />} />
             <Route path="/accept-invite" element={<AcceptInvite />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route element={<Protected><AppShell /></Protected>}>
-              <Route index element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/today" element={<Today />} />
               <Route path="/my-work" element={permit(<MyWork />, ROLE_GROUPS.staff)} />
               <Route path="/barn-board" element={<Navigate to="/today" replace />} />

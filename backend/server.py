@@ -67,6 +67,7 @@ from routes.care import build_router as build_care_router
 from routes.horses import build_router as build_horses_router
 from routes.operations import build_router as build_operations_router
 from routes.billing import build_router as build_billing_router
+from routes.membership import build_router as build_membership_router
 from routes.recurring_charges import build_router as build_recurring_charges_router
 from routes.system import build_router as build_system_router
 from routes.admin import build_router as build_admin_router
@@ -180,6 +181,12 @@ api_router.include_router(build_billing_router(
     list_collection=list_collection,
     clean=clean,
     new_id=new_id,
+))
+
+# Marketplace membership — Stripe Checkout (routes/membership.py)
+api_router.include_router(build_membership_router(
+    db=db,
+    get_current_user=get_current_user,
 ))
 
 # Recurring charges — Phase 9B-1 billing templates (routes/recurring_charges.py)

@@ -2,6 +2,10 @@ export const ADMIN_ROLES = ["admin", "barn_manager"];
 export const STAFF_ROLES = ["admin", "barn_manager", "trainer", "groom", "working_student"];
 export const CARE_PARTNER_ROLES = ["veterinarian", "farrier"];
 export const OWNER_ROLES = ["horse_owner", "parent"];
+// Marketplace-only roles — these accounts are self-signup. They get a session
+// but no privileged scope; `role_status` (`active` | `pending_review`) gates
+// any future admin elevation. Listed here for completeness/visibility only.
+export const MARKETPLACE_ROLES = ["horse_owner", "rider", "trainer", "barn_owner", "service_provider"];
 
 export const ROLE_GROUPS = {
   admin: ADMIN_ROLES,

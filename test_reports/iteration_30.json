@@ -1,0 +1,68 @@
+{
+  "summary": "Full backend + frontend validation of the new Marketplace Signup + Stripe membership flow. Backend: 14/14 pytest pass on test_marketplace_signup.py (tier catalog, all 5 role flows incl. pending-review, validation errors, Stripe paid + free, session ownership 403, /auth/register still role-locked). Frontend: Landing, /signup wizard (Step 1→2→3), free finish, paid checkout redirect to checkout.stripe.com, trainer pending-review banner on /dashboard, horse_owner banner-absent, logged-in / auto-redirect to /dashboard — ALL WORK. Two regressions found that are unrelated to the new marketplace surfaces but break the spec's last assertion ('/login still works for seeded admin@equine.test/admin123'): seeded accounts cannot log in because Pydantic email validator now rejects the reserved .test TLD with HTTP 422, and Login.jsx then renders the Pydantic error array directly as a React child causing an Uncaught runtime error overlay.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "/api/auth/login", "issue": "Returns HTTP 422 for ALL seeded demo accounts (admin@equine.test, barn@equine.test, trainer@equine.test, groom@equine.test, owner@equine.test) because Pydantic email-validator rejects the reserved .test TLD: 'value is not a valid email address: The part after the @-sign is a special-use or reserved name'. Login is impossible with any seeded credential. Root cause: LoginRequest model uses pydantic.EmailStr (or similar strict validator) and the seed.py emails use the reserved .test TLD. Fix options: (1) change seed emails to .com (e.g. @equine.local is also reserved — use @equinesync.com), or (2) relax the email validator on /auth/login to allow reserved domains (email_validator's check_deliverability=False with allow_special_use_domains, or accept plain str + manual regex).", "priority": "CRITICAL"}
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Login.jsx", "issue": "When /api/auth/login returns 422 with Pydantic's `detail: [{type, loc, msg, input, ctx}]` array, line 43 sets `err = err2?.response?.data?.detail` to that array of objects. Line 109 then renders `{err}` directly inside a <div>, which React refuses (`Objects are not valid as a React child (found: object with keys {type, loc, msg, input, ctx})`) and the whole page crashes into the dev error overlay. Fix: normalize detail before storing — `const d = err2?.response?.data?.detail; setErr(typeof d === 'string' ? d : Array.isArray(d) ? d.map(x => x.msg).join(', ') : 'Sign in failed');`", "selector": "[data-testid=\"login-error\"]", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "AppShell pending-review banner (/dashboard)", "issues": ["Banner heading text 'Your account is awaiting verification.' has very low contrast against the dark navy banner background — nearly invisible. Only the muted body paragraph is legible. Suggest brightening the heading to equine-ivory or brassLight."]}
+    ]
+  },
+  "verified_flows": [
+    "GET /api/membership/tiers → 4 tiers (free=$0, owner_rider=$15, trainer_provider=$49, barn_facility=$149) ✓",
+    "POST /api/auth/signup role=horse_owner → role_status=active + token ✓",
+    "POST /api/auth/signup role=rider → role_status=active + token ✓",
+    "POST /api/auth/signup role=trainer → role_status=pending_review + token (login-with-banner UX) ✓",
+    "POST /api/auth/signup role=barn_owner → role_status=pending_review + token ✓",
+    "POST /api/auth/signup role=service_provider → role_status=pending_review + token ✓",
+    "POST /api/auth/signup role=admin → HTTP 400 ✓",
+    "POST /api/auth/signup password=short → HTTP 400 ✓",
+    "POST /api/auth/signup duplicate email → HTTP 400 ✓",
+    "POST /api/auth/register role=admin → coerced to horse_owner (Security Patch 2E intact) ✓",
+    "POST /api/membership/checkout tier=free → url=null + status=free, /auth/me.subscription_status flips to 'free' ✓",
+    "POST /api/membership/checkout tier=owner_rider → returns checkout.stripe.com URL + session_id + amount=15.0 ✓",
+    "POST /api/membership/checkout tier=platinum → HTTP 400 ✓",
+    "GET /api/membership/checkout/status/{other-users-session} → HTTP 403 ✓",
+    "FRONTEND: Landing / shows hero-join-cta, 5 role cards, 4 pricing cards. Verification badge on trainer/barn_owner/service_provider only ✓",
+    "FRONTEND: Clicking role-card-rider on Landing → /signup?role=rider with rider pre-selected, signup-step-next disabled until form is filled ✓",
+    "FRONTEND: Signup Step 1 fields filled → signup-step-next enabled → click creates account and advances to Step 2 ✓",
+    "FRONTEND: Step 2 signup-skip-profile present and works; signup-profile-specialties renders for trainer role ✓",
+    "FRONTEND: Step 3 shows all 4 signup-tier-* cards. Selecting free reveals signup-finish-free which navigates to /dashboard. Selecting trainer_provider reveals signup-checkout which redirects to https://checkout.stripe.com/c/pay/cs_test_… ✓",
+    "FRONTEND: Trainer who finished signup with free tier lands on /dashboard with pending-review-banner visible ✓",
+    "FRONTEND: Horse_owner who finished signup with free tier lands on /dashboard with pending-review-banner ABSENT ✓",
+    "FRONTEND: Visiting / while authenticated auto-redirects to /dashboard ✓"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_marketplace_signup.py",
+    "/app/test_reports/pytest/iter30_marketplace.xml"
+  ],
+  "action_items": [
+    "FIX (CRITICAL): /api/auth/login returns 422 for every seeded user because seed.py emails use the reserved .test TLD. Either re-seed with non-reserved TLD or relax the email validator on the login model (e.g. accept str instead of EmailStr, or pass allow_special_use_domains=True to email_validator).",
+    "FIX (HIGH): /app/frontend/src/pages/Login.jsx line 43 must guard against `detail` being an array — Pydantic 422 responses crash the page with 'Objects are not valid as a React child'. Normalize to string before setErr.",
+    "POLISH: Brighten the pending-review banner heading text — currently nearly invisible against dark navy background.",
+    "OPTIONAL: Update /app/memory/test_credentials.md once the .test seed issue is resolved (either by changing the TLD or by documenting that those creds are not usable until backend validator is relaxed)."
+  ],
+  "critical_code_review_comments": [
+    "Login.jsx error handling is brittle — assumes `detail` is always a string. Any FastAPI Pydantic 422 (or 200 response variants from other endpoints) will crash the page. Apply the same defensive .map(.msg).join() pattern used elsewhere.",
+    "Signup.jsx + SignupSuccess.jsx may have the same latent bug — if /auth/signup or /membership/checkout ever 422s, the error UI could crash similarly. Worth auditing.",
+    "Marketplace signup correctly issues a session for pending_review roles (banner UX) — verified end-to-end. Good separation between role_status and auth eligibility.",
+    "Stripe checkout URL is plausibly a real Stripe test session (cs_test_ prefix, opens hosted Stripe page) — emergentintegrations wiring works.",
+    "Free-tier short-circuit on /membership/checkout correctly updates subscription_status on the user; the success page polling path is therefore only exercised for paid tiers (sensible).",
+    "Security Patch 2E invariant (/auth/register role-lockdown) still holds — test_register_endpoint_still_role_locked passes alongside the new marketplace tests."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "14/14 marketplace tests (100%) — but login broken for seeds", "frontend": "All new marketplace surfaces 100%; legacy /login broken due to seed email TLD"},
+  "test_credentials": "Created on demand via /auth/signup (mkt_*@test.com pattern). Seeded admin@equine.test / admin123 NOT USABLE this iteration (422 on email validation).",
+  "seed_data_creation": "Created ~6 marketplace test users with timestamped emails (ui_owner_*, ui_trainer_*, ui_tr_banner_*, plus the 14 from pytest run). None collide with the existing seed.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All NEW marketplace functionality (Landing, /signup wizard, /signup/success, /membership/* APIs, AppShell pending banner) is solid. The two open issues are not in the marketplace scope: (1) seeded .test-TLD accounts fail login (backend regression in email validation, blocking every legacy demo login), and (2) Login.jsx crashes on Pydantic array-detail errors. Once seed emails are fixed (e.g. switch to *@equinesync.com) the /login → /dashboard assertion will pass. The Stripe paid-tier session created during the test (cs_test_a1kZI4jMV2fMiEkbjmrmwRRwUBQPqBBYkKt2cX8GjGDPpTK9P2FO4OgDd4 for trainer_provider $49) was abandoned at the Stripe page — not completed.",
+  "rca_of_the_issue": "Seeded login 422: backend's login pydantic model uses a strict EmailStr (from email-validator) which since v2.x rejects ICANN special-use TLDs like .test/.localhost/.example/.invalid. All seed emails in /app/backend/seed.py use @equine.test, so the request body fails validation before the credentials are even checked. The Login.jsx UI then receives detail as an array of error objects and crashes on render. Mitigation A (preferred): update seed.py to use a non-reserved domain (@equinesync.com mirrors the convention seen in iteration 29) and re-seed. Mitigation B: in the LoginRequest model, change email: EmailStr to email: str (login does not need RFC-strict validation — uniqueness is enforced at DB lookup time). Mitigation C: pass allow_special_use_domains=True to email_validator. In parallel, harden Login.jsx error handling to never assume detail is a string."
+}

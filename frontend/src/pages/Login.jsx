@@ -30,7 +30,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (user) navigate("/", { replace: true });
+    if (user) navigate("/dashboard", { replace: true });
   }, [user, navigate]);
 
   const submit = async (e) => {
@@ -38,7 +38,7 @@ export default function Login() {
     setErr(""); setLoading(true);
     try {
       await login(email, password);
-      navigate("/", { replace: true });
+      navigate("/dashboard", { replace: true });
     } catch (err2) {
       setErr(err2?.response?.data?.detail || "Sign in failed");
     } finally {
