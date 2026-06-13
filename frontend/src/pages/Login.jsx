@@ -40,7 +40,14 @@ export default function Login() {
       await login(email, password);
       navigate("/dashboard", { replace: true });
     } catch (err2) {
-      setErr(err2?.response?.data?.detail || "Sign in failed");
+      const d = err2?.response?.data?.detail;
+      const msg =
+        typeof d === "string"
+          ? d
+          : Array.isArray(d)
+          ? d.map((x) => x?.msg).filter(Boolean).join(", ")
+          : "Sign in failed";
+      setErr(msg);
     } finally {
       setLoading(false);
     }

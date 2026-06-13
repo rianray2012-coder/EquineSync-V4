@@ -161,7 +161,9 @@ class UserCreate(BaseModel):
 
 
 class LoginBody(BaseModel):
-    email: EmailStr
+    # Use str (not EmailStr) so reserved/special-use TLDs (.test/.localhost
+    # used by seed accounts + integration tests) aren't rejected upstream.
+    email: str
     password: str
 
 

@@ -508,3 +508,74 @@ A deliberate **pure-subtraction release** to reduce fake/demo trust risks before
 8. **Inventory module** with low-stock alerts.
 9. **Dark mode toggle** (CSS-var scaffolding already in place).
 10. **Shows & Competitions** module, **Reports / BI dashboard** with charts.
+
+
+## 🆕 Phase 13 — Public Marketplace Signup + Stripe (Feb 13 2026)
+
+The founder-beta surface (invite-only, role-locked) is now bolted onto a
+**public consumer entry point** so riders, owners, trainers, barns, and
+service providers can self-onboard, build profiles, and pick a tier.
+
+### What shipped
+- **Public Landing at `/`** (`/app/frontend/src/pages/Landing.jsx`) — Brand Guide 22
+  dark luxury treatment: hero ("Every horse. Every task. In sync."), trust strip,
+  5-role bento grid (Owner / Rider / Trainer / Barn / Service Provider with a
+  "Verification required" badge on the three privileged roles), pricing band,
+  footer. Logged-in visitors auto-redirect to `/dashboard`.
+- **3-step Signup Wizard at `/signup`** (`/app/frontend/src/pages/Signup.jsx`):
+  - Step 1: account basics (name, email, phone, password, location, role pick).
+  - Step 2: role-specific *skippable* profile fields ("Skip & complete later").
+  - Step 3: 4-tier picker → Stripe Checkout (paid) or instant free finalize.
+- **SignupSuccess** (`/app/frontend/src/pages/SignupSuccess.jsx`) — polls
+  `/api/membership/checkout/status/{session_id}` up to 8× then routes to dashboard.
+- **AppShell pending-review banner** — visible only when `user.role_status === "pending_review"`.
+
+### Backend
+- `POST /api/auth/signup` — new marketplace endpoint (5 roles). Auto-approves
+  `horse_owner` + `rider`; flags `trainer`/`barn_owner`/`service_provider`
+  with `role_status="pending_review"` but **still issues a session**
+  (login-with-banner UX per user choice).
+- `routes/membership.py` — `GET /api/membership/tiers`, `POST /api/membership/checkout`
+  (Stripe Checkout via emergentintegrations, free short-circuit), polled status
+  endpoint with per-user scoping (403 cross-user), and `POST /api/webhook/stripe`.
+- `routes/auth.py::LoginBody` relaxed from `EmailStr` → `str` so reserved-TLD
+  test/seed emails (`.test`, `.localhost`) can sign in.
+- `Login.jsx` error path normalized — no more "Objects are not valid as a React child"
+  on Pydantic 422 responses.
+- Security Patch 2E invariant preserved: `/auth/register` still forces `horse_owner`.
+
+### Tiers
+| Tier | Amount | Note |
+|---|---|---|
+| free | $0 | available to all roles |
+| owner_rider | $15/mo | recommended for Horse Owner + Rider |
+| trainer_provider | $49/mo | recommended for Trainer + Service Provider ★ |
+| barn_facility | $149/mo | recommended for Barn / Facility |
+
+### Tests
+- `/app/backend/tests/test_marketplace_signup.py` — 14/14 green (tier catalog,
+  all five role flows, validation, /register lockdown, free + paid checkout,
+  cross-user 403, /auth/me subscription_status flip).
+- `/app/backend/tests/test_security_patch_2e.py` — still 6/6 green.
+- Testing-agent iter 30 verified all 21 e2e scenarios.
+
+### Env / config
+- `STRIPE_API_KEY=sk_test_emergent` added to `/app/backend/.env`. **NOT** the
+  user-provided live keys (intentional — emergentintegrations playbook supplies
+  the test sandbox). When user is ready to flip to live mode, swap the value to
+  the live secret key only (no code changes needed).
+
+## Next Tasks (post-Phase 13)
+**P1 — Admin Review Queue UI**: backend `/review-queue` exists; wire it to the
+new `role_status="pending_review"` users so an admin can approve/reject from
+the dashboard.
+
+**P1 — Stripe webhook verification**: set `STRIPE_WEBHOOK_SECRET` and exercise
+the real Stripe event lifecycle (`customer.subscription.updated/deleted`) to
+keep `subscription_status` in sync after the initial checkout.
+
+**P2 — Onboarding email**: trigger Resend "Welcome to Equine Sync" template on
+successful signup (template path already in `/app/backend/mailer.py`).
+
+**P2 — Trial / grace period** for paid tiers (initial 7-day free trial baked
+into the Stripe Checkout config).
