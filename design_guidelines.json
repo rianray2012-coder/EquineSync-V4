@@ -1,113 +1,116 @@
 {
-  "project_name": "EquineSync",
-  "theme": "dark",
-  "archetype": "Archetype 5: Jewel & Luxury",
-  "brand_personality": "Sophisticated, quiet luxury, trustworthy, professional, modern, organized, high-end equestrian, operationally intelligent",
-  "typography": {
-    "heading_font": "Cormorant Garamond",
-    "body_font": "Inter",
-    "rules": {
-      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none text-[#F5F2EC] font-light",
-      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight text-[#F5F2EC] font-light",
-      "h3": "text-xl sm:text-2xl tracking-normal text-[#C0C0C0] font-medium",
-      "body": "text-base leading-relaxed text-[#D9D9D9] font-normal",
-      "labels": "text-xs tracking-[0.2em] uppercase text-[#4D4D4D] font-semibold",
-      "notes": "E1 ANTI-DEFAULT RULE: Headings must use Cormorant Garamond to establish equestrian heritage. Body uses Inter for modern software clarity."
+  "theme_archetype": {
+    "theme": "Dark",
+    "archetype": "5 (Luxury)",
+    "description": "Cinematic, moody, and expensive. Uses deep graphite and navy tones layered with elegant typography and high contrast frost white text. Generous whitespace, calm, confident, asymmetrical."
+  },
+  "tailwind_config": {
+    "theme_extensions": {
+      "colors": {
+        "equine": {
+          "graphite": "#232734",
+          "navy": "#2E3550",
+          "platinum": "#F7F8FA",
+          "lilac": "#B8AECF"
+        }
+      },
+      "fontFamily": {
+        "display": ["Cormorant Garamond", "serif"],
+        "body": ["Inter", "sans-serif"]
+      }
     }
   },
-  "colors": {
-    "background": {
-      "primary": "#111111", 
-      "secondary": "#1E1E1E",
-      "tertiary": "#2A2A2A"
+  "typography": {
+    "fonts": {
+      "display": "Cormorant Garamond, serif",
+      "body": "Inter, sans-serif"
     },
-    "text": {
-      "primary": "#F5F2EC",
-      "secondary": "#D9D9D9",
-      "muted": "#C0C0C0"
-    },
-    "border": {
-      "default": "#4D4D4D",
-      "subtle": "#2A2A2A"
-    },
-    "accent": {
-      "primary": "#BFC5CC",
-      "secondary": "#52667A",
-      "hover": "#D9D9D9"
-    },
-    "status": {
-      "success": "#6E8B74",
-      "warning": "#C6924B",
-      "critical": "#A85C4B",
-      "info": "#708090"
-    },
-    "rules": "Avoid neon or bright saturations. All colors must remain matte and restrained. Backgrounds should feel deep and architectural."
+    "hierarchy": {
+      "h1": "text-5xl md:text-6xl font-display font-light tracking-tight text-equine-platinum",
+      "h2": "text-3xl md:text-4xl font-display font-light tracking-tight text-equine-platinum",
+      "h3": "text-xl md:text-2xl font-display font-medium text-equine-platinum",
+      "body": "text-base font-body text-equine-platinum/80 leading-relaxed",
+      "label": "text-xs font-body uppercase tracking-[0.2em] text-equine-lilac"
+    }
   },
-  "layout_and_spacing": {
-    "grid_system": "The Control Room Grid",
-    "dashboard_rules": {
-      "desktop": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6",
-      "tablet": "grid-cols-1 md:grid-cols-2 gap-4 (For 'Today's Barn Board')",
-      "mobile": "grid-cols-1 gap-4"
-    },
-    "spacing_scale": "Use generous internal padding. Cards must use p-6 or p-8 to allow data to breathe.",
-    "alignment": "Strict left-alignment for data and lists. Optical alignment for icons inside buttons."
+  "layouts_and_spacing": {
+    "global_spacing": "Generous spacing. Use py-24 to py-32 for major sections.",
+    "role_cards_grid": "Asymmetrical Bento Grid (grid-cols-1 md:grid-cols-6). Example: Card 1 (col-span-4), Card 2 (col-span-2). Use gap-8.",
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "card_padding": "p-8 md:p-10"
   },
-  "components": {
-    "cards": {
-      "style": "Rounded modern cards (rounded-2xl). Background bg-[#1E1E1E]. Border 1px solid border-[#4D4D4D]. Soft ambient shadow.",
-      "glassmorphism": "Used only for sticky headers and modals: backdrop-blur-xl bg-[#111111]/70 border-b border-[#4D4D4D]/50."
+  "components_specs": {
+    "hero": {
+      "layout": "Single hero, elegant and confident. Clear headline + subhead.",
+      "classes": "min-h-[80vh] flex flex-col justify-center relative overflow-hidden",
+      "overlay": "bg-equine-graphite/60 or gradient overlay to ensure text contrast over background image.",
+      "ctas": "Primary CTA 'Join Equine Sync' (bg-equine-platinum text-equine-graphite font-medium px-8 py-4). Secondary 'Sign in' (text-equine-lilac hover:text-equine-platinum transition-colors)."
     },
-    "buttons": {
-      "primary": "bg-[#BFC5CC] text-[#111111] font-medium rounded-full px-6 py-2.5 hover:bg-[#F5F2EC] transition-colors",
-      "secondary": "bg-transparent border border-[#4D4D4D] text-[#F5F2EC] rounded-full px-6 py-2.5 hover:bg-[#1E1E1E] transition-colors",
-      "quick_action": "Large touch targets (min 44px height) for tablet usability in the barn."
+    "trust_strip": {
+      "layout": "Horizontal banner underneath hero.",
+      "classes": "flex flex-wrap justify-between md:justify-center gap-8 md:gap-16 py-8 border-y border-white/5 bg-equine-navy/30",
+      "text_style": "font-body text-sm tracking-wide text-equine-lilac/80"
     },
-    "navigation": {
-      "sidebar": "Dark matte sidebar (bg-[#111111]) with thin right border. Icons should be highly legible line-art. Selected state uses steel-blue (#52667A) subtle background with soft-ivory (#F5F2EC) text."
+    "role_cards": {
+      "style": "bg-equine-navy/50 border border-white/5 backdrop-blur-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer",
+      "text_style": "font-display text-2xl text-equine-platinum group-hover:text-white",
+      "roles": [
+        "Horse Owner",
+        "Rider",
+        "Trainer",
+        "Barn/Facility",
+        "Service Provider"
+      ]
     },
-    "dividers": "Hairline dividers (1px bg-[#2A2A2A]) used to segment lists without visual clutter."
+    "pricing_band": {
+      "layout": "4-column grid (grid-cols-1 md:grid-cols-2 lg:grid-cols-4) gap-6",
+      "card_style": "bg-equine-navy/40 border border-white/5 p-8 flex flex-col relative overflow-hidden",
+      "most_popular": "For $49 tier. Add a subtle 1px border-equine-lilac/50 and a soft glow. Add a 'Most Popular' overline badge (bg-equine-lilac/10 text-equine-lilac px-3 py-1 text-xs tracking-wider font-body absolute top-6 right-6)."
+    },
+    "signup_wizard": {
+      "layout": "Centered narrow container (max-w-2xl) inside a py-20 section.",
+      "step_indicator": "3-step visual progress. Use text-equine-lilac for active step, text-white/20 for upcoming.",
+      "step_1": "Account basics: Name, Email, Phone, Password, Location, Role pick. Role pick should use custom Shadcn select or styled radio cards.",
+      "step_2": "Role-specific fields. Include a distinct 'Skip & complete later' pill/button (variant='ghost' text-equine-lilac hover:bg-equine-navy/50).",
+      "step_3": "Membership tier selection (compact cards) + Stripe checkout visual placeholder.",
+      "classes": "bg-equine-navy/80 border border-white/10 p-10 shadow-2xl backdrop-blur-xl"
+    },
+    "pending_review_banner": {
+      "layout": "Fixed top or inline prominent banner.",
+      "classes": "bg-equine-navy border-l-4 border-equine-lilac p-4 flex items-center gap-4 mb-8",
+      "text": "text-equine-platinum text-sm font-body tracking-wide"
+    }
   },
-  "motion_and_interactions": {
-    "hover_states": "Subtle brightness increase on cards (hover:bg-[#2A2A2A]).",
-    "transitions": "Smooth and deliberate. transition-all duration-300 ease-in-out.",
-    "microinteractions": "Buttons scale down slightly on active (active:scale-95). Tabs slide indicator."
+  "interactions_and_motion": {
+    "hover_states": "Cards lift slightly (-translate-y-1). Subtle border brightness increase.",
+    "entrance": "Staggered fade-up for role cards and pricing using Framer Motion.",
+    "transitions": "transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
   },
   "media": {
-    "image_urls": {
-      "logo": {
-        "url": "https://static.prod-images.emergentagent.com/jobs/137f7c6b-a2e1-41c0-9c38-96d2409d644a/images/29b907cf4a080e1f325ad7b224ad58ab70ac92998a6b2464c96036a0fea55d7e.png",
-        "description": "EquineSync minimal luxury logo - ES monogram with horse head outline on black"
-      },
-      "login_background": {
-        "url": "https://static.prod-images.emergentagent.com/jobs/137f7c6b-a2e1-41c0-9c38-96d2409d644a/images/3ca3908290d52bc07be0b5f45e2f358fac3cee0e8034aa339d3b62ddac3b3403.png",
-        "description": "Cinematic wide background of an immaculate luxury equestrian indoor riding arena at dawn"
-      },
-      "dashboard_hero": {
-        "url": "https://images.unsplash.com/photo-1639570830431-6c2d0100d37b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwzfHxibGFjayUyMGhvcnNlJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzc4OTk1NzgwfDA&ixlib=rb-4.1.0&q=85",
-        "description": "Elegant black horse portrait for empty states or dashboard welcome headers"
-      },
-      "barn_profile": {
-        "url": "https://images.unsplash.com/photo-1694885143306-3dfea504b032?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHw0fHxsdXh1cnklMjBob3JzZSUyMHN0YWJsZXxlbnwwfHx8fDE3Nzg5OTU3ODB8MA&ixlib=rb-4.1.0&q=85",
-        "description": "Luxury horse barn interior for stable settings and facility overviews"
-      }
+    "hero_background": {
+      "url": "https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Grayscale elegant horse rider, use as a subtle dark background with overlay."
     },
-    "rules": "All images must be darkened or overlaid with black/50 when text is placed on top to maintain contrast and the moody luxury aesthetic."
-  },
-  "iconography": {
-    "library": "lucide-react",
-    "style": "Use thin stroke widths (strokeWidth={1.5}) to match the luxury minimalist aesthetic. Icons should feel like precision instruments."
-  },
-  "testing": {
-    "rules": "All interactive and key informational elements MUST include a data-testid attribute in kebab-case."
+    "role_rider": {
+      "url": "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
+    },
+    "role_trainer": {
+      "url": "https://images.unsplash.com/photo-1594768816441-1dd241ffaa67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwdHJhaW5lcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
+    },
+    "role_barn": {
+      "url": "https://images.unsplash.com/photo-1576692192914-9abed71b3ef9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3JzZSUyMGJhcm58ZW58MHx8fHwxNzgxMzQxNTQ5fDA&ixlib=rb-4.1.0&q=85"
+    },
+    "role_service_provider": {
+      "url": "https://images.unsplash.com/photo-1649127616601-6f0a3ea26eae?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwZmFycmllcnxlbnwwfHx8fDE3ODEzNDE1NjF8MA&ixlib=rb-4.1.0&q=85"
+    }
   },
   "instructions_to_main_agent": [
-    "Install lucide-react and configure Tailwind with the custom color palette provided.",
-    "Implement the 'Control Room Grid' for the dashboard with responsive adjustments for tablets.",
-    "Use 'Today's Barn Board' as the primary operational view with large touch-friendly cards.",
-    "Do NOT use pure white. Use the Soft Ivory and Light Silver for text.",
-    "Ensure all cards have a 1px #4D4D4D border and #1E1E1E background.",
-    "Override generic font families in Tailwind config: display uses Cormorant Garamond, sans uses Inter.",
-    "Never use placeholder image URLs. Rely entirely on the provided media URLs."
+    "Build using React (.js files, NOT .tsx) and Tailwind CSS.",
+    "Update tailwind.config.js with the provided colors (equine-graphite, etc.) and fonts (Cormorant Garamond, Inter).",
+    "Use 'lucide-react' for icons (e.g., checkmarks in pricing).",
+    "Use framer-motion for smooth entrance animations.",
+    "Ensure all interactive elements and forms have `data-testid` attributes.",
+    "Do NOT use HTML <select> or <input type='date'>. Use Shadcn components and strip away generic Vercel-like styles to match the luxury dark theme.",
+    "Implement the landing page at `/` and the signup wizard at `/signup`."
   ]
 }
