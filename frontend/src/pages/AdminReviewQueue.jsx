@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { api } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
-import { Navigate } from "react-router-dom";
-import { CheckCircle2, XCircle, Clock, ShieldX, AlertCircle, Loader2 } from "lucide-react";
+import { CheckCircle2, XCircle, Clock, AlertCircle, Loader2 } from "lucide-react";
 
 const ROLE_LABEL = {
   trainer: "Trainer",
@@ -14,7 +13,8 @@ const ROLE_LABEL = {
 
 export default function AdminReviewQueue() {
   const { user } = useAuth();
-  const isAdmin = ["admin", "barn_manager"].includes(user?.role);
+  // Route-level RoleProtected (App.js) already gates non-admins to the
+  // generic Forbidden page — no in-page guard needed.
 
   const [tab, setTab] = useState("pending"); // pending | history
   const [items, setItems] = useState([]);
@@ -25,7 +25,6 @@ export default function AdminReviewQueue() {
   const [rejectReason, setRejectReason] = useState("");
 
   const fetchData = useCallback(async () => {
-    if (!isAdmin) return;
     try {
       const url = tab === "pending" ? "/admin/review-queue" : "/admin/review-queue/history";
       const { data } = await api.get(url);
@@ -36,23 +35,14 @@ export default function AdminReviewQueue() {
     } finally {
       setLoading(false);
     }
-  }, [isAdmin, tab]);
+  }, [tab]);
 
   useEffect(() => {
     setLoading(true);
     fetchData();
   }, [fetchData]);
 
-  if (!user) return <Navigate to="/login" replace />;
-  if (!isAdmin) {
-    return (
-      <div className="max-w-md mt-20 mx-auto text-center" data-testid="admin-review-forbidden">
-        <ShieldX className="w-12 h-12 mx-auto text-equine-saddle mb-4" />
-        <h1 className="font-display text-3xl text-equine-ivory mb-2">Admin access only</h1>
-        <p className="text-equine-platinum/70 text-[14px]">This page is restricted to admins and barn managers.</p>
-      </div>
-    );
-  }
+  if (!user) return null;
 
   const approve = async (id) => {
     setBusyId(id);
