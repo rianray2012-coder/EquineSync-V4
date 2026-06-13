@@ -46,7 +46,7 @@ const STEPS = ["Account", "Profile", "Membership"];
 export default function Signup() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const { setSession } = useAuth();
+  const { setSession, refreshMe } = useAuth();
 
   const initialRole = params.get("role");
   const initialIsRole = ROLE_OPTIONS.some((r) => r.id === initialRole);
@@ -104,7 +104,10 @@ export default function Signup() {
         role: form.role,
         phone: form.phone || null,
         location: form.location || null,
-        tier: tier || "free",
+        // Tier is selected on Step 3 (membership). Always create the account
+        // on the free tier first so Step 3 can call /membership/start-trial
+        // or /membership/checkout without colliding with a pre-committed tier.
+        tier: "free",
         profile,
       };
       const { data } = await api.post("/auth/signup", payload);
@@ -120,19 +123,6 @@ export default function Signup() {
       const msg = e?.response?.data?.detail || "Could not create your account.";
       setErr(typeof msg === "string" ? msg : "Could not create your account.");
       throw e;
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const finalizeFree = async () => {
-    setSubmitting(true);
-    try {
-      // Account is already created with tier='free' or 'incomplete' — flip to free.
-      await api.post("/membership/checkout", { tier: "free", origin_url: window.location.origin });
-      navigate("/dashboard");
-    } catch (e) {
-      setErr("Could not finalize free plan.");
     } finally {
       setSubmitting(false);
     }
@@ -154,6 +144,34 @@ export default function Signup() {
       navigate("/dashboard");
     } catch (e) {
       setErr(e?.response?.data?.detail || "Could not start checkout.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const startTrial = async () => {
+    // 7-day free trial on a paid tier — no card needed. Server-side only.
+    setErr("");
+    setSubmitting(true);
+    try {
+      await api.post("/membership/start-trial", { tier, origin_url: window.location.origin });
+      await refreshMe();
+      navigate("/dashboard");
+    } catch (e) {
+      setErr(e?.response?.data?.detail || "Could not start trial.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const finalizeFreeRefreshed = async () => {
+    setSubmitting(true);
+    try {
+      await api.post("/membership/checkout", { tier: "free", origin_url: window.location.origin });
+      await refreshMe();
+      navigate("/dashboard");
+    } catch (e) {
+      setErr("Could not finalize free plan.");
     } finally {
       setSubmitting(false);
     }
@@ -393,7 +411,9 @@ export default function Signup() {
             <div data-testid="signup-step-membership">
               <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Step 3 of 3</div>
               <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">Choose your tier</h2>
-              <p className="text-white/60 text-[14px] mb-8">Start free or unlock the full platform. Cancel anytime.</p>
+              <p className="text-white/60 text-[14px] mb-8">
+                Paid tiers include a <span className="text-equine-saddle font-medium">7-day free trial</span> — no card needed.
+              </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {tiers.map((t) => {
@@ -430,7 +450,7 @@ export default function Signup() {
                 </button>
                 {tier === "free" ? (
                   <button
-                    onClick={finalizeFree}
+                    onClick={finalizeFreeRefreshed}
                     disabled={submitting}
                     className="bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                     data-testid="signup-finish-free"
@@ -438,14 +458,24 @@ export default function Signup() {
                     {submitting ? "Finishing…" : "Start with Free"} <ArrowRight className="w-4 h-4" />
                   </button>
                 ) : (
-                  <button
-                    onClick={launchCheckout}
-                    disabled={submitting || !tier}
-                    className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
-                    data-testid="signup-checkout"
-                  >
-                    {submitting ? "Redirecting…" : "Continue to checkout"} <ArrowRight className="w-4 h-4" />
-                  </button>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      onClick={startTrial}
+                      disabled={submitting || !tier}
+                      className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                      data-testid="signup-start-trial"
+                    >
+                      {submitting ? "Starting…" : "Start 7-day free trial"} <ArrowRight className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={launchCheckout}
+                      disabled={submitting || !tier}
+                      className="text-[13px] tracking-wide text-white/70 hover:text-white disabled:opacity-40 transition-colors px-4 py-3"
+                      data-testid="signup-checkout"
+                    >
+                      Or pay now →
+                    </button>
+                  </div>
                 )}
               </div>
             </div>

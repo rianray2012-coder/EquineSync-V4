@@ -322,6 +322,17 @@ def build_router(db) -> APIRouter:
         if existing:
             raise HTTPException(400, "Email already registered")
         role_status = "pending_review" if role in MARKETPLACE_PENDING_REVIEW_ROLES else "active"
+        chosen_tier = body.tier or "free"
+        is_paid = chosen_tier != "free"
+        # Phase 14 — 7-day trial only when user picks a paid tier ON SIGNUP.
+        # Upgrades from the free tier later in the dashboard pay normally.
+        if is_paid:
+            sub_status = "trialing"
+            from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+            trial_expires_at = (_dt.now(_tz.utc) + _td(days=7)).isoformat()
+        else:
+            sub_status = "free"
+            trial_expires_at = None
         user = {
             "id": new_id(),
             "email": body.email.lower(),
@@ -334,8 +345,10 @@ def build_router(db) -> APIRouter:
             "phone": body.phone,
             "location": body.location,
             "profile": body.profile or {},
-            "membership_tier": body.tier or "free",
-            "subscription_status": "free" if (body.tier or "free") == "free" else "incomplete",
+            "membership_tier": chosen_tier,
+            "subscription_status": sub_status,
+            "trial_expires_at": trial_expires_at,
+            "trial_used": is_paid,  # one trial per account; upgrades later don't get another.
             "signup_source": "marketplace",
             "created_at": now_iso(),
         }
@@ -344,6 +357,40 @@ def build_router(db) -> APIRouter:
         verify_ttl = email_verify_ttl_hours()
         raw_verify = await issue_token(db, user["id"], PURPOSE_EMAIL_VERIFY, verify_ttl)
         await _send_verification_email(user, raw_verify, verify_ttl)
+        # Best-effort marketplace welcome email — never blocks signup.
+        try:
+            from mailer import send as _send_mail
+            role_label = role.replace("_", " ").title()
+            tier_label = chosen_tier.replace("_", " ").title()
+            extra = ""
+            if role_status == "pending_review":
+                extra = (
+                    "Our team is reviewing your application to make sure your "
+                    "credentials check out. You'll have full read access in the "
+                    "meantime — we'll email you the moment you're verified."
+                )
+            elif is_paid:
+                extra = (
+                    f"Your 7-day free trial of the {tier_label} tier starts now. "
+                    "No card on file — we'll remind you before it ends."
+                )
+            html = f"""
+            <div style='font-family: Inter, sans-serif; color: #232734; max-width: 560px; margin: 0 auto;'>
+              <div style='font-family: Cormorant Garamond, serif; font-size: 32px; margin-bottom: 8px;'>Welcome to Equine Sync.</div>
+              <p style='line-height: 1.6;'>Hi {user['full_name']},</p>
+              <p style='line-height: 1.6;'>You're in as a <strong>{role_label}</strong>. {extra}</p>
+              <p style='line-height: 1.6;'>Pop back into your dashboard whenever you're ready — your profile, network, and tools are waiting.</p>
+              <p style='line-height: 1.6; color: #6b6f7d; font-size: 13px; margin-top: 32px;'>Every horse. Every task. In sync.</p>
+            </div>
+            """
+            await _send_mail(
+                to=user["email"],
+                subject="Welcome to Equine Sync",
+                html=html,
+            )
+        except Exception:
+            logger_local = __import__("logging").getLogger(__name__)
+            logger_local.exception("welcome email failed (non-blocking)")
 
         # Per user direction: allow full login but mark with a banner — so we
         # always issue a session here (email-verify gate still respected if ON).

@@ -1,0 +1,58 @@
+{
+  "summary": "Phase 14 end-to-end validation: Admin Review Queue (approve/reject/history), 7-day trial flow, MVP billing lifecycle (cancel-membership), trial banner, cancelled banner, rejected banner, and admin sidebar nav. Backend 25/25 pytest pass (test_review_queue_and_lifecycle.py 11/11 + test_marketplace_signup.py 14/14). Frontend Playwright e2e: 14/15 acceptance criteria pass. Only one minor mismatch: when a horse_owner navigates to /admin/review-queue, the route-level RoleProtected guard renders the generic <Forbidden /> screen (data-testid='forbidden-page') instead of the page-internal data-testid='admin-review-forbidden' screen — the user-facing UX is correct (forbidden screen IS shown) but the requested testid is unreachable because the route-level guard intercepts before AdminReviewQueue.jsx mounts.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "App.js RoleProtected wrapper around /admin/review-queue", "issue": "Horse_owner hitting /admin/review-queue sees the generic <Forbidden /> screen (data-testid='forbidden-page'), NOT the page-level data-testid='admin-review-forbidden' that the PRD specifies. The internal forbidden block inside AdminReviewQueue.jsx (line 49) is dead code because RoleProtected (App.js line 85) intercepts non-admins and renders <Forbidden /> instead of letting the page mount. UX is correct — only the testid contract is mismatched. Fix options: (a) replace the route's `permit(<AdminReviewQueue/>, ROLE_GROUPS.admin)` with a plain `<AdminReviewQueue/>` route so the page's own gate fires; (b) add `data-testid='admin-review-forbidden'` to the generic Forbidden component when path matches /admin/*; (c) update the test contract to expect 'forbidden-page' instead.", "selector": "[data-testid=\"admin-review-forbidden\"]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_flows": [
+    "BACKEND: 25/25 pytest pass — test_review_queue_and_lifecycle.py (11/11) + test_marketplace_signup.py (14/14). JUnit at /app/test_reports/pytest/iter31_phase14.xml",
+    "BACKEND: POST /api/admin/review-queue/{id}/approve flips role_status=approved; repeat → 409 ✓",
+    "BACKEND: POST /api/admin/review-queue/{id}/reject stores review_rejection_reason, /auth/me still returns the user (soft reject, no hard delete) ✓",
+    "BACKEND: GET /api/admin/review-queue 200 for admin, 403 for horse_owner ✓",
+    "BACKEND: GET /api/admin/review-queue/history lists previously approved+rejected users ✓",
+    "BACKEND: POST /membership/start-trial flips subscription_status='trialing' + trial_used=True; second call 409 ✓",
+    "BACKEND: POST /membership/start-trial {tier:'free'} → 400 ✓",
+    "BACKEND: POST /membership/cancel flips subscription_status='cancelled' + membership_tier='free'; /auth/me reflects ✓",
+    "BACKEND: /auth/signup with tier=owner_rider on body sets subscription_status='trialing' + trial_expires_at on the user ✓",
+    "BACKEND: /auth/signup without tier (free default) leaves subscription_status='free' + trial_used=False ✓",
+    "BACKEND: /auth/register still role-locks to horse_owner (Security Patch 2E intact) ✓",
+    "FRONTEND: Admin login → /admin/review-queue renders data-testid='admin-review-queue' + 'review-list' with pending trainer; approve button click removes trainer from pending and (History tab) shows data-testid='review-status-{id}'='approved' ✓",
+    "FRONTEND: Reject flow — clicking reject-{id} reveals reject-reason-{id} input; entering reason + confirm-reject-{id} moves user to History with status 'rejected' ✓",
+    "FRONTEND: Rejected user logging into /dashboard sees data-testid='rejected-banner' with the rejection reason ('Application not approved. Reason from our team: \"Missing credentials\"') ✓",
+    "FRONTEND: Signup wizard Step 3 paid tier (owner_rider) shows BOTH data-testid='signup-start-trial' AND data-testid='signup-checkout' ✓",
+    "FRONTEND: Clicking signup-start-trial → /dashboard with data-testid='trial-banner' showing '7 days left on your free trial' ✓",
+    "FRONTEND: Free-tier signup → /dashboard with data-testid='trial-banner' ABSENT ✓",
+    "FRONTEND: Clicking signup-checkout redirects to https://checkout.stripe.com/c/pay/cs_test_... ✓",
+    "FRONTEND: Cancelled user (subscription_status='cancelled') sees data-testid='cancelled-banner' with 'Resume membership' link on /dashboard ✓",
+    "FRONTEND: Admin sees 'Member Review' nav link (a[href='/admin/review-queue']) in sidebar; non-admin (horse_owner) does NOT see the link ✓"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_review_queue_and_lifecycle.py",
+    "/app/backend/tests/test_marketplace_signup.py",
+    "/app/test_reports/pytest/iter31_phase14.xml"
+  ],
+  "action_items": [
+    "LOW (optional polish): When a non-admin lands on /admin/review-queue, the page renders data-testid='forbidden-page' (from generic <Forbidden />) rather than data-testid='admin-review-forbidden' (from AdminReviewQueue.jsx). The internal forbidden screen in AdminReviewQueue.jsx is currently unreachable. Either remove the route-level RoleProtected wrapper for /admin/review-queue (let the page own its gating) OR update PRD/tests to expect the generic 'forbidden-page' testid."
+  ],
+  "critical_code_review_comments": [
+    "Two redundant forbidden checks for /admin/review-queue — the route-level <RoleProtected> wrapper and the page-level internal `if (!isAdmin)` block. Pick one. If you keep the route-level guard, delete the page-level forbidden div to avoid dead code; if you want page-level testid to fire, drop the wrapper for this route.",
+    "STRIPE_WEBHOOK_SECRET is empty in /app/backend/.env — webhook signature verification falls back to non-strict. Fine for MVP but flag this in deployment notes; production must set this before going live.",
+    "Phase 14 backend code is cohesive: admin_review.py uses require(user, 'barn:manage') consistently; membership.py /cancel + /start-trial are minimal and idempotent. Good separation from Stripe (cancel is purely a local flip, correctly labelled MVP).",
+    "AppShell MembershipBanners stacking works — verified that rejected/cancelled/trial banners can each render independently based on role_status + subscription_status without overlap."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "25/25 pytest (100%)", "frontend": "14/15 acceptance criteria (93%)"},
+  "test_credentials": "Created on demand via /api/auth/signup with timestamped emails. Admin users promoted via direct pymongo write: db.users.update_one({'id': uid}, {'$set':{'role':'admin'}}) then re-login to mint a fresh JWT carrying role=admin (matches test_review_queue_and_lifecycle.py::_admin_session pattern).",
+  "seed_data_creation": "Created ~15 marketplace test users with timestamped emails (trial_, freeu_, paynow_, cancel_, e2e2_*, fb_, adm3/4_, nadm_). None collide with existing seed. No persistent test data needs cleanup.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Phase 14 is functionally complete. The only open item is a testid contract mismatch on the route-level forbidden screen for /admin/review-queue — UX is correct, just the data-testid is 'forbidden-page' (generic) instead of 'admin-review-forbidden' (page-internal). All other 14 acceptance criteria pass end-to-end. No backend regressions; the existing 25 pytest tests + the earlier marketplace tests all stay green. Stripe webhook signing secret is intentionally blank in .env per MVP scope.",
+  "rca_of_the_issue": "AdminReviewQueue.jsx (line 49) contains an `if (!isAdmin) return <div data-testid='admin-review-forbidden'>` block, but App.js wraps the route with `permit(<AdminReviewQueue/>, ROLE_GROUPS.admin)` which is `<RoleProtected roles={ROLE_GROUPS.admin}>` (App.js line 83-87). RoleProtected short-circuits with the generic `<Forbidden />` (data-testid='forbidden-page') for non-admins, so AdminReviewQueue never mounts and its internal forbidden testid never appears in the DOM. Both checks are valid gates; the duplication is the only issue."
+}

@@ -36,11 +36,21 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   }, []);
 
+  const refreshMe = useCallback(async () => {
+    try {
+      const { data } = await api.get("/auth/me");
+      setUser(data);
+      return data;
+    } catch {
+      return null;
+    }
+  }, []);
+
   const setSession = useCallback((newUser) => setUser(newUser), []);
 
   const value = useMemo(
-    () => ({ user, login, logout, loading, setSession }),
-    [user, login, logout, loading, setSession],
+    () => ({ user, login, logout, loading, setSession, refreshMe }),
+    [user, login, logout, loading, setSession, refreshMe],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
