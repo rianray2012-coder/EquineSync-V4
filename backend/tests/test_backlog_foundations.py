@@ -8,7 +8,7 @@ import requests
 from ._test_creds import ADMIN, OWNER, DEMO_PASSWORD
 
 
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://barn-ops-preview.preview.emergentagent.com").rstrip("/")
+BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://preflight-check-8.preview.emergentagent.com").rstrip("/")
 API = f"{BASE_URL}/api"
 
 
