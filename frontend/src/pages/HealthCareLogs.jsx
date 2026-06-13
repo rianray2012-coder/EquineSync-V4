@@ -6,30 +6,30 @@ import { Card, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const FARrier_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Mercury" },
-  { key: "farrier_name", label: "Farrier", placeholder: "Dana Mills" },
-  { key: "scheduled_at", label: "Scheduled", placeholder: "2026-06-18T10:00:00" },
-  { key: "completed_at", label: "Completed", placeholder: "2026-06-18T10:45:00" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
+  { key: "farrier_name", label: "Farrier", placeholder: "Provider name" },
+  { key: "scheduled_at", label: "Scheduled", placeholder: "YYYY-MM-DDTHH:MM:SS" },
+  { key: "completed_at", label: "Completed", placeholder: "YYYY-MM-DDTHH:MM:SS" },
   { key: "service_type", label: "Service", kind: "select", opts: ["trim", "front_shoes", "full_set", "reset", "therapeutic"] },
   { key: "status", label: "Status", kind: "select", opts: ["scheduled", "complete", "missed", "follow_up"] },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
 ];
 
 const MED_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Juniper" },
-  { key: "medication_name", label: "Medication", required: true, placeholder: "Phenylbutazone" },
-  { key: "dosage", label: "Dosage", placeholder: "1 g" },
-  { key: "administered_at", label: "Administered", placeholder: "2026-06-10T07:30:00" },
-  { key: "administered_by", label: "Administered by", placeholder: "Sophia Reyes" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
+  { key: "medication_name", label: "Medication", required: true, placeholder: "Medication name" },
+  { key: "dosage", label: "Dosage", placeholder: "Dosage" },
+  { key: "administered_at", label: "Administered", placeholder: "YYYY-MM-DDTHH:MM:SS" },
+  { key: "administered_by", label: "Administered by", placeholder: "Staff name" },
   { key: "status", label: "Status", kind: "select", opts: ["scheduled", "administered", "missed", "held"] },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
 ];
 
 const INJURY_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino" },
-  { key: "case_title", label: "Case", required: true, placeholder: "Mild right hind stiffness", full: true },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
+  { key: "case_title", label: "Case", required: true, placeholder: "Observation summary", full: true },
   { key: "severity", label: "Severity", kind: "select", opts: ["watch", "mild", "moderate", "urgent"] },
-  { key: "observed_at", label: "Observed", placeholder: "2026-06-09T16:15:00" },
+  { key: "observed_at", label: "Observed", placeholder: "YYYY-MM-DDTHH:MM:SS" },
   { key: "status", label: "Status", kind: "select", opts: ["open", "monitoring", "vet_called", "resolved"] },
   { key: "care_plan", label: "Care plan", kind: "textarea", rows: 3, full: true },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },

@@ -9,8 +9,8 @@ const STATUSES = ["new", "contacted", "offered", "scheduled", "closed"];
 const PRIORITY_TONE = { high: "critical", normal: "info", low: "neutral" };
 
 const ADD_FIELDS = [
-  { key: "client_name", label: "Client", required: true, placeholder: "Maya Chen", full: true },
-  { key: "horse_name", label: "Horse", placeholder: "Sunday Best" },
+  { key: "client_name", label: "Client", required: true, placeholder: "Client name", full: true },
+  { key: "horse_name", label: "Horse", placeholder: "Horse name" },
   { key: "service_type", label: "Service", kind: "select", opts: ["board", "training", "lesson", "rehab"] },
   { key: "priority", label: "Priority", kind: "select", opts: ["low", "normal", "high"] },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },

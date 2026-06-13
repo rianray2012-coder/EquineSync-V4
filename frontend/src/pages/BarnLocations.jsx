@@ -109,7 +109,7 @@ export default function BarnLocations() {
                 value={note}
                 onChange={(event) => setNote(event.target.value)}
                 rows={2}
-                placeholder="Example: Please check this board before turning horses out."
+                placeholder="Note: Please check this board before turning horses out."
                 className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-[13px] text-equine-ink outline-none focus:border-equine-brass"
                 data-testid="barn-locations-note"
               />

@@ -4,19 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
 import { api } from "../lib/api";
 
-const DEMO = [
-  { email: "admin@equinesync.com", role: "Stable Owner" },
-  { email: "trainer@equinesync.com", role: "Trainer" },
-  { email: "groom@equinesync.com", role: "Groom" },
-  { email: "owner@equinesync.com", role: "Horse Owner" },
-  { email: "vet@equinesync.com", role: "Veterinarian" },
-];
-
 export default function Login() {
   const { login, user } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("admin@equinesync.com");
-  const [password, setPassword] = useState("demo1234");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
@@ -72,10 +64,10 @@ export default function Login() {
               Quiet precision.<br/>Operational mastery.
             </h2>
             <p className="mt-6 text-equine-silver/85 text-[15px] leading-relaxed">
-              EquineSync unites horse care, training, billing, and owner communication in one elegant platform — built for elite show barns, rehab facilities, and luxury private operations.
+              Equine-Sync unites horse care, training, billing, and owner communication in one elegant platform — built for elite show barns, rehab facilities, and luxury private operations.
             </p>
           </div>
-          <div className="text-[11px] tracking-[0.22em] uppercase text-equine-brassLight/55">© EquineSync · Crafted for elite equestrian operations</div>
+          <div className="text-[11px] tracking-[0.22em] uppercase text-equine-brassLight/55">© Equine-Sync · Crafted for elite equestrian operations</div>
         </div>
       </div>
 
@@ -132,7 +124,7 @@ export default function Login() {
                   <div className="label-eyebrow">Reset your password</div>
                   <input
                     type="email" value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)}
-                    required placeholder="you@example.com" data-testid="forgot-email"
+                    required placeholder="you@your-domain.com" data-testid="forgot-email"
                     className="input-field"
                   />
                   <button
@@ -147,20 +139,10 @@ export default function Login() {
           )}
 
           <div className="mt-10 pt-6 border-t border-equine-hairline">
-            <div className="label-eyebrow mb-3">Demo accounts (password: demo1234)</div>
-            <div className="grid grid-cols-1 gap-2">
-              {DEMO.map((d) => (
-                <button
-                  key={d.email}
-                  onClick={() => { setEmail(d.email); setPassword("demo1234"); }}
-                  data-testid={`demo-${d.role.toLowerCase().replace(/\s/g, '-')}`}
-                  className="text-left px-4 py-2.5 rounded-lg border border-equine-graphite/40 hover:border-equine-saddle hover:bg-equine-soft transition-all flex items-center justify-between"
-                >
-                  <span className="text-[13px] text-equine-ivory">{d.email}</span>
-                  <span className="text-[11px] tracking-[0.16em] uppercase text-equine-silver">{d.role}</span>
-                </button>
-              ))}
-            </div>
+            <div className="label-eyebrow mb-3">New to EquineSync?</div>
+            <p className="text-[13px] text-equine-silver leading-relaxed">
+              Your barn owner or administrator will send you a secure invitation. Follow that link to create your password and join your barn workspace.
+            </p>
           </div>
         </div>
       </div>

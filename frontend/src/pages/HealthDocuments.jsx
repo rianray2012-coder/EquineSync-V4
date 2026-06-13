@@ -7,7 +7,7 @@ import QuickAddSheet from "../components/QuickAddSheet";
 
 const TYPES = ["all", "coggins", "vaccine", "vet_report", "insurance", "other"];
 const ADD_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
   { key: "document_type", label: "Type", kind: "select", opts: TYPES.filter((t) => t !== "all") },
   { key: "document_url", label: "File URL", placeholder: "https://…" },
   { key: "shared_with", label: "Shared with", placeholder: "owner, show secretary" },

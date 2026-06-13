@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api, track } from "../lib/api";
 import { Card, PageHeader, StatusPill } from "../components/Primitives";
+import { Logo } from "../components/Logo";
+import { BrandLoader } from "../components/BrandLoader";
 import { Check, ChevronRight, ChevronLeft, Rocket, Building2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -11,6 +13,7 @@ import CrudStep from "../components/onboarding/CrudStep";
 import { OwnersStep, HorsesStep, RidersStep } from "../components/onboarding/RecordsStep";
 import StaffStep from "../components/onboarding/StaffStep";
 import ReviewStep from "../components/onboarding/ReviewStep";
+import OperationsSetupStep from "../components/onboarding/OperationsSetupStep";
 
 /**
  * Setup concierge — guided onboarding shell.
@@ -27,6 +30,7 @@ const renderStep = (stepId, onAnyChange, onFinish) => {
     case "riders":         return <RidersStep onAnyChange={onAnyChange} />;
     case "feed_templates": return <CrudStep kind="feed_templates" onAnyChange={onAnyChange} />;
     case "inventory":      return <CrudStep kind="inventory" onAnyChange={onAnyChange} />;
+    case "operations_setup": return <OperationsSetupStep onAnyChange={onAnyChange} />;
     case "staff":          return <StaffStep onAnyChange={onAnyChange} />;
     case "schedules":      return <CrudStep kind="schedules" onAnyChange={onAnyChange} />;
     case "review":         return <ReviewStep onFinish={onFinish} />;
@@ -70,7 +74,7 @@ export default function Onboarding() {
   };
 
   if (loading || !progress) {
-    return <div className="text-equine-platinum/60">Loading concierge…</div>;
+    return <BrandLoader label="Loading concierge…" />;
   }
 
   const stepIndex = steps.findIndex((s) => s.id === currentId);
@@ -81,6 +85,8 @@ export default function Onboarding() {
     (progress.steps?.[s.id] || "pending") === "complete"
   ).length;
   const percent = steps.length === 0 ? 0 : Math.round(100 * completedVisible / steps.length);
+  const currentStatus = progress.steps?.[currentId] || "pending";
+  const currentStatusLabel = currentStatus.replace(/_/g, " ");
 
   const next = async () => {
     await setStepStatus(currentId, "complete");
@@ -105,6 +111,7 @@ export default function Onboarding() {
 
   return (
     <div data-testid="onboarding-page" className="max-w-7xl">
+      <div className="mb-5"><Logo size={68} /></div>
       <PageHeader
         eyebrow="Setup Concierge"
         title="Welcome to your barn"
@@ -167,7 +174,7 @@ export default function Onboarding() {
             data-testid="onboarding-reassurance"
             className="px-3 pb-3 pt-1 text-[11px] text-equine-platinum/55 leading-relaxed"
           >
-            Most barns revisit Inventory and Schedules after their first operational week. Nothing here is required to begin running daily care.
+            Most barns revisit Inventory and Operations &amp; Sharing after their first operational week. Nothing here is required to begin running daily care.
           </div>
         </Card>
 
@@ -183,11 +190,11 @@ export default function Onboarding() {
                 <h2 className="font-display text-3xl text-equine-ivory mt-1">{current?.label}</h2>
               </div>
               <StatusPill tone={
-                progress.steps?.[currentId] === "complete" ? "success"
-                : progress.steps?.[currentId] === "skipped" ? "neutral"
+                currentStatus === "complete" ? "success"
+                : currentStatus === "skipped" ? "neutral"
                 : "info"
               }>
-                {progress.steps?.[currentId] || "pending"}
+                {currentStatusLabel}
               </StatusPill>
             </div>
 

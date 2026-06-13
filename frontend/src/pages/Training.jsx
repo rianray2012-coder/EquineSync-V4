@@ -28,11 +28,11 @@ export default function Training() {
         : horses.map((h) => ({ v: h.id, l: h.name })),
     },
     { key: "date", label: "Date", type: "date", required: true },
-    { key: "discipline", label: "Discipline", placeholder: "Show Jumping" },
+    { key: "discipline", label: "Discipline", placeholder: "Discipline" },
     { key: "exercises", label: "Exercises", full: true, kind: "textarea", rows: 3,
-      placeholder: "Trot poles, canter transitions, gymnastic line 2-1-2." },
+      placeholder: "Training notes" },
     { key: "notes", label: "Notes", full: true, kind: "textarea", rows: 2 },
-    { key: "rating", label: "Rating (1–10)", type: "number", placeholder: "8" },
+    { key: "rating", label: "Rating (1–10)", type: "number", placeholder: "Rating" },
     { key: "homework", label: "Homework" },
   ], [horses]);
 

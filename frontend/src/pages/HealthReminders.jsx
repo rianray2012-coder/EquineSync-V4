@@ -9,10 +9,10 @@ const STATUSES = ["expired", "due", "scheduled", "complete"];
 const STATUS_TONE = { expired: "critical", due: "warning", scheduled: "info", complete: "success" };
 
 const ADD_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
   { key: "reminder_type", label: "Type", kind: "select", opts: ["vaccine", "coggins", "dental", "deworming"] },
   { key: "due_date", label: "Due date", type: "date", required: true },
-  { key: "provider", label: "Provider", placeholder: "Dr. Henrik Vossler" },
+  { key: "provider", label: "Provider", placeholder: "Provider name" },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
 ];

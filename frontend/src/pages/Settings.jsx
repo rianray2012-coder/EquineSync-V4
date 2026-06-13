@@ -47,7 +47,7 @@ export default function Settings() {
           <div><div className="label-eyebrow">Name</div><div className="text-equine-ivory mt-1">{user?.full_name}</div></div>
           <div><div className="label-eyebrow">Email</div><div className="text-equine-ivory mt-1">{user?.email}</div></div>
           <div><div className="label-eyebrow">Role</div><div className="text-equine-ivory mt-1 capitalize">{user?.role?.replace('_', ' ')}</div></div>
-          <div><div className="label-eyebrow">Facility</div><div className="text-equine-ivory mt-1">Whitfield Equestrian Estate</div></div>
+          <div><div className="label-eyebrow">Facility</div><div className="text-equine-ivory mt-1">{user?.barn_name || user?.barn_id || "Not configured"}</div></div>
         </div>
       </Card>
 

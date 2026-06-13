@@ -23,7 +23,7 @@ export default function Today() {
   const [data, setData] = useState(null);
   const [horses, setHorses] = useState({});
   // Restore last-used filter from sessionStorage so a phone-lock/reopen
-  // mid-feed-round doesn't wipe Sophia's filter. Per OPERATIONAL_SIMULATION
+  // mid-feed-round doesn't wipe the current staff filter. Per OPERATIONAL_SIMULATION
   // §4.2 this saves ~30 wasted taps/day on a typical groom workflow.
   const [filter, setFilter] = useState(() => {
     try { return sessionStorage.getItem("equine_today_filter") || null; }

@@ -47,7 +47,7 @@ export default function AuditLog() {
       <PageHeader
         eyebrow="Insights"
         title="Backlog Audit Log"
-        subtitle="Recent create, update, archive, portal, and placeholder actions across the additive backlog modules."
+        subtitle="Recent create, update, archive, portal, and integration-readiness actions across the additive backlog modules."
         action={
           <button onClick={load} className="btn-secondary inline-flex items-center gap-2" data-testid="audit-log-refresh">
             <RefreshCw className="w-4 h-4" /> Refresh

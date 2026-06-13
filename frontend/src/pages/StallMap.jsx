@@ -9,11 +9,11 @@ const GRID_ROWS = 4;
 const GRID_COLS = 6;
 
 const ADD_FIELDS = [
-  { key: "stall_id", label: "Stall", required: true, placeholder: "A-01" },
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino", full: true },
-  { key: "barn_area", label: "Barn area", placeholder: "Main Barn" },
-  { key: "row", label: "Row", type: "number", placeholder: "1" },
-  { key: "column", label: "Column", type: "number", placeholder: "1" },
+  { key: "stall_id", label: "Stall", required: true, placeholder: "Stall ID" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name", full: true },
+  { key: "barn_area", label: "Barn area", placeholder: "Barn area" },
+  { key: "row", label: "Row", type: "number", placeholder: "Number" },
+  { key: "column", label: "Column", type: "number", placeholder: "Number" },
   { key: "status", label: "Status", kind: "select", opts: ["occupied", "open", "hold", "maintenance"] },
   { key: "notes", label: "Notes", kind: "textarea", full: true, rows: 3 },
 ];

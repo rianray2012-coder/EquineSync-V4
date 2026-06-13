@@ -1,12 +1,9 @@
 """EquineSync Onboarding/Barn Setup backend tests."""
-import os
 import requests
 import pytest
 
+from ._api_helpers import API, BASE as BASE_URL
 from ._test_creds import ADMIN
-
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL").rstrip("/")
-API = f"{BASE_URL}/api"
 
 EXPECTED_STEP_IDS = {
     "barn", "locations", "owners", "horses", "riders",

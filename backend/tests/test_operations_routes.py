@@ -5,16 +5,13 @@ service-requests, incidents) respond identically after extraction from
 server.py to routes/operations.py. Also validates role gating + 409 guard
 on service-request approve / decline.
 """
-import os
 import uuid
 
 import pytest
 import requests
 
+from ._api_helpers import API, BASE as BASE_URL
 from ._test_creds import DEMO_PASSWORD, ADMIN, OWNER, GROOM
-
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL").rstrip("/")
-API = f"{BASE_URL}/api"
 
 CREDS = {
     "admin":   (ADMIN["email"],   DEMO_PASSWORD),

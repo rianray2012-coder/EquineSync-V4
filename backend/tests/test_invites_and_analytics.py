@@ -1,13 +1,10 @@
 """Backend tests for invite flow, analytics events, tenant-reset, onboarding reset, deep-merge progress."""
-import os
 import uuid
 import requests
 import pytest
 
+from ._api_helpers import API, BASE as BASE_URL
 from ._test_creds import ADMIN, GROOM, DEMO_PASSWORD
-
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL").rstrip("/")
-API = f"{BASE_URL}/api"
 
 
 def _login(creds):

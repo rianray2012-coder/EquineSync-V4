@@ -29,7 +29,7 @@ const CRUD_CONFIG = {
       { key: "meal", label: "Meal", kind: "select", opts: ["morning", "midday", "evening"], required: true },
       { key: "hay_type", label: "Hay type", placeholder: "Timothy / Alfalfa mix" },
       { key: "hay_lbs", label: "Hay (lbs)", type: "number" },
-      { key: "grain_type", label: "Grain type", placeholder: "Triple Crown Senior" },
+      { key: "grain_type", label: "Grain type", placeholder: "Feed or supplement name" },
       { key: "grain_lbs", label: "Grain (lbs)", type: "number" },
       { key: "supplements", label: "Supplements" },
       { key: "med_timing", label: "Medication timing" },
@@ -43,7 +43,7 @@ const CRUD_CONFIG = {
     fields: [
       { key: "category", label: "Category", kind: "select",
         opts: ["grain", "hay", "bedding", "supplements", "medical", "blankets", "tack", "other"], required: true },
-      { key: "name", label: "Item", placeholder: "Triple Crown Senior", required: true },
+      { key: "name", label: "Item", placeholder: "Feed or supplement name", required: true },
       { key: "quantity", label: "On hand", type: "number" },
       { key: "unit", label: "Unit", placeholder: "lbs / bales / count" },
       { key: "reorder_at", label: "Reorder at", type: "number" },
@@ -58,8 +58,8 @@ const CRUD_CONFIG = {
     fields: [
       { key: "type", label: "Type", kind: "select",
         opts: ["turnout", "feed", "medication", "blanketing", "lesson_block", "training_ride"], required: true },
-      { key: "name", label: "Name", placeholder: "Morning turnout — Geldings A", required: true },
-      { key: "time", label: "Time", placeholder: "07:30" },
+      { key: "name", label: "Name", placeholder: "Turnout schedule name", required: true },
+      { key: "time", label: "Time", placeholder: "HH:MM" },
       { key: "days_of_week", label: "Days (comma-sep)", placeholder: "mon, tue, wed, thu, fri", kind: "csv" },
       { key: "notes", label: "Notes" },
     ],

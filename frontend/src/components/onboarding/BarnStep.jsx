@@ -41,12 +41,12 @@ const BarnStep = ({ onAnyChange }) => {
         Tell us about your facility. This drives branding, timezone-aware schedules and contact details for owners.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Barn name" value={barn.name} onChange={(v) => update({ name: v })} placeholder="Whitfield Equestrian Estate" testid="barn-name" />
+        <Field label="Barn name" value={barn.name} onChange={(v) => update({ name: v })} placeholder="Barn name" testid="barn-name" />
         <Select label="Facility type" value={barn.facility_type} onChange={(v) => update({ facility_type: v })} options={FACILITY_TYPES} testid="barn-type" />
-        <Field label="Address" value={barn.address} onChange={(v) => update({ address: v })} placeholder="1200 Whitfield Lane, Wellington FL" testid="barn-address" />
+        <Field label="Address" value={barn.address} onChange={(v) => update({ address: v })} placeholder="Barn address" testid="barn-address" />
         <Field label="Timezone" value={barn.timezone} onChange={(v) => update({ timezone: v })} placeholder="America/New_York" testid="barn-tz" />
-        <Field label="Contact email" type="email" value={barn.contact_email} onChange={(v) => update({ contact_email: v })} placeholder="ops@whitfield.com" testid="barn-email" />
-        <Field label="Contact phone" value={barn.contact_phone} onChange={(v) => update({ contact_phone: v })} placeholder="+1 555 0100" testid="barn-phone" />
+        <Field label="Contact email" type="email" value={barn.contact_email} onChange={(v) => update({ contact_email: v })} placeholder="contact@your-domain.com" testid="barn-email" />
+        <Field label="Contact phone" value={barn.contact_phone} onChange={(v) => update({ contact_phone: v })} placeholder="Phone number" testid="barn-phone" />
         <Field label="Logo URL" value={barn.logo_url} onChange={(v) => update({ logo_url: v })} placeholder="https://…" testid="barn-logo" />
         <Field
           label="Disciplines (comma-sep)"

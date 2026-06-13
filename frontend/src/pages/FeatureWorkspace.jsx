@@ -83,7 +83,7 @@ export default function FeatureWorkspace({ moduleKey, fallbackTitle, icon: Icon 
   const prepareIntegration = async (provider) => {
     try {
       const r = await api.post(`/integrations/${provider}/prepare`);
-      toast.success(r.data.message || "Placeholder ready");
+      toast.success(r.data.message || "Configuration ready");
     } catch (err) {
       toast.error(err?.response?.data?.detail || "Could not prepare integration");
     }
@@ -185,7 +185,7 @@ export default function FeatureWorkspace({ moduleKey, fallbackTitle, icon: Icon 
       )}
 
       {moduleKey === "integrations" && integrations.length > 0 && (
-        <Card hover={false} className="mt-6" data-testid="integration-placeholders">
+        <Card hover={false} className="mt-6" data-testid="integration-readiness">
           <div className="flex items-center gap-2 mb-4">
             <Plug className="w-4 h-4 text-equine-navy" />
             <h2 className="font-display text-2xl text-equine-ink">Integration readiness</h2>

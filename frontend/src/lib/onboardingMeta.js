@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Building2, MapPin, Users, Cat, GraduationCap,
-  UtensilsCrossed, Package, UserPlus, Calendar, Rocket,
+  UtensilsCrossed, Package, UserPlus, Calendar, Rocket, ClipboardList,
 } from "lucide-react";
 
 /**
@@ -16,6 +16,7 @@ export const STEP_META = {
   riders:         { label: "Riders",              icon: GraduationCap },
   feed_templates: { label: "Feed Templates",      icon: UtensilsCrossed },
   inventory:      { label: "Inventory",           icon: Package },
+  operations_setup: { label: "Operations & Sharing", icon: ClipboardList },
   staff:          { label: "Team & Staff",        icon: UserPlus },
   schedules:      { label: "Recurring Schedules", icon: Calendar },
   review:         { label: "Review & Launch",     icon: Rocket },

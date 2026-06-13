@@ -2,7 +2,7 @@
 
 The goal of this module is not to finish every advanced workflow in one pass.
 It creates stable, audit-friendly collections, RBAC gates, module metadata,
-CRUD shells, and integration placeholders so UI and deeper services can grow
+CRUD shells, and integration readiness contracts so UI and deeper services can grow
 without disturbing existing Emergent-built routes.
 """
 from __future__ import annotations
@@ -73,6 +73,12 @@ class DocumentScanUploadIn(BaseModel):
 class BarnLocationShareIn(BaseModel):
     enabled: bool = True
     title: str = "Barn Location Board"
+    note: Optional[str] = None
+
+
+class ArenaScheduleShareIn(BaseModel):
+    enabled: bool = True
+    title: str = "Arena Schedule"
     note: Optional[str] = None
 
 
@@ -149,6 +155,24 @@ MODULES: Dict[str, Dict[str, Any]] = {
             {"key": "weather_rule", "label": "Weather rule", "type": TEXTAREA},
         ],
         ["Turnout block planning", "Group scheduling", "Weather-rule notes"],
+    ),
+    "arena-schedule": _module(
+        "arena-schedule", "Operations", "Arena Schedule", "arena_schedule_blocks",
+        "operations:read", "barn:manage",
+        [
+            {"key": "arena_name", "label": "Arena", "type": TEXT, "required": True},
+            {"key": "title", "label": "Title", "type": TEXT, "required": True},
+            {"key": "date", "label": "Date", "type": DATE, "required": True},
+            {"key": "start_time", "label": "Start", "type": TEXT},
+            {"key": "end_time", "label": "End", "type": TEXT},
+            {"key": "rental_duration", "label": "Duration", "type": SELECT, "options": ["30_min", "1_hour", "half_day", "full_day"]},
+            {"key": "status", "label": "Status", "type": SELECT, "options": ["open", "requested", "reserved", "lesson", "maintenance", "private"]},
+            {"key": "visibility", "label": "Visibility", "type": SELECT, "options": ["shared_with_owners", "staff_only"]},
+            {"key": "horse_name", "label": "Horse", "type": TEXT},
+            {"key": "owner_name", "label": "Owner", "type": TEXT},
+            {"key": "notes", "label": "Notes", "type": TEXTAREA},
+        ],
+        ["Owner-visible arena availability", "Rental duration tracking", "Approved request booking"],
     ),
     "equipment": _module(
         "equipment", "Operations", "Equipment & Tack", "equipment_items",
@@ -332,10 +356,10 @@ MODULES: Dict[str, Dict[str, Any]] = {
             {"key": "form_name", "label": "Form", "type": TEXT, "required": True},
             {"key": "recipient_name", "label": "Recipient", "type": TEXT},
             {"key": "status", "label": "Status", "type": SELECT, "options": ["draft", "sent", "signed", "expired"]},
-            {"key": "signature_provider", "label": "Provider", "type": SELECT, "options": ["internal_placeholder", "docusign_ready"]},
+            {"key": "signature_provider", "label": "Provider", "type": SELECT, "options": ["internal", "docusign_ready"]},
             {"key": "signed_at", "label": "Signed at", "type": DATE},
         ],
-        ["Digital form tracking", "Signature-provider placeholder", "Status workflow"],
+        ["Digital form tracking", "Signature-provider readiness", "Status workflow"],
     ),
     "emergency-contacts": _module(
         "emergency-contacts", "Communication", "Emergency Contacts", "emergency_contacts",
@@ -471,7 +495,7 @@ MODULES: Dict[str, Dict[str, Any]] = {
         "Generated text remains review-first and does not provide veterinary advice.",
     ),
     "integrations": _module(
-        "integrations", "Mobile & Integrations", "Integration Placeholders", "integration_connections",
+        "integrations", "Mobile & Integrations", "Integration Readiness", "integration_connections",
         "integration:read", "integration:write",
         [
             {"key": "provider", "label": "Provider", "type": SELECT, "options": ["quickbooks", "stripe", "google_calendar", "push_notifications", "wearables", "document_scanning", "qr_horse_id"]},
@@ -479,7 +503,7 @@ MODULES: Dict[str, Dict[str, Any]] = {
             {"key": "external_ref", "label": "External ref", "type": TEXT},
             {"key": "notes", "label": "Notes", "type": TEXTAREA},
         ],
-        ["QuickBooks placeholder", "Google Calendar sync placeholder", "Wearables/scanning/QR hooks"],
+        ["QuickBooks readiness", "Google Calendar sync readiness", "Wearables/scanning/QR hooks"],
     ),
     "offline-sync": _module(
         "offline-sync", "Mobile & Integrations", "Offline Sync Queue", "offline_sync_queue",
@@ -525,8 +549,9 @@ MODULES: Dict[str, Dict[str, Any]] = {
 
 BACKLOG_AUDIT_COLLECTION = "backlog_audit_events"
 BACKLOG_LOCATION_SHARE_COLLECTION = "barn_location_share_settings"
+BACKLOG_ARENA_SHARE_COLLECTION = "arena_schedule_share_settings"
 BACKLOG_COLLECTIONS = sorted({mod["collection"] for mod in MODULES.values()})
-BACKLOG_SUPPORT_COLLECTIONS = [BACKLOG_AUDIT_COLLECTION, BACKLOG_LOCATION_SHARE_COLLECTION]
+BACKLOG_SUPPORT_COLLECTIONS = [BACKLOG_AUDIT_COLLECTION, BACKLOG_LOCATION_SHARE_COLLECTION, BACKLOG_ARENA_SHARE_COLLECTION]
 BACKLOG_RESET_COLLECTIONS = sorted({*BACKLOG_COLLECTIONS, *BACKLOG_SUPPORT_COLLECTIONS})
 
 
@@ -789,6 +814,42 @@ def _location_board_payload(*, share: Dict[str, Any], stalls: List[Dict[str, Any
     }
 
 
+def _arena_schedule_payload(*, share: Dict[str, Any], records: List[Dict[str, Any]], owner_view: bool = False) -> Dict[str, Any]:
+    blocks = []
+    for record in records:
+        data = record.get("data") or {}
+        if owner_view and data.get("visibility", "shared_with_owners") != "shared_with_owners":
+            continue
+        row = {
+            "id": record.get("id"),
+            "arena_name": data.get("arena_name") or "",
+            "title": data.get("title") or "",
+            "date": data.get("date") or "",
+            "start_time": data.get("start_time") or "",
+            "end_time": data.get("end_time") or "",
+            "rental_duration": data.get("rental_duration") or "",
+            "status": data.get("status") or "open",
+            "visibility": data.get("visibility") or "shared_with_owners",
+            "horse_name": data.get("horse_name") or "",
+            "owner_name": data.get("owner_name") or "",
+            "notes": data.get("notes") or "",
+            "source_request_id": data.get("source_request_id") or "",
+        }
+        blocks.append(row)
+    blocks = sorted(blocks, key=lambda item: (str(item.get("date") or ""), str(item.get("start_time") or ""), str(item.get("arena_name") or "")))
+    return {
+        "share": share,
+        "blocks": blocks,
+        "stats": {
+            "blocks": len(blocks),
+            "open": sum(1 for row in blocks if row.get("status") == "open"),
+            "reserved": sum(1 for row in blocks if row.get("status") == "reserved"),
+            "maintenance": sum(1 for row in blocks if row.get("status") == "maintenance"),
+        },
+        "generated_at": _now_iso(),
+    }
+
+
 def _qr_preview_matrix(code: str, size: int = 17) -> List[List[bool]]:
     source = code or "EquineSync"
     matrix: List[List[bool]] = []
@@ -888,58 +949,16 @@ async def ensure_backlog_indexes(db):
     await db[BACKLOG_AUDIT_COLLECTION].create_index([("barn_id", 1), ("created_at", -1)])
     await db[BACKLOG_AUDIT_COLLECTION].create_index([("record_id", 1), ("created_at", -1)])
     await db[BACKLOG_LOCATION_SHARE_COLLECTION].create_index([("barn_id", 1)], unique=True)
+    await db[BACKLOG_ARENA_SHARE_COLLECTION].create_index([("barn_id", 1)], unique=True)
 
 
-async def seed_demo_backlog(db, new_id, actor_id: Optional[str] = None):
-    demo = {
-        "stall-map": {"stall_id": "A-01", "horse_name": "Valentino", "barn_area": "Main Barn", "row": 1, "column": 1, "status": "occupied"},
-        "waitlist": {"client_name": "Maya Chen", "horse_name": "Sunday Best", "service_type": "training", "priority": "normal", "status": "contacted", "target_date": "2026-07-01"},
-        "pasture-schedule": {"pasture": "North Field", "group_name": "Geldings A", "horse_names": "Valentino, Mercury", "start_time": "08:00", "end_time": "14:00", "status": "planned", "weather_rule": "Hold if footing is slick."},
-        "equipment": {"name": "Devoucoux jump saddle", "category": "tack", "assigned_to": "Valentino", "condition": "good", "location": "Tack Room A", "serial_number": "DX-1842"},
-        "supply-inventory": {"name": "Orchard grass hay", "category": "hay", "quantity": 42, "unit": "bales", "reorder_at": 25, "vendor": "Bluegrass Feed", "location": "Hay loft", "status": "in_stock", "notes": "Second cutting."},
-        "health-reminders": {"horse_name": "Juniper", "reminder_type": "coggins", "due_date": "2026-08-15", "status": "due"},
-        "health-documents": {"horse_name": "Valentino", "document_type": "coggins", "document_url": "https://example.com/docs/valentino-coggins.pdf", "shared_with": "owner, show secretary", "expires_at": "2027-04-01"},
-        "farrier-history": {"horse_name": "Mercury", "farrier_name": "Dana Mills", "scheduled_at": "2026-06-18T10:00:00", "completed_at": "", "service_type": "front_shoes", "status": "scheduled", "notes": "Check left front wear pattern."},
-        "medication-logs": {"horse_name": "Juniper", "medication_name": "Phenylbutazone", "dosage": "1 g", "administered_at": "2026-06-10T07:30:00", "administered_by": "Sophia Reyes", "status": "administered", "notes": "Given with breakfast."},
-        "injury-tracking": {"horse_name": "Valentino", "case_title": "Mild right hind stiffness", "severity": "mild", "observed_at": "2026-06-09T16:15:00", "status": "monitoring", "care_plan": "Light work and reassess after turnout.", "notes": "No heat or swelling."},
-        "weight-trends": {"horse_name": "Valentino", "recorded_at": "2026-06-01", "weight_lbs": 1180, "body_condition": 5.5, "notes": "Baseline summer measurement."},
-        "payments": {"owner_name": "Charlotte Vance", "provider": "stripe", "autopay_status": "invited", "customer_ref": "cus_placeholder_001"},
-        "recurring-billing": {"name": "Full board monthly", "owner_name": "Charlotte Vance", "horse_name": "Valentino", "amount": 2850, "frequency": "monthly", "next_run_date": "2026-07-01", "status": "active"},
-        "expenses": {"vendor": "Bluegrass Feed", "category": "feed", "amount": 840.50, "spent_at": "2026-06-01"},
-        "group-messaging": {"subject": "Weather turnout update", "audience": "owners", "body": "Indoor turnout is in use until the footing dries. Horses are settled and staff will reassess this afternoon.", "channel": "in_app", "status": "sent"},
-        "owner-updates": {"horse_name": "Valentino", "owner_name": "Charlotte Vance", "caption": "Excellent flatwork today; relaxed and forward.", "media_url": "https://images.unsplash.com/photo-1553284965-5dc02f396399?w=900&auto=format&fit=crop", "visibility": "owner_only"},
-        "forms-signatures": {"form_name": "Show hauling release", "recipient_name": "Charlotte Vance", "status": "sent", "signature_provider": "internal_placeholder"},
-        "emergency-contacts": {"person_name": "Charlotte Vance", "relationship": "Owner", "phone": "+1 555 0142", "horse_name": "Valentino", "priority": 1, "notes": "Authorizes emergency vet care up to $5,000."},
-        "emergency-workflows": {"horse_name": "Valentino", "emergency_type": "injury", "primary_contact": "Charlotte Vance", "vet_status": "called", "owner_status": "confirmed", "workflow_status": "stabilizing", "started_at": "2026-06-10T16:20:00", "notes": "Owner authorized vet exam; cold hose until vet arrives."},
-        "training-plans": {"horse_name": "Valentino", "trainer_name": "Marcus Aldridge", "goal": "Consistent changes", "plan_notes": "Confirm clean changes after lateral warmup.", "target_date": "2026-08-15", "status": "active"},
-        "competitions": {"show_name": "Silver Waters Summer Classic", "horse_name": "Valentino", "rider_name": "Amelia Vance", "start_date": "2026-07-18", "entry_status": "submitted", "results": ""},
-        "ride-gps": {"horse_name": "Mercury", "rider_name": "Marcus Aldridge", "started_at": "2026-06-08T08:30:00", "distance_miles": 4.2, "duration_minutes": 38, "track_url": "https://example.com/tracks/mercury-0608"},
-        "staff-scheduling": {"staff_name": "Sophia Reyes", "role": "Groom", "shift_start": "2026-06-12T07:00:00", "shift_end": "2026-06-12T15:00:00", "area": "Main Barn", "notes": "Leave rehab handoff in aisle clipboard."},
-        "staff-tasks": {"title": "Reset rehab stall mats", "assigned_to": "Sophia Reyes", "due_at": "2026-06-12T12:00:00", "status": "open", "handoff_notes": "Use fresh shavings after mats dry."},
-        "handoff-reports": {"shift_date": "2026-06-12", "outgoing_staff": "Sophia Reyes", "incoming_staff": "Noah Patel", "area": "Main Barn", "summary": "Morning chores complete; rehab stall mats still drying.", "open_items": "Check mats at noon and replace shavings before afternoon meds.", "priority": "normal", "status": "submitted"},
-        "time-clock": {"staff_name": "Sophia Reyes", "clock_in": "2026-06-10T07:00:00", "clock_out": "2026-06-10T15:00:00", "break_minutes": 30, "notes": "Main barn coverage."},
-        "ai-automation": {"suggestion_type": "care_summary", "subject": "Valentino weekly care", "summary": "Draft summary awaiting staff review.", "confidence": 0.72, "status": "draft"},
-        "integrations": {"provider": "google_calendar", "status": "not_configured", "external_ref": "", "notes": "Ready for OAuth credentials when calendar sync is enabled."},
-        "offline-sync": {"action_type": "complete_task", "target_module": "staff-tasks", "payload_summary": "Sophia completed morning hay check while offline.", "captured_at": "2026-06-10T06:45:00", "sync_status": "queued"},
-        "document-scans": {"document_type": "coggins", "horse_name": "Valentino", "file_url": "https://example.com/uploads/valentino-coggins-scan.pdf", "linked_module": "health-documents", "scan_status": "captured", "notes": "Awaiting staff review before owner share."},
-        "qr-horse-id": {"horse_name": "Valentino", "qr_code": "EQSYNC-VALENTINO-001", "profile_url": "/horses/valentino", "stall_location": "A-01", "status": "active"},
-    }
-    actor = actor_id or "seed"
-    for key, data in demo.items():
-        mod = MODULES[key]
-        if await db[mod["collection"]].count_documents({"data": data}) > 0:
-            continue
-        now = _now_iso()
-        await db[mod["collection"]].insert_one({
-            "id": new_id(),
-            "barn_id": DEFAULT_BARN_ID,
-            "data": data,
-            "created_at": now,
-            "updated_at": now,
-            "created_by": actor,
-            "updated_by": actor,
-            "seeded": True,
-        })
+async def seed_starter_backlog(db, new_id, actor_id: Optional[str] = None):
+    """Compatibility hook retained for older imports.
+
+    Launch builds must not create starter backlog records. New barns start empty
+    and use onboarding plus module-specific add flows.
+    """
+    return {"records_created": 0, "skipped": True}
 
 
 def build_router(*, db, get_current_user, new_id) -> APIRouter:
@@ -1132,6 +1151,67 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         pastures = await db.pasture_schedules.find(q, {"_id": 0}).sort("data.start_time", 1).to_list(500)
         return _location_board_payload(share=share, stalls=stalls, pastures=pastures)
 
+    @router.post("/arena-schedule-share")
+    async def update_arena_schedule_share(body: ArenaScheduleShareIn, user=Depends(get_current_user)):
+        if user.get("role") not in ADMIN_ROLES:
+            raise HTTPException(403, "Permission denied")
+        barn_id = user.get("barn_id") or DEFAULT_BARN_ID
+        existing = await db[BACKLOG_ARENA_SHARE_COLLECTION].find_one({"barn_id": barn_id}, {"_id": 0})
+        now = _now_iso()
+        share = {
+            "id": existing.get("id") if existing else new_id(),
+            "barn_id": barn_id,
+            "enabled": body.enabled,
+            "title": body.title.strip() or "Arena Schedule",
+            "note": body.note or "",
+            "share_path": "/arena-schedule",
+            "created_at": existing.get("created_at") if existing else now,
+            "updated_at": now,
+            "created_by": existing.get("created_by") if existing else user["id"],
+            "updated_by": user["id"],
+        }
+        await db[BACKLOG_ARENA_SHARE_COLLECTION].update_one(
+            {"barn_id": barn_id},
+            {"$set": share},
+            upsert=True,
+        )
+        await write_audit(
+            action="arena_schedule_share_updated",
+            user=user,
+            collection=BACKLOG_ARENA_SHARE_COLLECTION,
+            record_id=share["id"],
+            before=existing,
+            after=share,
+            metadata={"enabled": share["enabled"]},
+        )
+        return share
+
+    @router.get("/arena-schedule-share")
+    async def arena_schedule_share(user=Depends(get_current_user)):
+        role = user.get("role")
+        if role not in STAFF_ROLES and role not in ("horse_owner", "parent"):
+            raise HTTPException(403, "Permission denied")
+        barn_id = user.get("barn_id") or DEFAULT_BARN_ID
+        share = await db[BACKLOG_ARENA_SHARE_COLLECTION].find_one({"barn_id": barn_id}, {"_id": 0})
+        if not share:
+            share = {
+                "id": "default",
+                "barn_id": barn_id,
+                "enabled": role in ADMIN_ROLES,
+                "title": "Arena Schedule",
+                "note": "",
+                "share_path": "/arena-schedule",
+                "created_at": None,
+                "updated_at": None,
+            }
+        owner_view = role in ("horse_owner", "parent")
+        if owner_view and not share.get("enabled"):
+            raise HTTPException(403, "Arena schedule sharing is not enabled")
+
+        q = {"barn_id": barn_id, "archived_at": {"$exists": False}}
+        records = await db.arena_schedule_blocks.find(q, {"_id": 0}).sort([("data.date", 1), ("data.start_time", 1)]).to_list(500)
+        return _arena_schedule_payload(share=share, records=records, owner_view=owner_view)
+
     @router.get("/integrations/placeholders")
     async def integration_placeholders(user=Depends(get_current_user)):
         require_permission(user, "integration:read")
@@ -1157,7 +1237,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         )
         return {
             "provider": provider,
-            "status": "placeholder_ready",
+            "status": "configuration_ready",
             "message": "Credentials and webhook configuration are required before live sync is enabled.",
         }
 
@@ -1463,7 +1543,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         validate_upload("document", body.mime_type, body.byte_size)
         barn_id = user.get("barn_id") or DEFAULT_BARN_ID
         subject = body.horse_name or body.document_type or "document"
-        key = build_key(barn_id, "document", _safe_filename(subject), body.filename)
+        key = build_key("default", "document", _safe_filename(subject), body.filename, barn_id=barn_id)
         intent = get_provider().prepare_upload(key=key, mime=body.mime_type, byte_size=body.byte_size)
         draft_record = {
             "document_type": body.document_type,
@@ -1815,7 +1895,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
                 payment_q["data.owner_name"] = owner_name
                 recurring_q["data.owner_name"] = owner_name
             if not invoice_clauses:
-                return {"invoices": [], "payment_profiles": [], "recurring_rules": [], "payment_provider": "stripe_placeholder"}
+                return {"invoices": [], "payment_profiles": [], "recurring_rules": [], "payment_provider": "stripe_ready"}
             invoice_q["$or"] = invoice_clauses
         elif role not in ("admin", "barn_manager"):
             raise HTTPException(403, "Permission denied")
@@ -1827,7 +1907,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "invoices": invoices,
             "payment_profiles": payment_profiles,
             "recurring_rules": recurring_rules,
-            "payment_provider": "stripe_placeholder",
+            "payment_provider": "stripe_ready",
         }
 
     @router.post("/owner-portal/billing/{invoice_id}/prepare-payment")
@@ -1862,7 +1942,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         return {
             "invoice_id": invoice["id"],
             "provider": "stripe",
-            "status": "placeholder_ready",
+            "status": "configuration_ready",
             "amount": invoice.get("total") or 0,
             "message": "Stripe checkout credentials are required before live payment collection is enabled.",
         }
@@ -2111,7 +2191,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "occupancy": {"occupied": occupied, "total_stalls": len(stall_rows)},
             "financial": {"revenue": revenue_total, "expenses": expense_total, "profit_loss": revenue_total - expense_total},
             "health": {"due_or_expired": health_due},
-            "exports": {"excel": "placeholder_ready", "pdf": "placeholder_ready"},
+            "exports": {"excel": "export_ready", "pdf": "export_ready"},
         }
 
     @router.post("/reports/custom-builder")
@@ -2125,7 +2205,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "columns": ["id", "created_at", "updated_at", "created_by", "data"],
             "status": "definition_valid",
             "collections": [m["collection"] for m in selected],
-            "export_formats": ["xlsx_placeholder", "pdf_placeholder"],
+            "export_formats": ["xlsx", "pdf"],
         }
 
     @router.post("/reports/export")

@@ -16,6 +16,7 @@ const REQUEST_TYPE_LABEL = {
   farrier_appt: "Farrier appointment",
   hand_walk: "Hand walk",
   schedule_change: "Schedule change",
+  arena_use: "Arena use",
   other: "Other request",
 };
 
@@ -220,6 +221,11 @@ export default function NotificationsBell() {
                       {sr.details && (
                         <div className="text-[12px] text-equine-inkMuted mt-1 leading-relaxed">
                           {sr.details}
+                        </div>
+                      )}
+                      {sr.type === "arena_use" && (
+                        <div className="text-[12px] text-equine-inkSoft mt-1 leading-relaxed">
+                          {sr.arena_name || "Arena"} · {sr.requested_date || "Date TBD"} {sr.requested_time || ""} · {(sr.rental_duration || "duration").replace(/_/g, " ")}
                         </div>
                       )}
                       <div className="text-[10.5px] text-equine-inkSoft mt-1">

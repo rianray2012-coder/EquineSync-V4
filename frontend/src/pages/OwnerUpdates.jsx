@@ -8,8 +8,8 @@ import QuickAddSheet from "../components/QuickAddSheet";
 const VISIBILITY = ["owner_only", "staff", "barn"];
 const VISIBILITY_TONE = { owner_only: "success", staff: "info", barn: "neutral" };
 const ADD_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino" },
-  { key: "owner_name", label: "Owner", placeholder: "Charlotte Vance" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
+  { key: "owner_name", label: "Owner", placeholder: "Owner name" },
   { key: "visibility", label: "Visibility", kind: "select", opts: VISIBILITY },
   { key: "media_url", label: "Media URL", placeholder: "https://…" },
   { key: "caption", label: "Caption", kind: "textarea", rows: 4, full: true },

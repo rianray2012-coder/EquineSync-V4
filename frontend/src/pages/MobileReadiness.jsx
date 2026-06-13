@@ -11,13 +11,13 @@ const OFFLINE_FIELDS = [
   { key: "action_type", label: "Action", kind: "select", opts: ["create", "update", "complete_task", "upload_document"] },
   { key: "target_module", label: "Target module", required: true, placeholder: "staff-tasks" },
   { key: "payload_summary", label: "Payload summary", required: true, kind: "textarea", rows: 4, full: true },
-  { key: "captured_at", label: "Captured", placeholder: "2026-06-10T06:45:00" },
+  { key: "captured_at", label: "Captured", placeholder: "YYYY-MM-DDTHH:MM:SS" },
   { key: "sync_status", label: "Status", kind: "select", opts: ["queued", "ready", "synced", "failed"] },
 ];
 
 const SCAN_FIELDS = [
   { key: "document_type", label: "Type", kind: "select", opts: ["receipt", "coggins", "waiver", "insurance", "other"] },
-  { key: "horse_name", label: "Horse", placeholder: "Valentino" },
+  { key: "horse_name", label: "Horse", placeholder: "Horse name" },
   { key: "file_url", label: "File URL", required: true, placeholder: "https://..." },
   { key: "linked_module", label: "Linked module", placeholder: "health-documents" },
   { key: "scan_status", label: "Status", kind: "select", opts: ["captured", "reviewed", "attached", "rejected"] },
@@ -25,10 +25,10 @@ const SCAN_FIELDS = [
 ];
 
 const QR_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino" },
-  { key: "qr_code", label: "QR code", required: true, placeholder: "EQSYNC-VALENTINO-001" },
-  { key: "profile_url", label: "Profile URL", placeholder: "/horses/valentino" },
-  { key: "stall_location", label: "Stall/location", placeholder: "A-01" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
+  { key: "qr_code", label: "QR code", required: true, placeholder: "EQSYNC-HORSE-001" },
+  { key: "profile_url", label: "Profile URL", placeholder: "/horses/{horse-id}" },
+  { key: "stall_location", label: "Stall/location", placeholder: "Stall ID" },
   { key: "status", label: "Status", kind: "select", opts: ["draft", "printed", "active", "retired"] },
 ];
 
@@ -69,7 +69,7 @@ export default function MobileReadiness() {
   const [offlineRecords, setOfflineRecords] = useState([]);
   const [scanRecords, setScanRecords] = useState([]);
   const [qrRecords, setQrRecords] = useState([]);
-  const [placeholders, setPlaceholders] = useState([]);
+  const [readinessItems, setReadinessItems] = useState([]);
   const [localQueue, setLocalQueue] = useState(() => loadDraftQueue());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -86,7 +86,7 @@ export default function MobileReadiness() {
     setLoading(true);
     setError(null);
     try {
-      const [offlineRes, scanRes, qrRes, placeholderRes] = await Promise.all([
+      const [offlineRes, scanRes, qrRes, readinessRes] = await Promise.all([
         api.get("/feature-modules/offline-sync"),
         api.get("/feature-modules/document-scans"),
         api.get("/feature-modules/qr-horse-id"),
@@ -95,7 +95,7 @@ export default function MobileReadiness() {
       setOfflineRecords(offlineRes.data.records || []);
       setScanRecords(scanRes.data.records || []);
       setQrRecords(qrRes.data.records || []);
-      setPlaceholders(placeholderRes.data || []);
+      setReadinessItems(readinessRes.data || []);
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load mobile readiness.");
     } finally {
@@ -106,16 +106,16 @@ export default function MobileReadiness() {
   useEffect(() => { load(); }, [load]);
 
   const readiness = useMemo(() => {
-    const lookup = Object.fromEntries(placeholders.map((item) => [item.provider, item]));
+    const lookup = Object.fromEntries(readinessItems.map((item) => [item.provider, item]));
     return ["push_notifications", "wearables", "document_scanning", "qr_horse_id"].map((key) => lookup[key]).filter(Boolean);
-  }, [placeholders]);
+  }, [readinessItems]);
 
   const addLocalOfflineAction = () => {
     const row = {
       id: `local-${Date.now()}`,
       action_type: "complete_task",
       target_module: "staff-tasks",
-      payload_summary: "Local demo action waiting for signal.",
+      payload_summary: "Local action waiting for network sync.",
       captured_at: new Date().toISOString(),
       sync_status: "queued",
     };
@@ -263,7 +263,7 @@ export default function MobileReadiness() {
         <Metric label="Offline actions" value={offlineRecords.length + localQueue.length} caption={`${localQueue.length} local`} icon={Smartphone} />
         <Metric label="Document scans" value={scanRecords.length} caption="Intake jobs" icon={FileScan} />
         <Metric label="QR IDs" value={qrRecords.length} caption="Horse identifiers" icon={QrCode} />
-        <Metric label="Readiness hooks" value={readiness.length} caption="Provider placeholders" icon={UploadCloud} />
+        <Metric label="Readiness hooks" value={readiness.length} caption="Provider setup" icon={UploadCloud} />
       </div>
 
       {loading ? (
@@ -353,7 +353,7 @@ export default function MobileReadiness() {
                     <input
                       value={scanUploadForm.horse_name}
                       onChange={(event) => setScanUploadForm((current) => ({ ...current, horse_name: event.target.value }))}
-                      placeholder="Valentino"
+                      placeholder="Horse name"
                       className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-[13px] text-equine-ink"
                       data-testid="document-upload-horse"
                     />

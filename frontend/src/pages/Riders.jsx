@@ -5,11 +5,11 @@ import { Card, PageHeader, StatusPill, Empty } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const ADD_FIELDS = [
-  { key: "full_name", label: "Rider name", required: true, full: true, placeholder: "Amelia Vance" },
+  { key: "full_name", label: "Rider name", required: true, full: true, placeholder: "Rider name" },
   { key: "age", label: "Age", type: "number" },
   { key: "skill_level", label: "Skill level", kind: "select", opts: ["beginner", "intermediate", "advanced"] },
-  { key: "goals", label: "Goals / focus", full: true, kind: "textarea", rows: 2, placeholder: "Move up to 1.10m jumpers by summer" },
-  { key: "emergency_contact", label: "Emergency contact", full: true, placeholder: "+1 555 0900" },
+  { key: "goals", label: "Goals / focus", full: true, kind: "textarea", rows: 2, placeholder: "Training goals" },
+  { key: "emergency_contact", label: "Emergency contact", full: true, placeholder: "Phone number" },
 ];
 
 export default function Riders() {

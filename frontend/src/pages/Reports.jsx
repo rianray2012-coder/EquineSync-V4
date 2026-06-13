@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { api } from "../lib/api";
 import { Card, PageHeader, StatusPill } from "../components/Primitives";
+import { BrandLoader } from "../components/BrandLoader";
 import { Sparkles, Send, Clock, TrendingUp, CheckCircle2, Mail, AlertTriangle, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 
@@ -58,7 +59,7 @@ export default function Reports() {
       />
 
       {loading && !health ? (
-        <div className="text-equine-platinum/60">Loading metrics…</div>
+        <BrandLoader label="Loading metrics…" />
       ) : !health ? null : (
         <>
           {/* KPI strip */}

@@ -6,10 +6,10 @@ import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const ADD_FIELDS = [
-  { key: "staff_name", label: "Staff", required: true, placeholder: "Sophia Reyes" },
-  { key: "clock_in", label: "Clock in", required: true, placeholder: "2026-06-12T07:00:00" },
-  { key: "clock_out", label: "Clock out", placeholder: "2026-06-12T15:00:00" },
-  { key: "break_minutes", label: "Break minutes", type: "number", placeholder: "30" },
+  { key: "staff_name", label: "Staff", required: true, placeholder: "Staff name" },
+  { key: "clock_in", label: "Clock in", required: true, placeholder: "YYYY-MM-DDTHH:MM:SS" },
+  { key: "clock_out", label: "Clock out", placeholder: "YYYY-MM-DDTHH:MM:SS" },
+  { key: "break_minutes", label: "Break minutes", type: "number", placeholder: "Minutes" },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
 ];
 

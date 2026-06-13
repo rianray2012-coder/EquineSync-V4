@@ -10,13 +10,13 @@ const CATEGORIES = ["grain", "hay", "bedding", "supplements", "medical", "blanke
 
 const ADD_FIELDS = [
   { key: "category", label: "Category", kind: "select", opts: CATEGORIES, required: true },
-  { key: "name", label: "Item", placeholder: "Triple Crown Senior", required: true, full: true },
-  { key: "quantity", label: "On hand", type: "number", placeholder: "120" },
+  { key: "name", label: "Item", placeholder: "Feed or supplement name", required: true, full: true },
+  { key: "quantity", label: "On hand", type: "number", placeholder: "Quantity" },
   { key: "unit", label: "Unit", placeholder: "lbs / bales / count" },
-  { key: "reorder_at", label: "Reorder at", type: "number", placeholder: "40" },
-  { key: "vendor", label: "Vendor", placeholder: "Tractor Supply" },
+  { key: "reorder_at", label: "Reorder at", type: "number", placeholder: "Reorder quantity" },
+  { key: "vendor", label: "Vendor", placeholder: "Vendor name" },
   { key: "cost_per_unit", label: "Cost / unit", type: "number" },
-  { key: "notes", label: "Notes", kind: "textarea", full: true, placeholder: "Stored in the feed-room loft." },
+  { key: "notes", label: "Notes", kind: "textarea", full: true, placeholder: "Storage notes." },
 ];
 
 export default function Inventory() {

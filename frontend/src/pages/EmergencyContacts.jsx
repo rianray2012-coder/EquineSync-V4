@@ -6,11 +6,11 @@ import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const ADD_FIELDS = [
-  { key: "person_name", label: "Name", required: true, placeholder: "Charlotte Vance" },
+  { key: "person_name", label: "Name", required: true, placeholder: "Owner name" },
   { key: "relationship", label: "Relationship", placeholder: "Owner" },
-  { key: "phone", label: "Phone", required: true, placeholder: "+1 555 0142" },
-  { key: "horse_name", label: "Horse", placeholder: "Valentino" },
-  { key: "priority", label: "Priority", type: "number", placeholder: "1" },
+  { key: "phone", label: "Phone", required: true, placeholder: "Phone number" },
+  { key: "horse_name", label: "Horse", placeholder: "Horse name" },
+  { key: "priority", label: "Priority", type: "number", placeholder: "Number" },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
 ];
 

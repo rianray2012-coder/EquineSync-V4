@@ -9,7 +9,7 @@ const STATUSES = ["not_enrolled", "invited", "enrolled", "paused"];
 const STATUS_TONE = { not_enrolled: "neutral", invited: "warning", enrolled: "success", paused: "critical" };
 
 const ADD_FIELDS = [
-  { key: "owner_name", label: "Owner", required: true, placeholder: "Charlotte Vance", full: true },
+  { key: "owner_name", label: "Owner", required: true, placeholder: "Owner name", full: true },
   { key: "provider", label: "Provider", kind: "select", opts: ["stripe", "manual"] },
   { key: "autopay_status", label: "Auto-pay", kind: "select", opts: STATUSES },
   { key: "customer_ref", label: "Customer ref", placeholder: "cus_…" },
@@ -18,7 +18,7 @@ const ADD_FIELDS = [
 
 export default function Payments() {
   const [records, setRecords] = useState([]);
-  const [placeholders, setPlaceholders] = useState([]);
+  const [readinessItems, setReadinessItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
@@ -28,12 +28,12 @@ export default function Payments() {
     setLoading(true);
     setError(null);
     try {
-      const [moduleRes, placeholderRes] = await Promise.all([
+      const [moduleRes, readinessRes] = await Promise.all([
         api.get("/feature-modules/payments"),
         api.get("/integrations/placeholders"),
       ]);
       setRecords(moduleRes.data.records || []);
-      setPlaceholders((placeholderRes.data || []).filter((p) => p.provider === "stripe"));
+      setReadinessItems((readinessRes.data || []).filter((p) => p.provider === "stripe"));
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load payments.");
     } finally {
@@ -64,7 +64,7 @@ export default function Payments() {
   const prepareStripe = async () => {
     try {
       const r = await api.post("/integrations/stripe/prepare");
-      toast.success(r.data.message || "Stripe placeholder ready");
+      toast.success(r.data.message || "Stripe configuration ready");
     } catch (err) {
       toast.error(err?.response?.data?.detail || "Could not prepare Stripe");
     }
@@ -103,11 +103,11 @@ export default function Payments() {
           <div className="flex items-start gap-3 flex-1">
             <CreditCard className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
             <div>
-              <div className="text-equine-ink text-[14px]">Stripe-ready placeholder</div>
+              <div className="text-equine-ink text-[14px]">Stripe-ready configuration</div>
               <div className="text-[12.5px] text-equine-inkMuted mt-1">
                 No credentials or card data are stored here. Live checkout and webhooks stay behind the integration abstraction.
               </div>
-              {placeholders[0] && <div className="text-[11.5px] text-equine-inkSoft mt-2">{placeholders[0].ready_for.join(" · ")}</div>}
+              {readinessItems[0] && <div className="text-[11.5px] text-equine-inkSoft mt-2">{readinessItems[0].ready_for.join(" · ")}</div>}
             </div>
           </div>
           <button type="button" onClick={prepareStripe} className="btn-secondary text-[12px] py-2 px-4" data-testid="prepare-stripe">

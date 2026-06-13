@@ -42,8 +42,8 @@ export default function Lessons() {
       opts: [{ v: "__none__", l: "— TBD —" }, ...horses.map((h) => ({ v: h.id, l: h.name }))],
     },
     { key: "start_time", label: "Start time", type: "datetime-local", required: true },
-    { key: "duration_min", label: "Duration (min)", type: "number", placeholder: "60" },
-    { key: "focus", label: "Focus", full: true, placeholder: "Gymnastic grid · lateral work · position" },
+    { key: "duration_min", label: "Duration (min)", type: "number", placeholder: "Minutes" },
+    { key: "focus", label: "Focus", full: true, placeholder: "Lesson focus" },
   ], [riders, horses]);
 
   const transform = (form) => ({

@@ -8,10 +8,10 @@ import QuickAddSheet from "../components/QuickAddSheet";
 const STATUSES = ["draft", "sent", "signed", "expired"];
 const STATUS_TONE = { draft: "neutral", sent: "warning", signed: "success", expired: "critical" };
 const ADD_FIELDS = [
-  { key: "form_name", label: "Form", required: true, placeholder: "Show hauling release", full: true },
-  { key: "recipient_name", label: "Recipient", placeholder: "Charlotte Vance" },
+  { key: "form_name", label: "Form", required: true, placeholder: "Form name", full: true },
+  { key: "recipient_name", label: "Recipient", placeholder: "Recipient name" },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },
-  { key: "signature_provider", label: "Provider", kind: "select", opts: ["internal_placeholder", "docusign_ready"] },
+  { key: "signature_provider", label: "Provider", kind: "select", opts: ["internal", "docusign_ready"] },
   { key: "signed_at", label: "Signed at", type: "date" },
 ];
 
@@ -89,7 +89,7 @@ export default function FormsSignatures() {
         <div className="flex items-start gap-3">
           <FileSignature className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
           <div className="text-[13px] text-equine-inkMuted leading-relaxed">
-            Signature providers are placeholder-ready. This screen tracks workflow state until a live e-signature integration is configured.
+            Signature providers are configuration-ready. This screen tracks workflow state until a live e-signature integration is configured.
           </div>
         </div>
       </Card>
@@ -137,7 +137,7 @@ export default function FormsSignatures() {
                     <div className="flex-1 min-w-0">
                       <div className="font-display text-2xl text-equine-ink truncate">{data.form_name}</div>
                       <div className="text-[12.5px] text-equine-inkMuted">
-                        {data.recipient_name || "Recipient TBD"} · {(data.signature_provider || "internal_placeholder").replace(/_/g, " ")}
+                        {data.recipient_name || "Recipient TBD"} · {(data.signature_provider || "internal").replace(/_/g, " ")}
                       </div>
                       {data.signed_at && <div className="text-[12px] text-equine-sage mt-1">Signed {fmtDate(data.signed_at)}</div>}
                     </div>
@@ -163,7 +163,7 @@ export default function FormsSignatures() {
         eyebrow="Communication"
         fields={ADD_FIELDS}
         endpoint="/feature-modules/forms-signatures/records"
-        initialValues={{ status: "draft", signature_provider: "internal_placeholder" }}
+        initialValues={{ status: "draft", signature_provider: "internal" }}
         transform={(form) => ({ data: form })}
         submitLabel="Save form"
         testidPrefix="forms-add"

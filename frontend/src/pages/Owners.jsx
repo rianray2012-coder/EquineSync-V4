@@ -5,9 +5,9 @@ import { Card, PageHeader, Empty } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const ADD_FIELDS = [
-  { key: "full_name", label: "Full name", required: true, placeholder: "Charlotte Vance", full: true },
-  { key: "email", label: "Email", type: "email", placeholder: "charlotte@example.com" },
-  { key: "phone", label: "Phone", placeholder: "+1 555 0142" },
+  { key: "full_name", label: "Full name", required: true, placeholder: "Owner name", full: true },
+  { key: "email", label: "Email", type: "email", placeholder: "owner@your-domain.com" },
+  { key: "phone", label: "Phone", placeholder: "Phone number" },
 ];
 
 export default function Owners() {

@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Cat, UserCircle2, Users, GraduationCap, Dumbbell,
   Stethoscope, BedDouble, Pill, Trees, UtensilsCrossed, Package, Receipt,
   AlertTriangle, MessageSquare, BarChart3, Settings, ShieldAlert,
   LogOut, Crown, Sparkles, ListChecks, Map, ClipboardList, Wrench,
-  FileText, HeartPulse, CalendarDays, Landmark, UsersRound, PenLine, Route, Smartphone, ShieldCheck,
+  FileText, HeartPulse, CalendarDays, Landmark, UsersRound, PenLine, Route, Smartphone, ShieldCheck, ClipboardCheck,
 } from "lucide-react";
 import { Logo } from "./Logo";
 import { useAuth } from "../context/AuthContext";
 import { ROLE_GROUPS } from "../lib/permissions";
+import { api } from "../lib/api";
 
 const NAV_SECTIONS = [
   {
@@ -53,6 +54,7 @@ const NAV_SECTIONS = [
       { to: "/owners", label: "Owners", icon: Users },
       { to: "/owner-portal", label: "Owner Portal", icon: Crown, roles: ROLE_GROUPS.ownerPortal },
       { to: "/billing", label: "Billing", icon: Receipt, roles: ROLE_GROUPS.financial },
+      { to: "/review-queue", label: "Review Queue", icon: ClipboardCheck, roles: ROLE_GROUPS.communication, reviewBadge: true },
       { to: "/financial-dashboard", label: "Financial Dashboard", icon: BarChart3, roles: ROLE_GROUPS.financial },
       { to: "/payments", label: "Payments", icon: Landmark, roles: ROLE_GROUPS.financial },
       { to: "/recurring-billing", label: "Recurring Billing", icon: Landmark, roles: ROLE_GROUPS.financial },
@@ -69,6 +71,7 @@ const NAV_SECTIONS = [
     label: "Operations",
     items: [
       { to: "/barn-locations", label: "Barn Locations", icon: Map, roles: ROLE_GROUPS.locationShare },
+      { to: "/arena-schedule", label: "Arena Schedule", icon: CalendarDays, roles: ROLE_GROUPS.locationShare },
       { to: "/stall-map", label: "Stall Map", icon: Map, roles: ROLE_GROUPS.operations },
       { to: "/waitlist", label: "Waitlist", icon: ClipboardList, roles: ROLE_GROUPS.operations },
       { to: "/pasture-schedule", label: "Pasture Schedule", icon: Trees, roles: ROLE_GROUPS.operations },
@@ -97,9 +100,33 @@ const NAV_SECTIONS = [
   },
 ];
 
+const REVIEW_ROLES = ["admin", "barn_manager", "trainer"];
+
 export default function Sidebar({ onNavigate }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const canReview = REVIEW_ROLES.includes(user?.role);
+  const [pendingCount, setPendingCount] = useState(0);
+
+  const refreshPending = useCallback(() => {
+    if (!canReview) return;
+    api
+      .get("/owner-updates?status=pending_review")
+      .then((r) => setPendingCount(Array.isArray(r.data) ? r.data.length : 0))
+      .catch(() => {});
+  }, [canReview]);
+
+  useEffect(() => {
+    if (!canReview) return;
+    refreshPending();
+    const t = setInterval(refreshPending, 60000);
+    const onChange = () => refreshPending();
+    window.addEventListener("owner-updates-changed", onChange);
+    return () => {
+      clearInterval(t);
+      window.removeEventListener("owner-updates-changed", onChange);
+    };
+  }, [canReview, refreshPending]);
 
   return (
     <aside className="h-full w-[290px] bg-equine-navy border-r border-equine-navyDeep flex flex-col text-equine-platinum/90" data-testid="sidebar">
@@ -134,6 +161,14 @@ export default function Sidebar({ onNavigate }) {
                     <>
                       <Icon strokeWidth={1.5} className={`w-[18px] h-[18px] transition-colors ${isActive ? "text-equine-brassLight" : "group-hover:text-equine-brassLight/90"}`} />
                       <span className="text-[13.5px] tracking-wide flex-1">{item.label}</span>
+                      {item.reviewBadge && pendingCount > 0 && (
+                        <span
+                          data-testid="review-queue-badge"
+                          className="min-w-[18px] h-[18px] px-1.5 rounded-full bg-equine-brassLight text-equine-navy text-[10.5px] font-semibold flex items-center justify-center"
+                        >
+                          {pendingCount > 9 ? "9+" : pendingCount}
+                        </span>
+                      )}
                       {isActive && <span className="w-1 h-1 rounded-full bg-equine-brassLight shadow-[0_0_10px_rgba(194,205,236,0.9)]" />}
                     </>
                   )}

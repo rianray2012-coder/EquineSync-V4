@@ -76,10 +76,10 @@ const StaffStep = ({ onAnyChange }) => {
       <form onSubmit={submit} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         <Field label="Full name" value={form.full_name}
                onChange={(v) => setForm({ ...form, full_name: v })}
-               testid="staff-name" placeholder="Marcus Aldridge" />
+               testid="staff-name" placeholder="Staff name" />
         <Field label="Email" type="email" value={form.email}
                onChange={(v) => setForm({ ...form, email: v })}
-               testid="staff-email" placeholder="marcus@…" />
+               testid="staff-email" placeholder="staff@…" />
         <Select label="Role" value={form.role}
                 onChange={(v) => setForm({ ...form, role: v })}
                 testid="staff-role" options={ROLE_OPTIONS} />

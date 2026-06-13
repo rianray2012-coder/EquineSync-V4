@@ -11,9 +11,9 @@ const PRIORITY_TONE = { low: "neutral", normal: "info", high: "critical" };
 
 const ADD_FIELDS = [
   { key: "shift_date", label: "Shift date", type: "date", required: true },
-  { key: "outgoing_staff", label: "Outgoing staff", placeholder: "Sophia Reyes" },
-  { key: "incoming_staff", label: "Incoming staff", placeholder: "Noah Patel" },
-  { key: "area", label: "Area", placeholder: "Main Barn" },
+  { key: "outgoing_staff", label: "Outgoing staff", placeholder: "Staff name" },
+  { key: "incoming_staff", label: "Incoming staff", placeholder: "Staff name" },
+  { key: "area", label: "Area", placeholder: "Barn area" },
   { key: "priority", label: "Priority", kind: "select", opts: ["low", "normal", "high"] },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },
   { key: "summary", label: "Summary", kind: "textarea", rows: 4, required: true, full: true },

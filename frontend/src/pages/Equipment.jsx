@@ -15,12 +15,12 @@ const CONDITION_TONE = {
 };
 
 const ADD_FIELDS = [
-  { key: "name", label: "Item", required: true, placeholder: "Devoucoux jump saddle", full: true },
+  { key: "name", label: "Item", required: true, placeholder: "Saddle or equipment name", full: true },
   { key: "category", label: "Category", kind: "select", opts: CATEGORIES.filter((c) => c !== "all") },
-  { key: "assigned_to", label: "Assigned to", placeholder: "Valentino" },
+  { key: "assigned_to", label: "Assigned to", placeholder: "Horse name" },
   { key: "condition", label: "Condition", kind: "select", opts: CONDITIONS },
-  { key: "location", label: "Location", placeholder: "Tack Room A" },
-  { key: "serial_number", label: "Serial / tag", placeholder: "DX-1842" },
+  { key: "location", label: "Location", placeholder: "Storage location" },
+  { key: "serial_number", label: "Serial / tag", placeholder: "Serial or tag" },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
 ];
 

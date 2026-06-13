@@ -208,9 +208,9 @@ export const OwnersStep = ({ onAnyChange }) => (
     kind="owners" endpoint="/owners" displayKey="full_name" onAnyChange={onAnyChange}
     intro="Add your boarding/training clients. Or import a roster via CSV in seconds."
     fields={[
-      { key: "full_name", label: "Full name", required: true, placeholder: "Charlotte Vance" },
-      { key: "email", label: "Email", type: "email", placeholder: "charlotte@example.com" },
-      { key: "phone", label: "Phone", placeholder: "+1 555 0142" },
+      { key: "full_name", label: "Full name", required: true, placeholder: "Owner name" },
+      { key: "email", label: "Email", type: "email", placeholder: "owner@your-domain.com" },
+      { key: "phone", label: "Phone", placeholder: "Phone number" },
       { key: "emergency_contact", label: "Emergency contact" },
       { key: "billing_preferences", label: "Billing preference", kind: "select",
         opts: ["monthly_card", "monthly_ach", "invoice_check", "wire"] },
@@ -224,14 +224,14 @@ export const HorsesStep = ({ onAnyChange }) => (
     kind="horses" endpoint="/horses" displayKey="name" onAnyChange={onAnyChange}
     intro="Each horse needs a profile. Add manually for elite-care detail, or upload a CSV for fast bulk import."
     fields={[
-      { key: "name", label: "Show name", required: true, placeholder: "Valentino" },
-      { key: "barn_name", label: "Barn name", placeholder: "Val" },
-      { key: "breed", label: "Breed", placeholder: "Hanoverian" },
+      { key: "name", label: "Show name", required: true, placeholder: "Horse name" },
+      { key: "barn_name", label: "Barn name", placeholder: "Barn name" },
+      { key: "breed", label: "Breed", placeholder: "Breed" },
       { key: "age", label: "Age", type: "number" },
       { key: "color", label: "Color" },
       { key: "height_hands", label: "Height (hh)", type: "number" },
-      { key: "discipline", label: "Discipline", placeholder: "Show Jumping" },
-      { key: "stall", label: "Stall / Location", placeholder: "Stall 1" },
+      { key: "discipline", label: "Discipline", placeholder: "Discipline" },
+      { key: "stall", label: "Stall / Location", placeholder: "Stall ID" },
       { key: "turnout_group", label: "Turnout group" },
       { key: "feed_plan", label: "Feed notes" },
     ]}

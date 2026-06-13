@@ -1,18 +1,22 @@
-"""routes/care.py — care records: horses, owners, riders, medications,
-vet, farrier, injuries, wellness.
+"""routes/care.py — care records: owners, riders, medications,
+vet, farrier, injuries, wellness, feed-tasks.
 
 Phase-F final sweep extraction (Feb 20 2026). All handlers are trivial
 CRUD over MongoDB collections; they share the `list_collection`, `clean`
 and `new_id` helpers from server.py. Models live here too because they
 are not shared with any other route module.
+
+Note: horse-profile CRUD was extracted to `routes/horses.py` in Phase 3C.
 """
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, EmailStr
+
+from core.tenancy import barn_filter, stamp_barn
 
 
 def _now_utc() -> datetime:
@@ -24,30 +28,6 @@ def _iso(dt: datetime) -> str:
 
 
 # ---------------- Models ----------------
-
-class HorseIn(BaseModel):
-    name: str
-    barn_name: Optional[str] = None
-    breed: Optional[str] = None
-    age: Optional[int] = None
-    color: Optional[str] = None
-    height_hands: Optional[float] = None
-    discipline: Optional[str] = None
-    owner_id: Optional[str] = None
-    rider_id: Optional[str] = None
-    trainer_id: Optional[str] = None
-    stall: Optional[str] = None
-    photo_url: Optional[str] = None
-    allergies: Optional[List[str]] = []
-    emergency_notes: Optional[str] = None
-    insurance: Optional[str] = None
-    wellness_score: Optional[int] = 85
-    status: Optional[str] = "active"
-    training_goals: Optional[str] = None
-    feed_plan: Optional[str] = None
-    turnout_group: Optional[str] = None
-    behavior_flags: Optional[List[str]] = []
-
 
 class OwnerIn(BaseModel):
     full_name: str
@@ -85,6 +65,10 @@ class MedLogIn(BaseModel):
     scheduled_time: str
     status: str
     notes: Optional[str] = None
+    # Phase 6B: optional client-supplied idempotency key. When provided, repeat
+    # posts with the same (barn, client_log_id) return the same log instead of
+    # inserting a duplicate. Omitting it preserves the original insert behavior.
+    client_log_id: Optional[str] = None
 
 
 class VetRecordIn(BaseModel):
@@ -131,41 +115,36 @@ class FeedTaskIn(BaseModel):
 def build_router(*, db, get_current_user, list_collection, clean, new_id) -> APIRouter:
     router = APIRouter(tags=["care"])
 
-    # ---------------- Horses ----------------
+    # ---------------- Phase 6A: care input integrity helpers ----------------
+    # Validate that a referenced id belongs to the caller's barn BEFORE writing
+    # a care record. Cross-barn and absent ids return the same generic 404 so
+    # there is no existence leak (consistent with the 4E isolation contract).
 
-    @router.get("/horses")
-    async def list_horses(user=Depends(get_current_user)):
-        return await list_collection("horses")
-
-    @router.post("/horses")
-    async def create_horse(body: HorseIn, user=Depends(get_current_user)):
-        doc = body.model_dump()
-        doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
-        await db.horses.insert_one(doc)
-        return clean(doc)
-
-    @router.get("/horses/{horse_id}")
-    async def get_horse(horse_id: str, user=Depends(get_current_user)):
-        h = await db.horses.find_one({"id": horse_id}, {"_id": 0})
-        if not h:
+    async def _require_horse(user, horse_id: str) -> None:
+        if not await db.horses.find_one(barn_filter(user, {"id": horse_id}), {"_id": 0, "id": 1}):
             raise HTTPException(404, "Horse not found")
-        return h
 
-    @router.patch("/horses/{horse_id}")
-    async def update_horse(horse_id: str, body: Dict[str, Any], user=Depends(get_current_user)):
-        await db.horses.update_one({"id": horse_id}, {"$set": body})
-        return await db.horses.find_one({"id": horse_id}, {"_id": 0})
+    async def _require_medication(user, medication_id: str) -> None:
+        if not await db.medications.find_one(
+            barn_filter(user, {"id": medication_id}), {"_id": 0, "id": 1}
+        ):
+            raise HTTPException(404, "Medication not found")
 
     # ---------------- Owners ----------------
 
     @router.get("/owners")
     async def list_owners(user=Depends(get_current_user)):
-        return await list_collection("owners")
+        # Phase 6C: deterministic newest-first ordering (created_at desc).
+        return await list_collection("owners", barn_filter(user), sort_field="created_at")
 
     @router.post("/owners")
     async def create_owner(body: OwnerIn, user=Depends(get_current_user)):
+        # Phase 6A: every referenced horse must belong to the caller's barn.
+        for horse_id in (body.horses or []):
+            await _require_horse(user, horse_id)
         doc = body.model_dump()
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        stamp_barn(user, doc)
         await db.owners.insert_one(doc)
         return clean(doc)
 
@@ -173,12 +152,17 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
 
     @router.get("/riders")
     async def list_riders(user=Depends(get_current_user)):
-        return await list_collection("riders")
+        # Phase 6C: deterministic newest-first ordering (created_at desc).
+        return await list_collection("riders", barn_filter(user), sort_field="created_at")
 
     @router.post("/riders")
     async def create_rider(body: RiderIn, user=Depends(get_current_user)):
+        # Phase 6A backlog (deferred): rider.trainer_id references a user/staff
+        # record (cross-domain into `users`), outside the care-records boundary.
+        # Validating trainer barn membership is tracked for a later phase.
         doc = body.model_dump()
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        stamp_barn(user, doc)
         await db.riders.insert_one(doc)
         return clean(doc)
 
@@ -186,24 +170,44 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
 
     @router.get("/medications")
     async def list_meds(horse_id: Optional[str] = None, user=Depends(get_current_user)):
-        q = {"horse_id": horse_id} if horse_id else {}
-        return await list_collection("medications", q)
+        extra = {"horse_id": horse_id} if horse_id else {}
+        # Phase 6C: deterministic newest-first ordering (created_at desc).
+        return await list_collection("medications", barn_filter(user, extra), sort_field="created_at")
 
     @router.post("/medications")
     async def create_med(body: MedicationIn, user=Depends(get_current_user)):
+        await _require_horse(user, body.horse_id)
         doc = body.model_dump()
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        stamp_barn(user, doc)
         await db.medications.insert_one(doc)
         return clean(doc)
 
     @router.get("/medication-logs")
-    async def list_med_logs(user=Depends(get_current_user)):
-        return await list_collection("medication_logs", sort_field="scheduled_time")
+    async def list_med_logs(medication_id: Optional[str] = None, user=Depends(get_current_user)):
+        # Phase 6C: optional barn-scoped medication_id filter (parity with the
+        # horse_id filter on the other care lists). A foreign/unknown id simply
+        # returns an empty array (barn_filter scopes it) — no 404, no leak.
+        extra = {"medication_id": medication_id} if medication_id else {}
+        return await list_collection(
+            "medication_logs", barn_filter(user, extra), sort_field="scheduled_time"
+        )
 
     @router.post("/medication-logs")
     async def create_med_log(body: MedLogIn, user=Depends(get_current_user)):
+        await _require_medication(user, body.medication_id)
         doc = body.model_dump()
         doc.update({"id": new_id(), "completed_by": user["id"], "completed_at": _iso(_now_utc())})
+        stamp_barn(user, doc)
+        # Phase 6B: opt-in idempotency. With a client_log_id, atomically upsert
+        # keyed by (barn_id, client_log_id) so repeat submits return the first
+        # log and never duplicate. Without it, behave exactly as before.
+        if body.client_log_id:
+            key = barn_filter(user, {"client_log_id": body.client_log_id})
+            await db.medication_logs.update_one(key, {"$setOnInsert": doc}, upsert=True)
+            return clean(await db.medication_logs.find_one(key, {"_id": 0}))
+        # No key: preserve the original shape — don't persist/return client_log_id: null.
+        doc.pop("client_log_id", None)
         await db.medication_logs.insert_one(doc)
         return clean(doc)
 
@@ -211,28 +215,40 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
 
     @router.get("/feed-tasks")
     async def list_feed(date_str: Optional[str] = None, user=Depends(get_current_user)):
-        q = {"date": date_str} if date_str else {}
-        return await list_collection("feed_tasks", q)
+        extra = {"date": date_str} if date_str else {}
+        # Phase 6C: deterministic newest-first ordering (created_at desc).
+        return await list_collection("feed_tasks", barn_filter(user, extra), sort_field="created_at")
 
     @router.post("/feed-tasks/{task_id}/complete")
     async def complete_feed(task_id: str, user=Depends(get_current_user)):
+        scope = barn_filter(user, {"id": task_id})
+        if not await db.feed_tasks.find_one(scope, {"_id": 0}):
+            raise HTTPException(404, "Feed task not found")
+        # Phase 6B: idempotent completion — only set fields when not already
+        # completed, so a re-complete preserves the original completer/timestamp.
+        # Response shape is unchanged (still the feed-task doc).
         await db.feed_tasks.update_one(
-            {"id": task_id},
+            barn_filter(user, {"id": task_id, "completed": {"$ne": True}}),
             {"$set": {"completed": True, "completed_by": user["full_name"], "completed_at": _iso(_now_utc())}},
         )
-        return await db.feed_tasks.find_one({"id": task_id}, {"_id": 0})
+        return await db.feed_tasks.find_one(scope, {"_id": 0})
 
     # ---------------- Vet records ----------------
 
     @router.get("/vet-records")
     async def list_vet(horse_id: Optional[str] = None, user=Depends(get_current_user)):
-        q = {"horse_id": horse_id} if horse_id else {}
-        return await list_collection("vet_records", q, sort_field="date")
+        # Phase 4B-7: read now barn-scoped — the task_engine completion hooks
+        # stamp barn_id on engine-written vet_records (and the startup backfill
+        # covers legacy rows), so barn_filter no longer hides engine-projected rows.
+        extra = {"horse_id": horse_id} if horse_id else None
+        return await list_collection("vet_records", barn_filter(user, extra), sort_field="date")
 
     @router.post("/vet-records")
     async def create_vet(body: VetRecordIn, user=Depends(get_current_user)):
+        await _require_horse(user, body.horse_id)
         doc = body.model_dump()
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        stamp_barn(user, doc)
         await db.vet_records.insert_one(doc)
         return clean(doc)
 
@@ -240,20 +256,27 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
 
     @router.get("/farrier-history")
     async def list_farrier(horse_id: Optional[str] = None, user=Depends(get_current_user)):
-        q = {"horse_id": horse_id} if horse_id else {}
-        return await db.farrier_history.find(q, {"_id": 0}).sort("date", -1).to_list(500)
+        # Phase 4B-7: read now barn-scoped — engine-written farrier_history rows
+        # stamp barn_id (+ startup backfill for legacy rows). See vet-records note.
+        # Phase 6C: harmonized to route through list_collection (date desc) — same
+        # behavior as the bespoke .find().sort().to_list(500) it replaced.
+        extra = {"horse_id": horse_id} if horse_id else None
+        return await list_collection("farrier_history", barn_filter(user, extra), sort_field="date")
 
     # ---------------- Injuries ----------------
 
     @router.get("/injuries")
     async def list_injuries(horse_id: Optional[str] = None, user=Depends(get_current_user)):
-        q = {"horse_id": horse_id} if horse_id else {}
-        return await list_collection("injuries", q)
+        extra = {"horse_id": horse_id} if horse_id else {}
+        # Phase 6C: deterministic newest-first ordering (created_at desc).
+        return await list_collection("injuries", barn_filter(user, extra), sort_field="created_at")
 
     @router.post("/injuries")
     async def create_injury(body: InjuryIn, user=Depends(get_current_user)):
+        await _require_horse(user, body.horse_id)
         doc = body.model_dump()
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        stamp_barn(user, doc)
         await db.injuries.insert_one(doc)
         return clean(doc)
 
@@ -261,17 +284,22 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
 
     @router.get("/wellness")
     async def list_wellness(horse_id: Optional[str] = None, user=Depends(get_current_user)):
-        q = {"horse_id": horse_id} if horse_id else {}
-        return await list_collection("wellness", q, sort_field="created_at")
+        extra = {"horse_id": horse_id} if horse_id else {}
+        return await list_collection("wellness", barn_filter(user, extra), sort_field="created_at")
 
     @router.post("/wellness")
     async def create_wellness(body: WellnessIn, user=Depends(get_current_user)):
+        # Phase 6A: reject a foreign/absent horse_id up front (no record written).
+        await _require_horse(user, body.horse_id)
         doc = body.model_dump()
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        stamp_barn(user, doc)
         await db.wellness.insert_one(doc)
         # Bump horse wellness_score using the same heuristic as before.
+        # Phase 4B-2: scope the horse update by barn so a cross-barn horse_id
+        # can never trigger a side effect on another barn's horse.
         avg = (body.appetite + body.water_intake + body.energy + body.coat_quality) * 5
-        await db.horses.update_one({"id": body.horse_id}, {"$set": {"wellness_score": min(100, avg)}})
+        await db.horses.update_one(barn_filter(user, {"id": body.horse_id}), {"$set": {"wellness_score": min(100, avg)}})
         return clean(doc)
 
     return router

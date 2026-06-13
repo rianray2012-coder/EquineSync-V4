@@ -18,13 +18,20 @@ const ReviewStep = () => {
       api.get("/riders"),
       api.get("/feed-templates"),
       api.get("/inventory"),
+      api.get("/barn-location-share").catch(() => ({ data: null })),
+      api.get("/feature-modules/stall-map").catch(() => ({ data: { records: [] } })),
+      api.get("/feature-modules/pasture-schedule").catch(() => ({ data: { records: [] } })),
+      api.get("/feature-modules/supply-inventory").catch(() => ({ data: { records: [] } })),
+      api.get("/feature-modules/equipment").catch(() => ({ data: { records: [] } })),
       api.get("/invites").catch(() => ({ data: [] })),
       api.get("/recurring-schedules"),
-    ]).then(([barn, locations, owners, horses, riders, feeds, inv, staff, sched]) => {
+    ]).then(([barn, locations, owners, horses, riders, feeds, inv, share, stalls, pastures, supplies, equipment, staff, sched]) => {
       setData({
         barn: barn.data, locations: locations.data, owners: owners.data,
         horses: horses.data, riders: riders.data, feeds: feeds.data,
-        inv: inv.data, staff: staff.data, sched: sched.data,
+        inv: inv.data, share: share.data, stalls: stalls.data.records || [],
+        pastures: pastures.data.records || [], supplies: supplies.data.records || [],
+        equipment: equipment.data.records || [], staff: staff.data, sched: sched.data,
       });
     });
   }, []);
@@ -38,6 +45,10 @@ const ReviewStep = () => {
     { label: "Riders",               value: data.riders.length,    hint: "active program" },
     { label: "Feed templates",       value: data.feeds.length,     hint: "daily meals" },
     { label: "Inventory items",      value: data.inv.length,       hint: "tracked stock" },
+    { label: "Stall assignments",    value: data.stalls.length,    hint: data.share?.enabled ? "shared board on" : "shared board off" },
+    { label: "Pasture plans",        value: data.pastures.length,  hint: "turnout visibility" },
+    { label: "Supply records",       value: data.supplies.length,  hint: "feed / hay / bedding" },
+    { label: "Equipment records",    value: data.equipment.length, hint: "tack and tools" },
     { label: "Staff invites",        value: data.staff.length,     hint: "team" },
     { label: "Recurring schedules",  value: data.sched.length,     hint: "routines" },
   ];

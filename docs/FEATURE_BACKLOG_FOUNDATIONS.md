@@ -14,6 +14,7 @@ New frontend files:
 - `frontend/src/pages/Forbidden.jsx`
 - `frontend/src/pages/AuditLog.jsx`
 - `frontend/src/pages/BarnLocations.jsx`
+- `frontend/src/pages/ArenaSchedule.jsx`
 - `frontend/src/pages/StallMap.jsx`
 - `frontend/src/pages/Waitlist.jsx`
 - `frontend/src/pages/PastureSchedule.jsx`
@@ -121,6 +122,7 @@ Startup creates non-destructive indexes on `barn_id + created_at` and `barn_id +
 - Barn owner-managed shared location board with publish/pause controls, share link, read-only stall list, pasture map, and horse location list visible to staff, trainers, and owners when enabled.
 - Waitlist management with pipeline columns, priority sorting, status advancement, add form, and soft archive.
 - Pasture schedule management with turnout blocks, weather holds, active/done status changes, add form, and soft archive.
+- Arena schedule sharing with owner-visible availability/reservations, publish/pause controls, share link, and approved request booking.
 - Equipment and tack tracking with search, category filters, condition dashboards, assignment/location fields, condition updates, add form, and soft archive.
 - Supply inventory tracking for feed, hay, bedding, supplements, reorder thresholds, vendors, stock status, add form, and soft archive.
 - Health reminders with overdue/due/scheduled/complete grouping, due-date awareness, completion/reopen actions, add form, and soft archive.
@@ -129,23 +131,24 @@ Startup creates non-destructive indexes on `barn_id + created_at` and `barn_id +
 - Owner portal health snapshot with owner-scoped vaccination/Coggins reminders and weight/body-condition history.
 - Health care logs for farrier scheduling/history, medication administration, and injury/lameness cases with status actions, add forms, and soft archive.
 - Weight and body-condition trend tracking with per-horse filters, lightweight inline trend charts, measurement history, add form, and soft archive.
-- Payments and auto-pay tracking with Stripe-ready placeholder metadata, provider refs, enrollment status actions, add form, and soft archive.
+- Payments and auto-pay tracking with Stripe-ready readiness metadata, provider refs, enrollment status actions, add form, and soft archive.
 - Recurring billing rules with active/paused/draft status, next-run tracking, estimated monthly recurring revenue, add form, and soft archive.
-- Expense tracking with category filters, search, receipt links, QuickBooks-ready placeholder metadata, audited CSV export manifests, total spend summary, add form, and soft archive.
+- Expense tracking with category filters, search, receipt links, QuickBooks-ready readiness metadata, audited CSV export manifests, total spend summary, add form, and soft archive.
 - Financial dashboard with invoice revenue, overdue totals, auto-pay readiness, recurring revenue, recent expenses, and profit/loss signal summaries.
-- Owner portal billing feed with owner-scoped invoices, payment profiles, recurring rules, and a non-charging Stripe-ready payment preparation placeholder.
-- Group messaging with audience/channel/status tracking, push-ready placeholder metadata, queue/sent workflow, preview-only push payload manifests, add form, and soft archive.
+- Owner portal billing feed with owner-scoped invoices, payment profiles, recurring rules, and a non-charging Stripe-ready payment preparation flow.
+- Group messaging with audience/channel/status tracking, push-ready readiness metadata, queue/sent workflow, preview-only push payload manifests, add form, and soft archive.
 - Owner portal announcements feed with sent owner-audience messages and push-ready channel metadata.
 - Owner photo/video updates with media URL previews, visibility controls, captions, add form, and soft archive.
 - Owner portal media feed with scoped owner-visible photo/video updates and periodic refresh while the portal is open.
-- Digital forms and signatures with provider placeholder metadata, draft/sent/signed/expired workflow, add form, and soft archive.
+- Digital forms and signatures with provider readiness metadata, draft/sent/signed/expired workflow, add form, and soft archive.
 - Owner portal forms feed with recipient-scoped sent/signed/expired forms and an internal signature action for sent forms.
 - Emergency contacts with priority ordering, horse association, tap-to-call links, search, add form, and soft archive.
 - Emergency workflows with owner authorization, vet status, contact lookup, resolution actions, add form, and soft archive.
 - Owner portal emergency readiness feed with scoped contacts, tap-to-call details, and active workflow statuses.
+- Owner portal arena-use requests with 30 minute, 1 hour, half-day, and full-day rental options. Approved requests create reserved arena schedule blocks.
 - Training plans and goals with trainer assignment, target dates, status filters, status actions, add form, and soft archive.
 - Competition and show-entry tracking with show calendar grouping, entry status workflow, result capture, add form, and soft archive.
-- GPS ride tracking with ride distance/duration metrics, external track links, wearable placeholder metadata, add form, and soft archive.
+- GPS ride tracking with ride distance/duration metrics, external track links, wearable readiness metadata, add form, and soft archive.
 - Owner portal training/performance feed with owner-scoped goals, show entries, GPS ride summaries, and existing ride logs.
 - Performance analytics with trainer workload, average ride ratings, active/achieved goals, show inputs, GPS mileage, and horse progress summaries.
 - Staff scheduling with shift timing, area coverage, shift notes, state summaries, add form, and soft archive.
@@ -157,10 +160,10 @@ Startup creates non-destructive indexes on `barn_id + created_at` and `barn_id +
 - Integration readiness dashboard for Stripe, QuickBooks, Google Calendar, push notifications, wearables, document scanning, and QR horse identification, with provider prepare actions, connection records, Google Calendar ICS export manifests, QuickBooks CSV export manifests, and push notification preview manifests.
 - Mobile readiness workspace with local offline action staging, API-backed offline queue records, document scan intake workflow with storage upload intents, QR horse ID/stall-card tracking, and downloadable printable stall-card SVGs.
 - Advanced reporting dashboard with occupancy, revenue, profit/loss, health-due metrics, custom report builder, and audited Excel/PDF export manifests.
-- Demo records added to `/api/seed`.
-- Backend regression tests for catalog, validation, audit fields, RBAC, reporting, and integration placeholders.
+- Launch-safe starter reset available at `/api/seed`.
+- Backend regression tests for catalog, validation, audit fields, RBAC, reporting, and integration readiness.
 
-## Integration-ready placeholders
+## Integration-Ready Providers
 These are intentionally not live third-party integrations yet:
 - Stripe checkout/autopay/webhooks.
 - Live QuickBooks expense and invoice sync; CSV-compatible export manifests are implemented for review/import.
@@ -174,7 +177,7 @@ These are intentionally not live third-party integrations yet:
 - Native Excel/PDF binary generation; the app now prepares audited export manifests and CSV-compatible spreadsheet downloads.
 - External LLM-generated text automation; current generator is deterministic and review-first.
 
-The placeholder endpoints return readiness metadata and avoid storing third-party credentials.
+The integration readiness endpoints return provider metadata and avoid storing third-party credentials.
 
 ## RBAC notes
 New backlog routes use `backend/core/permissions.py` for centralized role gates. Existing legacy routes have not been rewritten in this pass.

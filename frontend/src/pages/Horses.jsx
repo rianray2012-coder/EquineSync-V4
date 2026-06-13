@@ -6,15 +6,15 @@ import { Search, Plus } from "lucide-react";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const ADD_FIELDS = [
-  { key: "name", label: "Show name", required: true, placeholder: "Valentino" },
-  { key: "barn_name", label: "Barn name", placeholder: "Val" },
-  { key: "breed", label: "Breed", placeholder: "Hanoverian" },
+  { key: "name", label: "Show name", required: true, placeholder: "Horse name" },
+  { key: "barn_name", label: "Barn name", placeholder: "Barn name" },
+  { key: "breed", label: "Breed", placeholder: "Breed" },
   { key: "age", label: "Age", type: "number" },
-  { key: "color", label: "Color", placeholder: "Bay" },
-  { key: "height_hands", label: "Height (hh)", type: "number", placeholder: "16.3" },
-  { key: "discipline", label: "Discipline", placeholder: "Show Jumping" },
-  { key: "stall", label: "Stall / Location", placeholder: "Stall 1" },
-  { key: "turnout_group", label: "Turnout group", placeholder: "Geldings A" },
+  { key: "color", label: "Color", placeholder: "Color" },
+  { key: "height_hands", label: "Height (hh)", type: "number", placeholder: "Height" },
+  { key: "discipline", label: "Discipline", placeholder: "Discipline" },
+  { key: "stall", label: "Stall / Location", placeholder: "Stall ID" },
+  { key: "turnout_group", label: "Turnout group", placeholder: "Turnout group" },
   { key: "status", label: "Status", kind: "select", opts: ["active", "stall_rest", "rehab", "retired"] },
   { key: "feed_plan", label: "Feed notes", full: true, kind: "textarea", rows: 2 },
 ];

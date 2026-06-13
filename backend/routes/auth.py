@@ -30,6 +30,7 @@ from core.config import (
     app_base_url,
     is_production,
     enforce_email_verification,
+    user_verification_ok,
     email_verify_ttl_hours,
     password_reset_ttl_hours,
     login_lockout_enabled,
@@ -46,6 +47,8 @@ from core.auth_tokens import (
     PURPOSE_EMAIL_VERIFY,
 )
 from core.login_attempts import check_lockout, record_failure, clear_attempts
+from core.tenancy import PRIMARY_BARN_ID, resolve_barn_id
+from core import audit
 
 logger = logging.getLogger(__name__)
 
@@ -66,12 +69,15 @@ def verify_pwd(p: str, h: str) -> bool:
         return False
 
 
-def create_token(user_id: str, role: str) -> str:
+def create_token(user_id: str, role: str, barn_id: Optional[str] = None) -> str:
     payload = {
         "sub": user_id,
         "role": role,
         "exp": datetime.now(timezone.utc) + timedelta(hours=JWT_EXP_HOURS),
     }
+    # Phase 4A: forward-compat barn_id claim (never used for authorization).
+    if barn_id is not None:
+        payload["barn_id"] = barn_id
     return pyjwt.encode(payload, JWT_SECRET, algorithm=JWT_ALG)
 
 
@@ -98,13 +104,14 @@ def make_current_user_dependency(db):
         user = await db.users.find_one({"id": payload["sub"]}, {"_id": 0, "password_hash": 0})
         if not user:
             raise HTTPException(status_code=401, detail="User not found")
+        # Defense-in-depth: block unverified users when enforcement is on, even
+        # if they hold a pre-issued token. Missing field => treated as verified.
+        if not user_verification_ok(user):
+            raise HTTPException(status_code=403, detail="Email not verified")
+        # Phase 4A: attach authoritative barn scope from the user doc.
+        user["barn_id"] = resolve_barn_id(user)
         return user
     return _get
-
-
-def require_setup_role(user):
-    if user.get("role") not in ("admin", "barn_manager"):
-        raise HTTPException(status_code=403, detail="Owner / Barn Manager access required")
 
 
 def user_safe(user: dict) -> dict:
@@ -119,11 +126,29 @@ async def client_meta(request: Optional[Request]):
 
 # ---------------- request bodies ----------------
 
+# Public self-registration always creates a safe, low-privilege account
+# (Security Patch 2E). Privileged roles (admin/barn_manager/trainer/staff) are
+# ONLY granted via the authenticated admin invite flow or the startup seed.
+PUBLIC_REGISTRATION_ROLE = "horse_owner"
+
+
+def should_issue_session_on_register(email_verified: bool, enforce: bool) -> bool:
+    """Decide whether registration may return access/refresh tokens.
+
+    When email-verification enforcement is ON, a freshly registered (unverified)
+    user must NOT receive a usable session — they have to verify first. When
+    enforcement is OFF (default), the existing auto-login behavior is preserved.
+    """
+    return email_verified or not enforce
+
+
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
     full_name: str
-    role: str = "admin"
+    # NOTE: `role` is intentionally accepted-but-ignored on public registration.
+    # Any client-supplied value is discarded; the server forces a safe default.
+    role: Optional[str] = None
 
 
 class LoginBody(BaseModel):
@@ -201,8 +226,8 @@ def build_router(db) -> APIRouter:
 
     @router.post("/auth/register", dependencies=[Depends(auth_rate_limiter)])
     async def register(request: Request, body: UserCreate):
-        if body.role not in ROLES:
-            raise HTTPException(400, "Invalid role")
+        # Security Patch 2E: never trust a client-supplied role on public
+        # registration. Privileged roles come only from admin invites / seed.
         existing = await db.users.find_one({"email": body.email.lower()})
         if existing:
             raise HTTPException(400, "Email already registered")
@@ -210,7 +235,11 @@ def build_router(db) -> APIRouter:
             "id": new_id(),
             "email": body.email.lower(),
             "full_name": body.full_name,
-            "role": body.role,
+            "role": PUBLIC_REGISTRATION_ROLE,
+            # Phase 4D: public self-serve registration intentionally stays bound
+            # to the primary barn with a non-privileged role (Security Patch 2E).
+            # Joining any other barn is invite-only.
+            "barn_id": PRIMARY_BARN_ID,
             "password_hash": hash_pwd(body.password),
             "email_verified": False,
             "created_at": now_iso(),
@@ -220,7 +249,20 @@ def build_router(db) -> APIRouter:
         verify_ttl = email_verify_ttl_hours()
         raw_verify = await issue_token(db, user["id"], PURPOSE_EMAIL_VERIFY, verify_ttl)
         await _send_verification_email(user, raw_verify, verify_ttl)
-        token = create_token(user["id"], user["role"])
+
+        # Security Patch 2E: when verification is enforced, do NOT hand back a
+        # usable session for an unverified account — the user must verify first.
+        if not should_issue_session_on_register(user["email_verified"], enforce_email_verification()):
+            resp = {
+                "pending_verification": True,
+                "message": "Account created. Please verify your email before signing in.",
+                "user": user_safe(user),
+            }
+            if not is_production():
+                resp["dev_verification_token"] = raw_verify
+            return resp
+
+        token = create_token(user["id"], user["role"], resolve_barn_id(user))
         ua, ip = await client_meta(request)
         refresh = await issue_refresh_token(db, user["id"], user_agent=ua, ip=ip)
         resp = {
@@ -243,6 +285,11 @@ def build_router(db) -> APIRouter:
             remaining = await check_lockout(db, email)
             if remaining:
                 mins = (remaining + 59) // 60
+                await audit.record(
+                    action="auth.login.locked", actor_email=email, request=request,
+                    resource_type="session", outcome="denied", status_code=423,
+                    metadata={"reason": "account_locked", "retry_after_minutes": mins},
+                )
                 raise HTTPException(
                     423,
                     f"Account temporarily locked due to repeated failed attempts. "
@@ -258,6 +305,12 @@ def build_router(db) -> APIRouter:
                     lockout_minutes=login_lockout_minutes(),
                     ip=ip,
                 )
+            await audit.record(
+                action="auth.login.failure", actor_email=email, request=request,
+                barn_id=(resolve_barn_id(user) if user else None),
+                resource_type="session", outcome="failure", status_code=401,
+                metadata={"reason": "invalid_credentials"},
+            )
             raise HTTPException(401, "Invalid credentials")
         # Successful auth — clear any failed-attempt history.
         if login_lockout_enabled():
@@ -269,8 +322,12 @@ def build_router(db) -> APIRouter:
                 403,
                 "Email not verified. Please check your inbox for the verification link.",
             )
-        token = create_token(user["id"], user["role"])
+        token = create_token(user["id"], user["role"], resolve_barn_id(user))
         refresh = await issue_refresh_token(db, user["id"], user_agent=ua, ip=ip)
+        await audit.record(
+            action="auth.login.success", user=user, request=request,
+            resource_type="session", resource_id=user["id"],
+        )
         return {
             "token": token,
             "refresh_token": refresh,
@@ -284,11 +341,15 @@ def build_router(db) -> APIRouter:
         user = res["user"]
         old = res["record"]
         await revoke_refresh_token(db, body.refresh_token)
-        token = create_token(user["id"], user["role"])
+        token = create_token(user["id"], user["role"], resolve_barn_id(user))
         ua, ip = await client_meta(request)
         new_refresh = await issue_refresh_token(db, user["id"], user_agent=ua, ip=ip)
         await db.refresh_tokens.update_one(
             {"id": old["id"]}, {"$set": {"rotated_to": new_refresh[:8] + "…"}},
+        )
+        await audit.record(
+            action="auth.token.refreshed", user=user, request=request,
+            resource_type="session", resource_id=user["id"],
         )
         return {
             "token": token,
@@ -298,16 +359,25 @@ def build_router(db) -> APIRouter:
         }
 
     @router.post("/auth/logout")
-    async def logout(body: RefreshBody, user=Depends(get_current_user)):
+    async def logout(body: RefreshBody, request: Request, user=Depends(get_current_user)):
         try:
             await revoke_refresh_token(db, body.refresh_token)
         except Exception:
             logger.exception("logout: refresh revoke failed")
+        await audit.record(
+            action="auth.logout", user=user, request=request,
+            resource_type="session", resource_id=user["id"],
+        )
         return {"ok": True}
 
     @router.post("/auth/logout-all")
-    async def logout_all(user=Depends(get_current_user)):
+    async def logout_all(request: Request, user=Depends(get_current_user)):
         await revoke_all_user_refresh_tokens(db, user["id"])
+        await audit.record(
+            action="auth.logout_all", user=user, request=request,
+            resource_type="session", resource_id=user["id"],
+            metadata={"scope": "all_sessions"},
+        )
         return {"ok": True}
 
     @router.get("/auth/me")
@@ -330,6 +400,12 @@ def build_router(db) -> APIRouter:
             await _send_reset_email(user, raw, ttl)
             if not is_production():
                 resp["dev_token"] = raw
+        await audit.record(
+            action="auth.password_reset.requested", request=request,
+            user=(user or None), actor_email=body.email.lower(),
+            resource_type="user", resource_id=(user["id"] if user else None),
+            metadata={"email_dispatched": bool(user)},
+        )
         return resp
 
     @router.post("/auth/reset-password", dependencies=[Depends(auth_rate_limiter)])
@@ -345,17 +421,35 @@ def build_router(db) -> APIRouter:
         )
         # Invalidate all existing sessions after a password change.
         await revoke_all_user_refresh_tokens(db, rec["user_id"])
+        u = await db.users.find_one(
+            {"id": rec["user_id"]},
+            {"_id": 0, "id": 1, "email": 1, "role": 1, "barn_id": 1},
+        )
+        await audit.record(
+            action="auth.password_reset.completed", request=request, user=u,
+            actor_email=(u or {}).get("email"),
+            resource_type="user", resource_id=rec["user_id"],
+            metadata={"sessions_revoked": True},
+        )
         return {"ok": True, "message": "Password updated. Please sign in with your new password."}
 
     # ---------------- email verification ----------------
 
     @router.post("/auth/verify-email")
-    async def verify_email(body: TokenBody):
+    async def verify_email(body: TokenBody, request: Request):
         rec = await consume_token(db, body.token, PURPOSE_EMAIL_VERIFY)
         if not rec:
             raise HTTPException(400, "Invalid or expired verification token")
         await db.users.update_one(
             {"id": rec["user_id"]}, {"$set": {"email_verified": True}}
+        )
+        u = await db.users.find_one(
+            {"id": rec["user_id"]},
+            {"_id": 0, "id": 1, "email": 1, "role": 1, "barn_id": 1},
+        )
+        await audit.record(
+            action="auth.email.verified", request=request, user=u,
+            resource_type="user", resource_id=rec["user_id"],
         )
         return {"ok": True, "message": "Email verified."}
 

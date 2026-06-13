@@ -10,9 +10,9 @@ const FREQUENCIES = ["monthly", "weekly", "per_lesson", "custom"];
 const STATUS_TONE = { active: "success", paused: "warning", draft: "neutral" };
 
 const ADD_FIELDS = [
-  { key: "name", label: "Rule", required: true, placeholder: "Full board monthly", full: true },
-  { key: "owner_name", label: "Owner", placeholder: "Charlotte Vance" },
-  { key: "horse_name", label: "Horse", placeholder: "Valentino" },
+  { key: "name", label: "Rule", required: true, placeholder: "Billing rule name", full: true },
+  { key: "owner_name", label: "Owner", placeholder: "Owner name" },
+  { key: "horse_name", label: "Horse", placeholder: "Horse name" },
   { key: "amount", label: "Amount", type: "number", required: true },
   { key: "frequency", label: "Frequency", kind: "select", opts: FREQUENCIES },
   { key: "next_run_date", label: "Next run", type: "date" },

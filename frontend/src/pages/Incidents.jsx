@@ -37,7 +37,7 @@ export default function Incidents() {
     { key: "type", label: "Type", kind: "select", opts: INCIDENT_TYPES, required: true },
     { key: "severity", label: "Severity", kind: "select", opts: SEVERITIES, required: true },
     { key: "horse_id", label: "Horse", kind: "select", opts: horseOptions, full: true },
-    { key: "title", label: "Title", required: true, full: true, placeholder: "Cast in stall overnight" },
+    { key: "title", label: "Title", required: true, full: true, placeholder: "Incident title" },
     { key: "occurred_at", label: "Occurred at", type: "datetime-local", required: true, full: true },
     { key: "description", label: "What happened", required: true, kind: "textarea", rows: 4, full: true, placeholder: "Brief, factual account. Who was there, what was observed, action taken." },
     { key: "follow_up", label: "Follow-up", kind: "textarea", rows: 2, full: true, placeholder: "Optional: vet called, monitoring plan, follow-up date." },

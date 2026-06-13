@@ -8,9 +8,9 @@ import QuickAddSheet from "../components/QuickAddSheet";
 const STATUSES = ["planning", "submitted", "accepted", "scratched"];
 const STATUS_TONE = { planning: "info", submitted: "warning", accepted: "success", scratched: "critical" };
 const ADD_FIELDS = [
-  { key: "show_name", label: "Show", required: true, placeholder: "Silver Waters Summer Classic", full: true },
-  { key: "horse_name", label: "Horse", placeholder: "Valentino" },
-  { key: "rider_name", label: "Rider", placeholder: "Amelia Vance" },
+  { key: "show_name", label: "Show", required: true, placeholder: "Show name", full: true },
+  { key: "horse_name", label: "Horse", placeholder: "Horse name" },
+  { key: "rider_name", label: "Rider", placeholder: "Rider name" },
   { key: "start_date", label: "Start", type: "date" },
   { key: "entry_status", label: "Entry", kind: "select", opts: STATUSES },
   { key: "results", label: "Results", kind: "textarea", rows: 3, full: true },

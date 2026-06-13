@@ -25,18 +25,19 @@ import OwnerPortal from "./pages/OwnerPortal";
 import Incidents from "./pages/Incidents";
 import Inventory from "./pages/Inventory";
 import Settings from "./pages/Settings";
-import Placeholder from "./pages/Placeholder";
 import Onboarding from "./pages/Onboarding";
 import AcceptInvite from "./pages/AcceptInvite";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import Reports from "./pages/Reports";
+import ReviewQueue from "./pages/ReviewQueue";
 import Today from "./pages/Today";
 import MyWork from "./pages/MyWork";
 import Rehab from "./pages/Rehab";
 import Turnout from "./pages/Turnout";
 import StallMap from "./pages/StallMap";
 import BarnLocations from "./pages/BarnLocations";
+import ArenaSchedule from "./pages/ArenaSchedule";
 import Waitlist from "./pages/Waitlist";
 import PastureSchedule from "./pages/PastureSchedule";
 import Equipment from "./pages/Equipment";
@@ -113,6 +114,7 @@ function App() {
               <Route path="/turnout" element={<Turnout />} />
               <Route path="/stall-map" element={permit(<StallMap />, ROLE_GROUPS.operations)} />
               <Route path="/barn-locations" element={permit(<BarnLocations />, ROLE_GROUPS.locationShare)} />
+              <Route path="/arena-schedule" element={permit(<ArenaSchedule />, ROLE_GROUPS.locationShare)} />
               <Route path="/waitlist" element={permit(<Waitlist />, ROLE_GROUPS.operations)} />
               <Route path="/pasture-schedule" element={permit(<PastureSchedule />, ROLE_GROUPS.operations)} />
               <Route path="/feed" element={<Feed />} />
@@ -124,6 +126,7 @@ function App() {
               <Route path="/health-care-logs" element={permit(<HealthCareLogs />, ROLE_GROUPS.care)} />
               <Route path="/weight-trends" element={permit(<WeightTrends />, ROLE_GROUPS.care)} />
               <Route path="/billing" element={permit(<Billing />, ROLE_GROUPS.financial)} />
+              <Route path="/review-queue" element={permit(<ReviewQueue />, ROLE_GROUPS.communication)} />
               <Route path="/payments" element={permit(<Payments />, ROLE_GROUPS.financial)} />
               <Route path="/recurring-billing" element={permit(<RecurringBilling />, ROLE_GROUPS.financial)} />
               <Route path="/expenses" element={permit(<Expenses />, ROLE_GROUPS.financial)} />

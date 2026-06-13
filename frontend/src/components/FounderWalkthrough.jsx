@@ -3,7 +3,7 @@
  *
  * Two minutes maximum. No real mutations. No flashy animation.
  * It should feel like a thoughtful barn manager talking the founder
- * through their app — not a sales demo.
+ * through their app — not a sales walkthrough.
  *
  * Architectural notes:
  *   • Pure overlay component — no router changes, no global state.
@@ -11,7 +11,7 @@
  *   • Closes on Escape / backdrop click / final-step "I've got it" button.
  *   • Persists the "I've seen it" flag in localStorage so a returning
  *     founder isn't auto-prompted, but the button stays available.
- *   • All API reads are GETs the user already has access to — no demo
+ *   • All API reads are GETs the user already has access to — no seeded
  *     seeding, no synthetic state, no operational side-effects.
  */
 import React, { useEffect, useState } from "react";

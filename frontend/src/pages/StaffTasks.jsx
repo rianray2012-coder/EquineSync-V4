@@ -8,9 +8,9 @@ import QuickAddSheet from "../components/QuickAddSheet";
 const STATUSES = ["open", "in_progress", "blocked", "complete"];
 const STATUS_TONE = { open: "info", in_progress: "warning", blocked: "critical", complete: "success" };
 const ADD_FIELDS = [
-  { key: "title", label: "Task", required: true, placeholder: "Reset rehab stall mats", full: true },
-  { key: "assigned_to", label: "Assigned to", placeholder: "Sophia Reyes" },
-  { key: "due_at", label: "Due", placeholder: "2026-06-12T12:00:00" },
+  { key: "title", label: "Task", required: true, placeholder: "Task title", full: true },
+  { key: "assigned_to", label: "Assigned to", placeholder: "Staff name" },
+  { key: "due_at", label: "Due", placeholder: "YYYY-MM-DDTHH:MM:SS" },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },
   { key: "handoff_notes", label: "Handoff notes", kind: "textarea", rows: 4, full: true },
 ];

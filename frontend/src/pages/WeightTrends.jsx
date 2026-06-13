@@ -6,10 +6,10 @@ import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const ADD_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
   { key: "recorded_at", label: "Date", type: "date", required: true },
-  { key: "weight_lbs", label: "Weight lbs", type: "number", placeholder: "1180" },
-  { key: "body_condition", label: "Body condition", type: "number", placeholder: "5.5" },
+  { key: "weight_lbs", label: "Weight lbs", type: "number", placeholder: "Weight" },
+  { key: "body_condition", label: "Body condition", type: "number", placeholder: "Body condition score" },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
 ];
 

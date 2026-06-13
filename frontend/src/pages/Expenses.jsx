@@ -7,7 +7,7 @@ import QuickAddSheet from "../components/QuickAddSheet";
 
 const CATEGORIES = ["all", "feed", "bedding", "labor", "vet", "farrier", "maintenance", "show", "other"];
 const ADD_FIELDS = [
-  { key: "vendor", label: "Vendor", required: true, placeholder: "Bluegrass Feed", full: true },
+  { key: "vendor", label: "Vendor", required: true, placeholder: "Vendor name", full: true },
   { key: "category", label: "Category", kind: "select", opts: CATEGORIES.filter((c) => c !== "all") },
   { key: "amount", label: "Amount", type: "number", required: true },
   { key: "spent_at", label: "Date", type: "date" },
@@ -19,7 +19,7 @@ const csvCell = (value) => `"${String(value ?? "").replace(/"/g, '""')}"`;
 
 export default function Expenses() {
   const [records, setRecords] = useState([]);
-  const [placeholders, setPlaceholders] = useState([]);
+  const [readinessItems, setReadinessItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
@@ -32,12 +32,12 @@ export default function Expenses() {
     setLoading(true);
     setError(null);
     try {
-      const [moduleRes, placeholderRes] = await Promise.all([
+      const [moduleRes, readinessRes] = await Promise.all([
         api.get("/feature-modules/expenses"),
         api.get("/integrations/placeholders"),
       ]);
       setRecords(moduleRes.data.records || []);
-      setPlaceholders((placeholderRes.data || []).filter((p) => p.provider === "quickbooks"));
+      setReadinessItems((readinessRes.data || []).filter((p) => p.provider === "quickbooks"));
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load expenses.");
     } finally {
@@ -73,7 +73,7 @@ export default function Expenses() {
   const prepareQuickBooks = async () => {
     try {
       const r = await api.post("/integrations/quickbooks/prepare");
-      toast.success(r.data.message || "QuickBooks placeholder ready");
+      toast.success(r.data.message || "QuickBooks configuration ready");
     } catch (err) {
       toast.error(err?.response?.data?.detail || "Could not prepare QuickBooks");
     }
@@ -144,11 +144,11 @@ export default function Expenses() {
             <div className="flex items-start gap-3 flex-1">
               <Receipt className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
               <div>
-                <div className="text-equine-ink text-[14px]">QuickBooks-ready placeholder</div>
+                <div className="text-equine-ink text-[14px]">QuickBooks-ready export</div>
                 <div className="text-[12.5px] text-equine-inkMuted mt-1">
                   Expense export and invoice sync are scaffolded behind the integration abstraction until credentials are available.
                 </div>
-                {placeholders[0] && <div className="text-[11.5px] text-equine-inkSoft mt-2">{placeholders[0].ready_for.join(" · ")}</div>}
+                {readinessItems[0] && <div className="text-[11.5px] text-equine-inkSoft mt-2">{readinessItems[0].ready_for.join(" · ")}</div>}
               </div>
             </div>
             <div className="flex flex-wrap gap-2">

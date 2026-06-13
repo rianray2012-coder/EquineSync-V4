@@ -1,0 +1,284 @@
+# Owner Trust Layer (Phase 7)
+
+> Authoritative spec: `docs/OWNER_TRUST_FRAMEWORK.md` + `docs/PHASED_EXECUTION_PLAN.md`
+> §Phase 7 (goals: improve owner dashboard · weekly recap framework ·
+> **owner-facing update controls** · **approval flow for sensitive updates**).
+>
+> Boundary: each sub-phase is separately gated (plan → approval → implement →
+> Codex review). **7A is backend-only** — no frontend, no task-engine, billing,
+> onboarding, or scheduler changes.
+
+## Sub-phases
+- **7A — Owner Update model + lifecycle** ✅ **DONE (2026-06-06)** — backend
+  foundation: the `owner_updates` collection + `/api/owner-updates` lifecycle
+  (`draft → published → archived`), barn + owner isolation, role gates, and
+  high-signal audit. *(this doc)*
+- **7B — Approval flow for sensitive updates** ✅ **DONE (2026-06-06)** — review
+  workflow `draft → pending_review → published` (+ `request-changes → draft`),
+  dedicated `owner_update:review` cap, four-eyes on sensitive approvals, audit
+  `submitted`/`approved`/`changes_requested`. *(this doc)*
+- **7C — Owner-facing update controls (frontend)** — gated sub-phases:
+  - **7C-1 — Owner feed (read-only)** ✅ **DONE (2026-06-06)** — owner "Updates from
+    your barn" feed on Owner Portal. *(this doc)*
+  - **7C-2 — Staff composer** ✅ **DONE (2026-06-06)** — HorseProfile "Updates" tab:
+    create/edit draft, publish non-sensitive, submit sensitive, archive. *(this doc)*
+  - **7C-3 — Manager review queue** ✅ **DONE (2026-06-06)** — `/review-queue` page +
+    reviewer-only sidebar item + pending badge + approve/request-changes + four-eyes UX. *(this doc)*
+- **7D — Owner dashboard polish + docs/test consolidation** — billing/upcoming
+  visibility, recap integration, framework↔implementation map. *(planned)*
+
+## 7A — Owner Update model + lifecycle ✅
+An **Owner Update** is a publishable note authored by barn staff about a specific
+horse, with an explicit lifecycle and an internal vs owner-facing visibility flag.
+This is the first concrete primitive of the Owner Trust Layer.
+
+### Data model — `owner_updates` collection (additive, no migration)
+| Field | Notes |
+|---|---|
+| `id` | uuid |
+| `barn_id` | Phase-4 tenant stamp (`stamp_barn`) |
+| `horse_id` | validated ∈ barn on create (6A contract; foreign/absent → generic 404) |
+| `author_user_id` | creator |
+| `kind` | `routine \| training \| wellness \| incident \| billing \| recap` (422 on other) |
+| `body` | required, non-empty (422 on empty) |
+| `visibility` | `internal \| owner_facing` (default `owner_facing`) |
+| `sensitive` | bool, **stored in 7A but publish-blocked** — a sensitive draft cannot be published until the 7B review gate exists (publish returns `409`). Not otherwise acted on in 7A. |
+| `status` | `draft \| pending_review \| published \| archived` (full enum; 7A wires only draft→published→archived) |
+| `created_at` / `updated_at` | ISO |
+| `published_at` / `published_by` | set on publish |
+| `reviewed_by` | reserved for 7B |
+| `archived_at` / `archived_by` | set on archive (soft — row is never deleted) |
+
+### Endpoints — `routes/owner_updates.py` (prefix `/api/owner-updates`)
+| Method / Path | Access | Behavior |
+|---|---|---|
+| `POST /owner-updates` | `owner_update:create` | create `draft` (validates `horse_id ∈ barn`) |
+| `GET /owner-updates?horse_id=&status=` | owner ⇒ own horses' published+owner_facing; staff (create-cap) ⇒ barn-scoped all; else 403 | list (owner sort `published_at`, staff sort `created_at`) |
+| `GET /owner-updates/{id}` | same model as list | read one (owner: generic 404 for draft/internal/foreign) |
+| `PATCH /owner-updates/{id}` | `owner_update:create` | edit **draft only** (`409` otherwise) |
+| `POST /owner-updates/{id}/publish` | `owner_update:publish` | `draft → published` (`409` otherwise); **sensitive drafts are publish-blocked → `409 "Sensitive updates require review"`** (status unchanged, no audit emitted); emits audit on success |
+| `POST /owner-updates/{id}/archive` | `owner_update:archive` | `published → archived` (`409` otherwise); soft; emits audit |
+
+### Permissions (additive in `core/permissions.py` — no existing capability changed)
+| Capability | Roles | Denial message |
+|---|---|---|
+| `owner_update:create` | admin, barn_manager, trainer | `Insufficient role to manage owner updates` |
+| `owner_update:publish` | admin, barn_manager, trainer | `Insufficient role to publish owner updates` |
+| `owner_update:archive` | admin, barn_manager, trainer | `Insufficient role to archive owner updates` |
+
+Staff list/read reuses the `owner_update:create` capability as the read gate in
+7A (`403 "Insufficient role to view owner updates"` for non-owner non-staff, e.g.
+groom/vet). A dedicated read capability can be split out later if grooms/vets need
+read access.
+
+### Isolation
+- **Barn:** every read/write goes through `barn_filter`; an other-barn update never
+  appears in lists and returns `404` on direct GET (4E contract).
+- **Owner:** owners are scoped to horses where `horse.owner_id == user.id` **and**
+  the update is `status=published` + `visibility=owner_facing`. Drafts, internal
+  notes, and other horses' updates return a **generic 404** (no existence leak).
+  *(Compatibility note: this relies on `horses.owner_id` pointing at the owner's
+  user id — the same linkage the owner digest uses. New launch workspaces start
+  empty, so owner visibility begins once real horses and owners are linked.)*
+
+### Audit (existing Phase-5 fail-open service — no new subsystem)
+- `owner_update.published` and `owner_update.archived` only, via
+  `await audit.record(...)` (fail-open — never blocks the action).
+- `resource_type="owner_update"`, `resource_id=<update id>`,
+  `metadata={"kind", "visibility"}` only — **no body/title/owner/horse/email text**.
+
+### Tests
+`tests/test_owner_updates.py` (9) — staff lifecycle + 409 guards; edit-draft-only;
+foreign horse 404 + empty body 422; owner/groom cannot create; groom cannot read;
+owner sees only own published owner-facing updates (drafts/internal/foreign hidden,
+404 on direct GET); **sensitive draft is publish-blocked (409, stays draft, owner
+can't see it, no publish audit)**; other-barn update never leaks; publish/archive
+emit minimal, non-PII audit. Backend suite: **499 passed / 3 skipped** (490 + 9).
+
+## 7B — Approval flow for sensitive updates ✅
+Adds the human-review path so sensitive Owner Updates can reach owners safely.
+Backend only — no frontend.
+
+### Lifecycle (7B adds the review transitions)
+```
+draft ──submit──▶ pending_review ──approve──▶ published ──archive──▶ archived
+  ▲                     │
+  └──request-changes────┘
+draft ──publish──▶ published      (non-sensitive only; sensitive draft publish → 409)
+```
+
+### New endpoints — `routes/owner_updates.py`
+| Method / Path | Access | Transition | Notes |
+|---|---|---|---|
+| `POST /owner-updates/{id}/submit` | `owner_update:create` | `draft → pending_review` | any draft may submit; sensitive drafts MUST use this; `409` if not draft; audit `owner_update.submitted` |
+| `POST /owner-updates/{id}/approve` | `owner_update:review` | `pending_review → published` | stamps `reviewed_by` + `published_at/by`; **four-eyes**: author cannot approve their own *sensitive* update → `403 "Author cannot approve their own sensitive update"`; `409` if not pending_review; audit `owner_update.approved` |
+| `POST /owner-updates/{id}/request-changes` | `owner_update:review` | `pending_review → draft` | optional capped `review_note` (≤500) stored on the update, **never audited**; stamps `reviewed_by`; `409` if not pending_review; audit `owner_update.changes_requested` |
+
+- `publish` unchanged (non-sensitive `draft → published`; sensitive draft still `409`).
+- `PATCH` unchanged (draft-only). `archive` unchanged.
+
+### Permissions (additive)
+- New `owner_update:review` = {admin, barn_manager, trainer}, deny `"Insufficient role to review owner updates"`. `submit` reuses `owner_update:create`.
+
+### Four-eyes (separation of duties)
+- Enforced for **sensitive** updates only: `doc.sensitive and author_user_id == approver.id → 403`. Non-sensitive submissions may be self-approved by the author.
+
+### Audit (existing fail-open service)
+- `owner_update.submitted`, `owner_update.approved`, `owner_update.changes_requested`
+  — all `resource_type="owner_update"`, metadata `{kind, visibility}` only.
+  The `review_note` is **never** written to audit.
+
+### New field
+- `review_note` (`str|None`, ≤500) — stored on the update by `request-changes`; defaults `None` on create.
+
+### Tests
+`tests/test_owner_updates.py` extended (now 13) — sensitive happy path (publish-blocked →
+submit → owner-hidden while pending → four-eyes 403 → second-reviewer approve → owner-visible)
+with `submitted`+`approved` audit; `request-changes` stores the note but audits without it;
+state guards (`approve`/`request-changes` only from pending_review; `submit` only from draft);
+role gates (groom can't submit, owner can't review); non-sensitive submit + self-approve
+allowed. Backend suite: **503 passed / 3 skipped** (499 + 4).
+
+## 7C-1 — Owner-facing feed (read-only) ✅
+Frontend only — **no backend changes**. Makes published Owner Updates visible to owners.
+
+- New `frontend/src/components/OwnerUpdatesFeed.jsx` — fetches `GET /api/owner-updates`
+  (the backend auto-scopes a `horse_owner` to ONLY their horses' `published` +
+  `owner_facing` updates), renders calm date-grouped, **read-only** cards (kind chip,
+  horse name, body). Loading / empty states. testids: `owner-updates-feed`,
+  `owner-updates-loading`, `owner-updates-empty`, `owner-update-<id>`.
+- Wired into `frontend/src/pages/OwnerPortal.jsx` — rendered **only for `role==='horse_owner'`**,
+  between the digest card and the Care Timeline. No composer / review actions (those are 7C-2/7C-3).
+- Palette: matches the Owner Portal `equine-ink/navy/soft/hairline` family (the dual-palette
+  reconciliation remains Phase 8 / Tech Debt #11).
+- **Verified** by testing_agent (iteration_24): 100% frontend, 6/6 scenarios — feed renders &
+  positioned correctly, seeded update visible, read-only (no controls), owner-scoping holds,
+  staff don't see the feed, empty/loading states safe. Zero UI/integration/design bugs.
+
+### Launch Seed Policy
+Manual owner-link seed helpers were removed for launch readiness. New workspaces start empty
+and owner updates appear only after real horses, owners, and published updates are created.
+
+## 7C-2 — Staff composer (HorseProfile "Updates" tab) ✅
+Frontend only — **no backend changes**. Lets staff author Owner Updates per horse and drive
+the author lifecycle (review actions stay in 7C-3).
+
+- New `frontend/src/components/HorseOwnerUpdates.jsx` — composer (kind / visibility / body /
+  sensitive, with a calm hint when sensitive is checked) + a per-horse list. Per-row actions by
+  status: `draft` → **Edit** (inline; `PATCH`) · **Submit for review** (`/submit`) · **Publish**
+  (`/publish`, shown for **non-sensitive only** — sensitive drafts offer Submit only); `pending_review`
+  → read-only **"awaiting review"**; `published` → **Archive** (`/archive`); `archived` → none.
+  testids: `updates-composer`, `composer-kind|visibility|body|sensitive|submit`,
+  `composer-sensitive-hint`, `owner-update-row-<id>`, `update-edit|submit|publish|archive-<id>`,
+  `edit-save-<id>`.
+- Wired into `frontend/src/pages/HorseProfile.jsx` — adds an **"Updates"** tab (last tab),
+  rendered **only when `canManage = role ∈ {admin, barn_manager, trainer}`** (owners/grooms/vets
+  never see it). Composer auto-uses the current horse.
+- Palette: HorseProfile `equine-platinum/ivory/champagne/steel` family.
+- **Verified** by testing_agent (iteration_25): **100% frontend, 8/8 scenarios** — role gating,
+  create draft, publish non-sensitive, sensitive hint + no-publish + submit, draft-only inline edit,
+  soft archive, pending_review read-only (no 7C-3 controls leaked), zero console errors.
+
+## 7C-3 — Manager review queue ✅
+Frontend only — **no backend changes**. Reviewers clear `pending_review` updates.
+
+- New `frontend/src/pages/ReviewQueue.jsx` at route `/review-queue` (in App.js, inside AppShell).
+  Role guard: non-reviewers (`role ∉ {admin, barn_manager, trainer}`) → `<Navigate to="/" />`.
+  Lists `GET /owner-updates?status=pending_review` (+ `GET /horses` for names). Per row:
+  **Approve** (`/approve`) and **Request changes** (modal, optional `review_note`, `/request-changes`).
+  **Four-eyes:** for a `sensitive` item authored by the current reviewer, Approve is disabled with
+  *"You authored this — another reviewer must approve."* (Request changes stays enabled; backend
+  also returns 403 defensively). testids: `review-queue`, `review-row-<id>`, `review-approve-<id>`,
+  `review-approve-blocked-<id>`, `review-request-changes-<id>`, `review-note-modal|input|submit`,
+  `review-empty`.
+- `frontend/src/components/Sidebar.jsx`: new **"Review Queue"** item (Business section), rendered
+  **only for reviewers**; a pending **badge** (`review-queue-badge`) polls
+  `GET /owner-updates?status=pending_review` every 60s and refreshes instantly on the
+  `owner-updates-changed` window event (dispatched by the queue page after approve/request-changes).
+  The existing **EquineSync logo header was preserved untouched** (verified non-regressed).
+- **Verified** by testing_agent (iteration_26): **100% frontend, 10/10 behaviours** — reviewer-only
+  item + live badge, non-reviewer redirect, four-eyes block (admin can't approve own sensitive),
+  second-reviewer (trainer) approve, request-changes modal (optional note), instant badge refresh,
+  empty state, **logo non-regression**, zero app console errors. **Phase 7C is complete.**
+
+## Framework → Implementation → Tests map (Phase 7D-3)
+Authoritative cross-reference of `OWNER_TRUST_FRAMEWORK.md` layers → what shipped → endpoints → tests.
+
+| Framework area | Shipped feature | Endpoint(s) | Test file(s) |
+|---|---|---|---|
+| Layer 1 — Care Confidence | Curated owner timeline | `GET /horses/{id}/timeline?owner_view=true` | `test_owner_trust.py` |
+| Layer 1/2 — Care & Wellness | Daily digest | `GET /notifications/digest/preview` · `POST /notifications/digest/send-me` · `POST /admin/digest/run-now` | `test_owner_trust.py`, `test_owner_trust_edges.py`, `test_digests_routes.py` |
+| Layer 1–3 — Weekly Recap (signature) | Weekly recap compose/send | `GET /notifications/weekly-recap/preview` · `POST /notifications/weekly-recap/send-me` · `POST /admin/weekly-recap/run-now` | `test_weekly_recap.py`, `test_digests_routes.py` |
+| Layer 3 — Training Progress / Owner Updates | Owner Update lifecycle (7A) + sensitive review (7B) | `POST/GET/PATCH /owner-updates` · `/{id}/publish\|submit\|approve\|request-changes\|archive` | `test_owner_updates.py` |
+| Owner Update controls (frontend) | Owner feed (7C-1) · staff composer (7C-2) · review queue (7C-3) | (consumes the `/owner-updates` API) | iteration_24 / 25 / 26 (frontend) |
+| Layer 4 — Financial Trust | Owner billing visibility (7D-1) | `GET /invoices` (owner-scoped for horse_owner) | `test_owner_billing.py` |
+| Layer 1 — Looking ahead | Owner upcoming (7D-2) | `GET /owner/upcoming` | `test_owner_upcoming.py` |
+| Layer 5 — Relationship Trust | Service requests + decline reasons | `/service-requests/*` | `test_owner_trust.py`, `test_owner_trust_edges.py` |
+| Accountability (Phase 5) | Audit of publish/approve/archive | `core/audit.py` → `owner_update.*` | `test_owner_updates.py` |
+
+### Owner-feature → test-file coverage map
+| Area | Test file |
+|---|---|
+| Digest + curated timeline + service requests | `tests/test_owner_trust.py` |
+| Digest/recap role-gating edge cases | `tests/test_owner_trust_edges.py` |
+| Digest/recap route registration + auth | `tests/test_digests_routes.py` |
+| Weekly recap compose/idempotency | `tests/test_weekly_recap.py` |
+| Owner Update lifecycle + review (7A/7B) | `tests/test_owner_updates.py` |
+| Owner billing visibility (7D-1) | `tests/test_owner_billing.py` |
+| Owner upcoming visibility (7D-2) | `tests/test_owner_upcoming.py` |
+| Shared owner-test fixtures (7D-3) | `tests/_owner_helpers.py` |
+
+> **Test hygiene (7D-3):** all owner suites now share `tests/_owner_helpers.py`
+> (self-contained env/login/Mongo; `_care_helpers.py` untouched) — the stale
+> `barn-ops-preview.preview…` fallbacks were removed (tests fail clearly if the API
+> env is unset). Older billing suites (`test_billing_routes.py`, `test_billing_scoping.py`)
+> now teardown the synthetic invoices they create. `backend/cleanup_test_invoices.py`
+> (dry-run default, double-guarded) removes pre-existing `TEST_owner_*` leftovers — run
+> later with `python -m cleanup_test_invoices --apply`.
+
+## Deferred / backlog (NOT in 7A)
+- **Phase 7 (Owner Trust Layer) is COMPLETE** — 7A, 7B, 7C-1/2/3, 7D-1/2/3 all shipped.
+- Future: published-update → digest/email roll-in; owner self-pay; upcoming-task de-duplication/grouping; `owner_update:read` split for grooms/vets; `horses.owner_id`/`invoice.owner_id` seed-linkage reconciliation; analytics-isolation flake stability sweep.
+
+## 7D-2 — Owner upcoming visibility ✅
+Owner-safe, **read-only** "Looking ahead" on the Owner Portal + a new owner-scoped read.
+
+- **Backend:** new `routes/owner.py` (owner self-service reads) → `GET /api/owner/upcoming`.
+  Owner-only (`role != horse_owner` → `403 "This view is for horse owners"`), barn + owned-horse
+  scoped. Reads `tasks` (same shape as the digest) for `category ∈ {vet, farrier, rehab}`,
+  active status, `scheduled_at` within **14 days** (`UPCOMING_WINDOW_DAYS`), soonest-first.
+  **Owner-safe whitelist** `{id, category, title, scheduled_at, horse_id, horse_name}` — no
+  staffing/internal fields. Titles humanized (`_friendly_title`) so engine ids like
+  `vetfu-<uuid>` never reach owners (→ "Vet follow-up" / category label). No task-engine or
+  email/digest changes.
+- **Frontend:** new `frontend/src/components/OwnerUpcomingCard.jsx` — read-only list (category
+  icon+chip, title, horse, date) with a client-side **Today / Tomorrow / In N days** countdown;
+  loading, empty, and a distinct soft **error** state. Rendered on `OwnerPortal` only for
+  `role==='horse_owner'`, between the Updates feed and Billing. testids: `owner-upcoming-card`,
+  `owner-upcoming-item-<id>`, `owner-upcoming-countdown-<id>`, `owner-upcoming-empty`, `owner-upcoming-error`.
+- **Tests:** `tests/test_owner_upcoming.py` (3) — owned/barn scope, soonest-first, excludes
+  other horses / past / completed / non-appointment categories / out-of-window / other barn;
+  staff → 403; owner-safe whitelist keys.
+- **Verified** by testing_agent (iteration_28): **100% frontend + backend** — card renders with
+  rows + countdown, read-only, owner-only (admin 403), whitelist payload, staff don't see the card,
+  zero console errors. (Title-id leak + error-vs-empty findings fixed in this sub-phase.)
+
+## 7D-1 — Owner billing visibility ✅
+Owner-safe, **read-only** billing on the Owner Portal + a required isolation fix.
+
+- **Backend (isolation fix):** `GET /invoices` now owner-scopes for `role==horse_owner`
+  (`{owner_id: user.id}` added to `barn_filter`) — an owner sees ONLY their own invoices.
+  Staff path unchanged (full barn-scoped list). Response shape unchanged.
+- **Frontend:** new `frontend/src/components/OwnerBillingCard.jsx` — open balance (allow-list
+  `open`/`overdue`), next-due date, and a read-only invoice list with status pills.
+  **No pay/checkout action.** Rendered on `OwnerPortal` only for `role==='horse_owner'`.
+  testids: `owner-billing-card`, `owner-balance`, `owner-next-due`, `owner-invoice-<id>`, `owner-billing-empty`.
+- **Tests:** `tests/test_owner_billing.py` (3) — owner sees only their own; staff see the full
+  barn list; other-barn invoice never leaks to the owner. Billing regression unchanged (7/7).
+- **Verified** by testing_agent (iteration_27): **100% frontend** — card + balance/next-due/list,
+  read-only (zero buttons), owner isolation end-to-end (owner=1 invoice; admin=195 across 75 owners),
+  staff don't see the card, zero console errors.
+- Launch seed policy leaves owner invoices empty until real billing records are created.
+- **Frontend** (owner feed, staff composer, review queue) — **7C**.
+- Additive index on `owner_updates(barn_id, horse_id, status)` if read volume warrants.
+- `owner_update:read` split (grooms/vets read access) if needed.

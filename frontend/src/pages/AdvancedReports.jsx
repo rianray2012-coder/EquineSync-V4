@@ -149,7 +149,7 @@ export default function AdvancedReports() {
       <PageHeader
         eyebrow="Reporting"
         title="Barn Performance Reports"
-        subtitle="Occupancy, revenue, health trends, trainer performance inputs, custom report definitions, and export-ready placeholders."
+        subtitle="Occupancy, revenue, health trends, trainer performance inputs, custom report definitions, and export-ready formats."
         action={
           <div className="flex items-center gap-3">
             <button onClick={() => exportReport("xlsx")} disabled={exportingFormat === "xlsx"} className="btn-secondary inline-flex items-center gap-2 disabled:opacity-50" data-testid="advanced-reports-export-xlsx">

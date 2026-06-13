@@ -6,11 +6,11 @@ import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const ADD_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Mercury" },
-  { key: "rider_name", label: "Rider", placeholder: "Marcus Aldridge" },
-  { key: "started_at", label: "Started", placeholder: "2026-06-08T08:30:00" },
-  { key: "distance_miles", label: "Distance", type: "number", placeholder: "4.2" },
-  { key: "duration_minutes", label: "Minutes", type: "number", placeholder: "38" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
+  { key: "rider_name", label: "Rider", placeholder: "Staff name" },
+  { key: "started_at", label: "Started", placeholder: "YYYY-MM-DDTHH:MM:SS" },
+  { key: "distance_miles", label: "Distance", type: "number", placeholder: "Miles" },
+  { key: "duration_minutes", label: "Minutes", type: "number", placeholder: "Minutes" },
   { key: "track_url", label: "Track URL", placeholder: "https://…" },
 ];
 

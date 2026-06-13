@@ -9,8 +9,8 @@ const STATUSES = ["planned", "active", "achieved", "paused"];
 const STATUS_TONE = { planned: "info", active: "warning", achieved: "success", paused: "neutral" };
 
 const ADD_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino" },
-  { key: "trainer_name", label: "Trainer", placeholder: "Marcus Aldridge" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
+  { key: "trainer_name", label: "Trainer", placeholder: "Staff name" },
   { key: "goal", label: "Goal", required: true, placeholder: "Consistent changes", full: true },
   { key: "target_date", label: "Target date", type: "date" },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },

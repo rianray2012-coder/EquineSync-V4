@@ -9,13 +9,13 @@ const WORKFLOW_STATUSES = ["open", "stabilizing", "resolved", "closed"];
 const STATUS_TONE = { open: "critical", stabilizing: "warning", resolved: "success", closed: "neutral" };
 
 const ADD_FIELDS = [
-  { key: "horse_name", label: "Horse", required: true, placeholder: "Valentino" },
+  { key: "horse_name", label: "Horse", required: true, placeholder: "Horse name" },
   { key: "emergency_type", label: "Type", kind: "select", opts: ["colic", "injury", "cast", "transport", "weather", "other"] },
-  { key: "primary_contact", label: "Primary contact", placeholder: "Charlotte Vance" },
+  { key: "primary_contact", label: "Primary contact", placeholder: "Owner name" },
   { key: "vet_status", label: "Vet", kind: "select", opts: ["not_called", "called", "en_route", "on_site", "complete"] },
   { key: "owner_status", label: "Owner", kind: "select", opts: ["not_contacted", "left_message", "confirmed", "authorized"] },
   { key: "workflow_status", label: "Status", kind: "select", opts: WORKFLOW_STATUSES },
-  { key: "started_at", label: "Started", placeholder: "2026-06-10T16:20:00" },
+  { key: "started_at", label: "Started", placeholder: "YYYY-MM-DDTHH:MM:SS" },
   { key: "notes", label: "Notes", kind: "textarea", rows: 4, full: true },
 ];
 

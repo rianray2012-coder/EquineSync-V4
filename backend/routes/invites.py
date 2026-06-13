@@ -15,6 +15,9 @@ from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, EmailStr
 
+from core.tenancy import PRIMARY_BARN_ID, barn_filter, resolve_barn_id
+from core import audit
+
 
 class InviteCreate(BaseModel):
     email: EmailStr
@@ -72,7 +75,7 @@ def build_router(
     async def list_invites_full(user=Depends(get_current_user)):
         require_setup_role(user)
         return await db.invites.find(
-            {}, {"_id": 0, "token_hash": 0},
+            barn_filter(user), {"_id": 0, "token_hash": 0},
         ).sort("created_at", -1).to_list(500)
 
     @router.post("")
@@ -84,21 +87,24 @@ def build_router(
         email_l = body.email.lower()
         if await db.users.find_one({"email": email_l}):
             raise HTTPException(409, "A user with this email already exists")
-        existing = await db.invites.find_one({"email": email_l, "status": "pending"})
+        existing = await db.invites.find_one(barn_filter(user, {"email": email_l, "status": "pending"}))
         if existing:
             raise HTTPException(409, "An invite for this email is already pending — resend or revoke it first")
 
         raw_token, token_hash = new_token_pair()
         ttl_days = int(os.environ.get("INVITE_TTL_DAYS", "7"))
         expires_at = _now_utc() + timedelta(days=ttl_days)
-        barn = await db.barn.find_one({"id": body.barn_id or "primary"}, {"_id": 0, "name": 1}) or {}
+        # Security: ignore any client-supplied barn_id and bind the invite to the
+        # inviter's own barn (Phase 4D — a barn-2 admin can only invite into barn 2).
+        invite_barn_id = resolve_barn_id(user)
+        barn = await db.barn.find_one({"id": invite_barn_id}, {"_id": 0, "name": 1}) or {}
 
         invite = {
             "id": new_id(),
             "email": email_l,
             "full_name": body.full_name,
             "role": body.role,
-            "barn_id": body.barn_id or "primary",
+            "barn_id": invite_barn_id,
             "token_hash": token_hash,
             "status": "pending",
             "message": body.message,
@@ -125,7 +131,7 @@ def build_router(
             },
         )
         await db.invites.update_one(
-            {"id": invite["id"]},
+            barn_filter(user, {"id": invite["id"]}),
             {"$push": {"sends": {"at": _iso(_now_utc()),
                                   "status": mail.get("status"),
                                   "id": mail.get("id")}}},
@@ -134,15 +140,21 @@ def build_router(
                     {"invite_id": invite["id"], "role": body.role,
                      "dev_mode": mail.get("dev", False)},
                     user["id"])
-        out = await db.invites.find_one({"id": invite["id"]}, {"_id": 0, "token_hash": 0})
+        out = await db.invites.find_one(barn_filter(user, {"id": invite["id"]}), {"_id": 0, "token_hash": 0})
         if mail.get("dev"):
             out["dev_accept_url"] = accept_url
+        await audit.record(
+            action="invite.created", user=user, request=request,
+            resource_type="invite", resource_id=invite["id"],
+            metadata={"role": body.role},
+        )
         return out
 
     @router.post("/{invite_id}/resend")
     async def resend_invite(invite_id: str, request: Request, user=Depends(get_current_user)):
         require_setup_role(user)
-        inv = await db.invites.find_one({"id": invite_id})
+        scope = barn_filter(user, {"id": invite_id})
+        inv = await db.invites.find_one(scope)
         if not inv:
             raise HTTPException(404, "Invite not found")
         if inv.get("status") != "pending":
@@ -151,7 +163,7 @@ def build_router(
         ttl_days = int(os.environ.get("INVITE_TTL_DAYS", "7"))
         expires_at = _now_utc() + timedelta(days=ttl_days)
         await db.invites.update_one(
-            {"id": invite_id},
+            scope,
             {"$set": {"token_hash": token_hash,
                       "expires_at": _iso(expires_at),
                       "updated_at": _iso(_now_utc())}},
@@ -173,23 +185,27 @@ def build_router(
             },
         )
         await db.invites.update_one(
-            {"id": invite_id},
+            scope,
             {"$push": {"sends": {"at": _iso(_now_utc()),
                                   "status": mail.get("status"),
                                   "id": mail.get("id"),
                                   "resend": True}}},
         )
         await track("invite.resent", {"invite_id": invite_id}, user["id"])
-        out = await db.invites.find_one({"id": invite_id}, {"_id": 0, "token_hash": 0})
+        out = await db.invites.find_one(scope, {"_id": 0, "token_hash": 0})
         if mail.get("dev"):
             out["dev_accept_url"] = accept_url
+        await audit.record(
+            action="invite.resent", user=user, request=request,
+            resource_type="invite", resource_id=invite_id,
+        )
         return out
 
     @router.post("/{invite_id}/revoke")
-    async def revoke_invite(invite_id: str, user=Depends(get_current_user)):
+    async def revoke_invite(invite_id: str, request: Request, user=Depends(get_current_user)):
         require_setup_role(user)
         res = await db.invites.update_one(
-            {"id": invite_id, "status": "pending"},
+            barn_filter(user, {"id": invite_id, "status": "pending"}),
             {"$set": {"status": "revoked",
                       "revoked_at": _iso(_now_utc()),
                       "revoked_by": user["full_name"]}},
@@ -197,6 +213,10 @@ def build_router(
         if res.matched_count == 0:
             raise HTTPException(404, "No pending invite found")
         await track("invite.revoked", {"invite_id": invite_id}, user["id"])
+        await audit.record(
+            action="invite.revoked", user=user, request=request,
+            resource_type="invite", resource_id=invite_id,
+        )
         return {"ok": True}
 
     @router.get("/verify")
@@ -243,11 +263,20 @@ def build_router(
 
         full_name = (body.full_name or inv.get("full_name")
                      or inv["email"].split('@')[0]).strip()
+        # Phase 4D: bind the new user to the INVITE's barn. Legacy-safe — if the
+        # invite stored a missing/malformed barn_id, or that barn was deleted,
+        # fall back to the primary barn so a valid invitee is never locked out.
+        invite_barn = inv.get("barn_id") or PRIMARY_BARN_ID
+        if invite_barn != PRIMARY_BARN_ID:
+            barn_exists = await db.barn.find_one({"id": invite_barn}, {"_id": 0, "id": 1})
+            if not barn_exists:
+                invite_barn = PRIMARY_BARN_ID
         new_user = {
             "id": new_id(),
             "email": inv["email"],
             "full_name": full_name,
             "role": inv["role"],
+            "barn_id": invite_barn,
             "password_hash": hash_pwd(body.password),
             "created_at": _iso(_now_utc()),
             "via_invite_id": inv["id"],
@@ -263,6 +292,7 @@ def build_router(
         has_setup_role = inv["role"] in ("admin", "barn_manager")
         progress = {
             "user_id": new_user["id"],
+            "barn_id": new_user["barn_id"],
             "steps": {s["id"]: "pending" for s in onboarding_steps},
             "current_step": onboarding_steps[0]["id"],
             "data": {},
@@ -273,12 +303,17 @@ def build_router(
         }
         await db.onboarding_progress.insert_one(progress)
 
-        token = create_token(new_user["id"], new_user["role"])
+        token = create_token(new_user["id"], new_user["role"], new_user["barn_id"])
         ua, ip = await client_meta(request)
         refresh = await issue_refresh_token(db, new_user["id"], user_agent=ua, ip=ip)
         await track("invite.accepted",
                     {"invite_id": inv["id"], "role": inv["role"]},
                     new_user["id"])
+        await audit.record(
+            action="invite.accepted", user=new_user, request=request,
+            resource_type="invite", resource_id=inv["id"],
+            metadata={"role": inv["role"]},
+        )
         return {
             "token": token,
             "refresh_token": refresh,

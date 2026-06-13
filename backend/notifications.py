@@ -51,8 +51,8 @@ class NotificationPrefsIn(BaseModel):
     push_enabled: bool = False
     digest_enabled: bool = True  # owner-only; ignored for non-owner accounts
     # event_type -> categories list ([] = none, ["*"] = all)
-    inbox_rules: dict | None = None
-    email_rules: dict | None = None
+    inbox_rules: Optional[dict] = None
+    email_rules: Optional[dict] = None
 
 
 # ---------- helpers ----------
@@ -70,7 +70,7 @@ def _new_id() -> str:
     return str(uuid.uuid4())
 
 
-def _rule_matches(rules: dict | None, event_type: str, category: Optional[str]) -> bool:
+def _rule_matches(rules: Optional[dict], event_type: str, category: Optional[str]) -> bool:
     if not rules:
         return False
     cats = rules.get(event_type)
@@ -149,13 +149,19 @@ async def _deliver_email(db, recipient_user_id: str, event: dict, mailer):
     if not user:
         return
     try:
-        subject = f"EquineSync · {_summarize(event)}"
-        body_text = f"Hi {user.get('full_name','there')},\n\n{_summarize(event)}\n\n— EquineSync"
+        subject = f"Equine-Sync · {_summarize(event)}"
+        body_text = f"Hi {user.get('full_name','there')},\n\n{_summarize(event)}\n\n— Equine-Sync"
         # Use the existing render+send pipeline; fall back to plain text body.
         mailer["send"](
             to=user["email"],
             subject=subject,
-            html=f"<p>Hi {user.get('full_name','there')},</p><p>{_summarize(event)}</p><p>— EquineSync</p>",
+            html=(
+                f"<p>Hi {user.get('full_name','there')},</p>"
+                f"<p>{_summarize(event)}</p>"
+                f'<p style="font-family:Georgia,serif">— '
+                f'<span style="color:#232734">Equine-</span>'
+                f'<span style="color:#6E5A99">Sync</span></p>'
+            ),
             text=body_text,
         )
     except Exception:

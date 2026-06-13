@@ -10,12 +10,12 @@ const STATUSES = ["in_stock", "low", "ordered", "out"];
 const STATUS_TONE = { in_stock: "success", low: "warning", ordered: "info", out: "critical" };
 
 const ADD_FIELDS = [
-  { key: "name", label: "Item", required: true, placeholder: "Orchard grass hay", full: true },
+  { key: "name", label: "Item", required: true, placeholder: "Supply name", full: true },
   { key: "category", label: "Category", kind: "select", opts: CATEGORIES.filter((c) => c !== "all") },
-  { key: "quantity", label: "Quantity", type: "number", placeholder: "42" },
+  { key: "quantity", label: "Quantity", type: "number", placeholder: "Quantity" },
   { key: "unit", label: "Unit", placeholder: "bales" },
-  { key: "reorder_at", label: "Reorder at", type: "number", placeholder: "25" },
-  { key: "vendor", label: "Vendor", placeholder: "Bluegrass Feed" },
+  { key: "reorder_at", label: "Reorder at", type: "number", placeholder: "Reorder quantity" },
+  { key: "vendor", label: "Vendor", placeholder: "Vendor name" },
   { key: "location", label: "Location", placeholder: "Hay loft" },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },
   { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },

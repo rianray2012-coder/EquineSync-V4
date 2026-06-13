@@ -10,8 +10,11 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, EmailStr
+
+from core.tenancy import barn_filter, resolve_barn_id
+from core import audit
 
 
 ONBOARDING_STEPS: List[Dict[str, Any]] = [
@@ -22,6 +25,7 @@ ONBOARDING_STEPS: List[Dict[str, Any]] = [
     {"id": "riders", "label": "Riders", "required": False},
     {"id": "feed_templates", "label": "Feed Templates", "required": True},
     {"id": "inventory", "label": "Inventory", "required": False},
+    {"id": "operations_setup", "label": "Operations & Sharing", "required": False},
     {"id": "staff", "label": "Team & Staff", "required": False},
     {"id": "schedules", "label": "Recurring Schedules", "required": False},
     {"id": "review", "label": "Review & Launch", "required": True},
@@ -142,9 +146,29 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
     async def _ensure_progress(user) -> dict:
         doc = await db.onboarding_progress.find_one({"user_id": user["id"]}, {"_id": 0})
         if doc:
+            step_ids = [s["id"] for s in ONBOARDING_STEPS]
+            existing_steps = doc.get("steps") or {}
+            normalized_steps = {sid: existing_steps.get(sid, "pending") for sid in step_ids}
+            if normalized_steps != existing_steps:
+                current_step = doc.get("current_step")
+                if current_step not in step_ids:
+                    current_step = ONBOARDING_STEPS[0]["id"]
+                await db.onboarding_progress.update_one(
+                    {"user_id": user["id"]},
+                    {"$set": {
+                        "steps": normalized_steps,
+                        "current_step": current_step,
+                        "barn_id": doc.get("barn_id") or resolve_barn_id(user),
+                        "updated_at": _iso(_now_utc()),
+                    }},
+                )
+                doc["steps"] = normalized_steps
+                doc["current_step"] = current_step
+                doc["barn_id"] = doc.get("barn_id") or resolve_barn_id(user)
             return doc
         doc = {
             "user_id": user["id"],
+            "barn_id": resolve_barn_id(user),
             "steps": {s["id"]: "pending" for s in ONBOARDING_STEPS},
             "current_step": ONBOARDING_STEPS[0]["id"],
             "data": {},
@@ -196,6 +220,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
         await db.onboarding_progress.update_one(
             {"user_id": user["id"]},
             {"$set": {
+                "barn_id": resolve_barn_id(user),
                 "completed": False,
                 "completed_at": None,
                 "steps": {s["id"]: "pending" for s in ONBOARDING_STEPS},
@@ -210,63 +235,70 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
 
     @router.get("/barn")
     async def get_barn(user=Depends(get_current_user)):
-        doc = await db.barn.find_one({"id": "primary"}, {"_id": 0})
+        barn_id = resolve_barn_id(user)
+        doc = await db.barn.find_one({"id": barn_id}, {"_id": 0})
         if not doc:
-            doc = {"id": "primary", "name": "", "facility_type": "boarding",
+            doc = {"id": barn_id, "name": "", "facility_type": "boarding",
                    "disciplines": [], "address": "", "timezone": "America/New_York",
                    "contact_email": "", "contact_phone": "", "logo_url": "", "banner_url": ""}
         return doc
 
     @router.put("/barn")
-    async def update_barn(body: BarnSettings, user=Depends(get_current_user)):
+    async def update_barn(body: BarnSettings, request: Request, user=Depends(get_current_user)):
         require_setup_role(user)
+        barn_id = resolve_barn_id(user)
         doc = body.model_dump()
-        doc["id"] = "primary"
+        doc["id"] = barn_id
         doc["updated_at"] = _iso(_now_utc())
-        await db.barn.update_one({"id": "primary"}, {"$set": doc}, upsert=True)
-        return await db.barn.find_one({"id": "primary"}, {"_id": 0})
+        await db.barn.update_one({"id": barn_id}, {"$set": doc}, upsert=True)
+        await audit.record(
+            action="barn.settings.updated", user=user, request=request,
+            resource_type="barn", resource_id=barn_id,
+            metadata={"updated_fields": sorted(body.model_dump(exclude_unset=True).keys())},
+        )
+        return await db.barn.find_one({"id": barn_id}, {"_id": 0})
 
     # ---------- Locations ----------
 
     @router.get("/locations")
     async def list_locations(user=Depends(get_current_user)):
-        return await list_collection("locations")
+        return await list_collection("locations", barn_filter(user))
 
     @router.post("/locations")
     async def create_location(body: LocationIn, user=Depends(get_current_user)):
         doc = body.model_dump()
-        doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        doc.update({"id": new_id(), "barn_id": resolve_barn_id(user), "created_at": _iso(_now_utc())})
         await db.locations.insert_one(doc)
         return clean(doc)
 
     @router.delete("/locations/{loc_id}")
     async def delete_location(loc_id: str, user=Depends(get_current_user)):
-        await db.locations.delete_one({"id": loc_id})
+        await db.locations.delete_one(barn_filter(user, {"id": loc_id}))
         return {"ok": True}
 
     # ---------- Feed templates ----------
 
     @router.get("/feed-templates")
     async def list_feed_templates(user=Depends(get_current_user)):
-        return await list_collection("feed_templates")
+        return await list_collection("feed_templates", barn_filter(user))
 
     @router.post("/feed-templates")
     async def create_feed_template(body: FeedTemplateIn, user=Depends(get_current_user)):
         doc = body.model_dump()
-        doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        doc.update({"id": new_id(), "barn_id": resolve_barn_id(user), "created_at": _iso(_now_utc())})
         await db.feed_templates.insert_one(doc)
         return clean(doc)
 
     @router.delete("/feed-templates/{tid}")
     async def delete_feed_template(tid: str, user=Depends(get_current_user)):
-        await db.feed_templates.delete_one({"id": tid})
+        await db.feed_templates.delete_one(barn_filter(user, {"id": tid}))
         return {"ok": True}
 
     # ---------- Inventory ----------
 
     @router.get("/inventory")
     async def list_inventory(user=Depends(get_current_user)):
-        items = await list_collection("inventory")
+        items = await list_collection("inventory", barn_filter(user))
         for it in items:
             it["low_stock"] = (
                 (it.get("reorder_at") or 0) > 0
@@ -277,51 +309,52 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
     @router.post("/inventory")
     async def create_inventory(body: InventoryIn, user=Depends(get_current_user)):
         doc = body.model_dump()
-        doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        doc.update({"id": new_id(), "barn_id": resolve_barn_id(user), "created_at": _iso(_now_utc())})
         await db.inventory.insert_one(doc)
         return clean(doc)
 
     @router.delete("/inventory/{iid}")
     async def delete_inventory(iid: str, user=Depends(get_current_user)):
-        await db.inventory.delete_one({"id": iid})
+        await db.inventory.delete_one(barn_filter(user, {"id": iid}))
         return {"ok": True}
 
     # ---------- Recurring Schedules ----------
 
     @router.get("/recurring-schedules")
     async def list_rs(user=Depends(get_current_user)):
-        return await list_collection("recurring_schedules")
+        return await list_collection("recurring_schedules", barn_filter(user))
 
     @router.post("/recurring-schedules")
     async def create_rs(body: RecurringScheduleIn, user=Depends(get_current_user)):
         doc = body.model_dump()
-        doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
+        doc.update({"id": new_id(), "barn_id": resolve_barn_id(user), "created_at": _iso(_now_utc())})
         await db.recurring_schedules.insert_one(doc)
         return clean(doc)
 
     @router.delete("/recurring-schedules/{sid}")
     async def delete_rs(sid: str, user=Depends(get_current_user)):
-        await db.recurring_schedules.delete_one({"id": sid})
+        await db.recurring_schedules.delete_one(barn_filter(user, {"id": sid}))
         return {"ok": True}
 
     # ---------- Staff Invites (lightweight onboarding-side store) ----------
 
     @router.get("/staff-invites")
     async def list_invites(user=Depends(get_current_user)):
-        return await list_collection("staff_invites")
+        return await list_collection("staff_invites", barn_filter(user))
 
     @router.post("/staff-invites")
     async def create_invite(body: StaffInviteIn, user=Depends(get_current_user)):
         require_setup_role(user)
         if body.role not in roles:
             raise HTTPException(400, "Invalid role")
-        if await db.staff_invites.find_one({"email": body.email.lower()}):
+        if await db.staff_invites.find_one(barn_filter(user, {"email": body.email.lower()})):
             raise HTTPException(409, "Already invited")
         if await db.users.find_one({"email": body.email.lower()}):
             raise HTTPException(409, "User already exists")
         doc = body.model_dump()
         doc["email"] = doc["email"].lower()
         doc.update({"id": new_id(), "status": "pending",
+                    "barn_id": resolve_barn_id(user),
                     "invited_by": user["full_name"],
                     "created_at": _iso(_now_utc())})
         await db.staff_invites.insert_one(doc)
@@ -329,7 +362,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
 
     @router.delete("/staff-invites/{sid}")
     async def delete_invite(sid: str, user=Depends(get_current_user)):
-        await db.staff_invites.delete_one({"id": sid})
+        await db.staff_invites.delete_one(barn_filter(user, {"id": sid}))
         return {"ok": True}
 
     # ---------- CSV import ----------
@@ -347,7 +380,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
         if body.kind == "horses":
             existing_names = {
                 h["name"].lower()
-                for h in await db.horses.find({}, {"_id": 0, "name": 1}).to_list(1000)
+                for h in await db.horses.find(barn_filter(user), {"_id": 0, "name": 1}).to_list(1000)
             }
             for r in rows:
                 if (r.get("name") or "").lower() in existing_names:
@@ -355,7 +388,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
         elif body.kind == "owners":
             existing = {
                 o.get("email", "").lower()
-                for o in await db.owners.find({}, {"_id": 0, "email": 1}).to_list(1000)
+                for o in await db.owners.find(barn_filter(user), {"_id": 0, "email": 1}).to_list(1000)
             }
             for r in rows:
                 if (r.get("email") or "").lower() in existing:
@@ -369,11 +402,11 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
         if body.kind == "horses":
             existing_names = {
                 h["name"].lower()
-                for h in await db.horses.find({}, {"_id": 0, "name": 1}).to_list(2000)
+                for h in await db.horses.find(barn_filter(user), {"_id": 0, "name": 1}).to_list(2000)
             }
             owners_map = {
                 o.get("full_name", "").lower(): o["id"]
-                for o in await db.owners.find({}, {"_id": 0}).to_list(2000)
+                for o in await db.owners.find(barn_filter(user), {"_id": 0}).to_list(2000)
             }
 
             def _maybe_int(v):
@@ -398,6 +431,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
                 existing_names.add(name.lower())
                 doc = {
                     "id": new_id(),
+                    "barn_id": resolve_barn_id(user),
                     "name": name,
                     "barn_name": r.get("barn_name") or name,
                     "breed": r.get("breed"),
@@ -422,7 +456,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
         elif body.kind == "owners":
             existing_emails = {
                 o.get("email", "").lower()
-                for o in await db.owners.find({}, {"_id": 0, "email": 1}).to_list(2000)
+                for o in await db.owners.find(barn_filter(user), {"_id": 0, "email": 1}).to_list(2000)
                 if o.get("email")
             }
             for r in body.rows:
@@ -437,6 +471,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
                     existing_emails.add(email)
                 doc = {
                     "id": new_id(),
+                    "barn_id": resolve_barn_id(user),
                     "full_name": name,
                     "email": email or None,
                     "phone": r.get("phone"),
@@ -455,8 +490,8 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
     @router.get("/onboarding/csv-template")
     async def csv_template(kind: str):
         templates = {
-            "horses": "name,breed,age,color,height_hands,discipline,stall,owner,status,wellness_score,allergies,feed_plan,turnout_group,behavior_flags,photo_url\nValentino,Hanoverian,11,Bay,16.3,Show Jumping,Stall 1,Charlotte Vance,active,92,Sweet itch,2lb grain + 6lb hay,Geldings A,Solo turnout,https://example.com/photo.jpg",
-            "owners": "full_name,email,phone,emergency_contact,billing_preferences,waiver_signed\nCharlotte Vance,charlotte@example.com,+1 555 0142,Edward Vance +1 555 0143,monthly_card,yes",
+            "horses": "name,breed,age,color,height_hands,discipline,stall,owner,status,wellness_score,allergies,feed_plan,turnout_group,behavior_flags,photo_url\n",
+            "owners": "full_name,email,phone,emergency_contact,billing_preferences,waiver_signed\n",
         }
         text = templates.get(kind)
         if not text:

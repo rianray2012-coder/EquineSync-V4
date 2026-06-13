@@ -8,7 +8,7 @@ import QuickAddSheet from "../components/QuickAddSheet";
 const STATUSES = ["draft", "queued", "sent"];
 const STATUS_TONE = { draft: "neutral", queued: "warning", sent: "success" };
 const ADD_FIELDS = [
-  { key: "subject", label: "Subject", required: true, placeholder: "Storm plan", full: true },
+  { key: "subject", label: "Subject", required: true, placeholder: "Message subject", full: true },
   { key: "audience", label: "Audience", kind: "select", opts: ["all_staff", "owners", "trainers", "custom"] },
   { key: "channel", label: "Channel", kind: "select", opts: ["in_app", "email", "push_ready"] },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },

@@ -11,9 +11,9 @@ const STATUS_TONE = { draft: "info", reviewed: "warning", approved: "success", d
 
 const ADD_FIELDS = [
   { key: "suggestion_type", label: "Type", kind: "select", opts: TYPES },
-  { key: "subject", label: "Subject", required: true, placeholder: "Valentino weekly care", full: true },
+  { key: "subject", label: "Subject", required: true, placeholder: "Care summary subject", full: true },
   { key: "summary", label: "Summary", required: true, kind: "textarea", rows: 5, full: true },
-  { key: "confidence", label: "Confidence", type: "number", placeholder: "0.72" },
+  { key: "confidence", label: "Confidence", type: "number", placeholder: "Confidence score" },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },
 ];
 

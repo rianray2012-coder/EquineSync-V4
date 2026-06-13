@@ -92,7 +92,7 @@ def test_backlog_dashboard_and_integration_placeholders(admin_h):
     assert d.status_code == 200, d.text
     body = d.json()
     assert "occupancy" in body and "financial" in body and "exports" in body
-    assert body["exports"]["excel"] == "placeholder_ready"
+    assert body["exports"]["excel"] == "export_ready"
 
     p = requests.get(f"{API}/integrations/placeholders", headers=admin_h, timeout=30)
     assert p.status_code == 200

@@ -18,6 +18,8 @@ import logging
 
 from dateutil.rrule import rrulestr
 
+from core.tenancy import PRIMARY_BARN_ID, resolve_barn_id
+
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
@@ -241,13 +243,14 @@ class TaskEngine:
         return [o for o in rule_obj.between(start_window, horizon, inc=True)][:500]
 
     @staticmethod
-    def _build_task_doc(template: dict, occ: datetime, tenant_id: str) -> dict:
+    def _build_task_doc(template: dict, occ: datetime, tenant_id: str, barn_id: str) -> dict:
         wb = int(template.get("window_minutes_before", 30) or 0)
         wa = int(template.get("window_minutes_after", 120) or 0)
         now_iso = iso(now_utc())
         return {
             "id": new_id(),
             "tenant_id": tenant_id,
+            "barn_id": barn_id,
             "template_id": template["id"],
             "category": template["category"],
             "title": template["title"],
@@ -267,10 +270,11 @@ class TaskEngine:
             "updated_at": now_iso,
         }
 
-    async def _existing_occurrence_times(self, tenant_id: str, template_id: str) -> set:
+    async def _existing_occurrence_times(self, tenant_id: str, template_id: str, barn_id: str) -> set:
         existing = await self.db.tasks.find(
             {
                 "tenant_id": tenant_id,
+                "barn_id": barn_id,
                 "template_id": template_id,
                 "scheduled_at": {"$gte": iso(now_utc() - timedelta(days=1))},
             },
@@ -290,10 +294,11 @@ class TaskEngine:
             return 0
 
         tenant_id = template.get("tenant_id", DEFAULT_TENANT_ID)
-        existing_times = await self._existing_occurrence_times(tenant_id, template["id"])
+        barn_id = template.get("barn_id", PRIMARY_BARN_ID)
+        existing_times = await self._existing_occurrence_times(tenant_id, template["id"], barn_id)
 
         new_docs = [
-            self._build_task_doc(template, occ, tenant_id)
+            self._build_task_doc(template, occ, tenant_id, barn_id)
             for occ in occurrences
             if iso(occ) not in existing_times
         ]
@@ -309,9 +314,13 @@ class TaskEngine:
             )
         return len(new_docs)
 
-    async def materialize_all(self, tenant_id: str = DEFAULT_TENANT_ID) -> int:
+    async def materialize_all(self, tenant_id: str = DEFAULT_TENANT_ID,
+                              barn_id: Optional[str] = None) -> int:
+        q: Dict[str, Any] = {"tenant_id": tenant_id, "active": True}
+        if barn_id is not None:
+            q["barn_id"] = barn_id
         templates = await self.db.task_templates.find(
-            {"tenant_id": tenant_id, "active": True},
+            q,
             {"_id": 0},
         ).to_list(500)
         total = 0
@@ -345,6 +354,7 @@ class TaskEngine:
         event_doc = {
             "id": new_id(),
             "tenant_id": tenant_id,
+            "barn_id": task.get("barn_id", PRIMARY_BARN_ID),
             "event_type": event_type,
             "task_id": task.get("id"),
             "category": task.get("category"),
@@ -365,11 +375,12 @@ class TaskEngine:
     # -- completion helpers ---------------------------------------------
     @staticmethod
     def _build_completion_doc(task_id: str, body: CompleteBody, user: dict,
-                              tenant_id: str) -> dict:
+                              tenant_id: str, barn_id: str) -> dict:
         completed_at = body.completed_at or iso(now_utc())
         return {
             "id": new_id(),
             "tenant_id": tenant_id,
+            "barn_id": barn_id,
             "task_id": task_id,
             "completed_by_user_id": user["id"],
             "completed_at": completed_at,
@@ -399,7 +410,10 @@ class TaskEngine:
         existing_notes = canonical.get("notes") or ""
         new_notes = (existing_notes + ("\n" if existing_notes else "") + extra_note)[:2000]
         await self.db.task_completions.update_one(
-            {"id": canonical["id"]}, {"$set": {"notes": new_notes}},
+            {"id": canonical["id"],
+             "tenant_id": canonical.get("tenant_id", DEFAULT_TENANT_ID),
+             "barn_id": canonical.get("barn_id", PRIMARY_BARN_ID)},
+            {"$set": {"notes": new_notes}},
         )
 
     # -- category post-completion hooks ------------------------------
@@ -409,12 +423,13 @@ class TaskEngine:
     # denormalized projections for read-paths that haven't migrated yet.
 
     @staticmethod
-    def _build_vet_record(task: dict, body: CompleteBody, completion_id: str) -> dict:
+    def _build_vet_record(task: dict, body: CompleteBody, completion_id: str, barn_id: str) -> dict:
         pa = body.payload_actual or {}
         snap = task.get("payload") or {}
         horse_ids = task.get("linked_horse_ids") or []
         return {
             "id": new_id(),
+            "barn_id": barn_id,
             "horse_id": horse_ids[0] if horse_ids else None,
             "horse_ids": horse_ids,  # multi-horse support without breaking single-horse readers
             "type": pa.get("type") or snap.get("type") or "exam",
@@ -432,12 +447,13 @@ class TaskEngine:
         }
 
     @staticmethod
-    def _build_farrier_record(task: dict, body: CompleteBody, completion_id: str) -> dict:
+    def _build_farrier_record(task: dict, body: CompleteBody, completion_id: str, barn_id: str) -> dict:
         pa = body.payload_actual or {}
         snap = task.get("payload") or {}
         horse_ids = task.get("linked_horse_ids") or []
         return {
             "id": new_id(),
+            "barn_id": barn_id,
             "horse_id": horse_ids[0] if horse_ids else None,
             "horse_ids": horse_ids,
             "farrier_name": pa.get("farrier_name") or snap.get("farrier_name"),
@@ -471,6 +487,7 @@ class TaskEngine:
         doc = {
             "id": new_id(),
             "tenant_id": tenant_id,
+            "barn_id": task.get("barn_id", PRIMARY_BARN_ID),
             "template_id": None,
             "category": task.get("category"),
             "title": f"Follow-up: {task.get('title')}",
@@ -508,9 +525,10 @@ class TaskEngine:
         """
         side_effects: Dict[str, Any] = {}
         cat = task.get("category")
+        barn_id = task.get("barn_id", PRIMARY_BARN_ID)
         try:
             if cat == "vet" and body.outcome in ("done", "partial"):
-                rec = self._build_vet_record(task, body, completion["id"])
+                rec = self._build_vet_record(task, body, completion["id"], barn_id)
                 await self.db.vet_records.insert_one(rec)
                 side_effects["vet_record_id"] = rec["id"]
                 side_effects["cost"] = rec["cost"]
@@ -520,7 +538,7 @@ class TaskEngine:
                         task, rec["follow_up_due"], tenant_id, user["id"],
                     )
             elif cat == "farrier" and body.outcome in ("done", "partial"):
-                rec = self._build_farrier_record(task, body, completion["id"])
+                rec = self._build_farrier_record(task, body, completion["id"], barn_id)
                 await self.db.farrier_history.insert_one(rec)
                 side_effects["farrier_record_id"] = rec["id"]
                 side_effects["cost"] = rec["cost"]
@@ -537,24 +555,27 @@ class TaskEngine:
     # -- completion ------------------------------------------------------
     async def complete_task(self, task_id: str, body: CompleteBody, user: dict,
                             tenant_id: str = DEFAULT_TENANT_ID) -> dict:
+        barn_id = resolve_barn_id(user)
         task = await self.db.tasks.find_one(
-            {"id": task_id, "tenant_id": tenant_id}, {"_id": 0},
+            {"id": task_id, "tenant_id": tenant_id, "barn_id": barn_id}, {"_id": 0},
         )
         if not task:
             raise HTTPException(404, "Task not found")
 
         # Idempotency: same (task_id, client_completion_id) — return existing.
         existing = await self.db.task_completions.find_one(
-            {"task_id": task_id, "client_completion_id": body.client_completion_id},
+            {"task_id": task_id, "tenant_id": tenant_id, "barn_id": barn_id,
+             "client_completion_id": body.client_completion_id},
             {"_id": 0},
         )
         if existing:
             return {"task": task, "completion": existing, "deduped": True}
 
         canonical = await self.db.task_completions.find_one(
-            {"task_id": task_id, "voided": {"$ne": True}}, {"_id": 0},
+            {"task_id": task_id, "tenant_id": tenant_id, "barn_id": barn_id,
+             "voided": {"$ne": True}}, {"_id": 0},
         )
-        completion = self._build_completion_doc(task_id, body, user, tenant_id)
+        completion = self._build_completion_doc(task_id, body, user, tenant_id, barn_id)
 
         # Concurrency: a different completion already canonicalized this task.
         if canonical:
@@ -571,7 +592,7 @@ class TaskEngine:
 
         new_status = self._outcome_to_status(body.outcome)
         await self.db.tasks.update_one(
-            {"id": task_id},
+            {"id": task_id, "tenant_id": tenant_id, "barn_id": barn_id},
             {"$set": {
                 "status": new_status,
                 "updated_at": iso(now_utc()),
@@ -615,14 +636,16 @@ class TaskEngine:
 
     async def void_completion(self, task_id: str, reason: str, user: dict,
                               tenant_id: str = DEFAULT_TENANT_ID) -> dict:
+        barn_id = resolve_barn_id(user)
         canonical = await self.db.task_completions.find_one(
-            {"task_id": task_id, "voided": {"$ne": True}, "tenant_id": tenant_id},
+            {"task_id": task_id, "voided": {"$ne": True},
+             "tenant_id": tenant_id, "barn_id": barn_id},
             {"_id": 0},
         )
         if not canonical:
             raise HTTPException(404, "No active completion to void")
         await self.db.task_completions.update_one(
-            {"id": canonical["id"]},
+            {"id": canonical["id"], "tenant_id": tenant_id, "barn_id": barn_id},
             {"$set": {
                 "voided": True,
                 "voided_by_user_id": user["id"],
@@ -630,11 +653,12 @@ class TaskEngine:
             }},
         )
         # revert task status to overdue/due based on time
-        task = await self.db.tasks.find_one({"id": task_id}, {"_id": 0})
+        task = await self.db.tasks.find_one(
+            {"id": task_id, "tenant_id": tenant_id, "barn_id": barn_id}, {"_id": 0})
         if task:
             new_status = self._derive_status({**task, "status": "scheduled"})
             await self.db.tasks.update_one(
-                {"id": task_id},
+                {"id": task_id, "tenant_id": tenant_id, "barn_id": barn_id},
                 {"$set": {"status": new_status, "updated_at": iso(now_utc())}},
             )
             task["status"] = new_status
@@ -661,7 +685,7 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
     async def list_templates(user=Depends(get_current_user),
                              category: Optional[str] = None,
                              active: Optional[bool] = None):
-        q: Dict[str, Any] = {"tenant_id": DEFAULT_TENANT_ID}
+        q: Dict[str, Any] = {"tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user)}
         if category:
             q["category"] = category
         if active is not None:
@@ -675,6 +699,7 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         doc.update({
             "id": new_id(),
             "tenant_id": DEFAULT_TENANT_ID,
+            "barn_id": resolve_barn_id(user),
             "created_by": user["id"],
             "created_at": iso(now_utc()),
             "updated_at": iso(now_utc()),
@@ -689,38 +714,42 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
 
     @router.patch("/task-templates/{tpl_id}")
     async def update_template(tpl_id: str, body: TaskTemplateIn, user=Depends(get_current_user)):
-        existing = await db.task_templates.find_one({"id": tpl_id, "tenant_id": DEFAULT_TENANT_ID}, {"_id": 0})
+        barn_id = resolve_barn_id(user)
+        scope = {"id": tpl_id, "tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id}
+        existing = await db.task_templates.find_one(scope, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Template not found")
         updates = body.model_dump()
         updates["updated_at"] = iso(now_utc())
-        await db.task_templates.update_one({"id": tpl_id}, {"$set": updates})
+        await db.task_templates.update_one(scope, {"$set": updates})
         # Re-materialize future, untouched occurrences.
         # Delete future scheduled (not yet started) tasks; preserve any that
         # are in_progress/completed/skipped/cancelled or have a completion.
         future_cutoff = iso(now_utc())
         await db.tasks.delete_many({
             "tenant_id": DEFAULT_TENANT_ID,
+            "barn_id": barn_id,
             "template_id": tpl_id,
             "status": "scheduled",
             "scheduled_at": {"$gt": future_cutoff},
         })
-        refreshed = await db.task_templates.find_one({"id": tpl_id}, {"_id": 0})
+        refreshed = await db.task_templates.find_one(scope, {"_id": 0})
         new_count = await engine.materialize_template(refreshed)
         return {"template": refreshed, "rematerialized": new_count}
 
     @router.delete("/task-templates/{tpl_id}")
     async def delete_template(tpl_id: str, user=Depends(get_current_user)):
+        barn_id = resolve_barn_id(user)
         # soft-delete: set active=False
         r = await db.task_templates.update_one(
-            {"id": tpl_id, "tenant_id": DEFAULT_TENANT_ID},
+            {"id": tpl_id, "tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id},
             {"$set": {"active": False, "updated_at": iso(now_utc())}},
         )
         if r.matched_count == 0:
             raise HTTPException(404, "Template not found")
         # cancel future scheduled instances
         await db.tasks.update_many(
-            {"tenant_id": DEFAULT_TENANT_ID, "template_id": tpl_id,
+            {"tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id, "template_id": tpl_id,
              "status": "scheduled"},
             {"$set": {"status": "cancelled", "updated_at": iso(now_utc())}},
         )
@@ -737,7 +766,7 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
                          status_: Optional[str] = Query(None, alias="status"),
                          priority: Optional[str] = None,
                          limit: int = 200):
-        q: Dict[str, Any] = {"tenant_id": DEFAULT_TENANT_ID}
+        q: Dict[str, Any] = {"tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user)}
         if start or end:
             q["scheduled_at"] = {}
             if start:
@@ -768,9 +797,11 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         anchor = parse_iso(date) if date else now_utc()
         start = anchor.replace(hour=0, minute=0, second=0, microsecond=0)
         end = start + timedelta(days=1)
+        barn_id = resolve_barn_id(user)
         items = await db.tasks.find(
             {
                 "tenant_id": DEFAULT_TENANT_ID,
+                "barn_id": barn_id,
                 "scheduled_at": {"$gte": iso(start), "$lt": iso(end)},
             },
             {"_id": 0},
@@ -780,6 +811,7 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         overdue_prior = await db.tasks.find(
             {
                 "tenant_id": DEFAULT_TENANT_ID,
+                "barn_id": barn_id,
                 "scheduled_at": {"$lt": iso(start)},
                 "status": {"$nin": ["completed", "skipped", "cancelled"]},
             },
@@ -825,6 +857,7 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         doc = {
             "id": new_id(),
             "tenant_id": DEFAULT_TENANT_ID,
+            "barn_id": resolve_barn_id(user),
             "template_id": None,
             "category": body.category,
             "title": body.title,
@@ -855,7 +888,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
 
     @router.patch("/tasks/{task_id}")
     async def patch_task(task_id: str, body: TaskPatch, user=Depends(get_current_user)):
-        existing = await db.tasks.find_one({"id": task_id, "tenant_id": DEFAULT_TENANT_ID}, {"_id": 0})
+        scope = {"id": task_id, "tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user)}
+        existing = await db.tasks.find_one(scope, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Task not found")
         if existing.get("status") in ("completed", "cancelled"):
@@ -872,8 +906,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         for f in ("title", "assignee_user_id", "assignee_role", "priority", "notes", "payload"):
             if f in data and data[f] is not None:
                 updates[f] = data[f]
-        await db.tasks.update_one({"id": task_id}, {"$set": updates})
-        updated = await db.tasks.find_one({"id": task_id}, {"_id": 0})
+        await db.tasks.update_one(scope, {"$set": updates})
+        updated = await db.tasks.find_one(scope, {"_id": 0})
         return {"task": updated}
 
     @router.post("/tasks/{task_id}/complete")
@@ -914,7 +948,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
 
     @router.post("/tasks/{task_id}/reassign")
     async def reassign(task_id: str, body: ReassignBody, user=Depends(get_current_user)):
-        existing = await db.tasks.find_one({"id": task_id, "tenant_id": DEFAULT_TENANT_ID}, {"_id": 0})
+        scope = {"id": task_id, "tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user)}
+        existing = await db.tasks.find_one(scope, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Task not found")
         updates = {"updated_at": iso(now_utc())}
@@ -923,8 +958,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
             updates["assignee_user_id"] = data["assignee_user_id"]
         if "assignee_role" in data:
             updates["assignee_role"] = data["assignee_role"]
-        await db.tasks.update_one({"id": task_id}, {"$set": updates})
-        updated = await db.tasks.find_one({"id": task_id}, {"_id": 0})
+        await db.tasks.update_one(scope, {"$set": updates})
+        updated = await db.tasks.find_one(scope, {"_id": 0})
         await engine.emit_event(
             tenant_id=DEFAULT_TENANT_ID,
             event_type="task.reassigned",
@@ -936,7 +971,7 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
 
     @router.post("/tasks/materialize")
     async def force_materialize(user=Depends(get_current_user)):
-        n = await engine.materialize_all()
+        n = await engine.materialize_all(barn_id=resolve_barn_id(user))
         return {"created": n}
 
     # -- timelines / activity -----------------------------------------
@@ -947,6 +982,7 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
                               owner_view: bool = False):
         q: Dict[str, Any] = {
             "tenant_id": DEFAULT_TENANT_ID,
+            "barn_id": resolve_barn_id(user),
             "subject_horse_ids": horse_id,
         }
         if owner_view or user.get("role") == "horse_owner":
@@ -958,7 +994,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
     @router.get("/staff/{user_id}/activity")
     async def staff_activity(user_id: str, user=Depends(get_current_user), limit: int = 100):
         items = await db.task_events.find(
-            {"tenant_id": DEFAULT_TENANT_ID, "actor_user_id": user_id},
+            {"tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user),
+             "actor_user_id": user_id},
             {"_id": 0},
         ).sort("occurred_at", -1).to_list(min(limit, 500))
         return {"items": items}
@@ -968,13 +1005,14 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
     async def analytics_summary(user=Depends(get_current_user),
                                  days: int = 7):
         since = iso(now_utc() - timedelta(days=days))
+        barn_id = resolve_barn_id(user)
         completions = await db.task_completions.count_documents(
-            {"tenant_id": DEFAULT_TENANT_ID, "voided": {"$ne": True},
+            {"tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id, "voided": {"$ne": True},
              "completed_at": {"$gte": since}}
         )
         overdue = 0
         live = await db.tasks.find(
-            {"tenant_id": DEFAULT_TENANT_ID,
+            {"tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id,
              "status": {"$nin": ["completed", "skipped", "cancelled"]}},
             {"_id": 0, "window_end": 1},
         ).to_list(2000)
@@ -986,7 +1024,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
 
         # per category counts over window
         pipeline = [
-            {"$match": {"tenant_id": DEFAULT_TENANT_ID, "occurred_at": {"$gte": since}}},
+            {"$match": {"tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id,
+                        "occurred_at": {"$gte": since}}},
             {"$group": {"_id": {"event_type": "$event_type", "category": "$category"},
                           "count": {"$sum": 1}}},
         ]
@@ -1007,124 +1046,11 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
     return router
 
 
-# ---------------------------------------------------------------------------
-# Seeder — used by server.py at startup to ensure demo data exists
-# ---------------------------------------------------------------------------
+async def seed_starter_templates(db, owner_user_id: Optional[str] = None) -> Dict[str, int]:
+    """Launch-safe compatibility hook.
 
-async def seed_demo_templates(db, owner_user_id: Optional[str] = None) -> Dict[str, int]:
-    """Idempotent: only seeds if no templates exist."""
-    existing = await db.task_templates.count_documents({"tenant_id": DEFAULT_TENANT_ID})
-    if existing > 0:
-        return {"templates_created": 0, "skipped": True}
-
-    # fetch some horse ids to attach demo templates to
-    horses = await db.horses.find({}, {"_id": 0, "id": 1, "name": 1}).to_list(20)
-    horse_ids = [h["id"] for h in horses]
-    h1 = horse_ids[:3] if horse_ids else []
-    h2 = horse_ids[3:6] if len(horse_ids) > 3 else h1
-
-    # anchor today at 6 AM UTC as a stable demo anchor
-    today_6am = now_utc().replace(hour=6, minute=0, second=0, microsecond=0)
-
-    templates = [
-        {
-            "category": "feed", "title": "AM Grain",
-            "description": "Morning grain across pasture A",
-            "linked_horse_ids": h1,
-            "default_assignee_role": "groom",
-            "rrule": "FREQ=DAILY", "dtstart": iso(today_6am),
-            "window_minutes_before": 30, "window_minutes_after": 120,
-            "priority": "standard",
-            "payload_defaults": {"feed_type": "Senior Mix", "amount": 2, "unit": "qt"},
-        },
-        {
-            "category": "feed", "title": "PM Grain",
-            "linked_horse_ids": h1,
-            "default_assignee_role": "groom",
-            "rrule": "FREQ=DAILY",
-            "dtstart": iso(today_6am.replace(hour=17)),
-            "priority": "standard",
-            "payload_defaults": {"feed_type": "Senior Mix", "amount": 2, "unit": "qt"},
-        },
-        {
-            "category": "medication", "title": "Bute 1g — Halo",
-            "linked_horse_ids": h2[:1],
-            "default_assignee_role": "groom",
-            "rrule": "FREQ=DAILY", "dtstart": iso(today_6am.replace(hour=7)),
-            "priority": "critical",
-            "payload_defaults": {"med_name": "Phenylbutazone", "dose": 1, "unit": "g", "route": "oral"},
-        },
-        {
-            "category": "turnout_out", "title": "AM Turnout",
-            "linked_horse_ids": horse_ids,
-            "default_assignee_role": "groom",
-            "rrule": "FREQ=DAILY", "dtstart": iso(today_6am.replace(hour=8)),
-            "priority": "standard",
-            "payload_defaults": {"paddock_id": "paddock-a", "blanket": False, "fly_mask": True},
-        },
-        {
-            "category": "turnout_in", "title": "PM Bring-in",
-            "linked_horse_ids": horse_ids,
-            "default_assignee_role": "groom",
-            "rrule": "FREQ=DAILY", "dtstart": iso(today_6am.replace(hour=16)),
-            "priority": "standard",
-            "payload_defaults": {"paddock_id": "paddock-a"},
-        },
-        {
-            "category": "stall_clean", "title": "Stall Pick",
-            "linked_horse_ids": horse_ids,
-            "default_assignee_role": "groom",
-            "rrule": "FREQ=DAILY", "dtstart": iso(today_6am.replace(hour=10)),
-            "priority": "informational",
-            "payload_defaults": {"level": "pick"},
-        },
-        {
-            "category": "farrier", "title": "Trim & Shoe (6-week cycle)",
-            "linked_horse_ids": h2,
-            "default_assignee_role": "barn_manager",
-            "rrule": "FREQ=WEEKLY;INTERVAL=6;BYDAY=TU",
-            "dtstart": iso(today_6am.replace(hour=11)),
-            "priority": "standard",
-            "payload_defaults": {"farrier_name": "Jordan A.", "shoes_on": ["fronts"]},
-        },
-        {
-            "category": "vet", "title": "Spring Vaccinations",
-            "linked_horse_ids": horse_ids,
-            "default_assignee_role": "barn_manager",
-            "rrule": None,
-            "dtstart": iso(today_6am + timedelta(days=2, hours=3)),
-            "priority": "standard",
-            "payload_defaults": {"vet_name": "Dr. Maren", "reason": "Annual vaccines"},
-        },
-        {
-            "category": "rehab", "title": "Hand-walk 20min",
-            "linked_horse_ids": h2[:1],
-            "default_assignee_role": "trainer",
-            "rrule": "FREQ=DAILY;BYHOUR=9,14",
-            "dtstart": iso(today_6am.replace(hour=9)),
-            "priority": "standard",
-            "payload_defaults": {"activity": "Hand-walking", "duration_min": 20, "intensity": "light"},
-        },
-    ]
-
-    docs = []
-    for t in templates:
-        d = {
-            "id": new_id(),
-            "tenant_id": DEFAULT_TENANT_ID,
-            "created_by": owner_user_id,
-            "created_at": iso(now_utc()),
-            "updated_at": iso(now_utc()),
-            "active": True,
-            "description": t.get("description"),
-            "linked_location_id": None,
-            "default_assignee_user_id": None,
-            "window_minutes_before": t.get("window_minutes_before", 30),
-            "window_minutes_after": t.get("window_minutes_after", 120),
-            "payload_schema": {},
-            **t,
-        }
-        docs.append(d)
-    if docs:
-        await db.task_templates.insert_many(docs)
-    return {"templates_created": len(docs), "skipped": False}
+    Startup still calls this after ensuring task indexes. It intentionally does
+    not create templates automatically; real barns configure routines during
+    onboarding or from scheduling/task screens.
+    """
+    return {"templates_created": 0, "skipped": True}

@@ -14,11 +14,11 @@ const STATUS_TONE = {
 };
 
 const ADD_FIELDS = [
-  { key: "pasture", label: "Pasture", required: true, placeholder: "North Field" },
-  { key: "group_name", label: "Group", placeholder: "Geldings A" },
-  { key: "horse_names", label: "Horses", kind: "textarea", rows: 3, full: true, placeholder: "Valentino, Mercury" },
-  { key: "start_time", label: "Start", placeholder: "08:00" },
-  { key: "end_time", label: "End", placeholder: "14:00" },
+  { key: "pasture", label: "Pasture", required: true, placeholder: "Pasture name" },
+  { key: "group_name", label: "Group", placeholder: "Turnout group" },
+  { key: "horse_names", label: "Horses", kind: "textarea", rows: 3, full: true, placeholder: "Horse names" },
+  { key: "start_time", label: "Start", placeholder: "HH:MM" },
+  { key: "end_time", label: "End", placeholder: "HH:MM" },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },
   { key: "weather_rule", label: "Weather rule", kind: "textarea", rows: 3, full: true },
 ];

@@ -112,7 +112,7 @@ export default function VerifyEmail() {
                   </label>
                   <input
                     type="email" value={resendEmail} onChange={(e) => setResendEmail(e.target.value)}
-                    required placeholder="you@example.com" data-testid="verify-resend-email"
+                    required placeholder="you@your-domain.com" data-testid="verify-resend-email"
                     className="w-full rounded-xl px-4 py-3 text-sm focus:outline-none" style={inputStyle}
                   />
                   <button

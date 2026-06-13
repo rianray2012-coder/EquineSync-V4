@@ -6,11 +6,11 @@ import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const ADD_FIELDS = [
-  { key: "staff_name", label: "Staff", required: true, placeholder: "Sophia Reyes" },
+  { key: "staff_name", label: "Staff", required: true, placeholder: "Staff name" },
   { key: "role", label: "Role", placeholder: "Groom" },
-  { key: "shift_start", label: "Start", required: true, placeholder: "2026-06-12T07:00:00" },
-  { key: "shift_end", label: "End", placeholder: "2026-06-12T15:00:00" },
-  { key: "area", label: "Area", placeholder: "Main Barn" },
+  { key: "shift_start", label: "Start", required: true, placeholder: "YYYY-MM-DDTHH:MM:SS" },
+  { key: "shift_end", label: "End", placeholder: "YYYY-MM-DDTHH:MM:SS" },
+  { key: "area", label: "Area", placeholder: "Barn area" },
   { key: "notes", label: "Shift notes", kind: "textarea", rows: 3, full: true },
 ];
 

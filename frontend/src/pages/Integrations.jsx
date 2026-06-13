@@ -12,7 +12,7 @@ const STATUS_TONE = { not_configured: "neutral", ready: "info", connected: "succ
 const ADD_FIELDS = [
   { key: "provider", label: "Provider", kind: "select", opts: PROVIDERS },
   { key: "status", label: "Status", kind: "select", opts: STATUSES },
-  { key: "external_ref", label: "External ref", placeholder: "acct_placeholder_001" },
+  { key: "external_ref", label: "External ref", placeholder: "Account or connection id" },
   { key: "notes", label: "Notes", kind: "textarea", rows: 4, full: true },
 ];
 
@@ -20,7 +20,7 @@ const labelFor = (value) => String(value || "").replace(/_/g, " ");
 
 export default function Integrations() {
   const [records, setRecords] = useState([]);
-  const [placeholders, setPlaceholders] = useState([]);
+  const [readinessItems, setReadinessItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
@@ -32,12 +32,12 @@ export default function Integrations() {
     setLoading(true);
     setError(null);
     try {
-      const [moduleRes, placeholderRes] = await Promise.all([
+      const [moduleRes, readinessRes] = await Promise.all([
         api.get("/feature-modules/integrations"),
         api.get("/integrations/placeholders"),
       ]);
       setRecords(moduleRes.data.records || []);
-      setPlaceholders(placeholderRes.data || []);
+      setReadinessItems(readinessRes.data || []);
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load integrations.");
     } finally {
@@ -53,7 +53,7 @@ export default function Integrations() {
     setSavingProvider(provider);
     try {
       const r = await api.post(`/integrations/${provider}/prepare`);
-      toast.success(r.data.message || "Placeholder ready");
+      toast.success(r.data.message || "Configuration ready");
     } catch (err) {
       toast.error(err?.response?.data?.detail || "Could not prepare integration");
     } finally {
@@ -159,7 +159,7 @@ export default function Integrations() {
       ) : (
         <>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-            {placeholders.map((item) => {
+            {readinessItems.map((item) => {
               const record = connectedByProvider[item.provider];
               const status = (record?.data || {}).status || "not_configured";
               return (
@@ -212,7 +212,7 @@ export default function Integrations() {
             <Empty>
               <Plug strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
               <div className="font-display text-2xl text-equine-ivory mb-1">No connection records</div>
-              <div className="text-[13px] text-equine-platinum/60 mb-4">Add a provider record when a barn is ready to configure credentials outside this placeholder layer.</div>
+              <div className="text-[13px] text-equine-platinum/60 mb-4">Add a provider record when a barn is ready to configure credentials with its provider.</div>
               <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="integrations-empty-add">
                 <Plus className="w-4 h-4" /> Add first connection
               </button>
