@@ -69,6 +69,7 @@ from routes.operations import build_router as build_operations_router
 from routes.billing import build_router as build_billing_router
 from routes.membership import build_router as build_membership_router
 from routes.admin_review import build_router as build_admin_review_router
+from routes.subscriptions import build_router as build_subscriptions_router
 from routes.recurring_charges import build_router as build_recurring_charges_router
 from routes.system import build_router as build_system_router
 from routes.admin import build_router as build_admin_router
@@ -192,6 +193,12 @@ api_router.include_router(build_membership_router(
 
 # Admin marketplace review queue (routes/admin_review.py)
 api_router.include_router(build_admin_review_router(
+    db=db,
+    get_current_user=get_current_user,
+))
+
+# Phase 15.A — facility-level Stripe Subscriptions (routes/subscriptions.py)
+api_router.include_router(build_subscriptions_router(
     db=db,
     get_current_user=get_current_user,
 ))

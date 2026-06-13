@@ -146,6 +146,18 @@ def register_lifecycle(app, *, send_nudges):
         except Exception:
             logger.exception("Task engine startup failed")
 
+        # Phase 15.A — Stripe subscription catalog provisioning.
+        # Idempotent. In production this validates env-provided Price IDs and
+        # aborts startup on a miss; in dev it auto-creates Stripe Products and
+        # Prices tagged with metadata.equinesync_managed=true. Local `plans`
+        # collection is always upserted (even for Free + Enterprise which have
+        # no Stripe price).
+        try:
+            from core.billing_provisioning import ensure_stripe_catalog
+            await ensure_stripe_catalog(db)
+        except Exception:
+            logger.exception("Stripe catalog provisioning failed (15.A)")
+
         async def _materialize_loop():
             await asyncio.sleep(60)
             engine_loop = TaskEngine(db, _track)

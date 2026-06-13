@@ -2,7 +2,84 @@
 
 > See PRD.md tail for full history. This file is the rolling **most-recent** snapshot.
 
-## ✅ Phase 14 — Admin Review Queue + Billing Lifecycle + Trials (Feb 13 2026)
+## ✅ Phase 15.A — Subscription Billing Foundation (Feb 13 2026)
+
+**Approved scope only**: backend foundation, no frontend pricing UI changes.
+Locks: 1c · 2a · 3a · 4a · 5c · 6b.
+
+### Backend
+- `core/billing_provisioning.py` — Plan catalog (Free / Starter $49 / Pro $149 / Enterprise contact-sales).
+  - Dev/test: idempotent Stripe Product + Price provisioning via metadata.
+    Fail-open: local `plans` row always upserted even when Stripe call fails.
+  - Prod: validates `STRIPE_PRICE_*` env vars against Stripe; aborts startup
+    on miss/invalid.
+  - Hooked into `lifespan.on_startup`.
+- `routes/subscriptions.py` — 5 endpoints + minimal webhook:
+  - `GET  /api/billing/plans`
+  - `GET  /api/billing/usage` (barn-scoped, soft-warn-only, NO hard block)
+  - `POST /api/subscriptions/checkout` (Starter/Professional, monthly/annual,
+    14-day trial only when barn has no prior subscription, `barn:manage`)
+  - `POST /api/subscriptions/customer-portal` (`barn:manage`; 400 when no
+    Stripe customer on file yet)
+  - `GET  /api/subscriptions/me` (barn-scoped read)
+  - `POST /api/webhook/stripe-subscriptions` — **`checkout.session.completed`
+    ONLY**. Unknown event types → 200 + log + ignore (no `billing_events`
+    table yet; that's 15.B). Idempotent via `stripe_subscription_id`.
+- `barns` collection extended lazily: `stripe_customer_id`, `subscription_id`.
+- New collections: `plans`, `subscriptions`.
+- Phase 9 `invoices` + recurring-charges collections: **untouched** (locked).
+- `/api/membership/checkout` (one-time): **untouched + deprecated comment**
+  per lock. Free-tier short-circuit still works for the existing wizard.
+
+### Env (`.env`)
+- `STRIPE_WEBHOOK_SECRET=` — required in prod (warn-only in dev).
+- `STRIPE_PRICE_STARTER_MONTHLY=` / `_ANNUAL` — required in prod.
+- `STRIPE_PRICE_PROFESSIONAL_MONTHLY=` / `_ANNUAL` — required in prod.
+
+### Tests — 13/13 (`/app/backend/tests/test_subscriptions_15a.py`)
+- 4-tier catalog shape (Enterprise contact_sales=true, no Stripe IDs).
+- Usage endpoint barn-scoped, used/limit, non-blocking.
+- Checkout rejects Enterprise (400 "contact sales"), unknown tier, bad cycle.
+- Checkout requires `barn:manage`.
+- Checkout returns clear 500 when plan row lacks Stripe Price IDs (the dev
+  state since `sk_test_emergent` can't talk to raw Stripe).
+- Portal requires existing Stripe customer (400 with clear msg).
+- Portal requires `barn:manage`.
+- `/subscriptions/me` returns null when no subscription.
+- Webhook unknown events → 200 + handled:false.
+- Webhook `checkout.session.completed` idempotent on `stripe_subscription_id`.
+- Legacy `/membership/checkout` still works for free tier (no regression).
+
+All previous phases still green: 14 marketplace + 11 review-queue/lifecycle
++ 13 subscriptions-15A = **38/38** when run together.
+
+### ⚠️ Live key required to exercise Stripe end-to-end
+The current env uses `STRIPE_API_KEY=sk_test_emergent`, which is the
+`emergentintegrations` magic value. The raw `stripe` SDK rejects it.
+Phase 15.A code is correct and tested; once you paste a real Stripe test
+secret (`sk_test_...`) into `/app/backend/.env`, dev catalog provisioning
+will populate the `stripe_*_id` columns on the Starter/Professional plan
+rows, and the checkout endpoint will return real `https://checkout.stripe.com`
+URLs.
+
+## Next up
+- **Phase 15.B** — full webhook lifecycle: `customer.subscription.{created,
+  updated,deleted}`, `invoice.{created,finalized,paid,payment_failed}`,
+  `payment_intent.{succeeded,payment_failed}`. New collections:
+  `subscription_invoices`, `payments`, `billing_events` (idempotency table).
+- **Phase 15.C** — Facility Owner Billing Portal UI (`/billing` page), landing
+  pricing band swap, wizard Step 3 rewrite, monthly/annual toggle, resume
+  membership flow.
+- **Phase 15.D** — Trial email scheduler (idempotent `trial_emails_sent`
+  markers, env-gated, fail-open).
+- **Phase 15.E** — New platform-admin capability + Admin Billing Dashboard.
+- **Phase 15.F** — Soft-warn usage indicators in UI (still no hard-block).
+- **Phase 15.G** — Migration cleanup: remove `/membership/checkout` after one
+  cycle of zero traffic.
+
+## Phase 14 — Admin Review Queue + Billing Lifecycle MVP (Feb 13 2026)
+
+(See previous entry in PRD.md tail.)
 
 ### Backend
 - `routes/admin_review.py` — `GET /api/admin/review-queue` (pending), `…/history`,
