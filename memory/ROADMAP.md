@@ -2,6 +2,13 @@
 
 > See PRD.md tail for full history. This file is the rolling **most-recent** snapshot.
 
+## 🔒 Phase 15 hard rule (locked) — NO hard-blocking
+
+Throughout Phase 15.A → 15.G, feature enforcement is **soft-warn only**. No
+402 blocks on horse/user/storage limits. Usage endpoints surface counts and
+entitlements; UI surfaces banners + upgrade prompts. **Hard enforcement is
+its own separately approved phase.**
+
 ## ✅ Phase 15.A — Subscription Billing Foundation (Feb 13 2026)
 
 **Approved scope only**: backend foundation, no frontend pricing UI changes.

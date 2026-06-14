@@ -84,3 +84,38 @@ Goals:
 - Improve logging
 - Add monitoring
 - Prepare deployment checklist
+
+---
+
+## Phase 15: Subscription Billing v2 (True Stripe Subscriptions)
+
+**Locks**: 1c · 2a · 3a · 4a · 5c · 6b (consumer-marketplace MERGE; `facility_id = barn_id`; one user → one facility → one subscription; Enterprise = Contact Sales; soft-warn only; 14-day trial).
+
+### Hard rule — NO hard-blocking anywhere in Phase 15
+Throughout Phase 15.A → 15.G, feature enforcement is **soft-warn only**.
+No 402 responses. No create-flow blocking on horse/user/storage counts.
+Usage endpoints surface counts and entitlements; UI surfaces banners and
+upgrade prompts. **Hard enforcement is its own separately approved phase.**
+
+### Sub-phase sequence (locked)
+- **15.A** — Subscription foundation, backend-only. ✅ Shipped. Awaiting Codex review.
+- **15.B** — Full webhook lifecycle: idempotency table, `subscription_invoices`,
+  `payments`, lifecycle sync.
+- **15.C** — Facility Owner Billing Portal + pricing-band swap + wizard Step 3 +
+  monthly/annual toggle + resume flow + usage/limits display in billing UI.
+- **15.D** — Trial email scheduler (env-gated, idempotent, fail-open).
+- **15.E** — Platform-admin capability proposal + Admin Billing Dashboard
+  (`barn:manage` alone is NOT enough for cross-facility platform billing
+  visibility — a separate capability must be proposed and approved first).
+- **15.F** — Soft-warn usage indicators in create flows and other operational
+  UI surfaces. Still NO hard-blocking.
+- **15.G** — Migration cleanup after one quiet release cycle. **Do not** remove
+  `/membership/checkout` until telemetry/tests prove no usage.
+
+### Protected during Phase 15
+- Phase 9 `invoices` collection and recurring-charges flows are untouched.
+  Stripe subscription invoices land in a NEW collection (`subscription_invoices`)
+  in 15.B.
+- `/api/membership/checkout` (one-time Checkout) stays operational with a
+  deprecation comment until 15.G removes it.
+
