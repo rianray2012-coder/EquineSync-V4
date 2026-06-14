@@ -81,3 +81,25 @@ export const daysUntil = (iso) => {
   if (Number.isNaN(t)) return null;
   return Math.max(0, Math.ceil((t - Date.now()) / 86_400_000));
 };
+
+// Phase 15.C — Stripe price-ID readiness gate. `/api/billing/plans` returns
+// `has_monthly` / `has_annual` based on the presence of STRIPE_PRICE_*
+// environment variables on the backend. When false, `/api/subscriptions/
+// checkout` raises HTTP 500 ("missing a Stripe Price for cycle=…"). The UI
+// must disable any CTA that would otherwise hit that 500 and surface a
+// "Billing setup pending" message instead. Enterprise / contact-sales plans
+// are always considered un-checkoutable here — those use mailto.
+export const isPlanCheckoutable = (plan, cycle) => {
+  if (!plan || plan.contact_sales) return false;
+  if (cycle === "annual") return !!plan.has_annual;
+  if (cycle === "monthly") return !!plan.has_monthly;
+  return !!(plan.has_monthly || plan.has_annual);
+};
+
+// Returns the first available cycle for a plan, or null if none.
+export const firstAvailableCycle = (plan) => {
+  if (!plan || plan.contact_sales) return null;
+  if (plan.has_monthly) return "monthly";
+  if (plan.has_annual) return "annual";
+  return null;
+};

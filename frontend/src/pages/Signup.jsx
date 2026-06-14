@@ -5,7 +5,7 @@ import { api, tokens } from "../lib/api";
 import { Logo } from "../components/Logo";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react";
 import {
-  sortPlans, formatCents, annualSavingsPct,
+  sortPlans, formatCents, annualSavingsPct, isPlanCheckoutable,
 } from "../lib/subscriptionBilling";
 
 // Phase 15.C — these recommendations map the marketplace role pick (Step 0)
@@ -174,9 +174,18 @@ export default function Signup() {
         navigate("/dashboard");
         return;
       }
+      const selectedPlan = plans.find((p) => p.tier_code === tier);
+      // Phase 15.C — pick the safest cycle: prefer the user's selection, but
+      // fall back to whichever cycle is actually checkoutable. The Step 3 UI
+      // already disables the CTA when neither cycle is checkoutable, so by
+      // the time we get here at least one is guaranteed.
+      let cycleToUse = signupCycle;
+      if (!isPlanCheckoutable(selectedPlan, cycleToUse)) {
+        cycleToUse = signupCycle === "monthly" ? "annual" : "monthly";
+      }
       const { data } = await api.post("/subscriptions/checkout", {
         plan_tier_code: tier,
-        billing_cycle: signupCycle,
+        billing_cycle: cycleToUse,
         origin_url: window.location.origin,
       });
       if (data.url) {
@@ -556,16 +565,50 @@ export default function Signup() {
                   >
                     Contact sales <ArrowRight className="w-4 h-4" />
                   </a>
-                ) : (
-                  <button
-                    onClick={launchCheckout}
-                    disabled={submitting || !tier}
-                    className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
-                    data-testid="signup-start-trial"
-                  >
-                    {submitting ? "Starting…" : "Start 14-day free trial"} <ArrowRight className="w-4 h-4" />
-                  </button>
-                )}
+                ) : (() => {
+                  // Phase 15.C — gate the paid CTA on Stripe price-ID readiness
+                  // (has_monthly / has_annual from /api/billing/plans). When
+                  // neither cycle has a price ID, the backend would 500 on
+                  // /api/subscriptions/checkout; surface a "Billing setup
+                  // pending" message instead. When only one cycle is available
+                  // we silently force that cycle.
+                  const selectedPlan = plans.find((p) => p.tier_code === tier);
+                  const cycleOk = isPlanCheckoutable(selectedPlan, signupCycle);
+                  const noCycles = selectedPlan && !selectedPlan.contact_sales && !selectedPlan.has_monthly && !selectedPlan.has_annual;
+                  const otherCycle = signupCycle === "monthly" ? "annual" : "monthly";
+                  const otherOk = isPlanCheckoutable(selectedPlan, otherCycle);
+                  return (
+                    <div className="flex flex-col items-end gap-2">
+                      <button
+                        onClick={launchCheckout}
+                        disabled={submitting || !tier || noCycles || (!cycleOk && !otherOk)}
+                        className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                        data-testid="signup-start-trial"
+                      >
+                        {submitting ? "Starting…" : noCycles ? "Billing setup pending" : "Start 14-day free trial"}
+                        {!noCycles && <ArrowRight className="w-4 h-4" />}
+                      </button>
+                      {noCycles && (
+                        <div
+                          data-testid="signup-billing-setup-pending"
+                          className="text-equine-clay text-[12px] text-right max-w-[280px]"
+                        >
+                          Stripe pricing for {selectedPlan?.name || tier} is being configured.
+                          Pick a different plan or contact support to subscribe.
+                        </div>
+                      )}
+                      {!noCycles && !cycleOk && otherOk && (
+                        <div
+                          data-testid="signup-cycle-fallback-hint"
+                          className="text-white/60 text-[12px] text-right max-w-[280px]"
+                        >
+                          {signupCycle === "monthly" ? "Monthly" : "Annual"} pricing for {selectedPlan?.name || tier} isn&apos;t available yet —
+                          we&apos;ll start you on {otherCycle} instead.
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           )}

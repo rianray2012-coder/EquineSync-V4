@@ -30,6 +30,7 @@ import { BrandLoader } from "../components/BrandLoader";
 import {
   STATUS_LABEL, STATUS_TONE, RESUMABLE_STATUSES,
   SUBSCRIBABLE_TIERS, sortPlans, formatCents, annualSavingsPct, daysUntil,
+  isPlanCheckoutable,
 } from "../lib/subscriptionBilling";
 
 const fmtDate = (iso) => {
@@ -107,6 +108,16 @@ export default function SubscriptionBilling() {
     }
   }, []);
 
+  // Phase 15.C — guard against a 500 from /subscriptions/checkout when the
+  // backend `plans` row is missing its STRIPE_PRICE_* IDs. Surface a
+  // "Billing setup pending" state instead of letting the user click into a
+  // server error. Memoized above the early-return so hook order stays stable.
+  const planTier = me?.subscription?.plan_tier_code || usage?.plan_tier_code || "free";
+  const currentPlan = useMemo(
+    () => plans.find((p) => p.tier_code === planTier) || null,
+    [plans, planTier],
+  );
+
   if (loading) {
     return (
       <div data-testid="subscription-billing-page" className="pb-20 lg:pb-8">
@@ -117,10 +128,13 @@ export default function SubscriptionBilling() {
 
   const sub = me?.subscription || null;
   const status = sub?.status || (usage?.plan_tier_code === "free" ? "free" : null);
-  const planTier = sub?.plan_tier_code || usage?.plan_tier_code || "free";
   const isResumable = sub && RESUMABLE_STATUSES.has(sub.status);
   const isTrialing = sub?.status === "trialing";
   const trialDays = isTrialing ? daysUntil(sub?.trial_end) : null;
+
+  const resumeMonthlyOk = isPlanCheckoutable(currentPlan, "monthly");
+  const resumeAnnualOk = isPlanCheckoutable(currentPlan, "annual");
+  const resumePending = isResumable && SUBSCRIBABLE_TIERS.has(planTier) && !resumeMonthlyOk && !resumeAnnualOk;
 
   return (
     <div data-testid="subscription-billing-page" className="pb-20 lg:pb-8">
@@ -173,25 +187,35 @@ export default function SubscriptionBilling() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
-              {SUBSCRIBABLE_TIERS.has(planTier) && (
+              {SUBSCRIBABLE_TIERS.has(planTier) && !resumePending && (
                 <>
                   <button
                     onClick={() => launchCheckout(planTier, "monthly")}
-                    disabled={busyAction.startsWith("checkout:")}
+                    disabled={busyAction.startsWith("checkout:") || !resumeMonthlyOk}
                     data-testid={`subscription-resume-${planTier}-monthly`}
-                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium bg-equine-navy text-white hover:bg-equine-navyLift disabled:opacity-50 transition-colors inline-flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium bg-equine-navy text-white hover:bg-equine-navyLift disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5"
+                    title={resumeMonthlyOk ? "Resume on the monthly cycle" : "Monthly cycle is unavailable for this plan"}
                   >
                     Resume monthly <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => launchCheckout(planTier, "annual")}
-                    disabled={busyAction.startsWith("checkout:")}
+                    disabled={busyAction.startsWith("checkout:") || !resumeAnnualOk}
                     data-testid={`subscription-resume-${planTier}-annual`}
-                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15 disabled:opacity-50 transition-colors inline-flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15 disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5"
+                    title={resumeAnnualOk ? "Resume on the annual cycle" : "Annual cycle is unavailable for this plan"}
                   >
                     Resume annual
                   </button>
                 </>
+              )}
+              {resumePending && (
+                <div
+                  data-testid="subscription-resume-billing-setup-pending"
+                  className="text-[12px] text-equine-amber bg-equine-amber/10 border border-equine-amber/30 rounded-full px-4 py-2 inline-flex items-center gap-1.5"
+                >
+                  <AlertTriangle className="w-3.5 h-3.5" /> Billing setup pending — contact support to resume
+                </div>
               )}
             </div>
           </div>
@@ -396,7 +420,15 @@ function UsageMeter({ label, used, limit, testid }) {
 }
 
 function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyAction }) {
-  const [cycle, setCycle] = useState("monthly");
+  // Phase 15.C — auto-snap the toggle to whichever cycle is actually
+  // checkoutable so the user never lands on a disabled CTA by default. Falls
+  // back to "monthly" for contact-sales plans (where the toggle is hidden).
+  const initialCycle = plan.has_monthly
+    ? "monthly"
+    : plan.has_annual
+    ? "annual"
+    : "monthly";
+  const [cycle, setCycle] = useState(initialCycle);
   const monthly = plan.monthly_price_cents;
   const annual = plan.annual_price_cents;
   const savings = annualSavingsPct(plan);
@@ -405,17 +437,24 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
   const contactSales = !!plan.contact_sales;
   const checkoutKey = `checkout:${plan.tier_code}:${cycle}`;
   const busy = busyAction === checkoutKey;
+  const checkoutable = isPlanCheckoutable(plan, cycle);
+  const noCyclesAvailable = !contactSales && !plan.has_monthly && !plan.has_annual;
 
   const handleClick = () => {
     if (contactSales) {
       window.location.assign("mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry");
       return;
     }
+    if (!checkoutable) return; // safety — CTA is disabled in this state
     onCheckout(plan.tier_code, cycle);
   };
 
   const ctaCopy = contactSales
     ? "Contact sales"
+    : noCyclesAvailable
+    ? "Billing setup pending"
+    : !checkoutable
+    ? `${cycle === "monthly" ? "Monthly" : "Annual"} unavailable`
     : isCurrentCycle
     ? "Current plan"
     : isCurrent
@@ -423,6 +462,8 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
     : busy
     ? "Opening…"
     : `Switch to ${plan.name || plan.tier_code}`;
+
+  const ctaDisabled = busy || isCurrentCycle || (!contactSales && !checkoutable);
 
   return (
     <Card
@@ -520,7 +561,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
 
       <button
         onClick={handleClick}
-        disabled={busy || isCurrentCycle}
+        disabled={ctaDisabled}
         data-testid={`plan-cta-${plan.tier_code}`}
         className={`w-full text-[12.5px] tracking-wide font-medium py-2.5 rounded-full transition-colors inline-flex items-center justify-center gap-1.5 ${
           isCurrentCycle
@@ -528,10 +569,18 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
             : isCurrent || contactSales
             ? "border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15"
             : "bg-equine-navy text-white hover:bg-equine-navyLift"
-        } disabled:opacity-60`}
+        } disabled:opacity-60 disabled:cursor-not-allowed`}
       >
-        {ctaCopy} {!isCurrentCycle && <ArrowRight className="w-3.5 h-3.5" />}
+        {ctaCopy} {!isCurrentCycle && checkoutable && !contactSales && <ArrowRight className="w-3.5 h-3.5" />}
       </button>
+      {noCyclesAvailable && (
+        <div
+          data-testid={`plan-billing-setup-pending-${plan.tier_code}`}
+          className="mt-2 text-[11px] text-equine-amber leading-snug"
+        >
+          Stripe pricing for this plan is being configured. Contact support to subscribe.
+        </div>
+      )}
     </Card>
   );
 }
