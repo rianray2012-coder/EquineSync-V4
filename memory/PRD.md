@@ -967,7 +967,7 @@ particularly careful scoping (which mutations, what confirmation steps,
 audit metadata shape, soft-delete vs hard-delete defaults, role-change
 gating, cross-barn leakage prevention, and idempotency).
 
-## 🔐 Equine·Sync Admin Portal — Phase Admin-3 ✅ (Feb 14 2026)
+## 🔐 Equine·Sync Admin Portal — Phase Admin-3 ✅ **CODEX-APPROVED & LOCKED** (Feb 14 2026)
 
 First mutation surface in the Admin Portal — user approvals + user
 management. Tightly scoped, fully audit-logged, idempotent where
@@ -1065,3 +1065,31 @@ Admin-4 remains gated.
 | Admin-5 | Subscription + billing read-only control center               | ⏸ Gated |
 | Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
+
+**Codex sign-off received Feb 14 2026 (round-3, after shared
+`backend/core/auth.py::get_current_user` suspension-enforcement fix).**
+Final package: `/app/phase_admin_3_changes.zip` (41 KB, 11 files,
+includes the previously-missing `backend/core/auth.py`).
+Final test count: **33/33 green** in
+`backend/tests/test_admin_portal_admin3.py` including the new
+`test_suspended_user_blocked_on_shared_core_auth_product_endpoint`
+regression that hits `/api/horses` to prove the gate is canonical.
+
+### Admin Portal — Phase Status (post Admin-3 lock)
+
+| Phase   | Scope                                                        | Status |
+|---------|--------------------------------------------------------------|--------|
+| Admin-1 | Shell + access boundary                                       | ✅ Codex-approved & locked |
+| Admin-2 | Read-only dashboard + activity + sub health                   | ✅ Codex-approved & locked |
+| Admin-3 | User approvals + user management (first mutations)            | ✅ **Codex-approved & locked** |
+| Admin-4 | Facility / barn management                                    | ⏸ **Gated** — does NOT start until founder provides Admin-4 plan |
+| Admin-5 | Subscription + billing read-only control center               | ⏸ Gated |
+| Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
+| Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
+
+⛔ **Admin-4 work is suspended.** Per the founder gating rule, no
+implementation begins until a pre-approved Admin-4 plan is provided.
+Admin-4 introduces the second mutation surface (facility edits + soft
+disable) — worth particularly careful scoping around cross-facility
+data isolation, billing-relationship side effects, and what a
+"soft-disabled" facility means for tenant-scoped queries.
