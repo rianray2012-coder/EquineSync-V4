@@ -418,6 +418,179 @@ def test_each_mutation_writes_audit_log_with_before_after(db):
     assert "@" not in str(meta.get("target_email_masked") or "")
 
 
+# ---------------------------------------------------------------------
+# Codex round-1 (Admin-3) blocker — suspension MUST be real, not cosmetic
+# ---------------------------------------------------------------------
+def test_suspended_user_cannot_access_protected_endpoint_with_existing_token(db):
+    """Codex blocker: a user who was holding a valid token when an admin
+    suspended them MUST lose access on the very next protected request.
+
+    Steps:
+      1. Sign up target → get a working token.
+      2. Verify the target can hit /auth/me (sanity).
+      3. Admin suspends the target.
+      4. SAME token must now be rejected (401).
+    """
+    actor = _admin_session(db, "platform_admin")
+    target = _pending_target()
+    target_h = _bearer(target)
+    me_ok = requests.get(f"{API}/auth/me", headers=target_h, timeout=10)
+    assert me_ok.status_code == 200, "Target should be able to read /auth/me before suspend."
+
+    s = requests.post(
+        f"{API}/admin/portal/users/{target['user']['id']}/suspend",
+        headers=_bearer(actor), json={}, timeout=10,
+    )
+    assert s.status_code == 200
+    assert s.json().get("account_status") == "suspended"
+
+    # Same token, immediately after suspend.
+    me_blocked = requests.get(f"{API}/auth/me", headers=target_h, timeout=10)
+    assert me_blocked.status_code == 401, (
+        f"Suspended user with valid token should be 401, got {me_blocked.status_code}: {me_blocked.text}"
+    )
+
+
+def test_suspended_user_cannot_log_in(db):
+    """Codex blocker: /auth/login must reject suspended accounts, even
+    with correct credentials. Response is the generic 401 'Invalid
+    credentials' so a probe can't distinguish suspended vs bad password.
+    """
+    # Sign up fresh target with a known password.
+    email = f"adm3_susp_login_{uuid.uuid4().hex[:8]}@example.com"
+    pw = "securepass1"
+    r = requests.post(
+        f"{API}/auth/signup",
+        json={"email": email, "password": pw, "full_name": "Suspend Login Test",
+              "role": "horse_owner"},
+        timeout=15,
+    )
+    assert r.status_code == 200
+    target_id = r.json()["user"]["id"]
+
+    # Sanity: login works.
+    ok = requests.post(f"{API}/auth/login", json={"email": email, "password": pw}, timeout=15)
+    assert ok.status_code == 200
+
+    # Admin suspends.
+    actor = _admin_session(db, "platform_admin")
+    s = requests.post(
+        f"{API}/admin/portal/users/{target_id}/suspend",
+        headers=_bearer(actor), json={}, timeout=10,
+    )
+    assert s.status_code == 200
+
+    # Login with correct creds must now 401.
+    blocked = requests.post(
+        f"{API}/auth/login",
+        json={"email": email, "password": pw}, timeout=15,
+    )
+    assert blocked.status_code == 401, (
+        f"Suspended user login should be 401, got {blocked.status_code}: {blocked.text}"
+    )
+
+
+def test_suspended_user_refresh_token_is_rejected(db):
+    """Codex blocker: refresh-token flow must NOT mint a fresh session
+    for a suspended user — and outstanding refresh tokens for the user
+    should be revoked at suspend time (defense-in-depth)."""
+    # Fresh signup → get a refresh_token from /auth/login.
+    email = f"adm3_susp_refresh_{uuid.uuid4().hex[:8]}@example.com"
+    pw = "securepass1"
+    requests.post(
+        f"{API}/auth/signup",
+        json={"email": email, "password": pw, "full_name": "Refresh Test",
+              "role": "horse_owner"},
+        timeout=15,
+    )
+    login = requests.post(f"{API}/auth/login",
+                          json={"email": email, "password": pw}, timeout=15)
+    assert login.status_code == 200
+    body = login.json()
+    refresh_token = body["refresh_token"]
+    target_id = body["user"]["id"]
+
+    # Suspend.
+    actor = _admin_session(db, "platform_admin")
+    s = requests.post(
+        f"{API}/admin/portal/users/{target_id}/suspend",
+        headers=_bearer(actor), json={}, timeout=10,
+    )
+    assert s.status_code == 200
+
+    # The refresh-token row should have been revoked at suspend time.
+    rt_row = db.refresh_tokens.find_one({"user_id": target_id})
+    if rt_row is not None:
+        # If the collection exists, the row must be revoked.
+        assert rt_row.get("revoked_at") is not None, (
+            "Suspend must revoke outstanding refresh tokens (defense-in-depth)."
+        )
+
+    # /auth/refresh with the (revoked + suspended-owner) token → 401.
+    rsp = requests.post(f"{API}/auth/refresh",
+                        json={"refresh_token": refresh_token}, timeout=10)
+    assert rsp.status_code == 401, (
+        f"Suspended user refresh should be 401, got {rsp.status_code}: {rsp.text}"
+    )
+
+
+def test_reactivate_restores_login_and_protected_access(db):
+    """Codex blocker: reactivate must fully restore access — both
+    /auth/login AND a brand-new protected request via the fresh token."""
+    email = f"adm3_react_{uuid.uuid4().hex[:8]}@example.com"
+    pw = "securepass1"
+    requests.post(
+        f"{API}/auth/signup",
+        json={"email": email, "password": pw, "full_name": "React Test",
+              "role": "horse_owner"},
+        timeout=15,
+    )
+    login1 = requests.post(f"{API}/auth/login",
+                            json={"email": email, "password": pw}, timeout=15).json()
+    target_id = login1["user"]["id"]
+
+    actor = _admin_session(db, "platform_admin")
+    h = _bearer(actor)
+
+    # Suspend → confirm login blocked.
+    requests.post(f"{API}/admin/portal/users/{target_id}/suspend",
+                  headers=h, json={}, timeout=10)
+    blocked = requests.post(f"{API}/auth/login",
+                            json={"email": email, "password": pw}, timeout=15)
+    assert blocked.status_code == 401
+
+    # Reactivate → login should succeed and the fresh token must work.
+    re = requests.post(f"{API}/admin/portal/users/{target_id}/reactivate",
+                       headers=h, json={}, timeout=10)
+    assert re.status_code == 200
+    assert re.json().get("account_status") == "active"
+
+    login2 = requests.post(f"{API}/auth/login",
+                           json={"email": email, "password": pw}, timeout=15)
+    assert login2.status_code == 200
+    new_token = login2.json()["token"]
+
+    me = requests.get(f"{API}/auth/me",
+                      headers={"Authorization": f"Bearer {new_token}"}, timeout=10)
+    assert me.status_code == 200
+
+
+def test_suspend_response_is_generic_for_existing_token(db):
+    """The /auth/me 401 response for a suspended token must not disclose
+    'suspended' / 'banned' / 'disabled' specifically — generic only."""
+    actor = _admin_session(db, "platform_admin")
+    target = _pending_target()
+    requests.post(f"{API}/admin/portal/users/{target['user']['id']}/suspend",
+                  headers=_bearer(actor), json={}, timeout=10)
+    rsp = requests.get(f"{API}/auth/me", headers=_bearer(target), timeout=10)
+    assert rsp.status_code == 401
+    body_text = (rsp.text or "").lower()
+    for leaked in ("suspended", "banned", "disabled", "blocked"):
+        assert leaked not in body_text, (
+            f"401 response leaked status keyword '{leaked}': {body_text!r}"
+        )
+
+
 def test_idempotent_mutation_does_NOT_double_audit(db):
     """A no-op re-approve must not create a second audit entry."""
     actor = _admin_session(db, "platform_admin")

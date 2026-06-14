@@ -113,6 +113,12 @@ def make_current_user_dependency(db):
         user = await db.users.find_one({"id": payload["sub"]}, {"_id": 0, "password_hash": 0})
         if not user:
             raise HTTPException(status_code=401, detail="User not found")
+        # Admin-3 (round-2 Codex blocker): suspended users must lose
+        # access on the NEXT request — existing tokens stop working as
+        # soon as the suspend mutation lands. The response stays generic
+        # to avoid disclosing the reason to a probing client.
+        if (user.get("account_status") or "").strip().lower() == "suspended":
+            raise HTTPException(status_code=401, detail="Session unavailable")
         # Defense-in-depth: block unverified users when enforcement is on, even
         # if they hold a pre-issued token. Missing field => treated as verified.
         if not user_verification_ok(user):
@@ -461,6 +467,17 @@ def build_router(db) -> APIRouter:
         # Successful auth — clear any failed-attempt history.
         if login_lockout_enabled():
             await clear_attempts(db, email)
+        # Admin-3 (round-2 Codex blocker): block login for suspended
+        # accounts. Generic 401 so a probing client cannot distinguish
+        # bad password vs suspended account; the audit row carries the
+        # real reason for the operations team.
+        if (user.get("account_status") or "").strip().lower() == "suspended":
+            await audit.record(
+                action="auth.login.failure", user=user, request=request,
+                resource_type="session", outcome="denied", status_code=401,
+                metadata={"reason": "account_suspended"},
+            )
+            raise HTTPException(401, "Invalid credentials")
         # Email-verification gate is OFF by default (ENFORCE_EMAIL_VERIFICATION).
         # Missing field is treated as verified so existing users are never locked out.
         if enforce_email_verification() and not user.get("email_verified", True):
@@ -486,6 +503,18 @@ def build_router(db) -> APIRouter:
         res = await consume_refresh_token(db, body.refresh_token)
         user = res["user"]
         old = res["record"]
+        # Admin-3 (round-2 Codex blocker): a suspended user MUST NOT
+        # receive a fresh session via refresh. Revoke the consumed
+        # refresh token (already done by consume) and the in-flight
+        # rotation here, then 401 with the same generic message.
+        if (user.get("account_status") or "").strip().lower() == "suspended":
+            await revoke_refresh_token(db, body.refresh_token)
+            await audit.record(
+                action="auth.token.refresh_denied", user=user, request=request,
+                resource_type="session", outcome="denied", status_code=401,
+                metadata={"reason": "account_suspended"},
+            )
+            raise HTTPException(401, "Session unavailable")
         await revoke_refresh_token(db, body.refresh_token)
         token = create_token(user["id"], user["role"], resolve_barn_id(user))
         ua, ip = await client_meta(request)

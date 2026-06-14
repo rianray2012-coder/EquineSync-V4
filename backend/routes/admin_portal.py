@@ -725,11 +725,28 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "suspended_at": datetime.now(timezone.utc).isoformat(),
             "suspended_by": user["id"],
         }
-        return await _apply_user_mutation(
+        result = await _apply_user_mutation(
             user_id=user_id, action="suspend", actor=user, request=request,
             set_doc=set_doc,
             noop_when={"account_status": "suspended"},
         )
+        # Admin-3 (round-2 Codex blocker): suspension MUST be real, not
+        # cosmetic. Revoke every outstanding refresh token for the target
+        # so the suspended user cannot mint a new session via refresh
+        # after their current access token expires. The get_current_user
+        # gate already blocks the LIVE token on the next request — this
+        # closes the refresh window. Best-effort: if the collection is
+        # missing or the call errors we still return success on suspend.
+        if not result.get("_noop"):
+            try:
+                await db.refresh_tokens.update_many(
+                    {"user_id": user_id, "revoked_at": None},
+                    {"$set": {"revoked_at": datetime.now(timezone.utc).isoformat(),
+                              "revoked_reason": "admin.user.suspend"}},
+                )
+            except Exception:
+                logger.exception("admin.user.suspend: refresh-token revoke failed")
+        return result
 
     @router.post("/admin/portal/users/{user_id}/reactivate")
     async def reactivate_user(user_id: str, request: Request, user=Depends(get_current_user)):

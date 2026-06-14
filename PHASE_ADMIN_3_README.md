@@ -1,10 +1,68 @@
 # Phase Admin-3 — User Approvals + User Management
 
-**Status:** Ready for Codex round-1 review.
+**Status:** Round-2 fixes applied — suspension is now REAL, not cosmetic.
 **Date:** Feb 14, 2026.
 **Scope:** First Admin Portal MUTATION surface. Approve / reject /
 request-info / suspend / reactivate. **No hard delete.** No billing or
 subscription mutations. No platform_role mutations (CLI only).
+
+---
+
+## 🛠 Round-1 Codex feedback addressed
+
+**Blocker — Suspend was cosmetic.** The Admin-3 endpoint flipped
+`account_status="suspended"` but the auth layer never read that field,
+so suspended users kept their working tokens and could still log in.
+
+**Fix applied — small, audited touch in `routes/auth.py`** + a
+defense-in-depth refresh-token revoke at suspend time. The Admin
+Portal's "Suspend" button is now a real session-kill, not a label:
+
+1. **`make_current_user_dependency` (`routes/auth.py`)** — after fetching
+   the user from Mongo, rejects with `401 "Session unavailable"` when
+   `account_status=="suspended"`. Every protected endpoint inherits
+   this gate via `Depends(get_current_user)`. Response is intentionally
+   generic so a probing client can't distinguish suspended vs invalid
+   token.
+2. **`POST /api/auth/login`** — after credential check + lockout clear,
+   the same suspended check kicks in and returns the generic
+   `401 "Invalid credentials"` (so a probe can't distinguish suspended
+   vs bad password). The audit row carries the real reason
+   (`metadata.reason = "account_suspended"`).
+3. **`POST /api/auth/refresh`** — refuses to mint a fresh session for
+   a suspended user; revokes the consumed refresh token; emits
+   `auth.token.refresh_denied`.
+4. **`POST /api/admin/portal/users/{id}/suspend`** — on every NON-noop
+   suspend, bulk-revokes every outstanding refresh-token row for the
+   target user (`revoked_at` + `revoked_reason="admin.user.suspend"`).
+   Defense-in-depth: closes the refresh window even if a token leaked
+   to a malicious client before the suspend.
+5. **`reactivate`** unchanged on the auth side — flipping
+   `account_status` back to `"active"` automatically lifts every gate
+   above. The user can log in again immediately.
+
+**Note:** this required touching `routes/auth.py`, which had been
+deliberately untouched since Admin-1. Per the Admin-3 plan ("`suspend/
+reactivate` has to be real") and the founder direction in the round-1
+feedback, this is the small, scoped auth-enforcement touch that makes
+the first mutation surface trustworthy. No changes to login lockout,
+email-verification gate, JWT signing, refresh-token rotation, or any
+Phase 9 / Phase 15 surface.
+
+**Five new regression tests in `tests/test_admin_portal_admin3.py`:**
+1. `test_suspended_user_cannot_access_protected_endpoint_with_existing_token` —
+   target signs in, hits `/auth/me` (200), admin suspends → SAME token
+   on `/auth/me` is now 401.
+2. `test_suspended_user_cannot_log_in` — correct credentials + suspended
+   account → generic `401 "Invalid credentials"`.
+3. `test_suspended_user_refresh_token_is_rejected` — `/auth/refresh` with
+   a previously-valid refresh token returns 401; the refresh-token
+   collection row is revoked at suspend time.
+4. `test_reactivate_restores_login_and_protected_access` — full
+   round-trip: suspend (blocked) → reactivate → login succeeds → new
+   token hits `/auth/me` (200).
+5. `test_suspend_response_is_generic_for_existing_token` — the
+   401 body must not leak "suspended"/"banned"/"disabled"/"blocked".
 
 ---
 
@@ -33,6 +91,11 @@ subscription mutations. No platform_role mutations (CLI only).
 | 19 | Destructive/sensitive actions require confirmation modal | ✅ |
 | 20 | All tables paginated | ✅ cursor pagination |
 | 21 | No Phase 9 / Phase 15 changes | ✅ |
+| 22 | **Suspend is REAL — existing tokens stop working** | ✅ NEW round-2 — verified by test |
+| 23 | **Suspended users cannot log in** | ✅ NEW round-2 — verified by test |
+| 24 | **Refresh-token flow refuses suspended users** | ✅ NEW round-2 — verified by test |
+| 25 | **Reactivate fully restores access** | ✅ NEW round-2 — verified by test |
+| 26 | **401 response is generic (no "suspended" leak)** | ✅ NEW round-2 — verified by test |
 
 ---
 
@@ -99,12 +162,14 @@ from the Admin-2 activity feed per the round-2 self-flood fix).
 ```
 cd /app/backend
 python -m pytest tests/test_admin_portal_admin3.py -v
-# 27 passed in 39.69s
+# 32 passed in 48.79s  (was 27, +5 round-2 suspension-enforcement regressions)
 
+# Full Admin Portal suite:
 python -m pytest tests/test_admin_portal_admin1.py \
                  tests/test_admin_portal_admin2.py \
-                 tests/test_admin_portal_admin3.py
-# 60 passed
+                 tests/test_admin_portal_admin3.py \
+                 tests/test_core_auth_verification_gate.py
+# 74 passed
 ```
 
 Critical invariants (subset):
@@ -130,11 +195,17 @@ Frontend live-DOM verification:
 
 ## 📦 Files changed
 
-**Backend (additive — extends Admin-2 router):**
+**Backend (additive — extends Admin-2 router; +small auth-enforcement touch in round-2):**
 - `backend/routes/admin_portal.py` — adds role matrix, safe field
   projection, `_apply_user_mutation` helper, 3 new GET + 5 new POST
-  endpoints.
-- `backend/tests/test_admin_portal_admin3.py` — **NEW** 27 tests.
+  endpoints, and the round-2 bulk refresh-token revoke at suspend time.
+- `backend/routes/auth.py` — **round-2 auth-enforcement touch**:
+  `make_current_user_dependency` blocks `account_status="suspended"`,
+  `/auth/login` blocks suspended creds with the generic 401,
+  `/auth/refresh` refuses suspended users and revokes the consumed
+  token.
+- `backend/tests/test_admin_portal_admin3.py` — 32 tests (27 original
+  + 5 round-2 suspension-enforcement regressions).
 
 **Frontend (additive — extends Admin-1 shell):**
 - `frontend/src/pages/admin/AdminUsers.jsx` — **NEW** table page.
