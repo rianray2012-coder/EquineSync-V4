@@ -966,3 +966,102 @@ Admin-3 is the FIRST mutation surface in the Admin Portal — it deserves
 particularly careful scoping (which mutations, what confirmation steps,
 audit metadata shape, soft-delete vs hard-delete defaults, role-change
 gating, cross-barn leakage prevention, and idempotency).
+
+## 🔐 Equine·Sync Admin Portal — Phase Admin-3 ✅ (Feb 14 2026)
+
+First mutation surface in the Admin Portal — user approvals + user
+management. Tightly scoped, fully audit-logged, idempotent where
+reasonable, and gated by a strict platform-role matrix.
+
+**Backend (extends `routes/admin_portal.py`):**
+
+Read endpoints:
+- `GET /api/admin/portal/users` — paginated (cursor+limit), filters
+  (`q`, `role`, `role_status`, `platform_role`, `barn_id`, date range),
+  safe field projection only (no `password_hash`, no tokens).
+- `GET /api/admin/portal/users/{id}` — safe profile + barn summary +
+  horses count/recent + last 10 audit entries that reference the user.
+  Generic 404 for missing/unauthorized.
+- `GET /api/admin/portal/approvals` — `role_status="pending_review"` queue.
+
+Mutation endpoints (all funnel through one `_apply_user_mutation`
+helper for uniform audit + idempotency):
+- `POST .../users/{id}/approve`        → `role_status="active"` (+ optional barn assignment with existence check)
+- `POST .../users/{id}/reject`         → `role_status="rejected"` + optional capped note
+- `POST .../users/{id}/request-info`   → stamps `info_requested_at` + note; status STAYS pending
+- `POST .../users/{id}/suspend`        → `account_status="suspended"`
+- `POST .../users/{id}/reactivate`     → `account_status="active"`
+
+**Platform-role matrix (enforced by `_check_user_mutation_allowed`):**
+
+| Role               | Approve | Reject | Request-info | Suspend | Reactivate |
+|--------------------|---------|--------|--------------|---------|------------|
+| `super_admin`      | ✅      | ✅     | ✅           | ✅      | ✅         |
+| `platform_admin`   | ✅¹     | ✅¹    | ✅¹          | ✅¹     | ✅¹        |
+| `support_admin`    | ❌      | ❌     | ✅           | ❌      | ❌         |
+| `billing_admin`    | ❌      | ❌     | ❌           | ❌      | ❌         |
+| `read_only_auditor`| ❌      | ❌     | ❌           | ❌      | ❌         |
+
+¹ except cannot touch a `super_admin` target. **No admin can act on
+their own account.**
+
+**Audit shape (every mutation):**
+- Action: `admin.user.{approve|reject|request_info|suspend|reactivate}`
+- Resource: `user/{id}`
+- Metadata: `{before: {role_status, account_status}, after: same,
+  note_present: bool, target_email_masked: "abc…"}`
+- Note text itself NEVER stored in audit metadata (privacy).
+- Idempotent no-op mutations do NOT double-audit.
+
+**Frontend (extends `pages/admin/*`):**
+- `AdminUsers.jsx` — searchable, filterable, paginated table with
+  cursor pagination. Row click opens drawer.
+- `AdminApprovals.jsx` — pending-review queue, reuses the drawer.
+- `UserDetailDrawer.jsx` — safe profile, barn + horses + recent audit.
+  **Mutation buttons render ONLY when the actor's platform role
+  permits them on the target** (mirrors backend matrix exactly).
+- `ConfirmActionModal.jsx` — generic confirm/note prompt;
+  client-side 500-char cap; cancel always available.
+- `UserStatusBadge.jsx` — status pills in approved palette only.
+- All new components use **only** `equinesync.{graphite,slate,frost,
+  lilac}` tokens (verified by extended source-check regression).
+
+**Tests:** `tests/test_admin_portal_admin3.py` — **27/27 green**:
+access boundary (4), strip-sensitive-fields, search/filter/pagination
+(3), generic 404, approvals queue, **role matrix parametrised across
+5 platform roles × 2 mutation classes**, self-action denied, no
+mutation of super_admin by lower roles, idempotent approve / reject
+/ suspend-reactivate, barn validation, request-info preserves
+status, note cap, audit before/after + no-double-audit invariant.
+
+**Regression:** 14/14 Admin-1 + 19/19 Admin-2 + 27/27 Admin-3 = **60/60
+green**. Phase 9 / Phase 15 untouched.
+
+**Strict guardrails honored:**
+- ✅ NO hard delete. All "destructive" actions are soft + reversible.
+- ✅ NO Phase 9 / Phase 15 mutations.
+- ✅ NO platform_role mutation surface (deferred per plan; only the
+  CLI bootstrap script can change platform_role).
+- ✅ NO password / hash / token / JWT / Stripe-ID leakage (explicit
+  safe Mongo projection).
+- ✅ Read-only platform roles see NO mutation buttons (visibility =
+  permission, mirrored client+server).
+- ✅ Notes capped 500 chars + raw note never in audit metadata.
+- ✅ Approved palette only (zero red/amber/green tokens — verified
+  live in DOM scan).
+- ✅ All denial paths audit-logged via `core.audit.record_denial`.
+
+**Packaged:** `/app/phase_admin_3_changes.zip` for Codex review.
+Admin-4 remains gated.
+
+### Admin Portal — Phase Status (post Admin-3)
+
+| Phase   | Scope                                                        | Status |
+|---------|--------------------------------------------------------------|--------|
+| Admin-1 | Shell + access boundary                                       | ✅ Codex-approved & locked |
+| Admin-2 | Read-only dashboard + activity + sub health                   | ✅ Codex-approved & locked |
+| Admin-3 | User approvals + user management (first mutations)            | ✅ Ready for Codex review |
+| Admin-4 | Facility / barn management                                    | ⏸ Gated |
+| Admin-5 | Subscription + billing read-only control center               | ⏸ Gated |
+| Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
+| Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
