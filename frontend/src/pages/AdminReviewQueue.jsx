@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { api } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
-import { CheckCircle2, XCircle, Clock, AlertCircle, Loader2 } from "lucide-react";
+import { CheckCircle2, XCircle, Clock, AlertCircle, Loader2, KeyRound, X } from "lucide-react";
 
 const ROLE_LABEL = {
   trainer: "Trainer",
@@ -10,6 +10,13 @@ const ROLE_LABEL = {
   horse_owner: "Horse Owner",
   rider: "Rider",
 };
+
+// Phase 15.E — roles that are candidates for facility-access elevation.
+// `barn_manager` and `admin` already have `barn:manage`, so the button is
+// hidden for them.
+const ELEVATION_ELIGIBLE_ROLES = new Set([
+  "barn_owner", "trainer", "service_provider",
+]);
 
 export default function AdminReviewQueue() {
   const { user } = useAuth();
@@ -23,6 +30,8 @@ export default function AdminReviewQueue() {
   const [busyId, setBusyId] = useState(null);
   const [rejectingId, setRejectingId] = useState(null);
   const [rejectReason, setRejectReason] = useState("");
+  // Phase 15.E — grant-facility-access modal state.
+  const [grantingUser, setGrantingUser] = useState(null);
 
   const fetchData = useCallback(async () => {
     try {
@@ -121,7 +130,25 @@ export default function AdminReviewQueue() {
       <div className="space-y-3" data-testid="review-list">
         {items.map((u) => {
           const decided = u.role_status === "approved" || u.role_status === "rejected";
-          return (
+          return renderRow(u, decided);
+        })}
+      </div>
+
+      {grantingUser && (
+        <GrantFacilityAccessModal
+          target={grantingUser}
+          onClose={() => setGrantingUser(null)}
+          onGranted={async () => {
+            setGrantingUser(null);
+            await fetchData();
+          }}
+        />
+      )}
+    </div>
+  );
+
+  function renderRow(u, decided) {
+    return (
             <div
               key={u.id}
               className="border border-white/10 rounded-xl p-5 bg-equine-navy/30 flex flex-col md:flex-row md:items-center gap-4"
@@ -169,7 +196,27 @@ export default function AdminReviewQueue() {
                     Decided {new Date(u.review_decided_at).toLocaleString()}
                   </div>
                 )}
+                {u.role === "barn_manager" && u.barn_id && (
+                  <div className="text-[11px] text-equine-saddle/80 mt-1" data-testid={`facility-granted-${u.id}`}>
+                    Facility access granted · barn {u.barn_id}
+                  </div>
+                )}
               </div>
+
+              {decided
+                && u.role_status === "approved"
+                && ELEVATION_ELIGIBLE_ROLES.has(u.role) && (
+                <div className="shrink-0">
+                  <button
+                    onClick={() => setGrantingUser(u)}
+                    disabled={busyId === u.id}
+                    data-testid={`grant-facility-${u.id}`}
+                    className="border border-equine-saddle/40 text-equine-saddle hover:bg-equine-saddle/10 disabled:opacity-40 transition-colors px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium inline-flex items-center gap-1.5"
+                  >
+                    <KeyRound className="w-3.5 h-3.5" /> Grant facility access
+                  </button>
+                </div>
+              )}
 
               {!decided && (
                 <div className="flex items-center gap-2 shrink-0">
@@ -221,8 +268,164 @@ export default function AdminReviewQueue() {
                 </div>
               )}
             </div>
-          );
-        })}
+    );
+  }
+}
+
+
+function GrantFacilityAccessModal({ target, onClose, onGranted }) {
+  const [mode, setMode] = useState("existing"); // "existing" | "create"
+  const [barns, setBarns] = useState([]);
+  const [barnQuery, setBarnQuery] = useState("");
+  const [selectedBarnId, setSelectedBarnId] = useState("");
+  const [newBarnName, setNewBarnName] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [err, setErr] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    const params = barnQuery.trim() ? `?q=${encodeURIComponent(barnQuery.trim())}` : "";
+    api.get(`/admin/barns${params}`)
+      .then((r) => { if (!cancelled) setBarns(r.data.items || []); })
+      .catch(() => { /* silent */ });
+    return () => { cancelled = true; };
+  }, [barnQuery]);
+
+  const submit = async () => {
+    setErr("");
+    setSubmitting(true);
+    try {
+      const body = mode === "create"
+        ? { create_new_barn: true, new_barn_name: newBarnName.trim() }
+        : { barn_id: selectedBarnId };
+      await api.post(`/admin/users/${target.id}/grant-facility-access`, body);
+      await onGranted();
+    } catch (e) {
+      setErr(e?.response?.data?.detail || "Could not grant facility access.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const canSubmit = mode === "existing"
+    ? !!selectedBarnId
+    : newBarnName.trim().length > 0;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-equine-navyDeep/60"
+      data-testid="grant-facility-modal"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-lg bg-equine-navy border border-white/10 rounded-2xl p-7 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          data-testid="grant-facility-close"
+          className="absolute top-4 right-4 p-2 rounded-full text-equine-platinum/60 hover:text-equine-ivory hover:bg-white/5"
+        >
+          <X className="w-4 h-4" />
+        </button>
+        <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Grant facility access</div>
+        <div className="font-display text-2xl text-equine-ivory mb-1">{target.full_name || target.email}</div>
+        <div className="text-[12.5px] text-equine-platinum/60 mb-5">
+          Elevates role from <span className="text-equine-platinum">{ROLE_LABEL[target.role] || target.role}</span> to
+          <span className="text-equine-saddle"> Barn Manager</span>. Audited.
+        </div>
+
+        <div className="inline-flex bg-white/5 border border-white/10 rounded-full p-0.5 mb-5">
+          <button
+            type="button"
+            onClick={() => setMode("existing")}
+            data-testid="grant-mode-existing"
+            className={`px-4 py-1.5 text-[12px] rounded-full ${mode === "existing" ? "bg-equine-saddle text-equine-navyDeep" : "text-equine-platinum/65 hover:text-equine-ivory"}`}
+          >
+            Pick existing
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode("create")}
+            data-testid="grant-mode-create"
+            className={`px-4 py-1.5 text-[12px] rounded-full ${mode === "create" ? "bg-equine-saddle text-equine-navyDeep" : "text-equine-platinum/65 hover:text-equine-ivory"}`}
+          >
+            Create new
+          </button>
+        </div>
+
+        {mode === "existing" && (
+          <div className="space-y-3" data-testid="grant-existing-form">
+            <input
+              type="text"
+              value={barnQuery}
+              onChange={(e) => setBarnQuery(e.target.value)}
+              placeholder="Search barn by id or name"
+              className="w-full bg-equine-navyDeep/50 border border-white/10 text-equine-ivory placeholder:text-white/30 px-3 py-2 rounded-lg text-[13px] focus:outline-none focus:border-equine-saddle/60"
+              data-testid="grant-barn-search"
+            />
+            <div className="max-h-56 overflow-y-auto border border-white/10 rounded-lg divide-y divide-white/5" data-testid="grant-barn-list">
+              {barns.length === 0 && (
+                <div className="text-[12px] text-equine-platinum/50 px-3 py-4" data-testid="grant-barn-list-empty">
+                  No barns match. Try &ldquo;Create new&rdquo; instead.
+                </div>
+              )}
+              {barns.map((b) => (
+                <label
+                  key={b.id}
+                  className={`flex items-center gap-3 px-3 py-2 cursor-pointer text-[12.5px] ${selectedBarnId === b.id ? "bg-equine-saddle/10" : "hover:bg-white/5"}`}
+                  data-testid={`grant-barn-option-${b.id}`}
+                >
+                  <input
+                    type="radio"
+                    name="barn"
+                    value={b.id}
+                    checked={selectedBarnId === b.id}
+                    onChange={() => setSelectedBarnId(b.id)}
+                  />
+                  <div>
+                    <div className="text-equine-ivory">{b.name || b.id}</div>
+                    <div className="text-equine-platinum/50 text-[11px]">{b.id}</div>
+                  </div>
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {mode === "create" && (
+          <div data-testid="grant-create-form">
+            <input
+              type="text"
+              autoFocus
+              value={newBarnName}
+              onChange={(e) => setNewBarnName(e.target.value)}
+              placeholder="New barn name"
+              className="w-full bg-equine-navyDeep/50 border border-white/10 text-equine-ivory placeholder:text-white/30 px-3 py-2 rounded-lg text-[13px] focus:outline-none focus:border-equine-saddle/60"
+              data-testid="grant-new-barn-name"
+            />
+            <div className="text-[11.5px] text-equine-platinum/50 mt-2">
+              A new barn record is created and the user is set as its Barn Manager.
+            </div>
+          </div>
+        )}
+
+        {err && <div className="text-equine-clay text-[12.5px] mt-4" data-testid="grant-facility-error">{err}</div>}
+
+        <div className="mt-6 flex items-center justify-end gap-2">
+          <button
+            onClick={onClose}
+            className="text-equine-platinum/60 hover:text-equine-ivory text-[12.5px] px-3 py-2"
+          >Cancel</button>
+          <button
+            onClick={submit}
+            disabled={!canSubmit || submitting}
+            data-testid="grant-facility-submit"
+            className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors px-5 py-2 rounded-full text-[12.5px] tracking-wide font-medium inline-flex items-center gap-1.5"
+          >
+            {submitting ? "Granting…" : "Grant access"}
+          </button>
+        </div>
       </div>
     </div>
   );

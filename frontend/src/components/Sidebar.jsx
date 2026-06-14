@@ -81,6 +81,7 @@ const NAV_SECTIONS = [
       { to: "/equipment", label: "Equipment", icon: Wrench, roles: ROLE_GROUPS.operations },
       { to: "/staff", label: "Staff", icon: UsersRound, roles: ROLE_GROUPS.admin },
       { to: "/admin/review-queue", label: "Member Review", icon: UsersRound, roles: ROLE_GROUPS.admin, memberReviewBadge: true },
+      { to: "/admin/billing", label: "Billing Admin", icon: Receipt, roles: ROLE_GROUPS.admin },
       { to: "/staff-tasks", label: "Staff Tasks", icon: ClipboardList, roles: ROLE_GROUPS.admin },
       { to: "/handoff-reports", label: "Handoff Reports", icon: FileText, roles: ROLE_GROUPS.admin },
       { to: "/time-clock", label: "Time Clock", icon: CalendarDays, roles: ROLE_GROUPS.admin },

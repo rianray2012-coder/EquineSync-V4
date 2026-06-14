@@ -661,12 +661,54 @@ into the Stripe Checkout config).
 - Manual trigger: `POST /api/admin/subscriptions/email-pass` (NEW
   `backend/routes/subscription_emails.py`), gated by **narrowest existing
 
-### Upcoming (gated on user approval of 15.D)
-- **15.E — Platform-admin billing dashboard** (P2) — admin role-elevation UI
-  for marketplace facility signups becomes a candidate sub-task here.
-- **15.F — Soft-warn usage indicators in create flows** (P2).
-- **15.G — Migration cleanup**: remove legacy `/api/membership/checkout`,
-  replace static `LANDING_PLANS` with a public read-only mirror (P3).
+### Phase 15.E — Platform-admin Billing Dashboard ✅ (Feb 2026, awaiting Codex review)
+- **NEW `backend/routes/admin_billing.py`** — 7 endpoints, all gated by the
+  narrowest existing admin capability `admin:access → {"admin"}`:
+  - `GET /api/admin/billing/overview` — headline metrics; **both Committed MRR
+    (active + trialing + past_due) and Active MRR (active + past_due)** per
+    decision #4c, plus by-status / by-tier counts, trials-ending-7d, and
+    stuck-counts.
+  - `GET /api/admin/billing/subscriptions?status=&tier=&q=&page=&page_size=`
+    — paginated list with owner-email + barn-name join, search by owner email
+    or barn id.
+  - `GET /api/admin/billing/subscriptions/{stripe_subscription_id}` — drill-in
+    payload (sub + last 5 invoices via 15.B `subscription_id` field + last 10
+    `billing_events` + last 10 `subscription_email_log` rows). Read-only.
+  - `GET /api/admin/billing/stuck-events` — `billing_events` in
+    `retry_502 | metadata_missing_retryable` older than
+    `STUCK_BILLING_EVENTS_MINUTES` (env override, default 10).
+  - `GET /api/admin/billing/stuck-emails` — `subscription_email_log` rows in
+    `permanent_failure`.
+  - `GET /api/admin/barns?q=` — id+name list (no PII) for the elevation picker.
+  - `POST /api/admin/users/{user_id}/grant-facility-access` — role-elevation
+    (only when `role_status == "approved"` per decision #2a). Body shape:
+    `{barn_id}` OR `{create_new_barn: true, new_barn_name}`. Writes a
+    `core.audit.record` row with **minimal metadata** per the 15.E guardrail:
+    `{from_role, to_role, barn_id, created_barn}` — explicitly no
+    email/name/phone (test asserts the forbidden keys are absent).
+- **NEW `frontend/src/pages/AdminBillingDashboard.jsx`** (route
+  `/admin/billing`, gated by `ROLE_GROUPS.admin`) — 4-card headline strip
+  (Active subs / Committed MRR / Active MRR / Trials ending 7d), 2 stuck-queue
+  panels (events + emails) with expand-to-see-details, filterable + searchable
+  + paginated subscriptions table, click-row drill-in drawer showing sub
+  metadata + last invoices + last webhook events + last emails. All read-only.
+- **EDIT `frontend/src/pages/AdminReviewQueue.jsx`** — added "Grant facility
+  access" button (visible for `approved` users with role ∈ {barn_owner,
+  trainer, service_provider}) and `GrantFacilityAccessModal` — picker/search
+  for existing barn OR create-new form per decision #1d. Idempotent for users
+  already `barn_manager`.
+- **EDIT `Sidebar.jsx`** — new "Billing Admin" nav item under Admin group,
+  gated by `ROLE_GROUPS.admin`.
+- **Brand:** existing Equine-Sync palette tokens only; no new tokens.
+- **Tests:** 17/17 in `test_admin_billing_15e.py`. **74/74 combined** with 15.A
+  + 15.B + 15.D. Live curl smoke-test confirmed all 5 GET endpoints respond
+  200 over the public preview ingress.
+- **Strict guardrails honored:** no edits to `routes/subscriptions.py`,
+  `routes/subscriptions_webhook_handlers.py`, `routes/billing.py`,
+  `routes/recurring_charges.py`, legacy `invoices`. No new external SDKs. No
+  email sends. Drill-in is read-only — no reprocess / refund / cancel buttons
+  per decision #5a. `/billing/subscription` gate unchanged.
+- Packaged delta: `/app/phase15e_changes.zip`.
 
   admin gate** `admin:access → {"admin"}`. Returns `{ok, stats}` for ops/QA.
 - New email templates (concierge-warm tone, brand name **Equine-Sync**

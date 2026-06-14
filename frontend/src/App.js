@@ -35,6 +35,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import Reports from "./pages/Reports";
 import ReviewQueue from "./pages/ReviewQueue";
 import AdminReviewQueue from "./pages/AdminReviewQueue";
+import AdminBillingDashboard from "./pages/AdminBillingDashboard";
 import Today from "./pages/Today";
 import MyWork from "./pages/MyWork";
 import Rehab from "./pages/Rehab";
@@ -139,6 +140,7 @@ function App() {
               <Route path="/billing/success" element={<SubscriptionSuccess />} />
               <Route path="/review-queue" element={permit(<ReviewQueue />, ROLE_GROUPS.communication)} />
               <Route path="/admin/review-queue" element={permit(<AdminReviewQueue />, ROLE_GROUPS.admin)} />
+              <Route path="/admin/billing" element={permit(<AdminBillingDashboard />, ROLE_GROUPS.admin)} />
               <Route path="/payments" element={permit(<Payments />, ROLE_GROUPS.financial)} />
               <Route path="/recurring-billing" element={permit(<RecurringBilling />, ROLE_GROUPS.financial)} />
               <Route path="/expenses" element={permit(<Expenses />, ROLE_GROUPS.financial)} />
