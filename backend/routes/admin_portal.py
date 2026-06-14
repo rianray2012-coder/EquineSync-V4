@@ -875,8 +875,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 barn["id"],
                 (sub or {}).get("entitlements_snapshot") or {},
             )
+            # Strip internal-only keys (subscription_id, subscription_updated_at)
+            # before the row crosses the API boundary — decision 4a.
             return {
-                **barn,
+                **_strip_barn_response(barn),
                 "subscription_status": (sub or {}).get("status"),
                 "usage": usage,
             }
@@ -960,7 +962,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
             outcome="success", status_code=200,
         )
         return {
-            "barn": barn,
+            "barn": _strip_barn_response(barn),
             "subscription_summary": sub_summary,
             "usage": usage,
             "counts": {

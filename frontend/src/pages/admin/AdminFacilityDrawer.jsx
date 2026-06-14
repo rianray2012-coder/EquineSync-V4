@@ -3,7 +3,7 @@
  *
  * Surfaces:
  *   - Safe profile (name, address, contact, tier, created)
- *   - Subscription SUMMARY (plan, status, period end, MRR) — NO Stripe IDs
+ *   - Subscription SUMMARY (plan, status, period end, recurring amount) — NO Stripe IDs
  *   - Usage vs limits (horses, users)
  *   - Recent admin activity for the barn
  *
@@ -119,7 +119,7 @@ export default function AdminFacilityDrawer({ barnId, open, onClose }) {
                     <Tile label="Plan" value={sub.plan_tier_code} testid="admin-facility-sub-plan" />
                     <Tile label="Status" value={sub.status} testid="admin-facility-sub-status" />
                     <Tile label="Cycle" value={sub.billing_cycle || "—"} testid="admin-facility-sub-cycle" />
-                    <Tile label="MRR" value={formatMrr(sub.amount_cents)} testid="admin-facility-sub-mrr" />
+                    <Tile label="Recurring amount" value={formatMrr(sub.amount_cents)} testid="admin-facility-sub-mrr" />
                     <Tile label="Period ends" value={sub.current_period_end ? formatTs(sub.current_period_end) : "—"} testid="admin-facility-sub-period" />
                     <Tile label="Trial ends" value={sub.trial_end ? formatTs(sub.trial_end) : "—"} testid="admin-facility-sub-trial" />
                   </div>

@@ -1,8 +1,28 @@
 # Phase Admin-4 — Facility Roster + Health Page (READ-ONLY)
 
-**Status:** Ready for Codex round-1 review.
-**Date:** Feb 14, 2026.
+**Status:** Codex round-2 fixes applied. Ready for re-review.
+**Date:** Feb 14, 2026 · Updated Feb 24, 2026 (round-2 fixes).
 **Scope:** Cross-facility visibility. Strictly read-only.
+
+---
+
+## 🔁 Codex round-2 fixes (Feb 24, 2026)
+
+1. **`subscription_id` data-leak — FIXED.** Both `/facilities` (list rows
+   via `_augment`) and `/facilities/{id}` (the `barn` field) now run the
+   safe payload through `_strip_barn_response()` before serialization.
+   The strip helper drops `subscription_id` and `subscription_updated_at`
+   — both are internal join keys; neither belongs on the API boundary.
+   Regression tests planted barns with a known `subscription_id` value
+   and asserted it never appears anywhere in the response payload.
+2. **"MRR" relabeled to "Recurring amount"** in `AdminFacilityDrawer.jsx`
+   to avoid the booked-vs-projected MRR ambiguity surfaced in review.
+   Label-only change; the value still reads `amount_cents` directly off
+   the subscription row (Admin-5 will own MRR normalization math).
+3. **Tests:** 23/23 pass (`pytest tests/test_admin_portal_admin4.py`)
+   including the 2 new regression tests
+   (`test_facility_list_does_not_leak_internal_subscription_id`,
+    `test_facility_detail_does_not_leak_internal_subscription_id`).
 
 ---
 

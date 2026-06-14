@@ -1126,7 +1126,8 @@ drill-down, no Phase 9 reads.
   summary in 6-tile grid, usage in 2-tile grid, recent audit feed).
   Approved palette only.
 
-**Tests:** `tests/test_admin_portal_admin4.py` — **21/21 green**.
+**Tests:** `tests/test_admin_portal_admin4.py` — **23/23 green**
+(21 original + 2 round-2 regression tests for `subscription_id` leak).
 Cross-facility isolation matrix parametrised over 5 platform roles
 all returning 200; barn-scoped users (with and without role="admin")
 return 403 on both list and own-barn detail; non-existent barn → 404;
@@ -1152,6 +1153,16 @@ emission for both endpoints.
 **Packaged:** `/app/phase_admin_4_changes.zip` for Codex review.
 Admin-4b (real edits + soft-disable enforcement) gated.
 
+**Codex round-2 fixes (Feb 24 2026):**
+- `subscription_id` was leaking via the list endpoint's `_augment`
+  spread and the detail endpoint's `barn` field. `_strip_barn_response()`
+  is now applied in BOTH endpoints; `subscription_id` and
+  `subscription_updated_at` never cross the API boundary.
+- Frontend drawer relabeled `MRR` → `Recurring amount` (label-only;
+  Admin-5 will own MRR normalization math).
+- Added 2 regression tests: `test_facility_list_does_not_leak_internal_subscription_id`,
+  `test_facility_detail_does_not_leak_internal_subscription_id`.
+
 ### Admin Portal — Phase Status (post Admin-4)
 
 | Phase   | Scope                                                        | Status |
@@ -1159,7 +1170,7 @@ Admin-4b (real edits + soft-disable enforcement) gated.
 | Admin-1 | Shell + access boundary                                       | ✅ Codex-approved & locked |
 | Admin-2 | Read-only dashboard + activity + sub health                   | ✅ Codex-approved & locked |
 | Admin-3 | User approvals + user management                              | ✅ Codex-approved & locked |
-| Admin-4 | Facility roster + read-only health page                       | ✅ Ready for Codex review |
+| Admin-4 | Facility roster + read-only health page                       | ✅ Round-2 fixes applied, repackaged for re-review |
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
 | Admin-5 | Subscription + billing control center                         | ⏸ Gated |
 | Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |

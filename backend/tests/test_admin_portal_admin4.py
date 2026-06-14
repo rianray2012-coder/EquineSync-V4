@@ -247,6 +247,85 @@ def test_facility_detail_subscription_summary_has_no_stripe_ids(db):
         )
 
 
+# Codex round-2 (Admin-4) regression: `subscription_id` is needed
+# INTERNALLY (the detail endpoint joins through it to fetch the
+# subscription summary), but it MUST NOT cross the API boundary.
+# `subscription_updated_at` is also stripped on the way out.
+def test_facility_list_does_not_leak_internal_subscription_id(db):
+    """List rows must NEVER carry `subscription_id` or
+    `subscription_updated_at` — both are internal-only join keys."""
+    s = _admin_session(db, "platform_admin")
+    # Plant a barn with a subscription_id set so we KNOW the row would
+    # carry it if the strip were ever removed.
+    barn_id = f"barn_strip_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_internal_{uuid.uuid4().hex[:8]}"
+    db.barns.insert_one({
+        "id": barn_id, "name": f"StripTest_{barn_id[-4:]}",
+        "subscription_tier_code": "starter",
+        "subscription_id": sub_id,
+        "subscription_updated_at": datetime.now(timezone.utc).isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    })
+    try:
+        r = requests.get(
+            f"{API}/admin/portal/facilities?q=StripTest_{barn_id[-4:]}",
+            headers=_bearer(s), timeout=10,
+        )
+        assert r.status_code == 200
+        body = r.json()
+        ours = [x for x in body["items"] if x.get("id") == barn_id]
+        assert ours, "Planted barn missing from search results."
+        row = ours[0]
+        assert "subscription_id" not in row, (
+            f"List leaked subscription_id: row={row}"
+        )
+        assert "subscription_updated_at" not in row, (
+            f"List leaked subscription_updated_at: row={row}"
+        )
+        # And the join key value itself must not appear anywhere in the
+        # serialized payload (defense in depth against rename leaks).
+        assert sub_id not in r.text, (
+            f"List leaked raw subscription_id value '{sub_id}'"
+        )
+    finally:
+        db.barns.delete_one({"id": barn_id})
+
+
+def test_facility_detail_does_not_leak_internal_subscription_id(db):
+    """Detail payload must NEVER carry `subscription_id` or
+    `subscription_updated_at` on `barn` — same invariant as the list."""
+    s = _admin_session(db, "platform_admin")
+    barn_id = f"barn_strip_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_internal_{uuid.uuid4().hex[:8]}"
+    db.barns.insert_one({
+        "id": barn_id, "name": f"StripDetail_{barn_id[-4:]}",
+        "subscription_tier_code": "starter",
+        "subscription_id": sub_id,
+        "subscription_updated_at": datetime.now(timezone.utc).isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    })
+    try:
+        r = requests.get(
+            f"{API}/admin/portal/facilities/{barn_id}",
+            headers=_bearer(s), timeout=10,
+        )
+        assert r.status_code == 200
+        body = r.json()
+        barn = body.get("barn") or {}
+        assert "subscription_id" not in barn, (
+            f"Detail.barn leaked subscription_id: {barn}"
+        )
+        assert "subscription_updated_at" not in barn, (
+            f"Detail.barn leaked subscription_updated_at: {barn}"
+        )
+        # Belt-and-braces: full body must not contain the raw id either.
+        assert sub_id not in r.text, (
+            f"Detail leaked raw subscription_id value '{sub_id}'"
+        )
+    finally:
+        db.barns.delete_one({"id": barn_id})
+
+
 def test_facility_detail_subscription_summary_keys_are_whitelisted(db):
     s = _admin_session(db, "platform_admin")
     r = requests.get(f"{API}/admin/portal/facilities/primary",
