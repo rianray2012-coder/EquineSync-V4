@@ -17,6 +17,7 @@ Strict guardrails honoured:
 from __future__ import annotations
 
 import os
+import re
 import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
@@ -41,6 +42,32 @@ PERMANENT_FAIL_STATUS = "permanent_failure"
 
 DEFAULT_STUCK_MINUTES = 10
 
+# Phase 15.E round-2 blocker #1 — backend allowlist for the role-elevation
+# endpoint. Frontend already filters the button, but the API itself must
+# enforce. `barn_manager` is included only to keep the idempotent no-op
+# branch reachable; anything else (admin, horse_owner, rider,
+# veterinarian, farrier, etc.) is rejected with 409.
+ELEVATION_ELIGIBLE_ROLES = frozenset({
+    "barn_owner", "trainer", "service_provider",
+    "barn_manager",  # idempotent no-op only
+})
+
+# Phase 15.E round-2 should-fix #4 — admin search is regex-injected into
+# Mongo. Even though the endpoint is admin-gated, we escape + length-cap
+# `q` to match the hardening shape of `/admin/barns`.
+SEARCH_MAX_LEN = 80
+
+
+def _safe_regex(q: Optional[str]) -> Optional[str]:
+    """Length-capped, regex-escaped substring search pattern. Returns None if
+    `q` is empty/whitespace so callers can short-circuit."""
+    if not q:
+        return None
+    trimmed = q.strip()[:SEARCH_MAX_LEN]
+    if not trimmed:
+        return None
+    return re.escape(trimmed)
+
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -55,27 +82,64 @@ def _stuck_threshold_minutes() -> int:
         return DEFAULT_STUCK_MINUTES
 
 
-def _monthly_equivalent_cents(sub: Dict[str, Any]) -> int:
+def _monthly_equivalent_cents(
+    sub: Dict[str, Any],
+    plans_by_tier: Optional[Dict[str, Dict[str, Any]]] = None,
+) -> int:
     """Normalise a subscription row to monthly-equivalent cents for MRR math.
 
-    Source field is `amount_cents` (set by 15.B handlers from
-    `items.data[0].price.unit_amount`). Annual billing → divided by 12.
-    Returns 0 when the row lacks amount or has an unexpected cycle.
+    Resolution order (round-2 blocker #2):
+      1. ``subscriptions.amount_cents`` when present (15.B / future
+         handlers MAY populate it; currently they do not).
+      2. **Fallback** — read the canonical unit price from the
+         ``plans`` catalog via ``(plan_tier_code, billing_cycle)``. This
+         is what real production rows resolve through because 15.B's
+         `_h_subscription_updated` only stores `stripe_price_id`, not
+         the dollar amount.
+
+    Annual cycle → divided by 12. Returns 0 only when both sources are
+    missing or the cycle is unrecognised.
     """
-    amount = sub.get("amount_cents") or 0
-    if not isinstance(amount, (int, float)) or amount < 0:
-        return 0
+    amount = sub.get("amount_cents")
+    if not isinstance(amount, (int, float)) or amount <= 0:
+        amount = None
+
     cycle = (sub.get("billing_cycle") or "").lower()
+
+    if amount is None and plans_by_tier:
+        plan = plans_by_tier.get(sub.get("plan_tier_code") or "")
+        if plan:
+            if cycle == "annual":
+                amount = plan.get("annual_price_cents")
+            elif cycle == "monthly":
+                amount = plan.get("monthly_price_cents")
+        if not isinstance(amount, (int, float)) or amount <= 0:
+            amount = None
+
+    if amount is None:
+        return 0
     if cycle == "annual":
         return int(round(amount / 12))
     if cycle == "monthly":
         return int(amount)
-    # Unknown cycle — most conservative is treat as 0 rather than over-count.
     return 0
 
 
+async def _load_plans_by_tier(db) -> Dict[str, Dict[str, Any]]:
+    """Tiny helper — load the seeded plan catalog into ``{tier_code: plan}``
+    for synchronous MRR resolution. Cached per-request only; if you call
+    this in hot paths, hoist into a TTL cache."""
+    plans = await db.plans.find(
+        {}, {"_id": 0, "tier_code": 1,
+             "monthly_price_cents": 1, "annual_price_cents": 1},
+    ).to_list(length=100)
+    return {p["tier_code"]: p for p in plans if p.get("tier_code")}
+
+
 def _public_sub(sub: Dict[str, Any], *, owner_email: Optional[str] = None,
-                barn_name: Optional[str] = None) -> Dict[str, Any]:
+                barn_name: Optional[str] = None,
+                plans_by_tier: Optional[Dict[str, Dict[str, Any]]] = None,
+                ) -> Dict[str, Any]:
     """Projection of a `subscriptions` row safe to return to admins."""
     return {
         "subscription_id": sub.get("stripe_subscription_id") or sub.get("id"),
@@ -87,7 +151,7 @@ def _public_sub(sub: Dict[str, Any], *, owner_email: Optional[str] = None,
         "status": sub.get("status"),
         "billing_cycle": sub.get("billing_cycle"),
         "amount_cents": sub.get("amount_cents"),
-        "monthly_equivalent_cents": _monthly_equivalent_cents(sub),
+        "monthly_equivalent_cents": _monthly_equivalent_cents(sub, plans_by_tier),
         "current_period_start": sub.get("current_period_start"),
         "current_period_end": sub.get("current_period_end"),
         "trial_end": sub.get("trial_end"),
@@ -120,7 +184,12 @@ def build_router(*, db, get_current_user):
     @router.get("/admin/billing/overview")
     async def overview(user=Depends(get_current_user)):
         require(user, "admin:access")
+        plans_by_tier = await _load_plans_by_tier(db)
         # Aggregate counts by status — single pass over subscriptions.
+        # NOTE (round-2 blocker #2): project plan_tier_code + billing_cycle
+        # in addition to amount_cents because MRR falls back to the plan
+        # catalog when amount_cents is absent (which is the production
+        # default — 15.B handlers don't write amount_cents).
         cursor = db.subscriptions.find(
             {}, {"_id": 0, "status": 1, "amount_cents": 1,
                  "billing_cycle": 1, "trial_end": 1, "plan_tier_code": 1})
@@ -140,7 +209,7 @@ def build_router(*, db, get_current_user):
             tier = s.get("plan_tier_code")
             if tier:
                 tier_counts[tier] = tier_counts.get(tier, 0) + 1
-            mec = _monthly_equivalent_cents(s)
+            mec = _monthly_equivalent_cents(s, plans_by_tier)
             if status in COMMITTED_STATUSES:
                 committed_cents += mec
             if status in ACTIVE_STATUSES:
@@ -192,34 +261,37 @@ def build_router(*, db, get_current_user):
     async def list_subscriptions(
         status: Optional[str] = Query(None),
         tier: Optional[str] = Query(None),
-        q: Optional[str] = Query(None, description="Search by owner email or barn id"),
+        q: Optional[str] = Query(None, max_length=SEARCH_MAX_LEN,
+                                 description="Search by owner email or barn id"),
         page: int = Query(1, ge=1),
         page_size: int = Query(25, ge=1, le=100),
         user=Depends(get_current_user),
     ):
         require(user, "admin:access")
+        plans_by_tier = await _load_plans_by_tier(db)
 
-        # Search support: resolve `q` → list of owner_user_ids by email first.
+        # Round-2 should-fix #4: cap + escape the regex before any Mongo
+        # use. Even though this is admin-gated, untrusted regex syntax
+        # could DoS the index or surprise the operator.
+        safe_q = _safe_regex(q)
         owner_ids_from_search: Optional[List[str]] = None
-        if q:
-            q_lower = q.strip().lower()
-            if q_lower:
-                matched_users = await db.users.find(
-                    {"email": {"$regex": q_lower, "$options": "i"}},
-                    {"_id": 0, "id": 1},
-                ).to_list(length=500)
-                owner_ids_from_search = [u["id"] for u in matched_users]
+        if safe_q is not None:
+            matched_users = await db.users.find(
+                {"email": {"$regex": safe_q, "$options": "i"}},
+                {"_id": 0, "id": 1},
+            ).to_list(length=500)
+            owner_ids_from_search = [u["id"] for u in matched_users]
 
         flt: Dict[str, Any] = {}
         if status:
             flt["status"] = status
         if tier:
             flt["plan_tier_code"] = tier
-        if owner_ids_from_search is not None:
-            # Match either owner email match OR barn_id contains q
+        if owner_ids_from_search is not None and safe_q is not None:
+            # Match either owner email match OR barn_id contains q (escaped).
             flt["$or"] = [
                 {"owner_user_id": {"$in": owner_ids_from_search}},
-                {"barn_id": {"$regex": q, "$options": "i"}},
+                {"barn_id": {"$regex": safe_q, "$options": "i"}},
             ]
 
         total = await db.subscriptions.count_documents(flt)
@@ -247,7 +319,8 @@ def build_router(*, db, get_current_user):
         items = [
             _public_sub(s,
                         owner_email=users_by_id.get(s.get("owner_user_id")),
-                        barn_name=barns_by_id.get(s.get("barn_id")))
+                        barn_name=barns_by_id.get(s.get("barn_id")),
+                        plans_by_tier=plans_by_tier)
             for s in subs
         ]
         return {
@@ -262,6 +335,7 @@ def build_router(*, db, get_current_user):
     async def subscription_detail(subscription_id: str,
                                   user=Depends(get_current_user)):
         require(user, "admin:access")
+        plans_by_tier = await _load_plans_by_tier(db)
         sub = await db.subscriptions.find_one(
             {"stripe_subscription_id": subscription_id}, {"_id": 0})
         if not sub:
@@ -285,9 +359,32 @@ def build_router(*, db, get_current_user):
             {"subscription_id": subscription_id}, {"_id": 0},
         ).sort([("created_at", -1)]).limit(5).to_list(length=5)
 
-        # Last 10 billing_events that mention this subscription.
+        # ---------- billing_events: enriched lookup (round-2 should-fix #3) ----------
+        # 15.B writes `billing_events.object_id` derived from the Stripe event
+        # payload, NOT a normalised `subscription_id`. So a naive
+        # `find({"subscription_id": ...})` produced empty results for real
+        # production rows. We enrich the query to surface the events whose
+        # `object_id` references THIS subscription, any of its invoices, or
+        # its Stripe customer — which is what the operator actually wants
+        # in the "Recent webhook events" panel.
+        invoice_ids = [
+            i.get("stripe_invoice_id") or i.get("id")
+            for i in invoices if (i.get("stripe_invoice_id") or i.get("id"))
+        ]
+        object_ids = {subscription_id, *invoice_ids}
+        customer_id = sub.get("stripe_customer_id")
+        if customer_id:
+            object_ids.add(customer_id)
+        events_filter = {
+            "$or": [
+                {"object_id": {"$in": list(object_ids)}},
+                # Belt-and-braces: also include rows where some future
+                # writer normalised a `subscription_id` column.
+                {"subscription_id": subscription_id},
+            ]
+        }
         events = await db.billing_events.find(
-            {"subscription_id": subscription_id}, {"_id": 0},
+            events_filter, {"_id": 0},
         ).sort([("created_at", -1)]).limit(10).to_list(length=10)
 
         # Last 10 email log rows.
@@ -296,7 +393,9 @@ def build_router(*, db, get_current_user):
         ).sort([("updated_at", -1)]).limit(10).to_list(length=10)
 
         return {
-            "subscription": _public_sub(sub, owner_email=owner_email, barn_name=barn_name),
+            "subscription": _public_sub(sub, owner_email=owner_email,
+                                        barn_name=barn_name,
+                                        plans_by_tier=plans_by_tier),
             "invoices": invoices,
             "billing_events": events,
             "email_log": emails,
@@ -333,17 +432,18 @@ def build_router(*, db, get_current_user):
     # F. Role-elevation: grant facility access
     # =====================================================================
     @router.get("/admin/barns")
-    async def list_barns(q: Optional[str] = Query(None, max_length=80),
+    async def list_barns(q: Optional[str] = Query(None, max_length=SEARCH_MAX_LEN),
                          user=Depends(get_current_user)):
         """Tiny admin-only list endpoint feeding the 'Grant facility access'
         picker. Read-only; returns up to 200 barns with id+name only. No PII.
         """
         require(user, "admin:access")
         flt: Dict[str, Any] = {}
-        if q and q.strip():
+        safe_q = _safe_regex(q)
+        if safe_q is not None:
             flt["$or"] = [
-                {"id":   {"$regex": q, "$options": "i"}},
-                {"name": {"$regex": q, "$options": "i"}},
+                {"id":   {"$regex": safe_q, "$options": "i"}},
+                {"name": {"$regex": safe_q, "$options": "i"}},
             ]
         rows = await db.barns.find(
             flt, {"_id": 0, "id": 1, "name": 1},
@@ -370,8 +470,21 @@ def build_router(*, db, get_current_user):
                 f"(current: {target.get('role_status') or 'unknown'}).",
             )
 
-        # Idempotent — if already a barn_manager we just no-op.
         from_role = target.get("role")
+
+        # Round-2 blocker #1: backend allowlist for eligible roles. The
+        # frontend already filters the button, but the API itself must
+        # also reject (otherwise an admin curl could promote a
+        # `horse_owner` or `rider` to `barn_manager`).
+        if from_role not in ELEVATION_ELIGIBLE_ROLES:
+            raise HTTPException(
+                409,
+                f"Role '{from_role}' is not eligible for facility-access "
+                f"elevation. Eligible roles: "
+                f"{sorted(ELEVATION_ELIGIBLE_ROLES - {'barn_manager'})}.",
+            )
+
+        # Idempotent — if already a barn_manager we just no-op.
         if from_role == "barn_manager" and target.get("barn_id"):
             return {
                 "ok": True, "noop": True,

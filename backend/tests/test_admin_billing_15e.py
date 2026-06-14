@@ -525,3 +525,227 @@ def test_grant_facility_access_404_when_barn_missing(db):
         json={"barn_id": "barn_15e_does_not_exist"},
         headers=_h(admin_tok), timeout=15)
     assert r.status_code == 404, r.text
+
+
+# ---------------------------------------------------------------------------
+# Round-2 review fixes — locked here so they cannot regress
+# ---------------------------------------------------------------------------
+
+def test_grant_facility_access_rejects_horse_owner_and_rider(db):
+    """Round-2 blocker #1: an admin curl could previously promote any
+    approved user to `barn_manager`. The backend now allowlists eligible
+    roles (`barn_owner`, `trainer`, `service_provider`, plus `barn_manager`
+    for idempotent no-op only). Locking the allowlist with explicit
+    rejections for non-facility roles."""
+    admin_tok, _ = _mint_user(db, "admin")
+    for ineligible_role in ("horse_owner", "rider"):
+        _, target_id = _mint_user(db, ineligible_role,
+                                  role_status="approved")
+        r = requests.post(
+            f"{API}/admin/users/{target_id}/grant-facility-access",
+            json={"barn_id": "primary"},
+            headers=_h(admin_tok), timeout=15)
+        assert r.status_code == 409, \
+            f"role={ineligible_role}: expected 409, got {r.status_code} {r.text}"
+        assert "not eligible" in r.text.lower(), r.text
+        # Confirm the user was NOT mutated.
+        u = db.users.find_one({"id": target_id})
+        assert u["role"] == ineligible_role, "role must remain unchanged"
+
+
+def test_overview_mrr_falls_back_to_plan_catalog_when_amount_cents_missing(db):
+    """Round-2 blocker #2: real 15.B subscription rows do not include
+    `amount_cents` (the webhook handlers only persist `stripe_price_id`).
+    Overview MRR must fall back to the seeded `plans` catalog using
+    (plan_tier_code, billing_cycle). Without the fallback this test
+    would see committed_monthly_cents == 0 — the silent prod bug.
+
+    Uses isolated tier codes (`tier_15e_*`) to avoid mutating the shared
+    `starter` / `professional` rows that 15.B tests assume.
+    """
+    tok, _ = _mint_user(db, "admin")
+    # Isolated plan rows — unique tier codes that don't collide with
+    # whatever 15.B / seed scripts wrote.
+    db.plans.insert_one({
+        "id": "tier_15e_m", "tier_code": "tier_15e_m",
+        "monthly_price_cents": 4900, "annual_price_cents": 49980,
+        "feature_limits": {"horses": 25, "users": 5},
+    })
+    db.plans.insert_one({
+        "id": "tier_15e_a", "tier_code": "tier_15e_a",
+        "monthly_price_cents": 14900, "annual_price_cents": 151980,
+        "feature_limits": {"horses": 100, "users": 25},
+    })
+
+    # Realistic 15.B-shaped subscription rows — NO `amount_cents` field.
+    sid_realistic = f"sub_15e_{uuid.uuid4().hex[:8]}"
+    db.subscriptions.insert_one({
+        "id": sid_realistic,
+        "stripe_subscription_id": sid_realistic,
+        "barn_id": "primary",
+        "owner_user_id": None,
+        "plan_tier_code": "tier_15e_m",
+        "status": "active",
+        "billing_cycle": "monthly",
+        # NO amount_cents — this is what _h_subscription_updated produces.
+        "stripe_price_id": "price_starter_monthly",
+        "current_period_start": _iso(_now() - timedelta(days=5)),
+        "current_period_end":   _iso(_now() + timedelta(days=25)),
+        "created_at": _iso(_now() - timedelta(days=5)),
+        "updated_at": _iso(_now() - timedelta(days=1)),
+    })
+    sid_pro_annual = f"sub_15e_{uuid.uuid4().hex[:8]}"
+    db.subscriptions.insert_one({
+        "id": sid_pro_annual,
+        "stripe_subscription_id": sid_pro_annual,
+        "barn_id": "primary",
+        "plan_tier_code": "tier_15e_a",
+        "status": "active",
+        "billing_cycle": "annual",
+        "stripe_price_id": "price_pro_annual",
+        "current_period_start": _iso(_now() - timedelta(days=5)),
+        "current_period_end":   _iso(_now() + timedelta(days=360)),
+        "created_at": _iso(_now() - timedelta(days=5)),
+        "updated_at": _iso(_now() - timedelta(days=1)),
+    })
+    try:
+        # Per-row projection check — pulls JUST our row by tier filter,
+        # which avoids confounds from other test rows in the collection.
+        r = requests.get(f"{API}/admin/billing/subscriptions?tier=tier_15e_m",
+                         headers=_h(tok), timeout=15)
+        rows = r.json()["items"]
+        match = next(x for x in rows if x["subscription_id"] == sid_realistic)
+        assert match["monthly_equivalent_cents"] == 4900, \
+            "fallback failed: amount_cents=None should resolve via plan catalog"
+        assert match["amount_cents"] is None, \
+            "test row must lack amount_cents to validate the fallback"
+
+        r = requests.get(f"{API}/admin/billing/subscriptions?tier=tier_15e_a",
+                         headers=_h(tok), timeout=15)
+        rows = r.json()["items"]
+        match = next(x for x in rows if x["subscription_id"] == sid_pro_annual)
+        # 151980 / 12 = 12665
+        assert match["monthly_equivalent_cents"] == 12665, \
+            f"annual fallback failed: got {match['monthly_equivalent_cents']}"
+
+        # Overview math also reflects the fallback (>= the two rows' MRR).
+        r = requests.get(f"{API}/admin/billing/overview",
+                         headers=_h(tok), timeout=15)
+        committed = r.json()["mrr"]["committed_monthly_cents"]
+        assert committed >= 4900 + 12665, \
+            f"committed MRR fallback failed: got {committed}"
+    finally:
+        db.subscriptions.delete_one({"stripe_subscription_id": sid_realistic})
+        db.subscriptions.delete_one({"stripe_subscription_id": sid_pro_annual})
+        db.plans.delete_one({"tier_code": "tier_15e_m"})
+        db.plans.delete_one({"tier_code": "tier_15e_a"})
+
+
+def test_subscription_detail_billing_events_enriched_lookup(db):
+    """Round-2 should-fix #3: `billing_events` rows from 15.B store the
+    Stripe object id in `object_id`, NOT a normalised `subscription_id`.
+    The drill-in must now surface events whose object_id references this
+    subscription, any of its invoices, or its Stripe customer.
+    """
+    tok, _ = _mint_user(db, "admin")
+    sid = f"sub_15e_{uuid.uuid4().hex[:8]}"
+    cust = f"cus_15e_{uuid.uuid4().hex[:8]}"
+    db.subscriptions.insert_one({
+        "id": sid, "stripe_subscription_id": sid,
+        "stripe_customer_id": cust,
+        "barn_id": "primary", "plan_tier_code": "starter",
+        "billing_cycle": "monthly", "status": "active",
+        "created_at": _iso(_now()), "updated_at": _iso(_now()),
+    })
+    inv_id = f"in_15e_{uuid.uuid4().hex[:8]}"
+    db.subscription_invoices.insert_one({
+        "id": inv_id, "stripe_invoice_id": inv_id,
+        "subscription_id": sid, "barn_id": "primary",
+        "amount_cents": 4900, "status": "paid",
+        "created_at": _iso(_now() - timedelta(hours=1)),
+    })
+    # Seed 3 billing_events using the REAL 15.B schema (object_id, no
+    # subscription_id field):
+    db.billing_events.insert_many([
+        {"stripe_event_id": f"evt_15e_a_{uuid.uuid4().hex[:6]}",
+         "event_type": "customer.subscription.updated",
+         "object_id": sid,                       # → matches subscription
+         "processing_status": "ok",
+         "created_at": _iso(_now() - timedelta(minutes=1)),
+         "updated_at": _iso(_now() - timedelta(minutes=1))},
+        {"stripe_event_id": f"evt_15e_b_{uuid.uuid4().hex[:6]}",
+         "event_type": "invoice.payment_succeeded",
+         "object_id": inv_id,                    # → matches via invoice
+         "processing_status": "ok",
+         "created_at": _iso(_now() - timedelta(minutes=2)),
+         "updated_at": _iso(_now() - timedelta(minutes=2))},
+        {"stripe_event_id": f"evt_15e_c_{uuid.uuid4().hex[:6]}",
+         "event_type": "customer.updated",
+         "object_id": cust,                      # → matches via customer
+         "processing_status": "ok",
+         "created_at": _iso(_now() - timedelta(minutes=3)),
+         "updated_at": _iso(_now() - timedelta(minutes=3))},
+        # Unrelated event should NOT appear.
+        {"stripe_event_id": f"evt_15e_x_{uuid.uuid4().hex[:6]}",
+         "event_type": "customer.subscription.updated",
+         "object_id": "sub_completely_unrelated_xyz",
+         "processing_status": "ok",
+         "created_at": _iso(_now()),
+         "updated_at": _iso(_now())},
+    ])
+    try:
+        r = requests.get(f"{API}/admin/billing/subscriptions/{sid}",
+                         headers=_h(tok), timeout=15)
+        assert r.status_code == 200, r.text
+        events = r.json()["billing_events"]
+        types = sorted(e["event_type"] for e in events)
+        assert "customer.subscription.updated" in types, \
+            "subscription-scoped event must surface"
+        assert "invoice.payment_succeeded" in types, \
+            "invoice-scoped event must surface (via invoice id linkage)"
+        assert "customer.updated" in types, \
+            "customer-scoped event must surface (via customer id linkage)"
+        # Unrelated event must NOT leak in.
+        unrelated_present = any(
+            e.get("object_id") == "sub_completely_unrelated_xyz"
+            for e in events)
+        assert not unrelated_present, "unrelated event leaked into drill-in"
+    finally:
+        db.subscriptions.delete_one({"stripe_subscription_id": sid})
+        db.subscription_invoices.delete_one({"stripe_invoice_id": inv_id})
+        db.billing_events.delete_many({"stripe_event_id": {"$regex": "^evt_15e_"}})
+
+
+def test_search_q_escapes_regex_metacharacters(db):
+    """Round-2 should-fix #4: `q` is regex-escaped, length-capped, and
+    safe against operator typos with metacharacters like `.` or `[`.
+    """
+    tok, _ = _mint_user(db, "admin")
+    # Seed a barn with a literal "." in the name.
+    bid = f"barn_15e_{uuid.uuid4().hex[:6]}"
+    db.barns.insert_one({"id": bid, "name": "Smith.Co",
+                         "created_at": _iso(_now())})
+    try:
+        # Plain "." would match every char without escape; with escape it
+        # only matches the literal dot.
+        r = requests.get(f"{API}/admin/barns?q=Smith.Co",
+                         headers=_h(tok), timeout=15)
+        assert r.status_code == 200, r.text
+        names = [b["name"] for b in r.json()["items"]]
+        assert "Smith.Co" in names
+
+        # Pathological input that previously could explode the regex
+        # engine — must just return safely (empty or filtered, never 500).
+        r = requests.get(f"{API}/admin/barns?q=(((",
+                         headers=_h(tok), timeout=15)
+        assert r.status_code == 200, r.text
+
+        # Length cap — the Query(...) declares max_length=80, so anything
+        # longer is a 422 from FastAPI validation. That's the intended
+        # belt-and-braces.
+        long_q = "x" * 200
+        r = requests.get(f"{API}/admin/barns?q={long_q}",
+                         headers=_h(tok), timeout=15)
+        assert r.status_code in (200, 422), r.text
+    finally:
+        db.barns.delete_one({"id": bid})
