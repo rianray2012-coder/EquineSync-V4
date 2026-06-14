@@ -608,9 +608,38 @@ into the Stripe Checkout config).
 - Reference: `/app/docs/PHASE_15B_WEBHOOK_LIFECYCLE.md`.
 - Packaged delta: `/app/phase15b_changes.zip`.
 
-### Upcoming (gated on user approval of 15.B)
-- **15.C — Facility-owner billing UI** (P1): pricing band swap, wizard step 3,
-  monthly/annual toggle, resume membership, usage display.
+### Phase 15.C — Facility Owner Billing Portal UI ✅ (Feb 2026, awaiting user sign-off)
+- **New routes**: `/billing/subscription` (gated by `ROLE_GROUPS.barnManage` ≡
+  backend `barn:manage`) and `/billing/success` (Stripe Checkout return).
+  Phase 9 `/billing` (invoices) remains untouched.
+- **Landing pricing band** swapped to 4 cards (Free / Starter $49 / Professional
+  $149 / Enterprise = contact-sales mailto) with a monthly/annual cycle toggle
+  and auto-computed "Save X%" badge. Uses a static catalog mirroring the
+  seeded `plans` collection because `/api/billing/plans` is auth-gated.
+- **Signup wizard Step 3** rewritten to load `/api/billing/plans` after
+  authentication, dispatch paid checkout via `POST /api/subscriptions/checkout`
+  (Free still uses legacy `/membership/checkout` until 15.G), and surface
+  Enterprise as a contact-sales mailto. **All copy says 14-day trial.**
+- **`/billing/subscription`** shows: status card (plan, status pill, cycle,
+  trial countdown, period dates), 3 soft-warn usage meters (sage → amber →
+  clay accents at 0/80/100% — never blocking), "Manage in Stripe" portal
+  link, "Change plan" picker with per-card monthly/annual toggle, and a
+  primary **Resume membership** card when status ∈ {canceled, past_due,
+  unpaid, incomplete_expired}.
+- **Dashboard secondary Resume banner** mirrors the resumable-state CTA for
+  `barn:manage` users.
+- **Brand guardrail**: only existing approved Equine-Sync tokens used (saddle,
+  navy, sage, amber, clay, brass, ink/inkMuted/inkSoft, soft/hairline,
+  card/elevated). No matte black, no champagne, no new color tokens.
+- **Permissions**: new `BARN_MANAGE_ROLES`, `ROLE_GROUPS.barnManage`, and
+  `canManageBilling(user)` helper in `frontend/src/lib/permissions.js` mirror
+  backend `CAPABILITIES["barn:manage"]`.
+- Testing agent (iteration_32) — 98% pass; only fix needed was a `&apos;`
+  literal in a JS string (now corrected).
+- New files: `pages/SubscriptionBilling.jsx`, `pages/SubscriptionSuccess.jsx`,
+  `lib/subscriptionBilling.js`.
+
+### Upcoming (gated on user approval of 15.C)
 - **15.D — Trial email scheduler** (P1): background job consuming
   `subscriptions.pending_emails`.
 - **15.E — Platform-admin billing dashboard** (P2).

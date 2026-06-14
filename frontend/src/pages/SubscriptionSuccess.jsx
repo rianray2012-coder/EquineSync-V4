@@ -94,7 +94,7 @@ export default function SubscriptionSuccess() {
             <p className="text-[13.5px] text-equine-inkMuted leading-relaxed">
               {sub
                 ? "Your plan is active. Manage payment methods, cycle, and cancellation any time from the Subscription page."
-                : "We&apos;re still confirming the final details with Stripe — this usually takes a few seconds. You can keep using the app meanwhile."}
+                : "We\u2019re still confirming the final details with Stripe \u2014 this usually takes a few seconds. You can keep using the app meanwhile."}
             </p>
             {status && (
               <div className="mt-3" data-testid="success-status-pill">
