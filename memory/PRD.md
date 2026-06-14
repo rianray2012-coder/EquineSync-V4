@@ -738,12 +738,54 @@ into the Stripe Checkout config).
 - **Strict guardrails honored:** approved Equine-Sync palette only (sage/saddle/amber/clay), no hard-blocking, no disabled CTAs, no nag modals/toasts, frontend-only, zero new API endpoints, zero edits to phase-9/15.A/15.B/15.D/15.E surface files.
 - Packaged delta: `/app/phase15f_changes.zip`.
 
-### Phase 15.G — Migration Cleanup ✅ (Feb 14 2026)
-- **Free-tier finalize via `/api/subscriptions/checkout`** — `plan_tier_code:"free"` now short-circuits without a Stripe round-trip (writes a local `subscriptions` row with `amount_cents=0`, `stripe_subscription_id=null`, `status="active"`) and returns `{url:null}`. `barn:manage` is enforced only on paid tiers; Free remains a solo-user tier accessible to any authenticated marketplace user (`horse_owner`, `rider`, etc.).
-- **Legacy `/api/membership/checkout` sunset** — returns HTTP 410 Gone with a structured detail payload `{code:"membership_checkout_sunset", message, successor:"/api/subscriptions/checkout"}`. Marketplace status polling + cancel + start-trial + webhook all retained for in-flight sessions (Phase 16 reconciliation).
-- **New public catalog `GET /api/billing/plans-public`** — no auth required; strips operational Stripe fields (`stripe_price_id_monthly`, `stripe_price_id_annual`, `stripe_product_id`, `has_monthly`, `has_annual`); sets `Cache-Control: public, max-age=300` at origin.
-- **Webhook `amount_cents` persistence** — both `_h_subscription_created` and both branches (bootstrap + standard) of `_h_subscription_updated` now persist `items[0].price.unit_amount` into `subscriptions.amount_cents`. Field name retained (no rename). MRR-fallback in 15.E admin dashboard becomes a true fallback for catalog-priced plans only.
-- **Frontend:** `SignupSuccess.jsx` deleted; `/signup/success` now `<Navigate to="/billing/success" replace />` (paid Stripe Checkout returns land at the new success page). `Signup.jsx` free + paid flows both POST `/api/subscriptions/checkout`. `Landing.jsx` fetches `/api/billing/plans-public` (live) with static fallback only on network failure; first marketing bullet is derived from live `feature_limits` so the card never contradicts the live catalog.
-- **Tests:** new `backend/tests/test_subscriptions_15g.py` (9 tests — plans-public public + scrubbed + cached, free finalize writes local row, free no-barn-manage, 410 free/paid/invalid, webhook created amount_cents, webhook updated amount_cents). Updated `test_marketplace_signup.py` (4 tests) and `test_subscriptions_15a.py` (1 test) to assert 410 contract. **101/101 combined subscription suite green** (15.A + 15.B + 15.D + 15.E + 15.G + marketplace).
-- **Strict guardrails honored:** approved Equine-Sync palette only, soft-enforcement preserved (no HTTP 402/403 on usage), no Phase 9 (`routes/billing.py`, `routes/recurring_charges.py`, legacy `invoices`) changes, `amount_cents` field name preserved, marketplace tier seed data untouched, `/api/billing/plans` (auth-gated) endpoint preserved alongside the new public catalog.
+### Phase 15.G — Migration Cleanup ✅ **CODEX-APPROVED & LOCKED** (Feb 14 2026)
 
+**Round-1 deliverables:**
+- **Free-tier finalize via `/api/subscriptions/checkout`** — `plan_tier_code:"free"` short-circuits without a Stripe round-trip (writes a local `subscriptions` row with `amount_cents=0`, `stripe_subscription_id=null`, `status="active"`) and returns `{url:null}`. `barn:manage` is enforced only on paid tiers; Free remains a solo-user tier accessible to any authenticated marketplace user.
+- **Legacy `POST /api/membership/checkout` sunset** — returns HTTP 410 Gone with structured `{code:"membership_checkout_sunset", message, successor:"/api/subscriptions/checkout"}`.
+- **New public catalog `GET /api/billing/plans-public`** — no auth required; strips operational Stripe fields (`stripe_price_id_monthly/_annual`, `stripe_product_id`, `has_monthly/_annual`); sets `Cache-Control: public, max-age=300` at origin.
+- **Webhook `amount_cents` persistence** — `_h_subscription_created` + both branches (bootstrap + standard) of `_h_subscription_updated`.
+- **Frontend:** `SignupSuccess.jsx` deleted; `/signup/success` redirects to `/billing/success`. `Signup.jsx` free + paid flows both POST `/subscriptions/checkout`. `Landing.jsx` fetches `/billing/plans-public`.
+
+**Round-2 Codex blockers addressed:**
+- 🔴 **`GET /api/membership/checkout/status/{session_id}` → HTTP 410** with `{code:"membership_checkout_status_sunset", successor:"/api/subscriptions/me"}`. Previously this still ran legacy polling + user-flip logic. Test: `test_legacy_membership_checkout_status_is_410`.
+- 🔴 **Free checkout now visible via `/subscriptions/me`.** Stable `id="free_{barn_id}"` set on the row + `barn.subscription_id` + `subscription_updated_at` stamped. Test: `test_free_checkout_visible_via_subscriptions_me`.
+- 🔴 **`Landing.jsx` static price catalog deleted.** `LANDING_PLANS_FALLBACK` removed; only marketing bullets keyed by `tier_code` remain. On API failure the page shows a calm "pricing temporarily unavailable" CTA (data-testid `pricing-unavailable`) with Contact-Sales mailto — never stale prices. Test ids: `pricing-loading`, `pricing-grid`, `pricing-unavailable`. Two new pytest source assertions.
+- 🟡 **Webhook `amount_cents` defensive set** — only when `unit_amount` is present, so a defensive Stripe shape cannot overwrite a known nonzero amount with 0. Test: `test_subscription_updated_amount_cents_not_overwritten_when_missing`.
+
+**Tests:** 14 in `test_subscriptions_15g.py` (9 round-1 + 5 round-2). **106/106 combined subscription suite green** (15.A + 15.B + 15.D + 15.E + 15.G + marketplace).
+
+**Strict guardrails honored:** approved Equine-Sync palette only, soft-enforcement preserved (no HTTP 402/403 on usage), Phase 9 untouched (`routes/billing.py`, `routes/recurring_charges.py`, legacy `invoices`), `amount_cents` field name preserved, marketplace tier seed data untouched, `/api/billing/plans` (auth-gated) preserved alongside the new public catalog.
+
+**Codex sign-off received Feb 14 2026.** Package: `/app/phase15g_changes.zip` (46 KB, 9 files).
+
+---
+
+## ✅ Phase 15 — Stripe Subscription Billing **COMPLETE**
+
+| Sub-phase | Scope | Status |
+|---|---|---|
+| 15.A | Foundation: `plans` + `subscriptions` collections; checkout / customer-portal / me / usage endpoints; soft-enforcement only | ✅ Codex-approved |
+| 15.B | Webhook lifecycle: status-gated idempotency, 10 handler groups / 11 event types, stale-lock reclaim, retry replay | ✅ Codex-approved |
+| 15.C | Facility Owner Billing Portal UI: `/billing/subscription`, status card, usage meters, change-plan picker, resume CTA | ✅ Codex-approved |
+| 15.D | Trial/Lifecycle email scheduler: `pending_emails` consumer, 3 branded templates, admin run-now | ✅ Codex-approved |
+| 15.E | Platform-admin Billing Dashboard: read-only ops views (`/admin/billing`), role-elevation, MRR fallback | ✅ Codex-approved |
+| 15.F | Soft-warn Usage Indicators: `useSubscriptionUsage()` hook, `UsageMeter` (inline + card), QuickAddSheet integration, never blocks | ✅ Codex-approved |
+| 15.G | Migration Cleanup: unified free finalize, legacy `/membership/checkout*` → 410, `/billing/plans-public`, webhook `amount_cents`, static catalog purge | ✅ **Codex-approved & locked** |
+
+**Phase 15 totals:** 106/106 pytest tests green across the subscription suite; 6 review-package zips delivered (`phase15a` → `phase15g`); zero Phase 9 (legacy `invoices` + `recurring_charges`) regressions; brand guardrails strictly honored; no hard enforcement (HTTP 402/disabled CTAs) anywhere in the surface.
+
+---
+
+## Next — Gated Plans Required Before Phase 16
+
+⛔ **Phase 16 is NOT scheduled.** Per the founder direction, no Phase 16 work begins without a pre-approved gated plan that covers, at minimum:
+1. **Reconciliation strategy** for in-flight legacy `payment_transactions` rows that were created before the 15.G sunset and may still be in `status="open"`.
+2. **Hard-deletion sequence** for the legacy `/api/membership/*` 410 stubs (status, cancel, start-trial, webhook) — including a deprecation window, error budget, and observability checks.
+3. **Production Stripe price-ID rollout** — when annual price IDs are configured live, surface the savings prominently on Landing + Signup.
+4. **Optional enhancements** (deferred backlog):
+   - Platform-admin invoice generation / billing reporting extensions.
+   - Synthetic monitoring on `/billing/plans-public` (stale-snapshot detection).
+   - Annual cycle emphasis treatment on Landing pricing band.
+
+When the founder is ready, they'll provide the gated plan and `ask_human` will surface the scope before any implementation begins.
