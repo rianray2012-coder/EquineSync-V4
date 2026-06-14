@@ -789,3 +789,74 @@ into the Stripe Checkout config).
    - Annual cycle emphasis treatment on Landing pricing band.
 
 When the founder is ready, they'll provide the gated plan and `ask_human` will surface the scope before any implementation begins.
+
+---
+
+## 🔐 Equine·Sync Admin Portal — Phase Admin-1 ✅ (Feb 14 2026)
+
+Foundation pass. Read-only, shell + access boundary only — no mutations,
+no Phase 9/15 data flowing through admin endpoints yet (those land in
+Admin-4 / Admin-5).
+
+**Backend (additive only — zero changes to Phase 9 / Phase 15 / `auth` /
+existing `admin*` routes):**
+- New `core.permissions.PLATFORM_ROLES = {super_admin, platform_admin,
+  support_admin, billing_admin, read_only_auditor}` + helpers
+  `platform_role()`, `has_platform_role()`, `is_platform_admin()`,
+  `require_platform_role()` (audit-emitting denial).
+- New `routes/admin_portal.py` exposes **only** `GET /api/admin/portal/me`
+  + `GET /api/admin/portal/health`. The `/me` payload includes the
+  caller's `platform_role`, the section keys they can enter, and the
+  full role × section capability map (so the FE can render section
+  locks accurately).
+- New CLI `python -m scripts.bootstrap_platform_admin --email <e>
+  --platform-role <role|none>` for explicit promotion. `audit_log` entry
+  tagged `admin.platform_role.bootstrap` on every change.
+- Role contract: `role="admin"` (barn-level) does NOT inherit
+  platform-admin access. Verified by
+  `test_role_admin_barn_admin_does_not_inherit_platform_access`.
+
+**Frontend (`/app/frontend/src/pages/admin/*`, scoped namespace):**
+- `AdminLayout.jsx` — outer shell, route guard (loading → login redirect
+  → AdminForbidden → shell).
+- `AdminSidebar.jsx` — 14 nav items, per-section capability filtering via
+  `canSeeAdminSection()`, mobile drawer, "Back to Equine·Sync" link,
+  role pill.
+- `AdminTopbar.jsx` — placeholder search (wires up in Admin-2) + identity
+  block.
+- `AdminForbidden.jsx` — calm dedicated 403 screen on Midnight Graphite.
+- `AdminDashboard.jsx` — KPI grid with em-dash placeholders + "Wires up
+  in Admin-2" hint + live access summary (live `/portal/me` call).
+- `AdminPlaceholder.jsx` — reusable per-section placeholder; 13 sections
+  use it for now.
+- `frontend/src/lib/permissions.js` extended with `PLATFORM_ROLES`,
+  `getPlatformRole()`, `isPlatformAdmin()`, `hasPlatformRole()`,
+  `canAccessAdminPortal()`, `ADMIN_SECTION_CAPS`, `canSeeAdminSection()`.
+
+**Brand:** new `equinesync.{graphite,slate,frost,lilac}` Tailwind tokens
+locked to the master spec colors (`#232734`, `#2E3448`, `#F7F8FA`,
+`#B8AECF`). Scoped to `/admin/*` only — no bleed into the existing
+product or marketing palettes.
+
+**Tests:** `tests/test_admin_portal_admin1.py` — **13/13 green** (auth
+boundary, role inheritance, 5 platform roles parametrised, unknown role
+rejected, health gate, audit emission, mutation surface invariant).
+`test_subscriptions_15g.py` still **14/14 green** — zero regression.
+
+**Strict guardrails honored:**
+- ✅ No mutations exposed in the Admin-1 surface (invariant test).
+- ✅ Existing `role="admin"` users stay barn-scoped — no auto-elevation.
+- ✅ No edits to Phase 9 (`routes/billing.py`, `routes/recurring_charges.py`,
+  legacy `invoices`).
+- ✅ No edits to Phase 15 subscription routes / webhooks / Stripe flows.
+- ✅ Approved colors only (Midnight Graphite, Slate Navy, Frost White,
+  Smoky Lilac).
+- ✅ No mocked production metrics — all KPIs render `—` with "Wires up
+  in Admin-2" badges.
+- ✅ Every admin-portal denial path is audit-logged via
+  `core.permissions.require_platform_role` → `core.audit.record_denial`.
+
+**Packaged:** `/app/phase_admin_portal_changes.zip` (Admin-1 only) for
+Codex review. **Admin-2 is gated** — does not start until this pass is
+signed off.
+

@@ -75,6 +75,11 @@ import AuditLog from "./pages/AuditLog";
 import SubscriptionBilling from "./pages/SubscriptionBilling";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
 
+// Admin Portal (Admin-1)
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
+
 const Protected = ({ children }) => {
   const { user, loading } = useAuth();
   if (loading) return <div className="min-h-screen flex items-center justify-center text-equine-platinum/60">Loading…</div>;
@@ -104,6 +109,26 @@ function App() {
             <Route path="/accept-invite" element={<AcceptInvite />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+
+            {/* Admin Portal (Admin-1) — own shell + platform_role gate */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="/admin/dashboard" replace />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="users" element={<AdminPlaceholder section="Users" phase="Admin-3" description="Search, filter, suspend, reactivate, change role. Audit-logged mutations gated by capability." />} />
+              <Route path="facilities" element={<AdminPlaceholder section="Facilities" phase="Admin-4" description="Cross-facility roster, health panel, usage vs plan limits, soft-disable." />} />
+              <Route path="horses" element={<AdminPlaceholder section="Horses" phase="Admin-4" description="Admin-level horse directory with masked medical for lower roles." />} />
+              <Route path="approvals" element={<AdminPlaceholder section="Approvals" phase="Admin-3" description="Pending account approvals: approve, reject, request-info, assign facility." />} />
+              <Route path="subscriptions" element={<AdminPlaceholder section="Subscriptions" phase="Admin-5" description="Read-only Phase 15 Stripe subscription visibility — Stripe IDs masked. Mutations land in a separate gated phase." />} />
+              <Route path="billing" element={<AdminPlaceholder section="Billing" phase="Admin-5" description="Read-only subscription invoices, payments, failed payments, MRR/ARR." />} />
+              <Route path="permissions" element={<AdminPlaceholder section="Permissions" phase="Admin-7" description="Read-only role × capability matrix from the backend." />} />
+              <Route path="support" element={<AdminPlaceholder section="Support" phase="Admin-6" description="Inbox of user-reported issues with internal notes + assignment." />} />
+              <Route path="alerts" element={<AdminPlaceholder section="Alerts" phase="Admin-6" description="Failed payments, webhook errors, overdue billing, SLA warnings — auto-populated." />} />
+              <Route path="reports" element={<AdminPlaceholder section="Reports" phase="Admin-7" description="Usage analytics, growth, churn, conversion. CSV export." />} />
+              <Route path="integrations" element={<AdminPlaceholder section="Integrations" phase="Admin-7" description="Connected integrations, sync status, retry controls — clearly labelled if any rows are demo." />} />
+              <Route path="settings" element={<AdminPlaceholder section="Settings" phase="Admin-7" description="App-wide settings, feature flags, templates, announcements (read-only first)." />} />
+              <Route path="audit-logs" element={<AdminPlaceholder section="Audit Logs" phase="Admin-6" description="Searchable append-only audit trail with detail drawer + CSV export." />} />
+            </Route>
+
             <Route element={<Protected><AppShell /></Protected>}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/today" element={<Today />} />

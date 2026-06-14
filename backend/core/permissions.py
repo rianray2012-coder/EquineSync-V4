@@ -71,6 +71,63 @@ CAPABILITIES: Dict[str, Set[str]] = {
     "reporting:write": ADMIN_ROLES,
 }
 
+# ----------------------------------------------------------------------
+# Admin Portal — Platform-level roles (Admin-1, Feb 2026)
+# ----------------------------------------------------------------------
+# These live on User.platform_role and are SEPARATE from the existing
+# barn-scoped User.role. Existing role="admin" users are NOT auto-elevated
+# (per founder direction: barn-admin trust boundary != platform-admin trust
+# boundary). Use the bootstrap CLI script to promote the first super_admin.
+PLATFORM_ROLES: Set[str] = {
+    "super_admin",
+    "platform_admin",
+    "support_admin",
+    "billing_admin",
+    "read_only_auditor",
+}
+
+
+def platform_role(user: Dict[str, Any]) -> str:
+    """Return the platform_role string for a user, or empty string."""
+    return ((user or {}).get("platform_role") or "").strip().lower()
+
+
+def has_platform_role(user: Dict[str, Any], *allowed: str) -> bool:
+    """True iff the user has any of the supplied platform_role values."""
+    pr = platform_role(user)
+    if not pr or pr not in PLATFORM_ROLES:
+        return False
+    if not allowed:
+        return True  # any platform role
+    return pr in {a.lower() for a in allowed}
+
+
+def is_platform_admin(user: Dict[str, Any]) -> bool:
+    """Shorthand: any valid platform role grants admin portal access."""
+    return platform_role(user) in PLATFORM_ROLES
+
+
+def require_platform_role(user: Dict[str, Any], *allowed: str) -> None:
+    """Gate. 403 + audit denial when the caller lacks the platform role.
+
+    Empty `allowed` means "any valid platform role." Otherwise pass an
+    explicit allowlist like require_platform_role(user, "super_admin",
+    "billing_admin").
+    """
+    if has_platform_role(user, *allowed):
+        return
+    message = (
+        "Platform admin access required"
+        if not allowed
+        else f"Platform role required: {', '.join(sorted(set(allowed)))}"
+    )
+    try:
+        from core.audit import record_denial as _rd
+        _rd(user, "admin:portal_access", message)
+    except Exception:  # pragma: no cover
+        pass
+    raise HTTPException(status_code=403, detail=message)
+
 # Per-capability denial messages preserve the exact wording used by the existing
 # guards so swapping them in later (Phase 4C) is behavior-identical.
 _DENY_MESSAGES: Dict[str, str] = {

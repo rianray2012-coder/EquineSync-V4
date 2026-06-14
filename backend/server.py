@@ -236,6 +236,13 @@ api_router.include_router(build_admin_router(
     run_seed=run_seed,
 ))
 
+# Admin Portal — platform-level role foundation (Admin-1).
+from routes.admin_portal import build_router as build_admin_portal_router  # noqa: E402
+api_router.include_router(build_admin_portal_router(
+    db=db,
+    get_current_user=get_current_user,
+))
+
 # Analytics (routes/analytics.py)
 api_router.include_router(build_analytics_router(db, get_current_user, require_setup_role))
 

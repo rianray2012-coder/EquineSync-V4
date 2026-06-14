@@ -38,3 +38,58 @@ export const canAccessRole = (user, roles) => {
 // kick off a Stripe Checkout. Source of truth is the backend capability
 // table; this helper exists so individual pages don't hard-code role names.
 export const canManageBilling = (user) => canAccessRole(user, BARN_MANAGE_ROLES);
+
+// ----------------------------------------------------------------------
+// Admin Portal — platform-level roles (Admin-1, Feb 2026)
+// ----------------------------------------------------------------------
+// Mirrors backend core/permissions.py::PLATFORM_ROLES. These live on
+// user.platform_role and are SEPARATE from the barn-scoped user.role.
+// Existing role="admin" users are NOT auto-elevated to platform admin.
+export const PLATFORM_ROLES = [
+  "super_admin",
+  "platform_admin",
+  "support_admin",
+  "billing_admin",
+  "read_only_auditor",
+];
+
+export const getPlatformRole = (user) =>
+  String((user?.platform_role || "")).trim().toLowerCase();
+
+export const isPlatformAdmin = (user) =>
+  PLATFORM_ROLES.includes(getPlatformRole(user));
+
+export const hasPlatformRole = (user, ...allowed) => {
+  const pr = getPlatformRole(user);
+  if (!pr || !PLATFORM_ROLES.includes(pr)) return false;
+  if (!allowed.length) return true;
+  return allowed.map((r) => String(r).toLowerCase()).includes(pr);
+};
+
+export const canAccessAdminPortal = (user) => isPlatformAdmin(user);
+
+// Section → allowed platform_role values. Mirrors backend
+// admin_portal.SECTION_CAPABILITIES. Kept here only for sidebar gating;
+// the backend is the source of truth and re-checks on every read.
+export const ADMIN_SECTION_CAPS = {
+  dashboard:     ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
+  users:         ["super_admin", "platform_admin", "support_admin"],
+  facilities:    ["super_admin", "platform_admin", "support_admin"],
+  horses:        ["super_admin", "platform_admin", "support_admin"],
+  approvals:     ["super_admin", "platform_admin"],
+  subscriptions: ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
+  billing:       ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
+  permissions:   ["super_admin", "platform_admin"],
+  support:       ["super_admin", "platform_admin", "support_admin"],
+  alerts:        ["super_admin", "platform_admin", "support_admin", "billing_admin"],
+  reports:       ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
+  integrations:  ["super_admin", "platform_admin"],
+  settings:      ["super_admin", "platform_admin"],
+  audit_logs:    ["super_admin", "platform_admin", "read_only_auditor"],
+};
+
+export const canSeeAdminSection = (user, sectionKey) => {
+  const allowed = ADMIN_SECTION_CAPS[sectionKey];
+  if (!allowed) return false;
+  return allowed.includes(getPlatformRole(user));
+};

@@ -48,6 +48,19 @@ module.exports = {
           clay:        '#8B5E6B',  // muted mauve
           slate:       '#666674',
         },
+        // ------------------------------------------------------------------
+        // Equine·Sync Admin Portal palette (Brand Guide 22 — Admin-1).
+        // Used EXCLUSIVELY for /admin/* surfaces. Do not bleed into the
+        // marketing or product pages — they already have their lavender
+        // palette above. These four tokens are an exact, locked match of
+        // the master spec for the platform control center.
+        // ------------------------------------------------------------------
+        equinesync: {
+          graphite: '#232734', // Midnight Graphite — primary surface for nav rail
+          slate:    '#2E3448', // Slate Navy — accents, hovers, brand pills
+          frost:    '#F7F8FA', // Frost White — main content bg, ink-on-graphite text
+          lilac:    '#B8AECF', // Smoky Lilac — quiet accents, role pills, dividers
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' },
