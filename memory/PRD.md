@@ -1170,7 +1170,7 @@ Admin-4b (real edits + soft-disable enforcement) gated.
 | Admin-1 | Shell + access boundary                                       | ✅ Codex-approved & locked |
 | Admin-2 | Read-only dashboard + activity + sub health                   | ✅ Codex-approved & locked |
 | Admin-3 | User approvals + user management                              | ✅ Codex-approved & locked |
-| Admin-4 | Facility roster + read-only health page                       | ✅ Round-2 fixes applied, repackaged for re-review |
+| Admin-4 | Facility roster + read-only health page                       | ✅ Codex-approved & locked |
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
 | Admin-5 | Subscription + billing control center                         | ⏸ Gated |
 | Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |

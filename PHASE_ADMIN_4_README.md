@@ -74,7 +74,7 @@ No Stripe IDs (`stripe_customer_id`, `stripe_subscription_id`, `stripe_price_id`
 
 ```
 python -m pytest tests/test_admin_portal_admin4.py -v
-# 21 passed in 15.85s
+# 23 passed in 17.83s
 ```
 
 Highlights:
@@ -87,12 +87,14 @@ Highlights:
 - `test_admin4_does_not_touch_phase9_invoices_or_recurring_charges` (Phase 9 guard)
 - `test_no_mutations_exposed_on_admin4_endpoints` (parametrised × 2 paths × 4 mutation methods)
 - `test_both_endpoints_emit_audit_log`
+- `test_facility_list_does_not_leak_internal_subscription_id` (round-2 regression)
+- `test_facility_detail_does_not_leak_internal_subscription_id` (round-2 regression)
 
 ## 📁 Files changed
 
 **Backend (additive only):**
 - `backend/routes/admin_portal.py` — adds Admin-4 GETs; documents the deferred Admin-4b whitelist in a code comment block.
-- `backend/tests/test_admin_portal_admin4.py` — **NEW** 21 tests.
+- `backend/tests/test_admin_portal_admin4.py` — **23 tests** (21 original + 2 round-2 regression tests for the `subscription_id` strip).
 
 **Frontend (additive only):**
 - `frontend/src/pages/admin/AdminFacilities.jsx` — **NEW** roster page.
