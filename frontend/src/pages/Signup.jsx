@@ -4,6 +4,21 @@ import { useAuth } from "../context/AuthContext";
 import { api, tokens } from "../lib/api";
 import { Logo } from "../components/Logo";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react";
+import {
+  sortPlans, formatCents, annualSavingsPct,
+} from "../lib/subscriptionBilling";
+
+// Phase 15.C — these recommendations map the marketplace role pick (Step 0)
+// to a default facility plan tier for Step 3. Solo roles default to "free";
+// barn/facility roles default to "starter" (the cheapest paid B2B plan). The
+// user can always override on Step 3.
+const ROLE_TO_PLAN = {
+  horse_owner: "free",
+  rider: "free",
+  trainer: "free",
+  service_provider: "free",
+  barn_owner: "starter",
+};
 
 const ROLE_OPTIONS = [
   { id: "horse_owner", label: "Horse Owner", blurb: "Track your horse's care, billing, progress.", recommendedTier: "owner_rider" },
@@ -51,7 +66,7 @@ export default function Signup() {
   const initialRole = params.get("role");
   const initialIsRole = ROLE_OPTIONS.some((r) => r.id === initialRole);
   const initialTier = initialIsRole
-    ? ROLE_OPTIONS.find((r) => r.id === initialRole).recommendedTier
+    ? ROLE_TO_PLAN[initialRole] || "free"
     : "";
 
   const [stepIdx, setStepIdx] = useState(0);
@@ -65,23 +80,30 @@ export default function Signup() {
   });
   const [profile, setProfile] = useState({});
   const [tier, setTier] = useState(initialTier);
-  const [tiers, setTiers] = useState([]);
+  const [signupCycle, setSignupCycle] = useState("monthly");
+  // Plan catalog from /api/billing/plans — populated after the account is
+  // created (the endpoint requires auth). Falls back to an empty array, which
+  // hides the catalog UI and lets the user proceed on Free.
+  const [plans, setPlans] = useState([]);
   const [err, setErr] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const role = ROLE_OPTIONS.find((r) => r.id === form.role);
 
+  // Lazy-load the plan catalog when Step 3 becomes reachable (after the
+  // account is created and the session is set in submitAccount).
   useEffect(() => {
-    api.get("/membership/tiers").then((r) => setTiers(r.data)).catch(() => setTiers([]));
-  }, []);
+    if (stepIdx < 1) return;
+    if (plans.length) return;
+    api.get("/billing/plans").then((r) => setPlans(sortPlans(r.data))).catch(() => setPlans([]));
+  }, [stepIdx, plans.length]);
 
   const updateForm = (k, v) => setForm((f) => ({ ...f, [k]: v }));
   const updateProfile = (k, v) => setProfile((p) => ({ ...p, [k]: v }));
 
   const pickRole = (roleId) => {
     setForm((f) => ({ ...f, role: roleId }));
-    const r = ROLE_OPTIONS.find((x) => x.id === roleId);
-    if (r && !tier) setTier(r.recommendedTier);
+    if (!tier) setTier(ROLE_TO_PLAN[roleId] || "free");
   };
 
   const canProceedStep0 = useMemo(() => {
@@ -130,35 +152,40 @@ export default function Signup() {
 
   const launchCheckout = async () => {
     setErr("");
+    // Enterprise → contact sales (no Stripe checkout).
+    if (tier === "enterprise") {
+      window.location.assign("mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry");
+      return;
+    }
+    // Free uses the legacy membership endpoint (untouched in 15.C — 15.G will
+    // remove it). Paid (Starter/Professional) uses the new Phase 15 endpoint
+    // which bakes in the 14-day Stripe trial via subscription_data.
     setSubmitting(true);
     try {
-      const { data } = await api.post("/membership/checkout", {
-        tier,
+      if (tier === "free") {
+        const { data } = await api.post("/membership/checkout", {
+          tier,
+          origin_url: window.location.origin,
+        });
+        if (data.url) {
+          window.location.href = data.url;
+          return;
+        }
+        navigate("/dashboard");
+        return;
+      }
+      const { data } = await api.post("/subscriptions/checkout", {
+        plan_tier_code: tier,
+        billing_cycle: signupCycle,
         origin_url: window.location.origin,
       });
       if (data.url) {
         window.location.href = data.url;
         return;
       }
-      // Free fallthrough (shouldn't happen here).
       navigate("/dashboard");
     } catch (e) {
       setErr(e?.response?.data?.detail || "Could not start checkout.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const startTrial = async () => {
-    // 7-day free trial on a paid tier — no card needed. Server-side only.
-    setErr("");
-    setSubmitting(true);
-    try {
-      await api.post("/membership/start-trial", { tier, origin_url: window.location.origin });
-      await refreshMe();
-      navigate("/dashboard");
-    } catch (e) {
-      setErr(e?.response?.data?.detail || "Could not start trial.");
     } finally {
       setSubmitting(false);
     }
@@ -406,37 +433,101 @@ export default function Signup() {
             </div>
           )}
 
-          {/* Step 3 — membership + Stripe */}
+          {/* Step 3 — membership + Stripe (Phase 15.C) */}
           {stepIdx === 2 && (
             <div data-testid="signup-step-membership">
               <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Step 3 of 3</div>
-              <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">Choose your tier</h2>
+              <div className="flex items-end justify-between flex-wrap gap-4 mb-3">
+                <h2 className="font-display text-3xl md:text-4xl font-light text-white">Choose your plan</h2>
+                {/* Monthly / Annual toggle — only meaningful for paid tiers */}
+                <div
+                  className="inline-flex bg-white/5 border border-white/10 rounded-full p-0.5"
+                  data-testid="signup-cycle-toggle"
+                  role="tablist"
+                  aria-label="Billing cycle"
+                >
+                  {["monthly", "annual"].map((c) => (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => setSignupCycle(c)}
+                      data-testid={`signup-cycle-${c}`}
+                      className={`px-4 py-1.5 text-[11.5px] tracking-wide uppercase rounded-full transition-colors ${
+                        signupCycle === c
+                          ? "bg-equine-saddle text-equine-navyDeep"
+                          : "text-white/65 hover:text-white"
+                      }`}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <p className="text-white/60 text-[14px] mb-8">
-                Paid tiers include a <span className="text-equine-saddle font-medium">7-day free trial</span> — no card needed.
+                Paid plans include a <span className="text-equine-saddle font-medium">14-day free trial</span>.
+                Cancel from your account anytime — Free stays free forever.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {tiers.map((t) => {
-                  const selected = tier === t.id;
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-testid="signup-plan-grid">
+                {plans.length === 0 && (
+                  <div className="col-span-full text-white/40 text-[13px]" data-testid="signup-plan-empty">
+                    Loading plans…
+                  </div>
+                )}
+                {plans.map((p) => {
+                  const selected = tier === p.tier_code;
+                  const isFree = p.tier_code === "free";
+                  const isEnterprise = p.tier_code === "enterprise" || !!p.contact_sales;
+                  const priceCents =
+                    signupCycle === "annual" && p.annual_price_cents != null
+                      ? p.annual_price_cents
+                      : p.monthly_price_cents;
+                  const savings = annualSavingsPct(p);
                   return (
                     <button
-                      key={t.id}
+                      key={p.tier_code}
                       type="button"
-                      onClick={() => setTier(t.id)}
-                      className={`text-left p-5 rounded-xl border transition-all ${
+                      onClick={() => setTier(p.tier_code)}
+                      className={`text-left p-5 rounded-xl border transition-all flex flex-col ${
                         selected
                           ? "border-equine-saddle bg-equine-saddle/10"
                           : "border-white/10 bg-white/5 hover:border-white/30"
                       }`}
-                      data-testid={`signup-tier-${t.id}`}
+                      data-testid={`signup-tier-${p.tier_code}`}
                     >
-                      <div className="flex items-baseline justify-between">
-                        <div className="font-display text-xl text-white">{t.label}</div>
-                        <div className="text-white font-display text-2xl">
-                          ${t.amount}<span className="text-[12px] text-white/40 font-sans"> /mo</span>
-                        </div>
+                      <div className="flex items-baseline justify-between gap-2">
+                        <div className="font-display text-xl text-white capitalize">{p.name || p.tier_code}</div>
                       </div>
-                      <div className="text-[12.5px] text-white/55 mt-2 leading-relaxed">{t.blurb}</div>
+                      <div className="mt-2 text-white font-display text-2xl">
+                        {isEnterprise ? (
+                          "Let's talk"
+                        ) : isFree ? (
+                          <>$0<span className="text-[12px] text-white/40 font-sans"> /mo</span></>
+                        ) : (
+                          <>
+                            {formatCents(priceCents)}
+                            <span className="text-[12px] text-white/40 font-sans">
+                              {signupCycle === "annual" ? " /yr" : " /mo"}
+                            </span>
+                          </>
+                        )}
+                      </div>
+                      {signupCycle === "annual" && savings != null && !isEnterprise && !isFree && (
+                        <div className="mt-1 text-[10.5px] tracking-[0.2em] uppercase text-equine-saddle" data-testid={`signup-savings-${p.tier_code}`}>
+                          Save {savings}%
+                        </div>
+                      )}
+                      <div className="text-[12.5px] text-white/55 mt-2 leading-relaxed flex-1">{p.description}</div>
+                      {p.feature_limits && (
+                        <div className="mt-3 text-[11.5px] text-white/55 space-y-1">
+                          {p.feature_limits.horses != null && (
+                            <div className="flex items-center gap-1.5"><Check className="w-3 h-3 text-equine-saddle" /> Up to {p.feature_limits.horses} horses</div>
+                          )}
+                          {p.feature_limits.users != null && (
+                            <div className="flex items-center gap-1.5"><Check className="w-3 h-3 text-equine-saddle" /> Up to {p.feature_limits.users} users</div>
+                          )}
+                        </div>
+                      )}
                     </button>
                   );
                 })}
@@ -457,25 +548,23 @@ export default function Signup() {
                   >
                     {submitting ? "Finishing…" : "Start with Free"} <ArrowRight className="w-4 h-4" />
                   </button>
+                ) : tier === "enterprise" ? (
+                  <a
+                    href="mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry"
+                    className="bg-equine-saddle text-equine-navyDeep hover:bg-white transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                    data-testid="signup-contact-sales"
+                  >
+                    Contact sales <ArrowRight className="w-4 h-4" />
+                  </a>
                 ) : (
-                  <div className="flex flex-wrap items-center gap-3">
-                    <button
-                      onClick={startTrial}
-                      disabled={submitting || !tier}
-                      className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
-                      data-testid="signup-start-trial"
-                    >
-                      {submitting ? "Starting…" : "Start 7-day free trial"} <ArrowRight className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={launchCheckout}
-                      disabled={submitting || !tier}
-                      className="text-[13px] tracking-wide text-white/70 hover:text-white disabled:opacity-40 transition-colors px-4 py-3"
-                      data-testid="signup-checkout"
-                    >
-                      Or pay now →
-                    </button>
-                  </div>
+                  <button
+                    onClick={launchCheckout}
+                    disabled={submitting || !tier}
+                    className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                    data-testid="signup-start-trial"
+                  >
+                    {submitting ? "Starting…" : "Start 14-day free trial"} <ArrowRight className="w-4 h-4" />
+                  </button>
                 )}
               </div>
             </div>

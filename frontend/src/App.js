@@ -72,6 +72,8 @@ import Integrations from "./pages/Integrations";
 import AdvancedReports from "./pages/AdvancedReports";
 import MobileReadiness from "./pages/MobileReadiness";
 import AuditLog from "./pages/AuditLog";
+import SubscriptionBilling from "./pages/SubscriptionBilling";
+import SubscriptionSuccess from "./pages/SubscriptionSuccess";
 
 const Protected = ({ children }) => {
   const { user, loading } = useAuth();
@@ -133,6 +135,8 @@ function App() {
               <Route path="/health-care-logs" element={permit(<HealthCareLogs />, ROLE_GROUPS.care)} />
               <Route path="/weight-trends" element={permit(<WeightTrends />, ROLE_GROUPS.care)} />
               <Route path="/billing" element={permit(<Billing />, ROLE_GROUPS.financial)} />
+              <Route path="/billing/subscription" element={permit(<SubscriptionBilling />, ROLE_GROUPS.barnManage)} />
+              <Route path="/billing/success" element={<SubscriptionSuccess />} />
               <Route path="/review-queue" element={permit(<ReviewQueue />, ROLE_GROUPS.communication)} />
               <Route path="/admin/review-queue" element={permit(<AdminReviewQueue />, ROLE_GROUPS.admin)} />
               <Route path="/payments" element={permit(<Payments />, ROLE_GROUPS.financial)} />

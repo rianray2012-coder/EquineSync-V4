@@ -54,6 +54,7 @@ const NAV_SECTIONS = [
       { to: "/owners", label: "Owners", icon: Users },
       { to: "/owner-portal", label: "Owner Portal", icon: Crown, roles: ROLE_GROUPS.ownerPortal },
       { to: "/billing", label: "Billing", icon: Receipt, roles: ROLE_GROUPS.financial },
+      { to: "/billing/subscription", label: "Subscription", icon: Sparkles, roles: ROLE_GROUPS.barnManage },
       { to: "/review-queue", label: "Review Queue", icon: ClipboardCheck, roles: ROLE_GROUPS.communication, reviewBadge: true },
       { to: "/financial-dashboard", label: "Financial Dashboard", icon: BarChart3, roles: ROLE_GROUPS.financial },
       { to: "/payments", label: "Payments", icon: Landmark, roles: ROLE_GROUPS.financial },

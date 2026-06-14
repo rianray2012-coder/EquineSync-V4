@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Logo } from "../components/Logo";
-import { api } from "../lib/api";
 import { Check, ArrowRight, ShieldCheck, Sparkles, Users, Calendar } from "lucide-react";
+import { annualSavingsPct, formatCents } from "../lib/subscriptionBilling";
 
 const ROLE_CARDS = [
   {
@@ -58,18 +58,83 @@ const TRUST = [
   { Icon: Sparkles, label: "Cancel anytime" },
 ];
 
+// Phase 15.C — landing-page pricing band. The authoritative source is the
+// seeded `plans` collection (see backend/scripts/seed_plans.py and the public
+// catalog at GET /api/billing/plans). That endpoint requires auth, so this
+// static mirror is what unauthenticated visitors see. Keep these values in
+// lockstep with the seed; tweak both together. Numbers use the same shape
+// (`monthly_price_cents`, `annual_price_cents`, `feature_limits`) so the
+// rendering helpers (formatCents, annualSavingsPct) just work.
+const LANDING_PLANS = [
+  {
+    tier_code: "free",
+    name: "Free",
+    description: "Solo riders, owners and small-stable getting started.",
+    monthly_price_cents: 0,
+    annual_price_cents: null,
+    feature_limits: { horses: 3, users: 1 },
+    bullets: [
+      "Personal horse profile + journal",
+      "Network directory presence",
+      "Messaging with verified pros",
+    ],
+  },
+  {
+    tier_code: "starter",
+    name: "Starter",
+    description: "Small barns running day-to-day operations.",
+    monthly_price_cents: 4900,
+    annual_price_cents: 49980,
+    feature_limits: { horses: 25, users: 5 },
+    bullets: [
+      "Up to 25 horses · 5 staff users",
+      "Daily care, feed & medication tracking",
+      "Boarder invoices & owner portal",
+    ],
+  },
+  {
+    tier_code: "professional",
+    name: "Professional",
+    description: "Growing facilities with training and lesson programs.",
+    monthly_price_cents: 14900,
+    annual_price_cents: 151980,
+    feature_limits: { horses: 100, users: 25 },
+    popular: true,
+    bullets: [
+      "Up to 100 horses · 25 staff users",
+      "Training plans, GPS, advanced reporting",
+      "Recurring billing + boarder messaging",
+    ],
+  },
+  {
+    tier_code: "enterprise",
+    name: "Enterprise",
+    description: "Multi-location facilities with custom needs.",
+    contact_sales: true,
+    feature_limits: { horses: null, users: null },
+    bullets: [
+      "Unlimited horses & staff users",
+      "Dedicated support · SSO · custom integrations",
+      "Volume pricing & on-prem options",
+    ],
+  },
+];
+
+const CONTACT_SALES_MAILTO = "mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry";
+
 export default function Landing() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
-  const [tiers, setTiers] = useState([]);
+  const [billingCycle, setBillingCycle] = useState("monthly");
 
   useEffect(() => {
     if (user && !loading) navigate("/dashboard", { replace: true });
   }, [user, loading, navigate]);
 
-  useEffect(() => {
-    api.get("/membership/tiers").then((r) => setTiers(r.data)).catch(() => setTiers([]));
-  }, []);
+  const plansForCycle = useMemo(
+    () => LANDING_PLANS.map((p) => ({ ...p, _savings: annualSavingsPct(p) })),
+    [],
+  );
 
   const goToSignup = (roleId) => {
     const query = roleId ? `?role=${roleId}` : "";
@@ -207,27 +272,62 @@ export default function Landing() {
       {/* Pricing band */}
       <section id="pricing" className="border-t border-white/10 bg-equine-navy/30">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
-          <div className="mb-14 max-w-2xl">
-            <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-4">
-              Membership
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-2xl">
+              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-4">
+                Membership
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+                Pricing that respects your time.
+              </h2>
+              <p className="mt-4 text-white/65 text-[15px] leading-relaxed">
+                Start free. Upgrade to a facility plan when you need it. Paid plans include a
+                <span className="text-equine-saddle font-medium"> 14-day free trial</span>. Cancel anytime.
+              </p>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-light text-white">
-              Pricing that respects your time.
-            </h2>
-            <p className="mt-4 text-white/65 text-[15px] leading-relaxed">
-              Start free. Upgrade only when you need the features. Cancel anytime.
-            </p>
+            {/* Monthly / Annual toggle */}
+            <div
+              className="inline-flex bg-white/5 border border-white/10 rounded-full p-0.5"
+              data-testid="landing-cycle-toggle"
+              role="tablist"
+              aria-label="Billing cycle"
+            >
+              {["monthly", "annual"].map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setBillingCycle(c)}
+                  data-testid={`landing-cycle-${c}`}
+                  className={`px-4 py-2 text-[12px] tracking-wide uppercase rounded-full transition-colors ${
+                    billingCycle === c
+                      ? "bg-equine-saddle text-equine-navyDeep"
+                      : "text-white/65 hover:text-white"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tiers.map((tier) => {
-              const popular = tier.id === "trainer_provider";
+            {plansForCycle.map((tier) => {
+              const popular = !!tier.popular;
+              const contactSales = !!tier.contact_sales;
+              const isFree = tier.tier_code === "free";
+              const priceCents =
+                billingCycle === "annual" && tier.annual_price_cents != null
+                  ? tier.annual_price_cents
+                  : tier.monthly_price_cents;
+              const cycleLabel = billingCycle === "annual" ? "/ yr" : "/ mo";
+
               return (
                 <div
-                  key={tier.id}
+                  key={tier.tier_code}
                   className={`relative bg-equine-navy/60 border ${
                     popular ? "border-equine-saddle/50 shadow-[0_0_60px_-20px_rgba(199,182,217,0.4)]" : "border-white/5"
                   } rounded-2xl p-8 flex flex-col`}
-                  data-testid={`pricing-card-${tier.id}`}
+                  data-testid={`pricing-card-${tier.tier_code}`}
                 >
                   {popular && (
                     <span className="absolute top-5 right-5 text-[10px] tracking-[0.2em] uppercase text-equine-saddle bg-equine-saddle/10 border border-equine-saddle/30 px-2.5 py-1 rounded-full">
@@ -235,30 +335,61 @@ export default function Landing() {
                     </span>
                   )}
                   <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle/80 font-medium mb-3">
-                    {tier.label}
+                    {tier.name}
                   </div>
-                  <div className="font-display text-5xl text-white font-light">
-                    ${tier.amount}
-                    <span className="text-[14px] text-white/50 font-sans tracking-wide ml-2">/ mo</span>
-                  </div>
-                  <p className="mt-4 text-[13.5px] text-white/65 leading-relaxed">{tier.blurb}</p>
-                  <ul className="mt-6 space-y-2.5 text-[13px] text-white/70">
-                    <li className="flex items-start gap-2"><Check className="w-3.5 h-3.5 mt-0.5 text-equine-saddle flex-shrink-0" /><span>Profile + directory presence</span></li>
-                    <li className="flex items-start gap-2"><Check className="w-3.5 h-3.5 mt-0.5 text-equine-saddle flex-shrink-0" /><span>Messaging with the network</span></li>
-                    {tier.id !== "free" && (
-                      <li className="flex items-start gap-2"><Check className="w-3.5 h-3.5 mt-0.5 text-equine-saddle flex-shrink-0" /><span>Premium scheduling & tools</span></li>
-                    )}
-                    {tier.id === "barn_facility" && (
-                      <li className="flex items-start gap-2"><Check className="w-3.5 h-3.5 mt-0.5 text-equine-saddle flex-shrink-0" /><span>Full barn operations suite</span></li>
-                    )}
+
+                  {contactSales ? (
+                    <div className="font-display text-4xl text-white font-light">
+                      Let&apos;s talk
+                    </div>
+                  ) : (
+                    <div className="font-display text-5xl text-white font-light">
+                      {formatCents(priceCents)}
+                      <span className="text-[14px] text-white/50 font-sans tracking-wide ml-2">{cycleLabel}</span>
+                    </div>
+                  )}
+
+                  {billingCycle === "annual" && tier._savings != null && (
+                    <div
+                      className="mt-2 text-[11px] tracking-[0.2em] uppercase text-equine-saddle"
+                      data-testid={`pricing-savings-${tier.tier_code}`}
+                    >
+                      Save {tier._savings}% vs. monthly
+                    </div>
+                  )}
+
+                  <p className="mt-4 text-[13.5px] text-white/65 leading-relaxed">{tier.description}</p>
+
+                  <ul className="mt-6 space-y-2.5 text-[13px] text-white/70 flex-1">
+                    {(tier.bullets || []).map((b) => (
+                      <li key={b} className="flex items-start gap-2">
+                        <Check className="w-3.5 h-3.5 mt-0.5 text-equine-saddle flex-shrink-0" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
                   </ul>
-                  <button
-                    onClick={() => goToSignup()}
-                    className={`mt-8 w-full ${popular ? "bg-equine-saddle text-equine-navyDeep hover:bg-white" : "bg-white/5 text-white hover:bg-white/10 border border-white/10"} transition-colors py-3 text-[13px] tracking-wide font-medium rounded-full`}
-                    data-testid={`pricing-cta-${tier.id}`}
-                  >
-                    Choose {tier.label}
-                  </button>
+
+                  {contactSales ? (
+                    <a
+                      href={CONTACT_SALES_MAILTO}
+                      className="mt-8 w-full text-center bg-white/5 text-white hover:bg-white/10 border border-white/10 transition-colors py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center justify-center gap-1.5"
+                      data-testid={`pricing-cta-${tier.tier_code}`}
+                    >
+                      Contact sales <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => goToSignup()}
+                      className={`mt-8 w-full ${
+                        popular
+                          ? "bg-equine-saddle text-equine-navyDeep hover:bg-white"
+                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                      } transition-colors py-3 text-[13px] tracking-wide font-medium rounded-full`}
+                      data-testid={`pricing-cta-${tier.tier_code}`}
+                    >
+                      {isFree ? "Start free" : `Start ${tier.name}`}
+                    </button>
+                  )}
                 </div>
               );
             })}

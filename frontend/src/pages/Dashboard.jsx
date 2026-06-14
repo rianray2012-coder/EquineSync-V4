@@ -15,6 +15,8 @@ import { OperationsCard, UpcomingCareCard } from "../components/dashboard/SmallC
 import FounderWalkthrough, { walkthroughSeen } from "../components/FounderWalkthrough";
 import LastSyncedBadge from "../components/today/LastSyncedBadge";
 import { BrandLoader } from "../components/BrandLoader";
+import { canManageBilling } from "../lib/permissions";
+import { RESUMABLE_STATUSES, STATUS_LABEL } from "../lib/subscriptionBilling";
 
 /**
  * Stable Command — operational glance, not an analytics board.
@@ -119,6 +121,8 @@ export default function Dashboard() {
         onClose={() => setWalkthroughOpen(false)}
       />
 
+      <SubscriptionResumeBanner user={user} />
+
       <SetupConciergeCard progress={progress} steps={steps} />
 
       {/* SECTION 1 · Right now */}
@@ -207,3 +211,55 @@ export default function Dashboard() {
     </div>
   );
 }
+
+// Phase 15.C — secondary "Resume membership" CTA. Renders only for users
+// with the `barn:manage` capability whose subscription is in a resumable
+// state (canceled / past_due / unpaid / incomplete_expired). The primary
+// action lives at /billing/subscription; this is the lightweight Dashboard
+// pointer.
+function SubscriptionResumeBanner({ user }) {
+  const [sub, setSub] = useState(null);
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    if (!canManageBilling(user)) {
+      setReady(true);
+      return;
+    }
+    let cancelled = false;
+    api.get("/subscriptions/me")
+      .then((r) => { if (!cancelled) setSub(r.data?.subscription || null); })
+      .catch(() => { /* silent — banner just doesn't render */ })
+      .finally(() => { if (!cancelled) setReady(true); });
+    return () => { cancelled = true; };
+  }, [user]);
+
+  if (!ready) return null;
+  if (!sub || !RESUMABLE_STATUSES.has(sub.status)) return null;
+
+  return (
+    <div
+      className="mb-6 rounded-xl border border-equine-clay/30 bg-equine-clay/8 p-4 flex flex-wrap items-center gap-4"
+      data-testid="dashboard-resume-banner"
+    >
+      <div className="inline-flex w-8 h-8 rounded-full bg-equine-clay/15 border border-equine-clay/30 items-center justify-center">
+        <Receipt strokeWidth={1.5} className="w-4 h-4 text-equine-clay" />
+      </div>
+      <div className="flex-1 min-w-[200px]">
+        <div className="text-equine-ink text-[14px] font-medium leading-snug">
+          Your {sub.plan_tier_code} membership is {STATUS_LABEL[sub.status] || sub.status}.
+        </div>
+        <div className="text-equine-inkMuted text-[12.5px] mt-0.5">
+          Resume from the Subscription page to keep your facility features.
+        </div>
+      </div>
+      <Link
+        to="/billing/subscription"
+        data-testid="dashboard-resume-cta"
+        className="inline-flex items-center gap-1.5 text-[12px] tracking-wide font-medium px-4 py-2 rounded-full bg-equine-navy text-white hover:bg-equine-navyLift transition-colors"
+      >
+        Resume membership <ArrowRight className="w-3.5 h-3.5" />
+      </Link>
+    </div>
+  );
+}
+

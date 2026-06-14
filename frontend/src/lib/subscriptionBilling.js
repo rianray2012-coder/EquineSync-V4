@@ -1,0 +1,83 @@
+// Phase 15.C — shared helpers for the Subscription Billing UI. Pure
+// front-end utilities; no network calls. Source data: GET /api/billing/plans
+// (see backend/routes/subscriptions.py::list_plans).
+
+// Display order — mirrors backend `_plan_to_public` sort. "free" stays first
+// because the landing pricing band still surfaces it, but the wizard +
+// /billing/subscription only act on subscribable tiers.
+export const PLAN_ORDER = ["free", "starter", "professional", "enterprise"];
+
+export const SUBSCRIBABLE_TIERS = new Set(["starter", "professional"]);
+
+export const sortPlans = (plans) => {
+  const idx = (t) => {
+    const i = PLAN_ORDER.indexOf(t);
+    return i === -1 ? 999 : i;
+  };
+  return [...(plans || [])].sort((a, b) => idx(a.tier_code) - idx(b.tier_code));
+};
+
+// Convert cents → "$1,499" / "$149.99" string. Strips trailing .00.
+export const formatCents = (cents) => {
+  if (cents == null) return "—";
+  const dollars = cents / 100;
+  const hasFraction = Math.round(dollars) !== dollars;
+  return `$${dollars.toLocaleString(undefined, {
+    minimumFractionDigits: hasFraction ? 2 : 0,
+    maximumFractionDigits: 2,
+  })}`;
+};
+
+// Annual-vs-monthly savings: rounded whole percent. Returns null when one of
+// the prices is missing or the annual price isn't actually a discount.
+export const annualSavingsPct = (plan) => {
+  const m = plan?.monthly_price_cents;
+  const a = plan?.annual_price_cents;
+  if (m == null || a == null || m <= 0 || a <= 0) return null;
+  const fullYear = m * 12;
+  if (a >= fullYear) return null;
+  return Math.round(((fullYear - a) / fullYear) * 100);
+};
+
+// Friendly label for a subscription status returned by /api/subscriptions/me.
+export const STATUS_LABEL = {
+  trialing: "Free trial",
+  active: "Active",
+  past_due: "Payment past due",
+  unpaid: "Unpaid",
+  canceled: "Canceled",
+  incomplete: "Awaiting first payment",
+  incomplete_expired: "Checkout expired",
+  paused: "Paused",
+};
+
+// `StatusPill` tone for each status — uses the existing approved palette
+// tokens (sage/amber/clay/brass/neutral) only.
+export const STATUS_TONE = {
+  trialing: "info",
+  active: "success",
+  past_due: "warning",
+  unpaid: "warning",
+  canceled: "critical",
+  incomplete: "warning",
+  incomplete_expired: "critical",
+  paused: "neutral",
+};
+
+// Statuses where the user should see a "Resume membership" CTA. Mirrors the
+// 15.B webhook lifecycle states that take a barn off paid access.
+export const RESUMABLE_STATUSES = new Set([
+  "canceled",
+  "past_due",
+  "incomplete_expired",
+  "unpaid",
+]);
+
+// Days remaining until an ISO timestamp; never negative. Returns null if the
+// timestamp is missing or unparseable.
+export const daysUntil = (iso) => {
+  if (!iso) return null;
+  const t = new Date(iso).getTime();
+  if (Number.isNaN(t)) return null;
+  return Math.max(0, Math.ceil((t - Date.now()) / 86_400_000));
+};

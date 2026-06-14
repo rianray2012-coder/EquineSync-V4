@@ -1,0 +1,38 @@
+{
+  "summary": "Phase 15.C — Facility Owner Billing UI tested end-to-end in the browser. Landing pricing band (4 cards + cycle toggle + annual savings + Enterprise mailto), Signup Step 3 (14-day trial copy, cycle toggle, 4 tiers, savings badges, /subscriptions/checkout dispatch, contact-sales + finish-free branches), Sidebar role gating, Route gating with Forbidden screen for horse_owner, SubscriptionBilling portal (status card, soft-warn usage meters, resume flow primary+secondary, manage-stripe button, plan picker), and SubscriptionSuccess return page all verified with proper data-testids. Resume flow validated by direct DB seed of canceled subscription on barn=primary — POST /api/subscriptions/checkout fires with correct {plan_tier_code, billing_cycle} body for BOTH monthly and annual resume buttons, and the Dashboard secondary banner CTA links to /billing/subscription. Soft-warn enforcement confirmed: with users=536/1 (>100%), the bar turns clay, StatusPill becomes critical, usage-users-warn copy appears, but NO modal/blocker — sidebar nav and other CTAs remain interactive.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/billing/plans", "issue": "All plans return has_monthly=false and has_annual=false because STRIPE_PRICE_* env vars are unset in backend/.env. As a result, the per-card monthly/annual toggle (plan-cycle-toggle-{tier}, plan-cycle-monthly-{tier}, plan-cycle-annual-{tier}, plan-savings-{tier}) on /billing/subscription is correctly hidden by the frontend gate (line 443 of SubscriptionBilling.jsx). This is a seeding/config issue per the 15.C handoff note, NOT a 15.C UI bug — flagged for visibility only. Landing + Signup wizard cycle toggles work fine because they use static catalogs."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "SubscriptionSuccess", "issue": "Line 97 of /app/frontend/src/pages/SubscriptionSuccess.jsx uses '&apos;' inside a JSX *string literal* (not JSX text), so the screen renders the literal text 'We&apos;re still confirming...' instead of a curly apostrophe. Fix: replace the &apos; with a real apostrophe (escaped via \\u2019 or simply ').", "selector": "[data-testid=\"success-summary-card\"]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix the &apos; literal in SubscriptionSuccess.jsx line 97 (simple string fix).",
+    "(Out of 15.C scope but worth noting to ops): set STRIPE_PRICE_STARTER_MONTHLY/ANNUAL and STRIPE_PRICE_PROFESSIONAL_MONTHLY/ANNUAL in backend/.env so has_monthly/has_annual flags surface, enabling the in-card cycle toggle on /billing/subscription.",
+    "Optional: also expose monthly/annual price metadata when stripe price ids are absent (dev-mode) so the picker toggle remains testable without Stripe creds."
+  ],
+  "critical_code_review_comments": [
+    "SubscriptionBilling.jsx PlanPickerCard toggle is correctly gated by plan.has_monthly||has_annual — good defensive coding, but means testing the toggle requires real Stripe price IDs OR a backend dev fallback.",
+    "permissions.js BARN_MANAGE_ROLES properly mirrors backend ADMIN_ROLES; canManageBilling is wired to ROLE_GROUPS.barnManage in App.js routes — gating is correct.",
+    "Resume CTA placement matches spec: primary on /billing/subscription (subscription-resume-card with -monthly/-annual buttons) AND secondary on /dashboard (dashboard-resume-banner with dashboard-resume-cta) — both verified end-to-end.",
+    "UsageMeter palette: bg-equine-sage/saddle/amber/clay — all approved tokens, no matte black or champagne introduced.",
+    "Landing pricing band shows 'Save 15% vs. monthly' rather than the documented 'Save X%' format. Still matches the spec semantically (annualSavingsPct returns 15 for current static catalog), but the trailing 'vs. monthly' qualifier is an extra phrase — not a bug.",
+    "On SubscriptionBilling page, when no subscription exists, subscription-manage-stripe-btn is correctly disabled with helpful subtext 'Available after your first subscription checkout.' Good UX."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (frontend-only run)", "frontend": "98%"},
+  "test_credentials": "admin: admin@equinesync.com / TestPassword123! (created via /api/auth/signup then role flipped via pymongo). marketplace user: mkt_fb_1781408835@test.com / securepass1 (horse_owner, used for forbidden-gate test).",
+  "seed_data_creation": "Seeded a canceled subscription doc on barn_id=primary and linked barns.subscription_id, to drive the Resume CTA. Cleaned up after the run (deleted subscriptions where stripe_subscription_id=sub_test_15c and unset barns.subscription_id).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All 7 spec features pass except the &apos; literal in SubscriptionSuccess.jsx — trivial fix. The in-card plan-cycle-toggle on /billing/subscription is hidden because /api/billing/plans returns has_monthly/has_annual=false (STRIPE price IDs unset). When testing that toggle in the future, either set STRIPE_PRICE_* env vars OR monkey-patch the plans response. Resume flow requires both subscriptions doc with status='canceled'|'past_due'|'unpaid'|'incomplete_expired' AND barns.subscription_id = that doc's id — purely setting subscriptions.barn_id is not enough because /subscriptions/me reads through barn.subscription_id.",
+  "rca of the issue": "1) Apostrophe bug: JSX text auto-decodes HTML entities, but inside a JS string literal it does not — author copy-pasted &apos; into the template. 2) Plan-toggle hidden: backend gates has_monthly/has_annual on presence of STRIPE_PRICE_* env vars, which are blank in this preview env. Neither blocks 15.C acceptance; the frontend code paths are correct."
+}
