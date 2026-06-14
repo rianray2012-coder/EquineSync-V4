@@ -288,8 +288,11 @@ async def _upsert_plan(db, tier, product_id, monthly_price_id, annual_price_id):
 async def ensure_stripe_catalog(db) -> None:
     """Entry point — called from lifespan.on_startup.
 
-    Fail-open by default in dev (logs + continues) so a missing/invalid
-    STRIPE_API_KEY never blocks app startup. In production we fail-fast.
+    Production: STRIPE_API_KEY is required AND env-provided Price IDs are
+    validated via stripe.Price.retrieve. Startup aborts on any miss.
+    Dev: fail-open. Local `plans` rows are ALWAYS upserted (all 4 tiers,
+    including Starter/Professional with null Stripe IDs when Stripe is
+    unreachable) so /billing/plans is consistent across environments.
     """
     api_key = _stripe_api_key()
     if not api_key:
@@ -297,11 +300,15 @@ async def ensure_stripe_catalog(db) -> None:
             raise RuntimeError(
                 "Production startup: STRIPE_API_KEY missing. Subscriptions cannot operate."
             )
-        logger.warning("STRIPE_API_KEY not set — skipping catalog provisioning (dev mode).")
-        # Still upsert non-Stripe rows (Free, Enterprise) so /billing/plans works.
+        logger.warning(
+            "STRIPE_API_KEY not set — skipping Stripe provisioning. "
+            "Local `plans` rows still upserted with null Stripe IDs."
+        )
+        # Codex finding #3: upsert ALL four plans (including Starter +
+        # Professional with null Stripe IDs) so /billing/plans returns a
+        # consistent catalog in dev when the key is missing.
         for tier in PLAN_CATALOG:
-            if not tier["stripe_provisioned"]:
-                await _upsert_plan(db, tier, None, None, None)
+            await _upsert_plan(db, tier, None, None, None)
         return
 
     stripe.api_key = api_key
@@ -316,3 +323,9 @@ async def ensure_stripe_catalog(db) -> None:
         if _is_production():
             raise
         logger.exception("Stripe catalog provisioning failed (dev) — continuing: %s", ex)
+        # Codex finding #3: even on dev failure, make sure all four plan
+        # rows exist with null Stripe IDs.
+        for tier in PLAN_CATALOG:
+            existing = await db.plans.find_one({"tier_code": tier["tier_code"]})
+            if not existing:
+                await _upsert_plan(db, tier, None, None, None)

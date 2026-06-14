@@ -72,18 +72,85 @@ def _plan_to_public(plan: dict) -> dict:
     }
 
 
-async def _get_barn_for_user(db, user) -> dict:
+async def _resolve_barn(db, user) -> dict:
+    """READ-ONLY barn lookup. Returns a barn row OR a synthesized read-only
+    placeholder when no row exists yet. NEVER writes to the DB. Used by
+    `/billing/usage` and `/subscriptions/me` per Codex finding #2.
+    """
     barn_id = user.get("barn_id")
     if not barn_id:
         raise HTTPException(400, "User is not associated with a barn.")
     barn = await db.barns.find_one({"id": barn_id})
-    if not barn:
-        # First touch — create a minimal record so we can attach Stripe customer
-        # and subscription_id later without violating the user choice that
-        # barn_id IS the facility_id (no new collection).
-        barn = {"id": barn_id, "created_at": _now_iso()}
-        await db.barns.insert_one(barn)
+    if barn:
+        return barn
+    # In-memory placeholder — never persisted from a read path.
+    return {"id": barn_id, "stripe_customer_id": None, "subscription_id": None}
+
+
+async def _resolve_or_create_barn(db, user) -> dict:
+    """READ-OR-CREATE barn lookup. Used by mutating endpoints (checkout) that
+    legitimately need a persisted barn row to attach Stripe customer + sub
+    references.
+    """
+    barn_id = user.get("barn_id")
+    if not barn_id:
+        raise HTTPException(400, "User is not associated with a barn.")
+    barn = await db.barns.find_one({"id": barn_id})
+    if barn:
+        return barn
+    barn = {"id": barn_id, "created_at": _now_iso()}
+    await db.barns.insert_one(barn)
     return barn
+
+
+def _allowed_origins() -> list[str]:
+    """Whitelist of origins permitted as the Stripe success/cancel redirect
+    base. Combines APP_BASE_URL (canonical) + REACT_APP_BACKEND_URL (preview)
+    + ALLOWED_BILLING_ORIGINS (comma-separated extras). All values are
+    stripped to scheme+host so a trailing path is ignored.
+    """
+    raw = [
+        os.environ.get("APP_BASE_URL"),
+        os.environ.get("REACT_APP_BACKEND_URL"),
+        os.environ.get("FRONTEND_URL"),
+    ]
+    extras = (os.environ.get("ALLOWED_BILLING_ORIGINS") or "")
+    raw += [v.strip() for v in extras.split(",")]
+    out = []
+    from urllib.parse import urlparse
+    for v in raw:
+        if not v:
+            continue
+        p = urlparse(v.strip().rstrip("/"))
+        if not p.scheme or not p.netloc:
+            continue
+        out.append(f"{p.scheme}://{p.netloc}")
+    return list(dict.fromkeys(out))  # de-dupe, preserve order
+
+
+def _validate_origin_or_400(origin_url: str) -> str:
+    """Return a normalized scheme+host origin if allow-listed; raise 400 if not.
+
+    Codex finding #4: client-supplied origin_url must NOT be trusted blindly.
+    """
+    if not origin_url or not origin_url.startswith(("http://", "https://")):
+        raise HTTPException(400, "origin_url must be an absolute http(s) URL.")
+    from urllib.parse import urlparse
+    parsed = urlparse(origin_url.rstrip("/"))
+    candidate = f"{parsed.scheme}://{parsed.netloc}"
+    allowed = _allowed_origins()
+    if not allowed:
+        # No allow-list configured at all — refuse rather than open up.
+        raise HTTPException(
+            500,
+            "Server origin allow-list is empty. Configure APP_BASE_URL.",
+        )
+    if candidate not in allowed:
+        raise HTTPException(
+            400,
+            "origin_url is not in the allow-listed frontend origins.",
+        )
+    return candidate
 
 
 async def _ensure_stripe_customer(db, user, barn) -> str:
@@ -131,7 +198,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
     # ------------------------------------------------------------------
     @router.get("/billing/usage")
     async def get_usage(user=Depends(get_current_user)):
-        barn = await _get_barn_for_user(db, user)
+        # Codex finding #2: read-only resolver. NEVER mutates the DB.
+        barn = await _resolve_barn(db, user)
         # Resolve current entitlements: prefer the subscription snapshot, else
         # fall back to the Free plan's limits.
         ent = None
@@ -184,8 +252,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         if cycle not in ("monthly", "annual"):
             raise HTTPException(400, "billing_cycle must be 'monthly' or 'annual'.")
         origin = (body.origin_url or "").rstrip("/")
-        if not origin.startswith(("http://", "https://")):
-            raise HTTPException(400, "origin_url must be an absolute http(s) URL.")
+        normalized_origin = _validate_origin_or_400(origin)
 
         plan = await db.plans.find_one({"tier_code": tier, "active": True}, {"_id": 0})
         if not plan:
@@ -194,7 +261,9 @@ def build_router(*, db, get_current_user) -> APIRouter:
         if not price_id:
             raise HTTPException(500, f"Plan '{tier}' is missing a Stripe Price for cycle={cycle}.")
 
-        barn = await _get_barn_for_user(db, user)
+        # Mutating endpoint — barn row may need to be created so we can
+        # attach the Stripe customer + subscription references.
+        barn = await _resolve_or_create_barn(db, user)
         customer_id = await _ensure_stripe_customer(db, user, barn)
 
         # 14-day trial only if this barn has no prior subscription.
@@ -203,8 +272,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
         if prior_sub_count > 0:
             trial_days = None
 
-        success_url = f"{origin}/billing/success?session_id={{CHECKOUT_SESSION_ID}}"
-        cancel_url = f"{origin}/billing?cancelled=1"
+        success_url = f"{normalized_origin}/billing/success?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url = f"{normalized_origin}/billing?cancelled=1"
 
         _stripe_init()
         sub_data = {}
@@ -244,18 +313,23 @@ def build_router(*, db, get_current_user) -> APIRouter:
     @router.post("/subscriptions/customer-portal")
     async def create_customer_portal(body: PortalBody, user=Depends(get_current_user)):
         require(user, "barn:manage")
-        barn = await _get_barn_for_user(db, user)
+        # Read-only resolver — portal does NOT need to mint a new barn row.
+        # Existing Stripe customer is a prerequisite; if there's no barn or
+        # no customer on it, return a clear 400.
+        barn = await _resolve_barn(db, user)
         customer_id = barn.get("stripe_customer_id")
         if not customer_id:
             raise HTTPException(400, "No Stripe customer on file. Subscribe to a plan first.")
-        return_url = (body.origin_url or "").rstrip("/") or "https://example.com"
-        if not return_url.startswith(("http://", "https://")):
-            raise HTTPException(400, "origin_url must be an absolute http(s) URL.")
+        return_origin = (body.origin_url or "").rstrip("/")
+        if not return_origin:
+            # Fall back to APP_BASE_URL when caller didn't supply one.
+            return_origin = (os.environ.get("APP_BASE_URL") or "").rstrip("/")
+        normalized_origin = _validate_origin_or_400(return_origin)
         _stripe_init()
         try:
             session = stripe.billing_portal.Session.create(
                 customer=customer_id,
-                return_url=f"{return_url}/billing",
+                return_url=f"{normalized_origin}/billing",
             )
         except stripe.error.StripeError as ex:
             logger.exception("customer portal create failed")
@@ -267,17 +341,23 @@ def build_router(*, db, get_current_user) -> APIRouter:
     # ------------------------------------------------------------------
     @router.get("/subscriptions/me")
     async def get_my_subscription(user=Depends(get_current_user)):
-        barn = await _get_barn_for_user(db, user)
+        # Codex finding #2 + #5: read-only resolver, and strip raw Stripe IDs
+        # from the default response. The UI only needs plan tier, status,
+        # period, trial info, and entitlements snapshot.
+        barn = await _resolve_barn(db, user)
         sub_id = barn.get("subscription_id")
         if not sub_id:
             return {"barn_id": barn["id"], "subscription": None}
         sub = await db.subscriptions.find_one({"id": sub_id}, {"_id": 0})
         if not sub:
             return {"barn_id": barn["id"], "subscription": None}
-        # Strip raw Stripe IDs from default response — keep them, since the
-        # Customer Portal flow needs no IDs surfaced, but it's a barn-scoped
-        # read for the owner. Acceptable to return them.
-        return {"barn_id": barn["id"], "subscription": sub}
+        STRIPE_FIELDS = {
+            "stripe_customer_id",
+            "stripe_subscription_id",
+            "stripe_price_id",
+        }
+        safe = {k: v for k, v in sub.items() if k not in STRIPE_FIELDS}
+        return {"barn_id": barn["id"], "subscription": safe}
 
     # ------------------------------------------------------------------
     # Webhook — 15.A scope: ONLY checkout.session.completed handled.

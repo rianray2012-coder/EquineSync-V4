@@ -312,3 +312,198 @@ def test_legacy_membership_checkout_free_tier_still_works():
     body = r.json()
     assert body["url"] is None
     assert body["status"] == "free"
+
+
+# ===================================================================
+# Codex review fixes — focused regression tests
+# ===================================================================
+
+# Codex finding #1: production fail-fast must NOT be swallowed.
+def test_lifespan_production_fail_fast_is_not_swallowed(monkeypatch):
+    """Simulate the production startup path with missing Stripe Price IDs:
+    `ensure_stripe_catalog` MUST raise (not log-and-continue), and the
+    lifespan wrapper MUST re-raise rather than swallow.
+    """
+    import asyncio
+    import sys
+    sys.path.insert(0, "/app/backend")
+    from core import billing_provisioning
+
+    monkeypatch.setenv("APP_ENV", "production")
+    monkeypatch.setenv("STRIPE_API_KEY", "sk_test_pretend")
+    # Clear any Price IDs that may be set in the env so the prod validator fails.
+    for k in (
+        "STRIPE_PRICE_STARTER_MONTHLY",
+        "STRIPE_PRICE_STARTER_ANNUAL",
+        "STRIPE_PRICE_PROFESSIONAL_MONTHLY",
+        "STRIPE_PRICE_PROFESSIONAL_ANNUAL",
+    ):
+        monkeypatch.delenv(k, raising=False)
+
+    class _StubDB:
+        class _Plans:
+            async def update_one(self, *a, **k): return None
+            async def find_one(self, *a, **k): return None
+        plans = _Plans()
+
+    db = _StubDB()
+    with pytest.raises(RuntimeError) as ex:
+        asyncio.run(billing_provisioning.ensure_stripe_catalog(db))
+    assert "STRIPE_PRICE" in str(ex.value)
+
+
+# Codex finding #2: GET /billing/usage and GET /subscriptions/me must NOT
+# create barn rows.
+def test_usage_endpoint_is_read_only_no_barn_insert():
+    """Calling /billing/usage for a user whose barn has no DB row must not
+    create one. Repeated calls produce the same answer; barns collection
+    document count is unchanged.
+    """
+    from pymongo import MongoClient
+    mongo_url = os.environ["MONGO_URL"]
+    db_name = os.environ.get("DB_NAME") or "test_database"
+    client = MongoClient(mongo_url)
+    barns = client[db_name].barns
+
+    # Set the user's barn_id to a unique value that definitely has no row.
+    out = _signup()
+    uid = out["user"]["id"]
+    unique_barn = f"phantom_barn_{uuid.uuid4().hex[:8]}"
+    client[db_name].users.update_one({"id": uid}, {"$set": {"barn_id": unique_barn}})
+
+    h = {"Authorization": f"Bearer {out['token']}"}
+    # Re-login so the JWT carries the updated barn_id.
+    login = requests.post(
+        f"{API}/auth/login",
+        json={"email": out["user"]["email"], "password": "phase15apass"},
+        timeout=15,
+    ).json()
+    h = {"Authorization": f"Bearer {login['token']}"}
+
+    before = barns.count_documents({"id": unique_barn})
+    assert before == 0
+
+    r1 = requests.get(f"{API}/billing/usage", headers=h, timeout=15)
+    r2 = requests.get(f"{API}/billing/usage", headers=h, timeout=15)
+    assert r1.status_code == 200
+    assert r2.status_code == 200
+    assert r1.json()["barn_id"] == unique_barn
+
+    after = barns.count_documents({"id": unique_barn})
+    assert after == 0, f"GET /billing/usage created a barn row (before={before}, after={after})"
+
+
+def test_subscriptions_me_is_read_only_no_barn_insert():
+    """Same invariant for /subscriptions/me — pure read."""
+    from pymongo import MongoClient
+    mongo_url = os.environ["MONGO_URL"]
+    db_name = os.environ.get("DB_NAME") or "test_database"
+    client = MongoClient(mongo_url)
+    barns = client[db_name].barns
+
+    out = _signup()
+    uid = out["user"]["id"]
+    unique_barn = f"phantom_barn_{uuid.uuid4().hex[:8]}"
+    client[db_name].users.update_one({"id": uid}, {"$set": {"barn_id": unique_barn}})
+    login = requests.post(
+        f"{API}/auth/login",
+        json={"email": out["user"]["email"], "password": "phase15apass"},
+        timeout=15,
+    ).json()
+    h = {"Authorization": f"Bearer {login['token']}"}
+
+    assert barns.count_documents({"id": unique_barn}) == 0
+    r = requests.get(f"{API}/subscriptions/me", headers=h, timeout=15)
+    assert r.status_code == 200
+    assert r.json()["barn_id"] == unique_barn
+    assert r.json()["subscription"] is None
+    assert barns.count_documents({"id": unique_barn}) == 0
+
+
+# Codex finding #3: dev-mode catalog must upsert ALL 4 plans even when the
+# Stripe key is missing or unreachable.
+def test_plans_catalog_contains_all_four_tiers_even_without_stripe():
+    """Local /billing/plans MUST always return Free, Starter, Professional,
+    Enterprise — regardless of Stripe connectivity. Starter + Professional
+    may have null Stripe IDs in dev (the `has_monthly`/`has_annual` flags
+    on the public payload reflect this).
+    """
+    out = _signup()
+    h = {"Authorization": f"Bearer {out['token']}"}
+    r = requests.get(f"{API}/billing/plans", headers=h, timeout=15)
+    assert r.status_code == 200
+    tiers = {p["tier_code"] for p in r.json()}
+    assert tiers == {"free", "starter", "professional", "enterprise"}, (
+        f"Catalog must always contain all four tiers in dev (got {tiers})"
+    )
+
+
+# Codex finding #4: origin_url must be allow-listed.
+def test_checkout_rejects_unlisted_origin():
+    tok, _ = _admin_token()
+    h = {"Authorization": f"Bearer {tok}"}
+    r = requests.post(
+        f"{API}/subscriptions/checkout",
+        json={
+            "plan_tier_code": "starter",
+            "billing_cycle": "monthly",
+            "origin_url": "https://evil.example.com",  # NOT allow-listed
+        },
+        headers=h, timeout=15,
+    )
+    assert r.status_code == 400, r.text
+    assert "allow-list" in r.json()["detail"].lower()
+
+
+# Codex finding #5: /subscriptions/me strips raw Stripe IDs.
+def test_subscriptions_me_strips_stripe_ids():
+    """When a subscription doc carries Stripe IDs in the DB, the /me endpoint
+    must NOT echo them back."""
+    from pymongo import MongoClient
+    mongo_url = os.environ["MONGO_URL"]
+    db_name = os.environ.get("DB_NAME") or "test_database"
+    client = MongoClient(mongo_url)
+    db = client[db_name]
+
+    out = _signup()
+    uid = out["user"]["id"]
+    barn_id = f"barn_strip_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_strip_{uuid.uuid4().hex[:8]}"
+    db.users.update_one({"id": uid}, {"$set": {"barn_id": barn_id}})
+    db.barns.insert_one({
+        "id": barn_id,
+        "stripe_customer_id": "cus_secret_should_not_leak",
+        "subscription_id": sub_id,
+    })
+    db.subscriptions.insert_one({
+        "id": sub_id,
+        "barn_id": barn_id,
+        "owner_user_id": uid,
+        "plan_tier_code": "starter",
+        "status": "active",
+        "billing_cycle": "monthly",
+        "stripe_customer_id": "cus_secret_should_not_leak",
+        "stripe_subscription_id": "sub_secret_should_not_leak",
+        "stripe_price_id": "price_secret_should_not_leak",
+    })
+
+    login = requests.post(
+        f"{API}/auth/login",
+        json={"email": out["user"]["email"], "password": "phase15apass"},
+        timeout=15,
+    ).json()
+    h = {"Authorization": f"Bearer {login['token']}"}
+    r = requests.get(f"{API}/subscriptions/me", headers=h, timeout=15)
+    assert r.status_code == 200
+    sub = r.json()["subscription"]
+    assert sub is not None
+    for k in ("stripe_customer_id", "stripe_subscription_id", "stripe_price_id"):
+        assert k not in sub, f"raw Stripe id {k} leaked in /subscriptions/me"
+    # ...but the non-secret fields still come through.
+    assert sub["plan_tier_code"] == "starter"
+    assert sub["status"] == "active"
+
+    # Cleanup
+    db.subscriptions.delete_one({"id": sub_id})
+    db.barns.delete_one({"id": barn_id})
+    client.close()

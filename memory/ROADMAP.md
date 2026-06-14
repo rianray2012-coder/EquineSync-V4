@@ -14,6 +14,16 @@ its own separately approved phase.**
 **Approved scope only**: backend foundation, no frontend pricing UI changes.
 Locks: 1c · 2a · 3a · 4a · 5c · 6b.
 
+### 🔧 Codex round-1 review fixes applied (Feb 14 2026)
+
+| # | Finding | Fix |
+|---|---|---|
+| 1 | Production fail-fast was swallowed in `lifespan.py` | Wrapper now re-raises when `APP_ENV=production`; dev still tolerates errors. New test: `test_lifespan_production_fail_fast_is_not_swallowed` |
+| 2 | `/billing/usage` and `/subscriptions/me` mutated the DB via `_get_barn_for_user` | Split into `_resolve_barn` (read-only, returns in-memory placeholder) vs `_resolve_or_create_barn` (mutating, only used by `/checkout`). New tests: `test_usage_endpoint_is_read_only_no_barn_insert`, `test_subscriptions_me_is_read_only_no_barn_insert` |
+| 3 | Missing-key dev mode upserted only Free + Enterprise | `ensure_stripe_catalog` now upserts ALL four tiers (Free, Starter, Professional, Enterprise) with null Stripe IDs when the key is missing or Stripe is unreachable. New test: `test_plans_catalog_contains_all_four_tiers_even_without_stripe` |
+| 4 | Origin URL was trusted blindly | New `_validate_origin_or_400` helper validates against `APP_BASE_URL` + `REACT_APP_BACKEND_URL` + `FRONTEND_URL` + `ALLOWED_BILLING_ORIGINS` (comma-separated). Returns 400 for non-allow-listed. New test: `test_checkout_rejects_unlisted_origin` |
+| 5 | `/subscriptions/me` returned raw Stripe IDs | Endpoint now strips `stripe_customer_id`, `stripe_subscription_id`, `stripe_price_id` from the response. New test: `test_subscriptions_me_strips_stripe_ids` |
+
 ### Backend
 - `core/billing_provisioning.py` — Plan catalog (Free / Starter $49 / Pro $149 / Enterprise contact-sales).
   - Dev/test: idempotent Stripe Product + Price provisioning via metadata.
@@ -43,7 +53,7 @@ Locks: 1c · 2a · 3a · 4a · 5c · 6b.
 - `STRIPE_PRICE_STARTER_MONTHLY=` / `_ANNUAL` — required in prod.
 - `STRIPE_PRICE_PROFESSIONAL_MONTHLY=` / `_ANNUAL` — required in prod.
 
-### Tests — 13/13 (`/app/backend/tests/test_subscriptions_15a.py`)
+### Tests — 19/19 (`/app/backend/tests/test_subscriptions_15a.py`)
 - 4-tier catalog shape (Enterprise contact_sales=true, no Stripe IDs).
 - Usage endpoint barn-scoped, used/limit, non-blocking.
 - Checkout rejects Enterprise (400 "contact sales"), unknown tier, bad cycle.
