@@ -212,3 +212,92 @@ def test_admin_portal_exposes_no_mutations():
         assert r.status_code in (401, 403, 405), (
             f"{method.upper()} /admin/portal/me unexpectedly returned {r.status_code}"
         )
+
+
+# ---------------------------------------------------------------------
+# Codex round-1 follow-up — App.js admin route collision regression
+# ---------------------------------------------------------------------
+def test_no_app_js_admin_path_collision():
+    """Codex round-1 feedback: the Admin-1 portal placeholders must NOT
+    shadow legacy /admin/* routes (Phase 15.E /admin/billing and
+    Phase 13 /admin/review-queue).
+
+    Strategy: parse frontend/src/App.js for every `path="/admin..."`
+    literal and assert no two routes declare the same exact path. This
+    catches a future regression where someone re-adds an Admin-1
+    placeholder under a colliding URL.
+    """
+    import re
+    app_js = pathlib.Path("/app/frontend/src/App.js").read_text()
+
+    # Extract all top-level Route paths in the file. We deliberately
+    # match only string literals (not template literals) and only
+    # paths starting with /admin so legacy app routes like /dashboard
+    # don't pollute the check.
+    top_level_paths = re.findall(r'path="(/admin[^"]*)"', app_js)
+
+    # Nested child Routes declared inside the <Route path="/admin/portal">
+    # block use relative paths (e.g. path="dashboard"). Reconstruct the
+    # full path so this check sees the actual rendered URL.
+    portal_block = re.search(
+        r'<Route path="/admin/portal"[^>]*>(.*?)</Route>',
+        app_js, flags=re.DOTALL,
+    )
+    if portal_block:
+        nested_rel = re.findall(r'<Route\s+path="([^"]+)"', portal_block.group(1))
+        for rel in nested_rel:
+            if rel.startswith("/"):
+                top_level_paths.append(rel)
+            else:
+                top_level_paths.append(f"/admin/portal/{rel}".replace("//", "/"))
+
+    # Dedup-check: any duplicate exact path is a route collision.
+    seen = {}
+    duplicates = []
+    for p in top_level_paths:
+        seen[p] = seen.get(p, 0) + 1
+        if seen[p] == 2:
+            duplicates.append(p)
+    assert not duplicates, (
+        f"App.js declares duplicate /admin/* route paths: {duplicates}. "
+        f"The Admin-1 portal MUST live under /admin/portal/* so it never "
+        f"shadows legacy /admin/billing or /admin/review-queue."
+    )
+
+    # Additional guard: the two known legacy paths must still be reachable
+    # (i.e. they must appear in App.js — if a future refactor drops them,
+    # we want a loud failure here so the reviewer can confirm intent).
+    assert "/admin/billing" in app_js, (
+        "Phase 15.E /admin/billing route appears to have been removed "
+        "from App.js. Admin-1 must NOT remove it; see "
+        "/app/memory/PRD.md Phase 15.E."
+    )
+    assert "/admin/review-queue" in app_js, (
+        "Phase 13 /admin/review-queue route appears to have been removed "
+        "from App.js. Admin-1 must NOT remove it."
+    )
+
+    # And: every Admin-1 portal placeholder path must be inside
+    # /admin/portal/* (defense-in-depth: prevents anyone from declaring
+    # a new portal placeholder at /admin/users etc.).
+    portal_only_admin_paths = [
+        p for p in top_level_paths
+        if p.startswith("/admin/portal/") or p == "/admin/portal"
+    ]
+    legacy_admin_paths = [
+        p for p in top_level_paths
+        if p.startswith("/admin/") and not p.startswith("/admin/portal")
+        and p != "/admin"
+    ]
+    # The only acceptable legacy admin routes for now are the two known
+    # Phase 13 / Phase 15.E entries. Anything else means someone added
+    # a new top-level /admin/<x> placeholder that risks future collision.
+    unknown_legacy = set(legacy_admin_paths) - {"/admin/billing", "/admin/review-queue"}
+    assert not unknown_legacy, (
+        f"Unexpected non-portal /admin/* paths in App.js: {sorted(unknown_legacy)}. "
+        f"New Admin Portal sections must live under /admin/portal/*."
+    )
+    assert len(portal_only_admin_paths) >= 14, (
+        "Expected at least 14 portal placeholder paths under /admin/portal/*; "
+        f"found {len(portal_only_admin_paths)}: {portal_only_admin_paths}."
+    )

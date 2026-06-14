@@ -1,9 +1,42 @@
 # Phase Admin-1 — Equine·Sync Admin Portal Foundation
 
-**Status:** Ready for Codex round-1 review.
+**Status:** Round-2 — collision fix applied. Ready for Codex re-review.
 **Date:** Feb 14, 2026.
 **Scope:** Shell + access boundary only. No mutations. No Phase 9/15 data
 read or written through admin endpoints (those land in Admin-4/Admin-5).
+
+---
+
+## 🛠 Round-1 Codex feedback addressed
+
+**Blocker:** Admin-1 placeholder at `/admin/billing` was shadowing the live
+Phase 15.E `AdminBillingDashboard` (also at `/admin/billing`). Per the
+gating rule, Admin-1 must not take over that route until Admin-5.
+
+**Fix applied (Codex option 2):** the entire Admin-1 portal now lives
+under a non-colliding namespace **`/admin/portal/*`**. The 14 sidebar
+items route to `/admin/portal/{dashboard,users,facilities,horses,
+approvals,subscriptions,billing,permissions,support,alerts,reports,
+integrations,settings,audit-logs}`. The legacy routes
+`/admin/billing` (Phase 15.E) and `/admin/review-queue` (Phase 13)
+are **untouched** and continue to render inside `AppShell` under their
+original `permit(... ROLE_GROUPS.admin)` gate. A platform-admin user
+who visits the portal Billing card sees the Admin-5 placeholder
+("Wires up in Admin-5"); a barn admin who visits `/admin/billing`
+still sees their existing Phase 15.E dashboard. Trust boundaries stay
+separate.
+
+**Regression check shipped:**
+`backend/tests/test_admin_portal_admin1.py::test_no_app_js_admin_path_collision`
+parses `frontend/src/App.js`, builds the full resolved path of every
+`/admin/*` Route, and asserts:
+1. No two routes declare the same exact path.
+2. Both legacy routes (`/admin/billing`, `/admin/review-queue`) still
+   appear in the file (loud failure if a future refactor drops them).
+3. Every non-portal `/admin/*` path is one of the two known legacy
+   entries — anything else would mean someone added a new top-level
+   placeholder that risks future collision.
+4. At least 14 portal placeholder paths exist under `/admin/portal/*`.
 
 ---
 
@@ -11,16 +44,19 @@ read or written through admin endpoints (those land in Admin-4/Admin-5).
 
 | # | Item | Met? |
 |---|---|---|
-| 1 | `/admin/*` namespace exists with its own protected layout | ✅ |
-| 2 | Sidebar lists all 14 required sections | ✅ |
-| 3 | Five platform roles defined: `super_admin`, `platform_admin`, `support_admin`, `billing_admin`, `read_only_auditor` | ✅ |
-| 4 | Existing `role="admin"` users are NOT auto-elevated to platform admin | ✅ |
-| 5 | Admin Portal Dashboard renders the KPI frame only — no fake production data | ✅ |
-| 6 | Approved colors only (Midnight Graphite / Slate Navy / Frost White / Smoky Lilac) | ✅ |
-| 7 | Bootstrap mechanism exists for promoting the first platform admin | ✅ CLI |
-| 8 | Every denial path is audit-logged | ✅ |
-| 9 | Phase 9 invoices and Phase 15 subscription flows are NOT touched | ✅ |
-| 10 | No mutation endpoints in the Admin-1 surface | ✅ (asserted by test) |
+| 1 | Admin portal lives in its own `/admin/portal/*` namespace | ✅ |
+| 2 | Legacy `/admin/billing` (Phase 15.E) NOT shadowed | ✅ verified live |
+| 3 | Legacy `/admin/review-queue` (Phase 13) NOT shadowed | ✅ |
+| 4 | Sidebar lists all 14 required sections | ✅ |
+| 5 | Five platform roles defined: `super_admin`, `platform_admin`, `support_admin`, `billing_admin`, `read_only_auditor` | ✅ |
+| 6 | Existing `role="admin"` users are NOT auto-elevated to platform admin | ✅ |
+| 7 | Admin Portal Dashboard renders the KPI frame only — no fake production data | ✅ |
+| 8 | Approved colors only (Midnight Graphite / Slate Navy / Frost White / Smoky Lilac) | ✅ |
+| 9 | Bootstrap mechanism exists for promoting the first platform admin | ✅ CLI |
+| 10 | Every denial path is audit-logged | ✅ |
+| 11 | Phase 9 invoices and Phase 15 subscription flows are NOT touched | ✅ |
+| 12 | No mutation endpoints in the Admin-1 surface | ✅ (asserted by test) |
+| 13 | App.js admin-path collision regression test | ✅ new |
 
 ---
 
@@ -67,7 +103,7 @@ read or written through admin endpoints (those land in Admin-4/Admin-5).
 ```
 cd /app/backend
 python -m pytest tests/test_admin_portal_admin1.py -v
-# 13 passed in 9.65s
+# 14 passed in 9.75s
 ```
 
 Coverage:
@@ -87,6 +123,10 @@ Coverage:
 12. `test_portal_me_emits_audit_log` — confirms the audit trail.
 13. `test_admin_portal_exposes_no_mutations` — POST/PUT/PATCH/DELETE
     on `/admin/portal/me` MUST be 401/403/405.
+14. **NEW (round-2)** `test_no_app_js_admin_path_collision` — parses
+    `App.js`, builds resolved /admin paths, asserts no duplicates,
+    confirms legacy `/admin/billing` + `/admin/review-queue` remain,
+    and confirms all new placeholders live under `/admin/portal/*`.
 
 **Regression:** `pytest tests/test_subscriptions_15g.py` →
 14/14 green (Phase 15.G unaffected).
@@ -97,7 +137,7 @@ Coverage:
 
 Both critical paths verified live against the preview URL:
 
-1. **Authorized super_admin** (`/admin/dashboard`):
+1. **Authorized super_admin** (`/admin/portal/dashboard`):
    - Graphite sidebar + 14 nav items + role pill rendered.
    - KPI grid (8 cards) displays em-dash + "Wires up in Admin-2".
    - Live access-summary chip strip lists all 14 sections for `super_admin`.
@@ -105,10 +145,17 @@ Both critical paths verified live against the preview URL:
      `admin-sidebar-nav`, `admin-kpi-grid`, `admin-section-chips`,
      `admin-platform-role-pill`.
 
-2. **Forbidden non-admin** (horse_owner trying `/admin/dashboard`):
+2. **Forbidden non-admin** (horse_owner trying `/admin/portal/dashboard`):
    - Calm dedicated screen on Midnight Graphite with "Platform admin
      access required." copy + email confirmation + Back-to-app CTA.
    - `data-testid="admin-forbidden"` + `admin-forbidden-back` confirmed.
+
+3. **NEW (round-2)** **Legacy `/admin/billing` unshadowed**:
+   - As a non-barn-admin user, visiting `/admin/billing` now correctly
+     renders the legacy `AppShell` "Permission needed" page (the
+     existing Phase 15.E `permit(... ROLE_GROUPS.admin)` gate),
+     NOT the Admin-1 portal placeholder. Confirms the route-collision
+     fix end-to-end.
 
 ---
 

@@ -8,21 +8,25 @@ import {
 import { canSeeAdminSection, getPlatformRole } from "../../lib/permissions";
 
 // Section key → icon + label + route. Order matches the master spec.
+// Paths are namespaced under /admin/portal/* so the platform portal
+// never shadows the legacy barn-admin pages at /admin/billing
+// (Phase 15.E) and /admin/review-queue (Phase 13). The collision-free
+// invariant is asserted by tests/test_admin_portal_admin1.py.
 const NAV = [
-  { key: "dashboard",     label: "Dashboard",     path: "/admin/dashboard",     Icon: LayoutDashboard },
-  { key: "users",         label: "Users",         path: "/admin/users",         Icon: Users },
-  { key: "facilities",    label: "Facilities",    path: "/admin/facilities",    Icon: Building2 },
-  { key: "horses",        label: "Horses",        path: "/admin/horses",        Icon: Heart },
-  { key: "approvals",     label: "Approvals",     path: "/admin/approvals",     Icon: ShieldCheck },
-  { key: "subscriptions", label: "Subscriptions", path: "/admin/subscriptions", Icon: CreditCard },
-  { key: "billing",       label: "Billing",       path: "/admin/billing",       Icon: Receipt },
-  { key: "permissions",   label: "Permissions",   path: "/admin/permissions",   Icon: KeyRound },
-  { key: "support",       label: "Support",       path: "/admin/support",       Icon: LifeBuoy },
-  { key: "alerts",        label: "Alerts",        path: "/admin/alerts",        Icon: Bell },
-  { key: "reports",       label: "Reports",       path: "/admin/reports",       Icon: BarChart3 },
-  { key: "integrations",  label: "Integrations",  path: "/admin/integrations",  Icon: Plug },
-  { key: "settings",      label: "Settings",      path: "/admin/settings",      Icon: Settings },
-  { key: "audit_logs",    label: "Audit Logs",    path: "/admin/audit-logs",    Icon: ScrollText },
+  { key: "dashboard",     label: "Dashboard",     path: "/admin/portal/dashboard",     Icon: LayoutDashboard },
+  { key: "users",         label: "Users",         path: "/admin/portal/users",         Icon: Users },
+  { key: "facilities",    label: "Facilities",    path: "/admin/portal/facilities",    Icon: Building2 },
+  { key: "horses",        label: "Horses",        path: "/admin/portal/horses",        Icon: Heart },
+  { key: "approvals",     label: "Approvals",     path: "/admin/portal/approvals",     Icon: ShieldCheck },
+  { key: "subscriptions", label: "Subscriptions", path: "/admin/portal/subscriptions", Icon: CreditCard },
+  { key: "billing",       label: "Billing",       path: "/admin/portal/billing",       Icon: Receipt },
+  { key: "permissions",   label: "Permissions",   path: "/admin/portal/permissions",   Icon: KeyRound },
+  { key: "support",       label: "Support",       path: "/admin/portal/support",       Icon: LifeBuoy },
+  { key: "alerts",        label: "Alerts",        path: "/admin/portal/alerts",        Icon: Bell },
+  { key: "reports",       label: "Reports",       path: "/admin/portal/reports",       Icon: BarChart3 },
+  { key: "integrations",  label: "Integrations",  path: "/admin/portal/integrations",  Icon: Plug },
+  { key: "settings",      label: "Settings",      path: "/admin/portal/settings",      Icon: Settings },
+  { key: "audit_logs",    label: "Audit Logs",    path: "/admin/portal/audit-logs",    Icon: ScrollText },
 ];
 
 const ROLE_LABEL = {

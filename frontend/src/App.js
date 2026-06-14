@@ -110,16 +110,22 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
 
-            {/* Admin Portal (Admin-1) — own shell + platform_role gate */}
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            {/* Admin Portal (Admin-1) — own shell + platform_role gate.
+                Namespace is /admin/portal/* (NOT /admin/*) so it never
+                shadows the legacy barn-admin pages at /admin/billing
+                (Phase 15.E) and /admin/review-queue (Phase 13). The
+                regression test
+                backend/tests/test_admin_portal_admin1.py::test_no_app_js_admin_path_collision
+                enforces this invariant. */}
+            <Route path="/admin/portal" element={<AdminLayout />}>
+              <Route index element={<Navigate to="/admin/portal/dashboard" replace />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="users" element={<AdminPlaceholder section="Users" phase="Admin-3" description="Search, filter, suspend, reactivate, change role. Audit-logged mutations gated by capability." />} />
               <Route path="facilities" element={<AdminPlaceholder section="Facilities" phase="Admin-4" description="Cross-facility roster, health panel, usage vs plan limits, soft-disable." />} />
               <Route path="horses" element={<AdminPlaceholder section="Horses" phase="Admin-4" description="Admin-level horse directory with masked medical for lower roles." />} />
               <Route path="approvals" element={<AdminPlaceholder section="Approvals" phase="Admin-3" description="Pending account approvals: approve, reject, request-info, assign facility." />} />
               <Route path="subscriptions" element={<AdminPlaceholder section="Subscriptions" phase="Admin-5" description="Read-only Phase 15 Stripe subscription visibility — Stripe IDs masked. Mutations land in a separate gated phase." />} />
-              <Route path="billing" element={<AdminPlaceholder section="Billing" phase="Admin-5" description="Read-only subscription invoices, payments, failed payments, MRR/ARR." />} />
+              <Route path="billing" element={<AdminPlaceholder section="Billing" phase="Admin-5" description="Read-only subscription invoices, payments, failed payments, MRR/ARR. The existing Phase 15.E barn-admin dashboard at /admin/billing remains live and untouched until Admin-5." />} />
               <Route path="permissions" element={<AdminPlaceholder section="Permissions" phase="Admin-7" description="Read-only role × capability matrix from the backend." />} />
               <Route path="support" element={<AdminPlaceholder section="Support" phase="Admin-6" description="Inbox of user-reported issues with internal notes + assignment." />} />
               <Route path="alerts" element={<AdminPlaceholder section="Alerts" phase="Admin-6" description="Failed payments, webhook errors, overdue billing, SLA warnings — auto-populated." />} />
