@@ -1093,3 +1093,74 @@ Admin-4 introduces the second mutation surface (facility edits + soft
 disable) — worth particularly careful scoping around cross-facility
 data isolation, billing-relationship side effects, and what a
 "soft-disabled" facility means for tenant-scoped queries.
+
+## 🔐 Equine·Sync Admin Portal — Phase Admin-4 ✅ (Feb 14 2026)
+
+Cross-facility roster + per-facility health page. **READ-ONLY** per the
+locked founder decisions (1a). No mutations, no soft-disable, no Stripe
+drill-down, no Phase 9 reads.
+
+**Locked decisions:**
+- 1a — read-only only; mutations + edits deferred to Admin-4b.
+- 2c — soft-disable deferred entirely (no tenancy-layer enforcement).
+- 3a — future mutable-field whitelist documented in code as deferred.
+- 4a — subscription/usage data is SUMMARY only; no Stripe IDs, no
+       drill-down to subscriptions rows or billing_events.
+- 5a — full cross-facility isolation matrix (5 platform roles × 200
+       + barn-scoped 403 on own AND other barn).
+
+**Backend (extends `routes/admin_portal.py`):**
+- `GET /api/admin/portal/facilities` — paginated (cursor+limit), search
+  by name (`q`), filter by `tier`/`status`. Per-row summary includes
+  subscription status + usage tile (horses/users used vs limit).
+- `GET /api/admin/portal/facilities/{id}` — health page. Returns:
+  safe barn profile (whitelisted fields), subscription summary
+  (whitelisted 7 keys, NO Stripe IDs), usage vs limits, count tiles,
+  last 10 audit entries tagged with this `barn_id`. Generic 404 on
+  missing facility.
+
+**Frontend (extends `pages/admin/*`):**
+- `AdminFacilities.jsx` — paginated table page with search + tier
+  filter; row click opens detail drawer; ZERO mutation buttons.
+- `AdminFacilityDrawer.jsx` — read-only health page (profile, sub
+  summary in 6-tile grid, usage in 2-tile grid, recent audit feed).
+  Approved palette only.
+
+**Tests:** `tests/test_admin_portal_admin4.py` — **21/21 green**.
+Cross-facility isolation matrix parametrised over 5 platform roles
+all returning 200; barn-scoped users (with and without role="admin")
+return 403 on both list and own-barn detail; non-existent barn → 404;
+shape contract (allowlisted summary keys, usage shape); Stripe-prefix
+leak guard (none of `sub_/cus_/evt_/price_/pi_/ch_` or any
+`stripe_*` field in the payload); no drill-down references
+(`billing_events`, `/admin/portal/subscriptions`); no Phase 9
+references (`invoices`, `invoice`, `recurring_charge`); no-mutation
+parametrised invariant across both new paths × 4 methods; audit
+emission for both endpoints.
+
+**Strict guardrails honored:**
+- ✅ READ-ONLY. No POST/PUT/PATCH/DELETE exposed.
+- ✅ No tenancy-layer enforcement added (deferred to Admin-4b).
+- ✅ No Stripe IDs / Stripe API calls in any response.
+- ✅ Subscription summary whitelist: ONLY `plan_tier_code`, `status`,
+  `billing_cycle`, `current_period_end`, `trial_end`, `amount_cents`,
+  `updated_at`. Verified by test.
+- ✅ No Phase 9 / Phase 15 source files touched.
+- ✅ Approved palette only.
+- ✅ Audit emission on every read.
+
+**Packaged:** `/app/phase_admin_4_changes.zip` for Codex review.
+Admin-4b (real edits + soft-disable enforcement) gated.
+
+### Admin Portal — Phase Status (post Admin-4)
+
+| Phase   | Scope                                                        | Status |
+|---------|--------------------------------------------------------------|--------|
+| Admin-1 | Shell + access boundary                                       | ✅ Codex-approved & locked |
+| Admin-2 | Read-only dashboard + activity + sub health                   | ✅ Codex-approved & locked |
+| Admin-3 | User approvals + user management                              | ✅ Codex-approved & locked |
+| Admin-4 | Facility roster + read-only health page                       | ✅ Ready for Codex review |
+| Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
+| Admin-5 | Subscription + billing control center                         | ⏸ Gated |
+| Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
+| Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |

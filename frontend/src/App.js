@@ -81,6 +81,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminApprovals from "./pages/admin/AdminApprovals";
+import AdminFacilities from "./pages/admin/AdminFacilities";
 
 const Protected = ({ children }) => {
   const { user, loading } = useAuth();
@@ -124,7 +125,7 @@ function App() {
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="users" element={<AdminUsers />} />
               <Route path="approvals" element={<AdminApprovals />} />
-              <Route path="facilities" element={<AdminPlaceholder section="Facilities" phase="Admin-4" description="Cross-facility roster, health panel, usage vs plan limits, soft-disable." />} />
+              <Route path="facilities" element={<AdminFacilities />} />
               <Route path="horses" element={<AdminPlaceholder section="Horses" phase="Admin-4" description="Admin-level horse directory with masked medical for lower roles." />} />
               <Route path="subscriptions" element={<AdminPlaceholder section="Subscriptions" phase="Admin-5" description="Read-only Phase 15 Stripe subscription visibility — Stripe IDs masked. Mutations land in a separate gated phase." />} />
               <Route path="billing" element={<AdminPlaceholder section="Billing" phase="Admin-5" description="Read-only subscription invoices, payments, failed payments, MRR/ARR. The existing Phase 15.E barn-admin dashboard at /admin/billing remains live and untouched until Admin-5." />} />
