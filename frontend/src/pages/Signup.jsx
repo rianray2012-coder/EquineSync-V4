@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { api, tokens } from "../lib/api";
+import { canManageBilling } from "../lib/permissions";
 import { Logo } from "../components/Logo";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react";
 import {
@@ -61,7 +62,7 @@ const STEPS = ["Account", "Profile", "Membership"];
 export default function Signup() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const { setSession, refreshMe } = useAuth();
+  const { user, setSession, refreshMe } = useAuth();
 
   const initialRole = params.get("role");
   const initialIsRole = ROLE_OPTIONS.some((r) => r.id === initialRole);
@@ -565,6 +566,34 @@ export default function Signup() {
                   >
                     Contact sales <ArrowRight className="w-4 h-4" />
                   </a>
+                ) : !canManageBilling(user) ? (
+                  // Phase 15.C — fresh marketplace signups do not yet carry
+                  // the backend `barn:manage` capability (admin / barn_manager
+                  // only). The `/subscriptions/checkout` endpoint guards on
+                  // it, so offering a checkout button here would return 403.
+                  // Surface a clear post-review message and let the user
+                  // finish on Free; 15.E/15.F-era backend work will introduce
+                  // the elevation flow.
+                  <div className="flex flex-col items-end gap-3 max-w-[340px]" data-testid="signup-paid-review-pending">
+                    <div className="bg-white/5 border border-equine-saddle/30 rounded-2xl p-4 text-[12.5px] text-white/75 leading-relaxed">
+                      <div className="text-equine-saddle text-[11px] tracking-[0.22em] uppercase mb-2">
+                        Facility billing
+                      </div>
+                      <p>
+                        Paid facility plans activate after your account is reviewed and
+                        an admin finishes barn setup. You can start on{" "}
+                        <span className="text-white font-medium">Free</span> today and
+                        upgrade from your Subscription page once that&apos;s complete.
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => setTier("free")}
+                      className="text-[12.5px] tracking-wide text-equine-saddle hover:text-white inline-flex items-center gap-2"
+                      data-testid="signup-switch-to-free"
+                    >
+                      Continue on Free <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 ) : (() => {
                   // Phase 15.C — gate the paid CTA on Stripe price-ID readiness
                   // (has_monthly / has_annual from /api/billing/plans). When
