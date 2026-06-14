@@ -196,18 +196,52 @@ def _plant_phase9_invoice(db, *, barn_id: str) -> str:
     return iid
 
 
-STRIPE_LEAK_TOKENS = ("cus_", "price_",
-                     "stripe_customer_id", "stripe_subscription_id",
-                     "stripe_price_id", "stripe_invoice_id", "stripe_event_id")
-# Notes:
-#   - `pi_` and `ch_` are excluded — they're too short and collide with
-#     legitimate field names like `api_access`, `chart`, etc. The
-#     planted-STRIPELEAK value check below catches their actual leak
-#     paths, and the projection allowlists already exclude these fields.
-#   - `sub_`, `evt_`, `in_` are excluded because the local entity ids
-#     happen to use these prefixes by design (see webhook handler —
-#     local `id` IS the Stripe id). The `stripe_*` foreign-key keys are
-#     stripped via the projection + _strip_keys helper.
+import re
+
+# Stripe-shaped ID VALUE regex — matches a quoted JSON value whose
+# contents look exactly like a Stripe id (e.g. "sub_…", "evt_…", "in_…",
+# "cus_…", "price_…"). The pattern is anchored to the opening quote so
+# legitimate field names like "admin_ref" (which contains "in_" as a
+# substring) and barn ids like "barn_evt_…" do NOT trigger false matches.
+STRIPE_VALUE_RE = re.compile(
+    r'"(sub|evt|in|cus|price)_[A-Za-z0-9_]{4,}"'
+)
+
+# Stripe foreign-key field NAMES that must never serialize.
+STRIPE_KEY_TOKENS = (
+    "stripe_customer_id", "stripe_subscription_id",
+    "stripe_price_id", "stripe_invoice_id", "stripe_event_id",
+)
+
+
+def _assert_no_stripe_value_leak(text: str, where: str) -> None:
+    """Run both the regex value-scan AND the explicit key-name scan."""
+    m = STRIPE_VALUE_RE.search(text)
+    if m:
+        raise AssertionError(
+            f"{where} leaked a Stripe-shaped value: {m.group(0)}"
+        )
+    for k in STRIPE_KEY_TOKENS:
+        if k in text:
+            raise AssertionError(f"{where} leaked Stripe field key '{k}'")
+
+
+# Kept for backwards reference in older assertions that import it.
+STRIPE_LEAK_TOKENS = STRIPE_KEY_TOKENS
+
+
+def _admin_ref_for(db, collection: str, local_id: str, prefix: str) -> str:
+    """Look up the Mongo `_id` for a planted row and mint the same opaque
+    admin_ref the API would mint. Lets tests address the new
+    `/admin/portal/{kind}/{admin_ref}` route without ever exposing the
+    raw Stripe-shaped local id in the URL."""
+    row = getattr(db, collection).find_one({"id": local_id}, {"_id": 1})
+    assert row, f"No {collection} row found for local id {local_id}"
+    return f"{prefix}_{str(row['_id'])}"
+
+
+def _admin_ref_for_subscription(db, sub_local_id: str) -> str:
+    return _admin_ref_for(db, "subscriptions", sub_local_id, "as")
 
 
 # ---------------------------------------------------------------------
@@ -295,11 +329,36 @@ def test_unauthenticated_is_401(path):
 
 def test_subscription_detail_404_for_missing(db):
     s = _admin_session(db, "platform_admin")
+    # Malformed ref (not the `as_<24-hex>` pattern) → 404, not 422.
     r = requests.get(
         f"{API}/admin/portal/subscriptions/does-not-exist-{uuid.uuid4().hex[:6]}",
         headers=_bearer(s), timeout=10,
     )
     assert r.status_code == 404
+    # Well-formed but nonexistent ref → 404.
+    r = requests.get(
+        f"{API}/admin/portal/subscriptions/as_" + "f" * 24,
+        headers=_bearer(s), timeout=10,
+    )
+    assert r.status_code == 404
+
+
+def test_subscription_detail_rejects_raw_stripe_shaped_id(db):
+    """Locked decision 4a: the detail route must NOT accept a raw
+    Stripe-shaped subscription id. Only the opaque `as_<oid>` ref."""
+    s = _admin_session(db, "platform_admin")
+    sub_id = _plant_subscription(db)
+    try:
+        r = requests.get(
+            f"{API}/admin/portal/subscriptions/{sub_id}",
+            headers=_bearer(s), timeout=10,
+        )
+        assert r.status_code == 404, (
+            f"Detail route accepted raw Stripe-shaped id: {r.status_code}"
+        )
+    finally:
+        db.subscriptions.delete_one({"id": sub_id})
+        db.barns.delete_many({"id": {"$regex": "^barn_adm5_"}})
 
 
 # ---------------------------------------------------------------------
@@ -316,20 +375,26 @@ def test_subscriptions_list_shape_and_no_stripe_id_leak(db):
         assert r.status_code == 200
         body = r.json()
         assert "items" in body and "total" in body and "next_cursor" in body
-        # Confirm our planted row is there and shape is right.
-        ours = [x for x in body["items"] if x.get("id") == sub_id]
-        assert ours, "Planted subscription missing from list."
+        # The raw Stripe-shaped local id MUST NOT appear anywhere in
+        # the response — only the opaque admin_ref does.
+        assert sub_id not in r.text, (
+            f"/subscriptions leaked the raw Stripe-shaped local id '{sub_id}'"
+        )
+        # Find our planted row via barn_id (which is safe — UUID-shaped).
+        barn = db.barns.find_one({"subscription_id": sub_id}, {"_id": 0, "id": 1})
+        ours = [x for x in body["items"] if x.get("barn_id") == barn["id"]]
+        assert ours, "Planted subscription missing from list (lookup by barn_id)."
         row = ours[0]
-        for k in ("id", "barn_id", "plan_tier_code", "status", "billing_cycle",
-                  "amount_cents", "facility_name"):
+        for k in ("admin_ref", "barn_id", "plan_tier_code", "status",
+                  "billing_cycle", "amount_cents", "facility_name"):
             assert k in row, f"Missing key {k} in subscription row"
-        # No Stripe ID keys / value tokens — defense in depth.
-        for forbidden in STRIPE_LEAK_TOKENS:
-            assert forbidden not in r.text, (
-                f"/subscriptions leaked Stripe field/prefix '{forbidden}'"
-            )
-        # Also assert the raw stored stripe IDs (which we planted with
-        # `LEAK` in the value) never appear.
+        assert "id" not in row, (
+            "Subscription row leaked raw `id` — only `admin_ref` is allowed"
+        )
+        assert row["admin_ref"].startswith("as_"), (
+            f"admin_ref has wrong prefix: {row['admin_ref']}"
+        )
+        _assert_no_stripe_value_leak(r.text, "/subscriptions list")
         assert "STRIPELEAK" not in r.text, (
             "/subscriptions leaked a planted Stripe ID value"
         )
@@ -342,22 +407,25 @@ def test_subscriptions_list_filters_by_status_and_tier(db):
     s = _admin_session(db, "platform_admin")
     sub_id = _plant_subscription(db)
     try:
+        barn = db.barns.find_one({"subscription_id": sub_id}, {"_id": 0, "id": 1})
         # status filter — exact match
         r = requests.get(
             f"{API}/admin/portal/subscriptions?status=canceled&limit=100",
             headers=_bearer(s), timeout=10,
         )
         assert r.status_code == 200
-        ids = [x["id"] for x in r.json()["items"]]
-        assert sub_id not in ids, "Active sub leaked through status=canceled filter"
+        barn_ids = [x["barn_id"] for x in r.json()["items"]]
+        assert barn["id"] not in barn_ids, (
+            "Active sub leaked through status=canceled filter"
+        )
 
         # plan_tier_code filter
         r = requests.get(
             f"{API}/admin/portal/subscriptions?plan_tier_code=starter&limit=100",
             headers=_bearer(s), timeout=10,
         )
-        ids = [x["id"] for x in r.json()["items"]]
-        assert sub_id in ids
+        barn_ids = [x["barn_id"] for x in r.json()["items"]]
+        assert barn["id"] in barn_ids
     finally:
         db.subscriptions.delete_one({"id": sub_id})
         db.barns.delete_many({"id": {"$regex": "^barn_adm5_"}})
@@ -369,8 +437,9 @@ def test_subscriptions_list_filters_by_status_and_tier(db):
 def test_subscription_detail_shape_and_no_stripe_ids(db):
     s = _admin_session(db, "platform_admin")
     sub_id = _plant_subscription(db)
+    ref = _admin_ref_for_subscription(db, sub_id)
     try:
-        r = requests.get(f"{API}/admin/portal/subscriptions/{sub_id}",
+        r = requests.get(f"{API}/admin/portal/subscriptions/{ref}",
                          headers=_bearer(s), timeout=10)
         assert r.status_code == 200
         body = r.json()
@@ -378,16 +447,23 @@ def test_subscription_detail_shape_and_no_stripe_ids(db):
         assert "facility" in body
         assert "recent_activity" in body
         sub = body["subscription"]
+        # The opaque admin_ref is the only id surfaced.
+        assert sub.get("admin_ref") == ref
+        assert "id" not in sub, (
+            "Detail leaked raw `id` field — only `admin_ref` is allowed"
+        )
         for forbidden_key in ("stripe_customer_id", "stripe_subscription_id",
                               "stripe_price_id"):
             assert forbidden_key not in sub, (
                 f"Detail leaked '{forbidden_key}' in subscription payload"
             )
         # No raw Stripe id tokens anywhere in the body.
-        for token in STRIPE_LEAK_TOKENS:
-            assert token not in r.text, (
-                f"Detail leaked Stripe token '{token}'"
-            )
+        _assert_no_stripe_value_leak(r.text, "/subscriptions detail")
+        # Strongest check: the raw Stripe-shaped local id MUST NOT
+        # appear anywhere — only admin_ref is allowed out.
+        assert sub_id not in r.text, (
+            f"Detail leaked raw Stripe-shaped local id '{sub_id}'"
+        )
         assert "STRIPELEAK" not in r.text, "Detail leaked a planted Stripe ID value"
     finally:
         db.subscriptions.delete_one({"id": sub_id})
@@ -400,9 +476,10 @@ def test_subscription_detail_recent_activity_is_audit_log_only(db):
     and confirm it does NOT show up in recent_activity."""
     s = _admin_session(db, "platform_admin")
     sub_id = _plant_subscription(db)
+    ref = _admin_ref_for_subscription(db, sub_id)
     _plant_billing_event(db, sub_id=sub_id)
     try:
-        r = requests.get(f"{API}/admin/portal/subscriptions/{sub_id}",
+        r = requests.get(f"{API}/admin/portal/subscriptions/{ref}",
                          headers=_bearer(s), timeout=10)
         assert r.status_code == 200
         activity = r.json()["recent_activity"]
@@ -412,6 +489,11 @@ def test_subscription_detail_recent_activity_is_audit_log_only(db):
             assert "action" in row
             assert "event_type" not in row, (
                 "recent_activity leaked a billing_event row"
+            )
+            # The audit row must NOT leak the Stripe-shaped resource_id
+            # that lives on the underlying audit_log document.
+            assert "resource_id" not in row, (
+                "recent_activity leaked raw resource_id (Stripe-shaped)"
             )
     finally:
         db.subscriptions.delete_one({"id": sub_id})
@@ -433,9 +515,17 @@ def test_billing_events_shape_and_no_stripe_id_leak(db):
         assert r.status_code == 200
         body = r.json()
         assert "items" in body and "total" in body
-        ours = [x for x in body["items"] if x.get("id") == eid]
+        # Find our planted row by event_type (id is now opaque admin_ref).
+        ours = [x for x in body["items"]
+                if x.get("event_type") == "customer.subscription.updated"]
         assert ours, "Planted billing_event missing from list."
         row = ours[0]
+        assert "id" not in row, (
+            "/billing-events leaked raw `id` — only `admin_ref` is allowed"
+        )
+        assert row.get("admin_ref", "").startswith("ae_"), (
+            f"admin_ref has wrong prefix: {row.get('admin_ref')}"
+        )
         # Allowlist shape — no stripe_event_id, no object_id raw.
         for forbidden in ("stripe_event_id", "object_id"):
             assert forbidden not in row, (
@@ -445,6 +535,10 @@ def test_billing_events_shape_and_no_stripe_id_leak(db):
             assert token not in r.text, (
                 f"/billing-events leaked Stripe token '{token}'"
             )
+        _assert_no_stripe_value_leak(r.text, "/billing-events list")
+        assert eid not in r.text, (
+            f"/billing-events leaked raw Stripe-shaped local id '{eid}'"
+        )
         assert "STRIPELEAK" not in r.text, "/billing-events leaked a planted ID"
     finally:
         db.billing_events.delete_many({"id": {"$regex": "^evt_internal_"}})
@@ -455,13 +549,18 @@ def test_billing_events_filters_by_processing_status(db):
     eid_ok = _plant_billing_event(db, status="ok")
     eid_retry = _plant_billing_event(db, status="retry_502")
     try:
+        # We filter by status and confirm the count matches what we
+        # planted — we can't filter by Stripe-shaped local id anymore.
+        # Each row must NOT carry the raw evt_… id either.
         r = requests.get(
             f"{API}/admin/portal/billing-events?processing_status=retry_502&limit=100",
             headers=_bearer(s), timeout=10,
         )
-        ids = [x["id"] for x in r.json()["items"]]
-        assert eid_retry in ids
-        assert eid_ok not in ids
+        items = r.json()["items"]
+        statuses = [x.get("processing_status") for x in items]
+        assert "retry_502" in statuses
+        assert "ok" not in statuses
+        assert eid_ok not in r.text and eid_retry not in r.text
     finally:
         db.billing_events.delete_many({"id": {"$regex": "^evt_internal_"}})
 
@@ -481,9 +580,24 @@ def test_payments_shape_and_no_stripe_id_leak(db):
         )
         assert r.status_code == 200
         body = r.json()
-        ours = [x for x in body["items"] if x.get("id") == iid]
+        # Find our planted row via barn_id (id is now opaque admin_ref).
+        ours = [x for x in body["items"] if x.get("barn_id") == barn["id"]]
         assert ours, "Planted subscription_invoice missing from /payments."
         row = ours[0]
+        assert "id" not in row, (
+            "/payments leaked raw `id` — only `admin_ref` is allowed"
+        )
+        assert row.get("admin_ref", "").startswith("ap_"), (
+            f"admin_ref has wrong prefix: {row.get('admin_ref')}"
+        )
+        # The Stripe-shaped foreign `subscription_id` MUST be replaced
+        # with the opaque `subscription_admin_ref`.
+        assert "subscription_id" not in row, (
+            "/payments leaked raw Stripe-shaped `subscription_id`"
+        )
+        assert row.get("subscription_admin_ref", "").startswith("as_"), (
+            f"subscription_admin_ref wrong shape: {row.get('subscription_admin_ref')}"
+        )
         # No Stripe-side keys, no hosted URLs.
         for forbidden in ("stripe_customer_id", "stripe_invoice_id",
                           "hosted_invoice_url", "invoice_pdf_url"):
@@ -492,6 +606,14 @@ def test_payments_shape_and_no_stripe_id_leak(db):
             assert token not in r.text, (
                 f"/payments leaked Stripe token '{token}'"
             )
+        _assert_no_stripe_value_leak(r.text, "/payments list")
+        # The planted raw ids (Stripe-shaped) must not appear.
+        assert iid not in r.text, (
+            f"/payments leaked the raw invoice local id '{iid}'"
+        )
+        assert sub_id not in r.text, (
+            f"/payments leaked the raw subscription_id '{sub_id}'"
+        )
         assert "stripe-leak.test" not in r.text, (
             "/payments leaked hosted Stripe URL"
         )
@@ -534,11 +656,12 @@ def test_subscriptions_endpoints_do_not_reference_phase9_invoices(db):
     test."""
     s = _admin_session(db, "platform_admin")
     sub_id = _plant_subscription(db)
+    ref = _admin_ref_for_subscription(db, sub_id)
     barn = db.barns.find_one({"subscription_id": sub_id}, {"_id": 0, "id": 1})
     phase9_id = _plant_phase9_invoice(db, barn_id=barn["id"])
     try:
         for path in (f"/admin/portal/subscriptions?barn_id={barn['id']}&limit=100",
-                     f"/admin/portal/subscriptions/{sub_id}"):
+                     f"/admin/portal/subscriptions/{ref}"):
             r = requests.get(f"{API}{path}", headers=_bearer(s), timeout=10)
             assert r.status_code == 200
             text = r.text

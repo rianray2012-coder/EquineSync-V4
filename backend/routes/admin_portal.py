@@ -27,6 +27,8 @@ from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, Field
+from bson import ObjectId
+from bson.errors import InvalidId
 
 from core import audit
 from core.permissions import (
@@ -281,9 +283,12 @@ _BILLING_EVENT_STRIP_KEYS = (
 
 # Safe Mongo projection for the subscriptions roster + detail. Includes
 # only fields we intentionally surface (no Stripe IDs).
+# `_id` is kept INTERNAL (it mints the opaque admin_ref); `id` is the
+# Stripe-shaped local subscription id, kept INTERNAL only (used to
+# query audit_log on detail) and stripped before serialization.
 _SUBSCRIPTION_SAFE_FIELDS = {
-    "_id": 0,
-    "id": 1, "barn_id": 1, "plan_tier_code": 1, "status": 1,
+    "_id": 1, "id": 1,
+    "barn_id": 1, "plan_tier_code": 1, "status": 1,
     "billing_cycle": 1, "amount_cents": 1, "currency": 1,
     "current_period_start": 1, "current_period_end": 1,
     "trial_end": 1, "cancel_at_period_end": 1,
@@ -292,8 +297,8 @@ _SUBSCRIPTION_SAFE_FIELDS = {
 }
 
 _BILLING_EVENT_SAFE_FIELDS = {
-    "_id": 0,
-    "id": 1, "event_type": 1, "event_created_at": 1,
+    "_id": 1, "id": 1,
+    "event_type": 1, "event_created_at": 1,
     "barn_id": 1,
     "processing_status": 1, "processed_at": 1, "retry_count": 1,
     "last_error_class": 1, "created_at": 1, "updated_at": 1,
@@ -306,12 +311,48 @@ _BILLING_EVENT_SAFE_FIELDS = {
 # subscription_invoices safe projection — Phase 15 ONLY. We never touch
 # the Phase 9 `invoices` collection from Admin-5.
 _PAYMENT_SAFE_FIELDS = {
-    "_id": 0,
-    "id": 1, "barn_id": 1, "subscription_id": 1,
+    "_id": 1, "id": 1,
+    "barn_id": 1, "subscription_id": 1,
     "amount_cents": 1, "currency": 1, "status": 1,
     "period_start": 1, "period_end": 1, "due_date": 1,
     "payment_failure_count": 1, "created_at": 1, "updated_at": 1,
 }
+
+
+def _admin_ref(prefix: str, mongo_id) -> str:
+    """Return an opaque, API-safe identifier derived from Mongo `_id`.
+    Never Stripe-shaped. Example: `as_507f1f77bcf86cd799439011`.
+
+    Per locked decision 4a, Admin-5 surfaces only opaque local refs —
+    raw Stripe-shaped IDs (`sub_…`, `evt_…`, `in_…`, `cus_…`, `price_…`)
+    NEVER cross the API boundary, even when they happen to BE the local
+    entity id.
+    """
+    return f"{prefix}_{str(mongo_id)}"
+
+
+def _resolve_admin_ref(prefix: str, ref: str) -> ObjectId:
+    """Parse a `<prefix>_<hex24>` admin_ref back to its Mongo ObjectId.
+    Any malformed input → 404 (we never reveal which prefix was used)."""
+    expected = f"{prefix}_"
+    if not ref or not ref.startswith(expected):
+        raise HTTPException(404, "Not found.")
+    try:
+        return ObjectId(ref[len(expected):])
+    except (InvalidId, TypeError, ValueError):
+        raise HTTPException(404, "Not found.")
+
+
+def _attach_admin_ref(prefix: str, row: Dict[str, Any]) -> Dict[str, Any]:
+    """Mint `admin_ref` from `_id`; drop both `_id` and raw `id` from
+    the outbound payload. Mutates and returns the row."""
+    if not isinstance(row, dict):
+        return row
+    mid = row.pop("_id", None)
+    row.pop("id", None)
+    if mid is not None:
+        row["admin_ref"] = _admin_ref(prefix, mid)
+    return row
 
 
 def _strip_keys(doc: Optional[Dict[str, Any]], keys) -> Optional[Dict[str, Any]]:
@@ -1119,10 +1160,12 @@ def build_router(*, db, get_current_user) -> APIRouter:
         if barn_id:
             mongo_q["barn_id"] = barn_id
         if q:
-            # Search joins through barn name. We resolve the barn ids
-            # first, then filter subscriptions by that set + an OR on the
-            # subscription `id` substring itself (matches local Mongo id,
-            # NOT Stripe ids).
+            # Search joins through barn name ONLY. We deliberately do
+            # NOT match against the local subscription `id` (it's
+            # Stripe-shaped — exposing it via fuzzy match would leak the
+            # Stripe-id format expectation). Admin operators can also
+            # filter by exact `barn_id` if needed; opaque `admin_ref`
+            # is used for direct navigation.
             import re as _re
             safe = _re.escape(q)
             barn_hits = await db.barns.find(
@@ -1130,12 +1173,12 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 {"_id": 0, "id": 1},
             ).to_list(length=200)
             barn_ids = [b["id"] for b in barn_hits]
-            or_clauses: List[Dict[str, Any]] = [
-                {"id": {"$regex": safe, "$options": "i"}},
-            ]
             if barn_ids:
-                or_clauses.append({"barn_id": {"$in": barn_ids}})
-            mongo_q["$or"] = or_clauses
+                mongo_q["barn_id"] = {"$in": barn_ids}
+            else:
+                # No barn matched — short-circuit to an empty result so
+                # we don't fall back to an unfiltered scan.
+                mongo_q["barn_id"] = "__no_match__"
 
         total = await db.subscriptions.count_documents(mongo_q)
         items = await db.subscriptions.find(
@@ -1149,6 +1192,9 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # Defense-in-depth strip — the projection already excluded
         # Stripe ids, but if the document grows new keys we strip here.
         items = [_strip_keys(r, _SUBSCRIPTION_STRIP_KEYS) for r in items]
+        # Mint opaque admin_ref from Mongo _id; drop the raw
+        # Stripe-shaped local `id` so the API never surfaces it.
+        items = [_attach_admin_ref("as", r) for r in items]
 
         next_cursor = cursor + len(items) if (cursor + len(items)) < total else None
         await audit.record(
@@ -1157,23 +1203,29 @@ def build_router(*, db, get_current_user) -> APIRouter:
             resource_type="admin_portal", resource_id="subscriptions",
             outcome="success", status_code=200,
             metadata={"limit": limit, "cursor": cursor, "count": len(items),
-                      "filter_keys": sorted([k for k in mongo_q.keys() if k != "$or"])},
+                      "filter_keys": sorted(mongo_q.keys())},
         )
         return {"items": items, "total": total, "limit": limit,
                 "cursor": cursor, "next_cursor": next_cursor}
 
-    @router.get("/admin/portal/subscriptions/{subscription_id}")
-    async def get_subscription_detail(subscription_id: str, request: Request,
+    @router.get("/admin/portal/subscriptions/{admin_ref}")
+    async def get_subscription_detail(admin_ref: str, request: Request,
                                       user=Depends(get_current_user)):
-        """Subscription detail. Pulls audit_log activity (decision 7a)
-        — billing_events is NOT joined here. Stripe IDs stripped."""
+        """Subscription detail. Routed by opaque `admin_ref` derived
+        from Mongo `_id` (decision 4a) — raw Stripe-shaped subscription
+        IDs never appear in the URL or payload. Pulls audit_log activity
+        (decision 7a)."""
         require_platform_role(user)
+        oid = _resolve_admin_ref("as", admin_ref)
         sub = await db.subscriptions.find_one(
-            {"id": subscription_id}, _SUBSCRIPTION_SAFE_FIELDS,
+            {"_id": oid}, _SUBSCRIPTION_SAFE_FIELDS,
         )
         if not sub:
             raise HTTPException(404, "Subscription not found.")
         sub = _strip_keys(sub, _SUBSCRIPTION_STRIP_KEYS)
+        # Keep the local Stripe-shaped `id` for the audit_log join, then
+        # mint admin_ref and drop it from the outbound payload.
+        local_subscription_id = sub.get("id")
 
         # Facility summary — safe fields only, no Stripe IDs / no
         # internal subscription_id (matches Admin-4 strip invariant).
@@ -1191,21 +1243,27 @@ def build_router(*, db, get_current_user) -> APIRouter:
         try:
             recent_audit = await db.audit_log.find(
                 {"$or": [
-                    {"resource_id": subscription_id, "resource_type": "subscription"},
-                    {"resource_id": subscription_id, "resource_type": "admin_portal"},
+                    {"resource_id": local_subscription_id, "resource_type": "subscription"},
+                    {"resource_id": local_subscription_id, "resource_type": "admin_portal"},
                 ]},
                 {"_id": 0, "id": 1, "ts": 1, "action": 1, "actor_email": 1,
-                 "resource_type": 1, "resource_id": 1, "outcome": 1, "metadata": 1},
+                 "resource_type": 1, "outcome": 1, "metadata": 1},
             ).sort("ts", -1).limit(10).to_list(length=10)
             for row in recent_audit:
                 row["metadata"] = _scrub_metadata(row.get("metadata"))
+                # Drop resource_id from each entry — it IS the local
+                # Stripe-shaped subscription id.
+                row.pop("resource_id", None)
         except Exception:
             recent_audit = []
+
+        # Mint outbound admin_ref + drop raw Stripe-shaped id.
+        sub = _attach_admin_ref("as", sub)
 
         await audit.record(
             action="admin.portal.read.subscription_detail",
             user=user, request=request,
-            resource_type="subscription", resource_id=subscription_id,
+            resource_type="subscription", resource_id=local_subscription_id,
             outcome="success", status_code=200,
         )
         return {
@@ -1248,6 +1306,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
         for row in items:
             row["facility_name"] = labels.get(row.get("barn_id"))
         items = [_strip_keys(r, _BILLING_EVENT_STRIP_KEYS) for r in items]
+        # Mint opaque admin_ref + drop raw Stripe-shaped `evt_…` id.
+        items = [_attach_admin_ref("ae", r) for r in items]
         next_cursor = cursor + len(items) if (cursor + len(items)) < total else None
         await audit.record(
             action="admin.portal.read.billing_events",
@@ -1287,9 +1347,28 @@ def build_router(*, db, get_current_user) -> APIRouter:
             mongo_q, _PAYMENT_SAFE_FIELDS,
         ).sort("created_at", -1).skip(cursor).limit(limit).to_list(length=limit)
         labels = await _facility_label_map([r.get("barn_id") for r in items])
+
+        # Batch-resolve the Stripe-shaped foreign `subscription_id` into
+        # an opaque `subscription_admin_ref` so operators can navigate
+        # back to the subscription drawer without ever seeing `sub_…`.
+        sub_local_ids = list({r.get("subscription_id") for r in items
+                              if r.get("subscription_id")})
+        sub_ref_map: Dict[str, str] = {}
+        if sub_local_ids:
+            sub_rows = await db.subscriptions.find(
+                {"id": {"$in": sub_local_ids}},
+                {"_id": 1, "id": 1},
+            ).to_list(length=len(sub_local_ids))
+            sub_ref_map = {s["id"]: _admin_ref("as", s["_id"]) for s in sub_rows}
+
         for row in items:
             row["facility_name"] = labels.get(row.get("barn_id"))
+            sid = row.pop("subscription_id", None)
+            if sid:
+                row["subscription_admin_ref"] = sub_ref_map.get(sid)
         items = [_strip_keys(r, _PAYMENT_STRIP_KEYS) for r in items]
+        # Mint opaque admin_ref + drop raw Stripe-shaped `in_…` id.
+        items = [_attach_admin_ref("ap", r) for r in items]
         next_cursor = cursor + len(items) if (cursor + len(items)) < total else None
         await audit.record(
             action="admin.portal.read.payments",

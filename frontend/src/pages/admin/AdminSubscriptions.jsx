@@ -42,7 +42,7 @@ export default function AdminSubscriptions() {
   const [cycle, setCycle] = useState("");
   const [cursor, setCursor] = useState(0);
   const [nextCursor, setNextCursor] = useState(null);
-  const [openId, setOpenId] = useState(null);
+  const [openRef, setOpenRef] = useState(null);
 
   const load = useCallback(async () => {
     setLoading(true); setErr(null);
@@ -161,14 +161,14 @@ export default function AdminSubscriptions() {
             <tbody>
               {items.map((s) => (
                 <tr
-                  key={s.id}
-                  data-testid={`admin-subscriptions-row-${s.id}`}
-                  onClick={() => setOpenId(s.id)}
+                  key={s.admin_ref}
+                  data-testid={`admin-subscriptions-row-${s.admin_ref}`}
+                  onClick={() => setOpenRef(s.admin_ref)}
                   className="border-b border-equinesync-graphite/5 last:border-b-0 hover:bg-equinesync-frost cursor-pointer"
                 >
                   <td className="px-4 py-3">
                     <div className="text-equinesync-graphite font-medium">{s.facility_name || s.barn_id || "—"}</div>
-                    <div className="text-equinesync-graphite/55 text-[11.5px]">{s.id}</div>
+                    <div className="text-equinesync-graphite/55 text-[11.5px] font-mono">{s.admin_ref}</div>
                   </td>
                   <td className="px-4 py-3 text-equinesync-graphite/75">{s.plan_tier_code || "—"}</td>
                   <td className="px-4 py-3">
@@ -208,9 +208,9 @@ export default function AdminSubscriptions() {
       </div>
 
       <AdminSubscriptionDrawer
-        subscriptionId={openId}
-        open={!!openId}
-        onClose={() => setOpenId(null)}
+        adminRef={openRef}
+        open={!!openRef}
+        onClose={() => setOpenRef(null)}
       />
     </div>
   );

@@ -143,13 +143,13 @@ function PaymentsTab() {
             <tbody>
               {items.map((p) => (
                 <tr
-                  key={p.id}
-                  data-testid={`admin-billing-payments-row-${p.id}`}
+                  key={p.admin_ref}
+                  data-testid={`admin-billing-payments-row-${p.admin_ref}`}
                   className="border-b border-equinesync-graphite/5 last:border-b-0 hover:bg-equinesync-frost"
                 >
                   <td className="px-4 py-3">
                     <div className="text-equinesync-graphite font-medium">{p.facility_name || p.barn_id || "—"}</div>
-                    <div className="text-equinesync-graphite/55 text-[11.5px]">{p.id}</div>
+                    <div className="text-equinesync-graphite/55 text-[11.5px] font-mono">{p.admin_ref}</div>
                   </td>
                   <td className="px-4 py-3 text-equinesync-graphite/75">{formatMoney(p.amount_cents)}</td>
                   <td className="px-4 py-3">
@@ -268,13 +268,13 @@ function EventsTab() {
             <tbody>
               {items.map((ev) => (
                 <tr
-                  key={ev.id}
-                  data-testid={`admin-billing-events-row-${ev.id}`}
+                  key={ev.admin_ref}
+                  data-testid={`admin-billing-events-row-${ev.admin_ref}`}
                   className="border-b border-equinesync-graphite/5 last:border-b-0 hover:bg-equinesync-frost"
                 >
                   <td className="px-4 py-3">
                     <div className="text-equinesync-graphite font-medium">{ev.event_type || "—"}</div>
-                    <div className="text-equinesync-graphite/55 text-[11.5px]">{ev.id}</div>
+                    <div className="text-equinesync-graphite/55 text-[11.5px] font-mono">{ev.admin_ref}</div>
                   </td>
                   <td className="px-4 py-3 text-equinesync-graphite/75">{ev.facility_name || ev.barn_id || "—"}</td>
                   <td className="px-4 py-3">

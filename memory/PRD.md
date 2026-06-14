@@ -1211,27 +1211,17 @@ Strict guardrails per the locked plan (1a/2a/3a/4a/5a/6a/7a/8a).
 - `UserStatusBadge.jsx` — status→tone map extended with subscription +
   billing-event statuses; still approved palette only.
 
-**Tests:** `tests/test_admin_portal_admin5.py` — **40/40 green**.
-Includes platform-role matrix (5 roles × 200 on subscriptions, 4 roles
-× 200 + support_admin × 403 on billing-events/payments), barn-scoped
-403 on all 3 surface paths, unauthenticated → 401, generic 404 for
-missing subscription, exhaustive Stripe-ID leak guards (planted
-`STRIPELEAK` value markers + explicit `stripe_*` key checks), Phase 9
-isolation guard (planted `invoices` doc must not appear in /payments),
-read-only ceiling (parametrised × 4 paths × 4 mutation methods → 401/
-403/405), activity feed self-flood guard, audit emission on every read.
+**Tests:** `tests/test_admin_portal_admin5.py` — **41/41 green**
+(round-1 added `test_subscription_detail_rejects_raw_stripe_shaped_id`).
+Round-1 Codex blocker fixed: opaque `admin_ref` derived from Mongo
+`_id` now routes the detail endpoint and is the only id surfaced.
+Raw Stripe-shaped local ids (`sub_…`, `evt_…`, `in_…`) never cross
+the API boundary; `/payments.subscription_id` replaced with
+`subscription_admin_ref`; `recent_activity[].resource_id` stripped;
+Stripe-VALUE regex `re.compile(r'"(sub|evt|in|cus|price)_[A-Za-z0-9_]{4,}"')`
+enforces the absence.
 
-**Strict guardrails honored:**
-- ✅ READ-ONLY. No mutations exposed on any Admin-5 endpoint.
-- ✅ No Stripe SDK calls. Local DB only.
-- ✅ Stripe foreign-key IDs stripped from every response.
-- ✅ Billing event `summary` not surfaced (could leak Stripe IDs).
-- ✅ Hosted Stripe URLs stripped from `/payments`.
-- ✅ Phase 9 `invoices` + `recurring_charges` untouched.
-- ✅ Approved palette only.
-- ✅ Audit emission on every read; excluded from Admin-2 feed.
-
-**Packaged:** `/app/phase_admin_5_changes.zip` for Codex review.
+**Packaged:** `/app/phase_admin_5_changes.zip` for Codex re-review.
 
 ### Admin Portal — Phase Status (post Admin-4)
 
@@ -1242,6 +1232,6 @@ read-only ceiling (parametrised × 4 paths × 4 mutation methods → 401/
 | Admin-3 | User approvals + user management                              | ✅ Codex-approved & locked |
 | Admin-4 | Facility roster + read-only health page                       | ✅ Codex-approved & locked |
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
-| Admin-5 | Subscription + billing control center                         | ✅ Ready for Codex review |
+| Admin-5 | Subscription + billing control center                         | ✅ Round-1 fix applied, repackaged for re-review |
 | Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |

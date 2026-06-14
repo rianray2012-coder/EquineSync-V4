@@ -39,21 +39,21 @@ const Tile = ({ label, value, testid }) => (
   </div>
 );
 
-export default function AdminSubscriptionDrawer({ subscriptionId, open, onClose }) {
+export default function AdminSubscriptionDrawer({ adminRef, open, onClose }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
 
   useEffect(() => {
-    if (!open || !subscriptionId) return;
+    if (!open || !adminRef) return;
     let cancelled = false;
     setLoading(true); setErr(null); setData(null);
-    api.get(`/admin/portal/subscriptions/${subscriptionId}`)
+    api.get(`/admin/portal/subscriptions/${adminRef}`)
       .then((r) => { if (!cancelled) setData(r.data); })
       .catch((e) => { if (!cancelled) setErr(e?.response?.data?.detail || "Could not load subscription."); })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
-  }, [open, subscriptionId]);
+  }, [open, adminRef]);
 
   if (!open) return null;
   const sub = data?.subscription;
@@ -70,7 +70,7 @@ export default function AdminSubscriptionDrawer({ subscriptionId, open, onClose 
               Subscription detail · read-only
             </div>
             <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-light truncate">
-              {facility?.name || sub?.barn_id || subscriptionId}
+              {facility?.name || sub?.barn_id || adminRef}
             </div>
           </div>
           <button
