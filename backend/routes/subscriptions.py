@@ -194,6 +194,30 @@ def build_router(*, db, get_current_user) -> APIRouter:
         return [_plan_to_public(p) for p in plans]
 
     # ------------------------------------------------------------------
+    # Phase 15.G — Public plans (no auth)
+    # ------------------------------------------------------------------
+    # Used by the unauthenticated Landing pricing band so the static
+    # LANDING_PLANS mirror can be retired. STRIPS operational secrets
+    # (stripe_price_id_*, stripe_product_id, has_monthly / has_annual)
+    # so a public scrape can't infer whether Stripe setup is complete.
+    # Cached at the edge for 5 minutes (decision #4a).
+    @router.get("/billing/plans-public")
+    async def list_plans_public(response: Response):
+        cursor = db.plans.find({"active": True}, {"_id": 0})
+        plans = await cursor.to_list(length=50)
+        order = {"free": 0, "starter": 1, "professional": 2, "enterprise": 3}
+        plans.sort(key=lambda p: order.get(p["tier_code"], 99))
+        scrubbed = []
+        for p in plans:
+            pub = _plan_to_public(p)
+            for k in ("stripe_price_id_monthly", "stripe_price_id_annual",
+                      "stripe_product_id", "has_monthly", "has_annual"):
+                pub.pop(k, None)
+            scrubbed.append(pub)
+        response.headers["Cache-Control"] = "public, max-age=300"
+        return scrubbed
+
+    # ------------------------------------------------------------------
     # Usage read (soft-warn only; never blocks)
     # ------------------------------------------------------------------
     @router.get("/billing/usage")
@@ -247,6 +271,40 @@ def build_router(*, db, get_current_user) -> APIRouter:
         cycle = (body.billing_cycle or "").strip().lower()
         if tier == "enterprise":
             raise HTTPException(400, "Enterprise is contact-sales only. Please reach out to our team.")
+
+        # Phase 15.G — free-tier finalize. Mirrors the legacy
+        # /api/membership/checkout {tier:"free"} behaviour without a
+        # Stripe round-trip. Returns {url: null} so the FE navigates to
+        # /dashboard. No barn:manage requirement check beyond what the
+        # decorator above already enforced, since this still records a
+        # facility-level entitlement.
+        if tier == "free":
+            barn = await _resolve_or_create_barn(db, user)
+            plan = await db.plans.find_one({"tier_code": "free"}, {"_id": 0})
+            snapshot = (plan or {}).get("feature_limits") or {}
+            now = _now_iso()
+            await db.subscriptions.update_one(
+                {"barn_id": barn["id"], "stripe_subscription_id": None,
+                 "plan_tier_code": "free"},
+                {"$set": {"status": "active", "billing_cycle": None,
+                          "entitlements_snapshot": snapshot,
+                          "updated_at": now, "last_event_at": now},
+                 "$setOnInsert": {"barn_id": barn["id"],
+                                  "stripe_subscription_id": None,
+                                  "plan_tier_code": "free",
+                                  "owner_user_id": user.get("id"),
+                                  "amount_cents": 0,
+                                  "created_at": now,
+                                  "pending_emails": []}},
+                upsert=True,
+            )
+            await db.barns.update_one(
+                {"id": barn["id"]},
+                {"$set": {"subscription_entitlements": snapshot,
+                          "subscription_tier_code": "free"}},
+            )
+            return {"url": None, "session_id": None, "tier": "free"}
+
         if tier not in SUBSCRIBABLE_TIERS:
             raise HTTPException(400, f"Tier '{tier}' is not subscribable. Choose one of {sorted(SUBSCRIBABLE_TIERS)}.")
         if cycle not in ("monthly", "annual"):
