@@ -639,9 +639,48 @@ into the Stripe Checkout config).
 - New files: `pages/SubscriptionBilling.jsx`, `pages/SubscriptionSuccess.jsx`,
   `lib/subscriptionBilling.js`.
 
-### Upcoming (gated on user approval of 15.C)
-- **15.D — Trial email scheduler** (P1): background job consuming
-  `subscriptions.pending_emails`.
-- **15.E — Platform-admin billing dashboard** (P2).
+### Phase 15.D — Trial / Lifecycle Email Scheduler ✅ (Feb 2026, awaiting Codex review)
+- New service `backend/services/subscription_email_dispatcher.py` —
+  `run_subscription_email_pass(db, mailer)` consumes
+  `subscriptions.pending_emails` (populated by 15.B webhook handlers via
+  `$addToSet`), sends each event via the existing `mailer.send()` layer, and
+  `$pull`s the key only on successful send.
+- 3 events handled: `trial_will_end`, `payment_succeeded`, `payment_failed`.
+- Recipient: `subscriptions.owner_user_id`'s `users.email` (single recipient).
+- Cycle: 15-minute background loop in `core/lifespan.py`, gated by
+  `DISABLE_SUBSCRIPTION_EMAIL_DISPATCHER`. Interval override via
+  `SUBSCRIPTION_EMAIL_INTERVAL_SECONDS`. Startup log line now reports
+  `subscription_emails=True/False`.
+- Idempotency: per-key audit row in new `subscription_email_log` collection
+  with `{status, attempt, last_error, sent_at, message_id}`. Status enum:
+  `queued | sent | failed | permanent_failure`. UPSERT keyed on
+  `(subscription_id, event_key)` so retries don't inflate counters.
+- Retry policy: 5 attempts max; on attempt 5 the row is promoted to
+  `permanent_failure` and the key is pulled (won't block the queue forever).
+- Unknown event keys are pulled with `last_error=unknown_event_key`.
+- Manual trigger: `POST /api/admin/subscriptions/email-pass` (NEW
+  `backend/routes/subscription_emails.py`), gated by **narrowest existing
+
+### Upcoming (gated on user approval of 15.D)
+- **15.E — Platform-admin billing dashboard** (P2) — admin role-elevation UI
+  for marketplace facility signups becomes a candidate sub-task here.
 - **15.F — Soft-warn usage indicators in create flows** (P2).
-- **15.G — Migration cleanup**: remove legacy `/api/membership/checkout` (P3).
+- **15.G — Migration cleanup**: remove legacy `/api/membership/checkout`,
+  replace static `LANDING_PLANS` with a public read-only mirror (P3).
+
+  admin gate** `admin:access → {"admin"}`. Returns `{ok, stats}` for ops/QA.
+- New email templates (concierge-warm tone, brand name **Equine-Sync**
+  hyphenated as required by the 15.D guardrail):
+  `subscription_trial_will_end.html`, `subscription_payment_succeeded.html`,
+  `subscription_payment_failed.html` — all wrap the existing `_base_auth.html`
+  brand layout.
+- Tests: `backend/tests/test_subscription_emails_15d.py` (10 tests; happy
+  path, retry-then-permanent, unknown key, missing recipient, dev-mode
+  mailer, mailer-raises isolation, empty queue, invoice variable hydration,
+  403-for-non-admin, 200-for-admin manual trigger). 53/53 combined with
+  15.A + 15.B.
+- Strict guardrails honored: no edits to `routes/subscriptions.py`,
+  `routes/subscriptions_webhook_handlers.py`, `routes/billing.py`,
+  `routes/recurring_charges.py`, or legacy `invoices`. No new webhook
+  surface. No frontend changes.
+- Packaged delta: `/app/phase15d_changes.zip`.

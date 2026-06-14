@@ -262,6 +262,30 @@ def register_lifecycle(app, *, send_nudges):
         if os.environ.get("DISABLE_AUTO_NUDGES", "").lower() not in ("1", "true", "yes"):
             asyncio.create_task(_nudge_loop())
 
+        # ---------- Phase 15.D — Subscription email dispatcher ----------
+        # Consumes `subscriptions.pending_emails` (populated by 15.B webhook
+        # handlers via $addToSet). Runs every 15 minutes; per-row try/except
+        # inside the pass keeps a single bad row from halting the loop.
+        if os.environ.get("DISABLE_SUBSCRIPTION_EMAIL_DISPATCHER", "").lower() not in ("1", "true", "yes"):
+            from services.subscription_email_dispatcher import run_subscription_email_pass
+
+            async def _subscription_email_loop():
+                # Slight stagger so it doesn't share boot-time with other loops.
+                await asyncio.sleep(120)
+                mailer = {"send": send_email, "render": render_email}
+                interval_seconds = int(os.environ.get(
+                    "SUBSCRIPTION_EMAIL_INTERVAL_SECONDS", "900"))  # 15 minutes
+                while True:
+                    try:
+                        stats = await run_subscription_email_pass(db, mailer)
+                        if any(stats.get(k) for k in ("sent", "failed", "permanent_failures", "unknown_pulled")):
+                            logger.info("Subscription email pass: %s", stats)
+                    except Exception:
+                        logger.exception("Subscription email loop iteration failed")
+                    await asyncio.sleep(max(60, interval_seconds))
+
+            asyncio.create_task(_subscription_email_loop())
+
         # Phase 10B: structured startup-complete log — booleans/strings only,
         # no secrets/URLs/keys. Mirrors the /api/health/ready posture.
         def _enabled(flag: str) -> bool:
@@ -276,7 +300,7 @@ def register_lifecycle(app, *, send_nudges):
         logger.info(
             "startup complete: env=%s db_ok=%s indexes_ensured=%s "
             "task_materializer=%s notifications=%s owner_digest=%s "
-            "weekly_recap=%s auto_nudges=%s",
+            "weekly_recap=%s auto_nudges=%s subscription_emails=%s",
             "production" if os.environ.get("APP_ENV", "").lower() == "production" else "development",
             db_ok,
             snap["indexes_ensured"],
@@ -285,6 +309,7 @@ def register_lifecycle(app, *, send_nudges):
             _enabled("DISABLE_OWNER_DIGEST"),
             _enabled("DISABLE_OWNER_WEEKLY_RECAP"),
             _enabled("DISABLE_AUTO_NUDGES"),
+            _enabled("DISABLE_SUBSCRIPTION_EMAIL_DISPATCHER"),
         )
 
     @app.on_event("shutdown")
