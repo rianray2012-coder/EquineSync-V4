@@ -17,6 +17,8 @@ import LastSyncedBadge from "../components/today/LastSyncedBadge";
 import { BrandLoader } from "../components/BrandLoader";
 import { canManageBilling } from "../lib/permissions";
 import { RESUMABLE_STATUSES, STATUS_LABEL } from "../lib/subscriptionBilling";
+import { UsageMeter } from "../components/UsageMeter";
+import { useSubscriptionUsage } from "../lib/useSubscriptionUsage";
 
 /**
  * Stable Command — operational glance, not an analytics board.
@@ -123,6 +125,8 @@ export default function Dashboard() {
 
       <SubscriptionResumeBanner user={user} />
 
+      <SubscriptionUsageSnapshot />
+
       <SetupConciergeCard progress={progress} steps={steps} />
 
       {/* SECTION 1 · Right now */}
@@ -212,7 +216,7 @@ export default function Dashboard() {
   );
 }
 
-// Phase 15.C — secondary "Resume membership" CTA. Renders only for users
+// Phase 15.F — secondary "Resume membership" CTA. Renders only for users
 // with the `barn:manage` capability whose subscription is in a resumable
 // state (canceled / past_due / unpaid / incomplete_expired). The primary
 // action lives at /billing/subscription; this is the lightweight Dashboard
@@ -262,4 +266,38 @@ function SubscriptionResumeBanner({ user }) {
     </div>
   );
 }
+
+
+// Phase 15.F — Dashboard usage snapshot. Two-meter tile (horses + staff)
+// for `barn:manage` users only. Always read-only. Hidden by the hook when
+// the user is non-eligible or on an unlimited plan.
+function SubscriptionUsageSnapshot() {
+  const { usage } = useSubscriptionUsage();
+  if (!usage) return null;
+  // Skip entirely on unlimited plans (no meaningful meter to show).
+  const hLimit = usage.usage?.horses?.limit;
+  const uLimit = usage.usage?.users?.limit;
+  const anyLimited = (hLimit && Number.isFinite(hLimit) && hLimit > 0)
+                  || (uLimit && Number.isFinite(uLimit) && uLimit > 0);
+  if (!anyLimited) return null;
+  return (
+    <div className="mb-6" data-testid="dashboard-usage-snapshot">
+      <div className="flex items-center justify-between mb-2">
+        <div className="label-eyebrow">Plan usage</div>
+        <Link
+          to="/billing/subscription"
+          className="text-[11.5px] tracking-wide text-equine-saddleDeep hover:text-equine-ink inline-flex items-center gap-1"
+          data-testid="dashboard-usage-snapshot-link"
+        >
+          Manage plan <ArrowRight className="w-3 h-3" />
+        </Link>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <UsageMeter usage={usage} kind="horses" variant="card" />
+        <UsageMeter usage={usage} kind="users" variant="card" />
+      </div>
+    </div>
+  );
+}
+
 

@@ -4,6 +4,8 @@ import { api } from "../lib/api";
 import { Card, PageHeader, StatusPill, Empty } from "../components/Primitives";
 import { Search, Plus } from "lucide-react";
 import QuickAddSheet from "../components/QuickAddSheet";
+import { UsageMeter } from "../components/UsageMeter";
+import { useSubscriptionUsage } from "../lib/useSubscriptionUsage";
 
 const ADD_FIELDS = [
   { key: "name", label: "Show name", required: true, placeholder: "Horse name" },
@@ -23,6 +25,7 @@ export default function Horses() {
   const [horses, setHorses] = useState([]);
   const [q, setQ] = useState("");
   const [addOpen, setAddOpen] = useState(false);
+  const { usage, refresh: refreshUsage } = useSubscriptionUsage();
 
   const load = useCallback(() => api.get("/horses").then((r) => setHorses(r.data)), []);
   useEffect(() => { load(); }, [load]);
@@ -38,13 +41,16 @@ export default function Horses() {
         title="Horses"
         subtitle="Every horse in the barn with at-a-glance health, discipline and stall details."
         action={
-          <button
-            onClick={() => setAddOpen(true)}
-            data-testid="horses-add-btn"
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            <Plus className="w-4 h-4" /> Add horse
-          </button>
+          <div className="flex items-center gap-3 flex-wrap">
+            <UsageMeter usage={usage} kind="horses" variant="inline" />
+            <button
+              onClick={() => setAddOpen(true)}
+              data-testid="horses-add-btn"
+              className="btn-primary inline-flex items-center gap-2"
+            >
+              <Plus className="w-4 h-4" /> Add horse
+            </button>
+          </div>
         }
       />
 
@@ -128,8 +134,18 @@ export default function Horses() {
         endpoint="/horses"
         submitLabel="Add horse"
         testidPrefix="horses-add"
-        onCreated={load}
+        onCreated={async () => { await load(); await refreshUsage(); }}
       />
+
+      {/* Phase 15.F — card meter just below the search bar so the
+          context is visible BEFORE the user opens the add sheet. Hidden
+          for non-`barn:manage` users and unlimited plans by the meter
+          itself. */}
+      {usage && (
+        <div className="mt-6" data-testid="horses-usage-card-wrap">
+          <UsageMeter usage={usage} kind="horses" variant="card" />
+        </div>
+      )}
     </div>
   );
 }

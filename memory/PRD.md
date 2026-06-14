@@ -726,3 +726,19 @@ into the Stripe Checkout config).
   `routes/recurring_charges.py`, or legacy `invoices`. No new webhook
   surface. No frontend changes.
 - Packaged delta: `/app/phase15d_changes.zip`.
+
+
+### Phase 15.F — Soft-warn Usage Indicators in Create Flows ✅ (Feb 2026, awaiting Codex review)
+- **NEW `frontend/src/lib/useSubscriptionUsage.js`** — `useSubscriptionUsage()` hook wrapping `GET /api/billing/usage`. Frontend gate via `canManageBilling(user)` short-circuits the API call for ineligible users; a 403 is treated identically (silent no-render, defense-in-depth per decision #3a). Includes `refresh()` for post-create updates (decision #5a).
+- **NEW `frontend/src/components/UsageMeter.jsx`** — two variants: `inline` (slim 1-line pill beside CTAs) and `card` (full progress bar). Concierge-warm threshold copy at 80% → amber and 100% → clay (decision #2a). Hidden when limit is null/unlimited. Storage meter intentionally omitted (decision #1a).
+- **Horses page** — inline meter beside "Add horse" + card meter below the header; `refreshUsage()` fires after a successful create via `QuickAddSheet.onCreated`.
+- **StaffStep onboarding** — staff-seats card meter above the invite form; `refreshUsage()` fires after a successful invite.
+- **Dashboard** — `SubscriptionUsageSnapshot` tile (horses + users cards) for `barn:manage` users on limited plans, links to `/billing/subscription` (decision #4a).
+- **Bug locked:** the hook's `mounted.current` ref now resets per-mount (not just on cleanup), so React StrictMode's simulated unmount can't permanently strand it at `false` and silently skip setState. Caught + fixed during smoke screenshots.
+- **Strict guardrails honored:** approved Equine-Sync palette only (sage/saddle/amber/clay), no hard-blocking, no disabled CTAs, no nag modals/toasts, frontend-only, zero new API endpoints, zero edits to phase-9/15.A/15.B/15.D/15.E surface files.
+- Packaged delta: `/app/phase15f_changes.zip`.
+
+### Upcoming (gated on user approval of 15.F)
+- **15.G — Migration cleanup** (P3) — multi-part:
+  - Remove legacy `/api/membership/checkout` and the static `LANDING_PLANS` mirror (replace with a public read-only `/api/billing/plans-public` endpoint that strips Stripe IDs).
+  - **Non-blocking webhook cleanup (deferred per user direction):** persist Stripe `items.data[0].price.unit_amount` into `subscriptions.amount_cents` in `_h_subscription_updated`, so the plan-catalog MRR fallback shipped in 15.E is truly only a fallback for standard plans (custom-priced Enterprise contracts will no longer be confused with the catalog price).

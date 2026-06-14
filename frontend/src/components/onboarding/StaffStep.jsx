@@ -6,6 +6,8 @@ import {
   Send, Trash2, AlertTriangle, Copy, X,
 } from "lucide-react";
 import { Field, Select } from "./FormPrimitives";
+import { UsageMeter } from "../UsageMeter";
+import { useSubscriptionUsage } from "../../lib/useSubscriptionUsage";
 
 const ROLE_OPTIONS = [
   { v: "barn_manager",    l: "Barn Manager" },
@@ -24,6 +26,7 @@ const StaffStep = ({ onAnyChange }) => {
   const [form, setForm] = useState({ email: "", full_name: "", role: "trainer" });
   const [sending, setSending] = useState(false);
   const [lastDevLink, setLastDevLink] = useState(null);
+  const { usage, refresh: refreshUsage } = useSubscriptionUsage();
 
   const load = () => api.get("/invites").then((r) => setInvites(r.data)).catch(() => setInvites([]));
   useEffect(() => { load(); }, []);
@@ -39,6 +42,7 @@ const StaffStep = ({ onAnyChange }) => {
       else setLastDevLink(null);
       setForm({ email: "", full_name: "", role: "trainer" });
       load();
+      await refreshUsage();
       onAnyChange();
       track("onboarding.invite_sent", { role: r.data.role });
     } catch (e) {
@@ -72,6 +76,14 @@ const StaffStep = ({ onAnyChange }) => {
         Invite barn managers, trainers, grooms, vets, parents and owners. Each invitee receives a private magic link to set their password — no signups required.
         Roles with setup permissions (Owner / Barn Manager) will be guided through this concierge automatically on first login.
       </p>
+
+      {/* Phase 15.F — soft-warn staff-seats meter. Hidden for unlimited
+          plans and non-`barn:manage` users by the meter itself. */}
+      {usage && (
+        <div className="mb-5" data-testid="staff-invite-usage-card-wrap">
+          <UsageMeter usage={usage} kind="users" variant="card" />
+        </div>
+      )}
 
       <form onSubmit={submit} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         <Field label="Full name" value={form.full_name}
