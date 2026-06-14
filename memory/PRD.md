@@ -881,7 +881,7 @@ Final test count: 14/14 backend tests green in
 
 ⛔ **(Original gate notice — Admin-2 plan now approved; see implementation block below.)**
 
-## 🔐 Equine·Sync Admin Portal — Phase Admin-2 ✅ (Feb 14 2026)
+## 🔐 Equine·Sync Admin Portal — Phase Admin-2 ✅ **CODEX-APPROVED & LOCKED** (Feb 14 2026)
 
 Read-only dashboard pass. Wires live KPIs, subscription health, and a
 curated audit-log feed into the existing Admin-1 shell. **Zero mutation
@@ -939,3 +939,30 @@ Admin-3 remains gated.
 | Admin-5 | Subscription + billing read-only control center               | ⏸ Gated |
 | Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
+
+**Codex sign-off received Feb 14 2026 (round-2, after activity self-flood
++ unapproved-color fixes).** Final package:
+`/app/phase_admin_2_changes.zip` (22 KB, 7 files). Final test count:
+**19/19 green** in `backend/tests/test_admin_portal_admin2.py`
+including the new `test_activity_feed_excludes_dashboard_self_reads`
+and `test_admin_portal_components_use_only_approved_color_tokens`
+regressions. Combined Admin-1 + Admin-2 + Phase 15.G suite: **47/47.**
+
+### Admin Portal — Phase Status (post Admin-2 lock)
+
+| Phase   | Scope                                                        | Status |
+|---------|--------------------------------------------------------------|--------|
+| Admin-1 | Shell + access boundary                                       | ✅ Codex-approved & locked |
+| Admin-2 | Read-only dashboard + activity + sub health                   | ✅ **Codex-approved & locked** |
+| Admin-3 | User approvals + user management (first mutations)            | ⏸ **Gated** — does NOT start until founder provides Admin-3 plan |
+| Admin-4 | Facility / barn management                                    | ⏸ Gated |
+| Admin-5 | Subscription + billing read-only control center               | ⏸ Gated |
+| Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
+| Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
+
+⛔ **Admin-3 work is suspended.** Per the founder gating rule, no
+implementation begins until a pre-approved Admin-3 plan is provided.
+Admin-3 is the FIRST mutation surface in the Admin Portal — it deserves
+particularly careful scoping (which mutations, what confirmation steps,
+audit metadata shape, soft-delete vs hard-delete defaults, role-change
+gating, cross-barn leakage prevention, and idempotency).
