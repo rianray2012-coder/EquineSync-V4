@@ -122,62 +122,28 @@ def build_router(*, db, get_current_user) -> APIRouter:
         )
 
     @router.get("/membership/checkout/status/{session_id}")
-    async def checkout_status(session_id: str, request: Request,
-                              user=Depends(get_current_user)):
-        """Poll Stripe for the session status.
-
-        Idempotency: we only flip the user's subscription_status ONCE per
-        session_id. Repeat calls return the cached row from
-        payment_transactions.
+    async def checkout_status_gone(session_id: str, request: Request,
+                                   user=Depends(get_current_user)):
+        """Phase 15.G — Legacy status polling is sunset alongside the
+        legacy create endpoint. Returns HTTP 410 with the same structured
+        sunset payload as `/membership/checkout`. New paid flows return
+        the user to `/billing/success`, where the Phase 15 webhook
+        pipeline finalizes the subscription idempotently — no client
+        polling required.
         """
-        tx = await db.payment_transactions.find_one({"session_id": session_id}, {"_id": 0})
-        if not tx:
-            raise HTTPException(404, "Unknown checkout session.")
-        if tx.get("user_id") != user["id"]:
-            raise HTTPException(403, "Not your checkout session.")
-
-        # If we've already finalized, just return what we have.
-        if tx.get("payment_status") in ("paid", "expired", "failed"):
-            return {
-                "session_id": session_id,
-                "payment_status": tx["payment_status"],
-                "status": tx.get("status"),
-                "tier": tx.get("tier"),
-            }
-
-        client = _stripe_client(request)
-        try:
-            st = await client.get_checkout_status(session_id)
-        except Exception as ex:
-            logger.exception("stripe get_checkout_status failed")
-            raise HTTPException(502, f"Could not check status: {ex}")
-
-        payment_status = st.payment_status
-        status = st.status
-        update = {
-            "payment_status": payment_status,
-            "status": status,
-            "updated_at": _now_iso(),
-        }
-        # Idempotent user flip — only on the first observed "paid".
-        if payment_status == "paid" and tx.get("payment_status") != "paid":
-            await db.users.update_one(
-                {"id": user["id"]},
-                {"$set": {
-                    "membership_tier": tx.get("tier"),
-                    "subscription_status": "active",
-                    "subscription_updated_at": _now_iso(),
-                }},
-            )
-        await db.payment_transactions.update_one(
-            {"session_id": session_id}, {"$set": update}
+        raise HTTPException(
+            status_code=410,
+            detail={
+                "code": "membership_checkout_status_sunset",
+                "message": (
+                    "/api/membership/checkout/status/{session_id} is no longer "
+                    "available. Paid subscription state is finalized via the "
+                    "Phase 15 webhook (POST /api/webhook/stripe-subscriptions) "
+                    "and exposed by GET /api/subscriptions/me."
+                ),
+                "successor": "/api/subscriptions/me",
+            },
         )
-        return {
-            "session_id": session_id,
-            "payment_status": payment_status,
-            "status": status,
-            "tier": tx.get("tier"),
-        }
 
     @router.post("/membership/cancel")
     async def cancel_membership(user=Depends(get_current_user)):

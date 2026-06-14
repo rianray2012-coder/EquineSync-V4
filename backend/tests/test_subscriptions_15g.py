@@ -273,3 +273,130 @@ def test_subscription_updated_persists_amount_cents(db):
     sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
     assert sub is not None
     assert sub.get("amount_cents") == 14900
+
+
+
+# ---------------------------------------------------------------------
+# Round-2 blockers (Codex review)
+# ---------------------------------------------------------------------
+def test_legacy_membership_checkout_status_is_410():
+    """Codex round-2 blocker #1: the legacy status polling endpoint must
+    also return 410 — pre-15.G it ran the old polling + user-flip logic.
+    """
+    sess = _signup_user("horse_owner")
+    r = requests.get(
+        f"{API}/membership/checkout/status/cs_test_sessfake",
+        headers={"Authorization": f"Bearer {sess['token']}"},
+        timeout=15,
+    )
+    assert r.status_code == 410, r.text
+    detail = (r.json() or {}).get("detail") or {}
+    assert isinstance(detail, dict)
+    assert detail.get("code") == "membership_checkout_status_sunset"
+    assert "subscriptions/me" in (detail.get("successor") or "")
+
+
+def test_free_checkout_visible_via_subscriptions_me():
+    """Codex round-2 blocker #2: finalizing Free must produce a row that
+    `/api/subscriptions/me` actually returns. Previously the row was
+    written but barn.subscription_id was never stamped, so /me returned
+    null.
+    """
+    sess = _signup_user("horse_owner")
+    h = {"Authorization": f"Bearer {sess['token']}"}
+    r = requests.post(
+        f"{API}/subscriptions/checkout",
+        headers=h,
+        json={
+            "plan_tier_code": "free",
+            "billing_cycle": "monthly",
+            "origin_url": "http://localhost:3000",
+        },
+        timeout=15,
+    )
+    assert r.status_code == 200, r.text
+
+    me = requests.get(f"{API}/subscriptions/me", headers=h, timeout=15)
+    assert me.status_code == 200, me.text
+    body = me.json()
+    sub = body.get("subscription")
+    assert sub is not None, "Free subscription must be visible via /subscriptions/me"
+    assert sub.get("plan_tier_code") == "free"
+    assert sub.get("status") == "active"
+    assert sub.get("amount_cents") == 0
+
+
+def test_subscription_updated_amount_cents_not_overwritten_when_missing(db):
+    """Codex round-2 should-fix: an update event WITHOUT
+    items[0].price.unit_amount must NOT overwrite an existing nonzero
+    amount_cents with 0 (defensive revenue-reporting guarantee).
+    """
+    barn_id = f"barn_15g_def_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_15g_def_{uuid.uuid4().hex[:10]}"
+    db.barns.insert_one({"id": barn_id, "created_at": datetime.now(timezone.utc).isoformat()})
+    db.subscriptions.insert_one({
+        "id": sub_id,
+        "barn_id": barn_id,
+        "stripe_subscription_id": sub_id,
+        "plan_tier_code": "starter",
+        "status": "active",
+        "amount_cents": 4900,  # pre-existing known value
+        "stripe_price_id": "price_test_starter_m",
+        "billing_cycle": "monthly",
+        "pending_emails": [],
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+    })
+
+    # Event with no unit_amount (defensive shape).
+    obj = {
+        "id": sub_id,
+        "customer": "cus_test_15g_defensive",
+        "status": "active",
+        "current_period_start": int(time.time()),
+        "current_period_end": int(time.time()) + 30 * 86400,
+        "cancel_at_period_end": False,
+        "trial_end": None,
+        "metadata": {"barn_id": barn_id, "plan_tier_code": "starter"},
+        "items": {"data": [{"price": {"id": "price_test_starter_m"}}]},  # NO unit_amount
+    }
+    r = _post_event(_evt("customer.subscription.updated", obj))
+    assert r.status_code == 200, r.text
+
+    sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
+    assert sub is not None
+    assert sub.get("amount_cents") == 4900, "amount_cents must NOT be overwritten with 0"
+
+
+
+# ---------------------------------------------------------------------
+# Round-2 blocker #3 — Landing must not fall back to static prices
+# ---------------------------------------------------------------------
+def test_landing_jsx_has_no_static_plan_prices():
+    """Codex round-2 blocker #3: confirm Landing.jsx no longer contains
+    a static plan catalog (full plan rows with monthly_price_cents). The
+    file may keep bullet-only marketing copy keyed by tier_code, but
+    must source prices, names, and descriptions from
+    /api/billing/plans-public exclusively.
+    """
+    landing = pathlib.Path("/app/frontend/src/pages/Landing.jsx").read_text()
+    # The retired fallback name must no longer appear (defense-in-depth
+    # against drift if someone re-introduces a static catalog).
+    assert "LANDING_PLANS_FALLBACK" not in landing
+    # No hard-coded `monthly_price_cents:` literals (the field name only
+    # appears as derived data through props).
+    assert "monthly_price_cents:" not in landing
+    assert "annual_price_cents:" not in landing
+    # Confirms the public endpoint is the source of truth.
+    assert "/billing/plans-public" in landing
+
+
+def test_landing_jsx_exposes_graceful_unavailable_state():
+    """Landing should expose a pricing-unavailable test id so the
+    operational team has a way to detect the error fallback (no static
+    prices) during synthetic monitoring.
+    """
+    landing = pathlib.Path("/app/frontend/src/pages/Landing.jsx").read_text()
+    assert "pricing-unavailable" in landing
+    assert "pricing-loading" in landing
+    assert "pricing-grid" in landing

@@ -431,7 +431,9 @@ async def _h_subscription_created(db, event):
     # Phase 15.G — persist amount_cents (Stripe `unit_amount`) so the
     # admin billing dashboard MRR fallback + invoice ledger never needs a
     # round-trip to the Stripe API to find the line-item amount.
-    amount_cents = (items[0].get("price") or {}).get("unit_amount") or 0
+    # Round-2 (Codex should-fix): only set when the field is present so
+    # an event without unit_amount cannot overwrite a known nonzero value.
+    raw_amount = (items[0].get("price") or {}).get("unit_amount")
     set_doc = {
         "barn_id": barn_id,
         "stripe_subscription_id": stripe_subscription_id,
@@ -444,10 +446,11 @@ async def _h_subscription_created(db, event):
         "cancel_at_period_end": bool(obj.get("cancel_at_period_end")),
         "trial_end": _ts_to_iso(obj.get("trial_end")),
         "entitlements_snapshot": snapshot,
-        "amount_cents": amount_cents,
         "updated_at": _now_iso(),
         "last_event_at": _now_iso(),
     }
+    if raw_amount is not None:
+        set_doc["amount_cents"] = raw_amount
     await db.subscriptions.update_one(
         {"stripe_subscription_id": stripe_subscription_id},
         {
@@ -517,7 +520,7 @@ async def _h_subscription_updated(db, event):
             )
         plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0})
         snapshot = (plan or {}).get("feature_limits") or {}
-        amount_cents = (items[0].get("price") or {}).get("unit_amount") or 0
+        raw_amount = (items[0].get("price") or {}).get("unit_amount")
         set_doc = {
             "barn_id": barn_id,
             "stripe_subscription_id": stripe_subscription_id,
@@ -531,10 +534,11 @@ async def _h_subscription_updated(db, event):
             "cancel_at_period_end": bool(obj.get("cancel_at_period_end")),
             "trial_end": _ts_to_iso(obj.get("trial_end")),
             "entitlements_snapshot": snapshot,
-            "amount_cents": amount_cents,
             "updated_at": _now_iso(),
             "last_event_at": _now_iso(),
         }
+        if raw_amount is not None:
+            set_doc["amount_cents"] = raw_amount
         await db.subscriptions.update_one(
             {"stripe_subscription_id": stripe_subscription_id},
             {
@@ -564,7 +568,7 @@ async def _h_subscription_updated(db, event):
         return barn_id, ("subscription_updated_bootstrapped", stripe_subscription_id, plan_tier_code)
 
     # ---------- Existing local row: standard update path ----------
-    new_amount_cents = (items[0].get("price") or {}).get("unit_amount") or 0
+    new_raw_amount = (items[0].get("price") or {}).get("unit_amount")
     set_doc = {
         "barn_id": barn_id,
         "stripe_subscription_id": stripe_subscription_id,
@@ -575,10 +579,11 @@ async def _h_subscription_updated(db, event):
         "cancel_at_period_end": bool(obj.get("cancel_at_period_end")),
         "trial_end": _ts_to_iso(obj.get("trial_end")),
         "stripe_price_id": new_price_id,
-        "amount_cents": new_amount_cents,
         "updated_at": _now_iso(),
         "last_event_at": _now_iso(),
     }
+    if new_raw_amount is not None:
+        set_doc["amount_cents"] = new_raw_amount
     await db.subscriptions.update_one(
         {"stripe_subscription_id": stripe_subscription_id}, {"$set": set_doc},
     )

@@ -59,65 +59,38 @@ const TRUST = [
   { Icon: Sparkles, label: "Cancel anytime" },
 ];
 
-// Phase 15.G — Landing fetches the public plans catalog from
-// `/api/billing/plans-public` so this static list is now a fallback only
-// (used when the network call fails). Bullet copy lives here because the
-// API surface doesn't include marketing bullets — feature_limits is what we
-// derive `Up to N horses · N users` from when populating from the API.
-const LANDING_PLANS_FALLBACK = [
-  {
-    tier_code: "free",
-    name: "Free",
-    description: "Solo riders, owners and small-stable getting started.",
-    monthly_price_cents: 0,
-    annual_price_cents: null,
-    feature_limits: { horses: 3, users: 1 },
-    bullets: [
-      "Personal horse profile + journal",
-      "Network directory presence",
-      "Messaging with verified pros",
-    ],
-  },
-  {
-    tier_code: "starter",
-    name: "Starter",
-    description: "Small barns running day-to-day operations.",
-    monthly_price_cents: 4900,
-    annual_price_cents: 49980,
-    feature_limits: { horses: 25, users: 5 },
-    bullets: [
-      "Up to 25 horses · 5 staff users",
-      "Daily care, feed & medication tracking",
-      "Boarder invoices & owner portal",
-    ],
-  },
-  {
-    tier_code: "professional",
-    name: "Professional",
-    description: "Growing facilities with training and lesson programs.",
-    monthly_price_cents: 14900,
-    annual_price_cents: 151980,
-    feature_limits: { horses: 100, users: 25 },
-    popular: true,
-    bullets: [
-      "Up to 100 horses · 25 staff users",
-      "Training plans, GPS, advanced reporting",
-      "Recurring billing + boarder messaging",
-    ],
-  },
-  {
-    tier_code: "enterprise",
-    name: "Enterprise",
-    description: "Multi-location facilities with custom needs.",
-    contact_sales: true,
-    feature_limits: { horses: null, users: null },
-    bullets: [
-      "Unlimited horses & staff users",
-      "Dedicated support · SSO · custom integrations",
-      "Volume pricing & on-prem options",
-    ],
-  },
-];
+// Phase 15.G round-2 (Codex blocker #3): Landing's pricing band is now
+// SOURCED EXCLUSIVELY from `/api/billing/plans-public`. We no longer carry
+// any prices, plan names, or descriptions in static frontend code — if
+// that catalog changes server-side, this page reflects it immediately.
+// The only thing kept locally is *marketing bullet copy*, keyed by
+// tier_code, since the public API intentionally does not carry it. If the
+// API call fails the page shows a graceful "pricing temporarily
+// unavailable" state with a Contact-Sales CTA — it does NOT show stale
+// hard-coded prices.
+const LANDING_BULLETS_BY_TIER = {
+  free: [
+    "Personal horse profile + journal",
+    "Network directory presence",
+    "Messaging with verified pros",
+  ],
+  starter: [
+    null, // placeholder; replaced live by feature_limits when present
+    "Daily care, feed & medication tracking",
+    "Boarder invoices & owner portal",
+  ],
+  professional: [
+    null,
+    "Training plans, GPS, advanced reporting",
+    "Recurring billing + boarder messaging",
+  ],
+  enterprise: [
+    "Unlimited horses & staff users",
+    "Dedicated support · SSO · custom integrations",
+    "Volume pricing & on-prem options",
+  ],
+};
+const LANDING_POPULAR_BY_TIER = { professional: true };
 
 const CONTACT_SALES_MAILTO = "mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry";
 
@@ -125,58 +98,62 @@ export default function Landing() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const [billingCycle, setBillingCycle] = useState("monthly");
-  const [livePlans, setLivePlans] = useState(null); // null = not loaded yet
+  // Phase 15.G round-2: track loading + error states. Static prices are
+  // no longer used as a fallback — if the public catalog is unreachable
+  // we show a graceful unavailable state with a Contact-Sales CTA.
+  const [livePlans, setLivePlans] = useState(null);
+  const [plansError, setPlansError] = useState(false);
 
   useEffect(() => {
     if (user && !loading) navigate("/dashboard", { replace: true });
   }, [user, loading, navigate]);
 
-  // Phase 15.G — fetch the unauthenticated public plan catalog. Falls
-  // back to LANDING_PLANS_FALLBACK if the call fails so the page never
-  // renders empty for an offline visitor.
+  // Fetch the unauthenticated public plan catalog.
   useEffect(() => {
     let cancelled = false;
     api.get("/billing/plans-public")
       .then((r) => {
         if (cancelled) return;
         const sorted = sortPlans(Array.isArray(r.data) ? r.data : []);
+        if (sorted.length === 0) {
+          setPlansError(true);
+          setLivePlans([]);
+          return;
+        }
         setLivePlans(sorted);
+        setPlansError(false);
       })
       .catch(() => {
-        if (!cancelled) setLivePlans([]);
+        if (cancelled) return;
+        setLivePlans([]);
+        setPlansError(true);
       });
     return () => { cancelled = true; };
   }, []);
 
   const plansForCycle = useMemo(() => {
-    // Build the marketing source: prefer live plans, otherwise fallback.
-    // Either way we attach bullets from the fallback (keyed by tier_code)
-    // because the API surface intentionally does not carry marketing
-    // copy. When the live API provides feature_limits we substitute the
-    // first bullet with the live counts so the card never contradicts
-    // the live catalog.
-    const bulletsByTier = Object.fromEntries(
-      LANDING_PLANS_FALLBACK.map((p) => [p.tier_code, p.bullets || []]),
-    );
-    const popularByTier = Object.fromEntries(
-      LANDING_PLANS_FALLBACK.map((p) => [p.tier_code, !!p.popular]),
-    );
-    const fromLive = livePlans && livePlans.length > 0;
-    const source = fromLive ? livePlans : LANDING_PLANS_FALLBACK;
-    return source.map((p) => {
-      const baseBullets = (p.bullets || bulletsByTier[p.tier_code] || []).slice();
-      if (fromLive && p.feature_limits && (p.feature_limits.horses || p.feature_limits.users)) {
+    // Source of truth: the public catalog. We do NOT fall back to static
+    // prices — see plansError empty state below. The static map only
+    // contributes marketing bullets keyed by tier_code; bullet 1 is
+    // derived live from `feature_limits` when present.
+    if (!livePlans) return [];
+    return livePlans.map((p) => {
+      const fallbackBullets = (LANDING_BULLETS_BY_TIER[p.tier_code] || []).slice();
+      const baseBullets = fallbackBullets.slice();
+      if (p.feature_limits && (p.feature_limits.horses != null || p.feature_limits.users != null)) {
         const h = p.feature_limits.horses;
         const u = p.feature_limits.users;
         const parts = [];
-        if (h != null) parts.push(`Up to ${h} horses`);
+        if (h != null) parts.push(`Up to ${h} horse${h === 1 ? "" : "s"}`);
         if (u != null) parts.push(`${u} staff user${u === 1 ? "" : "s"}`);
         if (parts.length) baseBullets[0] = parts.join(" · ");
       }
+      // Drop any placeholder slots that didn't get filled.
+      const bullets = baseBullets.filter(Boolean);
       return {
         ...p,
-        bullets: baseBullets,
-        popular: p.popular || popularByTier[p.tier_code] || false,
+        bullets,
+        popular: !!LANDING_POPULAR_BY_TIER[p.tier_code],
         _savings: annualSavingsPct(p),
       };
     });
@@ -356,7 +333,47 @@ export default function Landing() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Loading state (livePlans === null) → Skeleton */}
+          {livePlans === null && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-testid="pricing-loading">
+              {[0, 1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="bg-equine-navy/40 border border-white/5 rounded-2xl p-8 min-h-[420px] animate-pulse"
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Error / empty catalog state — graceful unavailable; no static prices */}
+          {plansError && livePlans !== null && plansForCycle.length === 0 && (
+            <div
+              className="bg-equine-navy/40 border border-equine-saddle/30 rounded-2xl p-10 text-center"
+              data-testid="pricing-unavailable"
+            >
+              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle/80 font-medium mb-3">
+                Membership
+              </div>
+              <h3 className="font-display text-3xl text-white font-light">
+                Pricing is temporarily unavailable.
+              </h3>
+              <p className="mt-3 text-white/65 text-[14px] max-w-md mx-auto">
+                We&apos;re refreshing the public catalog. Reach out and our team will walk
+                you through the right plan in minutes.
+              </p>
+              <a
+                href={CONTACT_SALES_MAILTO}
+                className="mt-6 inline-flex items-center gap-2 bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-6 py-3 text-[13px] tracking-wide font-medium rounded-full"
+                data-testid="pricing-contact-sales-cta"
+              >
+                Contact sales <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          )}
+
+          {/* Loaded catalog — render cards from the public endpoint only */}
+          {plansForCycle.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-testid="pricing-grid">
             {plansForCycle.map((tier) => {
               const popular = !!tier.popular;
               const contactSales = !!tier.contact_sales;
@@ -440,6 +457,7 @@ export default function Landing() {
               );
             })}
           </div>
+          )}
         </div>
       </section>
 

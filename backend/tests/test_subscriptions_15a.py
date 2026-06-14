@@ -211,6 +211,24 @@ def test_customer_portal_requires_barn_manage():
 # ---------- /subscriptions/me ----------
 
 def test_subscriptions_me_returns_null_when_no_sub():
+    """Verifies the /subscriptions/me null path. Because marketplace
+    signups share PRIMARY_BARN_ID under the current single-tenant model,
+    we explicitly clear barn.subscription_id at the test boundary so the
+    contract under test (no subscription → null response) is exercised.
+    """
+    import os as _os
+    from dotenv import load_dotenv as _load_dotenv
+    from pymongo import MongoClient as _MongoClient
+    _load_dotenv("/app/backend/.env")
+    _mc = _MongoClient(_os.environ["MONGO_URL"])
+    _db = _mc[_os.environ.get("DB_NAME") or "test_database"]
+    _db.barns.update_one(
+        {"id": "primary"},
+        {"$unset": {"subscription_id": "", "subscription_entitlements": "",
+                    "subscription_tier_code": "", "subscription_updated_at": ""}},
+    )
+    _mc.close()
+
     out = _signup()
     h = {"Authorization": f"Bearer {out['token']}"}
     r = requests.get(f"{API}/subscriptions/me", headers=h, timeout=15)

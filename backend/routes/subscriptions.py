@@ -282,10 +282,16 @@ def build_router(*, db, get_current_user) -> APIRouter:
             plan = await db.plans.find_one({"tier_code": "free"}, {"_id": 0})
             snapshot = (plan or {}).get("feature_limits") or {}
             now = _now_iso()
+            # Phase 15.G round-2 (Codex blocker #2): give the Free row a
+            # stable id and stamp barn.subscription_id so /subscriptions/me
+            # (which reads barn.subscription_id) actually surfaces it. The
+            # id is barn-scoped + deterministic so re-runs are idempotent.
+            free_sub_id = f"free_{barn['id']}"
             await db.subscriptions.update_one(
                 {"barn_id": barn["id"], "stripe_subscription_id": None,
                  "plan_tier_code": "free"},
-                {"$set": {"status": "active", "billing_cycle": None,
+                {"$set": {"id": free_sub_id, "status": "active",
+                          "billing_cycle": None,
                           "entitlements_snapshot": snapshot,
                           "updated_at": now, "last_event_at": now},
                  "$setOnInsert": {"barn_id": barn["id"],
@@ -300,7 +306,9 @@ def build_router(*, db, get_current_user) -> APIRouter:
             await db.barns.update_one(
                 {"id": barn["id"]},
                 {"$set": {"subscription_entitlements": snapshot,
-                          "subscription_tier_code": "free"}},
+                          "subscription_tier_code": "free",
+                          "subscription_id": free_sub_id,
+                          "subscription_updated_at": now}},
             )
             return {"url": None, "session_id": None, "tier": "free"}
 
