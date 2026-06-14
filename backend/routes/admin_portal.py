@@ -797,6 +797,19 @@ def build_router(*, db, get_current_user) -> APIRouter:
         "subscription_updated_at": 1, "created_at": 1, "updated_at": 1,
     }
 
+    # Codex round-1 (Admin-4) blocker fix: `subscription_id` and
+    # `subscription_updated_at` are needed INTERNALLY (the detail
+    # endpoint joins through `subscription_id` to look up the
+    # subscription summary), but they MUST NOT cross the API boundary —
+    # per the locked decision 4a, Admin-4 carries NO subscription
+    # drill-down identifiers. Strip them on the way out.
+    _BARN_RESPONSE_STRIP_KEYS = ("subscription_id", "subscription_updated_at")
+
+    def _strip_barn_response(barn: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        if not isinstance(barn, dict):
+            return barn
+        return {k: v for k, v in barn.items() if k not in _BARN_RESPONSE_STRIP_KEYS}
+
     async def _facility_usage_summary(barn_id: str, entitlements: Dict[str, Any]) -> Dict[str, Any]:
         """Derive `{horses_used, horses_limit, users_used, users_limit}`
         for one facility. Limits come from the entitlements snapshot
