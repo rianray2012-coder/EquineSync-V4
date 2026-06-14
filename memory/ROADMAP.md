@@ -14,6 +14,13 @@ its own separately approved phase.**
 **Approved scope only**: backend foundation, no frontend pricing UI changes.
 Locks: 1c · 2a · 3a · 4a · 5c · 6b.
 
+### 🔧 Codex round-2 review fixes applied (Feb 14 2026)
+
+| # | Finding | Fix |
+|---|---|---|
+| 1 | Webhook returned `200 handled:false` when `stripe.Subscription.retrieve` failed — Stripe wouldn't retry | Now raises `HTTPException(502, "Stripe subscription lookup failed; retry expected.")` so Stripe replays. New test: `test_webhook_returns_502_when_stripe_retrieve_fails` |
+| 2 | Idempotent-replay path didn't re-stamp `barn.subscription_id` if the original write had only persisted the subscription row | Both write paths (initial + idempotent replay) now use `upsert=True` with `$setOnInsert` for `id` + `created_at`, so the barn-pointer is durable. Updated test: `test_webhook_checkout_completed_is_idempotent` now asserts barn pointer is repaired on replay and the subscription row stays exactly one |
+
 ### 🔧 Codex round-1 review fixes applied (Feb 14 2026)
 
 | # | Finding | Fix |
@@ -53,7 +60,7 @@ Locks: 1c · 2a · 3a · 4a · 5c · 6b.
 - `STRIPE_PRICE_STARTER_MONTHLY=` / `_ANNUAL` — required in prod.
 - `STRIPE_PRICE_PROFESSIONAL_MONTHLY=` / `_ANNUAL` — required in prod.
 
-### Tests — 19/19 (`/app/backend/tests/test_subscriptions_15a.py`)
+### Tests — 20/20 (`/app/backend/tests/test_subscriptions_15a.py`)
 - 4-tier catalog shape (Enterprise contact_sales=true, no Stripe IDs).
 - Usage endpoint barn-scoped, used/limit, non-blocking.
 - Checkout rejects Enterprise (400 "contact sales"), unknown tier, bad cycle.

@@ -247,7 +247,8 @@ def test_webhook_checkout_completed_is_idempotent():
     has the magic emergent key), we insert a subscription row by hand with a
     known stripe_subscription_id, then POST a webhook for the same sub id —
     the endpoint should detect the existing row and short-circuit
-    (handled=True, idempotent=True).
+    (handled=True, idempotent=True). Codex round-2 #2: also verify the barn's
+    subscription_id pointer is repaired on replay.
     """
     from pymongo import MongoClient
     mongo_url = os.environ["MONGO_URL"]
@@ -255,7 +256,7 @@ def test_webhook_checkout_completed_is_idempotent():
     client = MongoClient(mongo_url)
     db = client[db_name]
     sub_id = f"sub_test_{uuid.uuid4().hex[:12]}"
-    barn_id = "primary"
+    barn_id = f"barn_idemp_{uuid.uuid4().hex[:8]}"
     db.subscriptions.insert_one({
         "id": sub_id,
         "barn_id": barn_id,
@@ -265,6 +266,8 @@ def test_webhook_checkout_completed_is_idempotent():
         "status": "active",
         "created_at": "2026-01-01T00:00:00+00:00",
     })
+    # Pre-condition: barn either missing or missing the subscription_id pointer.
+    db.barns.delete_one({"id": barn_id})
 
     fake_event = {
         "id": f"evt_test_{uuid.uuid4().hex[:12]}",
@@ -290,9 +293,100 @@ def test_webhook_checkout_completed_is_idempotent():
     assert body.get("handled") is True
     assert body.get("idempotent") is True
 
+    # Codex round-2 #2: barn pointer must be repaired idempotently.
+    barn = db.barns.find_one({"id": barn_id})
+    assert barn is not None, "barn row must be upserted on idempotent replay"
+    assert barn.get("subscription_id") == sub_id, (
+        "idempotent replay must repair barn.subscription_id"
+    )
+    assert barn.get("subscription_updated_at")
+
+    # Second replay — still idempotent, same pointer.
+    r2 = requests.post(
+        f"{API}/webhook/stripe-subscriptions",
+        json=fake_event, timeout=15,
+    )
+    assert r2.status_code == 200
+    assert r2.json().get("idempotent") is True
+    barn2 = db.barns.find_one({"id": barn_id})
+    assert barn2.get("subscription_id") == sub_id
+    # Still exactly one subscription row for this stripe_subscription_id.
+    assert db.subscriptions.count_documents({"stripe_subscription_id": sub_id}) == 1
+
     # Cleanup
     db.subscriptions.delete_one({"id": sub_id})
+    db.barns.delete_one({"id": barn_id})
     client.close()
+
+
+# Codex round-2 #1: Stripe.Subscription.retrieve failure must return a
+# retryable non-2xx (502), NOT 200 handled:false. That guarantees Stripe
+# replays the event and we eventually reconcile the subscription.
+def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
+    """Mock stripe.Subscription.retrieve to raise; assert the webhook
+    endpoint surfaces 502.
+
+    We can't monkeypatch the running server process, so this test reaches
+    in via a direct in-process call to the route handler.
+    """
+    import asyncio
+    import sys
+    sys.path.insert(0, "/app/backend")
+    import stripe as stripe_sdk
+    from fastapi import HTTPException
+    from routes.subscriptions import build_router
+
+    class _StubError(stripe_sdk.error.StripeError):
+        pass
+
+    def _boom(*a, **k):
+        raise _StubError("simulated stripe outage")
+
+    monkeypatch.setattr(stripe_sdk.Subscription, "retrieve", _boom)
+    monkeypatch.setenv("STRIPE_API_KEY", "sk_test_anything")
+    monkeypatch.delenv("STRIPE_WEBHOOK_SECRET", raising=False)
+
+    # Build a stub DB whose subscriptions.find_one returns None (so the
+    # idempotent short-circuit is bypassed and we hit the retrieve path).
+    class _Coll:
+        def __init__(self, store=None):
+            self.store = store or {}
+        async def find_one(self, *a, **k):
+            return None
+        async def update_one(self, *a, **k):
+            return None
+        async def insert_one(self, *a, **k):
+            return None
+    class _StubDB:
+        plans = _Coll()
+        subscriptions = _Coll()
+        barns = _Coll()
+
+    async def _fake_get_current_user():
+        return {"id": "tester"}
+
+    router = build_router(db=_StubDB(), get_current_user=_fake_get_current_user)
+    # Find the webhook handler.
+    handler = None
+    for route in router.routes:
+        if route.path == "/webhook/stripe-subscriptions":
+            handler = route.endpoint
+            break
+    assert handler is not None, "webhook route missing"
+
+    class _StubReq:
+        headers = {}
+        async def body(self):
+            sub_id = f"sub_boom_{uuid.uuid4().hex[:6]}"
+            return ('{"id":"evt_test","type":"checkout.session.completed",'
+                    '"data":{"object":{"id":"cs_test","subscription":"'
+                    + sub_id + '","customer":"cus_test","metadata":{'
+                    '"barn_id":"barn_boom","owner_user_id":"u",'
+                    '"plan_tier_code":"starter","billing_cycle":"monthly"}}}}').encode()
+    with pytest.raises(HTTPException) as ex:
+        asyncio.run(handler(_StubReq()))
+    assert ex.value.status_code == 502
+    assert "stripe" in ex.value.detail.lower()
 
 
 # ---------- /membership/checkout legacy still works (free tier only) ----------

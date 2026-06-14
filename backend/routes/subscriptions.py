@@ -410,22 +410,43 @@ def build_router(*, db, get_current_user) -> APIRouter:
             logger.warning("checkout.session.completed missing required metadata: %s", metadata)
             return {"received": True, "handled": False, "reason": "missing metadata"}
 
-        # Idempotency: keyed on stripe_subscription_id, NOT event id (15.A scope
-        # explicitly avoids the billing_events idempotency table — that lands
-        # in 15.B). If a Subscription row already exists with this Stripe sub
-        # id, we no-op the user/barn-state flip.
+        # Idempotency: keyed on stripe_subscription_id, NOT event id (15.A
+        # scope explicitly avoids the billing_events idempotency table — that
+        # lands in 15.B). If a Subscription row already exists with this
+        # Stripe sub id, we no-op the subscription insert — but we still
+        # idempotently repair the barn → subscription pointer in case the
+        # original webhook delivery succeeded on the subscriptions write but
+        # failed before stamping barn.subscription_id (Codex round-2 #2).
         existing = await db.subscriptions.find_one({"stripe_subscription_id": stripe_subscription_id})
         if existing:
+            await db.barns.update_one(
+                {"id": barn_id},
+                {
+                    "$set": {
+                        "subscription_id": stripe_subscription_id,
+                        "subscription_updated_at": _now_iso(),
+                    },
+                    "$setOnInsert": {"id": barn_id, "created_at": _now_iso()},
+                },
+                upsert=True,
+            )
             return {"received": True, "handled": True, "idempotent": True}
 
         # Fetch the live subscription so we can read status + period info from
         # the source of truth, not derived from the Checkout Session.
+        # Codex round-2 #1: on Stripe lookup failure, return a non-2xx
+        # retryable status so Stripe will replay the webhook. Returning 200
+        # would tell Stripe the event was successfully handled and the
+        # subscription would never be reconciled into our DB.
         try:
             stripe_sub = stripe.Subscription.retrieve(stripe_subscription_id)
         except stripe.error.StripeError as ex:
             logger.exception("could not retrieve stripe subscription %s: %s",
                              stripe_subscription_id, ex)
-            return {"received": True, "handled": False, "reason": "stripe lookup failed"}
+            raise HTTPException(
+                status_code=502,
+                detail="Stripe subscription lookup failed; retry expected.",
+            )
 
         plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0})
         snapshot = (plan or {}).get("feature_limits") or {}
@@ -457,10 +478,14 @@ def build_router(*, db, get_current_user) -> APIRouter:
         await db.subscriptions.insert_one(sub_doc)
         await db.barns.update_one(
             {"id": barn_id},
-            {"$set": {
-                "subscription_id": stripe_subscription_id,
-                "subscription_updated_at": _now_iso(),
-            }},
+            {
+                "$set": {
+                    "subscription_id": stripe_subscription_id,
+                    "subscription_updated_at": _now_iso(),
+                },
+                "$setOnInsert": {"id": barn_id, "created_at": _now_iso()},
+            },
+            upsert=True,
         )
         return {"received": True, "handled": True, "type": event_type}
 
