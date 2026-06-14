@@ -792,7 +792,7 @@ When the founder is ready, they'll provide the gated plan and `ask_human` will s
 
 ---
 
-## 🔐 Equine·Sync Admin Portal — Phase Admin-1 ✅ (Feb 14 2026)
+## 🔐 Equine·Sync Admin Portal — Phase Admin-1 ✅ **CODEX-APPROVED & LOCKED** (Feb 14 2026)
 
 Foundation pass. Read-only, shell + access boundary only — no mutations,
 no Phase 9/15 data flowing through admin endpoints yet (those land in
@@ -859,4 +859,28 @@ rejected, health gate, audit emission, mutation surface invariant).
 **Packaged:** `/app/phase_admin_portal_changes.zip` (Admin-1 only) for
 Codex review. **Admin-2 is gated** — does not start until this pass is
 signed off.
+
+
+**Codex sign-off received Feb 14 2026 (round-2, after collision fix).**
+Package: `/app/phase_admin_portal_changes.zip` (33 KB, 16 files).
+Final test count: 14/14 backend tests green in
+`backend/tests/test_admin_portal_admin1.py` including the
+`test_no_app_js_admin_path_collision` regression.
+
+### Admin Portal — Phase Status
+
+| Phase   | Scope                                                        | Status |
+|---------|--------------------------------------------------------------|--------|
+| Admin-1 | Shell + access boundary (platform_role, sidebar, AdminLayout) | ✅ **Codex-approved & locked** |
+| Admin-2 | Read-only dashboard + recent activity + sub-health snapshot   | ⏸ **Gated** — does NOT start until founder provides Admin-2 plan |
+| Admin-3 | User approvals + user management (first audit-logged mutations) | ⏸ Gated |
+| Admin-4 | Facility / barn management                                    | ⏸ Gated |
+| Admin-5 | Subscription + billing read-only control center               | ⏸ Gated |
+| Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
+| Admin-7 | Reports / integrations / settings / consolidation + Codex pkg | ⏸ Gated |
+
+⛔ **Admin-2 work is suspended.** Per the founder gating rule, no
+implementation begins until a pre-approved Admin-2 plan is provided
+covering scope, data sources (existing collections only), the activity
+feed shape, KPI definitions, and the cap on read-only surface area.
 
