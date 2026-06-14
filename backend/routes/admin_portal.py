@@ -98,6 +98,19 @@ _ACTIVITY_PREFIXES = (
     "permission.denied",      # security signal
 )
 
+# Codex round-1 (Admin-2) blocker fix: the activity feed must NOT show
+# its own dashboard reads back to itself, or the curated feed self-floods
+# with `admin.portal.read.kpis` / `admin.portal.read.subscription_health`
+# / `admin.portal.read.activity` / `admin.portal.me` and buries the
+# actually-useful admin / subscription / user / security events. We
+# still audit those reads (so platform-admin dashboard views remain
+# auditable in Admin-6) — we just hide them from THIS curated feed.
+_ACTIVITY_EXCLUDE_PREFIXES = (
+    "admin.portal.read.",
+    "admin.portal.me",
+)
+
+
 # Defensive scrub list — these keys must NEVER appear in an activity
 # response, even if they leaked into audit_log metadata.
 _METADATA_SCRUB_KEYS = {
@@ -329,7 +342,13 @@ def build_router(*, db, get_current_user) -> APIRouter:
             {"action": {"$regex": f"^{p}", "$options": "i"}}
             for p in _ACTIVITY_PREFIXES
         ]
-        query = {"$or": prefix_or}
+        # Codex round-1 (Admin-2) blocker fix: subtract dashboard-self
+        # reads so the curated feed doesn't bury real admin events.
+        exclude_or = [
+            {"action": {"$regex": f"^{p}", "$options": "i"}}
+            for p in _ACTIVITY_EXCLUDE_PREFIXES
+        ]
+        query = {"$and": [{"$or": prefix_or}, {"$nor": exclude_or}]}
 
         items: List[Dict[str, Any]] = []
         try:
@@ -360,6 +379,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "items": items,
             "limit": limit,
             "allowlist_prefixes": list(_ACTIVITY_PREFIXES),
+            "exclude_prefixes": list(_ACTIVITY_EXCLUDE_PREFIXES),
             "_generated_at": datetime.now(timezone.utc).isoformat(),
         }
 

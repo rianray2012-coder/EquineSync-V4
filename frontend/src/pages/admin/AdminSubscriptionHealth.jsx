@@ -6,17 +6,26 @@ import React from "react";
 import { Activity, AlertTriangle } from "lucide-react";
 
 const StatusPill = ({ label, value, tone }) => {
+  // Admin Portal palette only — Midnight Graphite, Slate Navy, Frost
+  // White, Smoky Lilac. Codex round-1 (Admin-2) blocker fix: no
+  // bg-red-*/text-red-*/bg-amber-*/text-amber-* tokens here. Severity
+  // is communicated through opacity weight + the brand's darkest tone:
+  //   danger → solid Slate Navy w/ Frost White text (highest emphasis)
+  //   warn   → Smoky Lilac at 40% w/ Slate Navy border + Graphite text
+  //   muted  → Graphite-on-Frost at low opacity (zero counts)
+  //   default (informational) → Smoky Lilac highlight
   const toneCls =
     tone === "danger"
-      ? "bg-red-50 text-red-800 border-red-100"
+      ? "bg-equinesync-slate text-equinesync-frost border-equinesync-slate"
       : tone === "warn"
-      ? "bg-amber-50 text-amber-800 border-amber-100"
+      ? "bg-equinesync-lilac/40 text-equinesync-graphite border-equinesync-slate/30"
       : tone === "muted"
       ? "bg-equinesync-graphite/5 text-equinesync-graphite/55 border-equinesync-graphite/10"
       : "bg-equinesync-lilac/15 text-equinesync-graphite/80 border-equinesync-lilac/30";
   return (
     <div
       data-testid={`admin-sub-health-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+      data-tone={tone || "default"}
       className={`rounded-lg border px-3 py-2 ${toneCls}`}
     >
       <div className="text-[9.5px] tracking-[0.22em] uppercase opacity-80">

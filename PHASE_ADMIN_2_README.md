@@ -1,9 +1,55 @@
 # Phase Admin-2 — Equine·Sync Admin Portal Dashboard (Read-only)
 
-**Status:** Ready for Codex round-1 review.
+**Status:** Round-2 fixes applied. Ready for Codex re-review.
 **Date:** Feb 14, 2026.
 **Scope:** Live KPIs + subscription health snapshot + curated activity
 feed wired into the existing Admin-1 shell. **Zero mutation buttons.**
+
+---
+
+## 🛠 Round-1 Codex feedback addressed
+
+**Blocker #1 — Activity feed was self-flooding with dashboard reads.**
+The backend audited `admin.portal.read.kpis`, `…read.subscription_health`,
+`…read.activity`, and `admin.portal.me`. Because the allowlist included
+`admin.*`, those audited reads ended up displayed in the very feed that
+produced them — burying real admin / subscription / user / security
+activity.
+
+*Fix:* added `_ACTIVITY_EXCLUDE_PREFIXES = ("admin.portal.read.",
+"admin.portal.me")`. Mongo query is now
+`{"$and": [{"$or": allowlist}, {"$nor": exclude}]}`. Reads ARE still
+audited (so Admin-6 audit-log surface keeps visibility). Response also
+advertises `exclude_prefixes` so the FE / QA can see what was filtered.
+**Regression test:** `test_activity_feed_excludes_dashboard_self_reads`
+plants three tagged entries (`admin.portal.read.kpis`, `admin.portal.me`,
+`admin.user.suspend`) and asserts only `admin.user.suspend` appears.
+
+**Blocker #2 — Unapproved red/amber Tailwind tokens.**
+`AdminSubscriptionHealth.jsx` and `AdminActivityFeed.jsx` used
+`bg-red-50/text-red-800/border-red-100` and the amber counterparts for
+"danger" / "warn" / "Denied" / "Failure" treatments. Per the Admin
+Portal guardrail (and confirmed by the official Equine·Sync Admin
+Portal Guide PDF), the palette is locked to **Midnight Graphite,
+Slate Navy, Frost White, Smoky Lilac only.** No other production
+colors permitted without approval.
+
+*Fix:* re-derived severity treatments within the approved palette —
+  - **danger** → solid `bg-equinesync-slate text-equinesync-frost
+    border-equinesync-slate` (highest brand-darkest emphasis)
+  - **warn** → `bg-equinesync-lilac/40 text-equinesync-graphite
+    border-equinesync-slate/30`
+  - **muted** → `bg-equinesync-graphite/5 text-equinesync-graphite/55
+    border-equinesync-graphite/10` (zero counts)
+  - **default** (informational) → `bg-equinesync-lilac/15` highlight
+
+**Regression test (source-level lint):**
+`test_admin_portal_components_use_only_approved_color_tokens` greps
+every `.jsx` under `frontend/src/pages/admin/` for any
+`bg|text|border|ring|from|to|via|fill|stroke - {red|amber|green|yellow
+|blue|indigo|violet|purple|pink|rose|teal|cyan|emerald|lime|orange|sky
+|fuchsia} - \d+` Tailwind token and fails with a per-file offender
+list. Locks the palette at source-check time.
 
 ---
 
@@ -25,6 +71,8 @@ feed wired into the existing Admin-1 shell. **Zero mutation buttons.**
 | 12 | Approved colors only (Midnight Graphite / Slate Navy / Frost White / Smoky Lilac) | ✅ |
 | 13 | Defensive scrub of sensitive metadata keys in the activity feed | ✅ verified by test |
 | 14 | 30-second cache on KPIs only (sub-health + activity uncached) | ✅ verified by test |
+| 15 | **Activity feed excludes dashboard self-reads** | ✅ NEW round-2 — verified by test |
+| 16 | **No unapproved color tokens in `pages/admin/*.jsx`** | ✅ NEW round-2 — source-check test |
 
 ---
 
@@ -56,7 +104,7 @@ feed wired into the existing Admin-1 shell. **Zero mutation buttons.**
 ```
 cd /app/backend
 python -m pytest tests/test_admin_portal_admin2.py -v
-# 17 passed in 45.13s
+# 19 passed in 44.78s
 ```
 
 Coverage map:
@@ -78,6 +126,8 @@ Coverage map:
 | `test_activity_feed_requires_platform_role` | 403 boundary |
 | **`test_no_mutations_exposed_on_admin2_endpoints`** | Parametrised over all 3 new paths × POST/PUT/PATCH/DELETE → all 401/403/405 |
 | `test_all_three_endpoints_emit_audit_log` | Audit emission invariant |
+| **`test_activity_feed_excludes_dashboard_self_reads`** | **NEW round-2** — planted `admin.portal.read.kpis` + `admin.portal.me` entries are filtered out while a planted real `admin.user.suspend` entry survives |
+| **`test_admin_portal_components_use_only_approved_color_tokens`** | **NEW round-2** — source-level grep over `pages/admin/*.jsx` against every forbidden Tailwind color family with a numeric suffix |
 
 **Regression:**
 - `pytest tests/test_admin_portal_admin1.py` → 14/14 green.

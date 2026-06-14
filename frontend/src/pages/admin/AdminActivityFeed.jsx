@@ -30,16 +30,26 @@ const ActionPill = ({ action }) => (
 );
 
 const OutcomePill = ({ outcome, status }) => {
+  // Approved palette only (Admin Portal guardrail): no red/amber tokens.
+  // Denied → solid Slate Navy for highest emphasis (security signal).
+  // Failure → Smoky Lilac w/ Graphite text + Slate Navy border (visible,
+  // calm). Success/neutral renders nothing — keeps the timeline quiet.
   if (outcome === "denied" || status === 403) {
     return (
-      <span className="px-2 py-0.5 rounded-full text-[10px] tracking-wide uppercase bg-red-50 text-red-800 border border-red-100">
+      <span
+        className="px-2 py-0.5 rounded-full text-[10px] tracking-wide uppercase bg-equinesync-slate text-equinesync-frost border border-equinesync-slate"
+        data-tone="denied"
+      >
         Denied
       </span>
     );
   }
   if (outcome === "failure") {
     return (
-      <span className="px-2 py-0.5 rounded-full text-[10px] tracking-wide uppercase bg-amber-50 text-amber-800 border border-amber-100">
+      <span
+        className="px-2 py-0.5 rounded-full text-[10px] tracking-wide uppercase bg-equinesync-lilac/40 text-equinesync-graphite border border-equinesync-slate/30"
+        data-tone="failure"
+      >
         Failure
       </span>
     );

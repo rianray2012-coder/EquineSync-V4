@@ -356,3 +356,101 @@ def test_all_three_endpoints_emit_audit_log(db):
     assert db.audit_log.count_documents({"action": "admin.portal.read.kpis"}) == before_k + 1
     assert db.audit_log.count_documents({"action": "admin.portal.read.subscription_health"}) == before_s + 1
     assert db.audit_log.count_documents({"action": "admin.portal.read.activity"}) == before_a + 1
+
+
+
+# ---------------------------------------------------------------------
+# Codex round-1 (Admin-2) blocker regressions
+# ---------------------------------------------------------------------
+def test_activity_feed_excludes_dashboard_self_reads(db):
+    """Codex blocker #1: the curated feed must NOT include
+    `admin.portal.read.*` or `admin.portal.me` entries, even though
+    they're audit-logged. Otherwise every dashboard visit floods the
+    feed with its own reads and buries the actually-useful events.
+
+    Strategy: plant TWO entries with the SAME unique tag —
+      • `admin.portal.read.kpis` (should be HIDDEN)
+      • `admin.user.suspend`     (should be VISIBLE — real admin event)
+    Then assert the visible one appears and the hidden one does not.
+    """
+    s = _admin_session(db)
+    h = {"Authorization": f"Bearer {s['token']}"}
+
+    tag = uuid.uuid4().hex[:8]
+    now_iso = datetime.now(timezone.utc).isoformat()
+    db.audit_log.insert_many([
+        {"id": f"hidden_{tag}", "ts": now_iso,
+         "action": "admin.portal.read.kpis",
+         "actor_email": f"t_{tag}@x", "outcome": "success",
+         "metadata": {"tag": tag, "label": "should_be_hidden"}},
+        {"id": f"hidden_me_{tag}", "ts": now_iso,
+         "action": "admin.portal.me",
+         "actor_email": f"t_{tag}@x", "outcome": "success",
+         "metadata": {"tag": tag, "label": "should_be_hidden_me"}},
+        {"id": f"visible_{tag}", "ts": now_iso,
+         "action": "admin.user.suspend",
+         "actor_email": f"t_{tag}@x", "outcome": "success",
+         "metadata": {"tag": tag, "label": "should_be_visible"}},
+    ])
+
+    try:
+        r = requests.get(f"{API}/admin/portal/activity?limit=100", headers=h, timeout=10)
+        assert r.status_code == 200
+        body = r.json()
+        items = body["items"]
+        ours = [i for i in items if (i.get("metadata") or {}).get("tag") == tag]
+        labels = [(i.get("metadata") or {}).get("label") for i in ours]
+
+        # Visible real admin event present.
+        assert "should_be_visible" in labels, (
+            f"Real admin event hidden from feed. Tagged items returned: {labels}"
+        )
+        # Dashboard self-reads excluded.
+        assert "should_be_hidden" not in labels, (
+            "admin.portal.read.kpis self-flood entry leaked into feed."
+        )
+        assert "should_be_hidden_me" not in labels, (
+            "admin.portal.me self-flood entry leaked into feed."
+        )
+        # Response advertises the exclude list for transparency.
+        assert "exclude_prefixes" in body
+        assert any("admin.portal.read" in p for p in body["exclude_prefixes"])
+    finally:
+        db.audit_log.delete_many({"metadata.tag": tag})
+
+
+def test_admin_portal_components_use_only_approved_color_tokens():
+    """Codex blocker #2: AdminSubscriptionHealth.jsx and
+    AdminActivityFeed.jsx had unapproved bg-red-*/text-red-*/bg-amber-*/
+    text-amber-* Tailwind tokens. Per the Admin Portal guardrail only
+    Midnight Graphite / Slate Navy / Frost White / Smoky Lilac are
+    permitted. This regression scans the admin component sources for
+    any forbidden Tailwind color family.
+    """
+    import re
+
+    admin_dir = pathlib.Path("/app/frontend/src/pages/admin")
+    forbidden_families = (
+        "red", "amber", "green", "yellow", "blue", "indigo",
+        "violet", "purple", "pink", "rose", "teal", "cyan",
+        "emerald", "lime", "orange", "sky", "fuchsia",
+    )
+    # Match Tailwind color tokens of the form `text-red-500`, `bg-amber-50`,
+    # `border-green-100`, etc. (numeric suffix required). We deliberately
+    # do NOT match `*-equinesync-*` (approved) or bare `text-white`/
+    # `bg-black` (not used here either).
+    pattern = re.compile(
+        rf"\b(?:bg|text|border|ring|from|to|via|fill|stroke)-(?:{'|'.join(forbidden_families)})-\d+",
+    )
+    offenders = {}
+    for f in admin_dir.glob("*.jsx"):
+        text = f.read_text()
+        hits = pattern.findall(text)
+        if hits:
+            offenders[f.name] = sorted(set(hits))
+
+    assert not offenders, (
+        "Unapproved Tailwind color tokens found in Admin Portal components. "
+        f"Use only Midnight Graphite / Slate Navy / Frost White / Smoky Lilac "
+        f"(equinesync.* tokens). Offenders: {offenders}"
+    )
