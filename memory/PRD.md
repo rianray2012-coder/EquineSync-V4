@@ -1223,6 +1223,36 @@ enforces the absence.
 
 **Packaged:** `/app/phase_admin_5_changes.zip` for Codex re-review.
 
+## 🔐 Equine·Sync Admin Portal — Phase Admin-5a ✅ (Feb 24 2026, bridge phase)
+
+Frontend-only lint cleanup. Behavior-preserving. No backend changes.
+
+**Goal:** silence `react-hooks/set-state-in-effect` warnings introduced
+in Admin-4 + Admin-5 (synchronous `setLoading(true); setErr(null);`
+at the top of `useEffect`-driven `load()` helpers).
+
+**Pattern:** AdminDashboard.jsx async-callback pattern.
+- All `setState` calls moved into `.then` / `.catch` / `.finally`.
+- Filter / pagination changes keep previous data visible until new
+  payload lands (SWR-style); initial state already represents
+  "loading, no data, no err" so first render still shows the skeleton.
+- Drawer components receive `key={ref}` from the parent → fresh mount
+  on each entity change, eliminating the "reset state then re-fetch"
+  block at the top of the effect.
+
+**Files changed (frontend only):**
+- `pages/admin/AdminFacilities.jsx`, `pages/admin/AdminFacilityDrawer.jsx`
+- `pages/admin/AdminSubscriptions.jsx`, `pages/admin/AdminSubscriptionDrawer.jsx`
+- `pages/admin/AdminBilling.jsx`
+
+**Verification:**
+- All 5 files lint clean (no `react-hooks/set-state-in-effect`).
+- Webpack `Compiled successfully` on every hot-reload.
+- Backend regression: `pytest tests/test_admin_portal_admin4.py
+  tests/test_admin_portal_admin5.py` → **64/64 pass**.
+
+**Packaged:** `/app/phase_admin_5a_lint_changes.zip` for Codex review.
+
 ### Admin Portal — Phase Status (post Admin-4)
 
 | Phase   | Scope                                                        | Status |
@@ -1232,6 +1262,7 @@ enforces the absence.
 | Admin-3 | User approvals + user management                              | ✅ Codex-approved & locked |
 | Admin-4 | Facility roster + read-only health page                       | ✅ Codex-approved & locked |
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
-| Admin-5 | Subscription + billing control center                         | ✅ Round-1 fix applied, repackaged for re-review |
+| Admin-5  | Subscription + billing control center                         | ✅ Codex-approved & locked |
+| Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Ready for Codex review |
 | Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |

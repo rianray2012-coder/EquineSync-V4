@@ -9,7 +9,7 @@
  *     they're blocked at the API layer from /billing-events and
  *     /payments.
  */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../lib/api";
 import UserStatusBadge from "./UserStatusBadge";
 import AdminSubscriptionDrawer from "./AdminSubscriptionDrawer";
@@ -44,28 +44,36 @@ export default function AdminSubscriptions() {
   const [nextCursor, setNextCursor] = useState(null);
   const [openRef, setOpenRef] = useState(null);
 
-  const load = useCallback(async () => {
-    setLoading(true); setErr(null);
-    try {
-      const params = new URLSearchParams();
-      if (q) params.set("q", q);
-      if (status) params.set("status", status);
-      if (tier) params.set("plan_tier_code", tier);
-      if (cycle) params.set("billing_cycle", cycle);
-      params.set("limit", "25");
-      params.set("cursor", String(cursor));
-      const { data } = await api.get(`/admin/portal/subscriptions?${params.toString()}`);
-      setItems(data.items);
-      setTotal(data.total);
-      setNextCursor(data.next_cursor);
-    } catch (e) {
-      setErr(e?.response?.data?.detail || "Failed to load subscriptions.");
-    } finally {
-      setLoading(false);
-    }
+  // All state transitions live inside async callbacks — same pattern
+  // as AdminDashboard / AdminFacilities. Filter or page changes keep
+  // the previous data visible until the new payload lands (SWR-style);
+  // satisfies `react-hooks/set-state-in-effect` without changing
+  // user-visible behavior.
+  useEffect(() => {
+    let cancelled = false;
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (status) params.set("status", status);
+    if (tier) params.set("plan_tier_code", tier);
+    if (cycle) params.set("billing_cycle", cycle);
+    params.set("limit", "25");
+    params.set("cursor", String(cursor));
+    api.get(`/admin/portal/subscriptions?${params.toString()}`)
+      .then((r) => {
+        if (cancelled) return;
+        setItems(r.data.items);
+        setTotal(r.data.total);
+        setNextCursor(r.data.next_cursor);
+        setErr(null);
+        setLoading(false);
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        setErr(e?.response?.data?.detail || "Failed to load subscriptions.");
+        setLoading(false);
+      });
+    return () => { cancelled = true; };
   }, [q, status, tier, cycle, cursor]);
-
-  useEffect(() => { load(); }, [load]);
 
   return (
     <div className="max-w-6xl mx-auto" data-testid="admin-subscriptions-page">
@@ -208,6 +216,7 @@ export default function AdminSubscriptions() {
       </div>
 
       <AdminSubscriptionDrawer
+        key={openRef || "closed"}
         adminRef={openRef}
         open={!!openRef}
         onClose={() => setOpenRef(null)}

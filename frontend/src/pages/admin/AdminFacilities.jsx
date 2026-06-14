@@ -5,7 +5,7 @@
  * the facility-detail drawer. ZERO mutation buttons — Admin-4 is
  * strictly read-only per the locked plan (1a).
  */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../lib/api";
 import UserStatusBadge from "./UserStatusBadge";
 import AdminFacilityDrawer from "./AdminFacilityDrawer";
@@ -35,26 +35,34 @@ export default function AdminFacilities() {
   const [nextCursor, setNextCursor] = useState(null);
   const [openBarnId, setOpenBarnId] = useState(null);
 
-  const load = useCallback(async () => {
-    setLoading(true); setErr(null);
-    try {
-      const params = new URLSearchParams();
-      if (q) params.set("q", q);
-      if (tier) params.set("tier", tier);
-      params.set("limit", "25");
-      params.set("cursor", String(cursor));
-      const { data } = await api.get(`/admin/portal/facilities?${params.toString()}`);
-      setItems(data.items);
-      setTotal(data.total);
-      setNextCursor(data.next_cursor);
-    } catch (e) {
-      setErr(e?.response?.data?.detail || "Failed to load facilities.");
-    } finally {
-      setLoading(false);
-    }
+  // All state transitions live inside async callbacks (see
+  // AdminDashboard for the same pattern). Filter/page changes keep
+  // the previous data visible until the new payload lands (SWR-style)
+  // — that satisfies `react-hooks/set-state-in-effect` without
+  // changing what users see meaningfully.
+  useEffect(() => {
+    let cancelled = false;
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (tier) params.set("tier", tier);
+    params.set("limit", "25");
+    params.set("cursor", String(cursor));
+    api.get(`/admin/portal/facilities?${params.toString()}`)
+      .then((r) => {
+        if (cancelled) return;
+        setItems(r.data.items);
+        setTotal(r.data.total);
+        setNextCursor(r.data.next_cursor);
+        setErr(null);
+        setLoading(false);
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        setErr(e?.response?.data?.detail || "Failed to load facilities.");
+        setLoading(false);
+      });
+    return () => { cancelled = true; };
   }, [q, tier, cursor]);
-
-  useEffect(() => { load(); }, [load]);
 
   return (
     <div className="max-w-6xl mx-auto" data-testid="admin-facilities-page">
@@ -177,6 +185,7 @@ export default function AdminFacilities() {
       </div>
 
       <AdminFacilityDrawer
+        key={openBarnId || "closed"}
         barnId={openBarnId}
         open={!!openBarnId}
         onClose={() => setOpenBarnId(null)}

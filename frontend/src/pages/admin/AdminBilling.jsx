@@ -13,7 +13,7 @@
  *   - Approved palette only (Graphite / Slate / Frost / Lilac).
  *   - NO Phase 9 invoices. NO Stripe IDs.
  */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Receipt, Activity } from "lucide-react";
 import { api } from "../../lib/api";
 import UserStatusBadge from "./UserStatusBadge";
@@ -75,25 +75,31 @@ function PaymentsTab() {
   const [cursor, setCursor] = useState(0);
   const [nextCursor, setNextCursor] = useState(null);
 
-  const load = useCallback(async () => {
-    setLoading(true); setErr(null);
-    try {
-      const params = new URLSearchParams();
-      if (status) params.set("status", status);
-      params.set("limit", "25");
-      params.set("cursor", String(cursor));
-      const { data } = await api.get(`/admin/portal/payments?${params.toString()}`);
-      setItems(data.items);
-      setTotal(data.total);
-      setNextCursor(data.next_cursor);
-    } catch (e) {
-      setErr(e?.response?.data?.detail || "Failed to load payments.");
-    } finally {
-      setLoading(false);
-    }
+  // All state transitions live inside async callbacks (see
+  // AdminDashboard / AdminFacilities). Satisfies
+  // `react-hooks/set-state-in-effect` without changing behavior.
+  useEffect(() => {
+    let cancelled = false;
+    const params = new URLSearchParams();
+    if (status) params.set("status", status);
+    params.set("limit", "25");
+    params.set("cursor", String(cursor));
+    api.get(`/admin/portal/payments?${params.toString()}`)
+      .then((r) => {
+        if (cancelled) return;
+        setItems(r.data.items);
+        setTotal(r.data.total);
+        setNextCursor(r.data.next_cursor);
+        setErr(null);
+        setLoading(false);
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        setErr(e?.response?.data?.detail || "Failed to load payments.");
+        setLoading(false);
+      });
+    return () => { cancelled = true; };
   }, [status, cursor]);
-
-  useEffect(() => { load(); }, [load]);
 
   return (
     <div data-testid="admin-billing-payments">
@@ -201,25 +207,29 @@ function EventsTab() {
   const [cursor, setCursor] = useState(0);
   const [nextCursor, setNextCursor] = useState(null);
 
-  const load = useCallback(async () => {
-    setLoading(true); setErr(null);
-    try {
-      const params = new URLSearchParams();
-      if (processingStatus) params.set("processing_status", processingStatus);
-      params.set("limit", "25");
-      params.set("cursor", String(cursor));
-      const { data } = await api.get(`/admin/portal/billing-events?${params.toString()}`);
-      setItems(data.items);
-      setTotal(data.total);
-      setNextCursor(data.next_cursor);
-    } catch (e) {
-      setErr(e?.response?.data?.detail || "Failed to load webhook events.");
-    } finally {
-      setLoading(false);
-    }
+  // Same async-callback pattern as PaymentsTab.
+  useEffect(() => {
+    let cancelled = false;
+    const params = new URLSearchParams();
+    if (processingStatus) params.set("processing_status", processingStatus);
+    params.set("limit", "25");
+    params.set("cursor", String(cursor));
+    api.get(`/admin/portal/billing-events?${params.toString()}`)
+      .then((r) => {
+        if (cancelled) return;
+        setItems(r.data.items);
+        setTotal(r.data.total);
+        setNextCursor(r.data.next_cursor);
+        setErr(null);
+        setLoading(false);
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        setErr(e?.response?.data?.detail || "Failed to load webhook events.");
+        setLoading(false);
+      });
+    return () => { cancelled = true; };
   }, [processingStatus, cursor]);
-
-  useEffect(() => { load(); }, [load]);
 
   return (
     <div data-testid="admin-billing-events">

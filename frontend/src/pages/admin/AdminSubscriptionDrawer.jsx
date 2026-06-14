@@ -40,16 +40,20 @@ const Tile = ({ label, value, testid }) => (
 );
 
 export default function AdminSubscriptionDrawer({ adminRef, open, onClose }) {
+  // Parent passes `key={adminRef}` so this drawer remounts per
+  // subscription. Initial state already represents "loading, no data,
+  // no err" — the effect just kicks off the fetch and writes state
+  // exclusively from async callbacks (silences
+  // `react-hooks/set-state-in-effect`).
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
   useEffect(() => {
     if (!open || !adminRef) return;
     let cancelled = false;
-    setLoading(true); setErr(null); setData(null);
     api.get(`/admin/portal/subscriptions/${adminRef}`)
-      .then((r) => { if (!cancelled) setData(r.data); })
+      .then((r) => { if (!cancelled) { setData(r.data); setErr(null); } })
       .catch((e) => { if (!cancelled) setErr(e?.response?.data?.detail || "Could not load subscription."); })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
