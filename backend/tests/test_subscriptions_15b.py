@@ -381,13 +381,18 @@ def test_payment_intent_succeeded_upserts_payments_row_idempotently(db):
 # =====================================================================
 
 def test_unresolvable_subscription_event_marks_metadata_missing_retryable(db):
+    """Codex round-3 #1: retryable metadata miss now returns 503 (not 200)
+    so Stripe replays. Row is persisted with status=metadata_missing_retryable.
+    """
     e = _evt("customer.subscription.updated",
              {"id": f"sub_ghost_{uuid.uuid4().hex[:6]}",
               "status": "active",
               "items": {"data": [{"price": {"id": "price_x"}}]}})
     r = _post_event(e)
-    assert r.status_code == 200
-    assert r.json().get("status") == "metadata_missing_retryable"
+    assert r.status_code == 503, r.text
+    row = db.billing_events.find_one({"stripe_event_id": e["id"]})
+    assert row is not None
+    assert row["processing_status"] == "metadata_missing_retryable"
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
 
 
@@ -478,3 +483,144 @@ def test_stripe_fetch_failure_during_subscription_updated_returns_502_and_sets_r
     assert r.status_code == 200
     db.subscriptions.delete_one({"id": sub_id})
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
+# =====================================================================
+# Codex round-3 reliability fixes — focused regression tests
+# =====================================================================
+
+def test_retryable_metadata_miss_returns_non_2xx_then_replays_successfully(db):
+    """Codex round-3 #1: a retryable metadata miss returns 503; once the
+    local subscription row lands, a replay with the SAME event_id succeeds.
+    """
+    sub_id = f"sub_late_{uuid.uuid4().hex[:8]}"
+    barn_id = f"barn_late_{uuid.uuid4().hex[:8]}"
+    # No local subscription row yet — first delivery should 503.
+    e = _evt("customer.subscription.trial_will_end",
+             {"id": sub_id, "trial_end": int(time.time()) + 86400})
+    r1 = _post_event(e)
+    assert r1.status_code == 503, r1.text
+    row = db.billing_events.find_one({"stripe_event_id": e["id"]})
+    assert row["processing_status"] == "metadata_missing_retryable"
+
+    # Now the local subscription lands (e.g., subscription.created caught up).
+    db.subscriptions.insert_one({
+        "id": sub_id, "stripe_subscription_id": sub_id, "barn_id": barn_id,
+        "plan_tier_code": "starter", "status": "active",
+        "pending_emails": [], "created_at": "x",
+    })
+    r2 = _post_event(e)
+    assert r2.status_code == 200, r2.text
+    row2 = db.billing_events.find_one({"stripe_event_id": e["id"]})
+    assert row2["processing_status"] == "ok"
+    sub = db.subscriptions.find_one({"id": sub_id})
+    assert "trial_will_end" in sub["pending_emails"]
+
+    db.subscriptions.delete_one({"id": sub_id})
+    db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
+def test_subscription_created_repairs_barn_pointer_and_entitlements(db):
+    """Codex round-3 #4: customer.subscription.created (arriving before our
+    checkout.session.completed in an out-of-order delivery) must stamp the
+    barn pointer + entitlements snapshot.
+    """
+    barn_id = f"barn_created_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_created_{uuid.uuid4().hex[:8]}"
+    db.barns.delete_one({"id": barn_id})  # ensure no pre-existing row
+    db.plans.update_one({"tier_code": "starter"},
+                        {"$setOnInsert": {
+                            "id": "starter", "tier_code": "starter",
+                            "feature_limits": {"horses": 50, "users": 5}}},
+                        upsert=True)
+    e = _evt("customer.subscription.created", {
+        "id": sub_id, "status": "trialing",
+        "metadata": {"barn_id": barn_id, "plan_tier_code": "starter",
+                     "owner_user_id": "u", "billing_cycle": "monthly"},
+        "items": {"data": [{"price": {"id": "p_x"}}]},
+    })
+    r = _post_event(e)
+    assert r.status_code == 200, r.text
+    barn = db.barns.find_one({"id": barn_id})
+    assert barn is not None, "barn row must be upserted"
+    assert barn["subscription_id"] == sub_id
+    assert barn["subscription_entitlements"]["horses"] == 50
+    db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    db.barns.delete_one({"id": barn_id})
+    db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
+def test_subscription_updated_upserts_when_no_local_row_but_metadata_present(db):
+    """Codex round-3 #4: with metadata.barn_id present but no local sub row,
+    customer.subscription.updated must upsert rather than silently no-op.
+    """
+    barn_id = f"barn_upd_up_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_upd_up_{uuid.uuid4().hex[:8]}"
+    e = _evt("customer.subscription.updated", {
+        "id": sub_id, "status": "active",
+        "metadata": {"barn_id": barn_id, "plan_tier_code": "starter",
+                     "billing_cycle": "monthly"},
+        "items": {"data": [{"price": {"id": "price_x"}}]},
+    })
+    r = _post_event(e)
+    assert r.status_code == 200, r.text
+    sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
+    assert sub is not None, "subscription row must be upserted on update + metadata"
+    assert sub["status"] == "active"
+    assert sub["barn_id"] == barn_id
+    db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
+def test_non_duplicate_db_insert_failure_raises_502_without_recursion(monkeypatch):
+    """Codex round-3 #2: a non-DuplicateKey DB error on the claim insert
+    must surface 502 (Stripe replays) without infinite recursion.
+    """
+    import sys as _sys
+    _sys.path.insert(0, "/app/backend")
+    from routes import subscriptions_webhook_handlers as h
+    from fastapi import HTTPException
+
+    class _Coll:
+        async def find_one(self, *a, **k):
+            return None
+        async def insert_one(self, *a, **k):
+            raise RuntimeError("simulated mongo write outage")
+        async def update_one(self, *a, **k):
+            return None
+        async def count_documents(self, *a, **k):
+            return 0
+    class _StubDB:
+        billing_events = _Coll()
+        subscriptions = _Coll()
+        barns = _Coll()
+        plans = _Coll()
+        subscription_invoices = _Coll()
+        payments = _Coll()
+
+    event = _evt("customer.subscription.updated",
+                 {"id": f"sub_db_fail_{uuid.uuid4().hex[:6]}"})
+    with pytest.raises(HTTPException) as ex:
+        asyncio.run(h.process_event(_StubDB(), event))
+    assert ex.value.status_code == 502
+    assert "claim insert" in ex.value.detail.lower()
+
+
+def test_stale_processing_lock_with_invalid_iso_does_not_crash(db):
+    """Codex round-3 #3: an existing 'processing' row with a non-ISO
+    processed_at value must NOT crash the dispatcher; it should be reclaimed.
+    """
+    event_id = f"evt_bad_iso_{uuid.uuid4().hex[:8]}"
+    db.billing_events.insert_one({
+        "id": event_id, "stripe_event_id": event_id,
+        "event_type": "invoice.voided",
+        "processing_status": "processing",
+        "processed_at": "not-a-real-iso-timestamp",
+        "retry_count": 0, "created_at": "x", "updated_at": "x",
+    })
+    e = _evt("invoice.voided", {"id": "in_bad_iso"}, event_id=event_id)
+    r = _post_event(e)
+    assert r.status_code == 200
+    row = db.billing_events.find_one({"stripe_event_id": event_id})
+    assert row["processing_status"] == "unknown_event"  # reclaimed + closed
+    db.billing_events.delete_one({"stripe_event_id": event_id})

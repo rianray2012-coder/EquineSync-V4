@@ -221,13 +221,13 @@ def test_subscriptions_me_returns_null_when_no_sub():
 # ---------- minimal webhook ----------
 
 def test_webhook_ignores_unknown_event_types_with_200():
-    """All event types other than checkout.session.completed → 200 + no
-    subscription state mutation (15.A explicit scope guard)."""
-    # Stripe sends signed events in prod; in dev we accept unsigned JSON for
-    # convenience. Send a totally unknown event_type and assert no mutation.
+    """All event types not in the dispatcher's HANDLED_EVENTS set → 200 + no
+    subscription state mutation. (15.B: `invoice.voided` is a genuine unknown
+    type; `invoice.created` is now handled.)
+    """
     fake_event = {
         "id": f"evt_test_{uuid.uuid4().hex[:12]}",
-        "type": "invoice.created",  # NOT handled in 15.A
+        "type": "invoice.voided",
         "data": {"object": {"id": f"in_test_{uuid.uuid4().hex[:12]}"}},
     }
     r = requests.post(

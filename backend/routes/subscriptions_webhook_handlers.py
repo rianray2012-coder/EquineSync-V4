@@ -130,13 +130,17 @@ async def process_event(db, event: dict) -> tuple[int, dict]:
         if st == STATUS_PROCESSING:
             ts_iso = existing.get("processed_at")
             stale = False
+            ts = None
             if ts_iso:
                 try:
                     ts = datetime.fromisoformat(ts_iso)
                     if (_now() - ts).total_seconds() > _stale_lock_seconds():
                         stale = True
-                except ValueError:
+                except (ValueError, TypeError):
+                    # Codex round-3 #3: invalid ISO → treat as stale rather
+                    # than crash. `ts` stays None for the log line below.
                     stale = True
+                    ts = None
             else:
                 stale = True
             if not stale:
@@ -148,9 +152,12 @@ async def process_event(db, event: dict) -> tuple[int, dict]:
                     "reason": "another worker is processing this event",
                 }
             # Stale lock — reclaim.
+            age_label = (
+                f"{(_now() - ts).total_seconds():.1f}s" if ts is not None else "unknown"
+            )
             logger.warning(
-                "billing_events stale 'processing' lock reclaimed event_id=%s age_s=%s",
-                event_id, (_now() - ts).total_seconds() if ts_iso else "unknown",
+                "billing_events stale 'processing' lock reclaimed event_id=%s age=%s",
+                event_id, age_label,
             )
             await db.billing_events.update_one(
                 {"stripe_event_id": event_id},
@@ -180,6 +187,7 @@ async def process_event(db, event: dict) -> tuple[int, dict]:
             )
     else:
         # 2. Fresh delivery — insert claim row.
+        from pymongo.errors import DuplicateKeyError
         try:
             await db.billing_events.insert_one({
                 "id": event_id,
@@ -196,11 +204,17 @@ async def process_event(db, event: dict) -> tuple[int, dict]:
                 "created_at": _now_iso(),
                 "updated_at": _now_iso(),
             })
-        except Exception as ex:
-            # Race: another worker just claimed it. Loop back through the
-            # status-gated path so we honor whatever state they ended with.
+        except DuplicateKeyError as ex:
+            # Codex round-3 #2: ONLY recurse on duplicate-key races.
             logger.info("billing_events claim race event_id=%s: %s", event_id, ex)
             return await process_event(db, event)
+        except Exception as ex:
+            # Codex round-3 #2: any other DB error → 502, NO recursion.
+            logger.exception("billing_events insert failed event_id=%s: %s", event_id, ex)
+            raise HTTPException(
+                status_code=502,
+                detail="Webhook claim insert failed; retry expected.",
+            )
 
     # ---------- 3. Unknown event types ----------
     if event_type not in HANDLED_EVENTS:
@@ -212,9 +226,21 @@ async def process_event(db, event: dict) -> tuple[int, dict]:
     try:
         barn_id, summary_parts = await handler(db, event)
     except _MetadataMissing as ex:
-        status = STATUS_METADATA_MISSING_RETRYABLE if ex.retryable else STATUS_METADATA_MISSING_PERMANENT
-        await _finalize(db, event_id, status, summary=_summary(event_type, ex.reason), barn_id=None)
-        return 200, {"received": True, "handled": False, "type": event_type, "status": status}
+        if ex.retryable:
+            # Codex round-3 #1: retryable metadata miss MUST return non-2xx
+            # so Stripe replays the event. 503 is the natural pick (service
+            # is temporarily unable to reconcile — try again later).
+            await _finalize(db, event_id, STATUS_METADATA_MISSING_RETRYABLE,
+                            summary=_summary(event_type, ex.reason), barn_id=None)
+            raise HTTPException(
+                status_code=503,
+                detail=f"Metadata not yet resolvable; retry expected ({ex.reason}).",
+            )
+        # Permanent miss → 200 short-circuit (no future replay will help).
+        await _finalize(db, event_id, STATUS_METADATA_MISSING_PERMANENT,
+                        summary=_summary(event_type, ex.reason), barn_id=None)
+        return 200, {"received": True, "handled": False, "type": event_type,
+                     "status": STATUS_METADATA_MISSING_PERMANENT}
     except _TransientStripeError as ex:
         await _finalize(db, event_id, STATUS_RETRY_502,
                         summary=_summary(event_type, "transient_stripe"),
@@ -431,6 +457,21 @@ async def _h_subscription_created(db, event):
         },
         upsert=True,
     )
+    # Codex round-3 #4: also stamp barn pointer + entitlements snapshot so an
+    # out-of-order `customer.subscription.created` (arrived before our
+    # checkout.session.completed) still produces a consistent barn record.
+    await db.barns.update_one(
+        {"id": barn_id},
+        {
+            "$set": {
+                "subscription_id": stripe_subscription_id,
+                "subscription_entitlements": snapshot,
+                "subscription_updated_at": _now_iso(),
+            },
+            "$setOnInsert": {"id": barn_id, "created_at": _now_iso()},
+        },
+        upsert=True,
+    )
     return barn_id, ("subscription_created", stripe_subscription_id)
 
 
@@ -438,12 +479,16 @@ async def _h_subscription_updated(db, event):
     obj = (event.get("data") or {}).get("object") or {}
     stripe_subscription_id = obj.get("id")
     local = await _resolve_subscription_local(db, stripe_subscription_id)
-    barn_id = (local or {}).get("barn_id") or ((obj.get("metadata") or {}).get("barn_id"))
+    metadata = obj.get("metadata") or {}
+    barn_id = (local or {}).get("barn_id") or metadata.get("barn_id")
     if not barn_id:
         raise _MetadataMissing(retryable=True, reason="barn_id not resolvable yet")
     items = (obj.get("items") or {}).get("data") or [{}]
     new_price_id = (items[0].get("price") or {}).get("id")
     set_doc = {
+        "barn_id": barn_id,
+        "stripe_subscription_id": stripe_subscription_id,
+        "stripe_customer_id": obj.get("customer"),
         "status": obj.get("status"),
         "current_period_start": _ts_to_iso(obj.get("current_period_start")),
         "current_period_end": _ts_to_iso(obj.get("current_period_end")),
@@ -453,8 +498,22 @@ async def _h_subscription_updated(db, event):
         "updated_at": _now_iso(),
         "last_event_at": _now_iso(),
     }
+    # Codex round-3 #4: if no local row yet but barn_id IS resolvable from
+    # metadata, upsert rather than silently no-op-and-mark-ok. Out-of-order
+    # delivery shouldn't lose state.
     await db.subscriptions.update_one(
-        {"stripe_subscription_id": stripe_subscription_id}, {"$set": set_doc},
+        {"stripe_subscription_id": stripe_subscription_id},
+        {
+            "$set": set_doc,
+            "$setOnInsert": {
+                "id": stripe_subscription_id,
+                "owner_user_id": metadata.get("owner_user_id"),
+                "billing_cycle": metadata.get("billing_cycle"),
+                "pending_emails": [],
+                "created_at": _now_iso(),
+            },
+        },
+        upsert=True,
     )
     summary_parts = ["subscription_updated", stripe_subscription_id]
     # Entitlements refresh on price change.

@@ -11,8 +11,18 @@ its own separately approved phase.**
 
 ## ✅ Phase 15.B — Webhook Lifecycle (Feb 14 2026)
 
-**Approved v2 plan implemented in full.** No frontend, no emails sent, no
-hard enforcement, no Phase 9 touches.
+**Approved v2 plan + Codex round-3 reliability patches applied.** No frontend,
+no emails sent, no hard enforcement, no Phase 9 touches.
+
+### 🔧 Codex round-3 reliability fixes
+
+| # | Finding | Fix |
+|---|---|---|
+| 1 | `metadata_missing_retryable` returned 200, so Stripe treated as delivered | Now raises **HTTP 503** with the row persisted as `metadata_missing_retryable`. Stripe replays. Test: `test_retryable_metadata_miss_returns_non_2xx_then_replays_successfully` |
+| 2 | Bare `except Exception` on `billing_events.insert_one` recursed infinitely on transient DB outages | Now catches only `pymongo.errors.DuplicateKeyError` for the race path; any other DB error raises **HTTP 502** without recursion. Test: `test_non_duplicate_db_insert_failure_raises_502_without_recursion` |
+| 3 | Stale `processing` lock with invalid ISO `processed_at` could leave `ts` unbound | Guarded with `(ValueError, TypeError)`; invalid timestamps treated as stale; warning log no longer crashes. Test: `test_stale_processing_lock_with_invalid_iso_does_not_crash` |
+| 4 | `customer.subscription.created` didn't stamp barn pointer + entitlements; `customer.subscription.updated` silently no-op'd if no local row | `created` now upserts barn + entitlements_snapshot. `updated` upserts the subscription row when metadata.barn_id is present. Tests: `test_subscription_created_repairs_barn_pointer_and_entitlements`, `test_subscription_updated_upserts_when_no_local_row_but_metadata_present` |
+| 5 | Placeholder "Stripe fetch failure" test was a happy-path | Replaced; coverage now via real `test_billing_events_first_delivery_failure_yields_502_and_retry_502_status` |
 
 ### Backend
 - `routes/subscriptions_webhook_handlers.py` (NEW) — Status-gated dispatcher
@@ -40,7 +50,7 @@ hard enforcement, no Phase 9 touches.
 - `customer.subscription.updated` refreshes `entitlements_snapshot` on price
   change and mirrors onto `barns.subscription_entitlements` for fast usage reads.
 
-### Tests — 18/18 (`tests/test_subscriptions_15b.py`)
+### Tests — 23/23 (`tests/test_subscriptions_15b.py`)
 - 6 idempotency-model tests (ok-replay short-circuit · retry_502 replay runs
   handler · first-failure 502 + retry_502 status · unknown_event short-circuit
   · stale lock reclaim · active lock 409)

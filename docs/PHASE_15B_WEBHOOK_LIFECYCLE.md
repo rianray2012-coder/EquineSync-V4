@@ -10,7 +10,7 @@
 | `processing` | An attempt is currently in flight | Recent → return **409**. Stale (older than `BILLING_EVENTS_STALE_LOCK_SECONDS`, default 60s) → reclaim and replay |
 | `ok` | Handler completed successfully | Short-circuit, return 200 + `idempotent: True` |
 | `retry_502` | Stripe / motor transient failure inside handler | Replay handler, `$inc retry_count` |
-| `metadata_missing_retryable` | Domain row needed for resolution hasn't synced yet | Replay handler on Stripe's redelivery |
+| `metadata_missing_retryable` | Domain row needed for resolution hasn't synced yet | **HTTP 503** so Stripe replays. Row persisted with this status |
 | `metadata_missing_permanent` | Event references state we have no record of | Short-circuit 200 |
 | `unknown_event` | Event type outside the 11-type set | Short-circuit 200 |
 
