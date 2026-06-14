@@ -10,7 +10,6 @@ import AppShell from "./components/AppShell";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Signup from "./pages/Signup";
-import SignupSuccess from "./pages/SignupSuccess";
 import Forbidden from "./pages/Forbidden";
 import Dashboard from "./pages/Dashboard";
 import Horses from "./pages/Horses";
@@ -100,7 +99,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/signup/success" element={<SignupSuccess />} />
+            <Route path="/signup/success" element={<Navigate to="/billing/success" replace />} />
             <Route path="/login" element={<Login />} />
             <Route path="/accept-invite" element={<AcceptInvite />} />
             <Route path="/reset-password" element={<ResetPassword />} />

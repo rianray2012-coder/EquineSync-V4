@@ -1,0 +1,36 @@
+{
+  "summary": "Phase 15.G migration cleanup verified end-to-end. All 9 tests in test_subscriptions_15g.py pass, the /api/billing/plans-public origin returns Cache-Control: public, max-age=300 with secrets stripped, the free-tier finalize via /subscriptions/checkout writes a local subs row without a Stripe round-trip, paid Starter checkout as horse_owner is correctly gated at 403, the legacy /membership/checkout returns 410 with the structured sunset detail (free + paid + invalid), and both subscription.created and .updated webhooks persist amount_cents. Frontend smoke confirms Landing renders all four pricing tiers (Free/Starter/Professional/Enterprise) and /signup/success redirects through /billing/success to /login when unauthenticated.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "tests/test_subscriptions_15a.py / test_subscriptions_15b.py (out of 15.G scope)", "issue": "Pre-existing: helpers reference os.environ['MONGO_URL'] without load_dotenv, so they error/fail when pytest is launched from /app/backend without explicit env. Not regressed by 15.G — 15.G suite (which calls load_dotenv) is clean. Worth aligning helpers with the 15.G pattern."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_subscriptions_15g.py",
+    "/app/test_reports/pytest/iteration33_15g.xml"
+  ],
+  "action_items": [
+    "Optional (not blocking 15.G): apply the load_dotenv('/app/backend/.env') pattern used in test_subscriptions_15g.py to the _admin_token / mongo helpers in test_subscriptions_15a.py and test_subscriptions_15b.py so they don't KeyError on MONGO_URL when pytest is invoked from /app/backend without the env preloaded."
+  ],
+  "critical_code_review_comments": [
+    "plans-public correctly strips stripe_price_id_monthly/annual, stripe_product_id, has_monthly, has_annual and is reachable without auth — good public contract.",
+    "Cache-Control is set at origin (max-age=300) — clean separation from edge caching policy.",
+    "Free finalize path correctly bypasses Stripe and gates only on authentication (not barn:manage), matching the 15.G charter (Free = solo tier).",
+    "/membership/checkout 410 response uses a structured dict detail with code='membership_checkout_sunset' and a successor pointer to /api/subscriptions/checkout — easy for client telemetry to key on.",
+    "Webhook amount_cents persistence works on both created and updated paths from items[0].price.unit_amount."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (9/9 on 15.G suite)", "frontend": "100% (Landing pricing + redirect contracts verified)"},
+  "test_credentials": "No fixed seeded users — tests create disposable horse_owner accounts via /api/auth/signup.",
+  "seed_data_creation": "Tests insert disposable barn + subscription rows under unique ids (barn_15g_*, sub_15g_*) for webhook scenarios; user accounts via signup are not cleaned up (acceptable per current suite convention).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Phase 15.G is fully landed. The 9 tests in /app/backend/tests/test_subscriptions_15g.py are the canonical acceptance gate. Pre-existing 15.A/15.B helper KeyError on MONGO_URL is a test-harness defect, not a product regression — it surfaces only when pytest is invoked from /app/backend without the env preloaded. If you re-run the whole subscriptions matrix, run with `cd /app && pytest backend/tests/...` or add load_dotenv to those helpers (mirroring 15.G).",
+  "rca of the issue": "N/A — no product bugs found in Phase 15.G."
+}

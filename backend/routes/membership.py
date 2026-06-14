@@ -96,78 +96,30 @@ def build_router(*, db, get_current_user) -> APIRouter:
         ]
 
     @router.post("/membership/checkout")
-    async def create_checkout(body: CheckoutRequestBody, request: Request,
-                              user=Depends(get_current_user)):
-        """Create a Stripe Checkout session for the chosen tier.
+    async def create_checkout_gone(body: CheckoutRequestBody, request: Request,
+                                   user=Depends(get_current_user)):
+        """Phase 15.G — Legacy membership checkout is sunset.
 
-        Free tier short-circuits — no Stripe call, user is flipped to
-        subscription_status='free' immediately and the response includes
-        url=None so the frontend can route to the success page directly.
+        The marketplace-tier `/membership/checkout` flow has been superseded
+        by the Phase 15 facility-tier subscription billing system. Calls now
+        return HTTP 410 Gone with a clear, non-sensitive pointer to the new
+        endpoint. The rest of the marketplace membership lifecycle
+        (start-trial, cancel, polling status, webhook) is retained for
+        rolling sessions and the legacy Stripe one-time-checkout webhook
+        path until Phase 16 reconciliation.
         """
-        tier_key = (body.tier or "").strip().lower()
-        if tier_key not in TIERS:
-            raise HTTPException(400, f"Invalid tier. Choose one of {sorted(TIERS)}.")
-        tier = TIERS[tier_key]
-
-        # Free tier: no Stripe checkout needed.
-        if tier["amount"] <= 0:
-            await db.users.update_one(
-                {"id": user["id"]},
-                {"$set": {
-                    "membership_tier": "free",
-                    "subscription_status": "free",
-                    "subscription_updated_at": _now_iso(),
-                }},
-            )
-            return {"url": None, "session_id": None, "tier": tier_key, "status": "free"}
-
-        origin = (body.origin_url or "").rstrip("/")
-        if not origin.startswith(("http://", "https://")):
-            raise HTTPException(400, "origin_url must be an absolute http(s) URL.")
-
-        success_url = f"{origin}/signup/success?session_id={{CHECKOUT_SESSION_ID}}"
-        cancel_url = f"{origin}/signup?cancelled=1"
-
-        client = _stripe_client(request)
-        req = CheckoutSessionRequest(
-            amount=float(tier["amount"]),
-            currency="usd",
-            success_url=success_url,
-            cancel_url=cancel_url,
-            metadata={
-                "user_id": user["id"],
-                "user_email": user.get("email", ""),
-                "tier": tier_key,
-                "source": "marketplace_signup",
+        raise HTTPException(
+            status_code=410,
+            detail={
+                "code": "membership_checkout_sunset",
+                "message": (
+                    "/api/membership/checkout is no longer available. "
+                    "Use POST /api/subscriptions/checkout with "
+                    "{plan_tier_code, billing_cycle, origin_url}."
+                ),
+                "successor": "/api/subscriptions/checkout",
             },
         )
-        try:
-            session = await client.create_checkout_session(req)
-        except Exception as ex:
-            logger.exception("stripe checkout session create failed")
-            raise HTTPException(502, f"Could not start checkout: {ex}")
-
-        # MANDATORY: payment_transactions audit row (status=initiated).
-        await db.payment_transactions.insert_one({
-            "id": str(uuid.uuid4()),
-            "session_id": session.session_id,
-            "user_id": user["id"],
-            "user_email": user.get("email"),
-            "tier": tier_key,
-            "amount": float(tier["amount"]),
-            "currency": "usd",
-            "metadata": req.metadata,
-            "payment_status": "initiated",
-            "status": "open",
-            "created_at": _now_iso(),
-            "updated_at": _now_iso(),
-        })
-        return {
-            "url": session.url,
-            "session_id": session.session_id,
-            "tier": tier_key,
-            "amount": float(tier["amount"]),
-        }
 
     @router.get("/membership/checkout/status/{session_id}")
     async def checkout_status(session_id: str, request: Request,

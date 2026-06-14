@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Logo } from "../components/Logo";
 import { Check, ArrowRight, ShieldCheck, Sparkles, Users, Calendar } from "lucide-react";
-import { annualSavingsPct, formatCents } from "../lib/subscriptionBilling";
+import { annualSavingsPct, formatCents, sortPlans } from "../lib/subscriptionBilling";
+import { api } from "../lib/api";
 
 const ROLE_CARDS = [
   {
@@ -58,14 +59,12 @@ const TRUST = [
   { Icon: Sparkles, label: "Cancel anytime" },
 ];
 
-// Phase 15.C — landing-page pricing band. The authoritative source is the
-// seeded `plans` collection (see backend/scripts/seed_plans.py and the public
-// catalog at GET /api/billing/plans). That endpoint requires auth, so this
-// static mirror is what unauthenticated visitors see. Keep these values in
-// lockstep with the seed; tweak both together. Numbers use the same shape
-// (`monthly_price_cents`, `annual_price_cents`, `feature_limits`) so the
-// rendering helpers (formatCents, annualSavingsPct) just work.
-const LANDING_PLANS = [
+// Phase 15.G — Landing fetches the public plans catalog from
+// `/api/billing/plans-public` so this static list is now a fallback only
+// (used when the network call fails). Bullet copy lives here because the
+// API surface doesn't include marketing bullets — feature_limits is what we
+// derive `Up to N horses · N users` from when populating from the API.
+const LANDING_PLANS_FALLBACK = [
   {
     tier_code: "free",
     name: "Free",
@@ -126,15 +125,62 @@ export default function Landing() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const [billingCycle, setBillingCycle] = useState("monthly");
+  const [livePlans, setLivePlans] = useState(null); // null = not loaded yet
 
   useEffect(() => {
     if (user && !loading) navigate("/dashboard", { replace: true });
   }, [user, loading, navigate]);
 
-  const plansForCycle = useMemo(
-    () => LANDING_PLANS.map((p) => ({ ...p, _savings: annualSavingsPct(p) })),
-    [],
-  );
+  // Phase 15.G — fetch the unauthenticated public plan catalog. Falls
+  // back to LANDING_PLANS_FALLBACK if the call fails so the page never
+  // renders empty for an offline visitor.
+  useEffect(() => {
+    let cancelled = false;
+    api.get("/billing/plans-public")
+      .then((r) => {
+        if (cancelled) return;
+        const sorted = sortPlans(Array.isArray(r.data) ? r.data : []);
+        setLivePlans(sorted);
+      })
+      .catch(() => {
+        if (!cancelled) setLivePlans([]);
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  const plansForCycle = useMemo(() => {
+    // Build the marketing source: prefer live plans, otherwise fallback.
+    // Either way we attach bullets from the fallback (keyed by tier_code)
+    // because the API surface intentionally does not carry marketing
+    // copy. When the live API provides feature_limits we substitute the
+    // first bullet with the live counts so the card never contradicts
+    // the live catalog.
+    const bulletsByTier = Object.fromEntries(
+      LANDING_PLANS_FALLBACK.map((p) => [p.tier_code, p.bullets || []]),
+    );
+    const popularByTier = Object.fromEntries(
+      LANDING_PLANS_FALLBACK.map((p) => [p.tier_code, !!p.popular]),
+    );
+    const fromLive = livePlans && livePlans.length > 0;
+    const source = fromLive ? livePlans : LANDING_PLANS_FALLBACK;
+    return source.map((p) => {
+      const baseBullets = (p.bullets || bulletsByTier[p.tier_code] || []).slice();
+      if (fromLive && p.feature_limits && (p.feature_limits.horses || p.feature_limits.users)) {
+        const h = p.feature_limits.horses;
+        const u = p.feature_limits.users;
+        const parts = [];
+        if (h != null) parts.push(`Up to ${h} horses`);
+        if (u != null) parts.push(`${u} staff user${u === 1 ? "" : "s"}`);
+        if (parts.length) baseBullets[0] = parts.join(" · ");
+      }
+      return {
+        ...p,
+        bullets: baseBullets,
+        popular: p.popular || popularByTier[p.tier_code] || false,
+        _savings: annualSavingsPct(p),
+      };
+    });
+  }, [livePlans]);
 
   const goToSignup = (roleId) => {
     const query = roleId ? `?role=${roleId}` : "";

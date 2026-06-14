@@ -392,8 +392,10 @@ def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
 # ---------- /membership/checkout legacy still works (free tier only) ----------
 
 def test_legacy_membership_checkout_free_tier_still_works():
-    """15.A explicitly keeps the old one-time endpoint untouched. The free
-    tier short-circuit must still flip subscription_status to 'free'.
+    """Phase 15.G sunset: /api/membership/checkout now returns HTTP 410
+    for all tiers. The 15.A invariant that the legacy endpoint reachable
+    was relaxed by the user-approved migration cleanup; see
+    tests/test_subscriptions_15g.py for the new contract.
     """
     out = _signup()
     h = {"Authorization": f"Bearer {out['token']}"}
@@ -402,10 +404,7 @@ def test_legacy_membership_checkout_free_tier_still_works():
         json={"tier": "free", "origin_url": BASE},
         headers=h, timeout=15,
     )
-    assert r.status_code == 200
-    body = r.json()
-    assert body["url"] is None
-    assert body["status"] == "free"
+    assert r.status_code == 410
 
 
 # ===================================================================

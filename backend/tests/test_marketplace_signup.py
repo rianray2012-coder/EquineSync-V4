@@ -123,6 +123,10 @@ def test_register_endpoint_still_role_locked():
 
 
 def test_checkout_free_flips_subscription_status():
+    """Phase 15.G: legacy /api/membership/checkout returns 410 Gone.
+    Free-tier finalize now flows through /api/subscriptions/checkout —
+    covered by tests/test_subscriptions_15g.py.
+    """
     p = _payload("horse_owner", tier="free")
     r = requests.post(f"{API}/auth/signup", json=p, timeout=15)
     assert r.status_code == 200
@@ -133,17 +137,13 @@ def test_checkout_free_flips_subscription_status():
         json={"tier": "free", "origin_url": BASE},
         headers=h, timeout=15,
     )
-    assert r2.status_code == 200, r2.text
-    body = r2.json()
-    assert body["url"] is None
-    assert body["status"] == "free"
-    # /auth/me reflects free subscription_status
-    me = requests.get(f"{API}/auth/me", headers=h, timeout=15)
-    assert me.status_code == 200
-    assert me.json().get("subscription_status") == "free"
+    assert r2.status_code == 410
 
 
 def test_checkout_paid_returns_stripe_url():
+    """Phase 15.G: legacy /api/membership/checkout returns 410 Gone.
+    Paid checkout now flows through /api/subscriptions/checkout.
+    """
     p = _payload("horse_owner", tier="owner_rider")
     r = requests.post(f"{API}/auth/signup", json=p, timeout=15)
     assert r.status_code == 200
@@ -154,15 +154,14 @@ def test_checkout_paid_returns_stripe_url():
         json={"tier": "owner_rider", "origin_url": BASE},
         headers=h, timeout=20,
     )
-    assert r2.status_code == 200, r2.text
-    body = r2.json()
-    assert body["url"] and body["url"].startswith("https://checkout.stripe.com/")
-    assert body["session_id"]
-    assert body["tier"] == "owner_rider"
-    assert body["amount"] == 15.0
+    assert r2.status_code == 410
 
 
 def test_checkout_rejects_invalid_tier():
+    """Phase 15.G: the 410 sunset applies uniformly — invalid tier
+    validation has been moved to /api/subscriptions/checkout (covered
+    elsewhere).
+    """
     p = _payload("rider")
     r = requests.post(f"{API}/auth/signup", json=p, timeout=15)
     token = r.json()["token"]
@@ -172,22 +171,21 @@ def test_checkout_rejects_invalid_tier():
         json={"tier": "platinum", "origin_url": BASE},
         headers=h, timeout=10,
     )
-    assert bad.status_code == 400
+    assert bad.status_code == 410
 
 
 def test_checkout_status_blocks_other_users_session():
-    # User A creates a session, user B can't poll it.
+    """Phase 15.G: per-user scoping on the status endpoint still applies
+    for sessions created BEFORE the sunset. The new system uses Stripe
+    Customer Portal for session management. This test now asserts the
+    create endpoint is 410 — cross-user status scoping is still enforced
+    by the route handler but cannot be exercised end-to-end here.
+    """
     a = requests.post(f"{API}/auth/signup", json=_payload("horse_owner"), timeout=15).json()
-    b = requests.post(f"{API}/auth/signup", json=_payload("rider"), timeout=15).json()
     ha = {"Authorization": f"Bearer {a['token']}"}
-    hb = {"Authorization": f"Bearer {b['token']}"}
     co = requests.post(
         f"{API}/membership/checkout",
         json={"tier": "owner_rider", "origin_url": BASE},
         headers=ha, timeout=15,
-    ).json()
-    r = requests.get(
-        f"{API}/membership/checkout/status/{co['session_id']}",
-        headers=hb, timeout=15,
     )
-    assert r.status_code == 403, r.text
+    assert co.status_code == 410

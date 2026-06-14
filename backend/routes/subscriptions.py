@@ -20,7 +20,7 @@ from datetime import datetime, timezone
 from typing import Optional
 
 import stripe
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel
 
 from core.permissions import require
@@ -266,7 +266,6 @@ def build_router(*, db, get_current_user) -> APIRouter:
     # ------------------------------------------------------------------
     @router.post("/subscriptions/checkout")
     async def create_subscription_checkout(body: CheckoutBody, user=Depends(get_current_user)):
-        require(user, "barn:manage")
         tier = (body.plan_tier_code or "").strip().lower()
         cycle = (body.billing_cycle or "").strip().lower()
         if tier == "enterprise":
@@ -275,9 +274,9 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # Phase 15.G — free-tier finalize. Mirrors the legacy
         # /api/membership/checkout {tier:"free"} behaviour without a
         # Stripe round-trip. Returns {url: null} so the FE navigates to
-        # /dashboard. No barn:manage requirement check beyond what the
-        # decorator above already enforced, since this still records a
-        # facility-level entitlement.
+        # /dashboard. Free is a SOLO-user tier per the Phase 15 charter
+        # — no `barn:manage` requirement so marketplace signups (horse
+        # owner / rider / etc.) can finalize without an admin role.
         if tier == "free":
             barn = await _resolve_or_create_barn(db, user)
             plan = await db.plans.find_one({"tier_code": "free"}, {"_id": 0})
@@ -305,6 +304,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
             )
             return {"url": None, "session_id": None, "tier": "free"}
 
+        # Paid tiers: gated to barn:manage (admin / barn_manager).
+        require(user, "barn:manage")
         if tier not in SUBSCRIBABLE_TIERS:
             raise HTTPException(400, f"Tier '{tier}' is not subscribable. Choose one of {sorted(SUBSCRIBABLE_TIERS)}.")
         if cycle not in ("monthly", "annual"):

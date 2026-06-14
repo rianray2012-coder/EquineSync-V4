@@ -158,20 +158,19 @@ export default function Signup() {
       window.location.assign("mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry");
       return;
     }
-    // Free uses the legacy membership endpoint (untouched in 15.C — 15.G will
-    // remove it). Paid (Starter/Professional) uses the new Phase 15 endpoint
-    // which bakes in the 14-day Stripe trial via subscription_data.
+    // Phase 15.G — all tiers (Free / Starter / Professional) now flow
+    // through the unified /api/subscriptions/checkout endpoint. Free
+    // short-circuits server-side ({url: null}) so we route to /dashboard
+    // directly. Paid tiers receive a Stripe Checkout URL and we navigate.
     setSubmitting(true);
     try {
       if (tier === "free") {
-        const { data } = await api.post("/membership/checkout", {
-          tier,
+        await api.post("/subscriptions/checkout", {
+          plan_tier_code: "free",
+          billing_cycle: "monthly",
           origin_url: window.location.origin,
         });
-        if (data.url) {
-          window.location.href = data.url;
-          return;
-        }
+        await refreshMe();
         navigate("/dashboard");
         return;
       }
@@ -204,7 +203,13 @@ export default function Signup() {
   const finalizeFreeRefreshed = async () => {
     setSubmitting(true);
     try {
-      await api.post("/membership/checkout", { tier: "free", origin_url: window.location.origin });
+      // Phase 15.G — finalize on the unified endpoint instead of the
+      // sunset /membership/checkout (now returns 410).
+      await api.post("/subscriptions/checkout", {
+        plan_tier_code: "free",
+        billing_cycle: "monthly",
+        origin_url: window.location.origin,
+      });
       await refreshMe();
       navigate("/dashboard");
     } catch (e) {
