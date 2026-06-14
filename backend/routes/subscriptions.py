@@ -1,16 +1,16 @@
-"""routes/subscriptions.py — Phase 15.A facility-level Stripe Subscriptions.
+"""routes/subscriptions.py — Phase 15.A/B facility-level Stripe Subscriptions.
 
-Scope (15.A only — see Phase 15 plan):
+15.A scope:
   - GET  /api/billing/plans               (public catalog from local `plans` collection)
   - GET  /api/billing/usage               (barn-scoped used/limit; non-blocking)
   - POST /api/subscriptions/checkout      (Starter/Professional only; barn:manage)
   - POST /api/subscriptions/customer-portal
   - GET  /api/subscriptions/me
-  - POST /api/webhook/stripe-subscriptions (ONLY checkout.session.completed handled)
 
-Out of scope: webhook lifecycle beyond checkout.session.completed,
-subscription_invoices, payments, billing_events log, admin dashboards, hard
-enforcement, frontend pricing UI. Those land in 15.B / 15.C / 15.E.
+15.B scope:
+  - POST /api/webhook/stripe-subscriptions — now dispatches to the full
+    lifecycle pipeline (10 handler groups / 11 Stripe event types) in
+    `subscriptions_webhook_handlers.py`. Status-gated idempotency model.
 """
 from __future__ import annotations
 
@@ -389,104 +389,15 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 raise HTTPException(400, "Invalid webhook payload.")
 
         event_type = event.get("type") or ""
-        if event_type != "checkout.session.completed":
-            # 15.A: log + 200 on every other event. Full lifecycle in 15.B.
-            logger.info("stripe-subscriptions webhook ignored event_type=%s (15.A scope)", event_type)
-            return {"received": True, "handled": False, "type": event_type}
 
-        session = (event.get("data") or {}).get("object") or {}
-        sess_id = session.get("id")
-        if not sess_id:
-            return {"received": True, "handled": False, "reason": "missing session id"}
-
-        metadata = session.get("metadata") or {}
-        barn_id = metadata.get("barn_id")
-        owner_user_id = metadata.get("owner_user_id")
-        plan_tier_code = metadata.get("plan_tier_code")
-        billing_cycle = metadata.get("billing_cycle")
-        stripe_subscription_id = session.get("subscription")
-        stripe_customer_id = session.get("customer")
-        if not (barn_id and stripe_subscription_id and plan_tier_code):
-            logger.warning("checkout.session.completed missing required metadata: %s", metadata)
-            return {"received": True, "handled": False, "reason": "missing metadata"}
-
-        # Idempotency: keyed on stripe_subscription_id, NOT event id (15.A
-        # scope explicitly avoids the billing_events idempotency table — that
-        # lands in 15.B). If a Subscription row already exists with this
-        # Stripe sub id, we no-op the subscription insert — but we still
-        # idempotently repair the barn → subscription pointer in case the
-        # original webhook delivery succeeded on the subscriptions write but
-        # failed before stamping barn.subscription_id (Codex round-2 #2).
-        existing = await db.subscriptions.find_one({"stripe_subscription_id": stripe_subscription_id})
-        if existing:
-            await db.barns.update_one(
-                {"id": barn_id},
-                {
-                    "$set": {
-                        "subscription_id": stripe_subscription_id,
-                        "subscription_updated_at": _now_iso(),
-                    },
-                    "$setOnInsert": {"id": barn_id, "created_at": _now_iso()},
-                },
-                upsert=True,
-            )
-            return {"received": True, "handled": True, "idempotent": True}
-
-        # Fetch the live subscription so we can read status + period info from
-        # the source of truth, not derived from the Checkout Session.
-        # Codex round-2 #1: on Stripe lookup failure, return a non-2xx
-        # retryable status so Stripe will replay the webhook. Returning 200
-        # would tell Stripe the event was successfully handled and the
-        # subscription would never be reconciled into our DB.
-        try:
-            stripe_sub = stripe.Subscription.retrieve(stripe_subscription_id)
-        except stripe.error.StripeError as ex:
-            logger.exception("could not retrieve stripe subscription %s: %s",
-                             stripe_subscription_id, ex)
-            raise HTTPException(
-                status_code=502,
-                detail="Stripe subscription lookup failed; retry expected.",
-            )
-
-        plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0})
-        snapshot = (plan or {}).get("feature_limits") or {}
-
-        def _ts_to_iso(ts):
-            return datetime.fromtimestamp(ts, tz=timezone.utc).isoformat() if ts else None
-
-        sub_doc = {
-            "id": stripe_subscription_id,             # use Stripe id as our id for trace-clarity
-            "barn_id": barn_id,
-            "owner_user_id": owner_user_id,
-            "plan_id": (plan or {}).get("id") or plan_tier_code,
-            "plan_tier_code": plan_tier_code,
-            "stripe_customer_id": stripe_customer_id,
-            "stripe_subscription_id": stripe_subscription_id,
-            "stripe_price_id": (
-                stripe_sub.get("items", {}).get("data", [{}])[0].get("price", {}).get("id")
-            ),
-            "status": stripe_sub.get("status"),
-            "billing_cycle": billing_cycle,
-            "current_period_start": _ts_to_iso(stripe_sub.get("current_period_start")),
-            "current_period_end": _ts_to_iso(stripe_sub.get("current_period_end")),
-            "cancel_at_period_end": bool(stripe_sub.get("cancel_at_period_end")),
-            "trial_end": _ts_to_iso(stripe_sub.get("trial_end")),
-            "entitlements_snapshot": snapshot,
-            "created_at": _now_iso(),
-            "updated_at": _now_iso(),
-        }
-        await db.subscriptions.insert_one(sub_doc)
-        await db.barns.update_one(
-            {"id": barn_id},
-            {
-                "$set": {
-                    "subscription_id": stripe_subscription_id,
-                    "subscription_updated_at": _now_iso(),
-                },
-                "$setOnInsert": {"id": barn_id, "created_at": _now_iso()},
-            },
-            upsert=True,
-        )
-        return {"received": True, "handled": True, "type": event_type}
+        # 15.B: status-gated idempotency model in subscriptions_webhook_handlers.
+        # The dispatcher handles billing_events insert/update, idempotent
+        # short-circuit, retry replay, stale-lock reclaim, and the 10 handler
+        # groups (11 Stripe event types). It raises HTTPException(502) on
+        # transient Stripe failures so Stripe will redeliver.
+        from routes.subscriptions_webhook_handlers import process_event
+        from fastapi.responses import JSONResponse
+        status_code, body = await process_event(db, event)
+        return JSONResponse(status_code=status_code, content=body)
 
     return router

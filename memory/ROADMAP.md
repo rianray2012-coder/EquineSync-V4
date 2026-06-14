@@ -9,6 +9,51 @@ Throughout Phase 15.A → 15.G, feature enforcement is **soft-warn only**. No
 entitlements; UI surfaces banners + upgrade prompts. **Hard enforcement is
 its own separately approved phase.**
 
+## ✅ Phase 15.B — Webhook Lifecycle (Feb 14 2026)
+
+**Approved v2 plan implemented in full.** No frontend, no emails sent, no
+hard enforcement, no Phase 9 touches.
+
+### Backend
+- `routes/subscriptions_webhook_handlers.py` (NEW) — Status-gated dispatcher
+  + 10 handler groups / 11 Stripe event types. Closed-enum
+  `processing_status` (processing / ok / retry_502 /
+  metadata_missing_retryable / metadata_missing_permanent / unknown_event).
+- `routes/subscriptions.py` — webhook route now delegates to `process_event`.
+  All 15.A external contracts preserved.
+- `core/lifespan.py` — unique indexes on `billing_events.stripe_event_id`,
+  `subscription_invoices.stripe_invoice_id`, `payments.stripe_payment_intent_id`,
+  `subscriptions.stripe_subscription_id` (sparse).
+
+### Idempotency model (per Codex's main-blocker fix)
+- Short-circuit only on `{ok, unknown_event, metadata_missing_permanent}`.
+- Replay handler on `{retry_502, metadata_missing_retryable}`.
+- Stale `processing` reclaim guard (`BILLING_EVENTS_STALE_LOCK_SECONDS`, default 60s).
+- Recent `processing` returns **409** (per final lock).
+- Transient Stripe / motor failure → 502 (Stripe replays).
+
+### Domain semantics
+- `pending_emails: [str]` additive via `$addToSet` (no overwriting).
+- `subscription_invoices.status` mirrors Stripe's actual status — never forced
+  to `uncollectible` on `invoice.payment_failed`. Separate `payment_failed_at`
+  + `payment_failure_count` markers.
+- `customer.subscription.updated` refreshes `entitlements_snapshot` on price
+  change and mirrors onto `barns.subscription_entitlements` for fast usage reads.
+
+### Tests — 18/18 (`tests/test_subscriptions_15b.py`)
+- 6 idempotency-model tests (ok-replay short-circuit · retry_502 replay runs
+  handler · first-failure 502 + retry_502 status · unknown_event short-circuit
+  · stale lock reclaim · active lock 409)
+- Per-event lifecycle tests for all 11 event types
+- Metadata-resolution retryable-vs-permanent distinction
+- Phase 9 isolation (`test_phase9_invoices_collection_untouched`)
+- Payload-hygiene (summary ≤ 500 chars, no forbidden payload keys)
+
+Combined regression: **63/63** (phases 13 + 14 + 15.A + 15.B).
+
+### Env additions
+- `BILLING_EVENTS_STALE_LOCK_SECONDS=60` (optional; default 60s).
+
 ## ✅ Phase 15.A — Subscription Billing Foundation (Feb 13 2026)
 
 **Approved scope only**: backend foundation, no frontend pricing UI changes.

@@ -161,6 +161,18 @@ def register_lifecycle(app, *, send_nudges):
             if (os.environ.get("APP_ENV") or "development").lower() == "production":
                 raise
 
+        # Phase 15.B — unique indexes on Stripe-ID-keyed collections. Required
+        # for the status-gated idempotency model in routes/subscriptions_webhook_handlers.
+        try:
+            await db.billing_events.create_index("stripe_event_id", unique=True)
+            await db.subscription_invoices.create_index("stripe_invoice_id", unique=True)
+            await db.payments.create_index("stripe_payment_intent_id", unique=True)
+            await db.subscriptions.create_index("stripe_subscription_id", unique=True, sparse=True)
+        except Exception:
+            logger.exception("Phase 15.B index creation failed (non-fatal in dev)")
+            if (os.environ.get("APP_ENV") or "development").lower() == "production":
+                raise
+
         async def _materialize_loop():
             await asyncio.sleep(60)
             engine_loop = TaskEngine(db, _track)

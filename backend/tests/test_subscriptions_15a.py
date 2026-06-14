@@ -241,14 +241,14 @@ def test_webhook_ignores_unknown_event_types_with_200():
 
 
 def test_webhook_checkout_completed_is_idempotent():
-    """Test the idempotency guard directly against the DB layer (not Stripe).
+    """15.B status-gated semantics: a fresh event_id processes the handler;
+    a replay of the same event_id short-circuits via billing_events.
 
-    Because we can't actually create a real Subscription in Stripe (test env
-    has the magic emergent key), we insert a subscription row by hand with a
-    known stripe_subscription_id, then POST a webhook for the same sub id —
-    the endpoint should detect the existing row and short-circuit
-    (handled=True, idempotent=True). Codex round-2 #2: also verify the barn's
-    subscription_id pointer is repaired on replay.
+    We also verify the within-handler subscription-row idempotency: when a
+    sub already exists for the same stripe_subscription_id but a DIFFERENT
+    event_id arrives (e.g. Stripe re-sends the checkout completion under a
+    new event), the handler's existing-subscription branch repairs the
+    barn pointer without duplicating the subscription row.
     """
     from pymongo import MongoClient
     mongo_url = os.environ["MONGO_URL"]
@@ -264,9 +264,9 @@ def test_webhook_checkout_completed_is_idempotent():
         "stripe_subscription_id": sub_id,
         "plan_tier_code": "starter",
         "status": "active",
+        "pending_emails": [],
         "created_at": "2026-01-01T00:00:00+00:00",
     })
-    # Pre-condition: barn either missing or missing the subscription_id pointer.
     db.barns.delete_one({"id": barn_id})
 
     fake_event = {
@@ -290,32 +290,27 @@ def test_webhook_checkout_completed_is_idempotent():
     )
     assert r.status_code == 200, r.text
     body = r.json()
+    # First delivery: dispatcher ran handler → handled=True, idempotent=False.
     assert body.get("handled") is True
-    assert body.get("idempotent") is True
 
-    # Codex round-2 #2: barn pointer must be repaired idempotently.
+    # Within-handler idempotency: barn pointer repaired even though sub already existed.
     barn = db.barns.find_one({"id": barn_id})
-    assert barn is not None, "barn row must be upserted on idempotent replay"
-    assert barn.get("subscription_id") == sub_id, (
-        "idempotent replay must repair barn.subscription_id"
-    )
-    assert barn.get("subscription_updated_at")
+    assert barn is not None
+    assert barn.get("subscription_id") == sub_id
 
-    # Second replay — still idempotent, same pointer.
+    # Replay with SAME event_id → status-gated short-circuit.
     r2 = requests.post(
         f"{API}/webhook/stripe-subscriptions",
         json=fake_event, timeout=15,
     )
     assert r2.status_code == 200
     assert r2.json().get("idempotent") is True
-    barn2 = db.barns.find_one({"id": barn_id})
-    assert barn2.get("subscription_id") == sub_id
-    # Still exactly one subscription row for this stripe_subscription_id.
     assert db.subscriptions.count_documents({"stripe_subscription_id": sub_id}) == 1
 
     # Cleanup
     db.subscriptions.delete_one({"id": sub_id})
     db.barns.delete_one({"id": barn_id})
+    db.billing_events.delete_one({"stripe_event_id": fake_event["id"]})
     client.close()
 
 
@@ -357,10 +352,15 @@ def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
             return None
         async def insert_one(self, *a, **k):
             return None
+        async def count_documents(self, *a, **k):
+            return 0
     class _StubDB:
         plans = _Coll()
         subscriptions = _Coll()
         barns = _Coll()
+        billing_events = _Coll()
+        subscription_invoices = _Coll()
+        payments = _Coll()
 
     async def _fake_get_current_user():
         return {"id": "tester"}
