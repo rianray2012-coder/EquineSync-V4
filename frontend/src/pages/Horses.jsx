@@ -135,17 +135,18 @@ export default function Horses() {
         submitLabel="Add horse"
         testidPrefix="horses-add"
         onCreated={async () => { await load(); await refreshUsage(); }}
+        // Phase 15.F — render the soft-warn card meter at the TOP of the
+        // add-horse sheet so the user sees plan context BEFORE filling the
+        // form. Hidden by the meter itself for unlimited plans and
+        // non-`barn:manage` users. CTA stays enabled regardless.
+        renderTop={() => (
+          usage ? (
+            <div className="mb-2" data-testid="horses-add-usage-wrap">
+              <UsageMeter usage={usage} kind="horses" variant="card" />
+            </div>
+          ) : null
+        )}
       />
-
-      {/* Phase 15.F — card meter just below the search bar so the
-          context is visible BEFORE the user opens the add sheet. Hidden
-          for non-`barn:manage` users and unlimited plans by the meter
-          itself. */}
-      {usage && (
-        <div className="mt-6" data-testid="horses-usage-card-wrap">
-          <UsageMeter usage={usage} kind="horses" variant="card" />
-        </div>
-      )}
     </div>
   );
 }

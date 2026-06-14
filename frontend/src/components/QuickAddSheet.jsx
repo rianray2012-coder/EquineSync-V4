@@ -58,6 +58,7 @@ export default function QuickAddSheet({
   transform,
   onCreated,
   renderWarnings,
+  renderTop,
   submitLabel = "Add",
   testidPrefix,
 }) {
@@ -222,6 +223,9 @@ export default function QuickAddSheet({
         </div>
 
         <form onSubmit={submit} ref={formRef} className="px-6 py-6 space-y-4">
+          {/* Optional content rendered above the form fields (e.g. soft
+              usage indicators surfaced inside the create flow). */}
+          {typeof renderTop === "function" && renderTop(form, { prefix })}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {fields.map((f) => {
               const wrapperCls = f.full ? "sm:col-span-2" : "";
