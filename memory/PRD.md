@@ -867,20 +867,75 @@ Final test count: 14/14 backend tests green in
 `backend/tests/test_admin_portal_admin1.py` including the
 `test_no_app_js_admin_path_collision` regression.
 
-### Admin Portal — Phase Status
+### Admin Portal — Phase Status (pre Admin-2 implementation; superseded below)
 
 | Phase   | Scope                                                        | Status |
 |---------|--------------------------------------------------------------|--------|
 | Admin-1 | Shell + access boundary (platform_role, sidebar, AdminLayout) | ✅ **Codex-approved & locked** |
-| Admin-2 | Read-only dashboard + recent activity + sub-health snapshot   | ⏸ **Gated** — does NOT start until founder provides Admin-2 plan |
+| Admin-2 | Read-only dashboard + recent activity + sub-health snapshot   | (initial gate) |
 | Admin-3 | User approvals + user management (first audit-logged mutations) | ⏸ Gated |
 | Admin-4 | Facility / barn management                                    | ⏸ Gated |
 | Admin-5 | Subscription + billing read-only control center               | ⏸ Gated |
 | Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
 | Admin-7 | Reports / integrations / settings / consolidation + Codex pkg | ⏸ Gated |
 
-⛔ **Admin-2 work is suspended.** Per the founder gating rule, no
-implementation begins until a pre-approved Admin-2 plan is provided
-covering scope, data sources (existing collections only), the activity
-feed shape, KPI definitions, and the cap on read-only surface area.
+⛔ **(Original gate notice — Admin-2 plan now approved; see implementation block below.)**
 
+## 🔐 Equine·Sync Admin Portal — Phase Admin-2 ✅ (Feb 14 2026)
+
+Read-only dashboard pass. Wires live KPIs, subscription health, and a
+curated audit-log feed into the existing Admin-1 shell. **Zero mutation
+buttons** — every new backend endpoint is GET-only and the cap is
+enforced by a parametrised test on POST/PUT/PATCH/DELETE.
+
+**Backend (additive — extends `routes/admin_portal.py`):**
+- `GET /api/admin/portal/kpis` — 8 KPIs + 7-day trend values for users /
+  horses / facilities. 30-second in-process cache. MRR = `sum(amount_cents)
+  where status="active"` (trialing excluded per founder direction).
+  `_partial=true` if any single metric query failed.
+- `GET /api/admin/portal/subscription-health` — status counts + webhook
+  health (`failed_last_24h`, `stuck_in_retry`). **No Stripe IDs in the
+  response.** No cache (operator surface).
+- `GET /api/admin/portal/activity?limit=1..100` — `audit_log` filtered
+  to the curated allowlist: `admin.*`, `subscription.*`, `user.*`,
+  `auth.login.*`, `billing.event.*`, `permission.denied`. Defensive
+  metadata scrubbing for `password`/`token`/`secret` keys.
+- All three endpoints emit `admin.portal.read.<endpoint>` audit entries.
+
+**Frontend (additive — extends `AdminDashboard.jsx`):**
+- New `AdminKpiCards.jsx` — 8-card grid (Users/Facilities/Horses carry
+  `+N last 7 days` trend chips; MRR uses the Slate Navy accent).
+- New `AdminSubscriptionHealth.jsx` — single card with status + webhook
+  pills (danger/warn tones only on nonzero failure counts).
+- New `AdminActivityFeed.jsx` — 25-row timeline with expandable
+  per-row metadata pre + Denied/Failure outcome pills for security
+  signals.
+- Parallel fetches on mount; each surface owns its own loading/error
+  state.
+
+**Tests:** `tests/test_admin_portal_admin2.py` — **17/17 green**.
+Critical invariants verified: MRR excludes trialing (planted trialing
+sub doesn't move MRR), no Stripe IDs in subscription-health, activity
+allowlist (planted in-list and out-of-list entries), metadata
+scrubbing (planted sensitive keys), no-mutation invariant (parametrised
+over all 3 paths × 4 methods), audit-emission invariant.
+
+**Regression:** 14/14 Admin-1 + 14/14 Phase 15.G → **45/45 combined
+green**. Route-collision regression still green. Zero changes to
+Phase 9 / Phase 15 source files.
+
+**Packaged:** `/app/phase_admin_2_changes.zip` for Codex review.
+Admin-3 remains gated.
+
+### Admin Portal — Phase Status (post Admin-2)
+
+
+| Phase   | Scope                                                        | Status |
+|---------|--------------------------------------------------------------|--------|
+| Admin-1 | Shell + access boundary                                       | ✅ Codex-approved & locked |
+| Admin-2 | Read-only dashboard + activity + sub health                   | ✅ Ready for Codex review |
+| Admin-3 | User approvals + user management (first mutations)            | ⏸ Gated |
+| Admin-4 | Facility / barn management                                    | ⏸ Gated |
+| Admin-5 | Subscription + billing read-only control center               | ⏸ Gated |
+| Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
+| Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |

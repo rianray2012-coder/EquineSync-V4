@@ -2,44 +2,55 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../lib/api";
 import { getPlatformRole } from "../../lib/permissions";
 import { useAuth } from "../../context/AuthContext";
-
-const KPI_PLACEHOLDERS = [
-  { key: "users",         label: "Total users",            phase: "Admin-2" },
-  { key: "facilities",    label: "Facilities",             phase: "Admin-2" },
-  { key: "horses",        label: "Horses on record",       phase: "Admin-2" },
-  { key: "active_subs",   label: "Active subscriptions",   phase: "Admin-2" },
-  { key: "trialing",      label: "Trialing subscriptions", phase: "Admin-2" },
-  { key: "past_due",      label: "Past-due subscriptions", phase: "Admin-2" },
-  { key: "approvals",     label: "Pending approvals",      phase: "Admin-2" },
-  { key: "mrr",           label: "Monthly recurring revenue", phase: "Admin-2" },
-];
+import AdminKpiCards from "./AdminKpiCards";
+import AdminSubscriptionHealth from "./AdminSubscriptionHealth";
+import AdminActivityFeed from "./AdminActivityFeed";
 
 /**
- * Admin-1 — Dashboard placeholder.
+ * Admin-2 — read-only platform dashboard.
  *
- * Per founder direction this surface is intentionally read-only and
- * dataless in Admin-1. The KPI cards render with em-dash placeholders +
- * a "Wires up in Admin-2" hint so reviewers can confirm the layout
- * without us inventing fake production metrics.
+ * Three parallel reads on mount: /portal/kpis, /portal/subscription-health,
+ * /portal/activity?limit=25. Each surface owns its own loading + error
+ * state so a stale activity feed doesn't blank the KPI row.
  *
- * The /api/admin/portal/me call here is the live access check (the
- * Layout guard is the structural one; this is the data-layer one). It
- * also surfaces the section list the current platform_role can see —
- * useful telemetry for the testing agent.
+ * Per the founder gate: ZERO mutation buttons on this page. The
+ * Stripe-customer link and other safe affordances land in Admin-5 (and
+ * only after a separate gated plan).
  */
 export default function AdminDashboard() {
   const { user } = useAuth();
   const [me, setMe] = useState(null);
-  const [err, setErr] = useState(null);
+  const [meErr, setMeErr] = useState(null);
+
+  const [kpis, setKpis] = useState(null);
+  const [kpiLoading, setKpiLoading] = useState(true);
+  const [kpiErr, setKpiErr] = useState(null);
+
+  const [subHealth, setSubHealth] = useState(null);
+  const [subLoading, setSubLoading] = useState(true);
+  const [subErr, setSubErr] = useState(null);
+
+  const [activity, setActivity] = useState(null);
+  const [actLoading, setActLoading] = useState(true);
+  const [actErr, setActErr] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
     api.get("/admin/portal/me")
       .then((r) => { if (!cancelled) setMe(r.data); })
-      .catch((e) => {
-        if (cancelled) return;
-        setErr(e?.response?.data?.detail || "Failed to load admin context.");
-      });
+      .catch((e) => { if (!cancelled) setMeErr(e?.response?.data?.detail || "Failed to load admin context."); });
+    api.get("/admin/portal/kpis")
+      .then((r) => { if (!cancelled) setKpis(r.data); })
+      .catch(() => { if (!cancelled) setKpiErr(true); })
+      .finally(() => { if (!cancelled) setKpiLoading(false); });
+    api.get("/admin/portal/subscription-health")
+      .then((r) => { if (!cancelled) setSubHealth(r.data); })
+      .catch(() => { if (!cancelled) setSubErr(true); })
+      .finally(() => { if (!cancelled) setSubLoading(false); });
+    api.get("/admin/portal/activity?limit=25")
+      .then((r) => { if (!cancelled) setActivity(r.data); })
+      .catch(() => { if (!cancelled) setActErr(true); })
+      .finally(() => { if (!cancelled) setActLoading(false); });
     return () => { cancelled = true; };
   }, []);
 
@@ -55,45 +66,27 @@ export default function AdminDashboard() {
         <p className="mt-2 text-[14px] text-equinesync-graphite/65 max-w-2xl">
           You&apos;re signed into the Equine·Sync platform control center as
           <span className="text-equinesync-slate font-medium"> {getPlatformRole(user) || "—"}</span>.
-          Live operational data lands in Admin-2; this Admin-1 build wires the
-          access boundary and the shell only.
+          Numbers update every 30 seconds; the dashboard is intentionally read-only.
         </p>
       </div>
 
-      {err && (
+      {meErr && (
         <div
           className="mb-6 rounded-lg border border-equinesync-graphite/15 bg-white p-4 text-[13px] text-equinesync-graphite/80"
           data-testid="admin-dashboard-error"
         >
-          {err}
+          {meErr}
         </div>
       )}
 
-      {/* KPI grid — placeholders only */}
-      <div
-        className="grid grid-cols-2 md:grid-cols-4 gap-4"
-        data-testid="admin-kpi-grid"
-      >
-        {KPI_PLACEHOLDERS.map(({ key, label, phase }) => (
-          <div
-            key={key}
-            data-testid={`admin-kpi-${key}`}
-            className="rounded-xl border border-equinesync-graphite/10 bg-white p-5"
-          >
-            <div className="text-[10.5px] tracking-[0.22em] uppercase text-equinesync-graphite/50">
-              {label}
-            </div>
-            <div className="mt-3 font-display text-3xl font-light text-equinesync-graphite/30">
-              —
-            </div>
-            <div className="mt-2 text-[10.5px] tracking-wide uppercase text-equinesync-lilac/80">
-              Wires up in {phase}
-            </div>
-          </div>
-        ))}
+      <AdminKpiCards kpis={kpis} loading={kpiLoading} error={kpiErr} />
+
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <AdminSubscriptionHealth data={subHealth} loading={subLoading} error={subErr} />
+        <AdminActivityFeed items={activity?.items} loading={actLoading} error={actErr} />
       </div>
 
-      {/* Access summary — useful for QA + reviewers, harmless to surface */}
+      {/* Access summary — useful for QA + reviewers, harmless */}
       <div
         className="mt-8 rounded-xl border border-equinesync-graphite/10 bg-white p-5"
         data-testid="admin-access-summary"
