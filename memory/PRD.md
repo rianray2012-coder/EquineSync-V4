@@ -1253,6 +1253,15 @@ at the top of `useEffect`-driven `load()` helpers).
 
 **Packaged:** `/app/phase_admin_5a_lint_changes.zip` for Codex review.
 
+**Codex round-1 (Feb 24 2026):** ✅ Approved with 2 non-blocking carry-forward notes:
+1. After a failed request, the previous error remains visible until the
+   next request succeeds. Acceptable for the bridge patch; smoothing
+   candidate for a later UX polish pass.
+2. `AdminSubscriptions.jsx` search placeholder still reads
+   "Facility name or subscription id" even though raw subscription-id
+   search was removed in Admin-5 round-1. Tiny copy cleanup candidate.
+Both are tracked in the carry-forward list (not Admin-5a blockers).
+
 ### Admin Portal — Phase Status (post Admin-4)
 
 | Phase   | Scope                                                        | Status |
@@ -1263,6 +1272,6 @@ at the top of `useEffect`-driven `load()` helpers).
 | Admin-4 | Facility roster + read-only health page                       | ✅ Codex-approved & locked |
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
 | Admin-5  | Subscription + billing control center                         | ✅ Codex-approved & locked |
-| Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Ready for Codex review |
-| Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
+| Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
+| Admin-6 | Audit logs + support + alerts                                 | 📝 Plan drafted, awaiting founder decisions |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
