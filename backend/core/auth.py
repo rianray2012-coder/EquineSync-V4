@@ -50,6 +50,16 @@ async def get_current_user(creds: Optional[HTTPAuthorizationCredentials] = Depen
     user = await db.users.find_one({"id": payload['sub']}, {"_id": 0, "password_hash": 0})
     if not user:
         raise HTTPException(status_code=401, detail="User not found")
+    # Admin-3 (round-2 Codex blocker, round-3 fix): suspension MUST be
+    # enforced on every product endpoint that uses the SHARED core/auth
+    # dependency — not only on the auth-router endpoints. Block here so
+    # any router that calls `Depends(get_current_user)` from
+    # `core.auth` (horses, barns, schedules, owners, etc.) rejects a
+    # suspended user's still-valid token on the next request. Response
+    # text is intentionally generic so a probing client cannot
+    # distinguish suspended vs invalid token.
+    if (user.get("account_status") or "").strip().lower() == "suspended":
+        raise HTTPException(status_code=401, detail="Session unavailable")
     # Defense-in-depth (Security Patch 2E hardening): when email verification is
     # enforced, block unverified users even if they hold an old/pre-issued token.
     # Missing email_verified is treated as verified (legacy/backfilled users).

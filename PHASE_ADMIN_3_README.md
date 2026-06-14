@@ -1,6 +1,7 @@
 # Phase Admin-3 — User Approvals + User Management
 
-**Status:** Round-2 fixes applied — suspension is now REAL, not cosmetic.
+**Status:** Round-3 fixes applied — suspension is enforced in the
+SHARED `core/auth.py` dependency that ALL product routers use.
 **Date:** Feb 14, 2026.
 **Scope:** First Admin Portal MUTATION surface. Approve / reject /
 request-info / suspend / reactivate. **No hard delete.** No billing or
@@ -8,7 +9,35 @@ subscription mutations. No platform_role mutations (CLI only).
 
 ---
 
-## 🛠 Round-1 Codex feedback addressed
+## 🛠 Round-2 Codex feedback addressed (round-3)
+
+**Blocker — suspension only patched in `routes/auth.py`, not the
+shared `core/auth.py` dependency.** The previous package gated
+`/auth/me` correctly, but the main app routers (horses, owners,
+schedules, etc.) all receive the `get_current_user` dependency from
+`backend/core/auth.py` (line 39 of `server.py`). A suspended user
+could therefore still hit normal product endpoints with a still-valid
+token.
+
+**Fix applied — patch the canonical shared dependency:**
+`backend/core/auth.py::get_current_user` now rejects
+`account_status="suspended"` with the generic
+`401 "Session unavailable"` before any product router sees the
+request. Every endpoint that uses `Depends(get_current_user)` from
+`core.auth` (which is the vast majority of the app) now inherits the
+gate automatically — no per-router changes needed.
+
+**Companion test:** `test_suspended_user_blocked_on_shared_core_auth_product_endpoint`
+explicitly hits `/api/horses` (a normal product endpoint owned by
+`routes/horses.py`, NOT the auth router) to prove the suspended user
+is blocked through the shared dependency, not just on `/auth/me`.
+
+**Files in this package now include `backend/core/auth.py`** — the
+file missing from the previous artifact.
+
+---
+
+## 🛠 Round-1 Codex feedback addressed (round-2, retained)
 
 **Blocker — Suspend was cosmetic.** The Admin-3 endpoint flipped
 `account_status="suspended"` but the auth layer never read that field,
@@ -96,6 +125,7 @@ Phase 9 / Phase 15 surface.
 | 24 | **Refresh-token flow refuses suspended users** | ✅ NEW round-2 — verified by test |
 | 25 | **Reactivate fully restores access** | ✅ NEW round-2 — verified by test |
 | 26 | **401 response is generic (no "suspended" leak)** | ✅ NEW round-2 — verified by test |
+| 27 | **Shared `core/auth.py::get_current_user` enforces suspension** | ✅ NEW round-3 — verified against `/api/horses` |
 
 ---
 
@@ -162,14 +192,15 @@ from the Admin-2 activity feed per the round-2 self-flood fix).
 ```
 cd /app/backend
 python -m pytest tests/test_admin_portal_admin3.py -v
-# 32 passed in 48.79s  (was 27, +5 round-2 suspension-enforcement regressions)
+# 33 passed in 50.37s  (was 27 → 32 → 33: +6 round-2/3 suspension regressions)
 
-# Full Admin Portal suite:
+# Full Admin Portal + auth-verification + Phase 15.G regression:
 python -m pytest tests/test_admin_portal_admin1.py \
                  tests/test_admin_portal_admin2.py \
                  tests/test_admin_portal_admin3.py \
-                 tests/test_core_auth_verification_gate.py
-# 74 passed
+                 tests/test_core_auth_verification_gate.py \
+                 tests/test_subscriptions_15g.py
+# 89 passed
 ```
 
 Critical invariants (subset):
@@ -195,17 +226,21 @@ Frontend live-DOM verification:
 
 ## 📦 Files changed
 
-**Backend (additive — extends Admin-2 router; +small auth-enforcement touch in round-2):**
-- `backend/routes/admin_portal.py` — adds role matrix, safe field
-  projection, `_apply_user_mutation` helper, 3 new GET + 5 new POST
-  endpoints, and the round-2 bulk refresh-token revoke at suspend time.
-- `backend/routes/auth.py` — **round-2 auth-enforcement touch**:
-  `make_current_user_dependency` blocks `account_status="suspended"`,
-  `/auth/login` blocks suspended creds with the generic 401,
-  `/auth/refresh` refuses suspended users and revokes the consumed
-  token.
-- `backend/tests/test_admin_portal_admin3.py` — 32 tests (27 original
-  + 5 round-2 suspension-enforcement regressions).
+**Backend (additive — extends Admin-2 router; +scoped auth-enforcement touch in round-2/3):**
+- `backend/routes/admin_portal.py` — role matrix, safe field projection,
+  `_apply_user_mutation` helper, 3 new GET + 5 new POST endpoints, +
+  refresh-token bulk-revoke at suspend time.
+- **`backend/core/auth.py` — round-3 fix**: the SHARED `get_current_user`
+  dependency that every product router uses now blocks
+  `account_status="suspended"` with generic `401 "Session unavailable"`.
+  This is the canonical enforcement point (server.py line 39 imports
+  from here).
+- `backend/routes/auth.py` — round-2 enforcement: same gate on
+  `/auth/login` (generic 401 + audit reason) and `/auth/refresh`
+  (consumed token revoked + 401). The internal `make_current_user_dependency`
+  inside this file is kept aligned with `core/auth.py` for `/auth/me`.
+- `backend/tests/test_admin_portal_admin3.py` — 33 tests (27 original
+  + 5 round-2 suspension + 1 round-3 shared-dependency regression).
 
 **Frontend (additive — extends Admin-1 shell):**
 - `frontend/src/pages/admin/AdminUsers.jsx` — **NEW** table page.

@@ -591,6 +591,44 @@ def test_suspend_response_is_generic_for_existing_token(db):
         )
 
 
+def test_suspended_user_blocked_on_shared_core_auth_product_endpoint(db):
+    """Codex round-2 (Admin-3) blocker: the previous fix only patched
+    `routes/auth.py::make_current_user_dependency`, which `/auth/me`
+    uses. The MAIN app routers (horses, owners, schedules, etc.) all
+    receive the SHARED `core/auth.py::get_current_user` dependency from
+    server.py. This regression confirms the suspension gate now sits in
+    the shared core dependency by testing against `/api/horses` (a
+    normal product endpoint that the auth router does NOT own).
+    """
+    target = _pending_target()
+    target_h = _bearer(target)
+
+    # Sanity: fresh user reaches /api/horses (200, not 401).
+    pre = requests.get(f"{API}/horses", headers=target_h, timeout=10)
+    assert pre.status_code == 200, (
+        f"Pre-suspend /api/horses should be 200, got {pre.status_code}"
+    )
+
+    # Admin suspends.
+    actor = _admin_session(db, "platform_admin")
+    s = requests.post(
+        f"{API}/admin/portal/users/{target['user']['id']}/suspend",
+        headers=_bearer(actor), json={}, timeout=10,
+    )
+    assert s.status_code == 200
+
+    # SAME token, immediately after suspend, on a SHARED-dependency
+    # product endpoint (NOT /auth/me).
+    blocked = requests.get(f"{API}/horses", headers=target_h, timeout=10)
+    assert blocked.status_code == 401, (
+        f"Suspended user on /api/horses should be 401, got {blocked.status_code}: {blocked.text}"
+    )
+    # Response stays generic (no status keyword leak).
+    body_text = (blocked.text or "").lower()
+    for leaked in ("suspended", "banned", "disabled", "blocked"):
+        assert leaked not in body_text
+
+
 def test_idempotent_mutation_does_NOT_double_audit(db):
     """A no-op re-approve must not create a second audit entry."""
     actor = _admin_session(db, "platform_admin")
