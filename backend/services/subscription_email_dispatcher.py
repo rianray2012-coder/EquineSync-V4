@@ -39,6 +39,15 @@ from typing import Any, Awaitable, Callable, Dict, List, Optional
 
 logger = logging.getLogger("equinesync.subscription_emails")
 
+# mailer.py contract (see backend/mailer.py::send):
+#   live success     → {"status": "sent"}
+#   no RESEND_API_KEY → {"status": "dev_logged", "dev": True}
+#   sandbox-rejected  → {"status": "sandbox", "dev": True}   (treated as success
+#                       across the codebase — invites/auth log the send and
+#                       surface dev_url to the inviter)
+#   live failure      → {"status": "error", "error": "<msg>"}
+SUCCESS_MAILER_STATUSES = frozenset({"sent", "dev_logged", "sandbox"})
+
 # Event keys we currently know how to render. 15.B webhook handlers only
 # enqueue these three; anything else is treated as an unknown key and
 # pulled off so it doesn't block the queue forever.
@@ -154,6 +163,27 @@ async def _send_one_event(
     sub_id = sub.get("stripe_subscription_id") or sub.get("id")
     log_filter = {"subscription_id": sub_id, "event_key": event_key}
 
+    # ------------------------------------------------------------------
+    # Re-queue safety (round-2 review).
+    # The log row is keyed only by (subscription_id, event_key). 15.B uses
+    # $addToSet, so a future re-occurrence of the same event (e.g. a later
+    # renewal `payment_succeeded`, or a fresh `payment_failed` long after a
+    # prior permanent failure) re-puts the same key on the queue. Without
+    # this reset, the pre-flight $inc would carry the old terminal counter
+    # forward and the next send would be silently pulled. When we see a
+    # queued key whose previous log row is already terminal, blank-slate
+    # the counter so the new occurrence gets a full retry budget.
+    # ------------------------------------------------------------------
+    prev = await db.subscription_email_log.find_one(log_filter, {"_id": 0})
+    if prev and prev.get("status") in ("sent", "permanent_failure"):
+        await db.subscription_email_log.update_one(
+            log_filter,
+            {"$set": {"attempt": 0, "status": "queued",
+                      "last_error": None, "previous_terminal_status": prev["status"],
+                      "previous_terminal_at": prev.get("updated_at"),
+                      "updated_at": now.isoformat()}},
+        )
+
     # Pre-flight attempt-counter bump (UPSERT). We read the post-update doc
     # to know the current attempt number.
     log_row = await db.subscription_email_log.find_one_and_update(
@@ -196,11 +226,11 @@ async def _send_one_event(
             variables=variables,
             base="_base_auth",
         )
-        # mailer.send returns {"status": "ok"|"dev"|"error", ...}. Treat
-        # both ok (live) and dev (no RESEND_API_KEY) as success — dev mode
-        # logs the body, which is exactly what we want in preview envs.
+        # mailer.send contract documented at top of file. Live success
+        # ("sent"), dev-mode ("dev_logged"), and sandbox-rejected ("sandbox")
+        # all count as delivered — matches how invites/auth treat them.
         status = (result or {}).get("status") if isinstance(result, dict) else None
-        if status in ("ok", "dev"):
+        if status in SUCCESS_MAILER_STATUSES:
             await _mark_attempt(db, log_filter, "sent",
                                 message_id=(result or {}).get("id"), now=now)
             await db.subscriptions.update_one(
@@ -321,19 +351,24 @@ async def _build_variables(db, sub: dict, event_key: str,
 
     elif event_key in ("payment_succeeded", "payment_failed"):
         # Pull the most recent subscription_invoice for this subscription.
+        # Schema source of truth: backend/routes/subscriptions_webhook_handlers
+        # _upsert_subscription_invoice — `subscription_id` holds the Stripe
+        # subscription id, monetary value lives on `amount_cents`, and the
+        # paid/failed timestamps live on `paid_at` / `payment_failed_at`.
         invoice = None
         try:
             invoice = await db.subscription_invoices.find_one(
-                {"stripe_subscription_id": sub_id},
+                {"subscription_id": sub_id},
                 {"_id": 0},
                 sort=[("created_at", -1)],
             )
         except Exception:
             invoice = None
-        amt = (invoice or {}).get("amount_paid_cents") or (invoice or {}).get("amount_due_cents")
+        amt = (invoice or {}).get("amount_cents")
         variables["amount_friendly"] = _money(amt) or "—"
-        variables["invoice_ref"] = (invoice or {}).get("stripe_invoice_id", "—")
-        variables["paid_at_friendly"] = _friendly_date((invoice or {}).get("paid_at"))
+        variables["invoice_ref"] = (invoice or {}).get("stripe_invoice_id") or "—"
+        ts_field = "paid_at" if event_key == "payment_succeeded" else "payment_failed_at"
+        variables["paid_at_friendly"] = _friendly_date((invoice or {}).get(ts_field))
         variables["next_renewal_friendly"] = _friendly_date(sub.get("current_period_end"))
 
     return variables
