@@ -48,7 +48,7 @@ SECTION_CAPABILITIES: Dict[str, List[str]] = {
     "facilities":    ["super_admin", "platform_admin", "support_admin"],
     "horses":        ["super_admin", "platform_admin", "support_admin"],
     "approvals":     ["super_admin", "platform_admin"],
-    "subscriptions": ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
+    "subscriptions": ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
     "billing":       ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
     "permissions":   ["super_admin", "platform_admin"],
     "support":       ["super_admin", "platform_admin", "support_admin"],
@@ -250,6 +250,103 @@ def _scrub_metadata(meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
 def _matches_activity_allowlist(action: str) -> bool:
     a = (action or "").lower()
     return any(a.startswith(p) for p in _ACTIVITY_PREFIXES)
+
+
+# ----------------------------------------------------------------------
+# Admin-5 — Subscription + Billing Control Center (READ-ONLY)
+# ----------------------------------------------------------------------
+# Locked founder decisions (Feb 2026):
+#   1a — read-only only; NO mutations.
+#   2a — support_admin can READ subscriptions (summary), but is BLOCKED
+#        from /billing-events and /payments.
+#   3a — manual email-pass retry DEFERRED (no mutation surface here).
+#   4a — Stripe IDs OMITTED from API responses (local IDs only).
+#   5a — one Billing Control Center page with tabs (frontend).
+#   6a — sidebar keeps two items: Subscriptions + Billing.
+#   7a — subscription detail recent_activity comes from audit_log only.
+#   8a — new Admin-5 read audits excluded from Admin-2 activity feed.
+#
+# Stripe ID strip list — internal storage keys that MUST NOT cross the
+# API boundary. Phase 9 invoices + recurring_charges remain untouched.
+_SUBSCRIPTION_STRIP_KEYS = (
+    "stripe_customer_id", "stripe_subscription_id", "stripe_price_id",
+)
+_PAYMENT_STRIP_KEYS = (
+    "stripe_customer_id", "stripe_subscription_id", "stripe_invoice_id",
+    "stripe_price_id", "hosted_invoice_url", "invoice_pdf_url",
+)
+_BILLING_EVENT_STRIP_KEYS = (
+    "stripe_event_id", "object_id",
+)
+
+# Safe Mongo projection for the subscriptions roster + detail. Includes
+# only fields we intentionally surface (no Stripe IDs).
+_SUBSCRIPTION_SAFE_FIELDS = {
+    "_id": 0,
+    "id": 1, "barn_id": 1, "plan_tier_code": 1, "status": 1,
+    "billing_cycle": 1, "amount_cents": 1, "currency": 1,
+    "current_period_start": 1, "current_period_end": 1,
+    "trial_end": 1, "cancel_at_period_end": 1,
+    "entitlements_snapshot": 1, "pending_emails": 1,
+    "created_at": 1, "updated_at": 1, "last_event_at": 1,
+}
+
+_BILLING_EVENT_SAFE_FIELDS = {
+    "_id": 0,
+    "id": 1, "event_type": 1, "event_created_at": 1,
+    "barn_id": 1,
+    "processing_status": 1, "processed_at": 1, "retry_count": 1,
+    "last_error_class": 1, "created_at": 1, "updated_at": 1,
+    # `summary` intentionally omitted — it can include raw Stripe IDs
+    # from various entity types (e.g. "payment_intent.succeeded ·
+    # pi_xxxx"). Admin-5 surfaces event_type + status + retry_count
+    # instead, which is sufficient for triage.
+}
+
+# subscription_invoices safe projection — Phase 15 ONLY. We never touch
+# the Phase 9 `invoices` collection from Admin-5.
+_PAYMENT_SAFE_FIELDS = {
+    "_id": 0,
+    "id": 1, "barn_id": 1, "subscription_id": 1,
+    "amount_cents": 1, "currency": 1, "status": 1,
+    "period_start": 1, "period_end": 1, "due_date": 1,
+    "payment_failure_count": 1, "created_at": 1, "updated_at": 1,
+}
+
+
+def _strip_keys(doc: Optional[Dict[str, Any]], keys) -> Optional[Dict[str, Any]]:
+    if not isinstance(doc, dict):
+        return doc
+    return {k: v for k, v in doc.items() if k not in keys}
+
+
+# Roles that can see billing-events + payments (i.e. the "Billing
+# Control Center" tab). support_admin is intentionally EXCLUDED per
+# locked decision 2a — they only see subscription summaries.
+_BILLING_TAB_ROLES = {
+    "super_admin", "platform_admin", "billing_admin", "read_only_auditor",
+}
+
+
+def _require_billing_access(user: Dict[str, Any]) -> None:
+    """Enforce decision 2a: support_admin is blocked from /billing-events
+    and /payments. Other platform roles already passed
+    require_platform_role; we layer a tighter check on top."""
+    role = platform_role(user)
+    if role not in _BILLING_TAB_ROLES:
+        raise HTTPException(403, "Your platform role cannot view billing details.")
+
+
+# Append the Admin-5 read prefixes to the dashboard-feed exclude list so
+# the curated Admin-2 activity feed doesn't self-flood with operator
+# subscription/billing reads (decision 8a). We mutate the tuple here to
+# avoid duplicating the list at the top of the file.
+_ACTIVITY_EXCLUDE_PREFIXES = _ACTIVITY_EXCLUDE_PREFIXES + (
+    "admin.portal.read.subscriptions",
+    "admin.portal.read.subscription_detail",
+    "admin.portal.read.billing_events",
+    "admin.portal.read.payments",
+)
 
 
 async def _compute_kpis(db) -> Dict[str, Any]:
@@ -971,5 +1068,238 @@ def build_router(*, db, get_current_user) -> APIRouter:
             },
             "recent_activity": recent_audit,
         }
+
+    # ------------------------------------------------------------------
+    # Admin-5 — Subscription + Billing Control Center (READ-ONLY)
+    # ------------------------------------------------------------------
+    # Surface map:
+    #   GET /admin/portal/subscriptions          — paginated roster
+    #   GET /admin/portal/subscriptions/{id}     — detail + audit_log
+    #   GET /admin/portal/billing-events         — webhook health table
+    #   GET /admin/portal/payments               — Phase 15 invoice roster
+    #
+    # Strict guardrails:
+    #   - NO mutation methods (POST/PUT/PATCH/DELETE) on ANY endpoint.
+    #   - NO Stripe API calls — local DB only.
+    #   - NO Stripe IDs in responses (omitted via _strip_keys).
+    #   - NO Phase 9 reads — `invoices` / `recurring_charges` untouched.
+    #   - support_admin BLOCKED from /billing-events + /payments.
+    async def _facility_label_map(barn_ids: List[str]) -> Dict[str, Optional[str]]:
+        """Bulk-fetch facility names for a list of barn_ids. Returns a
+        dict {barn_id: name or None}."""
+        if not barn_ids:
+            return {}
+        rows = await db.barns.find(
+            {"id": {"$in": list({b for b in barn_ids if b})}},
+            {"_id": 0, "id": 1, "name": 1},
+        ).to_list(length=len(barn_ids))
+        return {r["id"]: r.get("name") for r in rows}
+
+    @router.get("/admin/portal/subscriptions")
+    async def list_subscriptions(
+        request: Request,
+        q: Optional[str] = Query(default=None, max_length=200),
+        status: Optional[str] = Query(default=None, max_length=32),
+        plan_tier_code: Optional[str] = Query(default=None, max_length=32),
+        billing_cycle: Optional[str] = Query(default=None, max_length=16),
+        barn_id: Optional[str] = Query(default=None, max_length=64),
+        limit: int = Query(default=25, ge=1, le=100),
+        cursor: int = Query(default=0, ge=0),
+        user=Depends(get_current_user),
+    ):
+        """Subscription roster — Stripe IDs stripped on the way out."""
+        require_platform_role(user)
+        mongo_q: Dict[str, Any] = {}
+        if status:
+            mongo_q["status"] = status
+        if plan_tier_code:
+            mongo_q["plan_tier_code"] = plan_tier_code
+        if billing_cycle:
+            mongo_q["billing_cycle"] = billing_cycle
+        if barn_id:
+            mongo_q["barn_id"] = barn_id
+        if q:
+            # Search joins through barn name. We resolve the barn ids
+            # first, then filter subscriptions by that set + an OR on the
+            # subscription `id` substring itself (matches local Mongo id,
+            # NOT Stripe ids).
+            import re as _re
+            safe = _re.escape(q)
+            barn_hits = await db.barns.find(
+                {"name": {"$regex": safe, "$options": "i"}},
+                {"_id": 0, "id": 1},
+            ).to_list(length=200)
+            barn_ids = [b["id"] for b in barn_hits]
+            or_clauses: List[Dict[str, Any]] = [
+                {"id": {"$regex": safe, "$options": "i"}},
+            ]
+            if barn_ids:
+                or_clauses.append({"barn_id": {"$in": barn_ids}})
+            mongo_q["$or"] = or_clauses
+
+        total = await db.subscriptions.count_documents(mongo_q)
+        items = await db.subscriptions.find(
+            mongo_q, _SUBSCRIPTION_SAFE_FIELDS,
+        ).sort("updated_at", -1).skip(cursor).limit(limit).to_list(length=limit)
+
+        # Attach facility label per row (no Stripe IDs ever).
+        labels = await _facility_label_map([r.get("barn_id") for r in items])
+        for row in items:
+            row["facility_name"] = labels.get(row.get("barn_id"))
+        # Defense-in-depth strip — the projection already excluded
+        # Stripe ids, but if the document grows new keys we strip here.
+        items = [_strip_keys(r, _SUBSCRIPTION_STRIP_KEYS) for r in items]
+
+        next_cursor = cursor + len(items) if (cursor + len(items)) < total else None
+        await audit.record(
+            action="admin.portal.read.subscriptions",
+            user=user, request=request,
+            resource_type="admin_portal", resource_id="subscriptions",
+            outcome="success", status_code=200,
+            metadata={"limit": limit, "cursor": cursor, "count": len(items),
+                      "filter_keys": sorted([k for k in mongo_q.keys() if k != "$or"])},
+        )
+        return {"items": items, "total": total, "limit": limit,
+                "cursor": cursor, "next_cursor": next_cursor}
+
+    @router.get("/admin/portal/subscriptions/{subscription_id}")
+    async def get_subscription_detail(subscription_id: str, request: Request,
+                                      user=Depends(get_current_user)):
+        """Subscription detail. Pulls audit_log activity (decision 7a)
+        — billing_events is NOT joined here. Stripe IDs stripped."""
+        require_platform_role(user)
+        sub = await db.subscriptions.find_one(
+            {"id": subscription_id}, _SUBSCRIPTION_SAFE_FIELDS,
+        )
+        if not sub:
+            raise HTTPException(404, "Subscription not found.")
+        sub = _strip_keys(sub, _SUBSCRIPTION_STRIP_KEYS)
+
+        # Facility summary — safe fields only, no Stripe IDs / no
+        # internal subscription_id (matches Admin-4 strip invariant).
+        facility = None
+        if sub.get("barn_id"):
+            facility_raw = await db.barns.find_one(
+                {"id": sub["barn_id"]},
+                {"_id": 0, "id": 1, "name": 1, "contact_email": 1,
+                 "subscription_tier_code": 1, "created_at": 1},
+            )
+            facility = facility_raw
+
+        # Recent admin activity for this subscription (audit_log only;
+        # billing_events surface lives on the Billing tab).
+        try:
+            recent_audit = await db.audit_log.find(
+                {"$or": [
+                    {"resource_id": subscription_id, "resource_type": "subscription"},
+                    {"resource_id": subscription_id, "resource_type": "admin_portal"},
+                ]},
+                {"_id": 0, "id": 1, "ts": 1, "action": 1, "actor_email": 1,
+                 "resource_type": 1, "resource_id": 1, "outcome": 1, "metadata": 1},
+            ).sort("ts", -1).limit(10).to_list(length=10)
+            for row in recent_audit:
+                row["metadata"] = _scrub_metadata(row.get("metadata"))
+        except Exception:
+            recent_audit = []
+
+        await audit.record(
+            action="admin.portal.read.subscription_detail",
+            user=user, request=request,
+            resource_type="subscription", resource_id=subscription_id,
+            outcome="success", status_code=200,
+        )
+        return {
+            "subscription": sub,
+            "facility": facility,
+            "recent_activity": recent_audit,
+        }
+
+    @router.get("/admin/portal/billing-events")
+    async def list_billing_events(
+        request: Request,
+        processing_status: Optional[str] = Query(default=None, max_length=64),
+        event_type: Optional[str] = Query(default=None, max_length=80),
+        barn_id: Optional[str] = Query(default=None, max_length=64),
+        age_hours: Optional[int] = Query(default=None, ge=1, le=24 * 30),
+        limit: int = Query(default=25, ge=1, le=100),
+        cursor: int = Query(default=0, ge=0),
+        user=Depends(get_current_user),
+    ):
+        """Webhook health + event roster. support_admin gets 403."""
+        require_platform_role(user)
+        _require_billing_access(user)
+        mongo_q: Dict[str, Any] = {}
+        if processing_status:
+            mongo_q["processing_status"] = processing_status
+        if event_type:
+            mongo_q["event_type"] = event_type
+        if barn_id:
+            mongo_q["barn_id"] = barn_id
+        if age_hours:
+            cutoff = (datetime.now(timezone.utc) - timedelta(hours=age_hours)).isoformat()
+            mongo_q["event_created_at"] = {"$gte": cutoff}
+
+        total = await db.billing_events.count_documents(mongo_q)
+        items = await db.billing_events.find(
+            mongo_q, _BILLING_EVENT_SAFE_FIELDS,
+        ).sort("event_created_at", -1).skip(cursor).limit(limit).to_list(length=limit)
+
+        labels = await _facility_label_map([r.get("barn_id") for r in items])
+        for row in items:
+            row["facility_name"] = labels.get(row.get("barn_id"))
+        items = [_strip_keys(r, _BILLING_EVENT_STRIP_KEYS) for r in items]
+        next_cursor = cursor + len(items) if (cursor + len(items)) < total else None
+        await audit.record(
+            action="admin.portal.read.billing_events",
+            user=user, request=request,
+            resource_type="admin_portal", resource_id="billing_events",
+            outcome="success", status_code=200,
+            metadata={"limit": limit, "cursor": cursor, "count": len(items),
+                      "filter_keys": sorted(mongo_q.keys())},
+        )
+        return {"items": items, "total": total, "limit": limit,
+                "cursor": cursor, "next_cursor": next_cursor}
+
+    @router.get("/admin/portal/payments")
+    async def list_payments(
+        request: Request,
+        status: Optional[str] = Query(default=None, max_length=32),
+        barn_id: Optional[str] = Query(default=None, max_length=64),
+        limit: int = Query(default=25, ge=1, le=100),
+        cursor: int = Query(default=0, ge=0),
+        user=Depends(get_current_user),
+    ):
+        """Phase 15 subscription_invoices roster. support_admin gets 403.
+
+        NEVER reads the Phase 9 `invoices` collection. NEVER returns the
+        hosted Stripe URL or PDF link — Admin-5 is local-DB-only.
+        """
+        require_platform_role(user)
+        _require_billing_access(user)
+        mongo_q: Dict[str, Any] = {}
+        if status:
+            mongo_q["status"] = status
+        if barn_id:
+            mongo_q["barn_id"] = barn_id
+
+        total = await db.subscription_invoices.count_documents(mongo_q)
+        items = await db.subscription_invoices.find(
+            mongo_q, _PAYMENT_SAFE_FIELDS,
+        ).sort("created_at", -1).skip(cursor).limit(limit).to_list(length=limit)
+        labels = await _facility_label_map([r.get("barn_id") for r in items])
+        for row in items:
+            row["facility_name"] = labels.get(row.get("barn_id"))
+        items = [_strip_keys(r, _PAYMENT_STRIP_KEYS) for r in items]
+        next_cursor = cursor + len(items) if (cursor + len(items)) < total else None
+        await audit.record(
+            action="admin.portal.read.payments",
+            user=user, request=request,
+            resource_type="admin_portal", resource_id="payments",
+            outcome="success", status_code=200,
+            metadata={"limit": limit, "cursor": cursor, "count": len(items),
+                      "filter_keys": sorted(mongo_q.keys())},
+        )
+        return {"items": items, "total": total, "limit": limit,
+                "cursor": cursor, "next_cursor": next_cursor}
 
     return router

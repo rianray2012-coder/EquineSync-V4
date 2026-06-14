@@ -17,10 +17,16 @@ const TONE = {
 };
 
 const LABEL_TO_TONE = {
-  active: "active", approved: "active",
-  pending_review: "pending", pending: "pending",
+  active: "active", approved: "active", paid: "active", ok: "active",
+  trialing: "pending", processing: "pending",
+  past_due: "pending", retry_502: "pending",
+  metadata_missing_retryable: "pending", incomplete: "pending",
+  pending_review: "pending", pending: "pending", draft: "pending", open: "pending",
   rejected: "rejected",
   suspended: "suspended",
+  canceled: "muted", void: "muted", uncollectible: "muted",
+  unpaid: "muted", incomplete_expired: "muted",
+  metadata_missing_permanent: "rejected", unknown_event: "muted",
 };
 
 export default function UserStatusBadge({ value, kind = "status" }) {

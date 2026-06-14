@@ -108,7 +108,7 @@ def test_role_admin_barn_admin_does_not_inherit_platform_access(db):
     ("super_admin",       14),
     ("platform_admin",    14),
     ("billing_admin",      5),  # dashboard, subscriptions, billing, alerts, reports
-    ("support_admin",      6),  # dashboard, users, facilities, horses, support, alerts
+    ("support_admin",      7),  # dashboard, users, facilities, horses, subscriptions (Admin-5 summary-only), support, alerts
     ("read_only_auditor",  5),  # dashboard, subscriptions, billing, reports, audit_logs
 ])
 def test_portal_me_allows_each_platform_role(db, plat_role, expected_sections):

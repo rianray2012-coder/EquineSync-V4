@@ -1163,6 +1163,76 @@ Admin-4b (real edits + soft-disable enforcement) gated.
 - Added 2 regression tests: `test_facility_list_does_not_leak_internal_subscription_id`,
   `test_facility_detail_does_not_leak_internal_subscription_id`.
 
+## 🔐 Equine·Sync Admin Portal — Phase Admin-5 ✅ (Feb 24 2026, awaiting Codex review)
+
+Read-only Phase 15 subscription + billing visibility for platform admins.
+Strict guardrails per the locked plan (1a/2a/3a/4a/5a/6a/7a/8a).
+
+**Locked decisions:**
+- 1a — Admin-5 is read-only only. No mutation surface anywhere.
+- 2a — `support_admin` gets subscription summary only; 403 on
+  `/billing-events` and `/payments`.
+- 3a — Manual email-pass retry deferred (no mutation in Admin-5).
+- 4a — Stripe IDs omitted from API responses (foreign-key fields
+  stripped via projection + `_strip_keys` defense-in-depth).
+- 5a — One Billing Control Center page with Payments + Webhook Events
+  tabs.
+- 6a — Sidebar keeps two items (Subscriptions + Billing).
+- 7a — Subscription detail `recent_activity` comes from `audit_log`
+  only (no `billing_events` join).
+- 8a — Admin-5 read audits excluded from the Admin-2 curated feed.
+
+**Backend (extends `routes/admin_portal.py`):**
+- `GET /api/admin/portal/subscriptions` — paginated roster with status,
+  plan, billing cycle, and barn filters; search by facility name or
+  local subscription id; per-row facility label.
+- `GET /api/admin/portal/subscriptions/{id}` — detail with facility
+  summary, plan/status/recurring amount/period/trial tiles, entitlements
+  snapshot, pending email flags (read-only), and audit_log activity.
+- `GET /api/admin/portal/billing-events` — webhook health table with
+  retry-state filter. `summary` field intentionally omitted (could carry
+  raw Stripe IDs like `pi_xxx`). `support_admin` → 403.
+- `GET /api/admin/portal/payments` — Phase 15 `subscription_invoices`
+  roster, status filter. Hosted Stripe URLs stripped. `support_admin`
+  → 403.
+- New `_require_billing_access(user)` helper enforces decision 2a.
+- `_ACTIVITY_EXCLUDE_PREFIXES` extended with all 4 Admin-5 read actions.
+- `SECTION_CAPABILITIES["subscriptions"]` extended with `support_admin`
+  (Admin-1 `support_admin` section count test updated 6 → 7).
+
+**Frontend (extends `pages/admin/*`):**
+- `AdminSubscriptions.jsx` — table page (search + 3 filters + pagination
+  + row click → drawer).
+- `AdminSubscriptionDrawer.jsx` — read-only health page (facility,
+  subscription tiles, entitlements grid, pending email flags, audit_log
+  activity).
+- `AdminBilling.jsx` — tabbed Billing Control Center (Payments + Webhook
+  events). Approved palette only.
+- `UserStatusBadge.jsx` — status→tone map extended with subscription +
+  billing-event statuses; still approved palette only.
+
+**Tests:** `tests/test_admin_portal_admin5.py` — **40/40 green**.
+Includes platform-role matrix (5 roles × 200 on subscriptions, 4 roles
+× 200 + support_admin × 403 on billing-events/payments), barn-scoped
+403 on all 3 surface paths, unauthenticated → 401, generic 404 for
+missing subscription, exhaustive Stripe-ID leak guards (planted
+`STRIPELEAK` value markers + explicit `stripe_*` key checks), Phase 9
+isolation guard (planted `invoices` doc must not appear in /payments),
+read-only ceiling (parametrised × 4 paths × 4 mutation methods → 401/
+403/405), activity feed self-flood guard, audit emission on every read.
+
+**Strict guardrails honored:**
+- ✅ READ-ONLY. No mutations exposed on any Admin-5 endpoint.
+- ✅ No Stripe SDK calls. Local DB only.
+- ✅ Stripe foreign-key IDs stripped from every response.
+- ✅ Billing event `summary` not surfaced (could leak Stripe IDs).
+- ✅ Hosted Stripe URLs stripped from `/payments`.
+- ✅ Phase 9 `invoices` + `recurring_charges` untouched.
+- ✅ Approved palette only.
+- ✅ Audit emission on every read; excluded from Admin-2 feed.
+
+**Packaged:** `/app/phase_admin_5_changes.zip` for Codex review.
+
 ### Admin Portal — Phase Status (post Admin-4)
 
 | Phase   | Scope                                                        | Status |
@@ -1172,6 +1242,6 @@ Admin-4b (real edits + soft-disable enforcement) gated.
 | Admin-3 | User approvals + user management                              | ✅ Codex-approved & locked |
 | Admin-4 | Facility roster + read-only health page                       | ✅ Codex-approved & locked |
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
-| Admin-5 | Subscription + billing control center                         | ⏸ Gated |
+| Admin-5 | Subscription + billing control center                         | ✅ Ready for Codex review |
 | Admin-6 | Audit logs + support + alerts                                 | ⏸ Gated |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
