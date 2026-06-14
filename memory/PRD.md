@@ -579,3 +579,40 @@ successful signup (template path already in `/app/backend/mailer.py`).
 
 **P2 — Trial / grace period** for paid tiers (initial 7-day free trial baked
 into the Stripe Checkout config).
+
+## Phase 15 — Stripe Subscription Billing (Feb 2026)
+
+### Phase 15.A — Foundation ✅
+- `plans` + `subscriptions` collections seeded; `/api/subscriptions/checkout`,
+  `/api/subscriptions/customer-portal`, `/api/subscriptions/me`,
+  `/api/subscriptions/usage` endpoints live.
+- Soft-enforcement only — no hard-blocking of user/horse creation.
+- Phase 9 `invoices` collection untouched (separate `subscription_invoices`).
+- 20 pytest tests passing (`backend/tests/test_subscriptions_15a.py`).
+
+### Phase 15.B — Webhook Lifecycle ✅ (Codex review round-4 complete, awaiting user approval)
+- `POST /api/webhook/stripe-subscriptions` — status-gated idempotency
+  dispatcher with `billing_events` claim row, stale-lock reclaim, and 10
+  handler groups covering 11 Stripe event types.
+- Status enum: `processing | ok | retry_502 | metadata_missing_retryable |
+  metadata_missing_permanent | unknown_event`. Retryable metadata misses
+  return **HTTP 503** so Stripe replays; transient/handler crashes return 502
+  with `retry_502`.
+- `customer.subscription.updated` now upserts a FULL record (plan tier +
+  entitlements snapshot + barn pointer mirror) when no local row exists yet
+  but metadata is sufficient (round-3/4 reliability fix).
+- Email side-effects: `subscriptions.pending_emails` additive set via
+  `$addToSet`; 15.D will consume — **15.B never sends mail**.
+- 23 pytest tests passing (`backend/tests/test_subscriptions_15b.py`); 43/43
+  combined with 15.A.
+- Reference: `/app/docs/PHASE_15B_WEBHOOK_LIFECYCLE.md`.
+- Packaged delta: `/app/phase15b_changes.zip`.
+
+### Upcoming (gated on user approval of 15.B)
+- **15.C — Facility-owner billing UI** (P1): pricing band swap, wizard step 3,
+  monthly/annual toggle, resume membership, usage display.
+- **15.D — Trial email scheduler** (P1): background job consuming
+  `subscriptions.pending_emails`.
+- **15.E — Platform-admin billing dashboard** (P2).
+- **15.F — Soft-warn usage indicators in create flows** (P2).
+- **15.G — Migration cleanup**: remove legacy `/api/membership/checkout` (P3).

@@ -463,24 +463,29 @@ def test_no_raw_stripe_payload_persisted_in_collections(db):
 
 
 # =====================================================================
-# Carryover from 15.A — webhook returns 502 on Stripe outage
+# Carryover from 15.A — webhook handler happy-path smoke for
+# customer.subscription.updated. The deeper 502/retry_502 invariant is
+# covered by:
+#   - test_billing_events_first_delivery_failure_yields_502_and_retry_502_status
+#     (checkout.session.completed → stripe.retrieve outage path)
+#   - test_non_duplicate_db_insert_failure_raises_502_without_recursion
+#     (motor write outage on the claim insert)
 # =====================================================================
 
-def test_stripe_fetch_failure_during_subscription_updated_returns_502_and_sets_retry_502(monkeypatch, db):
-    # Already exercised via test_billing_events_first_delivery_failure_yields_502_and_retry_502_status
-    # for checkout.session.completed. This is a focused mirror for the
-    # subscription.updated handler, which does NOT call stripe.retrieve, so
-    # we instead simulate a motor failure via a non-existent collection name.
-    # Implementation note: we cover the broader invariant via the existing
-    # 15.A test test_webhook_returns_502_when_stripe_retrieve_fails — this
-    # placeholder asserts the basic 200 happy-path so the test list is
-    # complete.
+def test_subscription_updated_happy_path_smoke_200_and_status_ok(monkeypatch, db):
+    """Smoke: a well-formed customer.subscription.updated on an existing
+    local subscription returns 200 and lands billing_events.processing_status
+    == 'ok'. The 502 / retry_502 paths are covered by the dedicated tests
+    referenced in the comment block above this test.
+    """
     barn_id, sub_id, _ = _seed_local_sub(db)
     e = _evt("customer.subscription.updated",
              {"id": sub_id, "status": "active",
               "items": {"data": [{"price": {"id": "price_local_monthly"}}]}})
     r = _post_event(e)
     assert r.status_code == 200
+    row = db.billing_events.find_one({"stripe_event_id": e["id"]})
+    assert row and row["processing_status"] == "ok"
     db.subscriptions.delete_one({"id": sub_id})
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
 
@@ -551,24 +556,57 @@ def test_subscription_created_repairs_barn_pointer_and_entitlements(db):
 
 
 def test_subscription_updated_upserts_when_no_local_row_but_metadata_present(db):
-    """Codex round-3 #4: with metadata.barn_id present but no local sub row,
-    customer.subscription.updated must upsert rather than silently no-op.
+    """Codex round-3 #4 / round-4 blocker: with metadata.barn_id +
+    plan_tier_code present but no local sub row, customer.subscription.updated
+    must upsert a FULL subscription record (plan tier, entitlements snapshot)
+    AND repair the barn pointer (subscription_id + subscription_entitlements
+    mirror) — not a partial row.
     """
     barn_id = f"barn_upd_up_{uuid.uuid4().hex[:8]}"
     sub_id = f"sub_upd_up_{uuid.uuid4().hex[:8]}"
+    db.barns.delete_one({"id": barn_id})
+    db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    # Ensure plans catalog has a known tier so entitlements_snapshot is
+    # deterministic.
+    db.plans.update_one(
+        {"tier_code": "starter"},
+        {"$setOnInsert": {
+            "id": "starter", "tier_code": "starter",
+            "feature_limits": {"horses": 50, "users": 5},
+        }},
+        upsert=True,
+    )
     e = _evt("customer.subscription.updated", {
         "id": sub_id, "status": "active",
         "metadata": {"barn_id": barn_id, "plan_tier_code": "starter",
-                     "billing_cycle": "monthly"},
+                     "billing_cycle": "monthly", "owner_user_id": "u_x"},
         "items": {"data": [{"price": {"id": "price_x"}}]},
     })
     r = _post_event(e)
     assert r.status_code == 200, r.text
+
+    # Subscription row upserted with FULL record.
     sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
     assert sub is not None, "subscription row must be upserted on update + metadata"
     assert sub["status"] == "active"
     assert sub["barn_id"] == barn_id
+    assert sub["plan_tier_code"] == "starter"
+    assert sub.get("entitlements_snapshot", {}).get("horses") == 50
+    assert sub.get("entitlements_snapshot", {}).get("users") == 5
+
+    # Barn pointer + entitlements mirror repaired.
+    barn = db.barns.find_one({"id": barn_id})
+    assert barn is not None, "barn row must be upserted to repair pointer"
+    assert barn["subscription_id"] == sub_id
+    assert barn["subscription_entitlements"]["horses"] == 50
+    assert barn["subscription_entitlements"]["users"] == 5
+
+    # billing_events row closed as ok.
+    row = db.billing_events.find_one({"stripe_event_id": e["id"]})
+    assert row and row["processing_status"] == "ok"
+
     db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    db.barns.delete_one({"id": barn_id})
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
 
 

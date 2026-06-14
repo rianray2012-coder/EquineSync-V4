@@ -35,7 +35,7 @@ billing_events.find_one(stripe_event_id)
   └── new (insert claim row, processing_status="processing")
         → run handler
               ├── success                              → status=ok, 200
-              ├── _MetadataMissing(retryable=True)     → status=metadata_missing_retryable, 200
+              ├── _MetadataMissing(retryable=True)     → status=metadata_missing_retryable, 503
               ├── _MetadataMissing(retryable=False)    → status=metadata_missing_permanent, 200
               ├── _TransientStripeError                → status=retry_502, 502
               └── handler crash (other exception)      → status=retry_502, 502
@@ -47,7 +47,7 @@ billing_events.find_one(stripe_event_id)
 |---|---|---|---|
 | 1 | `checkout.session.completed` | `session.metadata.barn_id` | metadata_missing_permanent |
 | 2 | `customer.subscription.created` | (a) `obj.metadata.barn_id` (b) local `subscriptions` row | metadata_missing_retryable |
-| 3 | `customer.subscription.updated` | local `subscriptions` row (refresh entitlements if price changed) | metadata_missing_retryable |
+| 3 | `customer.subscription.updated` | (a) local `subscriptions` row (b) `obj.metadata.barn_id` + `plan_tier_code` (or price → plan lookup) — upserts a full row + barn mirror + entitlements snapshot when no local row exists | metadata_missing_retryable |
 | 4 | `customer.subscription.deleted` | local `subscriptions` row | metadata_missing_permanent |
 | 5 | `customer.subscription.trial_will_end` | local `subscriptions` row → metadata | metadata_missing_retryable |
 | 6 | `invoice.created` | local subscription by `obj.subscription` → by `obj.customer` | metadata_missing_retryable |

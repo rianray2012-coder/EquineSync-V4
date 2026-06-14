@@ -485,6 +485,78 @@ async def _h_subscription_updated(db, event):
         raise _MetadataMissing(retryable=True, reason="barn_id not resolvable yet")
     items = (obj.get("items") or {}).get("data") or [{}]
     new_price_id = (items[0].get("price") or {}).get("id")
+
+    # Codex round-3 #4 / round-4 blocker: when there's no local row, we must
+    # produce a FULL record (plan_tier_code + entitlements_snapshot + barn
+    # mirror) — not a partial one that we'd then mark `ok` and never repair.
+    # If metadata doesn't have enough to fully reconstruct, retry until a
+    # fuller event arrives.
+    if not local:
+        plan_tier_code = metadata.get("plan_tier_code")
+        if not plan_tier_code:
+            # Try resolving via the price id against our local plan catalog.
+            if new_price_id:
+                plan_by_price = await db.plans.find_one(
+                    {"$or": [
+                        {"stripe_price_id_monthly": new_price_id},
+                        {"stripe_price_id_annual": new_price_id},
+                    ]},
+                    {"_id": 0},
+                )
+                if plan_by_price:
+                    plan_tier_code = plan_by_price.get("tier_code")
+        if not plan_tier_code:
+            raise _MetadataMissing(
+                retryable=True,
+                reason="no local row and plan_tier_code not resolvable from metadata or price",
+            )
+        plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0})
+        snapshot = (plan or {}).get("feature_limits") or {}
+        set_doc = {
+            "barn_id": barn_id,
+            "stripe_subscription_id": stripe_subscription_id,
+            "stripe_customer_id": obj.get("customer"),
+            "stripe_price_id": new_price_id,
+            "plan_id": (plan or {}).get("id") or plan_tier_code,
+            "plan_tier_code": plan_tier_code,
+            "status": obj.get("status"),
+            "current_period_start": _ts_to_iso(obj.get("current_period_start")),
+            "current_period_end": _ts_to_iso(obj.get("current_period_end")),
+            "cancel_at_period_end": bool(obj.get("cancel_at_period_end")),
+            "trial_end": _ts_to_iso(obj.get("trial_end")),
+            "entitlements_snapshot": snapshot,
+            "updated_at": _now_iso(),
+            "last_event_at": _now_iso(),
+        }
+        await db.subscriptions.update_one(
+            {"stripe_subscription_id": stripe_subscription_id},
+            {
+                "$set": set_doc,
+                "$setOnInsert": {
+                    "id": stripe_subscription_id,
+                    "owner_user_id": metadata.get("owner_user_id"),
+                    "billing_cycle": metadata.get("billing_cycle"),
+                    "pending_emails": [],
+                    "created_at": _now_iso(),
+                },
+            },
+            upsert=True,
+        )
+        await db.barns.update_one(
+            {"id": barn_id},
+            {
+                "$set": {
+                    "subscription_id": stripe_subscription_id,
+                    "subscription_entitlements": snapshot,
+                    "subscription_updated_at": _now_iso(),
+                },
+                "$setOnInsert": {"id": barn_id, "created_at": _now_iso()},
+            },
+            upsert=True,
+        )
+        return barn_id, ("subscription_updated_bootstrapped", stripe_subscription_id, plan_tier_code)
+
+    # ---------- Existing local row: standard update path ----------
     set_doc = {
         "barn_id": barn_id,
         "stripe_subscription_id": stripe_subscription_id,
@@ -498,22 +570,8 @@ async def _h_subscription_updated(db, event):
         "updated_at": _now_iso(),
         "last_event_at": _now_iso(),
     }
-    # Codex round-3 #4: if no local row yet but barn_id IS resolvable from
-    # metadata, upsert rather than silently no-op-and-mark-ok. Out-of-order
-    # delivery shouldn't lose state.
     await db.subscriptions.update_one(
-        {"stripe_subscription_id": stripe_subscription_id},
-        {
-            "$set": set_doc,
-            "$setOnInsert": {
-                "id": stripe_subscription_id,
-                "owner_user_id": metadata.get("owner_user_id"),
-                "billing_cycle": metadata.get("billing_cycle"),
-                "pending_emails": [],
-                "created_at": _now_iso(),
-            },
-        },
-        upsert=True,
+        {"stripe_subscription_id": stripe_subscription_id}, {"$set": set_doc},
     )
     summary_parts = ["subscription_updated", stripe_subscription_id]
     # Entitlements refresh on price change.
