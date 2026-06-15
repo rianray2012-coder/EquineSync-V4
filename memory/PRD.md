@@ -1260,7 +1260,69 @@ at the top of `useEffect`-driven `load()` helpers).
 2. `AdminSubscriptions.jsx` search placeholder still reads
    "Facility name or subscription id" even though raw subscription-id
    search was removed in Admin-5 round-1. Tiny copy cleanup candidate.
-Both are tracked in the carry-forward list (not Admin-5a blockers).
+Both folded into Admin-6 polish (decision 7a).
+
+## 🔐 Equine·Sync Admin Portal — Phase Admin-6 ✅ (Feb 24 2026)
+
+Audit Logs + Support Inbox + Alerts. Read-first with the 3 locked
+support mutations (status / assign / notes). No public ingestion.
+
+**Locked decisions:**
+- 1a — Implement the 3 support mutations now.
+- 2a — Admin-side only; NO public ticket-ingestion endpoint.
+- 3a — Scrub keys + Stripe-VALUE regex + 256-char truncation
+  (recursive into nested dicts/lists).
+- 4a — billing_admin audit scope = 4 specific action prefixes
+  (`admin.portal.read.{subscriptions,subscription_detail,
+  billing_events,payments}`); server-enforced; detail returns 404
+  outside scope.
+- 5a — `denied_admin_access_pattern` severity = "warning"
+  (Smoky Lilac pill via UserStatusBadge).
+- 6a — Three separate sidebar nav items: Audit Logs / Support / Alerts.
+- 7a — Folded the Admin-5a carry-forwards: subscription placeholder →
+  "Facility name", and `setErr(null)` added to the useEffect cleanup
+  on the 4 list pages so stale errors clear on filter changes.
+
+**Codex-locked guardrail enforced:** Support note bodies live in
+`support_tickets.internal_notes` but NEVER appear in audit metadata.
+Audit row for `admin.portal.support.add_note` carries only
+`{"note_present": true}`. Test plants `STRIPELEAK`, `password`,
+`token`, `sub_…`, `api_key` payloads and asserts none appear in the
+audit document text.
+
+**Backend (extends `routes/admin_portal.py`):**
+- 8 new endpoints: `/audit-logs` + `/audit-logs/{ref}`, `/support` +
+  `/support/{ref}` + `/support/{ref}/status` + `/support/{ref}/assign`
+  + `/support/{ref}/notes`, `/alerts`.
+- Opaque refs: `al_*` (audit), `st_*` (ticket), `av_*` (alert).
+- `_scrub_metadata` upgraded — recursive Stripe-VALUE redaction,
+  length truncation, expanded sensitive-key list.
+- Alerts derived on-read from `billing_events`, `subscriptions`,
+  `subscription_invoices`, `users`, and `audit_log`.
+- `SECTION_CAPABILITIES["audit_logs"]` extended with `support_admin`
+  + `billing_admin` (Admin-1 section count bumped accordingly).
+
+**Frontend:**
+- `AdminAuditLogs.jsx` + `AdminAuditLogDrawer.jsx` — searchable
+  read-only audit roster + detail with scrubbed metadata.
+- `AdminSupport.jsx` + `AdminSupportDrawer.jsx` — roster + detail with
+  the 3 mutations.
+- `AdminAlerts.jsx` — grouped read-only roster.
+- `UserStatusBadge.jsx` tone map extended for new statuses.
+- 3 placeholder routes replaced in `App.js`.
+- Admin-5a polish carry-forwards applied across 4 list pages.
+
+**Tests:** `tests/test_admin_portal_admin6.py` — **45/45 green**.
+Highlights: platform-role matrix (read access + mutation lockdown),
+billing_admin audit-scope correctness (list + detail), `admin_ref`
+shape, metadata scrubber (sensitive keys + Stripe-VALUE redaction +
+truncation), note-body guardrail (planted leak tokens never appear in
+audit row), alert derivation for all 5 sources, denied-access alert
+severity = warning, billing_admin alert scope, no-mutation ceiling on
+read endpoints, activity-feed self-flood guard for 5 Admin-6 prefixes,
+Phase 9 isolation sweep.
+
+**Packaged:** `/app/phase_admin_6_changes.zip` for Codex review.
 
 ### Admin Portal — Phase Status (post Admin-4)
 
@@ -1273,5 +1335,5 @@ Both are tracked in the carry-forward list (not Admin-5a blockers).
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
 | Admin-5  | Subscription + billing control center                         | ✅ Codex-approved & locked |
 | Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
-| Admin-6 | Audit logs + support + alerts                                 | 📝 Plan drafted, awaiting founder decisions |
+| Admin-6 | Audit logs + support + alerts                                 | ✅ Ready for Codex review |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |

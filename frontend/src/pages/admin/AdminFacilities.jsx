@@ -61,7 +61,7 @@ export default function AdminFacilities() {
         setErr(e?.response?.data?.detail || "Failed to load facilities.");
         setLoading(false);
       });
-    return () => { cancelled = true; };
+    return () => { cancelled = true; setErr(null); };
   }, [q, tier, cursor]);
 
   return (

@@ -29,6 +29,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, Field
 from bson import ObjectId
 from bson.errors import InvalidId
+import uuid
 
 from core import audit
 from core.permissions import (
@@ -58,7 +59,7 @@ SECTION_CAPABILITIES: Dict[str, List[str]] = {
     "reports":       ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
     "integrations":  ["super_admin", "platform_admin"],
     "settings":      ["super_admin", "platform_admin"],
-    "audit_logs":    ["super_admin", "platform_admin", "read_only_auditor"],
+    "audit_logs":    ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
 }
 
 
@@ -231,11 +232,39 @@ class _NoteBody(BaseModel):
     review_note: Optional[str] = Field(default=None, max_length=_REVIEW_NOTE_MAX_LEN)
 
 
+# Admin-6 support inbox body models (module-scope per the same FastAPI
+# binding caveat — defining Pydantic inside the endpoint function
+# silently degrades to query-param parsing → 422s).
+class _SupportStatusBody(BaseModel):
+    status: str = Field(..., min_length=1, max_length=32)
+
+
+class _SupportAssignBody(BaseModel):
+    assignee_user_id: Optional[str] = Field(default=None, max_length=64)
+
+
+class _SupportNoteBody(BaseModel):
+    body: str = Field(..., min_length=1, max_length=4096)
+
+
+
+import re as _re_module
+
+# Stripe-shaped ID VALUE regex — used by `_scrub_metadata` to redact
+# any string that looks like a raw Stripe identifier, even if it ended
+# up nested deep inside an audit_log metadata blob. Reuses the exact
+# pattern enforced by Admin-5's leak guard.
+_STRIPE_VALUE_RE = _re_module.compile(
+    r"^(sub|evt|in|cus|price)_[A-Za-z0-9_]{4,}$"
+)
+_METADATA_VALUE_MAX_LEN = 256
+
 
 def _scrub_metadata(meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
     """Strip any sensitive-looking keys from audit metadata before
-    surfacing it on the dashboard. Defense-in-depth — these keys
-    should never have been logged in the first place."""
+    surfacing it. Defense-in-depth — these keys should never have been
+    logged in the first place. Also redacts Stripe-shaped values and
+    truncates long strings (Admin-6 guardrail, decision 3a)."""
     if not isinstance(meta, dict):
         return {}
     out: Dict[str, Any] = {}
@@ -243,10 +272,29 @@ def _scrub_metadata(meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         k_low = str(k).lower()
         if k_low in _METADATA_SCRUB_KEYS:
             continue
-        if any(s in k_low for s in ("password", "secret", "token")):
+        if any(s in k_low for s in ("password", "secret", "token",
+                                    "signature", "authorization", "cookie",
+                                    "api_key")):
             continue
-        out[k] = v
+        out[k] = _scrub_metadata_value(v)
     return out
+
+
+def _scrub_metadata_value(v: Any) -> Any:
+    """Recursively scrub a metadata value: redact Stripe-shaped strings,
+    truncate long strings, preserve numerics/bools/None, recurse into
+    nested dicts/lists."""
+    if isinstance(v, str):
+        if _STRIPE_VALUE_RE.match(v):
+            return "[stripe_id_redacted]"
+        if len(v) > _METADATA_VALUE_MAX_LEN:
+            return v[:_METADATA_VALUE_MAX_LEN] + "…(truncated)"
+        return v
+    if isinstance(v, dict):
+        return _scrub_metadata(v)
+    if isinstance(v, list):
+        return [_scrub_metadata_value(x) for x in v]
+    return v
 
 
 def _matches_activity_allowlist(action: str) -> bool:
@@ -387,6 +435,12 @@ _ACTIVITY_EXCLUDE_PREFIXES = _ACTIVITY_EXCLUDE_PREFIXES + (
     "admin.portal.read.subscription_detail",
     "admin.portal.read.billing_events",
     "admin.portal.read.payments",
+    # Admin-6 read prefixes (decision 8a — continues self-flood guard).
+    "admin.portal.read.audit_logs",
+    "admin.portal.read.audit_log_detail",
+    "admin.portal.read.support",
+    "admin.portal.read.support_detail",
+    "admin.portal.read.alerts",
 )
 
 
@@ -1380,5 +1434,560 @@ def build_router(*, db, get_current_user) -> APIRouter:
         )
         return {"items": items, "total": total, "limit": limit,
                 "cursor": cursor, "next_cursor": next_cursor}
+
+    # ------------------------------------------------------------------
+    # Admin-6 — Audit Logs + Support Inbox + Alerts
+    # ------------------------------------------------------------------
+    # Locked founder decisions:
+    #   1a — Implement the 3 support mutations now (status, assign, notes).
+    #   2a — Admin-side only; NO public ticket-ingestion endpoint.
+    #   3a — Keep scrub list + Stripe-VALUE regex + length truncation
+    #        (already applied to `_scrub_metadata` at module scope).
+    #   4a — `billing_admin` audit-log scope = 4 specific action prefixes.
+    #   5a — `denied_admin_access_pattern` severity = "warning".
+    #   6a — Three separate sidebar nav items.
+    #   7a — Fold Admin-5a carry-forwards (search placeholder + stale
+    #        error UX) into Admin-6 polish.
+    #
+    # Plus the Codex-locked guardrail:
+    #   Support note bodies live in `support_tickets.internal_notes`, but
+    #   MUST NEVER appear in audit_log metadata. Audit metadata for a
+    #   note add carries only `{"note_present": true}`.
+    _AUDIT_SAFE_FIELDS = {
+        "_id": 1, "id": 1,
+        "ts": 1, "action": 1, "actor_email": 1, "actor_user_id": 1,
+        "resource_type": 1, "resource_id": 1,
+        "outcome": 1, "status_code": 1, "metadata": 1,
+        "ip_address": 1,
+    }
+
+    # billing_admin audit scope — exactly the 4 action prefixes locked
+    # in decision 4a. Enforced server-side; cannot be widened by the
+    # caller.
+    _BILLING_ADMIN_AUDIT_SCOPE = (
+        "admin.portal.read.subscriptions",
+        "admin.portal.read.subscription_detail",
+        "admin.portal.read.billing_events",
+        "admin.portal.read.payments",
+    )
+
+    # Roles that may see ANY audit row (no scope filter).
+    _AUDIT_UNSCOPED_ROLES = {
+        "super_admin", "platform_admin", "support_admin", "read_only_auditor",
+    }
+
+    def _audit_scope_filter(user: Dict[str, Any]) -> Dict[str, Any]:
+        """Return a Mongo filter that enforces the per-role audit-log
+        scope (decision 4a). Unscoped roles get `{}`; billing_admin gets
+        an `action $in [ … ]` restriction limited to the 4 prefixes."""
+        role = platform_role(user)
+        if role in _AUDIT_UNSCOPED_ROLES:
+            return {}
+        if role == "billing_admin":
+            # Match on prefix — exact action names include the read
+            # variants plus any future fan-out beneath those prefixes.
+            return {"$or": [
+                {"action": {"$regex": f"^{_re_module.escape(p)}"}}
+                for p in _BILLING_ADMIN_AUDIT_SCOPE
+            ]}
+        # Any other role hitting this branch shouldn't be here, but
+        # default to "nothing" rather than "everything".
+        return {"id": "__no_match__"}
+
+    # Map known resource_type values → opaque ref factory. Reusing
+    # Admin-5's `_admin_ref()` pattern keeps the API boundary
+    # consistently Stripe-ID-free for cross-surface navigation.
+    async def _audit_resource_admin_ref(
+        resource_type: Optional[str], resource_id: Optional[str],
+    ) -> Optional[Dict[str, Optional[str]]]:
+        """Resolve a (resource_type, resource_id) pair into an opaque
+        cross-surface ref. Returns None when the type is unknown OR
+        when resource_id is missing."""
+        if not resource_type or not resource_id:
+            return None
+        if resource_type == "subscription":
+            sub = await db.subscriptions.find_one(
+                {"id": resource_id}, {"_id": 1},
+            )
+            if sub:
+                return {"kind": "subscription",
+                        "admin_ref": _admin_ref("as", sub["_id"])}
+            return {"kind": "subscription", "admin_ref": None}
+        if resource_type == "barn":
+            return {"kind": "barn", "admin_ref": resource_id}
+        if resource_type == "user":
+            return {"kind": "user", "admin_ref": resource_id}
+        # Unknown / Stripe-sensitive types → don't surface resource_id.
+        return None
+
+    @router.get("/admin/portal/audit-logs")
+    async def list_audit_logs(
+        request: Request,
+        action_prefix: Optional[str] = Query(default=None, max_length=80),
+        actor_email: Optional[str] = Query(default=None, max_length=200),
+        resource_type: Optional[str] = Query(default=None, max_length=64),
+        outcome: Optional[str] = Query(default=None, max_length=32),
+        from_ts: Optional[str] = Query(default=None, max_length=40),
+        to_ts: Optional[str] = Query(default=None, max_length=40),
+        q: Optional[str] = Query(default=None, max_length=200),
+        limit: int = Query(default=25, ge=1, le=100),
+        cursor: int = Query(default=0, ge=0),
+        user=Depends(get_current_user),
+    ):
+        """Paginated audit-log roster. billing_admin sees a scoped slice
+        (decision 4a). All reads emit an audit row that's excluded from
+        the Admin-2 activity feed (decision 8a continues)."""
+        require_platform_role(user)
+        mongo_q: Dict[str, Any] = {}
+        scope = _audit_scope_filter(user)
+        if scope:
+            mongo_q.update(scope)
+        if action_prefix:
+            mongo_q["action"] = {"$regex": f"^{_re_module.escape(action_prefix)}"}
+        if actor_email:
+            mongo_q["actor_email"] = actor_email
+        if resource_type:
+            mongo_q["resource_type"] = resource_type
+        if outcome:
+            mongo_q["outcome"] = outcome
+        ts_range: Dict[str, str] = {}
+        if from_ts:
+            ts_range["$gte"] = from_ts
+        if to_ts:
+            ts_range["$lte"] = to_ts
+        if ts_range:
+            mongo_q["ts"] = ts_range
+        if q:
+            mongo_q.setdefault("$and", []).append({"$or": [
+                {"action": {"$regex": _re_module.escape(q), "$options": "i"}},
+                {"actor_email": {"$regex": _re_module.escape(q), "$options": "i"}},
+            ]})
+
+        total = await db.audit_log.count_documents(mongo_q)
+        rows = await db.audit_log.find(
+            mongo_q, _AUDIT_SAFE_FIELDS,
+        ).sort("ts", -1).skip(cursor).limit(limit).to_list(length=limit)
+
+        for row in rows:
+            row["metadata"] = _scrub_metadata(row.get("metadata"))
+            # Strip the raw resource_id; surface only the opaque ref.
+            res_ref = await _audit_resource_admin_ref(
+                row.get("resource_type"), row.get("resource_id"),
+            )
+            row.pop("resource_id", None)
+            if res_ref:
+                row["resource"] = res_ref
+        rows = [_attach_admin_ref("al", r) for r in rows]
+
+        next_cursor = cursor + len(rows) if (cursor + len(rows)) < total else None
+        await audit.record(
+            action="admin.portal.read.audit_logs",
+            user=user, request=request,
+            resource_type="admin_portal", resource_id="audit_logs",
+            outcome="success", status_code=200,
+            metadata={"limit": limit, "cursor": cursor, "count": len(rows),
+                      "scoped": bool(scope)},
+        )
+        return {"items": rows, "total": total, "limit": limit,
+                "cursor": cursor, "next_cursor": next_cursor}
+
+    @router.get("/admin/portal/audit-logs/{audit_ref}")
+    async def get_audit_log_detail(audit_ref: str, request: Request,
+                                   user=Depends(get_current_user)):
+        require_platform_role(user)
+        oid = _resolve_admin_ref("al", audit_ref)
+        row = await db.audit_log.find_one({"_id": oid}, _AUDIT_SAFE_FIELDS)
+        if not row:
+            raise HTTPException(404, "Audit row not found.")
+        # billing_admin scope must also block direct detail access to
+        # rows outside their 4-prefix scope.
+        scope = _audit_scope_filter(user)
+        if scope:
+            action = row.get("action") or ""
+            if not any(action.startswith(p) for p in _BILLING_ADMIN_AUDIT_SCOPE):
+                raise HTTPException(404, "Audit row not found.")
+        row["metadata"] = _scrub_metadata(row.get("metadata"))
+        res_ref = await _audit_resource_admin_ref(
+            row.get("resource_type"), row.get("resource_id"),
+        )
+        row.pop("resource_id", None)
+        if res_ref:
+            row["resource"] = res_ref
+        row = _attach_admin_ref("al", row)
+        await audit.record(
+            action="admin.portal.read.audit_log_detail",
+            user=user, request=request,
+            resource_type="audit_log", resource_id=audit_ref,
+            outcome="success", status_code=200,
+        )
+        return {"row": row}
+
+    # --- Support Inbox ------------------------------------------------
+    # Locked decision 1a — implement the 3 mutations now.
+    # Locked decision 2a — admin-side only; no public ingestion.
+    _SUPPORT_TAB_ROLES = {"super_admin", "platform_admin", "support_admin"}
+    _SUPPORT_VALID_STATUSES = ("new", "in_progress", "waiting", "resolved")
+    _SUPPORT_NOTE_MAX_LEN = 4096
+    _SUPPORT_SAFE_FIELDS = {
+        "_id": 1, "id": 1,
+        "barn_id": 1, "subject": 1, "description": 1, "channel": 1,
+        "submitter_user_id": 1, "submitter_email": 1,
+        "status": 1, "assignee_user_id": 1, "assignee_email": 1,
+        "internal_notes": 1, "created_at": 1, "updated_at": 1,
+        "resolved_at": 1,
+    }
+
+    def _require_support_access(u: Dict[str, Any]) -> None:
+        if platform_role(u) not in _SUPPORT_TAB_ROLES:
+            raise HTTPException(403, "Your platform role cannot view support tickets.")
+
+    @router.get("/admin/portal/support")
+    async def list_support_tickets(
+        request: Request,
+        status: Optional[str] = Query(default=None, max_length=32),
+        assignee_user_id: Optional[str] = Query(default=None, max_length=64),
+        barn_id: Optional[str] = Query(default=None, max_length=64),
+        q: Optional[str] = Query(default=None, max_length=200),
+        limit: int = Query(default=25, ge=1, le=100),
+        cursor: int = Query(default=0, ge=0),
+        user=Depends(get_current_user),
+    ):
+        require_platform_role(user)
+        _require_support_access(user)
+        mongo_q: Dict[str, Any] = {}
+        if status:
+            mongo_q["status"] = status
+        if assignee_user_id:
+            mongo_q["assignee_user_id"] = assignee_user_id
+        if barn_id:
+            mongo_q["barn_id"] = barn_id
+        if q:
+            safe = _re_module.escape(q)
+            mongo_q["$or"] = [
+                {"subject": {"$regex": safe, "$options": "i"}},
+                {"submitter_email": {"$regex": safe, "$options": "i"}},
+            ]
+        total = await db.support_tickets.count_documents(mongo_q)
+        # Roster view — pure inclusion projection (Mongo doesn't allow
+        # mixed include/exclude). `internal_notes` and `description`
+        # are intentionally OMITTED here; they only surface in detail.
+        _ROSTER_FIELDS = {
+            "_id": 1, "id": 1, "barn_id": 1, "subject": 1, "channel": 1,
+            "submitter_user_id": 1, "submitter_email": 1,
+            "status": 1, "assignee_user_id": 1, "assignee_email": 1,
+            "created_at": 1, "updated_at": 1, "resolved_at": 1,
+        }
+        rows = await db.support_tickets.find(
+            mongo_q, _ROSTER_FIELDS,
+        ).sort("updated_at", -1).skip(cursor).limit(limit).to_list(length=limit)
+        labels = await _facility_label_map([r.get("barn_id") for r in rows])
+        for row in rows:
+            row["facility_name"] = labels.get(row.get("barn_id"))
+        rows = [_attach_admin_ref("st", r) for r in rows]
+        next_cursor = cursor + len(rows) if (cursor + len(rows)) < total else None
+        await audit.record(
+            action="admin.portal.read.support",
+            user=user, request=request,
+            resource_type="admin_portal", resource_id="support",
+            outcome="success", status_code=200,
+            metadata={"limit": limit, "cursor": cursor, "count": len(rows)},
+        )
+        return {"items": rows, "total": total, "limit": limit,
+                "cursor": cursor, "next_cursor": next_cursor}
+
+    @router.get("/admin/portal/support/{ticket_ref}")
+    async def get_support_ticket(ticket_ref: str, request: Request,
+                                 user=Depends(get_current_user)):
+        require_platform_role(user)
+        _require_support_access(user)
+        oid = _resolve_admin_ref("st", ticket_ref)
+        ticket = await db.support_tickets.find_one({"_id": oid}, _SUPPORT_SAFE_FIELDS)
+        if not ticket:
+            raise HTTPException(404, "Ticket not found.")
+        local_id = ticket.get("id")
+        # Recent activity for this ticket — audit_log only (decision 7a).
+        recent_audit = await db.audit_log.find(
+            {"resource_id": local_id, "resource_type": "support_ticket"},
+            {"_id": 0, "id": 1, "ts": 1, "action": 1, "actor_email": 1,
+             "outcome": 1, "metadata": 1},
+        ).sort("ts", -1).limit(20).to_list(length=20)
+        for r in recent_audit:
+            r["metadata"] = _scrub_metadata(r.get("metadata"))
+        ticket = _attach_admin_ref("st", ticket)
+        await audit.record(
+            action="admin.portal.read.support_detail",
+            user=user, request=request,
+            resource_type="support_ticket", resource_id=local_id,
+            outcome="success", status_code=200,
+        )
+        return {"ticket": ticket, "recent_activity": recent_audit}
+
+    @router.post("/admin/portal/support/{ticket_ref}/status")
+    async def support_change_status(ticket_ref: str, body: _SupportStatusBody,
+                                    request: Request,
+                                    user=Depends(get_current_user)):
+        require_platform_role(user)
+        _require_support_access(user)
+        if body.status not in _SUPPORT_VALID_STATUSES:
+            raise HTTPException(400, "Invalid status.")
+        oid = _resolve_admin_ref("st", ticket_ref)
+        ticket = await db.support_tickets.find_one(
+            {"_id": oid}, {"_id": 0, "id": 1, "status": 1},
+        )
+        if not ticket:
+            raise HTTPException(404, "Ticket not found.")
+        before = ticket.get("status")
+        now_iso = datetime.now(timezone.utc).isoformat()
+        update: Dict[str, Any] = {"status": body.status, "updated_at": now_iso}
+        if body.status == "resolved":
+            update["resolved_at"] = now_iso
+        await db.support_tickets.update_one({"_id": oid}, {"$set": update})
+        await audit.record(
+            action="admin.portal.support.status_change",
+            user=user, request=request,
+            resource_type="support_ticket", resource_id=ticket["id"],
+            outcome="success", status_code=200,
+            metadata={"before": before, "after": body.status},
+        )
+        return {"ok": True, "status": body.status}
+
+    @router.post("/admin/portal/support/{ticket_ref}/assign")
+    async def support_assign(ticket_ref: str, body: _SupportAssignBody,
+                             request: Request,
+                             user=Depends(get_current_user)):
+        require_platform_role(user)
+        _require_support_access(user)
+        oid = _resolve_admin_ref("st", ticket_ref)
+        ticket = await db.support_tickets.find_one(
+            {"_id": oid},
+            {"_id": 0, "id": 1, "assignee_user_id": 1},
+        )
+        if not ticket:
+            raise HTTPException(404, "Ticket not found.")
+        before = ticket.get("assignee_user_id")
+        # Resolve assignee email (defensive; clear if assignee=None).
+        assignee_email: Optional[str] = None
+        if body.assignee_user_id:
+            assignee = await db.users.find_one(
+                {"id": body.assignee_user_id},
+                {"_id": 0, "platform_role": 1, "email": 1},
+            )
+            if not assignee:
+                raise HTTPException(400, "Assignee user not found.")
+            if not assignee.get("platform_role"):
+                raise HTTPException(400, "Assignee must hold a platform role.")
+            assignee_email = assignee.get("email")
+        await db.support_tickets.update_one(
+            {"_id": oid},
+            {"$set": {
+                "assignee_user_id": body.assignee_user_id,
+                "assignee_email": assignee_email,
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+            }},
+        )
+        await audit.record(
+            action="admin.portal.support.assign",
+            user=user, request=request,
+            resource_type="support_ticket", resource_id=ticket["id"],
+            outcome="success", status_code=200,
+            metadata={"before_user_id": before,
+                      "after_user_id": body.assignee_user_id},
+        )
+        return {"ok": True, "assignee_user_id": body.assignee_user_id}
+
+    @router.post("/admin/portal/support/{ticket_ref}/notes")
+    async def support_add_note(ticket_ref: str, body: _SupportNoteBody,
+                               request: Request,
+                               user=Depends(get_current_user)):
+        require_platform_role(user)
+        _require_support_access(user)
+        oid = _resolve_admin_ref("st", ticket_ref)
+        ticket = await db.support_tickets.find_one({"_id": oid}, {"_id": 0, "id": 1})
+        if not ticket:
+            raise HTTPException(404, "Ticket not found.")
+        note = {
+            "id": f"note_{uuid.uuid4()}",
+            "author_user_id": user.get("id"),
+            "author_email": user.get("email"),
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "body": body.body,
+        }
+        await db.support_tickets.update_one(
+            {"_id": oid},
+            {"$push": {"internal_notes": note},
+             "$set": {"updated_at": note["ts"]}},
+        )
+        # CRITICAL: note body MUST NEVER reach audit metadata. Only
+        # `note_present: true` is logged (founder-locked guardrail).
+        await audit.record(
+            action="admin.portal.support.add_note",
+            user=user, request=request,
+            resource_type="support_ticket", resource_id=ticket["id"],
+            outcome="success", status_code=200,
+            metadata={"note_present": True},
+        )
+        return {"ok": True, "note_id": note["id"]}
+
+    # --- Alerts -------------------------------------------------------
+    # Read-only; derived on-read from existing collections. NO alerts
+    # collection. NO dismissal endpoint (locked guardrail).
+    _ALERTS_TAB_ROLES = {
+        "super_admin", "platform_admin", "support_admin", "billing_admin",
+    }
+    _BILLING_ADMIN_ALERT_KEYS = {
+        "billing_webhook_retry", "payment_failure",
+        "pending_subscription_email_stale",
+    }
+
+    def _alert_ref(key: str, source_ids: List[str]) -> str:
+        """Deterministic opaque ref for an alert row — derived from the
+        alert key + the sorted set of source ids it summarizes."""
+        import hashlib
+        h = hashlib.sha256(
+            (key + "|" + ",".join(sorted(source_ids))).encode("utf-8")
+        ).hexdigest()
+        return f"av_{h[:24]}"
+
+    @router.get("/admin/portal/alerts")
+    async def list_alerts(request: Request,
+                          user=Depends(get_current_user)):
+        require_platform_role(user)
+        role = platform_role(user)
+        if role not in _ALERTS_TAB_ROLES:
+            raise HTTPException(403, "Your platform role cannot view alerts.")
+        scoped = role == "billing_admin"
+        now = datetime.now(timezone.utc)
+        h24 = (now - timedelta(hours=24)).isoformat()
+        h72 = (now - timedelta(hours=72)).isoformat()
+        h48 = (now - timedelta(hours=48)).isoformat()
+        h1 = (now - timedelta(hours=1)).isoformat()
+        alerts: List[Dict[str, Any]] = []
+
+        # 1) billing_webhook_retry
+        if (not scoped) or "billing_webhook_retry" in _BILLING_ADMIN_ALERT_KEYS:
+            rows = await db.billing_events.find(
+                {"processing_status": {"$in": [
+                    "retry_502", "metadata_missing_retryable",
+                ]}, "event_created_at": {"$gte": h24}},
+                {"_id": 1, "barn_id": 1, "event_created_at": 1},
+            ).to_list(length=500)
+            if rows:
+                by_barn: Dict[Optional[str], List[Dict[str, Any]]] = {}
+                for r in rows:
+                    by_barn.setdefault(r.get("barn_id"), []).append(r)
+                for barn_id, group in by_barn.items():
+                    src_ids = [str(g["_id"]) for g in group]
+                    ts_vals = [g.get("event_created_at") for g in group if g.get("event_created_at")]
+                    alerts.append({
+                        "alert_ref": _alert_ref("billing_webhook_retry", src_ids),
+                        "key": "billing_webhook_retry",
+                        "severity": "warning",
+                        "facility_id": barn_id, "facility_name": None,
+                        "count": len(group),
+                        "oldest_at": min(ts_vals) if ts_vals else None,
+                        "newest_at": max(ts_vals) if ts_vals else None,
+                        "drill_in": None,
+                    })
+
+        # 2) pending_subscription_email_stale
+        if (not scoped) or "pending_subscription_email_stale" in _BILLING_ADMIN_ALERT_KEYS:
+            rows = await db.subscriptions.find(
+                {"pending_emails": {"$exists": True, "$ne": []},
+                 "updated_at": {"$lt": h72}},
+                {"_id": 1, "barn_id": 1, "updated_at": 1, "pending_emails": 1},
+            ).to_list(length=500)
+            for r in rows:
+                alerts.append({
+                    "alert_ref": _alert_ref("pending_subscription_email_stale", [str(r["_id"])]),
+                    "key": "pending_subscription_email_stale",
+                    "severity": "warning",
+                    "facility_id": r.get("barn_id"), "facility_name": None,
+                    "count": len(r.get("pending_emails") or []),
+                    "oldest_at": r.get("updated_at"),
+                    "newest_at": r.get("updated_at"),
+                    "drill_in": {"kind": "subscription",
+                                 "admin_ref": _admin_ref("as", r["_id"])},
+                })
+
+        # 3) payment_failure
+        if (not scoped) or "payment_failure" in _BILLING_ADMIN_ALERT_KEYS:
+            rows = await db.subscription_invoices.find(
+                {"payment_failure_count": {"$gt": 0},
+                 "status": {"$ne": "paid"}},
+                {"_id": 1, "barn_id": 1, "subscription_id": 1,
+                 "payment_failure_count": 1, "updated_at": 1},
+            ).to_list(length=500)
+            for r in rows:
+                alerts.append({
+                    "alert_ref": _alert_ref("payment_failure", [str(r["_id"])]),
+                    "key": "payment_failure",
+                    "severity": "warning",
+                    "facility_id": r.get("barn_id"), "facility_name": None,
+                    "count": r.get("payment_failure_count") or 1,
+                    "oldest_at": r.get("updated_at"),
+                    "newest_at": r.get("updated_at"),
+                    "drill_in": {"kind": "payment",
+                                 "admin_ref": _admin_ref("ap", r["_id"])},
+                })
+
+        # 4) pending_user_approval_stale (NOT in billing_admin scope)
+        if not scoped:
+            rows = await db.users.find(
+                {"role_status": "pending_review",
+                 "created_at": {"$lt": h48}},
+                {"_id": 0, "id": 1, "barn_id": 1, "created_at": 1},
+            ).to_list(length=500)
+            for r in rows:
+                alerts.append({
+                    "alert_ref": _alert_ref("pending_user_approval_stale", [r["id"]]),
+                    "key": "pending_user_approval_stale",
+                    "severity": "warning",
+                    "facility_id": r.get("barn_id"), "facility_name": None,
+                    "count": 1,
+                    "oldest_at": r.get("created_at"),
+                    "newest_at": r.get("created_at"),
+                    "drill_in": {"kind": "user", "admin_ref": r["id"]},
+                })
+
+        # 5) denied_admin_access_pattern (NOT in billing_admin scope)
+        if not scoped:
+            pipeline = [
+                {"$match": {"outcome": "denied",
+                            "action": {"$regex": "^admin\\.portal\\."},
+                            "ts": {"$gte": h1}}},
+                {"$group": {"_id": "$actor_email",
+                            "count": {"$sum": 1},
+                            "oldest": {"$min": "$ts"},
+                            "newest": {"$max": "$ts"}}},
+                {"$match": {"count": {"$gte": 3}}},
+            ]
+            agg_rows = await db.audit_log.aggregate(pipeline).to_list(length=200)
+            for r in agg_rows:
+                actor = r.get("_id") or "unknown"
+                alerts.append({
+                    "alert_ref": _alert_ref("denied_admin_access_pattern", [actor]),
+                    "key": "denied_admin_access_pattern",
+                    "severity": "warning",
+                    "facility_id": None, "facility_name": None,
+                    "actor_email": actor, "count": r.get("count", 0),
+                    "oldest_at": r.get("oldest"), "newest_at": r.get("newest"),
+                    "drill_in": None,
+                })
+
+        # Resolve facility names in batch (no Stripe IDs).
+        facility_labels = await _facility_label_map(
+            [a.get("facility_id") for a in alerts]
+        )
+        for a in alerts:
+            a["facility_name"] = facility_labels.get(a.get("facility_id"))
+
+        await audit.record(
+            action="admin.portal.read.alerts",
+            user=user, request=request,
+            resource_type="admin_portal", resource_id="alerts",
+            outcome="success", status_code=200,
+            metadata={"count": len(alerts), "scoped": scoped},
+        )
+        return {"items": alerts, "total": len(alerts)}
 
     return router

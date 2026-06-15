@@ -72,7 +72,11 @@ export default function AdminSubscriptions() {
         setErr(e?.response?.data?.detail || "Failed to load subscriptions.");
         setLoading(false);
       });
-    return () => { cancelled = true; };
+    // Smooth stale-error UX (Admin-5a carry-forward 7a): when the user
+    // changes filters or paginates after a failed request, the cleanup
+    // clears `err` before the next request starts so the old message
+    // does not linger until the new request succeeds.
+    return () => { cancelled = true; setErr(null); };
   }, [q, status, tier, cycle, cursor]);
 
   return (
@@ -96,7 +100,7 @@ export default function AdminSubscriptions() {
             type="text"
             value={q}
             onChange={(e) => { setCursor(0); setQ(e.target.value); }}
-            placeholder="Facility name or subscription id"
+            placeholder="Facility name"
             data-testid="admin-subscriptions-search"
             className="w-full px-3 py-2 rounded-lg border border-equinesync-graphite/15 bg-equinesync-frost text-[13px] focus:outline-none focus:border-equinesync-slate"
           />

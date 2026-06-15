@@ -22,6 +22,10 @@ const LABEL_TO_TONE = {
   past_due: "pending", retry_502: "pending",
   metadata_missing_retryable: "pending", incomplete: "pending",
   pending_review: "pending", pending: "pending", draft: "pending", open: "pending",
+  // Admin-6 support ticket states.
+  new: "pending", in_progress: "active", waiting: "pending", resolved: "active",
+  // Admin-6 alert severities.
+  warning: "pending", info: "muted",
   rejected: "rejected",
   suspended: "suspended",
   canceled: "muted", void: "muted", uncollectible: "muted",

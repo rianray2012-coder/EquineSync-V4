@@ -98,7 +98,7 @@ function PaymentsTab() {
         setErr(e?.response?.data?.detail || "Failed to load payments.");
         setLoading(false);
       });
-    return () => { cancelled = true; };
+    return () => { cancelled = true; setErr(null); };
   }, [status, cursor]);
 
   return (
@@ -228,7 +228,7 @@ function EventsTab() {
         setErr(e?.response?.data?.detail || "Failed to load webhook events.");
         setLoading(false);
       });
-    return () => { cancelled = true; };
+    return () => { cancelled = true; setErr(null); };
   }, [processingStatus, cursor]);
 
   return (

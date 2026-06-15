@@ -84,6 +84,9 @@ import AdminApprovals from "./pages/admin/AdminApprovals";
 import AdminFacilities from "./pages/admin/AdminFacilities";
 import AdminSubscriptions from "./pages/admin/AdminSubscriptions";
 import AdminBilling from "./pages/admin/AdminBilling";
+import AdminAuditLogs from "./pages/admin/AdminAuditLogs";
+import AdminSupport from "./pages/admin/AdminSupport";
+import AdminAlerts from "./pages/admin/AdminAlerts";
 
 const Protected = ({ children }) => {
   const { user, loading } = useAuth();
@@ -132,12 +135,12 @@ function App() {
               <Route path="subscriptions" element={<AdminSubscriptions />} />
               <Route path="billing" element={<AdminBilling />} />
               <Route path="permissions" element={<AdminPlaceholder section="Permissions" phase="Admin-7" description="Read-only role × capability matrix from the backend." />} />
-              <Route path="support" element={<AdminPlaceholder section="Support" phase="Admin-6" description="Inbox of user-reported issues with internal notes + assignment." />} />
-              <Route path="alerts" element={<AdminPlaceholder section="Alerts" phase="Admin-6" description="Failed payments, webhook errors, overdue billing, SLA warnings — auto-populated." />} />
+              <Route path="support" element={<AdminSupport />} />
+              <Route path="alerts" element={<AdminAlerts />} />
               <Route path="reports" element={<AdminPlaceholder section="Reports" phase="Admin-7" description="Usage analytics, growth, churn, conversion. CSV export." />} />
               <Route path="integrations" element={<AdminPlaceholder section="Integrations" phase="Admin-7" description="Connected integrations, sync status, retry controls — clearly labelled if any rows are demo." />} />
               <Route path="settings" element={<AdminPlaceholder section="Settings" phase="Admin-7" description="App-wide settings, feature flags, templates, announcements (read-only first)." />} />
-              <Route path="audit-logs" element={<AdminPlaceholder section="Audit Logs" phase="Admin-6" description="Searchable append-only audit trail with detail drawer + CSV export." />} />
+              <Route path="audit-logs" element={<AdminAuditLogs />} />
             </Route>
 
             <Route element={<Protected><AppShell /></Protected>}>
