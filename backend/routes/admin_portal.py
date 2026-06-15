@@ -250,21 +250,40 @@ class _SupportNoteBody(BaseModel):
 
 import re as _re_module
 
-# Stripe-shaped ID VALUE regex — used by `_scrub_metadata` to redact
-# any string that looks like a raw Stripe identifier, even if it ended
-# up nested deep inside an audit_log metadata blob. Reuses the exact
-# pattern enforced by Admin-5's leak guard.
+
+# Stripe-shaped ID redactor — Codex round-1 fix:
+#   * adds `pi_` (payment_intent) and `ch_` (charge) prefixes
+#   * scrubs EMBEDDED Stripe IDs inside longer strings, not just
+#     whole-string matches
+# Real Stripe IDs are `<prefix>_<14-32 base62 chars>` (no underscores
+# inside the body). The 14-char minimum keeps the regex from matching
+# legitimate snake_case words like `in_progress`, `branch_alpha`, etc.
+_STRIPE_VALUE_PATTERNS = ("sub", "evt", "in", "cus", "price", "pi", "ch")
+_STRIPE_EMBEDDED_RE = _re_module.compile(
+    r"\b(?:" + "|".join(_STRIPE_VALUE_PATTERNS) + r")_[A-Za-z0-9]{14,}\b"
+)
+# Whole-string variant — for the readable "[stripe_id_redacted]"
+# marker on a value that is EXACTLY a Stripe id. Allows the historical
+# inner-`_` shape some test fixtures used.
 _STRIPE_VALUE_RE = _re_module.compile(
-    r"^(sub|evt|in|cus|price)_[A-Za-z0-9_]{4,}$"
+    r"^(?:" + "|".join(_STRIPE_VALUE_PATTERNS) + r")_[A-Za-z0-9_]{4,}$"
 )
 _METADATA_VALUE_MAX_LEN = 256
+
+
+def _redact_stripe_in_string(s: str) -> str:
+    """Replace every Stripe-shaped substring inside `s` with
+    `[stripe_id_redacted]`. Used so longer strings carrying an
+    embedded Stripe ID (e.g. error messages like "missing sub_xxx")
+    don't leak."""
+    return _STRIPE_EMBEDDED_RE.sub("[stripe_id_redacted]", s)
 
 
 def _scrub_metadata(meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
     """Strip any sensitive-looking keys from audit metadata before
     surfacing it. Defense-in-depth — these keys should never have been
-    logged in the first place. Also redacts Stripe-shaped values and
-    truncates long strings (Admin-6 guardrail, decision 3a)."""
+    logged in the first place. Also redacts Stripe-shaped values
+    (exact AND embedded) and truncates long strings."""
     if not isinstance(meta, dict):
         return {}
     out: Dict[str, Any] = {}
@@ -281,12 +300,17 @@ def _scrub_metadata(meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def _scrub_metadata_value(v: Any) -> Any:
-    """Recursively scrub a metadata value: redact Stripe-shaped strings,
-    truncate long strings, preserve numerics/bools/None, recurse into
-    nested dicts/lists."""
+    """Recursively scrub a metadata value: redact Stripe-shaped strings
+    (both whole-string and embedded), truncate long strings, preserve
+    numerics/bools/None, recurse into nested dicts/lists."""
     if isinstance(v, str):
+        # Whole-string redaction (kept for backwards readability —
+        # operator sees a clean marker rather than a partial match).
         if _STRIPE_VALUE_RE.match(v):
             return "[stripe_id_redacted]"
+        # Embedded redaction — catches Stripe IDs nested inside longer
+        # strings like "Error: subscription sub_xyz failed".
+        v = _redact_stripe_in_string(v)
         if len(v) > _METADATA_VALUE_MAX_LEN:
             return v[:_METADATA_VALUE_MAX_LEN] + "…(truncated)"
         return v
@@ -295,6 +319,15 @@ def _scrub_metadata_value(v: Any) -> Any:
     if isinstance(v, list):
         return [_scrub_metadata_value(x) for x in v]
     return v
+
+
+def _scrub_text(s: Optional[str]) -> Optional[str]:
+    """Sanitize a free-text field destined for the API surface.
+    Same Stripe-ID embedded-redaction as `_scrub_metadata_value`, no
+    truncation (callers handle length policy)."""
+    if not isinstance(s, str):
+        return s
+    return _redact_stripe_in_string(s)
 
 
 def _matches_activity_allowlist(action: str) -> bool:
@@ -1626,6 +1659,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
     # Locked decision 1a — implement the 3 mutations now.
     # Locked decision 2a — admin-side only; no public ingestion.
     _SUPPORT_TAB_ROLES = {"super_admin", "platform_admin", "support_admin"}
+    # Codex round-1 fix: an assignee MUST hold one of the support-tab
+    # roles. billing_admin / read_only_auditor — even though they hold
+    # a platform_role — cannot own a ticket.
+    _SUPPORT_ASSIGNEE_ROLES = _SUPPORT_TAB_ROLES
     _SUPPORT_VALID_STATUSES = ("new", "in_progress", "waiting", "resolved")
     _SUPPORT_NOTE_MAX_LEN = 4096
     _SUPPORT_SAFE_FIELDS = {
@@ -1683,6 +1720,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
         labels = await _facility_label_map([r.get("barn_id") for r in rows])
         for row in rows:
             row["facility_name"] = labels.get(row.get("barn_id"))
+            # Scrub free-text on the roster surface too — subject can
+            # contain Stripe IDs or sensitive substrings.
+            if row.get("subject"):
+                row["subject"] = _scrub_text(row["subject"])
         rows = [_attach_admin_ref("st", r) for r in rows]
         next_cursor = cursor + len(rows) if (cursor + len(rows)) < total else None
         await audit.record(
@@ -1705,6 +1746,18 @@ def build_router(*, db, get_current_user) -> APIRouter:
         if not ticket:
             raise HTTPException(404, "Ticket not found.")
         local_id = ticket.get("id")
+        # Codex round-1 fix: scrub free-text fields before they cross
+        # the API boundary. A note body or description could carry a
+        # Stripe id or other sensitive substring; redact it without
+        # touching the underlying ticket record.
+        if ticket.get("description"):
+            ticket["description"] = _scrub_text(ticket["description"])
+        if ticket.get("internal_notes"):
+            for n in ticket["internal_notes"]:
+                if isinstance(n, dict) and n.get("body"):
+                    n["body"] = _scrub_text(n["body"])
+        if ticket.get("subject"):
+            ticket["subject"] = _scrub_text(ticket["subject"])
         # Recent activity for this ticket — audit_log only (decision 7a).
         recent_audit = await db.audit_log.find(
             {"resource_id": local_id, "resource_type": "support_ticket"},
@@ -1774,8 +1827,12 @@ def build_router(*, db, get_current_user) -> APIRouter:
             )
             if not assignee:
                 raise HTTPException(400, "Assignee user not found.")
-            if not assignee.get("platform_role"):
-                raise HTTPException(400, "Assignee must hold a platform role.")
+            # Codex round-1 fix: restrict to support-capable roles only.
+            # billing_admin / read_only_auditor cannot own tickets.
+            if assignee.get("platform_role") not in _SUPPORT_ASSIGNEE_ROLES:
+                raise HTTPException(
+                    400, "Assignee must be a support-capable platform admin.",
+                )
             assignee_email = assignee.get("email")
         await db.support_tickets.update_one(
             {"_id": oid},

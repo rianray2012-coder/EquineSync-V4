@@ -456,6 +456,135 @@ def test_support_assign_rejects_non_platform_user(db):
         db.audit_log.delete_many({"resource_id": tid})
 
 
+# Codex round-1 fix: assignee MUST hold a SUPPORT-capable platform role.
+# billing_admin / read_only_auditor — even with platform_role set —
+# cannot own a ticket.
+@pytest.mark.parametrize("disallowed_role", ["billing_admin", "read_only_auditor"])
+def test_support_assign_rejects_non_support_platform_roles(db, disallowed_role):
+    s = _admin_session(db, "platform_admin")
+    tid = _plant_support_ticket(db)
+    ref = _ticket_ref(db, tid)
+    # Plant a user with the disallowed platform role.
+    rs = requests.post(f"{API}/auth/signup", json={
+        "email": f"disallowed_{uuid.uuid4().hex[:6]}@example.com",
+        "password": "securepass1",
+        "full_name": "Disallowed", "role": "horse_owner",
+    }, timeout=15)
+    blocked = rs.json()["user"]
+    db.users.update_one({"id": blocked["id"]},
+                        {"$set": {"platform_role": disallowed_role}})
+    try:
+        r = requests.post(
+            f"{API}/admin/portal/support/{ref}/assign",
+            headers=_bearer(s), json={"assignee_user_id": blocked["id"]},
+            timeout=10,
+        )
+        assert r.status_code == 400, (
+            f"{disallowed_role} was accepted as assignee: {r.text}"
+        )
+        # And the ticket remains unassigned.
+        tk = db.support_tickets.find_one({"id": tid})
+        assert tk.get("assignee_user_id") is None
+    finally:
+        db.support_tickets.delete_one({"id": tid})
+        db.audit_log.delete_many({"resource_id": tid})
+
+
+# Codex round-1 fix: support detail response must scrub free-text
+# fields. A note (or description) carrying a Stripe ID / secret-like
+# string must not reach the API surface.
+def test_support_detail_scrubs_note_body_and_description(db):
+    s = _admin_session(db, "platform_admin")
+    tid = _plant_support_ticket(db)
+    ref = _ticket_ref(db, tid)
+    # Inject a description containing leak tokens directly into the
+    # ticket record (bypassing the in-app form).
+    leak_desc = ("Error: missing sub_1Mw4xK2eZvKYlo2CBQ8 "
+                 "and pi_3M3Pn82eZvKYlo2CXr after ch_1Mw4xK2eZvKYlo2CBQ")
+    db.support_tickets.update_one(
+        {"id": tid}, {"$set": {"description": leak_desc}},
+    )
+    # Add a note that contains a Stripe-shaped value via the real API.
+    leak_note = ("ticket linked to sub_1Mw4xK2eZvKYlo2CBQ8yz9Eo  — "
+                 "and previous attempt cus_NfgvL3IFvHRu4P, "
+                 "and intent pi_3M3Pn82eZvKYlo2CXr, charge ch_3M3Pn82eZv.")
+    requests.post(
+        f"{API}/admin/portal/support/{ref}/notes",
+        headers=_bearer(s), json={"body": leak_note}, timeout=10,
+    )
+    try:
+        r = requests.get(f"{API}/admin/portal/support/{ref}",
+                         headers=_bearer(s), timeout=10)
+        assert r.status_code == 200
+        body_text = r.text
+        # Every embedded Stripe-shaped ID must be redacted out.
+        for forbidden in (
+            "sub_1Mw4xK2eZvKYlo2CBQ8",          # in description
+            "sub_1Mw4xK2eZvKYlo2CBQ8yz9Eo",     # in note
+            "pi_3M3Pn82eZvKYlo2CXr",            # in description AND note
+            "ch_1Mw4xK2eZvKYlo2CBQ",            # in description
+            "cus_NfgvL3IFvHRu4P",               # in note
+        ):
+            assert forbidden not in body_text, (
+                f"support detail leaked embedded Stripe id '{forbidden}'"
+            )
+        # And the planted descriptions/notes should still contain the
+        # human prose around the redacted ID.
+        body_json = r.json()
+        desc = (body_json["ticket"].get("description") or "")
+        assert "missing" in desc and "and" in desc, (
+            "scrub stripped all context — should only redact the IDs"
+        )
+        notes = body_json["ticket"].get("internal_notes") or []
+        assert notes, "note disappeared"
+        assert "ticket linked to" in (notes[-1].get("body") or "")
+        # The ticket row in the DB MUST still hold the raw note body.
+        tk = db.support_tickets.find_one({"id": tid})
+        raw_notes = tk.get("internal_notes") or []
+        assert any("sub_1Mw4xK2eZvKYlo2CBQ8yz9Eo" in (n.get("body") or "")
+                   for n in raw_notes), (
+            "DB-level note body MUST be preserved verbatim — scrub is "
+            "boundary-only, not in-place"
+        )
+    finally:
+        db.support_tickets.delete_one({"id": tid})
+        db.audit_log.delete_many({"resource_id": tid})
+
+
+# Codex round-1 fix: `pi_` and `ch_` prefixes are now in scope; embedded
+# Stripe-shaped substrings are redacted from audit metadata text.
+def test_audit_metadata_redacts_embedded_stripe_ids(db):
+    aid = _plant_audit_row(
+        db, action="admin.portal.test_embedded_stripe",
+        actor_email="ops@example.com",
+        metadata={"reason": ("failed at pi_3M3Pn82eZvKYlo2CXr "
+                             "after ch_1Mw4xK2eZvKYlo2CBQ on sub_1Mw4xK2eZvKYlo2C"),
+                  "ok": "in_progress is fine and so is branch_alpha"},
+    )
+    try:
+        s = _admin_session(db, "platform_admin")
+        r = requests.get(
+            f"{API}/admin/portal/audit-logs?actor_email=ops@example.com&limit=20",
+            headers=_bearer(s), timeout=10,
+        )
+        target = next(x for x in r.json()["items"]
+                      if x.get("action") == "admin.portal.test_embedded_stripe")
+        meta = target.get("metadata") or {}
+        reason = meta.get("reason") or ""
+        # All 3 embedded ids redacted.
+        for forbidden in ("pi_3M3Pn82eZvKYlo2CXr",
+                          "ch_1Mw4xK2eZvKYlo2CBQ",
+                          "sub_1Mw4xK2eZvKYlo2C"):
+            assert forbidden not in reason, (
+                f"audit metadata leaked embedded '{forbidden}'"
+            )
+        assert "[stripe_id_redacted]" in reason
+        # Conversational tokens MUST NOT be touched.
+        assert meta.get("ok") == "in_progress is fine and so is branch_alpha"
+    finally:
+        db.audit_log.delete_one({"id": aid})
+
+
 def test_support_note_body_never_appears_in_audit_metadata(db):
     """🛡 Codex-locked guardrail — note body MUST stay in
     support_tickets.internal_notes. Audit metadata MUST only contain

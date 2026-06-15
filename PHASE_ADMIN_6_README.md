@@ -1,31 +1,88 @@
 # Phase Admin-6 — Audit Logs + Support Inbox + Alerts
 
-**Status:** Ready for Codex round-1 review.
-**Date:** Feb 24, 2026.
+**Status:** Codex round-1 fixes applied. Ready for re-review.
+**Date:** Feb 24, 2026 · Round-1 fixes Feb 24 2026.
 **Scope:** Audit logs (read), Support inbox (read + 3 gated mutations), Alerts (read-only, derived).
 
 ---
 
-## ✅ Locked founder decisions
+## 🔁 Codex round-1 fixes
+
+### Blocker 1 — Support assignee role restriction ✅
+- `_SUPPORT_ASSIGNEE_ROLES = _SUPPORT_TAB_ROLES` (`super_admin`, `platform_admin`, `support_admin`).
+- `support_assign` now rejects assignees whose `platform_role` is `billing_admin` or `read_only_auditor` with `400 Assignee must be a support-capable platform admin.`
+- New parametrised test `test_support_assign_rejects_non_support_platform_roles` covers both disallowed roles.
+
+### Blocker 2 — Support detail free-text sanitization ✅
+- New module helper `_scrub_text()` (Stripe-shaped embedded-substring redaction, no truncation — callers manage length).
+- `get_support_ticket` now scrubs `subject`, `description`, and every `internal_notes[].body` before returning.
+- `list_support_tickets` also scrubs the roster `subject` field.
+- **Boundary-only scrub** — the underlying `support_tickets` document remains verbatim so future audit / export surfaces can reason about real content.
+- New regression `test_support_detail_scrubs_note_body_and_description` plants a description and a note carrying real-shape `sub_…`, `pi_…`, `ch_…`, `cus_…` ids, calls the API, and asserts none of the values appear in the response while the conversational prose around them is preserved. Also asserts the raw note body is still on disk.
+
+### Blocker 3 — Stripe-ID redactor now catches `pi_`, `ch_`, and embedded substrings ✅
+- `_STRIPE_VALUE_PATTERNS = (sub, evt, in, cus, price, pi, ch)`.
+- New `_STRIPE_EMBEDDED_RE = \b(?:…)_[A-Za-z0-9]{14,}\b` — anchored to word boundaries and requires a Stripe-realistic 14+ alphanumeric body. The 14-char minimum keeps the regex from misfiring on legitimate snake_case words (`in_progress`, `branch_alpha`, `pi_chart`, `change_log`, etc.).
+- `_scrub_metadata_value()` redacts whole-string Stripe IDs as `[stripe_id_redacted]` (readable marker) and replaces every embedded Stripe-shaped substring inline with `[stripe_id_redacted]`.
+- New regression `test_audit_metadata_redacts_embedded_stripe_ids` plants a metadata string carrying `pi_…`, `ch_…`, AND `sub_…` embedded in prose, and asserts:
+  - All three are redacted to `[stripe_id_redacted]`.
+  - The phrases `in_progress is fine` and `branch_alpha` survive untouched (no false positives).
+
+---
+
+## ✅ Locked founder decisions (unchanged from round-1)
 
 | # | Decision | Implementation |
 |---|---|---|
 | 1a | Implement the 3 support mutations now | `POST /support/{ref}/status`, `/assign`, `/notes` — all audited |
-| 2a | Admin-side only; NO public ticket ingestion | No `POST /api/support/tickets` endpoint exposed |
-| 3a | Scrub keys + Stripe-VALUE regex + length truncation | Applied to `_scrub_metadata`; recurses into nested dicts/lists |
-| 4a | `billing_admin` audit scope = 4 prefixes | Server-side `action $regex` filter; cannot be widened by caller |
+| 2a | Admin-side only; NO public ticket ingestion | No public ingestion endpoint exposed |
+| 3a | Scrub keys + Stripe-VALUE regex + length truncation | Now also handles **embedded** Stripe IDs and `pi_`/`ch_` prefixes |
+| 4a | `billing_admin` audit scope = 4 prefixes | Server-side `action $regex` filter; out-of-scope detail → 404 |
 | 5a | `denied_admin_access_pattern` severity | `"warning"` (Smoky Lilac pill) |
-| 6a | Three separate sidebar nav items | Audit Logs / Support / Alerts (already wired in `AdminSidebar`) |
-| 7a | Fold Admin-5a carry-forwards | Subscription placeholder → "Facility name"; `setErr(null)` in effect cleanup across the 5 Admin-4/5 lists |
+| 6a | Three separate sidebar nav items | Audit Logs / Support / Alerts |
+| 7a | Fold Admin-5a carry-forwards | Subscription placeholder + `setErr(null)` cleanup |
 
 ### 🛡 Codex-locked guardrail (CRITICAL)
 
-> Support note bodies may live in `support_tickets.internal_notes`, but
-> **MUST NEVER appear in audit metadata**. Tests plant `STRIPELEAK`,
-> `sub_…`, `token`, and `password` payloads and confirm the audit row
-> only contains `{"note_present": true}`.
+Support note bodies live in `support_tickets.internal_notes` but
+**NEVER appear in audit metadata**. Round-1 test
+`test_support_note_body_never_appears_in_audit_metadata` plants
+`STRIPELEAK`, `sub_LEAKED_…`, `password=hunter2`, `token=secret`,
+`api_key=evilkey` in the note body and asserts NONE of them appear in
+the resulting audit document. Note body is stored in the ticket
+record only.
 
-✅ Enforced by `admin.portal.support.add_note` — the server logs only `note_present: True` and never references the note body. Test `test_support_note_body_never_appears_in_audit_metadata` plants every locked leak token in the note body, calls the endpoint, and asserts NONE of them appear anywhere in the resulting audit document.
+---
+
+## 🧪 Tests run
+
+```
+python -m pytest tests/test_admin_portal_admin6.py
+# 49 passed in ~85s
+```
+
+49 tests total = 45 original + 4 round-1 regressions:
+- `test_support_assign_rejects_non_support_platform_roles[billing_admin]`
+- `test_support_assign_rejects_non_support_platform_roles[read_only_auditor]`
+- `test_support_detail_scrubs_note_body_and_description`
+- `test_audit_metadata_redacts_embedded_stripe_ids`
+
+**Regression:** Admin-5 — 41/41 ✅ (Admin-4, Admin-1 unchanged from prior runs).
+
+---
+
+## 📁 Files changed (round-1 delta only)
+
+- `backend/routes/admin_portal.py` — extended Stripe redactor (`pi_` / `ch_` + embedded substring); added `_scrub_text()` helper; tightened `_SUPPORT_ASSIGNEE_ROLES` and the `support_assign` validator; added boundary scrub to `get_support_ticket` and `list_support_tickets`.
+- `backend/tests/test_admin_portal_admin6.py` — 4 new regression tests.
+- `PHASE_ADMIN_6_README.md` — this section.
+
+## 🚧 Untouched (still)
+
+- Phase 9 / Phase 15 / user-state / facility-state surfaces — fully untouched.
+- No Stripe SDK calls.
+- No ticket-ingestion endpoint.
+- No alert dismissal.
 
 ---
 

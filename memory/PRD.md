@@ -1324,6 +1324,31 @@ Phase 9 isolation sweep.
 
 **Packaged:** `/app/phase_admin_6_changes.zip` for Codex review.
 
+**Codex round-1 fixes (Feb 24 2026):** ✅ All 3 blockers addressed.
+1. **Support assignee role restriction** — `_SUPPORT_ASSIGNEE_ROLES`
+   limited to `{super_admin, platform_admin, support_admin}`.
+   `billing_admin` and `read_only_auditor` rejected with 400.
+   Regression: `test_support_assign_rejects_non_support_platform_roles`
+   (parametrised × 2).
+2. **Support detail free-text sanitization** — new boundary helper
+   `_scrub_text()` applied to `subject`, `description`, and every
+   `internal_notes[].body` in both list and detail endpoints. DB
+   document remains verbatim; scrub is API-boundary-only.
+   Regression: `test_support_detail_scrubs_note_body_and_description`
+   plants real-shape Stripe IDs in description AND note and asserts
+   they are redacted out while the surrounding prose survives.
+3. **Stripe ID redactor extended** — added `pi_`, `ch_` prefixes;
+   added embedded-substring redaction via
+   `\b(?:sub|evt|in|cus|price|pi|ch)_[A-Za-z0-9]{14,}\b`. The 14-char
+   minimum keeps the regex from false-matching legitimate snake_case
+   words like `in_progress`, `branch_alpha`, etc.
+   Regression: `test_audit_metadata_redacts_embedded_stripe_ids`
+   plants 3 Stripe-shaped IDs inside a longer string and confirms all
+   are redacted while `in_progress` survives.
+
+**Tests:** `tests/test_admin_portal_admin6.py` — **49/49 green**
+(45 original + 4 round-1 regressions). Admin-5 — 41/41 ✅.
+
 ### Admin Portal — Phase Status (post Admin-4)
 
 | Phase   | Scope                                                        | Status |
@@ -1335,5 +1360,5 @@ Phase 9 isolation sweep.
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
 | Admin-5  | Subscription + billing control center                         | ✅ Codex-approved & locked |
 | Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
-| Admin-6 | Audit logs + support + alerts                                 | ✅ Ready for Codex review |
+| Admin-6 | Audit logs + support + alerts                                 | ✅ Round-1 fixes applied, repackaged for re-review |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
