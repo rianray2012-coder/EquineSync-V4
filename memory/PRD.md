@@ -1349,6 +1349,15 @@ Phase 9 isolation sweep.
 **Tests:** `tests/test_admin_portal_admin6.py` — **49/49 green**
 (45 original + 4 round-1 regressions). Admin-5 — 41/41 ✅.
 
+**Codex round-2 (Feb 24 2026):** ✅ Admin-6 locked.
+
+**Carry-forward note for Admin-7 consolidation:** `_scrub_text()`
+is **Stripe-ID redaction only** — do NOT describe it (in docs, code
+comments, or future scope) as general "secret/token/password"
+scrubbing unless it's expanded later. The locked support-note
+guardrail is correctly enforced for audit metadata via the
+sensitive-key drop list in `_scrub_metadata`, which is separate.
+
 ### Admin Portal — Phase Status (post Admin-4)
 
 | Phase   | Scope                                                        | Status |
@@ -1360,5 +1369,5 @@ Phase 9 isolation sweep.
 | Admin-4b| Facility edits + soft-disable w/ tenancy enforcement          | ⏸ Gated (separate plan) |
 | Admin-5  | Subscription + billing control center                         | ✅ Codex-approved & locked |
 | Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
-| Admin-6 | Audit logs + support + alerts                                 | ✅ Round-1 fixes applied, repackaged for re-review |
+| Admin-6 | Audit logs + support + alerts                                 | ✅ Codex-approved & locked |
 | Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |

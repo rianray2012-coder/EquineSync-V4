@@ -322,9 +322,12 @@ def _scrub_metadata_value(v: Any) -> Any:
 
 
 def _scrub_text(s: Optional[str]) -> Optional[str]:
-    """Sanitize a free-text field destined for the API surface.
-    Same Stripe-ID embedded-redaction as `_scrub_metadata_value`, no
-    truncation (callers handle length policy)."""
+    """Boundary scrub for free-text fields destined for the API
+    surface. **Stripe-ID redaction ONLY** — replaces embedded
+    Stripe-shaped substrings with `[stripe_id_redacted]`. Does NOT
+    drop general secrets, tokens, or passwords (that policy lives in
+    `_scrub_metadata`'s sensitive-key drop list). Callers handle
+    length policy."""
     if not isinstance(s, str):
         return s
     return _redact_stripe_in_string(s)
