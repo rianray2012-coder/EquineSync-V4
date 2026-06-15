@@ -1358,6 +1358,53 @@ scrubbing unless it's expanded later. The locked support-note
 guardrail is correctly enforced for audit metadata via the
 sensitive-key drop list in `_scrub_metadata`, which is separate.
 
+## 🔐 Equine·Sync Admin Portal — Phase Admin-7A.1 ✅ (Feb 24 2026)
+
+Backend router consolidation as a **layered split**. Behavior-preserving.
+No new endpoints. No frontend changes.
+
+**Locked decisions:**
+- Layered split per founder direction (b): physical helper file +
+  consolidated `portal.py`; per-surface 12-file split deferred to
+  Admin-7A.2.
+- Route-map regression required → 40-test suite added.
+- Admin-1 through Admin-6 tests must pass unchanged → all 179 pass.
+
+**File moves:**
+- `backend/routes/admin_portal.py` → `backend/routes/admin_portal/portal.py`
+  (git rename; byte-identical content).
+- New `backend/routes/admin_portal/__init__.py` — re-exports
+  `build_router` so the external import path is unchanged.
+- New `backend/routes/admin_portal/_helpers.py` — locked public surface
+  of the helper boundary (re-export shim pointing at `portal.py`;
+  physical move lands in Admin-7A.2).
+
+**Naming-collision note:** the package lives at `routes/admin_portal/`,
+NOT `routes/admin/` — the legacy `routes/admin.py` (seed + tenant-reset)
+already owns the `routes.admin` import path. External import path
+unchanged from the pre-split flat module.
+
+**Helper boundary contract:**
+- `__all__` = `SECTION_CAPABILITIES`, `_sections_for`,
+  `_METADATA_SCRUB_KEYS`, `_STRIPE_VALUE_PATTERNS`,
+  `_STRIPE_EMBEDDED_RE`, `_STRIPE_VALUE_RE`, `_METADATA_VALUE_MAX_LEN`,
+  `_ACTIVITY_EXCLUDE_PREFIXES`, `_redact_stripe_in_string`,
+  `_scrub_metadata`, `_scrub_metadata_value`, `_scrub_text`,
+  `_admin_ref`, `_resolve_admin_ref`, `_attach_admin_ref`,
+  `_strip_keys`.
+- Invariant: `_helpers.X is portal.X` (byte-identical re-export).
+- Carry-forward note from Admin-6 round-2 baked into `_helpers.py`
+  docstring (`_scrub_text` is Stripe-ID-only).
+
+**Tests:** `tests/test_admin_portal_admin7a.py` — **40/40 green**.
+3 helper-boundary contract tests + 25 route-map preservation tests
+(18 GET + 7 POST locked paths) + 12 response-shape sanity probes
+(one per surface).
+
+**Regression:** Admin-1 through Admin-6 — **179/179 unchanged** ✅.
+
+**Packaged:** `/app/phase_admin_7a_consolidation.zip` for Codex review.
+
 ### Admin Portal — Phase Status (post Admin-4)
 
 | Phase   | Scope                                                        | Status |
@@ -1370,4 +1417,6 @@ sensitive-key drop list in `_scrub_metadata`, which is separate.
 | Admin-5  | Subscription + billing control center                         | ✅ Codex-approved & locked |
 | Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
 | Admin-6 | Audit logs + support + alerts                                 | ✅ Codex-approved & locked |
-| Admin-7 | Reports / integrations / settings / consolidation             | ⏸ Gated |
+| Admin-7A.1 | Backend router consolidation (layered split)                | ✅ Ready for Codex review |
+| Admin-7A.2 | Per-surface 12-file split                                  | ⏸ Gated (after 7A.1 lock) |
+| Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ⏸ Gated (after 7A locks) |
