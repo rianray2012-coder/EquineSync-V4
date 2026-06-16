@@ -244,3 +244,115 @@ def test_activity_exclude_prefixes_consolidated():
             f"missing {needed!r} from consolidated "
             "_ACTIVITY_EXCLUDE_PREFIXES."
         )
+
+
+
+# ---------------------------------------------------------------------
+# Admin-7A.2b round-2 — newly-promoted module-level constants per
+# Codex P1 finding. Confirm every surface module exposes its locked
+# role / safe-field / scope sets at MODULE scope (not closure scope),
+# so future drift guards can import them without invoking
+# build_router(). Also lock the values that the founder-locked
+# decisions pin down.
+# ---------------------------------------------------------------------
+def test_support_constants_at_module_scope():
+    from routes.admin_portal import support as _s
+    # Module-level — these must be importable WITHOUT calling register().
+    assert _s._SUPPORT_TAB_ROLES == {
+        "super_admin", "platform_admin", "support_admin",
+    }, "support_admin tab roles drift"
+    assert _s._SUPPORT_ASSIGNEE_ROLES is _s._SUPPORT_TAB_ROLES, (
+        "Codex round-1 contract: assignee role set === tab role set."
+    )
+    assert _s._SUPPORT_VALID_STATUSES == (
+        "new", "in_progress", "waiting", "resolved",
+    )
+    assert _s._SUPPORT_NOTE_MAX_LEN == 4096
+    assert "internal_notes" in _s._SUPPORT_SAFE_FIELDS
+
+
+def test_alerts_constants_at_module_scope():
+    from routes.admin_portal import alerts as _a
+    assert _a._ALERTS_TAB_ROLES == {
+        "super_admin", "platform_admin", "support_admin", "billing_admin",
+    }, "alerts tab roles drift"
+    assert _a._BILLING_ADMIN_ALERT_KEYS == {
+        "billing_webhook_retry", "payment_failure",
+        "pending_subscription_email_stale",
+    }, "billing_admin alert key scope drift"
+
+
+def test_audit_logs_constants_at_module_scope():
+    from routes.admin_portal import audit_logs as _al
+    # Decision 4a: exactly 4 action prefixes for billing_admin scope.
+    assert _al._BILLING_ADMIN_AUDIT_SCOPE == (
+        "admin.portal.read.subscriptions",
+        "admin.portal.read.subscription_detail",
+        "admin.portal.read.billing_events",
+        "admin.portal.read.payments",
+    ), "billing_admin audit-log action-prefix scope drift"
+    # Roles that get full audit-log access (no scope filter).
+    assert _al._AUDIT_UNSCOPED_ROLES == {
+        "super_admin", "platform_admin", "support_admin", "read_only_auditor",
+    }, "audit-log unscoped roles drift"
+    assert "metadata" in _al._AUDIT_SAFE_FIELDS
+
+
+def test_facilities_constants_at_module_scope():
+    from routes.admin_portal import facilities as _f
+    # `subscription_id` is in the INTERNAL projection (allowed) but
+    # MUST be in the strip-keys tuple so it never crosses the wire.
+    assert _f._BARN_SAFE_FIELDS.get("subscription_id") == 1
+    assert "subscription_id" in _f._BARN_RESPONSE_STRIP_KEYS
+    assert "subscription_updated_at" in _f._BARN_RESPONSE_STRIP_KEYS
+
+
+def test_users_detail_barn_projection_excludes_subscription_id():
+    """Codex P0 round-2 fix: the user-detail barn projection must NOT
+    include `subscription_id`. This is a source-level lock so the
+    leak can never regress silently."""
+    src = pathlib.Path(
+        "/app/backend/routes/admin_portal/users.py"
+    ).read_text()
+    # Find the barn projection block and confirm subscription_id
+    # is not part of the projection. We look for the projection
+    # dict on `db.barns.find_one`.
+    m = _re.search(
+        r"db\.barns\.find_one\s*\([^)]*\{([^}]*)\}", src, _re.DOTALL,
+    )
+    assert m, "could not locate db.barns.find_one(...) projection in users.py"
+    projection = m.group(1)
+    assert '"subscription_id"' not in projection, (
+        "users.py db.barns.find_one projection still includes "
+        "subscription_id — must be stripped for the API boundary."
+    )
+    assert "'subscription_id'" not in projection, (
+        "users.py db.barns.find_one projection still includes "
+        "subscription_id (single-quoted)."
+    )
+
+
+def test_subscriptions_uses_ctx_facility_label_map():
+    """Codex P2 round-2 fix: subscriptions.py must NOT define its own
+    `_facility_label_map`. It must use `ctx.facility_label_map` — the
+    one canonical cross-surface helper. This source-level lock
+    enforces the README's "only one cross-surface helper" invariant."""
+    src = pathlib.Path(
+        "/app/backend/routes/admin_portal/subscriptions.py"
+    ).read_text()
+    # The `_facility_label_map = ctx.facility_label_map` ALIAS line is
+    # expected. A `def _facility_label_map(` or `async def
+    # _facility_label_map(` DEFINITION line is not.
+    bad_def = _re.search(
+        r"(async\s+)?def\s+_facility_label_map\s*\(", src,
+    )
+    assert not bad_def, (
+        "subscriptions.py defines a local _facility_label_map; it "
+        "must use ctx.facility_label_map (the README's single "
+        "cross-surface helper)."
+    )
+    # The alias must be present.
+    assert "_facility_label_map = ctx.facility_label_map" in src, (
+        "subscriptions.py must alias ctx.facility_label_map at the "
+        "top of register()."
+    )

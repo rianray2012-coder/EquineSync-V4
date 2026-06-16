@@ -51,6 +51,31 @@ from ._helpers import (
 
 logger = logging.getLogger(__name__)
 
+
+# ----------------------------------------------------------------------
+# Facility surface constants — promoted to module scope in Admin-7A.2b
+# round-2 so source-level drift guards can import them directly.
+#
+# Locked invariants (carry from Admin-4):
+#   - `subscription_id` is in the INTERNAL projection (needed to join
+#     subscription details in the detail endpoint) but is STRIPPED
+#     before the response crosses the API boundary via
+#     `_BARN_RESPONSE_STRIP_KEYS` + `_strip_barn_response()`.
+# ----------------------------------------------------------------------
+_BARN_SAFE_FIELDS = {
+    "_id": 0,
+    "id": 1, "name": 1, "address": 1, "phone": 1, "contact_email": 1,
+    "timezone": 1, "notes": 1, "status": 1,
+    "subscription_tier_code": 1, "subscription_id": 1,
+    "subscription_updated_at": 1, "created_at": 1, "updated_at": 1,
+}
+
+# These fields are kept in the INTERNAL projection above but stripped
+# from the OUTBOUND response — per locked decision 4a, Admin-4 carries
+# NO subscription drill-down identifiers across the API boundary.
+_BARN_RESPONSE_STRIP_KEYS = ("subscription_id", "subscription_updated_at")
+
+
 def register(router, ctx) -> None:
     """Register this surface's routes onto `router` with the
     shared `ctx` (db, get_current_user, plus any cross-surface
@@ -85,21 +110,8 @@ def register(router, ctx) -> None:
     #                          invoices/recurring_charges (Phase 9),
     #                          anything in subscriptions (Phase 15).
 
-    _BARN_SAFE_FIELDS = {
-        "_id": 0,
-        "id": 1, "name": 1, "address": 1, "phone": 1, "contact_email": 1,
-        "timezone": 1, "notes": 1, "status": 1,
-        "subscription_tier_code": 1, "subscription_id": 1,
-        "subscription_updated_at": 1, "created_at": 1, "updated_at": 1,
-    }
-
-    # Codex round-1 (Admin-4) blocker fix: `subscription_id` and
-    # `subscription_updated_at` are needed INTERNALLY (the detail
-    # endpoint joins through `subscription_id` to look up the
-    # subscription summary), but they MUST NOT cross the API boundary —
-    # per the locked decision 4a, Admin-4 carries NO subscription
-    # drill-down identifiers. Strip them on the way out.
-    _BARN_RESPONSE_STRIP_KEYS = ("subscription_id", "subscription_updated_at")
+    # `_BARN_SAFE_FIELDS` and `_BARN_RESPONSE_STRIP_KEYS` live at
+    # MODULE scope (above) — the closures here resolve them via LEGB.
 
     def _strip_barn_response(barn: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
         if not isinstance(barn, dict):

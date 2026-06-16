@@ -270,13 +270,17 @@ def register(router, ctx) -> None:
         require_platform_role(user)
         target = await _fetch_target_user(user_id)
 
-        # Barn summary (safe fields only).
+        # Barn summary (safe fields only). Codex 7A.2b round-2 fix:
+        # `subscription_id` must NEVER cross the API boundary on the
+        # Admin Portal — Admin-4 already enforces this on the facility
+        # list/detail surface, and the locked invariant applies here
+        # too. Drop the field from the projection entirely.
         barn = None
         if target.get("barn_id"):
             barn = await db.barns.find_one(
                 {"id": target["barn_id"]},
                 {"_id": 0, "id": 1, "name": 1, "subscription_tier_code": 1,
-                 "subscription_id": 1, "created_at": 1},
+                 "created_at": 1},
             )
 
         # Horses count + small recent sample (last 5 — for context only).

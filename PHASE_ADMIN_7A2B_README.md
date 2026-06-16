@@ -1,8 +1,76 @@
 # Phase Admin-7A.2b — Per-Surface Split of the 8 Legacy Admin-1..6 Surfaces
 
-**Status:** Ready for Codex review · Behavior-preserving · `portal.py` 1,929 → 119 lines.
-**Date:** Feb 25 2026.
+**Status:** Codex round-2 fixes applied · Ready for final lock · Behavior-preserving.
+**Date:** Feb 25 2026 (round-2 update).
 **Scope:** Layer 2 of the two-layer Admin-7A.2 split (per founder approval).
+
+## Codex round-2 fixes (Feb 25 2026)
+
+Three findings from the round-1 review, all resolved:
+
+### P0 — `subscription_id` leak in user-detail barn summary (FIXED)
+
+`backend/routes/admin_portal/users.py` lines 276-280 (round-1) projected
+`subscription_id` straight into the user-detail barn summary response.
+This re-introduced the same class of leak Admin-4 already fixed for
+facility list/detail. Fix:
+
+- Removed `subscription_id` from the `db.barns.find_one` projection in
+  the user-detail handler. The barn summary now contains only safe
+  fields: `id`, `name`, `subscription_tier_code`, `created_at`.
+- Added `test_user_detail_does_not_leak_barn_subscription_id` in
+  `tests/test_admin_portal_admin7b.py`: plants a known Stripe-shaped
+  `sub_PLANT…` value on a barn, calls `/admin/portal/users/{id}`,
+  asserts the response neither carries the key nor the planted value.
+- Added `test_users_detail_barn_projection_excludes_subscription_id`
+  in `tests/test_admin_portal_admin7a2.py`: source-level parse of the
+  `db.barns.find_one` projection — fails if `subscription_id` ever
+  re-enters the projection in any quoting style.
+
+### P1 — Surface constants moved to MODULE SCOPE (FIXED)
+
+Per founder direction, role / safe-field / scope constants that were
+defined inside `register()` (where source-level drift guards cannot
+reach them) are now at module scope:
+
+- `support.py`: `_SUPPORT_TAB_ROLES`, `_SUPPORT_ASSIGNEE_ROLES`,
+  `_SUPPORT_VALID_STATUSES`, `_SUPPORT_NOTE_MAX_LEN`,
+  `_SUPPORT_SAFE_FIELDS`.
+- `alerts.py`: `_ALERTS_TAB_ROLES`, `_BILLING_ADMIN_ALERT_KEYS`.
+- `audit_logs.py`: `_AUDIT_SAFE_FIELDS`, `_BILLING_ADMIN_AUDIT_SCOPE`
+  (the 4 action prefixes locked by decision 4a), `_AUDIT_UNSCOPED_ROLES`.
+- `facilities.py`: `_BARN_SAFE_FIELDS`, `_BARN_RESPONSE_STRIP_KEYS`.
+
+Four new module-level drift guards in
+`tests/test_admin_portal_admin7a2.py`:
+- `test_support_constants_at_module_scope`
+- `test_alerts_constants_at_module_scope`
+- `test_audit_logs_constants_at_module_scope` (locks the 4-prefix
+  billing_admin scope from decision 4a)
+- `test_facilities_constants_at_module_scope`
+
+### P2 — Duplicate `_facility_label_map` in `subscriptions.py` (FIXED)
+
+`subscriptions.py` defined its own local `_facility_label_map`,
+shadowing `ctx.facility_label_map` and contradicting the
+"only one cross-surface helper" invariant. Fix:
+
+- Removed the local definition.
+- `subscriptions.py::register` now uses `_facility_label_map =
+  ctx.facility_label_map` exclusively (the same pattern as billing,
+  support, and alerts).
+- Added `test_subscriptions_uses_ctx_facility_label_map` in
+  `tests/test_admin_portal_admin7a2.py`: parses the source and fails
+  if a `def _facility_label_map(` definition ever re-appears in
+  `subscriptions.py`.
+
+## Layer split
+
+This phase ships **layer b** of the two-layer Admin-7A.2 split:
+
+- **`phase_admin_7a2a`** (locked Feb 2026): physical helper move into
+  `_helpers.py` + 3 Admin-7B surfaces + drift guards.
+- **`phase_admin_7a2b`** (this phase): the 8 legacy Admin-1..6 surfaces.
 
 ## What changed
 
@@ -16,12 +84,12 @@ contract first introduced in Admin-7A.2a.
 |------|--------|------:|----------------------------------|
 | `dashboard.py`     | 5 (4 GET + 1 GET activity) | 336 | `_KPI_CACHE`, `_seven_days_ago_iso`, `_MRR_STATUSES`, `_compute_kpis`, `_matches_activity_allowlist` |
 | `users.py`         | 8 (3 GET + 5 POST)         | 431 | `_USER_*_ROLES`, `_USER_SAFE_FIELDS`, `_REVIEW_NOTE_MAX_LEN`, `_check_user_mutation_allowed`, `_user_status_snapshot`, `_ApproveBody`, `_NoteBody` |
-| `facilities.py`    | 2 GET                       | 270 | inner closures only (`_strip_barn_response`, `_facility_usage_summary`) |
+| `facilities.py`    | 2 GET                       | 290 | **`_BARN_SAFE_FIELDS`, `_BARN_RESPONSE_STRIP_KEYS`** (round-2 promotion to module scope), inner `_strip_barn_response`, `_facility_usage_summary` |
 | `subscriptions.py` | 2 GET                       | 295 | `_SUBSCRIPTION_STRIP_KEYS`, `_PAYMENT_STRIP_KEYS`, `_BILLING_EVENT_STRIP_KEYS`, safe-field sets, `_BILLING_TAB_ROLES`, `_require_billing_access` (shared w/ billing) |
 | `billing.py`       | 2 GET                       | 185 | re-imports from `.subscriptions` (single source of truth) |
-| `audit_logs.py`    | 2 GET                       | 247 | inner closures (`_audit_scope_filter`, `_audit_resource_admin_ref`) |
-| `support.py`       | 5 (2 GET + 3 POST)          | 308 | `_SupportStatusBody`, `_SupportAssignBody`, `_SupportNoteBody`, `_SUPPORT_TAB_ROLES`, `_require_support_access` |
-| `alerts.py`        | 1 GET                       | 222 | `_ALERTS_TAB_ROLES`, `_BILLING_ADMIN_ALERT_KEYS`, `_alert_ref` |
+| `audit_logs.py`    | 2 GET                       | 257 | **`_AUDIT_SAFE_FIELDS`, `_BILLING_ADMIN_AUDIT_SCOPE`, `_AUDIT_UNSCOPED_ROLES`** (round-2 promotion), inner `_audit_scope_filter`, `_audit_resource_admin_ref` |
+| `support.py`       | 5 (2 GET + 3 POST)          | 320 | `_SupportStatusBody`, `_SupportAssignBody`, `_SupportNoteBody`, **`_SUPPORT_TAB_ROLES`, `_SUPPORT_ASSIGNEE_ROLES`, `_SUPPORT_VALID_STATUSES`, `_SUPPORT_NOTE_MAX_LEN`, `_SUPPORT_SAFE_FIELDS`** (round-2 promotion), inner `_require_support_access` |
+| `alerts.py`        | 1 GET                       | 230 | **`_ALERTS_TAB_ROLES`, `_BILLING_ADMIN_ALERT_KEYS`** (round-2 promotion), inner `_alert_ref` |
 
 ### 2. `portal.py` is now a pure orchestrator (119 lines)
 
@@ -107,12 +175,12 @@ pytest backend/tests/test_admin_portal_admin3.py                    # 33 passed
 pytest backend/tests/test_admin_portal_admin4.py                    # 23 passed
 pytest backend/tests/test_admin_portal_admin5.py                    # 49 passed
 pytest backend/tests/test_admin_portal_admin6.py                    # 41 passed
-pytest backend/tests/test_admin_portal_admin7a.py                   # 48 passed   ← route map preserved
-pytest backend/tests/test_admin_portal_admin7a2.py                  # 8 passed
-pytest backend/tests/test_admin_portal_admin7b.py                   # 98 passed
-pytest backend/tests/test_admin_portal_route_lock_guard.py          # 4 passed    ⭐ NEW
+pytest backend/tests/test_admin_portal_admin7a.py                   # 48 passed
+pytest backend/tests/test_admin_portal_admin7a2.py                  # 14 passed   ⭐ +6 module-scope drift guards
+pytest backend/tests/test_admin_portal_admin7b.py                   # 99 passed   ⭐ +1 subscription_id leak regression
+pytest backend/tests/test_admin_portal_route_lock_guard.py          # 4 passed
                                                                     # ─────────
-                                                                    # 337 passed total
+                                                                    # 344 passed total
 ```
 
 ## Cross-surface helper rationale
@@ -136,10 +204,16 @@ self-contained.
 - [ ] Every `@router.get` / `@router.post` on a `/admin/portal/*`
       path is in `LOCKED_GET_ROUTES` / `LOCKED_POST_ROUTES`.
 - [ ] The 34-endpoint surface (26 GET + 8 POST) is unchanged.
-- [ ] All 337 backend tests pass (was 333 before — +4 route-lock
-      guards, no other test additions or modifications other than
-      `test_admin_portal_admin7a.py::LOCKED_GET_ROUTES` already
-      locked in Admin-7A.2a round-2).
+- [ ] All 344 backend tests pass (was 337 — +7 round-2 additions:
+      P0 subscription_id leak regression, P1 four module-scope drift
+      guards, P2 ctx.facility_label_map lock, source-level users.py
+      projection lock).
+- [ ] **P0 fixed**: `subscription_id` no longer appears in user-detail
+      barn projection.
+- [ ] **P1 fixed**: every surface module exposes role/safe-field/scope
+      constants at module scope.
+- [ ] **P2 fixed**: `subscriptions.py` no longer defines a local
+      `_facility_label_map` — uses `ctx.facility_label_map` exclusively.
 - [ ] No frontend changes in this phase.
 - [ ] `_facility_label_map` is the only cross-surface helper; it
       lives on `ctx` and is consumed by 4 surfaces.

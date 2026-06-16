@@ -51,6 +51,20 @@ from ._helpers import (
 
 logger = logging.getLogger(__name__)
 
+
+# ----------------------------------------------------------------------
+# Surface role + constant sets — promoted to module scope in Admin-7A.2b
+# round-2 so source-level drift guards can import them directly.
+# ----------------------------------------------------------------------
+_ALERTS_TAB_ROLES = {
+    "super_admin", "platform_admin", "support_admin", "billing_admin",
+}
+_BILLING_ADMIN_ALERT_KEYS = {
+    "billing_webhook_retry", "payment_failure",
+    "pending_subscription_email_stale",
+}
+
+
 def register(router, ctx) -> None:
     """Register this surface's routes onto `router` with the
     shared `ctx` (db, get_current_user, plus any cross-surface
@@ -61,14 +75,8 @@ def register(router, ctx) -> None:
 
     # --- Alerts -------------------------------------------------------
     # Read-only; derived on-read from existing collections. NO alerts
-    # collection. NO dismissal endpoint (locked guardrail).
-    _ALERTS_TAB_ROLES = {
-        "super_admin", "platform_admin", "support_admin", "billing_admin",
-    }
-    _BILLING_ADMIN_ALERT_KEYS = {
-        "billing_webhook_retry", "payment_failure",
-        "pending_subscription_email_stale",
-    }
+    # collection. NO dismissal endpoint (locked guardrail). Role +
+    # billing-scope sets live at MODULE scope above for drift guards.
 
     def _alert_ref(key: str, source_ids: List[str]) -> str:
         """Deterministic opaque ref for an alert row — derived from the

@@ -1617,14 +1617,40 @@ Run in &lt;0.2 s.
 
 **Tests:** Admin-7A.2b route-lock guard — **4/4 green**.
 Admin-7A.1 route-map preservation — **48/48 unchanged**.
-Admin-7A.2a drift guards — **8/8 unchanged**.
-Admin-7B — **98/98 unchanged**.
+Admin-7A.2a drift guards — **14/14 green** (was 8 — +6 round-2
+module-scope drift guards for support/alerts/audit_logs/facilities/
+users projection/subscriptions ctx-helper).
+Admin-7B — **99/99 green** (was 98 — +1 round-2 subscription_id
+leak regression with planted Stripe-shaped value).
 Legacy Admin-1..6 — **179/179 unchanged**.
-**Grand total: 337 backend tests passing.**
+**Grand total: 344 backend tests passing.**
 
-**Behaviour:** byte-identical to Admin-7A.2a. No route/role/UI/audit
-changes. The same 34 endpoints register on the same APIRouter, same
-HTTP methods, same response shapes.
+**Codex round-2 fixes (Feb 25 2026):**
+- **P0 — `subscription_id` leak fixed**: removed `subscription_id`
+  from the `db.barns.find_one` projection in
+  `users.py::get_user_detail`. The barn summary now carries only
+  `id`, `name`, `subscription_tier_code`, `created_at`. Two new
+  regression tests (one live E2E with a planted `sub_PLANT…` value,
+  one source-level projection lock).
+- **P1 — Surface constants promoted to MODULE SCOPE**:
+  `_SUPPORT_TAB_ROLES`/`_SUPPORT_ASSIGNEE_ROLES`/
+  `_SUPPORT_VALID_STATUSES`/`_SUPPORT_NOTE_MAX_LEN`/
+  `_SUPPORT_SAFE_FIELDS` (support.py),
+  `_ALERTS_TAB_ROLES`/`_BILLING_ADMIN_ALERT_KEYS` (alerts.py),
+  `_AUDIT_SAFE_FIELDS`/`_BILLING_ADMIN_AUDIT_SCOPE`/
+  `_AUDIT_UNSCOPED_ROLES` (audit_logs.py),
+  `_BARN_SAFE_FIELDS`/`_BARN_RESPONSE_STRIP_KEYS` (facilities.py).
+  4 new module-level drift guards that lock the founder decisions
+  (including decision 4a's 4-prefix billing_admin audit scope).
+- **P2 — `_facility_label_map` no longer shadowed**:
+  `subscriptions.py` deleted its local definition and now uses
+  `ctx.facility_label_map` exclusively — the README's "only one
+  cross-surface helper" invariant holds. Source-level guard prevents
+  re-introduction.
+
+**Behaviour:** byte-identical to Admin-7A.2a. Same 34 endpoints,
+same HTTP methods, same response shapes (now WITHOUT the
+subscription_id leak), same role gates, same audit emission.
 
 **Packaged:** `/app/phase_admin_7a2b_split.zip` +
 `/app/PHASE_ADMIN_7A2B_README.md` (file-size accounting,

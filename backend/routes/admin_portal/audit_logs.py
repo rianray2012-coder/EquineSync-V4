@@ -51,6 +51,38 @@ from ._helpers import (
 
 logger = logging.getLogger(__name__)
 
+
+# ----------------------------------------------------------------------
+# Audit log surface constants — promoted to module scope in Admin-7A.2b
+# round-2 so source-level drift guards can import them directly.
+#
+# Locked founder decisions (continuing from Admin-6):
+#   4a — `billing_admin` audit-log scope = exactly the 4 action
+#        prefixes below. Enforced server-side; cannot be widened
+#        by the caller.
+#   5a — `denied_admin_access_pattern` severity = "warning".
+# ----------------------------------------------------------------------
+_AUDIT_SAFE_FIELDS = {
+    "_id": 1, "id": 1,
+    "ts": 1, "action": 1, "actor_email": 1, "actor_user_id": 1,
+    "resource_type": 1, "resource_id": 1,
+    "outcome": 1, "status_code": 1, "metadata": 1,
+    "ip_address": 1,
+}
+
+_BILLING_ADMIN_AUDIT_SCOPE = (
+    "admin.portal.read.subscriptions",
+    "admin.portal.read.subscription_detail",
+    "admin.portal.read.billing_events",
+    "admin.portal.read.payments",
+)
+
+# Roles that may see ANY audit row (no scope filter).
+_AUDIT_UNSCOPED_ROLES = {
+    "super_admin", "platform_admin", "support_admin", "read_only_auditor",
+}
+
+
 def register(router, ctx) -> None:
     """Register this surface's routes onto `router` with the
     shared `ctx` (db, get_current_user, plus any cross-surface
@@ -61,43 +93,10 @@ def register(router, ctx) -> None:
     # ------------------------------------------------------------------
     # Admin-6 — Audit Logs + Support Inbox + Alerts
     # ------------------------------------------------------------------
-    # Locked founder decisions:
-    #   1a — Implement the 3 support mutations now (status, assign, notes).
-    #   2a — Admin-side only; NO public ticket-ingestion endpoint.
-    #   3a — Keep scrub list + Stripe-VALUE regex + length truncation
-    #        (already applied to `_scrub_metadata` at module scope).
-    #   4a — `billing_admin` audit-log scope = 4 specific action prefixes.
-    #   5a — `denied_admin_access_pattern` severity = "warning".
-    #   6a — Three separate sidebar nav items.
-    #   7a — Fold Admin-5a carry-forwards (search placeholder + stale
-    #        error UX) into Admin-6 polish.
-    #
-    # Plus the Codex-locked guardrail:
-    #   Support note bodies live in `support_tickets.internal_notes`, but
-    #   MUST NEVER appear in audit_log metadata. Audit metadata for a
-    #   note add carries only `{"note_present": true}`.
-    _AUDIT_SAFE_FIELDS = {
-        "_id": 1, "id": 1,
-        "ts": 1, "action": 1, "actor_email": 1, "actor_user_id": 1,
-        "resource_type": 1, "resource_id": 1,
-        "outcome": 1, "status_code": 1, "metadata": 1,
-        "ip_address": 1,
-    }
-
-    # billing_admin audit scope — exactly the 4 action prefixes locked
-    # in decision 4a. Enforced server-side; cannot be widened by the
-    # caller.
-    _BILLING_ADMIN_AUDIT_SCOPE = (
-        "admin.portal.read.subscriptions",
-        "admin.portal.read.subscription_detail",
-        "admin.portal.read.billing_events",
-        "admin.portal.read.payments",
-    )
-
-    # Roles that may see ANY audit row (no scope filter).
-    _AUDIT_UNSCOPED_ROLES = {
-        "super_admin", "platform_admin", "support_admin", "read_only_auditor",
-    }
+    # Surface-level constants (safe field projection, billing-scope
+    # action-prefix tuple, unscoped role set) live at MODULE scope
+    # above so source-level drift guards can import them.
+    # ------------------------------------------------------------------
 
     def _audit_scope_filter(user: Dict[str, Any]) -> Dict[str, Any]:
         """Return a Mongo filter that enforces the per-role audit-log

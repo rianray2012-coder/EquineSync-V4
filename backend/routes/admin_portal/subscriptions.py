@@ -147,16 +147,12 @@ def register(router, ctx) -> None:
     #   - NO Stripe IDs in responses (omitted via _strip_keys).
     #   - NO Phase 9 reads — `invoices` / `recurring_charges` untouched.
     #   - support_admin BLOCKED from /billing-events + /payments.
-    async def _facility_label_map(barn_ids: List[str]) -> Dict[str, Optional[str]]:
-        """Bulk-fetch facility names for a list of barn_ids. Returns a
-        dict {barn_id: name or None}."""
-        if not barn_ids:
-            return {}
-        rows = await db.barns.find(
-            {"id": {"$in": list({b for b in barn_ids if b})}},
-            {"_id": 0, "id": 1, "name": 1},
-        ).to_list(length=len(barn_ids))
-        return {r["id"]: r.get("name") for r in rows}
+    #
+    # Codex 7A.2b round-2 fix: the local `async def _facility_label_map`
+    # that previously lived here is removed. We use `ctx.facility_label_map`
+    # (aliased above at the top of `register()`) — the one canonical
+    # cross-surface helper. The README's "only one cross-surface helper"
+    # invariant now holds.
 
     @router.get("/admin/portal/subscriptions")
     async def list_subscriptions(

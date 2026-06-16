@@ -707,3 +707,68 @@ def test_frontend_section_caps_mirror_matches_backend():
     assert "billing_admin" in fe_caps["audit_logs"], (
         "FE mirror must include billing_admin in 'audit_logs'."
     )
+
+
+
+# ---------------------------------------------------------------------
+# Codex 7A.2b round-2 — subscription_id leak regression (P0 fix).
+# ---------------------------------------------------------------------
+def test_user_detail_does_not_leak_barn_subscription_id(db):
+    """Locked invariant (Admin-4 → carries to every Admin Portal
+    surface that emits a barn summary): `barn.subscription_id` MUST
+    NEVER cross the API boundary.
+
+    Admin-4 already enforces this on the facility list/detail
+    surface. Admin-7A.2b round-1 reintroduced the leak on
+    `/admin/portal/users/{id}` because the user-detail barn summary
+    projected `subscription_id` straight into the response. Round-2
+    fix: strip `subscription_id` from the projection entirely.
+
+    This test plants a known Stripe-shaped `subscription_id` on a
+    barn and asserts the user-detail response never echoes it back.
+    """
+    s = _admin_session(db, "platform_admin")
+    target = _signup(role="horse_owner")
+    plant_barn_id = f"barn_7a2b_plant_{uuid.uuid4().hex[:8]}"
+    plant_sub_id = f"sub_PLANT{uuid.uuid4().hex[:20]}"
+
+    db.barns.insert_one({
+        "id": plant_barn_id,
+        "name": "Admin-7A.2b Plant Stable",
+        "subscription_id": plant_sub_id,
+        "subscription_tier_code": "tier_test",
+        "status": "active",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "_adm7a2b_plant": True,
+    })
+    # Wire the planted barn onto the target user.
+    db.users.update_one(
+        {"id": target["user"]["id"]},
+        {"$set": {"barn_id": plant_barn_id}},
+    )
+
+    try:
+        r = requests.get(
+            f"{API}/admin/portal/users/{target['user']['id']}",
+            headers=_bearer(s), timeout=10,
+        )
+        assert r.status_code == 200, r.text
+        body = r.json()
+        # The barn summary MUST exist (we planted one).
+        assert body.get("barn") is not None, "user-detail should carry a barn summary"
+        # And it MUST NOT carry subscription_id — neither the planted
+        # value nor the key at all.
+        assert "subscription_id" not in body["barn"], (
+            "user-detail barn summary leaks subscription_id key. "
+            f"Got barn: {body['barn']}"
+        )
+        # Belt-and-braces: the Stripe-shaped plant value must not
+        # appear anywhere in the response body.
+        assert plant_sub_id not in r.text, (
+            "user-detail response echoes the planted subscription_id "
+            "somewhere in its body. Response: "
+            + r.text[:500]
+        )
+    finally:
+        db.barns.delete_many({"_adm7a2b_plant": True})
+        db.users.delete_one({"id": target["user"]["id"]})

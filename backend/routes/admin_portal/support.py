@@ -66,6 +66,26 @@ class _SupportNoteBody(BaseModel):
     body: str = Field(..., min_length=1, max_length=4096)
 
 
+# ----------------------------------------------------------------------
+# Surface role + constant set — promoted to module scope in Admin-7A.2b
+# round-2 so source-level drift guards can import them directly. Names
+# preserved (leading `_`) to minimize behaviour-preserving diff.
+# ----------------------------------------------------------------------
+_SUPPORT_TAB_ROLES = {"super_admin", "platform_admin", "support_admin"}
+# Codex round-1 fix: an assignee MUST hold one of the support-tab
+# roles. billing_admin / read_only_auditor — even though they hold
+# a platform_role — cannot own a ticket.
+_SUPPORT_ASSIGNEE_ROLES = _SUPPORT_TAB_ROLES
+_SUPPORT_VALID_STATUSES = ("new", "in_progress", "waiting", "resolved")
+_SUPPORT_NOTE_MAX_LEN = 4096
+_SUPPORT_SAFE_FIELDS = {
+    "_id": 1, "id": 1,
+    "barn_id": 1, "subject": 1, "description": 1, "channel": 1,
+    "submitter_user_id": 1, "submitter_email": 1,
+    "status": 1, "assignee_user_id": 1, "assignee_email": 1,
+    "internal_notes": 1, "created_at": 1, "updated_at": 1,
+    "resolved_at": 1,
+}
 
 
 def register(router, ctx) -> None:
@@ -79,21 +99,8 @@ def register(router, ctx) -> None:
     # --- Support Inbox ------------------------------------------------
     # Locked decision 1a — implement the 3 mutations now.
     # Locked decision 2a — admin-side only; no public ingestion.
-    _SUPPORT_TAB_ROLES = {"super_admin", "platform_admin", "support_admin"}
-    # Codex round-1 fix: an assignee MUST hold one of the support-tab
-    # roles. billing_admin / read_only_auditor — even though they hold
-    # a platform_role — cannot own a ticket.
-    _SUPPORT_ASSIGNEE_ROLES = _SUPPORT_TAB_ROLES
-    _SUPPORT_VALID_STATUSES = ("new", "in_progress", "waiting", "resolved")
-    _SUPPORT_NOTE_MAX_LEN = 4096
-    _SUPPORT_SAFE_FIELDS = {
-        "_id": 1, "id": 1,
-        "barn_id": 1, "subject": 1, "description": 1, "channel": 1,
-        "submitter_user_id": 1, "submitter_email": 1,
-        "status": 1, "assignee_user_id": 1, "assignee_email": 1,
-        "internal_notes": 1, "created_at": 1, "updated_at": 1,
-        "resolved_at": 1,
-    }
+    # Surface role + constant sets live at MODULE scope (above) so
+    # source-level drift guards can import them.
 
     def _require_support_access(u: Dict[str, Any]) -> None:
         if platform_role(u) not in _SUPPORT_TAB_ROLES:
