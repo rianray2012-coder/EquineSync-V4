@@ -245,6 +245,87 @@ def test_admin_seed_skips_role_change_without_force_flag(db, roster_path):
         _cleanup_admin_test_rows(db)
 
 
+def test_admin_seed_dry_run_does_not_print_passwords(db, roster_path):
+    """Codex round-2 P1: --dry-run must NOT mint or print any
+    one-time password. The minted value would never persist, so any
+    operator who copied it from the output would be holding a
+    credential that doesn't work on the real system. The dry-run
+    output is also forbidden from containing the literal banner
+    text 'ONE-TIME PASSWORDS'."""
+    _cleanup_admin_test_rows(db)
+    try:
+        r = _run_admin_seed(roster_path, "--dry-run")
+        assert r.returncode == 0, r.stderr
+        stdout = r.stdout
+
+        # Banner must NOT appear in dry-run.
+        assert "ONE-TIME PASSWORDS" not in stdout, (
+            "dry-run must not print the live ONE-TIME PASSWORDS banner; "
+            "got:\n" + stdout
+        )
+
+        # No URL-safe 24-char token may appear next to an email — that
+        # is the shape of `secrets.token_urlsafe(24)` minted passwords.
+        for line in stdout.splitlines():
+            m = re.match(r"\s+\S+@\S+\s+(\S+)\s*$", line)
+            if not m:
+                continue
+            candidate = m.group(1)
+            # `(would mint password on apply)` ends with `)` — accept it.
+            if candidate.startswith("(") and candidate.endswith(")"):
+                continue
+            # `(...)` parenthetical phrases the script may print.
+            if "(" in candidate and ")" in candidate:
+                continue
+            # Otherwise, any long URL-safe token is a leaked credential.
+            assert not re.fullmatch(r"[A-Za-z0-9_\-]{20,}", candidate), (
+                f"dry-run output contains a credential-shaped token "
+                f"({candidate!r}) — this is the P1 finding."
+            )
+
+        # Dry-run must NOT have created any user rows.
+        for e in TEST_EMAILS:
+            assert db.users.count_documents({"email": e}) == 0, (
+                f"dry-run created a real user row for {e}"
+            )
+    finally:
+        _cleanup_admin_test_rows(db)
+
+
+def test_demo_seed_dry_run_does_not_print_passwords(db):
+    """Same invariant as the admin test, applied to the demo seed."""
+    # Make sure the demo barn isn't already present from a prior run.
+    _run_demo_seed("--teardown")
+    try:
+        r = _run_demo_seed("--dry-run")
+        assert r.returncode == 0, r.stderr
+        stdout = r.stdout
+
+        assert "ONE-TIME DEMO PASSWORD" not in stdout, (
+            "dry-run must not print the live ONE-TIME DEMO PASSWORD banner"
+        )
+
+        for line in stdout.splitlines():
+            m = re.match(r"\s+\S+@\S+\s+(\S+)\s*$", line)
+            if not m:
+                continue
+            candidate = m.group(1)
+            if candidate.startswith("(") and candidate.endswith(")"):
+                continue
+            if "(" in candidate and ")" in candidate:
+                continue
+            assert not re.fullmatch(r"[A-Za-z0-9_\-]{20,}", candidate), (
+                f"demo dry-run output contains a credential-shaped "
+                f"token ({candidate!r})"
+            )
+
+        # And nothing was actually persisted.
+        assert db.users.count_documents({"email": "demo.client@equine-sync.com"}) == 0
+        assert db.barns.count_documents({"demo_seed_key": "admin8_client_demo"}) == 0
+    finally:
+        _run_demo_seed("--teardown")
+
+
 # ----------------------------------------------------------------------
 # 4 — no password in logs / audit / committed docs.
 # ----------------------------------------------------------------------

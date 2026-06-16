@@ -1693,6 +1693,10 @@ Phase 15 / landing-page changes.
 - Production safety (3a): refuse to **write** when `APP_ENV` is
   production/prod unless `--allow-prod` is passed; `--dry-run` is
   honoured **even in production** (Codex round-1 P2 fix).
+- Dry-run credential safety (Codex round-2 P1): `--dry-run` no
+  longer mints or prints any one-time password. Output shows
+  `(would mint password on apply)` in place of any credential, so
+  operators cannot copy a fake value from a production dry-run.
 - Role-change gate (Codex round-1 P1): existing users whose
   `platform_role` differs from the locked roster are SKIPPED unless
   `--force-role-change` is passed. The skip emits an
@@ -1709,7 +1713,7 @@ Phase 15 / landing-page changes.
   `demo_seed_key: "admin8_client_demo"`,
   `created_by_seed: "phase_admin_8"`.
 
-**Tests:** Admin-8 — **11/11 green** (incl. round-1 fixes).
+**Tests:** Admin-8 — **13/13 green** (incl. round-1 & round-2 fixes).
 Admin-7A.2 + 7B + route-lock guard — **117/117 green** (regression).
 
 **Behaviour:** zero changes to existing routes, roles, audit shapes,
@@ -1739,6 +1743,29 @@ in the legacy router, the per-surface modules, or the drift guards.
 
 **Re-packaged:** `/app/phase_admin_8_access_demo_seed.zip` (round-1).
 
+### Phase Admin-8 — Codex Round-2 Fix (Feb 27 2026)
+
+Round-2 review surfaced one remaining P1 blocker. Resolved
+without spec changes.
+
+| ID | Severity | Finding | Resolution |
+|----|----------|---------|------------|
+| F-5 | **P1** | `--dry-run` still minted and printed "ONE-TIME PASSWORDS" even though nothing was persisted. An operator running a production dry-run could copy a credential that would never work. | Both scripts now skip the `secrets.token_urlsafe(...)` mint call entirely when `dry_run=True`. The `password_hash` field in the would-be doc is set to the literal `"(dry-run)"` (a non-bcrypt value), `password_source` is reported as `would_mint_on_apply`, and the live "ONE-TIME PASSWORDS / ONE-TIME DEMO PASSWORD" banners are suppressed. The dry-run prints a clearly-labelled `(would mint password on apply)` placeholder per affected user. Docs updated to say `--dry-run` "never writes" rather than "never touches Mongo" (the scripts still read Mongo to build the preview). |
+
+**New tests (Codex round-2):**
+- `test_admin_seed_dry_run_does_not_print_passwords` — asserts the
+  banner is absent, scans every `<email> <token>` style line for
+  URL-safe ≥20-char tokens (the shape of `token_urlsafe(24)`), and
+  confirms no user rows were persisted.
+- `test_demo_seed_dry_run_does_not_print_passwords` — same guard
+  applied to the demo seed; also confirms the demo barn was not
+  persisted.
+
+**Re-test:** `pytest backend/tests/test_admin_8_seed_scripts.py` →
+**13 passed**. Admin-portal regression remains **117 passed**.
+
+**Re-packaged:** `/app/phase_admin_8_access_demo_seed.zip` (round-2).
+
 
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
@@ -1763,4 +1790,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7A.2b | Per-surface split of 8 legacy Admin-1..6 surfaces          | ✅ Ready for Codex review |
 | Admin-7A.2c | (Optional) portal.py → orchestrator.py rename              | ⏸ Gated (deferred per founder) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
-| Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex round-1 fixes applied — re-submitted for review |
+| Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex round-2 fix applied — re-submitted for review |

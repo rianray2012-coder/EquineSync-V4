@@ -132,10 +132,20 @@ async def _seed(db, *, dry_run: bool) -> Dict[str, object]:
         user_action = "already_present"
         password_source = "n/a (existing user)"
     else:
-        password = env_password or _mint_password()
-        if not env_password:
-            minted_password = password
-        password_source = "env" if env_password else "mint"
+        # Codex round-2 P1 fix: do NOT mint a password in dry-run.
+        # The hash would never persist, so any printed value would
+        # mislead an operator into thinking they have a usable
+        # credential.
+        if dry_run:
+            password = "(dry-run: would mint on apply)"
+            password_hash_for_doc = "(dry-run)"
+            password_source = "env" if env_password else "would_mint_on_apply"
+        else:
+            password = env_password or _mint_password()
+            if not env_password:
+                minted_password = password
+            password_source = "env" if env_password else "mint"
+            password_hash_for_doc = _hash_pwd(password)
         user_id = str(uuid.uuid4())
         user_doc = {
             "id": user_id,
@@ -146,7 +156,7 @@ async def _seed(db, *, dry_run: bool) -> Dict[str, object]:
             "account_status": "active",
             # IMPORTANT: NO platform_role — demo cannot enter Admin Portal.
             "barn_id": barn_id,
-            "password_hash": _hash_pwd(password),
+            "password_hash": password_hash_for_doc,
             "email_verified": True,
             "signup_source": DEMO_PHASE,
             "membership_tier": "demo",
@@ -390,7 +400,14 @@ async def _main():
     print(f"  subscription {r['sub_action']}")
     print(f"  audit_rows added={r['audit_rows_added']}")
     print(f"  password_source={r['password_source']}")
-    if r["minted_password"]:
+    if args.dry_run and r["password_source"] == "would_mint_on_apply":
+        print()
+        print("=" * 72)
+        print("DRY-RUN: no password minted, none printed.")
+        print("On apply, a 32-char one-time password would be minted for:")
+        print("=" * 72)
+        print(f"  {DEMO_EMAIL}  (would mint password on apply)")
+    elif r["minted_password"]:
         print()
         print("=" * 72)
         print("ONE-TIME DEMO PASSWORD — copy now; not logged, not stored.")

@@ -1,8 +1,14 @@
 # Phase Admin-8 — Initial Admin Access + Client-Like Demo Account
 
-**Status:** Codex Round-1 fixes applied · Behavior-preserving for Admin-1..7B + 7A.2*.
-**Date:** Feb 25 2026 (round-1: Feb 26 2026).
+**Status:** Codex Round-2 fix applied · Behavior-preserving for Admin-1..7B + 7A.2*.
+**Date:** Feb 25 2026 (round-1: Feb 26 2026; round-2: Feb 27 2026).
 **Scope:** CLI scripts + tests + docs only.
+
+## Codex Round-2 fix highlights (Feb 27 2026)
+
+| ID | Severity | Fix |
+|----|----------|-----|
+| F-5 | **P1** | `--dry-run` no longer mints or prints one-time passwords. The "ONE-TIME PASSWORDS" banner is suppressed; the dry-run shows a clearly-labelled `(would mint password on apply)` placeholder per user so an operator can never copy a credential that will not exist in the real system. Two new tests (`test_admin_seed_dry_run_does_not_print_passwords`, `test_demo_seed_dry_run_does_not_print_passwords`) assert the banner is absent AND no URL-safe ≥20-char token appears in the dry-run output. Docs updated to say `--dry-run` "never writes" rather than "never touches Mongo" (the scripts still read Mongo to build the preview). |
 
 ## Codex Round-1 fix highlights (Feb 26 2026)
 
@@ -19,7 +25,7 @@
 |------|---------|
 | `backend/scripts/seed_initial_admins.py` | Idempotent seed of the 4 locked platform admins. |
 | `backend/scripts/seed_demo_account.py`   | Idempotent seed + teardown of a realistic demo client account. |
-| `backend/tests/test_admin_8_seed_scripts.py` | 11 tests covering founder Part D requirements + round-1 invariants. |
+| `backend/tests/test_admin_8_seed_scripts.py` | 13 tests covering founder Part D requirements + round-1 invariants + round-2 dry-run-credential guard. |
 | `docs/INITIAL_ADMIN_AND_DEMO_SETUP.md` | Operator usage guide. |
 
 ## Locked founder decisions encoded
@@ -67,7 +73,7 @@
 ## Tests run
 
 ```bash
-pytest backend/tests/test_admin_8_seed_scripts.py   # 11 passed  ⭐ NEW (incl. round-1 fixes)
+pytest backend/tests/test_admin_8_seed_scripts.py   # 13 passed  ⭐ NEW (incl. round-1 & round-2 fixes)
 pytest backend/tests/test_admin_portal_admin7a.py   # 48 passed  ← regression
 pytest backend/tests/test_admin_portal_admin7a2.py  # 14 passed  ← regression
 pytest backend/tests/test_admin_portal_admin7b.py   # 99 passed  ← regression
@@ -107,6 +113,12 @@ Admin-8 test coverage:
 11. `test_test_suite_never_targets_real_founder_emails` — guard test
     (Codex round-1 P0): scans this test file to ensure no future edit
     can regress us back to referencing the real founder emails.
+12. `test_admin_seed_dry_run_does_not_print_passwords` — guard test
+    (Codex round-2 P1): asserts admin-seed `--dry-run` output contains
+    no "ONE-TIME PASSWORDS" banner and no URL-safe ≥20-char token
+    next to any email; also confirms no rows were persisted.
+13. `test_demo_seed_dry_run_does_not_print_passwords` — same guard
+    (Codex round-2 P1) applied to the demo-seed script.
 
 ## Files in zip
 
@@ -121,8 +133,10 @@ Admin-8 test coverage:
 
 - [x] Both scripts respect `--dry-run`, `--allow-prod`, and refuse
       production **writes** without the flag. `--dry-run` always works.
-- [x] Mint-and-print passwords never reach logs, audit rows, or
-      any file.
+- [x] Real-run mint-and-print passwords never reach logs, audit
+      rows, or any file.
+- [x] `--dry-run` performs **no writes** and mints/prints **no
+      passwords** — verified by 2 dedicated round-2 guard tests.
 - [x] Demo subscription `id` is local-only and starts with
       `demo_subscription_` (never matches the Stripe scrubber).
 - [x] `--force-role-change` is required to overwrite an existing

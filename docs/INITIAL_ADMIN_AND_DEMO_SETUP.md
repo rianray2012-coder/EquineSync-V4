@@ -11,9 +11,14 @@ Both scripts:
 
 - Are **idempotent** — re-running is a no-op when the target state already holds.
 - Refuse to perform **writes** in production unless `--allow-prod` is passed.
-- Support `--dry-run` (prints the plan; never touches Mongo). `--dry-run` is
-  honoured **even in production** so operators can safely preview without
-  the `--allow-prod` gate (Codex round-1 fix).
+- Support `--dry-run` — **never writes to the database**. The
+  scripts still read from Mongo to build an accurate preview, but
+  no insert/update/delete is performed and no one-time passwords
+  are minted or printed. Dry-run output shows
+  `(would mint password on apply)` in place of any credential, so
+  an operator can safely run it in production. `--dry-run` is
+  honoured **even when `APP_ENV=production`** so previews never
+  need the write gate (Codex round-1 P2 fix; tightened in round-2 P1).
 - **Do not hardcode passwords.** Either an env var supplies it, or the
   script mints a 32-char URL-safe value and prints it ONCE to stdout.
   Audit rows never carry the value — only `password_source: "env" | "mint"`.
@@ -59,7 +64,7 @@ python -m scripts.seed_initial_admins --roster /tmp/throwaway_roster.json
 
 | Flag | Effect |
 |------|--------|
-| `--dry-run` | Print the plan; never touch the database. Allowed in every environment, including production. |
+| `--dry-run` | Print the plan; **never writes** to the database (reads only). Does NOT mint or print any password — dry-run output shows `(would mint password on apply)` so an operator can safely run it in production. Allowed in every environment. |
 | `--allow-prod` | Required for **writes** when `APP_ENV in {production, prod}`. |
 | `--force-role-change` | Required to overwrite an existing user's `platform_role` when it differs from the roster. Without it, the user is SKIPPED and an `admin.seed.skipped_role_diff` audit row is emitted. |
 | `--roster <path>` | Override the locked roster with a JSON list of `{email, full_name, title, platform_role}` objects. Used by the test suite so it can NEVER reference the real founder addresses. |

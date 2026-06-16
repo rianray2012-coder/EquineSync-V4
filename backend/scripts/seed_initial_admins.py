@@ -227,9 +227,18 @@ async def _ensure_admin(
         source = "n/a (existing user)"
     else:
         # CREATE — password from env or freshly minted.
-        password = env_password or _mint_password()
-        if not env_password:
-            minted_password = password
+        # Codex round-2 P1 fix: in --dry-run we MUST NOT mint a real
+        # password. Minting + printing a value that is never persisted
+        # produces a credential an operator might copy from a prod
+        # dry-run and later discover does not work.
+        if dry_run:
+            password = "(dry-run: would mint on apply)"
+            password_hash_for_doc = "(dry-run)"
+        else:
+            password = env_password or _mint_password()
+            if not env_password:
+                minted_password = password
+            password_hash_for_doc = _hash_pwd(password)
         user_doc = {
             "id": str(uuid.uuid4()),
             "email": email,
@@ -240,7 +249,7 @@ async def _ensure_admin(
             "account_status": "active",
             "platform_role": spec["platform_role"],
             "platform_role_updated_at": datetime.now(timezone.utc).isoformat(),
-            "password_hash": _hash_pwd(password),
+            "password_hash": password_hash_for_doc,
             "email_verified": True,   # operator-seeded; out-of-band verified.
             "signup_source": "phase_admin_8_seed",
             "created_at": datetime.now(timezone.utc).isoformat(),
@@ -248,6 +257,7 @@ async def _ensure_admin(
         if dry_run:
             action = "would_create"
             user_id = "(dry-run)"
+            source = "would_mint_on_apply" if not env_password else "env"
         else:
             await db.users.insert_one(user_doc)
             action = "created"
@@ -326,8 +336,24 @@ async def _main():
               f"role={r['platform_role']}  source={r['password_source']}")
 
     # Print minted passwords ONCE. Never logged, never persisted.
+    # Codex round-2 P1: in dry-run mode this list is ALWAYS empty by
+    # construction — `_ensure_admin` refuses to mint when dry_run=True.
     minted = [r for r in results if r.get("minted_password")]
-    if minted:
+    if args.dry_run:
+        would_mint = [
+            r for r in results
+            if r["action"] == "would_create"
+            and r["password_source"] == "would_mint_on_apply"
+        ]
+        if would_mint:
+            print()
+            print("=" * 72)
+            print("DRY-RUN: no passwords minted, none printed.")
+            print("On apply, a 32-char one-time password would be minted for:")
+            print("=" * 72)
+            for r in would_mint:
+                print(f"  {r['email']:30}  (would mint password on apply)")
+    elif minted:
         print()
         print("=" * 72)
         print("ONE-TIME PASSWORDS — copy them now; they will not be shown again.")
