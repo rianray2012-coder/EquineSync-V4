@@ -1526,5 +1526,5 @@ those tests now correctly assert the new caps).
 | Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
 | Admin-6 | Audit logs + support + alerts                                 | ✅ Codex-approved & locked |
 | Admin-7A.1 | Backend router consolidation (layered split)                | ✅ Codex-approved & locked |
-| Admin-7A.2 | Per-surface 12-file split                                  | ⏸ Gated (after 7B lock) |
-| Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Ready for Codex review |
+| Admin-7A.2 | Per-surface 12-file split                                  | ⏸ Gated (next phase) |
+| Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |

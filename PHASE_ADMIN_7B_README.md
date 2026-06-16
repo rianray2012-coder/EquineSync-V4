@@ -197,8 +197,8 @@ Frontend lint: `eslint` clean on the 5 new/edited admin pages
 - Unknown slug → 404.
 - Settings role gating: only super_admin + platform_admin pass.
 - Settings response asserts absence of raw env values for
-  `JWT_SECRET`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`,
-  `RESEND_API_KEY`, `MONGO_URL`.
+  `JWT_SECRET`, `STRIPE_API_KEY`, `STRIPE_SECRET_KEY`,
+  `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, `MONGO_URL`.
 - All Admin-7B paths reject `POST`/`PUT`/`PATCH`/`DELETE` (no writes).
 - Audit emission verified for all 7 actions per call.
 - Dashboard activity feed asserts none of the 7 Admin-7B read prefixes
