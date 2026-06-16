@@ -101,7 +101,40 @@ def _parse_args():
                    help="Print the plan; do NOT touch the database.")
     p.add_argument("--allow-prod", action="store_true",
                    help="Required to run when APP_ENV is production.")
+    # Codex 7A.2b-equivalent round-2 P1 fix: role changes on an
+    # existing user require an explicit confirmation flag. Without it,
+    # the script prints the role diff and SKIPS the user — no access-
+    # control mutation happens silently.
+    p.add_argument("--force-role-change", action="store_true",
+                   help=(
+                       "Allow overwriting an existing user's "
+                       "platform_role when it differs from the locked "
+                       "roster value. Default: skip + print diff."
+                   ))
+    # Codex round-2 P0 fix: the test suite must NEVER touch the real
+    # founder roster. `--roster <path>` accepts a JSON file with a
+    # list of {email, full_name, title, platform_role} objects. If
+    # absent, the locked roster ships above is used.
+    p.add_argument("--roster", type=str, default=None,
+                   help=(
+                       "Path to a JSON file overriding the admin "
+                       "roster. Used by tests to point at throwaway "
+                       "emails."
+                   ))
     return p.parse_args()
+
+
+def _load_roster(path: Optional[str]) -> List[Dict[str, str]]:
+    if not path:
+        return INITIAL_ADMINS
+    import json
+    with open(path) as f:
+        roster = json.load(f)
+    assert isinstance(roster, list), "roster JSON must be a list"
+    for entry in roster:
+        for k in ("email", "full_name", "title", "platform_role"):
+            assert k in entry, f"roster entry missing {k}: {entry}"
+    return roster
 
 
 def _is_prod() -> bool:
