@@ -1,8 +1,32 @@
 # Phase Admin-7A.2a — Helper Physical Move + 3 Admin-7B Surface Modules + Drift Guards
 
-**Status:** Ready for Codex review · Behavior-preserving.
-**Date:** Feb 25 2026.
+**Status:** Codex round-2 doc-nit fixed · Ready for final lock · Behavior-preserving.
+**Date:** Feb 25 2026 (round-2 update).
 **Scope:** Layer 1 of the two-layer Admin-7A.2 split (per founder approval).
+
+## Codex round-2 follow-up (Feb 25 2026)
+
+The Codex round-1 review flagged a non-blocking doc nit on the
+"27 routes still register" wording. While fixing the wording I noticed
+a real gap underneath: the 7 Admin-7B routes (4 reports + 2
+integrations + 1 settings) had been silently **un-locked** by
+`test_admin_portal_admin7a.py` since Admin-7B shipped — the route-map
+preservation test was only enforcing the 27 legacy paths. Codex's
+math callout ("27 legacy + 7 Admin-7B = 34") surfaced this directly.
+
+Fixed in Admin-7A.2a round-2 (this update):
+
+1. Added the 7 Admin-7B routes to `LOCKED_GET_ROUTES` in
+   `test_admin_portal_admin7a.py`. Total locked surface now
+   **34 endpoints = 26 GET + 8 POST** (was 19 GET + 8 POST). The
+   route-map test grew from 41 → 48 cases (one parametrized GET case
+   per new route).
+2. Reworded the README + PRD to use the precise "34 Admin Portal
+   endpoints (27 legacy + 7 Admin-7B)" phrasing.
+
+The 7 Admin-7B routes are now first-class citizens of the locked
+surface and will fail loudly on any drift — exactly what Codex's
+drift-guard discipline demands.
 
 ## Layer split
 
@@ -61,8 +85,19 @@ test_admin_portal_admin1..6 + admin7a + admin7b).
 Each module exposes a single public `register(router, ctx) -> None`
 function. `portal.py::build_router()` creates a `SimpleNamespace ctx`
 carrying `db`, `get_current_user`, `logger` and calls each surface's
-`register`. The 27 routes still register on the **same** APIRouter —
-the route map preservation test is green.
+`register`. All 34 Admin Portal endpoints still register on the
+**same** APIRouter:
+
+- 27 legacy Admin-1..6 routes (19 GET + 8 POST) — still defined in
+  `portal.py::build_router`.
+- 7 Admin-7B routes (7 GET; no POST) — now defined in `reports.py`,
+  `integrations.py`, `settings.py`.
+
+The route-map preservation test (`test_admin_portal_admin7a.py`) is
+**also** updated in Admin-7A.2a to lock the 7 Admin-7B routes
+explicitly (they were silently un-locked since Admin-7B shipped —
+caught during Codex round-2 review). The test now enforces all 34
+endpoints under their canonical paths and methods.
 
 ### 3. Role constants promoted to MODULE LEVEL
 
@@ -140,11 +175,11 @@ pytest backend/tests/test_admin_portal_admin3.py    # 33 passed
 pytest backend/tests/test_admin_portal_admin4.py    # 23 passed
 pytest backend/tests/test_admin_portal_admin5.py    # 49 passed
 pytest backend/tests/test_admin_portal_admin6.py    # 41 passed
-pytest backend/tests/test_admin_portal_admin7a.py   # 41 passed   ← route map preserved
+pytest backend/tests/test_admin_portal_admin7a.py   # 48 passed   ⭐ +7 Admin-7B route-map locks
 pytest backend/tests/test_admin_portal_admin7a2.py  # 8 passed    ⭐ NEW drift guards
-pytest backend/tests/test_admin_portal_admin7b.py   # 98 passed   ← unchanged scope
+pytest backend/tests/test_admin_portal_admin7b.py   # 98 passed
                                                     # ─────────
-                                                    # 326 passed total
+                                                    # 333 passed total
 ```
 
 ## What's deferred to Admin-7A.2b
@@ -177,8 +212,10 @@ will guarantee identical surface.
 - [ ] Stripe env contract moved cleanly into `integrations.py::stripe_configured`
       (re-used by `settings.py`); `STRIPE_API_KEY` checked first,
       `STRIPE_SECRET_KEY` fallback preserved.
-- [ ] Route map: 19 GET + 8 POST = 27 routes (unchanged from Admin-7B).
-- [ ] All 326 backend tests pass.
+- [ ] Route map: 26 GET + 8 POST = **34 Admin Portal endpoints**
+      (27 legacy Admin-1..6 + 7 Admin-7B). The Admin-7B routes are
+      now explicitly part of `LOCKED_GET_ROUTES`.
+- [ ] All 333 backend tests pass.
 - [ ] No frontend changes in this phase — only `frontend/src/lib/permissions.js`
       remains the cross-checked drift target (no edits to it in 7A.2a).
 

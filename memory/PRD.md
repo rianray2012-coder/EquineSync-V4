@@ -1557,16 +1557,25 @@ to point at `integrations.py` (the new source location) and to add direct
 behavioural assertions on `integrations.stripe_configured()`.
 
 **Tests:** Admin-7A.2a — **8/8 green**. Admin-7A.1 route-map
-preservation — **41/41 unchanged** (same 19 GET + 8 POST = 27 routes).
-Admin-7B — **98/98 unchanged**. Legacy Admin-1..6 — **179/179
-unchanged**. **Grand total: 326 backend tests passing.**
+preservation — **48/48 green** (extended from 41 to lock the 7
+Admin-7B routes too — see round-2 fix below). Admin-7B — **98/98
+unchanged**. Legacy Admin-1..6 — **179/179 unchanged**.
+**Grand total: 333 backend tests passing.**
+
+**Codex round-2 follow-up fix (Feb 25 2026):** While addressing the
+non-blocking "27 routes" doc nit, found a real test-scope gap: the 7
+Admin-7B routes had been silently un-locked by
+`test_admin_portal_admin7a.py` since Admin-7B shipped. Added them to
+`LOCKED_GET_ROUTES`; route-map test now enforces all **34 Admin Portal
+endpoints (26 GET + 8 POST = 27 legacy Admin-1..6 + 7 Admin-7B)**.
+README and PRD wording updated to match.
 
 **Behaviour:** byte-identical to Admin-7B. No route/role/UI/audit
 changes.
 
-**Packaged:** `/app/phase_admin_7a2a_split.zip` (8 files, 46 KB) +
+**Packaged:** `/app/phase_admin_7a2a_split.zip` (9 files, 49 KB) +
 `/app/PHASE_ADMIN_7A2A_README.md` (file map, helper move log, drift
-guard rationale, Codex review checklist).
+guard rationale, Codex review checklist, round-2 fix note).
 
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,

@@ -116,8 +116,12 @@ def test_build_router_importable_from_package():
 
 
 # ---------------------------------------------------------------------
-# Route-map preservation — every locked Admin-1..6 endpoint must still
+# Route-map preservation — every locked Admin-1..7B endpoint must still
 # be registered under the same path + same allowed HTTP methods.
+#
+# Total locked surface: 34 Admin Portal endpoints
+#   = 27 legacy Admin-1..6 routes (19 GET + 8 POST)
+#   + 7 Admin-7B read-only routes (7 GET; no POST)
 # ---------------------------------------------------------------------
 LOCKED_GET_ROUTES = [
     # Admin-1
@@ -145,6 +149,18 @@ LOCKED_GET_ROUTES = [
     "/api/admin/portal/support",
     "/api/admin/portal/support/{ticket_ref}",
     "/api/admin/portal/alerts",
+    # Admin-7B (locked Feb 2026 — Codex round-2 closeout). These are
+    # the 7 read-only surfaces that ship in Admin-7B. They were
+    # extracted into reports.py / integrations.py / settings.py in
+    # Admin-7A.2a — the route map must continue to surface them
+    # whether they live in portal.py or in a per-surface module.
+    "/api/admin/portal/reports/usage",
+    "/api/admin/portal/reports/subscriptions",
+    "/api/admin/portal/reports/facilities",
+    "/api/admin/portal/reports/export.csv",
+    "/api/admin/portal/integrations",
+    "/api/admin/portal/integrations/{slug}",
+    "/api/admin/portal/settings",
 ]
 LOCKED_POST_ROUTES = [
     # Admin-3
