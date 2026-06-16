@@ -1396,14 +1396,25 @@ unchanged from the pre-split flat module.
 - Carry-forward note from Admin-6 round-2 baked into `_helpers.py`
   docstring (`_scrub_text` is Stripe-ID-only).
 
-**Tests:** `tests/test_admin_portal_admin7a.py` — **40/40 green**.
-3 helper-boundary contract tests + 25 route-map preservation tests
-(18 GET + 7 POST locked paths) + 12 response-shape sanity probes
+**Tests:** `tests/test_admin_portal_admin7a.py` — **41/41 green**.
+3 helper-boundary contract tests + 27 route-map preservation tests
+(19 GET + 8 POST locked paths) + 11 response-shape sanity probes
 (one per surface).
 
-**Regression:** Admin-1 through Admin-6 — **179/179 unchanged** ✅.
+**Regression:** Admin-1 through Admin-6 — **179/179 unchanged** ✅
+(re-run Feb 25 2026: Admin-1..3 = 66/66, Admin-4..6 = 113/113).
 
 **Packaged:** `/app/phase_admin_7a_consolidation.zip` for Codex review.
+
+**Codex round-1 fixes (Feb 25 2026):**
+- Added missing `POST /api/admin/portal/users/{user_id}/request-info`
+  to `LOCKED_POST_ROUTES` (now 8 POST routes / 27 total).
+- Corrected `_helpers.py` docstring to reference `routes/admin_portal/`
+  (the prior `routes/admin/` text was a copy/paste slip — that import
+  path is owned by the legacy seed/tenant-reset module).
+- Re-ran full regression: **220/220** across Admin-1..6 + Admin-7A.1.
+- Repackaged `/app/phase_admin_7a_consolidation.zip`. **Awaiting Codex
+  round-2 review before unlocking Admin-7A.2.**
 
 ### Admin Portal — Phase Status (post Admin-4)
 
