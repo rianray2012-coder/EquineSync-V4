@@ -141,7 +141,13 @@ def _is_prod() -> bool:
     return (os.environ.get("APP_ENV") or "").strip().lower() in ("production", "prod")
 
 
-async def _ensure_admin(db, spec: Dict[str, str], *, dry_run: bool) -> Dict[str, str]:
+async def _ensure_admin(
+    db,
+    spec: Dict[str, str],
+    *,
+    dry_run: bool,
+    force_role_change: bool = False,
+) -> Dict[str, str]:
     """Idempotently ensure the admin user exists and carries the
     locked platform_role. Returns a result dict (no secret values)."""
     email = spec["email"].lower()
@@ -154,11 +160,56 @@ async def _ensure_admin(db, spec: Dict[str, str], *, dry_run: bool) -> Dict[str,
 
     action: str
     if existing:
+        prev_role = (existing.get("platform_role") or "(none)")
+        target_role = spec["platform_role"]
+        role_differs = (prev_role != target_role) and (prev_role != "(none)")
+
+        # Codex round-1 P1 fix: if the existing user already has a
+        # different platform_role, refuse to silently overwrite it.
+        # `--force-role-change` is the explicit confirmation gate.
+        if role_differs and not force_role_change:
+            action = "skipped_role_diff"
+            user_id = existing["id"]
+            source = "n/a (existing user)"
+            print(
+                f"  SKIP role change for {email}: "
+                f"existing platform_role={prev_role!r} -> "
+                f"target {target_role!r}; pass --force-role-change to apply."
+            )
+            if not dry_run:
+                await db.audit_log.insert_one({
+                    "id": str(uuid.uuid4()),
+                    "ts": datetime.now(timezone.utc).isoformat(),
+                    "action": "admin.seed.skipped_role_diff",
+                    "actor_email": "(cli)",
+                    "actor_role": "(cli)",
+                    "resource_type": "user",
+                    "resource_id": user_id,
+                    "outcome": "skipped",
+                    "status_code": 200,
+                    "metadata": {
+                        "target_email": email,
+                        "previous_platform_role": prev_role,
+                        "target_platform_role": target_role,
+                        "reason": "role_diff_requires_force_flag",
+                        "seed_phase": "phase_admin_8",
+                    },
+                })
+            return {
+                "email": email,
+                "platform_role": prev_role,
+                "action": action,
+                "user_id": user_id,
+                "password_source": source,
+                "minted_password": None,
+                "env_var": env_key,
+            }
+
         # PROMOTE only — never re-hash the password on an existing user.
         # Safe admin fields: platform_role, full_name (if blank), title,
         # account_status, role_status, platform_role_updated_at.
         updates: Dict[str, object] = {
-            "platform_role": spec["platform_role"],
+            "platform_role": target_role,
             "platform_role_updated_at": datetime.now(timezone.utc).isoformat(),
             "account_status": "active",
             "role_status": "active",
@@ -173,7 +224,6 @@ async def _ensure_admin(db, spec: Dict[str, str], *, dry_run: bool) -> Dict[str,
             await db.users.update_one({"id": existing["id"]}, {"$set": updates})
             action = "promoted"
         user_id = existing["id"]
-        prev_role = (existing.get("platform_role") or "(none)")
         source = "n/a (existing user)"
     else:
         # CREATE — password from env or freshly minted.
@@ -239,10 +289,15 @@ async def _ensure_admin(db, spec: Dict[str, str], *, dry_run: bool) -> Dict[str,
 async def _main():
     args = _parse_args()
 
-    if _is_prod() and not args.allow_prod:
-        print("ERROR: APP_ENV is production. Pass --allow-prod to confirm.",
+    # Codex round-1 P2 fix: `--dry-run` MUST be allowed even when
+    # APP_ENV=production. Only WRITE runs require --allow-prod.
+    if _is_prod() and not args.allow_prod and not args.dry_run:
+        print("ERROR: APP_ENV is production. Pass --allow-prod to confirm "
+              "(or use --dry-run to preview without writes).",
               file=sys.stderr)
         sys.exit(2)
+
+    roster = _load_roster(args.roster)
 
     mongo_url = os.environ["MONGO_URL"]
     db_name = os.environ.get("DB_NAME") or "equinesync"
@@ -253,13 +308,21 @@ async def _main():
     print(f"Phase Admin-8 — seeding initial platform admins"
           f"{'  (DRY-RUN)' if args.dry_run else ''}")
     print(f"APP_ENV={os.environ.get('APP_ENV') or 'development'}")
+    if args.roster:
+        print(f"roster_override={args.roster}  entries={len(roster)}")
+    if args.force_role_change:
+        print("force_role_change=ON  (existing roles WILL be overwritten)")
     print("=" * 72)
 
     results: List[Dict[str, str]] = []
-    for spec in INITIAL_ADMINS:
-        r = await _ensure_admin(db, spec, dry_run=args.dry_run)
+    for spec in roster:
+        r = await _ensure_admin(
+            db, spec,
+            dry_run=args.dry_run,
+            force_role_change=args.force_role_change,
+        )
         results.append(r)
-        print(f"  {r['action']:14}  {r['email']:30}  "
+        print(f"  {r['action']:18}  {r['email']:30}  "
               f"role={r['platform_role']}  source={r['password_source']}")
 
     # Print minted passwords ONCE. Never logged, never persisted.
@@ -277,9 +340,12 @@ async def _main():
         print("password, then change it from their account settings.")
 
     print()
-    print(f"Done. {sum(1 for r in results if r['action'] in ('created','promoted'))}"
+    print(f"Done. {sum(1 for r in results if r['action'] in ('created','promoted','would_create','would_promote'))}"
           f" change(s) applied"
           f"{', dry-run' if args.dry_run else ''}.")
+    skipped = sum(1 for r in results if r['action'] == 'skipped_role_diff')
+    if skipped:
+        print(f"  {skipped} user(s) skipped — re-run with --force-role-change to apply.")
 
 
 if __name__ == "__main__":

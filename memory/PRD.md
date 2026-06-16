@@ -1680,8 +1680,9 @@ Phase 15 / landing-page changes.
   `platform_role`), 3 horses (Aurelia/Beacon/Cinder), 5+3 tasks, a
   local-only demo subscription (no Stripe IDs), and 3 demo-tagged
   audit rows.
-- `backend/tests/test_admin_8_seed_scripts.py` — 9 tests covering
-  every founder Part D requirement.
+- `backend/tests/test_admin_8_seed_scripts.py` — 11 tests covering
+  every founder Part D requirement + the Codex round-1 invariants
+  (force-role-change gate, throwaway-roster guard).
 - `docs/INITIAL_ADMIN_AND_DEMO_SETUP.md` — operator usage guide.
 
 **Locked decisions encoded:**
@@ -1689,15 +1690,27 @@ Phase 15 / landing-page changes.
   32-char URL-safe value, print ONCE, never logged or audited.
 - Demo password (2b): env (`SEED_DEMO_CLIENT_PASSWORD`) if present,
   else mint-and-print.
-- Production safety (3a): refuse to run when `APP_ENV` is
+- Production safety (3a): refuse to **write** when `APP_ENV` is
   production/prod unless `--allow-prod` is passed; `--dry-run` is
-  always allowed.
+  honoured **even in production** (Codex round-1 P2 fix).
+- Role-change gate (Codex round-1 P1): existing users whose
+  `platform_role` differs from the locked roster are SKIPPED unless
+  `--force-role-change` is passed. The skip emits an
+  `admin.seed.skipped_role_diff` audit row.
+- Demo subscription `id` prefix (Codex round-1 P1): `demo_subscription_<uuid>`,
+  never the Stripe-shaped `sub_*` prefix (which trips the
+  `_STRIPE_VALUE_RE` scrubber).
+- Test safety (Codex round-1 P0): the test suite passes
+  `--roster <tmp.json>` with throwaway `*@admin8-test.local`
+  addresses; real founder emails are NEVER created, promoted, or
+  deleted by tests. A guard test asserts the suite file never
+  references the real founder addresses.
 - Demo tag triple on every record: `demo_seed: True`,
   `demo_seed_key: "admin8_client_demo"`,
   `created_by_seed: "phase_admin_8"`.
 
-**Tests:** Admin-8 — **9/9 green**. Admin-7A.1 route map — **48/48
-unchanged**. Admin-7A.2a + route-lock guard — **18/18 unchanged**.
+**Tests:** Admin-8 — **11/11 green** (incl. round-1 fixes).
+Admin-7A.2 + 7B + route-lock guard — **117/117 green** (regression).
 
 **Behaviour:** zero changes to existing routes, roles, audit shapes,
 or UI. Admin Portal locked regression remains untouched.
@@ -1705,6 +1718,27 @@ or UI. Admin Portal locked regression remains untouched.
 **Packaged:** `/app/phase_admin_8_access_demo_seed.zip` +
 `/app/PHASE_ADMIN_8_README.md` (locked decisions log, guardrail
 checklist, test coverage map).
+
+### Phase Admin-8 — Codex Round-1 Fixes (Feb 26 2026)
+
+Codex rejected the initial Admin-8 submission with 4 findings. All
+addressed in this round; no founder spec changed.
+
+| ID | Severity | Finding | Resolution |
+|----|----------|---------|------------|
+| F-1 | **P0** | Test suite ran against and deleted the real founder admin emails. | Tests now build a throwaway `*@admin8-test.local` roster in a tempfile and pass `--roster <path>` to every admin-seed invocation. New guard test (`test_test_suite_never_targets_real_founder_emails`) statically asserts the test file never references the real founder addresses. |
+| F-2 | **P1** | `--force-role-change` flag was wired but not enforced; existing users could be silently re-roled. | `_ensure_admin` now compares the existing `platform_role` to the spec; if they differ and `--force-role-change` is absent, the user is SKIPPED, the diff is printed, and an `admin.seed.skipped_role_diff` audit row is emitted. New test `test_admin_seed_skips_role_change_without_force_flag` proves both branches. |
+| F-3 | **P1** | Demo subscription `id` used the Stripe-shaped `sub_local_demo_*` prefix and was scrubbed by `_STRIPE_VALUE_RE`. | Prefix changed to `demo_subscription_<uuid>`. Test updated to assert both `not startswith("sub_")` AND `startswith("demo_subscription_")`. |
+| F-4 | **P2** | `--dry-run` exited with code 2 in production because the prod gate ran first. | Both scripts now evaluate `dry_run` BEFORE the `_is_prod() and not allow_prod` exit. Production writes still require `--allow-prod`; production previews need only `--dry-run`. Verified end-to-end with `APP_ENV=production`. |
+
+**Re-test:** `pytest backend/tests/test_admin_8_seed_scripts.py` →
+**11 passed**. Admin-portal regression
+(`test_admin_portal_admin7a2.py + test_admin_portal_admin7b.py +
+test_admin_portal_route_lock_guard.py`) → **117 passed**. No drift
+in the legacy router, the per-surface modules, or the drift guards.
+
+**Re-packaged:** `/app/phase_admin_8_access_demo_seed.zip` (round-1).
+
 
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
@@ -1729,4 +1763,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7A.2b | Per-surface split of 8 legacy Admin-1..6 surfaces          | ✅ Ready for Codex review |
 | Admin-7A.2c | (Optional) portal.py → orchestrator.py rename              | ⏸ Gated (deferred per founder) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
-| Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Ready for Codex review |
+| Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex round-1 fixes applied — re-submitted for review |

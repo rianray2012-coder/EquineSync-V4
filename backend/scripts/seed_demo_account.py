@@ -219,7 +219,7 @@ async def _seed(db, *, dry_run: bool) -> Dict[str, object]:
     )
     if not sub_present:
         sub_doc = {
-            "id": f"sub_local_demo_{uuid.uuid4().hex[:12]}",  # local, not Stripe
+            "id": f"demo_subscription_{uuid.uuid4().hex[:12]}",  # local, not Stripe-shaped
             "barn_id": barn_id,
             "status": "active",
             "tier": "demo",
@@ -359,8 +359,9 @@ async def _teardown(db, *, dry_run: bool) -> Dict[str, int]:
 async def _main():
     args = _parse_args()
 
-    if _is_prod() and not args.allow_prod:
-        print("ERROR: APP_ENV is production. Pass --allow-prod to confirm.",
+    if _is_prod() and not args.allow_prod and not args.dry_run:
+        print("ERROR: APP_ENV is production. Pass --allow-prod to confirm "
+              "(or use --dry-run to preview without writes).",
               file=sys.stderr)
         sys.exit(2)
 

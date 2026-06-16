@@ -10,8 +10,10 @@ Phase Admin-8 ships two idempotent CLI scripts:
 Both scripts:
 
 - Are **idempotent** — re-running is a no-op when the target state already holds.
-- Refuse to run when `APP_ENV=production` unless `--allow-prod` is passed.
-- Support `--dry-run` (prints the plan; never touches Mongo).
+- Refuse to perform **writes** in production unless `--allow-prod` is passed.
+- Support `--dry-run` (prints the plan; never touches Mongo). `--dry-run` is
+  honoured **even in production** so operators can safely preview without
+  the `--allow-prod` gate (Codex round-1 fix).
 - **Do not hardcode passwords.** Either an env var supplies it, or the
   script mints a 32-char URL-safe value and prints it ONCE to stdout.
   Audit rows never carry the value — only `password_source: "env" | "mint"`.
@@ -34,15 +36,33 @@ Both scripts:
 ```bash
 cd /app/backend
 
-# Dry-run first.
+# Dry-run first (safe — works even in production).
 python -m scripts.seed_initial_admins --dry-run
 
 # Apply.
 python -m scripts.seed_initial_admins
 
-# Production (must pass --allow-prod).
+# Production WRITE (must pass --allow-prod).
 APP_ENV=production python -m scripts.seed_initial_admins --allow-prod
+
+# Production dry-run (no --allow-prod required).
+APP_ENV=production python -m scripts.seed_initial_admins --dry-run
+
+# Overwrite an existing user's platform_role (must be explicit).
+python -m scripts.seed_initial_admins --force-role-change
+
+# Tests / staging: use a throwaway roster JSON.
+python -m scripts.seed_initial_admins --roster /tmp/throwaway_roster.json
 ```
+
+### Flag reference
+
+| Flag | Effect |
+|------|--------|
+| `--dry-run` | Print the plan; never touch the database. Allowed in every environment, including production. |
+| `--allow-prod` | Required for **writes** when `APP_ENV in {production, prod}`. |
+| `--force-role-change` | Required to overwrite an existing user's `platform_role` when it differs from the roster. Without it, the user is SKIPPED and an `admin.seed.skipped_role_diff` audit row is emitted. |
+| `--roster <path>` | Override the locked roster with a JSON list of `{email, full_name, title, platform_role}` objects. Used by the test suite so it can NEVER reference the real founder addresses. |
 
 ### Password sources
 
@@ -68,16 +88,19 @@ forgotten admin password through this script; use the existing
 
 ### Audit emission
 
-Every create / promote run writes one row to `audit_log`:
+Every create / promote / skip run writes one row to `audit_log`:
 
 ```
-action: admin.seed.created | admin.seed.promoted | admin.seed.would_create | admin.seed.would_promote
+action: admin.seed.created | admin.seed.promoted
+        | admin.seed.would_create | admin.seed.would_promote
+        | admin.seed.skipped_role_diff   ← Codex round-1 P1
 metadata:
   target_email
   previous_platform_role
-  new_platform_role
+  new_platform_role (or target_platform_role for skip)
   password_source: env | mint | "n/a (existing user)"
   seed_phase: phase_admin_8
+  reason: role_diff_requires_force_flag   (only on skip)
 ```
 
 ---
@@ -115,7 +138,7 @@ flow, normal app routes, and normal permissions.
 | `users`         | 1       | `demo.client@equine-sync.com`, role `horse_owner` — **no `platform_role`** |
 | `horses`        | 3       | `Aurelia` / `Beacon` / `Cinder` |
 | `tasks`         | up to 8 | 5 upcoming + 3 past (skipped if `tasks` collection isn't in use) |
-| `subscriptions` | 1       | local-only, tier `demo`, status `active`, NEVER a Stripe ID |
+| `subscriptions` | 1       | local-only, tier `demo`, status `active`. `id` always starts with `demo_subscription_` (never the Stripe `sub_` shape — Codex round-1 P1). |
 | `audit_log`     | 3       | representative demo-tagged events for dashboard rendering |
 
 Every record carries the tag triple:
@@ -171,10 +194,16 @@ cd /app/backend
 python -m pytest tests/test_admin_8_seed_scripts.py
 ```
 
-The suite covers founder-locked test requirements 1-9 (idempotency,
-promotion, audit emission, no-password-leak, demo data shape,
-demo-cannot-reach-admin-portal, surgical teardown, no landing-page
-edits, old demo-seed method not restored).
+The suite covers founder-locked test requirements 1-9 plus Codex
+round-1 invariants:
+
+1-9 — idempotency, promotion, audit emission, no-password-leak,
+demo data shape, demo-cannot-reach-admin-portal, surgical teardown,
+no landing-page edits, old demo-seed method not restored.
+
+10 — `--force-role-change` gate is enforced (P1).
+11 — Throwaway `--roster` is used everywhere so the suite NEVER
+     references real founder emails (P0).
 
 ## Locked guardrails
 

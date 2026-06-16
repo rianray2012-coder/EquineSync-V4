@@ -1,8 +1,17 @@
 # Phase Admin-8 — Initial Admin Access + Client-Like Demo Account
 
-**Status:** Ready for Codex review · Behavior-preserving for Admin-1..7B + 7A.2*.
-**Date:** Feb 25 2026.
+**Status:** Codex Round-1 fixes applied · Behavior-preserving for Admin-1..7B + 7A.2*.
+**Date:** Feb 25 2026 (round-1: Feb 26 2026).
 **Scope:** CLI scripts + tests + docs only.
+
+## Codex Round-1 fix highlights (Feb 26 2026)
+
+| ID | Severity | Fix |
+|----|----------|-----|
+| F-1 | **P0** | Tests now pass `--roster <tmp.json>` with throwaway `*@admin8-test.local` emails. The suite NEVER creates, promotes, or deletes a real founder email. A new guard test asserts the test file never references real founder addresses. |
+| F-2 | **P1** | `--force-role-change` is now enforced inside `_ensure_admin`. Existing users with a different `platform_role` are SKIPPED and emit an `admin.seed.skipped_role_diff` audit row unless the flag is passed. |
+| F-3 | **P1** | Demo subscription `id` prefix changed from `sub_local_demo_*` (matched the Stripe scrubber `_STRIPE_VALUE_RE`) to `demo_subscription_*` (non-Stripe-shaped). |
+| F-4 | **P2** | Both scripts now evaluate `--dry-run` BEFORE the `APP_ENV=production` exit block. Production write runs still require `--allow-prod`. |
 
 ## What ships
 
@@ -10,7 +19,7 @@
 |------|---------|
 | `backend/scripts/seed_initial_admins.py` | Idempotent seed of the 4 locked platform admins. |
 | `backend/scripts/seed_demo_account.py`   | Idempotent seed + teardown of a realistic demo client account. |
-| `backend/tests/test_admin_8_seed_scripts.py` | 9 tests covering founder Part D requirements. |
+| `backend/tests/test_admin_8_seed_scripts.py` | 11 tests covering founder Part D requirements + round-1 invariants. |
 | `docs/INITIAL_ADMIN_AND_DEMO_SETUP.md` | Operator usage guide. |
 
 ## Locked founder decisions encoded
@@ -25,9 +34,9 @@
   persisted as plaintext.
 - **Demo password source (2b):** env (`SEED_DEMO_CLIENT_PASSWORD`)
   if present; else mint-and-print.
-- **Production safety (3a):** both scripts refuse to run when
-  `APP_ENV in {production, prod}` unless `--allow-prod` is passed.
-  `--dry-run` is always allowed.
+- **Production safety (3a):** both scripts refuse to **write** in
+  production unless `--allow-prod` is passed. `--dry-run` is **always**
+  allowed even in production (Codex round-1 P2 fix).
 - **Demo specifics (4 locked):** `demo.client@equine-sync.com`,
   display name `Demo Client`, role `horse_owner` (NO
   `platform_role`), barn `Equine Sync Demo Barn`, 3 horses
@@ -58,36 +67,46 @@
 ## Tests run
 
 ```bash
-pytest backend/tests/test_admin_8_seed_scripts.py   # 9 passed   ⭐ NEW
+pytest backend/tests/test_admin_8_seed_scripts.py   # 11 passed  ⭐ NEW (incl. round-1 fixes)
 pytest backend/tests/test_admin_portal_admin7a.py   # 48 passed  ← regression
 pytest backend/tests/test_admin_portal_admin7a2.py  # 14 passed  ← regression
+pytest backend/tests/test_admin_portal_admin7b.py   # 99 passed  ← regression
 pytest backend/tests/test_admin_portal_route_lock_guard.py  # 4 passed
 ```
 
 Admin-8 test coverage:
 1. `test_admin_seed_creates_4_admins_and_is_idempotent` — two runs
-   yield the same 4 user rows; every admin gets an `admin.seed.*`
-   audit entry; no audit metadata key looks like a secret.
+   yield the same 4 user rows (against a **throwaway roster** of
+   `*@admin8-test.local` addresses, never the real founders); every
+   admin gets an `admin.seed.*` audit entry; no audit metadata key
+   looks like a secret.
 2. `test_admin_seed_promotes_existing_user_without_duplicating` —
-   pre-existing user is updated in-place (`platform_role` changes,
+   pre-existing test user is updated in-place (`platform_role` changes,
    `password_hash` untouched); audit row says `admin.seed.promoted`.
-3. `test_no_password_value_in_audit_log` — captures the minted
+3. `test_admin_seed_skips_role_change_without_force_flag` — pre-existing
+   test user with a DIFFERENT `platform_role` is SKIPPED unless
+   `--force-role-change` is passed; emits an
+   `admin.seed.skipped_role_diff` audit row (Codex round-1 P1).
+4. `test_no_password_value_in_audit_log` — captures the minted
    passwords printed to stdout, then asserts none of them appear in
    any audit row written by the run.
-4. `test_no_password_in_committed_files` — static scan of scripts /
+5. `test_no_password_in_committed_files` — static scan of scripts /
    docs / tests for `password = "literal"` patterns.
-5. `test_demo_seed_creates_expected_records` — 1 barn, 1 user, 3
-   horses, demo subscription with NO Stripe-shaped id, demo tags
-   present everywhere.
-6. `test_demo_user_cannot_reach_admin_portal_me` — live login → 403
+6. `test_demo_seed_creates_expected_records` — 1 barn, 1 user, 3
+   horses, demo subscription whose `id` starts with
+   `demo_subscription_` (NOT `sub_`); demo tags present everywhere.
+7. `test_demo_user_cannot_reach_admin_portal_me` — live login → 403
    on `/api/admin/portal/me` (the demo cannot reach admin).
-7. `test_teardown_removes_only_demo_tagged_records` — plants a
+8. `test_teardown_removes_only_demo_tagged_records` — plants a
    non-tagged look-alike barn; runs teardown; confirms the look-alike
    survives while every demo-tagged record is removed.
-8. `test_no_landing_page_modified` — `git diff` confirms no edits
+9. `test_no_landing_page_modified` — `git diff` confirms no edits
    to `Landing.jsx` / `Home.jsx` / `Index.jsx` / `App.js`.
-9. `test_old_demo_seed_method_not_restored` — backend grep for known
-   leftover shortcut patterns (`/api/auth/demo-login`, etc.).
+10. `test_old_demo_seed_method_not_restored` — backend grep for known
+    leftover shortcut patterns (`/api/auth/demo-login`, etc.).
+11. `test_test_suite_never_targets_real_founder_emails` — guard test
+    (Codex round-1 P0): scans this test file to ensure no future edit
+    can regress us back to referencing the real founder emails.
 
 ## Files in zip
 
@@ -100,15 +119,22 @@ Admin-8 test coverage:
 
 ## Codex review checklist
 
-- [ ] Both scripts respect `--dry-run`, `--allow-prod`, and refuse
-      production without the flag.
-- [ ] Mint-and-print passwords never reach logs, audit rows, or
+- [x] Both scripts respect `--dry-run`, `--allow-prod`, and refuse
+      production **writes** without the flag. `--dry-run` always works.
+- [x] Mint-and-print passwords never reach logs, audit rows, or
       any file.
-- [ ] Demo subscription `id` is local-only (never `sub_<14chars>`).
-- [ ] Demo user has no `platform_role`.
-- [ ] Teardown is surgical — only `demo_seed_key="admin8_client_demo"`.
-- [ ] Existing Admin Portal locked regression still green.
-- [ ] No frontend / landing-page changes.
+- [x] Demo subscription `id` is local-only and starts with
+      `demo_subscription_` (never matches the Stripe scrubber).
+- [x] `--force-role-change` is required to overwrite an existing
+      user's `platform_role`; absent the flag, the script SKIPS and
+      audits `admin.seed.skipped_role_diff`.
+- [x] Tests use a throwaway `*@admin8-test.local` roster via
+      `--roster <tmp.json>`; real founder emails are never touched.
+- [x] Demo user has no `platform_role`.
+- [x] Teardown is surgical — only `demo_seed_key="admin8_client_demo"`.
+- [x] Existing Admin Portal locked regression still green
+      (117 admin-portal tests pass).
+- [x] No frontend / landing-page changes.
 
 ## What's deferred (out of scope per founder lock)
 

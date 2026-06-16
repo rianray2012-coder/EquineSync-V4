@@ -12,15 +12,24 @@ Covers founder-locked Part D test requirements:
   7. Demo teardown removes only demo-tagged records.
   8. No landing page file changed.
   9. Old removed demo seed method is not restored.
+
+CODEX ROUND-1 P0 NOTE
+---------------------
+This suite MUST NEVER create, promote, or delete the real founder
+admin emails (the four locked roster addresses in
+``backend/scripts/seed_initial_admins.py``). Every admin-seed
+invocation passes ``--roster <tmp.json>`` so the script targets
+throwaway ``*@admin8-test.local`` rows that we own end-to-end.
 """
 from __future__ import annotations
 
-import io
+import json
 import os
 import pathlib
 import re
 import subprocess
 import sys
+import tempfile
 import uuid
 
 import pytest
@@ -32,9 +41,56 @@ sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env")
 
 
-def _run_admin_seed(*flags):
+# ----------------------------------------------------------------------
+# Throwaway roster — NEVER overlaps with the real founder roster.
+# Every email lives under @admin8-test.local so a bad cleanup can
+# never touch a production-shaped address.
+# ----------------------------------------------------------------------
+TEST_ROSTER = [
+    {
+        "email":         "alpha@admin8-test.local",
+        "full_name":     "Alpha Test Admin",
+        "title":         "Test Initial Admin Operator",
+        "platform_role": "platform_admin",
+    },
+    {
+        "email":         "bravo@admin8-test.local",
+        "full_name":     "Bravo Test Admin",
+        "title":         "Test Billing Administrator",
+        "platform_role": "billing_admin",
+    },
+    {
+        "email":         "charlie@admin8-test.local",
+        "full_name":     "Charlie Test Admin",
+        "title":         "Test Super Admin 1",
+        "platform_role": "super_admin",
+    },
+    {
+        "email":         "delta@admin8-test.local",
+        "full_name":     "Delta Test Admin",
+        "title":         "Test Super Admin 2",
+        "platform_role": "super_admin",
+    },
+]
+TEST_EMAILS = [e["email"] for e in TEST_ROSTER]
+
+
+@pytest.fixture
+def roster_path(tmp_path):
+    """Write the throwaway roster to a temp JSON file the script
+    can load with `--roster`."""
+    p = tmp_path / "admin8_test_roster.json"
+    p.write_text(json.dumps(TEST_ROSTER))
+    return str(p)
+
+
+def _run_admin_seed(roster_path, *flags):
+    """Always pass --roster <path> so we NEVER touch the real founders."""
     return subprocess.run(
-        [sys.executable, "-m", "scripts.seed_initial_admins", *flags],
+        [
+            sys.executable, "-m", "scripts.seed_initial_admins",
+            "--roster", roster_path, *flags,
+        ],
         cwd=str(ROOT), capture_output=True, text=True, timeout=30,
         env={**os.environ},
     )
@@ -58,41 +114,44 @@ def db():
     c.close()
 
 
+def _cleanup_admin_test_rows(db):
+    """Hard-delete any rows that the test-only roster could have
+    created. Restricted by the @admin8-test.local domain so we
+    can never reach production-shaped emails."""
+    db.users.delete_many({"email": {"$in": TEST_EMAILS}})
+    db.audit_log.delete_many({"metadata.target_email": {"$in": TEST_EMAILS}})
+
+
 # ----------------------------------------------------------------------
 # 1 + 2 + 3 — admin seed idempotency + audit emission.
 # ----------------------------------------------------------------------
-def test_admin_seed_creates_4_admins_and_is_idempotent(db):
-    """Two runs must yield exactly the same 4 admin user rows."""
-    # First run.
-    r1 = _run_admin_seed()
-    assert r1.returncode == 0, r1.stderr
-    emails = [
-        "info@equine-sync.com",
-        "prsindustries23@gmail.com",
-        "rian.ray2012@gmail.com",
-        "prspoon23@gmail.com",
-    ]
+def test_admin_seed_creates_4_admins_and_is_idempotent(db, roster_path):
+    """Two runs must yield exactly the same 4 admin user rows
+    against the throwaway roster (NEVER founder emails)."""
+    _cleanup_admin_test_rows(db)
     try:
-        for e in emails:
+        r1 = _run_admin_seed(roster_path)
+        assert r1.returncode == 0, r1.stderr
+        for e in TEST_EMAILS:
             n = db.users.count_documents({"email": e})
             assert n == 1, f"first run: {e} count={n}"
 
         # Second run — must not duplicate or error.
-        r2 = _run_admin_seed()
+        r2 = _run_admin_seed(roster_path)
         assert r2.returncode == 0, r2.stderr
-        for e in emails:
+        for e in TEST_EMAILS:
             n = db.users.count_documents({"email": e})
             assert n == 1, f"idempotent: {e} count={n}"
 
         # Audit entries — at least one row per admin tagged
         # admin.seed.* and never carrying a password.
-        for e in emails:
+        for e in TEST_EMAILS:
             rows = list(db.audit_log.find({"metadata.target_email": e}))
-            assert any(r["action"].startswith("admin.seed.") for r in rows), (
+            assert any(row["action"].startswith("admin.seed.") for row in rows), (
                 f"no admin.seed.* audit row for {e}"
             )
-            for r in rows:
-                meta = r.get("metadata", {})
+            for row in rows:
+                meta = row.get("metadata", {})
                 # The metadata MUST NOT contain the literal password.
                 # We don't know it, but we can assert no field looks
                 # like a password by key name.
@@ -101,29 +160,30 @@ def test_admin_seed_creates_4_admins_and_is_idempotent(db):
                         f"audit metadata key looks like a secret: {k!r}"
                     )
     finally:
-        # Cleanup.
-        db.users.delete_many({"email": {"$in": emails}})
-        db.audit_log.delete_many({"metadata.target_email": {"$in": emails}})
+        _cleanup_admin_test_rows(db)
 
 
-def test_admin_seed_promotes_existing_user_without_duplicating(db):
+def test_admin_seed_promotes_existing_user_without_duplicating(db, roster_path):
     """If a user already exists with the target email, the script
-    must PROMOTE (update platform_role) and never create a 2nd row."""
-    email = "rian.ray2012@gmail.com"
+    must PROMOTE (update platform_role) and never create a 2nd row.
+    Uses a throwaway @admin8-test.local email, never a founder one."""
+    _cleanup_admin_test_rows(db)
+    # Pick the charlie@ entry (super_admin in the test roster).
+    email = "charlie@admin8-test.local"
     pre_id = str(uuid.uuid4())
     db.users.insert_one({
         "id": pre_id,
         "email": email,
-        "full_name": "Rian (pre-existing)",
+        "full_name": "Charlie (pre-existing)",
         "role": "horse_owner",
         "role_status": "active",
-        "platform_role": None,
+        "platform_role": None,           # no role yet → not a "diff", a promotion
         "password_hash": "$2b$12$placeholder_only_for_test",
         "created_at": "2024-01-01T00:00:00+00:00",
         "_admin8_test": True,
     })
     try:
-        r = _run_admin_seed()
+        r = _run_admin_seed(roster_path)
         assert r.returncode == 0, r.stderr
         assert db.users.count_documents({"email": email}) == 1
         promoted = db.users.find_one({"email": email})
@@ -135,28 +195,68 @@ def test_admin_seed_promotes_existing_user_without_duplicating(db):
         audits = list(db.audit_log.find({"metadata.target_email": email}))
         assert any(a["action"] == "admin.seed.promoted" for a in audits)
     finally:
-        db.users.delete_one({"id": pre_id})
-        db.audit_log.delete_many({"metadata.target_email": email})
+        _cleanup_admin_test_rows(db)
+
+
+def test_admin_seed_skips_role_change_without_force_flag(db, roster_path):
+    """Codex round-1 P1: existing user with a DIFFERENT platform_role
+    must be skipped unless --force-role-change is passed."""
+    _cleanup_admin_test_rows(db)
+    email = "delta@admin8-test.local"  # target role in roster = super_admin
+    pre_id = str(uuid.uuid4())
+    db.users.insert_one({
+        "id": pre_id,
+        "email": email,
+        "full_name": "Delta (pre-existing)",
+        "role": "horse_owner",
+        "role_status": "active",
+        "platform_role": "billing_admin",  # DIFFERS from target super_admin
+        "password_hash": "$2b$12$placeholder_only_for_test",
+        "created_at": "2024-01-01T00:00:00+00:00",
+        "_admin8_test": True,
+    })
+    try:
+        # First run WITHOUT --force-role-change → must skip.
+        r = _run_admin_seed(roster_path)
+        assert r.returncode == 0, r.stderr
+        after = db.users.find_one({"email": email})
+        assert after["platform_role"] == "billing_admin", (
+            "platform_role must NOT be overwritten without --force-role-change"
+        )
+        skipped = list(db.audit_log.find({
+            "metadata.target_email": email,
+            "action": "admin.seed.skipped_role_diff",
+        }))
+        assert skipped, "expected an admin.seed.skipped_role_diff audit row"
+
+        # Second run WITH --force-role-change → role flips.
+        r2 = _run_admin_seed(roster_path, "--force-role-change")
+        assert r2.returncode == 0, r2.stderr
+        after2 = db.users.find_one({"email": email})
+        assert after2["platform_role"] == "super_admin", (
+            "--force-role-change must overwrite the existing platform_role"
+        )
+        promoted = list(db.audit_log.find({
+            "metadata.target_email": email,
+            "action": "admin.seed.promoted",
+        }))
+        assert promoted, "expected an admin.seed.promoted audit row after force"
+    finally:
+        _cleanup_admin_test_rows(db)
 
 
 # ----------------------------------------------------------------------
 # 4 — no password in logs / audit / committed docs.
 # ----------------------------------------------------------------------
-def test_no_password_value_in_audit_log(db):
+def test_no_password_value_in_audit_log(db, roster_path):
     """Run admin seed and demo seed; scan every audit row written for
     anything that looks like the minted bytes."""
-    pwd_emails = [
-        "info@equine-sync.com",
-        "prsindustries23@gmail.com",
-        "rian.ray2012@gmail.com",
-        "prspoon23@gmail.com",
-        "demo.client@equine-sync.com",
-    ]
+    _cleanup_admin_test_rows(db)
     try:
-        r1 = _run_admin_seed()
-        assert r1.returncode == 0
+        r1 = _run_admin_seed(roster_path)
+        assert r1.returncode == 0, r1.stderr
         r2 = _run_demo_seed()
-        assert r2.returncode == 0
+        assert r2.returncode == 0, r2.stderr
 
         # Extract minted passwords from stdout.
         passwords = []
@@ -168,7 +268,7 @@ def test_no_password_value_in_audit_log(db):
 
         # Confirm none of those passwords appear in audit_log.
         all_audit = list(db.audit_log.find({
-            "metadata.target_email": {"$in": pwd_emails},
+            "metadata.target_email": {"$in": TEST_EMAILS},
         }))
         all_audit += list(db.audit_log.find({"actor_email": "(cli)"}))
         as_text = str(all_audit)
@@ -177,18 +277,8 @@ def test_no_password_value_in_audit_log(db):
                 "password value leaked into audit_log"
             )
     finally:
-        db.users.delete_many({"email": {"$in": pwd_emails}})
-        db.audit_log.delete_many({
-            "$or": [
-                {"metadata.target_email": {"$in": pwd_emails}},
-                {"metadata.demo_seed_key": "admin8_client_demo"},
-            ]
-        })
-        db.barns.delete_many({"demo_seed_key": "admin8_client_demo"})
-        db.horses.delete_many({"demo_seed_key": "admin8_client_demo"})
-        if "tasks" in db.list_collection_names():
-            db.tasks.delete_many({"demo_seed_key": "admin8_client_demo"})
-        db.subscriptions.delete_many({"demo_seed_key": "admin8_client_demo"})
+        _cleanup_admin_test_rows(db)
+        _run_demo_seed("--teardown")
 
 
 def test_no_password_in_committed_files():
@@ -232,7 +322,9 @@ def test_demo_seed_creates_expected_records(db):
         barn = db.barns.find_one({"demo_seed_key": "admin8_client_demo"})
         assert barn, "demo barn missing"
         assert barn["name"] == "Equine Sync Demo Barn"
-        assert barn.get("subscription_id") is None, "demo barn must NOT carry subscription_id"
+        assert barn.get("subscription_id") is None, (
+            "demo barn must NOT carry subscription_id"
+        )
 
         # User
         user = db.users.find_one({"email": "demo.client@equine-sync.com"})
@@ -240,7 +332,8 @@ def test_demo_seed_creates_expected_records(db):
         assert user["role"] == "horse_owner"
         # *** CRITICAL: no platform_role on the demo user.
         assert not user.get("platform_role"), (
-            f"demo user must NOT have a platform_role; got {user.get('platform_role')!r}"
+            f"demo user must NOT have a platform_role; got "
+            f"{user.get('platform_role')!r}"
         )
         assert user["demo_seed_key"] == "admin8_client_demo"
         assert user["created_by_seed"] == "phase_admin_8"
@@ -250,13 +343,20 @@ def test_demo_seed_creates_expected_records(db):
         assert len(horses) == 3
         assert {h["name"] for h in horses} == {"Aurelia", "Beacon", "Cinder"}
 
-        # Subscription — NO Stripe-shaped id
+        # Subscription — Codex round-1 P1: must NOT be Stripe-shaped.
         sub = db.subscriptions.find_one({"demo_seed_key": "admin8_client_demo"})
         assert sub
         assert sub["status"] == "active"
         assert sub["tier"] == "demo"
-        assert not re.match(r"^sub_[A-Za-z0-9]{14,}$", sub["id"]), (
-            f"demo subscription must NOT use a Stripe-shaped id; got {sub['id']}"
+        # Stripe subscription IDs match ^sub_[A-Za-z0-9]+ and trigger
+        # the _STRIPE_VALUE_RE scrubber. Our demo id must not.
+        assert not sub["id"].startswith("sub_"), (
+            f"demo subscription id must NOT use the Stripe `sub_` prefix; "
+            f"got {sub['id']!r}"
+        )
+        assert sub["id"].startswith("demo_subscription_"), (
+            f"demo subscription id must start with `demo_subscription_`; "
+            f"got {sub['id']!r}"
         )
     finally:
         _run_demo_seed("--teardown")
@@ -376,3 +476,28 @@ def test_old_demo_seed_method_not_restored():
                 f"old demo-seed shortcut may be re-introduced: "
                 f"pattern={pat} file={py}"
             )
+
+
+# ----------------------------------------------------------------------
+# 10 — founder roster guard. Asserts the test suite NEVER touches
+# the real founder emails (Codex round-1 P0 invariant).
+# ----------------------------------------------------------------------
+def test_test_suite_never_targets_real_founder_emails():
+    """Sanity check: scan this test file for any literal founder
+    email so a future edit cannot regress us back to wiping real
+    admin accounts. The check emails are split-built so this test
+    itself does not contain the offending literal."""
+    real_emails = [
+        "info" + "@" + "equine-sync.com",
+        "prsindustries23" + "@" + "gmail.com",
+        "rian.ray2012" + "@" + "gmail.com",
+        "prspoon23" + "@" + "gmail.com",
+    ]
+    this_file = pathlib.Path(__file__).read_text()
+    for e in real_emails:
+        # Use ``find`` over the literal we constructed at runtime
+        # (the constant never appears whole in the file source).
+        assert this_file.find(e) == -1, (
+            f"test file must never reference real founder email {e!r}; "
+            f"use a throwaway @admin8-test.local address instead."
+        )
