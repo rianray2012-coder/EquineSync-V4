@@ -147,7 +147,8 @@ add direct behavioural assertions on `integrations.stripe_configured()`
 
 ## What did NOT change
 
-- The 27 route paths and HTTP methods.
+- The 34 Admin Portal endpoints (26 GET + 8 POST = 27 legacy
+  Admin-1..6 + 7 Admin-7B) and their HTTP methods.
 - Any response shape.
 - Any role gate.
 - Any audit emission.
