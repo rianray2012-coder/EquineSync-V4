@@ -1573,7 +1573,7 @@ README and PRD wording updated to match.
 **Behaviour:** byte-identical to Admin-7B. No route/role/UI/audit
 changes.
 
-**Packaged:** `/app/phase_admin_7a2a_split.zip` (9 files, 49 KB) +
+**Packaged:** `/app/phase_admin_7a2a_split.zip` (10 files, 94 KB) +
 `/app/PHASE_ADMIN_7A2A_README.md` (file map, helper move log, drift
 guard rationale, Codex review checklist, round-2 fix note).
 
