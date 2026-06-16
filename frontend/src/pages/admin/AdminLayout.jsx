@@ -41,7 +41,7 @@ export default function AdminLayout() {
   if (!user) {
     return (
       <Navigate
-        to={`/login?redirect=${encodeURIComponent(location.pathname)}`}
+        to={`/admin/portal/login?redirect=${encodeURIComponent(location.pathname)}`}
         replace
       />
     );

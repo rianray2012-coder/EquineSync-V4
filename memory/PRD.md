@@ -1416,7 +1416,86 @@ unchanged from the pre-split flat module.
 - Repackaged `/app/phase_admin_7a_consolidation.zip`. **Awaiting Codex
   round-2 review before unlocking Admin-7A.2.**
 
-### Admin Portal — Phase Status (post Admin-4)
+## 🔐 Equine·Sync Admin Portal — Phase Admin-7B ✅ (Feb 25 2026)
+
+Reports + Integrations + Settings + Admin Login. **Read-only only.**
+Admin-7A.2 (per-surface physical split) remains gated.
+
+**Locked founder decisions (encoded in code):**
+1. Reports readable by all 5 platform roles; CSV export gated tighter
+   to `_REPORTS_CSV_ROLES = {super_admin, platform_admin, billing_admin,
+   read_only_auditor}` — **support_admin denied CSV** even though they
+   can read reports.
+2. Integrations roles: `super_admin`, `platform_admin`, `billing_admin`,
+   `read_only_auditor` (no support_admin).
+3. Settings roles: `super_admin`, `platform_admin` only.
+4. Settings source: pure introspection of env/`core.config` — booleans
+   + safe labels. **No `app_settings` collection.**
+5. Integration IDs: static slugs `stripe`, `resend`, `webhooks`, `jobs`.
+   No opaque Mongo refs.
+6. Reports window: `?window=7d|30d|90d`, default `30d`. No arbitrary
+   `from_ts`/`to_ts` in this phase.
+7. CSV export: one endpoint, `text/csv`, Stripe-shaped values scrubbed
+   via `_scrub_text` before serialization. No `.xlsx`.
+8. Admin login: dedicated frontend route `/admin/portal/login` uses
+   existing `POST /api/auth/login`; valid `platform_role` → dashboard,
+   else `AdminForbidden`. **No separate admin auth backend, no admin
+   password store, no MFA in this phase.**
+
+**Endpoints (7 new GETs):**
+- `GET /api/admin/portal/reports/usage`
+- `GET /api/admin/portal/reports/subscriptions`
+- `GET /api/admin/portal/reports/facilities`
+- `GET /api/admin/portal/reports/export.csv?type=...&window=...`
+- `GET /api/admin/portal/integrations`
+- `GET /api/admin/portal/integrations/{slug}`
+- `GET /api/admin/portal/settings`
+
+**SECTION_CAPABILITIES updates** (backend + `frontend/src/lib/permissions.js` mirror):
+- `reports` → adds `support_admin` (read only; CSV still denied).
+- `integrations` → adds `billing_admin` + `read_only_auditor`.
+- `settings` → unchanged (`super_admin`, `platform_admin`).
+
+**Activity-feed self-flood guard** extended with the 7 new
+`admin.portal.read.{reports.*,integrations,integration_detail,settings}`
+prefixes — Admin-2 dashboard remains calm.
+
+**Frontend pages:**
+- `pages/admin/AdminReports.jsx` (window selector, 3 aggregate cards,
+  4-type CSV download — button hidden for support_admin).
+- `pages/admin/AdminIntegrations.jsx` + `AdminIntegrationDrawer.jsx`
+  (4 static slug cards; drawer shows recent processing summaries; no
+  retry/disable controls).
+- `pages/admin/AdminSettings.jsx` (7-card config inventory; booleans
+  + safe labels only).
+- `pages/admin/AdminLogin.jsx` (dedicated `/admin/portal/login` route;
+  graphite background, lilac accent, distinct from customer login).
+- `AdminLayout` redirects unauthenticated → `/admin/portal/login`
+  (not `/login`).
+
+**Tests:** `tests/test_admin_portal_admin7b.py` — **94/94 green**.
+Covers role gates (read + CSV + integrations + settings), window
+validation, all 4 CSV types, Stripe-shaped value scrubbing
+(plant test asserts `sub_PLANT…` never reaches CSV body), settings
+no-leak assertion against the real env values of `JWT_SECRET`,
+`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`,
+`MONGO_URL`, mutation-method rejection (POST/PUT/PATCH/DELETE → 405),
+audit emission for all 7 actions, dashboard feed exclusion of all 7
+read prefixes, existing `/api/auth/login` admin flow, and legacy
+`/api/admin/*` (non-portal) route preservation.
+
+**Regression:** Admin-1..6 + Admin-7A.1 — **220/220 unchanged** ✅
+(Admin-1 parametrized section counts adjusted to reflect decisions 1+2:
+`support_admin` 8→9, `billing_admin` 6→7, `read_only_auditor` 5→6;
+those tests now correctly assert the new caps).
+
+**Full grand total: 314 backend tests passing.**
+
+**Packaged:** `/app/phase_admin_7b_changes.zip` (12 files, 228 KB) +
+`/app/PHASE_ADMIN_7B_README.md` (endpoint map, permission matrix,
+guardrail checklist, deferrals).
+
+### Admin Portal — Phase Status (post Admin-7B)
 
 | Phase   | Scope                                                        | Status |
 |---------|--------------------------------------------------------------|--------|
@@ -1428,6 +1507,6 @@ unchanged from the pre-split flat module.
 | Admin-5  | Subscription + billing control center                         | ✅ Codex-approved & locked |
 | Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
 | Admin-6 | Audit logs + support + alerts                                 | ✅ Codex-approved & locked |
-| Admin-7A.1 | Backend router consolidation (layered split)                | ✅ Ready for Codex review |
-| Admin-7A.2 | Per-surface 12-file split                                  | ⏸ Gated (after 7A.1 lock) |
-| Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ⏸ Gated (after 7A locks) |
+| Admin-7A.1 | Backend router consolidation (layered split)                | ✅ Codex-approved & locked |
+| Admin-7A.2 | Per-surface 12-file split                                  | ⏸ Gated (after 7B lock) |
+| Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Ready for Codex review |

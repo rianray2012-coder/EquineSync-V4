@@ -107,9 +107,17 @@ def test_role_admin_barn_admin_does_not_inherit_platform_access(db):
 @pytest.mark.parametrize("plat_role,expected_sections", [
     ("super_admin",       14),
     ("platform_admin",    14),
-    ("billing_admin",      6),  # dashboard, subscriptions, billing, alerts, reports, audit_logs (Admin-6 scoped)
-    ("support_admin",      8),  # dashboard, users, facilities, horses, subscriptions, support, alerts, audit_logs (Admin-6)
-    ("read_only_auditor",  5),  # dashboard, subscriptions, billing, reports, audit_logs
+    # Admin-7B (Feb 2026): billing_admin gained `integrations` →
+    # dashboard, subscriptions, billing, alerts, reports, integrations,
+    # audit_logs.
+    ("billing_admin",      7),
+    # Admin-7B: support_admin gained `reports` (read but not export) →
+    # dashboard, users, facilities, horses, subscriptions, support,
+    # alerts, reports, audit_logs.
+    ("support_admin",      9),
+    # Admin-7B: read_only_auditor gained `integrations` → dashboard,
+    # subscriptions, billing, reports, integrations, audit_logs.
+    ("read_only_auditor",  6),
 ])
 def test_portal_me_allows_each_platform_role(db, plat_role, expected_sections):
     sess = _signup("horse_owner")

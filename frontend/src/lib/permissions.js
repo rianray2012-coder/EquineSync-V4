@@ -82,8 +82,8 @@ export const ADMIN_SECTION_CAPS = {
   permissions:   ["super_admin", "platform_admin"],
   support:       ["super_admin", "platform_admin", "support_admin"],
   alerts:        ["super_admin", "platform_admin", "support_admin", "billing_admin"],
-  reports:       ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
-  integrations:  ["super_admin", "platform_admin"],
+  reports:       ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
+  integrations:  ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
   settings:      ["super_admin", "platform_admin"],
   audit_logs:    ["super_admin", "platform_admin", "read_only_auditor"],
 };
@@ -93,3 +93,13 @@ export const canSeeAdminSection = (user, sectionKey) => {
   if (!allowed) return false;
   return allowed.includes(getPlatformRole(user));
 };
+
+// Admin-7B (locked Feb 2026) — reports CSV export is gated tighter
+// than reports read. support_admin can SEE reports but cannot export.
+// Mirrors backend portal.py::_REPORTS_CSV_ROLES.
+export const ADMIN_REPORTS_CSV_ROLES = [
+  "super_admin", "platform_admin", "billing_admin", "read_only_auditor",
+];
+
+export const canExportAdminReports = (user) =>
+  ADMIN_REPORTS_CSV_ROLES.includes(getPlatformRole(user));

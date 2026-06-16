@@ -87,6 +87,11 @@ import AdminBilling from "./pages/admin/AdminBilling";
 import AdminAuditLogs from "./pages/admin/AdminAuditLogs";
 import AdminSupport from "./pages/admin/AdminSupport";
 import AdminAlerts from "./pages/admin/AdminAlerts";
+// Admin-7B
+import AdminReports from "./pages/admin/AdminReports";
+import AdminIntegrations from "./pages/admin/AdminIntegrations";
+import AdminSettings from "./pages/admin/AdminSettings";
+import AdminLogin from "./pages/admin/AdminLogin";
 
 const Protected = ({ children }) => {
   const { user, loading } = useAuth();
@@ -137,11 +142,17 @@ function App() {
               <Route path="permissions" element={<AdminPlaceholder section="Permissions" phase="Admin-7" description="Read-only role × capability matrix from the backend." />} />
               <Route path="support" element={<AdminSupport />} />
               <Route path="alerts" element={<AdminAlerts />} />
-              <Route path="reports" element={<AdminPlaceholder section="Reports" phase="Admin-7" description="Usage analytics, growth, churn, conversion. CSV export." />} />
-              <Route path="integrations" element={<AdminPlaceholder section="Integrations" phase="Admin-7" description="Connected integrations, sync status, retry controls — clearly labelled if any rows are demo." />} />
-              <Route path="settings" element={<AdminPlaceholder section="Settings" phase="Admin-7" description="App-wide settings, feature flags, templates, announcements (read-only first)." />} />
+              <Route path="reports" element={<AdminReports />} />
+              <Route path="integrations" element={<AdminIntegrations />} />
+              <Route path="settings" element={<AdminSettings />} />
               <Route path="audit-logs" element={<AdminAuditLogs />} />
             </Route>
+            {/* Admin-7B — dedicated admin login route. Uses existing
+                /api/auth/login under the hood; no separate admin auth
+                backend, no admin password store. Sits OUTSIDE
+                AdminLayout so the gate redirect can land here without
+                a loop. */}
+            <Route path="/admin/portal/login" element={<AdminLogin />} />
 
             <Route element={<Protected><AppShell /></Protected>}>
               <Route path="/dashboard" element={<Dashboard />} />
