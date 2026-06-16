@@ -1577,6 +1577,64 @@ changes.
 `/app/PHASE_ADMIN_7A2A_README.md` (file map, helper move log, drift
 guard rationale, Codex review checklist, round-2 fix note).
 
+## 🔐 Equine·Sync Admin Portal — Phase Admin-7A.2b ✅ (Feb 25 2026)
+
+**Two-layer split, layer b** — physical split of the 8 legacy
+Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
+billing, audit_logs, support, alerts) + test-only route-lock guard.
+
+**What physically moved:**
+- All 27 legacy Admin-1..6 route handlers (19 GET + 8 POST) lifted
+  out of `portal.py::build_router` into per-surface modules under
+  `routes/admin_portal/`. Each surface owns its module-level
+  constants, body classes, surface-specific role lists, and
+  surface-specific inner closures.
+- **`portal.py` shrunk 1,929 → 119 lines (−1,810)** — now a pure
+  orchestrator that builds `ctx` (carrying `db`, `get_current_user`,
+  `logger`, and the cross-surface helper `facility_label_map`) and
+  calls each surface's `register(router, ctx)` in a stable order.
+- The only cross-surface helper is `_facility_label_map` (used by
+  subscriptions, billing, support, alerts to bulk-resolve barn_id →
+  facility name). It lives on `ctx` to avoid import cycles.
+
+**Test-only route-lock guard** (`test_admin_portal_route_lock_guard.py`,
+4 source-scan tests — founder-approved option 1a):
+1. `test_no_admin_portal_route_decorator_is_unlocked` — every
+   `@router.get`/`@router.post` decorator on a `/admin/portal/*` path
+   must appear in `LOCKED_GET_ROUTES` / `LOCKED_POST_ROUTES`. Catches
+   "silently un-locked route" — the failure mode Codex flagged in
+   7A.2a round-2.
+2. `test_no_locked_route_is_orphaned` — inverse: every entry in the
+   lock lists must have a matching decorator.
+3. `test_route_lock_total_count_matches_founder_decision` — 26 GET +
+   8 POST = 34 endpoints exactly.
+4. `test_every_admin_portal_decorator_lives_in_a_surface_module` —
+   portal.py declares ZERO route decorators (orchestrator-only
+   invariant locked).
+
+Pure static string scans — no import-time hook, no runtime behavior.
+Run in &lt;0.2 s.
+
+**Tests:** Admin-7A.2b route-lock guard — **4/4 green**.
+Admin-7A.1 route-map preservation — **48/48 unchanged**.
+Admin-7A.2a drift guards — **8/8 unchanged**.
+Admin-7B — **98/98 unchanged**.
+Legacy Admin-1..6 — **179/179 unchanged**.
+**Grand total: 337 backend tests passing.**
+
+**Behaviour:** byte-identical to Admin-7A.2a. No route/role/UI/audit
+changes. The same 34 endpoints register on the same APIRouter, same
+HTTP methods, same response shapes.
+
+**Packaged:** `/app/phase_admin_7a2b_split.zip` +
+`/app/PHASE_ADMIN_7A2B_README.md` (file-size accounting,
+cross-surface helper rationale, Codex review checklist).
+
+**Deferred to Admin-7A.2c** (gated, optional): rename `portal.py` →
+`orchestrator.py` (or fold into `__init__.py`) so the directory
+structure reads as pure FastAPI conventions. Per founder direction,
+this cosmetic decision waits until 7A.2b locks.
+
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
 billing, audit_logs, support, alerts) still live in `portal.py`.
@@ -1596,6 +1654,7 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
 | Admin-6 | Audit logs + support + alerts                                 | ✅ Codex-approved & locked |
 | Admin-7A.1 | Backend router consolidation (layered split)                | ✅ Codex-approved & locked |
-| Admin-7A.2a | Helper physical move + 3 Admin-7B surfaces + drift guards | ✅ Ready for Codex review |
-| Admin-7A.2b | Per-surface split of 8 legacy Admin-1..6 surfaces          | ⏸ Gated (after 7A.2a lock) |
+| Admin-7A.2a | Helper physical move + 3 Admin-7B surfaces + drift guards | ✅ Codex-approved & locked |
+| Admin-7A.2b | Per-surface split of 8 legacy Admin-1..6 surfaces          | ✅ Ready for Codex review |
+| Admin-7A.2c | (Optional) portal.py → orchestrator.py rename              | ⏸ Gated (deferred per founder) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
