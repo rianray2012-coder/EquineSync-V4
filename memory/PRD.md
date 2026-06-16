@@ -1661,6 +1661,51 @@ cross-surface helper rationale, Codex review checklist).
 structure reads as pure FastAPI conventions. Per founder direction,
 this cosmetic decision waits until 7A.2b locks.
 
+## 🔐 Equine·Sync Admin Portal — Phase Admin-8 ✅ (Feb 25 2026)
+
+**Initial admin access + client-like demo account.** Backend +
+scripts + tests + docs only. No product / Admin Portal / Phase 9 /
+Phase 15 / landing-page changes.
+
+**Ships:**
+- `backend/scripts/seed_initial_admins.py` — idempotent CLI that
+  ensures the 4 locked platform admins exist (or are promoted):
+  - `info@equine-sync.com` → `platform_admin`
+  - `prsindustries23@gmail.com` → `billing_admin`
+  - `rian.ray2012@gmail.com` → `super_admin`
+  - `prspoon23@gmail.com` → `super_admin`
+- `backend/scripts/seed_demo_account.py` — idempotent CLI to seed
+  (or `--teardown`) a realistic demo barn (`Equine Sync Demo Barn`)
+  with `demo.client@equine-sync.com` (`horse_owner`, NO
+  `platform_role`), 3 horses (Aurelia/Beacon/Cinder), 5+3 tasks, a
+  local-only demo subscription (no Stripe IDs), and 3 demo-tagged
+  audit rows.
+- `backend/tests/test_admin_8_seed_scripts.py` — 9 tests covering
+  every founder Part D requirement.
+- `docs/INITIAL_ADMIN_AND_DEMO_SETUP.md` — operator usage guide.
+
+**Locked decisions encoded:**
+- Password source (1d): env-var per user if present; else mint a
+  32-char URL-safe value, print ONCE, never logged or audited.
+- Demo password (2b): env (`SEED_DEMO_CLIENT_PASSWORD`) if present,
+  else mint-and-print.
+- Production safety (3a): refuse to run when `APP_ENV` is
+  production/prod unless `--allow-prod` is passed; `--dry-run` is
+  always allowed.
+- Demo tag triple on every record: `demo_seed: True`,
+  `demo_seed_key: "admin8_client_demo"`,
+  `created_by_seed: "phase_admin_8"`.
+
+**Tests:** Admin-8 — **9/9 green**. Admin-7A.1 route map — **48/48
+unchanged**. Admin-7A.2a + route-lock guard — **18/18 unchanged**.
+
+**Behaviour:** zero changes to existing routes, roles, audit shapes,
+or UI. Admin Portal locked regression remains untouched.
+
+**Packaged:** `/app/phase_admin_8_access_demo_seed.zip` +
+`/app/PHASE_ADMIN_8_README.md` (locked decisions log, guardrail
+checklist, test coverage map).
+
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
 billing, audit_logs, support, alerts) still live in `portal.py`.
@@ -1684,3 +1729,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7A.2b | Per-surface split of 8 legacy Admin-1..6 surfaces          | ✅ Ready for Codex review |
 | Admin-7A.2c | (Optional) portal.py → orchestrator.py rename              | ⏸ Gated (deferred per founder) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
+| Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Ready for Codex review |
