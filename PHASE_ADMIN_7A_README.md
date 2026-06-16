@@ -68,10 +68,12 @@ Admin-7A.2 will physically move the helper definitions into `_helpers.py` once t
    - `test_helpers_are_identical_to_portal_definitions` — `_helpers.X is portal.X` for every helper (the byte-identical re-export invariant).
    - `test_build_router_importable_from_package` — `routes.admin_portal.build_router is routes.admin_portal.portal.build_router`.
 
-2. **Route-map preservation (37 tests)**
-   - `test_all_locked_admin_portal_routes_present` — every one of the 18 locked GET + 7 locked POST endpoints is registered on the live FastAPI app under the same path.
-   - Parametrised method-set assertion for each locked path (18 × GET + 7 × POST = 25 tests).
+2. **Route-map preservation (38 tests)**
+   - `test_all_locked_admin_portal_routes_present` — every one of the 18 locked GET + 8 locked POST endpoints is registered on the live FastAPI app under the same path (26 paths total).
+   - Parametrised method-set assertion for each locked path (18 × GET + 8 × POST = 26 tests).
    - **Response-shape sanity probes** — one per surface (Admin-1 `/me`, Admin-2 `/kpis` + `/activity`, Admin-3 `/users`, Admin-4 `/facilities`, Admin-5 `/subscriptions` + `/billing-events`, Admin-6 `/audit-logs` + `/support` + `/alerts`). Each asserts the canonical top-level keys still exist.
+
+**Codex round-1 fix:** added the previously-missed Admin-3 `POST /api/admin/portal/users/{user_id}/request-info` to the locked POST route list. Route-map regression now covers all 27 registered Admin Portal routes (1 root `/api/admin/portal/me` + the surface lists above).
 
 3. **Regression sweep** — Admin-1 (14) + Admin-2 (19) + Admin-3 (33) + Admin-4 (23) + Admin-5 (41) + Admin-6 (49) = **179/179 pass unchanged**.
 

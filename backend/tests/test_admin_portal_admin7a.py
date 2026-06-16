@@ -152,6 +152,7 @@ LOCKED_POST_ROUTES = [
     "/api/admin/portal/users/{user_id}/reject",
     "/api/admin/portal/users/{user_id}/suspend",
     "/api/admin/portal/users/{user_id}/reactivate",
+    "/api/admin/portal/users/{user_id}/request-info",
     # Admin-6
     "/api/admin/portal/support/{ticket_ref}/status",
     "/api/admin/portal/support/{ticket_ref}/assign",

@@ -1,16 +1,21 @@
-"""routes/admin/_helpers.py — shared Admin Portal helpers.
+"""routes/admin_portal/_helpers.py — shared Admin Portal helpers.
 
 Admin-7A.1 (layered split, Feb 2026):
   The helper SURFACE lives here so per-surface files in the upcoming
   Admin-7A.2 split (`dashboard.py`, `users.py`, `facilities.py`, …)
   have a single canonical import path:
 
-      from routes.admin._helpers import (
+      from routes.admin_portal._helpers import (
           SECTION_CAPABILITIES, _sections_for,
           _admin_ref, _resolve_admin_ref, _attach_admin_ref,
           _scrub_metadata, _scrub_text, _strip_keys,
           ...
       )
+
+  NOTE: the package path is `routes/admin_portal/`, NOT
+  `routes/admin/` — the legacy `routes/admin.py` (seed + tenant-reset)
+  already owns the `routes.admin` import path. Admin-7A.1 deliberately
+  avoided that collision.
 
   In this transitional phase, the implementations remain in
   `portal.py` (the file that previously was `admin_portal.py`) and
