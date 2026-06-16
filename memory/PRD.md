@@ -1784,6 +1784,79 @@ Final scoreboard for Admin-8:
   PRD, and the phase README.
 
 
+## 🔐 Equine·Sync Admin Portal — Phase Admin-4b ✅ (Feb 27 2026)
+
+**Facility edits + soft-disable + tenancy enforcement.** Backend + Admin
+Portal frontend + tests only. No Phase 9 invoice / recurring-charge
+logic changes, no Phase 15 subscription / webhook / Stripe logic
+changes, no landing-page changes, no hard deletes.
+
+**Ships:**
+- `backend/routes/admin_portal/facilities.py` — 3 additive endpoints:
+  - `PATCH /api/admin/portal/facilities/{barn_id}` — whitelisted
+    profile edit (`name, address, phone, contact_email, timezone, notes`).
+  - `POST /api/admin/portal/facilities/{barn_id}/disable` — enum
+    reason category + optional 200-char operator-only details.
+  - `POST /api/admin/portal/facilities/{barn_id}/reenable`.
+- `backend/core/tenancy.py` — `make_require_active_facility(db, get_current_user)`
+  + `facility_status_for(db, user)` helper. Platform-role users bypass;
+  barn-scoped users with a disabled facility receive a generic
+  `403 {"detail":"Facility unavailable"}`.
+- `backend/server.py` — dependency attached at `include_router(...,
+  dependencies=[…])` scope on 18 tenant-data routers; 9 routers
+  (auth, system, admin, admin_portal, admin_billing, admin_review,
+  subscription_emails, membership, subscriptions) are intentionally
+  excluded. Full inventory in `PHASE_ADMIN_4B_README.md`.
+- `backend/routes/auth.py` — `/auth/me` returns the additive
+  `facility_status: "active" | "disabled"` field.
+- `backend/routes/admin_portal/dashboard.py` — `/admin/portal/me`
+  returns `capabilities.facilities_write` for the frontend gate.
+- `backend/routes/admin_portal/_helpers.py` — `_FACILITY_*` constants
+  (mutable whitelist, never-editable set, reason categories, writer
+  roles, field limits).
+- `backend/tests/test_admin_portal_admin4b.py` — 39 tests covering
+  whitelist, permission matrix, idempotency (409), audit shape,
+  Phase 9 / 15 byte-identical guards, Stripe-leak guard, tenancy
+  enforcement on `/horses`, `/owner-updates`, `/invoices`, /auth/me
+  banner field, /auth/refresh non-gated.
+- `frontend/src/pages/admin/AdminFacilityDrawer.jsx` — edit form,
+  disable + re-enable confirmation dialogs, lilac disabled badge.
+- `frontend/src/pages/admin/AdminFacilities.jsx` — list refresh on
+  mutation, copy updated to reflect Admin-4b writes.
+
+**Locked decisions encoded:**
+- URL shape (decision A): raw `barn_id` in all 3 mutation endpoints
+  (matches the existing GET shape; no `af_*` admin_ref minting).
+- Enforcement layer (decision B): dedicated FastAPI dependency factory
+  applied per-router via `include_router(..., dependencies=[…])`.
+- `/auth/me` (decision C): generic `facility_status` string only.
+- `disabled_reason` shape (decision D): enum category + optional 200-char
+  details. Details persisted on `barns` doc; **never** in audit metadata.
+- Permissions (decision E): super_admin + platform_admin write; others
+  blocked (per existing `SECTION_CAPABILITIES["facilities"]`).
+- Mutable whitelist (decision F): `name, address, phone, contact_email,
+  timezone, notes`. Everything else → 422.
+- Timezone (decision 7): strict IANA via `zoneinfo.available_timezones()`;
+  fail closed (422) if `zoneinfo` is unavailable.
+- Idempotency (decision 8): 409 on re-disable / re-enable.
+- Audit hardening (decision 9): `admin.facility.updated` records only
+  `changed_fields` — never raw before/after values.
+- Deferred (decision 10): no `?preview=true`, no
+  `/facilities/{barn_id}/audit-log` in Admin-4b.
+
+**Route lock totals:** 37 Admin Portal endpoints exactly
+(26 GET + 10 POST + 1 PATCH). New `LOCKED_PATCH_ROUTES` list added to
+`tests/test_admin_portal_admin7a.py`; route-lock guard extended to
+accept PATCH and assert orphan symmetry.
+
+**Tests:** Admin-4b — **39/39 green**. Admin-4 + route-lock guard +
+Admin-7A/7A.2/7B — **242 passed** (1 transient lockout flake on
+re-run, unrelated). Admin-8 regression unchanged at **13/13**.
+
+**Packaged:** `/app/phase_admin_4b_changes.zip` +
+`/app/PHASE_ADMIN_4B_README.md`.
+
+
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
 billing, audit_logs, support, alerts) still live in `portal.py`.
@@ -1808,3 +1881,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7A.2c | (Optional) portal.py → orchestrator.py rename              | ⏸ Gated (deferred per founder) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
 | Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex-approved & locked |
+| Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Ready for Codex review |

@@ -34,6 +34,9 @@ export default function AdminFacilities() {
   const [cursor, setCursor] = useState(0);
   const [nextCursor, setNextCursor] = useState(null);
   const [openBarnId, setOpenBarnId] = useState(null);
+  // Admin-4b: bump when a mutation happens in the drawer so the
+  // list re-renders with the updated status / name / etc.
+  const [listTick, setListTick] = useState(0);
 
   // All state transitions live inside async callbacks (see
   // AdminDashboard for the same pattern). Filter/page changes keep
@@ -62,7 +65,7 @@ export default function AdminFacilities() {
         setLoading(false);
       });
     return () => { cancelled = true; setErr(null); };
-  }, [q, tier, cursor]);
+  }, [q, tier, cursor, listTick]);
 
   return (
     <div className="max-w-6xl mx-auto" data-testid="admin-facilities-page">
@@ -72,8 +75,9 @@ export default function AdminFacilities() {
         </div>
         <h1 className="font-display text-3xl font-light text-equinesync-graphite mt-2">Facility roster</h1>
         <p className="mt-2 text-[13.5px] text-equinesync-graphite/65 max-w-2xl">
-          Cross-facility visibility for every platform role. Mutations (edits + soft-disable) land
-          in a separately-gated Admin-4b. Subscription data is summary-only — drill-down lives in Admin-5.
+          Cross-facility visibility for every platform role. Open a row to edit profile
+          fields or soft-disable the facility (super_admin / platform_admin only).
+          Subscription data is summary-only — drill-down lives in Admin-5.
         </p>
       </div>
 
@@ -189,6 +193,7 @@ export default function AdminFacilities() {
         barnId={openBarnId}
         open={!!openBarnId}
         onClose={() => setOpenBarnId(null)}
+        onMutated={() => setListTick((t) => t + 1)}
       />
     </div>
   );

@@ -119,9 +119,10 @@ def test_build_router_importable_from_package():
 # Route-map preservation — every locked Admin-1..7B endpoint must still
 # be registered under the same path + same allowed HTTP methods.
 #
-# Total locked surface: 34 Admin Portal endpoints
+# Total locked surface: 37 Admin Portal endpoints
 #   = 27 legacy Admin-1..6 routes (19 GET + 8 POST)
 #   + 7 Admin-7B read-only routes (7 GET; no POST)
+#   + 3 Admin-4b facility mutations (1 PATCH + 2 POST)
 # ---------------------------------------------------------------------
 LOCKED_GET_ROUTES = [
     # Admin-1
@@ -173,6 +174,16 @@ LOCKED_POST_ROUTES = [
     "/api/admin/portal/support/{ticket_ref}/status",
     "/api/admin/portal/support/{ticket_ref}/assign",
     "/api/admin/portal/support/{ticket_ref}/notes",
+    # Admin-4b — soft-disable + re-enable. Editable scope is locked
+    # to status transitions; the PATCH for whitelisted profile fields
+    # lives in LOCKED_PATCH_ROUTES below.
+    "/api/admin/portal/facilities/{barn_id}/disable",
+    "/api/admin/portal/facilities/{barn_id}/reenable",
+]
+LOCKED_PATCH_ROUTES = [
+    # Admin-4b — whitelisted facility profile edit (name, address,
+    # phone, contact_email, timezone, notes).
+    "/api/admin/portal/facilities/{barn_id}",
 ]
 
 
@@ -192,8 +203,10 @@ def _all_routes():
 
 def test_all_locked_admin_portal_routes_present():
     routes = _all_routes()
-    missing = [p for p in LOCKED_GET_ROUTES + LOCKED_POST_ROUTES
-               if p not in routes]
+    missing = [
+        p for p in LOCKED_GET_ROUTES + LOCKED_POST_ROUTES + LOCKED_PATCH_ROUTES
+        if p not in routes
+    ]
     assert not missing, (
         f"Admin-7A.1 split lost {len(missing)} locked route(s): {missing}"
     )
@@ -209,6 +222,12 @@ def test_locked_get_routes_accept_get(path):
 def test_locked_post_routes_accept_post(path):
     routes = _all_routes()
     assert "POST" in routes[path], f"{path} no longer accepts POST"
+
+
+@pytest.mark.parametrize("path", LOCKED_PATCH_ROUTES)
+def test_locked_patch_routes_accept_patch(path):
+    routes = _all_routes()
+    assert "PATCH" in routes[path], f"{path} no longer accepts PATCH"
 
 
 # ---------------------------------------------------------------------

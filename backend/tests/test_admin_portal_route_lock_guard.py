@@ -57,17 +57,18 @@ def _all_admin_portal_decorators():
 
 def _load_locked_lists():
     from tests.test_admin_portal_admin7a import (
-        LOCKED_GET_ROUTES, LOCKED_POST_ROUTES,
+        LOCKED_GET_ROUTES, LOCKED_POST_ROUTES, LOCKED_PATCH_ROUTES,
     )
-    return set(LOCKED_GET_ROUTES), set(LOCKED_POST_ROUTES)
+    return (set(LOCKED_GET_ROUTES), set(LOCKED_POST_ROUTES),
+            set(LOCKED_PATCH_ROUTES))
 
 
 def test_no_admin_portal_route_decorator_is_unlocked():
     """The most important guard: every admin_portal decorator must
     map to a locked entry. Catches the failure mode where someone
     adds a new endpoint inside a surface module but forgets to add it
-    to LOCKED_GET_ROUTES / LOCKED_POST_ROUTES."""
-    locked_get, locked_post = _load_locked_lists()
+    to LOCKED_GET_ROUTES / LOCKED_POST_ROUTES / LOCKED_PATCH_ROUTES."""
+    locked_get, locked_post, locked_patch = _load_locked_lists()
     unlocked = []
     for method, path, fname, lineno in _all_admin_portal_decorators():
         if method == "GET":
@@ -76,18 +77,22 @@ def test_no_admin_portal_route_decorator_is_unlocked():
         elif method == "POST":
             if path not in locked_post:
                 unlocked.append(f"POST {path}  ({fname}:{lineno})")
+        elif method == "PATCH":
+            if path not in locked_patch:
+                unlocked.append(f"PATCH {path}  ({fname}:{lineno})")
         else:
             # No other HTTP methods are allowed on admin-portal routes
             # by founder lock; catching them here is also useful.
             unlocked.append(
                 f"{method} {path}  ({fname}:{lineno}) — "
-                f"non-GET/POST methods are not permitted on the Admin Portal."
+                f"non-GET/POST/PATCH methods are not permitted on the Admin Portal."
             )
     assert not unlocked, (
         "Unlocked admin_portal route decorator(s) detected:\n  "
         + "\n  ".join(unlocked)
-        + "\n\nAdd the path to LOCKED_GET_ROUTES / LOCKED_POST_ROUTES "
-        "in tests/test_admin_portal_admin7a.py, or remove the endpoint."
+        + "\n\nAdd the path to LOCKED_GET_ROUTES / LOCKED_POST_ROUTES / "
+        "LOCKED_PATCH_ROUTES in tests/test_admin_portal_admin7a.py, "
+        "or remove the endpoint."
     )
 
 
@@ -96,22 +101,28 @@ def test_no_locked_route_is_orphaned():
     to a real decorator in a surface module. Catches the failure mode
     where someone removes an endpoint but forgets to update the lock
     list (which would silently weaken the route-map test)."""
-    locked_get, locked_post = _load_locked_lists()
+    locked_get, locked_post, locked_patch = _load_locked_lists()
     decorators_get = set()
     decorators_post = set()
+    decorators_patch = set()
     for method, path, fname, lineno in _all_admin_portal_decorators():
         if method == "GET":
             decorators_get.add(path)
         elif method == "POST":
             decorators_post.add(path)
+        elif method == "PATCH":
+            decorators_patch.add(path)
 
     missing_get = locked_get - decorators_get
     missing_post = locked_post - decorators_post
+    missing_patch = locked_patch - decorators_patch
     bad = []
     for p in sorted(missing_get):
         bad.append(f"GET {p}  — listed in LOCKED_GET_ROUTES but no surface module declares it")
     for p in sorted(missing_post):
         bad.append(f"POST {p}  — listed in LOCKED_POST_ROUTES but no surface module declares it")
+    for p in sorted(missing_patch):
+        bad.append(f"PATCH {p}  — listed in LOCKED_PATCH_ROUTES but no surface module declares it")
     assert not bad, (
         "Orphaned LOCKED_*_ROUTES entries (no matching decorator):\n  "
         + "\n  ".join(bad)
@@ -120,16 +131,20 @@ def test_no_locked_route_is_orphaned():
 
 
 def test_route_lock_total_count_matches_founder_decision():
-    """Belt-and-braces: the locked surface is 34 endpoints exactly
-    (26 GET + 8 POST = 27 legacy Admin-1..6 + 7 Admin-7B)."""
-    locked_get, locked_post = _load_locked_lists()
+    """Belt-and-braces: the locked surface is 37 endpoints exactly
+    (26 GET + 10 POST + 1 PATCH = 27 legacy Admin-1..6 + 7 Admin-7B + 3 Admin-4b)."""
+    locked_get, locked_post, locked_patch = _load_locked_lists()
     assert len(locked_get) == 26, (
         f"LOCKED_GET_ROUTES has {len(locked_get)} entries; expected 26 "
         "(19 legacy Admin-1..6 + 7 Admin-7B)."
     )
-    assert len(locked_post) == 8, (
-        f"LOCKED_POST_ROUTES has {len(locked_post)} entries; expected 8 "
-        "(legacy Admin-3 + Admin-6 mutations)."
+    assert len(locked_post) == 10, (
+        f"LOCKED_POST_ROUTES has {len(locked_post)} entries; expected 10 "
+        "(8 legacy Admin-3 + Admin-6 + 2 Admin-4b disable/reenable)."
+    )
+    assert len(locked_patch) == 1, (
+        f"LOCKED_PATCH_ROUTES has {len(locked_patch)} entries; expected 1 "
+        "(Admin-4b facility profile edit)."
     )
 
 

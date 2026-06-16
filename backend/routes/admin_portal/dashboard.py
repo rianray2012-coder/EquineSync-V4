@@ -184,6 +184,12 @@ def register(router, ctx) -> None:
             "platform_roles_known": sorted(PLATFORM_ROLES),
             "sections": _sections_for(role),
             "section_capabilities": SECTION_CAPABILITIES,
+            # Phase Admin-4b (additive): per-surface mutation capabilities.
+            # The frontend gates write buttons on these booleans so a
+            # support_admin sees the facility list but no Save / Disable.
+            "capabilities": {
+                "facilities_write": role in ("super_admin", "platform_admin"),
+            },
         }
 
     @router.get("/admin/portal/health")

@@ -356,20 +356,34 @@ def test_facility_detail_has_no_drill_down_links_or_billing_events(db):
 
 # ---------------------------------------------------------------------
 # Surface invariants — Admin-4 read-only ceiling (decision 1a)
+#
+# Admin-4b update (Feb 2026): the DETAIL endpoint now also accepts
+# PATCH for the whitelisted profile fields (name, address, phone,
+# contact_email, timezone, notes). POST/PUT/DELETE remain blocked on
+# both list + detail; PATCH on the list endpoint remains blocked.
 # ---------------------------------------------------------------------
-@pytest.mark.parametrize("path", [
-    "/admin/portal/facilities",
-    "/admin/portal/facilities/primary",
-])
-def test_no_mutations_exposed_on_admin4_endpoints(path):
-    """Decision 1a: Admin-4 is read-only. No mutation methods anywhere."""
+def test_no_mutations_exposed_on_admin4_list_endpoint():
+    """The list endpoint must NEVER accept any mutation method."""
     for method in ("post", "put", "patch", "delete"):
         r = getattr(requests, method)(
-            f"{API}{path}", timeout=10,
+            f"{API}/admin/portal/facilities", timeout=10,
             headers={"Content-Type": "application/json"}, json={},
         )
         assert r.status_code in (401, 403, 405), (
-            f"{method.upper()} {path} unexpectedly returned {r.status_code}"
+            f"{method.upper()} /admin/portal/facilities returned {r.status_code}"
+        )
+
+
+def test_no_post_put_delete_on_admin4_detail_endpoint():
+    """Detail endpoint: PATCH is now permitted (Admin-4b); POST / PUT /
+    DELETE must still be rejected at the framework / permission layer."""
+    for method in ("post", "put", "delete"):
+        r = getattr(requests, method)(
+            f"{API}/admin/portal/facilities/primary", timeout=10,
+            headers={"Content-Type": "application/json"}, json={},
+        )
+        assert r.status_code in (401, 403, 405), (
+            f"{method.upper()} /admin/portal/facilities/primary returned {r.status_code}"
         )
 
 

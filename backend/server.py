@@ -84,6 +84,17 @@ from routes.owner import build_router as build_owner_router
 from routes.backlog import build_router as build_backlog_router
 from seed_data import run_seed
 
+# Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
+# Builds the FastAPI dependency that blocks barn-scoped users whose
+# facility has been disabled via the Admin Portal. Attached at
+# `include_router(..., dependencies=[Depends(...)])` scope on every
+# product/tenant-data router below. See PHASE_ADMIN_4B_README.md for
+# the full applied/excluded inventory.
+from fastapi import Depends as _Depends
+from core.tenancy import make_require_active_facility
+require_active_facility = make_require_active_facility(db, get_current_user)
+PRODUCT_FACILITY_DEPS = [_Depends(require_active_facility)]
+
 # Phase 10A: centralized structured logging + request-correlation filters
 # (JSON in prod, plain in dev; configures the root logger).
 configure_logging()
@@ -94,16 +105,25 @@ api_router = APIRouter(prefix="/api")
 
 # ---------------- Router assembly ----------------
 # Unified Task Engine
-api_router.include_router(build_task_engine_router(db, get_current_user, _track))
+api_router.include_router(
+    build_task_engine_router(db, get_current_user, _track),
+    dependencies=PRODUCT_FACILITY_DEPS,
+)
 
 # Auth (routes/auth.py)
 api_router.include_router(build_auth_router(db))
 
 # Notifications
-api_router.include_router(build_notifications_router(db, get_current_user))
+api_router.include_router(
+    build_notifications_router(db, get_current_user),
+    dependencies=PRODUCT_FACILITY_DEPS,
+)
 
 # Dashboard (routes/dashboard.py)
-api_router.include_router(build_dashboard_router(db, get_current_user, TASK_TENANT_ID))
+api_router.include_router(
+    build_dashboard_router(db, get_current_user, TASK_TENANT_ID),
+    dependencies=PRODUCT_FACILITY_DEPS,
+)
 
 # Reports (routes/reports.py) — exposes send_nudges for the startup auto-nudge loop
 _reports_router = build_reports_router(
@@ -116,7 +136,7 @@ _reports_router = build_reports_router(
     require_setup_role=require_setup_role,
 )
 _send_nudges = _reports_router._reports_helpers["send_nudges"]
-api_router.include_router(_reports_router)
+api_router.include_router(_reports_router, dependencies=PRODUCT_FACILITY_DEPS)
 
 # Invites (routes/invites.py)
 api_router.include_router(build_invites_router(
@@ -136,7 +156,7 @@ api_router.include_router(build_invites_router(
     issue_refresh_token=issue_refresh_token,
     jwt_exp_hours=JWT_EXP_HOURS,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Onboarding (routes/onboarding.py)
 api_router.include_router(build_onboarding_router(
@@ -147,7 +167,7 @@ api_router.include_router(build_onboarding_router(
     list_collection=list_collection,
     clean=clean,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Horses — horse-profile CRUD (routes/horses.py).
 # NOTE: GET /horses/{id}/timeline intentionally remains in task_engine.py
@@ -158,7 +178,7 @@ api_router.include_router(build_horses_router(
     list_collection=list_collection,
     clean=clean,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Care records (routes/care.py)
 api_router.include_router(build_care_router(
@@ -167,7 +187,7 @@ api_router.include_router(build_care_router(
     list_collection=list_collection,
     clean=clean,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Operations (routes/operations.py)
 api_router.include_router(build_operations_router(
@@ -176,16 +196,18 @@ api_router.include_router(build_operations_router(
     list_collection=list_collection,
     clean=clean,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
-# Billing — invoices (routes/billing.py)
+# Billing — invoices (routes/billing.py) — Phase 9 read path.
+# Disabled-facility members cannot read tenant invoices; the underlying
+# invoice/recurring_charge docs are NOT mutated by enforcement.
 api_router.include_router(build_billing_router(
     db=db,
     get_current_user=get_current_user,
     list_collection=list_collection,
     clean=clean,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Marketplace membership — Stripe Checkout (routes/membership.py)
 api_router.include_router(build_membership_router(
@@ -223,7 +245,7 @@ api_router.include_router(build_recurring_charges_router(
     get_current_user=get_current_user,
     clean=clean,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # System — root + health (routes/system.py)
 api_router.include_router(build_system_router(db))
@@ -244,10 +266,12 @@ api_router.include_router(build_admin_portal_router(
 ))
 
 # Analytics (routes/analytics.py)
-api_router.include_router(build_analytics_router(db, get_current_user, require_setup_role))
+api_router.include_router(build_analytics_router(db, get_current_user, require_setup_role),
+                          dependencies=PRODUCT_FACILITY_DEPS)
 
 # Owner digest + weekly recap HTTP routes (routes/digests.py)
-api_router.include_router(build_digests_router(db=db, get_current_user=get_current_user))
+api_router.include_router(build_digests_router(db=db, get_current_user=get_current_user),
+                          dependencies=PRODUCT_FACILITY_DEPS)
 
 # Barn provisioning — Phase 4D multi-barn (routes/barns.py)
 api_router.include_router(build_barns_router(
@@ -257,10 +281,11 @@ api_router.include_router(build_barns_router(
     user_safe=_user_safe,
     new_id=new_id,
     onboarding_steps=ONBOARDING_STEPS,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Audit log read API — Phase 5D (routes/audit.py)
-api_router.include_router(build_audit_router(db=db, get_current_user=get_current_user))
+api_router.include_router(build_audit_router(db=db, get_current_user=get_current_user),
+                          dependencies=PRODUCT_FACILITY_DEPS)
 
 # Owner Updates — Phase 7A Owner Trust Layer (routes/owner_updates.py)
 api_router.include_router(build_owner_updates_router(
@@ -269,10 +294,11 @@ api_router.include_router(build_owner_updates_router(
     list_collection=list_collection,
     clean=clean,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Owner self-service reads — Phase 7D-2 (routes/owner.py)
-api_router.include_router(build_owner_router(db=db, get_current_user=get_current_user))
+api_router.include_router(build_owner_router(db=db, get_current_user=get_current_user),
+                          dependencies=PRODUCT_FACILITY_DEPS)
 
 # Codex feature backlog foundations — additive modules and integration-ready
 # shells alongside the Emergent founder-beta routes.
@@ -280,7 +306,7 @@ api_router.include_router(build_backlog_router(
     db=db,
     get_current_user=get_current_user,
     new_id=new_id,
-))
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 app.include_router(api_router)
 

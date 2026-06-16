@@ -47,7 +47,7 @@ from core.auth_tokens import (
     PURPOSE_EMAIL_VERIFY,
 )
 from core.login_attempts import check_lockout, record_failure, clear_attempts
-from core.tenancy import PRIMARY_BARN_ID, resolve_barn_id
+from core.tenancy import PRIMARY_BARN_ID, resolve_barn_id, facility_status_for
 from core import audit
 
 logger = logging.getLogger(__name__)
@@ -557,6 +557,10 @@ def build_router(db) -> APIRouter:
 
     @router.get("/auth/me")
     async def me(user=Depends(get_current_user)):
+        # Phase Admin-4b (additive): expose a generic `facility_status`
+        # so the frontend can render a "Facility unavailable" banner
+        # for soft-disabled barns. Other fields unchanged.
+        user["facility_status"] = await facility_status_for(db, user)
         return user
 
     # ---------------- password reset ----------------

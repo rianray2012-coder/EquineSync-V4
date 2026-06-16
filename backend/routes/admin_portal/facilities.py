@@ -46,6 +46,12 @@ from ._helpers import (
     _resolve_admin_ref,
     _attach_admin_ref,
     _strip_keys,
+    _FACILITY_MUTABLE_FIELDS,
+    _FACILITY_NEVER_EDITABLE,
+    _FACILITY_DISABLE_REASON_CATEGORIES,
+    _FACILITY_WRITER_ROLES,
+    _FACILITY_FIELD_LIMITS,
+    _FACILITY_DISABLE_DETAILS_MAX_LEN,
 )
 
 
@@ -279,4 +285,263 @@ def register(router, ctx) -> None:
             },
             "recent_activity": recent_audit,
         }
+
+    # ==================================================================
+    # Phase Admin-4b — facility mutations (PATCH / disable / reenable).
+    #
+    # Strict ceiling:
+    #   - Only `super_admin` + `platform_admin` may mutate. Every other
+    #     platform_role + every barn-scoped role receives a 403.
+    #   - Mutable whitelist is `_FACILITY_MUTABLE_FIELDS` only. Any other
+    #     field in the request body → 422.
+    #   - Soft-disable only. No hard deletes are introduced.
+    #   - Tenancy-layer enforcement (block disabled-facility members from
+    #     product routes) is implemented in `core/tenancy.make_require_active_facility`
+    #     and wired in `server.py`. See PHASE_ADMIN_4B_README.md inventory.
+    #   - Phase 9 (invoices, recurring_charges) and Phase 15
+    #     (subscriptions, webhooks) collections are NEVER mutated by
+    #     these endpoints — only `barns` is touched.
+    # ==================================================================
+
+    def _require_facility_writer(user):
+        """Mutation gate: must be `super_admin` or `platform_admin`.
+        Falls back to the generic 403 surfaced by `require_platform_role`
+        for non-platform users, then layers a tighter writer-role check
+        on top — the response detail stays generic to avoid leaking the
+        permission matrix to non-writers."""
+        require_platform_role(user)
+        if platform_role(user) not in _FACILITY_WRITER_ROLES:
+            raise HTTPException(403, "Insufficient platform role.")
+
+    def _validate_facility_patch(payload: Dict[str, Any]) -> Dict[str, Any]:
+        """Validate and normalise a PATCH body. Returns the trimmed,
+        whitelisted updates dict. Any unknown/disallowed field → 422.
+        Length + format rules per `_FACILITY_FIELD_LIMITS`."""
+        if not isinstance(payload, dict) or not payload:
+            raise HTTPException(422, "Empty request body.")
+
+        unknown = [k for k in payload.keys() if k not in _FACILITY_MUTABLE_FIELDS]
+        if unknown:
+            # Single, generic message — never reveal whether the
+            # unknown key was a Stripe/billing field vs a typo.
+            raise HTTPException(
+                422,
+                f"Field not editable: {sorted(unknown)[0]!r}",
+            )
+
+        # Optional timezone strict-IANA validation (fail closed when
+        # `zoneinfo` is unavailable — per founder decision 7).
+        tz_set: Optional[Set[str]] = None
+        try:
+            from zoneinfo import available_timezones  # py3.9+
+            tz_set = set(available_timezones())
+            if not tz_set:
+                tz_set = None
+        except Exception:
+            tz_set = None
+
+        updates: Dict[str, Any] = {}
+        for field in _FACILITY_MUTABLE_FIELDS:
+            if field not in payload:
+                continue
+            raw = payload[field]
+            if not isinstance(raw, str):
+                raise HTTPException(422, f"Field {field!r} must be a string.")
+            v = raw.strip()
+            lo, hi = _FACILITY_FIELD_LIMITS[field]
+            if len(v) < lo:
+                raise HTTPException(422, f"Field {field!r} is too short.")
+            if len(v) > hi:
+                raise HTTPException(422, f"Field {field!r} is too long.")
+            if field == "contact_email" and v:
+                # Permissive email pattern — defence-in-depth, not
+                # marketing-grade. Existing user signup uses the same.
+                if not _re_module.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", v):
+                    raise HTTPException(422, "Invalid email format.")
+            if field == "timezone":
+                if tz_set is None:
+                    raise HTTPException(
+                        422,
+                        "Timezone validation is unavailable on this runtime; "
+                        "cannot accept timezone updates safely.",
+                    )
+                if v not in tz_set:
+                    raise HTTPException(422, "Unknown IANA timezone.")
+            updates[field] = v
+        if not updates:
+            raise HTTPException(422, "Empty request body.")
+        return updates
+
+    @router.patch("/admin/portal/facilities/{barn_id}")
+    async def patch_facility(barn_id: str, request: Request,
+                             user=Depends(get_current_user)):
+        """Apply a whitelisted profile edit to a facility.
+
+        Allowed fields: name, address, phone, contact_email, timezone, notes.
+        Any other field → 422. Never touches subscription / Stripe /
+        Phase 9 / Phase 15 fields. Per founder decision 9, the audit row
+        records only `changed_fields` — never raw before/after values.
+        """
+        _require_facility_writer(user)
+
+        try:
+            payload = await request.json()
+        except Exception:
+            raise HTTPException(422, "Invalid JSON body.")
+
+        # Hard reject of any never-editable keys before whitelist check —
+        # the validator already rejects, but this gives a more precise
+        # error for the most dangerous fields (subscription_id, Stripe,
+        # Phase 9/15) without exposing them to enumeration.
+        bad_priv = [
+            k for k in (payload or {}).keys() if k in _FACILITY_NEVER_EDITABLE
+        ]
+        if bad_priv:
+            raise HTTPException(422, f"Field not editable: {bad_priv[0]!r}")
+
+        updates = _validate_facility_patch(payload)
+
+        barn = await db.barns.find_one({"id": barn_id}, {"_id": 0, "id": 1})
+        if not barn:
+            raise HTTPException(404, "Facility not found.")
+
+        updates["updated_at"] = datetime.now(timezone.utc).isoformat()
+        await db.barns.update_one({"id": barn_id}, {"$set": updates})
+
+        # Audit — record CHANGED FIELDS ONLY (founder decision 9).
+        await audit.record(
+            action="admin.facility.updated",
+            user=user, request=request,
+            resource_type="facility", resource_id=barn_id,
+            outcome="success", status_code=200,
+            metadata={
+                "barn_id": barn_id,
+                "changed_fields": sorted(k for k in updates if k != "updated_at"),
+                "actor_role": platform_role(user),
+            },
+        )
+
+        # Return the freshly-projected safe view (no Stripe IDs).
+        refreshed = await db.barns.find_one(
+            {"id": barn_id}, _BARN_SAFE_FIELDS,
+        )
+        return {"barn": _strip_barn_response(refreshed)}
+
+    @router.post("/admin/portal/facilities/{barn_id}/disable")
+    async def disable_facility(barn_id: str, request: Request,
+                               user=Depends(get_current_user)):
+        """Soft-disable a facility.
+
+        Body: `{"reason_category": "<one of _FACILITY_DISABLE_REASON_CATEGORIES>",
+                 "reason_details": "<optional, max 200 chars>"}`.
+        Re-running on an already-disabled facility → 409.
+        """
+        _require_facility_writer(user)
+
+        try:
+            payload = await request.json()
+        except Exception:
+            payload = {}
+        if not isinstance(payload, dict):
+            payload = {}
+
+        category = (payload.get("reason_category") or "").strip()
+        if category not in _FACILITY_DISABLE_REASON_CATEGORIES:
+            raise HTTPException(
+                422,
+                "reason_category must be one of: "
+                + ", ".join(sorted(_FACILITY_DISABLE_REASON_CATEGORIES)),
+            )
+        details_raw = payload.get("reason_details") or ""
+        if not isinstance(details_raw, str):
+            raise HTTPException(422, "reason_details must be a string.")
+        details = details_raw.strip()
+        if len(details) > _FACILITY_DISABLE_DETAILS_MAX_LEN:
+            raise HTTPException(
+                422,
+                f"reason_details exceeds {_FACILITY_DISABLE_DETAILS_MAX_LEN} chars.",
+            )
+
+        barn = await db.barns.find_one({"id": barn_id}, {"_id": 0, "id": 1, "status": 1})
+        if not barn:
+            raise HTTPException(404, "Facility not found.")
+        if (barn.get("status") or "").strip().lower() == "disabled":
+            raise HTTPException(409, "Facility already disabled.")
+
+        now_iso = datetime.now(timezone.utc).isoformat()
+        update_doc: Dict[str, Any] = {
+            "status": "disabled",
+            "disabled_at": now_iso,
+            "disabled_by": user.get("id"),
+            "disabled_reason": category,
+            "updated_at": now_iso,
+        }
+        # Only persist free-text details on the barn doc when supplied —
+        # founder decision 4b allows operator context but it must not
+        # cross the audit boundary.
+        if details:
+            update_doc["disabled_reason_details"] = details
+        else:
+            # Always set the field (cleared on re-enable) for predictability.
+            update_doc["disabled_reason_details"] = ""
+
+        await db.barns.update_one({"id": barn_id}, {"$set": update_doc})
+
+        await audit.record(
+            action="admin.facility.disabled",
+            user=user, request=request,
+            resource_type="facility", resource_id=barn_id,
+            outcome="success", status_code=200,
+            metadata={
+                "barn_id": barn_id,
+                "reason_category": category,
+                "reason_provided": bool(details),
+                "actor_role": platform_role(user),
+            },
+        )
+        return {"ok": True, "barn_id": barn_id, "status": "disabled"}
+
+    @router.post("/admin/portal/facilities/{barn_id}/reenable")
+    async def reenable_facility(barn_id: str, request: Request,
+                                user=Depends(get_current_user)):
+        """Re-enable a previously soft-disabled facility.
+
+        Sets `status="active"`, clears `disabled_reason` /
+        `disabled_reason_details`, and records `reenabled_at` /
+        `reenabled_by`. Historical `disabled_at` / `disabled_by` are
+        preserved for audit context. Re-running on an active facility
+        → 409.
+        """
+        _require_facility_writer(user)
+
+        barn = await db.barns.find_one({"id": barn_id}, {"_id": 0, "id": 1, "status": 1})
+        if not barn:
+            raise HTTPException(404, "Facility not found.")
+        if (barn.get("status") or "").strip().lower() != "disabled":
+            raise HTTPException(409, "Facility is not disabled.")
+
+        now_iso = datetime.now(timezone.utc).isoformat()
+        await db.barns.update_one(
+            {"id": barn_id},
+            {"$set": {
+                "status": "active",
+                "reenabled_at": now_iso,
+                "reenabled_by": user.get("id"),
+                "disabled_reason": "",
+                "disabled_reason_details": "",
+                "updated_at": now_iso,
+            }},
+        )
+
+        await audit.record(
+            action="admin.facility.reenabled",
+            user=user, request=request,
+            resource_type="facility", resource_id=barn_id,
+            outcome="success", status_code=200,
+            metadata={
+                "barn_id": barn_id,
+                "actor_role": platform_role(user),
+            },
+        )
+        return {"ok": True, "barn_id": barn_id, "status": "active"}
 

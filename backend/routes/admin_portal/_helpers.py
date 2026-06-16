@@ -251,6 +251,59 @@ def _strip_keys(doc: Optional[Dict[str, Any]], keys) -> Optional[Dict[str, Any]]
     return {k: v for k, v in doc.items() if k not in keys}
 
 
+# ----------------------------------------------------------------------
+# Phase Admin-4b — facility mutation surface constants.
+#
+# Locked founder decisions (Feb 2026):
+#   - Mutable whitelist: name, address, phone, contact_email, timezone,
+#     notes. Everything else is rejected with 422.
+#   - Disable reason is an enum CATEGORY + optional short details.
+#     Audit metadata stores ONLY the category + `reason_provided` bool;
+#     the free-text details never enter `audit_log`.
+#   - Soft-disable only. No hard deletes are introduced.
+#   - `super_admin` + `platform_admin` can edit/disable/reenable.
+#     `support_admin` keeps read-only access. `billing_admin` and
+#     `read_only_auditor` have no facility surface access (already
+#     enforced by SECTION_CAPABILITIES['facilities']).
+# ----------------------------------------------------------------------
+_FACILITY_MUTABLE_FIELDS = (
+    "name", "address", "phone", "contact_email", "timezone", "notes",
+)
+
+_FACILITY_NEVER_EDITABLE = frozenset({
+    "id", "_id", "created_at", "updated_at", "barn_id", "status",
+    "disabled_at", "disabled_by", "disabled_reason", "disabled_reason_details",
+    "reenabled_at", "reenabled_by",
+    "subscription_id", "subscription_tier_code",
+    "subscription_entitlements", "subscription_updated_at",
+    "stripe_customer_id",
+    "demo_seed_key", "created_by_seed", "demo_seed",
+})
+
+_FACILITY_DISABLE_REASON_CATEGORIES = frozenset({
+    "billing_dispute",
+    "customer_request",
+    "abuse",
+    "security",
+    "other",
+})
+
+# Roles permitted to mutate facility profile / soft-disable / reenable.
+_FACILITY_WRITER_ROLES = frozenset({"super_admin", "platform_admin"})
+
+# Length caps for whitelisted free-text fields.
+_FACILITY_FIELD_LIMITS = {
+    "name":          (1, 120),    # required non-empty
+    "address":       (0, 300),
+    "phone":         (0, 32),
+    "contact_email": (0, 254),    # RFC max
+    "timezone":      (1, 64),     # required non-empty if provided
+    "notes":         (0, 2000),
+}
+
+_FACILITY_DISABLE_DETAILS_MAX_LEN = 200
+
+
 __all__ = [
     "SECTION_CAPABILITIES", "_sections_for",
     "_ACTIVITY_PREFIXES", "_ACTIVITY_EXCLUDE_PREFIXES",
@@ -260,4 +313,11 @@ __all__ = [
     "_scrub_text",
     "_admin_ref", "_resolve_admin_ref", "_attach_admin_ref",
     "_strip_keys",
+    # Phase Admin-4b additions.
+    "_FACILITY_MUTABLE_FIELDS",
+    "_FACILITY_NEVER_EDITABLE",
+    "_FACILITY_DISABLE_REASON_CATEGORIES",
+    "_FACILITY_WRITER_ROLES",
+    "_FACILITY_FIELD_LIMITS",
+    "_FACILITY_DISABLE_DETAILS_MAX_LEN",
 ]
