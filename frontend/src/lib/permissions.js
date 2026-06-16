@@ -68,16 +68,22 @@ export const hasPlatformRole = (user, ...allowed) => {
 
 export const canAccessAdminPortal = (user) => isPlatformAdmin(user);
 
-// Section → allowed platform_role values. Mirrors backend
-// admin_portal.SECTION_CAPABILITIES. Kept here only for sidebar gating;
-// the backend is the source of truth and re-checks on every read.
+// Section → allowed platform_role values. **Mirrors backend
+// admin_portal.SECTION_CAPABILITIES exactly.** Kept here only for
+// sidebar gating; the backend is the source of truth and re-checks
+// on every read.
+//
+// IMPORTANT: every change to this map MUST be made in lockstep with
+// `backend/routes/admin_portal/portal.py::SECTION_CAPABILITIES`.
+// The Admin-7B regression suite asserts the two maps stay aligned
+// (see test_admin_portal_admin7b.py::test_frontend_section_caps_mirror_matches_backend).
 export const ADMIN_SECTION_CAPS = {
   dashboard:     ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
   users:         ["super_admin", "platform_admin", "support_admin"],
   facilities:    ["super_admin", "platform_admin", "support_admin"],
   horses:        ["super_admin", "platform_admin", "support_admin"],
   approvals:     ["super_admin", "platform_admin"],
-  subscriptions: ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
+  subscriptions: ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
   billing:       ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
   permissions:   ["super_admin", "platform_admin"],
   support:       ["super_admin", "platform_admin", "support_admin"],
@@ -85,7 +91,7 @@ export const ADMIN_SECTION_CAPS = {
   reports:       ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
   integrations:  ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
   settings:      ["super_admin", "platform_admin"],
-  audit_logs:    ["super_admin", "platform_admin", "read_only_auditor"],
+  audit_logs:    ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
 };
 
 export const canSeeAdminSection = (user, sectionKey) => {

@@ -1,9 +1,51 @@
 # Phase Admin-7B — Reports, Integrations, Settings, Admin Login
 
-**Status:** Ready for Codex review · Behavior-preserving for Admin-1..7A.1.
-**Date:** Feb 25 2026.
+**Status:** Codex round-2 fixes applied · Ready for re-review · Behavior-preserving for Admin-1..7A.1.
+**Date:** Feb 25 2026 (round-2 update).
 **Locked gating:** Admin-7A.2 (per-surface physical split of `portal.py`)
 remains gated; this phase does NOT touch the consolidation work.
+
+## Codex round-2 fixes (Feb 25 2026)
+
+Two blockers reported by Codex, both resolved:
+
+1. **Stripe env contract** — Phase 15 (`routes/subscriptions.py`,
+   `core/billing_provisioning.py`, `routes/membership.py`) reads
+   `STRIPE_API_KEY`. The Admin Portal previously read
+   `STRIPE_SECRET_KEY` only, so `/integrations/stripe` and
+   `/settings.billing.stripe_configured` could show "not configured"
+   on a working production env. Fixed by introducing
+   `_stripe_configured()` helper inside `portal.py::build_router`,
+   which reads `STRIPE_API_KEY` first and falls back to
+   `STRIPE_SECRET_KEY` for backwards tolerance. Both call sites
+   (integration status + settings billing block) now go through the
+   helper. Three new tests:
+   - `test_stripe_configured_uses_phase15_env_contract` (source-level
+     assertion that `STRIPE_API_KEY` is read and checked first).
+   - `test_integrations_stripe_reports_configured_when_api_key_set`
+     (end-to-end positive: `STRIPE_API_KEY` set → `configured=True`).
+   - `test_settings_stripe_configured_when_api_key_set`
+     (same regression on `/settings.billing.stripe_configured`).
+   - `test_settings_no_raw_secrets_or_stripe_ids` updated to also
+     assert `STRIPE_API_KEY` value never leaks.
+
+2. **Frontend section-capability mirror regression** — backend
+   `SECTION_CAPABILITIES` listed `support_admin` for `subscriptions`
+   and all 5 platform roles for `audit_logs`, but
+   `frontend/src/lib/permissions.js::ADMIN_SECTION_CAPS` omitted
+   those rows, silently hiding locked Admin-5/Admin-6 surfaces in
+   the sidebar from roles the backend explicitly allows. Fixed by
+   syncing `ADMIN_SECTION_CAPS` exactly with the backend map (added
+   `support_admin` to `subscriptions`; added `support_admin` and
+   `billing_admin` to `audit_logs`). New regression:
+   - `test_frontend_section_caps_mirror_matches_backend` —
+     source-level parses `permissions.js` and compares every key +
+     every role list against backend `SECTION_CAPABILITIES`. Will
+     fail loudly on any future drift. Includes belt-and-braces
+     assertions for the three specific roles Codex flagged.
+
+   `permissions.js` now carries an inline note pointing future
+   editors at the mirror invariant.
 
 ## Scope (locked)
 
@@ -131,9 +173,9 @@ pytest backend/tests/test_admin_portal_admin4.py          # 23 passed
 pytest backend/tests/test_admin_portal_admin5.py          # 49 passed
 pytest backend/tests/test_admin_portal_admin6.py          # 41 passed
 pytest backend/tests/test_admin_portal_admin7a.py         # 41 passed
-pytest backend/tests/test_admin_portal_admin7b.py         # 94 passed   ⭐ NEW
+pytest backend/tests/test_admin_portal_admin7b.py         # 98 passed   ⭐ +4 round-2
                                                           # ─────────
-                                                          # 314 passed total
+                                                          # 318 passed total
 ```
 
 Frontend lint: `eslint` clean on the 5 new/edited admin pages

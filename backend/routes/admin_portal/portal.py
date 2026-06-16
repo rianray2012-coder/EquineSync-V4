@@ -2101,6 +2101,22 @@ def build_router(*, db, get_current_user) -> APIRouter:
     # Static integration slugs (decision 5 — never opaque Mongo refs).
     _INTEGRATION_SLUGS = ("stripe", "resend", "webhooks", "jobs")
 
+    def _stripe_configured() -> bool:
+        """Mirror the Phase 15 Stripe contract.
+
+        Phase 15 (`routes/subscriptions.py`, `core/billing_provisioning.py`,
+        `routes/membership.py`) all read **`STRIPE_API_KEY`**. The Admin
+        Portal must therefore key its "configured" badge off the same
+        var or it will report a false negative ("not configured") on a
+        working production env. We also accept legacy `STRIPE_SECRET_KEY`
+        as a non-authoritative fallback so a transient mis-named .env
+        does not silently flip the badge.
+        """
+        return bool(
+            (os.environ.get("STRIPE_API_KEY") or "").strip()
+            or (os.environ.get("STRIPE_SECRET_KEY") or "").strip()
+        )
+
     def _require_reports_read(u: Dict[str, Any]) -> None:
         if platform_role(u) not in _REPORTS_READ_ROLES:
             raise HTTPException(403, "Your platform role cannot view reports.")
@@ -2435,7 +2451,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         Never returns secrets, raw env values, webhook URLs, or
         Stripe-shaped IDs."""
         if slug == "stripe":
-            configured = bool(os.environ.get("STRIPE_SECRET_KEY"))
+            configured = _stripe_configured()
             # Last successful billing event (timestamp only; no raw IDs).
             last_ok = None
             stale_count = 0
@@ -2614,7 +2630,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
                            .strip().lower() in ("1", "true", "yes", "on"),
             },
             "billing": {
-                "stripe_configured": bool(os.environ.get("STRIPE_SECRET_KEY")),
+                "stripe_configured": _stripe_configured(),
                 "billing_mode": (os.environ.get("BILLING_MODE") or "live")
                                  .strip().lower(),
             },

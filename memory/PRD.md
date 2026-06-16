@@ -1473,27 +1473,45 @@ prefixes — Admin-2 dashboard remains calm.
 - `AdminLayout` redirects unauthenticated → `/admin/portal/login`
   (not `/login`).
 
-**Tests:** `tests/test_admin_portal_admin7b.py` — **94/94 green**.
-Covers role gates (read + CSV + integrations + settings), window
-validation, all 4 CSV types, Stripe-shaped value scrubbing
-(plant test asserts `sub_PLANT…` never reaches CSV body), settings
-no-leak assertion against the real env values of `JWT_SECRET`,
-`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`,
-`MONGO_URL`, mutation-method rejection (POST/PUT/PATCH/DELETE → 405),
-audit emission for all 7 actions, dashboard feed exclusion of all 7
-read prefixes, existing `/api/auth/login` admin flow, and legacy
+**Tests:** `tests/test_admin_portal_admin7b.py` — **98/98 green**
+(94 original + 4 Codex round-2 additions). Covers role gates
+(read + CSV + integrations + settings), window validation, all 4 CSV
+types, Stripe-shaped value scrubbing (plant test asserts `sub_PLANT…`
+never reaches CSV body), settings no-leak assertion against the real
+env values of `JWT_SECRET`, `STRIPE_API_KEY`, `STRIPE_SECRET_KEY`,
+`STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, `MONGO_URL`,
+mutation-method rejection (POST/PUT/PATCH/DELETE → 405), audit
+emission for all 7 actions, dashboard feed exclusion of all 7 read
+prefixes, existing `/api/auth/login` admin flow, and legacy
 `/api/admin/*` (non-portal) route preservation.
+
+**Codex round-2 fixes (Feb 25 2026):**
+1. **Stripe env contract aligned with Phase 15.** Both call sites
+   (integration status + settings billing block) now use
+   `_stripe_configured()` which reads `STRIPE_API_KEY` first and
+   falls back to `STRIPE_SECRET_KEY` for backwards tolerance. This
+   resolves the false-negative "not configured" badge Codex flagged.
+   Three new tests assert the contract and the positive-when-set
+   behaviour on both `/integrations/stripe` and `/settings`.
+2. **Frontend section-capability mirror synced with backend.**
+   `ADMIN_SECTION_CAPS` in `frontend/src/lib/permissions.js` was
+   missing `support_admin` from `subscriptions` and missing
+   `support_admin` + `billing_admin` from `audit_logs`, silently
+   hiding locked Admin-5/Admin-6 surfaces. Now mirrors backend
+   exactly. New `test_frontend_section_caps_mirror_matches_backend`
+   parses `permissions.js` source and asserts the full map matches
+   `SECTION_CAPABILITIES`, with belt-and-braces locks for the three
+   roles Codex flagged.
 
 **Regression:** Admin-1..6 + Admin-7A.1 — **220/220 unchanged** ✅
 (Admin-1 parametrized section counts adjusted to reflect decisions 1+2:
 `support_admin` 8→9, `billing_admin` 6→7, `read_only_auditor` 5→6;
 those tests now correctly assert the new caps).
 
-**Full grand total: 314 backend tests passing.**
+**Full grand total: 318 backend tests passing.**
 
-**Packaged:** `/app/phase_admin_7b_changes.zip` (12 files, 228 KB) +
-`/app/PHASE_ADMIN_7B_README.md` (endpoint map, permission matrix,
-guardrail checklist, deferrals).
+**Packaged:** `/app/phase_admin_7b_changes.zip` (12 files, 60 KB) +
+`/app/PHASE_ADMIN_7B_README.md` updated with round-2 fix log.
 
 ### Admin Portal — Phase Status (post Admin-7B)
 
