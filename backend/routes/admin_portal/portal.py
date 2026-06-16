@@ -39,38 +39,46 @@ from core.permissions import (
     require_platform_role,
 )
 
+# Admin-7A.2a (Feb 2026): the shared helper surface now physically
+# lives in `_helpers.py`. portal.py re-imports them so the legacy
+# Admin-1..6 routes in this file keep their existing references; the
+# new per-surface modules (`reports.py`, `integrations.py`,
+# `settings.py`, ...) import directly from `._helpers`.
+from ._helpers import (
+    SECTION_CAPABILITIES,
+    _sections_for,
+    _ACTIVITY_PREFIXES,
+    _ACTIVITY_EXCLUDE_PREFIXES,
+    _METADATA_SCRUB_KEYS,
+    _STRIPE_VALUE_PATTERNS,
+    _STRIPE_EMBEDDED_RE,
+    _STRIPE_VALUE_RE,
+    _METADATA_VALUE_MAX_LEN,
+    _redact_stripe_in_string,
+    _scrub_metadata,
+    _scrub_metadata_value,
+    _scrub_text,
+    _admin_ref,
+    _resolve_admin_ref,
+    _attach_admin_ref,
+    _strip_keys,
+)
+
+# Per-surface modules registered by `build_router()` further down.
+# Admin-7A.2a ships reports/integrations/settings; Admin-7A.2b will
+# add dashboard/users/facilities/subscriptions/billing/audit_logs/
+# support/alerts.
+from . import reports as _reports_surface
+from . import integrations as _integrations_surface
+from . import settings as _settings_surface
+
 logger = logging.getLogger(__name__)
 
 
-# Capability map exposed to the frontend so the sidebar can gate per-section
-# entry points. Keys correspond to the 14 sidebar sections. Values list the
-# platform_role values allowed to enter that section in Admin-1 onward.
-# (Admin-1 only ships the shell — the actual pages land in later phases.)
-SECTION_CAPABILITIES: Dict[str, List[str]] = {
-    "dashboard":     ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
-    "users":         ["super_admin", "platform_admin", "support_admin"],
-    "facilities":    ["super_admin", "platform_admin", "support_admin"],
-    "horses":        ["super_admin", "platform_admin", "support_admin"],
-    "approvals":     ["super_admin", "platform_admin"],
-    "subscriptions": ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
-    "billing":       ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
-    "permissions":   ["super_admin", "platform_admin"],
-    "support":       ["super_admin", "platform_admin", "support_admin"],
-    "alerts":        ["super_admin", "platform_admin", "support_admin", "billing_admin"],
-    # Admin-7B (locked Feb 2026): Reports readable by all 5 platform
-    # roles; CSV export gated tighter (see _REPORTS_CSV_ROLES below).
-    "reports":       ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
-    # Admin-7B: integrations is read-only operational visibility — NOT
-    # a support surface, so support_admin is excluded.
-    "integrations":  ["super_admin", "platform_admin", "billing_admin", "read_only_auditor"],
-    "settings":      ["super_admin", "platform_admin"],
-    "audit_logs":    ["super_admin", "platform_admin", "support_admin", "billing_admin", "read_only_auditor"],
-}
-
-
-def _sections_for(role: str) -> List[str]:
-    """Return the list of sidebar section keys the given platform_role can see."""
-    return [s for s, allowed in SECTION_CAPABILITIES.items() if role in allowed]
+# SECTION_CAPABILITIES, _sections_for, _ACTIVITY_PREFIXES,
+# _ACTIVITY_EXCLUDE_PREFIXES, _METADATA_SCRUB_KEYS and the Stripe-scrub
+# / admin_ref helper families now live in `_helpers.py` (Admin-7A.2a).
+# They are imported at the top of this file.
 
 
 # ----------------------------------------------------------------------
@@ -95,38 +103,10 @@ def _seven_days_ago_iso() -> str:
 # Trialing is shown separately on the dashboard, not added to MRR.
 _MRR_STATUSES = ("active",)
 
-# Curated activity allowlist (prefixes). Anything that doesn't match one
-# of these falls out of the admin feed. Keeps the surface calm; full
-# trail is still queryable via the dedicated audit-log surface (Admin-6).
-_ACTIVITY_PREFIXES = (
-    "admin.",
-    "subscription.",
-    "user.",
-    "auth.login.",
-    "billing.event.",
-    "permission.denied",      # security signal
-)
-
-# Codex round-1 (Admin-2) blocker fix: the activity feed must NOT show
-# its own dashboard reads back to itself, or the curated feed self-floods
-# with `admin.portal.read.kpis` / `admin.portal.read.subscription_health`
-# / `admin.portal.read.activity` / `admin.portal.me` and buries the
-# actually-useful admin / subscription / user / security events. We
-# still audit those reads (so platform-admin dashboard views remain
-# auditable in Admin-6) — we just hide them from THIS curated feed.
-_ACTIVITY_EXCLUDE_PREFIXES = (
-    "admin.portal.read.",
-    "admin.portal.me",
-)
-
-
-# Defensive scrub list — these keys must NEVER appear in an activity
-# response, even if they leaked into audit_log metadata.
-_METADATA_SCRUB_KEYS = {
-    "password", "password_hash", "token", "access_token", "refresh_token",
-    "jwt", "stripe_secret_key", "stripe_webhook_secret", "client_secret",
-    "api_key",
-}
+# `_ACTIVITY_PREFIXES` and `_ACTIVITY_EXCLUDE_PREFIXES` are imported
+# from `_helpers.py` (Admin-7A.2a).  The Admin-7B exclude entries that
+# previously were appended further down in this file now live inline
+# in `_helpers.py::_ACTIVITY_EXCLUDE_PREFIXES`.
 
 
 # ----------------------------------------------------------------------
@@ -256,86 +236,10 @@ class _SupportNoteBody(BaseModel):
 import re as _re_module
 
 
-# Stripe-shaped ID redactor — Codex round-1 fix:
-#   * adds `pi_` (payment_intent) and `ch_` (charge) prefixes
-#   * scrubs EMBEDDED Stripe IDs inside longer strings, not just
-#     whole-string matches
-# Real Stripe IDs are `<prefix>_<14-32 base62 chars>` (no underscores
-# inside the body). The 14-char minimum keeps the regex from matching
-# legitimate snake_case words like `in_progress`, `branch_alpha`, etc.
-_STRIPE_VALUE_PATTERNS = ("sub", "evt", "in", "cus", "price", "pi", "ch")
-_STRIPE_EMBEDDED_RE = _re_module.compile(
-    r"\b(?:" + "|".join(_STRIPE_VALUE_PATTERNS) + r")_[A-Za-z0-9]{14,}\b"
-)
-# Whole-string variant — for the readable "[stripe_id_redacted]"
-# marker on a value that is EXACTLY a Stripe id. Allows the historical
-# inner-`_` shape some test fixtures used.
-_STRIPE_VALUE_RE = _re_module.compile(
-    r"^(?:" + "|".join(_STRIPE_VALUE_PATTERNS) + r")_[A-Za-z0-9_]{4,}$"
-)
-_METADATA_VALUE_MAX_LEN = 256
-
-
-def _redact_stripe_in_string(s: str) -> str:
-    """Replace every Stripe-shaped substring inside `s` with
-    `[stripe_id_redacted]`. Used so longer strings carrying an
-    embedded Stripe ID (e.g. error messages like "missing sub_xxx")
-    don't leak."""
-    return _STRIPE_EMBEDDED_RE.sub("[stripe_id_redacted]", s)
-
-
-def _scrub_metadata(meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
-    """Strip any sensitive-looking keys from audit metadata before
-    surfacing it. Defense-in-depth — these keys should never have been
-    logged in the first place. Also redacts Stripe-shaped values
-    (exact AND embedded) and truncates long strings."""
-    if not isinstance(meta, dict):
-        return {}
-    out: Dict[str, Any] = {}
-    for k, v in meta.items():
-        k_low = str(k).lower()
-        if k_low in _METADATA_SCRUB_KEYS:
-            continue
-        if any(s in k_low for s in ("password", "secret", "token",
-                                    "signature", "authorization", "cookie",
-                                    "api_key")):
-            continue
-        out[k] = _scrub_metadata_value(v)
-    return out
-
-
-def _scrub_metadata_value(v: Any) -> Any:
-    """Recursively scrub a metadata value: redact Stripe-shaped strings
-    (both whole-string and embedded), truncate long strings, preserve
-    numerics/bools/None, recurse into nested dicts/lists."""
-    if isinstance(v, str):
-        # Whole-string redaction (kept for backwards readability —
-        # operator sees a clean marker rather than a partial match).
-        if _STRIPE_VALUE_RE.match(v):
-            return "[stripe_id_redacted]"
-        # Embedded redaction — catches Stripe IDs nested inside longer
-        # strings like "Error: subscription sub_xyz failed".
-        v = _redact_stripe_in_string(v)
-        if len(v) > _METADATA_VALUE_MAX_LEN:
-            return v[:_METADATA_VALUE_MAX_LEN] + "…(truncated)"
-        return v
-    if isinstance(v, dict):
-        return _scrub_metadata(v)
-    if isinstance(v, list):
-        return [_scrub_metadata_value(x) for x in v]
-    return v
-
-
-def _scrub_text(s: Optional[str]) -> Optional[str]:
-    """Boundary scrub for free-text fields destined for the API
-    surface. **Stripe-ID redaction ONLY** — replaces embedded
-    Stripe-shaped substrings with `[stripe_id_redacted]`. Does NOT
-    drop general secrets, tokens, or passwords (that policy lives in
-    `_scrub_metadata`'s sensitive-key drop list). Callers handle
-    length policy."""
-    if not isinstance(s, str):
-        return s
-    return _redact_stripe_in_string(s)
+# _STRIPE_VALUE_PATTERNS, _STRIPE_EMBEDDED_RE, _STRIPE_VALUE_RE,
+# _METADATA_VALUE_MAX_LEN, _redact_stripe_in_string, _scrub_metadata,
+# _scrub_metadata_value, _scrub_text now live in `_helpers.py`
+# (Admin-7A.2a — physical move).
 
 
 def _matches_activity_allowlist(action: str) -> bool:
@@ -408,46 +312,8 @@ _PAYMENT_SAFE_FIELDS = {
 }
 
 
-def _admin_ref(prefix: str, mongo_id) -> str:
-    """Return an opaque, API-safe identifier derived from Mongo `_id`.
-    Never Stripe-shaped. Example: `as_507f1f77bcf86cd799439011`.
-
-    Per locked decision 4a, Admin-5 surfaces only opaque local refs —
-    raw Stripe-shaped IDs (`sub_…`, `evt_…`, `in_…`, `cus_…`, `price_…`)
-    NEVER cross the API boundary, even when they happen to BE the local
-    entity id.
-    """
-    return f"{prefix}_{str(mongo_id)}"
-
-
-def _resolve_admin_ref(prefix: str, ref: str) -> ObjectId:
-    """Parse a `<prefix>_<hex24>` admin_ref back to its Mongo ObjectId.
-    Any malformed input → 404 (we never reveal which prefix was used)."""
-    expected = f"{prefix}_"
-    if not ref or not ref.startswith(expected):
-        raise HTTPException(404, "Not found.")
-    try:
-        return ObjectId(ref[len(expected):])
-    except (InvalidId, TypeError, ValueError):
-        raise HTTPException(404, "Not found.")
-
-
-def _attach_admin_ref(prefix: str, row: Dict[str, Any]) -> Dict[str, Any]:
-    """Mint `admin_ref` from `_id`; drop both `_id` and raw `id` from
-    the outbound payload. Mutates and returns the row."""
-    if not isinstance(row, dict):
-        return row
-    mid = row.pop("_id", None)
-    row.pop("id", None)
-    if mid is not None:
-        row["admin_ref"] = _admin_ref(prefix, mid)
-    return row
-
-
-def _strip_keys(doc: Optional[Dict[str, Any]], keys) -> Optional[Dict[str, Any]]:
-    if not isinstance(doc, dict):
-        return doc
-    return {k: v for k, v in doc.items() if k not in keys}
+# `_admin_ref`, `_resolve_admin_ref`, `_attach_admin_ref`, `_strip_keys`
+# now live in `_helpers.py` (Admin-7A.2a).
 
 
 # Roles that can see billing-events + payments (i.e. the "Billing
@@ -467,31 +333,10 @@ def _require_billing_access(user: Dict[str, Any]) -> None:
         raise HTTPException(403, "Your platform role cannot view billing details.")
 
 
-# Append the Admin-5 read prefixes to the dashboard-feed exclude list so
-# the curated Admin-2 activity feed doesn't self-flood with operator
-# subscription/billing reads (decision 8a). We mutate the tuple here to
-# avoid duplicating the list at the top of the file.
-_ACTIVITY_EXCLUDE_PREFIXES = _ACTIVITY_EXCLUDE_PREFIXES + (
-    "admin.portal.read.subscriptions",
-    "admin.portal.read.subscription_detail",
-    "admin.portal.read.billing_events",
-    "admin.portal.read.payments",
-    # Admin-6 read prefixes (decision 8a — continues self-flood guard).
-    "admin.portal.read.audit_logs",
-    "admin.portal.read.audit_log_detail",
-    "admin.portal.read.support",
-    "admin.portal.read.support_detail",
-    "admin.portal.read.alerts",
-    # Admin-7B read prefixes (locked Feb 2026 — continues self-flood
-    # guard for the new Reports / Integrations / Settings surfaces).
-    "admin.portal.read.reports.usage",
-    "admin.portal.read.reports.subscriptions",
-    "admin.portal.read.reports.facilities",
-    "admin.portal.read.reports.export",
-    "admin.portal.read.integrations",
-    "admin.portal.read.integration_detail",
-    "admin.portal.read.settings",
-)
+# NOTE: _ACTIVITY_EXCLUDE_PREFIXES is now consolidated in `_helpers.py`
+# (Admin-7A.2a — physical move). All Admin-5/6/7B read prefixes that
+# were previously appended here are present in the canonical tuple
+# imported at the top of this file.
 
 
 async def _compute_kpis(db) -> Dict[str, Any]:
@@ -2067,596 +1912,18 @@ def build_router(*, db, get_current_user) -> APIRouter:
     # ------------------------------------------------------------------
     # Admin-7B — Reports / Integrations / Settings (read-only).
     #
-    # Locked guardrails (founder, Feb 2026):
-    #   - All 7 endpoints are GET only. No mutation, no retry, no
-    #     dismissal, no settings writes.
-    #   - Pure aggregates only — no raw documents, no Stripe IDs, no
-    #     secrets, no env values.
-    #   - CSV export is the ONLY non-JSON response. Stripe-shaped
-    #     values are scrubbed before serialization.
-    #   - support_admin can read reports but is BLOCKED from CSV
-    #     export (decision 1) and from integrations (decision 2).
-    #   - Settings is super_admin + platform_admin only (decision 3).
-    #   - Self-flood guard: every read action is added to
-    #     _ACTIVITY_EXCLUDE_PREFIXES so the Admin-2 dashboard feed
-    #     does not surface Admin-7B read traffic.
+    # Admin-7A.2a (Feb 2026): physically lifted into per-surface
+    # modules. Locked behavior, route map, and audit emission are
+    # unchanged — see reports.py / integrations.py / settings.py.
     # ------------------------------------------------------------------
-    _REPORTS_READ_ROLES = {
-        "super_admin", "platform_admin", "support_admin",
-        "billing_admin", "read_only_auditor",
-    }
-    # Decision 1: support_admin may read reports but may NOT export CSV.
-    _REPORTS_CSV_ROLES = {
-        "super_admin", "platform_admin", "billing_admin", "read_only_auditor",
-    }
-    # Decision 2: integrations excludes support_admin.
-    _INTEGRATIONS_READ_ROLES = {
-        "super_admin", "platform_admin", "billing_admin", "read_only_auditor",
-    }
-    # Decision 3: settings is super_admin + platform_admin only.
-    _SETTINGS_READ_ROLES = {"super_admin", "platform_admin"}
-
-    _REPORTS_WINDOWS = {"7d": 7, "30d": 30, "90d": 90}
-    _REPORTS_CSV_TYPES = {"users", "facilities", "subscriptions", "usage"}
-    # Static integration slugs (decision 5 — never opaque Mongo refs).
-    _INTEGRATION_SLUGS = ("stripe", "resend", "webhooks", "jobs")
-
-    def _stripe_configured() -> bool:
-        """Mirror the Phase 15 Stripe contract.
-
-        Phase 15 (`routes/subscriptions.py`, `core/billing_provisioning.py`,
-        `routes/membership.py`) all read **`STRIPE_API_KEY`**. The Admin
-        Portal must therefore key its "configured" badge off the same
-        var or it will report a false negative ("not configured") on a
-        working production env. We also accept legacy `STRIPE_SECRET_KEY`
-        as a non-authoritative fallback so a transient mis-named .env
-        does not silently flip the badge.
-        """
-        return bool(
-            (os.environ.get("STRIPE_API_KEY") or "").strip()
-            or (os.environ.get("STRIPE_SECRET_KEY") or "").strip()
-        )
-
-    def _require_reports_read(u: Dict[str, Any]) -> None:
-        if platform_role(u) not in _REPORTS_READ_ROLES:
-            raise HTTPException(403, "Your platform role cannot view reports.")
-
-    def _require_reports_csv(u: Dict[str, Any]) -> None:
-        if platform_role(u) not in _REPORTS_CSV_ROLES:
-            raise HTTPException(
-                403, "Your platform role cannot export reports."
-            )
-
-    def _require_integrations_read(u: Dict[str, Any]) -> None:
-        if platform_role(u) not in _INTEGRATIONS_READ_ROLES:
-            raise HTTPException(403, "Your platform role cannot view integrations.")
-
-    def _require_settings_read(u: Dict[str, Any]) -> None:
-        if platform_role(u) not in _SETTINGS_READ_ROLES:
-            raise HTTPException(403, "Your platform role cannot view settings.")
-
-    def _window_days(window: str) -> int:
-        days = _REPORTS_WINDOWS.get((window or "").strip().lower())
-        if days is None:
-            raise HTTPException(
-                400,
-                f"Invalid window. Allowed: {', '.join(_REPORTS_WINDOWS.keys())}",
-            )
-        return days
-
-    async def _safe(coro):
-        try:
-            return await coro
-        except Exception:  # pragma: no cover - defensive
-            logger.exception("admin.portal.report metric failed")
-            return None
-
-    # --- Reports — usage ---------------------------------------------
-    @router.get("/admin/portal/reports/usage")
-    async def reports_usage(request: Request,
-                            window: str = Query(default="30d"),
-                            user=Depends(get_current_user)):
-        """Usage aggregates over the selected window. Safe counts only;
-        no raw documents, no Stripe IDs."""
-        require_platform_role(user)
-        _require_reports_read(user)
-        days = _window_days(window)
-        since_iso = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-        results = await asyncio.gather(
-            _safe(db.users.count_documents({"created_at": {"$gte": since_iso}})),
-            _safe(db.barns.count_documents({"created_at": {"$gte": since_iso}})),
-            _safe(db.horses.count_documents({"created_at": {"$gte": since_iso}})),
-            _safe(db.audit_log.count_documents({"ts": {"$gte": since_iso}})),
-            _safe(db.audit_log.count_documents({"ts": {"$gte": since_iso}, "outcome": "denied"})),
-            _safe(db.support_tickets.count_documents({"created_at": {"$gte": since_iso}})),
-        )
-        partial = any(r is None for r in results)
-
-        def _v(idx: int) -> int:
-            return int(results[idx]) if results[idx] is not None else 0
-
-        payload = {
-            "window": window,
-            "window_days": days,
-            "new_users": _v(0),
-            "new_facilities": _v(1),
-            "new_horses": _v(2),
-            "audit_events": _v(3),
-            "denied_events": _v(4),
-            "new_support_tickets": _v(5),
-            "_partial": partial,
-            "_generated_at": datetime.now(timezone.utc).isoformat(),
-        }
-        await audit.record(
-            action="admin.portal.read.reports.usage",
-            user=user, request=request,
-            resource_type="admin_portal", resource_id="reports.usage",
-            outcome="success", status_code=200,
-            metadata={"window": window, "partial": partial},
-        )
-        return payload
-
-    # --- Reports — subscriptions -------------------------------------
-    @router.get("/admin/portal/reports/subscriptions")
-    async def reports_subscriptions(request: Request,
-                                    window: str = Query(default="30d"),
-                                    user=Depends(get_current_user)):
-        """Subscription distribution snapshot + new-in-window count.
-        Safe aggregates only; no Stripe IDs."""
-        require_platform_role(user)
-        _require_reports_read(user)
-        days = _window_days(window)
-        since_iso = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-
-        async def _by_status():
-            out: Dict[str, int] = {}
-            pipeline = [
-                {"$group": {"_id": "$status", "n": {"$sum": 1}}},
-            ]
-            async for row in db.subscriptions.aggregate(pipeline):
-                out[str(row.get("_id") or "unknown")] = int(row.get("n") or 0)
-            return out
-
-        async def _by_tier():
-            out: Dict[str, int] = {}
-            pipeline = [
-                {"$group": {"_id": "$tier", "n": {"$sum": 1}}},
-            ]
-            async for row in db.subscriptions.aggregate(pipeline):
-                out[str(row.get("_id") or "unknown")] = int(row.get("n") or 0)
-            return out
-
-        by_status = await _safe(_by_status()) or {}
-        by_tier = await _safe(_by_tier()) or {}
-        new_in_window = await _safe(
-            db.subscriptions.count_documents({"created_at": {"$gte": since_iso}})
-        )
-        total = await _safe(db.subscriptions.count_documents({}))
-        partial = (new_in_window is None) or (total is None)
-
-        payload = {
-            "window": window,
-            "window_days": days,
-            "total": int(total or 0),
-            "new_in_window": int(new_in_window or 0),
-            "by_status": by_status,
-            "by_tier": by_tier,
-            "_partial": partial,
-            "_generated_at": datetime.now(timezone.utc).isoformat(),
-        }
-        await audit.record(
-            action="admin.portal.read.reports.subscriptions",
-            user=user, request=request,
-            resource_type="admin_portal", resource_id="reports.subscriptions",
-            outcome="success", status_code=200,
-            metadata={"window": window, "partial": partial},
-        )
-        return payload
-
-    # --- Reports — facilities ----------------------------------------
-    @router.get("/admin/portal/reports/facilities")
-    async def reports_facilities(request: Request,
-                                 window: str = Query(default="30d"),
-                                 user=Depends(get_current_user)):
-        """Facility & horse aggregates. Safe counts only."""
-        require_platform_role(user)
-        _require_reports_read(user)
-        days = _window_days(window)
-        since_iso = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-
-        async def _facilities_by_status():
-            out: Dict[str, int] = {}
-            pipeline = [
-                {"$group": {"_id": "$status", "n": {"$sum": 1}}},
-            ]
-            async for row in db.barns.aggregate(pipeline):
-                out[str(row.get("_id") or "active")] = int(row.get("n") or 0)
-            return out
-
-        async def _horses_per_facility_summary():
-            pipeline = [
-                {"$group": {"_id": "$barn_id", "n": {"$sum": 1}}},
-            ]
-            counts: List[int] = []
-            async for row in db.horses.aggregate(pipeline):
-                counts.append(int(row.get("n") or 0))
-            if not counts:
-                return {"facilities_with_horses": 0, "max_horses_at_facility": 0}
-            return {
-                "facilities_with_horses": len(counts),
-                "max_horses_at_facility": max(counts),
-            }
-
-        by_status = await _safe(_facilities_by_status()) or {}
-        horses_summary = await _safe(_horses_per_facility_summary()) or {}
-        total_facilities = await _safe(db.barns.count_documents({}))
-        new_facilities = await _safe(
-            db.barns.count_documents({"created_at": {"$gte": since_iso}})
-        )
-        total_horses = await _safe(db.horses.count_documents({}))
-        partial = any(v is None for v in (total_facilities, new_facilities, total_horses))
-
-        payload = {
-            "window": window,
-            "window_days": days,
-            "total_facilities": int(total_facilities or 0),
-            "new_facilities_in_window": int(new_facilities or 0),
-            "total_horses": int(total_horses or 0),
-            "facilities_by_status": by_status,
-            "horses_summary": horses_summary,
-            "_partial": partial,
-            "_generated_at": datetime.now(timezone.utc).isoformat(),
-        }
-        await audit.record(
-            action="admin.portal.read.reports.facilities",
-            user=user, request=request,
-            resource_type="admin_portal", resource_id="reports.facilities",
-            outcome="success", status_code=200,
-            metadata={"window": window, "partial": partial},
-        )
-        return payload
-
-    # --- Reports — CSV export ----------------------------------------
-    @router.get("/admin/portal/reports/export.csv")
-    async def reports_export_csv(request: Request,
-                                 type: str = Query(...),
-                                 window: str = Query(default="30d"),
-                                 user=Depends(get_current_user)):
-        """CSV export of safe aggregates. Stripe-shaped values are
-        scrubbed before serialization. support_admin is denied
-        (decision 1)."""
-        require_platform_role(user)
-        _require_reports_read(user)   # baseline section gate
-        _require_reports_csv(user)    # CSV-specific gate
-        t = (type or "").strip().lower()
-        if t not in _REPORTS_CSV_TYPES:
-            raise HTTPException(
-                400,
-                f"Invalid type. Allowed: {', '.join(sorted(_REPORTS_CSV_TYPES))}",
-            )
-        days = _window_days(window)
-        since_iso = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-
-        import csv
-        import io as _io
-
-        buf = _io.StringIO()
-        writer = csv.writer(buf)
-
-        if t == "users":
-            writer.writerow(["metric", "value"])
-            total = await _safe(db.users.count_documents({})) or 0
-            new_in_window = await _safe(
-                db.users.count_documents({"created_at": {"$gte": since_iso}})
-            ) or 0
-            pending = await _safe(
-                db.users.count_documents({"role_status": "pending_review"})
-            ) or 0
-            writer.writerow(["total_users", int(total)])
-            writer.writerow([f"new_users_{window}", int(new_in_window)])
-            writer.writerow(["pending_review_users", int(pending)])
-            # By role
-            pipeline = [{"$group": {"_id": "$role", "n": {"$sum": 1}}}]
-            async for row in db.users.aggregate(pipeline):
-                role_label = _scrub_text(str(row.get("_id") or "unknown")) or "unknown"
-                writer.writerow([f"role_{role_label}", int(row.get("n") or 0)])
-
-        elif t == "facilities":
-            writer.writerow(["metric", "value"])
-            total = await _safe(db.barns.count_documents({})) or 0
-            new_in_window = await _safe(
-                db.barns.count_documents({"created_at": {"$gte": since_iso}})
-            ) or 0
-            writer.writerow(["total_facilities", int(total)])
-            writer.writerow([f"new_facilities_{window}", int(new_in_window)])
-            pipeline = [{"$group": {"_id": "$status", "n": {"$sum": 1}}}]
-            async for row in db.barns.aggregate(pipeline):
-                status_label = _scrub_text(str(row.get("_id") or "active")) or "active"
-                writer.writerow([f"status_{status_label}", int(row.get("n") or 0)])
-
-        elif t == "subscriptions":
-            writer.writerow(["metric", "value"])
-            total = await _safe(db.subscriptions.count_documents({})) or 0
-            new_in_window = await _safe(
-                db.subscriptions.count_documents({"created_at": {"$gte": since_iso}})
-            ) or 0
-            writer.writerow(["total_subscriptions", int(total)])
-            writer.writerow([f"new_subscriptions_{window}", int(new_in_window)])
-            pipeline = [{"$group": {"_id": "$status", "n": {"$sum": 1}}}]
-            async for row in db.subscriptions.aggregate(pipeline):
-                # Stripe-shaped value scrub on any stringified field.
-                status_label = _scrub_text(str(row.get("_id") or "unknown")) or "unknown"
-                writer.writerow([f"status_{status_label}", int(row.get("n") or 0)])
-            pipeline = [{"$group": {"_id": "$tier", "n": {"$sum": 1}}}]
-            async for row in db.subscriptions.aggregate(pipeline):
-                tier_label = _scrub_text(str(row.get("_id") or "unknown")) or "unknown"
-                writer.writerow([f"tier_{tier_label}", int(row.get("n") or 0)])
-
-        else:  # usage
-            writer.writerow(["metric", "value"])
-            new_users = await _safe(
-                db.users.count_documents({"created_at": {"$gte": since_iso}})
-            ) or 0
-            new_facilities = await _safe(
-                db.barns.count_documents({"created_at": {"$gte": since_iso}})
-            ) or 0
-            new_horses = await _safe(
-                db.horses.count_documents({"created_at": {"$gte": since_iso}})
-            ) or 0
-            audit_events = await _safe(
-                db.audit_log.count_documents({"ts": {"$gte": since_iso}})
-            ) or 0
-            denied_events = await _safe(
-                db.audit_log.count_documents({"ts": {"$gte": since_iso}, "outcome": "denied"})
-            ) or 0
-            new_tickets = await _safe(
-                db.support_tickets.count_documents({"created_at": {"$gte": since_iso}})
-            ) or 0
-            for k, v in (
-                (f"new_users_{window}", new_users),
-                (f"new_facilities_{window}", new_facilities),
-                (f"new_horses_{window}", new_horses),
-                (f"audit_events_{window}", audit_events),
-                (f"denied_events_{window}", denied_events),
-                (f"new_support_tickets_{window}", new_tickets),
-            ):
-                writer.writerow([k, int(v)])
-
-        csv_text = buf.getvalue()
-        # Defense-in-depth: scrub Stripe-shaped values from the final
-        # CSV body before it leaves the process.
-        csv_text = _scrub_text(csv_text) or ""
-
-        await audit.record(
-            action="admin.portal.read.reports.export",
-            user=user, request=request,
-            resource_type="admin_portal",
-            resource_id=f"reports.export.{t}",
-            outcome="success", status_code=200,
-            metadata={"type": t, "window": window, "bytes": len(csv_text)},
-        )
-        from fastapi.responses import Response
-        return Response(
-            content=csv_text,
-            media_type="text/csv",
-            headers={
-                "Content-Disposition":
-                    f'attachment; filename="equinesync-{t}-{window}.csv"'
-            },
-        )
-
-    # --- Integrations -------------------------------------------------
-    async def _integration_status(slug: str) -> Dict[str, Any]:
-        """Compute safe derived status for a static integration slug.
-        Never returns secrets, raw env values, webhook URLs, or
-        Stripe-shaped IDs."""
-        if slug == "stripe":
-            configured = _stripe_configured()
-            # Last successful billing event (timestamp only; no raw IDs).
-            last_ok = None
-            stale_count = 0
-            recent_summaries: List[Dict[str, Any]] = []
-            try:
-                row = await db.billing_events.find_one(
-                    {"processing_status": "processed"},
-                    sort=[("event_created_at", -1)],
-                    projection={"_id": 0, "event_created_at": 1},
-                )
-                if row:
-                    last_ok = row.get("event_created_at")
-                stale_count = await db.billing_events.count_documents({
-                    "processing_status": {"$in": [
-                        "retry_502", "metadata_missing_retryable",
-                    ]},
-                })
-                # Recent sanitized summaries — count + status only.
-                pipeline = [
-                    {"$sort": {"event_created_at": -1}},
-                    {"$limit": 50},
-                    {"$group": {"_id": "$processing_status",
-                                 "n": {"$sum": 1}}},
-                ]
-                async for r in db.billing_events.aggregate(pipeline):
-                    recent_summaries.append({
-                        "processing_status": str(r.get("_id") or "unknown"),
-                        "count": int(r.get("n") or 0),
-                    })
-            except Exception:
-                logger.exception("admin.portal.integration.stripe stats failed")
-            return {
-                "slug": "stripe",
-                "label": "Stripe (Payments)",
-                "configured": configured,
-                "status_label": "healthy" if (configured and stale_count == 0)
-                                 else ("attention" if configured else "not_configured"),
-                "last_successful_event_at": last_ok,
-                "stale_count": int(stale_count),
-                "retry_count": int(stale_count),
-                "recent_summaries": recent_summaries,
-            }
-
-        if slug == "resend":
-            configured = bool(os.environ.get("RESEND_API_KEY"))
-            pending_count = 0
-            try:
-                pending_count = await db.subscriptions.count_documents(
-                    {"pending_emails": {"$exists": True, "$ne": []}}
-                )
-            except Exception:
-                logger.exception("admin.portal.integration.resend stats failed")
-            return {
-                "slug": "resend",
-                "label": "Resend (Transactional Email)",
-                "configured": configured,
-                "status_label": "healthy" if configured else "not_configured",
-                "pending_email_count": int(pending_count),
-            }
-
-        if slug == "webhooks":
-            stale_count = 0
-            last_ok = None
-            try:
-                stale_count = await db.billing_events.count_documents({
-                    "processing_status": {"$in": [
-                        "retry_502", "metadata_missing_retryable",
-                    ]},
-                })
-                row = await db.billing_events.find_one(
-                    {"processing_status": "processed"},
-                    sort=[("event_created_at", -1)],
-                    projection={"_id": 0, "event_created_at": 1},
-                )
-                if row:
-                    last_ok = row.get("event_created_at")
-            except Exception:
-                logger.exception("admin.portal.integration.webhooks stats failed")
-            return {
-                "slug": "webhooks",
-                "label": "Inbound Webhooks",
-                "configured": True,
-                "status_label": "healthy" if stale_count == 0 else "attention",
-                "stale_count": int(stale_count),
-                "last_successful_event_at": last_ok,
-            }
-
-        if slug == "jobs":
-            scheduler_enabled = (
-                os.environ.get("SCHEDULER_ENABLED") or "true"
-            ).strip().lower() in ("1", "true", "yes", "on")
-            return {
-                "slug": "jobs",
-                "label": "Background Jobs",
-                "configured": scheduler_enabled,
-                "status_label": "healthy" if scheduler_enabled else "disabled",
-                "scheduler_enabled": scheduler_enabled,
-            }
-
-        raise HTTPException(404, "Unknown integration slug.")
-
-    @router.get("/admin/portal/integrations")
-    async def list_integrations(request: Request,
-                                user=Depends(get_current_user)):
-        require_platform_role(user)
-        _require_integrations_read(user)
-        items = []
-        for slug in _INTEGRATION_SLUGS:
-            try:
-                items.append(await _integration_status(slug))
-            except Exception:
-                logger.exception("admin.portal.integrations summary failed for %s", slug)
-        await audit.record(
-            action="admin.portal.read.integrations",
-            user=user, request=request,
-            resource_type="admin_portal", resource_id="integrations",
-            outcome="success", status_code=200,
-            metadata={"count": len(items)},
-        )
-        return {"items": items, "total": len(items)}
-
-    @router.get("/admin/portal/integrations/{slug}")
-    async def get_integration_detail(slug: str, request: Request,
-                                     user=Depends(get_current_user)):
-        require_platform_role(user)
-        _require_integrations_read(user)
-        s = (slug or "").strip().lower()
-        if s not in _INTEGRATION_SLUGS:
-            raise HTTPException(404, "Unknown integration slug.")
-        detail = await _integration_status(s)
-        await audit.record(
-            action="admin.portal.read.integration_detail",
-            user=user, request=request,
-            resource_type="admin_portal", resource_id=f"integration:{s}",
-            outcome="success", status_code=200,
-            metadata={"slug": s},
-        )
-        return detail
-
-    # --- Settings -----------------------------------------------------
-    @router.get("/admin/portal/settings")
-    async def get_settings(request: Request,
-                           user=Depends(get_current_user)):
-        """Pure introspection of environment/module config. Returns
-        booleans + safe labels only. No raw env values, no URLs with
-        credentials, no API keys, no webhook secrets, no JWT secrets,
-        no cookies, no tokens. (Decisions 3, 4.)"""
-        require_platform_role(user)
-        _require_settings_read(user)
-
-        from core import config as _cfg
-
-        env_mode = (os.environ.get("APP_ENV") or "development").strip().lower()
-        cors_origins = _cfg.get_cors_origins()
-        # Never leak full origins; just shape: a count + wildcard flag.
-        cors_summary = {
-            "policy": "wildcard" if cors_origins == ["*"] else "explicit",
-            "count": 0 if cors_origins == ["*"] else len(cors_origins),
-        }
-        public_app_url_configured = bool(
-            (os.environ.get("APP_BASE_URL") or os.environ.get("PUBLIC_APP_URL") or "").strip()
-        )
-
-        payload = {
-            "environment": env_mode,
-            "is_production": env_mode in ("production", "prod"),
-            "feature_flags": {
-                "enforce_email_verification": _cfg.enforce_email_verification(),
-                "login_lockout_enabled": _cfg.login_lockout_enabled(),
-                "rate_limit_enabled": _cfg.rate_limit_enabled(),
-                "allow_seed_route": _cfg.allow_seed_route(),
-                "auto_seed_enabled": _cfg.auto_seed_enabled(),
-            },
-            "scheduler": {
-                "enabled": (os.environ.get("SCHEDULER_ENABLED") or "true")
-                           .strip().lower() in ("1", "true", "yes", "on"),
-            },
-            "billing": {
-                "stripe_configured": _stripe_configured(),
-                "billing_mode": (os.environ.get("BILLING_MODE") or "live")
-                                 .strip().lower(),
-            },
-            "email": {
-                "resend_configured": bool(os.environ.get("RESEND_API_KEY")),
-            },
-            "cors": cors_summary,
-            "public_app_url_configured": public_app_url_configured,
-            "auth_policy": {
-                "login_max_attempts": _cfg.login_max_attempts(),
-                "login_lockout_minutes": _cfg.login_lockout_minutes(),
-                "login_attempt_window_minutes": _cfg.login_attempt_window_minutes(),
-                "email_verify_ttl_hours": _cfg.email_verify_ttl_hours(),
-                "password_reset_ttl_hours": _cfg.password_reset_ttl_hours(),
-            },
-            "health_probe": "/api/health",
-            "_generated_at": datetime.now(timezone.utc).isoformat(),
-        }
-
-        await audit.record(
-            action="admin.portal.read.settings",
-            user=user, request=request,
-            resource_type="admin_portal", resource_id="settings",
-            outcome="success", status_code=200,
-            metadata={"environment": env_mode},
-        )
-        return payload
+    from types import SimpleNamespace
+    ctx = SimpleNamespace(
+        db=db,
+        get_current_user=get_current_user,
+        logger=logger,
+    )
+    _reports_surface.register(router, ctx)
+    _integrations_surface.register(router, ctx)
+    _settings_surface.register(router, ctx)
 
     return router

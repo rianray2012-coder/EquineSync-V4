@@ -564,17 +564,18 @@ def test_stripe_configured_uses_phase15_env_contract(db, monkeypatch):
     as a non-authoritative fallback) — otherwise the badge can read
     "not configured" on a working production env.
 
-    We verify by calling the helper directly: with STRIPE_API_KEY set
-    and STRIPE_SECRET_KEY unset, the helper must return True. This
-    proves the new contract is real, not just a string change.
+    Admin-7A.2a (Feb 2026): the Stripe-configured helper moved out of
+    portal.py into the per-surface integrations module. We now assert
+    the contract on `integrations.stripe_configured` directly AND on
+    its source — both the import and the env precedence (API_KEY
+    first, SECRET_KEY fallback) must hold.
     """
     sys.path.insert(0, "/app/backend")
-    # Import the module so we can reach the build_router closure's
-    # source. Simplest: re-implement the contract assertion by reading
-    # the source and confirming both vars are present.
-    src = pathlib.Path("/app/backend/routes/admin_portal/portal.py").read_text()
+    src = pathlib.Path(
+        "/app/backend/routes/admin_portal/integrations.py"
+    ).read_text()
     assert "STRIPE_API_KEY" in src, (
-        "portal.py must read STRIPE_API_KEY (Phase 15 contract)."
+        "integrations.py must read STRIPE_API_KEY (Phase 15 contract)."
     )
     # Backwards tolerance: STRIPE_SECRET_KEY may still appear as a
     # documented fallback, but STRIPE_API_KEY must be the first check.
@@ -583,8 +584,24 @@ def test_stripe_configured_uses_phase15_env_contract(db, monkeypatch):
     if sec_idx != -1:
         assert api_idx < sec_idx, (
             "STRIPE_API_KEY must be checked before STRIPE_SECRET_KEY "
-            "fallback in portal.py."
+            "fallback in integrations.py."
         )
+
+    # Behavioural assertion: with STRIPE_API_KEY set and SECRET_KEY
+    # explicitly unset, the helper must return True.
+    from routes.admin_portal.integrations import stripe_configured
+    monkeypatch.setenv("STRIPE_API_KEY", "sk_test_admin7a2a_assert")
+    monkeypatch.delenv("STRIPE_SECRET_KEY", raising=False)
+    assert stripe_configured() is True
+
+    # And with neither set, must return False.
+    monkeypatch.delenv("STRIPE_API_KEY", raising=False)
+    monkeypatch.delenv("STRIPE_SECRET_KEY", raising=False)
+    assert stripe_configured() is False
+
+    # SECRET_KEY-only fallback continues to work.
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_fallback")
+    assert stripe_configured() is True
 
 
 def test_integrations_stripe_reports_configured_when_api_key_set(db):

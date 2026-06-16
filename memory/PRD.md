@@ -1513,6 +1513,67 @@ those tests now correctly assert the new caps).
 **Packaged:** `/app/phase_admin_7b_changes.zip` (12 files, 60 KB) +
 `/app/PHASE_ADMIN_7B_README.md` updated with round-2 fix log.
 
+## 🔐 Equine·Sync Admin Portal — Phase Admin-7A.2a ✅ (Feb 25 2026)
+
+**Two-layer split, layer a** — physical helper move + the 3 newest
+Admin-7B surfaces (`reports.py`, `integrations.py`, `settings.py`) +
+the drift guard tests the founder approved when locking Admin-7B.
+
+**What physically moved:**
+- The 17 locked helper names (`SECTION_CAPABILITIES`, `_scrub_text`,
+  Stripe-regex family, `_admin_ref` family, `_ACTIVITY_*` prefixes)
+  now have their **implementations** in `_helpers.py`. `portal.py`
+  imports them — the Admin-7A.1 re-export shim is retired.
+- `_ACTIVITY_EXCLUDE_PREFIXES` is now a single canonical tuple in
+  `_helpers.py` (was previously initialized then re-bound mid-file).
+- The 7 Admin-7B routes (4 reports + 2 integrations + 1 settings)
+  lifted out of `portal.py::build_router` into per-surface modules
+  with a uniform `register(router, ctx)` contract. portal.py shrunk
+  **2,507 → 1,929 lines** (−578).
+
+**Module-level constants** promoted out of closure scope (so source-
+level drift tests can import them directly):
+- `reports.py`: `REPORTS_READ_ROLES`, `REPORTS_CSV_ROLES`,
+  `REPORTS_WINDOWS`, `REPORTS_CSV_TYPES`.
+- `integrations.py`: `INTEGRATIONS_READ_ROLES`, `INTEGRATION_SLUGS`,
+  `stripe_configured()` (now the canonical Stripe-env helper —
+  reused by `settings.py`).
+- `settings.py`: `SETTINGS_READ_ROLES`.
+
+**Drift guards** (`test_admin_portal_admin7a2.py`, 8 source-level tests):
+1. `REPORTS_CSV_ROLES` ↔ `ADMIN_REPORTS_CSV_ROLES`.
+2. `INTEGRATIONS_READ_ROLES` ↔ `ADMIN_SECTION_CAPS.integrations`.
+3. `SETTINGS_READ_ROLES` ↔ `ADMIN_SECTION_CAPS.settings`.
+4-6. Per-surface module contract (`register` callable + locked role
+   constants exposed at module scope).
+7. `test_helpers_module_owns_implementations` — locks the
+   physical-move contract via source inspection + import-identity
+   equality across `_helpers.py` and `portal.py`.
+8. `test_activity_exclude_prefixes_consolidated` — locks the single
+   canonical tuple form of the exclude list.
+
+Updated `test_admin_portal_admin7b.py::test_stripe_configured_uses_phase15_env_contract`
+to point at `integrations.py` (the new source location) and to add direct
+behavioural assertions on `integrations.stripe_configured()`.
+
+**Tests:** Admin-7A.2a — **8/8 green**. Admin-7A.1 route-map
+preservation — **41/41 unchanged** (same 19 GET + 8 POST = 27 routes).
+Admin-7B — **98/98 unchanged**. Legacy Admin-1..6 — **179/179
+unchanged**. **Grand total: 326 backend tests passing.**
+
+**Behaviour:** byte-identical to Admin-7B. No route/role/UI/audit
+changes.
+
+**Packaged:** `/app/phase_admin_7a2a_split.zip` (8 files, 46 KB) +
+`/app/PHASE_ADMIN_7A2A_README.md` (file map, helper move log, drift
+guard rationale, Codex review checklist).
+
+**Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
+Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
+billing, audit_logs, support, alerts) still live in `portal.py`.
+Same `register(router, ctx)` pattern; same drift-guard discipline
+for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
+
 ### Admin Portal — Phase Status (post Admin-7B)
 
 | Phase   | Scope                                                        | Status |
@@ -1526,5 +1587,6 @@ those tests now correctly assert the new caps).
 | Admin-5a | Frontend lint cleanup (bridge phase)                          | ✅ Codex-approved & locked |
 | Admin-6 | Audit logs + support + alerts                                 | ✅ Codex-approved & locked |
 | Admin-7A.1 | Backend router consolidation (layered split)                | ✅ Codex-approved & locked |
-| Admin-7A.2 | Per-surface 12-file split                                  | ⏸ Gated (next phase) |
+| Admin-7A.2a | Helper physical move + 3 Admin-7B surfaces + drift guards | ✅ Ready for Codex review |
+| Admin-7A.2b | Per-surface split of 8 legacy Admin-1..6 surfaces          | ⏸ Gated (after 7A.2a lock) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
