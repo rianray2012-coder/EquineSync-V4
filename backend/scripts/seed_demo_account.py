@@ -82,7 +82,10 @@ def _parse_args():
     p = argparse.ArgumentParser(description=(
         "Seed (or tear down) the Phase Admin-8 client-like demo account."
     ))
-    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--dry-run", action="store_true",
+                   help="Print the plan; does NOT write to the database "
+                        "(reads are still performed to build the preview). "
+                        "No password is minted or printed in dry-run.")
     p.add_argument("--allow-prod", action="store_true",
                    help="Required to run when APP_ENV is production.")
     p.add_argument("--teardown", action="store_true",

@@ -1,7 +1,7 @@
 # Phase Admin-8 — Initial Admin Access + Client-Like Demo Account
 
-**Status:** Codex Round-2 fix applied · Behavior-preserving for Admin-1..7B + 7A.2*.
-**Date:** Feb 25 2026 (round-1: Feb 26 2026; round-2: Feb 27 2026).
+**Status:** ✅ Codex-approved & locked (Feb 27 2026) · Behavior-preserving for Admin-1..7B + 7A.2*.
+**Date:** Feb 25 2026 (round-1: Feb 26 2026; round-2 + lock: Feb 27 2026).
 **Scope:** CLI scripts + tests + docs only.
 
 ## Codex Round-2 fix highlights (Feb 27 2026)

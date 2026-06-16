@@ -98,7 +98,9 @@ def _parse_args():
         "Idempotent and re-runnable."
     ))
     p.add_argument("--dry-run", action="store_true",
-                   help="Print the plan; do NOT touch the database.")
+                   help="Print the plan; does NOT write to the database "
+                        "(reads are still performed to build the preview). "
+                        "No password is minted or printed in dry-run.")
     p.add_argument("--allow-prod", action="store_true",
                    help="Required to run when APP_ENV is production.")
     # Codex 7A.2b-equivalent round-2 P1 fix: role changes on an

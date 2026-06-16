@@ -1766,6 +1766,23 @@ without spec changes.
 
 **Re-packaged:** `/app/phase_admin_8_access_demo_seed.zip` (round-2).
 
+### Phase Admin-8 — Codex Approval & Lock (Feb 27 2026)
+
+Codex confirmed no blocking findings on the round-2 zip. Admin-8
+is **approved and locked**. One optional P2 wording cleanup was
+applied alongside the lock: the `--dry-run` argparse help string
+in both scripts now reads "does NOT write to the database (reads
+are still performed to build the preview). No password is minted
+or printed in dry-run." — matching the docs' "never writes"
+language. No behavioural change.
+
+Final scoreboard for Admin-8:
+- 13/13 Admin-8 seed-script tests green.
+- 117/117 Admin-portal regression unchanged.
+- 0 frontend / landing-page changes.
+- 6 files in the lock zip: 2 scripts, 1 test suite, operator doc,
+  PRD, and the phase README.
+
 
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
@@ -1790,4 +1807,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7A.2b | Per-surface split of 8 legacy Admin-1..6 surfaces          | ✅ Ready for Codex review |
 | Admin-7A.2c | (Optional) portal.py → orchestrator.py rename              | ⏸ Gated (deferred per founder) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
-| Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex round-2 fix applied — re-submitted for review |
+| Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex-approved & locked |
