@@ -1,8 +1,16 @@
 # Phase Admin-4b — Facility Edits + Soft-Disable + Tenancy Enforcement
 
-**Status:** Ready for Codex review
-**Date:** Feb 27 2026.
+**Status:** Codex Round-1 fixes applied — re-submitted for review
+**Date:** Feb 27 2026  (round-1 fixes: Feb 28 2026).
 **Scope:** Backend (FastAPI) + Admin Portal frontend + tests only.
+
+## Codex Round-1 fix highlights (Feb 28 2026)
+
+| ID | Severity | Finding | Resolution |
+|----|----------|---------|------------|
+| R1-A | **P0** | Phase 15 authenticated subscription routes were NOT facility-gated. The subscriptions router was excluded entirely from `PRODUCT_FACILITY_DEPS` because it contains an anonymous Stripe webhook + public marketing route, so disabled-facility members could still reach `/api/subscriptions/me`, `/api/subscriptions/checkout`, `/api/billing/usage`. | New `make_require_active_facility_optional_auth(db, security)` dependency in `core/tenancy.py`. It pulls the bearer credentials via FastAPI's `HTTPBearer(auto_error=False)`, decodes the JWT inline, and only fires the 403 when an authenticated barn-scoped user calls into a disabled facility. Anonymous webhook + public-plan callers pass through untouched. Wired in `server.py` as `PRODUCT_FACILITY_DEPS_OPTIONAL_AUTH` on both `build_subscriptions_router(...)` and `build_membership_router(...)`. Verified by 3 new tests (incl. anonymous webhook + public route still working). |
+| R1-B | **P0** | `_strip_barn_response()` only removed KEYS — it never inspected string VALUES, so a Stripe-shaped ID pasted into a free-text field (`notes`, `address`, `name`, …) would surface in every list / detail / PATCH response. | `_strip_barn_response()` now iterates the projected dict and runs `_redact_stripe_in_string` against every string value. The DB row keeps the raw text for operator context; only the wire response is scrubbed. Verified by `test_r1b_stripe_shape_in_free_text_field_is_scrubbed_on_list_and_detail`. |
+| R1-C | **P0** | `make_require_active_facility` bypassed the gate for ANY truthy `user.platform_role`. A user with an injected `platform_role="hacker_admin"` (compromised account / hand-edited DB row) could ride past tenancy enforcement entirely. | Bypass now checks `platform_role(user) in PLATFORM_ROLES` (the canonical set from `core/permissions.py`). Unknown values fall through to the facility-status gate just like a barn-scoped user. Verified by `test_r1c_unknown_platform_role_does_not_bypass_facility_gate` (asserts 403 on `/horses`, `/owner-updates`, `/invoices`, `/subscriptions/me`, `/billing/usage` for an unknown role; and that a known `support_admin` still bypasses to prove the legitimate path was not broken). |
 
 ## What ships
 
@@ -137,7 +145,7 @@ caches dependency resolution within a request — the second
 `Depends(get_current_user)` does not re-decode the JWT or re-read the
 user document.
 
-### Router inventory — APPLIED `Depends(require_active_facility)`
+### Router inventory — APPLIED via the strict `require_active_facility` dependency (18)
 
 | # | Router (built in `server.py`)             | Why it's covered |
 |---|-------------------------------------------|------------------|
@@ -160,7 +168,19 @@ user document.
 | 17 | `build_owner_router`                     | Phase 7D-2 owner self-service. |
 | 18 | `build_backlog_router`                   | Backlog foundations. |
 
-### Router inventory — INTENTIONALLY EXCLUDED
+### Router inventory — APPLIED via the optional-auth variant (2, **Codex R1-A fix**)
+
+These routers mix authenticated tenant routes with anonymous Stripe
+webhooks and public marketing routes. The optional-auth dependency
+passes anonymous callers through and only fires the 403 when a
+disabled-facility barn-scoped user is detected.
+
+| # | Router (built in `server.py`)             | Mixed-auth surfaces |
+|---|-------------------------------------------|---------------------|
+| 19 | `build_subscriptions_router`             | `POST /api/webhook/stripe-subscriptions` (anonymous), `GET /api/billing/plans-public` (public), `GET /api/billing/plans` + `GET /api/billing/usage` + `GET /api/subscriptions/me` + `POST /api/subscriptions/checkout` + `POST /api/subscriptions/customer-portal` (authenticated tenant — now gated). |
+| 20 | `build_membership_router`                | `POST /api/webhook/stripe` (anonymous), `GET /api/membership/tiers` (public), `POST /api/membership/checkout` (authenticated tenant — now gated). |
+
+### Router inventory — INTENTIONALLY EXCLUDED (7)
 
 | Router                          | Reason for exclusion |
 |---------------------------------|----------------------|
@@ -171,8 +191,6 @@ user document.
 | `build_admin_billing_router`    | Platform-admin billing dashboard endpoints (no tenant member access). |
 | `build_admin_review_router`     | Platform-admin marketplace review queue. |
 | `build_subscription_emails_router` | Platform-admin manual trigger. |
-| `build_membership_router`       | Contains the anonymous `POST /webhook/stripe` route + a public `GET /membership/tiers`. Wrapping the whole router with the auth-dependent gate would break the Stripe webhook. Excluded for Phase 15 webhook safety; revisit per-route if a tenant-write membership endpoint is added later. |
-| `build_subscriptions_router`    | Contains the anonymous `POST /webhook/stripe-subscriptions` route + `GET /billing/plans-public`. Same Phase 15 safety as above; tenant subscription mutations remain outside Admin-4b's enforcement scope by founder direction. |
 
 ## Audit events
 
@@ -253,7 +271,7 @@ True for `super_admin` + `platform_admin`; false everywhere else.
 ## Test results
 
 ```bash
-pytest backend/tests/test_admin_portal_admin4b.py        #  39 passed   ⭐ NEW
+pytest backend/tests/test_admin_portal_admin4b.py        #  44 passed   ⭐ NEW (incl. round-1 fixes R1-A/B/C)
 pytest backend/tests/test_admin_portal_admin4.py         #   regression update
 pytest backend/tests/test_admin_portal_route_lock_guard.py #  4 passed
 pytest backend/tests/test_admin_portal_admin7a.py        # 117 passed
@@ -306,6 +324,33 @@ storms; not caused by Admin-4b).
     responses, even with planted Stripe-shaped fields on the barn doc.
 22. `test_admin_portal_me_exposes_facilities_write_capability[<role>]` —
     booleans align with the matrix.
+
+### Codex round-1 regression coverage (added Feb 28 2026)
+
+23. `test_r1a_disabled_facility_member_blocked_on_authenticated_subscription_routes` —
+    asserts 403 "Facility unavailable" on the authenticated Phase 15
+    surfaces `GET /api/subscriptions/me`, `GET /api/billing/usage`,
+    and `POST /api/subscriptions/checkout` for a disabled-barn member.
+    Also confirms the member could call these routes successfully
+    while the barn was active (sanity check that the gate only fires
+    on the disabled state).
+24. `test_r1a_anonymous_stripe_webhook_not_blocked_by_facility_gate` —
+    posts to `/api/webhook/stripe-subscriptions` without an
+    Authorization header and asserts the facility gate is NOT what
+    produced the response (the route's own signature check may still
+    reject the payload, but never with "Facility unavailable").
+25. `test_r1a_public_plans_route_still_anonymous` — `GET /api/billing/plans-public`
+    must not require auth and must not be intercepted by the gate.
+26. `test_r1b_stripe_shape_in_free_text_field_is_scrubbed_on_list_and_detail` —
+    plants `sub_…`, `cus_…`, `pi_…` substrings into `name`, `address`,
+    `notes` and asserts they are scrubbed from the list / detail /
+    PATCH responses while non-Stripe text is preserved. Also asserts
+    the DB row keeps the raw text (operator context).
+27. `test_r1c_unknown_platform_role_does_not_bypass_facility_gate` —
+    plants `platform_role="hacker_admin"` and asserts the user is
+    still 403'd on `/horses`, `/owner-updates`, `/invoices`,
+    `/subscriptions/me`, `/billing/usage`. Also flips to
+    `support_admin` and asserts the legitimate bypass path is intact.
 
 ## Locked guardrails honoured
 

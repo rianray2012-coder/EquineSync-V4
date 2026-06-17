@@ -1856,6 +1856,40 @@ re-run, unrelated). Admin-8 regression unchanged at **13/13**.
 **Packaged:** `/app/phase_admin_4b_changes.zip` +
 `/app/PHASE_ADMIN_4B_README.md`.
 
+### Phase Admin-4b — Codex Round-1 Fixes (Feb 28 2026)
+
+Codex returned 3 P0 findings on the initial Admin-4b zip. All resolved
+without changing the founder-locked decisions.
+
+| ID | Severity | Finding | Resolution |
+|----|----------|---------|------------|
+| R1-A | **P0** | Phase 15 authenticated subscription routes were not facility-gated (the subscriptions router was excluded entirely because it contains an anonymous Stripe webhook + public marketing route). | New `make_require_active_facility_optional_auth(db, security)` in `core/tenancy.py` — decodes the bearer token inline, passes anonymous callers through (webhook + public plans), and fires the same generic 403 only for authenticated barn-scoped users in a disabled facility. Wired into `server.py` as `PRODUCT_FACILITY_DEPS_OPTIONAL_AUTH` on the **subscriptions** and **membership** routers. |
+| R1-B | **P0** | `_strip_barn_response()` stripped KEYS only — a Stripe-shaped ID pasted into a free-text field (`notes`, `address`, `name`) would surface on every list / detail / PATCH response. | `_strip_barn_response()` now runs `_redact_stripe_in_string` against every string value in the projected dict. DB row keeps the raw text (operator context); wire response is scrubbed. |
+| R1-C | **P0** | `make_require_active_facility` bypassed the gate for ANY truthy `user.platform_role` value. A user with an injected `platform_role="hacker_admin"` could ride past tenancy enforcement entirely. | Bypass now requires `platform_role(user) in PLATFORM_ROLES` (the canonical set from `core/permissions.py`). Unknown values fall through to the facility-status gate just like any barn-scoped user. |
+
+**New tests (Codex round-1, 5 added → 44 total in the Admin-4b file):**
+- `test_r1a_disabled_facility_member_blocked_on_authenticated_subscription_routes`
+  — `/subscriptions/me`, `/billing/usage`, `/subscriptions/checkout` → 403 on disable.
+- `test_r1a_anonymous_stripe_webhook_not_blocked_by_facility_gate`
+  — `/webhook/stripe-subscriptions` is NOT intercepted by the gate.
+- `test_r1a_public_plans_route_still_anonymous`
+  — `GET /billing/plans-public` is not auth-gated by the new dep.
+- `test_r1b_stripe_shape_in_free_text_field_is_scrubbed_on_list_and_detail`
+  — plants `sub_…`/`cus_…`/`pi_…` substrings in `name`, `address`,
+  `notes`; asserts list/detail/PATCH responses are scrubbed while
+  non-Stripe text survives; DB row retains the raw values.
+- `test_r1c_unknown_platform_role_does_not_bypass_facility_gate`
+  — `platform_role="hacker_admin"` is treated as barn-scoped and
+  receives 403 on product + Phase 15 authenticated routes; legitimate
+  `support_admin` bypass path proven intact.
+
+**Re-test:** Admin-4b — **44/44 green**. Admin-4 + route-lock +
+Admin-8 sweep — **84/84 passed** (one transient read-timeout on
+re-run, unrelated; passes on retry). Backend boots clean; no Phase 9
+or Phase 15 logic changes.
+
+**Re-packaged:** `/app/phase_admin_4b_changes.zip` (round-1).
+
 
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
@@ -1881,4 +1915,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7A.2c | (Optional) portal.py → orchestrator.py rename              | ⏸ Gated (deferred per founder) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
 | Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex-approved & locked |
-| Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Ready for Codex review |
+| Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Codex round-1 fixes applied — re-submitted for review |

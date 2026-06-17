@@ -91,9 +91,24 @@ from seed_data import run_seed
 # product/tenant-data router below. See PHASE_ADMIN_4B_README.md for
 # the full applied/excluded inventory.
 from fastapi import Depends as _Depends
-from core.tenancy import make_require_active_facility
+from core.auth import security as _security
+from core.tenancy import (
+    make_require_active_facility,
+    make_require_active_facility_optional_auth,
+)
 require_active_facility = make_require_active_facility(db, get_current_user)
 PRODUCT_FACILITY_DEPS = [_Depends(require_active_facility)]
+
+# Codex round-1 fix (Admin-4b): the Phase 15 subscriptions router (and
+# the membership router) mix authenticated tenant routes with anonymous
+# Stripe webhooks and public marketing endpoints. Attaching the strict
+# dependency would 401 the webhook. The optional-auth variant passes
+# anonymous requests through and only enforces the facility gate when
+# a valid token is presented AND its user is barn-scoped.
+require_active_facility_optional_auth = make_require_active_facility_optional_auth(
+    db, _security,
+)
+PRODUCT_FACILITY_DEPS_OPTIONAL_AUTH = [_Depends(require_active_facility_optional_auth)]
 
 # Phase 10A: centralized structured logging + request-correlation filters
 # (JSON in prod, plain in dev; configures the root logger).
@@ -210,10 +225,14 @@ api_router.include_router(build_billing_router(
 ), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Marketplace membership — Stripe Checkout (routes/membership.py)
+# Mixed-auth router (anonymous Stripe webhook + public `/membership/tiers`
+# + authenticated tenant checkout). Use the optional-auth variant so
+# anonymous routes pass through; authenticated calls from a disabled
+# facility are still gated.
 api_router.include_router(build_membership_router(
     db=db,
     get_current_user=get_current_user,
-))
+), dependencies=PRODUCT_FACILITY_DEPS_OPTIONAL_AUTH)
 
 # Admin marketplace review queue (routes/admin_review.py)
 api_router.include_router(build_admin_review_router(
@@ -222,10 +241,14 @@ api_router.include_router(build_admin_review_router(
 ))
 
 # Phase 15.A — facility-level Stripe Subscriptions (routes/subscriptions.py)
+# Mixed-auth router (anonymous `/webhook/stripe-subscriptions` + public
+# `/billing/plans-public` + authenticated tenant routes). Optional-auth
+# variant: anonymous pass-through; authenticated tenant call from a
+# disabled facility → 403 "Facility unavailable" (Codex round-1 fix).
 api_router.include_router(build_subscriptions_router(
     db=db,
     get_current_user=get_current_user,
-))
+), dependencies=PRODUCT_FACILITY_DEPS_OPTIONAL_AUTH)
 
 # Phase 15.D — manual trigger for the subscription-email dispatcher.
 api_router.include_router(build_subscription_emails_router(

@@ -120,9 +120,27 @@ def register(router, ctx) -> None:
     # MODULE scope (above) — the closures here resolve them via LEGB.
 
     def _strip_barn_response(barn: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        """Outbound projection: drop the internal-only keys AND redact
+        any Stripe-shaped substring that may have been pasted into a
+        free-text field (notes, address, contact_email, name, …).
+
+        Codex round-1 hardening: the previous version stripped keys
+        only. A platform admin who pasted `sub_1A…` into the notes
+        field would have it surface in every list / detail / PATCH
+        response. Now every string value is run through
+        `_redact_stripe_in_string` (which only acts on substrings
+        matching `<prefix>_<14+chars>` — leaves normal text alone)."""
         if not isinstance(barn, dict):
             return barn
-        return {k: v for k, v in barn.items() if k not in _BARN_RESPONSE_STRIP_KEYS}
+        out: Dict[str, Any] = {}
+        for k, v in barn.items():
+            if k in _BARN_RESPONSE_STRIP_KEYS:
+                continue
+            if isinstance(v, str):
+                out[k] = _redact_stripe_in_string(v)
+            else:
+                out[k] = v
+        return out
 
     async def _facility_usage_summary(barn_id: str, entitlements: Dict[str, Any]) -> Dict[str, Any]:
         """Derive `{horses_used, horses_limit, users_used, users_limit}`

@@ -714,3 +714,243 @@ def test_admin_portal_me_exposes_facilities_write_capability(db, role, expected)
     assert caps.get("facilities_write") is expected, (
         f"role={role} expected facilities_write={expected}; got {caps}"
     )
+
+
+# =====================================================================
+# Codex round-1 regression tests
+# =====================================================================
+# These three tests close the gaps identified in the round-1 review:
+#   (R1-A) Phase 15 authenticated subscription routes ARE gated.
+#   (R1-B) Stripe-shaped values pasted INTO free-text fields are
+#          scrubbed from list/detail/PATCH responses.
+#   (R1-C) An UNKNOWN `platform_role` value does NOT bypass the
+#          disabled-facility gate.
+# =====================================================================
+def test_r1a_disabled_facility_member_blocked_on_authenticated_subscription_routes(db):
+    """Codex round-1 finding A: the Phase 15 subscriptions router was
+    previously excluded entirely from the tenancy gate because it
+    contains an anonymous Stripe webhook. The fix attaches an
+    optional-auth dependency that passes anonymous webhooks through
+    but still blocks authenticated tenant calls from a disabled
+    facility. This test asserts the authenticated GET /api/subscriptions/me
+    and GET /api/billing/usage routes return 403 'Facility unavailable'
+    for a disabled-barn member."""
+    admin = _admin_session(db, "platform_admin")
+    barn_id = _make_test_barn(db)
+    member = _barn_member_session(db, barn_id)
+    try:
+        # Sanity: while the barn is active, the member can reach the
+        # subscription routes (they may return 200/404/empty; only the
+        # 403 outcome matters).
+        for path in ("/subscriptions/me", "/billing/usage"):
+            r_active = requests.get(f"{API}{path}",
+                                    headers=_bearer(member), timeout=10)
+            assert r_active.status_code != 403, (
+                f"active barn member should NOT be blocked on {path}; "
+                f"got {r_active.status_code} {r_active.text[:200]}"
+            )
+
+        # Disable the barn.
+        rd = requests.post(
+            f"{API}/admin/portal/facilities/{barn_id}/disable",
+            headers=_bearer(admin),
+            json={"reason_category": "billing_dispute"},
+            timeout=10,
+        )
+        assert rd.status_code == 200, rd.text
+
+        # Authenticated tenant calls on the subscriptions router now 403.
+        for path in ("/subscriptions/me", "/billing/usage"):
+            rr = requests.get(f"{API}{path}",
+                              headers=_bearer(member), timeout=10)
+            assert rr.status_code == 403, (
+                f"R1-A: expected 403 on {path} after disable, "
+                f"got {rr.status_code}: {rr.text}"
+            )
+            assert "Facility unavailable" in (rr.json().get("detail") or ""), (
+                f"R1-A: wrong detail on {path}: {rr.text}"
+            )
+
+        # And POST /subscriptions/checkout (authenticated + tenant-scoped)
+        # is also gated.
+        rc = requests.post(
+            f"{API}/subscriptions/checkout",
+            headers=_bearer(member),
+            json={"tier_code": "starter", "billing_cycle": "monthly"},
+            timeout=10,
+        )
+        assert rc.status_code == 403, (
+            f"R1-A: POST /subscriptions/checkout must 403 for disabled "
+            f"barn; got {rc.status_code}: {rc.text}"
+        )
+    finally:
+        _cleanup(db, barn_id)
+
+
+def test_r1a_anonymous_stripe_webhook_not_blocked_by_facility_gate(db):
+    """Codex round-1 finding A (companion): the anonymous Stripe
+    webhook on `/api/webhook/stripe-subscriptions` must NOT 401
+    or 403 because of the new facility gate. We don't supply a
+    signature header, so Stripe-side validation will reject the
+    payload (400 / 401 from the route itself), but the outcome
+    must NOT be the tenancy gate's 403 'Facility unavailable'."""
+    r = requests.post(
+        f"{API}/webhook/stripe-subscriptions",
+        json={"id": "evt_test"},
+        timeout=10,
+    )
+    # The route itself may return 400 (no signature), 401, or even
+    # the server's webhook-signature error — what matters is that the
+    # facility gate did not intercept it.
+    if r.status_code == 403:
+        assert "Facility unavailable" not in (r.json().get("detail") or ""), (
+            "R1-A: facility gate must not fire on anonymous Stripe webhook"
+        )
+
+
+def test_r1a_public_plans_route_still_anonymous(db):
+    """`GET /api/billing/plans-public` is the marketing public route.
+    The new optional-auth gate must let anonymous callers through
+    (no 401 / 403 from the facility gate)."""
+    r = requests.get(f"{API}/billing/plans-public", timeout=10)
+    # 200 is expected; if the route shape changes that's fine — we
+    # only assert the facility gate did not intercept.
+    if r.status_code == 403:
+        assert "Facility unavailable" not in (r.json().get("detail") or ""), (
+            "R1-A: facility gate must not fire on the public plans route"
+        )
+    assert r.status_code != 401, (
+        "R1-A: anonymous public plans route must not require auth"
+    )
+
+
+def test_r1b_stripe_shape_in_free_text_field_is_scrubbed_on_list_and_detail(db):
+    """Codex round-1 finding B: `_strip_barn_response()` previously
+    only stripped KEYS. A platform admin who pasted a Stripe ID into
+    `notes` / `address` / `name` would have it surface in every
+    facility-list and facility-detail response.
+
+    This test plants Stripe-shaped substrings inside the whitelisted
+    free-text fields and asserts the LIST + DETAIL + PATCH responses
+    no longer carry the literal Stripe IDs."""
+    s = _admin_session(db, "platform_admin")
+    barn_id = _make_test_barn(db)
+    db.barns.update_one(
+        {"id": barn_id},
+        {"$set": {
+            "name":          "Stables sub_TESTleakABCDEF12345",
+            "address":       "1 Main St cus_TESTleakABCDEF12345",
+            "notes":         "Migrated from pi_TESTleakABCDEF12345 last cycle.",
+            "contact_email": "admin@example.com",  # leave untouched / control
+            "phone":         "+1-555-0000",
+            "timezone":      "America/New_York",
+        }},
+    )
+    try:
+        # LIST
+        r1 = requests.get(f"{API}/admin/portal/facilities?limit=50",
+                          headers=_bearer(s), timeout=10)
+        assert r1.status_code == 200
+        assert not _STRIPE_LEAK_RE.search(r1.text), (
+            f"R1-B: Stripe-shaped substring leaked in list: {r1.text[:400]}"
+        )
+
+        # DETAIL
+        r2 = requests.get(f"{API}/admin/portal/facilities/{barn_id}",
+                          headers=_bearer(s), timeout=10)
+        assert r2.status_code == 200
+        assert not _STRIPE_LEAK_RE.search(r2.text), (
+            f"R1-B: Stripe-shaped substring leaked in detail: {r2.text[:400]}"
+        )
+        # And after explicit projection — values are still present but redacted.
+        d = r2.json()["barn"]
+        assert "Stables" in d["name"], "non-Stripe text must survive"
+        assert "1 Main St" in d["address"], "non-Stripe text must survive"
+        assert "Migrated from" in d["notes"], "non-Stripe text must survive"
+
+        # PATCH (write something back through the editable surface — the
+        # response should also be scrubbed).
+        r3 = requests.patch(
+            f"{API}/admin/portal/facilities/{barn_id}",
+            headers=_bearer(s),
+            json={"notes": "Resubmitted via sub_TESTleakABCDEF12345 channel."},
+            timeout=10,
+        )
+        assert r3.status_code == 200, r3.text
+        assert not _STRIPE_LEAK_RE.search(r3.text), (
+            f"R1-B: Stripe-shaped substring leaked in PATCH response: {r3.text[:400]}"
+        )
+        # Database keeps the raw value (operator context); response is
+        # scrubbed on the wire.
+        post = db.barns.find_one({"id": barn_id}, {"notes": 1})
+        assert "sub_TESTleakABCDEF12345" in (post.get("notes") or ""), (
+            "DB persists raw value; only response is redacted"
+        )
+    finally:
+        _cleanup(db, barn_id)
+
+
+def test_r1c_unknown_platform_role_does_not_bypass_facility_gate(db):
+    """Codex round-1 finding C: the previous bypass logic was
+    `if user.get('platform_role'):` — any truthy string short-
+    circuited the gate. A user with `platform_role='hacker'` (or
+    any non-canonical value) could ride past tenancy enforcement.
+
+    The fix bypasses only for values in `PLATFORM_ROLES`. This
+    test plants an unknown value and asserts the user is still
+    blocked when their facility is disabled."""
+    admin = _admin_session(db, "platform_admin")
+    barn_id = _make_test_barn(db)
+    member = _barn_member_session(db, barn_id)
+    # Plant an UNKNOWN platform_role on the member directly. Use a
+    # value that is not in PLATFORM_ROLES.
+    db.users.update_one(
+        {"id": member["user"]["id"]},
+        {"$set": {"platform_role": "hacker_admin"}},  # not a real role
+    )
+    try:
+        # Disable the barn.
+        rd = requests.post(
+            f"{API}/admin/portal/facilities/{barn_id}/disable",
+            headers=_bearer(admin),
+            json={"reason_category": "security"},
+            timeout=10,
+        )
+        assert rd.status_code == 200
+
+        # The unknown-role user MUST still get 403 on product routes.
+        for path in ("/horses", "/owner-updates", "/invoices"):
+            rr = requests.get(f"{API}{path}",
+                              headers=_bearer(member), timeout=10)
+            assert rr.status_code == 403, (
+                f"R1-C: unknown platform_role='hacker_admin' bypassed "
+                f"the facility gate on {path}; got {rr.status_code}"
+            )
+            assert "Facility unavailable" in (rr.json().get("detail") or ""), (
+                f"R1-C: wrong detail on {path}: {rr.text}"
+            )
+
+        # Same coverage for the Phase 15 authenticated routes via
+        # the optional-auth gate.
+        for path in ("/subscriptions/me", "/billing/usage"):
+            rr = requests.get(f"{API}{path}",
+                              headers=_bearer(member), timeout=10)
+            assert rr.status_code == 403, (
+                f"R1-C: unknown platform_role bypassed the Phase 15 "
+                f"gate on {path}; got {rr.status_code}"
+            )
+
+        # Sanity: a KNOWN platform_role (e.g. support_admin) DOES still
+        # bypass — proving we didn't break the legitimate path.
+        db.users.update_one(
+            {"id": member["user"]["id"]},
+            {"$set": {"platform_role": "support_admin"}},
+        )
+        rg = requests.get(f"{API}/horses",
+                          headers=_bearer(member), timeout=10)
+        assert rg.status_code != 403, (
+            "R1-C: known platform_role must still bypass the gate; "
+            f"got {rg.status_code}"
+        )
+    finally:
+        _cleanup(db, barn_id)
