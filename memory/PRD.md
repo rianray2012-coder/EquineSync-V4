@@ -33,7 +33,23 @@ Three Codex blockers closed:
 
 
 
-### Phase HorseOps-1D — Alerts, Escalations, History + Staff Experience Gate ✅ (Feb 2026, awaiting Codex review)
+### Phase HorseOps-1D — Alerts, Escalations, History + Staff Experience Gate ✅ **LOCKED** (Feb 2026, Codex approved Round-1)
+Codex re-review approved. Escalation scheduling is no longer silent, severity sorting uses explicit rank, and same-source PATCH upgrades existing alerts without duplication. Locked and frozen — no further drift permitted.
+
+**Final state**:
+- 3 endpoints in `routes/horse_ledger.py`: `GET /alerts`, `PATCH /alerts/{id}`, `GET /history`.
+- Event-driven alert minting from 1-C daily-check writes; no worker, no scheduler.
+- Lifecycle: `open → acknowledged → closed`; reopen manager-only.
+- `next_escalation_at` is manager-only; setting it always emits an `escalation_scheduled` event + audit row.
+- Severity rank stored on every alert; sort by `(severity_rank desc, last_seen_at desc)`.
+- Same-source PATCH upgrade path: severity + triggers merge, no `occurrence_count` bump.
+- `users.experience_level` field (`null` → treated as `novice`); generic 403 on under-qualified writes with **zero operational artifacts** (no audit, alert, or event).
+- Owner hard-hidden: `alerts_open: []`, `/alerts` 403, `/history` 403, policy PUT 422s on `alerts_open`.
+- Indexes: `hla_horse_type_status`, `hla_barn_status_last_seen`, `hla_horse_status_rank_last_seen`, `hlae_alert_ts`, `hlae_horse_ts`, `hlae_barn_ts`.
+- **Tests**: 106 cases in `test_horse_ledger_1d.py`; Care-Ledger suite **309/309 pass** (29 1-A + 101 1-B + 73 1-C + 106 1-D).
+- **Delta package**: `/app/phase_horseops_1d_changes.zip` (final lock package).
+
+
 Event-driven alert layer on top of the locked 1-C daily checks. **No background worker, no scheduler.** Alerts are minted as inline side effects of `POST/PATCH /daily-checks`; lifecycle endpoints handle ack/close/reopen; the new `/history` endpoint merges daily checks + alerts + audit rows. Staff experience-level gate refuses operational writes by under-qualified callers with a **generic** 403 and **zero operational artifacts** on denial.
 
 **Backend** — 3 endpoints in `routes/horse_ledger.py`:
