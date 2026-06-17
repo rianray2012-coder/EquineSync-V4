@@ -14,6 +14,7 @@ import Forbidden from "./pages/Forbidden";
 import Dashboard from "./pages/Dashboard";
 import Horses from "./pages/Horses";
 import HorseProfile from "./pages/HorseProfile";
+import OwnerCareLedger from "./pages/OwnerCareLedger";
 import Riders from "./pages/Riders";
 import Owners from "./pages/Owners";
 import Lessons from "./pages/Lessons";
@@ -122,6 +123,7 @@ function App() {
             <Route path="/accept-invite" element={<AcceptInvite />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/owner/horses/:horseId" element={<OwnerCareLedger />} />
 
             {/* Admin Portal (Admin-1) — own shell + platform_role gate.
                 Namespace is /admin/portal/* (NOT /admin/*) so it never

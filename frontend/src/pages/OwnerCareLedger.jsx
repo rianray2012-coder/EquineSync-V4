@@ -1,0 +1,233 @@
+/**
+ * OwnerCareLedger — Phase HorseOps-1E.
+ *
+ * Calm, owner-facing filtered view of a horse's care ledger plus the
+ * "Ask the barn" follow-up flow. Backend is authoritative on every
+ * owner-safe projection; this component never decides what an owner
+ * may see.
+ *
+ * Route: /owner/horses/:horseId  (mounted in App.js)
+ */
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { api } from "../lib/api";
+
+const CARE_STATUS_COPY = {
+  all_clear:            { label: "All clear", message: "Your horse's care is on track today." },
+  barn_reviewing:       { label: "Barn team reviewing", message: "The barn team is reviewing care for this horse." },
+  follow_up_available:  { label: "Follow-up in progress", message: "Your follow-up is with the barn team." },
+};
+
+const REQUEST_TYPES = [
+  { value: "question",            label: "General question" },
+  { value: "care_follow_up",      label: "Care follow-up" },
+  { value: "appointment_request", label: "Appointment request" },
+  { value: "other",               label: "Other" },
+];
+
+const CONTACT_OPTIONS = [
+  { value: "app",   label: "In-app" },
+  { value: "email", label: "Email" },
+  { value: "phone", label: "Phone" },
+];
+
+const STATUS_LABELS = { new: "New", in_progress: "In progress", resolved: "Resolved" };
+
+const Pill = ({ status }) => (
+  <span
+    data-testid={`owner-request-row-status-${status}`}
+    className="text-[10px] tracking-[0.16em] uppercase px-2 py-0.5 rounded border border-equine-silver/25 text-equine-platinum/75"
+  >
+    {STATUS_LABELS[status] || status}
+  </span>
+);
+
+export default function OwnerCareLedger() {
+  const { horseId } = useParams();
+  const [data, setData] = useState(null);
+  const [err, setErr]   = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const refetch = () => {
+    return api.get(`/horse-ledger/${horseId}/owner-summary`)
+      .then((r) => { setData(r.data); setErr(null); })
+      .catch((e) => setErr(e?.response?.data?.detail || "Could not load."));
+  };
+
+  useEffect(() => { refetch(); }, [horseId]);
+
+  if (err)   return <div className="p-6 text-equine-platinum/75" data-testid="owner-care-error">{err}</div>;
+  if (!data) return <div className="p-6 text-equine-platinum/55" data-testid="owner-care-loading">Loading…</div>;
+
+  const statusCopy = CARE_STATUS_COPY[data.care_status] || CARE_STATUS_COPY.all_clear;
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6" data-testid="owner-care-ledger">
+      <header className="space-y-2">
+        <div className="label-eyebrow">Care ledger</div>
+        <h1 className="text-3xl sm:text-4xl font-serif text-equine-silver">Your horse's care</h1>
+      </header>
+
+      {/* care_status banner */}
+      <section
+        data-testid="owner-care-status"
+        data-status={data.care_status}
+        className="rounded-lg border border-equine-silver/15 bg-equine-black/40 p-5"
+      >
+        <div className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/55 mb-1">
+          {statusCopy.label}
+        </div>
+        <div className="text-[15px] text-equine-silver/90">{statusCopy.message}</div>
+      </section>
+
+      {/* summary cards */}
+      <section className="grid sm:grid-cols-2 gap-3">
+        {(data.summary_cards || []).map((c) => (
+          <div
+            key={c.key}
+            data-testid={`owner-summary-card-${c.key}`}
+            className="rounded-lg border border-equine-silver/10 bg-equine-black/40 p-4"
+          >
+            <div className="label-eyebrow">{c.label}</div>
+            <div className="text-[13px] text-equine-silver/80 mt-2">{c.message}</div>
+          </div>
+        ))}
+      </section>
+
+      <button
+        type="button"
+        onClick={() => setDrawerOpen(true)}
+        data-testid="owner-request-ask-button"
+        className="w-full sm:w-auto text-[11px] tracking-[0.18em] uppercase border border-equine-silver/30 bg-equine-silver/10 hover:bg-equine-silver/20 text-equine-silver px-5 py-2.5 rounded"
+      >
+        Ask the barn
+      </button>
+
+      {/* recent owner requests */}
+      {(data.recent_owner_requests || []).length > 0 ? (
+        <section className="rounded-lg border border-equine-silver/10 bg-equine-black/40 p-4">
+          <div className="label-eyebrow mb-3">Your recent requests</div>
+          <ul className="space-y-2">
+            {data.recent_owner_requests.map((r) => (
+              <li
+                key={r.id}
+                data-testid={`owner-request-row-${r.id}`}
+                className="flex items-center justify-between gap-3 text-[13px]"
+              >
+                <span className="text-equine-silver/85 truncate">{r.message}</span>
+                <Pill status={r.status} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {drawerOpen ? (
+        <OwnerRequestDrawer horseId={horseId} onClose={() => setDrawerOpen(false)} onSaved={() => { setDrawerOpen(false); refetch(); }} />
+      ) : null}
+    </div>
+  );
+}
+
+function OwnerRequestDrawer({ horseId, onClose, onSaved }) {
+  const [type, setType]       = useState("question");
+  const [contact, setContact] = useState("app");
+  const [message, setMessage] = useState("");
+  const [saving, setSaving]   = useState(false);
+  const [error, setError]     = useState(null);
+
+  const save = async () => {
+    setError(null);
+    if (!message.trim()) { setError("Please add a short message."); return; }
+    if (message.length > 1000) { setError("Message too long."); return; }
+    setSaving(true);
+    try {
+      await api.post(`/horse-ledger/${horseId}/owner-service-requests`, {
+        request_type: type, message, preferred_contact: contact,
+      });
+      onSaved();
+    } catch (e) {
+      setError(e?.response?.data?.detail || "Could not send your request.");
+    } finally { setSaving(false); }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex" data-testid="owner-request-drawer">
+      <div className="flex-1 bg-equine-black/70 backdrop-blur-sm" onClick={onClose} />
+      <div className="w-full max-w-md bg-equine-black border-l border-equine-silver/15 flex flex-col">
+        <header className="px-5 py-4 border-b border-equine-silver/10">
+          <div className="label-eyebrow text-equine-platinum/55">Ask the barn</div>
+          <div className="text-[18px] font-serif text-equine-silver mt-1">New request</div>
+        </header>
+        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-3">
+          <label className="block">
+            <span className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/55 block mb-1">Type</span>
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              data-testid="owner-request-drawer-type"
+              className="w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
+            >
+              {REQUEST_TYPES.map((r) => (
+                <option key={r.value} value={r.value} data-testid={`owner-request-drawer-type-${r.value}`}>{r.label}</option>
+              ))}
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/55 block mb-1">Preferred contact</span>
+            <select
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              data-testid="owner-request-drawer-contact"
+              className="w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
+            >
+              {CONTACT_OPTIONS.map((c) => (
+                <option key={c.value} value={c.value} data-testid={`owner-request-drawer-contact-${c.value}`}>{c.label}</option>
+              ))}
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/55 block mb-1">Message</span>
+            <textarea
+              rows={5}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              maxLength={1000}
+              data-testid="owner-request-drawer-message"
+              className="w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none resize-y"
+            />
+            <div className="text-[11px] text-equine-platinum/45 mt-1">{message.length}/1000</div>
+          </label>
+          {error ? (
+            <div
+              data-testid="owner-request-error"
+              className="text-[12.5px] text-equine-platinum/85 border border-equine-silver/30 bg-equine-silver/5 px-3 py-2 rounded"
+            >
+              {error}
+            </div>
+          ) : null}
+        </div>
+        <footer className="px-5 py-3 border-t border-equine-silver/10 flex justify-end gap-2">
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={saving}
+            data-testid="owner-request-cancel"
+            className="text-[12px] tracking-[0.18em] uppercase text-equine-platinum/55 px-3 py-2 hover:text-equine-silver"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={save}
+            disabled={saving}
+            data-testid="owner-request-submit"
+            className="text-[12px] tracking-[0.18em] uppercase bg-equine-silver/15 hover:bg-equine-silver/25 text-equine-silver border border-equine-silver/25 px-4 py-2 rounded disabled:opacity-40"
+          >
+            {saving ? "Sending…" : "Send"}
+          </button>
+        </footer>
+      </div>
+    </div>
+  );
+}

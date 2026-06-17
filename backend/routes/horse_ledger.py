@@ -1794,4 +1794,301 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # Stripe-scrub the merged response.
         return _scrub_strings({"items": items})
 
+    # =================================================================
+    # Phase HorseOps-1E — owner-facing filtered care ledger +
+    # service-request flow.
+    # =================================================================
+    # Reuses the existing `service_requests` collection with
+    # `source="owner_care_ledger"` as the discriminator so the existing
+    # operational `/service-requests` routes (routes/operations.py) stay
+    # byte-identical.
+    _OWNER_REQUEST_TYPES = {"question", "care_follow_up",
+                            "appointment_request", "other"}
+    _OWNER_CONTACT       = {"app", "email", "phone"}
+    _OWNER_MSG_MAX       = 1000
+    _STAFF_NOTE_MAX      = 500
+    _OWNER_RATE_WINDOW_S = 3600
+    _OWNER_RATE_CAP      = 5
+    _OWNER_STATUS        = {"new", "in_progress", "resolved"}
+    _OWNER_VALID_TRANS = {
+        ("new", "in_progress"), ("new", "resolved"),
+        ("in_progress", "resolved"), ("in_progress", "new"),
+        ("resolved", "in_progress"),  # reopen
+    }
+
+    def _is_horse_owner_for(user, horse) -> bool:
+        """Owner if `user.id` matches `horses.owner_id` or appears in
+        `horses.secondary_owner_ids` (legacy field). Falls back to the
+        backend-authoritative owner-view branching used elsewhere."""
+        uid = user.get("id")
+        if not uid:
+            return False
+        if horse.get("owner_id") == uid:
+            return True
+        sec = horse.get("secondary_owner_ids") or []
+        return isinstance(sec, list) and uid in sec
+
+    async def _load_horse_for_owner_or_404(horse_id, user):
+        """Owner endpoints leak NO existence — non-owners and cross-
+        barn calls always 404."""
+        horse = await db.horses.find_one({"id": horse_id}, {"_id": 0})
+        if not horse:
+            raise HTTPException(404, "Not found.")
+        role = (user.get("role") or "").strip().lower()
+        if role == "horse_owner":
+            if horse.get("barn_id") != user.get("barn_id"):
+                raise HTTPException(404, "Not found.")
+            if not _is_horse_owner_for(user, horse):
+                raise HTTPException(404, "Not found.")
+            return horse
+        # Staff preview: must be in the same barn AND be admin/manager.
+        if role in {"admin", "barn_manager"}:
+            if horse.get("barn_id") != user.get("barn_id"):
+                raise HTTPException(404, "Not found.")
+            return horse
+        # Other staff roles cannot preview the owner surface in 1-E.
+        raise HTTPException(404, "Not found.")
+
+    def _strip_staff_note(row: Dict[str, Any]) -> Dict[str, Any]:
+        """Owner-safe projection of a service_requests row — drops the
+        manager-only staff_note field unconditionally."""
+        cleaned = {k: v for k, v in (row or {}).items() if k != "staff_note"}
+        return cleaned
+
+    @router.get("/horse-ledger/{horse_id}/owner-summary")
+    async def owner_summary(horse_id: str, user=Depends(get_current_user)):
+        horse = await _load_horse_for_owner_or_404(horse_id, user)
+        owner_view = True  # owner-safe projection always
+        # Reuse 1-A projection for visible_sections (same as the
+        # existing owner GET ledger payload, just relabeled).
+        profile = await db.horse_care_profiles.find_one(
+            {"horse_id": horse_id}, {"_id": 0},
+        )
+        policy_doc = await db.horse_owner_visibility_policy.find_one(
+            {"horse_id": horse_id}, {"_id": 0},
+        )
+        eff = lambda s: _effective_owner_keys(s, policy_doc)  # noqa: E731
+        visible_sections = {
+            "identity":        _build_identity(horse, owner_view),
+            "feeding":         _build_feeding(horse, profile, owner_view, eff("feeding")),
+            "hay_access":      _build_hay_access(profile, owner_view, eff("hay_access")),
+            "turnout":         _build_turnout(horse, profile, owner_view, eff("turnout")),
+            "riding_training": _build_riding_training(horse, profile, owner_view, eff("riding_training")),
+            "equipment":       [
+                {"category": r.get("category"), "label": r.get("label")}
+                for r in (await db.horse_equipment.find(
+                    {"horse_id": horse_id, "barn_id": horse["barn_id"],
+                     "status": {"$ne": "retired"}},
+                    {"_id": 0, "category": 1, "label": 1},
+                ).to_list(20))
+            ],
+            # Owner-safe health placeholder. The full owner health
+            # projection lives in the main GET ledger; for the summary
+            # endpoint we surface a single non-leaking signal.
+            "health":          {"status": "up_to_date"},
+        }
+        # Compute owner-safe care_status (strict precedence: alerts > requests > all_clear).
+        # The active-alert lookup returns only "is there any?" — zero
+        # detail crosses the boundary.
+        owner_uid = (user.get("id") if (user.get("role") or "").lower() == "horse_owner"
+                     else (horse.get("owner_id") or ""))
+        care_status = "all_clear"
+        active_alert = await db.horse_ledger_alerts.find_one(
+            {"horse_id": horse_id, "barn_id": horse["barn_id"],
+             "status": {"$in": ["open", "acknowledged"]}},
+            {"_id": 0, "id": 1},
+        )
+        if active_alert:
+            care_status = "barn_reviewing"
+        elif owner_uid:
+            open_req = await db.service_requests.find_one(
+                {"horse_id": horse_id, "barn_id": horse["barn_id"],
+                 "source": "owner_care_ledger",
+                 "owner_user_id": owner_uid,
+                 "status": {"$in": ["new", "in_progress"]}},
+                {"_id": 0, "id": 1},
+            )
+            if open_req:
+                care_status = "follow_up_available"
+        # Calm summary cards — server-side derived labels only.
+        def _card(key, label, struct):
+            if struct is None:
+                return {"key": key, "label": label, "status": "hidden",
+                        "message": "Operational — staff only."}
+            return {"key": key, "label": label, "status": "up_to_date",
+                    "message": "Up to date."}
+        cards = [
+            _card("identity",        "Identity",         visible_sections["identity"]),
+            _card("feeding",         "Feeding",          visible_sections["feeding"]),
+            _card("hay_access",      "Hay & access",     visible_sections["hay_access"]),
+            _card("turnout",         "Turnout",          visible_sections["turnout"]),
+            _card("riding_training", "Riding & training", visible_sections["riding_training"]),
+            _card("equipment",       "Equipment",        visible_sections["equipment"]),
+            _card("health",          "Health",           visible_sections["health"]),
+        ]
+        # Owner's recent requests (own only — even when called by staff preview).
+        recent_requests: List[Dict[str, Any]] = []
+        if owner_uid:
+            rows = await db.service_requests.find(
+                {"horse_id": horse_id, "barn_id": horse["barn_id"],
+                 "source": "owner_care_ledger", "owner_user_id": owner_uid},
+                {"_id": 0},
+            ).sort("created_at", -1).to_list(10)
+            recent_requests = [_strip_staff_note(r) for r in rows]
+        payload = {
+            "horse_id":             horse_id,
+            "generated_at":         datetime.now(timezone.utc).isoformat(),
+            "care_status":          care_status,
+            "summary_cards":        cards,
+            "visible_sections":     visible_sections,
+            "recent_owner_updates": [],  # reserved for a future phase
+            "recent_owner_requests":recent_requests,
+            "request_options": {
+                "request_type":      sorted(_OWNER_REQUEST_TYPES),
+                "preferred_contact": sorted(_OWNER_CONTACT),
+                "message_max":       _OWNER_MSG_MAX,
+            },
+        }
+        # _scrub_strings handles Stripe-shape redaction on every string.
+        return _scrub_strings(payload)
+
+    @router.post("/horse-ledger/{horse_id}/owner-service-requests")
+    async def create_owner_request(horse_id: str, body: Dict[str, Any],
+                                   user=Depends(get_current_user)):
+        # Owner-only create. Staff/admin previewing the owner page does
+        # NOT get write access here.
+        role = (user.get("role") or "").strip().lower()
+        if role != "horse_owner":
+            raise HTTPException(403, "Owner-only.")
+        horse = await _load_horse_for_owner_or_404(horse_id, user)
+        if not isinstance(body, dict):
+            raise HTTPException(422, "Body must be an object.")
+        allowed = {"request_type", "message", "preferred_contact"}
+        bad = [k for k in body if k not in allowed]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        rt = body.get("request_type")
+        if rt not in _OWNER_REQUEST_TYPES:
+            raise HTTPException(422, "request_type invalid.")
+        pc = body.get("preferred_contact")
+        if pc is not None and pc not in _OWNER_CONTACT:
+            raise HTTPException(422, "preferred_contact invalid.")
+        msg = body.get("message")
+        if not isinstance(msg, str) or not msg.strip():
+            raise HTTPException(422, "message is required.")
+        if len(msg) > _OWNER_MSG_MAX:
+            raise HTTPException(422, f"message too long (max {_OWNER_MSG_MAX}).")
+        # Rate-limit: 5 per (owner, horse) per rolling 1h.
+        cutoff = datetime.now(timezone.utc).timestamp() - _OWNER_RATE_WINDOW_S
+        cutoff_iso = datetime.fromtimestamp(cutoff, tz=timezone.utc).isoformat()
+        recent = await db.service_requests.count_documents({
+            "source": "owner_care_ledger",
+            "owner_user_id": user["id"], "horse_id": horse_id,
+            "created_at": {"$gte": cutoff_iso},
+        })
+        if recent >= _OWNER_RATE_CAP:
+            raise HTTPException(429, "Too many requests. Please try again later.")
+        now_iso = datetime.now(timezone.utc).isoformat()
+        rid = f"osr_{uuid.uuid4().hex[:24]}"
+        doc = {
+            "id": rid,
+            "source": "owner_care_ledger",
+            "horse_id": horse_id, "barn_id": horse["barn_id"],
+            "owner_user_id": user["id"],
+            "request_type": rt,
+            "message": msg,
+            "preferred_contact": pc or "app",
+            "status": "new",
+            "created_at": now_iso, "updated_at": now_iso,
+            "resolved_at": None, "resolved_by_user_id": None,
+            "staff_note": None,
+        }
+        await db.service_requests.insert_one(doc)
+        return {"ok": True, "id": rid}
+
+    @router.get("/horse-ledger/{horse_id}/owner-service-requests")
+    async def list_owner_requests(horse_id: str, user=Depends(get_current_user)):
+        # Owner sees own; manager/admin sees all owner-care requests on
+        # the horse. Other staff → 404 (founder lock #6 — no assigned-
+        # staff visibility in 1-E).
+        horse = await db.horses.find_one({"id": horse_id}, {"_id": 0})
+        if not horse:
+            raise HTTPException(404, "Not found.")
+        role = (user.get("role") or "").strip().lower()
+        if horse.get("barn_id") != user.get("barn_id"):
+            raise HTTPException(404, "Not found.")
+        q: Dict[str, Any] = {
+            "horse_id": horse_id, "barn_id": horse["barn_id"],
+            "source": "owner_care_ledger",
+        }
+        owner_response = False
+        if role == "horse_owner":
+            if not _is_horse_owner_for(user, horse):
+                raise HTTPException(404, "Not found.")
+            q["owner_user_id"] = user["id"]
+            owner_response = True
+        elif role in {"admin", "barn_manager"}:
+            pass  # full barn-scoped view
+        else:
+            raise HTTPException(404, "Not found.")
+        rows = await db.service_requests.find(q, {"_id": 0}) \
+            .sort("created_at", -1).to_list(50)
+        if owner_response:
+            rows = [_strip_staff_note(r) for r in rows]
+        return _scrub_strings({"items": rows})
+
+    @router.patch("/horse-ledger/{horse_id}/owner-service-requests/{rid}")
+    async def patch_owner_request(horse_id: str, rid: str,
+                                  body: Dict[str, Any],
+                                  user=Depends(get_current_user)):
+        role = (user.get("role") or "").strip().lower()
+        if role not in {"admin", "barn_manager"}:
+            raise HTTPException(403, "Manager-only.")
+        horse = await db.horses.find_one({"id": horse_id}, {"_id": 0})
+        if not horse or horse.get("barn_id") != user.get("barn_id"):
+            raise HTTPException(404, "Not found.")
+        existing = await db.service_requests.find_one(
+            {"id": rid, "horse_id": horse_id, "barn_id": horse["barn_id"],
+             "source": "owner_care_ledger"}, {"_id": 0},
+        )
+        if not existing:
+            raise HTTPException(404, "Not found.")
+        if not isinstance(body, dict) or not body:
+            raise HTTPException(422, "Empty body.")
+        allowed = {"status", "staff_note"}
+        bad = [k for k in body if k not in allowed]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        new_status = body.get("status")
+        if new_status is not None and new_status not in _OWNER_STATUS:
+            raise HTTPException(422, "status invalid.")
+        if "staff_note" in body and body["staff_note"] is not None:
+            sn = body["staff_note"]
+            if not isinstance(sn, str):
+                raise HTTPException(422, "staff_note must be string.")
+            if len(sn) > _STAFF_NOTE_MAX:
+                raise HTTPException(422, f"staff_note too long (max {_STAFF_NOTE_MAX}).")
+        updates: Dict[str, Any] = {}
+        if new_status is not None and new_status != existing.get("status"):
+            if (existing.get("status"), new_status) not in _OWNER_VALID_TRANS:
+                raise HTTPException(
+                    422,
+                    f"Invalid transition {existing.get('status')!r} → {new_status!r}.",
+                )
+            updates["status"] = new_status
+            if new_status == "resolved":
+                updates["resolved_at"] = datetime.now(timezone.utc).isoformat()
+                updates["resolved_by_user_id"] = user.get("id")
+            elif existing.get("status") == "resolved":
+                # Reopening clears resolved bookkeeping.
+                updates["resolved_at"] = None
+                updates["resolved_by_user_id"] = None
+        if "staff_note" in body:
+            updates["staff_note"] = body["staff_note"]
+        if not updates:
+            raise HTTPException(422, "No editable changes.")
+        updates["updated_at"] = datetime.now(timezone.utc).isoformat()
+        await db.service_requests.update_one({"id": rid}, {"$set": updates})
+        return {"ok": True}
+
     return router

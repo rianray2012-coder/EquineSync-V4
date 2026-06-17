@@ -20,6 +20,35 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1E — Owner-Facing Filtered Care Ledger + Service Request Flow ✅ (Feb 2026, awaiting Codex review)
+Owner trust layer on top of the locked 1-A/1-B/1-C/1-D Care Ledger. Owners get a calm, filtered view (`/owner/horses/:horseId`) and a structured "Ask the barn" flow — without exposing daily checks, alert internals, audit rows, staff notes, or sensitive handling fields.
+
+**Backend** — 4 new endpoints in `routes/horse_ledger.py`:
+- `GET  /horse-ledger/{id}/owner-summary` — owner-safe payload (7 summary cards, `care_status`, `visible_sections`, owner's recent requests). Manager/admin may preview the same owner-safe shape. Reuses 1-A owner projection (`_effective_owner_keys`, forbidden-key registry).
+- `POST /horse-ledger/{id}/owner-service-requests` — owner-only create. **Backend rate limit: 5 per (owner, horse) per rolling hour → 429** with generic message. `request_type ∈ {question, care_follow_up, appointment_request, other}` (no `billing_question`). Message ≤1000 chars.
+- `GET  /horse-ledger/{id}/owner-service-requests` — owner sees own; manager/admin sees barn-scoped; other staff → 404 (founder lock #6: no assigned-staff visibility in 1-E because `horse_provider_assignments` has no `user_id` linkage today). Owner response strips `staff_note`.
+- `PATCH /horse-ledger/{id}/owner-service-requests/{rid}` — manager/admin only. Status `new → in_progress → resolved` + reopen `resolved → in_progress`; optional `staff_note` ≤500.
+
+**`care_status` precedence (strict)**: active staff alert → `barn_reviewing`; else open owner request → `follow_up_available`; else `all_clear`. The active-alert check returns the enum string only — zero alert detail (count, severity, triggers, source_check_id, notes) crosses the owner boundary.
+
+**Schema** — reuses existing `service_requests` collection with `source="owner_care_ledger"` discriminator. Existing `routes/operations.py` endpoints are byte-identical. Two new indexes on `service_requests`: `sr_source_barn_horse_created` and `sr_owner_horse_created` (rate-limit + owner-list query backing).
+
+**Frontend** — new `OwnerCareLedger.jsx` route at `/owner/horses/:horseId` (calm copy throughout — "barn team is reviewing" instead of "urgent alert"; words "alert/missed/urgent/warning" never appear on owner surfaces). 7 summary cards with equine palette only. "Ask the barn" → `OwnerRequestDrawer`. Mobile-friendly stacked layout. Staff `CareLedgerTab.jsx` gains manager/admin-only `OwnerRequestsSection` with inline status mutator.
+
+**Tests** — `test_horse_ledger_1e.py`: **47 cases pass**. Care-Ledger suite **356/356 pass** (29 1-A + 101 1-B + 73 1-C + 106 1-D + 47 1-E).
+
+**Deferred (still future)**:
+- Assigned-staff visibility for owner requests (needs real `assignment → user` model).
+- Owner-visible alerts (future trust phase).
+- Notifications (email/SMS/push).
+- AI-generated owner replies.
+- Trust & Safety/Admin denial-visibility surface.
+- Phase 16, native mobile, breeding/pedigree, inventory/purchasing/vendor.
+
+**Delta package**: `/app/phase_horseops_1e_changes.zip` (route, lifespan, tests, owner page, manager panel, App.js routing, PRD, `PHASE_HORSEOPS_1E_README.md`).
+
+
+
 ### Phase HorseOps-1D Round-1 Fixes ✅ (Feb 2026, awaiting Codex re-review)
 Three Codex blockers closed:
 

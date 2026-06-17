@@ -512,6 +512,11 @@ export default function CareLedgerTab({ horseId }) {
         <HistorySection horseId={horseId} />
       ) : null}
 
+      {/* Owner requests — Phase HorseOps-1E. Manager/admin only. */}
+      {MUTATOR_ROLES.has(role) && !isOwner ? (
+        <OwnerRequestsSection horseId={horseId} />
+      ) : null}
+
       {drawer ? (
         <EditDrawerRouter
           drawer={drawer}
@@ -1565,6 +1570,83 @@ function HistorySection({ horseId }) {
               <span className="ml-auto text-[11.5px] text-equine-platinum/55 shrink-0">
                 {it.ts ? new Date(it.ts).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "—"}
               </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+
+
+// =====================================================================
+// Phase HorseOps-1E — manager/admin owner-requests panel.
+// =====================================================================
+function OwnerRequestsSection({ horseId }) {
+  const [items, setItems] = useState(null);
+  const [error, setError] = useState(null);
+  const [busy, setBusy]   = useState(null);
+
+  const refetch = () => {
+    return api.get(`/horse-ledger/${horseId}/owner-service-requests`)
+      .then((r) => { setItems(r.data.items || []); setError(null); })
+      .catch((e) => setError(e?.response?.data?.detail || "Could not load."));
+  };
+  useEffect(() => { refetch(); /* eslint-disable-next-line */ }, [horseId]);
+
+  const setStatus = async (rid, status) => {
+    setBusy(rid);
+    try {
+      await api.patch(`/horse-ledger/${horseId}/owner-service-requests/${rid}`, { status });
+      await refetch();
+    } finally { setBusy(null); }
+  };
+
+  return (
+    <section
+      data-testid="horse-ledger-section-owner_requests"
+      className="rounded-lg border border-equine-silver/10 bg-equine-black/40 p-4"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <div className="label-eyebrow">Owner requests</div>
+        <span className="text-[10.5px] uppercase tracking-[0.18em] text-equine-platinum/45">
+          Manager + admin
+        </span>
+      </div>
+      {error ? (
+        <div className="text-[12.5px] text-equine-platinum/85" data-testid="owner-requests-error">{error}</div>
+      ) : items === null ? (
+        <div className="text-[12.5px] text-equine-platinum/55 italic" data-testid="owner-requests-loading">Loading…</div>
+      ) : items.length === 0 ? (
+        <div className="text-[12.5px] text-equine-platinum/55 italic" data-testid="owner-requests-empty">No owner requests yet.</div>
+      ) : (
+        <ul className="space-y-2">
+          {items.map((r) => (
+            <li
+              key={r.id}
+              data-testid={`staff-owner-request-row-${r.id}`}
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[13px] py-1.5 border-b border-equine-silver/5 last:border-b-0"
+            >
+              <div className="min-w-0">
+                <div className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/55">
+                  {r.request_type} · {r.preferred_contact}
+                </div>
+                <div className="text-equine-silver/85 truncate">{r.message}</div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <select
+                  value={r.status}
+                  disabled={busy === r.id}
+                  onChange={(e) => setStatus(r.id, e.target.value)}
+                  data-testid={`staff-owner-request-status-mutator-${r.id}`}
+                  className="bg-equine-black/60 border border-equine-silver/15 rounded px-2 py-1 text-[12px] text-equine-silver"
+                >
+                  <option value="new">New</option>
+                  <option value="in_progress">In progress</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
             </li>
           ))}
         </ul>

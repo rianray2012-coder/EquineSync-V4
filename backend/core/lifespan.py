@@ -270,6 +270,20 @@ def register_lifecycle(app, *, send_nudges):
                 [("barn_id", 1), ("ts", -1)],
                 name="hlae_barn_ts",
             )
+            # Phase HorseOps-1E — owner service requests live alongside
+            # operational rows in `service_requests`, discriminated by
+            # `source="owner_care_ledger"`. This index backs the owner-
+            # scoped query path AND the rate-limit count query.
+            await db.service_requests.create_index(
+                [("source", 1), ("barn_id", 1), ("horse_id", 1),
+                 ("created_at", -1)],
+                name="sr_source_barn_horse_created",
+            )
+            await db.service_requests.create_index(
+                [("source", 1), ("owner_user_id", 1), ("horse_id", 1),
+                 ("created_at", -1)],
+                name="sr_owner_horse_created",
+            )
 
             await db.horse_owner_visibility_policy.create_index(
                 "horse_id", unique=True,
