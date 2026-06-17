@@ -36,6 +36,7 @@ OUT OF SCOPE for 1-A (lands in 1-B..1-E):
 """
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -425,5 +426,396 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # Final defense-in-depth scrub for Stripe-shaped substrings
         # (R1-B parity) on every string in the response.
         return _scrub_strings(response)
+
+    # =================================================================
+    # Phase HorseOps-1B — manager edit flows + first writes.
+    # =================================================================
+    # 5 operational first-write collections + audit rows in
+    # `horse_ledger_audit`. Owner-visibility policy is backend-
+    # authoritative on every read; manager writes never expand owner
+    # view beyond the allowlist intersected with the forbidden set.
+    # =================================================================
+
+    def _require_mutator(user, horse):
+        """Mutator gate: only `admin` or `barn_manager` in the horse's
+        barn may mutate. Owners (even primary) are read-only. Cross-
+        barn or wrong role → 403."""
+        role = (user.get("role") or "").strip().lower()
+        if role not in {"admin", "barn_manager"}:
+            raise HTTPException(403, "Insufficient role for Care Ledger edit.")
+        # barn_filter already enforced via the horse fetch.
+
+    async def _emit_audit(horse_id, barn_id, user, *, section, action,
+                          field_paths, sensitivity):
+        """Append a privacy-first audit row. NO before/after, NO notes,
+        NO hay-net instructions, NO behavior warnings — field-path
+        only + section + sensitivity enum."""
+        import uuid as _uuid
+        await db.horse_ledger_audit.insert_one({
+            "id": f"hla_{_uuid.uuid4().hex[:24]}",
+            "horse_id": horse_id, "barn_id": barn_id,
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "actor_user_id": user.get("id"),
+            "actor_role":    user.get("role"),
+            "section":   section,
+            "action":    action,
+            "field_paths": sorted(field_paths),
+            "sensitivity": sensitivity,
+            "owner_visible_eligible": sensitivity == "owner_visible",
+        })
+
+    # Per-section writable whitelists (every other field → 422).
+    _SECTION_WRITABLE: Dict[str, set] = {
+        "feeding": {
+            "grain_feed_type", "amount", "amount_value", "amount_unit",
+            "schedule", "prep_instructions", "soaking", "supplements",
+            "meds_with_feed", "water_source", "water_check_required",
+            "special_handling_notes", "horse_preferences", "sensitivities",
+            "staff_only_warnings",
+        },
+        "hay_access": {
+            "access_type", "hay_type", "quantity_per_feeding",
+            "quantity_value", "quantity_unit", "target_level",
+            "source_location", "allergy_restriction_notes",
+            "slow_feeder_used", "restriction_flags", "hay_nets",
+            "exception_notes",
+        },
+        "stall_bedding": {
+            "stall_number", "barn_aisle_section", "stall_type",
+            "bedding_type", "bedding_type_other",
+            "bedding_depth_preference", "banked_bedding_required",
+            "dust_sensitivity", "respiratory_restriction_notes",
+            "bedding_allergy_notes", "spot_clean_frequency",
+            "muck_schedule", "full_strip_schedule", "add_bedding_threshold",
+            "stall_safety_notes", "water_bucket_check_required",
+            "automatic_waterer_present",
+        },
+        "turnout": {
+            "schedule", "pasture_paddock_assignment", "turnout_group",
+            "buddies", "avoid", "grass_restrictions", "mud_restrictions",
+            "weather_rules", "required_apparel", "injury_risk_notes",
+            "catching_notes",
+        },
+        "handling_behavior": {
+            "catching_notes", "grooming_sensitivities", "tacking_preferences",
+            "trailer_loading_notes", "clipping_notes", "injection_behavior",
+            "farrier_behavior", "vet_behavior", "known_risks",
+            "required_staff_experience_level",
+        },
+        "riding_training": {
+            "discipline", "current_level", "goals_short_term",
+            "goals_long_term", "weekly_work_plan", "ride_schedule",
+            "lesson_schedule", "trainer_notes", "exercise_restrictions",
+            "conditioning_plan", "competition_goals",
+            "rider_compatibility_notes",
+        },
+    }
+
+    # Sensitivity classifier per section (default fail-closed staff_only).
+    _SECTION_SENSITIVITY: Dict[str, str] = {
+        "feeding":           "operational",
+        "hay_access":        "operational",
+        "stall_bedding":     "staff_only",
+        "turnout":           "operational",
+        "handling_behavior": "staff_only",
+        "riding_training":   "owner_visible",
+        "equipment":         "operational",
+        "service":           "operational",
+        "visibility_policy": "operational",
+    }
+
+    # Forbidden owner-allowlist keys — even a manager cannot add these.
+    _FORBIDDEN_OWNER_KEYS = {
+        "feeding": {"legacy", "soaking", "soaking.*", "prep_instructions",
+                    "staff_only_warnings", "sensitivities", "meds_with_feed",
+                    "meds_with_feed.*"},
+        "hay_access": {"restriction_flags", "staff_only_warnings",
+                       "hay_nets", "hay_nets.*"},
+        "stall_bedding": {"*"},
+        "handling_behavior": {"*"},
+        "turnout": {"avoid", "injury_risk_notes", "catching_notes"},
+        "identity": {"microchip_number", "tattoo_number", "registry_numbers",
+                     "required_staff_experience_level",
+                     "emergency_contact_ids", "document_ids",
+                     "secondary_owner_ids"},
+        "health.medication_logs_30d": {"*"},
+        "health.injuries": {"notes"},
+        "health.vet_records": {"notes"},
+        "health.wellness_latest": {"staff_note", "internal_observation",
+                                   "actor_user_id", "actor_name",
+                                   "raw_vet_dictation"},
+        "service_providers": {"*"},
+    }
+
+    def _is_forbidden_owner_key(section: str, key: str) -> bool:
+        forb = _FORBIDDEN_OWNER_KEYS.get(section, set())
+        if "*" in forb:
+            return True
+        if key.startswith("_"):
+            return True
+        if key in forb:
+            return True
+        # Wildcard prefix match (e.g., "hay_nets.*" forbids "hay_nets.foo")
+        for f in forb:
+            if f.endswith(".*") and key.startswith(f[:-1]):
+                return True
+        return False
+
+    def _hay_nets_ok(value):
+        return isinstance(value, list) and len(value) <= 6
+
+    async def _load_horse_or_404(horse_id, user):
+        horse = await db.horses.find_one(
+            barn_filter(user, {"id": horse_id}), {"_id": 0},
+        )
+        if not horse:
+            raise HTTPException(404, "Horse not found")
+        return horse
+
+    # ---------------- PATCH care-profile (section-scoped) ----------------
+    @router.patch("/horse-ledger/{horse_id}/care-profile")
+    async def patch_care_profile(horse_id: str, body: Dict[str, Any],
+                                 user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_mutator(user, horse)
+        if not isinstance(body, dict) or not body:
+            raise HTTPException(422, "Empty body.")
+        unknown_sections = [s for s in body if s not in _SECTION_WRITABLE]
+        if unknown_sections:
+            raise HTTPException(422, f"Unknown section: {unknown_sections[0]!r}")
+
+        updates = {}
+        changed_paths = []
+        for section, section_body in body.items():
+            if not isinstance(section_body, dict):
+                raise HTTPException(422, f"Section {section!r} must be an object.")
+            allowed = _SECTION_WRITABLE[section]
+            for k in section_body:
+                if k not in allowed:
+                    raise HTTPException(422, f"Field {section}.{k!r} not editable.")
+            if section == "hay_access" and "hay_nets" in section_body:
+                if not _hay_nets_ok(section_body["hay_nets"]):
+                    raise HTTPException(422, "Max 6 hay nets per horse.")
+            updates[section] = section_body
+            for k in section_body:
+                changed_paths.append(f"{section}.{k}")
+
+        now_iso = datetime.now(timezone.utc).isoformat()
+        import uuid as _uuid
+        await db.horse_care_profiles.update_one(
+            {"horse_id": horse_id},
+            {"$set": {**updates, "updated_at": now_iso,
+                      "updated_by": user.get("id"),
+                      "barn_id": horse["barn_id"]},
+             "$setOnInsert": {"id": f"hcp_{_uuid.uuid4().hex[:24]}",
+                              "horse_id": horse_id, "created_at": now_iso}},
+            upsert=True,
+        )
+        # Emit one audit row per touched section.
+        for section in updates:
+            sens = _SECTION_SENSITIVITY.get(section, "staff_only")
+            await _emit_audit(
+                horse_id, horse["barn_id"], user,
+                section=section, action="updated",
+                field_paths=[p for p in changed_paths if p.startswith(section + ".")],
+                sensitivity=sens,
+            )
+        return {"ok": True, "horse_id": horse_id,
+                "sections_updated": sorted(updates.keys())}
+
+    # ---------------- PUT owner-visibility-policy ----------------
+    _POLICY_SECTIONS = frozenset({
+        "identity", "feeding", "hay_access", "stall_bedding", "turnout",
+        "handling_behavior", "riding_training", "equipment",
+        "service_providers", "health.medications", "health.vet_records",
+        "health.injuries", "health.wellness_latest",
+    })
+
+    @router.put("/horse-ledger/{horse_id}/owner-visibility-policy")
+    async def put_visibility_policy(horse_id: str, body: Dict[str, Any],
+                                    user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_mutator(user, horse)
+        sections = (body or {}).get("sections")
+        if not isinstance(sections, dict):
+            raise HTTPException(422, "Body must contain `sections` object.")
+        for section, spec in sections.items():
+            if section not in _POLICY_SECTIONS:
+                raise HTTPException(422, f"Unknown policy section: {section!r}")
+            if not isinstance(spec, dict) or "allowlist" not in spec:
+                raise HTTPException(422, f"Section {section!r} missing allowlist.")
+            allowlist = spec["allowlist"]
+            if not isinstance(allowlist, list):
+                raise HTTPException(422, f"Allowlist for {section!r} must be a list.")
+            for key in allowlist:
+                if not isinstance(key, str):
+                    raise HTTPException(422, f"Allowlist key must be string: {key!r}")
+                if _is_forbidden_owner_key(section, key):
+                    raise HTTPException(
+                        422, f"Key {section}.{key!r} is forbidden for owner allowlist."
+                    )
+        now_iso = datetime.now(timezone.utc).isoformat()
+        import uuid as _uuid
+        await db.horse_owner_visibility_policy.update_one(
+            {"horse_id": horse_id},
+            {"$set": {"sections": sections, "updated_at": now_iso,
+                      "updated_by": user.get("id"),
+                      "barn_id": horse["barn_id"]},
+             "$inc":  {"policy_version": 1},
+             "$setOnInsert": {"id": f"hovp_{_uuid.uuid4().hex[:24]}",
+                              "horse_id": horse_id}},
+            upsert=True,
+        )
+        await _emit_audit(
+            horse_id, horse["barn_id"], user,
+            section="visibility_policy", action="updated",
+            field_paths=sorted(sections.keys()),
+            sensitivity="operational",
+        )
+        return {"ok": True, "horse_id": horse_id,
+                "sections": sorted(sections.keys())}
+
+    # ---------------- equipment ----------------
+    _EQUIPMENT_WRITABLE = {"category", "label", "brand", "size", "fit_notes",
+                           "location", "restrictions", "cleaning_care_notes",
+                           "saddle_fit_history", "status"}
+
+    @router.post("/horse-ledger/{horse_id}/equipment")
+    async def add_equipment(horse_id: str, body: Dict[str, Any],
+                            user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_mutator(user, horse)
+        if not isinstance(body, dict) or not body.get("category"):
+            raise HTTPException(422, "category is required.")
+        bad = [k for k in body if k not in _EQUIPMENT_WRITABLE]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        import uuid as _uuid
+        eq_id = f"eq_{_uuid.uuid4().hex[:24]}"
+        doc = {**body, "id": eq_id, "horse_id": horse_id,
+               "barn_id": horse["barn_id"],
+               "status": body.get("status") or "active",
+               "created_at": datetime.now(timezone.utc).isoformat()}
+        await db.horse_equipment.insert_one(doc)
+        await _emit_audit(horse_id, horse["barn_id"], user,
+                          section="equipment", action="created",
+                          field_paths=sorted(body.keys()),
+                          sensitivity="operational")
+        return {"ok": True, "id": eq_id}
+
+    @router.patch("/horse-ledger/{horse_id}/equipment/{equipment_id}")
+    async def patch_equipment(horse_id: str, equipment_id: str,
+                              body: Dict[str, Any],
+                              user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_mutator(user, horse)
+        bad = [k for k in (body or {}) if k not in _EQUIPMENT_WRITABLE]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        if body.get("status") and body["status"] not in {"active", "retired"}:
+            raise HTTPException(422, "status must be active|retired.")
+        r = await db.horse_equipment.update_one(
+            {"id": equipment_id, "horse_id": horse_id,
+             "barn_id": horse["barn_id"]},
+            {"$set": {**body, "updated_at": datetime.now(timezone.utc).isoformat()}},
+        )
+        if r.matched_count == 0:
+            raise HTTPException(404, "Equipment not found.")
+        action = "archived" if body.get("status") == "retired" else "updated"
+        await _emit_audit(horse_id, horse["barn_id"], user,
+                          section="equipment", action=action,
+                          field_paths=sorted(body.keys()),
+                          sensitivity="operational")
+        return {"ok": True}
+
+    # ---------------- service providers + assignments ----------------
+    _PROVIDER_CATS = {"vet", "farrier", "body_worker", "chiropractor",
+                      "massage", "acupuncturist", "saddle_fitter",
+                      "nutritionist", "dentist", "trainer", "other"}
+    _PROVIDER_WRITABLE = {"category", "name", "company", "phone", "email",
+                          "address", "notes", "is_primary_for_barn", "status"}
+    _ASSIGNMENT_WRITABLE = {"provider_id", "category", "last_service_date",
+                            "next_due_date", "interval_days", "notes",
+                            "is_primary_for_horse", "status"}
+
+    @router.post("/horse-ledger/{horse_id}/service-providers")
+    async def add_provider(horse_id: str, body: Dict[str, Any],
+                           user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_mutator(user, horse)
+        if (body or {}).get("category") not in _PROVIDER_CATS:
+            raise HTTPException(422, "category must be a known provider type.")
+        if not body.get("name"):
+            raise HTTPException(422, "name is required.")
+        bad = [k for k in body if k not in _PROVIDER_WRITABLE]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        import uuid as _uuid
+        sp_id = f"sp_{_uuid.uuid4().hex[:24]}"
+        await db.service_providers.insert_one({
+            **body, "id": sp_id, "barn_id": horse["barn_id"],
+            "status": body.get("status") or "active",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        })
+        await _emit_audit(horse_id, horse["barn_id"], user,
+                          section="service", action="created",
+                          field_paths=sorted(body.keys()),
+                          sensitivity="operational")
+        return {"ok": True, "id": sp_id}
+
+    @router.post("/horse-ledger/{horse_id}/provider-assignments")
+    async def add_assignment(horse_id: str, body: Dict[str, Any],
+                             user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_mutator(user, horse)
+        if not (body or {}).get("provider_id"):
+            raise HTTPException(422, "provider_id is required.")
+        if body.get("category") and body["category"] not in _PROVIDER_CATS:
+            raise HTTPException(422, "category must be a known provider type.")
+        bad = [k for k in body if k not in _ASSIGNMENT_WRITABLE]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        # Provider must be in same barn.
+        prov = await db.service_providers.find_one(
+            {"id": body["provider_id"], "barn_id": horse["barn_id"]},
+            {"_id": 0, "id": 1},
+        )
+        if not prov:
+            raise HTTPException(404, "Provider not found.")
+        import uuid as _uuid
+        hpa_id = f"hpa_{_uuid.uuid4().hex[:24]}"
+        await db.horse_provider_assignments.insert_one({
+            **body, "id": hpa_id, "horse_id": horse_id,
+            "barn_id": horse["barn_id"],
+            "status": body.get("status") or "active",
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        })
+        await _emit_audit(horse_id, horse["barn_id"], user,
+                          section="service", action="created",
+                          field_paths=sorted(body.keys()),
+                          sensitivity="operational")
+        return {"ok": True, "id": hpa_id}
+
+    @router.patch("/horse-ledger/{horse_id}/provider-assignments/{assignment_id}")
+    async def patch_assignment(horse_id: str, assignment_id: str,
+                               body: Dict[str, Any],
+                               user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_mutator(user, horse)
+        bad = [k for k in (body or {}) if k not in _ASSIGNMENT_WRITABLE]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        r = await db.horse_provider_assignments.update_one(
+            {"id": assignment_id, "horse_id": horse_id,
+             "barn_id": horse["barn_id"]},
+            {"$set": {**body, "updated_at": datetime.now(timezone.utc).isoformat()}},
+        )
+        if r.matched_count == 0:
+            raise HTTPException(404, "Assignment not found.")
+        await _emit_audit(horse_id, horse["barn_id"], user,
+                          section="service", action="updated",
+                          field_paths=sorted(body.keys()),
+                          sensitivity="operational")
+        return {"ok": True}
 
     return router

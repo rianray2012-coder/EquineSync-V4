@@ -630,24 +630,27 @@ def test_admin_portal_routes_unchanged(db):
     assert len(LOCKED_PATCH_ROUTES) == 1
 
 
-def test_no_writes_in_1a():
-    """Static AST check on routes/horse_ledger.py — no
-    db.<col>.{insert,update,delete,replace}* calls anywhere."""
+def test_no_writes_in_1a_endpoints_only():
+    """1-B added writes on the mutation endpoints, but the GET endpoint
+    handler (and its composed-read helpers) must remain write-free.
+    AST-checks only the GET handler body."""
     src = pathlib.Path("/app/backend/routes/horse_ledger.py").read_text()
     tree = ast.parse(src)
     bad_methods = (
-        "insert_one", "insert_many",
-        "update_one", "update_many",
-        "delete_one", "delete_many",
-        "replace_one", "find_one_and_update", "find_one_and_delete",
+        "insert_one", "insert_many", "update_one", "update_many",
+        "delete_one", "delete_many", "replace_one",
+        "find_one_and_update", "find_one_and_delete",
         "find_one_and_replace", "bulk_write",
     )
     bad: list[str] = []
     for node in ast.walk(tree):
-        if isinstance(node, ast.Attribute) and node.attr in bad_methods:
-            bad.append(f"{ast.unparse(node)} @ line {node.lineno}")
+        if (isinstance(node, ast.AsyncFunctionDef)
+                and node.name == "get_horse_ledger"):
+            for sub in ast.walk(node):
+                if isinstance(sub, ast.Attribute) and sub.attr in bad_methods:
+                    bad.append(f"{ast.unparse(sub)} @ line {sub.lineno}")
     assert not bad, (
-        "HorseOps-1A is read-only — write calls detected:\n  "
+        "GET /horse-ledger/{horse_id} must be read-only:\n  "
         + "\n  ".join(bad)
     )
 
