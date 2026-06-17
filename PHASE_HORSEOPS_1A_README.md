@@ -1,7 +1,7 @@
 # Phase HorseOps-1A — Care Ledger (Read-Only Composition)
 
-**Status:** Codex Round-1 fixes applied — re-submitted for review
-**Date:** Feb 28 2026  (round-1: Mar 01 2026).
+**Status:** ✅ Codex-approved & locked (Mar 01 2026)
+**Date:** Feb 28 2026  (round-1 fixes + lock: Mar 01 2026).
 **Scope:** Backend (FastAPI) + Horse Detail frontend tab + tests + indexes only.
 
 ## Codex Round-1 fix highlights (Mar 01 2026)

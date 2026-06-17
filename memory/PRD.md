@@ -1974,6 +1974,22 @@ without changing the founder-locked plan.
 
 **Re-packaged:** `/app/phase_horseops_1a_changes.zip` (round-1).
 
+### HorseOps-1A — Codex Approval & Lock (Mar 01 2026)
+
+Codex confirmed no blocking findings on the round-1 zip. HorseOps-1A
+is **approved and locked**.
+
+Final scoreboard for HorseOps-1A:
+- 29/29 HorseOps-1A tests green (incl. R1-A/B regressions).
+- 0 Phase 9 / Phase 15 / Admin Portal schema or route touches.
+- 0 documents written to any of the 8 new HorseOps collections.
+- 0 frontend / landing-page changes beyond the additive "Care Ledger" tab.
+- 9 files in the lock zip: 3 backend modules, 1 test file, 2 frontend
+  files, PRD, the HorseOps-1A README, and the updated Admin-4b README.
+
+HorseOps-1B is now unblocked (manager edit flows + audit emission +
+the 5 first-write collections). 1-C/1-D/1-E remain gated in sequence.
+
 
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
@@ -2000,4 +2016,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
 | Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex-approved & locked |
 | Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Codex-approved & locked |
-| HorseOps-1A | Care Ledger — read-only composition + 8 new collections + indexes | ✅ Codex round-1 fixes applied — re-submitted for review |
+| HorseOps-1A | Care Ledger — read-only composition + 8 new collections + indexes | ✅ Codex-approved & locked |
