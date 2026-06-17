@@ -1226,11 +1226,14 @@ def build_router(*, db, get_current_user) -> APIRouter:
         _validate_check_body(body, is_patch=False)
         _validate_check_payload(body.get("payload"))
         # Optional task linkage — must be a task in the same barn.
+        # Real tasks (materialized by `task_engine.py`) carry
+        # `tenant_id="default"` and `barn_id=<barn_id>`. We match on
+        # `barn_id` so the existing task-engine shape is accepted.
         task_id = body.get("task_id")
         if task_id:
             task = await db.tasks.find_one(
-                {"id": task_id, "tenant_id": horse["barn_id"]},
-                {"_id": 0, "id": 1},
+                {"id": task_id, "barn_id": horse["barn_id"]},
+                {"_id": 0, "id": 1, "barn_id": 1},
             )
             if not task:
                 # The 1-C founder spec calls for 422 (a *known* invalid

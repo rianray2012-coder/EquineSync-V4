@@ -20,6 +20,18 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1C Round-1 Fixes ✅ (Feb 2026, awaiting Codex re-review)
+Two Codex findings closed:
+
+- **`task_id` validation matched the wrong scope.** Real tasks materialized by `task_engine.py` carry `tenant_id="default"` + `barn_id=<barn_id>`. 1-C was filtering by `tenant_id == horse["barn_id"]`, which would reject every real same-barn task (the round-0 test masked it by seeding `tenant_id=bid`). Fixed: the lookup now queries by `barn_id` only. New regression `test_task_linkage_real_task_engine_shape_persists` seeds a task with the exact engine shape (`tenant_id="default"`, `barn_id=<bid>`, plus `scheduled_at` for realism) and asserts the daily-check write succeeds.
+- **Daily-check indexes referenced the wrong field.** 1-A indexed `check_time`; 1-C writes/queries `checked_at`. `core/lifespan.py` now creates four named, `checked_at`-aligned indexes — `hdcl_horse_checked_at`, `hdcl_barn_horse_checked_at`, `hdcl_barn_check_type_checked_at`, `hdcl_task_id` (sparse for the partial-index workload). The 1-A index-pinning test was updated to match. The live DB was migrated by dropping the stale `check_time` indexes; the backend restart recreated the new set. New regression `test_daily_check_indexes_exist_and_use_checked_at` pins the live state and asserts no stale `check_time` indexes remain.
+
+**Tests** — `test_horse_ledger_1c.py` grew 55 → **57** (+2 round-1 regressions). Full Care-Ledger suite **187/187 pass** (29 1-A + 101 1-B + 57 1-C).
+
+**Delta package** re-packaged at `/app/phase_horseops_1c_changes.zip` (now also includes `backend/core/lifespan.py` and the updated `backend/tests/test_horse_ledger_1a.py`).
+
+
+
 ### Phase HorseOps-1C — Staff Daily Checks ✅ (Feb 2026, awaiting Codex review)
 Immutable observation log layered on top of the existing `task_engine.py`. No new scheduler, no new alert worker. Daily checks (`hay_net`, `hay`, `water`, `feed`, `bedding`, `general`) are recorded by any in-barn staff role; amendments are author-only or manager. Owners are hard-hidden — `daily_checks_recent` is never projected to owners and the visibility-policy PUT 422s on the section.
 

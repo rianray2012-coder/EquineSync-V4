@@ -308,10 +308,13 @@ def test_notes_length_cap_422(db):
 # =====================================================================
 # Task linkage.
 # =====================================================================
-def _seed_task(db, bid, task_id="task_hl1c_t1"):
+def _seed_task(db, bid, task_id="task_hl1c_t1", tenant_id="default"):
+    """Seed a task using the REAL task-engine shape:
+    `tenant_id="default"` + `barn_id=<bid>`. Real tasks materialized
+    by `task_engine.py` always carry tenant_id="default"."""
     db.tasks.insert_one({
-        "id": task_id, "tenant_id": bid, "category": "feed",
-        "status": "scheduled", TAG: True,
+        "id": task_id, "tenant_id": tenant_id, "barn_id": bid,
+        "category": "feed", "status": "scheduled", TAG: True,
     })
     return task_id
 
@@ -334,7 +337,35 @@ def test_task_linkage_same_barn_persists_task_id(db):
         _cleanup(db)
 
 
+def test_task_linkage_real_task_engine_shape_persists(db):
+    """Regression for Codex Round-1: real tasks have tenant_id='default'
+    and barn_id=<barn>. Validation must accept that shape."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    # Insert a task using the EXACT shape `task_engine.py` materializes.
+    tid = f"task_real_{uuid.uuid4().hex[:10]}"
+    db.tasks.insert_one({
+        "id": tid,
+        "tenant_id": "default",         # task engine's DEFAULT_TENANT_ID
+        "barn_id":   bid,
+        "category":  "feed",
+        "status":    "scheduled",
+        "scheduled_at": datetime.now(timezone.utc).isoformat(),
+        TAG: True,
+    })
+    try:
+        r = requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                          headers=_bearer(mgr),
+                          json={"check_type": "feed", "task_id": tid},
+                          timeout=10)
+        assert r.status_code == 200, r.text
+        row = db.horse_daily_check_logs.find_one({"id": r.json()["id"]})
+        assert row["task_id"] == tid
+    finally:
+        _cleanup(db)
+
+
 def test_task_linkage_cross_barn_422(db):
+    """A task in another barn (real task-engine shape) is rejected."""
     bid1 = _make_barn(db); hid = _make_horse(db, bid1); mgr = _mgr(db, bid1)
     bid2 = _make_barn(db); tid = _seed_task(db, bid2, task_id="task_hl1c_other")
     try:
@@ -345,6 +376,27 @@ def test_task_linkage_cross_barn_422(db):
         assert r.status_code == 422, r.text
     finally:
         _cleanup(db)
+
+
+def test_daily_check_indexes_exist_and_use_checked_at(db):
+    """Codex Round-1: 1-A indexed `check_time`, but 1-C writes/queries
+    `checked_at`. The lifespan must create checked_at-based indexes
+    and the task_id partial index. Restart already happened in CI/dev;
+    this regression asserts the live state matches the plan."""
+    idx = {i["name"]: dict(i["key"]) for i in db.horse_daily_check_logs.list_indexes()}
+    # No stale `check_time` indexes left over.
+    assert not any("check_time" in str(k) for k in idx.values()), \
+        f"stale check_time index found: {idx}"
+    # checked_at-based composite indexes present.
+    expected = {
+        "hdcl_horse_checked_at":           {"horse_id": 1, "checked_at": -1},
+        "hdcl_barn_horse_checked_at":      {"barn_id": 1, "horse_id": 1, "checked_at": -1},
+        "hdcl_barn_check_type_checked_at": {"barn_id": 1, "check_type": 1, "checked_at": -1},
+        "hdcl_task_id":                    {"task_id": 1},
+    }
+    for name, key in expected.items():
+        assert name in idx, f"missing index {name}: have {list(idx)}"
+        assert idx[name] == key, f"{name} key mismatch: {idx[name]} vs {key}"
 
 
 def test_task_linkage_unknown_task_422(db):

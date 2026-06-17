@@ -192,11 +192,27 @@ def register_lifecycle(app, *, send_nudges):
                 [("barn_id", 1), ("next_due_date", 1)]
             )
 
+            # Phase HorseOps-1C: 1-A used a planned `check_time` field
+            # name; 1-C ships with `checked_at`. Indexes are aligned
+            # here so the 1-C query shape (recent logs by horse, by
+            # barn+type, by task_id) is index-backed from the first
+            # write.
             await db.horse_daily_check_logs.create_index(
-                [("horse_id", 1), ("check_time", -1)]
+                [("horse_id", 1), ("checked_at", -1)],
+                name="hdcl_horse_checked_at",
             )
             await db.horse_daily_check_logs.create_index(
-                [("barn_id", 1), ("check_type", 1), ("check_time", -1)]
+                [("barn_id", 1), ("horse_id", 1), ("checked_at", -1)],
+                name="hdcl_barn_horse_checked_at",
+            )
+            await db.horse_daily_check_logs.create_index(
+                [("barn_id", 1), ("check_type", 1), ("checked_at", -1)],
+                name="hdcl_barn_check_type_checked_at",
+            )
+            await db.horse_daily_check_logs.create_index(
+                [("task_id", 1)],
+                name="hdcl_task_id",
+                sparse=True,
             )
 
             await db.horse_ledger_alerts.create_index(

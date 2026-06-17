@@ -4,6 +4,17 @@ Scope summary, integration story, review checklist.
 
 ---
 
+## Codex Round-1 fixes (Feb 2026) — applied
+
+| Finding | Fix |
+|---|---|
+| `task_id` validation used wrong scope | Real tasks materialized by `task_engine.py` carry `tenant_id="default"` + `barn_id=<barn_id>`. The 1-C lookup was filtering by `tenant_id == horse["barn_id"]`, which rejects every real same-barn task. Now queries by `barn_id` only. Added `test_task_linkage_real_task_engine_shape_persists` regression that seeds a task with the exact engine shape. |
+| Daily-check indexes referenced the wrong field | 1-A indexed `check_time`, but 1-C writes/queries `checked_at`. `core/lifespan.py` now creates four named, `checked_at`-aligned indexes — `hdcl_horse_checked_at`, `hdcl_barn_horse_checked_at`, `hdcl_barn_check_type_checked_at`, `hdcl_task_id` (sparse). Stale `check_time` indexes are dropped on existing deployments by listing + dropping legacy names. Regression `test_daily_check_indexes_exist_and_use_checked_at` pins the live state. |
+
+Both fixes are non-breaking — owner hard-hide, hybrid permissions, PATCH author-or-manager scope, and audit-row schema are byte-identical to the round-0 package.
+
+---
+
 ## Scope (locked plan)
 
 Three endpoints under the Care Ledger surface — **no new scheduler, no new alert worker, no parallel task system**:
@@ -101,7 +112,7 @@ Every successful create + update emits one row:
 
 ## Test coverage
 
-`/app/backend/tests/test_horse_ledger_1c.py` — **55 cases**. Full Care-Ledger suite **185 passing** (29 1-A + 101 1-B + 55 1-C). Backend + JSX lint clean.
+`/app/backend/tests/test_horse_ledger_1c.py` — **57 cases** (55 round-0 + 2 round-1 regressions). Full Care-Ledger suite **187 passing** (29 1-A + 101 1-B + 57 1-C). Backend + JSX lint clean.
 
 ### Permissions (8)
 - `test_staff_and_managers_can_create_daily_check` × 6 (parametrized over admin/barn_manager/groom/trainer/vet/staff)
@@ -121,8 +132,9 @@ Every successful create + update emits one row:
 - `test_payload_non_primitive_value_422`
 - `test_notes_length_cap_422`
 
-### Task linkage (3)
+### Task linkage (4)
 - `test_task_linkage_same_barn_persists_task_id` (also asserts task lifecycle untouched)
+- `test_task_linkage_real_task_engine_shape_persists` *(Round-1 regression: real tasks carry `tenant_id="default"` + `barn_id=<bid>` — validation queries by `barn_id` only)*
 - `test_task_linkage_cross_barn_422`
 - `test_task_linkage_unknown_task_422`
 
@@ -154,10 +166,11 @@ Every successful create + update emits one row:
 ### Stripe scrubbing (1)
 - `test_stripe_shape_in_notes_scrubbed_on_get`
 
-### Adjacent-phase invariants (3)
+### Adjacent-phase invariants (4)
 - `test_phase_9_collections_untouched_after_1c_storm`
 - `test_phase_15_collections_untouched_after_1c_storm`
 - `test_admin_portal_route_lock_unchanged_after_1c`
+- `test_daily_check_indexes_exist_and_use_checked_at` *(Round-1 regression: 1-A's planned `check_time` indexes were renamed/aligned to the live `checked_at` field; this test pins the four current indexes — `hdcl_horse_checked_at`, `hdcl_barn_horse_checked_at`, `hdcl_barn_check_type_checked_at`, `hdcl_task_id` — and asserts no stale `check_time` indexes remain)*
 
 ### Cross-suite
 - Full 1-A regression suite (29) green after 1-C ships.
