@@ -239,6 +239,30 @@ def register_lifecycle(app, *, send_nudges):
             await db.horse_ledger_alerts.create_index(
                 [("barn_id", 1), ("severity", 1), ("closed_at", 1)]
             )
+            # Phase 1-D: 1-A planned `opened_at` but 1-D ships with
+            # `first_seen_at` / `last_seen_at`. Add the live shape
+            # without dropping the legacy index (no existing deployment
+            # has alert rows yet — 1-D is the first write).
+            await db.horse_ledger_alerts.create_index(
+                [("horse_id", 1), ("alert_type", 1), ("status", 1)],
+                name="hla_horse_type_status",
+            )
+            await db.horse_ledger_alerts.create_index(
+                [("barn_id", 1), ("status", 1), ("last_seen_at", -1)],
+                name="hla_barn_status_last_seen",
+            )
+            await db.horse_ledger_alert_events.create_index(
+                [("alert_id", 1), ("ts", 1)],
+                name="hlae_alert_ts",
+            )
+            await db.horse_ledger_alert_events.create_index(
+                [("horse_id", 1), ("ts", -1)],
+                name="hlae_horse_ts",
+            )
+            await db.horse_ledger_alert_events.create_index(
+                [("barn_id", 1), ("ts", -1)],
+                name="hlae_barn_ts",
+            )
 
             await db.horse_owner_visibility_policy.create_index(
                 "horse_id", unique=True,

@@ -37,6 +37,7 @@ OUT OF SCOPE for 1-A (lands in 1-B..1-E):
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import uuid
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -584,7 +585,16 @@ def build_router(*, db, get_current_user) -> APIRouter:
                     {"_id": 0},
                 ).sort("checked_at", -1).to_list(20)
             ),
-            "alerts_open":         [],
+            # Phase 1-D: staff/manager view loads top 20 active (open +
+            # acknowledged) alerts, severity desc then last_seen desc.
+            # Owners ALWAYS get [] — alerts are hard-hidden in 1-D.
+            "alerts_open": [] if owner_view else (
+                await db.horse_ledger_alerts.find(
+                    {"horse_id": horse_id, "barn_id": horse["barn_id"],
+                     "status": {"$in": ["open", "acknowledged"]}},
+                    {"_id": 0},
+                ).sort([("severity", -1), ("last_seen_at", -1)]).to_list(20)
+            ),
             "audit_recent":        [],
         }
 
@@ -727,6 +737,9 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # attempt to expose `daily_checks_recent` via the owner-
         # visibility policy must 422.
         "daily_checks_recent": {"*"},
+        # Phase 1-D: alerts are hard-hidden from owners. Owner-
+        # visibility policy PUT 422s on this section.
+        "alerts_open": {"*"},
     }
 
     def _is_forbidden_owner_key(section: str, key: str) -> bool:
@@ -1142,6 +1155,180 @@ def build_router(*, db, get_current_user) -> APIRouter:
             return
         raise HTTPException(403, "Only the author or a manager may amend.")
 
+    # =================================================================
+    # Phase HorseOps-1D — staff experience gate.
+    # =================================================================
+    # `users.experience_level` is the new field (default null → treated
+    # as `novice`). Admin / barn_manager always bypass. `general` check
+    # type bypasses. 403 message is INTENTIONALLY GENERIC — it must NOT
+    # reveal that this horse has elevated handling risk.
+    _EXP_RANK = {"novice": 0, "intermediate": 1, "experienced": 2, "advanced": 3}
+    _EXP_GATED_CHECK_TYPES = {"feed", "hay", "hay_net", "water", "bedding"}
+    _EXP_GATE_403 = "Insufficient permission for this care action."
+
+    async def _enforce_experience_gate(user, horse, check_type):
+        role = (user.get("role") or "").strip().lower()
+        if role in {"admin", "barn_manager"}:
+            return
+        if check_type not in _EXP_GATED_CHECK_TYPES:
+            return
+        prof = await db.horse_care_profiles.find_one(
+            {"horse_id": horse["id"]}, {"_id": 0, "handling_behavior": 1},
+        )
+        required = ((prof or {}).get("handling_behavior") or {}).get(
+            "required_staff_experience_level")
+        if not required:
+            return
+        required_rank = _EXP_RANK.get(required)
+        if required_rank is None:
+            return  # Unknown level → fail open (data drift).
+        caller_level = (user.get("experience_level") or "novice")
+        caller_rank = _EXP_RANK.get(caller_level, 0)
+        if caller_rank < required_rank:
+            # NO alert, NO audit row, NO history event on denial
+            # (locked HorseOps convention — denied attempts leave no
+            # operational artifact).
+            raise HTTPException(403, _EXP_GATE_403)
+
+    # =================================================================
+    # Phase HorseOps-1D — alert minting (event-driven from daily checks).
+    # =================================================================
+    _ALERT_TYPES = {"feed", "hay", "hay_net", "water", "bedding", "general"}
+    _ALERT_STATUSES = {"open", "acknowledged", "closed"}
+    # Severity ladder: info < attention < urgent. Repeats may upgrade
+    # but never downgrade.
+    _SEVERITY_RANK = {"info": 0, "attention": 1, "urgent": 2}
+
+    def _derive_alert_triggers(check_type, status, payload):
+        """Return (severity, triggers[]) for a daily-check row, or
+        (None, []) if no alert should mint. Per the founder spec, only
+        the listed triggers create alerts; pure `ok` checks do not."""
+        triggers = []
+        severity = None
+        if status == "missed":
+            triggers.append("status.missed")
+            severity = "urgent" if check_type in {"feed", "water"} else "attention"
+        elif status == "needs_attention":
+            triggers.append("status.needs_attention")
+            severity = "attention"
+        p = payload or {}
+        water = p.get("water") or {}
+        if water.get("bucket_ok") is False:
+            triggers.append("water.bucket_ok=false")
+            severity = "urgent"
+        if water.get("automatic_waterer_ok") is False:
+            triggers.append("water.automatic_waterer_ok=false")
+            severity = "urgent"
+        feed = p.get("feed") or {}
+        if feed.get("given") is False:
+            triggers.append("feed.given=false")
+            severity = "urgent"
+        bedding = p.get("bedding") or {}
+        if bedding.get("full_strip_needed") is True:
+            triggers.append("bedding.full_strip_needed=true")
+            severity = severity or "attention"
+        if bedding.get("top_off_needed") is True:
+            triggers.append("bedding.top_off_needed=true")
+            severity = severity or "attention"
+        hay_net = p.get("hay_net") or {}
+        if hay_net.get("nets_checked", 0) and not hay_net.get("nets_refilled"):
+            triggers.append("hay_net.nets_refilled=0")
+            severity = severity or "attention"
+        hay_access = p.get("hay_access") or {}
+        if hay_access.get("free_choice_available") is False:
+            triggers.append("hay_access.free_choice_available=false")
+            severity = severity or "attention"
+        return (severity, triggers)
+
+    async def _mint_alert_for_check(horse, check_doc):
+        """Idempotent alert minting from a daily-check row. Dedupe key
+        is `(horse_id, alert_type, status != "closed")`. Repeats bump
+        `occurrence_count` and `last_seen_at`; severity may upgrade.
+        `source_check_id + alert_type` never produces a duplicate."""
+        severity, triggers = _derive_alert_triggers(
+            check_doc["check_type"], check_doc["status"], check_doc.get("payload"),
+        )
+        if not severity:
+            return  # No alert needed.
+        alert_type = check_doc["check_type"]
+        horse_id = horse["id"]
+        barn_id  = horse["barn_id"]
+        source_check_id = check_doc["id"]
+        now_iso = datetime.now(timezone.utc).isoformat()
+        # 1. Exact (source_check_id, alert_type) dedupe — same check
+        #    row cannot mint twice (PATCH amend on the same row stays
+        #    idempotent for the originating check).
+        existing_exact = await db.horse_ledger_alerts.find_one(
+            {"horse_id": horse_id, "alert_type": alert_type,
+             "source_check_id": source_check_id},
+            {"_id": 0},
+        )
+        if existing_exact:
+            return
+        # 2. Open/acknowledged alert exists for this (horse, type) →
+        #    update last_seen + occurrence_count + merge triggers.
+        existing_open = await db.horse_ledger_alerts.find_one(
+            {"horse_id": horse_id, "alert_type": alert_type,
+             "status": {"$in": ["open", "acknowledged"]}},
+            {"_id": 0},
+        )
+        if existing_open:
+            # Severity upgrade only.
+            cur_rank = _SEVERITY_RANK.get(existing_open.get("severity"), -1)
+            new_rank = _SEVERITY_RANK.get(severity, 0)
+            sev_to_set = severity if new_rank > cur_rank else existing_open["severity"]
+            merged = sorted(set((existing_open.get("triggers") or []) + triggers))
+            await db.horse_ledger_alerts.update_one(
+                {"id": existing_open["id"]},
+                {"$set": {
+                    "last_seen_at": now_iso,
+                    "severity": sev_to_set,
+                    "triggers": merged,
+                    "last_source_check_id": source_check_id,
+                },
+                 "$inc": {"occurrence_count": 1}},
+            )
+            await db.horse_ledger_alert_events.insert_one({
+                "id": f"hlae_{uuid.uuid4().hex[:24]}",
+                "alert_id": existing_open["id"],
+                "horse_id": horse_id, "barn_id": barn_id, "ts": now_iso,
+                "event_type": "reoccurred",
+                "actor_user_id": check_doc.get("checked_by_user_id"),
+                "actor_role":    None,
+                "source_check_id": source_check_id,
+                "notes_present": bool(check_doc.get("notes")),
+            })
+            return
+        # 3. Otherwise create a new alert.
+        alert_id = f"hla_{uuid.uuid4().hex[:24]}"
+        await db.horse_ledger_alerts.insert_one({
+            "id": alert_id,
+            "horse_id": horse_id, "barn_id": barn_id,
+            "alert_type": alert_type,
+            "severity":   severity,
+            "status":     "open",
+            "source_check_id": source_check_id,
+            "last_source_check_id": source_check_id,
+            "first_seen_at": now_iso,
+            "last_seen_at":  now_iso,
+            "occurrence_count": 1,
+            "triggers": sorted(set(triggers)),
+            "acknowledged_at": None, "acknowledged_by_user_id": None,
+            "closed_at": None, "closed_by_user_id": None,
+            "resolution_note": None,
+            "next_escalation_at": None,  # informational only, populated by manual escalate
+        })
+        await db.horse_ledger_alert_events.insert_one({
+            "id": f"hlae_{uuid.uuid4().hex[:24]}",
+            "alert_id": alert_id,
+            "horse_id": horse_id, "barn_id": barn_id, "ts": now_iso,
+            "event_type": "opened",
+            "actor_user_id": check_doc.get("checked_by_user_id"),
+            "actor_role":    None,
+            "source_check_id": source_check_id,
+            "notes_present": bool(check_doc.get("notes")),
+        })
+
     def _validate_check_body(body, *, is_patch):
         """Raises HTTPException(422) on any shape violation. Used for
         both POST (full body) and PATCH (subset)."""
@@ -1249,6 +1436,9 @@ def build_router(*, db, get_current_user) -> APIRouter:
         _require_check_creator(user, horse)
         _validate_check_body(body, is_patch=False)
         _validate_check_payload(body.get("payload"), check_type=body["check_type"])
+        # Phase 1-D: experience gate runs AFTER role+shape checks so a
+        # malformed body still 422s instead of leaking gate behavior.
+        await _enforce_experience_gate(user, horse, body["check_type"])
         # Optional task linkage — must be a task in the same barn.
         # Real tasks (materialized by `task_engine.py`) carry
         # `tenant_id="default"` and `barn_id=<barn_id>`. We match on
@@ -1289,6 +1479,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
             field_paths=_check_field_paths(body),
             sensitivity=sensitivity,
         )
+        # Phase 1-D: mint/update alert side-effect AFTER the daily-check
+        # row + audit row are persisted, so the alert is always linked
+        # to a real source_check_id.
+        await _mint_alert_for_check(horse, doc)
         return {"ok": True, "id": check_id}
 
     @router.get("/horse-ledger/{horse_id}/daily-checks")
@@ -1329,6 +1523,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # determines which payload section is allowed.
         _validate_check_payload(body.get("payload"),
                                 check_type=existing.get("check_type"))
+        # Experience gate also applies to PATCH amend.
+        await _enforce_experience_gate(user, horse, existing["check_type"])
         updates: Dict[str, Any] = {}
         for k in ("status", "notes"):
             if k in body:
@@ -1356,6 +1552,204 @@ def build_router(*, db, get_current_user) -> APIRouter:
             field_paths=_check_field_paths(body),
             sensitivity=sensitivity,
         )
+        # Mint/update alert from the merged view of the doc.
+        merged_doc = {**existing, **updates, "id": check_id}
+        # Status defaults to existing if PATCH didn't change it.
+        if "status" not in updates:
+            merged_doc["status"] = existing.get("status") or "ok"
+        # Re-derive triggers off the merged doc; reuses the dedupe
+        # logic, so a `feed.given=false` PATCH on an `ok` row will
+        # mint a new alert.
+        await _mint_alert_for_check(horse, merged_doc)
         return {"ok": True}
+
+    # =================================================================
+    # Phase HorseOps-1D — alert lifecycle endpoints.
+    # =================================================================
+    # status filter values:
+    #   active        → open + acknowledged (default for list view)
+    #   open          → only open
+    #   acknowledged  → only acknowledged
+    #   closed        → only closed
+    #   all           → all three
+    _ALERT_STATUS_FILTERS = {"open", "acknowledged", "closed", "active", "all"}
+    # ≤500 char resolution note cap, staff-only free text.
+    _MAX_RES_NOTE = 500
+
+    def _alert_status_q(status_filter: Optional[str]) -> Dict[str, Any]:
+        if status_filter in (None, "", "active"):
+            return {"status": {"$in": ["open", "acknowledged"]}}
+        if status_filter == "all":
+            return {}
+        return {"status": status_filter}
+
+    @router.get("/horse-ledger/{horse_id}/alerts")
+    async def list_alerts(horse_id: str, status: Optional[str] = None,
+                          limit: int = 20,
+                          user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        role = (user.get("role") or "").strip().lower()
+        if role == "horse_owner":
+            raise HTTPException(403, "Alerts are staff-only.")
+        _require_check_creator(user, horse)  # any in-barn staff role
+        if status is not None and status not in _ALERT_STATUS_FILTERS:
+            raise HTTPException(422, "status filter invalid.")
+        q = {"horse_id": horse_id, "barn_id": horse["barn_id"], **_alert_status_q(status)}
+        limit = max(1, min(int(limit or 20), 100))
+        rows = await db.horse_ledger_alerts.find(q, {"_id": 0}) \
+            .sort([("severity", -1), ("last_seen_at", -1)]).to_list(limit)
+        return _scrub_strings({"items": rows})
+
+    @router.patch("/horse-ledger/{horse_id}/alerts/{alert_id}")
+    async def patch_alert(horse_id: str, alert_id: str,
+                          body: Dict[str, Any],
+                          user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        role = (user.get("role") or "").strip().lower()
+        if role == "horse_owner":
+            raise HTTPException(403, "Alerts are staff-only.")
+        _require_check_creator(user, horse)
+        existing = await db.horse_ledger_alerts.find_one(
+            {"id": alert_id, "horse_id": horse_id, "barn_id": horse["barn_id"]},
+            {"_id": 0},
+        )
+        if not existing:
+            raise HTTPException(404, "Alert not found.")
+        if not isinstance(body, dict) or not body:
+            raise HTTPException(422, "Empty body.")
+        allowed = {"status", "resolution_note", "next_escalation_at"}
+        bad = [k for k in body if k not in allowed]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        new_status = body.get("status")
+        if new_status is not None and new_status not in _ALERT_STATUSES:
+            raise HTTPException(422, "status invalid.")
+        if "resolution_note" in body and body["resolution_note"] is not None:
+            if not isinstance(body["resolution_note"], str):
+                raise HTTPException(422, "resolution_note must be a string.")
+            if len(body["resolution_note"]) > _MAX_RES_NOTE:
+                raise HTTPException(
+                    422, f"resolution_note too long (max {_MAX_RES_NOTE}).")
+        # Determine the transition.
+        cur = existing.get("status")
+        now_iso = datetime.now(timezone.utc).isoformat()
+        updates: Dict[str, Any] = {}
+        event_type = None
+        if new_status == "acknowledged" and cur == "open":
+            updates["status"] = "acknowledged"
+            updates["acknowledged_at"] = now_iso
+            updates["acknowledged_by_user_id"] = user.get("id")
+            event_type = "acknowledged"
+        elif new_status == "closed" and cur in {"open", "acknowledged"}:
+            updates["status"] = "closed"
+            updates["closed_at"] = now_iso
+            updates["closed_by_user_id"] = user.get("id")
+            if "resolution_note" in body:
+                updates["resolution_note"] = body["resolution_note"]
+            event_type = "closed"
+        elif new_status == "open" and cur == "closed":
+            # Reopen — only managers may do this.
+            if role not in {"admin", "barn_manager"}:
+                raise HTTPException(403, "Only a manager may reopen an alert.")
+            updates["status"] = "open"
+            updates["closed_at"] = None
+            updates["closed_by_user_id"] = None
+            event_type = "reopened"
+        elif new_status is not None:
+            raise HTTPException(
+                422, f"Invalid transition {cur!r} → {new_status!r}.")
+        # Allow setting next_escalation_at (informational) without a
+        # status change.
+        if "next_escalation_at" in body:
+            v = body["next_escalation_at"]
+            if v is not None and not isinstance(v, str):
+                raise HTTPException(422, "next_escalation_at must be ISO string.")
+            updates["next_escalation_at"] = v
+        if not updates:
+            raise HTTPException(422, "No editable changes.")
+        await db.horse_ledger_alerts.update_one(
+            {"id": alert_id}, {"$set": updates},
+        )
+        if event_type:
+            await db.horse_ledger_alert_events.insert_one({
+                "id": f"hlae_{uuid.uuid4().hex[:24]}",
+                "alert_id": alert_id,
+                "horse_id": horse_id, "barn_id": horse["barn_id"],
+                "ts": now_iso,
+                "event_type": event_type,
+                "actor_user_id": user.get("id"),
+                "actor_role":    role,
+                "source_check_id": None,
+                "notes_present": bool(updates.get("resolution_note")),
+            })
+            # Audit row for the lifecycle transition (field_paths only).
+            sensitivity = "operational" if existing.get("alert_type") in {"feed", "water"} else "staff_only"
+            await _emit_audit(
+                horse_id, horse["barn_id"], user,
+                section="alerts", action=event_type,
+                field_paths=sorted([k for k in updates.keys()]),
+                sensitivity=sensitivity,
+            )
+        return {"ok": True}
+
+    @router.get("/horse-ledger/{horse_id}/history")
+    async def get_history(horse_id: str, limit: int = 50,
+                          before: Optional[str] = None,
+                          user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        role = (user.get("role") or "").strip().lower()
+        if role == "horse_owner":
+            raise HTTPException(403, "History is staff-only.")
+        _require_check_creator(user, horse)
+        limit = max(1, min(int(limit or 50), 200))
+        cap = limit * 3  # over-fetch each source so the merged window covers `limit`.
+        barn_id = horse["barn_id"]
+        # Build the ts filter once.
+        ts_q: Dict[str, Any] = {}
+        if before:
+            ts_q = {"$lt": before}
+        # 1. recent daily checks
+        check_q: Dict[str, Any] = {"horse_id": horse_id, "barn_id": barn_id}
+        if ts_q:
+            check_q["checked_at"] = ts_q
+        checks = await db.horse_daily_check_logs.find(check_q, {"_id": 0}) \
+            .sort("checked_at", -1).to_list(cap)
+        # 2. recent alerts (by last_seen_at)
+        alert_q: Dict[str, Any] = {"horse_id": horse_id, "barn_id": barn_id}
+        if ts_q:
+            alert_q["last_seen_at"] = ts_q
+        alerts = await db.horse_ledger_alerts.find(alert_q, {"_id": 0}) \
+            .sort("last_seen_at", -1).to_list(cap)
+        # 3. recent audit (field_paths only — already that shape)
+        audit_q: Dict[str, Any] = {"horse_id": horse_id, "barn_id": barn_id}
+        if ts_q:
+            audit_q["ts"] = ts_q
+        audits = await db.horse_ledger_audit.find(audit_q, {"_id": 0}) \
+            .sort("ts", -1).to_list(cap)
+        # Merge + sort desc by ts (per-entry timestamp field varies).
+        def _ts(entry, key):
+            return entry.get(key) or ""
+        merged = []
+        for c in checks:
+            merged.append({"entry_type": "daily_check", "ts": _ts(c, "checked_at"),
+                           "id": c["id"], "check_type": c.get("check_type"),
+                           "status": c.get("status"),
+                           "checked_by_user_id": c.get("checked_by_user_id")})
+        for a in alerts:
+            merged.append({"entry_type": "alert", "ts": _ts(a, "last_seen_at"),
+                           "id": a["id"], "alert_type": a.get("alert_type"),
+                           "severity": a.get("severity"),
+                           "status": a.get("status"),
+                           "occurrence_count": a.get("occurrence_count")})
+        for au in audits:
+            merged.append({"entry_type": "audit", "ts": _ts(au, "ts"),
+                           "section": au.get("section"),
+                           "action": au.get("action"),
+                           "field_paths": au.get("field_paths") or [],
+                           "actor_user_id": au.get("actor_user_id")})
+        merged.sort(key=lambda e: e["ts"], reverse=True)
+        items = merged[:limit]
+        # Stripe-scrub the merged response.
+        return _scrub_strings({"items": items})
 
     return router

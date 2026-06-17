@@ -20,6 +20,30 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1D — Alerts, Escalations, History + Staff Experience Gate ✅ (Feb 2026, awaiting Codex review)
+Event-driven alert layer on top of the locked 1-C daily checks. **No background worker, no scheduler.** Alerts are minted as inline side effects of `POST/PATCH /daily-checks`; lifecycle endpoints handle ack/close/reopen; the new `/history` endpoint merges daily checks + alerts + audit rows. Staff experience-level gate refuses operational writes by under-qualified callers with a **generic** 403 and **zero operational artifacts** on denial.
+
+**Backend** — 3 endpoints in `routes/horse_ledger.py`:
+- `GET  /horse-ledger/{id}/alerts?status=open|acknowledged|closed|active|all` (default `active`)
+- `PATCH /horse-ledger/{id}/alerts/{alert_id}` (ack/close = any in-barn staff; reopen = manager-only; resolution_note ≤500 chars)
+- `GET  /horse-ledger/{id}/history?limit&before` (merged chronological — staff/manager; owner 403)
+
+Plus alert minting hook inside the existing `POST/PATCH /daily-checks` path. Dedup contract: `(source_check_id, alert_type)` never duplicates; same-category repeats update existing open/acked alert with `occurrence_count` + merged triggers + severity-upgrade-only; closed stays closed (next trigger creates a new row). `_FORBIDDEN_OWNER_KEYS["alerts_open"] = {"*"}` so policy PUT 422s on the section. Staff GET ledger populates `alerts_open` (top 20 active); owner always `[]`.
+
+**Experience gate** — `users.experience_level` (new field, `null`→treated as `novice`); `handling_behavior.required_staff_experience_level` (1-B). Levels: `novice/intermediate/experienced/advanced`. Admin/manager bypass; `general` checks bypass; under-qualified staff get **`"Insufficient permission for this care action."`** with NO audit row, NO alert row, NO history event. PATCH amend also gated.
+
+**Indexes** — added in `core/lifespan.py`: `hla_horse_type_status`, `hla_barn_status_last_seen`, `hlae_alert_ts`, `hlae_horse_ts`, `hlae_barn_ts`.
+
+**Frontend** — `CareLedgerTab.jsx` gains `AlertsSection` (staff-only): 3 severity counter chips (`equine-silver`/`equine-taupe`/`equine-brass`, no red/amber/orange), per-alert row with type · severity badge · status pill · occurrence-count chip · Ack/Close/Reopen actions, `AlertCloseDrawer` with resolution-note textarea labeled staff-only. New `HistorySection` (staff-only) chronological feed. Experience-block UI: calm banner + disabled operational chips when caller is under-qualified; `+ Note` (general) stays enabled. Owner UI unchanged.
+
+**Tests** — `test_horse_ledger_1d.py`: **97 cases**. Full Care-Ledger suite **300/300 pass** (29 1-A + 101 1-B + 73 1-C + 97 1-D). Backend lint clean; frontend syntax clean.
+
+**Deferred**: background escalation worker · notification channels (email/SMS/push) · owner-facing alerts (1-E) · Trust & Safety/Admin denial-visibility surface · curated schedule-shape picker · barn-wide visibility template (1-B.1).
+
+**Delta package**: `/app/phase_horseops_1d_changes.zip` with route, lifespan, tests, frontend, PRD, and `PHASE_HORSEOPS_1D_README.md`.
+
+
+
 ### Phase HorseOps-1C Round-2 Fixes ✅ (Feb 2026, awaiting Codex re-review)
 Two Codex Round-2 findings closed:
 

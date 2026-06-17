@@ -490,15 +490,27 @@ export default function CareLedgerTab({ horseId }) {
           checks={data.daily_checks_recent || []}
           currentUserId={user?.id}
           role={role}
+          requiredExperience={data.handling_behavior?.structured?.required_staff_experience_level || null}
+          callerExperience={user?.experience_level || null}
           onAddCheck={(type) => openDrawer("daily_check_new", { check_type: type })}
           onAmend={(check) => openDrawer("daily_check_amend", { check })}
         />
       ) : null}
 
-      {/* Alerts — placeholder for 1-D */}
-      <SectionShell id="alerts" title="Alerts">
-        <KV label="Status" value="Alerts land in HorseOps-1D." />
-      </SectionShell>
+      {/* Alerts — Phase HorseOps-1D. Staff-only, owner UI gets nothing. */}
+      {STAFF_ROLES.has(role) && !isOwner ? (
+        <AlertsSection
+          horseId={horseId}
+          alerts={data.alerts_open || []}
+          role={role}
+          onTransition={() => refetch()}
+        />
+      ) : null}
+
+      {/* History — Phase HorseOps-1D. Staff-only. */}
+      {STAFF_ROLES.has(role) && !isOwner ? (
+        <HistorySection horseId={horseId} />
+      ) : null}
 
       {drawer ? (
         <EditDrawerRouter
@@ -1006,8 +1018,13 @@ const fmtWhen = (iso) => {
   } catch { return iso; }
 };
 
-function DailyChecksSection({ horseId, checks, currentUserId, role, onAddCheck, onAmend }) {
+function DailyChecksSection({ horseId, checks, currentUserId, role, requiredExperience, callerExperience, onAddCheck, onAmend }) {
   const canAmend = (c) => MUTATOR_ROLES.has(role) || c?.checked_by_user_id === currentUserId;
+  const EXP_RANK = { novice: 0, intermediate: 1, experienced: 2, advanced: 3 };
+  const bypassesGate = MUTATOR_ROLES.has(role);
+  const callerRank = EXP_RANK[callerExperience || "novice"] ?? 0;
+  const requiredRank = requiredExperience ? (EXP_RANK[requiredExperience] ?? null) : null;
+  const isBlocked = !bypassesGate && requiredRank !== null && callerRank < requiredRank;
   return (
     <section
       data-testid="horse-ledger-section-daily_checks"
@@ -1020,19 +1037,41 @@ function DailyChecksSection({ horseId, checks, currentUserId, role, onAddCheck, 
         </span>
       </div>
 
+      {/* Experience-gate banner — calm disabled state when blocked. */}
+      {isBlocked ? (
+        <div
+          data-testid="daily-check-experience-block"
+          className="mb-3 text-[12px] text-equine-platinum/70 border border-equine-silver/20 bg-equine-silver/5 px-3 py-2 rounded"
+        >
+          This horse requires{" "}
+          <span className="uppercase tracking-[0.16em] text-equine-silver/90">
+            {requiredExperience}
+          </span>{" "}
+          experience for operational checks. General notes are still available.
+        </div>
+      ) : null}
+
       {/* Quick-action chips */}
       <div className="flex flex-wrap gap-2 mb-4">
-        {QUICK_ACTIONS.map((a) => (
-          <button
-            key={a.type}
-            type="button"
-            onClick={() => onAddCheck(a.type)}
-            data-testid={`daily-check-quick-${a.type}`}
-            className="text-[11px] tracking-[0.18em] uppercase text-equine-silver/90 border border-equine-silver/25 bg-equine-silver/5 hover:bg-equine-silver/10 px-3 py-1.5 rounded transition-colors"
-          >
-            {a.label}
-          </button>
-        ))}
+        {QUICK_ACTIONS.map((a) => {
+          const disabled = isBlocked && a.type !== "general";
+          return (
+            <button
+              key={a.type}
+              type="button"
+              disabled={disabled}
+              onClick={disabled ? undefined : () => onAddCheck(a.type)}
+              data-testid={`daily-check-quick-${a.type}`}
+              className={`text-[11px] tracking-[0.18em] uppercase border px-3 py-1.5 rounded transition-colors ${
+                disabled
+                  ? "border-equine-silver/10 bg-equine-silver/0 text-equine-platinum/35 cursor-not-allowed"
+                  : "border-equine-silver/25 bg-equine-silver/5 text-equine-silver/90 hover:bg-equine-silver/10"
+              }`}
+            >
+              {a.label}
+            </button>
+          );
+        })}
         <button
           type="button"
           onClick={() => onAddCheck("general")}
@@ -1263,3 +1302,274 @@ function DailyCheckDrawer({ horseId, mode, initialType, check, onClose, onSaved 
     </Drawer>
   );
 }
+
+
+// =====================================================================
+// Phase HorseOps-1D — Alerts + History sections.
+// Staff-only. Owner UI never sees these surfaces; the backend also
+// returns `alerts_open: []` and 403s on the history endpoint for owners.
+// =====================================================================
+
+const ALERT_TYPE_LABELS = {
+  feed:    "Feed",
+  hay:     "Hay",
+  hay_net: "Hay net",
+  water:   "Water",
+  bedding: "Bedding",
+  general: "General",
+};
+
+const SEVERITY_LABELS = {
+  info:      "Info",
+  attention: "Attention",
+  urgent:    "Urgent",
+};
+
+const ALERT_STATUS_LABELS = {
+  open:         "Open",
+  acknowledged: "Acked",
+  closed:       "Closed",
+};
+
+const SeverityBadge = ({ severity }) => {
+  // Approved equine palette only — brass / saddle / navy. No red/amber/orange.
+  const tone = ({
+    info:      "border-equine-brass/40 text-equine-brass",
+    attention: "border-equine-taupe/45 text-equine-taupe",
+    urgent:    "border-equine-silver/55 text-equine-silver",
+  })[severity] || "border-equine-silver/15 text-equine-platinum/55";
+  return (
+    <span
+      className={`text-[10px] tracking-[0.18em] uppercase px-2 py-0.5 rounded border ${tone}`}
+      data-testid={`alert-severity-${severity}`}
+    >
+      {SEVERITY_LABELS[severity] || severity}
+    </span>
+  );
+};
+
+const AlertStatusPill = ({ status }) => (
+  <span
+    className="text-[10px] tracking-[0.16em] uppercase px-1.5 py-0.5 rounded bg-equine-silver/10 text-equine-platinum/75"
+    data-testid={`alert-status-${status}`}
+  >
+    {ALERT_STATUS_LABELS[status] || status}
+  </span>
+);
+
+function AlertsSection({ horseId, alerts, role, onTransition }) {
+  const [drawer, setDrawer] = useState(null); // { alert, mode }
+
+  // Severity counters.
+  const counts = alerts.reduce((acc, a) => {
+    acc[a.severity] = (acc[a.severity] || 0) + 1;
+    return acc;
+  }, {});
+
+  const transition = async (alert_id, body) => {
+    try {
+      await api.patch(`/horse-ledger/${horseId}/alerts/${alert_id}`, body);
+      onTransition();
+    } catch (e) {
+      console.error("alert transition failed", e); // eslint-disable-line no-console
+    }
+  };
+
+  return (
+    <section
+      data-testid="horse-ledger-section-alerts"
+      className="rounded-lg border border-equine-silver/10 bg-equine-black/40 p-4"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <div className="label-eyebrow">Alerts</div>
+        <span className="text-[10.5px] uppercase tracking-[0.18em] text-equine-platinum/45">
+          Staff only
+        </span>
+      </div>
+
+      {/* Severity counter chips */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {["urgent", "attention", "info"].map((sev) => (
+          <span
+            key={sev}
+            data-testid={`alerts-severity-counter-${sev}`}
+            className="text-[11px] tracking-[0.18em] uppercase border border-equine-silver/20 bg-equine-silver/5 text-equine-silver/85 px-3 py-1.5 rounded"
+          >
+            {counts[sev] || 0} {SEVERITY_LABELS[sev]}
+          </span>
+        ))}
+      </div>
+
+      {alerts.length === 0 ? (
+        <div
+          data-testid="alerts-empty"
+          className="text-[12.5px] text-equine-platinum/55 italic"
+        >
+          No active alerts.
+        </div>
+      ) : (
+        <ul className="space-y-1.5">
+          {alerts.map((a) => (
+            <li
+              key={a.id}
+              data-testid={`alert-row-${a.id}`}
+              className="flex items-center justify-between gap-3 text-[13px] py-1.5 border-b border-equine-silver/5 last:border-b-0"
+            >
+              <div className="flex items-center gap-3 min-w-0 flex-wrap">
+                <span className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/60 min-w-[64px]">
+                  {ALERT_TYPE_LABELS[a.alert_type] || a.alert_type}
+                </span>
+                <SeverityBadge severity={a.severity} />
+                <AlertStatusPill status={a.status} />
+                {a.occurrence_count > 1 ? (
+                  <span className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/55"
+                        data-testid={`alert-count-${a.id}`}>
+                    ×{a.occurrence_count}
+                  </span>
+                ) : null}
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                {a.status === "open" ? (
+                  <button
+                    type="button"
+                    onClick={() => transition(a.id, { status: "acknowledged" })}
+                    data-testid={`alert-ack-${a.id}`}
+                    className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/65 hover:text-equine-silver"
+                  >
+                    Ack
+                  </button>
+                ) : null}
+                {a.status !== "closed" ? (
+                  <button
+                    type="button"
+                    onClick={() => setDrawer({ alert: a, mode: "close" })}
+                    data-testid={`alert-close-${a.id}`}
+                    className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/65 hover:text-equine-silver"
+                  >
+                    Close
+                  </button>
+                ) : MUTATOR_ROLES.has(role) ? (
+                  <button
+                    type="button"
+                    onClick={() => transition(a.id, { status: "open" })}
+                    data-testid={`alert-reopen-${a.id}`}
+                    className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/65 hover:text-equine-silver"
+                  >
+                    Reopen
+                  </button>
+                ) : null}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {drawer ? (
+        <AlertCloseDrawer
+          horseId={horseId}
+          alert={drawer.alert}
+          onClose={() => setDrawer(null)}
+          onSaved={() => { setDrawer(null); onTransition(); }}
+        />
+      ) : null}
+    </section>
+  );
+}
+
+function AlertCloseDrawer({ horseId, alert, onClose, onSaved }) {
+  const [note, setNote] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(null);
+  const save = async () => {
+    setError(null); setSaving(true);
+    try {
+      const body = { status: "closed" };
+      if (note) body.resolution_note = note;
+      await api.patch(`/horse-ledger/${horseId}/alerts/${alert.id}`, body);
+      onSaved();
+    } catch (e) {
+      setError(e?.response?.data?.detail || "Could not close alert.");
+    } finally { setSaving(false); }
+  };
+  return (
+    <Drawer
+      open={true}
+      eyebrow="Resolve · Alert"
+      title={`Close ${ALERT_TYPE_LABELS[alert.alert_type] || alert.alert_type}`}
+      onClose={onClose}
+      onSave={save}
+      saving={saving}
+      error={error}
+      saveLabel="Close alert"
+    >
+      <TextArea
+        label="Resolution note (staff-only — never shown to owners)"
+        name="resolution_note"
+        value={note}
+        onChange={(_, v) => setNote(v)}
+        testid="alert-close-resolution_note"
+        rows={4}
+      />
+    </Drawer>
+  );
+}
+
+function HistorySection({ horseId }) {
+  const [items, setItems] = useState(null);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    let cancelled = false;
+    api.get(`/horse-ledger/${horseId}/history`, { params: { limit: 50 } })
+      .then((r) => { if (!cancelled) setItems(r.data.items || []); })
+      .catch((e) => { if (!cancelled) setError(e?.response?.data?.detail || "Could not load history."); });
+    return () => { cancelled = true; };
+  }, [horseId]);
+
+  return (
+    <section
+      data-testid="horse-ledger-section-history"
+      className="rounded-lg border border-equine-silver/10 bg-equine-black/40 p-4"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <div className="label-eyebrow">History</div>
+        <span className="text-[10.5px] uppercase tracking-[0.18em] text-equine-platinum/45">
+          Staff only
+        </span>
+      </div>
+      {error ? (
+        <div className="text-[12.5px] text-equine-platinum/85" data-testid="history-error">{error}</div>
+      ) : items === null ? (
+        <div className="text-[12.5px] text-equine-platinum/55 italic" data-testid="history-loading">Loading…</div>
+      ) : items.length === 0 ? (
+        <div className="text-[12.5px] text-equine-platinum/55 italic" data-testid="history-empty">No history yet.</div>
+      ) : (
+        <ul className="space-y-1">
+          {items.map((it, idx) => (
+            <li
+              key={`${it.entry_type}-${it.id || idx}-${it.ts}`}
+              data-testid={`history-entry-${it.entry_type}-${it.id || idx}`}
+              className="flex items-center gap-3 text-[12.5px] py-1 border-b border-equine-silver/5 last:border-b-0"
+            >
+              <span className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/55 min-w-[80px]">
+                {it.entry_type === "daily_check" ? "Check"
+                  : it.entry_type === "alert"       ? "Alert"
+                  : "Audit"}
+              </span>
+              <span className="text-equine-silver/80 truncate">
+                {it.entry_type === "daily_check"
+                  ? `${CHECK_TYPE_LABELS[it.check_type] || it.check_type} · ${it.status}`
+                  : it.entry_type === "alert"
+                  ? `${ALERT_TYPE_LABELS[it.alert_type] || it.alert_type} · ${SEVERITY_LABELS[it.severity] || it.severity} · ${it.status}`
+                  : `${it.section}.${it.action}`}
+              </span>
+              <span className="ml-auto text-[11.5px] text-equine-platinum/55 shrink-0">
+                {it.ts ? new Date(it.ts).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "—"}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
