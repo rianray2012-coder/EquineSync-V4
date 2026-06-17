@@ -749,3 +749,251 @@ def test_admin_portal_route_lock_unchanged_after_1b():
     assert len(LOCKED_GET_ROUTES) == 26
     assert len(LOCKED_POST_ROUTES) == 10
     assert len(LOCKED_PATCH_ROUTES) == 1
+
+
+
+# =====================================================================
+# Codex Round-1 regressions (Phase HorseOps-1B)
+#
+# P0  Owner visibility policy must be applied on every owner read.
+# P0  Riding/training staff-only fields must not leak to owners.
+# P1  Nested validation for supplements / hay_nets / schedule.
+# =====================================================================
+def test_policy_removal_hides_previously_visible_safe_key(db):
+    """Without a policy doc the owner sees the conservative default
+    (grain_feed_type, schedule, supplements). After a PUT that omits
+    `grain_feed_type` from the allowlist, the owner read must drop
+    that field on the very next GET."""
+    bid = _make_barn(db); owner = _owner_session(db, bid)
+    hid = _make_horse(db, bid, owner_id=owner["user"]["id"])
+    mgr = _mgr_session(db, bid)
+    try:
+        # Plant structured feeding data.
+        requests.patch(f"{API}/horse-ledger/{hid}/care-profile",
+                       headers=_bearer(mgr),
+                       json={"feeding": {"grain_feed_type": "Senior",
+                                         "amount_value": 4.0,
+                                         "amount_unit": "lb"}}, timeout=10)
+        # Owner sees grain_feed_type with no policy doc (default policy).
+        r0 = requests.get(f"{API}/horse-ledger/{hid}",
+                          headers=_bearer(owner), timeout=10)
+        s0 = r0.json()["feeding"]["structured"]
+        assert s0.get("grain_feed_type") == "Senior"
+        # Manager now sets a narrowed policy that allows only
+        # `supplements` from feeding (NOT grain_feed_type).
+        requests.put(f"{API}/horse-ledger/{hid}/owner-visibility-policy",
+                     headers=_bearer(mgr),
+                     json={"sections": {"feeding": {"allowlist": ["supplements"]}}},
+                     timeout=10)
+        r1 = requests.get(f"{API}/horse-ledger/{hid}",
+                          headers=_bearer(owner), timeout=10)
+        body = r1.json()["feeding"]
+        # grain_feed_type MUST have disappeared even though the structured
+        # doc still holds it (proves backend-authoritative read).
+        if body and body.get("structured"):
+            assert "grain_feed_type" not in body["structured"]
+    finally:
+        _cleanup(db)
+
+
+def test_policy_addition_shows_only_safe_allowed_keys(db):
+    """Adding `amount_value` + `amount_unit` to the feeding allowlist
+    surfaces those keys to the owner. Any keys NOT in the registry
+    silently drop (defense in depth)."""
+    bid = _make_barn(db); owner = _owner_session(db, bid)
+    hid = _make_horse(db, bid, owner_id=owner["user"]["id"])
+    mgr = _mgr_session(db, bid)
+    try:
+        requests.patch(f"{API}/horse-ledger/{hid}/care-profile",
+                       headers=_bearer(mgr),
+                       json={"feeding": {"grain_feed_type": "Senior",
+                                         "amount_value": 4.0,
+                                         "amount_unit": "lb"}}, timeout=10)
+        # Default policy: grain_feed_type only by default — amount_value not visible.
+        r0 = requests.get(f"{API}/horse-ledger/{hid}",
+                          headers=_bearer(owner), timeout=10).json()
+        assert "amount_value" not in (r0["feeding"]["structured"] or {})
+        # Manager opts the owner into amount_value + amount_unit.
+        requests.put(f"{API}/horse-ledger/{hid}/owner-visibility-policy",
+                     headers=_bearer(mgr),
+                     json={"sections": {"feeding": {
+                         "allowlist": ["grain_feed_type", "amount_value", "amount_unit"]
+                     }}}, timeout=10)
+        r1 = requests.get(f"{API}/horse-ledger/{hid}",
+                          headers=_bearer(owner), timeout=10).json()
+        s = r1["feeding"]["structured"]
+        assert s.get("amount_value") == 4.0
+        assert s.get("amount_unit") == "lb"
+        assert s.get("grain_feed_type") == "Senior"
+    finally:
+        _cleanup(db)
+
+
+def test_tampered_policy_with_forbidden_key_stays_hidden_on_read(db):
+    """If a policy doc is planted directly in Mongo with a forbidden
+    feeding key (e.g. `staff_only_warnings`), the read path must drop
+    it via the backend safe-key registry intersection."""
+    bid = _make_barn(db); owner = _owner_session(db, bid)
+    hid = _make_horse(db, bid, owner_id=owner["user"]["id"])
+    db.horse_owner_visibility_policy.insert_one({
+        "id": "hovp_tampered_r1", "horse_id": hid, "barn_id": bid,
+        "sections": {"feeding": {"allowlist": ["grain_feed_type",
+                                                "staff_only_warnings"]}},
+        "_hl1b_test": True,
+    })
+    db.horse_care_profiles.insert_one({
+        "id": "hcp_tampered_r1", "horse_id": hid, "barn_id": bid,
+        "feeding": {"grain_feed_type": "Senior",
+                    "staff_only_warnings": "GIVE BUTE, OWNER UNAWARE"},
+        "_hl1b_test": True,
+    })
+    try:
+        r = requests.get(f"{API}/horse-ledger/{hid}",
+                         headers=_bearer(owner), timeout=10)
+        s = r.json()["feeding"]["structured"] or {}
+        assert "staff_only_warnings" not in s
+        assert "GIVE BUTE" not in r.text
+        # grain_feed_type still surfaces normally.
+        assert s.get("grain_feed_type") == "Senior"
+    finally:
+        _cleanup(db)
+
+
+@pytest.mark.parametrize("field", [
+    "trainer_notes", "exercise_restrictions", "weekly_work_plan",
+    "rider_compatibility_notes", "conditioning_plan", "lesson_schedule",
+])
+def test_riding_training_staff_only_fields_never_leak_to_owner(db, field):
+    """1-B added writable operational fields under riding_training.
+    None of them may ever appear in the owner read, even with NO
+    policy doc, even with a tampered policy doc."""
+    bid = _make_barn(db); owner = _owner_session(db, bid)
+    hid = _make_horse(db, bid, owner_id=owner["user"]["id"])
+    mgr = _mgr_session(db, bid)
+    try:
+        sentinel = f"SECRET_{field.upper()}_LEAK_PROBE"
+        requests.patch(f"{API}/horse-ledger/{hid}/care-profile",
+                       headers=_bearer(mgr),
+                       json={"riding_training": {"discipline": "Dressage",
+                                                  field: sentinel}},
+                       timeout=10)
+        # Default policy.
+        r0 = requests.get(f"{API}/horse-ledger/{hid}",
+                          headers=_bearer(owner), timeout=10)
+        assert sentinel not in r0.text, f"{field} leaked under default policy"
+        # Even if a manager attempts to expand the policy, the backend
+        # rejects forbidden keys (422). The read MUST stay clean.
+        bad = requests.put(
+            f"{API}/horse-ledger/{hid}/owner-visibility-policy",
+            headers=_bearer(mgr),
+            json={"sections": {"riding_training": {"allowlist": [field]}}},
+            timeout=10,
+        )
+        assert bad.status_code == 422
+        r1 = requests.get(f"{API}/horse-ledger/{hid}",
+                          headers=_bearer(owner), timeout=10)
+        assert sentinel not in r1.text
+        # Direct DB tamper — same outcome.
+        db.horse_owner_visibility_policy.update_one(
+            {"horse_id": hid},
+            {"$set": {"sections.riding_training.allowlist": [field]}},
+            upsert=True,
+        )
+        r2 = requests.get(f"{API}/horse-ledger/{hid}",
+                          headers=_bearer(owner), timeout=10)
+        assert sentinel not in r2.text, f"{field} leaked after DB tamper"
+    finally:
+        _cleanup(db)
+
+
+def test_default_owner_view_excludes_riding_training_staff_only_keys(db):
+    """Even without a policy doc, the default owner projection of
+    riding_training must include only `discipline`, `current_level`,
+    `competition_goals` — nothing else."""
+    bid = _make_barn(db); owner = _owner_session(db, bid)
+    hid = _make_horse(db, bid, owner_id=owner["user"]["id"])
+    mgr = _mgr_session(db, bid)
+    try:
+        requests.patch(f"{API}/horse-ledger/{hid}/care-profile",
+                       headers=_bearer(mgr),
+                       json={"riding_training": {
+                           "discipline": "Dressage",
+                           "current_level": "PSG",
+                           "trainer_notes": "REVISIT FRAME — staff only",
+                           "exercise_restrictions": "no canter on left lead",
+                       }}, timeout=10)
+        r = requests.get(f"{API}/horse-ledger/{hid}",
+                         headers=_bearer(owner), timeout=10).json()
+        s = (r.get("riding_training") or {}).get("structured") or {}
+        assert set(s.keys()) <= {"discipline", "current_level", "competition_goals"}
+        assert "trainer_notes" not in s
+        assert "exercise_restrictions" not in s
+    finally:
+        _cleanup(db)
+
+
+# ---------- nested validation ----------
+@pytest.mark.parametrize("payload", [
+    {"feeding": {"supplements": "not-a-list"}},
+    {"feeding": {"supplements": [{"name": 123}]}},
+    {"feeding": {"supplements": ["just a string"]}},
+    {"feeding": {"schedule": "morning"}},
+    {"feeding": {"schedule": [{"time": {"hour": 6}}]}},
+    {"hay_access": {"hay_nets": "not-a-list"}},
+    {"hay_access": {"hay_nets": [{"id": "n1"}, "scalar"]}},
+    {"turnout": {"schedule": {"oops": "object"}}},
+])
+def test_patch_care_profile_nested_shape_422(db, payload):
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        r = requests.patch(f"{API}/horse-ledger/{hid}/care-profile",
+                           headers=_bearer(mgr), json=payload, timeout=10)
+        assert r.status_code == 422, (payload, r.text)
+    finally:
+        _cleanup(db)
+
+
+def test_patch_care_profile_nested_shape_accepts_well_formed(db):
+    """Sanity: a properly-shaped nested payload still saves."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        r = requests.patch(
+            f"{API}/horse-ledger/{hid}/care-profile",
+            headers=_bearer(mgr),
+            json={"feeding": {"supplements": [{"name": "Magnesium"}],
+                              "schedule": ["AM", "PM"]},
+                  "hay_access": {"hay_nets": [{"id": "n1", "location": "stall"}]}},
+            timeout=10,
+        )
+        assert r.status_code == 200, r.text
+    finally:
+        _cleanup(db)
+
+
+def test_owner_supplements_projection_drops_dosage_notes(db):
+    """When a manager records supplements with dosage/notes, the owner
+    view must surface name only."""
+    bid = _make_barn(db); owner = _owner_session(db, bid)
+    hid = _make_horse(db, bid, owner_id=owner["user"]["id"])
+    mgr = _mgr_session(db, bid)
+    try:
+        requests.patch(f"{API}/horse-ledger/{hid}/care-profile",
+                       headers=_bearer(mgr),
+                       json={"feeding": {"supplements": [
+                           {"name": "Magnesium"}]}},
+                       timeout=10)
+        # Plant a tampered supplement with extra keys directly via Mongo
+        # to simulate a future schema drift.
+        db.horse_care_profiles.update_one(
+            {"horse_id": hid},
+            {"$set": {"feeding.supplements": [
+                {"name": "Magnesium", "dosage": "2 scoops",
+                 "staff_note": "DO NOT TELL OWNER"}]}},
+        )
+        r = requests.get(f"{API}/horse-ledger/{hid}",
+                         headers=_bearer(owner), timeout=10)
+        sups = r.json()["feeding"]["structured"]["supplements"]
+        assert sups == [{"name": "Magnesium"}]
+        assert "DO NOT TELL OWNER" not in r.text
+    finally:
+        _cleanup(db)

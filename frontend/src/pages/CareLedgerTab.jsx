@@ -137,7 +137,7 @@ const Drawer = ({ open, title, eyebrow, onClose, onSave, saving, error, children
   return (
     <div className="fixed inset-0 z-50 flex" data-testid="horse-ledger-drawer">
       <div
-        className="flex-1 bg-black/60 backdrop-blur-sm"
+        className="flex-1 bg-equine-black/70 backdrop-blur-sm"
         onClick={onClose}
         data-testid="horse-ledger-drawer-backdrop"
       />
@@ -154,7 +154,7 @@ const Drawer = ({ open, title, eyebrow, onClose, onSave, saving, error, children
           {children}
           {error ? (
             <div
-              className="text-[12.5px] text-rose-300/90 border border-rose-400/30 bg-rose-400/5 px-3 py-2 rounded"
+              className="text-[12.5px] text-equine-platinum/85 border border-equine-silver/30 bg-equine-silver/5 px-3 py-2 rounded"
               data-testid="horse-ledger-drawer-error"
             >
               {error}

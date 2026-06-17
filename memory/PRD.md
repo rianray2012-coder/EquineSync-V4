@@ -20,6 +20,32 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1B Round-1 Fixes ✅ (Feb 2026, awaiting Codex re-review)
+Closes the four Codex Round-1 findings:
+
+- **P0 — Owner visibility policy now applied on read.** `GET /api/horse-ledger/{horse_id}` for an owner loads `horse_owner_visibility_policy`, then projects each section through the effective allowlist computed as `(policy_allowlist ∩ _OWNER_SAFE_KEYS[section]) ∪ _DEFAULT_OWNER_POLICY[section] \ FORBIDDEN`. Policy doc removal/edit changes the very next GET — no caching.
+- **P0 — Riding/training staff-only fields can no longer leak.** `_build_riding_training()` projects via `_project_owner_safe()` (default keys: `discipline`, `current_level`, `competition_goals`). New entries in `_FORBIDDEN_OWNER_KEYS["riding_training"]`: `trainer_notes`, `exercise_restrictions`, `weekly_work_plan`, `rider_compatibility_notes`, `conditioning_plan`, `lesson_schedule`, `ride_schedule`. PUT endpoint 422s on any of these.
+- **P1 — Nested validation registry.** `_NESTED_VALIDATORS` enforces shape on `feeding.supplements` (list of objects), `feeding.schedule` / `turnout.schedule` (list of primitives or primitive-only dicts), `hay_access.hay_nets` (list of objects ≤6). Owner-safe projection of `supplements` still drops everything except `name`, so a tampered DB doc with extra keys can't leak.
+- **P2 — Frontend palette cleanup.** `CareLedgerTab.jsx` swapped `text-rose-*` / `border-rose-*` / `bg-rose-*` → `text-equine-platinum/85` / `border-equine-silver/30` / `bg-equine-silver/5`; `bg-black/60` → `bg-equine-black/70`. No red/orange/amber tokens remain.
+
+**Tests** — `test_horse_ledger_1b.py` grows to **77 cases (was 57)**. New Round-1 regressions:
+- `test_policy_removal_hides_previously_visible_safe_key`
+- `test_policy_addition_shows_only_safe_allowed_keys`
+- `test_tampered_policy_with_forbidden_key_stays_hidden_on_read`
+- `test_riding_training_staff_only_fields_never_leak_to_owner` × 6 (parametrized over the new forbidden keys)
+- `test_default_owner_view_excludes_riding_training_staff_only_keys`
+- `test_patch_care_profile_nested_shape_422` × 8 (parametrized over malformed payloads)
+- `test_patch_care_profile_nested_shape_accepts_well_formed`
+- `test_owner_supplements_projection_drops_dosage_notes` (proves a tampered DB doc can't leak dosage/notes)
+
+**Full suite**: 106/106 pass (29 1-A + 77 1-B). Lint clean (Python + JSX).
+
+**Out of scope (deferred)**: "Apply barn-wide owner visibility template" — approved as a future gated phase (likely HorseOps-1B.1) but explicitly NOT in this Round-1 package.
+
+**Delta package**: re-packaged at `/app/phase_horseops_1b_changes.zip`.
+
+
+
 ### Phase HorseOps-1B — Care Ledger Manager Edit Flows ✅ (Feb 2026, awaiting Codex review)
 Manager/admin edit surface layered on top of the locked 1-A read endpoint. **Privacy stays strictly backend-authoritative — manager writes never expand the owner view beyond the policy allowlist intersected with backend-known-safe keys and the forbidden-key set.**
 

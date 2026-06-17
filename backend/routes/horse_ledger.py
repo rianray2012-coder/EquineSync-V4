@@ -67,6 +67,133 @@ _OWNER_VISIBLE_SECTIONS = frozenset({
 })
 
 
+# ---------------------------------------------------------------------
+# Owner-safe key registry (Phase 1-B Round-1 fix).
+#
+# The READ path is backend-authoritative. The effective owner allowlist
+# per section is computed as:
+#     (policy_allowlist ∩ _OWNER_SAFE_KEYS[section]) ∪ _DEFAULT_OWNER_POLICY[section]
+#         minus  any FORBIDDEN owner key (incl. underscore-prefixed)
+#
+# `_OWNER_SAFE_KEYS` is the *universe* of keys a manager could ever
+# expose to an owner for a given section. Anything not in this set is
+# treated as staff-only on read, regardless of what the policy doc
+# says. This is defense-in-depth: even a stale or tampered policy doc
+# cannot surface keys the registry doesn't bless.
+#
+# `_DEFAULT_OWNER_POLICY` is the conservative fail-closed default
+# applied when no policy doc exists for the horse.
+# ---------------------------------------------------------------------
+_OWNER_SAFE_KEYS: Dict[str, frozenset] = {
+    "feeding": frozenset({
+        "grain_feed_type", "schedule", "supplements",
+        "amount_value", "amount_unit",
+    }),
+    "hay_access": frozenset({
+        "access_type", "hay_type", "quantity_per_feeding",
+        "quantity_value", "quantity_unit",
+    }),
+    "turnout": frozenset({
+        "schedule", "pasture_paddock_assignment", "turnout_group",
+        "buddies", "required_apparel",
+    }),
+    "riding_training": frozenset({
+        "discipline", "current_level", "competition_goals",
+        "goals_short_term", "goals_long_term",
+    }),
+    "equipment": frozenset({"category", "label"}),
+    # Sections explicitly NOT exposable to owners under any policy:
+    #   stall_bedding, handling_behavior, service_providers
+}
+
+_DEFAULT_OWNER_POLICY: Dict[str, frozenset] = {
+    "feeding":         frozenset({"grain_feed_type", "schedule", "supplements"}),
+    "hay_access":      frozenset({"access_type", "hay_type", "quantity_per_feeding"}),
+    "turnout":         frozenset({"schedule", "pasture_paddock_assignment", "turnout_group"}),
+    "riding_training": frozenset({"discipline", "current_level", "competition_goals"}),
+    "equipment":       frozenset({"category", "label"}),
+}
+
+
+def _effective_owner_keys(section: str,
+                          policy_doc: Optional[Dict[str, Any]]) -> set:
+    """Return the effective owner-visible key set for a section.
+
+    Intersects the policy's allowlist with the backend safe-key
+    registry. If the policy doc is missing OR has no entry for this
+    section, the conservative default is used (fail-closed)."""
+    safe = _OWNER_SAFE_KEYS.get(section, frozenset())
+    if not safe:
+        return set()
+    default = _DEFAULT_OWNER_POLICY.get(section, frozenset())
+    if policy_doc is None:
+        return set(default)
+    sections = (policy_doc or {}).get("sections") or {}
+    spec = sections.get(section)
+    if not isinstance(spec, dict):
+        return set(default)
+    allow_raw = spec.get("allowlist")
+    if not isinstance(allow_raw, list):
+        return set(default)
+    # Filter to safe keys AND drop underscore-prefixed / non-strings.
+    cleaned = {k for k in allow_raw if isinstance(k, str) and not k.startswith("_")}
+    return cleaned & safe
+
+
+def _project_supplements(supplements: Any) -> List[Dict[str, Any]]:
+    """Owner-safe supplement projection: name-only, no dosage/notes."""
+    if not isinstance(supplements, list):
+        return []
+    out = []
+    for s in supplements:
+        if isinstance(s, dict) and s.get("name"):
+            out.append({"name": s["name"]})
+        elif isinstance(s, str):
+            out.append({"name": s})
+    return out
+
+
+def _project_schedule(schedule: Any) -> List[Any]:
+    """Owner-safe schedule projection: list of strings/dicts retained
+    as-is, but bounded to primitives so nested staff notes can't ride
+    along."""
+    if not isinstance(schedule, list):
+        return []
+    out = []
+    for item in schedule:
+        if isinstance(item, (str, int, float, bool)):
+            out.append(item)
+        elif isinstance(item, dict):
+            # Only carry primitive keys; reject nested dicts.
+            out.append({k: v for k, v in item.items()
+                        if isinstance(v, (str, int, float, bool))})
+    return out
+
+
+def _project_owner_safe(section: str,
+                        structured: Optional[Dict[str, Any]],
+                        policy_keys: Optional[set]) -> Optional[Dict[str, Any]]:
+    """Project a structured payload to the owner-safe view for a
+    section using the effective key set."""
+    if not structured:
+        return None
+    keys = policy_keys if policy_keys is not None else set(_DEFAULT_OWNER_POLICY.get(section, set()))
+    if not keys:
+        return None
+    out: Dict[str, Any] = {}
+    for k in keys:
+        if k not in structured:
+            continue
+        v = structured[k]
+        if k == "supplements":
+            out[k] = _project_supplements(v)
+        elif k == "schedule":
+            out[k] = _project_schedule(v)
+        else:
+            out[k] = v
+    return out or None
+
+
 def _scrub_strings(obj: Any) -> Any:
     """Recursively run `_redact_stripe_in_string` on every string in
     nested dicts/lists. Reuses the Admin-4b R1-B primitive so a
@@ -137,7 +264,8 @@ def _build_identity(horse: Dict[str, Any], owner_view: bool) -> Dict[str, Any]:
 
 
 def _build_feeding(horse: Dict[str, Any], profile: Optional[Dict[str, Any]],
-                   owner_view: bool) -> Optional[Dict[str, Any]]:
+                   owner_view: bool,
+                   policy_keys: Optional[set] = None) -> Optional[Dict[str, Any]]:
     structured = (profile or {}).get("feeding")
     legacy_str = horse.get("feed_plan")
     envelope = _legacy_envelope(structured, legacy_str)
@@ -147,43 +275,33 @@ def _build_feeding(horse: Dict[str, Any], profile: Optional[Dict[str, Any]],
         return envelope
     # Owner-filtered feeding.
     #
-    # Codex round-1 P1: the legacy `horses.feed_plan` field is FREE TEXT
-    # and may contain prep instructions, soaking details, medication
-    # notes, or staff-only handling warnings. It must NOT be surfaced
-    # raw to owners. The owner view exposes ONLY a conservative
-    # structured projection: feed type + schedule + supplement names.
-    # If no structured profile exists yet, the owner sees `feeding: null`
-    # — they will see real feeding info once a manager populates the
-    # structured profile in 1-B.
-    if not structured:
+    # The legacy `horses.feed_plan` field is FREE TEXT and may contain
+    # prep instructions, soaking details, medication notes, or staff-
+    # only handling warnings. It is NEVER surfaced raw to owners. The
+    # owner view exposes ONLY the keys in the effective policy
+    # intersection (policy_keys ∩ _OWNER_SAFE_KEYS["feeding"]).
+    safe_struct = _project_owner_safe("feeding", structured, policy_keys)
+    if safe_struct is None:
         return None
-    safe_struct = {
-        "grain_feed_type": structured.get("grain_feed_type"),
-        "schedule":        structured.get("schedule") or [],
-        "supplements":     [
-            {"name": s.get("name")} for s in (structured.get("supplements") or [])
-            if isinstance(s, dict)
-        ],
-    }
-    # legacy is intentionally DROPPED in the owner envelope to avoid
-    # surfacing free-text staff notes.
+    # legacy is intentionally DROPPED in the owner envelope.
     return {"structured": safe_struct, "legacy": None}
 
 
 def _build_hay_access(profile: Optional[Dict[str, Any]],
-                      owner_view: bool) -> Optional[Dict[str, Any]]:
+                      owner_view: bool,
+                      policy_keys: Optional[set] = None) -> Optional[Dict[str, Any]]:
     structured = (profile or {}).get("hay_access")
     if not structured:
         return None
     if not owner_view:
         return {"structured": structured, "legacy": None}
-    # Owner-filtered: type + frequency surface; restriction flags,
-    # staff-only warnings, and all hay-net operational state hidden.
-    safe = {
-        "access_type":           structured.get("access_type"),
-        "hay_type":              structured.get("hay_type"),
-        "quantity_per_feeding":  structured.get("quantity_per_feeding"),
-    }
+    # Owner-filtered: only keys in the effective allowlist surface.
+    # `restriction_flags`, `staff_only_warnings`, and all hay-net
+    # operational state are excluded by the FORBIDDEN registry and by
+    # not being in `_OWNER_SAFE_KEYS["hay_access"]`.
+    safe = _project_owner_safe("hay_access", structured, policy_keys)
+    if safe is None:
+        return None
     return {"structured": safe, "legacy": None}
 
 
@@ -199,7 +317,8 @@ def _build_stall_bedding(profile: Optional[Dict[str, Any]],
 
 
 def _build_turnout(horse: Dict[str, Any], profile: Optional[Dict[str, Any]],
-                   owner_view: bool) -> Optional[Dict[str, Any]]:
+                   owner_view: bool,
+                   policy_keys: Optional[set] = None) -> Optional[Dict[str, Any]]:
     structured = (profile or {}).get("turnout")
     legacy_group = horse.get("turnout_group")
     envelope = _legacy_envelope(structured, legacy_group)
@@ -207,15 +326,10 @@ def _build_turnout(horse: Dict[str, Any], profile: Optional[Dict[str, Any]],
         return None
     if not owner_view:
         return envelope
-    # Owner-filtered: schedule + group only; avoid list / injury risk
-    # notes / catching notes hidden.
-    safe_struct: Optional[Dict[str, Any]] = None
-    if structured:
-        safe_struct = {
-            "schedule":                  structured.get("schedule") or [],
-            "pasture_paddock_assignment": structured.get("pasture_paddock_assignment"),
-            "turnout_group":             structured.get("turnout_group"),
-        }
+    # Owner-filtered. Avoid list / injury risk notes / catching notes
+    # are forbidden via the FORBIDDEN registry and dropped automatically
+    # by `_project_owner_safe`.
+    safe_struct = _project_owner_safe("turnout", structured, policy_keys) if structured else None
     return _legacy_envelope(safe_struct, legacy_group)
 
 
@@ -232,10 +346,29 @@ def _build_handling_behavior(horse: Dict[str, Any],
 
 def _build_riding_training(horse: Dict[str, Any],
                            profile: Optional[Dict[str, Any]],
-                           owner_view: bool) -> Optional[Dict[str, Any]]:
+                           owner_view: bool,
+                           policy_keys: Optional[set] = None) -> Optional[Dict[str, Any]]:
+    """Riding & Training. Phase 1-B introduced manager-writable
+    operational fields (`trainer_notes`, `exercise_restrictions`,
+    `weekly_work_plan`, `rider_compatibility_notes`,
+    `conditioning_plan`, `lesson_schedule`) that MUST NOT leak to
+    owners. Staff view returns the full structured envelope; owner view
+    is projected to the intersection of `policy_keys` and the section's
+    `_OWNER_SAFE_KEYS` set, with the staff-only fields excluded.
+
+    Legacy `horses.training_goals` is intentionally dropped in the
+    owner view to avoid surfacing free-text staff annotations.
+    """
     structured = (profile or {}).get("riding_training")
     legacy_goals = horse.get("training_goals")
-    return _legacy_envelope(structured, legacy_goals)
+    if not owner_view:
+        return _legacy_envelope(structured, legacy_goals)
+    safe_struct = _project_owner_safe(
+        "riding_training", structured, policy_keys,
+    ) if structured else None
+    if not safe_struct:
+        return None
+    return {"structured": safe_struct, "legacy": None}
 
 
 def _build_equipment_summary(equipment_rows: List[Dict[str, Any]],
@@ -349,6 +482,16 @@ def build_router(*, db, get_current_user) -> APIRouter:
         profile = await db.horse_care_profiles.find_one(
             {"horse_id": horse_id}, {"_id": 0},
         )
+        # Owner-visibility policy doc is loaded ONCE on every read so
+        # the response always reflects the current policy state. Used
+        # only to compute owner-visible key sets — staff reads bypass.
+        policy_doc = None
+        if owner_view:
+            policy_doc = await db.horse_owner_visibility_policy.find_one(
+                {"horse_id": horse_id}, {"_id": 0},
+            )
+        # Pre-compute effective owner key sets per section.
+        eff = (lambda s: _effective_owner_keys(s, policy_doc)) if owner_view else (lambda s: None)
         # In 1-A, horse_equipment, service_providers, daily_check_logs,
         # alerts, and audit are queryable but empty by definition (no
         # 1-A writer exists). We still issue the reads so the response
@@ -399,12 +542,12 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "section_capabilities_version": "1a",
 
             "identity":         _build_identity(horse, owner_view),
-            "feeding":          _build_feeding(horse, profile, owner_view),
-            "hay_access":       _build_hay_access(profile, owner_view),
+            "feeding":          _build_feeding(horse, profile, owner_view, eff("feeding")),
+            "hay_access":       _build_hay_access(profile, owner_view, eff("hay_access")),
             "stall_bedding":    _build_stall_bedding(profile, owner_view),
-            "turnout":          _build_turnout(horse, profile, owner_view),
+            "turnout":          _build_turnout(horse, profile, owner_view, eff("turnout")),
             "handling_behavior": _build_handling_behavior(horse, profile, owner_view),
-            "riding_training":  _build_riding_training(horse, profile, owner_view),
+            "riding_training":  _build_riding_training(horse, profile, owner_view, eff("riding_training")),
 
             "equipment":        _build_equipment_summary(equipment_rows, owner_view),
             "service_providers": [] if owner_view else list(provider_rows),
@@ -528,12 +671,25 @@ def build_router(*, db, get_current_user) -> APIRouter:
     _FORBIDDEN_OWNER_KEYS = {
         "feeding": {"legacy", "soaking", "soaking.*", "prep_instructions",
                     "staff_only_warnings", "sensitivities", "meds_with_feed",
-                    "meds_with_feed.*"},
+                    "meds_with_feed.*", "horse_preferences",
+                    "special_handling_notes", "water_check_required",
+                    "water_source"},
         "hay_access": {"restriction_flags", "staff_only_warnings",
-                       "hay_nets", "hay_nets.*"},
+                       "hay_nets", "hay_nets.*", "allergy_restriction_notes",
+                       "exception_notes", "slow_feeder_used",
+                       "source_location", "target_level"},
         "stall_bedding": {"*"},
         "handling_behavior": {"*"},
-        "turnout": {"avoid", "injury_risk_notes", "catching_notes"},
+        "turnout": {"avoid", "injury_risk_notes", "catching_notes",
+                    "grass_restrictions", "mud_restrictions",
+                    "weather_rules"},
+        # Round-1 P0 fix: riding_training gained writable operational
+        # fields in 1-B. These MUST NOT leak to owners — neither
+        # through a policy expansion nor through a direct projection.
+        "riding_training": {"trainer_notes", "exercise_restrictions",
+                            "weekly_work_plan", "rider_compatibility_notes",
+                            "conditioning_plan", "lesson_schedule",
+                            "ride_schedule"},
         "identity": {"microchip_number", "tattoo_number", "registry_numbers",
                      "required_staff_experience_level",
                      "emergency_contact_ids", "document_ids",
@@ -562,7 +718,55 @@ def build_router(*, db, get_current_user) -> APIRouter:
         return False
 
     def _hay_nets_ok(value):
-        return isinstance(value, list) and len(value) <= 6
+        """Hay-nets must be a list of dicts (≤6). Each item must be an
+        object so we don't accept random scalars masquerading as nets."""
+        if not isinstance(value, list) or len(value) > 6:
+            return False
+        return all(isinstance(item, dict) for item in value)
+
+    def _supplements_ok(value):
+        """Supplements must be a list of objects, each with a string
+        `name`. Free-text strings, nested arrays, or non-dict items
+        are rejected so owner projection can never accidentally pull
+        a staff note into the supplement payload."""
+        if not isinstance(value, list):
+            return False
+        for item in value:
+            if not isinstance(item, dict):
+                return False
+            if "name" in item and not isinstance(item["name"], str):
+                return False
+        return True
+
+    def _schedule_ok(value):
+        """Schedule must be a list of primitives (str/number/bool) or
+        primitive-only dicts. No deeply nested structures so the
+        owner-safe projection cannot carry over a staff note."""
+        if not isinstance(value, list):
+            return False
+        for item in value:
+            if isinstance(item, (str, int, float, bool)):
+                continue
+            if isinstance(item, dict):
+                if not all(isinstance(v, (str, int, float, bool))
+                           for v in item.values()):
+                    return False
+                continue
+            return False
+        return True
+
+    _NESTED_VALIDATORS: Dict[str, Dict[str, Any]] = {
+        "feeding": {
+            "supplements": _supplements_ok,
+            "schedule":    _schedule_ok,
+        },
+        "hay_access": {
+            "hay_nets": _hay_nets_ok,
+        },
+        "turnout": {
+            "schedule": _schedule_ok,
+        },
+    }
 
     async def _load_horse_or_404(horse_id, user):
         horse = await db.horses.find_one(
@@ -596,6 +800,14 @@ def build_router(*, db, get_current_user) -> APIRouter:
             if section == "hay_access" and "hay_nets" in section_body:
                 if not _hay_nets_ok(section_body["hay_nets"]):
                     raise HTTPException(422, "Max 6 hay nets per horse.")
+            # Nested validation pass — reject obvious shape violations
+            # so the read path can safely project structured fields.
+            for nested_key, validator in _NESTED_VALIDATORS.get(section, {}).items():
+                if nested_key in section_body and not validator(section_body[nested_key]):
+                    raise HTTPException(
+                        422,
+                        f"Invalid shape for {section}.{nested_key}.",
+                    )
             updates[section] = section_body
             for k in section_body:
                 changed_paths.append(f"{section}.{k}")
