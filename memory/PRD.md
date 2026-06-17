@@ -20,6 +20,38 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1B — Care Ledger Manager Edit Flows ✅ (Feb 2026, awaiting Codex review)
+Manager/admin edit surface layered on top of the locked 1-A read endpoint. **Privacy stays strictly backend-authoritative — manager writes never expand the owner view beyond the policy allowlist intersected with backend-known-safe keys and the forbidden-key set.**
+
+**Backend (`/app/backend/routes/horse_ledger.py`, 822 lines):**
+- `PATCH /horse-ledger/{horse_id}/care-profile` — section-scoped (feeding · hay_access · stall_bedding · turnout · handling_behavior · riding_training). 422 on unknown section or key; hay_nets capped at 6. Upserts into `horse_care_profiles`, single row per horse.
+- `PUT  /horse-ledger/{horse_id}/owner-visibility-policy` — replaces allowlists per section into `horse_owner_visibility_policy`. Rejects any forbidden owner key (`stall_bedding.*`, `handling_behavior.*`, `service_providers.*`, `identity.microchip_number`, `health.wellness_latest.staff_note`, underscore-prefixed, etc.). `policy_version` $inc on every write.
+- `POST/PATCH /equipment` — write to `horse_equipment`; PATCH supports status active|retired.
+- `POST /service-providers` — barn-scoped catalog row in `service_providers`.
+- `POST/PATCH /provider-assignments` — links provider→horse in `horse_provider_assignments`; cross-barn provider id → 404.
+- **Mutator gate**: only `admin` or `barn_manager` in the horse's barn. Owners → 403. Other staff roles → 403. Cross-barn → 404.
+- **Audit emission** (`horse_ledger_audit`): one row per mutated section with `{horse_id, barn_id, ts, actor_user_id, actor_role, section, action, field_paths[], sensitivity, owner_visible_eligible}`. **No before/after, no raw values, no operational notes.** No audit row on 403/denial.
+
+**Frontend (`/app/frontend/src/pages/CareLedgerTab.jsx`, 920 lines):**
+- Edit affordances visible only when `user.role ∈ {admin, barn_manager}` AND view is not owner. Owners see the 1-A read view unchanged.
+- 9 right-side slide-in drawers (matching QuickAddSheet vocabulary): Feeding · Hay & Hay Nets · Stall & Bedding · Turnout · Behavior & Handling · Riding & Training · Equipment (add + edit/retire) · Service Provider (add) · Provider Assignment (add/edit) · Owner Visibility Policy.
+- Visibility-policy drawer exposes only known-safe keys per section; staff-only sections (`stall_bedding`, `handling_behavior`, `service_providers`) are intentionally absent from the picker — backend still rejects them as defense in depth.
+
+**Tests**: `/app/backend/tests/test_horse_ledger_1b.py` — **57/57 pytest pass** + 29/29 1-A regressions still green (86/86 combined).
+- 12 care-profile cases (whitelist, role gating, cross-barn 404, hay-net cap, disabled-facility 403)
+- 7 owner-visibility cases (defaults, PUT, forbidden expansion via parametrize, tampered-doc fail-closed)
+- 4 equipment cases (POST/PATCH retire/cross-barn/422)
+- 6 provider + assignment cases (cross-barn provider 404)
+- 5 audit cases (rows emitted, no raw values, no 403 audit rows, sensitivity classification)
+- 4 privacy regression cases (manager edits don't expand owner view, legacy feed_plan still hidden, query-string can't force staff view, wellness allowlist intact)
+- 3 adjacent-phase invariants (Phase 9/15/Admin Portal locked routes byte-identical)
+
+**Delta package**: `/app/phase_horseops_1b_changes.zip` (76 KB) — `horse_ledger.py`, `test_horse_ledger_1b.py`, `CareLedgerTab.jsx`, `memory/PRD.md`.
+
+**Next**: stop for Codex review. After 1-B locks → Phase HorseOps-1C (staff daily checks for hay nets, bedding, water, feed via the existing `tasks` engine).
+
+
+
 ## 🆕 Governance & Production-Readiness Program (May 30 2026)
 The founder-beta "freeze" was lifted. The user supplied a full **23-document governance set** that reframes EquineSync as a phased production-readiness program. **The authoritative source of truth is now `/app/docs/` (project-root `/docs`)** — start at `/app/docs/MASTER_INDEX.md`. The `/app/memory/*` files are retained as historical founder-beta artifacts.
 
