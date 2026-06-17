@@ -1,7 +1,7 @@
 # Phase Admin-4b — Facility Edits + Soft-Disable + Tenancy Enforcement
 
-**Status:** Codex Round-1 fixes applied — re-submitted for review
-**Date:** Feb 27 2026  (round-1 fixes: Feb 28 2026).
+**Status:** ✅ Codex-approved & locked (Feb 28 2026)
+**Date:** Feb 27 2026  (round-1 fixes + lock: Feb 28 2026).
 **Scope:** Backend (FastAPI) + Admin Portal frontend + tests only.
 
 ## Codex Round-1 fix highlights (Feb 28 2026)
@@ -130,9 +130,15 @@ touched by either endpoint.
 `core/tenancy.make_require_active_facility(db, get_current_user)` returns a
 FastAPI dependency that, after `get_current_user` runs:
 
-1. **Bypasses** the gate when the user has ANY `platform_role` value
-   (platform admins must keep operating on disabled facilities through
-   the Admin Portal).
+1. **Bypasses** the gate when the user has a KNOWN `platform_role`
+   value (i.e. one of `core.permissions.PLATFORM_ROLES`:
+   `super_admin`, `platform_admin`, `support_admin`, `billing_admin`,
+   `read_only_auditor`). Unknown values (e.g. an injected
+   `platform_role="hacker_admin"`) fall through to the facility gate
+   just like a barn-scoped user — see Codex round-1 R1-C. Platform
+   admins must keep operating on disabled facilities through the
+   Admin Portal, which is why the bypass exists for the canonical
+   set.
 2. Otherwise reads ONE projected field (`status`) from `barns` for the
    user's resolved `barn_id`.
 3. Raises a generic `403 {"detail": "Facility unavailable"}` if the

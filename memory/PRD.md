@@ -1890,6 +1890,24 @@ or Phase 15 logic changes.
 
 **Re-packaged:** `/app/phase_admin_4b_changes.zip` (round-1).
 
+### Phase Admin-4b — Codex Approval & Lock (Feb 28 2026)
+
+Codex confirmed no blocking findings on the round-1 zip. Admin-4b is
+**approved and locked** with one optional P2 wording cleanup applied
+alongside the lock: the README's tenancy-enforcement section originally
+read "Bypasses the gate when the user has ANY `platform_role` value"
+(matching the pre-fix behaviour). It now reads "Bypasses the gate
+when the user has a KNOWN `platform_role` value (i.e. one of
+`core.permissions.PLATFORM_ROLES`)" so the documentation matches the
+round-1 code and tests. No behavioural change.
+
+Final scoreboard for Admin-4b:
+- 44/44 Admin-4b tests green.
+- 117/117 Admin-portal regression unchanged.
+- 0 frontend / landing-page changes.
+- 14 files in the lock zip: 6 backend modules, 4 test files, 2
+  frontend files, PRD, and the phase README.
+
 
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
@@ -1915,4 +1933,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7A.2c | (Optional) portal.py → orchestrator.py rename              | ⏸ Gated (deferred per founder) |
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
 | Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex-approved & locked |
-| Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Codex round-1 fixes applied — re-submitted for review |
+| Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Codex-approved & locked |
