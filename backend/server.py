@@ -82,6 +82,7 @@ from routes.audit import build_router as build_audit_router
 from routes.owner_updates import build_router as build_owner_updates_router
 from routes.owner import build_router as build_owner_router
 from routes.backlog import build_router as build_backlog_router
+from routes.horse_ledger import build_router as build_horse_ledger_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -330,6 +331,17 @@ api_router.include_router(build_backlog_router(
     get_current_user=get_current_user,
     new_id=new_id,
 ), dependencies=PRODUCT_FACILITY_DEPS)
+
+# Phase HorseOps-1A — composed read-only Care Ledger endpoint.
+# The line below is the Admin-4b enforcement gate for this surface.
+# A disabled-facility member calling /api/horse-ledger/{horse_id} hits
+# 403 "Facility unavailable" before any controller code runs. Removing
+# `dependencies=PRODUCT_FACILITY_DEPS` would silently disable the gate —
+# `test_get_ledger_disabled_facility_gate_applies` guards against that.
+api_router.include_router(
+    build_horse_ledger_router(db=db, get_current_user=get_current_user),
+    dependencies=PRODUCT_FACILITY_DEPS,
+)
 
 app.include_router(api_router)
 

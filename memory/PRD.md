@@ -1909,6 +1909,56 @@ Final scoreboard for Admin-4b:
   frontend files, PRD, and the phase README.
 
 
+## 🐎 Equine·Sync HorseOps — Phase HorseOps-1A ✅ (Feb 28 2026)
+
+**Care Ledger — read-only composition + data foundations.** Backend
+read-only endpoint + Horse Detail tab + 8 new collections (indexes
+only; zero documents written) + 27 focused tests. No edits, no
+workers, no checklist, no alerts, no provider scheduling — those land
+in 1-B..1-E.
+
+**Ships:**
+- `backend/routes/horse_ledger.py` *(NEW)* — `GET /api/horse-ledger/{horse_id}`.
+  Role-driven fail-closed shape. `horse_owner` always gets owner-filtered;
+  query string cannot escalate. Cross-barn → 404 (no platform exemption).
+- `backend/core/lifespan.py` — 15 indexes for the 8 new HorseOps
+  collections (idempotent `create_index`).
+- `backend/server.py` — wires the router with `dependencies=PRODUCT_FACILITY_DEPS`
+  (the Admin-4b gate). HorseOps router added to the applied-strict
+  inventory (19 strict + 2 optional-auth + 7 excluded).
+- `frontend/src/pages/CareLedgerTab.jsx` *(NEW)* + 1-line additive
+  update to `HorseProfile.jsx` to mount it.
+- `backend/tests/test_horse_ledger_1a.py` *(NEW)* — 27 tests covering
+  read shape, barn scoping, Admin-4b enforcement guard, fail-closed
+  owner semantics (Δ1), no-platform-cross-barn (Δ2), no-Stripe-leak,
+  no-billing-keys, no-writes-in-1A (static AST), Phase 9/15/Admin
+  portal untouched, inventory untouched, index existence, zero-doc-
+  write guard.
+
+**Locked decisions encoded:**
+- Compact UI label "**Care Ledger**" (billing-safe); internal docs use
+  "The Horse Ledger". No coin / dollar / receipt / "books" iconography.
+- Legacy `horses` fields (`feed_plan`, `training_goals`, `behavior_flags`,
+  `allergies`, `turnout_group`) preserved and surfaced via the locked
+  `{ structured, legacy }` envelope — never overwritten.
+- Conservative owner-visibility defaults: staff-only warnings, behavior
+  risks, restriction flags, bedding ops, microchip/tattoo, required-
+  staff-experience all default-hidden.
+- Index creation may create empty collections (Mongo side-effect);
+  1-A writes zero documents.
+- Cross-facility platform Ledger inspection deferred to a future Admin
+  Portal surface; not in any 1-A..1-E phase.
+
+**Tests:** HorseOps-1A — **27/27 green**. Admin-4b + Admin-8 + route-
+lock regression — **83/84 passed** (1 transient read-timeout on
+re-run, unrelated). Backend boots clean.
+
+**Packaged:** `/app/phase_horseops_1a_changes.zip` +
+`/app/PHASE_HORSEOPS_1A_README.md`.
+
+**Next:** Codex review of 1-A. **1-B is gated on founder approval of 1-A.**
+
+
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
 billing, audit_logs, support, alerts) still live in `portal.py`.
@@ -1934,3 +1984,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
 | Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex-approved & locked |
 | Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Codex-approved & locked |
+| HorseOps-1A | Care Ledger — read-only composition + 8 new collections + indexes | ✅ Ready for Codex review |

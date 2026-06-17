@@ -173,6 +173,57 @@ def register_lifecycle(app, *, send_nudges):
             if (os.environ.get("APP_ENV") or "development").lower() == "production":
                 raise
 
+        # Phase HorseOps-1A — indexes for the 8 new Ledger collections.
+        # Index creation MAY create empty collections in Mongo as a
+        # side-effect; 1-A writes ZERO documents to any of these. First
+        # writes land in 1-B (profiles, equipment, providers, policy,
+        # audit), 1-C (daily checks), 1-D (alerts).
+        try:
+            await db.horse_care_profiles.create_index("horse_id", unique=True)
+            await db.horse_care_profiles.create_index("barn_id")
+
+            await db.horse_equipment.create_index("horse_id")
+            await db.horse_equipment.create_index([("barn_id", 1), ("category", 1)])
+
+            await db.service_providers.create_index([("barn_id", 1), ("category", 1)])
+
+            await db.horse_provider_assignments.create_index("horse_id")
+            await db.horse_provider_assignments.create_index(
+                [("barn_id", 1), ("next_due_date", 1)]
+            )
+
+            await db.horse_daily_check_logs.create_index(
+                [("horse_id", 1), ("check_time", -1)]
+            )
+            await db.horse_daily_check_logs.create_index(
+                [("barn_id", 1), ("check_type", 1), ("check_time", -1)]
+            )
+
+            await db.horse_ledger_alerts.create_index(
+                [("horse_id", 1), ("opened_at", -1)]
+            )
+            await db.horse_ledger_alerts.create_index(
+                [("barn_id", 1), ("severity", 1), ("closed_at", 1)]
+            )
+
+            await db.horse_owner_visibility_policy.create_index(
+                "horse_id", unique=True,
+            )
+
+            await db.horse_ledger_audit.create_index(
+                [("horse_id", 1), ("ts", -1)]
+            )
+            await db.horse_ledger_audit.create_index(
+                [("barn_id", 1), ("ts", -1)]
+            )
+            await db.horse_ledger_audit.create_index(
+                [("actor_user_id", 1), ("ts", -1)]
+            )
+        except Exception:
+            logger.exception("HorseOps-1A index creation failed (non-fatal in dev)")
+            if (os.environ.get("APP_ENV") or "development").lower() == "production":
+                raise
+
         async def _materialize_loop():
             await asyncio.sleep(60)
             engine_loop = TaskEngine(db, _track)

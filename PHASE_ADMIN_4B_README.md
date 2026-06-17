@@ -151,7 +151,7 @@ caches dependency resolution within a request — the second
 `Depends(get_current_user)` does not re-decode the JWT or re-read the
 user document.
 
-### Router inventory — APPLIED via the strict `require_active_facility` dependency (18)
+### Router inventory — APPLIED via the strict `require_active_facility` dependency (19)
 
 | # | Router (built in `server.py`)             | Why it's covered |
 |---|-------------------------------------------|------------------|
@@ -173,6 +173,7 @@ user document.
 | 16 | `build_owner_updates_router`             | Phase 7A Owner Trust Layer. |
 | 17 | `build_owner_router`                     | Phase 7D-2 owner self-service. |
 | 18 | `build_backlog_router`                   | Backlog foundations. |
+| 19 | `build_horse_ledger_router` *(HorseOps-1A)* | Read-only `GET /api/horse-ledger/{horse_id}`. Composed Care Ledger view. Read-only in 1-A; future sub-phases (1-B..1-E) remain under the same strict gate. |
 
 ### Router inventory — APPLIED via the optional-auth variant (2, **Codex R1-A fix**)
 

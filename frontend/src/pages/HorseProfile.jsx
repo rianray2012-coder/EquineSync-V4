@@ -5,9 +5,10 @@ import { Card, StatusPill } from "../components/Primitives";
 import { ArrowLeft } from "lucide-react";
 import CuratedTimeline from "../components/CuratedTimeline";
 import HorseOwnerUpdates from "../components/HorseOwnerUpdates";
+import CareLedgerTab from "./CareLedgerTab";
 import { useAuth } from "../context/AuthContext";
 
-const BASE_TABS = ["Overview", "Timeline", "Feed", "Training", "Health", "Injuries", "Medications", "Wellness", "Billing", "Owner"];
+const BASE_TABS = ["Overview", "Care Ledger", "Timeline", "Feed", "Training", "Health", "Injuries", "Medications", "Wellness", "Billing", "Owner"];
 
 export default function HorseProfile() {
   const { id } = useParams();
@@ -103,6 +104,7 @@ export default function HorseProfile() {
         </div>
       )}
       {tab === "Medications" && <List items={meds} render={(m) => <Row title={m.name} sub={`${m.dosage} · ${m.frequency} · ${m.route}`} right={m.prescribing_vet} />} />}
+      {tab === "Care Ledger" && <Card><CareLedgerTab horseId={id} /></Card>}
       {tab === "Timeline" && <Card><CuratedTimeline horseId={id} limit={60} ownerView={false} /></Card>}
       {tab === "Health" && <List items={vet} render={(v) => <Row title={v.title} sub={`${fmtDate(v.date)} · ${v.vet_name}`} right={money(v.cost)} />} />}
       {tab === "Injuries" && <List items={injuries} render={(i) => <Row title={i.title} sub={i.description} right={<StatusPill tone={i.status === "resolved" ? "success" : "warning"}>{i.status}</StatusPill>} />} />}
