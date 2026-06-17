@@ -44,7 +44,21 @@ Two Codex findings closed:
 
 
 
-### Phase HorseOps-1C — Staff Daily Checks ✅ (Feb 2026, awaiting Codex review)
+### Phase HorseOps-1C — Staff Daily Checks ✅ **LOCKED** (Feb 2026, Codex approved Round-2)
+Codex re-review approved. Stale `check_time` indexes are dropped idempotently before `checked_at` indexes are created, and payload sections are now tied 1:1 to immutable `check_type` on POST/PATCH. Locked and frozen — no further drift permitted.
+
+**Final state**:
+- 3 endpoints in `routes/horse_ledger.py`: `POST/GET/PATCH /horse-ledger/{id}/daily-checks`.
+- Hybrid mutator gate (staff create; author or manager amend); owners hard-hidden.
+- `task_id` is store-only (does NOT touch task lifecycle); validated against real `task_engine.py` shape (`tenant_id="default"`, `barn_id=<bid>`).
+- `_CHECK_TYPE_PAYLOAD_SECTION` maps each `check_type` to exactly one payload section; cross-section payloads 422.
+- `core/lifespan.py` idempotent migration drops stale `check_time` indexes then creates 4 `checked_at`-aligned indexes (`hdcl_horse_checked_at`, `hdcl_barn_horse_checked_at`, `hdcl_barn_check_type_checked_at`, `hdcl_task_id` sparse).
+- Audit rows emit `field_paths` only; no raw values, no 403 rows.
+- Frontend Daily Checks section + drawer; owner UI unchanged.
+- **Tests**: 73 cases in `test_horse_ledger_1c.py`; Care-Ledger suite **203/203 pass** (29 1-A + 101 1-B + 73 1-C).
+- **Delta package**: `/app/phase_horseops_1c_changes.zip` (final lock package, do not modify).
+
+
 Immutable observation log layered on top of the existing `task_engine.py`. No new scheduler, no new alert worker. Daily checks (`hay_net`, `hay`, `water`, `feed`, `bedding`, `general`) are recorded by any in-barn staff role; amendments are author-only or manager. Owners are hard-hidden — `daily_checks_recent` is never projected to owners and the visibility-policy PUT 422s on the section.
 
 **Backend** — 3 new endpoints in `routes/horse_ledger.py`:
