@@ -197,6 +197,24 @@ def register_lifecycle(app, *, send_nudges):
             # here so the 1-C query shape (recent logs by horse, by
             # barn+type, by task_id) is index-backed from the first
             # write.
+            #
+            # Idempotent migration: existing deployments still carry
+            # the legacy `check_time` indexes from the 1-A plan. Drop
+            # them by name before creating the new set so we don't end
+            # up with stale duplicates pointing at a non-existent
+            # field. `drop_index` raises OperationFailure if the
+            # index doesn't exist — we swallow that path so the
+            # startup remains idempotent across cold and warm boots.
+            _stale_hdcl_indexes = (
+                "horse_id_1_check_time_-1",
+                "barn_id_1_check_type_1_check_time_-1",
+            )
+            for _stale in _stale_hdcl_indexes:
+                try:
+                    await db.horse_daily_check_logs.drop_index(_stale)
+                except Exception:
+                    # Already absent (cold deploy / already migrated).
+                    pass
             await db.horse_daily_check_logs.create_index(
                 [("horse_id", 1), ("checked_at", -1)],
                 name="hdcl_horse_checked_at",

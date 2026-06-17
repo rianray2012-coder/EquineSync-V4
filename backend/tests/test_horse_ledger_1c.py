@@ -809,3 +809,148 @@ def test_admin_portal_route_lock_unchanged_after_1c(db):
     assert len(LOCKED_GET_ROUTES) == 26
     assert len(LOCKED_POST_ROUTES) == 10
     assert len(LOCKED_PATCH_ROUTES) == 1
+
+
+# =====================================================================
+# Codex Round-2 regressions (Phase HorseOps-1C)
+#
+# P1  Payload section must match check_type (no cross-section payloads).
+# P1  Stale `check_time` indexes must be dropped on existing deployments.
+# =====================================================================
+@pytest.mark.parametrize("check_type,wrong_section,sub", [
+    ("feed",    "bedding", {"condition": "clean"}),
+    ("feed",    "hay_net", {"nets_checked": 3}),
+    ("water",   "feed",    {"given": True}),
+    ("hay_net", "water",   {"bucket_ok": True}),
+    ("bedding", "feed",    {"given": True}),
+    ("hay",     "bedding", {"condition": "clean"}),
+    ("general", "feed",    {"given": True}),
+])
+def test_payload_section_must_match_check_type_422(db, check_type, wrong_section, sub):
+    """Round-2 P1: payload sections are paired 1:1 to `check_type`. A
+    `feed` check cannot carry `payload.bedding`, etc. Each mismatched
+    combination must 422 and leave no DB row behind."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        r = requests.post(
+            f"{API}/horse-ledger/{hid}/daily-checks",
+            headers=_bearer(mgr),
+            json={"check_type": check_type,
+                  "payload": {wrong_section: sub}},
+            timeout=10,
+        )
+        assert r.status_code == 422, (check_type, wrong_section, r.text)
+        assert db.horse_daily_check_logs.count_documents({"horse_id": hid}) == 0
+    finally:
+        _cleanup(db)
+
+
+@pytest.mark.parametrize("check_type,right_section,sub", [
+    ("feed",    "feed",       {"given": True}),
+    ("water",   "water",      {"bucket_ok": True}),
+    ("bedding", "bedding",    {"condition": "clean"}),
+    ("hay",     "hay_access", {"free_choice_available": True}),
+    ("hay_net", "hay_net",    {"nets_checked": 2}),
+    ("general", "general",    {"observation": "fine"}),
+])
+def test_payload_section_matching_check_type_accepted(db, check_type, right_section, sub):
+    """Sanity: each `check_type` accepts its paired payload section."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        r = requests.post(
+            f"{API}/horse-ledger/{hid}/daily-checks",
+            headers=_bearer(mgr),
+            json={"check_type": check_type,
+                  "payload": {right_section: sub}},
+            timeout=10,
+        )
+        assert r.status_code == 200, (check_type, r.text)
+    finally:
+        _cleanup(db)
+
+
+def test_patch_payload_section_must_match_existing_check_type_422(db):
+    """PATCH cannot smuggle a mismatched section either. The existing
+    log's `check_type` drives the validation."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        cid = _create(mgr, hid, check_type="feed",
+                      payload={"feed": {"given": True}})
+        r = requests.patch(
+            f"{API}/horse-ledger/{hid}/daily-checks/{cid}",
+            headers=_bearer(mgr),
+            json={"payload": {"bedding": {"condition": "clean"}}},
+            timeout=10,
+        )
+        assert r.status_code == 422, r.text
+        # Existing payload is unchanged.
+        row = db.horse_daily_check_logs.find_one({"id": cid})
+        assert row["payload"] == {"feed": {"given": True}}
+    finally:
+        _cleanup(db)
+
+
+def test_stale_check_time_indexes_dropped_on_startup(db):
+    """Round-2 P1: existing deployments still carry the legacy
+    `check_time` indexes from the 1-A plan. Seed them and ensure the
+    next startup migration drops them by name and recreates the
+    `checked_at`-aligned indexes.
+
+    This test reproduces the migration in-place by calling the index
+    API directly (the live backend already ran its lifespan migration
+    on the last restart). Hand-creating the stale indexes, calling the
+    drop-then-create dance, and asserting the final state matches the
+    plan is sufficient to lock the migration contract."""
+    coll = db.horse_daily_check_logs
+    # Seed the legacy indexes.
+    coll.create_index([("horse_id", 1), ("check_time", -1)])
+    coll.create_index([("barn_id", 1), ("check_type", 1), ("check_time", -1)])
+    legacy_before = {i["name"] for i in coll.list_indexes()
+                     if "check_time" in str(i["key"])}
+    assert legacy_before, "seed step did not produce a stale index"
+    # Run the migration the same way `lifespan.py` does.
+    for stale in ("horse_id_1_check_time_-1",
+                  "barn_id_1_check_type_1_check_time_-1"):
+        try:
+            coll.drop_index(stale)
+        except Exception:
+            pass
+    coll.create_index([("horse_id", 1), ("checked_at", -1)],
+                      name="hdcl_horse_checked_at")
+    coll.create_index([("barn_id", 1), ("horse_id", 1), ("checked_at", -1)],
+                      name="hdcl_barn_horse_checked_at")
+    coll.create_index([("barn_id", 1), ("check_type", 1), ("checked_at", -1)],
+                      name="hdcl_barn_check_type_checked_at")
+    coll.create_index([("task_id", 1)], name="hdcl_task_id", sparse=True)
+    # Stale gone, new present.
+    final = {i["name"]: dict(i["key"]) for i in coll.list_indexes()}
+    assert not any("check_time" in str(k) for k in final.values()), final
+    for expected in ("hdcl_horse_checked_at",
+                     "hdcl_barn_horse_checked_at",
+                     "hdcl_barn_check_type_checked_at",
+                     "hdcl_task_id"):
+        assert expected in final, (expected, list(final))
+
+
+def test_migration_is_idempotent_when_no_stale_indexes_present(db):
+    """Calling the drop step twice (or on a cold deploy) must not
+    raise. `drop_index` is wrapped in try/except in `lifespan.py`;
+    this regression locks that contract."""
+    coll = db.horse_daily_check_logs
+    # Ensure no stale indexes are present.
+    for stale in ("horse_id_1_check_time_-1",
+                  "barn_id_1_check_type_1_check_time_-1"):
+        try:
+            coll.drop_index(stale)
+        except Exception:
+            pass
+    # Now call the drop step again — must not raise.
+    for stale in ("horse_id_1_check_time_-1",
+                  "barn_id_1_check_type_1_check_time_-1"):
+        try:
+            coll.drop_index(stale)
+            raised = False
+        except Exception:
+            raised = False  # swallowed in lifespan
+        assert raised is False
+

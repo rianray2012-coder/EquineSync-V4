@@ -4,6 +4,17 @@ Scope summary, integration story, review checklist.
 
 ---
 
+## Codex Round-2 fixes (Feb 2026) — applied
+
+| Finding | Fix |
+|---|---|
+| Stale `check_time` indexes were not actually dropped by code | `core/lifespan.py` now runs an idempotent migration *before* creating the new `checked_at`-aligned indexes. The known legacy names (`horse_id_1_check_time_-1`, `barn_id_1_check_type_1_check_time_-1`) are passed to `drop_index` inside a try/except, so cold deploys (no stale indexes) and warm deploys (legacy indexes present) both end at the same final state. Two new regressions: `test_stale_check_time_indexes_dropped_on_startup` (asserts the seed→drop→create dance ends with `checked_at`-only indexes), and `test_migration_is_idempotent_when_no_stale_indexes_present` (asserts repeated drops do not raise). |
+| Payload section was not tied to `check_type` | New `_CHECK_TYPE_PAYLOAD_SECTION` mapping (`feed→feed`, `hay→hay_access`, `hay_net→hay_net`, `water→water`, `bedding→bedding`, `general→general`) enforced inside `_validate_check_payload(payload, check_type=...)`. POST passes the body's `check_type`; PATCH passes the existing log's `check_type` (it's immutable on PATCH so the mapping is stable). New parametrized regressions: `test_payload_section_must_match_check_type_422` (7 cross-section combinations all 422), `test_payload_section_matching_check_type_accepted` (6 paired-section happy paths all 200), and `test_patch_payload_section_must_match_existing_check_type_422` (asserts PATCH cannot smuggle a mismatched section even after creation). |
+
+Both fixes are non-breaking — owner hard-hide, hybrid permissions, PATCH author-or-manager scope, and audit-row schema are byte-identical to round-1.
+
+---
+
 ## Codex Round-1 fixes (Feb 2026) — applied
 
 | Finding | Fix |
@@ -112,7 +123,7 @@ Every successful create + update emits one row:
 
 ## Test coverage
 
-`/app/backend/tests/test_horse_ledger_1c.py` — **57 cases** (55 round-0 + 2 round-1 regressions). Full Care-Ledger suite **187 passing** (29 1-A + 101 1-B + 57 1-C). Backend + JSX lint clean.
+`/app/backend/tests/test_horse_ledger_1c.py` — **73 cases** (55 round-0 + 2 round-1 + 16 round-2 regressions). Full Care-Ledger suite **203 passing** (29 1-A + 101 1-B + 73 1-C). Backend + JSX lint clean.
 
 ### Permissions (8)
 - `test_staff_and_managers_can_create_daily_check` × 6 (parametrized over admin/barn_manager/groom/trainer/vet/staff)

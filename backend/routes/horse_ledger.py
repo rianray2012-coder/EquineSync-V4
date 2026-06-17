@@ -1174,17 +1174,41 @@ def build_router(*, db, get_current_user) -> APIRouter:
             if not isinstance(body["checked_at"], str):
                 raise HTTPException(422, "checked_at must be ISO string.")
 
-    def _validate_check_payload(payload, *, check_type_hint=None):
+    # Phase 1-C Round-2: each check_type owns exactly one payload
+    # section. The validator rejects any mismatched section so a
+    # `feed` check cannot carry `payload.bedding`, etc. The mapping
+    # is also enforced on PATCH using the existing log's check_type
+    # (the field is immutable on PATCH, so the mapping is stable).
+    _CHECK_TYPE_PAYLOAD_SECTION = {
+        "feed":    "feed",
+        "hay":     "hay_access",
+        "hay_net": "hay_net",
+        "water":   "water",
+        "bedding": "bedding",
+        "general": "general",
+    }
+
+    def _validate_check_payload(payload, *, check_type):
         """Validate nested payload sections against the subkey
-        whitelist + value enums. payload may be None/empty."""
+        whitelist + value enums. Each `check_type` may only carry
+        its own paired payload section — feed→feed, water→water,
+        bedding→bedding, hay→hay_access, hay_net→hay_net,
+        general→general. payload may be None/empty."""
         if payload is None:
             return
         if not isinstance(payload, dict):
             raise HTTPException(422, "payload must be an object.")
+        expected_section = _CHECK_TYPE_PAYLOAD_SECTION.get(check_type)
         for section, section_body in payload.items():
             allowed = _CHECK_PAYLOAD_SUBKEYS.get(section)
             if allowed is None:
                 raise HTTPException(422, f"Unknown payload section: {section!r}")
+            if expected_section is not None and section != expected_section:
+                raise HTTPException(
+                    422,
+                    f"payload.{section} not allowed for check_type {check_type!r} "
+                    f"(expected payload.{expected_section}).",
+                )
             if not isinstance(section_body, dict):
                 raise HTTPException(422, f"payload.{section} must be an object.")
             bad = [k for k in section_body if k not in allowed]
@@ -1224,7 +1248,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         horse = await _load_horse_or_404(horse_id, user)
         _require_check_creator(user, horse)
         _validate_check_body(body, is_patch=False)
-        _validate_check_payload(body.get("payload"))
+        _validate_check_payload(body.get("payload"), check_type=body["check_type"])
         # Optional task linkage — must be a task in the same barn.
         # Real tasks (materialized by `task_engine.py`) carry
         # `tenant_id="default"` and `barn_id=<barn_id>`. We match on
@@ -1301,7 +1325,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
             raise HTTPException(404, "Daily check not found.")
         _require_check_amender(user, horse, existing)
         _validate_check_body(body, is_patch=True)
-        _validate_check_payload(body.get("payload"))
+        # PATCH cannot change check_type, so the existing row's type
+        # determines which payload section is allowed.
+        _validate_check_payload(body.get("payload"),
+                                check_type=existing.get("check_type"))
         updates: Dict[str, Any] = {}
         for k in ("status", "notes"):
             if k in body:

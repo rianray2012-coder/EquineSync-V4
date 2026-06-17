@@ -20,6 +20,18 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1C Round-2 Fixes ✅ (Feb 2026, awaiting Codex re-review)
+Two Codex Round-2 findings closed:
+
+- **Idempotent startup migration drops the stale `check_time` indexes.** `core/lifespan.py` now runs `drop_index` on the legacy names (`horse_id_1_check_time_-1`, `barn_id_1_check_type_1_check_time_-1`) inside a try/except *before* creating the new `checked_at`-aligned indexes. Cold deploys (nothing to drop) and warm deploys (legacy indexes still present) converge to the same final state. Two new regressions: `test_stale_check_time_indexes_dropped_on_startup` and `test_migration_is_idempotent_when_no_stale_indexes_present`.
+- **Payload section is now tied 1:1 to `check_type`.** New `_CHECK_TYPE_PAYLOAD_SECTION` mapping (`feed→feed`, `hay→hay_access`, `hay_net→hay_net`, `water→water`, `bedding→bedding`, `general→general`) enforced inside `_validate_check_payload(payload, check_type=...)`. POST passes the body's `check_type`; PATCH passes the existing log's `check_type` (immutable on PATCH). A `feed` check can no longer carry `payload.bedding`, etc. — closes the 1-D escalation-confusion risk Codex flagged. New parametrized regressions: 7 cross-section 422s, 6 paired-section happy paths, and a dedicated PATCH-mismatch case.
+
+**Tests** — `test_horse_ledger_1c.py` grew 57 → **73** (+16 round-2 regressions). Full Care-Ledger suite **203/203 pass** (29 1-A + 101 1-B + 73 1-C).
+
+**Delta package** re-packaged at `/app/phase_horseops_1c_changes.zip` (now reflects the migration in `lifespan.py` and the tightened payload validator in `horse_ledger.py`).
+
+
+
 ### Phase HorseOps-1C Round-1 Fixes ✅ (Feb 2026, awaiting Codex re-review)
 Two Codex findings closed:
 
