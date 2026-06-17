@@ -881,3 +881,286 @@ def test_admin_portal_route_lock_unchanged_after_1d(db):
     assert len(LOCKED_GET_ROUTES) == 26
     assert len(LOCKED_POST_ROUTES) == 10
     assert len(LOCKED_PATCH_ROUTES) == 1
+
+
+# =====================================================================
+# Codex Round-1 regressions (Phase HorseOps-1D)
+#
+# B1  `next_escalation_at` mutation must be manager-only AND emit an
+#     event + audit row (no more silent writes).
+# B2  Severity sort uses explicit rank, not lexicographic order.
+# B3  Same-source PATCH amend must update/upgrade the existing alert
+#     when the amended check becomes more severe (still no duplicate
+#     row, no occurrence_count bump).
+# =====================================================================
+def test_staff_cannot_set_next_escalation_at(db):
+    """Round-1 B1: only admin/barn_manager may set next_escalation_at."""
+    bid = _make_barn(db); hid = _make_horse(db, bid)
+    mgr = _mgr(db, bid); g = _groom(db, bid)
+    try:
+        a = _mint_alert(db, bid, hid, mgr)
+        r = requests.patch(
+            f"{API}/horse-ledger/{hid}/alerts/{a['id']}",
+            headers=_bearer(g),
+            json={"next_escalation_at": "2026-12-01T00:00:00+00:00"},
+            timeout=10,
+        )
+        assert r.status_code == 403, r.text
+        # Field unchanged.
+        cur = db.horse_ledger_alerts.find_one({"id": a["id"]})
+        assert cur.get("next_escalation_at") is None
+        # No audit row emitted on the 403.
+        n = db.horse_ledger_audit.count_documents(
+            {"horse_id": hid, "section": "alerts"})
+        assert n == 0
+    finally:
+        _cleanup(db)
+
+
+def test_manager_setting_next_escalation_at_emits_event_and_audit(db):
+    """Round-1 B1: when a manager sets next_escalation_at WITHOUT a
+    status transition, an `escalation_scheduled` alert_event AND an
+    audit row must be emitted so the change is visible."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        a = _mint_alert(db, bid, hid, mgr)
+        # Wipe any prior audit rows from the mint side effect
+        # (there shouldn't be any for alerts, but be defensive).
+        db.horse_ledger_audit.delete_many({"horse_id": hid, "section": "alerts"})
+        ts = "2026-12-01T00:00:00+00:00"
+        r = requests.patch(
+            f"{API}/horse-ledger/{hid}/alerts/{a['id']}",
+            headers=_bearer(mgr),
+            json={"next_escalation_at": ts}, timeout=10,
+        )
+        assert r.status_code == 200, r.text
+        cur = db.horse_ledger_alerts.find_one({"id": a["id"]})
+        assert cur["next_escalation_at"] == ts
+        # Event emitted.
+        evs = list(db.horse_ledger_alert_events.find(
+            {"alert_id": a["id"], "event_type": "escalation_scheduled"}))
+        assert len(evs) == 1, evs
+        # Audit row emitted with field_paths only.
+        audit = db.horse_ledger_audit.find_one(
+            {"horse_id": hid, "section": "alerts",
+             "action": "escalation_scheduled"})
+        assert audit is not None
+        assert "next_escalation_at" in audit["field_paths"]
+        # Raw timestamp must NOT be in the audit doc.
+        assert ts not in str(audit)
+    finally:
+        _cleanup(db)
+
+
+def test_manager_setting_next_escalation_at_with_close_does_not_double_event(db):
+    """Round-1 B1: when the same PATCH closes AND sets escalation, only
+    one event is minted (the `closed` transition wins; escalation rides
+    along in field_paths)."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        a = _mint_alert(db, bid, hid, mgr)
+        ts = "2027-01-01T00:00:00+00:00"
+        r = requests.patch(
+            f"{API}/horse-ledger/{hid}/alerts/{a['id']}",
+            headers=_bearer(mgr),
+            json={"status": "closed", "next_escalation_at": ts}, timeout=10,
+        )
+        assert r.status_code == 200, r.text
+        # Exactly one new event past the original `opened`.
+        non_open = list(db.horse_ledger_alert_events.find(
+            {"alert_id": a["id"], "event_type": {"$ne": "opened"}}))
+        assert len(non_open) == 1
+        assert non_open[0]["event_type"] == "closed"
+    finally:
+        _cleanup(db)
+
+
+# ---------- Round-1 B2: severity rank ordering ----------
+def test_alerts_list_sorted_by_explicit_severity_rank_not_lexicographic(db):
+    """Round-1 B2: list must return urgent > attention > info.
+    Lexicographic order on the `severity` string would put
+    `attention` ahead of `urgent` (a < u), which is wrong."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        # Three alerts of different severities.
+        requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                      headers=_bearer(mgr),
+                      json={"check_type": "general", "status": "needs_attention"},
+                      timeout=10)  # attention
+        requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                      headers=_bearer(mgr),
+                      json={"check_type": "feed",
+                            "payload": {"feed": {"given": False}}},
+                      timeout=10)  # urgent
+        # Force an `info`-severity alert by direct insert (no trigger
+        # maps to info today, but the rank ordering still must hold
+        # on existing rows).
+        db.horse_ledger_alerts.insert_one({
+            "id": "hla_info_test", "horse_id": hid, "barn_id": bid,
+            "alert_type": "general", "severity": "info", "severity_rank": 0,
+            "status": "open", "source_check_id": "hdcl_dummy",
+            "last_source_check_id": "hdcl_dummy",
+            "first_seen_at": "2026-01-01T00:00:00+00:00",
+            "last_seen_at":  "2026-01-01T00:00:00+00:00",
+            "occurrence_count": 1, "triggers": ["manual"],
+            "acknowledged_at": None, "acknowledged_by_user_id": None,
+            "closed_at": None, "closed_by_user_id": None,
+            "resolution_note": None, "next_escalation_at": None,
+            TAG: True,
+        })
+        r = requests.get(f"{API}/horse-ledger/{hid}/alerts",
+                         headers=_bearer(mgr),
+                         params={"status": "all"}, timeout=10)
+        items = r.json()["items"]
+        # Filter to the three rows we know about (other dedupe may merge).
+        seen = [it["severity"] for it in items]
+        # urgent must come before attention which must come before info.
+        if "urgent" in seen and "attention" in seen:
+            assert seen.index("urgent") < seen.index("attention"), seen
+        if "attention" in seen and "info" in seen:
+            assert seen.index("attention") < seen.index("info"), seen
+        if "urgent" in seen and "info" in seen:
+            assert seen.index("urgent") < seen.index("info"), seen
+    finally:
+        _cleanup(db)
+
+
+def test_alerts_open_in_ledger_sorted_by_severity_rank(db):
+    """Round-1 B2: `alerts_open` on the Care Ledger GET must use the
+    same explicit rank ordering."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                      headers=_bearer(mgr),
+                      json={"check_type": "general", "status": "needs_attention"},
+                      timeout=10)
+        requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                      headers=_bearer(mgr),
+                      json={"check_type": "feed",
+                            "payload": {"feed": {"given": False}}},
+                      timeout=10)
+        r = requests.get(f"{API}/horse-ledger/{hid}",
+                         headers=_bearer(mgr), timeout=10)
+        opens = r.json()["alerts_open"]
+        sevs = [a["severity"] for a in opens]
+        if "urgent" in sevs and "attention" in sevs:
+            assert sevs.index("urgent") < sevs.index("attention"), sevs
+    finally:
+        _cleanup(db)
+
+
+def test_alert_documents_carry_severity_rank(db):
+    """Round-1 B2: every minted alert must store `severity_rank` so
+    the live sort is index-backed and deterministic."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                      headers=_bearer(mgr),
+                      json={"check_type": "feed",
+                            "payload": {"feed": {"given": False}}},
+                      timeout=10)
+        a = db.horse_ledger_alerts.find_one({"horse_id": hid})
+        assert a["severity"] == "urgent"
+        assert a["severity_rank"] == 2
+    finally:
+        _cleanup(db)
+
+
+# ---------- Round-1 B3: same-source PATCH upgrade ----------
+def test_same_source_patch_upgrades_existing_alert(db):
+    """Round-1 B3: a PATCH amend that makes the same daily-check more
+    severe must upgrade the alert's severity + merge triggers WITHOUT
+    creating a duplicate alert row and WITHOUT bumping
+    occurrence_count (because the source is the same check)."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        # First write: bedding top-off → attention.
+        r1 = requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                           headers=_bearer(mgr),
+                           json={"check_type": "bedding",
+                                 "payload": {"bedding": {"top_off_needed": True,
+                                                          "condition": "clean"}}},
+                           timeout=10)
+        cid = r1.json()["id"]
+        a1 = db.horse_ledger_alerts.find_one({"horse_id": hid})
+        assert a1["severity"] == "attention"
+        first_count = a1["occurrence_count"]
+        # Same source, but PATCH adds full_strip_needed (still
+        # attention) — should merge triggers, no count bump.
+        requests.patch(f"{API}/horse-ledger/{hid}/daily-checks/{cid}",
+                       headers=_bearer(mgr),
+                       json={"payload": {"bedding": {"full_strip_needed": True,
+                                                      "condition": "soiled"}}},
+                       timeout=10)
+        a2 = db.horse_ledger_alerts.find_one({"horse_id": hid})
+        # Still exactly one row.
+        assert db.horse_ledger_alerts.count_documents({"horse_id": hid}) == 1
+        # No count bump (same source).
+        assert a2["occurrence_count"] == first_count
+        # Triggers merged.
+        assert "bedding.top_off_needed=true"   in a2["triggers"]
+        assert "bedding.full_strip_needed=true" in a2["triggers"]
+    finally:
+        _cleanup(db)
+
+
+def test_same_source_patch_severity_upgrade(db):
+    """Round-1 B3: a PATCH amend on the same check that flips
+    `feed.given` from true to false must upgrade the alert severity
+    from `attention` (status=needs_attention) to `urgent`
+    (feed.given=false), with no duplicate row."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        # First write: feed check with needs_attention (attention).
+        r1 = requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                           headers=_bearer(mgr),
+                           json={"check_type": "feed",
+                                 "status": "needs_attention",
+                                 "payload": {"feed": {"given": True}}},
+                           timeout=10)
+        cid = r1.json()["id"]
+        a1 = db.horse_ledger_alerts.find_one({"horse_id": hid})
+        assert a1["severity"] == "attention"
+        # PATCH amend: feed.given=false → urgent.
+        requests.patch(f"{API}/horse-ledger/{hid}/daily-checks/{cid}",
+                       headers=_bearer(mgr),
+                       json={"payload": {"feed": {"given": False}}},
+                       timeout=10)
+        a2 = db.horse_ledger_alerts.find_one({"horse_id": hid})
+        assert db.horse_ledger_alerts.count_documents({"horse_id": hid}) == 1
+        assert a2["severity"] == "urgent"
+        assert a2["severity_rank"] == 2
+        # An `amended` event row is appended.
+        amended = list(db.horse_ledger_alert_events.find(
+            {"alert_id": a1["id"], "event_type": "amended"}))
+        assert len(amended) >= 1
+        # occurrence_count stays at 1 (same source).
+        assert a2["occurrence_count"] == 1
+    finally:
+        _cleanup(db)
+
+
+def test_same_source_patch_no_event_when_unchanged(db):
+    """A PATCH amend that doesn't actually change severity or merge a
+    new trigger should NOT mint a redundant `amended` event."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr(db, bid)
+    try:
+        r1 = requests.post(f"{API}/horse-ledger/{hid}/daily-checks",
+                           headers=_bearer(mgr),
+                           json={"check_type": "feed",
+                                 "payload": {"feed": {"given": False}}},
+                           timeout=10)
+        cid = r1.json()["id"]
+        events_before = db.horse_ledger_alert_events.count_documents(
+            {"horse_id": hid})
+        # PATCH amend with just a notes change — payload unchanged.
+        requests.patch(f"{API}/horse-ledger/{hid}/daily-checks/{cid}",
+                       headers=_bearer(mgr),
+                       json={"notes": "minor amendment"},
+                       timeout=10)
+        events_after = db.horse_ledger_alert_events.count_documents(
+            {"horse_id": hid})
+        assert events_before == events_after, "redundant amended event minted"
+    finally:
+        _cleanup(db)
+

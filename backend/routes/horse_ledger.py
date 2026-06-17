@@ -593,7 +593,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
                     {"horse_id": horse_id, "barn_id": horse["barn_id"],
                      "status": {"$in": ["open", "acknowledged"]}},
                     {"_id": 0},
-                ).sort([("severity", -1), ("last_seen_at", -1)]).to_list(20)
+                ).sort([("severity_rank", -1), ("last_seen_at", -1)]).to_list(20)
             ),
             "audit_recent":        [],
         }
@@ -1244,7 +1244,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
         """Idempotent alert minting from a daily-check row. Dedupe key
         is `(horse_id, alert_type, status != "closed")`. Repeats bump
         `occurrence_count` and `last_seen_at`; severity may upgrade.
-        `source_check_id + alert_type` never produces a duplicate."""
+        `source_check_id + alert_type` never produces a duplicate
+        ROW, but it MAY upgrade the existing alert's severity and
+        merge new triggers (Round-1 fix — a PATCH amend that flips
+        `feed.given` from true to false must escalate the alert)."""
         severity, triggers = _derive_alert_triggers(
             check_doc["check_type"], check_doc["status"], check_doc.get("payload"),
         )
@@ -1255,15 +1258,42 @@ def build_router(*, db, get_current_user) -> APIRouter:
         barn_id  = horse["barn_id"]
         source_check_id = check_doc["id"]
         now_iso = datetime.now(timezone.utc).isoformat()
-        # 1. Exact (source_check_id, alert_type) dedupe — same check
-        #    row cannot mint twice (PATCH amend on the same row stays
-        #    idempotent for the originating check).
+        # 1. Exact (source_check_id, alert_type) — same check row.
+        #    Do NOT bump occurrence_count (it's the same source), but
+        #    DO upgrade severity and merge triggers so a PATCH amend
+        #    that worsens the condition is reflected on the alert.
         existing_exact = await db.horse_ledger_alerts.find_one(
             {"horse_id": horse_id, "alert_type": alert_type,
              "source_check_id": source_check_id},
             {"_id": 0},
         )
         if existing_exact:
+            cur_rank = _SEVERITY_RANK.get(existing_exact.get("severity"), -1)
+            new_rank = _SEVERITY_RANK.get(severity, 0)
+            sev_to_set = severity if new_rank > cur_rank else existing_exact["severity"]
+            sev_rank   = _SEVERITY_RANK[sev_to_set]
+            merged = sorted(set((existing_exact.get("triggers") or []) + triggers))
+            updates = {
+                "last_seen_at": now_iso,
+                "severity": sev_to_set,
+                "severity_rank": sev_rank,
+                "triggers": merged,
+            }
+            if updates["severity"] != existing_exact.get("severity") or \
+               merged != (existing_exact.get("triggers") or []):
+                await db.horse_ledger_alerts.update_one(
+                    {"id": existing_exact["id"]}, {"$set": updates},
+                )
+                await db.horse_ledger_alert_events.insert_one({
+                    "id": f"hlae_{uuid.uuid4().hex[:24]}",
+                    "alert_id": existing_exact["id"],
+                    "horse_id": horse_id, "barn_id": barn_id, "ts": now_iso,
+                    "event_type": "amended",
+                    "actor_user_id": check_doc.get("checked_by_user_id"),
+                    "actor_role":    None,
+                    "source_check_id": source_check_id,
+                    "notes_present": bool(check_doc.get("notes")),
+                })
             return
         # 2. Open/acknowledged alert exists for this (horse, type) →
         #    update last_seen + occurrence_count + merge triggers.
@@ -1277,12 +1307,14 @@ def build_router(*, db, get_current_user) -> APIRouter:
             cur_rank = _SEVERITY_RANK.get(existing_open.get("severity"), -1)
             new_rank = _SEVERITY_RANK.get(severity, 0)
             sev_to_set = severity if new_rank > cur_rank else existing_open["severity"]
+            sev_rank   = _SEVERITY_RANK[sev_to_set]
             merged = sorted(set((existing_open.get("triggers") or []) + triggers))
             await db.horse_ledger_alerts.update_one(
                 {"id": existing_open["id"]},
                 {"$set": {
                     "last_seen_at": now_iso,
                     "severity": sev_to_set,
+                    "severity_rank": sev_rank,
                     "triggers": merged,
                     "last_source_check_id": source_check_id,
                 },
@@ -1305,7 +1337,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "id": alert_id,
             "horse_id": horse_id, "barn_id": barn_id,
             "alert_type": alert_type,
-            "severity":   severity,
+            "severity":     severity,
+            "severity_rank": _SEVERITY_RANK[severity],
             "status":     "open",
             "source_check_id": source_check_id,
             "last_source_check_id": source_check_id,
@@ -1597,7 +1630,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         q = {"horse_id": horse_id, "barn_id": horse["barn_id"], **_alert_status_q(status)}
         limit = max(1, min(int(limit or 20), 100))
         rows = await db.horse_ledger_alerts.find(q, {"_id": 0}) \
-            .sort([("severity", -1), ("last_seen_at", -1)]).to_list(limit)
+            .sort([("severity_rank", -1), ("last_seen_at", -1)]).to_list(limit)
         return _scrub_strings({"items": rows})
 
     @router.patch("/horse-ledger/{horse_id}/alerts/{alert_id}")
@@ -1658,13 +1691,22 @@ def build_router(*, db, get_current_user) -> APIRouter:
         elif new_status is not None:
             raise HTTPException(
                 422, f"Invalid transition {cur!r} → {new_status!r}.")
-        # Allow setting next_escalation_at (informational) without a
-        # status change.
+        # Phase 1-D Round-1: `next_escalation_at` is informational only,
+        # but it is NOT a silent field. Only admin/barn_manager may set
+        # it, and setting it always emits an alert_event + audit row so
+        # the change is visible on the alert's history.
         if "next_escalation_at" in body:
+            if role not in {"admin", "barn_manager"}:
+                raise HTTPException(
+                    403, "Only a manager may set next_escalation_at.")
             v = body["next_escalation_at"]
             if v is not None and not isinstance(v, str):
                 raise HTTPException(422, "next_escalation_at must be ISO string.")
             updates["next_escalation_at"] = v
+            # If no status transition happened, mint an `escalation_scheduled`
+            # event so the change is auditable.
+            if event_type is None:
+                event_type = "escalation_scheduled"
         if not updates:
             raise HTTPException(422, "No editable changes.")
         await db.horse_ledger_alerts.update_one(

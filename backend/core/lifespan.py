@@ -251,6 +251,13 @@ def register_lifecycle(app, *, send_nudges):
                 [("barn_id", 1), ("status", 1), ("last_seen_at", -1)],
                 name="hla_barn_status_last_seen",
             )
+            # Phase 1-D Round-1: sort by explicit severity_rank, not
+            # the lexical `severity` string.
+            await db.horse_ledger_alerts.create_index(
+                [("horse_id", 1), ("status", 1), ("severity_rank", -1),
+                 ("last_seen_at", -1)],
+                name="hla_horse_status_rank_last_seen",
+            )
             await db.horse_ledger_alert_events.create_index(
                 [("alert_id", 1), ("ts", 1)],
                 name="hlae_alert_ts",

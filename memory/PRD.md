@@ -20,6 +20,19 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1D Round-1 Fixes ✅ (Feb 2026, awaiting Codex re-review)
+Three Codex blockers closed:
+
+- **`next_escalation_at` silent mutation removed.** Field is now **manager-only** (any other role → 403). Every set emits an `escalation_scheduled` alert event + an audit row with `field_paths=["next_escalation_at"]` (raw value never in audit). When a status transition AND `next_escalation_at` ship in the same PATCH, the transition event wins (`closed`/`acknowledged`/`reopened`) and `next_escalation_at` rides along in `field_paths` — no double event.
+- **Severity sort uses explicit rank.** Alerts now carry `severity_rank` (`info=0`, `attention=1`, `urgent=2`) written on every mint/upgrade. `GET /alerts` and `alerts_open` sort by `(severity_rank desc, last_seen_at desc)`. New compound index `hla_horse_status_rank_last_seen`. Regression `test_alerts_list_sorted_by_explicit_severity_rank_not_lexicographic` proves `urgent > attention > info` (lexical order would put `attention` ahead of `urgent`).
+- **Same-source PATCH now upgrades existing alert.** `_mint_alert_for_check` adds a third dedupe path: exact `(source_check_id, alert_type)` match → upgrade severity + merge `triggers[]` + mint `amended` event, NO `occurrence_count` bump (same source). A no-op PATCH (no severity/trigger change) mints **no** event. Round-0 path for different-source repeats unchanged.
+
+**Tests** — `test_horse_ledger_1d.py` grew 97 → **106** (+9 Round-1 regressions). Full Care-Ledger suite **309/309 pass** (29 1-A + 101 1-B + 73 1-C + 106 1-D).
+
+**Delta package re-packaged**: `/app/phase_horseops_1d_changes.zip`.
+
+
+
 ### Phase HorseOps-1D — Alerts, Escalations, History + Staff Experience Gate ✅ (Feb 2026, awaiting Codex review)
 Event-driven alert layer on top of the locked 1-C daily checks. **No background worker, no scheduler.** Alerts are minted as inline side effects of `POST/PATCH /daily-checks`; lifecycle endpoints handle ack/close/reopen; the new `/history` endpoint merges daily checks + alerts + audit rows. Staff experience-level gate refuses operational writes by under-qualified callers with a **generic** 403 and **zero operational artifacts** on denial.
 

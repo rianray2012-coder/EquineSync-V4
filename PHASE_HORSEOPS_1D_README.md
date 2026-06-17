@@ -4,6 +4,16 @@ Scope summary, endpoint map, privacy model, experience-gate model, test counts, 
 
 ---
 
+## Codex Round-1 fixes (Feb 2026) — applied
+
+| Blocker | Fix |
+|---|---|
+| `next_escalation_at` mutation was silent | Now **manager-only** (any other role → 403) AND every set emits an `escalation_scheduled` alert event + an audit row with `field_paths=["next_escalation_at"]` (raw value never in audit). When the same PATCH closes/acks AND sets `next_escalation_at`, the transition event wins (closed/acknowledged/reopened) and `next_escalation_at` rides along in `field_paths` — no double event. |
+| Severity sort was lexicographic | Every alert document now carries an explicit integer `severity_rank` (`info=0, attention=1, urgent=2`) that is written on every mint/upgrade. `GET /alerts` and `alerts_open` in `GET /horse-ledger/{id}` sort by `(severity_rank desc, last_seen_at desc)`. New compound index `hla_horse_status_rank_last_seen` backs the sort. Test `test_alerts_list_sorted_by_explicit_severity_rank_not_lexicographic` proves `urgent > attention > info` (lexical order would put `attention` ahead of `urgent`). |
+| Same-source PATCH didn't upgrade existing alert severity | `_mint_alert_for_check` now handles three cases: (1) exact `(source_check_id, alert_type)` match → upgrade severity + merge `triggers[]` + mint `amended` event, NO `occurrence_count` bump (same source); (2) different source with open/acked alert → bump `occurrence_count` + merge + upgrade; (3) otherwise mint new. A no-op PATCH (no severity change, no new triggers) mints **no** event. |
+
+---
+
 ## Scope
 
 1. **Event-driven alert minting** from the locked 1-C daily-check writes (no scheduler, no background worker).
@@ -166,9 +176,9 @@ All interactive elements carry stable `data-testid`s (`alert-row-<id>`, `alert-a
 
 ## Test coverage
 
-`/app/backend/tests/test_horse_ledger_1d.py` — **97 cases**.
+`/app/backend/tests/test_horse_ledger_1d.py` — **106 cases** (97 round-0 + 9 round-1 regressions).
 
-Full Care-Ledger suite **300 passing** (29 1-A + 101 1-B + 73 1-C + 97 1-D).
+Full Care-Ledger suite **309 passing** (29 1-A + 101 1-B + 73 1-C + 106 1-D).
 
 ### Alert minting (12)
 - 10 parametrized triggers → 1 alert row each, correct severity, 1 history event.
