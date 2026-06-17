@@ -144,19 +144,29 @@ def _build_feeding(horse: Dict[str, Any], profile: Optional[Dict[str, Any]],
         return None
     if not owner_view:
         return envelope
-    # Owner-filtered: name + schedule + supplement names only;
-    # prep / soaking / staff_only_warnings / sensitivities / meds_with_feed hidden.
-    safe_struct: Optional[Dict[str, Any]] = None
-    if structured:
-        safe_struct = {
-            "grain_feed_type": structured.get("grain_feed_type"),
-            "schedule":        structured.get("schedule") or [],
-            "supplements":     [
-                {"name": s.get("name")} for s in (structured.get("supplements") or [])
-                if isinstance(s, dict)
-            ],
-        }
-    return _legacy_envelope(safe_struct, legacy_str)
+    # Owner-filtered feeding.
+    #
+    # Codex round-1 P1: the legacy `horses.feed_plan` field is FREE TEXT
+    # and may contain prep instructions, soaking details, medication
+    # notes, or staff-only handling warnings. It must NOT be surfaced
+    # raw to owners. The owner view exposes ONLY a conservative
+    # structured projection: feed type + schedule + supplement names.
+    # If no structured profile exists yet, the owner sees `feeding: null`
+    # — they will see real feeding info once a manager populates the
+    # structured profile in 1-B.
+    if not structured:
+        return None
+    safe_struct = {
+        "grain_feed_type": structured.get("grain_feed_type"),
+        "schedule":        structured.get("schedule") or [],
+        "supplements":     [
+            {"name": s.get("name")} for s in (structured.get("supplements") or [])
+            if isinstance(s, dict)
+        ],
+    }
+    # legacy is intentionally DROPPED in the owner envelope to avoid
+    # surfacing free-text staff notes.
+    return {"structured": safe_struct, "legacy": None}
 
 
 def _build_hay_access(profile: Optional[Dict[str, Any]],
@@ -248,8 +258,21 @@ def _build_health(meds: List[Dict[str, Any]],
                   legacy_allergies: Optional[List[str]],
                   owner_view: bool) -> Dict[str, Any]:
     if owner_view:
-        # Owner-safe projection: medication names + dosage only; no
-        # staff_only_warnings; vet records: title + date only.
+        # Owner-safe projection. Each sub-field is an EXPLICIT allowlist
+        # — never a whole document. Codex round-1 P1: previously
+        # `wellness[0]` was returned raw, which can leak staff notes,
+        # actor fields, internal observations. We now project to a
+        # fixed set of safe display fields.
+        wellness_safe: Optional[Dict[str, Any]] = None
+        if wellness:
+            w = wellness[0] or {}
+            wellness_safe = {
+                "id":         w.get("id"),
+                "created_at": w.get("created_at"),
+                "status":     w.get("status"),
+                "score":      w.get("score"),
+                "summary":    w.get("summary"),     # owner-safe display string if present
+            }
         return {
             "medications": [
                 {"id": m.get("id"), "name": m.get("name"),
@@ -266,7 +289,7 @@ def _build_health(meds: List[Dict[str, Any]],
                  "status": i.get("status")}
                 for i in injuries
             ],
-            "wellness_latest": wellness[0] if wellness else None,
+            "wellness_latest": wellness_safe,
             "allergies_legacy": legacy_allergies or [],
         }
     return {

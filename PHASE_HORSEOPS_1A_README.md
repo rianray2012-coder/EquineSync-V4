@@ -1,8 +1,19 @@
 # Phase HorseOps-1A — Care Ledger (Read-Only Composition)
 
-**Status:** Ready for Codex review
-**Date:** Feb 28 2026.
+**Status:** Codex Round-1 fixes applied — re-submitted for review
+**Date:** Feb 28 2026  (round-1: Mar 01 2026).
 **Scope:** Backend (FastAPI) + Horse Detail frontend tab + tests + indexes only.
+
+## Codex Round-1 fix highlights (Mar 01 2026)
+
+| ID | Severity | Finding | Resolution |
+|----|----------|---------|------------|
+| R1-A | **P1** | Owner view exposed the full legacy `horses.feed_plan` free-text string, which can carry prep instructions, soaking details, medication notes, or staff-only handling warnings. | `_build_feeding()` in `routes/horse_ledger.py` now drops `legacy` entirely in the owner envelope. If a structured profile exists, the owner sees a strict whitelist (`grain_feed_type`, `schedule`, `supplements[name only]`); if not, the owner sees `feeding: null`. Staff view is unchanged — managers still see the legacy free text via the `{ structured, legacy }` envelope. |
+| R1-B | **P1** | Owner view returned `wellness[0]` raw, leaking any staff notes / actor fields / internal observations stored on the wellness row. | `_build_health()` now projects `wellness_latest` to an explicit owner-safe allowlist: `id`, `created_at`, `status`, `score`, `summary`. Every other field from the raw doc is dropped. Staff view continues to receive the full document. |
+
+**New tests (2 added → 29 total):**
+- `test_r1_owner_view_does_not_expose_legacy_feed_plan_free_text` — plants `STAFF ONLY: soak / Give bute / WARNING / bites` into the legacy `feed_plan`, asserts owner view contains none of those strings, asserts staff view still contains them.
+- `test_r1_owner_view_wellness_projects_to_safe_allowlist_only` — plants 6 staff-only fields (`staff_note`, `internal_observation`, `actor_user_id`, `actor_name`, `_internal_flag`, `raw_vet_dictation`) on a wellness row; asserts the owner-projected `wellness_latest` carries ONLY `{id, created_at, status, score, summary}` and none of the secret strings appear anywhere in the response body. Staff view is unchanged.
 
 ## What ships
 
@@ -126,10 +137,10 @@ When a section may carry both a legacy field (from `horses`) and a structured fi
 
 Legacy is **never overwritten, never normalised, never dropped**. Staff can review transition data without losing the original string.
 
-## Tests (27/27 green)
+## Tests (29/29 green)
 
 ```bash
-pytest backend/tests/test_horse_ledger_1a.py        # 27 passed   ⭐ NEW
+pytest backend/tests/test_horse_ledger_1a.py        # 29 passed   ⭐ NEW (incl. round-1 R1-A/B)
 ```
 
 Test coverage map:
@@ -145,6 +156,8 @@ Test coverage map:
 - 24-25 — Δ1 fail-closed: owner shape regardless of query string.
 - 26 — Δ2: platform admin cannot cross-barn-inspect via the product route.
 - 27 — Index creation writes zero documents into any of the 8 new collections.
+- 28 (R1-A) — Owner view does not expose legacy `feed_plan` free text; staff view still does.
+- 29 (R1-B) — Owner `wellness_latest` projected to a strict 5-key allowlist (`id`, `created_at`, `status`, `score`, `summary`); planted staff-only fields are not leaked.
 
 ## Locked guardrails honoured
 

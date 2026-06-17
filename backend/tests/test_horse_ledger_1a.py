@@ -402,6 +402,127 @@ def test_owner_view_shows_owner_safe_health_fields(db):
 
 
 # ---------------------------------------------------------------------
+# Codex round-1 regressions
+# ---------------------------------------------------------------------
+def test_r1_owner_view_does_not_expose_legacy_feed_plan_free_text(db):
+    """Codex round-1 P1: owner view MUST NOT surface the raw
+    `horses.feed_plan` legacy string, which is free text and can
+    contain prep instructions, soaking details, medication notes,
+    or staff-only handling warnings."""
+    barn_id = _make_barn(db)
+    owner = _signup(role="horse_owner")
+    sensitive = (
+        "STAFF ONLY: soak 30 min in warm water. "
+        "Give bute 1g in feed AM. "
+        "WARNING: bites at handling."
+    )
+    horse_id = _make_horse(
+        db, barn_id, owner_id=owner["user"]["id"],
+        feed_plan=sensitive,
+    )
+    _put_user_in_barn(db, owner["user"]["id"], barn_id, role="horse_owner")
+    try:
+        # Owner view: legacy free text must NOT appear anywhere.
+        ro = requests.get(f"{API}/horse-ledger/{horse_id}",
+                          headers=_bearer(owner), timeout=10)
+        assert ro.status_code == 200
+        for needle in ("STAFF ONLY", "soak 30 min", "Give bute",
+                       "WARNING", "bites at handling"):
+            assert needle not in ro.text, (
+                f"R1 P1: owner view leaked legacy feed_plan text "
+                f"({needle!r}) -- payload:\n{ro.text[:600]}"
+            )
+        # And `feeding.legacy` is explicitly None in the owner envelope
+        # when no structured profile exists.
+        feeding = ro.json()["feeding"]
+        if feeding is not None:
+            assert feeding.get("legacy") is None, feeding
+
+        # Staff view: the legacy field IS surfaced (manager can see it).
+        staff = _signup()
+        _put_user_in_barn(db, staff["user"]["id"], barn_id, role="barn_manager")
+        rs = requests.get(f"{API}/horse-ledger/{horse_id}",
+                          headers=_bearer(staff), timeout=10)
+        assert rs.status_code == 200
+        # Staff sees the legacy free-text via the envelope.
+        assert "STAFF ONLY" in rs.text, (
+            "Staff view must continue to surface legacy feed_plan."
+        )
+    finally:
+        _cleanup(db)
+
+
+def test_r1_owner_view_wellness_projects_to_safe_allowlist_only(db):
+    """Codex round-1 P1: owner view MUST project `wellness_latest`
+    to an explicit allowlist of safe fields. Staff-only fields
+    (notes, actor fields, internal observations) must not surface."""
+    barn_id = _make_barn(db)
+    owner = _signup(role="horse_owner")
+    horse_id = _make_horse(db, barn_id, owner_id=owner["user"]["id"])
+    _put_user_in_barn(db, owner["user"]["id"], barn_id, role="horse_owner")
+
+    wellness_id = f"well_{uuid.uuid4().hex[:8]}"
+    secret_strings = {
+        "staff_note":         "STAFF ONLY: vet recommended sedation",
+        "internal_observation": "INTERNAL: cribbing escalating, recommend muzzle",
+        "actor_user_id":      "user_internal_xyz",
+        "actor_name":         "Dr Internal",
+        "_internal_flag":     True,
+        "raw_vet_dictation":  "do not share with owner — possible founder lameness",
+    }
+    db.wellness.insert_one({
+        "id": wellness_id,
+        "horse_id": horse_id, "barn_id": barn_id,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        # owner-safe display fields:
+        "status": "good", "score": 8, "summary": "Holding steady this week.",
+        # staff-only fields that must NOT leak:
+        **secret_strings,
+        "_hl1a_test": True,
+    })
+    try:
+        r = requests.get(f"{API}/horse-ledger/{horse_id}",
+                         headers=_bearer(owner), timeout=10)
+        assert r.status_code == 200
+        body = r.json()
+        wl = body["health"]["wellness_latest"]
+
+        # Allowlist of safe keys only — every other key from the raw doc
+        # must be ABSENT in the owner projection.
+        assert wl is not None
+        assert set(wl.keys()) <= {"id", "created_at", "status", "score", "summary"}, (
+            f"owner wellness_latest leaked keys outside the safe allowlist: "
+            f"{set(wl.keys())}"
+        )
+        # Safe display fields ARE present.
+        assert wl["id"] == wellness_id
+        assert wl["status"] == "good"
+        assert wl["summary"] == "Holding steady this week."
+
+        # Staff-only string values must not appear anywhere in the wire payload.
+        for secret in secret_strings.values():
+            if isinstance(secret, str):
+                assert secret not in r.text, (
+                    f"R1 P1: owner view leaked wellness staff-only value "
+                    f"({secret!r})"
+                )
+
+        # Staff view: the full wellness doc is still returned (manager
+        # gets operational visibility).
+        staff = _signup()
+        _put_user_in_barn(db, staff["user"]["id"], barn_id, role="barn_manager")
+        rs = requests.get(f"{API}/horse-ledger/{horse_id}",
+                          headers=_bearer(staff), timeout=10)
+        assert rs.status_code == 200
+        assert "STAFF ONLY" in rs.text, (
+            "staff view should continue to see the full wellness doc"
+        )
+    finally:
+        db.wellness.delete_many({"_hl1a_test": True})
+        _cleanup(db)
+
+
+# ---------------------------------------------------------------------
 # 15-16  No Stripe leak / no billing keys
 # ---------------------------------------------------------------------
 def test_no_stripe_shaped_string_leaks_in_any_response(db):

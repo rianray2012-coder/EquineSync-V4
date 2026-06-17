@@ -1958,6 +1958,22 @@ re-run, unrelated). Backend boots clean.
 
 **Next:** Codex review of 1-A. **1-B is gated on founder approval of 1-A.**
 
+### HorseOps-1A — Codex Round-1 Fixes (Mar 01 2026)
+
+Codex round-1 returned 2 P1 owner-privacy blockers. Both resolved
+without changing the founder-locked plan.
+
+| ID | Severity | Finding | Resolution |
+|----|----------|---------|------------|
+| R1-A | **P1** | Owner view exposed the full legacy `horses.feed_plan` free-text string (could carry prep/soaking/medication/staff-only handling warnings). | `_build_feeding()` now drops `legacy` entirely in the owner envelope. Owner sees only the structured whitelist (`grain_feed_type`, `schedule`, `supplements[name only]`); if no structured profile exists, `feeding: null`. Staff envelope unchanged. |
+| R1-B | **P1** | Owner view returned `wellness[0]` raw, leaking staff notes / actor fields / internal observations. | `_build_health()` projects owner `wellness_latest` to an explicit 5-key allowlist (`id`, `created_at`, `status`, `score`, `summary`). Every other field from the raw doc is dropped. Staff view continues to receive the full doc. |
+
+**New tests:** 2 added → 29 total. Plants `STAFF ONLY / soak / Give bute / WARNING / bites` into legacy `feed_plan` and `staff_note / internal_observation / actor_user_id / raw_vet_dictation` into a wellness row, then asserts the owner view leaks none of them, the owner `wellness_latest` carries only the allowlist keys, and the staff view continues to see everything.
+
+**Re-test:** HorseOps-1A — **29/29 green**. Backend boots clean.
+
+**Re-packaged:** `/app/phase_horseops_1a_changes.zip` (round-1).
+
 
 **Deferred to Admin-7A.2b** (gated on this approval): the 8 legacy
 Admin-1..6 surfaces (dashboard, users, facilities, subscriptions,
@@ -1984,4 +2000,4 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-7B   | Reports + Integrations + Settings + Admin Login route     | ✅ Codex-approved & locked |
 | Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex-approved & locked |
 | Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Codex-approved & locked |
-| HorseOps-1A | Care Ledger — read-only composition + 8 new collections + indexes | ✅ Ready for Codex review |
+| HorseOps-1A | Care Ledger — read-only composition + 8 new collections + indexes | ✅ Codex round-1 fixes applied — re-submitted for review |
