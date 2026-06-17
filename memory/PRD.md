@@ -20,6 +20,30 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1C — Staff Daily Checks ✅ (Feb 2026, awaiting Codex review)
+Immutable observation log layered on top of the existing `task_engine.py`. No new scheduler, no new alert worker. Daily checks (`hay_net`, `hay`, `water`, `feed`, `bedding`, `general`) are recorded by any in-barn staff role; amendments are author-only or manager. Owners are hard-hidden — `daily_checks_recent` is never projected to owners and the visibility-policy PUT 422s on the section.
+
+**Backend** — 3 new endpoints in `routes/horse_ledger.py`:
+- `POST /horse-ledger/{id}/daily-checks` — write to `horse_daily_check_logs`, optional `task_id` (must be same barn, does NOT touch task lifecycle), emits audit row.
+- `GET  /horse-ledger/{id}/daily-checks?check_type=...` — staff/manager list.
+- `PATCH /horse-ledger/{id}/daily-checks/{check_id}` — author or manager only; section-level payload merge; `amended_at` set; `checked_at` preserved.
+
+Validation: `check_type` and `status` enums; per-check-type payload subkey whitelist (`_CHECK_PAYLOAD_SUBKEYS`); `bedding.condition` enum; primitive-only payload values; notes ≤500 chars. `daily_checks_recent` added to `_FORBIDDEN_OWNER_KEYS` so policy expansion 422s. Staff GET ledger now populates `daily_checks_recent` (top 20 by `checked_at desc`); owner GET still receives `[]`.
+
+**Frontend** — `CareLedgerTab.jsx` gains a `DailyChecksSection` (staff-only) with 5 quick-action chips (Feed given · Hay checked · Hay net refilled · Water checked · Bedding checked) + Note + recent list with `brass/silver/platinum` status badges (no red/orange/amber). New `DailyCheckDrawer` (create + amend) with conditional sub-payload fields per check type. Notes textarea labeled "Notes (staff-only — never shown to owners)". Owner UI receives nothing.
+
+**Tests** — `tests/test_horse_ledger_1c.py`: **55 cases**. Care-Ledger suite total **185/185 pass** (29 1-A + 101 1-B + 55 1-C). Backend + JSX lint clean.
+
+**Deferred (still future scope)**:
+- Curated schedule-shape picker in the manager drawer (UX polish; approved as future, not part of 1-C).
+- Barn-wide owner-visibility template (HorseOps-1B.1).
+- Alerts / escalations / history (HorseOps-1D).
+- Owner-facing filtered view (HorseOps-1E).
+
+**Delta package**: `/app/phase_horseops_1c_changes.zip` with route, tests, frontend, PRD, and `PHASE_HORSEOPS_1C_README.md`.
+
+
+
 ### Phase HorseOps-1B Round-2 Fixes ✅ (Feb 2026, awaiting Codex re-review)
 Closes the four Codex Round-2 findings:
 

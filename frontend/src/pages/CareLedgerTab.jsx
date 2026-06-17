@@ -33,6 +33,27 @@ const SECTION_LABELS = {
 
 const MUTATOR_ROLES = new Set(["admin", "barn_manager"]);
 
+// Phase HorseOps-1C — any same-barn staff role may create a daily check.
+// PATCH is further restricted (author or manager) by the backend.
+const STAFF_ROLES = new Set(["admin", "barn_manager", "groom", "trainer",
+                              "vet", "staff"]);
+
+const CHECK_TYPE_LABELS = {
+  feed:    "Feed",
+  hay:     "Hay",
+  hay_net: "Hay net",
+  water:   "Water",
+  bedding: "Bedding",
+  general: "General",
+};
+
+const STATUS_LABELS = {
+  ok:              "OK",
+  needs_attention: "Needs attention",
+  missed:          "Missed",
+  not_applicable:  "N/A",
+};
+
 const KV = ({ label, value }) => (
   <div className="py-1.5 flex gap-3 text-[13px]">
     <div className="text-equine-platinum/55 min-w-[140px]">{label}</div>
@@ -462,10 +483,19 @@ export default function CareLedgerTab({ horseId }) {
         ) : null}
       </SectionShell>
 
-      {/* Daily checks / alerts — placeholders for 1-C / 1-D */}
-      <SectionShell id="daily_checks" title="Daily checks">
-        <KV label="Status" value="Daily checks land in HorseOps-1C." />
-      </SectionShell>
+      {/* Daily Checks — Phase HorseOps-1C. Staff-only, owner UI gets nothing. */}
+      {STAFF_ROLES.has(role) && !isOwner ? (
+        <DailyChecksSection
+          horseId={horseId}
+          checks={data.daily_checks_recent || []}
+          currentUserId={user?.id}
+          role={role}
+          onAddCheck={(type) => openDrawer("daily_check_new", { check_type: type })}
+          onAmend={(check) => openDrawer("daily_check_amend", { check })}
+        />
+      ) : null}
+
+      {/* Alerts — placeholder for 1-D */}
       <SectionShell id="alerts" title="Alerts">
         <KV label="Status" value="Alerts land in HorseOps-1D." />
       </SectionShell>
@@ -594,6 +624,14 @@ function EditDrawerRouter({ drawer, horseId, data, onClose, onSaved }) {
   if (drawer.kind === "assignment_new" || drawer.kind === "assignment_edit")
     return <AssignmentDrawer horseId={horseId} mode={drawer.kind === "assignment_edit" ? "edit" : "new"}
               assignment={drawer.assignment} onClose={onClose} onSaved={onSaved} />;
+
+  if (drawer.kind === "daily_check_new")
+    return <DailyCheckDrawer horseId={horseId} mode="new"
+              initialType={drawer.check_type} onClose={onClose} onSaved={onSaved} />;
+
+  if (drawer.kind === "daily_check_amend")
+    return <DailyCheckDrawer horseId={horseId} mode="amend"
+              check={drawer.check} onClose={onClose} onSaved={onSaved} />;
 
   if (drawer.kind === "visibility_policy")
     return <VisibilityPolicyDrawer horseId={horseId} onClose={onClose} onSaved={onSaved} />;
@@ -922,6 +960,306 @@ function VisibilityPolicyDrawer({ horseId, onClose, onSaved }) {
           </div>
         </div>
       ))}
+    </Drawer>
+  );
+}
+
+
+
+// =====================================================================
+// Phase HorseOps-1C — Daily Checks section + drawer.
+// Staff-only. Owner UI never receives this surface; the backend also
+// returns `daily_checks_recent: []` for owners.
+// =====================================================================
+
+const QUICK_ACTIONS = [
+  { type: "feed",    label: "Feed given" },
+  { type: "hay",     label: "Hay checked" },
+  { type: "hay_net", label: "Hay net refilled" },
+  { type: "water",   label: "Water checked" },
+  { type: "bedding", label: "Bedding checked" },
+];
+
+const StatusBadge = ({ status }) => {
+  // Equine palette only — brass / silver / platinum tokens (no red/orange/amber).
+  const tone = ({
+    ok:              "border-equine-brass/40 text-equine-brass",
+    needs_attention: "border-equine-silver/40 text-equine-silver",
+    missed:          "border-equine-platinum/35 text-equine-platinum/80",
+    not_applicable:  "border-equine-silver/15 text-equine-platinum/55",
+  })[status] || "border-equine-silver/15 text-equine-platinum/55";
+  return (
+    <span
+      className={`text-[10px] tracking-[0.16em] uppercase px-2 py-0.5 rounded border ${tone}`}
+      data-testid={`daily-check-status-${status}`}
+    >
+      {STATUS_LABELS[status] || status}
+    </span>
+  );
+};
+
+const fmtWhen = (iso) => {
+  if (!iso) return "—";
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  } catch { return iso; }
+};
+
+function DailyChecksSection({ horseId, checks, currentUserId, role, onAddCheck, onAmend }) {
+  const canAmend = (c) => MUTATOR_ROLES.has(role) || c?.checked_by_user_id === currentUserId;
+  return (
+    <section
+      data-testid="horse-ledger-section-daily_checks"
+      className="rounded-lg border border-equine-silver/10 bg-equine-black/40 p-4"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <div className="label-eyebrow">Daily checks</div>
+        <span className="text-[10.5px] uppercase tracking-[0.18em] text-equine-platinum/45">
+          Staff only
+        </span>
+      </div>
+
+      {/* Quick-action chips */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {QUICK_ACTIONS.map((a) => (
+          <button
+            key={a.type}
+            type="button"
+            onClick={() => onAddCheck(a.type)}
+            data-testid={`daily-check-quick-${a.type}`}
+            className="text-[11px] tracking-[0.18em] uppercase text-equine-silver/90 border border-equine-silver/25 bg-equine-silver/5 hover:bg-equine-silver/10 px-3 py-1.5 rounded transition-colors"
+          >
+            {a.label}
+          </button>
+        ))}
+        <button
+          type="button"
+          onClick={() => onAddCheck("general")}
+          data-testid="daily-check-quick-general"
+          className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/65 hover:text-equine-silver border border-equine-silver/15 px-3 py-1.5 rounded transition-colors"
+        >
+          + Note
+        </button>
+      </div>
+
+      {/* Recent list */}
+      {checks.length === 0 ? (
+        <div className="text-[12.5px] text-equine-platinum/55 italic"
+             data-testid="daily-check-empty">
+          No checks recorded yet today. Tap a chip above to record one.
+        </div>
+      ) : (
+        <ul className="space-y-1.5">
+          {checks.map((c) => (
+            <li key={c.id}
+                data-testid={`daily-check-row-${c.id}`}
+                className="flex items-center justify-between gap-3 text-[13px] py-1.5 border-b border-equine-silver/5 last:border-b-0">
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/60 min-w-[68px]">
+                  {CHECK_TYPE_LABELS[c.check_type] || c.check_type}
+                </span>
+                <StatusBadge status={c.status} />
+                <span className="text-equine-silver/75 text-[12.5px] truncate">
+                  {fmtWhen(c.checked_at)}
+                </span>
+                {c.notes ? (
+                  <span className="text-equine-platinum/55 text-[12px] truncate"
+                        data-testid={`daily-check-notes-${c.id}`}>
+                    · {c.notes}
+                  </span>
+                ) : null}
+              </div>
+              {canAmend(c) ? (
+                <button
+                  type="button"
+                  onClick={() => onAmend(c)}
+                  data-testid={`daily-check-amend-${c.id}`}
+                  className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/55 hover:text-equine-silver"
+                >
+                  Amend
+                </button>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+// ---------------------------------------------------------------------
+// Drawer: create / amend a daily check.
+// On amend, only `status` / `notes` / `payload` go through.
+// ---------------------------------------------------------------------
+function DailyCheckDrawer({ horseId, mode, initialType, check, onClose, onSaved }) {
+  const isAmend = mode === "amend";
+  const seedType = isAmend ? check?.check_type : (initialType || "general");
+
+  const [checkType] = useState(seedType);
+  const [status,  setStatus]  = useState(isAmend ? (check?.status || "ok") : "ok");
+  const [notes,   setNotes]   = useState(isAmend ? (check?.notes || "") : "");
+  const [payload, setPayload] = useState(() => {
+    const seed = isAmend ? (check?.payload || {}) : {};
+    return {
+      hay_net:    seed.hay_net    || {},
+      hay_access: seed.hay_access || {},
+      water:      seed.water      || {},
+      feed:       seed.feed       || {},
+      bedding:    seed.bedding    || {},
+      general:    seed.general    || {},
+    };
+  });
+  const [saving, setSaving] = useState(false);
+  const [error,  setError]  = useState(null);
+
+  const setPL = (section, key, value) =>
+    setPayload((p) => ({ ...p, [section]: { ...p[section], [key]: value } }));
+
+  const renderPayloadFields = () => {
+    if (checkType === "hay_net") return (
+      <>
+        <Field label="Nets checked" name="nets_checked" type="number"
+               value={payload.hay_net.nets_checked} onChange={(_, v) => setPL("hay_net", "nets_checked", v)}
+               testid="daily-check-payload-hay_net-nets_checked" />
+        <Field label="Nets refilled" name="nets_refilled" type="number"
+               value={payload.hay_net.nets_refilled} onChange={(_, v) => setPL("hay_net", "nets_refilled", v)}
+               testid="daily-check-payload-hay_net-nets_refilled" />
+        <Field label="Hay net id (optional)" name="hay_net_id"
+               value={payload.hay_net.hay_net_id} onChange={(_, v) => setPL("hay_net", "hay_net_id", v)}
+               testid="daily-check-payload-hay_net-hay_net_id" />
+      </>
+    );
+    if (checkType === "hay") return (
+      <>
+        <Toggle label="Free-choice available" name="free_choice_available"
+                value={!!payload.hay_access.free_choice_available}
+                onChange={(_, v) => setPL("hay_access", "free_choice_available", v)}
+                testid="daily-check-payload-hay_access-free_choice_available" />
+        <TextArea label="Exception (if any)" name="exception"
+                  value={payload.hay_access.exception}
+                  onChange={(_, v) => setPL("hay_access", "exception", v)}
+                  testid="daily-check-payload-hay_access-exception" />
+      </>
+    );
+    if (checkType === "water") return (
+      <>
+        <Toggle label="Bucket OK" name="bucket_ok"
+                value={!!payload.water.bucket_ok}
+                onChange={(_, v) => setPL("water", "bucket_ok", v)}
+                testid="daily-check-payload-water-bucket_ok" />
+        <Toggle label="Automatic waterer OK" name="automatic_waterer_ok"
+                value={!!payload.water.automatic_waterer_ok}
+                onChange={(_, v) => setPL("water", "automatic_waterer_ok", v)}
+                testid="daily-check-payload-water-automatic_waterer_ok" />
+        <Toggle label="Refilled" name="refilled"
+                value={!!payload.water.refilled}
+                onChange={(_, v) => setPL("water", "refilled", v)}
+                testid="daily-check-payload-water-refilled" />
+      </>
+    );
+    if (checkType === "feed") return (
+      <>
+        <Toggle label="Feed given" name="given"
+                value={!!payload.feed.given}
+                onChange={(_, v) => setPL("feed", "given", v)}
+                testid="daily-check-payload-feed-given" />
+        <Field label="Missed reason" name="missed_reason"
+               value={payload.feed.missed_reason}
+               onChange={(_, v) => setPL("feed", "missed_reason", v)}
+               testid="daily-check-payload-feed-missed_reason" />
+        <Field label="Amount" name="amount_value" type="number"
+               value={payload.feed.amount_value}
+               onChange={(_, v) => setPL("feed", "amount_value", v)}
+               testid="daily-check-payload-feed-amount_value" />
+        <Select label="Amount unit" name="amount_unit"
+                value={payload.feed.amount_unit}
+                onChange={(_, v) => setPL("feed", "amount_unit", v)}
+                options={["lb", "kg", "scoop", "flake"]}
+                testid="daily-check-payload-feed-amount_unit" />
+      </>
+    );
+    if (checkType === "bedding") return (
+      <>
+        <Select label="Condition" name="condition"
+                value={payload.bedding.condition}
+                onChange={(_, v) => setPL("bedding", "condition", v)}
+                options={["clean", "damp", "soiled"]}
+                testid="daily-check-payload-bedding-condition" />
+        <Toggle label="Top-off needed" name="top_off_needed"
+                value={!!payload.bedding.top_off_needed}
+                onChange={(_, v) => setPL("bedding", "top_off_needed", v)}
+                testid="daily-check-payload-bedding-top_off_needed" />
+        <Toggle label="Full strip needed" name="full_strip_needed"
+                value={!!payload.bedding.full_strip_needed}
+                onChange={(_, v) => setPL("bedding", "full_strip_needed", v)}
+                testid="daily-check-payload-bedding-full_strip_needed" />
+      </>
+    );
+    return (
+      <TextArea label="Observation" name="observation"
+                value={payload.general.observation}
+                onChange={(_, v) => setPL("general", "observation", v)}
+                testid="daily-check-payload-general-observation" />
+    );
+  };
+
+  const cleanedPayload = () => {
+    const out = {};
+    const candidate = {
+      hay_net:    checkType === "hay_net" ? payload.hay_net    : null,
+      hay_access: checkType === "hay"     ? payload.hay_access : null,
+      water:      checkType === "water"   ? payload.water      : null,
+      feed:       checkType === "feed"    ? payload.feed       : null,
+      bedding:    checkType === "bedding" ? payload.bedding    : null,
+      general:    checkType === "general" ? payload.general    : null,
+    };
+    for (const [section, sub] of Object.entries(candidate)) {
+      if (!sub) continue;
+      const filtered = {};
+      for (const [k, v] of Object.entries(sub)) {
+        if (v === "" || v === null || v === undefined) continue;
+        filtered[k] = v;
+      }
+      if (Object.keys(filtered).length > 0) out[section] = filtered;
+    }
+    return out;
+  };
+
+  const save = async () => {
+    setError(null); setSaving(true);
+    try {
+      const body = { status };
+      if (notes) body.notes = notes;
+      const pl = cleanedPayload();
+      if (Object.keys(pl).length > 0) body.payload = pl;
+      if (isAmend) {
+        await api.patch(`/horse-ledger/${horseId}/daily-checks/${check.id}`, body);
+      } else {
+        body.check_type = checkType;
+        await api.post(`/horse-ledger/${horseId}/daily-checks`, body);
+      }
+      onSaved();
+    } catch (e) {
+      setError(e?.response?.data?.detail || "Could not save daily check.");
+    } finally { setSaving(false); }
+  };
+
+  return (
+    <Drawer
+      open={true}
+      eyebrow={isAmend ? "Amend · Daily check" : "New · Daily check"}
+      title={CHECK_TYPE_LABELS[checkType] || "Daily check"}
+      onClose={onClose} onSave={save} saving={saving} error={error}
+      saveLabel={isAmend ? "Save amendment" : "Record check"}
+    >
+      <Select label="Status" name="status" value={status} onChange={(_, v) => setStatus(v)}
+              options={["ok", "needs_attention", "missed", "not_applicable"]}
+              testid="daily-check-drawer-status" />
+      {renderPayloadFields()}
+      <TextArea label="Notes (staff-only — never shown to owners)"
+                name="notes" value={notes} onChange={(_, v) => setNotes(v)}
+                testid="daily-check-drawer-notes" rows={3} />
     </Drawer>
   );
 }

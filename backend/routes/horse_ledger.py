@@ -575,9 +575,15 @@ def build_router(*, db, get_current_user) -> APIRouter:
                                     owner_view,
                                 ),
 
-            # 1-A: these arrive in later sub-phases. Always empty by
-            # construction so the frontend can render placeholders.
-            "daily_checks_recent": [],
+            # Staff/manager view loads the 20 most recent daily check
+            # logs in descending `checked_at` order. Owners ALWAYS get
+            # an empty array — daily checks are hard-hidden in 1-C.
+            "daily_checks_recent": [] if owner_view else (
+                await db.horse_daily_check_logs.find(
+                    {"horse_id": horse_id, "barn_id": horse["barn_id"]},
+                    {"_id": 0},
+                ).sort("checked_at", -1).to_list(20)
+            ),
             "alerts_open":         [],
             "audit_recent":        [],
         }
@@ -717,6 +723,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
                                    "actor_user_id", "actor_name",
                                    "raw_vet_dictation"},
         "service_providers": {"*"},
+        # Phase 1-C: daily checks are hard-hidden from owners. Any
+        # attempt to expose `daily_checks_recent` via the owner-
+        # visibility policy must 422.
+        "daily_checks_recent": {"*"},
     }
 
     def _is_forbidden_owner_key(section: str, key: str) -> bool:
@@ -1081,6 +1091,241 @@ def build_router(*, db, get_current_user) -> APIRouter:
                           section="service", action="updated",
                           field_paths=sorted(body.keys()),
                           sensitivity="operational")
+        return {"ok": True}
+
+    # =================================================================
+    # Phase HorseOps-1C — staff daily checks.
+    # =================================================================
+    # Immutable observation log layered on top of the existing task
+    # engine. Daily checks live in `horse_daily_check_logs`. A check
+    # may optionally reference a `task_id` for trail linkage, but
+    # creating a check does NOT auto-complete the task and does NOT
+    # touch the task engine in any way. No new scheduler. No alerts
+    # worker (1-D). Owner visibility is HARD-HIDDEN — `daily_checks_
+    # recent` is never projected to owners and the visibility-policy
+    # PUT 422s on any attempt to expose it.
+    # =================================================================
+    _CHECK_TYPES  = {"feed", "hay", "hay_net", "water", "bedding", "general"}
+    _CHECK_STATUS = {"ok", "needs_attention", "missed", "not_applicable"}
+    _CHECK_TOP_WRITABLE = {"check_type", "status", "notes", "payload",
+                           "task_id", "checked_at"}
+    _CHECK_PATCH_WRITABLE = {"status", "notes", "payload"}
+
+    # Per-check_type payload subkey whitelists. Anything outside →
+    # 422. Defense-in-depth on read also drops unknown keys via
+    # `_project_check_payload`.
+    _CHECK_PAYLOAD_SUBKEYS = {
+        "hay_net":   {"nets_checked", "nets_refilled", "hay_net_id"},
+        "hay_access":{"free_choice_available", "exception"},
+        "water":     {"bucket_ok", "automatic_waterer_ok", "refilled"},
+        "feed":      {"given", "missed_reason", "amount_value", "amount_unit"},
+        "bedding":   {"condition", "top_off_needed", "full_strip_needed"},
+        "general":   {"observation"},
+    }
+    _BEDDING_CONDITIONS = {"clean", "damp", "soiled"}
+
+    # Staff roles that may CREATE a daily check (hybrid gate). PATCH is
+    # restricted further to the original author or admin/barn_manager.
+    _STAFF_CREATE_ROLES = {"admin", "barn_manager", "groom", "trainer",
+                           "vet", "staff"}
+
+    def _require_check_creator(user, horse):
+        role = (user.get("role") or "").strip().lower()
+        if role not in _STAFF_CREATE_ROLES:
+            raise HTTPException(403, "Insufficient role for daily checks.")
+
+    def _require_check_amender(user, horse, existing_log):
+        role = (user.get("role") or "").strip().lower()
+        if role in {"admin", "barn_manager"}:
+            return
+        if existing_log.get("checked_by_user_id") == user.get("id"):
+            return
+        raise HTTPException(403, "Only the author or a manager may amend.")
+
+    def _validate_check_body(body, *, is_patch):
+        """Raises HTTPException(422) on any shape violation. Used for
+        both POST (full body) and PATCH (subset)."""
+        if not isinstance(body, dict) or not body:
+            raise HTTPException(422, "Empty body.")
+        allowed = _CHECK_PATCH_WRITABLE if is_patch else _CHECK_TOP_WRITABLE
+        bad = [k for k in body if k not in allowed]
+        if bad:
+            raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        # check_type only on POST
+        if not is_patch:
+            ct = body.get("check_type")
+            if ct not in _CHECK_TYPES:
+                raise HTTPException(422, "check_type invalid.")
+        # status on either path
+        if "status" in body and body["status"] not in _CHECK_STATUS:
+            raise HTTPException(422, "status invalid.")
+        # notes length cap, staff-only free text
+        if "notes" in body and body["notes"] is not None:
+            if not isinstance(body["notes"], str):
+                raise HTTPException(422, "notes must be a string.")
+            if len(body["notes"]) > 500:
+                raise HTTPException(422, "notes too long (max 500).")
+        # task_id shape (full validation incl. barn match happens later)
+        if "task_id" in body and body["task_id"] is not None:
+            if not isinstance(body["task_id"], str) or not body["task_id"]:
+                raise HTTPException(422, "task_id must be a non-empty string.")
+        # checked_at: ISO string only
+        if "checked_at" in body and body["checked_at"] is not None:
+            if not isinstance(body["checked_at"], str):
+                raise HTTPException(422, "checked_at must be ISO string.")
+
+    def _validate_check_payload(payload, *, check_type_hint=None):
+        """Validate nested payload sections against the subkey
+        whitelist + value enums. payload may be None/empty."""
+        if payload is None:
+            return
+        if not isinstance(payload, dict):
+            raise HTTPException(422, "payload must be an object.")
+        for section, section_body in payload.items():
+            allowed = _CHECK_PAYLOAD_SUBKEYS.get(section)
+            if allowed is None:
+                raise HTTPException(422, f"Unknown payload section: {section!r}")
+            if not isinstance(section_body, dict):
+                raise HTTPException(422, f"payload.{section} must be an object.")
+            bad = [k for k in section_body if k not in allowed]
+            if bad:
+                raise HTTPException(
+                    422, f"Field not editable: payload.{section}.{bad[0]}")
+            # bedding.condition enum check
+            if section == "bedding" and "condition" in section_body:
+                if section_body["condition"] not in _BEDDING_CONDITIONS:
+                    raise HTTPException(422, "bedding.condition invalid.")
+            # primitive-only values
+            for k, v in section_body.items():
+                if v is None:
+                    continue
+                if not isinstance(v, (str, int, float, bool)):
+                    raise HTTPException(
+                        422, f"payload.{section}.{k} must be primitive.")
+
+    def _check_field_paths(body):
+        """Build the audit field_paths list — keys only, no values."""
+        paths = []
+        for k in body:
+            if k == "payload" and isinstance(body[k], dict):
+                for section, sub in body[k].items():
+                    if isinstance(sub, dict):
+                        for nk in sub:
+                            paths.append(f"payload.{section}.{nk}")
+                    else:
+                        paths.append(f"payload.{section}")
+            else:
+                paths.append(k)
+        return sorted(paths)
+
+    @router.post("/horse-ledger/{horse_id}/daily-checks")
+    async def create_daily_check(horse_id: str, body: Dict[str, Any],
+                                 user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_check_creator(user, horse)
+        _validate_check_body(body, is_patch=False)
+        _validate_check_payload(body.get("payload"))
+        # Optional task linkage — must be a task in the same barn.
+        task_id = body.get("task_id")
+        if task_id:
+            task = await db.tasks.find_one(
+                {"id": task_id, "tenant_id": horse["barn_id"]},
+                {"_id": 0, "id": 1},
+            )
+            if not task:
+                # The 1-C founder spec calls for 422 (a *known* invalid
+                # body), not 404 (the parent resource). Cross-barn task
+                # ids are treated as malformed input.
+                raise HTTPException(422, "task_id not in this barn.")
+        now_iso = datetime.now(timezone.utc).isoformat()
+        import uuid as _uuid
+        check_id = f"hdcl_{_uuid.uuid4().hex[:24]}"
+        doc = {
+            "id": check_id,
+            "horse_id": horse_id,
+            "barn_id":  horse["barn_id"],
+            "task_id":  task_id or None,
+            "check_type": body["check_type"],
+            "status":     body.get("status") or "ok",
+            "notes":      body.get("notes"),
+            "payload":    body.get("payload") or {},
+            "created_at": now_iso,
+            "checked_at": body.get("checked_at") or now_iso,
+            "checked_by_user_id": user.get("id"),
+            "amended_at": None,
+        }
+        await db.horse_daily_check_logs.insert_one(doc)
+        sensitivity = "operational" if body["check_type"] == "feed" else "staff_only"
+        await _emit_audit(
+            horse_id, horse["barn_id"], user,
+            section="daily_checks", action="created",
+            field_paths=_check_field_paths(body),
+            sensitivity=sensitivity,
+        )
+        return {"ok": True, "id": check_id}
+
+    @router.get("/horse-ledger/{horse_id}/daily-checks")
+    async def list_daily_checks(horse_id: str,
+                                limit: int = 20,
+                                check_type: Optional[str] = None,
+                                user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        # Hard-hidden from owners.
+        role = (user.get("role") or "").strip().lower()
+        if role == "horse_owner":
+            raise HTTPException(403, "Daily checks are staff-only.")
+        _require_check_creator(user, horse)  # any in-barn staff role
+        q: Dict[str, Any] = {"horse_id": horse_id, "barn_id": horse["barn_id"]}
+        if check_type is not None:
+            if check_type not in _CHECK_TYPES:
+                raise HTTPException(422, "check_type invalid.")
+            q["check_type"] = check_type
+        limit = max(1, min(int(limit or 20), 100))
+        rows = await db.horse_daily_check_logs.find(q, {"_id": 0}) \
+            .sort("checked_at", -1).to_list(limit)
+        return _scrub_strings({"items": rows})
+
+    @router.patch("/horse-ledger/{horse_id}/daily-checks/{check_id}")
+    async def patch_daily_check(horse_id: str, check_id: str,
+                                body: Dict[str, Any],
+                                user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        existing = await db.horse_daily_check_logs.find_one(
+            {"id": check_id, "horse_id": horse_id,
+             "barn_id": horse["barn_id"]}, {"_id": 0},
+        )
+        if not existing:
+            raise HTTPException(404, "Daily check not found.")
+        _require_check_amender(user, horse, existing)
+        _validate_check_body(body, is_patch=True)
+        _validate_check_payload(body.get("payload"))
+        updates: Dict[str, Any] = {}
+        for k in ("status", "notes"):
+            if k in body:
+                updates[k] = body[k]
+        if "payload" in body and isinstance(body["payload"], dict):
+            # Merge payload section-by-section so a partial PATCH does
+            # not blow away prior subkeys. (Section-level replace,
+            # subkey-level merge.)
+            merged = dict(existing.get("payload") or {})
+            for section, sub in body["payload"].items():
+                cur = dict(merged.get(section) or {})
+                cur.update(sub)
+                merged[section] = cur
+            updates["payload"] = merged
+        if not updates:
+            raise HTTPException(422, "No editable fields supplied.")
+        updates["amended_at"] = datetime.now(timezone.utc).isoformat()
+        await db.horse_daily_check_logs.update_one(
+            {"id": check_id}, {"$set": updates},
+        )
+        sensitivity = "operational" if existing.get("check_type") == "feed" else "staff_only"
+        await _emit_audit(
+            horse_id, horse["barn_id"], user,
+            section="daily_checks", action="updated",
+            field_paths=_check_field_paths(body),
+            sensitivity=sensitivity,
+        )
         return {"ok": True}
 
     return router
