@@ -997,3 +997,229 @@ def test_owner_supplements_projection_drops_dosage_notes(db):
         assert "DO NOT TELL OWNER" not in r.text
     finally:
         _cleanup(db)
+
+
+# =====================================================================
+# Codex Round-2 regressions (Phase HorseOps-1B)
+#
+# P0  feeding.schedule / turnout.schedule staff-note leak
+# P1  Policy PUT must 422 on unknown allowlist keys
+# P1  Equipment / provider / assignment status enum validation
+# =====================================================================
+@pytest.mark.parametrize("section", ["feeding", "turnout"])
+def test_schedule_dict_with_unknown_subkey_rejected_at_write(db, section):
+    """Round-2 P0: a manager cannot save a schedule entry with a free-
+    form subkey like `staff_note`. The PATCH must 422 so the staff note
+    never even enters the DB."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        r = requests.patch(
+            f"{API}/horse-ledger/{hid}/care-profile",
+            headers=_bearer(mgr),
+            json={section: {"schedule": [
+                {"time": "AM", "staff_note": "give bute, do not tell owner"}
+            ]}},
+            timeout=10,
+        )
+        assert r.status_code == 422, r.text
+        # Confirm nothing was persisted with that staff note.
+        prof = db.horse_care_profiles.find_one({"horse_id": hid}) or {}
+        assert "give bute" not in str(prof)
+    finally:
+        _cleanup(db)
+
+
+@pytest.mark.parametrize("section", ["feeding", "turnout"])
+def test_schedule_staff_note_stripped_on_owner_read_if_db_tampered(db, section):
+    """Round-2 P0 defense-in-depth: if a schedule entry is hand-planted
+    in Mongo with a `staff_note` (bypassing the write validator), the
+    owner read MUST strip it via the `_SCHEDULE_SUBKEYS` projection."""
+    bid = _make_barn(db); owner = _owner_session(db, bid)
+    hid = _make_horse(db, bid, owner_id=owner["user"]["id"])
+    sentinel = f"LEAK_VIA_{section.upper()}_SCHEDULE"
+    db.horse_care_profiles.insert_one({
+        "id": f"hcp_r2_{section}", "horse_id": hid, "barn_id": bid,
+        section: {"schedule": [
+            {"time": "AM", "staff_note": sentinel, "label": "Breakfast"}
+        ]},
+        "_hl1b_test": True,
+    })
+    try:
+        r = requests.get(f"{API}/horse-ledger/{hid}",
+                         headers=_bearer(owner), timeout=10)
+        assert sentinel not in r.text, f"{section}.schedule leaked staff_note"
+        # The owner-safe subkeys should still surface.
+        body = r.json().get(section) or {}
+        struct = body.get("structured") or {}
+        sched = struct.get("schedule") or []
+        assert sched, f"{section}.schedule projection was empty"
+        for entry in sched:
+            if isinstance(entry, dict):
+                assert "staff_note" not in entry
+                # The known-safe subkeys are still allowed through.
+                assert set(entry.keys()) <= {"time", "label", "amount", "duration", "paddock"}
+    finally:
+        _cleanup(db)
+
+
+def test_policy_put_rejects_unknown_allowlist_key(db):
+    """Round-2 P1: a key not in `_OWNER_SAFE_KEYS` for a section must
+    422 at PUT time, not silently no-op on read."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        r = requests.put(
+            f"{API}/horse-ledger/{hid}/owner-visibility-policy",
+            headers=_bearer(mgr),
+            json={"sections": {"feeding": {
+                "allowlist": ["grain_feed_type", "totally_made_up_key"]
+            }}},
+            timeout=10,
+        )
+        assert r.status_code == 422, r.text
+        # No policy doc should have been written.
+        assert db.horse_owner_visibility_policy.find_one({"horse_id": hid}) is None
+    finally:
+        _cleanup(db)
+
+
+@pytest.mark.parametrize("section", ["stall_bedding", "handling_behavior", "service_providers"])
+def test_policy_put_rejects_section_with_no_owner_exposable_keys(db, section):
+    """Sections that have no owner-exposable keys in the safe registry
+    must 422 outright on a PUT — a manager cannot accidentally start
+    leaking these sections by saving a non-empty allowlist."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        r = requests.put(
+            f"{API}/horse-ledger/{hid}/owner-visibility-policy",
+            headers=_bearer(mgr),
+            json={"sections": {section: {"allowlist": ["whatever"]}}},
+            timeout=10,
+        )
+        assert r.status_code == 422, r.text
+    finally:
+        _cleanup(db)
+
+
+def test_policy_put_accepts_known_safe_keys(db):
+    """Sanity: every key in `_OWNER_SAFE_KEYS` is accepted by PUT."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        r = requests.put(
+            f"{API}/horse-ledger/{hid}/owner-visibility-policy",
+            headers=_bearer(mgr),
+            json={"sections": {
+                "feeding":         {"allowlist": ["grain_feed_type", "amount_value", "amount_unit"]},
+                "hay_access":      {"allowlist": ["access_type", "hay_type", "quantity_per_feeding"]},
+                "turnout":         {"allowlist": ["schedule", "pasture_paddock_assignment"]},
+                "riding_training": {"allowlist": ["discipline", "current_level"]},
+                "equipment":       {"allowlist": ["category", "label"]},
+            }},
+            timeout=10,
+        )
+        assert r.status_code == 200, r.text
+    finally:
+        _cleanup(db)
+
+
+# ---------- status enum tightening (Round-2 P1) ----------
+@pytest.mark.parametrize("bad_status", ["deleted", "archived", "Active", "DRAFT", "x"])
+def test_equipment_post_rejects_bad_status(db, bad_status):
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        r = requests.post(
+            f"{API}/horse-ledger/{hid}/equipment",
+            headers=_bearer(mgr),
+            json={"category": "saddle", "status": bad_status},
+            timeout=10,
+        )
+        assert r.status_code == 422, (bad_status, r.text)
+    finally:
+        _cleanup(db)
+
+
+@pytest.mark.parametrize("bad_status", ["deleted", "retired", "X", "draft"])
+def test_provider_post_rejects_bad_status(db, bad_status):
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        r = requests.post(
+            f"{API}/horse-ledger/{hid}/service-providers",
+            headers=_bearer(mgr),
+            json={"category": "vet", "name": "Dr Smith", "status": bad_status},
+            timeout=10,
+        )
+        assert r.status_code == 422, (bad_status, r.text)
+    finally:
+        _cleanup(db)
+
+
+@pytest.mark.parametrize("bad_status", ["deleted", "retired", "DRAFT", "x"])
+def test_assignment_post_rejects_bad_status(db, bad_status):
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        # Create a provider first.
+        rp = requests.post(
+            f"{API}/horse-ledger/{hid}/service-providers",
+            headers=_bearer(mgr),
+            json={"category": "vet", "name": "Dr Smith"}, timeout=10,
+        )
+        sp_id = rp.json()["id"]
+        r = requests.post(
+            f"{API}/horse-ledger/{hid}/provider-assignments",
+            headers=_bearer(mgr),
+            json={"provider_id": sp_id, "category": "vet", "status": bad_status},
+            timeout=10,
+        )
+        assert r.status_code == 422, (bad_status, r.text)
+    finally:
+        _cleanup(db)
+
+
+def test_assignment_patch_rejects_bad_status(db):
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        rp = requests.post(
+            f"{API}/horse-ledger/{hid}/service-providers",
+            headers=_bearer(mgr),
+            json={"category": "farrier", "name": "Joe"}, timeout=10,
+        )
+        sp_id = rp.json()["id"]
+        ra = requests.post(
+            f"{API}/horse-ledger/{hid}/provider-assignments",
+            headers=_bearer(mgr),
+            json={"provider_id": sp_id, "category": "farrier"}, timeout=10,
+        )
+        a_id = ra.json()["id"]
+        bad = requests.patch(
+            f"{API}/horse-ledger/{hid}/provider-assignments/{a_id}",
+            headers=_bearer(mgr),
+            json={"status": "deleted"}, timeout=10,
+        )
+        assert bad.status_code == 422, bad.text
+    finally:
+        _cleanup(db)
+
+
+def test_status_enum_happy_paths(db):
+    """Sanity: equipment(active|retired) + provider/assignment(active|archived) still work."""
+    bid = _make_barn(db); hid = _make_horse(db, bid); mgr = _mgr_session(db, bid)
+    try:
+        # equipment: active + retired
+        for st in ("active", "retired"):
+            r = requests.post(
+                f"{API}/horse-ledger/{hid}/equipment",
+                headers=_bearer(mgr),
+                json={"category": "saddle", "status": st}, timeout=10,
+            )
+            assert r.status_code == 200, (st, r.text)
+        # provider: active + archived
+        for st in ("active", "archived"):
+            r = requests.post(
+                f"{API}/horse-ledger/{hid}/service-providers",
+                headers=_bearer(mgr),
+                json={"category": "vet", "name": f"Dr {st}",
+                      "status": st}, timeout=10,
+            )
+            assert r.status_code == 200, (st, r.text)
+    finally:
+        _cleanup(db)
+

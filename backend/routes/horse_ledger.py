@@ -153,20 +153,36 @@ def _project_supplements(supplements: Any) -> List[Dict[str, Any]]:
     return out
 
 
-def _project_schedule(schedule: Any) -> List[Any]:
-    """Owner-safe schedule projection: list of strings/dicts retained
-    as-is, but bounded to primitives so nested staff notes can't ride
-    along."""
+# Round-2 P0: schedule subkeys are restricted to a tiny, owner-safe
+# registry per section. Both the read projection AND the PATCH
+# validator use this registry — at write time we 422 on unknown subkeys
+# so a staff note keyed `staff_note` (or anything else) never even
+# lands in the DB. The read projection then strips any unknown subkey
+# as defense-in-depth in case a doc was hand-planted.
+_SCHEDULE_SUBKEYS: Dict[str, frozenset] = {
+    "feeding": frozenset({"time", "label", "amount"}),
+    "turnout": frozenset({"time", "label", "duration", "paddock"}),
+}
+
+
+def _project_schedule(section: str, schedule: Any) -> List[Any]:
+    """Owner-safe schedule projection. Lists of primitives pass
+    through; dict entries are restricted to the section's
+    `_SCHEDULE_SUBKEYS` allowlist. Anything else is dropped so a
+    free-form `staff_note` (or any other unsanctioned key) can never
+    surface to an owner."""
     if not isinstance(schedule, list):
         return []
-    out = []
+    allowed = _SCHEDULE_SUBKEYS.get(section, frozenset())
+    out: List[Any] = []
     for item in schedule:
         if isinstance(item, (str, int, float, bool)):
             out.append(item)
         elif isinstance(item, dict):
-            # Only carry primitive keys; reject nested dicts.
-            out.append({k: v for k, v in item.items()
-                        if isinstance(v, (str, int, float, bool))})
+            cleaned = {k: v for k, v in item.items()
+                       if k in allowed and isinstance(v, (str, int, float, bool))}
+            if cleaned:
+                out.append(cleaned)
     return out
 
 
@@ -188,7 +204,7 @@ def _project_owner_safe(section: str,
         if k == "supplements":
             out[k] = _project_supplements(v)
         elif k == "schedule":
-            out[k] = _project_schedule(v)
+            out[k] = _project_schedule(section, v)
         else:
             out[k] = v
     return out or None
@@ -738,33 +754,40 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 return False
         return True
 
-    def _schedule_ok(value):
+    def _schedule_ok(section: str, value):
         """Schedule must be a list of primitives (str/number/bool) or
-        primitive-only dicts. No deeply nested structures so the
-        owner-safe projection cannot carry over a staff note."""
+        dicts whose keys are in the section's `_SCHEDULE_SUBKEYS`
+        allowlist with primitive values. This is what stops a payload
+        like `[{"time": "AM", "staff_note": "..."}]` from ever landing
+        in the DB."""
         if not isinstance(value, list):
             return False
+        allowed = _SCHEDULE_SUBKEYS.get(section, frozenset())
         for item in value:
             if isinstance(item, (str, int, float, bool)):
                 continue
             if isinstance(item, dict):
-                if not all(isinstance(v, (str, int, float, bool))
-                           for v in item.values()):
+                if not item:
                     return False
+                for k, v in item.items():
+                    if k not in allowed:
+                        return False
+                    if not isinstance(v, (str, int, float, bool)):
+                        return False
                 continue
             return False
         return True
 
     _NESTED_VALIDATORS: Dict[str, Dict[str, Any]] = {
         "feeding": {
-            "supplements": _supplements_ok,
-            "schedule":    _schedule_ok,
+            "supplements": lambda v: _supplements_ok(v),
+            "schedule":    lambda v: _schedule_ok("feeding", v),
         },
         "hay_access": {
-            "hay_nets": _hay_nets_ok,
+            "hay_nets": lambda v: _hay_nets_ok(v),
         },
         "turnout": {
-            "schedule": _schedule_ok,
+            "schedule": lambda v: _schedule_ok("turnout", v),
         },
     }
 
@@ -866,6 +889,23 @@ def build_router(*, db, get_current_user) -> APIRouter:
                     raise HTTPException(
                         422, f"Key {section}.{key!r} is forbidden for owner allowlist."
                     )
+                # Round-2 P1: unknown allowlist keys (outside the safe
+                # registry) must be rejected up-front so a manager
+                # cannot save ineffective policy values that the UI
+                # then implies were accepted.
+                safe = _OWNER_SAFE_KEYS.get(section)
+                if safe is not None and key not in safe:
+                    raise HTTPException(
+                        422,
+                        f"Key {section}.{key!r} is not an owner-safe key.",
+                    )
+                if safe is None:
+                    # Section has no owner-exposable keys (e.g.
+                    # stall_bedding, handling_behavior, service_providers).
+                    raise HTTPException(
+                        422,
+                        f"Section {section!r} cannot be exposed to owners.",
+                    )
         now_iso = datetime.now(timezone.utc).isoformat()
         import uuid as _uuid
         await db.horse_owner_visibility_policy.update_one(
@@ -891,6 +931,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
     _EQUIPMENT_WRITABLE = {"category", "label", "brand", "size", "fit_notes",
                            "location", "restrictions", "cleaning_care_notes",
                            "saddle_fit_history", "status"}
+    _EQUIPMENT_STATUS = {"active", "retired"}
 
     @router.post("/horse-ledger/{horse_id}/equipment")
     async def add_equipment(horse_id: str, body: Dict[str, Any],
@@ -902,6 +943,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
         bad = [k for k in body if k not in _EQUIPMENT_WRITABLE]
         if bad:
             raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        if body.get("status") and body["status"] not in _EQUIPMENT_STATUS:
+            raise HTTPException(422, "status must be active|retired.")
         import uuid as _uuid
         eq_id = f"eq_{_uuid.uuid4().hex[:24]}"
         doc = {**body, "id": eq_id, "horse_id": horse_id,
@@ -924,7 +967,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         bad = [k for k in (body or {}) if k not in _EQUIPMENT_WRITABLE]
         if bad:
             raise HTTPException(422, f"Field not editable: {bad[0]!r}")
-        if body.get("status") and body["status"] not in {"active", "retired"}:
+        if body.get("status") and body["status"] not in _EQUIPMENT_STATUS:
             raise HTTPException(422, "status must be active|retired.")
         r = await db.horse_equipment.update_one(
             {"id": equipment_id, "horse_id": horse_id,
@@ -946,9 +989,11 @@ def build_router(*, db, get_current_user) -> APIRouter:
                       "nutritionist", "dentist", "trainer", "other"}
     _PROVIDER_WRITABLE = {"category", "name", "company", "phone", "email",
                           "address", "notes", "is_primary_for_barn", "status"}
+    _PROVIDER_STATUS = {"active", "archived"}
     _ASSIGNMENT_WRITABLE = {"provider_id", "category", "last_service_date",
                             "next_due_date", "interval_days", "notes",
                             "is_primary_for_horse", "status"}
+    _ASSIGNMENT_STATUS = {"active", "archived"}
 
     @router.post("/horse-ledger/{horse_id}/service-providers")
     async def add_provider(horse_id: str, body: Dict[str, Any],
@@ -962,6 +1007,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
         bad = [k for k in body if k not in _PROVIDER_WRITABLE]
         if bad:
             raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        if body.get("status") and body["status"] not in _PROVIDER_STATUS:
+            raise HTTPException(422, "status must be active|archived.")
         import uuid as _uuid
         sp_id = f"sp_{_uuid.uuid4().hex[:24]}"
         await db.service_providers.insert_one({
@@ -987,6 +1034,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
         bad = [k for k in body if k not in _ASSIGNMENT_WRITABLE]
         if bad:
             raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        if body.get("status") and body["status"] not in _ASSIGNMENT_STATUS:
+            raise HTTPException(422, "status must be active|archived.")
         # Provider must be in same barn.
         prov = await db.service_providers.find_one(
             {"id": body["provider_id"], "barn_id": horse["barn_id"]},
@@ -1017,6 +1066,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
         bad = [k for k in (body or {}) if k not in _ASSIGNMENT_WRITABLE]
         if bad:
             raise HTTPException(422, f"Field not editable: {bad[0]!r}")
+        if body.get("category") and body["category"] not in _PROVIDER_CATS:
+            raise HTTPException(422, "category must be a known provider type.")
+        if body.get("status") and body["status"] not in _ASSIGNMENT_STATUS:
+            raise HTTPException(422, "status must be active|archived.")
         r = await db.horse_provider_assignments.update_one(
             {"id": assignment_id, "horse_id": horse_id,
              "barn_id": horse["barn_id"]},

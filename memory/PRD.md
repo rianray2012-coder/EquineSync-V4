@@ -20,6 +20,34 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1B Round-2 Fixes ✅ (Feb 2026, awaiting Codex re-review)
+Closes the four Codex Round-2 findings:
+
+- **P0 — `schedule` staff-note leak closed.** New `_SCHEDULE_SUBKEYS` registry restricts schedule dict subkeys to a tiny owner-safe set (`feeding`: `time/label/amount`; `turnout`: `time/label/duration/paddock`). `_schedule_ok(section, value)` 422s any subkey outside that registry at write time, and `_project_schedule(section, schedule)` strips unknown subkeys on owner read as defense-in-depth. A payload like `[{"time":"AM","staff_note":"give bute"}]` is now rejected at PATCH time AND filtered on read if hand-planted in Mongo.
+- **P1 — Policy PUT 422s on unknown allowlist keys.** `PUT /owner-visibility-policy` now rejects any key not in `_OWNER_SAFE_KEYS[section]` and any section that has no owner-exposable keys (`stall_bedding`, `handling_behavior`, `service_providers`).
+- **P1 — Status enums tightened.** New enums `_EQUIPMENT_STATUS = {active, retired}`, `_PROVIDER_STATUS = {active, archived}`, `_ASSIGNMENT_STATUS = {active, archived}` enforced on every POST + PATCH. "deleted", capitalized variants, and other free strings → 422.
+- **P2 — Phase README ships in the delta package.** `PHASE_HORSEOPS_1B_README.md` covers scope, Round-1/Round-2 fixes, test counts, deferred barn-wide template note, and a Codex review checklist.
+
+**Tests** — `test_horse_ledger_1b.py` grew 77 → 101 (+24 Round-2 regressions). Full Care-Ledger suite **130/130 pass** (29 1-A + 101 1-B).
+
+New Round-2 regressions:
+- `test_schedule_dict_with_unknown_subkey_rejected_at_write` × 2 sections (feeding/turnout)
+- `test_schedule_staff_note_stripped_on_owner_read_if_db_tampered` × 2 sections
+- `test_policy_put_rejects_unknown_allowlist_key`
+- `test_policy_put_rejects_section_with_no_owner_exposable_keys` × 3 sections
+- `test_policy_put_accepts_known_safe_keys`
+- `test_equipment_post_rejects_bad_status` × 5 bad strings
+- `test_provider_post_rejects_bad_status` × 4 bad strings
+- `test_assignment_post_rejects_bad_status` × 4 bad strings
+- `test_assignment_patch_rejects_bad_status`
+- `test_status_enum_happy_paths`
+
+**Delta package** re-packaged at `/app/phase_horseops_1b_changes.zip` (with README now included).
+
+**Out of scope (deferred)**: "Apply barn-wide owner visibility template" stays a future gated phase (likely HorseOps-1B.1).
+
+
+
 ### Phase HorseOps-1B Round-1 Fixes ✅ (Feb 2026, awaiting Codex re-review)
 Closes the four Codex Round-1 findings:
 
