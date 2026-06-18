@@ -123,7 +123,14 @@ function App() {
             <Route path="/accept-invite" element={<AcceptInvite />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="/owner/horses/:horseId" element={<OwnerCareLedger />} />
+            <Route
+              path="/owner/horses/:horseId"
+              element={
+                <Protected>
+                  {permit(<OwnerCareLedger />, ["horse_owner", "admin", "barn_manager"])}
+                </Protected>
+              }
+            />
 
             {/* Admin Portal (Admin-1) — own shell + platform_role gate.
                 Namespace is /admin/portal/* (NOT /admin/*) so it never

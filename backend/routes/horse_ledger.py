@@ -1817,12 +1817,17 @@ def build_router(*, db, get_current_user) -> APIRouter:
     }
 
     def _is_horse_owner_for(user, horse) -> bool:
-        """Owner if `user.id` matches `horses.owner_id` or appears in
-        `horses.secondary_owner_ids` (legacy field). Falls back to the
-        backend-authoritative owner-view branching used elsewhere."""
+        """Owner if `user.id` matches `horses.primary_owner_id` (the
+        locked Care Ledger field name from 1-A), `horses.owner_id`
+        (legacy alias still in use across older docs), or appears in
+        `horses.secondary_owner_ids`. Round-1 fix: 1-E originally
+        only checked `owner_id` which caused 404s for every horse
+        whose owner is recorded under `primary_owner_id`."""
         uid = user.get("id")
         if not uid:
             return False
+        if horse.get("primary_owner_id") == uid:
+            return True
         if horse.get("owner_id") == uid:
             return True
         sec = horse.get("secondary_owner_ids") or []
@@ -1891,7 +1896,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # The active-alert lookup returns only "is there any?" — zero
         # detail crosses the boundary.
         owner_uid = (user.get("id") if (user.get("role") or "").lower() == "horse_owner"
-                     else (horse.get("owner_id") or ""))
+                     else (horse.get("primary_owner_id") or horse.get("owner_id") or ""))
         care_status = "all_clear"
         active_alert = await db.horse_ledger_alerts.find_one(
             {"horse_id": horse_id, "barn_id": horse["barn_id"],

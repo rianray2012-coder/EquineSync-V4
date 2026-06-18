@@ -654,3 +654,152 @@ def test_service_request_owner_indexes_present(db):
     idx = {i["name"] for i in db.service_requests.list_indexes()}
     assert "sr_source_barn_horse_created" in idx
     assert "sr_owner_horse_created" in idx
+
+
+# =====================================================================
+# Codex Round-1 regressions (Phase HorseOps-1E)
+#
+# P0  Owner access must support `primary_owner_id` (locked Care Ledger
+#     field name from 1-A) in addition to `owner_id` and
+#     `secondary_owner_ids`. Without this, every horse keyed under
+#     `primary_owner_id` 404s the owner.
+# =====================================================================
+def _owner_via_primary(db, bid, horse_id):
+    """Owner whose ID is stored in `horses.primary_owner_id` only
+    (NOT `owner_id`). Mirrors the locked Care Ledger schema from 1-A."""
+    s = _signup(role="horse_owner")
+    _put_user_in_barn(db, s["user"]["id"], bid, "horse_owner")
+    db.horses.update_one(
+        {"id": horse_id},
+        {"$set": {"primary_owner_id": s["user"]["id"]},
+         "$unset": {"owner_id": ""}},
+    )
+    return s
+
+
+def test_owner_summary_accepts_primary_owner_id(db):
+    bid = _make_barn(db); hid = _make_horse(db, bid)
+    o = _owner_via_primary(db, bid, hid)
+    try:
+        r = requests.get(f"{API}/horse-ledger/{hid}/owner-summary",
+                         headers=_bearer(o), timeout=10)
+        assert r.status_code == 200, r.text
+        assert r.json()["horse_id"] == hid
+    finally:
+        _cleanup(db)
+
+
+def test_owner_can_post_owner_request_via_primary_owner_id(db):
+    bid = _make_barn(db); hid = _make_horse(db, bid)
+    o = _owner_via_primary(db, bid, hid)
+    try:
+        r = requests.post(
+            f"{API}/horse-ledger/{hid}/owner-service-requests",
+            headers=_bearer(o),
+            json={"request_type": "question", "message": "via primary",
+                  "preferred_contact": "app"}, timeout=10,
+        )
+        assert r.status_code == 200, r.text
+        row = db.service_requests.find_one(
+            {"id": r.json()["id"], "source": "owner_care_ledger"})
+        assert row["owner_user_id"] == o["user"]["id"]
+    finally:
+        _cleanup(db)
+
+
+def test_owner_list_via_primary_owner_id(db):
+    bid = _make_barn(db); hid = _make_horse(db, bid)
+    o = _owner_via_primary(db, bid, hid)
+    # Seed a request directly.
+    db.service_requests.insert_one({
+        "id": "osr_primary_seed", "source": "owner_care_ledger",
+        "horse_id": hid, "barn_id": bid,
+        "owner_user_id": o["user"]["id"],
+        "request_type": "question", "message": "seeded",
+        "preferred_contact": "app", "status": "new",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "resolved_at": None, "resolved_by_user_id": None, "staff_note": None,
+        TAG: True,
+    })
+    try:
+        r = requests.get(f"{API}/horse-ledger/{hid}/owner-service-requests",
+                         headers=_bearer(o), timeout=10)
+        assert r.status_code == 200, r.text
+        items = r.json()["items"]
+        assert any(it["id"] == "osr_primary_seed" for it in items)
+        # Owner response still strips staff_note.
+        for it in items:
+            assert "staff_note" not in it
+    finally:
+        _cleanup(db)
+
+
+def test_owner_summary_care_status_request_via_primary_owner_id(db):
+    """care_status follow_up_available must also key off
+    `primary_owner_id` (was effectively broken before — owner posts
+    succeeded under owner_id but care_status lookup used owner_id only).
+    """
+    bid = _make_barn(db); hid = _make_horse(db, bid)
+    o = _owner_via_primary(db, bid, hid)
+    try:
+        requests.post(f"{API}/horse-ledger/{hid}/owner-service-requests",
+                      headers=_bearer(o),
+                      json={"request_type": "question", "message": "?",
+                            "preferred_contact": "app"}, timeout=10)
+        r = requests.get(f"{API}/horse-ledger/{hid}/owner-summary",
+                         headers=_bearer(o), timeout=10)
+        assert r.json()["care_status"] == "follow_up_available"
+    finally:
+        _cleanup(db)
+
+
+def test_manager_preview_care_status_uses_primary_owner_id_for_owner_lookup(db):
+    """Manager preview reads `recent_owner_requests` for the horse's
+    primary owner; if it uses only `owner_id`, the preview will show an
+    empty list when the field is `primary_owner_id`."""
+    bid = _make_barn(db); hid = _make_horse(db, bid)
+    o = _owner_via_primary(db, bid, hid); mgr = _mgr(db, bid)
+    try:
+        requests.post(f"{API}/horse-ledger/{hid}/owner-service-requests",
+                      headers=_bearer(o),
+                      json={"request_type": "question", "message": "?",
+                            "preferred_contact": "app"}, timeout=10)
+        r = requests.get(f"{API}/horse-ledger/{hid}/owner-summary",
+                         headers=_bearer(mgr), timeout=10)
+        assert r.status_code == 200
+        # care_status follows the primary owner's request.
+        assert r.json()["care_status"] == "follow_up_available"
+        # And the recent_owner_requests block reflects the primary owner.
+        recent = r.json().get("recent_owner_requests") or []
+        assert len(recent) == 1
+    finally:
+        _cleanup(db)
+
+
+def test_secondary_owner_id_still_works(db):
+    """Regression: the existing `secondary_owner_ids` path is not
+    broken by adding `primary_owner_id` support."""
+    bid = _make_barn(db); hid = _make_horse(db, bid)
+    # Create a primary-only owner (so the horse has SOMEONE), then a
+    # secondary owner.
+    primary = _owner_via_primary(db, bid, hid)
+    sec = _signup(role="horse_owner")
+    _put_user_in_barn(db, sec["user"]["id"], bid, "horse_owner")
+    db.horses.update_one({"id": hid},
+                         {"$set": {"secondary_owner_ids": [sec["user"]["id"]]}})
+    try:
+        r = requests.get(f"{API}/horse-ledger/{hid}/owner-summary",
+                         headers=_bearer(sec), timeout=10)
+        assert r.status_code == 200, r.text
+        # Posting a request as the secondary owner succeeds.
+        r2 = requests.post(
+            f"{API}/horse-ledger/{hid}/owner-service-requests",
+            headers=_bearer(sec),
+            json={"request_type": "question", "message": "from secondary",
+                  "preferred_contact": "app"}, timeout=10,
+        )
+        assert r2.status_code == 200
+    finally:
+        _cleanup(db)
+
