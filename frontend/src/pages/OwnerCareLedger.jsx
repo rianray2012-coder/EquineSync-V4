@@ -8,9 +8,11 @@
  *
  * Route: /owner/horses/:horseId  (mounted in App.js)
  */
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../lib/api";
+import { useAuth } from "../context/AuthContext";
+import { buildHorseOpsDraftKey, clearHorseOpsDraft, loadHorseOpsDraft, saveHorseOpsDraft } from "../lib/horseOpsDrafts";
 
 const CARE_STATUS_COPY = {
   all_clear:            { label: "All clear", message: "Your horse's care is on track today." },
@@ -48,13 +50,13 @@ export default function OwnerCareLedger() {
   const [err, setErr]   = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const refetch = () => {
+  const refetch = useCallback(() => {
     return api.get(`/horse-ledger/${horseId}/owner-summary`)
       .then((r) => { setData(r.data); setErr(null); })
       .catch((e) => setErr(e?.response?.data?.detail || "Could not load."));
-  };
+  }, [horseId]);
 
-  useEffect(() => { refetch(); }, [horseId]);
+  useEffect(() => { refetch(); }, [refetch]);
 
   if (err)   return <div className="p-6 text-equine-platinum/75" data-testid="owner-care-error">{err}</div>;
   if (!data) return <div className="p-6 text-equine-platinum/55" data-testid="owner-care-loading">Loading…</div>;
@@ -98,7 +100,7 @@ export default function OwnerCareLedger() {
         type="button"
         onClick={() => setDrawerOpen(true)}
         data-testid="owner-request-ask-button"
-        className="w-full sm:w-auto text-[11px] tracking-[0.18em] uppercase border border-equine-silver/30 bg-equine-silver/10 hover:bg-equine-silver/20 text-equine-silver px-5 py-2.5 rounded"
+        className="min-h-11 w-full sm:w-auto text-[11px] tracking-[0.18em] uppercase border border-equine-silver/30 bg-equine-silver/10 hover:bg-equine-silver/20 text-equine-silver px-5 py-2.5 rounded"
       >
         Ask the barn
       </button>
@@ -112,9 +114,9 @@ export default function OwnerCareLedger() {
               <li
                 key={r.id}
                 data-testid={`owner-request-row-${r.id}`}
-                className="flex items-center justify-between gap-3 text-[13px]"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[13px]"
               >
-                <span className="text-equine-silver/85 truncate">{r.message}</span>
+                <span className="text-equine-silver/85 break-words">{r.message}</span>
                 <Pill status={r.status} />
               </li>
             ))}
@@ -130,11 +132,38 @@ export default function OwnerCareLedger() {
 }
 
 function OwnerRequestDrawer({ horseId, onClose, onSaved }) {
+  const { user } = useAuth();
+  const draftKey = buildHorseOpsDraftKey({
+    userId: user?.id || user?.email,
+    horseId,
+    form: "owner-request",
+  });
   const [type, setType]       = useState("question");
   const [contact, setContact] = useState("app");
   const [message, setMessage] = useState("");
   const [saving, setSaving]   = useState(false);
   const [error, setError]     = useState(null);
+  const [draftRestored, setDraftRestored] = useState(false);
+  const [draftReady, setDraftReady] = useState(false);
+
+  useEffect(() => {
+    const draft = loadHorseOpsDraft(draftKey);
+    if (!draft) { setDraftReady(true); return; }
+    if (draft.type) setType(draft.type);
+    if (draft.contact) setContact(draft.contact);
+    if (typeof draft.message === "string") setMessage(draft.message);
+    setDraftRestored(true);
+    setDraftReady(true);
+  }, [draftKey]);
+
+  useEffect(() => {
+    if (!draftReady) return;
+    if (type !== "question" || contact !== "app" || message.trim()) {
+      saveHorseOpsDraft(draftKey, { type, contact, message });
+    } else {
+      clearHorseOpsDraft(draftKey);
+    }
+  }, [draftKey, draftReady, type, contact, message]);
 
   const save = async () => {
     setError(null);
@@ -145,6 +174,7 @@ function OwnerRequestDrawer({ horseId, onClose, onSaved }) {
       await api.post(`/horse-ledger/${horseId}/owner-service-requests`, {
         request_type: type, message, preferred_contact: contact,
       });
+      clearHorseOpsDraft(draftKey);
       onSaved();
     } catch (e) {
       setError(e?.response?.data?.detail || "Could not send your request.");
@@ -152,21 +182,41 @@ function OwnerRequestDrawer({ horseId, onClose, onSaved }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex" data-testid="owner-request-drawer">
+    <div className="fixed inset-0 z-50 flex items-stretch justify-end" data-testid="owner-request-drawer">
       <div className="flex-1 bg-equine-black/70 backdrop-blur-sm" onClick={onClose} />
-      <div className="w-full max-w-md bg-equine-black border-l border-equine-silver/15 flex flex-col">
-        <header className="px-5 py-4 border-b border-equine-silver/10">
-          <div className="label-eyebrow text-equine-platinum/55">Ask the barn</div>
-          <div className="text-[18px] font-serif text-equine-silver mt-1">New request</div>
+      <div className="h-full max-h-dvh w-full max-w-md bg-equine-black border-l border-equine-silver/15 flex flex-col">
+        <header className="shrink-0 px-5 py-4 border-b border-equine-silver/10 flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <div className="label-eyebrow text-equine-platinum/55">Ask the barn</div>
+            <div className="text-[18px] font-serif text-equine-silver mt-1">New request</div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={saving}
+            aria-label="Close"
+            data-testid="owner-request-drawer-close"
+            className="min-h-11 min-w-11 rounded border border-equine-silver/15 text-equine-platinum/65 hover:text-equine-silver hover:bg-equine-silver/10 disabled:opacity-40"
+          >
+            ×
+          </button>
         </header>
-        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-3">
+        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4 pb-6 space-y-3">
+          {draftRestored ? (
+            <div
+              data-testid="owner-request-draft-restored"
+              className="text-[12.5px] text-equine-platinum/70 border border-equine-silver/20 bg-equine-silver/5 px-3 py-2 rounded"
+            >
+              Draft restored on this device.
+            </div>
+          ) : null}
           <label className="block">
             <span className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/55 block mb-1">Type</span>
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
               data-testid="owner-request-drawer-type"
-              className="w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
+              className="min-h-11 w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
             >
               {REQUEST_TYPES.map((r) => (
                 <option key={r.value} value={r.value} data-testid={`owner-request-drawer-type-${r.value}`}>{r.label}</option>
@@ -179,7 +229,7 @@ function OwnerRequestDrawer({ horseId, onClose, onSaved }) {
               value={contact}
               onChange={(e) => setContact(e.target.value)}
               data-testid="owner-request-drawer-contact"
-              className="w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
+              className="min-h-11 w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
             >
               {CONTACT_OPTIONS.map((c) => (
                 <option key={c.value} value={c.value} data-testid={`owner-request-drawer-contact-${c.value}`}>{c.label}</option>
@@ -207,13 +257,13 @@ function OwnerRequestDrawer({ horseId, onClose, onSaved }) {
             </div>
           ) : null}
         </div>
-        <footer className="px-5 py-3 border-t border-equine-silver/10 flex justify-end gap-2">
+        <footer className="shrink-0 px-5 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] border-t border-equine-silver/10 flex justify-end gap-2">
           <button
             type="button"
             onClick={onClose}
             disabled={saving}
             data-testid="owner-request-cancel"
-            className="text-[12px] tracking-[0.18em] uppercase text-equine-platinum/55 px-3 py-2 hover:text-equine-silver"
+            className="min-h-11 text-[12px] tracking-[0.18em] uppercase text-equine-platinum/55 px-4 py-2 hover:text-equine-silver"
           >
             Cancel
           </button>
@@ -222,7 +272,7 @@ function OwnerRequestDrawer({ horseId, onClose, onSaved }) {
             onClick={save}
             disabled={saving}
             data-testid="owner-request-submit"
-            className="text-[12px] tracking-[0.18em] uppercase bg-equine-silver/15 hover:bg-equine-silver/25 text-equine-silver border border-equine-silver/25 px-4 py-2 rounded disabled:opacity-40"
+            className="min-h-11 text-[12px] tracking-[0.18em] uppercase bg-equine-silver/15 hover:bg-equine-silver/25 text-equine-silver border border-equine-silver/25 px-5 py-2 rounded disabled:opacity-40"
           >
             {saving ? "Sending…" : "Send"}
           </button>
