@@ -18,7 +18,7 @@
  * role is `admin` or `barn_manager`. Owners never see edit controls;
  * the read view is unchanged from 1-A.
  */
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { api } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
 
@@ -1588,12 +1588,12 @@ function OwnerRequestsSection({ horseId }) {
   const [error, setError] = useState(null);
   const [busy, setBusy]   = useState(null);
 
-  const refetch = () => {
+  const refetch = useCallback(() => {
     return api.get(`/horse-ledger/${horseId}/owner-service-requests`)
       .then((r) => { setItems(r.data.items || []); setError(null); })
       .catch((e) => setError(e?.response?.data?.detail || "Could not load."));
-  };
-  useEffect(() => { refetch(); /* eslint-disable-next-line */ }, [horseId]);
+  }, [horseId]);
+  useEffect(() => { refetch(); }, [refetch]);
 
   const setStatus = async (rid, status) => {
     setBusy(rid);
@@ -1654,4 +1654,3 @@ function OwnerRequestsSection({ horseId }) {
     </section>
   );
 }
-
