@@ -1,9 +1,9 @@
-"""routes/membership.py — Equine Sync marketplace membership + Stripe Checkout.
+"""routes/membership.py — legacy marketplace membership + Stripe webhook shim.
 
-Public marketplace tier selection + Stripe Checkout integration via the
-emergentintegrations Stripe playbook. Server-authoritative pricing (no
-client-controlled amounts), payment_transactions audit collection, and a
-polling-based status endpoint to update the user's `subscription_status`.
+Public marketplace tier selection and checkout are sunset in favor of the
+Phase 15 subscription billing system. The remaining legacy webhook shim uses
+the official Stripe SDK so production deploys do not depend on the retired
+Emergent-only integration package.
 
 Tiers (USD/month):
   - free            → $0      (no checkout, immediate "free" status)
@@ -21,11 +21,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
-
-from emergentintegrations.payments.stripe.checkout import (
-    StripeCheckout,
-    CheckoutSessionRequest,
-)
+import stripe
 
 logger = logging.getLogger(__name__)
 
@@ -65,23 +61,36 @@ class CheckoutRequestBody(BaseModel):
     origin_url: str  # frontend window.location.origin for success/cancel URLs
 
 
-def _stripe_client(request: Request) -> StripeCheckout:
+class _LegacyCheckoutEvent:
+    def __init__(self, *, event_type: str, session: dict):
+        self.event_type = event_type
+        self.session_id = session.get("id")
+        self.payment_status = session.get("payment_status")
+        self.status = session.get("status")
+
+
+async def _parse_legacy_checkout_event(request: Request) -> _LegacyCheckoutEvent:
     api_key = os.environ.get("STRIPE_API_KEY")
     if not api_key:
         raise HTTPException(500, "Stripe is not configured on this server.")
-    host_url = str(request.base_url)
-    webhook_url = f"{host_url.rstrip('/')}/api/webhook/stripe"
-    # If a signing secret is configured, hand it to the playbook helper so
-    # webhook signature verification is enforced (MVP billing lifecycle).
+    stripe.api_key = api_key
+    body = await request.body()
     secret = os.environ.get("STRIPE_WEBHOOK_SECRET")
-    kwargs = {"api_key": api_key, "webhook_url": webhook_url}
-    if secret:
-        kwargs["webhook_secret"] = secret
     try:
-        return StripeCheckout(**kwargs)
-    except TypeError:
-        # Older playbook signatures don't accept webhook_secret — fall back.
-        return StripeCheckout(api_key=api_key, webhook_url=webhook_url)
+        if secret:
+            event = stripe.Webhook.construct_event(
+                payload=body,
+                sig_header=request.headers.get("Stripe-Signature"),
+                secret=secret,
+            )
+        else:
+            event = stripe.Event.construct_from(await request.json(), stripe.api_key)
+    except Exception as ex:
+        logger.exception("stripe webhook handler failed")
+        raise HTTPException(400, f"Invalid webhook: {ex}") from ex
+    data = event.get("data", {}) if isinstance(event, dict) else getattr(event, "data", {})
+    session = data.get("object", {}) if isinstance(data, dict) else getattr(data, "object", {})
+    return _LegacyCheckoutEvent(event_type=event.get("type", ""), session=dict(session))
 
 
 def build_router(*, db, get_current_user) -> APIRouter:
@@ -201,7 +210,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
 
     @router.post("/webhook/stripe")
     async def stripe_webhook(request: Request):
-        """Stripe webhook receiver — verifies signature via emergentintegrations
+        """Legacy Stripe webhook receiver — verifies signature via Stripe SDK
         and finalizes payment_transactions + user.subscription_status.
 
         MVP billing lifecycle (NOT true subscriptions): handles
@@ -210,14 +219,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         like customer.subscription.updated/deleted are deferred to a future
         phase that would require migrating off one-time Checkout.
         """
-        body = await request.body()
-        sig = request.headers.get("Stripe-Signature")
-        client = _stripe_client(request)
-        try:
-            evt = await client.handle_webhook(body, sig)
-        except Exception as ex:
-            logger.exception("stripe webhook handler failed")
-            raise HTTPException(400, f"Invalid webhook: {ex}")
+        evt = await _parse_legacy_checkout_event(request)
         session_id = evt.session_id
         if not session_id:
             return {"received": True}
