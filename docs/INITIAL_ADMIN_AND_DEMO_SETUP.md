@@ -146,6 +146,14 @@ flow, normal app routes, and normal permissions.
 | `subscriptions` | 1       | local-only, tier `demo`, status `active`. `id` always starts with `demo_subscription_` (never the Stripe `sub_` shape — Codex round-1 P1). |
 | `audit_log`     | 3       | representative demo-tagged events for dashboard rendering |
 
+Optional extra owner:
+
+| Collection | Records | Notes |
+|------------|---------|-------|
+| `users` | 1 | `demo.owner2@equine-sync.com`, role `horse_owner`, no `platform_role`. |
+| `account_memberships` | 1 | Immediate demo-tagged facility membership for the second owner. |
+| `horses` | update | Adds the second owner to `Beacon.secondary_owner_ids` for owner-view QA. |
+
 Every record carries the tag triple:
 
 ```
@@ -169,6 +177,15 @@ python -m scripts.seed_demo_account
 SEED_DEMO_CLIENT_PASSWORD='your-test-password' \
     python -m scripts.seed_demo_account
 
+# Add a second owner demo account with a known private password.
+SEED_DEMO_EXTRA_OWNER_PASSWORD='your-second-owner-password' \
+    python -m scripts.seed_demo_account --extra-owner
+
+# If the second owner already exists and you intentionally need to
+# rotate only that account's password.
+SEED_DEMO_EXTRA_OWNER_PASSWORD='your-new-second-owner-password' \
+    python -m scripts.seed_demo_account --extra-owner --reset-extra-owner-password
+
 # Teardown — removes ONLY records tagged demo_seed_key=admin8_client_demo.
 python -m scripts.seed_demo_account --teardown
 ```
@@ -177,6 +194,10 @@ python -m scripts.seed_demo_account --teardown
 
 The demo account uses the **normal client flow**: visit `/login`,
 sign in with `demo.client@equine-sync.com` + the printed password.
+
+The optional second owner account also uses the normal client flow:
+visit `/login`, sign in with `demo.owner2@equine-sync.com` + the
+password supplied in `SEED_DEMO_EXTRA_OWNER_PASSWORD`.
 
 The demo user has **no `platform_role`**. Any attempt to reach
 `/admin/portal/*` returns **403** — verified by the

@@ -32,6 +32,7 @@ import sys
 import tempfile
 import uuid
 
+import bcrypt
 import pytest
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -443,6 +444,60 @@ def test_demo_seed_creates_expected_records(db):
         _run_demo_seed("--teardown")
 
 
+def test_demo_seed_extra_owner_creates_second_owner_and_links_horse(db):
+    """Extra demo owner is opt-in, demo-tagged, login-ready, and
+    linked to one existing demo horse without changing the original
+    demo client account."""
+    password = "ExtraDemo-" + uuid.uuid4().hex[:12] + "Aa1!"
+    try:
+        r = _run_demo_seed(
+            "--extra-owner",
+            extra_env={"SEED_DEMO_EXTRA_OWNER_PASSWORD": password},
+        )
+        assert r.returncode == 0, r.stderr
+        assert "demo.owner2@equine-sync.com" in r.stdout
+
+        primary = db.users.find_one({"email": "demo.client@equine-sync.com"})
+        extra = db.users.find_one({"email": "demo.owner2@equine-sync.com"})
+        assert primary
+        assert extra
+        assert primary["id"] != extra["id"]
+        assert extra["role"] == "horse_owner"
+        assert extra["barn_id"] == primary["barn_id"]
+        assert extra["demo_seed_key"] == "admin8_client_demo"
+        assert not extra.get("platform_role"), (
+            "extra demo owner must not receive admin access"
+        )
+        assert bcrypt.checkpw(
+            password.encode("utf-8"),
+            extra["password_hash"].encode("utf-8"),
+        )
+
+        beacon = db.horses.find_one({
+            "name": "Beacon",
+            "demo_seed_key": "admin8_client_demo",
+        })
+        assert beacon
+        assert extra["id"] in (beacon.get("secondary_owner_ids") or [])
+
+        membership = db.account_memberships.find_one({
+            "user_id": extra["id"],
+            "demo_seed_key": "admin8_client_demo",
+        })
+        assert membership
+        assert membership["account_id"] == extra["barn_id"]
+        assert membership["relationship_type"] == "owner"
+
+        audits = list(db.audit_log.find({
+            "action": "admin.seed.demo_extra_owner_created",
+            "metadata.target_email": "demo.owner2@equine-sync.com",
+        }))
+        assert audits
+        assert password not in str(audits)
+    finally:
+        _run_demo_seed("--teardown")
+
+
 def test_demo_user_cannot_reach_admin_portal_me(db):
     """Demo user has no platform_role → /api/admin/portal/me must 403."""
     import requests
@@ -501,6 +556,10 @@ def test_teardown_removes_only_demo_tagged_records(db):
         # Demo gone…
         assert db.barns.count_documents({"demo_seed_key": "admin8_client_demo"}) == 0
         assert db.users.count_documents({"email": "demo.client@equine-sync.com"}) == 0
+        assert db.users.count_documents({"email": "demo.owner2@equine-sync.com"}) == 0
+        assert db.account_memberships.count_documents({
+            "demo_seed_key": "admin8_client_demo",
+        }) == 0
         # …survivor still present.
         assert db.barns.count_documents({"id": survivor_id}) == 1
     finally:
@@ -521,7 +580,7 @@ def test_no_landing_page_modified():
     ]
     out = subprocess.run(
         ["git", "diff", "--name-only", "HEAD"],
-        cwd="/app", capture_output=True, text=True, timeout=10,
+        cwd=str(ROOT.parent), capture_output=True, text=True, timeout=10,
     )
     changed = set(out.stdout.splitlines())
     for c in candidates:
@@ -545,7 +604,7 @@ def test_old_demo_seed_method_not_restored():
         r"def\s+create_seeded_demo\b", # old name candidate
         r"DEMO_SHORTCUT",
     ]
-    for py in pathlib.Path("/app/backend").rglob("*.py"):
+    for py in (ROOT.parent / "backend").rglob("*.py"):
         if py.name in (
             "seed_demo_account.py",
             "test_admin_8_seed_scripts.py",

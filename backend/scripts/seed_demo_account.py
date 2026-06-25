@@ -43,12 +43,16 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env")
 
+from core.account_memberships import compatibility_membership_from_user
+
 
 DEMO_KEY = "admin8_client_demo"
 DEMO_PHASE = "phase_admin_8"
 
 DEMO_EMAIL = "demo.client@equine-sync.com"
 DEMO_NAME = "Demo Client"
+EXTRA_OWNER_EMAIL = "demo.owner2@equine-sync.com"
+EXTRA_OWNER_NAME = "Demo Owner 2"
 DEMO_BARN_NAME = "Equine Sync Demo Barn"
 DEMO_HORSES = [
     {"name": "Aurelia",  "breed": "Andalusian", "age": 9,  "discipline": "Dressage"},
@@ -90,13 +94,177 @@ def _parse_args():
                    help="Required to run when APP_ENV is production.")
     p.add_argument("--teardown", action="store_true",
                    help=f"Remove every record tagged demo_seed_key='{DEMO_KEY}'.")
+    p.add_argument("--extra-owner", action="store_true",
+                   help="Also seed a second demo horse-owner user "
+                        f"({EXTRA_OWNER_EMAIL}) linked to one demo horse.")
+    p.add_argument("--reset-extra-owner-password", action="store_true",
+                   help="When used with --extra-owner and "
+                        "SEED_DEMO_EXTRA_OWNER_PASSWORD, update the second "
+                        "demo owner's password hash. Does not affect the "
+                        "original demo client account.")
     return p.parse_args()
 
 
 # ----------------------------------------------------------------------
 # SEED
 # ----------------------------------------------------------------------
-async def _seed(db, *, dry_run: bool) -> Dict[str, object]:
+async def _upsert_demo_membership(db, user_doc: Dict[str, object],
+                                  *, generated_at: str, dry_run: bool) -> str:
+    """Mirror a demo user into account_memberships immediately.
+
+    Startup also backfills this collection, but the seed script should leave
+    production/staging ready for a login right away without waiting for a
+    service restart. The row is demo-tagged so teardown remains surgical.
+    """
+    membership = compatibility_membership_from_user(
+        user_doc, generated_at=generated_at,
+    )
+    membership.update(_tag())
+    if not dry_run:
+        await db.account_memberships.update_one(
+            {"compatibility_key": membership["compatibility_key"]},
+            {
+                "$set": membership,
+                "$setOnInsert": {"created_at": generated_at},
+            },
+            upsert=True,
+        )
+    return membership["id"]
+
+
+async def _ensure_extra_owner(db, *, barn_id: str, now_iso: str,
+                              dry_run: bool, reset_password: bool) -> Dict[str, object]:
+    env_password = os.environ.get("SEED_DEMO_EXTRA_OWNER_PASSWORD")
+    if not env_password and not dry_run:
+        raise RuntimeError(
+            "SEED_DEMO_EXTRA_OWNER_PASSWORD is required when --extra-owner "
+            "creates or resets the second demo owner."
+        )
+
+    existing = await db.users.find_one(
+        {"email": EXTRA_OWNER_EMAIL}, {"password_hash": 0},
+    )
+    password_source = "env" if env_password else "env_required_on_apply"
+    password_action = "not_applicable"
+
+    if existing:
+        user_id = existing["id"]
+        user_action = "already_present"
+        user_doc = {
+            **existing,
+            "barn_id": existing.get("barn_id") or barn_id,
+            "role": existing.get("role") or "horse_owner",
+            "role_status": existing.get("role_status") or "active",
+            "account_status": existing.get("account_status") or "active",
+        }
+        if reset_password:
+            password_action = "would_reset" if dry_run else "reset"
+            if not dry_run:
+                await db.users.update_one(
+                    {"id": user_id},
+                    {"$set": {
+                        "password_hash": _hash_pwd(env_password),
+                        "updated_at": now_iso,
+                        "barn_id": barn_id,
+                        "role": "horse_owner",
+                        "role_status": "active",
+                        "account_status": "active",
+                        "email_verified": True,
+                        **_tag(),
+                    }},
+                )
+                user_doc.update({
+                    "barn_id": barn_id,
+                    "role": "horse_owner",
+                    "role_status": "active",
+                    "account_status": "active",
+                    "email_verified": True,
+                    **_tag(),
+                })
+        else:
+            password_source = "n/a (existing user)"
+    else:
+        user_id = str(uuid.uuid4())
+        user_action = "created"
+        password_action = "would_set" if dry_run else "set"
+        user_doc = {
+            "id": user_id,
+            "email": EXTRA_OWNER_EMAIL,
+            "full_name": EXTRA_OWNER_NAME,
+            "role": "horse_owner",
+            "role_status": "active",
+            "account_status": "active",
+            "barn_id": barn_id,
+            "password_hash": "(dry-run)" if dry_run else _hash_pwd(env_password),
+            "email_verified": True,
+            "signup_source": "phase_admin_8_extra_owner",
+            "membership_tier": "demo",
+            "subscription_status": "active",
+            "created_at": now_iso,
+            **_tag(),
+        }
+        if not dry_run:
+            await db.users.insert_one(user_doc)
+
+    membership_id = await _upsert_demo_membership(
+        db, user_doc, generated_at=now_iso, dry_run=dry_run,
+    )
+
+    horse_name = "Beacon"
+    horse = await db.horses.find_one({
+        "barn_id": barn_id,
+        "name": horse_name,
+        "demo_seed_key": DEMO_KEY,
+    }, {"_id": 0, "id": 1})
+    horse_link_action = "missing_demo_horse"
+    if horse:
+        horse_link_action = "would_link" if dry_run else "linked"
+        if not dry_run:
+            await db.horses.update_one(
+                {"id": horse["id"]},
+                {
+                    "$addToSet": {"secondary_owner_ids": user_id},
+                    "$set": {"updated_at": now_iso},
+                },
+            )
+
+    if not dry_run:
+        await db.audit_log.insert_one({
+            "id": str(uuid.uuid4()),
+            "ts": now_iso,
+            "action": "admin.seed.demo_extra_owner_created",
+            "actor_email": "(cli)",
+            "actor_role": "(cli)",
+            "resource_type": "user",
+            "resource_id": user_id,
+            "outcome": "success",
+            "status_code": 200,
+            "metadata": {
+                "demo_seed_key": DEMO_KEY,
+                "seed_phase": "phase_admin_8_extra_owner",
+                "target_email": EXTRA_OWNER_EMAIL,
+                "user_action": user_action,
+                "password_source": password_source,
+                "password_action": password_action,
+                "membership_id": membership_id,
+                "horse_link_action": horse_link_action,
+                "linked_horse_name": horse_name if horse else None,
+            },
+        })
+
+    return {
+        "email": EXTRA_OWNER_EMAIL,
+        "user_id": user_id,
+        "user_action": user_action,
+        "password_source": password_source,
+        "password_action": password_action,
+        "membership_id": membership_id,
+        "horse_link_action": horse_link_action,
+    }
+
+
+async def _seed(db, *, dry_run: bool, extra_owner: bool = False,
+                reset_extra_owner_password: bool = False) -> Dict[str, object]:
     now = datetime.now(timezone.utc)
     now_iso = now.isoformat()
 
@@ -134,6 +302,13 @@ async def _seed(db, *, dry_run: bool) -> Dict[str, object]:
         user_id = existing_user["id"]
         user_action = "already_present"
         password_source = "n/a (existing user)"
+        primary_user_doc = {
+            **existing_user,
+            "barn_id": existing_user.get("barn_id") or barn_id,
+            "role": existing_user.get("role") or "horse_owner",
+            "role_status": existing_user.get("role_status") or "active",
+            "account_status": existing_user.get("account_status") or "active",
+        }
     else:
         # Codex round-2 P1 fix: do NOT mint a password in dry-run.
         # The hash would never persist, so any printed value would
@@ -170,6 +345,11 @@ async def _seed(db, *, dry_run: bool) -> Dict[str, object]:
         if not dry_run:
             await db.users.insert_one(user_doc)
         user_action = "created"
+        primary_user_doc = user_doc
+
+    await _upsert_demo_membership(
+        db, primary_user_doc, generated_at=now_iso, dry_run=dry_run,
+    )
 
     # 3. Horses.
     horses_added = 0
@@ -306,6 +486,13 @@ async def _seed(db, *, dry_run: bool) -> Dict[str, object]:
             },
         })
 
+    extra_owner_result = None
+    if extra_owner:
+        extra_owner_result = await _ensure_extra_owner(
+            db, barn_id=barn_id, now_iso=now_iso, dry_run=dry_run,
+            reset_password=reset_extra_owner_password,
+        )
+
     return {
         "barn_id": barn_id,
         "user_id": user_id,
@@ -317,6 +504,7 @@ async def _seed(db, *, dry_run: bool) -> Dict[str, object]:
         "audit_rows_added": audit_added,
         "password_source": password_source,
         "minted_password": minted_password,
+        "extra_owner": extra_owner_result,
     }
 
 
@@ -330,7 +518,8 @@ async def _teardown(db, *, dry_run: bool) -> Dict[str, int]:
     audit_sel = {"metadata.demo_seed_key": DEMO_KEY}
 
     counts: Dict[str, int] = {}
-    for col in ("users", "barns", "horses", "tasks", "subscriptions"):
+    for col in ("users", "barns", "horses", "tasks", "subscriptions",
+                "account_memberships"):
         if col not in await db.list_collection_names():
             counts[col] = 0
             continue
@@ -395,7 +584,10 @@ async def _main():
         print(f"  removed counts: {counts}")
         return
 
-    r = await _seed(db, dry_run=args.dry_run)
+    r = await _seed(
+        db, dry_run=args.dry_run, extra_owner=args.extra_owner,
+        reset_extra_owner_password=args.reset_extra_owner_password,
+    )
     print(f"  barn   {r['barn_action']:18} id={r['barn_id']}")
     print(f"  user   {r['user_action']:18} id={r['user_id']}  email={DEMO_EMAIL}")
     print(f"  horses added={r['horses_added']}")
@@ -403,6 +595,14 @@ async def _main():
     print(f"  subscription {r['sub_action']}")
     print(f"  audit_rows added={r['audit_rows_added']}")
     print(f"  password_source={r['password_source']}")
+    if r.get("extra_owner"):
+        extra = r["extra_owner"]
+        print("  extra_owner "
+              f"{extra['user_action']:18} id={extra['user_id']}  "
+              f"email={extra['email']}")
+        print(f"  extra_owner_password {extra['password_action']}  "
+              f"source={extra['password_source']}")
+        print(f"  extra_owner_horse_link {extra['horse_link_action']}")
     if args.dry_run and r["password_source"] == "would_mint_on_apply":
         print()
         print("=" * 72)
