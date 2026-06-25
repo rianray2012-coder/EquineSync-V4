@@ -14,33 +14,69 @@ const ADD_FIELDS = [
   { key: "signature_provider", label: "Provider", kind: "select", opts: ["internal", "docusign_ready"] },
   { key: "signed_at", label: "Signed at", type: "date" },
 ];
+const TEMPLATE_STATUS = ["draft", "active", "archived"];
+const MINOR_STATUSES = ["adult", "minor_13_to_17", "under_13", "unknown"];
 
 export default function FormsSignatures() {
   const [records, setRecords] = useState([]);
+  const [documentTypes, setDocumentTypes] = useState({});
+  const [templates, setTemplates] = useState([]);
+  const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
+  const [templateOpen, setTemplateOpen] = useState(false);
+  const [requestOpen, setRequestOpen] = useState(false);
   const [savingId, setSavingId] = useState(null);
+  const [providerReadiness, setProviderReadiness] = useState(null);
+
+  const loadDocumentWorkflow = useCallback(async () => {
+    try {
+      const [typesRes, templatesRes, requestsRes] = await Promise.all([
+        api.get("/document-signatures/document-types"),
+        api.get("/document-signatures/templates"),
+        api.get("/document-signatures/requests"),
+      ]);
+      setDocumentTypes(typesRes.data.document_types || {});
+      setTemplates(templatesRes.data.templates || []);
+      setRequests(requestsRes.data.requests || []);
+    } catch {
+      setDocumentTypes({});
+      setTemplates([]);
+      setRequests([]);
+    }
+  }, []);
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const r = await api.get("/feature-modules/forms-signatures");
+      const [r] = await Promise.all([
+        api.get("/feature-modules/forms-signatures"),
+        loadDocumentWorkflow(),
+      ]);
       setRecords(r.data.records || []);
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load forms.");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [loadDocumentWorkflow]);
 
   useEffect(() => { load(); }, [load]);
+
+  useEffect(() => {
+    api.get("/document-signatures/providers")
+      .then((r) => setProviderReadiness(r.data))
+      .catch(() => setProviderReadiness(null));
+  }, []);
 
   const stats = useMemo(() => Object.fromEntries(STATUSES.map((status) => [
     status,
     records.filter((record) => ((record.data || {}).status || "draft") === status).length,
   ])), [records]);
+  const documentTypeOptions = useMemo(() => Object.keys(documentTypes).sort(), [documentTypes]);
+  const templateOptions = useMemo(() => templates.map((template) => template.id), [templates]);
 
   const setStatus = async (record, status) => {
     setSavingId(record.id);
@@ -89,10 +125,83 @@ export default function FormsSignatures() {
         <div className="flex items-start gap-3">
           <FileSignature className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
           <div className="text-[13px] text-equine-inkMuted leading-relaxed">
-            Signature providers are configuration-ready. This screen tracks workflow state until a live e-signature integration is configured.
+            Signature providers use a hybrid model: legal signatures route to a third-party provider, while lower-risk acknowledgements stay internal.
+            {providerReadiness?.legal_signature_provider && (
+              <span className="block mt-2">
+                {providerReadiness.legal_signature_provider.label}:{" "}
+                <span className="font-semibold text-equine-ink">
+                  {providerReadiness.legal_signature_provider.configured ? "credentials ready" : "credentials needed"}
+                </span>
+                . Live envelope sending remains gated to a later phase.
+              </span>
+            )}
           </div>
         </div>
       </Card>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 mb-6" data-testid="document-workflow-foundation">
+        <Card hover={false}>
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <div>
+              <div className="label-eyebrow-muted mb-1">Local template registry</div>
+              <div className="font-display text-2xl text-equine-ink">Document templates</div>
+              <div className="text-[12.5px] text-equine-inkMuted mt-1">Local setup only. Provider template IDs may be stored, but no envelope is sent.</div>
+            </div>
+            <button onClick={() => setTemplateOpen(true)} className="btn-secondary inline-flex items-center gap-2" data-testid="document-template-add">
+              <Plus className="w-4 h-4" /> Template
+            </button>
+          </div>
+          {templates.length === 0 ? (
+            <div className="text-[13px] text-equine-inkMuted py-4">No document templates registered yet.</div>
+          ) : (
+            <div className="space-y-3">
+              {templates.slice(0, 5).map((template) => (
+                <div key={template.id} className="rounded-xl border border-equine-hairline bg-equine-soft/55 p-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="font-medium text-equine-ink truncate">{template.display_name}</div>
+                      <div className="text-[12px] text-equine-inkMuted truncate">{template.document_type} · {template.workflow_kind}</div>
+                    </div>
+                    <StatusPill tone="neutral">{template.status}</StatusPill>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </Card>
+
+        <Card hover={false}>
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <div>
+              <div className="label-eyebrow-muted mb-1">Soft-warning request tracking</div>
+              <div className="font-display text-2xl text-equine-ink">Document requests</div>
+              <div className="text-[12.5px] text-equine-inkMuted mt-1">Creates local requests and signer-role requirements only. No signing link is generated.</div>
+            </div>
+            <button onClick={() => setRequestOpen(true)} disabled={templates.length === 0} className="btn-secondary inline-flex items-center gap-2 disabled:opacity-50" data-testid="document-request-add">
+              <Plus className="w-4 h-4" /> Request
+            </button>
+          </div>
+          {requests.length === 0 ? (
+            <div className="text-[13px] text-equine-inkMuted py-4">No document requests created yet.</div>
+          ) : (
+            <div className="space-y-3">
+              {requests.slice(0, 5).map((request) => (
+                <div key={request.id} className="rounded-xl border border-equine-hairline bg-equine-soft/55 p-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="font-medium text-equine-ink truncate">{request.display_name}</div>
+                      <div className="text-[12px] text-equine-inkMuted truncate">
+                        {request.minor_status || "unknown"} · {request.required_signer_count || 0} required signer(s)
+                      </div>
+                    </div>
+                    <StatusPill tone="warning">{request.status}</StatusPill>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </Card>
+      </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {STATUSES.map((status) => (
@@ -168,6 +277,51 @@ export default function FormsSignatures() {
         submitLabel="Save form"
         testidPrefix="forms-add"
         onCreated={load}
+      />
+      <QuickAddSheet
+        open={templateOpen}
+        onClose={() => setTemplateOpen(false)}
+        title="Register document template"
+        eyebrow="Documents"
+        fields={[
+          { key: "document_type", label: "Document type", kind: "select", opts: documentTypeOptions, required: true, full: true },
+          { key: "provider_template_id", label: "Provider template ID", placeholder: "Optional local reference", full: true },
+          { key: "version", label: "Version", type: "number" },
+          { key: "status", label: "Status", kind: "select", opts: TEMPLATE_STATUS },
+        ]}
+        endpoint="/document-signatures/templates"
+        initialValues={{ version: 1, status: "draft" }}
+        submitLabel="Save template"
+        testidPrefix="document-template-add"
+        onCreated={loadDocumentWorkflow}
+      />
+      <QuickAddSheet
+        open={requestOpen}
+        onClose={() => setRequestOpen(false)}
+        title="Create document request"
+        eyebrow="Documents"
+        fields={[
+          { key: "template_id", label: "Template", kind: "select", opts: templateOptions, required: true, full: true },
+          { key: "subject_user_id", label: "Subject user ID", placeholder: "Optional when using student profile", full: true },
+          { key: "subject_student_profile_id", label: "Student profile ID", placeholder: "Optional when using user ID", full: true },
+          { key: "minor_status", label: "Minor status", kind: "select", opts: MINOR_STATUSES },
+          { key: "guardian_user_ids", label: "Guardian user IDs", placeholder: "Comma-separated, if required", full: true },
+          { key: "facility_countersigner_user_id", label: "Facility countersigner", placeholder: "Optional user ID", full: true },
+          { key: "expires_at", label: "Expires at", type: "date" },
+          { key: "note", label: "Private note present", rows: 2, full: true },
+        ]}
+        endpoint="/document-signatures/requests"
+        initialValues={{ minor_status: "unknown" }}
+        transform={(form) => ({
+          ...form,
+          guardian_user_ids: String(form.guardian_user_ids || "")
+            .split(",")
+            .map((item) => item.trim())
+            .filter(Boolean),
+        })}
+        submitLabel="Create request"
+        testidPrefix="document-request-add"
+        onCreated={loadDocumentWorkflow}
       />
     </div>
   );

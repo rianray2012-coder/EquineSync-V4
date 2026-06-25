@@ -6,6 +6,17 @@ EquineSync is evolving into a comprehensive equine operations platform focused o
 
 This roadmap tracks: planned features, active development, future opportunities, experimental systems.
 
+## Build Packet Source
+
+The updated launch/build packet lives in
+`docs/equine_sync_build_packet/`. Use it as the source for new gated phase
+prompts, acceptance criteria, QA planning, compliance/payment decisions, and
+launch checklist work. It does not override the existing rule that each
+implementation phase needs explicit scope, guardrails, tests, and deferrals.
+
+The current proposed execution sequence is in
+`docs/NEXT_BUILD_PLAN_FROM_UPDATED_ROADMAP.md`.
+
 ## Status Legend
 `Planned` · `In Progress` · `Active` · `Experimental` · `Deferred` · `Deprecated`
 
@@ -67,3 +78,17 @@ This roadmap tracks: planned features, active development, future opportunities,
 6. Reporting
 7. AI Assistance
 8. Ecosystem Expansion
+
+## Near-Term Build Order
+
+1. Billing clarity: Build-Next-1 is Codex-approved and locked with a read-only
+   live Stripe catalog readiness report and Apple placeholder contract.
+2. Mobile readiness: Build-Next-2A is Codex-approved and locked with a mobile
+   evidence inventory matrix, existing HorseOps 390x844 screenshots,
+   source-pinned billing/signup/dashboard/mobile-readiness contracts, and a
+   required Build-Next-2B live screenshot gate.
+3. Build-packet launch foundations: multi-barn/multi-role account model,
+   invite/onboarding polish, minor/student communication safeguards,
+   document/signature decision, and QA/UAT gates.
+4. Phase 16: legacy billing reconciliation and hard-delete sequence only after
+   a separate approved plan.

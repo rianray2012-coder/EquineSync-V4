@@ -331,8 +331,8 @@ export default function SubscriptionBilling() {
       {/* CHANGE PLAN */}
       <SectionEyebrow>Change plan</SectionEyebrow>
       <p className="text-[13.5px] text-equine-inkMuted mb-5 max-w-2xl leading-relaxed">
-        Switching plans starts a new Stripe Checkout. Annual cycles get a discount when the
-        catalog includes one. Free is solo-only — upgrade any time to unlock facility features.
+        Switching plans starts a new Stripe Checkout. Annual cycles use the
+        catalog price. Invited owner portal access stays free for barn-paid accounts.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" data-testid="subscription-plan-grid">
         {plans
@@ -442,7 +442,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
 
   const handleClick = () => {
     if (contactSales) {
-      window.location.assign("mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry");
+      window.location.assign("mailto:sales@equinesync.com?subject=EquineSync%20custom%20plan%20enquiry");
       return;
     }
     if (!checkoutable) return; // safety — CTA is disabled in this state

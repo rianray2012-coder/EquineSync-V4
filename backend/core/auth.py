@@ -27,6 +27,13 @@ def hash_pwd(p: str) -> str:
     return bcrypt.hashpw(p.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 
+def verify_pwd(p: str, h: str) -> bool:
+    try:
+        return bcrypt.checkpw(p.encode('utf-8'), h.encode('utf-8'))
+    except Exception:
+        return False
+
+
 def create_token(user_id: str, role: str, barn_id: Optional[str] = None) -> str:
     payload = {
         'sub': user_id,

@@ -100,6 +100,9 @@ _ACTIVITY_EXCLUDE_PREFIXES = (
     "admin.portal.read.support",
     "admin.portal.read.support_detail",
     "admin.portal.read.alerts",
+    # HorseOps-1G reads (platform Care Ledger inspection).
+    "admin.portal.read.horses",
+    "admin.portal.read.horse_ledger_summary",
     # Admin-7B reads (locked Feb 2026 — Reports / Integrations / Settings).
     "admin.portal.read.reports.usage",
     "admin.portal.read.reports.subscriptions",

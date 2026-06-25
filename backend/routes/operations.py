@@ -17,6 +17,11 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 
+from core.minor_communication import (
+    audit_safe_minor_communication_metadata,
+    message_minor_communication_gate,
+    message_response_projection,
+)
 from core.permissions import require
 from core.tenancy import barn_filter, stamp_barn
 from core import audit
@@ -60,6 +65,9 @@ class MessageIn(BaseModel):
     subject: str
     body: str
     visibility: str = "staff_only"
+    student_profile_id: Optional[str] = None
+    participant_user_ids: Optional[list[str]] = None
+    guardian_user_ids: Optional[list[str]] = None
 
 
 class ServiceRequestIn(BaseModel):
@@ -144,11 +152,23 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
 
     @router.get("/messages")
     async def list_messages(user=Depends(get_current_user)):
-        return await list_collection("messages", barn_filter(user), sort_field="created_at")
+        rows = await list_collection("messages", barn_filter(user), sort_field="created_at")
+        return [message_response_projection(row) for row in rows]
 
     @router.post("/messages")
-    async def create_message(body: MessageIn, user=Depends(get_current_user)):
+    async def create_message(body: MessageIn, request: Request, user=Depends(get_current_user)):
         doc = body.model_dump()
+        gate = await message_minor_communication_gate(db=db, actor_user=user, message=doc)
+        if gate["decision"] != "allow":
+            await audit.record(
+                action="minor_communication.blocked", user=user, request=request,
+                resource_type="student_profile",
+                resource_id=(doc.get("student_profile_id") or None),
+                outcome="denied",
+                status_code=403,
+                metadata=audit_safe_minor_communication_metadata(gate),
+            )
+            raise HTTPException(status_code=403, detail="Guardian must be included")
         doc.update({
             "id": new_id(),
             "from_user_id": user["id"],
@@ -158,7 +178,7 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         })
         stamp_barn(user, doc)
         await db.messages.insert_one(doc)
-        return clean(doc)
+        return message_response_projection(doc)
 
     # ---------------- Service Requests ----------------
 

@@ -7,6 +7,8 @@
  * Write (manager only, Phase HorseOps-1B):
  *   PATCH /api/horse-ledger/{horse_id}/care-profile
  *   PUT   /api/horse-ledger/{horse_id}/owner-visibility-policy
+ *   PUT   /api/horse-ledger/templates/owner-visibility
+ *   POST  /api/horse-ledger/templates/owner-visibility/apply
  *   POST  /api/horse-ledger/{horse_id}/equipment
  *   PATCH /api/horse-ledger/{horse_id}/equipment/{equipment_id}
  *   POST  /api/horse-ledger/{horse_id}/service-providers
@@ -21,6 +23,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { api } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
+import { buildHorseOpsDraftKey, clearHorseOpsDraft, loadHorseOpsDraft, saveHorseOpsDraft } from "../lib/horseOpsDrafts";
 
 const SECTION_LABELS = {
   feeding:           "Feeding",
@@ -156,19 +159,31 @@ const Drawer = ({ open, title, eyebrow, onClose, onSave, saving, error, children
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex" data-testid="horse-ledger-drawer">
+    <div className="fixed inset-0 z-50 flex items-stretch justify-end" data-testid="horse-ledger-drawer">
       <div
         className="flex-1 bg-equine-black/70 backdrop-blur-sm"
         onClick={onClose}
         data-testid="horse-ledger-drawer-backdrop"
       />
-      <div className="w-full max-w-md bg-equine-black border-l border-equine-silver/15 shadow-2xl flex flex-col">
-        <header className="px-5 py-4 border-b border-equine-silver/10 sticky top-0 bg-equine-black z-10">
-          <div className="label-eyebrow text-[10.5px] text-equine-platinum/55">{eyebrow}</div>
-          <div className="text-[18px] font-serif text-equine-silver mt-1">{title}</div>
+      <div className="h-full max-h-dvh w-full max-w-md bg-equine-black border-l border-equine-silver/15 shadow-2xl flex flex-col">
+        <header className="shrink-0 px-5 py-4 border-b border-equine-silver/10 sticky top-0 bg-equine-black z-10 flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <div className="label-eyebrow text-[10.5px] text-equine-platinum/55">{eyebrow}</div>
+            <div className="text-[18px] font-serif text-equine-silver mt-1 truncate">{title}</div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={saving}
+            aria-label="Close"
+            data-testid="horse-ledger-drawer-close"
+            className="min-h-11 min-w-11 rounded border border-equine-silver/15 text-equine-platinum/65 hover:text-equine-silver hover:bg-equine-silver/10 disabled:opacity-40"
+          >
+            ×
+          </button>
         </header>
         <form
-          className="flex-1 overflow-y-auto px-5 py-4 space-y-3"
+          className="min-h-0 flex-1 overflow-y-auto px-5 py-4 pb-6 space-y-3"
           onSubmit={(e) => { e.preventDefault(); onSave(); }}
           data-testid="horse-ledger-drawer-form"
         >
@@ -184,13 +199,13 @@ const Drawer = ({ open, title, eyebrow, onClose, onSave, saving, error, children
           {/* hidden submit so Enter works */}
           <button type="submit" hidden />
         </form>
-        <footer className="px-5 py-3 border-t border-equine-silver/10 flex justify-end gap-2 sticky bottom-0 bg-equine-black">
+        <footer className="shrink-0 px-5 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] border-t border-equine-silver/10 flex justify-end gap-2 sticky bottom-0 bg-equine-black">
           <button
             type="button"
             onClick={onClose}
             disabled={saving}
             data-testid="horse-ledger-drawer-cancel"
-            className="text-[12px] tracking-[0.18em] uppercase text-equine-platinum/55 px-3 py-2 hover:text-equine-silver"
+            className="min-h-11 text-[12px] tracking-[0.18em] uppercase text-equine-platinum/55 px-4 py-2 hover:text-equine-silver"
           >
             Cancel
           </button>
@@ -199,7 +214,7 @@ const Drawer = ({ open, title, eyebrow, onClose, onSave, saving, error, children
             onClick={onSave}
             disabled={saving}
             data-testid="horse-ledger-drawer-save"
-            className="text-[12px] tracking-[0.18em] uppercase bg-equine-silver/15 hover:bg-equine-silver/25 text-equine-silver border border-equine-silver/25 px-4 py-2 rounded disabled:opacity-40"
+            className="min-h-11 text-[12px] tracking-[0.18em] uppercase bg-equine-silver/15 hover:bg-equine-silver/25 text-equine-silver border border-equine-silver/25 px-5 py-2 rounded disabled:opacity-40"
           >
             {saving ? "Saving…" : saveLabel}
           </button>
@@ -218,7 +233,7 @@ const Field = ({ label, name, value, onChange, type = "text", placeholder, testi
       placeholder={placeholder}
       onChange={(e) => onChange(name, type === "number" ? (e.target.value === "" ? "" : Number(e.target.value)) : e.target.value)}
       data-testid={testid}
-      className="w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
+      className="min-h-11 w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
     />
   </label>
 );
@@ -232,7 +247,7 @@ const TextArea = ({ label, name, value, onChange, placeholder, testid, rows = 3 
       placeholder={placeholder}
       onChange={(e) => onChange(name, e.target.value)}
       data-testid={testid}
-      className="w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none resize-y"
+      className="min-h-11 w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none resize-y"
     />
   </label>
 );
@@ -244,7 +259,7 @@ const Select = ({ label, name, value, onChange, options, testid }) => (
       value={value ?? ""}
       onChange={(e) => onChange(name, e.target.value)}
       data-testid={testid}
-      className="w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
+      className="min-h-11 w-full bg-equine-black/60 border border-equine-silver/15 rounded px-3 py-2 text-[13px] text-equine-silver focus:border-equine-silver/35 outline-none"
     >
       <option value="">—</option>
       {options.map((o) => (
@@ -255,18 +270,62 @@ const Select = ({ label, name, value, onChange, options, testid }) => (
 );
 
 const Toggle = ({ label, name, value, onChange, testid }) => (
-  <label className="flex items-center justify-between py-2">
+  <label className="flex min-h-11 items-center justify-between gap-3 py-2">
     <span className="text-[13px] text-equine-silver">{label}</span>
     <button
       type="button"
       onClick={() => onChange(name, !value)}
       data-testid={testid}
-      className={`w-10 h-6 rounded-full transition-colors ${value ? "bg-equine-silver/60" : "bg-equine-silver/15"}`}
+      className={`min-h-11 min-w-11 rounded-full transition-colors flex items-center justify-center ${value ? "bg-equine-silver/20" : "bg-equine-silver/5"}`}
     >
-      <span className={`block w-4 h-4 rounded-full bg-equine-black mt-1 transition-transform ${value ? "translate-x-5" : "translate-x-1"}`} />
+      <span className={`block w-8 h-5 rounded-full border border-equine-silver/20 relative ${value ? "bg-equine-silver/60" : "bg-equine-silver/15"}`}>
+        <span className={`absolute top-0.5 block w-4 h-4 rounded-full bg-equine-black transition-transform ${value ? "translate-x-3.5" : "translate-x-0.5"}`} />
+      </span>
     </button>
   </label>
 );
+
+const SchedulePresetPicker = ({ section, value, onPreset, testid }) => {
+  const rows = Array.isArray(value) ? value : [];
+  const presets = SCHEDULE_PRESETS[section] || [];
+  return (
+    <div data-testid={testid} className="border border-equine-silver/10 rounded p-3 bg-equine-black/35">
+      <div className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/55 mb-2">
+        Schedule
+      </div>
+      <div className="flex flex-wrap gap-2 mb-3">
+        {presets.map((preset) => (
+          <button
+            key={preset.label}
+            type="button"
+            onClick={() => onPreset(preset.rows)}
+            data-testid={`${testid}-preset-${preset.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+            className="min-h-10 text-[11px] tracking-[0.14em] uppercase text-equine-platinum/65 hover:text-equine-silver border border-equine-silver/15 px-3 py-2 rounded"
+          >
+            {preset.label}
+          </button>
+        ))}
+      </div>
+      <div className="text-[12px] text-equine-platinum/55 leading-relaxed">
+        Safe owner-facing shape:{" "}
+        {section === "feeding"
+          ? "{time, label, amount}"
+          : "{time, label, duration, paddock}"}
+      </div>
+      {rows.length > 0 ? (
+        <div className="mt-3 space-y-1" data-testid={`${testid}-preview`}>
+          {rows.map((row, idx) => (
+            <div key={`${idx}-${row.time || row.label}`} className="text-[12.5px] text-equine-silver/85">
+              {Object.entries(row).map(([k, v]) => `${k}: ${v}`).join(" · ")}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-3 text-[12.5px] text-equine-platinum/45">No schedule preset selected.</div>
+      )}
+    </div>
+  );
+};
 
 // ---------------------------------------------------------------------
 // Section editors. Each one shapes the PATCH body for /care-profile.
@@ -276,11 +335,46 @@ const PROVIDER_CATEGORIES = ["vet", "farrier", "body_worker", "chiropractor", "m
 // Allowlist keys we expose in the visibility policy UI per section. The
 // backend rejects forbidden keys; this list is purely for ergonomics.
 const POLICY_KEYS = {
-  feeding:         ["grain_feed_type", "amount_value", "amount_unit", "supplements"],
+  feeding:         ["grain_feed_type", "amount_value", "amount_unit", "schedule", "supplements"],
   hay_access:      ["access_type", "hay_type", "quantity_per_feeding"],
   turnout:         ["schedule", "pasture_paddock_assignment", "turnout_group"],
   riding_training: ["discipline", "current_level", "goals_short_term", "goals_long_term", "competition_goals"],
   equipment:       ["category", "label"],
+};
+
+const SCHEDULE_PRESETS = {
+  feeding: [
+    {
+      label: "AM / PM feed",
+      rows: [
+        { time: "AM", label: "Morning feed", amount: "standard" },
+        { time: "PM", label: "Evening feed", amount: "standard" },
+      ],
+    },
+    {
+      label: "Three meals",
+      rows: [
+        { time: "AM", label: "Breakfast", amount: "light" },
+        { time: "Midday", label: "Lunch", amount: "light" },
+        { time: "PM", label: "Dinner", amount: "standard" },
+      ],
+    },
+  ],
+  turnout: [
+    {
+      label: "AM turnout",
+      rows: [
+        { time: "AM", label: "Morning turnout", duration: "4h", paddock: "assigned" },
+      ],
+    },
+    {
+      label: "Split turnout",
+      rows: [
+        { time: "AM", label: "Morning turnout", duration: "3h", paddock: "assigned" },
+        { time: "PM", label: "Afternoon turnout", duration: "2h", paddock: "assigned" },
+      ],
+    },
+  ],
 };
 
 export default function CareLedgerTab({ horseId }) {
@@ -333,16 +427,28 @@ export default function CareLedgerTab({ horseId }) {
           </div>
         </div>
         {canEdit && !isOwner ? (
-          <button
-            type="button"
-            onClick={() => openDrawer("visibility_policy")}
-            data-testid="horse-ledger-edit-visibility_policy"
-            className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/60 hover:text-equine-silver border border-equine-silver/15 px-3 py-1.5 rounded"
-          >
-            Owner visibility
-          </button>
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => openDrawer("visibility_policy")}
+              data-testid="horse-ledger-edit-visibility_policy"
+              className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/60 hover:text-equine-silver border border-equine-silver/15 px-3 py-1.5 rounded"
+            >
+              Owner visibility
+            </button>
+            <button
+              type="button"
+              onClick={() => openDrawer("visibility_template")}
+              data-testid="horse-ledger-edit-visibility_template"
+              className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/60 hover:text-equine-silver border border-equine-silver/15 px-3 py-1.5 rounded"
+            >
+              Barn template
+            </button>
+          </div>
         ) : null}
       </div>
+
+      {canEdit && !isOwner ? <ManagerPulse /> : null}
 
       {/* Feeding */}
       <SectionShell id="feeding" title={SECTION_LABELS.feeding}
@@ -530,6 +636,73 @@ export default function CareLedgerTab({ horseId }) {
   );
 }
 
+function ManagerPulse() {
+  const [items, setItems] = useState([]);
+  const [err, setErr] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    api.get("/horse-ledger/pulse/manager")
+      .then((r) => {
+        if (!cancelled) {
+          setItems(Array.isArray(r.data?.items) ? r.data.items : []);
+          setErr(null);
+        }
+      })
+      .catch((e) => {
+        if (!cancelled) setErr(e?.response?.data?.detail || "Could not load care pulse.");
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  if (err) {
+    return (
+      <div
+        data-testid="horse-ledger-manager-pulse-error"
+        className="rounded-lg border border-equine-silver/15 bg-equine-silver/5 px-4 py-3 text-[12.5px] text-equine-platinum/65"
+      >
+        {err}
+      </div>
+    );
+  }
+  if (!items.length) return null;
+
+  return (
+    <section
+      data-testid="horse-ledger-manager-pulse"
+      className="rounded-lg border border-equine-silver/10 bg-equine-black/35 p-4"
+    >
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <div>
+          <div className="label-eyebrow">Manager pulse</div>
+          <div className="text-[12px] text-equine-platinum/50 mt-1">
+            Active care items by horse, sorted by severity and recency.
+          </div>
+        </div>
+      </div>
+      <div className="grid gap-2 md:grid-cols-2">
+        {items.slice(0, 4).map((item) => (
+          <div
+            key={item.horse_id}
+            data-testid={`horse-ledger-manager-pulse-${item.horse_id}`}
+            className="rounded border border-equine-silver/10 bg-equine-black/45 px-3 py-2"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="text-[13px] text-equine-silver">{item.horse_name}</div>
+              <div className="text-[10.5px] tracking-[0.16em] uppercase text-equine-platinum/55">
+                {item.top_severity}
+              </div>
+            </div>
+            <div className="text-[12px] text-equine-platinum/55 mt-1">
+              {item.open_count} active · {item.urgent_count} urgent · {item.attention_count} attention
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ---------------------------------------------------------------------
 // Drawer router — renders the right editor for the active drawer kind.
 // All drawers POST/PATCH to backend; on success they refetch the tab.
@@ -542,7 +715,7 @@ function EditDrawerRouter({ drawer, horseId, data, onClose, onSaved }) {
                 { name: "grain_feed_type", kind: "text", label: "Grain / feed type" },
                 { name: "amount_value", kind: "number", label: "Amount" },
                 { name: "amount_unit", kind: "select", label: "Amount unit", options: ["lb", "kg", "scoop", "flake"] },
-                { name: "schedule", kind: "text", label: "Schedule" },
+                { name: "schedule", kind: "schedule", label: "Schedule" },
                 { name: "prep_instructions", kind: "textarea", label: "Prep instructions" },
                 { name: "horse_preferences", kind: "textarea", label: "Horse preferences" },
                 { name: "sensitivities", kind: "textarea", label: "Sensitivities" },
@@ -586,7 +759,7 @@ function EditDrawerRouter({ drawer, horseId, data, onClose, onSaved }) {
     return <CareProfileSectionDrawer section="turnout" title="Turnout" eyebrow="Edit · Care Ledger"
               horseId={horseId} initial={data.turnout?.structured} onClose={onClose} onSaved={onSaved}
               fields={[
-                { name: "schedule", kind: "text", label: "Schedule" },
+                { name: "schedule", kind: "schedule", label: "Schedule" },
                 { name: "pasture_paddock_assignment", kind: "text", label: "Paddock / pasture" },
                 { name: "turnout_group", kind: "text", label: "Turnout group" },
                 { name: "buddies", kind: "text", label: "Buddies (comma-sep)" },
@@ -653,6 +826,9 @@ function EditDrawerRouter({ drawer, horseId, data, onClose, onSaved }) {
   if (drawer.kind === "visibility_policy")
     return <VisibilityPolicyDrawer horseId={horseId} onClose={onClose} onSaved={onSaved} />;
 
+  if (drawer.kind === "visibility_template")
+    return <VisibilityTemplateDrawer onClose={onClose} />;
+
   return null;
 }
 
@@ -676,6 +852,7 @@ function CareProfileSectionDrawer({ section, title, eyebrow, horseId, initial, f
   const [error, setError] = useState(null);
 
   const setField = (name, value) => setForm((prev) => ({ ...prev, [name]: value }));
+  const setSchedulePreset = (rows) => setForm((prev) => ({ ...prev, schedule: rows }));
 
   const save = async () => {
     setError(null);
@@ -717,6 +894,7 @@ function CareProfileSectionDrawer({ section, title, eyebrow, horseId, initial, f
         if (f.kind === "textarea") return <TextArea key={f.name} label={f.label} name={f.name} value={form[f.name]} onChange={setField} testid={testid} />;
         if (f.kind === "select")   return <Select   key={f.name} label={f.label} name={f.name} value={form[f.name]} onChange={setField} options={f.options} testid={testid} />;
         if (f.kind === "toggle")   return <Toggle   key={f.name} label={f.label} name={f.name} value={!!form[f.name]} onChange={setField} testid={testid} />;
+        if (f.kind === "schedule") return <SchedulePresetPicker key={f.name} section={section} value={form[f.name]} onPreset={setSchedulePreset} testid={testid} />;
         return <Field key={f.name} label={f.label} name={f.name} value={form[f.name]} onChange={setField} type={f.kind} testid={testid} />;
       })}
     </Drawer>
@@ -981,6 +1159,120 @@ function VisibilityPolicyDrawer({ horseId, onClose, onSaved }) {
   );
 }
 
+function VisibilityTemplateDrawer({ onClose }) {
+  const [allow, setAllow] = useState({});
+  const [saving, setSaving] = useState(false);
+  const [applying, setApplying] = useState(false);
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    api.get("/horse-ledger/templates/owner-visibility")
+      .then((r) => {
+        if (cancelled) return;
+        const sections = r.data?.sections || {};
+        const next = {};
+        Object.entries(sections).forEach(([section, spec]) => {
+          next[section] = Array.isArray(spec?.allowlist) ? spec.allowlist : [];
+        });
+        setAllow(next);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
+  const toggleKey = (section, key) => setAllow((prev) => {
+    const cur = new Set(prev[section] || []);
+    if (cur.has(key)) cur.delete(key); else cur.add(key);
+    return { ...prev, [section]: Array.from(cur) };
+  });
+
+  const buildSections = () => {
+    const sections = {};
+    for (const [section, keys] of Object.entries(allow)) {
+      if (keys && keys.length > 0) sections[section] = { allowlist: keys };
+    }
+    return sections;
+  };
+
+  const saveTemplate = async () => {
+    setError(null); setMessage(null); setSaving(true);
+    try {
+      const sections = buildSections();
+      if (Object.keys(sections).length === 0) {
+        setError("Pick at least one key for the barn template.");
+        setSaving(false); return;
+      }
+      await api.put("/horse-ledger/templates/owner-visibility", { sections });
+      setMessage("Barn template saved.");
+    } catch (e) {
+      setError(e?.response?.data?.detail || "Could not save template.");
+    } finally { setSaving(false); }
+  };
+
+  const applyTemplate = async () => {
+    setError(null); setMessage(null); setApplying(true);
+    try {
+      const r = await api.post("/horse-ledger/templates/owner-visibility/apply", {});
+      setMessage(`Applied to ${r.data?.applied_count ?? 0} horses.`);
+    } catch (e) {
+      setError(e?.response?.data?.detail || "Could not apply template.");
+    } finally { setApplying(false); }
+  };
+
+  return (
+    <Drawer open={true} title="Barn visibility template"
+            eyebrow="Privacy · Care Ledger"
+            onClose={onClose} onSave={saveTemplate}
+            saving={saving} error={error}
+            saveLabel={saving ? "Saving…" : "Save template"}>
+      <p className="text-[12px] text-equine-platinum/60 leading-relaxed">
+        Set the default owner-visible fields for this barn, then apply it
+        across the horse roster. The server still rejects staff-only keys
+        and writes one per-horse policy row so owner reads stay unchanged.
+      </p>
+      {message ? (
+        <div
+          data-testid="horse-ledger-template-message"
+          className="text-[12.5px] text-equine-silver border border-equine-silver/20 bg-equine-silver/5 px-3 py-2 rounded"
+        >
+          {message}
+        </div>
+      ) : null}
+      {Object.entries(POLICY_KEYS).map(([section, keys]) => (
+        <div key={section} className="border border-equine-silver/10 rounded p-3"
+             data-testid={`horse-ledger-template-section-${section}`}>
+          <div className="label-eyebrow text-[10.5px] mb-2">{SECTION_LABELS[section] || section}</div>
+          <div className="space-y-1">
+            {keys.map((k) => (
+              <label key={k} className="flex items-center justify-between gap-3 text-[13px] py-1 cursor-pointer">
+                <span className="text-equine-silver/85">{k}</span>
+                <input
+                  type="checkbox"
+                  checked={(allow[section] || []).includes(k)}
+                  onChange={() => toggleKey(section, k)}
+                  data-testid={`horse-ledger-template-${section}-${k}`}
+                  className="accent-equine-silver"
+                />
+              </label>
+            ))}
+          </div>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={applyTemplate}
+        disabled={applying || saving}
+        data-testid="horse-ledger-template-apply-all"
+        className="w-full text-[11px] tracking-[0.18em] uppercase text-equine-silver border border-equine-silver/25 bg-equine-silver/10 hover:bg-equine-silver/15 px-3 py-2 rounded disabled:opacity-40"
+      >
+        {applying ? "Applying…" : "Apply saved template to all horses"}
+      </button>
+    </Drawer>
+  );
+}
+
 
 
 // =====================================================================
@@ -1067,7 +1359,7 @@ function DailyChecksSection({ horseId, checks, currentUserId, role, requiredExpe
               disabled={disabled}
               onClick={disabled ? undefined : () => onAddCheck(a.type)}
               data-testid={`daily-check-quick-${a.type}`}
-              className={`text-[11px] tracking-[0.18em] uppercase border px-3 py-1.5 rounded transition-colors ${
+              className={`min-h-11 text-[11px] tracking-[0.18em] uppercase border px-3 py-2.5 rounded transition-colors ${
                 disabled
                   ? "border-equine-silver/10 bg-equine-silver/0 text-equine-platinum/35 cursor-not-allowed"
                   : "border-equine-silver/25 bg-equine-silver/5 text-equine-silver/90 hover:bg-equine-silver/10"
@@ -1081,7 +1373,7 @@ function DailyChecksSection({ horseId, checks, currentUserId, role, requiredExpe
           type="button"
           onClick={() => onAddCheck("general")}
           data-testid="daily-check-quick-general"
-          className="text-[11px] tracking-[0.18em] uppercase text-equine-platinum/65 hover:text-equine-silver border border-equine-silver/15 px-3 py-1.5 rounded transition-colors"
+          className="min-h-11 text-[11px] tracking-[0.18em] uppercase text-equine-platinum/65 hover:text-equine-silver border border-equine-silver/15 px-3 py-2.5 rounded transition-colors"
         >
           + Note
         </button>
@@ -1098,17 +1390,17 @@ function DailyChecksSection({ horseId, checks, currentUserId, role, requiredExpe
           {checks.map((c) => (
             <li key={c.id}
                 data-testid={`daily-check-row-${c.id}`}
-                className="flex items-center justify-between gap-3 text-[13px] py-1.5 border-b border-equine-silver/5 last:border-b-0">
-              <div className="flex items-center gap-3 min-w-0">
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[13px] py-2.5 border-b border-equine-silver/5 last:border-b-0">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 min-w-0">
                 <span className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/60 min-w-[68px]">
                   {CHECK_TYPE_LABELS[c.check_type] || c.check_type}
                 </span>
                 <StatusBadge status={c.status} />
-                <span className="text-equine-silver/75 text-[12.5px] truncate">
+                <span className="text-equine-silver/75 text-[12.5px]">
                   {fmtWhen(c.checked_at)}
                 </span>
                 {c.notes ? (
-                  <span className="text-equine-platinum/55 text-[12px] truncate"
+                  <span className="basis-full sm:basis-auto text-equine-platinum/55 text-[12px] break-words"
                         data-testid={`daily-check-notes-${c.id}`}>
                     · {c.notes}
                   </span>
@@ -1119,7 +1411,7 @@ function DailyChecksSection({ horseId, checks, currentUserId, role, requiredExpe
                   type="button"
                   onClick={() => onAmend(c)}
                   data-testid={`daily-check-amend-${c.id}`}
-                  className="text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/55 hover:text-equine-silver"
+                  className="self-start sm:self-auto min-h-11 px-3 text-[10.5px] tracking-[0.18em] uppercase text-equine-platinum/55 hover:text-equine-silver border border-equine-silver/10 rounded"
                 >
                   Amend
                 </button>
@@ -1137,12 +1429,20 @@ function DailyChecksSection({ horseId, checks, currentUserId, role, requiredExpe
 // On amend, only `status` / `notes` / `payload` go through.
 // ---------------------------------------------------------------------
 function DailyCheckDrawer({ horseId, mode, initialType, check, onClose, onSaved }) {
+  const { user } = useAuth();
   const isAmend = mode === "amend";
   const seedType = isAmend ? check?.check_type : (initialType || "general");
+  const seedStatus = isAmend ? (check?.status || "ok") : "ok";
+  const seedNotes = isAmend ? (check?.notes || "") : "";
+  const draftKey = buildHorseOpsDraftKey({
+    userId: user?.id || user?.email,
+    horseId,
+    form: isAmend ? `daily-check-amend-${check?.id || "unknown"}` : `daily-check-new-${seedType}`,
+  });
 
   const [checkType] = useState(seedType);
-  const [status,  setStatus]  = useState(isAmend ? (check?.status || "ok") : "ok");
-  const [notes,   setNotes]   = useState(isAmend ? (check?.notes || "") : "");
+  const [status,  setStatus]  = useState(seedStatus);
+  const [notes,   setNotes]   = useState(seedNotes);
   const [payload, setPayload] = useState(() => {
     const seed = isAmend ? (check?.payload || {}) : {};
     return {
@@ -1156,6 +1456,27 @@ function DailyCheckDrawer({ horseId, mode, initialType, check, onClose, onSaved 
   });
   const [saving, setSaving] = useState(false);
   const [error,  setError]  = useState(null);
+  const [draftRestored, setDraftRestored] = useState(false);
+  const [draftReady, setDraftReady] = useState(false);
+
+  useEffect(() => {
+    const draft = loadHorseOpsDraft(draftKey);
+    if (!draft) { setDraftReady(true); return; }
+    if (draft.status) setStatus(draft.status);
+    if (typeof draft.notes === "string") setNotes(draft.notes);
+    if (draft.payload && typeof draft.payload === "object") {
+      setPayload((p) => ({
+        hay_net:    draft.payload.hay_net    || p.hay_net,
+        hay_access: draft.payload.hay_access || p.hay_access,
+        water:      draft.payload.water      || p.water,
+        feed:       draft.payload.feed       || p.feed,
+        bedding:    draft.payload.bedding    || p.bedding,
+        general:    draft.payload.general    || p.general,
+      }));
+    }
+    setDraftRestored(true);
+    setDraftReady(true);
+  }, [draftKey]);
 
   const setPL = (section, key, value) =>
     setPayload((p) => ({ ...p, [section]: { ...p[section], [key]: value } }));
@@ -1248,7 +1569,7 @@ function DailyCheckDrawer({ horseId, mode, initialType, check, onClose, onSaved 
     );
   };
 
-  const cleanedPayload = () => {
+  const cleanedPayload = useCallback(() => {
     const out = {};
     const candidate = {
       hay_net:    checkType === "hay_net" ? payload.hay_net    : null,
@@ -1268,7 +1589,21 @@ function DailyCheckDrawer({ horseId, mode, initialType, check, onClose, onSaved 
       if (Object.keys(filtered).length > 0) out[section] = filtered;
     }
     return out;
-  };
+  }, [checkType, payload]);
+
+  useEffect(() => {
+    if (!draftReady) return;
+    const pl = cleanedPayload();
+    const hasDraftValue =
+      status !== seedStatus ||
+      notes !== seedNotes ||
+      Object.keys(pl).length > 0;
+    if (hasDraftValue) {
+      saveHorseOpsDraft(draftKey, { status, notes, payload });
+    } else {
+      clearHorseOpsDraft(draftKey);
+    }
+  }, [cleanedPayload, draftKey, draftReady, status, notes, payload, seedStatus, seedNotes]);
 
   const save = async () => {
     setError(null); setSaving(true);
@@ -1283,6 +1618,7 @@ function DailyCheckDrawer({ horseId, mode, initialType, check, onClose, onSaved 
         body.check_type = checkType;
         await api.post(`/horse-ledger/${horseId}/daily-checks`, body);
       }
+      clearHorseOpsDraft(draftKey);
       onSaved();
     } catch (e) {
       setError(e?.response?.data?.detail || "Could not save daily check.");
@@ -1297,6 +1633,14 @@ function DailyCheckDrawer({ horseId, mode, initialType, check, onClose, onSaved 
       onClose={onClose} onSave={save} saving={saving} error={error}
       saveLabel={isAmend ? "Save amendment" : "Record check"}
     >
+      {draftRestored ? (
+        <div
+          data-testid="daily-check-draft-restored"
+          className="text-[12.5px] text-equine-platinum/70 border border-equine-silver/20 bg-equine-silver/5 px-3 py-2 rounded"
+        >
+          Draft restored on this device.
+        </div>
+      ) : null}
       <Select label="Status" name="status" value={status} onChange={(_, v) => setStatus(v)}
               options={["ok", "needs_attention", "missed", "not_applicable"]}
               testid="daily-check-drawer-status" />

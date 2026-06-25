@@ -167,7 +167,7 @@ def test_invite_accept_audited():
                        json={"token": token, "password": PW, "full_name": "Owner C"}, timeout=30)
     assert ac.status_code == 200, ac.text
     row = _capture({"action": "invite.accepted", "resource_id": invite_id})
-    assert row and row["metadata"] == {"role": "horse_owner"}
+    assert row and row["metadata"] == {"role": "horse_owner", "existing_user": False}
     assert row["actor_user_id"] == ac.json()["user"]["id"]
 
 

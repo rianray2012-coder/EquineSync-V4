@@ -131,12 +131,12 @@ def test_no_locked_route_is_orphaned():
 
 
 def test_route_lock_total_count_matches_founder_decision():
-    """Belt-and-braces: the locked surface is 37 endpoints exactly
-    (26 GET + 10 POST + 1 PATCH = 27 legacy Admin-1..6 + 7 Admin-7B + 3 Admin-4b)."""
+    """Belt-and-braces: the locked surface is 39 endpoints exactly
+    (28 GET + 10 POST + 1 PATCH = 27 legacy Admin-1..6 + 7 Admin-7B + 3 Admin-4b + 2 HorseOps-1G)."""
     locked_get, locked_post, locked_patch = _load_locked_lists()
-    assert len(locked_get) == 26, (
-        f"LOCKED_GET_ROUTES has {len(locked_get)} entries; expected 26 "
-        "(19 legacy Admin-1..6 + 7 Admin-7B)."
+    assert len(locked_get) == 28, (
+        f"LOCKED_GET_ROUTES has {len(locked_get)} entries; expected 28 "
+        "(19 legacy Admin-1..6 + 7 Admin-7B + 2 HorseOps-1G)."
     )
     assert len(locked_post) == 10, (
         f"LOCKED_POST_ROUTES has {len(locked_post)} entries; expected 10 "
@@ -150,7 +150,7 @@ def test_route_lock_total_count_matches_founder_decision():
 
 def test_every_admin_portal_decorator_lives_in_a_surface_module():
     """Phase Admin-7A.2b structural invariant: NO admin-portal route
-    handlers may live in `portal.py`. All 34 endpoints must be
+    handlers may live in `portal.py`. All 39 endpoints must be
     declared in a surface module (`dashboard.py`, `users.py`, ...,
     `settings.py`). `portal.py` is the orchestrator only."""
     portal_py = pathlib.Path(

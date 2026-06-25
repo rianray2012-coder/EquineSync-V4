@@ -31,8 +31,9 @@ import requests
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
-sys.path.insert(0, "/app/backend")
-load_dotenv("/app/backend/.env")
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "backend"))
+load_dotenv(ROOT / "backend" / ".env")
 
 
 def _base_url() -> str:
@@ -620,12 +621,12 @@ def test_phase_15_collections_not_touched_by_ledger_read(db):
 
 
 def test_admin_portal_routes_unchanged(db):
-    """Route-lock regression — Admin-portal surface is 37 endpoints
-    exactly. HorseOps-1A must not have added an admin-portal route."""
+    """Route-lock regression - Admin-portal surface is locked at 39
+    endpoints after HorseOps-1G added the platform inspection reads."""
     from tests.test_admin_portal_admin7a import (
         LOCKED_GET_ROUTES, LOCKED_POST_ROUTES, LOCKED_PATCH_ROUTES,
     )
-    assert len(LOCKED_GET_ROUTES) == 26
+    assert len(LOCKED_GET_ROUTES) == 28
     assert len(LOCKED_POST_ROUTES) == 10
     assert len(LOCKED_PATCH_ROUTES) == 1
 
@@ -634,7 +635,7 @@ def test_no_writes_in_1a_endpoints_only():
     """1-B added writes on the mutation endpoints, but the GET endpoint
     handler (and its composed-read helpers) must remain write-free.
     AST-checks only the GET handler body."""
-    src = pathlib.Path("/app/backend/routes/horse_ledger.py").read_text()
+    src = (ROOT / "backend" / "routes" / "horse_ledger.py").read_text()
     tree = ast.parse(src)
     bad_methods = (
         "insert_one", "insert_many", "update_one", "update_many",

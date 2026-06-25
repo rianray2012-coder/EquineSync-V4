@@ -8,9 +8,10 @@ headers — new callers should use /api/tasks/today directly.
 from __future__ import annotations
 
 from datetime import datetime, timezone, timedelta
+from typing import Optional
 from fastapi import APIRouter, Depends, Response
 
-from core.tenancy import barn_filter, resolve_barn_id
+from core.account_route_context import resolve_read_facility_barn_id
 
 
 def _now_utc() -> datetime:
@@ -21,7 +22,7 @@ def build_router(db, get_current_user, tenant_id: str) -> APIRouter:
     router = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
     @router.get("/summary")
-    async def dashboard(user=Depends(get_current_user)):
+    async def dashboard(account_id: Optional[str] = None, user=Depends(get_current_user)):
         """Engine-derived dashboard counts. Feed/meds/lesson counts come from
         the unified Task Engine (Phase-A migration, Feb 19 2026).
         """
@@ -29,36 +30,37 @@ def build_router(db, get_current_user, tenant_id: str) -> APIRouter:
         today_end = today_start + timedelta(days=1)
         today_start_iso = today_start.isoformat()
         today_end_iso = today_end.isoformat()
+        barn_id = await resolve_read_facility_barn_id(db, user, account_id=account_id)
 
-        total_horses = await db.horses.count_documents(barn_filter(user))
-        stall_rest = await db.horses.count_documents(barn_filter(user, {"status": {"$in": ["stall_rest", "rehab"]}}))
-        active_injuries = await db.injuries.count_documents(barn_filter(user, {"status": {"$in": ["active", "monitoring", "improving"]}}))
+        total_horses = await db.horses.count_documents({"barn_id": barn_id})
+        stall_rest = await db.horses.count_documents({"barn_id": barn_id, "status": {"$in": ["stall_rest", "rehab"]}})
+        active_injuries = await db.injuries.count_documents({"barn_id": barn_id, "status": {"$in": ["active", "monitoring", "improving"]}})
 
-        feed_q = {"tenant_id": tenant_id, "barn_id": resolve_barn_id(user), "category": "feed",
+        feed_q = {"tenant_id": tenant_id, "barn_id": barn_id, "category": "feed",
                   "scheduled_at": {"$gte": today_start_iso, "$lt": today_end_iso}}
         feed_today_total = await db.tasks.count_documents(feed_q)
         feed_pending = await db.tasks.count_documents({**feed_q, "status": {"$nin": ["completed", "skipped", "cancelled"]}})
 
-        med_q = {"tenant_id": tenant_id, "barn_id": resolve_barn_id(user), "category": "medication",
+        med_q = {"tenant_id": tenant_id, "barn_id": barn_id, "category": "medication",
                  "scheduled_at": {"$gte": today_start_iso, "$lt": today_end_iso}}
         meds_due = await db.tasks.count_documents({**med_q, "status": {"$nin": ["completed", "skipped", "cancelled"]}})
         meds_missed = await db.task_completions.count_documents({
-            "tenant_id": tenant_id, "barn_id": resolve_barn_id(user), "voided": {"$ne": True},
+            "tenant_id": tenant_id, "barn_id": barn_id, "voided": {"$ne": True},
             "outcome": {"$in": ["refused", "skipped"]},
             "completed_at": {"$gte": today_start_iso, "$lt": today_end_iso},
         })
 
-        pending_sr = await db.service_requests.count_documents(barn_filter(user, {"status": "pending"}))
-        open_incidents = await db.incidents.count_documents(barn_filter(user, {"status": {"$ne": "closed"}}))
-        lessons_today = await db.lessons.count_documents(barn_filter(user, {"start_time": {"$regex": f"^{_now_utc().date().isoformat()}"}}))
+        pending_sr = await db.service_requests.count_documents({"barn_id": barn_id, "status": "pending"})
+        open_incidents = await db.incidents.count_documents({"barn_id": barn_id, "status": {"$ne": "closed"}})
+        lessons_today = await db.lessons.count_documents({"barn_id": barn_id, "start_time": {"$regex": f"^{_now_utc().date().isoformat()}"}})
 
         overdue_list = await db.invoices.find(
-            barn_filter(user, {"status": {"$in": ["open", "overdue"]}}), {"_id": 0, "total": 1},
+            {"barn_id": barn_id, "status": {"$in": ["open", "overdue"]}}, {"_id": 0, "total": 1},
         ).to_list(1000)
         overdue_invoices = len(overdue_list)
         overdue_amount = sum(i.get("total", 0) for i in overdue_list)
 
-        wellness_list = await db.horses.find(barn_filter(user), {"_id": 0, "wellness_score": 1}).to_list(1000)
+        wellness_list = await db.horses.find({"barn_id": barn_id}, {"_id": 0, "wellness_score": 1}).to_list(1000)
         avg_wellness = round(sum(h.get("wellness_score", 0) for h in wellness_list) / max(1, len(wellness_list))) if wellness_list else 0
 
         return {
@@ -79,7 +81,7 @@ def build_router(db, get_current_user, tenant_id: str) -> APIRouter:
         }
 
     @router.get("/barn-board")
-    async def barn_board(response: Response, user=Depends(get_current_user)):
+    async def barn_board(response: Response, account_id: Optional[str] = None, user=Depends(get_current_user)):
         """DEPRECATED (Phase-A): kept for backward compatibility while callers
         migrate to /tasks/today. Backed by the unified Task Engine.
         """
@@ -89,18 +91,19 @@ def build_router(db, get_current_user, tenant_id: str) -> APIRouter:
         today_start = _now_utc().replace(hour=0, minute=0, second=0, microsecond=0)
         today_end = today_start + timedelta(days=1)
         today_str = _now_utc().date().isoformat()
+        barn_id = await resolve_read_facility_barn_id(db, user, account_id=account_id)
 
         feed = await db.tasks.find({
-            "tenant_id": tenant_id, "barn_id": resolve_barn_id(user), "category": "feed",
+            "tenant_id": tenant_id, "barn_id": barn_id, "category": "feed",
             "scheduled_at": {"$gte": today_start.isoformat(), "$lt": today_end.isoformat()},
         }, {"_id": 0}).sort("scheduled_at", 1).to_list(200)
         meds = await db.tasks.find({
-            "tenant_id": tenant_id, "barn_id": resolve_barn_id(user), "category": "medication",
+            "tenant_id": tenant_id, "barn_id": barn_id, "category": "medication",
             "scheduled_at": {"$gte": today_start.isoformat(), "$lt": today_end.isoformat()},
         }, {"_id": 0}).sort("scheduled_at", 1).to_list(200)
-        lessons = await db.lessons.find(barn_filter(user, {"start_time": {"$regex": f"^{today_str}"}}), {"_id": 0}).to_list(200)
-        stall_rest = await db.horses.find(barn_filter(user, {"status": {"$in": ["stall_rest", "rehab"]}}), {"_id": 0}).to_list(100)
-        incidents = await db.incidents.find(barn_filter(user), {"_id": 0}).sort("occurred_at", -1).to_list(5)
+        lessons = await db.lessons.find({"barn_id": barn_id, "start_time": {"$regex": f"^{today_str}"}}, {"_id": 0}).to_list(200)
+        stall_rest = await db.horses.find({"barn_id": barn_id, "status": {"$in": ["stall_rest", "rehab"]}}, {"_id": 0}).to_list(100)
+        incidents = await db.incidents.find({"barn_id": barn_id}, {"_id": 0}).sort("occurred_at", -1).to_list(5)
         return {
             "date": today_str,
             "feed": feed,

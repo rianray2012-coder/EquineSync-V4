@@ -119,10 +119,11 @@ def test_build_router_importable_from_package():
 # Route-map preservation — every locked Admin-1..7B endpoint must still
 # be registered under the same path + same allowed HTTP methods.
 #
-# Total locked surface: 37 Admin Portal endpoints
+# Total locked surface: 39 Admin Portal endpoints
 #   = 27 legacy Admin-1..6 routes (19 GET + 8 POST)
 #   + 7 Admin-7B read-only routes (7 GET; no POST)
 #   + 3 Admin-4b facility mutations (1 PATCH + 2 POST)
+#   + 2 HorseOps-1G read-only routes (2 GET; no POST)
 # ---------------------------------------------------------------------
 LOCKED_GET_ROUTES = [
     # Admin-1
@@ -139,6 +140,9 @@ LOCKED_GET_ROUTES = [
     # Admin-4
     "/api/admin/portal/facilities",
     "/api/admin/portal/facilities/{barn_id}",
+    # HorseOps-1G - platform Care Ledger inspection (read-only).
+    "/api/admin/portal/horses",
+    "/api/admin/portal/horses/{horse_id}/ledger-summary",
     # Admin-5
     "/api/admin/portal/subscriptions",
     "/api/admin/portal/subscriptions/{admin_ref}",
@@ -279,6 +283,16 @@ def test_shape_admin4_facilities(db):
     body = r.json()
     for k in ("items", "total"):
         assert k in body
+
+
+def test_shape_horseops1g_horses(db):
+    s = _admin_session(db, "platform_admin")
+    r = requests.get(f"{API}/admin/portal/horses?limit=5",
+                     headers=_bearer(s), timeout=10)
+    assert r.status_code == 200
+    body = r.json()
+    for k in ("items", "total", "limit", "cursor"):
+        assert k in body, f"/horses missing key {k}"
 
 
 def test_shape_admin5_subscriptions(db):

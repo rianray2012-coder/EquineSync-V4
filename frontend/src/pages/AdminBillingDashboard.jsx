@@ -11,9 +11,15 @@ import { RefreshCw, AlertTriangle, Search, ChevronRight, X } from "lucide-react"
 import { api } from "../lib/api";
 import { Card, PageHeader, SectionEyebrow, StatusPill } from "../components/Primitives";
 import { BrandLoader } from "../components/BrandLoader";
-import { formatCents, STATUS_LABEL, STATUS_TONE } from "../lib/subscriptionBilling";
+import { formatCents, PLAN_ORDER, STATUS_LABEL, STATUS_TONE } from "../lib/subscriptionBilling";
 
 const PAGE_SIZE = 25;
+const PLAN_FILTER_OPTIONS = PLAN_ORDER;
+const planLabel = (tier) => (tier || "")
+  .split("_")
+  .filter(Boolean)
+  .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+  .join(" ");
 
 export default function AdminBillingDashboard() {
   const [loading, setLoading] = useState(true);
@@ -204,9 +210,9 @@ export default function AdminBillingDashboard() {
             className="text-[12.5px] px-3 py-2 bg-equine-soft/50 border border-equine-hairline rounded-full"
           >
             <option value="">All tiers</option>
-            <option value="starter">Starter</option>
-            <option value="professional">Professional</option>
-            <option value="enterprise">Enterprise</option>
+            {PLAN_FILTER_OPTIONS.map((tier) => (
+              <option key={tier} value={tier}>{planLabel(tier)}</option>
+            ))}
           </select>
         </div>
 

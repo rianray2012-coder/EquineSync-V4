@@ -889,14 +889,16 @@ def build_router(*, db, get_current_user) -> APIRouter:
         "health.injuries", "health.wellness_latest",
     })
 
-    @router.put("/horse-ledger/{horse_id}/owner-visibility-policy")
-    async def put_visibility_policy(horse_id: str, body: Dict[str, Any],
-                                    user=Depends(get_current_user)):
-        horse = await _load_horse_or_404(horse_id, user)
-        _require_mutator(user, horse)
-        sections = (body or {}).get("sections")
+    def _require_barn_template_manager(user) -> str:
+        role = (user.get("role") or "").strip().lower()
+        if role not in {"admin", "barn_manager"}:
+            raise HTTPException(403, "Insufficient role for Care Ledger edit.")
+        return resolve_barn_id(user)
+
+    def _validate_policy_sections(sections: Any) -> Dict[str, Any]:
         if not isinstance(sections, dict):
             raise HTTPException(422, "Body must contain `sections` object.")
+        cleaned: Dict[str, Any] = {}
         for section, spec in sections.items():
             if section not in _POLICY_SECTIONS:
                 raise HTTPException(422, f"Unknown policy section: {section!r}")
@@ -905,6 +907,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
             allowlist = spec["allowlist"]
             if not isinstance(allowlist, list):
                 raise HTTPException(422, f"Allowlist for {section!r} must be a list.")
+            out_keys: List[str] = []
             for key in allowlist:
                 if not isinstance(key, str):
                     raise HTTPException(422, f"Allowlist key must be string: {key!r}")
@@ -929,6 +932,24 @@ def build_router(*, db, get_current_user) -> APIRouter:
                         422,
                         f"Section {section!r} cannot be exposed to owners.",
                     )
+                if key not in out_keys:
+                    out_keys.append(key)
+            cleaned[section] = {"allowlist": out_keys}
+        return cleaned
+
+    def _policy_field_paths(sections: Dict[str, Any]) -> List[str]:
+        paths: List[str] = []
+        for section, spec in sections.items():
+            for key in spec.get("allowlist") or []:
+                paths.append(f"{section}.{key}")
+        return sorted(paths or sections.keys())
+
+    @router.put("/horse-ledger/{horse_id}/owner-visibility-policy")
+    async def put_visibility_policy(horse_id: str, body: Dict[str, Any],
+                                    user=Depends(get_current_user)):
+        horse = await _load_horse_or_404(horse_id, user)
+        _require_mutator(user, horse)
+        sections = _validate_policy_sections((body or {}).get("sections"))
         now_iso = datetime.now(timezone.utc).isoformat()
         import uuid as _uuid
         await db.horse_owner_visibility_policy.update_one(
@@ -944,11 +965,160 @@ def build_router(*, db, get_current_user) -> APIRouter:
         await _emit_audit(
             horse_id, horse["barn_id"], user,
             section="visibility_policy", action="updated",
-            field_paths=sorted(sections.keys()),
+            field_paths=_policy_field_paths(sections),
             sensitivity="operational",
         )
         return {"ok": True, "horse_id": horse_id,
                 "sections": sorted(sections.keys())}
+
+    # ---------------- Phase 1-F: barn-wide owner visibility template ----------------
+    @router.get("/horse-ledger/templates/owner-visibility")
+    async def get_owner_visibility_template(user=Depends(get_current_user)):
+        barn_id = _require_barn_template_manager(user)
+        row = await db.horse_owner_visibility_templates.find_one(
+            {"barn_id": barn_id}, {"_id": 0},
+        )
+        if not row:
+            return {"barn_id": barn_id, "sections": {}, "template_version": 0}
+        return _scrub_strings({
+            "barn_id": barn_id,
+            "sections": row.get("sections") or {},
+            "template_version": row.get("template_version") or 0,
+            "updated_at": row.get("updated_at"),
+        })
+
+    @router.put("/horse-ledger/templates/owner-visibility")
+    async def put_owner_visibility_template(body: Dict[str, Any],
+                                            user=Depends(get_current_user)):
+        barn_id = _require_barn_template_manager(user)
+        sections = _validate_policy_sections((body or {}).get("sections"))
+        if not sections:
+            raise HTTPException(422, "Template must contain at least one section.")
+        now_iso = datetime.now(timezone.utc).isoformat()
+        await db.horse_owner_visibility_templates.update_one(
+            {"barn_id": barn_id},
+            {"$set": {"sections": sections, "updated_at": now_iso,
+                      "updated_by": user.get("id")},
+             "$inc": {"template_version": 1},
+             "$setOnInsert": {"id": f"hovt_{uuid.uuid4().hex[:24]}",
+                              "barn_id": barn_id, "created_at": now_iso}},
+            upsert=True,
+        )
+        await db.horse_ledger_audit.insert_one({
+            "id": f"hla_{uuid.uuid4().hex[:24]}",
+            "horse_id": None, "barn_id": barn_id,
+            "ts": now_iso,
+            "actor_user_id": user.get("id"),
+            "actor_role": user.get("role"),
+            "section": "visibility_template",
+            "action": "updated",
+            "field_paths": _policy_field_paths(sections),
+            "sensitivity": "operational",
+            "owner_visible_eligible": False,
+        })
+        return {"ok": True, "barn_id": barn_id,
+                "sections": sorted(sections.keys())}
+
+    @router.post("/horse-ledger/templates/owner-visibility/apply")
+    async def apply_owner_visibility_template(body: Dict[str, Any],
+                                              user=Depends(get_current_user)):
+        barn_id = _require_barn_template_manager(user)
+        body = body or {}
+        horse_ids = body.get("horse_ids")
+        if horse_ids is not None:
+            if not isinstance(horse_ids, list) or not all(isinstance(h, str) for h in horse_ids):
+                raise HTTPException(422, "horse_ids must be a list of strings.")
+            if not horse_ids:
+                raise HTTPException(422, "horse_ids cannot be empty.")
+            horse_filter = {"barn_id": barn_id, "id": {"$in": sorted(set(horse_ids))}}
+        else:
+            horse_filter = {"barn_id": barn_id, "status": {"$ne": "archived"}}
+        template = await db.horse_owner_visibility_templates.find_one(
+            {"barn_id": barn_id}, {"_id": 0},
+        )
+        if not template:
+            raise HTTPException(404, "No owner visibility template configured.")
+        sections = _validate_policy_sections(template.get("sections"))
+        if not sections:
+            raise HTTPException(422, "Owner visibility template is empty.")
+        horses = await db.horses.find(horse_filter, {"_id": 0, "id": 1}).to_list(500)
+        found_ids = [h["id"] for h in horses if h.get("id")]
+        if horse_ids is not None and len(found_ids) != len(set(horse_ids)):
+            raise HTTPException(404, "One or more horses were not found.")
+        now_iso = datetime.now(timezone.utc).isoformat()
+        for horse_id in found_ids:
+            await db.horse_owner_visibility_policy.update_one(
+                {"horse_id": horse_id},
+                {"$set": {"sections": sections, "updated_at": now_iso,
+                          "updated_by": user.get("id"),
+                          "barn_id": barn_id,
+                          "source": "barn_visibility_template"},
+                 "$inc": {"policy_version": 1},
+                 "$setOnInsert": {"id": f"hovp_{uuid.uuid4().hex[:24]}",
+                                  "horse_id": horse_id}},
+                upsert=True,
+            )
+            await _emit_audit(
+                horse_id, barn_id, user,
+                section="visibility_policy", action="template_applied",
+                field_paths=_policy_field_paths(sections),
+                sensitivity="operational",
+            )
+        return {"ok": True, "barn_id": barn_id,
+                "applied_count": len(found_ids),
+                "horse_ids": found_ids}
+
+    # ---------------- Phase 1-F: manager pulse ----------------
+    @router.get("/horse-ledger/pulse/manager")
+    async def manager_pulse(user=Depends(get_current_user)):
+        barn_id = _require_barn_template_manager(user)
+        rows = await db.horse_ledger_alerts.find(
+            {"barn_id": barn_id, "status": {"$in": ["open", "acknowledged"]}},
+            {"_id": 0, "horse_id": 1, "severity": 1, "severity_rank": 1,
+             "last_seen_at": 1},
+        ).sort([("severity_rank", -1), ("last_seen_at", -1)]).to_list(500)
+        horse_ids = sorted({r.get("horse_id") for r in rows if r.get("horse_id")})
+        names = {}
+        if horse_ids:
+            horses = await db.horses.find(
+                {"barn_id": barn_id, "id": {"$in": horse_ids}},
+                {"_id": 0, "id": 1, "name": 1},
+            ).to_list(len(horse_ids))
+            names = {h.get("id"): h.get("name") for h in horses}
+        grouped: Dict[str, Dict[str, Any]] = {}
+        for row in rows:
+            hid = row.get("horse_id")
+            if not hid:
+                continue
+            entry = grouped.setdefault(hid, {
+                "horse_id": hid,
+                "horse_name": names.get(hid) or "Horse",
+                "open_count": 0,
+                "urgent_count": 0,
+                "attention_count": 0,
+                "top_severity": "info",
+                "top_severity_rank": 0,
+                "last_seen_at": None,
+            })
+            entry["open_count"] += 1
+            sev = row.get("severity") or "info"
+            if sev == "urgent":
+                entry["urgent_count"] += 1
+            elif sev == "attention":
+                entry["attention_count"] += 1
+            rank = int(row.get("severity_rank") or 0)
+            if rank > entry["top_severity_rank"]:
+                entry["top_severity_rank"] = rank
+                entry["top_severity"] = sev
+            ts = row.get("last_seen_at")
+            if ts and (entry["last_seen_at"] is None or ts > entry["last_seen_at"]):
+                entry["last_seen_at"] = ts
+        items = sorted(
+            grouped.values(),
+            key=lambda x: (x["top_severity_rank"], x.get("last_seen_at") or ""),
+            reverse=True,
+        )
+        return _scrub_strings({"barn_id": barn_id, "items": items[:20]})
 
     # ---------------- equipment ----------------
     _EQUIPMENT_WRITABLE = {"category", "label", "brand", "size", "fit_notes",

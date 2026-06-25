@@ -10,10 +10,22 @@
 # Stripe — Subscription billing v2 (Phase 15.A)
 STRIPE_API_KEY=                          # already exists (do not rotate here)
 STRIPE_WEBHOOK_SECRET=                   # required in prod; warn-only in dev
-STRIPE_PRICE_STARTER_MONTHLY=            # required in prod
-STRIPE_PRICE_STARTER_ANNUAL=             # required in prod
-STRIPE_PRICE_PROFESSIONAL_MONTHLY=       # required in prod
-STRIPE_PRICE_PROFESSIONAL_ANNUAL=        # required in prod
+STRIPE_PRICE_INDIVIDUAL_OWNER_MONTHLY=       # required in prod
+STRIPE_PRICE_INDIVIDUAL_OWNER_ANNUAL=        # required in prod
+STRIPE_PRICE_PRIVATE_OWNER_PLUS_MONTHLY=     # required in prod
+STRIPE_PRICE_PRIVATE_OWNER_PLUS_ANNUAL=      # required in prod
+STRIPE_PRICE_STARTER_BARN_MONTHLY=           # required in prod
+STRIPE_PRICE_STARTER_BARN_ANNUAL=            # required in prod
+STRIPE_PRICE_ADVANCED_BARN_MONTHLY=          # required in prod
+STRIPE_PRICE_ADVANCED_BARN_ANNUAL=           # required in prod
+STRIPE_PRICE_ELITE_BARN_MONTHLY=             # required in prod
+STRIPE_PRICE_ELITE_BARN_ANNUAL=              # required in prod
+STRIPE_PRICE_TRAINER_NO_LESSON_MONTHLY=      # required in prod
+STRIPE_PRICE_TRAINER_NO_LESSON_ANNUAL=       # required in prod
+STRIPE_PRICE_TRAINER_LESSON_15_MONTHLY=      # required in prod
+STRIPE_PRICE_TRAINER_LESSON_15_ANNUAL=       # required in prod
+STRIPE_PRICE_TRAINER_LESSON_50_MONTHLY=      # required in prod
+STRIPE_PRICE_TRAINER_LESSON_50_ANNUAL=       # required in prod
 
 # Origin allow-list for Stripe redirects (Codex finding #4)
 # Comma-separated extras; combined with APP_BASE_URL + REACT_APP_BACKEND_URL
@@ -29,8 +41,8 @@ APP_BASE_URL=                            # canonical https://… of the app
 
 | Mode | Behavior |
 |---|---|
-| `APP_ENV=development` (or anything ≠ "production") | Idempotently auto-create Stripe Products + Prices tagged with `metadata.equinesync_managed=true` + `metadata.tier_code=<starter\|professional>`. Local `plans` rows are upserted **always** for ALL FOUR tiers (Free + Starter + Professional + Enterprise) — even when Stripe is unreachable or the API key is missing — with `stripe_*_id = null` so `/billing/plans` keeps working. Checkout returns a clear 500 when `stripe_price_id_*` is absent (no silent failure). |
-| `APP_ENV=production` | **Validate-only.** `STRIPE_API_KEY` + `STRIPE_PRICE_*` env vars are required; each is verified via `stripe.Price.retrieve`. Startup aborts with a clear error on any miss or invalid ID. **`lifespan.on_startup` re-raises in production**, so provisioning failure WILL bring the process down (no silent swallowing). No Products/Prices are created at startup in production. |
+| `APP_ENV=development` (or anything ≠ "production") | Idempotently auto-create Stripe Products + Prices tagged with `metadata.equinesync_managed=true` + `metadata.tier_code=<new pricing tier>`. Local `plans` rows are upserted **always** for every public/catalog tier — even when Stripe is unreachable or the API key is missing — with `stripe_*_id = null` so `/billing/plans` keeps working. Checkout returns a clear 500 when `stripe_price_id_*` is absent (no silent failure). |
+| `APP_ENV=production` | **Validate-only.** `STRIPE_API_KEY` + all required `STRIPE_PRICE_*` env vars for public paid tiers are required; each is verified via `stripe.Price.retrieve`. Startup aborts with a clear error on any miss or invalid ID. **`lifespan.on_startup` re-raises in production**, so provisioning failure WILL bring the process down (no silent swallowing). No Products/Prices are created at startup in production. |
 
 ## Origin allow-list (Codex finding #4)
 

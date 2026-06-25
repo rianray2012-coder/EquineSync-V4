@@ -2,12 +2,33 @@
 // front-end utilities; no network calls. Source data: GET /api/billing/plans
 // (see backend/routes/subscriptions.py::list_plans).
 
-// Display order — mirrors backend `_plan_to_public` sort. "free" stays first
-// because the landing pricing band still surfaces it, but the wizard +
-// /billing/subscription only act on subscribable tiers.
-export const PLAN_ORDER = ["free", "starter", "professional", "enterprise"];
+// Display order — mirrors backend PLAN_CATALOG in core/billing_provisioning.py.
+// "free" is the invited owner portal/local finalize tier; public paid tiers
+// use Stripe Checkout; custom-contract plans route to Contact Sales.
+export const PLAN_ORDER = [
+  "free",
+  "individual_owner",
+  "private_owner_plus",
+  "starter_barn",
+  "advanced_barn",
+  "elite_barn",
+  "trainer_no_lesson",
+  "trainer_lesson_15",
+  "trainer_lesson_50",
+  "enterprise",
+  "community_program",
+];
 
-export const SUBSCRIBABLE_TIERS = new Set(["starter", "professional"]);
+export const SUBSCRIBABLE_TIERS = new Set([
+  "individual_owner",
+  "private_owner_plus",
+  "starter_barn",
+  "advanced_barn",
+  "elite_barn",
+  "trainer_no_lesson",
+  "trainer_lesson_15",
+  "trainer_lesson_50",
+]);
 
 export const sortPlans = (plans) => {
   const idx = (t) => {
@@ -87,7 +108,7 @@ export const daysUntil = (iso) => {
 // environment variables on the backend. When false, `/api/subscriptions/
 // checkout` raises HTTP 500 ("missing a Stripe Price for cycle=…"). The UI
 // must disable any CTA that would otherwise hit that 500 and surface a
-// "Billing setup pending" message instead. Enterprise / contact-sales plans
+// "Billing setup pending" message instead. Contact-sales plans
 // are always considered un-checkoutable here — those use mailto.
 export const isPlanCheckoutable = (plan, cycle) => {
   if (!plan || plan.contact_sales) return false;

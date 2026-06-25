@@ -20,6 +20,113 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
 
+### Phase HorseOps-1H — Mobile Field Readiness ✅ (Jun 2026, ready for Codex review)
+Frontend-first mobile hardening for the locked Care Ledger surfaces. No backend
+routes, schemas, billing behavior, admin roles, or landing-page changes.
+
+**Delivered**
+- Local-only HorseOps draft helper for field forms (`horseOpsDrafts.js`).
+- Staff daily-check drawer restores unsent draft fields on the same device and
+  clears the draft after successful save.
+- Owner "Ask the barn" drawer restores unsent draft fields on the same device
+  and clears the draft after successful send.
+- Care Ledger drawers now use mobile-safe height, safe-area footer padding,
+  sticky actions, and larger tap targets.
+- Admin Portal horse directory keeps the desktop table and adds phone-friendly
+  summary cards that open the same scrubbed, summary-only drawer.
+
+**Privacy lock**
+- Draft storage contains form fields only; no tokens, passwords, cookies,
+  headers, or server secrets.
+- Owner projections remain backend-authoritative; no owner alert/history
+  internals, staff notes, raw daily-check payloads, audit rows, triggers, or
+  source identifiers are exposed.
+- Admin horse mobile cards remain summary-only.
+
+**Tests**
+- New `backend/tests/test_horse_ledger_1h.py` pins draft safety, mobile drawer
+  primitives, admin horse mobile cards, owner-copy privacy terms, and approved
+  Admin Portal color usage.
+
+**Package**
+- `outputs/phase_horseops_1h_changes.zip` (7 files; ready for Codex review).
+
+
+### Phase HorseOps-1K — Release Readiness & Privacy Hardening ✅ (Jun 2026, Codex-approved & locked)
+Evidence/docs/test hardening pass for the locked HorseOps track. No product
+behavior, backend route/schema/auth/permission, owner projection, billing,
+Stripe, Admin Portal capability, landing-page, native-mobile, push, service
+worker, offline sync, AI reply, scheduler, or workflow-engine changes.
+
+**Delivered**
+- New release-readiness matrix for HorseOps-1A through HorseOps-1J:
+  `outputs/horseops_1k_release_readiness_matrix.md`.
+- New focused verification file:
+  `backend/tests/test_horse_ledger_1k.py`.
+- Live-regression follow-up patched two test-harness portability issues:
+  `test_horse_ledger_1a.py` no longer hardcodes `/app`, and
+  `test_horse_ledger_1f.py` signs up with a public role before test DB role
+  promotion.
+- Added root `pytest.ini` with a narrow filter for Starlette's legacy
+  python-multipart import warning; no dependency/runtime behavior change.
+- Matrix verifies each locked HorseOps phase and the launch boundary it owns.
+- Privacy checks re-pin owner-safe and platform-admin summary-only surfaces.
+- 1J mobile screenshot evidence remains present, JPEG-valid, and 390x844.
+
+**Package**
+- `outputs/phase_horseops_1k_changes.zip` (Codex-approved & locked).
+
+**Lock verification**
+- Founder-run live HorseOps regression passed: 398 passed, 0 warnings.
+- Next stage: Phase 16 remains gated and must begin with a founder-approved
+  plan.
+
+
+### Phase HorseOps-1I — Mobile Field Verification & Polish ✅ (Jun 2026, Codex-approved & locked)
+Frontend-only mobile field-readiness polish on top of HorseOps-1H. No backend
+routes, schemas, billing behavior, auth, admin-role, or landing-page changes.
+
+**Delivered**
+- Care Ledger form primitives now keep 44px-friendly mobile tap targets for
+  fields, selects, textareas, toggles, and schedule preset chips.
+- Daily Check rows stack on narrow screens and keep the Amend action tappable.
+- Owner recent-request rows stack on narrow screens and wrap longer text.
+- Admin Portal horse summary drawer wraps long horse/facility identifiers and
+  uses a one-column severity-count layout on phones.
+
+**Verification**
+- New `backend/tests/test_horse_ledger_1i.py` pins mobile tap targets, stacked
+  rows, long-id wrapping, and approved Admin Portal palette usage.
+- Focused 1H + 1I tests pass.
+- Frontend production build passes.
+- Browser plugin verification succeeded after the founder restarted the local
+  backend/frontend. Captured mobile screenshots for the staff Care Ledger and
+  daily-check drawer are included under `outputs/horseops_1i_screenshots/`.
+  Owner-linked and platform-admin-only screenshots remain a seeded-credential
+  follow-up; their responsive contracts are pinned by the focused test file.
+
+**Package**
+- `outputs/phase_horseops_1i_changes.zip` (ready for Codex review).
+
+
+### Phase HorseOps-1F — Manager Polish: Templates, Schedule Presets, Pulse ✅ (Feb 2026, awaiting Codex review)
+Additive manager-polish layer on top of locked Care Ledger phases 1-A through 1-E.
+
+**Backend** — 4 new endpoints in `routes/horse_ledger.py`:
+- `GET /horse-ledger/templates/owner-visibility` — manager/admin reads the current barn template.
+- `PUT /horse-ledger/templates/owner-visibility` — manager/admin saves one safe-key owner-visibility template per barn.
+- `POST /horse-ledger/templates/owner-visibility/apply` — manager/admin applies the saved template to all active same-barn horses, or explicit same-barn `horse_ids`.
+- `GET /horse-ledger/pulse/manager` — manager/admin summary-only active care rollup by horse.
+
+**Privacy model** — template validation reuses the same locked owner-safe policy validator as per-horse `PUT /owner-visibility-policy`; forbidden sections/keys still 422. Applying a template writes the existing per-horse `horse_owner_visibility_policy` rows, so owner reads remain backend-authoritative and unchanged. Audit rows emit field paths only. Manager Pulse returns counts/severity labels only — no triggers, source check ids, notes, or raw alert rows.
+
+**Frontend** — `CareLedgerTab.jsx` adds manager-only `Barn template` drawer, schedule-shape preset chips for Feeding (`{time,label,amount}`) and Turnout (`{time,label,duration,paddock}`), and a staff-only Manager Pulse strip. Owner UI unchanged.
+
+**Tests** — new `test_horse_ledger_1f.py` with 8 focused tests covering template save/read, empty-template rejection, safe-key rejection, apply/audit, cross-barn protection, manager-only access, pulse redaction, and index presence.
+
+**Delta package**: `outputs/phase_horseops_1f_changes.zip`.
+
+
 ### Phase HorseOps-1E — Owner-Facing Filtered Care Ledger + Service Request Flow ✅ (Feb 2026, awaiting Codex review)
 Owner trust layer on top of the locked 1-A/1-B/1-C/1-D Care Ledger. Owners get a calm, filtered view (`/owner/horses/:horseId`) and a structured "Ask the barn" flow — without exposing daily checks, alert internals, audit rows, staff notes, or sensitive handling fields.
 
@@ -261,12 +368,12 @@ The founder-beta "freeze" was lifted. The user supplied a full **23-document gov
 Documentation-only pass; **zero runtime changes** (services never restarted).
 - Created `/app/docs/` with all 23 governance docs + `assets/brand/equinesync-icon.png`.
 - Reconciled `DESIGN_TOKENS.md` to Brand Guide 22 (deprecated warm palette).
-- Authored a **code-grounded `KNOWN_TECH_DEBT.md`** (15 items, file/line-referenced). Top criticals: `JWT_SECRET='change-me'` fallback (`server.py:70`, `auth.py:31`); `barn_id` absent platform-wide (only in `invites.py`); no centralized permission service; hard-deletes in `onboarding.py`; no `AuditLog`; no rate limiting; non-standard API responses.
+- Authored a **code-grounded `KNOWN_TECH_DEBT.md`** (15 items, file/line-referenced). Top criticals: insecure JWT fallback (`server.py:70`, `auth.py:31`); `barn_id` absent platform-wide (only in `invites.py`); no centralized permission service; hard-deletes in `onboarding.py`; no `AuditLog`; no rate limiting; non-standard API responses.
 - Logged key decisions in `DECISION_LOG.md`.
 
 ### Phase 2A — JWT Hardening & Centralized Config ✅ (May 30 2026)
 Closed the Critical JWT-fallback debt. Scoped narrowly (no password reset / email / rate-limiting yet).
-- New `backend/config.py` = single source of truth; removed `JWT_SECRET='change-me'` fallback from `server.py` + `routes/auth.py`.
+- New `backend/config.py` = single source of truth; removed the insecure JWT fallback from `server.py` + `routes/auth.py`.
 - `validate_config()` at startup: **fails fast in production** if `JWT_SECRET`/`MONGO_URL`/`DB_NAME` missing or `JWT_SECRET` insecure; **dev** uses logged ephemeral secret. Added `APP_ENV` toggle to `.env`.
 - Tests: `backend/tests/test_config.py` (18 unit tests pass). Verified login + `/auth/me` + 20 `test_phase2.py` integration tests pass — no regression.
 - **Next:** Phase 2B (password reset + email verification via Resend `RESEND_API_KEY`), then 2C (rate limiting + CORS tightening), 2D (auth/permission test coverage). Awaiting user go-ahead per "one sub-phase at a time" directive.
@@ -790,10 +897,11 @@ service providers can self-onboard, build profiles, and pick a tier.
 - Testing-agent iter 30 verified all 21 e2e scenarios.
 
 ### Env / config
-- `STRIPE_API_KEY=sk_test_emergent` added to `/app/backend/.env`. **NOT** the
+- A test-mode Stripe API key was added to `/app/backend/.env`. **NOT** the
   user-provided live keys (intentional — emergentintegrations playbook supplies
-  the test sandbox). When user is ready to flip to live mode, swap the value to
-  the live secret key only (no code changes needed).
+  the test sandbox). When user is ready to flip to live mode, configure the live
+  secret key through the approved environment path only (no code changes
+  needed).
 
 ## Next Tasks (post-Phase 13)
 **P1 — Admin Review Queue UI**: backend `/review-queue` exists; wire it to the
@@ -1004,6 +1112,290 @@ into the Stripe Checkout config).
 | 15.G | Migration Cleanup: unified free finalize, legacy `/membership/checkout*` → 410, `/billing/plans-public`, webhook `amount_cents`, static catalog purge | ✅ **Codex-approved & locked** |
 
 **Phase 15 totals:** 106/106 pytest tests green across the subscription suite; 6 review-package zips delivered (`phase15a` → `phase15g`); zero Phase 9 (legacy `invoices` + `recurring_charges`) regressions; brand guardrails strictly honored; no hard enforcement (HTTP 402/disabled CTAs) anywhere in the surface.
+
+---
+
+## Phase 15R — Billing Entitlements Refactor
+
+Phase 15R is recorded in
+`docs/PHASE_15R_BILLING_ENTITLEMENTS_REFACTOR.md` and is deferred until the
+founder finishes live Stripe product/price setup and the Apple product-id
+mapping is ready, or until a placeholder-only prep phase is explicitly
+approved.
+
+Locked intent:
+- Stripe is a payment option for web-based subscription purchases only.
+- Apple App Store billing handles iOS-originated subscription purchases.
+- Web purchasers must still receive Apple app access.
+- Apple purchasers must receive backend entitlements without requiring Stripe
+  IDs.
+- Invited Horse Owner Portal remains free permission-based access under a
+  subscribed barn/trainer/facility; no paid Stripe Product should be created for
+  that access path.
+- Pricing and limits should resolve through a backend plan/entitlement layer,
+  not scattered hardcoded frontend/backend branches.
+
+Safe work before Apple product IDs are ready: canonicalize `plan_code` values,
+normalize plan-limit vocabulary, design provider-neutral entitlement response
+shapes, prepare a migration plan from current `plans`/`subscriptions`, and wire
+the founder-provided Stripe web Price IDs. Apple receipt/server-notification,
+add-on item writes, and hard enforcement stay deferred until their own gated
+plans exist.
+
+### Phase 15R-A — Entitlement Schema Prep ✅ (ready for review)
+
+Prep-only pass for the deferred Phase 15R billing refactor. No live billing
+behavior changed.
+
+Delivered:
+- `backend/core/entitlements.py` defines provider-neutral entitlement helpers.
+- Canonical plan-code aliases normalize founder Stripe lookup variants
+  (`trainer_no_lessons`, `trainer_lessons_15`, `trainer_lessons_50`) into the
+  existing Phase 15 catalog spellings.
+- Future `subscription_plans` projection shape is derived from the current
+  `PLAN_CATALOG`.
+- Future `account_subscription_limits` projection shape accepts today's
+  `plan_tier_code` subscriptions and future Apple-backed subscriptions.
+- Invited Horse Owner Portal is pinned as free manual permission access, not a
+  paid Stripe product.
+- Providers/platforms are closed to `stripe | apple | manual | comped` and
+  `web | ios | admin`.
+
+Guardrails honored: no checkout changes, no webhook changes, no Apple receipt
+validation, no Stripe product/price ID assumptions, no public pricing display
+changes, no hard enforcement, no Phase 9 changes, no frontend changes.
+
+Tests: `backend/tests/test_phase15r_entitlements.py` — **22/22 passed**.
+
+### Phase 15R-B — Migration Dry-Run + Gap Report ✅ LOCKED
+
+Read-only migration prep for the deferred Phase 15R billing refactor. No live
+billing behavior changed.
+
+Delivered:
+- `backend/core/entitlements_migration.py` analyzes current `plans` and
+  `subscriptions` rows as plain dictionaries.
+- `backend/scripts/phase15r_migration_dry_run.py` reads Mongo read-only and
+  writes `outputs/phase15r_b_migration_dry_run_report.md`.
+- `backend/tests/test_phase15r_migration_dry_run.py` pins clean projections,
+  alias warnings, unknown-plan blockers, free/Stripe blockers, provider and
+  platform validation, Apple projection shape, markdown content, and a
+  source-level no-Mongo-writes guard for the CLI.
+- `PHASE_15R_B_MIGRATION_DRY_RUN.md` documents the phase and local run command.
+
+Report behavior:
+- Flags unknown plan codes.
+- Flags old Phase 15 live rows `starter` and `professional` as warning-level
+  `legacy_plan_code` issues and projects them to `starter_barn` and
+  `advanced_barn`.
+- Flags founder-provided alias plan-code variants.
+- Flags missing plan-limit fields.
+- Flags free invited-owner access carrying Stripe IDs.
+- Flags free subscriptions treated as paid Stripe subscriptions.
+- Flags unknown billing providers / purchase platforms.
+- Flags Apple/manual/comped subscriptions carrying Stripe IDs.
+
+Codex sandbox note: the packaged report was generated from the static
+`PLAN_CATALOG` fallback because this sandbox cannot connect to local MongoDB.
+The CLI is ready for local/live execution when `MONGO_URL` and `DB_NAME` are
+exported.
+
+Guardrails honored: no Mongo writes, no new collections, no Stripe calls, no
+Apple receipt/server-notification code, no checkout/webhook changes, no public
+pricing display changes, no hard enforcement, no Phase 9 changes, no frontend
+changes.
+
+Round-1 patch: the first live local report found two blockers for old Phase 15
+plan rows (`starter`, `professional`). These now normalize to canonical plan
+codes as warnings; true unknown codes still block.
+
+Lock result: founder-run live Mongo dry-run passed with **4 plan rows, 2
+subscription rows, 0 blockers, and 13 warnings**. The old `starter` and
+`professional` rows now appear as warning-level `legacy_plan_code` issues and
+project to `starter_barn` / `advanced_barn`. Remaining warnings are deferred
+data cleanup/provider-field normalization.
+
+Tests: 15R-A + 15R-B focused suite — **34/34 passed**.
+
+### Phase 15R-C — Stripe Catalog Wiring ✅ LOCKED
+
+Live web Stripe Price IDs are now wired into the existing Phase 15 subscription
+spine and the Phase 15R provider-neutral entitlement collections.
+
+Delivered:
+- `backend/core/billing_provisioning.py` now contains the founder-provided
+  Stripe Price ID map for web checkout plans and recurring add-ons.
+- Startup upserts `plans`, `subscription_plans`, and `subscription_addons`.
+- `subscriptions` checkout accepts founder-facing trainer aliases and stores
+  canonical plan codes.
+- Existing Stripe checkout/webhook writes mirror subscription state into
+  `account_subscriptions` and `account_usage_limits`.
+- `backend/core/subscription_records.py` provides provider-neutral account-row
+  projections for Stripe-web today and Apple-iOS later.
+- Round-2 fix: inactive subscription statuses now project `account_usage_limits`
+  to Free/portal limits instead of carrying paid plan or add-on capacity forward
+  after cancellation.
+- `backend/core/lifespan.py` adds indexes for the new provider-neutral billing
+  collections.
+- Focused tests pin exact Price IDs, add-on IDs, latest plan limits, alias
+  handling, provider-neutral account rows, and secret-key hygiene.
+
+Guardrails honored: no secret keys committed, no Apple receipt validation, no
+App Store server notifications, no add-on subscription-item mutations, no hard
+usage blocking, no Phase 9 invoice/recurring-charge behavior changes, no Admin
+Portal capability changes, and no landing-page redesign.
+
+Lock result: focused Phase 15R suite passed with **51/51** tests green. Lock
+package `outputs/phase_15r_c_stripe_catalog_wiring.zip` was rebuilt with the 13
+reviewed source, test, and documentation files and passed zip-integrity
+verification.
+
+### Phase 15R-D — Usage Add-On Prompt Readiness ✅ LOCKED
+
+Read-only usage pressure and add-on prompt layer for the Phase 15R
+provider-neutral entitlement mirror.
+
+Delivered:
+- `backend/core/subscription_usage.py` adds pure usage-pressure, soft-prompt,
+  plan-aware add-on suggestion, and catalog-scrubbing helpers.
+- `GET /api/billing/addons` returns authenticated, Stripe-ID-scrubbed add-on
+  catalog metadata.
+- `GET /api/billing/usage` prefers `account_usage_limits` when available and
+  preserves existing `horses`, `users`, and `storage_gb` keys.
+- New usage response fields include `staff`, `owner_managers`,
+  `lesson_participants`, `limits_source`, and `add_on_suggestions`.
+- Round-1 fix: the legacy `users` meter now counts billable staff plus
+  owner/manager seats only, using `billing_seat_type` when present and
+  role-based fallback for unmigrated rows. Free invited owner portal accounts
+  no longer inflate paid-seat usage.
+
+Guardrails honored: no checkout changes, no webhook changes, no Apple receipt
+validation, no Stripe subscription-item mutations, no hard usage blocking, no
+Phase 9 billing changes, no Admin Portal capability changes, and no landing
+page changes.
+
+Lock result: focused Phase 15R suite passed with **60/60** tests green. Lock
+package `outputs/phase_15r_d_usage_addon_prompts.zip` was rebuilt with the 6
+reviewed source, test, and documentation files and passed zip-integrity
+verification.
+
+### Phase 15R-E — Billing Seat Classification Prep ✅ LOCKED
+
+Read-only preparation for future `billing_seat_type`, `account_origin`, and
+`portal_access_status` user fields.
+
+Delivered:
+- `backend/core/billing_seats.py` adds pure billing-seat vocabulary and
+  user-row projection helpers.
+- `backend/scripts/phase15r_billing_seat_dry_run.py` reads current `users` rows
+  and writes a markdown preview report without Mongo writes.
+- Focused tests pin owner portal users as `client_owner_portal`,
+  self-subscribed owners as paid owner path, platform users as
+  `platform_admin`, and ambiguous professional roles as warning-only review
+  items.
+- Round-1 fix: explicit valid `billing_seat_type` rows now preserve their seat
+  type but warn when companion `account_origin` / `portal_access_status` fields
+  are missing or invalid.
+
+Guardrails honored: no `users` writes, no checkout changes, no webhook changes,
+no Apple receipt validation, no Stripe subscription-item mutations, no hard
+usage blocking, no Phase 9 billing changes, no Admin Portal capability changes,
+and no landing-page changes.
+
+Lock result: focused Phase 15R suite passed with **73/73** tests green. Lock
+package `outputs/phase_15r_e_billing_seat_classification.zip` was rebuilt with
+the 7 reviewed source, test, and documentation files and passed zip-integrity
+verification.
+
+### Phase 15R-F — Billing Seat Cleanup Report ✅ LOCKED
+
+Read-only founder cleanup checklist for future user billing-seat migration.
+
+Delivered:
+- `backend/core/billing_seats.py` now emits a `cleanup_checklist` from the
+  billing-seat dry-run.
+- Warning issues are grouped by user record with suggested future
+  `billing_seat_type`, `account_origin`, and `portal_access_status` values.
+- The dry-run markdown includes a founder-facing cleanup table.
+- Focused tests pin grouped checklist output and markdown rendering.
+
+Guardrails honored: no `users` writes, no checkout changes, no webhook changes,
+no Apple receipt validation, no Stripe subscription-item mutations, no hard
+usage blocking, no Phase 9 billing changes, no Admin Portal capability changes,
+and no landing-page changes.
+
+Verification: focused Phase 15R suite passed with **75/75** tests green, Python
+compile checks passed for the billing-seat helper/report code, and package
+secret scan found no live/restricted Stripe keys or webhook secrets in the
+15R-E/15R-F package files.
+
+Lock result: Round-1 review note resolved by tightening the platform
+billing-role drift guard to exact equality with `core.permissions.PLATFORM_ROLES`;
+the focused billing-seat test file passed with **15/15** tests green and the lock
+package passed zip-integrity verification.
+
+### Phase 15R-G — Billing Channel Routing Prep ✅ LOCKED
+
+Read-only contract prep for web Stripe purchases and future Apple App Store
+purchases.
+
+Delivered:
+- `backend/core/billing_channels.py` adds pure provider/channel projection
+  helpers.
+- `billing_provider` vocabulary remains `stripe | apple | manual | comped`.
+- `purchase_channel` vocabulary remains `web | ios | admin`, with
+  `purchase_platform` kept as a compatibility mirror.
+- Stripe/web and Apple/iOS rows both project to cross-platform app access:
+  `web_app=true`, `ios_app=true`.
+- Public billing-channel shapes omit Stripe and Apple operational IDs.
+- Unknown provider/channel values are warning-only in this 15R-G prep helper.
+
+Guardrails honored: no Apple receipt validation, no App Store server
+notifications, no checkout changes, no webhook changes, no Stripe
+subscription-item mutations, no hard usage blocking, no Phase 9 billing
+changes, no Admin Portal capability changes, and no landing-page changes.
+
+Verification: focused Phase 15R suite passed with **81/81** tests green, Python
+compile checks passed for the billing-channel helper/test code, and package scan
+found no payment SDK calls, database writes, live/restricted Stripe keys, or
+webhook secrets in the 15R-G implementation files.
+
+Lock result: 15R-G is Codex-approved and locked. No Apple receipt, Stripe
+Checkout, webhook, subscription-item, enforcement, Phase 9, Admin Portal, or
+landing-page behavior changed.
+
+### Phase 15R-H — Stripe Live Catalog Reconciliation ✅ LOCKED
+
+Catalog-only reconciliation against the founder-exported live Stripe catalog
+PDF.
+
+Delivered:
+- `backend/core/billing_provisioning.py` now pins the PDF-confirmed live Stripe
+  Product IDs for self-service plans, Enterprise, and Community Program.
+- The eight self-service web subscription plans now use the PDF-confirmed live
+  monthly/annual Price IDs.
+- Invited Horse Owner Portal remains free/manual and has no Stripe Product or
+  Price mapping.
+- Enterprise and Community Program remain quote-only with Product IDs but no
+  public recurring Prices.
+- Recurring add-ons now include PDF-confirmed Product/Price IDs, including the
+  new `additional_helper_seat` add-on row mapped to the existing staff-seat
+  limit/quantity vocabulary.
+- `GET /api/billing/addons` projects out both `stripe_product_id` and
+  `stripe_price_id` before returning app-safe rows.
+
+Guardrails honored: no secret keys committed, no checkout changes, no webhook
+changes, no Apple billing, no Stripe subscription-item mutation, no hard usage
+enforcement, no Phase 9 billing changes, no Admin Portal capability changes,
+and no landing-page changes.
+
+Verification: focused Phase 15R suite passed with **83/83** tests green.
+
+Lock result: Codex review found no blocking findings. 15R-H is
+Codex-approved and locked. Package was rebuilt with the cleaned 15R-H test
+labels and updated planning docs. No checkout, webhook, Apple billing, add-on
+mutation, hard enforcement, Phase 9 billing, Admin Portal, or landing-page
+behavior changed.
 
 ---
 
@@ -2247,3 +2639,879 @@ for `USER_*_ROLES`, `BILLING_TAB_ROLES`, etc.
 | Admin-8    | Initial admin access + client-like demo account (seed scripts) | ✅ Codex-approved & locked |
 | Admin-4b   | Facility edits + soft-disable + tenancy enforcement       | ✅ Codex-approved & locked |
 | HorseOps-1A | Care Ledger — read-only composition + 8 new collections + indexes | ✅ Codex-approved & locked |
+| HorseOps-1G | Platform Care Ledger inspection — Admin Portal horse directory + summary-only ledger drawer | ✅ Codex-approved & locked |
+| HorseOps-1H | Mobile Field Readiness — local field drafts + mobile drawer/card hardening | ✅ Ready for Codex review |
+| HorseOps-1I | Mobile Field Verification & Polish — tap targets, stacking, long-value wrapping | ✅ Codex-approved & locked |
+| HorseOps-1J | Evidence Closure Only — six mobile screenshots + verification package | ✅ Codex-approved & locked |
+| HorseOps-1K | Release Readiness & Privacy Hardening — phase matrix + focused privacy/evidence checks | ✅ Codex-approved & locked |
+
+## Build Packet Baseline — Added to Repo Docs (Jun 20 2026)
+
+The updated build/work-plan packet from the founder has been added under
+`docs/equine_sync_build_packet/` as markdown source files. It now anchors
+future gated planning for:
+
+- product requirements and launch scope;
+- roles and permissions;
+- user flows and acceptance criteria;
+- data model and technical guide;
+- roadmap and backlog;
+- QA/UAT;
+- compliance, payments, and legal-document notes;
+- launch checklist;
+- decision log and open questions.
+
+Planning rule: the packet informs future phase prompts and acceptance criteria,
+but does not authorize broad scope expansion inside unrelated phases. Each new
+implementation pass still needs explicit scope, guardrails, tests, and
+deferrals.
+
+Near-term order remains: continue gated 15R billing-provider prep, finish
+mobile readiness/evidence closure, gate remaining build-packet launch
+foundations, and return to Phase 16 only with a separate approved legacy
+reconciliation/hard-delete plan.
+
+## Next Build Plan From Updated Roadmap — Added (Jun 20 2026)
+
+Created `docs/NEXT_BUILD_PLAN_FROM_UPDATED_ROADMAP.md` as the next gated
+planning artifact after 15R-H lock.
+
+Recommended order:
+
+1. **Build-Next-1 — Billing Launch Verification and Apple Contract Prep**
+   (recommended immediate next phase).
+2. **Build-Next-2A — Mobile Evidence Inventory And Source Guards**.
+3. **Build-Next-2B — Live Mobile Screenshot Gate**.
+4. **Build-Next-3 — Multi-Barn / Multi-Role Account Model Gap Report**.
+5. **Build-Next-4 — Invite, Registration, and Onboarding Polish**.
+6. **Build-Next-5 — Minor / Parent Safeguard Plan**.
+7. **Build-Next-6 — Document / Signature Hybrid Connector Prep**.
+8. **Build-Next-7 — Launch QA / UAT Gate**.
+9. **Phase 16 — Legacy Billing Reconciliation and Cleanup**, still deferred
+   until separately approved.
+
+The plan keeps the updated build packet actionable while preserving the
+phase-gate discipline: every implementation pass still needs explicit scope,
+guardrails, tests, and deferrals.
+
+### Build-Next-1 — Billing Launch Verification and Apple Contract Prep ✅ LOCKED (Jun 20 2026)
+
+Read-only launch-readiness layer after 15R-H lock.
+
+Delivered:
+
+- `backend/core/billing_launch_readiness.py` pure report helper.
+- `backend/scripts/build_next_1_billing_launch_readiness.py` read-only report
+  generator with Mongo mode and `--constants-only` mode.
+- `outputs/build_next_1_billing_launch_readiness_report.md`.
+- `backend/tests/test_build_next_1_billing_launch_readiness.py`.
+- Codex review P1/P2 fixes:
+  - supplied Mongo `plans`, `subscription_plans`, and `subscription_addons`
+    rows are compared against locked Stripe Product/Price constants, and stale
+    Stripe IDs become blocker-level launch-readiness issues;
+  - public `/billing/plans-public` Stripe-ID scrub behavior is pinned by a
+    Build-Next source guard.
+
+Constants-only report result:
+
+- 11 catalog plans.
+- 8 self-service plans.
+- 2 contact-sales plans.
+- 12 add-ons.
+- 0 blockers.
+- 0 warnings.
+
+Apple placeholders are documented as
+`com.equinesync.<plan_code>.monthly` and
+`com.equinesync.<plan_code>.annual` for the eight self-service plans.
+
+Guardrails honored: no Stripe SDK calls in tests, no Apple receipt validation,
+no App Store server notifications, no Mongo writes, no checkout/webhook
+changes, no subscription-item mutation, no hard usage enforcement, no Phase 9
+billing changes, no Admin Portal capability changes, no landing-page changes,
+and no Phase 16 cleanup.
+
+Verification: Build-Next-1 focused tests passed with **13/13** green, focused
+billing subset passed with **59/59** green, and full available 15R +
+Build-Next-1 suite passed with **96/96** green. Package integrity passed for
+`outputs/build_next_1_billing_launch_readiness.zip`.
+
+### Build-Next-2A — Mobile Evidence Inventory And Source Guards ✅ LOCKED
+
+Launch-readiness evidence inventory for phone-sized use after Build-Next-1
+lock. This is an evidence/source-pinning phase, not the final live screenshot
+closure gate and not a native-mobile build.
+
+Delivered:
+
+- `BUILD_NEXT_2_MOBILE_READINESS_README.md`.
+- `outputs/build_next_2_mobile_readiness_matrix.md`.
+- `backend/tests/test_build_next_2_mobile_readiness.py`.
+
+Evidence status:
+
+- Reuses locked HorseOps-1J 390x844 screenshots for staff Care Ledger, staff
+  daily-check drawer, owner Care Ledger, owner request drawer, Admin Portal
+  horse directory, and Admin Portal horse summary drawer.
+- Source-pins broader launch-critical mobile contracts for
+  `/billing/subscription`, Signup Step 3, `/dashboard`, and
+  `/mobile-readiness`.
+- Clearly marks billing, signup, dashboard, and Mobile Readiness as requiring
+  Build-Next-2B live 390x844 screenshots.
+- Clearly marks deferred invite/onboarding, multi-barn, minor/parent, and
+  document/signature mobile evidence.
+
+Guardrails honored: no backend route/schema/auth/permission changes, no owner
+projection changes, no billing behavior changes, no Admin Portal capability
+changes, no landing-page changes, no native app, no push notifications, no
+service worker, no offline sync engine, no Apple receipt validation, no Stripe
+subscription-item mutation, no hard usage blocking, and no Phase 16 cleanup.
+
+P1 review fix: Build-Next-2A no longer claims full launch-mobile screenshot
+closure. Build-Next-2B is the explicit live screenshot gate for the four broader
+launch routes.
+
+Lock note: Build-Next-2A is Codex-approved and locked as an
+inventory/source-guard phase. It does not close the four broader live
+screenshots.
+
+### Build-Next-2B — Live Mobile Screenshot Gate ✅ LOCKED
+
+Status: Codex-approved and locked.
+
+Goal: capture and verify the four broader launch-route mobile screenshots that
+Build-Next-2A intentionally source-pins but does not close.
+
+Scope:
+
+- `/billing/subscription` with a real or seeded barn-manage account.
+- Signup Step 3 with public plans loaded.
+- `/dashboard` for a barn-management user.
+- `/mobile-readiness` for an integrations/admin user.
+
+Guardrails: evidence/screenshots and tiny frontend-only unblockers only. No
+backend route/schema/auth/permission changes, no owner projection changes, no
+billing behavior changes, no Admin Portal capability changes, no landing-page
+changes, no native app, no push notifications, no service worker, no offline
+sync engine, no Apple receipt validation, no Stripe subscription-item mutation,
+no hard usage blocking, and no Phase 16 cleanup.
+
+Evidence captured: all four required live screenshots exist under
+`outputs/build_next_2b_screenshots/`, have PNG signatures, and are exactly
+`390x844`. Focused screenshot-integrity tests pass.
+
+Round-1 lock fixes: dashboard evidence was recaptured with a disposable
+`Build Next Manager` session, and the static Emergent badge was removed from
+the app shell before all four screenshots were refreshed. Focused
+Build-Next-2A/2B tests passed with 13/13 green.
+
+Next recommended gate: Build-Next-3C Route Guard Migration Plan.
+
+### Build-Next-3B — Active Context + Facility Search Planning ✅ LOCKED
+
+Status: Codex-approved and locked.
+
+Purpose: add a read-only active account-context contract before product route
+guards, invite acceptance, onboarding, and facility-search behavior move onto
+`account_memberships`.
+
+Delivered:
+- `backend/core/account_context.py` with read-only helper functions.
+- `backend/routes/account_context.py` exposing `GET /api/account/context`.
+- Server wiring that intentionally leaves the endpoint outside product
+  facility route-guard dependencies.
+- Focused tests for fallback mirrors, multiple memberships, requested
+  account selection, standalone individual-owner context, platform-role
+  reporting, pending-review selection, rejected/suspended non-selection, and
+  the planning-only facility-search contract.
+
+Round-1 / Round-2 P1 fix:
+- No-membership `horse_owner` users with no `barn_id` now project as read-only
+  `individual_owner` contexts with `barn_id: null`, not the legacy `primary`
+  facility.
+- Stored BN3A-shaped `source="users_mirror"` rows for no-barn horse owners are
+  normalized at read time the same way, so post-startup backfilled rows cannot
+  reintroduce the `primary` facility projection.
+- The projected standalone account id uses an `acct_owner_` prefix and does
+  not expose the raw `user_id`.
+- Regressions added to pin both the no-row fallback and stored-mirror paths.
+
+Strictly unchanged:
+- No auth behavior change.
+- No route guard migration.
+- No invite acceptance change.
+- No onboarding behavior change.
+- No facility-search UI or lead-capture write.
+- No owner projection change.
+- No billing / Stripe / Apple / Phase 15R behavior change.
+- No Admin Portal capability change.
+- No HorseOps privacy change.
+- No landing-page, native, offline, push, service-worker, or Phase 16 change.
+
+Verification:
+- 13 Build-Next-3B focused tests now exist after the P1 regressions.
+- 16/16 Build-Next-3 + Build-Next-3A regression tests passed.
+- Syntax checks and package integrity passed.
+- Review package: `outputs/build_next_3b_active_context.zip`.
+
+Next recommended gate: Build-Next-3C Route Guard Migration Plan.
+
+### Build-Next-3C — Route Guard Migration Pilot ✅ LOCKED
+
+Status: Codex-reviewed and locked.
+
+Purpose: migrate the first small pilot set of product route guards from legacy
+`users.barn_id` assumptions toward selected `account_memberships` context
+while preserving launch-safe compatibility fallback.
+
+Delivered:
+- Added `backend/core/account_route_context.py`.
+- Migrated `GET /api/dashboard/summary` and `GET /api/dashboard/barn-board`.
+- Migrated `GET /api/horses` and `GET /api/horses/{horse_id}`.
+- Added optional `account_id` query support for those pilot reads.
+- Kept `POST /api/horses` and `PATCH /api/horses/{horse_id}` on legacy
+  `users.barn_id` write scoping.
+- Added `backend/tests/test_build_next_3c_route_context.py`.
+
+Behavior:
+- Existing single-barn users still work without specifying `account_id`.
+- Multi-membership users can select a facility account on pilot reads.
+- Unknown or unauthorized requested accounts return generic 404.
+- No-barn individual-owner contexts do not gain facility-scoped access.
+- Disabled selected facilities return `403 Facility unavailable`.
+- Pilot reads still work when the caller's legacy `users.barn_id` facility is
+  disabled but the requested `account_id` points to another active facility
+  membership.
+
+Strictly deferred: invite acceptance, onboarding/facility-search writes,
+account transfer, role-switcher UI, Admin Portal capability changes, HorseOps
+privacy changes, billing / Stripe / Apple / Phase 15R behavior, hard usage
+enforcement, landing pages, native/offline/push work, and Phase 16 cleanup.
+
+Verification:
+- 37/37 focused Build-Next-3 through Build-Next-3C tests passed.
+- Zip integrity passed, including `backend/server.py` route wiring in the
+  review package.
+- Review package: `outputs/build_next_3c_route_guard_migration.zip`.
+
+Next gate after locked BN3D: Build-Next-4 invite, registration, and onboarding
+polish.
+
+### Build-Next-3D — Task/Today Read-Scope Migration ✅ LOCKED
+
+Status: Codex-reviewed and locked.
+
+Purpose: extend the locked BN3C selected-account read pattern to task-engine
+read routes while preserving legacy-scoped task writes through launch.
+
+Delivered:
+- Migrated `GET /api/task-templates`.
+- Migrated `GET /api/tasks`.
+- Migrated `GET /api/tasks/today`.
+- Migrated `GET /api/horses/{horse_id}/timeline`.
+- Migrated `GET /api/staff/{user_id}/activity`.
+- Migrated `GET /api/tasks/analytics/summary`.
+- Added optional `account_id` query support for those task read routes.
+- Kept task/template create, patch, delete, completion, skip, void, reassign,
+  and materialize routes on legacy `users.barn_id` write scoping.
+- Added `backend/tests/test_build_next_3d_task_context.py`.
+
+Behavior:
+- Existing single-barn users still read legacy `users.barn_id` task data
+  without specifying `account_id`.
+- Multi-membership users can select a facility account on task read routes.
+- Unknown or unauthorized requested accounts return generic 404.
+- No-barn individual-owner contexts do not gain facility-scoped task access.
+- Disabled selected facilities return `403 Facility unavailable`.
+- A disabled legacy `users.barn_id` does not block task reads when the caller
+  explicitly selects another active facility membership.
+
+Strictly deferred: task write migration, invite acceptance,
+onboarding/facility-search writes, account transfer, role-switcher UI, Admin
+Portal capability changes, HorseOps privacy changes, billing / Stripe / Apple /
+Phase 15R behavior, hard usage enforcement, landing pages, native/offline/push
+work, and Phase 16 cleanup.
+
+Verification:
+- 43/43 focused Build-Next-3 through Build-Next-3D tests passed.
+- Syntax checks passed.
+- Zip integrity passed and package contents matched the working tree.
+- Review package: `outputs/build_next_3d_task_context.zip`.
+
+Next recommended gate: Build-Next-5 minor / parent safeguard plan.
+
+### Build-Next-4 — Invite, Registration, and Onboarding Polish ✅ LOCKED
+
+Status: Codex-reviewed and locked.
+
+Purpose: harden launch-critical magic invites so existing users can accept an
+additional facility invite without duplicate-account drift.
+
+Delivered:
+- Added invite-sourced account membership projection helpers in
+  `backend/core/account_memberships.py`.
+- `POST /api/invites` now allows inviting an email that already belongs to a
+  user while still blocking duplicate pending invites in the same barn.
+- `POST /api/invites/accept` now attaches existing users through
+  `account_memberships` instead of creating duplicate user rows.
+- Existing-user invite acceptance verifies the submitted password before
+  writing the membership, marking the invite accepted, or issuing a session.
+- New invitees still follow the existing create-user flow.
+- Existing users keep their current `users.barn_id` and `users.role` mirrors.
+- Accepted invite rows record `accepted_existing_user` and
+  `accepted_membership_id`.
+- Acceptance responses include a safe membership projection.
+- Public duplicate signup remains blocked for `/api/auth/register` and
+  `/api/auth/signup`.
+- Added `backend/tests/test_build_next_4_invites_onboarding.py`.
+
+Strictly deferred: role-switcher UI, broad onboarding UI rewrite, billing /
+Stripe / Apple / Phase 15R behavior, HorseOps privacy changes, Admin Portal
+capability changes, hard usage enforcement, landing pages, native/offline/push
+work, and Phase 16 cleanup.
+
+Verification:
+- 49/49 focused Build-Next-3 through Build-Next-4 tests passed.
+- Syntax checks passed.
+- Review package: `outputs/build_next_4_invite_onboarding.zip`.
+
+Lock note: Codex P0 was closed by requiring existing-user invite acceptance to
+verify the submitted password before membership/session issuance.
+
+Next recommended gate: Build-Next-5 minor / parent safeguard plan.
+
+### Build-Next-5 — Minor / Parent Safeguard Plan ✅ LOCKED
+
+Status: BN5-A, BN5-B, BN5-C, and BN5-D are Codex-reviewed and locked.
+
+Purpose: turn build-packet minor/student safety requirements into a founder-
+approved rule matrix before expanding messaging, parent/student onboarding,
+waivers, event approvals, or consent-sensitive workflows.
+
+Recommended sequence:
+- BN5-A: rule matrix and schema prep — locked.
+- BN5-B: guardian / student invite foundation — locked.
+- BN5-C: server-side minor communication guard — locked.
+- BN5-D: QA evidence and launch checklist — locked.
+
+Detailed gated execution plan, review package names, strict non-scope, and
+acceptance criteria are recorded in
+`BUILD_NEXT_5_MINOR_PARENT_SAFEGUARDS_PLAN.md`.
+
+BN5-A delivered:
+- `backend/core/minor_safety.py` pure rule helpers.
+- Additive `student_profiles` / `guardian_links` index prep.
+- `backend/tests/test_build_next_5a_minor_safety_rules.py`.
+- 11/11 BN5-A tests passed.
+- Codex review P1/P2 fixes are closed: age conflicts fail closed and audit
+  extras cannot override canonical gate fields.
+
+BN5-B delivered:
+- `backend/routes/student_guardians.py` backend foundation.
+- `POST /api/student-profiles`, list/detail, guardian invite/link endpoints,
+  and status transition endpoint.
+- Existing guardian users link without duplicate user creation or user mirror
+  overwrites.
+- Guardian links require parent/horse-owner role or active parent/owner
+  account-membership relationship; staff-only barn access is not enough.
+- Invite-based guardian links require the accepted invite itself to be a
+  parent/guardian invite.
+- Minor profiles cannot become lesson-ready without an active guardian link.
+- Audit metadata uses BN5-A safe projection and omits private minor fields.
+- 12/12 focused BN5-B source guards passed with pytest plugin autoload disabled.
+- No messaging, waivers, documents, payments, billing, Admin Portal, HorseOps,
+  landing, native/offline/push, or Phase 16 work.
+
+BN5-C delivered:
+- Added reusable `backend/core/minor_communication.py` guard.
+- Wired only the existing `POST /api/messages` path in
+  `backend/routes/operations.py`.
+- Existing non-student messages remain compatible.
+- Minor/unknown-age student messages require included active guardian.
+- Staff-only participants cannot count as guardians.
+- Last-guardian removal is blocked by the reusable guard.
+- Behavior-level tests were added, addressing BN5-B's residual note that
+  source-only tests are not enough for communication enforcement.
+- Direct BN5-A/B/C behavior checks passed: 32 test functions.
+- No new messaging engine, group chat, notifications, frontend redesign,
+  documents, payments, billing, Admin Portal, HorseOps, landing, native,
+  offline/push, or Phase 16 work.
+
+BN5-D delivered:
+- Added `backend/tests/test_build_next_5d_minor_parent_evidence.py`.
+- Added `BUILD_NEXT_5D_MINOR_PARENT_QA_EVIDENCE_README.md`.
+- Verified the launch evidence matrix for guardian-first invites, guardian link
+  eligibility, lesson-ready gating, adult/minor/unknown/under-13 decisions,
+  minor communication guard behavior, last-guardian removal, message response
+  projection, and audit privacy.
+- Screenshots are not applicable because BN5-A/B/C are backend guardrail
+  foundations and BN5-D did not add or modify frontend flows.
+- Direct BN5-A/B/C/D evidence checks passed: 38 test functions.
+- No product behavior, route/schema/auth/permission/UI, messaging engine,
+  legal document, billing, Stripe, Apple, Admin Portal, HorseOps, landing,
+  native/offline/push, service worker, or Phase 16 work.
+
+BN5-D lock note:
+- Codex re-review found no remaining BN5D findings after the stale wording and
+  disk-space/package-read issue were fixed.
+- Lock artifact: `outputs/build_next_5d_minor_parent_evidence.zip`.
+- Zip integrity passed with 16 files.
+
+Build-Next-6A lock note:
+- BN6A Signature Connector Prep is Codex-reviewed and locked.
+- Lock artifact: `outputs/build_next_6a_signature_connector_prep.zip`.
+- The read-only DocuSign-style readiness endpoint is gated by
+  `integration:read`, so owner/parent roles cannot inspect provider
+  configuration posture.
+- No DocuSign SDK, provider API calls, envelope creation, signing links,
+  signed-document storage, or participation gates were added.
+
+Build-Next-6B lock note:
+- BN6B Document Workflow Provider Contract is Codex-reviewed and locked.
+- README: `BUILD_NEXT_6B_DOCUMENT_WORKFLOW_PROVIDER_README.md`.
+- Source contract: `backend/core/document_workflows.py`.
+- Tests: `backend/tests/test_build_next_6b_document_workflow_contract.py`.
+- BN6B defines the document type matrix, provider vs in-house workflow
+  classification, adult/minor/guardian signer routing, provider status mapping,
+  safe provider-envelope preview, response projection scrubber, and audit-safe
+  metadata scrubber.
+- All launch effects remain `soft_warning`; no hard participation gate, live
+  DocuSign envelope, signing URL, provider webhook, signed-document storage, or
+  legal text generation was added.
+
+Build-Next-6C lock note:
+- BN6C Document Request Foundation is Codex-reviewed and locked.
+- README: `BUILD_NEXT_6C_DOCUMENT_REQUEST_FOUNDATION_README.md`.
+- Backend: local document type, template, and request endpoints under
+  `/api/document-signatures/*`.
+- Frontend: Forms & Signatures panels for local templates and requests.
+- Facility `admin` / `barn_manager` users can register local templates and
+  create local requests for their own barn.
+- Local template/request list and detail reads are manager-only in BN6C; owner
+  or parent request access remains deferred to the later signing experience.
+- Request creation computes signer roles from the BN6B matrix and BN5
+  minor-status rules.
+- Provider template IDs are stored only as local references.
+- No live DocuSign envelope, signing URL, provider webhook, signed-document
+  storage, legal text storage, or hard participation gate was added.
+- Codex review found no remaining BN6C findings after the manager-only
+  template/request read boundary was patched and verified.
+
+Next gated implementation split:
+- BN6D — backend-only DocuSign sandbox JWT token smoke. ✅ Codex-reviewed and locked.
+- BN6E — sandbox-only DocuSign envelope creation behind an explicit flag. ✅ Codex-reviewed and locked.
+- BN6F — provider webhook status sync.
+- BN6G — signer UX and admin evidence export.
+
+Build-Next-6D review note:
+- BN6D adds `DOCUSIGN_PRIVATE_KEY_PATH` support and
+  `backend/scripts/docusign_jwt_smoke.py`.
+- The smoke script verifies sandbox JWT token readiness only.
+- Local verification passed: BN6A-BN6D focused suite. Live DocuSign sandbox JWT
+  smoke received an access token, verified the configured API account ID through
+  `oauth/userinfo`, and attempted no envelope creation.
+- Codex review found no remaining BN6D findings after the API account ID
+  verification patch.
+- No DocuSign envelope, signing URL, provider webhook, signed-document storage,
+  legal text storage, hard participation gate, owner signing UX, billing,
+  Stripe, Apple, HorseOps, Admin Portal, landing, native/offline/push, service
+  worker, or Phase 16 work was added.
+
+Build-Next-6E implementation note:
+- BN6E adds a manager-only sandbox envelope action at
+  `POST /api/document-signatures/requests/{request_id}/sandbox-envelope`.
+- The action is disabled by default and requires
+  `DOCUSIGN_SANDBOX_ENVELOPES_ENABLED=true`, DocuSign demo auth/base URLs,
+  BN6D credentials, and `DOCUSIGN_SANDBOX_SIGNER_EMAIL`.
+- The DocuSign payload creates a draft envelope only (`status=created`) from
+  the existing BN6C provider template/request contract. No signing URL, sent
+  envelope email, webhook, signed-document retrieval/storage, signer UX, or
+  participation gate was added.
+- Local request metadata is updated with provider status and timestamps, while
+  normal API projections continue to strip `provider_envelope_id`.
+- Round-1 fixes: demo REST base URL validation is exact/parsed instead of
+  prefix-based, and top-level sandbox readiness mirrors the full
+  `docusign_sandbox_ready(...)` result.
+- Verification: changed files compile; source guards show no DocuSign SDK,
+  signing URL, provider webhook, signed-document storage, or sent-envelope
+  payload. Focused pytest was attempted but local dependency imports stalled
+  before project test code executed, matching the BN6D local cache caveat.
+- Lock note: Codex re-review found no remaining BN6E findings after the exact
+  demo URL validation and full-readiness snapshot fixes.
+
+Founder decisions carried forward into BN5-A defaults:
+- Under-13 launch policy.
+- Birthdate versus minor-status data model.
+- Guardian requirement for minor students.
+- Guardian-first invite flow.
+- Adult-to-minor communication rule.
+- Guardian removal rule.
+- Minor-safety audit/privacy boundary.
+- Behavior when guardian is missing.
+
+### Build-Next-3 — Multi-Barn / Multi-Role Account Model Gap Report ✅ LOCKED
+
+Status: Codex-approved and locked in
+`outputs/build_next_3_multi_barn_multi_role_gap_report.md`.
+
+Purpose: reconcile the build packet's multi-barn and multi-role requirements
+against the current implementation before expanding invites, transfers,
+membership schemas, permissions, or active-facility context behavior.
+
+Strict scope: read-only source/data audit, gap report, optional source/read-only
+tests, docs, and package only. No schema migration, database migration, invite
+behavior change, account transfer, permission expansion, billing/Stripe/Apple
+change, HorseOps privacy change, Admin Portal capability change, landing-page
+change, native app/offline/push work, or Phase 16 cleanup.
+
+Exit criteria: founder receives a concrete implementation plan that separates
+safe-now behavior from future migration work and captures the decisions needed
+for the eventual multi-barn/multi-role account model.
+
+Founder decisions applied:
+- Future collection name: `account_memberships`.
+- Users may hold multiple roles across owner, parent/student, lesson
+  participant, trainer, staff, and facility contexts.
+- Individual users may be active without an active facility; future onboarding
+  should ask users to search for a facility and collect barn information as a
+  sales lead if no active membership exists.
+- Billing entitlements remain account/facility scoped, except the free
+  individual-owner one-horse account.
+
+Founder decisions subsequently locked for Build-Next-3A:
+- Owner access remains horse-specific for launch.
+- Preserve `users.barn_id` and `users.role` as compatibility mirrors through
+  launch.
+- Use generated standalone owner account ids instead of raw `user_id`.
+- Apply facility search / lead capture to all non-platform onboarding paths
+  except invited users; individual owners may continue without an active
+  facility.
+
+BN3 report conclusion: the current app is safe for launch as a single-context
+model, but existing-user invite acceptance and multi-role/multi-barn support
+should not expand until `account_memberships` exists and route guards have a
+compatibility migration path.
+
+### Build-Next-3A — Account Membership Schema Foundation ✅ LOCKED
+
+Status: Codex-approved and locked.
+
+Founder decisions applied:
+- Owner access remains horse-specific for launch.
+- `users.barn_id` and `users.role` remain compatibility mirrors through launch.
+- Standalone individual-owner account ids are generated and do not reuse raw
+  `user_id`.
+- Facility search / lead capture applies to all non-platform onboarding paths
+  except invited users; individual owners may continue without an active
+  facility.
+
+Implementation:
+- Added `backend/core/account_memberships.py`.
+- Added future `account_memberships` shape and named indexes.
+- Added startup backfill that creates one idempotent `source="users_mirror"`
+  membership row per existing user from current `users.barn_id` / `users.role`.
+- Added generated standalone owner account id helper.
+
+Strictly unchanged:
+- No auth behavior change.
+- No route guard migration.
+- No invite acceptance change.
+- No onboarding behavior change.
+- No owner projection change.
+- No billing / Stripe / Apple / Phase 15R behavior change.
+- No Admin Portal capability change.
+- No HorseOps privacy change.
+- No landing page, native, offline, push, or Phase 16 change.
+
+Next recommended gate after BN3D review: Build-Next-4 invite, registration,
+and onboarding polish.
+
+## Phase HorseOps-1J - Evidence Closure Only ✅ LOCKED (Jun 19 2026)
+
+HorseOps-1J is an evidence-only closure phase for the mobile screenshot gap
+left after locked HorseOps-1I. It introduces no product behavior changes.
+
+Evidence captured at 390x844:
+- Staff / manager Care Ledger mobile view.
+- Staff daily-check drawer mobile view.
+- Owner Care Ledger mobile view for an owner-linked horse.
+- Owner request drawer mobile view.
+- Platform Admin Horses directory mobile view.
+- Platform Admin horse summary drawer mobile view.
+
+Privacy and scope boundaries:
+- No backend route, schema, auth, permission, owner projection, alert/history,
+  service-request, audit, billing, Admin Portal capability, landing-page,
+  service-worker, push, native-mobile, offline-sync, or workflow-engine changes.
+- Owner screenshots show only owner-safe summary cards and the request drawer.
+- Admin screenshots remain summary-only and avoid raw daily-check payloads,
+  alert triggers, source IDs, staff notes, owner request messages, audit diffs,
+  auth tokens, passwords, Stripe IDs, and private owner/admin-only fields.
+
+Verification:
+- `backend/tests/test_horse_ledger_1j.py` pins all six screenshot paths, JPEG
+  signatures, 390x844 dimensions, and evidence-only README language.
+- Package: `outputs/phase_horseops_1j_changes.zip`.
+- Codex review complete; phase is locked. HorseOps-1K is the next gated phase
+  and must begin with a founder-approved plan.
+
+## Phase HorseOps-1G - Platform Care Ledger Inspection ✅ LOCKED (Jun 18 2026)
+
+HorseOps-1G adds the deferred Admin Portal cross-facility Care Ledger
+inspection surface as a read-only, summary-only operator view.
+
+Implemented:
+- New `backend/routes/admin_portal/horses.py` surface.
+- New `GET /api/admin/portal/horses` roster.
+- New `GET /api/admin/portal/horses/{horse_id}/ledger-summary` summary.
+- `/admin/portal/horses` frontend route now renders `AdminHorses` instead
+  of the placeholder.
+- Admin Portal route lock updated to 39 endpoints: 28 GET, 10 POST, 1 PATCH.
+
+Privacy lock:
+- Product `/api/horse-ledger/{horse_id}` remains barn-scoped and unchanged.
+- 1G responses exclude raw daily-check payloads, alert triggers,
+  `source_check_id`, staff notes, owner request messages, audit diffs,
+  owner IDs, microchip/private fields, and Stripe-shaped strings.
+
+Verification in this Codex desktop environment:
+- Backend syntax checks passed.
+- Admin route decorator scan reports 39 routes: 28 GET, 10 POST, 1 PATCH.
+- New admin page has no forbidden admin color tokens.
+- Zip review found one P1 test setup issue (`_signup(role="admin")`); fixed
+  by creating a normal signed-up user and shaping the barn-scoped role in
+  Mongo.
+- Direct functional verification passed against the local backend + Mongo:
+  health, cross-facility horse list, barn-scoped/billing_admin denial,
+  summary-only privacy scrub, audit rows, self-read exclusions, and frontend
+  route/privacy copy.
+- Archive integrity verified with `unzip -t`; `memory/PRD.md` is included at
+  full size; Python compile passes for the 1G route and test.
+
+Lock package:
+- `outputs/phase_horseops_1g_changes.zip` — 16 files.
+
+Next gated phase:
+- HorseOps-1H — awaiting founder-approved scope. No implementation starts
+  until the 1H plan is approved.
+
+## Build-Next-6F - DocuSign Connect Webhook Status Sync ✅ LOCKED (Jun 23 2026)
+
+BN6F adds a live-capable DocuSign Connect webhook receiver at
+`POST /api/document-signatures/docusign/webhook`, disabled by default until
+`DOCUSIGN_WEBHOOKS_ENABLED=true`.
+
+Scope:
+- Requires `DOCUSIGN_WEBHOOK_SECRET` and validates `X-DocuSign-Signature-1`
+  against the raw request body.
+- Supports optional `DOCUSIGN_CONNECT_CONFIGURATION_ID=22209160` allowlist.
+- Requires payload `data.accountId` to match configured `DOCUSIGN_ACCOUNT_ID`.
+- Matches existing local DocuSign provider-signature document requests by
+  `provider_envelope_id`.
+- Stores only provider status, local status, provider status timestamp, and
+  `updated_at`.
+- Unknown envelope ids return accepted/no-op.
+- Unknown provider statuses map to `provider_attention`.
+- Emits `document_request.provider_status_updated` with existing safe document
+  audit metadata.
+
+Privacy lock:
+- No raw provider payloads, email subjects, email blurbs, sender/recipient
+  identities, envelope documents, PDF bytes, document names, signing URLs,
+  signed documents, legal text, full audit diffs, billing, Stripe, Apple,
+  HorseOps, Admin Portal, landing, native/offline/push, service worker, or
+  Phase 16 behavior.
+
+Package:
+- `outputs/build_next_6f_docusign_webhook_status_sync.zip`
+
+Lock note:
+- Codex re-review found no remaining blockers after the webhook match predicate
+  was scoped to `provider=docusign` and `workflow_kind=provider_signature`.
+
+## Build-Next-7 - Launch QA / UAT Gate READY FOR CODEX REVIEW (Jun 23 2026)
+
+BN7 is an audit/evidence phase that converts the build packet's QA plan and
+launch checklist into a founder launch gate.
+
+Artifacts:
+- `BUILD_NEXT_7_LAUNCH_QA_UAT_GATE_README.md`
+- `outputs/build_next_7_launch_readiness_report.md`
+- `outputs/build_next_7_evidence/manifest.md`
+- `backend/tests/test_build_next_7_launch_gate.py`
+- `outputs/build_next_7_launch_qa_uat_gate.zip`
+
+Verdict:
+- Controlled founder/staging UAT: conditionally ready.
+- First-client pilot: not yet ready until blocker checklist closes.
+- Broad public launch: no-go until UAT, live provider verification, production
+  ops sign-off, and go-live runbook are complete.
+
+Strictly unchanged:
+- No product behavior, backend route/schema/auth/permission, checkout, webhook,
+  billing, Stripe, Apple, HorseOps, Admin Portal, landing page, service worker,
+  push, native, offline, AI, scheduler, workflow-engine, or Phase 16 behavior
+  changes.
+
+## Build-Next-7A - Staging UAT Evidence Capture ✅ LOCKED (Jun 23 2026)
+
+BN7A creates the execution packet for staging UAT:
+- `BUILD_NEXT_7A_STAGING_UAT_EVIDENCE_README.md`
+- `outputs/build_next_7a_staging_uat_evidence_report.md`
+- `outputs/build_next_7a_evidence/staging_uat_checklist.md`
+- `outputs/build_next_7a_evidence/sanitized_evidence_log.md`
+- `backend/tests/test_build_next_7a_staging_uat_evidence.py`
+- `outputs/build_next_7a_staging_uat_evidence.zip`
+
+Verdict:
+- Evidence packet: Codex-reviewed and locked.
+- Human/staging UAT execution: pending.
+- First-client pilot: still blocked until required rows are pass or
+  founder-accepted.
+- Broad public launch: still no-go.
+
+Strictly unchanged:
+- No product behavior, backend route/schema/auth/permission, checkout, webhook,
+  billing, Stripe, Apple, DocuSign workflow behavior, HorseOps, Admin Portal,
+  landing page, service worker, push, native, offline, AI, scheduler,
+  workflow-engine, or Phase 16 behavior changes.
+
+## Build-Next-8 - Production Go-Live Runbook ✅ LOCKED (Jun 23 2026)
+
+BN8 creates the production go-live runbook and founder sign-off package.
+
+Artifacts:
+- `BUILD_NEXT_8_PRODUCTION_GO_LIVE_RUNBOOK_README.md`
+- `outputs/build_next_8_go_live_runbook.md`
+- `outputs/build_next_8_env_boolean_checklist.md`
+- `backend/tests/test_build_next_8_go_live_runbook.py`
+- `outputs/build_next_8_production_go_live_runbook.zip`
+
+Verdict:
+- Runbook package: Codex-reviewed and locked.
+- Production launch: not approved by this phase.
+- First-client pilot: still requires BN7A UAT evidence closure and founder
+  sign-off.
+- Broad public launch: still no-go.
+
+Strictly unchanged:
+- No product behavior, provider calls, backend route/schema/auth/permission,
+  checkout, webhook, billing, Stripe, Apple, DocuSign workflow behavior,
+  HorseOps, Admin Portal, landing page, service worker, push, native, offline,
+  AI, scheduler, workflow-engine, deploy action, public launch action, or Phase
+  16 behavior changes.
+
+## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
+
+BN12 execution is deferred. BN12-Prep creates a safe collection packet for the
+inputs needed before BN12 can fill official staging identity:
+- `BUILD_NEXT_12_PREP_STAGING_INPUTS_README.md`
+- `outputs/build_next_12_prep_staging_inputs_checklist.md`
+- `outputs/build_next_12_prep_staging_inputs_walkthrough.md`
+- `backend/tests/test_build_next_12_prep_staging_inputs.py`
+- `outputs/build_next_12_prep_staging_inputs.zip`
+
+Verdict:
+- BN12 remains deferred.
+- Official staging frontend/API/build/database/deploy/flag inputs remain to be
+  gathered.
+- Role-account readiness remains to be confirmed.
+- Stripe and DocuSign readiness remain to be confirmed without lifecycle
+  execution.
+- Apple remains deferred.
+- Localhost is not accepted as official UAT evidence.
+- First-client pilot remains blocked.
+- Broad public launch remains no-go.
+
+Strictly unchanged:
+- No product behavior, provider calls, backend route/schema/auth/permission,
+  checkout, webhook, billing, Stripe, Apple, DocuSign workflow behavior,
+  HorseOps, Admin Portal, landing page, service worker, push, native, offline,
+  AI, scheduler, workflow-engine, deploy action, public launch action, or Phase
+  16 behavior changes.
+
+## Build-Next-9 - Staging UAT Execution Evidence ✅ LOCKED (Jun 24 2026)
+
+BN9 converts the locked BN7A checklist into an explicit evidence packet:
+- `BUILD_NEXT_9_STAGING_UAT_EXECUTION_README.md`
+- `outputs/build_next_9_staging_uat_execution_report.md`
+- `outputs/build_next_7a_evidence/staging_uat_checklist.md`
+- `outputs/build_next_7a_evidence/sanitized_evidence_log.md`
+- `outputs/build_next_9_role_staging_execution_attempt.md`
+- `outputs/build_next_9_role_screenshots/`
+- `backend/tests/test_build_next_9_staging_uat_execution.py`
+- `outputs/build_next_9_staging_uat_execution.zip`
+
+Verdict:
+- All required UAT rows now have stable BN9 evidence references.
+- Jun 24 local dry-run captured sanitized screenshots for UAT-R1 through UAT-R8
+  with disposable BN9 accounts after backend/frontend availability was restored.
+- Human/staging role walkthroughs remain pending.
+- Live provider lifecycle evidence remains pending.
+- Production operations sign-off remains pending.
+- First-client pilot remains blocked.
+- Broad public launch remains no-go.
+
+Strictly unchanged:
+- No product behavior, provider calls, backend route/schema/auth/permission,
+  checkout, webhook, billing, Stripe, Apple, DocuSign workflow behavior,
+  HorseOps, Admin Portal, landing page, service worker, push, native, offline,
+  AI, scheduler, workflow-engine, deploy action, public launch action, or Phase
+  16 behavior changes.
+
+## Build-Next-10 - Official Staging UAT Closure Plan ✅ LOCKED (Jun 24 2026)
+
+BN10 locks the official evidence rules for closing the pending BN7A/BN9 UAT
+rows:
+- `BUILD_NEXT_10_STAGING_UAT_CLOSURE_README.md`
+- `outputs/build_next_10_staging_uat_closure_report.md`
+- `outputs/build_next_10_founder_decision_matrix.md`
+- `backend/tests/test_build_next_10_staging_uat_closure.py`
+- `outputs/build_next_10_staging_uat_closure.zip`
+
+Verdict:
+- Official environment for launch-clearing UAT is production-like staging.
+- BN9 local screenshots are reference-only and cannot close UAT rows.
+- Rian is the only actor who can mark a row `founder-accepted`.
+- Patrick/operator may co-sign operations rows, but cannot founder-accept a
+  caveat.
+- Stripe and DocuSign checks are allowed only as controlled live-safe checks.
+- Apple remains deferred until a separate Apple billing phase is approved.
+- First-client pilot remains blocked.
+- Broad public launch remains no-go.
+
+Strictly unchanged:
+- No product behavior, provider calls, backend route/schema/auth/permission,
+  checkout, webhook, billing, Stripe, Apple, DocuSign workflow behavior,
+  HorseOps, Admin Portal, landing page, service worker, push, native, offline,
+  AI, scheduler, workflow-engine, deploy action, public launch action, or Phase
+  16 behavior changes.
+
+## Build-Next-11 - Production-Like Staging Environment Proof ✅ LOCKED (Jun 24 2026)
+
+BN11 creates the official staging-environment proof packet required by locked
+BN10:
+- `BUILD_NEXT_11_STAGING_ENV_PROOF_README.md`
+- `outputs/build_next_11_staging_environment_report.md`
+- `outputs/build_next_11_staging_environment_checklist.md`
+- `backend/tests/test_build_next_11_staging_environment_proof.py`
+- `outputs/build_next_11_staging_environment_proof.zip`
+
+Verdict:
+- Official staging identity remains blocked until frontend URL/domain, API base
+  URL, build/version, environment label, database label, deploy marker, and
+  feature-flag summary are supplied.
+- Local app health is recorded as reference-only and cannot close UAT rows.
+- Official staged role-account readiness remains pending.
+- Stripe and DocuSign readiness remain pending without executing lifecycle
+  actions.
+- Apple remains deferred.
+- First-client pilot remains blocked.
+- Broad public launch remains no-go.
+
+Strictly unchanged:
+- No product behavior, provider calls, backend route/schema/auth/permission,
+  checkout, webhook, billing, Stripe, Apple, DocuSign workflow behavior,
+  HorseOps, Admin Portal, landing page, service worker, push, native, offline,
+  AI, scheduler, workflow-engine, deploy action, public launch action, or Phase
+  16 behavior changes.

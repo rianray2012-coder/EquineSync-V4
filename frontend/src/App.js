@@ -83,6 +83,7 @@ import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminApprovals from "./pages/admin/AdminApprovals";
 import AdminFacilities from "./pages/admin/AdminFacilities";
+import AdminHorses from "./pages/admin/AdminHorses";
 import AdminSubscriptions from "./pages/admin/AdminSubscriptions";
 import AdminBilling from "./pages/admin/AdminBilling";
 import AdminAuditLogs from "./pages/admin/AdminAuditLogs";
@@ -145,7 +146,7 @@ function App() {
               <Route path="users" element={<AdminUsers />} />
               <Route path="approvals" element={<AdminApprovals />} />
               <Route path="facilities" element={<AdminFacilities />} />
-              <Route path="horses" element={<AdminPlaceholder section="Horses" phase="Admin-4" description="Admin-level horse directory with masked medical for lower roles." />} />
+              <Route path="horses" element={<AdminHorses />} />
               <Route path="subscriptions" element={<AdminSubscriptions />} />
               <Route path="billing" element={<AdminBilling />} />
               <Route path="permissions" element={<AdminPlaceholder section="Permissions" phase="Admin-7" description="Read-only role × capability matrix from the backend." />} />

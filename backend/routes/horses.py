@@ -16,6 +16,7 @@ from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
+from core.account_route_context import account_barn_filter
 from core.tenancy import barn_filter, stamp_barn
 
 
@@ -51,16 +52,17 @@ class HorseIn(BaseModel):
     behavior_flags: Optional[List[str]] = []
 
 
-def build_router(*, db, get_current_user, list_collection, clean, new_id) -> APIRouter:
+def build_router(*, db, get_current_user, list_collection, clean, new_id, require_active_facility=None) -> APIRouter:
     router = APIRouter(tags=["horses"])
+    enforce_active_facility = require_active_facility or get_current_user
 
     @router.get("/horses")
-    async def list_horses(user=Depends(get_current_user)):
-        # Phase 4B-1: scope list reads to the caller's barn.
-        return await list_collection("horses", barn_filter(user))
+    async def list_horses(account_id: Optional[str] = None, user=Depends(get_current_user)):
+        # BN3C pilot: read scope can use selected account context; writes remain legacy-scoped.
+        return await list_collection("horses", await account_barn_filter(db, user, account_id=account_id))
 
     @router.post("/horses")
-    async def create_horse(body: HorseIn, user=Depends(get_current_user)):
+    async def create_horse(body: HorseIn, user=Depends(get_current_user), _active=Depends(enforce_active_facility)):
         doc = body.model_dump()
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
         # Phase 4B-1: stamp the caller's barn at write time.
@@ -69,15 +71,15 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         return clean(doc)
 
     @router.get("/horses/{horse_id}")
-    async def get_horse(horse_id: str, user=Depends(get_current_user)):
-        # Phase 4B-1: scope by id + barn; a cross-barn id 404s (no existence leak).
-        h = await db.horses.find_one(barn_filter(user, {"id": horse_id}), {"_id": 0})
+    async def get_horse(horse_id: str, account_id: Optional[str] = None, user=Depends(get_current_user)):
+        # BN3C pilot: scope read by id + selected facility account; cross-account ids 404.
+        h = await db.horses.find_one(await account_barn_filter(db, user, account_id=account_id, extra={"id": horse_id}), {"_id": 0})
         if not h:
             raise HTTPException(404, "Horse not found")
         return h
 
     @router.patch("/horses/{horse_id}")
-    async def update_horse(horse_id: str, body: Dict[str, Any], user=Depends(get_current_user)):
+    async def update_horse(horse_id: str, body: Dict[str, Any], user=Depends(get_current_user), _active=Depends(enforce_active_facility)):
         scope = barn_filter(user, {"id": horse_id})
         existing = await db.horses.find_one(scope, {"_id": 0})
         if not existing:

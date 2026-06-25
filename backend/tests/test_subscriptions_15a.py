@@ -1,10 +1,10 @@
 """tests/test_subscriptions_15a.py — Phase 15.A facility subscriptions.
 
-Scope: plan catalog, usage read, subscription checkout (Starter/Professional
-only), customer portal, and minimal checkout.session.completed webhook.
+Scope: plan catalog, usage read, subscription checkout for public paid tiers,
+customer portal, and checkout.session.completed webhook.
 
 Stripe SDK is monkey-patched at the test boundary so we don't require a live
-Stripe key. The dev environment's STRIPE_API_KEY=sk_test_emergent is not a
+Stripe key. The dev environment's STRIPE_API_KEY=<test-placeholder> is not a
 real Stripe key — the production code path is exercised end-to-end with
 stub responses.
 """
@@ -33,6 +33,7 @@ def _base_url():
 
 BASE = _base_url()
 API = f"{BASE}/api"
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 
 # ---------- helpers ----------
@@ -73,22 +74,39 @@ def _admin_token():
 
 # ---------- plans catalog ----------
 
-def test_plans_catalog_returns_all_four_tiers():
+def test_plans_catalog_returns_updated_pricing_tiers():
     out = _signup()
     h = {"Authorization": f"Bearer {out['token']}"}
     r = requests.get(f"{API}/billing/plans", headers=h, timeout=15)
     assert r.status_code == 200, r.text
     plans = {p["tier_code"]: p for p in r.json()}
-    assert {"free", "starter", "professional", "enterprise"} <= set(plans)
+    expected = {
+        "free",
+        "individual_owner",
+        "private_owner_plus",
+        "starter_barn",
+        "advanced_barn",
+        "elite_barn",
+        "trainer_no_lesson",
+        "trainer_lesson_15",
+        "trainer_lesson_50",
+        "enterprise",
+        "community_program",
+    }
+    assert expected <= set(plans)
     assert plans["enterprise"]["contact_sales"] is True
     assert plans["enterprise"]["monthly_price_cents"] is None
-    assert plans["starter"]["monthly_price_cents"] == 4900
-    assert plans["starter"]["annual_price_cents"] == 49980
-    assert plans["professional"]["monthly_price_cents"] == 14900
-    assert plans["professional"]["annual_price_cents"] == 151980
-    # Enterprise has no contact_sales pricing — frontend renders "Talk to sales".
+    assert plans["individual_owner"]["monthly_price_cents"] == 1499
+    assert plans["individual_owner"]["annual_price_cents"] == 14900
+    assert plans["starter_barn"]["monthly_price_cents"] == 6999
+    assert plans["starter_barn"]["annual_price_cents"] == 69900
+    assert plans["advanced_barn"]["monthly_price_cents"] == 14999
+    assert plans["advanced_barn"]["annual_price_cents"] == 149900
+    assert plans["trainer_lesson_50"]["feature_limits"]["lesson_participants"] == 50
+    # Custom-contract tiers have no checkout pricing — frontend renders sales contact.
     assert plans["enterprise"]["feature_limits"]["horses"] is None
     assert plans["enterprise"]["feature_limits"]["users"] is None
+    assert plans["community_program"]["contact_sales"] is True
 
 
 # ---------- usage (barn-scoped, non-blocking) ----------
@@ -140,7 +158,7 @@ def test_checkout_rejects_bad_billing_cycle():
     h = {"Authorization": f"Bearer {tok}"}
     r = requests.post(
         f"{API}/subscriptions/checkout",
-        json={"plan_tier_code": "starter", "billing_cycle": "biennial", "origin_url": BASE},
+        json={"plan_tier_code": "starter_barn", "billing_cycle": "biennial", "origin_url": BASE},
         headers=h, timeout=15,
     )
     assert r.status_code == 400
@@ -153,7 +171,7 @@ def test_checkout_requires_barn_manage_capability():
     h = {"Authorization": f"Bearer {out['token']}"}
     r = requests.post(
         f"{API}/subscriptions/checkout",
-        json={"plan_tier_code": "starter", "billing_cycle": "monthly", "origin_url": BASE},
+        json={"plan_tier_code": "starter_barn", "billing_cycle": "monthly", "origin_url": BASE},
         headers=h, timeout=15,
     )
     assert r.status_code == 403, r.text
@@ -167,11 +185,11 @@ def test_checkout_requires_stripe_price_id_configured():
     h = {"Authorization": f"Bearer {tok}"}
     # Inspect the current plan to know whether to expect 500 or 200(stub).
     plans = requests.get(f"{API}/billing/plans", headers=h, timeout=15).json()
-    starter = next(p for p in plans if p["tier_code"] == "starter")
-    if not starter["has_monthly"]:
+    starter_barn = next(p for p in plans if p["tier_code"] == "starter_barn")
+    if not starter_barn["has_monthly"]:
         r = requests.post(
             f"{API}/subscriptions/checkout",
-            json={"plan_tier_code": "starter", "billing_cycle": "monthly", "origin_url": BASE},
+            json={"plan_tier_code": "starter_barn", "billing_cycle": "monthly", "origin_url": BASE},
             headers=h, timeout=15,
         )
         assert r.status_code == 500
@@ -219,7 +237,7 @@ def test_subscriptions_me_returns_null_when_no_sub():
     import os as _os
     from dotenv import load_dotenv as _load_dotenv
     from pymongo import MongoClient as _MongoClient
-    _load_dotenv("/app/backend/.env")
+    _load_dotenv(ROOT / "backend" / ".env")
     _mc = _MongoClient(_os.environ["MONGO_URL"])
     _db = _mc[_os.environ.get("DB_NAME") or "test_database"]
     _db.barns.update_one(
@@ -280,7 +298,7 @@ def test_webhook_checkout_completed_is_idempotent():
         "barn_id": barn_id,
         "owner_user_id": "test-owner",
         "stripe_subscription_id": sub_id,
-        "plan_tier_code": "starter",
+        "plan_tier_code": "starter_barn",
         "status": "active",
         "pending_emails": [],
         "created_at": "2026-01-01T00:00:00+00:00",
@@ -297,7 +315,7 @@ def test_webhook_checkout_completed_is_idempotent():
             "metadata": {
                 "barn_id": barn_id,
                 "owner_user_id": "test-owner",
-                "plan_tier_code": "starter",
+                "plan_tier_code": "starter_barn",
                 "billing_cycle": "monthly",
             },
         }},
@@ -344,7 +362,7 @@ def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
     """
     import asyncio
     import sys
-    sys.path.insert(0, "/app/backend")
+    sys.path.insert(0, str(ROOT / "backend"))
     import stripe as stripe_sdk
     from fastapi import HTTPException
     from routes.subscriptions import build_router
@@ -356,7 +374,7 @@ def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
         raise _StubError("simulated stripe outage")
 
     monkeypatch.setattr(stripe_sdk.Subscription, "retrieve", _boom)
-    monkeypatch.setenv("STRIPE_API_KEY", "sk_test_anything")
+    monkeypatch.setenv("STRIPE_API_KEY", "stripe_test_key_placeholder")
     monkeypatch.delenv("STRIPE_WEBHOOK_SECRET", raising=False)
 
     # Build a stub DB whose subscriptions.find_one returns None (so the
@@ -400,7 +418,7 @@ def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
                     '"data":{"object":{"id":"cs_test","subscription":"'
                     + sub_id + '","customer":"cus_test","metadata":{'
                     '"barn_id":"barn_boom","owner_user_id":"u",'
-                    '"plan_tier_code":"starter","billing_cycle":"monthly"}}}}').encode()
+                    '"plan_tier_code":"starter_barn","billing_cycle":"monthly"}}}}').encode()
     with pytest.raises(HTTPException) as ex:
         asyncio.run(handler(_StubReq()))
     assert ex.value.status_code == 502
@@ -437,17 +455,29 @@ def test_lifespan_production_fail_fast_is_not_swallowed(monkeypatch):
     """
     import asyncio
     import sys
-    sys.path.insert(0, "/app/backend")
+    sys.path.insert(0, str(ROOT / "backend"))
     from core import billing_provisioning
 
     monkeypatch.setenv("APP_ENV", "production")
-    monkeypatch.setenv("STRIPE_API_KEY", "sk_test_pretend")
+    monkeypatch.setenv("STRIPE_API_KEY", "stripe_test_key_placeholder")
     # Clear any Price IDs that may be set in the env so the prod validator fails.
     for k in (
-        "STRIPE_PRICE_STARTER_MONTHLY",
-        "STRIPE_PRICE_STARTER_ANNUAL",
-        "STRIPE_PRICE_PROFESSIONAL_MONTHLY",
-        "STRIPE_PRICE_PROFESSIONAL_ANNUAL",
+        "STRIPE_PRICE_INDIVIDUAL_OWNER_MONTHLY",
+        "STRIPE_PRICE_INDIVIDUAL_OWNER_ANNUAL",
+        "STRIPE_PRICE_PRIVATE_OWNER_PLUS_MONTHLY",
+        "STRIPE_PRICE_PRIVATE_OWNER_PLUS_ANNUAL",
+        "STRIPE_PRICE_STARTER_BARN_MONTHLY",
+        "STRIPE_PRICE_STARTER_BARN_ANNUAL",
+        "STRIPE_PRICE_ADVANCED_BARN_MONTHLY",
+        "STRIPE_PRICE_ADVANCED_BARN_ANNUAL",
+        "STRIPE_PRICE_ELITE_BARN_MONTHLY",
+        "STRIPE_PRICE_ELITE_BARN_ANNUAL",
+        "STRIPE_PRICE_TRAINER_NO_LESSON_MONTHLY",
+        "STRIPE_PRICE_TRAINER_NO_LESSON_ANNUAL",
+        "STRIPE_PRICE_TRAINER_LESSON_15_MONTHLY",
+        "STRIPE_PRICE_TRAINER_LESSON_15_ANNUAL",
+        "STRIPE_PRICE_TRAINER_LESSON_50_MONTHLY",
+        "STRIPE_PRICE_TRAINER_LESSON_50_ANNUAL",
     ):
         monkeypatch.delenv(k, raising=False)
 
@@ -531,21 +561,32 @@ def test_subscriptions_me_is_read_only_no_barn_insert():
     assert barns.count_documents({"id": unique_barn}) == 0
 
 
-# Codex finding #3: dev-mode catalog must upsert ALL 4 plans even when the
+# Codex finding #3: dev-mode catalog must upsert all pricing-addendum plans even when the
 # Stripe key is missing or unreachable.
-def test_plans_catalog_contains_all_four_tiers_even_without_stripe():
-    """Local /billing/plans MUST always return Free, Starter, Professional,
-    Enterprise — regardless of Stripe connectivity. Starter + Professional
-    may have null Stripe IDs in dev (the `has_monthly`/`has_annual` flags
-    on the public payload reflect this).
+def test_plans_catalog_contains_all_updated_tiers_even_without_stripe():
+    """Local /billing/plans MUST always return the updated pricing catalog,
+    regardless of Stripe connectivity. Paid tiers may have null Stripe IDs in
+    dev (the `has_monthly`/`has_annual` flags reflect this).
     """
     out = _signup()
     h = {"Authorization": f"Bearer {out['token']}"}
     r = requests.get(f"{API}/billing/plans", headers=h, timeout=15)
     assert r.status_code == 200
     tiers = {p["tier_code"] for p in r.json()}
-    assert tiers == {"free", "starter", "professional", "enterprise"}, (
-        f"Catalog must always contain all four tiers in dev (got {tiers})"
+    assert tiers == {
+        "free",
+        "individual_owner",
+        "private_owner_plus",
+        "starter_barn",
+        "advanced_barn",
+        "elite_barn",
+        "trainer_no_lesson",
+        "trainer_lesson_15",
+        "trainer_lesson_50",
+        "enterprise",
+        "community_program",
+    }, (
+        f"Catalog must always contain the updated pricing tiers in dev (got {tiers})"
     )
 
 
@@ -556,7 +597,7 @@ def test_checkout_rejects_unlisted_origin():
     r = requests.post(
         f"{API}/subscriptions/checkout",
         json={
-            "plan_tier_code": "starter",
+            "plan_tier_code": "starter_barn",
             "billing_cycle": "monthly",
             "origin_url": "https://evil.example.com",  # NOT allow-listed
         },
@@ -590,7 +631,7 @@ def test_subscriptions_me_strips_stripe_ids():
         "id": sub_id,
         "barn_id": barn_id,
         "owner_user_id": uid,
-        "plan_tier_code": "starter",
+        "plan_tier_code": "starter_barn",
         "status": "active",
         "billing_cycle": "monthly",
         "stripe_customer_id": "cus_secret_should_not_leak",
@@ -611,7 +652,7 @@ def test_subscriptions_me_strips_stripe_ids():
     for k in ("stripe_customer_id", "stripe_subscription_id", "stripe_price_id"):
         assert k not in sub, f"raw Stripe id {k} leaked in /subscriptions/me"
     # ...but the non-secret fields still come through.
-    assert sub["plan_tier_code"] == "starter"
+    assert sub["plan_tier_code"] == "starter_barn"
     assert sub["status"] == "active"
 
     # Cleanup

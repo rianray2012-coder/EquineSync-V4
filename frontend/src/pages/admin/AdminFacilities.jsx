@@ -7,10 +7,16 @@
  */
 import React, { useEffect, useState } from "react";
 import { api } from "../../lib/api";
+import { PLAN_ORDER } from "../../lib/subscriptionBilling";
 import UserStatusBadge from "./UserStatusBadge";
 import AdminFacilityDrawer from "./AdminFacilityDrawer";
 
-const TIER_OPTIONS = ["", "free", "starter", "professional", "enterprise"];
+const TIER_OPTIONS = ["", ...PLAN_ORDER];
+const planLabel = (tier) => (tier || "")
+  .split("_")
+  .filter(Boolean)
+  .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+  .join(" ");
 
 const formatTs = (iso) => {
   if (!iso) return "—";
@@ -102,7 +108,7 @@ export default function AdminFacilities() {
             data-testid="admin-facilities-tier-filter"
             className="w-full px-3 py-2 rounded-lg border border-equinesync-graphite/15 bg-white text-[13px]"
           >
-            {TIER_OPTIONS.map((o) => (<option key={o} value={o}>{o || "Any tier"}</option>))}
+            {TIER_OPTIONS.map((o) => (<option key={o} value={o}>{o ? planLabel(o) : "Any tier"}</option>))}
           </select>
         </div>
         <div className="text-[11.5px] text-equinesync-graphite/55 ml-auto">{total.toLocaleString()} total</div>

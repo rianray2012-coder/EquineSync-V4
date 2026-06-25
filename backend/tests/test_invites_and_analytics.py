@@ -62,11 +62,15 @@ class TestInvitesCreate:
         assert r2.status_code == 409
         requests.post(f"{API}/invites/{inv_id}/revoke", headers=admin_h, timeout=30)
 
-    def test_create_invite_409_existing_user(self, admin_h):
-        # admin already exists
+    def test_create_invite_existing_user_allowed_for_membership_attachment(self, admin_h):
+        # BN4: existing users can receive a facility invite; accept attaches an
+        # account_membership instead of creating a duplicate user.
         r = requests.post(f"{API}/invites", headers=admin_h,
                           json={"email": "admin@equinesync.com", "role": "trainer"}, timeout=30)
-        assert r.status_code == 409
+        assert r.status_code == 200, r.text
+        d = r.json()
+        assert d["existing_user"] is True
+        requests.post(f"{API}/invites/{d['id']}/revoke", headers=admin_h, timeout=30)
 
 
 class TestInvitesList:

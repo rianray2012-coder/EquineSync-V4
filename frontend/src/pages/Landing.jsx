@@ -70,29 +70,64 @@ const TRUST = [
 // hard-coded prices.
 const LANDING_BULLETS_BY_TIER = {
   free: [
-    "Personal horse profile + journal",
-    "Network directory presence",
-    "Messaging with verified pros",
+    "Included with subscribed barns",
+    "Approved updates, invoices, photos & documents",
+    "Owner requests and barn messaging",
   ],
-  starter: [
-    null, // placeholder; replaced live by feature_limits when present
-    "Daily care, feed & medication tracking",
-    "Boarder invoices & owner portal",
-  ],
-  professional: [
+  individual_owner: [
     null,
-    "Training plans, GPS, advanced reporting",
-    "Recurring billing + boarder messaging",
+    "Feed, supplement, vet & farrier records",
+    "Training notes, calendar, emergency profile",
+  ],
+  private_owner_plus: [
+    null,
+    "Helper seats, document vault, QR stall cards",
+    "Basic inventory and emergency mode",
+  ],
+  starter_barn: [
+    null,
+    "Feed, turnout, owner updates and billing",
+    "Client owner portal accounts included",
+  ],
+  advanced_barn: [
+    null,
+    "Staff tasks, inventory, rehab and alerts",
+    "Internal messaging and basic reports",
+  ],
+  elite_barn: [
+    null,
+    "Advanced reporting and permissions",
+    "Contracts, signatures and branded portal",
+  ],
+  trainer_no_lesson: [
+    null,
+    "Training logs, plans and owner updates",
+    "Ride calendar, documents and basic billing",
+  ],
+  trainer_lesson_15: [
+    null,
+    "Lesson scheduling, notes and packages",
+    "Parent portal and lesson horse workload",
+  ],
+  trainer_lesson_50: [
+    null,
+    "Attendance, waivers and progress reports",
+    "Lesson billing and revenue reports",
   ],
   enterprise: [
-    "Unlimited horses & staff users",
-    "Dedicated support · SSO · custom integrations",
-    "Volume pricing & on-prem options",
+    "100+ horses and multi-location support",
+    "Dedicated account manager and SSO options",
+    "Custom onboarding, API access and migration",
+  ],
+  community_program: [
+    "Nonprofit, education and rescue programs",
+    "30-50% discount or custom quote",
+    "Polished Community Program support",
   ],
 };
-const LANDING_POPULAR_BY_TIER = { professional: true };
+const LANDING_POPULAR_BY_TIER = { advanced_barn: true };
 
-const CONTACT_SALES_MAILTO = "mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry";
+const CONTACT_SALES_MAILTO = "mailto:sales@equinesync.com?subject=EquineSync%20custom%20plan%20enquiry";
 
 export default function Landing() {
   const navigate = useNavigate();

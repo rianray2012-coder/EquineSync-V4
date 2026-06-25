@@ -18,6 +18,7 @@ import logging
 
 from dateutil.rrule import rrulestr
 
+from core.account_route_context import resolve_read_facility_barn_id
 from core.tenancy import PRIMARY_BARN_ID, resolve_barn_id
 
 logger = logging.getLogger(__name__)
@@ -676,16 +677,19 @@ class TaskEngine:
 # Router factory — wires the engine into FastAPI
 # ---------------------------------------------------------------------------
 
-def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
+def build_router(db, get_current_user, analytics_track=None, require_active_facility=None) -> APIRouter:
     engine = TaskEngine(db, analytics_track)
     router = APIRouter()
+    enforce_active_facility = require_active_facility or get_current_user
 
     # -- templates ------------------------------------------------------
     @router.get("/task-templates")
     async def list_templates(user=Depends(get_current_user),
+                             account_id: Optional[str] = None,
                              category: Optional[str] = None,
                              active: Optional[bool] = None):
-        q: Dict[str, Any] = {"tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user)}
+        barn_id = await resolve_read_facility_barn_id(db, user, account_id=account_id)
+        q: Dict[str, Any] = {"tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id}
         if category:
             q["category"] = category
         if active is not None:
@@ -694,7 +698,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         return {"items": items}
 
     @router.post("/task-templates")
-    async def create_template(body: TaskTemplateIn, user=Depends(get_current_user)):
+    async def create_template(body: TaskTemplateIn, user=Depends(get_current_user),
+                              _active=Depends(enforce_active_facility)):
         doc = body.model_dump()
         doc.update({
             "id": new_id(),
@@ -713,7 +718,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         return {"template": created, "materialized": created_count}
 
     @router.patch("/task-templates/{tpl_id}")
-    async def update_template(tpl_id: str, body: TaskTemplateIn, user=Depends(get_current_user)):
+    async def update_template(tpl_id: str, body: TaskTemplateIn, user=Depends(get_current_user),
+                              _active=Depends(enforce_active_facility)):
         barn_id = resolve_barn_id(user)
         scope = {"id": tpl_id, "tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id}
         existing = await db.task_templates.find_one(scope, {"_id": 0})
@@ -738,7 +744,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         return {"template": refreshed, "rematerialized": new_count}
 
     @router.delete("/task-templates/{tpl_id}")
-    async def delete_template(tpl_id: str, user=Depends(get_current_user)):
+    async def delete_template(tpl_id: str, user=Depends(get_current_user),
+                              _active=Depends(enforce_active_facility)):
         barn_id = resolve_barn_id(user)
         # soft-delete: set active=False
         r = await db.task_templates.update_one(
@@ -758,6 +765,7 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
     # -- tasks ----------------------------------------------------------
     @router.get("/tasks")
     async def list_tasks(user=Depends(get_current_user),
+                         account_id: Optional[str] = None,
                          start: Optional[str] = None,
                          end: Optional[str] = None,
                          horse_id: Optional[str] = None,
@@ -766,7 +774,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
                          status_: Optional[str] = Query(None, alias="status"),
                          priority: Optional[str] = None,
                          limit: int = 200):
-        q: Dict[str, Any] = {"tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user)}
+        barn_id = await resolve_read_facility_barn_id(db, user, account_id=account_id)
+        q: Dict[str, Any] = {"tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id}
         if start or end:
             q["scheduled_at"] = {}
             if start:
@@ -792,12 +801,13 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
 
     @router.get("/tasks/today")
     async def today_view(user=Depends(get_current_user),
+                         account_id: Optional[str] = None,
                          date: Optional[str] = None):
         """Returns urgency-grouped Today view."""
         anchor = parse_iso(date) if date else now_utc()
         start = anchor.replace(hour=0, minute=0, second=0, microsecond=0)
         end = start + timedelta(days=1)
-        barn_id = resolve_barn_id(user)
+        barn_id = await resolve_read_facility_barn_id(db, user, account_id=account_id)
         items = await db.tasks.find(
             {
                 "tenant_id": DEFAULT_TENANT_ID,
@@ -852,7 +862,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
                 "counts": {k: len(v) for k, v in groups.items()}}
 
     @router.post("/tasks")
-    async def create_task(body: AdHocTaskIn, user=Depends(get_current_user)):
+    async def create_task(body: AdHocTaskIn, user=Depends(get_current_user),
+                          _active=Depends(enforce_active_facility)):
         sched = parse_iso(body.scheduled_at)
         doc = {
             "id": new_id(),
@@ -887,7 +898,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         return {"task": out}
 
     @router.patch("/tasks/{task_id}")
-    async def patch_task(task_id: str, body: TaskPatch, user=Depends(get_current_user)):
+    async def patch_task(task_id: str, body: TaskPatch, user=Depends(get_current_user),
+                         _active=Depends(enforce_active_facility)):
         scope = {"id": task_id, "tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user)}
         existing = await db.tasks.find_one(scope, {"_id": 0})
         if not existing:
@@ -911,11 +923,13 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         return {"task": updated}
 
     @router.post("/tasks/{task_id}/complete")
-    async def complete(task_id: str, body: CompleteBody, user=Depends(get_current_user)):
+    async def complete(task_id: str, body: CompleteBody, user=Depends(get_current_user),
+                       _active=Depends(enforce_active_facility)):
         return await engine.complete_task(task_id, body, user)
 
     @router.post("/tasks/bulk-complete")
-    async def bulk_complete(body: BulkCompleteBody, user=Depends(get_current_user)):
+    async def bulk_complete(body: BulkCompleteBody, user=Depends(get_current_user),
+                            _active=Depends(enforce_active_facility)):
         results = []
         for item in body.items:
             try:
@@ -938,16 +952,19 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         return {"results": results, "succeeded": succeeded, "total": len(results)}
 
     @router.post("/tasks/{task_id}/skip")
-    async def skip(task_id: str, body: SkipBody, user=Depends(get_current_user)):
+    async def skip(task_id: str, body: SkipBody, user=Depends(get_current_user),
+                   _active=Depends(enforce_active_facility)):
         return await engine.skip_task(task_id, body, user)
 
     @router.post("/tasks/{task_id}/void")
-    async def void(task_id: str, body: Dict[str, Any] = None, user=Depends(get_current_user)):
+    async def void(task_id: str, body: Dict[str, Any] = None, user=Depends(get_current_user),
+                   _active=Depends(enforce_active_facility)):
         reason = (body or {}).get("reason") if isinstance(body, dict) else None
         return await engine.void_completion(task_id, reason or "voided", user)
 
     @router.post("/tasks/{task_id}/reassign")
-    async def reassign(task_id: str, body: ReassignBody, user=Depends(get_current_user)):
+    async def reassign(task_id: str, body: ReassignBody, user=Depends(get_current_user),
+                       _active=Depends(enforce_active_facility)):
         scope = {"id": task_id, "tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user)}
         existing = await db.tasks.find_one(scope, {"_id": 0})
         if not existing:
@@ -970,7 +987,8 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         return {"task": updated}
 
     @router.post("/tasks/materialize")
-    async def force_materialize(user=Depends(get_current_user)):
+    async def force_materialize(user=Depends(get_current_user),
+                                _active=Depends(enforce_active_facility)):
         n = await engine.materialize_all(barn_id=resolve_barn_id(user))
         return {"created": n}
 
@@ -978,11 +996,13 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
     @router.get("/horses/{horse_id}/timeline")
     async def horse_timeline(horse_id: str,
                               user=Depends(get_current_user),
+                              account_id: Optional[str] = None,
                               limit: int = 100,
                               owner_view: bool = False):
+        barn_id = await resolve_read_facility_barn_id(db, user, account_id=account_id)
         q: Dict[str, Any] = {
             "tenant_id": DEFAULT_TENANT_ID,
-            "barn_id": resolve_barn_id(user),
+            "barn_id": barn_id,
             "subject_horse_ids": horse_id,
         }
         if owner_view or user.get("role") == "horse_owner":
@@ -992,9 +1012,11 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
         return {"items": items}
 
     @router.get("/staff/{user_id}/activity")
-    async def staff_activity(user_id: str, user=Depends(get_current_user), limit: int = 100):
+    async def staff_activity(user_id: str, user=Depends(get_current_user),
+                             account_id: Optional[str] = None, limit: int = 100):
+        barn_id = await resolve_read_facility_barn_id(db, user, account_id=account_id)
         items = await db.task_events.find(
-            {"tenant_id": DEFAULT_TENANT_ID, "barn_id": resolve_barn_id(user),
+            {"tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id,
              "actor_user_id": user_id},
             {"_id": 0},
         ).sort("occurred_at", -1).to_list(min(limit, 500))
@@ -1003,9 +1025,10 @@ def build_router(db, get_current_user, analytics_track=None) -> APIRouter:
     # -- analytics rollup ---------------------------------------------
     @router.get("/tasks/analytics/summary")
     async def analytics_summary(user=Depends(get_current_user),
+                                 account_id: Optional[str] = None,
                                  days: int = 7):
         since = iso(now_utc() - timedelta(days=days))
-        barn_id = resolve_barn_id(user)
+        barn_id = await resolve_read_facility_barn_id(db, user, account_id=account_id)
         completions = await db.task_completions.count_documents(
             {"tenant_id": DEFAULT_TENANT_ID, "barn_id": barn_id, "voided": {"$ne": True},
              "completed_at": {"$gte": since}}

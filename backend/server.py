@@ -36,7 +36,7 @@ validate_config()
 
 # Shared infrastructure (imported only after .env load + config validation).
 from core.db import db
-from core.auth import get_current_user, create_token, hash_pwd, require_setup_role
+from core.auth import get_current_user, create_token, hash_pwd, verify_pwd, require_setup_role
 from core.helpers import (
     new_id, clean, list_collection, _user_safe, _client_meta,
 )
@@ -83,6 +83,9 @@ from routes.owner_updates import build_router as build_owner_updates_router
 from routes.owner import build_router as build_owner_router
 from routes.backlog import build_router as build_backlog_router
 from routes.horse_ledger import build_router as build_horse_ledger_router
+from routes.account_context import build_router as build_account_context_router
+from routes.student_guardians import build_router as build_student_guardians_router
+from routes.document_signatures import build_router as build_document_signatures_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -122,12 +125,25 @@ api_router = APIRouter(prefix="/api")
 # ---------------- Router assembly ----------------
 # Unified Task Engine
 api_router.include_router(
-    build_task_engine_router(db, get_current_user, _track),
-    dependencies=PRODUCT_FACILITY_DEPS,
+    build_task_engine_router(
+        db,
+        get_current_user,
+        _track,
+        require_active_facility=require_active_facility,
+    ),
 )
 
 # Auth (routes/auth.py)
 api_router.include_router(build_auth_router(db))
+
+# Build-Next-3B — read-only account context contract.
+# Intentionally not attached to the product facility dependency list: this endpoint is a
+# planning/selection surface that must remain readable before later phases move
+# product route guards to membership-aware context selection.
+api_router.include_router(build_account_context_router(
+    db=db,
+    get_current_user=get_current_user,
+))
 
 # Notifications
 api_router.include_router(
@@ -138,7 +154,6 @@ api_router.include_router(
 # Dashboard (routes/dashboard.py)
 api_router.include_router(
     build_dashboard_router(db, get_current_user, TASK_TENANT_ID),
-    dependencies=PRODUCT_FACILITY_DEPS,
 )
 
 # Reports (routes/reports.py) — exposes send_nudges for the startup auto-nudge loop
@@ -167,6 +182,7 @@ api_router.include_router(build_invites_router(
     base_url_from_request=_base_url,
     create_token=create_token,
     hash_pwd=hash_pwd,
+    verify_pwd=verify_pwd,
     user_safe=_user_safe,
     client_meta=_client_meta,
     issue_refresh_token=issue_refresh_token,
@@ -185,6 +201,17 @@ api_router.include_router(build_onboarding_router(
     new_id=new_id,
 ), dependencies=PRODUCT_FACILITY_DEPS)
 
+# Build-Next-5B — guardian-first lesson-student onboarding foundation.
+# Barn-scoped product surface; no messaging, waiver, payment, billing, or
+# document workflows are introduced here.
+api_router.include_router(build_student_guardians_router(
+    db=db,
+    get_current_user=get_current_user,
+    mailer_send=send_email,
+    base_url_from_request=_base_url,
+    new_id=new_id,
+), dependencies=PRODUCT_FACILITY_DEPS)
+
 # Horses — horse-profile CRUD (routes/horses.py).
 # NOTE: GET /horses/{id}/timeline intentionally remains in task_engine.py
 # (it is a task-event projection, not horse-profile CRUD).
@@ -194,7 +221,8 @@ api_router.include_router(build_horses_router(
     list_collection=list_collection,
     clean=clean,
     new_id=new_id,
-), dependencies=PRODUCT_FACILITY_DEPS)
+    require_active_facility=require_active_facility,
+))
 
 # Care records (routes/care.py)
 api_router.include_router(build_care_router(
@@ -331,6 +359,14 @@ api_router.include_router(build_backlog_router(
     get_current_user=get_current_user,
     new_id=new_id,
 ), dependencies=PRODUCT_FACILITY_DEPS)
+
+# Build-Next-6A — document-signature provider readiness.
+# Connector status only: no provider API calls, no envelopes, no signed document
+# storage, and no participation gates.
+api_router.include_router(
+    build_document_signatures_router(get_current_user=get_current_user),
+    dependencies=PRODUCT_FACILITY_DEPS,
+)
 
 # Phase HorseOps-1A — composed read-only Care Ledger endpoint.
 # The line below is the Admin-4b enforcement gate for this surface.

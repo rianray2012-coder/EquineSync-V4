@@ -878,7 +878,7 @@ def test_admin_portal_route_lock_unchanged_after_1d(db):
     from tests.test_admin_portal_admin7a import (
         LOCKED_GET_ROUTES, LOCKED_POST_ROUTES, LOCKED_PATCH_ROUTES,
     )
-    assert len(LOCKED_GET_ROUTES) == 26
+    assert len(LOCKED_GET_ROUTES) == 28
     assert len(LOCKED_POST_ROUTES) == 10
     assert len(LOCKED_PATCH_ROUTES) == 1
 
@@ -1163,4 +1163,3 @@ def test_same_source_patch_no_event_when_unchanged(db):
         assert events_before == events_after, "redundant amended event minted"
     finally:
         _cleanup(db)
-

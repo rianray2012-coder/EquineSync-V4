@@ -802,11 +802,11 @@ def test_phase_15_collections_untouched_after_1c_storm(db):
 
 
 def test_admin_portal_route_lock_unchanged_after_1c(db):
-    """The Admin Portal locked-route counts must remain byte-identical."""
+    """The Admin Portal locked-route counts must remain on the current lock."""
     from tests.test_admin_portal_admin7a import (
         LOCKED_GET_ROUTES, LOCKED_POST_ROUTES, LOCKED_PATCH_ROUTES,
     )
-    assert len(LOCKED_GET_ROUTES) == 26
+    assert len(LOCKED_GET_ROUTES) == 28
     assert len(LOCKED_POST_ROUTES) == 10
     assert len(LOCKED_PATCH_ROUTES) == 1
 
@@ -953,4 +953,3 @@ def test_migration_is_idempotent_when_no_stale_indexes_present(db):
         except Exception:
             raised = False  # swallowed in lifespan
         assert raised is False
-

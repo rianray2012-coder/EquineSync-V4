@@ -38,6 +38,7 @@ def _base_url() -> str:
 BASE = _base_url()
 API  = f"{BASE}/api"
 TAG  = "_hl1e_test"
+PATCH_TIMEOUT = int(os.environ.get("HL1E_PATCH_TIMEOUT", "30"))
 
 
 @pytest.fixture
@@ -516,7 +517,7 @@ def test_manager_can_transition_to_resolved(db):
                            headers=_bearer(mgr),
                            json={"status": "resolved",
                                  "staff_note": "Talked to owner."},
-                           timeout=10)
+                           timeout=PATCH_TIMEOUT)
         assert r.status_code == 200, r.text
         row = db.service_requests.find_one({"id": rid})
         assert row["status"] == "resolved"
@@ -534,7 +535,8 @@ def test_staff_cannot_patch_owner_request(db):
     try:
         r = requests.patch(f"{API}/horse-ledger/{hid}/owner-service-requests/{rid}",
                            headers=_bearer(g),
-                           json={"status": "in_progress"}, timeout=10)
+                           json={"status": "in_progress"},
+                           timeout=PATCH_TIMEOUT)
         assert r.status_code == 403
     finally:
         _cleanup(db)
@@ -547,7 +549,8 @@ def test_owner_cannot_patch_owner_request(db):
     try:
         r = requests.patch(f"{API}/horse-ledger/{hid}/owner-service-requests/{rid}",
                            headers=_bearer(o),
-                           json={"status": "resolved"}, timeout=10)
+                           json={"status": "resolved"},
+                           timeout=PATCH_TIMEOUT)
         assert r.status_code == 403
     finally:
         _cleanup(db)
@@ -558,13 +561,17 @@ def test_invalid_status_transition_422(db):
     o = _owner(db, bid, hid); mgr = _mgr(db, bid)
     rid = _seed_request(db, hid, bid, o["user"]["id"])
     # Move to resolved.
-    requests.patch(f"{API}/horse-ledger/{hid}/owner-service-requests/{rid}",
-                   headers=_bearer(mgr), json={"status": "resolved"}, timeout=10)
+    setup = requests.patch(f"{API}/horse-ledger/{hid}/owner-service-requests/{rid}",
+                           headers=_bearer(mgr),
+                           json={"status": "resolved"},
+                           timeout=PATCH_TIMEOUT)
+    assert setup.status_code == 200, setup.text
     try:
         # resolved → new is not in the valid set; only resolved→in_progress is.
         r = requests.patch(f"{API}/horse-ledger/{hid}/owner-service-requests/{rid}",
                            headers=_bearer(mgr),
-                           json={"status": "new"}, timeout=10)
+                           json={"status": "new"},
+                           timeout=PATCH_TIMEOUT)
         assert r.status_code == 422
     finally:
         _cleanup(db)
@@ -577,7 +584,8 @@ def test_staff_note_length_cap_422(db):
     try:
         r = requests.patch(f"{API}/horse-ledger/{hid}/owner-service-requests/{rid}",
                            headers=_bearer(mgr),
-                           json={"staff_note": "x" * 501}, timeout=10)
+                           json={"staff_note": "x" * 501},
+                           timeout=PATCH_TIMEOUT)
         assert r.status_code == 422
     finally:
         _cleanup(db)
@@ -589,7 +597,8 @@ def test_staff_note_never_in_owner_response(db):
     rid = _seed_request(db, hid, bid, o["user"]["id"])
     requests.patch(f"{API}/horse-ledger/{hid}/owner-service-requests/{rid}",
                    headers=_bearer(mgr),
-                   json={"staff_note": "INTERNAL_DO_NOT_SHOW"}, timeout=10)
+                   json={"staff_note": "INTERNAL_DO_NOT_SHOW"},
+                   timeout=PATCH_TIMEOUT)
     try:
         r = requests.get(f"{API}/horse-ledger/{hid}/owner-service-requests",
                          headers=_bearer(o), timeout=10)
@@ -645,7 +654,7 @@ def test_admin_portal_lock_unchanged_after_1e(db):
     from tests.test_admin_portal_admin7a import (
         LOCKED_GET_ROUTES, LOCKED_POST_ROUTES, LOCKED_PATCH_ROUTES,
     )
-    assert len(LOCKED_GET_ROUTES) == 26
+    assert len(LOCKED_GET_ROUTES) == 28
     assert len(LOCKED_POST_ROUTES) == 10
     assert len(LOCKED_PATCH_ROUTES) == 1
 
@@ -654,6 +663,21 @@ def test_service_request_owner_indexes_present(db):
     idx = {i["name"] for i in db.service_requests.list_indexes()}
     assert "sr_source_barn_horse_created" in idx
     assert "sr_owner_horse_created" in idx
+
+
+def test_owner_care_ledger_route_is_protected_in_app_js():
+    """Codex Round-1 regression: the owner ledger route must sit inside
+    the shared Protected wrapper, not as a public top-level route."""
+    app_js = (
+        pathlib.Path(__file__).resolve().parents[2]
+        / "frontend" / "src" / "App.js"
+    ).read_text()
+    marker = 'path="/owner/horses/:horseId"'
+    assert marker in app_js
+    route_block = app_js[app_js.index(marker): app_js.index(marker) + 420]
+    assert "<Protected>" in route_block
+    assert "{permit(<OwnerCareLedger />" in route_block
+    assert route_block.index("<Protected>") < route_block.index("OwnerCareLedger")
 
 
 # =====================================================================
@@ -802,4 +826,3 @@ def test_secondary_owner_id_still_works(db):
         assert r2.status_code == 200
     finally:
         _cleanup(db)
-

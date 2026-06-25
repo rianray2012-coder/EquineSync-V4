@@ -1,7 +1,8 @@
 """routes/admin_portal/portal.py — Phase Admin-7A.2b thin orchestrator.
 
-Admin-7A.2b (Feb 2026): all 11 Admin Portal surfaces (8 legacy
-Admin-1..6 + 3 Admin-7B) now live in their own per-surface modules.
+Admin-7A.2b (Feb 2026): all Admin Portal surfaces live in their own
+per-surface modules. HorseOps-1G adds the read-only `horses.py`
+inspection surface without changing the product Care Ledger routes.
 This file is the orchestrator only — it owns:
 
   1. `build_router(*, db, get_current_user)` — the public factory
@@ -11,14 +12,13 @@ This file is the orchestrator only — it owns:
   3. A single `register` call into every surface module, in a stable
      order.
 
-The 34 Admin Portal endpoints (26 GET + 8 POST) register under their
+The 39 Admin Portal endpoints (28 GET + 10 POST + 1 PATCH) register under their
 canonical paths — route-map preservation is locked by
 `test_admin_portal_admin7a.py::LOCKED_GET_ROUTES` +
-`LOCKED_POST_ROUTES`. No new endpoints, no role changes, no UI changes,
-no audit changes vs Admin-7A.2a.
+`LOCKED_POST_ROUTES` + `LOCKED_PATCH_ROUTES`.
 
-Behaviour for every endpoint is byte-identical; the bodies were lifted
-verbatim into their surface module's `register(router, ctx)`.
+Existing Admin-1..8 endpoints keep their locked behavior; HorseOps-1G
+adds two read-only horse inspection routes in `horses.py`.
 
 DO NOT add route handlers to this file. New surfaces go in their own
 file. New endpoints on existing surfaces go in the surface module.
@@ -37,6 +37,7 @@ from . import audit_logs as _audit_logs_surface
 from . import billing as _billing_surface
 from . import dashboard as _dashboard_surface
 from . import facilities as _facilities_surface
+from . import horses as _horses_surface
 from . import integrations as _integrations_surface
 from . import reports as _reports_surface
 from . import settings as _settings_surface
@@ -106,6 +107,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
     _dashboard_surface.register(router, ctx)
     _users_surface.register(router, ctx)
     _facilities_surface.register(router, ctx)
+    _horses_surface.register(router, ctx)
     _subscriptions_surface.register(router, ctx)
     _billing_surface.register(router, ctx)
     _audit_logs_surface.register(router, ctx)

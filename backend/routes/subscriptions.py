@@ -3,7 +3,8 @@
 15.A scope:
   - GET  /api/billing/plans               (public catalog from local `plans` collection)
   - GET  /api/billing/usage               (barn-scoped used/limit; non-blocking)
-  - POST /api/subscriptions/checkout      (Starter/Professional only; barn:manage)
+  - GET  /api/billing/addons              (safe add-on catalog; no Stripe IDs)
+  - POST /api/subscriptions/checkout      (public paid tiers via Stripe Checkout)
   - POST /api/subscriptions/customer-portal
   - GET  /api/subscriptions/me
 
@@ -23,13 +24,42 @@ import stripe
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel
 
+from core.billing_provisioning import ADDON_PRICE_CATALOG, PLAN_CATALOG, PLAN_ORDER
+from core.entitlements import normalize_plan_code
 from core.permissions import require
+from core.subscription_records import sync_account_subscription_records
+from core.subscription_usage import (
+    build_addon_suggestions,
+    build_usage_entry,
+    scrub_addon_catalog,
+)
 
 logger = logging.getLogger(__name__)
 
 
-SUBSCRIBABLE_TIERS = {"starter", "professional"}
+SUBSCRIBABLE_TIERS = {
+    tier["tier_code"]
+    for tier in PLAN_CATALOG
+    if tier.get("stripe_provisioned")
+}
+CONTACT_SALES_TIERS = {
+    tier["tier_code"]
+    for tier in PLAN_CATALOG
+    if tier.get("contact_sales")
+}
+SELF_SERVICE_ROLE_TIERS = {
+    "individual_owner": {"horse_owner", "rider", "admin", "barn_manager"},
+    "private_owner_plus": {"horse_owner", "rider", "admin", "barn_manager"},
+    "trainer_no_lesson": {"trainer", "admin", "barn_manager"},
+    "trainer_lesson_15": {"trainer", "admin", "barn_manager"},
+    "trainer_lesson_50": {"trainer", "admin", "barn_manager"},
+    "starter_barn": {"barn_owner", "admin", "barn_manager"},
+    "advanced_barn": {"barn_owner", "admin", "barn_manager"},
+    "elite_barn": {"barn_owner", "admin", "barn_manager"},
+}
 TRIAL_DAYS = 14
+BILLABLE_STAFF_ROLES = ["trainer", "groom", "working_student", "veterinarian", "farrier"]
+BILLABLE_OWNER_MANAGER_ROLES = ["admin", "barn_manager", "barn_owner"]
 
 
 def _now_iso() -> str:
@@ -48,7 +78,7 @@ def _stripe_init():
 
 
 class CheckoutBody(BaseModel):
-    plan_tier_code: str               # "starter" | "professional"
+    plan_tier_code: str
     billing_cycle: str                # "monthly" | "annual"
     origin_url: str                   # frontend origin for success/cancel URLs
 
@@ -66,10 +96,21 @@ def _plan_to_public(plan: dict) -> dict:
         "monthly_price_cents": plan.get("monthly_price_cents"),
         "annual_price_cents": plan.get("annual_price_cents"),
         "feature_limits": plan.get("feature_limits") or {},
+        "overage": plan.get("overage") or {},
         "contact_sales": bool(plan.get("contact_sales")),
+        "display_order": plan.get("display_order", PLAN_ORDER.get(plan["tier_code"], 999)),
         "has_monthly": bool(plan.get("stripe_price_id_monthly")),
         "has_annual": bool(plan.get("stripe_price_id_annual")),
     }
+
+
+def _require_checkout_permission(user: dict, tier: str) -> None:
+    allowed_roles = SELF_SERVICE_ROLE_TIERS.get(tier)
+    role = ((user or {}).get("role") or "").strip().lower()
+    if allowed_roles and role in allowed_roles:
+        return
+    # Preserve the original B2B safety default for unknown/future paid tiers.
+    require(user, "barn:manage")
 
 
 async def _resolve_barn(db, user) -> dict:
@@ -188,9 +229,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
     async def list_plans(user=Depends(get_current_user)):
         cursor = db.plans.find({"active": True}, {"_id": 0})
         plans = await cursor.to_list(length=50)
-        # Sort: free → starter → professional → enterprise
-        order = {"free": 0, "starter": 1, "professional": 2, "enterprise": 3}
-        plans.sort(key=lambda p: order.get(p["tier_code"], 99))
+        plans.sort(key=lambda p: p.get("display_order", PLAN_ORDER.get(p["tier_code"], 999)))
         return [_plan_to_public(p) for p in plans]
 
     # ------------------------------------------------------------------
@@ -205,8 +244,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
     async def list_plans_public(response: Response):
         cursor = db.plans.find({"active": True}, {"_id": 0})
         plans = await cursor.to_list(length=50)
-        order = {"free": 0, "starter": 1, "professional": 2, "enterprise": 3}
-        plans.sort(key=lambda p: order.get(p["tier_code"], 99))
+        plans.sort(key=lambda p: p.get("display_order", PLAN_ORDER.get(p["tier_code"], 999)))
         scrubbed = []
         for p in plans:
             pub = _plan_to_public(p)
@@ -220,37 +258,148 @@ def build_router(*, db, get_current_user) -> APIRouter:
     # ------------------------------------------------------------------
     # Usage read (soft-warn only; never blocks)
     # ------------------------------------------------------------------
+    @router.get("/billing/addons")
+    async def list_billing_addons(user=Depends(get_current_user)):
+        # Read-only resolver keeps this barn-scoped without creating barns from
+        # a catalog read. Add-on subscription item mutations remain deferred.
+        await _resolve_barn(db, user)
+        rows = await db.subscription_addons.find(
+            {"is_active": True},
+            {"_id": 0, "stripe_product_id": 0, "stripe_price_id": 0},
+        ).to_list(length=100)
+        if not rows:
+            rows = [
+                {
+                    "addon_code": addon_code,
+                    "billing_provider": "stripe",
+                    "billing_channel": "web",
+                    "recurring": True,
+                    "limit_field": cfg.get("limit_field"),
+                    "quantity_field": cfg.get("quantity_field"),
+                    "is_active": True,
+                }
+                for addon_code, cfg in ADDON_PRICE_CATALOG.items()
+            ]
+        return {"addons": scrub_addon_catalog(rows)}
+
     @router.get("/billing/usage")
     async def get_usage(user=Depends(get_current_user)):
         # Codex finding #2: read-only resolver. NEVER mutates the DB.
         barn = await _resolve_barn(db, user)
-        # Resolve current entitlements: prefer the subscription snapshot, else
-        # fall back to the Free plan's limits.
+        # Resolve current limits: prefer the provider-neutral 15R mirror, else
+        # fall back to the legacy subscription snapshot, else Free plan limits.
         ent = None
         plan_tier = "free"
+        limits_source = "free_plan_fallback"
+        account_limits = await db.account_usage_limits.find_one({"account_id": barn["id"]}, {"_id": 0})
+        if account_limits:
+            plan_tier = account_limits.get("plan_code", "free")
+            plan_doc = await db.plans.find_one({"tier_code": plan_tier}, {"_id": 0})
+            plan_limits = (plan_doc or {}).get("feature_limits") or {}
+            staff_limit = account_limits.get("staff_limit")
+            owner_manager_limit = account_limits.get("owner_manager_limit")
+            users_limit = (
+                None
+                if staff_limit is None or owner_manager_limit is None
+                else int(staff_limit or 0) + int(owner_manager_limit or 0)
+            )
+            ent = {
+                **plan_limits,
+                "horses": account_limits.get("horse_limit"),
+                "staff_seats": account_limits.get("staff_limit"),
+                "owner_manager_seats": account_limits.get("owner_manager_limit"),
+                "lesson_participants": account_limits.get("lesson_participant_limit"),
+                "users": users_limit,
+            }
+            limits_source = "account_usage_limits"
         sub_id = barn.get("subscription_id")
-        if sub_id:
+        if not ent and sub_id:
             sub = await db.subscriptions.find_one({"id": sub_id}, {"_id": 0})
             if sub:
                 ent = sub.get("entitlements_snapshot")
                 plan_tier = sub.get("plan_tier_code", "free")
+                limits_source = "legacy_subscription_snapshot"
         if not ent:
             free_plan = await db.plans.find_one({"tier_code": "free"}, {"_id": 0})
             ent = (free_plan or {}).get("feature_limits") or {}
 
         horses_used = await db.horses.count_documents({"barn_id": barn["id"]})
-        users_used = await db.users.count_documents({
+        # Prefer the future billing_seat_type field when present. Fallback to
+        # role only for older rows that have not been migrated yet. Invited
+        # owner portal accounts must never count as paid staff seats.
+        staff_used = await db.users.count_documents({
             "barn_id": barn["id"],
             "role_status": {"$ne": "rejected"},
+            "$or": [
+                {"billing_seat_type": "staff"},
+                {
+                    "$and": [
+                        {"billing_seat_type": {"$in": [None, ""]}},
+                        {"role": {"$in": BILLABLE_STAFF_ROLES}},
+                    ],
+                },
+            ],
         })
+        owner_manager_used = await db.users.count_documents({
+            "barn_id": barn["id"],
+            "role_status": {"$ne": "rejected"},
+            "$or": [
+                {"billing_seat_type": "owner_manager"},
+                {
+                    "$and": [
+                        {"billing_seat_type": {"$in": [None, ""]}},
+                        {"role": {"$in": BILLABLE_OWNER_MANAGER_ROLES}},
+                    ],
+                },
+            ],
+        })
+        users_used = staff_used + owner_manager_used
+        lesson_participants_used = await db.riders.count_documents({"barn_id": barn["id"]})
+        usage = {
+            "horses": build_usage_entry(
+                key="horses",
+                used=horses_used,
+                limit=ent.get("horses"),
+                plan_code=plan_tier,
+            ),
+            # Backward-compatible aggregate used by existing dashboard cards.
+            "users": build_usage_entry(
+                key="users",
+                used=users_used,
+                limit=ent.get("users"),
+                plan_code=plan_tier,
+            ),
+            "staff": build_usage_entry(
+                key="staff",
+                used=staff_used,
+                limit=ent.get("staff_seats"),
+                plan_code=plan_tier,
+            ),
+            "owner_managers": build_usage_entry(
+                key="owner_managers",
+                used=owner_manager_used,
+                limit=ent.get("owner_manager_seats"),
+                plan_code=plan_tier,
+            ),
+            "lesson_participants": build_usage_entry(
+                key="lesson_participants",
+                used=lesson_participants_used,
+                limit=ent.get("lesson_participants"),
+                plan_code=plan_tier,
+            ),
+            "storage_gb": build_usage_entry(
+                key="storage_gb",
+                used=0,
+                limit=ent.get("storage_gb"),
+                plan_code=plan_tier,
+            ),
+        }
         return {
             "barn_id": barn["id"],
             "plan_tier_code": plan_tier,
-            "usage": {
-                "horses": {"used": horses_used, "limit": ent.get("horses")},
-                "users":  {"used": users_used,  "limit": ent.get("users")},
-                "storage_gb": {"used": 0, "limit": ent.get("storage_gb")},
-            },
+            "limits_source": limits_source,
+            "usage": usage,
+            "add_on_suggestions": build_addon_suggestions(usage),
             "feature_flags": {
                 "advanced_reporting": bool(ent.get("advanced_reporting")),
                 "medical_records": bool(ent.get("medical_records")),
@@ -262,27 +411,29 @@ def build_router(*, db, get_current_user) -> APIRouter:
         }
 
     # ------------------------------------------------------------------
-    # Subscription Checkout (Starter / Professional only)
+    # Subscription Checkout (public paid tiers + local free finalize)
     # ------------------------------------------------------------------
     @router.post("/subscriptions/checkout")
     async def create_subscription_checkout(body: CheckoutBody, user=Depends(get_current_user)):
-        tier = (body.plan_tier_code or "").strip().lower()
+        tier = normalize_plan_code(body.plan_tier_code)
         cycle = (body.billing_cycle or "").strip().lower()
-        if tier == "enterprise":
-            raise HTTPException(400, "Enterprise is contact-sales only. Please reach out to our team.")
+        if tier in CONTACT_SALES_TIERS:
+            raise HTTPException(400, f"{tier} is contact-sales only. Please reach out to our team.")
 
         # Phase 15.G — free-tier finalize. Mirrors the legacy
         # /api/membership/checkout {tier:"free"} behaviour without a
         # Stripe round-trip. Returns {url: null} so the FE navigates to
         # /dashboard. Free is a SOLO-user tier per the Phase 15 charter
         # — no `barn:manage` requirement so marketplace signups (horse
-        # owner / rider / etc.) can finalize without an admin role.
+        # owner / rider / etc.) can finalize without an admin role. With the
+        # updated pricing addendum this local tier represents invited owner
+        # portal access, not a paid self-managed owner plan.
         if tier == "free":
             barn = await _resolve_or_create_barn(db, user)
             plan = await db.plans.find_one({"tier_code": "free"}, {"_id": 0})
             snapshot = (plan or {}).get("feature_limits") or {}
             now = _now_iso()
-            # Phase 15.G round-2 (Codex blocker #2): give the Free row a
+            # Phase 15.G round-2 (Codex blocker #2): give the free portal row a
             # stable id and stamp barn.subscription_id so /subscriptions/me
             # (which reads barn.subscription_id) actually surfaces it. The
             # id is barn-scoped + deterministic so re-runs are idempotent.
@@ -310,10 +461,21 @@ def build_router(*, db, get_current_user) -> APIRouter:
                           "subscription_id": free_sub_id,
                           "subscription_updated_at": now}},
             )
+            await sync_account_subscription_records(db, {
+                "id": free_sub_id,
+                "barn_id": barn["id"],
+                "owner_user_id": user.get("id"),
+                "plan_tier_code": "free",
+                "status": "active",
+                "billing_provider": "manual",
+                "purchase_platform": "admin",
+                "amount_cents": 0,
+            })
             return {"url": None, "session_id": None, "tier": "free"}
 
-        # Paid tiers: gated to barn:manage (admin / barn_manager).
-        require(user, "barn:manage")
+        # Paid tiers: self-service roles for owner/trainer/barn plans; fail
+        # closed to barn:manage for future tiers.
+        _require_checkout_permission(user, tier)
         if tier not in SUBSCRIBABLE_TIERS:
             raise HTTPException(400, f"Tier '{tier}' is not subscribable. Choose one of {sorted(SUBSCRIBABLE_TIERS)}.")
         if cycle not in ("monthly", "annual"):
@@ -434,7 +596,11 @@ def build_router(*, db, get_current_user) -> APIRouter:
         payload = await request.body()
         sig = request.headers.get("Stripe-Signature")
         secret = os.environ.get("STRIPE_WEBHOOK_SECRET")
-        _stripe_init()
+        api_key = os.environ.get("STRIPE_API_KEY")
+        if api_key:
+            stripe.api_key = api_key
+        elif _is_production():
+            raise HTTPException(500, "STRIPE_API_KEY is required in production.")
 
         if secret:
             try:

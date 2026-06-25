@@ -77,9 +77,15 @@ Existing operational rows (`source != "owner_care_ledger"`) are untouched and fi
 
 ## Test coverage
 
-`/app/backend/tests/test_horse_ledger_1e.py` — **47 cases pass**.
+`/app/backend/tests/test_horse_ledger_1e.py` — **48 cases pass**.
 
-Full Care-Ledger suite **356/356 pass** (29 1-A + 101 1-B + 73 1-C + 106 1-D + 47 1-E).
+Full Care-Ledger suite **357/357 pass** (29 1-A + 101 1-B + 73 1-C + 106 1-D + 48 1-E).
+
+Codex pickup note: the owner-request PATCH tests use `PATCH_TIMEOUT`
+(default 30 seconds, overrideable with `HL1E_PATCH_TIMEOUT`) because the
+preview backend timed out on two late-suite PATCH requests during the
+handoff run. The handler path is synchronous Mongo work only; this keeps
+the test strict while reducing preview-ingress flake.
 
 Highlights:
 - **owner-summary owner-safe** (4 access tests + 11 parametrized forbidden-key regressions)
@@ -91,6 +97,7 @@ Highlights:
 - **existing `service_requests` integrity** (operational rows excluded from owner list; route count unchanged)
 - **index regression** (`sr_source_barn_horse_created`, `sr_owner_horse_created`)
 - **Admin Portal locked-route counts unchanged**
+- **Codex Round-1 regressions** (`primary_owner_id` owner access + `/owner/horses/:horseId` route inside `Protected`)
 
 ---
 
@@ -98,7 +105,7 @@ Highlights:
 
 - `backend/routes/horse_ledger.py` — 4 new endpoints + helpers + Stripe scrubbing
 - `backend/core/lifespan.py` — 2 new `service_requests` indexes
-- `backend/tests/test_horse_ledger_1e.py` — 47 cases
+- `backend/tests/test_horse_ledger_1e.py` — 48 cases
 - `frontend/src/pages/OwnerCareLedger.jsx` (new) — owner page + drawer
 - `frontend/src/pages/CareLedgerTab.jsx` — manager `OwnerRequestsSection`
 - `frontend/src/App.js` — route wiring `/owner/horses/:horseId`
@@ -115,6 +122,8 @@ Highlights:
 - [x] `billing_question` rejected with 422; other 3 bad enums also 422.
 - [x] Rate limit 5/h enforced at backend; 429 on 6th; per (owner, horse).
 - [x] Cross-barn / non-owner / non-manager → 404 (no 403 leakage).
+- [x] Owner access accepts locked `horses.primary_owner_id` plus legacy `owner_id` and `secondary_owner_ids`.
+- [x] `/owner/horses/:horseId` is wrapped in the shared frontend `Protected` route gate.
 - [x] Owner `GET /owner-service-requests` strips `staff_note`; manager keeps it.
 - [x] Status mutation manager/admin only; invalid transition 422; staff_note ≤500.
 - [x] Existing `service_requests` operational rows filtered OUT of 1-E endpoints.

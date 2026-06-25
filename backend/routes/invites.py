@@ -15,6 +15,7 @@ from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, EmailStr
 
+from core.account_memberships import upsert_invite_membership
 from core.tenancy import PRIMARY_BARN_ID, barn_filter, resolve_barn_id
 from core import audit
 
@@ -63,6 +64,7 @@ def build_router(
     base_url_from_request,
     create_token,
     hash_pwd,
+    verify_pwd,
     user_safe,
     client_meta,
     issue_refresh_token,
@@ -85,11 +87,10 @@ def build_router(
         if body.role not in roles:
             raise HTTPException(400, "Invalid role")
         email_l = body.email.lower()
-        if await db.users.find_one({"email": email_l}):
-            raise HTTPException(409, "A user with this email already exists")
         existing = await db.invites.find_one(barn_filter(user, {"email": email_l, "status": "pending"}))
         if existing:
             raise HTTPException(409, "An invite for this email is already pending — resend or revoke it first")
+        existing_user = await db.users.find_one({"email": email_l}, {"_id": 0, "id": 1})
 
         raw_token, token_hash = new_token_pair()
         ttl_days = int(os.environ.get("INVITE_TTL_DAYS", "7"))
@@ -110,6 +111,7 @@ def build_router(
             "message": body.message,
             "invited_by_id": user["id"],
             "invited_by_name": user["full_name"],
+            "existing_user_id": existing_user.get("id") if existing_user else None,
             "expires_at": _iso(expires_at),
             "created_at": _iso(_now_utc()),
             "sends": [],
@@ -141,6 +143,7 @@ def build_router(
                      "dev_mode": mail.get("dev", False)},
                     user["id"])
         out = await db.invites.find_one(barn_filter(user, {"id": invite["id"]}), {"_id": 0, "token_hash": 0})
+        out["existing_user"] = bool(existing_user)
         if mail.get("dev"):
             out["dev_accept_url"] = accept_url
         await audit.record(
@@ -256,13 +259,6 @@ def build_router(
         if exp < _now_utc():
             await db.invites.update_one({"id": inv["id"]}, {"$set": {"status": "expired"}})
             raise HTTPException(410, "Invitation expired")
-        if len(body.password) < 8:
-            raise HTTPException(400, "Password must be at least 8 characters")
-        if await db.users.find_one({"email": inv["email"]}):
-            raise HTTPException(409, "A user already exists for this email — please sign in")
-
-        full_name = (body.full_name or inv.get("full_name")
-                     or inv["email"].split('@')[0]).strip()
         # Phase 4D: bind the new user to the INVITE's barn. Legacy-safe — if the
         # invite stored a missing/malformed barn_id, or that barn was deleted,
         # fall back to the primary barn so a valid invitee is never locked out.
@@ -271,54 +267,83 @@ def build_router(
             barn_exists = await db.barn.find_one({"id": invite_barn}, {"_id": 0, "id": 1})
             if not barn_exists:
                 invite_barn = PRIMARY_BARN_ID
-        new_user = {
-            "id": new_id(),
-            "email": inv["email"],
-            "full_name": full_name,
-            "role": inv["role"],
-            "barn_id": invite_barn,
-            "password_hash": hash_pwd(body.password),
-            "created_at": _iso(_now_utc()),
-            "via_invite_id": inv["id"],
-        }
-        await db.users.insert_one(new_user)
+
+        existing_user = await db.users.find_one({"email": inv["email"]}, {"_id": 0})
+        if existing_user:
+            if not verify_pwd(body.password, existing_user.get("password_hash", "")):
+                raise HTTPException(401, "Invalid email or password")
+            accepted_user = existing_user
+            accepted_existing_user = True
+        else:
+            if len(body.password) < 8:
+                raise HTTPException(400, "Password must be at least 8 characters")
+            full_name = (body.full_name or inv.get("full_name")
+                         or inv["email"].split('@')[0]).strip()
+            accepted_user = {
+                "id": new_id(),
+                "email": inv["email"],
+                "full_name": full_name,
+                "role": inv["role"],
+                "barn_id": invite_barn,
+                "password_hash": hash_pwd(body.password),
+                "created_at": _iso(_now_utc()),
+                "via_invite_id": inv["id"],
+            }
+            await db.users.insert_one(accepted_user)
+            accepted_existing_user = False
+
+        membership = await upsert_invite_membership(
+            db,
+            accepted_user,
+            invite=inv,
+            barn_id=invite_barn,
+            is_primary=not accepted_existing_user,
+        )
         await db.invites.update_one(
             {"id": inv["id"]},
             {"$set": {"status": "accepted",
                       "accepted_at": _iso(_now_utc()),
-                      "accepted_user_id": new_user["id"]}},
+                      "accepted_user_id": accepted_user["id"],
+                      "accepted_existing_user": accepted_existing_user,
+                      "accepted_membership_id": membership["id"]}},
         )
 
         has_setup_role = inv["role"] in ("admin", "barn_manager")
-        progress = {
-            "user_id": new_user["id"],
-            "barn_id": new_user["barn_id"],
-            "steps": {s["id"]: "pending" for s in onboarding_steps},
-            "current_step": onboarding_steps[0]["id"],
-            "data": {},
-            "completed": not has_setup_role,
-            "auto_launch": has_setup_role,
-            "created_at": _iso(_now_utc()),
-            "updated_at": _iso(_now_utc()),
-        }
-        await db.onboarding_progress.insert_one(progress)
+        if not await db.onboarding_progress.find_one({"user_id": accepted_user["id"]}, {"_id": 0, "id": 1}):
+            progress = {
+                "user_id": accepted_user["id"],
+                "barn_id": invite_barn,
+                "steps": {s["id"]: "pending" for s in onboarding_steps},
+                "current_step": onboarding_steps[0]["id"],
+                "data": {},
+                "completed": not has_setup_role,
+                "auto_launch": has_setup_role,
+                "created_at": _iso(_now_utc()),
+                "updated_at": _iso(_now_utc()),
+            }
+            await db.onboarding_progress.insert_one(progress)
 
-        token = create_token(new_user["id"], new_user["role"], new_user["barn_id"])
+        token = create_token(accepted_user["id"], accepted_user["role"], resolve_barn_id(accepted_user))
         ua, ip = await client_meta(request)
-        refresh = await issue_refresh_token(db, new_user["id"], user_agent=ua, ip=ip)
+        refresh = await issue_refresh_token(db, accepted_user["id"], user_agent=ua, ip=ip)
         await track("invite.accepted",
-                    {"invite_id": inv["id"], "role": inv["role"]},
-                    new_user["id"])
+                    {"invite_id": inv["id"], "role": inv["role"], "existing_user": accepted_existing_user},
+                    accepted_user["id"])
         await audit.record(
-            action="invite.accepted", user=new_user, request=request,
+            action="invite.accepted", user=accepted_user, request=request,
             resource_type="invite", resource_id=inv["id"],
-            metadata={"role": inv["role"]},
+            metadata={"role": inv["role"], "existing_user": accepted_existing_user},
         )
         return {
             "token": token,
             "refresh_token": refresh,
             "expires_in_seconds": jwt_exp_hours * 3600,
-            "user": user_safe(new_user),
+            "user": user_safe(accepted_user),
+            "accepted_existing_user": accepted_existing_user,
+            "membership": {k: membership.get(k) for k in (
+                "id", "account_id", "account_type", "barn_id", "role",
+                "membership_status", "relationship_type", "is_primary",
+            )},
             "auto_launch_onboarding": has_setup_role,
         }
 

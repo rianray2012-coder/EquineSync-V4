@@ -1,0 +1,24 @@
+Equine Sync Build Packet
+
+Files:
+- 00_Build_Packet_README.md
+- 00_Build_Packet_README.pdf
+- 01_Product_Requirements_Document.md
+- 01_Product_Requirements_Document.pdf
+- 02_Roles_and_Permissions_Matrix.md
+- 02_Roles_and_Permissions_Matrix.pdf
+- 03_User_Flows_and_Acceptance_Criteria.md
+- 03_User_Flows_and_Acceptance_Criteria.pdf
+- 04_Data_Model_and_Technical_Guide.md
+- 04_Data_Model_and_Technical_Guide.pdf
+- 05_Roadmap_and_Feature_Backlog.md
+- 05_Roadmap_and_Feature_Backlog.pdf
+- 06_QA_and_UAT_Test_Plan.md
+- 06_QA_and_UAT_Test_Plan.pdf
+- 07_Compliance_Payments_and_Legal_Docs_Notes.md
+- 07_Compliance_Payments_and_Legal_Docs_Notes.pdf
+- 08_Launch_Checklist.md
+- 08_Launch_Checklist.pdf
+- 09_Decision_Log_and_Open_Questions.md
+- 09_Decision_Log_and_Open_Questions.pdf
+- Equine_Sync_Build_Guide_Packet.pdf

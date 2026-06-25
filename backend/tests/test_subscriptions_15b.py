@@ -555,6 +555,56 @@ def test_subscription_created_repairs_barn_pointer_and_entitlements(db):
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
 
 
+def test_subscription_created_normalizes_founder_plan_alias_metadata(db):
+    """15R-C: webhook metadata may carry founder-facing Stripe lookup codes
+    like trainer_lessons_15. The handler must store the canonical code and
+    resolve real entitlements instead of writing an empty snapshot.
+    """
+    barn_id = f"barn_alias_cr_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_alias_cr_{uuid.uuid4().hex[:8]}"
+    db.barns.delete_one({"id": barn_id})
+    db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    db.account_subscriptions.delete_one({"account_id": barn_id})
+    db.account_usage_limits.delete_one({"account_id": barn_id})
+    db.plans.update_one(
+        {"tier_code": "trainer_lesson_15"},
+        {"$set": {
+            "id": "trainer_lesson_15",
+            "tier_code": "trainer_lesson_15",
+            "feature_limits": {
+                "horses": 15,
+                "staff_seats": 3,
+                "owner_manager_seats": 1,
+                "lesson_participants": 15,
+            },
+        }},
+        upsert=True,
+    )
+    e = _evt("customer.subscription.created", {
+        "id": sub_id, "status": "active",
+        "metadata": {"barn_id": barn_id, "plan_tier_code": "trainer_lessons_15",
+                     "owner_user_id": "u", "billing_cycle": "monthly"},
+        "items": {"data": [{"price": {"id": "price_alias", "unit_amount": 9999}}]},
+    })
+
+    r = _post_event(e)
+    assert r.status_code == 200, r.text
+    sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
+    assert sub["plan_tier_code"] == "trainer_lesson_15"
+    assert sub["entitlements_snapshot"]["lesson_participants"] == 15
+    barn = db.barns.find_one({"id": barn_id})
+    assert barn["subscription_entitlements"]["lesson_participants"] == 15
+    usage_limits = db.account_usage_limits.find_one({"account_id": barn_id})
+    assert usage_limits["plan_code"] == "trainer_lesson_15"
+    assert usage_limits["lesson_participant_limit"] == 15
+
+    db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    db.barns.delete_one({"id": barn_id})
+    db.account_subscriptions.delete_one({"account_id": barn_id})
+    db.account_usage_limits.delete_one({"account_id": barn_id})
+    db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
 def test_subscription_updated_upserts_when_no_local_row_but_metadata_present(db):
     """Codex round-3 #4 / round-4 blocker: with metadata.barn_id +
     plan_tier_code present but no local sub row, customer.subscription.updated
@@ -607,6 +657,54 @@ def test_subscription_updated_upserts_when_no_local_row_but_metadata_present(db)
 
     db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
     db.barns.delete_one({"id": barn_id})
+    db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
+def test_subscription_updated_bootstrap_normalizes_founder_plan_alias_metadata(db):
+    """15R-C: the no-local-row bootstrap path must normalize alias metadata
+    before resolving plan rows and account limits.
+    """
+    barn_id = f"barn_alias_up_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_alias_up_{uuid.uuid4().hex[:8]}"
+    db.barns.delete_one({"id": barn_id})
+    db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    db.account_subscriptions.delete_one({"account_id": barn_id})
+    db.account_usage_limits.delete_one({"account_id": barn_id})
+    db.plans.update_one(
+        {"tier_code": "trainer_lesson_50"},
+        {"$set": {
+            "id": "trainer_lesson_50",
+            "tier_code": "trainer_lesson_50",
+            "feature_limits": {
+                "horses": 25,
+                "staff_seats": 6,
+                "owner_manager_seats": 3,
+                "lesson_participants": 50,
+            },
+        }},
+        upsert=True,
+    )
+    e = _evt("customer.subscription.updated", {
+        "id": sub_id, "status": "active",
+        "metadata": {"barn_id": barn_id, "plan_tier_code": "trainer_lessons_50",
+                     "billing_cycle": "annual", "owner_user_id": "u_x"},
+        "items": {"data": [{"price": {"id": "price_alias_50", "unit_amount": 179900}}]},
+    })
+
+    r = _post_event(e)
+    assert r.status_code == 200, r.text
+    sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
+    assert sub["plan_tier_code"] == "trainer_lesson_50"
+    assert sub["entitlements_snapshot"]["lesson_participants"] == 50
+    usage_limits = db.account_usage_limits.find_one({"account_id": barn_id})
+    assert usage_limits["plan_code"] == "trainer_lesson_50"
+    assert usage_limits["horse_limit"] == 25
+    assert usage_limits["lesson_participant_limit"] == 50
+
+    db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    db.barns.delete_one({"id": barn_id})
+    db.account_subscriptions.delete_one({"account_id": barn_id})
+    db.account_usage_limits.delete_one({"account_id": barn_id})
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
 
 

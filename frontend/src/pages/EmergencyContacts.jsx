@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { AlertTriangle, Phone, Plus, RefreshCw, Search, ShieldAlert } from "lucide-react";
+import { AlertTriangle, PhoneCall, Plus, RefreshCw, Search, ShieldAlert } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "../lib/api";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
@@ -122,7 +122,7 @@ export default function EmergencyContacts() {
                   <StatusPill tone={Number(data.priority) === 1 ? "critical" : "warning"}>priority {data.priority || "—"}</StatusPill>
                 </div>
                 <a href={`tel:${data.phone || ""}`} className="inline-flex items-center gap-2 text-equine-navy hover:text-equine-saddle text-[14px] mb-3">
-                  <Phone className="w-4 h-4" /> {data.phone}
+                  <PhoneCall className="w-4 h-4" /> {data.phone}
                 </a>
                 {data.notes && <div className="text-[13px] text-equine-inkMuted leading-relaxed">{data.notes}</div>}
                 <div className="hairline mt-4 pt-3 flex items-center justify-between gap-3">

@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { api, tokens } from "../lib/api";
-import { canManageBilling } from "../lib/permissions";
 import { Logo } from "../components/Logo";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react";
 import {
@@ -10,23 +9,22 @@ import {
 } from "../lib/subscriptionBilling";
 
 // Phase 15.C — these recommendations map the marketplace role pick (Step 0)
-// to a default facility plan tier for Step 3. Solo roles default to "free";
-// barn/facility roles default to "starter" (the cheapest paid B2B plan). The
-// user can always override on Step 3.
+// to a default tier from the pricing addendum. Invited owner-portal access is
+// still free, but self-signup horse owners should see the Individual Owner plan.
 const ROLE_TO_PLAN = {
-  horse_owner: "free",
+  horse_owner: "individual_owner",
   rider: "free",
-  trainer: "free",
+  trainer: "trainer_no_lesson",
   service_provider: "free",
-  barn_owner: "starter",
+  barn_owner: "starter_barn",
 };
 
 const ROLE_OPTIONS = [
-  { id: "horse_owner", label: "Horse Owner", blurb: "Track your horse's care, billing, progress.", recommendedTier: "owner_rider" },
-  { id: "rider", label: "Rider", blurb: "Log sessions, follow your training plan.", recommendedTier: "owner_rider" },
-  { id: "trainer", label: "Trainer", blurb: "Manage clients, sessions, and notes.", recommendedTier: "trainer_provider", pending: true },
-  { id: "barn_owner", label: "Barn / Facility", blurb: "Run a full operation under one roof.", recommendedTier: "barn_facility", pending: true },
-  { id: "service_provider", label: "Service Provider", blurb: "Connect with barns that need your craft.", recommendedTier: "trainer_provider", pending: true },
+  { id: "horse_owner", label: "Horse Owner", blurb: "Track your horse's care, billing, progress.", recommendedTier: "individual_owner" },
+  { id: "rider", label: "Rider", blurb: "Log sessions, follow your training plan.", recommendedTier: "free" },
+  { id: "trainer", label: "Trainer", blurb: "Manage clients, sessions, and notes.", recommendedTier: "trainer_no_lesson", pending: true },
+  { id: "barn_owner", label: "Barn / Facility", blurb: "Run a full operation under one roof.", recommendedTier: "starter_barn", pending: true },
+  { id: "service_provider", label: "Service Provider", blurb: "Connect with barns that need your craft.", recommendedTier: "free", pending: true },
 ];
 
 const ROLE_PROFILE_FIELDS = {
@@ -62,7 +60,7 @@ const STEPS = ["Account", "Profile", "Membership"];
 export default function Signup() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const { user, setSession, refreshMe } = useAuth();
+  const { setSession, refreshMe } = useAuth();
 
   const initialRole = params.get("role");
   const initialIsRole = ROLE_OPTIONS.some((r) => r.id === initialRole);
@@ -90,6 +88,7 @@ export default function Signup() {
   const [submitting, setSubmitting] = useState(false);
 
   const role = ROLE_OPTIONS.find((r) => r.id === form.role);
+  const selectedPlanForTier = plans.find((p) => p.tier_code === tier);
 
   // Lazy-load the plan catalog when Step 3 becomes reachable (after the
   // account is created and the session is set in submitAccount).
@@ -153,12 +152,13 @@ export default function Signup() {
 
   const launchCheckout = async () => {
     setErr("");
-    // Enterprise → contact sales (no Stripe checkout).
-    if (tier === "enterprise") {
-      window.location.assign("mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry");
+    // Custom-contract tiers route to sales (no Stripe checkout).
+    const selected = plans.find((p) => p.tier_code === tier);
+    if (selected?.contact_sales) {
+      window.location.assign("mailto:sales@equinesync.com?subject=EquineSync%20custom%20plan%20enquiry");
       return;
     }
-    // Phase 15.G — all tiers (Free / Starter / Professional) now flow
+    // Phase 15.G — all catalog tiers now flow
     // through the unified /api/subscriptions/checkout endpoint. Free
     // short-circuits server-side ({url: null}) so we route to /dashboard
     // directly. Paid tiers receive a Stripe Checkout URL and we navigate.
@@ -480,7 +480,7 @@ export default function Signup() {
               </div>
               <p className="text-white/60 text-[14px] mb-8">
                 Paid plans include a <span className="text-equine-saddle font-medium">14-day free trial</span>.
-                Cancel from your account anytime — Free stays free forever.
+                Cancel from your account anytime — invited owner portal access stays free.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-testid="signup-plan-grid">
@@ -492,7 +492,7 @@ export default function Signup() {
                 {plans.map((p) => {
                   const selected = tier === p.tier_code;
                   const isFree = p.tier_code === "free";
-                  const isEnterprise = p.tier_code === "enterprise" || !!p.contact_sales;
+                  const isContactSales = !!p.contact_sales;
                   const priceCents =
                     signupCycle === "annual" && p.annual_price_cents != null
                       ? p.annual_price_cents
@@ -514,7 +514,7 @@ export default function Signup() {
                         <div className="font-display text-xl text-white capitalize">{p.name || p.tier_code}</div>
                       </div>
                       <div className="mt-2 text-white font-display text-2xl">
-                        {isEnterprise ? (
+                        {isContactSales ? (
                           "Let's talk"
                         ) : isFree ? (
                           <>$0<span className="text-[12px] text-white/40 font-sans"> /mo</span></>
@@ -527,7 +527,7 @@ export default function Signup() {
                           </>
                         )}
                       </div>
-                      {signupCycle === "annual" && savings != null && !isEnterprise && !isFree && (
+                      {signupCycle === "annual" && savings != null && !isContactSales && !isFree && (
                         <div className="mt-1 text-[10.5px] tracking-[0.2em] uppercase text-equine-saddle" data-testid={`signup-savings-${p.tier_code}`}>
                           Save {savings}%
                         </div>
@@ -563,42 +563,14 @@ export default function Signup() {
                   >
                     {submitting ? "Finishing…" : "Start with Free"} <ArrowRight className="w-4 h-4" />
                   </button>
-                ) : tier === "enterprise" ? (
+                ) : selectedPlanForTier?.contact_sales ? (
                   <a
-                    href="mailto:sales@equinesync.com?subject=Enterprise%20plan%20enquiry"
+                    href="mailto:sales@equinesync.com?subject=EquineSync%20custom%20plan%20enquiry"
                     className="bg-equine-saddle text-equine-navyDeep hover:bg-white transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                     data-testid="signup-contact-sales"
                   >
                     Contact sales <ArrowRight className="w-4 h-4" />
                   </a>
-                ) : !canManageBilling(user) ? (
-                  // Phase 15.C — fresh marketplace signups do not yet carry
-                  // the backend `barn:manage` capability (admin / barn_manager
-                  // only). The `/subscriptions/checkout` endpoint guards on
-                  // it, so offering a checkout button here would return 403.
-                  // Surface a clear post-review message and let the user
-                  // finish on Free; 15.E/15.F-era backend work will introduce
-                  // the elevation flow.
-                  <div className="flex flex-col items-end gap-3 max-w-[340px]" data-testid="signup-paid-review-pending">
-                    <div className="bg-white/5 border border-equine-saddle/30 rounded-2xl p-4 text-[12.5px] text-white/75 leading-relaxed">
-                      <div className="text-equine-saddle text-[11px] tracking-[0.22em] uppercase mb-2">
-                        Facility billing
-                      </div>
-                      <p>
-                        Paid facility plans activate after your account is reviewed and
-                        an admin finishes barn setup. You can start on{" "}
-                        <span className="text-white font-medium">Free</span> today and
-                        upgrade from your Subscription page once that&apos;s complete.
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => setTier("free")}
-                      className="text-[12.5px] tracking-wide text-equine-saddle hover:text-white inline-flex items-center gap-2"
-                      data-testid="signup-switch-to-free"
-                    >
-                      Continue on Free <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
                 ) : (() => {
                   // Phase 15.C — gate the paid CTA on Stripe price-ID readiness
                   // (has_monthly / has_annual from /api/billing/plans). When

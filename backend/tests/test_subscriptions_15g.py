@@ -24,9 +24,10 @@ import requests
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
-sys.path.insert(0, "/app/backend")
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "backend"))
 # Load backend/.env so MONGO_URL/DB_NAME are present when running standalone.
-load_dotenv("/app/backend/.env")
+load_dotenv(ROOT / "backend" / ".env")
 
 
 def _base_url():
@@ -78,7 +79,19 @@ def test_plans_public_no_auth_required():
     body = r.json()
     assert isinstance(body, list) and len(body) >= 3
     tiers = {p["tier_code"] for p in body}
-    assert {"free", "starter", "professional"}.issubset(tiers)
+    assert {
+        "free",
+        "individual_owner",
+        "private_owner_plus",
+        "starter_barn",
+        "advanced_barn",
+        "elite_barn",
+        "trainer_no_lesson",
+        "trainer_lesson_15",
+        "trainer_lesson_50",
+        "enterprise",
+        "community_program",
+    }.issubset(tiers)
 
 
 def test_plans_public_strips_secrets():
@@ -184,7 +197,7 @@ def test_legacy_membership_checkout_410_for_paid_tiers_too():
     r = requests.post(
         f"{API}/membership/checkout",
         headers={"Authorization": f"Bearer {sess['token']}"},
-        json={"tier": "barn_facility", "origin_url": "http://localhost:3000"},
+        json={"tier": "starter_barn", "origin_url": "http://localhost:3000"},
         timeout=15,
     )
     assert r.status_code == 410
@@ -211,7 +224,7 @@ def test_subscription_created_persists_amount_cents(db):
     sub_id = f"sub_15g_{uuid.uuid4().hex[:10]}"
     db.barns.insert_one({"id": barn_id, "created_at": datetime.now(timezone.utc).isoformat()})
 
-    # Pull the live starter plan so plan_tier_code resolves an entitlements snapshot.
+    # Pull the live starter_barn plan so plan_tier_code resolves an entitlements snapshot.
     obj = {
         "id": sub_id,
         "customer": "cus_test_15g_created",
@@ -223,18 +236,18 @@ def test_subscription_created_persists_amount_cents(db):
         "metadata": {
             "barn_id": barn_id,
             "owner_user_id": "u_test_owner",
-            "plan_tier_code": "starter",
+            "plan_tier_code": "starter_barn",
             "billing_cycle": "monthly",
         },
-        "items": {"data": [{"price": {"id": "price_test_starter_m", "unit_amount": 4900}}]},
+        "items": {"data": [{"price": {"id": "price_test_starter_barn_m", "unit_amount": 6999}}]},
     }
     r = _post_event(_evt("customer.subscription.created", obj))
     assert r.status_code == 200, r.text
 
     sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
     assert sub is not None
-    assert sub.get("amount_cents") == 4900
-    assert sub.get("plan_tier_code") == "starter"
+    assert sub.get("amount_cents") == 6999
+    assert sub.get("plan_tier_code") == "starter_barn"
 
 
 def test_subscription_updated_persists_amount_cents(db):
@@ -245,17 +258,17 @@ def test_subscription_updated_persists_amount_cents(db):
         "id": sub_id,
         "barn_id": barn_id,
         "stripe_subscription_id": sub_id,
-        "plan_tier_code": "starter",
+        "plan_tier_code": "starter_barn",
         "status": "active",
-        "amount_cents": 4900,
-        "stripe_price_id": "price_test_starter_m",
+        "amount_cents": 6999,
+        "stripe_price_id": "price_test_starter_barn_m",
         "billing_cycle": "monthly",
         "pending_emails": [],
         "created_at": datetime.now(timezone.utc).isoformat(),
         "updated_at": datetime.now(timezone.utc).isoformat(),
     })
 
-    # Simulate a price upgrade Starter → Professional.
+    # Simulate a price upgrade Starter Barn → Advanced Barn.
     obj = {
         "id": sub_id,
         "customer": "cus_test_15g_updated",
@@ -264,15 +277,15 @@ def test_subscription_updated_persists_amount_cents(db):
         "current_period_end": int(time.time()) + 30 * 86400,
         "cancel_at_period_end": False,
         "trial_end": None,
-        "metadata": {"barn_id": barn_id, "plan_tier_code": "professional"},
-        "items": {"data": [{"price": {"id": "price_test_professional_m", "unit_amount": 14900}}]},
+        "metadata": {"barn_id": barn_id, "plan_tier_code": "advanced_barn"},
+        "items": {"data": [{"price": {"id": "price_test_advanced_barn_m", "unit_amount": 14999}}]},
     }
     r = _post_event(_evt("customer.subscription.updated", obj))
     assert r.status_code == 200, r.text
 
     sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
     assert sub is not None
-    assert sub.get("amount_cents") == 14900
+    assert sub.get("amount_cents") == 14999
 
 
 
@@ -338,10 +351,10 @@ def test_subscription_updated_amount_cents_not_overwritten_when_missing(db):
         "id": sub_id,
         "barn_id": barn_id,
         "stripe_subscription_id": sub_id,
-        "plan_tier_code": "starter",
+        "plan_tier_code": "starter_barn",
         "status": "active",
-        "amount_cents": 4900,  # pre-existing known value
-        "stripe_price_id": "price_test_starter_m",
+        "amount_cents": 6999,  # pre-existing known value
+        "stripe_price_id": "price_test_starter_barn_m",
         "billing_cycle": "monthly",
         "pending_emails": [],
         "created_at": datetime.now(timezone.utc).isoformat(),
@@ -357,15 +370,15 @@ def test_subscription_updated_amount_cents_not_overwritten_when_missing(db):
         "current_period_end": int(time.time()) + 30 * 86400,
         "cancel_at_period_end": False,
         "trial_end": None,
-        "metadata": {"barn_id": barn_id, "plan_tier_code": "starter"},
-        "items": {"data": [{"price": {"id": "price_test_starter_m"}}]},  # NO unit_amount
+        "metadata": {"barn_id": barn_id, "plan_tier_code": "starter_barn"},
+        "items": {"data": [{"price": {"id": "price_test_starter_barn_m"}}]},  # NO unit_amount
     }
     r = _post_event(_evt("customer.subscription.updated", obj))
     assert r.status_code == 200, r.text
 
     sub = db.subscriptions.find_one({"stripe_subscription_id": sub_id})
     assert sub is not None
-    assert sub.get("amount_cents") == 4900, "amount_cents must NOT be overwritten with 0"
+    assert sub.get("amount_cents") == 6999, "amount_cents must NOT be overwritten with 0"
 
 
 
@@ -379,7 +392,7 @@ def test_landing_jsx_has_no_static_plan_prices():
     must source prices, names, and descriptions from
     /api/billing/plans-public exclusively.
     """
-    landing = pathlib.Path("/app/frontend/src/pages/Landing.jsx").read_text()
+    landing = (ROOT / "frontend" / "src" / "pages" / "Landing.jsx").read_text()
     # The retired fallback name must no longer appear (defense-in-depth
     # against drift if someone re-introduces a static catalog).
     assert "LANDING_PLANS_FALLBACK" not in landing
@@ -396,7 +409,7 @@ def test_landing_jsx_exposes_graceful_unavailable_state():
     operational team has a way to detect the error fallback (no static
     prices) during synthetic monitoring.
     """
-    landing = pathlib.Path("/app/frontend/src/pages/Landing.jsx").read_text()
+    landing = (ROOT / "frontend" / "src" / "pages" / "Landing.jsx").read_text()
     assert "pricing-unavailable" in landing
     assert "pricing-loading" in landing
     assert "pricing-grid" in landing

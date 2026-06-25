@@ -30,6 +30,11 @@ from notifications import (
 )
 from core.auth_tokens import ensure_auth_token_indexes
 from core.audit import ensure_audit_indexes
+from core.account_memberships import (
+    ensure_account_membership_indexes,
+    backfill_account_memberships_from_users,
+)
+from core.minor_safety import ensure_minor_safety_indexes
 from routes.billing import ensure_billing_indexes
 from routes.backlog import BACKLOG_RESET_COLLECTIONS, ensure_backlog_indexes
 from mailer import send as send_email, render as render_email
@@ -124,6 +129,33 @@ def register_lifecycle(app, *, send_nudges):
             )
             if backfill.modified_count:
                 logger.info("Backfilled email_verified=True for %d existing users.", backfill.modified_count)
+            # Build-Next-3A: future multi-role/multi-barn account membership
+            # foundation. Isolated so an additive membership-index/backfill
+            # issue cannot skip locked startup work such as barn backfill or
+            # task materialization. Current `users.barn_id` / `users.role`
+            # continue to drive auth and route scoping until later gated phases
+            # migrate each surface.
+            try:
+                await ensure_account_membership_indexes(db)
+                membership_res = await backfill_account_memberships_from_users(db)
+                if membership_res.get("upserted") or membership_res.get("modified"):
+                    logger.info(
+                        "Build-Next-3A: account_memberships mirror backfill scanned=%d upserted=%d modified=%d skipped=%d.",
+                        membership_res.get("scanned", 0),
+                        membership_res.get("upserted", 0),
+                        membership_res.get("modified", 0),
+                        membership_res.get("skipped", 0),
+                    )
+            except Exception:
+                logger.exception("Build-Next-3A account_memberships mirror foundation failed")
+            # Build-Next-5A: additive parent/minor safeguard indexes only.
+            # No routes or product behavior are enabled here; future BN5-B/C
+            # phases will write student_profiles / guardian_links after the
+            # founder-approved rule matrix is locked.
+            try:
+                await ensure_minor_safety_indexes(db)
+            except Exception:
+                logger.exception("Build-Next-5A minor safety index foundation failed")
             # Retained compatibility hook; production no longer creates templates automatically.
             admin_user = await db.users.find_one({"role": "admin"}, {"_id": 0, "id": 1})
             admin_id = admin_user.get("id") if admin_user else None
@@ -147,11 +179,11 @@ def register_lifecycle(app, *, send_nudges):
             logger.exception("Task engine startup failed")
 
         # Phase 15.A — Stripe subscription catalog provisioning.
-        # Idempotent. In PRODUCTION this validates env-provided Price IDs and
+        # Idempotent. In PRODUCTION this validates configured Price IDs and
         # MUST abort startup on a miss (Codex fail-fast lock). In dev it
-        # auto-creates Stripe Products and Prices tagged with
-        # metadata.equinesync_managed=true, and is fail-open. Local `plans`
-        # collection is always upserted (Free + Enterprise too).
+        # upserts local catalog rows from the founder-approved live Price map,
+        # and is fail-open. Local `plans` / `subscription_plans` rows are
+        # always upserted (Free + Enterprise too).
         try:
             from core.billing_provisioning import ensure_stripe_catalog
             await ensure_stripe_catalog(db)
@@ -168,6 +200,16 @@ def register_lifecycle(app, *, send_nudges):
             await db.subscription_invoices.create_index("stripe_invoice_id", unique=True)
             await db.payments.create_index("stripe_payment_intent_id", unique=True)
             await db.subscriptions.create_index("stripe_subscription_id", unique=True, sparse=True)
+            # Phase 15R-C — provider-neutral subscription/entitlement rows.
+            # These collections let app limits be resolved without hardcoding
+            # Stripe-specific fields throughout product code. Apple receipt
+            # validation will write the same account-level shapes later.
+            await db.subscription_plans.create_index("plan_code", unique=True)
+            await db.account_subscriptions.create_index("account_id", unique=True)
+            await db.account_subscriptions.create_index([("billing_provider", 1), ("subscription_status", 1)])
+            await db.subscription_addons.create_index("addon_code", unique=True)
+            await db.subscription_addons.create_index("stripe_price_id", unique=True, sparse=True)
+            await db.account_usage_limits.create_index("account_id", unique=True)
         except Exception:
             logger.exception("Phase 15.B index creation failed (non-fatal in dev)")
             if (os.environ.get("APP_ENV") or "development").lower() == "production":
@@ -287,6 +329,14 @@ def register_lifecycle(app, *, send_nudges):
 
             await db.horse_owner_visibility_policy.create_index(
                 "horse_id", unique=True,
+            )
+            # Phase HorseOps-1F — one barn-wide owner-visibility
+            # template per facility. Applying the template still
+            # writes the locked per-horse policy rows above; this
+            # index just keeps the template source idempotent.
+            await db.horse_owner_visibility_templates.create_index(
+                "barn_id", unique=True,
+                name="hovt_barn_unique",
             )
 
             await db.horse_ledger_audit.create_index(

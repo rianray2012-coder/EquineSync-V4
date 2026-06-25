@@ -17,6 +17,7 @@ Represents a single operational organization (tenant).
 | `address` | string | |
 | `timezone` | string | IANA tz |
 | `subscription_plan` | string | |
+| `plan_type` | enum | individual_owner / private_owner / barn / trainer / lesson_program / enterprise / nonprofit_community |
 | `created_at` | ISO datetime | |
 
 **Relationships:** has many `User`, `Horse`, `Invoice`, `Task`.
@@ -34,6 +35,9 @@ Represents a platform user.
 | `last_name` | string | |
 | `email` | string | unique, lowercased |
 | `role` | enum | see roles below |
+| `billing_seat_type` | enum | owner_manager / staff / helper_family / client_owner_portal / lesson_participant / platform_admin / none |
+| `account_origin` | enum | self_subscribed / invited_by_barn / invited_by_trainer / platform_created |
+| `portal_access_status` | enum | active / invited / disabled |
 | `phone` | string | |
 | `status` | string | active / invited / disabled |
 | `created_at` | ISO datetime | |
@@ -41,6 +45,8 @@ Represents a platform user.
 **Roles:** `admin`, `barn_manager`, `trainer`, `groom`, `working_student`, `horse_owner`, `rider`, `parent`, `veterinarian`, `farrier`.
 
 > **Reconciliation note:** Live code stores `full_name` (single field) + `password_hash`; it does not yet store `first_name`/`last_name`/`barn_id`/`phone`/`status`. The role list in code matches the target.
+>
+> **Pricing foundation note:** `role` controls app permissions; `billing_seat_type` controls plan usage counts. These must not be collapsed into one field. Free invited owner portal accounts should use `billing_seat_type = "client_owner_portal"` and must not count as staff or owner/manager seats.
 
 **Relationships:** has many `Task`.
 
@@ -61,7 +67,13 @@ Represents an equine profile.
 | `owner_ids` | string[] | |
 | `trainer_id` | string | |
 | `status` | string | active / archived |
+| `billing_status` | string | active / inactive |
+| `billing_status_reason` | string | short reason or null |
+| `billing_status_updated_at` | ISO datetime | |
+| `billing_status_updated_by` | string | user id |
 | `special_instructions` | string | |
+
+> **Pricing foundation note:** `status` is the operational lifecycle field. `billing_status` is the billing-facing active/inactive field used for plan limits and overage calculations. Existing non-archived horses should default to `billing_status = "active"` for usage purposes; archived or billing-inactive horses should not count toward active horse limits.
 
 **Relationships:** has many `CareTask`, `MedicationSchedule`, `IncidentReport`, `Invoice`.
 

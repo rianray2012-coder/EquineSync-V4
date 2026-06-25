@@ -746,7 +746,7 @@ def test_admin_portal_route_lock_unchanged_after_1b():
     from tests.test_admin_portal_admin7a import (
         LOCKED_GET_ROUTES, LOCKED_POST_ROUTES, LOCKED_PATCH_ROUTES,
     )
-    assert len(LOCKED_GET_ROUTES) == 26
+    assert len(LOCKED_GET_ROUTES) == 28
     assert len(LOCKED_POST_ROUTES) == 10
     assert len(LOCKED_PATCH_ROUTES) == 1
 
@@ -1222,4 +1222,3 @@ def test_status_enum_happy_paths(db):
             assert r.status_code == 200, (st, r.text)
     finally:
         _cleanup(db)
-

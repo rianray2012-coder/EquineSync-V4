@@ -2,6 +2,80 @@
 
 > See PRD.md tail for full history. This file is the rolling **most-recent** snapshot.
 
+## 📦 Build Packet Baseline (June 2026)
+
+Updated build/work-plan packet added under
+`docs/equine_sync_build_packet/`:
+
+- PRD
+- roles and permissions matrix
+- user flows and acceptance criteria
+- data model / technical guide
+- roadmap and backlog
+- QA / UAT test plan
+- compliance, payments, and legal-doc notes
+- launch checklist
+- decision log / open questions
+
+Use this packet to draft future gated phase prompts. It is guidance for scope
+and acceptance criteria, not blanket approval to expand an unrelated phase.
+
+The proposed next build sequence is tracked in
+`docs/NEXT_BUILD_PLAN_FROM_UPDATED_ROADMAP.md`.
+
+Near-term order:
+1. Build-Next-1 billing launch verification / Apple contract prep is
+   Codex-approved and locked.
+2. Build-Next-2A mobile evidence inventory is Codex-approved and locked. It
+   reuses locked HorseOps 390x844 screenshots, pins
+   billing/signup/dashboard/mobile-readiness source contracts, and moves the
+   remaining four live screenshots into an explicit Build-Next-2B gate.
+3. Build-Next-2B live mobile screenshot gate is Codex-approved and locked. It
+   captured billing, signup, dashboard, and Mobile Readiness 390x844 PNG
+   screenshots, including the round-1 non-founder dashboard recapture and
+   static badge removal.
+4. Build-Next-3 Multi-Barn / Multi-Role Account Model Gap Report is
+   Codex-approved and locked. It applies the founder decisions for `account_memberships`,
+   multiple roles per user, standalone individual users, and facility/account
+   scoped billing with the free one-horse owner exception.
+5. Build-Next-3A Account Membership Schema Foundation is Codex-approved and
+   locked. It adds `account_memberships`, named indexes, generated standalone
+   owner account ids, and an idempotent `users` mirror backfill while preserving
+   current auth, route guards, invites, onboarding, owner projection, billing,
+   Admin Portal, HorseOps privacy, landing pages, native/offline/push behavior,
+   and Phase 16 boundaries.
+6. Build-Next-3B Active Context + Facility Search Planning is Codex-approved
+   and locked. It adds the read-only `/api/account/context` contract and helper
+   layer while preserving current auth, route guards, invites, onboarding,
+   owner projection, billing, Admin Portal, HorseOps privacy, landing pages,
+   native/offline/push behavior, and Phase 16 boundaries.
+7. Build-Next-3C Route Guard Migration Pilot is Codex-reviewed and locked.
+   It migrates dashboard reads plus horse roster/detail reads to
+   membership-aware active context while preserving `users.barn_id` fallback,
+   clearing the disabled-legacy-barn selected-context edge case, and leaving
+   writes/non-pilot routes unchanged.
+8. Build-Next-3D Task/Today Read-Scope Migration is Codex-reviewed and locked.
+   It extends the selected-account read pattern to task templates,
+   task list/today, timeline, staff activity, and task analytics reads while
+   keeping task writes legacy-scoped and active-facility gated.
+9. Build-Next-4 Invite, Registration, and Onboarding Polish is Codex-reviewed
+   and locked. It enables existing-user invite acceptance via
+   `account_memberships` without duplicate users or overwriting launch
+   compatibility mirrors, and verifies existing-user passwords before
+   membership/session issuance.
+10. Build-Next-5 Minor / Parent Safeguard Plan is prepared in
+   `BUILD_NEXT_5_MINOR_PARENT_SAFEGUARDS_PLAN.md`. BN5-A rule matrix/schema
+   prep, BN5-B guardian / student invite foundation, BN5-C server-side minor
+   communication guard, and BN5-D QA evidence are locked.
+11. Build-Next-6 Document / Signature path: BN6A is Codex-reviewed and locked.
+   BN6B document workflow provider contract is ready for Codex review in
+   `BUILD_NEXT_6B_DOCUMENT_WORKFLOW_PROVIDER_README.md`; live signing remains
+   deferred.
+12. Gate remaining build-packet launch foundations:
+   QA/UAT.
+13. Return to Phase 16 only with a separate approved legacy-reconciliation and
+   hard-delete plan.
+
 ## 🔒 Phase 15 hard rule (locked) — NO hard-blocking
 
 Throughout Phase 15.A → 15.G, feature enforcement is **soft-warn only**. No
@@ -121,7 +195,7 @@ Locks: 1c · 2a · 3a · 4a · 5c · 6b.
 - Checkout rejects Enterprise (400 "contact sales"), unknown tier, bad cycle.
 - Checkout requires `barn:manage`.
 - Checkout returns clear 500 when plan row lacks Stripe Price IDs (the dev
-  state since `sk_test_emergent` can't talk to raw Stripe).
+  state since the local test placeholder can't talk to raw Stripe).
 - Portal requires existing Stripe customer (400 with clear msg).
 - Portal requires `barn:manage`.
 - `/subscriptions/me` returns null when no subscription.
@@ -133,10 +207,10 @@ All previous phases still green: 14 marketplace + 11 review-queue/lifecycle
 + 13 subscriptions-15A = **38/38** when run together.
 
 ### ⚠️ Live key required to exercise Stripe end-to-end
-The current env uses `STRIPE_API_KEY=sk_test_emergent`, which is the
+The current env uses a non-live Stripe placeholder, which is the
 `emergentintegrations` magic value. The raw `stripe` SDK rejects it.
 Phase 15.A code is correct and tested; once you paste a real Stripe test
-secret (`sk_test_...`) into `/app/backend/.env`, dev catalog provisioning
+secret into `/app/backend/.env`, dev catalog provisioning
 will populate the `stripe_*_id` columns on the Starter/Professional plan
 rows, and the checkout endpoint will return real `https://checkout.stripe.com`
 URLs.

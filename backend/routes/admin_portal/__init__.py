@@ -1,11 +1,10 @@
 """routes/admin_portal — Admin Portal router package.
 
-Admin-7A.1 layered split (Feb 2026):
+Admin-7A.2b (Feb 2026):
   - Shared helpers/constants live in `_helpers.py`.
-  - All endpoints live in `portal.py`, clearly sectioned by surface
-    (`# --- Admin-1`, `# --- Admin-2`, …, `# --- Admin-6`).
-  - The per-surface 12-file split lands in a future Admin-7A.2 once
-    this helper boundary is locked.
+  - `portal.py` is a thin orchestrator.
+  - Admin Portal endpoints live in per-surface modules such as
+    `dashboard.py`, `facilities.py`, `horses.py`, and `reports.py`.
 
 External import path (unchanged from the previous flat module):
 

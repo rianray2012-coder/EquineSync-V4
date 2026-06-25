@@ -25,6 +25,9 @@ from typing import Any, Optional
 import stripe
 from fastapi import HTTPException
 
+from core.entitlements import normalize_plan_code
+from core.subscription_records import sync_account_subscription_by_id, sync_account_subscription_records
+
 logger = logging.getLogger(__name__)
 
 
@@ -340,7 +343,7 @@ async def _h_checkout_session_completed(db, event):
     metadata = session.get("metadata") or {}
     barn_id = metadata.get("barn_id")
     stripe_subscription_id = session.get("subscription")
-    plan_tier_code = metadata.get("plan_tier_code")
+    plan_tier_code = normalize_plan_code(metadata.get("plan_tier_code"))
     billing_cycle = metadata.get("billing_cycle")
     if not (barn_id and stripe_subscription_id and plan_tier_code):
         # 15.A contract: this metadata is always present on OUR sessions.
@@ -363,6 +366,7 @@ async def _h_checkout_session_completed(db, event):
             },
             upsert=True,
         )
+        await sync_account_subscription_by_id(db, stripe_subscription_id=stripe_subscription_id)
         return barn_id, ("checkout_replay", stripe_subscription_id)
 
     stripe_sub = _safe_stripe_retrieve(
@@ -407,6 +411,7 @@ async def _h_checkout_session_completed(db, event):
         },
         upsert=True,
     )
+    await sync_account_subscription_records(db, sub_doc)
     return barn_id, ("checkout_created", stripe_subscription_id)
 
 
@@ -423,7 +428,10 @@ async def _h_subscription_created(db, event):
     if not barn_id:
         raise _MetadataMissing(retryable=True, reason="barn_id not resolvable yet")
     # Same upsert contract as checkout — idempotent.
-    plan_tier_code = metadata.get("plan_tier_code") or (await _resolve_subscription_local(db, stripe_subscription_id) or {}).get("plan_tier_code")
+    plan_tier_code = normalize_plan_code(
+        metadata.get("plan_tier_code")
+        or (await _resolve_subscription_local(db, stripe_subscription_id) or {}).get("plan_tier_code")
+    )
     plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0}) if plan_tier_code else None
     snapshot = (plan or {}).get("feature_limits") or {}
     items = (obj.get("items") or {}).get("data") or [{}]
@@ -480,6 +488,7 @@ async def _h_subscription_created(db, event):
         },
         upsert=True,
     )
+    await sync_account_subscription_by_id(db, stripe_subscription_id=stripe_subscription_id)
     return barn_id, ("subscription_created", stripe_subscription_id)
 
 
@@ -500,7 +509,7 @@ async def _h_subscription_updated(db, event):
     # If metadata doesn't have enough to fully reconstruct, retry until a
     # fuller event arrives.
     if not local:
-        plan_tier_code = metadata.get("plan_tier_code")
+        plan_tier_code = normalize_plan_code(metadata.get("plan_tier_code"))
         if not plan_tier_code:
             # Try resolving via the price id against our local plan catalog.
             if new_price_id:
@@ -565,6 +574,7 @@ async def _h_subscription_updated(db, event):
             },
             upsert=True,
         )
+        await sync_account_subscription_by_id(db, stripe_subscription_id=stripe_subscription_id)
         return barn_id, ("subscription_updated_bootstrapped", stripe_subscription_id, plan_tier_code)
 
     # ---------- Existing local row: standard update path ----------
@@ -608,6 +618,7 @@ async def _h_subscription_updated(db, event):
             updated_sub["plan_tier_code"] = new_tier_code
             await _refresh_entitlements(db, updated_sub, new_tier_code)
             summary_parts.append(f"price_changed:{new_tier_code}")
+    await sync_account_subscription_by_id(db, stripe_subscription_id=stripe_subscription_id)
     return barn_id, tuple(summary_parts)
 
 
@@ -639,6 +650,7 @@ async def _h_subscription_deleted(db, event):
                 "subscription_updated_at": _now_iso(),
             }},
         )
+    await sync_account_subscription_by_id(db, stripe_subscription_id=stripe_subscription_id)
     return barn_id, ("subscription_deleted", stripe_subscription_id)
 
 
