@@ -50,6 +50,8 @@ DocuSign envelope, waiver, legal record, or participation gate.
 ## Safety Notes
 
 - Rider profile reads and writes are current-user only.
+- Rider profile responses use an explicit field allowlist; internal or
+  accidental same-user document fields are not returned.
 - The endpoint ignores client-supplied identity or role fields.
 - Non-rider users receive 403.
 - The route is intentionally not attached to the active-facility product gate:
@@ -64,6 +66,13 @@ DocuSign envelope, waiver, legal record, or participation gate.
 - `backend/tests/test_build_next_13b_role_navigation.py`
 - Frontend production build
 - Zip integrity check for `outputs/build_next_13c_rider_intake_shell.zip`
+
+## Review Fixes
+
+- Closed the same-user projection leak by changing the rider profile response
+  projection from "all fields except `_id`" to an explicit rider-safe allowlist.
+  Regression coverage plants `admin_note`, `review_status`, `source_id`, and
+  `password_hash` on the stored profile and verifies none are returned.
 
 ## Deferred
 

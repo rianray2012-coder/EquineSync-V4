@@ -3449,6 +3449,9 @@ first-login profile/intake shell:
 
 Verdict:
 - Riders can read and update their own profile/intake fields.
+- Review fix: rider profile responses now use an explicit rider-safe allowlist,
+  so same-user internal fields such as admin notes, review status, source IDs,
+  or password hashes are not returned if they exist on the stored document.
 - Non-rider users receive 403 on rider-profile endpoints.
 - The API ignores client-supplied identity/role fields and keys persistence to
   the authenticated current user.

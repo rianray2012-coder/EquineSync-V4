@@ -102,6 +102,36 @@ def test_rider_get_returns_current_user_default_profile_only():
     assert "password_hash" not in body
 
 
+def test_rider_get_scrubs_same_user_internal_profile_fields():
+    client, db = _client({
+        "id": "rider_internal",
+        "email": "rider-internal@example.com",
+        "full_name": "Internal Rider",
+        "role": "rider",
+    })
+    db.rider_profiles.docs["rider_internal"] = {
+        "id": "rider_profile_internal",
+        "user_id": "rider_internal",
+        "email": "rider-internal@example.com",
+        "full_name": "Internal Rider",
+        "preferred_name": "IR",
+        "disciplines": ["Dressage"],
+        "experience_level": "beginner",
+        "admin_note": "staff-only context",
+        "review_status": "internal_review",
+        "source_id": "src_secret",
+        "password_hash": "never",
+        "_id": "mongo",
+    }
+
+    r = client.get("/api/rider/profile")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["preferred_name"] == "IR"
+    for forbidden in ["admin_note", "review_status", "source_id", "password_hash", "_id"]:
+        assert forbidden not in body
+
+
 def test_rider_patch_persists_whitelisted_profile_fields_and_completion():
     client, db = _client({
         "id": "rider_2",

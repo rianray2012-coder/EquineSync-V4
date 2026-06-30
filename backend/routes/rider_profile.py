@@ -33,6 +33,22 @@ RIDER_PROFILE_FIELDS = {
     "emergency_contact_phone",
     "consent_acknowledged",
 }
+RIDER_PROFILE_RESPONSE_FIELDS = {
+    "id",
+    "user_id",
+    "email",
+    "full_name",
+    "preferred_name",
+    "disciplines",
+    "experience_level",
+    "goals",
+    "availability_notes",
+    "emergency_contact_name",
+    "emergency_contact_phone",
+    "consent_acknowledged",
+    "created_at",
+    "updated_at",
+}
 
 
 def _now_iso() -> str:
@@ -89,7 +105,7 @@ def _default_profile(user: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _project(profile: Dict[str, Any]) -> Dict[str, Any]:
-    out = {k: v for k, v in profile.items() if k != "_id"}
+    out = {k: profile.get(k) for k in RIDER_PROFILE_RESPONSE_FIELDS if k in profile}
     for field in RIDER_PROFILE_FIELDS:
         out.setdefault(field, [] if field == "disciplines" else None)
     out["disciplines"] = out.get("disciplines") or []
