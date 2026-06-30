@@ -11,6 +11,9 @@ Account readiness means an account exists, can sign in, and is assigned the
 intended role/context. Workflow pass still requires sanitized evidence from the
 role walkthrough.
 
+BN12A provides a CLI helper for creating these accounts:
+`backend/scripts/seed_bn12_uat_accounts.py`.
+
 ## Environment
 
 | Field | Value |
@@ -41,6 +44,22 @@ role walkthrough.
 | UAT-R6 | Guardian / parent | pending | Confirm guardian/parent can sign in and reach linked minor/student context. |
 | UAT-R7 | Lesson participant | pending | Confirm participant can sign in and reach lesson context. |
 | UAT-R8 | Standalone individual owner | pending | Confirm individual owner can sign in without active facility membership. |
+
+## BN12A Seed Roster
+
+If the role accounts do not exist yet, run the BN12A seed script and copy the
+one-time passwords privately.
+
+| UAT ID | Seeded Email |
+| --- | --- |
+| `UAT-R1` | `uat.platform@equine-sync.com` |
+| `UAT-R2` | `uat.facility-admin@equine-sync.com` |
+| `UAT-R3` | `uat.manager@equine-sync.com` |
+| `UAT-R4` | `uat.staff@equine-sync.com` |
+| `UAT-R5` | `uat.owner@equine-sync.com` |
+| `UAT-R6` | `uat.guardian@equine-sync.com` |
+| `UAT-R7` | `uat.participant@equine-sync.com` |
+| `UAT-R8` | `uat.individual-owner@equine-sync.com` |
 
 ## Evidence Rules
 
