@@ -18,7 +18,7 @@ providers, approve first-client pilot, or approve public launch.
 | Environment label | production-like hosted environment; founder must confirm whether this is official staging or production | needs founder label |
 | Database identity label | MongoDB Atlas / Equine Sync / EsProduction / ES_Members | known |
 | Frontend deploy marker | Vercel Production Deploy / 06.30.2026 / commit `5aeea66` / status Ready | known |
-| Backend deploy marker | Render deploy marker still needs provider-dashboard confirmation | needs deploy marker |
+| Backend deploy marker | Render deploy / 2026-06-30 / commit `5aeea66` / status Live | known |
 | Feature-flag summary | backend health reports production, CORS configured, JWT configured, rate limiting enabled, auto seed disabled, seed route disabled, email verification not enforced | partially known |
 | Email/mailer | backend health reports `mailer_configured=true` | cleared |
 | Stripe readiness | backend is configured enough for startup/catalog provisioning; controlled live-safe checkout/webhook proof still pending | pending proof |
@@ -46,7 +46,7 @@ confirmation for UAT-R1 through UAT-R8. Do not paste passwords or tokens.
 1. Decide whether `https://app.equine-sync.com` is the official BN12
    production-like staging environment or whether a separate staging domain
    will be created.
-2. Confirm backend deploy marker and role-account readiness table.
+2. Confirm role-account readiness table.
 3. Execute controlled Stripe live-safe proof.
 4. Execute controlled DocuSign disposable signer/webhook proof.
 
@@ -74,6 +74,7 @@ APPLE billing: deferred
 `BN12 not yet closed`
 
 The deployment is reachable, the API is healthy, production email is configured,
-and the sanitized database identity label is recorded. Official
-launch-clearing UAT remains blocked by role-account proof, provider proof,
-deploy markers, and final founder staging/production label confirmation.
+the sanitized database identity label is recorded, and frontend/backend deploy
+markers are recorded. Official launch-clearing UAT remains blocked by
+role-account proof, provider proof, and final founder staging/production label
+confirmation.
