@@ -293,6 +293,9 @@ async def _ensure_user(
         if not dry_run:
             await db.users.insert_one(user_doc)
 
+    if not dry_run:
+        await db.login_attempts.delete_one({"email": email})
+
     membership_action = await _upsert_membership(db, user_doc, dry_run=dry_run)
 
     if not dry_run:

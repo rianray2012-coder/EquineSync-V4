@@ -178,6 +178,22 @@ def test_bn12a_env_password_and_reset_existing_password():
         database.client.drop_database(db_name)
 
 
+def test_bn12a_seed_clears_existing_login_attempt_lockouts():
+    db_name = f"test_bn12a_lockout_{uuid.uuid4().hex[:8]}"
+    database = _db(db_name)
+    try:
+        database.login_attempts.insert_one({
+            "email": "uat.platform@equine-sync.com",
+            "count": 5,
+            "locked_until": "2999-01-01T00:00:00+00:00",
+        })
+        proc = _run(db_name=db_name)
+        assert proc.returncode == 0, proc.stderr
+        assert database.login_attempts.find_one({"email": "uat.platform@equine-sync.com"}) is None
+    finally:
+        database.client.drop_database(db_name)
+
+
 def test_bn12a_production_writes_require_allow_prod_but_dry_run_allowed():
     db_name = f"test_bn12a_prod_{uuid.uuid4().hex[:8]}"
     database = _db(db_name)
