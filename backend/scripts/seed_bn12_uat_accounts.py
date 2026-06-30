@@ -31,6 +31,7 @@ from core.account_memberships import (  # noqa: E402
     compatibility_membership_from_user,
 )
 from core.account_context import standalone_owner_membership_from_user  # noqa: E402
+from core.mongo import mongo_client_kwargs  # noqa: E402
 
 
 SEED_KEY = "bn12_uat_accounts"
@@ -345,7 +346,7 @@ async def _main():
 
     mongo_url = os.environ["MONGO_URL"]
     db_name = os.environ["DB_NAME"]
-    client = AsyncIOMotorClient(mongo_url)
+    client = AsyncIOMotorClient(mongo_url, **mongo_client_kwargs(mongo_url))
     db = client[db_name]
 
     print("=" * 72)

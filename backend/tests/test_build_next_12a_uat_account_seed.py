@@ -9,6 +9,7 @@ import uuid
 from pathlib import Path
 
 import bcrypt
+import certifi
 from pymongo import MongoClient
 
 
@@ -65,6 +66,14 @@ def test_bn12a_artifacts_exist_and_list_all_roles():
         assert email in text
     for row in [f"UAT-R{i}" for i in range(1, 9)]:
         assert row in text
+
+
+def test_bn12a_mongo_clients_use_certifi_for_atlas_tls():
+    from core.mongo import mongo_client_kwargs
+
+    kwargs = mongo_client_kwargs("mongodb+srv://user:pw@example.mongodb.net/ES_Members")
+    assert kwargs["tlsCAFile"] == certifi.where()
+    assert mongo_client_kwargs("mongodb://127.0.0.1:27017") == {}
 
 
 def test_bn12a_dry_run_mints_no_passwords_and_writes_nothing():
