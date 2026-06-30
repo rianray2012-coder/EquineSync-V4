@@ -36,6 +36,7 @@ def test_sidebar_consumes_role_navigation_source_of_truth():
 
     assert "getRoleNavigation" in src
     assert "const navSections = getRoleNavigation(user)" in src
+    assert 'key={`${sec.label}:${item.label}:${item.to}`}' in src
     assert "NAV_SECTIONS" not in src
     assert "ROLE_GROUPS" not in src
 
@@ -69,6 +70,49 @@ def test_facility_admin_navigation_has_setup_and_business_tools():
         assert text in facility_admin
     assert '"/onboarding"' in facility_admin
     assert '"/admin/portal' not in facility_admin
+
+
+def test_barn_owner_navigation_avoids_currently_forbidden_admin_routes():
+    src = _read(ROLE_NAV)
+    barn_owner = _section(src, "BARN_OWNER_NAVIGATION")
+
+    for text in ['"Setup"', '"Horses"', '"Owners"', '"Riders"', '"Tasks"', '"Messages"', '"Profile"']:
+        assert text in barn_owner
+
+    forbidden = [
+        '"/staff"',
+        '"/billing"',
+        '"/reports"',
+        '"/forms-signatures"',
+        '"/arena-schedule"',
+        '"/admin',
+        '"Staff"',
+        '"Billing"',
+        '"Reports"',
+        '"Facility Settings"',
+    ]
+    for text in forbidden:
+        assert text not in barn_owner
+
+
+def test_trainer_navigation_avoids_admin_only_routes():
+    src = _read(ROLE_NAV)
+    trainer = _section(src, "TRAINER_NAVIGATION")
+
+    for text in ['"Tasks"', '"Horses"', '"Schedule"', '"Owner Requests"', '"Reports"', '"Messages"', '"Settings"']:
+        assert text in trainer
+
+    assert '"/advanced-reports"' in trainer
+    forbidden = [
+        '"/staff"',
+        '"/reports"',
+        '"/billing"',
+        '"/admin',
+        '"Staff"',
+        '"Billing"',
+    ]
+    for text in forbidden:
+        assert text not in trainer
 
 
 def test_staff_navigation_excludes_admin_and_financial_surfaces():
@@ -132,8 +176,10 @@ def test_guardian_and_rider_navigation_do_not_point_to_legacy_lesson_or_admin_pa
 def test_role_resolver_maps_each_locked_profile_to_expected_menu():
     src = _read(ROLE_NAV)
 
-    assert 'if (role === "admin" || role === "barn_owner") return FACILITY_ADMIN_NAVIGATION' in src
-    assert 'if (role === "barn_manager" || role === "trainer") return MANAGER_NAVIGATION' in src
+    assert 'if (role === "admin") return FACILITY_ADMIN_NAVIGATION' in src
+    assert 'if (role === "barn_owner") return BARN_OWNER_NAVIGATION' in src
+    assert 'if (role === "barn_manager") return MANAGER_NAVIGATION' in src
+    assert 'if (role === "trainer") return TRAINER_NAVIGATION' in src
     assert 'if (role === "groom" || role === "working_student") return STAFF_NAVIGATION' in src
     assert 'if (role === "parent") return GUARDIAN_NAVIGATION' in src
     assert 'if (role === "rider") return RIDER_NAVIGATION' in src

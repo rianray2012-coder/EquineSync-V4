@@ -51,10 +51,25 @@ BN13B is a navigation-only follow-up to BN13A. BN13A sends each role to the righ
 
 ### Manager / Trainer
 
+Manager:
+
 - Dashboard
 - Tasks
 - Horses
 - Staff
+- Schedule
+- Health Alerts
+- Owner Requests
+- Facility
+- Reports
+- Messages
+- Settings
+
+Trainer:
+
+- Dashboard
+- Tasks
+- Horses
 - Schedule
 - Health Alerts
 - Owner Requests
@@ -129,7 +144,15 @@ BN13B is a navigation-only follow-up to BN13A. BN13A sends each role to the righ
 - Riders and guardians do not link to `/lessons`; they stay on safe role-home placeholders until the rider/guardian surfaces are built.
 - Owners see a Billing item, but it does not link to the existing barn-admin billing route.
 - Staff do not see Billing, Setup, Staff Admin, Audit Log, Integrations, or platform-admin surfaces.
+- Trainers do not see the admin-only `/staff`, `/reports`, or billing routes; their Reports item points to the trainer-allowed reporting route.
+- `barn_owner` uses a safe setup-oriented navigation shell until BN13C+ decides whether to expand barn-owner permissions.
 - Platform admins are pointed back to the Admin Portal lane.
+
+## Review Fixes
+
+- Trainer navigation no longer includes admin-only `Staff`, `/reports`, or billing links.
+- Barn-owner navigation no longer mirrors full facility-admin routes that the current route guards deny.
+- Sidebar list keys now include section, label, and route so placeholder-heavy menus do not produce duplicate React keys.
 
 ## Verification
 

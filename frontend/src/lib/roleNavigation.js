@@ -70,6 +70,45 @@ export const MANAGER_NAVIGATION = [
   },
 ];
 
+export const TRAINER_NAVIGATION = [
+  {
+    label: "Trainer",
+    items: [
+      item("/dashboard", "Dashboard", "dashboard", { end: true }),
+      item("/today", "Tasks", "tasks"),
+      item("/horses", "Horses", "horse"),
+      item("/arena-schedule", "Schedule", "calendar"),
+      item("/health", "Health Alerts", "health"),
+      item("/owner-updates", "Owner Requests", "requests", { reviewBadge: true }),
+    ],
+  },
+  {
+    label: "Program",
+    items: [
+      item("/barn-locations", "Facility", "map"),
+      item("/advanced-reports", "Reports", "reports"),
+      item("/messaging", "Messages", "messages"),
+      item("/settings", "Settings", "settings"),
+    ],
+  },
+];
+
+export const BARN_OWNER_NAVIGATION = [
+  {
+    label: "Facility",
+    items: [
+      item("/dashboard", "Dashboard", "dashboard", { end: true }),
+      item("/onboarding", "Setup", "sparkles"),
+      item("/horses", "Horses", "horse"),
+      item("/owners", "Owners", "users"),
+      item("/riders", "Riders", "profile"),
+      item("/today", "Tasks", "tasks"),
+      item("/messaging", "Messages", "messages"),
+      item("/settings", "Profile", "settings"),
+    ],
+  },
+];
+
 export const STAFF_NAVIGATION = [
   {
     label: "Daily Work",
@@ -187,8 +226,10 @@ export const getRoleNavigation = (user) => {
 
   const role = String(user?.role || "").toLowerCase();
 
-  if (role === "admin" || role === "barn_owner") return FACILITY_ADMIN_NAVIGATION;
-  if (role === "barn_manager" || role === "trainer") return MANAGER_NAVIGATION;
+  if (role === "admin") return FACILITY_ADMIN_NAVIGATION;
+  if (role === "barn_owner") return BARN_OWNER_NAVIGATION;
+  if (role === "barn_manager") return MANAGER_NAVIGATION;
+  if (role === "trainer") return TRAINER_NAVIGATION;
   if (role === "groom" || role === "working_student") return STAFF_NAVIGATION;
   if (role === "parent") return GUARDIAN_NAVIGATION;
   if (role === "rider") return RIDER_NAVIGATION;

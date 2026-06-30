@@ -82,7 +82,7 @@ export default function Sidebar({ onNavigate }) {
               const Icon = ICONS[item.icon] || LayoutDashboard;
               return (
                 <NavLink
-                  key={item.to}
+                  key={`${sec.label}:${item.label}:${item.to}`}
                   to={item.to}
                   end={item.end}
                   onClick={onNavigate}

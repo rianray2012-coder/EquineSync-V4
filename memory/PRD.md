@@ -3416,6 +3416,13 @@ Verdict:
 - Facility admins see setup, facility operations, billing, reports, and
   facility settings.
 - Managers/trainers see operational manager navigation.
+- Review fix: trainers now use a trainer-safe menu without admin-only Staff,
+  billing, or `/reports` links; their Reports item uses the trainer-allowed
+  reporting route.
+- Review fix: `barn_owner` now uses a safe setup-oriented menu instead of
+  full facility-admin links that current guards deny.
+- Review fix: sidebar keys now include section + label + path to avoid
+  duplicate keys in placeholder-heavy client menus.
 - Staff see daily work navigation without billing, setup, staff admin, audit
   log, integrations, or platform surfaces.
 - Owners, guardians, and riders get client-facing menus; unfinished client
