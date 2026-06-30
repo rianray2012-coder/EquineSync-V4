@@ -1,8 +1,11 @@
 # Build-Next-13B — Role Navigation Shells
 
-Status: ready for Codex review
+Status: Codex-approved and locked
 
 Date: 2026-06-30
+
+Lock note: BN13B passed re-review after the trainer, barn-owner, and duplicate
+sidebar-key findings were fixed. No blocking findings remain.
 
 ## Purpose
 

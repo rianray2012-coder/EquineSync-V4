@@ -3401,7 +3401,7 @@ Strictly unchanged:
   AI, scheduler, workflow-engine, deploy action, public launch action, or Phase
   16 behavior changes.
 
-## Build-Next-13B - Role Navigation Shells READY FOR CODEX REVIEW (Jun 30 2026)
+## Build-Next-13B - Role Navigation Shells ✅ LOCKED (Jun 30 2026)
 
 BN13B follows locked BN13A role landing by replacing the broad legacy sidebar
 with role-specific navigation groups:
@@ -3412,6 +3412,8 @@ with role-specific navigation groups:
 - `outputs/build_next_13b_role_navigation.zip`
 
 Verdict:
+- Codex re-review found no blocking findings after the trainer, barn-owner, and
+  duplicate-sidebar-key fixes.
 - Platform admins stay in the Admin Portal lane.
 - Facility admins see setup, facility operations, billing, reports, and
   facility settings.
