@@ -1,107 +1,41 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
-  LayoutDashboard, Cat, UserCircle2, Users, GraduationCap, Dumbbell,
-  Stethoscope, BedDouble, Pill, Trees, UtensilsCrossed, Package, Receipt,
-  AlertTriangle, MessageSquare, BarChart3, Settings, ShieldAlert,
-  LogOut, Crown, Sparkles, ListChecks, Map, ClipboardList, Wrench,
-  FileText, HeartPulse, CalendarDays, Landmark, UsersRound, PenLine, Route, Smartphone, ShieldCheck, ClipboardCheck,
+  LayoutDashboard, Cat, UserCircle2, Users, GraduationCap,
+  Stethoscope, Receipt, AlertTriangle, MessageSquare, BarChart3,
+  Settings, LogOut, Sparkles, ListChecks, Map, ClipboardList,
+  FileText, CalendarDays, UsersRound, PenLine, ShieldCheck,
+  Building2, Heart,
 } from "lucide-react";
 import { Logo } from "./Logo";
 import { useAuth } from "../context/AuthContext";
-import { ROLE_GROUPS } from "../lib/permissions";
 import { api } from "../lib/api";
+import { getRoleNavigation } from "../lib/roleNavigation";
 
-const NAV_SECTIONS = [
-  {
-    label: "Daily",
-    items: [
-      { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, end: true },
-      { to: "/today", label: "Today", icon: ListChecks },
-      { to: "/my-work", label: "My Work", icon: ClipboardList, roles: ROLE_GROUPS.staff },
-      { to: "/feed", label: "Feed Room", icon: UtensilsCrossed },
-      { to: "/medications", label: "Medications", icon: Pill },
-    ],
-  },
-  {
-    label: "Care",
-    items: [
-      { to: "/horses", label: "Horses", icon: Cat },
-      { to: "/health", label: "Health & Vet", icon: Stethoscope },
-      { to: "/health-reminders", label: "Health Reminders", icon: HeartPulse, roles: ROLE_GROUPS.care },
-      { to: "/health-documents", label: "Health Docs", icon: FileText, roles: ROLE_GROUPS.care },
-      { to: "/health-care-logs", label: "Care Logs", icon: HeartPulse, roles: ROLE_GROUPS.care },
-      { to: "/weight-trends", label: "Weight Trends", icon: HeartPulse, roles: ROLE_GROUPS.care },
-      { to: "/stall-rest", label: "Stall Rest & Rehab", icon: BedDouble },
-      { to: "/turnout", label: "Turnout & Pastures", icon: Trees },
-    ],
-  },
-  {
-    label: "Program",
-    items: [
-      { to: "/riders", label: "Riders", icon: UserCircle2 },
-      { to: "/lessons", label: "Lessons", icon: GraduationCap },
-      { to: "/training", label: "Training", icon: Dumbbell },
-      { to: "/training-plans", label: "Training Plans", icon: ClipboardList, roles: ROLE_GROUPS.training },
-      { to: "/shows", label: "Shows", icon: CalendarDays, roles: ROLE_GROUPS.training },
-      { to: "/ride-gps", label: "Ride GPS", icon: Route, roles: ROLE_GROUPS.training },
-      { to: "/performance-analytics", label: "Performance", icon: BarChart3, roles: ROLE_GROUPS.training },
-    ],
-  },
-  {
-    label: "Business",
-    items: [
-      { to: "/owners", label: "Owners", icon: Users },
-      { to: "/owner-portal", label: "Owner Portal", icon: Crown, roles: ROLE_GROUPS.ownerPortal },
-      { to: "/billing", label: "Billing", icon: Receipt, roles: ROLE_GROUPS.financial },
-      { to: "/billing/subscription", label: "Subscription", icon: Sparkles, roles: ROLE_GROUPS.barnManage },
-      { to: "/review-queue", label: "Review Queue", icon: ClipboardCheck, roles: ROLE_GROUPS.communication, reviewBadge: true },
-      { to: "/financial-dashboard", label: "Financial Dashboard", icon: BarChart3, roles: ROLE_GROUPS.financial },
-      { to: "/payments", label: "Payments", icon: Landmark, roles: ROLE_GROUPS.financial },
-      { to: "/recurring-billing", label: "Recurring Billing", icon: Landmark, roles: ROLE_GROUPS.financial },
-      { to: "/expenses", label: "Expenses", icon: Receipt, roles: ROLE_GROUPS.financial },
-      { to: "/messaging", label: "Messaging", icon: MessageSquare },
-      { to: "/group-messaging", label: "Group Messages", icon: MessageSquare, roles: ROLE_GROUPS.communication },
-      { to: "/owner-updates", label: "Owner Updates", icon: PenLine, roles: ROLE_GROUPS.communication },
-      { to: "/forms-signatures", label: "Forms", icon: PenLine, roles: ROLE_GROUPS.communication },
-      { to: "/emergency-contacts", label: "Emergency Contacts", icon: AlertTriangle, roles: ROLE_GROUPS.communication },
-      { to: "/emergency-workflows", label: "Emergency Workflows", icon: ShieldAlert, roles: ROLE_GROUPS.communication },
-    ],
-  },
-  {
-    label: "Operations",
-    items: [
-      { to: "/barn-locations", label: "Barn Locations", icon: Map, roles: ROLE_GROUPS.locationShare },
-      { to: "/arena-schedule", label: "Arena Schedule", icon: CalendarDays, roles: ROLE_GROUPS.locationShare },
-      { to: "/stall-map", label: "Stall Map", icon: Map, roles: ROLE_GROUPS.operations },
-      { to: "/waitlist", label: "Waitlist", icon: ClipboardList, roles: ROLE_GROUPS.operations },
-      { to: "/pasture-schedule", label: "Pasture Schedule", icon: Trees, roles: ROLE_GROUPS.operations },
-      { to: "/inventory", label: "Inventory", icon: Package },
-      { to: "/supply-inventory", label: "Supplies", icon: Package, roles: ROLE_GROUPS.operations },
-      { to: "/equipment", label: "Equipment", icon: Wrench, roles: ROLE_GROUPS.operations },
-      { to: "/staff", label: "Staff", icon: UsersRound, roles: ROLE_GROUPS.admin },
-      { to: "/admin/review-queue", label: "Member Review", icon: UsersRound, roles: ROLE_GROUPS.admin, memberReviewBadge: true },
-      { to: "/admin/billing", label: "Billing Admin", icon: Receipt, roles: ROLE_GROUPS.admin },
-      { to: "/staff-tasks", label: "Staff Tasks", icon: ClipboardList, roles: ROLE_GROUPS.admin },
-      { to: "/handoff-reports", label: "Handoff Reports", icon: FileText, roles: ROLE_GROUPS.admin },
-      { to: "/time-clock", label: "Time Clock", icon: CalendarDays, roles: ROLE_GROUPS.admin },
-      { to: "/incidents", label: "Incidents", icon: AlertTriangle },
-    ],
-  },
-  {
-    label: "Insights",
-    items: [
-      { to: "/reports", label: "Reports", icon: BarChart3, roles: ROLE_GROUPS.admin },
-      { to: "/advanced-reports", label: "Advanced Reports", icon: BarChart3, roles: ROLE_GROUPS.reporting },
-      { to: "/audit-log", label: "Audit Log", icon: ShieldCheck, roles: ROLE_GROUPS.admin },
-      { to: "/ai-automation", label: "AI Automation", icon: Sparkles, roles: ROLE_GROUPS.admin },
-      { to: "/integrations", label: "Integrations", icon: Wrench, roles: ROLE_GROUPS.integrations },
-      { to: "/mobile-readiness", label: "Mobile Readiness", icon: Smartphone, roles: ROLE_GROUPS.integrations },
-      { to: "/onboarding", label: "Barn Setup", icon: Sparkles, roles: ROLE_GROUPS.admin },
-      { to: "/settings", label: "Settings", icon: Settings },
-    ],
-  },
-];
+const ICONS = {
+  alert: AlertTriangle,
+  billing: Receipt,
+  calendar: CalendarDays,
+  clipboard: ClipboardList,
+  dashboard: LayoutDashboard,
+  documents: FileText,
+  facility: Building2,
+  health: Stethoscope,
+  heart: Heart,
+  horse: Cat,
+  map: Map,
+  messages: MessageSquare,
+  profile: UserCircle2,
+  reports: BarChart3,
+  requests: PenLine,
+  settings: Settings,
+  shield: ShieldCheck,
+  sparkles: Sparkles,
+  tasks: ListChecks,
+  team: UsersRound,
+  training: GraduationCap,
+  users: Users,
+};
 
 const REVIEW_ROLES = ["admin", "barn_manager", "trainer"];
 
@@ -110,6 +44,7 @@ export default function Sidebar({ onNavigate }) {
   const navigate = useNavigate();
   const canReview = REVIEW_ROLES.includes(user?.role);
   const [pendingCount, setPendingCount] = useState(0);
+  const navSections = getRoleNavigation(user);
 
   const refreshPending = useCallback(() => {
     if (!canReview) return;
@@ -140,11 +75,11 @@ export default function Sidebar({ onNavigate }) {
 
       {/* Nav sections */}
       <nav className="flex-1 overflow-y-auto scrollbar-luxe py-4 px-3">
-        {NAV_SECTIONS.map((sec, si) => (
+        {navSections.map((sec, si) => (
           <div key={sec.label} className={si > 0 ? "mt-5" : ""}>
             <div className="px-3 pb-2 text-[9.5px] tracking-[0.28em] uppercase text-equine-brassLight/70 font-semibold">{sec.label}</div>
-            {sec.items.filter((item) => !item.roles || item.roles.includes(user?.role)).map((item) => {
-              const Icon = item.icon;
+            {sec.items.map((item) => {
+              const Icon = ICONS[item.icon] || LayoutDashboard;
               return (
                 <NavLink
                   key={item.to}

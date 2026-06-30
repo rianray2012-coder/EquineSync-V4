@@ -3401,6 +3401,32 @@ Strictly unchanged:
   AI, scheduler, workflow-engine, deploy action, public launch action, or Phase
   16 behavior changes.
 
+## Build-Next-13B - Role Navigation Shells READY FOR CODEX REVIEW (Jun 30 2026)
+
+BN13B follows locked BN13A role landing by replacing the broad legacy sidebar
+with role-specific navigation groups:
+- `frontend/src/lib/roleNavigation.js`
+- `frontend/src/components/Sidebar.jsx`
+- `backend/tests/test_build_next_13b_role_navigation.py`
+- `BUILD_NEXT_13B_ROLE_NAVIGATION_README.md`
+- `outputs/build_next_13b_role_navigation.zip`
+
+Verdict:
+- Platform admins stay in the Admin Portal lane.
+- Facility admins see setup, facility operations, billing, reports, and
+  facility settings.
+- Managers/trainers see operational manager navigation.
+- Staff see daily work navigation without billing, setup, staff admin, audit
+  log, integrations, or platform surfaces.
+- Owners, guardians, and riders get client-facing menus; unfinished client
+  tools route to safe role-home placeholders rather than legacy operational
+  pages.
+
+Strictly unchanged:
+- Navigation-only: no backend route, schema, auth, permission, database,
+  billing, provider, Admin Portal, HorseOps, landing page, deploy, or product
+  workflow behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the

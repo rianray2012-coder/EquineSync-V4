@@ -94,10 +94,10 @@ def test_auth_payload_exposes_setup_completion_for_facility_admin_routing():
 
 
 def test_sidebar_dashboard_no_longer_points_to_marketing_root():
-    src = _read(FRONTEND / "components" / "Sidebar.jsx")
+    src = _read(FRONTEND / "lib" / "roleNavigation.js")
 
-    assert '{ to: "/dashboard", label: "Dashboard"' in src
-    assert '{ to: "/", label: "Dashboard"' not in src
+    assert 'item("/dashboard", "Dashboard"' in src
+    assert 'item("/", "Dashboard"' not in src
 
 
 def test_bn13a_readme_declares_deferred_work_and_no_launch_approval():
