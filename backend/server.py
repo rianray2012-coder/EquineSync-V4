@@ -86,6 +86,7 @@ from routes.horse_ledger import build_router as build_horse_ledger_router
 from routes.account_context import build_router as build_account_context_router
 from routes.student_guardians import build_router as build_student_guardians_router
 from routes.document_signatures import build_router as build_document_signatures_router
+from routes.rider_profile import build_router as build_rider_profile_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -141,6 +142,15 @@ api_router.include_router(build_auth_router(db))
 # planning/selection surface that must remain readable before later phases move
 # product route guards to membership-aware context selection.
 api_router.include_router(build_account_context_router(
+    db=db,
+    get_current_user=get_current_user,
+))
+
+# Build-Next-13C — rider first-login profile/intake shell.
+# Authenticated and rider-role scoped, but intentionally not attached to the
+# facility product dependency: marketplace rider accounts may exist before
+# joining an active facility.
+api_router.include_router(build_rider_profile_router(
     db=db,
     get_current_user=get_current_user,
 ))

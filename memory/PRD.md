@@ -3436,6 +3436,32 @@ Strictly unchanged:
   billing, provider, Admin Portal, HorseOps, landing page, deploy, or product
   workflow behavior changes.
 
+## Build-Next-13C - Rider Intake Shell READY FOR CODEX REVIEW (Jun 30 2026)
+
+BN13C follows locked BN13A/BN13B by giving `role="rider"` users a safe
+first-login profile/intake shell:
+- `backend/routes/rider_profile.py`
+- `backend/server.py`
+- `frontend/src/pages/RoleHome.jsx`
+- `backend/tests/test_build_next_13c_rider_intake_shell.py`
+- `BUILD_NEXT_13C_RIDER_INTAKE_README.md`
+- `outputs/build_next_13c_rider_intake_shell.zip`
+
+Verdict:
+- Riders can read and update their own profile/intake fields.
+- Non-rider users receive 403 on rider-profile endpoints.
+- The API ignores client-supplied identity/role fields and keys persistence to
+  the authenticated current user.
+- Rider home now shows profile completion, intake fields, and safe
+  coming-soon panels for schedule, lessons, documents, goals, and messages.
+- Rider navigation remains on role-home placeholders and does not link directly
+  to `/lessons`, `/billing`, setup, or admin surfaces.
+
+Strictly unchanged:
+- No lesson enrollment, scheduling engine, trainer curriculum, guardian/minor
+  consent, billing, Stripe, Apple, DocuSign, Admin Portal, HorseOps, permission,
+  launch/UAT, or provider behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the
