@@ -164,42 +164,43 @@ export default function NotificationPrefsCard() {
           </thead>
           <tbody>
             {EVENT_TYPES.map((et) => (
-              <React.Fragment key={et.key}>
-                <tr className="border-t border-equine-hairline">
-                  <td className="py-2 pr-4 text-equine-ink">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Inbox className="w-3 h-3 text-equine-inkSoft" /> {et.label}
+              <tr key={et.key} className="border-t border-equine-hairline">
+                <td className="py-3 pr-4 text-equine-ink align-top">
+                  <div>{et.label}</div>
+                  <div className="mt-1 flex items-center gap-3 text-[10.5px] uppercase tracking-[0.14em] text-equine-inkMuted">
+                    <span className="inline-flex items-center gap-1">
+                      <Inbox className="w-3 h-3 text-equine-inkSoft" /> Inbox
                     </span>
-                  </td>
-                  {CATEGORIES.map((cat) => (
-                    <td key={cat} className="py-2 px-1 text-center">
-                      <input
-                        type="checkbox"
-                        data-testid={`pref-inbox-${et.key}-${cat}`}
-                        checked={inboxT.get(et.key, cat)}
-                        onChange={(e) => inboxT.set(et.key, cat, e.target.checked)}
-                      />
-                    </td>
-                  ))}
-                </tr>
-                <tr className="border-t border-equine-hairline">
-                  <td className="py-2 pr-4 text-equine-inkMuted">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Mail className="w-3 h-3 text-equine-inkSoft" /> {et.label}
+                    <span className="inline-flex items-center gap-1">
+                      <Mail className="w-3 h-3 text-equine-inkSoft" /> Email
                     </span>
+                  </div>
+                </td>
+                {CATEGORIES.map((cat) => (
+                  <td key={cat} className="py-3 px-1 text-center align-top">
+                    <div className="inline-flex items-center justify-center gap-2">
+                      <label className="inline-flex items-center justify-center" title="In-app inbox">
+                        <span className="sr-only">{`${et.label} ${cat.replace(/_/g, " ")} inbox`}</span>
+                        <input
+                          type="checkbox"
+                          data-testid={`pref-inbox-${et.key}-${cat}`}
+                          checked={inboxT.get(et.key, cat)}
+                          onChange={(e) => inboxT.set(et.key, cat, e.target.checked)}
+                        />
+                      </label>
+                      <label className="inline-flex items-center justify-center" title="Email">
+                        <span className="sr-only">{`${et.label} ${cat.replace(/_/g, " ")} email`}</span>
+                        <input
+                          type="checkbox"
+                          data-testid={`pref-email-${et.key}-${cat}`}
+                          checked={emailT.get(et.key, cat)}
+                          onChange={(e) => emailT.set(et.key, cat, e.target.checked)}
+                        />
+                      </label>
+                    </div>
                   </td>
-                  {CATEGORIES.map((cat) => (
-                    <td key={cat} className="py-2 px-1 text-center">
-                      <input
-                        type="checkbox"
-                        data-testid={`pref-email-${et.key}-${cat}`}
-                        checked={emailT.get(et.key, cat)}
-                        onChange={(e) => emailT.set(et.key, cat, e.target.checked)}
-                      />
-                    </td>
-                  ))}
-                </tr>
-              </React.Fragment>
+                ))}
+              </tr>
             ))}
           </tbody>
         </table>
