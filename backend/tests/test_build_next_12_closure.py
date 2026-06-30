@@ -29,6 +29,7 @@ def test_bn12_records_current_live_urls_and_email_configured():
     assert "https://app.equine-sync.com" in text
     assert "https://equine-sync-api.onrender.com" in text
     assert "MongoDB Atlas / Equine Sync / EsProduction / ES_Members" in text
+    assert "Vercel Production Deploy / 06.30.2026 / commit `5aeea66` / status Ready" in text
     assert "Email/mailer: configured" in text
     assert "mailer_configured=true" in text
     assert "RESEND_API_KEY configured: yes" in text
