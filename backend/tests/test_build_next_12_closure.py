@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 README = ROOT / "BUILD_NEXT_12_CLOSURE_README.md"
 STATUS = ROOT / "docs/BUILD_NEXT_12_CURRENT_INPUTS_STATUS.md"
+ROLE_READINESS = ROOT / "docs/BUILD_NEXT_12_ROLE_READINESS_CHECKLIST.md"
 
 
 def _read(path: Path) -> str:
@@ -18,13 +19,13 @@ def _read(path: Path) -> str:
 
 
 def test_bn12_closure_artifacts_exist_and_are_nonempty():
-    for path in (README, STATUS):
+    for path in (README, STATUS, ROLE_READINESS):
         assert path.exists(), str(path)
         assert path.stat().st_size > 500, str(path)
 
 
 def test_bn12_records_current_live_urls_and_email_configured():
-    text = f"{_read(README)}\n{_read(STATUS)}"
+    text = f"{_read(README)}\n{_read(STATUS)}\n{_read(ROLE_READINESS)}"
 
     assert "https://app.equine-sync.com" in text
     assert "https://equine-sync-api.onrender.com" in text
@@ -38,7 +39,7 @@ def test_bn12_records_current_live_urls_and_email_configured():
 
 
 def test_bn12_keeps_launch_blocked_until_role_and_provider_proof():
-    text = f"{_read(README)}\n{_read(STATUS)}".lower()
+    text = f"{_read(README)}\n{_read(STATUS)}\n{_read(ROLE_READINESS)}".lower()
 
     assert "not launch-clearing" in text
     assert "`blocked`" in text
@@ -52,7 +53,7 @@ def test_bn12_keeps_launch_blocked_until_role_and_provider_proof():
 
 
 def test_bn12_secret_shapes_are_not_recorded():
-    text = f"{_read(README)}\n{_read(STATUS)}"
+    text = f"{_read(README)}\n{_read(STATUS)}\n{_read(ROLE_READINESS)}"
     forbidden = [
         "sk" + "_live_",
         "sk" + "_test_",
@@ -74,9 +75,21 @@ def test_bn12_secret_shapes_are_not_recorded():
 
 
 def test_bn12_role_rows_remain_pending_for_official_evidence():
-    text = _read(STATUS)
+    text = f"{_read(STATUS)}\n{_read(ROLE_READINESS)}"
 
     for row in ("UAT-R1", "UAT-R2", "UAT-R3", "UAT-R4", "UAT-R5", "UAT-R6", "UAT-R7", "UAT-R8"):
         assert row in text
     assert "account exists and can sign in" in text
     assert "Do not paste passwords or tokens" in text
+
+
+def test_bn12_role_readiness_is_account_readiness_not_workflow_pass():
+    text = _read(ROLE_READINESS)
+
+    assert "Account readiness means" in text
+    assert "Workflow pass still requires sanitized evidence" in text
+    assert "`role readiness pending`" in text
+    assert text.count("| UAT-R") == 8
+    assert "| UAT-R8 | Standalone individual owner | pending |" in text
+    assert "ready for unrestricted launch" not in text.lower()
+    assert "launch approved" not in text.lower()

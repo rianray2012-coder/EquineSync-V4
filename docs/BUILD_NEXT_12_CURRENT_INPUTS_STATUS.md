@@ -25,6 +25,12 @@ providers, approve first-client pilot, or approve public launch.
 | DocuSign readiness | connector/webhook phases are built; live-safe disposable envelope/webhook proof still pending | pending proof |
 | Apple billing | deferred | deferred |
 
+## Role Readiness Checklist
+
+Use `docs/BUILD_NEXT_12_ROLE_READINESS_CHECKLIST.md` to capture UAT-R1 through
+UAT-R8 account readiness. Account readiness is not the same as workflow pass;
+each role still needs sanitized walkthrough evidence before BN12 can close.
+
 ## Role Account Readiness
 
 Official staged role-account readiness still needs founder/operator

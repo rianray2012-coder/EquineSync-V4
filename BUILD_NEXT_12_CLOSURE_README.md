@@ -28,9 +28,8 @@ are complete.
 
 1. Founder/operator confirms whether `https://app.equine-sync.com` is the
    official BN12 production-like staging environment or final production.
-2. Founder/operator supplies a sanitized database identity label and deploy
-   marker from hosting dashboards.
-3. Role-account readiness is confirmed for UAT-R1 through UAT-R8.
+2. Role-account readiness is confirmed for UAT-R1 through UAT-R8 using
+   `docs/BUILD_NEXT_12_ROLE_READINESS_CHECKLIST.md`.
 4. Controlled live-safe Stripe proof is captured.
 5. Controlled DocuSign disposable signer/webhook proof is captured.
 
@@ -49,6 +48,7 @@ are complete.
 
 - `BUILD_NEXT_12_CLOSURE_README.md`
 - `docs/BUILD_NEXT_12_CURRENT_INPUTS_STATUS.md`
+- `docs/BUILD_NEXT_12_ROLE_READINESS_CHECKLIST.md`
 - `backend/tests/test_build_next_12_closure.py`
 - `outputs/build_next_12_closure.zip`
 
