@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
 import { api } from "../lib/api";
+import { resolvePostLoginPath } from "../lib/roleLanding";
 
 export default function Login() {
   const { login, user } = useAuth();
@@ -30,15 +31,15 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (user) navigate("/dashboard", { replace: true });
+    if (user) navigate(resolvePostLoginPath(user), { replace: true });
   }, [user, navigate]);
 
   const submit = async (e) => {
     if (e?.preventDefault) e.preventDefault();
     setErr(""); setLoading(true);
     try {
-      await login(email, password);
-      navigate("/dashboard", { replace: true });
+      const u = await login(email, password);
+      navigate(resolvePostLoginPath(u), { replace: true });
     } catch (err2) {
       const d = err2?.response?.data?.detail;
       const msg =

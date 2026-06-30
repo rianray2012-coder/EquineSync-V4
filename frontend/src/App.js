@@ -75,6 +75,8 @@ import MobileReadiness from "./pages/MobileReadiness";
 import AuditLog from "./pages/AuditLog";
 import SubscriptionBilling from "./pages/SubscriptionBilling";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
+import RoleHome from "./pages/RoleHome";
+import { isFacilitySetupEligible, resolvePostLoginPath } from "./lib/roleLanding";
 
 // Admin Portal (Admin-1)
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -105,6 +107,14 @@ const Protected = ({ children }) => {
 const RoleProtected = ({ roles, children }) => {
   const { user } = useAuth();
   if (!canAccessRole(user, roles)) return <Forbidden />;
+  return children;
+};
+
+const SetupProtected = ({ children }) => {
+  const { user } = useAuth();
+  if (!isFacilitySetupEligible(user)) {
+    return <Navigate to={resolvePostLoginPath(user)} replace />;
+  }
   return children;
 };
 
@@ -166,10 +176,11 @@ function App() {
 
             <Route element={<Protected><AppShell /></Protected>}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/role-home/:profile" element={<RoleHome />} />
               <Route path="/today" element={<Today />} />
               <Route path="/my-work" element={permit(<MyWork />, ROLE_GROUPS.staff)} />
               <Route path="/barn-board" element={<Navigate to="/today" replace />} />
-              <Route path="/onboarding" element={permit(<Onboarding />, ROLE_GROUPS.admin)} />
+              <Route path="/onboarding" element={<SetupProtected><Onboarding /></SetupProtected>} />
               <Route path="/horses" element={<Horses />} />
               <Route path="/horses/:id" element={<HorseProfile />} />
               <Route path="/riders" element={<Riders />} />

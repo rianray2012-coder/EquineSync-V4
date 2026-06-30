@@ -16,7 +16,7 @@ const NAV_SECTIONS = [
   {
     label: "Daily",
     items: [
-      { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
+      { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, end: true },
       { to: "/today", label: "Today", icon: ListChecks },
       { to: "/my-work", label: "My Work", icon: ClipboardList, roles: ROLE_GROUPS.staff },
       { to: "/feed", label: "Feed Room", icon: UtensilsCrossed },
