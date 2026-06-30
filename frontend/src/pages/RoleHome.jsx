@@ -23,7 +23,7 @@ const PROFILES = {
       ["Riding Goals", "Current goals, milestones, and suggested focus.", Sparkles],
       ["Trainer Notes", "Recent lesson summary and practice focus.", MessageSquare],
     ],
-    primary: { to: "/lessons", label: "Open lessons" },
+    primary: { label: "Rider intake coming next" },
   },
   guardian: {
     eyebrow: "Rider Overview",
@@ -34,7 +34,7 @@ const PROFILES = {
       ["Guardian Tasks", "Documents, schedule confirmations, and approvals.", ClipboardList],
       ["Billing & Documents", "Invoices, waivers, and signed forms.", FileText],
     ],
-    primary: { to: "/lessons", label: "Open rider schedule" },
+    primary: { label: "Guardian tools coming next" },
   },
   owner: {
     eyebrow: "My Horse",
@@ -89,14 +89,26 @@ export default function RoleHome() {
       </div>
 
       <div className="mt-7 flex flex-wrap gap-3">
-        <Link
-          to={config.primary.to}
-          className="btn-primary inline-flex items-center gap-2"
-          data-testid={`role-home-primary-${profile}`}
-        >
-          <Cat className="w-4 h-4" />
-          {config.primary.label}
-        </Link>
+        {config.primary.to ? (
+          <Link
+            to={config.primary.to}
+            className="btn-primary inline-flex items-center gap-2"
+            data-testid={`role-home-primary-${profile}`}
+          >
+            <Cat className="w-4 h-4" />
+            {config.primary.label}
+          </Link>
+        ) : (
+          <button
+            type="button"
+            disabled
+            className="btn-secondary inline-flex items-center gap-2 opacity-70 cursor-not-allowed"
+            data-testid={`role-home-primary-${profile}`}
+          >
+            <Cat className="w-4 h-4" />
+            {config.primary.label}
+          </button>
+        )}
         <Link
           to="/messaging"
           className="btn-secondary inline-flex items-center gap-2"

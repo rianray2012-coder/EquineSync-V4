@@ -133,6 +133,19 @@ def user_safe(user: dict) -> dict:
     return {k: v for k, v in user.items() if k not in ("password_hash", "_id")}
 
 
+async def user_safe_with_context(db, user: dict) -> dict:
+    safe = user_safe(user)
+    role = (safe.get("role") or "").strip().lower()
+    if role in {"admin", "barn_owner"} and not safe.get("platform_role"):
+        progress = await db.onboarding_progress.find_one(
+            {"user_id": safe["id"]}, {"_id": 0, "completed": 1}
+        )
+        completed = bool(progress.get("completed")) if progress else False
+        safe["onboarding_completed"] = completed
+        safe["facility_setup_complete"] = completed
+    return safe
+
+
 async def client_meta(request: Optional[Request]):
     ua = request.headers.get("user-agent") if request else None
     ip = request.client.host if request and request.client else None
@@ -290,7 +303,7 @@ def build_router(db) -> APIRouter:
             resp = {
                 "pending_verification": True,
                 "message": "Account created. Please verify your email before signing in.",
-                "user": user_safe(user),
+                "user": await user_safe_with_context(db, user),
             }
             if not is_production():
                 resp["dev_verification_token"] = raw_verify
@@ -303,7 +316,7 @@ def build_router(db) -> APIRouter:
             "token": token,
             "refresh_token": refresh,
             "expires_in_seconds": JWT_EXP_HOURS * 3600,
-            "user": user_safe(user),
+            "user": await user_safe_with_context(db, user),
         }
         # Dev convenience only — never leak the raw token in production.
         if not is_production():
@@ -404,7 +417,7 @@ def build_router(db) -> APIRouter:
             resp = {
                 "pending_verification": True,
                 "message": "Account created. Please verify your email before signing in.",
-                "user": user_safe(user),
+                "user": await user_safe_with_context(db, user),
             }
             if not is_production():
                 resp["dev_verification_token"] = raw_verify
@@ -422,7 +435,7 @@ def build_router(db) -> APIRouter:
             "token": token,
             "refresh_token": refresh,
             "expires_in_seconds": JWT_EXP_HOURS * 3600,
-            "user": user_safe(user),
+            "user": await user_safe_with_context(db, user),
         }
         if not is_production():
             resp["dev_verification_token"] = raw_verify
@@ -495,7 +508,7 @@ def build_router(db) -> APIRouter:
             "token": token,
             "refresh_token": refresh,
             "expires_in_seconds": JWT_EXP_HOURS * 3600,
-            "user": user_safe(user),
+            "user": await user_safe_with_context(db, user),
         }
 
     @router.post("/auth/refresh", dependencies=[Depends(auth_rate_limiter)])
@@ -530,7 +543,7 @@ def build_router(db) -> APIRouter:
             "token": token,
             "refresh_token": new_refresh,
             "expires_in_seconds": JWT_EXP_HOURS * 3600,
-            "user": user_safe(user),
+            "user": await user_safe_with_context(db, user),
         }
 
     @router.post("/auth/logout")
@@ -561,7 +574,7 @@ def build_router(db) -> APIRouter:
         # so the frontend can render a "Facility unavailable" banner
         # for soft-disabled barns. Other fields unchanged.
         user["facility_status"] = await facility_status_for(db, user)
-        return user
+        return await user_safe_with_context(db, user)
 
     # ---------------- password reset ----------------
 

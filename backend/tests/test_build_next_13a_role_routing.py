@@ -75,6 +75,22 @@ def test_role_home_is_client_facing_and_not_setup_copy():
     forbidden = ["Barn Setup", "Admin Portal", "Billing configuration", "Facility settings"]
     for text in forbidden:
         assert text not in src
+    assert 'primary: { label: "Rider intake coming next" }' in src
+    assert 'primary: { label: "Guardian tools coming next" }' in src
+    assert 'primary: { to: "/lessons"' not in src
+    assert 'to="/lessons"' not in src
+
+
+def test_auth_payload_exposes_setup_completion_for_facility_admin_routing():
+    src = _read(ROOT / "backend" / "routes" / "auth.py")
+
+    assert "async def user_safe_with_context" in src
+    assert "db.onboarding_progress.find_one" in src
+    assert '"completed": 1' in src
+    assert 'safe["onboarding_completed"] = completed' in src
+    assert 'safe["facility_setup_complete"] = completed' in src
+    assert '"user": await user_safe_with_context(db, user)' in src
+    assert "return await user_safe_with_context(db, user)" in src
 
 
 def test_sidebar_dashboard_no_longer_points_to_marketing_root():
