@@ -111,6 +111,12 @@ def validate_config(env: Optional[Mapping[str, str]] = None) -> None:
 
 # ---------------- CORS ----------------
 
+CANONICAL_PRODUCTION_CORS_ORIGINS = (
+    "https://app.equine-sync.com",
+    "https://app.equinesync.com",
+)
+
+
 def get_cors_origins(env: Optional[Mapping[str, str]] = None) -> list[str]:
     """Resolve allowed CORS origins from ``CORS_ORIGINS`` (comma-separated).
 
@@ -126,10 +132,14 @@ def get_cors_origins(env: Optional[Mapping[str, str]] = None) -> list[str]:
                 "CORS_ORIGINS must be set to explicit origin(s) in production; "
                 "'*' is not allowed (security)."
             )
-        return [o.strip() for o in raw.split(",") if o.strip()]
+        origins = [o.strip().rstrip("/") for o in raw.split(",") if o.strip()]
+        for canonical in CANONICAL_PRODUCTION_CORS_ORIGINS:
+            if canonical not in origins:
+                origins.append(canonical)
+        return origins
     if not raw:
         return ["*"]
-    return [o.strip() for o in raw.split(",") if o.strip()]
+    return [o.strip().rstrip("/") for o in raw.split(",") if o.strip()]
 
 
 # ---------------- Rate limiting ----------------

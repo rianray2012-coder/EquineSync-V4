@@ -101,7 +101,7 @@ def test_cors_dev_defaults_to_wildcard():
 
 
 def test_cors_dev_parses_comma_list():
-    assert get_cors_origins({"CORS_ORIGINS": "https://a.com, https://b.com"}) == [
+    assert get_cors_origins({"CORS_ORIGINS": "https://a.com/, https://b.com"}) == [
         "https://a.com",
         "https://b.com",
     ]
@@ -121,7 +121,18 @@ def test_cors_production_accepts_explicit_origins():
     assert get_cors_origins({
         "APP_ENV": "production",
         "CORS_ORIGINS": "https://app.equinesync.com",
-    }) == ["https://app.equinesync.com"]
+    }) == ["https://app.equinesync.com", "https://app.equine-sync.com"]
+
+
+def test_cors_production_includes_canonical_launch_frontend():
+    assert get_cors_origins({
+        "APP_ENV": "production",
+        "CORS_ORIGINS": "https://admin.equine-sync.com/",
+    }) == [
+        "https://admin.equine-sync.com",
+        "https://app.equine-sync.com",
+        "https://app.equinesync.com",
+    ]
 
 
 def test_validate_production_rejects_wildcard_cors():
