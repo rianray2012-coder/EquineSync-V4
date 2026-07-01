@@ -3467,7 +3467,7 @@ Strictly unchanged:
   consent, billing, Stripe, Apple, DocuSign, Admin Portal, HorseOps, permission,
   launch/UAT, or provider behavior changes.
 
-## Build-Next-13D - Guardian + Minor Rider Intake Shell READY FOR CODEX REVIEW (Jun 30 2026)
+## Build-Next-13D - Guardian + Minor Rider Intake Shell ✅ LOCKED (Jul 01 2026)
 
 BN13D follows locked BN13A/BN13B/BN13C by giving `role="parent"` accounts a
 safe first-login guardian/minor rider intake shell:
@@ -3491,6 +3491,13 @@ Scope:
   and no direct links to enrollment, billing, admin, staff, or setup workflows.
 - Guardian navigation remains on role-home placeholders for unfinished product
   areas.
+
+Verdict:
+- Codex re-review found no blocking findings after the malformed text-field
+  validation fix.
+- BN13A/B/C/D focused backend tests passed at 40/40.
+- Frontend build compiled successfully.
+- `outputs/build_next_13d_guardian_minor_intake.zip` integrity passed.
 
 Strictly unchanged:
 - No lesson enrollment, scheduling engine, trainer/staff visibility, formal

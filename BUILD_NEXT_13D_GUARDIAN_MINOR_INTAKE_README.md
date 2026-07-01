@@ -1,6 +1,10 @@
 # Build-Next-13D - Guardian + Minor Rider Intake Shell
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-REVIEWED AND LOCKED
+
+Lock note: BN13D was re-reviewed clean after the malformed text-field
+validation fix. The focused BN13A/B/C/D backend suite passed at 40/40, frontend
+build compiled successfully, and the review package integrity check passed.
 
 ## Purpose
 
