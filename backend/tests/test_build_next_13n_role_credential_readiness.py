@@ -63,12 +63,29 @@ def test_bn13n_script_uses_safe_production_and_dry_run_guards():
         "--dry-run",
         "--allow-prod",
         "--reset-passwords",
+        "--email",
         "DRY-RUN: no passwords minted, none printed.",
         "APP_ENV is production. Pass --allow-prod",
         "would_mint_on_apply",
         "bn13.role_smoke_account.seeded",
     ]:
         assert phrase in src
+
+
+def test_bn13n_target_email_filter_limits_scope_to_one_account():
+    module = _load_script_module()
+    selected = module._select_roster("UAT.BARN-OWNER@EQUINE-SYNC.COM")
+    assert len(selected) == 1
+    assert selected[0]["row"] == "UAT-R2b"
+    assert selected[0]["email"] == "uat.barn-owner@equine-sync.com"
+
+    try:
+        module._select_roster("not-a-bn13-user@example.com")
+    except ValueError as exc:
+        assert "is not a BN13 role-smoke email" in str(exc)
+        assert "uat.trainer@equine-sync.com" in str(exc)
+    else:
+        raise AssertionError("unknown target email must fail closed")
 
 
 def test_bn13n_existing_user_dry_run_reset_does_not_mint_password(monkeypatch):

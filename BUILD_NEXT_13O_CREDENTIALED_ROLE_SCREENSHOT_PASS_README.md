@@ -97,6 +97,8 @@ To clear BN13O, an operator must:
 1. Run the BN13N script in the production Render shell:
    - dry-run first,
    - then apply with `--allow-prod` only after the preview is reviewed.
+   - use `--email <role-email>` with `--reset-passwords` when only one
+     password needs to be rotated.
 2. Copy any one-time passwords out of band.
 3. Log into each role through the production frontend with a clean session.
 4. Capture sanitized screenshots for every role row.

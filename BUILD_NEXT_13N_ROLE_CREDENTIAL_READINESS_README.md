@@ -49,6 +49,12 @@ To rotate existing UAT role-smoke passwords intentionally:
 python -m scripts.seed_bn13_role_smoke_accounts --allow-prod --reset-passwords
 ```
 
+To rotate one role-smoke password without touching the other accounts:
+
+```bash
+python -m scripts.seed_bn13_role_smoke_accounts --allow-prod --reset-passwords --email uat.barn-owner@equine-sync.com
+```
+
 ## Credential Safety
 
 - `--dry-run` reads only, writes nothing, and mints/prints no passwords.

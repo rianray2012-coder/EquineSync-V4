@@ -199,7 +199,28 @@ def _parse_args():
             "New one-time passwords are printed once."
         ),
     )
+    parser.add_argument(
+        "--email",
+        help=(
+            "Optional BN13 role-smoke email to process. Use with "
+            "--reset-passwords for a one-account password reset."
+        ),
+    )
     return parser.parse_args()
+
+
+def _select_roster(target_email: Optional[str]) -> List[Dict[str, Optional[str]]]:
+    if not target_email:
+        return BN13_ROLE_SMOKE_ROSTER
+    normalized = target_email.strip().lower()
+    selected = [
+        spec for spec in BN13_ROLE_SMOKE_ROSTER
+        if str(spec["email"]).lower() == normalized
+    ]
+    if not selected:
+        valid = ", ".join(str(spec["email"]) for spec in BN13_ROLE_SMOKE_ROSTER)
+        raise ValueError(f"{target_email!r} is not a BN13 role-smoke email. Valid emails: {valid}")
+    return selected
 
 
 async def _ensure_barn(db, *, dry_run: bool) -> str:
@@ -387,6 +408,13 @@ async def _main():
     print(f"APP_ENV={os.environ.get('APP_ENV') or 'development'}")
     if args.reset_passwords:
         print("reset_passwords=ON")
+    try:
+        roster = _select_roster(args.email)
+    except ValueError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        sys.exit(2)
+    if args.email:
+        print(f"target_email={str(args.email).strip().lower()}")
     print("=" * 72)
 
     barn_action = await _ensure_barn(db, dry_run=args.dry_run)
@@ -396,7 +424,7 @@ async def _main():
         await _ensure_user(
             db, spec, dry_run=args.dry_run, reset_passwords=args.reset_passwords
         )
-        for spec in BN13_ROLE_SMOKE_ROSTER
+        for spec in roster
     ]
     for item in results:
         print(
