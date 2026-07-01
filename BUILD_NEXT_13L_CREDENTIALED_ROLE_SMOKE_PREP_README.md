@@ -1,6 +1,6 @@
 # Build-Next-13L - Credentialed Role Smoke Prep
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 BN13L is a prep-only phase. It takes BN13K's blocked live role-smoke rows and
 turns them into a safe execution packet for the later credentialed browser
@@ -82,7 +82,11 @@ with ZipFile(p) as z:
 PY
 ```
 
-## Review Notes
+## Lock Notes
 
 BN13L should be approved only as a prep packet. It intentionally leaves the live
 credentialed role-flow evidence blocked for BN13M.
+
+Codex review found no blocking findings. BN13L is locked as the credentialed
+role-smoke prep packet only; browser execution, screenshots, and founder
+acceptance remain deferred to BN13M.

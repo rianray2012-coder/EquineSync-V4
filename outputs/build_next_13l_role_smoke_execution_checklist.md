@@ -1,6 +1,6 @@
 # Build-Next-13L Role Smoke Execution Checklist
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 Prepared: 2026-07-01
 
@@ -9,6 +9,9 @@ Prepared: 2026-07-01
 This checklist is the operator packet for BN13M. It defines what to verify for
 each credentialed role session. It does not contain credentials and does not
 record founder acceptance.
+
+Codex review found no blocking findings. This checklist is locked as prep-only
+execution guidance; it does not prove that credentialed role smoke has run.
 
 ## Official Environment Gate
 

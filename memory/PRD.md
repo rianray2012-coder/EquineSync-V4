@@ -3761,7 +3761,7 @@ Strictly unchanged:
   DocuSign, Admin Portal, email, notification, landing page, launch/UAT,
   provider, seeded-demo, or product facility dependency behavior changes.
 
-## Build-Next-13L - Credentialed Role Smoke Prep READY FOR CODEX REVIEW (Jul 01 2026)
+## Build-Next-13L - Credentialed Role Smoke Prep ✅ LOCKED (Jul 01 2026)
 
 BN13L prepares the credentialed role-smoke execution packet that BN13M will use:
 - `BUILD_NEXT_13L_CREDENTIALED_ROLE_SMOKE_PREP_README.md`
@@ -3778,7 +3778,8 @@ Scope:
   secrets, screenshots, sessions, or founder acceptance.
 
 Verdict:
-- BN13L is ready for Codex review.
+- Codex review found no blocking findings.
+- BN13L is locked as the credentialed role-smoke prep packet.
 - Live credentialed browser execution remains deferred to BN13M.
 
 Strictly unchanged:
