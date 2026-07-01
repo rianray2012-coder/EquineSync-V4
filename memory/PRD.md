@@ -3658,6 +3658,46 @@ Strictly unchanged:
   checkout, Stripe, Apple, DocuSign, Admin Portal, email, notification, landing
   page, launch/UAT, provider, or product facility dependency behavior changes.
 
+## Build-Next-13I - Staff Intake Shell READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13I follows locked BN13A/BN13B/BN13C/BN13D/BN13E/BN13F/BN13G/BN13H by giving
+`role="groom"` and `role="working_student"` users a safe first-login staff
+intake shell:
+- `backend/routes/staff_intake.py`
+- `backend/server.py`
+- `frontend/src/lib/roleLanding.js`
+- `frontend/src/pages/RoleHome.jsx`
+- `backend/tests/test_build_next_13a_role_routing.py`
+- `backend/tests/test_build_next_13i_staff_intake_shell.py`
+- `BUILD_NEXT_13I_STAFF_INTAKE_README.md`
+- `outputs/build_next_13i_staff_intake_shell.zip`
+
+Scope:
+- Adds staff-only `GET /api/staff-intake/profile` and
+  `PATCH /api/staff-intake/profile`.
+- Stores staff-owned intake rows in `staff_intake_profiles`, keyed to the
+  authenticated current user.
+- Allows only `groom` and `working_student` roles to read or write their own
+  staff intake row.
+- Captures safe staff setup context, including preferred contact, availability
+  notes, experience level, care-area comfort, training/support needs, emergency
+  contact preference, and notes.
+- Routes `role="groom"` and `role="working_student"` users after login to
+  `/role-home/staff`.
+- Staff home now shows completion, intake fields, and placeholder-only panels
+  for today's work, assigned horses, care checks, schedule, team notes, and
+  safety/training.
+
+Review state:
+- Awaiting Codex review.
+
+Strictly unchanged:
+- No task creation/assignment/completion/scheduling, HorseOps record creation,
+  staff permission mutation, facility membership or setup mutation, payroll,
+  billing, checkout, Stripe, Apple, DocuSign, Admin Portal, email,
+  notification, landing page, launch/UAT, provider, or product facility
+  dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the

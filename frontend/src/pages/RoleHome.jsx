@@ -72,6 +72,30 @@ const MANAGER_OPERATIONS_FOCUS = [
   ["prefer_not_to_say", "Prefer not to say"],
 ];
 
+const STAFF_EXPERIENCE_LEVELS = [
+  ["", "Select experience"],
+  ["new", "New to barn work"],
+  ["beginner", "Beginner"],
+  ["intermediate", "Intermediate"],
+  ["experienced", "Experienced"],
+  ["professional", "Professional"],
+  ["prefer_not_to_say", "Prefer not to say"],
+];
+
+const STAFF_CARE_AREAS = [
+  ["feeding", "Feeding"],
+  ["water", "Water"],
+  ["hay", "Hay"],
+  ["hay_nets", "Hay nets"],
+  ["stall_bedding", "Stall bedding"],
+  ["turnout", "Turnout"],
+  ["grooming", "Grooming"],
+  ["blanketing", "Blanketing"],
+  ["medication_support", "Medication support"],
+  ["facility_checks", "Facility checks"],
+  ["other", "Other"],
+];
+
 const GUARDIAN_CONTACT_PREFERENCES = [
   ["", "Select preference"],
   ["email", "Email"],
@@ -205,6 +229,13 @@ const PROFILES = {
     cards: [],
     primary: { label: "Manager intake" },
   },
+  staff: {
+    eyebrow: "Staff Home",
+    title: "Staff setup intent",
+    subtitle: "Capture your care comfort, availability, and training needs before task or HorseOps workflows begin.",
+    cards: [],
+    primary: { label: "Staff intake" },
+  },
   "barn-owner": {
     eyebrow: "Facility Founder",
     title: "Facility setup intent",
@@ -265,6 +296,17 @@ const emptyTrainerProfile = {
   notes: "",
 };
 
+const emptyStaffProfile = {
+  preferred_name: "",
+  preferred_contact: "",
+  availability_notes: "",
+  experience_level: "",
+  care_area_comfort: [],
+  training_support_needs: "",
+  emergency_contact_preference: "",
+  notes: "",
+};
+
 const emptyManagerProfile = {
   preferred_name: "",
   preferred_contact: "",
@@ -291,6 +333,247 @@ const emptyBarnOwnerProfile = {
   timeline: "",
   notes: "",
 };
+
+function StaffHome({ user }) {
+  const [profile, setProfile] = useState(emptyStaffProfile);
+  const [completion, setCompletion] = useState({ percent: 0, missing_fields: [] });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState("");
+
+  useEffect(() => {
+    let alive = true;
+    api
+      .get("/staff-intake/profile")
+      .then((r) => {
+        if (!alive) return;
+        setProfile({ ...emptyStaffProfile, ...r.data });
+        setCompletion(r.data?.completion || { percent: 0, missing_fields: [] });
+        setErr("");
+      })
+      .catch((e) => {
+        if (!alive) return;
+        setErr(e?.response?.data?.detail || "Could not load staff intake.");
+      })
+      .finally(() => {
+        if (alive) setLoading(false);
+      });
+    return () => { alive = false; };
+  }, []);
+
+  const setField = (field, value) => {
+    setProfile((p) => ({ ...p, [field]: value }));
+  };
+
+  const toggleCareArea = (value) => {
+    setProfile((p) => {
+      const current = p.care_area_comfort || [];
+      const care_area_comfort = current.includes(value)
+        ? current.filter((item) => item !== value)
+        : [...current, value];
+      return { ...p, care_area_comfort };
+    });
+  };
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      const payload = {
+        preferred_name: profile.preferred_name || null,
+        preferred_contact: profile.preferred_contact || null,
+        availability_notes: profile.availability_notes || null,
+        experience_level: profile.experience_level || null,
+        care_area_comfort: profile.care_area_comfort || [],
+        training_support_needs: profile.training_support_needs || null,
+        emergency_contact_preference: profile.emergency_contact_preference || null,
+        notes: profile.notes || null,
+      };
+      const { data } = await api.patch("/staff-intake/profile", payload);
+      setProfile({ ...emptyStaffProfile, ...data });
+      setCompletion(data?.completion || { percent: 0, missing_fields: [] });
+      toast.success("Staff intake saved");
+    } catch (e) {
+      toast.error(e?.response?.data?.detail || "Could not save staff intake");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto pb-20 lg:pb-8" data-testid="role-home-staff">
+      <header className="mb-8">
+        <div className="label-eyebrow mb-3">Staff Home</div>
+        <h1 className="font-display text-4xl md:text-5xl text-equine-ivory">
+          Staff setup intent{profile.preferred_name ? ` for ${profile.preferred_name}` : ""}
+        </h1>
+        <p className="mt-3 max-w-2xl text-equine-platinum/70 text-[15px] leading-relaxed">
+          Share your availability, comfort areas, and support needs before task assignment, task completion, HorseOps records, or schedules are changed.
+        </p>
+      </header>
+
+      <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] gap-5">
+        <section className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid="staff-intake-shell">
+          <div className="flex items-start justify-between gap-4 mb-5">
+            <div>
+              <div className="label-eyebrow">Profile completion</div>
+              <h2 className="font-display text-3xl text-equine-ivory mt-1">Staff intake</h2>
+            </div>
+            <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="text-equine-platinum/60 text-[13px] py-10">Loading staff intake...</div>
+          ) : err ? (
+            <div className="rounded-xl border border-equine-clay/40 bg-equine-clay/10 p-4 text-equine-clay text-[13px]">{err}</div>
+          ) : (
+            <div className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Preferred name</span>
+                  <input
+                    value={profile.preferred_name || ""}
+                    onChange={(e) => setField("preferred_name", e.target.value)}
+                    data-testid="staff-preferred-name"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="What should the barn call you?"
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Preferred contact</span>
+                  <select
+                    value={profile.preferred_contact || ""}
+                    onChange={(e) => setField("preferred_contact", e.target.value)}
+                    data-testid="staff-preferred-contact"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {GUARDIAN_CONTACT_PREFERENCES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Experience level</span>
+                <select
+                  value={profile.experience_level || ""}
+                  onChange={(e) => setField("experience_level", e.target.value)}
+                  data-testid="staff-experience-level"
+                  className="mt-2 input-luxe w-full"
+                >
+                  {STAFF_EXPERIENCE_LEVELS.map(([value, label]) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+              </label>
+
+              <div>
+                <span className="label-eyebrow">Care-area comfort</span>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {STAFF_CARE_AREAS.map(([value, label]) => {
+                    const active = (profile.care_area_comfort || []).includes(value);
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => toggleCareArea(value)}
+                        data-testid={`staff-care-area-${value}`}
+                        className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
+                          active
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Availability notes</span>
+                <textarea
+                  value={profile.availability_notes || ""}
+                  onChange={(e) => setField("availability_notes", e.target.value)}
+                  data-testid="staff-availability-notes"
+                  className="mt-2 input-luxe w-full min-h-[96px]"
+                  placeholder="Days, shifts, school constraints, or coverage windows."
+                />
+              </label>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Training or support needs</span>
+                  <textarea
+                    value={profile.training_support_needs || ""}
+                    onChange={(e) => setField("training_support_needs", e.target.value)}
+                    data-testid="staff-training-support-needs"
+                    className="mt-2 input-luxe w-full min-h-[90px]"
+                    placeholder="Where would extra guidance help?"
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Emergency contact preference</span>
+                  <textarea
+                    value={profile.emergency_contact_preference || ""}
+                    onChange={(e) => setField("emergency_contact_preference", e.target.value)}
+                    data-testid="staff-emergency-contact-preference"
+                    className="mt-2 input-luxe w-full min-h-[90px]"
+                    placeholder="Optional contact preference only. This does not create emergency workflows."
+                  />
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Notes</span>
+                <textarea
+                  value={profile.notes || ""}
+                  onChange={(e) => setField("notes", e.target.value)}
+                  data-testid="staff-notes"
+                  className="mt-2 input-luxe w-full min-h-[80px]"
+                  placeholder="Optional context. This does not create tasks, schedules, staff permissions, task completions, or HorseOps records."
+                />
+              </label>
+
+              <button
+                type="button"
+                onClick={save}
+                disabled={saving}
+                data-testid="staff-intake-save"
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                {saving ? "Saving..." : "Save staff intake"}
+              </button>
+            </div>
+          )}
+        </section>
+
+        <aside className="space-y-5">
+          {[
+            ["Today's Work", "Task assignment and completion stay in the approved task workflow.", ClipboardList],
+            ["Assigned Horses", "Horse access is not granted from this page.", Heart],
+            ["Care Checks", "HorseOps care checks are not created until the approved care workflow is used.", ShieldCheck],
+            ["Schedule", "Shift or lesson scheduling is not changed by this intake.", CalendarDays],
+            ["Team Notes", "Team communication remains in the approved message workflow.", MessageSquare],
+            ["Safety / Training", "Training and safety needs captured here are setup context only.", FileText],
+          ].map(([title, body, Icon]) => (
+            <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`staff-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+              <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
+              </div>
+              <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
+            </section>
+          ))}
+        </aside>
+      </div>
+    </div>
+  );
+}
 
 function ManagerHome({ user }) {
   const [profile, setProfile] = useState(emptyManagerProfile);
@@ -1907,6 +2190,7 @@ export default function RoleHome() {
   if (profile === "barn-owner") return <BarnOwnerHome user={user} />;
   if (profile === "trainer") return <TrainerHome user={user} />;
   if (profile === "manager") return <ManagerHome user={user} />;
+  if (profile === "staff") return <StaffHome user={user} />;
 
   return (
     <div

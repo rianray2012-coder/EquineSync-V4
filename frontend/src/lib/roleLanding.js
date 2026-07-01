@@ -7,7 +7,7 @@ export const ROLE_HOME_PATHS = {
   barnOwner: "/role-home/barn-owner",
   trainer: "/role-home/trainer",
   manager: "/role-home/manager",
-  staff: "/today",
+  staff: "/role-home/staff",
   facilityAdmin: "/dashboard",
   platformAdmin: "/admin/portal/dashboard",
 };
