@@ -1,6 +1,11 @@
 # Build-Next-13F - Barn Owner Intake Shell
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-REVIEWED AND LOCKED
+
+Lock note: BN13F was reviewed clean. The focused BN13A/B/C/D/E/F backend suite
+passed at 59/59, the frontend build compiled successfully, the barn-owner
+intake routes registered correctly, and the review package integrity check
+passed.
 
 ## Purpose
 

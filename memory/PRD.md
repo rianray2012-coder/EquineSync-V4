@@ -3543,7 +3543,7 @@ Strictly unchanged:
   Stripe, Apple, Admin Portal, email, notification, landing page, launch/UAT,
   provider, or product facility dependency behavior changes.
 
-## Build-Next-13F - Barn Owner Intake Shell READY FOR CODEX REVIEW (Jul 01 2026)
+## Build-Next-13F - Barn Owner Intake Shell ✅ LOCKED (Jul 01 2026)
 
 BN13F follows locked BN13A/BN13B/BN13C/BN13D/BN13E by giving
 `role="barn_owner"` users a safe first-login facility-founder intake shell:
@@ -3568,11 +3568,11 @@ Scope:
   panels for facility setup, staff/roles, horses, documents, and support.
 
 Verdict:
-- Ready for Codex review.
-- BN13A/B/C/D/E/F focused backend tests are expected to pass together.
-- Frontend build must compile before lock.
-- `outputs/build_next_13f_barn_owner_intake_shell.zip` must pass integrity
-  before lock.
+- Codex review found no blocking findings.
+- BN13A/B/C/D/E/F focused backend tests passed at 59/59.
+- Frontend build compiled successfully.
+- Barn-owner intake routes registered correctly.
+- `outputs/build_next_13f_barn_owner_intake_shell.zip` integrity passed.
 
 Strictly unchanged:
 - No facility creation, facility membership creation/approval, onboarding
