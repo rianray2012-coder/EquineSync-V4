@@ -3505,6 +3505,37 @@ Strictly unchanged:
   Stripe, Apple, Admin Portal, HorseOps, email, notification, landing page,
   launch/UAT, provider, or facility-product dependency behavior changes.
 
+## Build-Next-13E - Owner Intake Shell READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13E follows locked BN13A/BN13B/BN13C/BN13D by giving `role="horse_owner"`
+users a safe first-login owner intake shell:
+- `backend/routes/owner_intake.py`
+- `backend/server.py`
+- `frontend/src/pages/RoleHome.jsx`
+- `backend/tests/test_build_next_13e_owner_intake_shell.py`
+- `BUILD_NEXT_13E_OWNER_INTAKE_README.md`
+- `outputs/build_next_13e_owner_intake_shell.zip`
+
+Scope:
+- Adds horse-owner-only `GET /api/owner-intake/profile` and
+  `PATCH /api/owner-intake/profile`.
+- Stores owner-owned intake rows in `owner_intake_profiles`, keyed to the
+  authenticated current user.
+- Captures safe owner intake context, including preferred contact, owner path,
+  primary horse name, intended horse count, care goals, and facility search
+  notes.
+- Owner home now shows completion, intake fields, a safe facility-connection
+  placeholder for unattached owners, and the existing `/owner-portal` entry
+  point only for facility-linked owners.
+- Individual-owner navigation remains on role-home placeholders for unfinished
+  product areas.
+
+Strictly unchanged:
+- No facility membership creation/approval, horse CRUD replacement, HorseOps
+  owner projection changes, owner request workflow expansion, billing, checkout,
+  Stripe, Apple, Admin Portal, email, notification, landing page, launch/UAT,
+  provider, or product facility dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the

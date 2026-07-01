@@ -88,6 +88,7 @@ from routes.student_guardians import build_router as build_student_guardians_rou
 from routes.document_signatures import build_router as build_document_signatures_router
 from routes.rider_profile import build_router as build_rider_profile_router
 from routes.guardian_intake import build_router as build_guardian_intake_router
+from routes.owner_intake import build_router as build_owner_intake_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -161,6 +162,15 @@ api_router.include_router(build_rider_profile_router(
 # facility product dependency: guardian accounts may complete first-login
 # intake before the minor rider is connected to an active facility.
 api_router.include_router(build_guardian_intake_router(
+    db=db,
+    get_current_user=get_current_user,
+))
+
+# Build-Next-13E — owner first-login intake shell.
+# Authenticated and horse_owner-role scoped, but intentionally not attached to
+# the facility product dependency: individual owner accounts may exist before
+# joining an active facility or creating their first horse setup.
+api_router.include_router(build_owner_intake_router(
     db=db,
     get_current_user=get_current_user,
 ))

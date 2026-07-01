@@ -54,6 +54,22 @@ const MINOR_AGE_RANGES = [
   ["prefer_not_to_say", "Prefer not to say"],
 ];
 
+const OWNER_TYPES = [
+  ["", "Select owner path"],
+  ["facility_linked", "My horse is at a facility"],
+  ["individual_owner", "I manage my own horse"],
+  ["exploring_facility", "I am looking for a facility"],
+  ["prefer_not_to_say", "Prefer not to say"],
+];
+
+const HORSE_COUNT_INTENTS = [
+  ["", "Select horse count"],
+  ["one", "1 horse"],
+  ["two_to_five", "2-5 horses"],
+  ["six_plus", "6+ horses"],
+  ["unknown", "Not sure yet"],
+];
+
 const PROFILES = {
   rider: {
     eyebrow: "Rider Home",
@@ -115,6 +131,272 @@ const emptyGuardianProfile = {
   medical_allergy_notes: "",
   consent_status: "pending_formal_consent",
 };
+
+const emptyOwnerProfile = {
+  preferred_name: "",
+  preferred_contact: "",
+  owner_type: "",
+  primary_horse_name: "",
+  horse_count_intent: "",
+  riding_or_care_goals: "",
+  facility_search_name: "",
+  facility_city_state: "",
+  notes: "",
+};
+
+function OwnerHome({ user }) {
+  const [profile, setProfile] = useState(emptyOwnerProfile);
+  const [completion, setCompletion] = useState({ percent: 0, missing_fields: [] });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState("");
+
+  const facilityLinked = Boolean(user?.barn_id || user?.facility_id);
+
+  useEffect(() => {
+    let alive = true;
+    api
+      .get("/owner-intake/profile")
+      .then((r) => {
+        if (!alive) return;
+        setProfile({ ...emptyOwnerProfile, ...r.data });
+        setCompletion(r.data?.completion || { percent: 0, missing_fields: [] });
+        setErr("");
+      })
+      .catch((e) => {
+        if (!alive) return;
+        setErr(e?.response?.data?.detail || "Could not load owner intake.");
+      })
+      .finally(() => {
+        if (alive) setLoading(false);
+      });
+    return () => { alive = false; };
+  }, []);
+
+  const setField = (field, value) => {
+    setProfile((p) => ({ ...p, [field]: value }));
+  };
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      const payload = {
+        preferred_name: profile.preferred_name || null,
+        preferred_contact: profile.preferred_contact || null,
+        owner_type: profile.owner_type || null,
+        primary_horse_name: profile.primary_horse_name || null,
+        horse_count_intent: profile.horse_count_intent || null,
+        riding_or_care_goals: profile.riding_or_care_goals || null,
+        facility_search_name: profile.facility_search_name || null,
+        facility_city_state: profile.facility_city_state || null,
+        notes: profile.notes || null,
+      };
+      const { data } = await api.patch("/owner-intake/profile", payload);
+      setProfile({ ...emptyOwnerProfile, ...data });
+      setCompletion(data?.completion || { percent: 0, missing_fields: [] });
+      toast.success("Owner intake saved");
+    } catch (e) {
+      toast.error(e?.response?.data?.detail || "Could not save owner intake");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto pb-20 lg:pb-8" data-testid="role-home-owner">
+      <header className="mb-8">
+        <div className="label-eyebrow mb-3">Owner Home</div>
+        <h1 className="font-display text-4xl md:text-5xl text-equine-ivory">
+          Horse owner setup{profile.primary_horse_name ? ` for ${profile.primary_horse_name}` : ""}
+        </h1>
+        <p className="mt-3 max-w-2xl text-equine-platinum/70 text-[15px] leading-relaxed">
+          Start with your horse, your care goals, and your facility connection. Billing, memberships, and care visibility stay in their approved workflows.
+        </p>
+      </header>
+
+      <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] gap-5">
+        <section className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid="owner-intake-shell">
+          <div className="flex items-start justify-between gap-4 mb-5">
+            <div>
+              <div className="label-eyebrow">Profile completion</div>
+              <h2 className="font-display text-3xl text-equine-ivory mt-1">Owner intake</h2>
+            </div>
+            <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="text-equine-platinum/60 text-[13px] py-10">Loading owner intake...</div>
+          ) : err ? (
+            <div className="rounded-xl border border-equine-clay/40 bg-equine-clay/10 p-4 text-equine-clay text-[13px]">{err}</div>
+          ) : (
+            <div className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Preferred name</span>
+                  <input
+                    value={profile.preferred_name || ""}
+                    onChange={(e) => setField("preferred_name", e.target.value)}
+                    data-testid="owner-preferred-name"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="What should your barn call you?"
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Preferred contact</span>
+                  <select
+                    value={profile.preferred_contact || ""}
+                    onChange={(e) => setField("preferred_contact", e.target.value)}
+                    data-testid="owner-preferred-contact"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {GUARDIAN_CONTACT_PREFERENCES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Owner path</span>
+                  <select
+                    value={profile.owner_type || ""}
+                    onChange={(e) => setField("owner_type", e.target.value)}
+                    data-testid="owner-type"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {OWNER_TYPES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Horse count</span>
+                  <select
+                    value={profile.horse_count_intent || ""}
+                    onChange={(e) => setField("horse_count_intent", e.target.value)}
+                    data-testid="owner-horse-count-intent"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {HORSE_COUNT_INTENTS.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Primary horse</span>
+                  <input
+                    value={profile.primary_horse_name || ""}
+                    onChange={(e) => setField("primary_horse_name", e.target.value)}
+                    data-testid="owner-primary-horse-name"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="Horse name"
+                  />
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Riding or care goals</span>
+                <textarea
+                  value={profile.riding_or_care_goals || ""}
+                  onChange={(e) => setField("riding_or_care_goals", e.target.value)}
+                  data-testid="owner-care-goals"
+                  className="mt-2 input-luxe w-full min-h-[90px]"
+                  placeholder="What would make Equine Sync useful for you and your horse?"
+                />
+              </label>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Facility search</span>
+                  <input
+                    value={profile.facility_search_name || ""}
+                    onChange={(e) => setField("facility_search_name", e.target.value)}
+                    data-testid="owner-facility-search-name"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="Facility name, if known"
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Facility location</span>
+                  <input
+                    value={profile.facility_city_state || ""}
+                    onChange={(e) => setField("facility_city_state", e.target.value)}
+                    data-testid="owner-facility-city-state"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="City, state"
+                  />
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Notes</span>
+                <textarea
+                  value={profile.notes || ""}
+                  onChange={(e) => setField("notes", e.target.value)}
+                  data-testid="owner-intake-notes"
+                  className="mt-2 input-luxe w-full min-h-[80px]"
+                  placeholder="Optional context. This does not create a facility membership or horse record."
+                />
+              </label>
+
+              <button
+                type="button"
+                onClick={save}
+                disabled={saving}
+                data-testid="owner-intake-save"
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                {saving ? "Saving..." : "Save owner intake"}
+              </button>
+            </div>
+          )}
+        </section>
+
+        <aside className="space-y-5">
+          <section className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid="owner-panel-my-horse">
+            <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
+              <Heart className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
+            </div>
+            <h2 className="font-display text-2xl text-equine-ivory">My Horse</h2>
+            <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">
+              {profile.primary_horse_name || "Add your primary horse name to personalize this space."}
+            </p>
+            {facilityLinked ? (
+              <Link to="/owner-portal" className="btn-secondary mt-4 inline-flex items-center gap-2" data-testid="owner-open-owner-portal">
+                <Cat className="w-4 h-4" />
+                Open owner portal
+              </Link>
+            ) : (
+              <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-[12.5px] text-equine-platinum/65" data-testid="owner-facility-pending">
+                Facility connection is pending. Setup can continue without an active facility.
+              </div>
+            )}
+          </section>
+
+          {[
+            ["Facility Connection", profile.facility_search_name || "Search and facility lead capture stay placeholder-only in this phase.", ShieldCheck],
+            ["Daily Care", "Coming soon: approved owner-visible care status without staff notes or internal payloads.", Heart],
+            ["Requests", "Coming soon: owner requests stay in the existing approved workflow.", ClipboardList],
+            ["Documents", "Coming soon: policies and signed forms without creating new signature flows.", FileText],
+            ["Messages", "Use Messages for approved conversations.", MessageSquare],
+          ].map(([title, body, Icon]) => (
+            <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`owner-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+              <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
+              </div>
+              <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
+            </section>
+          ))}
+        </aside>
+      </div>
+    </div>
+  );
+}
 
 function RiderHome({ user }) {
   const [profile, setProfile] = useState(emptyRiderProfile);
@@ -647,6 +929,7 @@ export default function RoleHome() {
   if (!config) return <Navigate to={resolvePostLoginPath(user)} replace />;
   if (profile === "rider") return <RiderHome user={user} />;
   if (profile === "guardian") return <GuardianHome user={user} />;
+  if (profile === "owner") return <OwnerHome user={user} />;
 
   return (
     <div
