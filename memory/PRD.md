@@ -3789,7 +3789,7 @@ Strictly unchanged:
   launch/UAT, provider, seeded-demo, UAT-account mutation, or product facility
   dependency behavior changes.
 
-## Build-Next-13M - Credentialed Role Smoke Evidence READY FOR CODEX REVIEW (Jul 01 2026)
+## Build-Next-13M - Credentialed Role Smoke Evidence ✅ LOCKED (Jul 01 2026)
 
 BN13M attempted the credentialed role-smoke evidence run using the locked BN13L
 checklist:
@@ -3806,7 +3806,8 @@ Scope:
 - Captures no screenshots and records no founder acceptance.
 
 Verdict:
-- BN13M is ready for Codex review as a blocked evidence run.
+- Codex review found no blocking findings.
+- BN13M is locked as a blocked evidence run.
 - Official environment reachability is confirmed.
 - Credentialed role-smoke execution remains blocked pending safe role
   credentials/sessions and sanitized screenshots.

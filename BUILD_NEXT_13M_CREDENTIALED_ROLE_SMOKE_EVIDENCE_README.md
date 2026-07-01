@@ -1,6 +1,6 @@
 # Build-Next-13M - Credentialed Role Smoke Evidence
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 BN13M is the credentialed browser-evidence phase that follows the locked BN13L
 execution checklist. This run records the official environment reachability
@@ -93,3 +93,9 @@ PY
 To turn BN13M into a passing credentialed role-smoke phase, rerun the role rows
 with safe role credentials or authenticated sessions supplied out of band, then
 capture sanitized screenshots for every role row.
+
+## Lock Notes
+
+Codex review found no blocking findings. BN13M is locked as a blocked evidence
+run: environment reachability is proven, but credentialed role smoke remains
+open until safe role sessions and screenshots are captured in the next phase.

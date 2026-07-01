@@ -1,6 +1,6 @@
 # Build-Next-13M Credentialed Role Smoke Report
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 Generated: 2026-07-01
 
@@ -11,6 +11,9 @@ this run, the official frontend and API are reachable, but credentialed role
 sessions are unavailable, so every role login row remains blocked.
 
 Founder acceptance: not recorded.
+
+Codex review found no blocking findings. This report is locked as a blocked
+evidence run, not as credentialed role-smoke completion.
 
 ## Environment Evidence
 
