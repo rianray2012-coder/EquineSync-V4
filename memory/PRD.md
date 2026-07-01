@@ -3580,6 +3580,45 @@ Strictly unchanged:
   Stripe, Apple, DocuSign, Admin Portal, email, notification, landing page,
   launch/UAT, provider, or product facility dependency behavior changes.
 
+## Build-Next-13G - Trainer Intake Shell READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13G follows locked BN13A/BN13B/BN13C/BN13D/BN13E/BN13F by giving
+`role="trainer"` users a safe first-login trainer intake shell:
+- `backend/routes/trainer_intake.py`
+- `backend/server.py`
+- `frontend/src/lib/roleLanding.js`
+- `frontend/src/pages/RoleHome.jsx`
+- `backend/tests/test_build_next_13g_trainer_intake_shell.py`
+- `BUILD_NEXT_13G_TRAINER_INTAKE_README.md`
+- `outputs/build_next_13g_trainer_intake_shell.zip`
+
+Scope:
+- Adds trainer-only `GET /api/trainer-intake/profile` and
+  `PATCH /api/trainer-intake/profile`.
+- Stores trainer-owned intake rows in `trainer_intake_profiles`, keyed to the
+  authenticated current user.
+- Captures safe trainer setup context, including preferred contact,
+  disciplines, program focus, rider levels supported, availability notes,
+  certification/insurance notes, facility connection notes, goals, and notes.
+- Routes `role="trainer"` users after login to `/role-home/trainer`.
+- Trainer home now shows completion, intake fields, and placeholder-only panels
+  for schedule, assigned horses, lesson students, training notes, documents,
+  and messages.
+
+Verdict:
+- Ready for Codex review.
+- BN13A/B/C/D/E/F/G focused backend tests are expected to pass together.
+- Frontend build must compile before lock.
+- `outputs/build_next_13g_trainer_intake_shell.zip` must pass integrity before
+  lock.
+
+Strictly unchanged:
+- No lesson creation/scheduling, rider/student enrollment, horse assignment,
+  staff permission mutation, facility membership creation/approval, HorseOps
+  changes, billing, checkout, Stripe, Apple, DocuSign, Admin Portal, email,
+  notification, landing page, launch/UAT, provider, or product facility
+  dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the

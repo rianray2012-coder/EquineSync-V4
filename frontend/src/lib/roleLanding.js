@@ -5,6 +5,7 @@ export const ROLE_HOME_PATHS = {
   guardian: "/role-home/guardian",
   owner: "/role-home/owner",
   barnOwner: "/role-home/barn-owner",
+  trainer: "/role-home/trainer",
   staff: "/today",
   manager: "/today",
   facilityAdmin: "/dashboard",
@@ -42,7 +43,8 @@ export const resolvePostLoginPath = (user) => {
     return ROLE_HOME_PATHS.facilityAdmin;
   }
 
-  if (role === "barn_manager" || role === "trainer") return ROLE_HOME_PATHS.manager;
+  if (role === "trainer") return ROLE_HOME_PATHS.trainer;
+  if (role === "barn_manager") return ROLE_HOME_PATHS.manager;
   if (role === "groom" || role === "working_student") return ROLE_HOME_PATHS.staff;
   if (role === "horse_owner") return ownerHorsePath(user);
   if (role === "parent") return ROLE_HOME_PATHS.guardian;

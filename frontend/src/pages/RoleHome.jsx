@@ -36,6 +36,29 @@ const RIDER_DISCIPLINES = [
   "Not sure yet",
 ];
 
+const TRAINER_PROGRAM_FOCUS = [
+  ["", "Select program focus"],
+  ["lessons", "Lessons"],
+  ["training", "Training"],
+  ["show_program", "Show program"],
+  ["young_horses", "Young horses"],
+  ["rehab", "Rehab"],
+  ["sales", "Sales"],
+  ["mixed", "Mixed"],
+  ["other", "Other"],
+  ["prefer_not_to_say", "Prefer not to say"],
+];
+
+const TRAINER_RIDER_LEVELS = [
+  ["new", "New riders"],
+  ["beginner", "Beginner"],
+  ["intermediate", "Intermediate"],
+  ["advanced", "Advanced"],
+  ["professional", "Professional"],
+  ["mixed", "Mixed levels"],
+  ["prefer_not_to_say", "Prefer not to say"],
+];
+
 const GUARDIAN_CONTACT_PREFERENCES = [
   ["", "Select preference"],
   ["email", "Email"],
@@ -155,6 +178,13 @@ const PROFILES = {
     ],
     primary: { to: "/owner-portal", label: "Open owner portal" },
   },
+  trainer: {
+    eyebrow: "Trainer Home",
+    title: "Trainer setup intent",
+    subtitle: "Capture your training focus before lessons, assignments, students, or facility workflows begin.",
+    cards: [],
+    primary: { label: "Trainer intake" },
+  },
   "barn-owner": {
     eyebrow: "Facility Founder",
     title: "Facility setup intent",
@@ -202,6 +232,19 @@ const emptyOwnerProfile = {
   notes: "",
 };
 
+const emptyTrainerProfile = {
+  preferred_name: "",
+  preferred_contact: "",
+  disciplines: [],
+  program_focus: "",
+  rider_levels_supported: [],
+  availability_notes: "",
+  certification_insurance_notes: "",
+  facility_connection_notes: "",
+  goals: "",
+  notes: "",
+};
+
 const emptyBarnOwnerProfile = {
   preferred_name: "",
   preferred_contact: "",
@@ -215,6 +258,284 @@ const emptyBarnOwnerProfile = {
   timeline: "",
   notes: "",
 };
+
+function TrainerHome({ user }) {
+  const [profile, setProfile] = useState(emptyTrainerProfile);
+  const [completion, setCompletion] = useState({ percent: 0, missing_fields: [] });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState("");
+
+  useEffect(() => {
+    let alive = true;
+    api
+      .get("/trainer-intake/profile")
+      .then((r) => {
+        if (!alive) return;
+        setProfile({ ...emptyTrainerProfile, ...r.data });
+        setCompletion(r.data?.completion || { percent: 0, missing_fields: [] });
+        setErr("");
+      })
+      .catch((e) => {
+        if (!alive) return;
+        setErr(e?.response?.data?.detail || "Could not load trainer intake.");
+      })
+      .finally(() => {
+        if (alive) setLoading(false);
+      });
+    return () => { alive = false; };
+  }, []);
+
+  const setField = (field, value) => {
+    setProfile((p) => ({ ...p, [field]: value }));
+  };
+
+  const toggleListValue = (field, name) => {
+    setProfile((p) => {
+      const current = p[field] || [];
+      const next = current.includes(name)
+        ? current.filter((item) => item !== name)
+        : [...current, name];
+      return { ...p, [field]: next };
+    });
+  };
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      const payload = {
+        preferred_name: profile.preferred_name || null,
+        preferred_contact: profile.preferred_contact || null,
+        disciplines: profile.disciplines || [],
+        program_focus: profile.program_focus || null,
+        rider_levels_supported: profile.rider_levels_supported || [],
+        availability_notes: profile.availability_notes || null,
+        certification_insurance_notes: profile.certification_insurance_notes || null,
+        facility_connection_notes: profile.facility_connection_notes || null,
+        goals: profile.goals || null,
+        notes: profile.notes || null,
+      };
+      const { data } = await api.patch("/trainer-intake/profile", payload);
+      setProfile({ ...emptyTrainerProfile, ...data });
+      setCompletion(data?.completion || { percent: 0, missing_fields: [] });
+      toast.success("Trainer intake saved");
+    } catch (e) {
+      toast.error(e?.response?.data?.detail || "Could not save trainer intake");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto pb-20 lg:pb-8" data-testid="role-home-trainer">
+      <header className="mb-8">
+        <div className="label-eyebrow mb-3">Trainer Home</div>
+        <h1 className="font-display text-4xl md:text-5xl text-equine-ivory">
+          Trainer setup intent{profile.preferred_name ? ` for ${profile.preferred_name}` : ""}
+        </h1>
+        <p className="mt-3 max-w-2xl text-equine-platinum/70 text-[15px] leading-relaxed">
+          Share your training focus and availability before the barn connects lessons, students, horses, or facility assignments.
+        </p>
+      </header>
+
+      <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] gap-5">
+        <section className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid="trainer-intake-shell">
+          <div className="flex items-start justify-between gap-4 mb-5">
+            <div>
+              <div className="label-eyebrow">Profile completion</div>
+              <h2 className="font-display text-3xl text-equine-ivory mt-1">Trainer intake</h2>
+            </div>
+            <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="text-equine-platinum/60 text-[13px] py-10">Loading trainer intake...</div>
+          ) : err ? (
+            <div className="rounded-xl border border-equine-clay/40 bg-equine-clay/10 p-4 text-equine-clay text-[13px]">{err}</div>
+          ) : (
+            <div className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Preferred name</span>
+                  <input
+                    value={profile.preferred_name || ""}
+                    onChange={(e) => setField("preferred_name", e.target.value)}
+                    data-testid="trainer-preferred-name"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="What should riders call you?"
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Preferred contact</span>
+                  <select
+                    value={profile.preferred_contact || ""}
+                    onChange={(e) => setField("preferred_contact", e.target.value)}
+                    data-testid="trainer-preferred-contact"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {GUARDIAN_CONTACT_PREFERENCES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Program focus</span>
+                <select
+                  value={profile.program_focus || ""}
+                  onChange={(e) => setField("program_focus", e.target.value)}
+                  data-testid="trainer-program-focus"
+                  className="mt-2 input-luxe w-full"
+                >
+                  {TRAINER_PROGRAM_FOCUS.map(([value, label]) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+              </label>
+
+              <div>
+                <span className="label-eyebrow">Disciplines</span>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {RIDER_DISCIPLINES.filter((name) => name !== "Not sure yet").map((name) => {
+                    const active = (profile.disciplines || []).includes(name);
+                    return (
+                      <button
+                        key={name}
+                        type="button"
+                        onClick={() => toggleListValue("disciplines", name)}
+                        data-testid={`trainer-discipline-${name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
+                        className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
+                          active
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
+                        }`}
+                      >
+                        {name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <span className="label-eyebrow">Rider levels supported</span>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {TRAINER_RIDER_LEVELS.map(([value, label]) => {
+                    const active = (profile.rider_levels_supported || []).includes(value);
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => toggleListValue("rider_levels_supported", value)}
+                        data-testid={`trainer-rider-level-${value}`}
+                        className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
+                          active
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Goals</span>
+                <textarea
+                  value={profile.goals || ""}
+                  onChange={(e) => setField("goals", e.target.value)}
+                  data-testid="trainer-goals"
+                  className="mt-2 input-luxe w-full min-h-[96px]"
+                  placeholder="What should Equine Sync help your program organize first?"
+                />
+              </label>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Availability notes</span>
+                  <textarea
+                    value={profile.availability_notes || ""}
+                    onChange={(e) => setField("availability_notes", e.target.value)}
+                    data-testid="trainer-availability-notes"
+                    className="mt-2 input-luxe w-full min-h-[90px]"
+                    placeholder="Days, lesson blocks, travel days, or constraints."
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Facility connection</span>
+                  <textarea
+                    value={profile.facility_connection_notes || ""}
+                    onChange={(e) => setField("facility_connection_notes", e.target.value)}
+                    data-testid="trainer-facility-connection-notes"
+                    className="mt-2 input-luxe w-full min-h-[90px]"
+                    placeholder="Barn or program context, if known."
+                  />
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Certification or insurance notes</span>
+                <textarea
+                  value={profile.certification_insurance_notes || ""}
+                  onChange={(e) => setField("certification_insurance_notes", e.target.value)}
+                  data-testid="trainer-certification-insurance-notes"
+                  className="mt-2 input-luxe w-full min-h-[80px]"
+                  placeholder="Optional context only. This does not upload documents or verify credentials."
+                />
+              </label>
+
+              <label className="block">
+                <span className="label-eyebrow">Notes</span>
+                <textarea
+                  value={profile.notes || ""}
+                  onChange={(e) => setField("notes", e.target.value)}
+                  data-testid="trainer-notes"
+                  className="mt-2 input-luxe w-full min-h-[80px]"
+                  placeholder="Optional context. This does not create lessons, students, or horse assignments."
+                />
+              </label>
+
+              <button
+                type="button"
+                onClick={save}
+                disabled={saving}
+                data-testid="trainer-intake-save"
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                {saving ? "Saving..." : "Save trainer intake"}
+              </button>
+            </div>
+          )}
+        </section>
+
+        <aside className="space-y-5">
+          {[
+            ["Schedule", "Lesson blocks and availability remain separate from this intake.", CalendarDays],
+            ["Assigned Horses", "Horse assignments are not created from this page.", Heart],
+            ["Lesson Students", "Student enrollment stays in the approved program workflow.", Cat],
+            ["Training Notes", "Training records are not created until a horse or program is connected.", ClipboardList],
+            ["Documents", "Credentials, waivers, and signature envelopes stay in approved document workflows.", FileText],
+            ["Messages", "Use Messages or support channels for setup questions.", MessageSquare],
+          ].map(([title, body, Icon]) => (
+            <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`trainer-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+              <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
+              </div>
+              <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
+            </section>
+          ))}
+        </aside>
+      </div>
+    </div>
+  );
+}
 
 function BarnOwnerHome({ user }) {
   const [profile, setProfile] = useState(emptyBarnOwnerProfile);
@@ -1288,6 +1609,7 @@ export default function RoleHome() {
   if (profile === "guardian") return <GuardianHome user={user} />;
   if (profile === "owner") return <OwnerHome user={user} />;
   if (profile === "barn-owner") return <BarnOwnerHome user={user} />;
+  if (profile === "trainer") return <TrainerHome user={user} />;
 
   return (
     <div

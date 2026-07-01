@@ -90,6 +90,7 @@ from routes.rider_profile import build_router as build_rider_profile_router
 from routes.guardian_intake import build_router as build_guardian_intake_router
 from routes.owner_intake import build_router as build_owner_intake_router
 from routes.barn_owner_intake import build_router as build_barn_owner_intake_router
+from routes.trainer_intake import build_router as build_trainer_intake_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -181,6 +182,15 @@ api_router.include_router(build_owner_intake_router(
 # the facility product dependency: facility founders may capture setup intent
 # before creating or joining an active facility.
 api_router.include_router(build_barn_owner_intake_router(
+    db=db,
+    get_current_user=get_current_user,
+))
+
+# Build-Next-13G — trainer first-login intake shell.
+# Authenticated and trainer-role scoped, but intentionally not attached to the
+# facility product dependency: marketplace trainer accounts may capture setup
+# intent before assignments, lessons, or active facility membership are ready.
+api_router.include_router(build_trainer_intake_router(
     db=db,
     get_current_user=get_current_user,
 ))
