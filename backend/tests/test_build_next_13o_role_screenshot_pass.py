@@ -1,11 +1,12 @@
 """Build-Next-13O credentialed role screenshot-pass checks.
 
-This BN13O run records official reachability and honestly blocks the
-credentialed screenshot rows because the production script/session credentials
-were not available to this run.
+The binary screenshot evidence is packaged in the local BN13O zip. The committed
+test validates the report inventory and, when the local screenshot folder is
+present, also validates the image signatures and dimensions.
 """
 from __future__ import annotations
 
+import struct
 from pathlib import Path
 
 
@@ -14,23 +15,37 @@ README = ROOT / "BUILD_NEXT_13O_CREDENTIALED_ROLE_SCREENSHOT_PASS_README.md"
 REPORT = ROOT / "outputs" / "build_next_13o_role_smoke_report.md"
 SCREENSHOT_DIR = ROOT / "outputs" / "build_next_13o_role_smoke_screenshots"
 
+EXPECTED_SCREENSHOTS = [
+    "uat-r1-platform-admin.png",
+    "uat-r2a-facility-admin.png",
+    "uat-r2b-barn-owner.png",
+    "bn13m-t1-trainer.png",
+    "uat-r3-barn-manager.png",
+    "uat-r4a-groom.png",
+    "bn13m-w1-working-student.png",
+    "uat-r5-horse-owner.png",
+    "uat-r6-guardian-parent.png",
+    "uat-r7-rider.png",
+    "uat-r8-individual-owner.png",
+]
+
 
 def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def test_bn13o_artifacts_exist_and_state_blocked_screenshot_status():
+def test_bn13o_artifacts_exist_and_state_captured_screenshot_status():
     for path in [README, REPORT]:
         assert path.exists(), str(path)
         assert path.stat().st_size > 1000, str(path)
 
     text = _read(README) + "\n" + _read(REPORT)
     for phrase in [
-        "Credentialed role login rows: BLOCKED",
-        "Screenshots: not captured",
+        "Credentialed role screenshot rows: PASS / PASS_WITH_RESIDUAL",
+        "Screenshots: 11/11 captured",
         "No product behavior changes",
-        "No BN13N script execution was performed by this package",
-        "BN13N script execution and safe credential/session unavailable",
+        "Screenshot files were copied into the package evidence folder",
+        "Not Found` residual",
     ]:
         assert phrase in text
 
@@ -50,7 +65,7 @@ def test_bn13o_environment_reachability_is_recorded_without_secrets():
         assert phrase in text
 
 
-def test_bn13o_all_role_rows_are_present_and_blocked():
+def test_bn13o_all_role_rows_are_present_and_screenshotted():
     text = _read(REPORT)
     rows = [
         "UAT-R1",
@@ -69,16 +84,29 @@ def test_bn13o_all_role_rows_are_present_and_blocked():
         assert row in text
 
     role_table = text.split("## Role Screenshot Results", 1)[1].split("## Screenshot Inventory", 1)[0]
-    assert role_table.count("| BLOCKED | not captured |") == len(rows)
-    assert "| PASS |" not in role_table
+    assert role_table.count("| PASS |") == 6
+    assert role_table.count("| PASS_WITH_RESIDUAL |") == 5
+    assert "| BLOCKED |" not in role_table
     assert "| FAIL |" not in role_table
 
 
-def test_bn13o_does_not_include_or_claim_screenshot_files():
+def test_bn13o_screenshot_inventory_is_complete_and_local_files_validate_when_present():
     text = _read(REPORT)
-    assert "No screenshot files were created" in text
-    assert "Expected future folder" in text
-    assert not SCREENSHOT_DIR.exists()
+    assert "All screenshot files are PNGs" in text
+    for name in EXPECTED_SCREENSHOTS:
+        assert f"`{name}`" in text
+
+    if not SCREENSHOT_DIR.exists():
+        return
+    actual = sorted(p.name for p in SCREENSHOT_DIR.glob("*.png"))
+    assert actual == sorted(EXPECTED_SCREENSHOTS)
+
+    for name in EXPECTED_SCREENSHOTS:
+        data = (SCREENSHOT_DIR / name).read_bytes()
+        assert data.startswith(b"\x89PNG\r\n\x1a\n"), name
+        width, height = struct.unpack(">II", data[16:24])
+        assert width >= 1000, name
+        assert height >= 800, name
 
 
 def test_bn13o_secret_safety_terms_are_absent_as_values():
@@ -102,10 +130,10 @@ def test_bn13o_secret_safety_terms_are_absent_as_values():
 def test_bn13o_records_followup_requirements_before_acceptance():
     text = _read(REPORT)
     for phrase in [
-        "Run the BN13N script in the production Render shell",
-        "Review the dry-run output before applying",
-        "Copy any one-time passwords out of band",
-        "Capture sanitized screenshots for every role row",
+        "Review the 11 screenshots",
+        "Decide whether the `Not Found` intake-panel residual blocks acceptance",
+        "Confirm no screenshot exposes passwords",
+        "Record founder acceptance separately",
     ]:
         assert phrase in text
     assert "Founder acceptance: not recorded" in text

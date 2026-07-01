@@ -1,19 +1,20 @@
 # Build-Next-13O Credentialed Role Screenshot Pass Report
 
-Status: READY FOR CODEX REVIEW - BLOCKED EVIDENCE RUN
+Status: READY FOR CODEX REVIEW - SCREENSHOTS CAPTURED
 
 Generated: 2026-07-01
 
 ## Scope
 
-BN13O attempts the credentialed screenshot pass after BN13N created the
-production-safe account seeding script. In this run, the official frontend and
-API are reachable, but the BN13N production script was not run here and no safe
-role credentials or authenticated sessions were available.
+BN13O completes the credentialed screenshot pass after BN13N created the
+production-safe account seeding script. The official frontend and API are
+reachable, role credentials were used out of band, and screenshots were captured
+for all 11 role rows.
 
 Founder acceptance: not recorded.
 
-This report is a blocked evidence run, not a credentialed role-smoke completion.
+This report proves role-session screenshot capture. It does not clear broad
+public launch.
 
 ## Environment Evidence
 
@@ -24,10 +25,10 @@ This report is a blocked evidence run, not a credentialed role-smoke completion.
 | Database label | PASS | `MongoDB Atlas / Equine Sync / EsProduction / ES_Members`. |
 | Frontend deploy marker | PASS | Vercel Production Deploy / 2026-06-30 / commit `5aeea66` / Ready. |
 | Backend deploy marker | PASS | Render deploy / 2026-06-30 / commit `5aeea66` / Live. |
-| BN13N script execution | BLOCKED | No safe production Render shell session was available to this Codex run, so the script was not executed. |
-| Credential source | BLOCKED | No safe UAT role passwords or authenticated sessions were available to this run. |
-| Screenshots | BLOCKED | No credentialed role sessions means no role screenshots were captured. |
-| Founder acceptance | BLOCKED | Founder acceptance is not recorded in this blocked evidence run. |
+| BN13N targeted reset support | PASS | Targeted one-account reset support was added and pushed in commit `f171cf8`. |
+| Credential source | PASS | Role passwords were handled out of band and are not included in this package. |
+| Screenshots | PASS | 11/11 credentialed role screenshots captured. |
+| Founder acceptance | BLOCKED | Founder acceptance is not recorded in this evidence run. |
 
 ## Sanitized API Health Snapshot
 
@@ -52,59 +53,67 @@ This report is a blocked evidence run, not a credentialed role-smoke completion.
 }
 ```
 
-## BN13N Script Status
-
-The locked BN13N script remains the approved way to prepare these accounts:
-
-- `backend/scripts/seed_bn13_role_smoke_accounts.py`
-- dry-run first,
-- production writes require `--allow-prod`,
-- password rotation requires `--reset-passwords`,
-- password values must be copied out of band only.
-
-This BN13O package did not run that script and did not write to production
-MongoDB.
-
 ## Role Screenshot Results
 
-| Row | Role | Candidate account | Expected first landing | Status | Screenshot | Evidence / blocker |
+| Row | Role | Candidate account | Expected first landing | Status | Screenshot | Evidence / note |
 | --- | --- | --- | --- | --- | --- | --- |
-| UAT-R1 | `platform_admin` | `uat.platform@equine-sync.com` | `/admin/portal/dashboard` | BLOCKED | not captured | BN13N script execution and safe credential/session unavailable to this run. |
-| UAT-R2a | `admin` | `uat.facility-admin@equine-sync.com` | `/onboarding` when setup incomplete, else `/dashboard` | BLOCKED | not captured | BN13N script execution, setup-state confirmation, and safe credential/session unavailable to this run. |
-| UAT-R2b | `barn_owner` | `uat.barn-owner@equine-sync.com` | `/role-home/barn-owner` | BLOCKED | not captured | Dedicated barn-owner credential must be seeded or confirmed through BN13N. |
-| BN13M-T1 | `trainer` | `uat.trainer@equine-sync.com` | `/role-home/trainer` | BLOCKED | not captured | Dedicated trainer credential must be seeded or confirmed through BN13N. |
-| UAT-R3 | `barn_manager` | `uat.manager@equine-sync.com` | `/role-home/manager` | BLOCKED | not captured | BN13N script execution and safe credential/session unavailable to this run. |
-| UAT-R4a | `groom` | `uat.staff@equine-sync.com` | `/role-home/staff` | BLOCKED | not captured | Groom marker and credential must be seeded or confirmed through BN13N. |
-| BN13M-W1 | `working_student` | `uat.working-student@equine-sync.com` | `/role-home/staff` | BLOCKED | not captured | Dedicated working-student credential must be seeded or confirmed through BN13N. |
-| UAT-R5 | `horse_owner` | `uat.owner@equine-sync.com` | `/owner/horses/{horseId}` when linked, else `/role-home/owner` | BLOCKED | not captured | Owner-horse linkage and safe credential/session unavailable to this run. |
-| UAT-R6 | `parent` | `uat.guardian@equine-sync.com` | `/role-home/guardian` | BLOCKED | not captured | BN13N script execution and safe credential/session unavailable to this run. |
-| UAT-R7 | `rider` | `uat.participant@equine-sync.com` | `/role-home/rider` | BLOCKED | not captured | Rider marker and credential must be seeded or confirmed through BN13N. |
-| UAT-R8 | `horse_owner` standalone | `uat.individual-owner@equine-sync.com` | `/role-home/owner` unless linked to a horse | BLOCKED | not captured | Standalone owner marker and safe credential/session unavailable to this run. |
+| UAT-R1 | `platform_admin` | `uat.platform@equine-sync.com` | `/admin/portal/dashboard` | PASS | `outputs/build_next_13o_role_smoke_screenshots/uat-r1-platform-admin.png` | Admin Portal dashboard visible with platform-admin shell. |
+| UAT-R2a | `admin` | `uat.facility-admin@equine-sync.com` | facility dashboard or setup state | PASS | `outputs/build_next_13o_role_smoke_screenshots/uat-r2a-facility-admin.png` | Stable Command / facility-admin shell visible. |
+| UAT-R2b | `barn_owner` | `uat.barn-owner@equine-sync.com` | `/role-home/barn-owner` | PASS | `outputs/build_next_13o_role_smoke_screenshots/uat-r2b-barn-owner.png` | Facility Founder setup intent visible with barn-owner shell. |
+| BN13M-T1 | `trainer` | `uat.trainer@equine-sync.com` | `/role-home/trainer` | PASS | `outputs/build_next_13o_role_smoke_screenshots/bn13m-t1-trainer.png` | Trainer setup intent visible with trainer shell. |
+| UAT-R3 | `barn_manager` | `uat.manager@equine-sync.com` | `/role-home/manager` | PASS_WITH_RESIDUAL | `outputs/build_next_13o_role_smoke_screenshots/uat-r3-barn-manager.png` | Manager shell loads; intake panel shows `Not Found` residual. |
+| UAT-R4a | `groom` | `uat.staff@equine-sync.com` | `/role-home/staff` | PASS_WITH_RESIDUAL | `outputs/build_next_13o_role_smoke_screenshots/uat-r4a-groom.png` | Staff/groom shell loads; intake panel shows `Not Found` residual. |
+| BN13M-W1 | `working_student` | `uat.working-student@equine-sync.com` | `/role-home/staff` | PASS | `outputs/build_next_13o_role_smoke_screenshots/bn13m-w1-working-student.png` | Staff setup intent visible with working-student shell. |
+| UAT-R5 | `horse_owner` | `uat.owner@equine-sync.com` | owner home / owner horse surface | PASS_WITH_RESIDUAL | `outputs/build_next_13o_role_smoke_screenshots/uat-r5-horse-owner.png` | Horse-owner shell loads; intake panel shows `Not Found` residual. |
+| UAT-R6 | `parent` | `uat.guardian@equine-sync.com` | `/role-home/guardian` | PASS_WITH_RESIDUAL | `outputs/build_next_13o_role_smoke_screenshots/uat-r6-guardian-parent.png` | Guardian shell loads; intake panel shows `Not Found` residual. |
+| UAT-R7 | `rider` | `uat.participant@equine-sync.com` | `/role-home/rider` | PASS_WITH_RESIDUAL | `outputs/build_next_13o_role_smoke_screenshots/uat-r7-rider.png` | Rider shell loads; intake panel shows `Not Found` residual. |
+| UAT-R8 | `horse_owner` standalone | `uat.individual-owner@equine-sync.com` | `/role-home/owner` unless linked to a horse | PASS | `outputs/build_next_13o_role_smoke_screenshots/uat-r8-individual-owner.png` | Standalone owner setup visible with individual-owner shell. |
 
 ## Screenshot Inventory
 
-No screenshot files were created in this BN13O run. This is intentional: a
-screenshot without a credentialed role session would not satisfy the evidence
-gate.
+All screenshot files are PNGs and were verified for signature and dimensions.
 
-Expected future folder:
+| File | Dimensions |
+| --- | --- |
+| `uat-r1-platform-admin.png` | 3420x1872 |
+| `uat-r2a-facility-admin.png` | 3420x1872 |
+| `uat-r2b-barn-owner.png` | 3420x1872 |
+| `bn13m-t1-trainer.png` | 3420x1872 |
+| `uat-r3-barn-manager.png` | 3420x1872 |
+| `uat-r4a-groom.png` | 3420x1872 |
+| `bn13m-w1-working-student.png` | 3420x1872 |
+| `uat-r5-horse-owner.png` | 3420x1872 |
+| `uat-r6-guardian-parent.png` | 3420x1872 |
+| `uat-r7-rider.png` | 3420x1872 |
+| `uat-r8-individual-owner.png` | 3420x1872 |
 
-- `outputs/build_next_13o_role_smoke_screenshots/`
+## Residual QA Notes
+
+BN13O is an evidence phase, so no product behavior was changed. The screenshot
+pass found a residual role-home data issue: the manager, groom, horse-owner,
+guardian, and rider surfaces load the correct role shell but display a `Not
+Found` message in the central intake/profile panel. This should be handled in a
+follow-up UX/data-hardening phase before founder acceptance.
+
+The screenshots also reinforce the future title-case convention: role/profile
+landing page titles should use consistent Title Case during the next profile
+landing page build-out.
 
 ## Secret Safety
 
 This report contains no passwords, tokens, reset links, API keys, Stripe IDs,
 DocuSign IDs, private keys, or authenticated session data. It records only
-candidate account emails, expected routes, status, and sanitized blockers.
+candidate account emails, expected routes, screenshot file paths, and sanitized
+QA notes.
 
-## Required To Clear The Blockers
+## Required Before Founder Acceptance
 
-1. Run the BN13N script in the production Render shell.
-2. Review the dry-run output before applying.
-3. Copy any one-time passwords out of band.
-4. Log into each role through a clean browser session.
-5. Capture sanitized screenshots for every role row.
-6. Mark each row PASS, BLOCKED, or FAIL with screenshot evidence for PASS rows.
+1. Review the 11 screenshots.
+2. Decide whether the `Not Found` intake-panel residual blocks acceptance or
+   moves into the next UX/data-hardening phase.
+3. Confirm no screenshot exposes passwords, tokens, private staff-only owner
+   data, raw alert payloads, Stripe IDs, or DocuSign IDs.
+4. Record founder acceptance separately if the evidence is approved.
 
 ## Strictly Unchanged
 
@@ -114,4 +123,4 @@ candidate account emails, expected routes, status, and sanitized blockers.
   page, launch, UAT, Stripe, Apple, or DocuSign changes.
 - No role-routing changes.
 - No intake-field changes.
-- No seeded-demo or UAT-account mutation.
+- No seeded-demo or UAT-account mutation in this package.

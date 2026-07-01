@@ -1,6 +1,6 @@
 # Build-Next-13O - Credentialed Role Screenshot Pass
 
-Status: READY FOR CODEX REVIEW - BLOCKED EVIDENCE RUN
+Status: READY FOR CODEX REVIEW - SCREENSHOTS CAPTURED
 
 BN13O is the follow-up evidence pass after locked BN13N. Its job is to run the
 BN13N role-smoke account script in the official environment, then capture
@@ -10,15 +10,15 @@ credentialed browser screenshots for every role row.
 
 - Official frontend reachability: PASS.
 - Official API health: PASS.
-- BN13N script execution in production: BLOCKED.
-- Credentialed role login rows: BLOCKED.
-- Screenshots: not captured.
+- BN13N targeted reset support: PASS.
+- Credentialed role screenshot rows: PASS / PASS_WITH_RESIDUAL.
+- Screenshots: 11/11 captured.
 - Founder acceptance: not recorded.
 
-The production app and API are reachable, but this Codex run does not have a
-safe Render shell session, role passwords, or authenticated browser sessions.
-BN13O therefore records a blocked screenshot-pass attempt instead of marking any
-role row complete.
+The production app and API are reachable, and all 11 credentialed role
+screenshots are present. Several role-home surfaces load the correct shell but
+show a `Not Found` residual in the intake/profile panel; this is recorded as a
+follow-up QA note rather than changed in this evidence-only phase.
 
 ## Strict Scope
 
@@ -30,14 +30,16 @@ role row complete.
 - No role-routing changes.
 - No intake-field changes.
 - No seeded-demo or UAT-account mutation.
-- No BN13N script execution was performed by this package.
-- No screenshots were captured in this blocked run.
+- No BN13N script execution was performed by this package after the screenshots
+  were supplied out of band.
+- Screenshot files were copied into the package evidence folder.
 - No passwords, tokens, reset links, API keys, Stripe IDs, DocuSign IDs, private
   keys, or authenticated session data are included.
 
 ## Artifacts
 
 - `outputs/build_next_13o_role_smoke_report.md`
+- `outputs/build_next_13o_role_smoke_screenshots/`
 - `backend/tests/test_build_next_13o_role_screenshot_pass.py`
 - `outputs/build_next_13o_credentialed_role_screenshot_pass.zip`
 - `memory/PRD.md`
@@ -92,21 +94,17 @@ PY
 
 ## Remaining Action
 
-To clear BN13O, an operator must:
+Before founder acceptance:
 
-1. Run the BN13N script in the production Render shell:
-   - dry-run first,
-   - then apply with `--allow-prod` only after the preview is reviewed.
-   - use `--email <role-email>` with `--reset-passwords` when only one
-     password needs to be rotated.
-2. Copy any one-time passwords out of band.
-3. Log into each role through the production frontend with a clean session.
-4. Capture sanitized screenshots for every role row.
-5. Repackage BN13O with each row marked PASS, BLOCKED, or FAIL and a screenshot
-   for every PASS row.
+1. Review the 11 screenshots.
+2. Decide whether the `Not Found` intake-panel residual blocks acceptance or
+   moves into the next UX/data-hardening phase.
+3. Confirm no screenshot exposes passwords, tokens, private staff-only owner
+   data, raw alert payloads, Stripe IDs, or DocuSign IDs.
+4. Record founder acceptance separately if the evidence is approved.
 
 ## Review Notes
 
-This package is intentionally blocked. It proves the official app surfaces are
-reachable, but it does not prove role-session behavior. Founder acceptance and
-launch readiness remain pending until credentialed screenshots are captured.
+This package proves credentialed screenshot capture, but founder acceptance and
+launch readiness remain pending until the screenshots and residual QA notes are
+reviewed.

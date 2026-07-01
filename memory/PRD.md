@@ -3967,9 +3967,10 @@ Strictly unchanged:
 
 ## Build-Next-13O - Credentialed Role Screenshot Pass ⏸ READY FOR REVIEW (Jul 01 2026)
 
-BN13O attempted the credentialed screenshot pass after locked BN13N:
+BN13O completed the credentialed screenshot capture pass after locked BN13N:
 - `BUILD_NEXT_13O_CREDENTIALED_ROLE_SCREENSHOT_PASS_README.md`
 - `outputs/build_next_13o_role_smoke_report.md`
+- `outputs/build_next_13o_role_smoke_screenshots/`
 - `backend/tests/test_build_next_13o_role_screenshot_pass.py`
 - `outputs/build_next_13o_credentialed_role_screenshot_pass.zip`
 
@@ -3978,11 +3979,11 @@ Verdict:
   200).
 - Official API health is PASS (`status=ok`, `database=connected`,
   `environment=production`).
-- BN13N production script execution is BLOCKED because no safe Render shell
-  session was available to this Codex run.
-- Credentialed role rows remain BLOCKED because no safe role passwords or
-  authenticated sessions were available.
-- Screenshots were not captured.
+- BN13N targeted one-account password reset support is available.
+- Credentialed screenshots are captured for all 11 role rows.
+- 6 rows are PASS and 5 rows are PASS_WITH_RESIDUAL.
+- Residual: manager, groom, horse-owner, guardian, and rider shells load but
+  show a `Not Found` intake/profile panel that needs follow-up review.
 - Founder acceptance is not recorded.
 - Broad public launch remains no-go.
 
