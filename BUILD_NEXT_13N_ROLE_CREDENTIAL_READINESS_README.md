@@ -1,6 +1,6 @@
 # Build-Next-13N - Role Credential Readiness
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 BN13N prepares the account-readiness step needed before BN13M can be rerun with
 real credentialed browser screenshots.
@@ -95,3 +95,9 @@ PY
 An operator still needs to run the script in the correct environment, copy any
 one-time passwords out of band, and then rerun BN13M for actual browser
 screenshots.
+
+## Lock Notes
+
+Codex review found no blocking findings after the dry-run reset safety patch.
+BN13N is locked as the role credential-readiness package. It does not prove that
+the accounts were seeded or that screenshots were captured; those remain BN13O.

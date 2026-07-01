@@ -1,6 +1,6 @@
 # Build-Next-13N Role Credential Readiness Report
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 Generated: 2026-07-01
 
@@ -11,6 +11,9 @@ credentialed role-smoke account set needed by BN13M.
 
 This package does not run the script against production, does not write to
 MongoDB, and does not record any password values.
+
+Codex review found no blocking findings after the dry-run reset safety patch.
+The package is locked as account-readiness tooling only.
 
 ## Readiness Matrix
 
