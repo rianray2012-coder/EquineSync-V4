@@ -3761,6 +3761,33 @@ Strictly unchanged:
   DocuSign, Admin Portal, email, notification, landing page, launch/UAT,
   provider, seeded-demo, or product facility dependency behavior changes.
 
+## Build-Next-13L - Credentialed Role Smoke Prep READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13L prepares the credentialed role-smoke execution packet that BN13M will use:
+- `BUILD_NEXT_13L_CREDENTIALED_ROLE_SMOKE_PREP_README.md`
+- `outputs/build_next_13l_role_smoke_execution_checklist.md`
+- `outputs/build_next_13l_role_smoke_result_template.md`
+- `backend/tests/test_build_next_13l_role_smoke_prep.py`
+- `outputs/build_next_13l_credentialed_role_smoke_prep.zip`
+
+Scope:
+- Defines exact role rows, expected first landing routes, expected surfaces,
+  sidebar/menu expectations, forbidden-link checks, screenshot filenames, and
+  blocker rules for BN13M.
+- Keeps credential handling out-of-band and records no passwords, tokens,
+  secrets, screenshots, sessions, or founder acceptance.
+
+Verdict:
+- BN13L is ready for Codex review.
+- Live credentialed browser execution remains deferred to BN13M.
+
+Strictly unchanged:
+- No product behavior, role routing, intake-field, backend route/schema/auth/
+  permission, privacy, task, HorseOps, facility setup, billing, checkout,
+  Stripe, Apple, DocuSign, Admin Portal, email, notification, landing page,
+  launch/UAT, provider, seeded-demo, UAT-account mutation, or product facility
+  dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the
