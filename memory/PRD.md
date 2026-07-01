@@ -3789,6 +3789,35 @@ Strictly unchanged:
   launch/UAT, provider, seeded-demo, UAT-account mutation, or product facility
   dependency behavior changes.
 
+## Build-Next-13M - Credentialed Role Smoke Evidence READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13M attempted the credentialed role-smoke evidence run using the locked BN13L
+checklist:
+- `BUILD_NEXT_13M_CREDENTIALED_ROLE_SMOKE_EVIDENCE_README.md`
+- `outputs/build_next_13m_role_smoke_report.md`
+- `backend/tests/test_build_next_13m_role_smoke_evidence.py`
+- `outputs/build_next_13m_credentialed_role_smoke_evidence.zip`
+
+Scope:
+- Records official frontend reachability (`https://app.equine-sync.com`) and
+  API health (`https://equine-sync-api.onrender.com/api/health`) as passing.
+- Records every credentialed role row as blocked because no safe UAT role
+  credentials or authenticated sessions were available to this run.
+- Captures no screenshots and records no founder acceptance.
+
+Verdict:
+- BN13M is ready for Codex review as a blocked evidence run.
+- Official environment reachability is confirmed.
+- Credentialed role-smoke execution remains blocked pending safe role
+  credentials/sessions and sanitized screenshots.
+
+Strictly unchanged:
+- No product behavior, role routing, intake-field, backend route/schema/auth/
+  permission, privacy, task, HorseOps, facility setup, billing, checkout,
+  Stripe, Apple, DocuSign, Admin Portal, email, notification, landing page,
+  launch/UAT, provider, seeded-demo, UAT-account mutation, or product facility
+  dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the
