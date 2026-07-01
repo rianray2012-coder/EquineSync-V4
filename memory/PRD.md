@@ -3580,7 +3580,7 @@ Strictly unchanged:
   Stripe, Apple, DocuSign, Admin Portal, email, notification, landing page,
   launch/UAT, provider, or product facility dependency behavior changes.
 
-## Build-Next-13G - Trainer Intake Shell READY FOR CODEX REVIEW (Jul 01 2026)
+## Build-Next-13G - Trainer Intake Shell ✅ LOCKED (Jul 01 2026)
 
 BN13G follows locked BN13A/BN13B/BN13C/BN13D/BN13E/BN13F by giving
 `role="trainer"` users a safe first-login trainer intake shell:
@@ -3606,11 +3606,11 @@ Scope:
   and messages.
 
 Verdict:
-- Ready for Codex review.
-- BN13A/B/C/D/E/F/G focused backend tests are expected to pass together.
-- Frontend build must compile before lock.
-- `outputs/build_next_13g_trainer_intake_shell.zip` must pass integrity before
-  lock.
+- Codex review found no blocking findings.
+- BN13A/B/C/D/E/F/G focused backend tests passed at 69/69.
+- Frontend build compiled successfully.
+- Trainer intake routes registered correctly.
+- `outputs/build_next_13g_trainer_intake_shell.zip` integrity passed.
 
 Strictly unchanged:
 - No lesson creation/scheduling, rider/student enrollment, horse assignment,

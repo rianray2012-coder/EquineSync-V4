@@ -1,6 +1,11 @@
 # Build-Next-13G - Trainer Intake Shell
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-REVIEWED AND LOCKED
+
+Lock note: BN13G was reviewed clean. The focused BN13A/B/C/D/E/F/G backend
+suite passed at 69/69, the frontend build compiled successfully, the trainer
+intake routes registered correctly, and the review package integrity check
+passed.
 
 ## Purpose
 
