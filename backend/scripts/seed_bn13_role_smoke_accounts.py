@@ -271,14 +271,18 @@ async def _ensure_user(
             updates["platform_role_updated_at"] = _now()
 
         if reset_passwords:
-            password = env_password or _mint_password()
-            if env_password:
-                password_source = "env"
+            if dry_run:
+                password_source = "env" if env_password else "would_mint_on_apply"
+                password_action = "would_reset"
             else:
-                password_source = "mint"
-                minted_password = password
-            updates["password_hash"] = _hash_pwd(password)
-            password_action = "would_reset" if dry_run else "reset"
+                password = env_password or _mint_password()
+                if env_password:
+                    password_source = "env"
+                else:
+                    password_source = "mint"
+                    minted_password = password
+                updates["password_hash"] = _hash_pwd(password)
+                password_action = "reset"
         if not dry_run:
             await db.users.update_one({"id": user_id}, {"$set": updates})
         user_doc = {**existing, **updates, "id": user_id, "email": email}

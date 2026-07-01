@@ -1,6 +1,7 @@
 """Build-Next-13N role credential-readiness checks."""
 from __future__ import annotations
 
+import asyncio
 import importlib.util
 import py_compile
 from pathlib import Path
@@ -68,6 +69,49 @@ def test_bn13n_script_uses_safe_production_and_dry_run_guards():
         "bn13.role_smoke_account.seeded",
     ]:
         assert phrase in src
+
+
+def test_bn13n_existing_user_dry_run_reset_does_not_mint_password(monkeypatch):
+    module = _load_script_module()
+    spec = module.BN13_ROLE_SMOKE_ROSTER[0]
+
+    async def _find_one(_query, _projection=None):
+        return {
+            "id": "uat-existing-user",
+            "email": spec["email"],
+            "full_name": "Existing UAT User",
+            "role": spec["role"],
+            "barn_id": spec["barn_id"],
+            "platform_role": spec["platform_role"],
+            "account_status": "active",
+            "role_status": "active",
+        }
+
+    class _Users:
+        find_one = staticmethod(_find_one)
+
+    class _DB:
+        users = _Users()
+
+    def _boom():
+        raise AssertionError("_mint_password must not run during dry-run reset")
+
+    monkeypatch.delenv(module.env_var_for_email(spec["email"]), raising=False)
+    monkeypatch.setattr(module, "_mint_password", _boom)
+
+    result = asyncio.run(
+        module._ensure_user(
+            _DB(),
+            spec,
+            dry_run=True,
+            reset_passwords=True,
+        )
+    )
+
+    assert result["action"] == "already_present"
+    assert result["password_source"] == "would_mint_on_apply"
+    assert result["password_action"] == "would_reset"
+    assert result["minted_password"] is None
 
 
 def test_bn13n_report_lists_every_env_var_without_values():
