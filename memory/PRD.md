@@ -3702,6 +3702,32 @@ Strictly unchanged:
   notification, landing page, launch/UAT, provider, or product facility
   dependency behavior changes.
 
+## Build-Next-13J - Role First-Login Evidence Closure READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13J closes the BN13 role-routing/intake sequence with evidence only:
+- `BUILD_NEXT_13J_ROLE_FIRST_LOGIN_EVIDENCE_README.md`
+- `outputs/build_next_13j_role_first_login_matrix.md`
+- `backend/tests/test_build_next_13j_role_first_login_matrix.py`
+- `outputs/build_next_13j_role_first_login_evidence.zip`
+
+Scope:
+- Documents and verifies the locked first-login destination for every supported
+  role: platform admin, facility admin, barn owner, trainer, barn manager,
+  groom, working student, horse owner, guardian/parent, and rider.
+- Verifies every BN13 intake surface remains role-scoped and is not attached to
+  the product facility gate.
+- Verifies role-home shells and navigation do not directly expose forbidden or
+  unfinished private workflows.
+
+Review state:
+- Awaiting Codex review.
+
+Strictly unchanged:
+- No new product behavior, intake fields, backend route/schema/auth/permission,
+  task, HorseOps, facility setup, billing, checkout, Stripe, Apple, DocuSign,
+  Admin Portal, email, notification, landing page, launch/UAT, provider, or
+  product facility dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the
