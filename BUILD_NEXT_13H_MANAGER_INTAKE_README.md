@@ -1,6 +1,6 @@
 # Build-Next-13H - Barn Manager Intake Shell
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 ## Purpose
 
@@ -81,12 +81,13 @@ BN13H does not change:
 
 ## Verification
 
-Expected checks:
+Completed checks:
 
-- BN13A through BN13H focused backend tests pass.
-- Frontend build compiles successfully.
-- Manager intake routes register under `/api/manager-intake/*`.
-- Zip integrity passes.
+- BN13A through BN13H focused backend tests passed at 78/78.
+- Frontend build compiled successfully.
+- Manager intake routes registered under `/api/manager-intake/*`.
+- Zip integrity passed.
+- Codex review found no blocking findings.
 
 Package:
 
