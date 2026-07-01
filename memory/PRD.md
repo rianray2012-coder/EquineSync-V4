@@ -3467,6 +3467,37 @@ Strictly unchanged:
   consent, billing, Stripe, Apple, DocuSign, Admin Portal, HorseOps, permission,
   launch/UAT, or provider behavior changes.
 
+## Build-Next-13D - Guardian + Minor Rider Intake Shell READY FOR CODEX REVIEW (Jun 30 2026)
+
+BN13D follows locked BN13A/BN13B/BN13C by giving `role="parent"` accounts a
+safe first-login guardian/minor rider intake shell:
+- `backend/routes/guardian_intake.py`
+- `backend/server.py`
+- `frontend/src/pages/RoleHome.jsx`
+- `backend/tests/test_build_next_13d_guardian_minor_intake.py`
+- `BUILD_NEXT_13D_GUARDIAN_MINOR_INTAKE_README.md`
+- `outputs/build_next_13d_guardian_minor_intake.zip`
+
+Scope:
+- Adds parent-only `GET /api/guardian/minor-rider-profile` and
+  `PATCH /api/guardian/minor-rider-profile`.
+- Stores guardian-owned intake rows in `guardian_minor_rider_profiles`, keyed to
+  the authenticated current guardian user.
+- Captures safe intake context for the minor rider, including age range,
+  interests, goals, availability, emergency contact, and medical/allergy notes.
+- Always projects `consent_status="pending_formal_consent"`; this is only an
+  intake status, not a legal approval or waiver status.
+- Guardian home now shows completion, intake fields, safe coming-soon panels,
+  and no direct links to enrollment, billing, admin, staff, or setup workflows.
+- Guardian navigation remains on role-home placeholders for unfinished product
+  areas.
+
+Strictly unchanged:
+- No lesson enrollment, scheduling engine, trainer/staff visibility, formal
+  consent approval, waiver generation, DocuSign envelope creation, billing,
+  Stripe, Apple, Admin Portal, HorseOps, email, notification, landing page,
+  launch/UAT, provider, or facility-product dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the

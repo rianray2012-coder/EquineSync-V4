@@ -87,6 +87,7 @@ from routes.account_context import build_router as build_account_context_router
 from routes.student_guardians import build_router as build_student_guardians_router
 from routes.document_signatures import build_router as build_document_signatures_router
 from routes.rider_profile import build_router as build_rider_profile_router
+from routes.guardian_intake import build_router as build_guardian_intake_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -151,6 +152,15 @@ api_router.include_router(build_account_context_router(
 # facility product dependency: marketplace rider accounts may exist before
 # joining an active facility.
 api_router.include_router(build_rider_profile_router(
+    db=db,
+    get_current_user=get_current_user,
+))
+
+# Build-Next-13D — guardian + minor rider intake shell.
+# Authenticated and parent-role scoped, but intentionally not attached to the
+# facility product dependency: guardian accounts may complete first-login
+# intake before the minor rider is connected to an active facility.
+api_router.include_router(build_guardian_intake_router(
     db=db,
     get_current_user=get_current_user,
 ))
