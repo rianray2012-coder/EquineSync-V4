@@ -1,6 +1,11 @@
 # Build-Next-13E - Owner Intake Shell
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-REVIEWED AND LOCKED
+
+Lock note: BN13E was reviewed clean. The focused BN13A/B/C/D/E backend suite
+passed at 49/49, malformed owner intake values return 422 instead of 500,
+frontend build compiled successfully, and the review package integrity check
+passed.
 
 ## Purpose
 
