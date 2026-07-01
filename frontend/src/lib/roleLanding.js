@@ -4,6 +4,7 @@ export const ROLE_HOME_PATHS = {
   rider: "/role-home/rider",
   guardian: "/role-home/guardian",
   owner: "/role-home/owner",
+  barnOwner: "/role-home/barn-owner",
   staff: "/today",
   manager: "/today",
   facilityAdmin: "/dashboard",
@@ -32,7 +33,9 @@ export const resolvePostLoginPath = (user) => {
 
   const role = String(user.role || "").toLowerCase();
 
-  if (role === "admin" || role === "barn_owner") {
+  if (role === "barn_owner") return ROLE_HOME_PATHS.barnOwner;
+
+  if (role === "admin") {
     if (user.onboarding_completed === false || user.facility_setup_complete === false) {
       return "/onboarding";
     }

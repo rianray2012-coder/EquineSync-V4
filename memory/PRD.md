@@ -3543,6 +3543,43 @@ Strictly unchanged:
   Stripe, Apple, Admin Portal, email, notification, landing page, launch/UAT,
   provider, or product facility dependency behavior changes.
 
+## Build-Next-13F - Barn Owner Intake Shell READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13F follows locked BN13A/BN13B/BN13C/BN13D/BN13E by giving
+`role="barn_owner"` users a safe first-login facility-founder intake shell:
+- `backend/routes/barn_owner_intake.py`
+- `backend/server.py`
+- `frontend/src/lib/roleLanding.js`
+- `frontend/src/pages/RoleHome.jsx`
+- `backend/tests/test_build_next_13f_barn_owner_intake_shell.py`
+- `BUILD_NEXT_13F_BARN_OWNER_INTAKE_README.md`
+- `outputs/build_next_13f_barn_owner_intake_shell.zip`
+
+Scope:
+- Adds barn-owner-only `GET /api/barn-owner-intake/profile` and
+  `PATCH /api/barn-owner-intake/profile`.
+- Stores barn-owner-owned intake rows in `barn_owner_intake_profiles`, keyed to
+  the authenticated current user.
+- Captures safe founder setup context, including preferred contact, facility
+  name/location/type, horse count range, staff count range, services offered,
+  setup goals, timeline, and notes.
+- Routes `role="barn_owner"` users after login to `/role-home/barn-owner`.
+- Barn-owner home now shows completion, intake fields, and placeholder-only
+  panels for facility setup, staff/roles, horses, documents, and support.
+
+Verdict:
+- Ready for Codex review.
+- BN13A/B/C/D/E/F focused backend tests are expected to pass together.
+- Frontend build must compile before lock.
+- `outputs/build_next_13f_barn_owner_intake_shell.zip` must pass integrity
+  before lock.
+
+Strictly unchanged:
+- No facility creation, facility membership creation/approval, onboarding
+  mutation, staff invites, horse records, HorseOps changes, billing, checkout,
+  Stripe, Apple, DocuSign, Admin Portal, email, notification, landing page,
+  launch/UAT, provider, or product facility dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the

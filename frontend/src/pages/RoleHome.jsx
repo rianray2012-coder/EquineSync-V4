@@ -70,6 +70,57 @@ const HORSE_COUNT_INTENTS = [
   ["unknown", "Not sure yet"],
 ];
 
+const BARN_FACILITY_TYPES = [
+  ["", "Select facility type"],
+  ["boarding", "Boarding"],
+  ["training", "Training"],
+  ["lesson_program", "Lesson program"],
+  ["private_barn", "Private barn"],
+  ["rescue", "Rescue"],
+  ["mixed", "Mixed"],
+  ["other", "Other"],
+  ["prefer_not_to_say", "Prefer not to say"],
+];
+
+const BARN_HORSE_COUNT_RANGES = [
+  ["", "Select horse count"],
+  ["none_yet", "None yet"],
+  ["1_10", "1-10"],
+  ["11_30", "11-30"],
+  ["31_75", "31-75"],
+  ["76_plus", "76+"],
+  ["unknown", "Unknown"],
+];
+
+const BARN_STAFF_COUNT_RANGES = [
+  ["", "Select staff size"],
+  ["solo", "Solo"],
+  ["1_3", "1-3"],
+  ["4_10", "4-10"],
+  ["11_plus", "11+"],
+  ["unknown", "Unknown"],
+];
+
+const BARN_SETUP_TIMELINES = [
+  ["", "Select timeline"],
+  ["now", "Now"],
+  ["30_days", "Next 30 days"],
+  ["90_days", "Next 90 days"],
+  ["later", "Later"],
+  ["exploring", "Exploring"],
+];
+
+const BARN_SERVICES = [
+  "Boarding",
+  "Training",
+  "Lessons",
+  "Sales",
+  "Rehab",
+  "Retirement",
+  "Shows",
+  "Clinics",
+];
+
 const PROFILES = {
   rider: {
     eyebrow: "Rider Home",
@@ -103,6 +154,13 @@ const PROFILES = {
       ["Upcoming Care", "Vet, farrier, dental, vaccines, and bodywork.", CalendarDays],
     ],
     primary: { to: "/owner-portal", label: "Open owner portal" },
+  },
+  "barn-owner": {
+    eyebrow: "Facility Founder",
+    title: "Facility setup intent",
+    subtitle: "Capture your facility profile before operational setup, memberships, billing, or staff workflows begin.",
+    cards: [],
+    primary: { label: "Founder intake" },
   },
 };
 
@@ -143,6 +201,305 @@ const emptyOwnerProfile = {
   facility_city_state: "",
   notes: "",
 };
+
+const emptyBarnOwnerProfile = {
+  preferred_name: "",
+  preferred_contact: "",
+  facility_name: "",
+  facility_city_state: "",
+  facility_type: "",
+  horse_count_range: "",
+  staff_count_range: "",
+  services_offered: [],
+  setup_goals: "",
+  timeline: "",
+  notes: "",
+};
+
+function BarnOwnerHome({ user }) {
+  const [profile, setProfile] = useState(emptyBarnOwnerProfile);
+  const [completion, setCompletion] = useState({ percent: 0, missing_fields: [] });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState("");
+
+  useEffect(() => {
+    let alive = true;
+    api
+      .get("/barn-owner-intake/profile")
+      .then((r) => {
+        if (!alive) return;
+        setProfile({ ...emptyBarnOwnerProfile, ...r.data });
+        setCompletion(r.data?.completion || { percent: 0, missing_fields: [] });
+        setErr("");
+      })
+      .catch((e) => {
+        if (!alive) return;
+        setErr(e?.response?.data?.detail || "Could not load facility founder intake.");
+      })
+      .finally(() => {
+        if (alive) setLoading(false);
+      });
+    return () => { alive = false; };
+  }, []);
+
+  const setField = (field, value) => {
+    setProfile((p) => ({ ...p, [field]: value }));
+  };
+
+  const toggleService = (name) => {
+    setProfile((p) => {
+      const current = p.services_offered || [];
+      const services_offered = current.includes(name)
+        ? current.filter((service) => service !== name)
+        : [...current, name];
+      return { ...p, services_offered };
+    });
+  };
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      const payload = {
+        preferred_name: profile.preferred_name || null,
+        preferred_contact: profile.preferred_contact || null,
+        facility_name: profile.facility_name || null,
+        facility_city_state: profile.facility_city_state || null,
+        facility_type: profile.facility_type || null,
+        horse_count_range: profile.horse_count_range || null,
+        staff_count_range: profile.staff_count_range || null,
+        services_offered: profile.services_offered || [],
+        setup_goals: profile.setup_goals || null,
+        timeline: profile.timeline || null,
+        notes: profile.notes || null,
+      };
+      const { data } = await api.patch("/barn-owner-intake/profile", payload);
+      setProfile({ ...emptyBarnOwnerProfile, ...data });
+      setCompletion(data?.completion || { percent: 0, missing_fields: [] });
+      toast.success("Facility founder intake saved");
+    } catch (e) {
+      toast.error(e?.response?.data?.detail || "Could not save facility founder intake");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto pb-20 lg:pb-8" data-testid="role-home-barn-owner">
+      <header className="mb-8">
+        <div className="label-eyebrow mb-3">Facility Founder</div>
+        <h1 className="font-display text-4xl md:text-5xl text-equine-ivory">
+          Facility setup intent{profile.facility_name ? ` for ${profile.facility_name}` : ""}
+        </h1>
+        <p className="mt-3 max-w-2xl text-equine-platinum/70 text-[15px] leading-relaxed">
+          Share how your barn operates before the formal setup flow begins. This page does not create a facility, invite staff, add horses, start billing, or change memberships.
+        </p>
+      </header>
+
+      <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] gap-5">
+        <section className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid="barn-owner-intake-shell">
+          <div className="flex items-start justify-between gap-4 mb-5">
+            <div>
+              <div className="label-eyebrow">Profile completion</div>
+              <h2 className="font-display text-3xl text-equine-ivory mt-1">Founder intake</h2>
+            </div>
+            <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="text-equine-platinum/60 text-[13px] py-10">Loading facility founder intake...</div>
+          ) : err ? (
+            <div className="rounded-xl border border-equine-clay/40 bg-equine-clay/10 p-4 text-equine-clay text-[13px]">{err}</div>
+          ) : (
+            <div className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Preferred name</span>
+                  <input
+                    value={profile.preferred_name || ""}
+                    onChange={(e) => setField("preferred_name", e.target.value)}
+                    data-testid="barn-owner-preferred-name"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="What should Equine Sync call you?"
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Preferred contact</span>
+                  <select
+                    value={profile.preferred_contact || ""}
+                    onChange={(e) => setField("preferred_contact", e.target.value)}
+                    data-testid="barn-owner-preferred-contact"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {GUARDIAN_CONTACT_PREFERENCES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Facility name</span>
+                  <input
+                    value={profile.facility_name || ""}
+                    onChange={(e) => setField("facility_name", e.target.value)}
+                    data-testid="barn-owner-facility-name"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="Barn, stable, or program name"
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Facility location</span>
+                  <input
+                    value={profile.facility_city_state || ""}
+                    onChange={(e) => setField("facility_city_state", e.target.value)}
+                    data-testid="barn-owner-facility-city-state"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="City, state"
+                  />
+                </label>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Facility type</span>
+                  <select
+                    value={profile.facility_type || ""}
+                    onChange={(e) => setField("facility_type", e.target.value)}
+                    data-testid="barn-owner-facility-type"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {BARN_FACILITY_TYPES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Horse count</span>
+                  <select
+                    value={profile.horse_count_range || ""}
+                    onChange={(e) => setField("horse_count_range", e.target.value)}
+                    data-testid="barn-owner-horse-count-range"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {BARN_HORSE_COUNT_RANGES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Staff size</span>
+                  <select
+                    value={profile.staff_count_range || ""}
+                    onChange={(e) => setField("staff_count_range", e.target.value)}
+                    data-testid="barn-owner-staff-count-range"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {BARN_STAFF_COUNT_RANGES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Setup timeline</span>
+                <select
+                  value={profile.timeline || ""}
+                  onChange={(e) => setField("timeline", e.target.value)}
+                  data-testid="barn-owner-timeline"
+                  className="mt-2 input-luxe w-full"
+                >
+                  {BARN_SETUP_TIMELINES.map(([value, label]) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+              </label>
+
+              <div>
+                <span className="label-eyebrow">Services offered</span>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {BARN_SERVICES.map((name) => {
+                    const active = (profile.services_offered || []).includes(name);
+                    return (
+                      <button
+                        key={name}
+                        type="button"
+                        onClick={() => toggleService(name)}
+                        data-testid={`barn-owner-service-${name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
+                        className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
+                          active
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
+                        }`}
+                      >
+                        {name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Setup goals</span>
+                <textarea
+                  value={profile.setup_goals || ""}
+                  onChange={(e) => setField("setup_goals", e.target.value)}
+                  data-testid="barn-owner-setup-goals"
+                  className="mt-2 input-luxe w-full min-h-[96px]"
+                  placeholder="What do you want Equine Sync to help organize first?"
+                />
+              </label>
+
+              <label className="block">
+                <span className="label-eyebrow">Notes</span>
+                <textarea
+                  value={profile.notes || ""}
+                  onChange={(e) => setField("notes", e.target.value)}
+                  data-testid="barn-owner-notes"
+                  className="mt-2 input-luxe w-full min-h-[80px]"
+                  placeholder="Optional context. This remains intake-only and does not create facility records."
+                />
+              </label>
+
+              <button
+                type="button"
+                onClick={save}
+                disabled={saving}
+                data-testid="barn-owner-intake-save"
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                {saving ? "Saving..." : "Save founder intake"}
+              </button>
+            </div>
+          )}
+        </section>
+
+        <aside className="space-y-5">
+          {[
+            ["Facility Setup", "Formal setup remains separate. This intake only captures founder intent.", ShieldCheck],
+            ["Staff & Roles", "Staff invites and role assignments are not created from this page.", ClipboardList],
+            ["Horses", "Horse records are not created here; this page only records expected facility scale.", Heart],
+            ["Documents", "Policies and signature envelopes stay in the approved document workflows.", FileText],
+            ["Support", "Use Messages or support channels for founder setup questions.", MessageSquare],
+          ].map(([title, body, Icon]) => (
+            <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`barn-owner-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+              <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
+              </div>
+              <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
+            </section>
+          ))}
+        </aside>
+      </div>
+    </div>
+  );
+}
 
 function OwnerHome({ user }) {
   const [profile, setProfile] = useState(emptyOwnerProfile);
@@ -930,6 +1287,7 @@ export default function RoleHome() {
   if (profile === "rider") return <RiderHome user={user} />;
   if (profile === "guardian") return <GuardianHome user={user} />;
   if (profile === "owner") return <OwnerHome user={user} />;
+  if (profile === "barn-owner") return <BarnOwnerHome user={user} />;
 
   return (
     <div
