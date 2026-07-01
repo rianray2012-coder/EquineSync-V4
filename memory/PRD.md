@@ -3731,6 +3731,35 @@ Strictly unchanged:
   Admin Portal, email, notification, landing page, launch/UAT, provider, or
   product facility dependency behavior changes.
 
+## Build-Next-13K - Role Flow Smoke Evidence READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13K converts the locked BN13 first-login/source matrix into a practical
+role-flow smoke packet:
+- `BUILD_NEXT_13K_ROLE_FLOW_SMOKE_README.md`
+- `outputs/build_next_13k_role_flow_smoke_report.md`
+- `backend/tests/test_build_next_13k_role_flow_smoke.py`
+- `outputs/build_next_13k_role_flow_smoke.zip`
+
+Scope:
+- Covers platform admin, facility admin, barn owner, trainer, barn manager,
+  groom, working student, horse owner, guardian/parent, and rider.
+- Verifies source-level role landing paths, role-home shells, navigation
+  boundaries, and BN13 intake route placement.
+- Records every credentialed live smoke row as blocked until safe credentials,
+  official environment confirmation, and sanitized screenshots exist.
+
+Verdict:
+- BN13K is ready for Codex review.
+- Source-level role-flow evidence is captured.
+- Official role smoke remains blocked pending credentialed staging/browser
+  evidence and founder acceptance.
+
+Strictly unchanged:
+- No product behavior, intake-field, backend route/schema/auth/permission,
+  privacy, task, HorseOps, facility setup, billing, checkout, Stripe, Apple,
+  DocuSign, Admin Portal, email, notification, landing page, launch/UAT,
+  provider, seeded-demo, or product facility dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the
