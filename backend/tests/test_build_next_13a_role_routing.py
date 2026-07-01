@@ -34,7 +34,7 @@ def test_role_landing_matrix_is_source_locked():
     assert 'guardian: "/role-home/guardian"' in src
     assert 'owner: "/role-home/owner"' in src
     assert 'staff: "/today"' in src
-    assert 'manager: "/today"' in src
+    assert 'manager: "/role-home/manager"' in src
     assert 'facilityAdmin: "/dashboard"' in src
     assert 'role === "rider"' in src
     assert 'role === "parent"' in src

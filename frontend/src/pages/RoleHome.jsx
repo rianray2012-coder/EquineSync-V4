@@ -59,6 +59,19 @@ const TRAINER_RIDER_LEVELS = [
   ["prefer_not_to_say", "Prefer not to say"],
 ];
 
+const MANAGER_OPERATIONS_FOCUS = [
+  ["daily_tasks", "Daily tasks"],
+  ["horse_care", "Horse care"],
+  ["staff_coordination", "Staff coordination"],
+  ["facility_maintenance", "Facility maintenance"],
+  ["owner_communication", "Owner communication"],
+  ["inventory", "Inventory"],
+  ["scheduling", "Scheduling"],
+  ["mixed", "Mixed"],
+  ["other", "Other"],
+  ["prefer_not_to_say", "Prefer not to say"],
+];
+
 const GUARDIAN_CONTACT_PREFERENCES = [
   ["", "Select preference"],
   ["email", "Email"],
@@ -185,6 +198,13 @@ const PROFILES = {
     cards: [],
     primary: { label: "Trainer intake" },
   },
+  manager: {
+    eyebrow: "Manager Home",
+    title: "Manager setup intent",
+    subtitle: "Capture your operations focus before task, team, and HorseOps workflows begin.",
+    cards: [],
+    primary: { label: "Manager intake" },
+  },
   "barn-owner": {
     eyebrow: "Facility Founder",
     title: "Facility setup intent",
@@ -245,6 +265,19 @@ const emptyTrainerProfile = {
   notes: "",
 };
 
+const emptyManagerProfile = {
+  preferred_name: "",
+  preferred_contact: "",
+  operations_focus: [],
+  shift_availability_notes: "",
+  team_coordination_notes: "",
+  horse_care_oversight_notes: "",
+  task_board_goals: "",
+  facility_connection_notes: "",
+  emergency_operations_notes: "",
+  notes: "",
+};
+
 const emptyBarnOwnerProfile = {
   preferred_name: "",
   preferred_contact: "",
@@ -258,6 +291,269 @@ const emptyBarnOwnerProfile = {
   timeline: "",
   notes: "",
 };
+
+function ManagerHome({ user }) {
+  const [profile, setProfile] = useState(emptyManagerProfile);
+  const [completion, setCompletion] = useState({ percent: 0, missing_fields: [] });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState("");
+
+  useEffect(() => {
+    let alive = true;
+    api
+      .get("/manager-intake/profile")
+      .then((r) => {
+        if (!alive) return;
+        setProfile({ ...emptyManagerProfile, ...r.data });
+        setCompletion(r.data?.completion || { percent: 0, missing_fields: [] });
+        setErr("");
+      })
+      .catch((e) => {
+        if (!alive) return;
+        setErr(e?.response?.data?.detail || "Could not load manager intake.");
+      })
+      .finally(() => {
+        if (alive) setLoading(false);
+      });
+    return () => { alive = false; };
+  }, []);
+
+  const setField = (field, value) => {
+    setProfile((p) => ({ ...p, [field]: value }));
+  };
+
+  const toggleFocus = (value) => {
+    setProfile((p) => {
+      const current = p.operations_focus || [];
+      const operations_focus = current.includes(value)
+        ? current.filter((item) => item !== value)
+        : [...current, value];
+      return { ...p, operations_focus };
+    });
+  };
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      const payload = {
+        preferred_name: profile.preferred_name || null,
+        preferred_contact: profile.preferred_contact || null,
+        operations_focus: profile.operations_focus || [],
+        shift_availability_notes: profile.shift_availability_notes || null,
+        team_coordination_notes: profile.team_coordination_notes || null,
+        horse_care_oversight_notes: profile.horse_care_oversight_notes || null,
+        task_board_goals: profile.task_board_goals || null,
+        facility_connection_notes: profile.facility_connection_notes || null,
+        emergency_operations_notes: profile.emergency_operations_notes || null,
+        notes: profile.notes || null,
+      };
+      const { data } = await api.patch("/manager-intake/profile", payload);
+      setProfile({ ...emptyManagerProfile, ...data });
+      setCompletion(data?.completion || { percent: 0, missing_fields: [] });
+      toast.success("Manager intake saved");
+    } catch (e) {
+      toast.error(e?.response?.data?.detail || "Could not save manager intake");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto pb-20 lg:pb-8" data-testid="role-home-manager">
+      <header className="mb-8">
+        <div className="label-eyebrow mb-3">Manager Home</div>
+        <h1 className="font-display text-4xl md:text-5xl text-equine-ivory">
+          Manager setup intent{profile.preferred_name ? ` for ${profile.preferred_name}` : ""}
+        </h1>
+        <p className="mt-3 max-w-2xl text-equine-platinum/70 text-[15px] leading-relaxed">
+          Share your operations focus before task ownership, staff coordination, HorseOps records, or facility setup changes begin.
+        </p>
+      </header>
+
+      <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] gap-5">
+        <section className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid="manager-intake-shell">
+          <div className="flex items-start justify-between gap-4 mb-5">
+            <div>
+              <div className="label-eyebrow">Profile completion</div>
+              <h2 className="font-display text-3xl text-equine-ivory mt-1">Manager intake</h2>
+            </div>
+            <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="text-equine-platinum/60 text-[13px] py-10">Loading manager intake...</div>
+          ) : err ? (
+            <div className="rounded-xl border border-equine-clay/40 bg-equine-clay/10 p-4 text-equine-clay text-[13px]">{err}</div>
+          ) : (
+            <div className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Preferred name</span>
+                  <input
+                    value={profile.preferred_name || ""}
+                    onChange={(e) => setField("preferred_name", e.target.value)}
+                    data-testid="manager-preferred-name"
+                    className="mt-2 input-luxe w-full"
+                    placeholder="What should the team call you?"
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Preferred contact</span>
+                  <select
+                    value={profile.preferred_contact || ""}
+                    onChange={(e) => setField("preferred_contact", e.target.value)}
+                    data-testid="manager-preferred-contact"
+                    className="mt-2 input-luxe w-full"
+                  >
+                    {GUARDIAN_CONTACT_PREFERENCES.map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <div>
+                <span className="label-eyebrow">Operations focus</span>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {MANAGER_OPERATIONS_FOCUS.map(([value, label]) => {
+                    const active = (profile.operations_focus || []).includes(value);
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => toggleFocus(value)}
+                        data-testid={`manager-focus-${value}`}
+                        className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
+                          active
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Task board goals</span>
+                <textarea
+                  value={profile.task_board_goals || ""}
+                  onChange={(e) => setField("task_board_goals", e.target.value)}
+                  data-testid="manager-task-board-goals"
+                  className="mt-2 input-luxe w-full min-h-[96px]"
+                  placeholder="What should the task board help organize first?"
+                />
+              </label>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Team coordination notes</span>
+                  <textarea
+                    value={profile.team_coordination_notes || ""}
+                    onChange={(e) => setField("team_coordination_notes", e.target.value)}
+                    data-testid="manager-team-coordination-notes"
+                    className="mt-2 input-luxe w-full min-h-[90px]"
+                    placeholder="Staff handoffs, shift patterns, or communication needs."
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Horse care oversight</span>
+                  <textarea
+                    value={profile.horse_care_oversight_notes || ""}
+                    onChange={(e) => setField("horse_care_oversight_notes", e.target.value)}
+                    data-testid="manager-horse-care-oversight-notes"
+                    className="mt-2 input-luxe w-full min-h-[90px]"
+                    placeholder="Care areas you expect to oversee. This does not create HorseOps records."
+                  />
+                </label>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <label className="block">
+                  <span className="label-eyebrow">Shift availability notes</span>
+                  <textarea
+                    value={profile.shift_availability_notes || ""}
+                    onChange={(e) => setField("shift_availability_notes", e.target.value)}
+                    data-testid="manager-shift-availability-notes"
+                    className="mt-2 input-luxe w-full min-h-[90px]"
+                    placeholder="Usual coverage windows or constraints."
+                  />
+                </label>
+                <label className="block">
+                  <span className="label-eyebrow">Facility connection</span>
+                  <textarea
+                    value={profile.facility_connection_notes || ""}
+                    onChange={(e) => setField("facility_connection_notes", e.target.value)}
+                    data-testid="manager-facility-connection-notes"
+                    className="mt-2 input-luxe w-full min-h-[90px]"
+                    placeholder="Barn or team context, if known."
+                  />
+                </label>
+              </div>
+
+              <label className="block">
+                <span className="label-eyebrow">Emergency operations notes</span>
+                <textarea
+                  value={profile.emergency_operations_notes || ""}
+                  onChange={(e) => setField("emergency_operations_notes", e.target.value)}
+                  data-testid="manager-emergency-operations-notes"
+                  className="mt-2 input-luxe w-full min-h-[80px]"
+                  placeholder="Optional planning context. This does not create policies or assignments."
+                />
+              </label>
+
+              <label className="block">
+                <span className="label-eyebrow">Notes</span>
+                <textarea
+                  value={profile.notes || ""}
+                  onChange={(e) => setField("notes", e.target.value)}
+                  data-testid="manager-notes"
+                  className="mt-2 input-luxe w-full min-h-[80px]"
+                  placeholder="Optional context. This does not create tasks, staff invites, permissions, facility setup, or HorseOps records."
+                />
+              </label>
+
+              <button
+                type="button"
+                onClick={save}
+                disabled={saving}
+                data-testid="manager-intake-save"
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                {saving ? "Saving..." : "Save manager intake"}
+              </button>
+            </div>
+          )}
+        </section>
+
+        <aside className="space-y-5">
+          {[
+            ["Today's Work", "Task creation and assignment stay in the approved task workflow.", ClipboardList],
+            ["Team Coordination", "Staff invites, roles, and permissions are not changed from this page.", ShieldCheck],
+            ["Horse Care Oversight", "HorseOps records are not created until the horse workflow is used.", Heart],
+            ["Facility Tasks", "Facility setup and configuration remain separate from this intake.", CalendarDays],
+            ["Owner Requests", "Owner communication and request workflows stay in their approved surfaces.", MessageSquare],
+            ["Messages", "Use Messages or support channels for setup questions.", FileText],
+          ].map(([title, body, Icon]) => (
+            <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`manager-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+              <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
+              </div>
+              <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
+            </section>
+          ))}
+        </aside>
+      </div>
+    </div>
+  );
+}
 
 function TrainerHome({ user }) {
   const [profile, setProfile] = useState(emptyTrainerProfile);
@@ -1610,6 +1906,7 @@ export default function RoleHome() {
   if (profile === "owner") return <OwnerHome user={user} />;
   if (profile === "barn-owner") return <BarnOwnerHome user={user} />;
   if (profile === "trainer") return <TrainerHome user={user} />;
+  if (profile === "manager") return <ManagerHome user={user} />;
 
   return (
     <div

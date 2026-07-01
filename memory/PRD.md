@@ -3619,6 +3619,41 @@ Strictly unchanged:
   notification, landing page, launch/UAT, provider, or product facility
   dependency behavior changes.
 
+## Build-Next-13H - Barn Manager Intake Shell READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13H follows locked BN13A/BN13B/BN13C/BN13D/BN13E/BN13F/BN13G by giving
+`role="barn_manager"` users a safe first-login manager intake shell:
+- `backend/routes/manager_intake.py`
+- `backend/server.py`
+- `frontend/src/lib/roleLanding.js`
+- `frontend/src/pages/RoleHome.jsx`
+- `backend/tests/test_build_next_13h_manager_intake_shell.py`
+- `BUILD_NEXT_13H_MANAGER_INTAKE_README.md`
+- `outputs/build_next_13h_manager_intake_shell.zip`
+
+Scope:
+- Adds barn-manager-only `GET /api/manager-intake/profile` and
+  `PATCH /api/manager-intake/profile`.
+- Stores manager-owned intake rows in `manager_intake_profiles`, keyed to the
+  authenticated current user.
+- Captures safe manager setup context, including preferred contact,
+  operations focus, shift availability notes, team coordination notes, horse
+  care oversight notes, task board goals, facility connection notes, emergency
+  operations notes, and notes.
+- Routes `role="barn_manager"` users after login to `/role-home/manager`.
+- Manager home now shows completion, intake fields, and placeholder-only panels
+  for today's work, team coordination, horse care oversight, facility tasks,
+  owner requests, and messages.
+
+Review state:
+- Awaiting Codex review.
+
+Strictly unchanged:
+- No task creation/assignment/scheduling, staff invite or permission mutation,
+  HorseOps record creation, facility setup or membership mutation, billing,
+  checkout, Stripe, Apple, DocuSign, Admin Portal, email, notification, landing
+  page, launch/UAT, provider, or product facility dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the

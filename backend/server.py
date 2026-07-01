@@ -91,6 +91,7 @@ from routes.guardian_intake import build_router as build_guardian_intake_router
 from routes.owner_intake import build_router as build_owner_intake_router
 from routes.barn_owner_intake import build_router as build_barn_owner_intake_router
 from routes.trainer_intake import build_router as build_trainer_intake_router
+from routes.manager_intake import build_router as build_manager_intake_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -191,6 +192,15 @@ api_router.include_router(build_barn_owner_intake_router(
 # facility product dependency: marketplace trainer accounts may capture setup
 # intent before assignments, lessons, or active facility membership are ready.
 api_router.include_router(build_trainer_intake_router(
+    db=db,
+    get_current_user=get_current_user,
+))
+
+# Build-Next-13H — barn manager first-login intake shell.
+# Authenticated and barn_manager-role scoped, but intentionally not attached to
+# the facility product dependency: manager accounts may capture setup intent
+# before task ownership, staff coordination, or active facility context is ready.
+api_router.include_router(build_manager_intake_router(
     db=db,
     get_current_user=get_current_user,
 ))
