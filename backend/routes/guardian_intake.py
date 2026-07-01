@@ -73,6 +73,8 @@ def _require_parent(user: Dict[str, Any]) -> None:
 def _clean_text(value: Optional[str]) -> Optional[str]:
     if value is None:
         return None
+    if not isinstance(value, str):
+        raise ValueError("Input should be a valid string")
     cleaned = value.strip()
     return cleaned or None
 

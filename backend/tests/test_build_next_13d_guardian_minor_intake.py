@@ -194,6 +194,16 @@ def test_guardian_patch_rejects_invalid_contact_preference():
     assert r.status_code == 422
 
 
+def test_guardian_patch_rejects_non_string_text_fields_without_500():
+    client, _db = _client({"id": "guardian_text_type", "role": "parent"})
+
+    r = client.patch("/api/guardian/minor-rider-profile", json={
+        "minor_display_name": 123,
+    })
+
+    assert r.status_code == 422
+
+
 def test_guardian_patch_rejects_invalid_age_range():
     client, _db = _client({"id": "guardian_4", "role": "parent"})
 
