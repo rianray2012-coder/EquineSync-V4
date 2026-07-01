@@ -1,6 +1,6 @@
 # Build-Next-13K - Role Flow Smoke Evidence
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 Build-Next-13K is an evidence-only phase. It converts the BN13 role routing
 matrix into a practical staging smoke checklist without changing product
@@ -93,8 +93,12 @@ with ZipFile(p) as z:
 PY
 ```
 
-## Review Notes
+## Lock Notes
 
 BN13K does not close official UAT. It makes the remaining live role smoke work
 explicit and keeps the launch gate from silently treating source evidence as
 credentialed staging evidence.
+
+Codex review found no blocking findings. The packet is locked as source-level
+role-flow smoke evidence, with live credentialed staging rows still blocked
+until safe role sessions and screenshots are captured.

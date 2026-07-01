@@ -1,6 +1,6 @@
 # Build-Next-13K Role Flow Smoke Report
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 Generated: 2026-07-01
 
@@ -31,6 +31,13 @@ staging rows that must be completed before launch/UAT acceptance.
 | Credentialed staging login smoke | BLOCKED | Role passwords/sessions were not available to this evidence phase |
 | Screenshot evidence | BLOCKED | Screenshots require credentialed role sessions |
 | Launch/UAT acceptance | BLOCKED | BN13K does not approve public launch or official UAT closure |
+
+## Codex Review Verdict
+
+Codex review found no blocking findings. BN13K is locked as source-level
+role-flow smoke evidence. The live credentialed staging rows remain blocked and
+must be completed in a later evidence phase before any official UAT or launch
+acceptance is recorded.
 
 ## Role Smoke Matrix
 

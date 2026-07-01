@@ -3731,7 +3731,7 @@ Strictly unchanged:
   Admin Portal, email, notification, landing page, launch/UAT, provider, or
   product facility dependency behavior changes.
 
-## Build-Next-13K - Role Flow Smoke Evidence READY FOR CODEX REVIEW (Jul 01 2026)
+## Build-Next-13K - Role Flow Smoke Evidence ✅ LOCKED (Jul 01 2026)
 
 BN13K converts the locked BN13 first-login/source matrix into a practical
 role-flow smoke packet:
@@ -3749,7 +3749,8 @@ Scope:
   official environment confirmation, and sanitized screenshots exist.
 
 Verdict:
-- BN13K is ready for Codex review.
+- Codex review found no blocking findings.
+- BN13K is locked as source-level role-flow smoke evidence.
 - Source-level role-flow evidence is captured.
 - Official role smoke remains blocked pending credentialed staging/browser
   evidence and founder acceptance.
