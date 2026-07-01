@@ -1,6 +1,6 @@
 # Build-Next-13I - Staff Intake Shell
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 ## Purpose
 
@@ -87,12 +87,13 @@ BN13I does not change:
 
 ## Verification
 
-Expected checks:
+Completed checks:
 
-- BN13A through BN13I focused backend tests pass.
-- Frontend build compiles successfully.
-- Staff intake routes register under `/api/staff-intake/*`.
-- Zip integrity passes.
+- BN13A through BN13I focused backend tests passed at 87/87.
+- Frontend build compiled successfully.
+- Staff intake routes registered under `/api/staff-intake/*`.
+- Zip integrity passed.
+- Codex review found no blocking findings.
 
 Package:
 

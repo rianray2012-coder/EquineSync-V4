@@ -3658,7 +3658,7 @@ Strictly unchanged:
   checkout, Stripe, Apple, DocuSign, Admin Portal, email, notification, landing
   page, launch/UAT, provider, or product facility dependency behavior changes.
 
-## Build-Next-13I - Staff Intake Shell READY FOR CODEX REVIEW (Jul 01 2026)
+## Build-Next-13I - Staff Intake Shell ✅ LOCKED (Jul 01 2026)
 
 BN13I follows locked BN13A/BN13B/BN13C/BN13D/BN13E/BN13F/BN13G/BN13H by giving
 `role="groom"` and `role="working_student"` users a safe first-login staff
@@ -3688,8 +3688,12 @@ Scope:
   for today's work, assigned horses, care checks, schedule, team notes, and
   safety/training.
 
-Review state:
-- Awaiting Codex review.
+Verdict:
+- Codex review found no blocking findings.
+- BN13A/B/C/D/E/F/G/H/I focused backend tests passed at 87/87.
+- Frontend build compiled successfully.
+- Staff intake routes registered correctly.
+- `outputs/build_next_13i_staff_intake_shell.zip` integrity passed.
 
 Strictly unchanged:
 - No task creation/assignment/completion/scheduling, HorseOps record creation,
