@@ -1,6 +1,6 @@
 # Build-Next-13J - Role First-Login Evidence Closure
 
-Status: READY FOR CODEX REVIEW
+Status: CODEX-APPROVED & LOCKED
 
 ## Purpose
 
@@ -44,11 +44,12 @@ BN13J verifies these first-login destinations:
 
 ## Verification
 
-Expected checks:
+Completed checks:
 
-- BN13A through BN13J focused backend/source tests pass.
-- Frontend build compiles successfully.
-- Zip integrity passes.
+- BN13A through BN13J focused backend/source tests passed at 95/95.
+- Frontend build compiled successfully.
+- Zip integrity passed.
+- Codex review found no blocking findings.
 
 ## Package
 
