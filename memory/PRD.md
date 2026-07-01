@@ -3819,6 +3819,36 @@ Strictly unchanged:
   launch/UAT, provider, seeded-demo, UAT-account mutation, or product facility
   dependency behavior changes.
 
+## Build-Next-13N - Role Credential Readiness READY FOR CODEX REVIEW (Jul 01 2026)
+
+BN13N prepares the account-readiness step required before BN13M can be rerun
+with real credentialed browser screenshots:
+- `BUILD_NEXT_13N_ROLE_CREDENTIAL_READINESS_README.md`
+- `backend/scripts/seed_bn13_role_smoke_accounts.py`
+- `outputs/build_next_13n_role_credential_readiness_report.md`
+- `backend/tests/test_build_next_13n_role_credential_readiness.py`
+- `outputs/build_next_13n_role_credential_readiness.zip`
+
+Scope:
+- Adds a dedicated, production-safe operator script for all 11 BN13M role rows.
+- Adds dedicated rows for barn owner, trainer, and working student while
+  preserving the existing BN12 UAT rows.
+- Supports dry-run, production write guard, and intentional password rotation.
+- Does not run the script against production and records no password values.
+
+Verdict:
+- BN13N is ready for Codex review.
+- BN13M-R2 remains blocked until an operator runs the script in the correct
+  environment, copies any one-time passwords out of band, and captures
+  credentialed screenshots.
+
+Strictly unchanged:
+- No product behavior, role routing, intake-field, backend route/schema/auth/
+  permission, privacy, task, HorseOps, facility setup, billing, checkout,
+  Stripe, Apple, DocuSign, Admin Portal, email, notification, landing page,
+  launch/UAT, provider, seeded-demo account behavior, screenshot, or product
+  facility dependency behavior changes.
+
 ## Build-Next-12 Prep - Staging Inputs Collection READY FOR CODEX REVIEW (Jun 24 2026)
 
 BN12 execution is deferred. BN12-Prep creates a safe collection packet for the
