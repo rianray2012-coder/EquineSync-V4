@@ -1,8 +1,11 @@
 # Build-Next-13C — Rider Intake Shell
 
-Status: ready for Codex review
+Status: Codex-approved and locked
 
 Date: 2026-06-30
+
+Lock note: BN13C passed re-review after the rider-profile projection allowlist
+fix. No blocking findings remain.
 
 ## Purpose
 

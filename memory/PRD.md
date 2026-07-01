@@ -3436,7 +3436,7 @@ Strictly unchanged:
   billing, provider, Admin Portal, HorseOps, landing page, deploy, or product
   workflow behavior changes.
 
-## Build-Next-13C - Rider Intake Shell READY FOR CODEX REVIEW (Jun 30 2026)
+## Build-Next-13C - Rider Intake Shell ✅ LOCKED (Jun 30 2026)
 
 BN13C follows locked BN13A/BN13B by giving `role="rider"` users a safe
 first-login profile/intake shell:
@@ -3448,6 +3448,8 @@ first-login profile/intake shell:
 - `outputs/build_next_13c_rider_intake_shell.zip`
 
 Verdict:
+- Codex re-review found no blocking findings after the rider-profile projection
+  allowlist fix.
 - Riders can read and update their own profile/intake fields.
 - Review fix: rider profile responses now use an explicit rider-safe allowlist,
   so same-user internal fields such as admin notes, review status, source IDs,
