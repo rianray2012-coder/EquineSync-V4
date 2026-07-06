@@ -2,17 +2,9 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertTriangle, CalendarClock, Clock, Plus, RefreshCw, StickyNote } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "../lib/api";
+import { normalizeStaffDirectory, staffNameById, staffOptions } from "../lib/staffDirectory";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
-
-const ADD_FIELDS = [
-  { key: "staff_name", label: "Staff", required: true, placeholder: "Staff name" },
-  { key: "role", label: "Role", placeholder: "Groom" },
-  { key: "shift_start", label: "Start", required: true, placeholder: "YYYY-MM-DDTHH:MM:SS" },
-  { key: "shift_end", label: "End", placeholder: "YYYY-MM-DDTHH:MM:SS" },
-  { key: "area", label: "Area", placeholder: "Barn area" },
-  { key: "notes", label: "Shift notes", kind: "textarea", rows: 3, full: true },
-];
 
 const fmtDateTime = (value) => {
   if (!value) return "TBD";
@@ -37,13 +29,18 @@ export default function StaffScheduling() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
+  const [staff, setStaff] = useState([]);
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const r = await api.get("/feature-modules/staff-scheduling");
+      const [r, staffRes] = await Promise.all([
+        api.get("/feature-modules/staff-scheduling"),
+        api.get("/staff-portal/staff-directory"),
+      ]);
       setRecords(r.data.records || []);
+      setStaff(normalizeStaffDirectory(staffRes.data));
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load staff schedule.");
     } finally {
@@ -52,6 +49,15 @@ export default function StaffScheduling() {
   }, []);
 
   useEffect(() => { load(); }, [load]);
+
+  const addFields = useMemo(() => [
+    { key: "staff_user_id", label: "Staff", kind: "select", required: true, opts: staffOptions(staff) },
+    { key: "role", label: "Role", placeholder: "Groom" },
+    { key: "shift_start", label: "Start", required: true, placeholder: "YYYY-MM-DDTHH:MM:SS" },
+    { key: "shift_end", label: "End", placeholder: "YYYY-MM-DDTHH:MM:SS" },
+    { key: "area", label: "Area", placeholder: "Barn area" },
+    { key: "notes", label: "Shift notes", kind: "textarea", rows: 3, full: true },
+  ], [staff]);
 
   const sorted = useMemo(() => [...records].sort((a, b) => String((a.data || {}).shift_start || "").localeCompare(String((b.data || {}).shift_start || ""))), [records]);
   const stats = useMemo(() => sorted.reduce((out, record) => {
@@ -156,10 +162,10 @@ export default function StaffScheduling() {
         onClose={() => setAddOpen(false)}
         title="Add staff shift"
         eyebrow="Staff"
-        fields={ADD_FIELDS}
+        fields={addFields}
         endpoint="/feature-modules/staff-scheduling/records"
         initialValues={{ shift_start: new Date().toISOString().slice(0, 16) }}
-        transform={(form) => ({ data: form })}
+        transform={(form) => ({ data: { ...form, staff_name: staffNameById(staff, form.staff_user_id) } })}
         submitLabel="Save shift"
         testidPrefix="staff-scheduling-add"
         onCreated={load}

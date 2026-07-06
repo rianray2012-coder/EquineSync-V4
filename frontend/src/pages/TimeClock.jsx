@@ -2,16 +2,9 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertTriangle, Clock3, Download, LogOut, Plus, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "../lib/api";
+import { normalizeStaffDirectory, staffNameById, staffOptions } from "../lib/staffDirectory";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
-
-const ADD_FIELDS = [
-  { key: "staff_name", label: "Staff", required: true, placeholder: "Staff name" },
-  { key: "clock_in", label: "Clock in", required: true, placeholder: "YYYY-MM-DDTHH:MM:SS" },
-  { key: "clock_out", label: "Clock out", placeholder: "YYYY-MM-DDTHH:MM:SS" },
-  { key: "break_minutes", label: "Break minutes", type: "number", placeholder: "Minutes" },
-  { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
-];
 
 const fmtDateTime = (value) => {
   if (!value) return "Open";
@@ -38,13 +31,18 @@ export default function TimeClock() {
   const [savingId, setSavingId] = useState(null);
   const [exporting, setExporting] = useState(false);
   const [exportManifest, setExportManifest] = useState(null);
+  const [staff, setStaff] = useState([]);
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const r = await api.get("/feature-modules/time-clock");
+      const [r, staffRes] = await Promise.all([
+        api.get("/feature-modules/time-clock"),
+        api.get("/staff-portal/staff-directory"),
+      ]);
       setRecords(r.data.records || []);
+      setStaff(normalizeStaffDirectory(staffRes.data));
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load time clock.");
     } finally {
@@ -53,6 +51,14 @@ export default function TimeClock() {
   }, []);
 
   useEffect(() => { load(); }, [load]);
+
+  const addFields = useMemo(() => [
+    { key: "staff_user_id", label: "Staff", kind: "select", required: true, opts: staffOptions(staff) },
+    { key: "clock_in", label: "Clock in", required: true, placeholder: "YYYY-MM-DDTHH:MM:SS" },
+    { key: "clock_out", label: "Clock out", placeholder: "YYYY-MM-DDTHH:MM:SS" },
+    { key: "break_minutes", label: "Break minutes", type: "number", placeholder: "Minutes" },
+    { key: "notes", label: "Notes", kind: "textarea", rows: 3, full: true },
+  ], [staff]);
 
   const sorted = useMemo(() => [...records].sort((a, b) => String((b.data || {}).clock_in || "").localeCompare(String((a.data || {}).clock_in || ""))), [records]);
   const totals = useMemo(() => ({
@@ -207,10 +213,10 @@ export default function TimeClock() {
         onClose={() => setAddOpen(false)}
         title="Add time entry"
         eyebrow="Staff"
-        fields={ADD_FIELDS}
+        fields={addFields}
         endpoint="/feature-modules/time-clock/records"
         initialValues={{ clock_in: new Date().toISOString().slice(0, 16), break_minutes: 0 }}
-        transform={(form) => ({ data: form })}
+        transform={(form) => ({ data: { ...form, staff_name: staffNameById(staff, form.staff_user_id) } })}
         submitLabel="Save entry"
         testidPrefix="time-clock-add"
         onCreated={load}

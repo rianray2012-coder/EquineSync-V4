@@ -2,18 +2,12 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertTriangle, CheckCircle2, ClipboardList, PauseCircle, PlayCircle, Plus, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "../lib/api";
+import { normalizeStaffDirectory, staffNameById, staffOptions } from "../lib/staffDirectory";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const STATUSES = ["open", "in_progress", "blocked", "complete"];
 const STATUS_TONE = { open: "info", in_progress: "warning", blocked: "critical", complete: "success" };
-const ADD_FIELDS = [
-  { key: "title", label: "Task", required: true, placeholder: "Task title", full: true },
-  { key: "assigned_to", label: "Assigned to", placeholder: "Staff name" },
-  { key: "due_at", label: "Due", placeholder: "YYYY-MM-DDTHH:MM:SS" },
-  { key: "status", label: "Status", kind: "select", opts: STATUSES },
-  { key: "handoff_notes", label: "Handoff notes", kind: "textarea", rows: 4, full: true },
-];
 
 const fmtDateTime = (value) => {
   if (!value) return "No due time";
@@ -28,13 +22,18 @@ export default function StaffTasks() {
   const [error, setError] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
   const [savingId, setSavingId] = useState(null);
+  const [staff, setStaff] = useState([]);
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const r = await api.get("/feature-modules/staff-tasks");
+      const [r, staffRes] = await Promise.all([
+        api.get("/feature-modules/staff-tasks"),
+        api.get("/staff-portal/staff-directory"),
+      ]);
       setRecords(r.data.records || []);
+      setStaff(normalizeStaffDirectory(staffRes.data));
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load staff tasks.");
     } finally {
@@ -43,6 +42,14 @@ export default function StaffTasks() {
   }, []);
 
   useEffect(() => { load(); }, [load]);
+
+  const addFields = useMemo(() => [
+    { key: "title", label: "Task", required: true, placeholder: "Task title", full: true },
+    { key: "assigned_user_id", label: "Assigned to", kind: "select", required: true, opts: staffOptions(staff) },
+    { key: "due_at", label: "Due", placeholder: "YYYY-MM-DDTHH:MM:SS" },
+    { key: "status", label: "Status", kind: "select", opts: STATUSES },
+    { key: "handoff_notes", label: "Handoff notes", kind: "textarea", rows: 4, full: true },
+  ], [staff]);
 
   const grouped = useMemo(() => {
     const out = Object.fromEntries(STATUSES.map((status) => [status, []]));
@@ -164,10 +171,10 @@ export default function StaffTasks() {
         onClose={() => setAddOpen(false)}
         title="Add staff task"
         eyebrow="Staff"
-        fields={ADD_FIELDS}
+        fields={addFields}
         endpoint="/feature-modules/staff-tasks/records"
         initialValues={{ status: "open" }}
-        transform={(form) => ({ data: form })}
+        transform={(form) => ({ data: { ...form, assigned_to: staffNameById(staff, form.assigned_user_id) } })}
         submitLabel="Save task"
         testidPrefix="staff-tasks-add"
         onCreated={load}

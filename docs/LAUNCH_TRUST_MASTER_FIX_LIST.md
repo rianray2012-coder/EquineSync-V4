@@ -25,6 +25,7 @@ locked BN18B/BN18C/BN18D/BN18E state and public launch.
 - BN21 - First-Client Pilot Go/No-Go. Codex-reviewed and locked with
   `go_for_web_first_first_client_pilot` evidence result. No pilot launch action
   performed.
+- BN22A - Capacitor Native Readiness + Shell Integration. Planned; not started.
 
 BN18B and BN18C are considered locked after the refreshed production API and role evidence passes reported zero blockers and zero warnings.
 
@@ -42,6 +43,9 @@ BN18B and BN18C are considered locked after the refreshed production API and rol
      support/privacy/terms/deletion URLs, store screenshots, review notes,
      release ownership, and final Apple/Google billing policy.
    - BN19 accepted this as deferred, not blocking the web-first pilot.
+   - BN22A is now the planned bridge for Capacitor native shell readiness, local
+     iOS build proof, and TestFlight-readiness reporting before any native store
+     claim.
 
 3. Demo/test seed data must remain excluded from production customer records.
    - No pilot if demo/test seed accounts or fixture data can contaminate production customer workflows.
@@ -100,6 +104,8 @@ post-BN18D track even though full offline support is deferred.
 2. Native store readiness remains deferred outside the web-first pilot:
    - BN19 accepted the pilot as web-first / PWA-assisted.
    - Native App Store / Google Play launch is deferred after BN18E.
+   - BN22A must prove Capacitor shell readiness before native distribution can
+     move from deferred to reviewable.
    - Apple/Google billing policy, store metadata, privacy labels, support links,
      screenshots, review notes, and release ownership remain future native-store
      readiness work.
@@ -122,7 +128,8 @@ post-BN18D track even though full offline support is deferred.
 
 ## Deferred Roadmap
 
-- Full native mobile app implementation, unless BN18E changes the distribution strategy.
+- Full native mobile app implementation beyond the BN22A Capacitor shell
+  readiness gate, unless founder authorizes deeper native scope.
 - App Store / Google Play submission, unless founder decides native store
   launch is required before public launch and authorizes the missing native,
   metadata, privacy, billing, support, screenshot, review-note, and ownership
@@ -169,6 +176,7 @@ post-BN18D track even though full offline support is deferred.
 | BN19 | Founder acceptance ledger including BN18A-BN18E | Accepted and locked |
 | BN20 / BN12 | Staging/UAT closure package | Accepted and locked |
 | BN21 | First-client pilot go/no-go | Codex-reviewed and locked / web-first go evidence |
+| BN22A | Capacitor config, iOS/Android shells, app identity, native permissions, local iOS build, TestFlight-readiness report | Planned / not started |
 | BN22 | Public launch gate | Pending BN21 review and pilot evidence |
 
 ## Linked Planning Docs
@@ -180,4 +188,5 @@ post-BN18D track even though full offline support is deferred.
 - [App Store Production Readiness](APP_STORE_PRODUCTION_READINESS.md)
 - [BN20 / BN12 Launch Closure](BN20_BN12_LAUNCH_CLOSURE.md)
 - [BN21 First-Client Pilot Go/No-Go](BN21_FIRST_CLIENT_PILOT_GO_NO_GO.md)
+- [BN22A Capacitor Native Readiness + Shell Integration](BN22A_CAPACITOR_NATIVE_READINESS_PLAN.md)
 - [BN18D/BN18E Current State Scan](../outputs/bn18d_bn18e_current_state_scan.md)

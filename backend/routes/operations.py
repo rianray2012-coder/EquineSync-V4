@@ -12,7 +12,7 @@ Note: invoice/billing routes were extracted to `routes/billing.py` in Phase 3F.
 from __future__ import annotations
 
 from datetime import datetime, time, timedelta, timezone
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
@@ -33,6 +33,41 @@ def _now_utc() -> datetime:
 
 def _iso(dt: datetime) -> str:
     return dt.isoformat()
+
+
+def _is_trainer(user: Dict[str, Any]) -> bool:
+    return (user.get("role") or "").strip().lower() == "trainer"
+
+
+def _trainer_owned_filter(user: Dict[str, Any]) -> Dict[str, Any]:
+    return barn_filter(user, {"$or": [{"trainer_id": user.get("id")}, {"trainer_user_id": user.get("id")}]})
+
+
+async def _require_same_barn_trainer(db, user: Dict[str, Any], trainer_id: str) -> Dict[str, Any]:
+    trainer = await db.users.find_one(
+        barn_filter(user, {"id": trainer_id, "role": "trainer"}),
+        {"_id": 0, "id": 1, "full_name": 1, "email": 1},
+    )
+    if not trainer:
+        raise HTTPException(422, "Unknown trainer")
+    return trainer
+
+
+async def _stamp_trainer_identity(db, user: Dict[str, Any], doc: Dict[str, Any]) -> Dict[str, Any]:
+    trainer_id = doc.get("trainer_id")
+    if _is_trainer(user):
+        if trainer_id and trainer_id != user.get("id"):
+            raise HTTPException(403, "Trainer can only assign their own trainer id")
+        doc["trainer_id"] = user.get("id")
+        doc["trainer_name"] = user.get("full_name") or user.get("email") or user.get("id")
+        return doc
+    if trainer_id:
+        trainer = await _require_same_barn_trainer(db, user, trainer_id)
+        doc["trainer_id"] = trainer["id"]
+        doc["trainer_name"] = trainer.get("full_name") or trainer.get("email") or trainer["id"]
+        return doc
+    doc["trainer_name"] = user.get("full_name")
+    return doc
 
 
 # ---------------- Models ----------------
@@ -101,7 +136,8 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
 
     @router.get("/lessons")
     async def list_lessons(user=Depends(get_current_user)):
-        return await list_collection("lessons", barn_filter(user), sort_field="start_time")
+        q = _trainer_owned_filter(user) if _is_trainer(user) else barn_filter(user)
+        return await list_collection("lessons", q, sort_field="start_time")
 
     @router.post("/lessons")
     async def create_lesson(body: LessonIn, user=Depends(get_current_user)):
@@ -110,17 +146,18 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         # lookup hop. Missing references are tolerated (operationally a
         # rider record may be added later, after the lesson is sketched in).
         # Phase 4B-3: all enrichment lookups are barn-scoped so a cross-barn id
-        # resolves to None (no cross-barn name leak); tolerate-missing preserved.
+        # resolves to None (no cross-barn name leak); RF9 now requires stable
+        # same-barn references for lesson creates.
         rider = await db.riders.find_one(barn_filter(user, {"id": body.rider_id}), {"_id": 0, "full_name": 1})
+        if not rider:
+            raise HTTPException(404, "Rider not found")
         doc["rider_name"] = rider["full_name"] if rider else None
         if body.horse_id:
             horse = await db.horses.find_one(barn_filter(user, {"id": body.horse_id}), {"_id": 0, "name": 1})
+            if not horse:
+                raise HTTPException(404, "Horse not found")
             doc["horse_name"] = horse["name"] if horse else None
-        if body.trainer_id:
-            trainer = await db.users.find_one(barn_filter(user, {"id": body.trainer_id}), {"_id": 0, "full_name": 1})
-            doc["trainer_name"] = trainer["full_name"] if trainer else None
-        else:
-            doc["trainer_name"] = user.get("full_name")
+        await _stamp_trainer_identity(db, user, doc)
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
         stamp_barn(user, doc)
         await db.lessons.insert_one(doc)
@@ -131,18 +168,18 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
     @router.get("/training")
     async def list_training(horse_id: Optional[str] = None, user=Depends(get_current_user)):
         extra = {"horse_id": horse_id} if horse_id else {}
+        if _is_trainer(user):
+            extra = {**extra, "$or": [{"trainer_id": user.get("id")}, {"trainer_user_id": user.get("id")}]}
         return await list_collection("training", barn_filter(user, extra), sort_field="date")
 
     @router.post("/training")
     async def create_training(body: TrainingSessionIn, user=Depends(get_current_user)):
         doc = body.model_dump()
         horse = await db.horses.find_one(barn_filter(user, {"id": body.horse_id}), {"_id": 0, "name": 1})
+        if not horse:
+            raise HTTPException(404, "Horse not found")
         doc["horse_name"] = horse["name"] if horse else None
-        if body.trainer_id:
-            trainer = await db.users.find_one(barn_filter(user, {"id": body.trainer_id}), {"_id": 0, "full_name": 1})
-            doc["trainer_name"] = trainer["full_name"] if trainer else None
-        else:
-            doc["trainer_name"] = user.get("full_name")
+        await _stamp_trainer_identity(db, user, doc)
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
         stamp_barn(user, doc)
         await db.training.insert_one(doc)

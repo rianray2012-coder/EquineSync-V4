@@ -19,10 +19,36 @@ const DURATION_OPTIONS = [
 ];
 
 const DURATION_LABEL = Object.fromEntries(DURATION_OPTIONS.map((item) => [item.value, item.label]));
+const OWNER_PORTAL_HORSE_ROLES = new Set(["horse_owner", "parent"]);
+const OWNER_LEDGER_SERVICE_TYPES = new Set(["lesson", "arena_use", "hauling", "show_prep"]);
+
+const normalizeItems = (data) => (Array.isArray(data) ? data : data?.items || []);
+
+const ownerLedgerRequestType = (serviceType) => (
+  OWNER_LEDGER_SERVICE_TYPES.has(serviceType) ? "appointment_request" : "care_follow_up"
+);
+
+const ownerLedgerMessage = (payload) => {
+  const lines = [
+    `Service type: ${String(payload.type || "").replace(/_/g, " ")}`,
+    payload.details?.trim() ? `Details: ${payload.details.trim()}` : null,
+  ];
+  if (payload.type === "arena_use") {
+    lines.push(
+      payload.arena_name?.trim() ? `Arena: ${payload.arena_name.trim()}` : null,
+      payload.requested_date ? `Date: ${payload.requested_date}` : null,
+      payload.requested_time ? `Start time: ${payload.requested_time}` : null,
+      payload.rental_duration ? `Duration: ${DURATION_LABEL[payload.rental_duration] || payload.rental_duration}` : null,
+    );
+  }
+  return lines.filter(Boolean).join("\n");
+};
 
 export default function OwnerPortal() {
   const { user } = useAuth();
   const isOwner = user?.role === "horse_owner";
+  const usesOwnerSafeHorseList = OWNER_PORTAL_HORSE_ROLES.has(user?.role);
+  const usesOwnerCareRequests = OWNER_PORTAL_HORSE_ROLES.has(user?.role);
   const canDecide = ["admin", "barn_manager", "trainer"].includes(user?.role);
 
   const [horses, setHorses] = useState([]);
@@ -43,15 +69,27 @@ export default function OwnerPortal() {
   const [submittingDecline, setSubmittingDecline] = useState(false);
 
   const load = useCallback(() => {
-    api.get("/horses").then((r) => {
-      setHorses(r.data);
-      if (r.data?.length && !activeHorseId) setActiveHorseId(r.data[0].id);
+    const horseEndpoint = usesOwnerSafeHorseList ? "/owner-portal/horses" : "/horses";
+    api.get(horseEndpoint).then((r) => {
+      const rows = normalizeItems(r.data);
+      setHorses(rows);
+      if (rows.length && !activeHorseId) setActiveHorseId(rows[0].id);
     });
-    api.get("/service-requests").then((r) => setRequests(r.data));
+    if (usesOwnerCareRequests) {
+      if (activeHorseId) {
+        api.get(`/horse-ledger/${activeHorseId}/owner-service-requests`)
+          .then((r) => setRequests(normalizeItems(r.data)))
+          .catch(() => setRequests([]));
+      } else {
+        setRequests([]);
+      }
+    } else {
+      api.get("/service-requests").then((r) => setRequests(r.data));
+    }
     api.get("/arena-schedule-share")
       .then((r) => setArenaBoard(r.data))
       .catch(() => setArenaBoard(null));
-  }, [activeHorseId]);
+  }, [activeHorseId, usesOwnerCareRequests, usesOwnerSafeHorseList]);
   useEffect(() => { load(); }, [load]);
 
   const submit = async (e) => {
@@ -67,7 +105,21 @@ export default function OwnerPortal() {
         return;
       }
     }
-    await api.post("/service-requests", form);
+    if (usesOwnerCareRequests) {
+      const message = ownerLedgerMessage(form);
+      if (!message.trim()) {
+        toast.error("Add request details before submitting.");
+        return;
+      }
+      await api.post(`/horse-ledger/${form.horse_id}/owner-service-requests`, {
+        request_type: ownerLedgerRequestType(form.type),
+        message,
+        preferred_contact: "app",
+      });
+      setActiveHorseId(form.horse_id);
+    } else {
+      await api.post("/service-requests", form);
+    }
     setForm({
       horse_id: "",
       type: "extra_ride",
@@ -310,16 +362,19 @@ export default function OwnerPortal() {
               No requests yet.
             </div>
           )}
-          {requests.map((s) => (
+          {requests.map((s) => {
+            const requestType = s.type || s.request_type || "request";
+            const requestDetails = s.details || s.message || "No additional notes";
+            return (
             <div key={s.id} className="py-3 hairline flex items-start gap-4 flex-wrap">
               <div className="flex-1 min-w-[200px]">
                 <div className="text-equine-ink">
-                  {s.horse_name} — <span className="capitalize">{s.type.replace('_', ' ')}</span>
+                  {s.horse_name || activeHorse?.name || "Horse"} — <span className="capitalize">{requestType.replace(/_/g, " ")}</span>
                 </div>
                 <div className="text-[12.5px] text-equine-inkMuted">
-                  {s.details || "No additional notes"} · {fmtDate(s.created_at)}
+                  {requestDetails} · {fmtDate(s.created_at)}
                 </div>
-                {s.type === "arena_use" && (
+                {requestType === "arena_use" && (
                   <div className="text-[12.5px] text-equine-inkSoft mt-1">
                     {s.arena_name || "Arena"} · {s.requested_date || "Date TBD"} {s.requested_time || ""} · {DURATION_LABEL[s.rental_duration] || "Duration TBD"}
                   </div>
@@ -353,7 +408,8 @@ export default function OwnerPortal() {
                 </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </Card>
       </div>
 
@@ -367,7 +423,7 @@ export default function OwnerPortal() {
           <div className="bg-equine-card border border-equine-hairline rounded-2xl shadow-xl max-w-md w-full p-6">
             <div className="uppercase tracking-[0.22em] text-[10.5px] text-equine-inkSoft mb-1">Decline request</div>
             <h3 className="font-display text-xl text-equine-ink mb-1">
-              {declineFor.horse_name} · <span className="capitalize">{declineFor.type.replace('_', ' ')}</span>
+              {declineFor.horse_name || activeHorse?.name || "Horse"} · <span className="capitalize">{(declineFor.type || declineFor.request_type || "request").replace(/_/g, " ")}</span>
             </h3>
             <p className="text-[13px] text-equine-inkMuted mb-4">
               Add a brief, owner-facing note (optional). Keep it warm and professional — the owner will see this in their portal.

@@ -31,7 +31,9 @@ These are launch-trust gates, not feature-expansion phases. They exist because f
    PWA-assisted pilot.
 9. BN20 / BN12 Closure - Staging, UAT, and remaining launch-runbook closure. Locked.
 10. BN21 - First-Client Pilot Go/No-Go. Locked.
-11. BN22 - Public Launch Gate.
+11. BN22A - Capacitor Native Readiness + Shell Integration. Planned; not
+    started.
+12. BN22 - Public Launch Gate.
 
 ## Why BN18D Was Added
 
@@ -247,10 +249,36 @@ Planning doc:
 
 - [BN21 First-Client Pilot Go/No-Go](BN21_FIRST_CLIENT_PILOT_GO_NO_GO.md)
 
+## BN22A Capacitor Native Readiness + Shell Integration
+
+BN22A is added as a native-readiness bridge after the locked web-first
+first-client pilot go/no-go. It is not an App Store or Google Play submission
+phase.
+
+BN22A should:
+
+- verify the web build;
+- add Capacitor config;
+- add iOS and Android project shells;
+- configure app identity;
+- document native permissions;
+- generate a native readiness checklist;
+- run a local iOS build;
+- produce a TestFlight-readiness report.
+
+BN22A must not submit to App Store Connect or Google Play Console, mutate Apple
+or Google provider state, change billing policy, claim completed store privacy
+labels/data-safety answers, or broaden the locked BN18D offline posture.
+
+Planning doc:
+
+- [BN22A Capacitor Native Readiness + Shell Integration](BN22A_CAPACITOR_NATIVE_READINESS_PLAN.md)
+
 ## Current Recommendation
 
+Proceed to BN22A before any native App Store / Google Play readiness claim.
 Proceed to BN22 only as a public launch gate after first-client pilot evidence
-is available and reviewed. BN21's go result applies only to the first-client
-web-first / PWA-assisted pilot and does not approve public launch, native store
-distribution, provider-live overstatement, full offline claims, or broad
-weak-signal claims.
+and BN22A native-shell readiness evidence are available and reviewed. BN21's go
+result applies only to the first-client web-first / PWA-assisted pilot and does
+not approve public launch, native store distribution, provider-live
+overstatement, full offline claims, or broad weak-signal claims.

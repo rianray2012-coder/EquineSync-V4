@@ -92,6 +92,8 @@ from routes.guardian_intake import build_router as build_guardian_intake_router
 from routes.owner_intake import build_router as build_owner_intake_router
 from routes.barn_owner_intake import build_router as build_barn_owner_intake_router
 from routes.trainer_intake import build_router as build_trainer_intake_router
+from routes.trainer_operating_center import build_router as build_trainer_operating_center_router
+from routes.service_provider_center import build_router as build_service_provider_center_router
 from routes.manager_intake import build_router as build_manager_intake_router
 from routes.staff_intake import build_router as build_staff_intake_router
 from seed_data import run_seed
@@ -197,6 +199,20 @@ api_router.include_router(build_trainer_intake_router(
     db=db,
     get_current_user=get_current_user,
 ))
+
+# RF9 — trainer operating-center read model. Facility-gated product data; unlike
+# trainer intake, this reads active lesson/training/horse/rider context.
+api_router.include_router(build_trainer_operating_center_router(
+    db=db,
+    get_current_user=get_current_user,
+), dependencies=PRODUCT_FACILITY_DEPS)
+
+# RF10 — explicit-grant service-provider operating center.
+api_router.include_router(build_service_provider_center_router(
+    db=db,
+    get_current_user=get_current_user,
+    new_id=new_id,
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Build-Next-13H — barn manager first-login intake shell.
 # Authenticated and barn_manager-role scoped, but intentionally not attached to

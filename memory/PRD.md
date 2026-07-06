@@ -5667,3 +5667,234 @@ Deferred after RF6 package:
 - RF17: route hiding, redirecting, aliasing, and Admin Setup placement.
 
 Next phase after RF6 lock: RF7 owner, guardian, and client portal hardening.
+
+## RF7 - Owner, Guardian, and Client Portal Hardening CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+RF7 hardens the owner/client portal trust surface without broad feature
+expansion. It builds on RF1 owner-safe predicates, RF5 enrollment caveats, and
+RF6 canonical owner-update decisions.
+
+Created:
+- `backend/core/rf7_owner_client_portal_hardening.py`
+- `backend/scripts/build_rf7_owner_client_portal_hardening.py`
+- `backend/tests/test_rf7_owner_client_portal_hardening.py`
+- `BUILD_NEXT_RF7_OWNER_CLIENT_PORTAL_HARDENING_README.md`
+- `docs/RF7_OWNER_GUARDIAN_CLIENT_PORTAL_HARDENING.md`
+- `outputs/rf7_owner_client_portal_hardening_report.md`
+- `outputs/build_next_rf7_owner_client_portal_hardening.zip`
+
+RF7 source updates:
+- `OwnerPortal.jsx` now routes owner/guardian horse inventory to
+  `/owner-portal/horses` and normalizes the backend `{items}` response.
+- Staff preview users continue to use `/horses`.
+- Owner/guardian service submissions from the owner portal now use
+  `/horse-ledger/{horse_id}/owner-service-requests`.
+- `horse_ledger.py` now allows guardian-linked parent users to submit and read
+  their own owner-care requests only for guardian-linked horses.
+- Request display supports both legacy `type/details` service-request rows and
+  owner-care-ledger `request_type/message` rows.
+
+RF7 generated report snapshot:
+- Overall status: `ready`.
+- Blocked/missing rows: 0.
+- Deferred rows remain for owner-media migration/hide, limited-trial server
+  access caps, and leasee grant/revocation implementation.
+
+RF7 lock verification:
+- Focused RF7 tests passed.
+- RF7 report generation passed with blocker failure enabled.
+- Frontend build passed.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check` and RF7 secret-shape scan passed.
+
+RF7 does not implement leasee grants, full limited-trial enforcement,
+feature-module owner-media retirement, concierge billing truth, provider calls,
+native apps, or founder acceptance auto-marking.
+
+Next phase after RF7 lock: RF8 staff work and Task Engine alignment.
+
+RF8 planning doc:
+- `docs/RF8_STAFF_WORKFORCE_MODEL_PLAN.md`
+
+## RF8 - Staff Workforce Model CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+RF8 hardens new staff workforce creates without a historical backfill or Staff
+Tasks migration.
+
+Created:
+- `frontend/src/lib/staffDirectory.js`
+- `backend/core/rf8_staff_workforce_model.py`
+- `backend/scripts/build_rf8_staff_workforce_model.py`
+- `backend/tests/test_rf8_staff_workforce_model.py`
+- `BUILD_NEXT_RF8_STAFF_WORKFORCE_MODEL_README.md`
+- `docs/RF8_STAFF_WORKFORCE_MODEL.md`
+- `outputs/rf8_staff_workforce_model_report.md`
+- `outputs/build_next_rf8_staff_workforce_model.zip`
+
+RF8 source updates:
+- Added `/staff-portal/staff-directory` with `staff:read`, same-barn staff-role
+  filtering, and safe id/name/email/role projection.
+- Staff module create paths require stable staff user IDs for covered staff
+  identity fields.
+- Staff module create/update paths normalize submitted staff user IDs and stamp
+  display names from trusted same-barn user rows.
+- Staff Scheduling create flow requires and submits `staff_user_id`.
+- Staff Tasks create flow requires and submits `assigned_user_id`.
+- Handoff Reports create flow requires and submits `incoming_staff_user_id` and
+  `outgoing_staff_user_id`.
+- Time Clock admin create flow requires and submits `staff_user_id`.
+
+RF8 generated report snapshot:
+- Overall status: `ready`.
+- Blocked/missing rows: 0.
+- Deferred rows remain for Staff Tasks migration/hide, legacy row backfill, and
+  payroll staff-name filter retirement.
+
+RF8 does not mutate legacy rows, perform historical staff backfill, delete Staff
+Tasks, migrate Staff Tasks into Task Engine, change billing truth, add provider
+grants, or mark founder decisions accepted.
+
+Next phase after RF8 lock: RF9 Trainer Operating Center and Trainer Fluidity.
+
+RF9 planning doc:
+- `docs/RF9_TRAINER_OPERATING_CENTER_PLAN.md`
+
+## BN22A - Capacitor Native Readiness + Shell Integration PLANNED (Jul 06 2026)
+
+BN22A is added to the launch-trust path as a native-readiness bridge after the
+locked BN21 web-first first-client pilot go/no-go and before any native
+App Store / Google Play readiness claim.
+
+BN22A is not an App Store or Google Play submission phase.
+
+BN22A scope:
+- verify the web build;
+- add Capacitor config;
+- add iOS and Android native project shells;
+- configure app identity;
+- document native permissions;
+- generate a native readiness checklist;
+- run a local iOS build;
+- produce a TestFlight-readiness report.
+
+BN22A must not submit to App Store Connect or Google Play Console, mutate Apple
+or Google provider state, change billing policy, claim completed privacy labels
+or Data safety answers, broaden offline claims, or mark founder acceptance
+automatically.
+
+Planning doc:
+- `docs/BN22A_CAPACITOR_NATIVE_READINESS_PLAN.md`
+
+## RF9 - Trainer Operating Center and Trainer Fluidity CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+RF9 hardens trainer-owned work without implementing trainer package billing,
+haul-ins, school-horse workflows, or broad multi-facility grants.
+
+Created:
+- `backend/routes/trainer_operating_center.py`
+- `backend/core/rf9_trainer_operating_center.py`
+- `backend/scripts/build_rf9_trainer_operating_center.py`
+- `backend/tests/test_rf9_trainer_operating_center.py`
+- `BUILD_NEXT_RF9_TRAINER_OPERATING_CENTER_README.md`
+- `docs/RF9_TRAINER_OPERATING_CENTER.md`
+- `outputs/rf9_trainer_operating_center_report.md`
+- `outputs/build_next_rf9_trainer_operating_center.zip`
+
+RF9 source updates:
+- Added `/trainer/operating-center` as a trainer-role-scoped read model for
+  trainer-owned lessons, training logs, training plans, horses, and riders.
+- Added `/trainer/directory` for admin, barn manager, and trainer users to use
+  stable trainer IDs in selectors.
+- Lesson and training creates now stamp stable `trainer_id` for trainer users.
+- Trainer lesson/training reads now filter by stable trainer IDs.
+- New Training Plans require stable `horse_id` and `trainer_user_id`, and the
+  backend stamps display names from trusted same-barn records.
+- `/dashboard/trainer` now renders a trainer-specific operating center instead
+  of the generic facility dashboard.
+
+RF9 generated report snapshot:
+- Overall status: `ready`.
+- Blocked/missing rows: 0.
+- Deferred rows remain for trainer package billing and broad multi-facility
+  trainer fluidity.
+- Review findings were fixed before lock: Training Plans no longer hard-depend
+  on `/trainer/directory` for read-only training roles, Training Plan write
+  controls align with backend write roles, and completed lessons are excluded
+  from trainer `upcoming_lessons`.
+
+RF9 does not mutate Stripe, implement paid trainer packages, add
+service-provider grants, implement haul-ins, implement school-horse workflows,
+add native/offline behavior, or mark founder decisions accepted.
+
+Next phase after RF9 lock: RF10 Service Provider / Care Partner Multi-Barn
+Model.
+
+RF10 planning doc:
+- `docs/RF10_SERVICE_PROVIDER_CARE_PARTNER_PLAN.md`
+
+## RF10 - Service Provider / Care Partner Multi-Barn Model CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+RF10 hardens service-provider access through explicit grants without
+implementing provider billing, payouts, messaging delivery, legal document
+workflows, live provider calls, provider canonical care-write authority,
+account-level cross-facility provider identity, native/offline behavior, or
+founder acceptance.
+
+Created:
+- `backend/core/provider_access.py`
+- `backend/routes/service_provider_center.py`
+- `backend/core/rf10_service_provider_care_partner.py`
+- `backend/scripts/build_rf10_service_provider_care_partner.py`
+- `backend/tests/test_rf10_service_provider_care_partner.py`
+- `BUILD_NEXT_RF10_SERVICE_PROVIDER_CARE_PARTNER_README.md`
+- `docs/RF10_SERVICE_PROVIDER_CARE_PARTNER.md`
+- `outputs/rf10_service_provider_care_partner_report.md`
+- `outputs/build_next_rf10_service_provider_care_partner.zip`
+
+RF10 source updates:
+- Adds explicit provider grant resolution from active
+  `horse_provider_assignments` linked by same-barn stable `provider_user_id` or
+  explicit provider catalog rows.
+- Care Ledger service-provider catalog and assignment rows can now carry
+  validated `provider_user_id`.
+- Adds `/service-provider/operating-center` for grant-scoped shared horses,
+  vet records, farrier records, and provider visit notes.
+- Adds `/service-provider/visit-notes`, which requires a granted horse and
+  stamps the provider user and granted horse barn.
+- Direct provider `/horses` and care-route reads are scoped to explicit grants;
+  provider owners/riders lists return no barn directory data.
+- Provider-authored RF10 care entries are limited to provider visit notes;
+  canonical care creates and medication/feed completions remain facility-owned.
+- The operating-center API returns safe grant projections instead of raw
+  assignment rows or internal assignment notes.
+- `/dashboard/service-provider` now renders a real grant-scoped provider center
+  instead of static shell cards.
+
+RF10 generated report snapshot:
+- Overall status: `ready`.
+- Blocked/missing rows: 0.
+- Deferred rows remain for provider invoices/payments/payouts, messaging
+  delivery truth, legal documents/signatures/storage, and live external
+  provider integrations.
+- Deferred rows also remain for provider canonical care-write authority and
+  account-level cross-facility provider identity.
+
+RF10 does not mutate Stripe, implement provider invoices or payouts, call live
+providers, implement messaging delivery, implement legal document workflows, add
+provider canonical care-write authority, prove account-level cross-facility
+provider identity, add native/offline behavior, or mark founder decisions
+accepted.
+
+RF10 lock verification:
+- Focused RF10 tests passed with provider grant, denial, safe grant projection,
+  canonical care-write rejection, and medication-log barn scoping coverage.
+- RF10 report generation passed with blocker failure enabled.
+- Frontend build passed.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check`, py-compile, and RF10 secret-shape scan passed.
+
+Next phase after RF10 lock: RF11 Property, Location, Map, and Community Help
+System.
+
+RF11 planning doc:
+- `docs/RF11_PROPERTY_LOCATION_MAP_COMMUNITY_HELP_PLAN.md`

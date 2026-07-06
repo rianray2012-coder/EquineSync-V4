@@ -42,6 +42,7 @@ from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from core.provider_access import service_provider_user_exists
 from core.tenancy import barn_filter, resolve_barn_id
 from routes.admin_portal._helpers import _redact_stripe_in_string
 
@@ -1181,9 +1182,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
                       "massage", "acupuncturist", "saddle_fitter",
                       "nutritionist", "dentist", "trainer", "other"}
     _PROVIDER_WRITABLE = {"category", "name", "company", "phone", "email",
-                          "address", "notes", "is_primary_for_barn", "status"}
+                          "address", "notes", "is_primary_for_barn", "status",
+                          "provider_user_id"}
     _PROVIDER_STATUS = {"active", "archived"}
-    _ASSIGNMENT_WRITABLE = {"provider_id", "category", "last_service_date",
+    _ASSIGNMENT_WRITABLE = {"provider_id", "provider_user_id", "category", "last_service_date",
                             "next_due_date", "interval_days", "notes",
                             "is_primary_for_horse", "status"}
     _ASSIGNMENT_STATUS = {"active", "archived"}
@@ -1202,6 +1204,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
             raise HTTPException(422, f"Field not editable: {bad[0]!r}")
         if body.get("status") and body["status"] not in _PROVIDER_STATUS:
             raise HTTPException(422, "status must be active|archived.")
+        if not await service_provider_user_exists(db, user, body.get("provider_user_id")):
+            raise HTTPException(422, "provider_user_id must reference a same-barn provider user.")
         import uuid as _uuid
         sp_id = f"sp_{_uuid.uuid4().hex[:24]}"
         await db.service_providers.insert_one({
@@ -1232,14 +1236,19 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # Provider must be in same barn.
         prov = await db.service_providers.find_one(
             {"id": body["provider_id"], "barn_id": horse["barn_id"]},
-            {"_id": 0, "id": 1},
+            {"_id": 0, "id": 1, "provider_user_id": 1},
         )
         if not prov:
             raise HTTPException(404, "Provider not found.")
+        if body.get("provider_user_id") and prov.get("provider_user_id") and body["provider_user_id"] != prov["provider_user_id"]:
+            raise HTTPException(422, "provider_user_id must match the linked provider.")
+        if not await service_provider_user_exists(db, user, body.get("provider_user_id") or prov.get("provider_user_id")):
+            raise HTTPException(422, "provider_user_id must reference a same-barn provider user.")
         import uuid as _uuid
         hpa_id = f"hpa_{_uuid.uuid4().hex[:24]}"
         await db.horse_provider_assignments.insert_one({
             **body, "id": hpa_id, "horse_id": horse_id,
+            "provider_user_id": body.get("provider_user_id") or prov.get("provider_user_id"),
             "barn_id": horse["barn_id"],
             "status": body.get("status") or "active",
             "created_at": datetime.now(timezone.utc).isoformat(),
@@ -1263,6 +1272,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
             raise HTTPException(422, "category must be a known provider type.")
         if body.get("status") and body["status"] not in _ASSIGNMENT_STATUS:
             raise HTTPException(422, "status must be active|archived.")
+        if not await service_provider_user_exists(db, user, body.get("provider_user_id")):
+            raise HTTPException(422, "provider_user_id must reference a same-barn provider user.")
         r = await db.horse_provider_assignments.update_one(
             {"id": assignment_id, "horse_id": horse_id,
              "barn_id": horse["barn_id"]},
@@ -2003,6 +2014,23 @@ def build_router(*, db, get_current_user) -> APIRouter:
         sec = horse.get("secondary_owner_ids") or []
         return isinstance(sec, list) and uid in sec
 
+    def _is_horse_guardian_for(user, horse) -> bool:
+        uid = user.get("id")
+        if not uid:
+            return False
+        if horse.get("guardian_user_id") == uid:
+            return True
+        guardians = horse.get("guardian_user_ids") or []
+        return isinstance(guardians, list) and uid in guardians
+
+    def _can_use_owner_request_contract(user, horse) -> bool:
+        role = (user.get("role") or "").strip().lower()
+        if role == "horse_owner":
+            return _is_horse_owner_for(user, horse)
+        if role == "parent":
+            return _is_horse_guardian_for(user, horse)
+        return False
+
     def _owner_safe_horse_projection(horse: Dict[str, Any]) -> Dict[str, Any]:
         data = horse.get("data") if isinstance(horse.get("data"), dict) else {}
         return _scrub_strings({
@@ -2054,10 +2082,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
         if not horse:
             raise HTTPException(404, "Not found.")
         role = (user.get("role") or "").strip().lower()
-        if role == "horse_owner":
+        if role in {"horse_owner", "parent"}:
             if horse.get("barn_id") != user.get("barn_id"):
                 raise HTTPException(404, "Not found.")
-            if not _is_horse_owner_for(user, horse):
+            if not _can_use_owner_request_contract(user, horse):
                 raise HTTPException(404, "Not found.")
             return horse
         # Staff preview: must be in the same barn AND be admin/manager.
@@ -2117,7 +2145,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # Compute owner-safe care_status (strict precedence: alerts > requests > all_clear).
         # The active-alert lookup returns only "is there any?" — zero
         # detail crosses the boundary.
-        owner_uid = (user.get("id") if (user.get("role") or "").lower() == "horse_owner"
+        role = (user.get("role") or "").strip().lower()
+        owner_uid = (user.get("id") if role in {"horse_owner", "parent"}
                      else (horse.get("primary_owner_id") or horse.get("owner_id") or ""))
         care_status = "all_clear"
         active_alert = await db.horse_ledger_alerts.find_one(
@@ -2182,11 +2211,11 @@ def build_router(*, db, get_current_user) -> APIRouter:
     @router.post("/horse-ledger/{horse_id}/owner-service-requests")
     async def create_owner_request(horse_id: str, body: Dict[str, Any],
                                    user=Depends(get_current_user)):
-        # Owner-only create. Staff/admin previewing the owner page does
-        # NOT get write access here.
+        # Owner/guardian create. Staff/admin previewing the owner page
+        # does NOT get write access here.
         role = (user.get("role") or "").strip().lower()
-        if role != "horse_owner":
-            raise HTTPException(403, "Owner-only.")
+        if role not in {"horse_owner", "parent"}:
+            raise HTTPException(403, "Owner/guardian-only.")
         horse = await _load_horse_for_owner_or_404(horse_id, user)
         if not isinstance(body, dict):
             raise HTTPException(422, "Body must be an object.")
@@ -2235,9 +2264,9 @@ def build_router(*, db, get_current_user) -> APIRouter:
 
     @router.get("/horse-ledger/{horse_id}/owner-service-requests")
     async def list_owner_requests(horse_id: str, user=Depends(get_current_user)):
-        # Owner sees own; manager/admin sees all owner-care requests on
-        # the horse. Other staff → 404 (founder lock #6 — no assigned-
-        # staff visibility in 1-E).
+        # Owner/guardian sees own; manager/admin sees all owner-care
+        # requests on the horse. Other staff → 404 (founder lock #6 —
+        # no assigned-staff visibility in 1-E).
         horse = await db.horses.find_one({"id": horse_id}, {"_id": 0})
         if not horse:
             raise HTTPException(404, "Not found.")
@@ -2249,8 +2278,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "source": "owner_care_ledger",
         }
         owner_response = False
-        if role == "horse_owner":
-            if not _is_horse_owner_for(user, horse):
+        if role in {"horse_owner", "parent"}:
+            if not _can_use_owner_request_contract(user, horse):
                 raise HTTPException(404, "Not found.")
             q["owner_user_id"] = user["id"]
             owner_response = True

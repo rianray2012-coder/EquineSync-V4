@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, RF2, RF3, RF4, RF5, and RF6 CODEX-REVIEWED & LOCKED. RF7 is next.
+Status: RF0, RF1, RF2, RF3, RF4, RF5, RF6, RF7, RF8, RF9, and RF10 CODEX-REVIEWED & LOCKED. RF11 is ready for planning.
 
 ## Purpose
 
@@ -52,7 +52,7 @@ Acceleration is allowed only after RF1 and RF2 are safe. Do not build RF9/RF10 t
 
 ## Current Recommendation
 
-Proceed to RF7 - Owner, Guardian, and Client Portal Hardening.
+Proceed with RF11 - Property, Location, Map, and Community Help System.
 
 RF1 locked these source-backed blocker fixes:
 
@@ -205,3 +205,81 @@ should build on RF1 stable owner-safe predicates, RF5 enrollment caveats, and
 RF6 canonical owner-update decisions without expanding trainer/provider,
 billing, document-signature, or feature-shell retirement scope beyond the owner
 trust surface.
+
+## RF7 Lock Note
+
+RF7 is Codex-reviewed and locked. See
+`docs/RF7_OWNER_GUARDIAN_CLIENT_PORTAL_HARDENING.md` and
+`outputs/rf7_owner_client_portal_hardening_report.md`.
+
+RF7 status is `ready` with zero blocked or missing rows. It hardens
+`frontend/src/pages/OwnerPortal.jsx` so owner/guardian horse inventory uses
+`/owner-portal/horses`, while staff preview users continue to use `/horses`.
+Owner/guardian service submissions from the owner portal now use the hardened
+owner-care-ledger request contract at
+`/horse-ledger/{horse_id}/owner-service-requests`; request display handles both
+legacy `type/details` rows and owner-care-ledger `request_type/message` rows.
+
+RF7 does not implement leasee grants/revocation, full limited-trial server
+access caps, feature-module owner-media migration/hide, concierge billing truth,
+provider calls, native app work, or founder acceptance auto-marking.
+
+RF8 may proceed as the staff work and Task Engine alignment gate.
+
+## RF8 Lock Note
+
+RF8 is Codex-reviewed and locked. See `docs/RF8_STAFF_WORKFORCE_MODEL.md` and
+`outputs/rf8_staff_workforce_model_report.md`.
+
+RF8 status is `ready` with zero blocked or missing rows. It adds a safe
+same-barn staff directory endpoint, requires stable staff IDs on new covered
+staff-module creates, normalizes supplied staff user IDs to trusted display
+names server-side, and updates staff scheduling, Staff Tasks, handoff, and
+time-clock create flows to require and submit stable staff user IDs.
+
+RF8 preserves RF2 self-service ID predicates for My Work, staff task status,
+time clock, and payroll export. RF8 does not migrate historical name-only rows,
+delete Staff Tasks, migrate Staff Tasks into Task Engine, change billing truth,
+add provider grants, or mark founder decisions accepted.
+
+RF9 may proceed as the Trainer Operating Center and Trainer Fluidity gate. See
+`docs/RF9_TRAINER_OPERATING_CENTER_PLAN.md`.
+
+## RF9 Lock Note
+
+RF9 is Codex-reviewed and locked. See `docs/RF9_TRAINER_OPERATING_CENTER.md` and
+`outputs/rf9_trainer_operating_center_report.md`.
+
+RF9 status is `ready` with zero blocked or missing rows. It adds an
+ID-scoped trainer operating-center read model, stable trainer-owned lesson and
+training log semantics, stable-ID Training Plan creates, and a trainer-specific
+dashboard at `/dashboard/trainer`.
+
+RF9 preserves trainer intake as review-gated setup intent. RF9 does not
+implement trainer package billing, Stripe changes, haul-in workflows,
+school-horse workflows, broad multi-facility trainer grants, service-provider
+multi-barn grants, native/offline behavior, or founder acceptance
+auto-marking.
+
+RF10 is Codex-reviewed and locked as the Service Provider / Care Partner
+Multi-Barn Model gate. See `docs/RF10_SERVICE_PROVIDER_CARE_PARTNER.md`.
+
+## RF10 Package Note
+
+RF10 is Codex-reviewed and locked. See
+`docs/RF10_SERVICE_PROVIDER_CARE_PARTNER.md` and
+`outputs/rf10_service_provider_care_partner_report.md`.
+
+RF10 status is `ready` with zero blocked or missing rows. It adds an explicit
+provider-grant helper, same-barn stable `provider_user_id` validation for Care
+Ledger provider assignments, safe grant projections, a provider-role operating
+center at `/service-provider/operating-center`, provider-authored visit notes,
+direct provider horse/care read scoping, and a real service-provider dashboard.
+
+RF10 does not implement provider invoices, payouts, Stripe changes, live
+provider API calls, messaging delivery truth, legal signature/storage truth,
+provider canonical care-write authority, account-level cross-facility provider
+identity, native/offline behavior, or founder acceptance auto-marking.
+
+RF11 may proceed as the Property, Location, Map, and Community Help System
+gate. See `docs/RF11_PROPERTY_LOCATION_MAP_COMMUNITY_HELP_PLAN.md`.

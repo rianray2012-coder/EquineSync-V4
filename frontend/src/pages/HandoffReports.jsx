@@ -2,23 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertTriangle, CheckCircle2, ClipboardList, FileText, Plus, RefreshCw, Send } from "lucide-react";
 import { toast } from "sonner";
 import { api, fmtDate } from "../lib/api";
+import { normalizeStaffDirectory, staffNameById, staffOptions } from "../lib/staffDirectory";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const STATUSES = ["draft", "submitted", "reviewed"];
 const STATUS_TONE = { draft: "neutral", submitted: "warning", reviewed: "success" };
 const PRIORITY_TONE = { low: "neutral", normal: "info", high: "critical" };
-
-const ADD_FIELDS = [
-  { key: "shift_date", label: "Shift date", type: "date", required: true },
-  { key: "outgoing_staff", label: "Outgoing staff", placeholder: "Staff name" },
-  { key: "incoming_staff", label: "Incoming staff", placeholder: "Staff name" },
-  { key: "area", label: "Area", placeholder: "Barn area" },
-  { key: "priority", label: "Priority", kind: "select", opts: ["low", "normal", "high"] },
-  { key: "status", label: "Status", kind: "select", opts: STATUSES },
-  { key: "summary", label: "Summary", kind: "textarea", rows: 4, required: true, full: true },
-  { key: "open_items", label: "Open items", kind: "textarea", rows: 4, full: true },
-];
 
 const today = () => new Date().toISOString().slice(0, 10);
 const labelFor = (value) => String(value || "").replace(/_/g, " ");
@@ -31,19 +21,22 @@ export default function HandoffReports() {
   const [error, setError] = useState(null);
   const [addOpen, setAddOpen] = useState(false);
   const [savingId, setSavingId] = useState(null);
+  const [staff, setStaff] = useState([]);
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const [reportRes, taskRes, shiftRes] = await Promise.all([
+      const [reportRes, taskRes, shiftRes, staffRes] = await Promise.all([
         api.get("/feature-modules/handoff-reports"),
         api.get("/feature-modules/staff-tasks"),
         api.get("/feature-modules/staff-scheduling"),
+        api.get("/staff-portal/staff-directory"),
       ]);
       setReports(reportRes.data.records || []);
       setTasks(taskRes.data.records || []);
       setShifts(shiftRes.data.records || []);
+      setStaff(normalizeStaffDirectory(staffRes.data));
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load handoff reports.");
     } finally {
@@ -52,6 +45,17 @@ export default function HandoffReports() {
   }, []);
 
   useEffect(() => { load(); }, [load]);
+
+  const addFields = useMemo(() => [
+    { key: "shift_date", label: "Shift date", type: "date", required: true },
+    { key: "outgoing_staff_user_id", label: "Outgoing staff", kind: "select", required: true, opts: staffOptions(staff) },
+    { key: "incoming_staff_user_id", label: "Incoming staff", kind: "select", required: true, opts: staffOptions(staff) },
+    { key: "area", label: "Area", placeholder: "Barn area" },
+    { key: "priority", label: "Priority", kind: "select", opts: ["low", "normal", "high"] },
+    { key: "status", label: "Status", kind: "select", opts: STATUSES },
+    { key: "summary", label: "Summary", kind: "textarea", rows: 4, required: true, full: true },
+    { key: "open_items", label: "Open items", kind: "textarea", rows: 4, full: true },
+  ], [staff]);
 
   const stats = useMemo(() => Object.fromEntries(STATUSES.map((status) => [
     status,
@@ -241,10 +245,16 @@ export default function HandoffReports() {
         onClose={() => setAddOpen(false)}
         title="Add handoff report"
         eyebrow="Staff"
-        fields={ADD_FIELDS}
+        fields={addFields}
         endpoint="/feature-modules/handoff-reports/records"
         initialValues={{ shift_date: today(), priority: "normal", status: "draft" }}
-        transform={(form) => ({ data: form })}
+        transform={(form) => ({
+          data: {
+            ...form,
+            outgoing_staff: staffNameById(staff, form.outgoing_staff_user_id),
+            incoming_staff: staffNameById(staff, form.incoming_staff_user_id),
+          },
+        })}
         submitLabel="Save report"
         testidPrefix="handoff-reports-add"
         onCreated={load}

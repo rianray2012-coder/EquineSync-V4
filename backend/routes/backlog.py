@@ -1054,6 +1054,126 @@ def _staff_time_clock_clauses(user_id: Optional[str]) -> List[Dict[str, Any]]:
     ]
 
 
+async def _staff_user_lookup(db, user: Dict[str, Any], staff_user_id: Optional[str]) -> Optional[Dict[str, Any]]:
+    if not staff_user_id:
+        return None
+    return await db.users.find_one(
+        {
+            "id": staff_user_id,
+            "barn_id": user.get("barn_id") or DEFAULT_BARN_ID,
+            "role": {"$in": sorted(STAFF_ROLES)},
+        },
+        {"_id": 0, "id": 1, "full_name": 1, "email": 1, "role": 1},
+    )
+
+
+async def _trainer_user_lookup(db, user: Dict[str, Any], trainer_user_id: Optional[str]) -> Optional[Dict[str, Any]]:
+    if not trainer_user_id:
+        return None
+    return await db.users.find_one(
+        {
+            "id": trainer_user_id,
+            "barn_id": user.get("barn_id") or DEFAULT_BARN_ID,
+            "role": "trainer",
+        },
+        {"_id": 0, "id": 1, "full_name": 1, "email": 1, "role": 1},
+    )
+
+
+async def _horse_lookup(db, user: Dict[str, Any], horse_id: Optional[str]) -> Optional[Dict[str, Any]]:
+    if not horse_id:
+        return None
+    return await db.horses.find_one(
+        {"id": horse_id, "barn_id": user.get("barn_id") or DEFAULT_BARN_ID},
+        {"_id": 0, "id": 1, "name": 1},
+    )
+
+
+RF8_STAFF_IDENTITY_FIELDS: Dict[str, List[tuple[str, str]]] = {
+    "staff-scheduling": [("staff_user_id", "staff_name")],
+    "staff-tasks": [("assigned_user_id", "assigned_to")],
+    "handoff-reports": [("outgoing_staff_user_id", "outgoing_staff"), ("incoming_staff_user_id", "incoming_staff")],
+    "time-clock": [("staff_user_id", "staff_name")],
+}
+
+
+async def _normalize_staff_identity_data(
+    db,
+    user: Dict[str, Any],
+    module_key: str,
+    data: Dict[str, Any],
+    *,
+    creating: bool = False,
+) -> Dict[str, Any]:
+    normalized = dict(data or {})
+    identity_fields = RF8_STAFF_IDENTITY_FIELDS.get(module_key, [])
+
+    if creating and identity_fields:
+        missing_ids = [id_key for id_key, _ in identity_fields if not normalized.get(id_key)]
+        if missing_ids:
+            raise HTTPException(422, f"Missing required stable staff id field(s): {', '.join(missing_ids)}")
+
+    for id_key, name_key in identity_fields:
+        if creating and normalized.get(name_key) and not normalized.get(id_key):
+            raise HTTPException(422, f"{name_key} requires {id_key}")
+
+    async def apply_user_id(id_key: str, name_key: str) -> None:
+        staff_user_id = normalized.get(id_key)
+        if not staff_user_id:
+            return
+        staff_user = await _staff_user_lookup(db, user, staff_user_id)
+        if not staff_user:
+            raise HTTPException(422, f"Unknown staff user for {id_key}")
+        normalized[id_key] = staff_user["id"]
+        normalized[name_key] = staff_user.get("full_name") or staff_user.get("email") or staff_user["id"]
+
+    for id_key, name_key in identity_fields:
+        await apply_user_id(id_key, name_key)
+
+    return normalized
+
+
+async def _normalize_training_plan_identity_data(
+    db,
+    user: Dict[str, Any],
+    module_key: str,
+    data: Dict[str, Any],
+    *,
+    creating: bool = False,
+) -> Dict[str, Any]:
+    normalized = dict(data or {})
+    if module_key != "training-plans":
+        return normalized
+
+    if creating:
+        missing = [key for key in ("horse_id", "trainer_user_id") if not normalized.get(key)]
+        if missing:
+            raise HTTPException(422, f"Missing required stable training plan field(s): {', '.join(missing)}")
+
+    horse_id = normalized.get("horse_id")
+    if horse_id:
+        horse = await _horse_lookup(db, user, horse_id)
+        if not horse:
+            raise HTTPException(422, "Unknown horse for training plan")
+        normalized["horse_id"] = horse["id"]
+        normalized["horse_name"] = horse.get("name") or horse["id"]
+
+    trainer_user_id = normalized.get("trainer_user_id")
+    if (user.get("role") or "").strip().lower() == "trainer":
+        if trainer_user_id and trainer_user_id != user.get("id"):
+            raise HTTPException(403, "Trainer can only assign their own trainer id")
+        trainer_user_id = user.get("id")
+        normalized["trainer_user_id"] = trainer_user_id
+    if trainer_user_id:
+        trainer = await _trainer_user_lookup(db, user, trainer_user_id)
+        if not trainer:
+            raise HTTPException(422, "Unknown trainer for training plan")
+        normalized["trainer_user_id"] = trainer["id"]
+        normalized["trainer_name"] = trainer.get("full_name") or trainer.get("email") or trainer["id"]
+
+    return normalized
+
+
 def _automation_draft(*, suggestion_type: str, subject: str, summary: str, confidence: float, generated_key: str) -> Dict[str, Any]:
     return {
         "suggestion_type": suggestion_type,
@@ -1129,6 +1249,18 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             rows.append({k: v for k, v in mod.items() if k != "collection"} | {"record_count": count})
         return rows
 
+    @router.get("/staff-portal/staff-directory")
+    async def staff_portal_staff_directory(user=Depends(get_current_user)):
+        require_permission(user, "staff:read")
+        rows = await db.users.find(
+            {
+                "barn_id": user.get("barn_id") or DEFAULT_BARN_ID,
+                "role": {"$in": sorted(STAFF_ROLES)},
+            },
+            {"_id": 0, "id": 1, "full_name": 1, "email": 1, "role": 1},
+        ).sort("full_name", 1).to_list(500)
+        return {"items": rows}
+
     @router.get("/feature-modules/{module_key}")
     async def get_module(module_key: str, user=Depends(get_current_user)):
         mod = _module_for(module_key)
@@ -1144,8 +1276,10 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
     async def create_record(module_key: str, body: FeatureRecordIn, user=Depends(get_current_user)):
         mod = _module_for(module_key)
         require_permission(user, mod["write_permission"])
-        _validate_record(mod, body.data)
-        doc = _base_doc(user=user, new_id=new_id, data=body.data)
+        data = await _normalize_staff_identity_data(db, user, module_key, body.data, creating=True)
+        data = await _normalize_training_plan_identity_data(db, user, module_key, data, creating=True)
+        _validate_record(mod, data)
+        doc = _base_doc(user=user, new_id=new_id, data=data)
         await db[mod["collection"]].insert_one(doc)
         clean = _clean_doc(doc)
         await write_audit(
@@ -1168,7 +1302,8 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         )
         if not existing:
             raise HTTPException(404, "Record not found")
-        data = {**(existing.get("data") or {}), **body.data}
+        data = await _normalize_staff_identity_data(db, user, module_key, {**(existing.get("data") or {}), **body.data})
+        data = await _normalize_training_plan_identity_data(db, user, module_key, data)
         _validate_record(mod, data)
         await db[mod["collection"]].update_one(
             {"id": record_id},

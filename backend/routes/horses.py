@@ -17,6 +17,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from core.account_route_context import account_barn_filter
+from core.provider_access import grant_horse_filter, is_provider_user, provider_grants
 from core.tenancy import barn_filter, stamp_barn
 
 
@@ -58,6 +59,9 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id, requir
 
     @router.get("/horses")
     async def list_horses(account_id: Optional[str] = None, user=Depends(get_current_user)):
+        if is_provider_user(user):
+            grants = await provider_grants(db, user)
+            return await list_collection("horses", grant_horse_filter(grants))
         # BN3C pilot: read scope can use selected account context; writes remain legacy-scoped.
         return await list_collection("horses", await account_barn_filter(db, user, account_id=account_id))
 
@@ -72,6 +76,12 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id, requir
 
     @router.get("/horses/{horse_id}")
     async def get_horse(horse_id: str, account_id: Optional[str] = None, user=Depends(get_current_user)):
+        if is_provider_user(user):
+            grants = await provider_grants(db, user)
+            h = await db.horses.find_one(grant_horse_filter(grants, horse_id), {"_id": 0})
+            if not h:
+                raise HTTPException(404, "Horse not found")
+            return h
         # BN3C pilot: scope read by id + selected facility account; cross-account ids 404.
         h = await db.horses.find_one(await account_barn_filter(db, user, account_id=account_id, extra={"id": horse_id}), {"_id": 0})
         if not h:
