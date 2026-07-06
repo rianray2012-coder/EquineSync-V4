@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, RF2, and RF3 CODEX-REVIEWED & LOCKED. RF4 is next.
+Status: RF0, RF1, RF2, RF3, and RF4 CODEX-REVIEWED & LOCKED. RF5 is next.
 
 ## Purpose
 
@@ -25,7 +25,7 @@ Current launch posture remains:
 | RF2 | Identity-Based Access Migration | Replace highest-risk name-based access matching with stable IDs. | Staff self-service access no longer depends on display names; payroll supports stable staff filtering; document signature identity evidence is recorded; provider, message, and full workforce identity work is explicitly deferred to RF8/RF10/RF13/RF17. |
 | RF3 | Onboarding 2.0, Import Concierge, and Setup Integrations | Turn onboarding/import/setup into guided, review-first workflows. | Users can import draft data safely; required/optional setup is clear; integration readiness is truthful; AI suggestions require review. |
 | RF4 | Feature Completion Certification and Placeholder Elimination | Classify every visible feature as hidden, scaffold, readiness, pilot beta, live, or deprecated. | No daily user sees a fake-live feature; every nav item maps to a live/pilot or approved readiness surface; no placeholder/dev/test copy in user-facing production UI. |
-| RF5 | Admin Portal Intelligence, Customer Success, Billing Intervention, and Account Health | Expand platform admin into customer-success, billing health, support, account health, and product intelligence. | Platform admins can see user/facility health; support can find stuck users; billing actions are audited; sensitive content is scrubbed; barn admins remain separate. |
+| RF5 | Admin Portal Intelligence, Customer Success, Web Enrollment, Billing Intervention, and Account Health | Expand platform admin into customer-success, web enrollment/signup entry-point health, billing health, support, account health, and product intelligence. | Platform admins can see user/facility health; support can find stuck users; login/home signup entry points route no-account users to the correct enrollment path; billing actions are audited; sensitive content is scrubbed; barn admins remain separate. |
 | RF6 | Canonical Systems Consolidation | Choose one source of truth per domain and retire split systems. | Operational tasks, inventory, owner updates, documents, billing, and integration readiness each have one canonical system or explicit migration/hide decision. |
 | RF7 | Owner, Guardian, and Client Portal Hardening | Finish owner/guardian/rider trust surfaces. | Owners, guardians, and riders see only linked records; staff/internal notes remain hidden; payment/document/request state is accurate. |
 | RF8 | Staff Workforce Model | Unify staff identity, scheduling, tasks, handoffs, time clock, and payroll export. | Staff schedule, My Work, time clock, handoffs, and payroll use stable user IDs and audited corrections; operational tasks remain Task Engine tasks. |
@@ -52,7 +52,8 @@ Acceleration is allowed only after RF1 and RF2 are safe. Do not build RF9/RF10 t
 
 ## Current Recommendation
 
-Proceed to RF4 - Feature Completion Certification and Placeholder Elimination.
+Proceed to RF5 - Admin Portal Intelligence, Customer Success, Web Enrollment,
+Billing Intervention, and Account Health.
 
 RF1 locked these source-backed blocker fixes:
 
@@ -77,7 +78,7 @@ RF1 is Codex-reviewed and locked as a narrow P0 data-fence and
 backend-capability gate. See `docs/RF1_DATA_FENCES_CAPABILITY_GATES.md` and
 `outputs/rf1_data_fences_capability_gates_report.md`.
 
-RF4 may proceed as the next dedicated phase.
+RF4 is Codex-reviewed and locked. RF5 may proceed.
 
 ## RF3 Lock Note
 
@@ -99,3 +100,48 @@ RF2 is Codex-reviewed and locked. See
 RF2 must not be expanded into RF8 workforce implementation after lock. Strict
 stable-ID staff self-service matching is accepted for RF2, and legacy name-only
 staff rows remain RF8 migration/backfill work.
+
+## RF4 Lock Note
+
+RF4 is Codex-reviewed and locked. See
+`docs/RF4_FEATURE_COMPLETION_CERTIFICATION.md` and
+`outputs/rf4_feature_completion_certification_report.md`.
+
+RF4 locked with report status `ready`, zero blocker rows, and one deferred
+scaffold row for Staff Tasks versus Task Engine consolidation. RF4 classifies
+all 32 feature-module keys, pins eight direct feature/readiness routes, and
+narrows copy for manifest exports, push previews, local form/signature status,
+integration readiness, limited field-recovery/mobile readiness, Admin Portal
+permissions, and owner role-intake fallback panels.
+
+RF4 does not close RF6/RF8/RF12/RF13/RF14/RF15/RF16/RF17. Founder review still
+must decide which readiness/scaffold pages stay visible before RF17 and whether
+manifest-only exports and push previews are acceptable until their later
+implementation phases.
+
+## RF4 Pre-Lock Enrollment Note
+
+Before RF4 lock, founder requested that EquineSync add a general web-based
+enrollment workflow. This is recorded as RF0-F19 in the master fix list and is
+mapped into the current RF plan:
+
+- RF5 owns the web enrollment/signup foundation: home-page signup, login-page
+  join/signup entry point, account creation credentials, critical signup data,
+  and a clear path selector.
+- RF7 owns individual horse/owner enrollment depth, including owners whose barns
+  are not on EquineSync, owners keeping horses on their own land, and family or
+  informal care contexts.
+- RF9 owns trainer-specific enrollment depth.
+- RF10 owns service-provider enrollment depth.
+- RF18 must re-test the enrollment paths before broader launch.
+
+RF4 does not implement enrollment. This note is included so RF5 planning does
+not miss the signup entry-point and individual-horse enrollment requirement.
+
+## RF5 Entry Boundary
+
+RF5 may start with the RF0-F19 web enrollment foundation and evidence-backed
+customer-success/account-health inventory. RF5 must not implement RF7 owner
+portal hardening, RF9 trainer operating-center depth, RF10 service-provider
+multi-barn grants, RF12 payment truth, or RF18 UAT closure inside the opening
+RF5 pass.

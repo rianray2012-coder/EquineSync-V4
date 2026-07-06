@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, RF2, and RF3 CODEX-REVIEWED & LOCKED. RF4 is next.
+Status: RF0, RF1, RF2, RF3, and RF4 CODEX-REVIEWED & LOCKED. RF5 is next.
 
 ## Classification Key
 
@@ -24,19 +24,20 @@ Status: RF0, RF1, RF2, and RF3 CODEX-REVIEWED & LOCKED. RF4 is next.
 | RF0-F03 | QuickBooks invoice export must be barn-scoped. | fixed | RF1, RF12 | RF1 scopes QuickBooks invoice export by `barn_id` in `backend/routes/backlog.py`. | RF12 should finish broader export/accounting truth beyond the RF1 leak fix. |
 | RF0-F04 | Owner portal billing and related surfaces still rely on display/free-text fields. | partially fixed | RF1, RF2, RF7, RF12 | RF1 moved owner-portal access predicates to stable owner/user/horse clauses. RF2 records that remaining display/form fields are not authorization predicates for its narrow scope. | RF7/RF12 should finish canonical portal UX and payment truth; RF17 should retire misleading feature-shell form fields. |
 | RF0-F05 | Owner updates exist in two worlds: real lifecycle backend and feature-module media tracker. | partially fixed | RF6, RF7, RF17 | Real lifecycle exists in `backend/routes/owner_updates.py`; feature-module media update routes still exist in `backend/routes/backlog.py`. | Make `owner_updates` canonical; migrate/hide feature-module owner media updates. |
-| RF0-F06 | Feature-module shells still appear as production-like modules. | open P1 | RF4, RF17 | Routes and pages exist for `MobileReadiness`, `AdvancedReports`, `GroupMessaging`, `AI Automation`, `Forms & Signatures`, `Staff Tasks`, `Supply Inventory`, and others. Some are readiness/manifest surfaces. | Create feature registry; hide, relabel, or move readiness surfaces out of daily nav. |
+| RF0-F06 | Feature-module shells still appear as production-like modules. | partially fixed | RF4, RF17 | RF4 classifies all 32 feature-module keys and pins direct-route classifications for `MobileReadiness`, `AdvancedReports`, `GroupMessaging`, `AI Automation`, `Forms & Signatures`, `Staff Tasks`, `Supply Inventory`, and integration readiness surfaces. Daily role navigation is curated, but direct readiness/scaffold routes still need RF17 founder decisions. | Use the locked RF4 classifications to hide, relabel, redirect, or move readiness/scaffold surfaces out of daily nav in RF17. |
 | RF0-F07 | Staff scheduling, tasks, handoffs, and time clock are name-based. | partially fixed | RF2, RF8 | RF2 packages stable user-ID predicates for staff My Work, task status, handoffs, time-clock ownership, and payroll `staff_user_id` filtering in `backend/routes/backlog.py`. Frontend staff forms and legacy rows still use/display name fields. | RF8 must migrate/backfill workforce records to `staff_user_id` / `account_membership_id` and replace name text fields with staff selectors. |
 | RF0-F08 | Staff Tasks and Task Engine are parallel task systems. | open P1 | RF6, RF8 | `backend/task_engine.py` is canonical for operational tasks, while `staff_task_assignments` and `/staff-tasks` exist in backlog surfaces. | Merge/demote Staff Tasks into Task Engine views or hide as readiness/admin-only. |
 | RF0-F09 | Inventory and Supply Inventory are duplicated. | open P1 | RF6 | `/inventory` and `/supply-inventory` are both routed; `frontend/src/pages/Inventory.jsx` and `frontend/src/pages/SupplyInventory.jsx` are separate surfaces. | Choose canonical inventory and migrate/fold supply inventory. |
-| RF0-F10 | Group Messaging tracks intent/status but does not necessarily deliver messages. | open P1 | RF13, RF17 | `frontend/src/pages/GroupMessaging.jsx` produces push preview/manifests and reads integration placeholders. | Build real delivery logs/recipient IDs or relabel/hide as readiness. |
-| RF0-F11 | Advanced Reports imply Excel/PDF while export behavior may be manifest-based. | open P1 | RF12, RF17 | `backend/routes/backlog.py` report export returns manifest/download formats, while UI/routes expose advanced reporting. | Either generate real Excel/PDF or label manifest truthfully. |
+| RF0-F10 | Group Messaging tracks intent/status but does not necessarily deliver messages. | partially fixed | RF13, RF17 | RF4 relabels Group Messaging as push-preview/local-status readiness and records `sent` as local status, not external delivery. | RF13 must build real delivery logs/recipient IDs or RF17 must hide/demote the surface. |
+| RF0-F11 | Advanced Reports imply Excel/PDF while export behavior may be manifest-based. | partially fixed | RF12, RF17 | RF4 labels Excel/PDF actions as export manifests while `backend/routes/backlog.py` report export returns manifest/download formats. | RF12 must generate real Excel/PDF or RF17 must keep the manifest-only label/hide the surface. |
 | RF0-F12 | Owner payment flow can be configuration-ready rather than true payment collection. | partially fixed | RF1, RF12 | RF1 scopes owner payment prep by barn and stable account/invoice identity without horse-only authorization. Stripe collection truth remains RF12. | RF12 should make payment collection, refunds, voids, and Stripe state truthful. |
-| RF0-F13 | QR/stall-card flow may not be a true QR encoder. | open P2 | RF11, RF17 | Mobile readiness/stall-card flows exist in `frontend/src/pages/MobileReadiness.jsx` and backlog QR hooks. | Build true QR generation or label as stall-card/readiness manifest. |
+| RF0-F13 | QR/stall-card flow may not be a true QR encoder. | partially fixed | RF11, RF17 | RF4 labels Mobile Readiness as limited field-recovery and stall-card identification; backend QR records remain deterministic text records with printable image generation deferred. | RF11/RF17 should build true QR generation or keep the stall-card/readiness label. |
 | RF0-F14 | Barn-location and arena-share defaults should use explicit publish state rather than role-inferred enabled state. | open P1 | RF1, RF11 | Arena/location surfaces include visibility fields and owner-access route groups; RF0 found no canonical publish-state model. | Add explicit publish/share state and backend enforcement. |
 | RF0-F15 | Trainer fluidity is not fully built. | open P1 | RF9 | Trainer intake exists and explicitly does not create lessons, rider enrollments, horse assignments, permissions, or billing. Trainer dashboard delegates to generic dashboard. | Build trainer operating center after RF1/RF2 foundations. |
 | RF0-F16 | Service provider multi-barn/client access is not fully built. | open P1 | RF10 | Service provider dashboard is a shell; `veterinarian` and `farrier` are legacy care-partner roles; no full provider access-grant model found. | Build provider profile/business/access-grant/appointment model after RF1/RF2 foundations. |
 | RF0-F17 | Onboarding remains a major pain-point risk and should become guided import/setup. | partially fixed | RF3, RF5 | RF3 packages review-first CSV metadata and commit gating for horse/owner imports, explicit deferred import kinds, setup readiness truth, and integration readiness boundaries. First-value milestone analytics and richer import mapping remain RF5/RF18 follow-up work. | Review RF3, then decide whether richer row-level mapping UI is needed before first-client UAT. |
 | RF0-F18 | Admin portal should become a product intelligence and customer-success center. | partially fixed | RF5 | Admin Portal has platform-role separation, users, facilities, billing, support, alerts, reports, integrations, settings, audit logs. RF5 User 360/Facility 360/account health/dunning/feature health/data quality are incomplete. | Extend admin portal into RF5 intelligence/customer-success surfaces with privacy-scrubbed analytics. |
+| RF0-F19 | General web-based enrollment and signup entry points are incomplete. | open P1 | RF5, RF7, RF9, RF10, RF18 | Founder requested two separate enrollment paths, including individual horse enrollment for owners whose barns are not using EquineSync or whose horses are on their own land/family land, plus signup paths from sign-in and home pages for barn owners, trainers, service providers, and other account types. | RF5 should build/plan the home/login signup entry points, account credentials, critical signup data, and enrollment path selector. RF7 should own individual horse/owner enrollment depth; RF9 trainer enrollment; RF10 service-provider enrollment; RF18 end-to-end UAT. |
 
 ## Founder / Product Decisions
 
@@ -52,6 +53,7 @@ Status: RF0, RF1, RF2, and RF3 CODEX-REVIEWED & LOCKED. RF4 is next.
 | Offline workflows required for launch claims. | deferred / requires founder decision | RF15 | Current BN18D/BN21 posture permits limited recovery only. |
 | Feature shells to hide immediately. | requires founder decision | RF4, RF17 | RF0 recommends auditing daily nav first. |
 | Privacy boundaries for platform-admin insights. | requires founder decision | RF5 | Admin analytics must avoid sensitive free text and private content. |
+| Web enrollment path ordering and copy. | requires founder decision | RF5, RF7, RF9, RF10 | Decide the first signup choices shown from home/login: individual horse owner, barn/facility owner, trainer, service provider, and any other account type. |
 
 ## RF1 Locked Status
 
@@ -73,7 +75,8 @@ stable IDs.
 
 ## Current Phase Recommendation
 
-Proceed to RF4 - Feature Completion Certification and Placeholder Elimination.
+Proceed to RF5 - Admin Portal Intelligence, Customer Success, Web Enrollment,
+Billing Intervention, and Account Health.
 
 RF4 should be kept narrow:
 
@@ -82,6 +85,9 @@ RF4 should be kept narrow:
 3. Move readiness/provider/setup surfaces to truthful admin/setup language where source already supports it.
 4. No broad UX redesign, provider calls, schema rewrites, or completion of later RF domain models.
 5. Evidence, tests, report, and package before lock.
+
+RF4 package is locked at
+`outputs/build_next_rf4_feature_completion_certification.zip`.
 
 ## RF3 Locked Status
 
@@ -119,3 +125,50 @@ RF2 accepted/deferred founder decisions:
 - Admin payroll `staff_name` filter retirement is deferred to RF8/RF12.
 - Provider grants, message recipients, and full workforce backfill remain deferred
   to RF8/RF10/RF13.
+
+## RF4 Locked Status
+
+RF4 is Codex-reviewed and locked. The generated report is
+`outputs/rf4_feature_completion_certification_report.md`.
+
+RF4 closes the evidence/copy-certification portion of RF0-F06/F10/F11/F13, but
+does not close the later implementation and UX-hiding work:
+
+| Finding | RF4 Status | Evidence |
+| --- | --- | --- |
+| RF0-F06 | partially fixed for feature classification and truth labeling; still open for RF17 hide/move decisions | All 32 backend feature-module keys are classified; daily role navigation avoids the old generic feature shell menu; eight direct routes are explicitly classified. |
+| RF0-F10 | partially fixed for current truth labeling | Group Messaging says push-preview/local-status, not external delivery; backend push manifests remain `preview_only`. |
+| RF0-F11 | partially fixed for current truth labeling | Advanced Reports labels Excel/PDF outputs as manifests. |
+| RF0-F13 | partially fixed for current truth labeling | Mobile Readiness says limited field-recovery and stall-card identification; true QR/native/offline work remains later. |
+| RF4-REV-01 | fixed | Admin Portal permissions and owner role-intake fallback panels no longer render phase, placeholder-only, or shell-shipping copy. |
+
+RF4 founder decisions:
+
+- Accept RF4 classifications as current feature truth for review.
+- Decide which readiness/scaffold pages stay visible before RF17.
+- Accept manifest-only exports and push-preview wording until RF12/RF13
+  implementation, or require hiding/demotion sooner.
+
+## RF4 Pre-Lock Founder Enrollment Note
+
+Founder requested that EquineSync add a general web-based enrollment workflow
+before RF4 lock. This is now tracked as RF0-F19, mapped to RF5/RF7/RF9/RF10,
+and should be included in RF5 planning:
+
+- Add home-page signup and sign-in-page join/signup entry points for users who
+  do not yet have accounts.
+- Route users to a signup path selector before collecting credentials and
+  critical signup data.
+- Include an individual horse enrollment path for owners whose barns are not
+  using EquineSync, owners keeping horses on their own land, and family/informal
+  care contexts.
+- Include distinct enrollment paths for barn/facility owners, trainers, service
+  providers, and other relevant account types.
+- Re-test all enrollment paths in RF18 before broader launch.
+
+## RF5 Current Phase Recommendation
+
+Proceed to RF5 with RF0-F19 included in the first RF5 pass. RF5 should start
+with home/login signup entry points, enrollment path selection, critical signup
+data requirements, and admin/customer-success evidence. Do not complete RF7,
+RF9, RF10, RF12, or RF18 inside RF5.

@@ -254,7 +254,7 @@ function App() {
               <Route path="horses" element={<AdminHorses />} />
               <Route path="subscriptions" element={<AdminSubscriptions />} />
               <Route path="billing" element={<AdminBilling />} />
-              <Route path="permissions" element={<AdminPlaceholder section="Permissions" phase="Admin-7" description="Read-only role × capability matrix from the backend." />} />
+              <Route path="permissions" element={<AdminPlaceholder section="Permissions" description="Read-only role × capability matrix from the backend." />} />
               <Route path="support" element={<AdminSupport />} />
               <Route path="alerts" element={<AdminAlerts />} />
               <Route path="reports" element={<AdminReports />} />

@@ -42,8 +42,17 @@ RF3 is Codex-reviewed and locked as a narrow onboarding/import/setup gate:
   deferred until the relevant relationship/provider/care models are reviewed.
 - Integration setup remains manifest/configuration readiness only; RF3 does not
   configure credentials or call providers.
-- RF4 is next and should focus on feature completion certification, placeholder
-  elimination, and truthful visible feature classification.
+
+RF4 is Codex-reviewed and locked:
+
+- All backend feature-module keys are classified.
+- Direct feature/readiness routes are pinned to truthful readiness, scaffold,
+  pilot-beta, or deprecated status.
+- Manifest exports, push previews, local form/signature status, integration
+  readiness, limited field-recovery/mobile readiness, Admin Portal permissions,
+  and owner role-intake fallback panels use conservative copy.
+- RF0-F19 records the founder-requested web enrollment workflow and maps it to
+  RF5/RF7/RF9/RF10/RF18.
 
 
 ### Phase HorseOps-1H — Mobile Field Readiness ✅ (Jun 2026, ready for Codex review)
@@ -5464,3 +5473,69 @@ BN21 go boundary:
 
 Next gate after BN21 lock:
 - BN22 - Public launch gate, after first-client pilot evidence is reviewed.
+
+## RF4 - Feature Completion Certification and Placeholder Elimination CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+RF4 was executed as a narrow feature-completion certification and
+placeholder-elimination gate after RF3 lock. It did not build new workflows,
+call providers, change backend routes/schemas/auth/permissions/privacy, mutate
+billing/provider data, submit native apps, or mark founder acceptance.
+
+Created:
+- `backend/core/rf4_feature_completion_certification.py`
+- `backend/scripts/build_rf4_feature_completion_certification.py`
+- `backend/tests/test_rf4_feature_completion_certification.py`
+- `BUILD_NEXT_RF4_FEATURE_CERTIFICATION_README.md`
+- `docs/RF4_FEATURE_COMPLETION_CERTIFICATION.md`
+- `outputs/rf4_feature_completion_certification_report.md`
+- `outputs/build_next_rf4_feature_completion_certification.zip`
+
+Generated certification snapshot:
+- Overall status: `ready`.
+- Issue counts: 0 blocker row(s), 1 deferred scaffold row.
+- All 32 backend feature-module keys are classified as `live`, `pilot beta`,
+  `readiness`, `scaffold`, `hidden`, or `deprecated`.
+- Eight direct RF4 surfaces are classified:
+  `/advanced-reports`, `/ai-automation`, `/forms-signatures`,
+  `/group-messaging`, `/integrations`, `/mobile-readiness`, `/staff-tasks`,
+  and `/supply-inventory`.
+
+RF4 truth-labeling updates:
+- Advanced Reports now labels Excel/PDF behavior as export manifests.
+- Group Messaging now labels push behavior as preview metadata and records
+  local sent status without implying external delivery.
+- Forms & Signatures now labels local form records and uses record-status
+  language for sent/signed actions.
+- Integration Readiness records connected status as a local readiness record.
+- Mobile Readiness uses limited field-recovery and stall-card identification
+  language, not full offline/native language.
+- Admin Portal permissions and owner role-intake fallback panels avoid phase,
+  placeholder-only, and shell-shipping language in user-facing copy.
+
+Deferred after RF4 review:
+- RF5/RF7/RF9/RF10: general web-based enrollment, home/login signup entry
+  points, individual horse enrollment for owners outside EquineSync barns or on
+  private/family land, and role-specific signup paths for barn owners, trainers,
+  and service providers.
+- RF6/RF8: Staff Tasks versus Task Engine and workforce canonicalization.
+- RF12/RF13/RF14: true exports/payments, live messaging delivery, and legal
+  signature/document storage truth.
+- RF15/RF16: real offline/native implementation if claims require it.
+- RF17: hide, redirect, or move readiness/scaffold surfaces out of daily nav
+  after founder review.
+
+RF4 is Codex-reviewed and locked. RF5 may proceed with the RF0-F19 enrollment
+note included in its opening scope.
+
+RF4 pre-lock founder note:
+- EquineSync needs a general web-based enrollment workflow.
+- Home page and sign-in page must provide signup/join entry points for users
+  who do not yet have accounts.
+- Signup must route users to separate options before collecting username,
+  password, and critical signup data.
+- Required paths include individual horse enrollment for owners whose barns are
+  not using EquineSync, owners whose horses are on their own land, and family or
+  informal care contexts.
+- Required role paths include barn/facility owner, trainer, service provider,
+  and other relevant account types.
+- Tracked as RF0-F19 and mapped to RF5/RF7/RF9/RF10/RF18.

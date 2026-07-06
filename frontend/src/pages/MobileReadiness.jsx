@@ -246,7 +246,7 @@ export default function MobileReadiness() {
       <PageHeader
         eyebrow="Mobile & Integrations"
         title="Mobile Readiness"
-        subtitle="Offline queue shape, document scan intake, and QR horse identification workflows for native app handoff."
+        subtitle="Limited field-recovery queue shape, document scan intake, and stall-card identification workflows for native app handoff."
         action={
           <div className="flex items-center gap-3">
             <button onClick={load} className="btn-secondary inline-flex items-center gap-2" data-testid="mobile-readiness-refresh">
@@ -281,7 +281,7 @@ export default function MobileReadiness() {
           <Card hover={false}>
             <div className="flex items-start justify-between gap-4 mb-5">
               <div>
-                <div className="label-eyebrow mb-2">Offline-ready data</div>
+                <div className="label-eyebrow mb-2">Limited field recovery</div>
                 <h2 className="font-display text-3xl text-equine-ink">Sync queue</h2>
               </div>
               <div className="flex items-center gap-2">
@@ -421,8 +421,8 @@ export default function MobileReadiness() {
 
             <Card hover={false}>
               <div className="flex items-start justify-between gap-4 mb-5">
-                <div>
-                  <div className="label-eyebrow mb-2">QR identification</div>
+              <div>
+                  <div className="label-eyebrow mb-2">Stall-card identification</div>
                   <h2 className="font-display text-3xl text-equine-ink">Horse IDs</h2>
                   {stallCardManifest && (
                     <div className="text-[12.5px] text-equine-inkMuted mt-1" data-testid="stall-card-manifest">

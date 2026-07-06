@@ -1,13 +1,7 @@
 import React from "react";
 import { Construction } from "lucide-react";
 
-/**
- * Admin-1 — generic "Coming in Admin-X" placeholder for the 13 sections
- * that don't materialize until later phases. The component is data-less
- * by design; it exists so the sidebar route compiles and the testing
- * agent can confirm route protection works for every section.
- */
-export default function AdminPlaceholder({ section, phase, description }) {
+export default function AdminPlaceholder({ section, description }) {
   return (
     <div
       className="max-w-3xl mx-auto"
@@ -24,7 +18,7 @@ export default function AdminPlaceholder({ section, phase, description }) {
           <Construction className="w-6 h-6 text-equinesync-slate" strokeWidth={1.4} />
         </div>
         <h1 className="mt-5 font-display text-2xl text-equinesync-graphite font-light">
-          Wires up in {phase}.
+          {section} access is read-only here.
         </h1>
         {description && (
           <p className="mt-3 text-[13.5px] text-equinesync-graphite/65 leading-relaxed max-w-md mx-auto">
@@ -32,7 +26,7 @@ export default function AdminPlaceholder({ section, phase, description }) {
           </p>
         )}
         <p className="mt-4 text-[11.5px] tracking-wide uppercase text-equinesync-graphite/45">
-          Admin-1 ships the shell + access boundary only.
+          Settings changes remain restricted until an approved workflow is connected.
         </p>
       </div>
     </div>

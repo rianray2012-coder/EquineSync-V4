@@ -1752,7 +1752,7 @@ function OwnerHome({ user }) {
           </section>
 
           {[
-            ["Facility Connection", profile.facility_search_name || "Search and facility lead capture stay placeholder-only in this phase.", ShieldCheck],
+            ["Facility Connection", profile.facility_search_name || "Facility connection can be completed after intake.", ShieldCheck],
             ["Daily Care", pulsePanelText(pulse, "horse_care", "Approved owner-visible care status will appear here after the barn connects care visibility."), Heart],
             ["Requests", "Owner requests stay in the existing approved workflow.", ClipboardList],
             ["Documents", "Policies and signed forms will appear here after approved document workflows are connected.", FileText],

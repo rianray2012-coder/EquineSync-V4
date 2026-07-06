@@ -7,6 +7,7 @@ import QuickAddSheet from "../components/QuickAddSheet";
 
 const STATUSES = ["draft", "queued", "sent"];
 const STATUS_TONE = { draft: "neutral", queued: "warning", sent: "success" };
+const DISPLAY_LABELS = { draft: "draft", queued: "queued", sent: "recorded sent" };
 const ADD_FIELDS = [
   { key: "subject", label: "Subject", required: true, placeholder: "Message subject", full: true },
   { key: "audience", label: "Audience", kind: "select", opts: ["all_staff", "owners", "trainers", "custom"] },
@@ -101,7 +102,7 @@ export default function GroupMessaging() {
       <PageHeader
         eyebrow="Communication"
         title="Group Messaging"
-        subtitle="Draft and track owner, trainer, staff, and custom audience announcements with push-ready channel metadata."
+        subtitle="Draft and track owner, trainer, staff, and custom audience announcements with push-preview metadata."
         action={
           <div className="flex items-center gap-3">
             <button onClick={load} className="btn-secondary inline-flex items-center gap-2" data-testid="group-messaging-refresh">
@@ -119,7 +120,7 @@ export default function GroupMessaging() {
           <Bell className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
           <div className="flex-1 text-[13px] text-equine-inkMuted leading-relaxed">
             <div>
-              Push notification delivery is app-token ready. Current records track channel intent and status without sending external push notifications.
+              Push notification payload previews are app-token shaped. Current records track channel intent and local status without sending external push notifications.
               {placeholders[0] && <span className="block mt-1 text-equine-inkSoft">{placeholders[0].ready_for.join(" · ")}</span>}
             </div>
           </div>
@@ -153,10 +154,10 @@ export default function GroupMessaging() {
       <div className="grid grid-cols-3 gap-4 mb-6">
         {STATUSES.map((status) => (
           <Card key={status} hover={false} className="p-4">
-            <div className="label-eyebrow-muted mb-2 capitalize">{status}</div>
+            <div className="label-eyebrow-muted mb-2 capitalize">{DISPLAY_LABELS[status]}</div>
             <div className="flex items-end justify-between gap-3">
               <div className="font-display text-4xl text-equine-ink leading-none">{stats[status]}</div>
-              <StatusPill tone={STATUS_TONE[status]}>{status}</StatusPill>
+              <StatusPill tone={STATUS_TONE[status]}>{DISPLAY_LABELS[status]}</StatusPill>
             </div>
           </Card>
         ))}
@@ -195,15 +196,15 @@ export default function GroupMessaging() {
                       {(data.audience || "custom").replace(/_/g, " ")} · {(data.channel || "in_app").replace(/_/g, " ")} · {fmtDate(record.created_at)}
                     </div>
                   </div>
-                  <StatusPill tone={STATUS_TONE[status]}>{status}</StatusPill>
+                  <StatusPill tone={STATUS_TONE[status]}>{DISPLAY_LABELS[status]}</StatusPill>
                 </div>
                 <div className="text-[13.5px] text-equine-ink leading-relaxed whitespace-pre-wrap">{data.body}</div>
                 <div className="hairline mt-4 pt-3 flex flex-wrap items-center gap-2">
                   {status !== "sent" ? (
                     <button type="button" onClick={() => setStatus(record, status === "draft" ? "queued" : "sent")} className="btn-secondary text-[12px] py-2 px-4 inline-flex items-center gap-1">
-                      <Send className="w-3.5 h-3.5" /> {status === "draft" ? "Queue" : "Mark sent"}
+                      <Send className="w-3.5 h-3.5" /> {status === "draft" ? "Queue" : "Record sent"}
                     </button>
-                  ) : <span className="text-[12px] text-equine-inkSoft">Sent record</span>}
+                  ) : <span className="text-[12px] text-equine-inkSoft">Local sent record</span>}
                   <button type="button" onClick={() => archiveRecord(record)} className="ml-auto text-[12px] text-equine-clay hover:text-equine-ink">
                     Archive
                   </button>

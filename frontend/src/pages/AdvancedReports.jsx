@@ -149,14 +149,14 @@ export default function AdvancedReports() {
       <PageHeader
         eyebrow="Reporting"
         title="Barn Performance Reports"
-        subtitle="Occupancy, revenue, health trends, trainer performance inputs, custom report definitions, and export-ready formats."
+        subtitle="Occupancy, revenue, health trends, trainer performance inputs, custom report definitions, and export manifests."
         action={
           <div className="flex items-center gap-3">
             <button onClick={() => exportReport("xlsx")} disabled={exportingFormat === "xlsx"} className="btn-secondary inline-flex items-center gap-2 disabled:opacity-50" data-testid="advanced-reports-export-xlsx">
-              <FileSpreadsheet className="w-4 h-4" /> {exportingFormat === "xlsx" ? "Preparing" : "Excel"}
+              <FileSpreadsheet className="w-4 h-4" /> {exportingFormat === "xlsx" ? "Preparing" : "Excel manifest"}
             </button>
             <button onClick={() => exportReport("pdf")} disabled={exportingFormat === "pdf"} className="btn-secondary inline-flex items-center gap-2 disabled:opacity-50" data-testid="advanced-reports-export-pdf">
-              <Download className="w-4 h-4" /> {exportingFormat === "pdf" ? "Preparing" : "PDF"}
+              <Download className="w-4 h-4" /> {exportingFormat === "pdf" ? "Preparing" : "PDF manifest"}
             </button>
             <button onClick={load} className="btn-secondary inline-flex items-center gap-2" data-testid="advanced-reports-refresh">
               <RefreshCw className="w-4 h-4" /> Refresh
@@ -198,8 +198,8 @@ export default function AdvancedReports() {
               <Bar label="Revenue vs expenses" value={dashboard.financial.revenue ? Math.max(0, Math.min(100, Math.round((dashboard.financial.profit_loss / dashboard.financial.revenue) * 100))) : 0} />
               <Bar label="Health readiness" value={dashboard.health.due_or_expired ? 35 : 100} invert={dashboard.health.due_or_expired > 0} />
               <div className="hairline mt-5 pt-4 flex flex-wrap gap-2">
-                <StatusPill tone="info">Excel {dashboard.exports.excel.replace(/_/g, " ")}</StatusPill>
-                <StatusPill tone="info">PDF {dashboard.exports.pdf.replace(/_/g, " ")}</StatusPill>
+                <StatusPill tone="info">Excel manifest {dashboard.exports.excel.replace(/_/g, " ")}</StatusPill>
+                <StatusPill tone="info">PDF manifest {dashboard.exports.pdf.replace(/_/g, " ")}</StatusPill>
               </div>
             </Card>
 
@@ -251,7 +251,7 @@ export default function AdvancedReports() {
                     <StatusPill tone="success">{definition.status.replace(/_/g, " ")}</StatusPill>
                   </div>
                   <div className="text-[12.5px] text-equine-inkMuted mb-2">{definition.collections.join(" - ")}</div>
-                  <div className="text-[12px] text-equine-inkSoft">Exports: {definition.export_formats.join(", ")}</div>
+                  <div className="text-[12px] text-equine-inkSoft">Export manifests: {definition.export_formats.join(", ")}</div>
                 </div>
               )}
 

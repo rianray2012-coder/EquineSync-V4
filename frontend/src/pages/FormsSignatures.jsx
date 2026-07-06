@@ -108,7 +108,7 @@ export default function FormsSignatures() {
       <PageHeader
         eyebrow="Communication"
         title="Forms & Signatures"
-        subtitle="Track digital forms, recipients, signature-provider readiness, and signing status."
+        subtitle="Track local digital form records, recipients, signature-provider readiness, and signing status."
         action={
           <div className="flex items-center gap-3">
             <button onClick={load} className="btn-secondary inline-flex items-center gap-2" data-testid="forms-refresh">
@@ -252,8 +252,8 @@ export default function FormsSignatures() {
                     </div>
                     <StatusPill tone={STATUS_TONE[status]}>{status}</StatusPill>
                     <div className="flex flex-wrap items-center gap-2">
-                      {status === "draft" && <button type="button" onClick={() => setStatus(record, "sent")} className="btn-secondary text-[12px] py-2 px-4">Send</button>}
-                      {status === "sent" && <button type="button" onClick={() => setStatus(record, "signed")} className="btn-primary text-[12px] py-2 px-4">Mark signed</button>}
+                      {status === "draft" && <button type="button" onClick={() => setStatus(record, "sent")} className="btn-secondary text-[12px] py-2 px-4">Record sent</button>}
+                      {status === "sent" && <button type="button" onClick={() => setStatus(record, "signed")} className="btn-primary text-[12px] py-2 px-4">Record signed</button>}
                       {status !== "expired" && status !== "signed" && <button type="button" onClick={() => setStatus(record, "expired")} className="btn-secondary text-[12px] py-2 px-4">Expire</button>}
                       <button type="button" onClick={() => archiveRecord(record)} className="text-[12px] text-equine-clay hover:text-equine-ink px-2">Archive</button>
                     </div>

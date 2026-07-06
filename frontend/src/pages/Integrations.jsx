@@ -197,9 +197,9 @@ export default function Integrations() {
                     {record && status !== "ready" && (
                       <button type="button" onClick={() => setStatus(record, "ready")} className="btn-secondary text-[12px] py-2 px-4">Ready</button>
                     )}
-                    {record && status !== "connected" && (
+            {record && status !== "connected" && (
                       <button type="button" onClick={() => setStatus(record, "connected")} className="btn-primary text-[12px] py-2 px-4 inline-flex items-center gap-1">
-                        <CheckCircle2 className="w-3.5 h-3.5" /> Connected
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Record connected
                       </button>
                     )}
                   </div>
