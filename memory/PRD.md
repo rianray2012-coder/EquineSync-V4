@@ -33,6 +33,18 @@ identity-access migration:
 - Full workforce backfill, provider grants, messaging recipient identity, and
   feature-shell UI rewrites remain deferred to RF8/RF10/RF13/RF17.
 
+RF3 is Codex-reviewed and locked as a narrow onboarding/import/setup gate:
+
+- Horse and owner CSV preview now returns row-review metadata and commit
+  eligibility.
+- CSV commit requires the preview-driven `reviewed: true` marker.
+- Rider, staff, service-provider, and feed/medication imports are explicitly
+  deferred until the relevant relationship/provider/care models are reviewed.
+- Integration setup remains manifest/configuration readiness only; RF3 does not
+  configure credentials or call providers.
+- RF4 is next and should focus on feature completion certification, placeholder
+  elimination, and truthful visible feature classification.
+
 
 ### Phase HorseOps-1H — Mobile Field Readiness ✅ (Jun 2026, ready for Codex review)
 Frontend-first mobile hardening for the locked Care Ledger surfaces. No backend

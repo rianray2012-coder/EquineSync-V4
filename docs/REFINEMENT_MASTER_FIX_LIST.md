@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, and RF2 CODEX-REVIEWED & LOCKED. RF3 is next.
+Status: RF0, RF1, RF2, and RF3 CODEX-REVIEWED & LOCKED. RF4 is next.
 
 ## Classification Key
 
@@ -35,7 +35,7 @@ Status: RF0, RF1, and RF2 CODEX-REVIEWED & LOCKED. RF3 is next.
 | RF0-F14 | Barn-location and arena-share defaults should use explicit publish state rather than role-inferred enabled state. | open P1 | RF1, RF11 | Arena/location surfaces include visibility fields and owner-access route groups; RF0 found no canonical publish-state model. | Add explicit publish/share state and backend enforcement. |
 | RF0-F15 | Trainer fluidity is not fully built. | open P1 | RF9 | Trainer intake exists and explicitly does not create lessons, rider enrollments, horse assignments, permissions, or billing. Trainer dashboard delegates to generic dashboard. | Build trainer operating center after RF1/RF2 foundations. |
 | RF0-F16 | Service provider multi-barn/client access is not fully built. | open P1 | RF10 | Service provider dashboard is a shell; `veterinarian` and `farrier` are legacy care-partner roles; no full provider access-grant model found. | Build provider profile/business/access-grant/appointment model after RF1/RF2 foundations. |
-| RF0-F17 | Onboarding remains a major pain-point risk and should become guided import/setup. | open P1 | RF3, RF5 | Onboarding/readiness and setup surfaces exist, but RF3 import concierge, AI-assisted review-first mapping, and first-value milestone analytics are not built. | Build Onboarding 2.0 as review-first guided setup and import concierge. |
+| RF0-F17 | Onboarding remains a major pain-point risk and should become guided import/setup. | partially fixed | RF3, RF5 | RF3 packages review-first CSV metadata and commit gating for horse/owner imports, explicit deferred import kinds, setup readiness truth, and integration readiness boundaries. First-value milestone analytics and richer import mapping remain RF5/RF18 follow-up work. | Review RF3, then decide whether richer row-level mapping UI is needed before first-client UAT. |
 | RF0-F18 | Admin portal should become a product intelligence and customer-success center. | partially fixed | RF5 | Admin Portal has platform-role separation, users, facilities, billing, support, alerts, reports, integrations, settings, audit logs. RF5 User 360/Facility 360/account health/dunning/feature health/data quality are incomplete. | Extend admin portal into RF5 intelligence/customer-success surfaces with privacy-scrubbed analytics. |
 
 ## Founder / Product Decisions
@@ -73,15 +73,30 @@ stable IDs.
 
 ## Current Phase Recommendation
 
-Proceed to RF3 - Onboarding 2.0, Import Concierge, and Setup Integrations.
+Proceed to RF4 - Feature Completion Certification and Placeholder Elimination.
 
-RF3 should be kept narrow:
+RF4 should be kept narrow:
 
-1. Review-first import concierge for horses, owners, riders, staff, and service-provider seeds.
-2. Setup readiness truth for required versus optional configuration.
-3. No provider mutations or live integration setup.
-4. No AI auto-apply; suggestions must remain draft/review-first.
+1. Inventory every visible feature/module/nav item and classify it as hidden, scaffold, readiness, pilot beta, live, or deprecated.
+2. Verify daily-user navigation does not present fake-live feature shells.
+3. Move readiness/provider/setup surfaces to truthful admin/setup language where source already supports it.
+4. No broad UX redesign, provider calls, schema rewrites, or completion of later RF domain models.
 5. Evidence, tests, report, and package before lock.
+
+## RF3 Locked Status
+
+RF3 has been reviewed, fixed, re-reviewed, and locked. The following RF0 finding
+is closed for RF3 review-first import and setup-readiness scope:
+
+| Finding | RF3 Status | Evidence |
+| --- | --- | --- |
+| RF0-F17 | fixed for RF3 review-first horse/owner import and setup-readiness scope; still open for RF5/RF18 analytics and UAT depth | CSV preview returns row-review metadata, CSV commit requires `reviewed: true`, deferred import kinds are explicit, setup readiness remains backend-authoritative, and integration setup remains manifest-only. |
+
+RF3 accepted/deferred founder decisions:
+
+- Active import scope of horses and owners only is accepted for RF3.
+- Richer row-level mapping UI is deferred to RF18 or a later founder-approved follow-up.
+- Integration setup readiness remains manifest-only until provider phases.
 
 ## Lock Note
 

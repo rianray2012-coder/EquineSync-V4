@@ -67,8 +67,8 @@ const RecordsWithCsvStep = ({ kind, endpoint, displayKey, fields, intro, noCsv, 
   };
 
   const doCommit = async () => {
-    if (!preview?.rows?.length) return;
-    const r = await api.post("/onboarding/csv-commit", { kind, rows: preview.rows });
+    if (!preview?.rows?.length || preview.commit_allowed === false) return;
+    const r = await api.post("/onboarding/csv-commit", { kind, rows: preview.rows, reviewed: true });
     toast.success(`Imported ${r.data.created} ${kind}${r.data.skipped ? ` · ${r.data.skipped} skipped (duplicates)` : ""}`);
     track("onboarding.csv_imported", { kind, created: r.data.created, skipped: r.data.skipped });
     setCsvOpen(false); setCsvText(""); setPreview(null);
@@ -144,7 +144,12 @@ const RecordsWithCsvStep = ({ kind, endpoint, displayKey, fields, intro, noCsv, 
                       </div>
                     ))}
                   </div>
-                  <button onClick={doCommit} data-testid={`${kind}-csv-commit`} className="btn-primary w-full mt-3 inline-flex items-center justify-center gap-2">
+                  <button
+                    onClick={doCommit}
+                    disabled={preview.commit_allowed === false}
+                    data-testid={`${kind}-csv-commit`}
+                    className="btn-primary w-full mt-3 inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
                     Import {preview.count} {kind}
                   </button>
                 </div>

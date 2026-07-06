@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, and RF2 CODEX-REVIEWED & LOCKED. RF3 is next.
+Status: RF0, RF1, RF2, and RF3 CODEX-REVIEWED & LOCKED. RF4 is next.
 
 ## Purpose
 
@@ -52,7 +52,7 @@ Acceleration is allowed only after RF1 and RF2 are safe. Do not build RF9/RF10 t
 
 ## Current Recommendation
 
-Proceed to RF3 - Onboarding 2.0, Import Concierge, and Setup Integrations.
+Proceed to RF4 - Feature Completion Certification and Placeholder Elimination.
 
 RF1 locked these source-backed blocker fixes:
 
@@ -77,7 +77,18 @@ RF1 is Codex-reviewed and locked as a narrow P0 data-fence and
 backend-capability gate. See `docs/RF1_DATA_FENCES_CAPABILITY_GATES.md` and
 `outputs/rf1_data_fences_capability_gates_report.md`.
 
-RF3 may proceed as the next dedicated phase.
+RF4 may proceed as the next dedicated phase.
+
+## RF3 Lock Note
+
+RF3 is Codex-reviewed and locked. See
+`docs/RF3_ONBOARDING_IMPORT_SETUP.md` and
+`outputs/rf3_onboarding_import_setup_report.md`.
+
+RF3 must not be expanded into a full importer rewrite, AI auto-mapping, live
+provider setup, service-provider grants, or staff workforce backfill after lock.
+Active import scope is horses and owners; riders, staff, service providers, and
+feed/medication lists remain explicitly deferred.
 
 ## RF2 Lock Note
 

@@ -49,6 +49,22 @@ BN16B_DEFERRED_STEP_IDS = ("schedules",)
 BN16B_COMPLETION_ROLES = {"admin", "barn_owner"}
 BN16B_SETUP_ACCESS_ROLES = {"admin", "barn_owner", "barn_manager"}
 _STEP_BY_ID = {step["id"]: step for step in ONBOARDING_STEPS}
+RF3_ACTIVE_IMPORT_KINDS = {
+    "horses": {
+        "label": "Horse profiles",
+        "required_any": [["name"]],
+    },
+    "owners": {
+        "label": "Owners and clients",
+        "required_any": [["full_name", "name"]],
+    },
+}
+RF3_DEFERRED_IMPORT_KINDS = {
+    "riders": "Rider CSV import needs minor/guardian relationship review before bulk apply.",
+    "staff": "Staff import should use invite/account-membership review before bulk apply.",
+    "service_providers": "Service-provider seeds need the RF10 provider access-grant model.",
+    "feed_medication_lists": "Feed and medication list import needs care-ledger mapping review before bulk apply.",
+}
 
 
 class BarnSettings(BaseModel):
@@ -123,6 +139,7 @@ class CsvPreviewBody(BaseModel):
 class CsvCommitBody(BaseModel):
     kind: str
     rows: List[Dict[str, Any]]
+    reviewed: bool = False
 
 
 def _now_utc() -> datetime:
@@ -150,6 +167,46 @@ def _parse_csv(text: str) -> List[Dict[str, str]]:
     reader = csv.DictReader(io.StringIO(text.strip()))
     return [{(k or "").strip().lower(): (v or "").strip() for k, v in row.items()}
             for row in reader]
+
+
+def _normalize_import_kind(kind: str) -> str:
+    return (kind or "").strip().lower().replace("-", "_")
+
+
+def _review_import_rows(kind: str, rows: List[Dict[str, str]], duplicates: List[str]) -> Dict[str, Any]:
+    duplicate_values = {str(value or "").strip().lower() for value in duplicates if value}
+    contract = RF3_ACTIVE_IMPORT_KINDS[kind]
+    row_reviews = []
+    for index, row in enumerate(rows, start=1):
+        messages: List[str] = []
+        status = "ready"
+        if not any(any((row.get(field) or "").strip() for field in group) for group in contract["required_any"]):
+            status = "error"
+            messages.append("Missing required identity field.")
+        duplicate_probes = {
+            "horses": [row.get("name")],
+            "owners": [row.get("email")],
+        }.get(kind, [])
+        has_duplicate = any((probe or "").strip().lower() in duplicate_values for probe in duplicate_probes)
+        if has_duplicate and status != "error":
+            status = "warning"
+            messages.append("Possible duplicate; commit will skip if still duplicate.")
+        row_reviews.append({
+            "row": index,
+            "status": status,
+            "messages": messages,
+        })
+    error_count = sum(1 for row in row_reviews if row["status"] == "error")
+    warning_count = sum(1 for row in row_reviews if row["status"] == "warning")
+    return {
+        "row_reviews": row_reviews,
+        "review_summary": {
+            "ready": sum(1 for row in row_reviews if row["status"] == "ready"),
+            "warnings": warning_count,
+            "errors": error_count,
+        },
+        "commit_allowed": error_count == 0,
+    }
 
 
 def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
@@ -537,15 +594,39 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
 
     @router.post("/onboarding/csv-preview")
     async def csv_preview(body: CsvPreviewBody, user=Depends(get_current_user)):
+        kind = _normalize_import_kind(body.kind)
+        if kind in RF3_DEFERRED_IMPORT_KINDS:
+            return {
+                "rows": [],
+                "duplicates": [],
+                "count": 0,
+                "kind": kind,
+                "import_kind_status": "deferred",
+                "review_required": True,
+                "commit_allowed": False,
+                "deferred_reason": RF3_DEFERRED_IMPORT_KINDS[kind],
+            }
+        if kind not in RF3_ACTIVE_IMPORT_KINDS:
+            raise HTTPException(400, "Unsupported kind")
         try:
             rows = _parse_csv(body.csv_text)
         except Exception as e:
             raise HTTPException(400, f"Invalid CSV: {e}")
         if not rows:
-            return {"rows": [], "duplicates": [], "count": 0}
+            return {
+                "rows": [],
+                "duplicates": [],
+                "count": 0,
+                "kind": kind,
+                "import_kind_status": "active",
+                "review_required": True,
+                "commit_allowed": False,
+                "review_summary": {"ready": 0, "warnings": 0, "errors": 0},
+                "row_reviews": [],
+            }
 
         duplicates: List[str] = []
-        if body.kind == "horses":
+        if kind == "horses":
             existing_names = {
                 h["name"].lower()
                 for h in await db.horses.find(barn_filter(user), {"_id": 0, "name": 1}).to_list(1000)
@@ -553,7 +634,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
             for r in rows:
                 if (r.get("name") or "").lower() in existing_names:
                     duplicates.append(r.get("name"))
-        elif body.kind == "owners":
+        elif kind == "owners":
             existing = {
                 o.get("email", "").lower()
                 for o in await db.owners.find(barn_filter(user), {"_id": 0, "email": 1}).to_list(1000)
@@ -561,13 +642,37 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
             for r in rows:
                 if (r.get("email") or "").lower() in existing:
                     duplicates.append(r.get("email"))
-        return {"rows": rows, "duplicates": duplicates, "count": len(rows)}
+        review = _review_import_rows(kind, rows, duplicates)
+        return {
+            "rows": rows,
+            "duplicates": duplicates,
+            "count": len(rows),
+            "kind": kind,
+            "import_kind_status": "active",
+            "review_required": True,
+            **review,
+        }
 
     @router.post("/onboarding/csv-commit")
     async def csv_commit(body: CsvCommitBody, user=Depends(get_current_user)):
+        kind = _normalize_import_kind(body.kind)
+        if kind in RF3_DEFERRED_IMPORT_KINDS:
+            raise HTTPException(409, {
+                "message": "This import type is deferred.",
+                "kind": kind,
+                "deferred_reason": RF3_DEFERRED_IMPORT_KINDS[kind],
+            })
+        if kind not in RF3_ACTIVE_IMPORT_KINDS:
+            raise HTTPException(400, "Unsupported kind")
+        if not body.reviewed:
+            raise HTTPException(409, {
+                "message": "CSV import must be previewed and reviewed before commit.",
+                "kind": kind,
+                "review_required": True,
+            })
         created = 0
         skipped = 0
-        if body.kind == "horses":
+        if kind == "horses":
             existing_names = {
                 h["name"].lower()
                 for h in await db.horses.find(barn_filter(user), {"_id": 0, "name": 1}).to_list(2000)
@@ -621,7 +726,7 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
                 }
                 await db.horses.insert_one(doc)
                 created += 1
-        elif body.kind == "owners":
+        elif kind == "owners":
             existing_emails = {
                 o.get("email", "").lower()
                 for o in await db.owners.find(barn_filter(user), {"_id": 0, "email": 1}).to_list(2000)
@@ -651,17 +756,28 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
                 }
                 await db.owners.insert_one(doc)
                 created += 1
-        else:
-            raise HTTPException(400, "Unsupported kind")
-        return {"created": created, "skipped": skipped}
+        return {
+            "created": created,
+            "skipped": skipped,
+            "reviewed": True,
+            "review_required": True,
+            "kind": kind,
+        }
 
     @router.get("/onboarding/csv-template")
     async def csv_template(kind: str):
+        kind = _normalize_import_kind(kind)
         templates = {
             "horses": "name,breed,age,color,height_hands,discipline,stall,owner,status,wellness_score,allergies,feed_plan,turnout_group,behavior_flags,photo_url\n",
             "owners": "full_name,email,phone,emergency_contact,billing_preferences,waiver_signed\n",
         }
         text = templates.get(kind)
+        if kind in RF3_DEFERRED_IMPORT_KINDS:
+            raise HTTPException(409, {
+                "message": "This import template is deferred.",
+                "kind": kind,
+                "deferred_reason": RF3_DEFERRED_IMPORT_KINDS[kind],
+            })
         if not text:
             raise HTTPException(400, "Unknown template")
         return {"text": text, "filename": f"equinesync_{kind}_template.csv"}
