@@ -914,19 +914,99 @@ def _clean_doc(doc: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
     return {k: v for k, v in doc.items() if k != "_id"}
 
 
-async def _owner_ids_for_name(db, owner_name: Optional[str]) -> List[str]:
-    if not owner_name:
-        return []
-    owner_docs = await db.owners.find({"full_name": owner_name}, {"_id": 0, "id": 1}).to_list(20)
-    return [o["id"] for o in owner_docs if o.get("id")]
+def _dedupe(values: List[Optional[str]]) -> List[str]:
+    seen = set()
+    clean_values: List[str] = []
+    for value in values:
+        if not value or value in seen:
+            continue
+        seen.add(value)
+        clean_values.append(value)
+    return clean_values
 
 
-async def _horse_names_for_owner(db, owner_name: Optional[str]) -> List[str]:
-    owner_ids = await _owner_ids_for_name(db, owner_name)
-    if not owner_ids:
+async def _owner_link_ids_for_user(db, user: Dict[str, Any], barn_id: str) -> List[str]:
+    user_id = user.get("id")
+    if not user_id:
         return []
-    horse_docs = await db.horses.find({"owner_id": {"$in": owner_ids}}, {"_id": 0, "name": 1}).to_list(200)
-    return [h["name"] for h in horse_docs if h.get("name")]
+    owner_docs = await db.owners.find(
+        {
+            "barn_id": barn_id,
+            "$or": [
+                {"user_id": user_id},
+                {"owner_user_id": user_id},
+                {"account_user_id": user_id},
+                {"linked_user_id": user_id},
+                {"user_ids": user_id},
+            ],
+        },
+        {"_id": 0, "id": 1},
+    ).to_list(50)
+    return _dedupe([user_id] + [o.get("id") for o in owner_docs])
+
+
+async def _owned_horse_ids_for_user(db, user: Dict[str, Any], barn_id: str) -> List[str]:
+    user_id = user.get("id")
+    owner_ids = await _owner_link_ids_for_user(db, user, barn_id)
+    if not user_id and not owner_ids:
+        return []
+    clauses: List[Dict[str, Any]] = []
+    if owner_ids:
+        clauses.extend([
+            {"owner_id": {"$in": owner_ids}},
+            {"primary_owner_id": {"$in": owner_ids}},
+            {"secondary_owner_ids": {"$in": owner_ids}},
+        ])
+    if user_id:
+        clauses.extend([
+            {"owner_user_id": user_id},
+            {"owner_user_ids": user_id},
+            {"guardian_user_id": user_id},
+            {"guardian_user_ids": user_id},
+            {"rider_user_id": user_id},
+            {"rider_user_ids": user_id},
+        ])
+    horse_docs = await db.horses.find(
+        {"barn_id": barn_id, "$or": clauses},
+        {"_id": 0, "id": 1},
+    ).to_list(500)
+    return _dedupe([h.get("id") for h in horse_docs])
+
+
+def _owner_account_clauses(owner_ids: List[str], user_id: Optional[str]) -> List[Dict[str, Any]]:
+    clauses: List[Dict[str, Any]] = []
+    if user_id:
+        for field in (
+            "owner_user_id",
+            "payer_user_id",
+            "recipient_user_id",
+            "data.owner_user_id",
+            "data.payer_user_id",
+            "data.recipient_user_id",
+            "data.shared_user_ids",
+        ):
+            clauses.append({field: user_id})
+    if owner_ids:
+        for field in (
+            "owner_id",
+            "primary_owner_id",
+            "payer_owner_id",
+            "recipient_owner_id",
+            "data.owner_id",
+            "data.primary_owner_id",
+            "data.payer_owner_id",
+            "data.recipient_owner_id",
+        ):
+            clauses.append({field: {"$in": owner_ids}})
+    return clauses
+
+
+def _owner_horse_context_clauses(owner_ids: List[str], horse_ids: List[str], user_id: Optional[str]) -> List[Dict[str, Any]]:
+    clauses = _owner_account_clauses(owner_ids, user_id)
+    if horse_ids:
+        for field in ("horse_id", "data.horse_id"):
+            clauses.append({field: {"$in": horse_ids}})
+    return clauses
 
 
 def _automation_draft(*, suggestion_type: str, subject: str, summary: str, confidence: float, generated_key: str) -> Dict[str, Any]:
@@ -1363,7 +1443,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
                 })
 
         if body.include_invoices:
-            invoices = await db.invoices.find({}, {"_id": 0}).sort("due_date", -1).to_list(1000)
+            invoices = await db.invoices.find({"barn_id": barn_id}, {"_id": 0}).sort("due_date", -1).to_list(1000)
             for invoice in invoices:
                 if invoice.get("status") == "void":
                     continue
@@ -1710,10 +1790,12 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "archived_at": {"$exists": False},
         }
         if role in ("horse_owner", "parent"):
-            q.update({
-                "data.visibility": "owner_only",
-                "data.owner_name": user.get("full_name"),
-            })
+            owner_ids = await _owner_link_ids_for_user(db, user, q["barn_id"])
+            horse_ids = await _owned_horse_ids_for_user(db, user, q["barn_id"])
+            owner_clauses = _owner_horse_context_clauses(owner_ids, horse_ids, user.get("id"))
+            if not owner_clauses:
+                return []
+            q.update({"data.visibility": "owner_only", "$or": owner_clauses})
         elif role not in ("admin", "barn_manager", "trainer"):
             raise HTTPException(403, "Permission denied")
         rows = await db.owner_media_updates.find(q, {"_id": 0}).sort("created_at", -1).to_list(100)
@@ -1728,7 +1810,11 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "data.status": {"$in": ["sent", "signed", "expired"]},
         }
         if role in ("horse_owner", "parent"):
-            q["data.recipient_name"] = user.get("full_name")
+            owner_ids = await _owner_link_ids_for_user(db, user, q["barn_id"])
+            owner_clauses = _owner_account_clauses(owner_ids, user.get("id"))
+            if not owner_clauses:
+                return []
+            q["$or"] = owner_clauses
         elif role not in ("admin", "barn_manager", "trainer"):
             raise HTTPException(403, "Permission denied")
         rows = await db.digital_forms.find(q, {"_id": 0}).sort("updated_at", -1).to_list(100)
@@ -1744,8 +1830,12 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "barn_id": user.get("barn_id") or DEFAULT_BARN_ID,
             "archived_at": {"$exists": False},
             "data.status": "sent",
-            "data.recipient_name": user.get("full_name"),
         }
+        owner_ids = await _owner_link_ids_for_user(db, user, q["barn_id"])
+        owner_clauses = _owner_account_clauses(owner_ids, user.get("id"))
+        if not owner_clauses:
+            raise HTTPException(404, "Form not found or not ready for signature")
+        q["$or"] = owner_clauses
         existing = await db.digital_forms.find_one(q, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Form not found or not ready for signature")
@@ -1781,18 +1871,9 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "archived_at": {"$exists": False},
         }
         if role in ("horse_owner", "parent"):
-            owner_name = user.get("full_name")
-            horse_names = await _horse_names_for_owner(db, owner_name)
-            share_clauses: List[Dict[str, Any]] = []
-            if owner_name:
-                share_clauses.append({"data.shared_with": {"$regex": owner_name, "$options": "i"}})
-            if horse_names:
-                share_clauses.append({
-                    "$and": [
-                        {"data.horse_name": {"$in": horse_names}},
-                        {"data.shared_with": {"$regex": "owner|parent|guardian", "$options": "i"}},
-                    ],
-                })
+            owner_ids = await _owner_link_ids_for_user(db, user, barn_id)
+            horse_ids = await _owned_horse_ids_for_user(db, user, barn_id)
+            share_clauses = _owner_horse_context_clauses(owner_ids, horse_ids, user.get("id"))
             if not share_clauses:
                 return []
             q["$or"] = share_clauses
@@ -1809,12 +1890,12 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         weight_q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
 
         if role in ("horse_owner", "parent"):
-            horse_names = await _horse_names_for_owner(db, user.get("full_name"))
-            if not horse_names:
+            horse_ids = await _owned_horse_ids_for_user(db, user, barn_id)
+            if not horse_ids:
                 return {"reminders": [], "weight_entries": []}
-            horse_filter = {"$in": horse_names}
-            reminder_q["data.horse_name"] = horse_filter
-            weight_q["data.horse_name"] = horse_filter
+            horse_filter = {"$in": horse_ids}
+            reminder_q["$or"] = [{"horse_id": horse_filter}, {"data.horse_id": horse_filter}]
+            weight_q["$or"] = [{"horse_id": horse_filter}, {"data.horse_id": horse_filter}]
         elif role not in ("admin", "barn_manager", "trainer", "veterinarian"):
             raise HTTPException(403, "Permission denied")
 
@@ -1829,16 +1910,10 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         contact_q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
         workflow_q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
         if role in ("horse_owner", "parent"):
-            owner_name = user.get("full_name")
-            horse_names = await _horse_names_for_owner(db, owner_name)
-            contact_clauses: List[Dict[str, Any]] = []
-            workflow_clauses: List[Dict[str, Any]] = []
-            if owner_name:
-                contact_clauses.append({"data.person_name": owner_name})
-                workflow_clauses.append({"data.primary_contact": owner_name})
-            if horse_names:
-                contact_clauses.append({"data.horse_name": {"$in": horse_names}})
-                workflow_clauses.append({"data.horse_name": {"$in": horse_names}})
+            owner_ids = await _owner_link_ids_for_user(db, user, barn_id)
+            horse_ids = await _owned_horse_ids_for_user(db, user, barn_id)
+            contact_clauses = _owner_horse_context_clauses(owner_ids, horse_ids, user.get("id"))
+            workflow_clauses = _owner_horse_context_clauses(owner_ids, horse_ids, user.get("id"))
             if not contact_clauses and not workflow_clauses:
                 return {"contacts": [], "workflows": []}
             contact_q["$or"] = contact_clauses
@@ -1856,17 +1931,20 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         plan_q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
         show_q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
         ride_q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
-        legacy_training_q: Dict[str, Any] = {}
+        legacy_training_q: Dict[str, Any] = {"barn_id": barn_id}
 
         if role in ("horse_owner", "parent"):
-            horse_names = await _horse_names_for_owner(db, user.get("full_name"))
-            if not horse_names:
+            horse_ids = await _owned_horse_ids_for_user(db, user, barn_id)
+            if not horse_ids:
                 return {"plans": [], "shows": [], "rides": [], "ride_logs": []}
-            horse_filter = {"$in": horse_names}
-            plan_q["data.horse_name"] = horse_filter
-            show_q["data.horse_name"] = horse_filter
-            ride_q["data.horse_name"] = horse_filter
-            legacy_training_q["horse_name"] = horse_filter
+            horse_filter = {"$in": horse_ids}
+            plan_q["$or"] = [{"horse_id": horse_filter}, {"data.horse_id": horse_filter}]
+            show_q["$or"] = [{"horse_id": horse_filter}, {"data.horse_id": horse_filter}]
+            ride_q["$or"] = [{"horse_id": horse_filter}, {"data.horse_id": horse_filter}]
+            legacy_training_q = {
+                "barn_id": barn_id,
+                "$or": [{"horse_id": horse_filter}, {"data.horse_id": horse_filter}],
+            }
         elif role not in ("admin", "barn_manager", "trainer"):
             raise HTTPException(403, "Permission denied")
 
@@ -1880,23 +1958,18 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
     async def owner_portal_billing(user=Depends(get_current_user)):
         role = user.get("role")
         barn_id = user.get("barn_id") or DEFAULT_BARN_ID
-        invoice_q: Dict[str, Any] = {}
+        invoice_q: Dict[str, Any] = {"barn_id": barn_id}
         payment_q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
         recurring_q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
 
         if role in ("horse_owner", "parent"):
-            owner_name = user.get("full_name")
-            owner_ids = await _owner_ids_for_name(db, owner_name)
-            invoice_clauses: List[Dict[str, Any]] = []
-            if owner_ids:
-                invoice_clauses.append({"owner_id": {"$in": owner_ids}})
-            if owner_name:
-                invoice_clauses.append({"owner_name": owner_name})
-                payment_q["data.owner_name"] = owner_name
-                recurring_q["data.owner_name"] = owner_name
+            owner_ids = await _owner_link_ids_for_user(db, user, barn_id)
+            invoice_clauses = _owner_account_clauses(owner_ids, user.get("id"))
             if not invoice_clauses:
                 return {"invoices": [], "payment_profiles": [], "recurring_rules": [], "payment_provider": "stripe_ready"}
             invoice_q["$or"] = invoice_clauses
+            payment_q["$or"] = invoice_clauses
+            recurring_q["$or"] = invoice_clauses
         elif role not in ("admin", "barn_manager"):
             raise HTTPException(403, "Permission denied")
 
@@ -1913,15 +1986,11 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
     @router.post("/owner-portal/billing/{invoice_id}/prepare-payment")
     async def prepare_owner_portal_payment(invoice_id: str, user=Depends(get_current_user)):
         role = user.get("role")
-        invoice_q: Dict[str, Any] = {"id": invoice_id}
+        barn_id = user.get("barn_id") or DEFAULT_BARN_ID
+        invoice_q: Dict[str, Any] = {"id": invoice_id, "barn_id": barn_id}
         if role in ("horse_owner", "parent"):
-            owner_name = user.get("full_name")
-            owner_ids = await _owner_ids_for_name(db, owner_name)
-            invoice_clauses: List[Dict[str, Any]] = []
-            if owner_ids:
-                invoice_clauses.append({"owner_id": {"$in": owner_ids}})
-            if owner_name:
-                invoice_clauses.append({"owner_name": owner_name})
+            owner_ids = await _owner_link_ids_for_user(db, user, barn_id)
+            invoice_clauses = _owner_account_clauses(owner_ids, user.get("id"))
             if not invoice_clauses:
                 raise HTTPException(404, "Invoice not found")
             invoice_q["$or"] = invoice_clauses
@@ -2180,7 +2249,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
     async def backlog_dashboard(user=Depends(get_current_user)):
         require_permission(user, "reporting:read")
         barn_id = user.get("barn_id") or DEFAULT_BARN_ID
-        revenue_rows = await db.invoices.find({}, {"_id": 0, "total": 1, "status": 1}).to_list(1000)
+        revenue_rows = await db.invoices.find({"barn_id": barn_id}, {"_id": 0, "total": 1, "status": 1}).to_list(1000)
         expenses = await db.expenses.find({"barn_id": barn_id}, {"_id": 0}).to_list(1000)
         stall_rows = await db.stall_assignments.find({"barn_id": barn_id}, {"_id": 0}).to_list(500)
         health_due = await db.health_reminders.count_documents({"barn_id": barn_id, "data.status": {"$in": ["due", "expired"]}})

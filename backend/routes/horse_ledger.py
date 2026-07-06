@@ -2003,6 +2003,50 @@ def build_router(*, db, get_current_user) -> APIRouter:
         sec = horse.get("secondary_owner_ids") or []
         return isinstance(sec, list) and uid in sec
 
+    def _owner_safe_horse_projection(horse: Dict[str, Any]) -> Dict[str, Any]:
+        data = horse.get("data") if isinstance(horse.get("data"), dict) else {}
+        return _scrub_strings({
+            "id": horse.get("id"),
+            "name": horse.get("name") or data.get("name"),
+            "barn_id": horse.get("barn_id"),
+            "stall_location": horse.get("stall_location") or data.get("stall_location"),
+            "breed": horse.get("breed") or data.get("breed"),
+            "color": horse.get("color") or data.get("color"),
+            "discipline": horse.get("discipline") or data.get("discipline"),
+        })
+
+    def _owner_safe_horse_clauses(user: Dict[str, Any]) -> List[Dict[str, Any]]:
+        uid = user.get("id")
+        if not uid:
+            return []
+        return [
+            {"owner_id": uid},
+            {"primary_owner_id": uid},
+            {"secondary_owner_ids": uid},
+            {"owner_user_id": uid},
+            {"owner_user_ids": uid},
+            {"guardian_user_id": uid},
+            {"guardian_user_ids": uid},
+            {"rider_user_id": uid},
+            {"rider_user_ids": uid},
+        ]
+
+    async def _list_owner_safe_horses(user) -> Dict[str, Any]:
+        role = (user.get("role") or "").strip().lower()
+        if role not in {"horse_owner", "parent", "rider"}:
+            raise HTTPException(403, "Owner-safe horse list is owner/guardian/rider only.")
+        clauses = _owner_safe_horse_clauses(user)
+        if not clauses:
+            return {"items": []}
+        rows = await db.horses.find(
+            {
+                "barn_id": resolve_barn_id(user),
+                "$or": clauses,
+            },
+            {"_id": 0},
+        ).sort("name", 1).to_list(200)
+        return {"items": [_owner_safe_horse_projection(row) for row in rows]}
+
     async def _load_horse_for_owner_or_404(horse_id, user):
         """Owner endpoints leak NO existence — non-owners and cross-
         barn calls always 404."""
@@ -2023,6 +2067,14 @@ def build_router(*, db, get_current_user) -> APIRouter:
             return horse
         # Other staff roles cannot preview the owner surface in 1-E.
         raise HTTPException(404, "Not found.")
+
+    @router.get("/owner/horses")
+    async def owner_horses(user=Depends(get_current_user)):
+        return await _list_owner_safe_horses(user)
+
+    @router.get("/owner-portal/horses")
+    async def owner_portal_horses(user=Depends(get_current_user)):
+        return await _list_owner_safe_horses(user)
 
     def _strip_staff_note(row: Dict[str, Any]) -> Dict[str, Any]:
         """Owner-safe projection of a service_requests row — drops the

@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0 CODEX-REVIEWED & LOCKED. Do not implement RF1-RF18 without a dedicated phase.
+Status: RF0 and RF1 CODEX-REVIEWED & LOCKED. RF2 is next.
 
 ## Purpose
 
@@ -50,19 +50,28 @@ RF0 -> RF1 -> RF2 -> RF3 -> RF4 -> RF5 -> RF6 -> RF7 -> RF8 -> RF9 -> RF10 -> RF
 
 Acceleration is allowed only after RF1 and RF2 are safe. Do not build RF9/RF10 trainer/provider expansion on top of unsafe data fences or name-based access.
 
-## Current RF0 Recommendation
+## Current Recommendation
 
-Proceed next to RF1 - P0 Data Fences and Backend Capability Gates.
+Proceed to RF2 - Identity-Based Access Migration.
 
-RF1 should start with source-backed blockers:
+RF1 locked these source-backed blockers:
 
 - QuickBooks invoice export currently reads all invoices in `backend/routes/backlog.py`.
 - Backlog owner-portal billing/forms/health/training surfaces still use `full_name`, `owner_name`, `recipient_name`, or free-text sharing fields.
 - Some sensitive routes have frontend gates and broad capability groups, but RF1 must prove backend authority for each direct route.
 
-RF2 should follow immediately after RF1 because several RF1 risks are caused by name-based access.
+RF2 should follow immediately because several remaining risks are caused by
+broader name-based access.
 
 ## Lock Note
 
 RF0 is Codex-reviewed and locked as an evidence-only refinement intake. It does
-not implement RF1-RF18. RF1 may proceed as the next dedicated phase.
+not implement RF1-RF18.
+
+## RF1 Lock Note
+
+RF1 is Codex-reviewed and locked as a narrow P0 data-fence and
+backend-capability gate. See `docs/RF1_DATA_FENCES_CAPABILITY_GATES.md` and
+`outputs/rf1_data_fences_capability_gates_report.md`.
+
+RF2 may proceed as the next dedicated phase.

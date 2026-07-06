@@ -79,8 +79,21 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             raise HTTPException(404, "Horse not found")
 
     async def _owner_horse_ids(user) -> list[str]:
+        uid = user["id"]
         horses = await db.horses.find(
-            barn_filter(user, {"owner_id": user["id"]}), {"_id": 0, "id": 1},
+            barn_filter(
+                user,
+                {
+                    "$or": [
+                        {"owner_id": uid},
+                        {"primary_owner_id": uid},
+                        {"secondary_owner_ids": uid},
+                        {"owner_user_id": uid},
+                        {"owner_user_ids": uid},
+                    ],
+                },
+            ),
+            {"_id": 0, "id": 1},
         ).to_list(500)
         return [h["id"] for h in horses]
 

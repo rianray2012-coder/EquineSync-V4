@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0 CODEX-REVIEWED & LOCKED. Do not implement RF1-RF18 from this file without a dedicated phase.
+Status: RF0 and RF1 CODEX-REVIEWED & LOCKED. RF2 is next.
 
 ## Classification Key
 
@@ -53,9 +53,27 @@ Status: RF0 CODEX-REVIEWED & LOCKED. Do not implement RF1-RF18 from this file wi
 | Feature shells to hide immediately. | requires founder decision | RF4, RF17 | RF0 recommends auditing daily nav first. |
 | Privacy boundaries for platform-admin insights. | requires founder decision | RF5 | Admin analytics must avoid sensitive free text and private content. |
 
-## Recommended Next Phase
+## RF1 Locked Status
 
-Proceed to RF1 - P0 Data Fences and Backend Capability Gates.
+RF1 has been reviewed, fixed, reviewed again, and locked. The following RF0
+findings are closed for RF1 scope:
+
+| Finding | RF1 Status | Evidence |
+| --- | --- | --- |
+| RF0-F01 | fixed for RF1 | `GET /owner/horses` and `GET /owner-portal/horses` now exist with stable owner/guardian/rider predicates. |
+| RF0-F02 | fixed for RF1 | RF1 proof tests assert backend financial/reporting capability gates. |
+| RF0-F03 | fixed for RF1 | QuickBooks invoice export reads invoices by `barn_id`. |
+| RF0-F04 | fixed for RF1 | Owner portal media/forms/health/emergency/training/billing predicates use stable owner/user/horse clauses. |
+| RF0-F12 | fixed for RF1 | Owner billing and payment-prep invoice lookups are barn-scoped and account-identity-scoped, without horse-only authorization. |
+| RF0-F14 | deferred | Canonical property/location/share publish state remains RF11. |
+
+Founder review item: RF1 intentionally hides legacy owner-facing records that
+only match by display/free-text name until RF2/RF7 migration links them to
+stable IDs.
+
+## Current Phase Recommendation
+
+Proceed to RF2 - Identity-Based Access Migration.
 
 RF1 should be kept narrow:
 
@@ -68,4 +86,5 @@ RF1 should be kept narrow:
 ## Lock Note
 
 RF0 is Codex-reviewed and locked. The finding classifications remain evidence
-intake only; RF1 fixes must be implemented and reviewed in a separate phase.
+intake only. RF1 is Codex-reviewed and locked for P0 data fences and backend
+capability gates.
