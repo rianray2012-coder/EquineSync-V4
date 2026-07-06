@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, RF2, RF3, RF4, and RF5 CODEX-REVIEWED & LOCKED. RF6 is next.
+Status: RF0, RF1, RF2, RF3, RF4, RF5, and RF6 CODEX-REVIEWED & LOCKED. RF7 is next.
 
 ## Purpose
 
@@ -52,7 +52,7 @@ Acceleration is allowed only after RF1 and RF2 are safe. Do not build RF9/RF10 t
 
 ## Current Recommendation
 
-Proceed to RF6 - Canonical Systems Consolidation.
+Proceed to RF7 - Owner, Guardian, and Client Portal Hardening.
 
 RF1 locked these source-backed blocker fixes:
 
@@ -174,3 +174,34 @@ RF6 may proceed as a canonical systems consolidation gate. RF6 should identify
 one source of truth, alias/read-only posture, hide decision, or explicit
 migration/defer decision for duplicated operational tasks, inventory, owner
 updates, documents/signatures, billing, and integration-readiness surfaces.
+
+## RF6 Lock Note
+
+RF6 is Codex-reviewed and locked. See
+`docs/RF6_CANONICAL_SYSTEMS_CONSOLIDATION.md` and
+`outputs/rf6_canonical_systems_consolidation_report.md`.
+
+RF6 status is `ready` with zero blocker rows. It records source-of-truth posture
+for six duplicated domains:
+
+- Task Engine is canonical for operational tasks; Staff Tasks is a migration,
+  hide, or admin-readiness candidate for RF8/RF17.
+- Inventory is canonical for stock/supply truth; Supply Inventory should alias,
+  migrate, or hide before operators rely on it as a second stock ledger.
+- Owner Updates is canonical for owner-trust lifecycle; owner media updates
+  should migrate or hide in RF7/RF17.
+- Document Signatures is canonical for legal signature workflows; Digital Forms
+  remains local acknowledgement/readiness until RF14.
+- Account subscription records are canonical billing entitlement truth; legacy
+  membership/payment feature records are not subscription truth.
+- Integration readiness remains manifest/status evidence only until later
+  provider phases.
+
+RF6 does not migrate data, hide routes, redirect URLs, add schemas, change auth,
+mutate billing, call providers, or mark founder decisions accepted.
+
+RF7 may proceed as the owner, guardian, and client portal hardening gate. RF7
+should build on RF1 stable owner-safe predicates, RF5 enrollment caveats, and
+RF6 canonical owner-update decisions without expanding trainer/provider,
+billing, document-signature, or feature-shell retirement scope beyond the owner
+trust surface.

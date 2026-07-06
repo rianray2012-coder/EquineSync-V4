@@ -72,6 +72,21 @@ opening gate:
 - RF5 does not complete RF7 owner depth, RF9 trainer workflows, RF10 provider
   access grants, RF12 billing intervention, or RF18 UAT acceptance.
 
+RF6 is Codex-reviewed and locked as a canonical systems consolidation gate:
+
+- Task Engine is declared canonical for operational tasks; Staff Tasks remains
+  RF8/RF17 migration or hide work.
+- Inventory is declared canonical for stock/supply truth; Supply Inventory
+  remains RF17 alias/migration/hide work.
+- Owner Updates is declared canonical for owner-trust lifecycle; owner media
+  updates remain RF7/RF17 migration or hide work.
+- Document Signatures is declared canonical for legal signature workflows;
+  Digital Forms remains local acknowledgement/readiness until RF14.
+- Account subscription records are declared canonical billing entitlement truth;
+  legacy membership/payment feature records are not subscription truth.
+- Integration readiness remains manifest/status evidence only until provider
+  phases.
+
 
 ### Phase HorseOps-1H — Mobile Field Readiness ✅ (Jun 2026, ready for Codex review)
 Frontend-first mobile hardening for the locked Care Ledger surfaces. No backend
@@ -5615,3 +5630,40 @@ Deferred after RF5 package:
 - RF18: end-to-end enrollment UAT acceptance.
 
 Next phase after RF5 lock: RF6 canonical systems consolidation.
+
+## RF6 - Canonical Systems Consolidation CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+RF6 was opened as a narrow source-of-truth decision gate after RF5 lock. It does
+not migrate data, hide routes, redirect URLs, add schemas, change auth, mutate
+billing, call providers, or mark founder decisions accepted.
+
+Created:
+- `backend/core/rf6_canonical_systems_consolidation.py`
+- `backend/scripts/build_rf6_canonical_systems_consolidation.py`
+- `backend/tests/test_rf6_canonical_systems_consolidation.py`
+- `BUILD_NEXT_RF6_CANONICAL_SYSTEMS_README.md`
+- `docs/RF6_CANONICAL_SYSTEMS_CONSOLIDATION.md`
+- `outputs/rf6_canonical_systems_consolidation_report.md`
+- `outputs/build_next_rf6_canonical_systems_consolidation.zip`
+
+RF6 generated report snapshot:
+- Overall status: `ready`.
+- Blocker rows: 0.
+- Canonical decision rows: operational tasks, inventory, owner updates,
+  documents/signatures, billing entitlements, and integration readiness.
+
+RF6 lock verification:
+- Focused RF6 tests passed.
+- RF6 report generation passed with blocker failure enabled.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check` and RF6 secret-shape scan passed.
+
+Deferred after RF6 package:
+- RF7/RF17: owner media update migration/hide and owner portal cleanup.
+- RF8/RF17: Staff Tasks migration/hide and Task Engine staff-work alignment.
+- RF12: billing/payment/refund/export truth beyond entitlement source of truth.
+- RF14: legal signature, acknowledgement, signer-rule, and storage
+  consolidation.
+- RF17: route hiding, redirecting, aliasing, and Admin Setup placement.
+
+Next phase after RF6 lock: RF7 owner, guardian, and client portal hardening.

@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, RF2, RF3, RF4, and RF5 CODEX-REVIEWED & LOCKED. RF6 is next.
+Status: RF0, RF1, RF2, RF3, RF4, RF5, and RF6 CODEX-REVIEWED & LOCKED. RF7 is next.
 
 ## Classification Key
 
@@ -23,11 +23,11 @@ Status: RF0, RF1, RF2, RF3, RF4, and RF5 CODEX-REVIEWED & LOCKED. RF6 is next.
 | RF0-F02 | Some backend writes still need explicit capability gates, not only barn stamping or frontend nav. | partially fixed | RF1, RF4 | RF1 proof tests assert backend financial/reporting capability gates backed by `backend/core/permissions.py`. Full feature certification remains RF4. | RF4 should finish route-by-route feature certification and hide or gate non-certified surfaces. |
 | RF0-F03 | QuickBooks invoice export must be barn-scoped. | fixed | RF1, RF12 | RF1 scopes QuickBooks invoice export by `barn_id` in `backend/routes/backlog.py`. | RF12 should finish broader export/accounting truth beyond the RF1 leak fix. |
 | RF0-F04 | Owner portal billing and related surfaces still rely on display/free-text fields. | partially fixed | RF1, RF2, RF7, RF12 | RF1 moved owner-portal access predicates to stable owner/user/horse clauses. RF2 records that remaining display/form fields are not authorization predicates for its narrow scope. | RF7/RF12 should finish canonical portal UX and payment truth; RF17 should retire misleading feature-shell form fields. |
-| RF0-F05 | Owner updates exist in two worlds: real lifecycle backend and feature-module media tracker. | partially fixed | RF6, RF7, RF17 | Real lifecycle exists in `backend/routes/owner_updates.py`; feature-module media update routes still exist in `backend/routes/backlog.py`. | Make `owner_updates` canonical; migrate/hide feature-module owner media updates. |
+| RF0-F05 | Owner updates exist in two worlds: real lifecycle backend and feature-module media tracker. | partially fixed | RF6, RF7, RF17 | RF6 declares `backend/routes/owner_updates.py` / `db.owner_updates` canonical. Feature-module `owner_media_updates` still exist and are now migration/hide candidates. | RF7/RF17 should migrate or hide feature-module owner media updates. |
 | RF0-F06 | Feature-module shells still appear as production-like modules. | partially fixed | RF4, RF17 | RF4 classifies all 32 feature-module keys and pins direct-route classifications for `MobileReadiness`, `AdvancedReports`, `GroupMessaging`, `AI Automation`, `Forms & Signatures`, `Staff Tasks`, `Supply Inventory`, and integration readiness surfaces. Daily role navigation is curated, but direct readiness/scaffold routes still need RF17 founder decisions. | Use the locked RF4 classifications to hide, relabel, redirect, or move readiness/scaffold surfaces out of daily nav in RF17. |
 | RF0-F07 | Staff scheduling, tasks, handoffs, and time clock are name-based. | partially fixed | RF2, RF8 | RF2 packages stable user-ID predicates for staff My Work, task status, handoffs, time-clock ownership, and payroll `staff_user_id` filtering in `backend/routes/backlog.py`. Frontend staff forms and legacy rows still use/display name fields. | RF8 must migrate/backfill workforce records to `staff_user_id` / `account_membership_id` and replace name text fields with staff selectors. |
-| RF0-F08 | Staff Tasks and Task Engine are parallel task systems. | open P1 | RF6, RF8 | `backend/task_engine.py` is canonical for operational tasks, while `staff_task_assignments` and `/staff-tasks` exist in backlog surfaces. | Merge/demote Staff Tasks into Task Engine views or hide as readiness/admin-only. |
-| RF0-F09 | Inventory and Supply Inventory are duplicated. | open P1 | RF6 | `/inventory` and `/supply-inventory` are both routed; `frontend/src/pages/Inventory.jsx` and `frontend/src/pages/SupplyInventory.jsx` are separate surfaces. | Choose canonical inventory and migrate/fold supply inventory. |
+| RF0-F08 | Staff Tasks and Task Engine are parallel task systems. | partially fixed | RF6, RF8 | RF6 declares Task Engine canonical for operational tasks. `staff_task_assignments`, `/staff-tasks`, and staff portal task status remain noncanonical until RF8/RF17 migration/hide work. | RF8 should migrate/demote Staff Tasks into Task Engine views or hide as readiness/admin-only. |
+| RF0-F09 | Inventory and Supply Inventory are duplicated. | partially fixed | RF6, RF17 | RF6 declares `/inventory` / `db.inventory` canonical. `/supply-inventory` and `supply_inventory_items` remain noncanonical until alias/migration/hide work. | RF17 should alias, migrate, or hide Supply Inventory. |
 | RF0-F10 | Group Messaging tracks intent/status but does not necessarily deliver messages. | partially fixed | RF13, RF17 | RF4 relabels Group Messaging as push-preview/local-status readiness and records `sent` as local status, not external delivery. | RF13 must build real delivery logs/recipient IDs or RF17 must hide/demote the surface. |
 | RF0-F11 | Advanced Reports imply Excel/PDF while export behavior may be manifest-based. | partially fixed | RF12, RF17 | RF4 labels Excel/PDF actions as export manifests while `backend/routes/backlog.py` report export returns manifest/download formats. | RF12 must generate real Excel/PDF or RF17 must keep the manifest-only label/hide the surface. |
 | RF0-F12 | Owner payment flow can be configuration-ready rather than true payment collection. | partially fixed | RF1, RF12 | RF1 scopes owner payment prep by barn and stable account/invoice identity without horse-only authorization. Stripe collection truth remains RF12. | RF12 should make payment collection, refunds, voids, and Stripe state truthful. |
@@ -58,6 +58,12 @@ Status: RF0, RF1, RF2, RF3, RF4, and RF5 CODEX-REVIEWED & LOCKED. RF6 is next.
 | Web enrollment path ordering and copy. | requires founder decision | RF5, RF7, RF9, RF10 | RF5 proposed this order: Individual Horse Owner, Barn Owner / Manager, Service Provider, Trainer. Founder should accept or adjust before lock. |
 | Rider/guardian/staff limited trial posture. | requires founder decision | RF5, RF7, RF18 | Accept invite-first access plus limited modified-individual-owner trial fallback, with server enforcement deferred beyond RF5. |
 | Leasee invite authority. | requires founder decision | RF7 | Accept that leasee invites can only be sent by the horse owner or assigned trainer, while owner oversight remains intact. |
+| Task Engine canonical ownership. | requires founder decision | RF6, RF8 | Accept Task Engine as canonical over Staff Tasks before RF8 migration/hide work. |
+| Inventory canonical ownership. | requires founder decision | RF6, RF17 | Accept `/inventory` / `db.inventory` as canonical over Supply Inventory before alias/migration/hide work. |
+| Owner Updates canonical ownership. | requires founder decision | RF6, RF7, RF17 | Accept `owner_updates` as canonical over feature-module owner media updates. |
+| Document signature canonical ownership. | requires founder decision | RF6, RF14 | Accept Document Signatures as canonical legal-signature workflow truth while Digital Forms remains local acknowledgement/readiness. |
+| Billing entitlement canonical ownership. | requires founder decision | RF6, RF12 | Accept account subscription rows as subscription entitlement truth, distinct from invoices/payment records/legacy membership. |
+| Integration readiness canonical boundary. | requires founder decision | RF6, RF10, RF12, RF13, RF14, RF16, RF17 | Accept integration readiness as manifest/status evidence only until provider-specific phases prove live sync. |
 
 ## RF1 Locked Status
 
@@ -79,12 +85,12 @@ stable IDs.
 
 ## Current Phase Recommendation
 
-Proceed to RF6 - Canonical Systems Consolidation.
+Proceed to RF7 - Owner, Guardian, and Client Portal Hardening.
 
-RF6 should identify the canonical source of truth for duplicated operational
-tasks, inventory, owner updates, documents/signatures, billing, and integration
-readiness surfaces. It should produce explicit migrate, alias, read-only, hide,
-or defer decisions without broad schema rewrites or provider mutations.
+RF6 identifies the canonical source of truth for duplicated operational tasks,
+inventory, owner updates, documents/signatures, billing, and integration
+readiness surfaces. It produces explicit migrate, alias, read-only, hide, or
+defer decisions without broad schema rewrites or provider mutations.
 
 ## RF3 Locked Status
 
@@ -193,3 +199,34 @@ RF5 founder decisions:
 - Accept rider/guardian/staff invite-first access plus limited-trial fallback.
 - Accept leasee invite authority and owner oversight requirements.
 - Accept admin account-health inventory as opening evidence only.
+
+## RF6 Locked Status
+
+RF6 is Codex-reviewed and locked. It records canonical source-of-truth
+decisions without data migration, route hiding, redirects, schemas, auth
+changes, billing mutations, provider calls, or founder acceptance auto-marking.
+
+RF6 generated report:
+`outputs/rf6_canonical_systems_consolidation_report.md`.
+
+RF6 package:
+`outputs/build_next_rf6_canonical_systems_consolidation.zip`.
+
+| Finding / Domain | RF6 Status | Evidence |
+| --- | --- | --- |
+| RF0-F05 | partially fixed for canonical decision | `owner_updates` is canonical; `owner_media_updates` remains migration/hide work. |
+| RF0-F08 | partially fixed for canonical decision | Task Engine is canonical; Staff Tasks remains migration/hide work for RF8/RF17. |
+| RF0-F09 | partially fixed for canonical decision | `/inventory` / `db.inventory` is canonical; Supply Inventory remains alias/migration/hide work. |
+| Documents/signatures | canonical decision recorded | Document Signatures owns legal signature workflows; Digital Forms remains local acknowledgement/readiness until RF14. |
+| Billing entitlements | canonical decision recorded | `account_subscriptions` / `account_usage_limits` are entitlement truth; legacy membership/payment feature records are not subscription truth. |
+| Integration readiness | canonical readiness boundary recorded | `integration_connections` and prepare/export/preview manifests are readiness evidence only until provider phases. |
+
+RF6 founder decisions:
+
+- Accept Task Engine as canonical over Staff Tasks.
+- Accept Inventory as canonical over Supply Inventory.
+- Accept Owner Updates as canonical over owner media updates.
+- Accept Document Signatures as canonical for legal signature workflows.
+- Accept account subscription records as billing entitlement truth.
+- Accept integration readiness as manifest/status evidence only until provider
+  phases.
