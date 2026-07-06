@@ -31,6 +31,25 @@ ONBOARDING_STEPS: List[Dict[str, Any]] = [
     {"id": "review", "label": "Review & Launch", "required": True},
 ]
 
+BN16B_REQUIRED_STEP_IDS = (
+    "barn",
+    "locations",
+    "owners",
+    "horses",
+    "feed_templates",
+    "review",
+)
+BN16B_OPTIONAL_STEP_IDS = (
+    "riders",
+    "inventory",
+    "operations_setup",
+    "staff",
+)
+BN16B_DEFERRED_STEP_IDS = ("schedules",)
+BN16B_COMPLETION_ROLES = {"admin", "barn_owner"}
+BN16B_SETUP_ACCESS_ROLES = {"admin", "barn_owner", "barn_manager"}
+_STEP_BY_ID = {step["id"]: step for step in ONBOARDING_STEPS}
+
 
 class BarnSettings(BaseModel):
     name: Optional[str] = None
@@ -180,6 +199,138 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
         doc.pop("_id", None)
         return doc
 
+    async def _count_barn_docs(collection_name: str, barn_id: str) -> int:
+        collection = getattr(db, collection_name)
+        query = {"barn_id": barn_id}
+        try:
+            return await collection.count_documents(query)
+        except AttributeError:
+            rows = await collection.find(query, {"_id": 0, "id": 1}).to_list(1000)
+            return len(rows)
+
+    def _actor_role(user) -> str:
+        return (user.get("role") or "").strip().lower()
+
+    def _require_readiness_view(user) -> None:
+        if _actor_role(user) not in BN16B_SETUP_ACCESS_ROLES:
+            raise HTTPException(
+                status_code=403,
+                detail="Setup readiness requires a facility setup role.",
+            )
+
+    def _require_completion_role(user) -> None:
+        if _actor_role(user) not in BN16B_COMPLETION_ROLES:
+            raise HTTPException(
+                status_code=403,
+                detail="Setup completion requires a facility admin or barn owner role.",
+            )
+
+    def _step_label(step_id: str) -> str:
+        return (_STEP_BY_ID.get(step_id) or {}).get("label") or step_id
+
+    def _step_payload(step_id: str, *, status: str, required: bool = False,
+                      deferred: bool = False, reason: Optional[str] = None) -> Dict[str, Any]:
+        out: Dict[str, Any] = {
+            "id": step_id,
+            "label": _step_label(step_id),
+            "status": status,
+            "required": required,
+            "deferred": deferred,
+        }
+        if reason:
+            out["reason"] = reason
+        return out
+
+    async def _build_readiness(user) -> Dict[str, Any]:
+        progress = await _ensure_progress(user)
+        barn_id = resolve_barn_id(user)
+        actor_role = _actor_role(user)
+        steps = progress.get("steps") or {}
+
+        barn = await db.barn.find_one({"id": barn_id}, {"_id": 0, "id": 1, "name": 1})
+        counts = {
+            "locations": await _count_barn_docs("locations", barn_id),
+            "owners": await _count_barn_docs("owners", barn_id),
+            "horses": await _count_barn_docs("horses", barn_id),
+            "feed_templates": await _count_barn_docs("feed_templates", barn_id),
+            "riders": await _count_barn_docs("riders", barn_id),
+            "inventory": await _count_barn_docs("inventory", barn_id),
+            "staff": await _count_barn_docs("staff_invites", barn_id),
+        }
+
+        required_statuses = {
+            "barn": "complete" if (barn and (barn.get("name") or "").strip()) else "blocked",
+            "locations": "complete" if counts["locations"] > 0 else "blocked",
+            "owners": "complete" if counts["owners"] > 0 else "blocked",
+            "horses": "complete" if counts["horses"] > 0 else "blocked",
+            "feed_templates": "complete" if counts["feed_templates"] > 0 else "blocked",
+            "review": "complete" if steps.get("review") == "complete" else "blocked",
+        }
+        required_reasons = {
+            "barn": "Barn profile needs a saved name.",
+            "locations": "Add at least one location.",
+            "owners": "Add at least one owner or client.",
+            "horses": "Add at least one horse profile.",
+            "feed_templates": "Add at least one feed template.",
+            "review": "Mark Review & Launch complete after checking setup.",
+        }
+
+        blockers = []
+        required_steps = []
+        for step_id in BN16B_REQUIRED_STEP_IDS:
+            status = required_statuses[step_id]
+            reason = None if status == "complete" else required_reasons[step_id]
+            payload = _step_payload(step_id, status=status, required=True, reason=reason)
+            required_steps.append(payload)
+            if status != "complete":
+                blockers.append({
+                    "step_id": step_id,
+                    "label": _step_label(step_id),
+                    "reason": reason,
+                    "severity": "blocker",
+                })
+
+        optional_steps = []
+        optional_reason = "Optional setup item; does not block setup completion."
+        for step_id in BN16B_OPTIONAL_STEP_IDS:
+            status = "complete" if (steps.get(step_id) == "complete" or counts.get(step_id, 0) > 0) else "pending"
+            optional_steps.append(_step_payload(step_id, status=status, reason=optional_reason))
+
+        deferred_steps = [
+            _step_payload(
+                step_id,
+                status="deferred",
+                deferred=True,
+                reason="Deferred until recurring schedule materialization is ready.",
+            )
+            for step_id in BN16B_DEFERRED_STEP_IDS
+        ]
+
+        required_completed = sum(1 for step in required_steps if step["status"] == "complete")
+        can_finalize = actor_role in BN16B_COMPLETION_ROLES
+        can_view = actor_role in BN16B_SETUP_ACCESS_ROLES
+        return {
+            "ok": True,
+            "phase": "BN16B",
+            "barn_id": barn_id,
+            "user_id": user["id"],
+            "actor_role": actor_role,
+            "completion_scope": "barn",
+            "can_view": can_view,
+            "can_finalize": can_finalize,
+            "can_complete": can_finalize and not blockers,
+            "required_steps": required_steps,
+            "optional_steps": optional_steps,
+            "deferred_steps": deferred_steps,
+            "blockers": blockers,
+            "warnings": [],
+            "progress": {
+                "required_completed": required_completed,
+                "required_total": len(BN16B_REQUIRED_STEP_IDS),
+                "required_percent": round(100 * required_completed / len(BN16B_REQUIRED_STEP_IDS)),
+            },
+        }
+
     @router.get("/onboarding/progress")
     async def get_progress(user=Depends(get_current_user)):
         doc = await _ensure_progress(user)
@@ -207,13 +358,30 @@ def build_router(*, db, get_current_user, require_setup_role, roles: List[str],
         fresh["percent"] = round(100 * completed_steps / len(ONBOARDING_STEPS))
         return fresh
 
+    @router.get("/onboarding/readiness")
+    async def get_readiness(user=Depends(get_current_user)):
+        _require_readiness_view(user)
+        return await _build_readiness(user)
+
     @router.post("/onboarding/complete")
     async def complete_onboarding(user=Depends(get_current_user)):
+        _require_completion_role(user)
+        readiness = await _build_readiness(user)
+        if readiness["blockers"]:
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    "message": "Setup is not ready to complete.",
+                    "blockers": readiness["blockers"],
+                    "progress": readiness["progress"],
+                    "completion_scope": readiness["completion_scope"],
+                },
+            )
         await db.onboarding_progress.update_one(
             {"user_id": user["id"]},
             {"$set": {"completed": True, "completed_at": _iso(_now_utc())}},
         )
-        return {"ok": True}
+        return {"ok": True, "readiness": readiness}
 
     @router.post("/onboarding/reset")
     async def reset_onboarding(user=Depends(get_current_user)):

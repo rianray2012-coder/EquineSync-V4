@@ -103,7 +103,7 @@ export default function NotificationPrefsCard() {
         <h3 className="font-display text-2xl text-equine-ink">Notification preferences</h3>
       </div>
       <p className="text-[12.5px] text-equine-inkMuted mb-5 max-w-2xl">
-        Choose how the barn reaches you. Inbox lives in your bell · email arrives in your inbox · push is coming soon.
+        Choose how the barn reaches you. Inbox lives in your bell · email arrives in your inbox. Additional delivery channels appear here after they are configured.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">

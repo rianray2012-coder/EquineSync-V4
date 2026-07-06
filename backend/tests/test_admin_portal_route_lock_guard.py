@@ -20,10 +20,12 @@ import re
 import sys
 
 
-sys.path.insert(0, "/app/backend")
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+BACKEND_DIR = REPO_ROOT / "backend"
+sys.path.insert(0, str(BACKEND_DIR))
 
 
-PKG_DIR = pathlib.Path("/app/backend/routes/admin_portal")
+PKG_DIR = BACKEND_DIR / "routes" / "admin_portal"
 
 # Strip a leading `/api` prefix because router files use the path
 # WITHOUT the `/api` prefix (the prefix is added by the parent
@@ -153,9 +155,7 @@ def test_every_admin_portal_decorator_lives_in_a_surface_module():
     handlers may live in `portal.py`. All 39 endpoints must be
     declared in a surface module (`dashboard.py`, `users.py`, ...,
     `settings.py`). `portal.py` is the orchestrator only."""
-    portal_py = pathlib.Path(
-        "/app/backend/routes/admin_portal/portal.py"
-    ).read_text()
+    portal_py = (PKG_DIR / "portal.py").read_text()
     matches = list(DECO_RE.finditer(portal_py))
     assert not matches, (
         "portal.py declares route decorator(s):\n  "

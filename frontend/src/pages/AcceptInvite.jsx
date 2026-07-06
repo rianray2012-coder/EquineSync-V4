@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { api, tokens } from "../lib/api";
 import { Logo } from "../components/Logo";
 import { useAuth } from "../context/AuthContext";
+import { SETUP_ROUTE } from "../lib/roleLanding";
 import { toast } from "sonner";
 import { ShieldCheck, AlertTriangle } from "lucide-react";
 
@@ -36,7 +37,7 @@ export default function AcceptInvite() {
       if (setSession) setSession(r.data.user);
       toast.success("Welcome to the barn");
       if (r.data.auto_launch_onboarding) {
-        navigate("/onboarding", { replace: true });
+        navigate(SETUP_ROUTE, { replace: true });
       } else {
         navigate("/", { replace: true });
       }

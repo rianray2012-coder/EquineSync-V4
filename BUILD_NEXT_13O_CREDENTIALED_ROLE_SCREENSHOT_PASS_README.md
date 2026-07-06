@@ -1,6 +1,6 @@
 # Build-Next-13O - Credentialed Role Screenshot Pass
 
-Status: READY FOR CODEX REVIEW - SCREENSHOTS CAPTURED
+Status: CODEX-REVIEWED AND LOCKED
 
 BN13O is the follow-up evidence pass after locked BN13N. Its job is to run the
 BN13N role-smoke account script in the official environment, then capture
@@ -11,19 +11,26 @@ credentialed browser screenshots for every role row.
 - Official frontend reachability: PASS.
 - Official API health: PASS.
 - BN13N targeted reset support: PASS.
-- Credentialed role screenshot rows: PASS / PASS_WITH_RESIDUAL.
+- Credentialed role screenshot rows: PASS.
 - Screenshots: 11/11 captured.
-- Founder acceptance: not recorded.
+- Founder acceptance: recorded by user instruction to lock BN13O.
+- Round-1 evidence safety: platform-admin Recent Activity row details were
+  redacted from the packaged screenshot.
+- Round-1 UX hardening: role-home missing intake/profile rows now render empty
+  setup forms instead of a `Not Found` panel.
+  In short: missing intake/profile rows now render empty setup forms.
+- Recapture: the five role-home rows that originally showed `Not Found` were
+  replaced with clean screenshots showing the empty setup forms.
 
 The production app and API are reachable, and all 11 credentialed role
 screenshots are present. Several role-home surfaces load the correct shell but
-show a `Not Found` residual in the intake/profile panel; this is recorded as a
-follow-up QA note rather than changed in this evidence-only phase.
+showed a `Not Found` residual in the original captures; the frontend fallback
+has been patched and those five rows have been recaptured.
 
 ## Strict Scope
 
-- Evidence capture and reporting only.
-- No product behavior changes.
+- Evidence capture, reporting, and round-1 finding cleanup only.
+- Frontend-only defensive fallback for missing role-home intake/profile rows.
 - No backend route, schema, auth, permission, privacy, billing, provider,
   HorseOps, Admin Portal, task, facility setup, email, notification, landing
   page, launch, UAT, Stripe, Apple, or DocuSign changes.
@@ -34,7 +41,8 @@ follow-up QA note rather than changed in this evidence-only phase.
   were supplied out of band.
 - Screenshot files were copied into the package evidence folder.
 - No passwords, tokens, reset links, API keys, Stripe IDs, DocuSign IDs, private
-  keys, or authenticated session data are included.
+  keys, or authenticated session details are included. The platform-admin
+  Recent Activity row details are redacted in the packaged screenshot.
 
 ## Artifacts
 
@@ -94,17 +102,16 @@ PY
 
 ## Remaining Action
 
-Before founder acceptance:
+Lock notes:
 
 1. Review the 11 screenshots.
-2. Decide whether the `Not Found` intake-panel residual blocks acceptance or
-   moves into the next UX/data-hardening phase.
-3. Confirm no screenshot exposes passwords, tokens, private staff-only owner
+2. Confirm no screenshot exposes passwords, tokens, private staff-only owner
    data, raw alert payloads, Stripe IDs, or DocuSign IDs.
-4. Record founder acceptance separately if the evidence is approved.
+3. Founder acceptance for BN13O evidence is recorded by user instruction to
+   lock BN13O.
+4. Broad public launch remains separate and is not approved by this lock.
 
 ## Review Notes
 
-This package proves credentialed screenshot capture, but founder acceptance and
-launch readiness remain pending until the screenshots and residual QA notes are
-reviewed.
+This package proves credentialed screenshot capture and is locked. Broad public
+launch readiness remains pending until the remaining launch gates are cleared.

@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
-  LayoutDashboard, Cat, UserCircle2, Users, GraduationCap,
+  LayoutDashboard, UserCircle2, Users, GraduationCap,
   Stethoscope, Receipt, AlertTriangle, MessageSquare, BarChart3,
   Settings, LogOut, Sparkles, ListChecks, Map, ClipboardList,
   FileText, CalendarDays, UsersRound, PenLine, ShieldCheck,
   Building2, Heart,
 } from "lucide-react";
 import { Logo } from "./Logo";
+import HorseshoeIcon from "./icons/HorseshoeIcon";
 import { useAuth } from "../context/AuthContext";
 import { api } from "../lib/api";
 import { getRoleNavigation } from "../lib/roleNavigation";
@@ -22,7 +23,7 @@ const ICONS = {
   facility: Building2,
   health: Stethoscope,
   heart: Heart,
-  horse: Cat,
+  horse: HorseshoeIcon,
   map: Map,
   messages: MessageSquare,
   profile: UserCircle2,

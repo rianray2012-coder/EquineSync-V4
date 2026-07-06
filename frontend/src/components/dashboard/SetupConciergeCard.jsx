@@ -7,7 +7,7 @@ import { STEP_META } from "../../lib/onboardingMeta";
 /**
  * SetupConciergeCard — surfaces incomplete onboarding on the dashboard.
  * Renders only when an admin/manager has progress < 100%. Each tile deep-links
- * back into /onboarding to resume the wizard at the right step.
+ * back into the facility setup route to resume the wizard at the right step.
  */
 const SetupConciergeCard = ({ progress, steps }) => {
   if (!progress || progress.completed || (progress.percent ?? 0) >= 100) return null;
@@ -26,7 +26,7 @@ const SetupConciergeCard = ({ progress, steps }) => {
               Finish setting up your barn
             </h3>
             <Link
-              to="/onboarding"
+              to="/setup/facility"
               data-testid="resume-setup"
               className="btn-primary !py-2 !px-4 text-[13px] inline-flex items-center gap-2 whitespace-nowrap"
             >
@@ -60,7 +60,7 @@ const SetupConciergeCard = ({ progress, steps }) => {
             : "border-equine-graphite/30 bg-equine-soft/60";
           return (
             <Link
-              to="/onboarding"
+              to="/setup/facility"
               key={s.id}
               data-testid={`checklist-${s.id}`}
               className={`px-3 py-2.5 rounded-xl border transition-all duration-200 hover:border-equine-brass hover:bg-equine-elevated flex items-center gap-2.5 tap-44 ${tone}`}

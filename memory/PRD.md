@@ -3965,7 +3965,7 @@ Strictly unchanged:
   AI, scheduler, workflow-engine, deploy action, public launch action, or Phase
   16 behavior changes.
 
-## Build-Next-13O - Credentialed Role Screenshot Pass ⏸ READY FOR REVIEW (Jul 01 2026)
+## Build-Next-13O - Credentialed Role Screenshot Pass ✅ LOCKED (Jul 01 2026)
 
 BN13O completed the credentialed screenshot capture pass after locked BN13N:
 - `BUILD_NEXT_13O_CREDENTIALED_ROLE_SCREENSHOT_PASS_README.md`
@@ -3981,15 +3981,1460 @@ Verdict:
   `environment=production`).
 - BN13N targeted one-account password reset support is available.
 - Credentialed screenshots are captured for all 11 role rows.
-- 6 rows are PASS and 5 rows are PASS_WITH_RESIDUAL.
-- Residual: manager, groom, horse-owner, guardian, and rider shells load but
-  show a `Not Found` intake/profile panel that needs follow-up review.
-- Founder acceptance is not recorded.
+- 11 rows are PASS.
+- Round-1 cleanup redacted the platform-admin Recent Activity row details from
+  the packaged screenshot so truncated session identifiers are not included.
+- Round-1 cleanup added a frontend-only defensive fallback so missing
+  role-home intake/profile rows render an empty setup form instead of a `Not
+  Found` panel.
+- The five role-home rows that originally showed `Not Found` were recaptured
+  after the fallback fix and now show clean empty setup forms.
+- Founder acceptance for BN13O evidence is recorded by user instruction to lock
+  BN13O.
 - Broad public launch remains no-go.
 
 Strictly unchanged:
-- No product behavior, provider calls, backend route/schema/auth/permission,
+- No backend route/schema/auth/permission, provider calls, checkout, webhook,
+  billing, Stripe, Apple, DocuSign workflow behavior, HorseOps, Admin Portal,
+  landing page, service worker, push, native, offline, AI, scheduler,
+  workflow-engine, deploy action, public launch action, UAT acceptance, or Phase
+  16 behavior changes.
+
+## Build-Next-13P - Role Home Title Case Polish ✅ LOCKED (Jul 01 2026)
+
+BN13P follows locked BN13O:
+- `BUILD_NEXT_13P_ROLE_HOME_TITLE_CASE_POLISH_PLAN.md`
+- `BUILD_NEXT_13P_ROLE_HOME_TITLE_CASE_POLISH_README.md`
+- `outputs/build_next_13p_role_home_title_case_report.md`
+- `backend/tests/test_build_next_13p_role_home_title_case.py`
+- `outputs/build_next_13p_role_home_title_case_polish.zip`
+
+Scope:
+- Normalize role/profile landing page titles and major headings to consistent
+  Title Case across role-home surfaces.
+- Keep "Setup Intent" for unfinished setup-intent surfaces.
+- Keep subtitles and body copy in sentence case.
+- Replace `Coming soon:` scaffold wording with conservative empty-state copy
+  that does not imply new workflows are active.
+- Keep the phase frontend/source-evidence scoped with no screenshots required.
+
+Verdict:
+- BN13P is Codex-reviewed and locked.
+- Source-level proof records title/headline normalization and route/test-id
+  preservation.
+
+Guardrails:
+- No backend route/schema/auth/permission, provider calls, checkout, webhook,
+  billing, Stripe, Apple, DocuSign workflow behavior, HorseOps, Admin Portal,
+  landing page, service worker, push, native, offline, AI, scheduler,
+  workflow-engine, deploy action, public launch action, UAT-account mutation, or
+  Phase 16 behavior changes.
+- No new workflows, CTAs, routes, role-routing changes, intake fields, or owner
+  privacy changes.
+
+## Build-Next-14A - Roadmap Alignment + Pre-Expansion Hardening ✅ LOCKED (Jul 02 2026)
+
+BN14A compares the uploaded phased roadmap in
+`/Users/rianray/Downloads/equinesync_phased_plan_md 2/` against the current
+EquineSync codebase before new feature expansion:
+- `BUILD_NEXT_14A_ROADMAP_ALIGNMENT_HARDENING_README.md`
+- `outputs/build_next_14a_roadmap_alignment_report.md`
+- `outputs/build_next_14a_phase_matrix.md`
+- `outputs/build_next_14a_hardening_findings.md`
+- `outputs/build_next_14a_recommended_sequence.md`
+- `outputs/build_next_14a_roadmap_alignment_hardening.zip`
+
+Verdict:
+- EquineSync should not restart at uploaded Phase 0; Admin Portal, HorseOps,
+  billing, DocuSign, role routing, UAT evidence, and role-home foundations are
+  already materially built.
+- EquineSync should not begin new roadmap feature expansion until a short BN14B
+  hardening cleanup clears the route-lock portability issue, Settings
+  notification duplicate triage, status-doc reconciliation, permission-matrix
+  artifact, and duplicate-copy-file hygiene.
+- Recommended next gate: BN14B - Role UX + Hardening Cleanup.
+- First new product build after BN14B: BN15A - Today's Pulse Data Contract.
+
+Verification:
+- Frontend production build passed.
+- BN13P role-home title-case and BN13O screenshot source tests passed.
+- Admin Portal route-lock guard failed in this relocated checkout because it
+  hardcodes `/app/...` for import path, admin-portal package scan path, and
+  `portal.py` read path; recorded as a BN14B hardening finding, not changed in
+  BN14A.
+
+Strictly unchanged:
+- No product behavior, backend route/schema/auth/permission, provider calls,
   checkout, webhook, billing, Stripe, Apple, DocuSign workflow behavior,
   HorseOps, Admin Portal, landing page, service worker, push, native, offline,
-  AI, scheduler, workflow-engine, deploy action, public launch action, UAT
-  acceptance, or Phase 16 behavior changes.
+  AI, scheduler, workflow-engine, deploy action, public launch action,
+  UAT-account mutation, or Phase 16 behavior changes.
+
+Lock note:
+- BN14A is Codex-reviewed and locked.
+- Round-1 P2 wording cleanup was applied before lock to clarify all three
+  hardcoded `/app/...` route-lock guard paths.
+- Next gated phase: BN14B - Role UX + Hardening Cleanup.
+
+## Build-Next-14B - Role UX + Hardening Cleanup ✅ READY FOR REVIEW (Jul 02 2026)
+
+BN14B clears the pre-expansion cleanup items identified by locked BN14A:
+- `BUILD_NEXT_14B_ROLE_UX_HARDENING_CLEANUP_README.md`
+- `outputs/build_next_14b_hardening_cleanup_report.md`
+- `outputs/build_next_14b_roadmap_permission_matrix.md`
+- `outputs/build_next_14b_role_ux_hardening_cleanup.zip`
+
+Completed:
+- Admin Portal route-lock guard now resolves repo paths from the test file
+  instead of hardcoded `/app/...` paths.
+- Four accidental duplicate-copy frontend files were confirmed byte-for-byte
+  identical to canonical files and removed:
+  - `frontend/src/lib/horseOpsDrafts 2.js`
+  - `frontend/src/pages/CareLedgerTab 2.jsx`
+  - `frontend/src/pages/OwnerCareLedger 2.jsx`
+  - `frontend/src/pages/admin/AdminHorses 2.jsx`
+- Settings notification controls are documented as intentional channel controls:
+  EquineSync Inbox and Email are separate delivery methods, not duplicate
+  settings.
+- Text/SMS notification preferences are carried forward to roadmap Phase 12 -
+  Platform Maturity / Smart Notifications / Quiet Hours.
+- A roadmap permission matrix was created for BN15 and later phases.
+
+Verification:
+- Admin Portal route-lock guard plus BN13P/BN13O source evidence tests: 16
+  passed.
+- Frontend production build: compiled successfully.
+- Zip integrity: `ZipFile.testzip()` returned `None`.
+
+Strictly unchanged:
+- No product workflows, backend routes/schemas/auth/permissions, role-routing
+  behavior, notification delivery behavior, Text/SMS implementation, billing,
+  Stripe, Apple, DocuSign, HorseOps, Admin Portal feature behavior, landing
+  page, service worker, push, native, offline, AI, scheduler, workflow-engine,
+  deploy action, public launch action, seed/demo/UAT mutation, or Phase 16
+  behavior changes.
+
+Recommended next gate after BN14B lock:
+- BN15A - Today's Pulse Data Contract.
+
+## Build-Next-15A - Today's Pulse Data Contract ✅ LOCKED (Jul 02 2026)
+
+BN15A adds a backend-only, read-only pulse contract for future role-home
+surfaces:
+- `BUILD_NEXT_15A_TODAYS_PULSE_DATA_CONTRACT_README.md`
+- `backend/routes/pulse.py`
+- `backend/tests/test_build_next_15a_today_pulse_contract.py`
+- `outputs/build_next_15a_todays_pulse_data_contract.zip`
+
+Completed:
+- Added `GET /api/pulse/today`.
+- Response shape is stable and versioned as `bn15a.today_pulse.v1`.
+- Platform, facility, individual-owner, and unknown-context scopes are covered.
+- Cards expose visibility flags and counts only.
+- Privacy contract explicitly marks raw/private data as excluded.
+- Round-1 review fixes:
+  - Facility-linked owner-safe roles do not receive barn-wide horse totals by
+    default.
+  - Future community/siloed/custom barn-wide visibility settings are deferred
+    to a separate barn visibility policy phase.
+  - Platform pulse counts require a known `core.permissions.PLATFORM_ROLES`
+    value.
+  - Focused task-count tests are date-stable.
+
+Strictly excluded:
+- No frontend wiring, no product workflow mutation, no HorseOps owner
+  projection changes, no task behavior changes, no billing/checkout/webhook/
+  Stripe/Apple behavior changes, no Admin Portal capability changes, no landing
+  page changes, no notification delivery changes, no push/native/offline/AI/
+  scheduler/workflow-engine changes.
+
+Verification:
+- `backend/tests/test_build_next_15a_today_pulse_contract.py`: 8 passed.
+- Python compile check passed for `backend/routes/pulse.py`,
+  `backend/server.py`, and the focused BN15A test file.
+
+Lock note:
+- BN15A is Codex-reviewed and locked.
+- BN15B is already Codex-approved and locked.
+
+Recommended next gate:
+- BN15C-A - Today's Pulse frontend wiring plan.
+
+## Build-Next-15B - Billing Webhook Entitlement Hardening ✅ LOCKED (Jul 02 2026)
+
+BN15B is Codex-approved and locked:
+- `BUILD_NEXT_15B_BILLING_WEBHOOK_ENTITLEMENT_HARDENING_README.md`
+
+Completed:
+- `checkout.session.completed`, `customer.subscription.created`, and the
+  no-local-row bootstrap path for `customer.subscription.updated` now resolve
+  plan codes through the guarded entitlement resolver before writing
+  subscription or barn entitlement mirrors.
+- Unknown or unresolvable plan codes remain retryable metadata failures instead
+  of writing OK billing rows with empty entitlement snapshots.
+- Canceled/deleted inactive subscription paths now clear the barn mirror back
+  to free-plan limits.
+- `backend/tests/test_subscriptions_15b.py` no longer hardcodes `/app/backend`.
+
+Verification:
+- `backend/tests/test_subscriptions_15b.py`
+- `backend/tests/test_phase15r_entitlements.py`
+- `backend/tests/test_phase15r_migration_dry_run.py`
+- Result: 70 passed.
+- Python compile check passed for the changed webhook handler and test file.
+
+Recommended next gate:
+- BN15C-A - Today's Pulse Frontend Wiring.
+
+## Build-Next-15C-A - Today's Pulse Frontend Wiring ✅ LOCKED (Jul 02 2026)
+
+BN15C-A wires the locked BN15A `GET /api/pulse/today` contract into existing
+role-home intake cards:
+- `BUILD_NEXT_15C_A_TODAYS_PULSE_FRONTEND_WIRING_README.md`
+- `frontend/src/pages/RoleHome.jsx`
+- `backend/tests/test_build_next_15c_a_today_pulse_frontend_wiring.py`
+- `outputs/build_next_15c_a_today_pulse_frontend_wiring.zip`
+
+Completed:
+- Added a shared `useTodayPulse()` hook.
+- Added count-only `pulsePanelText()` rendering for existing staff, manager,
+  trainer, barn-owner, and owner role-home cards.
+- Preserved conservative fallback copy whenever the backend does not mark a
+  card visible.
+- Preserved BN15A's deferred barn visibility policy decision: owner-safe
+  facility roles do not get barn-wide horse totals by default.
+
+Strictly excluded:
+- No backend route, schema, auth, permission, privacy, owner projection, task,
+  HorseOps, owner-request, billing, webhook, Stripe, Apple, DocuSign, Admin
+  Portal, entitlement, landing-page, notification-delivery, Text/SMS, push,
+  native mobile, offline sync, AI, scheduler, or workflow-engine changes.
+
+Verification:
+- `backend/tests/test_build_next_15c_a_today_pulse_frontend_wiring.py`
+- `backend/tests/test_build_next_15a_today_pulse_contract.py`
+- Result: 13 passed.
+- Frontend production build compiled successfully.
+
+Lock note:
+- BN15C-A is Codex-reviewed and locked.
+
+Recommended next gate:
+- BN15C-B - Barn Visibility Policy for community vs siloed owner-safe summary
+  counts.
+
+## Build-Next-15C-B - Barn Visibility Policy ✅ LOCKED (Jul 03 2026)
+
+BN15C-B adds the barn-level owner-safe summary visibility choice requested by
+the founder:
+- `siloed` remains the default and hides barn-wide horse totals from
+  owner-safe facility roles.
+- `community` lets owner, guardian, and rider facility views see the
+  count-only total horse count.
+- Alert counts, alert details, staff notes, request details, care payloads,
+  audit details, billing fields, and Stripe IDs remain hidden.
+- Round-1 fix: policy changes now authorize from the resolved active facility
+  membership role, not the global `user.role`, so multi-role users cannot carry
+  manager powers from one barn into an owner-only membership in another barn.
+- Settings now gates the card from `/api/account/context` active membership
+  role instead of the global user role.
+- Round-2 fix: `GET /api/pulse/today` now also derives facility card visibility
+  and `scope.role` from the resolved active/requested membership role, closing
+  the same multi-role leak on the read response.
+
+Files:
+- `BUILD_NEXT_15C_B_BARN_VISIBILITY_POLICY_README.md`
+- `backend/routes/pulse.py`
+- `backend/tests/test_build_next_15a_today_pulse_contract.py`
+- `backend/tests/test_build_next_15c_b_barn_visibility_policy.py`
+- `frontend/src/pages/Settings.jsx`
+- `outputs/build_next_15c_b_barn_visibility_policy.zip`
+
+Verification:
+- `backend/tests/test_build_next_15a_today_pulse_contract.py`
+- `backend/tests/test_build_next_15c_a_today_pulse_frontend_wiring.py`
+- `backend/tests/test_build_next_15c_b_barn_visibility_policy.py`
+- Result: 22 passed.
+
+Strictly excluded:
+- No raw owner projection changes, HorseOps write behavior, alert/history
+  behavior, task behavior, billing/checkout/Stripe/Apple behavior, Admin Portal
+  capability, DocuSign behavior, notification delivery, Text/SMS, push, native
+  mobile, offline sync, AI, scheduler, workflow-engine, or landing page changes.
+
+Strictly unchanged:
+- No checkout UI, Customer Portal UI, Stripe secret handling, Apple billing,
+  add-on subscription mutation, hard usage enforcement, Admin Portal capability,
+  Phase 9 invoice behavior, landing page, role-home UX, service worker, push,
+  native, offline, AI, scheduler, or workflow-engine behavior changed.
+
+Lock note:
+- BN15C-B is Codex-reviewed and locked.
+- Package: `outputs/build_next_15c_b_barn_visibility_policy.zip`.
+- Round-1 and Round-2 findings are closed: policy writes and Today Pulse reads
+  both use the resolved active/requested membership role for facility context
+  authority and visibility.
+
+Recommended next gate:
+- BN15C-C - Today's Pulse role-home evidence and UX hardening.
+
+## Build-Next-15C-C - Today's Pulse Role-Home Evidence ✅ LOCKED (Jul 03 2026)
+
+BN15C-C closes the Today's Pulse role-home evidence gap after locked BN15A,
+BN15C-A, and BN15C-B.
+
+Completed:
+- Added focused evidence tests for manager, staff, trainer, owner, guardian,
+  and rider role-home Pulse behavior.
+- Hardened `RiderHome` and `GuardianHome` to consume the existing locked
+  `useTodayPulse()` hook through the count-only `horse_care` helper.
+- Added owner-safe `Horse Context` panels for rider and guardian role homes.
+- Added evidence report:
+  `outputs/build_next_15c_c_today_pulse_role_home_evidence_report.md`.
+
+Privacy boundary:
+- Manager-safe roles may see count-only work, horse-care, owner-request, and
+  plan-usage summaries.
+- Staff/trainer roles may see work and horse-care counts, but not manager-only
+  owner-request or plan-usage counts.
+- Owner, guardian, and rider facility roles remain siloed by default.
+- Community policy exposes only the total horse count to owner-safe facility
+  roles.
+- Staff notes, raw daily-check payloads, alert triggers, `source_check_id`,
+  audit diffs, Stripe IDs, auth tokens, passwords, and private horse records
+  remain excluded.
+
+Strictly excluded:
+- No backend route/schema/auth/permission changes.
+- No owner projection changes.
+- No HorseOps write behavior, alert/history/service-request behavior, billing,
+  checkout, Customer Portal, Stripe, Apple, entitlement, DocuSign, Admin Portal,
+  notification delivery, Text/SMS, landing page, service worker, push, native,
+  offline, AI, scheduler, or workflow-engine changes.
+
+Files:
+- `BUILD_NEXT_15C_C_TODAYS_PULSE_ROLE_HOME_EVIDENCE_README.md`
+- `backend/tests/test_build_next_15c_c_today_pulse_role_home_evidence.py`
+- `frontend/src/pages/RoleHome.jsx`
+- `outputs/build_next_15c_c_today_pulse_role_home_evidence_report.md`
+- `outputs/build_next_15c_c_today_pulse_role_home_evidence.zip`
+
+Lock note:
+- BN15C-C is Codex-reviewed and locked.
+- No blocking findings.
+- Package integrity passed; `ZipFile.testzip()` returned clean.
+- Packaged files match the working tree byte-for-byte.
+- Focused BN15 suite passed: `29 passed`.
+- Scoped whitespace check passed.
+
+Recommended next gate:
+- BN15D - Today's Pulse staging/UAT evidence capture, unless live Stripe
+  billing evidence becomes the higher launch-risk item.
+
+## Build-Next-15D - Today's Pulse UAT Evidence ✅ LOCKED (Jul 03 2026)
+
+BN15D is an evidence-only bridge after locked BN15A, BN15C-A, BN15C-B, and
+BN15C-C.
+
+Completed:
+- Added BN15D evidence report:
+  `outputs/build_next_15d_today_pulse_uat_evidence_report.md`.
+- Created BN15D screenshot evidence folder:
+  `outputs/build_next_15d_today_pulse_screenshots/`.
+- Copied the locked BN13O credentialed role screenshots into the BN15D folder
+  so the phase has a local screenshot inventory.
+- Added focused evidence/inventory guard:
+  `backend/tests/test_build_next_15d_today_pulse_uat_evidence.py`.
+- Verified the BN15D role matrix across platform admin, facility admin,
+  barn owner, barn manager, groom, trainer, working student, horse owner,
+  guardian/parent, rider, and standalone individual owner.
+
+Evidence model:
+- BN15D does not claim a fresh live login pass was performed.
+- Visual role-shell coverage comes from locked BN13O credentialed screenshots.
+- Today's Pulse role/privacy behavior comes from locked BN15A/BN15C-B/BN15C-C
+  focused tests plus the BN15D evidence guard.
+- No new browser credentials were minted.
+- No production, staging, local, seeded-demo, or UAT data was mutated.
+
+Privacy boundary:
+- Count-only Today's Pulse evidence.
+- No staff notes, raw daily-check payloads, alert triggers, `source_check_id`,
+  audit diffs, Stripe IDs, DocuSign IDs, auth tokens, passwords, or private
+  horse records are included.
+
+Strictly excluded:
+- No backend route/schema/auth/permission changes.
+- No owner projection changes.
+- No HorseOps write behavior, alert/history/service-request behavior, billing,
+  checkout, Customer Portal, Stripe, Apple, entitlement, DocuSign, Admin Portal,
+  notification delivery, Text/SMS, landing page, service worker, push, native,
+  offline, AI, scheduler, workflow-engine, seeded-demo, UAT-account, or
+  production-data changes.
+
+Verification:
+- BN15 focused evidence suite: `35 passed`.
+
+Files:
+- `BUILD_NEXT_15D_TODAYS_PULSE_UAT_EVIDENCE_README.md`
+- `backend/tests/test_build_next_15d_today_pulse_uat_evidence.py`
+- `outputs/build_next_15d_today_pulse_uat_evidence_report.md`
+- `outputs/build_next_15d_today_pulse_screenshots/`
+- `outputs/build_next_15d_today_pulse_uat_evidence.zip`
+
+Lock note:
+- BN15D is Codex-reviewed and locked.
+- No findings.
+- Focused BN15 evidence suite passed: `35 passed`.
+- Zip integrity passed; `ZipFile.testzip()` returned clean.
+- Packaged files match the working tree byte-for-byte.
+- All 11 screenshot PNGs validate with expected dimensions.
+- Scoped whitespace check passed.
+
+Recommended next gate:
+- BN15E - Today's Pulse founder UAT acceptance ledger, unless live Stripe
+  billing evidence becomes the higher launch-risk item.
+
+## Build-Next-15E - Today's Pulse Founder Acceptance Ledger ✅ CODEX-APPROVED & LOCKED (Jul 03 2026)
+
+BN15E converts the locked Today's Pulse evidence chain into a founder-facing
+acceptance ledger.
+
+Completed:
+- Added founder acceptance ledger:
+  `outputs/build_next_15e_today_pulse_founder_acceptance_ledger.md`.
+- Added focused ledger guard:
+  `backend/tests/test_build_next_15e_today_pulse_founder_acceptance_ledger.py`.
+- Added phase README:
+  `BUILD_NEXT_15E_TODAYS_PULSE_FOUNDER_ACCEPTANCE_LEDGER_README.md`.
+
+Lock result:
+- Codex review found no blockers.
+- BN15D + BN15E focused suite passed: `15 passed`.
+- Broader BN15 evidence suite passed: `44 passed`.
+- Zip integrity passed and packaged files matched the working tree byte-for-byte.
+
+Acceptance boundary:
+- BN15E does not mark any row founder-accepted.
+- Only Rian can mark a Today's Pulse row `founder-accepted`.
+- Operator/Codex review can mark rows ready for founder review, not accepted.
+- BN13O/BN15D screenshots are visual role-shell evidence.
+- BN15 focused tests are code-level privacy and count-only evidence.
+- BN15E does not claim fresh live login, live data mutation, live Stripe,
+  live billing, live DocuSign, mobile/native, first-client pilot, public
+  launch, or unrestricted launch acceptance.
+
+Ledger rows:
+- TP-1 platform admin Today's Pulse scope.
+- TP-2 facility admin / barn owner manager-safe Pulse.
+- TP-3 barn manager Pulse.
+- TP-4 staff/groom Pulse.
+- TP-5 trainer Pulse.
+- TP-6 working student Pulse.
+- TP-7 horse owner facility context.
+- TP-8 guardian / parent context.
+- TP-9 rider / lesson participant context.
+- TP-10 standalone individual owner.
+- TP-11 privacy exclusions.
+
+Strictly excluded:
+- No product behavior changes.
+- No backend route/schema/auth/permission changes.
+- No frontend behavior changes.
+- No owner projection changes.
+- No HorseOps write behavior, alert/history/service-request behavior, billing,
+  checkout, Customer Portal, Stripe, Apple, entitlement, DocuSign, Admin Portal,
+  notification delivery, Text/SMS, landing page, service worker, push, native,
+  offline, AI, scheduler, workflow-engine, seeded-demo, UAT-account,
+  production-data, credential, first-client pilot, or public-launch changes.
+
+Files:
+- `BUILD_NEXT_15E_TODAYS_PULSE_FOUNDER_ACCEPTANCE_LEDGER_README.md`
+- `backend/tests/test_build_next_15e_today_pulse_founder_acceptance_ledger.py`
+- `outputs/build_next_15e_today_pulse_founder_acceptance_ledger.md`
+- `outputs/build_next_15e_today_pulse_founder_acceptance_ledger.zip`
+
+Recommended next gate:
+- BN15F - fresh live/staging Today's Pulse walkthrough execution, or live
+  Stripe billing evidence if billing remains the higher launch-risk lane.
+
+## Build-Next-15F - Live Today's Pulse Walkthrough ✅ CODEX-APPROVED & LOCKED (Jul 03 2026)
+
+BN15F attempts the fresh live/staging Today's Pulse walkthrough requested after
+locked BN15E.
+
+Verdict for this run:
+- Official frontend reachability: PASS.
+- Official API health: PASS.
+- Production-like database identity: PASS, using the locked BN13O label.
+- Credentialed role walkthrough rows: BLOCKED pending safe role sessions.
+- Fresh role screenshots: not captured.
+- Founder acceptance: not recorded.
+
+Environment evidence:
+- Frontend: `https://app.equine-sync.com` returned HTTP 200 from Vercel.
+- API: `https://equine-sync-api.onrender.com/api/health` returned `status=ok`,
+  `database=connected`, `environment=production`, and
+  `mailer_configured=true`.
+- Database label: `MongoDB Atlas / Equine Sync / EsProduction / ES_Members`.
+- Frontend deploy marker: Vercel Production Deploy / 2026-06-30 / commit
+  `5aeea66` / Ready.
+- Backend deploy marker: Render deploy / 2026-06-30 / commit `5aeea66` / Live.
+
+Blocked TP rows:
+- TP-1 platform admin Today's Pulse scope.
+- TP-2 facility admin / barn owner manager-safe Pulse.
+- TP-3 barn manager Pulse.
+- TP-4 staff/groom Pulse.
+- TP-5 trainer Pulse.
+- TP-6 working student Pulse.
+- TP-7 horse owner facility context.
+- TP-8 guardian / parent context.
+- TP-9 rider / lesson participant context.
+- TP-10 standalone individual owner.
+- TP-11 privacy exclusions.
+
+Blocker:
+- Safe UAT role passwords or authenticated browser sessions were not available
+  to this Codex run. BN15F does not invent credentials, reset passwords, mutate
+  production data, or mark a role row passing without a credentialed session.
+
+Lock result:
+- Codex review found no findings.
+- BN15F is locked as a truthful blocked evidence packet, not as a passing
+  credentialed walkthrough.
+- BN15F focused guard passed: `7 passed`.
+- Broader BN15 evidence regression passed: `52 passed`.
+- Zip integrity passed and packaged files matched the working tree byte-for-byte.
+
+Strictly excluded:
+- No product behavior changes.
+- No backend route/schema/auth/permission changes.
+- No frontend behavior changes.
+- No owner projection changes.
+- No HorseOps write behavior, alert/history/service-request behavior, billing,
+  checkout, Customer Portal, Stripe, Apple, entitlement, provider, DocuSign,
+  Admin Portal, notification delivery, Text/SMS, landing page, service worker,
+  push, native, offline, AI, scheduler, workflow-engine, seeded-demo,
+  UAT-account, production-data, credential, password, first-client pilot,
+  founder-acceptance, or public-launch changes.
+
+Files:
+- `BUILD_NEXT_15F_LIVE_TODAYS_PULSE_WALKTHROUGH_README.md`
+- `backend/tests/test_build_next_15f_live_today_pulse_walkthrough.py`
+- `outputs/build_next_15f_live_today_pulse_walkthrough.md`
+- `outputs/build_next_15f_screenshots/README.md`
+- `outputs/build_next_15f_live_today_pulse_walkthrough.zip`
+
+Recommended next gate:
+- BN15F.1 - credentialed live Today's Pulse walkthrough with safe sessions, or
+  live Stripe billing evidence if billing remains the higher launch-risk lane.
+
+## Build-Next-15F.1 - Credentialed Live Today's Pulse Walkthrough 🟡 READY FOR CODEX REVIEW (Jul 03 2026)
+
+BN15F.1 is the credentialed follow-up gate after locked BN15F. It attempts to
+clear BN15F's role-session blocker by using the official production-like
+frontend, Render backend, and locked database label for a fresh Today's Pulse
+walkthrough.
+
+Verdict for this run:
+- Official frontend reachability: PASS.
+- Official API health: PASS.
+- Production-like database identity: PASS, using the locked BN13O label.
+- Credentialed role walkthrough rows: PASS.
+- Fresh role screenshots: TP-1 through TP-10 captured; TP-11 privacy sweep complete.
+- Founder acceptance: not recorded.
+
+Environment evidence:
+- Frontend: `https://app.equine-sync.com` returned HTTP 200 from Vercel.
+- API: `https://equine-sync-api.onrender.com/api/health` returned `status=ok`,
+  `database=connected`, `environment=production`, and
+  `mailer_configured=true`.
+- Database label: `MongoDB Atlas / Equine Sync / EsProduction / ES_Members`.
+- Frontend deploy marker: Vercel Production Deploy / 2026-06-30 / commit
+  `5aeea66` / Ready.
+- Backend deploy marker: Render deploy / 2026-06-30 / commit `5aeea66` / Live.
+
+Blocked TP rows:
+- None for screenshot capture. Founder acceptance remains not recorded.
+
+Blocker:
+- TP-1 Platform Admin was captured from a safe role session.
+- TP-2 Facility Admin and Barn Owner were captured from safe role sessions.
+- TP-2 Facility Admin and Barn Owner dashboard evidence are each included in
+  two supporting screenshot parts because the live dashboard needed a reduced
+  viewport to show the relevant sections.
+- TP-3 Barn Manager was captured from a safe role session in two supporting
+  dashboard screenshot parts because the live dashboard needed a reduced
+  viewport to show the relevant sections.
+- TP-4 Staff/Groom was captured from a safe role session.
+- TP-5 Trainer was captured from a safe role session.
+- TP-6 Working Student was captured from a safe role session.
+- TP-7 Horse Owner facility context was captured from a safe role session.
+- TP-8 Guardian/Parent context was captured from a safe role session.
+- TP-9 Lesson Participant was captured from a safe role session.
+- TP-10 Individual Owner was captured from a safe role session.
+- TP-11 privacy exclusions are complete as a screenshot-only privacy sweep
+  across TP-1 through TP-10. No credentialed API response payloads were
+  captured in BN15F.1. BN15F.1 does not invent credentials, reset passwords,
+  run seed scripts, mutate production data, or mark a row founder-accepted.
+
+Verification:
+- BN15F.1 focused guard passed: `8 passed`.
+- Broader BN15 evidence regression passed: `61 passed`.
+
+Strictly excluded:
+- No product behavior changes.
+- No backend route/schema/auth/permission changes.
+- No frontend behavior changes.
+- No owner projection changes.
+- No HorseOps write behavior, alert/history/service-request behavior, billing,
+  checkout, Customer Portal, Stripe, Apple, entitlement, provider, DocuSign,
+  Admin Portal, notification delivery, Text/SMS, landing page, service worker,
+  push, native, offline, AI, scheduler, workflow-engine, seeded-demo,
+  UAT-account, production-data, credential, password, first-client pilot,
+  founder-acceptance, or public-launch changes.
+
+Files:
+- `BUILD_NEXT_15F1_CREDENTIALED_LIVE_TODAYS_PULSE_WALKTHROUGH_README.md`
+- `backend/tests/test_build_next_15f1_live_today_pulse_walkthrough.py`
+- `outputs/build_next_15f1_live_today_pulse_walkthrough.md`
+- `outputs/build_next_15f1_screenshots/README.md`
+- `outputs/build_next_15f1_live_today_pulse_walkthrough.zip`
+
+Evidence boundary:
+- TP-1 through TP-10 role screenshots are captured for this BN15F.1 pass.
+- TP-11 is screenshot-only privacy evidence; no credentialed API response
+  payloads were captured.
+- No TP row is founder-accepted by this report.
+
+## Build-Next-16A - Role Journey Separation Audit ✅ LOCKED (Jul 04 2026)
+
+BN16A inserts a new audit-only gate before the next launch-hardening work to
+separate first-login, facility setup, role intake, and role dashboard concepts.
+
+Completed:
+- Added BN16A phase README:
+  `BUILD_NEXT_16A_ROLE_JOURNEY_SEPARATION_AUDIT_README.md`.
+- Added detailed current-state audit:
+  `outputs/build_next_16a_role_journey_audit.md`.
+- Recorded the recommended BN16B-H gated sequence:
+  backend setup readiness, frontend route separation, role intake refactor,
+  role dashboard split, production copy cleanup, guardrails/mobile evidence,
+  and founder UAT packet.
+
+Current-state findings:
+- Current first-login routing still sends most non-admin roles to
+  `/role-home/*`.
+- `/role-home/:profile` currently combines role intake, role home, and
+  dashboard-like placeholder cards.
+- `/dashboard` remains the Stable Command facility dashboard shared across
+  multiple role journeys.
+- Onboarding completion lacks a backend-authoritative readiness/blocker
+  contract.
+- Some setup and role-home copy remains too permissive or scaffold-like for a
+  clean launch posture.
+
+Strict scope:
+- Audit/reporting only.
+- No backend route/schema/auth/permission changes.
+- No frontend route/component/runtime changes.
+- No onboarding completion behavior changes.
+- No billing, Stripe, Apple, entitlement, DocuSign, Admin Portal,
+  notification, Text/SMS, landing page, service worker, native mobile, offline,
+  AI, scheduler, workflow-engine, seed, demo, UAT account, credential,
+  production-data, password, founder-acceptance, or public-launch changes.
+
+Recommended next gate:
+- BN16B - Backend Setup Readiness Contract.
+
+Lock notes:
+- Codex review found no blocking findings.
+- Verified package integrity and expected file inventory.
+- Confirmed source-grounded audit claims against current routing, onboarding,
+  and setup concierge files.
+- No product behavior, backend route, frontend runtime, onboarding completion,
+  billing, seed, credential, or launch/founder-acceptance changes were made.
+
+## Build-Next-16B - Backend Setup Readiness Contract ✅ LOCKED (Jul 04 2026)
+
+BN16B adds a backend-authoritative setup readiness contract before frontend
+route separation. It gives facility setup completion a server-side blocker list
+and makes `/api/onboarding/complete` refuse incomplete required setup evidence.
+
+Completed:
+- Added `GET /api/onboarding/readiness`.
+- Added readiness constants for required, optional, deferred, and completion
+  role sets.
+- Updated `POST /api/onboarding/complete`:
+  - `403` for actors that can view setup but cannot finalize it.
+  - `409` with blocker details when required setup evidence is incomplete.
+  - Existing success write to `onboarding_progress` is preserved when readiness
+    passes.
+- Added focused backend tests:
+  `backend/tests/test_build_next_16b_setup_readiness_contract.py`.
+- Updated legacy onboarding step-count and completion tests to align with the
+  already-existing `operations_setup` step and the new readiness-gated
+  completion contract.
+- Added phase README:
+  `BUILD_NEXT_16B_BACKEND_SETUP_READINESS_CONTRACT_README.md`.
+
+Required completion blockers:
+- `barn`
+- `locations`
+- `owners`
+- `horses`
+- `feed_templates`
+- `review`
+
+Optional non-blocking steps:
+- `riders`
+- `inventory`
+- `operations_setup`
+- `staff`
+
+Deferred non-blocking step:
+- `schedules`
+
+Role boundary:
+- `admin` and `barn_owner` can finalize setup when no blockers remain.
+- `barn_manager` can read readiness but cannot finalize setup in BN16B.
+- Non-setup roles receive `403` from `/api/onboarding/readiness` before
+  readiness calculation, so no readiness payload or progress side effect is
+  produced.
+- Non-finalizers receive `403` from `/api/onboarding/complete` before readiness
+  calculation, so denied completion probes cannot create `onboarding_progress`
+  rows.
+
+Strict scope:
+- No frontend route separation.
+- No role-intake component split.
+- No dashboard resolver or role dashboard changes.
+- No billing, Stripe, Apple, entitlement, DocuSign, Admin Portal,
+  notification, Text/SMS, landing page, service worker, native mobile, offline,
+  AI, scheduler, workflow-engine, seed, demo, UAT account, credential,
+  production-data, password, founder-acceptance, or public-launch changes.
+
+Verification:
+- `./.venv/bin/python -m pytest backend/tests/test_build_next_16b_setup_readiness_contract.py -q`
+  -> `8 passed`.
+- `./.venv/bin/python -m py_compile backend/routes/onboarding.py backend/tests/test_build_next_16b_setup_readiness_contract.py`
+  -> passed.
+- Package integrity passed; expected files only.
+
+Lock note:
+- BN16B is Codex-reviewed and locked.
+- Review found no blocking findings after the readiness/complete role-boundary
+  guards were added.
+- Non-setup readiness probes and non-finalizer completion probes now fail before
+  readiness calculation, preserving the no-side-effect denial invariant.
+
+Expected package:
+- `outputs/build_next_16b_setup_readiness_contract.zip`
+
+Expected files:
+- `BUILD_NEXT_16B_BACKEND_SETUP_READINESS_CONTRACT_README.md`
+- `backend/routes/onboarding.py`
+- `backend/tests/test_build_next_16b_setup_readiness_contract.py`
+- `backend/tests/test_onboarding.py`
+- `backend/tests/test_founder_crud_sprint.py`
+- `memory/PRD.md`
+
+Recommended next gate:
+- BN16C - Frontend Route Separation, using the BN16B readiness response instead
+  of client-only setup completion assumptions.
+
+## Build-Next-16C - Frontend Route Separation (Jul 04 2026)
+
+Status: Codex-reviewed and locked.
+
+BN16C separates the frontend route names for facility setup, role intake, and
+live dashboards while preserving existing compatibility routes.
+
+Completed:
+- Added explicit setup route constant: `/setup/facility`.
+- Preserved legacy `/onboarding` as a compatibility redirect to
+  `/setup/facility`.
+- Added explicit role-intake route aliases:
+  - `/intake/facility-founder`
+  - `/intake/manager`
+  - `/intake/staff`
+  - `/intake/trainer`
+  - `/intake/owner`
+  - `/intake/guardian`
+  - `/intake/rider`
+- Preserved `/role-home/:profile` for compatibility with prior BN13/BN15
+  evidence and bookmarks.
+- Updated post-login role resolution:
+  - platform admins still route to `/admin/portal/dashboard`.
+  - facility admins and barn owners with incomplete setup route to
+    `/setup/facility`.
+  - facility admins and barn owners with complete setup route to `/dashboard`.
+  - non-dashboard role-intake users route to `/intake/*`, except linked horse
+    owners who still route to `/owner/horses/:horseId`.
+- Updated `SetupProtected` to fetch `GET /api/onboarding/readiness` before
+  rendering the setup wizard.
+- Passed the backend readiness payload into `Onboarding`.
+- Added a setup readiness panel to the setup wizard.
+- Preserved the BN16B role boundary:
+  - `admin` and `barn_owner` may launch setup when readiness passes.
+  - `barn_manager` may inspect readiness but cannot launch setup.
+  - non-setup roles are redirected before seeing the setup page.
+- Updated setup concierge dashboard links to `/setup/facility`.
+- Round-1 fix: updated facility admin/barn owner sidebar setup links, invite
+  auto-launch, and setup reset flows to navigate directly to `/setup/facility`
+  instead of relying on the legacy `/onboarding` compatibility redirect.
+- Added a guard that keeps legacy `/onboarding` out of UI navigation entry
+  points while preserving the redirect and backend `/onboarding/*` APIs.
+- Added focused source-level guards:
+  `backend/tests/test_build_next_16c_frontend_route_separation.py`.
+- Added phase README:
+  `BUILD_NEXT_16C_FRONTEND_ROUTE_SEPARATION_README.md`.
+
+Strict scope:
+- No backend route/schema/auth/permission changes.
+- No BN16B readiness calculation changes.
+- No role-home component split.
+- No billing, Stripe, Apple, entitlement, DocuSign, Admin Portal,
+  notification, Text/SMS, landing page, service worker, native mobile, offline,
+  AI, scheduler, workflow-engine, seed, demo, UAT account, credential,
+  production-data, password, founder-acceptance, or public-launch changes.
+
+Verification:
+- `./.venv/bin/python -m pytest backend/tests/test_build_next_16c_frontend_route_separation.py -q`
+  -> `8 passed`.
+- `./.venv/bin/python -m pytest backend/tests/test_build_next_16b_setup_readiness_contract.py backend/tests/test_build_next_16c_frontend_route_separation.py -q`
+  -> `16 passed`.
+- `CI=false GENERATE_SOURCEMAP=false npm run build`
+  -> compiled successfully.
+
+Lock notes:
+- BN16C is locked after Codex re-review cleared the stale `/onboarding` UI
+  navigation finding.
+- Legacy `/onboarding` remains only as the compatibility redirect and backend
+  `/onboarding/*` API namespace.
+- No product behavior, backend readiness logic, role permission, billing,
+  landing page, UAT seed, or launch-evidence acceptance changes were added
+  during lock.
+
+Expected package:
+- `outputs/build_next_16c_frontend_route_separation.zip`
+
+Expected files:
+- `BUILD_NEXT_16C_FRONTEND_ROUTE_SEPARATION_README.md`
+- `backend/tests/test_build_next_16c_frontend_route_separation.py`
+- `frontend/src/App.js`
+- `frontend/src/components/dashboard/SetupConciergeCard.jsx`
+- `frontend/src/lib/roleNavigation.js`
+- `frontend/src/lib/roleLanding.js`
+- `frontend/src/pages/AcceptInvite.jsx`
+- `frontend/src/pages/Onboarding.jsx`
+- `frontend/src/pages/RoleHome.jsx`
+- `frontend/src/pages/Settings.jsx`
+- `memory/PRD.md`
+
+## Build-Next-17A — Launch Trust Route Taxonomy ✅ LOCKED (Jul 04 2026)
+
+BN17A opens the Launch Trust Sprint with a frontend route taxonomy cleanup. It
+keeps BN16C locked setup behavior intact and separates the three production
+journeys:
+
+- facility setup: `/setup/facility`
+- role intake: `/role-intake/:profile`
+- live dashboards: `/dashboard` resolver plus `/dashboard/*` role dashboards
+
+Implemented changes:
+- Added role dashboard wrappers under `frontend/src/features/dashboards/`.
+- Updated `/dashboard` to resolve through `DashboardResolver`.
+- Added live dashboard routes for facility, manager, staff, trainer, owner,
+  guardian, rider, and service-provider accounts.
+- Locked direct `/dashboard/*` route access behind explicit role guards so the
+  resolver and canonical dashboard URLs share the same role boundary.
+- Preserved `/role-home/:profile` for compatibility.
+- Redirected legacy `/intake/*` routes to canonical `/role-intake/*` routes.
+- Promoted `barn_manager` into frontend setup-eligible route resolution.
+- Protected `/setup/facility/*` descendant safe redirects for non-setup roles,
+  not only the exact `/setup/facility` path.
+- Added service-provider safe dashboard shell with no API reads.
+- Updated role navigation to use the dashboard namespace for primary role
+  destinations.
+- Added `HorseshoeIcon` and changed the Sidebar horse icon away from lucide
+  `Cat`.
+- Added focused source-level guards:
+  `backend/tests/test_build_next_17a_launch_trust_route_taxonomy.py`.
+
+Strict scope:
+- No backend route/schema/auth/permission/privacy changes.
+- No owner projection, alert/history, service-request, audit, billing,
+  Admin Portal, landing page, Stripe, DocuSign, Text/SMS, service worker,
+  native mobile, offline, AI, scheduler, workflow-engine, seed, demo, UAT,
+  credential, production-data, password, founder-acceptance, or public-launch
+  changes.
+
+Expected package:
+- `outputs/build_next_17a_launch_trust_route_taxonomy.zip`
+
+Verification:
+- `./.venv/bin/python -m pytest backend/tests/test_build_next_16b_setup_readiness_contract.py backend/tests/test_build_next_16c_frontend_route_separation.py backend/tests/test_build_next_17a_launch_trust_route_taxonomy.py -q`
+  -> `23 passed`.
+- `CI=false GENERATE_SOURCEMAP=false npm run build`
+  -> compiled successfully.
+
+Lock notes:
+- BN17A is Codex-reviewed and locked.
+- Round-1 P1 direct-route role-gating and P2 setup descendant redirect findings
+  are closed.
+- Zip integrity passed and packaged files matched the working tree
+  byte-for-byte.
+- Next recommended gate: BN17B - Role Intake Split and Copy Cleanup.
+
+## Build-Next-17B — Role Intake Split and Copy Cleanup ✅ LOCKED (Jul 04 2026)
+
+BN17B completes the BN17A frontend route taxonomy by separating the live
+dashboard rendering surface from the role-intake rendering surface.
+
+Implemented changes:
+- Added `frontend/src/pages/RoleIntake.jsx` as the dedicated role-intake
+  implementation.
+- Reduced `frontend/src/pages/RoleHome.jsx` to a compatibility wrapper so the
+  legacy `/role-home/:profile` route remains explicit.
+- Updated `/role-intake/:profile` to render `RoleIntake` directly.
+- Added `frontend/src/features/dashboards/PersonalDashboard.jsx` for owner,
+  guardian, and rider dashboard shells using dashboard/home copy instead of
+  intake/setup copy.
+- Updated `OwnerDashboard`, `GuardianDashboard`, and `RiderDashboard` to render
+  `PersonalDashboard` instead of `RoleHome`.
+- Kept role dashboard headings in Title Case.
+- Added `backend/tests/test_build_next_17b_role_intake_split.py` source-level
+  guards.
+
+Round-1 review fix:
+- Owner dashboard CTA now renders as disabled `Owner Portal Pending` instead of
+  linking to `/owner-portal`. This prevents BN17B from introducing owner-portal
+  navigation for unlinked/individual owners before a backend-authoritative
+  facility/horse connection is available.
+- Added a source-level guard so `PersonalDashboard.jsx` cannot reintroduce a
+  direct `/owner-portal` link in this phase.
+
+Strict scope:
+- Frontend route/component separation, docs, and source-level tests only.
+- No backend route/schema/auth/permission/privacy changes.
+- No billing, Stripe, DocuSign, Text/SMS, seed, UAT, landing page, launch
+  acceptance, or founder-accepted row changes.
+
+Expected package:
+- `outputs/build_next_17b_role_intake_split.zip`
+
+Lock note:
+- BN17B is Codex-reviewed and locked.
+- Round-1 owner-portal CTA fix is included in the lock package.
+- Focused BN16/17 tests passed with 28/28 green.
+- Frontend production build compiled successfully.
+- Package integrity passed.
+
+## Launch Trust Roadmap Alignment - BN17C Ready (Jul 04 2026)
+
+This alignment checkpoint records the launch-trust path after locked BN17B.
+
+Created:
+- `docs/LAUNCH_TRUST_CURRENT_PLAN.md`
+- `docs/LAUNCH_TRUST_MASTER_FIX_LIST.md`
+- `outputs/bn17c_role_journey_launch_trust_evidence.md`
+
+Current position:
+- BN17B is the current locked phase.
+- BN17C is the next correct phase.
+- BN17C is an evidence-first role journey and launch-trust pass, not a feature
+  expansion phase.
+- BN17D should only open if BN17C finds concrete role-journey, dashboard, nav,
+  scoping, copy, or feature-shell issues.
+
+Remaining launch path:
+- BN17C - Post-BN17B Role Journey + Launch Trust Evidence Pass.
+- BN17D - Targeted Role Journey / Dashboard / Nav / Scoping Cleanup, only if
+  BN17C finds issues.
+- BN18A - Provider-live proof.
+- BN18B - Production environment proof.
+- BN18C - UAT role refresh.
+- BN19 - Founder acceptance ledger.
+- BN20 / BN12 Closure - final launch closure package.
+- BN21 - first-client pilot go/no-go.
+- BN22 - public launch gate.
+
+Status drift to reconcile before launch closure:
+- BN14B files still describe the phase as ready for review.
+- BN15F.1 files still describe the phase as ready for review even though the
+  credentialed walkthrough evidence proceeded.
+
+Strict scope:
+- Documentation and evidence-prep only.
+- No backend, frontend, auth, permission, billing, Stripe, Resend, DocuSign,
+  Admin Portal, HorseOps, landing page, seed, UAT account, production data,
+  credential, password, founder-acceptance, pilot, or public-launch behavior
+  changes.
+
+## Build-Next-17C - Role Journey Launch Trust Evidence ✅ LOCKED (Jul 04 2026)
+
+BN17C is Codex-reviewed and locked as an evidence-only launch-trust pass after
+locked BN17B.
+
+Created:
+- `BUILD_NEXT_17C_ROLE_JOURNEY_LAUNCH_TRUST_EVIDENCE_README.md`
+- `outputs/bn17c_role_journey_launch_trust_evidence.md`
+- `backend/tests/test_build_next_17c_role_journey_launch_trust_evidence.py`
+- `outputs/build_next_17c_role_journey_launch_trust_evidence.zip`
+
+Evidence result:
+- BN17A/BN17B dashboard route taxonomy remains intact.
+- Role dashboard routes are still direct-URL role gated.
+- Owner, guardian, rider, and service-provider dashboard shells remain safe
+  non-runtime shells.
+- BN17C does not clear launch by itself.
+- BN17D is now recommended for direct-route role/capability cleanup,
+  production-copy cleanup, feature-shell classification, and follow-up direct
+  URL scoping evidence.
+- Lock verification: focused BN16/17 source-level suite passed 33/33; lock zip
+  integrity passed; packaged files matched the working tree.
+
+Strict scope:
+- Evidence, docs, and source-level guards only.
+- No runtime backend/frontend behavior changes.
+- No billing, Stripe, DocuSign, Resend, Text/SMS, Admin Portal, HorseOps,
+  landing page, seed, UAT account, founder-accepted, pilot, or public-launch
+  changes.
+
+## Build-Next-17D - Role Journey Cleanup ✅ CODEX-REVIEWED & LOCKED (Jul 04 2026)
+
+BN17D executed the targeted cleanup opened by locked BN17C. This phase is a
+narrow source cleanup, not a new feature phase.
+
+Changed:
+- Added explicit frontend role gates for legacy product routes identified by
+  `BN17D-ROUTE-1`, including `/today`, `/horses`, `/horses/:id`, `/owners`,
+  `/riders`, `/feed`, `/inventory`, `/incidents`, `/messaging`, `/settings`,
+  and related care/training routes.
+- Removed unsafe direct `/messaging` nav exposure for owner, individual owner,
+  guardian, default, and service-provider navigation until role-specific
+  messaging exists.
+- Cleaned BN17C-flagged production copy in StaffStep, NotificationPrefsCard,
+  AdminTopbar, FeatureWorkspace, and FormsSignatures.
+- Added `backend/tests/test_build_next_17d_role_journey_cleanup.py` as the
+  source-level guard for BN17D.
+- Updated BN6 signature connector copy guard to preserve provider-readiness
+  behavior without requiring later-phase copy.
+
+Preserved:
+- No backend route/schema/auth/permission/privacy changes.
+- No owner projection, alert/history, service-request, audit, billing, Stripe,
+  Resend, DocuSign, Text/SMS, Admin Portal capability, HorseOps, landing-page,
+  seed, UAT, founder-accepted, pilot, or public-launch changes.
+
+Outputs:
+- `BUILD_NEXT_17D_ROLE_JOURNEY_CLEANUP_README.md`
+- `outputs/bn17d_role_journey_cleanup_evidence.md`
+- `outputs/build_next_17d_role_journey_cleanup.zip`
+
+Lock note:
+- Codex review found no blocking issues.
+- Focused BN6/BN16/BN17 suite: 45/45 passed.
+- Zip integrity passed.
+
+Next gate after BN17D lock:
+- BN18A provider-live proof.
+
+## Build-Next-18A - Provider-Live Proof ✅ CODEX-APPROVED & LOCKED (Jul 05 2026)
+
+BN18A is an evidence-only launch-trust phase for Stripe, Resend, DocuSign, and
+integration-label posture.
+
+Created:
+- `backend/core/provider_live_proof.py`
+- `backend/scripts/build_next_18a_provider_live_proof.py`
+- `backend/tests/test_build_next_18a_provider_live_proof.py`
+- `BUILD_NEXT_18A_PROVIDER_LIVE_PROOF_README.md`
+- `outputs/bn18a_provider_live_proof_report.md`
+- `outputs/build_next_18a_provider_live_proof.zip`
+
+Strict scope:
+- Read-only provider proof from environment posture and locked source
+  constants.
+- No Stripe Checkout session creation.
+- No Stripe webhook replay or mutation.
+- No Resend email send.
+- No DocuSign JWT request.
+- No DocuSign envelope creation/send.
+- No MongoDB read/write.
+- No Admin Portal label, billing behavior, email behavior, document-signature
+  behavior, UAT, seed, owner projection, privacy, landing page, or founder
+  acceptance changes.
+
+Generated report snapshot:
+- Overall status: `deferred`.
+- Issue counts: 0 blocker(s), 7 warning(s).
+- Secret-shaped marker scan passed.
+- Local report does not replace BN18B production environment proof.
+- Round-1 fixes applied: DocuSign REST base proof now requires recognized live
+  `*.docusign.net` `/restapi` hosts, and Resend proof now requires the verified
+  `equine-sync.com` sender domain. Custom DocuSign URLs and non-EquineSync
+  sender domains cannot falsely pass readiness.
+- Focused provider-adjacent tests: `40/40` passed.
+- Codex re-review found no remaining BN18A issues.
+- Zip integrity passed.
+
+Next gate after BN18A lock:
+- BN18B production environment proof.
+
+## Build-Next-18B - Production Environment Proof ✅ LOCKED (Jul 05 2026)
+
+BN18B executed as an evidence-only launch-trust phase for the production
+environment. The original locked packet truthfully captured the production
+API TLS/custom-domain blocker. After the API posture was fixed, BN18B was
+rerun with operator evidence labels supplied.
+
+Created:
+- `backend/core/production_environment_proof.py`
+- `backend/scripts/build_next_18b_production_environment_proof.py`
+- `backend/tests/test_build_next_18b_production_environment_proof.py`
+- `BUILD_NEXT_18B_PRODUCTION_ENVIRONMENT_PROOF_README.md`
+- `outputs/bn18b_production_environment_proof_report.md`
+- `outputs/build_next_18b_production_environment_proof.zip`
+
+Strict scope:
+- Public GET probes only.
+- No Stripe, Resend, DocuSign, MongoDB, Vercel, Render, or Atlas mutation.
+- No user, seed, billing, webhook, document-signature, owner-visibility, UAT,
+  founder-acceptance, product behavior, landing-page, Admin Portal, privacy,
+  schema, auth, or permission changes.
+
+Locked report snapshot:
+- Overall status: `pass`.
+- Issue counts: 0 blocker(s), 0 warning(s).
+- Frontend proof passes for `https://app.equine-sync.com`.
+- Production API health passes for `https://api.equine-sync.com/api/health`.
+- Production API readiness passes for
+  `https://api.equine-sync.com/api/health/ready`.
+- Database is connected, runtime readiness reports `indexes_ensured=True`, and
+  runtime seed flags remain disabled.
+- Source-level production seed guards are fail-closed.
+- Operator evidence labels are provided, but raw values are not rendered.
+- Email verification enforcement is live:
+  `email_verification_enforced=True`.
+
+Verification:
+- Focused BN18B tests: `11/11` passed.
+- Compile check passed for the helper and CLI.
+- Zip integrity to be rerun after refresh packaging.
+
+Round-1 fixes:
+- Readiness proof fails closed unless `/api/health/ready` returns valid JSON
+  with `status=ok` and `indexes_ensured=True`.
+- Runtime seed-safety proof requires explicit health flags
+  `auto_seed_enabled=False` and `seed_route_enabled=False`; missing values are
+  blocker-level unverified flags.
+
+Next gate after BN18B lock:
+- Review alongside BN18C role evidence, then proceed to the founder acceptance
+  ledger phase.
+
+## Build-Next-18C - UAT Role Refresh ✅ LOCKED (Jul 05 2026)
+
+BN18C was rerun after the BN18B production API health/readiness gate became
+clean. The phase remains evidence-only and does not mark founder acceptance.
+
+Created:
+- `backend/core/uat_role_refresh_proof.py`
+- `backend/scripts/build_next_18c_uat_role_refresh.py`
+- `backend/tests/test_build_next_18c_uat_role_refresh.py`
+- `BUILD_NEXT_18C_UAT_ROLE_REFRESH_README.md`
+- `outputs/bn18c_uat_role_refresh_report.md`
+- `outputs/build_next_18c_uat_role_refresh_screenshots/README.md`
+- `outputs/build_next_18c_uat_role_refresh.zip`
+
+Strict scope:
+- Public GET probes only via the BN18B production proof helper.
+- Screenshot evidence is local review evidence only; the proof script does not
+  create or replay browser sessions.
+- No UAT account, credential, provider, MongoDB, product behavior, frontend,
+  backend route/schema/auth/permission/privacy, billing, webhook,
+  document-signature, Admin Portal, or founder-acceptance mutation.
+
+Generated report snapshot:
+- Overall status: `ready_for_founder_review`.
+- BN18C issue counts: 0 blocker(s), 0 warning(s).
+- Underlying BN18B gate blocker count: 0.
+- Frontend proof passes for `https://app.equine-sync.com`.
+- Production API health/readiness pass for `https://api.equine-sync.com`.
+- TP-1 through TP-11 all have `evidence_captured`.
+- Screenshot files are non-empty PNG evidence with matching signatures.
+- `privacy-sweep.md` contains meaningful text.
+- TP-2 includes separate `uat-r2a-facility-admin.png` and
+  `uat-r2b-barn-owner.png` evidence.
+- Manual review note: guardian and rider evidence show role-specific
+  navigation while the main body resolves to the shared Stable Command
+  facility surface; this should be reviewed as a UX note, not silently hidden.
+
+Verification:
+- Focused BN18C tests: `9/9` passed.
+- BN18B + BN18C proof regression: `20/20` passed.
+- Compile check passed for the helper and CLI.
+- Report generated successfully with `ready_for_founder_review`.
+
+Next gate after BN18C lock:
+- Founder/Codex review of the locked screenshot evidence and privacy sweep.
+- Do not mark TP rows founder-accepted automatically; acceptance belongs to the
+  next explicit founder acceptance ledger phase.
+
+## Build-Next-18D - Field Reliability / Offline Proof ✅ CODEX-REVIEWED & LOCKED (Jul 05 2026)
+
+BN18D executed as an evidence-only launch-trust phase for field reliability,
+offline, draft preservation, retry, and lock-screen recovery boundaries.
+
+Created:
+- `backend/core/field_reliability_proof.py`
+- `backend/scripts/build_next_18d_field_reliability_proof.py`
+- `backend/tests/test_build_next_18d_field_reliability_proof.py`
+- `BUILD_NEXT_18D_FIELD_RELIABILITY_OFFLINE_PROOF_README.md`
+- `outputs/bn18d_field_reliability_report.md`
+- `outputs/build_next_18d_field_reliability_offline_proof.zip`
+
+Strict scope:
+- Source and documentation proof only.
+- No product behavior, frontend route/copy/style, backend route/schema/auth/
+  permission/privacy, billing, webhook, document-signing, Admin Portal, seed,
+  UAT-account, provider, MongoDB, Vercel, Render, Atlas, service-worker, native
+  mobile, push, universal offline-sync, or founder-acceptance mutation.
+
+Generated report snapshot:
+- Overall status: `ready_for_founder_review` in the read-only source proof
+  report.
+- Issue counts: 0 blocker(s), 0 warning(s), 20 founder-decision row(s).
+- Source evidence present for task completion/skip/bulk-complete local queue,
+  backend `client_completion_id` idempotency, Today filter recovery, QuickAdd
+  draft preservation, HorseOps draft preservation, Mobile Readiness scaffold,
+  and offline-sync backlog metadata.
+- Full offline app support is explicitly not claimed: no full service-worker
+  app shell, no IndexedDB-backed universal outbox, no universal cached-read
+  layer, and no broad conflict-review UI.
+
+Founder decision recorded and locked:
+- EquineSync may enter pilot as an online-first web platform with limited field
+  recovery.
+- Narrow queued retry/idempotency may be claimed only for task complete, task
+  skip, and bulk complete where source proof exists.
+- Local draft preservation may be claimed only for QuickAdd and HorseOps forms
+  where source proof exists.
+- Most admin, provider, billing, owner, medical, safety, daily-care note,
+  incident, and service-request workflows remain online-only or partial unless a
+  later phase expands them.
+- Launch copy must not claim full offline app support, universal cached reads,
+  universal queued writes, service-worker/PWA offline app shell,
+  IndexedDB-backed universal outbox, broad conflict-review UI, or provider
+  offline support.
+- Founder trust constraint: poor-signal barn, arena, truck, and field use is a
+  trust-critical risk. Work loss or ambiguous save/retry/draft state in weak
+  signal would be a trust killer, so weak-signal reliability remains a
+  high-priority follow-up track even though full offline support is deferred.
+
+Verification:
+- Focused BN18D tests: `7/7` passed.
+- Report generated with `--fail-on-blockers`.
+
+Next gate after BN18D lock:
+- BN18E production App Store / Google Play readiness gate.
+
+## Build-Next-18E - Production App Store / Google Play Readiness Gate ✅ CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+BN18E executed as an evidence-only readiness gate for Apple App Store and Google
+Play launch readiness. It did not build a native app, submit an app, mutate
+providers, create review accounts, change product behavior, write MongoDB, or
+mark founder acceptance.
+
+Created:
+- `backend/core/app_store_readiness_proof.py`
+- `backend/scripts/build_next_18e_app_store_readiness_proof.py`
+- `backend/tests/test_build_next_18e_app_store_readiness_proof.py`
+- `BUILD_NEXT_18E_APP_STORE_READINESS_README.md`
+- `docs/APP_STORE_PRODUCTION_READINESS.md`
+- `outputs/bn18e_app_store_readiness_report.md`
+- `outputs/build_next_18e_app_store_readiness.zip`
+
+Generated report snapshot:
+- Overall status: `blocked`.
+- Issue counts: 6 blocker(s), 0 warning(s), 3 decision-required row(s).
+- Web manifest evidence is present.
+- Existing UAT/role screenshot evidence is present but is not a store-device
+  screenshot package.
+- Billing planning distinguishes web Stripe from Apple-originated purchase
+  concepts, but native Apple/Google billing remains incomplete.
+- Native iOS/Android project evidence is missing.
+- Store metadata, Apple privacy-label worksheet, Google Data safety worksheet,
+  public support/privacy/terms/deletion URLs, review notes, review-account
+  package, store screenshots, and release ownership are missing.
+
+Lock result:
+- BN18E is locked as an evidence gate.
+- The native App Store / Google Play blocked status is intentional and becomes a
+  BN19 founder acceptance input, not a BN18E implementation defect.
+- No product behavior, provider, database, UAT account, native app, app-store
+  submission, or founder-acceptance mutation was performed.
+
+Round-1 review fix:
+- Readiness rows for native iOS project, native Android project, store metadata,
+  and store screenshots now follow the source scan instead of staying
+  hard-coded as missing/partial.
+- Added a focused temp-root regression proving those rows become `ready` when
+  matching native/store artifacts are present.
+
+Founder decisions required before BN19:
+- Decide whether first-client pilot is web-only, PWA-assisted web, or native
+  app-store distributed.
+- Decide whether App Store / Google Play launch is required before public
+  launch or deferred.
+- Decide billing policy for native distribution: web Stripe-only while native is
+  deferred, Apple/Google in-app purchase for native launch, or a compliant
+  hybrid access model.
+- Assign privacy/data-safety, support, account deletion, release submission,
+  and rejection-response ownership.
+
+Launch positioning lock:
+- EquineSync may continue toward pilot as a production web platform only if
+  founder accepts native App Store / Google Play distribution as deferred.
+- Do not claim App Store readiness, Google Play readiness, native iOS/Android
+  app availability, completed privacy labels, completed Data safety answers,
+  completed account deletion, completed store screenshots, or completed
+  Apple/Google billing policy until a later locked gate proves those items.
+
+Next gate after BN18E lock:
+- BN19 - Founder Acceptance Ledger.
+
+## Build-Next-19 - Founder Acceptance Ledger ✅ CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+BN19 executed as an evidence and decision-record phase after locked BN18A
+through BN18E. After founder instruction to proceed with the recommended
+web-first posture, BN19 records explicit acceptance for a web-first /
+PWA-assisted pilot with native App Store / Google Play distribution deferred.
+
+BN19 did not mutate providers, write MongoDB, create UAT/review accounts, submit
+to app stores, or change product behavior.
+
+Created:
+- `backend/core/founder_acceptance_ledger.py`
+- `backend/scripts/build_next_19_founder_acceptance_ledger.py`
+- `backend/tests/test_build_next_19_founder_acceptance_ledger.py`
+- `BUILD_NEXT_19_FOUNDER_ACCEPTANCE_LEDGER_README.md`
+- `docs/FOUNDER_ACCEPTANCE_LEDGER.md`
+- `outputs/bn19_founder_acceptance_ledger.md`
+- `outputs/build_next_19_founder_acceptance_ledger.zip`
+
+Accepted ledger snapshot:
+- Overall status: `accepted_for_web_first_pilot`.
+- Pilot recommendation:
+  `accepted_web_first_pilot_with_native_store_deferred`.
+- Founder acceptance: `explicit_founder_instruction_recorded`.
+- Issue counts: 0 blocker(s), 0 warning(s), 0 decision-required row(s).
+- Locked evidence inputs are present for BN18A provider-live proof, BN18B
+  production environment proof, BN18C UAT role refresh, BN18D field reliability
+  / offline proof, and BN18E App Store / Google Play readiness proof.
+
+Founder decisions recorded:
+- First-client pilot posture accepted as web-first / PWA-assisted.
+- Native App Store / Google Play distribution deferred.
+- BN18E native store-readiness blocked posture accepted as deferred, not
+  blocking the web-first pilot.
+- Stripe / Resend / DocuSign provider-live limitations accepted with restricted
+  launch copy.
+- Weak-signal reliability accepted as a high-priority post-pilot track.
+- BN18D online-first / limited-field-recovery posture, demo/test seed
+  exclusion, role/facility/privacy posture, and current UAT evidence currency
+  accepted for the web-first pilot.
+
+Launch positioning boundary:
+- No full offline app support claim.
+- No universal cached read or universal queued write claim.
+- No App Store / Google Play readiness claim.
+- No native iOS / Android availability claim.
+- No completed Apple privacy label or Google Data safety claim.
+- Founder acceptance applies only to the web-first / PWA-assisted pilot posture
+  recorded in BN19.
+
+Next gate after BN19 lock:
+- BN20 / BN12 Closure - staging, UAT, and remaining launch-runbook closure
+  within the accepted web-first boundaries.
+
+## Build-Next-20 / BN12 Closure ✅ CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+BN20 / BN12 Closure executed as an evidence-only staging, UAT, and
+launch-runbook closure gate after BN19 founder acceptance. It did not mutate
+providers, write MongoDB, create or mutate UAT/review accounts, submit to app
+stores, build native app code, or change product behavior.
+
+Created:
+- `backend/core/bn20_bn12_closure.py`
+- `backend/scripts/build_next_20_bn12_closure.py`
+- `backend/tests/test_build_next_20_bn12_closure.py`
+- `BUILD_NEXT_20_BN12_CLOSURE_README.md`
+- `docs/BN20_BN12_LAUNCH_CLOSURE.md`
+- `outputs/bn20_bn12_closure_report.md`
+- `outputs/build_next_20_bn12_closure.zip`
+
+Generated closure snapshot:
+- Overall status: `ready_for_bn21_pilot_go_no_go`.
+- Recommendation:
+  `proceed_to_bn21_first_client_pilot_go_no_go_with_web_first_boundaries`.
+- Issue counts: 0 blocker(s), 0 warning(s), 0 decision-required row(s).
+- Required inputs are present for BN19 founder acceptance, BN18B production
+  environment proof, BN18C UAT role refresh, Launch Trust Current Plan, and
+  Launch Trust Master Fix List.
+
+BN20 closure boundaries:
+- BN21 may evaluate first-client pilot go/no-go only for the accepted web-first
+  / PWA-assisted posture.
+- Native App Store / Google Play distribution remains deferred.
+- Provider-live claims remain restricted unless a later provider-refresh gate
+  changes them.
+- Weak-signal reliability remains a high-priority follow-up track unless a
+  later runtime drill or implementation gate changes it.
+- Full offline app support remains unclaimed.
+
+Lock note:
+- Codex review found one stale wording issue in the master fix list where BN18E
+  still appeared to require pilot-distribution clarification after BN19 had
+  already accepted web-first / PWA-assisted pilot posture. The wording was
+  corrected before lock.
+
+Next gate after BN20 lock:
+- BN21 - First-client pilot go/no-go within the accepted web-first boundaries.
+
+## Build-Next-21 - First-Client Pilot Go/No-Go ✅ CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+BN21 executed as an evidence-only first-client pilot go/no-go gate after locked
+BN20 / BN12 closure. It did not launch a pilot, approve public launch, mutate
+providers, write MongoDB, create or mutate UAT/review/customer accounts, submit
+to app stores, build native app code, or change product behavior.
+
+Created:
+- `backend/core/bn21_pilot_go_no_go.py`
+- `backend/scripts/build_next_21_pilot_go_no_go.py`
+- `backend/tests/test_build_next_21_pilot_go_no_go.py`
+- `BUILD_NEXT_21_FIRST_CLIENT_PILOT_GO_NO_GO_README.md`
+- `docs/BN21_FIRST_CLIENT_PILOT_GO_NO_GO.md`
+- `outputs/bn21_first_client_pilot_go_no_go_report.md`
+- `outputs/build_next_21_first_client_pilot_go_no_go.zip`
+
+Generated go/no-go snapshot:
+- Overall status: `go_for_web_first_first_client_pilot`.
+- Recommendation: `proceed_to_first_client_pilot_with_web_first_boundaries`.
+- Issue counts: 0 blocker(s), 0 warning(s), 0 decision-required row(s).
+- Required inputs are present for BN20 closure, BN19 founder acceptance, BN18B
+  production proof, and BN18C UAT role evidence.
+
+BN21 go boundary:
+- Go applies only to the first-client web-first / PWA-assisted pilot.
+- Native App Store / Google Play distribution remains deferred.
+- Provider-live claims remain restricted.
+- Weak-signal reliability remains a high-priority follow-up track.
+- Full offline app support remains unclaimed.
+- Public launch remains a later BN22 gate after pilot evidence.
+
+Next gate after BN21 lock:
+- BN22 - Public launch gate, after first-client pilot evidence is reviewed.

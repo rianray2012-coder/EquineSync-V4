@@ -137,7 +137,7 @@ export default function FeatureWorkspace({ moduleKey, fallbackTitle, icon: Icon 
         <Empty>
           <Icon strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No records yet</div>
-          <div className="text-[13px] text-equine-platinum/60 mb-4">Create the first record to activate this workflow shell.</div>
+          <div className="text-[13px] text-equine-platinum/60 mb-4">Create the first record when this workspace is ready to use.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="feature-empty-add">
             <Plus className="w-4 h-4" /> Add first record
           </button>

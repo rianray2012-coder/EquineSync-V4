@@ -60,6 +60,7 @@ from task_engine import (
 from notifications import build_router as build_notifications_router
 from routes.auth import build_router as build_auth_router
 from routes.dashboard import build_router as build_dashboard_router
+from routes.pulse import build_router as build_pulse_router
 from routes.reports import build_router as build_reports_router
 from routes.invites import build_router as build_invites_router
 from routes.onboarding import build_router as build_onboarding_router, ONBOARDING_STEPS
@@ -224,6 +225,13 @@ api_router.include_router(
 # Dashboard (routes/dashboard.py)
 api_router.include_router(
     build_dashboard_router(db, get_current_user, TASK_TENANT_ID),
+)
+
+# Build-Next-15A - read-only Today Pulse data contract for role-home pages.
+# Not attached to product facility dependencies because it must serve platform
+# admins and standalone individual-owner contexts as well as facility contexts.
+api_router.include_router(
+    build_pulse_router(db, get_current_user, TASK_TENANT_ID),
 )
 
 # Reports (routes/reports.py) — exposes send_nudges for the startup auto-nudge loop

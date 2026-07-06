@@ -1,6 +1,7 @@
 import { isPlatformAdmin } from "./permissions";
+import { DASHBOARD_PATHS, SERVICE_PROVIDER_ROLES, SETUP_ROUTE } from "./roleLanding";
 
-const roleHome = (profile) => `/role-home/${profile}`;
+const dashboardFor = (profile) => DASHBOARD_PATHS[profile] || "/dashboard";
 
 const item = (to, label, icon, extra = {}) => ({ to, label, icon, ...extra });
 
@@ -16,7 +17,7 @@ export const PLATFORM_NAVIGATION = [
   },
   {
     label: "Account",
-    items: [item("/settings", "Profile", "settings")],
+    items: [item("/admin/portal/settings", "Profile", "settings")],
   },
 ];
 
@@ -24,8 +25,8 @@ export const FACILITY_ADMIN_NAVIGATION = [
   {
     label: "Facility Admin",
     items: [
-      item("/dashboard", "Dashboard", "dashboard", { end: true }),
-      item("/onboarding", "Setup", "sparkles"),
+      item(DASHBOARD_PATHS.facility, "Dashboard", "dashboard", { end: true }),
+      item(SETUP_ROUTE, "Setup", "sparkles"),
       item("/horses", "Horses", "horse"),
       item("/owners", "Owners", "users"),
       item("/riders", "Riders", "profile"),
@@ -50,7 +51,7 @@ export const MANAGER_NAVIGATION = [
   {
     label: "Manager",
     items: [
-      item("/dashboard", "Dashboard", "dashboard", { end: true }),
+      item(DASHBOARD_PATHS.manager, "Dashboard", "dashboard", { end: true }),
       item("/today", "Tasks", "tasks"),
       item("/horses", "Horses", "horse"),
       item("/staff", "Staff", "team"),
@@ -74,7 +75,7 @@ export const TRAINER_NAVIGATION = [
   {
     label: "Trainer",
     items: [
-      item("/dashboard", "Dashboard", "dashboard", { end: true }),
+      item(DASHBOARD_PATHS.trainer, "Dashboard", "dashboard", { end: true }),
       item("/today", "Tasks", "tasks"),
       item("/horses", "Horses", "horse"),
       item("/arena-schedule", "Schedule", "calendar"),
@@ -97,8 +98,8 @@ export const BARN_OWNER_NAVIGATION = [
   {
     label: "Facility",
     items: [
-      item("/dashboard", "Dashboard", "dashboard", { end: true }),
-      item("/onboarding", "Setup", "sparkles"),
+      item(DASHBOARD_PATHS.facility, "Dashboard", "dashboard", { end: true }),
+      item(SETUP_ROUTE, "Setup", "sparkles"),
       item("/horses", "Horses", "horse"),
       item("/owners", "Owners", "users"),
       item("/riders", "Riders", "profile"),
@@ -113,7 +114,7 @@ export const STAFF_NAVIGATION = [
   {
     label: "Daily Work",
     items: [
-      item("/today", "Today", "tasks"),
+      item(DASHBOARD_PATHS.staff, "Today", "tasks", { end: true }),
       item("/my-work", "My Tasks", "clipboard"),
       item("/today", "Horse Checks", "health"),
       item("/horses", "Horse List", "horse"),
@@ -129,15 +130,14 @@ export const OWNER_NAVIGATION = [
   {
     label: "My Horse",
     items: [
-      item(roleHome("owner"), "My Horse", "heart"),
-      item(roleHome("owner"), "Daily Care", "health"),
+      item(dashboardFor("owner"), "My Horse", "heart", { end: true }),
+      item(dashboardFor("owner"), "Daily Care", "health"),
       item("/arena-schedule", "Barn Schedule", "calendar"),
-      item(roleHome("owner"), "Training Notes", "training"),
-      item(roleHome("owner"), "Health", "health"),
-      item(roleHome("owner"), "Requests", "requests"),
-      item(roleHome("owner"), "Billing", "billing"),
-      item(roleHome("owner"), "Documents", "documents"),
-      item("/messaging", "Messages", "messages"),
+      item(dashboardFor("owner"), "Training Notes", "training"),
+      item(dashboardFor("owner"), "Health", "health"),
+      item(dashboardFor("owner"), "Requests", "requests"),
+      item(dashboardFor("owner"), "Billing", "billing"),
+      item(dashboardFor("owner"), "Documents", "documents"),
       item("/settings", "Profile", "settings"),
     ],
   },
@@ -147,15 +147,14 @@ export const INDIVIDUAL_OWNER_NAVIGATION = [
   {
     label: "My Horse",
     items: [
-      item(roleHome("owner"), "My Horse", "heart"),
-      item(roleHome("owner"), "Daily Care", "health"),
-      item(roleHome("owner"), "Training Notes", "training"),
-      item(roleHome("owner"), "Health", "health"),
-      item(roleHome("owner"), "Schedule", "calendar"),
-      item(roleHome("owner"), "Requests", "requests"),
-      item(roleHome("owner"), "Billing", "billing"),
-      item(roleHome("owner"), "Documents", "documents"),
-      item("/messaging", "Messages", "messages"),
+      item(dashboardFor("owner"), "My Horse", "heart", { end: true }),
+      item(dashboardFor("owner"), "Daily Care", "health"),
+      item(dashboardFor("owner"), "Training Notes", "training"),
+      item(dashboardFor("owner"), "Health", "health"),
+      item(dashboardFor("owner"), "Schedule", "calendar"),
+      item(dashboardFor("owner"), "Requests", "requests"),
+      item(dashboardFor("owner"), "Billing", "billing"),
+      item(dashboardFor("owner"), "Documents", "documents"),
       item("/settings", "Profile", "settings"),
     ],
   },
@@ -165,14 +164,13 @@ export const GUARDIAN_NAVIGATION = [
   {
     label: "Guardian",
     items: [
-      item(roleHome("guardian"), "Rider Overview", "profile"),
-      item(roleHome("guardian"), "Schedule", "calendar"),
-      item(roleHome("guardian"), "Progress Notes", "documents"),
-      item(roleHome("guardian"), "Billing", "billing"),
-      item(roleHome("guardian"), "Documents", "documents"),
-      item(roleHome("guardian"), "Requests", "requests"),
-      item("/messaging", "Messages", "messages"),
-      item(roleHome("guardian"), "Emergency Info", "alert"),
+      item(dashboardFor("guardian"), "Rider Overview", "profile", { end: true }),
+      item(dashboardFor("guardian"), "Schedule", "calendar"),
+      item(dashboardFor("guardian"), "Progress Notes", "documents"),
+      item(dashboardFor("guardian"), "Billing", "billing"),
+      item(dashboardFor("guardian"), "Documents", "documents"),
+      item(dashboardFor("guardian"), "Requests", "requests"),
+      item(dashboardFor("guardian"), "Emergency Info", "alert"),
       item("/settings", "Profile", "settings"),
     ],
   },
@@ -182,14 +180,14 @@ export const RIDER_NAVIGATION = [
   {
     label: "Rider",
     items: [
-      item(roleHome("rider"), "Home", "dashboard"),
-      item(roleHome("rider"), "Schedule", "calendar"),
-      item(roleHome("rider"), "Lessons", "training"),
-      item(roleHome("rider"), "Progress Notes", "documents"),
-      item(roleHome("rider"), "Goals", "sparkles"),
-      item(roleHome("rider"), "Requests", "requests"),
-      item(roleHome("rider"), "Barn Announcements", "messages"),
-      item(roleHome("rider"), "Documents", "documents"),
+      item(dashboardFor("rider"), "Home", "dashboard", { end: true }),
+      item(dashboardFor("rider"), "Schedule", "calendar"),
+      item(dashboardFor("rider"), "Lessons", "training"),
+      item(dashboardFor("rider"), "Progress Notes", "documents"),
+      item(dashboardFor("rider"), "Goals", "sparkles"),
+      item(dashboardFor("rider"), "Requests", "requests"),
+      item(dashboardFor("rider"), "Barn Announcements", "messages"),
+      item(dashboardFor("rider"), "Documents", "documents"),
       item("/settings", "Profile", "settings"),
     ],
   },
@@ -200,7 +198,18 @@ export const DEFAULT_NAVIGATION = [
     label: "Account",
     items: [
       item("/dashboard", "Dashboard", "dashboard", { end: true }),
-      item("/messaging", "Messages", "messages"),
+      item("/settings", "Profile", "settings"),
+    ],
+  },
+];
+
+export const SERVICE_PROVIDER_NAVIGATION = [
+  {
+    label: "Provider",
+    items: [
+      item(DASHBOARD_PATHS.serviceProvider, "Dashboard", "dashboard", { end: true }),
+      item(DASHBOARD_PATHS.serviceProvider, "Appointments", "calendar"),
+      item(DASHBOARD_PATHS.serviceProvider, "Shared Horses", "horse"),
       item("/settings", "Profile", "settings"),
     ],
   },
@@ -233,6 +242,7 @@ export const getRoleNavigation = (user) => {
   if (role === "groom" || role === "working_student") return STAFF_NAVIGATION;
   if (role === "parent") return GUARDIAN_NAVIGATION;
   if (role === "rider") return RIDER_NAVIGATION;
+  if (SERVICE_PROVIDER_ROLES.includes(role)) return SERVICE_PROVIDER_NAVIGATION;
   if (role === "horse_owner") {
     return isIndividualOwnerNavigation(user) ? INDIVIDUAL_OWNER_NAVIGATION : OWNER_NAVIGATION;
   }

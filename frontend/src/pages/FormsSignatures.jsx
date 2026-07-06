@@ -132,7 +132,7 @@ export default function FormsSignatures() {
                 <span className="font-semibold text-equine-ink">
                   {providerReadiness.legal_signature_provider.configured ? "credentials ready" : "credentials needed"}
                 </span>
-                . Live envelope sending remains gated to a later phase.
+                . Envelope sending appears only after the signature provider is enabled for this account.
               </span>
             )}
           </div>

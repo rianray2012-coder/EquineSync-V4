@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[2]
 README = ROOT / "BUILD_NEXT_13O_CREDENTIALED_ROLE_SCREENSHOT_PASS_README.md"
 REPORT = ROOT / "outputs" / "build_next_13o_role_smoke_report.md"
 SCREENSHOT_DIR = ROOT / "outputs" / "build_next_13o_role_smoke_screenshots"
+ROLE_HOME = ROOT / "frontend" / "src" / "pages" / "RoleHome.jsx"
+ROLE_INTAKE = ROOT / "frontend" / "src" / "pages" / "RoleIntake.jsx"
 
 EXPECTED_SCREENSHOTS = [
     "uat-r1-platform-admin.png",
@@ -34,6 +36,13 @@ def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def _role_home_source() -> str:
+    role_home = _read(ROLE_HOME)
+    assert 'import RoleIntake from "./RoleIntake";' in role_home
+    assert "<RoleIntake {...props} />" in role_home
+    return _read(ROLE_INTAKE)
+
+
 def test_bn13o_artifacts_exist_and_state_captured_screenshot_status():
     for path in [README, REPORT]:
         assert path.exists(), str(path)
@@ -41,11 +50,13 @@ def test_bn13o_artifacts_exist_and_state_captured_screenshot_status():
 
     text = _read(README) + "\n" + _read(REPORT)
     for phrase in [
-        "Credentialed role screenshot rows: PASS / PASS_WITH_RESIDUAL",
+        "Credentialed role screenshot rows: PASS.",
         "Screenshots: 11/11 captured",
-        "No product behavior changes",
+        "CODEX-REVIEWED AND LOCKED",
+        "Frontend-only defensive fallback",
         "Screenshot files were copied into the package evidence folder",
-        "Not Found` residual",
+        "missing intake/profile rows now render empty setup forms",
+        "five role-home rows that originally showed `Not Found` were recaptured",
     ]:
         assert phrase in text
 
@@ -84,8 +95,8 @@ def test_bn13o_all_role_rows_are_present_and_screenshotted():
         assert row in text
 
     role_table = text.split("## Role Screenshot Results", 1)[1].split("## Screenshot Inventory", 1)[0]
-    assert role_table.count("| PASS |") == 6
-    assert role_table.count("| PASS_WITH_RESIDUAL |") == 5
+    assert role_table.count("| PASS |") == 11
+    assert "| PASS_WITH_RESIDUAL |" not in role_table
     assert "| BLOCKED |" not in role_table
     assert "| FAIL |" not in role_table
 
@@ -93,6 +104,7 @@ def test_bn13o_all_role_rows_are_present_and_screenshotted():
 def test_bn13o_screenshot_inventory_is_complete_and_local_files_validate_when_present():
     text = _read(REPORT)
     assert "All screenshot files are PNGs" in text
+    assert "Recent Activity row details redacted" in text
     for name in EXPECTED_SCREENSHOTS:
         assert f"`{name}`" in text
 
@@ -131,10 +143,37 @@ def test_bn13o_records_followup_requirements_before_acceptance():
     text = _read(REPORT)
     for phrase in [
         "Review the 11 screenshots",
-        "Decide whether the `Not Found` intake-panel residual blocks acceptance",
         "Confirm no screenshot exposes passwords",
-        "Record founder acceptance separately",
+        "Founder acceptance for BN13O evidence is recorded",
     ]:
         assert phrase in text
-    assert "Founder acceptance: not recorded" in text
+    assert "Recapture the five role-home rows" not in text
+    assert "Founder acceptance: recorded by user instruction to lock BN13O" in text
     assert "launch approved" not in text.lower()
+
+
+def test_bn13o_role_home_missing_intake_profiles_fall_back_to_empty_setup_state():
+    text = _role_home_source()
+    assert "const isMissingIntakeProfile = (error) => error?.response?.status === 404;" in text
+
+    expected_fallbacks = [
+        'api\n      .get("/staff-intake/profile")',
+        'setProfile({ ...emptyStaffProfile });',
+        'api\n      .get("/manager-intake/profile")',
+        'setProfile({ ...emptyManagerProfile });',
+        'api\n      .get("/trainer-intake/profile")',
+        'setProfile({ ...emptyTrainerProfile });',
+        'api\n      .get("/barn-owner-intake/profile")',
+        'setProfile({ ...emptyBarnOwnerProfile });',
+        'api\n      .get("/owner-intake/profile")',
+        'setProfile({ ...emptyOwnerProfile });',
+        'api\n      .get("/rider/profile")',
+        'setProfile({ ...emptyRiderProfile });',
+        'api\n      .get("/guardian/minor-rider-profile")',
+        'setProfile({ ...emptyGuardianProfile });',
+    ]
+    for phrase in expected_fallbacks:
+        assert phrase in text
+
+    assert text.count("if (isMissingIntakeProfile(e))") == 7
+    assert text.count("setCompletion(emptyCompletion);") == 7

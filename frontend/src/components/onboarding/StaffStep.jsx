@@ -73,7 +73,7 @@ const StaffStep = ({ onAnyChange }) => {
   return (
     <div data-testid="step-staff">
       <p className="text-equine-silver/70 text-[14px] mb-5">
-        Invite barn managers, trainers, grooms, vets, parents and owners. Each invitee receives a private magic link to set their password — no signups required.
+        Invite barn managers, trainers, grooms, vets, parents and owners. Each invitee receives a private accept link to set their password — no separate signup required.
         Roles with setup permissions (Owner / Barn Manager) will be guided through this concierge automatically on first login.
       </p>
 
@@ -107,9 +107,9 @@ const StaffStep = ({ onAnyChange }) => {
           <div className="flex items-start gap-3">
             <AlertTriangle className="w-4 h-4 text-equine-amber mt-0.5 flex-shrink-0" />
             <div className="flex-1 min-w-0">
-              <div className="text-[12.5px] text-equine-amber font-medium mb-1">Email delivery is in dev mode</div>
+              <div className="text-[12.5px] text-equine-amber font-medium mb-1">Invite link available</div>
               <div className="text-[12px] text-equine-platinum/70 mb-2">
-                Add a Resend API key to backend/.env to enable real email. For now, copy this magic link and share it with{" "}
+                Email delivery is not available for this invite. Copy this secure accept link and share it directly with{" "}
                 <strong className="text-equine-ivory">{lastDevLink.email}</strong>:
               </div>
               <div className="flex items-center gap-2">

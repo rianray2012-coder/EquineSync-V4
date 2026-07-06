@@ -25,7 +25,7 @@ from typing import Any, Optional
 import stripe
 from fastapi import HTTPException
 
-from core.entitlements import normalize_plan_code
+from core.entitlements import normalize_plan_code, plan_by_code
 from core.subscription_records import sync_account_subscription_by_id, sync_account_subscription_records
 
 logger = logging.getLogger(__name__)
@@ -307,7 +307,7 @@ async def _refresh_entitlements(db, sub_doc: dict, plan_tier_code: Optional[str]
     """Refresh entitlements_snapshot from plans + mirror onto the barn."""
     if not plan_tier_code:
         return sub_doc.get("entitlements_snapshot") or {}
-    plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0})
+    plan = await _resolve_plan_for_snapshot(db, plan_tier_code)
     snapshot = (plan or {}).get("feature_limits") or {}
     await db.subscriptions.update_one(
         {"stripe_subscription_id": sub_doc["stripe_subscription_id"]},
@@ -323,6 +323,37 @@ async def _refresh_entitlements(db, sub_doc: dict, plan_tier_code: Optional[str]
             upsert=True,
         )
     return snapshot
+
+
+async def _resolve_plan_for_snapshot(db, plan_tier_code: Optional[str]) -> dict:
+    """Resolve a non-empty entitlement source for webhook subscription mirrors."""
+    if not plan_tier_code:
+        raise _MetadataMissing(retryable=True, reason="plan_tier_code not resolvable")
+    plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0})
+    if plan:
+        return plan
+    try:
+        return plan_by_code(plan_tier_code)
+    except ValueError as ex:
+        raise _MetadataMissing(
+            retryable=True,
+            reason=f"plan_tier_code not resolvable: {plan_tier_code}",
+        ) from ex
+
+
+async def _mirror_inactive_subscription_to_barn(db, *, barn_id: Optional[str], stripe_subscription_id: str) -> None:
+    if not barn_id:
+        return
+    free_plan = await _resolve_plan_for_snapshot(db, "free")
+    await db.barns.update_one(
+        {"id": barn_id},
+        {"$set": {
+            "subscription_id": None,
+            "subscription_entitlements": free_plan.get("feature_limits") or {},
+            "subscription_updated_at": _now_iso(),
+            "last_inactive_subscription_id": stripe_subscription_id,
+        }},
+    )
 
 
 def _safe_stripe_retrieve(retriever_fn):
@@ -372,7 +403,7 @@ async def _h_checkout_session_completed(db, event):
     stripe_sub = _safe_stripe_retrieve(
         lambda: stripe.Subscription.retrieve(stripe_subscription_id)
     )
-    plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0})
+    plan = await _resolve_plan_for_snapshot(db, plan_tier_code)
     snapshot = (plan or {}).get("feature_limits") or {}
     items = (stripe_sub.get("items") or {}).get("data") or [{}]
     price_id = (items[0].get("price") or {}).get("id")
@@ -432,7 +463,7 @@ async def _h_subscription_created(db, event):
         metadata.get("plan_tier_code")
         or (await _resolve_subscription_local(db, stripe_subscription_id) or {}).get("plan_tier_code")
     )
-    plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0}) if plan_tier_code else None
+    plan = await _resolve_plan_for_snapshot(db, plan_tier_code)
     snapshot = (plan or {}).get("feature_limits") or {}
     items = (obj.get("items") or {}).get("data") or [{}]
     price_id = (items[0].get("price") or {}).get("id")
@@ -527,7 +558,7 @@ async def _h_subscription_updated(db, event):
                 retryable=True,
                 reason="no local row and plan_tier_code not resolvable from metadata or price",
             )
-        plan = await db.plans.find_one({"tier_code": plan_tier_code}, {"_id": 0})
+        plan = await _resolve_plan_for_snapshot(db, plan_tier_code)
         snapshot = (plan or {}).get("feature_limits") or {}
         raw_amount = (items[0].get("price") or {}).get("unit_amount")
         set_doc = {
@@ -619,6 +650,12 @@ async def _h_subscription_updated(db, event):
             await _refresh_entitlements(db, updated_sub, new_tier_code)
             summary_parts.append(f"price_changed:{new_tier_code}")
     await sync_account_subscription_by_id(db, stripe_subscription_id=stripe_subscription_id)
+    if (obj.get("status") or "").strip().lower() in {"canceled", "cancelled", "unpaid", "incomplete_expired"}:
+        await _mirror_inactive_subscription_to_barn(
+            db,
+            barn_id=barn_id,
+            stripe_subscription_id=stripe_subscription_id,
+        )
     return barn_id, tuple(summary_parts)
 
 
@@ -639,16 +676,10 @@ async def _h_subscription_deleted(db, event):
         }},
     )
     if barn_id:
-        # Fall back to Free plan limits on the barn mirror.
-        free_plan = await db.plans.find_one({"tier_code": "free"}, {"_id": 0})
-        free_limits = (free_plan or {}).get("feature_limits") or {}
-        await db.barns.update_one(
-            {"id": barn_id},
-            {"$set": {
-                "subscription_id": None,
-                "subscription_entitlements": free_limits,
-                "subscription_updated_at": _now_iso(),
-            }},
+        await _mirror_inactive_subscription_to_barn(
+            db,
+            barn_id=barn_id,
+            stripe_subscription_id=stripe_subscription_id,
         )
     await sync_account_subscription_by_id(db, stripe_subscription_id=stripe_subscription_id)
     return barn_id, ("subscription_deleted", stripe_subscription_id)

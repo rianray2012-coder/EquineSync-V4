@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "./index.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -11,7 +11,6 @@ import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Signup from "./pages/Signup";
 import Forbidden from "./pages/Forbidden";
-import Dashboard from "./pages/Dashboard";
 import Horses from "./pages/Horses";
 import HorseProfile from "./pages/HorseProfile";
 import OwnerCareLedger from "./pages/OwnerCareLedger";
@@ -76,7 +75,18 @@ import AuditLog from "./pages/AuditLog";
 import SubscriptionBilling from "./pages/SubscriptionBilling";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
 import RoleHome from "./pages/RoleHome";
-import { isFacilitySetupEligible, resolvePostLoginPath } from "./lib/roleLanding";
+import RoleIntake from "./pages/RoleIntake";
+import { resolvePostLoginPath, SETUP_ROUTE } from "./lib/roleLanding";
+import { api } from "./lib/api";
+import DashboardResolver from "./features/dashboards/DashboardResolver";
+import FacilityDashboard from "./features/dashboards/FacilityDashboard";
+import ManagerDashboard from "./features/dashboards/ManagerDashboard";
+import StaffDashboard from "./features/dashboards/StaffDashboard";
+import TrainerDashboard from "./features/dashboards/TrainerDashboard";
+import OwnerDashboard from "./features/dashboards/OwnerDashboard";
+import GuardianDashboard from "./features/dashboards/GuardianDashboard";
+import RiderDashboard from "./features/dashboards/RiderDashboard";
+import ServiceProviderDashboard from "./features/dashboards/ServiceProviderDashboard";
 
 // Admin Portal (Admin-1)
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -112,13 +122,98 @@ const RoleProtected = ({ roles, children }) => {
 
 const SetupProtected = ({ children }) => {
   const { user } = useAuth();
-  if (!isFacilitySetupEligible(user)) {
+  const [state, setState] = useState({ loading: true, readiness: null, error: null });
+
+  useEffect(() => {
+    let alive = true;
+    if (!user) {
+      setState({ loading: false, readiness: null, error: null });
+      return () => { alive = false; };
+    }
+    setState({ loading: true, readiness: null, error: null });
+    api.get("/onboarding/readiness")
+      .then((response) => {
+        if (alive) setState({ loading: false, readiness: response.data, error: null });
+      })
+      .catch((error) => {
+        if (alive) setState({ loading: false, readiness: null, error });
+      });
+    return () => { alive = false; };
+  }, [user]);
+
+  if (!user) return <Navigate to="/login" replace />;
+  if (state.loading) {
+    return (
+      <div className="min-h-[40vh] flex items-center justify-center text-equine-platinum/60">
+        Checking setup readiness…
+      </div>
+    );
+  }
+  if (state.error?.response?.status === 403) {
     return <Navigate to={resolvePostLoginPath(user)} replace />;
   }
-  return children;
+  if (state.error) {
+    return (
+      <div data-testid="setup-readiness-error" className="max-w-3xl mx-auto rounded-2xl border border-equine-rose/30 bg-equine-rose/8 p-5 text-equine-ivory">
+        Setup readiness could not load. Please refresh and try again.
+      </div>
+    );
+  }
+  return React.isValidElement(children)
+    ? React.cloneElement(children, { setupReadiness: state.readiness })
+    : children;
 };
 
 const permit = (element, roles) => <RoleProtected roles={roles}>{element}</RoleProtected>;
+
+const ROLE_DASHBOARD_ROLES = {
+  facility: ["admin", "barn_owner"],
+  manager: ["barn_manager"],
+  staff: ["groom", "working_student"],
+  trainer: ["trainer"],
+  owner: ["horse_owner"],
+  guardian: ["parent"],
+  rider: ["rider"],
+  serviceProvider: ["service_provider", "veterinarian", "farrier"],
+};
+
+const BN17D_DIRECT_ROUTE_ROLES = {
+  barnOperations: ["admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"],
+  horseDirectory: ["admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"],
+  facilityDirectory: ["admin", "barn_owner"],
+  trainingWorkflow: ["admin", "barn_owner", "barn_manager", "trainer"],
+  careWorkflow: ["admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"],
+  inventoryWorkflow: ["admin", "barn_owner", "barn_manager"],
+  operationalMessaging: ["admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"],
+  checkoutReturn: [
+    "admin",
+    "barn_owner",
+    "barn_manager",
+    "trainer",
+    "groom",
+    "working_student",
+    "horse_owner",
+    "parent",
+    "rider",
+    "service_provider",
+    "veterinarian",
+    "farrier",
+  ],
+  accountSettings: [
+    "admin",
+    "barn_owner",
+    "barn_manager",
+    "trainer",
+    "groom",
+    "working_student",
+    "horse_owner",
+    "parent",
+    "rider",
+    "service_provider",
+    "veterinarian",
+    "farrier",
+  ],
+};
 
 function App() {
   return (
@@ -175,30 +270,47 @@ function App() {
             <Route path="/admin/portal/login" element={<AdminLogin />} />
 
             <Route element={<Protected><AppShell /></Protected>}>
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard" element={<DashboardResolver />} />
+              <Route path="/dashboard/facility" element={permit(<FacilityDashboard />, ROLE_DASHBOARD_ROLES.facility)} />
+              <Route path="/dashboard/manager" element={permit(<ManagerDashboard />, ROLE_DASHBOARD_ROLES.manager)} />
+              <Route path="/dashboard/staff" element={permit(<StaffDashboard />, ROLE_DASHBOARD_ROLES.staff)} />
+              <Route path="/dashboard/trainer" element={permit(<TrainerDashboard />, ROLE_DASHBOARD_ROLES.trainer)} />
+              <Route path="/dashboard/owner" element={permit(<OwnerDashboard />, ROLE_DASHBOARD_ROLES.owner)} />
+              <Route path="/dashboard/guardian" element={permit(<GuardianDashboard />, ROLE_DASHBOARD_ROLES.guardian)} />
+              <Route path="/dashboard/rider" element={permit(<RiderDashboard />, ROLE_DASHBOARD_ROLES.rider)} />
+              <Route path="/dashboard/service-provider" element={permit(<ServiceProviderDashboard />, ROLE_DASHBOARD_ROLES.serviceProvider)} />
+              <Route path="/role-intake/:profile" element={<RoleIntake />} />
               <Route path="/role-home/:profile" element={<RoleHome />} />
-              <Route path="/today" element={<Today />} />
+              <Route path="/intake/facility-founder" element={<Navigate to="/role-intake/barn-owner" replace />} />
+              <Route path="/intake/manager" element={<Navigate to="/role-intake/manager" replace />} />
+              <Route path="/intake/staff" element={<Navigate to="/role-intake/staff" replace />} />
+              <Route path="/intake/trainer" element={<Navigate to="/role-intake/trainer" replace />} />
+              <Route path="/intake/owner" element={<Navigate to="/role-intake/owner" replace />} />
+              <Route path="/intake/guardian" element={<Navigate to="/role-intake/guardian" replace />} />
+              <Route path="/intake/rider" element={<Navigate to="/role-intake/rider" replace />} />
+              <Route path="/today" element={permit(<Today />, BN17D_DIRECT_ROUTE_ROLES.barnOperations)} />
               <Route path="/my-work" element={permit(<MyWork />, ROLE_GROUPS.staff)} />
               <Route path="/barn-board" element={<Navigate to="/today" replace />} />
-              <Route path="/onboarding" element={<SetupProtected><Onboarding /></SetupProtected>} />
-              <Route path="/horses" element={<Horses />} />
-              <Route path="/horses/:id" element={<HorseProfile />} />
-              <Route path="/riders" element={<Riders />} />
-              <Route path="/owners" element={<Owners />} />
-              <Route path="/lessons" element={<Lessons />} />
-              <Route path="/training" element={<Training />} />
-              <Route path="/health" element={<Health />} />
-              <Route path="/stall-rest" element={<Rehab />} />
+              <Route path="/setup/facility" element={<SetupProtected><Onboarding /></SetupProtected>} />
+              <Route path="/onboarding" element={<Navigate to={SETUP_ROUTE} replace />} />
+              <Route path="/horses" element={permit(<Horses />, BN17D_DIRECT_ROUTE_ROLES.horseDirectory)} />
+              <Route path="/horses/:id" element={permit(<HorseProfile />, BN17D_DIRECT_ROUTE_ROLES.horseDirectory)} />
+              <Route path="/riders" element={permit(<Riders />, BN17D_DIRECT_ROUTE_ROLES.facilityDirectory)} />
+              <Route path="/owners" element={permit(<Owners />, BN17D_DIRECT_ROUTE_ROLES.facilityDirectory)} />
+              <Route path="/lessons" element={permit(<Lessons />, BN17D_DIRECT_ROUTE_ROLES.trainingWorkflow)} />
+              <Route path="/training" element={permit(<Training />, BN17D_DIRECT_ROUTE_ROLES.trainingWorkflow)} />
+              <Route path="/health" element={permit(<Health />, BN17D_DIRECT_ROUTE_ROLES.careWorkflow)} />
+              <Route path="/stall-rest" element={permit(<Rehab />, BN17D_DIRECT_ROUTE_ROLES.careWorkflow)} />
               <Route path="/rehab" element={<Navigate to="/stall-rest" replace />} />
-              <Route path="/medications" element={<Medications />} />
-              <Route path="/turnout" element={<Turnout />} />
+              <Route path="/medications" element={permit(<Medications />, BN17D_DIRECT_ROUTE_ROLES.careWorkflow)} />
+              <Route path="/turnout" element={permit(<Turnout />, BN17D_DIRECT_ROUTE_ROLES.careWorkflow)} />
               <Route path="/stall-map" element={permit(<StallMap />, ROLE_GROUPS.operations)} />
               <Route path="/barn-locations" element={permit(<BarnLocations />, ROLE_GROUPS.locationShare)} />
               <Route path="/arena-schedule" element={permit(<ArenaSchedule />, ROLE_GROUPS.locationShare)} />
               <Route path="/waitlist" element={permit(<Waitlist />, ROLE_GROUPS.operations)} />
               <Route path="/pasture-schedule" element={permit(<PastureSchedule />, ROLE_GROUPS.operations)} />
-              <Route path="/feed" element={<Feed />} />
-              <Route path="/inventory" element={<Inventory />} />
+              <Route path="/feed" element={permit(<Feed />, BN17D_DIRECT_ROUTE_ROLES.careWorkflow)} />
+              <Route path="/inventory" element={permit(<Inventory />, BN17D_DIRECT_ROUTE_ROLES.inventoryWorkflow)} />
               <Route path="/supply-inventory" element={permit(<SupplyInventory />, ROLE_GROUPS.operations)} />
               <Route path="/equipment" element={permit(<Equipment />, ROLE_GROUPS.operations)} />
               <Route path="/health-reminders" element={permit(<HealthReminders />, ROLE_GROUPS.care)} />
@@ -207,7 +319,7 @@ function App() {
               <Route path="/weight-trends" element={permit(<WeightTrends />, ROLE_GROUPS.care)} />
               <Route path="/billing" element={permit(<Billing />, ROLE_GROUPS.financial)} />
               <Route path="/billing/subscription" element={permit(<SubscriptionBilling />, ROLE_GROUPS.barnManage)} />
-              <Route path="/billing/success" element={<SubscriptionSuccess />} />
+              <Route path="/billing/success" element={permit(<SubscriptionSuccess />, BN17D_DIRECT_ROUTE_ROLES.checkoutReturn)} />
               <Route path="/review-queue" element={permit(<ReviewQueue />, ROLE_GROUPS.communication)} />
               <Route path="/admin/review-queue" element={permit(<AdminReviewQueue />, ROLE_GROUPS.admin)} />
               <Route path="/admin/billing" element={permit(<AdminBillingDashboard />, ROLE_GROUPS.admin)} />
@@ -215,7 +327,7 @@ function App() {
               <Route path="/recurring-billing" element={permit(<RecurringBilling />, ROLE_GROUPS.financial)} />
               <Route path="/expenses" element={permit(<Expenses />, ROLE_GROUPS.financial)} />
               <Route path="/financial-dashboard" element={permit(<FinancialDashboard />, ROLE_GROUPS.financial)} />
-              <Route path="/incidents" element={<Incidents />} />
+              <Route path="/incidents" element={permit(<Incidents />, BN17D_DIRECT_ROUTE_ROLES.careWorkflow)} />
               <Route path="/shows" element={permit(<Competitions />, ROLE_GROUPS.training)} />
               <Route path="/documents" element={permit(<HealthDocuments />, ROLE_GROUPS.care)} />
               <Route path="/maintenance" element={permit(<Equipment />, ROLE_GROUPS.operations)} />
@@ -223,7 +335,7 @@ function App() {
               <Route path="/staff-tasks" element={permit(<StaffTasks />, ROLE_GROUPS.admin)} />
               <Route path="/handoff-reports" element={permit(<HandoffReports />, ROLE_GROUPS.admin)} />
               <Route path="/time-clock" element={permit(<TimeClock />, ROLE_GROUPS.admin)} />
-              <Route path="/messaging" element={<Messaging />} />
+              <Route path="/messaging" element={permit(<Messaging />, BN17D_DIRECT_ROUTE_ROLES.operationalMessaging)} />
               <Route path="/group-messaging" element={permit(<GroupMessaging />, ROLE_GROUPS.communication)} />
               <Route path="/owner-updates" element={permit(<OwnerUpdates />, ROLE_GROUPS.communication)} />
               <Route path="/forms-signatures" element={permit(<FormsSignatures />, ROLE_GROUPS.communication)} />
@@ -240,7 +352,7 @@ function App() {
               <Route path="/audit-log" element={permit(<AuditLog />, ROLE_GROUPS.admin)} />
               <Route path="/reports" element={permit(<Reports />, ROLE_GROUPS.admin)} />
               <Route path="/owner-portal" element={permit(<OwnerPortal />, ROLE_GROUPS.ownerPortal)} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/settings" element={permit(<Settings />, BN17D_DIRECT_ROUTE_ROLES.accountSettings)} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

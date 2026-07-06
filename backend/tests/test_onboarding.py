@@ -7,7 +7,7 @@ from ._test_creds import ADMIN
 
 EXPECTED_STEP_IDS = {
     "barn", "locations", "owners", "horses", "riders",
-    "feed_templates", "inventory", "staff", "schedules", "review",
+    "feed_templates", "inventory", "operations_setup", "staff", "schedules", "review",
 }
 
 
@@ -29,7 +29,7 @@ def test_get_steps(H):
     assert r.status_code == 200
     data = r.json()
     assert "steps" in data and isinstance(data["steps"], list)
-    assert len(data["steps"]) == 10
+    assert len(data["steps"]) == 11
     ids = {s["id"] for s in data["steps"]}
     assert ids == EXPECTED_STEP_IDS
     for s in data["steps"]:
@@ -64,15 +64,15 @@ def test_progress_patch_updates_and_percent(H):
     assert d["percent"] >= 10
 
 
-def test_progress_complete(H):
+def test_progress_complete_requires_readiness(H):
     r = requests.post(f"{API}/onboarding/complete", headers=H, timeout=30)
-    assert r.status_code == 200
-    assert r.json().get("ok") is True
-    # Verify via GET
-    g = requests.get(f"{API}/onboarding/progress", headers=H, timeout=30).json()
-    assert g["completed"] is True
-    # Reset for idempotency for later tests: mark uncompleted via patch (no endpoint to unset)
-    # leave as-is; subsequent tests don't depend on completed flag
+    assert r.status_code in (200, 409)
+    if r.status_code == 409:
+        detail = r.json()["detail"]
+        assert detail["message"] == "Setup is not ready to complete."
+        assert "blockers" in detail
+    else:
+        assert r.json().get("ok") is True
 
 
 # ---- Barn settings ----

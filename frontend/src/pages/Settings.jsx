@@ -1,25 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Card, PageHeader, StatusPill } from "../components/Primitives";
 import { api } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { RotateCcw, Trash2, ShieldAlert } from "lucide-react";
+import { Eye, EyeOff, RotateCcw, Trash2, ShieldAlert } from "lucide-react";
 import NotificationPrefsCard from "../components/NotificationPrefsCard";
+import { SETUP_ROUTE } from "../lib/roleLanding";
+
+const VISIBILITY_POLICY_ROLES = new Set(["admin", "barn_admin", "barn_owner", "barn_manager"]);
 
 export default function Settings() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [resetting, setResetting] = useState(false);
   const [wiping, setWiping] = useState(false);
+  const [visibilityPolicy, setVisibilityPolicy] = useState(null);
+  const [accountContext, setAccountContext] = useState(null);
+  const [visibilityLoading, setVisibilityLoading] = useState(false);
+  const [visibilitySaving, setVisibilitySaving] = useState(false);
   const isAdmin = user?.role === "admin";
+  const activeContext = accountContext?.active_context;
+  const activeFacilityRole = activeContext?.account_type === "facility" ? activeContext?.role : null;
+  const canManageVisibility =
+    activeContext?.account_type === "facility" &&
+    activeContext?.membership_status === "active" &&
+    VISIBILITY_POLICY_ROLES.has(activeFacilityRole);
+
+  useEffect(() => {
+    let alive = true;
+    api.get("/account/context")
+      .then((r) => {
+        if (alive) setAccountContext(r.data);
+      })
+      .catch(() => {
+        if (alive) setAccountContext(null);
+      });
+    return () => { alive = false; };
+  }, [user?.id]);
+
+  useEffect(() => {
+    if (!canManageVisibility) return;
+    let alive = true;
+    setVisibilityLoading(true);
+    api.get("/pulse/visibility-policy")
+      .then((r) => {
+        if (alive) setVisibilityPolicy(r.data);
+      })
+      .catch(() => {
+        if (alive) toast.error("Could not load visibility settings");
+      })
+      .finally(() => {
+        if (alive) setVisibilityLoading(false);
+      });
+    return () => { alive = false; };
+  }, [canManageVisibility]);
 
   const reopenSetup = async () => {
     setResetting(true);
     try {
       await api.post("/onboarding/reset");
       toast.success("Setup re-opened");
-      navigate("/onboarding");
+      navigate(SETUP_ROUTE);
     } catch { toast.error("Could not reset"); }
     finally { setResetting(false); }
   };
@@ -38,6 +80,25 @@ export default function Settings() {
       toast.error(e?.response?.data?.detail || "Reset failed");
     } finally { setWiping(false); }
   };
+
+  const saveVisibilityPolicy = async (mode) => {
+    setVisibilitySaving(true);
+    const body = {
+      mode,
+      owner_safe_summary_counts: { total_horses: mode === "community" },
+    };
+    try {
+      const r = await api.put("/pulse/visibility-policy", body);
+      setVisibilityPolicy(r.data);
+      toast.success(mode === "community" ? "Community horse count is visible" : "Horse count is siloed");
+    } catch (e) {
+      toast.error(e?.response?.data?.detail || "Could not save visibility setting");
+    } finally {
+      setVisibilitySaving(false);
+    }
+  };
+
+  const visibilityMode = visibilityPolicy?.mode || "siloed";
 
   return (
     <div data-testid="settings-page">
@@ -67,6 +128,55 @@ export default function Settings() {
       </Card>
 
       <NotificationPrefsCard />
+
+      {canManageVisibility && (
+        <Card className="mt-6" data-testid="barn-visibility-policy-card">
+          <div className="flex items-start justify-between gap-4 flex-wrap">
+            <div className="flex-1 min-w-[260px]">
+              <div className="label-eyebrow">Owner-Safe Summary Visibility</div>
+              <h3 className="font-display text-2xl text-equine-ivory mt-1">Total Horse Count</h3>
+              <p className="text-equine-silver/70 text-[13.5px] mt-2 max-w-2xl">
+                Choose whether owner, guardian, and rider views show the barn-wide horse total. This is count-only: no staff notes, alert details, care payloads, billing data, or private horse records are shared.
+              </p>
+            </div>
+            <StatusPill tone={visibilityMode === "community" ? "success" : "neutral"}>
+              {visibilityMode === "community" ? "Community Count" : "Siloed"}
+            </StatusPill>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5">
+            <button
+              type="button"
+              onClick={() => saveVisibilityPolicy("siloed")}
+              disabled={visibilityLoading || visibilitySaving || visibilityMode === "siloed"}
+              data-testid="visibility-policy-siloed"
+              className="btn-secondary text-left p-4 h-auto flex items-start gap-3 disabled:opacity-50"
+            >
+              <EyeOff className="w-4 h-4 mt-0.5 text-equine-brass flex-shrink-0" />
+              <div>
+                <div className="text-[13px] text-equine-ivory">Siloed</div>
+                <div className="text-[11.5px] text-equine-platinum/60 mt-0.5">
+                  Owners and riders see only their approved horse context.
+                </div>
+              </div>
+            </button>
+            <button
+              type="button"
+              onClick={() => saveVisibilityPolicy("community")}
+              disabled={visibilityLoading || visibilitySaving || visibilityMode === "community"}
+              data-testid="visibility-policy-community"
+              className="btn-secondary text-left p-4 h-auto flex items-start gap-3 disabled:opacity-50"
+            >
+              <Eye className="w-4 h-4 mt-0.5 text-equine-sage flex-shrink-0" />
+              <div>
+                <div className="text-[13px] text-equine-ivory">Community Count</div>
+                <div className="text-[11.5px] text-equine-platinum/60 mt-0.5">
+                  Owner-safe views may show the total active horse count only.
+                </div>
+              </div>
+            </button>
+          </div>
+        </Card>
+      )}
 
       {isAdmin && (
         <Card className="mt-6 !border-equine-clay/30">

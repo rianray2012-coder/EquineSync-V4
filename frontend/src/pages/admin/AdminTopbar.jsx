@@ -18,7 +18,7 @@ export default function AdminTopbar({ user }) {
       className="border-b border-equinesync-graphite/10 bg-white sticky top-0 z-20"
     >
       <div className="px-4 md:px-8 h-14 flex items-center gap-4">
-        {/* Search command — placeholder, Admin-2 will wire */}
+        {/* Search command placeholder */}
         <div className="flex-1 flex items-center gap-2 max-w-xl md:ml-12 ml-12">
           <div className="relative w-full">
             <Search
@@ -27,7 +27,7 @@ export default function AdminTopbar({ user }) {
             />
             <input
               type="text"
-              placeholder="Search… (coming in Admin-2)"
+              placeholder="Search"
               disabled
               data-testid="admin-topbar-search"
               className="w-full pl-9 pr-3 py-2 rounded-lg bg-equinesync-frost border border-equinesync-graphite/10 text-[13px] text-equinesync-graphite placeholder:text-equinesync-graphite/30 disabled:cursor-not-allowed disabled:opacity-60"

@@ -38,16 +38,25 @@ const renderStep = (stepId, onAnyChange, onFinish) => {
   }
 };
 
-export default function Onboarding() {
+export default function Onboarding({ setupReadiness = null }) {
   const navigate = useNavigate();
   const [steps, setSteps] = useState([]);
   const [progress, setProgress] = useState(null);
+  const [readiness, setReadiness] = useState(setupReadiness);
   const [currentId, setCurrentId] = useState("barn");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([api.get("/onboarding/steps"), api.get("/onboarding/progress")])
-      .then(([s, p]) => {
+    if (setupReadiness) setReadiness(setupReadiness);
+  }, [setupReadiness]);
+
+  useEffect(() => {
+    const readinessRequest = api.get("/onboarding/readiness")
+      .then((r) => r.data)
+      .catch(() => setupReadiness);
+
+    Promise.all([api.get("/onboarding/steps"), api.get("/onboarding/progress"), readinessRequest])
+      .then(([s, p, ready]) => {
         // Founder-beta: recurring schedules collection is intentionally hidden
         // until the scheduler is wired to materialize tasks (see audit §J.6).
         // Backend model + endpoints remain intact so data persists across
@@ -55,13 +64,14 @@ export default function Onboarding() {
         const visibleSteps = s.data.steps.filter((step) => step.id !== "schedules");
         setSteps(visibleSteps);
         setProgress(p.data);
+        if (ready) setReadiness(ready);
         const startId = p.data.current_step === "schedules"
           ? (visibleSteps.find((st) => p.data.steps?.[st.id] !== "complete")?.id || visibleSteps[0].id)
           : (p.data.current_step || visibleSteps[0].id);
         setCurrentId(startId);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [setupReadiness]);
 
   const setStepStatus = async (step_id, status) => {
     const r = await api.patch("/onboarding/progress", { step_id, status });
@@ -71,6 +81,11 @@ export default function Onboarding() {
     setCurrentId(step_id);
     const r = await api.patch("/onboarding/progress", { current_step: step_id });
     setProgress(r.data);
+  };
+  const refreshReadiness = async () => {
+    const response = await api.get("/onboarding/readiness");
+    setReadiness(response.data);
+    return response.data;
   };
 
   if (loading || !progress) {
@@ -87,26 +102,51 @@ export default function Onboarding() {
   const percent = steps.length === 0 ? 0 : Math.round(100 * completedVisible / steps.length);
   const currentStatus = progress.steps?.[currentId] || "pending";
   const currentStatusLabel = currentStatus.replace(/_/g, " ");
+  const readinessBlockers = readiness?.blockers || [];
+  const readinessWarnings = readiness?.warnings || [];
+  const canFinalizeSetup = readiness?.can_finalize !== false;
 
   const next = async () => {
     await setStepStatus(currentId, "complete");
     track("onboarding.step_completed", { step: currentId });
+    refreshReadiness().catch(() => null);
     if (stepIndex < steps.length - 1) setCurrent(steps[stepIndex + 1].id);
   };
   const skip = async () => {
     await setStepStatus(currentId, "skipped");
     track("onboarding.step_skipped", { step: currentId });
+    refreshReadiness().catch(() => null);
     if (stepIndex < steps.length - 1) setCurrent(steps[stepIndex + 1].id);
   };
   const back = () => {
     if (stepIndex > 0) setCurrent(steps[stepIndex - 1].id);
   };
   const launch = async () => {
-    await setStepStatus("review", "complete");
-    await api.post("/onboarding/complete");
-    track("onboarding.completed", { percent: 100 });
-    toast.success("Barn setup complete!");
-    navigate("/");
+    if (!canFinalizeSetup) {
+      toast.error("Only a facility admin or barn owner can launch setup.");
+      return;
+    }
+    try {
+      await setStepStatus("review", "complete");
+      const response = await api.post("/onboarding/complete");
+      if (response.data?.readiness) setReadiness(response.data.readiness);
+      track("onboarding.completed", { percent: 100 });
+      toast.success("Barn setup complete!");
+      navigate("/");
+    } catch (error) {
+      const status = error?.response?.status;
+      const detail = error?.response?.data?.detail;
+      if (status === 409 && detail) {
+        setReadiness(detail);
+        toast.error(detail.message || "Setup still has required blockers.");
+        return;
+      }
+      if (status === 403) {
+        toast.error("Only a facility admin or barn owner can launch setup.");
+        return;
+      }
+      toast.error("Setup could not be completed. Please try again.");
+    }
   };
 
   return (
@@ -123,6 +163,46 @@ export default function Onboarding() {
           </div>
         }
       />
+
+      {readiness && (
+        <Card hover={false} className="mb-6" data-testid="setup-readiness-panel">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+            <div>
+              <div className="label-eyebrow">Backend Readiness</div>
+              <h2 className="font-display text-2xl text-equine-ivory mt-1">
+                {readiness.can_complete
+                  ? "Ready To Launch"
+                  : canFinalizeSetup
+                    ? "Required Setup Evidence Needed"
+                    : "Read-Only Setup Review"}
+              </h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">
+                {canFinalizeSetup
+                  ? "Facility setup completion is now checked by the server before launch."
+                  : "Barn managers can inspect setup readiness, but only a facility admin or barn owner can launch the barn."}
+              </p>
+            </div>
+            <StatusPill tone={readiness.can_complete ? "success" : canFinalizeSetup ? "warning" : "neutral"}>
+              {readiness.can_complete ? "ready" : canFinalizeSetup ? `${readinessBlockers.length} blocker${readinessBlockers.length === 1 ? "" : "s"}` : "view only"}
+            </StatusPill>
+          </div>
+          {readinessBlockers.length > 0 && (
+            <div className="mt-4 grid md:grid-cols-2 gap-2" data-testid="setup-readiness-blockers">
+              {readinessBlockers.slice(0, 6).map((item) => (
+                <div key={item.step_id} className="rounded-xl border border-equine-rose/25 bg-equine-rose/8 px-3 py-2">
+                  <div className="text-[11px] uppercase tracking-[0.16em] text-equine-rose/80">{item.step_id}</div>
+                  <div className="text-[13px] text-equine-platinum/75 mt-1">{item.message}</div>
+                </div>
+              ))}
+            </div>
+          )}
+          {readinessWarnings.length > 0 && (
+            <div className="mt-3 text-[12px] text-equine-platinum/60" data-testid="setup-readiness-warnings">
+              {readinessWarnings.length} non-blocking setup note{readinessWarnings.length === 1 ? "" : "s"} recorded.
+            </div>
+          )}
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* ───── Stepper ───── */}
@@ -218,7 +298,12 @@ export default function Onboarding() {
                   </button>
                 )}
                 {currentId === "review" ? (
-                  <button onClick={launch} data-testid="step-finish" className="btn-primary inline-flex items-center gap-2">
+                  <button
+                    onClick={launch}
+                    disabled={!canFinalizeSetup}
+                    data-testid="step-finish"
+                    className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center gap-2"
+                  >
                     Launch barn <Rocket className="w-4 h-4" />
                   </button>
                 ) : (

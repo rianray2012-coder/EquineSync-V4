@@ -18,7 +18,9 @@ import pytest
 import requests
 from pymongo import MongoClient
 
-sys.path.insert(0, "/app/backend")
+BACKEND_DIR = pathlib.Path(__file__).resolve().parents[1]
+if str(BACKEND_DIR) not in sys.path:
+    sys.path.insert(0, str(BACKEND_DIR))
 
 
 def _base_url():
@@ -272,6 +274,53 @@ def test_subscription_updated_syncs_status_and_period(db):
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
 
 
+def test_subscription_updated_canceled_status_clears_barn_mirror_to_free_limits(db):
+    """BN15B: status-only cancellation updates must not leave the barn mirror
+    pointing at paid entitlements after account_usage_limits has fallen back.
+    """
+    barn_id, sub_id, _ = _seed_local_sub(db, plan_tier_code="starter_barn")
+    db.barns.update_one(
+        {"id": barn_id},
+        {"$set": {
+            "id": barn_id,
+            "subscription_id": sub_id,
+            "subscription_entitlements": {"horses": 10, "staff_seats": 3},
+        }},
+        upsert=True,
+    )
+    db.plans.update_one(
+        {"tier_code": "free"},
+        {"$set": {
+            "id": "free",
+            "tier_code": "free",
+            "feature_limits": {"horses": 1, "staff_seats": 0},
+        }},
+        upsert=True,
+    )
+    e = _evt("customer.subscription.updated", {
+        "id": sub_id,
+        "status": "canceled",
+        "items": {"data": [{"price": {"id": "price_local_monthly"}}]},
+    })
+
+    r = _post_event(e)
+    assert r.status_code == 200, r.text
+    barn = db.barns.find_one({"id": barn_id})
+    assert barn["subscription_id"] is None
+    assert barn["subscription_entitlements"]["horses"] == 1
+    assert barn["subscription_entitlements"]["staff_seats"] == 0
+    assert barn["last_inactive_subscription_id"] == sub_id
+    usage_limits = db.account_usage_limits.find_one({"account_id": barn_id})
+    assert usage_limits["plan_code"] == "free"
+    assert usage_limits["subscription_status"] == "canceled"
+
+    db.subscriptions.delete_one({"id": sub_id})
+    db.barns.delete_one({"id": barn_id})
+    db.account_subscriptions.delete_one({"account_id": barn_id})
+    db.account_usage_limits.delete_one({"account_id": barn_id})
+    db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
 def test_subscription_deleted_marks_canceled_and_clears_barn_pointer(db):
     barn_id, sub_id, _ = _seed_local_sub(db)
     db.barns.insert_one({"id": barn_id, "subscription_id": sub_id})
@@ -304,6 +353,57 @@ def test_trial_will_end_addtoset_appends_email_flag(db):
     assert set(sub["pending_emails"]) == {"payment_failed", "trial_will_end"}
     db.subscriptions.delete_one({"id": sub_id})
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
+def test_checkout_completed_unknown_plan_does_not_lock_empty_entitlements(monkeypatch):
+    """BN15B: checkout must use the same guarded entitlement resolver as
+    subscription lifecycle events. Unknown plans stay retryable, not OK-empty.
+    """
+    from routes import subscriptions_webhook_handlers as h
+
+    class _FakeStripeSubscription:
+        @staticmethod
+        def retrieve(_subscription_id):
+            return {
+                "id": _subscription_id,
+                "status": "active",
+                "items": {"data": [{"price": {"id": "price_checkout_unknown"}}]},
+            }
+
+    sub_id = f"sub_checkout_unknown_{uuid.uuid4().hex[:8]}"
+    e = _evt("checkout.session.completed", {
+        "id": f"cs_{uuid.uuid4().hex[:8]}",
+        "customer": f"cus_{uuid.uuid4().hex[:8]}",
+        "subscription": sub_id,
+        "metadata": {
+            "barn_id": f"barn_checkout_unknown_{uuid.uuid4().hex[:8]}",
+            "plan_tier_code": "not_a_real_plan",
+            "owner_user_id": "u_checkout",
+            "billing_cycle": "monthly",
+        },
+    })
+
+    monkeypatch.setattr(h.stripe, "Subscription", _FakeStripeSubscription)
+
+    class _NoPlanCollection:
+        async def find_one(self, *args, **kwargs):
+            return None
+
+        async def insert_one(self, *args, **kwargs):
+            raise AssertionError("subscription insert must not happen for unknown plans")
+
+        async def update_one(self, *args, **kwargs):
+            raise AssertionError("barn mirror update must not happen for unknown plans")
+
+    class _StubDB:
+        subscriptions = _NoPlanCollection()
+        plans = _NoPlanCollection()
+        barns = _NoPlanCollection()
+
+    with pytest.raises(h._MetadataMissing) as ex:
+        asyncio.run(h._h_checkout_session_completed(_StubDB(), e))
+    assert ex.value.retryable is True
+    assert "plan_tier_code not resolvable" in ex.value.reason
 
 
 def test_invoice_paid_inserts_subscription_invoice_and_payment_row(db):
@@ -549,8 +649,36 @@ def test_subscription_created_repairs_barn_pointer_and_entitlements(db):
     barn = db.barns.find_one({"id": barn_id})
     assert barn is not None, "barn row must be upserted"
     assert barn["subscription_id"] == sub_id
-    assert barn["subscription_entitlements"]["horses"] == 50
+    assert barn["subscription_entitlements"]["horses"] == 10
     db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    db.barns.delete_one({"id": barn_id})
+    db.billing_events.delete_one({"stripe_event_id": e["id"]})
+
+
+def test_subscription_created_unknown_plan_does_not_lock_empty_entitlements(db):
+    """BN15B: an unresolved created-event plan must remain retryable instead
+    of writing an OK billing row with empty subscription/barn entitlements.
+    """
+    barn_id = f"barn_created_unknown_{uuid.uuid4().hex[:8]}"
+    sub_id = f"sub_created_unknown_{uuid.uuid4().hex[:8]}"
+    db.barns.delete_one({"id": barn_id})
+    db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
+    e = _evt("customer.subscription.created", {
+        "id": sub_id,
+        "status": "active",
+        "metadata": {"barn_id": barn_id, "plan_tier_code": "not_a_real_plan"},
+        "items": {"data": [{"price": {"id": "price_unknown", "unit_amount": 9999}}]},
+    })
+
+    r = _post_event(e)
+    assert r.status_code == 503, r.text
+    assert db.subscriptions.find_one({"stripe_subscription_id": sub_id}) is None
+    barn = db.barns.find_one({"id": barn_id})
+    assert not barn or not barn.get("subscription_entitlements")
+    row = db.billing_events.find_one({"stripe_event_id": e["id"]})
+    assert row["processing_status"] == "metadata_missing_retryable"
+    assert "plan_tier_code not resolvable" in row["summary"]
+
     db.barns.delete_one({"id": barn_id})
     db.billing_events.delete_one({"stripe_event_id": e["id"]})
 
@@ -616,13 +744,13 @@ def test_subscription_updated_upserts_when_no_local_row_but_metadata_present(db)
     sub_id = f"sub_upd_up_{uuid.uuid4().hex[:8]}"
     db.barns.delete_one({"id": barn_id})
     db.subscriptions.delete_one({"stripe_subscription_id": sub_id})
-    # Ensure plans catalog has a known tier so entitlements_snapshot is
+    # Ensure plans catalog has a known canonical tier so entitlements_snapshot is
     # deterministic.
     db.plans.update_one(
-        {"tier_code": "starter"},
+        {"tier_code": "starter_barn"},
         {"$setOnInsert": {
-            "id": "starter", "tier_code": "starter",
-            "feature_limits": {"horses": 50, "users": 5},
+            "id": "starter_barn", "tier_code": "starter_barn",
+            "feature_limits": {"horses": 10, "staff_seats": 3},
         }},
         upsert=True,
     )
@@ -640,16 +768,16 @@ def test_subscription_updated_upserts_when_no_local_row_but_metadata_present(db)
     assert sub is not None, "subscription row must be upserted on update + metadata"
     assert sub["status"] == "active"
     assert sub["barn_id"] == barn_id
-    assert sub["plan_tier_code"] == "starter"
-    assert sub.get("entitlements_snapshot", {}).get("horses") == 50
-    assert sub.get("entitlements_snapshot", {}).get("users") == 5
+    assert sub["plan_tier_code"] == "starter_barn"
+    assert sub.get("entitlements_snapshot", {}).get("horses") == 10
+    assert sub.get("entitlements_snapshot", {}).get("staff_seats") == 3
 
     # Barn pointer + entitlements mirror repaired.
     barn = db.barns.find_one({"id": barn_id})
     assert barn is not None, "barn row must be upserted to repair pointer"
     assert barn["subscription_id"] == sub_id
-    assert barn["subscription_entitlements"]["horses"] == 50
-    assert barn["subscription_entitlements"]["users"] == 5
+    assert barn["subscription_entitlements"]["horses"] == 10
+    assert barn["subscription_entitlements"]["staff_seats"] == 3
 
     # billing_events row closed as ok.
     row = db.billing_events.find_one({"stripe_event_id": e["id"]})
@@ -712,8 +840,6 @@ def test_non_duplicate_db_insert_failure_raises_502_without_recursion(monkeypatc
     """Codex round-3 #2: a non-DuplicateKey DB error on the claim insert
     must surface 502 (Stripe replays) without infinite recursion.
     """
-    import sys as _sys
-    _sys.path.insert(0, "/app/backend")
     from routes import subscriptions_webhook_handlers as h
     from fastapi import HTTPException
 

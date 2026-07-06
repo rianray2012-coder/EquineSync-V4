@@ -125,5 +125,5 @@ def test_forms_page_consumes_readiness_without_live_send_action():
 
     assert 'api.get("/document-signatures/providers")' in src
     assert "credentials ready" in src
-    assert "Live envelope sending remains gated" in src
+    assert "Envelope sending appears only after the signature provider is enabled for this account." in src
     assert "send-envelope" not in src

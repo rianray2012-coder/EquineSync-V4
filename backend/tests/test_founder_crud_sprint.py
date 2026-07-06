@@ -4,7 +4,7 @@ Verifies (1) Inventory/Owners/Riders/Horses create+list flows wired to
 QuickAddSheet, (2) Lessons tolerate non-existent rider_id (rider_name=null),
 (3) Training tolerates missing horse (horse_name=null), (4) Incidents resolve
 horse_name when horse_id given and default status='open', (5) Backend
-/api/onboarding/steps still exposes all 10 steps (schedules hidden in FE only).
+/api/onboarding/steps still exposes schedules (hidden in FE only).
 """
 import os
 import uuid
@@ -42,7 +42,8 @@ def test_onboarding_steps_still_has_schedules_in_backend(admin_h):
     steps = payload.get("steps") if isinstance(payload, dict) else payload
     ids = [s["id"] for s in steps]
     assert "schedules" in ids, "Backend MUST still expose schedules per PRD"
-    assert len(ids) == 10, f"Expected 10 steps, got {len(ids)}: {ids}"
+    assert "operations_setup" in ids
+    assert len(ids) == 11, f"Expected 11 steps, got {len(ids)}: {ids}"
 
 
 # ---------- Inventory ----------
