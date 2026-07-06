@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, RF2, RF3, and RF4 CODEX-REVIEWED & LOCKED. RF5 is next.
+Status: RF0, RF1, RF2, RF3, RF4, and RF5 CODEX-REVIEWED & LOCKED. RF6 is next.
 
 ## Classification Key
 
@@ -36,8 +36,10 @@ Status: RF0, RF1, RF2, RF3, and RF4 CODEX-REVIEWED & LOCKED. RF5 is next.
 | RF0-F15 | Trainer fluidity is not fully built. | open P1 | RF9 | Trainer intake exists and explicitly does not create lessons, rider enrollments, horse assignments, permissions, or billing. Trainer dashboard delegates to generic dashboard. | Build trainer operating center after RF1/RF2 foundations. |
 | RF0-F16 | Service provider multi-barn/client access is not fully built. | open P1 | RF10 | Service provider dashboard is a shell; `veterinarian` and `farrier` are legacy care-partner roles; no full provider access-grant model found. | Build provider profile/business/access-grant/appointment model after RF1/RF2 foundations. |
 | RF0-F17 | Onboarding remains a major pain-point risk and should become guided import/setup. | partially fixed | RF3, RF5 | RF3 packages review-first CSV metadata and commit gating for horse/owner imports, explicit deferred import kinds, setup readiness truth, and integration readiness boundaries. First-value milestone analytics and richer import mapping remain RF5/RF18 follow-up work. | Review RF3, then decide whether richer row-level mapping UI is needed before first-client UAT. |
-| RF0-F18 | Admin portal should become a product intelligence and customer-success center. | partially fixed | RF5 | Admin Portal has platform-role separation, users, facilities, billing, support, alerts, reports, integrations, settings, audit logs. RF5 User 360/Facility 360/account health/dunning/feature health/data quality are incomplete. | Extend admin portal into RF5 intelligence/customer-success surfaces with privacy-scrubbed analytics. |
-| RF0-F19 | General web-based enrollment and signup entry points are incomplete. | open P1 | RF5, RF7, RF9, RF10, RF18 | Founder requested two separate enrollment paths, including individual horse enrollment for owners whose barns are not using EquineSync or whose horses are on their own land/family land, plus signup paths from sign-in and home pages for barn owners, trainers, service providers, and other account types. | RF5 should build/plan the home/login signup entry points, account credentials, critical signup data, and enrollment path selector. RF7 should own individual horse/owner enrollment depth; RF9 trainer enrollment; RF10 service-provider enrollment; RF18 end-to-end UAT. |
+| RF0-F18 | Admin portal should become a product intelligence and customer-success center. | partially fixed | RF5 | Admin Portal has platform-role separation, users, facilities, billing, support, alerts, reports, integrations, settings, audit logs. RF5 now inventories these account-health/customer-success surfaces. User 360/Facility 360/dunning/feature health/data quality are incomplete. | Extend admin portal into RF5 intelligence/customer-success surfaces with privacy-scrubbed analytics after founder acceptance of the opening gate. |
+| RF0-F19 | General web-based enrollment and signup entry points are incomplete. | partially fixed | RF5, RF7, RF9, RF10, RF18 | RF5 adds `/enroll`, routes home/login Join actions to enrollment before credential collection, declares four public paths (individual horse owner, barn owner/manager, service provider, trainer), keeps rider/guardian/staff out of the main public path grid, and locks signup role/context to the selected path. Deeper enrollment workflows remain open. | RF7 should own individual horse/owner enrollment depth, limited-trial semantics, and leasee invites; RF9 trainer enrollment; RF10 service-provider enrollment; RF18 end-to-end UAT. |
+| RF0-F20 | Rider, guardian, and staff public self-signup must not grant full product access. | partially fixed | RF5, RF7, RF18 | RF5 records those roles as invite-first and provides a limited seven-day individual-owner trial fallback when facility/trainer/provider contact information is supplied. Signup uses a separate limited-access branch instead of the standard paid-plan trial screen. Backend access caps and trial enforcement are not implemented in RF5. | RF7/RF18 must implement and test limited modified-individual-owner access that excludes barn owner, manager, trainer, and provider features. |
+| RF0-F21 | Leasee access must preserve owner oversight and be invite-controlled. | open P1 | RF7 | RF5 records leasee access as invite-only from the horse owner or assigned trainer, with owner oversight preserved. No leasee grant model is implemented in RF5. | RF7 should implement leasee invites, scoped access, revocation, and owner oversight guarantees. |
 
 ## Founder / Product Decisions
 
@@ -53,7 +55,9 @@ Status: RF0, RF1, RF2, RF3, and RF4 CODEX-REVIEWED & LOCKED. RF5 is next.
 | Offline workflows required for launch claims. | deferred / requires founder decision | RF15 | Current BN18D/BN21 posture permits limited recovery only. |
 | Feature shells to hide immediately. | requires founder decision | RF4, RF17 | RF0 recommends auditing daily nav first. |
 | Privacy boundaries for platform-admin insights. | requires founder decision | RF5 | Admin analytics must avoid sensitive free text and private content. |
-| Web enrollment path ordering and copy. | requires founder decision | RF5, RF7, RF9, RF10 | Decide the first signup choices shown from home/login: individual horse owner, barn/facility owner, trainer, service provider, and any other account type. |
+| Web enrollment path ordering and copy. | requires founder decision | RF5, RF7, RF9, RF10 | RF5 proposed this order: Individual Horse Owner, Barn Owner / Manager, Service Provider, Trainer. Founder should accept or adjust before lock. |
+| Rider/guardian/staff limited trial posture. | requires founder decision | RF5, RF7, RF18 | Accept invite-first access plus limited modified-individual-owner trial fallback, with server enforcement deferred beyond RF5. |
+| Leasee invite authority. | requires founder decision | RF7 | Accept that leasee invites can only be sent by the horse owner or assigned trainer, while owner oversight remains intact. |
 
 ## RF1 Locked Status
 
@@ -75,19 +79,12 @@ stable IDs.
 
 ## Current Phase Recommendation
 
-Proceed to RF5 - Admin Portal Intelligence, Customer Success, Web Enrollment,
-Billing Intervention, and Account Health.
+Proceed to RF6 - Canonical Systems Consolidation.
 
-RF4 should be kept narrow:
-
-1. Inventory every visible feature/module/nav item and classify it as hidden, scaffold, readiness, pilot beta, live, or deprecated.
-2. Verify daily-user navigation does not present fake-live feature shells.
-3. Move readiness/provider/setup surfaces to truthful admin/setup language where source already supports it.
-4. No broad UX redesign, provider calls, schema rewrites, or completion of later RF domain models.
-5. Evidence, tests, report, and package before lock.
-
-RF4 package is locked at
-`outputs/build_next_rf4_feature_completion_certification.zip`.
+RF6 should identify the canonical source of truth for duplicated operational
+tasks, inventory, owner updates, documents/signatures, billing, and integration
+readiness surfaces. It should produce explicit migrate, alias, read-only, hide,
+or defer decisions without broad schema rewrites or provider mutations.
 
 ## RF3 Locked Status
 
@@ -166,9 +163,33 @@ and should be included in RF5 planning:
   providers, and other relevant account types.
 - Re-test all enrollment paths in RF18 before broader launch.
 
-## RF5 Current Phase Recommendation
+## RF5 Locked Status
 
-Proceed to RF5 with RF0-F19 included in the first RF5 pass. RF5 should start
-with home/login signup entry points, enrollment path selection, critical signup
-data requirements, and admin/customer-success evidence. Do not complete RF7,
-RF9, RF10, RF12, or RF18 inside RF5.
+RF5 is Codex-reviewed and locked with RF0-F19 included in the first RF5 pass.
+RF5 adds home/login signup entry points, enrollment path selection, critical
+signup data inventory, and admin/customer-success evidence. It does not
+complete RF7, RF9, RF10, RF12, or RF18 inside this opening RF5 gate.
+
+RF5 generated report:
+`outputs/rf5_web_enrollment_account_health_report.md`.
+
+RF5 package:
+`outputs/build_next_rf5_web_enrollment_account_health.zip`.
+
+| Finding | RF5 Status | Evidence |
+| --- | --- | --- |
+| RF0-F18 | partially fixed for inventory evidence | Admin Portal account-health/customer-success route inventory is captured; deeper privacy-scrubbed analytics and intervention workflows remain future RF5 work. |
+| RF0-F19 | partially fixed for public enrollment entry path | `/enroll` is public; home/login Join actions route there; signup requires selected enrollment context; the main public grid is limited to individual horse owner, barn owner/manager, service provider, and trainer. |
+| RF0-F20 | partially fixed for RF5 posture | Rider/guardian/staff access is invite-first in public copy, with a limited-trial fallback recorded but not enforced server-side. |
+| RF0-F21 | recorded for RF7 | Leasee access is documented as owner/assigned-trainer invite-only with owner oversight preserved. |
+| RF5-REV-01 | fixed | Rider, guardian, and staff are not exposed as main public enrollment paths; the signup role is locked to the selected enrollment path. |
+| RF5-REV-02 | fixed | The limited-trial signup branch is separate from the standard paid-plan trial screen and does not present normal paid-plan trial copy. |
+
+RF5 founder decisions:
+
+- Accept the first public enrollment path order and labels.
+- Decide which critical signup fields become required by path.
+- Decide whether trainer and service-provider self-signup remains review-gated.
+- Accept rider/guardian/staff invite-first access plus limited-trial fallback.
+- Accept leasee invite authority and owner oversight requirements.
+- Accept admin account-health inventory as opening evidence only.

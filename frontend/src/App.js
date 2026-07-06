@@ -10,6 +10,7 @@ import AppShell from "./components/AppShell";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Signup from "./pages/Signup";
+import Enrollment from "./pages/Enrollment";
 import Forbidden from "./pages/Forbidden";
 import Horses from "./pages/Horses";
 import HorseProfile from "./pages/HorseProfile";
@@ -223,6 +224,7 @@ function App() {
           <Toaster position="top-right" theme="dark" />
           <Routes>
             <Route path="/" element={<Landing />} />
+            <Route path="/enroll" element={<Enrollment />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/signup/success" element={<Navigate to="/billing/success" replace />} />
             <Route path="/login" element={<Login />} />

@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, RF2, RF3, and RF4 CODEX-REVIEWED & LOCKED. RF5 is next.
+Status: RF0, RF1, RF2, RF3, RF4, and RF5 CODEX-REVIEWED & LOCKED. RF6 is next.
 
 ## Purpose
 
@@ -52,8 +52,7 @@ Acceleration is allowed only after RF1 and RF2 are safe. Do not build RF9/RF10 t
 
 ## Current Recommendation
 
-Proceed to RF5 - Admin Portal Intelligence, Customer Success, Web Enrollment,
-Billing Intervention, and Account Health.
+Proceed to RF6 - Canonical Systems Consolidation.
 
 RF1 locked these source-backed blocker fixes:
 
@@ -127,10 +126,18 @@ mapped into the current RF plan:
 
 - RF5 owns the web enrollment/signup foundation: home-page signup, login-page
   join/signup entry point, account creation credentials, critical signup data,
-  and a clear path selector.
+  and a clear four-path selector for individual horse owner, barn owner/manager,
+  service provider, and trainer.
+- Rider, guardian, and staff accounts are invite-first; RF5 may record a
+  limited seven-day modified individual-owner trial fallback when facility,
+  trainer, or provider contact information is supplied, but enforcement remains
+  future work.
+- Leasee access must be invite-only from the horse owner or assigned trainer,
+  while the owner keeps oversight access.
 - RF7 owns individual horse/owner enrollment depth, including owners whose barns
-  are not on EquineSync, owners keeping horses on their own land, and family or
-  informal care contexts.
+  are not on EquineSync, owners keeping horses on their own land, family or
+  informal care contexts, limited-trial semantics, and leasee invite/grant
+  behavior.
 - RF9 owns trainer-specific enrollment depth.
 - RF10 owns service-provider enrollment depth.
 - RF18 must re-test the enrollment paths before broader launch.
@@ -145,3 +152,25 @@ customer-success/account-health inventory. RF5 must not implement RF7 owner
 portal hardening, RF9 trainer operating-center depth, RF10 service-provider
 multi-barn grants, RF12 payment truth, or RF18 UAT closure inside the opening
 RF5 pass.
+
+## RF5 Lock Note
+
+RF5 is Codex-reviewed and locked. See
+`docs/RF5_WEB_ENROLLMENT_ACCOUNT_HEALTH.md` and
+`outputs/rf5_web_enrollment_account_health_report.md`.
+
+RF5 opening-gate status is `ready` with zero blocker rows. It adds a public
+`/enroll` path selector, routes home and login Join actions to enrollment before
+credential collection, locks signup role/context to the selected enrollment
+path, keeps rider/guardian/staff out of the main public path grid, records the
+limited-trial and leasee caveats, and inventories Admin Portal
+account-health/customer-success surfaces.
+
+RF5 does not lock founder decisions or complete RF7 individual owner depth, RF9
+trainer operating-center workflows, RF10 service-provider access grants, RF12
+billing intervention/payment truth, or RF18 UAT acceptance.
+
+RF6 may proceed as a canonical systems consolidation gate. RF6 should identify
+one source of truth, alias/read-only posture, hide decision, or explicit
+migration/defer decision for duplicated operational tasks, inventory, owner
+updates, documents/signatures, billing, and integration-readiness surfaces.

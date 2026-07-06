@@ -54,6 +54,24 @@ RF4 is Codex-reviewed and locked:
 - RF0-F19 records the founder-requested web enrollment workflow and maps it to
   RF5/RF7/RF9/RF10/RF18.
 
+RF5 is Codex-reviewed and locked as a narrow web enrollment/account-health
+opening gate:
+
+- Public `/enroll` path selector added before credential collection.
+- Home and login Join actions route no-account users to enrollment.
+- Signup requires role/context from the selected enrollment path.
+- Individual Horse Owner, Barn Owner / Manager, Service Provider, and Trainer
+  paths are declared with critical signup data and later phase ownership.
+- Rider, guardian, and staff accounts remain invite-first; RF5 records a
+  limited seven-day modified individual-owner trial fallback but does not
+  enforce access caps server-side. Signup keeps this path separate from the
+  standard paid-plan trial screen.
+- Leasee access is recorded as owner/assigned-trainer invite-only with owner
+  oversight preserved; RF7 owns implementation.
+- Admin Portal account-health/customer-success surfaces are inventoried.
+- RF5 does not complete RF7 owner depth, RF9 trainer workflows, RF10 provider
+  access grants, RF12 billing intervention, or RF18 UAT acceptance.
+
 
 ### Phase HorseOps-1H — Mobile Field Readiness ✅ (Jun 2026, ready for Codex review)
 Frontend-first mobile hardening for the locked Care Ledger surfaces. No backend
@@ -5539,3 +5557,61 @@ RF4 pre-lock founder note:
 - Required role paths include barn/facility owner, trainer, service provider,
   and other relevant account types.
 - Tracked as RF0-F19 and mapped to RF5/RF7/RF9/RF10/RF18.
+
+## RF5 - Web Enrollment and Account Health Opening Gate CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+RF5 was opened as a narrow web-enrollment/account-health gate after RF4 lock. It
+does not complete every RF5 domain and does not lock founder decisions.
+
+Created:
+- `frontend/src/lib/enrollmentPaths.js`
+- `frontend/src/pages/Enrollment.jsx`
+- `backend/core/rf5_web_enrollment_account_health.py`
+- `backend/scripts/build_rf5_web_enrollment_account_health.py`
+- `backend/tests/test_rf5_web_enrollment_account_health.py`
+- `BUILD_NEXT_RF5_WEB_ENROLLMENT_ACCOUNT_HEALTH_README.md`
+- `docs/RF5_WEB_ENROLLMENT_ACCOUNT_HEALTH.md`
+- `outputs/rf5_web_enrollment_account_health_report.md`
+- `outputs/build_next_rf5_web_enrollment_account_health.zip`
+
+RF5 source updates:
+- Public `/enroll` route added before credential collection.
+- Home page Join CTAs route to `/enroll`.
+- Login page includes a Join EquineSync action for users without accounts.
+- `/enroll` separates Individual Horse Owner, Barn Owner / Manager, Service
+  Provider, and Trainer paths.
+- Signup requires role/context from `enrollment` and `role` query params, locks
+  public role choice to the selected path, and shows a changeable enrollment
+  context panel.
+- Rider, guardian, and staff accounts are invite-first in public copy; RF5
+  records a limited seven-day individual-owner trial fallback when facility,
+  trainer, or provider contact information is supplied.
+- Leasee access is recorded as invite-only from the horse owner or assigned
+  trainer, while owner oversight remains intact.
+- Admin Portal account-health/customer-success route inventory is recorded.
+
+RF5 generated report snapshot:
+- Overall status: `ready`.
+- Blocker rows: 0.
+- Founder decisions remain open for path order/copy, required critical fields,
+  rider/guardian/staff limited-trial posture, leasee invite authority,
+  trainer/provider review-gating, and account-health inventory acceptance.
+
+RF5 lock verification:
+- Focused RF5 tests passed.
+- RF5 report generation passed with blocker failure enabled.
+- Frontend build passed.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check` and RF5 secret-shape scan passed.
+
+Deferred after RF5 package:
+- RF7: individual owner/horse enrollment depth.
+- RF7/RF18: limited modified-individual-owner trial enforcement for
+  rider/guardian/staff users without invites.
+- RF7: leasee invite/grant model with owner oversight preserved.
+- RF9: trainer operating-center and enrollment depth.
+- RF10: service-provider grant and enrollment depth.
+- RF12: billing intervention/payment truth.
+- RF18: end-to-end enrollment UAT acceptance.
+
+Next phase after RF5 lock: RF6 canonical systems consolidation.

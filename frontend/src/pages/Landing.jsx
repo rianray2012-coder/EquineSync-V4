@@ -9,36 +9,19 @@ import { api } from "../lib/api";
 const ROLE_CARDS = [
   {
     id: "horse_owner",
-    label: "Horse Owner",
-    blurb: "Track your horse's care, billing and progress in one calm place.",
+    label: "Individual Horse Owner",
+    blurb: "Track your horse's care, billing and progress outside an EquineSync barn workspace.",
     image:
       "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
     span: "md:col-span-3",
   },
   {
-    id: "rider",
-    label: "Rider",
-    blurb: "Log sessions, follow your training plan, and stay in sync with your trainer.",
-    image:
-      "https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
-    span: "md:col-span-3",
-  },
-  {
-    id: "trainer",
-    label: "Trainer",
-    blurb: "Manage clients, sessions, and progress notes — verified by the Equine Sync team.",
-    image:
-      "https://images.unsplash.com/photo-1594768816441-1dd241ffaa67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwdHJhaW5lcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
-    span: "md:col-span-2",
-    pending: true,
-  },
-  {
     id: "barn_owner",
-    label: "Barn / Facility",
-    blurb: "Run a full operation — stalls, staff, owners, billing — under one roof.",
+    label: "Barn Owner / Manager",
+    blurb: "Start a barn workspace for stalls, staff, owners, billing, and facility operations.",
     image:
       "https://images.unsplash.com/photo-1576692192914-9abed71b3ef9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3JzZSUyMGJhcm58ZW58MHx8fHwxNzgxMzQxNTQ5fDA&ixlib=rb-4.1.0&q=85",
-    span: "md:col-span-2",
+    span: "md:col-span-3",
     pending: true,
   },
   {
@@ -50,12 +33,21 @@ const ROLE_CARDS = [
     span: "md:col-span-2",
     pending: true,
   },
+  {
+    id: "trainer",
+    label: "Trainer",
+    blurb: "Manage clients, sessions, and progress notes — verified by the Equine Sync team.",
+    image:
+      "https://images.unsplash.com/photo-1594768816441-1dd241ffaa67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwdHJhaW5lcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
+    span: "md:col-span-2",
+    pending: true,
+  },
 ];
 
 const TRUST = [
   { Icon: ShieldCheck, label: "Verified equestrian network" },
   { Icon: Calendar, label: "Skip & complete your profile later" },
-  { Icon: Users, label: "5 role types, one connected platform" },
+  { Icon: Users, label: "4 public paths, invite-only barn roles" },
   { Icon: Sparkles, label: "Cancel anytime" },
 ];
 
@@ -194,9 +186,9 @@ export default function Landing() {
     });
   }, [livePlans]);
 
-  const goToSignup = (roleId) => {
-    const query = roleId ? `?role=${roleId}` : "";
-    navigate(`/signup${query}`);
+  const goToEnrollment = (roleId) => {
+    const query = roleId ? `?path=${roleId}` : "";
+    navigate(`/enroll${query}`);
   };
 
   return (
@@ -220,7 +212,7 @@ export default function Landing() {
             Sign in
           </Link>
           <button
-            onClick={() => goToSignup()}
+            onClick={() => goToEnrollment()}
             className="bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-5 py-2 text-[13px] tracking-wide font-medium rounded-full"
             data-testid="nav-join-cta"
           >
@@ -247,13 +239,12 @@ export default function Landing() {
               <span className="text-equine-saddle">In sync.</span>
             </h1>
             <p className="mt-8 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
-              Equine Sync connects riders, owners, trainers, barns and service providers in one
-              quietly powerful platform. Build your profile, find the right people, and choose
-              the tier that fits.
+              Equine Sync connects owners, barns, trainers, and service providers in one quietly
+              powerful platform. Rider, guardian, and staff accounts remain invitation-based.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <button
-                onClick={() => goToSignup()}
+                onClick={() => goToEnrollment()}
                 className="group bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-8 py-4 text-[14px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                 data-testid="hero-join-cta"
               >
@@ -291,14 +282,14 @@ export default function Landing() {
             Join as
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-light text-white">
-            Five roles. One quietly connected network.
+            Four public paths. Invitation-only barn roles.
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-6 gap-5 md:gap-6">
           {ROLE_CARDS.map((card) => (
             <button
               key={card.id}
-              onClick={() => goToSignup(card.id)}
+              onClick={() => goToEnrollment(card.id)}
               className={`group relative overflow-hidden text-left ${card.span} col-span-1 bg-equine-navy/60 hover:bg-equine-navy border border-white/5 hover:border-equine-saddle/40 transition-all duration-500 rounded-2xl min-h-[280px] flex flex-col justify-end p-6 md:p-7`}
               data-testid={`role-card-${card.id}`}
             >
@@ -477,7 +468,7 @@ export default function Landing() {
                     </a>
                   ) : (
                     <button
-                      onClick={() => goToSignup()}
+                      onClick={() => goToEnrollment()}
                       className={`mt-8 w-full ${
                         popular
                           ? "bg-equine-saddle text-equine-navyDeep hover:bg-white"
@@ -502,7 +493,7 @@ export default function Landing() {
           <div>© Equine Sync · Crafted for the equestrian world</div>
           <div className="flex gap-6">
             <Link to="/login" className="hover:text-white transition-colors" data-testid="footer-signin">Sign in</Link>
-            <button onClick={() => goToSignup()} className="hover:text-white transition-colors" data-testid="footer-join">Join</button>
+            <button onClick={() => goToEnrollment()} className="hover:text-white transition-colors" data-testid="footer-join">Join</button>
           </div>
         </div>
       </footer>

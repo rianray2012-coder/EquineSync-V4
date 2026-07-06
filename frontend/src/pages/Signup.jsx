@@ -7,6 +7,7 @@ import { Check, ArrowRight, ArrowLeft } from "lucide-react";
 import {
   sortPlans, formatCents, annualSavingsPct, isPlanCheckoutable,
 } from "../lib/subscriptionBilling";
+import { ENROLLMENT_CONTEXT_BY_ID, ENROLLMENT_PATH_BY_ROLE } from "../lib/enrollmentPaths";
 
 // Phase 15.C — these recommendations map the marketplace role pick (Step 0)
 // to a default tier from the pricing addendum. Invited owner-portal access is
@@ -23,7 +24,7 @@ const ROLE_OPTIONS = [
   { id: "horse_owner", label: "Horse Owner", blurb: "Track your horse's care, billing, progress.", recommendedTier: "individual_owner" },
   { id: "rider", label: "Rider", blurb: "Log sessions, follow your training plan.", recommendedTier: "free" },
   { id: "trainer", label: "Trainer", blurb: "Manage clients, sessions, and notes.", recommendedTier: "trainer_no_lesson", pending: true },
-  { id: "barn_owner", label: "Barn / Facility", blurb: "Run a full operation under one roof.", recommendedTier: "starter_barn", pending: true },
+  { id: "barn_owner", label: "Barn Owner / Manager", blurb: "Run a full operation under one roof.", recommendedTier: "starter_barn", pending: true },
   { id: "service_provider", label: "Service Provider", blurb: "Connect with barns that need your craft.", recommendedTier: "free", pending: true },
 ];
 
@@ -55,6 +56,13 @@ const ROLE_PROFILE_FIELDS = {
   ],
 };
 
+const LIMITED_TRIAL_PROFILE_FIELDS = [
+  { name: "horse_name", label: "Horse's name", placeholder: "Optional" },
+  { name: "facility_or_provider_name", label: "Boarding facility, trainer, or provider", placeholder: "Name" },
+  { name: "facility_or_provider_contact", label: "Facility, trainer, or provider contact", placeholder: "Email or phone" },
+  { name: "relationship_to_horse", label: "Your relationship to the horse", placeholder: "Rider, parent/guardian, staff, leasee…", textarea: true },
+];
+
 const STEPS = ["Account", "Profile", "Membership"];
 
 export default function Signup() {
@@ -63,9 +71,17 @@ export default function Signup() {
   const { setSession, refreshMe } = useAuth();
 
   const initialRole = params.get("role");
+  const initialEnrollment = params.get("enrollment");
+  const selectedEnrollment = ENROLLMENT_CONTEXT_BY_ID[initialEnrollment] || ENROLLMENT_PATH_BY_ROLE[initialRole];
   const initialIsRole = ROLE_OPTIONS.some((r) => r.id === initialRole);
-  const initialTier = initialIsRole
+  const initialEnrollmentRole = selectedEnrollment?.role;
+  const initialEnrollmentIsRole = ROLE_OPTIONS.some((r) => r.id === initialEnrollmentRole);
+  const initialTier = selectedEnrollment?.limitedAccess
+    ? "free"
+    : initialIsRole
     ? ROLE_TO_PLAN[initialRole] || "free"
+    : initialEnrollmentIsRole
+    ? ROLE_TO_PLAN[initialEnrollmentRole] || "free"
     : "";
 
   const [stepIdx, setStepIdx] = useState(0);
@@ -75,7 +91,7 @@ export default function Signup() {
     phone: "",
     password: "",
     location: "",
-    role: initialIsRole ? initialRole : "",
+    role: initialIsRole ? initialRole : initialEnrollmentIsRole ? initialEnrollmentRole : "",
   });
   const [profile, setProfile] = useState({});
   const [tier, setTier] = useState(initialTier);
@@ -88,7 +104,15 @@ export default function Signup() {
   const [submitting, setSubmitting] = useState(false);
 
   const role = ROLE_OPTIONS.find((r) => r.id === form.role);
+  const enrollmentContext = selectedEnrollment && selectedEnrollment.role === form.role ? selectedEnrollment : null;
+  const profileFields = enrollmentContext?.limitedAccess
+    ? LIMITED_TRIAL_PROFILE_FIELDS
+    : (ROLE_PROFILE_FIELDS[form.role] || []);
   const selectedPlanForTier = plans.find((p) => p.tier_code === tier);
+
+  useEffect(() => {
+    if (!selectedEnrollment) navigate("/enroll", { replace: true });
+  }, [selectedEnrollment, navigate]);
 
   // Lazy-load the plan catalog when Step 3 becomes reachable (after the
   // account is created and the session is set in submitAccount).
@@ -100,11 +124,6 @@ export default function Signup() {
 
   const updateForm = (k, v) => setForm((f) => ({ ...f, [k]: v }));
   const updateProfile = (k, v) => setProfile((p) => ({ ...p, [k]: v }));
-
-  const pickRole = (roleId) => {
-    setForm((f) => ({ ...f, role: roleId }));
-    if (!tier) setTier(ROLE_TO_PLAN[roleId] || "free");
-  };
 
   const canProceedStep0 = useMemo(() => {
     return (
@@ -131,6 +150,7 @@ export default function Signup() {
         // or /membership/checkout without colliding with a pre-committed tier.
         tier: "free",
         profile,
+        enrollment_path: enrollmentContext?.id || null,
       };
       const { data } = await api.post("/auth/signup", payload);
       if (data.pending_verification) {
@@ -289,6 +309,39 @@ export default function Signup() {
               <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Step 1 of 3</div>
               <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">Create your account</h2>
               <p className="text-white/60 text-[14px] mb-8">A few basics — you can finish your profile later.</p>
+              {enrollmentContext && (
+                <div
+                  className="mb-6 rounded-xl border border-equine-saddle/30 bg-equine-saddle/10 p-4"
+                  data-testid="signup-enrollment-context"
+                >
+                  <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-saddle mb-1">
+                    Enrollment path
+                  </div>
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="font-display text-xl text-white">{enrollmentContext.label}</div>
+                      <div className="mt-1 text-[12.5px] text-white/60 leading-relaxed">
+                        {enrollmentContext.summary}
+                      </div>
+                      {enrollmentContext.limitedAccess && (
+                        <div
+                          className="mt-2 text-[11px] tracking-[0.18em] uppercase text-equine-saddle"
+                          data-testid="signup-limited-trial-note"
+                        >
+                          Limited seven-day individual-owner trial
+                        </div>
+                      )}
+                    </div>
+                    <Link
+                      to="/enroll"
+                      className="text-[12px] text-equine-saddle hover:text-white whitespace-nowrap"
+                      data-testid="signup-change-enrollment"
+                    >
+                      Change
+                    </Link>
+                  </div>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Field label="Full name" required>
@@ -341,31 +394,31 @@ export default function Signup() {
               </div>
 
               <div className="mt-8">
-                <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">I am a…</div>
+                <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Selected path</div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" data-testid="signup-role-grid">
-                  {ROLE_OPTIONS.map((r) => (
-                    <button
-                      key={r.id}
-                      type="button"
-                      onClick={() => pickRole(r.id)}
-                      className={`text-left p-4 rounded-xl border transition-all ${
-                        form.role === r.id
-                          ? "border-equine-saddle bg-equine-saddle/10"
-                          : "border-white/10 bg-white/5 hover:border-white/30"
-                      }`}
-                      data-testid={`signup-role-${r.id}`}
+                  {role && (
+                    <div
+                      className="text-left p-4 rounded-xl border border-equine-saddle bg-equine-saddle/10"
+                      data-testid={`signup-role-${role.id}`}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <div className="font-display text-lg text-white">{r.label}</div>
-                        {r.pending && (
+                        <div className="font-display text-lg text-white">{role.label}</div>
+                        {role.pending && (
                           <span className="text-[9px] tracking-[0.2em] uppercase text-equine-saddle bg-equine-saddle/10 border border-equine-saddle/30 px-1.5 py-0.5 rounded-full whitespace-nowrap">
                             Review
                           </span>
                         )}
                       </div>
-                      <div className="text-[12px] text-white/55 mt-1 leading-relaxed">{r.blurb}</div>
-                    </button>
-                  ))}
+                      <div className="text-[12px] text-white/55 mt-1 leading-relaxed">{role.blurb}</div>
+                      <Link
+                        to="/enroll"
+                        className="mt-3 inline-flex text-[12px] text-equine-saddle hover:text-white"
+                        data-testid="signup-change-role-path"
+                      >
+                        Change enrollment path
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -408,7 +461,7 @@ export default function Signup() {
               </p>
 
               <div className="space-y-4">
-                {(ROLE_PROFILE_FIELDS[form.role] || []).map((f) => (
+                {profileFields.map((f) => (
                   <Field key={f.name} label={f.label} full>
                     {f.textarea ? (
                       <textarea
@@ -448,8 +501,48 @@ export default function Signup() {
             </div>
           )}
 
+          {/* Step 3 — limited trial confirmation */}
+          {stepIdx === 2 && enrollmentContext?.limitedAccess && (
+            <div data-testid="signup-step-limited-trial">
+              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Step 3 of 3</div>
+              <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">
+                Start with limited individual-owner access
+              </h2>
+              <p className="text-white/60 text-[14px] mb-8 leading-relaxed">
+                We&apos;ll use your facility, trainer, or provider contact details to verify the right
+                workspace connection. Invite-based rider, guardian, and staff access remains separate.
+              </p>
+
+              <div className="rounded-xl border border-equine-saddle/30 bg-equine-saddle/10 p-4">
+                <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-saddle mb-2">
+                  Limited trial posture
+                </div>
+                <div className="text-[13px] text-white/65 leading-relaxed">
+                  This starts as a modified individual-owner account, not a barn owner, manager,
+                  trainer, or service-provider workspace.
+                </div>
+              </div>
+
+              {err && <div className="mt-5 text-equine-clay text-[13px]" data-testid="signup-error">{err}</div>}
+
+              <div className="mt-8 flex items-center justify-between flex-wrap gap-4">
+                <button onClick={back} className="text-[13px] text-white/60 hover:text-white inline-flex items-center gap-2" data-testid="signup-step-back">
+                  <ArrowLeft className="w-4 h-4" /> Back
+                </button>
+                <button
+                  onClick={finalizeFreeRefreshed}
+                  disabled={submitting}
+                  className="bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                  data-testid="signup-finish-limited-trial"
+                >
+                  {submitting ? "Finishing…" : "Continue with limited access"} <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Step 3 — membership + Stripe (Phase 15.C) */}
-          {stepIdx === 2 && (
+          {stepIdx === 2 && !enrollmentContext?.limitedAccess && (
             <div data-testid="signup-step-membership">
               <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Step 3 of 3</div>
               <div className="flex items-end justify-between flex-wrap gap-4 mb-3">

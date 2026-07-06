@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
 import { api } from "../lib/api";
 import { resolvePostLoginPath } from "../lib/roleLanding";
@@ -149,8 +149,15 @@ export default function Login() {
           <div className="mt-10 pt-6 border-t border-equine-hairline">
             <div className="label-eyebrow mb-3">New to EquineSync?</div>
             <p className="text-[13px] text-equine-silver leading-relaxed">
-              Your barn owner or administrator will send you a secure invitation. Follow that link to create your password and join your barn workspace.
+              Choose the path that fits you, then create your username and password with the critical setup details for your account.
             </p>
+            <Link
+              to="/enroll"
+              className="mt-4 inline-flex items-center justify-center w-full bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-5 py-3 text-[13px] tracking-wide font-medium rounded-full"
+              data-testid="login-join-link"
+            >
+              Join EquineSync
+            </Link>
           </div>
         </div>
       </div>
