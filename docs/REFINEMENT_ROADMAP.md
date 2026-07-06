@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0 and RF1 CODEX-REVIEWED & LOCKED. RF2 is next.
+Status: RF0, RF1, and RF2 CODEX-REVIEWED & LOCKED. RF3 is next.
 
 ## Purpose
 
@@ -22,7 +22,7 @@ Current launch posture remains:
 | --- | --- | --- | --- |
 | RF0 | Refinement Intake, Evidence Freeze, and Scope Control | Inventory known findings and freeze scope before fixes. | Every known issue has a classification and RF phase; source evidence is recorded; next phase is recommended; founder/product owner approves ordering. |
 | RF1 | P0 Data Fences and Backend Capability Gates | Fix highest-risk tenant isolation, owner-safe data, backend authorization, and export scoping. | Owner cannot receive unrelated horses or invoices; cross-barn billing/export leakage is impossible; sensitive writes have backend gates; direct-route tests prove boundaries. |
-| RF2 | Identity-Based Access Migration | Replace name-based matching with stable IDs. | Owner, staff, document, provider, billing, and message access no longer depends on display names; temporary fallbacks are documented and marked for removal. |
+| RF2 | Identity-Based Access Migration | Replace highest-risk name-based access matching with stable IDs. | Staff self-service access no longer depends on display names; payroll supports stable staff filtering; document signature identity evidence is recorded; provider, message, and full workforce identity work is explicitly deferred to RF8/RF10/RF13/RF17. |
 | RF3 | Onboarding 2.0, Import Concierge, and Setup Integrations | Turn onboarding/import/setup into guided, review-first workflows. | Users can import draft data safely; required/optional setup is clear; integration readiness is truthful; AI suggestions require review. |
 | RF4 | Feature Completion Certification and Placeholder Elimination | Classify every visible feature as hidden, scaffold, readiness, pilot beta, live, or deprecated. | No daily user sees a fake-live feature; every nav item maps to a live/pilot or approved readiness surface; no placeholder/dev/test copy in user-facing production UI. |
 | RF5 | Admin Portal Intelligence, Customer Success, Billing Intervention, and Account Health | Expand platform admin into customer-success, billing health, support, account health, and product intelligence. | Platform admins can see user/facility health; support can find stuck users; billing actions are audited; sensitive content is scrubbed; barn admins remain separate. |
@@ -52,16 +52,19 @@ Acceleration is allowed only after RF1 and RF2 are safe. Do not build RF9/RF10 t
 
 ## Current Recommendation
 
-Proceed to RF2 - Identity-Based Access Migration.
+Proceed to RF3 - Onboarding 2.0, Import Concierge, and Setup Integrations.
 
-RF1 locked these source-backed blockers:
+RF1 locked these source-backed blocker fixes:
 
-- QuickBooks invoice export currently reads all invoices in `backend/routes/backlog.py`.
-- Backlog owner-portal billing/forms/health/training surfaces still use `full_name`, `owner_name`, `recipient_name`, or free-text sharing fields.
-- Some sensitive routes have frontend gates and broad capability groups, but RF1 must prove backend authority for each direct route.
+- QuickBooks invoice export reads invoices by `barn_id`.
+- Backlog owner-portal billing/forms/health/training predicates use stable owner/user/horse clauses.
+- Sensitive financial/reporting routes retain backend capability gates proven by RF1 source tests.
 
-RF2 should follow immediately because several remaining risks are caused by
-broader name-based access.
+RF2 locked as a narrow identity-access migration for staff
+self-service predicates, payroll export stable filtering, and document
+signature identity evidence. It intentionally defers full workforce backfill,
+provider grants, message-recipient identity, and feature-shell UI rewrites to
+RF8/RF10/RF13/RF17.
 
 ## Lock Note
 
@@ -74,4 +77,14 @@ RF1 is Codex-reviewed and locked as a narrow P0 data-fence and
 backend-capability gate. See `docs/RF1_DATA_FENCES_CAPABILITY_GATES.md` and
 `outputs/rf1_data_fences_capability_gates_report.md`.
 
-RF2 may proceed as the next dedicated phase.
+RF3 may proceed as the next dedicated phase.
+
+## RF2 Lock Note
+
+RF2 is Codex-reviewed and locked. See
+`docs/RF2_IDENTITY_BASED_ACCESS_MIGRATION.md` and
+`outputs/rf2_identity_access_migration_report.md`.
+
+RF2 must not be expanded into RF8 workforce implementation after lock. Strict
+stable-ID staff self-service matching is accepted for RF2, and legacy name-only
+staff rows remain RF8 migration/backfill work.

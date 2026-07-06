@@ -19,6 +19,20 @@ Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne
 - **Frontend**: React 19, React Router v7, Tailwind + custom equine palette, lucide-react icons
 - **Routes**: 23 routes under `/api/*`; auto-seed on startup if `users` collection empty
 
+## Refinement Track Status (Jul 2026)
+
+RF0, RF1, and RF2 are Codex-reviewed and locked. RF2 locked as a narrow
+identity-access migration:
+
+- Staff self-service reads/updates now use stable staff user-ID predicates for
+  shifts, tasks, handoffs, and time-clock entries.
+- Payroll export supports `staff_user_id` as the preferred stable filter while
+  retaining `staff_name` as a legacy admin report filter.
+- Document signature requests already use subject/guardian/countersigner user
+  IDs and remain evidence-only in RF2.
+- Full workforce backfill, provider grants, messaging recipient identity, and
+  feature-shell UI rewrites remain deferred to RF8/RF10/RF13/RF17.
+
 
 ### Phase HorseOps-1H — Mobile Field Readiness ✅ (Jun 2026, ready for Codex review)
 Frontend-first mobile hardening for the locked Care Ledger surfaces. No backend

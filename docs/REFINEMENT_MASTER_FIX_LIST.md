@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0 and RF1 CODEX-REVIEWED & LOCKED. RF2 is next.
+Status: RF0, RF1, and RF2 CODEX-REVIEWED & LOCKED. RF3 is next.
 
 ## Classification Key
 
@@ -19,18 +19,18 @@ Status: RF0 and RF1 CODEX-REVIEWED & LOCKED. RF2 is next.
 
 | ID | Finding | Classification | RF Phase | Evidence / Current State | Required Fix Direction |
 | --- | --- | --- | --- | --- | --- |
-| RF0-F01 | Owner Portal and owner-facing surfaces need a true owner-safe horse endpoint. | partially fixed | RF1, RF7 | Owner-safe horse ledger endpoints exist in `backend/routes/horse_ledger.py` using stable owner IDs and owner-safe projections. Backlog owner-portal modules still use name/free-text matching in `backend/routes/backlog.py`. | In RF1, verify or add canonical `GET /owner/horses` / `GET /owner-portal/horses`; move owner-portal modules to stable owner/guardian/rider relationships. |
-| RF0-F02 | Some backend writes still need explicit capability gates, not only barn stamping or frontend nav. | open P0 | RF1 | `backend/core/permissions.py` has fail-closed capabilities, but many direct routes still rely on broad route groups or module-local checks. | Create an RF1 route/capability matrix and add backend tests for sensitive writes. |
-| RF0-F03 | QuickBooks invoice export must be barn-scoped. | open P0 | RF1, RF12 | `backend/routes/backlog.py` scopes expenses by barn but reads invoices with `db.invoices.find({})` in QuickBooks export. | Scope invoice export by barn/account and add cross-barn export regression. |
-| RF0-F04 | Owner portal billing and related surfaces still rely on display/free-text fields. | open P0 | RF1, RF2, RF7, RF12 | Backlog owner portal uses `full_name`, `owner_name`, `recipient_name`, and `shared_with` regex in `backend/routes/backlog.py`. | Replace with stable IDs and temporary compatibility fields only where documented. |
+| RF0-F01 | Owner Portal and owner-facing surfaces need a true owner-safe horse endpoint. | partially fixed | RF1, RF7 | RF1 added owner-safe horse ledger endpoints and moved backlog owner-portal access predicates to stable owner/user/horse clauses. RF7 still owns portal UX hardening and canonical surface cleanup. | RF7 should finish owner/guardian/rider portal response contracts and retire duplicated feature-module owner-update surfaces. |
+| RF0-F02 | Some backend writes still need explicit capability gates, not only barn stamping or frontend nav. | partially fixed | RF1, RF4 | RF1 proof tests assert backend financial/reporting capability gates backed by `backend/core/permissions.py`. Full feature certification remains RF4. | RF4 should finish route-by-route feature certification and hide or gate non-certified surfaces. |
+| RF0-F03 | QuickBooks invoice export must be barn-scoped. | fixed | RF1, RF12 | RF1 scopes QuickBooks invoice export by `barn_id` in `backend/routes/backlog.py`. | RF12 should finish broader export/accounting truth beyond the RF1 leak fix. |
+| RF0-F04 | Owner portal billing and related surfaces still rely on display/free-text fields. | partially fixed | RF1, RF2, RF7, RF12 | RF1 moved owner-portal access predicates to stable owner/user/horse clauses. RF2 records that remaining display/form fields are not authorization predicates for its narrow scope. | RF7/RF12 should finish canonical portal UX and payment truth; RF17 should retire misleading feature-shell form fields. |
 | RF0-F05 | Owner updates exist in two worlds: real lifecycle backend and feature-module media tracker. | partially fixed | RF6, RF7, RF17 | Real lifecycle exists in `backend/routes/owner_updates.py`; feature-module media update routes still exist in `backend/routes/backlog.py`. | Make `owner_updates` canonical; migrate/hide feature-module owner media updates. |
 | RF0-F06 | Feature-module shells still appear as production-like modules. | open P1 | RF4, RF17 | Routes and pages exist for `MobileReadiness`, `AdvancedReports`, `GroupMessaging`, `AI Automation`, `Forms & Signatures`, `Staff Tasks`, `Supply Inventory`, and others. Some are readiness/manifest surfaces. | Create feature registry; hide, relabel, or move readiness surfaces out of daily nav. |
-| RF0-F07 | Staff scheduling, tasks, handoffs, and time clock are name-based. | open P1 | RF2, RF8 | Staff portal and forms use `staff_name`, `assigned_to`, `incoming_staff`, `outgoing_staff`, and `full_name` matching in `backend/routes/backlog.py` and frontend staff pages. | Migrate workforce records to `staff_user_id` / `account_membership_id`. |
+| RF0-F07 | Staff scheduling, tasks, handoffs, and time clock are name-based. | partially fixed | RF2, RF8 | RF2 packages stable user-ID predicates for staff My Work, task status, handoffs, time-clock ownership, and payroll `staff_user_id` filtering in `backend/routes/backlog.py`. Frontend staff forms and legacy rows still use/display name fields. | RF8 must migrate/backfill workforce records to `staff_user_id` / `account_membership_id` and replace name text fields with staff selectors. |
 | RF0-F08 | Staff Tasks and Task Engine are parallel task systems. | open P1 | RF6, RF8 | `backend/task_engine.py` is canonical for operational tasks, while `staff_task_assignments` and `/staff-tasks` exist in backlog surfaces. | Merge/demote Staff Tasks into Task Engine views or hide as readiness/admin-only. |
 | RF0-F09 | Inventory and Supply Inventory are duplicated. | open P1 | RF6 | `/inventory` and `/supply-inventory` are both routed; `frontend/src/pages/Inventory.jsx` and `frontend/src/pages/SupplyInventory.jsx` are separate surfaces. | Choose canonical inventory and migrate/fold supply inventory. |
 | RF0-F10 | Group Messaging tracks intent/status but does not necessarily deliver messages. | open P1 | RF13, RF17 | `frontend/src/pages/GroupMessaging.jsx` produces push preview/manifests and reads integration placeholders. | Build real delivery logs/recipient IDs or relabel/hide as readiness. |
 | RF0-F11 | Advanced Reports imply Excel/PDF while export behavior may be manifest-based. | open P1 | RF12, RF17 | `backend/routes/backlog.py` report export returns manifest/download formats, while UI/routes expose advanced reporting. | Either generate real Excel/PDF or label manifest truthfully. |
-| RF0-F12 | Owner payment flow can be configuration-ready rather than true payment collection. | open P0 | RF1, RF12 | Owner-portal payment prep in `backend/routes/backlog.py` returns provider readiness posture and owner lookup still includes name matching. | Scope by stable owner/invoice IDs and make Stripe collection state truthful. |
+| RF0-F12 | Owner payment flow can be configuration-ready rather than true payment collection. | partially fixed | RF1, RF12 | RF1 scopes owner payment prep by barn and stable account/invoice identity without horse-only authorization. Stripe collection truth remains RF12. | RF12 should make payment collection, refunds, voids, and Stripe state truthful. |
 | RF0-F13 | QR/stall-card flow may not be a true QR encoder. | open P2 | RF11, RF17 | Mobile readiness/stall-card flows exist in `frontend/src/pages/MobileReadiness.jsx` and backlog QR hooks. | Build true QR generation or label as stall-card/readiness manifest. |
 | RF0-F14 | Barn-location and arena-share defaults should use explicit publish state rather than role-inferred enabled state. | open P1 | RF1, RF11 | Arena/location surfaces include visibility fields and owner-access route groups; RF0 found no canonical publish-state model. | Add explicit publish/share state and backend enforcement. |
 | RF0-F15 | Trainer fluidity is not fully built. | open P1 | RF9 | Trainer intake exists and explicitly does not create lessons, rider enrollments, horse assignments, permissions, or billing. Trainer dashboard delegates to generic dashboard. | Build trainer operating center after RF1/RF2 foundations. |
@@ -73,18 +73,34 @@ stable IDs.
 
 ## Current Phase Recommendation
 
-Proceed to RF2 - Identity-Based Access Migration.
+Proceed to RF3 - Onboarding 2.0, Import Concierge, and Setup Integrations.
 
-RF1 should be kept narrow:
+RF3 should be kept narrow:
 
-1. Owner-safe horse endpoint and owner-portal data fence proof.
-2. QuickBooks invoice export barn/account scoping.
-3. Owner billing/payment scoping proof.
-4. Backend capability-gate matrix for sensitive writes.
-5. Direct route regression tests for owner/staff/provider/trainer access boundaries.
+1. Review-first import concierge for horses, owners, riders, staff, and service-provider seeds.
+2. Setup readiness truth for required versus optional configuration.
+3. No provider mutations or live integration setup.
+4. No AI auto-apply; suggestions must remain draft/review-first.
+5. Evidence, tests, report, and package before lock.
 
 ## Lock Note
 
 RF0 is Codex-reviewed and locked. The finding classifications remain evidence
 intake only. RF1 is Codex-reviewed and locked for P0 data fences and backend
 capability gates.
+
+## RF2 Locked Status
+
+RF2 has been reviewed, fixed, re-reviewed, and locked. The following RF0 finding
+is closed for RF2 backend self-service scope:
+
+| Finding | RF2 Status | Evidence |
+| --- | --- | --- |
+| RF0-F07 | fixed for RF2 backend self-service scope; still open for RF8 model completion | Staff My Work, staff task status, handoffs, and time-clock ownership now use stable user-ID predicates. Payroll export accepts `staff_user_id`. |
+
+RF2 accepted/deferred founder decisions:
+
+- Strict staff self-service matching for stable user-ID records only is accepted.
+- Admin payroll `staff_name` filter retirement is deferred to RF8/RF12.
+- Provider grants, message recipients, and full workforce backfill remain deferred
+  to RF8/RF10/RF13.

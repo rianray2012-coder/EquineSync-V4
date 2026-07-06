@@ -43,6 +43,7 @@ class ReportExportIn(CustomReportIn):
 class PayrollExportIn(BaseModel):
     start_date: Optional[str] = None
     end_date: Optional[str] = None
+    staff_user_id: Optional[str] = None
     staff_name: Optional[str] = None
 
 
@@ -1007,6 +1008,50 @@ def _owner_horse_context_clauses(owner_ids: List[str], horse_ids: List[str], use
         for field in ("horse_id", "data.horse_id"):
             clauses.append({field: {"$in": horse_ids}})
     return clauses
+
+
+def _staff_shift_clauses(user_id: Optional[str]) -> List[Dict[str, Any]]:
+    if not user_id:
+        return []
+    return [
+        {"staff_user_id": user_id},
+        {"data.staff_user_id": user_id},
+        {"data.staff_user_ids": user_id},
+    ]
+
+
+def _staff_task_clauses(user_id: Optional[str]) -> List[Dict[str, Any]]:
+    if not user_id:
+        return []
+    return [
+        {"assigned_user_id": user_id},
+        {"assigned_staff_user_id": user_id},
+        {"data.assigned_user_id": user_id},
+        {"data.assigned_to_user_id": user_id},
+        {"data.assigned_staff_user_id": user_id},
+        {"data.assigned_user_ids": user_id},
+        {"data.assigned_staff_user_ids": user_id},
+    ]
+
+
+def _staff_handoff_clauses(user_id: Optional[str]) -> List[Dict[str, Any]]:
+    if not user_id:
+        return []
+    return [
+        {"data.incoming_staff_user_id": user_id},
+        {"data.outgoing_staff_user_id": user_id},
+        {"data.incoming_staff_user_ids": user_id},
+        {"data.outgoing_staff_user_ids": user_id},
+    ]
+
+
+def _staff_time_clock_clauses(user_id: Optional[str]) -> List[Dict[str, Any]]:
+    if not user_id:
+        return []
+    return [
+        {"staff_user_id": user_id},
+        {"data.staff_user_id": user_id},
+    ]
 
 
 def _automation_draft(*, suggestion_type: str, subject: str, summary: str, confidence: float, generated_key: str) -> Dict[str, Any]:
@@ -2038,29 +2083,28 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         if user.get("role") not in STAFF_ROLES:
             raise HTTPException(403, "Permission denied")
         barn_id = user.get("barn_id") or DEFAULT_BARN_ID
-        full_name = user.get("full_name")
-        staff_match = _exact_name_query(full_name)
+        user_id = user.get("id")
         base_q = {"barn_id": barn_id, "archived_at": {"$exists": False}}
+        shift_clauses = _staff_shift_clauses(user_id)
+        task_clauses = _staff_task_clauses(user_id)
+        handoff_clauses = _staff_handoff_clauses(user_id)
+        time_clauses = _staff_time_clock_clauses(user_id)
+        if not any([shift_clauses, task_clauses, handoff_clauses, time_clauses]):
+            return {"shifts": [], "tasks": [], "handoffs": [], "time_entries": []}
         shifts = await db.staff_shifts.find(
-            {**base_q, "data.staff_name": staff_match},
+            {**base_q, "$or": shift_clauses},
             {"_id": 0},
         ).sort("data.shift_start", 1).to_list(50)
         tasks = await db.staff_task_assignments.find(
-            {**base_q, "data.assigned_to": staff_match},
+            {**base_q, "$or": task_clauses},
             {"_id": 0},
         ).sort("data.due_at", 1).to_list(100)
         handoffs = await db.shift_handoff_reports.find(
-            {
-                **base_q,
-                "$or": [
-                    {"data.incoming_staff": staff_match},
-                    {"data.outgoing_staff": staff_match},
-                ],
-            },
+            {**base_q, "$or": handoff_clauses},
             {"_id": 0},
         ).sort("updated_at", -1).to_list(25)
         time_entries = await db.time_clock_entries.find(
-            {**base_q, "data.staff_name": staff_match},
+            {**base_q, "$or": time_clauses},
             {"_id": 0},
         ).sort("data.clock_in", -1).to_list(25)
         return {
@@ -2078,21 +2122,24 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         if status not in {"open", "in_progress", "blocked", "complete"}:
             raise HTTPException(422, "Invalid task status")
         barn_id = user.get("barn_id") or DEFAULT_BARN_ID
-        full_name = user.get("full_name")
         q: Dict[str, Any] = {
             "id": record_id,
             "barn_id": barn_id,
             "archived_at": {"$exists": False},
         }
         if user.get("role") not in ("admin", "barn_manager"):
-            q["data.assigned_to"] = _exact_name_query(full_name)
+            staff_clauses = _staff_task_clauses(user.get("id"))
+            if not staff_clauses:
+                raise HTTPException(404, "Task not found")
+            q["$or"] = staff_clauses
         existing = await db.staff_task_assignments.find_one(q, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Task not found")
         data = {**(existing.get("data") or {}), "status": status}
         if status == "complete":
             data["completed_at"] = _now_iso()
-            data["completed_by"] = user.get("full_name")
+            data["completed_by_user_id"] = user.get("id")
+            data["completed_by_name"] = user.get("full_name")
         await db.staff_task_assignments.update_one(
             {"id": record_id},
             {"$set": {"data": data, "updated_at": _now_iso(), "updated_by": user["id"]}},
@@ -2115,10 +2162,13 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         if user.get("role") not in STAFF_ROLES:
             raise HTTPException(403, "Permission denied")
         barn_id = user.get("barn_id") or DEFAULT_BARN_ID
+        time_clauses = _staff_time_clock_clauses(user.get("id"))
+        if not time_clauses:
+            raise HTTPException(403, "Permission denied")
         existing = await db.time_clock_entries.find_one({
             "barn_id": barn_id,
             "archived_at": {"$exists": False},
-            "data.staff_name": _exact_name_query(user.get("full_name")),
+            "$or": time_clauses,
             "data.clock_out": {"$in": [None, ""]},
         }, {"_id": 0})
         if existing:
@@ -2127,6 +2177,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             user=user,
             new_id=new_id,
             data={
+                "staff_user_id": user.get("id"),
                 "staff_name": user.get("full_name"),
                 "clock_in": _now_iso(),
                 "clock_out": "",
@@ -2154,8 +2205,10 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "id": record_id,
             "barn_id": user.get("barn_id") or DEFAULT_BARN_ID,
             "archived_at": {"$exists": False},
-            "data.staff_name": _exact_name_query(user.get("full_name")),
+            "$or": _staff_time_clock_clauses(user.get("id")),
         }
+        if not q["$or"]:
+            raise HTTPException(403, "Permission denied")
         existing = await db.time_clock_entries.find_one(q, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Time entry not found")
@@ -2181,6 +2234,8 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         require_permission(user, "staff:read")
         barn_id = user.get("barn_id") or DEFAULT_BARN_ID
         q: Dict[str, Any] = {"barn_id": barn_id, "archived_at": {"$exists": False}}
+        if body.staff_user_id:
+            q["data.staff_user_id"] = body.staff_user_id
         if body.staff_name:
             q["data.staff_name"] = _exact_name_query(body.staff_name)
 
@@ -2214,6 +2269,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "filters": {
                 "start_date": body.start_date,
                 "end_date": body.end_date,
+                "staff_user_id": body.staff_user_id,
                 "staff_name": body.staff_name,
             },
             "columns": ["staff_name", "clock_in", "clock_out", "break_minutes", "hours", "notes", "entry_id"],
