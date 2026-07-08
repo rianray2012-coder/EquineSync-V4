@@ -30,13 +30,14 @@ The package is locked as account-readiness tooling only.
 | UAT-R6 | guardian / parent | `uat.guardian@equine-sync.com` | role=`parent` | BN12A existing row | ready to seed/confirm |
 | UAT-R7 | rider | `uat.participant@equine-sync.com` | role=`rider` | BN12A existing row | ready to seed/confirm |
 | UAT-R8 | standalone individual owner | `uat.individual-owner@equine-sync.com` | role=`horse_owner`, no barn_id | BN12A existing row | ready to seed/confirm |
+| UAT-R9 | service provider free | `uat.service-provider@equine-sync.com` | role=`service_provider`, membership_tier=`service_provider_free` | RF19 dedicated row | ready to create/reset |
 
 ## Script Behavior
 
 `backend/scripts/seed_bn13_role_smoke_accounts.py`:
 
 - reuses the BN12 UAT facility id `bn12_uat_facility`,
-- prepares 11 role-smoke rows,
+- prepares 12 role-smoke rows,
 - creates or updates only UAT-tagged role-smoke users,
 - upserts account membership mirrors,
 - sets `email_verified=true` and active account status,
@@ -80,6 +81,7 @@ Optional env-var password inputs:
 - `SEED_BN13_UAT_GUARDIAN_EQUINE_SYNC_COM_PASSWORD`
 - `SEED_BN13_UAT_PARTICIPANT_EQUINE_SYNC_COM_PASSWORD`
 - `SEED_BN13_UAT_INDIVIDUAL_OWNER_EQUINE_SYNC_COM_PASSWORD`
+- `SEED_BN13_UAT_SERVICE_PROVIDER_EQUINE_SYNC_COM_PASSWORD`
 
 No password value is included in this report.
 

@@ -1,0 +1,195 @@
+{
+  "captured_at": "2026-07-08T08:22:00Z",
+  "index_status": "partial_online_evidence_captured_uat_roster_login_blocked",
+  "redaction_confirmed": true,
+  "redaction_notes": "Online headless screenshots contain no entered credentials, tokens, API keys, payment secrets, private horse medical details, or owner-hidden staff notes. Sanitized credential checks store no passwords or session payloads.",
+  "artifacts": [
+    {
+      "artifact_id": "rf19_online_api_health_001",
+      "rf19_row": "official_staging_context",
+      "area": "Official staging/API reachability",
+      "capture_type": "sanitized_api_health_json",
+      "source_url": "https://equine-sync-api.onrender.com/api/health",
+      "storage_path": "outputs/rf19_artifacts/online_uat/api-health-2026-07-08T081300Z.json",
+      "redacted": true,
+      "result": "pass",
+      "notes": "Render API health returned status ok, production environment, database connected, email verification enforced, rate limiting enabled, and seed route disabled."
+    },
+    {
+      "artifact_id": "uat_enrollment_pricing_online_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "headless_chrome_screenshot",
+      "source_url": "https://app.equine-sync.com/#pricing",
+      "storage_path": "outputs/rf19_artifacts/online_uat/enrollment/pricing-online-full-viewport.png",
+      "redacted": true,
+      "result": "partial_pass",
+      "notes": "Online landing/pricing surface loaded from the production app alias. The tall capture shows the four public role paths and the membership/pricing area, including individual owner, private owner plus, service provider free, and service provider premium cards. It does not prove completed signup or paid checkout."
+    },
+    {
+      "artifact_id": "uat_enrollment_individual_owner_online_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "headless_chrome_screenshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=individual_horse_owner&role=horse_owner",
+      "storage_path": "outputs/rf19_artifacts/online_uat/enrollment/individual-owner-step1.png",
+      "redacted": true,
+      "result": "partial_pass",
+      "notes": "Official online Individual Horse Owner signup Step 1 rendered with the account/profile/membership stepper and owner enrollment context. Completion, profile step, membership activation, and role-session evidence remain pending."
+    },
+    {
+      "artifact_id": "uat_enrollment_private_owner_plus_online_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "headless_chrome_screenshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=individual_horse_owner&role=horse_owner&tier=private_owner_plus",
+      "storage_path": "outputs/rf19_artifacts/online_uat/enrollment/private-owner-plus-step1.png",
+      "redacted": true,
+      "result": "partial_pass",
+      "notes": "Official online Private Owner Plus entry preserves the tier parameter on the owner signup route. It does not yet prove membership selection, the one-additional-profile limit, or post-signup entitlements."
+    },
+    {
+      "artifact_id": "uat_enrollment_barn_owner_online_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "headless_chrome_screenshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=barn_facility_owner&role=barn_owner",
+      "storage_path": "outputs/rf19_artifacts/online_uat/enrollment/barn-owner-step1.png",
+      "redacted": true,
+      "result": "partial_pass",
+      "notes": "Official online Barn Owner / Manager signup Step 1 rendered with the barn/facility enrollment context. Completion, profile step, membership selection, and admin review outcome remain pending."
+    },
+    {
+      "artifact_id": "uat_enrollment_trainer_online_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "headless_chrome_screenshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=trainer&role=trainer",
+      "storage_path": "outputs/rf19_artifacts/online_uat/enrollment/trainer-step1.png",
+      "redacted": true,
+      "result": "partial_pass",
+      "notes": "Official online Trainer signup Step 1 rendered with the trainer enrollment context. Completion, profile step, membership selection, and trainer role review outcome remain pending."
+    },
+    {
+      "artifact_id": "uat_enrollment_service_provider_free_online_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "headless_chrome_screenshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=service_provider&role=service_provider&tier=service_provider_free",
+      "storage_path": "outputs/rf19_artifacts/online_uat/enrollment/service-provider-free-step1.png",
+      "redacted": true,
+      "result": "partial_pass",
+      "notes": "Official online Service Provider Free signup entry rendered and includes updated provider copy for basic horse info, calendar visibility, and appointment scheduling. Completion and credentialed provider dashboard evidence remain pending."
+    },
+    {
+      "artifact_id": "uat_enrollment_service_provider_premium_online_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "headless_chrome_screenshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=service_provider&role=service_provider&tier=service_provider_premium",
+      "storage_path": "outputs/rf19_artifacts/online_uat/enrollment/service-provider-premium-step1.png",
+      "redacted": true,
+      "result": "partial_pass",
+      "notes": "Official online Service Provider Premium signup entry rendered and preserves tier=service_provider_premium. Paid membership/Stripe flow was not exercised because live payment movement is out of RF19 scope."
+    },
+    {
+      "artifact_id": "uat_enrollment_limited_owner_trial_online_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "headless_chrome_screenshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=limited_individual_owner_trial&role=horse_owner&trial=limited",
+      "storage_path": "outputs/rf19_artifacts/online_uat/enrollment/limited-owner-trial-step1.png",
+      "redacted": true,
+      "result": "partial_pass",
+      "notes": "Official online Limited Individual Owner Trial signup entry rendered for rider, guardian, parent, or staff users without an invite. This supports the invite-boundary posture but does not prove invite acceptance or post-login boundaries."
+    },
+    {
+      "artifact_id": "rf19_online_uat_credential_check_001",
+      "rf19_row": "uat_owner_guardian;uat_staff_trainer;uat_provider;uat_billing;uat_documents_messaging;uat_field_native",
+      "area": "Credentialed role UAT",
+      "capture_type": "sanitized_api_login_check",
+      "source_url": "https://equine-sync-api.onrender.com/api/auth/login",
+      "storage_path": "outputs/rf19_artifacts/online_uat/credential-check-results.json",
+      "redacted": true,
+      "result": "blocked",
+      "notes": "The supplied online UAT roster did not authenticate. UAT-R1, UAT-R2a, UAT-R2b, BN13M-T1, and UAT-R3 returned invalid credentials; later slow retries confirmed invalid credentials for UAT-R8 and UAT-R9; remaining role checks hit API rate limiting after failed roster attempts. No passwords or tokens were stored."
+    },
+    {
+      "artifact_id": "uat_enrollment_private_owner_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "user_supplied_browser_appshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=individual_horse_owner&role=horse_owner",
+      "storage_path": "Google Chrome Appshot 2026-07-08T00-41-46.012Z.png",
+      "redacted": true,
+      "result": "superseded_by_online_headless_capture",
+      "notes": "Earlier user-supplied appshot retained for provenance; use uat_enrollment_individual_owner_online_step1_001 and uat_enrollment_private_owner_plus_online_step1_001 as the current online evidence."
+    },
+    {
+      "artifact_id": "uat_enrollment_barn_owner_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "user_supplied_browser_appshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=barn_facility_owner&role=barn_owner",
+      "storage_path": "Google Chrome Appshot 2026-07-08T00-42-45.531Z.png",
+      "redacted": true,
+      "result": "superseded_by_online_headless_capture",
+      "notes": "Earlier user-supplied appshot retained for provenance; use uat_enrollment_barn_owner_online_step1_001 as the current online evidence."
+    },
+    {
+      "artifact_id": "uat_enrollment_service_provider_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "user_supplied_browser_appshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=service_provider&role=service_provider",
+      "storage_path": "Google Chrome Appshot 2026-07-08T00-43-22.185Z.png",
+      "redacted": true,
+      "result": "superseded_by_online_headless_capture",
+      "notes": "Earlier user-supplied appshot retained for provenance; service-provider copy was later verified in the online free/premium captures."
+    },
+    {
+      "artifact_id": "uat_enrollment_trainer_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "user_supplied_browser_appshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=trainer&role=trainer",
+      "storage_path": "Google Chrome Appshot 2026-07-08T00-43-54.501Z.png",
+      "redacted": true,
+      "result": "superseded_by_online_headless_capture",
+      "notes": "Earlier user-supplied appshot retained for provenance; use uat_enrollment_trainer_online_step1_001 as the current online evidence."
+    },
+    {
+      "artifact_id": "uat_enrollment_limited_owner_trial_invite_boundary_step1_001",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "user_supplied_browser_appshot",
+      "source_url": "https://app.equine-sync.com/signup?enrollment=limited_individual_owner_trial&role=horse_owner&trial=limited",
+      "storage_path": "Google Chrome Appshot 2026-07-08T00-44-27.482Z.png",
+      "redacted": true,
+      "result": "superseded_by_online_headless_capture",
+      "notes": "Earlier user-supplied appshot retained for provenance; use uat_enrollment_limited_owner_trial_online_step1_001 as the current online evidence."
+    },
+    {
+      "artifact_id": "uat_enrollment_individual_owner_local_step1_002",
+      "rf19_row": "uat_enrollment",
+      "area": "Enrollment and signup",
+      "capture_type": "user_supplied_screenshot",
+      "source_url": "http://localhost:3000/signup?enrollment=individual_horse_owner&role=horse_owner",
+      "storage_path": "/Users/rianray/Desktop/Screenshot 2026-07-08 at 1.19.59 AM.png",
+      "redacted": true,
+      "result": "local_preflight_only",
+      "notes": "Localhost evidence retained for provenance only; it does not satisfy official online RF19 evidence by itself."
+    }
+  ],
+  "remaining_uat_enrollment_captures": [
+    "Completed or next-step account creation capture for at least one owner signup path using a verified test email.",
+    "Membership step capture showing Individual Owner, Private Owner Plus, Service Provider Free, and Service Provider Premium behavior without live payment movement.",
+    "Private Owner Plus entitlement capture proving one additional profile, not three staff seats."
+  ],
+  "remaining_credentialed_uat_captures": [
+    "Reset or seed official online UAT accounts and clear login throttling.",
+    "Capture owner, guardian, rider, staff, trainer, barn admin, platform admin, and service-provider role dashboards.",
+    "Capture relationship-scoped visibility and unrelated-user denial.",
+    "Capture staff/trainer/provider workflows, billing/export truth, documents/messaging, and field/native smoke evidence."
+  ]
+}

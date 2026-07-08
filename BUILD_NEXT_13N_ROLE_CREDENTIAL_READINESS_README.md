@@ -77,6 +77,7 @@ python -m scripts.seed_bn13_role_smoke_accounts --allow-prod --reset-passwords -
 - UAT-R6 guardian / parent
 - UAT-R7 rider
 - UAT-R8 standalone individual owner
+- UAT-R9 service provider free
 
 ## Verification
 

@@ -139,6 +139,17 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
         "barn_id": None,
         "description": "Standalone individual owner",
     },
+    {
+        "row": "UAT-R9",
+        "email": "uat.service-provider@equine-sync.com",
+        "full_name": "UAT Service Provider",
+        "role": "service_provider",
+        "platform_role": None,
+        "barn_id": UAT_BARN_ID,
+        "description": "Service provider free",
+        "membership_tier": "service_provider_free",
+        "subscription_status": "free",
+    },
 ]
 
 
@@ -286,6 +297,11 @@ async def _ensure_user(
             "uat_id": spec["row"],
             **_tag(),
         }
+        if spec.get("membership_tier"):
+            updates["membership_tier"] = spec.get("membership_tier")
+            updates["subscription_tier_code"] = spec.get("membership_tier")
+        if spec.get("subscription_status"):
+            updates["subscription_status"] = spec.get("subscription_status")
         updates["barn_id"] = spec.get("barn_id")
         updates["platform_role"] = spec.get("platform_role")
         if spec.get("platform_role"):
@@ -339,6 +355,11 @@ async def _ensure_user(
             "created_at": _now(),
             **_tag(),
         }
+        if spec.get("membership_tier"):
+            user_doc["membership_tier"] = spec.get("membership_tier")
+            user_doc["subscription_tier_code"] = spec.get("membership_tier")
+        if spec.get("subscription_status"):
+            user_doc["subscription_status"] = spec.get("subscription_status")
         if spec.get("platform_role"):
             user_doc["platform_role_updated_at"] = _now()
         if not dry_run:

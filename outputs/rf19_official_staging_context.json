@@ -1,0 +1,172 @@
+{
+  "captured_at": "2026-07-08T08:22:00Z",
+  "context_status": "official_online_context_partial_public_enrollment_captured_uat_roster_login_blocked",
+  "staging_url": "https://app.equine-sync.com",
+  "api_url": "https://equine-sync-api.onrender.com",
+  "deployment": {
+    "frontend_host": "Vercel",
+    "frontend_project": "equine-sync-v4",
+    "frontend_deployment_id": "dpl_21i6P3WH4gjbNH7cSzPa9z1KwPn4",
+    "frontend_ready_state": "READY",
+    "backend_host": "Render",
+    "backend_service": "equine-sync-api",
+    "backend_deploy_id": "dep-d96vo4l8nd3s73br035g",
+    "backend_health_artifact": "outputs/rf19_artifacts/online_uat/api-health-2026-07-08T081300Z.json",
+    "production_alias": "https://app.equine-sync.com",
+    "future_preview_deploy_command": "cd \"/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current\" && npx vercel@latest --yes"
+  },
+  "accounts": [
+    {
+      "uat_id": "UAT-R1",
+      "email": "uat.platform@equine-sync.com",
+      "role": "admin",
+      "platform_role": "platform_admin",
+      "label": "Platform admin",
+      "environment": "official_online_api",
+      "status": "login_failed_invalid_credentials"
+    },
+    {
+      "uat_id": "UAT-R2a",
+      "email": "uat.facility-admin@equine-sync.com",
+      "role": "admin",
+      "label": "Facility admin",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "login_failed_invalid_credentials"
+    },
+    {
+      "uat_id": "UAT-R2b",
+      "email": "uat.barn-owner@equine-sync.com",
+      "role": "barn_owner",
+      "label": "Barn owner",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "login_failed_invalid_credentials"
+    },
+    {
+      "uat_id": "UAT-R3",
+      "email": "uat.manager@equine-sync.com",
+      "role": "barn_manager",
+      "label": "Barn manager",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "login_failed_invalid_credentials"
+    },
+    {
+      "uat_id": "UAT-R4a",
+      "email": "uat.staff@equine-sync.com",
+      "role": "groom",
+      "label": "Staff / groom",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "not_verified_rate_limited_after_failed_roster_attempts"
+    },
+    {
+      "uat_id": "BN13M-W1",
+      "email": "uat.working-student@equine-sync.com",
+      "role": "working_student",
+      "label": "Working student",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "not_verified_rate_limited_after_failed_roster_attempts"
+    },
+    {
+      "uat_id": "BN13M-T1",
+      "email": "uat.trainer@equine-sync.com",
+      "role": "trainer",
+      "label": "Trainer",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "login_failed_invalid_credentials"
+    },
+    {
+      "uat_id": "UAT-R5",
+      "email": "uat.owner@equine-sync.com",
+      "role": "horse_owner",
+      "label": "Barn-linked horse owner",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "not_verified_rate_limited_after_failed_roster_attempts"
+    },
+    {
+      "uat_id": "UAT-R6",
+      "email": "uat.guardian@equine-sync.com",
+      "role": "parent",
+      "label": "Guardian / parent",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "not_verified_rate_limited_after_failed_roster_attempts"
+    },
+    {
+      "uat_id": "UAT-R7",
+      "email": "uat.participant@equine-sync.com",
+      "role": "rider",
+      "label": "Rider / lesson participant",
+      "environment": "official_online_api",
+      "barn_id": "bn12_uat_facility",
+      "status": "not_verified_rate_limited_after_failed_roster_attempts"
+    },
+    {
+      "uat_id": "UAT-R8",
+      "email": "uat.individual-owner@equine-sync.com",
+      "role": "horse_owner",
+      "label": "Standalone individual owner",
+      "environment": "official_online_api",
+      "status": "login_failed_invalid_credentials_confirmed_on_slow_retry"
+    },
+    {
+      "uat_id": "UAT-R9",
+      "email": "uat.service-provider@equine-sync.com",
+      "role": "service_provider",
+      "label": "Service provider free",
+      "provider_type": "not_exercised",
+      "subscription_tier_code": "service_provider_free",
+      "environment": "official_online_api",
+      "status": "login_failed_invalid_credentials_confirmed_on_slow_retry"
+    }
+  ],
+  "account_roster_status": "official online API and app are reachable, but the supplied UAT credentials did not authenticate; credentialed RF19 role evidence remains blocked pending UAT account reset/seed or corrected passwords",
+  "credential_check_artifact": "outputs/rf19_artifacts/online_uat/credential-check-results.json",
+  "role_mapping": {
+    "individual_owner": "Online public signup entry captured; credentialed standalone-owner login is blocked pending UAT roster reset or corrected password.",
+    "private_owner_plus": "Online public signup entry captured with tier=private_owner_plus; membership completion and additional-profile evidence remain blocked pending credentialed UAT.",
+    "barn_owner_manager": "Online public signup entry captured; credentialed barn/facility login is blocked pending UAT roster reset or corrected password.",
+    "trainer": "Online public signup entry captured; credentialed trainer login is blocked pending UAT roster reset or corrected password.",
+    "service_provider": "Online public signup entries captured for free and premium tier parameters; credentialed provider login is blocked pending UAT roster reset or corrected password.",
+    "guardian_or_rider": "Online limited individual-owner trial entry captured as invite-boundary evidence; credentialed guardian/rider login is blocked pending UAT roster reset or corrected password.",
+    "staff": "Staff remains invite-only; credentialed staff and working-student logins are blocked pending UAT roster reset or corrected password."
+  },
+  "redaction_rules": {
+    "must_redact": [
+      "passwords",
+      "magic login links",
+      "session tokens",
+      "API keys",
+      "JWT secrets",
+      "database URLs",
+      "Stripe secret keys",
+      "Stripe webhook secrets",
+      "checkout session URLs",
+      "client secrets",
+      "DocuSign private keys",
+      "provider tokens",
+      "real owner contact details",
+      "real horse medical details",
+      "private barn records",
+      "owner-hidden staff notes"
+    ],
+    "allowed_to_show": [
+      "staging URL",
+      "test account role labels",
+      "test barn names",
+      "test horse names",
+      "non-secret UI state",
+      "sanitized timestamps",
+      "sanitized success messages",
+      "sanitized validation or denial messages",
+      "sanitized invalid-credential or rate-limit status"
+    ],
+    "storage_rule": "Only sanitized screenshots, logs, and notes may be listed in outputs/rf19_staging_uat_artifact_index.json.",
+    "evidence_rule": "Screenshots and logs must prove the role boundary or workflow outcome without exposing credentials, tokens, payment secrets, provider secrets, real owner data, or owner-hidden private notes."
+  }
+}

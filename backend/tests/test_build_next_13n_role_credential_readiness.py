@@ -35,7 +35,7 @@ def test_bn13n_script_compiles_and_has_expected_roster():
     py_compile.compile(str(SCRIPT), doraise=True)
     module = _load_script_module()
     roster = module.BN13_ROLE_SMOKE_ROSTER
-    assert len(roster) == 11
+    assert len(roster) == 12
 
     expected = {
         "UAT-R1": ("uat.platform@equine-sync.com", "admin", "platform_admin"),
@@ -49,12 +49,15 @@ def test_bn13n_script_compiles_and_has_expected_roster():
         "UAT-R6": ("uat.guardian@equine-sync.com", "parent", None),
         "UAT-R7": ("uat.participant@equine-sync.com", "rider", None),
         "UAT-R8": ("uat.individual-owner@equine-sync.com", "horse_owner", None),
+        "UAT-R9": ("uat.service-provider@equine-sync.com", "service_provider", None),
     }
     by_row = {item["row"]: item for item in roster}
     for row, (email, role, platform_role) in expected.items():
         assert by_row[row]["email"] == email
         assert by_row[row]["role"] == role
         assert by_row[row]["platform_role"] == platform_role
+    assert by_row["UAT-R9"]["membership_tier"] == "service_provider_free"
+    assert by_row["UAT-R9"]["subscription_status"] == "free"
 
 
 def test_bn13n_script_uses_safe_production_and_dry_run_guards():
@@ -145,6 +148,7 @@ def test_bn13n_report_lists_every_env_var_without_values():
         "SEED_BN13_UAT_GUARDIAN_EQUINE_SYNC_COM_PASSWORD",
         "SEED_BN13_UAT_PARTICIPANT_EQUINE_SYNC_COM_PASSWORD",
         "SEED_BN13_UAT_INDIVIDUAL_OWNER_EQUINE_SYNC_COM_PASSWORD",
+        "SEED_BN13_UAT_SERVICE_PROVIDER_EQUINE_SYNC_COM_PASSWORD",
     ]:
         assert env_name in text
 

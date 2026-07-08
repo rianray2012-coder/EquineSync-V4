@@ -1,0 +1,24 @@
+{
+  "captured_at": "2026-07-08T08:13:00Z",
+  "source_url": "https://equine-sync-api.onrender.com/api/health",
+  "redacted": true,
+  "result": "pass",
+  "response": {
+    "status": "ok",
+    "service": "equinesync-api",
+    "version": "0.1.0",
+    "database": "connected",
+    "config": {
+      "jwt_configured": true,
+      "cors_configured": true,
+      "environment": "production"
+    },
+    "dependencies": {
+      "mailer_configured": true,
+      "email_verification_enforced": true,
+      "rate_limiting_enabled": true,
+      "auto_seed_enabled": false,
+      "seed_route_enabled": false
+    }
+  }
+}

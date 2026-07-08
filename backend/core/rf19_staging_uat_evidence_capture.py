@@ -79,7 +79,7 @@ UAT_ROWS: tuple[UatEvidenceRow, ...] = (
         "anonymous visitor, individual owner, barn owner/manager, trainer, service provider, invite-first rider/guardian/staff",
         "Official staging capture for four public signup paths and invite-first rider/guardian/staff boundaries.",
         "blocked_pending_official_staging_evidence",
-        "No official staging context or sanitized enrollment evidence artifact index is present.",
+        "Online public entry screenshots are captured and indexed, but completed signup, membership step, and credentialed role-session evidence remain pending.",
     ),
     UatEvidenceRow(
         "uat_owner_guardian",
@@ -87,7 +87,7 @@ UAT_ROWS: tuple[UatEvidenceRow, ...] = (
         "owner, guardian/parent, rider, unrelated user, staff preview",
         "Official staging capture for relationship-scoped owner-safe projections and unrelated-user denial.",
         "blocked_pending_official_staging_evidence",
-        "No official staging role roster or sanitized portal evidence artifact index is present.",
+        "Official online UAT owner/guardian/rider accounts did not authenticate or were not verified before rate limiting; role-scoped portal evidence remains pending.",
     ),
     UatEvidenceRow(
         "uat_staff_trainer",
@@ -95,7 +95,7 @@ UAT_ROWS: tuple[UatEvidenceRow, ...] = (
         "staff, trainer, barn manager/admin, unrelated staff",
         "Official staging capture for My Work/Today, trainer operating center, assigned-horse, unrelated-horse denial, and owner-visible summaries.",
         "blocked_pending_official_staging_evidence",
-        "No official staging staff/trainer account roster or sanitized workflow evidence artifact index is present.",
+        "Official online UAT staff/trainer/barn accounts did not authenticate or were not verified before rate limiting; workflow evidence remains pending.",
     ),
     UatEvidenceRow(
         "uat_provider",
@@ -103,7 +103,7 @@ UAT_ROWS: tuple[UatEvidenceRow, ...] = (
         "chosen provider type, barn manager/admin, horse owner, unrelated provider",
         "Official staging capture for grant, revocation, denied access, visit note, and unrelated-horse denial.",
         "blocked_pending_official_staging_evidence",
-        "No founder-selected first provider type or sanitized provider-grant evidence artifact index is present.",
+        "Service-provider free and premium public entries are captured, but the official provider UAT account did not authenticate; grant/revocation/visit-note evidence remains pending.",
     ),
     UatEvidenceRow(
         "uat_billing",
@@ -111,7 +111,7 @@ UAT_ROWS: tuple[UatEvidenceRow, ...] = (
         "owner, barn admin/manager, platform/admin role where applicable",
         "Official staging capture for owner billing, admin billing, export truth, and no checkout URL/client-secret/live-money exposure.",
         "blocked_pending_official_staging_evidence",
-        "No official staging billing evidence artifact index is present; live money movement remains out of scope.",
+        "Billing/export role evidence remains blocked until owner/admin UAT accounts authenticate; live money movement remains out of scope.",
     ),
     UatEvidenceRow(
         "uat_documents_messaging",
@@ -119,7 +119,7 @@ UAT_ROWS: tuple[UatEvidenceRow, ...] = (
         "owner, guardian/parent, barn admin/manager, staff, recipient user",
         "Official staging capture for guardian-required document requests, local acknowledgement, push-preview/local-log, and announcement visibility.",
         "blocked_pending_official_staging_evidence",
-        "No official staging documents/messaging evidence artifact index is present; live provider delivery remains out of scope.",
+        "Documents/messaging role evidence remains blocked until owner/guardian/admin/staff UAT accounts authenticate; live provider delivery remains out of scope.",
     ),
     UatEvidenceRow(
         "uat_field_native",
@@ -127,16 +127,16 @@ UAT_ROWS: tuple[UatEvidenceRow, ...] = (
         "field staff, trainer, native-shell smoke actor, owner where relevant",
         "Official staging capture for weak-signal task retry, draft recovery, and native shell smoke without store submission/full offline claims.",
         "blocked_pending_official_staging_evidence",
-        "No official staging weak-signal/native-shell evidence artifact index is present.",
+        "Field/native evidence remains blocked until staff/trainer UAT accounts authenticate and the weak-signal/native smoke can be run.",
     ),
 )
 
 
 FOUNDER_DECISION_ROWS: tuple[Dict[str, str], ...] = (
     {
-        "decision": "Provide or confirm the official staging URL and safe UAT account roster.",
+        "decision": "Reset/seed or correct the official online UAT account roster.",
         "status": "requires founder action",
-        "notes": "RF19 cannot pass UAT rows from localhost or source evidence alone.",
+        "notes": "The app/API are reachable and public enrollment evidence is captured, but the supplied UAT credentials did not authenticate online.",
     },
     {
         "decision": "Confirm evidence redaction and storage rules.",
