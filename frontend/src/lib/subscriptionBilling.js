@@ -8,6 +8,8 @@
 export const PLAN_ORDER = [
   "free",
   "individual_owner",
+  "service_provider_free",
+  "service_provider_premium",
   "private_owner_plus",
   "starter_barn",
   "advanced_barn",
@@ -21,6 +23,7 @@ export const PLAN_ORDER = [
 
 export const SUBSCRIBABLE_TIERS = new Set([
   "individual_owner",
+  "service_provider_premium",
   "private_owner_plus",
   "starter_barn",
   "advanced_barn",

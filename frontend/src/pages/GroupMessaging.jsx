@@ -7,7 +7,7 @@ import QuickAddSheet from "../components/QuickAddSheet";
 
 const STATUSES = ["draft", "queued", "sent"];
 const STATUS_TONE = { draft: "neutral", queued: "warning", sent: "success" };
-const DISPLAY_LABELS = { draft: "draft", queued: "queued", sent: "recorded sent" };
+const DISPLAY_LABELS = { draft: "draft", queued: "queued", sent: "logged locally" };
 const ADD_FIELDS = [
   { key: "subject", label: "Subject", required: true, placeholder: "Message subject", full: true },
   { key: "audience", label: "Audience", kind: "select", opts: ["all_staff", "owners", "trainers", "custom"] },
@@ -202,9 +202,9 @@ export default function GroupMessaging() {
                 <div className="hairline mt-4 pt-3 flex flex-wrap items-center gap-2">
                   {status !== "sent" ? (
                     <button type="button" onClick={() => setStatus(record, status === "draft" ? "queued" : "sent")} className="btn-secondary text-[12px] py-2 px-4 inline-flex items-center gap-1">
-                      <Send className="w-3.5 h-3.5" /> {status === "draft" ? "Queue" : "Record sent"}
+                      <Send className="w-3.5 h-3.5" /> {status === "draft" ? "Queue" : "Log locally"}
                     </button>
-                  ) : <span className="text-[12px] text-equine-inkSoft">Local sent record</span>}
+                  ) : <span className="text-[12px] text-equine-inkSoft">Local communication log</span>}
                   <button type="button" onClick={() => archiveRecord(record)} className="ml-auto text-[12px] text-equine-clay hover:text-equine-ink">
                     Archive
                   </button>

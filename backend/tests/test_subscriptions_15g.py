@@ -83,6 +83,8 @@ def test_plans_public_no_auth_required():
         "free",
         "individual_owner",
         "private_owner_plus",
+        "service_provider_free",
+        "service_provider_premium",
         "starter_barn",
         "advanced_barn",
         "elite_barn",
@@ -413,3 +415,74 @@ def test_landing_jsx_exposes_graceful_unavailable_state():
     assert "pricing-unavailable" in landing
     assert "pricing-loading" in landing
     assert "pricing-grid" in landing
+
+
+def test_landing_jsx_hides_legacy_pricing_options():
+    """The public homepage must not display retired Starter/Professional
+    options, but it must keep the new barn-size and trainer catalog tiers.
+    """
+    landing = (ROOT / "frontend" / "src" / "pages" / "Landing.jsx").read_text()
+    assert "HIDDEN_LANDING_PRICING_TIERS" in landing
+    assert '"starter"' in landing
+    assert '"professional"' in landing
+    hidden_section = landing.split("const HIDDEN_LANDING_PRICING_TIERS", 1)[1].split("]);", 1)[0]
+    assert '"starter_barn"' not in hidden_section
+    assert '"advanced_barn"' not in hidden_section
+    assert '"trainer_no_lesson"' not in hidden_section
+    assert '"trainer_lesson_15"' not in hidden_section
+    assert '"trainer_lesson_50"' not in hidden_section
+    assert "!HIDDEN_LANDING_PRICING_TIERS.has(plan.tier_code)" in landing
+
+
+def test_landing_jsx_private_owner_plus_uses_additional_profile_copy():
+    """Private Owner Plus must advertise one additional profile, not staff seats."""
+    landing = (ROOT / "frontend" / "src" / "pages" / "Landing.jsx").read_text()
+    assert 'plan.tier_code === "private_owner_plus"' in landing
+    assert "Includes everything in Individual Horse Owner" in landing
+    assert "one additional profile and private-owner tools" in landing
+    assert 'parts.push("1 additional profile")' in landing
+    assert "staff user" not in landing
+
+
+def test_landing_jsx_exposes_service_provider_pricing_and_cta_path():
+    """The homepage pricing band must include free and premium provider options."""
+    landing = (ROOT / "frontend" / "src" / "pages" / "Landing.jsx").read_text()
+    assert "service_provider_free" in landing
+    assert "service_provider_premium" in landing
+    assert "Basic horse info, calendar and appointment scheduling" in landing
+    assert "$15/month premium provider subscription" in landing
+    assert 'startsWith("service_provider")' in landing
+
+
+def test_landing_role_cards_do_not_show_verification_required_badges():
+    """Public role-photo cards should not scare visitors with unclear verification language."""
+    landing = (ROOT / "frontend" / "src" / "pages" / "Landing.jsx").read_text()
+    assert "Verification required" not in landing
+    assert "card.pending" not in landing
+
+
+def test_shared_logo_links_to_home():
+    """The shared brand mark should behave as a home link on every page using Logo."""
+    logo = (ROOT / "frontend" / "src" / "components" / "Logo.jsx").read_text()
+    assert 'import { Link } from "react-router-dom";' in logo
+    assert 'linkTo = "/"' in logo
+    assert 'to: linkTo' in logo
+    assert 'aria-label": "Equine Sync home"' in logo
+    assert 'data-testid={linkTo ? "logo-home-link" : "logo"}' in logo
+
+
+def test_landing_footer_uses_founder_equestrian_positioning():
+    """Footer copy should signal lived equestrian context without generic marketing filler."""
+    landing = (ROOT / "frontend" / "src" / "pages" / "Landing.jsx").read_text()
+    assert "Crafted for the equestrian world" not in landing
+    assert "Built by horse owners and equestrians" in landing
+    assert "people and facilities who care for horses" in landing
+
+
+def test_signup_jsx_defaults_service_provider_to_provider_free_plan():
+    """Service-provider signup must not borrow the invited-owner free tier."""
+    signup = (ROOT / "frontend" / "src" / "pages" / "Signup.jsx").read_text()
+    assert 'service_provider: "service_provider_free"' in signup
+    assert 'new Set(["free", "service_provider_free"])' in signup
+    assert 'plan_tier_code: tier' in signup
+    assert "Start Service Provider Free" in signup

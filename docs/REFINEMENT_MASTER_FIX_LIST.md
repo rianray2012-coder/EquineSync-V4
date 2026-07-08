@@ -2,7 +2,7 @@
 
 Date: 2026-07-06
 
-Status: RF0, RF1, RF2, RF3, RF4, RF5, RF6, RF7, RF8, RF9, and RF10 CODEX-REVIEWED & LOCKED. RF11 is ready for planning.
+Status: RF0, RF1, RF2, RF3, RF4, RF5, RF6, RF7, RF8, RF9, RF10, RF11, RF12, RF13, RF14, RF15, RF16, RF17, and RF18 CODEX-REVIEWED & LOCKED. RF19 is prepared for Codex review.
 
 ## Classification Key
 
@@ -23,16 +23,16 @@ Status: RF0, RF1, RF2, RF3, RF4, RF5, RF6, RF7, RF8, RF9, and RF10 CODEX-REVIEWE
 | RF0-F02 | Some backend writes still need explicit capability gates, not only barn stamping or frontend nav. | partially fixed | RF1, RF4 | RF1 proof tests assert backend financial/reporting capability gates backed by `backend/core/permissions.py`. Full feature certification remains RF4. | RF4 should finish route-by-route feature certification and hide or gate non-certified surfaces. |
 | RF0-F03 | QuickBooks invoice export must be barn-scoped. | fixed | RF1, RF12 | RF1 scopes QuickBooks invoice export by `barn_id` in `backend/routes/backlog.py`. | RF12 should finish broader export/accounting truth beyond the RF1 leak fix. |
 | RF0-F04 | Owner portal billing and related surfaces still rely on display/free-text fields. | partially fixed | RF1, RF2, RF7, RF12 | RF1 moved owner-portal access predicates to stable owner/user/horse clauses. RF2 records that remaining display/form fields are not authorization predicates for its narrow scope. | RF7/RF12 should finish canonical portal UX and payment truth; RF17 should retire misleading feature-shell form fields. |
-| RF0-F05 | Owner updates exist in two worlds: real lifecycle backend and feature-module media tracker. | deferred after RF7 | RF6, RF7, RF17 | RF6 declares `backend/routes/owner_updates.py` / `db.owner_updates` canonical. RF7 preserves that canonical decision and records `owner_media_updates` as a migration/hide candidate without removing data or routes. | RF17 should migrate, hide, or redirect feature-module owner media updates. |
-| RF0-F06 | Feature-module shells still appear as production-like modules. | partially fixed | RF4, RF17 | RF4 classifies all 32 feature-module keys and pins direct-route classifications for `MobileReadiness`, `AdvancedReports`, `GroupMessaging`, `AI Automation`, `Forms & Signatures`, `Staff Tasks`, `Supply Inventory`, and integration readiness surfaces. Daily role navigation is curated, but direct readiness/scaffold routes still need RF17 founder decisions. | Use the locked RF4 classifications to hide, relabel, redirect, or move readiness/scaffold surfaces out of daily nav in RF17. |
+| RF0-F05 | Owner updates exist in two worlds: real lifecycle backend and feature-module media tracker. | fixed for RF17 visible route truth | RF6, RF7, RF17 | RF6 declares `backend/routes/owner_updates.py` / `db.owner_updates` canonical. RF17 redirects `/owner-updates` to `/review-queue` and daily Manager/Trainer nav now uses Review Queue for Owner Requests. | Non-destructive historical media-record migration remains a future migration task only if founder/product requires it. |
+| RF0-F06 | Feature-module shells still appear as production-like modules. | fixed for RF17 daily nav/direct-route truth | RF4, RF17 | RF4 classified feature-module keys. RF17 removes known shell paths from daily role navigation and redirects Supply Inventory, Staff Tasks, owner media updates, Group Messaging, and Advanced Reports to canonical surfaces. | RF18 should browser-smoke seeded role navigation; future feature completion may reintroduce retired surfaces only with source-backed implementation. |
 | RF0-F07 | Staff scheduling, tasks, handoffs, and time clock are name-based. | partially fixed for RF8 new rows | RF2, RF8 | RF2 packages stable user-ID predicates for staff My Work, task status, handoffs, time-clock ownership, and payroll `staff_user_id` filtering. RF8 adds a same-barn staff directory, requires stable staff IDs on new covered staff-module creates, normalizes submitted staff IDs server-side, and updates staff module create flows to submit `staff_user_id`, `assigned_user_id`, `incoming_staff_user_id`, and `outgoing_staff_user_id`. Legacy name-only rows remain. | RF18/backfill should migrate historical rows after founder approves the strategy. |
-| RF0-F08 | Staff Tasks and Task Engine are parallel task systems. | deferred after RF8 | RF6, RF8, RF17 | RF6 declares Task Engine canonical for operational tasks. RF8 prevents new Staff Tasks ID drift but does not migrate or hide `staff_task_assignments`. | RF17 or a founder-approved RF8 follow-up should migrate, hide, or relabel Staff Tasks. |
-| RF0-F09 | Inventory and Supply Inventory are duplicated. | partially fixed | RF6, RF17 | RF6 declares `/inventory` / `db.inventory` canonical. `/supply-inventory` and `supply_inventory_items` remain noncanonical until alias/migration/hide work. | RF17 should alias, migrate, or hide Supply Inventory. |
-| RF0-F10 | Group Messaging tracks intent/status but does not necessarily deliver messages. | partially fixed | RF13, RF17 | RF4 relabels Group Messaging as push-preview/local-status readiness and records `sent` as local status, not external delivery. | RF13 must build real delivery logs/recipient IDs or RF17 must hide/demote the surface. |
-| RF0-F11 | Advanced Reports imply Excel/PDF while export behavior may be manifest-based. | partially fixed | RF12, RF17 | RF4 labels Excel/PDF actions as export manifests while `backend/routes/backlog.py` report export returns manifest/download formats. | RF12 must generate real Excel/PDF or RF17 must keep the manifest-only label/hide the surface. |
-| RF0-F12 | Owner payment flow can be configuration-ready rather than true payment collection. | partially fixed | RF1, RF12 | RF1 scopes owner payment prep by barn and stable account/invoice identity without horse-only authorization. Stripe collection truth remains RF12. | RF12 should make payment collection, refunds, voids, and Stripe state truthful. |
-| RF0-F13 | QR/stall-card flow may not be a true QR encoder. | partially fixed | RF11, RF17 | RF4 labels Mobile Readiness as limited field-recovery and stall-card identification; backend QR records remain deterministic text records with printable image generation deferred. | RF11/RF17 should build true QR generation or keep the stall-card/readiness label. |
-| RF0-F14 | Barn-location and arena-share defaults should use explicit publish state rather than role-inferred enabled state. | open P1 | RF1, RF11 | Arena/location surfaces include visibility fields and owner-access route groups; RF0 found no canonical publish-state model. | Add explicit publish/share state and backend enforcement. |
+| RF0-F08 | Staff Tasks and Task Engine are parallel task systems. | fixed for RF17 visible route truth | RF6, RF8, RF17 | RF6 declares Task Engine canonical for operational tasks. RF17 redirects `/staff-tasks` to `/today` and daily navigation does not point to Staff Tasks. | Historical `staff_task_assignments` migration remains deferred to a future non-destructive migration phase if needed. |
+| RF0-F09 | Inventory and Supply Inventory are duplicated. | fixed for RF17 visible route truth | RF6, RF17 | RF6 declares `/inventory` / `db.inventory` canonical. RF17 redirects `/supply-inventory` to `/inventory` and daily navigation does not point to Supply Inventory. | Historical `supply_inventory_items` migration remains deferred to a future non-destructive migration phase if needed. |
+| RF0-F10 | Group Messaging tracks intent/status but does not necessarily deliver messages. | fixed for RF17 visible route truth | RF13, RF17 | RF13 labels Group Messaging as local communication log / push-preview readiness. RF17 redirects `/group-messaging` to `/messaging` and daily navigation does not point to Group Messaging. | True provider delivery receipts remain deferred to a future provider-delivery phase. |
+| RF0-F11 | Advanced Reports imply Excel/PDF while export behavior may be manifest-based. | fixed for RF17 visible route truth | RF12, RF17 | RF12 records Advanced Reports as audited export manifest/download readiness. RF17 redirects `/advanced-reports` to `/reports`, keeps manifest wording, and removes Advanced Reports from Trainer navigation. | Real Excel/PDF binary generation remains deferred to a future export phase if required. |
+| RF0-F12 | Owner payment flow can be configuration-ready rather than true payment collection. | partially fixed for RF12 payment truth | RF1, RF12 | RF12 proves owner payment preparation is barn/account scoped, returns `configuration_ready`, and does not return checkout URLs, payment intents, or client secrets. Live payment collection, refunds, and voids remain deferred. | RF18 should UAT owner billing after founder accepts live billing/payment posture; live payment collection needs a later explicit implementation gate. |
+| RF0-F13 | QR/stall-card flow may not be a true QR encoder. | partially fixed for RF11 claim truth | RF11, RF17 | RF11 keeps the stall-card route truthful as local printable SVG readiness and tests that the response does not claim true QR encoding. | RF17 or a native-readiness follow-up should build and test true QR generation/scanning before stronger claims. |
+| RF0-F14 | Barn-location and arena-share defaults should use explicit publish state rather than role-inferred enabled state. | partially fixed for RF11 share projections | RF1, RF11 | RF11 adds explicit `share_state` metadata and owner-safe projections for existing barn-location and arena-share endpoints. Owner/parent reads still require enabled share settings; owner views hide internal location notes, pasture weather rules, arena owner names, arena notes, and staff/admin share metadata. Canonical property/location IDs and movement audits remain deferred. | RF18 should UAT enabled/disabled owner/parent/staff share states; a later model phase should add canonical location IDs and movement audit history. |
 | RF0-F15 | Trainer fluidity is not fully built. | partially fixed for RF9 operating center | RF9 | RF9 adds an ID-scoped trainer operating-center read model, stable trainer-owned lesson/training semantics, stable-ID Training Plan creates, and a trainer-specific dashboard. Trainer package billing, haul-ins, school horses, and broad multi-facility grants remain deferred. | RF18 should UAT seeded trainer scenarios; RF12 owns package/billing truth; broader multi-facility grants need future account/grant policy. |
 | RF0-F16 | Service provider multi-barn/client access is not fully built. | partially fixed for RF10 grant model | RF10 | RF10 adds active explicit horse-provider grants with same-barn stable `provider_user_id` assignment validation, provider-safe direct horse/care reads, provider-authored visit notes, safe grant projections, and a real service-provider dashboard. Canonical care writes, account-level cross-facility provider identity, provider invoices/payments, legal documents, messaging delivery, and external provider integrations remain deferred. | RF18 should UAT seeded provider grant, revocation, and denial scenarios; RF12/RF13/RF14 own payment, messaging, and document truth; future account-membership policy should prove stable cross-facility provider identity. |
 | RF0-F17 | Onboarding remains a major pain-point risk and should become guided import/setup. | partially fixed | RF3, RF5 | RF3 packages review-first CSV metadata and commit gating for horse/owner imports, explicit deferred import kinds, setup readiness truth, and integration readiness boundaries. First-value milestone analytics and richer import mapping remain RF5/RF18 follow-up work. | Review RF3, then decide whether richer row-level mapping UI is needed before first-client UAT. |
@@ -51,19 +51,21 @@ Status: RF0, RF1, RF2, RF3, RF4, RF5, RF6, RF7, RF8, RF9, and RF10 CODEX-REVIEWE
 | First onboarding import types. | requires founder decision | RF3 | Recommended first: horses, owners, riders, staff, service providers, feed/medication lists. |
 | Trainer workflow priority. | requires founder decision | RF9 | Lesson packages, horse training, haul-ins, school horses, and multi-facility context need ordering. |
 | Service-provider type priority. | requires founder decision | RF10 | Base model can support all types, but first UAT type should be selected. |
-| Native App Store / Google Play timing. | deferred / requires founder decision | RF16 | Current BN19-BN21 posture defers native store distribution. |
+| Native App Store / Google Play timing. | partially fixed / requires founder decision | RF16 | RF16 adds Capacitor iOS/Android shell source evidence with zero source blockers and verifies local Android debug / iOS simulator builds. Store submission remains out of scope. |
 | Offline workflows required for launch claims. | deferred / requires founder decision | RF15 | Current BN18D/BN21 posture permits limited recovery only. |
-| Feature shells to hide immediately. | requires founder decision | RF4, RF17 | RF0 recommends auditing daily nav first. |
+| Feature shells to hide immediately. | accepted by founder review for RF17 | RF4, RF17 | Founder approved the RF17 truth-first cleanup posture: daily nav shows real workflows; readiness/scaffold/proof surfaces may be hidden, redirected, or truth-labeled. |
 | Privacy boundaries for platform-admin insights. | requires founder decision | RF5 | Admin analytics must avoid sensitive free text and private content. |
 | Web enrollment path ordering and copy. | requires founder decision | RF5, RF7, RF9, RF10 | RF5 proposed this order: Individual Horse Owner, Barn Owner / Manager, Service Provider, Trainer. Founder should accept or adjust before lock. |
 | Rider/guardian/staff limited trial posture. | requires founder decision | RF5, RF7, RF18 | Accept invite-first access plus limited modified-individual-owner trial fallback, with server enforcement deferred beyond RF5. |
 | Leasee invite authority. | requires founder decision | RF7 | Accept that leasee invites can only be sent by the horse owner or assigned trainer, while owner oversight remains intact. |
-| Task Engine canonical ownership. | requires founder decision | RF6, RF8 | Accept Task Engine as canonical over Staff Tasks before RF8 migration/hide work. |
-| Inventory canonical ownership. | requires founder decision | RF6, RF17 | Accept `/inventory` / `db.inventory` as canonical over Supply Inventory before alias/migration/hide work. |
-| Owner Updates canonical ownership. | requires founder decision | RF6, RF7, RF17 | Accept `owner_updates` as canonical over feature-module owner media updates. |
+| Task Engine canonical ownership. | accepted by founder review for RF17 visible route truth | RF6, RF8, RF17 | Task Engine is canonical over Staff Tasks; RF17 redirects Staff Tasks to Today without deleting data. |
+| Inventory canonical ownership. | accepted by founder review for RF17 visible route truth | RF6, RF17 | `/inventory` / `db.inventory` is canonical over Supply Inventory; RF17 redirects Supply Inventory to Inventory without deleting data. |
+| Owner Updates canonical ownership. | accepted by founder review for RF17 visible route truth | RF6, RF7, RF17 | `owner_updates` / Review Queue is canonical over feature-module owner media updates; RF17 redirects Owner Updates to Review Queue without deleting data. |
 | Document signature canonical ownership. | requires founder decision | RF6, RF14 | Accept Document Signatures as canonical legal-signature workflow truth while Digital Forms remains local acknowledgement/readiness. |
 | Billing entitlement canonical ownership. | requires founder decision | RF6, RF12 | Accept account subscription rows as subscription entitlement truth, distinct from invoices/payment records/legacy membership. |
-| Integration readiness canonical boundary. | requires founder decision | RF6, RF10, RF12, RF13, RF14, RF16, RF17 | Accept integration readiness as manifest/status evidence only until provider-specific phases prove live sync. |
+| Integration readiness canonical boundary. | accepted by founder review for RF17 truth labels | RF6, RF10, RF12, RF13, RF14, RF16, RF17 | Integration readiness remains manifest/status evidence only until provider-specific phases prove live sync. |
+| Property/location privacy posture. | requires founder decision | RF11, RF18 | Accept private-by-default location/map posture until a barn admin or manager explicitly enables a share surface. |
+| Community-help audience and escalation model. | requires founder decision | RF11, RF13, RF18 | Decide internal barn-only, owner/rider-linked, service-provider-linked, or broader community behavior before implementation. |
 
 ## RF1 Locked Status
 
@@ -77,7 +79,7 @@ findings are closed for RF1 scope:
 | RF0-F03 | fixed for RF1 | QuickBooks invoice export reads invoices by `barn_id`. |
 | RF0-F04 | fixed for RF1 | Owner portal media/forms/health/emergency/training/billing predicates use stable owner/user/horse clauses. |
 | RF0-F12 | fixed for RF1 | Owner billing and payment-prep invoice lookups are barn-scoped and account-identity-scoped, without horse-only authorization. |
-| RF0-F14 | deferred | Canonical property/location/share publish state remains RF11. |
+| RF0-F14 | partially fixed for RF11 share projections | Explicit share-state projections are locked in RF11; canonical property/location IDs and movement audit remain future work. |
 
 Founder review item: RF1 intentionally hides legacy owner-facing records that
 only match by display/free-text name until RF2/RF7 migration links them to
@@ -85,7 +87,9 @@ stable IDs.
 
 ## Current Phase Recommendation
 
-Proceed with RF11 - Property, Location, Map, and Community Help System.
+Current gated phase is RF19 - Official Staging UAT Evidence Capture. RF19 is
+prepared for Codex review and currently blocks UAT closure until official
+staging context and sanitized evidence artifacts are supplied.
 
 RF6 identifies the canonical source of truth for duplicated operational tasks,
 inventory, owner updates, documents/signatures, billing, and integration
@@ -339,5 +343,266 @@ provider canonical care-write authority, prove account-level cross-facility
 provider identity, add native/offline behavior, or mark founder decisions
 accepted.
 
-Next phase: RF11 Property, Location, Map, and Community Help System. See
+Completed phase: RF11 Property, Location, Map, and Community Help System. See
 `docs/RF11_PROPERTY_LOCATION_MAP_COMMUNITY_HELP_PLAN.md`.
+
+## RF11 Locked Status
+
+RF11 is Codex-reviewed and locked. It hardens existing location/share evidence
+without implementing live maps, geocoding, public community networking,
+dispatch, native/offline behavior, true QR encoding, QR scanning, or founder
+acceptance.
+
+RF11 generated report:
+`outputs/rf11_property_location_map_community_help_report.md`.
+
+RF11 package:
+`outputs/build_next_rf11_property_location_map_community_help.zip`.
+
+| Finding / Domain | RF11 Status | Evidence |
+| --- | --- | --- |
+| RF0-F13 | partially fixed for RF11 claim truth | Stall-card response remains local printable SVG readiness and explicitly says a true QR encoder can replace the preview grid later. |
+| RF0-F14 | partially fixed for RF11 share projections | Location and arena shares include explicit `share_state`; owner/parent views require enabled shares and omit internal location notes, weather rules, owner names, arena notes, and staff/admin share metadata. |
+| Canonical property/location IDs | deferred | RF11 records the model gap; canonical property/location IDs and movement audit history remain future work. |
+| Live maps/geocoding/route navigation | deferred | RF11 makes no provider calls and keeps map claims out of launch posture. |
+| Community help/dispatch | deferred | RF11 records founder-decision rows and makes no public community or live dispatch claim. |
+
+RF11 does not mutate provider systems, implement native/offline behavior, or mark
+founder decisions accepted.
+
+Next phase: RF12 Billing, Payments, Exports, and Financial Truth. See
+`docs/RF12_BILLING_PAYMENTS_EXPORTS_FINANCIAL_TRUTH_PLAN.md`.
+
+## RF12 Locked Status
+
+RF12 is Codex-reviewed and locked. It fixes a barn-scoping leak in automation
+billing recommendations and records financial/export truth without implementing
+live money movement, provider payouts, trainer package billing, native
+app-store billing, or founder acceptance.
+
+RF12 generated report:
+`outputs/rf12_billing_payments_exports_financial_truth_report.md`.
+
+RF12 package:
+`outputs/build_next_rf12_billing_payments_exports_financial_truth.zip`.
+
+| Finding / Domain | RF12 Status | Evidence |
+| --- | --- | --- |
+| RF0-F03 | preserved / expanded | QuickBooks export remains barn-scoped and manifest-only; RF12 adds focused test coverage for cross-barn invoice/expense exclusion. |
+| RF0-F11 | partially fixed for export truth | Advanced Reports remain manifest/download readiness, not native Excel/PDF binary generation. |
+| RF0-F12 | partially fixed for payment truth | Owner payment preparation is barn/account scoped, configuration-only, and does not return live checkout/payment secrets. |
+| Automation billing recommendation | fixed | Overdue invoice count now includes `barn_id`; focused test plants overdue invoices in two barns and expects only current-barn count. |
+| Provider payouts / trainer packages | deferred | Founder decisions are required before live provider or trainer package billing is implemented. |
+| App-store billing | deferred | Web Stripe billing remains separate from future Apple/Google IAP implementation. |
+
+RF12 does not mutate Stripe, Apple, Google, QuickBooks, provider systems,
+MongoDB Atlas, Vercel, Render, UAT accounts, or founder acceptance state.
+
+Next phase: RF13 Messaging, Notifications, and Delivery Truth. See
+`docs/RF13_MESSAGING_NOTIFICATIONS_DELIVERY_TRUTH_PLAN.md`.
+
+## RF13 Locked Status
+
+RF13 is Codex-reviewed and locked. It hardens messaging/notification delivery
+truth without implementing live push, SMS, broad email, provider messaging,
+public community messaging, or founder acceptance.
+
+RF13 generated report:
+`outputs/rf13_messaging_notifications_delivery_truth_report.md`.
+
+RF13 package:
+`outputs/build_next_rf13_messaging_notifications_delivery_truth.zip`.
+
+| Finding / Domain | RF13 Status | Evidence |
+| --- | --- | --- |
+| RF0-F10 | partially fixed for delivery truth | Group Messaging custom recipients normalize to `recipient_user_ids`; UI says local communication log; push manifests remain preview-only. |
+| Owner/guardian announcements | fixed for RF13 projection scope | Horse owners receive owner-audience and targeted rows; guardians/parents receive only explicitly targeted rows. |
+| Task Engine notifications | fixed for RF13 candidate scope | Notification recipients are scoped to event `barn_id`/`tenant_id` for staff, horses, and owner users. |
+| Provider/trainer messaging | deferred | Founder decisions are required before broad trainer/provider direct messaging claims. |
+| Community-help messaging | deferred | RF11/RF13 keep public/community escalation model as founder-decision work. |
+| Live provider delivery | deferred | APNs/FCM/SMS/email/provider delivery, device tokens, and receipts remain future provider work. |
+
+RF13 does not call APNs, FCM, Twilio, Resend, SendGrid, Mailgun, Google,
+Apple, Stripe, QuickBooks, DocuSign, MongoDB Atlas, Vercel, Render, UAT
+systems, provider messaging systems, or founder acceptance state.
+
+## RF14 Locked Status
+
+RF14 is Codex-reviewed and locked. It consolidates document/signature/storage
+truth without implementing live legal-signature delivery, production storage,
+provider document access, or founder acceptance.
+
+RF14 generated report:
+`outputs/rf14_documents_signatures_storage_consolidation_report.md`.
+
+RF14 package:
+`outputs/build_next_rf14_documents_signatures_storage_consolidation.zip`.
+
+| Finding / Domain | RF14 Status | Evidence |
+| --- | --- | --- |
+| Document signature canonical ownership | fixed for RF14 truth boundary | Document Signatures remains the legal-signature readiness path; Digital Forms are labeled local acknowledgement or provider-readiness only. |
+| Guardian/minor signer enforcement | fixed for RF14 request creation | Guardian-required document requests reject missing `guardian_user_ids` before creating local request rows. |
+| Provider references and signer IDs | fixed for default projection | Document request projections continue to hide signer ID lists and provider envelope/signature/certificate references by default. |
+| Owner form acknowledgement | fixed for RF14 local truth | Owner portal form acknowledgement remains owner-scoped and records `signed_claim=local_acknowledgement_not_legal_signature`. |
+| Document scan storage | fixed for upload-intent truth | Scan upload preparation returns `storage_claim=upload_intent_only_no_external_file_mutation_by_rf14`. |
+| Provider/trainer document scope | deferred | Founder decisions are required before broad provider/trainer document visibility or signer grants. |
+| Live DocuSign and signed-document storage | deferred | Envelope sending, signing URLs, signed-document archival, production storage, retention, and deletion workflows remain future provider/legal/storage work. |
+
+RF14 does not call DocuSign, Stripe, Apple, Google, Resend, MongoDB Atlas,
+Vercel, Render, S3, Google Drive, UAT systems, external storage/signature
+providers, or founder acceptance state.
+
+Next phase: RF15 Offline, Lock-Screen, and Field Reliability Implementation.
+
+## RF15 Locked Status
+
+RF15 is Codex-reviewed and locked. It creates a workflow capability registry
+and preserves the online-first / limited-field-recovery posture without
+implementing full offline app support.
+
+RF15 generated report:
+`outputs/rf15_offline_lock_screen_field_reliability_report.md`.
+
+RF15 package:
+`outputs/build_next_rf15_offline_lock_screen_field_reliability.zip`.
+
+| Finding / Domain | RF15 Status | Evidence |
+| --- | --- | --- |
+| Offline workflows required for launch claims | fixed for explicit capability registry | Every RF15 field-critical workflow is classified as `online_only`, `draft_only`, `queued_write`, or `provider_online_only`. |
+| Task complete/skip/bulk complete | fixed for narrow queued-write truth | Existing `taskSync` queue and backend `client_completion_id` idempotency remain the only queued-write claim. |
+| QuickAdd and HorseOps forms | fixed for draft-only truth | QuickAdd sessionStorage and HorseOps per-user/per-horse/per-form draft keys remain draft preservation only. |
+| Medical, incident, owner request, provider visit, admin, billing, legal provider workflows | fixed for online/provider boundary | RF15 classifies these as online-only or provider-online; no queue/cache claim is made. |
+| Service-worker app shell, IndexedDB universal outbox, broad conflict-review UI | fixed for overclaim guard | RF15 proof confirms these broad offline features are absent. |
+| Future cached reads and broader offline support | deferred | Founder decisions are required before cached-read, broad queue, or conflict-review work. |
+
+RF15 does not implement service-worker/PWA offline app shell, native app
+behavior, IndexedDB universal outbox, universal cached reads, universal queued
+writes, broad conflict-review UI, provider offline support, UAT mutation,
+provider calls, or founder acceptance auto-marking.
+
+## RF16 Locked Status
+
+RF16 is Codex-reviewed and locked. It creates Capacitor native shell source
+evidence for iOS and Android and verifies local Android debug / iOS simulator
+builds without submitting to stores or claiming native launch readiness.
+
+RF16 generated report:
+`outputs/rf16_pwa_native_app_store_readiness_report.md`.
+
+RF16 package:
+`outputs/build_next_rf16_pwa_native_app_store_readiness.zip`.
+
+| Finding / Domain | RF16 Status | Evidence |
+| --- | --- | --- |
+| Native App Store / Google Play timing | partially fixed for source shell evidence | Capacitor config, package dependencies, iOS project shell, Android project shell, and app identity defaults exist. |
+| iOS local build readiness | fixed for simulator build evidence | Xcode simulator build for scheme `App` succeeds and produces local `App.app` output. |
+| Android local build readiness | fixed for debug build evidence | `./gradlew assembleDebug` succeeds and produces `app-debug.apk`. |
+| Store submission and review accounts | deferred | RF16 adds no App Store Connect or Google Play submission automation and creates no review accounts. |
+| Native billing compliance | deferred | RF16 adds no Apple/Google in-app purchase implementation. |
+| Broad native/offline support | not implemented | RF16 keeps RF15's limited-field-recovery posture and adds no broad native/background/offline system. |
+
+RF16 does not submit to App Store Connect or Google Play Console, create store
+listings or review accounts, implement native billing, complete privacy labels
+or Google Data safety answers, call providers, mutate UAT accounts, broaden
+RF15 offline claims, or auto-mark founder acceptance.
+
+RF17 is Codex-reviewed and locked.
+
+## RF17 Locked Status
+
+RF17 applies the founder-approved truth-first cleanup posture. It redirects
+duplicate feature-shell direct routes and removes the known shell paths from
+daily role navigation without deleting data or performing migrations.
+
+RF17 generated report:
+`outputs/rf17_feature_shell_ux_truth_report.md`.
+
+RF17 package:
+`outputs/build_next_rf17_feature_shell_ux_truth.zip`.
+
+| Finding / Domain | RF17 Status | Evidence |
+| --- | --- | --- |
+| Supply Inventory duplicate | fixed for visible route truth | `/supply-inventory` redirects to `/inventory`; daily nav contains no Supply Inventory path. |
+| Staff Tasks duplicate | fixed for visible route truth | `/staff-tasks` redirects to `/today`; daily nav contains no Staff Tasks path. |
+| Owner media updates duplicate | fixed for visible route truth | `/owner-updates` redirects to `/review-queue`; Manager/Trainer Owner Requests nav uses Review Queue. |
+| Group Messaging delivery overclaim risk | fixed for visible route truth | `/group-messaging` redirects to `/messaging`; Group Messaging remains local-log/readiness in source labels. |
+| Advanced Reports export overclaim risk | fixed for visible route truth | `/advanced-reports` redirects to `/reports`; Advanced Reports remains manifest/readiness in source labels. |
+| Mobile/integration readiness | truth-labeled and out of daily nav | Mobile Readiness and Integrations remain readiness evidence and are not daily role nav items. |
+
+RF17 does not delete feature-module data, perform data migrations, call
+providers, submit stores, implement native billing, implement true provider
+sync/delivery, broaden RF15/RF16 offline/native claims, mutate UAT accounts, or
+auto-mark founder acceptance.
+
+Next gated phase: RF18 QA, UAT, Migration, and Public Launch Re-Readiness.
+RF18 is not started by RF17 lock.
+
+## RF18 Locked Status
+
+RF18 is Codex-reviewed and locked as an evidence-only QA/UAT/public-launch
+re-readiness gate.
+
+RF18 generated report:
+`outputs/rf18_qa_uat_public_launch_readiness_report.md`.
+
+RF18 package:
+`outputs/build_next_rf18_qa_uat_public_launch_readiness.zip`.
+
+| Finding / Domain | RF18 Status | Evidence |
+| --- | --- | --- |
+| Locked RF1-RF17 evidence | ready for founder/UAT review | RF18 verifies every locked RF doc, report, and package exists and each report is ready. |
+| Public launch | no-go | RF18 report records `public_launch_status=no_go_until_uat_acceptance`. |
+| Enrollment and signup | requires staging UAT | RF5/RF9/RF10 source evidence is ready; official browser UAT remains open. |
+| Owner/guardian/rider visibility | requires staging UAT | RF1/RF7 source evidence is ready; seeded role UAT remains open. |
+| Staff/trainer/provider workflows | requires staging UAT | RF8/RF9/RF10 source evidence is ready; workflow and grant UAT remains open. |
+| Billing/documents/messaging/native boundaries | requires staging UAT | RF12/RF13/RF14/RF15/RF16 source evidence is ready; live provider/store/full-offline claims remain blocked. |
+| Migration/backfill work | classify only | RF18 records historical staff, inventory, owner-media, leasee, and limited-trial migration areas without mutating data. |
+
+RF18 does not mutate production, staging, seeded-demo, or UAT accounts; call
+providers; submit stores; collect live payments; run destructive migrations;
+approve public launch; or auto-mark founder acceptance.
+
+Next gated phase: RF19 Official Staging UAT Evidence Capture.
+
+## RF19 Planned Status
+
+RF19 should execute and package the seven RF18 UAT rows in the approved staging
+environment without expanding product behavior.
+
+| Area | RF19 Plan |
+| --- | --- |
+| Enrollment and signup | Capture official staging evidence for individual owner, barn owner/manager, trainer, service provider, and invite-first rider/guardian/staff flows. |
+| Owner/guardian/rider visibility | Capture seeded role evidence for owner-safe projections and unrelated-user denial. |
+| Staff/trainer workflows | Capture My Work/Today, trainer operating center, assigned-horse, unrelated-horse denial, and owner-visible summary evidence. |
+| Service-provider grants | Capture grant, revocation, denied access, visit note, and unrelated-horse denial evidence for the chosen provider type. |
+| Billing/payment/export truth | Capture billing/export evidence while proving no checkout URL, client secret, or live money movement is exposed. |
+| Documents/signatures/messaging | Capture guardian-required document, local acknowledgement, push-preview/local-log, and announcement visibility evidence without live provider delivery. |
+| Field reliability/native shell | Capture weak-signal task retry/draft recovery and native shell smoke evidence without store submission or full offline claims. |
+
+RF19 must not mutate production data, call external providers, submit stores,
+collect live payments, run destructive migrations, approve public launch, or
+mark founder acceptance.
+
+## RF19 Prepared Status
+
+RF19 is prepared for Codex review as an official staging UAT evidence-capture
+gate.
+
+RF19 generated report:
+`outputs/rf19_staging_uat_evidence_capture_report.md`.
+
+RF19 package:
+`outputs/build_next_rf19_staging_uat_evidence_capture.zip`.
+
+| Finding / Domain | RF19 Status | Evidence |
+| --- | --- | --- |
+| Locked RF18 evidence | ready | RF19 verifies the locked RF18 doc, report, and package. |
+| Official staging context | blocked | `outputs/rf19_official_staging_context.json` is intentionally required before UAT rows can pass. |
+| Sanitized evidence artifact index | blocked | `outputs/rf19_staging_uat_artifact_index.json` is intentionally required before UAT rows can pass. |
+| Seven UAT rows | blocked pending official staging evidence | RF19 records all seven RF18 UAT rows and their required official staging evidence. |
+| Public launch | no-go | RF19 report records `public_launch_status=no_go_until_founder_acceptance`. |
+| Founder acceptance | not auto-marked | RF19 creates decision rows but does not accept them. |
+
+RF19 does not mutate production, staging, seeded-demo, or UAT accounts by
+itself; call providers; submit stores; collect live payments; run destructive
+migrations; approve public launch; or auto-mark founder acceptance.

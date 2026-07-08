@@ -42,6 +42,13 @@ SUBSCRIBABLE_TIERS = {
     for tier in PLAN_CATALOG
     if tier.get("stripe_provisioned")
 }
+LOCAL_FREE_TIERS = {
+    tier["tier_code"]
+    for tier in PLAN_CATALOG
+    if not tier.get("stripe_provisioned")
+    and not tier.get("contact_sales")
+    and (tier.get("monthly_price_cents") or 0) == 0
+}
 CONTACT_SALES_TIERS = {
     tier["tier_code"]
     for tier in PLAN_CATALOG
@@ -50,6 +57,7 @@ CONTACT_SALES_TIERS = {
 SELF_SERVICE_ROLE_TIERS = {
     "individual_owner": {"horse_owner", "rider", "admin", "barn_manager"},
     "private_owner_plus": {"horse_owner", "rider", "admin", "barn_manager"},
+    "service_provider_premium": {"service_provider", "veterinarian", "farrier", "admin", "barn_manager"},
     "trainer_no_lesson": {"trainer", "admin", "barn_manager"},
     "trainer_lesson_15": {"trainer", "admin", "barn_manager"},
     "trainer_lesson_50": {"trainer", "admin", "barn_manager"},
@@ -420,34 +428,32 @@ def build_router(*, db, get_current_user) -> APIRouter:
         if tier in CONTACT_SALES_TIERS:
             raise HTTPException(400, f"{tier} is contact-sales only. Please reach out to our team.")
 
-        # Phase 15.G — free-tier finalize. Mirrors the legacy
+        # Phase 15.G — local free-tier finalize. Mirrors the legacy
         # /api/membership/checkout {tier:"free"} behaviour without a
         # Stripe round-trip. Returns {url: null} so the FE navigates to
-        # /dashboard. Free is a SOLO-user tier per the Phase 15 charter
-        # — no `barn:manage` requirement so marketplace signups (horse
-        # owner / rider / etc.) can finalize without an admin role. With the
-        # updated pricing addendum this local tier represents invited owner
-        # portal access, not a paid self-managed owner plan.
-        if tier == "free":
+        # /dashboard. Free tiers are SOLO-user tiers per the Phase 15 charter
+        # — no `barn:manage` requirement so marketplace signups can finalize
+        # without an admin role.
+        if tier in LOCAL_FREE_TIERS:
             barn = await _resolve_or_create_barn(db, user)
-            plan = await db.plans.find_one({"tier_code": "free"}, {"_id": 0})
+            plan = await db.plans.find_one({"tier_code": tier}, {"_id": 0})
             snapshot = (plan or {}).get("feature_limits") or {}
             now = _now_iso()
             # Phase 15.G round-2 (Codex blocker #2): give the free portal row a
             # stable id and stamp barn.subscription_id so /subscriptions/me
             # (which reads barn.subscription_id) actually surfaces it. The
             # id is barn-scoped + deterministic so re-runs are idempotent.
-            free_sub_id = f"free_{barn['id']}"
+            free_sub_id = f"{tier}_{barn['id']}"
             await db.subscriptions.update_one(
                 {"barn_id": barn["id"], "stripe_subscription_id": None,
-                 "plan_tier_code": "free"},
+                 "plan_tier_code": tier},
                 {"$set": {"id": free_sub_id, "status": "active",
                           "billing_cycle": None,
                           "entitlements_snapshot": snapshot,
                           "updated_at": now, "last_event_at": now},
                  "$setOnInsert": {"barn_id": barn["id"],
                                   "stripe_subscription_id": None,
-                                  "plan_tier_code": "free",
+                                  "plan_tier_code": tier,
                                   "owner_user_id": user.get("id"),
                                   "amount_cents": 0,
                                   "created_at": now,
@@ -457,7 +463,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
             await db.barns.update_one(
                 {"id": barn["id"]},
                 {"$set": {"subscription_entitlements": snapshot,
-                          "subscription_tier_code": "free",
+                          "subscription_tier_code": tier,
                           "subscription_id": free_sub_id,
                           "subscription_updated_at": now}},
             )
@@ -465,13 +471,13 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 "id": free_sub_id,
                 "barn_id": barn["id"],
                 "owner_user_id": user.get("id"),
-                "plan_tier_code": "free",
+                "plan_tier_code": tier,
                 "status": "active",
                 "billing_provider": "manual",
                 "purchase_platform": "admin",
                 "amount_cents": 0,
             })
-            return {"url": None, "session_id": None, "tier": "free"}
+            return {"url": None, "session_id": None, "tier": tier}
 
         # Paid tiers: self-service roles for owner/trainer/barn plans; fail
         # closed to barn:manage for future tiers.

@@ -155,10 +155,22 @@ def build_rf5_readiness(root: Path = ROOT) -> Dict[str, object]:
             next_action="RF18 should run end-to-end enrollment UAT across supported device sizes.",
         ),
         ProofRow(
-            key="home_signup_entry_points_route_to_enrollment",
-            status="ready" if 'navigate(`/enroll${query}`)' in landing and "goToEnrollment" in landing and "/signup" not in landing else "blocked",
-            evidence="Landing navigation, hero, role cards, pricing CTAs, and footer Join actions route to `/enroll`.",
-            next_action="Founder should approve path order and copy before broader launch.",
+            key="home_signup_entry_points_preserve_enrollment_context",
+            status="ready"
+            if "goToEnrollment" in landing
+            and "LANDING_ROLE_SIGNUP_PATHS" in landing
+            and "/signup?enrollment=individual_horse_owner&role=horse_owner" in landing
+            and "/signup?enrollment=barn_facility_owner&role=barn_owner" in landing
+            and "/signup?enrollment=service_provider&role=service_provider" in landing
+            and "/signup?enrollment=trainer&role=trainer" in landing
+            and "signupPathForTier" in landing
+            and "tier=${encodedTier}" in landing
+            and "`?path=${roleId}`" not in landing
+            and 'params.get("tier")' in signup
+            and "PLAN_TIER_TO_ROLE" in signup
+            else "blocked",
+            evidence="Landing broad Join actions route to `/enroll`, while concrete role cards and pricing CTAs route directly to canonical `/signup` URLs with enrollment, role, and tier context preserved.",
+            next_action="RF18 should verify each public landing selection opens the matching signup path and membership preselection.",
         ),
         ProofRow(
             key="login_signup_entry_point",

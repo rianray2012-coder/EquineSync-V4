@@ -74,9 +74,13 @@ def test_live_stripe_product_ids_are_wired_exactly_from_pdf_catalog():
 
 def test_contact_sales_and_free_plans_have_no_live_stripe_price_mapping():
     assert "free" not in LIVE_STRIPE_PRICE_IDS
+    assert "service_provider_free" not in LIVE_STRIPE_PRICE_IDS
+    assert "service_provider_premium" not in LIVE_STRIPE_PRICE_IDS
     assert "enterprise" not in LIVE_STRIPE_PRICE_IDS
     assert "community_program" not in LIVE_STRIPE_PRICE_IDS
     assert "free" not in LIVE_STRIPE_PRODUCT_IDS
+    assert "service_provider_free" not in LIVE_STRIPE_PRODUCT_IDS
+    assert "service_provider_premium" not in LIVE_STRIPE_PRODUCT_IDS
     assert LIVE_STRIPE_PRODUCT_IDS["enterprise"].startswith("prod_")
     assert LIVE_STRIPE_PRODUCT_IDS["community_program"].startswith("prod_")
 
@@ -104,8 +108,21 @@ def test_latest_founder_limits_are_in_plan_catalog():
     plans = {p["tier_code"]: p for p in PLAN_CATALOG}
     assert plans["individual_owner"]["feature_limits"]["horses"] == 1
     assert plans["individual_owner"]["feature_limits"]["owner_manager_seats"] == 1
+    assert plans["service_provider_free"]["monthly_price_cents"] == 0
+    assert plans["service_provider_free"]["stripe_provisioned"] is False
+    assert plans["service_provider_free"]["feature_limits"]["basic_horse_info"] is True
+    assert plans["service_provider_free"]["feature_limits"]["calendar_visibility"] is True
+    assert plans["service_provider_free"]["feature_limits"]["appointment_scheduling"] is True
+    assert plans["service_provider_premium"]["monthly_price_cents"] == 1500
+    assert plans["service_provider_premium"]["annual_price_cents"] == 18000
+    assert plans["service_provider_premium"]["stripe_provisioned"] is True
+    assert plans["service_provider_premium"]["feature_limits"]["premium_provider_features"] is True
     assert plans["private_owner_plus"]["feature_limits"]["horses"] == 5
-    assert plans["private_owner_plus"]["feature_limits"]["staff_seats"] == 2
+    assert plans["private_owner_plus"]["feature_limits"]["users"] == 2
+    assert plans["private_owner_plus"]["feature_limits"]["staff_seats"] == 0
+    assert plans["private_owner_plus"]["feature_limits"]["helper_family_seats"] == 1
+    assert plans["private_owner_plus"]["feature_limits"]["owner_manager_seats"] == 1
+    assert "Includes everything in Individual Horse Owner" in plans["private_owner_plus"]["description"]
     assert plans["starter_barn"]["feature_limits"]["horses"] == 10
     assert plans["starter_barn"]["feature_limits"]["staff_seats"] == 3
     assert plans["advanced_barn"]["feature_limits"]["horses"] == 30

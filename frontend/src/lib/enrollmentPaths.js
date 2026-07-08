@@ -28,7 +28,7 @@ export const ENROLLMENT_PATHS = [
     role: "service_provider",
     signupPath: "/signup?enrollment=service_provider&role=service_provider",
     summary:
-      "For providers who need scoped client or barn access after the provider grant model is implemented.",
+      "For providers who need basic horse info, calendar visibility, appointment scheduling, and optional premium provider tools.",
     criticalData: ["Provider identity", "Service type", "Service area", "Business contact"],
     deferredPhase: "RF10",
   },

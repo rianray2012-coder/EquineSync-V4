@@ -214,16 +214,70 @@ PLAN_CATALOG = [
         "stripe_provisioned": True,
     },
     {
+        "tier_code": "service_provider_free",
+        "name": "Service Provider Free",
+        "description": "Free service-provider access for basic horse information, calendar visibility, and appointment scheduling.",
+        "monthly_price_cents": 0,
+        "annual_price_cents": 0,
+        "feature_limits": {
+            "users": 1,
+            "staff_seats": 0,
+            "owner_manager_seats": 0,
+            "service_provider_profile": True,
+            "basic_horse_info": True,
+            "calendar_visibility": True,
+            "appointment_scheduling": True,
+            "client_notes": False,
+            "document_uploads": False,
+            "premium_provider_features": False,
+            "advanced_reporting": False,
+            "medical_records": False,
+            "messaging": False,
+            "calendar_integrations": True,
+            "api_access": False,
+            "dedicated_support": False,
+        },
+        "contact_sales": False,
+        "stripe_provisioned": False,
+    },
+    {
+        "tier_code": "service_provider_premium",
+        "name": "Service Provider Premium",
+        "description": "For independent service providers who need premium scheduling, client notes, documents, and provider visibility.",
+        "monthly_price_cents": 1500,
+        "annual_price_cents": 18000,
+        "feature_limits": {
+            "users": 1,
+            "staff_seats": 0,
+            "owner_manager_seats": 0,
+            "service_provider_profile": True,
+            "basic_horse_info": True,
+            "calendar_visibility": True,
+            "appointment_scheduling": True,
+            "client_notes": True,
+            "document_uploads": True,
+            "premium_provider_features": True,
+            "advanced_reporting": True,
+            "medical_records": False,
+            "messaging": True,
+            "calendar_integrations": True,
+            "api_access": False,
+            "dedicated_support": False,
+        },
+        "contact_sales": False,
+        "stripe_provisioned": True,
+    },
+    {
         "tier_code": "private_owner_plus",
         "name": "Private Owner Plus",
-        "description": "For small private owners, hobby farms, families, and personal multi-horse setups.",
+        "description": "Includes everything in Individual Horse Owner, plus one additional profile and private-owner tools for multi-horse setups.",
         "monthly_price_cents": 2999,
         "annual_price_cents": 29900,
         "feature_limits": {
             "horses": 5,
-            "users": 3,
-            "staff_seats": 2,
-            "helper_family_seats": 2,
+            "users": 2,
+            "staff_seats": 0,
+            "helper_family_seats": 1,
             "owner_manager_seats": 1,
             "storage_gb": 10,
             "advanced_reporting": True,
@@ -496,6 +550,8 @@ def _configured_product_id(tier_code: str) -> Optional[str]:
 def _customer_type_for_tier(tier_code: str) -> str:
     if tier_code == "free":
         return "invited_owner_portal"
+    if tier_code in {"service_provider_free", "service_provider_premium"}:
+        return "service_provider"
     if tier_code in {"individual_owner", "private_owner_plus"}:
         return "individual_owner"
     if tier_code in {"starter_barn", "advanced_barn", "elite_barn"}:

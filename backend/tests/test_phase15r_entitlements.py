@@ -48,6 +48,8 @@ def test_canonical_catalog_contains_founder_plan_set_once():
         "free",
         "individual_owner",
         "private_owner_plus",
+        "service_provider_free",
+        "service_provider_premium",
         "starter_barn",
         "advanced_barn",
         "elite_barn",
@@ -73,6 +75,25 @@ def test_invited_owner_portal_is_free_manual_access_not_paid_stripe_product():
     assert free["monthly_amount"] == 0
     assert free["annual_amount"] == 0
     assert free["included_horses"] == 0
+
+
+def test_service_provider_free_is_manual_access_not_owner_portal():
+    provider_free = plan_to_subscription_plan_shape(plan_by_code("service_provider_free"))
+    assert provider_free["plan_code"] == "service_provider_free"
+    assert provider_free["display_name"] == "Service Provider Free"
+    assert provider_free["customer_type"] == "service_provider"
+    assert provider_free["billing_channels"] == ["manual"]
+    assert provider_free["monthly_amount"] == 0
+    assert provider_free["annual_amount"] == 0
+
+
+def test_service_provider_premium_is_paid_provider_plan():
+    provider_premium = plan_to_subscription_plan_shape(plan_by_code("service_provider_premium"))
+    assert provider_premium["plan_code"] == "service_provider_premium"
+    assert provider_premium["customer_type"] == "service_provider"
+    assert provider_premium["billing_channels"] == ["stripe", "apple"]
+    assert provider_premium["monthly_amount"] == 1500
+    assert provider_premium["annual_amount"] == 18000
 
 
 def test_self_service_paid_plans_are_provider_neutral_for_web_and_ios():
@@ -219,7 +240,7 @@ def test_account_subscription_limits_shape_accepts_future_apple_subscription():
     assert shape["billing_provider"] == "apple"
     assert shape["purchase_platform"] == "ios"
     assert shape["horse_limit"] == 5
-    assert shape["staff_limit"] == 2
+    assert shape["staff_limit"] == 0
     assert shape["owner_manager_limit"] == 1
     assert shape["stripe_customer_id"] is None
     assert shape["stripe_subscription_id"] is None
@@ -258,6 +279,8 @@ def test_provider_and_platform_vocabulary_is_closed_for_future_adapters():
     [
         ("individual_owner", "individual_owner"),
         ("private_owner_plus", "individual_owner"),
+        ("service_provider_free", "service_provider"),
+        ("service_provider_premium", "service_provider"),
         ("starter_barn", "facility"),
         ("advanced_barn", "facility"),
         ("elite_barn", "facility"),

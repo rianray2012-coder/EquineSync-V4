@@ -57,7 +57,7 @@ export const MANAGER_NAVIGATION = [
       item("/staff", "Staff", "team"),
       item("/arena-schedule", "Schedule", "calendar"),
       item("/health", "Health Alerts", "health"),
-      item("/owner-updates", "Owner Requests", "requests", { reviewBadge: true }),
+      item("/review-queue", "Owner Requests", "requests", { reviewBadge: true }),
     ],
   },
   {
@@ -80,14 +80,14 @@ export const TRAINER_NAVIGATION = [
       item("/horses", "Horses", "horse"),
       item("/arena-schedule", "Schedule", "calendar"),
       item("/health", "Health Alerts", "health"),
-      item("/owner-updates", "Owner Requests", "requests", { reviewBadge: true }),
+      item("/review-queue", "Owner Requests", "requests", { reviewBadge: true }),
     ],
   },
   {
     label: "Program",
     items: [
       item("/barn-locations", "Facility", "map"),
-      item("/advanced-reports", "Reports", "reports"),
+      item("/reports", "Reports", "reports"),
       item("/messaging", "Messages", "messages"),
       item("/settings", "Settings", "settings"),
     ],

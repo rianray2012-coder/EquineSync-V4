@@ -26,7 +26,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 def test_build_next_1_catalog_report_has_no_blockers_from_locked_constants():
     report = build_billing_launch_readiness_report()
     assert report["source_counts"]["catalog_plans"] == len(PLAN_CATALOG)
-    assert report["source_counts"]["self_service_plans"] == 8
+    assert report["source_counts"]["self_service_plans"] == 9
     assert report["source_counts"]["contact_sales_plans"] == 2
     assert report["source_counts"]["addons"] == len(ADDON_PRICE_CATALOG) == 12
     assert not any(issue["severity"] == "blocker" for issue in report["issues"])
@@ -36,15 +36,21 @@ def test_free_and_contact_sales_contracts_match_founder_locks():
     report = build_billing_launch_readiness_report()
     preview = {row["plan_code"]: row for row in report["plan_preview"]}
 
-    assert FREE_MANUAL_PLAN_CODES == ("free",)
+    assert FREE_MANUAL_PLAN_CODES == ("free", "service_provider_free")
     assert preview["free"] == {
         "plan_code": "free",
         "customer_type": "free_manual",
         "stripe_product_configured": False,
         "stripe_monthly_configured": False,
         "stripe_annual_configured": False,
+        "stripe_env_required": False,
         "apple_contract_status": "not_applicable",
     }
+    assert preview["service_provider_free"]["customer_type"] == "free_manual"
+    assert preview["service_provider_free"]["stripe_product_configured"] is False
+    assert preview["service_provider_free"]["stripe_monthly_configured"] is False
+    assert preview["service_provider_free"]["stripe_annual_configured"] is False
+    assert preview["service_provider_free"]["stripe_env_required"] is False
 
     assert set(CONTACT_SALES_PLAN_CODES) == {"enterprise", "community_program"}
     for plan_code in CONTACT_SALES_PLAN_CODES:
@@ -52,12 +58,14 @@ def test_free_and_contact_sales_contracts_match_founder_locks():
         assert preview[plan_code]["stripe_product_configured"] is True
         assert preview[plan_code]["stripe_monthly_configured"] is False
         assert preview[plan_code]["stripe_annual_configured"] is False
+        assert preview[plan_code]["stripe_env_required"] is False
         assert preview[plan_code]["apple_contract_status"] == "not_applicable"
 
 
 def test_apple_product_contract_covers_only_self_service_plans_as_placeholders():
     assert tuple(APPLE_PRODUCT_ID_CONTRACT) == SELF_SERVICE_PLAN_CODES
     assert "free" not in APPLE_PRODUCT_ID_CONTRACT
+    assert "service_provider_free" not in APPLE_PRODUCT_ID_CONTRACT
     assert "enterprise" not in APPLE_PRODUCT_ID_CONTRACT
     assert "community_program" not in APPLE_PRODUCT_ID_CONTRACT
     for plan_code, row in APPLE_PRODUCT_ID_CONTRACT.items():

@@ -7,6 +7,7 @@ import QuickAddSheet from "../components/QuickAddSheet";
 
 const STATUSES = ["draft", "sent", "signed", "expired"];
 const STATUS_TONE = { draft: "neutral", sent: "warning", signed: "success", expired: "critical" };
+const DISPLAY_LABELS = { draft: "draft", sent: "ready locally", signed: "acknowledged locally", expired: "expired" };
 const ADD_FIELDS = [
   { key: "form_name", label: "Form", required: true, placeholder: "Form name", full: true },
   { key: "recipient_name", label: "Recipient", placeholder: "Recipient name" },
@@ -108,7 +109,7 @@ export default function FormsSignatures() {
       <PageHeader
         eyebrow="Communication"
         title="Forms & Signatures"
-        subtitle="Track local digital form records, recipients, signature-provider readiness, and signing status."
+        subtitle="Track local acknowledgement records, recipients, signature-provider readiness, and status without claiming live legal delivery."
         action={
           <div className="flex items-center gap-3">
             <button onClick={load} className="btn-secondary inline-flex items-center gap-2" data-testid="forms-refresh">
@@ -209,7 +210,7 @@ export default function FormsSignatures() {
             <div className="label-eyebrow-muted mb-2 capitalize">{status}</div>
             <div className="flex items-end justify-between gap-3">
               <div className="font-display text-4xl text-equine-ink leading-none">{stats[status]}</div>
-              <StatusPill tone={STATUS_TONE[status]}>{status}</StatusPill>
+              <StatusPill tone={STATUS_TONE[status]}>{DISPLAY_LABELS[status] || status}</StatusPill>
             </div>
           </Card>
         ))}
@@ -250,10 +251,10 @@ export default function FormsSignatures() {
                       </div>
                       {data.signed_at && <div className="text-[12px] text-equine-sage mt-1">Signed {fmtDate(data.signed_at)}</div>}
                     </div>
-                    <StatusPill tone={STATUS_TONE[status]}>{status}</StatusPill>
+                    <StatusPill tone={STATUS_TONE[status]}>{DISPLAY_LABELS[status] || status}</StatusPill>
                     <div className="flex flex-wrap items-center gap-2">
-                      {status === "draft" && <button type="button" onClick={() => setStatus(record, "sent")} className="btn-secondary text-[12px] py-2 px-4">Record sent</button>}
-                      {status === "sent" && <button type="button" onClick={() => setStatus(record, "signed")} className="btn-primary text-[12px] py-2 px-4">Record signed</button>}
+                      {status === "draft" && <button type="button" onClick={() => setStatus(record, "sent")} className="btn-secondary text-[12px] py-2 px-4">Mark ready locally</button>}
+                      {status === "sent" && <button type="button" onClick={() => setStatus(record, "signed")} className="btn-primary text-[12px] py-2 px-4">Record acknowledgement</button>}
                       {status !== "expired" && status !== "signed" && <button type="button" onClick={() => setStatus(record, "expired")} className="btn-secondary text-[12px] py-2 px-4">Expire</button>}
                       <button type="button" onClick={() => archiveRecord(record)} className="text-[12px] text-equine-clay hover:text-equine-ink px-2">Archive</button>
                     </div>

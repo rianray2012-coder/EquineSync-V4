@@ -27,10 +27,31 @@ def test_rf5_public_enrollment_route_and_entry_points_exist():
     assert 'path="/enroll"' in app
     assert 'import Enrollment from "./pages/Enrollment"' in app
     assert "goToEnrollment" in landing
-    assert 'navigate(`/enroll${query}`)' in landing
-    assert "/signup" not in landing
+    assert 'navigate(roleId ? LANDING_ROLE_SIGNUP_PATHS[roleId] || "/enroll" : "/enroll")' in landing
+    assert "/signup?enrollment=individual_horse_owner&role=horse_owner" in landing
+    assert "/signup?enrollment=barn_facility_owner&role=barn_owner" in landing
+    assert "/signup?enrollment=service_provider&role=service_provider" in landing
+    assert "/signup?enrollment=trainer&role=trainer" in landing
     assert 'to="/enroll"' in login
     assert 'data-testid="login-join-link"' in login
+
+
+def test_rf5_landing_selection_routes_preserve_signup_context():
+    landing = _read("frontend/src/pages/Landing.jsx")
+    signup = _read("frontend/src/pages/Signup.jsx")
+
+    assert "`?path=${roleId}`" not in landing
+    assert "LANDING_ROLE_SIGNUP_PATHS" in landing
+    assert "signupPathForTier" in landing
+    assert "tier=${encodedTier}" in landing
+    assert "private_owner_plus" in landing
+    assert "service_provider_premium" in landing
+    assert 'onClick={() => navigate(signupPathForTier(tier.tier_code))}' in landing
+
+    assert 'params.get("tier")' in signup
+    assert "PLAN_TIER_TO_ROLE" in signup
+    assert "PLAN_ORDER.includes(requestedTier)" in signup
+    assert "initialTierFromQuery" in signup
 
 
 def test_rf5_declares_required_enrollment_paths_with_phase_boundaries():

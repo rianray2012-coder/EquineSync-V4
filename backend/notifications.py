@@ -175,27 +175,37 @@ async def _candidate_recipients(db, event: dict) -> list[str]:
 
     Phase 1 single-tenant heuristics:
     - The actor (if present) gets no self-notification.
-    - All non-actor admins/barn_managers receive inbox events by default.
+    - Same-barn non-actor admins/barn_managers receive inbox events by default.
     - Horse owners receive curated events only (filtered by category match).
     """
     actor = event.get("actor_user_id")
+    barn_id = event.get("barn_id") or event.get("tenant_id")
     recipients = set()
     # Staff/admins
+    staff_q = {"role": {"$in": ["admin", "barn_manager"]}}
+    if barn_id:
+        staff_q["barn_id"] = barn_id
     staff = await db.users.find(
-        {"role": {"$in": ["admin", "barn_manager"]}}, {"_id": 0, "id": 1},
+        staff_q, {"_id": 0, "id": 1},
     ).to_list(100)
     for u in staff:
         recipients.add(u["id"])
     # Horse owners whose horses are subjects of this event — curated categories only
     subjects = event.get("subject_horse_ids") or []
     if subjects and event.get("category") in {"medication", "farrier", "vet", "rehab", "feed"}:
+        horse_q = {"id": {"$in": subjects}}
+        if barn_id:
+            horse_q["barn_id"] = barn_id
         horses = await db.horses.find(
-            {"id": {"$in": subjects}}, {"_id": 0, "owner_id": 1},
+            horse_q, {"_id": 0, "owner_id": 1},
         ).to_list(200)
         owner_ids = [h.get("owner_id") for h in horses if h.get("owner_id")]
         if owner_ids:
+            owner_q = {"id": {"$in": owner_ids}, "role": "horse_owner"}
+            if barn_id:
+                owner_q["barn_id"] = barn_id
             owner_users = await db.users.find(
-                {"id": {"$in": owner_ids}, "role": "horse_owner"},
+                owner_q,
                 {"_id": 0, "id": 1},
             ).to_list(200)
             for u in owner_users:

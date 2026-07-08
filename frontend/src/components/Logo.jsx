@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import horseFrost from "../assets/brand/icon_horse_frost.png";
 import horseDark from "../assets/brand/icon_horse_dark.png";
 import horseFrostSquare from "../assets/brand/icon_horse_frost_square.png";
@@ -18,6 +19,7 @@ export const Logo = ({
   onNavy = false,
   variant = "horizontal",
   tone,
+  linkTo = "/",
 }) => {
   const dark = tone ? tone === "dark" : onNavy;
 
@@ -40,16 +42,29 @@ export const Logo = ({
     />
   );
 
+  const Wrapper = linkTo ? Link : "span";
+  const wrapperProps = linkTo
+    ? { to: linkTo, "aria-label": "Equine Sync home" }
+    : {};
+
   if (variant === "icon" || !withText) {
     return (
-      <span className="group/logo inline-flex items-center" data-testid="logo">
+      <Wrapper
+        {...wrapperProps}
+        className="group/logo inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-equine-saddle/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        data-testid={linkTo ? "logo-home-link" : "logo"}
+      >
         {iconEl}
-      </span>
+      </Wrapper>
     );
   }
 
   return (
-    <div className="group/logo flex items-center gap-3" data-testid="logo">
+    <Wrapper
+      {...wrapperProps}
+      className="group/logo flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-equine-saddle/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+      data-testid={linkTo ? "logo-home-link" : "logo"}
+    >
       {iconEl}
       <div className="leading-none">
         <div className="font-display text-[22px] tracking-wide">
@@ -63,6 +78,6 @@ export const Logo = ({
           Every Horse. Every Task. In Sync.
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };

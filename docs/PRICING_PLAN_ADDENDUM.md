@@ -17,14 +17,16 @@ This addendum is part of the EquineSync build direction file set. It updates the
 | --- | --- | ---: | ---: | --- |
 | 0 | Invited Horse Owner Portal | $0 | N/A | Portal access for owners invited by a subscribed barn, trainer, or facility |
 | 1 | Individual Horse Owner | $14.99 | $149 | 1 active horse, 1 owner account, 1 emergency contact |
-| 2 | Private Owner Plus | $29.99 | $299 | Up to 5 active horses, 1 owner/manager seat, 2 helper/family seats |
-| 3 | Starter Barn | $69.99 | $699 | Up to 10 active horses, 3 staff seats, 1 owner/manager seat |
-| 4 | Advanced Barn | $149.99 | $1,499 | Up to 30 active horses, 8 staff seats, 2 owner/manager seats |
-| 5 | Elite Barn | $299.99 | $2,999 | Up to 50 active horses, 12 staff seats, 4 owner/manager seats |
-| 6 | Trainer - No Lesson Program | $59.99 | $599 | Up to 20 active training horses, 1 owner/manager seat, 2 staff/assistant seats |
-| 7 | Trainer + Lesson Program - 15 Participants | $99.99 | $999 | Up to 15 active lesson participants, up to 15 active horses, 1 owner/manager seat, 3 staff/trainer seats |
-| 8 | Trainer + Lesson Program - 50 Participants | $179.99 | $1,799 | Up to 50 active lesson participants, up to 25 active horses, 3 owner/manager seats, 6 staff/trainer seats |
-| 9 | Enterprise / Multi-Location | Starts at $599 | Custom | 100+ active horses, multi-location support, custom seats, API access, SSO if needed |
+| 2 | Service Provider Free | $0 | N/A | Basic horse info, calendar visibility, appointment scheduling, and a provider profile |
+| 3 | Service Provider Premium | $15 | $180 | Includes everything in Service Provider Free, plus premium scheduling, client notes, documents, provider visibility, and messaging |
+| 4 | Private Owner Plus | $29.99 | $299 | Includes everything in Individual Horse Owner, plus up to 5 active horses, 1 owner/manager profile, and 1 additional helper/family profile |
+| 5 | Starter Barn | $69.99 | $699 | Up to 10 active horses, 3 staff seats, 1 owner/manager seat |
+| 6 | Advanced Barn | $149.99 | $1,499 | Up to 30 active horses, 8 staff seats, 2 owner/manager seats |
+| 7 | Elite Barn | $299.99 | $2,999 | Up to 50 active horses, 12 staff seats, 4 owner/manager seats |
+| 8 | Trainer - No Lesson Program | $59.99 | $599 | Up to 20 active training horses, 1 owner/manager seat, 2 staff/assistant seats |
+| 9 | Trainer + Lesson Program - 15 Participants | $99.99 | $999 | Up to 15 active lesson participants, up to 15 active horses, 1 owner/manager seat, 3 staff/trainer seats |
+| 10 | Trainer + Lesson Program - 50 Participants | $179.99 | $1,799 | Up to 50 active lesson participants, up to 25 active horses, 3 owner/manager seats, 6 staff/trainer seats |
+| 11 | Enterprise / Multi-Location | Starts at $599 | Custom | 100+ active horses, multi-location support, custom seats, API access, SSO if needed |
 
 ## Overage Rules
 
@@ -32,7 +34,7 @@ This addendum is part of the EquineSync build direction file set. It updates the
 | --- | ---: |
 | Additional horse on Individual Horse Owner | $5/month per horse |
 | Additional horse on Private Owner Plus | $5/month per horse |
-| Additional helper seat on Private Owner Plus | $6/month |
+| Additional helper/family profile on Private Owner Plus | $6/month |
 | Additional horse on Starter Barn | $7/month per horse |
 | Additional horse on Advanced Barn | $6/month per horse |
 | Additional horse on Elite Barn | $5/month per horse over 50 |

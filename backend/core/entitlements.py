@@ -117,6 +117,8 @@ def customer_type_for_plan(plan_code: str | None) -> str:
     code = assert_known_plan_code(plan_code)
     if code == "free":
         return "invited_owner_portal"
+    if code in {"service_provider_free", "service_provider_premium"}:
+        return "service_provider"
     if code in {"individual_owner", "private_owner_plus"}:
         return "individual_owner"
     if code in {"starter_barn", "advanced_barn", "elite_barn"}:

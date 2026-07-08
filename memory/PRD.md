@@ -5898,3 +5898,461 @@ System.
 
 RF11 planning doc:
 - `docs/RF11_PROPERTY_LOCATION_MAP_COMMUNITY_HELP_PLAN.md`
+
+## RF11 - Property, Location, Map, and Community Help System CODEX-REVIEWED & LOCKED (Jul 06 2026)
+
+RF11 hardens existing location/share evidence without expanding into live maps,
+geocoding, dispatch, public community networking, native/offline behavior, true
+QR encoding, or QR scanning.
+
+Created:
+- `backend/core/rf11_property_location_map_community_help.py`
+- `backend/scripts/build_rf11_property_location_map_community_help.py`
+- `backend/tests/test_rf11_property_location_map_community_help.py`
+- `BUILD_NEXT_RF11_PROPERTY_LOCATION_MAP_COMMUNITY_HELP_README.md`
+- `docs/RF11_PROPERTY_LOCATION_MAP_COMMUNITY_HELP.md`
+- `outputs/rf11_property_location_map_community_help_report.md`
+- `outputs/build_next_rf11_property_location_map_community_help.zip`
+
+RF11 source updates:
+- Barn-location and arena-share payloads include explicit `share_state`
+  metadata.
+- Owner/parent barn-location reads require enabled share settings and omit
+  internal stall notes, pasture weather-rule text, and staff/admin share
+  metadata.
+- Staff barn-location reads keep operational notes and weather rules.
+- Owner/parent arena-share reads include only `shared_with_owners` blocks and
+  omit internal owner-name, notes, and staff/admin share metadata fields.
+- Staff arena-share reads keep staff-only blocks and private operational
+  fields.
+- Stall-card/QR evidence remains local printable SVG readiness only.
+
+RF11 generated report snapshot:
+- Overall status: `ready`.
+- Blocked/missing rows: 0.
+- Deferred rows remain for canonical property/location IDs, movement audit
+  history, live maps/geocoding/routing, native/offline map support, community
+  help/dispatch, true QR encoding, and QR scanning.
+
+RF11 does not mutate provider systems, add public community networking,
+implement native/offline behavior, or mark founder decisions accepted.
+
+RF11 lock verification:
+- Focused RF11 tests passed with enabled/disabled share-state, owner-safe share
+  projection, staff operational projection, arena visibility, and stall-card
+  claim-boundary coverage.
+- RF11 report generation passed with blocker failure enabled.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check`, py-compile, and RF11 secret-shape scan passed.
+
+Next phase after RF11 lock: RF12 Billing, Payments, Exports, and Financial
+Truth.
+
+RF12 planning doc:
+- `docs/RF12_BILLING_PAYMENTS_EXPORTS_FINANCIAL_TRUTH_PLAN.md`
+
+## RF12 - Billing, Payments, Exports, and Financial Truth CODEX-REVIEWED AND LOCKED (Jul 06 2026)
+
+RF12 is Codex-reviewed and locked. It fixes a barn-scoping leak in automation
+billing recommendations and records financial/export truth without expanding
+into live money movement,
+provider payouts, trainer package billing, native app-store billing, or founder
+acceptance.
+
+Created:
+- `backend/core/rf12_billing_payments_exports_financial_truth.py`
+- `backend/scripts/build_rf12_billing_payments_exports_financial_truth.py`
+- `backend/tests/test_rf12_billing_payments_exports_financial_truth.py`
+- `BUILD_NEXT_RF12_BILLING_PAYMENTS_EXPORTS_FINANCIAL_TRUTH_README.md`
+- `docs/RF12_BILLING_PAYMENTS_EXPORTS_FINANCIAL_TRUTH.md`
+- `outputs/rf12_billing_payments_exports_financial_truth_report.md`
+- `outputs/build_next_rf12_billing_payments_exports_financial_truth.zip`
+
+RF12 source updates:
+- `/automation/generate-drafts` now counts overdue invoices with
+  `{"barn_id": barn_id, "status": "overdue"}` instead of a global status-only
+  count.
+- Owner payment preparation remains barn/account scoped and returns
+  `configuration_ready`.
+- Owner payment preparation does not return checkout URLs, payment intents, or
+  client secrets.
+- QuickBooks export remains a barn-scoped CSV-compatible manifest for review
+  before live sync.
+- Advanced Reports remain manifest/download readiness, not native Excel/PDF
+  binary generation.
+
+RF12 generated report snapshot:
+- Overall status: `ready`.
+- Blocked/missing rows: 0.
+- Deferred rows remain for provider invoices/payments/payouts, trainer package
+  billing, refunds/voids, native app-store billing, live QuickBooks sync, and
+  native Excel/PDF generation.
+
+RF12 does not call or mutate Stripe, Apple, Google, QuickBooks, DocuSign,
+Resend, MongoDB Atlas, Vercel, Render, UAT accounts, provider systems, or
+founder acceptance state.
+
+RF12 lock verification:
+- Focused RF12 tests passed.
+- RF12 report generation passed with blocker failure enabled.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check`, py-compile, and RF12 secret-shape scan passed.
+
+Next phase after RF12 lock: RF13 Messaging, Notifications, and Delivery Truth.
+
+RF13 planning doc:
+- `docs/RF13_MESSAGING_NOTIFICATIONS_DELIVERY_TRUTH_PLAN.md`
+
+## RF13 - Messaging, Notifications, and Delivery Truth CODEX-REVIEWED AND LOCKED (Jul 06 2026)
+
+RF13 is Codex-reviewed and locked. It makes communication claims truthful
+without turning on external provider delivery. It closes a same-barn
+notification candidate scoping issue, hardens owner/guardian announcement
+projections, normalizes custom Group Messaging recipient IDs, and keeps push
+notifications as preview-only manifests.
+
+Created:
+- `backend/core/rf13_messaging_notifications_delivery_truth.py`
+- `backend/scripts/build_rf13_messaging_notifications_delivery_truth.py`
+- `backend/tests/test_rf13_messaging_notifications_delivery_truth.py`
+- `BUILD_NEXT_RF13_MESSAGING_NOTIFICATIONS_DELIVERY_TRUTH_README.md`
+- `docs/RF13_MESSAGING_NOTIFICATIONS_DELIVERY_TRUTH.md`
+- `outputs/rf13_messaging_notifications_delivery_truth_report.md`
+- `outputs/build_next_rf13_messaging_notifications_delivery_truth.zip`
+
+RF13 source updates:
+- Task Engine notification candidate resolution now scopes admin/manager,
+  horse, and owner-recipient queries to event `barn_id` or `tenant_id`.
+- Group Messaging custom rows normalize `recipient_user_ids` from comma text
+  or lists into deduped stable user IDs.
+- Owner portal announcements now return owner-audience rows only to horse-owner
+  users; guardians/parents only receive explicitly targeted rows.
+- Push-preview payloads include preview-only delivery metadata and targeted
+  recipient counts without APNs/FCM delivery claims.
+- Group Messaging UI labels final status as a local communication log.
+
+RF13 generated report snapshot:
+- Overall status: `ready`.
+- Blocked/missing rows: 0.
+- Deferred rows remain for provider/trainer direct messaging, public/community
+  help messaging, live APNs/FCM/SMS/email delivery, device tokens, provider
+  receipts, and native/live notification delivery.
+
+RF13 does not call or mutate APNs, FCM, Twilio, Resend, SendGrid, Mailgun,
+Google, Apple, Stripe, QuickBooks, DocuSign, MongoDB Atlas, Vercel, Render,
+UAT accounts, provider systems, device-token stores, or founder acceptance
+state.
+
+RF13 lock verification:
+- Focused RF13 tests passed.
+- RF13 report generation passed with blocker failure enabled.
+- Frontend build passed.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check`, py-compile, and RF13 secret-shape scan passed.
+
+Next phase after RF13 lock: RF14 Documents, Signatures, and Storage
+Consolidation.
+
+RF14 planning doc:
+- `docs/RF14_DOCUMENTS_SIGNATURES_STORAGE_CONSOLIDATION_PLAN.md`
+
+## RF14 - Documents, Signatures, and Storage Consolidation CODEX-REVIEWED AND LOCKED (Jul 07 2026)
+
+RF14 is Codex-reviewed and locked. It consolidates document, signature,
+acknowledgement, signer-rule, and storage truth without turning on live
+provider behavior.
+
+Created:
+- `backend/core/rf14_documents_signatures_storage_consolidation.py`
+- `backend/scripts/build_rf14_documents_signatures_storage_consolidation.py`
+- `backend/tests/test_rf14_documents_signatures_storage_consolidation.py`
+- `BUILD_NEXT_RF14_DOCUMENTS_SIGNATURES_STORAGE_CONSOLIDATION_README.md`
+- `docs/RF14_DOCUMENTS_SIGNATURES_STORAGE_CONSOLIDATION.md`
+- `outputs/rf14_documents_signatures_storage_consolidation_report.md`
+- `outputs/build_next_rf14_documents_signatures_storage_consolidation.zip`
+
+RF14 source updates:
+- Guardian-required document requests now reject missing `guardian_user_ids`
+  before creating local request rows.
+- Document request projections continue to hide signer ID lists and provider
+  envelope/signature/certificate references by default.
+- Digital Forms records normalize local acknowledgement and provider-readiness
+  truth fields.
+- Owner portal form acknowledgement remains owner-scoped and records
+  `signed_claim=local_acknowledgement_not_legal_signature`.
+- Forms & Signatures UI labels records as local acknowledgements and
+  signature-provider readiness rather than live legal delivery.
+- Document scan upload preparation records
+  `storage_claim=upload_intent_only_no_external_file_mutation_by_rf14`.
+
+RF14 generated report snapshot:
+- Overall status: `ready`.
+- Blocked/missing rows: 0.
+- Deferred rows remain for provider/trainer document scope, live DocuSign
+  envelope sending, signing URLs, signed-document archival, production storage,
+  retention, deletion workflows, and RF18 UAT after founder/legal acceptance.
+
+RF14 does not call or mutate DocuSign, Stripe, Apple, Google, Resend, MongoDB
+Atlas, Vercel, Render, S3, Google Drive, UAT accounts, external
+storage/signature providers, or founder acceptance state.
+
+RF14 lock verification:
+- Focused RF14 tests passed.
+- RF14 report generation passed with blocker failure enabled.
+- Frontend build passed.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check`, py-compile, zip parity, stale-overclaim scan, and RF14
+  secret-shape scan passed.
+
+Next phase after RF14 lock: RF15 Offline, Lock-Screen, and Field Reliability
+Implementation.
+
+## RF15 - Offline, Lock-Screen, and Field Reliability CODEX-REVIEWED AND LOCKED (Jul 07 2026)
+
+RF15 is Codex-reviewed and locked. It implements the narrow field-reliability
+core while preserving the online-first / limited-field-recovery posture.
+
+Created:
+- `backend/core/rf15_offline_lock_screen_field_reliability.py`
+- `backend/scripts/build_rf15_offline_lock_screen_field_reliability.py`
+- `backend/tests/test_rf15_offline_lock_screen_field_reliability.py`
+- `BUILD_NEXT_RF15_OFFLINE_LOCK_SCREEN_FIELD_RELIABILITY_README.md`
+- `docs/RF15_OFFLINE_LOCK_SCREEN_FIELD_RELIABILITY.md`
+- `docs/RF15_OFFLINE_LOCK_SCREEN_FIELD_RELIABILITY_PLAN.md`
+- `outputs/rf15_offline_lock_screen_field_reliability_report.md`
+- `outputs/build_next_rf15_offline_lock_screen_field_reliability.zip`
+
+RF15 source updates:
+- Adds an explicit workflow capability registry for field-critical workflows.
+- Classifies workflows as `online_only`, `draft_only`, `queued_write`, or
+  `provider_online_only`.
+- Preserves narrow queued-write evidence for task complete, task skip/refuse,
+  and bulk task complete.
+- Preserves draft-only evidence for QuickAdd and HorseOps forms.
+- Keeps medical-like, incident, owner request, owner portal read, provider
+  visit note, admin portal, billing, and DocuSign/legal-provider workflows
+  online-only or provider-online.
+- Adds overclaim guards for absent service-worker app shell, absent IndexedDB
+  universal outbox, and absent broad conflict-review UI.
+
+RF15 generated report snapshot:
+- Overall status: `ready`.
+- Blocker rows: 0.
+- Decision rows remain for online-only/provider-online workflows and future
+  cached-read/offline expansion.
+
+RF15 does not implement full offline app support, service-worker/PWA offline
+app shell, native app behavior, IndexedDB universal outbox, universal cached
+reads, universal queued writes, broad conflict-review UI, provider offline
+support, UAT mutation, provider calls, or founder acceptance auto-marking.
+
+RF15 lock verification:
+- Focused RF15 tests passed.
+- RF15 report generation passed with blocker failure enabled.
+- Py-compile passed for RF15 core, script, and tests.
+- Zip integrity and expected manifest checks passed.
+- `git diff --check`, zip parity, stale-overclaim scan, and RF15 secret-shape
+  scan passed.
+
+## RF16 - PWA, Native App, App Store, and Google Play Readiness CODEX-REVIEWED AND LOCKED (Jul 07 2026)
+
+RF16 is Codex-reviewed and locked. It creates source-level native shell
+readiness evidence and verifies local Android debug / iOS simulator builds
+without submitting EquineSync to app stores or claiming native launch
+readiness.
+
+Created:
+- `backend/core/rf16_pwa_native_app_store_readiness.py`
+- `backend/scripts/build_rf16_pwa_native_app_store_readiness.py`
+- `backend/tests/test_rf16_pwa_native_app_store_readiness.py`
+- `BUILD_NEXT_RF16_PWA_NATIVE_APP_STORE_READINESS_README.md`
+- `docs/RF16_PWA_NATIVE_APP_STORE_READINESS.md`
+- `docs/RF16_PWA_NATIVE_APP_STORE_READINESS_PLAN.md`
+- `frontend/capacitor.config.json`
+- `outputs/rf16_pwa_native_app_store_readiness_report.md`
+- `outputs/build_next_rf16_pwa_native_app_store_readiness.zip`
+
+RF16 source updates:
+- Adds Capacitor dependencies for iOS and Android native shells.
+- Adds Capacitor config with default app identity `EquineSync` /
+  `com.equinesync.app`.
+- Generates iOS and Android Capacitor project shells.
+- Expands native shell evidence/package coverage to include Android
+  MainActivity, Android resources, Android Gradle wrapper metadata, iOS
+  storyboards/assets, and iOS Swift Package source.
+- Corrects generated Android test package/assertion identity to
+  `com.equinesync.app`.
+- Verifies frontend production build output.
+- Adds overclaim guards for absent store-submission automation, absent native
+  billing implementation, and absent broad native/offline behavior.
+
+RF16 generated report snapshot:
+- Overall status: `ready`.
+- Source blocker rows: 0.
+- Local build blocker rows: 0 after Android debug and iOS simulator builds
+  passed.
+- Decision rows remain for Capacitor strategy, app identity, native billing
+  posture, and TestFlight / Play internal-test timing.
+
+RF16 does not submit to App Store Connect or Google Play Console, create store
+listings or review accounts, implement native billing, complete privacy labels
+or Google Data safety answers, call providers, mutate UAT accounts, broaden
+RF15 offline claims, or auto-mark founder acceptance.
+
+RF16 lock verification:
+- Focused RF16 tests passed.
+- RF16 report generation passed with source-blocker failure enabled.
+- Frontend build passed.
+- Capacitor sync passed.
+- Android debug build passed with `./gradlew assembleDebug`.
+- iOS simulator build passed with Xcode scheme `App`.
+- Py-compile passed for RF16 core, script, and tests.
+- RF16 package rebuild through `--zip-output`, zip integrity, and expected
+  manifest checks passed.
+- `git diff --check`, zip parity, stale-overclaim scan, and RF16 secret-shape
+  scan passed.
+
+RF17 is Codex-reviewed and locked. RF18 is the next gated phase.
+
+## RF17 - Feature-Shell Retirement and UX Truth CODEX-REVIEWED AND LOCKED (Jul 07 2026)
+
+RF17 is Codex-reviewed and locked under the founder-approved truth-first cleanup
+posture. It reduces launch deferrals by applying these accepted defaults:
+daily role navigation shows only real supported workflows; readiness,
+scaffold, placeholder, and proof surfaces may be hidden, redirected, or
+truth-labeled; Inventory is canonical over Supply Inventory; Task Engine is
+canonical over Staff Tasks; canonical Owner Updates / Review Queue are
+canonical over feature-module owner media updates; Group Messaging remains
+local-log/readiness only until true delivery evidence exists; Advanced Reports
+remains manifest/readiness until real Excel/PDF export exists.
+
+Created:
+- `backend/core/rf17_feature_shell_ux_truth.py`
+- `backend/scripts/build_rf17_feature_shell_ux_truth.py`
+- `backend/tests/test_rf17_feature_shell_ux_truth.py`
+- `BUILD_NEXT_RF17_FEATURE_SHELL_UX_TRUTH_README.md`
+- `docs/RF17_FEATURE_SHELL_UX_TRUTH.md`
+- `docs/RF17_FEATURE_SHELL_UX_TRUTH_PLAN.md`
+- `outputs/rf17_feature_shell_ux_truth_report.md`
+- `outputs/build_next_rf17_feature_shell_ux_truth.zip`
+
+RF17 source updates:
+- Redirects `/supply-inventory` to `/inventory`.
+- Redirects `/staff-tasks` to `/today`.
+- Redirects `/owner-updates` to `/review-queue`.
+- Redirects `/group-messaging` to `/messaging`.
+- Redirects `/advanced-reports` to `/reports`.
+- Updates Manager and Trainer navigation so Owner Requests points to
+  `/review-queue`.
+- Updates Trainer Reports navigation so it points to `/reports`.
+
+RF17 generated report snapshot:
+- Overall status: `ready`.
+- Blocker rows: 0.
+- Route redirects, daily navigation absence checks, and truth-label checks pass.
+- Founder decision rows record the explicit RF17 acceptance posture and keep
+  store submission, native billing, provider sync, full offline support, and
+  destructive migrations deferred.
+
+RF17 does not delete feature-module data, perform data migrations, call
+providers, submit to App Store Connect or Google Play Console, implement native
+billing, implement true provider delivery/sync, broaden RF15/RF16 offline or
+native claims, mutate UAT accounts, or start RF18.
+
+RF17 lock verification:
+- Focused RF17 tests passed.
+- RF17 report generation passed with blocker failure enabled.
+- Frontend build passed.
+- Py-compile passed for RF17 core, script, and tests.
+- RF17 package rebuild through `--zip-output`, zip integrity, and expected
+  manifest checks passed.
+- `git diff --check`, zip parity, stale-overclaim scan, and RF17 secret-shape
+  scan passed.
+
+Next gated phase after RF17 lock: RF18 QA, UAT, Migration, and Public Launch
+Re-Readiness. RF18 is not started by RF17 lock.
+
+## RF18 - QA, UAT, Migration, and Public Launch Re-Readiness PREPARED FOR REVIEW (Jul 07 2026)
+
+RF18 is prepared for Codex review as an evidence-only QA/UAT/public-launch
+re-readiness gate across locked RF1-RF17. It does not approve public launch.
+
+Created:
+- `backend/core/rf18_qa_uat_public_launch_readiness.py`
+- `backend/scripts/build_rf18_qa_uat_public_launch_readiness.py`
+- `backend/tests/test_rf18_qa_uat_public_launch_readiness.py`
+- `BUILD_NEXT_RF18_QA_UAT_PUBLIC_LAUNCH_READINESS_README.md`
+- `docs/RF18_QA_UAT_PUBLIC_LAUNCH_READINESS.md`
+- `docs/RF18_QA_UAT_PUBLIC_LAUNCH_READINESS_PLAN.md`
+- `outputs/rf18_qa_uat_public_launch_readiness_report.md`
+- `outputs/build_next_rf18_qa_uat_public_launch_readiness.zip`
+
+RF18 generated report snapshot:
+- Overall status: `ready_for_founder_uat_review`.
+- Public launch status: `no_go_until_uat_acceptance`.
+- Source blocker rows: 0.
+- Open UAT rows: 7.
+- Locked RF1-RF17 docs, reports, and packages are present and ready.
+- Launch-critical evidence checks for data fences, identity access, enrollment,
+  owner/guardian portal, trainer, provider, billing, messaging, documents,
+  limited field reliability, native shell, and feature-shell retirement pass.
+
+RF18 UAT rows remain open for:
+- enrollment and signup;
+- owner/guardian/rider visibility;
+- staff/trainer workflows;
+- service-provider grants;
+- billing/payment/export truth;
+- documents/signatures/messaging;
+- field reliability/native shell smoke.
+
+RF18 does not mutate production, staging, seeded-demo, or UAT accounts; call
+providers; submit stores; collect live payments; run destructive migrations;
+approve public launch; or auto-mark founder acceptance.
+
+RF18 is Codex-reviewed and locked after clean review.
+
+Locked RF18 package:
+`outputs/build_next_rf18_qa_uat_public_launch_readiness.zip`.
+
+Next gated phase: RF19 Official Staging UAT Evidence Capture. RF19 should
+execute the seven RF18 UAT rows in the approved staging environment and package
+sanitized evidence without mutating production data, calling providers,
+collecting live payments, submitting app stores, running destructive
+migrations, approving public launch, or auto-marking founder acceptance.
+
+Recommended RF19 artifact set:
+- `BUILD_NEXT_RF19_STAGING_UAT_EVIDENCE_CAPTURE_README.md`
+- `docs/RF19_STAGING_UAT_EVIDENCE_CAPTURE.md`
+- `docs/RF19_STAGING_UAT_EVIDENCE_CAPTURE_PLAN.md`
+- `backend/core/rf19_staging_uat_evidence_capture.py`
+- `backend/scripts/build_rf19_staging_uat_evidence_capture.py`
+- `backend/tests/test_rf19_staging_uat_evidence_capture.py`
+- `outputs/rf19_staging_uat_evidence_capture_report.md`
+- `outputs/build_next_rf19_staging_uat_evidence_capture.zip`
+
+## RF19 Official Staging UAT Evidence Capture - Prepared For Review (Jul 07 2026)
+
+Created:
+- `backend/core/rf19_staging_uat_evidence_capture.py`
+- `backend/scripts/build_rf19_staging_uat_evidence_capture.py`
+- `backend/tests/test_rf19_staging_uat_evidence_capture.py`
+- `BUILD_NEXT_RF19_STAGING_UAT_EVIDENCE_CAPTURE_README.md`
+- `docs/RF19_STAGING_UAT_EVIDENCE_CAPTURE.md`
+- `docs/RF19_STAGING_UAT_EVIDENCE_CAPTURE_PLAN.md`
+- `outputs/rf19_staging_uat_evidence_capture_report.md`
+- `outputs/build_next_rf19_staging_uat_evidence_capture.zip`
+
+RF19 generated report snapshot:
+- Overall status: `blocked_pending_official_staging_evidence`.
+- Public launch status: `no_go_until_founder_acceptance`.
+- Locked RF18 input evidence is ready.
+- Official staging context is blocked until
+  `outputs/rf19_official_staging_context.json` is supplied.
+- Sanitized evidence artifact index is blocked until
+  `outputs/rf19_staging_uat_artifact_index.json` is supplied.
+- Seven UAT rows remain blocked pending official staging evidence.
+
+RF19 does not mutate production, staging, seeded-demo, or UAT accounts by
+itself; call providers; submit stores; collect live payments; run destructive
+migrations; approve public launch; or auto-mark founder acceptance.

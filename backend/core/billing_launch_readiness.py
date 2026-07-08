@@ -27,7 +27,13 @@ CONTACT_SALES_PLAN_CODES = tuple(
 )
 FREE_MANUAL_PLAN_CODES = tuple(
     tier["tier_code"] for tier in PLAN_CATALOG
-    if tier["tier_code"] == "free"
+    if not tier.get("stripe_provisioned")
+    and not tier.get("contact_sales")
+    and (tier.get("monthly_price_cents") or 0) == 0
+)
+ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES = tuple(
+    plan_code for plan_code in SELF_SERVICE_PLAN_CODES
+    if plan_code not in LIVE_STRIPE_PRICE_IDS
 )
 
 
@@ -136,7 +142,7 @@ def build_billing_launch_readiness_report(
                     "blocker",
                     "free_plan_has_stripe_mapping",
                     code,
-                    "Invited Horse Owner Portal must remain manual/free with no Stripe mapping.",
+                    "Manual/free plans must not carry Stripe mapping in the locked constants.",
                 ))
         elif code in CONTACT_SALES_PLAN_CODES:
             if not product_id:
@@ -154,11 +160,13 @@ def build_billing_launch_readiness_report(
                     "Contact-sales plan must not expose public recurring Price IDs.",
                 ))
         elif code in SELF_SERVICE_PLAN_CODES:
-            if not product_id:
+            if code in ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES:
+                pass
+            elif not product_id:
                 issues.append(_issue("blocker", "self_service_missing_product_id", code, "Missing live Product ID."))
-            if not monthly_id:
+            if code not in ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES and not monthly_id:
                 issues.append(_issue("blocker", "self_service_missing_monthly_price_id", code, "Missing live monthly Price ID."))
-            if not annual_id:
+            if code not in ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES and not annual_id:
                 issues.append(_issue("blocker", "self_service_missing_annual_price_id", code, "Missing live annual Price ID."))
             if code not in APPLE_PRODUCT_ID_CONTRACT:
                 issues.append(_issue("warning", "apple_contract_missing_placeholder", code, "Future Apple product-id placeholder is missing."))
@@ -166,57 +174,59 @@ def build_billing_launch_readiness_report(
         if plans is not None and not row:
             issues.append(_issue("warning", "plans_row_missing", code, "Local plans row not found in supplied data."))
         elif plans is not None and row:
-            _compare_row_field(
-                issues,
-                collection="plans",
-                record=code,
-                field="stripe_product_id",
-                actual=row.get("stripe_product_id"),
-                expected=product_id,
-            )
-            _compare_row_field(
-                issues,
-                collection="plans",
-                record=code,
-                field="stripe_price_id_monthly",
-                actual=row.get("stripe_price_id_monthly"),
-                expected=monthly_id,
-            )
-            _compare_row_field(
-                issues,
-                collection="plans",
-                record=code,
-                field="stripe_price_id_annual",
-                actual=row.get("stripe_price_id_annual"),
-                expected=annual_id,
-            )
+            if code not in ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES:
+                _compare_row_field(
+                    issues,
+                    collection="plans",
+                    record=code,
+                    field="stripe_product_id",
+                    actual=row.get("stripe_product_id"),
+                    expected=product_id,
+                )
+                _compare_row_field(
+                    issues,
+                    collection="plans",
+                    record=code,
+                    field="stripe_price_id_monthly",
+                    actual=row.get("stripe_price_id_monthly"),
+                    expected=monthly_id,
+                )
+                _compare_row_field(
+                    issues,
+                    collection="plans",
+                    record=code,
+                    field="stripe_price_id_annual",
+                    actual=row.get("stripe_price_id_annual"),
+                    expected=annual_id,
+                )
         if subscription_plans is not None and not sub_row:
             issues.append(_issue("warning", "subscription_plans_row_missing", code, "Local subscription_plans row not found in supplied data."))
         elif subscription_plans is not None and sub_row:
-            _compare_row_field(
-                issues,
-                collection="subscription_plans",
-                record=code,
-                field="stripe_product_id",
-                actual=sub_row.get("stripe_product_id"),
-                expected=product_id,
-            )
-            _compare_row_field(
-                issues,
-                collection="subscription_plans",
-                record=code,
-                field="stripe_monthly_price_id",
-                actual=sub_row.get("stripe_monthly_price_id"),
-                expected=monthly_id,
-            )
-            _compare_row_field(
-                issues,
-                collection="subscription_plans",
-                record=code,
-                field="stripe_annual_price_id",
-                actual=sub_row.get("stripe_annual_price_id"),
-                expected=annual_id,
-            )
+            if code not in ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES:
+                _compare_row_field(
+                    issues,
+                    collection="subscription_plans",
+                    record=code,
+                    field="stripe_product_id",
+                    actual=sub_row.get("stripe_product_id"),
+                    expected=product_id,
+                )
+                _compare_row_field(
+                    issues,
+                    collection="subscription_plans",
+                    record=code,
+                    field="stripe_monthly_price_id",
+                    actual=sub_row.get("stripe_monthly_price_id"),
+                    expected=monthly_id,
+                )
+                _compare_row_field(
+                    issues,
+                    collection="subscription_plans",
+                    record=code,
+                    field="stripe_annual_price_id",
+                    actual=sub_row.get("stripe_annual_price_id"),
+                    expected=annual_id,
+                )
             for apple_field in ("apple_monthly_product_id", "apple_annual_product_id"):
                 _compare_row_field(
                     issues,
@@ -240,6 +250,7 @@ def build_billing_launch_readiness_report(
             "stripe_product_configured": bool(product_id),
             "stripe_monthly_configured": bool(monthly_id),
             "stripe_annual_configured": bool(annual_id),
+            "stripe_env_required": code in ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES,
             "apple_contract_status": (
                 APPLE_PRODUCT_ID_CONTRACT.get(code, {}).get("status")
                 if code in SELF_SERVICE_PLAN_CODES

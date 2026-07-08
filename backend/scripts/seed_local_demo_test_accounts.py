@@ -15,10 +15,20 @@ ROOT = Path(__file__).resolve().parents[2]
 
 DEMO_PASSWORD = "demo1234"
 DEMO_USERS = [
-    ("admin@equinesync.com", "Demo Admin", "admin"),
-    ("owner@equinesync.com", "Demo Owner", "horse_owner"),
-    ("trainer@equinesync.com", "Demo Trainer", "trainer"),
-    ("groom@equinesync.com", "Demo Groom", "groom"),
+    ("platform-admin@equinesync.com", "Demo Platform Admin", "admin", "platform_admin", "primary"),
+    ("admin@equinesync.com", "Demo Facility Admin", "admin", None, "primary"),
+    ("barn-owner@equinesync.com", "Demo Barn Owner", "barn_owner", None, "primary"),
+    ("manager@equinesync.com", "Demo Barn Manager", "barn_manager", None, "primary"),
+    ("owner@equinesync.com", "Demo Owner", "horse_owner", None, "primary"),
+    ("individual-owner@equinesync.com", "Demo Individual Owner", "horse_owner", None, None),
+    ("trainer@equinesync.com", "Demo Trainer", "trainer", None, "primary"),
+    ("groom@equinesync.com", "Demo Groom", "groom", None, "primary"),
+    ("working-student@equinesync.com", "Demo Working Student", "working_student", None, "primary"),
+    ("guardian@equinesync.com", "Demo Guardian", "parent", None, "primary"),
+    ("rider@equinesync.com", "Demo Rider", "rider", None, "primary"),
+    ("service-provider@equinesync.com", "Demo Service Provider", "service_provider", None, "primary"),
+    ("vet@equinesync.com", "Demo Veterinarian", "veterinarian", None, "primary"),
+    ("farrier@equinesync.com", "Demo Farrier", "farrier", None, "primary"),
 ]
 
 
@@ -54,10 +64,12 @@ def main() -> int:
     now = _now()
 
     if args.dry_run:
-        for email, _name, role in DEMO_USERS:
+        for email, _name, role, platform_role, barn_id in DEMO_USERS:
             exists = db.users.find_one({"email": email}, {"_id": 0, "id": 1, "role": 1})
             action = "update" if exists else "insert"
-            print(f"{action}: {email} role={role}")
+            suffix = f" platform_role={platform_role}" if platform_role else ""
+            barn_suffix = f" barn_id={barn_id}" if barn_id else " standalone"
+            print(f"{action}: {email} role={role}{suffix}{barn_suffix}")
         return 0
 
     db.barn.update_one(
@@ -71,7 +83,8 @@ def main() -> int:
         upsert=True,
     )
 
-    for email, full_name, role in DEMO_USERS:
+    seeded_users = []
+    for email, full_name, role, platform_role, barn_id in DEMO_USERS:
         existing = db.users.find_one({"email": email}, {"_id": 0, "id": 1})
         user_id = (existing or {}).get("id") or f"local_demo_{uuid.uuid4().hex[:12]}"
         doc = {
@@ -79,24 +92,33 @@ def main() -> int:
             "email": email,
             "full_name": full_name,
             "role": role,
-            "barn_id": "primary",
+            "barn_id": barn_id,
             "password_hash": _hash_pwd(DEMO_PASSWORD),
             "email_verified": True,
             "account_status": "active",
+            "role_status": "active",
+            "role_intake_completed": True,
+            "intake_completed": True,
+            "profile_completed": True,
+            "facility_setup_complete": True,
+            "onboarding_completed": True,
+            "platform_role": platform_role,
             "local_demo_seed": True,
             "updated_at": now,
         }
+        if platform_role:
+            doc["platform_role_updated_at"] = now
         db.users.update_one(
             {"email": email},
             {"$set": doc, "$setOnInsert": {"created_at": now}},
             upsert=True,
         )
         db.account_memberships.update_one(
-            {"user_id": user_id, "barn_id": "primary"},
+            {"user_id": user_id, "barn_id": barn_id},
             {
                 "$set": {
                     "user_id": user_id,
-                    "barn_id": "primary",
+                    "barn_id": barn_id,
                     "role": role,
                     "status": "active",
                     "updated_at": now,
@@ -105,8 +127,220 @@ def main() -> int:
             },
             upsert=True,
         )
+        seeded_users.append({"id": user_id, "email": email, "role": role, "barn_id": barn_id})
         print(f"seeded: {email} role={role}")
+
+    _seed_facility_readiness(db, now, seeded_users)
+    _seed_service_provider_demo_context(db, now)
     return 0
+
+
+def _seed_facility_readiness(db, now: str, seeded_users) -> None:
+    db.locations.update_one(
+        {"id": "local_demo_main_barn"},
+        {
+            "$set": {
+                "id": "local_demo_main_barn",
+                "barn_id": "primary",
+                "name": "Main Barn",
+                "type": "barn",
+                "status": "active",
+                "updated_at": now,
+                "local_demo_seed": True,
+            },
+            "$setOnInsert": {"created_at": now},
+        },
+        upsert=True,
+    )
+    db.owners.update_one(
+        {"id": "local_demo_owner_record"},
+        {
+            "$set": {
+                "id": "local_demo_owner_record",
+                "barn_id": "primary",
+                "full_name": "Demo Owner",
+                "email": "owner@equinesync.com",
+                "status": "active",
+                "updated_at": now,
+                "local_demo_seed": True,
+            },
+            "$setOnInsert": {"created_at": now},
+        },
+        upsert=True,
+    )
+    db.feed_templates.update_one(
+        {"id": "local_demo_feed_template"},
+        {
+            "$set": {
+                "id": "local_demo_feed_template",
+                "barn_id": "primary",
+                "meal": "AM",
+                "name": "Demo AM Feed",
+                "description": "Local demo feed template for setup-readiness preflight.",
+                "updated_at": now,
+                "local_demo_seed": True,
+            },
+            "$setOnInsert": {"created_at": now},
+        },
+        upsert=True,
+    )
+
+    complete_steps = {
+        "barn": "complete",
+        "locations": "complete",
+        "owners": "complete",
+        "horses": "complete",
+        "feed_templates": "complete",
+        "review": "complete",
+    }
+    for user in seeded_users:
+        if user["role"] not in {"admin", "barn_owner"} or user.get("barn_id") != "primary":
+            continue
+        db.onboarding_progress.update_one(
+            {"user_id": user["id"]},
+            {
+                "$set": {
+                    "user_id": user["id"],
+                    "barn_id": "primary",
+                    "completed": True,
+                    "steps": complete_steps,
+                    "updated_at": now,
+                    "local_demo_seed": True,
+                },
+                "$setOnInsert": {"id": f"onboarding_{uuid.uuid4().hex[:12]}", "created_at": now},
+            },
+            upsert=True,
+        )
+
+
+def _seed_service_provider_demo_context(db, now: str) -> None:
+    horse_id = "local_demo_provider_horse"
+    db.horses.update_one(
+        {"id": horse_id},
+        {
+            "$set": {
+                "id": horse_id,
+                "barn_id": "primary",
+                "name": "Demo Provider Horse",
+                "breed": "Warmblood",
+                "discipline": "Hunter",
+                "status": "active",
+                "allergies": ["penicillin"],
+                "updated_at": now,
+                "local_demo_seed": True,
+            },
+            "$setOnInsert": {"created_at": now},
+        },
+        upsert=True,
+    )
+
+    provider_specs = [
+        ("service-provider@equinesync.com", "body_worker", "Demo Service Provider"),
+        ("vet@equinesync.com", "vet", "Demo Veterinarian"),
+        ("farrier@equinesync.com", "farrier", "Demo Farrier"),
+    ]
+    for email, category, name in provider_specs:
+        user = db.users.find_one({"email": email}, {"_id": 0, "id": 1, "role": 1})
+        if not user:
+            continue
+        provider_id = f"local_demo_provider_{category}"
+        db.service_providers.update_one(
+            {"id": provider_id},
+            {
+                "$set": {
+                    "id": provider_id,
+                    "barn_id": "primary",
+                    "category": category,
+                    "name": name,
+                    "email": email,
+                    "provider_user_id": user["id"],
+                    "status": "active",
+                    "updated_at": now,
+                    "local_demo_seed": True,
+                },
+                "$setOnInsert": {"created_at": now},
+            },
+            upsert=True,
+        )
+        db.horse_provider_assignments.update_one(
+            {"id": f"local_demo_grant_{category}"},
+            {
+                "$set": {
+                    "id": f"local_demo_grant_{category}",
+                    "barn_id": "primary",
+                    "horse_id": horse_id,
+                    "provider_id": provider_id,
+                    "provider_user_id": user["id"],
+                    "category": category,
+                    "status": "active",
+                    "last_service_date": "2026-07-01",
+                    "next_due_date": "2026-08-01",
+                    "interval_days": 30,
+                    "is_primary_for_horse": category in {"vet", "farrier"},
+                    "updated_at": now,
+                    "local_demo_seed": True,
+                },
+                "$setOnInsert": {"created_at": now},
+            },
+            upsert=True,
+        )
+
+    db.vet_records.update_one(
+        {"id": "local_demo_vet_record"},
+        {
+            "$set": {
+                "id": "local_demo_vet_record",
+                "barn_id": "primary",
+                "horse_id": horse_id,
+                "type": "wellness",
+                "title": "Demo wellness check",
+                "date": "2026-07-01",
+                "vet_name": "Demo Veterinarian",
+                "follow_up_due": "2026-08-01",
+                "updated_at": now,
+                "local_demo_seed": True,
+            },
+            "$setOnInsert": {"created_at": now},
+        },
+        upsert=True,
+    )
+    db.farrier_history.update_one(
+        {"id": "local_demo_farrier_record"},
+        {
+            "$set": {
+                "id": "local_demo_farrier_record",
+                "barn_id": "primary",
+                "horse_id": horse_id,
+                "date": "2026-07-01",
+                "farrier_name": "Demo Farrier",
+                "next_visit_due": "2026-08-12",
+                "shoes_on": ["front"],
+                "updated_at": now,
+                "local_demo_seed": True,
+            },
+            "$setOnInsert": {"created_at": now},
+        },
+        upsert=True,
+    )
+    db.provider_visit_notes.update_one(
+        {"id": "local_demo_provider_note"},
+        {
+            "$set": {
+                "id": "local_demo_provider_note",
+                "barn_id": "primary",
+                "horse_id": horse_id,
+                "provider_name": "Demo Service Provider",
+                "category": "body_worker",
+                "title": "Demo bodywork visit",
+                "visit_date": "2026-07-01",
+                "follow_up_due": "2026-08-01",
+                "updated_at": now,
+                "local_demo_seed": True,
+            },
+            "$setOnInsert": {"created_at": now},
+        },
+        upsert=True,
+    )
 
 
 if __name__ == "__main__":

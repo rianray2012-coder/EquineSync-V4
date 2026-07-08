@@ -46,7 +46,6 @@ import ArenaSchedule from "./pages/ArenaSchedule";
 import Waitlist from "./pages/Waitlist";
 import PastureSchedule from "./pages/PastureSchedule";
 import Equipment from "./pages/Equipment";
-import SupplyInventory from "./pages/SupplyInventory";
 import HealthReminders from "./pages/HealthReminders";
 import HealthDocuments from "./pages/HealthDocuments";
 import HealthCareLogs from "./pages/HealthCareLogs";
@@ -55,8 +54,6 @@ import Payments from "./pages/Payments";
 import RecurringBilling from "./pages/RecurringBilling";
 import Expenses from "./pages/Expenses";
 import FinancialDashboard from "./pages/FinancialDashboard";
-import GroupMessaging from "./pages/GroupMessaging";
-import OwnerUpdates from "./pages/OwnerUpdates";
 import FormsSignatures from "./pages/FormsSignatures";
 import EmergencyContacts from "./pages/EmergencyContacts";
 import EmergencyWorkflows from "./pages/EmergencyWorkflows";
@@ -65,12 +62,10 @@ import Competitions from "./pages/Competitions";
 import RideGps from "./pages/RideGps";
 import PerformanceAnalytics from "./pages/PerformanceAnalytics";
 import StaffScheduling from "./pages/StaffScheduling";
-import StaffTasks from "./pages/StaffTasks";
 import HandoffReports from "./pages/HandoffReports";
 import TimeClock from "./pages/TimeClock";
 import AiAutomation from "./pages/AiAutomation";
 import Integrations from "./pages/Integrations";
-import AdvancedReports from "./pages/AdvancedReports";
 import MobileReadiness from "./pages/MobileReadiness";
 import AuditLog from "./pages/AuditLog";
 import SubscriptionBilling from "./pages/SubscriptionBilling";
@@ -313,7 +308,7 @@ function App() {
               <Route path="/pasture-schedule" element={permit(<PastureSchedule />, ROLE_GROUPS.operations)} />
               <Route path="/feed" element={permit(<Feed />, BN17D_DIRECT_ROUTE_ROLES.careWorkflow)} />
               <Route path="/inventory" element={permit(<Inventory />, BN17D_DIRECT_ROUTE_ROLES.inventoryWorkflow)} />
-              <Route path="/supply-inventory" element={permit(<SupplyInventory />, ROLE_GROUPS.operations)} />
+              <Route path="/supply-inventory" element={<Navigate to="/inventory" replace />} />
               <Route path="/equipment" element={permit(<Equipment />, ROLE_GROUPS.operations)} />
               <Route path="/health-reminders" element={permit(<HealthReminders />, ROLE_GROUPS.care)} />
               <Route path="/health-documents" element={permit(<HealthDocuments />, ROLE_GROUPS.care)} />
@@ -334,12 +329,12 @@ function App() {
               <Route path="/documents" element={permit(<HealthDocuments />, ROLE_GROUPS.care)} />
               <Route path="/maintenance" element={permit(<Equipment />, ROLE_GROUPS.operations)} />
               <Route path="/staff" element={permit(<StaffScheduling />, ROLE_GROUPS.admin)} />
-              <Route path="/staff-tasks" element={permit(<StaffTasks />, ROLE_GROUPS.admin)} />
+              <Route path="/staff-tasks" element={<Navigate to="/today" replace />} />
               <Route path="/handoff-reports" element={permit(<HandoffReports />, ROLE_GROUPS.admin)} />
               <Route path="/time-clock" element={permit(<TimeClock />, ROLE_GROUPS.admin)} />
               <Route path="/messaging" element={permit(<Messaging />, BN17D_DIRECT_ROUTE_ROLES.operationalMessaging)} />
-              <Route path="/group-messaging" element={permit(<GroupMessaging />, ROLE_GROUPS.communication)} />
-              <Route path="/owner-updates" element={permit(<OwnerUpdates />, ROLE_GROUPS.communication)} />
+              <Route path="/group-messaging" element={<Navigate to="/messaging" replace />} />
+              <Route path="/owner-updates" element={<Navigate to="/review-queue" replace />} />
               <Route path="/forms-signatures" element={permit(<FormsSignatures />, ROLE_GROUPS.communication)} />
               <Route path="/emergency-contacts" element={permit(<EmergencyContacts />, ROLE_GROUPS.communication)} />
               <Route path="/emergency-workflows" element={permit(<EmergencyWorkflows />, ROLE_GROUPS.communication)} />
@@ -350,7 +345,7 @@ function App() {
               <Route path="/ai-automation" element={permit(<AiAutomation />, ROLE_GROUPS.admin)} />
               <Route path="/integrations" element={permit(<Integrations />, ROLE_GROUPS.integrations)} />
               <Route path="/mobile-readiness" element={permit(<MobileReadiness />, ROLE_GROUPS.integrations)} />
-              <Route path="/advanced-reports" element={permit(<AdvancedReports />, ROLE_GROUPS.reporting)} />
+              <Route path="/advanced-reports" element={<Navigate to="/reports" replace />} />
               <Route path="/audit-log" element={permit(<AuditLog />, ROLE_GROUPS.admin)} />
               <Route path="/reports" element={permit(<Reports />, ROLE_GROUPS.admin)} />
               <Route path="/owner-portal" element={permit(<OwnerPortal />, ROLE_GROUPS.ownerPortal)} />

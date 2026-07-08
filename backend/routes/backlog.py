@@ -335,6 +335,7 @@ MODULES: Dict[str, Dict[str, Any]] = {
             {"key": "body", "label": "Message", "type": TEXTAREA, "required": True},
             {"key": "channel", "label": "Channel", "type": SELECT, "options": ["in_app", "email", "push_ready"]},
             {"key": "status", "label": "Status", "type": SELECT, "options": ["draft", "queued", "sent"]},
+            {"key": "recipient_user_ids", "label": "Recipient user IDs", "type": TEXT, "placeholder": "Comma-separated user IDs for custom or guardian-visible messages"},
         ],
         ["Group announcements", "Push-ready channel metadata", "Owner/staff audience targeting"],
     ),
@@ -753,7 +754,30 @@ def _split_horse_names(value: Any) -> List[str]:
     return [name.strip() for name in str(value or "").replace("\n", ",").split(",") if name.strip()]
 
 
-def _location_board_payload(*, share: Dict[str, Any], stalls: List[Dict[str, Any]], pastures: List[Dict[str, Any]]) -> Dict[str, Any]:
+def _share_state(share: Dict[str, Any], *, owner_view: bool) -> Dict[str, Any]:
+    enabled = bool((share or {}).get("enabled"))
+    return {
+        "enabled": enabled,
+        "state": "published" if enabled else "private",
+        "audience": "owner_parent" if owner_view else "staff",
+        "source": "barn_admin_share_setting",
+    }
+
+
+def _share_payload(share: Dict[str, Any], *, owner_view: bool) -> Dict[str, Any]:
+    if not owner_view:
+        return dict(share or {})
+    return {
+        "id": (share or {}).get("id"),
+        "enabled": bool((share or {}).get("enabled")),
+        "title": (share or {}).get("title") or "",
+        "note": (share or {}).get("note") or "",
+        "share_path": (share or {}).get("share_path") or "",
+        "updated_at": (share or {}).get("updated_at"),
+    }
+
+
+def _location_board_payload(*, share: Dict[str, Any], stalls: List[Dict[str, Any]], pastures: List[Dict[str, Any]], owner_view: bool = False) -> Dict[str, Any]:
     stall_rows = []
     horse_locations: Dict[str, Dict[str, Any]] = {}
     for record in stalls:
@@ -767,8 +791,9 @@ def _location_board_payload(*, share: Dict[str, Any], stalls: List[Dict[str, Any
             "row": data.get("row"),
             "column": data.get("column"),
             "status": data.get("status") or "occupied",
-            "notes": data.get("notes") or "",
         }
+        if not owner_view:
+            row["notes"] = data.get("notes") or ""
         stall_rows.append(row)
         if row["horse_name"]:
             horse_locations[row["horse_name"]] = row
@@ -786,8 +811,9 @@ def _location_board_payload(*, share: Dict[str, Any], stalls: List[Dict[str, Any
             "start_time": data.get("start_time") or "",
             "end_time": data.get("end_time") or "",
             "status": data.get("status") or "planned",
-            "weather_rule": data.get("weather_rule") or "",
         }
+        if not owner_view:
+            row["weather_rule"] = data.get("weather_rule") or ""
         pasture_rows.append(row)
         for horse_name in horses:
             if row["status"] in ("active", "planned", "weather_hold"):
@@ -802,7 +828,8 @@ def _location_board_payload(*, share: Dict[str, Any], stalls: List[Dict[str, Any
                 }
 
     return {
-        "share": share,
+        "share": _share_payload(share, owner_view=owner_view),
+        "share_state": _share_state(share, owner_view=owner_view),
         "stalls": sorted(stall_rows, key=lambda item: (str(item.get("barn_area") or ""), str(item.get("stall_id") or ""))),
         "pastures": sorted(pasture_rows, key=lambda item: (str(item.get("pasture") or ""), str(item.get("start_time") or ""))),
         "horse_locations": sorted(horse_locations.values(), key=lambda item: str(item.get("horse_name") or "")),
@@ -832,14 +859,16 @@ def _arena_schedule_payload(*, share: Dict[str, Any], records: List[Dict[str, An
             "status": data.get("status") or "open",
             "visibility": data.get("visibility") or "shared_with_owners",
             "horse_name": data.get("horse_name") or "",
-            "owner_name": data.get("owner_name") or "",
-            "notes": data.get("notes") or "",
             "source_request_id": data.get("source_request_id") or "",
         }
+        if not owner_view:
+            row["owner_name"] = data.get("owner_name") or ""
+            row["notes"] = data.get("notes") or ""
         blocks.append(row)
     blocks = sorted(blocks, key=lambda item: (str(item.get("date") or ""), str(item.get("start_time") or ""), str(item.get("arena_name") or "")))
     return {
-        "share": share,
+        "share": _share_payload(share, owner_view=owner_view),
+        "share_state": _share_state(share, owner_view=owner_view),
         "blocks": blocks,
         "stats": {
             "blocks": len(blocks),
@@ -926,6 +955,41 @@ def _dedupe(values: List[Optional[str]]) -> List[str]:
     return clean_values
 
 
+def _split_user_ids(value: Any) -> List[str]:
+    if isinstance(value, list):
+        raw_values = value
+    else:
+        raw_values = str(value or "").replace("\n", ",").split(",")
+    return _dedupe([str(item).strip() for item in raw_values if str(item).strip()])
+
+
+def _normalize_group_message_data(module_key: str, data: Dict[str, Any]) -> Dict[str, Any]:
+    if module_key != "group-messaging":
+        return data
+    normalized = dict(data)
+    recipient_ids = _split_user_ids(normalized.get("recipient_user_ids"))
+    if recipient_ids:
+        normalized["recipient_user_ids"] = recipient_ids
+    else:
+        normalized.pop("recipient_user_ids", None)
+    return normalized
+
+
+def _normalize_digital_form_data(module_key: str, data: Dict[str, Any]) -> Dict[str, Any]:
+    if module_key != "forms-signatures":
+        return data
+    normalized = dict(data)
+    provider = str(normalized.get("signature_provider") or "internal").strip() or "internal"
+    normalized["signature_provider"] = provider
+    if provider == "internal":
+        normalized["signature_scope"] = "local_acknowledgement_only"
+        normalized["legal_signature_status"] = "not_legal_signature"
+    elif provider == "docusign_ready":
+        normalized["signature_scope"] = "provider_readiness_only"
+        normalized["legal_signature_status"] = "provider_not_sent"
+    return normalized
+
+
 async def _owner_link_ids_for_user(db, user: Dict[str, Any], barn_id: str) -> List[str]:
     user_id = user.get("id")
     if not user_id:
@@ -999,6 +1063,26 @@ def _owner_account_clauses(owner_ids: List[str], user_id: Optional[str]) -> List
             "data.recipient_owner_id",
         ):
             clauses.append({field: {"$in": owner_ids}})
+    return clauses
+
+
+def _owner_announcement_clauses(user: Dict[str, Any]) -> List[Dict[str, Any]]:
+    user_id = user.get("id")
+    if not user_id:
+        return []
+    targeted_fields = (
+        "data.recipient_user_id",
+        "data.recipient_user_ids",
+        "data.owner_user_id",
+        "data.owner_user_ids",
+        "data.guardian_user_id",
+        "data.guardian_user_ids",
+        "data.parent_user_id",
+        "data.parent_user_ids",
+    )
+    clauses = [{field: user_id} for field in targeted_fields]
+    if user.get("role") == "horse_owner":
+        clauses.append({"data.audience": "owners"})
     return clauses
 
 
@@ -1278,6 +1362,8 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         require_permission(user, mod["write_permission"])
         data = await _normalize_staff_identity_data(db, user, module_key, body.data, creating=True)
         data = await _normalize_training_plan_identity_data(db, user, module_key, data, creating=True)
+        data = _normalize_group_message_data(module_key, data)
+        data = _normalize_digital_form_data(module_key, data)
         _validate_record(mod, data)
         doc = _base_doc(user=user, new_id=new_id, data=data)
         await db[mod["collection"]].insert_one(doc)
@@ -1304,6 +1390,8 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             raise HTTPException(404, "Record not found")
         data = await _normalize_staff_identity_data(db, user, module_key, {**(existing.get("data") or {}), **body.data})
         data = await _normalize_training_plan_identity_data(db, user, module_key, data)
+        data = _normalize_group_message_data(module_key, data)
+        data = _normalize_digital_form_data(module_key, data)
         _validate_record(mod, data)
         await db[mod["collection"]].update_one(
             {"id": record_id},
@@ -1409,7 +1497,8 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         q = {"barn_id": barn_id, "archived_at": {"$exists": False}}
         stalls = await db.stall_assignments.find(q, {"_id": 0}).sort("data.stall_id", 1).to_list(500)
         pastures = await db.pasture_schedules.find(q, {"_id": 0}).sort("data.start_time", 1).to_list(500)
-        return _location_board_payload(share=share, stalls=stalls, pastures=pastures)
+        owner_view = role in ("horse_owner", "parent")
+        return _location_board_payload(share=share, stalls=stalls, pastures=pastures, owner_view=owner_view)
 
     @router.post("/arena-schedule-share")
     async def update_arena_schedule_share(body: ArenaScheduleShareIn, user=Depends(get_current_user)):
@@ -1693,6 +1782,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             ).sort("updated_at", -1).to_list(250)
             for record in messages:
                 data = record.get("data") or {}
+                recipient_ids = _split_user_ids(data.get("recipient_user_ids"))
                 payloads.append(_push_payload(
                     source="group_messages",
                     record=record,
@@ -1702,6 +1792,9 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
                     metadata={
                         "channel": data.get("channel") or "in_app",
                         "message_status": data.get("status") or "draft",
+                        "delivery_claim": "preview_only_no_external_delivery",
+                        "recipient_user_ids": recipient_ids,
+                        "recipient_count": len(recipient_ids),
                     },
                 ))
 
@@ -1816,6 +1909,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         manifest = {
             "status": "upload_intent_ready",
             "provider": get_provider().name(),
+            "storage_claim": "upload_intent_only_no_external_file_mutation_by_rf14",
             "filename": body.filename,
             "mime_type": body.mime_type,
             "byte_size": body.byte_size,
@@ -1828,7 +1922,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
                 "expires_at": intent.expires_at,
             },
             "draft_record": draft_record,
-            "message": "Upload the file to upload_url when a real storage provider is configured, then save draft_record as the document scan.",
+            "message": "Upload intent only. Store through upload_url only when a real storage provider is configured, then save draft_record as the document scan.",
         }
         await write_audit(
             action="document_scan_upload_prepared",
@@ -1871,7 +1965,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "archived_at": {"$exists": False},
             "data.visibility": "owner_only",
         })
-        overdue_invoices = await db.invoices.count_documents({"status": "overdue"})
+        overdue_invoices = await db.invoices.count_documents({"barn_id": barn_id, "status": "overdue"})
         autopay_open = await db.payment_profiles.count_documents({
             "barn_id": barn_id,
             "archived_at": {"$exists": False},
@@ -2025,6 +2119,9 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "signed_at": datetime.now(timezone.utc).date().isoformat(),
             "signed_by": user["id"],
             "signed_by_name": user.get("full_name"),
+            "signature_scope": "local_acknowledgement_only",
+            "legal_signature_status": "not_legal_signature",
+            "signed_claim": "local_acknowledgement_not_legal_signature",
         }
         await db.digital_forms.update_one(
             {"id": record_id},
@@ -2207,7 +2304,10 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "data.audience": {"$in": ["owners", "custom"]},
         }
         if role in ("horse_owner", "parent"):
-            pass
+            clauses = _owner_announcement_clauses(user)
+            if not clauses:
+                return []
+            q["$or"] = clauses
         elif role not in ("admin", "barn_manager", "trainer"):
             raise HTTPException(403, "Permission denied")
         rows = await db.group_messages.find(q, {"_id": 0}).sort("updated_at", -1).to_list(100)

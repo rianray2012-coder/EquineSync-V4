@@ -244,6 +244,8 @@ def build_router(*, get_current_user, db=None) -> APIRouter:
             minor_status=minor_status,
         )
         signer_roles = list(signer_contract["signer_roles"])
+        if SIGNER_GUARDIAN in signer_roles and not [gid for gid in body.guardian_user_ids if gid]:
+            raise HTTPException(status_code=422, detail="guardian_user_ids is required for guardian-required document requests")
         required_signer_user_ids = _required_signer_ids(signer_roles, body)
         now = _now_iso()
         status = "draft"

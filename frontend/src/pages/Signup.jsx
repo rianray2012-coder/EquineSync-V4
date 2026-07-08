@@ -5,7 +5,7 @@ import { api, tokens } from "../lib/api";
 import { Logo } from "../components/Logo";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react";
 import {
-  sortPlans, formatCents, annualSavingsPct, isPlanCheckoutable,
+  PLAN_ORDER, sortPlans, formatCents, annualSavingsPct, isPlanCheckoutable,
 } from "../lib/subscriptionBilling";
 import { ENROLLMENT_CONTEXT_BY_ID, ENROLLMENT_PATH_BY_ROLE } from "../lib/enrollmentPaths";
 
@@ -16,8 +16,22 @@ const ROLE_TO_PLAN = {
   horse_owner: "individual_owner",
   rider: "free",
   trainer: "trainer_no_lesson",
-  service_provider: "free",
+  service_provider: "service_provider_free",
   barn_owner: "starter_barn",
+};
+const LOCAL_FREE_TIERS = new Set(["free", "service_provider_free"]);
+const PLAN_TIER_TO_ROLE = {
+  free: "horse_owner",
+  individual_owner: "horse_owner",
+  private_owner_plus: "horse_owner",
+  service_provider_free: "service_provider",
+  service_provider_premium: "service_provider",
+  starter_barn: "barn_owner",
+  advanced_barn: "barn_owner",
+  elite_barn: "barn_owner",
+  trainer_no_lesson: "trainer",
+  trainer_lesson_15: "trainer",
+  trainer_lesson_50: "trainer",
 };
 
 const ROLE_OPTIONS = [
@@ -25,8 +39,24 @@ const ROLE_OPTIONS = [
   { id: "rider", label: "Rider", blurb: "Log sessions, follow your training plan.", recommendedTier: "free" },
   { id: "trainer", label: "Trainer", blurb: "Manage clients, sessions, and notes.", recommendedTier: "trainer_no_lesson", pending: true },
   { id: "barn_owner", label: "Barn Owner / Manager", blurb: "Run a full operation under one roof.", recommendedTier: "starter_barn", pending: true },
-  { id: "service_provider", label: "Service Provider", blurb: "Connect with barns that need your craft.", recommendedTier: "free", pending: true },
+  { id: "service_provider", label: "Service Provider", blurb: "Connect with barns that need your craft.", recommendedTier: "service_provider_free", pending: true },
 ];
+
+const buildPlanFeatureRows = (plan) => {
+  const limits = plan?.feature_limits || {};
+  if (plan?.tier_code === "free") return ["1 invited owner profile"];
+  if (plan?.tier_code === "service_provider_free" || plan?.tier_code === "service_provider_premium") {
+    return ["1 provider profile"];
+  }
+  const rows = [];
+  if (limits.horses != null && limits.horses > 0) {
+    rows.push(`Up to ${limits.horses} horse${limits.horses === 1 ? "" : "s"}`);
+  }
+  if (limits.users != null && limits.users > 0) {
+    rows.push(`Up to ${limits.users} user${limits.users === 1 ? "" : "s"}`);
+  }
+  return rows;
+};
 
 const ROLE_PROFILE_FIELDS = {
   horse_owner: [
@@ -72,12 +102,22 @@ export default function Signup() {
 
   const initialRole = params.get("role");
   const initialEnrollment = params.get("enrollment");
+  const requestedTier = params.get("tier");
   const selectedEnrollment = ENROLLMENT_CONTEXT_BY_ID[initialEnrollment] || ENROLLMENT_PATH_BY_ROLE[initialRole];
   const initialIsRole = ROLE_OPTIONS.some((r) => r.id === initialRole);
   const initialEnrollmentRole = selectedEnrollment?.role;
   const initialEnrollmentIsRole = ROLE_OPTIONS.some((r) => r.id === initialEnrollmentRole);
+  const resolvedInitialRole = initialIsRole ? initialRole : initialEnrollmentIsRole ? initialEnrollmentRole : "";
+  const requestedTierRole = PLAN_TIER_TO_ROLE[requestedTier];
+  const initialTierFromQuery = requestedTier &&
+    PLAN_ORDER.includes(requestedTier) &&
+    (!requestedTierRole || requestedTierRole === resolvedInitialRole)
+    ? requestedTier
+    : "";
   const initialTier = selectedEnrollment?.limitedAccess
     ? "free"
+    : initialTierFromQuery
+    ? initialTierFromQuery
     : initialIsRole
     ? ROLE_TO_PLAN[initialRole] || "free"
     : initialEnrollmentIsRole
@@ -91,7 +131,7 @@ export default function Signup() {
     phone: "",
     password: "",
     location: "",
-    role: initialIsRole ? initialRole : initialEnrollmentIsRole ? initialEnrollmentRole : "",
+    role: resolvedInitialRole,
   });
   const [profile, setProfile] = useState({});
   const [tier, setTier] = useState(initialTier);
@@ -184,9 +224,9 @@ export default function Signup() {
     // directly. Paid tiers receive a Stripe Checkout URL and we navigate.
     setSubmitting(true);
     try {
-      if (tier === "free") {
+      if (LOCAL_FREE_TIERS.has(tier)) {
         await api.post("/subscriptions/checkout", {
-          plan_tier_code: "free",
+          plan_tier_code: tier,
           billing_cycle: "monthly",
           origin_url: window.location.origin,
         });
@@ -584,8 +624,9 @@ export default function Signup() {
                 )}
                 {plans.map((p) => {
                   const selected = tier === p.tier_code;
-                  const isFree = p.tier_code === "free";
+                  const isFree = LOCAL_FREE_TIERS.has(p.tier_code) || p.monthly_price_cents === 0;
                   const isContactSales = !!p.contact_sales;
+                  const featureRows = buildPlanFeatureRows(p);
                   const priceCents =
                     signupCycle === "annual" && p.annual_price_cents != null
                       ? p.annual_price_cents
@@ -626,14 +667,11 @@ export default function Signup() {
                         </div>
                       )}
                       <div className="text-[12.5px] text-white/55 mt-2 leading-relaxed flex-1">{p.description}</div>
-                      {p.feature_limits && (
+                      {featureRows.length > 0 && (
                         <div className="mt-3 text-[11.5px] text-white/55 space-y-1">
-                          {p.feature_limits.horses != null && (
-                            <div className="flex items-center gap-1.5"><Check className="w-3 h-3 text-equine-saddle" /> Up to {p.feature_limits.horses} horses</div>
-                          )}
-                          {p.feature_limits.users != null && (
-                            <div className="flex items-center gap-1.5"><Check className="w-3 h-3 text-equine-saddle" /> Up to {p.feature_limits.users} users</div>
-                          )}
+                          {featureRows.map((row) => (
+                            <div key={row} className="flex items-center gap-1.5"><Check className="w-3 h-3 text-equine-saddle" /> {row}</div>
+                          ))}
                         </div>
                       )}
                     </button>
@@ -647,14 +685,14 @@ export default function Signup() {
                 <button onClick={back} className="text-[13px] text-white/60 hover:text-white inline-flex items-center gap-2" data-testid="signup-step-back">
                   <ArrowLeft className="w-4 h-4" /> Back
                 </button>
-                {tier === "free" ? (
+                {LOCAL_FREE_TIERS.has(tier) ? (
                   <button
-                    onClick={finalizeFreeRefreshed}
+                    onClick={launchCheckout}
                     disabled={submitting}
                     className="bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                     data-testid="signup-finish-free"
                   >
-                    {submitting ? "Finishing…" : "Start with Free"} <ArrowRight className="w-4 h-4" />
+                    {submitting ? "Finishing…" : tier === "service_provider_free" ? "Start Service Provider Free" : "Start with Free"} <ArrowRight className="w-4 h-4" />
                   </button>
                 ) : selectedPlanForTier?.contact_sales ? (
                   <a

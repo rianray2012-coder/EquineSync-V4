@@ -1,0 +1,8 @@
+{
+  "appId": "com.equinesync.app",
+  "appName": "EquineSync",
+  "webDir": "build",
+  "server": {
+    "androidScheme": "https"
+  }
+}

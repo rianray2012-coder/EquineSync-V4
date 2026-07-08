@@ -84,6 +84,8 @@ def test_plans_catalog_returns_updated_pricing_tiers():
         "free",
         "individual_owner",
         "private_owner_plus",
+        "service_provider_free",
+        "service_provider_premium",
         "starter_barn",
         "advanced_barn",
         "elite_barn",
@@ -98,6 +100,9 @@ def test_plans_catalog_returns_updated_pricing_tiers():
     assert plans["enterprise"]["monthly_price_cents"] is None
     assert plans["individual_owner"]["monthly_price_cents"] == 1499
     assert plans["individual_owner"]["annual_price_cents"] == 14900
+    assert plans["service_provider_free"]["monthly_price_cents"] == 0
+    assert plans["service_provider_premium"]["monthly_price_cents"] == 1500
+    assert plans["service_provider_premium"]["annual_price_cents"] == 18000
     assert plans["starter_barn"]["monthly_price_cents"] == 6999
     assert plans["starter_barn"]["annual_price_cents"] == 69900
     assert plans["advanced_barn"]["monthly_price_cents"] == 14999
@@ -577,6 +582,8 @@ def test_plans_catalog_contains_all_updated_tiers_even_without_stripe():
         "free",
         "individual_owner",
         "private_owner_plus",
+        "service_provider_free",
+        "service_provider_premium",
         "starter_barn",
         "advanced_barn",
         "elite_barn",
