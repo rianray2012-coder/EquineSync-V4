@@ -1,0 +1,74 @@
+name: Provider isolation
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  no-live-provider-contact:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      APP_ENV: test
+      MONGO_URL: mongodb://127.0.0.1:27017
+      DB_NAME: provider_isolation_ci
+      JWT_SECRET: provider-isolation-ci-secret-at-least-thirty-two-bytes
+      STRIPE_API_KEY: ""
+      STRIPE_WEBHOOK_SECRET: ""
+      DOCUSIGN_ACCESS_TOKEN: ""
+      DOCUSIGN_CLIENT_SECRET: ""
+      DOCUSIGN_PRIVATE_KEY: ""
+      DOCUSIGN_PRIVATE_KEY_PATH: ""
+      DOCUSIGN_WEBHOOK_SECRET: ""
+      RESEND_API_KEY: ""
+      SENDGRID_API_KEY: ""
+      TWILIO_AUTH_TOKEN: ""
+      OPENAI_API_KEY: ""
+      ANTHROPIC_API_KEY: ""
+      GOOGLE_API_KEY: ""
+      GOOGLE_CLIENT_SECRET: ""
+      MICROSOFT_CLIENT_SECRET: ""
+      FIREBASE_PRIVATE_KEY: ""
+      SENTRY_AUTH_TOKEN: ""
+      ALLOW_SANDBOX_PROVIDER_TESTS: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Dependency bootstrap (PyPI only; before test isolation)
+        run: pip install -r backend/requirements.txt
+      - name: Verify CI egress policy
+        run: PYTHONPATH=. python backend/scripts/verify_ci_egress_policy.py
+      - name: Verify provider isolation under process-wide no-egress guard
+        run: PYTHONPATH=backend/tests/ci_no_egress:backend:. pytest -q backend/tests/test_w1_p2_08_provider_isolation.py backend/tests/test_ci_egress_defense.py
+      - name: Verify kernel network namespace has no external interface
+        run: |
+          sudo unshare --net bash -c '
+            set -euo pipefail
+            ip link set lo up
+            ! ip route | grep -q default
+            PYTHONPATH=backend:. python - <<"PY"
+          import socket
+          try:
+              socket.create_connection(("203.0.113.10", 443), timeout=0.1)
+          except OSError:
+              pass
+          else:
+              raise SystemExit("isolated namespace allowed outbound connection")
+          listener = socket.socket()
+          listener.bind(("127.0.0.1", 0))
+          listener.listen(1)
+          client = socket.create_connection(listener.getsockname(), timeout=1)
+          server, _ = listener.accept()
+          client.close(); server.close(); listener.close()
+          print("kernel namespace outbound denied; loopback preserved")
+          PY
+            PYTHONPATH=backend:. pytest -q backend/tests/test_w1_p2_08_provider_isolation.py
+          '
+      - name: Reject uncontrolled provider calls in ordinary test configuration
+        run: |
+          ! rg -n 'ALLOW_SANDBOX_PROVIDER_TESTS.{0,40}(true|1)' backend/tests \
+            -g '!test_w1_p2_08_provider_isolation.py'
