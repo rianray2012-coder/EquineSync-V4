@@ -61,4 +61,4 @@ def test_ordinary_test_network_policy_blocks_non_loopback(monkeypatch):
 
     monkeypatch.setattr(socket.socket, "connect", guarded_connect)
     with pytest.raises(RuntimeError, match="egress blocked"):
-        socket.create_connection(("api.stripe.com", 443), timeout=0.01)
+        socket.create_connection(("203.0.113.10", 443), timeout=0.01)
