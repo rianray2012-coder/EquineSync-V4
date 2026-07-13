@@ -46,7 +46,7 @@ jobs:
         run: PYTHONPATH=backend/tests/ci_no_egress:backend:. pytest -q backend/tests/test_w1_p2_08_provider_isolation.py backend/tests/test_ci_egress_defense.py
       - name: Verify kernel network namespace has no external interface
         run: |
-          sudo unshare --net bash -c '
+          sudo --preserve-env=PATH unshare --net bash -c '
             set -euo pipefail
             ip link set lo up
             ! ip route | grep -q default
@@ -66,7 +66,7 @@ jobs:
           client.close(); server.close(); listener.close()
           print("kernel namespace outbound denied; loopback preserved")
           PY
-            PYTHONPATH=backend:. pytest -q backend/tests/test_w1_p2_08_provider_isolation.py
+            PYTHONPATH=backend:. python -m pytest -q backend/tests/test_w1_p2_08_provider_isolation.py
           '
       - name: Reject uncontrolled provider calls in ordinary test configuration
         run: |
