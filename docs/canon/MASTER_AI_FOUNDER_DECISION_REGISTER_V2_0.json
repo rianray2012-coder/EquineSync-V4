@@ -1,0 +1,747 @@
+{
+  "classification": "FOUNDER_RATIFIED_CONTROLLING_COMPANION_REGISTER",
+  "origin": "NEW_CONTROLLING_COMPANION_NOT_HISTORICAL_RECOVERY",
+  "source": {
+    "path": "docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+    "section": "96. Founder Decisions Incorporated",
+    "sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8"
+  },
+  "directive_sha256": "e18bd3618241f2cd0b38af30d970933c732af1d87088fd88ad5fa45dac605425",
+  "identifier_rule": {
+    "prospective": true,
+    "administrative_only": true,
+    "section_96_controls": true
+  },
+  "decisions": [
+    {
+      "id": "AI-FD01",
+      "title": "Assistive Tool Boundary",
+      "exact_language": [
+        "AI is a tool for assistance, information, pattern and trend detection, and routine-task support."
+      ],
+      "sections": [
+        5,
+        13,
+        14,
+        15,
+        16,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        68
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "A",
+        "B"
+      ],
+      "cross_canons": [
+        "Product Vision",
+        "Ecosystem",
+        "Domain canons"
+      ],
+      "authority_owner": "AI Governance and applicable domain owner",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S005",
+        "AI-REQ-S013",
+        "AI-REQ-S014",
+        "AI-REQ-S015",
+        "AI-REQ-S016",
+        "AI-REQ-S052",
+        "AI-REQ-S053",
+        "AI-REQ-S054",
+        "AI-REQ-S055",
+        "AI-REQ-S056",
+        "AI-REQ-S057",
+        "AI-REQ-S058",
+        "AI-REQ-S068",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD02",
+      "title": "Safety Supremacy",
+      "exact_language": [
+        "AI must always prioritize safety."
+      ],
+      "sections": [
+        6,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "C",
+        "G",
+        "I",
+        "K",
+        "L"
+      ],
+      "cross_canons": [
+        "Security",
+        "Platform Operations",
+        "Safeguarding",
+        "Equine Health"
+      ],
+      "authority_owner": "AI Governance and accountable safety/domain owners",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S006",
+        "AI-REQ-S018",
+        "AI-REQ-S019",
+        "AI-REQ-S020",
+        "AI-REQ-S021",
+        "AI-REQ-S022",
+        "AI-REQ-S023",
+        "AI-REQ-S024",
+        "AI-REQ-S074",
+        "AI-REQ-S075",
+        "AI-REQ-S076",
+        "AI-REQ-S077",
+        "AI-REQ-S078",
+        "AI-REQ-S079",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD03",
+      "title": "Rider Ability and Lameness Prohibition",
+      "exact_language": [
+        "AI cannot determine rider ability or horse lameness."
+      ],
+      "sections": [
+        19,
+        62,
+        63,
+        69
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "A",
+        "B",
+        "L"
+      ],
+      "cross_canons": [
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "authority_owner": "Qualified human and professional authorities",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S019",
+        "AI-REQ-S062",
+        "AI-REQ-S063",
+        "AI-REQ-S069",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD04",
+      "title": "Consequential Human-Authority Zones",
+      "exact_language": [
+        "Consequential legal, financial, medical, welfare, safeguarding, ownership, and access decisions remain human-authority zones."
+      ],
+      "sections": [
+        17,
+        18,
+        19,
+        20,
+        24,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "B",
+        "G",
+        "H",
+        "L"
+      ],
+      "cross_canons": [
+        "Claims",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Relationship",
+        "Permission",
+        "Horse Transfer"
+      ],
+      "authority_owner": "Controlling domain authority",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S017",
+        "AI-REQ-S018",
+        "AI-REQ-S019",
+        "AI-REQ-S020",
+        "AI-REQ-S024",
+        "AI-REQ-S059",
+        "AI-REQ-S060",
+        "AI-REQ-S061",
+        "AI-REQ-S062",
+        "AI-REQ-S063",
+        "AI-REQ-S064",
+        "AI-REQ-S065",
+        "AI-REQ-S066",
+        "AI-REQ-S067",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD05",
+      "title": "Customer Operational Data Training Prohibition",
+      "exact_language": [
+        "EquineSync customer operational data will not be used to train General or Shared Models."
+      ],
+      "sections": [
+        25,
+        26,
+        27,
+        28,
+        32
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "J"
+      ],
+      "cross_canons": [
+        "Record Stewardship",
+        "Privacy",
+        "Data Protection",
+        "External Architecture"
+      ],
+      "authority_owner": "Record and privacy authorities constrained by AI Governance",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S025",
+        "AI-REQ-S026",
+        "AI-REQ-S027",
+        "AI-REQ-S028",
+        "AI-REQ-S032",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD06",
+      "title": "Provider Neutrality and Data Minimization",
+      "exact_language": [
+        "Provider-neutral architecture, minimum-necessary disclosure, strong retention controls, and vendor exit capability are required."
+      ],
+      "sections": [
+        9,
+        29,
+        30,
+        36,
+        37,
+        72,
+        84,
+        85
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "J",
+        "K"
+      ],
+      "cross_canons": [
+        "External Architecture",
+        "Record Stewardship",
+        "Privacy",
+        "Security",
+        "Platform Operations"
+      ],
+      "authority_owner": "Respective external, record, privacy, security, and operations owners",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S009",
+        "AI-REQ-S029",
+        "AI-REQ-S030",
+        "AI-REQ-S036",
+        "AI-REQ-S037",
+        "AI-REQ-S072",
+        "AI-REQ-S084",
+        "AI-REQ-S085",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD07",
+      "title": "Five-Tier Decision Framework",
+      "exact_language": [
+        "The five-tier decision framework is approved."
+      ],
+      "sections": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "A",
+        "B",
+        "C",
+        "H"
+      ],
+      "cross_canons": [
+        "Permission",
+        "Identity",
+        "Relationship",
+        "Domain canons"
+      ],
+      "authority_owner": "AI Governance classification and domain authority",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S012",
+        "AI-REQ-S013",
+        "AI-REQ-S014",
+        "AI-REQ-S015",
+        "AI-REQ-S016",
+        "AI-REQ-S017",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD08",
+      "title": "Output Labeling and Uncertainty",
+      "exact_language": [
+        "AI outputs must be labeled, source-grounded, transparent about fact versus inference, explicit about estimates, and candid about uncertainty."
+      ],
+      "sections": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        47,
+        50
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "F",
+        "G"
+      ],
+      "cross_canons": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Search and Discovery"
+      ],
+      "authority_owner": "AI Governance and applicable audit, record, and communication owners",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S040",
+        "AI-REQ-S041",
+        "AI-REQ-S042",
+        "AI-REQ-S043",
+        "AI-REQ-S044",
+        "AI-REQ-S047",
+        "AI-REQ-S050",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD09",
+      "title": "Refusal of Unsupported Conclusions",
+      "exact_language": [
+        "AI must refuse unsupported conclusions and request more information when appropriate."
+      ],
+      "sections": [
+        24,
+        43,
+        45,
+        46
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "F",
+        "G",
+        "I"
+      ],
+      "cross_canons": [
+        "Security",
+        "Audit",
+        "Domain professional authority"
+      ],
+      "authority_owner": "AI Governance and accountable domain reviewer",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S024",
+        "AI-REQ-S043",
+        "AI-REQ-S045",
+        "AI-REQ-S046",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD10",
+      "title": "Noncanonical Output and Narrowest Permission",
+      "exact_language": [
+        "AI output is not automatically canonical, users may challenge it, and AI inherits the user's narrowest permissions."
+      ],
+      "sections": [
+        31,
+        41,
+        48,
+        49,
+        87
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "G",
+        "H"
+      ],
+      "cross_canons": [
+        "Permission",
+        "Identity",
+        "Relationship",
+        "Claims",
+        "Audit",
+        "Record Stewardship"
+      ],
+      "authority_owner": "Permission Model and controlling record or claims owner",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S031",
+        "AI-REQ-S041",
+        "AI-REQ-S048",
+        "AI-REQ-S049",
+        "AI-REQ-S087",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD11",
+      "title": "Cross-Tenant and Enhanced Safeguards",
+      "exact_language": [
+        "Identifiable cross-tenant learning is prohibited; minors, offline use, financial use, and equine-health use receive enhanced safeguards."
+      ],
+      "sections": [
+        32,
+        33,
+        34,
+        38,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "C",
+        "I",
+        "J",
+        "K",
+        "L"
+      ],
+      "cross_canons": [
+        "Privacy",
+        "Safeguarding",
+        "Offline and Resilience",
+        "Financial Truth",
+        "Equine Health"
+      ],
+      "authority_owner": "Applicable privacy, safeguarding, financial, and health owners",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S032",
+        "AI-REQ-S033",
+        "AI-REQ-S034",
+        "AI-REQ-S038",
+        "AI-REQ-S059",
+        "AI-REQ-S060",
+        "AI-REQ-S061",
+        "AI-REQ-S062",
+        "AI-REQ-S063",
+        "AI-REQ-S064",
+        "AI-REQ-S065",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    },
+    {
+      "id": "AI-FD12",
+      "title": "Bounded Launch Candidates and Emergency Deferral",
+      "exact_language": [
+        "Health-risk scoring, feed recommendations, behavioral or risk scoring, automatic collections, financial forecasting, and supervised workflow automation are permitted launch candidates within the boundaries of this Model.",
+        "Predictive Emergency Decisions remain deferred."
+      ],
+      "sections": [
+        52,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        92,
+        93
+      ],
+      "invariants": [
+        94
+      ],
+      "prohibitions": [
+        95
+      ],
+      "appendices": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "I",
+        "K",
+        "L"
+      ],
+      "cross_canons": [
+        "Implementation Atlas",
+        "Financial Truth",
+        "Equine Health",
+        "Platform Operations",
+        "RF30"
+      ],
+      "authority_owner": "Founder and later governed implementation or release authority",
+      "source_section": "96. Founder Decisions Incorporated",
+      "exact_source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "decision_status": "FOUNDER_RATIFIED",
+      "authority_classification": "CONSTITUTIONAL_AI_POLICY_WITH_DOMAIN_AUTHORITY_PRESERVED",
+      "governance_requirement_ids": [
+        "AI-REQ-S052",
+        "AI-REQ-S059",
+        "AI-REQ-S060",
+        "AI-REQ-S061",
+        "AI-REQ-S062",
+        "AI-REQ-S063",
+        "AI-REQ-S064",
+        "AI-REQ-S065",
+        "AI-REQ-S066",
+        "AI-REQ-S067",
+        "AI-REQ-S092",
+        "AI-REQ-S093",
+        "AI-REQ-S094",
+        "AI-REQ-S095"
+      ],
+      "traceability_status": "COMPLETE",
+      "adoption_state": "PENDING",
+      "lock_state": "PENDING",
+      "implementation_authority": false,
+      "production_authority": false,
+      "supersession_state": "NONE",
+      "notes": "Administrative metadata only; exact Section 96 language controls."
+    }
+  ],
+  "metadata_rule": {
+    "decision_status": "FOUNDER_RATIFIED",
+    "traceability_status": "COMPLETE",
+    "adoption_state": "PENDING",
+    "lock_state": "PENDING",
+    "implementation_authority": false,
+    "production_authority": false,
+    "supersession_state": "NONE",
+    "notes": "Administrative titles and mappings do not modify exact Section 96 language."
+  }
+}

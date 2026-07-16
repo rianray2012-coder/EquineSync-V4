@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-07-16T17:24:34Z",
+  "findings": [
+    {
+      "id": "C0-023-LR-P1-01",
+      "severity": "P1",
+      "row": "C0-023",
+      "title": "Primary constitutional prerequisites are not lifecycle-resolved",
+      "evidence": [
+        "C0-004 Master Product Vision: NOT_ESTABLISHED",
+        "C0-019 Agreement, Consent, and Authorization: NOT_ESTABLISHED"
+      ],
+      "required_resolution": "Resolve exact-source identity and constitutional lifecycle for C0-004 and C0-019, then rerun the C0-023 lock-readiness review."
+    },
+    {
+      "id": "C0-035-LR-P1-01",
+      "severity": "P1",
+      "row": "C0-035",
+      "title": "Reporting lock prerequisites are incomplete",
+      "evidence": [
+        "C0-004 Master Product Vision: NOT_ESTABLISHED",
+        "C0-022 Permission and Access-Control: NOT_ESTABLISHED",
+        "C0-023 Privacy: ADOPTED but NOT_YET_LOCKED"
+      ],
+      "required_resolution": "Resolve C0-004 and C0-022, complete and lock C0-023 under separate authority, then rerun the C0-035 lock-readiness review."
+    },
+    {
+      "id": "C0-023-LR-P2-01",
+      "severity": "P2",
+      "row": "C0-023",
+      "title": "Non-primary co-review families remain lifecycle-incomplete",
+      "evidence": [
+        "C0-028 Claims, Disputes, and Authority: NOT_ESTABLISHED",
+        "C0-041 Vendor Security and Supply Chain: pending separate adoption"
+      ],
+      "required_resolution": "Track change-impact review so later adoption cannot silently conflict with locked Privacy authority."
+    },
+    {
+      "id": "C0-035-LR-P2-01",
+      "severity": "P2",
+      "row": "C0-035",
+      "title": "Search mandatory overlay remains lifecycle-incomplete",
+      "evidence": [
+        "C0-033 Search, Discovery, Ranking, and Retrieval: pending separate adoption"
+      ],
+      "required_resolution": "Require future C0-033 adoption and lock review to conform to Reporting, Privacy, Permission, and Record authority."
+    }
+  ]
+}

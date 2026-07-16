@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-07-16T20:22:52Z",
+  "source_hashes": "PASS",
+  "exact_byte_copies": "PASS",
+  "merge_markers": "PASS",
+  "secret_scan": "PASS",
+  "authority_overclaim": "PASS",
+  "dependency_order": "PASS",
+  "json_validation": "PASS",
+  "application_runtime_changes": 0,
+  "p0": 0,
+  "open_p1": 0,
+  "lock_blocking_p2": 0,
+  "rows": [
+    {
+      "c0_id": "C0-005",
+      "source_sha256": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+      "source_bytes": 11560
+    },
+    {
+      "c0_id": "C0-012",
+      "source_sha256": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+      "source_bytes": 12313
+    },
+    {
+      "c0_id": "C0-014",
+      "source_sha256": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+      "source_bytes": 10324
+    },
+    {
+      "c0_id": "C0-015",
+      "source_sha256": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+      "source_bytes": 11741
+    },
+    {
+      "c0_id": "C0-016",
+      "source_sha256": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+      "source_bytes": 10587
+    },
+    {
+      "c0_id": "C0-022",
+      "source_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "source_bytes": 49176
+    },
+    {
+      "c0_id": "C0-028",
+      "source_sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "source_bytes": 62200
+    },
+    {
+      "c0_id": "C0-033",
+      "source_sha256": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+      "source_bytes": 67252
+    },
+    {
+      "c0_id": "C0-039",
+      "source_sha256": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+      "source_bytes": 77016
+    },
+    {
+      "c0_id": "C0-040",
+      "source_sha256": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f",
+      "source_bytes": 87995
+    },
+    {
+      "c0_id": "C0-041",
+      "source_sha256": "7561351c796d433ac6b9da1eb66eccc53acc2244c764903f6a844d44da704361",
+      "source_bytes": 51339
+    },
+    {
+      "c0_id": "C0-042",
+      "source_sha256": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+      "source_bytes": 26952
+    },
+    {
+      "c0_id": "C0-043",
+      "source_sha256": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+      "source_bytes": 73087
+    }
+  ]
+}

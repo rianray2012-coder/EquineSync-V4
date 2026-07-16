@@ -1,0 +1,1130 @@
+{
+  "generated_at": "2026-07-16T08:32:07Z",
+  "approved_roots": [
+    "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/docs",
+    "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs",
+    "/Users/rianray/Downloads",
+    "/Users/rianray/.codex/attachments"
+  ],
+  "public_web_used": false,
+  "archive_count": 251,
+  "named_candidate_file_count": 71,
+  "named_archive_member_count": 67,
+  "archives": [
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/docs/RF28/duplicate copy.zip",
+      "size": 15739
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/docs/canon/reviews/stage0_companion_reconciliation_v1_2/EquineSync_Stage0_Companion_Reconciliation_Package_V1_2.zip",
+      "size": 897429
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/docs/canon/reviews/c0_source_reconciliation_v1_0/EquineSync_C0_Constitutional_Source_Reconciliation_Package_V1_0.zip",
+      "size": 88668
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/EquineSync_Safeguarding_Companion_Integration_Package_V1_0.zip",
+      "size": 453773
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/docs/canon/adoptions/safeguarding_v1_2/evidence/safeguarding_v1_2_adoption_candidate_review_evidence.zip",
+      "size": 1081062
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package.zip",
+      "size": 436451
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf2_identity_access_migration.zip",
+      "size": 137749
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13g_trainer_intake_shell.zip",
+      "size": 102554
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf30_implementation_readiness.zip",
+      "size": 56933
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6f_docusign_webhook_status_sync 3.zip",
+      "size": 114148
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_2_mobile_readiness.zip",
+      "size": 225151
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/master_equinesync_wave_2_implementation_and_lock.zip",
+      "size": 87038
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13f_barn_owner_intake_shell.zip",
+      "size": 101232
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6f_docusign_webhook_status_sync.zip",
+      "size": 114316
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_12a_uat_account_seed.zip",
+      "size": 10614
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/equine_sync_next_build_plan.zip",
+      "size": 84414
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_atlas2_barn_reality_audit.zip",
+      "size": 110616
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf15_offline_lock_screen_field_reliability.zip",
+      "size": 151429
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6a_signature_connector_prep.zip",
+      "size": 113275
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf29_activation_authorization.zip",
+      "size": 25938
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_21_first_client_pilot_go_no_go.zip",
+      "size": 117240
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/native_offline_sync_founder_acceptance.zip",
+      "size": 10825
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Actor_V2_Constitutional_Correction_Package.zip",
+      "size": 92399
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf30_activation_evidence.zip",
+      "size": 29627
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6f_docusign_webhook_status_sync 2.zip",
+      "size": 112889
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13d_guardian_minor_intake.zip",
+      "size": 96675
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_facility_legacy_convergence_kickoff.zip",
+      "size": 92869
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf29_calendar_domain_canon.zip",
+      "size": 35752
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/native_offline_sync_stop_evidence.zip",
+      "size": 37231
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13k_role_flow_smoke.zip",
+      "size": 87368
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_atlas4_next_wave_implementation_readiness.zip",
+      "size": 58565
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_17c_role_journey_launch_trust_evidence.zip",
+      "size": 106353
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13l_credentialed_role_smoke_prep.zip",
+      "size": 88451
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_e_billing_seat_classification 2.zip",
+      "size": 85699
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf9_trainer_operating_center.zip",
+      "size": 172588
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15a_todays_pulse_data_contract.zip",
+      "size": 98351
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/master_media_files_and_digital_asset_governance_v1_2_review_package.zip",
+      "size": 57859
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_d_usage_addon_prompts.zip",
+      "size": 83746
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1h_changes.zip",
+      "size": 91098
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_4_invite_onboarding 2.zip",
+      "size": 109139
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/External_Architecture_V2_0_Founder_Review_Package.zip",
+      "size": 68466
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15f_live_today_pulse_walkthrough.zip",
+      "size": 95388
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/External_Architecture_V2_0_Lock_Review_Package.zip",
+      "size": 46772
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf7_owner_client_portal_hardening.zip",
+      "size": 157985
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/master_media_files_and_digital_asset_governance_v1_1_review_package.zip",
+      "size": 43056
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_10_staging_uat_closure.zip",
+      "size": 109831
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_5c_minor_communication_guard.zip",
+      "size": 112996
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_18b_production_environment_proof.zip",
+      "size": 108797
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf25_equine_passport_continuity_expansion.zip",
+      "size": 10231
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_5b_guardian_student_invites.zip",
+      "size": 113332
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf29_final_lock_readiness.zip",
+      "size": 176730
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_16b_setup_readiness_contract.zip",
+      "size": 105636
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/safeguarding_v1_2_adoption_candidate_review_evidence.zip",
+      "size": 1081062
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf5_web_enrollment_account_health.zip",
+      "size": 152573
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_implementation_readiness.zip",
+      "size": 75684
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_atlas1_product_continuity_audit.zip",
+      "size": 364695
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_16c_frontend_route_separation.zip",
+      "size": 125480
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf16_pwa_native_app_store_readiness.zip",
+      "size": 719688
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/External_Architecture_V2_0_Controlled_Adoption_Package.zip",
+      "size": 143004
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/equine_health_v1_1_founder_review_evidence.zip",
+      "size": 77014
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf30_final_lock.zip",
+      "size": 265228
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/master_equinesync_wave_1_implementation_review.zip",
+      "size": 63300
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13a_role_routing.zip",
+      "size": 22392
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/safeguarding_v1_2_founder_adoption_evidence.zip",
+      "size": 1153263
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_19_founder_acceptance_ledger.zip",
+      "size": 118768
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1g_changes.zip",
+      "size": 129289
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6e_docusign_sandbox_envelope 2.zip",
+      "size": 108202
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf23_navigation_persona_workflow_continuity.zip",
+      "size": 7810
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Actor_V2_Constitutional_Review_Package.zip",
+      "size": 58329
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13j_role_first_login_evidence.zip",
+      "size": 86050
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15c_b_barn_visibility_policy.zip",
+      "size": 100488
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/rf31_fd04_mandatory_review_policy_package.zip",
+      "size": 140107
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_2b_live_mobile_screenshot_gate.zip",
+      "size": 591855
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1g_changes 2.zip",
+      "size": 128776
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/native_offline_sync_bounded_corrective_evidence.zip",
+      "size": 28116
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_5c_minor_communication_guard_plan.zip",
+      "size": 100527
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_3b_active_context.zip",
+      "size": 100793
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_final_lock.zip",
+      "size": 125959
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_5b_guardian_student_invites_plan.zip",
+      "size": 99836
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_e_billing_seat_classification.zip",
+      "size": 88107
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_5_minor_parent_safeguards_plan.zip",
+      "size": 97069
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf14_documents_signatures_storage_consolidation.zip",
+      "size": 173577
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_4_invite_onboarding.zip",
+      "size": 116577
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_g_billing_channel_routing_prep.zip",
+      "size": 78152
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6e_docusign_sandbox_envelope.zip",
+      "size": 109018
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf30_ai_boundary.zip",
+      "size": 54717
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1e_changes_codex_fix.zip",
+      "size": 120649
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf24_service_provider_operating_center.zip",
+      "size": 15199
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf20_post_rf19_founder_acceptance.zip",
+      "size": 5527735
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_1_billing_launch_readiness.zip",
+      "size": 95610
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/rf31_fd05_beneficial_ownership_policy_package.zip",
+      "size": 153371
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_c_stripe_catalog_wiring.zip",
+      "size": 118248
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1k_changes.zip",
+      "size": 80392
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_3a_account_memberships.zip",
+      "size": 111355
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_18a_provider_live_proof.zip",
+      "size": 111248
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_17b_role_intake_split.zip",
+      "size": 116295
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf10_service_provider_care_partner.zip",
+      "size": 176186
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf8_staff_workforce_model.zip",
+      "size": 165569
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf29_final_lock.zip",
+      "size": 177618
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/launch_trust_roadmap_alignment.zip",
+      "size": 100953
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13p_role_home_title_case_polish.zip",
+      "size": 101396
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Actor_V2_Lock_Review_Package.zip",
+      "size": 112109
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/controlled_review_classification_correction_evidence.zip",
+      "size": 649912
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_migration_execution_authorization.zip",
+      "size": 18977
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Actor_V2_Controlled_Adoption_Package.zip",
+      "size": 122462
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Account_Actor_V2_Final_Lock_Package.zip",
+      "size": 715148
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15b_billing_webhook_entitlement_hardening.zip",
+      "size": 100839
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf21_founder_decision_intake.zip",
+      "size": 5682775
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_3_multi_barn_multi_role_gap_report.zip",
+      "size": 97575
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf11_property_location_map_community_help.zip",
+      "size": 161253
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf13_messaging_notifications_delivery_truth.zip",
+      "size": 170748
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_16a_role_journey_audit.zip",
+      "size": 95543
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13b_role_navigation.zip",
+      "size": 87766
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_5a_minor_safety_rules.zip",
+      "size": 113921
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/rf31_fd03_automated_approval_policy_package.zip",
+      "size": 122346
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/W1_RF01_Identity_Readiness_Assessment_Package.zip",
+      "size": 64977
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_atlas0_enterprise_discovery_audit.zip",
+      "size": 494631
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13m_credentialed_role_smoke_evidence.zip",
+      "size": 87173
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_3d_task_context.zip",
+      "size": 109373
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6c_document_request_foundation.zip",
+      "size": 102461
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/specialized_canon_controlled_review_evidence.zip",
+      "size": 89459
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6d_docusign_jwt_smoke 2.zip",
+      "size": 96557
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_17a_launch_trust_route_taxonomy.zip",
+      "size": 111059
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Implementation_Atlas_V1_Adoption_Package.zip",
+      "size": 1193584
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_7a_staging_uat_evidence 2.zip",
+      "size": 98712
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13n_role_credential_readiness.zip",
+      "size": 119356
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Actor_V2_Controlled_Adoption_Review_Package.zip",
+      "size": 92399
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_7a_staging_uat_evidence.zip",
+      "size": 98711
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf29_activation_evidence.zip",
+      "size": 45672
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6d_docusign_jwt_smoke 3.zip",
+      "size": 97398
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_9_staging_uat_execution.zip",
+      "size": 1239022
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_8_production_go_live_runbook.zip",
+      "size": 98628
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf1_data_fences_capability_gates.zip",
+      "size": 67669
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_7_launch_qa_uat_gate.zip",
+      "size": 98634
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_14b_role_ux_hardening_cleanup.zip",
+      "size": 91847
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15d_today_pulse_uat_evidence.zip",
+      "size": 6071456
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_14a_roadmap_alignment_hardening.zip",
+      "size": 94447
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/ci_egress_defense_in_depth_closure.zip",
+      "size": 127653
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/rf27_facility_map_barn_operations_reality.zip",
+      "size": 65501
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_12_closure.zip",
+      "size": 7668
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf22_rf_closeout_atlas_handoff.zip",
+      "size": 5848122
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1i_changes.zip",
+      "size": 143856
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_5d_minor_parent_evidence.zip",
+      "size": 130345
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_3c_route_guard_migration_plan.zip",
+      "size": 94072
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf3_onboarding_import_setup.zip",
+      "size": 129817
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Implementation_Atlas_V1_Founder_Decision_Packet.zip",
+      "size": 61680
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/security_foundational_models_v1_0_founder_review_package.zip",
+      "size": 27019
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/External_Architecture_V2_0_Narrow_Correction_Package.zip",
+      "size": 115569
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_implementation_evidence.zip",
+      "size": 77155
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf30_final_lock_readiness.zip",
+      "size": 137224
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/stage0_c0_repository_incorporation_evidence.zip",
+      "size": 2456913
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf18_qa_uat_public_launch_readiness.zip",
+      "size": 148877
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15e_today_pulse_founder_acceptance_ledger.zip",
+      "size": 93476
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/rf31_horse_transfer_policy_final_lock_package.zip",
+      "size": 249584
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/native_offline_sync_implementation_planning_evidence.zip",
+      "size": 47820
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/equine_sync_build_packet_repo_docs.zip",
+      "size": 115527
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf6_canonical_systems_consolidation.zip",
+      "size": 126698
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13e_owner_intake_shell.zip",
+      "size": 97818
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_18e_app_store_readiness.zip",
+      "size": 125853
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15f1_live_today_pulse_walkthrough.zip",
+      "size": 10480943
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf30_replacement_activation_evidence.zip",
+      "size": 41664
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf19_staging_uat_evidence_capture.zip",
+      "size": 5360600
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15c_c_today_pulse_role_home_evidence.zip",
+      "size": 104116
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Next_Governed_Phase_Assessment_Package.zip",
+      "size": 48386
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/ci_egress_defense_in_depth_evidence.zip",
+      "size": 16399
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_11_staging_environment_proof.zip",
+      "size": 107694
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_3b_active_context 2.zip",
+      "size": 99113
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_12_prep_staging_inputs.zip",
+      "size": 105425
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_a_entitlement_schema_prep.zip",
+      "size": 79069
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/EquineSync_Confirmed_Canon_Package.zip",
+      "size": 1593468
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13o_credentialed_role_screenshot_pass.zip",
+      "size": 6082655
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13h_manager_intake_shell.zip",
+      "size": 104924
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/parallel_safeguarding_package_reconciliation_evidence.zip",
+      "size": 998395
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Wave_1_Readiness_Package.zip",
+      "size": 15395
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf30_implementation_evidence.zip",
+      "size": 65487
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_15c_a_today_pulse_frontend_wiring.zip",
+      "size": 100428
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_atlas3_canon_integrity_domain_consistency.zip",
+      "size": 180280
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_adapter_activation_evidence.zip",
+      "size": 14084
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/native_offline_sync_readiness_final_evidence.zip",
+      "size": 49460
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/master_media_files_and_digital_asset_governance_v1_0_review_package.zip",
+      "size": 18879
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf4_feature_completion_certification.zip",
+      "size": 162047
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_17d_role_journey_cleanup.zip",
+      "size": 126978
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_h_stripe_live_catalog_reconciliation.zip",
+      "size": 110974
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_20_bn12_closure.zip",
+      "size": 118591
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf17_feature_shell_ux_truth.zip",
+      "size": 170206
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/equine_health_v1_1_founder_adoption_evidence.zip",
+      "size": 215770
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1h_changes 2.zip",
+      "size": 91123
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_9_staging_uat_execution 4.zip",
+      "size": 107399
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf30_activation_authorization.zip",
+      "size": 49255
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_3c_route_guard_migration.zip",
+      "size": 112352
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_18d_field_reliability_offline_proof.zip",
+      "size": 124598
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf29_implementation_readiness.zip",
+      "size": 28449
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/External_Architecture_V2_0_Final_Lock_Package.zip",
+      "size": 127868
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1j_changes.zip",
+      "size": 196829
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_18c_uat_role_refresh.zip",
+      "size": 2825183
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6b_document_workflow_provider_plan.zip",
+      "size": 111524
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_migration_execution_evidence.zip",
+      "size": 14136
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/master_equinesync_wave_1_final_lock.zip",
+      "size": 87015
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf12_billing_payments_exports_financial_truth.zip",
+      "size": 160999
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf26_care_circle_permission_continuity.zip",
+      "size": 20973
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_adapter_activation_authorization.zip",
+      "size": 21381
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_8_production_go_live_runbook 2.zip",
+      "size": 98487
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13i_staff_intake_shell.zip",
+      "size": 106390
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_13c_rider_intake_shell.zip",
+      "size": 94070
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_6d_docusign_jwt_smoke.zip",
+      "size": 97418
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/master_security_privacy_and_trust_model_v1_0_review_package.zip",
+      "size": 16743
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_8_production_go_live_runbook 3.zip",
+      "size": 98632
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Critical_Path_Phases_1_4_Completion_Package.zip",
+      "size": 1246895
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/financial_truth_v2_1_adoption_lock_package.zip",
+      "size": 87166
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf28_reproducibility_evidence.zip",
+      "size": 10129
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/equinesync_access_and_control_documents.zip",
+      "size": 37947
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/rf31_fd06_fd30_consolidated_reconciliation_package.zip",
+      "size": 198467
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_9_staging_uat_execution 2.zip",
+      "size": 100711
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Implementation_Atlas_V1_Controlled_Review_Package.zip",
+      "size": 59443
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_rf29_implementation_evidence.zip",
+      "size": 70926
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/External_Architecture_V2_0_Controlled_Adoption_Review_Package.zip",
+      "size": 85540
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_f_billing_seat_cleanup_report.zip",
+      "size": 80298
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_horseops_1f_changes.zip",
+      "size": 113264
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/build_next_9_staging_uat_execution 3.zip",
+      "size": 104116
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/phase_15r_b_migration_dry_run.zip",
+      "size": 90987
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/governance_v1_0_final_baseline_resumption/GOVERNANCE_V1_0_COMPANION_ADOPTION_AND_C0_LIFECYCLE_RECONCILIATION_EVIDENCE.zip",
+      "size": 751626
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/governance_v1_0_ai_reconciliation/governance_v1_0_ai_v2_phase_2_blocker_package.zip",
+      "size": 30659
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/governance_v1_0_global_companion_reconciliation/EQUINESYNC_GLOBAL_COMPANION_ARTIFACT_SOURCE_RECOVERY_AND_LIFECYCLE_RECONCILIATION_PACKAGE_V1_0.zip",
+      "size": 499498
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/governance_v1_0_c0_lifecycle_completion_batch_1/GOVERNANCE_V1_0_C0_BATCH_1_TRACK_B_SEVEN_CANON_LOCK_EVIDENCE_PACKAGE.zip",
+      "size": 341385
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/governance_v1_0_c0_lifecycle_completion_batch_1/GOVERNANCE_V1_0_C0_LIFECYCLE_COMPLETION_BATCH_1_EVIDENCE_PACKAGE.zip",
+      "size": 255061
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Account_Actor_V2_Final_Lock_Package/artifacts/outputs/Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package.zip",
+      "size": 436451
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Account_Actor_V2_Final_Lock_Package/artifacts/outputs/Identity_Actor_V2_Lock_Review_Package.zip",
+      "size": 112109
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Account_Actor_V2_Final_Lock_Package/artifacts/outputs/Identity_Actor_V2_Controlled_Adoption_Package.zip",
+      "size": 122462
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Implementation_Atlas_V1_Adoption_Package/artifacts/outputs/Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package.zip",
+      "size": 436451
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Implementation_Atlas_V1_Adoption_Package/artifacts/outputs/Identity_Account_Actor_V2_Final_Lock_Package.zip",
+      "size": 715148
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/governance_v1_0_ai_reconciliation/ai_v2_exact_source_resumption/AI_V2_0_FOUNDER_RATIFICATION_REVIEW_PACKAGE.zip",
+      "size": 485686
+    },
+    {
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/governance_v1_0_ai_reconciliation/ai_v2_locked_replacement/AI_V2_0_FOUNDER_RATIFIED_RECONCILIATION_AND_REVIEW_PACKAGE.zip",
+      "size": 520524
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_Media_Files_Digital_Asset_Governance_V1_3_Package.zip",
+      "size": 77575
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_C1_RF31_Source_Recovery_and_Linkage_Package_V1_0 (1).zip",
+      "size": 54948
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_Six_Foundational_Canon_Reviewed_Candidates.zip",
+      "size": 304389
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_ATLAS5_External_Services_Readiness_Package (1).zip",
+      "size": 18224
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_Safeguarding_Companion_Integration_Package_V1_0(1).zip",
+      "size": 453773
+    },
+    {
+      "path": "/Users/rianray/Downloads/safeguarding_v1_2_adoption_candidate_review_evidence.zip",
+      "size": 1081062
+    },
+    {
+      "path": "/Users/rianray/Downloads/safeguarding_v1_2_founder_adoption_evidence.zip",
+      "size": 1153263
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_C0_Constitutional_Source_Reconciliation_Package_V1_0.zip",
+      "size": 88668
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_Canon_Compilation_Control_Package.zip",
+      "size": 11325
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_Safeguarding_Companion_Integration_Package_V1_0.zip",
+      "size": 453773
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_C1_RF31_Source_Recovery_and_Linkage_Package_V1_0.zip",
+      "size": 54948
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_ATLAS5_External_Services_Readiness_Package.zip",
+      "size": 18224
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_Stage0_Companion_Reconciliation_Package_V1_2.zip",
+      "size": 897429
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_Master_Minor_Guardianship_Safeguarding_Protected_Participant_V1_1_Reviewed_Draft_Package.zip",
+      "size": 116006
+    },
+    {
+      "path": "/Users/rianray/Downloads/EquineSync_Cross_Canon_Reconciliation_Package_V1_0.zip",
+      "size": 343996
+    },
+    {
+      "path": "/Users/rianray/Downloads/Equine Sync Codex and July Docs/equinesync_phased_plan_md(2).zip",
+      "size": 36384
+    },
+    {
+      "path": "/Users/rianray/Downloads/Equine Sync Codex and July Docs/equinesync_phased_plan_md.zip",
+      "size": 29022
+    },
+    {
+      "path": "/Users/rianray/Downloads/Equine Sync Codex and July Docs/EquineSync Platform Launch-all-assets.zip",
+      "size": 3680914
+    },
+    {
+      "path": "/Users/rianray/Downloads/docs/canon/adoptions/safeguarding_v1_2/evidence/safeguarding_v1_2_adoption_candidate_review_evidence.zip",
+      "size": 1081062
+    }
+  ],
+  "exact_hash_matches": [
+    {
+      "row_id": "C0-028",
+      "kind": "file",
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/docs/canon/intake/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+      "member": null,
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "row_id": "C0-028",
+      "kind": "zip_member",
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package.zip",
+      "member": "Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package/artifacts/docs/canon/intake/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "row_id": "C0-028",
+      "kind": "zip_member",
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/EquineSync_Confirmed_Canon_Package.zip",
+      "member": "EquineSync_Confirmed_Canon_Package/90_SOURCE_VERSIONS/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "row_id": "C0-028",
+      "kind": "zip_member",
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Identity_Account_Actor_V2_Final_Lock_Package/artifacts/outputs/Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package.zip",
+      "member": "Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package/artifacts/docs/canon/intake/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "row_id": "C0-028",
+      "kind": "zip_member",
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Implementation_Atlas_V1_Adoption_Package/artifacts/outputs/Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package.zip",
+      "member": "Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package/artifacts/docs/canon/intake/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "row_id": "C0-028",
+      "kind": "file",
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/EquineSync_Confirmed_Canon_Package/90_SOURCE_VERSIONS/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+      "member": null,
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "row_id": "C0-028",
+      "kind": "file",
+      "path": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current/outputs/Master_EquineSync_Wave_0_Canon_Integration_and_Lock_Package/artifacts/docs/canon/intake/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+      "member": null,
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "row_id": "C0-028",
+      "kind": "file",
+      "path": "/Users/rianray/Downloads/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0.md",
+      "member": null,
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "row_id": "C0-022",
+      "kind": "zip_member",
+      "path": "/Users/rianray/Downloads/EquineSync_Cross_Canon_Reconciliation_Package_V1_0.zip",
+      "member": "equinesync_cross_canon_reconciliation/MASTER_PERMISSION_MODEL_V1_1.md",
+      "sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "size": 49176
+    },
+    {
+      "row_id": "C0-019",
+      "kind": "zip_member",
+      "path": "/Users/rianray/Downloads/EquineSync_Cross_Canon_Reconciliation_Package_V1_0.zip",
+      "member": "equinesync_cross_canon_reconciliation/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1.md",
+      "sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+      "size": 86116
+    },
+    {
+      "row_id": "C0-019",
+      "kind": "file",
+      "path": "/Users/rianray/Downloads/equinesync_cross_canon_reconciliation/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1.md",
+      "member": null,
+      "sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+      "size": 86116
+    },
+    {
+      "row_id": "C0-022",
+      "kind": "file",
+      "path": "/Users/rianray/Downloads/equinesync_cross_canon_reconciliation/MASTER_PERMISSION_MODEL_V1_1.md",
+      "member": null,
+      "sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "size": 49176
+    }
+  ],
+  "matched_rows": [
+    "C0-019",
+    "C0-022",
+    "C0-028"
+  ],
+  "unmatched_rows": [
+    "C0-004",
+    "C0-005",
+    "C0-012",
+    "C0-014",
+    "C0-015",
+    "C0-016"
+  ]
+}

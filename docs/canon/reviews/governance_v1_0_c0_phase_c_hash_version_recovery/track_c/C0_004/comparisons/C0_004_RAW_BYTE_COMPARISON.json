@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-004",
+  "current_path": "docs/canon/MASTER_PRODUCT_VISION.md",
+  "current_sha256": "ba2bdedfbbd89889af02035656d2f738175dcbde3869084c5e0c92062644c469",
+  "expected_sha256": "42f01b4094923d85ab6b7de9c56fc6c084adac4f9b06464554ba2f9e91787953",
+  "expected_source_recovered": false,
+  "recovered_evidence_path": null,
+  "recovered_sha256": null,
+  "raw_byte_identical": false,
+  "current_size": 56480,
+  "recovered_size": null,
+  "normalized_line_similarity": null,
+  "heading_similarity": null
+}

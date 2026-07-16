@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-07-16T17:56:30Z",
+  "sources": [
+    {
+      "path": "docs/canon/reviews/c0_019_agreement_consent_authorization_lifecycle_completion/source_event/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1_ORIGINAL.md",
+      "version": "2.1",
+      "status": "exact expected source",
+      "sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+      "controlling_claim": true,
+      "relationship": "controlling successor"
+    },
+    {
+      "path": "docs/canon/founder_approved_sources/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1_FOUNDER_APPROVED.md",
+      "version": "2.1",
+      "status": "founder-approved pre-adoption",
+      "sha256": "fca7f430a405cd169d44d1be6e5eb3c269f3dd8872aea95ac743dc056240815b",
+      "controlling_claim": true,
+      "relationship": "metadata derivative"
+    },
+    {
+      "path": "docs/canon/candidates/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_0.md",
+      "version": "2.0",
+      "status": "historical superseded candidate",
+      "sha256": "630b6128e37734be01a40d64b80d9fb4d74fce48198c60f9fcbd1a2ef83c232b",
+      "controlling_claim": false,
+      "relationship": "predecessor"
+    },
+    {
+      "path": "docs/canon/history/agreement_consent_authorization_v2_0/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_0_HISTORICAL_SUPERSEDED_CANDIDATE.md",
+      "version": "2.0",
+      "status": "preserved history",
+      "sha256": "630b6128e37734be01a40d64b80d9fb4d74fce48198c60f9fcbd1a2ef83c232b",
+      "controlling_claim": false,
+      "relationship": "byte-identical preservation"
+    }
+  ]
+}

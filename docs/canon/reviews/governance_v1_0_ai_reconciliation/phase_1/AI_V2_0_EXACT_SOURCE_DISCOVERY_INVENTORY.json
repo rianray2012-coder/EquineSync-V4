@@ -1,0 +1,78 @@
+{
+  "phase": 1,
+  "disposition": "PHASE_1_COMPLETE_BOUNDED_SOURCE_RECOVERY_PATH_IDENTIFIED",
+  "intended_source": {
+    "constitutional_family": "Master AI Governance and Decision Boundary Model",
+    "identifier": "MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0",
+    "version": "V2.0",
+    "expected_filename": "MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+    "classification": "NAMED_SOURCE_NOT_LOCATED",
+    "sha256": null,
+    "bytes": null,
+    "repository_path": null,
+    "founder_acceptance_from_c0_derivative": "YES",
+    "adoption": "NOT ESTABLISHED",
+    "repository_lock": "NOT ESTABLISHED"
+  },
+  "candidates": [
+    {
+      "path": "docs/canon/MASTER_AI_OPERATING_SYSTEM.md",
+      "title": "Master AI Operating System",
+      "version": "1.0",
+      "bytes": 43676,
+      "sha256": "09d79c809d1261ad6cfc15a6759267fd0bbea080bc2ac40c8c144a7cc6abc68d",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "relationship_to_ai_v2": "SEPARATE_COMPETING_AI_FAMILY_NOT_A_SUBSTITUTE",
+      "adoption": "not evaluated by this phase",
+      "lock": "not evaluated by this phase"
+    },
+    {
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_CONSTITUTIONAL_SOURCE_OF_TRUTH_REGISTER_V1_0.csv",
+      "bytes": 29771,
+      "sha256": "fd5923e14eb095b56ecdb3025f85aab529f7576a582c553c420f7655fdd66826",
+      "classification": "DERIVATIVE_SOURCE_ONLY",
+      "relationship_to_ai_v2": "C0_LIFECYCLE_AND_FILENAME_EVIDENCE"
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_repository_incorporation/C0_REPOSITORY_RECONCILIATION_DATA_SUPPLEMENT_V1_0.json",
+      "bytes": 55927,
+      "sha256": "535fed62bd7e26e5c553e25120c4c346e20d7c9f0c0c7644e6353115d03968be",
+      "classification": "DERIVATIVE_SOURCE_ONLY",
+      "relationship_to_ai_v2": "COMPETING_FAMILY_CLASSIFICATION_EVIDENCE"
+    },
+    {
+      "path": "docs/RF30/RF30_FINAL_LOCK_REVIEW.md",
+      "bytes": 2403,
+      "sha256": "89b472e16a10175533c631072202c8d1c5982ac81b3238fd2f7686fd7d88daf3",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "relationship_to_ai_v2": "SEPARATE_RF30_PHASE_LOCK_NOT_CONSTITUTIONAL_AI_V2_LOCK"
+    },
+    {
+      "path": "outputs/rf30_founder_final_lock.json",
+      "bytes": 2522,
+      "sha256": "a575d789a6f8535e83a00460977d1211336355997b300293b1bef1d3c96fdb02",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "relationship_to_ai_v2": "SEPARATE_RF30_MACHINE_LOCK_EVIDENCE"
+    }
+  ],
+  "search_scope": [
+    "active repository",
+    "/Users/rianray/Downloads",
+    "/Users/rianray/Desktop",
+    "Codex attachments",
+    "locally available ZIP member listings"
+  ],
+  "bounded_recovery_path": [
+    "mount the exact File Library DOCX bytes",
+    "compute and preserve checksum and provenance",
+    "recover exact AI-specific founder decisions and lifecycle records",
+    "reconcile exact evidence without substituting AI Operating System or RF30"
+  ],
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "production": false,
+    "public_claim": false,
+    "public_launch": false
+  }
+}

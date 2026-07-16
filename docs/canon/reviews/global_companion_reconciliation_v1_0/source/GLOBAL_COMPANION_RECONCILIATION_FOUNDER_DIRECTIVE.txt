@@ -1,0 +1,610 @@
+# CODEX FOUNDER DIRECTIVE
+## GLOBAL COMPANION-ARTIFACT SOURCE RECOVERY, LIFECYCLE RECONCILIATION, AND GOVERNANCE V1.0 CLOSURE PREPARATION
+
+### 1. DIRECTIVE STATUS
+
+This directive authorizes controlled recovery, exact-source verification, lifecycle reconciliation, repair, and completion of the EquineSync global constitutional companion-artifact family.
+
+AI Governance V2.0 is complete and must remain closed:
+
+- AI V2.0 exact source verified;
+- Founder Decision Matrix ratified;
+- P0 = 0;
+- Open P1 = 0;
+- AI V2.0 adopted and locked;
+- retained AI P2 items are nonblocking;
+- implementation, runtime, provider, production, and launch authority remain FALSE.
+
+This directive must not reopen, rewrite, relock, supersede, or otherwise disturb the completed AI V2.0 package except to add correct references to it in global companion artifacts.
+
+The current Governance V1.0 disposition is:
+
+`GOVERNANCE_V1_0_NOT_READY_FOR_CONSTITUTIONAL_BASELINE_LOCK`
+
+The remaining blockers concern the global companion artifacts and unresolved lifecycle evidence across C0.
+
+---
+
+# 2. CONTROLLING BASELINE
+
+Use the following as the starting controlled evidence set:
+
+1. `EQUINESYNC_GOVERNANCE_COMPANION_ARTIFACTS_REVIEW_MEMORANDUM_V1_2`
+2. `EQUINESYNC_CONSTITUTIONAL_SOURCE_OF_TRUTH_REGISTER_V1_0`
+3. `CANON_HISTORICAL_PROVENANCE_EXCEPTION_LEDGER`
+4. all C0 reconciliation reports and machine-readable registers;
+5. all exact companion-artifact sources already mounted or repository-linked;
+6. all safeguarding patch schedules and integration memoranda;
+7. all RF31 decision-linkage evidence;
+8. all AI V2.0 final adoption, lock, decision, requirement, traceability, and evidence records;
+9. all current canon adoption and lock records.
+
+The V1.2 Review Memorandum is the controlled review baseline, not proof that every underlying artifact is exact, adopted, or locked.
+
+---
+
+# 3. TARGET GLOBAL COMPANION ARTIFACTS
+
+Recover and reconcile, at minimum:
+
+1. Constitutional Canon Index and Navigator;
+2. Constitutional Vocabulary and Definitions Index;
+3. Constitutional Domain Ownership and Boundary Register;
+4. Cross-Canon Reference Normalization Register;
+5. Constitutional Authority Matrix;
+6. Canon Dependency Map;
+7. Founder Decision Register;
+8. Governance Requirement Index;
+9. Requirement Traceability Matrix;
+10. Constitutional Cross-Reference Index, if treated separately from the normalization register;
+11. Constitutional Source-of-Truth Register;
+12. adoption register;
+13. lock register;
+14. supersession register;
+15. unresolved-evidence ledger;
+16. governance P2 register.
+
+Use exact repository names where established. Do not force historical names onto artifacts whose exact names differ.
+
+---
+
+# 4. EVIDENCE RULES
+
+For every artifact candidate, classify it as one of:
+
+- `EXACT_REPOSITORY_SOURCE_VERIFIED`
+- `EXACT_MOUNTED_SOURCE_VERIFIED`
+- `EXACT_FILE_LIBRARY_SOURCE_LOCATED_BYTES_NOT_MOUNTED`
+- `EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE`
+- `FOUNDER_ACCEPTED_SOURCE_LIFECYCLE_UNVERIFIED`
+- `DERIVATIVE_SUPPORTING_ARTIFACT`
+- `CONTROLLED_PATCH_SCHEDULE`
+- `NEW_CONTROLLED_REPLACEMENT_ARTIFACT`
+- `SUPERSEDED_SOURCE`
+- `CONFLICTING_SOURCE_CANDIDATES`
+- `HISTORICAL_SOURCE_UNAVAILABLE_DO_NOT_RECREATE`
+- `UNRESOLVED_SOURCE_CLASSIFICATION`
+
+Do not regenerate a missing historical artifact and describe it as recovered.
+
+Where exact historical bytes cannot be recovered:
+
+1. preserve the provenance exception;
+2. create a new controlled replacement only if authorized;
+3. label it prospectively;
+4. bind it to exact controlling sources and Founder decisions;
+5. preserve the historical gap.
+
+---
+
+# PHASE G0 — WORKSPACE AND PRIOR-EVIDENCE VERIFICATION
+
+1. Identify repository root, branch, commit, and working-tree state.
+2. Verify the current C0 package and manifests.
+3. Verify the V1.2 Review Memorandum.
+4. Verify the historical provenance exception ledger.
+5. Verify AI V2.0 adoption and lock package.
+6. Verify safeguarding integration and patch schedules.
+7. Verify RF31 decision-linkage evidence.
+8. Create a controlled working directory.
+9. Preserve all prior blocked and completed dispositions.
+
+Create:
+
+- `GLOBAL_COMPANION_RECONCILIATION_PHASE_G0_INITIALIZATION_REPORT.md`
+- `GLOBAL_COMPANION_RECONCILIATION_CHAIN_OF_CUSTODY.md`
+- `GLOBAL_COMPANION_RECONCILIATION_INITIAL_EVIDENCE_INVENTORY.json`
+
+---
+
+# PHASE G1 — GLOBAL COMPANION SOURCE DISCOVERY
+
+Search all authorized repository, mounted, package, archive, and File Library evidence locations for every target artifact.
+
+Search by:
+
+- exact filename;
+- internal title;
+- document identifier;
+- prior title;
+- alias;
+- version;
+- references in other companion artifacts;
+- references in C0;
+- references in adoption and lock reports.
+
+For every candidate record:
+
+- path;
+- filename;
+- title;
+- version;
+- file size;
+- SHA-256;
+- document type;
+- authority state;
+- Founder status;
+- adoption state;
+- lock state;
+- supersession state;
+- provenance;
+- conflicting candidates;
+- patch dependencies.
+
+Create:
+
+- `GLOBAL_COMPANION_EXACT_SOURCE_DISCOVERY_INVENTORY.md`
+- `GLOBAL_COMPANION_EXACT_SOURCE_DISCOVERY_INVENTORY.json`
+- `GLOBAL_COMPANION_SOURCE_CONFLICT_REPORT.md`
+
+---
+
+# PHASE G2 — ARTIFACT-BY-ARTIFACT SOURCE DETERMINATION
+
+For each target artifact:
+
+1. identify the controlling candidate;
+2. hash all candidates;
+3. compare byte identity and substantive content;
+4. preserve prior versions;
+5. identify whether later versions are:
+   - exact successors;
+   - controlled integration candidates;
+   - presentation editions;
+   - derivatives;
+   - conflicting candidates;
+6. classify missing exact sources under the provenance exception ledger;
+7. determine whether the gap blocks Governance V1.0 adoption or lock.
+
+Create:
+
+- `GLOBAL_COMPANION_CONTROLLING_SOURCE_DETERMINATION_REPORT.md`
+- `GLOBAL_COMPANION_HASH_MANIFEST.json`
+- `GLOBAL_COMPANION_PROVENANCE_MATRIX.md`
+
+Mandatory stop if materially conflicting controlling candidates cannot be resolved.
+
+---
+
+# PHASE G3 — FOUNDER DECISION REGISTER RECOVERY
+
+Recover and reconcile the global Founder Decision Register.
+
+Required actions:
+
+1. locate all global and family-specific Founder Decision Registers;
+2. recover exact Founder decision text from exact sources;
+3. immutably link rather than paraphrase RF31 FD01-FD30;
+4. incorporate the ratified AI-FD01 through AI-FD12 records;
+5. apply safeguarding FD-MSP patch rows from the controlled patch schedule;
+6. incorporate exact decisions from media, search, reporting, plugins, integrations, security, privacy, resilience, financial, claims, audit, communication, identity, relationships, transfers, Atlas, waves, and other constitutional families;
+7. preserve source hashes and exact citations;
+8. identify prospective IDs separately from historical IDs;
+9. detect duplicate or conflicting IDs;
+10. preserve superseded decisions.
+
+If an exact historical global register is recovered, preserve and reconcile it.
+
+If no exact standalone historical register exists, create:
+
+`MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0`
+
+Classification:
+
+`NEW_FOUNDER_RATIFIED_CONTROLLED_GLOBAL_COMPANION_REGISTER`
+
+Do not describe it as a recovered historical original.
+
+Create:
+
+- `GLOBAL_FOUNDER_DECISION_SOURCE_RECOVERY_REPORT.md`
+- `MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.md`
+- `MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.json`
+- `GLOBAL_FOUNDER_DECISION_TRACEABILITY_MATRIX.md`
+
+---
+
+# PHASE G4 — GOVERNANCE REQUIREMENT INDEX RECOVERY
+
+Recover or create the controlling Governance Requirement Index.
+
+Use the 60-requirement V1.2 baseline only as a seeded review baseline.
+
+For every requirement:
+
+- unique requirement ID;
+- normalized text;
+- exact controlling source;
+- exact source section;
+- Founder decision basis, where applicable;
+- authority owner;
+- constitutional domain;
+- implementation applicability;
+- verification expectation;
+- lifecycle state;
+- supersession state;
+- dependencies;
+- retained P2 linkage.
+
+Add requirements from subsequently completed canons, including:
+
+- AI V2.0;
+- safeguarding V1.1;
+- equine health and welfare;
+- media V2.1;
+- search and discovery;
+- financial V2.1;
+- reporting V2.0;
+- developer and integration V2.0;
+- plugin V2.0;
+- security, privacy, access control, resilience, and related adopted successors.
+
+Create:
+
+- `GLOBAL_GOVERNANCE_REQUIREMENT_RECOVERY_REPORT.md`
+- `MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.md`
+- `MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.json`
+
+No requirement may remain source-less or owner-less.
+
+---
+
+# PHASE G5 — REQUIREMENT TRACEABILITY MATRIX RECOVERY
+
+Recover or create the global RTM.
+
+Every requirement must trace bidirectionally among:
+
+- requirement ID;
+- exact canon and section;
+- Founder decision;
+- authority owner;
+- dependency;
+- implementation governance package;
+- validation evidence;
+- adoption state;
+- lock state;
+- retained P2;
+- supersession state.
+
+Apply:
+
+- AI V2.0 final traceability;
+- safeguarding patch rows;
+- RF31 decision linkage;
+- all subsequently completed canon mappings.
+
+Create:
+
+- `GLOBAL_RTM_RECOVERY_REPORT.md`
+- `MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.md`
+- `MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.json`
+
+No orphan requirement and no untracked mandatory canon provision may remain.
+
+---
+
+# PHASE G6 — CROSS-CANON NORMALIZATION REGISTER RECOVERY
+
+Recover the exact Cross-Canon Reference Normalization Register.
+
+Distinguish it from the Constitutional Cross-Reference Index if both exist:
+
+- Normalization Register: canonical titles, aliases, versions, lifecycle terms, reference rules, defect controls;
+- Cross-Reference Index: navigation and reading paths.
+
+Reconcile:
+
+- exact canon titles;
+- versions;
+- aliases;
+- superseded names;
+- stale references;
+- lifecycle vocabulary;
+- authority relationships;
+- AI V2.0 final locked status;
+- safeguarding V1.1;
+- equine health and welfare;
+- Financial Truth V2.1;
+- other adopted successors.
+
+Create:
+
+- `GLOBAL_CROSS_CANON_SOURCE_RECOVERY_REPORT.md`
+- reconciled controlling normalization register;
+- reconciled cross-reference index;
+- machine-readable mappings.
+
+---
+
+# PHASE G7 — APPLY CONTROLLED PATCH SCHEDULES
+
+Apply all valid patch schedules only after recovering the exact target source.
+
+At minimum apply:
+
+- safeguarding Canon Index patch;
+- safeguarding Founder Decision Register patch;
+- safeguarding Governance Requirement Index patch;
+- safeguarding RTM patch;
+- AI V2.0 final companion-artifact entries;
+- any equine-health reconciliation patches;
+- any media, search, reporting, plugin, integration, transfer, or financial patches supported by exact evidence.
+
+For every patch:
+
+- identify source authority;
+- identify exact target artifact hash before patch;
+- apply deterministically;
+- record exact rows changed;
+- calculate post-patch hash;
+- classify substantive versus administrative changes;
+- preserve prior version.
+
+Create:
+
+- `GLOBAL_COMPANION_PATCH_APPLICATION_REPORT.md`
+- `GLOBAL_COMPANION_PATCH_CHANGE_LEDGER.md`
+- `GLOBAL_COMPANION_PRE_POST_HASH_MANIFEST.json`
+
+---
+
+# PHASE G8 — LIFECYCLE RECONCILIATION
+
+For every constitutional canon and companion artifact, determine:
+
+- Founder status;
+- source status;
+- adoption status;
+- lock status;
+- supersession status;
+- repository path;
+- SHA-256;
+- lifecycle evidence;
+- unresolved gaps.
+
+Reconcile every C0 row.
+
+Do not infer adoption or lock from:
+
+- Founder acceptance alone;
+- filename;
+- page header;
+- later reference;
+- derivative register;
+- conversation summary.
+
+Where exact source exists but lifecycle evidence is missing:
+
+- classify adoption or lock as not established;
+- identify the required prospective remedy;
+- do not backdate.
+
+Where a canon is now validly adopted and locked after C0, update C0 with exact evidence and preserve the historical C0 state.
+
+Create:
+
+- `GLOBAL_LIFECYCLE_RECONCILIATION_REPORT.md`
+- `GLOBAL_ADOPTION_STATE_REGISTER.md`
+- `GLOBAL_LOCK_STATE_REGISTER.md`
+- `C0_LIFECYCLE_RECONCILIATION_DELTA.json`
+
+---
+
+# PHASE G9 — FORMAL INTEGRITY SCANS
+
+Run:
+
+1. dependency-cycle scan;
+2. orphan-requirement scan;
+3. orphan-control scan;
+4. orphan-Founder-decision scan;
+5. duplicate-ID scan;
+6. broken-reference scan;
+7. stale-version scan;
+8. authority-owner scan;
+9. adoption-state consistency scan;
+10. lock-state consistency scan;
+11. supersession-integrity scan;
+12. expired-exception scan;
+13. checksum and path completeness scan.
+
+Create:
+
+- `GLOBAL_COMPANION_FORMAL_SCAN_MASTER_REPORT.md`
+- `GLOBAL_COMPANION_FORMAL_SCAN_FINDINGS.json`
+- `GLOBAL_COMPANION_FORMAL_SCAN_REMEDIATION_LEDGER.md`
+
+Mandatory gate:
+
+- P0 = 0
+- P1 = 0
+- adoption-blocking P2 = 0 before adoption
+- lock-blocking P2 = 0 before lock
+
+---
+
+# PHASE G10 — COMPANION ARTIFACT ADOPTION CANDIDATE
+
+If all mandatory gates pass, assemble:
+
+`EQUINESYNC_GLOBAL_COMPANION_ARTIFACT_ADOPTION_CANDIDATE_V1_0`
+
+Include:
+
+- exact artifacts;
+- hashes;
+- provenance;
+- Founder Decision Register;
+- Governance Requirement Index;
+- RTM;
+- Cross-Canon Normalization Register;
+- Canon Index;
+- Authority Matrix;
+- Dependency Map;
+- Vocabulary Index;
+- Cross-Reference Index;
+- source-of-truth register;
+- lifecycle registers;
+- scans;
+- unresolved nonblocking P2 register.
+
+Create:
+
+- `GLOBAL_COMPANION_ARTIFACT_ADOPTION_CANDIDATE_MANIFEST.md`
+- `GLOBAL_COMPANION_ARTIFACT_ADOPTION_CANDIDATE_MANIFEST.json`
+- `GLOBAL_COMPANION_ARTIFACT_ADOPTION_ASSESSMENT.md`
+
+Do not adopt automatically unless this directive and existing governance rules provide sufficient Founder authority.
+
+---
+
+# PHASE G11 — BLOCKER OR CLOSURE PACKAGE
+
+If blockers remain, issue:
+
+`GLOBAL_COMPANION_ARTIFACT_RECONCILIATION_BLOCKED`
+
+Create:
+
+- exact blocker ledger;
+- missing evidence list;
+- artifact-specific remedy;
+- Founder decisions required;
+- sources needing upload;
+- hashes needing verification;
+- lifecycle records requiring prospective creation.
+
+If all gates pass, issue:
+
+`GLOBAL_COMPANION_ARTIFACTS_READY_FOR_CONTROLLED_ADOPTION`
+
+Then resume the final Governance V1.0 Closure Assessment.
+
+---
+
+# REQUIRED FINAL PACKAGE
+
+Create:
+
+`EQUINESYNC_GLOBAL_COMPANION_ARTIFACT_SOURCE_RECOVERY_AND_LIFECYCLE_RECONCILIATION_PACKAGE_V1_0.zip`
+
+Include:
+
+- all phase reports;
+- exact recovered artifacts;
+- new controlled replacements;
+- provenance exception records;
+- patch schedules and application evidence;
+- hash manifests;
+- lifecycle registers;
+- formal scans;
+- adoption candidate or blocker assessment;
+- verification instructions.
+
+Compute and report SHA-256.
+
+---
+
+# AUTHORITY BOUNDARIES
+
+Throughout this directive:
+
+- AI V2.0 lock: preserved;
+- companion-artifact recovery authority: TRUE;
+- prospective companion drafting authority: TRUE only where exact historical source is unavailable and explicitly classified;
+- constitutional adoption: FALSE unless separately completed;
+- constitutional lock: FALSE unless separately completed;
+- implementation authority: FALSE;
+- runtime authority: FALSE;
+- provider activation authority: FALSE;
+- production authority: FALSE;
+- public-launch authority: FALSE;
+- public trust-claim authority: FALSE.
+
+---
+
+# FINAL RESPONSE FORMAT
+
+## Final Disposition
+
+`[EXACT DISPOSITION]`
+
+## Source Recovery
+
+- Target artifacts:
+- Exact sources recovered:
+- Exact sources unresolved:
+- New controlled replacements:
+- Historical gaps preserved:
+- Conflicting candidates:
+
+## Lifecycle Reconciliation
+
+- Founder-accepted:
+- Adopted:
+- Locked:
+- Adoption not established:
+- Lock not established:
+- C0 rows updated:
+- Remaining lifecycle blockers:
+
+## Global Companion Artifacts
+
+- Canon Index:
+- Vocabulary Index:
+- Domain Ownership Register:
+- Cross-Canon Normalization Register:
+- Authority Matrix:
+- Dependency Map:
+- Founder Decision Register:
+- Governance Requirement Index:
+- RTM:
+- Cross-Reference Index:
+
+## Formal Scans
+
+- P0:
+- P1:
+- Adoption-blocking P2:
+- Lock-blocking P2:
+- Dependency cycles:
+- Orphan requirements:
+- Duplicate IDs:
+- Broken references:
+- Authority-owner conflicts:
+
+## Governance V1.0
+
+- Closure Assessment:
+- Adoption readiness:
+- Lock readiness:
+- Remaining blockers:
+
+## Package
+
+- Package path:
+- Package SHA-256:
+- Manifest SHA-256:
+
+Begin with Phase G0. Preserve all exact, historical, adopted, and locked evidence unchanged.

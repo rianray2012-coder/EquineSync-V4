@@ -1,0 +1,30 @@
+{
+  "row_id": "C0-037",
+  "disposition": "C0_037_EQUINE_HEALTH_V1_1_CONSTITUTIONAL_CANON_LOCKED",
+  "locked_at": "2026-07-16T07:34:35Z",
+  "source": "docs/canon/adopted_sources/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md",
+  "source_sha256": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+  "adoption_record_sha256": "82a20de3c601de5b0608a5b66f5ab0dc95d2541b358782871530141409c74f9c",
+  "lock_record": "docs/canon/locks/equine_health_v1_1/C0_037_EQUINE_HEALTH_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "51e311f6ba7ddb64328f3e38fae259ddc5092925d9c7736eeaf82eec83a320cf",
+  "retained_nonblocking_p2": [
+    "EQUINE-HEALTH-P2-01",
+    "EQUINE-HEALTH-P2-02",
+    "EQUINE-HEALTH-P2-03",
+    "EQUINE-HEALTH-P2-04",
+    "EQUINE-HEALTH-P2-05",
+    "EQUINE-HEALTH-P2-06"
+  ],
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

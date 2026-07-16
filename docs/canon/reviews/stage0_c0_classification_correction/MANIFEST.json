@@ -1,0 +1,155 @@
+{
+  "package": "EquineSync_Controlled_Review_Classification_Correction",
+  "version": "1.0",
+  "generated": "2026-07-15",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "disposition": "CONTROLLED_REVIEW_INGESTION_ACCEPTED_WITH_REQUIRED_CLASSIFICATION_CORRECTIONS",
+  "artifacts": [
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/CONTROLLED_REVIEW_INGESTION_CORRECTION_REPORT.md",
+      "sha256": "be49bc88277acc366738af0e88809a4cf11cd955a031a7aa82cb7035af8616e6",
+      "bytes": 6472
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/CONTROLLED_REVIEW_CLASSIFICATION_CORRECTION_LEDGER.md",
+      "sha256": "d3fdcff54d8f25047c42bfa52861f9d52020dd4caf9cda82314294ca13cf383f",
+      "bytes": 2370
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/EXACT_SOURCE_RECOVERY_QUEUE.md",
+      "sha256": "d0417298954c1ab4962101071b4795a2ecae2b041633e89429ad29084257d322",
+      "bytes": 4796
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/OFFLINE_AND_PROGRAM_EVIDENCE_CONSOLIDATION.md",
+      "sha256": "33a425803610630c0e1907940ad411893e62e0287e83da8055ff2c71efcf0e06",
+      "bytes": 3601
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/UNRESOLVED_SOURCE_LEDGER.json",
+      "sha256": "7aeda6ca8fd4e2532dd01e1588066df2bf367b01c60a0cf296b0913fca265f9d",
+      "bytes": 5469
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_DELEGATED_ASSISTANCE_CANON_V1_0_DRAFT.md",
+      "sha256": "6269d9d02c67a43f7477553b55857275ab04d92172708ba158e46786f8b87c7b",
+      "bytes": 10867
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/DRAFTING_WORKSPACE_README.md",
+      "sha256": "a7885f608eee88dcd78109f725c2ada33a468698a351ba594ce555dbb068e4c4",
+      "bytes": 632
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/COMPANION_ARTIFACT_RECONCILIATION.md",
+      "sha256": "5c9a5c128a7627fc1c4d40d5f52a9b614d4997c19378a3e0e552abe9557066bb",
+      "bytes": 1213
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_0_DRAFT.md",
+      "sha256": "6087aa3c6c56e58117937bd226f582ee302a8cc49c78277134fead5ce58834ea",
+      "bytes": 11750
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/DRAFTING_WORKSPACE_README.md",
+      "sha256": "650b18d42b16a4e9d931fe6843d9723ed684858192085763d05933b34f9e54ea",
+      "bytes": 659
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/COMPANION_ARTIFACT_RECONCILIATION.md",
+      "sha256": "2da6f8e57f0f930460c741d5f654cd65b3f915c3d4a981e8c33d289ebb50ce84",
+      "bytes": 1260
+    },
+    {
+      "path": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/history/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_0_CONTROLLED_DRAFT.docx",
+      "sha256": "550f305bf5989988aa2018ae2d2b794b16f5387355cffe9b571edf16bebe22ca",
+      "bytes": 510775
+    },
+    {
+      "path": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/presentation/EQUINESYNC_GOVERNANCE_COMPANION_ARTIFACTS_REVIEW_MEMORANDUM_V1_2.pdf",
+      "sha256": "c641e19e20e2431ac881c0559ee36b7426e5218e53196b6788e48de2789a3121",
+      "bytes": 98333
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_repository_incorporation/C0_REPOSITORY_RECONCILIATION_DATA_SUPPLEMENT_V1_0.json",
+      "sha256": "535fed62bd7e26e5c553e25120c4c346e20d7c9f0c0c7644e6353115d03968be",
+      "bytes": 55927
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_repository_incorporation/C0_REPOSITORY_RECONCILIATION_SUPPLEMENT_V1_0.csv",
+      "sha256": "d3b8c09daf8c4aae91b2c248ff98d38c1dcd5369e59af8ce4a9090ca8adf9326",
+      "bytes": 19571
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_repository_incorporation/C0_REPOSITORY_RECONCILIATION_SUPPLEMENT_V1_0.md",
+      "sha256": "26d7a17123aec16b6815fd5a6f6c01015c343212f6550f1c032a36264ebe9e82",
+      "bytes": 13593
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_repository_incorporation/STAGE0_C0_UNRESOLVED_CONFLICT_LEDGER.md",
+      "sha256": "423006d23e3822f4fd23063bdfa79e928fc7ca727d71477694d8a17852675eb4",
+      "bytes": 6300
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_repository_incorporation/STAGE0_C0_REPOSITORY_INCORPORATION_REPORT.md",
+      "sha256": "b39cffb6017b3edfe8544a68f6ec1235e5e8536226800572a4aacce2d831e338",
+      "bytes": 9954
+    },
+    {
+      "path": "docs/canon/registries/CANON_ARTIFACT_INVENTORY.md",
+      "sha256": "147f2b1788d7dc0b59f76698b7b6179793f0b2d6942dded95adb998460e33a1c",
+      "bytes": 9596
+    },
+    {
+      "path": "docs/canon/registries/GOVERNANCE_FINDING_REGISTRY.md",
+      "sha256": "1c0df5437ecf30c77ef6f678f91e733dac226ff4fda9b05c3a15c7b4e08d5bc1",
+      "bytes": 13218
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/VALIDATION_REPORT.md",
+      "sha256": "c606acc0b5d47073243c804191622dbf9495da61462393d6fcde0b9f6da9a94b",
+      "bytes": 1675
+    }
+  ],
+  "incoming_source_treatment": {
+    "byte_identical_skipped": 4,
+    "historical_predecessor_added": 1,
+    "presentation_edition_added": 1
+  },
+  "machine_instruments": {
+    "founder_decision_register_v1_1": "not_mounted",
+    "normalization_register_v1_1": "not_mounted",
+    "governance_requirement_index_v1_1": "not_mounted",
+    "requirement_traceability_matrix_v1_1": "not_mounted"
+  },
+  "scans": {
+    "dependency_cycle": "NOT_EXECUTED_SOURCE_INSTRUMENTS_NOT_MOUNTED",
+    "orphan_requirement": "NOT_EXECUTED_SOURCE_INSTRUMENTS_NOT_MOUNTED"
+  },
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "runtime": false,
+    "schema": false,
+    "migration": false,
+    "permission": false,
+    "production": false,
+    "public_claim": false,
+    "onboarding": false,
+    "launch": false
+  },
+  "validation": {
+    "archive_integrity": "passed",
+    "fresh_extraction": "passed",
+    "manifest_hashes": "21_of_21_passed",
+    "prior_stage0_c0_checksums": "39_passed",
+    "incoming_byte_identity": "4_of_4_passed",
+    "docx_integrity": "passed",
+    "pdf_integrity_and_visual_review": "passed",
+    "json": "passed",
+    "secret_scan": "passed",
+    "authority_scan": "passed",
+    "git_diff_check": "passed"
+  }
+}

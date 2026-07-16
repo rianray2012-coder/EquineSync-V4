@@ -1,0 +1,35 @@
+{
+  "p0": 0,
+  "open_p1": 0,
+  "adoption_blocking_p2": 0,
+  "rows": [
+    {
+      "row_id": "C0-025",
+      "findings": []
+    },
+    {
+      "row_id": "C0-026",
+      "findings": []
+    },
+    {
+      "row_id": "C0-027",
+      "findings": []
+    },
+    {
+      "row_id": "C0-029",
+      "findings": []
+    },
+    {
+      "row_id": "C0-030",
+      "findings": []
+    },
+    {
+      "row_id": "C0-031",
+      "findings": []
+    },
+    {
+      "row_id": "C0-032",
+      "findings": []
+    }
+  ]
+}

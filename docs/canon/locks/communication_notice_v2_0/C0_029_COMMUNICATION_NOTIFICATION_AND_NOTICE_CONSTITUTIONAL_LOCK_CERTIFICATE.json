@@ -1,0 +1,38 @@
+{
+  "row_id": "C0-029",
+  "title": "Master Communication, Notification, and Notice Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_at": "2026-07-16T07:53:55Z",
+  "source": "docs/canon/adopted_sources/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "source_sha256": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+  "adoption_record": "docs/canon/adoptions/c0_batch_1/C0_029_COMMUNICATION_NOTIFICATION_AND_NOTICE_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "41b91b72c9914ccf014ab94d273882d1795facc71fe1516f71107b2abfc3e285",
+  "lock_readiness_report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_029_LOCK_READINESS_REPORT.md",
+  "founder_directive": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/source/C0_BATCH_1_TRACK_B_LOCK_FOUNDER_DIRECTIVE.txt",
+  "founder_directive_sha256": "837e73c08323add8344a67bde13f85646c94b3c0caeae0d337637f77a5d68962",
+  "lock_record": "docs/canon/locks/communication_notice_v2_0/C0_029_COMMUNICATION_NOTIFICATION_AND_NOTICE_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "4fba67dcc980627917110ddb3237ac8f5d328146940a4ffff1449dc497fb6474",
+  "lock_record_body_sha256": "c835b6abb795533a5637c0ea1298baee1f2713386c72544962143825f36e30b5",
+  "post_lock_protocol": "docs/canon/locks/communication_notice_v2_0/C0_029_COMMUNICATION_NOTIFICATION_AND_NOTICE_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md",
+  "post_lock_protocol_sha256": "688f87c9c4a4e1f1301bf2b205d1c61edd65ba7548ffead2cc5e60bb5fbff96b",
+  "retained_nonblocking_p2": [
+    "C0-029-P2-HISTORICAL-V1-SOURCE-UNAVAILABLE"
+  ],
+  "verification": "PASSED",
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "production": false,
+    "provider_activation": false,
+    "external_integration_activation": false,
+    "deployment": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false
+  }
+}

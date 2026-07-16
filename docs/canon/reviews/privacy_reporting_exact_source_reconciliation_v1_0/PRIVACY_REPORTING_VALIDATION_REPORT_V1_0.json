@@ -1,0 +1,17 @@
+{
+  "result": "PASS_PARTIAL_MOUNT_BLOCKER_CORRECTLY_RETAINED",
+  "disposition": "PRIVACY_REPORTING_EXACT_SOURCE_RECONCILIATION_PARTIALLY_MOUNTED_COUNTERPARTS_REQUIRED",
+  "checks": {
+    "approval_zip_present": true,
+    "approval_zip_sha256": "c1c91525b66849811fc2c71fd7f5d83e13a338b4f7b82b70db08cd44f65dd97e",
+    "package_member_hashes_pass": true,
+    "exact_required_sources_mounted": false,
+    "mounted_source_count": 2,
+    "missing_source_stop_behavior": true,
+    "source_reconstruction_performed": false,
+    "canon_source_files_created": false,
+    "runtime_files_changed_by_builder": false,
+    "c0_lifecycle_registers_changed_by_builder": false,
+    "authority_flags_all_false": true
+  }
+}

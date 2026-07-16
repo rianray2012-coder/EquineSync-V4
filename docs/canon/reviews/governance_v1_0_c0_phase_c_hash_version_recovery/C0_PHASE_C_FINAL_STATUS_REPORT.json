@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-07-16T08:32:07Z",
+  "disposition": "C0_PHASE_C_SOURCE_RECOVERY_PARTIALLY_COMPLETE_WITH_IDENTIFIED_EVIDENCE_BLOCKERS",
+  "rows_complete": 9,
+  "sources_recovered": 3,
+  "evidence_blockers": 6,
+  "lifecycle_blockers": 17,
+  "p0": 0,
+  "open_p1": 0,
+  "source_classification_blocking_p2": 0,
+  "adoptions": 0,
+  "locks": 0,
+  "current_sources_overwritten": false,
+  "authority": {
+    "founder_source_identity_decision": false,
+    "adoption": false,
+    "lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "amendment_of_locked_canon": false
+  }
+}

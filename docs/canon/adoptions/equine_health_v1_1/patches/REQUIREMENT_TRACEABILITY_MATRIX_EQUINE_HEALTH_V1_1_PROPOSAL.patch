@@ -1,0 +1,9 @@
+# Proposed Equine Health V1.1 Requirement Traceability Matrix Delta
+
+- Add EH-FD01 through EH-FD14 to candidate-section traceability.
+- Add EH-REQ-001 through EH-REQ-035 to adopted-section traceability.
+- Preserve all verification families as future, separately authorized work.
+- Record constitutional adoption as evidence of policy authority only, not executable implementation or runtime verification.
+- Link `EH-V1.1-P2-01` through `EH-V1.1-P2-06` to their affected downstream gates.
+
+Proposal only. The exact controlling Requirement Traceability Matrix is unavailable and must not be reconstructed from this delta.

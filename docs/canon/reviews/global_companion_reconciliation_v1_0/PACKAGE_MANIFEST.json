@@ -1,0 +1,419 @@
+{
+  "package": "EQUINESYNC_GLOBAL_COMPANION_ARTIFACT_SOURCE_RECOVERY_AND_LIFECYCLE_RECONCILIATION_PACKAGE_V1_0",
+  "generated_at": "2026-07-16T06:08:55Z",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "disposition": "GLOBAL_COMPANION_ARTIFACTS_READY_FOR_CONTROLLED_ADOPTION",
+  "file_count_excluding_manifest": 80,
+  "files": [
+    {
+      "path": "docs/RF31/RF31_FOUNDER_DECISION_LEDGER.md",
+      "sha256": "fbf50e0297c3d1fec28815e284b795b3e24a9471770a47249be9aea32f57af09",
+      "bytes": 135529
+    },
+    {
+      "path": "docs/canon/CANON_HISTORICAL_PROVENANCE_EXCEPTION_LEDGER.md",
+      "sha256": "4e4c1cbc42539b4e721675f6f7c39f9ed1483389f2c38fa61e647836d7a686e0",
+      "bytes": 6516
+    },
+    {
+      "path": "docs/canon/CANON_INDEX.md",
+      "sha256": "2df377ef5192592d0c75deb816c31efc966c3f97849db9fdb4b7506556e65d77",
+      "bytes": 24362
+    },
+    {
+      "path": "docs/canon/MASTER_AI_FOUNDER_DECISION_REGISTER_V2_0.json",
+      "sha256": "6ad000d6da464bb6c50b4b88dc467c8418203910c8150ff921e821dcd679f6ef",
+      "bytes": 20777
+    },
+    {
+      "path": "docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+      "sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "bytes": 140809
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CANON_DEPENDENCY_MAP_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "c1983addf32a788ebed5e8c52707727939ca120843a9b195e8c0101994c2cc3d",
+      "bytes": 786
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_AUTHORITY_MATRIX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "c65786cf70e7991b256ec272920927fd7c90ebcc8ecc11cb5ae85a94642782e4",
+      "bytes": 1240
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_CROSS_REFERENCE_INDEX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "04ce4f6ca848393302cb4dbae9a22bdbf2f32943301f6d0dada1361aed617b0b",
+      "bytes": 618
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_VOCABULARY_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "e7453b09bb166f77d30dafa55e2862eeb479b5d7c6f8b9fac81851960e9590d6",
+      "bytes": 807
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/GOVERNANCE_REQUIREMENT_INDEX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "7e363225fa650478b6bde626849fef01d7b4e8486779c2b38e3c993e865d69be",
+      "bytes": 736
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/REQUIREMENT_TRACEABILITY_MATRIX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "e21f7ac310d2ff9a2de678ed75e796ea99748e0e59d23ab981672486f4e6d483",
+      "bytes": 620
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/CANON_DEPENDENCY_MAP_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "f8c1cc30338cbbe3295ef0b27efc01fb77e7bd085d9e51ad76c2022306286136",
+      "bytes": 683
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/CONSTITUTIONAL_AUTHORITY_MATRIX_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "e01017dbc949727e236e65d5fca35d90468b217f130dc65d632e84bd092d7f24",
+      "bytes": 639
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/CONSTITUTIONAL_CROSS_REFERENCE_INDEX_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "b8674270e3fbac5c9553aae1fa170bb5c0a1948f3d87654037c7651b093cf703",
+      "bytes": 494
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/CONSTITUTIONAL_VOCABULARY_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "5c8052e7639c540a2bf57077e4cdb229bf658d190ab65ab735ccaaa4e5cfbdf4",
+      "bytes": 793
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/FOUNDER_DECISION_REGISTER_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "2196e85d801bbe305320a7dfc09ce7272abdc6d3e33c47c74f3638607c3ab682",
+      "bytes": 459
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/GOVERNANCE_REQUIREMENT_INDEX_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "6b5867344f7f887da97b2f955dc1513a0b465b4a2725251a1f80b317e3ddb724",
+      "bytes": 515
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/REQUIREMENT_TRACEABILITY_MATRIX_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "307752556a27e60f06a585f5210124a7b680a9de1630f6a902c7c4a60726fcc8",
+      "bytes": 500
+    },
+    {
+      "path": "docs/canon/registries/CANON_LOCK_LEDGER.md",
+      "sha256": "5374b960109e532c584c0dba398995a3dcdac8f838164eb3393fba2465c0d797",
+      "bytes": 3313
+    },
+    {
+      "path": "docs/canon/registries/CANON_STATE_AND_LOCK_REGISTRY.md",
+      "sha256": "0588986eb310d87095010d6419df6a035271fc87721f470e8af3a8e72babe7a4",
+      "bytes": 4191
+    },
+    {
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_C0_SOURCE_RECONCILIATION_DATA_V1_0.json",
+      "sha256": "008c4f89e862e11f93cc2736450124a4a401d9e203e52a3962ebd7f8609c0b49",
+      "bytes": 80125
+    },
+    {
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_C0_UNRESOLVED_EVIDENCE_CLASSIFICATION_LEDGER_V1_0.md",
+      "sha256": "7b2a6a710650092330573ec9347b2df4cf720d7ecedecb0010642be1acef4eb6",
+      "bytes": 10299
+    },
+    {
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_CONSTITUTIONAL_SOURCE_OF_TRUTH_REGISTER_V1_0.csv",
+      "sha256": "fd5923e14eb095b56ecdb3025f85aab529f7576a582c553c420f7655fdd66826",
+      "bytes": 29771
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EH_FD01_EH_FD14_DECISION_TO_REQUIREMENT_CROSSWALK.md",
+      "sha256": "0922a7dc93637cb130fa40b39dbb7d972914c5041d5912c75bb2d02fad52adda",
+      "bytes": 1481
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_FOUNDER_DECISION_EVENT_RECORD.json",
+      "sha256": "f5cc04893b878eeafd44c91a8fada1df5fe1b4db5fc4fd2713126987c5276d56",
+      "bytes": 6965
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g0/GLOBAL_COMPANION_RECONCILIATION_CHAIN_OF_CUSTODY.md",
+      "sha256": "697701e08c1380496008fe7c8419deb71a36b0091cf9df1bda9065a9573014a0",
+      "bytes": 1161
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g0/GLOBAL_COMPANION_RECONCILIATION_INITIAL_EVIDENCE_INVENTORY.json",
+      "sha256": "cf909bb1ec653fcfaa8711fae60f4401fb4e9e2f82e79490a5f94e38edbde52e",
+      "bytes": 7901
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g0/GLOBAL_COMPANION_RECONCILIATION_PHASE_G0_INITIALIZATION_REPORT.md",
+      "sha256": "f7c1484e77295467266e3ed8ce03b7a60d22ed72d6fe84b19ec9bf870ba50158",
+      "bytes": 11949
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g10_g11/GLOBAL_COMPANION_ARTIFACT_ADOPTION_ASSESSMENT.md",
+      "sha256": "8c5b06ef8a5deb030d4cbf2459f62c6171d04dcba08a9b28e8cc24af46062890",
+      "bytes": 500
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g10_g11/GLOBAL_COMPANION_ARTIFACT_ADOPTION_CANDIDATE_MANIFEST.json",
+      "sha256": "4b0c34edb101e2801273920c42f2bbb0d22429fda79361e900453e426bd22173",
+      "bytes": 11385
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g10_g11/GLOBAL_COMPANION_ARTIFACT_ADOPTION_CANDIDATE_MANIFEST.md",
+      "sha256": "d28fb8618e088e8732379d4d73f236af4b4a10f70b038ee68a6a9697a279f9e0",
+      "bytes": 8618
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g10_g11/GLOBAL_COMPANION_PACKAGE_VERIFICATION_INSTRUCTIONS.md",
+      "sha256": "9ee158685621a7593bcd0e6033db8ad7b4699da505a906a89e2a6f798df984f6",
+      "bytes": 293
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g10_g11/GLOBAL_COMPANION_RECONCILIATION_FINAL_DISPOSITION.md",
+      "sha256": "0b120bc3444a4e97b6ec1a017cf842e1a6f3f71ffa6d61b6cda0a51ff7aab3c3",
+      "bytes": 352
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g1_g2/GLOBAL_COMPANION_CONTROLLING_SOURCE_DETERMINATION_REPORT.md",
+      "sha256": "101d3cfc80a2d84a54bd924a6e655eb9cbc63787195aad3e187101d43d55a91e",
+      "bytes": 2041
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g1_g2/GLOBAL_COMPANION_EXACT_SOURCE_DISCOVERY_INVENTORY.json",
+      "sha256": "a2243a19b8153a155b0af85591323a3c66caac6e8f48ad7cccbbeebc3d169e0d",
+      "bytes": 8050
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g1_g2/GLOBAL_COMPANION_EXACT_SOURCE_DISCOVERY_INVENTORY.md",
+      "sha256": "fba040c36528befb2ebd071e1509677f01e1da0a9351b1e8e8232fcfa34b6fc8",
+      "bytes": 4516
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g1_g2/GLOBAL_COMPANION_HASH_MANIFEST.json",
+      "sha256": "aad1b03c69dc7868ea651848cc872a4c157aa729ee41db92c561eaccbe87bc53",
+      "bytes": 3747
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g1_g2/GLOBAL_COMPANION_PROVENANCE_MATRIX.md",
+      "sha256": "1c19ecf207b8549c21b32a835baccf74bb7cf210502b0aff9da549bbcf1788f3",
+      "bytes": 2272
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g1_g2/GLOBAL_COMPANION_SOURCE_CONFLICT_REPORT.md",
+      "sha256": "4f1b9c901ab7e0bb261eb9d5921f491ada063506002c499b12f609ea05bb8946",
+      "bytes": 628
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/GLOBAL_CROSS_CANON_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "5923a4a4556d1f8fa1c587802436be57ada070c4311088f8784f82f25d5fbae7",
+      "bytes": 450
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/GLOBAL_FOUNDER_DECISION_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "728b54d2881018f30e729ee22bdab90f675e2689cac0b49a2c7fc10f41f8b253",
+      "bytes": 297
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/GLOBAL_FOUNDER_DECISION_TRACEABILITY_MATRIX.md",
+      "sha256": "59165638a70faab49d26fbb973842c015f0c75d954542e9bef64a2e0fbf50dab",
+      "bytes": 15014
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/GLOBAL_GOVERNANCE_REQUIREMENT_RECOVERY_REPORT.md",
+      "sha256": "a3516017e238fb56926d94fee6f9568d2def609ae29774e4ba3cf58aed0085ab",
+      "bytes": 311
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/GLOBAL_RTM_RECOVERY_REPORT.md",
+      "sha256": "77cb3b405b92ac0cbefa3fc4c7ab06a1e4907a4888f17f01ad5b9e8a56b79d78",
+      "bytes": 177
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.json",
+      "sha256": "4074247c8fb29943180cf55a9c8f6c38733ca974a472e8d243e457d4e630e9fd",
+      "bytes": 158827
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.md",
+      "sha256": "27139695a882f43c370d9a57bbffbfdd1058388f196f5053d4b0180bfccb631b",
+      "bytes": 16372
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.json",
+      "sha256": "643d0e19899f88db7b367ffa01b12425fcddbbe847b7e9e10b6b69e3a790bf8c",
+      "bytes": 309254
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.md",
+      "sha256": "a52ec0f34e14ea74464bd8e42fb72f71f016d734a720e119d06d7c545625ea86",
+      "bytes": 54235
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.json",
+      "sha256": "3cdeadef68eeb6feebbe8c87d5f0597455a033e1eb86bc3e12988ca991a0efa2",
+      "bytes": 208202
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g3_g6/MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.md",
+      "sha256": "f8e1d0771cc2fb5da31e68fe22e9bca6897a1c5d211b0098d8c855d6bde7e9c3",
+      "bytes": 73942
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g7/GLOBAL_COMPANION_PATCH_APPLICATION_REPORT.md",
+      "sha256": "19b67fae939ce1b75b112f71bb177c4ed58700eb56da7c13048b696438987543",
+      "bytes": 4216
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g7/GLOBAL_COMPANION_PATCH_CHANGE_LEDGER.md",
+      "sha256": "2e624d6a2aa12ba630c30722de7e56eb55747d70eae74898714abc1bc8efd4a7",
+      "bytes": 169
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g7/GLOBAL_COMPANION_PRE_POST_HASH_MANIFEST.json",
+      "sha256": "90d8222c7d33d1d4459e6b007b778255d1e0f3f6a247c4c9f06ef95eeae12e2d",
+      "bytes": 3368
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/C0_LIFECYCLE_RECONCILIATION_DELTA.json",
+      "sha256": "9bc694c4621d0000da5f1802e427dbbb905418180d7defa73e94cdcf648a0327",
+      "bytes": 26081
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_ADOPTION_STATE_REGISTER.json",
+      "sha256": "3c2b4c8d04e0e43ad87e2b220aa76300fe1c46584c6532fbb085e60840d6fa58",
+      "bytes": 5048
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_ADOPTION_STATE_REGISTER.md",
+      "sha256": "8411135cba325485b0c5a60cacef94ea65775f3e0d4d43b75c76cae31da9cd00",
+      "bytes": 2640
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_GOVERNANCE_P2_REGISTER.json",
+      "sha256": "ea23091ddb8d9f562e829961bfed7dac9776ff7345f667df33c18f9c8c8bad4c",
+      "bytes": 4102
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_GOVERNANCE_P2_REGISTER.md",
+      "sha256": "bbfcb84571ee5e92e29556f708363d262c9a2299fa8af03f0f28b2bf1d71cbec",
+      "bytes": 1704
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_LIFECYCLE_RECONCILIATION_REPORT.md",
+      "sha256": "66a8faa282156f7e25fef252fd785cd9b1d376d13fedb1a21ecdf58642cba864",
+      "bytes": 1003
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_LOCK_STATE_REGISTER.json",
+      "sha256": "c6cac2ee82ce6537d3227e938879faf52d0d40a3ac5094cf9924a2761eafd1b8",
+      "bytes": 4977
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_LOCK_STATE_REGISTER.md",
+      "sha256": "4ccbb26ba6ad734f9e8a909dff81d814681d40226acb07aca104c97347391eca",
+      "bytes": 2625
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_SUPERSESSION_REGISTER.json",
+      "sha256": "7f1cd2e7c98d17890c9c2815464d07a6811f5de58006ae2882752584e3c65367",
+      "bytes": 1040
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_SUPERSESSION_REGISTER.md",
+      "sha256": "1765b3b14532ee0d6fe54ccc12b6ba9d28ddef4be6707adc5e2a713d0640e052",
+      "bytes": 962
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g9/GLOBAL_COMPANION_FORMAL_SCAN_FINDINGS.json",
+      "sha256": "d0797eea4c422992a333ba08338d2758bfe4c3ec14f1d549117386ef97164e82",
+      "bytes": 3012
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g9/GLOBAL_COMPANION_FORMAL_SCAN_MASTER_REPORT.md",
+      "sha256": "b034dbe10dcb23f4170573abd8c1c2fb1f8a52ac9c02e98e4f6b257c478d9d2d",
+      "bytes": 1670
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g9/GLOBAL_COMPANION_FORMAL_SCAN_REMEDIATION_LEDGER.md",
+      "sha256": "5d0fd289d91573e15c7a0ab6cc344fc48b808b9f8023872cee49a4b0d3185a3c",
+      "bytes": 165
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/source/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_0.docx",
+      "sha256": "f56f1053533add3f08993b7584abe43563e30eb173c83d6c6d286574ce37afe2",
+      "bytes": 40295
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/source/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_0.md",
+      "sha256": "b4a58b2071c7dcd216ad811ff8b36ae97e0e73e80e5cbf06e7ffdf4e87cd5bfe",
+      "bytes": 4223
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/source/GLOBAL_COMPANION_RECONCILIATION_FOUNDER_DIRECTIVE.txt",
+      "sha256": "7a12bf6dc13290551a39dc8214ed326bb282ef8fb9e91a203f7b33dfd5a4a1fd",
+      "bytes": 16171
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/tools/build_global_companion_reconciliation.py",
+      "sha256": "7e5cbebdd5433f8763995be9ae4e9e2869d788619c6aa85f33c28a5eb691c12b",
+      "bytes": 47035
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r7/AI_V2_0_FINAL_LOCK_CERTIFICATE.json",
+      "sha256": "ada602ea82dd73afadd3c9d7422a3e2929f7b075e2366368940422d49c0fa3a1",
+      "bytes": 1031
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/adoption_candidate_review/SAFEGUARDING_V1_2_REQUIREMENT_TO_SECTION_TRACEABILITY.md",
+      "sha256": "50838e522e97f7d5a7d85988ed5db3f2393d2b7a53e3b67200c23cacc3ed397d",
+      "bytes": 11143
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "sha256": "6be760d6b5f274097074d16fcee805aea3249b51058d5998abff4235945adc75",
+      "bytes": 9190
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "sha256": "9a41067be17c667dd70328ac7c7c53bf3029bd478b3f8f9b6fd8964842c06833",
+      "bytes": 5558
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "sha256": "7262277efc185c78b911d85fb6d3b8c2556ebe6f5b3b8b5a97b85a34517fa24c",
+      "bytes": 50571
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "sha256": "31102a8f399d51449807f6bb65c9775e931b5796d2602b029e4a0afb634ade7f",
+      "bytes": 122226
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "sha256": "6e810af409884936ad25f709d0f482f859765a84a5437625e635b1fcdcc239cb",
+      "bytes": 118290
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "sha256": "aa8888de9f0e60a5c30dffc5f86838129e44f24c2bc65d98ec940056251155fe",
+      "bytes": 76161
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.md",
+      "sha256": "4a024d4764fd947be51cc53b56d30e83d1ac61c1dfd9b7f5bc291f3c13aba60e",
+      "bytes": 10532
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_repository_incorporation/C0_REPOSITORY_RECONCILIATION_DATA_SUPPLEMENT_V1_0.json",
+      "sha256": "535fed62bd7e26e5c553e25120c4c346e20d7c9f0c0c7644e6353115d03968be",
+      "bytes": 55927
+    }
+  ],
+  "authority": {
+    "constitutional_adoption": false,
+    "constitutional_lock": false,
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "state": "SAFEGUARDING_RECONCILIATION_COMPLETE_READY_FOR_FOUNDER_ADOPTION_REVIEW_WITH_NONBLOCKING_P2",
+  "date": "2026-07-15",
+  "founder_event": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/founder_confirmation/EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md",
+  "founder_event_sha256": "f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152",
+  "candidate": "docs/canon/candidates/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_RECONCILED_ADOPTION_CANDIDATE.md",
+  "decisions": {
+    "fd_msp_resolved": 15,
+    "sg_fd_resolved": 12
+  },
+  "findings": {
+    "p0": 0,
+    "p1": 0,
+    "p2": 6
+  },
+  "formal_scans": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING",
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "runtime": false,
+    "production": false,
+    "public_claims": false,
+    "onboarding": false,
+    "launch": false
+  },
+  "retained_p2": [
+    "Exact machine-readable source mounting, duplicate checks, and formal scan completion",
+    "Jurisdiction and current-law reporting matrices with qualified legal review",
+    "Retention, hold, deletion, restoration, and lawful-erasure alignment",
+    "Exact Search and Privacy dependency verification",
+    "Executable and adversarial implementation scenario evidence",
+    "Qualified safeguarding, legal, privacy, and veterinary review before affected claims or activation"
+  ]
+}

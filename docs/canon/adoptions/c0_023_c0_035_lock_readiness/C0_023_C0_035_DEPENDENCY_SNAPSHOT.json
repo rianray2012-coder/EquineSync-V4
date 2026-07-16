@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-07-16T17:24:34Z",
+  "rows": {
+    "C0-004": {
+      "family": "Master Product Vision",
+      "category": "unresolved_source_evidence",
+      "adoption": "NOT_ESTABLISHED",
+      "lock": "NOT_ESTABLISHED"
+    },
+    "C0-017": {
+      "family": "Master Identity, Account, and Actor Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-018": {
+      "family": "Master Relationship Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-019": {
+      "family": "Master Agreement, Consent, and Authorization Model",
+      "category": "unresolved_source_evidence",
+      "adoption": "NOT_ESTABLISHED",
+      "lock": "NOT_ESTABLISHED"
+    },
+    "C0-020": {
+      "family": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-022": {
+      "family": "Master Permission and Access-Control Model",
+      "category": "unresolved_source_evidence",
+      "adoption": "NOT_ESTABLISHED",
+      "lock": "NOT_ESTABLISHED"
+    },
+    "C0-023": {
+      "family": "Master Privacy and Data Protection Model",
+      "category": "lock_required",
+      "adoption": "ADOPTED",
+      "lock": "NOT_YET_LOCKED"
+    },
+    "C0-025": {
+      "family": "Master Data Protection, Encryption, and Key Management Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-026": {
+      "family": "Master Record Stewardship and Retention Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-027": {
+      "family": "Master Audit Event and Evidence Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-028": {
+      "family": "Master Claims, Disputes, and Authority Model",
+      "category": "unresolved_source_evidence",
+      "adoption": "NOT_ESTABLISHED",
+      "lock": "NOT_ESTABLISHED"
+    },
+    "C0-029": {
+      "family": "Master Communication, Notification, and Notice Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-033": {
+      "family": "Master Search, Discovery, Ranking, and Retrieval Model",
+      "category": "unresolved_source_evidence",
+      "adoption": "NOT_ESTABLISHED",
+      "lock": "NOT_ESTABLISHED"
+    },
+    "C0-034": {
+      "family": "Master AI Governance and Decision Boundary Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-035": {
+      "family": "Master Reporting, Analytics, and Business Intelligence Model",
+      "category": "lock_required",
+      "adoption": "ADOPTED",
+      "lock": "NOT_YET_LOCKED"
+    },
+    "C0-036": {
+      "family": "Master Financial Truth and Responsibility Model",
+      "category": "lifecycle_verified_complete",
+      "adoption": "ADOPTED",
+      "lock": "LOCKED"
+    },
+    "C0-041": {
+      "family": "Master Vendor Security and Supply Chain Model",
+      "category": "unresolved_source_evidence",
+      "adoption": "NOT_ESTABLISHED",
+      "lock": "NOT_ESTABLISHED"
+    }
+  }
+}

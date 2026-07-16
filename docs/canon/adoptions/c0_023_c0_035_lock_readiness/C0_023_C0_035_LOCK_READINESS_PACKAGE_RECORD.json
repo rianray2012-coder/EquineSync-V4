@@ -1,0 +1,34 @@
+{
+  "package": "outputs/governance_v1_0_c0_023_c0_035_lock_readiness/GOVERNANCE_V1_0_C0_023_C0_035_LOCK_READINESS_EVIDENCE_PACKAGE.zip",
+  "sha256": "d86b7e2f6446d2aaa2bbd0814a13da8c12e8af78abe44230a1c97d9700fe5233",
+  "size_bytes": 77717,
+  "archive_file_count": 19,
+  "archive_extraction_validation": "PASS",
+  "manifest_entry_validation": "PASS",
+  "readiness": {
+    "C0-023": false,
+    "C0-035": false
+  },
+  "lock_issued": false,
+  "findings": {
+    "p0": 0,
+    "open_p1": 2,
+    "retained_p2": 2
+  },
+  "authority": {
+    "constitutional_lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "migration": false,
+    "runtime": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "customer_data_processing": false,
+    "public_launch": false,
+    "certification": false,
+    "public_trust_claims": false
+  }
+}

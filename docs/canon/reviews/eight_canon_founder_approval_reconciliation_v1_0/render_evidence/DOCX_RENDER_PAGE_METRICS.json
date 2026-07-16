@@ -1,0 +1,1795 @@
+{
+  "MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0_FOUNDER_APPROVED": {
+    "page_count": 8,
+    "blank_pages": [],
+    "pages": [
+      {
+        "page": "page-1.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.089795,
+        "dark_ratio": 0.084529
+      },
+      {
+        "page": "page-2.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.068077,
+        "dark_ratio": 0.060751
+      },
+      {
+        "page": "page-3.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.095324,
+        "dark_ratio": 0.087285
+      },
+      {
+        "page": "page-4.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.096373,
+        "dark_ratio": 0.08626
+      },
+      {
+        "page": "page-5.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.098662,
+        "dark_ratio": 0.08855
+      },
+      {
+        "page": "page-6.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.097674,
+        "dark_ratio": 0.089608
+      },
+      {
+        "page": "page-7.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.071919,
+        "dark_ratio": 0.065362
+      },
+      {
+        "page": "page-8.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.08454,
+        "dark_ratio": 0.077801
+      }
+    ]
+  },
+  "MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_0_FOUNDER_APPROVED": {
+    "page_count": 58,
+    "blank_pages": [],
+    "pages": [
+      {
+        "page": "page-1.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.074527,
+        "dark_ratio": 0.069624
+      },
+      {
+        "page": "page-2.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.032155,
+        "dark_ratio": 0.028408
+      },
+      {
+        "page": "page-3.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.028449,
+        "dark_ratio": 0.025116
+      },
+      {
+        "page": "page-4.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.044927,
+        "dark_ratio": 0.039987
+      },
+      {
+        "page": "page-5.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.047602,
+        "dark_ratio": 0.042606
+      },
+      {
+        "page": "page-6.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.050189,
+        "dark_ratio": 0.045369
+      },
+      {
+        "page": "page-7.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.044858,
+        "dark_ratio": 0.040598
+      },
+      {
+        "page": "page-8.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.051486,
+        "dark_ratio": 0.046589
+      },
+      {
+        "page": "page-9.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.039211,
+        "dark_ratio": 0.035422
+      },
+      {
+        "page": "page-10.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.045885,
+        "dark_ratio": 0.041418
+      },
+      {
+        "page": "page-11.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.031081,
+        "dark_ratio": 0.027839
+      },
+      {
+        "page": "page-12.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.039077,
+        "dark_ratio": 0.035507
+      },
+      {
+        "page": "page-13.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.036798,
+        "dark_ratio": 0.033307
+      },
+      {
+        "page": "page-14.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.042652,
+        "dark_ratio": 0.038684
+      },
+      {
+        "page": "page-15.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027028,
+        "dark_ratio": 0.024068
+      },
+      {
+        "page": "page-16.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.042022,
+        "dark_ratio": 0.03819
+      },
+      {
+        "page": "page-17.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035801,
+        "dark_ratio": 0.032244
+      },
+      {
+        "page": "page-18.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.040749,
+        "dark_ratio": 0.036697
+      },
+      {
+        "page": "page-19.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035942,
+        "dark_ratio": 0.032249
+      },
+      {
+        "page": "page-20.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035281,
+        "dark_ratio": 0.031745
+      },
+      {
+        "page": "page-21.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.037209,
+        "dark_ratio": 0.033554
+      },
+      {
+        "page": "page-22.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.03562,
+        "dark_ratio": 0.031891
+      },
+      {
+        "page": "page-23.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.040922,
+        "dark_ratio": 0.036856
+      },
+      {
+        "page": "page-24.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.042958,
+        "dark_ratio": 0.038513
+      },
+      {
+        "page": "page-25.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.028195,
+        "dark_ratio": 0.025304
+      },
+      {
+        "page": "page-26.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027872,
+        "dark_ratio": 0.024996
+      },
+      {
+        "page": "page-27.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030458,
+        "dark_ratio": 0.027521
+      },
+      {
+        "page": "page-28.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.034277,
+        "dark_ratio": 0.031073
+      },
+      {
+        "page": "page-29.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030972,
+        "dark_ratio": 0.028078
+      },
+      {
+        "page": "page-30.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.031781,
+        "dark_ratio": 0.028555
+      },
+      {
+        "page": "page-31.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.042015,
+        "dark_ratio": 0.038028
+      },
+      {
+        "page": "page-32.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033319,
+        "dark_ratio": 0.030205
+      },
+      {
+        "page": "page-33.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025478,
+        "dark_ratio": 0.022994
+      },
+      {
+        "page": "page-34.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033561,
+        "dark_ratio": 0.030424
+      },
+      {
+        "page": "page-35.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.032493,
+        "dark_ratio": 0.02937
+      },
+      {
+        "page": "page-36.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.037995,
+        "dark_ratio": 0.034358
+      },
+      {
+        "page": "page-37.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.034163,
+        "dark_ratio": 0.030873
+      },
+      {
+        "page": "page-38.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035207,
+        "dark_ratio": 0.031699
+      },
+      {
+        "page": "page-39.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.049122,
+        "dark_ratio": 0.044236
+      },
+      {
+        "page": "page-40.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.038229,
+        "dark_ratio": 0.034443
+      },
+      {
+        "page": "page-41.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.034173,
+        "dark_ratio": 0.030847
+      },
+      {
+        "page": "page-42.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030679,
+        "dark_ratio": 0.027765
+      },
+      {
+        "page": "page-43.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.028025,
+        "dark_ratio": 0.025323
+      },
+      {
+        "page": "page-44.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030542,
+        "dark_ratio": 0.027284
+      },
+      {
+        "page": "page-45.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.031943,
+        "dark_ratio": 0.028916
+      },
+      {
+        "page": "page-46.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.03593,
+        "dark_ratio": 0.032621
+      },
+      {
+        "page": "page-47.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030984,
+        "dark_ratio": 0.028121
+      },
+      {
+        "page": "page-48.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025632,
+        "dark_ratio": 0.023081
+      },
+      {
+        "page": "page-49.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.026156,
+        "dark_ratio": 0.023335
+      },
+      {
+        "page": "page-50.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.039779,
+        "dark_ratio": 0.036243
+      },
+      {
+        "page": "page-51.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.034107,
+        "dark_ratio": 0.030649
+      },
+      {
+        "page": "page-52.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.038034,
+        "dark_ratio": 0.034487
+      },
+      {
+        "page": "page-53.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030648,
+        "dark_ratio": 0.027392
+      },
+      {
+        "page": "page-54.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.028352,
+        "dark_ratio": 0.02525
+      },
+      {
+        "page": "page-55.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.049316,
+        "dark_ratio": 0.043774
+      },
+      {
+        "page": "page-56.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.036359,
+        "dark_ratio": 0.032484
+      },
+      {
+        "page": "page-57.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.037127,
+        "dark_ratio": 0.033385
+      },
+      {
+        "page": "page-58.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.008343,
+        "dark_ratio": 0.007606
+      }
+    ]
+  },
+  "MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_V2_0_FOUNDER_APPROVED": {
+    "page_count": 53,
+    "blank_pages": [],
+    "pages": [
+      {
+        "page": "page-1.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.097436,
+        "dark_ratio": 0.091892
+      },
+      {
+        "page": "page-2.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.076117,
+        "dark_ratio": 0.069832
+      },
+      {
+        "page": "page-3.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035493,
+        "dark_ratio": 0.031601
+      },
+      {
+        "page": "page-4.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.048472,
+        "dark_ratio": 0.043695
+      },
+      {
+        "page": "page-5.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.022182,
+        "dark_ratio": 0.019827
+      },
+      {
+        "page": "page-6.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.045913,
+        "dark_ratio": 0.041542
+      },
+      {
+        "page": "page-7.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.068188,
+        "dark_ratio": 0.061844
+      },
+      {
+        "page": "page-8.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.057335,
+        "dark_ratio": 0.051887
+      },
+      {
+        "page": "page-9.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.048693,
+        "dark_ratio": 0.044062
+      },
+      {
+        "page": "page-10.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.046002,
+        "dark_ratio": 0.041624
+      },
+      {
+        "page": "page-11.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.041667,
+        "dark_ratio": 0.037622
+      },
+      {
+        "page": "page-12.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035285,
+        "dark_ratio": 0.031573
+      },
+      {
+        "page": "page-13.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.036494,
+        "dark_ratio": 0.03318
+      },
+      {
+        "page": "page-14.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.04472,
+        "dark_ratio": 0.040767
+      },
+      {
+        "page": "page-15.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.034937,
+        "dark_ratio": 0.031495
+      },
+      {
+        "page": "page-16.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.037881,
+        "dark_ratio": 0.034441
+      },
+      {
+        "page": "page-17.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.052776,
+        "dark_ratio": 0.047843
+      },
+      {
+        "page": "page-18.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.055519,
+        "dark_ratio": 0.050417
+      },
+      {
+        "page": "page-19.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.049034,
+        "dark_ratio": 0.044627
+      },
+      {
+        "page": "page-20.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.048611,
+        "dark_ratio": 0.04426
+      },
+      {
+        "page": "page-21.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.053246,
+        "dark_ratio": 0.048495
+      },
+      {
+        "page": "page-22.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.036759,
+        "dark_ratio": 0.033122
+      },
+      {
+        "page": "page-23.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.047783,
+        "dark_ratio": 0.043508
+      },
+      {
+        "page": "page-24.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.053497,
+        "dark_ratio": 0.048486
+      },
+      {
+        "page": "page-25.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.045057,
+        "dark_ratio": 0.04078
+      },
+      {
+        "page": "page-26.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.062409,
+        "dark_ratio": 0.05722
+      },
+      {
+        "page": "page-27.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.049656,
+        "dark_ratio": 0.044833
+      },
+      {
+        "page": "page-28.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.052194,
+        "dark_ratio": 0.047522
+      },
+      {
+        "page": "page-29.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.048117,
+        "dark_ratio": 0.043688
+      },
+      {
+        "page": "page-30.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.065302,
+        "dark_ratio": 0.059634
+      },
+      {
+        "page": "page-31.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.051874,
+        "dark_ratio": 0.047173
+      },
+      {
+        "page": "page-32.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.055241,
+        "dark_ratio": 0.050433
+      },
+      {
+        "page": "page-33.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.052368,
+        "dark_ratio": 0.047496
+      },
+      {
+        "page": "page-34.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.049189,
+        "dark_ratio": 0.045004
+      },
+      {
+        "page": "page-35.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.053828,
+        "dark_ratio": 0.049067
+      },
+      {
+        "page": "page-36.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.051025,
+        "dark_ratio": 0.046408
+      },
+      {
+        "page": "page-37.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.037762,
+        "dark_ratio": 0.034266
+      },
+      {
+        "page": "page-38.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.047399,
+        "dark_ratio": 0.043141
+      },
+      {
+        "page": "page-39.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.054821,
+        "dark_ratio": 0.049905
+      },
+      {
+        "page": "page-40.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.055918,
+        "dark_ratio": 0.050892
+      },
+      {
+        "page": "page-41.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.062762,
+        "dark_ratio": 0.05713
+      },
+      {
+        "page": "page-42.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.037296,
+        "dark_ratio": 0.034005
+      },
+      {
+        "page": "page-43.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.039768,
+        "dark_ratio": 0.035826
+      },
+      {
+        "page": "page-44.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.05858,
+        "dark_ratio": 0.053562
+      },
+      {
+        "page": "page-45.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.057933,
+        "dark_ratio": 0.053158
+      },
+      {
+        "page": "page-46.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.06109,
+        "dark_ratio": 0.055401
+      },
+      {
+        "page": "page-47.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.036457,
+        "dark_ratio": 0.032734
+      },
+      {
+        "page": "page-48.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.04993,
+        "dark_ratio": 0.044791
+      },
+      {
+        "page": "page-49.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.046643,
+        "dark_ratio": 0.042375
+      },
+      {
+        "page": "page-50.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.077635,
+        "dark_ratio": 0.072143
+      },
+      {
+        "page": "page-51.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.065295,
+        "dark_ratio": 0.060989
+      },
+      {
+        "page": "page-52.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.056175,
+        "dark_ratio": 0.050689
+      },
+      {
+        "page": "page-53.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.006954,
+        "dark_ratio": 0.006336
+      }
+    ]
+  },
+  "MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0_FOUNDER_APPROVED": {
+    "page_count": 63,
+    "blank_pages": [],
+    "pages": [
+      {
+        "page": "page-1.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.075538,
+        "dark_ratio": 0.070156
+      },
+      {
+        "page": "page-2.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.034167,
+        "dark_ratio": 0.029909
+      },
+      {
+        "page": "page-3.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.051817,
+        "dark_ratio": 0.046498
+      },
+      {
+        "page": "page-4.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.018849,
+        "dark_ratio": 0.016885
+      },
+      {
+        "page": "page-5.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.017164,
+        "dark_ratio": 0.015172
+      },
+      {
+        "page": "page-6.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035661,
+        "dark_ratio": 0.032316
+      },
+      {
+        "page": "page-7.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027002,
+        "dark_ratio": 0.024221
+      },
+      {
+        "page": "page-8.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033215,
+        "dark_ratio": 0.030084
+      },
+      {
+        "page": "page-9.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025774,
+        "dark_ratio": 0.023437
+      },
+      {
+        "page": "page-10.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027559,
+        "dark_ratio": 0.024726
+      },
+      {
+        "page": "page-11.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.045718,
+        "dark_ratio": 0.041558
+      },
+      {
+        "page": "page-12.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.041388,
+        "dark_ratio": 0.037678
+      },
+      {
+        "page": "page-13.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027061,
+        "dark_ratio": 0.024584
+      },
+      {
+        "page": "page-14.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.026413,
+        "dark_ratio": 0.023959
+      },
+      {
+        "page": "page-15.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.022931,
+        "dark_ratio": 0.02065
+      },
+      {
+        "page": "page-16.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.024677,
+        "dark_ratio": 0.022234
+      },
+      {
+        "page": "page-17.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.016994,
+        "dark_ratio": 0.015263
+      },
+      {
+        "page": "page-18.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.02638,
+        "dark_ratio": 0.023866
+      },
+      {
+        "page": "page-19.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.029633,
+        "dark_ratio": 0.026619
+      },
+      {
+        "page": "page-20.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.024706,
+        "dark_ratio": 0.02223
+      },
+      {
+        "page": "page-21.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.024051,
+        "dark_ratio": 0.021667
+      },
+      {
+        "page": "page-22.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025841,
+        "dark_ratio": 0.023285
+      },
+      {
+        "page": "page-23.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.022135,
+        "dark_ratio": 0.019942
+      },
+      {
+        "page": "page-24.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.028207,
+        "dark_ratio": 0.025464
+      },
+      {
+        "page": "page-25.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030512,
+        "dark_ratio": 0.027618
+      },
+      {
+        "page": "page-26.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.032315,
+        "dark_ratio": 0.029151
+      },
+      {
+        "page": "page-27.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027505,
+        "dark_ratio": 0.024737
+      },
+      {
+        "page": "page-28.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.026009,
+        "dark_ratio": 0.0234
+      },
+      {
+        "page": "page-29.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.022455,
+        "dark_ratio": 0.019982
+      },
+      {
+        "page": "page-30.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025833,
+        "dark_ratio": 0.023244
+      },
+      {
+        "page": "page-31.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.024238,
+        "dark_ratio": 0.021911
+      },
+      {
+        "page": "page-32.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.017955,
+        "dark_ratio": 0.016205
+      },
+      {
+        "page": "page-33.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.026012,
+        "dark_ratio": 0.023388
+      },
+      {
+        "page": "page-34.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.026088,
+        "dark_ratio": 0.023549
+      },
+      {
+        "page": "page-35.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025811,
+        "dark_ratio": 0.023185
+      },
+      {
+        "page": "page-36.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025366,
+        "dark_ratio": 0.022754
+      },
+      {
+        "page": "page-37.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027502,
+        "dark_ratio": 0.024697
+      },
+      {
+        "page": "page-38.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.028855,
+        "dark_ratio": 0.026171
+      },
+      {
+        "page": "page-39.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025847,
+        "dark_ratio": 0.02339
+      },
+      {
+        "page": "page-40.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027196,
+        "dark_ratio": 0.024638
+      },
+      {
+        "page": "page-41.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.022882,
+        "dark_ratio": 0.020759
+      },
+      {
+        "page": "page-42.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.025979,
+        "dark_ratio": 0.023577
+      },
+      {
+        "page": "page-43.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.02715,
+        "dark_ratio": 0.024685
+      },
+      {
+        "page": "page-44.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.024861,
+        "dark_ratio": 0.022491
+      },
+      {
+        "page": "page-45.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.028318,
+        "dark_ratio": 0.025769
+      },
+      {
+        "page": "page-46.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.026478,
+        "dark_ratio": 0.023945
+      },
+      {
+        "page": "page-47.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027055,
+        "dark_ratio": 0.024593
+      },
+      {
+        "page": "page-48.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.023014,
+        "dark_ratio": 0.020654
+      },
+      {
+        "page": "page-49.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.026766,
+        "dark_ratio": 0.024016
+      },
+      {
+        "page": "page-50.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030834,
+        "dark_ratio": 0.027456
+      },
+      {
+        "page": "page-51.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.056596,
+        "dark_ratio": 0.049801
+      },
+      {
+        "page": "page-52.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.036825,
+        "dark_ratio": 0.032966
+      },
+      {
+        "page": "page-53.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.016159,
+        "dark_ratio": 0.014523
+      },
+      {
+        "page": "page-54.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.032584,
+        "dark_ratio": 0.029474
+      },
+      {
+        "page": "page-55.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.053506,
+        "dark_ratio": 0.049045
+      },
+      {
+        "page": "page-56.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.054663,
+        "dark_ratio": 0.050023
+      },
+      {
+        "page": "page-57.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.047264,
+        "dark_ratio": 0.041465
+      },
+      {
+        "page": "page-58.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.045815,
+        "dark_ratio": 0.040207
+      },
+      {
+        "page": "page-59.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.042618,
+        "dark_ratio": 0.037831
+      },
+      {
+        "page": "page-60.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.054869,
+        "dark_ratio": 0.048562
+      },
+      {
+        "page": "page-61.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.031016,
+        "dark_ratio": 0.027812
+      },
+      {
+        "page": "page-62.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035538,
+        "dark_ratio": 0.032152
+      },
+      {
+        "page": "page-63.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.022747,
+        "dark_ratio": 0.020532
+      }
+    ]
+  },
+  "MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0_FOUNDER_APPROVED": {
+    "page_count": 33,
+    "blank_pages": [],
+    "pages": [
+      {
+        "page": "page-1.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.184416,
+        "dark_ratio": 0.178827
+      },
+      {
+        "page": "page-2.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.117526,
+        "dark_ratio": 0.112304
+      },
+      {
+        "page": "page-3.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.073143,
+        "dark_ratio": 0.064809
+      },
+      {
+        "page": "page-4.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.073042,
+        "dark_ratio": 0.064778
+      },
+      {
+        "page": "page-5.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.05488,
+        "dark_ratio": 0.049598
+      },
+      {
+        "page": "page-6.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.052181,
+        "dark_ratio": 0.046756
+      },
+      {
+        "page": "page-7.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.051745,
+        "dark_ratio": 0.046678
+      },
+      {
+        "page": "page-8.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.070429,
+        "dark_ratio": 0.063401
+      },
+      {
+        "page": "page-9.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.047467,
+        "dark_ratio": 0.042593
+      },
+      {
+        "page": "page-10.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.044903,
+        "dark_ratio": 0.040304
+      },
+      {
+        "page": "page-11.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.050213,
+        "dark_ratio": 0.044622
+      },
+      {
+        "page": "page-12.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.041204,
+        "dark_ratio": 0.037086
+      },
+      {
+        "page": "page-13.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.050871,
+        "dark_ratio": 0.04603
+      },
+      {
+        "page": "page-14.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.068516,
+        "dark_ratio": 0.062105
+      },
+      {
+        "page": "page-15.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.048996,
+        "dark_ratio": 0.044251
+      },
+      {
+        "page": "page-16.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.043321,
+        "dark_ratio": 0.038765
+      },
+      {
+        "page": "page-17.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.057533,
+        "dark_ratio": 0.052116
+      },
+      {
+        "page": "page-18.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.064018,
+        "dark_ratio": 0.057678
+      },
+      {
+        "page": "page-19.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.051571,
+        "dark_ratio": 0.04659
+      },
+      {
+        "page": "page-20.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.041153,
+        "dark_ratio": 0.037163
+      },
+      {
+        "page": "page-21.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.044365,
+        "dark_ratio": 0.040298
+      },
+      {
+        "page": "page-22.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.046542,
+        "dark_ratio": 0.042162
+      },
+      {
+        "page": "page-23.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.040592,
+        "dark_ratio": 0.036721
+      },
+      {
+        "page": "page-24.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.052563,
+        "dark_ratio": 0.047767
+      },
+      {
+        "page": "page-25.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.053184,
+        "dark_ratio": 0.048014
+      },
+      {
+        "page": "page-26.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.040596,
+        "dark_ratio": 0.036473
+      },
+      {
+        "page": "page-27.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.049877,
+        "dark_ratio": 0.044776
+      },
+      {
+        "page": "page-28.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.041996,
+        "dark_ratio": 0.037361
+      },
+      {
+        "page": "page-29.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.059076,
+        "dark_ratio": 0.052556
+      },
+      {
+        "page": "page-30.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.047993,
+        "dark_ratio": 0.042955
+      },
+      {
+        "page": "page-31.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.038845,
+        "dark_ratio": 0.034875
+      },
+      {
+        "page": "page-32.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.102014,
+        "dark_ratio": 0.095454
+      },
+      {
+        "page": "page-33.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.056694,
+        "dark_ratio": 0.052853
+      }
+    ]
+  },
+  "MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_V2_0_FOUNDER_APPROVED": {
+    "page_count": 36,
+    "blank_pages": [],
+    "pages": [
+      {
+        "page": "page-1.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.333179,
+        "dark_ratio": 0.328199
+      },
+      {
+        "page": "page-2.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.13566,
+        "dark_ratio": 0.130766
+      },
+      {
+        "page": "page-3.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.03712,
+        "dark_ratio": 0.032993
+      },
+      {
+        "page": "page-4.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.04464,
+        "dark_ratio": 0.039312
+      },
+      {
+        "page": "page-5.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035549,
+        "dark_ratio": 0.031873
+      },
+      {
+        "page": "page-6.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.026422,
+        "dark_ratio": 0.023541
+      },
+      {
+        "page": "page-7.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033702,
+        "dark_ratio": 0.030086
+      },
+      {
+        "page": "page-8.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.031424,
+        "dark_ratio": 0.028219
+      },
+      {
+        "page": "page-9.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.032697,
+        "dark_ratio": 0.029278
+      },
+      {
+        "page": "page-10.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.024966,
+        "dark_ratio": 0.022043
+      },
+      {
+        "page": "page-11.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033321,
+        "dark_ratio": 0.029846
+      },
+      {
+        "page": "page-12.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.031123,
+        "dark_ratio": 0.027815
+      },
+      {
+        "page": "page-13.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033452,
+        "dark_ratio": 0.030061
+      },
+      {
+        "page": "page-14.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.03281,
+        "dark_ratio": 0.029562
+      },
+      {
+        "page": "page-15.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.029186,
+        "dark_ratio": 0.026147
+      },
+      {
+        "page": "page-16.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033071,
+        "dark_ratio": 0.029783
+      },
+      {
+        "page": "page-17.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033045,
+        "dark_ratio": 0.029715
+      },
+      {
+        "page": "page-18.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.033376,
+        "dark_ratio": 0.029879
+      },
+      {
+        "page": "page-19.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.03243,
+        "dark_ratio": 0.029195
+      },
+      {
+        "page": "page-20.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.031465,
+        "dark_ratio": 0.028299
+      },
+      {
+        "page": "page-21.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.030329,
+        "dark_ratio": 0.027309
+      },
+      {
+        "page": "page-22.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.029515,
+        "dark_ratio": 0.026605
+      },
+      {
+        "page": "page-23.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.0277,
+        "dark_ratio": 0.024753
+      },
+      {
+        "page": "page-24.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.032919,
+        "dark_ratio": 0.02945
+      },
+      {
+        "page": "page-25.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.032572,
+        "dark_ratio": 0.029235
+      },
+      {
+        "page": "page-26.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035691,
+        "dark_ratio": 0.032175
+      },
+      {
+        "page": "page-27.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.035156,
+        "dark_ratio": 0.031884
+      },
+      {
+        "page": "page-28.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.03702,
+        "dark_ratio": 0.033455
+      },
+      {
+        "page": "page-29.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.029164,
+        "dark_ratio": 0.026055
+      },
+      {
+        "page": "page-30.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.032077,
+        "dark_ratio": 0.02905
+      },
+      {
+        "page": "page-31.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.029792,
+        "dark_ratio": 0.026688
+      },
+      {
+        "page": "page-32.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.048828,
+        "dark_ratio": 0.043818
+      },
+      {
+        "page": "page-33.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.048702,
+        "dark_ratio": 0.043199
+      },
+      {
+        "page": "page-34.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.027837,
+        "dark_ratio": 0.024578
+      },
+      {
+        "page": "page-35.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.039719,
+        "dark_ratio": 0.035414
+      },
+      {
+        "page": "page-36.png",
+        "width": 1547,
+        "height": 2002,
+        "nonwhite_ratio": 0.052238,
+        "dark_ratio": 0.047173
+      }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "row_id": "C0-014",
+  "generated_at": "2026-07-16T08:32:07Z",
+  "files": [
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/C0_014_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "8e685e5cf666e54f1cb9b5548bc61570d9e40195b396813861a77bd48ac131b2",
+      "size": 517
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "707dfec9872e218948134738b8862033e4d10a7202cb13d17f472da644082ad0",
+      "size": 410
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "94efaf7276595111cee5e71cda17dfd43c5561d2ef0cc538c41430b12fe8e80f",
+      "size": 275
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_RAW_BYTE_COMPARISON.json",
+      "sha256": "df455fe8157c3afec2b69c753b9b589a359a2281323e3c49a87c3ada58ddf3bb",
+      "size": 516
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_REQUIREMENT_ID_DELTA.json",
+      "sha256": "62dad66ef16b769a5b915c5ded53c35b6d2bef6f2c6a3caa56fca7e4dea2f437",
+      "size": 223
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "b290f5e4ce2b47600bdba7ccb26aa70498a2f52f692b3ec641db08979fa5ff1d",
+      "size": 486
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/current_repository_source/MASTER_FACILITY_DOMAIN_MODEL.md",
+      "sha256": "ee97b61290d7552a9907df14db25b2a3b4a8a32a57871adca6ce0e373b5c712b",
+      "size": 6268
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/decision_package/C0_014_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "58004dc7b32686c49dda5c76ee66f4396ff614848d3c7a69736a7092a0322ad0",
+      "size": 844
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/decision_package/C0_014_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "f7df260f4e2335c2de7bad8b2560d4a37e9fe0cd8327b74a9bc67eb60c318319",
+      "size": 315
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/provenance/C0_014_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "03c21affd3025f922d97057f0aad1f1ae0e15109b99b5b7e973eafd333118d88",
+      "size": 875
+    }
+  ],
+  "authority": {
+    "founder_source_identity_decision": false,
+    "adoption": false,
+    "lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "amendment_of_locked_canon": false
+  }
+}

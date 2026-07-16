@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-07-16T08:32:07Z",
+  "root": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current",
+  "branch": "integrate-emergent-final-zip",
+  "commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "working_tree_entries_preserved": 232,
+  "no_runtime_change_authorized": true,
+  "authority": {
+    "founder_source_identity_decision": false,
+    "adoption": false,
+    "lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "amendment_of_locked_canon": false
+  }
+}

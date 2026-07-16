@@ -1,0 +1,13 @@
+sg_decision_id,sg_topic,governing_founder_direction,candidate_sections,treatment,resolution,classification
+SG-FD01,Transition to majority,FD-MSP15,81-84,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by reconfirmed FD-MSP15,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD02,Conflicting guardians,FD-MSP04,13-18,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by reconfirmed FD-MSP04,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD03,Adult-to-minor ordinary electronic communication,FD-MSP06,23-32; 114-117,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by founder-modified FD-MSP06,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD04,Media location search and recommendation defaults,FD-MSP05,58-64,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by directive Part IV,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD05,Emergency intervention before guardian contact,FD-MSP09,37-40,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by reconfirmed FD-MSP09,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD06,Mandated-reporting governance,Founder directive Part V,37.1; 37.2,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by qualified-human legal-duty boundary,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD07,Safeguarding record access sealing and unsealing,Founder directive Part VI,70-75; 71.1,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by sealing and exceptional-access rules,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD08,Background-check and credential representations,FD-MSP12; directive Part VII,43-47; 43.1; 85,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by claim-neutral evidence rules,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD09,Minor account capability tiers,FD-MSP03; FD-MSP05; FD-MSP11; directive Part VIII,19-20; 20.1; 54-57,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved as capability and risk classes without activation,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD10,Unsubstantiated mistaken withdrawn and malicious reports,FD-MSP14,36; 42; 76-80,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by reconfirmed FD-MSP14,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD11,Communication observability and content-review authority,FD-MSP06; FD-MSP13; directive Part IX,23-32; 32; 65-69,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by purpose-specific audited access,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW
+SG-FD12,SafeSport and comparable framework claims,Founder directive Part X,85; 85.1; 117,RESOLVED_BY_CURRENT_FOUNDER_DIRECTION,Resolved by claim-neutral framework rules,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW

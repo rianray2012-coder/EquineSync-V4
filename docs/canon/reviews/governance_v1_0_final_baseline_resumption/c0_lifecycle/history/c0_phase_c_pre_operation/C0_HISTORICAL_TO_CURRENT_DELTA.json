@@ -1,0 +1,428 @@
+{
+  "generated_at": "2026-07-16T07:13:38Z",
+  "rows": [
+    {
+      "record_id": "C0-001",
+      "historical_adoption": "NOT ADOPTED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-002",
+      "historical_adoption": "NOT ADOPTED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/CANON_INDEX.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-003",
+      "historical_adoption": "MIXED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "MIXED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/registries/CANON_ARTIFACT_INVENTORY.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-004",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_PRODUCT_VISION.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-005",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_ECOSYSTEM_MODEL.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-006",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-007",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-008",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-009",
+      "historical_adoption": "NOT ADOPTED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-010",
+      "historical_adoption": "NOT ADOPTED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-011",
+      "historical_adoption": "NOT ADOPTED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-012",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_HORSE_LIFECYCLE.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-013",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "ADOPTED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "LOCKED",
+      "basis": "docs/canon/MASTER_HORSE_TRANSFER_AND_CONTINUITY_POLICY.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-014",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_FACILITY_DOMAIN_MODEL.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-015",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_BARN_LIFECYCLE.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-016",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_BUSINESS_LIFECYCLE.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-017",
+      "historical_adoption": "REPORTED ADOPTED",
+      "current_adoption": "ADOPTED",
+      "historical_lock": "REPORTED LOCKED",
+      "current_lock": "LOCKED",
+      "basis": "docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-018",
+      "historical_adoption": "REPORTED ADOPTED",
+      "current_adoption": "ADOPTED",
+      "historical_lock": "REPORTED LOCKED",
+      "current_lock": "LOCKED",
+      "basis": "docs/canon/MASTER_RELATIONSHIP_MODEL.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-019",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/candidates/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-020",
+      "historical_adoption": "NO",
+      "current_adoption": "ADOPTED",
+      "historical_lock": "NO",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-021",
+      "historical_adoption": "SCOPE-SPECIFIC / REPORTED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "REPORTED LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/RF29/RF29_FINAL_LOCK_REVIEW.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-022",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_PERMISSION_MODEL.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-023",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": null,
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-024",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "SUPERSEDED_OR_EXCLUDED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_APPLICABLE",
+      "basis": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_SECURITY_FOUNDATIONAL_MODELS_V1_0_FOUNDER_VERSION_EXCEPTION_DIRECTIVE_V1_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-025",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/candidates/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-026",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-027",
+      "historical_adoption": "AUTHORIZED / COMPLETION UNVERIFIED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "PENDING",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/candidates/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-028",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-029",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/candidates/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-030",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/candidates/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-031",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/candidates/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-032",
+      "historical_adoption": "NOT ADOPTED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-033",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": null,
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-034",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "ADOPTED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "LOCKED",
+      "basis": "docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-035",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": null,
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-036",
+      "historical_adoption": "REPORTED / DIRECTIVE PRESENT",
+      "current_adoption": "ADOPTED",
+      "historical_lock": "DIRECTIVE PRESENT; TERMINAL LOCK UNVERIFIED",
+      "current_lock": "LOCKED",
+      "basis": "docs/canon/MASTER_FINANCIAL_TRUTH_AND_RESPONSIBILITY_MODEL_V2_1.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-037",
+      "historical_adoption": "NO",
+      "current_adoption": "ADOPTED",
+      "historical_lock": "NO",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/adopted_sources/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-038",
+      "historical_adoption": "V2.0 REPORTED ADOPTED; V2.1 NOT ESTABLISHED",
+      "current_adoption": "SUPERSEDED_OR_EXCLUDED",
+      "historical_lock": "V2.0 REPORTED LOCKED; V2.1 NOT ESTABLISHED",
+      "current_lock": "NOT_APPLICABLE",
+      "basis": "docs/canon/MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-039",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": null,
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-040",
+      "historical_adoption": "NOT ESTABLISHED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "NOT ESTABLISHED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": null,
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-041",
+      "historical_adoption": "PENDING",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "PENDING",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": null,
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-042",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": null,
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-043",
+      "historical_adoption": "UNRESOLVED",
+      "current_adoption": "NOT_ESTABLISHED",
+      "historical_lock": "UNRESOLVED",
+      "current_lock": "NOT_ESTABLISHED",
+      "basis": "docs/canon/candidates/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-044",
+      "historical_adoption": "NOT A SINGLE CANON DETERMINATION",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "WAVES 0-2 REPORTED LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/reviews/stage0_c0_classification_correction/OFFLINE_AND_PROGRAM_EVIDENCE_CONSOLIDATION.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-045",
+      "historical_adoption": "ADOPTED FOR PLANNING",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-046",
+      "historical_adoption": "NOT ADOPTED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.md",
+      "historical_record_mutated": false
+    },
+    {
+      "record_id": "C0-047",
+      "historical_adoption": "NOT ADOPTED",
+      "current_adoption": "SUPPORTING_OR_SCOPE_SPECIFIC",
+      "historical_lock": "NOT LOCKED",
+      "current_lock": "NOT_REQUIRED_AS_SINGLE_CONSTITUTIONAL_CANON",
+      "basis": "docs/canon/companions/MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.md",
+      "historical_record_mutated": false
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# Proposed Equine Health V1.1 Governance Requirement Index Delta
+
+- Register `EH-REQ-001` through `EH-REQ-035` as constitutional requirements owned by the adopted Equine Health V1.1 source or the adjacent controlling owner identified in the requirement traceability report.
+- Link each requirement to `docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_V1_1_REQUIREMENT_TO_SECTION_TRACEABILITY.md`.
+- Mark every implementation state `NOT_AUTHORIZED`.
+- Link retained P2 gates where jurisdiction, Privacy, scenarios, qualified review, or formal source scans remain required.
+
+Proposal only. The exact controlling Governance Requirement Index is unavailable and must not be reconstructed from this delta.

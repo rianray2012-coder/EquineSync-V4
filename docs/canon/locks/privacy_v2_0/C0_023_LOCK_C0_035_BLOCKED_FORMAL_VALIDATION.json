@@ -1,0 +1,38 @@
+{
+  "disposition": "C0_023_LOCKED_C0_035_BLOCKED_BY_C0_022_LIFECYCLE",
+  "checks": {
+    "adoption_and_pre_lock_hashes": "PASS",
+    "substantive_immutability": "PASS",
+    "lock_record_hash": "PASS",
+    "visual_qa": "24_OF_24_PASS",
+    "lifecycle_state": "PASS_C0_023_LOCKED_C0_035_OPEN",
+    "blocker_ledger": "PASS",
+    "readiness_findings": "PASS",
+    "merge_secret_json_scans": "PASS",
+    "python_compilation": "PASS",
+    "git_diff_check": "PASS",
+    "application_runtime_files_changed": 0,
+    "authority": {
+      "implementation": false,
+      "migration": false,
+      "runtime": false,
+      "provider_activation": false,
+      "production": false,
+      "public_launch": false,
+      "certification": false,
+      "public_trust_claims": false
+    }
+  },
+  "findings": {
+    "C0-023": {
+      "p0": 0,
+      "open_p1": 0,
+      "retained_p2": 1
+    },
+    "C0-035": {
+      "p0": 0,
+      "open_p1": 1,
+      "retained_p2": 1
+    }
+  }
+}

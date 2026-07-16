@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-07-16T06:08:55Z",
+  "patches": [
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CANON_DEPENDENCY_MAP_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "c1983addf32a788ebed5e8c52707727939ca120843a9b195e8c0101994c2cc3d",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_AUTHORITY_MATRIX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "c65786cf70e7991b256ec272920927fd7c90ebcc8ecc11cb5ae85a94642782e4",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_CROSS_REFERENCE_INDEX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "04ce4f6ca848393302cb4dbae9a22bdbf2f32943301f6d0dada1361aed617b0b",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_VOCABULARY_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "e7453b09bb166f77d30dafa55e2862eeb479b5d7c6f8b9fac81851960e9590d6",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/GOVERNANCE_REQUIREMENT_INDEX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "7e363225fa650478b6bde626849fef01d7b4e8486779c2b38e3c993e865d69be",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/REQUIREMENT_TRACEABILITY_MATRIX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "e21f7ac310d2ff9a2de678ed75e796ea99748e0e59d23ab981672486f4e6d483",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/CANON_DEPENDENCY_MAP_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "f8c1cc30338cbbe3295ef0b27efc01fb77e7bd085d9e51ad76c2022306286136",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/CONSTITUTIONAL_AUTHORITY_MATRIX_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "e01017dbc949727e236e65d5fca35d90468b217f130dc65d632e84bd092d7f24",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/CONSTITUTIONAL_CROSS_REFERENCE_INDEX_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "b8674270e3fbac5c9553aae1fa170bb5c0a1948f3d87654037c7651b093cf703",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/CONSTITUTIONAL_VOCABULARY_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "5c8052e7639c540a2bf57077e4cdb229bf658d190ab65ab735ccaaa4e5cfbdf4",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/FOUNDER_DECISION_REGISTER_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "2196e85d801bbe305320a7dfc09ce7272abdc6d3e33c47c74f3638607c3ab682",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/GOVERNANCE_REQUIREMENT_INDEX_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "6b5867344f7f887da97b2f955dc1513a0b465b4a2725251a1f80b317e3ddb724",
+      "target_mutated": false
+    },
+    {
+      "path": "docs/canon/adoptions/safeguarding_v1_2/patches/REQUIREMENT_TRACEABILITY_MATRIX_SAFEGUARDING_V1_2_PROPOSAL.patch",
+      "sha256": "307752556a27e60f06a585f5210124a7b680a9de1630f6a902c7c4a60726fcc8",
+      "target_mutated": false
+    }
+  ]
+}

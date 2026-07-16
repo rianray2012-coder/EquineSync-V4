@@ -1,0 +1,235 @@
+EQUINESYNC FOUNDER DIRECTIVE
+C0 Batch 1 Track B Constitutional Lock Authorization
+Founder disposition
+
+FOUNDER_AUTHORIZED_C0_BATCH_1_TRACK_B_SEVEN_CANON_CONSTITUTIONAL_LOCK
+
+I, as Founder of EquineSync, approve and authorize the separate constitutional lock of the following seven Track B canons:
+
+C0 row	Adoption-record SHA-256	Lock-readiness	Existing P2
+C0-025	90e31fa2be06d4ebf4c2e65718b1fb4dffc12cf0490d885a0ab92e335e14c028	Passed	3
+C0-026	300edb31066c0c76b9235a3360be674cc519c6ad951bd2e64fadff4a3555e612	Passed	0
+C0-027	3f243f17d8e5c210616cc8d30ee88e243c4884dbad6c3dbe59bd96827bcac1f0	Passed	1
+C0-029	41b91b72c9914ccf014ab94d273882d1795facc71fe1516f71107b2abfc3e285	Passed	1
+C0-030	92ca7148d0631dadbcf312d510a71a3f8ea893df50778c2b133107247caa42e1	Passed	3
+C0-031	07fa305bdf48e210dda4befd69b97b37ed05d143c180cbdaf904d31a29650111	Passed	3
+C0-032	3bccad61ca0f8e1e6eeef0a93301d3b5c4334b20bab89e260d6c35a4d090b755	Passed	12
+
+This directive relies upon and incorporates the evidence established in:
+
+C0_BATCH_1_TRACK_B_LOCK_READINESS_MASTER_REPORT.md
+the seven Track B adoption records;
+C0_BATCH_1_POST_LIFECYCLE_FORMAL_SCAN_MASTER_REPORT.md;
+C0_BATCH_1_CURRENT_LIFECYCLE_DELTA.md;
+C0_UNRESOLVED_LIFECYCLE_BLOCKER_LEDGER.md; and
+evidence package SHA-256:
+
+a2634c646d934b798f8ac82bcd09350e6ae11a5a9b57208b53437049143f6d7d
+
+1. Authorized action
+
+Codex is authorized to:
+
+Verify the exact adopted source bytes and adoption-record hashes for C0-025, C0-026, C0-027, C0-029, C0-030, C0-031, and C0-032.
+Confirm that each source remains byte-identical to the source that passed lock-readiness review.
+Create a separate constitutional lock record for each of the seven canons.
+Mark each canon’s lifecycle state as:
+Adoption: ADOPTED
+Lock-readiness: PASSED
+Constitutional lock: LOCKED
+Lifecycle blocker: RESOLVED
+Record the exact source SHA-256 and lock-record SHA-256 for every canon.
+Update all affected lifecycle, constitutional, companion, machine-readable, and traceability records.
+Run complete post-lock validation and produce a final evidence package.
+2. No substantive redrafting authorized
+
+This is a lock-only authorization.
+
+Codex may not:
+
+revise substantive policy language;
+modify founder-approved decisions;
+add new requirements;
+remove existing requirements;
+weaken any protection, prohibition, or governance boundary;
+silently resolve interpretive uncertainty through drafting;
+substitute a newer or different source artifact;
+merge canon text;
+renumber constitutional requirements except where an already-authorized mechanical correction is strictly required;
+reopen adoption; or
+treat the lock as implementation authority.
+
+Any source-byte mismatch, unexplained hash change, substantive inconsistency, unresolved authority conflict, or lock-blocking defect must halt the affected row and be reported rather than repaired without separate founder authority.
+
+A defect affecting one row does not automatically prevent locking the remaining independently valid rows.
+
+3. Existing P2 findings
+
+The existing P2 findings are accepted as nonblocking retained follow-up items because the formal lock-readiness process determined:
+
+P0: 0
+open P1: 0
+lock-blocking P2: 0
+
+Codex shall:
+
+preserve each P2 finding;
+retain its existing wording, owner, scope, and traceability where available;
+identify the locked canon to which it relates;
+classify it as nonblocking;
+ensure it is not silently closed merely because the canon is locked; and
+confirm that no retained P2 contradicts the locked constitutional text.
+
+Expected retained P2 total across these seven rows: 23.
+
+4. Required lock records
+
+Create one lock record per C0 row under an appropriate controlled path such as:
+
+docs/canon/locks/<canon_family>/
+
+Each lock record must contain:
+
+C0 row identifier;
+exact canon title;
+controlling version;
+exact source path;
+source SHA-256;
+adoption-record path and SHA-256;
+lock-readiness report reference;
+founder-lock directive reference;
+founder-lock decision;
+lock timestamp;
+lock disposition;
+retained P2 count;
+implementation authority status;
+production authority status;
+public-launch authority status;
+public-trust-claim authority status;
+supersession and amendment rules;
+required process for future modification;
+verification results; and
+lock-record SHA-256.
+
+The lock records must state that future substantive modification requires a separately governed amendment, supersession, or reopening process.
+
+5. Required lifecycle updates
+
+Update, at minimum, all applicable versions of:
+
+C0 Source-of-Truth Register;
+C0 Row-by-Row Lifecycle Resolution Ledger;
+C0 Unresolved Lifecycle Blocker Ledger;
+C0 Current Lifecycle Delta;
+Constitutional Canon Index and Navigator;
+Constitutional Authority Matrix;
+Constitutional Domain Ownership and Boundary Register;
+Cross-Canon Reference Normalization Register;
+Canon Dependency Map;
+Founder Decision Register;
+Governance Requirement Index;
+Requirement Traceability Matrix;
+constitutional checksum or manifest records;
+machine-readable lifecycle data;
+retained-P2 registers; and
+Batch 1 status reports.
+
+The updated C0 status should reflect, subject to successful verification:
+
+previous blockers before Batch 1: 26;
+Track A lifecycle resolutions: 2;
+Track B lifecycle resolutions added by this directive: 7;
+total lifecycle-complete from Batch 1: 9;
+remaining C0 blockers: 17;
+Track C remaining: 9;
+Track D remaining: 7;
+Track E remaining: 1.
+
+Do not use these expected totals if repository validation demonstrates a different mathematically correct result. Report and explain any variance.
+
+6. Required validation
+
+Before issuing final lock disposition, perform:
+
+exact-source-byte verification;
+SHA-256 verification;
+adoption-record verification;
+dependency-cycle scan;
+orphan-canon scan;
+duplicate constitutional-ID scan;
+broken-reference scan;
+authority-conflict scan;
+requirement traceability scan;
+unresolved placeholder scan;
+JSON validation;
+archive extraction validation;
+secret scan;
+Markdown-link and path validation;
+git diff --check;
+prohibited-authority-language scan; and
+confirmation that no implementation or production state changed.
+
+Any P0, open P1, or lock-blocking P2 must prevent lock of the affected canon.
+
+7. Authority boundaries
+
+The following remain FALSE:
+
+implementation authority;
+runtime authority;
+migration authority;
+production authority;
+provider activation authority;
+external integration activation authority;
+deployment authority;
+public-launch authority;
+public-trust-claim authority;
+customer-data processing authority;
+security-certification authority; and
+Governance V1.0 baseline adoption or lock authority.
+
+This directive locks only the seven identified constitutional canons.
+
+It does not authorize:
+
+Governance V1.0 baseline adoption;
+Governance V1.0 baseline lock;
+Track C work;
+Track D work;
+Track E substantive review;
+software implementation;
+production deployment; or
+public representation that EquineSync is operationally compliant with the locked canons.
+8. Required final disposition
+
+Upon successful completion, issue:
+
+C0_BATCH_1_TRACK_B_SEVEN_CANONS_CONSTITUTIONALLY_LOCKED
+
+The final report must include:
+
+a row-by-row disposition;
+source hashes;
+adoption-record hashes;
+lock-record paths and hashes;
+retained P2 counts;
+formal scan results;
+lifecycle-ledger changes;
+revised blocker totals;
+changed-file manifest;
+repository diff summary;
+evidence-package path and SHA-256;
+confirmation that no substantive canon text changed; and
+confirmation that all implementation, runtime, provider, production, launch, and public-trust authority remains FALSE.
+
+If one or more rows cannot be locked, use:
+
+C0_BATCH_1_TRACK_B_PARTIALLY_LOCKED_WITH_IDENTIFIED_ROW_BLOCKERS
+
+and clearly separate locked rows from blocked rows.
+
+Founder authorization
+
+The seven Track B canons are approved for immediate constitutional lock under the restrictions and verification requirements above.
+
+Founder decision: APPROVED_AND_AUTHORIZED

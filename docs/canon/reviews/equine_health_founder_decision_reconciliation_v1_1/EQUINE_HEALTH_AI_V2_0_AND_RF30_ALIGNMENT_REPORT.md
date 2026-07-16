@@ -1,0 +1,3 @@
+# Equine Health AI V2.0 and RF30 Alignment Report
+
+EH-FD14 preserves RF30's default-off boundary. Future support may retrieve or summarize permission-safe source material only under separate authorization, with citations, freshness, uncertainty, assumptions, and qualified human review. AI may not diagnose, establish prognosis, prescribe, alter dosage, select treatment, determine emergency necessity, approve euthanasia, contact a provider, execute care, mutate canonical records, or use real models, credentials, tools, or production data through this workstream. RF30 remains locked and unchanged.

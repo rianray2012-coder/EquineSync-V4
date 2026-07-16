@@ -1,0 +1,39 @@
+{
+  "event": "SAFEGUARDING_V1_2_FOUNDER_ADOPTION",
+  "event_date": "2026-07-15",
+  "founder": "Rian Ray",
+  "disposition": "SAFEGUARDING_V1_2_FOUNDER_ADOPTED_LOCK_PENDING",
+  "lifecycle_state": "FOUNDER_ADOPTED_CONSTITUTIONAL_CANON_LOCK_PENDING",
+  "constitutional_authority": "CONTROLLING",
+  "lock_state": "NOT_LOCKED",
+  "adopted_source": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+  "adopted_sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+  "candidate_source": "docs/canon/candidates/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_RECONCILED_ADOPTION_CANDIDATE.md",
+  "candidate_sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+  "supporting_evidence_sha256": "0ad6cb93e1240ac55d16521d3fe69c8ef073b28b4e4978673d6b1e0bcdf29909",
+  "founder_directive": "docs/canon/adoptions/safeguarding_v1_2/EQUINESYNC_SAFEGUARDING_V1_2_FOUNDER_ADOPTION_DIRECTIVE.md",
+  "founder_directive_sha256": "c76c3b82227181c3310bd530329d7b9c79b4db6039ec3ca0ec8d36cb9f91b0ef",
+  "decisions": {
+    "fd_msp_resolved": 15,
+    "sg_fd_resolved": 12
+  },
+  "findings": {
+    "p0": 0,
+    "p1": 0,
+    "p2_open": 6
+  },
+  "authority": {
+    "lock": false,
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "permission_expansion": false,
+    "runtime": false,
+    "provider_activation": false,
+    "production": false,
+    "onboarding": false,
+    "public_claims": false,
+    "launch": false
+  }
+}
+

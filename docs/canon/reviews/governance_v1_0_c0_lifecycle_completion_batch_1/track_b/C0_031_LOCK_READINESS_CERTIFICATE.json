@@ -1,0 +1,29 @@
+{
+  "row_id": "C0-031",
+  "reviewed_at": "2026-07-16T07:34:36Z",
+  "ready": true,
+  "adopted_source": "docs/canon/adopted_sources/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0_ADOPTED_SOURCE.md",
+  "sha256": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+  "adoption_record_sha256": "07fa305bdf48e210dda4befd69b97b37ed05d143c180cbdaf904d31a29650111",
+  "p0": 0,
+  "open_p1": 0,
+  "lock_blocking_p2": 0,
+  "retained_nonblocking_p2": [
+    "SFM-P2-01",
+    "SFM-P2-02",
+    "SFM-P2-03"
+  ],
+  "lock_issued": false,
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

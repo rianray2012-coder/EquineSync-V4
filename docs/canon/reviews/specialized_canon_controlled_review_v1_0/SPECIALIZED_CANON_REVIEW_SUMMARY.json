@@ -1,0 +1,72 @@
+{
+  "program": "CONTROLLED_SPECIALIZED_CANON_SUBSTANTIVE_REVIEW_AND_FOUNDER_DECISION_EXTRACTION",
+  "disposition": "SPECIALIZED_CANON_CONTROLLED_REVIEW_AUTHORIZED",
+  "generated": "2026-07-15",
+  "canons": {
+    "safeguarding": {
+      "original_draft": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_DELEGATED_ASSISTANCE_CANON_V1_0_DRAFT.md",
+      "revised_draft": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_DELEGATED_ASSISTANCE_CANON_V1_0_REVISED_NONCONTROLLING_DRAFT.md",
+      "p0": 0,
+      "p1": 12,
+      "p2": 6,
+      "founder_decisions": [
+        "SG-FD01",
+        "SG-FD02",
+        "SG-FD03",
+        "SG-FD04",
+        "SG-FD05",
+        "SG-FD06",
+        "SG-FD07",
+        "SG-FD08",
+        "SG-FD09",
+        "SG-FD10",
+        "SG-FD11",
+        "SG-FD12"
+      ],
+      "preliminary_requirements": 30
+    },
+    "equine_health": {
+      "original_draft": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_0_DRAFT.md",
+      "revised_draft": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_0_REVISED_NONCONTROLLING_DRAFT.md",
+      "p0": 0,
+      "p1": 14,
+      "p2": 6,
+      "founder_decisions": [
+        "EH-FD01",
+        "EH-FD02",
+        "EH-FD03",
+        "EH-FD04",
+        "EH-FD05",
+        "EH-FD06",
+        "EH-FD07",
+        "EH-FD08",
+        "EH-FD09",
+        "EH-FD10",
+        "EH-FD11",
+        "EH-FD12",
+        "EH-FD13",
+        "EH-FD14"
+      ],
+      "preliminary_requirements": 35
+    }
+  },
+  "formal_scans": {
+    "dependency_cycle": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING",
+    "orphan_requirement": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING"
+  },
+  "preliminary_analysis": "NONAUTHORITATIVE_PRELIMINARY_REVIEW_ANALYSIS",
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "permission_expansion": false,
+    "provider_activation": false,
+    "runtime": false,
+    "production": false,
+    "onboarding": false,
+    "public_claim": false,
+    "launch": false
+  }
+}

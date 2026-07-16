@@ -1,0 +1,89 @@
+# C0 Repository Reconciliation Supplement V1.0
+
+**Date:** 2026-07-15
+**Baseline:** Founder-approved C0 V1.0 source reconciliation
+**Effect:** Repository verification supplement only; original C0 findings are unchanged
+**Adoption / Lock / Implementation / Runtime / Production / Public Claim / Launch:** Not authorized
+
+## Summary
+
+All 47 C0 records were compared with the active repository. Exact paths and hashes are recorded only for files read directly from this checkout.
+
+| Repository classification | Count |
+| --- | ---: |
+| `AUTHORIZED_DRAFT_REQUIRED` | 2 |
+| `COMPETING_FAMILY_SOURCE_UNRESOLVED` | 2 |
+| `DEDICATED_CANON_ABSENT` | 2 |
+| `EXACT_FILE_LIBRARY_SOURCE_LOCATED_BYTES_NOT_MOUNTED` | 1 |
+| `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | 8 |
+| `EXACT_SOURCE_ABSENT` | 5 |
+| `EXACT_SOURCE_AND_FOUNDER_EXCEPTION_VERIFIED` | 3 |
+| `EXACT_SOURCE_LIFECYCLE_PARTIAL` | 1 |
+| `EXACT_SOURCE_VERIFIED` | 5 |
+| `EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED` | 4 |
+| `FOUNDER_ACCEPTED_SUCCESSOR_ADOPTION_LOCK_PENDING` | 1 |
+| `PARTIAL_OR_SUMMARY_EVIDENCE_ONLY` | 2 |
+| `RELATED_ACTIVE_NAVIGATOR_VERIFIED` | 1 |
+| `REPOSITORY_SOURCE_AND_ADOPTION_VERIFIED` | 1 |
+| `REPOSITORY_SOURCE_AND_LOCK_VERIFIED` | 5 |
+| `REPOSITORY_SOURCE_LIFECYCLE_PARTIAL` | 4 |
+
+## Record Reconciliation
+
+| ID | Identifier | Repository classification | Verified path or unresolved state |
+| --- | --- | --- | --- |
+| C0-001 | `EQUINESYNC_FOUNDER_DECISION_REGISTER` | `EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED` | Founder-accepted substantive status is preserved. Exact standalone V1.1 Founder Decision Register bytes are not mounted or repository-linked; recover the source and do not reconstruct or redraft it. |
+| C0-002 | `EQUINESYNC_CONSTITUTIONAL_CANON_INDEX_AND_NAVIGATOR` | `RELATED_ACTIVE_NAVIGATOR_VERIFIED` | `docs/canon/CANON_INDEX.md` |
+| C0-003 | `RF_AND_ATLAS_CONTROLLED_REVIEW_EVIDENCE` | `PARTIAL_OR_SUMMARY_EVIDENCE_ONLY` | `docs/RF29/RF29_FINAL_LOCK_REVIEW.md`<br>`docs/RF31/RF31_FINAL_FOUNDER_ACCEPTANCE_RECORD.md`<br>`docs/ATLAS4/ATLAS4_PHASE_COMPLETION_INDEX.md` |
+| C0-004 | `MASTER_PRODUCT_VISION_V2_1` | `EXACT_FILE_LIBRARY_SOURCE_LOCATED_BYTES_NOT_MOUNTED` | `docs/canon/MASTER_PRODUCT_VISION.md` |
+| C0-005 | `MASTER_ECOSYSTEM_MODEL_V2_1` | `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | `docs/canon/MASTER_ECOSYSTEM_MODEL.md` |
+| C0-006 | `CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_0` | `EXACT_SOURCE_ABSENT` | Exact domain ownership and boundary register is not in the supplied packages or active repository. |
+| C0-007 | `EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1` | `EXACT_SOURCE_VERIFIED` | `docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1.md` |
+| C0-008 | `CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_0` | `EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED` | Founder-accepted substantive status is preserved. Exact standalone Cross-Canon Reference Normalization Register bytes are not mounted or repository-linked; recover the source and do not reconstruct or redraft it. |
+| C0-009 | `EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_1` | `EXACT_SOURCE_VERIFIED` | `docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_1.md` |
+| C0-010 | `EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_1` | `EXACT_SOURCE_VERIFIED` | `docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_1.md` |
+| C0-011 | `EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1` | `EXACT_SOURCE_VERIFIED` | `docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1.md` |
+| C0-012 | `MASTER_HORSE_LIFECYCLE_V3_1` | `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | `docs/canon/MASTER_HORSE_LIFECYCLE.md` |
+| C0-013 | `MASTER_HORSE_TRANSFER_AND_CONTINUITY_POLICY_V2_0` | `REPOSITORY_SOURCE_AND_LOCK_VERIFIED` | `docs/canon/MASTER_HORSE_TRANSFER_AND_CONTINUITY_POLICY.md`<br>`docs/canon/MASTER_HORSE_TRANSFER_AND_CONTINUITY_POLICY_FINAL_LOCK_REPORT.md`<br>`docs/RF31/RF31_FINAL_FOUNDER_ACCEPTANCE_RECORD.md`<br>`outputs/rf31_horse_transfer_policy_final_lock_package.zip` |
+| C0-014 | `MASTER_FACILITY_DOMAIN_MODEL_V2_1` | `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | `docs/canon/MASTER_FACILITY_DOMAIN_MODEL.md` |
+| C0-015 | `MASTER_BARN_LIFECYCLE_V3_1` | `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | `docs/canon/MASTER_BARN_LIFECYCLE.md` |
+| C0-016 | `MASTER_BUSINESS_LIFECYCLE_V2_1` | `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | `docs/canon/MASTER_BUSINESS_LIFECYCLE.md` |
+| C0-017 | `MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0` | `REPOSITORY_SOURCE_AND_LOCK_VERIFIED` | `docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0.md`<br>`docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0_FINAL_LOCK_REPORT.md`<br>`docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0_LOCK_MANIFEST.md` |
+| C0-018 | `MASTER_RELATIONSHIP_MODEL_V2_0` | `REPOSITORY_SOURCE_AND_LOCK_VERIFIED` | `docs/canon/MASTER_RELATIONSHIP_MODEL.md`<br>`docs/canon/MASTER_RELATIONSHIP_MODEL_V2_0_FINAL_LOCK_REPORT.md`<br>`docs/canon/MASTER_RELATIONSHIP_MODEL_V2_0_FINAL_LOCK_MANIFEST.json` |
+| C0-019 | `MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1` | `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | `docs/canon/candidates/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_0.md` |
+| C0-020 | `MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL` | `AUTHORIZED_DRAFT_REQUIRED` | `docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_DELEGATED_ASSISTANCE_CANON_V1_0_DRAFT.md` |
+| C0-021 | `RF29_CALENDAR_DOMAIN_CANON` | `REPOSITORY_SOURCE_AND_LOCK_VERIFIED` | `docs/RF29/RF29_FINAL_LOCK_REVIEW.md`<br>`docs/RF29/RF29_DELIVERABLE_MANIFEST.md`<br>`outputs/build_next_rf29_final_lock.zip` |
+| C0-022 | `MASTER_PERMISSION_MODEL_V1_1` | `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | `docs/canon/MASTER_PERMISSION_MODEL.md` |
+| C0-023 | `MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0` | `EXACT_SOURCE_ABSENT` | Dedicated Master Privacy and Data Protection Model V2.0 remains absent. |
+| C0-024 | `MASTER_SECURITY_AND_TRUST_MODEL_V1_1` | `EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED` | `docs/canon/candidates/MASTER_SECURITY_PRIVACY_AND_TRUST_MODEL_V1_0.md` |
+| C0-025 | `MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0` | `EXACT_SOURCE_AND_FOUNDER_EXCEPTION_VERIFIED` | `docs/canon/candidates/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0.md`<br>`docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_SECURITY_FOUNDATIONAL_MODELS_V1_0_FOUNDER_VERSION_EXCEPTION_DIRECTIVE_V1_0.md`<br>`outputs/security_foundational_models_v1_0_founder_review_package.zip` |
+| C0-026 | `MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1` | `REPOSITORY_SOURCE_LIFECYCLE_PARTIAL` | `docs/canon/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1.md`<br>`docs/canon/intake/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1_FOUNDER_SOURCE.md` |
+| C0-027 | `MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0` | `REPOSITORY_SOURCE_LIFECYCLE_PARTIAL` | `docs/canon/candidates/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_FOUNDER_APPROVED.md`<br>`docs/canon/intake/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_FOUNDER_APPROVAL_DIRECTIVE.md` |
+| C0-028 | `MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0` | `EXACT_SOURCE_LIFECYCLE_PARTIAL` | `docs/canon/intake/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md`<br>`docs/canon/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0.md` |
+| C0-029 | `MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0` | `REPOSITORY_SOURCE_LIFECYCLE_PARTIAL` | `docs/canon/candidates/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_FOUNDER_APPROVED.md`<br>`docs/canon/intake/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_CANDIDATE_SOURCE.md` |
+| C0-030 | `MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0` | `EXACT_SOURCE_AND_FOUNDER_EXCEPTION_VERIFIED` | `docs/canon/candidates/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0.md`<br>`docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_SECURITY_FOUNDATIONAL_MODELS_V1_0_FOUNDER_VERSION_EXCEPTION_DIRECTIVE_V1_0.md`<br>`outputs/security_foundational_models_v1_0_founder_review_package.zip` |
+| C0-031 | `MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0` | `EXACT_SOURCE_AND_FOUNDER_EXCEPTION_VERIFIED` | `docs/canon/candidates/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0.md`<br>`docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_SECURITY_FOUNDATIONAL_MODELS_V1_0_FOUNDER_VERSION_EXCEPTION_DIRECTIVE_V1_0.md`<br>`outputs/security_foundational_models_v1_0_founder_review_package.zip` |
+| C0-032 | `MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1` | `EXACT_SOURCE_VERIFIED` | `docs/canon/reviews/stage0_companion_reconciliation_v1_2/MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1.md` |
+| C0-033 | `MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0` | `EXACT_SOURCE_ABSENT` | Exact Search, Discovery, Ranking, and Retrieval V2.0 source remains absent. |
+| C0-034 | `MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0` | `COMPETING_FAMILY_SOURCE_UNRESOLVED` | `docs/canon/MASTER_AI_OPERATING_SYSTEM.md` |
+| C0-035 | `MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0` | `COMPETING_FAMILY_SOURCE_UNRESOLVED` | `docs/canon/MASTER_ANALYTICS_FRAMEWORK.md` |
+| C0-036 | `MASTER_FINANCIAL_TRUTH_AND_RESPONSIBILITY_MODEL_V2_1` | `REPOSITORY_SOURCE_AND_LOCK_VERIFIED` | `docs/canon/MASTER_FINANCIAL_TRUTH_AND_RESPONSIBILITY_MODEL_V2_1.md`<br>`docs/canon/reviews/financial_truth_v2_1/MASTER_FINANCIAL_TRUTH_AND_RESPONSIBILITY_MODEL_V2_1_LOCK_REPORT.md`<br>`outputs/financial_truth_v2_1_adoption_lock_package.zip` |
+| C0-037 | `MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL` | `AUTHORIZED_DRAFT_REQUIRED` | `docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_0_DRAFT.md` |
+| C0-038 | `MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_1` | `FOUNDER_ACCEPTED_SUCCESSOR_ADOPTION_LOCK_PENDING` | `docs/canon/MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0.md`<br>`docs/canon/MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0_FINAL_LOCK_REPORT.md` |
+| C0-039 | `MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_1` | `EXACT_SOURCE_ABSENT` | Exact Developer, Platform, and Integration Governance V2.1 source remains absent. |
+| C0-040 | `MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_V2_1` | `EXACT_SOURCE_ABSENT` | Exact Platform Extensibility and Plugin Governance V2.1 source remains absent. |
+| C0-041 | `MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_V2_0` | `DEDICATED_CANON_ABSENT` | Dedicated Vendor Security and Supply Chain V2.0 source remains absent. |
+| C0-042 | `MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0` | `DEDICATED_CANON_ABSENT` | Dedicated Configuration and Feature Flag Governance V2.0 source remains absent. |
+| C0-043 | `MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0` | `REPOSITORY_SOURCE_LIFECYCLE_PARTIAL` | `docs/canon/candidates/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0.md` |
+| C0-044 | `NATIVE_OFFLINE_SYNCHRONIZATION_CANON_AND_LOCKED_READINESS_INSTRUMENTS` | `PARTIAL_OR_SUMMARY_EVIDENCE_ONLY` | `outputs/native_offline_sync_readiness_final_evidence.zip`<br>`outputs/native_offline_sync_founder_acceptance.zip`<br>`outputs/native_offline_sync_implementation_planning_evidence.zip`<br>`docs/canon/reviews/stage0_c0_classification_correction/OFFLINE_AND_PROGRAM_EVIDENCE_CONSOLIDATION.md` |
+| C0-045 | `MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0` | `REPOSITORY_SOURCE_AND_ADOPTION_VERIFIED` | `docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0.md` |
+| C0-046 | `EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX` | `EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED` | Founder-accepted substantive status is preserved. Exact standalone 60-requirement Governance Requirement Index bytes are not mounted or repository-linked; recover the source and do not reconstruct or redraft it. |
+| C0-047 | `EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX` | `EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED` | Founder-accepted substantive status is preserved. Exact standalone 60-row Requirement Traceability Matrix bytes are not mounted or repository-linked; recover the source and do not reconstruct or redraft it. |
+
+## Preserved Blockers
+
+The dedicated Minor/Guardianship/Safeguarding canon and Equine Health/Welfare/Medical canon remain authorized drafting blockers. Several C0-named successor sources have verified package or file-library provenance but still require exact-byte mounting, repository linkage, and lifecycle disposition. The Governance Requirement Index, Requirement Traceability Matrix, Founder Decision Register V1.1, and Cross-Canon Reference Normalization Register retain founder-accepted substantive status; only their exact standalone bytes and repository links remain unresolved. They must be recovered, not reconstructed or redrafted.
+
+## Authority Attestation
+
+This supplement changes evidence classification only. It does not adopt, lock, implement, activate, deploy, migrate, promote, or authorize public claims or launch.

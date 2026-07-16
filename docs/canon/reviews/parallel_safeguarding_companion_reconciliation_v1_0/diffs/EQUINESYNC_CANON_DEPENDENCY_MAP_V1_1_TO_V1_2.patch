@@ -1,0 +1,96 @@
+diff --git a/docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1.md b/docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md
+index 35c7e39..fc75a10 100644
+--- a/docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1.md
++++ b/docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md
+@@ -1,15 +1,15 @@
+ **Constitutional Prerequisite, Co-Review, Change-Impact, and Sequencing
+ Map**
+ 
+-| **Document Identifier**      | EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1                                                                                      |
++| **Document Identifier**      | EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2                                                                                      |
+ |------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+ | **Document Type**            | Constitutional Support Artifact / Canon Dependency, Change-Impact, and Sequencing Map                                     |
+-| **Status**                   | Founder-Accepted Constitutional Support Artifact                                                                          |
++| **Status**                   | Controlled Completion Integration Candidate for Founder Review                                                                          |
+ | **Implementation Authority** | FALSE                                                                                                                     |
+ | **Production Authority**     | FALSE                                                                                                                     |
+ | **Public Launch Authority**  | FALSE                                                                                                                     |
+-| **Date**                     | July 14, 2026                                                                                                             |
+-| **Coverage**                 | 44 constitutional and governance families; seven dependency layers; critical-path, change-impact, and coupled-review maps |
++| **Date**                     | July 15, 2026                                                                                                             |
++| **Coverage**                 | 44 constitutional and governance families, with the safeguarding family resolved to its founder-approved V1.1 source; seven dependency layers; critical-path, change-impact, and coupled-review maps |
+ 
+ | **Constitutional function: This Map shows what must exist first, what must be read together, and what must be revalidated after change. It does not replace the substantive canon, Authority Matrix, Cross Reference Index, Controlled Canon Index, or founder evidence.** |
+ |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+@@ -69,7 +69,7 @@ be resolved through the Controlled Canon Index and founder evidence.
+ |-----------|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+ | L0        | Lifecycle and Constitutional Control          | Founder authority, active-version resolution, adoption evidence, and RF legislative history.                                        |
+ | L1        | Apex and Interpretive Framework               | Product purpose, ecosystem structure, ownership boundaries, vocabulary, references, authority, navigation, and this dependency map. |
+-| L2        | Core Domain Truth                             | Horse, facility, barn, business, identity, relationship, consent, minor, and calendar truth.                                        |
++| L2        | Core Domain Truth                             | Horse, facility, barn, business, identity, relationship, consent, protected-participant safeguarding, and calendar truth.                                        |
+ | L3        | Trust, Rights, Records, and Evidence          | Permissions, privacy, security, encryption, stewardship, audit, disputes, communication, incidents, and resilience.                 |
+ | L4        | Specialized Information and Decision Overlays | Media, search, AI, reporting, and financial governance that act on underlying domain truth.                                         |
+ | L5        | Platform, External, and Runtime Governance    | External architecture, integrations, plugins, vendors, configuration, operations, and offline synchronization.                      |
+@@ -97,7 +97,7 @@ evidence dependencies.*
+ | Identity and Access      | Product Vision → Ecosystem → Identity → Relationship → Agreement / Minor → Permission → Audit Evidence                                                                                                                                            |
+ | Horse Continuity         | Product Vision → Ecosystem → Horse Lifecycle → Horse Transfer → Record / Audit / Financial / Claims / Notice                                                                                                                                      |
+ | Barn Operations          | Ecosystem → Facility → Barn Lifecycle → Calendar → Permission / Record / Audit / Communication                                                                                                                                                    |
+-| Minor Delegated Care     | Identity → Relationship → Agreement → Minor and Guardian Canon → Permission → Search / Media / AI / Reporting constraints                                                                                                                         |
++| Minor Delegated Care     | Identity → Relationship → Agreement → Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1 → Permission → Search / Media / AI / Reporting constraints                                                                                                                         |
+ | Media Lifecycle          | Permission + Privacy + Record + Security + Encryption → Media Governance → Search / AI / Reporting / Sharing / Deletion                                                                                                                           |
+ | AI Output                | Domain truth + Permission + Privacy + Security + Record + Audit + Search + Vendor controls → AI Governance → Human review and evidence                                                                                                            |
+ | Financial Truth          | Identity + Relationship + Agreement + Record + Audit → Financial Truth → Claims / Transfer / Reporting / External payment rails                                                                                                                   |
+@@ -359,12 +359,11 @@ notices.</td>
+ </tr>
+ <tr class="odd">
+ <td>CDM-020<br />
+-Minor, Guardian, Safeguarding, and Delegated-Assistance Canon</td>
++Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1</td>
+ <td>Identity; Relationship; Agreement and Authorization.</td>
+-<td>Permission; Privacy; Audit; Communication; Claims.</td>
++<td>Permission; Privacy; Communication; Record Stewardship; Claims; Audit; Media; Search; AI; Barn Operations.</td>
+ <td>Protective<br />
+-Minor access, guardian authority, delegated care, search exposure, AI,
+-media, and reporting constraints.</td>
++Protected-participant status, guardian authority, assent, protected communication, safeguarding intake, emergency restrictions, adult eligibility, pickup and transportation, task safety, search, media, AI, reporting, evidence, and transition-to-adulthood constraints.</td>
+ </tr>
+ <tr class="even">
+ <td>CDM-021<br />
+@@ -717,8 +716,8 @@ or release gates must be revised.
+ | External Architecture            | Developer governance, Plugins, Vendors, AI providers, financial rails, operational isolation, exit capability                     |
+ | Platform Operations              | Configuration, Resilience, Offline, release certification, migrations, observability, implementation packages                     |
+ | AI Governance                    | Search, Reporting, Media transformation, Vendor controls, human review, evidence, product claims                                  |
+-| Minor and Guardian Canon         | Permission, Search, Media, AI, Reporting, Communication, delegated-assistance workflows                                           |
+-| Founder Decision or Canon Status | Controlled Canon Index, all support artifacts, RF ledgers, implementation authority, publication and launch posture               |
++| Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1         | Permission, Search, Media, AI, Reporting, Communication, delegated-assistance workflows                                           |
++| Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1 | Identity, Relationship, Agreement, Permission, Communication, Privacy, Records, Claims, Audit, Media, Search, AI, Reporting, Barn Operations, Calendar, external integrations, public-claim controls || Founder Decision or Canon Status | Controlled Canon Index, all support artifacts, RF ledgers, implementation authority, publication and launch posture               |
+ 
+ # 8. Coupled-Review Pairs
+ 
+@@ -734,6 +733,8 @@ constitutional amendment authority.
+ | External Architecture and Vendor Security | Architecture controls provider-neutral boundaries and adapters; vendor governance controls processor eligibility, diligence, contracts, monitoring, and exit.                                                                                                                                                                                  |
+ | Financial Truth and Claims                | Financial canon owns the ledger and responsibility; claims canon owns contested facts, holds, dispute handling, and resolution evidence.                                                                                                                                                                                                       |
+ | Horse Lifecycle and Record Stewardship    | Horse canon owns permanent identity and continuity; stewardship owns the records that evidence and preserve that truth.                                                                                                                                                                                                                        |
++| Safeguarding and Communication | Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1 owns the prohibition on ordinary one-to-one adult-minor electronic communication and the guardian-inclusion floor; Communication owns channel delivery, notices, and delivery evidence. Neither may weaken the other. |
++| Safeguarding and Relationship / Permission | Relationship owns underlying relationships and delegated assistance; Permission enforces valid scope; Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1 adds non-delegable protective constraints and may narrow or block action involving protected participants. |
+ 
+ # 9. Dependency and Cycle-Control Rules
+ 
+@@ -819,7 +820,7 @@ obligations, and applicable release gate.
+ | CDM-017 | Master Identity, Account, and Actor Model                             | Owns person, account, actor, credential, authentication, and actor-attribution distinctions.                              |
+ | CDM-018 | Master Relationship Model                                             | Owns legal, operational, care, service, ownership, organizational, and delegated relationships.                           |
+ | CDM-019 | Master Agreement, Consent, and Authorization Model                    | Distinguishes consent, assent, authorization, agreement, delegation, revocation, and proof.                               |
+-| CDM-020 | Minor, Guardian, Safeguarding, and Delegated-Assistance Canon         | Owns heightened protections for minors, guardians, safeguarding, and task-limited delegated assistance.                   |
++| CDM-020 | Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1         | Owns protected-participant status, guardian-authority safeguards, assent and protected refusal, protected communication, safeguarding intake, emergency restrictions, adult eligibility, pickup and transportation, task-risk constraints, case protections, and transition to adulthood.                   |
+ | CDM-021 | RF29 Calendar Domain Canon                                            | Owns calendar event truth, domain ownership, scheduling relationships, and calendar projections.                          |
+ | CDM-022 | Master Permission and Access-Control Model                            | Owns authorization, least privilege, scope, delegation, revocation, emergency access, and enforcement boundaries.         |
+ | CDM-023 | Master Privacy and Data Protection Model                              | Owns lawful and purpose-limited processing, minimization, disclosure, data-subject rights, and privacy boundaries.        |
+@@ -844,3 +845,8 @@ obligations, and applicable release gate.
+ | CDM-042 | Master Platform Operations, Reliability, and Release Model            | Owns operational readiness, environment separation, change control, release gates, telemetry, and production discipline.  |
+ | CDM-043 | Native Offline Synchronization Canon and Locked Readiness Instruments | Owns offline authority, local-state boundaries, synchronization, revocation, conflict handling, and recovery.             |
+ | CDM-044 | Master EquineSync Implementation Atlas and Authorized RF Packages     | Translates controlling canon into dependency-aware work packages without creating policy or authority by itself.          |
++
++
++# 12. V1.2 Safeguarding Integration Change Record
++
++V1.2 resolves CDM-020 to the founder-approved safeguarding family, strengthens protected-participant dependency paths, and adds explicit coupled-review and change-propagation rules without transferring underlying identity, relationship, agreement, permission, communication, record, or audit ownership.

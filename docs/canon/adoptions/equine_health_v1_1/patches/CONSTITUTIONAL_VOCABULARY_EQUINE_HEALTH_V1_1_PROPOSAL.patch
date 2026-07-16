@@ -1,0 +1,23 @@
+# Proposed Equine Health V1.1 Vocabulary Delta
+
+Add controlled terms and distinctions for:
+
+- clinical authority;
+- treatment authority;
+- canonical health fact;
+- provider source record;
+- private or deliberative note;
+- operational care record;
+- owner observation;
+- continuity projection;
+- medication order;
+- medication administration;
+- high-risk or legally restricted treatment;
+- imported or device-generated evidence;
+- health continuity package;
+- welfare-preserving emergency action;
+- non-authoritative clinical support.
+
+Preserve the rule that evidence, account type, appointment, payment, upload, possession, Care Circle membership, and external-system state do not independently create clinical authority.
+
+Proposal only. Exact vocabulary-source modification requires separate verification.

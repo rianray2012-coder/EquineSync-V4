@@ -1,0 +1,39 @@
+{
+  "phase": "R0",
+  "disposition": "PHASE_R0_EXACT_FILE_INGESTION_PASSED",
+  "founder_identification": "FOUNDER_IDENTIFIED_CORRECT_AI_V2_0_SOURCE_CANDIDATE",
+  "uploaded_source": {
+    "filename": "MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0_FOUNDER_APPROVED.docx",
+    "mounted_path": "/Users/rianray/Downloads/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0_FOUNDER_APPROVED.docx",
+    "sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+    "bytes": 140809,
+    "mime_description": "Microsoft OOXML",
+    "opc_valid": true,
+    "zip_entries": 22
+  },
+  "canonical_copy": {
+    "filename": "MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+    "repository_path": "docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+    "sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+    "bytes": 140809,
+    "byte_identical": true,
+    "lifecycle": "FOUNDER_APPROVED_ADOPTION_CANDIDATE_NOT_ADOPTED_NOT_LOCKED"
+  },
+  "document_identity": {
+    "title": "Master AI Governance and Decision Boundary Model",
+    "subject": "Tier 3 Foundational Domain Canon",
+    "version": "2.0",
+    "document_control_lifecycle": "FOUNDER_APPROVED_ADOPTION_CANDIDATE",
+    "founder_approval_date": "July 15, 2026",
+    "rendered_pages": 42,
+    "visual_qa": "PASSED"
+  },
+  "authority": {
+    "constitutional_controlling": false,
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false
+  }
+}

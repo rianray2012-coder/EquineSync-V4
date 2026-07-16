@@ -1,0 +1,237 @@
+{
+  "generated_at": "2026-07-16T07:53:55Z",
+  "count": 23,
+  "blocking_count": 0,
+  "findings": [
+    {
+      "finding_id": "SFM-P2-01",
+      "row_id": "C0-025",
+      "locked_canon": "Master Data Protection, Encryption, and Key Management Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Implementation sequencing and operationalization remain separately governed.",
+      "traceability": "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "SFM-P2-02",
+      "row_id": "C0-025",
+      "locked_canon": "Master Data Protection, Encryption, and Key Management Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Controlled registries require separate drafting, ownership, and approval evidence.",
+      "traceability": "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "SFM-P2-03",
+      "row_id": "C0-025",
+      "locked_canon": "Master Data Protection, Encryption, and Key Management Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Implementation conformance requires separate executable evidence and authority.",
+      "traceability": "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "C0-027-P2-HISTORICAL-V1-SOURCE-UNAVAILABLE",
+      "row_id": "C0-027",
+      "locked_canon": "Master Audit Event and Evidence Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Historical Version 1 source remains unavailable; provenance is evidence-qualified.",
+      "traceability": "docs/canon/locks/audit_event_evidence_v2_0/C0_027_AUDIT_EVENT_AND_EVIDENCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "C0-029-P2-HISTORICAL-V1-SOURCE-UNAVAILABLE",
+      "row_id": "C0-029",
+      "locked_canon": "Master Communication, Notification, and Notice Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Historical Version 1 source remains unavailable; provenance is evidence-qualified.",
+      "traceability": "docs/canon/locks/communication_notice_v2_0/C0_029_COMMUNICATION_NOTIFICATION_AND_NOTICE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "SFM-P2-01",
+      "row_id": "C0-030",
+      "locked_canon": "Master Security Incident Response and Disclosure Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Implementation sequencing and operationalization remain separately governed.",
+      "traceability": "docs/canon/locks/security_incident_response_v1_0/C0_030_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "SFM-P2-02",
+      "row_id": "C0-030",
+      "locked_canon": "Master Security Incident Response and Disclosure Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Controlled registries require separate drafting, ownership, and approval evidence.",
+      "traceability": "docs/canon/locks/security_incident_response_v1_0/C0_030_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "SFM-P2-03",
+      "row_id": "C0-030",
+      "locked_canon": "Master Security Incident Response and Disclosure Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Implementation conformance requires separate executable evidence and authority.",
+      "traceability": "docs/canon/locks/security_incident_response_v1_0/C0_030_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "SFM-P2-01",
+      "row_id": "C0-031",
+      "locked_canon": "Master Platform Resilience, Backup, and Recovery Operational Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Implementation sequencing and operationalization remain separately governed.",
+      "traceability": "docs/canon/locks/platform_resilience_v1_0/C0_031_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "SFM-P2-02",
+      "row_id": "C0-031",
+      "locked_canon": "Master Platform Resilience, Backup, and Recovery Operational Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Controlled registries require separate drafting, ownership, and approval evidence.",
+      "traceability": "docs/canon/locks/platform_resilience_v1_0/C0_031_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "SFM-P2-03",
+      "row_id": "C0-031",
+      "locked_canon": "Master Platform Resilience, Backup, and Recovery Operational Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Implementation conformance requires separate executable evidence and authority.",
+      "traceability": "docs/canon/locks/platform_resilience_v1_0/C0_031_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-01",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Classification enforcement and evidence mapping",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-02",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Lifecycle transitions and failure states",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-03",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Rights, stewardship, custody, and complaint workflows",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-04",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Evidence schemas and chain-of-custody serialization",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-05",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Retention and disposition propagation",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-06",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "AI processor and synthetic-media controls",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-07",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Offline eligibility and device-loss handling",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-08",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Storage residency, portability, and vendor-exit proof",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-09",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Malware and unsafe-file handling",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-10",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Permission parity for derived and indexed data",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-11",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Accessible-media acceptance criteria",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    },
+    {
+      "finding_id": "P2-MDA-12",
+      "row_id": "C0-032",
+      "locked_canon": "Master Media, Files, and Digital Asset Governance Model",
+      "status": "OPEN_NONBLOCKING",
+      "owner": "governing domain owner and future authorized RF",
+      "scope": "Capacity, quota, cost, export, and decommissioning controls",
+      "traceability": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md",
+      "contradicts_locked_text": false
+    }
+  ]
+}

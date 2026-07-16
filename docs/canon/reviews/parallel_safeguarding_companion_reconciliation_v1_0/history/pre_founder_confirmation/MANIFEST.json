@@ -1,0 +1,364 @@
+{
+  "package": "EquineSync_Parallel_Safeguarding_Companion_Reconciliation_V1_0",
+  "generated": "2026-07-15",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "disposition": "PARALLEL_SAFEGUARDING_PACKAGE_RECONCILED_FOUNDER_CONFIRMATION_REQUIRED",
+  "source_package_sha256": "e70eb6c325fd50436f5acdd4d04c91584de8c63c12760c293a5a9dfd76b5b815",
+  "counts": {
+    "source_files": 41,
+    "fd_msp": 15,
+    "sg_crosswalk": 12,
+    "section_groups": 29,
+    "companion_candidates": 6,
+    "machine_diffs": 4,
+    "package_p0": 0,
+    "package_p1": 3,
+    "existing_sg_p1": 12,
+    "existing_sg_p2": 6
+  },
+  "formal_scans": {
+    "dependency_cycle": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING",
+    "orphan_requirement": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING"
+  },
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "permission_expansion": false,
+    "provider_activation": false,
+    "runtime": false,
+    "production": false,
+    "customer_onboarding": false,
+    "public_claim": false,
+    "launch": false
+  },
+  "artifacts": [
+    {
+      "path": "docs/canon/registries/CANON_ARTIFACT_INVENTORY.md",
+      "sha256": "304877ebea1dee48d0c44727109393600996b3672c52a7714d69ff132738f5cd",
+      "bytes": 12331
+    },
+    {
+      "path": "docs/canon/registries/GOVERNANCE_FINDING_REGISTRY.md",
+      "sha256": "9598e6211d05c171b57bf5107b8795c255553b314c65bdf41405b3db1c988b6e",
+      "bytes": 15452
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/FOUNDER_DECISION_PROVENANCE.csv",
+      "sha256": "d64e41c19753262bc6c3dd762cccc437826e5ec0d9acadb805b4d3eb5c60935f",
+      "bytes": 11325
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/PACKAGE_ARTIFACT_INVENTORY.csv",
+      "sha256": "420752b436e001fa669c03030bd1e101fd83a6d01cfab2e872cd6a5ffaf52e4e",
+      "bytes": 10982
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/PARALLEL_SAFEGUARDING_PACKAGE_INTAKE_AND_PROVENANCE_REPORT.md",
+      "sha256": "f129de5b1fe941cbdb3179c6424d5de88764b39daa0f1e5c1e7feabe50f6ec18",
+      "bytes": 3413
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/PARALLEL_SAFEGUARDING_RECONCILIATION_DATA.json",
+      "sha256": "fbcc6e18e49dcfdab1b8594b6e27af9be99e02e7f9dad8a1e4aa5e198b01b974",
+      "bytes": 54728
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_COMPANION_ARTIFACT_DELTA.csv",
+      "sha256": "4dcf8894c77e8f7d034dc83c29d211f9667135892cb2641baaa5025c867a484d",
+      "bytes": 2770
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_COMPANION_ARTIFACT_DELTA_REPORT.md",
+      "sha256": "f724a4d34f409e058d1fc79d04abff1f9d8f792ec828017564b7b9747e75efe4",
+      "bytes": 2190
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_DOCUMENT_LAYERING_AND_IMPLEMENTATION_BACKLOG.md",
+      "sha256": "1ba1d5bf484385eb43df8ef63c09674917bb982f727a63583a28194a63967510",
+      "bytes": 2805
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_EQUINE_HEALTH_AND_AI_RECONCILIATION_REPORT.md",
+      "sha256": "21d906de07098293dc37bc8d4eb98f5c2329d5371a1ac47958108c7537965569",
+      "bytes": 2095
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_PARALLEL_TEXT_SECTION_DISPOSITION_MATRIX.csv",
+      "sha256": "1896f7b17ab864b445bd3a85deeccbf14f703dc841def317be428ed29ddda1fb",
+      "bytes": 5388
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_PARALLEL_TEXT_SECTION_DISPOSITION_MATRIX.md",
+      "sha256": "2d9c536a0e524135fc3bf157af9230e8d46ff94c150054c6ebe2cd3290439de1",
+      "bytes": 1920
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_POLICY_CONFLICT_AND_FOUNDER_CONFIRMATION_REGISTER.md",
+      "sha256": "f300f55c558404159b42945a2499e0ce051af01e0b87722f02825d4498528531",
+      "bytes": 2821
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_RECONCILIATION_COMPLETION_REPORT.md",
+      "sha256": "a8aab07b51fc9ab0cbb8bad49cb3a36e77225554175653e8f036abb343a4a1d7",
+      "bytes": 2656
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_SOURCE_VERSION_AND_IDENTIFIER_COLLISION_REPORT.md",
+      "sha256": "47fc3099396db1cab3a5c64e3f9d7b385054f0b615e5ca59af7bef1743495669",
+      "bytes": 2424
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SAFEGUARDING_TAXONOMY_RECONCILIATION_REPORT.md",
+      "sha256": "b077b33cc746bd80f51dff2d3216850c7ed4480c39e46225a6d32832e1f89407",
+      "bytes": 2300
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SG_FD_TO_FD_MSP_DECISION_CROSSWALK.csv",
+      "sha256": "18c8833f3e7d3cea700bd4db5d47e12836595d46db54938bf2bdd8bda8df7af0",
+      "bytes": 2856
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/SG_FD_TO_FD_MSP_DECISION_CROSSWALK.md",
+      "sha256": "3edcb041920ca09a13ce2bf2a5844a93f2fb43c2532b10470808584e128cf8cd",
+      "bytes": 2399
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/VALIDATION_REPORT.md",
+      "sha256": "0b6e4c85e1c09a54f08f4cbf1297be77d05fd223f9246a703c0ab8e40db4002b",
+      "bytes": 1929
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/diffs/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1_TO_V1_2.patch",
+      "sha256": "43f3907466f546e806ecbf9a325ca1abdc378f9138f7dfde068abb5b3161ccec",
+      "bytes": 14788
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/diffs/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_1_TO_V1_2.patch",
+      "sha256": "91a5c64ddda916891e09774c9d4317c218fadf55aa6a970913442e9afe7cbc61",
+      "bytes": 74216
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/diffs/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_1_TO_V1_2.patch",
+      "sha256": "ec518417ac1fddb1609575a42d1d4c4f4e81014d3f79e2c8a036fe1e47c105a1",
+      "bytes": 55627
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/diffs/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1_TO_V1_2.patch",
+      "sha256": "6a699c745890fa42cfef195d69e3819d3c85d05317a84b96298a04f340f797b6",
+      "bytes": 14154
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/EquineSync_Safeguarding_Companion_Integration_Package_V1_0.zip",
+      "sha256": "e70eb6c325fd50436f5acdd4d04c91584de8c63c12760c293a5a9dfd76b5b815",
+      "bytes": 453773
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.docx",
+      "sha256": "85d95a337664c9dbc327b3fe3858b19c8513aba94752eb9a0a5c29eff0d2628f",
+      "bytes": 16018
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "sha256": "6be760d6b5f274097074d16fcee805aea3249b51058d5998abff4235945adc75",
+      "bytes": 9190
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.docx",
+      "sha256": "544a5e666515c30fbf8b25e51183957e89e7c933937de6bfbd49d82a4c302696",
+      "bytes": 13957
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "sha256": "9a41067be17c667dd70328ac7c7c53bf3029bd478b3f8f9b6fd8964842c06833",
+      "bytes": 5558
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.docx",
+      "sha256": "9a992c8d573317832094d77d0764868f192460ecddde10aaa95d8b3f942d0070",
+      "bytes": 27097
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "sha256": "7262277efc185c78b911d85fb6d3b8c2556ebe6f5b3b8b5a97b85a34517fa24c",
+      "bytes": 50571
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.docx",
+      "sha256": "d1f2dfb4bec1c6e6fd151864521571b82196046dcf9ead58982368dd28f80e36",
+      "bytes": 46194
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "sha256": "31102a8f399d51449807f6bb65c9775e931b5796d2602b029e4a0afb634ade7f",
+      "bytes": 122226
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.docx",
+      "sha256": "e33ba9db612fd792dc293b811fcafabb1c1ce593f7aef90a1450d930ae6bb644",
+      "bytes": 40855
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "sha256": "6e810af409884936ad25f709d0f482f859765a84a5437625e635b1fcdcc239cb",
+      "bytes": 118290
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.docx",
+      "sha256": "1a5e1df142bb874707c40c9378214509aab363f796fa036e5d3c449e2bed68e2",
+      "bytes": 36364
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "sha256": "aa8888de9f0e60a5c30dffc5f86838129e44f24c2bc65d98ec940056251155fe",
+      "bytes": 76161
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.docx",
+      "sha256": "44c21dd0b797de8e64426926a097518e2a9afd5da3d14083baf5f01dd766d544",
+      "bytes": 15845
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.md",
+      "sha256": "4a024d4764fd947be51cc53b56d30e83d1ac61c1dfd9b7f5bc291f3c13aba60e",
+      "bytes": 10532
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.docx",
+      "sha256": "ab895f84bad914ef1248f8a0e4f90318359d52dffe2f7ab64823184757202141",
+      "bytes": 12621
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.md",
+      "sha256": "b0546e1762a8e1e84091595dbbee9ffd7ed2d1833580f7479702046adb581607",
+      "bytes": 2102
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.docx",
+      "sha256": "dcb57538adc443b17179fe9bf739f7df11dbc8042a9257a759396406518379cd",
+      "bytes": 13173
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.md",
+      "sha256": "c1cf18fcb99630d4699d7de43dbc6fe647c46ea34a42a8c44336cd41e284d349",
+      "bytes": 3565
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_SAFEGUARDING_COMPANION_INTEGRATION_VALIDATION_REPORT_V1_0.md",
+      "sha256": "be09f1c071d40ffbbc3e649be3dea11f473d750040ca6cfc9b40df4621303636",
+      "bytes": 3621
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_REGISTER_V1_0.xlsx",
+      "sha256": "100ad2cf53cbc1084c0086084b5652732b3a9154f02a75a97c887e68baa4c6ab",
+      "bytes": 18412
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.docx",
+      "sha256": "da5929a714dc4eb9d57daf516d03739a05ba76f7c1a852b927d4acc0d2b6300f",
+      "bytes": 21070
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.md",
+      "sha256": "f1f025b1a2b549dc2b6035052bb3f66f86d0c7e2d0f3b0ecdbd06d7a82b37bee",
+      "bytes": 26408
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.docx",
+      "sha256": "8058981a7a5288698324c55ebee33ba7d4902548a723c2a5c35e4f3a12daa76c",
+      "bytes": 59592
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.md",
+      "sha256": "e956999709da35b2260ce8fdac230bc37d0bee6000007cec35c18e3653f59f05",
+      "bytes": 109521
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/PACKAGE_FILE_MANIFEST.md",
+      "sha256": "f3d2cd2238fce9ab5e5665ce47dbcbc5614e054dfb7794747ebb34aec1e198fd",
+      "bytes": 5736
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/PACKAGE_MANIFEST.json",
+      "sha256": "080d2fe2f2e64fb978ba46450449d4365c48a85c061f774b9160eccc68b4f45e",
+      "bytes": 9019
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/README.md",
+      "sha256": "2f2d3615793be4d5a4d5a8de58faf0eb07611d2aa9852f1505281ea57ed1b94e",
+      "bytes": 887
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/REPOSITORY_APPLICATION_INSTRUCTIONS.md",
+      "sha256": "88935684003ea4b2bfc54c132f0e580451705b1db77a30e1976b41b213cb09cd",
+      "bytes": 867
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/SHA256SUMS.txt",
+      "sha256": "a6c56868d03c8a0ef3739952c2d7a64b155742b4f592832ab318078e192810a8",
+      "bytes": 5230
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/safeguarding_patch_data.json",
+      "sha256": "348376a32a5d234c5b980b8ffd655bde77f2b55bf507ce107abfab9830ae88f1",
+      "bytes": 36974
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.json",
+      "sha256": "6686918e85908a4ca91cea99ee23dbb285ab6b36d0724015ab50c939e90c1192",
+      "bytes": 215
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.json",
+      "sha256": "14ca3e61564ba3328c5fa1f22aaa356ca835edb9bf0402ef0c4296444fdc22b9",
+      "bytes": 206
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.json",
+      "sha256": "a84a7e22cb881341501edac84861aadece6efe6453d369885ee1b06f54688deb",
+      "bytes": 193
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.json",
+      "sha256": "ae75bd66993700d3b50bdd4d344f3dacdacbac3cd2e17c1c74c1736e490dacb9",
+      "bytes": 204
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.json",
+      "sha256": "3d53bc80ba1f4a4810a79fa868addc9f76ad3d067481fb8baf4b8bbbba171c2b",
+      "bytes": 209
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.json",
+      "sha256": "945c089d34d2cefe5dcf0c88709a4bfc6e13d30d20b8a68b22fcb5fc2650e1ad",
+      "bytes": 220
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.json",
+      "sha256": "27c1101e2e3c8ddce2a1093d9616afc1feeee7f49072dcb8e26cc4739f9d8189",
+      "bytes": 236
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.json",
+      "sha256": "3889e8c4a67789b025f0799bea6b77c17dcd7c2a9b9580cc5a932f98f80fe745",
+      "bytes": 239
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.json",
+      "sha256": "a8886355395b08696b8f80f8a71152c21c1801c9f12f10ab4eb2037fa64d9dd1",
+      "bytes": 227
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.json",
+      "sha256": "5bca4528ade90061b849fe23a75508c797edafc9ae4372cca5acb9a8360baedf",
+      "bytes": 210
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/validation/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.json",
+      "sha256": "5c026d84ddb2b62b70a0e579eded8b426997226ef13f4c23d854f63da5f8d812",
+      "bytes": 247
+    }
+  ]
+}

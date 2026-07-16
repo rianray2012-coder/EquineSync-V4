@@ -1,0 +1,30 @@
+{
+  "row_id": "C0-020",
+  "disposition": "C0_020_SAFEGUARDING_V1_2_CONSTITUTIONAL_CANON_LOCKED",
+  "locked_at": "2026-07-16T07:34:35Z",
+  "source": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+  "source_sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+  "adoption_record_sha256": "cc085b57f0a68a3e1f01f690f41d19e6c77bec60033b7522b59e04f6af4b3929",
+  "lock_record": "docs/canon/locks/safeguarding_v1_2/C0_020_SAFEGUARDING_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "b1329a8bc1d0ad28089dbc21f8ea5c57965ad1693417c717f0e03e4dbd61d834",
+  "retained_nonblocking_p2": [
+    "SAFEGUARDING-P2-01",
+    "SAFEGUARDING-P2-02",
+    "SAFEGUARDING-P2-03",
+    "SAFEGUARDING-P2-04",
+    "SAFEGUARDING-P2-05",
+    "SAFEGUARDING-P2-06"
+  ],
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

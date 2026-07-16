@@ -1,0 +1,423 @@
+{
+  "scope": "Privacy and Reporting deterministic format-counterpart completion",
+  "classification": "FOUNDER_AUTHORIZED_DETERMINISTIC_FORMAT_COUNTERPART_DERIVED_FROM_EXACT_SUBSTANTIVE_SOURCE",
+  "files": [
+    {
+      "path": "docs/canon/CANON_INDEX.md",
+      "size_bytes": 28818,
+      "sha256": "bdca95da4fcd1fefc3ab066b39b8dd15769275339abe05644846137fe8b9f894"
+    },
+    {
+      "path": "docs/canon/companions/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "size_bytes": 51519,
+      "sha256": "e4aacf00433068e5e52dbf4709dcee82a3c13a6e9ea3f822ee06a41fda6f00fd"
+    },
+    {
+      "path": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "size_bytes": 123071,
+      "sha256": "193b6359a97f5af9b42deb024fec0f91a1b46e7735df1555d21fc518f039d931"
+    },
+    {
+      "path": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "size_bytes": 119259,
+      "sha256": "5341761c30077beda797208330b45fe547fad04167c87a7ca21ae53da2b49be4"
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.json",
+      "size_bytes": 159288,
+      "sha256": "3aa9b81c8a4cbee3efdf7fe8a0ce4d0dc9a8cdce132a65f7631e82878a99f550"
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.md",
+      "size_bytes": 17472,
+      "sha256": "aa8eeb09073cae536130b4662dbd33fd8ec11600eedb154e6c675941ef039aa7"
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.json",
+      "size_bytes": 309715,
+      "sha256": "00309b063c1c90086473a9f8f8750e92eec358b90b17adc6af98dacf63e744d5"
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.md",
+      "size_bytes": 55205,
+      "sha256": "5f1784e5cf888e08e7ff81a44d9f37c7df58ee41e9ccb5e348aa484e0a3ff785"
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.json",
+      "size_bytes": 208663,
+      "sha256": "c651a64adf4e5d3511da5b359853c90a4e75aad1e6207ba452b55cd032b0e6fc"
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.md",
+      "size_bytes": 74909,
+      "sha256": "57eff43aaa74de4638937b06c6127553c54180f514bb168cb40310500a9d0aea"
+    },
+    {
+      "path": "docs/canon/founder_approved_sources/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_FOUNDER_APPROVED.docx",
+      "size_bytes": 64701,
+      "sha256": "76cdc1338a70c1c18f0295340f0f3599c4e99b3d37c0f306d740db9537ef1846"
+    },
+    {
+      "path": "docs/canon/founder_approved_sources/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "size_bytes": 78145,
+      "sha256": "41d8a72e78c369a297350b0abbdda90b1bf5401a3bb16050101679c325012eed"
+    },
+    {
+      "path": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.docx",
+      "size_bytes": 54666,
+      "sha256": "d6cc3cc2add501d2d34d947de4e7a2ee7c6af77aa9669606c95514361657504d"
+    },
+    {
+      "path": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "size_bytes": 46558,
+      "sha256": "56de16098bbba31571c94d2ec3560dcc48a74daae318da047e5b5592044e953a"
+    },
+    {
+      "path": "docs/canon/registries/CANON_ARTIFACT_INVENTORY.md",
+      "size_bytes": 20294,
+      "sha256": "2866daf878231d23e85bc3ba8aae29a33f8b9d984962752a397e508d69362617"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/C0_CURRENT_SOURCE_OF_TRUTH_REGISTER.json",
+      "size_bytes": 71076,
+      "sha256": "f8df09a05d665725e8b420df0a7ab1684a98576b9af6e957224e4fb0c227e59f"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/C0_CURRENT_SOURCE_OF_TRUTH_REGISTER.md",
+      "size_bytes": 13818,
+      "sha256": "71acb5e8d2590a95eceb81ba34b117612c8e2655987359064f14f76900f72238"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_CURRENT_LIFECYCLE_STATE_REGISTER.json",
+      "size_bytes": 69202,
+      "sha256": "ca5cd7e818c917419bf73306f2a84f7059f6864761392802166aa8c2099315a2"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_CURRENT_LIFECYCLE_STATE_REGISTER.md",
+      "size_bytes": 11771,
+      "sha256": "20249397f5f756dab535c1a23336fdbe722c8240cb14c619ecc88217a3e163b5"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_HISTORICAL_TO_CURRENT_DELTA.json",
+      "size_bytes": 16957,
+      "sha256": "95c133d607af1c6e411479ef7100f7d8033db244c52805cda9bf85eece621f17"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_HISTORICAL_TO_CURRENT_DELTA.md",
+      "size_bytes": 7640,
+      "sha256": "9e9ffc6bd795e4118aeac95fab16a12e74afb1a6f9276603d82dd9a80e3016a6"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_ROW_BY_ROW_LIFECYCLE_RESOLUTION_LEDGER.json",
+      "size_bytes": 24818,
+      "sha256": "a5ae03e5d1bce55589b2b33e3613168ec4d49306ab26fb5bc1ad7643bd7b8e75"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_ROW_BY_ROW_LIFECYCLE_RESOLUTION_LEDGER.md",
+      "size_bytes": 4498,
+      "sha256": "92f4cf39fa5968de08f81c881d0833bc7472d4e7f180b30f85f8ae5859e1e7fd"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_UNRESOLVED_LIFECYCLE_BLOCKER_LEDGER.md",
+      "size_bytes": 3749,
+      "sha256": "47e5d7a3d248303db0b953d2e743e5b75ecf88e5905bb77dad3257032d67d4ee"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/DOCX_RENDER_VISUAL_QA.md",
+      "size_bytes": 1318,
+      "sha256": "01f9d45b340e7100ce57b65ddbec004a1ade1ba92d642d3f9d311b3520a667ad"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/PRIVACY_FORMAT_COUNTERPART_PROVENANCE_RECORD.md",
+      "size_bytes": 908,
+      "sha256": "e45bd57a3a4a4d57076d3342627b128602a18e11b0a70be013be064608ec373e"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/PRIVACY_MD_DOCX_PARITY_REPORT.md",
+      "size_bytes": 564,
+      "sha256": "370e4957437522dd377a0a0ee840784a9907d48b12e81f26f86d88c84cf0eb24"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/PRIVACY_REPORTING_EVIDENCE_PACKAGE_RECORD.json",
+      "size_bytes": 813,
+      "sha256": "bcb77f1bd888219aa4291772ad4aa7d0e615909a21f261bb30693248751786e6"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/PRIVACY_REPORTING_FORMAT_COUNTERPART_COMPLETION_REPORT.md",
+      "size_bytes": 4098,
+      "sha256": "143cf2db38fd7c85c17a8fe0338f28bd1a9ddc9e74f6d23ef4634cb2b64e75aa"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/PRIVACY_REPORTING_FORMAT_COUNTERPART_MANIFEST.json",
+      "size_bytes": 6721,
+      "sha256": "2fc56faf6cf6032d9a6f3a8f5212cfd614e66e03fb291006e4b326d2c9c607fb"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/REPORTING_DOCX_MD_PARITY_REPORT.md",
+      "size_bytes": 577,
+      "sha256": "d7d8547aa32c3e831254c67f71b12ec665012d3c35ac20a50564be2a2a004f4e"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/REPORTING_FORMAT_COUNTERPART_PROVENANCE_RECORD.md",
+      "size_bytes": 1004,
+      "sha256": "11e1c60a54fd8c49711723c7db5fb62a6f76f3709c9c3caa243b9a9543ea3f88"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/exact_sources/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.md",
+      "size_bytes": 77438,
+      "sha256": "30858ed46725a8adaf7104193525aa1074dd8421555ded92ede034ec3339202e"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/exact_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.docx",
+      "size_bytes": 54666,
+      "sha256": "d6cc3cc2add501d2d34d947de4e7a2ee7c6af77aa9669606c95514361657504d"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/DOCX_RENDER_METRICS.json",
+      "size_bytes": 7797,
+      "sha256": "35bdf7ddbbe160bd1ddd1f3f320125c0d8aa9eb3adba5757066bb270b884ef7d"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_FOUNDER_APPROVED.pdf",
+      "size_bytes": 389751,
+      "sha256": "7b1d4b7a678887e3f62c49a74b8b904f2061d4c3423f6f743ce941f4437faec6"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/contact-sheet-01.png",
+      "size_bytes": 831355,
+      "sha256": "7062a3d9d2b6e7359379cc488ad5bf6d0fa2bbb112287c300ffb6c603e7b656a"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/contact-sheet-02.png",
+      "size_bytes": 785751,
+      "sha256": "3e0a3ba2fccbc84fd53a76eac7d09a090b4c6280458d902f3b54d62cfea075f8"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-1.png",
+      "size_bytes": 384406,
+      "sha256": "f8ab747763ff1216d542ee621466af241ef3ac8691486eace6179bd055dd9a41"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-10.png",
+      "size_bytes": 429303,
+      "sha256": "023d2a67cda305e0488b0782b86f1402d48c6df95eef7bae90a34857a1c05952"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-11.png",
+      "size_bytes": 468601,
+      "sha256": "eb82ab1747f6c98eb40e0690dcf4c71594fad29787eb153aa9142b8900d5d73f"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-12.png",
+      "size_bytes": 430759,
+      "sha256": "49df07e9e0653ce54446369fde97fd84d32acb6aeba96df80075cc1e5c842e30"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-13.png",
+      "size_bytes": 446600,
+      "sha256": "e1247eb0d8b9d024b28930158121ae3663bfab757395dc95146db20d499d280e"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-14.png",
+      "size_bytes": 385337,
+      "sha256": "2525d592a1172a09ad1f9624e36b7131c5bf5d0bf2545ee660891161cc0dcf9b"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-15.png",
+      "size_bytes": 407653,
+      "sha256": "31d6fbaed915db4173a7ba3bf421aef511cb95ac7b09f7a343918f76066f6b34"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-16.png",
+      "size_bytes": 442728,
+      "sha256": "3cd38dc41c47d5d58c3b75bb86a3117bae3fbf59c6ddc348b684e9df7a8fb473"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-17.png",
+      "size_bytes": 462879,
+      "sha256": "47c8ffa2d6b0da5b12393800f5f22c3a30a0e5002b55c6817a5d2d6338748a0c"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-18.png",
+      "size_bytes": 448135,
+      "sha256": "5a3a80ef60c7a0d8591e8b5f0b4b2a40465bceb09af14b8e80c93077005b48f9"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-19.png",
+      "size_bytes": 484009,
+      "sha256": "ca3d942cded2aeb9ff8ce1c5c8d747dd6234a76ad46a3aa45317d067a3fac6a6"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-2.png",
+      "size_bytes": 456364,
+      "sha256": "4c79d06284910f1b48e507df16d71811285c11699926ad7e07ca406f2efb2b39"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-20.png",
+      "size_bytes": 495195,
+      "sha256": "617ea5bba8e59c2cd48b374aa13b61d2c00bcfbe031a0ae7326fcac856428280"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-21.png",
+      "size_bytes": 332471,
+      "sha256": "4fef6e13fca45f5e66fdbf56b0dfe665ef6463f5ae3154a93c705f422ec34811"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-22.png",
+      "size_bytes": 444673,
+      "sha256": "115d014bbefe924e839fe38f8bf3152126c228a84e9b7b92a4720822c6a5e395"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-23.png",
+      "size_bytes": 485477,
+      "sha256": "a0fbbd3e9549d1955af5bcc97fae13b9b28d9e2b419f740da4d398b7b8f703a0"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-24.png",
+      "size_bytes": 91827,
+      "sha256": "ecbc5a837b2596e5daefa5442a7af4e5c2f77f3694d3f8983a36f722a1c8c0dd"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-3.png",
+      "size_bytes": 465158,
+      "sha256": "b373287b74c04314609b4d712b7554c28cfa98b85b70c4c4eeedb49cf7f58825"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-4.png",
+      "size_bytes": 379365,
+      "sha256": "4bc3a7bb4d1f98421b26cc8edab084c6f18ad3aacb85a87843c1dcf99e1e7359"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-5.png",
+      "size_bytes": 448165,
+      "sha256": "8d24061d7120e2a24bf7ad89a7fb053deb5245e86e3ab8cb00c1e88320f41d39"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-6.png",
+      "size_bytes": 444545,
+      "sha256": "7cab223ae10b0ee560bb8c51f423ec7cb6a450731f58732c1cf1ab3aa96ec10a"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-7.png",
+      "size_bytes": 457871,
+      "sha256": "39217bd230cb6def43ff0c9ed71f28aab9d2980ff973790f633c60200dcec0d4"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-8.png",
+      "size_bytes": 433704,
+      "sha256": "ee8355edc22e964ce34fb05ff3e2a5b2383330c91f2e44da1e9956e3973b51e2"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/privacy/page-9.png",
+      "size_bytes": 483394,
+      "sha256": "dcdd15917d15e7eb512d94b5adc77a632074c4a3e312f22c1f10c90947315de9"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.pdf",
+      "size_bytes": 263089,
+      "sha256": "db2251718b4d2965ff17b7e75d7df13e476880473e1f7495dd7e2cb958c65997"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/contact-sheet-01.png",
+      "size_bytes": 789475,
+      "sha256": "0072a235f2dd0f4f5eafa47c5f9322878e85903c5c2ade1938afc07c598f95bb"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/contact-sheet-02.png",
+      "size_bytes": 218363,
+      "sha256": "1ddefcf8e74ee9a3818db00ddbeeb826662e0ee59fd5869a1bbeb53db59410ef"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-1.png",
+      "size_bytes": 109145,
+      "sha256": "f2e28bbc8c14dfb2a74cebaa4f708fe7b2eedaceff720a7f5acb74d16d9afe5c"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-10.png",
+      "size_bytes": 481241,
+      "sha256": "327957e73d60b6074f5e01e022776c75f9f1b7bb70f645e0c0c42ce56c915ff7"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-11.png",
+      "size_bytes": 489264,
+      "sha256": "88b33fdb0ccee1710ab5fa58ea5c79f0901c0569513762a1dcf77439976865c6"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-12.png",
+      "size_bytes": 470435,
+      "sha256": "7da213177b0a09d0a22a5398c3756e3e77c9b0a2a808c4c5a78e18b85cefd24a"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-13.png",
+      "size_bytes": 481506,
+      "sha256": "0944f850e96a042beb26ac234519627dfe8ee16bd96b094923b2a611bc26de47"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-14.png",
+      "size_bytes": 456744,
+      "sha256": "27fd5ed3cf512646f1f4d2e8866c962001d5150850c5e6c7dbb6475de9aaf70c"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-15.png",
+      "size_bytes": 536562,
+      "sha256": "797427be11e65b945c0c0e307120fd7cd96b897d3cb09d5facc51ef828dedcdb"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-2.png",
+      "size_bytes": 407662,
+      "sha256": "f2ea1c702a9bc3c63bdd2481b9bc4c2f043f9c7048d6305a3b7ca450a7d4606d"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-3.png",
+      "size_bytes": 434446,
+      "sha256": "ff35c9fa40532bfd5f4f40fa42ab64fd314a7189d92802786a403c06f4180376"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-4.png",
+      "size_bytes": 402633,
+      "sha256": "4da70d2b75251ab7552c4e8592fd39825970feaa42cb039a73f3896d2c46ec9b"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-5.png",
+      "size_bytes": 422904,
+      "sha256": "7ab4eca1b514b83912a628fa831aed397b46622e77c27230aa97ef023ab134da"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-6.png",
+      "size_bytes": 470848,
+      "sha256": "e686417fac38617de09821328415b5cb6639c26b2ce379554c1f95f0d3f5b78f"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-7.png",
+      "size_bytes": 510473,
+      "sha256": "d7fdd1c3c6a1449ab0a876192a18e0997c63e80270f2e0ed392770db3a6dc892"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-8.png",
+      "size_bytes": 536131,
+      "sha256": "68c971f176b7ca2d5a48b0cca7fd595b9a9aa77a4fb40ce15d01e73d6f52d9ff"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/render_evidence/reporting/page-9.png",
+      "size_bytes": 524790,
+      "sha256": "1ae1072769837ac7db4f608d75c929225b76f7cd7c3c7fab482999b3500508f0"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/tools/__pycache__/build_completion.cpython-312.pyc",
+      "size_bytes": 50709,
+      "sha256": "ef0d9d23539ea9e37b80385571f4a992ee8da543eb97901834528a576f5280c4"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/tools/build_completion.py",
+      "size_bytes": 40120,
+      "sha256": "6d987e8461429ea37217e4023649e2a6ced55e2053836954ba17c559e895c540"
+    },
+    {
+      "path": "docs/canon/reviews/privacy_reporting_format_counterpart_completion_v1_0/tools/finalize_completion.py",
+      "size_bytes": 13728,
+      "sha256": "0213c758761660aa0bca6da4906cb4e9fb688279d51e5cbfb4e474ab8914e8a6"
+    }
+  ],
+  "self_hash_excluded": true,
+  "runtime_or_application_files": []
+}

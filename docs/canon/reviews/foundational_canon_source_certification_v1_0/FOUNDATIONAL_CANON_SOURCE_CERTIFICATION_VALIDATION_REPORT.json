@@ -1,0 +1,32 @@
+{
+  "disposition": "PASS",
+  "checks": {
+    "founder_attachment_hashes": "PASS",
+    "source_archive_integrity": "PASS",
+    "certified_source_hashes": "PASS",
+    "repository_parity": "PASS",
+    "lifecycle_state": "PASS_15_OPEN_NO_REDUCTION",
+    "lifecycle_track_reclassification": "PASS",
+    "json_validation": "PASS",
+    "python_compilation": "PASS",
+    "git_diff_check": "PASS",
+    "application_runtime_files_changed": 0,
+    "authority": {
+      "adoption": false,
+      "lock": false,
+      "implementation": false,
+      "runtime": false,
+      "migration": false,
+      "provider_activation": false,
+      "production": false,
+      "public_launch": false,
+      "governance_v1_baseline_adoption": false,
+      "governance_v1_baseline_lock": false
+    }
+  },
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "blocking_p2": 0
+  }
+}

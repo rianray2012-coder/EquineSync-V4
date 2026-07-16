@@ -1,0 +1,645 @@
+{
+  "canon_index": [
+    {
+      "field": "Canon Family",
+      "value": "Minor, Guardianship, Safeguarding, and Protected Participant"
+    },
+    {
+      "field": "Canonical Document Identifier",
+      "value": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1"
+    },
+    {
+      "field": "Markdown Filename",
+      "value": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.md"
+    },
+    {
+      "field": "DOCX Filename",
+      "value": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.docx"
+    },
+    {
+      "field": "Version",
+      "value": "1.1"
+    },
+    {
+      "field": "Founder Status",
+      "value": "Founder Approved"
+    },
+    {
+      "field": "Constitutional Status",
+      "value": "Controlling substantive text; controlled adoption pending"
+    },
+    {
+      "field": "Repository Lock",
+      "value": "Pending"
+    },
+    {
+      "field": "Implementation / Runtime / Production / Claims / Launch",
+      "value": "FALSE"
+    },
+    {
+      "field": "Markdown SHA-256",
+      "value": "e956999709da35b2260ce8fdac230bc37d0bee6000007cec35c18e3653f59f05"
+    },
+    {
+      "field": "DOCX SHA-256",
+      "value": "8058981a7a5288698324c55ebee33ba7d4902548a723c2a5c35e4f3a12daa76c"
+    },
+    {
+      "field": "Repository Path",
+      "value": "UNRESOLVED"
+    },
+    {
+      "field": "Supersession",
+      "value": "Substantively supersedes V1.0 first draft; preserves drafting history"
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "FD-MSP01",
+      "topic": "Final domain boundary",
+      "disposition": "Approved as recommended",
+      "decision_text": "The Relationship Model owns the underlying delegated-assistance relationship. Agreement and Permission own the grant, scope, duration, enforcement, and revocation. Search owns discoverability and minimum-information exposure. This Model owns the heightened eligibility, safety, supervision, communication, and safeguarding restrictions that apply when a minor or protected participant is involved.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP02",
+      "topic": "Protected-participant definition",
+      "disposition": "Approved as recommended",
+      "decision_text": "Protected Participant includes minors; adults subject to guardianship, conservatorship, supported decision-making, or comparable authority arrangements; persons whose capacity to provide informed authorization is materially limited for the relevant matter; persons subject to an active safeguarding or protective restriction; alleged victims, reporters, and witnesses whose identity or safety requires heightened protection; and persons temporarily designated through a documented protective process. Diagnosis, disability, age, or vulnerability alone does not remove autonomy.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP03",
+      "topic": "Age and jurisdiction model",
+      "disposition": "Approved as recommended",
+      "decision_text": "EquineSync shall use a jurisdiction-aware model and treat anyone under eighteen as a minor by default unless controlling law establishes a different status. Product age bands may support age-appropriate experiences but may not substitute for legal status, capacity, guardian authority, or individual assessment.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP04",
+      "topic": "Guardian authority and conflicting guardians",
+      "disposition": "Approved as recommended",
+      "decision_text": "Guardian authority must be independently evidenced, person-specific, scope-specific, time-bound where applicable, subject to court orders and legal restrictions, and distinguishable from payer, emergency-contact, account-administrator, or household status. When valid guardians conflict, EquineSync must preserve the conflict, restrict disputed consequential actions, maintain necessary safety services, and route the matter to controlled review. The platform must not select whichever guardian acted first, pays, or controls the account.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP05",
+      "topic": "Minor assent and refusal",
+      "disposition": "Approved as recommended",
+      "decision_text": "Minor assent should be collected in an age-appropriate form for material participation decisions whenever practicable. A minor's refusal controls optional promotional media, public profiles, nonessential direct communications, optional research, testimonials, optional AI-assisted personalization, and optional social or community participation. Emergency care, legally required action, and immediate safety interventions remain separate.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP06",
+      "topic": "Electronic communications involving minors",
+      "disposition": "Approved with founder modification",
+      "decision_text": "EquineSync shall prohibit one-to-one electronic communication between a minor and a trainer, coach, instructor, staff member, volunteer, provider, or other adult third party. Every ordinary electronic communication between an adult third party and a minor must include at least one currently verified parent or guardian as an active participant from the time the message is sent and throughout the thread. The platform must prevent prohibited messaging, including minor-initiated messages, guardian removal, delayed guardian addition, external-channel evasion, disappearing communications, attachments, comments, replies, and integrated communications. A separate protected safeguarding-intake path may restrict guardian involvement when inclusion would create danger, retaliation, investigative compromise, or another documented safeguarding risk; it may not create private messaging with the trainer, coach, accused person, or ordinary third party.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP07",
+      "topic": "Safeguarding report intake and anonymity",
+      "disposition": "Approved as recommended",
+      "decision_text": "Reports may be submitted by minors, guardians, staff, providers, volunteers, customers, witnesses, or other affected persons. EquineSync should support identified, confidential, anonymous where technically and legally supportable, on-behalf-of, and emergency reports, with preservation of supporting evidence. Anonymous status must not be represented as absolute where identity becomes legally required, technically discoverable, or necessary to prevent immediate harm.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP08",
+      "topic": "Guardian notification and access exceptions",
+      "disposition": "Approved as recommended",
+      "decision_text": "A guardian is not always entitled to immediate notice of or access to every safeguarding matter. Notice or access may be delayed, restricted, or withheld when the guardian is the subject of the concern, disclosure could increase danger or retaliation, disclosure could compromise an investigation, another person's protected information would be exposed, law or a valid order restricts disclosure, or a qualified safeguarding authority determines that disclosure would be unsafe. The exception must be documented, scoped, time-aware, and reviewable.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP09",
+      "topic": "Emergency protective authority",
+      "disposition": "Approved as recommended",
+      "decision_text": "A defined safeguarding authority and narrowly authorized emergency personnel may impose temporary minimum-necessary restrictions where there is a reasonable safety concern, including suspension of messaging, physical access, directory visibility, assignments, media access, delegated authority, contact, or pickup, plus preservation and escalation. Emergency restrictions must be attributable, time-limited, promptly reviewed, and must not be treated as final guilt or liability.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP10",
+      "topic": "In-person interaction, transportation, and release",
+      "disposition": "Approved as recommended",
+      "decision_text": "Observable, interruptible, and accountable interaction is the default. EquineSync shall require authorized pickup and release records, transportation-specific authorization, identified driver and responsible organization, destination and expected time, emergency-contact availability, and documented emergency exceptions. Lesson or participation authorization does not automatically authorize transportation, pickup, lodging, or private-space access.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP11",
+      "topic": "Minor participation in delegated horse care",
+      "disposition": "Approved as recommended",
+      "decision_text": "Minors may receive only age-appropriate, competence-appropriate, horse-specific, task-specific, time-limited duties with appropriate guardian, facility, or program authorization and supervision. Minors may not independently exercise medication, veterinary, emergency-disposition, horse-transport, financial, ownership, custody, safeguarding-investigation, unrelated-record, or unsupervised high-risk authority.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP12",
+      "topic": "Eligibility of adults working with protected participants",
+      "disposition": "Approved as recommended",
+      "decision_text": "A governed eligibility state is required before an adult receives protected-participant access or assignments. The constitutional floor includes verified identity, applicable role and relationship, required training or acknowledgment, restriction and suspension checks, purpose-limited access, periodic revalidation, immediate revocation capability, no self-approval, and no automatic transfer of eligibility between unrelated organizations.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP13",
+      "topic": "AI and automated safeguarding support",
+      "disposition": "Approved as recommended",
+      "decision_text": "AI may assist with intake organization, duplicate detection, translation, missing-information prompts, urgent-language surfacing for human review, timelines, routing, and controlled redaction. AI may not independently determine abuse, danger, credibility, mandatory-reporting conclusions, discipline, report closure, guardian rights, emergency contact, or predictive risk profiles, and may not create cross-tenant safeguarding lists.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP14",
+      "topic": "Challenge, appeal, and non-retaliation",
+      "disposition": "Approved as recommended",
+      "decision_text": "Affected persons may request human review, correction, clarification, or appeal. A challenge does not automatically suspend a protective restriction. The process must prohibit retaliation, preserve evidence, separate allegations, interim measures, factual findings, eligibility outcomes, and legal determinations, and prevent ordinary appeal from exposing protected reporter or witness information.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    },
+    {
+      "decision_id": "FD-MSP15",
+      "topic": "Transition to adulthood or restored autonomy",
+      "disposition": "Approved as recommended",
+      "decision_text": "At adulthood or a material change in supported authority, EquineSync must conduct a governed transition rather than silently continuing guardian control. Guardian-derived permissions must end or be reassessed; the participant should be invited to control their own account; optional consents, privacy, and communication settings must be reviewed; historical actions and agreements must be preserved; payer responsibility changes only through a separate process; and safeguarding restrictions continue only where supported by an independent basis.",
+      "source": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0"
+    }
+  ],
+  "requirements": [
+    {
+      "requirement_id": "GOV-MSP-001",
+      "requirement": "Treat persons under eighteen as minors by default unless controlling jurisdictional evidence establishes another rule.",
+      "source_sections": "6.1; 8; 81-84",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T01; MSP-T80",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-002",
+      "requirement": "Protected-participant status must be evidence-based, scoped, reviewable, and must not be inferred solely from diagnosis, disability, age, communication style, reputation, or convenience.",
+      "source_sections": "6.2; 9-10",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T58; MSP-T80",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-003",
+      "requirement": "Guardian identity and guardian authority must remain separate from parentage, payer, household, emergency-contact, account, and administrative status.",
+      "source_sections": "6.3-6.4; 13-18",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T02; MSP-T03",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-004",
+      "requirement": "Each guardian authority record must preserve source, scope, restrictions, dates, evidence, notice rights, communication rights, pickup rights, and dispute state.",
+      "source_sections": "6.4; 13-18",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T04",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-005",
+      "requirement": "Conflicting guardian claims must be preserved and routed to controlled review without choosing the first actor, payer, or account controller.",
+      "source_sections": "16-18; 50",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T05; MSP-T06",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-006",
+      "requirement": "Age-appropriate assent must be sought for material participation decisions whenever practicable.",
+      "source_sections": "6.5; 11-12",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T07",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-007",
+      "requirement": "A protected refusal must control optional publicity, research, social exposure, nonessential communication, and personalization unless a documented safety, legal, emergency, or essential-care basis applies.",
+      "source_sections": "6.6; 11-12; 61-62",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T08; MSP-T09",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-008",
+      "requirement": "Ordinary one-to-one electronic communication between an adult third party and a minor must be prohibited.",
+      "source_sections": "23-32; 115-117",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T10; MSP-T61",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-009",
+      "requirement": "At least one currently verified guardian must be an active participant from the start and throughout every ordinary adult-minor electronic communication thread.",
+      "source_sections": "23-32; 115-117",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T11; MSP-T61",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-010",
+      "requirement": "New conversational messages must be blocked when guardian delivery fails, guardian authority expires, or no valid guardian can participate.",
+      "source_sections": "18.1; 28; 31",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T62; MSP-T63",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-011",
+      "requirement": "Messaging integrations, email, SMS, replies, comments, attachments, and external-channel handoffs must not bypass guardian inclusion or create disappearing or hidden communication.",
+      "source_sections": "23-32; 88-95",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T12; MSP-T13; MSP-T64",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-012",
+      "requirement": "Protected safeguarding intake must remain segregated from ordinary coaching, training, social, and operational messaging.",
+      "source_sections": "6.13; 30-37.2",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T14; MSP-T54",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-013",
+      "requirement": "Safeguarding intake must support identified, confidential, on-behalf-of, emergency, and anonymous reporting where technically and legally supportable, without falsely promising absolute anonymity.",
+      "source_sections": "33-37.2",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T15; MSP-T16",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-014",
+      "requirement": "Guardian notice or access may be delayed, restricted, or withheld when disclosure creates danger, retaliation, investigative compromise, legal conflict, or third-party privacy harm.",
+      "source_sections": "17; 30-31; 40",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T17; MSP-T18",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-015",
+      "requirement": "Internal approval, tenant administration, customer preference, or workflow delay must not block an applicable emergency or external reporting duty.",
+      "source_sections": "36-37.2",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T66",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-016",
+      "requirement": "Temporary safeguarding restrictions must be minimum-necessary, attributable, time-aware, promptly reviewed, and must not be represented as final guilt or liability.",
+      "source_sections": "37-40",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T19; MSP-T69",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-017",
+      "requirement": "Material protective matters must support a governed Safety Plan combining communication, scheduling, contact, pickup, transportation, assignment, media, and access safeguards.",
+      "source_sections": "6.22; 37-40",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T20",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-018",
+      "requirement": "Safeguarding case assignment must identify conflicts of interest, support recusal and reassignment, and provide an alternate path outside an implicated ordinary chain.",
+      "source_sections": "6.23; 34-42.2",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T65; MSP-T72",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-019",
+      "requirement": "Good-faith reporting and participation in safeguarding processes must be protected from retaliation.",
+      "source_sections": "41-42.2; 76-80",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T21; MSP-T67",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-020",
+      "requirement": "An adult eligibility state must precede protected-participant access, assignments, communication, pickup, transport, or other protected roles.",
+      "source_sections": "43-47",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T22; MSP-T23",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-021",
+      "requirement": "Adult eligibility must support verified identity, applicable role, required training or acknowledgment, restriction checks, periodic revalidation, no self-approval, and immediate revocation.",
+      "source_sections": "43-47",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T24; MSP-T25",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-022",
+      "requirement": "Pickup and release must require verified, current, scoped authority and must preserve conflicts and emergency exceptions.",
+      "source_sections": "48-53",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T26; MSP-T27",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-023",
+      "requirement": "Transportation must require separate authorization, identified driver and responsible organization, destination, expected time, and emergency-contact availability.",
+      "source_sections": "48-53",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T28; MSP-T29",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-024",
+      "requirement": "Lodging, changing areas, private spaces, and comparable exposure require distinct authorization and observable, interruptible safeguards.",
+      "source_sections": "48-53",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T73",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-025",
+      "requirement": "Minor delegated horse-care tasks must be horse-specific, task-specific, time-limited, age-appropriate, competence-appropriate, and supervised according to risk.",
+      "source_sections": "54-57",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T30; MSP-T31",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-026",
+      "requirement": "Minors must not independently exercise medical, medication, veterinary, transport, financial, ownership, custody, safeguarding-investigation, or unsupervised high-risk authority.",
+      "source_sections": "54-57",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T32; MSP-T33",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-027",
+      "requirement": "Protected-participant personal information must use high-privacy defaults, minimum-necessary projection, purpose limitation, and guardian-access exceptions.",
+      "source_sections": "58-64",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T34; MSP-T78",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-028",
+      "requirement": "Minors, safeguarding reports, reporter identities, witness identities, restrictions, and precise protected details must be excluded from general search and discoverability.",
+      "source_sections": "58-64",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T35; MSP-T36",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-029",
+      "requirement": "Minor media publication and marketing use must require appropriate rights, guardian authorization where applicable, participant assent or protected-refusal treatment, and withdrawal propagation.",
+      "source_sections": "61-64",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T37; MSP-T55",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-030",
+      "requirement": "Precise location, routine movement, facility security detail, and embedded geolocation metadata must be suppressed unless minimum-necessary authority exists.",
+      "source_sections": "58-64",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T38; MSP-T56",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-031",
+      "requirement": "AI must not independently determine abuse, credibility, danger, grooming risk, trauma, maturity, discipline, guardian rights, or mandatory-reporting outcomes.",
+      "source_sections": "65-69",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T39; MSP-T76",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-032",
+      "requirement": "Permitted AI assistance must remain source-aware, limited, reviewable, correction-capable, and subject to authorized human judgment.",
+      "source_sections": "65-69",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T40; MSP-T77",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-033",
+      "requirement": "Each safeguarding matter must be a distinct governed case with separable participants, issues, allegations, restrictions, evidence, and access.",
+      "source_sections": "70-75",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T41; MSP-T71",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-034",
+      "requirement": "Safeguarding evidence, holds, access, transformations, exports, custody, and disposition must preserve originals and block incompatible deletion.",
+      "source_sections": "70-75",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T42; MSP-T43",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-035",
+      "requirement": "Responding persons must receive appropriate notice and review rights without receiving protected reporter, witness, unrelated participant, privileged, or unsafe information.",
+      "source_sections": "76-80",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T44; MSP-T69; MSP-T70",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-036",
+      "requirement": "A challenge or appeal must not automatically suspend a protective restriction, and unsubstantiated reports must not be relabeled false or malicious without a separate authorized determination.",
+      "source_sections": "76-80",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T45; MSP-T67; MSP-T68",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-037",
+      "requirement": "Age of majority or restored autonomy must trigger reassessment of guardian-derived permissions, account control, communications, privacy, and optional consents while preserving history.",
+      "source_sections": "81-84",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T46; MSP-T47",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-038",
+      "requirement": "Vendors, processors, integrations, plugins, APIs, and automations must inherit protected-participant controls and may not create bypass channels or broader access.",
+      "source_sections": "85-95",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T48; MSP-T49",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-039",
+      "requirement": "Offline access, device storage, notifications, caches, exports, and recovery must apply encryption, expiry, revocation, minimum display, and protected-content suppression.",
+      "source_sections": "85-95",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T50; MSP-T79",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    },
+    {
+      "requirement_id": "GOV-MSP-040",
+      "requirement": "Public safeguarding, SafeSport, safety, or compliance claims must remain blocked until current external requirements, implementation evidence, validation, and separate founder claim authority exist.",
+      "source_sections": "118-121",
+      "primary_owner": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model V1.1",
+      "test_ids": "MSP-T60",
+      "design_status": "PENDING",
+      "control_status": "PENDING",
+      "evidence_status": "PENDING",
+      "release_status": "BLOCKED",
+      "implementation_authority": "FALSE"
+    }
+  ]
+}

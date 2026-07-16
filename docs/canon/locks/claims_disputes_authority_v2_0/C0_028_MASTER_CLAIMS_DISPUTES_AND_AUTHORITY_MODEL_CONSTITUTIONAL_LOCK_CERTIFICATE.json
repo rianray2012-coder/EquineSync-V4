@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-028",
+  "title": "Master Claims, Disputes, and Authority Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "locked_sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+  "adoption_record": "docs/canon/adoptions/c0_028_claims_disputes_authority_v2_0/C0_028_MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "8f491dabfb9b452b365c6a649170b3d2abaa2c3ed00fd7a239be668e166665d2",
+  "lock_record": "docs/canon/locks/claims_disputes_authority_v2_0/C0_028_MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "8aa5df686c9f14e6170a701b7b1233360fab62ecbb01ffa4b5c4bd695d9b7592",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

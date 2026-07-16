@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-019",
+  "current_path": "docs/canon/candidates/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_0.md",
+  "current_sha256": "630b6128e37734be01a40d64b80d9fb4d74fce48198c60f9fcbd1a2ef83c232b",
+  "expected_sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+  "expected_source_recovered": true,
+  "recovered_evidence_path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/recovered_sources/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1.md",
+  "recovered_sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+  "raw_byte_identical": false,
+  "current_size": 84199,
+  "recovered_size": 86116,
+  "normalized_line_similarity": 0.9891404380636849,
+  "heading_similarity": 0.9957264957264957
+}

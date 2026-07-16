@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-012",
+  "current_path": "docs/canon/MASTER_HORSE_LIFECYCLE.md",
+  "current_sha256": "cd47c8fe3e76eee067594f38efd45265929d279c4d1fd9dc2a70e16fea976391",
+  "expected_sha256": "be225014b476d266d4effcd35fa8577da21d8646e53afbbf60ca3b6509ea0057",
+  "expected_source_recovered": false,
+  "recovered_evidence_path": null,
+  "recovered_sha256": null,
+  "raw_byte_identical": false,
+  "current_size": 41680,
+  "recovered_size": null,
+  "normalized_line_similarity": null,
+  "heading_similarity": null
+}

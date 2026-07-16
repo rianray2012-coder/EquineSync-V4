@@ -1,0 +1,47 @@
+{
+  "phase": 2,
+  "disposition": "AI_V2_0_ADOPTION_AND_LOCK_RECONCILIATION_BLOCKED",
+  "exact_register": {
+    "status": "NAMED_SOURCE_NOT_LOCATED",
+    "path": null,
+    "sha256": null
+  },
+  "decision_universe": {
+    "status": "UNAVAILABLE",
+    "decision_count": null,
+    "all_decisions_classified": false,
+    "all_decisions_mapped": false,
+    "conflict_review_complete": false
+  },
+  "decisions": [],
+  "non_substitutable_evidence": [
+    "docs/canon/MASTER_AI_OPERATING_SYSTEM.md",
+    "docs/RF30/RF30_FINAL_LOCK_REVIEW.md",
+    "outputs/rf30_founder_final_lock.json",
+    "cross-canon vocabulary and normalization references"
+  ],
+  "findings": [
+    {
+      "id": "AI-V2-P1-EXACT-SOURCE-BYTES-ABSENT",
+      "severity": "P1",
+      "lock_blocking": true
+    },
+    {
+      "id": "AI-V2-P1-FOUNDER-DECISION-SET-ABSENT",
+      "severity": "P1",
+      "lock_blocking": true
+    }
+  ],
+  "phase_gate": {
+    "passed": false,
+    "later_phases_authorized": false,
+    "phases_not_executed": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "production": false,
+    "public_claim": false,
+    "public_launch": false
+  }
+}

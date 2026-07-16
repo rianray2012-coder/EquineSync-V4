@@ -1,0 +1,31 @@
+{
+  "row_id": "C0-020",
+  "source": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+  "source_sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+  "adoption_record": "docs/canon/adoptions/safeguarding_v1_2/SAFEGUARDING_V1_2_ADOPTION_EVENT_RECORD.json",
+  "adoption_record_sha256": "cc085b57f0a68a3e1f01f690f41d19e6c77bec60033b7522b59e04f6af4b3929",
+  "byte_drift": false,
+  "p0": 0,
+  "open_p1": 0,
+  "lock_blocking_p2": 0,
+  "retained_nonblocking_p2": [
+    "SAFEGUARDING-P2-01",
+    "SAFEGUARDING-P2-02",
+    "SAFEGUARDING-P2-03",
+    "SAFEGUARDING-P2-04",
+    "SAFEGUARDING-P2-05",
+    "SAFEGUARDING-P2-06"
+  ],
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-016",
+  "title": "Master Business Lifecycle Model",
+  "version": "2.1",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_BUSINESS_LIFECYCLE_V2_1_ADOPTED_SOURCE.md",
+  "locked_sha256": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+  "adoption_record": "docs/canon/adoptions/c0_016_business_lifecycle_v2_1/C0_016_MASTER_BUSINESS_LIFECYCLE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "ec87763e58f7dceac6a8ca66ff441d48a257afdb39a704c4e3b9e3ad2cebaf63",
+  "lock_record": "docs/canon/locks/business_lifecycle_v2_1/C0_016_MASTER_BUSINESS_LIFECYCLE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "8373e983340ddfb6259ddcbc84b4ed7038be6e7b09667aeafd49985af3c9fcda",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

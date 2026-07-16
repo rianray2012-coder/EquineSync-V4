@@ -1,0 +1,1426 @@
+# CODEX DIRECTIVE
+
+## AI V2.0 RECONCILIATION, GOVERNANCE CLOSURE ASSESSMENT, AND GOVERNANCE V1.0 CONSTITUTIONAL BASELINE ADOPTION AND LOCK
+
+### 1. DIRECTIVE STATUS
+
+This directive authorizes a controlled, multi-phase constitutional-governance reconciliation and closure process for EquineSync.
+
+The authorized work includes:
+
+1. Completion of the exact-source, checksum, adoption, and lock reconciliation for the EquineSync AI Governance V2.0 constitutional canon.
+2. Recovery and controlled reconciliation of the exact companion governance artifacts identified in this directive.
+3. Formal constitutional integrity, dependency, traceability, ownership, authority, identifier, and cross-reference scans.
+4. Closure or controlled disposition of governance-level P2 dependencies required for the final constitutional baseline lock.
+5. Completion of the final Governance Closure Assessment.
+6. Preparation and issuance of the Governance V1.0 Constitutional Baseline Adoption and Lock Package.
+
+This directive does not authorize:
+
+* production deployment;
+* runtime activation;
+* code implementation;
+* infrastructure mutation;
+* database or schema mutation;
+* migration execution;
+* external-provider activation;
+* AI-provider activation;
+* model configuration changes;
+* training or fine-tuning activity;
+* processing of live customer data;
+* secrets or credential changes;
+* public launch;
+* public trust, compliance, certification, or security claims;
+* silent amendment of founder-approved decisions;
+* substitution of reconstructed language for an exact source where exact source recovery remains possible;
+* adoption of any artifact that fails the required constitutional integrity gates.
+
+All work must remain repository-local, evidence-preserving, non-destructive, and governance-only unless a later founder directive expressly grants broader authority.
+
+---
+
+# 2. GOVERNING OBJECTIVE
+
+The objective is to establish a complete, evidence-backed, internally consistent, founder-controlled constitutional baseline for EquineSync Governance V1.0.
+
+The final baseline must demonstrate that:
+
+1. every controlling constitutional canon included in the baseline has an identified source, authority state, adoption state, and lock state;
+2. every required source has either been exactly recovered or given an explicit evidence classification;
+3. every controlling file has a verified checksum;
+4. every founder decision is traceable to the controlling canon or companion artifact that implements it;
+5. every governance requirement is mapped to an authoritative source and an accountable authority owner;
+6. all cross-canon references resolve correctly;
+7. no unresolved blocking dependency, orphan requirement, duplicate identifier, authority ambiguity, or material dependency cycle remains;
+8. governance-level P2 dependencies required for baseline lock have been closed, incorporated, superseded, or explicitly determined not to block the baseline;
+9. the final package distinguishes constitutional adoption and lock from implementation or production authority;
+10. the resulting baseline can function as the controlled source of truth for subsequent implementation waves and specialized governance work.
+
+---
+
+# 3. CONTROLLING BASELINE AND EVIDENCE PRINCIPLES
+
+Codex must begin from the most recent founder-approved constitutional source-reconciliation baseline and must preserve all prior approved findings unless new exact evidence proves that a correction is required.
+
+The following rules apply throughout all phases:
+
+## 3.1 Evidence hierarchy
+
+Use the following hierarchy, from strongest to weakest:
+
+1. exact repository bytes at an authoritative path;
+2. exact mounted source bytes with independently verified checksum;
+3. exact checksum-bearing adoption or lock package;
+4. exact founder-approved source located in the File Library or supplied evidence package;
+5. exact quoted source language preserved in a founder directive or controlled decision ledger;
+6. corroborated derivative artifact that identifies the exact controlling source;
+7. reconstructed or inferred content.
+
+Reconstructed or inferred content may be used only for diagnostic comparison. It may not be represented as an exact recovered source.
+
+## 3.2 No silent reconstruction
+
+If an exact artifact cannot be recovered:
+
+* do not silently regenerate it;
+* do not overwrite an existing artifact with a reconstruction;
+* do not label reconstructed text as exact;
+* assign an evidence classification;
+* identify the missing evidence;
+* determine whether the absence blocks adoption or lock;
+* create a founder-review item only where founder action is actually required.
+
+## 3.3 Founder-approved language
+
+Founder-approved language must be preserved exactly except for:
+
+* purely mechanical formatting normalization;
+* correction of an objectively provable typographical error that does not alter substance;
+* normalization expressly authorized by an existing founder decision;
+* cross-reference repair that does not alter the underlying policy.
+
+Any substantive conflict must be escalated and must not be resolved through Codex inference.
+
+## 3.4 Immutable prior locks
+
+Previously locked artifacts must not be modified in place.
+
+Where correction is required:
+
+* preserve the locked artifact;
+* create a superseding version or controlled reconciliation record;
+* document the relationship between the locked source and the superseding artifact;
+* state whether the prior lock remains historically valid, is superseded prospectively, or contains a documented non-substantive defect.
+
+## 3.5 Hashing
+
+Use SHA-256 for every artifact included in the adoption and lock package.
+
+Hash:
+
+* the exact source artifact;
+* any adoption record;
+* any lock record;
+* each final companion artifact;
+* the machine-readable baseline manifest;
+* the final package archive, if one is created.
+
+Record file size, canonical repository path, hash, source classification, authority classification, adoption state, lock state, and verification timestamp.
+
+---
+
+# 4. AUTHORIZED TARGET ARTIFACTS
+
+At minimum, this directive applies to the following artifacts and artifact families.
+
+## 4.1 AI Governance V2.0
+
+Locate and reconcile the controlling AI constitutional canon, including any applicable title variation such as:
+
+* `MASTER_AI_GOVERNANCE_MODEL_V2_0`
+* `MASTER_ARTIFICIAL_INTELLIGENCE_GOVERNANCE_MODEL_V2_0`
+* `MASTER_AI_ASSISTANCE_AUTOMATION_AND_MODEL_GOVERNANCE_V2_0`
+* any exact founder-approved equivalent title established by repository evidence.
+
+Also locate and reconcile:
+
+* AI founder decision register or decision ledger;
+* AI adoption record;
+* AI lock record;
+* AI review findings;
+* AI requirement mappings;
+* AI cross-canon references;
+* any AI retained P2 register;
+* any checksum-bearing package or evidence bundle;
+* any subsequent correction, reconciliation, supersession, or founder-acceptance record.
+
+## 4.2 Exact companion artifacts to recover
+
+Recover the exact controlling versions of:
+
+1. Founder Decision Register;
+2. Cross-Canon Reference Normalization Register;
+3. Governance Requirement Index;
+4. Requirement Traceability Matrix.
+
+Use exact established filenames where repository evidence identifies them. Do not assume a filename merely because the title is known.
+
+## 4.3 Baseline companion artifacts to inspect
+
+Also inspect and reconcile, where present:
+
+* Constitutional Canon Index and Navigator;
+* Constitutional Domain Ownership and Boundary Register;
+* Constitutional Authority Matrix;
+* Canon Dependency Map;
+* Constitutional Vocabulary and Definition Index;
+* Constitutional Cross-Reference Index;
+* constitutional source-of-truth register;
+* unresolved evidence classification ledger;
+* adoption register;
+* lock register;
+* founder decision ledger or family-specific decision registers;
+* governance P2 register;
+* canon supersession register;
+* implementation-authority boundary register.
+
+---
+
+# 5. REQUIRED EXECUTION MODEL
+
+Execute the work in the phases below.
+
+Do not skip a phase merely because later artifacts already exist. Existing artifacts must be verified rather than trusted by filename or status label alone.
+
+At the end of every phase:
+
+1. produce a phase report;
+2. list artifacts created, modified, or preserved;
+3. record hashes for new or changed artifacts;
+4. identify blockers, material discrepancies, and retained nonblocking items;
+5. state the next authorized phase;
+6. stop if a mandatory gate fails.
+
+---
+
+# PHASE 0 — WORKSPACE, AUTHORITY, AND SAFETY INITIALIZATION
+
+## Objective
+
+Establish the exact workspace, repository state, evidence scope, governing authority, and non-destructive execution boundaries.
+
+## Required actions
+
+1. Identify the repository root and current branch or working state.
+2. Record the current commit, if Git-backed.
+3. Identify uncommitted changes.
+4. Do not discard, reset, overwrite, or reformat unrelated work.
+5. Locate the most recent founder-approved constitutional source reconciliation package.
+6. Locate all governance adoption and lock registers.
+7. Locate all files containing references to AI V2.0.
+8. Locate all files containing references to the four required companion artifacts.
+9. Locate all governance-level P2 registers or ledgers.
+10. Identify any prior Governance Closure Assessment or baseline-adoption candidate.
+11. Create a controlled working directory for this reconciliation.
+12. Create an initial evidence inventory.
+13. Create a phase-zero chain-of-custody record.
+
+## Required output
+
+Create:
+
+`GOVERNANCE_V1_0_PHASE_0_WORKSPACE_AND_AUTHORITY_INITIALIZATION_REPORT.md`
+
+The report must include:
+
+* repository root;
+* branch and commit;
+* workspace cleanliness status;
+* governing source-reconciliation baseline;
+* applicable founder directives;
+* located evidence packages;
+* missing expected evidence;
+* non-destructive safeguards;
+* authority limitations;
+* initial artifact inventory;
+* initial risk classification.
+
+## Gate
+
+Proceed only if:
+
+* the repository or evidence workspace can be identified;
+* the governing reconciliation baseline can be identified;
+* no action requires destructive modification of prior locked evidence.
+
+If the active repository cannot be identified, continue only as an evidence-reconciliation exercise and classify all active repository paths as unresolved.
+
+---
+
+# PHASE 1 — AI V2.0 EXACT-SOURCE DISCOVERY AND CLASSIFICATION
+
+## Objective
+
+Identify every candidate source, derivative, adoption record, lock record, decision record, and evidence package associated with AI V2.0.
+
+## Required actions
+
+Search the full authorized workspace for:
+
+* filenames containing `AI`, `ARTIFICIAL_INTELLIGENCE`, `MODEL_GOVERNANCE`, `AUTOMATION`, or equivalent;
+* document titles and headings referencing AI governance;
+* founder acceptance language;
+* adoption dispositions;
+* lock dispositions;
+* SHA-256 values;
+* requirement identifiers;
+* cross-canon references;
+* retained P2 items;
+* supersession language;
+* references in indices, matrices, and dependency maps.
+
+For each candidate artifact, record:
+
+* exact path;
+* title;
+* version;
+* file size;
+* modification timestamp;
+* SHA-256;
+* document authority;
+* adoption state;
+* lock state;
+* source provenance;
+* whether byte identity can be established;
+* whether it is controlling, superseded, supporting, derivative, draft, or unknown;
+* conflicts with other candidates.
+
+Use evidence-specific classifications, including as appropriate:
+
+* `EXACT_REPOSITORY_SOURCE_VERIFIED`
+* `EXACT_MOUNTED_SOURCE_VERIFIED`
+* `EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE`
+* `EXACT_FOUNDER_ACCEPTED_SOURCE_BYTES_NOT_REPOSITORY_LINKED`
+* `EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED`
+* `DERIVATIVE_SOURCE_ONLY`
+* `PARTIAL_SOURCE_EVIDENCE`
+* `NAMED_SOURCE_NOT_LOCATED`
+* `RECONSTRUCTED_NONCONTROLLING_DRAFT`
+* `SUPERSEDED_SOURCE`
+* `CONFLICTING_SOURCE_CANDIDATES`
+* `UNRESOLVED_SOURCE_CLASSIFICATION`
+
+Do not merge source candidates during this phase.
+
+## Required outputs
+
+Create:
+
+1. `AI_V2_0_EXACT_SOURCE_DISCOVERY_INVENTORY.md`
+2. `AI_V2_0_EXACT_SOURCE_DISCOVERY_INVENTORY.json`
+3. `AI_V2_0_SOURCE_CONFLICT_AND_PROVENANCE_REPORT.md`
+
+## Gate
+
+Proceed only if a controlling source can be established or a bounded reconciliation path exists.
+
+Stop and issue a founder-review blocker if:
+
+* two materially different artifacts both claim controlling founder-approved status;
+* adoption or lock records point to different non-identical candidate bytes;
+* AI V2.0 cannot be distinguished from a draft or superseded version;
+* substantive founder decisions conflict and no later controlling decision resolves the conflict.
+
+---
+
+# PHASE 2 — AI V2.0 FOUNDER DECISION RECONCILIATION
+
+## Objective
+
+Recover and verify the exact founder decisions governing AI V2.0 and establish complete decision-to-canon traceability.
+
+## Required actions
+
+1. Locate all AI-specific founder decision registers, ledgers, directives, review responses, and acceptance records.
+2. Compare exact decision language across all sources.
+3. Establish the controlling decision for each decision identifier.
+4. Preserve decision IDs exactly.
+5. Identify duplicate, reused, missing, renumbered, or conflicting IDs.
+6. Map every AI founder decision to:
+
+   * the controlling AI canon section;
+   * applicable cross-canon sections;
+   * governance requirements;
+   * retained P2 items;
+   * adoption or lock evidence.
+7. Identify any approved decision not implemented in the AI canon.
+8. Identify any AI canon rule lacking decision or constitutional authority where such authority is required.
+9. Separate:
+
+   * exact founder decision text;
+   * explanatory notes;
+   * Codex inference;
+   * implementation guidance.
+
+## Required outputs
+
+Create or recover and verify:
+
+1. exact AI Founder Decision Register;
+2. `AI_V2_0_FOUNDER_DECISION_RECONCILIATION_REPORT.md`;
+3. `AI_V2_0_FOUNDER_DECISION_TRACEABILITY_MATRIX.md`;
+4. machine-readable decision mapping.
+
+If the exact register exists, preserve its bytes and create a verification record rather than rewriting it.
+
+If no exact standalone register exists but exact decision text exists in controlling sources, create a non-controlling recovered compilation and label it clearly pending founder acceptance. Do not represent it as the missing exact artifact.
+
+## Gate
+
+Proceed only if:
+
+* all AI founder decisions are classified;
+* no unresolved substantive conflict remains;
+* every controlling decision is mapped or explicitly classified as not requiring canon text.
+
+---
+
+# PHASE 3 — AI V2.0 CHECKSUM, ADOPTION, AND LOCK RECONCILIATION
+
+## Objective
+
+Determine the exact source bytes, checksum state, adoption state, and lock state for AI V2.0.
+
+## Required actions
+
+1. Calculate SHA-256 for all candidate AI artifacts.
+2. Compare current bytes against every recorded checksum.
+3. Determine whether adoption was:
+
+   * proposed;
+   * founder accepted;
+   * adopted;
+   * adopted with nonblocking follow-up;
+   * conditionally adopted;
+   * not adopted;
+   * ambiguous.
+4. Determine whether lock was:
+
+   * proposed;
+   * locked;
+   * locked with retained nonblocking P2;
+   * adopted but not locked;
+   * superseded;
+   * ambiguous.
+5. Verify whether adoption and lock records identify:
+
+   * the exact filename;
+   * the exact version;
+   * the exact checksum;
+   * the exact authority status;
+   * the effect on prior versions;
+   * implementation-authority limitations.
+6. Identify any post-lock byte drift.
+7. Distinguish:
+
+   * substantive drift;
+   * formatting-only drift;
+   * path-only movement;
+   * line-ending normalization;
+   * metadata-only change;
+   * unknown drift.
+8. Reconcile AI V2.0 into the constitutional source-of-truth register.
+9. Reconcile AI V2.0 into the adoption and lock registers.
+10. Do not lock a reconstructed source unless the founder has expressly approved that reconstructed artifact as the controlling canon.
+
+## Required outputs
+
+Create:
+
+1. `AI_V2_0_CHECKSUM_ADOPTION_AND_LOCK_RECONCILIATION_REPORT.md`
+2. `AI_V2_0_HASH_MANIFEST.json`
+3. `AI_V2_0_AUTHORITY_ADOPTION_LOCK_RECORD.md`
+4. any required non-destructive correction or supersession record.
+
+## Gate
+
+AI V2.0 may proceed into the final baseline only if:
+
+* exact controlling bytes are verified;
+* the controlling SHA-256 is verified;
+* adoption authority is established;
+* lock authority is established or can be completed under this directive;
+* no unresolved substantive drift exists;
+* retained P2 items do not undermine constitutional completeness.
+
+If adoption exists but lock does not, Codex may prepare a lock candidate under this directive, but must not claim the prior artifact was already locked.
+
+---
+
+# PHASE 4 — RECOVERY OF THE FOUR REQUIRED EXACT COMPANION ARTIFACTS
+
+## Objective
+
+Recover and validate the exact controlling versions of:
+
+1. Founder Decision Register;
+2. Cross-Canon Reference Normalization Register;
+3. Governance Requirement Index;
+4. Requirement Traceability Matrix.
+
+## Required actions for each artifact
+
+1. Search by exact title, probable filename variants, internal headings, identifiers, and references from other governance artifacts.
+2. Identify all candidate versions.
+3. Calculate SHA-256 for each candidate.
+4. Determine the exact controlling source.
+5. Determine authority, adoption, and lock status.
+6. Identify whether the artifact is:
+
+   * a constitutional companion;
+   * an operational index;
+   * a derived report;
+   * a draft;
+   * a superseded version.
+7. Compare the candidate against references in:
+
+   * the Canon Index and Navigator;
+   * Authority Matrix;
+   * Dependency Map;
+   * source-of-truth register;
+   * adoption package;
+   * lock package.
+8. Preserve exact bytes where found.
+9. Do not replace an exact artifact with a regenerated one.
+10. If multiple components were previously distributed across several files, document that fact instead of inventing a historical standalone file.
+
+## Required outputs
+
+Create:
+
+1. `EXACT_COMPANION_ARTIFACT_RECOVERY_REPORT.md`
+2. `EXACT_COMPANION_ARTIFACT_HASH_MANIFEST.json`
+3. `EXACT_COMPANION_ARTIFACT_PROVENANCE_MATRIX.md`
+
+For each artifact, record:
+
+* exact source path;
+* title;
+* version;
+* SHA-256;
+* authority;
+* adoption state;
+* lock state;
+* completeness;
+* relationship to derivatives;
+* unresolved issues.
+
+## Gate
+
+Proceed only if each artifact is either:
+
+* exactly recovered and verified; or
+* explicitly classified with a determination that the missing exact source does not block baseline lock.
+
+A missing exact artifact blocks final lock if it is the only authoritative record of:
+
+* founder decisions;
+* constitutional requirements;
+* cross-canon normalization;
+* requirement traceability;
+* authority ownership;
+* unresolved constitutional exceptions.
+
+---
+
+# PHASE 5 — CONTROLLED COMPANION-ARTIFACT RECONCILIATION
+
+## Objective
+
+Bring the four recovered companion artifacts into alignment with the complete constitutional canon set without changing founder-approved policy.
+
+## Required actions
+
+### 5.1 Founder Decision Register
+
+Verify that:
+
+* every founder decision has a unique identifier;
+* every decision has a status;
+* every decision identifies its governing domain;
+* every decision maps to the controlling artifact and section;
+* superseded decisions are preserved and linked;
+* no unresolved decision is mislabeled as approved;
+* family-specific decision registers reconcile with the master register.
+
+### 5.2 Cross-Canon Reference Normalization Register
+
+Verify that:
+
+* every canonical title has one normalized name;
+* aliases and prior titles are recorded;
+* section citations resolve;
+* version references are current;
+* superseded references are identified;
+* circular references are classified;
+* cross-domain references do not silently transfer authority;
+* references distinguish controlling incorporation from informational citation.
+
+### 5.3 Governance Requirement Index
+
+Verify that:
+
+* every requirement has a unique ID;
+* each requirement has a normalized statement;
+* each requirement has a domain;
+* each requirement identifies authority level;
+* each requirement identifies source canon and section;
+* each requirement has an authority owner;
+* each requirement has an implementation applicability state;
+* each requirement has a validation or evidence expectation;
+* superseded and retired requirements remain traceable.
+
+### 5.4 Requirement Traceability Matrix
+
+Verify bidirectional traceability among:
+
+* founder decisions;
+* constitutional requirements;
+* controlling canons;
+* companion artifacts;
+* retained P2 items;
+* implementation governance;
+* validation evidence;
+* adoption and lock records.
+
+No requirement may be treated as complete merely because it appears in one direction of the matrix.
+
+## Required outputs
+
+Create:
+
+1. reconciled versions or verification records for all four artifacts;
+2. `COMPANION_ARTIFACT_RECONCILIATION_REPORT.md`;
+3. `COMPANION_ARTIFACT_CHANGE_LEDGER.md`;
+4. machine-readable normalized registers.
+
+Any modification must state:
+
+* whether it is substantive or non-substantive;
+* the authority for the modification;
+* affected requirement or decision IDs;
+* affected cross-references;
+* whether founder review is required.
+
+## Gate
+
+No substantive founder-approved policy change may be introduced through companion-artifact reconciliation.
+
+---
+
+# PHASE 6 — FORMAL CONSTITUTIONAL INTEGRITY SCANS
+
+## Objective
+
+Run the complete formal scan suite across the constitutional baseline candidate.
+
+The scans must be automated where practical and independently reviewed through deterministic reports.
+
+## 6.1 Dependency-cycle scan
+
+Build a directed dependency graph across all controlling canons and required companion artifacts.
+
+Classify each edge as:
+
+* authoritative dependency;
+* definitional dependency;
+* procedural dependency;
+* evidentiary dependency;
+* implementation dependency;
+* informational reference;
+* supersession relationship.
+
+Detect:
+
+* direct cycles;
+* indirect cycles;
+* self-dependencies;
+* authority cycles;
+* adoption dependencies;
+* lock dependencies;
+* unresolved conditional dependencies.
+
+Not every cross-reference cycle is necessarily invalid. Classify each cycle as:
+
+* prohibited authority cycle;
+* material constitutional cycle;
+* benign mutual reference;
+* intentional reciprocal dependency;
+* implementation-only cycle;
+* false positive.
+
+Create:
+
+`FORMAL_DEPENDENCY_CYCLE_SCAN_REPORT.md`
+
+## 6.2 Orphan-requirement scan
+
+Detect requirements that lack any of the following:
+
+* controlling source;
+* governing domain;
+* authority owner;
+* founder-decision basis where required;
+* implementation applicability;
+* validation path;
+* traceability to a canon section;
+* lifecycle state.
+
+Also detect canon provisions that impose mandatory obligations but have no requirement ID.
+
+Create:
+
+`FORMAL_ORPHAN_REQUIREMENT_SCAN_REPORT.md`
+
+## 6.3 Duplicate-ID scan
+
+Scan all controlled artifact families for duplicate or conflicting IDs, including:
+
+* founder decision IDs;
+* governance requirement IDs;
+* canon IDs;
+* P0, P1, and P2 IDs;
+* exception IDs;
+* risk IDs;
+* control IDs;
+* cross-reference IDs;
+* adoption and lock record IDs;
+* supersession IDs.
+
+Classify duplicates as:
+
+* valid scoped reuse;
+* accidental duplicate;
+* conflicting duplicate;
+* alias;
+* superseded ID;
+* parsing artifact.
+
+Create:
+
+`FORMAL_DUPLICATE_IDENTIFIER_SCAN_REPORT.md`
+
+## 6.4 Cross-reference scan
+
+Validate every internal cross-reference for:
+
+* target artifact existence;
+* correct normalized title;
+* correct version;
+* correct section;
+* correct authority relationship;
+* correct supersession status;
+* correct adoption and lock status.
+
+Detect:
+
+* broken references;
+* stale version references;
+* references to drafts;
+* references to superseded artifacts;
+* references that improperly imply incorporation;
+* unresolved section anchors;
+* inconsistent title aliases.
+
+Create:
+
+`FORMAL_CROSS_REFERENCE_INTEGRITY_SCAN_REPORT.md`
+
+## 6.5 Authority-owner scan
+
+Verify every constitutional domain, requirement, exception, decision pathway, and escalation pathway has an identified authority owner.
+
+Distinguish:
+
+* Founder;
+* constitutional governance owner;
+* product authority;
+* security authority;
+* privacy authority;
+* safeguarding authority;
+* equine welfare or clinical authority;
+* financial authority;
+* legal or compliance authority;
+* facility authority;
+* record steward;
+* implementation owner;
+* operational owner;
+* reviewer;
+* approver;
+* accountable authority.
+
+Detect:
+
+* missing owner;
+* multiple conflicting owners;
+* owner without authority;
+* approval deadlock;
+* self-review conflict;
+* escalation loop;
+* domain boundary ambiguity;
+* authority inherited solely through a non-controlling reference.
+
+Create:
+
+`FORMAL_AUTHORITY_OWNER_SCAN_REPORT.md`
+
+## 6.6 Combined scan output
+
+Create:
+
+1. `GOVERNANCE_FORMAL_SCAN_MASTER_REPORT.md`
+2. `GOVERNANCE_FORMAL_SCAN_FINDINGS.json`
+3. `GOVERNANCE_FORMAL_SCAN_REMEDIATION_LEDGER.md`
+
+Each finding must have:
+
+* unique finding ID;
+* scan type;
+* severity;
+* affected artifact;
+* affected section or ID;
+* evidence;
+* constitutional impact;
+* recommended correction;
+* authority needed;
+* blocking status;
+* disposition;
+* verification result.
+
+## Gate
+
+The baseline may not proceed if any open finding is classified:
+
+* P0;
+* P1;
+* lock-blocking P2;
+* unresolved authority conflict;
+* unresolved substantive cross-reference failure;
+* unresolved orphan constitutional requirement;
+* prohibited authority cycle;
+* duplicate controlling ID with conflicting meaning.
+
+---
+
+# PHASE 7 — GOVERNANCE-LEVEL P2 DEPENDENCY CLOSURE
+
+## Objective
+
+Close the governance-level P2 dependencies required for final constitutional baseline lock.
+
+## Required actions
+
+1. Locate all open P2 items across:
+
+   * canon-specific reviews;
+   * adoption records;
+   * lock records;
+   * reconciliation ledgers;
+   * source-of-truth registers;
+   * prior closure assessments;
+   * dependency maps;
+   * companion artifacts.
+2. De-duplicate overlapping P2 items.
+3. Classify each P2 as:
+
+   * baseline-lock blocking;
+   * nonblocking constitutional follow-up;
+   * implementation-only;
+   * operational-only;
+   * superseded;
+   * already resolved;
+   * invalid or duplicate;
+   * requires founder decision.
+4. For each baseline-lock-blocking P2:
+
+   * identify the exact evidence;
+   * identify the controlling authority;
+   * complete the authorized governance correction;
+   * update all affected traceability and reference artifacts;
+   * verify closure through the formal scan suite.
+5. Do not close a P2 merely by relabeling it.
+6. Do not convert unresolved constitutional substance into an implementation follow-up.
+7. Preserve retained nonblocking P2 items in a controlled post-lock register.
+
+## Required closure standards
+
+A P2 is closed only when:
+
+* the required artifact or correction exists;
+* authority is established;
+* traceability is updated;
+* dependent references are updated;
+* the correction passes the relevant scans;
+* evidence is recorded;
+* the disposition is explicit.
+
+## Required outputs
+
+Create:
+
+1. `GOVERNANCE_LEVEL_P2_MASTER_REGISTER.md`
+2. `GOVERNANCE_LEVEL_P2_CLOSURE_REPORT.md`
+3. `GOVERNANCE_LEVEL_P2_CLOSURE_EVIDENCE.json`
+4. `GOVERNANCE_V1_0_RETAINED_NONBLOCKING_FOLLOW_UP_REGISTER.md`
+
+## Gate
+
+Required state before proceeding:
+
+* P0 = 0;
+* P1 = 0;
+* lock-blocking governance P2 = 0;
+* all retained P2 items expressly classified as nonblocking and outside the constitutional baseline lock gate.
+
+---
+
+# PHASE 8 — FINAL AI V2.0 CONSTITUTIONAL ADOPTION AND LOCK RECONCILIATION
+
+## Objective
+
+Complete the formal constitutional status of AI V2.0 and integrate it into the Governance V1.0 baseline.
+
+## Required actions
+
+1. Confirm the exact controlling AI V2.0 bytes.
+2. Confirm the verified SHA-256.
+3. Confirm the controlling founder decisions.
+4. Confirm all AI requirements are indexed and traceable.
+5. Confirm all AI cross-canon references resolve.
+6. Confirm AI domain ownership and authority are unambiguous.
+7. Confirm no lock-blocking AI P2 remains.
+8. Confirm no AI policy grants runtime or implementation authority.
+9. Confirm provider-neutral, least-privilege, no-access-expansion, human-review, uncertainty, training-data, retention, minor-protection, safeguarding, financial, medical, equine-welfare, and consequential-decision boundaries reconcile with the controlling canons.
+10. Create or verify the AI V2.0 adoption record.
+11. Create or verify the AI V2.0 lock record.
+12. Record any retained nonblocking AI P2 items.
+
+## Required disposition
+
+Use one of the following exact dispositions, based on evidence:
+
+* `AI_V2_0_ADOPTED_AND_LOCKED`
+* `AI_V2_0_ADOPTED_AND_LOCKED_WITH_NONBLOCKING_P2`
+* `AI_V2_0_ADOPTION_VERIFIED_LOCK_COMPLETED`
+* `AI_V2_0_ADOPTION_AND_LOCK_RECONCILIATION_BLOCKED`
+
+Do not use an approved disposition unless every required condition is satisfied.
+
+## Required outputs
+
+Create:
+
+1. `AI_V2_0_FINAL_ADOPTION_RECORD.md`
+2. `AI_V2_0_FINAL_LOCK_RECORD.md`
+3. `AI_V2_0_FINAL_RECONCILIATION_SUMMARY.md`
+4. final AI hash and authority entry for the baseline manifest.
+
+---
+
+# PHASE 9 — FINAL GOVERNANCE CLOSURE ASSESSMENT
+
+## Objective
+
+Determine whether the complete EquineSync constitutional governance body is ready for Governance V1.0 baseline adoption and lock.
+
+## Assessment domains
+
+At minimum, assess:
+
+1. constitutional source completeness;
+2. exact-source verification;
+3. checksum completeness;
+4. founder-decision completeness;
+5. adoption-state completeness;
+6. lock-state completeness;
+7. authority ownership;
+8. domain boundaries;
+9. vocabulary normalization;
+10. cross-canon references;
+11. requirement completeness;
+12. bidirectional traceability;
+13. dependency integrity;
+14. supersession integrity;
+15. unresolved evidence;
+16. unresolved P0, P1, and P2 findings;
+17. implementation-authority boundaries;
+18. safeguarding and minor protections;
+19. equine health, welfare, and clinical boundaries;
+20. privacy and data protection;
+21. security and trust;
+22. identity and access control;
+23. audit and evidence;
+24. records, retention, and deletion;
+25. financial truth and responsibility;
+26. reporting and analytics;
+27. AI governance;
+28. media, files, and digital assets;
+29. developer, platform, integration, and plugin governance;
+30. resilience, backup, recovery, offline operation, and continuity;
+31. transfer, ownership, custody, and relationship continuity;
+32. communication, notices, search, discovery, ranking, and retrieval;
+33. external architecture and provider neutrality;
+34. launch, production, and public-claim restrictions.
+
+## Required findings structure
+
+For each domain, state:
+
+* governing artifacts;
+* source status;
+* checksum status;
+* adoption status;
+* lock status;
+* requirement coverage;
+* authority owner;
+* dependencies;
+* open findings;
+* closure determination.
+
+## Required final assessment dispositions
+
+Use exactly one:
+
+* `GOVERNANCE_V1_0_READY_FOR_CONSTITUTIONAL_BASELINE_ADOPTION_AND_LOCK`
+* `GOVERNANCE_V1_0_READY_FOR_CONSTITUTIONAL_BASELINE_ADOPTION_AND_LOCK_WITH_RETAINED_NONBLOCKING_FOLLOW_UP`
+* `GOVERNANCE_V1_0_NOT_READY_FOR_CONSTITUTIONAL_BASELINE_LOCK`
+
+## Required outputs
+
+Create:
+
+1. `FINAL_GOVERNANCE_CLOSURE_ASSESSMENT.md`
+2. `FINAL_GOVERNANCE_CLOSURE_ASSESSMENT.json`
+3. `FINAL_GOVERNANCE_CLOSURE_SCORECARD.md`
+4. `FINAL_GOVERNANCE_CLOSURE_FINDING_LEDGER.md`
+
+The assessment must be evidence-based. A numerical score may be included, but no score may override a failed mandatory gate.
+
+---
+
+# PHASE 10 — GOVERNANCE V1.0 CONSTITUTIONAL BASELINE CANDIDATE
+
+## Objective
+
+Assemble the complete baseline candidate and prove its contents before adoption and lock.
+
+## Required actions
+
+1. Enumerate every controlling constitutional canon.
+2. Enumerate every required constitutional companion artifact.
+3. Record exact path, version, authority, adoption state, lock state, file size, and SHA-256.
+4. Record superseded or excluded artifacts separately.
+5. Record retained nonblocking P2 items separately.
+6. Record unresolved implementation items separately.
+7. Confirm the baseline contains no draft, unapproved, ambiguous, or reconstructed controlling artifact.
+8. Confirm the package does not imply production or implementation authority.
+9. Generate a deterministic machine-readable manifest.
+10. Generate a human-readable index.
+11. Generate a reproducible package verification script or command set.
+12. If creating an archive, ensure archive creation does not alter source bytes.
+
+## Required outputs
+
+Create:
+
+1. `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_MANIFEST.md`
+2. `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_MANIFEST.json`
+3. `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_INDEX.md`
+4. `GOVERNANCE_V1_0_BASELINE_EXCLUSIONS_AND_SUPERSESSIONS_REGISTER.md`
+5. `GOVERNANCE_V1_0_BASELINE_VERIFICATION_INSTRUCTIONS.md`
+6. optional deterministic evidence archive;
+7. archive SHA-256, if created.
+
+## Gate
+
+Proceed only if the manifest independently verifies and matches the Closure Assessment.
+
+---
+
+# PHASE 11 — GOVERNANCE V1.0 ADOPTION PACKAGE
+
+## Objective
+
+Issue the formal adoption record for the complete constitutional baseline.
+
+## Required adoption record content
+
+The adoption record must include:
+
+* baseline name;
+* baseline version;
+* effective governance status;
+* manifest SHA-256;
+* package SHA-256, if applicable;
+* included artifact count;
+* excluded artifact count;
+* superseded artifact count;
+* P0 count;
+* P1 count;
+* lock-blocking P2 count;
+* retained nonblocking P2 count;
+* source reconciliation status;
+* exact-source verification status;
+* founder-decision reconciliation status;
+* scan status;
+* authority-owner status;
+* traceability status;
+* implementation-authority limitation;
+* production-authority limitation;
+* public-launch limitation;
+* public-claims limitation.
+
+## Required adoption disposition
+
+Use exactly one:
+
+* `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_ADOPTED`
+* `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_ADOPTED_WITH_RETAINED_NONBLOCKING_FOLLOW_UP`
+* `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_ADOPTION_BLOCKED`
+
+## Required output
+
+Create:
+
+`GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_ADOPTION_RECORD.md`
+
+Adoption alone must not be described as lock unless the lock phase is separately completed.
+
+---
+
+# PHASE 12 — GOVERNANCE V1.0 LOCK PACKAGE
+
+## Objective
+
+Issue the formal immutable constitutional baseline lock after successful adoption.
+
+## Required lock conditions
+
+The lock may issue only if:
+
+* the adoption record exists;
+* exact baseline bytes are fixed;
+* the manifest hash is verified;
+* all included artifact hashes are verified;
+* P0 = 0;
+* P1 = 0;
+* lock-blocking governance P2 = 0;
+* all formal scans pass;
+* no unresolved authority conflict exists;
+* no unresolved exact-source blocker exists;
+* no unresolved substantive drift exists;
+* retained follow-up items are expressly nonblocking;
+* implementation and production authority remain false.
+
+## Required lock record content
+
+The lock record must state:
+
+1. the exact baseline manifest hash;
+2. the exact adoption record hash;
+3. the exact archive hash, if applicable;
+4. the lock timestamp;
+5. the lock disposition;
+6. the immutable scope;
+7. permitted future amendment process;
+8. supersession rules;
+9. retained nonblocking follow-up process;
+10. explicit denial of implementation, runtime, production, and launch authority;
+11. the requirement that any future constitutional change use a new controlled version, amendment, or superseding canon rather than editing locked bytes.
+
+## Required lock disposition
+
+Use exactly one:
+
+* `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCKED`
+* `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCKED_WITH_RETAINED_NONBLOCKING_FOLLOW_UP`
+* `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCK_BLOCKED`
+
+## Required outputs
+
+Create:
+
+1. `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCK_RECORD.md`
+2. `GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCK_CERTIFICATE.json`
+3. `GOVERNANCE_V1_0_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md`
+
+---
+
+# PHASE 13 — FINAL EVIDENCE PACKAGE AND EXECUTIVE REPORT
+
+## Objective
+
+Produce the complete founder-reviewable evidence package.
+
+## Required package contents
+
+Include:
+
+* all phase reports;
+* AI V2.0 reconciliation records;
+* exact-source inventories;
+* hash manifests;
+* recovered companion artifacts or exact verification records;
+* all formal scan reports;
+* scan remediation ledger;
+* P2 closure register and evidence;
+* final Closure Assessment;
+* baseline manifest;
+* adoption record;
+* lock record;
+* post-lock change-control protocol;
+* machine-readable evidence;
+* package verification instructions.
+
+## Required executive report
+
+Create:
+
+`GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_FINAL_EXECUTIVE_REPORT.md`
+
+The report must state:
+
+* final disposition;
+* AI V2.0 disposition;
+* number of controlling canons;
+* number of companion artifacts;
+* exact-source recovery results;
+* checksum verification results;
+* founder-decision results;
+* formal scan results;
+* P0, P1, lock-blocking P2, and retained P2 counts;
+* adoption status;
+* lock status;
+* manifest hash;
+* package hash;
+* unresolved matters;
+* prohibited interpretations of the lock;
+* recommended next governed action.
+
+## Recommended next governed action
+
+Unless a separate founder directive already controls the next step, recommend one of:
+
+* constitutional baseline maintenance only;
+* controlled implementation traceability reconciliation;
+* implementation-readiness assessment;
+* launch-governance planning;
+* no further action pending founder authorization.
+
+Do not automatically authorize the recommended action.
+
+---
+
+# 6. REQUIRED MACHINE-READABLE DATA MODEL
+
+The final machine-readable manifest must include, at minimum, for every artifact:
+
+* `artifact_id`
+* `canonical_title`
+* `canonical_filename`
+* `version`
+* `domain`
+* `artifact_type`
+* `authority_classification`
+* `source_classification`
+* `adoption_state`
+* `lock_state`
+* `repository_path`
+* `file_size_bytes`
+* `sha256`
+* `founder_decision_ids`
+* `requirement_ids`
+* `dependency_ids`
+* `authority_owner`
+* `supersedes`
+* `superseded_by`
+* `retained_p2_ids`
+* `implementation_authority`
+* `production_authority`
+* `public_launch_authority`
+* `verification_status`
+* `verification_timestamp`
+
+The machine-readable scan finding format must include:
+
+* `finding_id`
+* `scan_type`
+* `severity`
+* `blocking_status`
+* `artifact_id`
+* `location`
+* `description`
+* `evidence`
+* `required_action`
+* `authority_required`
+* `disposition`
+* `verification_evidence`
+
+---
+
+# 7. SEVERITY AND CLOSURE RULES
+
+Use the following governance severity model:
+
+## P0
+
+A defect that invalidates constitutional authority, creates a material safety or legal contradiction, corrupts source integrity, or makes the baseline untrustworthy.
+
+P0 must be zero before adoption or lock.
+
+## P1
+
+A material governance defect that prevents reliable constitutional interpretation, authority assignment, traceability, or enforcement.
+
+P1 must be zero before adoption or lock.
+
+## P2
+
+A bounded defect, incompleteness, or follow-up that does not invalidate constitutional meaning.
+
+A P2 may remain after lock only if it is expressly classified as nonblocking and does not affect:
+
+* controlling policy;
+* founder intent;
+* authority ownership;
+* source integrity;
+* checksum integrity;
+* requirement completeness;
+* cross-reference resolution;
+* safeguarding;
+* equine welfare;
+* legal, financial, medical, privacy, or security boundaries;
+* adoption or lock validity.
+
+## P3
+
+Editorial or convenience improvement with no constitutional effect.
+
+P3 items may be retained without affecting the lock.
+
+---
+
+# 8. PROHIBITED SHORTCUTS
+
+Codex must not:
+
+1. infer that an artifact is adopted or locked from its filename alone;
+2. infer exact-source identity from similar text;
+3. regenerate a missing exact artifact and call it recovered;
+4. use timestamps as proof of authority;
+5. treat a derivative matrix as proof of the underlying exact source without corroboration;
+6. close P2 items by moving them to another register without remediation;
+7. omit unresolved evidence from the final report;
+8. silently renumber founder decisions or requirements;
+9. merge different authority domains for convenience;
+10. treat cross-reference existence as proof of correct authority;
+11. claim production readiness from constitutional completion;
+12. amend previously locked bytes in place;
+13. delete or overwrite conflicting evidence;
+14. create public compliance or security claims;
+15. claim founder approval that is not evidenced.
+
+---
+
+# 9. FINAL RESPONSE FORMAT
+
+At completion, Codex must return a concise but complete execution summary in this form:
+
+## Final Disposition
+
+`[EXACT FINAL DISPOSITION]`
+
+## AI V2.0
+
+* Source status:
+* SHA-256:
+* Adoption status:
+* Lock status:
+* Founder decisions:
+* Requirements:
+* Open P0:
+* Open P1:
+* Lock-blocking P2:
+* Retained nonblocking P2:
+
+## Governance V1.0 Baseline
+
+* Controlling constitutional canons:
+* Required companion artifacts:
+* Exact sources verified:
+* Exact sources unresolved:
+* Manifest SHA-256:
+* Adoption record SHA-256:
+* Lock record SHA-256:
+* Package SHA-256:
+* Open P0:
+* Open P1:
+* Lock-blocking P2:
+* Retained nonblocking P2:
+* Implementation authority:
+* Production authority:
+* Public launch authority:
+
+## Formal Scan Results
+
+* Dependency cycles:
+* Orphan requirements:
+* Duplicate IDs:
+* Broken or stale cross-references:
+* Authority-owner conflicts:
+* Remaining nonblocking findings:
+
+## Key Artifacts
+
+Provide repository-relative links or exact paths for:
+
+* final Governance Closure Assessment;
+* AI V2.0 reconciliation report;
+* formal scan master report;
+* P2 closure report;
+* baseline manifest;
+* adoption record;
+* lock record;
+* final executive report;
+* final evidence package.
+
+## Next Governed Action
+
+State the recommended next action and explicitly state whether it is authorized.
+
+---
+
+# 10. AUTHORIZED END STATE
+
+The preferred successful end state is:
+
+`GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCKED_WITH_RETAINED_NONBLOCKING_FOLLOW_UP`
+
+This disposition may be used only if the evidence supports it.
+
+A fully clean result may instead use:
+
+`GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCKED`
+
+The final package must expressly state:
+
+* constitutional governance authority: `CONTROLLING`;
+* constitutional baseline adoption: `TRUE`;
+* constitutional baseline lock: `TRUE`;
+* implementation authority: `FALSE`;
+* runtime activation authority: `FALSE`;
+* production authority: `FALSE`;
+* public launch authority: `FALSE`;
+* public compliance or trust claim authority: `FALSE`.
+
+Begin with Phase 0 and proceed sequentially through each authorized phase. Stop at any failed mandatory gate and issue a precise blocker package rather than overstating completion.

@@ -1,0 +1,27 @@
+{
+  "row_id": "C0-029",
+  "reviewed_at": "2026-07-16T07:34:36Z",
+  "ready": true,
+  "adopted_source": "docs/canon/adopted_sources/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "sha256": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+  "adoption_record_sha256": "41b91b72c9914ccf014ab94d273882d1795facc71fe1516f71107b2abfc3e285",
+  "p0": 0,
+  "open_p1": 0,
+  "lock_blocking_p2": 0,
+  "retained_nonblocking_p2": [
+    "C0-029-P2-HISTORICAL-V1-SOURCE-UNAVAILABLE"
+  ],
+  "lock_issued": false,
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "classification": "FOUNDER_RATIFIED_CONTROLLING_AI_V2_0_DECISION_MATRIX",
+  "source": {
+    "path": "docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+    "sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+    "section": "96. Founder Decisions Incorporated",
+    "exact_bullet_count": 13
+  },
+  "identifiers": {
+    "historical": false,
+    "newly_assigned_for_traceability": true,
+    "founder_ratification_required": false,
+    "founder_ratified": true,
+    "administrative_identifiers_only": true,
+    "section_96_controls": true
+  },
+  "decisions": [
+    {"id":"AI-FD01","exact_source_bullets":["AI is a tool for assistance, information, pattern and trend detection, and routine-task support."],"sections":[5,13,14,15,16,52,53,54,55,56,57,58,68],"appendices":["A","B"],"implementation_authority":false},
+    {"id":"AI-FD02","exact_source_bullets":["AI must always prioritize safety."],"sections":[6,18,19,20,21,22,23,24,74,75,76,77,78,79],"appendices":["C","G","I","K","L"],"implementation_authority":false},
+    {"id":"AI-FD03","exact_source_bullets":["AI cannot determine rider ability or horse lameness."],"sections":[19,62,63,69],"appendices":["A","B","L"],"implementation_authority":false},
+    {"id":"AI-FD04","exact_source_bullets":["Consequential legal, financial, medical, welfare, safeguarding, ownership, and access decisions remain human-authority zones."],"sections":[17,18,19,20,24,59,60,61,62,63,64,65,66,67],"appendices":["B","G","H","L"],"implementation_authority":false},
+    {"id":"AI-FD05","exact_source_bullets":["EquineSync customer operational data will not be used to train General or Shared Models."],"sections":[25,26,27,28,32],"appendices":["J"],"implementation_authority":false},
+    {"id":"AI-FD06","exact_source_bullets":["Provider-neutral architecture, minimum-necessary disclosure, strong retention controls, and vendor exit capability are required."],"sections":[9,29,30,36,37,72,84,85],"appendices":["J","K"],"implementation_authority":false,"provider_activation_authority":false},
+    {"id":"AI-FD07","exact_source_bullets":["The five-tier decision framework is approved."],"sections":[12,13,14,15,16,17],"appendices":["A","B","C","H"],"implementation_authority":false},
+    {"id":"AI-FD08","exact_source_bullets":["AI outputs must be labeled, source-grounded, transparent about fact versus inference, explicit about estimates, and candid about uncertainty."],"sections":[40,41,42,43,44,47,50],"appendices":["F","G"],"implementation_authority":false},
+    {"id":"AI-FD09","exact_source_bullets":["AI must refuse unsupported conclusions and request more information when appropriate."],"sections":[24,43,45,46],"appendices":["F","G","I"],"implementation_authority":false},
+    {"id":"AI-FD10","exact_source_bullets":["AI output is not automatically canonical, users may challenge it, and AI inherits the user's narrowest permissions."],"sections":[31,41,48,49,87],"appendices":["G","H"],"implementation_authority":false},
+    {"id":"AI-FD11","exact_source_bullets":["Identifiable cross-tenant learning is prohibited; minors, offline use, financial use, and equine-health use receive enhanced safeguards."],"sections":[32,33,34,38,59,60,61,62,63,64,65],"appendices":["C","I","J","K","L"],"implementation_authority":false},
+    {"id":"AI-FD12","exact_source_bullets":["Health-risk scoring, feed recommendations, behavioral or risk scoring, automatic collections, financial forecasting, and supervised workflow automation are permitted launch candidates within the boundaries of this Model.","Predictive Emergency Decisions remain deferred."],"sections":[52,59,60,61,64,65,66,67,92,93],"appendices":["A","B","C","D","I","K","L"],"implementation_authority":false,"runtime_authority":false,"production_authority":false,"public_launch_authority":false}
+  ],
+  "authority": {
+    "constitutional_controlling": false,
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false
+  }
+}

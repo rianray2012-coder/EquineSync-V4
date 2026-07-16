@@ -1,0 +1,107 @@
+{
+  "source_presence": {
+    "C0-043": true,
+    "C0-042": true,
+    "C0-041": true,
+    "C0-040": true,
+    "C0-039": true,
+    "C0-035": "BLOCKED_AS_EXPECTED",
+    "C0-033": true,
+    "C0-023": "BLOCKED_AS_EXPECTED"
+  },
+  "predecessor_hashes": {
+    "C0-043": true,
+    "C0-042": true,
+    "C0-041": true,
+    "C0-040": true,
+    "C0-039": true,
+    "C0-033": true
+  },
+  "deterministic_successor_text": {
+    "C0-043": true,
+    "C0-042": true,
+    "C0-041": true,
+    "C0-040": true,
+    "C0-039": true,
+    "C0-033": true
+  },
+  "markdown_docx_parity": {
+    "C0-043": {
+      "pass": true,
+      "markdown_tokens": 7880,
+      "docx_tokens": 7880
+    },
+    "C0-042": {
+      "pass": true,
+      "markdown_tokens": 3034,
+      "docx_tokens": 3034
+    },
+    "C0-041": {
+      "pass": true,
+      "markdown_tokens": 5689,
+      "docx_tokens": 5689
+    },
+    "C0-040": {
+      "pass": true,
+      "markdown_tokens": 10286,
+      "docx_tokens": 10286
+    },
+    "C0-039": {
+      "pass": true,
+      "markdown_tokens": 8665,
+      "docx_tokens": 8665
+    },
+    "C0-033": {
+      "pass": true,
+      "markdown_tokens": 8001,
+      "docx_tokens": 8001
+    }
+  },
+  "lifecycle_language": {
+    "C0-043": true,
+    "C0-042": true,
+    "C0-041": true,
+    "C0-040": true,
+    "C0-039": true,
+    "C0-033": true
+  },
+  "render_evidence": {
+    "C0-043": {
+      "pass": true,
+      "pages": 63
+    },
+    "C0-042": {
+      "pass": true,
+      "pages": 8
+    },
+    "C0-041": {
+      "pass": true,
+      "pages": 36
+    },
+    "C0-040": {
+      "pass": true,
+      "pages": 53
+    },
+    "C0-039": {
+      "pass": true,
+      "pages": 58
+    },
+    "C0-033": {
+      "pass": true,
+      "pages": 33
+    }
+  },
+  "authority": true,
+  "intake_zip_checksum": {
+    "expected": "360ad38e812bd425f5e72fd2f4de06921e18593a24e71c697f3ed55a6846f414",
+    "actual": "360ad38e812bd425f5e72fd2f4de06921e18593a24e71c697f3ed55a6846f414",
+    "pass": true
+  },
+  "visual_qa": {
+    "pages_reviewed": 251,
+    "blank_pages": 0,
+    "report": "docs/canon/reviews/eight_canon_founder_approval_reconciliation_v1_0/render_evidence/DOCX_RENDER_VISUAL_QA.md"
+  },
+  "failures": [],
+  "status": "PASS"
+}

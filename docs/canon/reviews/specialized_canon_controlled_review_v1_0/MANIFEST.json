@@ -1,0 +1,266 @@
+{
+  "package": "EquineSync_Specialized_Canon_Controlled_Review_V1_0",
+  "generated": "2026-07-15",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "disposition": "SPECIALIZED_CANON_CONTROLLED_REVIEW_AUTHORIZED",
+  "artifacts": [
+    {
+      "path": "docs/canon/registries/CANON_ARTIFACT_INVENTORY.md",
+      "sha256": "95d49ed8b26f47ba568de004a179fde1f1910640b4199f0325c6738a87a9c993",
+      "bytes": 10930
+    },
+    {
+      "path": "docs/canon/registries/GOVERNANCE_FINDING_REGISTRY.md",
+      "sha256": "7315d6c4072b3ae4c56551b474b44ede013d20c28c85c55b6d5c06c35cb980ba",
+      "bytes": 14092
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/COMPANION_ARTIFACT_RECONCILIATION.md",
+      "sha256": "2da6f8e57f0f930460c741d5f654cd65b3f915c3d4a981e8c33d289ebb50ce84",
+      "bytes": 1260
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/CROSS_CANON_CONFLICT_AND_DEPENDENCY_MATRIX.md",
+      "sha256": "44c2b31f49bddbfcf40e7368a3edcb642cc84ccc81a6889909b3bfe7e4742b99",
+      "bytes": 3749
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/DRAFTING_WORKSPACE_README.md",
+      "sha256": "4ac914b23dd1ceb5064351a6aa1befe4f78f45ae1370e0d6969482d8df9c5233",
+      "bytes": 827
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/FOUNDER_DECISION_REGISTER.md",
+      "sha256": "1d9b4ce8a85bfe65f045780cf483b1c6aca5fb44afecde23a454892a784b9fd7",
+      "bytes": 8781
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_0_DRAFT.md",
+      "sha256": "6087aa3c6c56e58117937bd226f582ee302a8cc49c78277134fead5ce58834ea",
+      "bytes": 11750
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_0_REVISED_NONCONTROLLING_DRAFT.md",
+      "sha256": "f68d65873599237a65006ea6ce614b427a16e259db132f36c9116b6dec90abfa",
+      "bytes": 23511
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/PRELIMINARY_TRACEABILITY_MATRIX.md",
+      "sha256": "4ab9e2d768d71c60be8d70cb3396e0277cf2ef2615f626b9caecbbf1848cc4ee",
+      "bytes": 2185
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/REQUIREMENT_EXTRACTION_INDEX.md",
+      "sha256": "358b4aa8c534c24ee0097c149621fcd9e1fe1691ec8f1f7182b6396ccb7dc1e2",
+      "bytes": 4595
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/REVISION_CHANGE_LOG.md",
+      "sha256": "3b8336128d4e963812e4ce66715091a876afdf93605e47ec680b010f38dbcef4",
+      "bytes": 1961
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/SECTION_ISSUE_AND_RECOMMENDATION_LEDGER.md",
+      "sha256": "452377df42c00afe80c2eb0ae0a5833292dfc6bbbdacae1bc26d1c106bc718ca",
+      "bytes": 3395
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/SUBSTANTIVE_REVIEW_MEMORANDUM.md",
+      "sha256": "3777552058769cb27f843fceaa6f10510b9dbb40b201c118f0c467e015fd69c0",
+      "bytes": 2807
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/TERMINOLOGY_AND_DEFINITION_RECONCILIATION.md",
+      "sha256": "1f316709828d72f614f4c24c108b9a9946aba5242128b14513603bfeabb78fba",
+      "bytes": 2167
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/UNRESOLVED_QUESTION_REGISTER.md",
+      "sha256": "0217f89e86df5247010d3d4b078887c69c081d54018dd535decfb065750e661c",
+      "bytes": 2000
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/COMPANION_ARTIFACT_RECONCILIATION.md",
+      "sha256": "5c9a5c128a7627fc1c4d40d5f52a9b614d4997c19378a3e0e552abe9557066bb",
+      "bytes": 1213
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/CROSS_CANON_CONFLICT_AND_DEPENDENCY_MATRIX.md",
+      "sha256": "68b8914fe6ad69cba0c8a8c10ae45f3a2510849caf226b3a104f22fd87cb54e9",
+      "bytes": 3623
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/DRAFTING_WORKSPACE_README.md",
+      "sha256": "7e0f8a0b5f88157fd4daa3b41b6be292d7822e0619b6c7b95d7809a78d2aee63",
+      "bytes": 799
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/FOUNDER_DECISION_REGISTER.md",
+      "sha256": "43a61975ad7fd98eb3d0dfd8ab86dd0daee45471929d80bf65a98a2e3a2ea685",
+      "bytes": 7586
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_DELEGATED_ASSISTANCE_CANON_V1_0_DRAFT.md",
+      "sha256": "6269d9d02c67a43f7477553b55857275ab04d92172708ba158e46786f8b87c7b",
+      "bytes": 10867
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_DELEGATED_ASSISTANCE_CANON_V1_0_REVISED_NONCONTROLLING_DRAFT.md",
+      "sha256": "90f2f045c24549986e655a1e6e8adf2714de9c349d66f26e3b2ebcb7356c3af9",
+      "bytes": 20393
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/PRELIMINARY_TRACEABILITY_MATRIX.md",
+      "sha256": "72f6d1a32e8ed19aa869b4d7b48833f7262ff7fa8052644abe93679ab12ed86c",
+      "bytes": 1813
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/REQUIREMENT_EXTRACTION_INDEX.md",
+      "sha256": "a2ea32a237c4cdd1583fd89f61bee1fb812e834063e81b7c8a6902a66063f2c4",
+      "bytes": 3993
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/REVISION_CHANGE_LOG.md",
+      "sha256": "7467103a4e19524c47a2ba42f92772b3ec4eb71627e7e9237379ca5e78ff61a1",
+      "bytes": 1694
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/SECTION_ISSUE_AND_RECOMMENDATION_LEDGER.md",
+      "sha256": "9622f29dd338eebd22541ef2dbd7165b4513b4a97800e672bbd38d6b2a5eb2bb",
+      "bytes": 3440
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/SUBSTANTIVE_REVIEW_MEMORANDUM.md",
+      "sha256": "7d9c884dcab8cffc0ec7c0d467f9eeb562b41a9cd3e6089351b794d732bb08e8",
+      "bytes": 2710
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/TERMINOLOGY_AND_DEFINITION_RECONCILIATION.md",
+      "sha256": "4c1460fbee0856074b909593e340a7a7ebf2ac773523acd6cef62b45d6c3c103",
+      "bytes": 2207
+    },
+    {
+      "path": "docs/canon/reviews/drafting_minor_guardianship_safeguarding_v1_0/UNRESOLVED_QUESTION_REGISTER.md",
+      "sha256": "0824bc79589a34742c5bc03da21957cbc14c12f78e6a7d4661a0440fc0a37d42",
+      "bytes": 1806
+    },
+    {
+      "path": "docs/canon/reviews/specialized_canon_controlled_review_v1_0/CONSOLIDATED_SPECIALIZED_CANON_COMPARISON_REPORT.md",
+      "sha256": "ad1d37b5af55f1e54db66ae4176c56361928146fa967a84fee4980d2981cc710",
+      "bytes": 4108
+    },
+    {
+      "path": "docs/canon/reviews/specialized_canon_controlled_review_v1_0/CONTROLLED_REVIEW_COMPLETION_REPORT.md",
+      "sha256": "fec1d60d42101888d16637f993dcbe732e6d7f5577ecb50e394d1d8a6e724e2b",
+      "bytes": 1521
+    },
+    {
+      "path": "docs/canon/reviews/specialized_canon_controlled_review_v1_0/EXACT_SOURCE_RECOVERY_PROGRESS.md",
+      "sha256": "8fa8eed3005dbc1244e9ca0d9e1a7d50acf0e5f84946487b4a93a20acb706f2b",
+      "bytes": 1094
+    },
+    {
+      "path": "docs/canon/reviews/specialized_canon_controlled_review_v1_0/EXISTING_FOUNDER_DIRECTION_INCORPORATION_LEDGER.md",
+      "sha256": "b4547d62618faa74936698d3beb4dc71c43d446852d80175dd4ecd9cc66b8100",
+      "bytes": 2424
+    },
+    {
+      "path": "docs/canon/reviews/specialized_canon_controlled_review_v1_0/SPECIALIZED_CANON_REVIEW_SUMMARY.json",
+      "sha256": "ce33778f53cf9025337137730d365c9007085f74312d6aea8f37c3031cce087a",
+      "bytes": 2342
+    },
+    {
+      "path": "docs/canon/reviews/specialized_canon_controlled_review_v1_0/VALIDATION_REPORT.md",
+      "sha256": "7fb840107a93436670b4486907cfccded9dd6e1005a757a5262bff7d8ffef906",
+      "bytes": 1689
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/CONTROLLED_REVIEW_INGESTION_CORRECTION_REPORT.md",
+      "sha256": "be49bc88277acc366738af0e88809a4cf11cd955a031a7aa82cb7035af8616e6",
+      "bytes": 6472
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/EXACT_SOURCE_RECOVERY_QUEUE.md",
+      "sha256": "d0417298954c1ab4962101071b4795a2ecae2b041633e89429ad29084257d322",
+      "bytes": 4796
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/OFFLINE_AND_PROGRAM_EVIDENCE_CONSOLIDATION.md",
+      "sha256": "33a425803610630c0e1907940ad411893e62e0287e83da8055ff2c71efcf0e06",
+      "bytes": 3601
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_classification_correction/VALIDATION_REPORT.md",
+      "sha256": "c606acc0b5d47073243c804191622dbf9495da61462393d6fcde0b9f6da9a94b",
+      "bytes": 1675
+    }
+  ],
+  "linked_prior_evidence": {
+    "controlled_ingestion_package": "outputs/controlled_review_classification_correction_evidence.zip",
+    "sha256": "8c408ef40f30b0fc093a4f64cfd05fd290451d18f6c54ecaa4b999e34e07b449"
+  },
+  "findings": {
+    "p0": 0,
+    "p1": 26,
+    "p2": 12
+  },
+  "decisions": {
+    "safeguarding": [
+      "SG-FD01",
+      "SG-FD02",
+      "SG-FD03",
+      "SG-FD04",
+      "SG-FD05",
+      "SG-FD06",
+      "SG-FD07",
+      "SG-FD08",
+      "SG-FD09",
+      "SG-FD10",
+      "SG-FD11",
+      "SG-FD12"
+    ],
+    "equine_health": [
+      "EH-FD01",
+      "EH-FD02",
+      "EH-FD03",
+      "EH-FD04",
+      "EH-FD05",
+      "EH-FD06",
+      "EH-FD07",
+      "EH-FD08",
+      "EH-FD09",
+      "EH-FD10",
+      "EH-FD11",
+      "EH-FD12",
+      "EH-FD13",
+      "EH-FD14"
+    ]
+  },
+  "formal_scans": {
+    "dependency_cycle": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING",
+    "orphan_requirement": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING"
+  },
+  "validation": {
+    "required_artifacts": "20_of_20_passed",
+    "original_draft_preservation": "2_of_2_passed",
+    "founder_decision_ids": "26_unique",
+    "preliminary_requirement_ids": "65_unique",
+    "secret_scan": "passed",
+    "authority_overclaim_scan": "passed",
+    "git_diff_check": "passed"
+  },
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "permission_expansion": false,
+    "provider_activation": false,
+    "runtime": false,
+    "production": false,
+    "onboarding": false,
+    "public_claim": false,
+    "launch": false
+  }
+}

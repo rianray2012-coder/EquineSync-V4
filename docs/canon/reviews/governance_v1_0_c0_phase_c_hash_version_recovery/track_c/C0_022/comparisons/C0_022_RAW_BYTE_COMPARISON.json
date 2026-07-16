@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-022",
+  "current_path": "docs/canon/MASTER_PERMISSION_MODEL.md",
+  "current_sha256": "2034979a0fe77fd89ba065ecf9d309f5897641b6c38c9bde7c69dc8ac06adeab",
+  "expected_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+  "expected_source_recovered": true,
+  "recovered_evidence_path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/recovered_sources/MASTER_PERMISSION_MODEL_V1_1.md",
+  "recovered_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+  "raw_byte_identical": false,
+  "current_size": 45150,
+  "recovered_size": 49176,
+  "normalized_line_similarity": 0.9609845509295627,
+  "heading_similarity": 0.8827586206896552
+}

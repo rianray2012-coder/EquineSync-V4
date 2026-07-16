@@ -1,0 +1,96 @@
+{
+  "disposition": "C0_023_AND_C0_035_LOCK_READINESS_CHECK_COMPLETE_NOT_READY",
+  "files": [
+    {
+      "path": "docs/canon/CANON_INDEX.md",
+      "size_bytes": 28879,
+      "sha256": "cd4f98276a2669051aee5df41ec6e13c37d80b0f826d789df04f73aeeead3844"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_adoption/C0_023_C0_035_FORMAL_ADOPTION_VALIDATION.json",
+      "size_bytes": 3303,
+      "sha256": "332745f618fdc9ee2475413f5d711fec2d12c2cba8f9172c7fa74f1b265ae97d"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_lock_readiness/C0_023_C0_035_DEPENDENCY_SNAPSHOT.json",
+      "size_bytes": 3377,
+      "sha256": "4908fa65a641966ea6c0dd6ef0fbfc6c6858a767430a82626e3de61b66521301"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_lock_readiness/C0_023_C0_035_LOCK_READINESS_FINDINGS.json",
+      "size_bytes": 1962,
+      "sha256": "599b22f661bd5e1a8b3a5e5307a3cff166e1ea50a1c62eea7b9129606a2219ab"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_lock_readiness/C0_023_C0_035_LOCK_READINESS_MASTER_REPORT.md",
+      "size_bytes": 958,
+      "sha256": "fc93211461b5905bb485724ea9890f82df9f570a9bd0cb57969e6dec87758585"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_lock_readiness/C0_023_C0_035_LOCK_READINESS_VALIDATION.json",
+      "size_bytes": 2624,
+      "sha256": "af07a2a0b8769f65790ff0f08bb0e65f4f0859b12bc630f189e64d0c39e00e42"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_lock_readiness/C0_023_LOCK_READINESS_CERTIFICATE.json",
+      "size_bytes": 1039,
+      "sha256": "883c8615865ee8c5df9e3e3a6fda0b8b1ba389bd74e47801ad186237f842cb05"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_lock_readiness/C0_023_PRIVACY_LOCK_READINESS_ASSESSMENT.md",
+      "size_bytes": 1691,
+      "sha256": "61db78be5c6fdfa9424230a91a8fd4d7001532319895cafff13e5f51db18780d"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_lock_readiness/C0_035_LOCK_READINESS_CERTIFICATE.json",
+      "size_bytes": 1059,
+      "sha256": "2f60784f841c2bd59a37d451b74825c0ef33ad2fbe938623bc46a9f864d0215b"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_c0_035_lock_readiness/C0_035_REPORTING_LOCK_READINESS_ASSESSMENT.md",
+      "size_bytes": 1670,
+      "sha256": "22cac222af6b85a5a8e0159fffd681bede11cbca202e4486cbddff2dcf8df60e"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_privacy_v2_0/C0_023_LOCK_READINESS_PREPARATION.md",
+      "size_bytes": 661,
+      "sha256": "949b7db95ef12609c4606c5dc91f2737eae205476c8d46b092e48a86bade22c3"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_023_privacy_v2_0/C0_023_PRIVACY_AND_DATA_PROTECTION_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "size_bytes": 2910,
+      "sha256": "1ba284afda6c02ef5dc1cf4ae3b7b9b963c5aeb223341fe95bc587b411ed9b12"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_035_reporting_v2_0/C0_035_LOCK_READINESS_PREPARATION.md",
+      "size_bytes": 689,
+      "sha256": "c477f3f32d9d313e0255881137d833e4d5484da8954f1523a8f720df64cefb29"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_035_reporting_v2_0/C0_035_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "size_bytes": 3024,
+      "sha256": "0a5b9f223a3b094ce9083d0488b831da8afa38e17b7805392be8c219e3241b6a"
+    },
+    {
+      "path": "docs/canon/companions/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "size_bytes": 52127,
+      "sha256": "f8d9d4c2211d6f04058952faa99e813cddf206bce3dd7e381f2624ede48f82d0"
+    },
+    {
+      "path": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "size_bytes": 123681,
+      "sha256": "9b9a2bde429f3bb88639135bec119537d795138d84e669b5262b83ed886eecfb"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/C0_CURRENT_SOURCE_OF_TRUTH_REGISTER.json",
+      "size_bytes": 71010,
+      "sha256": "a3d23afdc66b8e32c0ea9969a70c1bfecabcc4e58a0a191ea90af7374ff3b639"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_CURRENT_LIFECYCLE_STATE_REGISTER.json",
+      "size_bytes": 69123,
+      "sha256": "cb3f6aabdf58c6c332adba53b3a2540201c5e985de4c41c3434a39dd741d6a0f"
+    }
+  ],
+  "manifest_self_hash_excluded": true
+}

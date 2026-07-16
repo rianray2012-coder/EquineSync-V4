@@ -1,0 +1,84 @@
+{
+  "classification": "NEW_CONTROLLED_REPLACEMENT_ARTIFACT",
+  "generated_at": "2026-07-16T06:08:55Z",
+  "entries": [
+    {
+      "id": "GCR-P2-COMPANION-ADOPTION",
+      "blocking": false,
+      "remedy": "Founder controlled adoption decision for the assembled prospective companion family"
+    },
+    {
+      "id": "GCR-P2-C0-LIFECYCLE-COMPLETION",
+      "blocking": false,
+      "remedy": "Row-specific prospective lifecycle evidence before Governance V1.0 baseline lock"
+    },
+    {
+      "id": "GCR-P2-SPECIALIZED-FAMILY-COVERAGE",
+      "blocking": false,
+      "remedy": "Continue source-linked family decision and requirement expansion without changing authority"
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-001",
+      "blocking": false,
+      "source_path": "docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0_P2_RETENTION_REGISTER.md",
+      "source_sha256": "36f3784ed55329b835b93b26ac482efd37ccf6769e2feac1dc585a591b15aeaa",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-002",
+      "blocking": false,
+      "source_path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_RETAINED_P2_REGISTER.md",
+      "source_sha256": "a53d7b71a1d18cfe79d721b4bccf3acb576f8cef3b3fad47bda4cd92dd957c7c",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-003",
+      "blocking": false,
+      "source_path": "docs/canon/adoptions/safeguarding_v1_2/SAFEGUARDING_V1_2_RETAINED_P2_REGISTER.md",
+      "source_sha256": "6eecee46d899946db2f0dd3f7f221c9fb25279be83ed925f6ab91cdc2f7fb6e0",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-004",
+      "blocking": false,
+      "source_path": "docs/canon/reviews/global_companion_reconciliation_v1_0/phase_g8/GLOBAL_GOVERNANCE_P2_REGISTER.md",
+      "source_sha256": "7cd6c6f9dc117d193717a4dc3cf08e247503754fda3aa34ae021fe9151210dd8",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-005",
+      "blocking": false,
+      "source_path": "docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r6/AI_V2_0_RETAINED_P2_REGISTER.md",
+      "source_sha256": "d6c4acb04fa3ae18307d477241e59daa6ba4c5686b9619e8e6400779ed1e81d0",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-006",
+      "blocking": false,
+      "source_path": "docs/implementation/W1_RF01/W1_RF01_P2_RETENTION_REGISTER.md",
+      "source_sha256": "e9307e839cc6011f445b4dab2261be2da006d3895898016eadb972f25f352872",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-007",
+      "blocking": false,
+      "source_path": "docs/implementation/WAVE_1/MASTER_EQUINESYNC_WAVE_1_P2_RETENTION_REGISTER.md",
+      "source_sha256": "ff08c9fdab5397180d231d39f0dc13eb940e5f4e28f8ea237ea3b4dcf1fc0635",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-008",
+      "blocking": false,
+      "source_path": "docs/implementation/WAVE_2/MASTER_EQUINESYNC_WAVE_2_P2_RETENTION_REGISTER.md",
+      "source_sha256": "da2da20327a16988cf4bf3a02aebd04b12bf26ce2173e0348dcc859799a1fecb",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    },
+    {
+      "id": "FAMILY-P2-SOURCE-009",
+      "blocking": false,
+      "source_path": "docs/implementation/WAVE_2_P2_NATIVE_OFFLINE_SYNC/NATIVE_OFFLINE_SYNC_P2_RETENTION_REGISTER.md",
+      "source_sha256": "d9cb30baad1158f8ee265686c30965834b831c97597ff89e3e7c00876fcdb62e",
+      "remedy": "Retain family-specific disposition and lifecycle; this global index does not close it."
+    }
+  ]
+}

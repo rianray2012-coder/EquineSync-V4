@@ -1,0 +1,28 @@
+{
+  "artifact": "MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0",
+  "version": "2.0",
+  "adoption_date": "2026-07-12",
+  "adoption_decision": "ADOPT_WITH_NONBLOCKING_FOLLOW_UP",
+  "adoption_state": "ADOPTED_WITH_NONBLOCKING_FOLLOW_UP",
+  "lock_state": "ADOPTED_NOT_LOCKED",
+  "adopted_path": "docs/canon/MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0.md",
+  "adopted_sha256": "0cdad90cb5929588ee137e9835f6b499c3651159381960fbfad436dfcd0fa18d",
+  "verified_candidate_path": "docs/canon/candidates/MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0.md",
+  "verified_candidate_sha256": "0cdad90cb5929588ee137e9835f6b499c3651159381960fbfad436dfcd0fa18d",
+  "byte_identical": true,
+  "original_reviewed_source_sha256": "65d2d706c367d92f1452dc64f945cc39984ea03f58d3ca567b4b3dad875dbe3a",
+  "adoption_reviewed_candidate_sha256": "7d35dca4762c247cae23212fa1844ea1ed94ad6731090b588b2fd1a2670d5d72",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "open_p2": 1
+  },
+  "nonblocking_follow_up": "F_EXTERNAL_ADAPTERS-P2-01",
+  "canon_lock_authorized": false,
+  "implementation_authorized": false,
+  "provider_selection_authorized": false,
+  "provider_activation_authorized": false,
+  "secret_activity_authorized": false,
+  "production_mutation_authorized": false,
+  "public_launch_authorized": false
+}

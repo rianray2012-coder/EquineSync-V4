@@ -1,0 +1,401 @@
+{
+  "disposition": "GLOBAL_COMPANION_ARTIFACT_FAMILY_ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+  "adopted_at": "2026-07-16T07:13:38Z",
+  "founder_authority_source": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/source/GLOBAL_COMPANION_ADOPTION_AND_GOVERNANCE_V1_RESUMPTION_DIRECTIVE.txt",
+  "accepted_package_sha256": "5b2a0e0736d40789d9a50f1d6918bdf7a3c1181b224e012137808045e72f380c",
+  "accepted_manifest_sha256": "2a1b0c0dbd4729b8540574dd0a7268256b4ffbb4c3896e2179a04434e4e18d46",
+  "independent_verification": {
+    "package_sha256": "5b2a0e0736d40789d9a50f1d6918bdf7a3c1181b224e012137808045e72f380c",
+    "manifest_sha256": "2a1b0c0dbd4729b8540574dd0a7268256b4ffbb4c3896e2179a04434e4e18d46",
+    "files_verified": 80,
+    "errors": []
+  },
+  "artifact_count": 16,
+  "artifacts": [
+    {
+      "artifact_id": "GCA-001",
+      "canonical_title": "Constitutional Canon Index and Navigator",
+      "filename": "CANON_INDEX.md",
+      "version": "1.0 current",
+      "repository_path": "docs/canon/CANON_INDEX.md",
+      "sha256": "1f86aae4f4a0ac9283df84c1cb4ad566ba51c9ccfe52b9ea5547a10199be7f02",
+      "source_classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "controlling companion",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-002",
+      "canonical_title": "Constitutional Vocabulary and Definitions Index",
+      "filename": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "version": "1.2",
+      "repository_path": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "sha256": "aa8888de9f0e60a5c30dffc5f86838129e44f24c2bc65d98ec940056251155fe",
+      "source_classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "controlling companion",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-003",
+      "canonical_title": "Constitutional Domain Ownership and Boundary Register",
+      "filename": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "version": "1.1",
+      "repository_path": "docs/canon/companions/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "sha256": "6be760d6b5f274097074d16fcee805aea3249b51058d5998abff4235945adc75",
+      "source_classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "controlling companion",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-004",
+      "canonical_title": "Cross-Canon Reference Normalization Register",
+      "filename": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "version": "1.1",
+      "repository_path": "docs/canon/companions/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "sha256": "9a41067be17c667dd70328ac7c7c53bf3029bd478b3f8f9b6fd8964842c06833",
+      "source_classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "controlling companion successor; V1.0 preserved",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-005",
+      "canonical_title": "Constitutional Authority Matrix",
+      "filename": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "version": "1.2",
+      "repository_path": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "sha256": "31102a8f399d51449807f6bb65c9775e931b5796d2602b029e4a0afb634ade7f",
+      "source_classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "controlling companion",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-006",
+      "canonical_title": "Canon Dependency Map",
+      "filename": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "version": "1.2",
+      "repository_path": "docs/canon/companions/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "sha256": "7262277efc185c78b911d85fb6d3b8c2556ebe6f5b3b8b5a97b85a34517fa24c",
+      "source_classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "controlling companion",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-007",
+      "canonical_title": "Founder Decision Register",
+      "filename": "MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.md",
+      "version": "1.0",
+      "repository_path": "docs/canon/companions/MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_V1_0.md",
+      "sha256": "27139695a882f43c370d9a57bbffbfdd1058388f196f5053d4b0180bfccb631b",
+      "source_classification": "NEW_CONTROLLED_REPLACEMENT_ARTIFACT",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "prospective controlling successor",
+      "historical_provenance_exception": true,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-008",
+      "canonical_title": "Governance Requirement Index",
+      "filename": "MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.md",
+      "version": "1.0",
+      "repository_path": "docs/canon/companions/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.md",
+      "sha256": "a52ec0f34e14ea74464bd8e42fb72f71f016d734a720e119d06d7c545625ea86",
+      "source_classification": "NEW_CONTROLLED_REPLACEMENT_ARTIFACT",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "prospective controlling successor",
+      "historical_provenance_exception": true,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-009",
+      "canonical_title": "Requirement Traceability Matrix",
+      "filename": "MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.md",
+      "version": "1.0",
+      "repository_path": "docs/canon/companions/MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_V1_0.md",
+      "sha256": "f8e1d0771cc2fb5da31e68fe22e9bca6897a1c5d211b0098d8c855d6bde7e9c3",
+      "source_classification": "NEW_CONTROLLED_REPLACEMENT_ARTIFACT",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "prospective controlling successor",
+      "historical_provenance_exception": true,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-010",
+      "canonical_title": "Constitutional Cross-Reference Index",
+      "filename": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "version": "1.2",
+      "repository_path": "docs/canon/companions/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "sha256": "6e810af409884936ad25f709d0f482f859765a84a5437625e635b1fcdcc239cb",
+      "source_classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "controlling companion",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-011",
+      "canonical_title": "Constitutional Source-of-Truth Register",
+      "filename": "EQUINESYNC_CONSTITUTIONAL_SOURCE_OF_TRUTH_REGISTER_V1_0.csv",
+      "version": "1.0 historical baseline",
+      "repository_path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_CONSTITUTIONAL_SOURCE_OF_TRUTH_REGISTER_V1_0.csv",
+      "sha256": "fd5923e14eb095b56ecdb3025f85aab529f7576a582c553c420f7655fdd66826",
+      "source_classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "historical baseline with prospective lifecycle successor",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-012",
+      "canonical_title": "Global Adoption State Register",
+      "filename": "GLOBAL_ADOPTION_STATE_REGISTER.md",
+      "version": "1.0",
+      "repository_path": "docs/canon/companions/GLOBAL_ADOPTION_STATE_REGISTER.md",
+      "sha256": "8411135cba325485b0c5a60cacef94ea65775f3e0d4d43b75c76cae31da9cd00",
+      "source_classification": "NEW_CONTROLLED_REPLACEMENT_ARTIFACT",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "prospective controlling successor",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-013",
+      "canonical_title": "Global Lock State Register",
+      "filename": "GLOBAL_LOCK_STATE_REGISTER.md",
+      "version": "1.0",
+      "repository_path": "docs/canon/companions/GLOBAL_LOCK_STATE_REGISTER.md",
+      "sha256": "4ccbb26ba6ad734f9e8a909dff81d814681d40226acb07aca104c97347391eca",
+      "source_classification": "NEW_CONTROLLED_REPLACEMENT_ARTIFACT",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "prospective controlling successor",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-014",
+      "canonical_title": "Global Supersession Register",
+      "filename": "GLOBAL_SUPERSESSION_REGISTER.md",
+      "version": "1.0",
+      "repository_path": "docs/canon/companions/GLOBAL_SUPERSESSION_REGISTER.md",
+      "sha256": "1765b3b14532ee0d6fe54ccc12b6ba9d28ddef4be6707adc5e2a713d0640e052",
+      "source_classification": "NEW_CONTROLLED_REPLACEMENT_ARTIFACT",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "prospective controlling successor",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-015",
+      "canonical_title": "Unresolved Evidence Ledger",
+      "filename": "EQUINESYNC_C0_UNRESOLVED_EVIDENCE_CLASSIFICATION_LEDGER_V1_0.md",
+      "version": "1.0 historical baseline",
+      "repository_path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_C0_UNRESOLVED_EVIDENCE_CLASSIFICATION_LEDGER_V1_0.md",
+      "sha256": "7b2a6a710650092330573ec9347b2df4cf720d7ecedecb0010642be1acef4eb6",
+      "source_classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "historical baseline retained",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    },
+    {
+      "artifact_id": "GCA-016",
+      "canonical_title": "Global Governance P2 Register",
+      "filename": "GLOBAL_GOVERNANCE_P2_REGISTER.md",
+      "version": "1.0",
+      "repository_path": "docs/canon/companions/GLOBAL_GOVERNANCE_P2_REGISTER.md",
+      "sha256": "bbfcb84571ee5e92e29556f708363d262c9a2299fa8af03f0f28b2bf1d71cbec",
+      "source_classification": "NEW_CONTROLLED_REPLACEMENT_ARTIFACT",
+      "authority_classification": "CONTROLLING_GOVERNANCE_COMPANION",
+      "adoption_state": "ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+      "lock_state": "NOT_INDEPENDENTLY_LOCKED",
+      "supersession_relationship": "prospective controlling successor",
+      "historical_provenance_exception": false,
+      "retained_p2_linkage": [
+        "GCR-P2-COMPANION-ADOPTION",
+        "GCR-P2-C0-LIFECYCLE-COMPLETION",
+        "GCR-P2-SPECIALIZED-FAMILY-COVERAGE"
+      ],
+      "implementation_authority": false,
+      "production_authority": false,
+      "public_launch_authority": false
+    }
+  ],
+  "historical_gaps": [
+    {
+      "artifact": "former global Founder Decision Register",
+      "classification": "HISTORICAL_STANDALONE_SOURCE_UNAVAILABLE_PROSPECTIVE_CONTROLLING_SUCCESSOR_ADOPTED",
+      "successor": "GCA-007"
+    },
+    {
+      "artifact": "former 60-row Governance Requirement Index",
+      "classification": "HISTORICAL_STANDALONE_SOURCE_UNAVAILABLE_PROSPECTIVE_CONTROLLING_SUCCESSOR_ADOPTED",
+      "successor": "GCA-008"
+    },
+    {
+      "artifact": "former 60-row Requirement Traceability Matrix",
+      "classification": "HISTORICAL_STANDALONE_SOURCE_UNAVAILABLE_PROSPECTIVE_CONTROLLING_SUCCESSOR_ADOPTED",
+      "successor": "GCA-009"
+    }
+  ],
+  "retained_nonblocking_p2": 3,
+  "governance_authority": {
+    "global_companion_adoption": true,
+    "c0_lifecycle_reconciliation": true,
+    "prospective_lifecycle_remediation_drafting": true,
+    "ai_v2_adoption_and_lock_preserved": true
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

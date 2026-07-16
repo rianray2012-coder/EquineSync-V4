@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-07-16T17:39:32Z",
+  "sources": [
+    {
+      "path": "docs/canon/reviews/c0_004_master_product_vision_lifecycle_completion/source_event/MASTER_PRODUCT_VISION_V2_1_SUCCESSOR_CANDIDATE_ORIGINAL.md",
+      "filename": "MASTER_PRODUCT_VISION_V2_1_SUCCESSOR_CANDIDATE_ORIGINAL.md",
+      "version": "2.1",
+      "status": "exact expected source",
+      "size_bytes": 54956,
+      "sha256": "42f01b4094923d85ab6b7de9c56fc6c084adac4f9b06464554ba2f9e91787953",
+      "provenance": "Founder-attached source matching authenticated C0 manifest hash",
+      "relationship_to_attached_source": "proposed controlling successor"
+    },
+    {
+      "path": "docs/canon/founder_approved_sources/MASTER_PRODUCT_VISION_V2_1_FOUNDER_APPROVED.md",
+      "filename": "MASTER_PRODUCT_VISION_V2_1_FOUNDER_APPROVED.md",
+      "version": "2.1",
+      "status": "founder-approved source pair, pre-adoption",
+      "size_bytes": 55917,
+      "sha256": "ef3f28009d4552c7067f5eef0bcb554521a9feda6228adf63dd3979fb193ca30",
+      "provenance": "Deterministic metadata derivative of exact source",
+      "relationship_to_attached_source": "active lifecycle candidate"
+    },
+    {
+      "path": "docs/canon/MASTER_PRODUCT_VISION.md",
+      "filename": "MASTER_PRODUCT_VISION.md",
+      "version": "2.0",
+      "status": "historical predecessor",
+      "size_bytes": 56480,
+      "sha256": "ba2bdedfbbd89889af02035656d2f738175dcbde3869084c5e0c92062644c469",
+      "provenance": "Repository founder-canon artifact",
+      "relationship_to_attached_source": "superseded predecessor"
+    },
+    {
+      "path": "docs/canon/MASTER_PRODUCT_VISION.pdf",
+      "filename": "MASTER_PRODUCT_VISION.pdf",
+      "version": "2.0",
+      "status": "historical format predecessor",
+      "size_bytes": 195731,
+      "sha256": "a640800847bb762c3ca0daf9a1d128698232878b7976292a1ec29ee637e54192",
+      "provenance": "Repository PDF corresponding to V2.0",
+      "relationship_to_attached_source": "superseded predecessor format"
+    },
+    {
+      "path": "docs/PRODUCT_VISION.md",
+      "filename": "PRODUCT_VISION.md",
+      "version": "unversioned",
+      "status": "noncontrolling product summary",
+      "size_bytes": 3692,
+      "sha256": "680a0b6ea79d545de72170595253bdc09a06c13c5be8fc4f60f815cfa5696b52",
+      "provenance": "Earlier repository product summary",
+      "relationship_to_attached_source": "supporting historical summary"
+    },
+    {
+      "path": "docs/canon/history/master_product_vision_v2_0/MASTER_PRODUCT_VISION_V2_0_HISTORICAL_PREDECESSOR.md",
+      "filename": "MASTER_PRODUCT_VISION_V2_0_HISTORICAL_PREDECESSOR.md",
+      "version": "2.0",
+      "status": "preserved historical predecessor",
+      "size_bytes": 56480,
+      "sha256": "ba2bdedfbbd89889af02035656d2f738175dcbde3869084c5e0c92062644c469",
+      "provenance": "Byte-identical preservation copy",
+      "relationship_to_attached_source": "historical"
+    },
+    {
+      "path": "docs/canon/history/master_product_vision_v2_0/MASTER_PRODUCT_VISION_V2_0_HISTORICAL_PREDECESSOR.pdf",
+      "filename": "MASTER_PRODUCT_VISION_V2_0_HISTORICAL_PREDECESSOR.pdf",
+      "version": "2.0",
+      "status": "preserved historical predecessor",
+      "size_bytes": 195731,
+      "sha256": "a640800847bb762c3ca0daf9a1d128698232878b7976292a1ec29ee637e54192",
+      "provenance": "Byte-identical preservation copy",
+      "relationship_to_attached_source": "historical"
+    }
+  ]
+}

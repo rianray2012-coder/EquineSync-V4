@@ -1,0 +1,80 @@
+{
+  "document": "MASTER_RELATIONSHIP_MODEL_V2_0_FINAL_LOCK_MANIFEST.json",
+  "version": "2.0",
+  "state": "MASTER_RELATIONSHIP_MODEL_V2_0_LOCKED",
+  "generated_at": "2026-07-12T12:41:24Z",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "validation_result": "passed",
+  "artifacts": [
+    {
+      "path": "docs/canon/MASTER_RELATIONSHIP_MODEL.md",
+      "classification": "active_locked_canon",
+      "sha256": "f6715f0a02cad2eb8d8eb140d765b7906052c4d6bf3a5a40372c74c5c1e8ba01"
+    },
+    {
+      "path": "docs/canon/history/MASTER_RELATIONSHIP_MODEL_V1_FINAL_LOCKED.md",
+      "classification": "historical_locked_predecessor",
+      "sha256": "dc59187c60cc86498466d8ca959767b0a9188ea7fcf33440a742c633f1f57e4a"
+    },
+    {
+      "path": "docs/canon/MASTER_RELATIONSHIP_MODEL_V2_0_FINAL_CANDIDATE.md",
+      "classification": "approved_source_candidate",
+      "sha256": "8b818494dbee66f118a7db20265caeeb338ce4a65bf1395b214ee14cbaae10ed"
+    },
+    {
+      "path": "docs/canon/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0.md",
+      "classification": "controlling_cross_canon_source",
+      "sha256": "def33679b38b25ab5bbe0fc5c9c78a4fe8d505533d9c1d91a37035735f283ab4"
+    },
+    {
+      "path": "docs/canon/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1.md",
+      "classification": "controlling_record_canon_source",
+      "sha256": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a"
+    },
+    {
+      "path": "docs/canon/CANON_INDEX.md",
+      "classification": "activated_canon_index",
+      "sha256": "dceb06dc2b9466d6b43240fc275d23c6d8b3f9c2a494b1194be3c7d1042fe3cc"
+    },
+    {
+      "path": "docs/ATLAS2/CRITICAL_WORKFLOW_FIX_PLAN.md",
+      "classification": "rf31_rf32_dependency_record",
+      "sha256": "9a0fff63321e691398712c9b3a0fb87cca6192502aaa8cc81227ad1d9a6bf6c3"
+    },
+    {
+      "path": "docs/ATLAS5/ATLAS5_CONTROLLED_INTAKE_REPORT.md",
+      "classification": "atlas5_dependency_record",
+      "sha256": "4eecfa35deedcb4c15383bf39f7f4c542672b27d8e94e0ca6cdbd76136257fde"
+    },
+    {
+      "path": "docs/ATLAS5/ATLAS5_PROPOSED_DOCUMENT_CORRECTIONS.md",
+      "classification": "atlas5_planning_cross_reference",
+      "sha256": "163c176f0055d202add7a65ab549809e980a42b97fb5ef40e7b435a21ff8ab24"
+    },
+    {
+      "path": "docs/canon/MASTER_RELATIONSHIP_MODEL_V2_0_PRESERVATION_MATRIX.md",
+      "classification": "preservation_evidence",
+      "sha256": "8868fc1d58aa78176852f21a69b09a96c8e618c81663c94315419cb860997622"
+    },
+    {
+      "path": "docs/canon/MASTER_RELATIONSHIP_MODEL_V2_0_CORRECTION_TRACE.md",
+      "classification": "correction_evidence",
+      "sha256": "797ba1a6fa259a92820a2dc604c8993658deca7f147ecfdffa0c56d24149f931"
+    }
+  ],
+  "excluded_self_referential_artifacts": [
+    "docs/canon/MASTER_RELATIONSHIP_MODEL_V2_0_FINAL_LOCK_REPORT.md",
+    "outputs/master_relationship_model_v2_founder_approval.json"
+  ],
+  "exclusion_reason": "The final report and approval record embed this manifest checksum and are validated separately to avoid recursive hashing.",
+  "authorizations": {
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "production_mutation": false,
+    "permission_change": false,
+    "passport_or_care_circle_change": false,
+    "external_service_activation": false,
+    "rf31_rf36_execution": false
+  }
+}

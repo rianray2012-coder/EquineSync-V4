@@ -1,0 +1,89 @@
+{
+  "generated_at": "2026-07-16T07:34:35Z",
+  "branch": "integrate-emergent-final-zip",
+  "commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "dirty_entry_count": 232,
+  "ledger_path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_ROW_BY_ROW_LIFECYCLE_RESOLUTION_LEDGER.md",
+  "ledger_sha256": "36145a7e1de6046f508116ea7939d7a81cac5adb25dc09088e36e22ad90d1e22",
+  "ledger_verified": true,
+  "directive_path": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/source/C0_LIFECYCLE_COMPLETION_BATCH_1_FOUNDER_DIRECTIVE.md",
+  "directive_sha256": "17f5f518eec7dbae600674a2b278cce1cc4f6c9c385462496c189a1c91c4af63",
+  "source_checks": [
+    {
+      "row_id": "C0-020",
+      "path": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+      "expected_sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+      "actual_sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+      "verified": true
+    },
+    {
+      "row_id": "C0-037",
+      "path": "docs/canon/adopted_sources/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md",
+      "expected_sha256": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+      "actual_sha256": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+      "verified": true
+    },
+    {
+      "row_id": "C0-025",
+      "path": "docs/canon/candidates/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0.md",
+      "expected_sha256": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+      "actual_sha256": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+      "verified": true
+    },
+    {
+      "row_id": "C0-026",
+      "path": "docs/canon/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1.md",
+      "expected_sha256": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+      "actual_sha256": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+      "verified": true
+    },
+    {
+      "row_id": "C0-027",
+      "path": "docs/canon/candidates/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "expected_sha256": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+      "actual_sha256": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+      "verified": true
+    },
+    {
+      "row_id": "C0-029",
+      "path": "docs/canon/candidates/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "expected_sha256": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+      "actual_sha256": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+      "verified": true
+    },
+    {
+      "row_id": "C0-030",
+      "path": "docs/canon/candidates/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0.md",
+      "expected_sha256": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+      "actual_sha256": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+      "verified": true
+    },
+    {
+      "row_id": "C0-031",
+      "path": "docs/canon/candidates/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0.md",
+      "expected_sha256": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+      "actual_sha256": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+      "verified": true
+    },
+    {
+      "row_id": "C0-032",
+      "path": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1.md",
+      "expected_sha256": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+      "actual_sha256": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+      "verified": true
+    }
+  ],
+  "unrelated_work_preserved": true,
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

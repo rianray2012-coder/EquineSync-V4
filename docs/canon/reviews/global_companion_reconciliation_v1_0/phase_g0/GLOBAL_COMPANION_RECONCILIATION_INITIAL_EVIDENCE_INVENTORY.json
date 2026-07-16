@@ -1,0 +1,172 @@
+{
+  "generated_at": "2026-07-16T06:08:55Z",
+  "branch": "integrate-emergent-final-zip",
+  "commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "items": [
+    {
+      "path": "docs/canon/CANON_INDEX.md",
+      "exists": true,
+      "bytes": 24362,
+      "sha256": "2df377ef5192592d0c75deb816c31efc966c3f97849db9fdb4b7506556e65d77",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority": "controlled repository index",
+      "adoption_state": "not separately adopted",
+      "lock_state": "not separately locked",
+      "target": "Constitutional Canon Index and Navigator"
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "exists": true,
+      "bytes": 76161,
+      "sha256": "aa8888de9f0e60a5c30dffc5f86838129e44f24c2bc65d98ec940056251155fe",
+      "classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority": "founder-review integration source",
+      "adoption_state": "not established",
+      "lock_state": "not established",
+      "target": "Constitutional Vocabulary and Definitions Index"
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "exists": true,
+      "bytes": 9190,
+      "sha256": "6be760d6b5f274097074d16fcee805aea3249b51058d5998abff4235945adc75",
+      "classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority": "controlled integration source",
+      "adoption_state": "not established",
+      "lock_state": "not established",
+      "target": "Constitutional Domain Ownership and Boundary Register"
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/source/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_0.md",
+      "exists": true,
+      "bytes": 4223,
+      "sha256": "b4a58b2071c7dcd216ad811ff8b36ae97e0e73e80e5cbf06e7ffdf4e87cd5bfe",
+      "classification": "EXACT_MOUNTED_SOURCE_VERIFIED",
+      "authority": "founder-accepted support artifact",
+      "adoption_state": "not established",
+      "lock_state": "not established",
+      "target": "Cross-Canon Reference Normalization Register V1.0"
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "exists": true,
+      "bytes": 5558,
+      "sha256": "9a41067be17c667dd70328ac7c7c53bf3029bd478b3f8f9b6fd8964842c06833",
+      "classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority": "controlled integration candidate",
+      "adoption_state": "not adopted",
+      "lock_state": "not locked",
+      "target": "Cross-Canon Reference Normalization Register V1.1"
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "exists": true,
+      "bytes": 122226,
+      "sha256": "31102a8f399d51449807f6bb65c9775e931b5796d2602b029e4a0afb634ade7f",
+      "classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority": "controlled integration candidate",
+      "adoption_state": "not adopted",
+      "lock_state": "not locked",
+      "target": "Constitutional Authority Matrix"
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "exists": true,
+      "bytes": 50571,
+      "sha256": "7262277efc185c78b911d85fb6d3b8c2556ebe6f5b3b8b5a97b85a34517fa24c",
+      "classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority": "controlled integration candidate",
+      "adoption_state": "not adopted",
+      "lock_state": "not locked",
+      "target": "Canon Dependency Map"
+    },
+    {
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "exists": true,
+      "bytes": 118290,
+      "sha256": "6e810af409884936ad25f709d0f482f859765a84a5437625e635b1fcdcc239cb",
+      "classification": "EXACT_CHECKSUM_BEARING_PACKAGE_SOURCE",
+      "authority": "controlled integration candidate",
+      "adoption_state": "not adopted",
+      "lock_state": "not locked",
+      "target": "Constitutional Cross-Reference Index"
+    },
+    {
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_CONSTITUTIONAL_SOURCE_OF_TRUTH_REGISTER_V1_0.csv",
+      "exists": true,
+      "bytes": 29771,
+      "sha256": "fd5923e14eb095b56ecdb3025f85aab529f7576a582c553c420f7655fdd66826",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority": "founder-approved C0 baseline",
+      "adoption_state": "not adopted",
+      "lock_state": "not locked",
+      "target": "Constitutional Source-of-Truth Register"
+    },
+    {
+      "path": "docs/canon/registries/CANON_STATE_AND_LOCK_REGISTRY.md",
+      "exists": true,
+      "bytes": 4191,
+      "sha256": "0588986eb310d87095010d6419df6a035271fc87721f470e8af3a8e72babe7a4",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority": "controlled registry",
+      "adoption_state": "not separately adopted",
+      "lock_state": "not separately locked",
+      "target": "Adoption State Register"
+    },
+    {
+      "path": "docs/canon/registries/CANON_LOCK_LEDGER.md",
+      "exists": true,
+      "bytes": 3313,
+      "sha256": "5374b960109e532c584c0dba398995a3dcdac8f838164eb3393fba2465c0d797",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority": "controlled lock ledger",
+      "adoption_state": "not separately adopted",
+      "lock_state": "not separately locked",
+      "target": "Lock Register"
+    },
+    {
+      "path": "docs/canon/CANON_HISTORICAL_PROVENANCE_EXCEPTION_LEDGER.md",
+      "exists": true,
+      "bytes": 6516,
+      "sha256": "4e4c1cbc42539b4e721675f6f7c39f9ed1483389f2c38fa61e647836d7a686e0",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority": "founder-accepted permanent exception control",
+      "adoption_state": "not separately adopted",
+      "lock_state": "not separately locked",
+      "target": "Historical Provenance and Supersession Evidence"
+    },
+    {
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_C0_UNRESOLVED_EVIDENCE_CLASSIFICATION_LEDGER_V1_0.md",
+      "exists": true,
+      "bytes": 10299,
+      "sha256": "7b2a6a710650092330573ec9347b2df4cf720d7ecedecb0010642be1acef4eb6",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority": "founder-approved C0 baseline",
+      "adoption_state": "not adopted",
+      "lock_state": "not locked",
+      "target": "Unresolved Evidence Ledger"
+    },
+    {
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/source/GLOBAL_COMPANION_RECONCILIATION_FOUNDER_DIRECTIVE.txt",
+      "exists": true,
+      "bytes": 16171,
+      "sha256": "7a12bf6dc13290551a39dc8214ed326bb282ef8fb9e91a203f7b33dfd5a4a1fd",
+      "classification": "EXACT_MOUNTED_SOURCE_VERIFIED",
+      "authority": "founder directive",
+      "adoption_state": "not applicable",
+      "lock_state": "not applicable",
+      "target": "Current founder directive"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r7/AI_V2_0_FINAL_LOCK_CERTIFICATE.json",
+      "exists": true,
+      "bytes": 1031,
+      "sha256": "ada602ea82dd73afadd3c9d7422a3e2929f7b075e2366368940422d49c0fa3a1",
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "authority": "AI lock certificate",
+      "adoption_state": "adopted",
+      "lock_state": "locked",
+      "target": "AI V2.0 lock evidence"
+    }
+  ]
+}

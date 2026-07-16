@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-016",
+  "current_path": "docs/canon/MASTER_BUSINESS_LIFECYCLE.md",
+  "current_sha256": "063339ec8b8aab20908742675013692de2dbb56f018939bac71371b8366d2466",
+  "expected_sha256": "cd66ca4fcfdcc188ce5d6a44239ad52541c8a0be0c571d935405f64af6b72085",
+  "expected_source_recovered": false,
+  "recovered_evidence_path": null,
+  "recovered_sha256": null,
+  "raw_byte_identical": false,
+  "current_size": 47312,
+  "recovered_size": null,
+  "normalized_line_similarity": null,
+  "heading_similarity": null
+}

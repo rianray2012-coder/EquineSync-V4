@@ -1,0 +1,25 @@
+{
+  "package": "outputs/governance_v1_0_c0_023_c0_035_adoption/GOVERNANCE_V1_0_C0_023_C0_035_CONSTITUTIONAL_ADOPTION_EVIDENCE_PACKAGE.zip",
+  "sha256": "32ef54edb2f5ab1a65e790854b85b3b50bb415a9adcdedc9c7eb476c4d9921cc",
+  "size_bytes": 22793165,
+  "archive_extraction_validation": "PASS",
+  "manifest_entry_validation": "PASS",
+  "file_count": 99,
+  "constitutional_lock": false,
+  "authority": {
+    "constitutional_lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "migration": false,
+    "runtime": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "customer_data_processing": false,
+    "public_launch": false,
+    "certification": false,
+    "public_trust_claims": false
+  }
+}

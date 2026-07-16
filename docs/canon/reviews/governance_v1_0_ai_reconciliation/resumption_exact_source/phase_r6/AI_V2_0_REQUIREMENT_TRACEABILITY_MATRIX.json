@@ -1,0 +1,2044 @@
+{
+  "classification": "AI_V2_0_BIDIRECTIONAL_REQUIREMENT_TRACEABILITY_MATRIX",
+  "source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+  "requirements": [
+    {
+      "requirement_id": "AI-REQ-S001",
+      "source_locator": "Section 1",
+      "decision_ids": [],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "4c3788a7c575d05cfd795f05ea9106b696d0540714ec3700ea82bcc833428603",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S002",
+      "source_locator": "Section 2",
+      "decision_ids": [],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "0384be32b9c2f02d7cd62abd9230c51416f8239bcbf8a0cedb95a7fac19c24d1",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S003",
+      "source_locator": "Section 3",
+      "decision_ids": [],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "2a52129fdf4cadcfe48411e95231e91bd9ec7e23de80d8d75eca275e985072c7",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S004",
+      "source_locator": "Section 4",
+      "decision_ids": [],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "34ef6172875326f7c482db43acf893401b8a781c780b9f838010794aaa1b5fe6",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S005",
+      "source_locator": "Section 5",
+      "decision_ids": [
+        "AI-FD01"
+      ],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "b111f2b027aa20cdbb715b09163be2d24fbc15efe6a66fbe3d3348a66380ed20",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S006",
+      "source_locator": "Section 6",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "9e01b1b64f9fadd880d2f66e6d9c0eb705ffae09abc610d0fb9ee90c09286bf9",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S007",
+      "source_locator": "Section 7",
+      "decision_ids": [],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "9c98336ba950dea8864a80629baea40bdfbb4a8aac0827aab5030ff52050dda8",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S008",
+      "source_locator": "Section 8",
+      "decision_ids": [],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "a7377f95a018b9f3d7534624ff0b1386ba6c14807ed4b881fab51ed27fdc6767",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S009",
+      "source_locator": "Section 9",
+      "decision_ids": [
+        "AI-FD06"
+      ],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "7aac850bbbbdb81338f06dd0c0c1ab5bc52b81b24a91746da7bda1dc66391d51",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S010",
+      "source_locator": "Section 10",
+      "decision_ids": [],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "1c6811bec6dcedc7866e0be8eec83109871dca215bc59eb7216f670b940123d2",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S011",
+      "source_locator": "Section 11",
+      "decision_ids": [],
+      "authority_owner": "AI Governance and Founder constitutional authority",
+      "cross_canon_dependencies": [
+        "Product Vision",
+        "Ecosystem",
+        "Permission"
+      ],
+      "source_text_sha256": "6ed6606f933a9de88819df76f5ee9ef9cbb043079ca133d97bdc8f0a2a1b429c",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S012",
+      "source_locator": "Section 12",
+      "decision_ids": [
+        "AI-FD07"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "95a16524bcdd46e4d0e108a0b2d1aac904345d60c615e6c5db6233e664ce60cc",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S013",
+      "source_locator": "Section 13",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD07"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "f935100329c3e3651081b2b9e33e6bcbc228a23c6bd6d54b24cd9bfc05597ee0",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S014",
+      "source_locator": "Section 14",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD07"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "623155aaee2722a0a613fa743f0c37996423092f880543293a4f2fa6f9f7837f",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S015",
+      "source_locator": "Section 15",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD07"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "334f0ccf737bae6a419781972eedbfa5af2e5937cca8fbc908a5963578402053",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S016",
+      "source_locator": "Section 16",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD07"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "373be45dde46fb4e83ca1946f5c65fef0d007f24f6950ee872ca7b9c9a21f52c",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S017",
+      "source_locator": "Section 17",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD07"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "a5bc00df228e312609e0ca14724e3943cabbca0a90edb3fc556cd3abd6b14245",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S018",
+      "source_locator": "Section 18",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD04"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "85986aae6a90a86ebc7b88f81d42401db93225afc296ce33a7466a06b6f9e08b",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S019",
+      "source_locator": "Section 19",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD03",
+        "AI-FD04"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "696121fe669a948c29577173f818a552e9a0afe171e95a38feadfe78bab28a34",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S020",
+      "source_locator": "Section 20",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD04"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "75d1d24ad2dbdd6343f72c540c3f035eb14e8da81710e89b010f5ebeb1ccbfd5",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S021",
+      "source_locator": "Section 21",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "beb827d3ef8d4d09c8a1092f2babfbfc7c1f8635b381109a2a12341479cf947d",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S022",
+      "source_locator": "Section 22",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "70c4e6f63b986048f0830014b133907189e1fd5cfed5d210c03c05975ff2d33b",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S023",
+      "source_locator": "Section 23",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "60eb56f1224a187d56aa5f8ff0a8ad456424542df74d8820572ba9ad6a6a302e",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S024",
+      "source_locator": "Section 24",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD04",
+        "AI-FD09"
+      ],
+      "authority_owner": "AI Governance with controlling domain and human authority",
+      "cross_canon_dependencies": [
+        "Identity",
+        "Relationship",
+        "Permission",
+        "Applicable domain canon"
+      ],
+      "source_text_sha256": "8b8f594bd6e310661abbe2bad1fd8ec334cdf00b35c28f1dc8d692d979f894ea",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S025",
+      "source_locator": "Section 25",
+      "decision_ids": [
+        "AI-FD05"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "1b20866e2f92995232440200ec17229fcdb45ac737533046f560c2ceffdb3e9d",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S026",
+      "source_locator": "Section 26",
+      "decision_ids": [
+        "AI-FD05"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "349e568205262704cc7181f54d5f4e35d6094676850b96104726efc09df10517",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S027",
+      "source_locator": "Section 27",
+      "decision_ids": [
+        "AI-FD05"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "d8385e4b5ce1db131fbb7d2af478a20ec305296613bb84879585824adb9ff99a",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S028",
+      "source_locator": "Section 28",
+      "decision_ids": [
+        "AI-FD05"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "ba8328b3b0da28ad6b9118145a59a196a955d952c32d2a0f865a43bb3cd3acac",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S029",
+      "source_locator": "Section 29",
+      "decision_ids": [
+        "AI-FD06"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "6765d2511d74cc336a633d2eeaa9d3547d6ca07723b5c9bdff0386707df14cd8",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S030",
+      "source_locator": "Section 30",
+      "decision_ids": [
+        "AI-FD06"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "03184559b53bf02db33d34385633d7fb0dbc15084864fa6aa07b7297da6fcb23",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S031",
+      "source_locator": "Section 31",
+      "decision_ids": [
+        "AI-FD10"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "d9ae5d37b2a26e5868366f6ec3c906860f1a6f9195c083b04472fbca3f5f8fcf",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S032",
+      "source_locator": "Section 32",
+      "decision_ids": [
+        "AI-FD05",
+        "AI-FD11"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "ff8a9f5283ed9faad8e6b21e3a8ffb417d3246344d061e16b42b49a68e72eacd",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S033",
+      "source_locator": "Section 33",
+      "decision_ids": [
+        "AI-FD11"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "ea438115461ab7db131631f561852705f31a225cdc29d83bae33dacdb962e6cd",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S034",
+      "source_locator": "Section 34",
+      "decision_ids": [
+        "AI-FD11"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "40a4955933e819cc9fd60549fca5a5cd35f14c3f5d9fe479a1f1b0245990751e",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S035",
+      "source_locator": "Section 35",
+      "decision_ids": [],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "a5017805c9b41138cba628a92e27caf10b3a1d00acee2fa07537e69a6715ac75",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S036",
+      "source_locator": "Section 36",
+      "decision_ids": [
+        "AI-FD06"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "d31bc9a2118dd1c7c24c20e4af5fa2097046c85c2b0c14ecdd79a21dc742ab34",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S037",
+      "source_locator": "Section 37",
+      "decision_ids": [
+        "AI-FD06"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "2bda0ab9fb45b36d38f0f94fa9d1130b806624938f849df3073cb5c2894f690a",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S038",
+      "source_locator": "Section 38",
+      "decision_ids": [
+        "AI-FD11"
+      ],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "dd7a145736ef6b34f2dc2dc3af8c90da20ccfe2c21b58806e17c2e7ba340e505",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S039",
+      "source_locator": "Section 39",
+      "decision_ids": [],
+      "authority_owner": "Record Stewardship, Privacy, Permission, and AI Governance",
+      "cross_canon_dependencies": [
+        "Record Stewardship",
+        "Privacy",
+        "Permission",
+        "Security",
+        "External Architecture"
+      ],
+      "source_text_sha256": "bacef4dfb9b413620f6a874d8929c2065c8386a0b597b84ddcabec03b9f6c919",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S040",
+      "source_locator": "Section 40",
+      "decision_ids": [
+        "AI-FD08"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "e76a2d27c33e4eed26cbfd7a8e74f02aad6396f27f062a5971636c77111b135e",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S041",
+      "source_locator": "Section 41",
+      "decision_ids": [
+        "AI-FD08",
+        "AI-FD10"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "a9bc113bb995a873f51a8ddeeb0aa8a5aff3cf8e288cc4b515a5f8081f144bca",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S042",
+      "source_locator": "Section 42",
+      "decision_ids": [
+        "AI-FD08"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "b6f07fe1d60985bed1e665953688ce3cf5ada98684ae7473c3a11bf97e17d5fa",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S043",
+      "source_locator": "Section 43",
+      "decision_ids": [
+        "AI-FD08",
+        "AI-FD09"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "c52f7d762d411e9c5b0cd6b8e2e7739e0d5b66894b4e52aed5467e79a2629e08",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S044",
+      "source_locator": "Section 44",
+      "decision_ids": [
+        "AI-FD08"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "a3d0991b9813f25acc2f1e534bd797440b21a5a1f230d0ee8a50b46d7baf031c",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S045",
+      "source_locator": "Section 45",
+      "decision_ids": [
+        "AI-FD09"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "e4e48e29eec70d121cc58bbfcdd2cf9c7a9869a022eff8dfacf28c48c6ca01f3",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S046",
+      "source_locator": "Section 46",
+      "decision_ids": [
+        "AI-FD09"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "7d474dcedfe67c289a5a1cc635274345423f07e9fef9165185d46ba01626890d",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S047",
+      "source_locator": "Section 47",
+      "decision_ids": [
+        "AI-FD08"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "2adaf4cb65cc0ec72bd682e6a97984488dffb32a1a5f250297e48ab418b3c372",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S048",
+      "source_locator": "Section 48",
+      "decision_ids": [
+        "AI-FD10"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "3c81e0083689d5274bbdb7c227043f5191107521661bb39302aed015894b63b0",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S049",
+      "source_locator": "Section 49",
+      "decision_ids": [
+        "AI-FD10"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "82a46be2dd0410506ebcbfb0356f8fa336db1be7b2231c4e9c8922b3dd478361",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S050",
+      "source_locator": "Section 50",
+      "decision_ids": [
+        "AI-FD08"
+      ],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "66f02e63955cf4b2ad2759bc83ce7b6e8175270e9c0a39e3cb1bb786f8871d15",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S051",
+      "source_locator": "Section 51",
+      "decision_ids": [],
+      "authority_owner": "Audit, Records, Communications, and AI Governance",
+      "cross_canon_dependencies": [
+        "Audit",
+        "Records",
+        "Communications",
+        "Claims",
+        "Permission"
+      ],
+      "source_text_sha256": "e83d68a7edbf0642cf086d07b3674b23cc26450aeeb323544d5f3ee82055bb7b",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S052",
+      "source_locator": "Section 52",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD12"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "81721ddebc5f7e91a8826a99916db0d1ebf237ca01373ae168d6ce125d5f5cee",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S053",
+      "source_locator": "Section 53",
+      "decision_ids": [
+        "AI-FD01"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "7f309f4eaa100e26ae7a283994f812f5a4424246d95bc425629634cf6dded533",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S054",
+      "source_locator": "Section 54",
+      "decision_ids": [
+        "AI-FD01"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "a740b5c727d08c0d9a302c5b413a62b061693a7a3b2e8e126555128130434882",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S055",
+      "source_locator": "Section 55",
+      "decision_ids": [
+        "AI-FD01"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "42a1d28f877648bb6a7442a1f2bbdbec8e10d76bf3b64d33e47ca3eb144dfa3d",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S056",
+      "source_locator": "Section 56",
+      "decision_ids": [
+        "AI-FD01"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "84697f0a2b6fb59744d21cb74fb2f870924b05af27c03516d0d5c20e45ced64d",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S057",
+      "source_locator": "Section 57",
+      "decision_ids": [
+        "AI-FD01"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "b4e2bd51e75d7d3775450a159b7c50708b3dd56d6233e60e9db053e8ce12df3f",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S058",
+      "source_locator": "Section 58",
+      "decision_ids": [
+        "AI-FD01"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "dd6acc872102a08b4c9e2816df884d900d3ddacfc24c2d985577863411e2ea46",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S059",
+      "source_locator": "Section 59",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "ceb93a9415714a788c1324277c47bf922fa91707a3f54489cd2442d75181b958",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S060",
+      "source_locator": "Section 60",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "68fcf8b9fd944d1d3ea73b4666c77a1c8c8b1d2b2b98b4263fda7f35defdc7d0",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S061",
+      "source_locator": "Section 61",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "e7c9eb26068890c97df82c7ff912205ba4d3a2a57ea7b71d8c93a319b551bef0",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S062",
+      "source_locator": "Section 62",
+      "decision_ids": [
+        "AI-FD03",
+        "AI-FD04",
+        "AI-FD11"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "dbaddddcc081b4acd2dbe37cf0eb0b47c7bf0585e77f790309f328e7df309c09",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S063",
+      "source_locator": "Section 63",
+      "decision_ids": [
+        "AI-FD03",
+        "AI-FD04",
+        "AI-FD11"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "418f63107ad659fd102061c60e6f31206389ea05df0c40a77147bb309bb4adda",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S064",
+      "source_locator": "Section 64",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "93b24809c5abe150fd2808b7090e81db83109d805e60c2d6db2c846d6f44c607",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S065",
+      "source_locator": "Section 65",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "9dc76324ec96295c92819d34aee8adefdf3c2308c2ff98e00ff0b1399ba827b4",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S066",
+      "source_locator": "Section 66",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD12"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "2345d27286adec98f0252ad4983ce1e7e496bbff279d1eed9ed858a255ba0ac8",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S067",
+      "source_locator": "Section 67",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD12"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "efb65c658220017df64229ed73836d7e44e072ed92942648e1d3324c49e2d6c6",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S068",
+      "source_locator": "Section 68",
+      "decision_ids": [
+        "AI-FD01"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "d16a25518db3dd32e7f7751d6bfdcd004cd990037e30b7bf95d8c687e0dfb58c",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S069",
+      "source_locator": "Section 69",
+      "decision_ids": [
+        "AI-FD03"
+      ],
+      "authority_owner": "Applicable domain authority with AI Governance",
+      "cross_canon_dependencies": [
+        "Applicable domain canon",
+        "Financial Truth",
+        "Equine Health",
+        "Safeguarding",
+        "Permission"
+      ],
+      "source_text_sha256": "38ce10760b5e7011d91261b1e13245414dd19ac24fd3109fef06031bb42baae4",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S070",
+      "source_locator": "Section 70",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "9bfab5151b40ecb05a5b518ec1c296ec3bc7c34d80483ee864c30ec093b2f8c1",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S071",
+      "source_locator": "Section 71",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "51d7c6b3153fed9c7ab3eed170782bb44b41c7bf66a93a2d64fc5a849ff9d37c",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S072",
+      "source_locator": "Section 72",
+      "decision_ids": [
+        "AI-FD06"
+      ],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "5404bbd5df6430a2918d160e69c497219b7eb32831fd9e1a81f82b8a755180fd",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S073",
+      "source_locator": "Section 73",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "18fda16785f1f87c3b0fb81fac41ee95ea02b6d62383a54083d0e2e7f0cc7597",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S074",
+      "source_locator": "Section 74",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "1274b3d8364f230f1fe1f018a416555a09d8f6e4c60de6952e5a055f60ccd0d7",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S075",
+      "source_locator": "Section 75",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "9c21d8b37764b370324c83e71740c7c9e4d3d63491ccd698c151b2710c3e384f",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S076",
+      "source_locator": "Section 76",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "0a7d48c26db26a734b208ad6f04e87c2af481e196260583e6bc65133c64b8db0",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S077",
+      "source_locator": "Section 77",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "cf86941c1348cd8378acd7d1696eb0ea2765161360cdab1679077a0ac1adae8e",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S078",
+      "source_locator": "Section 78",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "c2c055bd7c0deebea5ecc79d2b30ce66eeea96571e02bfc750ef313205475ff6",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S079",
+      "source_locator": "Section 79",
+      "decision_ids": [
+        "AI-FD02"
+      ],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "888505128ddb3b98d8f52a440ea11f5f009d1488a204ca465a29d01513ce596f",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S080",
+      "source_locator": "Section 80",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "3bb07322d01b6200a462c0e69c61452cf86003355c133ea94b64c8c8798b6721",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S081",
+      "source_locator": "Section 81",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "04289e342940586779e81e02955e3eed73a04a7ff517236e265d235bf1226db6",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S082",
+      "source_locator": "Section 82",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "03a3bf9eb82fdd5b0c2815b6d383419a2f490d46bc3e7385b20fe9e5b989934c",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S083",
+      "source_locator": "Section 83",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "6d5559359cafc0fb346d8ddd7985ef6656b013dab906f06b037484e1b3dbc3c2",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S084",
+      "source_locator": "Section 84",
+      "decision_ids": [
+        "AI-FD06"
+      ],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "64e429abd45fdbba7c4c086f1a0261048ac8f63bb2d41291d35994f076af3438",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S085",
+      "source_locator": "Section 85",
+      "decision_ids": [
+        "AI-FD06"
+      ],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "501f552bb87d4a143b5aa565f69012a6f12fdae3f016d7c8656dbf1f7cecf671",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S086",
+      "source_locator": "Section 86",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "ea046290f35540ea9a082e0d8fa3576ac883b01adf05c7ba41c691cee6e78800",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S087",
+      "source_locator": "Section 87",
+      "decision_ids": [
+        "AI-FD10"
+      ],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "7b47b9aef2bb3c274aa6fd0275a501541203f97701562024f046b160126e9d78",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S088",
+      "source_locator": "Section 88",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "1793d9f49b99643f28e703700f64d77abfe8f562ec55d24b1940d4e49727fb11",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S089",
+      "source_locator": "Section 89",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "956347dff18265b375e349769a4730aeca25ec037ed5b6371464c5344c13151f",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S090",
+      "source_locator": "Section 90",
+      "decision_ids": [],
+      "authority_owner": "AI Governance, Audit, Security, and Platform Operations",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "c2abc217f1e2146c007bc82762857f292f82678ea27df8a363d2bd64b30c92f4",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S091",
+      "source_locator": "Section 91",
+      "decision_ids": [],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "2748bb1859d582ea57152f9769993df6123e99bcee30542805a0ae98082da6a7",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S092",
+      "source_locator": "Section 92",
+      "decision_ids": [
+        "AI-FD12"
+      ],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "ef70e3e0c3868db811ddd8743f3120bae038b7e297c6131245c7820ec02233ac",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S093",
+      "source_locator": "Section 93",
+      "decision_ids": [
+        "AI-FD12"
+      ],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "e6b654860c95ab52434e28711938636b6eb2aec3b9650e5445d7e2719027c65e",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S094",
+      "source_locator": "Section 94",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD02",
+        "AI-FD03",
+        "AI-FD04",
+        "AI-FD05",
+        "AI-FD06",
+        "AI-FD07",
+        "AI-FD08",
+        "AI-FD09",
+        "AI-FD10",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "e5be38b7b202cbb4f8f738f7ef4e1ca4dc8aee03810aae914acbf5b0f21a3f48",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S095",
+      "source_locator": "Section 95",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD02",
+        "AI-FD03",
+        "AI-FD04",
+        "AI-FD05",
+        "AI-FD06",
+        "AI-FD07",
+        "AI-FD08",
+        "AI-FD09",
+        "AI-FD10",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "1ee392206cd55f1dbc0a0efb7edabec66fee4d8084f275642d06c04514739b79",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S096",
+      "source_locator": "Section 96",
+      "decision_ids": [],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "25a85526168470a11b0f8f1ed90dd5df53fe2584720621afc778f763aefff924",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S097",
+      "source_locator": "Section 97",
+      "decision_ids": [],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "ea512ecb020b956bbfef352a6573f1062e848a4396c546c3bf8a9a8de6a8f6b3",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S098",
+      "source_locator": "Section 98",
+      "decision_ids": [],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "4e43e9dff9a2765fda791a1e60f21c2a421d89b0e8cf507c6a649d06e4016282",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S099",
+      "source_locator": "Section 99",
+      "decision_ids": [],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "ce172c74fc386e781da3456983f08017acdec7657b15efbd306dab8cf207cb87",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-S100",
+      "source_locator": "Section 100",
+      "decision_ids": [],
+      "authority_owner": "Founder constitutional authority and AI Governance",
+      "cross_canon_dependencies": [
+        "Security",
+        "Platform Operations",
+        "External Architecture",
+        "Audit",
+        "Implementation Atlas"
+      ],
+      "source_text_sha256": "24acb449df1847e3c98e68e4f4f77dd06352c7bc26755ec8b345fcc19c582f18",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AA",
+      "source_locator": "Appendix A",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD03",
+        "AI-FD07",
+        "AI-FD12"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "36fead8a1ad4b4ce454c157b65f96b16f5df4e766b8f5736c1448ccce96f52ce",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AB",
+      "source_locator": "Appendix B",
+      "decision_ids": [
+        "AI-FD01",
+        "AI-FD03",
+        "AI-FD04",
+        "AI-FD07",
+        "AI-FD12"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "010e180928af915ae8b19d83b0be6a3930478d065d831eb7a41df4f83a75109d",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AC",
+      "source_locator": "Appendix C",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD07",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "fee1c4474aa501515119b8122ecd97f58e73ed5a5cdf1dc3faadb9b938c0d9f8",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AD",
+      "source_locator": "Appendix D",
+      "decision_ids": [
+        "AI-FD12"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "b7c9492242d97e13d86ed155442ae5de08a221a3a93cfc4264896549a0ad82e5",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AE",
+      "source_locator": "Appendix E",
+      "decision_ids": [],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "381db36ffd1cdbc46cd1db59744b9c3fb41063c9e8668e8d1bb740ea6450fed1",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AF",
+      "source_locator": "Appendix F",
+      "decision_ids": [
+        "AI-FD08",
+        "AI-FD09"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "e08ebb1812b2a13673c85884ed7b13800798b32072ff1e005913770b45e952f3",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AG",
+      "source_locator": "Appendix G",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD04",
+        "AI-FD08",
+        "AI-FD09",
+        "AI-FD10"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "411ee129d37ed7910ef7106ed531c770384ff895103d70b9c07427aae4d2048f",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AH",
+      "source_locator": "Appendix H",
+      "decision_ids": [
+        "AI-FD04",
+        "AI-FD07",
+        "AI-FD10"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "c8c2ea1f18aca71a28ed3344bc49d2f57ba2f32483d98b0dfb031b90ddaa15e7",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AI",
+      "source_locator": "Appendix I",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD09",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "6ec7912a3bed9ec781d95eacdf47412b2b409773f7b124c878c1c6ea471941e5",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AJ",
+      "source_locator": "Appendix J",
+      "decision_ids": [
+        "AI-FD05",
+        "AI-FD06",
+        "AI-FD11"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "1cedf580a97e71c61fe757fb110fdb55a48f197b0dc7bc998fc15390aed575ac",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AK",
+      "source_locator": "Appendix K",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD06",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "f994379fc84265eec309aef046c614d89c487aaf52da991ed9426c9b19ad0a19",
+      "orphan": false
+    },
+    {
+      "requirement_id": "AI-REQ-AL",
+      "source_locator": "Appendix L",
+      "decision_ids": [
+        "AI-FD02",
+        "AI-FD03",
+        "AI-FD04",
+        "AI-FD11",
+        "AI-FD12"
+      ],
+      "authority_owner": "AI Governance with applicable domain, security, audit, and professional authorities",
+      "cross_canon_dependencies": [
+        "Applicable controlling canon"
+      ],
+      "source_text_sha256": "011ab23ea40e9e78a29bbeadd0ea376a5acd9c362afb3741304453fafde01ba7",
+      "orphan": false
+    }
+  ],
+  "decision_coverage": {
+    "AI-FD01": [
+      "AI-REQ-S005",
+      "AI-REQ-S013",
+      "AI-REQ-S014",
+      "AI-REQ-S015",
+      "AI-REQ-S016",
+      "AI-REQ-S052",
+      "AI-REQ-S053",
+      "AI-REQ-S054",
+      "AI-REQ-S055",
+      "AI-REQ-S056",
+      "AI-REQ-S057",
+      "AI-REQ-S058",
+      "AI-REQ-S068",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AA",
+      "AI-REQ-AB"
+    ],
+    "AI-FD02": [
+      "AI-REQ-S006",
+      "AI-REQ-S018",
+      "AI-REQ-S019",
+      "AI-REQ-S020",
+      "AI-REQ-S021",
+      "AI-REQ-S022",
+      "AI-REQ-S023",
+      "AI-REQ-S024",
+      "AI-REQ-S074",
+      "AI-REQ-S075",
+      "AI-REQ-S076",
+      "AI-REQ-S077",
+      "AI-REQ-S078",
+      "AI-REQ-S079",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AC",
+      "AI-REQ-AG",
+      "AI-REQ-AI",
+      "AI-REQ-AK",
+      "AI-REQ-AL"
+    ],
+    "AI-FD03": [
+      "AI-REQ-S019",
+      "AI-REQ-S062",
+      "AI-REQ-S063",
+      "AI-REQ-S069",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AA",
+      "AI-REQ-AB",
+      "AI-REQ-AL"
+    ],
+    "AI-FD04": [
+      "AI-REQ-S017",
+      "AI-REQ-S018",
+      "AI-REQ-S019",
+      "AI-REQ-S020",
+      "AI-REQ-S024",
+      "AI-REQ-S059",
+      "AI-REQ-S060",
+      "AI-REQ-S061",
+      "AI-REQ-S062",
+      "AI-REQ-S063",
+      "AI-REQ-S064",
+      "AI-REQ-S065",
+      "AI-REQ-S066",
+      "AI-REQ-S067",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AB",
+      "AI-REQ-AG",
+      "AI-REQ-AH",
+      "AI-REQ-AL"
+    ],
+    "AI-FD05": [
+      "AI-REQ-S025",
+      "AI-REQ-S026",
+      "AI-REQ-S027",
+      "AI-REQ-S028",
+      "AI-REQ-S032",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AJ"
+    ],
+    "AI-FD06": [
+      "AI-REQ-S009",
+      "AI-REQ-S029",
+      "AI-REQ-S030",
+      "AI-REQ-S036",
+      "AI-REQ-S037",
+      "AI-REQ-S072",
+      "AI-REQ-S084",
+      "AI-REQ-S085",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AJ",
+      "AI-REQ-AK"
+    ],
+    "AI-FD07": [
+      "AI-REQ-S012",
+      "AI-REQ-S013",
+      "AI-REQ-S014",
+      "AI-REQ-S015",
+      "AI-REQ-S016",
+      "AI-REQ-S017",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AA",
+      "AI-REQ-AB",
+      "AI-REQ-AC",
+      "AI-REQ-AH"
+    ],
+    "AI-FD08": [
+      "AI-REQ-S040",
+      "AI-REQ-S041",
+      "AI-REQ-S042",
+      "AI-REQ-S043",
+      "AI-REQ-S044",
+      "AI-REQ-S047",
+      "AI-REQ-S050",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AF",
+      "AI-REQ-AG"
+    ],
+    "AI-FD09": [
+      "AI-REQ-S024",
+      "AI-REQ-S043",
+      "AI-REQ-S045",
+      "AI-REQ-S046",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AF",
+      "AI-REQ-AG",
+      "AI-REQ-AI"
+    ],
+    "AI-FD10": [
+      "AI-REQ-S031",
+      "AI-REQ-S041",
+      "AI-REQ-S048",
+      "AI-REQ-S049",
+      "AI-REQ-S087",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AG",
+      "AI-REQ-AH"
+    ],
+    "AI-FD11": [
+      "AI-REQ-S032",
+      "AI-REQ-S033",
+      "AI-REQ-S034",
+      "AI-REQ-S038",
+      "AI-REQ-S059",
+      "AI-REQ-S060",
+      "AI-REQ-S061",
+      "AI-REQ-S062",
+      "AI-REQ-S063",
+      "AI-REQ-S064",
+      "AI-REQ-S065",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AC",
+      "AI-REQ-AI",
+      "AI-REQ-AJ",
+      "AI-REQ-AK",
+      "AI-REQ-AL"
+    ],
+    "AI-FD12": [
+      "AI-REQ-S052",
+      "AI-REQ-S059",
+      "AI-REQ-S060",
+      "AI-REQ-S061",
+      "AI-REQ-S064",
+      "AI-REQ-S065",
+      "AI-REQ-S066",
+      "AI-REQ-S067",
+      "AI-REQ-S092",
+      "AI-REQ-S093",
+      "AI-REQ-S094",
+      "AI-REQ-S095",
+      "AI-REQ-AA",
+      "AI-REQ-AB",
+      "AI-REQ-AC",
+      "AI-REQ-AD",
+      "AI-REQ-AI",
+      "AI-REQ-AK",
+      "AI-REQ-AL"
+    ]
+  },
+  "orphan_requirements": 0,
+  "unmapped_decisions": []
+}

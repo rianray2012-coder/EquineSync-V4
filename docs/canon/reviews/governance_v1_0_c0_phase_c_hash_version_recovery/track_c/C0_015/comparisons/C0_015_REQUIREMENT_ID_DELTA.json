@@ -1,0 +1,9 @@
+{
+  "row_id": "C0-015",
+  "expected_source_recovered": false,
+  "recovered_ids": [],
+  "current_ids": [],
+  "removed_from_current": null,
+  "added_in_current": null,
+  "orphan_validation": "DEFERRED_WITH_SOURCE_EVIDENCE"
+}

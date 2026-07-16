@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-07-16T08:32:07Z",
+  "status": "PHASE_C_PROSPECTIVE_DELTA",
+  "historical_c0_unchanged": true,
+  "phase_c_rows": 9,
+  "exact_sources_recovered": 3,
+  "expected_sources_not_recovered": 6,
+  "blockers_before": 17,
+  "blockers_after": 17,
+  "founder_identity_decisions": 0,
+  "adoptions": 0,
+  "locks": 0,
+  "authority": {
+    "founder_source_identity_decision": false,
+    "adoption": false,
+    "lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "amendment_of_locked_canon": false
+  }
+}

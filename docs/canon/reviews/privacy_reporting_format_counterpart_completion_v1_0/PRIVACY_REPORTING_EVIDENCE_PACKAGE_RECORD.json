@@ -1,0 +1,24 @@
+{
+  "package": "outputs/privacy_reporting_format_counterpart_completion_package.zip",
+  "sha256": "9316affecd7f82ed0604f164edfc07d311b8c61481c5c192c288c3582303c593",
+  "size_bytes": 18968512,
+  "archive_extraction_validation": "PASS",
+  "files": 85,
+  "disposition": "PRIVACY_AND_REPORTING_FOUNDER_APPROVED_FORMAT_COUNTERPARTS_COMPLETE_PENDING_SEPARATE_ADOPTION",
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "migration": false,
+    "runtime": false,
+    "production": false,
+    "provider_activation": false,
+    "deployment": false,
+    "customer_data_processing": false,
+    "public_launch": false,
+    "security_certification": false,
+    "public_trust_claims": false
+  }
+}

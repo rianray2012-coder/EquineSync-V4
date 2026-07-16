@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-022",
+  "title": "Master Permission and Access-Control Model",
+  "version": "1.1",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_V1_1_ADOPTED_SOURCE.md",
+  "locked_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+  "adoption_record": "docs/canon/adoptions/c0_022_permission_access_control_v1_1/C0_022_MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "93a69c8fd88019e5d0839ad0124180c22248151fb052b642bbf205b832b86181",
+  "lock_record": "docs/canon/locks/permission_access_control_v1_1/C0_022_MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "92c1eeff8d2ad71c737a3941ef7168650024b591bb312a34bd342c82d039a122",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

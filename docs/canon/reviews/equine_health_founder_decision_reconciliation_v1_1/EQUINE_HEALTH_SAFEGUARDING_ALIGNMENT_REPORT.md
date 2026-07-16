@@ -1,0 +1,3 @@
+# Equine Health and Safeguarding V1.2 Alignment Report
+
+The workstreams remain separate in source, decisions, lifecycle, evidence, and adoption. EH-FD13 aligns with the adopted Safeguarding V1.2 capability-tier and communication boundaries: a minor may receive only minimum-necessary, supervised horse-health task information and may submit observations or concerns. Guardian status concerning the minor does not create access to a horse's medical record. Medication decisions, private provider notes, owner financial data, disputes, unrelated clinical records, and private adult/minor messaging remain prohibited. No safeguarding lifecycle state changed.

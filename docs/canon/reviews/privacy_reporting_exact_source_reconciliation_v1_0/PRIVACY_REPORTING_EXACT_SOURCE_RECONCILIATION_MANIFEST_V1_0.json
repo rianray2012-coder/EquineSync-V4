@@ -1,0 +1,164 @@
+{
+  "package": "PRIVACY_REPORTING_EXACT_SOURCE_RECONCILIATION_V1_0",
+  "generated_on": "2026-07-16",
+  "disposition": "PRIVACY_REPORTING_EXACT_SOURCE_RECONCILIATION_PARTIALLY_MOUNTED_COUNTERPARTS_REQUIRED",
+  "approval_package": {
+    "source_path": "/Users/rianray/Downloads/EQUINESYNC_PRIVACY_REPORTING_FOUNDER_APPROVAL_PACKAGE_V1_0.zip",
+    "repository_path": "docs/canon/reviews/privacy_reporting_exact_source_reconciliation_v1_0/source_event/EQUINESYNC_PRIVACY_REPORTING_FOUNDER_APPROVAL_PACKAGE_V1_0.zip",
+    "size_bytes": 54511,
+    "sha256": "c1c91525b66849811fc2c71fd7f5d83e13a338b4f7b82b70db08cd44f65dd97e",
+    "members_verified": [
+      {
+        "filename": "EQUINESYNC_PRIVACY_AND_REPORTING_FOUNDER_APPROVAL_DIRECTIVE_V1_0.md",
+        "expected_sha256": "b42ac56490f4fe6e9e3d4abf56d01fc784d74f31c9cf03644d4ee019f9832b0f",
+        "actual_sha256": "b42ac56490f4fe6e9e3d4abf56d01fc784d74f31c9cf03644d4ee019f9832b0f",
+        "result": "PASS"
+      },
+      {
+        "filename": "EQUINESYNC_PRIVACY_AND_REPORTING_FOUNDER_APPROVAL_DIRECTIVE_V1_0.docx",
+        "expected_sha256": "41d0ff2a0fab3c45f909e706e241828d970a4a0816b0ed50e2892ea04b43aa0c",
+        "actual_sha256": "41d0ff2a0fab3c45f909e706e241828d970a4a0816b0ed50e2892ea04b43aa0c",
+        "result": "PASS"
+      },
+      {
+        "filename": "EQUINESYNC_PRIVACY_AND_REPORTING_REVIEW_MEMO_V1_0.md",
+        "expected_sha256": "5740e3b2c2a542cb753d995073a650252ef79cc640235b51a845537c851bd55c",
+        "actual_sha256": "5740e3b2c2a542cb753d995073a650252ef79cc640235b51a845537c851bd55c",
+        "result": "PASS"
+      },
+      {
+        "filename": "CODEX_PROMPT_PRIVACY_AND_REPORTING_EXACT_SOURCE_RECONCILIATION.md",
+        "expected_sha256": "8436b4f8dbecb39a97bf26775aa1c7247eea61fd3b686a8adf5c4997872ce816",
+        "actual_sha256": "8436b4f8dbecb39a97bf26775aa1c7247eea61fd3b686a8adf5c4997872ce816",
+        "result": "PASS"
+      },
+      {
+        "filename": "CODEX_PROMPT_PRIVACY_AND_REPORTING_EXACT_SOURCE_RECONCILIATION.txt",
+        "expected_sha256": "8436b4f8dbecb39a97bf26775aa1c7247eea61fd3b686a8adf5c4997872ce816",
+        "actual_sha256": "8436b4f8dbecb39a97bf26775aa1c7247eea61fd3b686a8adf5c4997872ce816",
+        "result": "PASS"
+      },
+      {
+        "filename": "PACKAGE_MANIFEST.md",
+        "expected_sha256": "859a99fdb07356775761caaa3960622c7710a8447d246533359b83d843aefb99",
+        "actual_sha256": "859a99fdb07356775761caaa3960622c7710a8447d246533359b83d843aefb99",
+        "result": "PASS"
+      }
+    ]
+  },
+  "source_search": {
+    "roots": [
+      "/Users/rianray/Downloads",
+      "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current"
+    ],
+    "root_count": 2,
+    "zip_archives_scanned": 257,
+    "archive_errors": [],
+    "exact_matches": [
+      {
+        "kind": "filesystem",
+        "path": "/Users/rianray/Downloads/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.md",
+        "filename": "MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.md",
+        "size_bytes": 77438,
+        "sha256": "30858ed46725a8adaf7104193525aa1074dd8421555ded92ede034ec3339202e"
+      },
+      {
+        "kind": "filesystem",
+        "path": "/Users/rianray/Downloads/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.docx",
+        "filename": "MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.docx",
+        "size_bytes": 54666,
+        "sha256": "d6cc3cc2add501d2d34d947de4e7a2ee7c6af77aa9669606c95514361657504d"
+      }
+    ]
+  },
+  "required_sources": [
+    {
+      "row_id": "C0-023",
+      "filename": "MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.md",
+      "status": "MOUNTED",
+      "matches": [
+        {
+          "kind": "filesystem",
+          "path": "/Users/rianray/Downloads/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.md",
+          "filename": "MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.md",
+          "size_bytes": 77438,
+          "sha256": "30858ed46725a8adaf7104193525aa1074dd8421555ded92ede034ec3339202e"
+        }
+      ],
+      "preserved_repository_path": "docs/canon/reviews/privacy_reporting_exact_source_reconciliation_v1_0/mounted_sources/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.md",
+      "preserved_sha256": "30858ed46725a8adaf7104193525aa1074dd8421555ded92ede034ec3339202e",
+      "preserved_size_bytes": 77438
+    },
+    {
+      "row_id": "C0-023",
+      "filename": "MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.docx",
+      "status": "NOT_MOUNTED",
+      "matches": [],
+      "preserved_repository_path": null,
+      "preserved_sha256": null,
+      "preserved_size_bytes": null
+    },
+    {
+      "row_id": "C0-035",
+      "filename": "MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.md",
+      "status": "NOT_MOUNTED",
+      "matches": [],
+      "preserved_repository_path": null,
+      "preserved_sha256": null,
+      "preserved_size_bytes": null
+    },
+    {
+      "row_id": "C0-035",
+      "filename": "MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.docx",
+      "status": "MOUNTED",
+      "matches": [
+        {
+          "kind": "filesystem",
+          "path": "/Users/rianray/Downloads/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.docx",
+          "filename": "MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.docx",
+          "size_bytes": 54666,
+          "sha256": "d6cc3cc2add501d2d34d947de4e7a2ee7c6af77aa9669606c95514361657504d"
+        }
+      ],
+      "preserved_repository_path": "docs/canon/reviews/privacy_reporting_exact_source_reconciliation_v1_0/mounted_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.docx",
+      "preserved_sha256": "d6cc3cc2add501d2d34d947de4e7a2ee7c6af77aa9669606c95514361657504d",
+      "preserved_size_bytes": 54666
+    }
+  ],
+  "rows": [
+    {
+      "row_id": "C0-023",
+      "founder_approval_state": "FOUNDER_APPROVED_CONTROLLING_SUBSTANTIVE_CANON",
+      "source_state": "MARKDOWN_MOUNTED_DOCX_COUNTERPART_REQUIRED",
+      "successor_state": "NOT_CREATED",
+      "adoption_state": "NOT_GRANTED_BY_DIRECTIVE",
+      "lock_state": "NOT_GRANTED_BY_DIRECTIVE",
+      "unresolved_items": [
+        "MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_REVIEWED_DRAFT.docx"
+      ]
+    },
+    {
+      "row_id": "C0-035",
+      "founder_approval_state": "FOUNDER_APPROVED_CONTROLLING_CANON_STATUS_PRESERVED",
+      "source_state": "DOCX_MOUNTED_MARKDOWN_COUNTERPART_REQUIRED",
+      "successor_state": "NOT_APPLICABLE_NO_REWRITE_PERMITTED",
+      "adoption_state": "ONLY_AS_SEPARATELY_EVIDENCED",
+      "lock_state": "NOT_GRANTED_BY_DIRECTIVE",
+      "unresolved_items": [
+        "MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0.md"
+      ]
+    }
+  ],
+  "cross_format_comparison": "NOT_EXECUTED_EXACT_SOURCE_PAIRS_NOT_MOUNTED",
+  "companion_artifacts_updated": [],
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "schema_or_migration": false,
+    "production": false,
+    "external_processor_or_provider_activation": false,
+    "public_claims": false,
+    "public_launch": false,
+    "repository_lock": false
+  }
+}

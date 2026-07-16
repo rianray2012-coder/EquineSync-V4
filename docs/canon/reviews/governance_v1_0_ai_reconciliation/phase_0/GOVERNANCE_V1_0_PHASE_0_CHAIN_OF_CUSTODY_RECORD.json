@@ -1,0 +1,21 @@
+{
+  "record": "GOVERNANCE_V1_0_PHASE_0_CHAIN_OF_CUSTODY",
+  "recorded_at_utc": "2026-07-16T02:05:25Z",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "directive_original_path": "/Users/rianray/.codex/attachments/94f26e4a-4d0c-4cfe-b82d-d9f1a620ce9c/pasted-text.txt",
+  "directive_preserved_path": "docs/canon/reviews/governance_v1_0_ai_reconciliation/source/GOVERNANCE_V1_0_AI_V2_RECONCILIATION_DIRECTIVE.txt",
+  "directive_sha256": "37f3d6d7860284bfe27e5cdd1de9fc26e09cc82f9ff154ea5e82253dddbc85ea",
+  "directive_byte_identity_verified": true,
+  "baseline_package": {
+    "path": "/Users/rianray/Downloads/EquineSync_C0_Constitutional_Source_Reconciliation_Package_V1_0.zip",
+    "sha256": "10a0cc2314b01c2a31674f7b5e14279cdecef32cb274e061c6670ec3a50139f5",
+    "archive_integrity": "passed"
+  },
+  "preservation_rules": {
+    "locked_artifacts_modified": false,
+    "unrelated_changes_discarded": false,
+    "missing_sources_reconstructed": false,
+    "runtime_files_authorized": false,
+    "production_activity_authorized": false
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "disposition": "C0_023_PRIVACY_AND_DATA_PROTECTION_CONSTITUTIONALLY_LOCKED",
+  "C0-023": {
+    "locked": true,
+    "markdown_sha256": "8f323e3d4d0782c5aa017c6b904b7c42c9bf4ab8ee72170ea8f7a003505184fd",
+    "docx_sha256": "67060cbdaa9a1290a66adb6406f940401aacc73d0bd5bdc60023b6e6e5ade931",
+    "lock_record_sha256": "af74e56192444a52d9c60b49d3179ef9c59b3434422189321de3a7c5abc31709",
+    "retained_p2": [
+      "C0-023-LR-P2-01"
+    ]
+  },
+  "C0-035": {
+    "locked": false,
+    "open_p1": [
+      "C0-035-LR-P1-01"
+    ],
+    "blocker": "C0-022 is not adopted or locked"
+  },
+  "authority": {
+    "implementation": false,
+    "migration": false,
+    "runtime": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "certification": false,
+    "public_trust_claims": false
+  }
+}

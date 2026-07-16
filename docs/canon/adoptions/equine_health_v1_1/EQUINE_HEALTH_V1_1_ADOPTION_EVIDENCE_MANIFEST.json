@@ -1,0 +1,241 @@
+{
+  "package": "equine_health_v1_1_founder_adoption_evidence",
+  "generated_at": "2026-07-16T02:01:01.496156+00:00",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "disposition": "EQUINE_HEALTH_V1_1_FOUNDER_ADOPTED_LOCK_PENDING",
+  "lifecycle_state": "EQUINE_HEALTH_V1_1_FOUNDER_ADOPTED_LOCK_PENDING",
+  "findings": {
+    "p0": 0,
+    "p1": 0,
+    "p2_open": 6
+  },
+  "authority": {
+    "lock": false,
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "permission": false,
+    "runtime": false,
+    "clinical_activity": false,
+    "provider": false,
+    "research_or_training": false,
+    "ai_activation": false,
+    "production": false,
+    "onboarding": false,
+    "public_claims": false,
+    "launch": false
+  },
+  "manifest_scope_note": "Files lists every adoption payload artifact. This manifest, the containing ZIP, and the external package record are excluded from their own checksum lists to avoid self-reference.",
+  "files": [
+    {
+      "path": "docs/canon/CANON_INDEX.md",
+      "sha256": "cf12fd50b859b486509fadc6f6fdb6bd18cf8d83f2e1f016ee9e731fca12ab54",
+      "bytes": 23586
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md",
+      "sha256": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+      "bytes": 29253
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+      "sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+      "bytes": 89345
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_ADOPTION_EVENT_RECORD.json",
+      "sha256": "82a20de3c601de5b0608a5b66f5ab0dc95d2541b358782871530141409c74f9c",
+      "bytes": 2102
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_COMPANION_UPDATE_AND_PATCH_REGISTER.md",
+      "sha256": "13a42c4d6c33f04f8ac5f6b543bb71bba26dc15d65fb7b951f168c5a15f38c53",
+      "bytes": 2722
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_FOUNDER_ADOPTION_CERTIFICATE.md",
+      "sha256": "71f81914cd2fec82c81a7ac4141fa324a766363f198cfc0a8d2250835a04e96c",
+      "bytes": 2596
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_FOUNDER_ADOPTION_DIRECTIVE.txt",
+      "sha256": "a7dea64261d2dc91c285e55bf16462d4c534a4ecf2a76455003bd3b2f95a3c88",
+      "bytes": 10080
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_LOCK_READINESS_ASSESSMENT.md",
+      "sha256": "98dfc8f13c0f15c081026a98753147a7d534bb9418f84307861332b8ab34a8df",
+      "bytes": 1409
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_POST_ADOPTION_VALIDATION_REPORT.md",
+      "sha256": "6fc164f9f88d08adccbde84bba744de0937d402ac3136e9baf17cb7ababa8acc",
+      "bytes": 1664
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_RETAINED_P2_REGISTER.md",
+      "sha256": "a53d7b71a1d18cfe79d721b4bccf3acb576f8cef3b3fad47bda4cd92dd957c7c",
+      "bytes": 4247
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CANON_DEPENDENCY_MAP_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "c1983addf32a788ebed5e8c52707727939ca120843a9b195e8c0101994c2cc3d",
+      "bytes": 786
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_AUTHORITY_MATRIX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "c65786cf70e7991b256ec272920927fd7c90ebcc8ecc11cb5ae85a94642782e4",
+      "bytes": 1240
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_CROSS_REFERENCE_INDEX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "04ce4f6ca848393302cb4dbae9a22bdbf2f32943301f6d0dada1361aed617b0b",
+      "bytes": 618
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/CONSTITUTIONAL_VOCABULARY_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "e7453b09bb166f77d30dafa55e2862eeb479b5d7c6f8b9fac81851960e9590d6",
+      "bytes": 807
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/GOVERNANCE_REQUIREMENT_INDEX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "7e363225fa650478b6bde626849fef01d7b4e8486779c2b38e3c993e865d69be",
+      "bytes": 736
+    },
+    {
+      "path": "docs/canon/adoptions/equine_health_v1_1/patches/REQUIREMENT_TRACEABILITY_MATRIX_EQUINE_HEALTH_V1_1_PROPOSAL.patch",
+      "sha256": "e21f7ac310d2ff9a2de678ed75e796ea99748e0e59d23ab981672486f4e6d483",
+      "bytes": 620
+    },
+    {
+      "path": "docs/canon/candidates/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_RECONCILED_ADOPTION_CANDIDATE.md",
+      "sha256": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+      "bytes": 29253
+    },
+    {
+      "path": "docs/canon/registries/CANON_ARTIFACT_INVENTORY.md",
+      "sha256": "14577b6f32d3fc151d0cad2d4c1ac407551ea15b740e433aabb12d0b440517a4",
+      "bytes": 16161
+    },
+    {
+      "path": "docs/canon/registries/CANON_STATE_AND_LOCK_REGISTRY.md",
+      "sha256": "37499fe02c5464c1a95b4c21f5280df5c2c9d59fd850c3298cb2625b9d4b3e7b",
+      "bytes": 3849
+    },
+    {
+      "path": "docs/canon/registries/GOVERNANCE_FINDING_REGISTRY.md",
+      "sha256": "6573f1a831ea1c7f84c5241acef3d24069265eb1d13972273f066d099d8b706f",
+      "bytes": 19764
+    },
+    {
+      "path": "docs/canon/registries/IMPLEMENTATION_AUTHORIZATION_REGISTRY.md",
+      "sha256": "3d2d90ecbe3cc519b21628145dab8f57d3d492b6126db582bd2da86df29efe45",
+      "bytes": 3259
+    },
+    {
+      "path": "docs/canon/reviews/drafting_equine_health_welfare_medical_v1_0/FOUNDER_DECISION_REGISTER.md",
+      "sha256": "edb6d2bcd2c31642bf89635dd7a3702250cb22b21f3d4a90915491944270c727",
+      "bytes": 10025
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EH_FD01_EH_FD14_DECISION_TO_REQUIREMENT_CROSSWALK.md",
+      "sha256": "0922a7dc93637cb130fa40b39dbb7d972914c5041d5912c75bb2d02fad52adda",
+      "bytes": 1481
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EH_FD01_EH_FD14_DECISION_TO_SECTION_CROSSWALK.md",
+      "sha256": "2d5c2b0dc60e54b31ab5f799e167792680d1c7bcaed4cf8d3e72a6d6db629cbb",
+      "bytes": 3264
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EH_FD01_EH_FD14_FOUNDER_RESPONSE_REGISTER.md",
+      "sha256": "f2cdc23e3b85c27f37317fedc37e362d926a75f90c6357c146d1a53eda21b50f",
+      "bytes": 5990
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_ADOPTION_CANDIDATE_READINESS_REPORT.md",
+      "sha256": "e38984dc47157e03c1bb2b25b7b46217f22bbe165fcf0ba9cbe4d3b503253970",
+      "bytes": 780
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_AI_V2_0_AND_RF30_ALIGNMENT_REPORT.md",
+      "sha256": "76568af05e934a1169a82fe2826db5aa03ce5a2d209ce72ae04e2aa90bad1ebf",
+      "bytes": 602
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_CONTROLLED_VALIDATION_REPORT.md",
+      "sha256": "c7f884b2145e1e5df52978d9dbe4cc7c95787c00dad3aeb3d6c14998b0ea5142",
+      "bytes": 2079
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_CROSS_CANON_CONFLICT_AND_ALIGNMENT_REPORT.md",
+      "sha256": "0f10edfdb2f2b06a1a07bab3a6e933d849d45bd1ab9f8db096fefa9d0faa9f45",
+      "bytes": 1902
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_FOUNDER_DECISION_EVENT_RECORD.json",
+      "sha256": "f5cc04893b878eeafd44c91a8fada1df5fe1b4db5fc4fd2713126987c5276d56",
+      "bytes": 6965
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_FOUNDER_DECISION_SOURCE_INGESTION_REPORT.md",
+      "sha256": "b846d3aba3fa77ce0582493a117698c00850da8232fe7e7278c982521cdd00f5",
+      "bytes": 1534
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_FOUNDER_RESPONSE_COMPLETENESS_REGISTER.md",
+      "sha256": "450562050d583dfd4fde78cc0a856086a5d614f671f7420b92ee8a09a4927288",
+      "bytes": 3038
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_POST_DECISION_REVISION_PLAN.md",
+      "sha256": "bbf245cb3695167a8c54d4991cb5a99e475d673c8820fe25aba2645e44d8c123",
+      "bytes": 682
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_SAFEGUARDING_ALIGNMENT_REPORT.md",
+      "sha256": "6d88e3b08d119e90a3b0e60182d70fb72bb6e1d7ef9ffd04b4fa5be25bb912f1",
+      "bytes": 656
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_V1_1_DECISION_INCORPORATION_CHANGE_LOG.md",
+      "sha256": "1e57535dc8a4d268b22070ac86b1f5a23825d7020ab9b4d31addeb4273e85e8a",
+      "bytes": 723
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/EQUINE_HEALTH_V1_1_REQUIREMENT_TO_SECTION_TRACEABILITY.md",
+      "sha256": "bd1314763bf7cb1aafd3552cf81e762977860096f866d958f798ad75c42918ad",
+      "bytes": 4892
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/SHA256SUMS",
+      "sha256": "a483b0b0f7b1e7624a51b83fe5c243444a6c59a8f56ffc8b56b1cba4ab05f064",
+      "bytes": 4346
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/history/FOUNDER_DECISION_REGISTER_PRE_INGESTION.md",
+      "sha256": "1d9b4ce8a85bfe65f045780cf483b1c6aca5fb44afecde23a454892a784b9fd7",
+      "bytes": 8781
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/history/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_0_DRAFT.md",
+      "sha256": "6087aa3c6c56e58117937bd226f582ee302a8cc49c78277134fead5ce58834ea",
+      "bytes": 11750
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/history/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_0_REVISED_NONCONTROLLING_DRAFT.md",
+      "sha256": "f68d65873599237a65006ea6ce614b427a16e259db132f36c9116b6dec90abfa",
+      "bytes": 23511
+    },
+    {
+      "path": "docs/canon/reviews/equine_health_founder_decision_reconciliation_v1_1/source/EQUINE_HEALTH_FOUNDER_DECISION_REGISTER_UPLOADED_2026-07-15.md",
+      "sha256": "81d1d33d45093b89718e877330739c3601ed86ffe9ce6c476a679caab289e4d3",
+      "bytes": 8782
+    },
+    {
+      "path": "outputs/equine_health_v1_1_founder_review_evidence.zip",
+      "sha256": "f31e448bc26db2ca7d1bfdabbe047d66380d3df1d9a9f955ae07640c15f8de07",
+      "bytes": 77014
+    }
+  ]
+}

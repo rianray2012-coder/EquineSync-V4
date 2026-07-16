@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-07-16T06:08:55Z",
+  "p0": 0,
+  "open_p1": 0,
+  "adoption_blocking_p2": 0,
+  "lock_blocking_p2": 0,
+  "findings": [],
+  "retained_nonblocking_p2": [
+    {
+      "id": "GCR-P2-COMPANION-ADOPTION",
+      "blocking": false,
+      "remedy": "Founder controlled adoption decision for the assembled prospective companion family"
+    },
+    {
+      "id": "GCR-P2-C0-LIFECYCLE-COMPLETION",
+      "blocking": false,
+      "remedy": "Row-specific prospective lifecycle evidence before Governance V1.0 baseline lock"
+    },
+    {
+      "id": "GCR-P2-SPECIALIZED-FAMILY-COVERAGE",
+      "blocking": false,
+      "remedy": "Continue source-linked family decision and requirement expansion without changing authority"
+    }
+  ],
+  "scans": [
+    {
+      "scan": "dependency-cycle",
+      "status": "PASS",
+      "notes": "Parsed 31 authoritative upstream edges; prohibited cycles: 0. Reciprocal peer/co-review edges excluded by rule."
+    },
+    {
+      "scan": "orphan-requirement",
+      "status": "PASS",
+      "notes": "Checked 232 requirements for source path and authority owner; missing source paths: 0."
+    },
+    {
+      "scan": "orphan-control",
+      "status": "PASS",
+      "notes": "Checked 15 target/source records for an authority classification."
+    },
+    {
+      "scan": "orphan-Founder-decision",
+      "status": "PASS",
+      "notes": "Checked 71 recovered decisions against RTM rows; orphans: 0."
+    },
+    {
+      "scan": "duplicate-ID",
+      "status": "PASS",
+      "notes": "Requirement IDs 232/232 unique; decision IDs 71/71 unique."
+    },
+    {
+      "scan": "broken-reference",
+      "status": "PASS",
+      "notes": "Validated every requirement source path; broken paths: 0."
+    },
+    {
+      "scan": "stale-version",
+      "status": "PASS",
+      "notes": "Versioned V1.0/V1.1/V1.2 candidates are preserved distinctly; no candidate was silently promoted by this package."
+    },
+    {
+      "scan": "authority-owner",
+      "status": "PASS",
+      "notes": "Checked authority owner on 232 requirements."
+    },
+    {
+      "scan": "adoption-state consistency",
+      "status": "PASS",
+      "notes": "Recorded adoption state for 15 target/source records; unknown states remain explicit and were not inferred."
+    },
+    {
+      "scan": "lock-state consistency",
+      "status": "PASS",
+      "notes": "Recorded lock state for 15 target/source records; unknown states remain explicit and were not inferred."
+    },
+    {
+      "scan": "supersession-integrity",
+      "status": "PASS",
+      "notes": "Historical sources and prospective successors are separately classified; no predecessor was overwritten."
+    },
+    {
+      "scan": "expired-exception",
+      "status": "PASS",
+      "notes": "Historical provenance exceptions were preserved; no dated exception represented itself as silently expired."
+    },
+    {
+      "scan": "checksum-and-path completeness",
+      "status": "PASS",
+      "notes": "Rehashed 15 discovered records; mismatches: 0."
+    }
+  ]
+}

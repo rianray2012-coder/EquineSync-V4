@@ -1,0 +1,10 @@
+{
+  "disposition":"AI_V2_0_CONSTITUTIONAL_CANON_ADOPTED_WITH_RETAINED_NONBLOCKING_P2",
+  "adopted_at_utc":"2026-07-16T04:30:22Z",
+  "source":{"path":"docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx","sha256":"414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8","bytes":140809},
+  "constitutional_authority":"CONTROLLING",
+  "findings":{"p0":0,"open_p1":0,"adoption_blocking_p2":0,"retained_nonblocking_p2":3},
+  "traceability":{"founder_decisions":12,"section_96_bullets":13,"requirements":112,"orphan_requirements":0,"unmapped_decisions":0},
+  "authority":{"implementation":false,"runtime":false,"provider_activation":false,"customer_data_transfer":false,"training":false,"production":false,"public_claim":false,"public_launch":false},
+  "lock_state":"PENDING_SEPARATE_RECORD"
+}

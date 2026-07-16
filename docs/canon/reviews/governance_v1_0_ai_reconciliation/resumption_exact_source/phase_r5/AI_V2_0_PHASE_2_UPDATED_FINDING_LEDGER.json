@@ -1,0 +1,44 @@
+{
+  "phase": "R5",
+  "disposition": "AI_V2_0_FOUNDER_DECISION_MATRIX_RATIFIED_AND_PHASE_2_RESUMPTION_AUTHORIZED",
+  "counts": {
+    "p0": 0,
+    "closed_p1": 2,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": null
+  },
+  "findings": [
+    {
+      "id": "AI-V2-P1-EXACT-SOURCE-BYTES-ABSENT",
+      "historical_severity": "P1",
+      "status": "CLOSED",
+      "closure_evidence_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8"
+    },
+    {
+      "id": "AI-V2-P1-FOUNDER-DECISION-SET-ABSENT",
+      "historical_severity": "P1",
+      "status": "CLOSED_THROUGH_RATIFIED_REPLACEMENT_RECORD",
+      "replacement_id": "AI-V2-P1-FOUNDER-DECISION-MATRIX-RATIFICATION-PENDING"
+    },
+    {
+      "id": "AI-V2-P1-FOUNDER-DECISION-MATRIX-RATIFICATION-PENDING",
+      "severity": "P1",
+      "status": "CLOSED_BY_EXPLICIT_FOUNDER_RATIFICATION",
+      "blocking": false,
+      "closure_directive_sha256": "e18bd3618241f2cd0b38af30d970933c732af1d87088fd88ad5fa45dac605425",
+      "closure_recorded_at_utc": "2026-07-16T04:24:18Z"
+    }
+  ],
+  "phase_r6_authorized": true,
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "constitutional_controlling": false,
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false
+  }
+}

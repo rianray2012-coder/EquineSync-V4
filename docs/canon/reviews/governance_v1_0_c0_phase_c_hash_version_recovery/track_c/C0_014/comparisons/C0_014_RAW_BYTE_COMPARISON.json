@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-014",
+  "current_path": "docs/canon/MASTER_FACILITY_DOMAIN_MODEL.md",
+  "current_sha256": "ee97b61290d7552a9907df14db25b2a3b4a8a32a57871adca6ce0e373b5c712b",
+  "expected_sha256": "4b88f477677bb2147df44f766a36b07ca587421967ea510b00e20315a34d2590",
+  "expected_source_recovered": false,
+  "recovered_evidence_path": null,
+  "recovered_sha256": null,
+  "raw_byte_identical": false,
+  "current_size": 6268,
+  "recovered_size": null,
+  "normalized_line_similarity": null,
+  "heading_similarity": null
+}

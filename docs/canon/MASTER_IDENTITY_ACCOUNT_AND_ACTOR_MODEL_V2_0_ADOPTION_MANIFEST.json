@@ -1,0 +1,35 @@
+{
+  "artifact": "MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0",
+  "version": "2.0",
+  "adoption_date": "2026-07-12",
+  "adoption_decision": "ADOPT_WITH_NONBLOCKING_FOLLOW_UP",
+  "constitutional_authority": "CONTROLLING",
+  "adoption_state": "ADOPTED_WITH_NONBLOCKING_FOLLOW_UP",
+  "lock_state": "ADOPTED_NOT_LOCKED",
+  "adopted_path": "docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0.md",
+  "adopted_sha256": "1c79c20a2edd2e7e3907e875679c5871d53c146a226364fb0cc3f956d39f5d0e",
+  "verified_candidate_path": "docs/canon/candidates/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0.md",
+  "verified_candidate_sha256": "1c79c20a2edd2e7e3907e875679c5871d53c146a226364fb0cc3f956d39f5d0e",
+  "byte_identical": true,
+  "original_reviewed_source_sha256": "7e69efdfa1e0b4fd843b9360e669c34b3cb416de635b1a892f7099492e7d551b",
+  "controlled_adoption_review_package_sha256": "d1f0c47b29b182f72b37ff92b59ecf563bba923a4d277872e3ae25976a08abeb",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "open_p2": 2
+  },
+  "nonblocking_follow_up": [
+    "A_IDENTITY_ACTOR-P2-01",
+    "A_IDENTITY_ACTOR-P2-02"
+  ],
+  "canon_lock_authorized": false,
+  "implementation_authorized": false,
+  "authentication_authorized": false,
+  "permission_evaluation_authorized": false,
+  "identity_provider_selection_authorized": false,
+  "credential_activity_authorized": false,
+  "schema_or_migration_authorized": false,
+  "runtime_execution_authorized": false,
+  "production_mutation_authorized": false,
+  "public_launch_authorized": false
+}

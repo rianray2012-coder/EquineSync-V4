@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-005",
+  "current_path": "docs/canon/MASTER_ECOSYSTEM_MODEL.md",
+  "current_sha256": "4344294c05b4b5483ff23497f198edb18e8bcb54d93410266791a57809107533",
+  "expected_sha256": "5d600fec0bb674b5b9a961628e70453e3bd56083ad53edd19c974216ae18fa9c",
+  "expected_source_recovered": false,
+  "recovered_evidence_path": null,
+  "recovered_sha256": null,
+  "raw_byte_identical": false,
+  "current_size": 33395,
+  "recovered_size": null,
+  "normalized_line_similarity": null,
+  "heading_similarity": null
+}

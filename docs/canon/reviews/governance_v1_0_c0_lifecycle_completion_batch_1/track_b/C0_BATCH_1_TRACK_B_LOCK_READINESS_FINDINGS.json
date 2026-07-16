@@ -1,0 +1,57 @@
+{
+  "reviewed_at": "2026-07-16T07:34:36Z",
+  "p0": 0,
+  "open_p1": 0,
+  "lock_blocking_p2": 0,
+  "rows": [
+    {
+      "row_id": "C0-025",
+      "ready": true,
+      "report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_025_LOCK_READINESS_REPORT.md",
+      "certificate": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_025_LOCK_READINESS_CERTIFICATE.json",
+      "lock_disposition": "PENDING_SEPARATE_FOUNDER_LOCK"
+    },
+    {
+      "row_id": "C0-026",
+      "ready": true,
+      "report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_026_LOCK_READINESS_REPORT.md",
+      "certificate": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_026_LOCK_READINESS_CERTIFICATE.json",
+      "lock_disposition": "PENDING_SEPARATE_FOUNDER_LOCK"
+    },
+    {
+      "row_id": "C0-027",
+      "ready": true,
+      "report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_027_LOCK_READINESS_REPORT.md",
+      "certificate": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_027_LOCK_READINESS_CERTIFICATE.json",
+      "lock_disposition": "PENDING_SEPARATE_FOUNDER_LOCK"
+    },
+    {
+      "row_id": "C0-029",
+      "ready": true,
+      "report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_029_LOCK_READINESS_REPORT.md",
+      "certificate": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_029_LOCK_READINESS_CERTIFICATE.json",
+      "lock_disposition": "PENDING_SEPARATE_FOUNDER_LOCK"
+    },
+    {
+      "row_id": "C0-030",
+      "ready": true,
+      "report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_030_LOCK_READINESS_REPORT.md",
+      "certificate": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_030_LOCK_READINESS_CERTIFICATE.json",
+      "lock_disposition": "PENDING_SEPARATE_FOUNDER_LOCK"
+    },
+    {
+      "row_id": "C0-031",
+      "ready": true,
+      "report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_031_LOCK_READINESS_REPORT.md",
+      "certificate": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_031_LOCK_READINESS_CERTIFICATE.json",
+      "lock_disposition": "PENDING_SEPARATE_FOUNDER_LOCK"
+    },
+    {
+      "row_id": "C0-032",
+      "ready": true,
+      "report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_032_LOCK_READINESS_REPORT.md",
+      "certificate": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_032_LOCK_READINESS_CERTIFICATE.json",
+      "lock_disposition": "PENDING_SEPARATE_FOUNDER_LOCK"
+    }
+  ]
+}

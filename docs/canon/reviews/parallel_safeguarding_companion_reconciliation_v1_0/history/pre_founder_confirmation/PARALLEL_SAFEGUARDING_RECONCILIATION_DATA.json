@@ -1,0 +1,1041 @@
+{
+  "program": "CONTROLLED_RECONCILIATION_OF_PARALLEL_SAFEGUARDING_PACKAGE",
+  "generated": "2026-07-15",
+  "disposition": "PARALLEL_SAFEGUARDING_PACKAGE_RECONCILED_FOUNDER_CONFIRMATION_REQUIRED",
+  "source_package": {
+    "path": "source_package/EquineSync_Safeguarding_Companion_Integration_Package_V1_0.zip",
+    "sha256": "e70eb6c325fd50436f5acdd4d04c91584de8c63c12760c293a5a9dfd76b5b815",
+    "classification": "NONAUTHORITATIVE_PARALLEL_DRAFT_EVIDENCE",
+    "extracted_files": 41,
+    "internal_checksum_rows_verified": 40,
+    "internal_json_manifest_rows": 38
+  },
+  "counts": {
+    "fd_msp_decisions": 15,
+    "fd_msp_independently_linked": 0,
+    "sg_decisions_crosswalked": 12,
+    "material_section_groups_classified": 29,
+    "companion_candidates": 6,
+    "machine_diffs": 4,
+    "package_p0": 0,
+    "package_p1": 3,
+    "existing_sg_p1": 12,
+    "existing_sg_p2": 6
+  },
+  "formal_scans": {
+    "dependency_cycle": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING",
+    "orphan_requirement": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING"
+  },
+  "analysis_class": "NONAUTHORITATIVE_PRELIMINARY_REVIEW_ANALYSIS",
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "permission_expansion": false,
+    "provider_activation": false,
+    "runtime": false,
+    "production": false,
+    "customer_onboarding": false,
+    "public_claim": false,
+    "launch": false
+  },
+  "artifact_inventory": [
+    {
+      "path": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.docx",
+      "sha256": "85d95a337664c9dbc327b3fe3858b19c8513aba94752eb9a0a5c29eff0d2628f",
+      "bytes": "16018",
+      "identifier": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1",
+      "version": "1.1",
+      "artifact_class": "COMPANION_DELTA_CANDIDATE",
+      "lifecycle_state": "EXACT_PREDECESSOR_NOT_MOUNTED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "sha256": "6be760d6b5f274097074d16fcee805aea3249b51058d5998abff4235945adc75",
+      "bytes": "9190",
+      "identifier": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1",
+      "version": "1.1",
+      "artifact_class": "COMPANION_DELTA_CANDIDATE",
+      "lifecycle_state": "EXACT_PREDECESSOR_NOT_MOUNTED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.docx",
+      "sha256": "544a5e666515c30fbf8b25e51183957e89e7c933937de6bfbd49d82a4c302696",
+      "bytes": "13957",
+      "identifier": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1",
+      "version": "1.1",
+      "artifact_class": "COMPANION_DELTA_CANDIDATE",
+      "lifecycle_state": "EXACT_PREDECESSOR_NOT_MOUNTED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "sha256": "9a41067be17c667dd70328ac7c7c53bf3029bd478b3f8f9b6fd8964842c06833",
+      "bytes": "5558",
+      "identifier": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1",
+      "version": "1.1",
+      "artifact_class": "COMPANION_DELTA_CANDIDATE",
+      "lifecycle_state": "EXACT_PREDECESSOR_NOT_MOUNTED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.docx",
+      "sha256": "9a992c8d573317832094d77d0764868f192460ecddde10aaa95d8b3f942d0070",
+      "bytes": "27097",
+      "identifier": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "sha256": "7262277efc185c78b911d85fb6d3b8c2556ebe6f5b3b8b5a97b85a34517fa24c",
+      "bytes": "50571",
+      "identifier": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.docx",
+      "sha256": "d1f2dfb4bec1c6e6fd151864521571b82196046dcf9ead58982368dd28f80e36",
+      "bytes": "46194",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "sha256": "31102a8f399d51449807f6bb65c9775e931b5796d2602b029e4a0afb634ade7f",
+      "bytes": "122226",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.docx",
+      "sha256": "e33ba9db612fd792dc293b811fcafabb1c1ce593f7aef90a1450d930ae6bb644",
+      "bytes": "40855",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "sha256": "6e810af409884936ad25f709d0f482f859765a84a5437625e635b1fcdcc239cb",
+      "bytes": "118290",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.docx",
+      "sha256": "1a5e1df142bb874707c40c9378214509aab363f796fa036e5d3c449e2bed68e2",
+      "bytes": "36364",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "sha256": "aa8888de9f0e60a5c30dffc5f86838129e44f24c2bc65d98ec940056251155fe",
+      "bytes": "76161",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.docx",
+      "sha256": "44c21dd0b797de8e64426926a097518e2a9afd5da3d14083baf5f01dd766d544",
+      "bytes": "15845",
+      "identifier": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "version": "1.0",
+      "artifact_class": "GENERATED_APPROVAL_ASSERTION",
+      "lifecycle_state": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.md",
+      "sha256": "4a024d4764fd947be51cc53b56d30e83d1ac61c1dfd9b7f5bc291f3c13aba60e",
+      "bytes": "10532",
+      "identifier": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "version": "1.0",
+      "artifact_class": "GENERATED_APPROVAL_ASSERTION",
+      "lifecycle_state": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.docx",
+      "sha256": "ab895f84bad914ef1248f8a0e4f90318359d52dffe2f7ab64823184757202141",
+      "bytes": "12621",
+      "identifier": "EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0",
+      "version": "1.1",
+      "artifact_class": "GENERATED_APPROVAL_ASSERTION",
+      "lifecycle_state": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.md",
+      "sha256": "b0546e1762a8e1e84091595dbbee9ffd7ed2d1833580f7479702046adb581607",
+      "bytes": "2102",
+      "identifier": "EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0",
+      "version": "1.1",
+      "artifact_class": "GENERATED_APPROVAL_ASSERTION",
+      "lifecycle_state": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.docx",
+      "sha256": "dcb57538adc443b17179fe9bf739f7df11dbc8042a9257a759396406518379cd",
+      "bytes": "13173",
+      "identifier": "EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0",
+      "version": "1.0",
+      "artifact_class": "PACKAGE_EVIDENCE",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.md",
+      "sha256": "c1cf18fcb99630d4699d7de43dbc6fe647c46ea34a42a8c44336cd41e284d349",
+      "bytes": "3565",
+      "identifier": "EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0",
+      "version": "1.0",
+      "artifact_class": "PACKAGE_EVIDENCE",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_INTEGRATION_VALIDATION_REPORT_V1_0.md",
+      "sha256": "be09f1c071d40ffbbc3e649be3dea11f473d750040ca6cfc9b40df4621303636",
+      "bytes": "3621",
+      "identifier": "EQUINESYNC_SAFEGUARDING_COMPANION_INTEGRATION_VALIDATION_REPORT_V1_0",
+      "version": "1.0",
+      "artifact_class": "PACKAGE_EVIDENCE",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_REGISTER_V1_0.xlsx",
+      "sha256": "100ad2cf53cbc1084c0086084b5652732b3a9154f02a75a97c887e68baa4c6ab",
+      "bytes": "18412",
+      "identifier": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_REGISTER_V1_0",
+      "version": "1.0",
+      "artifact_class": "PATCH_EVIDENCE",
+      "lifecycle_state": "PROVISIONAL_IDS_NOT_APPLIED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.docx",
+      "sha256": "da5929a714dc4eb9d57daf516d03739a05ba76f7c1a852b927d4acc0d2b6300f",
+      "bytes": "21070",
+      "identifier": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0",
+      "version": "1.0",
+      "artifact_class": "PATCH_EVIDENCE",
+      "lifecycle_state": "PROVISIONAL_IDS_NOT_APPLIED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.md",
+      "sha256": "f1f025b1a2b549dc2b6035052bb3f66f86d0c7e2d0f3b0ecdbd06d7a82b37bee",
+      "bytes": "26408",
+      "identifier": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0",
+      "version": "1.0",
+      "artifact_class": "PATCH_EVIDENCE",
+      "lifecycle_state": "PROVISIONAL_IDS_NOT_APPLIED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.docx",
+      "sha256": "8058981a7a5288698324c55ebee33ba7d4902548a723c2a5c35e4f3a12daa76c",
+      "bytes": "59592",
+      "identifier": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT",
+      "version": "1.1",
+      "artifact_class": "PARALLEL_CANON_DRAFT",
+      "lifecycle_state": "NONAUTHORITATIVE_PARALLEL_DRAFT_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.md",
+      "sha256": "e956999709da35b2260ce8fdac230bc37d0bee6000007cec35c18e3653f59f05",
+      "bytes": "109521",
+      "identifier": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT",
+      "version": "1.1",
+      "artifact_class": "PARALLEL_CANON_DRAFT",
+      "lifecycle_state": "NONAUTHORITATIVE_PARALLEL_DRAFT_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "PACKAGE_FILE_MANIFEST.md",
+      "sha256": "f3d2cd2238fce9ab5e5665ce47dbcbc5614e054dfb7794747ebb34aec1e198fd",
+      "bytes": "5736",
+      "identifier": "PACKAGE_FILE_MANIFEST",
+      "version": "UNSPECIFIED",
+      "artifact_class": "PACKAGE_EVIDENCE",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "false"
+    },
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "sha256": "080d2fe2f2e64fb978ba46450449d4365c48a85c061f774b9160eccc68b4f45e",
+      "bytes": "9019",
+      "identifier": "PACKAGE_MANIFEST",
+      "version": "UNSPECIFIED",
+      "artifact_class": "PACKAGE_EVIDENCE",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "false"
+    },
+    {
+      "path": "README.md",
+      "sha256": "2f2d3615793be4d5a4d5a8de58faf0eb07611d2aa9852f1505281ea57ed1b94e",
+      "bytes": "887",
+      "identifier": "README",
+      "version": "UNSPECIFIED",
+      "artifact_class": "PACKAGE_EVIDENCE",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "REPOSITORY_APPLICATION_INSTRUCTIONS.md",
+      "sha256": "88935684003ea4b2bfc54c132f0e580451705b1db77a30e1976b41b213cb09cd",
+      "bytes": "867",
+      "identifier": "REPOSITORY_APPLICATION_INSTRUCTIONS",
+      "version": "UNSPECIFIED",
+      "artifact_class": "PACKAGE_EVIDENCE",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "sha256": "a6c56868d03c8a0ef3739952c2d7a64b155742b4f592832ab318078e192810a8",
+      "bytes": "5230",
+      "identifier": "SHA256SUMS",
+      "version": "UNSPECIFIED",
+      "artifact_class": "PACKAGE_EVIDENCE",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "false"
+    },
+    {
+      "path": "safeguarding_patch_data.json",
+      "sha256": "348376a32a5d234c5b980b8ffd655bde77f2b55bf507ce107abfab9830ae88f1",
+      "bytes": "36974",
+      "identifier": "safeguarding_patch_data",
+      "version": "UNSPECIFIED",
+      "artifact_class": "PATCH_EVIDENCE",
+      "lifecycle_state": "PROVISIONAL_IDS_NOT_APPLIED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.json",
+      "sha256": "6686918e85908a4ca91cea99ee23dbb285ab6b36d0724015ab50c939e90c1192",
+      "bytes": "215",
+      "identifier": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1",
+      "version": "1.1",
+      "artifact_class": "COMPANION_DELTA_CANDIDATE",
+      "lifecycle_state": "EXACT_PREDECESSOR_NOT_MOUNTED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.json",
+      "sha256": "14ca3e61564ba3328c5fa1f22aaa356ca835edb9bf0402ef0c4296444fdc22b9",
+      "bytes": "206",
+      "identifier": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1",
+      "version": "1.1",
+      "artifact_class": "COMPANION_DELTA_CANDIDATE",
+      "lifecycle_state": "EXACT_PREDECESSOR_NOT_MOUNTED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.json",
+      "sha256": "a84a7e22cb881341501edac84861aadece6efe6453d369885ee1b06f54688deb",
+      "bytes": "193",
+      "identifier": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.json",
+      "sha256": "ae75bd66993700d3b50bdd4d344f3dacdacbac3cd2e17c1c74c1736e490dacb9",
+      "bytes": "204",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.json",
+      "sha256": "3d53bc80ba1f4a4810a79fa868addc9f76ad3d067481fb8baf4b8bbbba171c2b",
+      "bytes": "209",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.json",
+      "sha256": "945c089d34d2cefe5dcf0c88709a4bfc6e13d30d20b8a68b22fcb5fc2650e1ad",
+      "bytes": "220",
+      "identifier": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2",
+      "version": "1.2",
+      "artifact_class": "COMPANION_SUCCESSOR_CANDIDATE",
+      "lifecycle_state": "PENDING_PREDECESSOR_DIFF_REVIEW",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.json",
+      "sha256": "27c1101e2e3c8ddce2a1093d9616afc1feeee7f49072dcb8e26cc4739f9d8189",
+      "bytes": "236",
+      "identifier": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "version": "1.0",
+      "artifact_class": "GENERATED_APPROVAL_ASSERTION",
+      "lifecycle_state": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.json",
+      "sha256": "3889e8c4a67789b025f0799bea6b77c17dcd7c2a9b9580cc5a932f98f80fe745",
+      "bytes": "239",
+      "identifier": "EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0",
+      "version": "1.1",
+      "artifact_class": "GENERATED_APPROVAL_ASSERTION",
+      "lifecycle_state": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.json",
+      "sha256": "a8886355395b08696b8f80f8a71152c21c1801c9f12f10ab4eb2037fa64d9dd1",
+      "bytes": "227",
+      "identifier": "EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0",
+      "version": "1.0",
+      "artifact_class": "PACKAGE_SELF_VALIDATION",
+      "lifecycle_state": "NONAUTHORITATIVE_PACKAGE_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.json",
+      "sha256": "5bca4528ade90061b849fe23a75508c797edafc9ae4372cca5acb9a8360baedf",
+      "bytes": "210",
+      "identifier": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0",
+      "version": "1.0",
+      "artifact_class": "PATCH_EVIDENCE",
+      "lifecycle_state": "PROVISIONAL_IDS_NOT_APPLIED",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    },
+    {
+      "path": "validation/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.json",
+      "sha256": "5c026d84ddb2b62b70a0e579eded8b426997226ef13f4c23d854f63da5f8d812",
+      "bytes": "247",
+      "identifier": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT",
+      "version": "1.1",
+      "artifact_class": "PARALLEL_CANON_DRAFT",
+      "lifecycle_state": "NONAUTHORITATIVE_PARALLEL_DRAFT_EVIDENCE",
+      "authority": "FALSE",
+      "listed_in_internal_manifest": "true"
+    }
+  ],
+  "founder_decision_provenance": [
+    {
+      "decision_id": "FD-MSP01",
+      "topic": "Final domain boundary",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "The Relationship Model owns the underlying delegated-assistance relationship. Agreement and Permission own the grant, scope, duration, enforcement, and revocation. Search owns discoverability and minimum-information exposure. This Model owns the heightened eligibility, safety, supervision, communication, and safeguarding restrictions that apply when a minor or protected participant is involved.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP02",
+      "topic": "Protected-participant definition",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "Protected Participant includes minors; adults subject to guardianship, conservatorship, supported decision-making, or comparable authority arrangements; persons whose capacity to provide informed authorization is materially limited for the relevant matter; persons subject to an active safeguarding or protective restriction; alleged victims, reporters, and witnesses whose identity or safety requires heightened protection; and persons temporarily designated through a documented protective process. Diagnosis, disability, age, or vulnerability alone does not remove autonomy.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP03",
+      "topic": "Age and jurisdiction model",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "EquineSync shall use a jurisdiction-aware model and treat anyone under eighteen as a minor by default unless controlling law establishes a different status. Product age bands may support age-appropriate experiences but may not substitute for legal status, capacity, guardian authority, or individual assessment.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP04",
+      "topic": "Guardian authority and conflicting guardians",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "Guardian authority must be independently evidenced, person-specific, scope-specific, time-bound where applicable, subject to court orders and legal restrictions, and distinguishable from payer, emergency-contact, account-administrator, or household status. When valid guardians conflict, EquineSync must preserve the conflict, restrict disputed consequential actions, maintain necessary safety services, and route the matter to controlled review. The platform must not select whichever guardian acted first, pays, or controls the account.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP05",
+      "topic": "Minor assent and refusal",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "Minor assent should be collected in an age-appropriate form for material participation decisions whenever practicable. A minor's refusal controls optional promotional media, public profiles, nonessential direct communications, optional research, testimonials, optional AI-assisted personalization, and optional social or community participation. Emergency care, legally required action, and immediate safety interventions remain separate.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP06",
+      "topic": "Electronic communications involving minors",
+      "package_disposition": "Approved with founder modification",
+      "asserted_exact_language": "EquineSync shall prohibit one-to-one electronic communication between a minor and a trainer, coach, instructor, staff member, volunteer, provider, or other adult third party. Every ordinary electronic communication between an adult third party and a minor must include at least one currently verified parent or guardian as an active participant from the time the message is sent and throughout the thread. The platform must prevent prohibited messaging, including minor-initiated messages, guardian removal, delayed guardian addition, external-channel evasion, disappearing communications, attachments, comments, replies, and integrated communications. A separate protected safeguarding-intake path may restrict guardian involvement when inclusion would create danger, retaliation, investigative compromise, or another documented safeguarding risk; it may not create private messaging with the trainer, coach, accused person, or ordinary third party.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says founder modification",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP07",
+      "topic": "Safeguarding report intake and anonymity",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "Reports may be submitted by minors, guardians, staff, providers, volunteers, customers, witnesses, or other affected persons. EquineSync should support identified, confidential, anonymous where technically and legally supportable, on-behalf-of, and emergency reports, with preservation of supporting evidence. Anonymous status must not be represented as absolute where identity becomes legally required, technically discoverable, or necessary to prevent immediate harm.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP08",
+      "topic": "Guardian notification and access exceptions",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "A guardian is not always entitled to immediate notice of or access to every safeguarding matter. Notice or access may be delayed, restricted, or withheld when the guardian is the subject of the concern, disclosure could increase danger or retaliation, disclosure could compromise an investigation, another person's protected information would be exposed, law or a valid order restricts disclosure, or a qualified safeguarding authority determines that disclosure would be unsafe. The exception must be documented, scoped, time-aware, and reviewable.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP09",
+      "topic": "Emergency protective authority",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "A defined safeguarding authority and narrowly authorized emergency personnel may impose temporary minimum-necessary restrictions where there is a reasonable safety concern, including suspension of messaging, physical access, directory visibility, assignments, media access, delegated authority, contact, or pickup, plus preservation and escalation. Emergency restrictions must be attributable, time-limited, promptly reviewed, and must not be treated as final guilt or liability.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP10",
+      "topic": "In-person interaction, transportation, and release",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "Observable, interruptible, and accountable interaction is the default. EquineSync shall require authorized pickup and release records, transportation-specific authorization, identified driver and responsible organization, destination and expected time, emergency-contact availability, and documented emergency exceptions. Lesson or participation authorization does not automatically authorize transportation, pickup, lodging, or private-space access.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP11",
+      "topic": "Minor participation in delegated horse care",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "Minors may receive only age-appropriate, competence-appropriate, horse-specific, task-specific, time-limited duties with appropriate guardian, facility, or program authorization and supervision. Minors may not independently exercise medication, veterinary, emergency-disposition, horse-transport, financial, ownership, custody, safeguarding-investigation, unrelated-record, or unsupervised high-risk authority.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP12",
+      "topic": "Eligibility of adults working with protected participants",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "A governed eligibility state is required before an adult receives protected-participant access or assignments. The constitutional floor includes verified identity, applicable role and relationship, required training or acknowledgment, restriction and suspension checks, purpose-limited access, periodic revalidation, immediate revocation capability, no self-approval, and no automatic transfer of eligibility between unrelated organizations.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP13",
+      "topic": "AI and automated safeguarding support",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "AI may assist with intake organization, duplicate detection, translation, missing-information prompts, urgent-language surfacing for human review, timelines, routing, and controlled redaction. AI may not independently determine abuse, danger, credibility, mandatory-reporting conclusions, discipline, report closure, guardian rights, emergency contact, or predictive risk profiles, and may not create cross-tenant safeguarding lists.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP14",
+      "topic": "Challenge, appeal, and non-retaliation",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "Affected persons may request human review, correction, clarification, or appeal. A challenge does not automatically suspend a protective restriction. The process must prohibit retaliation, preserve evidence, separate allegations, interim measures, factual findings, eligibility outcomes, and legal determinations, and prevent ordinary appeal from exposing protected reporter or witness information.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    },
+    {
+      "decision_id": "FD-MSP15",
+      "topic": "Transition to adulthood or restored autonomy",
+      "package_disposition": "Approved as recommended",
+      "asserted_exact_language": "At adulthood or a material change in supported authority, EquineSync must conduct a governed transition rather than silently continuing guardian control. Guardian-derived permissions must end or be reassessed; the participant should be invited to control their own account; optional consents, privacy, and communication settings must be reviewed; historical actions and agreements must be preserved; payer responsibility changes only through a separate process; and safeguarding restrictions continue only where supported by an independent basis.",
+      "asserted_source_artifact": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0",
+      "independent_source_event": "NOT_LINKED",
+      "classification": "APPROVAL_ASSERTED_SOURCE_EVENT_NOT_LINKED",
+      "founder_modification": "Package says approved as recommended",
+      "provisional": "true"
+    }
+  ],
+  "decision_crosswalk": [
+    {
+      "sg_decision_id": "SG-FD01",
+      "sg_topic": "Transition to majority",
+      "parallel_decision_ids": "FD-MSP15",
+      "parallel_sections": "81-84",
+      "treatment": "RESOLVES_IF_PROVEN",
+      "alignment": "Aligned",
+      "founder_action": "Reconfirm FD-MSP15 and the V1.1 source event"
+    },
+    {
+      "sg_decision_id": "SG-FD02",
+      "sg_topic": "Conflicting guardians",
+      "parallel_decision_ids": "FD-MSP04",
+      "parallel_sections": "13-18",
+      "treatment": "RESOLVES_IF_PROVEN",
+      "alignment": "Aligned",
+      "founder_action": "Reconfirm FD-MSP04"
+    },
+    {
+      "sg_decision_id": "SG-FD03",
+      "sg_topic": "Adult-to-minor ordinary electronic communication",
+      "parallel_decision_ids": "FD-MSP06",
+      "parallel_sections": "23-32; 115-117",
+      "treatment": "CONFLICT_REQUIRES_DECISION",
+      "alignment": "Parallel text imposes an absolute prohibition; Codex recommendation allowed tightly governed communication",
+      "founder_action": "Choose the absolute parallel rule or expressly retain a narrower exception"
+    },
+    {
+      "sg_decision_id": "SG-FD04",
+      "sg_topic": "Media location search and recommendation defaults",
+      "parallel_decision_ids": "FD-MSP05",
+      "parallel_sections": "58-64",
+      "treatment": "PARTIAL_IF_PROVEN",
+      "alignment": "Parallel text is more protective and covers refusal public exposure and precise location",
+      "founder_action": "Confirm the complete default-deny package including search and recommendation behavior"
+    },
+    {
+      "sg_decision_id": "SG-FD05",
+      "sg_topic": "Emergency intervention before guardian contact",
+      "parallel_decision_ids": "FD-MSP09",
+      "parallel_sections": "37-40",
+      "treatment": "RESOLVES_IF_PROVEN",
+      "alignment": "Aligned",
+      "founder_action": "Reconfirm FD-MSP09"
+    },
+    {
+      "sg_decision_id": "SG-FD06",
+      "sg_topic": "Mandated-reporting governance",
+      "parallel_decision_ids": "",
+      "parallel_sections": "37.1; 37.2; 109",
+      "treatment": "BODY_ONLY_REQUIRES_CONFIRMATION",
+      "alignment": "Body text supports no-delay external reporting but no FD-MSP decision directly approves the jurisdiction and human-duty boundary",
+      "founder_action": "Approve or modify the body-only rule"
+    },
+    {
+      "sg_decision_id": "SG-FD07",
+      "sg_topic": "Safeguarding record access sealing and unsealing",
+      "parallel_decision_ids": "FD-MSP07; FD-MSP08; FD-MSP14",
+      "parallel_sections": "70-80; 96",
+      "treatment": "BODY_ONLY_REQUIRES_CONFIRMATION",
+      "alignment": "Segregated access and disclosure are addressed; sealing and unsealing authority classes remain incomplete",
+      "founder_action": "Approve access classes and direct a later sealing/unsealing standard"
+    },
+    {
+      "sg_decision_id": "SG-FD08",
+      "sg_topic": "Background-check and credential representations",
+      "parallel_decision_ids": "FD-MSP12",
+      "parallel_sections": "43-47; 85",
+      "treatment": "PARTIAL_IF_PROVEN",
+      "alignment": "Eligibility is governed but claim vocabulary and continuous-status limitations remain body-level",
+      "founder_action": "Confirm claim-neutral credential language"
+    },
+    {
+      "sg_decision_id": "SG-FD09",
+      "sg_topic": "Minor account capability tiers",
+      "parallel_decision_ids": "FD-MSP03; FD-MSP05; FD-MSP11",
+      "parallel_sections": "19-20; 54-57",
+      "treatment": "PARTIAL_IF_PROVEN",
+      "alignment": "Age-appropriate access and task limits are present but a canonical capability-tier decision is absent",
+      "founder_action": "Approve tiering principle without implementation activation"
+    },
+    {
+      "sg_decision_id": "SG-FD10",
+      "sg_topic": "Unsubstantiated mistaken withdrawn and malicious reports",
+      "parallel_decision_ids": "FD-MSP14",
+      "parallel_sections": "36; 42; 76-80",
+      "treatment": "RESOLVES_IF_PROVEN",
+      "alignment": "Aligned",
+      "founder_action": "Reconfirm FD-MSP14 and the separate maliciousness determination rule"
+    },
+    {
+      "sg_decision_id": "SG-FD11",
+      "sg_topic": "Communication observability and content-review authority",
+      "parallel_decision_ids": "FD-MSP06; FD-MSP13",
+      "parallel_sections": "23-32; 65-69",
+      "treatment": "PARTIAL_IF_PROVEN",
+      "alignment": "Thread integrity and monitoring boundaries are present; content-review authority requires a specific confirmation",
+      "founder_action": "Confirm metadata preservation and purpose-specific audited content review"
+    },
+    {
+      "sg_decision_id": "SG-FD12",
+      "sg_topic": "SafeSport and comparable framework claims",
+      "parallel_decision_ids": "",
+      "parallel_sections": "Founder notice; 85; 111; 117; MSP-T60",
+      "treatment": "BODY_ONLY_REQUIRES_CONFIRMATION",
+      "alignment": "The parallel body prohibits unsupported compliance claims but no FD-MSP decision independently approves it",
+      "founder_action": "Approve claim-neutral framework language"
+    }
+  ],
+  "section_dispositions": [
+    {
+      "section": "Document Control and Founder Notice",
+      "subject": "Status authority and electronic-communication floor",
+      "disposition": "REQUIRES_FOUNDER_DECISION",
+      "reason": "Approval event is asserted but not independently linked",
+      "target_layer": "Register and constitutional preface after confirmation"
+    },
+    {
+      "section": "Part I",
+      "subject": "Purpose ownership and boundaries",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Strong boundary language aligns with locked canon",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part II",
+      "subject": "Definitions and principles",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Most definitions are useful but Protected Participant taxonomy must be split",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part III",
+      "subject": "Age autonomy assent and refusal",
+      "disposition": "RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION",
+      "reason": "Adds jurisdiction and refusal safeguards pending provenance",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part IV",
+      "subject": "Guardian identity authority and conflict",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Aligns with Relationship Permission and Claims",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part V",
+      "subject": "Accounts identity and access",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Useful minimum-access rules; capability tiers remain a founder decision",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part VI",
+      "subject": "Electronic communications",
+      "disposition": "REQUIRES_FOUNDER_DECISION",
+      "reason": "Absolute prohibition conflicts with the current SG-FD03 recommendation",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part VII",
+      "subject": "Intake triage reporting and protection",
+      "disposition": "RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION",
+      "reason": "Strong intake no-delay recusal and fairness controls; mandated-reporting authority still needs confirmation",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part VIII",
+      "subject": "Adult eligibility and protected roles",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Adds revalidation and restriction controls without conferring credentials",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part IX",
+      "subject": "In-person participation release and transportation",
+      "disposition": "RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION",
+      "reason": "Closes private-space lodging gifts pickup and transport gaps",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part X",
+      "subject": "Delegated horse care",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Aligns with EH-FD13 boundary but medical task authority remains unresolved",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XI",
+      "subject": "Privacy media search and location",
+      "disposition": "RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION",
+      "reason": "Default protective treatment aligns with current recommendation",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XII",
+      "subject": "AI automation reporting and analytics",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Aligns with RF30 and prohibits shared-model training",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XIII",
+      "subject": "Records evidence holds and confidentiality",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Strong segregation and chain-of-custody rules; sealing classes remain subordinate work",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XIV",
+      "subject": "Challenge appeal fairness and non-retaliation",
+      "disposition": "RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION",
+      "reason": "Preserves protective measures while supporting procedural fairness",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XV",
+      "subject": "Transition to adulthood",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Aligned with SG-FD01 recommendation",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XVI",
+      "subject": "External systems offline and platform controls",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Preserves default-off offline and provider-neutral boundaries",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XVII",
+      "subject": "Roles and responsibilities",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Useful responsibility separation subject to canon authority order",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XVIII",
+      "subject": "Required registers standards and artifacts",
+      "disposition": "MOVE_TO_SUBORDINATE_STANDARD",
+      "reason": "Operational completeness should not block constitutional closure",
+      "target_layer": "Implementation Readiness Standard and Operational Backlog"
+    },
+    {
+      "section": "Part XIX",
+      "subject": "Implementation gates",
+      "disposition": "MOVE_TO_IMPLEMENTATION_READINESS",
+      "reason": "These are future feature and release gates not constitutional text",
+      "target_layer": "Safeguarding Implementation Readiness Standard"
+    },
+    {
+      "section": "Part XX",
+      "subject": "Mandatory test scenarios",
+      "disposition": "MOVE_TO_TEST_CATALOG",
+      "reason": "All 80 scenarios are valuable but belong in an executable catalog",
+      "target_layer": "Safeguarding Constitutional Test Catalog"
+    },
+    {
+      "section": "Part XXI",
+      "subject": "Metrics monitoring and assurance",
+      "disposition": "MOVE_TO_IMPLEMENTATION_READINESS",
+      "reason": "Metrics require implemented controls and data minimization",
+      "target_layer": "Implementation Readiness Standard"
+    },
+    {
+      "section": "Part XXII",
+      "subject": "Prohibited conduct and non-waivable rules",
+      "disposition": "RETAIN_AS_CONSTITUTIONAL_TEXT",
+      "reason": "Defines constitutional floors and prohibitions",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XXIII",
+      "subject": "Exceptions and founder-reserved authority",
+      "disposition": "RETAIN_AS_CONSTITUTIONAL_TEXT",
+      "reason": "Defines controlled exceptions without granting runtime authority",
+      "target_layer": "Master Safeguarding Constitutional Canon"
+    },
+    {
+      "section": "Part XXIV",
+      "subject": "Lifecycle and authorization boundary",
+      "disposition": "MERGE_INTO_EXISTING_CODEX_SECTION",
+      "reason": "Keep lifecycle truth but remove premature approval claims",
+      "target_layer": "Register and canon document control"
+    },
+    {
+      "section": "Appendix A",
+      "subject": "Founder decision traceability",
+      "disposition": "REQUIRES_FOUNDER_DECISION",
+      "reason": "Trace is useful but every approval is unlinked",
+      "target_layer": "Safeguarding Register and Evidence Inventory"
+    },
+    {
+      "section": "Appendix B",
+      "subject": "Cross-canon reading set",
+      "disposition": "MOVE_TO_SUBORDINATE_STANDARD",
+      "reason": "Maintain as dependency inventory",
+      "target_layer": "Safeguarding Register and Evidence Inventory"
+    },
+    {
+      "section": "Appendix C",
+      "subject": "Pre-implementation handoffs",
+      "disposition": "MOVE_TO_IMPLEMENTATION_READINESS",
+      "reason": "Associate each handoff with the feature or production gate that needs it",
+      "target_layer": "Operational Standards Backlog"
+    },
+    {
+      "section": "Appendix D",
+      "subject": "Validation focus",
+      "disposition": "MOVE_TO_TEST_CATALOG",
+      "reason": "Validation belongs with executable scenarios and evidence",
+      "target_layer": "Safeguarding Constitutional Test Catalog"
+    }
+  ],
+  "companion_deltas": [
+    {
+      "artifact": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER",
+      "predecessor_path": "NOT_MOUNTED",
+      "predecessor_sha256": "UNAVAILABLE",
+      "candidate_path": "source_package/extracted/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "candidate_sha256": "6be760d6b5f274097074d16fcee805aea3249b51058d5998abff4235945adc75",
+      "diff_path": "NOT_AVAILABLE",
+      "diff_numstat": "NOT_AVAILABLE",
+      "lifecycle": "SAFEGUARDING_DELTA_CANDIDATE_NOT_EXACT_V1_1"
+    },
+    {
+      "artifact": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER",
+      "predecessor_path": "NOT_MOUNTED",
+      "predecessor_sha256": "UNAVAILABLE",
+      "candidate_path": "source_package/extracted/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "candidate_sha256": "9a41067be17c667dd70328ac7c7c53bf3029bd478b3f8f9b6fd8964842c06833",
+      "diff_path": "NOT_AVAILABLE",
+      "diff_numstat": "NOT_AVAILABLE",
+      "lifecycle": "SAFEGUARDING_DELTA_CANDIDATE_NOT_RECOVERED_SOURCE"
+    },
+    {
+      "artifact": "EQUINESYNC_CANON_DEPENDENCY_MAP",
+      "predecessor_path": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1.md",
+      "predecessor_sha256": "516856c982af8d882ec6f94933b5a01ea6558ca63d47c9a6237ee76fe0f12a44",
+      "candidate_path": "source_package/extracted/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "candidate_sha256": "7262277efc185c78b911d85fb6d3b8c2556ebe6f5b3b8b5a97b85a34517fa24c",
+      "diff_path": "diffs/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1_TO_V1_2.patch",
+      "diff_numstat": "19 additions; 13 deletions",
+      "lifecycle": "CANDIDATE_SUCCESSOR_PENDING_REVIEW"
+    },
+    {
+      "artifact": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX",
+      "predecessor_path": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_1.md",
+      "predecessor_sha256": "1b614fafa17f5841363646e72191883db2bc2b8c5a54a959a6a0bf0f77c018fa",
+      "candidate_path": "source_package/extracted/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "candidate_sha256": "31102a8f399d51449807f6bb65c9775e931b5796d2602b029e4a0afb634ade7f",
+      "diff_path": "diffs/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_1_TO_V1_2.patch",
+      "diff_numstat": "44 additions; 20 deletions",
+      "lifecycle": "CANDIDATE_SUCCESSOR_PENDING_REVIEW"
+    },
+    {
+      "artifact": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX",
+      "predecessor_path": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_1.md",
+      "predecessor_sha256": "94badc3b6eeae1dd1d96d8c577a187bbdfe696df4db35e573629581a7856904e",
+      "candidate_path": "source_package/extracted/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "candidate_sha256": "6e810af409884936ad25f709d0f482f859765a84a5437625e635b1fcdcc239cb",
+      "diff_path": "diffs/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_1_TO_V1_2.patch",
+      "diff_numstat": "53 additions; 29 deletions",
+      "lifecycle": "CANDIDATE_SUCCESSOR_PENDING_REVIEW"
+    },
+    {
+      "artifact": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX",
+      "predecessor_path": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1.md",
+      "predecessor_sha256": "ee88f5e8ba3602ffecd3f15f5acc2d8881e58809645dac6d7038c3b1a4d0d0d0",
+      "candidate_path": "source_package/extracted/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "candidate_sha256": "aa8888de9f0e60a5c30dffc5f86838129e44f24c2bc65d98ec940056251155fe",
+      "diff_path": "diffs/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1_TO_V1_2.patch",
+      "diff_numstat": "240 additions; 3 deletions",
+      "lifecycle": "CANDIDATE_SUCCESSOR_PENDING_REVIEW"
+    }
+  ]
+}

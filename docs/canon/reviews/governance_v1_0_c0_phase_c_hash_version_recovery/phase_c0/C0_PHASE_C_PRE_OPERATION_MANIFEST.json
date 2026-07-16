@@ -1,0 +1,138 @@
+{
+  "generated_at": "2026-07-16T08:32:07Z",
+  "repository_root": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current",
+  "branch": "integrate-emergent-final-zip",
+  "commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "dirty_entry_count": 232,
+  "directive": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/source/C0_PHASE_C_FOUNDER_DIRECTIVE.md",
+  "directive_sha256": "f4728bad6a0b2324655aa40580e8e2ab7803c7fe046a20c00e7457b14ad6138d",
+  "current_sources": [
+    {
+      "row_id": "C0-004",
+      "path": "docs/canon/MASTER_PRODUCT_VISION.md",
+      "expected_start_sha256": "ba2bdedfbbd89889af02035656d2f738175dcbde3869084c5e0c92062644c469",
+      "actual_sha256": "ba2bdedfbbd89889af02035656d2f738175dcbde3869084c5e0c92062644c469",
+      "verified": true
+    },
+    {
+      "row_id": "C0-005",
+      "path": "docs/canon/MASTER_ECOSYSTEM_MODEL.md",
+      "expected_start_sha256": "4344294c05b4b5483ff23497f198edb18e8bcb54d93410266791a57809107533",
+      "actual_sha256": "4344294c05b4b5483ff23497f198edb18e8bcb54d93410266791a57809107533",
+      "verified": true
+    },
+    {
+      "row_id": "C0-012",
+      "path": "docs/canon/MASTER_HORSE_LIFECYCLE.md",
+      "expected_start_sha256": "cd47c8fe3e76eee067594f38efd45265929d279c4d1fd9dc2a70e16fea976391",
+      "actual_sha256": "cd47c8fe3e76eee067594f38efd45265929d279c4d1fd9dc2a70e16fea976391",
+      "verified": true
+    },
+    {
+      "row_id": "C0-014",
+      "path": "docs/canon/MASTER_FACILITY_DOMAIN_MODEL.md",
+      "expected_start_sha256": "ee97b61290d7552a9907df14db25b2a3b4a8a32a57871adca6ce0e373b5c712b",
+      "actual_sha256": "ee97b61290d7552a9907df14db25b2a3b4a8a32a57871adca6ce0e373b5c712b",
+      "verified": true
+    },
+    {
+      "row_id": "C0-015",
+      "path": "docs/canon/MASTER_BARN_LIFECYCLE.md",
+      "expected_start_sha256": "3e7428771d3d8868e801e80551912a8f6284f5a4d53698d170d4b67b3be13553",
+      "actual_sha256": "3e7428771d3d8868e801e80551912a8f6284f5a4d53698d170d4b67b3be13553",
+      "verified": true
+    },
+    {
+      "row_id": "C0-016",
+      "path": "docs/canon/MASTER_BUSINESS_LIFECYCLE.md",
+      "expected_start_sha256": "063339ec8b8aab20908742675013692de2dbb56f018939bac71371b8366d2466",
+      "actual_sha256": "063339ec8b8aab20908742675013692de2dbb56f018939bac71371b8366d2466",
+      "verified": true
+    },
+    {
+      "row_id": "C0-019",
+      "path": "docs/canon/candidates/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_0.md",
+      "expected_start_sha256": "630b6128e37734be01a40d64b80d9fb4d74fce48198c60f9fcbd1a2ef83c232b",
+      "actual_sha256": "630b6128e37734be01a40d64b80d9fb4d74fce48198c60f9fcbd1a2ef83c232b",
+      "verified": true
+    },
+    {
+      "row_id": "C0-022",
+      "path": "docs/canon/MASTER_PERMISSION_MODEL.md",
+      "expected_start_sha256": "2034979a0fe77fd89ba065ecf9d309f5897641b6c38c9bde7c69dc8ac06adeab",
+      "actual_sha256": "2034979a0fe77fd89ba065ecf9d309f5897641b6c38c9bde7c69dc8ac06adeab",
+      "verified": true
+    },
+    {
+      "row_id": "C0-028",
+      "path": "docs/canon/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0.md",
+      "expected_start_sha256": "def33679b38b25ab5bbe0fc5c9c78a4fe8d505533d9c1d91a37035735f283ab4",
+      "actual_sha256": "def33679b38b25ab5bbe0fc5c9c78a4fe8d505533d9c1d91a37035735f283ab4",
+      "verified": true
+    }
+  ],
+  "expected_package_evidence": {
+    "foundational_package": {
+      "historical_path": "/mnt/data/EquineSync_Foundational_Canon_Review_Package.zip",
+      "sha256": "8f061b741f629580850bfdf6721d3998d53de723a0454fbf0a408122c074a916",
+      "locally_mounted": false
+    },
+    "cross_canon_package": {
+      "path": "/Users/rianray/Downloads/EquineSync_Cross_Canon_Reconciliation_Package_V1_0.zip",
+      "locally_mounted": true
+    }
+  },
+  "locked_snapshot": {
+    "docs/canon/locks/audit_event_evidence_v2_0/C0_027_AUDIT_EVENT_AND_EVIDENCE_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "a6564926f471a7c3a202e5a38373aaea29b283c129de8ad4ddee6d6394c7d39a",
+    "docs/canon/locks/audit_event_evidence_v2_0/C0_027_AUDIT_EVENT_AND_EVIDENCE_CONSTITUTIONAL_LOCK_RECORD.md": "604ab98742c033caae650f3bce0792c8c41a4d2716c43201ded22ba2de8519aa",
+    "docs/canon/locks/audit_event_evidence_v2_0/C0_027_AUDIT_EVENT_AND_EVIDENCE_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "0ad5c4ac2ff83e1a3178d9fd989bd4ef30accefcc742ed82a07484ae54fc7b9e",
+    "docs/canon/locks/communication_notice_v2_0/C0_029_COMMUNICATION_NOTIFICATION_AND_NOTICE_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "8a040dbd6a013ed317185d64b0a383e816ce6ad25710be064571dcc1910272e1",
+    "docs/canon/locks/communication_notice_v2_0/C0_029_COMMUNICATION_NOTIFICATION_AND_NOTICE_CONSTITUTIONAL_LOCK_RECORD.md": "4fba67dcc980627917110ddb3237ac8f5d328146940a4ffff1449dc497fb6474",
+    "docs/canon/locks/communication_notice_v2_0/C0_029_COMMUNICATION_NOTIFICATION_AND_NOTICE_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "688f87c9c4a4e1f1301bf2b205d1c61edd65ba7548ffead2cc5e60bb5fbff96b",
+    "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "abb34a0507d60348f2941748fb4d965f3deeffa37472dd5c00dbf402aed0fd6e",
+    "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_CONSTITUTIONAL_LOCK_RECORD.md": "50eb1307c6a3817a08c201b73c2104cc11ed9ac50679384379e7c7088577129a",
+    "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "8bd51a226ee052aca1995b5b39eec2788a490a5ed3d41eeca453f9927eeec360",
+    "docs/canon/locks/equine_health_v1_1/C0_037_EQUINE_HEALTH_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "90e59e08f4269b524855b7e4ba9451b5e23a43d31eae805379fc5f088d7158c3",
+    "docs/canon/locks/equine_health_v1_1/C0_037_EQUINE_HEALTH_CONSTITUTIONAL_LOCK_RECORD.md": "51e311f6ba7ddb64328f3e38fae259ddc5092925d9c7736eeaf82eec83a320cf",
+    "docs/canon/locks/equine_health_v1_1/C0_037_EQUINE_HEALTH_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "a01291d366549def9ba73ce900d054097cb1fa54d3529341e7cd8e8e5b2be94a",
+    "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "f248c5cd64ff8f52ba07eb4ca470d35b2e662c054ae2bb0dc79f413c939f7302",
+    "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_RECORD.md": "2646d811a5505e5b20b796c76bffe7cdecacc102033141f5f5bd2d749aeb9763",
+    "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "98476cfdfcdd7087e1d8bc4ee3e8b7375097e2672bb555e79aed30619da0abaf",
+    "docs/canon/locks/platform_resilience_v1_0/C0_031_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "b8e9e73abfe58af68ad78a047dd19f4a3114ba9c1fabd62d039d170217cc4a5e",
+    "docs/canon/locks/platform_resilience_v1_0/C0_031_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_CONSTITUTIONAL_LOCK_RECORD.md": "f6e8370404851b10c47af42d9678a31a24d88cf64d9d5e852a51f23493ab9b8c",
+    "docs/canon/locks/platform_resilience_v1_0/C0_031_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "43304c8b7fdc177989b44c9bbc08b2252607132bcf2c69cc4bb8a2592837733c",
+    "docs/canon/locks/record_stewardship_v2_1/C0_026_RECORD_STEWARDSHIP_AND_RETENTION_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "2036648710f46ccc3940195ce4af055035fe1e4bf8d4ebc9aecf950244c877ec",
+    "docs/canon/locks/record_stewardship_v2_1/C0_026_RECORD_STEWARDSHIP_AND_RETENTION_CONSTITUTIONAL_LOCK_RECORD.md": "8e653b11e2b088da6ca4f773b52aad59450814b3b549db000fbb24d3f868ca7f",
+    "docs/canon/locks/record_stewardship_v2_1/C0_026_RECORD_STEWARDSHIP_AND_RETENTION_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "68be985a77c3d82b3f68865e74d886d7edd9730d10cde9cf41b1b601f435fa31",
+    "docs/canon/locks/safeguarding_v1_2/C0_020_SAFEGUARDING_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "24cdfc498aa07b560478939b2b7ac5a52133fbd28809f203931dcb5453375155",
+    "docs/canon/locks/safeguarding_v1_2/C0_020_SAFEGUARDING_CONSTITUTIONAL_LOCK_RECORD.md": "b1329a8bc1d0ad28089dbc21f8ea5c57965ad1693417c717f0e03e4dbd61d834",
+    "docs/canon/locks/safeguarding_v1_2/C0_020_SAFEGUARDING_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "328c38fff936a89e9c6f53f493b7c657a6017b55936d2745131e7f320ee2caf7",
+    "docs/canon/locks/security_incident_response_v1_0/C0_030_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_CONSTITUTIONAL_LOCK_CERTIFICATE.json": "2366564065fa76a51f9ad83631a4b4e518dfc1a12dc80ae6dc384cbdff8d0ad5",
+    "docs/canon/locks/security_incident_response_v1_0/C0_030_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_CONSTITUTIONAL_LOCK_RECORD.md": "ff4537e3e322bc6ebcb4927b57365d1ef9e5bd972201192bc6940dc31db1cb31",
+    "docs/canon/locks/security_incident_response_v1_0/C0_030_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md": "a4083baa89b4c9001ea1415ed30d84285a96421e2ef6c62d8f04c25304f5d2c6"
+  },
+  "regression_snapshot": {
+    "docs/canon/MASTER_HORSE_TRANSFER_AND_CONTINUITY_POLICY.md": "a54fd42261d99819f26ac77a6e207f121049a3c4f6d2e69e3b6e7b5167435c6b"
+  },
+  "governance_v1_baseline_adopted": false,
+  "governance_v1_baseline_locked": false,
+  "authority": {
+    "founder_source_identity_decision": false,
+    "adoption": false,
+    "lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "amendment_of_locked_canon": false
+  }
+}

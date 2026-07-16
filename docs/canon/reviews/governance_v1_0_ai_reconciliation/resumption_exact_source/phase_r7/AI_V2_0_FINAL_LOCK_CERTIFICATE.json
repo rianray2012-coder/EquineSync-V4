@@ -1,0 +1,12 @@
+{
+  "disposition":"AI_V2_0_CONSTITUTIONAL_CANON_LOCKED_WITH_RETAINED_NONBLOCKING_P2",
+  "locked_at_utc":"2026-07-16T04:30:53Z",
+  "source":{"path":"docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx","sha256":"414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8","bytes":140809},
+  "adoption_record":{"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r7/AI_V2_0_FINAL_ADOPTION_RECORD.md","sha256":"52e75e3b4a789ceda213d060dc1fed8e53d4711125867ca5348c016fabcf2a86"},
+  "post_adoption_byte_drift":false,
+  "constitutional_authority":"CONTROLLING_AND_LOCKED",
+  "findings":{"p0":0,"open_p1":0,"lock_blocking_p2":0,"retained_nonblocking_p2":3},
+  "formal_scans":{"passed":10,"failed":0},
+  "authority":{"implementation":false,"runtime":false,"provider_activation":false,"customer_data_transfer":false,"training":false,"production":false,"public_claim":false,"public_launch":false},
+  "change_control":"NEW_CONTROLLED_AMENDMENT_OR_SUPERSEDING_VERSION_REQUIRED"
+}

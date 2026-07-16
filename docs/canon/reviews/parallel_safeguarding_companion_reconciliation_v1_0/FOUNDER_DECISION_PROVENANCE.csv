@@ -1,0 +1,156 @@
+decision_id,topic,current_disposition,current_founder_language,source_artifact,independent_source_event,independent_source_sha256,classification,founder_modification,candidate_sections,provisional
+FD-MSP01,Final domain boundary,RECONFIRMED,"The Relationship Model owns the underlying delegated-assistance relationship. Agreement and Permission own the grant, scope, duration, enforcement, and revocation. Search owns discoverability and minimum-information exposure. This Model owns the heightened eligibility, safety, supervision, communication, and safeguarding restrictions that apply when a minor or protected participant is involved.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 2-4,false
+FD-MSP02,Protected-participant definition,APPROVED_AS_MODIFIED,"EquineSync shall not use one undifferentiated Protected Participant status to combine:
+
+- minor or age status;
+- guardianship or supported-decision-making status;
+- capacity for a particular decision;
+- safeguarding case participation;
+- reporter or witness confidentiality;
+- temporary restrictions;
+- allegations;
+- protective controls.
+
+The constitutional model shall separately represent:
+
+1. Minor Status;
+2. Adult Status;
+3. Supported or Assisted Decision-Making Status;
+4. Guardian, Custodian, Authorized Representative, and Support-Person Relationships;
+5. Affected Participant;
+6. Reporting Person;
+7. Confidential Reporter;
+8. Witness;
+9. Protected Witness;
+10. Responding Person;
+11. Protective Restriction;
+12. Prohibited-Contact Restriction;
+13. Safety Plan;
+14. Emergency Safeguarding Hold;
+15. Minor Capability Tier;
+16. Adult Eligibility State.
+
+Protected Participant may remain a descriptive umbrella term, but it shall not independently:
+
+- establish lack of capacity;
+- remove autonomy;
+- grant or deny permission;
+- expose case involvement;
+- imply victim status;
+- imply wrongdoing;
+- create guardian authority;
+- create a permanent restriction.
+
+Authorization and projection consequences must be derived from the precise evidence-supported underlying status, relationship, purpose, restriction, and controlling Permission rule.
+
+Diagnosis, disability, communication style, age alone, vulnerability, reputation, allegation, reporter status, witness status, or convenience shall not independently establish incapacity or broad restriction.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Founder-modified exact language,Sections 6.2 and 9-10,false
+FD-MSP03,Age and jurisdiction model,RECONFIRMED,"EquineSync shall use a jurisdiction-aware model and treat anyone under eighteen as a minor by default unless controlling law establishes a different status. Product age bands may support age-appropriate experiences but may not substitute for legal status, capacity, guardian authority, or individual assessment.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 8 and 20.1,false
+FD-MSP04,Guardian authority and conflicting guardians,RECONFIRMED,"Guardian authority must be independently evidenced, person-specific, scope-specific, time-bound where applicable, subject to court orders and legal restrictions, and distinguishable from payer, emergency-contact, account-administrator, or household status. When valid guardians conflict, EquineSync must preserve the conflict, restrict disputed consequential actions, maintain necessary safety services, and route the matter to controlled review. The platform must not select whichever guardian acted first, pays, or controls the account.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 13-18,false
+FD-MSP05,Minor assent and refusal,RECONFIRMED,"Minor assent should be collected in an age-appropriate form for material participation decisions whenever practicable. A minor's refusal controls optional promotional media, public profiles, nonessential direct communications, optional research, testimonials, optional AI-assisted personalization, and optional social or community participation. Emergency care, legally required action, and immediate safety interventions remain separate.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 19-22 and 58-64,false
+FD-MSP06,Electronic communications involving minors,APPROVED_AS_MODIFIED,"A. Private one-to-one messaging
+
+EquineSync shall prohibit private, ordinary, conversational electronic communication between a minor and a trainer, coach, instructor, staff member, volunteer, provider, transporter, photographer, customer representative, or other unrelated adult third party.
+
+The prohibition applies regardless of whether the adult or minor initiates the communication.
+
+B. Individualized communications
+
+An individualized conversational communication between an adult third party and a minor must ordinarily include a currently verified guardian from the beginning and throughout the thread.
+
+C. Controlled organizational alternative
+
+Where guardian inclusion is:
+
+- unavailable;
+- unsafe;
+- legally restricted;
+- subject to a guardian conflict;
+- inconsistent with the minor’s documented lawful status;
+- incompatible with a protected reporting process;
+- or not reasonably appropriate for a governed organizational group communication,
+
+the communication may proceed only through an approved, logged, open-and-transparent organizational channel that includes at least one separately authorized safeguarding or supervisory adult in addition to the communicating adult.
+
+The additional adult must not be:
+
+- a bot;
+- a generic unattended account;
+- the subject of the safeguarding concern;
+- an adult whose conflict makes oversight ineffective;
+- or a person added only after the communication occurred.
+
+D. Thread integrity
+
+The system must prevent or detect:
+
+- private branches;
+- guardian or oversight-adult removal;
+- delayed addition of the required oversight participant;
+- disappearing communications;
+- hidden edits or deletions;
+- attachment or media bypass;
+- comments, task annotations, or calendar replies used as hidden messaging;
+- integrated email or SMS bypass;
+- solicitation of secret off-platform communication;
+- external-channel evasion where technically enforceable.
+
+E. Guardian delivery failure
+
+Where guardian inclusion is required, an expired, restricted, disabled, unreachable, or undeliverable guardian does not satisfy the rule.
+
+The platform must not silently continue the thread as though guardian participation remains effective.
+
+It may:
+
+- suspend further conversational delivery;
+- require corrected guardian information;
+- route the communication to a controlled organizational channel;
+- or permit only a qualifying emergency or protected-intake exception.
+
+F. Protected safeguarding intake
+
+Protected safeguarding intake remains separate from ordinary communication.
+
+It may restrict or withhold guardian notice when:
+
+- the guardian is implicated;
+- notice creates danger or retaliation;
+- notice compromises an investigation;
+- another person’s protected information would be disclosed;
+- controlling law or an order restricts notice;
+- or a qualified safeguarding authority documents another safety basis.
+
+Protected intake shall not create private messaging with the accused person, ordinary trainer, ordinary coach, or unrelated third party.
+
+G. System notices
+
+Age-appropriate, non-conversational system notices may be delivered to a minor when:
+
+- they do not create a private adult-minor thread;
+- guardian or organizational visibility is provided where required;
+- replies route to a compliant channel;
+- and restricted safeguarding information is not exposed.
+
+H. Emergency communication
+
+Emergency communication may occur only to protect immediate human or horse safety.
+
+It must be:
+
+- narrowly scoped;
+- time-limited;
+- attributable;
+- preserved;
+- escalated;
+- and reviewed promptly.
+
+Emergency communication does not create continuing permission for private communication.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Founder-modified exact language,Sections 23-32 and 114-117,false
+FD-MSP07,Safeguarding report intake and anonymity,RECONFIRMED,"Reports may be submitted by minors, guardians, staff, providers, volunteers, customers, witnesses, or other affected persons. EquineSync should support identified, confidential, anonymous where technically and legally supportable, on-behalf-of, and emergency reports, with preservation of supporting evidence. Anonymous status must not be represented as absolute where identity becomes legally required, technically discoverable, or necessary to prevent immediate harm.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 33-36,false
+FD-MSP08,Guardian notification and access exceptions,RECONFIRMED,"A guardian is not always entitled to immediate notice of or access to every safeguarding matter. Notice or access may be delayed, restricted, or withheld when the guardian is the subject of the concern, disclosure could increase danger or retaliation, disclosure could compromise an investigation, another person's protected information would be exposed, law or a valid order restricts disclosure, or a qualified safeguarding authority determines that disclosure would be unsafe. The exception must be documented, scoped, time-aware, and reviewable.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,"Sections 30, 34, 71, and 79",false
+FD-MSP09,Emergency protective authority,RECONFIRMED,"A defined safeguarding authority and narrowly authorized emergency personnel may impose temporary minimum-necessary restrictions where there is a reasonable safety concern, including suspension of messaging, physical access, directory visibility, assignments, media access, delegated authority, contact, or pickup, plus preservation and escalation. Emergency restrictions must be attributable, time-limited, promptly reviewed, and must not be treated as final guilt or liability.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 38-40,false
+FD-MSP10,"In-person interaction, transportation, and release",RECONFIRMED,"Observable, interruptible, and accountable interaction is the default. EquineSync shall require authorized pickup and release records, transportation-specific authorization, identified driver and responsible organization, destination and expected time, emergency-contact availability, and documented emergency exceptions. Lesson or participation authorization does not automatically authorize transportation, pickup, lodging, or private-space access.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 48-53,false
+FD-MSP11,Minor participation in delegated horse care,RECONFIRMED,"Minors may receive only age-appropriate, competence-appropriate, horse-specific, task-specific, time-limited duties with appropriate guardian, facility, or program authorization and supervision. Minors may not independently exercise medication, veterinary, emergency-disposition, horse-transport, financial, ownership, custody, safeguarding-investigation, unrelated-record, or unsupervised high-risk authority.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 54-57,false
+FD-MSP12,Eligibility of adults working with protected participants,RECONFIRMED,"A governed eligibility state is required before an adult receives protected-participant access or assignments. The constitutional floor includes verified identity, applicable role and relationship, required training or acknowledgment, restriction and suspension checks, purpose-limited access, periodic revalidation, immediate revocation capability, no self-approval, and no automatic transfer of eligibility between unrelated organizations.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 43-47,false
+FD-MSP13,AI and automated safeguarding support,RECONFIRMED,"AI may assist with intake organization, duplicate detection, translation, missing-information prompts, urgent-language surfacing for human review, timelines, routing, and controlled redaction. AI may not independently determine abuse, danger, credibility, mandatory-reporting conclusions, discipline, report closure, guardian rights, emergency contact, or predictive risk profiles, and may not create cross-tenant safeguarding lists.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 65-68,false
+FD-MSP14,"Challenge, appeal, and non-retaliation",RECONFIRMED,"Affected persons may request human review, correction, clarification, or appeal. A challenge does not automatically suspend a protective restriction. The process must prohibit retaliation, preserve evidence, separate allegations, interim measures, factual findings, eligibility outcomes, and legal determinations, and prevent ordinary appeal from exposing protected reporter or witness information.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 42 and 76-80,false
+FD-MSP15,Transition to adulthood or restored autonomy,RECONFIRMED,"At adulthood or a material change in supported authority, EquineSync must conduct a governed transition rather than silently continuing guardian control. Guardian-derived permissions must end or be reassessed; the participant should be invited to control their own account; optional consents, privacy, and communication settings must be reviewed; historical actions and agreements must be preserved; payer responsibility changes only through a separate process; and safeguarding restrictions continue only where supported by an independent basis.",EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0,EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md,f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152,FOUNDER_APPROVED_RECONFIRMED_IN_CURRENT_REVIEW,Exact substantive direction reconfirmed,Sections 81-84,false

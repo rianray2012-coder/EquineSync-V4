@@ -1,0 +1,247 @@
+# Global Companion Reconciliation Phase G0 Initialization Report
+
+Generated: `2026-07-16T06:08:55Z`  
+Branch: `integrate-emergent-final-zip`  
+Source commit: `9f812280542f6e9c43935563badec2de1448947b`  
+Disposition: `G0_PRIOR_EVIDENCE_VERIFIED`
+
+The founder directive, C0 baseline, V1.2 review baseline, historical provenance exception ledger, AI V2.0 lock, safeguarding evidence, RF31 decision linkage, and current lifecycle registries were located. AI V2.0 remains adopted and locked. The working tree was already materially dirty before this governance-only pass; no pre-existing change is attributed to this package.
+
+Authority remains false for implementation, runtime, providers, production, public launch, and public trust claims.
+
+## Working Tree Snapshot
+
+```text
+M BUILD_NEXT_RF19_STAGING_UAT_EVIDENCE_CAPTURE_README.md
+ D "Expansion. You MUST NOT expand feature surface area, rewrite architectures, or fix low-priority linting issues.\n- **Immediate Trigger**: Stand by for the user to provide the founder"
+ M backend/auth_security.py
+ M backend/core/account_context.py
+ M backend/core/account_memberships.py
+ M backend/core/auth.py
+ M backend/core/lifespan.py
+ M backend/core/permissions.py
+ M backend/core/rf19_staging_uat_evidence_capture.py
+ M backend/routes/admin_portal/users.py
+ M backend/routes/auth.py
+ M backend/routes/backlog.py
+ M backend/routes/invites.py
+ M backend/scripts/build_rf19_staging_uat_evidence_capture.py
+ M backend/server.py
+ M backend/tests/test_admin_portal_admin3.py
+ M backend/tests/test_build_next_3a_account_memberships.py
+ M backend/tests/test_build_next_3b_account_context.py
+ M backend/tests/test_operations_routes.py
+ M backend/tests/test_rf19_staging_uat_evidence_capture.py
+ M backend/tests/test_task_engine.py
+ M docs/FOUNDER_ACCEPTANCE_LEDGER.md
+ M docs/REFINEMENT_MASTER_FIX_LIST.md
+ M docs/REFINEMENT_ROADMAP.md
+ M docs/RF19_STAGING_UAT_EVIDENCE_CAPTURE.md
+ M frontend/src/App.js
+ M frontend/src/components/QuickAddSheet.jsx
+ M frontend/src/context/AuthContext.jsx
+ M frontend/src/lib/permissions.js
+ M frontend/src/lib/roleNavigation.js
+ M frontend/src/lib/taskSync.js
+ M frontend/src/pages/HorseProfile.jsx
+ M frontend/src/pages/Horses.jsx
+ M frontend/src/pages/StallMap.jsx
+ M frontend/src/pages/Today.jsx
+ M memory/PRD.md
+ M outputs/build_next_rf19_staging_uat_evidence_capture.zip
+ M outputs/rf19_official_staging_context.json
+ M outputs/rf19_staging_uat_artifact_index.json
+ M outputs/rf19_staging_uat_evidence_capture_report.md
+?? .github/
+?? BUILD_NEXT_ATLAS0_ENTERPRISE_DISCOVERY_AUDIT_README.md
+?? BUILD_NEXT_ATLAS1_PRODUCT_CONTINUITY_AUDIT_README.md
+?? BUILD_NEXT_PASSPORT_CARE_CIRCLE_LOCK_README.md
+?? BUILD_NEXT_RF20_POST_RF19_FOUNDER_ACCEPTANCE_README.md
+?? BUILD_NEXT_RF21_FOUNDER_DECISION_INTAKE_README.md
+?? BUILD_NEXT_RF22_RF_CLOSEOUT_ATLAS_HANDOFF_README.md
+?? RF_FINAL_COMPLETION_REPORT.md
+?? backend/core/ai/
+?? backend/core/atlas0_enterprise_discovery_audit.py
+?? backend/core/atlas1_product_continuity_audit.py
+?? backend/core/atlas2_barn_reality_audit.py
+?? backend/core/atlas3_canon_integrity_domain_consistency.py
+?? backend/core/atlas4_next_wave_implementation_readiness.py
+?? backend/core/calendar_adapters/
+?? backend/core/calendar_conflicts.py
+?? backend/core/calendar_outbox.py
+?? backend/core/calendar_permissions.py
+?? backend/core/calendar_recurrence.py
+?? backend/core/calendar_registration.py
+?? backend/core/calendar_types.py
+?? backend/core/facility_legacy_convergence.py
+?? backend/core/provider_isolation.py
+?? backend/core/rf20_founder_acceptance.py
+?? backend/core/rf21_founder_decision_intake.py
+?? backend/core/rf22_rf_closeout_atlas_handoff.py
+?? backend/core/rf23_navigation_persona_workflow_continuity.py
+?? backend/core/rf24_service_provider_operating_center.py
+?? backend/core/rf25_equine_passport_continuity_expansion.py
+?? backend/core/rf26_care_circle_permission_continuity.py
+?? backend/core/rf27_facility_map_barn_operations_reality.py
+?? backend/core/rf28_adapter_activation_evidence.py
+?? backend/core/rf28_adapter_activation_readiness.py
+?? backend/core/rf28_facility_legacy_convergence_kickoff.py
+?? backend/core/rf28_implementation_evidence.py
+?? backend/core/rf28_implementation_readiness.py
+?? backend/core/rf28_migration_authorization_readiness.py
+?? backend/core/rf29_calendar_domain_canon.py
+?? backend/core/wave2_core.py
+?? backend/routes/calendar.py
+?? backend/routes/equine_passport.py
+?? backend/routes/facility_operations.py
+?? backend/routes/wave2_core.py
+?? backend/scripts/build_atlas0_enterprise_discovery_audit.py
+?? backend/scripts/build_atlas1_product_continuity_audit.py
+?? backend/scripts/build_atlas2_barn_reality_audit.py
+?? backend/scripts/build_atlas3_canon_integrity_domain_consistency.py
+?? backend/scripts/build_atlas4_next_wave_implementation_readiness.py
+?? backend/scripts/build_rf20_founder_acceptance.py
+?? backend/scripts/build_rf21_founder_decision_intake.py
+?? backend/scripts/build_rf22_rf_closeout_atlas_handoff.py
+?? backend/scripts/build_rf23_navigation_persona_workflow_continuity.py
+?? backend/scripts/build_rf24_service_provider_operating_center.py
+?? backend/scripts/build_rf25_equine_passport_continuity_expansion.py
+?? backend/scripts/build_rf26_care_circle_permission_continuity.py
+?? backend/scripts/build_rf27_facility_map_barn_operations_reality.py
+?? backend/scripts/build_rf28_adapter_activation_evidence.py
+?? backend/scripts/build_rf28_adapter_activation_readiness.py
+?? backend/scripts/build_rf28_facility_legacy_convergence_kickoff.py
+?? backend/scripts/build_rf28_final_lock.py
+?? backend/scripts/build_rf28_implementation_evidence.py
+?? backend/scripts/build_rf28_implementation_readiness.py
+?? backend/scripts/build_rf28_migration_authorization_readiness.py
+?? backend/scripts/build_rf28_migration_execution_evidence.py
+?? backend/scripts/build_rf28_reproducibility_evidence.py
+?? backend/scripts/build_rf29_activation_authorization.py
+?? backend/scripts/build_rf29_activation_evidence.py
+?? backend/scripts/build_rf29_calendar_domain_canon.py
+?? backend/scripts/build_rf29_final_lock_readiness.py
+?? backend/scripts/build_rf29_implementation_evidence.py
+?? backend/scripts/build_rf29_implementation_readiness.py
+?? backend/scripts/build_rf30_activation_authorization.py
+?? backend/scripts/build_rf30_activation_evidence.py
+?? backend/scripts/build_rf30_ai_boundary.py
+?? backend/scripts/build_rf30_final_lock.py
+?? backend/scripts/build_rf30_final_lock_readiness.py
+?? backend/scripts/build_rf30_implementation_evidence.py
+?? backend/scripts/build_rf30_implementation_readiness.py
+?? backend/scripts/build_rf30_replacement_activation_evidence.py
+?? backend/scripts/run_rf28_isolated_synthetic_migration.py
+?? backend/scripts/run_rf28_local_synthetic_adapter_smoke.py
+?? backend/scripts/run_rf28_reproducibility_validation.py
+?? backend/scripts/run_rf29_activation_extracted_evidence.py
+?? backend/scripts/run_rf29_extracted_evidence.py
+?? backend/scripts/run_rf29_local_synthetic_activation.py
+?? backend/scripts/run_rf30_local_synthetic_activation.py
+?? backend/scripts/run_wave1_identity_convergence_rehearsal.py
+?? backend/scripts/run_wave2_core_convergence_rehearsal.py
+?? backend/scripts/validate_rf29_activation_authorization.py
+?? backend/scripts/validate_rf29_implementation_readiness.py
+?? backend/scripts/validate_rf29_package.py
+?? backend/scripts/validate_rf30_activation_authorization.py
+?? backend/scripts/validate_rf30_activation_evidence.py
+?? backend/scripts/validate_rf30_ai_boundary.py
+?? backend/scripts/validate_rf30_final_lock.py
+?? backend/scripts/validate_rf30_final_lock_readiness.py
+?? backend/scripts/validate_rf30_implementation_evidence.py
+?? backend/scripts/validate_rf30_implementation_readiness.py
+?? backend/scripts/validate_rf30_replacement_activation_evidence.py
+?? backend/scripts/verify_ci_egress_policy.py
+?? backend/tests/ai/
+?? backend/tests/ci_no_egress/
+?? backend/tests/test_atlas0_enterprise_discovery_audit.py
+?? backend/tests/test_atlas1_product_continuity_audit.py
+?? backend/tests/test_atlas2_barn_reality_audit.py
+?? backend/tests/test_atlas3_canon_integrity_domain_consistency.py
+?? backend/tests/test_atlas4_next_wave_implementation_readiness.py
+?? backend/tests/test_ci_egress_defense.py
+?? backend/tests/test_equine_passport_care_circle.py
+?? backend/tests/test_rf20_founder_acceptance.py
+?? backend/tests/test_rf21_founder_decision_intake.py
+?? backend/tests/test_rf22_rf_closeout_atlas_handoff.py
+?? backend/tests/test_rf23_navigation_persona_workflow_continuity.py
+?? backend/tests/test_rf24_service_provider_operating_center.py
+?? backend/tests/test_rf25_equine_passport_continuity_expansion.py
+?? backend/tests/test_rf26_care_circle_permission_continuity.py
+?? backend/tests/test_rf27_facility_map_barn_operations_reality.py
+?? backend/tests/test_rf27_facility_operations_routes.py
+?? backend/tests/test_rf28_adapter_activation_evidence.py
+?? backend/tests/test_rf28_adapter_activation_readiness.py
+?? backend/tests/test_rf28_facility_legacy_convergence.py
+?? backend/tests/test_rf28_facility_legacy_convergence_kickoff.py
+?? backend/tests/test_rf28_final_lock.py
+?? backend/tests/test_rf28_implementation_evidence.py
+?? backend/tests/test_rf28_implementation_readiness.py
+?? backend/tests/test_rf28_isolated_synthetic_migration.py
+?? backend/tests/test_rf28_local_synthetic_adapter_smoke.py
+?? backend/tests/test_rf28_migration_authorization_readiness.py
+?? backend/tests/test_rf29_activation_authorization.py
+?? backend/tests/test_rf29_activation_evidence.py
+?? backend/tests/test_rf29_calendar_domain_canon.py
+?? backend/tests/test_rf29_calendar_implementation.py
+?? backend/tests/test_rf29_final_lock_readiness.py
+?? backend/tests/test_rf29_implementation_evidence.py
+?? backend/tests/test_rf29_implementation_readiness.py
+?? backend/tests/test_rf30_activation_authorization.py
+?? backend/tests/test_rf30_activation_evidence.py
+?? backend/tests/test_rf30_ai_boundary.py
+?? backend/tests/test_rf30_final_lock.py
+?? backend/tests/test_rf30_final_lock_readiness.py
+?? backend/tests/test_rf30_implementation_evidence.py
+?? backend/tests/test_rf30_implementation_readiness.py
+?? backend/tests/test_rf30_replacement_activation_evidence.py
+?? backend/tests/test_w1_p2_08_provider_isolation.py
+?? backend/tests/test_wave1_identity_hardening.py
+?? backend/tests/test_wave1_identity_integration.py
+?? backend/tests/test_wave2_core.py
+?? backend/tests/test_wave2_core_integration.py
+?? docs/ATLAS0/
+?? docs/ATLAS1/
+?? docs/ATLAS2/
+?? docs/ATLAS3/
+?? docs/ATLAS4/
+?? docs/ATLAS5/
+?? docs/POST_REFINEMENT_PLAN.md
+?? docs/POST_REFINEMENT_PROGRAM_BIBLE/
+?? docs/RF20_POST_RF19_FOUNDER_ACCEPTANCE.md
+?? docs/RF21_FOUNDER_DECISION_INTAKE.md
+?? docs/RF22_RF_CLOSEOUT_ATLAS_HANDOFF.md
+?? docs/RF23_NAVIGATION_PERSONA_WORKFLOW_CONTINUITY.md
+?? docs/RF24_SERVICE_PROVIDER_OPERATING_CENTER.md
+?? docs/RF25_EQUINE_PASSPORT_CONTINUITY_EXPANSION.md
+?? docs/RF26_CARE_CIRCLE_PERMISSION_CONTINUITY.md
+?? docs/RF27_FACILITY_MAP_BARN_OPERATIONS_REALITY.md
+?? docs/RF28/
+?? docs/RF29/
+?? docs/RF30/
+?? docs/RF31/
+?? docs/RF32/
+?? docs/access_control/
+?? docs/architecture/
+?? docs/canon/
+?? docs/implementation/
+?? docs/product/
+?? frontend/eslint.config.js
+?? frontend/src/components/calendar/
+?? frontend/src/context/AuthContext.offline.test.jsx
+?? frontend/src/lib/calendarPermissions.js
+?? frontend/src/lib/calendarPermissions.test.js
+?? frontend/src/lib/offlineSession.js
+?? frontend/src/lib/offlineSession.test.js
+?? frontend/src/lib/permissions.wave1.test.js
+?? frontend/src/lib/taskSync.session.test.js
+?? frontend/src/pages/BarnLocations.test.jsx
+?? frontend/src/pages/CareCircleCenter.jsx
+?? frontend/src/pages/FacilityOperations.jsx
+?? frontend/src/pages/FacilityOperations.test.jsx
+?? frontend/src/pages/HorseProfile.permission.test.jsx
+?? frontend/src/pages/ServiceProviderAppointments.jsx
+?? frontend/src/pages/ServiceProviderSharedHorses.jsx
+?? frontend/src/pages/StallMap.test.jsx
+?? frontend/src/pages/Today.offline.test.jsx
+```

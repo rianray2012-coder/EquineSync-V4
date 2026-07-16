@@ -1,0 +1,165 @@
+{
+  "generated_at": "2026-07-16T20:22:52Z",
+  "disposition": "ALL_SOURCE_READY_CANONS_ADOPTED_AND_LOCKED",
+  "newly_adopted": 13,
+  "newly_locked": 14,
+  "rows": [
+    {
+      "c0_id": "C0-005",
+      "source": "docs/canon/reviews/foundational_canon_source_certification_v1_0/source_event/six_reviewed_candidates/MASTER_ECOSYSTEM_MODEL_V2_1_REVIEWED_CANDIDATE.md",
+      "source_sha256": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+      "locked_path": "docs/canon/adopted_sources/MASTER_ECOSYSTEM_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "locked_sha256": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+      "adoption_record": "docs/canon/adoptions/c0_005_ecosystem_v2_1/C0_005_MASTER_ECOSYSTEM_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/ecosystem_v2_1/C0_005_MASTER_ECOSYSTEM_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/ecosystem_v2_1/C0_005_MASTER_ECOSYSTEM_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-012",
+      "source": "docs/canon/reviews/foundational_canon_source_certification_v1_0/source_event/six_reviewed_candidates/MASTER_HORSE_LIFECYCLE_V3_1_REVIEWED_CANDIDATE.md",
+      "source_sha256": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+      "locked_path": "docs/canon/adopted_sources/MASTER_HORSE_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+      "locked_sha256": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+      "adoption_record": "docs/canon/adoptions/c0_012_horse_lifecycle_v3_1/C0_012_MASTER_HORSE_LIFECYCLE_AND_PASSPORT_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/horse_lifecycle_v3_1/C0_012_MASTER_HORSE_LIFECYCLE_AND_PASSPORT_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/horse_lifecycle_v3_1/C0_012_MASTER_HORSE_LIFECYCLE_AND_PASSPORT_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-014",
+      "source": "docs/canon/reviews/foundational_canon_source_certification_v1_0/source_event/six_reviewed_candidates/MASTER_FACILITY_DOMAIN_MODEL_V2_1_REVIEWED_CANDIDATE.md",
+      "source_sha256": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+      "locked_path": "docs/canon/adopted_sources/MASTER_FACILITY_DOMAIN_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "locked_sha256": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+      "adoption_record": "docs/canon/adoptions/c0_014_facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-015",
+      "source": "docs/canon/reviews/foundational_canon_source_certification_v1_0/source_event/six_reviewed_candidates/MASTER_BARN_LIFECYCLE_V3_1_REVIEWED_CANDIDATE.md",
+      "source_sha256": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+      "locked_path": "docs/canon/adopted_sources/MASTER_BARN_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+      "locked_sha256": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+      "adoption_record": "docs/canon/adoptions/c0_015_barn_lifecycle_v3_1/C0_015_MASTER_BARN_LIFECYCLE_AND_OPERATIONS_CANON_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/barn_lifecycle_v3_1/C0_015_MASTER_BARN_LIFECYCLE_AND_OPERATIONS_CANON_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/barn_lifecycle_v3_1/C0_015_MASTER_BARN_LIFECYCLE_AND_OPERATIONS_CANON_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-016",
+      "source": "docs/canon/reviews/foundational_canon_source_certification_v1_0/source_event/six_reviewed_candidates/MASTER_BUSINESS_LIFECYCLE_V2_1_REVIEWED_CANDIDATE.md",
+      "source_sha256": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+      "locked_path": "docs/canon/adopted_sources/MASTER_BUSINESS_LIFECYCLE_V2_1_ADOPTED_SOURCE.md",
+      "locked_sha256": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+      "adoption_record": "docs/canon/adoptions/c0_016_business_lifecycle_v2_1/C0_016_MASTER_BUSINESS_LIFECYCLE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/business_lifecycle_v2_1/C0_016_MASTER_BUSINESS_LIFECYCLE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/business_lifecycle_v2_1/C0_016_MASTER_BUSINESS_LIFECYCLE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-022",
+      "source": "docs/canon/reviews/c0_022_permission_v1_1_source_identity_confirmation/source_event/MASTER_PERMISSION_MODEL_V1_1_FOUNDER_CONFIRMED_CONTROLLING_SOURCE.md",
+      "source_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "locked_path": "docs/canon/adopted_sources/MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_V1_1_ADOPTED_SOURCE.md",
+      "locked_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "adoption_record": "docs/canon/adoptions/c0_022_permission_access_control_v1_1/C0_022_MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/permission_access_control_v1_1/C0_022_MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/permission_access_control_v1_1/C0_022_MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-028",
+      "source": "docs/canon/reviews/foundational_canon_source_certification_v1_0/source_event/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_CERTIFIED_SOURCE.md",
+      "source_sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "locked_path": "docs/canon/adopted_sources/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "locked_sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "adoption_record": "docs/canon/adoptions/c0_028_claims_disputes_authority_v2_0/C0_028_MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/claims_disputes_authority_v2_0/C0_028_MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/claims_disputes_authority_v2_0/C0_028_MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-033",
+      "source": "docs/canon/founder_approved_sources/MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "source_sha256": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+      "locked_path": "docs/canon/adopted_sources/MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "locked_sha256": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+      "adoption_record": "docs/canon/adoptions/c0_033_search_discovery_v2_0/C0_033_MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/search_discovery_v2_0/C0_033_MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/search_discovery_v2_0/C0_033_MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-039",
+      "source": "docs/canon/founder_approved_sources/MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "source_sha256": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+      "locked_path": "docs/canon/adopted_sources/MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "locked_sha256": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+      "adoption_record": "docs/canon/adoptions/c0_039_developer_platform_integration_v2_0/C0_039_MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/developer_platform_integration_v2_0/C0_039_MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/developer_platform_integration_v2_0/C0_039_MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-040",
+      "source": "docs/canon/founder_approved_sources/MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "source_sha256": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f",
+      "locked_path": "docs/canon/adopted_sources/MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "locked_sha256": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f",
+      "adoption_record": "docs/canon/adoptions/c0_040_platform_extensibility_plugin_v2_0/C0_040_MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/platform_extensibility_plugin_v2_0/C0_040_MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/platform_extensibility_plugin_v2_0/C0_040_MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-041",
+      "source": "docs/canon/founder_approved_sources/MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "source_sha256": "7561351c796d433ac6b9da1eb66eccc53acc2244c764903f6a844d44da704361",
+      "locked_path": "docs/canon/adopted_sources/MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "locked_sha256": "7561351c796d433ac6b9da1eb66eccc53acc2244c764903f6a844d44da704361",
+      "adoption_record": "docs/canon/adoptions/c0_041_vendor_security_supply_chain_v2_0/C0_041_MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/vendor_security_supply_chain_v2_0/C0_041_MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/vendor_security_supply_chain_v2_0/C0_041_MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-042",
+      "source": "docs/canon/founder_approved_sources/MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "source_sha256": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+      "locked_path": "docs/canon/adopted_sources/MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "locked_sha256": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+      "adoption_record": "docs/canon/adoptions/c0_042_configuration_feature_flag_v2_0/C0_042_MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/configuration_feature_flag_v2_0/C0_042_MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/configuration_feature_flag_v2_0/C0_042_MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-043",
+      "source": "docs/canon/founder_approved_sources/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "source_sha256": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+      "locked_path": "docs/canon/adopted_sources/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "locked_sha256": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+      "adoption_record": "docs/canon/adoptions/c0_043_platform_operations_reliability_release_v2_0/C0_043_MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/platform_operations_reliability_release_v2_0/C0_043_MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/platform_operations_reliability_release_v2_0/C0_043_MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json"
+    },
+    {
+      "c0_id": "C0-035",
+      "source": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "source_sha256": "67b25cc23230492b9c8164c7a0b116f74109a623d544566a01b60425fe646f4f",
+      "locked_path": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "locked_sha256": "67b25cc23230492b9c8164c7a0b116f74109a623d544566a01b60425fe646f4f",
+      "adoption_record": "docs/canon/adoptions/c0_035_reporting_v2_0/C0_035_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "lock_record": "docs/canon/locks/reporting_analytics_v2_0/C0_035_MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "certificate": "docs/canon/locks/reporting_analytics_v2_0/C0_035_MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+      "dependency_resolution": "C0-022_ADOPTED_AND_LOCKED"
+    }
+  ],
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0
+  },
+  "authority": {
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

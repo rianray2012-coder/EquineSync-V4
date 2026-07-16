@@ -1,0 +1,8 @@
+# Proposed Equine Health V1.1 Canon Dependency Map Delta
+
+- Add Equine Health V1.1 as downstream of Product Vision and Ecosystem and dependent on Identity, Relationship, Permission, Claims and Authority, Agreement and Consent, Record Stewardship, Privacy, Financial Truth, External Architecture, Audit, Communications, Security, Safeguarding V1.2, Offline governance, AI V2.0, RF27, RF29, RF30, and RF31 where their assigned domains apply.
+- Mark the Privacy dependency as exact-source verification pending under `EH-V1.1-P2-03`.
+- Mark formal duplicate, cycle, dependency, and orphan scans pending under `EH-V1.1-P2-06`.
+- Preserve non-circular authority: Equine Health may consume adjacent authority but may not redefine it.
+
+Proposal only. It is not a passed formal dependency scan.

@@ -1,0 +1,31 @@
+{
+  "state": "SAFEGUARDING_RECONCILIATION_COMPLETE_READY_FOR_FOUNDER_ADOPTION_REVIEW_WITH_NONBLOCKING_P2",
+  "generated_at": "2026-07-15T22:55:13.054670+00:00",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "candidate": "docs/canon/candidates/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_RECONCILED_ADOPTION_CANDIDATE.md",
+  "candidate_sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+  "founder_event": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/founder_confirmation/EQUINESYNC_SAFEGUARDING_FOUNDER_CONFIRMATION_POLICY_RESOLUTION_AND_ADOPTION_CANDIDATE_AUTHORIZATION.md",
+  "founder_event_sha256": "f19d2e572d917bd6f041f467c8911ca518cc9696f5bfd5b97e1147b992d29152",
+  "decisions": {
+    "fd_msp_resolved": 15,
+    "sg_fd_resolved": 12
+  },
+  "requirements_mapped": 40,
+  "test_scenarios_preserved": 80,
+  "findings": {
+    "p0": 0,
+    "p1": 0,
+    "p2": 6
+  },
+  "formal_scans": "BLOCKED_PENDING_EXACT_MACHINE_READABLE_SOURCE_MOUNTING",
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "runtime": false,
+    "production": false,
+    "public_claims": false,
+    "onboarding": false,
+    "launch": false
+  }
+}

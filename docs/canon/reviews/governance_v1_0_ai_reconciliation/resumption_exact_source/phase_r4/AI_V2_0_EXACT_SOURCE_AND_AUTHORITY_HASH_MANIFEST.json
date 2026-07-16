@@ -1,0 +1,28 @@
+{
+  "phase": "R4",
+  "source_sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+  "source_bytes": 140809,
+  "canonical_copy_byte_identical": true,
+  "artifacts": [
+    {"path":"docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx","sha256":"414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8","bytes":140809},
+    {"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/source_uploaded/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0_FOUNDER_APPROVED.docx","sha256":"414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8","bytes":140809},
+    {"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/source_uploaded/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0(1).docx","sha256":"9495982c16f73b12a5c254583932578f6037f484285cd0e4c1ebb0a33c5d186b","bytes":140749},
+    {"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r0/AI_V2_0_EXACT_SOURCE_INGESTION_REPORT.md","sha256":"ed2652e933ebd1a7de91aef097998cb952968e01296698debdff90e3ea31ed5f"},
+    {"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r1/AI_V2_0_SOURCE_CANDIDATE_COMPARISON_REPORT.md","sha256":"256a82f0712cb41b122ddf9cf684a54020afd5f05b9ce60e54e0a0ab3fd4abc1"},
+    {"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r2/AI_V2_0_EMBEDDED_FOUNDER_DECISION_RECOVERY_REPORT.md","sha256":"f724dca6f5afb633f355f53b9a33a00ed0f56fea0ebd5e237be07013d11cb146"},
+    {"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r2/AI_V2_0_FOUNDER_DECISION_MATRIX.md","sha256":"7f1a2f519089c9b5bb0ea6f7453e28eeae90f22270b7a811008982be78a6bad1"},
+    {"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r2/AI_V2_0_FOUNDER_DECISION_MATRIX.json","sha256":"63ace72e04eb2892ac1c6f8fa4337de78fcaf4011554e9353ef5e9416183f40c"},
+    {"path":"docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r3/AI_V2_0_FOUNDER_SOURCE_IDENTITY_AND_DECISION_RATIFICATION.md","sha256":"b76e8bf6b4ead938e8a7429831c494a39524e4c96b8d317263ed2208b0f785d1"}
+  ],
+  "markdown_rendering_created": false,
+  "all_generated_artifacts_bound_to_exact_docx": true,
+  "ratification_status": "PENDING",
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "runtime": false,
+    "production": false,
+    "public_launch": false
+  }
+}

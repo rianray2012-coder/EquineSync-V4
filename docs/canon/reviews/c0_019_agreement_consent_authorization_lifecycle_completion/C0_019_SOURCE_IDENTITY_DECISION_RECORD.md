@@ -1,0 +1,5 @@
+# C0-019 Source Identity Decision Record
+
+`CONFIRM_MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1_AS_CONTROLLING_C0_019_SOURCE_AND_PRESERVE_V2_0_AS_HISTORICAL_SUPERSEDED_CANDIDATE`
+
+Classification: `EXACT_V2_1_CONTROLLING_SOURCE_CONFIRMED`. Exact hash `af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20` and package provenance are verified; no unresolved competing source or policy conflict remains.

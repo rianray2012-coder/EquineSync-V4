@@ -1,0 +1,220 @@
+FOUNDER ADOPTION DIRECTIVE
+
+Title:
+ADOPTION OF THE EQUINESYNC MASTER EQUINE HEALTH, WELFARE, MEDICAL RECORD, AND CLINICAL SUPPORT MODEL V1.1
+
+Founder:
+Rian Ray
+
+Authority:
+Constitutional adoption only.
+
+This directive does not authorize constitutional lock, implementation, schema creation, migration, permission expansion, runtime behavior, provider activation, clinical activity, production activity, customer onboarding, public claims, AI activation, or launch.
+
+ADOPTION CANDIDATE
+
+Document Identifier:
+
+MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_RECONCILED_ADOPTION_CANDIDATE
+
+Expected SHA-256:
+
+c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c
+
+Founder-Review Evidence Package:
+
+equine_health_v1_1_founder_review_evidence.zip
+
+Expected Evidence Package SHA-256:
+
+f31e448bc26db2ca7d1bfdabbe047d66380d3df1d9a9f955ae07640c15f8de07
+
+PRE-ADOPTION VERIFICATION
+
+Before recording adoption, Codex must:
+
+1. Verify the exact candidate SHA-256.
+2. Verify the exact evidence-package SHA-256.
+3. Freshly extract and verify all manifest entries.
+4. Confirm that all fourteen founder decisions are incorporated exactly.
+5. Confirm that all thirty-five preliminary requirements are traceable to candidate text.
+6. Confirm that P0 remains zero.
+7. Confirm that P1 remains zero.
+8. Enumerate all six retained P2 findings, including:
+   - exact finding ID;
+   - description;
+   - affected canon or dependency;
+   - owner;
+   - closure evidence;
+   - whether the finding affects adoption, lock, implementation, activation, or public claims.
+9. Confirm that no P2 finding is actually a misclassified P0 or P1 issue.
+10. Confirm that Safeguarding V1.2 remains separate and unchanged.
+11. Confirm that AI V2.0, RF30, Permission, Record Stewardship, Claims and Authority, External Architecture, Financial Truth, Audit, Communications, Privacy, and Relationship boundaries remain intact.
+12. Confirm that no runtime, schema, migration, provider, production, or product file was modified.
+
+If either supplied checksum does not match, or if a previously unidentified P0 or P1 issue exists, do not complete adoption. Preserve the candidate and return the exact discrepancy.
+
+FOUNDER DETERMINATION
+
+Subject to successful pre-adoption verification, I confirm that:
+
+1. I approved EH-FD01 through EH-FD14 exactly as recorded in:
+
+   EQUINE_HEALTH_FOUNDER_RESPONSE_ALL_RECOMMENDATIONS_ACCEPTED_V1_0
+
+2. All fourteen founder decisions have been incorporated into the V1.1 adoption candidate.
+3. The thirty-five requirements are adequately represented and traceable.
+4. The six retained P2 findings are accepted as nonblocking for constitutional adoption, subject to their documented downstream closure gates.
+5. EquineSync does not practice veterinary medicine, diagnose, prescribe, establish a veterinarian-client-patient relationship, or replace licensed professional judgment.
+6. Professional authority must remain evidence-supported, scoped, current, and distinct from account status, appointment, payment, upload, or Care Circle membership.
+7. Treatment authority remains separate from ownership, custody, boarding, payment responsibility, emergency-contact status, and record access.
+8. Health records must preserve source, classification, provenance, confidence, correction history, and authorship.
+9. Imported, device-generated, OCR-extracted, AI-extracted, owner-reported, and staff-observed information does not automatically become verified clinical truth.
+10. High-risk medication state must fail closed under uncertainty and must not use unsafe last-write-wins conflict resolution.
+11. Emergency action must remain narrow, temporary, attributable, welfare-preserving, and subject to review.
+12. Private notes, source-retained evidence, canonical health history, operational records, and continuity projections remain distinct.
+13. Horse transfer, lease, move, retirement, provider departure, account closure, or death must not silently destroy clinical history.
+14. Competition, withdrawal-period, regulatory, credential, and compliance statements must remain source-qualified and must not become unsupported guarantees.
+15. Research, analytics, benchmarking, and model-training use of health or welfare data requires separately governed authority.
+16. AI remains non-authoritative and default-off.
+17. AI may not diagnose, prescribe, determine prognosis, select treatment, alter dosage, approve euthanasia, contact providers autonomously, execute treatment, or mutate records.
+18. External providers, laboratories, devices, registries, pharmacies, insurers, and AI vendors cannot create EquineSync constitutional authority.
+19. The candidate grants no implementation or production authority.
+
+ADOPTION
+
+Upon successful pre-adoption verification, I hereby adopt the exact verified V1.1 source as the controlling EquineSync constitutional canon for equine health, welfare, medical records, medication safety, clinical collaboration, emergency care, continuity, biosecurity, and clinical-support boundaries.
+
+The adopted source must be preserved byte-for-byte.
+
+Its lifecycle state shall be recorded as:
+
+EQUINE_HEALTH_V1_1_FOUNDER_ADOPTED_LOCK_PENDING
+
+The adopted source may be copied into an adopted-source directory only if:
+
+- its substantive bytes remain unchanged;
+- the candidate checksum remains preserved;
+- lifecycle metadata is stored separately;
+- the original candidate remains preserved;
+- and no new wrapper text is inserted into the adopted substantive source.
+
+This adoption does not supersede another canon outside the expressly assigned Equine Health domain.
+
+Where this canon references another constitutional owner, that owner remains controlling for its assigned domain, including:
+
+- Identity for actor identity;
+- Relationship for horse, owner, provider, guardian, and Care Circle relationships;
+- Permission for final authorization and field-level projection;
+- Claims and Authority for contested assertions;
+- Record Stewardship for retention, hold, correction, restoration, and lawful erasure;
+- Agreements and Consent for authorization evidence;
+- Financial Truth for payment and responsibility;
+- External Architecture for provider and adapter boundaries;
+- Audit for evidence;
+- Communications for notice;
+- Privacy for processing and disclosure;
+- Safeguarding for minors and protected participants;
+- AI V2.0 and RF30 for AI authority and default-off boundaries.
+
+RETAINED P2 FINDINGS
+
+All six retained P2 findings must remain open until their specific closure evidence exists.
+
+Codex shall classify each as applicable to one or more of:
+
+- constitutional lock;
+- exact-source reconciliation;
+- formal machine-readable validation;
+- implementation readiness;
+- clinical or medication activation;
+- provider activation;
+- research or analytics activation;
+- AI activation;
+- jurisdiction-specific use;
+- qualified review;
+- or public claims.
+
+No P2 finding may be silently closed merely because the canon is adopted.
+
+AUTHORIZED CODEX ACTIONS
+
+Codex is authorized to:
+
+1. Preserve this directive as the independent founder adoption event.
+2. Record its exact text, date, provenance, and checksum.
+3. Verify the candidate and evidence-package hashes.
+4. Preserve the adopted source byte-for-byte.
+5. Create an Equine Health constitutional adoption certificate.
+6. Create a machine-readable adoption-event record.
+7. Create a post-adoption validation report.
+8. Create a retained-P2 register.
+9. Create a companion-update and patch register.
+10. Create a lock-readiness assessment.
+11. Update the Canon Artifact Inventory and Governance Finding Registry.
+12. Record the lifecycle state:
+
+    EQUINE_HEALTH_V1_1_FOUNDER_ADOPTED_LOCK_PENDING
+
+13. Prepare proposed updates or patches for:
+    - Constitutional Authority Matrix;
+    - Canon Dependency Map;
+    - Constitutional Cross-Reference Index;
+    - Constitutional Vocabulary and Definitions Index;
+    - Founder Decision Register;
+    - Governance Requirement Index;
+    - Requirement Traceability Matrix;
+    - source-of-truth and lifecycle registers.
+14. Apply updates only to exact mounted sources where modification authority exists.
+15. Preserve proposed patches separately where exact companion sources remain unavailable.
+16. Produce a SHA-256 manifest covering all adoption artifacts.
+
+NOT AUTHORIZED
+
+This directive does not authorize:
+
+- alteration of the adopted substantive source;
+- constitutional lock;
+- reconstruction of unavailable exact companion sources;
+- representation of blocked formal scans as passed;
+- schema creation or migration;
+- permission changes;
+- runtime or source-code changes;
+- medication workflow implementation;
+- emergency-care workflow implementation;
+- clinical record implementation;
+- provider, laboratory, pharmacy, insurer, registry, device, or external-system activation;
+- veterinary diagnosis, prescription, prognosis, treatment selection, dosage alteration, euthanasia approval, or treatment execution;
+- AI provider credentials, real model calls, autonomous tools, production inference, or clinical AI activation;
+- research, analytics, benchmarking, or model-training use of health or welfare data;
+- customer onboarding;
+- public claims concerning clinical authority, medication safety, competition eligibility, regulatory compliance, veterinary services, or AI clinical support;
+- production activity;
+- or launch.
+
+REQUIRED DELIVERABLES
+
+Create:
+
+1. EQUINE_HEALTH_V1_1_FOUNDER_ADOPTION_CERTIFICATE.md
+2. EQUINE_HEALTH_V1_1_ADOPTION_EVENT_RECORD.json
+3. EQUINE_HEALTH_V1_1_POST_ADOPTION_VALIDATION_REPORT.md
+4. EQUINE_HEALTH_V1_1_RETAINED_P2_REGISTER.md
+5. EQUINE_HEALTH_V1_1_COMPANION_UPDATE_AND_PATCH_REGISTER.md
+6. EQUINE_HEALTH_V1_1_LOCK_READINESS_ASSESSMENT.md
+7. EQUINE_HEALTH_V1_1_ADOPTION_EVIDENCE_MANIFEST.json
+8. an adoption evidence ZIP with a recorded SHA-256.
+
+REQUIRED DISPOSITION
+
+Use:
+
+EQUINE_HEALTH_V1_1_FOUNDER_ADOPTED_LOCK_PENDING
+
+only if all pre-adoption verification succeeds.
+
+Otherwise use:
+
+EQUINE_HEALTH_V1_1_ADOPTION_BLOCKED_PENDING_VERIFICATION
+
+and state each exact discrepancy.

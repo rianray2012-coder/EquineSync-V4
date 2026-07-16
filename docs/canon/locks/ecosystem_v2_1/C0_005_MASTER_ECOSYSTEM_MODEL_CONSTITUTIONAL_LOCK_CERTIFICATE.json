@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-005",
+  "title": "Master Ecosystem Model",
+  "version": "2.1",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_ECOSYSTEM_MODEL_V2_1_ADOPTED_SOURCE.md",
+  "locked_sha256": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+  "adoption_record": "docs/canon/adoptions/c0_005_ecosystem_v2_1/C0_005_MASTER_ECOSYSTEM_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "4e7dc8b5a663a1b1bf7c026cc4dad7c2b4149fc6f542e65f3430786afe26cb43",
+  "lock_record": "docs/canon/locks/ecosystem_v2_1/C0_005_MASTER_ECOSYSTEM_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "c268f87aed5f663897cd2d46bab944f65c2be7627d0bdcf3f10835377a4d8300",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

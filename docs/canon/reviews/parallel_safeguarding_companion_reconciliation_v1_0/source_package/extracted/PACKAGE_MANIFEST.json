@@ -1,0 +1,227 @@
+{
+  "package": "EquineSync Safeguarding Companion Integration Package V1.0",
+  "date": "2026-07-15",
+  "disposition": "CONTROLLED_COMPLETION_INTEGRATION_PACKAGE_READY_FOR_FOUNDER_AND_REPOSITORY_REVIEW",
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "runtime": false,
+    "production": false,
+    "public_claims": false,
+    "launch": false
+  },
+  "approved_source_identity": {
+    "markdown": {
+      "source_sha256": "e956999709da35b2260ce8fdac230bc37d0bee6000007cec35c18e3653f59f05",
+      "package_copy_sha256": "e956999709da35b2260ce8fdac230bc37d0bee6000007cec35c18e3653f59f05",
+      "byte_identical": true
+    },
+    "docx": {
+      "source_sha256": "8058981a7a5288698324c55ebee33ba7d4902548a723c2a5c35e4f3a12daa76c",
+      "package_copy_sha256": "8058981a7a5288698324c55ebee33ba7d4902548a723c2a5c35e4f3a12daa76c",
+      "byte_identical": true
+    }
+  },
+  "counts": {
+    "canon_index_rows": 1,
+    "founder_decision_rows": 15,
+    "unique_founder_decision_ids": 15,
+    "governance_requirement_rows": 40,
+    "unique_governance_requirement_ids": 40,
+    "rtm_rows": 40,
+    "implementation_authority": false
+  },
+  "files": [
+    {
+      "path": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.docx",
+      "size_bytes": 16018,
+      "sha256": "85d95a337664c9dbc327b3fe3858b19c8513aba94752eb9a0a5c29eff0d2628f"
+    },
+    {
+      "path": "CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "size_bytes": 9190,
+      "sha256": "6be760d6b5f274097074d16fcee805aea3249b51058d5998abff4235945adc75"
+    },
+    {
+      "path": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.docx",
+      "size_bytes": 13957,
+      "sha256": "544a5e666515c30fbf8b25e51183957e89e7c933937de6bfbd49d82a4c302696"
+    },
+    {
+      "path": "CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "size_bytes": 5558,
+      "sha256": "9a41067be17c667dd70328ac7c7c53bf3029bd478b3f8f9b6fd8964842c06833"
+    },
+    {
+      "path": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.docx",
+      "size_bytes": 27097,
+      "sha256": "9a992c8d573317832094d77d0764868f192460ecddde10aaa95d8b3f942d0070"
+    },
+    {
+      "path": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "size_bytes": 50571,
+      "sha256": "7262277efc185c78b911d85fb6d3b8c2556ebe6f5b3b8b5a97b85a34517fa24c"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.docx",
+      "size_bytes": 46194,
+      "sha256": "d1f2dfb4bec1c6e6fd151864521571b82196046dcf9ead58982368dd28f80e36"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "size_bytes": 122226,
+      "sha256": "31102a8f399d51449807f6bb65c9775e931b5796d2602b029e4a0afb634ade7f"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.docx",
+      "size_bytes": 40855,
+      "sha256": "e33ba9db612fd792dc293b811fcafabb1c1ce593f7aef90a1450d930ae6bb644"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "size_bytes": 118290,
+      "sha256": "6e810af409884936ad25f709d0f482f859765a84a5437625e635b1fcdcc239cb"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.docx",
+      "size_bytes": 36364,
+      "sha256": "1a5e1df142bb874707c40c9378214509aab363f796fa036e5d3c449e2bed68e2"
+    },
+    {
+      "path": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "size_bytes": 76161,
+      "sha256": "aa8888de9f0e60a5c30dffc5f86838129e44f24c2bc65d98ec940056251155fe"
+    },
+    {
+      "path": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.docx",
+      "size_bytes": 15845,
+      "sha256": "44c21dd0b797de8e64426926a097518e2a9afd5da3d14083baf5f01dd766d544"
+    },
+    {
+      "path": "EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.md",
+      "size_bytes": 10532,
+      "sha256": "4a024d4764fd947be51cc53b56d30e83d1ac61c1dfd9b7f5bc291f3c13aba60e"
+    },
+    {
+      "path": "EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.docx",
+      "size_bytes": 12621,
+      "sha256": "ab895f84bad914ef1248f8a0e4f90318359d52dffe2f7ab64823184757202141"
+    },
+    {
+      "path": "EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.md",
+      "size_bytes": 2102,
+      "sha256": "b0546e1762a8e1e84091595dbbee9ffd7ed2d1833580f7479702046adb581607"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.docx",
+      "size_bytes": 13173,
+      "sha256": "dcb57538adc443b17179fe9bf739f7df11dbc8042a9257a759396406518379cd"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.md",
+      "size_bytes": 3565,
+      "sha256": "c1cf18fcb99630d4699d7de43dbc6fe647c46ea34a42a8c44336cd41e284d349"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_INTEGRATION_VALIDATION_REPORT_V1_0.md",
+      "size_bytes": 3621,
+      "sha256": "be09f1c071d40ffbbc3e649be3dea11f473d750040ca6cfc9b40df4621303636"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_REGISTER_V1_0.xlsx",
+      "size_bytes": 18412,
+      "sha256": "100ad2cf53cbc1084c0086084b5652732b3a9154f02a75a97c887e68baa4c6ab"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.docx",
+      "size_bytes": 21070,
+      "sha256": "da5929a714dc4eb9d57daf516d03739a05ba76f7c1a852b927d4acc0d2b6300f"
+    },
+    {
+      "path": "EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.md",
+      "size_bytes": 26408,
+      "sha256": "f1f025b1a2b549dc2b6035052bb3f66f86d0c7e2d0f3b0ecdbd06d7a82b37bee"
+    },
+    {
+      "path": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.docx",
+      "size_bytes": 59592,
+      "sha256": "8058981a7a5288698324c55ebee33ba7d4902548a723c2a5c35e4f3a12daa76c"
+    },
+    {
+      "path": "MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.md",
+      "size_bytes": 109521,
+      "sha256": "e956999709da35b2260ce8fdac230bc37d0bee6000007cec35c18e3653f59f05"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 887,
+      "sha256": "2f2d3615793be4d5a4d5a8de58faf0eb07611d2aa9852f1505281ea57ed1b94e"
+    },
+    {
+      "path": "REPOSITORY_APPLICATION_INSTRUCTIONS.md",
+      "size_bytes": 867,
+      "sha256": "88935684003ea4b2bfc54c132f0e580451705b1db77a30e1976b41b213cb09cd"
+    },
+    {
+      "path": "safeguarding_patch_data.json",
+      "size_bytes": 36974,
+      "sha256": "348376a32a5d234c5b980b8ffd655bde77f2b55bf507ce107abfab9830ae88f1"
+    },
+    {
+      "path": "validation/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.json",
+      "size_bytes": 215,
+      "sha256": "6686918e85908a4ca91cea99ee23dbb285ab6b36d0724015ab50c939e90c1192"
+    },
+    {
+      "path": "validation/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.json",
+      "size_bytes": 206,
+      "sha256": "14ca3e61564ba3328c5fa1f22aaa356ca835edb9bf0402ef0c4296444fdc22b9"
+    },
+    {
+      "path": "validation/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.json",
+      "size_bytes": 193,
+      "sha256": "a84a7e22cb881341501edac84861aadece6efe6453d369885ee1b06f54688deb"
+    },
+    {
+      "path": "validation/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.json",
+      "size_bytes": 204,
+      "sha256": "ae75bd66993700d3b50bdd4d344f3dacdacbac3cd2e17c1c74c1736e490dacb9"
+    },
+    {
+      "path": "validation/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.json",
+      "size_bytes": 209,
+      "sha256": "3d53bc80ba1f4a4810a79fa868addc9f76ad3d067481fb8baf4b8bbbba171c2b"
+    },
+    {
+      "path": "validation/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.json",
+      "size_bytes": 220,
+      "sha256": "945c089d34d2cefe5dcf0c88709a4bfc6e13d30d20b8a68b22fcb5fc2650e1ad"
+    },
+    {
+      "path": "validation/EQUINESYNC_MINOR_SAFEGUARDING_FOUNDER_DECISION_DIRECTIVE_FD_MSP01_FD_MSP15_V1_0.json",
+      "size_bytes": 236,
+      "sha256": "27c1101e2e3c8ddce2a1093d9616afc1feeee7f49072dcb8e26cc4739f9d8189"
+    },
+    {
+      "path": "validation/EQUINESYNC_MINOR_SAFEGUARDING_V1_1_FOUNDER_APPROVAL_AND_INTEGRATION_DIRECTIVE_V1_0.json",
+      "size_bytes": 239,
+      "sha256": "3889e8c4a67789b025f0799bea6b77c17dcd7c2a9b9580cc5a932f98f80fe745"
+    },
+    {
+      "path": "validation/EQUINESYNC_SAFEGUARDING_COMPANION_ARTIFACT_INTEGRATION_MEMORANDUM_V1_0.json",
+      "size_bytes": 227,
+      "sha256": "a8886355395b08696b8f80f8a71152c21c1801c9f12f10ab4eb2037fa64d9dd1"
+    },
+    {
+      "path": "validation/EQUINESYNC_SAFEGUARDING_COMPANION_PATCH_SCHEDULE_V1_0.json",
+      "size_bytes": 210,
+      "sha256": "5bca4528ade90061b849fe23a75508c797edafc9ae4372cca5acb9a8360baedf"
+    },
+    {
+      "path": "validation/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1_REVIEWED_DRAFT.json",
+      "size_bytes": 247,
+      "sha256": "5c026d84ddb2b62b70a0e579eded8b426997226ef13f4c23d854f63da5f8d812"
+    }
+  ]
+}

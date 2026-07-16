@@ -1,0 +1,21 @@
+{
+  "C0-023": {
+    "ready": true,
+    "p0": 0,
+    "open_p1": 0,
+    "blocking_p2": 0,
+    "retained_p2": [
+      "C0-023-LR-P2-01"
+    ]
+  },
+  "C0-035": {
+    "ready": false,
+    "p0": 0,
+    "open_p1": 1,
+    "blocking_p2": 0,
+    "retained_p2": [
+      "C0-035-LR-P2-01"
+    ],
+    "blocking_finding": "C0-035-LR-P1-01"
+  }
+}

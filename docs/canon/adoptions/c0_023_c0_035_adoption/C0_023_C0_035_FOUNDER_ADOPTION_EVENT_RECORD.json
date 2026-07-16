@@ -1,0 +1,29 @@
+{
+  "disposition": "FOUNDER_AUTHORIZED_C0_023_AND_C0_035_CONSTITUTIONAL_ADOPTION",
+  "founder_decision": "APPROVED_AND_AUTHORIZED_FOR_ADOPTION",
+  "timestamp": "2026-07-16T13:51:44Z",
+  "prerequisite_disposition": "PRIVACY_AND_REPORTING_FOUNDER_APPROVED_FORMAT_COUNTERPARTS_COMPLETE_PENDING_SEPARATE_ADOPTION",
+  "prerequisite_package": "outputs/privacy_reporting_format_counterpart_completion_package.zip",
+  "prerequisite_package_sha256": "9316affecd7f82ed0604f164edfc07d311b8c61481c5c192c288c3582303c593",
+  "rows": [
+    "C0-023",
+    "C0-035"
+  ],
+  "authorization": "constitutional adoption only",
+  "authority": {
+    "constitutional_lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "migration": false,
+    "runtime": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "customer_data_processing": false,
+    "public_launch": false,
+    "certification": false,
+    "public_trust_claims": false
+  }
+}

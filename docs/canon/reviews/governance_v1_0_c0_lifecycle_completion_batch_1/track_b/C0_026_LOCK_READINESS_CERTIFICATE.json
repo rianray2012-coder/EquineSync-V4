@@ -1,0 +1,25 @@
+{
+  "row_id": "C0-026",
+  "reviewed_at": "2026-07-16T07:34:36Z",
+  "ready": true,
+  "adopted_source": "docs/canon/adopted_sources/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1_ADOPTED_SOURCE.md",
+  "sha256": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+  "adoption_record_sha256": "300edb31066c0c76b9235a3360be674cc519c6ad951bd2e64fadff4a3555e612",
+  "p0": 0,
+  "open_p1": 0,
+  "lock_blocking_p2": 0,
+  "retained_nonblocking_p2": [],
+  "lock_issued": false,
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

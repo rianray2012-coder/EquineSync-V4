@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-015",
+  "current_path": "docs/canon/MASTER_BARN_LIFECYCLE.md",
+  "current_sha256": "3e7428771d3d8868e801e80551912a8f6284f5a4d53698d170d4b67b3be13553",
+  "expected_sha256": "aebae6b952423435806837abf2fd9d5f1dd0dc96fca74810e78da50f0f80c47a",
+  "expected_source_recovered": false,
+  "recovered_evidence_path": null,
+  "recovered_sha256": null,
+  "raw_byte_identical": false,
+  "current_size": 42487,
+  "recovered_size": null,
+  "normalized_line_similarity": null,
+  "heading_similarity": null
+}

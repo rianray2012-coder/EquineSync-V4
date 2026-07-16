@@ -1,0 +1,34 @@
+{
+  "row_id": "C0-035",
+  "reviewed_at": "2026-07-16T17:24:34Z",
+  "ready": false,
+  "adopted_source": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.docx",
+  "sha256": "56d30d5ce8d51c636179a0b1f05f31f005abcb64d998d9b499f9085ab67975d4",
+  "adoption_record_sha256": "0a5b9f223a3b094ce9083d0488b831da8afa38e17b7805392be8c219e3241b6a",
+  "p0": 0,
+  "open_p1": 1,
+  "lock_blocking_p2": 0,
+  "retained_nonblocking_p2": [
+    "C0-035-LR-P2-01"
+  ],
+  "blocking_findings": [
+    "C0-035-LR-P1-01"
+  ],
+  "lock_issued": false,
+  "authority": {
+    "constitutional_lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "migration": false,
+    "runtime": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "customer_data_processing": false,
+    "public_launch": false,
+    "certification": false,
+    "public_trust_claims": false
+  }
+}

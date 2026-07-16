@@ -1,0 +1,29 @@
+{
+  "row_id": "C0-025",
+  "reviewed_at": "2026-07-16T07:34:36Z",
+  "ready": true,
+  "adopted_source": "docs/canon/adopted_sources/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0_ADOPTED_SOURCE.md",
+  "sha256": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+  "adoption_record_sha256": "90e31fa2be06d4ebf4c2e65718b1fb4dffc12cf0490d885a0ab92e335e14c028",
+  "p0": 0,
+  "open_p1": 0,
+  "lock_blocking_p2": 0,
+  "retained_nonblocking_p2": [
+    "SFM-P2-01",
+    "SFM-P2-02",
+    "SFM-P2-03"
+  ],
+  "lock_issued": false,
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

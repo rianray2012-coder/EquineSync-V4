@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-012",
+  "title": "Master Horse Lifecycle and Passport Model",
+  "version": "3.1",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_HORSE_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+  "locked_sha256": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+  "adoption_record": "docs/canon/adoptions/c0_012_horse_lifecycle_v3_1/C0_012_MASTER_HORSE_LIFECYCLE_AND_PASSPORT_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "9b915bb1a11d310bcb4498ab00fc44f5e52570363e349adee0b5fcc1ef868faa",
+  "lock_record": "docs/canon/locks/horse_lifecycle_v3_1/C0_012_MASTER_HORSE_LIFECYCLE_AND_PASSPORT_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "9d7e0c74d34c5481aaca2a2322cf145a921afac840c1455b8467211100c3fbb7",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

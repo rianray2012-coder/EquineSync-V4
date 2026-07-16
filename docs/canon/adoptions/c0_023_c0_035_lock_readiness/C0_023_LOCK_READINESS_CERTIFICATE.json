@@ -1,0 +1,34 @@
+{
+  "row_id": "C0-023",
+  "reviewed_at": "2026-07-16T17:24:34Z",
+  "ready": false,
+  "adopted_source": "docs/canon/founder_approved_sources/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_FOUNDER_APPROVED.md",
+  "sha256": "b773389d83308ab051e4959a4f61304cc3fb5328a5f8086ef683ab0a914498bb",
+  "adoption_record_sha256": "1ba284afda6c02ef5dc1cf4ae3b7b9b963c5aeb223341fe95bc587b411ed9b12",
+  "p0": 0,
+  "open_p1": 1,
+  "lock_blocking_p2": 0,
+  "retained_nonblocking_p2": [
+    "C0-023-LR-P2-01"
+  ],
+  "blocking_findings": [
+    "C0-023-LR-P1-01"
+  ],
+  "lock_issued": false,
+  "authority": {
+    "constitutional_lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "migration": false,
+    "runtime": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "customer_data_processing": false,
+    "public_launch": false,
+    "certification": false,
+    "public_trust_claims": false
+  }
+}

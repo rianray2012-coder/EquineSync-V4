@@ -1,0 +1,456 @@
+# CODEX FOUNDER DIRECTIVE
+## AI V2.0 FOUNDER DECISION MATRIX RATIFICATION, FINAL P1 CLOSURE, AND CONTROLLED RESUMPTION
+
+### 1. DIRECTIVE STATUS
+
+This directive provides the required Founder ratification for the AI V2.0 Founder Decision Matrix and authorizes closure of the remaining narrow P1 blocker.
+
+The current reconciliation disposition is:
+
+`AI_V2_0_EXACT_SOURCE_AND_DECISION_MATRIX_PENDING_FOUNDER_RATIFICATION`
+
+The exact AI V2.0 source has already been ingested and verified:
+
+Canonical filename:
+
+`MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx`
+
+Repository path:
+
+`docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx`
+
+SHA-256:
+
+`414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8`
+
+Byte size:
+
+`140,809`
+
+The canonical repository copy has been verified as byte-identical to the Founder-supplied source.
+
+Section 96 has been recovered from the exact source, and the derived Founder Decision Matrix assigns stable traceability identifiers:
+
+`AI-FD01` through `AI-FD12`
+
+The only remaining open P1 is:
+
+`AI-V2-P1-FOUNDER-DECISION-MATRIX-RATIFICATION-PENDING`
+
+This directive resolves that blocker.
+
+---
+
+# 2. FOUNDER RATIFICATION
+
+The Founder approves and ratifies the generated AI V2.0 Founder Decision Matrix.
+
+The Founder confirms that:
+
+1. `AI-FD01` through `AI-FD12` are administrative traceability identifiers only.
+
+2. These identifiers do not alter, expand, narrow, replace, paraphrase away, supersede, or reinterpret the exact Founder-approved language preserved in Section 96 of:
+
+   `MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx`
+
+3. The exact Section 96 language remains controlling where any conflict, ambiguity, omission, or summarization difference appears.
+
+4. The generated AI Founder Decision Matrix accurately represents the Founder-approved constitutional decisions embedded in Section 96.
+
+5. The AI Founder Decision Matrix is approved as the controlling AI V2.0 companion traceability artifact.
+
+6. The matrix is bound to the exact source SHA-256:
+
+   `414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8`
+
+7. This ratification closes:
+
+   `AI-V2-P1-FOUNDER-DECISION-MATRIX-RATIFICATION-PENDING`
+
+8. No additional Founder review is required solely to approve the administrative identifiers or the decision matrix.
+
+9. This ratification does not itself establish completed constitutional adoption or lock.
+
+10. This ratification does not grant implementation, runtime, provider activation, customer-data transfer, production, pilot, or public-launch authority.
+
+---
+
+# 3. AUTHORIZED ACTIONS
+
+Codex is authorized to:
+
+1. record this Founder ratification;
+2. update the AI V2.0 finding ledger;
+3. close the remaining P1 blocker;
+4. verify that open P1 equals zero;
+5. create a controlling AI Founder Decision Register;
+6. preserve the existing AI Founder Decision Matrix;
+7. resume the prior reconciliation at Phase R6;
+8. continue through later phases only if each mandatory gate passes;
+9. complete requirement, traceability, cross-canon, scan, adoption, lock, and Governance V1.0 closure work already authorized by the prior directive.
+
+---
+
+# 4. REQUIRED ARTIFACT STATUS
+
+## 4.1 Existing AI Founder Decision Matrix
+
+Locate:
+
+`AI_V2_0_FOUNDER_DECISION_MATRIX.md`
+
+and its machine-readable equivalent.
+
+Update its status from:
+
+`DERIVED_CONTROLLED_DECISION_MATRIX_FROM_EXACT_SOURCE_PENDING_FOUNDER_RATIFICATION`
+
+to:
+
+`FOUNDER_RATIFIED_CONTROLLING_AI_V2_0_DECISION_MATRIX`
+
+The matrix must continue to state that:
+
+- the IDs were assigned prospectively;
+- the IDs are administrative;
+- Section 96 controls;
+- no historical standalone matrix is claimed to have existed;
+- the exact source SHA-256 is controlling.
+
+Do not rewrite the exact decision language.
+
+## 4.2 Founder Decision Register
+
+Create:
+
+`MASTER_AI_FOUNDER_DECISION_REGISTER_V2_0.md`
+
+and:
+
+`MASTER_AI_FOUNDER_DECISION_REGISTER_V2_0.json`
+
+The register must be generated from the ratified matrix and exact Section 96 language.
+
+Required classification:
+
+`FOUNDER_RATIFIED_CONTROLLING_COMPANION_REGISTER`
+
+The register must not be described as a recovered historical artifact.
+
+It is a new controlling companion artifact created under this Founder directive.
+
+---
+
+# 5. REQUIRED REGISTER CONTENT
+
+For each of `AI-FD01` through `AI-FD12`, include:
+
+- decision ID;
+- exact Section 96 source language;
+- normalized short title;
+- source section;
+- exact source SHA-256;
+- decision status;
+- authority classification;
+- implementing sections;
+- constitutional invariants;
+- explicit prohibitions;
+- appendices;
+- cross-canon dependencies;
+- authority owner;
+- governance requirement IDs;
+- traceability status;
+- adoption state;
+- lock state;
+- implementation-authority state;
+- production-authority state;
+- supersession state;
+- notes distinguishing exact language from administrative metadata.
+
+The register must preserve the distinction between:
+
+- exact source language;
+- administrative title;
+- explanatory notes;
+- implementation guidance.
+
+---
+
+# 6. REQUIRED P1 CLOSURE
+
+Update the prior blocker:
+
+`AI-V2-P1-FOUNDER-DECISION-MATRIX-RATIFICATION-PENDING`
+
+Required disposition:
+
+`CLOSED_BY_EXPLICIT_FOUNDER_RATIFICATION`
+
+The closure record must identify:
+
+- this directive;
+- exact source SHA-256;
+- Founder Decision Matrix path;
+- Founder Decision Register path;
+- ratification date;
+- closure evidence;
+- verification result.
+
+Required current state:
+
+- P0: `0`
+- Open P1: `0`
+- Closed P1: `2`
+
+Do not proceed if another P1 is discovered during closure verification.
+
+---
+
+# 7. REQUIRED OUTPUTS FOR RATIFICATION AND CLOSURE
+
+Create or update:
+
+1. `AI_V2_0_FOUNDER_DECISION_MATRIX_RATIFICATION_RECORD.md`
+2. `AI_V2_0_FOUNDER_DECISION_MATRIX_RATIFICATION_RECORD.json`
+3. `MASTER_AI_FOUNDER_DECISION_REGISTER_V2_0.md`
+4. `MASTER_AI_FOUNDER_DECISION_REGISTER_V2_0.json`
+5. `AI_V2_0_PHASE_2_P1_BLOCKER_CLOSURE_REPORT.md`
+6. `AI_V2_0_PHASE_2_UPDATED_FINDING_LEDGER.json`
+7. `AI_V2_0_PHASE_2_RESUMPTION_AUTHORITY_RECORD.md`
+
+Compute and record SHA-256 for every new or modified artifact.
+
+---
+
+# 8. CONTROLLED PHASE R6 RESUMPTION
+
+After verifying:
+
+- P0 = `0`
+- Open P1 = `0`
+
+resume the prior reconciliation beginning at Phase R6.
+
+The resumed work must include:
+
+1. re-running the Phase 2 Founder-decision reconciliation;
+2. confirming the decision matrix and register are fully traceable;
+3. generating or reconciling the AI Governance Requirement Index;
+4. generating or reconciling the AI Requirement Traceability Matrix;
+5. normalizing AI cross-canon references;
+6. running the formal AI scan suite;
+7. closing adoption-blocking and lock-blocking P2 findings;
+8. preparing prospective AI V2.0 adoption;
+9. preparing prospective AI V2.0 lock;
+10. creating the replacement AI evidence package;
+11. resuming Governance V1.0 closure.
+
+Do not skip any mandatory gate.
+
+---
+
+# 9. REQUIRED AI FORMAL SCANS
+
+At minimum, run:
+
+- dependency-cycle scan;
+- orphan-requirement scan;
+- duplicate-ID scan;
+- cross-reference scan;
+- authority-owner scan;
+- Founder-decision coverage scan;
+- adoption-state scan;
+- lock-state scan;
+- exact-source completeness scan.
+
+All findings must be assigned:
+
+- finding ID;
+- severity;
+- affected artifact;
+- evidence;
+- blocking status;
+- required correction;
+- authority required;
+- disposition;
+- verification evidence.
+
+---
+
+# 10. AI V2.0 ADOPTION REQUIREMENTS
+
+AI V2.0 may be adopted only if:
+
+- exact source SHA-256 remains verified;
+- Founder approval remains verified;
+- Founder Decision Matrix is ratified;
+- Founder Decision Register is complete;
+- requirement mapping is complete;
+- traceability is bidirectional;
+- cross-canon references resolve;
+- authority owners resolve;
+- P0 = `0`;
+- P1 = `0`;
+- adoption-blocking P2 = `0`;
+- no substantive source conflict remains.
+
+Required adoption disposition:
+
+- `AI_V2_0_CONSTITUTIONAL_CANON_ADOPTED`
+- or `AI_V2_0_CONSTITUTIONAL_CANON_ADOPTED_WITH_RETAINED_NONBLOCKING_P2`
+- or `AI_V2_0_CONSTITUTIONAL_ADOPTION_BLOCKED`
+
+Adoption must remain separate from lock.
+
+---
+
+# 11. AI V2.0 LOCK REQUIREMENTS
+
+AI V2.0 may be locked only if:
+
+- adoption is complete;
+- source hash is verified;
+- adoption-record hash is verified;
+- decision-matrix and register hashes are verified;
+- requirement and traceability artifacts are verified;
+- all formal scans pass;
+- P0 = `0`;
+- P1 = `0`;
+- lock-blocking P2 = `0`;
+- no post-adoption byte drift exists.
+
+Required lock disposition:
+
+- `AI_V2_0_CONSTITUTIONAL_CANON_LOCKED`
+- or `AI_V2_0_CONSTITUTIONAL_CANON_LOCKED_WITH_RETAINED_NONBLOCKING_P2`
+- or `AI_V2_0_CONSTITUTIONAL_LOCK_BLOCKED`
+
+---
+
+# 12. AUTHORITY BOUNDARIES
+
+Throughout all resumed work, maintain:
+
+- Founder approval: `TRUE`
+- Constitutional adoption: pending until completed
+- Constitutional lock: pending until completed
+- Implementation authority: `FALSE`
+- Runtime authority: `FALSE`
+- Provider activation authority: `FALSE`
+- Customer-data transfer authority: `FALSE`
+- Training authority: `FALSE`
+- Production authority: `FALSE`
+- Public-launch authority: `FALSE`
+- Public compliance or trust-claim authority: `FALSE`
+
+No downstream phase may change these flags except constitutional adoption and lock status.
+
+---
+
+# 13. PROHIBITED ACTIONS
+
+Codex must not:
+
+1. modify or resave the exact AI V2.0 DOCX;
+2. alter Section 96 language;
+3. treat the new register as historical;
+4. create new policy through administrative titles;
+5. merge RF30 or AI Operating System artifacts into this canon;
+6. grant implementation or production authority;
+7. skip scan or traceability gates;
+8. close P2 items by relabeling them;
+9. claim adoption before the adoption record is issued;
+10. claim lock before the lock record is issued;
+11. continue past any newly discovered open P1;
+12. alter prior blocked evidence.
+
+---
+
+# 14. REQUIRED RESUMPTION DISPOSITION
+
+After ratification and P1 closure, issue:
+
+`AI_V2_0_FOUNDER_DECISION_MATRIX_RATIFIED_AND_PHASE_2_RESUMPTION_AUTHORIZED`
+
+only if:
+
+- exact source hash is verified;
+- matrix status is updated;
+- register is created;
+- P1 closure is verified;
+- Open P1 equals zero.
+
+Otherwise issue:
+
+`AI_V2_0_FOUNDER_DECISION_MATRIX_RATIFICATION_CLOSURE_BLOCKED`
+
+with a precise blocker report.
+
+---
+
+# 15. FINAL RESPONSE FORMAT
+
+## Ratification Disposition
+
+`[EXACT DISPOSITION]`
+
+## Exact Source
+
+- Canonical filename:
+- Repository path:
+- SHA-256:
+- Byte size:
+- Source status:
+
+## Founder Decisions
+
+- Section 96 verified:
+- Decision groups:
+- Decision IDs:
+- Matrix status:
+- Register status:
+- Founder ratification:
+- Source-hash linkage:
+
+## P1 Closure
+
+- P0:
+- Open P1 before:
+- Open P1 after:
+- Closed P1:
+- Closure finding:
+- Closure evidence:
+
+## Resumption
+
+- Phase R6 authorized:
+- Phase reached:
+- Next gate:
+- New blockers:
+
+## Lifecycle
+
+- Founder approval:
+- Adoption:
+- Lock:
+- Constitutional authority:
+- Implementation authority:
+- Runtime authority:
+- Provider activation:
+- Production authority:
+- Public-launch authority:
+
+## Key Artifacts
+
+Provide exact paths for:
+
+- Founder ratification record;
+- updated Founder Decision Matrix;
+- AI Founder Decision Register;
+- updated P1 closure report;
+- updated finding ledger;
+- Phase 2 resumption authority record;
+- resumed Phase 2 report;
+- any later adoption or lock records completed during the run.
+
+Begin by recording this Founder ratification and closing the remaining P1.

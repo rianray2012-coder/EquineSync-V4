@@ -1,0 +1,76 @@
+{
+  "phase": 0,
+  "generated_at_utc": "2026-07-16T02:05:25Z",
+  "repository_root": "/Users/rianray/Documents/Codex/Codex /2026-05-30/files-mentioned-by-the-user-03/work/Equine-Sync-v2-current",
+  "branch": "integrate-emergent-final-zip",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "worktree": {
+    "clean": false,
+    "entries": 232,
+    "modified": 39,
+    "untracked": 192,
+    "deleted": 1
+  },
+  "directive": {
+    "path": "docs/canon/reviews/governance_v1_0_ai_reconciliation/source/GOVERNANCE_V1_0_AI_V2_RECONCILIATION_DIRECTIVE.txt",
+    "sha256": "37f3d6d7860284bfe27e5cdd1de9fc26e09cc82f9ff154ea5e82253dddbc85ea",
+    "bytes": 42593
+  },
+  "governing_baseline": {
+    "stage0_state": "STAGE0_COMPANION_RECONCILIATION_INCORPORATED_CONTROLLED_BASELINE",
+    "c0_state": "C0_SOURCE_RECONCILIATION_FOUNDER_APPROVED_BASELINE_INCORPORATED",
+    "package_path": "/Users/rianray/Downloads/EquineSync_C0_Constitutional_Source_Reconciliation_Package_V1_0.zip",
+    "package_sha256": "10a0cc2314b01c2a31674f7b5e14279cdecef32cb274e061c6670ec3a50139f5",
+    "archive_integrity": "passed"
+  },
+  "key_evidence": [
+    {
+      "path": "docs/canon/MASTER_AI_OPERATING_SYSTEM.md",
+      "sha256": "09d79c809d1261ad6cfc15a6759267fd0bbea080bc2ac40c8c144a7cc6abc68d",
+      "bytes": 43676,
+      "classification": "EXACT_REPOSITORY_SOURCE_VERIFIED_DIFFERENT_AI_FAMILY"
+    },
+    {
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_CONSTITUTIONAL_SOURCE_OF_TRUTH_REGISTER_V1_0.csv",
+      "sha256": "fd5923e14eb095b56ecdb3025f85aab529f7576a582c553c420f7655fdd66826",
+      "classification": "EXACT_REPOSITORY_DERIVATIVE_REGISTER"
+    },
+    {
+      "path": "docs/canon/reviews/stage0_c0_repository_incorporation/C0_REPOSITORY_RECONCILIATION_DATA_SUPPLEMENT_V1_0.json",
+      "sha256": "535fed62bd7e26e5c553e25120c4c346e20d7c9f0c0c7644e6353115d03968be",
+      "classification": "EXACT_REPOSITORY_RECONCILIATION_EVIDENCE"
+    },
+    {
+      "path": "docs/RF30/RF30_FINAL_LOCK_REVIEW.md",
+      "sha256": "89b472e16a10175533c631072202c8d1c5982ac81b3238fd2f7686fd7d88daf3",
+      "classification": "EXACT_REPOSITORY_RF30_LOCK_EVIDENCE_NOT_AI_V2_CANON_LOCK"
+    },
+    {
+      "path": "outputs/rf30_founder_final_lock.json",
+      "sha256": "a575d789a6f8535e83a00460977d1211336355997b300293b1bef1d3c96fdb02",
+      "classification": "EXACT_REPOSITORY_RF30_MACHINE_LOCK_EVIDENCE"
+    },
+    {
+      "path": "/Users/rianray/Downloads/equinesync_cross_canon_reconciliation/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_0.md",
+      "sha256": "b4a58b2071c7dcd216ad811ff8b36ae97e0e73e80e5cbf06e7ffdf4e87cd5bfe",
+      "bytes": 4223,
+      "classification": "EXACT_MOUNTED_SOURCE_VERIFIED_NOT_REPOSITORY_LINKED"
+    }
+  ],
+  "missing_expected_evidence": [
+    "MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+    "AI V2.0 founder decision register or ledger",
+    "AI V2.0 adoption record",
+    "AI V2.0 constitutional lock record",
+    "AI V2.0 controlling checksum",
+    "exact standalone master Founder Decision Register",
+    "exact standalone Governance Requirement Index",
+    "exact standalone Requirement Traceability Matrix"
+  ],
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "production": false,
+    "public_launch": false
+  }
+}

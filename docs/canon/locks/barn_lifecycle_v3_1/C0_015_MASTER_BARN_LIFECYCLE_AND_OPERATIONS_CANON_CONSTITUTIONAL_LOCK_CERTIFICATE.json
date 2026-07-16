@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-015",
+  "title": "Master Barn Lifecycle and Operations Canon",
+  "version": "3.1",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_BARN_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+  "locked_sha256": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+  "adoption_record": "docs/canon/adoptions/c0_015_barn_lifecycle_v3_1/C0_015_MASTER_BARN_LIFECYCLE_AND_OPERATIONS_CANON_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "a8dcb8f4a2fffe8b67ddcd198e094f9915a11b9278895aede78b80671ad56c78",
+  "lock_record": "docs/canon/locks/barn_lifecycle_v3_1/C0_015_MASTER_BARN_LIFECYCLE_AND_OPERATIONS_CANON_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "2d5a86e9f44570001ce66660034861a29082af761155f7d0934e79fdd6d028c4",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

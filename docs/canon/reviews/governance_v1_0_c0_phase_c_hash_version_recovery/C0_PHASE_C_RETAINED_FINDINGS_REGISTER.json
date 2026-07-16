@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-07-16T08:32:07Z",
+  "p0": 0,
+  "open_p1": 0,
+  "source_classification_blocking_p2": 0,
+  "retained_p2": 6,
+  "findings": [
+    {
+      "finding_id": "PHASE-C-C0-004-EXPECTED-BYTES-NOT-MOUNTED",
+      "row_id": "C0-004",
+      "severity": "P2",
+      "classification_blocking": false,
+      "status": "OPEN_SOURCE_EVIDENCE",
+      "description": "Expected historical bytes are authenticated by hash and manifest but are not locally mounted; source identity and succession remain unproven.",
+      "owner": "Founder/source custodian",
+      "closure": "Supply exact bytes matching the expected SHA-256."
+    },
+    {
+      "finding_id": "PHASE-C-C0-005-EXPECTED-BYTES-NOT-MOUNTED",
+      "row_id": "C0-005",
+      "severity": "P2",
+      "classification_blocking": false,
+      "status": "OPEN_SOURCE_EVIDENCE",
+      "description": "Expected historical bytes are authenticated by hash and manifest but are not locally mounted; source identity and succession remain unproven.",
+      "owner": "Founder/source custodian",
+      "closure": "Supply exact bytes matching the expected SHA-256."
+    },
+    {
+      "finding_id": "PHASE-C-C0-012-EXPECTED-BYTES-NOT-MOUNTED",
+      "row_id": "C0-012",
+      "severity": "P2",
+      "classification_blocking": false,
+      "status": "OPEN_SOURCE_EVIDENCE",
+      "description": "Expected historical bytes are authenticated by hash and manifest but are not locally mounted; source identity and succession remain unproven.",
+      "owner": "Founder/source custodian",
+      "closure": "Supply exact bytes matching the expected SHA-256."
+    },
+    {
+      "finding_id": "PHASE-C-C0-014-EXPECTED-BYTES-NOT-MOUNTED",
+      "row_id": "C0-014",
+      "severity": "P2",
+      "classification_blocking": false,
+      "status": "OPEN_SOURCE_EVIDENCE",
+      "description": "Expected historical bytes are authenticated by hash and manifest but are not locally mounted; source identity and succession remain unproven.",
+      "owner": "Founder/source custodian",
+      "closure": "Supply exact bytes matching the expected SHA-256."
+    },
+    {
+      "finding_id": "PHASE-C-C0-015-EXPECTED-BYTES-NOT-MOUNTED",
+      "row_id": "C0-015",
+      "severity": "P2",
+      "classification_blocking": false,
+      "status": "OPEN_SOURCE_EVIDENCE",
+      "description": "Expected historical bytes are authenticated by hash and manifest but are not locally mounted; source identity and succession remain unproven.",
+      "owner": "Founder/source custodian",
+      "closure": "Supply exact bytes matching the expected SHA-256."
+    },
+    {
+      "finding_id": "PHASE-C-C0-016-EXPECTED-BYTES-NOT-MOUNTED",
+      "row_id": "C0-016",
+      "severity": "P2",
+      "classification_blocking": false,
+      "status": "OPEN_SOURCE_EVIDENCE",
+      "description": "Expected historical bytes are authenticated by hash and manifest but are not locally mounted; source identity and succession remain unproven.",
+      "owner": "Founder/source custodian",
+      "closure": "Supply exact bytes matching the expected SHA-256."
+    }
+  ]
+}

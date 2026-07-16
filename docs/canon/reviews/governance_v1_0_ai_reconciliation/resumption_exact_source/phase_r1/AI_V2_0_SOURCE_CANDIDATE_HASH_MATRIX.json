@@ -1,0 +1,40 @@
+{
+  "phase": "R1",
+  "disposition": "FOUNDER_SELECTED_SOURCE_VERIFIED_WITH_NONCONTROLLING_VARIANTS_PRESERVED",
+  "candidates": [
+    {
+      "path": "docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+      "source_filename": "MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0_FOUNDER_APPROVED.docx",
+      "sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+      "bytes": 140809,
+      "paragraphs": 748,
+      "tables": 29,
+      "rendered_pages": 42,
+      "normalized_text_sha256": "9f64f480f0f02787b29898944bd56e8476f98b4452b04a45036524b9f37f7d81",
+      "classification": "FOUNDER_SELECTED_CONTROLLING_SOURCE_CANDIDATE"
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/source_uploaded/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0(1).docx",
+      "sha256": "9495982c16f73b12a5c254583932578f6037f484285cd0e4c1ebb0a33c5d186b",
+      "bytes": 140749,
+      "paragraphs": 748,
+      "tables": 29,
+      "normalized_text_sha256": "62540b8955707b4573a626b90d6e841c65c59037c477d126e434d2d39c012ce7",
+      "classification": "EARLIER_REVIEW_CANDIDATE"
+    },
+    {
+      "path": "docs/canon/MASTER_AI_OPERATING_SYSTEM.md",
+      "sha256": "09d79c809d1261ad6cfc15a6759267fd0bbea080bc2ac40c8c144a7cc6abc68d",
+      "bytes": 43676,
+      "classification": "NONCONTROLLING_SEPARATE_AI_FAMILY"
+    }
+  ],
+  "substantive_source_conflict": false,
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "runtime": false,
+    "production": false
+  }
+}

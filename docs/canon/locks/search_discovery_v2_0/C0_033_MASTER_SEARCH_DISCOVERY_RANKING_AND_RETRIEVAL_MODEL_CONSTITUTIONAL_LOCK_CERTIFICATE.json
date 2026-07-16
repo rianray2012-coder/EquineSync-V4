@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-033",
+  "title": "Master Search, Discovery, Ranking, and Retrieval Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "locked_sha256": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+  "adoption_record": "docs/canon/adoptions/c0_033_search_discovery_v2_0/C0_033_MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "a44e028ab0413265cddd5b963d00b2f21df71206d5109eba493b0a4961b94111",
+  "lock_record": "docs/canon/locks/search_discovery_v2_0/C0_033_MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "94e16fe5eed8d64bc937a610fa39af67a2c89882b5c5d1839fbe87afbcaad3ef",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

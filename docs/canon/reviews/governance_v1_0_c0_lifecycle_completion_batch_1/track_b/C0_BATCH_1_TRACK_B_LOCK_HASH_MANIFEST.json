@@ -1,0 +1,47 @@
+{
+  "reviewed_at": "2026-07-16T07:34:36Z",
+  "rows": [
+    {
+      "row_id": "C0-025",
+      "adopted_source": "docs/canon/adopted_sources/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0_ADOPTED_SOURCE.md",
+      "sha256": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+      "adoption_record_sha256": "90e31fa2be06d4ebf4c2e65718b1fb4dffc12cf0490d885a0ab92e335e14c028"
+    },
+    {
+      "row_id": "C0-026",
+      "adopted_source": "docs/canon/adopted_sources/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "sha256": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+      "adoption_record_sha256": "300edb31066c0c76b9235a3360be674cc519c6ad951bd2e64fadff4a3555e612"
+    },
+    {
+      "row_id": "C0-027",
+      "adopted_source": "docs/canon/adopted_sources/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+      "adoption_record_sha256": "3f243f17d8e5c210616cc8d30ee88e243c4884dbad6c3dbe59bd96827bcac1f0"
+    },
+    {
+      "row_id": "C0-029",
+      "adopted_source": "docs/canon/adopted_sources/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+      "adoption_record_sha256": "41b91b72c9914ccf014ab94d273882d1795facc71fe1516f71107b2abfc3e285"
+    },
+    {
+      "row_id": "C0-030",
+      "adopted_source": "docs/canon/adopted_sources/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0_ADOPTED_SOURCE.md",
+      "sha256": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+      "adoption_record_sha256": "92ca7148d0631dadbcf312d510a71a3f8ea893df50778c2b133107247caa42e1"
+    },
+    {
+      "row_id": "C0-031",
+      "adopted_source": "docs/canon/adopted_sources/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0_ADOPTED_SOURCE.md",
+      "sha256": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+      "adoption_record_sha256": "07fa305bdf48e210dda4befd69b97b37ed05d143c180cbdaf904d31a29650111"
+    },
+    {
+      "row_id": "C0-032",
+      "adopted_source": "docs/canon/adopted_sources/MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "sha256": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+      "adoption_record_sha256": "3bccad61ca0f8e1e6eeef0a93301d3b5c4334b20bab89e260d6c35a4d090b755"
+    }
+  ]
+}

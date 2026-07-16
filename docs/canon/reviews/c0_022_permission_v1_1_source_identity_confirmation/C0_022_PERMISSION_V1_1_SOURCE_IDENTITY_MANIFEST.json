@@ -1,0 +1,25 @@
+{
+  "disposition": "CONFIRM_V1_1_AS_CONTROLLING_C0_022_SOURCE",
+  "files": {
+    "docs/canon/reviews/c0_022_permission_v1_1_source_identity_confirmation/source_event/MASTER_PERMISSION_MODEL_V1_1_FOUNDER_CONFIRMED_CONTROLLING_SOURCE.md": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+    "docs/canon/reviews/c0_022_permission_v1_1_source_identity_confirmation/C0_022_PERMISSION_V1_1_FOUNDER_SOURCE_IDENTITY_CONFIRMATION.md": "79c3eb155bdff851d84f2f1e31a04817d5631845d9f794ceee18982ef7b8631d",
+    "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/C0_CURRENT_SOURCE_OF_TRUTH_REGISTER.md": "983c5f455217a23afb3153a53b0d7a880f63c034face1b5d831be8ab607576e0",
+    "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_CURRENT_LIFECYCLE_STATE_REGISTER.md": "691cc24dd20336187256acaaf7d39fb8654f13b7f25addb2906bdb67b79a9308",
+    "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_ROW_BY_ROW_LIFECYCLE_RESOLUTION_LEDGER.json": "9a73ec2ccc2899617019ef44b8274a95916b8f70566fb6f2e34a10c24e394973",
+    "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_ROW_BY_ROW_LIFECYCLE_RESOLUTION_LEDGER.md": "d67846aae0d49e4eeea618b177712d5809a32e665c0401f84bcb9e2a3f9b4689",
+    "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_UNRESOLVED_LIFECYCLE_BLOCKER_LEDGER.md": "bdd28cb2b3dedf2ea1d160291c1a693c52f340ad8e9440ffd0d275d2fecbeaad",
+    "docs/canon/CANON_INDEX.md": "58299450f8af679df405abf90826452bf253c65ef7903289af02ab4fca1c1d0e",
+    "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/C0_CURRENT_SOURCE_OF_TRUTH_REGISTER.json": "62ba1bfe4a26ff473d1cf055cc7f012a746c952e95e395f09d9ac80f337dbbd2",
+    "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_CURRENT_LIFECYCLE_STATE_REGISTER.json": "80e6dbc5960a58cb98e4322d46682f7325da556783b2229c4b46424155757a21"
+  },
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "migration": false,
+    "runtime": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false
+  }
+}

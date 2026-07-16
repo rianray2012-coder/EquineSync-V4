@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-043",
+  "title": "Master Platform Operations, Reliability, and Release Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "locked_sha256": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+  "adoption_record": "docs/canon/adoptions/c0_043_platform_operations_reliability_release_v2_0/C0_043_MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "c4d4349ddef769c729f066a96254fa371919ed69c3ad5117b8078bbc632db9d4",
+  "lock_record": "docs/canon/locks/platform_operations_reliability_release_v2_0/C0_043_MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "1795a4d6507bc5f084ad1b921b664e9d71e3fa730143a3d4a3ba92580f7847bd",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

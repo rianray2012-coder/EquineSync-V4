@@ -1,0 +1,30 @@
+section,subject,disposition,reason,target_layer
+Document Control and Founder Notice,Status authority and electronic-communication floor,REQUIRES_FOUNDER_DECISION,"Approval event is asserted but not independently linked",Register and constitutional preface after confirmation
+Part I,Purpose ownership and boundaries,MERGE_INTO_EXISTING_CODEX_SECTION,"Strong boundary language aligns with locked canon",Master Safeguarding Constitutional Canon
+Part II,Definitions and principles,MERGE_INTO_EXISTING_CODEX_SECTION,"Most definitions are useful but Protected Participant taxonomy must be split",Master Safeguarding Constitutional Canon
+Part III,Age autonomy assent and refusal,RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION,"Adds jurisdiction and refusal safeguards pending provenance",Master Safeguarding Constitutional Canon
+Part IV,Guardian identity authority and conflict,MERGE_INTO_EXISTING_CODEX_SECTION,"Aligns with Relationship Permission and Claims",Master Safeguarding Constitutional Canon
+Part V,Accounts identity and access,MERGE_INTO_EXISTING_CODEX_SECTION,"Useful minimum-access rules; capability tiers remain a founder decision",Master Safeguarding Constitutional Canon
+Part VI,Electronic communications,REQUIRES_FOUNDER_DECISION,"Absolute prohibition conflicts with the current SG-FD03 recommendation",Master Safeguarding Constitutional Canon
+Part VII,Intake triage reporting and protection,RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION,"Strong intake no-delay recusal and fairness controls; mandated-reporting authority still needs confirmation",Master Safeguarding Constitutional Canon
+Part VIII,Adult eligibility and protected roles,MERGE_INTO_EXISTING_CODEX_SECTION,"Adds revalidation and restriction controls without conferring credentials",Master Safeguarding Constitutional Canon
+Part IX,In-person participation release and transportation,RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION,"Closes private-space lodging gifts pickup and transport gaps",Master Safeguarding Constitutional Canon
+Part X,Delegated horse care,MERGE_INTO_EXISTING_CODEX_SECTION,"Aligns with EH-FD13 boundary but medical task authority remains unresolved",Master Safeguarding Constitutional Canon
+Part XI,Privacy media search and location,RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION,"Default protective treatment aligns with current recommendation",Master Safeguarding Constitutional Canon
+Part XII,AI automation reporting and analytics,MERGE_INTO_EXISTING_CODEX_SECTION,"Aligns with RF30 and prohibits shared-model training",Master Safeguarding Constitutional Canon
+Part XIII,Records evidence holds and confidentiality,MERGE_INTO_EXISTING_CODEX_SECTION,"Strong segregation and chain-of-custody rules; sealing classes remain subordinate work",Master Safeguarding Constitutional Canon
+Part XIV,Challenge appeal fairness and non-retaliation,RETAIN_AS_MORE_PROTECTIVE_FOUNDER_DIRECTION,"Preserves protective measures while supporting procedural fairness",Master Safeguarding Constitutional Canon
+Part XV,Transition to adulthood,MERGE_INTO_EXISTING_CODEX_SECTION,"Aligned with SG-FD01 recommendation",Master Safeguarding Constitutional Canon
+Part XVI,External systems offline and platform controls,MERGE_INTO_EXISTING_CODEX_SECTION,"Preserves default-off offline and provider-neutral boundaries",Master Safeguarding Constitutional Canon
+Part XVII,Roles and responsibilities,MERGE_INTO_EXISTING_CODEX_SECTION,"Useful responsibility separation subject to canon authority order",Master Safeguarding Constitutional Canon
+Part XVIII,Required registers standards and artifacts,MOVE_TO_SUBORDINATE_STANDARD,"Operational completeness should not block constitutional closure",Implementation Readiness Standard and Operational Backlog
+Part XIX,Implementation gates,MOVE_TO_IMPLEMENTATION_READINESS,"These are future feature and release gates not constitutional text",Safeguarding Implementation Readiness Standard
+Part XX,Mandatory test scenarios,MOVE_TO_TEST_CATALOG,"All 80 scenarios are valuable but belong in an executable catalog",Safeguarding Constitutional Test Catalog
+Part XXI,Metrics monitoring and assurance,MOVE_TO_IMPLEMENTATION_READINESS,"Metrics require implemented controls and data minimization",Implementation Readiness Standard
+Part XXII,Prohibited conduct and non-waivable rules,RETAIN_AS_CONSTITUTIONAL_TEXT,"Defines constitutional floors and prohibitions",Master Safeguarding Constitutional Canon
+Part XXIII,Exceptions and founder-reserved authority,RETAIN_AS_CONSTITUTIONAL_TEXT,"Defines controlled exceptions without granting runtime authority",Master Safeguarding Constitutional Canon
+Part XXIV,Lifecycle and authorization boundary,MERGE_INTO_EXISTING_CODEX_SECTION,"Keep lifecycle truth but remove premature approval claims",Register and canon document control
+Appendix A,Founder decision traceability,REQUIRES_FOUNDER_DECISION,"Trace is useful but every approval is unlinked",Safeguarding Register and Evidence Inventory
+Appendix B,Cross-canon reading set,MOVE_TO_SUBORDINATE_STANDARD,"Maintain as dependency inventory",Safeguarding Register and Evidence Inventory
+Appendix C,Pre-implementation handoffs,MOVE_TO_IMPLEMENTATION_READINESS,"Associate each handoff with the feature or production gate that needs it",Operational Standards Backlog
+Appendix D,Validation focus,MOVE_TO_TEST_CATALOG,"Validation belongs with executable scenarios and evidence",Safeguarding Constitutional Test Catalog

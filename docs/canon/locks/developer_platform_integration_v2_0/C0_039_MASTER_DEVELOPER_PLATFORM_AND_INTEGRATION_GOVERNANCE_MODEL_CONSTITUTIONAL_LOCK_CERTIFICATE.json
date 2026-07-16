@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-039",
+  "title": "Master Developer, Platform, and Integration Governance Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "locked_sha256": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+  "adoption_record": "docs/canon/adoptions/c0_039_developer_platform_integration_v2_0/C0_039_MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "9f9259e1a559886ab1996e7ebecde9a734b456fc2e9fb6fa132928cafd357519",
+  "lock_record": "docs/canon/locks/developer_platform_integration_v2_0/C0_039_MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "f50b3ce739e0ad48200c5eb11d548058a625e3e76b68f60be70700779e3f55b3",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

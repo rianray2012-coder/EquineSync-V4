@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-042",
+  "title": "Master Configuration and Feature Flag Governance Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "locked_sha256": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+  "adoption_record": "docs/canon/adoptions/c0_042_configuration_feature_flag_v2_0/C0_042_MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "bd10cf0c4d5f6855e62edef6270e4fba945d5e60644707572568c8cb50c7ae3c",
+  "lock_record": "docs/canon/locks/configuration_feature_flag_v2_0/C0_042_MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "5a8c951ad23c3654a1ac86e841771e86d47c890d2d926140262b5fc9bbc945c5",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

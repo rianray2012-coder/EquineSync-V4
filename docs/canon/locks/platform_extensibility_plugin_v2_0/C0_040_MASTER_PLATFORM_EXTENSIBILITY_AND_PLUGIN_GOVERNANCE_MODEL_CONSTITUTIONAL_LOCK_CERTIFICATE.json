@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-040",
+  "title": "Master Platform Extensibility and Plugin Governance Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "locked_sha256": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f",
+  "adoption_record": "docs/canon/adoptions/c0_040_platform_extensibility_plugin_v2_0/C0_040_MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "985e07f1d060eb1ffc967bf157fe689a3e47461aca5f1ba4ceed07af9576df94",
+  "lock_record": "docs/canon/locks/platform_extensibility_plugin_v2_0/C0_040_MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "8f1ee84f3008d89e23060c663ca4b116015c9d1ed47bd9a586c24b8e5ca9f502",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

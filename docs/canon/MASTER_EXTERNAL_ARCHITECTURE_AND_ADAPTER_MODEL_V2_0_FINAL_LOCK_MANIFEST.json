@@ -1,0 +1,37 @@
+{
+  "artifact": "MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0",
+  "version": "2.0",
+  "lock_date": "2026-07-12",
+  "founder_lock_decision": "LOCK",
+  "final_state": "LOCKED",
+  "adoption_state": "ADOPTED_WITH_NONBLOCKING_FOLLOW_UP",
+  "locked_path": "docs/canon/MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0.md",
+  "immutable_sha256": "0cdad90cb5929588ee137e9835f6b499c3651159381960fbfad436dfcd0fa18d",
+  "byte_identical_to_adopted_artifact": true,
+  "byte_identical_to_verified_candidate": true,
+  "findings": {
+    "p0": 0,
+    "p1": 0,
+    "open_p2": 1
+  },
+  "nonblocking_follow_up": {
+    "id": "F_EXTERNAL_ADAPTERS-P2-01",
+    "state": "OPEN_TRACKED_NONBLOCKING",
+    "owner": "ATLAS5 and future applicable constitutional or implementation-readiness workstreams"
+  },
+  "provider_neutrality_verification": "PASS",
+  "cross_canon_references": "VALID_AND_STATE_QUALIFIED",
+  "provenance_integrity": "PASS",
+  "provider_selection_authorized": false,
+  "preferred_provider_designation_authorized": false,
+  "procurement_authorized": false,
+  "adapter_or_integration_development_authorized": false,
+  "runtime_implementation_authorized": false,
+  "schema_or_migration_authorized": false,
+  "secret_or_credential_activity_authorized": false,
+  "webhook_or_synchronization_authorized": false,
+  "external_processor_activation_authorized": false,
+  "infrastructure_deployment_authorized": false,
+  "production_mutation_authorized": false,
+  "public_launch_authorized": false
+}

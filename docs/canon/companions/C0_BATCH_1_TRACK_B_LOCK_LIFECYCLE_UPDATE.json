@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-07-16T07:53:55Z",
+  "decision": "FOUNDER_AUTHORIZED_C0_BATCH_1_TRACK_B_SEVEN_CANON_CONSTITUTIONAL_LOCK",
+  "locked_rows": [
+    "C0-025",
+    "C0-026",
+    "C0-027",
+    "C0-029",
+    "C0-030",
+    "C0-031",
+    "C0-032"
+  ],
+  "affected_companions": [
+    "Canon Index",
+    "Constitutional Authority Matrix",
+    "Domain Ownership and Boundary Register",
+    "Cross-Canon Reference Normalization Register",
+    "Canon Dependency Map",
+    "Founder Decision Register",
+    "Governance Requirement Index",
+    "Requirement Traceability Matrix"
+  ],
+  "substantive_requirement_changes": 0,
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "production": false,
+    "provider_activation": false,
+    "external_integration_activation": false,
+    "deployment": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false
+  }
+}

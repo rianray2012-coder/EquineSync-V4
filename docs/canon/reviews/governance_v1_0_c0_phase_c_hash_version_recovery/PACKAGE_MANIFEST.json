@@ -1,0 +1,771 @@
+{
+  "generated_at": "2026-07-16T08:32:07Z",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "disposition": "C0_PHASE_C_SOURCE_RECOVERY_PARTIALLY_COMPLETE_WITH_IDENTIFIED_EVIDENCE_BLOCKERS",
+  "files": [
+    {
+      "path": "docs/canon/CANON_INDEX.md",
+      "sha256": "d958defa8c511aa111f3e7c94f0bd5f745c0e98086139329c8c033d75a69a879",
+      "size": 25084
+    },
+    {
+      "path": "docs/canon/companions/C0_PHASE_C_SOURCE_RECOVERY_PROSPECTIVE_UPDATE.json",
+      "sha256": "3e42029411b0fc4f16d3df6e5ddbda403751002a640d91de5a21bec5226f9c72",
+      "size": 10365
+    },
+    {
+      "path": "docs/canon/companions/C0_PHASE_C_SOURCE_RECOVERY_PROSPECTIVE_UPDATE.md",
+      "sha256": "b7d1138e7a7c38bf9e9fd181e49bd2993f005159b7a92e68c230e1f88f44a097",
+      "size": 581
+    },
+    {
+      "path": "docs/canon/companions/CANON_DEPENDENCY_MAP_C0_PHASE_C_PROSPECTIVE_UPDATE.md",
+      "sha256": "293802a8f3b14356ac6c555d27b57fb27adeff8015a66d3a8640cae405a4bda8",
+      "size": 474
+    },
+    {
+      "path": "docs/canon/companions/CONSTITUTIONAL_AUTHORITY_MATRIX_C0_PHASE_C_PROSPECTIVE_UPDATE.md",
+      "sha256": "ac2f1a95ab65ad5a4f4d15138ec2aca161094f5946e9cd87cb0b686801f9c4c7",
+      "size": 485
+    },
+    {
+      "path": "docs/canon/companions/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_C0_PHASE_C_PROSPECTIVE_UPDATE.md",
+      "sha256": "c1772a91f0afc25243980ef4682dcd1ec7f602392443ed7e64715f858f90166d",
+      "size": 507
+    },
+    {
+      "path": "docs/canon/companions/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_C0_PHASE_C_PROSPECTIVE_UPDATE.md",
+      "sha256": "b5b2c644ed038d969a1c86cf1e018245c35f3d8204a9f49f326265b30b68ee88",
+      "size": 498
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_FOUNDER_DECISION_REGISTER_C0_PHASE_C_PROSPECTIVE_UPDATE.md",
+      "sha256": "128e436818e2ef7000fc5e559234d445ab46c0cabc645c056d99203af958f8bf",
+      "size": 497
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_C0_PHASE_C_PROSPECTIVE_UPDATE.md",
+      "sha256": "08e89231a958569078ec8ef5015ca48fd6c3bbb0d479f5afc1b7731f2698f057",
+      "size": 500
+    },
+    {
+      "path": "docs/canon/companions/MASTER_EQUINESYNC_REQUIREMENT_TRACEABILITY_MATRIX_C0_PHASE_C_PROSPECTIVE_UPDATE.md",
+      "sha256": "4634833e29709139b543f2932a35f2ea6b26822d066c2d33f93be48220b8ae86",
+      "size": 503
+    },
+    {
+      "path": "docs/canon/registries/C0_PHASE_C_SOURCE_EVIDENCE_INVENTORY.md",
+      "sha256": "553dcc9fa5adec4704ab36069f79317265d494ecca15c591a8f04f55342f7459",
+      "size": 1716
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_CHANGED_FILE_MANIFEST.json",
+      "sha256": "55ca3f212b7b580d8a37635d712eb5ddc3caeda7d019c3dc67a582938d9d7f67",
+      "size": 49334
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_CROSS_CANON_IMPACT_MASTER_REPORT.md",
+      "sha256": "f9676378a49136d4bc4789dd297fdd0d0999bf68d5ee0eafe94df7aa3605f73c",
+      "size": 329
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_CURRENT_LIFECYCLE_DELTA.json",
+      "sha256": "f8f519b277e732300b3f17dd483eaaa92f2d93c9f46c574ad3348b29607cf6ee",
+      "size": 901
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_CURRENT_LIFECYCLE_DELTA.md",
+      "sha256": "850b67718620c893fe1cc5de7e4d65beae1c3785e247457c44c443bd4fbb5224",
+      "size": 248
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_EVIDENCE_PACKAGE_VERIFICATION_INSTRUCTIONS.md",
+      "sha256": "42199fc862d604e653ff313ffe0dc2a9256c2f4cd2c6f300710b10c6e3bd65f4",
+      "size": 289
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_FINAL_STATUS_REPORT.json",
+      "sha256": "f3069394bc03b3e39eb1b51f2c1fc5c1b39123116bfce90bb740464dace85d36",
+      "size": 960
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_FINAL_STATUS_REPORT.md",
+      "sha256": "ae537f83d12b948246ea61b22b08790a97b5cccbb89f61784202c2a41c08b638",
+      "size": 475
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_FOUNDER_DECISION_MATRIX.md",
+      "sha256": "8978a194127a1b0c35867284621c00bad393563e1313dc82b1c9d1b77f6f72c1",
+      "size": 1159
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_HASH_VERIFICATION_LEDGER.json",
+      "sha256": "31ab54bf6eb92cf39393b82976bb7444b84b38dec925a6909739af8fc990cd6b",
+      "size": 1311
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_HASH_VERIFICATION_LEDGER.md",
+      "sha256": "88174bdafbf509842f63fd802622517dd0fa879c260c61d30dd1ad6a20fd9eed",
+      "size": 481
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_MASTER_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "79897d6e6bf2e00991f38d9770ff0b3f404e90b2e7e9a4603ca322a1623cefd6",
+      "size": 1609
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_REPOSITORY_DIFF_SUMMARY.md",
+      "sha256": "59441cd3126c91cd62ba87bdd3d7bf99bd1b635546c1d919cb9a11cafdc88be8",
+      "size": 364
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_RETAINED_FINDINGS_REGISTER.json",
+      "sha256": "02c2223f3c64fa21c9ad04a254fa90d3a9c70a812fc9f842037488d6155915cd",
+      "size": 3070
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_RETAINED_FINDINGS_REGISTER.md",
+      "sha256": "f8f929f72c08a3333f56dd3cae723c31482a28a417986febdba0817150d20e32",
+      "size": 1028
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_SOURCE_RECOVERY_REGISTER.json",
+      "sha256": "5b724459fb2245dcefe8d9a3cbd29c6323f956ef820818c60017b499502a7816",
+      "size": 10428
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_SOURCE_RECOVERY_REGISTER.md",
+      "sha256": "bf432cbcfe51c2fc7507d02a777da548710e1253927e12e54816d0f00e1021e3",
+      "size": 2525
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/C0_PHASE_C_SOURCE_SUCCESSION_CLASSIFICATION_MATRIX.md",
+      "sha256": "ad01d83ddc1b86ce2c656196728e5ce62b992a14f40eb58be8308cd837464467",
+      "size": 1606
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/formal_scans/C0_PHASE_C_FORMAL_VALIDATION_REPORT.md",
+      "sha256": "49a45f55e3567813b9503caeacc80fd8b107051ff86b980a41d7c43879f8df83",
+      "size": 933
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/formal_scans/C0_PHASE_C_FORMAL_VALIDATION_RESULTS.json",
+      "sha256": "53672c2e0a298850355f30abfb2ba88d9e77e072e42e002f5179902fb741f7d2",
+      "size": 776
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/formal_scans/C0_PHASE_C_INDEPENDENT_VERIFICATION.json",
+      "sha256": "aa8c879871cc4427f8f13af8b5a63adf0888eec4fce1881c8220f0ca110a5cf5",
+      "size": 597
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/formal_scans/C0_PHASE_C_INDEPENDENT_VERIFICATION.md",
+      "sha256": "ac5d1c3019298c55e80381bcb6007737da1164c0d9a13f52a8259b34637b1399",
+      "size": 604
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/phase_c0/C0_PHASE_C_APPROVED_SOURCE_SEARCH_LOG.json",
+      "sha256": "773accc95a1ec5cb9db57f75ed41f61b0c8de12533c2c23580e525acebcf481b",
+      "size": 59048
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/phase_c0/C0_PHASE_C_APPROVED_SOURCE_SEARCH_LOG.md",
+      "sha256": "be90e4dcab445517a1d9b98f961fd9ca94fe28978d1a06be96b073894e305da1",
+      "size": 4692
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/phase_c0/C0_PHASE_C_INITIALIZATION_REPORT.md",
+      "sha256": "970567449e696def8c97538b7ae11b6285ae0d752d9f3b674e809a9b53589345",
+      "size": 1428
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/phase_c0/C0_PHASE_C_PRE_OPERATION_MANIFEST.json",
+      "sha256": "73fc2fbb521a50c583756120a664e0023175304f63f77640ed0232b205538a83",
+      "size": 9820
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/phase_c0/C0_PHASE_C_REPOSITORY_STATE.json",
+      "sha256": "b41611fdf823aa8ff4f9902dafcef1277df3ff2cf45f1b9ea59315d954dde5b2",
+      "size": 919
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/source/C0_PHASE_C_FOUNDER_DIRECTIVE.md",
+      "sha256": "f4728bad6a0b2324655aa40580e8e2ab7803c7fe046a20c00e7457b14ad6138d",
+      "size": 24928
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/tools/build_phase_c_source_recovery.py",
+      "sha256": "b44ae2286101e36b367eeca2b0083a8508b432162d0e293f1521d0384984061b",
+      "size": 42467
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/tools/verify_phase_c_source_recovery.py",
+      "sha256": "f1ddfa760bde9e6c8ae0fafe4c7e98608a166cba14341315ea6b4a5e20da808c",
+      "size": 6561
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/C0_004_EVIDENCE_MANIFEST.json",
+      "sha256": "c39f0413b01089dfc88431c4690b9472391c99ecceb834d762bff0d4ba253b41",
+      "size": 3304
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/C0_004_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "1671e02024e3e004dd2c81ff6f7f23e33efffc02addbccf9cb016f42b1d3654e",
+      "size": 517
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/comparisons/C0_004_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "85c069208497fd79c96c59a3e0bf4e459fd77865720025c45088c59ba9d1b6fa",
+      "size": 410
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/comparisons/C0_004_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "d98b946f7b09e116afece1ada5ff32cd94fbe8662c318b7cda01f2657c3e345e",
+      "size": 275
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/comparisons/C0_004_RAW_BYTE_COMPARISON.json",
+      "sha256": "98def517cab183d0394de72f8f116055e9c6824a912c4e5ad037b7d2fcd59036",
+      "size": 510
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/comparisons/C0_004_REQUIREMENT_ID_DELTA.json",
+      "sha256": "e8b84fd83a8e60f710b09c10bd06cbb30b1b06917686b52ba31049dc20ffcbf3",
+      "size": 223
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/comparisons/C0_004_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "f8b1784d374388098462d0eb6ce3997b71fe0a43f36f3e07d3f4898c8b28b0ef",
+      "size": 453
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/current_repository_source/MASTER_PRODUCT_VISION.md",
+      "sha256": "ba2bdedfbbd89889af02035656d2f738175dcbde3869084c5e0c92062644c469",
+      "size": 56480
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/decision_package/C0_004_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "e9a789f700e9eeb457951616b5ac235a41ca6c3cc15a51becf37102a5597a9e3",
+      "size": 804
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/decision_package/C0_004_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "eeba1c96e3253404b623dfae13c226d11b9e607f751eab77f50eef5eb5d4fa00",
+      "size": 315
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_004/provenance/C0_004_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "bb5c07f35fd6e7abffd73edd1a86dd59ac5a2d19d24e3e3495843b451f2a84a2",
+      "size": 861
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/C0_005_EVIDENCE_MANIFEST.json",
+      "sha256": "96afe30da0ba0d6a59128b48edd873c1f58ae9d0f42cb423603b4a8ec1d9b4a6",
+      "size": 3305
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/C0_005_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "da04e4df0ce2ca34da51eb694a4bcffb4d55a9119501dd7cdad845654df719be",
+      "size": 517
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/comparisons/C0_005_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "d17b6eed1deca3529e5f67b0d9273ee88fff09cf3566381db9e2ae61548a65d7",
+      "size": 410
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/comparisons/C0_005_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "2b2265bfbda5bb2801d20e1c7de63ad18a66bc1a87604f3a199bb5ebc573357f",
+      "size": 275
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/comparisons/C0_005_RAW_BYTE_COMPARISON.json",
+      "sha256": "2847fbd6748e6b9123032589050cc1e62af08c0f073acadefb841b5ba1ecc73f",
+      "size": 511
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/comparisons/C0_005_REQUIREMENT_ID_DELTA.json",
+      "sha256": "481819c9e8923c0205c5eb7fda17ff3a42f1b47f1a258c7d126b1dab85dab247",
+      "size": 223
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/comparisons/C0_005_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "fb1dc2f93b1582ed27e14a950d4070379a46f723937ec4ff6625d8ec9e354da2",
+      "size": 432
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/current_repository_source/MASTER_ECOSYSTEM_MODEL.md",
+      "sha256": "4344294c05b4b5483ff23497f198edb18e8bcb54d93410266791a57809107533",
+      "size": 33395
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/decision_package/C0_005_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "3da93066311a977c6cdc2acc7300921d13d3141a1c22f549fd94fbe53888baf6",
+      "size": 784
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/decision_package/C0_005_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "3947b8f63df018a4126462216fe099c7d5b190933abe3f90f11246c90ca74200",
+      "size": 315
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_005/provenance/C0_005_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "f331acc9b1b409f70f37fae93ee15266385684a76f1dc26826f1e38fb5489804",
+      "size": 863
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/C0_012_EVIDENCE_MANIFEST.json",
+      "sha256": "a83e549b4f57cee48638ea7be9100a36371fdc69522497afc41818fa96be9e12",
+      "size": 3305
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/C0_012_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "ce56307005dbe572e759f1b7b00bd613c5e556aa206bcbd63b778862e33e4762",
+      "size": 517
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/comparisons/C0_012_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "50ebdfd599bf766a76fbe79c44091ae05cff756427eac17b3bbc8b1344ab959c",
+      "size": 410
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/comparisons/C0_012_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "47c38c5f4cb4d7a0c5904910cf3bab38be7aa06a0c699411c9c6f942ebe59c98",
+      "size": 275
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/comparisons/C0_012_RAW_BYTE_COMPARISON.json",
+      "sha256": "3ed2b950cb59f5ae6a310819e4d30e6a365f804c9ad93b5e109d91afce3814d8",
+      "size": 511
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/comparisons/C0_012_REQUIREMENT_ID_DELTA.json",
+      "sha256": "a6e0666178743cea59b819edf7432972e935bf210571815f76d7c752d9541732",
+      "size": 223
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/comparisons/C0_012_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "3d7056086a31d95337fdb701680e7ff33923c38ec71bf4d2ef9a4bfb17060db2",
+      "size": 467
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/current_repository_source/MASTER_HORSE_LIFECYCLE.md",
+      "sha256": "cd47c8fe3e76eee067594f38efd45265929d279c4d1fd9dc2a70e16fea976391",
+      "size": 41680
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/decision_package/C0_012_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "c1a6416b441a9cda1415404b1dec8685f0874fd556989f5b2fb6ad65c8d9d8a2",
+      "size": 819
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/decision_package/C0_012_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "0a75ef829f521f520c31238b38d1ddbbb804ccf88ef64a2d4ea81cf329cb35ca",
+      "size": 315
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_012/provenance/C0_012_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "8ab4aba1d637f077da1a0d36d9ecbabe2d66b12c857cdce0292c4cbaa7cf5790",
+      "size": 863
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/C0_014_EVIDENCE_MANIFEST.json",
+      "sha256": "9e83163fc7dbc825595a4f5e844cd3b040e8e8bd64bb585f744c80fcf550a50e",
+      "size": 3310
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/C0_014_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "8e685e5cf666e54f1cb9b5548bc61570d9e40195b396813861a77bd48ac131b2",
+      "size": 517
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "707dfec9872e218948134738b8862033e4d10a7202cb13d17f472da644082ad0",
+      "size": 410
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "94efaf7276595111cee5e71cda17dfd43c5561d2ef0cc538c41430b12fe8e80f",
+      "size": 275
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_RAW_BYTE_COMPARISON.json",
+      "sha256": "df455fe8157c3afec2b69c753b9b589a359a2281323e3c49a87c3ada58ddf3bb",
+      "size": 516
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_REQUIREMENT_ID_DELTA.json",
+      "sha256": "62dad66ef16b769a5b915c5ded53c35b6d2bef6f2c6a3caa56fca7e4dea2f437",
+      "size": 223
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/comparisons/C0_014_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "b290f5e4ce2b47600bdba7ccb26aa70498a2f52f692b3ec641db08979fa5ff1d",
+      "size": 486
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/current_repository_source/MASTER_FACILITY_DOMAIN_MODEL.md",
+      "sha256": "ee97b61290d7552a9907df14db25b2a3b4a8a32a57871adca6ce0e373b5c712b",
+      "size": 6268
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/decision_package/C0_014_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "58004dc7b32686c49dda5c76ee66f4396ff614848d3c7a69736a7092a0322ad0",
+      "size": 844
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/decision_package/C0_014_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "f7df260f4e2335c2de7bad8b2560d4a37e9fe0cd8327b74a9bc67eb60c318319",
+      "size": 315
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_014/provenance/C0_014_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "03c21affd3025f922d97057f0aad1f1ae0e15109b99b5b7e973eafd333118d88",
+      "size": 875
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/C0_015_EVIDENCE_MANIFEST.json",
+      "sha256": "64d509d19a51f77c9441cda905136b308ffc79ca730bd942e867b7d9085e2590",
+      "size": 3304
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/C0_015_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "9ed87bed945e029e912c8904b5d122e91c4c809e9bc445094d2be7d28f8d944f",
+      "size": 517
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/comparisons/C0_015_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "13527eb597fb457e629663ed91c9b678d48549fe5a3ba2d9601e41e3584e1d7d",
+      "size": 410
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/comparisons/C0_015_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "70fd5ebe560c54d0f227a450c3a9bdc19a73eb7b1353370557163211def98b8c",
+      "size": 275
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/comparisons/C0_015_RAW_BYTE_COMPARISON.json",
+      "sha256": "d2cf3b20c0a289ffedd9c59a92b39cd70ebe79023bff988cd89947d8f8dc53c9",
+      "size": 510
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/comparisons/C0_015_REQUIREMENT_ID_DELTA.json",
+      "sha256": "3574a2b4cf97fec8a3c0d81fdd1af929af69da1880583e09a5687848ba0c95fa",
+      "size": 223
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/comparisons/C0_015_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "a1ee93faadfaaa35a14f68e08c0ac764ed5e1626869518c0bb32f89a655d6df1",
+      "size": 485
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/current_repository_source/MASTER_BARN_LIFECYCLE.md",
+      "sha256": "3e7428771d3d8868e801e80551912a8f6284f5a4d53698d170d4b67b3be13553",
+      "size": 42487
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/decision_package/C0_015_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "366d418703ad02cbeb1caf33d8c5d46e8ed77d3f8a8e23f41fa0df83d390c563",
+      "size": 836
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/decision_package/C0_015_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "89c40cb18c45ea1391325a74dbe93905c358d625f00807c2c081cdc75388c0b4",
+      "size": 315
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_015/provenance/C0_015_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "d10356a16b9788333f3b5efef591cc57180935eaf0903fce6f8d62a90c7b95d0",
+      "size": 861
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/C0_016_EVIDENCE_MANIFEST.json",
+      "sha256": "5fe897700a1237f3ce26266a0ef2c0ac79359644b8e4048483f32d668062d901",
+      "size": 3308
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/C0_016_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "e15ec33cd536dfb97cf50da29b5016ba80ea25329b475b623dd034d642602861",
+      "size": 517
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/comparisons/C0_016_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "504beafaca02e9e788114f06733bea278a4f2083a8ed1746d44f7360d166673d",
+      "size": 410
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/comparisons/C0_016_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "cab173df580d923c02ab018c4873dad639a8d3b176194d3b57a49b710bcce516",
+      "size": 275
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/comparisons/C0_016_RAW_BYTE_COMPARISON.json",
+      "sha256": "f119e8eaf2e150b21f45a1f7bd748cc7f58877cd96df8a4bbbdd0c7d53949192",
+      "size": 514
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/comparisons/C0_016_REQUIREMENT_ID_DELTA.json",
+      "sha256": "f597f379635e3a59228280a0d344845fe4d4d20f6301d1e6652bee887ac46137",
+      "size": 223
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/comparisons/C0_016_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "5b743bf558a37987234328202f8a5fd5ef118157b1d059ce2cdfaccdb7bf39da",
+      "size": 493
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/current_repository_source/MASTER_BUSINESS_LIFECYCLE.md",
+      "sha256": "063339ec8b8aab20908742675013692de2dbb56f018939bac71371b8366d2466",
+      "size": 47312
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/decision_package/C0_016_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "74cc46b3928013b63a8c1a4849736010e107cdf6add7a11218e318a054b21915",
+      "size": 848
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/decision_package/C0_016_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "1e8de58b94bbfa1cf8ee15b97342dc8498d68077947748af23a0a1035daf3e9d",
+      "size": 315
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_016/provenance/C0_016_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "1784cf846ce029faa33b2b1bad3e889e30edd052a73c93a07afd774155354ec7",
+      "size": 869
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/C0_019_EVIDENCE_MANIFEST.json",
+      "sha256": "02c6cb56555308236452224d62770d8086d385f033fcfb54e1d2ea92e3b40b56",
+      "size": 3629
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/C0_019_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "d4f4eb8e35bcdb19bf54329eb70a2a44d6c9a9e8e5e6b76312e4ed6645099dc1",
+      "size": 527
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/comparisons/C0_019_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "144c3da381dbdb9781e573c86b9abf26d38f44776a82c20aaf6687dda706a8aa",
+      "size": 407
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/comparisons/C0_019_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "62922f3cca031e3944d848ed846a0340a5edd9aa411906aaa7bef381d13cf6b9",
+      "size": 284
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/comparisons/C0_019_RAW_BYTE_COMPARISON.json",
+      "sha256": "7e1ca72ed6111448eb19696e0ac52ca6ec240396303c9842d6b69141e68ebd7b",
+      "size": 798
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/comparisons/C0_019_REQUIREMENT_ID_DELTA.json",
+      "sha256": "b474604422274bfc1034d00c0fcdf6dc08158ec8551640dbf82cfec931b74b9c",
+      "size": 195
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/comparisons/C0_019_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "1e4f9e72c3a19d107da409af718005678f62737e39d1aacfaedf34882efcc3ad",
+      "size": 506
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/current_repository_source/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_0.md",
+      "sha256": "630b6128e37734be01a40d64b80d9fb4d74fce48198c60f9fcbd1a2ef83c232b",
+      "size": 84199
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/decision_package/C0_019_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "6998a1f54e1186ab8be2b0e88219235c1203d871d0d907cb736c8b51f77ee2ca",
+      "size": 903
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/decision_package/C0_019_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "f8105d40c38eeb9c4ec5932809432a91cdcd6ecd6a722205fa0296dd3e334dda",
+      "size": 324
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/provenance/C0_019_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "a382ada4056d9429c1268b6d2c9e4a9393ba2a0cc9309e659c3ba4b2e69a55a1",
+      "size": 1015
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_019/recovered_sources/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1.md",
+      "sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+      "size": 86116
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/C0_022_EVIDENCE_MANIFEST.json",
+      "sha256": "82bfda321414cfec78b7d8bdc8fd3f942867ac5d3867dce2ccde24a98e48207d",
+      "size": 3573
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/C0_022_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "14c29a46bf1794b89077bc4282d36b0412edc426101ad8028987121b88761d06",
+      "size": 502
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/comparisons/C0_022_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "f9c199907f8d950f1d608ef1a05f3f0a326e26102c282fbcad65b01163e34ada",
+      "size": 407
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/comparisons/C0_022_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "ba80105609f8a85094b23274d45a9dace5cd0d7972b9f36901a571530dbf2bea",
+      "size": 284
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/comparisons/C0_022_RAW_BYTE_COMPARISON.json",
+      "sha256": "e861c5254b111fad5afbce76b1e38c6366f62eb1b6525a597adf7f4e134537ba",
+      "size": 732
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/comparisons/C0_022_REQUIREMENT_ID_DELTA.json",
+      "sha256": "3076633fe8373c0dbbeb5ace5362403d4e0d4f10c77820979a729b57a66043f1",
+      "size": 195
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/comparisons/C0_022_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "0702c56775ca016aa2b5dbecb3390ee68076a997c4a4a9105d39dead12851fa6",
+      "size": 484
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/current_repository_source/MASTER_PERMISSION_MODEL.md",
+      "sha256": "2034979a0fe77fd89ba065ecf9d309f5897641b6c38c9bde7c69dc8ac06adeab",
+      "size": 45150
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/decision_package/C0_022_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "59203f55795d87fbcb9e5e36fbc794595bdd09e5cc4c7fa4df0b931fb8eb14b6",
+      "size": 856
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/decision_package/C0_022_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "7136b3e3b6490eb7bae109384746ab891e6f99f93c9470ac88f454d0b59cab62",
+      "size": 324
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/provenance/C0_022_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "d212c7f87721e156381c72da19fd83ee0277c4673d13653e205581c7e7120544",
+      "size": 910
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_022/recovered_sources/MASTER_PERMISSION_MODEL_V1_1.md",
+      "sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "size": 49176
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/C0_028_EVIDENCE_MANIFEST.json",
+      "sha256": "be9e71c880dacb450625b32d3fca1f9c50b7ae36d4b99ef54e3dcb9b3dacbda6",
+      "size": 3632
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/C0_028_SOURCE_RECOVERY_REPORT.md",
+      "sha256": "6bfedbf6200570986e33807dea55bc46abbac848a8abb7bab09c4f515e5ed78d",
+      "size": 600
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/comparisons/C0_028_CROSS_CANON_IMPACT_REPORT.md",
+      "sha256": "49ff69cbafda249b5f1b85a4b478be93ff5f6d94543b5a75a767a6ba2888e8b5",
+      "size": 407
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/comparisons/C0_028_NORMALIZED_TEXT_COMPARISON.md",
+      "sha256": "cfdc8ace3d6f1605c13b6a81e853c835f0cc643e66b9e6d3720325077ef3d948",
+      "size": 254
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/comparisons/C0_028_RAW_BYTE_COMPARISON.json",
+      "sha256": "8aa947f53315a933079de65fca30eb487ed33103958ac097d904c0622a67930a",
+      "size": 760
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/comparisons/C0_028_REQUIREMENT_ID_DELTA.json",
+      "sha256": "12aa3de12d428ba518f3edb594a41b7f3ec92334fe398071c847b2a7c720b6e5",
+      "size": 195
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/comparisons/C0_028_SEMANTIC_AND_AUTHORITY_DELTA.md",
+      "sha256": "f53616c87498762f67fdd33a0131c63acf241d90494ad68cfe12d87498b5208c",
+      "size": 494
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/current_repository_source/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0.md",
+      "sha256": "def33679b38b25ab5bbe0fc5c9c78a4fe8d505533d9c1d91a37035735f283ab4",
+      "size": 62194
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/decision_package/C0_028_FOUNDER_SOURCE_IDENTITY_DECISION_PACKET.md",
+      "sha256": "e7ee09738253252a5865d09a9ca59c68f0a7af43ad5bc5a3d30709c56d098ebd",
+      "size": 890
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/decision_package/C0_028_SOURCE_RELATIONSHIP_CLASSIFICATION.md",
+      "sha256": "900049217ce498342bf2404b2439e4b9704214f18fb53209ab26797470e82b1e",
+      "size": 320
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/provenance/C0_028_SOURCE_PROVENANCE_RECORD.md",
+      "sha256": "3ba2178997336d74d6e773995a2e909c6290899d695a74251bf2490c294abb41",
+      "size": 1084
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/recovered_sources/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "size": 62200
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_CURRENT_LIFECYCLE_STATE_REGISTER.json",
+      "sha256": "8341cc3cbba48f63c01387f24a834dd55ffb9b72d7bab66b61872f723e1a3e51",
+      "size": 68177
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_CURRENT_LIFECYCLE_STATE_REGISTER.md",
+      "sha256": "23e79f2fb43c10d815bca9fae6dabc4ac580723c5c08af3a7a0d350fd35b27ca",
+      "size": 11397
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_HISTORICAL_TO_CURRENT_DELTA_PHASE_C.json",
+      "sha256": "f8f519b277e732300b3f17dd483eaaa92f2d93c9f46c574ad3348b29607cf6ee",
+      "size": 901
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_HISTORICAL_TO_CURRENT_DELTA_PHASE_C.md",
+      "sha256": "c938a5270297521dd796e2512f721dc97d93ab216bf4d7adbfd366a7bc54a767",
+      "size": 251
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_ROW_BY_ROW_LIFECYCLE_RESOLUTION_LEDGER.json",
+      "sha256": "35ffe24ae63990f77e7d1a09a951d25cd2bfe65246483b3a1478cd8b81d2fa97",
+      "size": 22292
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_ROW_BY_ROW_LIFECYCLE_RESOLUTION_LEDGER.md",
+      "sha256": "54942bd075e106075917fba438de4688f4cb5f4e2de4a6e6f39a8fe860445aa0",
+      "size": 3442
+    },
+    {
+      "path": "docs/canon/reviews/governance_v1_0_final_baseline_resumption/c0_lifecycle/C0_UNRESOLVED_LIFECYCLE_BLOCKER_LEDGER.md",
+      "sha256": "0e13d7e06330cdf792fd11502e98159aed4195c886b8c694706cc6ea29b79247",
+      "size": 3417
+    }
+  ],
+  "authority": {
+    "founder_source_identity_decision": false,
+    "adoption": false,
+    "lock": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false,
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "amendment_of_locked_canon": false
+  }
+}

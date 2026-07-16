@@ -1,0 +1,632 @@
+# CODEX DIRECTIVE
+## AI V2.0 EXACT-SOURCE INGESTION, P1 BLOCKER CLOSURE, AND CONTROLLED GOVERNANCE RESUMPTION
+
+### 1. DIRECTIVE STATUS
+
+This directive authorizes controlled ingestion and reconciliation of the exact AI V2.0 DOCX now supplied by the Founder:
+
+`MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0(1).docx`
+
+The Founder has identified this uploaded DOCX as the correct intended AI V2.0 constitutional source candidate.
+
+This directive responds to the prior disposition:
+
+`AI_V2_0_ADOPTION_AND_LOCK_RECONCILIATION_BLOCKED`
+
+The prior reconciliation correctly stopped at Phase 2 because the repository did not then contain:
+
+1. exact AI V2.0 DOCX bytes;
+2. exact AI founder-decision evidence;
+3. byte-specific authority linkage;
+4. adoption evidence;
+5. lock evidence.
+
+The newly supplied DOCX materially changes the source-evidence state.
+
+Preserve all prior blocker reports and evidence packages as historically correct based on the evidence available at that time.
+
+Do not overwrite, delete, relabel, or retroactively alter the prior blocked disposition.
+
+---
+
+# 2. AUTHORIZED OBJECTIVE
+
+The authorized objective is to:
+
+1. ingest the newly supplied DOCX without modifying its bytes;
+2. compute and record its SHA-256;
+3. establish its exact source identity and repository path;
+4. compare it against prior AI V2.0 candidates and Markdown exports;
+5. confirm that the Founder-selected file is the controlling source candidate;
+6. recover the embedded founder decisions from Section 96;
+7. generate a controlled AI Founder Decision Matrix;
+8. close the prior exact-source P1 if the source verifies;
+9. determine whether the embedded decisions plus Founder source identification are sufficient to close the founder-decision P1;
+10. prepare a founder ratification record where required;
+11. resume the prior reconciliation at Phase 2;
+12. proceed through later phases only if all mandatory gates pass.
+
+This directive does not authorize:
+
+- runtime AI;
+- provider activation;
+- customer-data transfer;
+- model training;
+- embeddings;
+- persistent memory;
+- schema mutation;
+- production deployment;
+- pilot launch;
+- public launch;
+- public trust or compliance claims;
+- implementation authority;
+- modification of the uploaded source bytes;
+- substitution of RF30 or the AI Operating System for this canon.
+
+---
+
+# 3. CONTROLLING PRIOR EVIDENCE
+
+Before new work begins, verify and preserve:
+
+- prior Phase 1 source discovery inventory;
+- prior Phase 2 founder-decision reconciliation report;
+- prior Phase 2 blocker report;
+- prior blocker evidence package;
+- blocker package SHA-256:
+
+`12cdc8b8860669d90e9c8e3790b72b89c49b9fedd257bc0270a8188c75d802a4`
+
+Create a resumption record linking the prior blocked execution to this directive.
+
+---
+
+# PHASE R0 — EXACT FILE INGESTION AND CHAIN OF CUSTODY
+
+## Objective
+
+Ingest the supplied Founder-selected DOCX as immutable evidence.
+
+## Required actions
+
+1. Locate the uploaded file:
+   `MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0(1).docx`
+2. Record its exact mounted path.
+3. Copy it into a controlled evidence-ingestion directory without altering bytes.
+4. Preserve the original filename in chain-of-custody records.
+5. Assign a canonical repository filename only through a byte-identical copy:
+   `MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx`
+6. Compute:
+   - SHA-256;
+   - byte size;
+   - MIME/file type;
+   - ZIP/OPC package validity;
+   - internal DOCX title;
+   - version;
+   - page count where reproducibly available;
+   - document properties.
+7. Verify that the canonical repository copy is byte-identical to the uploaded source.
+8. Record the Founder identification:
+   `FOUNDER_IDENTIFIED_CORRECT_AI_V2_0_SOURCE_CANDIDATE`
+9. Do not edit, resave, normalize, repair, or open-save the uploaded source through Word or LibreOffice.
+
+## Required outputs
+
+Create:
+
+- `AI_V2_0_EXACT_SOURCE_INGESTION_REPORT.md`
+- `AI_V2_0_EXACT_SOURCE_CHAIN_OF_CUSTODY.md`
+- `AI_V2_0_EXACT_SOURCE_IDENTITY_RECORD.json`
+- `AI_V2_0_EXACT_SOURCE_HASH_RECORD.md`
+
+## Gate
+
+Proceed only if:
+
+- the uploaded file is readable as a DOCX;
+- the canonical copy is byte-identical;
+- the SHA-256 is successfully computed;
+- the internal title and version identify the AI Governance and Decision Boundary Model V2.0.
+
+---
+
+# PHASE R1 — SOURCE COMPARISON AND CONTROLLING-CANDIDATE DETERMINATION
+
+## Objective
+
+Determine the relationship between the Founder-selected DOCX and all previously located AI V2.0 candidates.
+
+## Required actions
+
+1. Locate all repository and mounted AI V2.0 DOCX and Markdown candidates.
+2. Compute SHA-256 for each.
+3. Compare:
+   - byte identity;
+   - internal title;
+   - section count;
+   - Section 96;
+   - Document Control;
+   - terminal state;
+   - appendices;
+   - substantive text;
+   - formatting-only differences;
+   - metadata differences.
+4. Classify each candidate as:
+   - `FOUNDER_SELECTED_CONTROLLING_SOURCE_CANDIDATE`
+   - `BYTE_IDENTICAL_DUPLICATE`
+   - `EARLIER_REVIEW_CANDIDATE`
+   - `DERIVATIVE_MARKDOWN_RENDERING`
+   - `SUPERSEDED_REVIEW_VERSION`
+   - `CONFLICTING_SOURCE_CANDIDATE`
+5. Preserve all prior versions as historical evidence.
+6. Do not delete or overwrite the other candidate files.
+7. Update the prior source inventory to show that exact source bytes are now available.
+
+## Required outputs
+
+Create:
+
+- `AI_V2_0_SOURCE_CANDIDATE_COMPARISON_REPORT.md`
+- `AI_V2_0_SOURCE_CANDIDATE_HASH_MATRIX.json`
+- `AI_V2_0_CONTROLLING_SOURCE_CANDIDATE_DETERMINATION.md`
+
+## Required disposition
+
+Use one:
+
+- `EXACT_AI_V2_0_SOURCE_BYTES_VERIFIED_AND_FOUNDER_IDENTIFIED`
+- `FOUNDER_SELECTED_SOURCE_VERIFIED_WITH_NONCONTROLLING_VARIANTS_PRESERVED`
+- `AI_V2_0_SOURCE_CONFLICT_REMAINS`
+
+Proceed only if no unresolved substantive source conflict remains.
+
+---
+
+# PHASE R2 — EMBEDDED FOUNDER DECISION RECOVERY
+
+## Objective
+
+Recover the founder decisions embedded in Section 96 of the exact Founder-selected DOCX.
+
+## Required actions
+
+1. Extract Section 96 exactly.
+2. Preserve the exact wording of every bullet.
+3. Confirm whether the section contains twelve distinct founder-decision groups.
+4. Do not rewrite the decision language.
+5. Assign prospective stable identifiers:
+
+- `AI-FD01`
+- `AI-FD02`
+- `AI-FD03`
+- `AI-FD04`
+- `AI-FD05`
+- `AI-FD06`
+- `AI-FD07`
+- `AI-FD08`
+- `AI-FD09`
+- `AI-FD10`
+- `AI-FD11`
+- `AI-FD12`
+
+6. Clearly state that these identifiers are newly assigned for controlled traceability and were not recovered as historical IDs.
+7. Map each decision to:
+   - exact Section 96 bullet;
+   - implementing canon sections;
+   - Section 94 constitutional invariants;
+   - Section 95 prohibitions;
+   - relevant appendices;
+   - applicable cross-canons;
+   - authority owner;
+   - implementation authority state;
+   - adoption state;
+   - lock state.
+
+## Required decision structure
+
+Use this mapping unless exact source analysis shows a different defensible grouping:
+
+- AI-FD01: AI is an assistive tool for information, pattern and trend detection, and routine-task support.
+- AI-FD02: AI must prioritize safety.
+- AI-FD03: AI cannot determine rider ability or horse lameness.
+- AI-FD04: Consequential legal, financial, medical, welfare, safeguarding, ownership, and access decisions remain human-authority zones.
+- AI-FD05: Customer operational data may not train or improve General or Shared Models.
+- AI-FD06: Provider neutrality, minimum-necessary disclosure, retention controls, and vendor exit capability are required.
+- AI-FD07: The five-tier decision framework is approved.
+- AI-FD08: AI outputs must be labeled, source-grounded, distinguish fact from inference, identify estimates, and disclose uncertainty.
+- AI-FD09: AI must refuse unsupported conclusions and request additional information where appropriate.
+- AI-FD10: AI output is not automatically canonical; users may challenge it; AI inherits the narrowest permissions.
+- AI-FD11: Identifiable cross-tenant learning is prohibited, with enhanced safeguards for minors, offline use, finances, and equine health.
+- AI-FD12: Listed bounded capabilities are permitted to seek separate launch authority; predictive emergency decisions remain deferred.
+
+## Required outputs
+
+Create:
+
+- `AI_V2_0_EMBEDDED_FOUNDER_DECISION_RECOVERY_REPORT.md`
+- `AI_V2_0_FOUNDER_DECISION_MATRIX.md`
+- `AI_V2_0_FOUNDER_DECISION_MATRIX.json`
+- `AI_V2_0_FOUNDER_DECISION_SECTION_TRACEABILITY.md`
+
+## Classification
+
+Until Founder approval is separately recorded, classify the matrix as:
+
+`DERIVED_CONTROLLED_DECISION_MATRIX_FROM_EXACT_SOURCE_PENDING_FOUNDER_RATIFICATION`
+
+Do not call it a recovered historical Founder Decision Register.
+
+---
+
+# PHASE R3 — FOUNDER SOURCE AND DECISION RATIFICATION PACKAGE
+
+## Objective
+
+Prepare the exact record needed for Founder ratification of the source identity and the generated decision matrix.
+
+## Required actions
+
+Create a founder-review artifact that states:
+
+1. the Founder identified the uploaded DOCX as the correct AI V2.0 source candidate;
+2. the exact DOCX SHA-256;
+3. the exact canonical filename;
+4. the exact repository path;
+5. Section 96 contains the incorporated founder positions;
+6. AI-FD01 through AI-FD12 are newly assigned traceability IDs;
+7. the matrix preserves the substance of Section 96;
+8. no historical standalone decision register is claimed to have existed;
+9. the ratification, if approved, will establish the decision matrix as the controlling AI V2.0 companion record;
+10. ratification does not itself authorize implementation, runtime AI, provider activation, production, or launch.
+
+## Required outputs
+
+Create:
+
+- `AI_V2_0_FOUNDER_SOURCE_IDENTITY_AND_DECISION_RATIFICATION.md`
+- `AI_V2_0_FOUNDER_RATIFICATION_EVIDENCE_MANIFEST.json`
+
+## Required pending disposition
+
+`AI_V2_0_EXACT_SOURCE_AND_DECISION_MATRIX_PENDING_FOUNDER_RATIFICATION`
+
+If this directive itself is accepted as sufficient Founder ratification under repository governance rules, document that basis explicitly. Otherwise stop for Founder approval of the ratification artifact.
+
+Do not infer ratification merely from upload.
+
+---
+
+# PHASE R4 — CHECKSUM AND PROVENANCE MANIFEST
+
+## Objective
+
+Create a complete checksum-bound source and authority manifest.
+
+## Required actions
+
+Record SHA-256 and byte size for:
+
+- exact Founder-selected DOCX;
+- canonical byte-identical repository copy;
+- any controlled Markdown rendering;
+- AI Founder Decision Matrix;
+- founder ratification record;
+- source-ingestion report;
+- source-comparison report;
+- decision-recovery report.
+
+Create a controlled Markdown rendering from the exact DOCX only if needed for search and traceability.
+
+The Markdown rendering must state:
+
+- it is derived;
+- the DOCX controls;
+- source DOCX SHA-256;
+- conversion method;
+- conversion date;
+- rendering limitations.
+
+## Required outputs
+
+Create:
+
+- `AI_V2_0_EXACT_SOURCE_AND_AUTHORITY_HASH_MANIFEST.json`
+- `AI_V2_0_EXACT_SOURCE_AND_AUTHORITY_HASH_MANIFEST.md`
+- optional:
+  `MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.md`
+
+## Gate
+
+Proceed only if all generated artifacts are hash-bound to the exact DOCX.
+
+---
+
+# PHASE R5 — PRIOR P1 BLOCKER CLOSURE
+
+## Objective
+
+Reassess and close the two prior P1 findings.
+
+## Required actions
+
+For each prior P1:
+
+1. quote the original finding;
+2. identify the exact new evidence;
+3. identify the SHA-256;
+4. state whether the finding is:
+   - closed;
+   - partially closed;
+   - replaced by a narrower blocker;
+   - unchanged.
+5. preserve the historical finding state.
+
+Expected analysis:
+
+### P1-A: Exact AI V2.0 source bytes absent
+
+Close only if:
+
+- the uploaded DOCX is ingested;
+- its hash is computed;
+- the canonical copy is byte-identical;
+- the Founder has identified it as correct.
+
+### P1-B: Founder decisions and byte-specific authority linkage absent
+
+Close only if:
+
+- Section 96 is recovered from the exact hashed DOCX;
+- the AI decision matrix is completed;
+- the Founder ratification record is approved or otherwise validly established;
+- the matrix and ratification both identify the exact DOCX SHA-256.
+
+## Required outputs
+
+Create:
+
+- `AI_V2_0_PHASE_2_P1_BLOCKER_CLOSURE_REPORT.md`
+- `AI_V2_0_PHASE_2_UPDATED_FINDING_LEDGER.json`
+
+## Required gate state
+
+- P0: `0`
+- Open P1: `0`
+
+If Open P1 remains above zero, stop and issue a narrow blocker report.
+
+---
+
+# PHASE R6 — RESUME PHASE 2
+
+## Objective
+
+Re-run the founder-decision reconciliation using the exact source and ratified decision matrix.
+
+## Required actions
+
+1. preserve the original Phase 2 blocked report;
+2. create a superseding resumed report;
+3. map every AI-FD decision to the exact canon;
+4. identify all cross-canon dependencies;
+5. identify any decision not fully incorporated;
+6. identify any canon provision lacking authority;
+7. verify separation from:
+   - RF30;
+   - AI Operating System;
+   - AI implementation packages;
+   - analytics governance;
+   - automation governance.
+8. confirm no substantive founder conflict remains.
+
+## Required outputs
+
+Create:
+
+- `AI_V2_0_PHASE_2_RESUMED_FOUNDER_DECISION_RECONCILIATION_REPORT.md`
+- `AI_V2_0_PHASE_2_RESUMED_DECISION_TRACEABILITY_MATRIX.md`
+- `AI_V2_0_PHASE_2_RESUMPTION_DISPOSITION.md`
+
+## Required disposition
+
+Use one:
+
+- `AI_V2_0_PHASE_2_GATE_PASSED`
+- `AI_V2_0_PHASE_2_GATE_BLOCKED`
+
+---
+
+# PHASE R7 — ADOPTION AND LOCK REMEDIATION
+
+## Objective
+
+Establish adoption and lock prospectively if not historically evidenced.
+
+The DOCX itself states that it is a candidate and not yet adopted or locked. Do not fabricate historical adoption or lock.
+
+## Required actions
+
+1. Confirm exact DOCX hash.
+2. Confirm Founder ratification.
+3. Confirm decision-matrix approval.
+4. Complete cross-canon review.
+5. Complete requirement and traceability mapping.
+6. Complete dependency-cycle, orphan-requirement, duplicate-ID, cross-reference, and authority-owner scans.
+7. Close all P0, P1, and lock-blocking P2 findings.
+8. Prepare a new adoption record.
+9. After adoption, prepare a new lock record.
+10. Bind both records to the exact DOCX SHA-256.
+
+## Required adoption disposition
+
+Use one:
+
+- `AI_V2_0_CONSTITUTIONAL_CANON_ADOPTED`
+- `AI_V2_0_CONSTITUTIONAL_CANON_ADOPTED_WITH_RETAINED_NONBLOCKING_P2`
+- `AI_V2_0_CONSTITUTIONAL_ADOPTION_BLOCKED`
+
+## Required lock disposition
+
+Use one:
+
+- `AI_V2_0_CONSTITUTIONAL_CANON_LOCKED`
+- `AI_V2_0_CONSTITUTIONAL_CANON_LOCKED_WITH_RETAINED_NONBLOCKING_P2`
+- `AI_V2_0_CONSTITUTIONAL_LOCK_BLOCKED`
+
+## Required authority flags
+
+- constitutional authority: `CONTROLLING` only after adoption;
+- implementation authority: `FALSE`;
+- runtime activation authority: `FALSE`;
+- provider activation authority: `FALSE`;
+- customer-data transfer authority: `FALSE`;
+- production authority: `FALSE`;
+- public-launch authority: `FALSE`.
+
+---
+
+# PHASE R8 — REPLACEMENT REVIEW AND EVIDENCE PACKAGE
+
+## Objective
+
+Create a new controlled replacement evidence package.
+
+Do not label it as the recovered original review package.
+
+## Required contents
+
+- exact DOCX;
+- source chain of custody;
+- source hash record;
+- source comparison report;
+- controlled Markdown rendering, if created;
+- AI Founder Decision Matrix;
+- Founder ratification record;
+- checksum manifest;
+- resumed Phase 2 report;
+- P1 closure report;
+- scan reports;
+- adoption record;
+- lock record;
+- retained P2 register;
+- verification instructions.
+
+## Required output
+
+Create:
+
+`AI_V2_0_FOUNDER_RATIFIED_RECONCILIATION_AND_REVIEW_PACKAGE.zip`
+
+Compute and report its SHA-256.
+
+Classification:
+
+`NEW_CONTROLLED_REPLACEMENT_EVIDENCE_PACKAGE`
+
+---
+
+# PHASE R9 — RESUME GOVERNANCE V1.0 CLOSURE
+
+If AI V2.0 adoption and lock complete successfully, resume the original Governance V1.0 reconciliation at the next uncompleted phase.
+
+Do not repeat already verified phases unless the new AI evidence affects them.
+
+At minimum:
+
+1. recover and reconcile the four companion artifacts;
+2. run formal scans;
+3. close governance-level lock-blocking P2 dependencies;
+4. perform the final Governance Closure Assessment;
+5. prepare the Governance V1.0 baseline manifest;
+6. issue the baseline adoption record;
+7. issue the baseline lock record;
+8. create the final evidence package.
+
+---
+
+# PROHIBITED ACTIONS
+
+Codex must not:
+
+- edit or resave the uploaded DOCX;
+- claim the uploaded DOCX was historically adopted or locked;
+- call the generated decision matrix an exact recovered historical register;
+- fabricate an original review ZIP;
+- substitute RF30 or the AI Operating System;
+- alter prior blocked evidence;
+- skip founder ratification where required;
+- proceed past an open P1;
+- grant implementation, runtime, provider, production, or launch authority;
+- weaken the founder-approved AI boundaries to close a finding.
+
+---
+
+# FINAL RESPONSE FORMAT
+
+## Final Disposition
+
+`[EXACT DISPOSITION]`
+
+## Exact AI V2.0 Source
+
+- Uploaded filename:
+- Canonical filename:
+- Repository path:
+- SHA-256:
+- Byte size:
+- Byte-identical copy verified:
+- Founder source identification:
+- Source classification:
+
+## Founder Decisions
+
+- Section 96 recovered:
+- Decisions identified:
+- Decision IDs:
+- Decision matrix status:
+- Founder ratification status:
+- Byte-specific authority linkage:
+
+## Blockers
+
+- P0:
+- Open P1:
+- Closed P1:
+- Lock-blocking P2:
+- Retained nonblocking P2:
+
+## AI V2.0 Lifecycle
+
+- Adoption:
+- Lock:
+- Constitutional authority:
+- Implementation authority:
+- Runtime authority:
+- Provider activation authority:
+- Production authority:
+- Public-launch authority:
+
+## Governance V1.0
+
+- Resumed through phase:
+- Closure Assessment:
+- Baseline adoption:
+- Baseline lock:
+- Remaining blockers:
+
+## Key Artifacts
+
+Provide exact paths for:
+
+- source-ingestion report;
+- source hash record;
+- source-comparison report;
+- AI Founder Decision Matrix;
+- Founder ratification record;
+- P1 closure report;
+- resumed Phase 2 report;
+- adoption record;
+- lock record;
+- replacement evidence package.
+
+Begin with Phase R0. Preserve the exact uploaded DOCX bytes unchanged.

@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-035",
+  "title": "Master Reporting, Analytics, and Business Intelligence Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+  "locked_sha256": "67b25cc23230492b9c8164c7a0b116f74109a623d544566a01b60425fe646f4f",
+  "adoption_record": "docs/canon/adoptions/c0_035_reporting_v2_0/C0_035_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "0a5b9f223a3b094ce9083d0488b831da8afa38e17b7805392be8c219e3241b6a",
+  "lock_record": "docs/canon/locks/reporting_analytics_v2_0/C0_035_MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "3692c8a06bf4997798d507894a1309d1ff0da69e676be4fcd5d3254602567acf",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

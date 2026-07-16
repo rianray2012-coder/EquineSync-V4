@@ -1,0 +1,406 @@
+# CODEX FOUNDER DIRECTIVE
+## GLOBAL COMPANION ARTIFACT ADOPTION, C0 LIFECYCLE CLOSURE, AND GOVERNANCE V1.0 FINAL BASELINE RESUMPTION
+
+### 1. DIRECTIVE STATUS
+
+This directive accepts the completed Global Companion Artifact Source Recovery and Lifecycle Reconciliation Package V1.0 and authorizes controlled adoption of the verified prospective global constitutional companion-artifact family.
+
+The controlling package disposition is:
+
+GLOBAL_COMPANION_ARTIFACTS_READY_FOR_CONTROLLED_ADOPTION
+
+Package SHA-256:
+
+5b2a0e0736d40789d9a50f1d6918bdf7a3c1181b224e012137808045e72f380c
+
+Manifest SHA-256:
+
+2a1b0c0dbd4729b8540574dd0a7268256b4ffbb4c3896e2179a04434e4e18d46
+
+The formal scan state is:
+
+- P0: 0
+- Open P1: 0
+- Adoption-blocking P2: 0
+- Lock-blocking P2: 0
+- Retained nonblocking P2: 3
+- Prohibited dependency cycles: 0
+- Orphan requirements: 0
+- Orphan Founder decisions: 0
+- Duplicate decision or requirement IDs: 0
+- Broken requirement source paths: 0
+- Authority-owner omissions: 0
+
+AI Governance V2.0 remains adopted and locked and must not be reopened, altered, or relocked.
+
+---
+
+# 2. FOUNDER ADOPTION
+
+The Founder approves the prospective global companion-artifact family created and verified through the Global Companion Artifact Source Recovery and Lifecycle Reconciliation Package V1.0.
+
+The Founder confirms that:
+
+1. the prospective global companion artifacts accurately reconcile the verified constitutional sources, Founder decisions, governance requirements, authority owners, dependencies, cross-references, and lifecycle evidence;
+
+2. the 71 reconciled Founder decisions are approved for use in the controlling global Founder Decision Register;
+
+3. the 232 governance requirements are approved for use in the controlling Governance Requirement Index;
+
+4. the 232 bidirectional mappings are approved for use in the controlling Requirement Traceability Matrix;
+
+5. the reconciled cross-canon normalization, authority, dependency, index, source, lifecycle, and related companion records are approved as controlling governance companions;
+
+6. the three historical standalone-source gaps remain preserved as provenance exceptions and are not represented as recovered originals;
+
+7. the seven prospective artifacts are new controlling successors created under Founder authority;
+
+8. retained P2 items remain nonblocking and must continue to be tracked;
+
+9. this adoption does not grant implementation, runtime, provider activation, customer-data transfer, production, launch, or public trust-claim authority.
+
+---
+
+# 3. AUTHORIZED ADOPTION DISPOSITION
+
+After independent package and manifest verification, issue:
+
+GLOBAL_COMPANION_ARTIFACT_FAMILY_ADOPTED_WITH_RETAINED_NONBLOCKING_P2
+
+only if:
+
+- package SHA-256 matches;
+- manifest SHA-256 matches;
+- all packaged artifact hashes verify;
+- P0 remains 0;
+- Open P1 remains 0;
+- adoption-blocking P2 remains 0;
+- no post-package source drift is detected.
+
+Otherwise issue:
+
+GLOBAL_COMPANION_ARTIFACT_ADOPTION_BLOCKED
+
+and stop with a precise evidence report.
+
+---
+
+# 4. REQUIRED ADOPTION RECORDS
+
+Create:
+
+1. GLOBAL_COMPANION_ARTIFACT_FAMILY_ADOPTION_RECORD.md
+2. GLOBAL_COMPANION_ARTIFACT_FAMILY_ADOPTION_CERTIFICATE.json
+3. GLOBAL_COMPANION_ARTIFACT_ADOPTION_HASH_MANIFEST.md
+4. GLOBAL_COMPANION_ARTIFACT_ADOPTION_HASH_MANIFEST.json
+5. GLOBAL_COMPANION_ARTIFACT_RETAINED_P2_REGISTER.md
+
+The adoption record must enumerate every adopted companion artifact and record:
+
+- artifact ID;
+- canonical title;
+- filename;
+- version;
+- repository path;
+- SHA-256;
+- source classification;
+- authority classification;
+- adoption state;
+- lock state;
+- supersession relationship;
+- historical provenance exception, if any;
+- retained P2 linkage;
+- implementation-authority state;
+- production-authority state;
+- public-launch-authority state.
+
+---
+
+# 5. REQUIRED CLASSIFICATION OF HISTORICAL GAPS
+
+Preserve the unresolved historical standalone sources for:
+
+1. the former global Founder Decision Register;
+2. the former 60-row Governance Requirement Index;
+3. the former 60-row Requirement Traceability Matrix.
+
+Classify each as:
+
+HISTORICAL_STANDALONE_SOURCE_UNAVAILABLE_PROSPECTIVE_CONTROLLING_SUCCESSOR_ADOPTED
+
+Do not:
+
+- fabricate historical bytes;
+- backdate the prospective successors;
+- overwrite provenance-exception records;
+- state that the prospective successors were the historical originals.
+
+---
+
+# 6. C0 ROW-SPECIFIC LIFECYCLE RECONCILIATION
+
+After companion adoption, reconcile all 47 historical C0 rows against current exact evidence.
+
+For each row determine:
+
+- exact source status;
+- current repository path;
+- SHA-256;
+- Founder status;
+- adoption state;
+- lock state;
+- supersession state;
+- current controlling artifact;
+- lifecycle evidence;
+- retained P2 items;
+- unresolved blocker, if any.
+
+Preserve the original C0 baseline unchanged.
+
+Create a prospective delta and current-state successor rather than rewriting historical C0 records.
+
+Required outputs:
+
+1. C0_CURRENT_LIFECYCLE_RECONCILIATION_REPORT.md
+2. C0_CURRENT_LIFECYCLE_STATE_REGISTER.md
+3. C0_CURRENT_LIFECYCLE_STATE_REGISTER.json
+4. C0_HISTORICAL_TO_CURRENT_DELTA.md
+5. C0_HISTORICAL_TO_CURRENT_DELTA.json
+6. C0_UNRESOLVED_LIFECYCLE_BLOCKER_LEDGER.md
+
+---
+
+# 7. LIFECYCLE EVIDENCE RULES
+
+Do not infer adoption or lock solely from:
+
+- Founder acceptance;
+- filename;
+- document header;
+- inclusion in another register;
+- later implementation work;
+- conversation summary;
+- derivative artifact;
+- repository location.
+
+Adoption requires an adoption record or equivalent exact authority evidence.
+
+Lock requires:
+
+- adoption;
+- exact source identity;
+- verified hash;
+- lock record or equivalent exact lock evidence;
+- no unresolved lock-blocking findings.
+
+Where a canon is Founder-approved but lacks adoption evidence, classify:
+
+FOUNDER_APPROVED_ADOPTION_NOT_ESTABLISHED
+
+Where adopted but lock evidence is absent, classify:
+
+ADOPTED_LOCK_NOT_ESTABLISHED
+
+Where neither can be established, preserve:
+
+LIFECYCLE_NOT_ESTABLISHED
+
+---
+
+# 8. PROSPECTIVE LIFECYCLE REMEDIATION
+
+For each row lacking adoption or lock evidence:
+
+1. determine whether the artifact is:
+   - Founder-approved and eligible for prospective adoption;
+   - already adopted but missing lock;
+   - superseded;
+   - supporting only;
+   - implementation governance rather than constitutional canon;
+   - blocked by substantive evidence;
+2. identify the exact remedy;
+3. separate administrative lifecycle remediation from substantive Founder policy review;
+4. do not reopen already locked artifacts;
+5. do not bundle unrelated substantive changes into lifecycle closure.
+
+Create:
+
+C0_LIFECYCLE_REMEDIATION_PLAN.md
+
+The plan must group rows into:
+
+- lifecycle verified complete;
+- adoption required;
+- lock required;
+- adoption and lock required;
+- superseded or excluded;
+- supporting artifact only;
+- substantive Founder decision required;
+- unresolved source evidence.
+
+---
+
+# 9. FORMAL POST-ADOPTION SCANS
+
+After companion adoption and C0 lifecycle reconciliation, rerun:
+
+- source completeness;
+- checksum completeness;
+- adoption-state consistency;
+- lock-state consistency;
+- supersession integrity;
+- dependency cycles;
+- orphan requirements;
+- orphan Founder decisions;
+- duplicate IDs;
+- cross-reference integrity;
+- authority ownership;
+- retained P2 classification.
+
+Create:
+
+1. GOVERNANCE_V1_0_POST_ADOPTION_FORMAL_SCAN_MASTER_REPORT.md
+2. GOVERNANCE_V1_0_POST_ADOPTION_FORMAL_SCAN_FINDINGS.json
+3. GOVERNANCE_V1_0_POST_ADOPTION_REMEDIATION_LEDGER.md
+
+Required gate:
+
+- P0 = 0
+- Open P1 = 0
+- adoption-blocking P2 = 0
+- lock-blocking P2 = 0
+- unresolved lifecycle blockers = 0 before final Governance V1.0 lock
+
+---
+
+# 10. FINAL GOVERNANCE CLOSURE ASSESSMENT
+
+After all row-specific lifecycle remediation is complete, perform the final Governance Closure Assessment.
+
+Create:
+
+1. FINAL_GOVERNANCE_V1_0_CLOSURE_ASSESSMENT.md
+2. FINAL_GOVERNANCE_V1_0_CLOSURE_ASSESSMENT.json
+3. FINAL_GOVERNANCE_V1_0_CLOSURE_SCORECARD.md
+4. FINAL_GOVERNANCE_V1_0_CLOSURE_FINDING_LEDGER.md
+
+Use exactly one disposition:
+
+- GOVERNANCE_V1_0_READY_FOR_CONSTITUTIONAL_BASELINE_ADOPTION_AND_LOCK
+- GOVERNANCE_V1_0_READY_FOR_CONSTITUTIONAL_BASELINE_ADOPTION_AND_LOCK_WITH_RETAINED_NONBLOCKING_FOLLOW_UP
+- GOVERNANCE_V1_0_NOT_READY_FOR_CONSTITUTIONAL_BASELINE_LOCK
+
+---
+
+# 11. GOVERNANCE V1.0 BASELINE ADOPTION AND LOCK
+
+Proceed only if the final assessment finds no remaining blockers.
+
+Required conditions:
+
+- P0 = 0;
+- Open P1 = 0;
+- adoption-blocking P2 = 0;
+- lock-blocking P2 = 0;
+- unresolved lifecycle blockers = 0;
+- exact source and checksum completeness established;
+- all controlling constitutional canons have established lifecycle states;
+- all global companion artifacts are adopted;
+- no post-adoption drift exists.
+
+Create:
+
+1. GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_MANIFEST.md
+2. GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_MANIFEST.json
+3. GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_ADOPTION_RECORD.md
+4. GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCK_RECORD.md
+5. GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCK_CERTIFICATE.json
+6. GOVERNANCE_V1_0_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md
+
+Use one final disposition:
+
+- GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCKED
+- GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCKED_WITH_RETAINED_NONBLOCKING_FOLLOW_UP
+- GOVERNANCE_V1_0_CONSTITUTIONAL_BASELINE_LOCK_BLOCKED
+
+---
+
+# 12. AUTHORITY BOUNDARIES
+
+Throughout this work:
+
+- AI V2.0 adoption and lock: preserved;
+- global companion adoption authority: TRUE;
+- C0 lifecycle reconciliation authority: TRUE;
+- prospective lifecycle-remediation drafting authority: TRUE;
+- implementation authority: FALSE;
+- runtime authority: FALSE;
+- provider activation authority: FALSE;
+- customer-data transfer authority: FALSE;
+- production authority: FALSE;
+- public-launch authority: FALSE;
+- public trust-claim authority: FALSE.
+
+No constitutional baseline lock grants implementation or launch authority.
+
+---
+
+# 13. FINAL RESPONSE FORMAT
+
+## Final Disposition
+
+[EXACT DISPOSITION]
+
+## Companion Adoption
+
+- Package verified:
+- Artifacts adopted:
+- Historical gaps preserved:
+- Adoption record SHA-256:
+- Retained P2:
+
+## C0 Reconciliation
+
+- Rows reviewed:
+- Lifecycle complete:
+- Adoption required:
+- Lock required:
+- Adoption and lock required:
+- Superseded or excluded:
+- Supporting only:
+- Substantive Founder decision required:
+- Unresolved source evidence:
+
+## Formal Scans
+
+- P0:
+- Open P1:
+- Adoption-blocking P2:
+- Lock-blocking P2:
+- Unresolved lifecycle blockers:
+- Dependency cycles:
+- Orphan requirements:
+- Duplicate IDs:
+- Broken references:
+- Authority-owner conflicts:
+
+## Governance V1.0
+
+- Closure Assessment:
+- Baseline adoption:
+- Baseline lock:
+- Manifest SHA-256:
+- Evidence-package SHA-256:
+- Remaining blockers:
+
+## Authority
+
+- Implementation:
+- Runtime:
+- Provider activation:
+- Customer-data transfer:
+- Production:
+- Public launch:
+- Public trust claims:
+
+Begin by independently verifying the companion reconciliation package and recording Founder-controlled adoption.

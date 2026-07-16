@@ -1,0 +1,60 @@
+{
+  "event": "EQUINE_HEALTH_V1_1_FOUNDER_ADOPTION",
+  "founder": "Rian Ray",
+  "received_date": "2026-07-15",
+  "embedded_directive_date": null,
+  "disposition": "EQUINE_HEALTH_V1_1_FOUNDER_ADOPTED_LOCK_PENDING",
+  "lifecycle_state": "EQUINE_HEALTH_V1_1_FOUNDER_ADOPTED_LOCK_PENDING",
+  "constitutional_authority": "CONTROLLING_WITHIN_ASSIGNED_EQUINE_HEALTH_DOMAIN",
+  "lock_state": "NOT_LOCKED",
+  "directive": {
+    "path": "docs/canon/adoptions/equine_health_v1_1/EQUINE_HEALTH_V1_1_FOUNDER_ADOPTION_DIRECTIVE.txt",
+    "sha256": "a7dea64261d2dc91c285e55bf16462d4c534a4ecf2a76455003bd3b2f95a3c88",
+    "provenance": "/Users/rianray/.codex/attachments/7937e2a1-6f13-482f-9640-2ffdc7e6589a/pasted-text.txt"
+  },
+  "candidate": {
+    "path": "docs/canon/candidates/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_RECONCILED_ADOPTION_CANDIDATE.md",
+    "sha256": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c"
+  },
+  "adopted_source": {
+    "path": "docs/canon/adopted_sources/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md",
+    "sha256": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+    "byte_identical_to_candidate": true
+  },
+  "founder_review_evidence": {
+    "path": "outputs/equine_health_v1_1_founder_review_evidence.zip",
+    "sha256": "f31e448bc26db2ca7d1bfdabbe047d66380d3df1d9a9f955ae07640c15f8de07",
+    "fresh_extraction": "passed",
+    "manifest_entries_verified": 24
+  },
+  "decisions": {
+    "resolved": 14,
+    "total": 14,
+    "exactly_incorporated": true
+  },
+  "requirements": {
+    "traceable": 35,
+    "total": 35
+  },
+  "findings": {
+    "p0": 0,
+    "p1": 0,
+    "p2_open": 6
+  },
+  "authority": {
+    "lock": false,
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "permission": false,
+    "runtime": false,
+    "provider": false,
+    "clinical_activity": false,
+    "research_or_training": false,
+    "ai_activation": false,
+    "production": false,
+    "onboarding": false,
+    "public_claims": false,
+    "launch": false
+  }
+}

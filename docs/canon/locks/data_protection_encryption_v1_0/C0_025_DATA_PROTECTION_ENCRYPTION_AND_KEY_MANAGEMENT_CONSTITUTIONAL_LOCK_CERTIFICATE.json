@@ -1,0 +1,40 @@
+{
+  "row_id": "C0-025",
+  "title": "Master Data Protection, Encryption, and Key Management Model",
+  "version": "1.0",
+  "disposition": "LOCKED",
+  "locked_at": "2026-07-16T07:53:55Z",
+  "source": "docs/canon/adopted_sources/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0_ADOPTED_SOURCE.md",
+  "source_sha256": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+  "adoption_record": "docs/canon/adoptions/c0_batch_1/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "90e31fa2be06d4ebf4c2e65718b1fb4dffc12cf0490d885a0ab92e335e14c028",
+  "lock_readiness_report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_025_LOCK_READINESS_REPORT.md",
+  "founder_directive": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/source/C0_BATCH_1_TRACK_B_LOCK_FOUNDER_DIRECTIVE.txt",
+  "founder_directive_sha256": "837e73c08323add8344a67bde13f85646c94b3c0caeae0d337637f77a5d68962",
+  "lock_record": "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "50eb1307c6a3817a08c201b73c2104cc11ed9ac50679384379e7c7088577129a",
+  "lock_record_body_sha256": "cdcdf8bf389065a48a06d9c9fc355ec38083be39d75d6648b510c9c5edc1eb0a",
+  "post_lock_protocol": "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md",
+  "post_lock_protocol_sha256": "8bd51a226ee052aca1995b5b39eec2788a490a5ed3d41eeca453f9927eeec360",
+  "retained_nonblocking_p2": [
+    "SFM-P2-01",
+    "SFM-P2-02",
+    "SFM-P2-03"
+  ],
+  "verification": "PASSED",
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "production": false,
+    "provider_activation": false,
+    "external_integration_activation": false,
+    "deployment": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false
+  }
+}

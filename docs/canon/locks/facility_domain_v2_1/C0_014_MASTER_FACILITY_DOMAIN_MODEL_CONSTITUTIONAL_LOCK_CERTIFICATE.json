@@ -1,0 +1,28 @@
+{
+  "c0_id": "C0-014",
+  "title": "Master Facility Domain Model",
+  "version": "2.1",
+  "disposition": "LOCKED",
+  "locked_path": "docs/canon/adopted_sources/MASTER_FACILITY_DOMAIN_MODEL_V2_1_ADOPTED_SOURCE.md",
+  "locked_sha256": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+  "adoption_record": "docs/canon/adoptions/c0_014_facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "a95033f85b8efae4c39aa8e608cbc1122d67ca6185cb47ba56edc98ca531e5d4",
+  "lock_record": "docs/canon/locks/facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "e3971e81683e2579085423f67a599ae88e7bc182b8ffb68e5d6ba3ac9da55de6",
+  "locked_at": "2026-07-16T20:22:52Z",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

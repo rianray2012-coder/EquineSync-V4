@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-07-16T07:53:55Z",
+  "status": "C0_BATCH_1_TRACK_B_SEVEN_CANONS_CONSTITUTIONALLY_LOCKED",
+  "blockers_before_batch_1": 26,
+  "track_a_resolved": 2,
+  "track_b_resolved": 7,
+  "batch_1_total_resolved": 9,
+  "remaining_blockers": 17,
+  "remaining_tracks": {
+    "C": 9,
+    "D": 7,
+    "E": 1
+  },
+  "locked_rows": [
+    "C0-025",
+    "C0-026",
+    "C0-027",
+    "C0-029",
+    "C0-030",
+    "C0-031",
+    "C0-032"
+  ],
+  "retained_nonblocking_p2": 23,
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "production": false,
+    "provider_activation": false,
+    "external_integration_activation": false,
+    "deployment": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "row_id": "C0-030",
+  "reviewed_at": "2026-07-16T07:34:36Z",
+  "ready": true,
+  "adopted_source": "docs/canon/adopted_sources/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0_ADOPTED_SOURCE.md",
+  "sha256": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+  "adoption_record_sha256": "92ca7148d0631dadbcf312d510a71a3f8ea893df50778c2b133107247caa42e1",
+  "p0": 0,
+  "open_p1": 0,
+  "lock_blocking_p2": 0,
+  "retained_nonblocking_p2": [
+    "SFM-P2-01",
+    "SFM-P2-02",
+    "SFM-P2-03"
+  ],
+  "lock_issued": false,
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "secrets_mutation": false,
+    "schema_or_database_mutation": false,
+    "migration": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claims": false
+  }
+}

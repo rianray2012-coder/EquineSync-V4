@@ -1,0 +1,21 @@
+{
+  "verification": "PASSED_WITH_SIX_RETAINED_SOURCE_EVIDENCE_BLOCKERS",
+  "rows_verified": 9,
+  "exact_sources_verified": 3,
+  "absent_sources_recorded": 6,
+  "current_sources_unchanged": 9,
+  "row_artifact_sets_complete": 9,
+  "p0": 0,
+  "open_p1": 0,
+  "source_classification_blocking_p2": 0,
+  "retained_source_evidence_p2": 6,
+  "remaining_lifecycle_blockers": 17,
+  "json": "PASSED",
+  "secret_scan": "PASSED",
+  "merge_marker_scan": "PASSED",
+  "diff_hygiene": "PASSED",
+  "runtime_or_application_changes": 0,
+  "adoptions_issued": 0,
+  "locks_issued": 0,
+  "authority_flags_false": true
+}

@@ -1,0 +1,14 @@
+{
+  "row_id": "C0-028",
+  "current_path": "docs/canon/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0.md",
+  "current_sha256": "def33679b38b25ab5bbe0fc5c9c78a4fe8d505533d9c1d91a37035735f283ab4",
+  "expected_sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+  "expected_source_recovered": true,
+  "recovered_evidence_path": "docs/canon/reviews/governance_v1_0_c0_phase_c_hash_version_recovery/track_c/C0_028/recovered_sources/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_FOUNDER_SOURCE.md",
+  "recovered_sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+  "raw_byte_identical": false,
+  "current_size": 62194,
+  "recovered_size": 62200,
+  "normalized_line_similarity": 1.0,
+  "heading_similarity": 1.0
+}

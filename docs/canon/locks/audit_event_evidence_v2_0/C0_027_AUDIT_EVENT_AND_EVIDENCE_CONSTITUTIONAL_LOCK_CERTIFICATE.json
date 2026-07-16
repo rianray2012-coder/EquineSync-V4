@@ -1,0 +1,38 @@
+{
+  "row_id": "C0-027",
+  "title": "Master Audit Event and Evidence Model",
+  "version": "2.0",
+  "disposition": "LOCKED",
+  "locked_at": "2026-07-16T07:53:55Z",
+  "source": "docs/canon/adopted_sources/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+  "source_sha256": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+  "adoption_record": "docs/canon/adoptions/c0_batch_1/C0_027_AUDIT_EVENT_AND_EVIDENCE_ADOPTION_RECORD.md",
+  "adoption_record_sha256": "3f243f17d8e5c210616cc8d30ee88e243c4884dbad6c3dbe59bd96827bcac1f0",
+  "lock_readiness_report": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/track_b/C0_027_LOCK_READINESS_REPORT.md",
+  "founder_directive": "docs/canon/reviews/governance_v1_0_c0_lifecycle_completion_batch_1/source/C0_BATCH_1_TRACK_B_LOCK_FOUNDER_DIRECTIVE.txt",
+  "founder_directive_sha256": "837e73c08323add8344a67bde13f85646c94b3c0caeae0d337637f77a5d68962",
+  "lock_record": "docs/canon/locks/audit_event_evidence_v2_0/C0_027_AUDIT_EVENT_AND_EVIDENCE_CONSTITUTIONAL_LOCK_RECORD.md",
+  "lock_record_sha256": "604ab98742c033caae650f3bce0792c8c41a4d2716c43201ded22ba2de8519aa",
+  "lock_record_body_sha256": "fabd41aa9443a8e9c68906fe99102888a2f47ad21ff9d756eb1cfbdfa4d94400",
+  "post_lock_protocol": "docs/canon/locks/audit_event_evidence_v2_0/C0_027_AUDIT_EVENT_AND_EVIDENCE_POST_LOCK_CHANGE_CONTROL_PROTOCOL.md",
+  "post_lock_protocol_sha256": "0ad5c4ac2ff83e1a3178d9fd989bd4ef30accefcc742ed82a07484ae54fc7b9e",
+  "retained_nonblocking_p2": [
+    "C0-027-P2-HISTORICAL-V1-SOURCE-UNAVAILABLE"
+  ],
+  "verification": "PASSED",
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "production": false,
+    "provider_activation": false,
+    "external_integration_activation": false,
+    "deployment": false,
+    "public_launch": false,
+    "public_trust_claims": false,
+    "customer_data_processing": false,
+    "security_certification": false,
+    "governance_v1_baseline_adoption": false,
+    "governance_v1_baseline_lock": false
+  }
+}

@@ -1,0 +1,1358 @@
+{
+  "generated_at": "2026-07-16T07:13:38Z",
+  "status": "ROW_BY_ROW_LIFECYCLE_RESOLUTION_LEDGER_COMPLETE",
+  "purpose": "Resolution planning for the 26 C0 lifecycle blockers; no lifecycle action is executed by this ledger.",
+  "row_count": 26,
+  "track_counts": {
+    "TRACK_A_LOCK_ONLY": 2,
+    "TRACK_B_ADOPTION_THEN_LOCK": 7,
+    "TRACK_C_HASH_OR_VERSION_RECOVERY": 9,
+    "TRACK_D_MISSING_SOURCE_RECOVERY": 7,
+    "TRACK_E_SUBSTANTIVE_FOUNDER_REVIEW": 1
+  },
+  "governance_v1_baseline_lock": false,
+  "records": [
+    {
+      "resolution_sequence": 1,
+      "record_id": "C0-020",
+      "family": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model",
+      "resolution_track": "TRACK_A_LOCK_ONLY",
+      "current_category": "lock_required",
+      "resolution_focus": "Perform a byte-identity and no-change lock review of the already adopted Safeguarding V1.2 source.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+      "current_sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_ADOPTED",
+      "adoption_state": "ADOPTED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a checksum-backed lock-readiness package; do not issue lock without a separate founder lock decision.",
+      "founder_decision_required": "LOCK or RETURN_FOR_CORRECTION",
+      "resolution_steps": [
+        "Verify the adopted source checksum and adoption authority record.",
+        "Confirm no bytes or governing references changed after adoption.",
+        "Run cross-canon, P0/P1, retained-P2, authority-overclaim, secret, and diff-hygiene checks.",
+        "Prepare a lock certificate and immutable evidence manifest for founder review."
+      ],
+      "required_evidence": [
+        "adoption record",
+        "adopted-source SHA-256",
+        "no-change comparison",
+        "lock-readiness report",
+        "checksum manifest"
+      ],
+      "completion_criteria": [
+        "founder issues LOCK",
+        "lock certificate hash verifies",
+        "Canon Index and lifecycle registers identify the exact locked bytes"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 2,
+      "record_id": "C0-037",
+      "family": "Master Equine Health, Welfare, Medical Record, and Clinical Support Model",
+      "resolution_track": "TRACK_A_LOCK_ONLY",
+      "current_category": "lock_required",
+      "resolution_focus": "Perform a byte-identity and no-change lock review of the already adopted Equine Health V1.1 source.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/adopted_sources/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md",
+      "current_sha256": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_ADOPTED",
+      "adoption_state": "ADOPTED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a checksum-backed lock-readiness package; do not issue lock without a separate founder lock decision.",
+      "founder_decision_required": "LOCK or RETURN_FOR_CORRECTION",
+      "resolution_steps": [
+        "Verify the adopted source checksum and adoption authority record.",
+        "Confirm no bytes or governing references changed after adoption.",
+        "Run cross-canon, P0/P1, retained-P2, authority-overclaim, secret, and diff-hygiene checks.",
+        "Prepare a lock certificate and immutable evidence manifest for founder review."
+      ],
+      "required_evidence": [
+        "adoption record",
+        "adopted-source SHA-256",
+        "no-change comparison",
+        "lock-readiness report",
+        "checksum manifest"
+      ],
+      "completion_criteria": [
+        "founder issues LOCK",
+        "lock certificate hash verifies",
+        "Canon Index and lifecycle registers identify the exact locked bytes"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 3,
+      "record_id": "C0-025",
+      "family": "Master Data Protection, Encryption, and Key Management Model",
+      "resolution_track": "TRACK_B_ADOPTION_THEN_LOCK",
+      "current_category": "adoption_and_lock_required",
+      "resolution_focus": "Adopt and then independently lock the verified Data Protection, Encryption, and Key Management V1.0 exception candidate.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/candidates/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0.md",
+      "current_sha256": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+      "expected_c0_sha256": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_STATUS_RECORDED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a row-specific controlled adoption package, then stop for founder adoption; lock must remain a later independent event.",
+      "founder_decision_required": "ADOPT, followed later by LOCK",
+      "resolution_steps": [
+        "Reverify exact candidate bytes, provenance, version, and cross-canon boundaries.",
+        "Complete a controlled adoption review with all operational authority flags false.",
+        "Obtain and record a founder ADOPT decision; preserve the candidate as historical adoption evidence.",
+        "After adoption, perform a separate no-change checksum-backed lock review and obtain a founder LOCK decision."
+      ],
+      "required_evidence": [
+        "candidate SHA-256",
+        "provenance record",
+        "cross-canon review",
+        "adoption record",
+        "post-adoption no-change proof",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "adoption and lock are separate recorded events",
+        "exact locked bytes are indexed",
+        "no implementation or production authority is introduced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 4,
+      "record_id": "C0-026",
+      "family": "Master Record Stewardship and Retention Model",
+      "resolution_track": "TRACK_B_ADOPTION_THEN_LOCK",
+      "current_category": "adoption_and_lock_required",
+      "resolution_focus": "Establish founder adoption and a separate lock for Record Stewardship V2.1 while preserving restoration and retention boundaries.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1.md",
+      "current_sha256": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_STATUS_RECORDED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a row-specific controlled adoption package, then stop for founder adoption; lock must remain a later independent event.",
+      "founder_decision_required": "ADOPT, followed later by LOCK",
+      "resolution_steps": [
+        "Reverify exact candidate bytes, provenance, version, and cross-canon boundaries.",
+        "Complete a controlled adoption review with all operational authority flags false.",
+        "Obtain and record a founder ADOPT decision; preserve the candidate as historical adoption evidence.",
+        "After adoption, perform a separate no-change checksum-backed lock review and obtain a founder LOCK decision."
+      ],
+      "required_evidence": [
+        "candidate SHA-256",
+        "provenance record",
+        "cross-canon review",
+        "adoption record",
+        "post-adoption no-change proof",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "adoption and lock are separate recorded events",
+        "exact locked bytes are indexed",
+        "no implementation or production authority is introduced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 5,
+      "record_id": "C0-027",
+      "family": "Master Audit Event and Evidence Model",
+      "resolution_track": "TRACK_B_ADOPTION_THEN_LOCK",
+      "current_category": "adoption_and_lock_required",
+      "resolution_focus": "Convert the founder-approved Audit V2.0 candidate into an adopted artifact, then complete a separate lock review.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/candidates/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "current_sha256": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_STATUS_RECORDED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a row-specific controlled adoption package, then stop for founder adoption; lock must remain a later independent event.",
+      "founder_decision_required": "ADOPT, followed later by LOCK",
+      "resolution_steps": [
+        "Reverify exact candidate bytes, provenance, version, and cross-canon boundaries.",
+        "Complete a controlled adoption review with all operational authority flags false.",
+        "Obtain and record a founder ADOPT decision; preserve the candidate as historical adoption evidence.",
+        "After adoption, perform a separate no-change checksum-backed lock review and obtain a founder LOCK decision."
+      ],
+      "required_evidence": [
+        "candidate SHA-256",
+        "provenance record",
+        "cross-canon review",
+        "adoption record",
+        "post-adoption no-change proof",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "adoption and lock are separate recorded events",
+        "exact locked bytes are indexed",
+        "no implementation or production authority is introduced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 6,
+      "record_id": "C0-029",
+      "family": "Master Communication, Notification, and Notice Model",
+      "resolution_track": "TRACK_B_ADOPTION_THEN_LOCK",
+      "current_category": "adoption_and_lock_required",
+      "resolution_focus": "Adopt and then lock the founder-approved Communication, Notification, and Notice V2.0 candidate without enabling delivery.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/candidates/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "current_sha256": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_STATUS_RECORDED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a row-specific controlled adoption package, then stop for founder adoption; lock must remain a later independent event.",
+      "founder_decision_required": "ADOPT, followed later by LOCK",
+      "resolution_steps": [
+        "Reverify exact candidate bytes, provenance, version, and cross-canon boundaries.",
+        "Complete a controlled adoption review with all operational authority flags false.",
+        "Obtain and record a founder ADOPT decision; preserve the candidate as historical adoption evidence.",
+        "After adoption, perform a separate no-change checksum-backed lock review and obtain a founder LOCK decision."
+      ],
+      "required_evidence": [
+        "candidate SHA-256",
+        "provenance record",
+        "cross-canon review",
+        "adoption record",
+        "post-adoption no-change proof",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "adoption and lock are separate recorded events",
+        "exact locked bytes are indexed",
+        "no implementation or production authority is introduced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 7,
+      "record_id": "C0-030",
+      "family": "Master Security Incident Response and Disclosure Model",
+      "resolution_track": "TRACK_B_ADOPTION_THEN_LOCK",
+      "current_category": "adoption_and_lock_required",
+      "resolution_focus": "Adopt and then lock the Security Incident Response V1.0 exception candidate without creating incident-response runtime authority.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/candidates/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0.md",
+      "current_sha256": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+      "expected_c0_sha256": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_STATUS_RECORDED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a row-specific controlled adoption package, then stop for founder adoption; lock must remain a later independent event.",
+      "founder_decision_required": "ADOPT, followed later by LOCK",
+      "resolution_steps": [
+        "Reverify exact candidate bytes, provenance, version, and cross-canon boundaries.",
+        "Complete a controlled adoption review with all operational authority flags false.",
+        "Obtain and record a founder ADOPT decision; preserve the candidate as historical adoption evidence.",
+        "After adoption, perform a separate no-change checksum-backed lock review and obtain a founder LOCK decision."
+      ],
+      "required_evidence": [
+        "candidate SHA-256",
+        "provenance record",
+        "cross-canon review",
+        "adoption record",
+        "post-adoption no-change proof",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "adoption and lock are separate recorded events",
+        "exact locked bytes are indexed",
+        "no implementation or production authority is introduced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 8,
+      "record_id": "C0-031",
+      "family": "Master Platform Resilience, Backup, and Recovery Operational Model",
+      "resolution_track": "TRACK_B_ADOPTION_THEN_LOCK",
+      "current_category": "adoption_and_lock_required",
+      "resolution_focus": "Adopt and then lock the subordinate Platform Resilience V1.0 operational model while preserving Stewardship and Security ownership boundaries.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/candidates/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0.md",
+      "current_sha256": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+      "expected_c0_sha256": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_STATUS_RECORDED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a row-specific controlled adoption package, then stop for founder adoption; lock must remain a later independent event.",
+      "founder_decision_required": "ADOPT, followed later by LOCK",
+      "resolution_steps": [
+        "Reverify exact candidate bytes, provenance, version, and cross-canon boundaries.",
+        "Complete a controlled adoption review with all operational authority flags false.",
+        "Obtain and record a founder ADOPT decision; preserve the candidate as historical adoption evidence.",
+        "After adoption, perform a separate no-change checksum-backed lock review and obtain a founder LOCK decision."
+      ],
+      "required_evidence": [
+        "candidate SHA-256",
+        "provenance record",
+        "cross-canon review",
+        "adoption record",
+        "post-adoption no-change proof",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "adoption and lock are separate recorded events",
+        "exact locked bytes are indexed",
+        "no implementation or production authority is introduced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 9,
+      "record_id": "C0-032",
+      "family": "Master Media, Files, and Digital Asset Governance Model",
+      "resolution_track": "TRACK_B_ADOPTION_THEN_LOCK",
+      "current_category": "adoption_and_lock_required",
+      "resolution_focus": "Adopt and then lock Media Governance V2.1 from the exact Stage 0 source without activating storage or media processing.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/reviews/stage0_companion_reconciliation_v1_2/MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1.md",
+      "current_sha256": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+      "expected_c0_sha256": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+      "hash_mismatch": false,
+      "founder_status": "FOUNDER_STATUS_RECORDED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a row-specific controlled adoption package, then stop for founder adoption; lock must remain a later independent event.",
+      "founder_decision_required": "ADOPT, followed later by LOCK",
+      "resolution_steps": [
+        "Reverify exact candidate bytes, provenance, version, and cross-canon boundaries.",
+        "Complete a controlled adoption review with all operational authority flags false.",
+        "Obtain and record a founder ADOPT decision; preserve the candidate as historical adoption evidence.",
+        "After adoption, perform a separate no-change checksum-backed lock review and obtain a founder LOCK decision."
+      ],
+      "required_evidence": [
+        "candidate SHA-256",
+        "provenance record",
+        "cross-canon review",
+        "adoption record",
+        "post-adoption no-change proof",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "adoption and lock are separate recorded events",
+        "exact locked bytes are indexed",
+        "no implementation or production authority is introduced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 10,
+      "record_id": "C0-004",
+      "family": "Master Product Vision",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Resolve whether the repository Product Vision is a successor to, derivative of, or conflict with the expected V2.1 bytes.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_PRODUCT_VISION.md",
+      "current_sha256": "ba2bdedfbbd89889af02035656d2f738175dcbde3869084c5e0c92062644c469",
+      "expected_c0_sha256": "42f01b4094923d85ab6b7de9c56fc6c084adac4f9b06464554ba2f9e91787953",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 11,
+      "record_id": "C0-005",
+      "family": "Master Ecosystem Model",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Resolve the Ecosystem Model V2.1 identity before relying on it as the apex relationship and domain boundary source.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_ECOSYSTEM_MODEL.md",
+      "current_sha256": "4344294c05b4b5483ff23497f198edb18e8bcb54d93410266791a57809107533",
+      "expected_c0_sha256": "5d600fec0bb674b5b9a961628e70453e3bd56083ad53edd19c974216ae18fa9c",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 12,
+      "record_id": "C0-012",
+      "family": "Master Horse Lifecycle and Passport Model",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Reconcile Horse Lifecycle V3.1 with the current Passport and RF31 continuity authorities without reopening locked RF31.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_HORSE_LIFECYCLE.md",
+      "current_sha256": "cd47c8fe3e76eee067594f38efd45265929d279c4d1fd9dc2a70e16fea976391",
+      "expected_c0_sha256": "be225014b476d266d4effcd35fa8577da21d8646e53afbbf60ca3b6509ea0057",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 13,
+      "record_id": "C0-014",
+      "family": "Master Facility Domain Model",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Reconcile Facility Domain V2.1 while preserving RF27 as the locked physical-intake and facility-operations baseline.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_FACILITY_DOMAIN_MODEL.md",
+      "current_sha256": "ee97b61290d7552a9907df14db25b2a3b4a8a32a57871adca6ce0e373b5c712b",
+      "expected_c0_sha256": "4b88f477677bb2147df44f766a36b07ca587421967ea510b00e20315a34d2590",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 14,
+      "record_id": "C0-015",
+      "family": "Master Barn Lifecycle and Operations Canon",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Reconcile Barn Lifecycle V3.1 and confirm its relationship to RF27 facility operations and barn operational sequencing.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_BARN_LIFECYCLE.md",
+      "current_sha256": "3e7428771d3d8868e801e80551912a8f6284f5a4d53698d170d4b67b3be13553",
+      "expected_c0_sha256": "aebae6b952423435806837abf2fd9d5f1dd0dc96fca74810e78da50f0f80c47a",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 15,
+      "record_id": "C0-016",
+      "family": "Master Business Lifecycle Model",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Reconcile Business Lifecycle V2.1 before assigning it controlling business-state authority.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_BUSINESS_LIFECYCLE.md",
+      "current_sha256": "063339ec8b8aab20908742675013692de2dbb56f018939bac71371b8366d2466",
+      "expected_c0_sha256": "cd66ca4fcfdcc188ce5d6a44239ad52541c8a0be0c571d935405f64af6b72085",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 16,
+      "record_id": "C0-019",
+      "family": "Master Agreement, Consent, and Authorization Model",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Recover the expected Agreement, Consent, and Authorization V2.1 source and compare it to the current V2.0 candidate.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/candidates/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_0.md",
+      "current_sha256": "630b6128e37734be01a40d64b80d9fb4d74fce48198c60f9fcbd1a2ef83c232b",
+      "expected_c0_sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 17,
+      "record_id": "C0-022",
+      "family": "Master Permission and Access-Control Model",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Recover the expected Permission Model V1.1 bytes and reconcile them with the current unverified repository model.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_PERMISSION_MODEL.md",
+      "current_sha256": "2034979a0fe77fd89ba065ecf9d309f5897641b6c38c9bde7c69dc8ac06adeab",
+      "expected_c0_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 18,
+      "record_id": "C0-028",
+      "family": "Master Claims, Disputes, and Authority Model",
+      "resolution_track": "TRACK_C_HASH_OR_VERSION_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Recover the expected Claims V2.0 bytes and reconcile them with the current same-title but hash-mismatched source.",
+      "current_exact_source_status": "RELATED_REPOSITORY_SOURCE_EXPECTED_VERSION_OR_HASH_NOT_VERIFIED",
+      "current_repository_path": "docs/canon/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0.md",
+      "current_sha256": "def33679b38b25ab5bbe0fc5c9c78a4fe8d505533d9c1d91a37035735f283ab4",
+      "expected_c0_sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "hash_mismatch": true,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Recover the exact historical source/version identified by C0 and verify its expected SHA-256 where available.",
+        "Preserve recovered bytes and chain of custody without overwriting the current repository artifact.",
+        "Perform a byte and semantic comparison against the current related artifact.",
+        "Classify the current artifact as identical, corrected successor, superseding successor, derivative, or conflict.",
+        "Obtain a founder source-identity or succession decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 19,
+      "record_id": "C0-023",
+      "family": "Master Privacy and Data Protection Model",
+      "resolution_track": "TRACK_D_MISSING_SOURCE_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Locate and authenticate the Privacy and Data Protection V2.0 source before any lifecycle claim is made.",
+      "current_exact_source_status": "SOURCE_NOT_LOCATED",
+      "current_repository_path": null,
+      "current_sha256": null,
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Search approved source locations for the exact named and versioned artifact; use the C0 checksum when one is available.",
+        "Preserve recovered bytes, source metadata, and chain of custody; do not reconstruct missing content.",
+        "Validate readability, completeness, version identity, and cross-canon compatibility.",
+        "Obtain a founder source-identity decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 20,
+      "record_id": "C0-033",
+      "family": "Master Search, Discovery, Ranking, and Retrieval Model",
+      "resolution_track": "TRACK_D_MISSING_SOURCE_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Locate and authenticate Search, Discovery, Ranking, and Retrieval V2.0 before assigning search-governance authority.",
+      "current_exact_source_status": "SOURCE_NOT_LOCATED",
+      "current_repository_path": null,
+      "current_sha256": null,
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Search approved source locations for the exact named and versioned artifact; use the C0 checksum when one is available.",
+        "Preserve recovered bytes, source metadata, and chain of custody; do not reconstruct missing content.",
+        "Validate readability, completeness, version identity, and cross-canon compatibility.",
+        "Obtain a founder source-identity decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 21,
+      "record_id": "C0-035",
+      "family": "Master Reporting, Analytics, and Business Intelligence Model",
+      "resolution_track": "TRACK_D_MISSING_SOURCE_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Locate and authenticate Reporting, Analytics, and Business Intelligence V2.0 before assigning analytics authority.",
+      "current_exact_source_status": "SOURCE_NOT_LOCATED",
+      "current_repository_path": null,
+      "current_sha256": null,
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Search approved source locations for the exact named and versioned artifact; use the C0 checksum when one is available.",
+        "Preserve recovered bytes, source metadata, and chain of custody; do not reconstruct missing content.",
+        "Validate readability, completeness, version identity, and cross-canon compatibility.",
+        "Obtain a founder source-identity decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 22,
+      "record_id": "C0-039",
+      "family": "Master Developer, Platform, and Integration Governance Model",
+      "resolution_track": "TRACK_D_MISSING_SOURCE_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Recover the exact Developer, Platform, and Integration Governance V2.1 bytes matching the known C0 checksum.",
+      "current_exact_source_status": "SOURCE_NOT_LOCATED",
+      "current_repository_path": null,
+      "current_sha256": null,
+      "expected_c0_sha256": "6aa4d6f805ade4367bb62d84ace0cec3151f68e989b596b05b7f14bd2e5d3186",
+      "hash_mismatch": false,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Search approved source locations for the exact named and versioned artifact; use the C0 checksum when one is available.",
+        "Preserve recovered bytes, source metadata, and chain of custody; do not reconstruct missing content.",
+        "Validate readability, completeness, version identity, and cross-canon compatibility.",
+        "Obtain a founder source-identity decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 23,
+      "record_id": "C0-040",
+      "family": "Master Platform Extensibility and Plugin Governance Model",
+      "resolution_track": "TRACK_D_MISSING_SOURCE_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Recover the exact Platform Extensibility and Plugin Governance V2.1 bytes matching the known C0 checksum.",
+      "current_exact_source_status": "SOURCE_NOT_LOCATED",
+      "current_repository_path": null,
+      "current_sha256": null,
+      "expected_c0_sha256": "f656c4b1192ac4f99af5518d709717393d118db5df6ea79076fc19f1e9e8f7ae",
+      "hash_mismatch": false,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Search approved source locations for the exact named and versioned artifact; use the C0 checksum when one is available.",
+        "Preserve recovered bytes, source metadata, and chain of custody; do not reconstruct missing content.",
+        "Validate readability, completeness, version identity, and cross-canon compatibility.",
+        "Obtain a founder source-identity decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 24,
+      "record_id": "C0-041",
+      "family": "Master Vendor Security and Supply Chain Model",
+      "resolution_track": "TRACK_D_MISSING_SOURCE_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Locate and authenticate Vendor Security and Supply Chain V2.0 and establish its relationship to locked External Architecture.",
+      "current_exact_source_status": "SOURCE_NOT_LOCATED",
+      "current_repository_path": null,
+      "current_sha256": null,
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Search approved source locations for the exact named and versioned artifact; use the C0 checksum when one is available.",
+        "Preserve recovered bytes, source metadata, and chain of custody; do not reconstruct missing content.",
+        "Validate readability, completeness, version identity, and cross-canon compatibility.",
+        "Obtain a founder source-identity decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 25,
+      "record_id": "C0-042",
+      "family": "Master Configuration and Feature Flag Governance Model",
+      "resolution_track": "TRACK_D_MISSING_SOURCE_RECOVERY",
+      "current_category": "unresolved_source_evidence",
+      "resolution_focus": "Locate and authenticate Configuration and Feature Flag Governance V2.0 before assigning configuration authority.",
+      "current_exact_source_status": "SOURCE_NOT_LOCATED",
+      "current_repository_path": null,
+      "current_sha256": null,
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "NOT_ESTABLISHED",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Conduct source recovery and provenance verification only; do not infer adoption or lock from the current related artifact.",
+      "founder_decision_required": "SOURCE_IDENTITY_OR_SUCCESSION, then ADOPT and later LOCK",
+      "resolution_steps": [
+        "Search approved source locations for the exact named and versioned artifact; use the C0 checksum when one is available.",
+        "Preserve recovered bytes, source metadata, and chain of custody; do not reconstruct missing content.",
+        "Validate readability, completeness, version identity, and cross-canon compatibility.",
+        "Obtain a founder source-identity decision, then conduct separate adoption and lock reviews."
+      ],
+      "required_evidence": [
+        "recovered source bytes",
+        "SHA-256 and provenance record",
+        "comparison or source-identity report",
+        "founder succession/identity decision",
+        "adoption record",
+        "lock certificate"
+      ],
+      "completion_criteria": [
+        "exact source or founder-approved successor is identified",
+        "source conflict is resolved",
+        "adoption and lock are separately evidenced"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SOURCE_RECOVERY",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    },
+    {
+      "resolution_sequence": 26,
+      "record_id": "C0-043",
+      "family": "Master Platform Operations, Reliability, and Release Model",
+      "resolution_track": "TRACK_E_SUBSTANTIVE_FOUNDER_REVIEW",
+      "current_category": "substantive_founder_decision_required",
+      "resolution_focus": "Complete substantive founder review of Platform Operations V2.0 before any adoption or lock action.",
+      "current_exact_source_status": "EXACT_REPOSITORY_SOURCE_VERIFIED",
+      "current_repository_path": "docs/canon/candidates/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0.md",
+      "current_sha256": "16b3cbd473196903fdb1a3586b9e7e827ad8444a91633bf2e982cb821cecdaf7",
+      "expected_c0_sha256": null,
+      "hash_mismatch": false,
+      "founder_status": "PENDING_FOUNDER_DECISION",
+      "adoption_state": "NOT_ESTABLISHED",
+      "lock_state": "NOT_ESTABLISHED",
+      "next_authorized_work": "Prepare a constitutional review package and explicit founder decision matrix; no adoption preparation until substantive review is complete.",
+      "founder_decision_required": "ACCEPT, ACCEPT_WITH_MODIFICATION, DEFER, or REJECT",
+      "resolution_steps": [
+        "Review the exact candidate against controlling canon and the companion authority/dependency maps.",
+        "Identify substantive conflicts, missing boundaries, and retained follow-up without silently editing founder policy.",
+        "Present an exact founder decision package and preserve the resulting decision source.",
+        "Only after acceptance, open separate adoption and later lock reviews."
+      ],
+      "required_evidence": [
+        "exact candidate SHA-256",
+        "constitutional review",
+        "founder decision record",
+        "correction trace if modified",
+        "later adoption and lock evidence"
+      ],
+      "completion_criteria": [
+        "substantive founder disposition recorded",
+        "accepted bytes identified",
+        "separate adoption and lock completed"
+      ],
+      "target_state": "LIFECYCLE_VERIFIED_COMPLETE_AFTER_SUBSTANTIVE_REVIEW",
+      "stop_conditions": [
+        "source identity conflict",
+        "checksum failure",
+        "new P0 or P1 finding",
+        "cross-canon authority conflict",
+        "authority overclaim"
+      ],
+      "authority": {
+        "implementation": false,
+        "runtime": false,
+        "production": false,
+        "public_launch": false
+      }
+    }
+  ],
+  "authority": {
+    "source_recovery_planning": true,
+    "adoption_package_preparation": true,
+    "lock_package_preparation": true,
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false
+  }
+}

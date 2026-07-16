@@ -1,0 +1,95 @@
+{
+  "package": "EquineSync_Stage0_Companion_Reconciliation_V1_2",
+  "created": "2026-07-14",
+  "lifecycle": {
+    "founder_acceptance": "RECORDED",
+    "adoption": "NOT_GRANTED",
+    "lock": "NOT_GRANTED",
+    "implementation_authority": false,
+    "runtime_activation_authority": false,
+    "production_authority": false,
+    "public_launch_authority": false
+  },
+  "security_version_exception": {
+    "applies": true,
+    "package": "security_foundational_models_v1_0_founder_review_package.zip",
+    "rule": "The identified V1.0 security foundational artifacts control within their reconciled scope until expressly superseded by founder directive."
+  },
+  "files": [
+    {
+      "file": "03_MEDIA_FILES_DIGITAL_ASSET_GOVERNANCE_GAP_MATRIX_V1_1.md",
+      "sha256": "a4388f3df3b803ff1f9c30f6570cfaed6743248a5a092c5e4f892167e4e5b314",
+      "bytes": 61098
+    },
+    {
+      "file": "04_MEDIA_FILES_DIGITAL_ASSET_CLASSIFICATION_AND_HANDLING_MATRIX_V1_1.md",
+      "sha256": "f688ebdd0d1f6649792840e6cb6ee0a45de49c2899bd2d0b135a76dd0c73258e",
+      "bytes": 87677
+    },
+    {
+      "file": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1.docx",
+      "sha256": "58fa9b3b18d05a1f467c15de234cf18a9bc6a014394db6375fabd2ac8b928d6f",
+      "bytes": 511115
+    },
+    {
+      "file": "EQUINESYNC_CANON_DEPENDENCY_MAP_V1_1.md",
+      "sha256": "516856c982af8d882ec6f94933b5a01ea6558ca63d47c9a6237ee76fe0f12a44",
+      "bytes": 48610
+    },
+    {
+      "file": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_1.docx",
+      "sha256": "c370c94e8adc9c4b93e2f2fc4e4e72878c57cdc8e829571517302737ec2d3dac",
+      "bytes": 71077
+    },
+    {
+      "file": "EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_1.md",
+      "sha256": "1b614fafa17f5841363646e72191883db2bc2b8c5a54a959a6a0bf0f77c018fa",
+      "bytes": 114254
+    },
+    {
+      "file": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_1.docx",
+      "sha256": "df855e2e6169bdc25b0a9eb91931689c414ed1aa01dd22e3bec05bdddf7e5ac0",
+      "bytes": 63685
+    },
+    {
+      "file": "EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_1.md",
+      "sha256": "94badc3b6eeae1dd1d96d8c577a187bbdfe696df4db35e573629581a7856904e",
+      "bytes": 114020
+    },
+    {
+      "file": "EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1.md",
+      "sha256": "ee88f5e8ba3602ffecd3f15f5acc2d8881e58809645dac6d7038c3b1a4d0d0d0",
+      "bytes": 64520
+    },
+    {
+      "file": "EQUINESYNC_GOVERNANCE_COMPANION_ARTIFACTS_REVIEW_MEMORANDUM_V1_2.docx",
+      "sha256": "9d3a2a8c041ac8daead68ba37302f378f8e08309a584ad409514f9c7b70e06a3",
+      "bytes": 42655
+    },
+    {
+      "file": "EQUINESYNC_GOVERNANCE_COMPANION_ARTIFACTS_REVIEW_MEMORANDUM_V1_2.md",
+      "sha256": "44ff735f26bde07511e1c4c011a66b5c271dd0e9a4abdd8d62ef93f0d31ac523",
+      "bytes": 9542
+    },
+    {
+      "file": "EQUINESYNC_SECURITY_FOUNDATIONAL_MODELS_V1_0_FOUNDER_VERSION_EXCEPTION_DIRECTIVE_V1_0.docx",
+      "sha256": "05b1dfe08cb436c560fe6cb5e57d7d84271afcbfc9dc9b7738904cdb5851d2c0",
+      "bytes": 40109
+    },
+    {
+      "file": "EQUINESYNC_SECURITY_FOUNDATIONAL_MODELS_V1_0_FOUNDER_VERSION_EXCEPTION_DIRECTIVE_V1_0.md",
+      "sha256": "9bd05475d6b6f024199239a5e2fb4c4b865b501a707c5fc6ec7a9954ba28a66e",
+      "bytes": 5468
+    },
+    {
+      "file": "MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1.md",
+      "sha256": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+      "bytes": 111268
+    },
+    {
+      "file": "security_foundational_models_v1_0_founder_review_package.zip",
+      "sha256": "7207f3a65b63784271e70c2506d4075ec987bc16a40d2a917a79480f41afaa13",
+      "bytes": 27019
+    }
+  ]
+}

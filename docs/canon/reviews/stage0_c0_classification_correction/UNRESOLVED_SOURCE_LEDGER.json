@@ -1,0 +1,159 @@
+{
+  "generated": "2026-07-15",
+  "source_baseline_modified": false,
+  "rows": [
+    {
+      "record_id": "C0-001",
+      "artifact": "Founder Decision Register V1.1",
+      "classification": "EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED",
+      "expected_sha256": null,
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-008",
+      "artifact": "Cross-Canon Reference Normalization Register V1.1",
+      "classification": "EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED",
+      "expected_sha256": null,
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-046",
+      "artifact": "Governance Requirement Index V1.1",
+      "classification": "EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED",
+      "expected_sha256": null,
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-047",
+      "artifact": "Requirement Traceability Matrix V1.1",
+      "classification": "EXACT_STANDALONE_SOURCE_BYTES_NOT_MOUNTED_OR_REPOSITORY_LINKED",
+      "expected_sha256": null,
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-004",
+      "artifact": "Master Product Vision V2.1",
+      "classification": "EXACT_FILE_LIBRARY_SOURCE_LOCATED_BYTES_NOT_MOUNTED",
+      "expected_sha256": "42f01b4094923d85ab6b7de9c56fc6c084adac4f9b06464554ba2f9e91787953",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-005",
+      "artifact": "Master Ecosystem Model V2.1",
+      "classification": "EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED",
+      "expected_sha256": "5d600fec0bb674b5b9a961628e70453e3bd56083ad53edd19c974216ae18fa9c",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-012",
+      "artifact": "Master Horse Lifecycle V3.1",
+      "classification": "EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED",
+      "expected_sha256": "be225014b476d266d4effcd35fa8577da21d8646e53afbbf60ca3b6509ea0057",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-014",
+      "artifact": "Master Facility Domain Model V2.1",
+      "classification": "EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED",
+      "expected_sha256": "4b88f477677bb2147df44f766a36b07ca587421967ea510b00e20315a34d2590",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-015",
+      "artifact": "Master Barn Lifecycle V3.1",
+      "classification": "EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED",
+      "expected_sha256": "aebae6b952423435806837abf2fd9d5f1dd0dc96fca74810e78da50f0f80c47a",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-016",
+      "artifact": "Master Business Lifecycle V2.1",
+      "classification": "EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED",
+      "expected_sha256": "cd66ca4fcfdcc188ce5d6a44239ad52541c8a0be0c571d935405f64af6b72085",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-019",
+      "artifact": "Agreement Consent and Authorization V2.1",
+      "classification": "EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED",
+      "expected_sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-022",
+      "artifact": "Permission Model V1.1",
+      "classification": "EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED",
+      "expected_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-024",
+      "artifact": "Security and Trust V1.1",
+      "classification": "EXACT_PACKAGE_SOURCE_VERIFIED_REPOSITORY_PATH_UNRESOLVED",
+      "expected_sha256": "c12dc835724992a076870258bf42a9b0539eb976998d7a2416fefe60e99543b8",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-038",
+      "artifact": "External Architecture and Adapter V2.1",
+      "classification": "FOUNDER_ACCEPTED_SUCCESSOR_ADOPTION_LOCK_PENDING",
+      "expected_sha256": "ede6456d35f0629182fbd7f063d978ec5b10503bafa5695697e39f7618ebac23",
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-020",
+      "artifact": "Minor Guardian Safeguarding and Delegated Assistance",
+      "classification": "AUTHORIZED_DRAFT_REQUIRED",
+      "expected_sha256": null,
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-037",
+      "artifact": "Equine Health Welfare Medical Record and Clinical Support",
+      "classification": "AUTHORIZED_DRAFT_REQUIRED",
+      "expected_sha256": null,
+      "repository_path": null,
+      "open": true
+    },
+    {
+      "record_id": "C0-044",
+      "artifact": "Offline and Program Evidence",
+      "classification": "PARTIAL_OR_SUMMARY_EVIDENCE_ONLY",
+      "expected_sha256": null,
+      "repository_path": null,
+      "open": true
+    }
+  ],
+  "blocked_scans": [
+    "dependency_cycle",
+    "orphan_requirement_traceability"
+  ],
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "runtime": false,
+    "schema": false,
+    "migration": false,
+    "permission": false,
+    "production": false,
+    "public_claim": false,
+    "onboarding": false,
+    "launch": false
+  }
+}

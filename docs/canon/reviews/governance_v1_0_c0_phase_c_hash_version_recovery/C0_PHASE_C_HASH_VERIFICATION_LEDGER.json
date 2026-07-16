@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-07-16T08:32:07Z",
+  "checks": [
+    {
+      "row_id": "C0-004",
+      "current_verified": true,
+      "expected_recovered": false,
+      "recovered_verified": null
+    },
+    {
+      "row_id": "C0-005",
+      "current_verified": true,
+      "expected_recovered": false,
+      "recovered_verified": null
+    },
+    {
+      "row_id": "C0-012",
+      "current_verified": true,
+      "expected_recovered": false,
+      "recovered_verified": null
+    },
+    {
+      "row_id": "C0-014",
+      "current_verified": true,
+      "expected_recovered": false,
+      "recovered_verified": null
+    },
+    {
+      "row_id": "C0-015",
+      "current_verified": true,
+      "expected_recovered": false,
+      "recovered_verified": null
+    },
+    {
+      "row_id": "C0-016",
+      "current_verified": true,
+      "expected_recovered": false,
+      "recovered_verified": null
+    },
+    {
+      "row_id": "C0-019",
+      "current_verified": true,
+      "expected_recovered": true,
+      "recovered_verified": true
+    },
+    {
+      "row_id": "C0-022",
+      "current_verified": true,
+      "expected_recovered": true,
+      "recovered_verified": true
+    },
+    {
+      "row_id": "C0-028",
+      "current_verified": true,
+      "expected_recovered": true,
+      "recovered_verified": true
+    }
+  ]
+}

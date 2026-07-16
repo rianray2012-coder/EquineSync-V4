@@ -1,0 +1,30 @@
+{
+  "disposition": "FOUNDER_RATIFIED_CONTROLLING_AI_V2_0_DECISION_MATRIX",
+  "ratification_recorded_at_utc": "2026-07-16T04:24:18Z",
+  "directive": {
+    "path": "docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/source_uploaded/AI_V2_0_FOUNDER_DECISION_MATRIX_RATIFICATION_DIRECTIVE.txt",
+    "sha256": "e18bd3618241f2cd0b38af30d970933c732af1d87088fd88ad5fa45dac605425"
+  },
+  "source": {
+    "path": "docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+    "sha256": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+    "bytes": 140809,
+    "section": "96. Founder Decisions Incorporated"
+  },
+  "decision_ids": ["AI-FD01","AI-FD02","AI-FD03","AI-FD04","AI-FD05","AI-FD06","AI-FD07","AI-FD08","AI-FD09","AI-FD10","AI-FD11","AI-FD12"],
+  "administrative_identifiers_only": true,
+  "section_96_controls": true,
+  "historical_register_claimed": false,
+  "closed_finding": "AI-V2-P1-FOUNDER-DECISION-MATRIX-RATIFICATION-PENDING",
+  "authority": {
+    "adoption": false,
+    "lock": false,
+    "implementation": false,
+    "runtime": false,
+    "provider_activation": false,
+    "customer_data_transfer": false,
+    "training": false,
+    "production": false,
+    "public_launch": false
+  }
+}

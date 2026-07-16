@@ -1,0 +1,271 @@
+diff --git a/docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1.md b/docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md
+index 22d17ce..2036d6f 100644
+--- a/docs/canon/reviews/stage0_companion_reconciliation_v1_2/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1.md
++++ b/docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md
+@@ -3,15 +3,15 @@
+ **CONSTITUTIONAL VOCABULARY  
+ AND DEFINITIONS INDEX**
+ 
+-VERSION 1.1
++VERSION 1.2
+ 
+ *Every Horse. Every Task. In Sync.*
+ 
+-| **Document Identifier**      | EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_1 |
++| **Document Identifier**      | EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2 |
+ |------------------------------|-----------------------------------------------------------------|
+ | **Document Type**            | Constitutional Support Artifact / Controlled Vocabulary Index   |
+ | **Status**                   | Founder Accepted Constitutional Support Artifact                |
+-| **Date**                     | July 14, 2026                                                   |
++| **Date**                     | July 15, 2026                                                   |
+ | **Implementation Authority** | FALSE                                                           |
+ | **Production Authority**     | FALSE                                                           |
+ | **Public Launch Authority**  | FALSE                                                           |
+@@ -2190,6 +2190,238 @@ Related Terms: Consent; Revocation; Termination
+ 
+ Status: Canonical
+ 
++## Safeguarding and Protected-Participant Terms Added in V1.2
++
++### Minor
++
++Definition: A person treated as under the age of legal majority or otherwise subject to minor-specific protection under applicable law or the governing participation context. EquineSync shall use a default under-18 presumption unless reliable jurisdictional evidence establishes a different rule.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Protected Participant; Guardian; Age of Majority
++
++Status: Canonical
++
++### Protected Participant
++
++Definition: A person entitled to heightened participation, privacy, communication, access, or safeguarding protections because the person is: - a minor; - subject to guardianship, conservatorship, supported decision-making, or comparable authority arrangement; - materially limited in the ability to provide informed authorization for the relevant matter; - subject to an active safeguarding or protective restriction; - an alleged victim, reporter, or witness whose identity or safety requires additional protection; - temporarily designated through a documented protective process. Protected-participant status must not be inferred solely from diagnosis, disability, age, communication style, reputation, or administrative convenience.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Minor; Guardian; Protective Restriction
++
++Status: Canonical
++
++### Guardian
++
++Definition: A person or legally recognized entity holding verified and scoped authority or responsibility for a minor or protected participant. Guardian status is distinct from parentage, household relationship, payer status, emergency-contact status, account ownership, and general caregiving.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Guardian Authority Record; Minor; Protected Participant
++
++Status: Canonical
++
++### Guardian Authority Record
++
++Definition: The governed record identifying the guardian, protected participant, authority source, scope, restrictions, effective dates, evidence, notice rights, communication rights, pickup rights, and dispute status.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Guardian; Authority Basis; Effective Time
++
++Status: Canonical
++
++### Assent
++
++Definition: An age-appropriate and capacity-appropriate expression of agreement, willingness, or participation by a minor or protected participant. Assent is distinct from legal consent, guardian authorization, contractual assent, and permission.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Consent; Protected Refusal; Guardian Authorization
++
++Status: Canonical
++
++### Protected Refusal
++
++Definition: A clear expression by a minor or protected participant declining optional publicity, optional communication, optional research, nonessential social exposure, or another non-mandatory activity. A protected refusal must be respected unless a documented safety, legal, emergency, or essential-care basis requires a different action.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Assent; Optional Participation; Withdrawal
++
++Status: Canonical
++
++### Adult Third Party
++
++Definition: An adult other than the protected participant's verified parent or guardian who interacts with the protected participant through a coaching, training, instructional, employment, volunteer, provider, facility, transportation, service, community, or operational role.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Trainer or Coach; Adult Eligibility State; Guardian
++
++Status: Canonical
++
++### Trainer or Coach
++
++Definition: An adult or organization providing riding, horse-care, athletic, instructional, training, performance, or related guidance, regardless of title, compensation, employment status, or platform role.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Adult Third Party; Adult Eligibility State; Protected Participant
++
++Status: Canonical
++
++### Safeguarding Concern
++
++Definition: Information indicating possible abuse, neglect, exploitation, grooming, harassment, boundary violation, retaliation, prohibited communication, unsafe release, unsafe transportation, coercion, privacy violation, or another threat to a protected participant.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Protected Safeguarding Intake; Safeguarding Case; Protective Restriction
++
++Status: Canonical
++
++### Safeguarding Authority
++
++Definition: A qualified and expressly authorized person or body permitted to receive, triage, preserve, restrict, review, escalate, or resolve safeguarding matters within a defined scope.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Safeguarding Case; Protective Restriction; External Reporting Duty
++
++Status: Canonical
++
++### Protective Restriction
++
++Definition: A temporary or continuing limitation on contact, messaging, access, assignment, pickup, transportation, media, visibility, participation, or another capability imposed to reduce safeguarding risk. A protective restriction is not itself a finding of guilt or liability.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Safety Plan; Emergency Access; Safeguarding Case
++
++Status: Canonical
++
++### Ordinary Electronic Communication
++
++Definition: Any non-safeguarding message, reply, file transmission, media transmission, email, SMS, integrated notice response, chat, or comparable electronic exchange between an adult third party and a minor.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Communication Consent; Protected Safeguarding Intake; Guardian
++
++Status: Canonical
++
++### Protected Safeguarding Intake
++
++Definition: A dedicated channel for reporting safeguarding concerns that is segregated from ordinary communication, subject to restricted visibility, and capable of protecting a reporter from unsafe guardian or accused-person disclosure.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Safeguarding Concern; Confidential Report; Guardian Notification Exception
++
++Status: Canonical
++
++### Adult Eligibility State
++
++Definition: The governed status determining whether an adult may receive protected-participant access, assignments, communication capability, pickup authority, transportation authority, or another protected role.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Adult Third Party; Trainer or Coach; Protective Restriction
++
++Status: Canonical
++
++### Observable and Interruptible Interaction
++
++Definition: An interaction structured so that an authorized person can observe, enter, interrupt, or review the interaction without hidden or isolated conditions inconsistent with the approved activity.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Protected Participant; Supervision; Safety Plan
++
++Status: Canonical
++
++### Safeguarding Case
++
++Definition: The governed case object that connects an intake, affected participants, reporter and witness information, alleged conduct, responding persons, interim protections, evidence, external referrals, review actions, decisions, appeals, and closure history. A Safeguarding Case is distinct from an ordinary incident, message thread, personnel note, customer-support ticket, or generic task.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Safeguarding Concern; Responding Person; Audit Evidence
++
++Status: Canonical
++
++### Responding Person
++
++Definition: A person whose conduct, access, eligibility, communication, or relationship is being reviewed in connection with a safeguarding concern. A Responding Person must not be labeled as an offender, abuser, dangerous person, or responsible party merely because a report or interim restriction exists.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Safeguarding Case; Procedural Fairness; Protective Restriction
++
++Status: Canonical
++
++### Good-Faith Report
++
++Definition: A report made with an honest belief that the information may indicate a safeguarding concern, even if the concern is later unsubstantiated, mistaken, incomplete, or unable to be determined.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Safeguarding Concern; Non-Retaliation; Knowingly False or Malicious Report
++
++Status: Canonical
++
++### Knowingly False or Malicious Report
++
++Definition: A report shown through an authorized process to have been intentionally fabricated or knowingly submitted for an improper retaliatory or harmful purpose. A mistaken, unsupported, withdrawn, or unsubstantiated report is not, without additional evidence, a knowingly false or malicious report.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Good-Faith Report; Retaliation; Safeguarding Case
++
++Status: Canonical
++
++### External Reporting Duty
++
++Definition: A legal, regulatory, governing-body, insurance, contractual, emergency, or professional duty requiring information or a concern to be reported outside EquineSync or outside the customer organization. An internal workflow must not delay, replace, narrow, or falsely represent satisfaction of an External Reporting Duty.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Mandated Reporter; Safeguarding Authority; Notice
++
++Status: Canonical
++
++### Mandated Reporter
++
++Definition: A person or role that may have a legally or professionally imposed duty to report specified concerns to an external authority. EquineSync may record and support the workflow but does not independently determine whether a person is a Mandated Reporter or provide legal advice.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: External Reporting Duty; Safeguarding Concern; Safeguarding Authority
++
++Status: Canonical
++
++### Safety Plan
++
++Definition: A documented, minimum-necessary set of temporary or continuing measures designed to reduce identified risk while preserving participation, privacy, fairness, and review rights to the extent reasonably possible.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Protective Restriction; Protected Participant; Emergency Action
++
++Status: Canonical
++
++### Conflict of Interest
++
++Definition: A personal, supervisory, financial, familial, organizational, legal, or other interest that could materially impair, or reasonably appear to impair, a person's impartial handling of a safeguarding matter.
++
++Primary Owner: MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_1
++
++Related Terms: Recusal; Safeguarding Authority; Independent Review
++
++Status: Canonical
++
+ # 5. Interpretation and Maintenance
+ 
+ This Index should be updated whenever a new constitutional document is
+@@ -2229,3 +2461,8 @@ Creation or founder acceptance of this Index does not authorize schema
+ creation, code changes, migrations, permissions, data processing,
+ provider activation, production mutation, public claims, or launch. It
+ is a constitutional navigation and interpretation artifact only.
++
++
++# 8. V1.2 Safeguarding Integration Change Record
++
++V1.2 adds 23 canonical safeguarding and protected-participant terms from the founder-approved V1.1 source. The source canon retains substantive ownership of each definition.

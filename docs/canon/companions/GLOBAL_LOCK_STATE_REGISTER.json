@@ -1,0 +1,200 @@
+{
+  "generated_at": "2026-07-16T20:22:52Z",
+  "entries": [
+    {
+      "artifact": "Constitutional Canon Index and Navigator",
+      "path": "docs/canon/CANON_INDEX.md",
+      "lock_state": "not separately locked",
+      "evidence_sha256": "2df377ef5192592d0c75deb816c31efc966c3f97849db9fdb4b7506556e65d77"
+    },
+    {
+      "artifact": "Constitutional Vocabulary and Definitions Index",
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_VOCABULARY_AND_DEFINITIONS_INDEX_V1_2.md",
+      "lock_state": "not established",
+      "evidence_sha256": "aa8888de9f0e60a5c30dffc5f86838129e44f24c2bc65d98ec940056251155fe"
+    },
+    {
+      "artifact": "Constitutional Domain Ownership and Boundary Register",
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CONSTITUTIONAL_DOMAIN_OWNERSHIP_AND_BOUNDARY_REGISTER_V1_1.md",
+      "lock_state": "not established",
+      "evidence_sha256": "6be760d6b5f274097074d16fcee805aea3249b51058d5998abff4235945adc75"
+    },
+    {
+      "artifact": "Cross-Canon Reference Normalization Register V1.0",
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/source/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_0.md",
+      "lock_state": "not established",
+      "evidence_sha256": "b4a58b2071c7dcd216ad811ff8b36ae97e0e73e80e5cbf06e7ffdf4e87cd5bfe"
+    },
+    {
+      "artifact": "Cross-Canon Reference Normalization Register V1.1",
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/CROSS_CANON_REFERENCE_NORMALIZATION_REGISTER_V1_1.md",
+      "lock_state": "not locked",
+      "evidence_sha256": "9a41067be17c667dd70328ac7c7c53bf3029bd478b3f8f9b6fd8964842c06833"
+    },
+    {
+      "artifact": "Constitutional Authority Matrix",
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_AUTHORITY_MATRIX_V1_2.md",
+      "lock_state": "not locked",
+      "evidence_sha256": "31102a8f399d51449807f6bb65c9775e931b5796d2602b029e4a0afb634ade7f"
+    },
+    {
+      "artifact": "Canon Dependency Map",
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CANON_DEPENDENCY_MAP_V1_2.md",
+      "lock_state": "not locked",
+      "evidence_sha256": "7262277efc185c78b911d85fb6d3b8c2556ebe6f5b3b8b5a97b85a34517fa24c"
+    },
+    {
+      "artifact": "Constitutional Cross-Reference Index",
+      "path": "docs/canon/reviews/parallel_safeguarding_companion_reconciliation_v1_0/source_package/extracted/EQUINESYNC_CONSTITUTIONAL_CROSS_REFERENCE_INDEX_V1_2.md",
+      "lock_state": "not locked",
+      "evidence_sha256": "6e810af409884936ad25f709d0f482f859765a84a5437625e635b1fcdcc239cb"
+    },
+    {
+      "artifact": "Constitutional Source-of-Truth Register",
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_CONSTITUTIONAL_SOURCE_OF_TRUTH_REGISTER_V1_0.csv",
+      "lock_state": "not locked",
+      "evidence_sha256": "fd5923e14eb095b56ecdb3025f85aab529f7576a582c553c420f7655fdd66826"
+    },
+    {
+      "artifact": "Adoption State Register",
+      "path": "docs/canon/registries/CANON_STATE_AND_LOCK_REGISTRY.md",
+      "lock_state": "not separately locked",
+      "evidence_sha256": "0588986eb310d87095010d6419df6a035271fc87721f470e8af3a8e72babe7a4"
+    },
+    {
+      "artifact": "Lock Register",
+      "path": "docs/canon/registries/CANON_LOCK_LEDGER.md",
+      "lock_state": "not separately locked",
+      "evidence_sha256": "5374b960109e532c584c0dba398995a3dcdac8f838164eb3393fba2465c0d797"
+    },
+    {
+      "artifact": "Historical Provenance and Supersession Evidence",
+      "path": "docs/canon/CANON_HISTORICAL_PROVENANCE_EXCEPTION_LEDGER.md",
+      "lock_state": "not separately locked",
+      "evidence_sha256": "4e4c1cbc42539b4e721675f6f7c39f9ed1483389f2c38fa61e647836d7a686e0"
+    },
+    {
+      "artifact": "Unresolved Evidence Ledger",
+      "path": "docs/canon/reviews/c0_source_reconciliation_v1_0/EQUINESYNC_C0_UNRESOLVED_EVIDENCE_CLASSIFICATION_LEDGER_V1_0.md",
+      "lock_state": "not locked",
+      "evidence_sha256": "7b2a6a710650092330573ec9347b2df4cf720d7ecedecb0010642be1acef4eb6"
+    },
+    {
+      "artifact": "Current founder directive",
+      "path": "docs/canon/reviews/global_companion_reconciliation_v1_0/source/GLOBAL_COMPANION_RECONCILIATION_FOUNDER_DIRECTIVE.txt",
+      "lock_state": "not applicable",
+      "evidence_sha256": "7a12bf6dc13290551a39dc8214ed326bb282ef8fb9e91a203f7b33dfd5a4a1fd"
+    },
+    {
+      "artifact": "AI V2.0 lock evidence",
+      "path": "docs/canon/reviews/governance_v1_0_ai_reconciliation/resumption_exact_source/phase_r7/AI_V2_0_FINAL_LOCK_CERTIFICATE.json",
+      "lock_state": "locked",
+      "evidence_sha256": "ada602ea82dd73afadd3c9d7422a3e2929f7b075e2366368940422d49c0fa3a1"
+    },
+    {
+      "artifact": "Master Privacy and Data Protection Model V2.0",
+      "path": "docs/canon/founder_approved_sources/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/privacy_v2_0/C0_023_PRIVACY_AND_DATA_PROTECTION_CONSTITUTIONAL_LOCK_RECORD.md",
+      "evidence_sha256": "af74e56192444a52d9c60b49d3179ef9c59b3434422189321de3a7c5abc31709"
+    },
+    {
+      "artifact": "Master Reporting, Analytics, and Business Intelligence Model V2.0",
+      "path": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/reporting_analytics_v2_0/C0_035_MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "67b25cc23230492b9c8164c7a0b116f74109a623d544566a01b60425fe646f4f"
+    },
+    {
+      "artifact": "Master Ecosystem Model",
+      "path": "docs/canon/adopted_sources/MASTER_ECOSYSTEM_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/ecosystem_v2_1/C0_005_MASTER_ECOSYSTEM_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07"
+    },
+    {
+      "artifact": "Master Horse Lifecycle and Passport Model",
+      "path": "docs/canon/adopted_sources/MASTER_HORSE_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/horse_lifecycle_v3_1/C0_012_MASTER_HORSE_LIFECYCLE_AND_PASSPORT_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf"
+    },
+    {
+      "artifact": "Master Facility Domain Model",
+      "path": "docs/canon/adopted_sources/MASTER_FACILITY_DOMAIN_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d"
+    },
+    {
+      "artifact": "Master Barn Lifecycle and Operations Canon",
+      "path": "docs/canon/adopted_sources/MASTER_BARN_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/barn_lifecycle_v3_1/C0_015_MASTER_BARN_LIFECYCLE_AND_OPERATIONS_CANON_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a"
+    },
+    {
+      "artifact": "Master Business Lifecycle Model",
+      "path": "docs/canon/adopted_sources/MASTER_BUSINESS_LIFECYCLE_V2_1_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/business_lifecycle_v2_1/C0_016_MASTER_BUSINESS_LIFECYCLE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d"
+    },
+    {
+      "artifact": "Master Permission and Access-Control Model",
+      "path": "docs/canon/adopted_sources/MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_V1_1_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/permission_access_control_v1_1/C0_022_MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3"
+    },
+    {
+      "artifact": "Master Claims, Disputes, and Authority Model",
+      "path": "docs/canon/adopted_sources/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/claims_disputes_authority_v2_0/C0_028_MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626"
+    },
+    {
+      "artifact": "Master Search, Discovery, Ranking, and Retrieval Model",
+      "path": "docs/canon/adopted_sources/MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/search_discovery_v2_0/C0_033_MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67"
+    },
+    {
+      "artifact": "Master Developer, Platform, and Integration Governance Model",
+      "path": "docs/canon/adopted_sources/MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/developer_platform_integration_v2_0/C0_039_MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e"
+    },
+    {
+      "artifact": "Master Platform Extensibility and Plugin Governance Model",
+      "path": "docs/canon/adopted_sources/MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/platform_extensibility_plugin_v2_0/C0_040_MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f"
+    },
+    {
+      "artifact": "Master Vendor Security and Supply Chain Model",
+      "path": "docs/canon/adopted_sources/MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/vendor_security_supply_chain_v2_0/C0_041_MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "7561351c796d433ac6b9da1eb66eccc53acc2244c764903f6a844d44da704361"
+    },
+    {
+      "artifact": "Master Configuration and Feature Flag Governance Model",
+      "path": "docs/canon/adopted_sources/MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/configuration_feature_flag_v2_0/C0_042_MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8"
+    },
+    {
+      "artifact": "Master Platform Operations, Reliability, and Release Model",
+      "path": "docs/canon/adopted_sources/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "lock_state": "locked",
+      "evidence": "docs/canon/locks/platform_operations_reliability_release_v2_0/C0_043_MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_CONSTITUTIONAL_LOCK_RECORD.md",
+      "immutable_sha256": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596"
+    }
+  ]
+}

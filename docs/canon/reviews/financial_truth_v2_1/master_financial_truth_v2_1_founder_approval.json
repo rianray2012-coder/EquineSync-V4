@@ -1,0 +1,30 @@
+{
+  "artifact": "MASTER_FINANCIAL_TRUTH_AND_RESPONSIBILITY_MODEL_V2_1.md",
+  "version": "2.1",
+  "founder_decision": "APPROVED_FOR_CONTROLLED_ADOPTION_AND_LOCK",
+  "canon_status": "ADOPTED",
+  "lock_state": "LOCKED",
+  "constitutional_authority": "CONTROLLING",
+  "supersession_status": "ALL_PRIOR_V1_0_AND_V2_0_CANDIDATES_SUPERSEDED",
+  "locked_at": "2026-07-13T18:44:51Z",
+  "immutable_sha256": "0a5302bba0240ba6acd9871b7453916ff212f91ce2f1622b9a4e236701f52604",
+  "source_commit": "9f812280542f6e9c43935563badec2de1448947b",
+  "working_tree_classification": "reviewed governance-only overlay",
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "retained_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "schema_or_migration": false,
+    "payment_provider_activation": false,
+    "connected_account_onboarding": false,
+    "production_financial_mutation": false,
+    "accounting_write_synchronization": false,
+    "collections_or_service_restriction": false,
+    "public_launch": false
+  },
+  "lifecycle": "DRAFTED_V2_1 -> CONTROLLED_CROSS_CANON_REVIEW -> FOUNDER_APPROVED -> CONTROLLED_ADOPTION -> LOCKED",
+  "terminal_state": "FINANCIAL_TRUTH_AND_RESPONSIBILITY_V2_1_ADOPTED_AND_LOCKED"
+}
