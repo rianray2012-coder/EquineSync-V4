@@ -1,0 +1,52 @@
+{
+  "schema": "equinesync.global-governance-lock-certificate.v1",
+  "baseline": "EQUINESYNC_GLOBAL_GOVERNANCE_V1_0",
+  "disposition": "LOCKED",
+  "founder_authority": "LOCK_GLOBAL_GOVERNANCE_V1",
+  "locked_at": "2026-07-17T00:47:19Z",
+  "baseline_manifest": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_BASELINE_MANIFEST.json",
+  "baseline_manifest_sha256": "f5666ebffbfe527f6d01eb7fe7fbe9f21de541b7b3afe5c4a1fe2d1b3379bfe9",
+  "lock_record": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_LOCK_RECORD.md",
+  "lock_record_sha256": "16c9b4c4f16f078c036c0768da38ae0d70cc643b10f9b5d76a50205a426ba551",
+  "validation_report": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_VALIDATION_REPORT.json",
+  "validation_report_sha256": "5471359fa5dfac762f7ec7078ccf60f67bbec8bf1ceabee40ff28fa45ddea687",
+  "file_count": 2208,
+  "source_bytes": 255522257,
+  "verification": {
+    "aggregate_manifest_passed": 2208,
+    "aggregate_manifest_failed": 0,
+    "lock_ledger_passed": 29,
+    "lock_ledger_failed": 0,
+    "lock_certificates_passed": 23,
+    "lock_certificates_failed": 0,
+    "json_passed": 239,
+    "json_failed": 0,
+    "secret_hits": 0,
+    "files_over_50_mb": 0,
+    "preservation_aware_diff_findings": 0
+  },
+  "retained_nonblocking_observations": [
+    "HISTORICAL_POINT_IN_TIME_MANIFEST_TARGETS_HAVE_EVOLVED_OR_REMAIN_EXTERNAL",
+    "PRESERVED_MARKDOWN_HARD_BREAK_WHITESPACE"
+  ],
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "integration_activation": false,
+    "deployment": false,
+    "production": false,
+    "customer_data_processing": false,
+    "public_launch": false,
+    "certification": false,
+    "public_trust_claim": false
+  },
+  "tag": "equinesync-governance-v1.0-locked-2026-07-16",
+  "tag_target": "TO_BE_RECORDED_BY_GIT_TAG_EVENT"
+}

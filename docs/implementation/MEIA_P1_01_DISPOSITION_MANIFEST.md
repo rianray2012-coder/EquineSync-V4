@@ -1,0 +1,16 @@
+# MEIA-P1-01 Disposition Manifest
+
+**Disposition:** `APPROVE_AS_RECOMMENDED`  
+**State:** `RESOLVED_FOR_ATLAS_V1_0_ADOPTION`
+
+| Artifact | SHA-256 |
+| --- | --- |
+| `docs/implementation/MEIA_P1_01_FINAL_FOUNDER_DISPOSITION.md` | `b4da592606bcdf6a8801a1e27a323aef1ae107f40bb6850158693d874066aa5a` |
+| `docs/implementation/MEIA_P1_01_EVIDENCE_VERIFICATION_REPORT.md` | `29e975c850cada0ec84968e657b0431b5055b1df22f33cbbd94412a69817b4e0` |
+| `docs/implementation/MEIA_P1_01_SERVICE_STATE_RECONCILIATION_MATRIX.md` | `a6d6bd9e7f1c6f49388a473b1a8069aede159bb95bb6472349a73b452620bf46` |
+| `docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0.md` | `bfa77b5e03fd9a75c8865b723794ee2da687754f030e72022f1476b9af6021d8` |
+| `docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_P1_RESOLUTION_MATRIX.md` | `d768f709f9b3fb4810f272496a55aff0ac1a3cafa624ae6686fed7626c993d93` |
+| `docs/canon/registries/GOVERNANCE_FINDING_REGISTRY.md` | `79dcb6ad6abf0e6f4e1762c9697a91edb3ad487752293f9934f42635c338edfd` |
+| `docs/FOUNDER_ACCEPTANCE_LEDGER.md` | `f45730ef85f6cea02f59131aff17f23cdb2d32fcf243200e977dc65a5cb5a05f` |
+
+Service activation and production authority remain `FALSE`.

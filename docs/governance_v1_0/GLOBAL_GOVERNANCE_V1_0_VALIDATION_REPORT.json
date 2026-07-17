@@ -1,0 +1,441 @@
+{
+  "schema": "equinesync.global-governance-validation.v1",
+  "generated_at": "2026-07-17T00:48:14Z",
+  "disposition": "READY_FOR_COMMIT_AND_CLEAN_CLONE_VERIFICATION",
+  "aggregate_manifest": {
+    "path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_BASELINE_MANIFEST.json",
+    "sha256": "f5666ebffbfe527f6d01eb7fe7fbe9f21de541b7b3afe5c4a1fe2d1b3379bfe9",
+    "entries": 2208,
+    "passed": 2208,
+    "failed": 0
+  },
+  "structured_data": {
+    "passed": 239,
+    "failed": 0,
+    "failures": []
+  },
+  "secret_scan": {
+    "hits": 0,
+    "paths": []
+  },
+  "large_files": {
+    "over_50_mb": 0,
+    "maximum_bytes": 2106518
+  },
+  "current_lock_ledger": {
+    "rows": 29,
+    "passed": 29,
+    "failed": 0,
+    "details": [
+      {
+        "family": "Master Horse Transfer and Continuity Policy",
+        "path": "docs/canon/MASTER_HORSE_TRANSFER_AND_CONTINUITY_POLICY.md",
+        "expected": "a54fd42261d99819f26ac77a6e207f121049a3c4f6d2e69e3b6e7b5167435c6b",
+        "observed": "a54fd42261d99819f26ac77a6e207f121049a3c4f6d2e69e3b6e7b5167435c6b",
+        "result": "PASS"
+      },
+      {
+        "family": "Master External Architecture and Adapter Model",
+        "path": "docs/canon/MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0.md",
+        "expected": "0cdad90cb5929588ee137e9835f6b499c3651159381960fbfad436dfcd0fa18d",
+        "observed": "0cdad90cb5929588ee137e9835f6b499c3651159381960fbfad436dfcd0fa18d",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Identity, Account, and Actor Model",
+        "path": "docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0.md",
+        "expected": "1c79c20a2edd2e7e3907e875679c5871d53c146a226364fb0cc3f956d39f5d0e",
+        "observed": "1c79c20a2edd2e7e3907e875679c5871d53c146a226364fb0cc3f956d39f5d0e",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Financial Truth and Responsibility Model",
+        "path": "docs/canon/MASTER_FINANCIAL_TRUTH_AND_RESPONSIBILITY_MODEL_V2_1.md",
+        "expected": "0a5302bba0240ba6acd9871b7453916ff212f91ce2f1622b9a4e236701f52604",
+        "observed": "0a5302bba0240ba6acd9871b7453916ff212f91ce2f1622b9a4e236701f52604",
+        "result": "PASS"
+      },
+      {
+        "family": "Master AI Governance and Decision Boundary Model",
+        "path": "docs/canon/MASTER_AI_GOVERNANCE_AND_DECISION_BOUNDARY_MODEL_V2_0.docx",
+        "expected": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+        "observed": "414e912c9caec58573558a5fa3e7519db59506b7a903879db3af33e840c0d1e8",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Minor, Guardianship, Safeguarding, and Protected Participant Model",
+        "path": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+        "expected": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+        "observed": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Equine Health, Welfare, Medical Record, and Clinical Support Model",
+        "path": "docs/canon/adopted_sources/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md",
+        "expected": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+        "observed": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Data Protection, Encryption, and Key Management Model",
+        "path": "docs/canon/adopted_sources/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0_ADOPTED_SOURCE.md",
+        "expected": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+        "observed": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Record Stewardship and Retention Model",
+        "path": "docs/canon/adopted_sources/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1_ADOPTED_SOURCE.md",
+        "expected": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+        "observed": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Audit Event and Evidence Model",
+        "path": "docs/canon/adopted_sources/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+        "observed": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Communication, Notification, and Notice Model",
+        "path": "docs/canon/adopted_sources/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+        "observed": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Security Incident Response and Disclosure Model",
+        "path": "docs/canon/adopted_sources/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0_ADOPTED_SOURCE.md",
+        "expected": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+        "observed": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Platform Resilience, Backup, and Recovery Operational Model",
+        "path": "docs/canon/adopted_sources/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0_ADOPTED_SOURCE.md",
+        "expected": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+        "observed": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Media, Files, and Digital Asset Governance Model",
+        "path": "docs/canon/adopted_sources/MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1_ADOPTED_SOURCE.md",
+        "expected": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+        "observed": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Privacy and Data Protection Model",
+        "path": "docs/canon/founder_approved_sources/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_FOUNDER_APPROVED.md",
+        "expected": "8f323e3d4d0782c5aa017c6b904b7c42c9bf4ab8ee72170ea8f7a003505184fd",
+        "observed": "8f323e3d4d0782c5aa017c6b904b7c42c9bf4ab8ee72170ea8f7a003505184fd",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Ecosystem Model",
+        "path": "docs/canon/adopted_sources/MASTER_ECOSYSTEM_MODEL_V2_1_ADOPTED_SOURCE.md",
+        "expected": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+        "observed": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Horse Lifecycle and Passport Model",
+        "path": "docs/canon/adopted_sources/MASTER_HORSE_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+        "expected": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+        "observed": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Facility Domain Model",
+        "path": "docs/canon/adopted_sources/MASTER_FACILITY_DOMAIN_MODEL_V2_1_ADOPTED_SOURCE.md",
+        "expected": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+        "observed": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Barn Lifecycle and Operations Canon",
+        "path": "docs/canon/adopted_sources/MASTER_BARN_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+        "expected": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+        "observed": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Business Lifecycle Model",
+        "path": "docs/canon/adopted_sources/MASTER_BUSINESS_LIFECYCLE_V2_1_ADOPTED_SOURCE.md",
+        "expected": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+        "observed": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Permission and Access-Control Model",
+        "path": "docs/canon/adopted_sources/MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_V1_1_ADOPTED_SOURCE.md",
+        "expected": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+        "observed": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Claims, Disputes, and Authority Model",
+        "path": "docs/canon/adopted_sources/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+        "observed": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Search, Discovery, Ranking, and Retrieval Model",
+        "path": "docs/canon/adopted_sources/MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+        "observed": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Developer, Platform, and Integration Governance Model",
+        "path": "docs/canon/adopted_sources/MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+        "observed": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Platform Extensibility and Plugin Governance Model",
+        "path": "docs/canon/adopted_sources/MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f",
+        "observed": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Vendor Security and Supply Chain Model",
+        "path": "docs/canon/adopted_sources/MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "7561351c796d433ac6b9da1eb66eccc53acc2244c764903f6a844d44da704361",
+        "observed": "7561351c796d433ac6b9da1eb66eccc53acc2244c764903f6a844d44da704361",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Configuration and Feature Flag Governance Model",
+        "path": "docs/canon/adopted_sources/MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+        "observed": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Platform Operations, Reliability, and Release Model",
+        "path": "docs/canon/adopted_sources/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+        "observed": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+        "result": "PASS"
+      },
+      {
+        "family": "Master Reporting, Analytics, and Business Intelligence Model",
+        "path": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+        "expected": "67b25cc23230492b9c8164c7a0b116f74109a623d544566a01b60425fe646f4f",
+        "observed": "67b25cc23230492b9c8164c7a0b116f74109a623d544566a01b60425fe646f4f",
+        "result": "PASS"
+      }
+    ]
+  },
+  "lock_certificates": {
+    "certificates": 23,
+    "explicit_source_checks": 23,
+    "passed": 23,
+    "failed": 0,
+    "details": [
+      {
+        "certificate": "docs/canon/locks/audit_event_evidence_v2_0/C0_027_AUDIT_EVENT_AND_EVIDENCE_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+        "observed": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/barn_lifecycle_v3_1/C0_015_MASTER_BARN_LIFECYCLE_AND_OPERATIONS_CANON_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_BARN_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+        "expected": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+        "observed": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/business_lifecycle_v2_1/C0_016_MASTER_BUSINESS_LIFECYCLE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_BUSINESS_LIFECYCLE_V2_1_ADOPTED_SOURCE.md",
+        "expected": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+        "observed": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/claims_disputes_authority_v2_0/C0_028_MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+        "observed": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/communication_notice_v2_0/C0_029_COMMUNICATION_NOTIFICATION_AND_NOTICE_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+        "observed": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/configuration_feature_flag_v2_0/C0_042_MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+        "observed": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/data_protection_encryption_v1_0/C0_025_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0_ADOPTED_SOURCE.md",
+        "expected": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+        "observed": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/developer_platform_integration_v2_0/C0_039_MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+        "observed": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/ecosystem_v2_1/C0_005_MASTER_ECOSYSTEM_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_ECOSYSTEM_MODEL_V2_1_ADOPTED_SOURCE.md",
+        "expected": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+        "observed": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/equine_health_v1_1/C0_037_EQUINE_HEALTH_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md",
+        "expected": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+        "observed": "c0d08f71e63302d6847560b39dae2e3b68caaee5b5a2bc2927ff80daf969926c",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_FACILITY_DOMAIN_MODEL_V2_1_ADOPTED_SOURCE.md",
+        "expected": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+        "observed": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/horse_lifecycle_v3_1/C0_012_MASTER_HORSE_LIFECYCLE_AND_PASSPORT_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_HORSE_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+        "expected": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+        "observed": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/media_governance_v2_1/C0_032_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_MEDIA_FILES_AND_DIGITAL_ASSET_GOVERNANCE_MODEL_V2_1_ADOPTED_SOURCE.md",
+        "expected": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+        "observed": "443ee842c3ba675980353784763dfe76c6c8231532cac24dc8badca315706402",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/permission_access_control_v1_1/C0_022_MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_V1_1_ADOPTED_SOURCE.md",
+        "expected": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+        "observed": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/platform_extensibility_plugin_v2_0/C0_040_MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_PLATFORM_EXTENSIBILITY_AND_PLUGIN_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f",
+        "observed": "e26bc54b75694599684e43a979b02e4cf7d3dbcd00ae6ba7ca0dcbc832fed27f",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/platform_operations_reliability_release_v2_0/C0_043_MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+        "observed": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/platform_resilience_v1_0/C0_031_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0_ADOPTED_SOURCE.md",
+        "expected": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+        "observed": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/record_stewardship_v2_1/C0_026_RECORD_STEWARDSHIP_AND_RETENTION_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1_ADOPTED_SOURCE.md",
+        "expected": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+        "observed": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/reporting_analytics_v2_0/C0_035_MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/founder_approved_sources/MASTER_REPORTING_ANALYTICS_AND_BUSINESS_INTELLIGENCE_MODEL_V2_0_FOUNDER_APPROVED.md",
+        "expected": "67b25cc23230492b9c8164c7a0b116f74109a623d544566a01b60425fe646f4f",
+        "observed": "67b25cc23230492b9c8164c7a0b116f74109a623d544566a01b60425fe646f4f",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/safeguarding_v1_2/C0_020_SAFEGUARDING_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+        "expected": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+        "observed": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/search_discovery_v2_0/C0_033_MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+        "observed": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/security_incident_response_v1_0/C0_030_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0_ADOPTED_SOURCE.md",
+        "expected": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+        "observed": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+        "result": "PASS"
+      },
+      {
+        "certificate": "docs/canon/locks/vendor_security_supply_chain_v2_0/C0_041_MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+        "source": "docs/canon/adopted_sources/MASTER_VENDOR_SECURITY_AND_SUPPLY_CHAIN_MODEL_V2_0_ADOPTED_SOURCE.md",
+        "expected": "7561351c796d433ac6b9da1eb66eccc53acc2244c764903f6a844d44da704361",
+        "observed": "7561351c796d433ac6b9da1eb66eccc53acc2244c764903f6a844d44da704361",
+        "result": "PASS"
+      }
+    ]
+  },
+  "historical_point_in_time_manifests": {
+    "manifests": 27,
+    "entries": 815,
+    "passed": 701,
+    "missing": 1,
+    "mismatch": 113,
+    "unparsed": 0,
+    "classification": "RETAINED_PROVENANCE_OBSERVATIONS_NOT_CURRENT_AGGREGATE_BASELINE"
+  },
+  "diff_hygiene": {
+    "plain_findings": 332,
+    "preservation_aware_findings": 0,
+    "classification": "Historical Markdown hard-break whitespace preserved; no locked bytes reformatted."
+  },
+  "scope": {
+    "implementation_governance_files": 285,
+    "ds_store_included": false,
+    "unrelated_files_included": false
+  },
+  "findings": {
+    "p0": 0,
+    "open_p1": 0,
+    "lock_blocking_p2": 0,
+    "retained_nonblocking": [
+      "HISTORICAL_POINT_IN_TIME_MANIFEST_TARGETS_HAVE_EVOLVED_OR_REMAIN_EXTERNAL",
+      "PRESERVED_MARKDOWN_HARD_BREAK_WHITESPACE"
+    ]
+  },
+  "authority": {
+    "implementation": false,
+    "runtime": false,
+    "migration": false,
+    "provider_activation": false,
+    "production": false,
+    "public_launch": false,
+    "public_trust_claim": false
+  }
+}

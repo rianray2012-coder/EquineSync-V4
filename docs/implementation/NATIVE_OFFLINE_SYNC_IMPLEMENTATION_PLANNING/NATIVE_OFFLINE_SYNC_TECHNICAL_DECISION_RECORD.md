@@ -1,0 +1,36 @@
+# Native Offline Synchronization Technical Decision Record
+
+Every selection below is a recommendation pending the Founder decision register.
+No dependency, schema, key, store, route, or worker is created by this document.
+
+| ID | Topic | Recommended selection | Rejected alternatives | Rationale and risk | Reversibility/dependency | Verification |
+| --- | --- | --- | --- | --- | --- | --- |
+| TD01 | Browser persistence | IndexedDB through a repository-owned typed adapter, with a small standards wrapper evaluated in Phase 1 | `localStorage`, Cache API for business truth, browser SQLite/WASM first | Transactions and larger structured data; browser at-rest protection remains limited | Adapter makes library reversible; depends on `NOS-P2-01/03/05` | Browser matrix, corruption, quota, eviction, upgrade tests |
+| TD02 | Native persistence | Encrypted SQLite-compatible store behind the same logical adapter; key in Keychain/Keystore | Plain SQLite, browser webview store as native authority, vendor cloud DB | Transactions, mature recovery, device encryption; plugin support and encryption mode are risks | Engine/plugin reversible behind adapter; depends on `NOS-P2-01/05` | iOS/Android inspection, key-loss, migration, crash tests |
+| TD03 | Shared abstraction | One TypeScript domain/outbox core plus browser/native storage adapters | Separate sync engines per platform | Prevents semantic drift; lowest common denominator may constrain optimizations | Reversible at adapter boundary | Contract suite runs against memory, IndexedDB, and native adapters |
+| TD04 | Local schema | Normalized metadata/outbox tables plus minimal JSON projections with schema and policy versions | One opaque blob, full server mirror | Supports transactions and migration without copying all canonical records | Additive, versioned, reversible before activation | Schema snapshot and migration tests |
+| TD05 | Queue record | Immutable operation envelope plus mutable processing metadata | Raw HTTP request storage | Preserves lineage while allowing retries; payload minimization required | Envelope versioned | Hash, serialization, scope, corruption tests |
+| TD06 | Local identity | UUIDv7-compatible operation/local IDs; server returns canonical IDs | Names, array indexes, timestamp alone | Sortable uniqueness without identity guessing | Mapping table allows remap | Collision, replay, mapping tests |
+| TD07 | Scope identities | Stable actor, barn, account, device, and authenticated-session IDs on every record | Token-only or user-email scope | Enforces tenant/session isolation | Mandatory invariant | Cross-user/barn/session/device tests |
+| TD08 | Idempotency | Client operation UUID, domain idempotency key, canonical receipt retained | Payload-only dedupe | Prevents duplicate side effects; key misuse risk | Server contract required | Replay same operation and conflicting payload tests |
+| TD09 | Ordering | Per-scope monotonic sequence plus explicit dependency DAG; server revision remains authoritative | Client time ordering, global FIFO only | Handles clock skew and dependent creates | Dependency model additive | Reorder, missing parent, cycle tests |
+| TD10 | Replay | Foreground single-flight bounded batches with per-item outcome | Continuous background worker, fire-and-forget retry | OS-safe and observable; slower convergence | Background may be separately added later | Network flap, crash, timeout, partial result tests |
+| TD11 | Duplicate suppression | Operation ID + barn + domain key; exact replay returns original receipt | Best-effort UI dedupe | Server-safe behavior across devices | Requires server index/receipt plan | Concurrent duplicate and payload mismatch tests |
+| TD12 | Conflict marker | Immutable conflict record linking local operation, canonical revision, policy version, and redacted comparison | Overwrite or silent drop | Reviewable and auditable | Resolver can evolve | Conflict creation/projection/closure tests |
+| TD13 | Tombstones | Versioned canonical tombstone blocks replay; local proposal retained as quarantined evidence until governed purge | Hard delete marker loss | Avoids resurrection | Depends on retention | Delete/edit/recreate tests |
+| TD14 | Attachments | Excluded first slice; future encrypted chunk manifest with parent dependency and content hash | Inline base64, untracked blob queue | Limits first-slice risk | Fully separable later | Interruption, orphan, hash, purge tests |
+| TD15 | Queue encryption | Native database encryption plus record-level authenticated payload envelope where required; browser minimizes sensitive data and uses non-exportable key only if proven | Hard-coded keys, token-derived keys, claimed browser encryption without proof | Protects local data without false guarantees | Key strategy Founder-approved | Key rotation/loss/tamper/inspection tests |
+| TD16 | Secure key storage | iOS Keychain and Android Keystore; no key in JS storage or logs | `.env`, localStorage, bundle constants | Platform protection | Adapter boundary | Static scan and device inspection |
+| TD17 | Purge | Transactional scope purge on logout; revocation/expiry quarantine then purge per retention; preserve only allowed audit receipt | Best-effort silent delete, cross-login reuse | Maintains privacy and evidence | Retention schedule dependency | Logout, crash-during-purge, legal-hold tests |
+| TD18 | Versioning | Independent local schema, envelope, API protocol, policy, and projection versions | One app-version switch | Allows compatible evolution and precise fail-closed behavior | Additive version registry | Old/new compatibility matrix |
+| TD19 | Local migration | Transactional, additive, checkpointed, backup/export of unsynced envelopes, verify then commit | Destructive in-place rewrite | Protects pending work | Rollback only before irreversible boundary | Upgrade/downgrade/interruption tests |
+| TD20 | Server compatibility | Explicit `/sync/v1` capability negotiation and minimum supported versions; online-only/read-only fallback | Guess from HTTP errors | Prevents schema drift | Endpoint requires separate implementation authority | Contract and unsupported-version tests |
+| TD21 | Observability | Structured allowlisted counters/events with correlation IDs; no payloads/tokens | Raw queue/log dump | Supportable without routine sensitive leakage | Event schema versioned | Redaction and correlation tests |
+| TD22 | Diagnostic bundle | User-initiated, scope-bound, encrypted export containing versions, counts, state codes, hashes, and redacted timelines | Automatic upload, raw DB export | Least privilege; support-access policy remains open | Depends on `NOS-P2-07` | Golden bundle and secret/PII scans |
+| TD23 | Workflow eligibility | Server-owned versioned policy class; first slice admits only `LOW_RISK_TASK_V1` | Collection-name, title-keyword, UI-category, or client-asserted eligibility | Prevents generic tasks from hiding safety work; classification drift is a risk | Server contract and policy version required | Missing/forged/stale/class-changed adversarial tests |
+
+## Proposed Local Collections
+
+`sync_meta`, `scope_sessions`, `local_projections`, `mutation_outbox`,
+`mutation_dependencies`, `canonical_receipts`, `conflicts`, `tombstones`, and
+`diagnostic_events`. Attachments are not part of the first slice.

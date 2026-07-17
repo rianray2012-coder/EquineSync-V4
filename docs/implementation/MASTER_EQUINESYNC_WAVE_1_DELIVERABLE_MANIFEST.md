@@ -1,0 +1,24 @@
+# Master EquineSync Wave 1 Deliverable Manifest
+
+**Disposition:** `READY_FOR_FOUNDER_AUTHORIZATION_WITH_SCOPED_BLOCKS`  
+**Wave 1 state:** `UNAUTHORIZED_PENDING_FOUNDER_DECISION`  
+**Recommended first RF:** `W1-RF01 IDENTITY FOUNDATION READINESS AND SECURITY HARDENING ASSESSMENT`  
+**Runtime and production authority:** `FALSE`
+
+| Artifact | SHA-256 |
+| --- | --- |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_READINESS_PACKET.md` | `42097aee71cb0213dc4047006f3dd06d7f56b171a7654ca79d4e8c38f2d0fca9` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_CURRENT_STATE_ASSESSMENT.md` | `eb4e9e8a92671e67de8bb8827eb9d9c8370ad075f649919425f5f34272e88bf7` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_DEPENDENCY_MATRIX.md` | `823d8d0a8c439bcc4dcb2785613fd0e385e246b5cdd1681f29619616bf244edb` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_SCOPE_OPTIONS.md` | `057dface1a5a1fceed3aa6acbfafc549b44a5efab85a15a27d0a1e4c82e05b5f` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_RISK_AND_BLOCKER_REGISTER.md` | `3d2567fa477310a60e03b5b0a940bff6f9d41ad90007ebf3e005e854e1678436` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_AUTHORITY_MATRIX.md` | `0917ba1ec5966220a07f485073a399319f00d2658c648f76bec24dc7c19f5249` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_TEST_AND_VERIFICATION_STRATEGY.md` | `7541b79e36eb40048568591ac761572d07cfbb3d172e2a97d1f2e50bc28ff8c7` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_MIGRATION_AND_ROLLBACK_ASSESSMENT.md` | `d75e3d0673393929de7836a1ed66a03e970b4466a2df849ef8f55b44941abacb` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_RECOMMENDED_RF_CHARTER.md` | `3cc175dbc44d6b5a5af4c9706c65cd203420e324fd547d8840f71285b7e197c1` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_FOUNDER_DECISION_PACKET.md` | `f5262f28052026d99c54d74c4aca430c99a58efcbf47b5c716571b90b835d31e` |
+| `docs/implementation/MASTER_EQUINESYNC_WAVE_1_READINESS_REPORT.md` | `210136515af78beddefd7d6c2b9232db2cbeec6e576c504d31570d35de63a27e` |
+| `outputs/master_equinesync_wave_1_readiness.json` | `bfecaa3bc8013cf5fa0d4462ebb5bab2fde8322dd299ac347c8192d21dabef0e` |
+
+This manifest does not authorize Wave 1 implementation and does not hash itself.
+
