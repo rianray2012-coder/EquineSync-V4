@@ -1,0 +1,11 @@
+Reading additional input from stdin...
+2026-07-19T21:58:05.000995Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:58:05.001025Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:58:06.082142Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_69377d07cd9c8191a988f06f15b8c674 plugin=clay marketplace=openai-curated-remote error=plugin.json name `app-69377d07cd9c8191a988f06f15b8c674` does not match marketplace plugin name `clay`
+2026-07-19T21:58:06.276554Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_694462199dd48191bedf3493b499d605 plugin=vantage marketplace=openai-curated-remote error=plugin.json name `app-694462199dd48191bedf3493b499d605` does not match marketplace plugin name `vantage`
+2026-07-19T21:58:06.345873Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:58:06.345888Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:58:33.891818Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:59:21.435517Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:59:25.269180Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:59:48.194367Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5

@@ -1,0 +1,57 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/es_ra_02_runtime_02",
+      "agent_role": "equinesync_segregated_review_agent",
+      "child_thread_id": "019f7c43-3e2d-7822-8a72-ed319ab1ebaa",
+      "cli_version": "0.144.6",
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+      "depth": 1,
+      "final_assistant_response": "{\"custom_agent_declared_name\":\"EquineSync Segregated Review Agent\",\"es_ra_role\":\"ES-RA-02\",\"runtime_registration_marker\":\"ES-RA-02-REGISTERED-V1.0.0\",\"expected_sandbox\":\"read-only\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false,\"substantive_content_request_disposition\":\"REFUSED\"}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T16-23-29-019f7c43-3e2d-7822-8a72-ed319ab1ebaa.jsonl",
+      "source_rollout_bytes": 81324,
+      "source_rollout_sha256": "1275ae44a6367b5330ac07fdead2eb51e1a29a8b3a9fd31ab073d04119c75aa8",
+      "tool_names_only": []
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-22-49-019f7c42-a0f4-7ed3-ba97-b1c610efa299.jsonl",
+  "parent_source_rollout_sha256": "ad861ba4dc9f6ca04972c9cd5b2488b9b8d2b45cad5b6bf3269ac00b70321e50",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "equinesync_segregated_review_agent",
+      "fork_turns": "none",
+      "task_name": "es_ra_02_runtime_02"
+    }
+  ],
+  "parent_thread_id": "019f7c42-a0f4-7ed3-ba97-b1c610efa299",
+  "raw_parent_artifact": "runs/roles/ES-RA-02/read_only_individual/run-02/stdout.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

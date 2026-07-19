@@ -1,0 +1,25 @@
+{
+  "children": [],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-21-45-019f7c41-a8e0-79b0-9210-41fd48019b2e.jsonl",
+  "parent_source_rollout_sha256": "e88a011758bdfa420a3dbcde02b79f3d5d6ab955e2a31c2f0c23ad57d07e58b5",
+  "parent_spawn_calls": [],
+  "parent_thread_id": "019f7c41-a8e0-79b0-9210-41fd48019b2e",
+  "raw_parent_artifact": "runs/roles/ES-RA-02/read_only_individual/run-01/stdout.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

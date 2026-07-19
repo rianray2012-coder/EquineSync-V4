@@ -1,0 +1,18 @@
+Reading additional input from stdin...
+2026-07-19T22:02:51.930817Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:02:52.429064Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-19T22:02:52.429081Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-19T22:02:52.947454Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_69377d07cd9c8191a988f06f15b8c674 plugin=clay marketplace=openai-curated-remote error=plugin.json name `app-69377d07cd9c8191a988f06f15b8c674` does not match marketplace plugin name `clay`
+2026-07-19T22:02:53.270054Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_694462199dd48191bedf3493b499d605 plugin=vantage marketplace=openai-curated-remote error=plugin.json name `app-694462199dd48191bedf3493b499d605` does not match marketplace plugin name `vantage`
+2026-07-19T22:02:54.827074Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-19T22:02:54.827100Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-19T22:03:15.030121Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:03:57.775473Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:04:01.634454Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:04:19.781950Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:04:33.865904Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:04:33.920269Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:05:09.851839Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:05:09.915161Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:05:42.843739Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T22:06:22.070197Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5

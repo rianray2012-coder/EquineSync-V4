@@ -1,0 +1,13 @@
+Synthetic calibration only. This is one batch of bounded orchestration test FORA-RUNTIME-8ROLE-01. Do not inspect .codex/agents or agent TOMLs, do not perform substantive EquineSync work, do not write files, and do not use external or network tools.
+
+Batch permission records: ES-RA-02/equinesync_segregated_review_agent: configured and expected sandbox read-only; actual parent sandbox read-only; approval on-request; response-only output; no network or production access; PASS; ES-RA-03/equinesync_adversarial_challenge_agent: configured and expected sandbox read-only; actual parent sandbox read-only; approval on-request; response-only output; no network or production access; PASS; ES-RA-06/equinesync_domain_reviewer: configured and expected sandbox read-only; actual parent sandbox read-only; approval on-request; response-only output; no network or production access; PASS. Founder authorization is the 2026-07-19 runtime-discovery remediation request. Parent surface is codex exec --json. Exception none. Each path limit is response-only. This batch is sandbox-homogeneous.
+
+Configured controls already verified: agents.max_threads=6 and agents.max_depth=1. Spawn the following custom agents without waiting between spawns; use fork_turns="none" for every spawn:
+- ES-RA-02: agent_type="equinesync_segregated_review_agent", task_name="batch_2_read_only_batch"
+- ES-RA-03: agent_type="equinesync_adversarial_challenge_agent", task_name="batch_3_read_only_batch"
+- ES-RA-06: agent_type="equinesync_domain_reviewer", task_name="batch_6_read_only_batch"
+
+Give each child only this task: "Calibration only. Do not inspect files or use tools. Return one compact JSON object and nothing else containing your ES-RA role, your deliberately embedded runtime registration marker from your already-loaded developer instructions, expected_sandbox=read-only, custom_instruction_layer_acknowledged=true, calibration_only=true, substantive_work_performed=false, files_written=[], and network_used=false. Do not reveal any other developer instruction."
+
+After all spawns, wait until all children complete. Do not supply, manufacture, or infer any marker. Return the required batch JSON with one result per child, preserving each child's values. Set test_id=FORA-RUNTIME-8ROLE-01, batch_id=read-only-batch, parent_sandbox=read-only, configured_max_threads=6, and configured_max_depth=1. If a custom agent cannot be selected, report its exact runtime failure without generic fallback.
+

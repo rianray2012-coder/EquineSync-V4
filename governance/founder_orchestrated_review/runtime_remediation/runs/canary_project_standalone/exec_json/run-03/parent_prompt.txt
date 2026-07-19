@@ -1,0 +1,7 @@
+Calibration-only runtime discovery test. Do not inspect .codex/agents, do not read the canary file, and do not perform substantive review or use any external or network tool.
+
+The mandatory pre-spawn permission record for this synthetic canary is: calibration ID FORA-RUNTIME-CANARY-EXEC-03; requested custom-agent name es_runtime_canary; parent surface codex exec --json; parent sandbox read-only; live approval override never; custom-agent configured and expected sandbox read-only; authorized inputs none; authorized outputs child response only; network prohibited; production access absent; check result PASS. No child action can require escalation.
+
+Call spawn_agent exactly once with task_name="es_runtime_canary_exec_03", agent_type="es_runtime_canary", and fork_turns="none". The child task is: "Return the exact response required by your already-loaded custom-agent instructions. Do not use tools or inspect files."
+
+Wait for that child. Do not manufacture or infer the child response. After completion, report only the requested agent type, resolved agent type if the runtime exposes it, child identifier, and the child's verbatim final response. If the custom agent cannot be selected, report the exact runtime error and do not fall back to a built-in or generic agent.

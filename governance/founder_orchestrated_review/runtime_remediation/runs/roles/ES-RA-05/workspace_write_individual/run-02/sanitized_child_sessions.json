@@ -1,0 +1,65 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/es_ra_05_runtime_02",
+      "agent_role": "equinesync_evidence_custodian",
+      "child_thread_id": "019f7c48-27f1-7652-acf1-04858e588c07",
+      "cli_version": "0.144.6",
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+      "depth": 1,
+      "final_assistant_response": "{\"custom_agent_declared_name\":\"EquineSync Evidence Custodian\",\"es_ra_role\":\"ES-RA-05\",\"runtime_registration_marker\":\"ES-RA-05-REGISTERED-V1.0.0\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_content_request_disposition\":\"NOT_REQUESTED\",\"substantive_work_performed\":false,\"files_written\":[\"governance/founder_orchestrated_review/runtime_remediation/disposable/ES-RA-05-RUNTIME-02/custody_write_probe.txt\"],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T16-28-51-019f7c48-27f1-7652-acf1-04858e588c07.jsonl",
+      "source_rollout_bytes": 91030,
+      "source_rollout_sha256": "0b5b1ac1553b7404b7eef70531d2bed438124fd522e11eb72706e4810fdb4140",
+      "tool_names_only": [
+        "exec"
+      ]
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "exclude_slash_tmp": false,
+      "exclude_tmpdir_env_var": false,
+      "network_access": false,
+      "type": "workspace-write"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-28-13-019f7c47-9404-7950-881d-ea5c127281a8.jsonl",
+  "parent_source_rollout_sha256": "66c2c24e8f8f75a9b6f756fb3d9b5c7be83b2c53e7441424a619002bc06eaf59",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "equinesync_evidence_custodian",
+      "fork_turns": "none",
+      "task_name": "es_ra_05_runtime_02"
+    }
+  ],
+  "parent_thread_id": "019f7c47-9404-7950-881d-ea5c127281a8",
+  "raw_parent_artifact": "runs/roles/ES-RA-05/workspace_write_individual/run-02/stdout.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

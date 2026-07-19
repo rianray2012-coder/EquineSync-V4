@@ -1,0 +1,61 @@
+{
+  "behavioral_calibration": {
+    "accepted_passes": 90,
+    "authorized": true,
+    "denominator": 120,
+    "failed_roles": [
+      "ES-RA-04",
+      "ES-RA-06"
+    ],
+    "roles_expected": 8,
+    "roles_with_passing_run": 6,
+    "synthetic_only": true
+  },
+  "bounded_eight_role_orchestration": {
+    "expected": 8,
+    "passed": 8
+  },
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "canary_by_surface": {
+    "codex_exec_json": "CUSTOM_AGENT_LOADED",
+    "interactive_cli": "CUSTOM_AGENT_LOADED",
+    "personal_agent_copy": "NOT_RUN_NOT_NECESSARY"
+  },
+  "custom_instruction_layers_loaded": {
+    "expected": 8,
+    "passed": 8
+  },
+  "final_disposition": "INSTALLATION_NOT_READY_ROLE_CALIBRATION_FAILED",
+  "founder_activation_approval": false,
+  "individual_role_registration": {
+    "expected": 8,
+    "passed": 8
+  },
+  "merged": false,
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "parent_installation_commit": "a1caf346fe7b07b1be7dde12f1b805a62b2e5f9b",
+  "project_agents_discovered": {
+    "expected": 8,
+    "passed": 8
+  },
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "repository_trust": "PASS",
+  "resulting_commit": "SELF_REFERENTIAL_NOT_EMBEDDED; report from git after commit",
+  "runtime_surfaces_tested": [
+    "interactive CLI",
+    "codex exec --json"
+  ],
+  "sandbox_provenance": {
+    "expected": 8,
+    "passed": 8
+  },
+  "schema_validation": {
+    "behavioral_response_instances": "SCHEMA_VALID_8_OF_8_LATEST_RUNS",
+    "behavioral_semantic_calibration": "PASS_6_OF_8_ROLES",
+    "individual_registration_outputs": "PASS_8_OF_8"
+  },
+  "schema_version": "1.0.0",
+  "sealed_package_unchanged": true,
+  "starting_commit": "f885a617332bb0a91b8adf15ae7b0e345cfb597f",
+  "substantive_review_started": false
+}

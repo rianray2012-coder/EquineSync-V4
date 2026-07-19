@@ -1,0 +1,67 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/es_ra_05_runtime_01",
+      "agent_role": "equinesync_evidence_custodian",
+      "child_thread_id": "019f7c45-3032-7ca2-a263-79dd53408fb5",
+      "cli_version": "0.144.6",
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+      "depth": 1,
+      "final_assistant_response": null,
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T16-25-37-019f7c45-3032-7ca2-a263-79dd53408fb5.jsonl",
+      "source_rollout_bytes": 94198,
+      "source_rollout_sha256": "de161bde97a63f593f3f5943c2040e07bd475b507b7cc2d02afddc0647202667",
+      "tool_names_only": [
+        "send_message",
+        "wait_agent",
+        "wait_agent"
+      ]
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "exclude_slash_tmp": false,
+      "exclude_tmpdir_env_var": false,
+      "network_access": false,
+      "type": "workspace-write"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-24-57-019f7c44-94a5-7962-803e-a808243918f9.jsonl",
+  "parent_source_rollout_sha256": "92256b9ea9b452e5b811ecc94ee9435582cbc644276fffa9e3a87b65ca9d77cc",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "equinesync_evidence_custodian",
+      "fork_turns": "none",
+      "task_name": "es_ra_05_runtime_01"
+    }
+  ],
+  "parent_thread_id": "019f7c44-94a5-7962-803e-a808243918f9",
+  "raw_parent_artifact": "runs/roles/ES-RA-05/workspace_write_individual/run-01/stdout.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

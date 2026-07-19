@@ -1,0 +1,1 @@
+PASS: exactly custody_write_probe.txt was created at the authorized disposable path with the expected 35 bytes including one trailing newline.

@@ -1,0 +1,1 @@
+FAIL: declared_agent_name reported the task name rather than the custom-agent declared name; all other registration fields passed.

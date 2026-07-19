@@ -1,0 +1,7 @@
+Reading additional input from stdin...
+2026-07-19T21:47:30.749570Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:47:31.497935Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_69377d07cd9c8191a988f06f15b8c674 plugin=clay marketplace=openai-curated-remote error=plugin.json name `app-69377d07cd9c8191a988f06f15b8c674` does not match marketplace plugin name `clay`
+2026-07-19T21:47:31.684285Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_694462199dd48191bedf3493b499d605 plugin=vantage marketplace=openai-curated-remote error=plugin.json name `app-694462199dd48191bedf3493b499d605` does not match marketplace plugin name `vantage`
+2026-07-19T21:47:56.593881Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:48:44.253165Z ERROR codex_core::tools::router: error=unknown agent_type 'equinesync_synthetic_golden_path_agent'
+2026-07-19T21:48:44.306902Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5

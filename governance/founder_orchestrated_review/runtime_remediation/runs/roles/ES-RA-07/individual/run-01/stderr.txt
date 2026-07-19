@@ -1,0 +1,11 @@
+2026-07-19T21:33:56.834984Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:33:57.310650Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:33:57.310683Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:33:57.859183Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_69377d07cd9c8191a988f06f15b8c674 plugin=clay marketplace=openai-curated-remote error=plugin.json name `app-69377d07cd9c8191a988f06f15b8c674` does not match marketplace plugin name `clay`
+2026-07-19T21:33:58.218005Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_694462199dd48191bedf3493b499d605 plugin=vantage marketplace=openai-curated-remote error=plugin.json name `app-694462199dd48191bedf3493b499d605` does not match marketplace plugin name `vantage`
+2026-07-19T21:33:58.995874Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:33:58.995936Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:34:19.623094Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:34:26.792964Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:34:29.794919Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:34:33.189172Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5

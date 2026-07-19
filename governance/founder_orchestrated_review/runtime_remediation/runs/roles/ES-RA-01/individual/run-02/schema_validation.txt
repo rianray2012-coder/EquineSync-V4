@@ -1,0 +1,1 @@
+PASS: human-readable declared role title returned; exact standalone agent type confirmed by child session metadata.

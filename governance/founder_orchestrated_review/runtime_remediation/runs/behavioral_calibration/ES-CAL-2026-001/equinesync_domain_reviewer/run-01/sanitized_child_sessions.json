@@ -1,0 +1,25 @@
+{
+  "children": [],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": null,
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-46-46-019f7c58-90a0-7b61-893b-58055569fe76.jsonl",
+  "parent_source_rollout_sha256": "34a0137824aa535ecd2913c5433b01b4699e271c12f4b4c5489f12ac06f9c49e",
+  "parent_spawn_calls": [],
+  "parent_thread_id": "019f7c58-90a0-7b61-893b-58055569fe76",
+  "raw_parent_artifact": "runs/behavioral_calibration/ES-CAL-2026-001/equinesync_domain_reviewer/run-01/events.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

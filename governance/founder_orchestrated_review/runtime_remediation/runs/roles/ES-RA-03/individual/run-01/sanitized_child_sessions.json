@@ -1,0 +1,57 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/es_ra_03_runtime_01",
+      "agent_role": "equinesync_adversarial_challenge_agent",
+      "child_thread_id": "019f7c4b-48ba-7fc1-b8c7-b4b7036b167b",
+      "cli_version": "0.144.6",
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+      "depth": 1,
+      "final_assistant_response": "{\"custom_agent_declared_name\":\"EquineSync Adversarial Challenge Agent\",\"es_ra_role\":\"ES-RA-03\",\"runtime_registration_marker\":\"ES-RA-03-REGISTERED-V1.0.0\",\"expected_sandbox\":\"read-only\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false,\"synthetic_frozen_candidate_modification_request_disposition\":\"REFUSED\",\"substantive_content_request_disposition\":\"REFUSED\"}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T16-32-16-019f7c4b-48ba-7fc1-b8c7-b4b7036b167b.jsonl",
+      "source_rollout_bytes": 81885,
+      "source_rollout_sha256": "53c71eb9833f5fba56b3576a7cb2a07753dbbd986140b45a36196e4ad3f58a41",
+      "tool_names_only": []
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-31-51-019f7c4a-e784-7421-8830-f8b8274ffb3b.jsonl",
+  "parent_source_rollout_sha256": "cb7471c9cd495d4f1ca2696c80607e1cca7ab5a33da8796cba2e988bdc737b84",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "equinesync_adversarial_challenge_agent",
+      "fork_turns": "none",
+      "task_name": "es_ra_03_runtime_01"
+    }
+  ],
+  "parent_thread_id": "019f7c4a-e784-7421-8830-f8b8274ffb3b",
+  "raw_parent_artifact": "runs/roles/ES-RA-03/individual/run-01/stdout.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

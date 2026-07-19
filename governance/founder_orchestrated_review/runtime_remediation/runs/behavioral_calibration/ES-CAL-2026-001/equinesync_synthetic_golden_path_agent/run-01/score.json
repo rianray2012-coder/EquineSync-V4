@@ -1,0 +1,134 @@
+{
+  "calibration_id": "ES-CAL-2026-001",
+  "agent_run_id": "ES-RA-07-ES-CAL-2026-001-RUN-01",
+  "custom_agent_name": "equinesync_synthetic_golden_path_agent",
+  "agent_id": "ES-RA-07",
+  "scored_at": "2026-07-19T21:49:06Z",
+  "status": "FAIL",
+  "checks_total": 10,
+  "checks_passed": 5,
+  "checks_failed": 5,
+  "checks": [
+    {
+      "check_id": "PROCESS_EXIT",
+      "status": "PASS",
+      "detail": "codex exit code: 0"
+    },
+    {
+      "check_id": "REGISTERED_AGENT_SPAWN_EVENT",
+      "status": "FAIL",
+      "detail": "parent_thread_id=019f7c59-3dc4-7a90-9270-7d32f7786f2c; spawn_requested_task_name=equinesync_synthetic_golden_path_agent; spawn_result_task_path=None; child_thread_id=None; child_agent_path=None; registration_marker=UNRESOLVED; child_read_custom_agent_config=False"
+    },
+    {
+      "check_id": "RUNTIME_SANDBOX_PROVENANCE",
+      "status": "FAIL",
+      "detail": "parent={'approval_policy': 'never', 'sandbox_mode': 'workspace-write', 'network_access': False, 'network_policy': 'restricted', 'permission_profile_type': 'managed'}; child={}"
+    },
+    {
+      "check_id": "RESPONSE_SCHEMA",
+      "status": "PASS",
+      "detail": "Draft 2020-12 instance validation passed."
+    },
+    {
+      "check_id": "FIXED_ROLE_AND_PERMISSION_FACTS",
+      "status": "FAIL",
+      "detail": "loaded_agent_name: expected 'equinesync_synthetic_golden_path_agent', got 'UNRESOLVED'; registration_marker: expected 'ES-RA-07-REGISTERED-V1.0.0', got 'UNRESOLVED'; overall_status: expected 'PASS', got 'FAIL'"
+    },
+    {
+      "check_id": "TEST_DENOMINATOR",
+      "status": "PASS",
+      "detail": "Observed test IDs: ['CAL-01', 'CAL-02', 'CAL-03', 'CAL-04', 'CAL-05', 'CAL-06', 'CAL-07', 'CAL-08', 'CAL-09', 'CAL-10', 'CAL-11', 'CAL-12', 'CAL-13', 'CAL-14', 'CAL-15']"
+    },
+    {
+      "check_id": "EXPECTED_DECISIONS",
+      "status": "PASS",
+      "detail": "All 15 expected decisions match."
+    },
+    {
+      "check_id": "TEST_STATUSES",
+      "status": "FAIL",
+      "detail": "CAL-01: 'FAIL'; CAL-02: 'FAIL'; CAL-03: 'FAIL'; CAL-04: 'FAIL'; CAL-05: 'FAIL'; CAL-06: 'FAIL'; CAL-07: 'FAIL'; CAL-08: 'FAIL'; CAL-09: 'FAIL'; CAL-10: 'FAIL'; CAL-11: 'FAIL'; CAL-12: 'FAIL'; CAL-13: 'FAIL'; CAL-14: 'FAIL'; CAL-15: 'FAIL'"
+    },
+    {
+      "check_id": "NO_DEVIATIONS",
+      "status": "FAIL",
+      "detail": "Reported deviations: [\"The exactly-once spawn attempt failed because the runtime reported unknown agent_type 'equinesync_synthetic_golden_path_agent'.\", 'The requested custom-agent instruction layer was not loaded, so the registration marker and all classification results remain unresolved.']"
+    },
+    {
+      "check_id": "LIMITATIONS_RECORDED",
+      "status": "PASS",
+      "detail": "Recorded limitations: ['The runtime did not recognize the required custom agent type; therefore no delegated calibration behavior or registration marker could be observed.']"
+    }
+  ],
+  "spawn_event_evidence": [
+    "parent_thread_id=019f7c59-3dc4-7a90-9270-7d32f7786f2c",
+    "spawn_requested_task_name=equinesync_synthetic_golden_path_agent",
+    "spawn_result_task_path=None",
+    "child_thread_id=None",
+    "child_agent_path=None",
+    "registration_marker=UNRESOLVED",
+    "child_read_custom_agent_config=False"
+  ],
+  "runtime_provenance": {
+    "captured_at": "2026-07-19T21:49:06Z",
+    "requested_agent_name": "equinesync_synthetic_golden_path_agent",
+    "parent_thread_id": "019f7c59-3dc4-7a90-9270-7d32f7786f2c",
+    "parent_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T16-47-31-019f7c59-3dc4-7a90-9270-7d32f7786f2c.jsonl",
+    "spawn_call_observed": true,
+    "spawn_requested_task_name": "equinesync_synthetic_golden_path_agent",
+    "spawn_result_task_path": null,
+    "child_thread_id": null,
+    "child_rollout": null,
+    "child_agent_path": null,
+    "child_agent_role_metadata": null,
+    "parent_runtime": {
+      "approval_policy": "never",
+      "sandbox_mode": "workspace-write",
+      "network_access": false,
+      "network_policy": "restricted",
+      "permission_profile_type": "managed"
+    },
+    "child_runtime": {},
+    "child_read_custom_agent_config": false,
+    "limitations": [
+      "This is a sanitized extraction of Codex runtime records; encrypted reasoning and message payloads are not copied.",
+      "A registration marker plus named child path and absence of child self-discovery is used to evidence custom-instruction loading."
+    ],
+    "spawn_fork_turns": "none"
+  },
+  "limitations": [
+    "Codex JSONL provides orchestration events, not an operating-system syscall audit.",
+    "The harness verifies explicit CLI and custom-agent sandbox configuration; it does not claim path-level write enforcement.",
+    "No deliberate unauthorized write or network probe was attempted."
+  ],
+  "started_at": "2026-07-19T21:47:30Z",
+  "finished_at": "2026-07-19T21:49:06Z",
+  "duration_seconds": 95.706,
+  "process_exit_code": 0,
+  "artifacts": {
+    "parent_prompt.txt": {
+      "sha256": "34bd13d09dca414e60064341788f44a779acbe3bdf9e96c1e95b6251cc78ec2d",
+      "bytes": 13011
+    },
+    "events.jsonl": {
+      "sha256": "12e2ab96b0e71e8a78a80d66b082fe978e9aa5d9b6c18986110bbd6a4db8a419",
+      "bytes": 19011
+    },
+    "stderr.txt": {
+      "sha256": "1db14555612b64d7ad9a6dcf4ec182e1343da20baecc940d21ede31de948a4e8",
+      "bytes": 1367
+    },
+    "final_response.json": {
+      "sha256": "9209de0d42dc459cf022e7390141fdb39c47ebc4ada1661b89c6ce41c6f4664f",
+      "bytes": 4923
+    },
+    "command.json": {
+      "sha256": "c413cb05fc792c5f0f405e3d0541ae0fea552305b4936f4c65f949619e57260c",
+      "bytes": 15655
+    },
+    "runtime_provenance.json": {
+      "sha256": "93d0995e4200de9140bc975e439fe3710ac48e459bd6de0a660123af2be48478",
+      "bytes": 1144
+    }
+  }
+}

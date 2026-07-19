@@ -1,0 +1,22 @@
+{
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "captured_for": "FORA runtime discovery remediation",
+  "codex_cli_version": "0.144.6",
+  "codex_executable_path": "/Users/rianray/.npm-global/bin/codex",
+  "codex_home_environment": "unset",
+  "codex_runtime_binary": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex",
+  "commands_and_live_policies": "recorded per run in command.txt or command.json and sanitized_child_sessions.json",
+  "current_working_directory": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+  "effective_codex_home": "/Users/rianray/.codex",
+  "home": "/Users/rianray",
+  "initial_working_tree_status": "clean",
+  "isolated_test_surfaces": [
+    "interactive CLI",
+    "codex exec --json"
+  ],
+  "operating_system": "macOS 26.5.2 build 25F84; Darwin 25.5.0 arm64",
+  "originating_surface": "Codex desktop app tool-backed task",
+  "repository_root": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+  "shell": "/bin/zsh",
+  "starting_commit": "f885a617332bb0a91b8adf15ae7b0e345cfb597f"
+}

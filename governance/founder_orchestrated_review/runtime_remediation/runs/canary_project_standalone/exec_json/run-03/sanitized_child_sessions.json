@@ -1,0 +1,57 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/es_runtime_canary_exec_03",
+      "agent_role": "es_runtime_canary",
+      "child_thread_id": "019f7c40-7e42-7300-bee6-e6cc8d5a61f2",
+      "cli_version": "0.144.6",
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+      "depth": 1,
+      "final_assistant_response": "ES_RUNTIME_CANARY_LOADED_V1",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T16-20-29-019f7c40-7e42-7300-bee6-e6cc8d5a61f2.jsonl",
+      "source_rollout_bytes": 73888,
+      "source_rollout_sha256": "6c8d0cb885ea50a3aaecd22cb136894e20aa6eb51cd9a97fca1d27cfdbb80261",
+      "tool_names_only": []
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-20-12-019f7c40-3af2-7b13-b27f-2c74eeae461e.jsonl",
+  "parent_source_rollout_sha256": "8dbc11ee53f85fd630a3ccf84147c92728fe2c2a0ccd52f54c21777569d0c782",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "es_runtime_canary",
+      "fork_turns": "none",
+      "task_name": "es_runtime_canary_exec_03"
+    }
+  ],
+  "parent_thread_id": "019f7c40-3af2-7b13-b27f-2c74eeae461e",
+  "raw_parent_artifact": "runs/canary_project_standalone/exec_json/run-03/stdout.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

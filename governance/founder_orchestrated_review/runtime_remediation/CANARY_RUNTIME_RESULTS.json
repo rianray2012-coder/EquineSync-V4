@@ -1,0 +1,120 @@
+{
+  "attempts": [
+    {
+      "child_agent_role_metadata": null,
+      "child_runtime": null,
+      "child_thread_id": null,
+      "classification": "INVOCATION_FAILED",
+      "command": "/usr/bin/script -q raw_terminal.log /Users/rianray/.npm-global/bin/codex -C /Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package -s read-only -a never --no-alt-screen",
+      "exact_marker": null,
+      "exact_marker_appeared_from_child": false,
+      "exact_marker_required": false,
+      "execution_began_at_repository_root": true,
+      "exit_status": 0,
+      "personal_agent_copy_used": false,
+      "requested_custom_agent_name": "es_runtime_canary",
+      "resolved_agent_type_observable_in_parent": false,
+      "run_path": "governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/interactive_cli/run-01",
+      "surface": "interactive CLI"
+    },
+    {
+      "child_agent_role_metadata": "es_runtime_canary",
+      "child_runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "child_thread_id": "019f7c3b-dd4e-7883-9e23-f99810269f6a",
+      "classification": "CUSTOM_AGENT_LOADED",
+      "command": "/usr/bin/script -q raw_terminal.log /Users/rianray/.npm-global/bin/codex -C /Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package -s read-only -a never --no-alt-screen",
+      "exact_marker": "ES_RUNTIME_CANARY_LOADED_V1",
+      "exact_marker_appeared_from_child": true,
+      "exact_marker_required": true,
+      "execution_began_at_repository_root": true,
+      "exit_status": 0,
+      "personal_agent_copy_used": false,
+      "requested_custom_agent_name": "es_runtime_canary",
+      "resolved_agent_type_observable_in_parent": false,
+      "run_path": "governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/interactive_cli/run-02",
+      "surface": "interactive CLI"
+    },
+    {
+      "child_agent_role_metadata": null,
+      "child_runtime": null,
+      "child_thread_id": null,
+      "classification": "INVOCATION_FAILED",
+      "command": "/Users/rianray/.npm-global/bin/codex exec -C /Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package -s read-only -a never --json -o governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-01/final_response.txt - < governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-01/parent_prompt.txt > governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-01/stdout.jsonl 2> governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-01/stderr.txt",
+      "exact_marker": null,
+      "exact_marker_appeared_from_child": false,
+      "exact_marker_required": false,
+      "execution_began_at_repository_root": true,
+      "exit_status": 2,
+      "personal_agent_copy_used": false,
+      "requested_custom_agent_name": "es_runtime_canary",
+      "resolved_agent_type_observable_in_parent": false,
+      "run_path": "governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-01",
+      "surface": "codex exec --json"
+    },
+    {
+      "child_agent_role_metadata": null,
+      "child_runtime": null,
+      "child_thread_id": null,
+      "classification": "INVOCATION_FAILED",
+      "command": "/Users/rianray/.npm-global/bin/codex -a never exec -C /Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package -s read-only --json -o governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-02/final_response.txt - < governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-02/parent_prompt.txt > governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-02/stdout.jsonl 2> governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-02/stderr.txt",
+      "exact_marker": null,
+      "exact_marker_appeared_from_child": false,
+      "exact_marker_required": false,
+      "execution_began_at_repository_root": true,
+      "exit_status": 0,
+      "personal_agent_copy_used": false,
+      "requested_custom_agent_name": "es_runtime_canary",
+      "resolved_agent_type_observable_in_parent": false,
+      "run_path": "governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-02",
+      "surface": "codex exec --json"
+    },
+    {
+      "child_agent_role_metadata": "es_runtime_canary",
+      "child_runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "child_thread_id": "019f7c40-7e42-7300-bee6-e6cc8d5a61f2",
+      "classification": "CUSTOM_AGENT_LOADED",
+      "command": "/Users/rianray/.npm-global/bin/codex -a never exec -C /Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package -s read-only --json -o governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-03/final_response.txt - < governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-03/parent_prompt.txt > governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-03/stdout.jsonl 2> governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-03/stderr.txt",
+      "exact_marker": "ES_RUNTIME_CANARY_LOADED_V1",
+      "exact_marker_appeared_from_child": true,
+      "exact_marker_required": true,
+      "execution_began_at_repository_root": true,
+      "exit_status": 0,
+      "personal_agent_copy_used": false,
+      "requested_custom_agent_name": "es_runtime_canary",
+      "resolved_agent_type_observable_in_parent": false,
+      "run_path": "governance/founder_orchestrated_review/runtime_remediation/runs/canary_project_standalone/exec_json/run-03",
+      "surface": "codex exec --json"
+    }
+  ],
+  "canary_name": "es_runtime_canary",
+  "configured_sandbox": "read-only",
+  "required_marker": "ES_RUNTIME_CANARY_LOADED_V1",
+  "schema_version": "1.0.0",
+  "surface_results": {
+    "codex_exec_json": "CUSTOM_AGENT_LOADED",
+    "interactive_cli": "CUSTOM_AGENT_LOADED",
+    "personal_agent_copy": "NOT_RUN_NOT_NECESSARY"
+  }
+}

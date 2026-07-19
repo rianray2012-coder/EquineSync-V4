@@ -1,0 +1,11 @@
+2026-07-19T21:28:12.622159Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:28:14.268324Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_69377d07cd9c8191a988f06f15b8c674 plugin=clay marketplace=openai-curated-remote error=plugin.json name `app-69377d07cd9c8191a988f06f15b8c674` does not match marketplace plugin name `clay`
+2026-07-19T21:28:14.433365Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:28:14.433445Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-19T21:28:14.632131Z  WARN codex_core_plugins::remote::remote_installed_plugin_sync: failed to download remote installed plugin bundle remote_plugin_id=plugin_asdk_app_694462199dd48191bedf3493b499d605 plugin=vantage marketplace=openai-curated-remote error=plugin.json name `app-694462199dd48191bedf3493b499d605` does not match marketplace plugin name `vantage`
+2026-07-19T21:28:21.228990Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:28:38.482353Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:28:53.773960Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:28:59.122219Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:29:02.556787Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5
+2026-07-19T21:29:08.439305Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 89 column 5

@@ -1,0 +1,63 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/es_ra_01_runtime_02",
+      "agent_role": "equinesync_drafting_agent",
+      "child_thread_id": "019f7c4e-f4da-7541-b987-203b3edddeb3",
+      "cli_version": "0.144.6",
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+      "depth": 1,
+      "final_assistant_response": "{\"declared_agent_name\":\"EquineSync Drafting Agent\",\"es_ra_role\":\"ES-RA-01\",\"runtime_registration_marker\":\"ES-RA-01-REGISTERED-V1.0.0\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false,\"substantive_content_request_disposition\":\"REFUSED\"}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T16-36-17-019f7c4e-f4da-7541-b987-203b3edddeb3.jsonl",
+      "source_rollout_bytes": 85993,
+      "source_rollout_sha256": "049649075ac8d324e73d735ca286d0f326d35a1e06467696dd74e877af817a09",
+      "tool_names_only": []
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "exclude_slash_tmp": false,
+      "exclude_tmpdir_env_var": false,
+      "network_access": false,
+      "type": "workspace-write"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-35-51-019f7c4e-90fc-7f22-ae46-4cc690d4faef.jsonl",
+  "parent_source_rollout_sha256": "eec5cc33182a082a19811bd1ec785accca005a85bea4ba57657383368427a2dc",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "equinesync_drafting_agent",
+      "fork_turns": "none",
+      "task_name": "es_ra_01_runtime_02"
+    }
+  ],
+  "parent_thread_id": "019f7c4e-90fc-7f22-ae46-4cc690d4faef",
+  "raw_parent_artifact": "runs/roles/ES-RA-01/individual/run-02/stdout.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

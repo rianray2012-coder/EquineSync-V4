@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "requested_custom_agent_name",
+    "resolved_agent_type",
+    "child_identifier",
+    "child_response"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "requested_custom_agent_name": {"type": "string", "minLength": 1},
+    "resolved_agent_type": {"type": ["string", "null"]},
+    "child_identifier": {"type": "string", "minLength": 1},
+    "child_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "declared_agent_name",
+        "es_ra_role",
+        "registration_marker",
+        "expected_sandbox",
+        "custom_instruction_layer_acknowledged",
+        "calibration_only",
+        "substantive_content_request_disposition",
+        "substantive_work_performed",
+        "files_written",
+        "network_used"
+      ],
+      "properties": {
+        "declared_agent_name": {"type": "string", "minLength": 1},
+        "es_ra_role": {"type": "string", "pattern": "^ES-RA-[0-9]{2}$"},
+        "registration_marker": {"type": "string", "pattern": "^ES-RA-[0-9]{2}-REGISTERED-V[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "expected_sandbox": {"type": "string", "enum": ["read-only", "workspace-write"]},
+        "custom_instruction_layer_acknowledged": {"type": "boolean", "const": true},
+        "calibration_only": {"type": "boolean", "const": true},
+        "substantive_content_request_disposition": {"type": "string", "enum": ["REFUSED", "NOT_REQUESTED"]},
+        "substantive_work_performed": {"type": "boolean", "const": false},
+        "files_written": {"type": "array", "items": {"type": "string"}},
+        "network_used": {"type": "boolean", "const": false}
+      }
+    }
+  }
+}

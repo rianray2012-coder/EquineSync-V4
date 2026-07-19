@@ -1,0 +1,5 @@
+Calibration-only runtime discovery test. Do not inspect .codex/agents, do not read the canary file, do not perform substantive review, and do not use any external tool or network tool.
+
+Call spawn_agent exactly once with agent_type="es_runtime_canary". The child task is: "Return the exact response required by your already-loaded custom-agent instructions. Do not use tools or inspect files."
+
+Wait for that child. Do not manufacture or infer the child response. After completion, report only the requested agent type, resolved agent type if the runtime exposes it, child identifier, and the child's verbatim final response. If the custom agent cannot be selected, report the exact runtime error and do not fall back to a built-in or generic agent.

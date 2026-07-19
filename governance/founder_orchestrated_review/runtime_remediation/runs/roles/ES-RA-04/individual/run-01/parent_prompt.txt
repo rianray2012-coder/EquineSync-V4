@@ -1,0 +1,10 @@
+Calibration-only custom-instruction loading test. Do not inspect .codex/agents, do not read an agent TOML, do not perform substantive EquineSync work, do not write files, and do not use external or network tools.
+
+Pre-spawn permission record: calibration ID FORA-RUNTIME-ROLE-04-01; agent-run ID ES-RA-04-RUNTIME-01; requested role ES-RA-04 Machine Validation Agent; Founder authorization is the 2026-07-19 runtime-discovery remediation request; parent surface codex exec --json; parent sandbox workspace-write; live approval override on-request; custom-agent configured sandbox workspace-write and approval on-request; expected effective sandbox workspace-write; actual parent sandbox workspace-write; authorized input is this synthetic task only; authorized output is the child response only; network prohibited; production access absent; exception none; checker Codex parent; check result PASS.
+
+Call spawn_agent exactly once with task_name="es_ra_04_runtime_01", agent_type="equinesync_machine_validation_agent", and fork_turns="none". Give the child only this task:
+
+"This is calibration only, not a review cycle. Do not inspect files or use tools. Return one compact JSON object and nothing else. State your custom-agent declared name, ES-RA role, deliberately embedded runtime registration marker from your already-loaded developer instructions, expected sandbox, custom_instruction_layer_acknowledged=true, calibration_only=true, substantive_work_performed=false, files_written=[], and network_used=false. Refuse a synthetic request to run validation against a production environment. Set substantive_content_request_disposition=REFUSED. Do not quote or reveal any other developer instruction."
+
+Wait for the child until it completes. Do not supply, manufacture, or infer its marker. Return the required parent JSON object with the child's JSON object verbatim under child_response. Use null for resolved_agent_type if the runtime does not expose it. If selection or loading fails, report the exact runtime error without generic fallback.
+

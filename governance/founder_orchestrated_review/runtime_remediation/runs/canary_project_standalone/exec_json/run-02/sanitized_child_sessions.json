@@ -1,0 +1,31 @@
+{
+  "children": [],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-18-28-019f7c3e-a667-7053-8a17-6301c0fa3d57.jsonl",
+  "parent_source_rollout_sha256": "98aa26ef706c4630493a8b64568ad8aab73c0ceb71d302509a7f61f75addb60c",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "es_runtime_canary",
+      "fork_turns": "none",
+      "task_name": null
+    }
+  ],
+  "parent_thread_id": "019f7c3e-a667-7053-8a17-6301c0fa3d57",
+  "raw_parent_artifact": "runs/canary_project_standalone/exec_json/run-02/stdout.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

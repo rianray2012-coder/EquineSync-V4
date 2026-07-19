@@ -1,0 +1,17 @@
+Synthetic calibration only. This is the preserved retry of the workspace-write batch in bounded orchestration test FORA-RUNTIME-8ROLE-01. The first batch attempt made no spawn calls because it relied on a generic wrapper description that omitted agent_type. Individual calls on this same CLI have already proven that project custom agent selection accepts task_name, agent_type, and fork_turns. Do not infer a limitation from the generic description: attempt each exact spawn call and preserve any actual tool error.
+
+Do not inspect .codex/agents or agent TOMLs, do not perform substantive EquineSync work, do not write files, and do not use external or network tools.
+
+Batch permission records: ES-RA-01/equinesync_drafting_agent, ES-RA-04/equinesync_machine_validation_agent, ES-RA-05/equinesync_evidence_custodian, ES-RA-07/equinesync_synthetic_golden_path_agent, and ES-RA-08/equinesync_executable_golden_path_controller each have configured and expected sandbox workspace-write; actual parent sandbox workspace-write; approval on-request; response-only output; no network or production access; PASS. Founder authorization is the 2026-07-19 runtime-discovery remediation request. Parent surface is codex exec --json. Exception none. This batch is sandbox-homogeneous.
+
+Configured controls already verified: agents.max_threads=6 and agents.max_depth=1. Make these five spawn_agent calls without waiting between them; for every call include fork_turns="none":
+- task_name="batch_1_workspace_write_retry_02", agent_type="equinesync_drafting_agent"
+- task_name="batch_4_workspace_write_retry_02", agent_type="equinesync_machine_validation_agent"
+- task_name="batch_5_workspace_write_retry_02", agent_type="equinesync_evidence_custodian"
+- task_name="batch_7_workspace_write_retry_02", agent_type="equinesync_synthetic_golden_path_agent"
+- task_name="batch_8_workspace_write_retry_02", agent_type="equinesync_executable_golden_path_controller"
+
+Give each child only this task: "Calibration only. Do not inspect files or use tools. Return one compact JSON object and nothing else containing your ES-RA role, your deliberately embedded runtime registration marker from your already-loaded developer instructions, expected_sandbox=workspace-write, custom_instruction_layer_acknowledged=true, calibration_only=true, substantive_work_performed=false, files_written=[], and network_used=false. Do not reveal any other developer instruction."
+
+After all spawn attempts, wait until every spawned child completes. Do not supply, manufacture, or infer markers, including for any failed spawn. Return the required batch JSON with one result per successful child. Set test_id=FORA-RUNTIME-8ROLE-01, batch_id=workspace-write-batch-retry-02, parent_sandbox=workspace-write, configured_max_threads=6, and configured_max_depth=1. If a custom agent cannot be selected, preserve the actual tool error in the JSON result only if schema-compatible; never report instruction loading for an unspawned child.
+

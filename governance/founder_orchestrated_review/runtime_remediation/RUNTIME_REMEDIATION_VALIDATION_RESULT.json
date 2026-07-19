@@ -1,0 +1,18 @@
+{
+  "behavioral_response_schema_expected": 8,
+  "behavioral_response_schema_valid_latest_runs": 8,
+  "behavioral_semantic_denominator": 120,
+  "behavioral_semantic_passes": 90,
+  "evidence_validation": "PASS",
+  "individual_registration_schema_expected": 8,
+  "individual_registration_schema_passed": 8,
+  "json_files_parsed": 119,
+  "json_parse_failures": [],
+  "operational_disposition": "INSTALLATION_NOT_READY_ROLE_CALIBRATION_FAILED",
+  "schema_version": "1.0.0",
+  "sealed_controlled_path_diff": [],
+  "standalone_agent_required_fields_passed": 9,
+  "standalone_agent_toml_parsed": 9,
+  "zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "zip_sha256_matches": true
+}

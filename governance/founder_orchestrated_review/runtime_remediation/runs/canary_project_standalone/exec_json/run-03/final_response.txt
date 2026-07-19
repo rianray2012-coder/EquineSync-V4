@@ -1,0 +1,4 @@
+Requested agent type: es_runtime_canary
+Resolved agent type: Not exposed
+Child identifier: /root/es_runtime_canary_exec_03
+Child response: ES_RUNTIME_CANARY_LOADED_V1

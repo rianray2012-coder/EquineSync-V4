@@ -1,0 +1,26 @@
+{
+  "captured_at": "2026-07-19T21:44:51Z",
+  "requested_agent_name": "equinesync_segregated_review_agent",
+  "parent_thread_id": "019f7c56-4db9-7c00-9a78-36f5390d894d",
+  "parent_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T16-44-18-019f7c56-4db9-7c00-9a78-36f5390d894d.jsonl",
+  "spawn_call_observed": false,
+  "spawn_requested_task_name": null,
+  "spawn_result_task_path": null,
+  "child_thread_id": null,
+  "child_rollout": null,
+  "child_agent_path": null,
+  "child_agent_role_metadata": null,
+  "parent_runtime": {
+    "approval_policy": "never",
+    "sandbox_mode": "read-only",
+    "network_access": null,
+    "network_policy": "restricted",
+    "permission_profile_type": "managed"
+  },
+  "child_runtime": {},
+  "child_read_custom_agent_config": false,
+  "limitations": [
+    "This is a sanitized extraction of Codex runtime records; encrypted reasoning and message payloads are not copied.",
+    "A registration marker plus named child path and absence of child self-discovery is used to evidence custom-instruction loading."
+  ]
+}

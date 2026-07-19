@@ -1,0 +1,34 @@
+{
+  "children": [],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": null,
+    "sandbox_policy": {
+      "exclude_slash_tmp": false,
+      "exclude_tmpdir_env_var": false,
+      "network_access": false,
+      "type": "workspace-write"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T16-47-31-019f7c59-3dc4-7a90-9270-7d32f7786f2c.jsonl",
+  "parent_source_rollout_sha256": "532364cc0592d8e23cbd2d6286fb9b66dfd2b05e7612659a6ed8656d52170e15",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "equinesync_synthetic_golden_path_agent",
+      "fork_turns": "none",
+      "task_name": "equinesync_synthetic_golden_path_agent"
+    }
+  ],
+  "parent_thread_id": "019f7c59-3dc4-7a90-9270-7d32f7786f2c",
+  "raw_parent_artifact": "runs/behavioral_calibration/ES-CAL-2026-001/equinesync_synthetic_golden_path_agent/run-01/events.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

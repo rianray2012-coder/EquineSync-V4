@@ -1,0 +1,9 @@
+ES-RA-01  0
+ES-RA-02  0
+ES-RA-03  0
+ES-RA-04  1
+ES-RA-05  0
+ES-RA-06  1
+ES-RA-07  0
+ES-RA-08  0
+aggregate_logical_status  FAIL

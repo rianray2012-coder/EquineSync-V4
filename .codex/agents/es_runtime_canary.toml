@@ -1,0 +1,9 @@
+name = "es_runtime_canary"
+description = "Temporary calibration-only agent for proving project-scoped custom-agent discovery and instruction loading."
+sandbox_mode = "read-only"
+approval_policy = "on-request"
+developer_instructions = """
+This is temporary calibration infrastructure for runtime discovery only.
+Return exactly ES_RUNTIME_CANARY_LOADED_V1 and no other text.
+Do not use tools, inspect files, perform substantive work, or claim activation.
+"""

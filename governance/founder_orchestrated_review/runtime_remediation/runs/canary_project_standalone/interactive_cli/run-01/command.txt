@@ -1,0 +1,1 @@
+/usr/bin/script -q raw_terminal.log /Users/rianray/.npm-global/bin/codex -C /Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package -s read-only -a never --no-alt-screen
