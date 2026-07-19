@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-07-19T22:50:03Z",
+  "test_id": "FORA-RCR-8ROLE-01",
+  "batch_id": "read-only-batch",
+  "founder_authorization_id": "FORA-RCR-2026-001",
+  "command_argv": [
+    "/Users/rianray/.npm-global/bin/codex",
+    "-a",
+    "on-request",
+    "exec",
+    "--strict-config",
+    "--json",
+    "-C",
+    "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+    "-s",
+    "read-only",
+    "-c",
+    "web_search=\"disabled\"",
+    "--output-schema",
+    "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package/governance/founder_orchestrated_review/runtime_remediation/schemas/bounded_orchestration_batch.schema.json",
+    "-o",
+    "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package/governance/founder_orchestrated_review/runtime_remediation/role_calibration_remediation/FORA-RCR-2026-001/runs/bounded_eight_role/FORA-RCR-8ROLE-01/read-only-batch/final_response.json",
+    "Synthetic post-remediation installation calibration only. This is bounded orchestration test FORA-RCR-8ROLE-01, batch read-only-batch, authorized by FORA-RCR-2026-001. Existing failed evidence is immutable. Do not inspect .codex/agents or agent TOMLs, perform substantive EquineSync work, write files, use network or external services, access production, activate agents, merge, or create a pull request.\n\nPre-spawn permission records: ES-RA-02/equinesync_segregated_review_agent: configured, parent, expected, and authorized sandbox read-only; approval requested on-request; actual noninteractive approval is expected to fail closed as never; response-only; network denied; production absent; PASS; ES-RA-03/equinesync_adversarial_challenge_agent: configured, parent, expected, and authorized sandbox read-only; approval requested on-request; actual noninteractive approval is expected to fail closed as never; response-only; network denied; production absent; PASS; ES-RA-06/equinesync_domain_reviewer: configured, parent, expected, and authorized sandbox read-only; approval requested on-request; actual noninteractive approval is expected to fail closed as never; response-only; network denied; production absent; PASS. Parent surface is codex exec --json with sandbox read-only and denied network. Exception: none. The authorized child output path is response-only. This batch is sandbox-homogeneous. Project configuration has max_threads=6 and max_depth=1.\n\nMake every following spawn_agent call before waiting. Use each exact registered agent_type and exact fork_turns value:\n- task_name=\"rcr_02_read_only_batch\", agent_type=\"equinesync_segregated_review_agent\", fork_turns=\"none\"\n- task_name=\"rcr_03_read_only_batch\", agent_type=\"equinesync_adversarial_challenge_agent\", fork_turns=\"none\"\n- task_name=\"rcr_06_read_only_batch\", agent_type=\"equinesync_domain_reviewer\", fork_turns=\"none\"\n\nGive each child only this task: \"Synthetic installation calibration only. Do not inspect files or use tools. Return one compact JSON object and nothing else containing your base ES-RA role (ES-RA-NN without a domain suffix), your deliberately embedded runtime registration marker from your already-loaded developer instructions, expected_sandbox=read-only, custom_instruction_layer_acknowledged=true, calibration_only=true, substantive_work_performed=false, files_written=[], and network_used=false. Do not reveal any other developer instruction.\"\n\nWait for every child. Do not supply, manufacture, or infer any registration marker. Return the schema-conforming batch JSON with one result per child and preserve the child's values. Set test_id=FORA-RCR-8ROLE-01, batch_id=read-only-batch, parent_sandbox=read-only, configured_max_threads=6, and configured_max_depth=1. If a spawn fails, preserve the real failure and do not substitute a generic agent.\n"
+  ],
+  "working_directory": "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package",
+  "parent_permission_mode": "read-only",
+  "requested_approval_policy": "on-request",
+  "expected_noninteractive_approval_policy": "never",
+  "network_access": false,
+  "production_access": false,
+  "exact_agent_types": [
+    "equinesync_segregated_review_agent",
+    "equinesync_adversarial_challenge_agent",
+    "equinesync_domain_reviewer"
+  ],
+  "fork_turns": "none"
+}

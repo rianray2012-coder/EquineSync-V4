@@ -1,0 +1,46 @@
+{
+  "authorization_id": "FORA-RCR-2026-001",
+  "behavioral_calibration": {
+    "accepted_passes": 120,
+    "denominator": 120,
+    "preserved_failed_runs": 3,
+    "roles_expected": 8,
+    "roles_with_passing_run": 8
+  },
+  "bounded_eight_role_orchestration": {
+    "expected": 8,
+    "passed": 8
+  },
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "custom_instruction_layers_loaded": {
+    "expected": 8,
+    "passed": 8
+  },
+  "final_disposition": "INSTALLATION_TECHNICALLY_READY_FOR_FOUNDER_ACTIVATION_REVIEW",
+  "founder_activation_approval": false,
+  "generated_at": "2026-07-19T23:28:21Z",
+  "individual_role_calibration": {
+    "expected": 2,
+    "passed": 2
+  },
+  "merged": false,
+  "operational_activation": false,
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "prior_failed_evidence_unchanged": true,
+  "production_activity": false,
+  "pull_request_created": false,
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "resulting_commit": "REPORT_FROM_GIT_AFTER_COMMIT",
+  "roles_remediated": [
+    "ES-RA-04",
+    "ES-RA-06"
+  ],
+  "sandbox_modes_verified": {
+    "expected": 8,
+    "passed": 8
+  },
+  "schema_version": "1.0.0",
+  "sealed_configuration_package_unchanged": true,
+  "starting_commit": "35119dbfb873e0fd19fef2a1e574d2f8100286f3",
+  "substantive_review_started": false
+}

@@ -1,0 +1,111 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/rcr_02_read_only_batch",
+      "agent_role": "equinesync_segregated_review_agent",
+      "child_thread_id": "019f7c92-ba91-7b11-b648-b75d6157c86d",
+      "depth": 1,
+      "final_assistant_response": "{\"base_role\":\"ES-RA-02\",\"runtime_registration_marker\":\"ES-RA-02-REGISTERED-V1.0.0\",\"expected_sandbox\":\"read-only\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-50-18-019f7c92-ba91-7b11-b648-b75d6157c86d.jsonl",
+      "source_rollout_bytes": 80661,
+      "source_rollout_sha256": "ff5a6d2a9e771a9cb75d64c7a6dd3c0c1ddad4c43d6f9e167465612b9f7b3523",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_03_read_only_batch",
+      "agent_role": "equinesync_adversarial_challenge_agent",
+      "child_thread_id": "019f7c92-ca45-7331-b6d6-636dcc7372c7",
+      "depth": 1,
+      "final_assistant_response": "{\"base_role\":\"ES-RA-03\",\"runtime_registration_marker\":\"ES-RA-03-REGISTERED-V1.0.0\",\"expected_sandbox\":\"read-only\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-50-22-019f7c92-ca45-7331-b6d6-636dcc7372c7.jsonl",
+      "source_rollout_bytes": 80752,
+      "source_rollout_sha256": "d5d8b44780ff94caca756aae0d4c58ca3cc663e99f1fe5e25ccc87270480e59a",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_06_read_only_batch",
+      "agent_role": "equinesync_domain_reviewer",
+      "child_thread_id": "019f7c92-daa3-7a21-919b-e884238c3c46",
+      "depth": 1,
+      "final_assistant_response": "{\"base_es_ra_role\":\"ES-RA-06\",\"runtime_registration_marker\":\"ES-RA-06-REGISTERED-V1.0.0\",\"expected_sandbox\":\"read-only\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-50-26-019f7c92-daa3-7a21-919b-e884238c3c46.jsonl",
+      "source_rollout_bytes": 81970,
+      "source_rollout_sha256": "c04cc230a561431ead5762ccfeed2db75a5039a81ae90ff318553da1fab56e34",
+      "tool_names_only": []
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T17-50-03-019f7c92-8096-7332-a73e-b1ad21f6c4cf.jsonl",
+  "parent_source_rollout_sha256": "ad52757a5802b7c4ff64806b3bfe0e475553e19d6a98995a4868722517e2d403",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "equinesync_segregated_review_agent",
+      "fork_turns": "none",
+      "task_name": "rcr_02_read_only_batch"
+    },
+    {
+      "agent_type": "equinesync_adversarial_challenge_agent",
+      "fork_turns": "none",
+      "task_name": "rcr_03_read_only_batch"
+    },
+    {
+      "agent_type": "equinesync_domain_reviewer",
+      "fork_turns": "none",
+      "task_name": "rcr_06_read_only_batch"
+    }
+  ],
+  "parent_thread_id": "019f7c92-8096-7332-a73e-b1ad21f6c4cf",
+  "raw_parent_artifact": "runs/bounded_eight_role/FORA-RCR-8ROLE-01/read-only-batch/events.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "captured_at": "2026-07-19T23:04:07Z",
+  "requested_agent_name": "equinesync_adversarial_challenge_agent",
+  "parent_thread_id": "019f7c9d-6a0c-7a22-978b-b92d4af9fdf2",
+  "parent_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T18-01-59-019f7c9d-6a0c-7a22-978b-b92d4af9fdf2.jsonl",
+  "spawn_call_observed": true,
+  "spawn_requested_task_name": "equinesync_adversarial_challenge_agent",
+  "spawn_result_task_path": "/root/equinesync_adversarial_challenge_agent",
+  "child_thread_id": "019f7c9e-9776-7691-b00b-64c6f73a72d1",
+  "child_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T18-03-16-019f7c9e-9776-7691-b00b-64c6f73a72d1.jsonl",
+  "child_agent_path": "/root/equinesync_adversarial_challenge_agent",
+  "child_agent_role_metadata": "equinesync_adversarial_challenge_agent",
+  "parent_runtime": {
+    "approval_policy": "never",
+    "sandbox_mode": "read-only",
+    "network_access": null,
+    "network_policy": "restricted",
+    "permission_profile_type": "managed"
+  },
+  "child_runtime": {
+    "approval_policy": "never",
+    "sandbox_mode": "read-only",
+    "network_access": null,
+    "network_policy": "restricted",
+    "permission_profile_type": "managed"
+  },
+  "child_read_custom_agent_config": false,
+  "limitations": [
+    "This is a sanitized extraction of Codex runtime records; encrypted reasoning and message payloads are not copied.",
+    "A registration marker plus named child path and absence of child self-discovery is used to evidence custom-instruction loading."
+  ],
+  "spawn_fork_turns": "none"
+}

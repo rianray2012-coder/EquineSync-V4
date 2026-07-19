@@ -1,0 +1,151 @@
+{
+  "test_id": "FORA-RCR-8ROLE-01",
+  "batch_id": "workspace-write-batch-retry-01",
+  "started_at": "2026-07-19T22:53:52Z",
+  "finished_at": "2026-07-19T22:54:57Z",
+  "duration_seconds": 65.264,
+  "process_exit_code": 0,
+  "parent_sandbox": "workspace-write",
+  "requested_roles": 5,
+  "batch_checks": {
+    "process_exit": true,
+    "response_test_id": true,
+    "response_batch_id": true,
+    "parent_sandbox_response": true,
+    "max_threads": true,
+    "max_depth": true,
+    "result_denominator": true,
+    "exact_spawn_calls": false,
+    "child_denominator": false,
+    "all_roles_pass": false
+  },
+  "role_checks": [
+    {
+      "custom_agent_name": "equinesync_drafting_agent",
+      "agent_id": "ES-RA-01",
+      "expected_sandbox": "workspace-write",
+      "checks": {
+        "response_identity": true,
+        "registration_marker": true,
+        "response_sandbox": true,
+        "instruction_layer_acknowledged": true,
+        "calibration_only": true,
+        "no_substantive_work": true,
+        "no_files_written": true,
+        "no_network_used": true,
+        "runtime_agent_type": false,
+        "runtime_sandbox": false,
+        "runtime_network_denied": false,
+        "child_used_no_tools": false
+      },
+      "status": "FAIL"
+    },
+    {
+      "custom_agent_name": "equinesync_machine_validation_agent",
+      "agent_id": "ES-RA-04",
+      "expected_sandbox": "workspace-write",
+      "checks": {
+        "response_identity": true,
+        "registration_marker": true,
+        "response_sandbox": true,
+        "instruction_layer_acknowledged": true,
+        "calibration_only": true,
+        "no_substantive_work": true,
+        "no_files_written": true,
+        "no_network_used": true,
+        "runtime_agent_type": false,
+        "runtime_sandbox": false,
+        "runtime_network_denied": false,
+        "child_used_no_tools": false
+      },
+      "status": "FAIL"
+    },
+    {
+      "custom_agent_name": "equinesync_evidence_custodian",
+      "agent_id": "ES-RA-05",
+      "expected_sandbox": "workspace-write",
+      "checks": {
+        "response_identity": true,
+        "registration_marker": true,
+        "response_sandbox": true,
+        "instruction_layer_acknowledged": true,
+        "calibration_only": true,
+        "no_substantive_work": true,
+        "no_files_written": true,
+        "no_network_used": true,
+        "runtime_agent_type": false,
+        "runtime_sandbox": false,
+        "runtime_network_denied": false,
+        "child_used_no_tools": false
+      },
+      "status": "FAIL"
+    },
+    {
+      "custom_agent_name": "equinesync_synthetic_golden_path_agent",
+      "agent_id": "ES-RA-07",
+      "expected_sandbox": "workspace-write",
+      "checks": {
+        "response_identity": true,
+        "registration_marker": true,
+        "response_sandbox": true,
+        "instruction_layer_acknowledged": true,
+        "calibration_only": true,
+        "no_substantive_work": true,
+        "no_files_written": true,
+        "no_network_used": true,
+        "runtime_agent_type": false,
+        "runtime_sandbox": false,
+        "runtime_network_denied": false,
+        "child_used_no_tools": false
+      },
+      "status": "FAIL"
+    },
+    {
+      "custom_agent_name": "equinesync_executable_golden_path_controller",
+      "agent_id": "ES-RA-08",
+      "expected_sandbox": "workspace-write",
+      "checks": {
+        "response_identity": true,
+        "registration_marker": true,
+        "response_sandbox": true,
+        "instruction_layer_acknowledged": true,
+        "calibration_only": true,
+        "no_substantive_work": true,
+        "no_files_written": true,
+        "no_network_used": true,
+        "runtime_agent_type": false,
+        "runtime_sandbox": false,
+        "runtime_network_denied": false,
+        "child_used_no_tools": false
+      },
+      "status": "FAIL"
+    }
+  ],
+  "status": "FAIL",
+  "artifacts": {
+    "parent_prompt.txt": {
+      "sha256": "b250670aa70cc0ec0b75985cfd0ec015b32fb6eabb400106f43d5f4ec47ba404",
+      "bytes": 3748
+    },
+    "events.jsonl": {
+      "sha256": "3ecc4e81f652a6c0bd121631ee5cd40df55522ce54382f3bf8927839ac7d4d91",
+      "bytes": 4074
+    },
+    "stderr.txt": {
+      "sha256": "6c5088cad5ef2a6e6efde2cd049fc4aa945bda2e98550e2f00844ca100ed74d6",
+      "bytes": 4389
+    },
+    "final_response.json": {
+      "sha256": "d055b5c121008ea3df741da2a6923264400b5bb9679810f904f53a3fd8929029",
+      "bytes": 2125
+    },
+    "command.json": {
+      "sha256": "03b77bfddb93526cb14d93190144e973159f1a9c095c3d1b48bbd0ffb2c0e1eb",
+      "bytes": 5642
+    },
+    "sanitized_child_sessions.json": {
+      "sha256": "a06771fde85cac5691b4b6a2183e10ec12ea9816ddf4f68cfbdad2bc59478e2e",
+      "bytes": 7855
+    }
+  }
+}

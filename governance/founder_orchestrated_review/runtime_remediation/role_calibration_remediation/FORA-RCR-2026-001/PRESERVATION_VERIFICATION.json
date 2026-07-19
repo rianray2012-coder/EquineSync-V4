@@ -1,0 +1,12 @@
+{
+  "authorization_id": "FORA-RCR-2026-001",
+  "generated_at": "2026-07-19T23:28:21Z",
+  "preserved_original_behavioral_failures": [
+    "governance/founder_orchestrated_review/runtime_remediation/runs/behavioral_calibration/ES-CAL-2026-001/equinesync_machine_validation_agent/run-02",
+    "governance/founder_orchestrated_review/runtime_remediation/runs/behavioral_calibration/ES-CAL-2026-001/equinesync_domain_reviewer/run-02"
+  ],
+  "prior_runtime_remediation_diff_paths": [],
+  "sealed_configuration_and_calibration_diff_paths": [],
+  "starting_commit": "35119dbfb873e0fd19fef2a1e574d2f8100286f3",
+  "status": "PASS"
+}

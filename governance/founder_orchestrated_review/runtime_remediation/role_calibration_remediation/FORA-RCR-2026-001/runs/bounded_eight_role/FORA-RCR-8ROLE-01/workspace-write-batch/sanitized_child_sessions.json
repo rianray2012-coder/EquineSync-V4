@@ -1,0 +1,185 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/rcr_01_workspace_write_batch",
+      "agent_role": "equinesync_drafting_agent",
+      "child_thread_id": "019f7c93-7f9a-7d51-b8f8-fd36e41be62b",
+      "depth": 1,
+      "final_assistant_response": "{\"base_role\":\"ES-RA-01\",\"runtime_registration_marker\":\"ES-RA-01-REGISTERED-V1.0.0\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-51-09-019f7c93-7f9a-7d51-b8f8-fd36e41be62b.jsonl",
+      "source_rollout_bytes": 84732,
+      "source_rollout_sha256": "93a3c2d8eea15b98c5e802bd28415b6f80e1593b842a7d659d16ccf3b4019612",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_04_workspace_write_batch",
+      "agent_role": "equinesync_machine_validation_agent",
+      "child_thread_id": "019f7c93-9e6c-7f52-9b8e-0406516a77c0",
+      "depth": 1,
+      "final_assistant_response": "{\"base_role\":\"ES-RA-04\",\"registration_marker\":\"ES-RA-04-REGISTERED-V1.0.0\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-51-17-019f7c93-9e6c-7f52-9b8e-0406516a77c0.jsonl",
+      "source_rollout_bytes": 85925,
+      "source_rollout_sha256": "4c689ca17538f7356361edff0681e1cea4ae8dd693c72bb86f41d234d3b60663",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_05_workspace_write_batch",
+      "agent_role": "equinesync_evidence_custodian",
+      "child_thread_id": "019f7c94-1349-76c1-9d8e-9919dc4cda0c",
+      "depth": 1,
+      "final_assistant_response": "{\"base_es_ra_role\":\"ES-RA-05\",\"runtime_registration_marker\":\"ES-RA-05-REGISTERED-V1.0.0\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-51-46-019f7c94-1349-76c1-9d8e-9919dc4cda0c.jsonl",
+      "source_rollout_bytes": 85010,
+      "source_rollout_sha256": "9091ce4f758a450a828a706771bba94d1b2a2ec86a000cf0fd58d74d4f1520cb",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_07_workspace_write_batch",
+      "agent_role": "equinesync_synthetic_golden_path_agent",
+      "child_thread_id": "019f7c94-22b2-74e3-8d32-72db74a76c64",
+      "depth": 1,
+      "final_assistant_response": "{\"base_es_ra_role\":\"ES-RA-07\",\"runtime_registration_marker\":\"ES-RA-07-REGISTERED-V1.0.0\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-51-50-019f7c94-22b2-74e3-8d32-72db74a76c64.jsonl",
+      "source_rollout_bytes": 85067,
+      "source_rollout_sha256": "61059a915e2fc3d90edee29bbd577a538c98a12cc781945a4bdc483aeb4664af",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_08_workspace_write_batch",
+      "agent_role": "equinesync_executable_golden_path_controller",
+      "child_thread_id": "019f7c94-32e3-7093-b905-a1da324c3d1a",
+      "depth": 1,
+      "final_assistant_response": "{\"base_role\":\"ES-RA-08\",\"runtime_registration_marker\":\"ES-RA-08-REGISTERED-V1.0.0\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-51-55-019f7c94-32e3-7093-b905-a1da324c3d1a.jsonl",
+      "source_rollout_bytes": 85142,
+      "source_rollout_sha256": "f6e336977c62d25cd4df41232873f04a819a4ca925dc1b0ab655e5cb8c314a58",
+      "tool_names_only": []
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "exclude_slash_tmp": false,
+      "exclude_tmpdir_env_var": false,
+      "network_access": false,
+      "type": "workspace-write"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T17-50-41-019f7c93-155e-7ed0-86b1-e3b87c835bee.jsonl",
+  "parent_source_rollout_sha256": "5f85c544ea3825a3349fb0dbf8493eb5d8707eafa1c4078afffd185ceb57cc2d",
+  "parent_spawn_calls": [
+    {
+      "agent_type": "equinesync_drafting_agent",
+      "fork_turns": "none",
+      "task_name": "rcr_01_workspace_write_batch"
+    },
+    {
+      "agent_type": "equinesync_machine_validation_agent",
+      "fork_turns": "none",
+      "task_name": "rcr_04_workspace_write_batch"
+    },
+    {
+      "agent_type": "equinesync_evidence_custodian",
+      "fork_turns": "none",
+      "task_name": "rcr_05_workspace_write_batch"
+    },
+    {
+      "agent_type": "equinesync_synthetic_golden_path_agent",
+      "fork_turns": "none",
+      "task_name": "rcr_07_workspace_write_batch"
+    },
+    {
+      "agent_type": "equinesync_executable_golden_path_controller",
+      "fork_turns": "none",
+      "task_name": "rcr_08_workspace_write_batch"
+    }
+  ],
+  "parent_thread_id": "019f7c93-155e-7ed0-86b1-e3b87c835bee",
+  "raw_parent_artifact": "runs/bounded_eight_role/FORA-RCR-8ROLE-01/workspace-write-batch/events.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

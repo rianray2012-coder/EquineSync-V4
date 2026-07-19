@@ -1,0 +1,185 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/rcr_01_workspace_write_batch_retry_01",
+      "agent_role": null,
+      "child_thread_id": "019f7c96-3c8f-7bb3-ab23-c639517b6cda",
+      "depth": 1,
+      "final_assistant_response": "{\"base_es_ra_role\":\"ES-RA-01\",\"runtime_registration_marker\":\"RCR-01-WORKSPACE-WRITE-BATCH-RETRY-01\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-54-08-019f7c96-3c8f-7bb3-ab23-c639517b6cda.jsonl",
+      "source_rollout_bytes": 78886,
+      "source_rollout_sha256": "709e33b142c4b9c27cd456a46df0fdbb852555c39cf7c215898d4e7084d171a4",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_04_workspace_write_batch_retry_01",
+      "agent_role": null,
+      "child_thread_id": "019f7c96-4ba4-7d32-b403-8dc8f0aca829",
+      "depth": 1,
+      "final_assistant_response": "{\"base_es_ra_role\":\"ES-RA-04\",\"runtime_registration_marker\":\"RCR-04-WORKSPACE-WRITE-BATCH-RETRY-01\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-54-12-019f7c96-4ba4-7d32-b403-8dc8f0aca829.jsonl",
+      "source_rollout_bytes": 77990,
+      "source_rollout_sha256": "c81d90903908fbd381209a14d256dcf26b77da248a5f201baa804a236b95d5f0",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_05_workspace_write_batch_retry_01",
+      "agent_role": null,
+      "child_thread_id": "019f7c96-5b24-7c60-91e5-146414ebd02e",
+      "depth": 1,
+      "final_assistant_response": "{\"base_es_ra_role\":\"ES-RA-05\",\"runtime_registration_marker\":\"workspace_write_batch_retry_01\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-54-16-019f7c96-5b24-7c60-91e5-146414ebd02e.jsonl",
+      "source_rollout_bytes": 78077,
+      "source_rollout_sha256": "b6053c086dc901c5454980db0060f530f8c4bf0598d7b32ba0082840c9f85784",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_07_workspace_write_batch_retry_01",
+      "agent_role": null,
+      "child_thread_id": "019f7c96-8542-7dd1-a78e-1071d04e4ebf",
+      "depth": 1,
+      "final_assistant_response": "{\"base_role\":\"ES-RA-07\",\"runtime_registration_marker\":\"rcr_07_workspace_write_batch_retry_01\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-54-27-019f7c96-8542-7dd1-a78e-1071d04e4ebf.jsonl",
+      "source_rollout_bytes": 78016,
+      "source_rollout_sha256": "fb852156de874b2699d6ca010b9d7fe06024f20bf06af8c335ce6f324382a591",
+      "tool_names_only": []
+    },
+    {
+      "agent_path": "/root/rcr_08_workspace_write_batch_retry_01",
+      "agent_role": null,
+      "child_thread_id": "019f7c96-9e2f-77c0-b99a-5435c36d7089",
+      "depth": 1,
+      "final_assistant_response": "{\"base_es_ra_role\":\"ES-RA-08\",\"runtime_registration_marker\":\"rcr_08_workspace_write_batch_retry_01\",\"expected_sandbox\":\"workspace-write\",\"custom_instruction_layer_acknowledged\":true,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "xhigh",
+        "sandbox_policy": {
+          "exclude_slash_tmp": false,
+          "exclude_tmpdir_env_var": false,
+          "network_access": false,
+          "type": "workspace-write"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T17-54-33-019f7c96-9e2f-77c0-b99a-5435c36d7089.jsonl",
+      "source_rollout_bytes": 79398,
+      "source_rollout_sha256": "ff2891f6692e233e47b05546fe73592bc741d59cdab1d8f7f29048cb4954c7c7",
+      "tool_names_only": []
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": "xhigh",
+    "sandbox_policy": {
+      "exclude_slash_tmp": false,
+      "exclude_tmpdir_env_var": false,
+      "network_access": false,
+      "type": "workspace-write"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T17-53-53-019f7c95-ffd9-7552-9cca-66d48d79ee70.jsonl",
+  "parent_source_rollout_sha256": "cc40e9ab0c28a2261f7653ee2f11d9d02b69a54321a3cba71bc9c5617c9a8797",
+  "parent_spawn_calls": [
+    {
+      "agent_type": null,
+      "fork_turns": "none",
+      "task_name": "rcr_01_workspace_write_batch_retry_01"
+    },
+    {
+      "agent_type": null,
+      "fork_turns": "none",
+      "task_name": "rcr_04_workspace_write_batch_retry_01"
+    },
+    {
+      "agent_type": null,
+      "fork_turns": "none",
+      "task_name": "rcr_05_workspace_write_batch_retry_01"
+    },
+    {
+      "agent_type": null,
+      "fork_turns": "none",
+      "task_name": "rcr_07_workspace_write_batch_retry_01"
+    },
+    {
+      "agent_type": null,
+      "fork_turns": "none",
+      "task_name": "rcr_08_workspace_write_batch_retry_01"
+    }
+  ],
+  "parent_thread_id": "019f7c95-ffd9-7552-9cca-66d48d79ee70",
+  "raw_parent_artifact": "runs/bounded_eight_role/FORA-RCR-8ROLE-01/workspace-write-batch-retry-01/events.jsonl",
+  "sanitization": {
+    "encrypted_reasoning_or_messages_copied": false,
+    "hidden_system_or_developer_instructions_copied": false,
+    "scope": "session identity, selected custom-agent role, runtime policy, tool names, final child response, and source hash only"
+  }
+}

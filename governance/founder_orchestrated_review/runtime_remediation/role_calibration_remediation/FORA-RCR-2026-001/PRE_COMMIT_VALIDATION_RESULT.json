@@ -1,0 +1,26 @@
+{
+  "authorization_id": "FORA-RCR-2026-001",
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "checks": {
+    "behavior_cases_pass": true,
+    "behavior_denominator_exact": true,
+    "behavior_roles_pass": true,
+    "bounded_roles_pass": true,
+    "branch_exact": true,
+    "final_disposition_exact": true,
+    "founder_activation_not_approved": true,
+    "individual_es_ra_04_pass": true,
+    "individual_es_ra_06_pass": true,
+    "instruction_layers_loaded": true,
+    "package_zip_hash_exact": true,
+    "prior_runtime_remediation_evidence_unchanged": true,
+    "sandbox_modes_verified": true,
+    "sealed_configuration_and_calibration_unchanged": true
+  },
+  "generated_at": "2026-07-19T23:28:21Z",
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "prior_runtime_diff_paths": [],
+  "sealed_diff_paths": [],
+  "starting_commit": "35119dbfb873e0fd19fef2a1e574d2f8100286f3",
+  "status": "PASS"
+}
