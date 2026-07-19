@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Completion Attestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "agent_run_id",
+    "recorded_scope",
+    "scope_denominator_count",
+    "completed_count",
+    "coverage_percentage",
+    "completeness",
+    "reliability",
+    "highest_evidence_level",
+    "attestation"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recorded_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope_denominator_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "completed_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "incomplete_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "coverage_percentage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "completeness": {
+      "type": "string"
+    },
+    "reliability": {
+      "type": "string"
+    },
+    "highest_evidence_level": {
+      "type": "string"
+    },
+    "material_assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "known_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "procedures_not_performed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "independent_verification_status": {
+      "type": "string"
+    },
+    "attestation": {
+      "const": "I completed the procedures identified in the Work Completeness Ledger for the recorded scope. This attestation does not constitute Founder approval, external assurance, legal certification, or proof that undiscovered defects do not exist."
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

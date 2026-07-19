@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Cross-Agent Discrepancy Register",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "discrepancies"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "discrepancies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "discrepancy_id",
+          "issue",
+          "agent_positions",
+          "status"
+        ],
+        "properties": {
+          "discrepancy_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "issue": {
+            "type": "string",
+            "minLength": 1
+          },
+          "agent_positions": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "agent_run_id",
+                "conclusion"
+              ],
+              "properties": {
+                "agent_run_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "conclusion": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                },
+                "method": {
+                  "type": "string"
+                },
+                "assumptions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                },
+                "confidence": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "possible_reason": {
+            "type": "string"
+          },
+          "additional_procedure": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "OPEN",
+              "UNDER_RECONCILIATION",
+              "RECONCILED",
+              "FOUNDER_DECISION_REQUIRED"
+            ]
+          },
+          "founder_disposition": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

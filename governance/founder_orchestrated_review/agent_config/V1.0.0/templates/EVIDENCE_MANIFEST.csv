@@ -1,0 +1,1 @@
+evidence_id,file_name,original_file_name,source_path,repository_path,version,commit_or_tag,source_actor,received_at,byte_size,media_type,hash_algorithm,hash_value,classification,parent_evidence_ids,superseded_by,access_classification,redaction_status,retention_status,related_findings,related_executions,notes

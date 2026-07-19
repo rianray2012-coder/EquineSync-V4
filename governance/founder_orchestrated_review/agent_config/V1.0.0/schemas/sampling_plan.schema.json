@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Sampling Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "population",
+    "method",
+    "sample_size",
+    "selection_criteria",
+    "limitations"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "population": {
+      "type": "object",
+      "required": [
+        "description",
+        "size"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "subgroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sample_size": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "selection_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "random_seed": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "high_risk_targeted_items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "expansion_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "founder_authorization_reference": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

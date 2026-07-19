@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Review Integrity Scorecard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "dimensions",
+    "overall_readiness"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dimension",
+          "status",
+          "evidence_ids"
+        ],
+        "properties": {
+          "dimension": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "COMPLETE",
+              "COMPLETE_WITH_LIMITATIONS",
+              "INCOMPLETE",
+              "BLOCKED",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "overall_readiness": {
+      "enum": [
+        "READY_FOR_FOUNDER_DISPOSITION",
+        "READY_WITH_LIMITATIONS",
+        "NOT_READY_FOR_FINAL_FOUNDER_DISPOSITION"
+      ]
+    },
+    "blocking_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  }
+}

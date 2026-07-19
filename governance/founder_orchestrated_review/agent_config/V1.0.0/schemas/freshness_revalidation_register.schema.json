@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Freshness and Revalidation Register",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "records"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "record_id",
+          "artifact_or_result",
+          "validity_basis",
+          "revalidation_triggers"
+        ],
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_or_result": {
+            "type": "string",
+            "minLength": 1
+          },
+          "validity_basis": {
+            "type": "object"
+          },
+          "review_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expiration": {
+            "type": "string"
+          },
+          "revalidation_triggers": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

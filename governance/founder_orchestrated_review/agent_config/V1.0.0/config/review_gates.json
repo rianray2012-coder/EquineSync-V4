@@ -1,0 +1,83 @@
+{
+  "framework_version": "V1.3",
+  "gates": [
+    {
+      "gate": "DRAFT_READY_FOR_REVIEW",
+      "minimum": {
+        "completeness": "C4",
+        "reliability": "R2",
+        "evidence": "E3"
+      },
+      "required_agents": [
+        "ES-RA-01"
+      ]
+    },
+    {
+      "gate": "GOVERNANCE_ADOPTION_RECOMMENDATION",
+      "minimum": {
+        "completeness": "C5",
+        "reliability": "R3",
+        "evidence": "E4"
+      },
+      "required_agents": [
+        "ES-RA-01",
+        "ES-RA-02",
+        "ES-RA-05",
+        "ES-RA-06"
+      ]
+    },
+    {
+      "gate": "IMPLEMENTATION_READINESS_RECOMMENDATION",
+      "minimum": {
+        "completeness": "C5",
+        "reliability": "R4",
+        "evidence": "E4"
+      },
+      "required_agents": [
+        "ES-RA-02",
+        "ES-RA-03",
+        "ES-RA-04",
+        "ES-RA-05",
+        "ES-RA-06",
+        "ES-RA-07"
+      ]
+    },
+    {
+      "gate": "PILOT_READINESS_RECOMMENDATION",
+      "minimum": {
+        "completeness": "C5",
+        "reliability": "R4",
+        "evidence": "E4"
+      },
+      "required_agents": [
+        "ES-RA-02",
+        "ES-RA-03",
+        "ES-RA-04",
+        "ES-RA-05",
+        "ES-RA-06",
+        "ES-RA-07",
+        "ES-RA-08"
+      ],
+      "required_reproduction_level": "LEVEL_3_FOR_CRITICAL_PATHS"
+    },
+    {
+      "gate": "PRODUCTION_READINESS_RECOMMENDATION",
+      "minimum": {
+        "completeness": "C5",
+        "reliability": "R4_OR_R5",
+        "evidence": "E5_FOR_CRITICAL_CLAIMS"
+      },
+      "required_agents": [
+        "ES-RA-02",
+        "ES-RA-03",
+        "ES-RA-04",
+        "ES-RA-05",
+        "ES-RA-06",
+        "ES-RA-07",
+        "ES-RA-08"
+      ],
+      "required_reproduction_level": "LEVEL_4_WHERE_MATERIALLY_APPLICABLE"
+    }
+  ],
+  "note": "Thresholds support recommendations only. They never automate Founder approval."
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Remediation Verification Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "verification_run_id",
+    "finding_id",
+    "original_version",
+    "remediated_version",
+    "verification_scope",
+    "result"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "verification_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "finding_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "remediated_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "change_log_evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "verification_scope": {
+      "enum": [
+        "EXACT_CHANGE",
+        "AFFECTED_SECTION",
+        "AFFECTED_DEPENDENCIES",
+        "COMPLETE_ARTIFACT"
+      ]
+    },
+    "procedures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "regression_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "residual_risk": {
+      "type": "string"
+    },
+    "result": {
+      "enum": [
+        "VERIFIED_CLOSED",
+        "PARTIALLY_REMEDIATED",
+        "VERIFICATION_FAILED",
+        "REMEDIATION_CREATED_NEW_FINDING",
+        "REOPENED"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

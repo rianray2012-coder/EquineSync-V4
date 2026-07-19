@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Golden-Path Execution Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "execution_id",
+    "specification_id",
+    "environment",
+    "starting_state_verified",
+    "steps",
+    "reproduction_level",
+    "recommended_disposition"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "specification_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "specification_version": {
+      "type": "string"
+    },
+    "authorization_reference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "build_id": {
+      "type": "string"
+    },
+    "commit": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "object"
+    },
+    "starting_state_verified": {
+      "type": "boolean"
+    },
+    "starting_state_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "step_number",
+          "intended_action",
+          "expected_result",
+          "actual_action",
+          "actual_result",
+          "status"
+        ],
+        "properties": {
+          "step_number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "intended_action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected_result": {
+            "type": "string",
+            "minLength": 1
+          },
+          "actual_action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "actual_result": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "BLOCKED",
+              "SKIPPED",
+              "DEVIATION",
+              "NOT_EXECUTED",
+              "NONDETERMINISTIC"
+            ]
+          },
+          "deviation": {
+            "type": "string"
+          },
+          "retry": {
+            "type": "string"
+          },
+          "manual_intervention": {
+            "type": "string"
+          },
+          "follow_up": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "failure_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "ending_state_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "cleanup": {
+      "type": "object"
+    },
+    "reproduction_level": {
+      "enum": [
+        "LEVEL_0",
+        "LEVEL_1",
+        "LEVEL_2",
+        "LEVEL_3",
+        "LEVEL_4"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "recommended_disposition": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

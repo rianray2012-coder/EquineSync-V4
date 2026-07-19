@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Agent Run Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "agent_id",
+    "agent_run_id",
+    "role",
+    "scope",
+    "package_identity",
+    "methodology",
+    "outputs",
+    "completeness",
+    "reliability",
+    "recommended_disposition"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt_version": {
+      "type": "string"
+    },
+    "contract_version": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "included",
+        "excluded"
+      ],
+      "properties": {
+        "included": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "excluded": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "package_identity": {
+      "type": "object",
+      "required": [
+        "package_id"
+      ],
+      "properties": {
+        "package_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "inputs_received": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "inputs_examined": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "methodology": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "findings_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "coverage_percentage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "completeness": {
+      "enum": [
+        "C0_NOT_STARTED",
+        "C1_PARTIAL",
+        "C2_SUBSTANTIALLY_COMPLETE",
+        "C3_COMPLETE_WITH_LIMITATIONS",
+        "C4_COMPLETE_FOR_RECORDED_SCOPE",
+        "C5_COMPLETE_AND_INDEPENDENTLY_VERIFIED"
+      ]
+    },
+    "reliability": {
+      "enum": [
+        "R0_UNASSESSED",
+        "R1_SINGLE_AGENT_RESULT",
+        "R2_INTERNALLY_CHECKED",
+        "R3_INDEPENDENTLY_VERIFIED",
+        "R4_INDEPENDENTLY_REPERFORMED",
+        "R5_CROSS_METHOD_OR_ENVIRONMENT_CORROBORATED"
+      ]
+    },
+    "highest_evidence_level": {
+      "enum": [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "what_not_established": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "recommended_disposition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_next_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "completion_attestation": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Claim-to-Evidence Register",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "agent_run_id",
+    "claims"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "claim",
+          "classification",
+          "evidence_level",
+          "confidence"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "classification": {
+            "enum": [
+              "DIRECTLY_OBSERVED",
+              "DETERMINISTICALLY_VERIFIED",
+              "REPRODUCED",
+              "SUPPORTED_BY_MULTIPLE_SOURCES",
+              "SUPPORTED_BY_SINGLE_SOURCE",
+              "INFERRED",
+              "REPORTED_BUT_NOT_VERIFIED",
+              "ASSUMED",
+              "CONFLICTED",
+              "UNKNOWN",
+              "NOT_TESTED"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "procedure_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "requirement_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "evidence_level": {
+            "enum": [
+              "E0",
+              "E1",
+              "E2",
+              "E3",
+              "E4",
+              "E5"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "HIGH",
+              "MODERATE",
+              "LOW",
+              "UNRESOLVED"
+            ]
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "contradictory_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "verification_agent_run_id": {
+            "type": "string"
+          },
+          "disposition": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

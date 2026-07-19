@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Scope Denominator",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "agent_run_id",
+    "denominator_type",
+    "items"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "denominator_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item_id",
+          "description",
+          "status"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "required_procedure": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "COMPLETED",
+              "COMPLETED_WITH_LIMITATION",
+              "SAMPLED",
+              "NOT_APPLICABLE",
+              "OUT_OF_SCOPE",
+              "BLOCKED",
+              "UNAVAILABLE",
+              "CONFLICTED",
+              "DEFERRED_BY_FOUNDER",
+              "NOT_REVIEWED"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "limitation": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "coverage_summary": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "coverage_percentage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    }
+  }
+}

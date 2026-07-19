@@ -1,0 +1,9 @@
+{
+  "framework_name": "EquineSync Founder-Orchestrated Review Agent Framework",
+  "framework_version": "V1.3",
+  "framework_status": "FOUNDER_APPROVED",
+  "founder": "Rian Ray",
+  "package_name": "EquineSync Founder-Orchestrated Review Agent Configuration Package",
+  "package_version": "1.0.0",
+  "purpose": "Codex-ready configuration package for eight founder-orchestrated internal-assurance agents."
+}

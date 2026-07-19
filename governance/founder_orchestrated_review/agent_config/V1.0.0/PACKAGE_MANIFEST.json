@@ -1,0 +1,386 @@
+{
+  "package_name": "EquineSync Founder-Orchestrated Review Agent Configuration Package",
+  "package_version": "1.0.0",
+  "framework_version": "V1.3",
+  "generated_at": "2026-07-19T12:00:00-05:00",
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "a504539b20ba5a09642c0542cbfbfabae4ed3805bd587a3d23c371ba4c309335",
+      "bytes": 356,
+      "category": "root"
+    },
+    {
+      "path": "FRAMEWORK_STATUS.json",
+      "sha256": "c4c560d8a493afeb53d0768dea60885717935f0e827232fe224cae5da33c7b3b",
+      "bytes": 405,
+      "category": "root"
+    },
+    {
+      "path": "README.md",
+      "sha256": "842952ed12a2603fe0d6acbf4328d381b2cfe82af082b4d215400d4e2e5b7b0e",
+      "bytes": 2068,
+      "category": "root"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "59854984853104df5c353e2f681a15fc7924742f9a2e468c29af248dce45ce03",
+      "bytes": 6,
+      "category": "root"
+    },
+    {
+      "path": "config/agent_registry.json",
+      "sha256": "83eec71ebff56568386d51678275febe44d2a3d86749bb5a9735c8d2f16f9e8f",
+      "bytes": 3053,
+      "category": "config"
+    },
+    {
+      "path": "config/directive_versions.json",
+      "sha256": "1718c58870e51e56f0a009f3d635605aec755558d0625973b79ee8a95839110d",
+      "bytes": 425,
+      "category": "config"
+    },
+    {
+      "path": "config/review_cycle_state_machine.json",
+      "sha256": "0ed08e737daef223eae8c8cf2280fb6f193ac1fb121457a75b94201bff2fe9d3",
+      "bytes": 708,
+      "category": "config"
+    },
+    {
+      "path": "config/review_gates.json",
+      "sha256": "16a541aa795629e246eabcecd8a04a4cf313d04c5511c701ade156f3ac9757a0",
+      "bytes": 1857,
+      "category": "config"
+    },
+    {
+      "path": "config/tool_policy.json",
+      "sha256": "8f7a00870c2271dbb536a1f62252d4271bfbd43ed50e5ded2da8ec4643228b60",
+      "bytes": 2188,
+      "category": "config"
+    },
+    {
+      "path": "examples/EXAMPLE_AGENT_INVOCATION.md",
+      "sha256": "59fc58dd296629c38c5c0991c4832639edbfeb5eb4d867943b907c5dc6aa4b20",
+      "bytes": 685,
+      "category": "examples"
+    },
+    {
+      "path": "examples/EXAMPLE_REVIEW_AUTHORIZATION.json",
+      "sha256": "7bae8456ccbf11ea367f04c02a0af32809739e71174fc461275b0562e9e3214b",
+      "bytes": 1210,
+      "category": "examples"
+    },
+    {
+      "path": "orchestration/CODEX_ORCHESTRATION_DIRECTIVE.md",
+      "sha256": "1bfb7c739adb0a0193e9402ac80e1db4fc4f2c663ec75649e6035eda0638e85b",
+      "bytes": 7106,
+      "category": "orchestration"
+    },
+    {
+      "path": "orchestration/HANDOFF_PROTOCOL.md",
+      "sha256": "4724c6576dfec600788a6d897502f38944e3d18e7592b6ce5c7d2b3e9038b1a2",
+      "bytes": 769,
+      "category": "orchestration"
+    },
+    {
+      "path": "orchestration/REVIEW_CYCLE_STATE_MACHINE.md",
+      "sha256": "471fdeef1e5e451738aa0077b14170d35c20cf4ad75c1d9265494c62e7453940",
+      "bytes": 1679,
+      "category": "orchestration"
+    },
+    {
+      "path": "prompts/ES-RA-01_DRAFTING_AGENT.md",
+      "sha256": "a314d2348e4a2d2095a0a05dcfdc0b6d4280af6576056581bd473522861d2594",
+      "bytes": 3444,
+      "category": "prompts"
+    },
+    {
+      "path": "prompts/ES-RA-02_SEGREGATED_REVIEW_AGENT.md",
+      "sha256": "3dcb1e3403a23a887664a4dbb103ee517fcc319bb3df3e000cdb47196f73e419",
+      "bytes": 3507,
+      "category": "prompts"
+    },
+    {
+      "path": "prompts/ES-RA-03_ADVERSARIAL_CHALLENGE_AGENT.md",
+      "sha256": "0b61fa393200e969476ba76ef563471a30f1f9a67035afb9f49b482204b1b52d",
+      "bytes": 3048,
+      "category": "prompts"
+    },
+    {
+      "path": "prompts/ES-RA-04_MACHINE_VALIDATION_AGENT.md",
+      "sha256": "25066ab427e953500f9cb4da52b7a31bd9321e9f3a9f059e079f948a59fce438",
+      "bytes": 2878,
+      "category": "prompts"
+    },
+    {
+      "path": "prompts/ES-RA-05_EVIDENCE_CUSTODIAN.md",
+      "sha256": "1c75da2b648333a0cf05ed2e593d48a2c616bece0cba33c4c3c90587e0fda52a",
+      "bytes": 3375,
+      "category": "prompts"
+    },
+    {
+      "path": "prompts/ES-RA-06_DOMAIN_REVIEWER.md",
+      "sha256": "ecfdb7eba8e53f657a5122fa6e92d923d4736a157e14579453ef4627087e2a42",
+      "bytes": 3226,
+      "category": "prompts"
+    },
+    {
+      "path": "prompts/ES-RA-07_SYNTHETIC_GOLDEN_PATH_SPECIFICATION_AGENT.md",
+      "sha256": "62c1021e72810578207cc9e34fb91c25618a9d491dd737bab04a2f39ee1ac319",
+      "bytes": 3112,
+      "category": "prompts"
+    },
+    {
+      "path": "prompts/ES-RA-08_EXECUTABLE_GOLDEN_PATH_REPRODUCTION_CONTROLLER.md",
+      "sha256": "69e51f4555e0c78329049da6eac34c7895c706a5e6df3a1a835202542884163f",
+      "bytes": 3660,
+      "category": "prompts"
+    },
+    {
+      "path": "schemas/agent_run_report.schema.json",
+      "sha256": "fd28e0705aa64a1c0c38c12852e556496f4fcdfc75956d471d67e203d599a3db",
+      "bytes": 4074,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/agent_self_audit.schema.json",
+      "sha256": "10dad63784b6d915c25994a63fa978366ae720f81603014cf53296edd57bfd05",
+      "bytes": 1495,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/claim_to_evidence_register.schema.json",
+      "sha256": "0ae7f1c2221342d3ced576f29313b244bdc666e0b2b160ea1bfde1cf7b2507bd",
+      "bytes": 2770,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/completion_attestation.schema.json",
+      "sha256": "240ef3da49e313aea70a0cddc1b6bb9d9f69cc0db01b858a78a690e144fdcb54",
+      "bytes": 2016,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/cross_agent_discrepancy_register.schema.json",
+      "sha256": "3055f7bd908b8da0ccd4ed2d381b4de213f8b2f9894941f25e972787b0f084ca",
+      "bytes": 2462,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/evidence_manifest.schema.json",
+      "sha256": "4225191f1ab4034cdcb12d7c41d687b850fd6dbfc97ad851c3f7126e3182b45b",
+      "bytes": 3381,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/execution_record.schema.json",
+      "sha256": "98d8b8fa51ca29d1d9d23907e647c1153c3f9a4c629c45b2b4b118f3894a9eba",
+      "bytes": 3547,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/findings_register.schema.json",
+      "sha256": "7920bbe4b792799f85f38ecc47e1c8a559c7770f175009e969c48826ba323b88",
+      "bytes": 4920,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/founder_decision_record.schema.json",
+      "sha256": "ef4b15a808741bcf4bec929f3ee4a561145a7e2f56fbaac466ea28f4fb2991e8",
+      "bytes": 1653,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/freshness_revalidation_register.schema.json",
+      "sha256": "cb647fa675caf00db8ad96962001bc7a2d89497c76313df812c2c83ad81f4fec",
+      "bytes": 1336,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/golden_path_specification.schema.json",
+      "sha256": "da8449d0d21ad10750f826544a80732dbaa4b02c8ee22f97a14e626c4f163a10",
+      "bytes": 4658,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/machine_validation_result.schema.json",
+      "sha256": "99eca008004557122736c690dfeea9b91352485b1986b900d636da99787e4637",
+      "bytes": 2855,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/package_manifest.schema.json",
+      "sha256": "6d7f2f0ee03cbccc75305600fae78e87cd2b2f7c51ebe413931388305e7cd03d",
+      "bytes": 1215,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/remediation_verification.schema.json",
+      "sha256": "be025b4913f2c1a18e8ab155bb63bfbd5f49175dc853f29d109f2daa659a69b4",
+      "bytes": 1705,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/review_authorization.schema.json",
+      "sha256": "c9a888da1d099ffbb8d0bd3674d645d45b863cbe433c8e0f0965254f71e33c32",
+      "bytes": 2129,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/review_integrity_scorecard.schema.json",
+      "sha256": "7c160a78be669de69724929ca74d5655628f6e90b2559bed72082c2853f2b70f",
+      "bytes": 1667,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/sampling_plan.schema.json",
+      "sha256": "a3d653749e6fab84abc9dc45d06d2d04880784949a8b8bfdcb58cf5214e5d804",
+      "bytes": 1889,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/scope_denominator.schema.json",
+      "sha256": "af7e3b41bce28b33a071b4b8600c347c96428675132a944e8aece1806cf61a40",
+      "bytes": 2055,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/source_authority_register.schema.json",
+      "sha256": "d837bfd92d32f19c0409ec38cd409918c2fcb20b978338f4b72aeb9f55d28836",
+      "bytes": 2089,
+      "category": "schemas"
+    },
+    {
+      "path": "schemas/work_completeness_ledger.schema.json",
+      "sha256": "3829f4b0f9e30f37d9f14ab8911ad15be605d5d4cd2aae936717097b5bb84074",
+      "bytes": 2293,
+      "category": "schemas"
+    },
+    {
+      "path": "scripts/create_review_cycle.py",
+      "sha256": "062c2d9405a24bcc34b9af34db7c94ac9c909d9a4a4c7650d56763fadeb25788",
+      "bytes": 1071,
+      "category": "scripts"
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "sha256": "cfa035bc41b26d1b472a3cefc0ddb8263002ab23ccad4b704c64048d53e76e45",
+      "bytes": 1853,
+      "category": "scripts"
+    },
+    {
+      "path": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "sha256": "bf10bcfb383a025af5d22475575ca919ddf7aef126c47f0f062f6ead33d6002c",
+      "bytes": 7293,
+      "category": "shared"
+    },
+    {
+      "path": "shared/COMPLETENESS_RELIABILITY_EVIDENCE_CLASSIFICATIONS.md",
+      "sha256": "3d6e25b769dc6abc09c2e8c11d95753b64aff4f5f5d4d8e1ee4a95f4c70682e3",
+      "bytes": 965,
+      "category": "shared"
+    },
+    {
+      "path": "shared/FINDING_SEVERITY_AND_LIFECYCLE.md",
+      "sha256": "cd1ce0dedaebad742e807e3a917d05f8bcbaa1578c90f515b74d765b0a2696f7",
+      "bytes": 1512,
+      "category": "shared"
+    },
+    {
+      "path": "shared/SOURCE_AUTHORITY_AND_CLAIM_DISCIPLINE.md",
+      "sha256": "1284c239d10cc2eba075e65a7c03a5c49f2e32e720f79d8f693d4a6d6317bf97",
+      "bytes": 936,
+      "category": "shared"
+    },
+    {
+      "path": "templates/AGENT_RUN_REPORT_TEMPLATE.md",
+      "sha256": "1fdaa4cc8b15b854af1ce38c52ed7e944b70ccf3bf6db51492bf2bce4ae8bc6e",
+      "bytes": 877,
+      "category": "templates"
+    },
+    {
+      "path": "templates/AGENT_SELF_AUDIT_TEMPLATE.md",
+      "sha256": "c6b3faa48660674eb58eeb9a30dcfa0cf280c651aee20c448e05241e9b9e7942",
+      "bytes": 762,
+      "category": "templates"
+    },
+    {
+      "path": "templates/CLAIM_TO_EVIDENCE_REGISTER.csv",
+      "sha256": "413c51374d4a725e28d2aad85c7f1f7b9ae0e6f85937c0f2873579695c19b5a2",
+      "bytes": 176,
+      "category": "templates"
+    },
+    {
+      "path": "templates/COMPLETION_ATTESTATION_TEMPLATE.md",
+      "sha256": "62a9712809c964610eba33ac59ca5244a39ddedfb8725670f78ac77b56d4195e",
+      "bytes": 642,
+      "category": "templates"
+    },
+    {
+      "path": "templates/EVIDENCE_MANIFEST.csv",
+      "sha256": "6bab427688808d56d7fce2c03c638a53d4ea3c8e7015136dbf582f47a78520f1",
+      "bytes": 310,
+      "category": "templates"
+    },
+    {
+      "path": "templates/EXECUTION_RECORD_TEMPLATE.md",
+      "sha256": "f1555c0624c479c7f4a509caae50d8a1ceb3e23a6bb8017564a706ba4311e6f7",
+      "bytes": 587,
+      "category": "templates"
+    },
+    {
+      "path": "templates/FINDINGS_REGISTER.csv",
+      "sha256": "753701644c3f17fdce8166e94fbbba8fb5d5b03d89b933ae27dfb718ef795c29",
+      "bytes": 340,
+      "category": "templates"
+    },
+    {
+      "path": "templates/FINDING_TEMPLATE.md",
+      "sha256": "748fc4f6bc642a874d239e6611ee4a16aa6bd878bb562b7a56d9216f1916c8c8",
+      "bytes": 477,
+      "category": "templates"
+    },
+    {
+      "path": "templates/FOUNDER_DECISION_PACKAGE_TEMPLATE.md",
+      "sha256": "816a8f87ae2c639b0e1796dbbb356d83abbb9d52c00759cb6470f6844f926522",
+      "bytes": 777,
+      "category": "templates"
+    },
+    {
+      "path": "templates/GOLDEN_PATH_SPECIFICATION_TEMPLATE.md",
+      "sha256": "b581223e1d73ba9b2d79f160399a907ffea6288a03bd69b23c4e5a34d8f2beed",
+      "bytes": 643,
+      "category": "templates"
+    },
+    {
+      "path": "templates/REMEDIATION_VERIFICATION_TEMPLATE.md",
+      "sha256": "2e61dbe740f298efd6b24e84ae410c4c9eec36737d6da39fb66959b4a774c792",
+      "bytes": 481,
+      "category": "templates"
+    },
+    {
+      "path": "templates/REVIEW_AUTHORIZATION_TEMPLATE.md",
+      "sha256": "41748c6718db22377e72f9280d7e06b4de01e5aafc617dab85bf92decf61fb3d",
+      "bytes": 588,
+      "category": "templates"
+    },
+    {
+      "path": "templates/REVIEW_INTEGRITY_SCORECARD_TEMPLATE.md",
+      "sha256": "93bc8514f47f7e42e9805593644f96c1424235f5b9cd43b32cb03d7de5a268c1",
+      "bytes": 793,
+      "category": "templates"
+    },
+    {
+      "path": "templates/WHAT_THIS_REVIEW_DID_NOT_ESTABLISH_TEMPLATE.md",
+      "sha256": "b848d462ea464e1093b644817efc2c6815740a2bbb8270fdd3f85a508da73715",
+      "bytes": 405,
+      "category": "templates"
+    },
+    {
+      "path": "templates/WORK_COMPLETENESS_LEDGER.csv",
+      "sha256": "d502e41bb16e537881c075bb66f86a68f5c1e50dc69b13e9600b4673170e6097",
+      "bytes": 164,
+      "category": "templates"
+    }
+  ]
+}

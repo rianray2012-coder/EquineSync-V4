@@ -1,0 +1,18 @@
+{
+  "package_version": "1.0.0",
+  "framework_version": "V1.3",
+  "common_contract": "1.0.0",
+  "codex_orchestration_directive": "1.0.0",
+  "agent_prompts": {
+    "ES-RA-01": "1.0.0",
+    "ES-RA-02": "1.0.0",
+    "ES-RA-03": "1.0.0",
+    "ES-RA-04": "1.0.0",
+    "ES-RA-05": "1.0.0",
+    "ES-RA-06": "1.0.0",
+    "ES-RA-07": "1.0.0",
+    "ES-RA-08": "1.0.0"
+  },
+  "schemas_version": "1.0.0",
+  "templates_version": "1.0.0"
+}

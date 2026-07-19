@@ -1,0 +1,78 @@
+{
+  "package_version": "1.0.0",
+  "framework_version": "V1.3",
+  "agents": [
+    {
+      "agent_id": "ES-RA-01",
+      "name": "Drafting Agent",
+      "prompt": "prompts/ES-RA-01_DRAFTING_AGENT.md",
+      "shared_contract": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "default_write_scope": "candidate workspace",
+      "primary_output": "Drafting Completion Report",
+      "may_issue_final_approval": false
+    },
+    {
+      "agent_id": "ES-RA-02",
+      "name": "Segregated Review Agent",
+      "prompt": "prompts/ES-RA-02_SEGREGATED_REVIEW_AGENT.md",
+      "shared_contract": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "default_write_scope": "review output only",
+      "primary_output": "Segregated Review Report",
+      "may_issue_final_approval": false
+    },
+    {
+      "agent_id": "ES-RA-03",
+      "name": "Adversarial Challenge Agent",
+      "prompt": "prompts/ES-RA-03_ADVERSARIAL_CHALLENGE_AGENT.md",
+      "shared_contract": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "default_write_scope": "challenge output only",
+      "primary_output": "Adversarial Challenge Report",
+      "may_issue_final_approval": false
+    },
+    {
+      "agent_id": "ES-RA-04",
+      "name": "Machine Validation Agent",
+      "prompt": "prompts/ES-RA-04_MACHINE_VALIDATION_AGENT.md",
+      "shared_contract": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "default_write_scope": "validation output only",
+      "primary_output": "Machine Validation Report",
+      "may_issue_final_approval": false
+    },
+    {
+      "agent_id": "ES-RA-05",
+      "name": "Evidence Custodian",
+      "prompt": "prompts/ES-RA-05_EVIDENCE_CUSTODIAN.md",
+      "shared_contract": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "default_write_scope": "controlled evidence store",
+      "primary_output": "Evidence Manifest and Closure Package",
+      "may_issue_final_approval": false
+    },
+    {
+      "agent_id": "ES-RA-06",
+      "name": "Domain Reviewer",
+      "prompt": "prompts/ES-RA-06_DOMAIN_REVIEWER.md",
+      "shared_contract": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "default_write_scope": "domain review output only",
+      "primary_output": "Domain Review Report",
+      "may_issue_final_approval": false
+    },
+    {
+      "agent_id": "ES-RA-07",
+      "name": "Synthetic Golden-Path Specification Agent",
+      "prompt": "prompts/ES-RA-07_SYNTHETIC_GOLDEN_PATH_SPECIFICATION_AGENT.md",
+      "shared_contract": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "default_write_scope": "specification output only",
+      "primary_output": "Golden-Path Specification",
+      "may_issue_final_approval": false
+    },
+    {
+      "agent_id": "ES-RA-08",
+      "name": "Executable Golden-Path Reproduction Controller",
+      "prompt": "prompts/ES-RA-08_EXECUTABLE_GOLDEN_PATH_REPRODUCTION_CONTROLLER.md",
+      "shared_contract": "shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+      "default_write_scope": "execution evidence only",
+      "primary_output": "Execution Record",
+      "may_issue_final_approval": false
+    }
+  ]
+}

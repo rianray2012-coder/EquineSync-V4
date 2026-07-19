@@ -1,0 +1,110 @@
+{
+  "policy_version": "1.0.0",
+  "default_rules": {
+    "least_privilege": true,
+    "production_write_allowed": false,
+    "destructive_actions_allowed": false,
+    "secret_exposure_allowed": false,
+    "frozen_package_mutation_allowed": false,
+    "network_access_default": "DENY_UNLESS_AUTHORIZED",
+    "first_failure_preservation_required": true
+  },
+  "role_policies": {
+    "ES-RA-01": {
+      "read": [
+        "authorized_sources",
+        "candidate_workspace"
+      ],
+      "write": [
+        "candidate_workspace"
+      ],
+      "execute": [
+        "non_destructive_authoring_tools"
+      ]
+    },
+    "ES-RA-02": {
+      "read": [
+        "frozen_package",
+        "controlling_sources"
+      ],
+      "write": [
+        "review_outputs"
+      ],
+      "execute": [
+        "read_only_analysis_tools"
+      ]
+    },
+    "ES-RA-03": {
+      "read": [
+        "frozen_package",
+        "authorized_test_environment"
+      ],
+      "write": [
+        "challenge_outputs"
+      ],
+      "execute": [
+        "bounded_non_destructive_tests"
+      ]
+    },
+    "ES-RA-04": {
+      "read": [
+        "isolated_copy"
+      ],
+      "write": [
+        "validation_outputs"
+      ],
+      "execute": [
+        "authorized_validation_commands"
+      ]
+    },
+    "ES-RA-05": {
+      "read": [
+        "review_packages",
+        "agent_outputs"
+      ],
+      "write": [
+        "controlled_evidence_store",
+        "manifests"
+      ],
+      "execute": [
+        "hashing_and_inventory_tools"
+      ]
+    },
+    "ES-RA-06": {
+      "read": [
+        "frozen_package",
+        "domain_authorities"
+      ],
+      "write": [
+        "domain_outputs"
+      ],
+      "execute": [
+        "read_only_analysis_tools"
+      ]
+    },
+    "ES-RA-07": {
+      "read": [
+        "requirements",
+        "frozen_candidate"
+      ],
+      "write": [
+        "specification_outputs"
+      ],
+      "execute": [
+        "fixture_generation_only"
+      ]
+    },
+    "ES-RA-08": {
+      "read": [
+        "approved_specification",
+        "authorized_environment"
+      ],
+      "write": [
+        "execution_evidence"
+      ],
+      "execute": [
+        "approved_test_steps_only"
+      ]
+    }
+  }
+}

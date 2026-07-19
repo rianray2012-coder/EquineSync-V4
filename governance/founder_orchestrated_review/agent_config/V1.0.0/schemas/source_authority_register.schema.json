@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Source Authority Register",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "sources"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "title",
+          "authority_class",
+          "status"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "authority_class": {
+            "enum": [
+              "FOUNDER_DECISION",
+              "CONTROLLING_CONSTITUTIONAL_AUTHORITY",
+              "ADOPTED_OPERATIONAL_AUTHORITY",
+              "APPROVED_MAIP_AUTHORITY",
+              "IMPLEMENTATION_REQUIREMENT",
+              "VERIFIED_REPOSITORY_EVIDENCE",
+              "VERIFIED_EXECUTION_EVIDENCE",
+              "DRAFT_CANDIDATE",
+              "BACKGROUND_REFERENCE",
+              "HISTORICAL_OR_SUPERSEDED",
+              "UNVERIFIED_SOURCE",
+              "CONFLICTING_SOURCE",
+              "MISSING_REQUIRED_SOURCE",
+              "NONAUTHORITATIVE_COMMENTARY"
+            ]
+          },
+          "status": {
+            "enum": [
+              "AVAILABLE",
+              "MISSING",
+              "CONFLICTED",
+              "SUPERSEDED",
+              "UNVERIFIED"
+            ]
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

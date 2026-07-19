@@ -1,0 +1,50 @@
+{
+  "review_cycle_id": "ES-REV-2026-001",
+  "authorized_by": "Rian Ray",
+  "authorization_date": "2026-07-19T12:00:00-05:00",
+  "review_object": "Example EquineSync candidate package",
+  "requested_gate": "IMPLEMENTATION_READINESS_RECOMMENDATION",
+  "package_id": "ES-PKG-2026-001-V001",
+  "repository_commit": "<commit>",
+  "package_hash": "<sha256>",
+  "assigned_agents": [
+    "ES-RA-01",
+    "ES-RA-02",
+    "ES-RA-03",
+    "ES-RA-04",
+    "ES-RA-05",
+    "ES-RA-06",
+    "ES-RA-07",
+    "ES-RA-08"
+  ],
+  "scope": {
+    "included": [
+      "Authorized candidate and listed dependencies"
+    ],
+    "excluded": [
+      "Production modification",
+      "External certification"
+    ]
+  },
+  "permitted_tools": [
+    "Read-only repository inspection",
+    "Isolated validation environment"
+  ],
+  "permitted_environments": [
+    "Local clean clone",
+    "Authorized test environment"
+  ],
+  "prohibited_actions": [
+    "Production modification",
+    "Destructive testing",
+    "Risk acceptance by agents"
+  ],
+  "founder_decisions_reserved": [
+    "Finding disposition",
+    "Risk acceptance",
+    "Adoption",
+    "Lock",
+    "Release"
+  ],
+  "notes": "Illustrative only. Replace placeholders before use."
+}

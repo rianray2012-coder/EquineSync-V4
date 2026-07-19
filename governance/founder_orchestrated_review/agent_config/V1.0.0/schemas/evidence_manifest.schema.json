@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Evidence Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_cycle_id",
+    "package_id",
+    "items"
+  ],
+  "properties": {
+    "review_cycle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_version": {
+      "type": "string"
+    },
+    "frozen_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "file_name",
+          "classification",
+          "source_actor",
+          "received_at"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "file_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "original_file_name": {
+            "type": "string"
+          },
+          "source_path": {
+            "type": "string"
+          },
+          "repository_path": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "commit_or_tag": {
+            "type": "string"
+          },
+          "source_actor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "byte_size": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "media_type": {
+            "type": "string"
+          },
+          "hash_algorithm": {
+            "type": "string"
+          },
+          "hash_value": {
+            "type": "string"
+          },
+          "classification": {
+            "enum": [
+              "ORIGINAL_RECEIVED_BYTES",
+              "VERIFIED_REPOSITORY_SOURCE",
+              "VERIFIED_COPY",
+              "UNVERIFIED_COPY",
+              "GENERATED_DERIVATIVE",
+              "REDACTED_DERIVATIVE",
+              "SCREENSHOT_OR_RENDERING",
+              "SUMMARY_ONLY",
+              "MACHINE_OUTPUT",
+              "EXECUTION_OUTPUT",
+              "FOUNDER_DECISION_EVIDENCE",
+              "EXTERNAL_REFERENCE_NOT_PRESERVED",
+              "MISSING_REQUIRED_EVIDENCE"
+            ]
+          },
+          "parent_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "superseded_by": {
+            "type": "string"
+          },
+          "access_classification": {
+            "type": "string"
+          },
+          "redaction_status": {
+            "type": "string"
+          },
+          "retention_status": {
+            "type": "string"
+          },
+          "related_findings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "related_executions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+finding_id,originating_agent_run_id,title,severity,substantiation,status,affected_artifacts,requirement_ids,observed_condition,expected_condition,evidence_ids,severity_rationale,confidence,likelihood,impact,affected_domains,root_cause,required_remediation,verification_criteria,dependencies,residual_risk,owner,due_gate,founder_disposition
