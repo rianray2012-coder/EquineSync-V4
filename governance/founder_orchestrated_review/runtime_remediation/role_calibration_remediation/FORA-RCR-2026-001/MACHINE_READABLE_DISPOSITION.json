@@ -18,7 +18,14 @@
   },
   "final_disposition": "INSTALLATION_TECHNICALLY_READY_FOR_FOUNDER_ACTIVATION_REVIEW",
   "founder_activation_approval": false,
-  "generated_at": "2026-07-19T23:28:21Z",
+  "fresh_clone_verification": {
+    "checksums_verified": 141,
+    "commit_in_default_branch": false,
+    "pull_requests_for_branch": 0,
+    "status": "PASS",
+    "verified_commit": "2d2efa9cc9aaaf14723283d94b716b5681c70df4"
+  },
+  "generated_at": "2026-07-19T23:30:37Z",
   "individual_role_calibration": {
     "expected": 2,
     "passed": 2

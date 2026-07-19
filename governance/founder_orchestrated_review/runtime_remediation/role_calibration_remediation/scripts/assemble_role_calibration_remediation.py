@@ -161,6 +161,8 @@ def main() -> int:
     generated_at = utc_now()
     behavior = read_json(CYCLE_DIR / "BEHAVIORAL_CALIBRATION_RESULT.json")
     bounded = read_json(CYCLE_DIR / "BOUNDED_EIGHT_ROLE_FINAL_ACCEPTED_RESULT.json")
+    fresh_clone_path = CYCLE_DIR / "FRESH_CLONE_VERIFICATION.json"
+    fresh_clone = read_json(fresh_clone_path) if fresh_clone_path.exists() else None
     behavior_runs = behavior_run_rows()
     bounded_runs = bounded_run_rows()
 
@@ -353,6 +355,17 @@ def main() -> int:
         "founder_activation_approval": False,
         "pull_request_created": False,
         "merged": False,
+        "fresh_clone_verification": (
+            {
+                "verified_commit": fresh_clone["verified_commit"],
+                "checksums_verified": fresh_clone["checksum_entries_verified"],
+                "commit_in_default_branch": fresh_clone["verified_commit_in_default_branch"],
+                "pull_requests_for_branch": fresh_clone["pull_requests_for_branch"],
+                "status": fresh_clone["status"],
+            }
+            if fresh_clone
+            else {"status": "PENDING"}
+        ),
         "final_disposition": DISPOSITION,
     }
     write_json(CYCLE_DIR / "MACHINE_READABLE_DISPOSITION.json", machine)
@@ -381,6 +394,7 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 - Custom instruction layers: `{behavior['custom_instruction_layers_loaded']}/8 PASS`.
 - Sandbox modes with denied network: `{behavior['sandbox_modes_verified']}/8 PASS`.
 - ZIP SHA-256: `{zip_hash}` (`PASS`).
+{f"- Fresh-clone proof for `{fresh_clone['verified_commit']}`: `{fresh_clone['status']}`." if fresh_clone else "- Fresh-clone proof: pending until after the first evidence commit is pushed."}
 
 ## Preserved failures and retries
 

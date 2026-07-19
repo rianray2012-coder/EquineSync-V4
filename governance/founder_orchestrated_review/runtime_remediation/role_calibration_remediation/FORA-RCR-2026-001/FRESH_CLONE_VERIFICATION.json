@@ -1,0 +1,33 @@
+{
+  "authorization_id": "FORA-RCR-2026-001",
+  "verified_at": "2026-07-19T23:29:51Z",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "verified_commit": "2d2efa9cc9aaaf14723283d94b716b5681c70df4",
+  "clone_method": "git clone --single-branch --branch agent/install-founder-review-agents-v1.0.0",
+  "clone_worktree_clean": true,
+  "checksum_entries_verified": 141,
+  "checksum_failures": 0,
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "behavioral_calibration": {
+    "accepted_passes": 120,
+    "denominator": 120,
+    "roles_with_passing_run": 8,
+    "roles_expected": 8
+  },
+  "bounded_eight_role_orchestration": {
+    "passed": 8,
+    "expected": 8
+  },
+  "final_disposition": "INSTALLATION_TECHNICALLY_READY_FOR_FOUNDER_ACTIVATION_REVIEW",
+  "founder_activation_approval": false,
+  "default_branch": "integrate-emergent-final-zip",
+  "default_branch_commit": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "verified_commit_in_default_branch": false,
+  "pull_requests_for_branch": 0,
+  "substantive_review_started": false,
+  "production_activity": false,
+  "operational_activation": false,
+  "ancestry_check_note": "The single-branch clone did not initially create the default branch remote-tracking ref. The check was repeated with an explicit refs/heads/integrate-emergent-final-zip:refs/remotes/origin/integrate-emergent-final-zip fetch refspec before evaluating ancestry.",
+  "status": "PASS"
+}

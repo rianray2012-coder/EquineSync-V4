@@ -1,6 +1,6 @@
 # Retry and Failure-Preservation Register
 
-Generated: `2026-07-19T23:28:21Z`
+Generated: `2026-07-19T23:30:37Z`
 
 Every run directory is append-only; no failed attempt was reused or overwritten.
 

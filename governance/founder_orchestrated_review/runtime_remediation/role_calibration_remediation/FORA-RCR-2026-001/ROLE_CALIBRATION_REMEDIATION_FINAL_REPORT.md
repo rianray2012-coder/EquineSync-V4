@@ -22,6 +22,7 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 - Custom instruction layers: `8/8 PASS`.
 - Sandbox modes with denied network: `8/8 PASS`.
 - ZIP SHA-256: `604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3` (`PASS`).
+- Fresh-clone proof for `2d2efa9cc9aaaf14723283d94b716b5681c70df4`: `PASS`.
 
 ## Preserved failures and retries
 
