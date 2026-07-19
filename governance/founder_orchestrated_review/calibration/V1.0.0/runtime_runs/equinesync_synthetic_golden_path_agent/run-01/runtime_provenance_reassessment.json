@@ -1,0 +1,36 @@
+{
+  "captured_at": "2026-07-19T20:53:04Z",
+  "requested_agent_name": "equinesync_synthetic_golden_path_agent",
+  "parent_thread_id": "019f7c21-60a4-7841-b23c-fd63c4686085",
+  "parent_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T15-46-30-019f7c21-60a4-7841-b23c-fd63c4686085.jsonl",
+  "spawn_call_observed": true,
+  "spawn_requested_task_name": "equinesync_synthetic_golden_path_agent",
+  "spawn_result_task_path": "/root/equinesync_synthetic_golden_path_agent",
+  "child_thread_id": "019f7c22-ba31-7ad2-be47-cebe808f2b11",
+  "child_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T15-47-58-019f7c22-ba31-7ad2-be47-cebe808f2b11.jsonl",
+  "child_agent_path": "/root/equinesync_synthetic_golden_path_agent",
+  "child_agent_role_metadata": null,
+  "parent_runtime": {
+    "approval_policy": "never",
+    "sandbox_mode": "workspace-write",
+    "network_access": false,
+    "network_policy": "restricted",
+    "permission_profile_type": "managed"
+  },
+  "child_runtime": {
+    "approval_policy": "never",
+    "sandbox_mode": "workspace-write",
+    "network_access": false,
+    "network_policy": "restricted",
+    "permission_profile_type": "managed"
+  },
+  "child_read_custom_agent_config": false,
+  "limitations": [
+    "This is a sanitized extraction of Codex runtime records; encrypted reasoning and message payloads are not copied.",
+    "A registration marker plus named child path and absence of child self-discovery is used to evidence custom-instruction loading."
+  ],
+  "spawn_fork_turns": "none",
+  "assessment_version": 2,
+  "original_score_unchanged": true,
+  "purpose": "Recognize both sandbox_policy.network_access=false and permission_profile.network=restricted as denied network evidence."
+}

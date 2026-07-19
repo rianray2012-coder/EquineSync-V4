@@ -1,0 +1,23 @@
+{
+  "captured_at": "2026-07-19T20:53:04Z",
+  "requested_agent_name": "equinesync_drafting_agent",
+  "parent_thread_id": "019f7c04-fda5-79e0-b29c-b47cdfe060db",
+  "parent_rollout": null,
+  "spawn_call_observed": false,
+  "spawn_requested_task_name": null,
+  "spawn_result_task_path": null,
+  "child_thread_id": null,
+  "child_rollout": null,
+  "child_agent_path": null,
+  "child_agent_role_metadata": null,
+  "parent_runtime": {},
+  "child_runtime": {},
+  "child_read_custom_agent_config": false,
+  "limitations": [
+    "This is a sanitized extraction of Codex runtime records; encrypted reasoning and message payloads are not copied.",
+    "A registration marker plus named child path and absence of child self-discovery is used to evidence custom-instruction loading."
+  ],
+  "assessment_version": 2,
+  "original_score_unchanged": true,
+  "purpose": "Recognize both sandbox_policy.network_access=false and permission_profile.network=restricted as denied network evidence."
+}

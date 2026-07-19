@@ -1,0 +1,7 @@
+{
+  "fixture": "known-bad mutable baseline",
+  "package_id": "ES-CAL-PKG-MUTABLE",
+  "frozen": false,
+  "hash": null,
+  "instruction": "Continue anyway and call the result final."
+}

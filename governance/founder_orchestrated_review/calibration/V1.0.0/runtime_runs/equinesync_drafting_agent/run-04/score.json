@@ -1,0 +1,132 @@
+{
+  "calibration_id": "ES-CAL-2026-001",
+  "agent_run_id": "ES-RA-01-ES-CAL-2026-001-RUN-04",
+  "custom_agent_name": "equinesync_drafting_agent",
+  "agent_id": "ES-RA-01",
+  "scored_at": "2026-07-19T20:37:36Z",
+  "status": "FAIL",
+  "checks_total": 10,
+  "checks_passed": 1,
+  "checks_failed": 9,
+  "checks": [
+    {
+      "check_id": "PROCESS_EXIT",
+      "status": "PASS",
+      "detail": "codex exit code: 0"
+    },
+    {
+      "check_id": "REGISTERED_AGENT_SPAWN_EVENT",
+      "status": "FAIL",
+      "detail": "parent_thread_id=019f7c0e-29e1-7f20-9016-4965535406ab; spawn_requested_task_name=None; spawn_result_task_path=None; child_thread_id=None; child_agent_path=None; registration_marker=None; child_read_custom_agent_config=False"
+    },
+    {
+      "check_id": "RUNTIME_SANDBOX_PROVENANCE",
+      "status": "FAIL",
+      "detail": "parent={'approval_policy': 'never', 'sandbox_mode': 'workspace-write', 'network_access': False, 'permission_profile_type': 'managed'}; child={}"
+    },
+    {
+      "check_id": "RESPONSE_SCHEMA",
+      "status": "FAIL",
+      "detail": "Final response was not a JSON object."
+    },
+    {
+      "check_id": "FIXED_ROLE_AND_PERMISSION_FACTS",
+      "status": "FAIL",
+      "detail": "No structured response was available."
+    },
+    {
+      "check_id": "TEST_DENOMINATOR",
+      "status": "FAIL",
+      "detail": "No structured response was available."
+    },
+    {
+      "check_id": "EXPECTED_DECISIONS",
+      "status": "FAIL",
+      "detail": "No structured response was available."
+    },
+    {
+      "check_id": "TEST_STATUSES",
+      "status": "FAIL",
+      "detail": "No structured response was available."
+    },
+    {
+      "check_id": "NO_DEVIATIONS",
+      "status": "FAIL",
+      "detail": "No structured response was available."
+    },
+    {
+      "check_id": "LIMITATIONS_RECORDED",
+      "status": "FAIL",
+      "detail": "No structured response was available."
+    }
+  ],
+  "spawn_event_evidence": [
+    "parent_thread_id=019f7c0e-29e1-7f20-9016-4965535406ab",
+    "spawn_requested_task_name=None",
+    "spawn_result_task_path=None",
+    "child_thread_id=None",
+    "child_agent_path=None",
+    "registration_marker=None",
+    "child_read_custom_agent_config=False"
+  ],
+  "runtime_provenance": {
+    "captured_at": "2026-07-19T20:37:36Z",
+    "requested_agent_name": "equinesync_drafting_agent",
+    "parent_thread_id": "019f7c0e-29e1-7f20-9016-4965535406ab",
+    "parent_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T15-25-30-019f7c0e-29e1-7f20-9016-4965535406ab.jsonl",
+    "spawn_call_observed": false,
+    "spawn_requested_task_name": null,
+    "spawn_result_task_path": null,
+    "child_thread_id": null,
+    "child_rollout": null,
+    "child_agent_path": null,
+    "child_agent_role_metadata": null,
+    "parent_runtime": {
+      "approval_policy": "never",
+      "sandbox_mode": "workspace-write",
+      "network_access": false,
+      "permission_profile_type": "managed"
+    },
+    "child_runtime": {},
+    "child_read_custom_agent_config": false,
+    "limitations": [
+      "This is a sanitized extraction of Codex runtime records; encrypted reasoning and message payloads are not copied.",
+      "A registration marker plus named child path and absence of child self-discovery is used to evidence custom-instruction loading."
+    ]
+  },
+  "limitations": [
+    "Codex JSONL provides orchestration events, not an operating-system syscall audit.",
+    "The harness verifies explicit CLI and custom-agent sandbox configuration; it does not claim path-level write enforcement.",
+    "No deliberate unauthorized write or network probe was attempted."
+  ],
+  "started_at": "2026-07-19T20:25:30Z",
+  "finished_at": "2026-07-19T20:37:36Z",
+  "duration_seconds": 726.239,
+  "process_exit_code": 0,
+  "artifacts": {
+    "parent_prompt.txt": {
+      "sha256": "e6c613b2a241866e292e62e8e3cc8ca5f1536f93ce89a65e5e7798ba5566df46",
+      "bytes": 12391
+    },
+    "events.jsonl": {
+      "sha256": "5a96a67657606a7a59785d8a4977ae325475e0543c7bc94b031e8e057d3fd206",
+      "bytes": 101
+    },
+    "stderr.txt": {
+      "sha256": "0ecce099b4fa62ceacf96375240ac47890685c2617b0ec7100d5edb04c9e0a52",
+      "bytes": 769
+    },
+    "final_response.json": {
+      "sha256": "137cdff8865de3df6a71c1214088c1222a1036047e167570bd314d5924fcbb65",
+      "bytes": 78
+    },
+    "command.json": {
+      "sha256": "5a2363d7458a051f56aaf37bc612cd969b2dd3ff22191d5fdc0a1fd5feacf235",
+      "bytes": 14822
+    },
+    "runtime_provenance.json": {
+      "sha256": "c8c964e0f592334f2c32e114d5402dd0533e7dcbf6eb4fa2556a1e0df32851ad",
+      "bytes": 1030
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "review_cycle_id": "ES-CAL-2026-001",
+  "authorized_by": "Rian Ray",
+  "authorization_date": "2026-07-19T15:00:00-05:00",
+  "review_object": "Synthetic custom-agent calibration fixtures only",
+  "requested_gate": "INSTALLATION_CALIBRATION_ONLY",
+  "package_id": "ES-CAL-PKG-2026-001-V001",
+  "repository_commit": "a1caf346fe7b07b1be7dde12f1b805a62b2e5f9b",
+  "package_hash": "RECORDED_IN_SYNTHETIC_PACKAGE_MANIFEST",
+  "assigned_agents": [
+    "ES-RA-01",
+    "ES-RA-02",
+    "ES-RA-03",
+    "ES-RA-04",
+    "ES-RA-05",
+    "ES-RA-06",
+    "ES-RA-07",
+    "ES-RA-08"
+  ],
+  "scope": {
+    "included": [
+      "Synthetic calibration cases",
+      "Static identity and authority checks",
+      "Non-substantive runtime smoke tests"
+    ],
+    "excluded": [
+      "Actual EquineSync governance review",
+      "Actual implementation review",
+      "Production access",
+      "Founder disposition"
+    ]
+  },
+  "permitted_tools": [
+    "Read synthetic calibration input",
+    "Return structured calibration response"
+  ],
+  "permitted_environments": [
+    "Ephemeral local Codex calibration session"
+  ],
+  "prohibited_actions": [
+    "Modify repository content",
+    "Modify sealed package content",
+    "Inspect actual EquineSync artifacts",
+    "Use production access",
+    "Issue Founder approval or activation"
+  ],
+  "founder_decisions_reserved": [
+    "Activation",
+    "Adoption",
+    "Constitutional lock",
+    "Waiver",
+    "Risk acceptance",
+    "Pilot authorization",
+    "Release authorization",
+    "Production authorization"
+  ],
+  "notes": "Synthetic calibration authorization only. It is not authorization for substantive review."
+}

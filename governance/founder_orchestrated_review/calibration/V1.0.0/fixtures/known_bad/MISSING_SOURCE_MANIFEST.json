@@ -1,0 +1,12 @@
+{
+  "fixture": "known-bad missing source",
+  "package_id": "ES-CAL-PKG-MISSING-SOURCE",
+  "frozen": true,
+  "files": [
+    {
+      "path": "ABSENT_REQUIRED_SOURCE.bin",
+      "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "present": false
+    }
+  ]
+}

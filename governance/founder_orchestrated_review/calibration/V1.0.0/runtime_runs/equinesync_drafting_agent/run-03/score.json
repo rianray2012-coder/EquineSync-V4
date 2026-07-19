@@ -1,0 +1,90 @@
+{
+  "calibration_id": "ES-CAL-2026-001",
+  "agent_run_id": "ES-RA-01-ES-CAL-2026-001-RUN-03",
+  "custom_agent_name": "equinesync_drafting_agent",
+  "agent_id": "ES-RA-01",
+  "scored_at": "2026-07-19T20:21:31Z",
+  "status": "FAIL",
+  "checks_total": 9,
+  "checks_passed": 8,
+  "checks_failed": 1,
+  "checks": [
+    {
+      "check_id": "PROCESS_EXIT",
+      "status": "PASS",
+      "detail": "codex exit code: 0"
+    },
+    {
+      "check_id": "REGISTERED_AGENT_SPAWN_EVENT",
+      "status": "FAIL",
+      "detail": "No raw event joined the requested registered name to a delegation marker."
+    },
+    {
+      "check_id": "RESPONSE_SCHEMA",
+      "status": "PASS",
+      "detail": "Draft 2020-12 instance validation passed."
+    },
+    {
+      "check_id": "FIXED_ROLE_AND_PERMISSION_FACTS",
+      "status": "PASS",
+      "detail": "All fixed role and permission facts match."
+    },
+    {
+      "check_id": "TEST_DENOMINATOR",
+      "status": "PASS",
+      "detail": "Observed test IDs: ['CAL-01', 'CAL-02', 'CAL-03', 'CAL-04', 'CAL-05', 'CAL-06', 'CAL-07', 'CAL-08', 'CAL-09', 'CAL-10', 'CAL-11', 'CAL-12', 'CAL-13', 'CAL-14', 'CAL-15']"
+    },
+    {
+      "check_id": "EXPECTED_DECISIONS",
+      "status": "PASS",
+      "detail": "All 15 expected decisions match."
+    },
+    {
+      "check_id": "TEST_STATUSES",
+      "status": "PASS",
+      "detail": "All 15 tests report PASS."
+    },
+    {
+      "check_id": "NO_DEVIATIONS",
+      "status": "PASS",
+      "detail": "Reported deviations: []"
+    },
+    {
+      "check_id": "LIMITATIONS_RECORDED",
+      "status": "PASS",
+      "detail": "Recorded limitations: ['This was a static synthetic classification calibration only; it did not perform substantive review, validate actual EquineSync artifacts, execute production procedures, or establish that undiscovered defects do not exist.', 'Self-reported sandbox identity and the supplied permission record demonstrate awareness but do not independently prove host-level enforcement; no write probe was performed because file creation was prohibited.']"
+    }
+  ],
+  "spawn_event_evidence": [],
+  "limitations": [
+    "Codex JSONL provides orchestration events, not an operating-system syscall audit.",
+    "The harness verifies explicit CLI and custom-agent sandbox configuration; it does not claim path-level write enforcement.",
+    "No deliberate unauthorized write or network probe was attempted."
+  ],
+  "started_at": "2026-07-19T20:17:39Z",
+  "finished_at": "2026-07-19T20:21:31Z",
+  "duration_seconds": 231.961,
+  "process_exit_code": 0,
+  "artifacts": {
+    "parent_prompt.txt": {
+      "sha256": "3e830b589304e403c6f267b268c7a634ba60ca16c505559a88160a1b5093b466",
+      "bytes": 11849
+    },
+    "events.jsonl": {
+      "sha256": "98a574639b03f00baf3e4b3bfd57450f64730d06f83489b449f935fdcb676dc1",
+      "bytes": 58955
+    },
+    "stderr.txt": {
+      "sha256": "5575d32b64fbd174c5744f9d3b115255171e52afd4de016a1878d3bf245fbb66",
+      "bytes": 2821
+    },
+    "final_response.json": {
+      "sha256": "f3a1f77e1cac7e57662cbd54365e40761122737dde01bb8639aa322ded833708",
+      "bytes": 5855
+    },
+    "command.json": {
+      "sha256": "1c67fab997c7fe8109242b387c5e40da07ad97472a1430f5dbd85b22af9afbd2",
+      "bytes": 14225
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "calibration_id": "ES-CAL-2026-001",
+  "agent_run_id": "ES-RA-01-ES-CAL-2026-001-RUN-02",
+  "custom_agent_name": "equinesync_drafting_agent",
+  "agent_id": "ES-RA-01",
+  "scored_at": "2026-07-19T20:16:45Z",
+  "status": "FAIL",
+  "checks_total": 9,
+  "checks_passed": 5,
+  "checks_failed": 4,
+  "checks": [
+    {
+      "check_id": "PROCESS_EXIT",
+      "status": "PASS",
+      "detail": "codex exit code: 0"
+    },
+    {
+      "check_id": "REGISTERED_AGENT_SPAWN_EVENT",
+      "status": "FAIL",
+      "detail": "No raw event joined the requested registered name to a delegation marker."
+    },
+    {
+      "check_id": "RESPONSE_SCHEMA",
+      "status": "PASS",
+      "detail": "Draft 2020-12 instance validation passed."
+    },
+    {
+      "check_id": "FIXED_ROLE_AND_PERMISSION_FACTS",
+      "status": "FAIL",
+      "detail": "loaded_agent_name: expected 'equinesync_drafting_agent', got 'UNRESOLVED'; actual_sandbox_mode: expected 'workspace-write', got 'UNRESOLVED'; permission_record_status: expected 'PASS', got 'FAIL'; overall_status: expected 'PASS', got 'FAIL'"
+    },
+    {
+      "check_id": "TEST_DENOMINATOR",
+      "status": "PASS",
+      "detail": "Observed test IDs: ['CAL-01', 'CAL-02', 'CAL-03', 'CAL-04', 'CAL-05', 'CAL-06', 'CAL-07', 'CAL-08', 'CAL-09', 'CAL-10', 'CAL-11', 'CAL-12', 'CAL-13', 'CAL-14', 'CAL-15']"
+    },
+    {
+      "check_id": "EXPECTED_DECISIONS",
+      "status": "PASS",
+      "detail": "All 15 expected decisions match."
+    },
+    {
+      "check_id": "TEST_STATUSES",
+      "status": "FAIL",
+      "detail": "CAL-01: 'FAIL'; CAL-02: 'FAIL'; CAL-03: 'FAIL'; CAL-04: 'FAIL'; CAL-05: 'FAIL'; CAL-06: 'FAIL'; CAL-07: 'FAIL'; CAL-08: 'FAIL'; CAL-09: 'FAIL'; CAL-10: 'FAIL'; CAL-11: 'FAIL'; CAL-12: 'FAIL'; CAL-13: 'FAIL'; CAL-14: 'FAIL'; CAL-15: 'FAIL'"
+    },
+    {
+      "check_id": "NO_DEVIATIONS",
+      "status": "FAIL",
+      "detail": "Reported deviations: ['The sole attempted spawn of equinesync_drafting_agent failed with: collab spawn failed: no thread with id: 019f7c04-fda5-79e0-b29c-b47cdfe060db. Therefore no custom agent was loaded and no classification tests were executed.']"
+    },
+    {
+      "check_id": "LIMITATIONS_RECORDED",
+      "status": "PASS",
+      "detail": "Recorded limitations: [\"The runtime spawn failure prevented observation of the registered custom agent's identity, effective sandbox, and answers to all 15 tests.\"]"
+    }
+  ],
+  "spawn_event_evidence": [],
+  "limitations": [
+    "Codex JSONL provides orchestration events, not an operating-system syscall audit.",
+    "The harness verifies explicit CLI and custom-agent sandbox configuration; it does not claim path-level write enforcement.",
+    "No deliberate unauthorized write or network probe was attempted."
+  ],
+  "started_at": "2026-07-19T20:15:29Z",
+  "finished_at": "2026-07-19T20:16:45Z",
+  "duration_seconds": 76.351,
+  "process_exit_code": 0,
+  "artifacts": {
+    "parent_prompt.txt": {
+      "sha256": "010a4e30cb9e9a1fb4cf530b03cfeb4cb65769ee64b12c1ecfc5ef7e5bb397f5",
+      "bytes": 11849
+    },
+    "events.jsonl": {
+      "sha256": "4b84ad6979a2f864bb206ee3143e36d2edc40b888e346af83751e43c188995d2",
+      "bytes": 41478
+    },
+    "stderr.txt": {
+      "sha256": "02c0178d0abc8098a158cadfd4651e56ab2c378878724868c10e7f25a7c262dd",
+      "bytes": 4378
+    },
+    "final_response.json": {
+      "sha256": "504656ee56844539193ca5a843c225c1966db45f131538ba70497bdd47b88a16",
+      "bytes": 4321
+    },
+    "command.json": {
+      "sha256": "a456c4bb6e63737875e29c71a61638e5f21a5c6bfd6379201b1451af8d01a3ad",
+      "bytes": 14244
+    }
+  }
+}

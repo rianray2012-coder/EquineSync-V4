@@ -1,0 +1,89 @@
+{
+  "calibration_id": "ES-CAL-2026-001",
+  "approval_policy": "on-request",
+  "network_access": false,
+  "production_access": false,
+  "live_override_source": "calibration harness CLI arguments",
+  "records": [
+    {
+      "agent_run_id": "ES-RA-01-ES-CAL-2026-001-RUN-01",
+      "custom_agent_name": "equinesync_drafting_agent",
+      "agent_id": "ES-RA-01",
+      "parent_permission_mode": "workspace-write",
+      "configured_sandbox_mode": "workspace-write",
+      "expected_effective_mode": "workspace-write",
+      "authorized_workspace": "synthetic response only; no agent-created file",
+      "check_result": "PASS"
+    },
+    {
+      "agent_run_id": "ES-RA-02-ES-CAL-2026-001-RUN-01",
+      "custom_agent_name": "equinesync_segregated_review_agent",
+      "agent_id": "ES-RA-02",
+      "parent_permission_mode": "read-only",
+      "configured_sandbox_mode": "read-only",
+      "expected_effective_mode": "read-only",
+      "authorized_workspace": "none; response returned to parent",
+      "check_result": "PASS"
+    },
+    {
+      "agent_run_id": "ES-RA-03-ES-CAL-2026-001-RUN-01",
+      "custom_agent_name": "equinesync_adversarial_challenge_agent",
+      "agent_id": "ES-RA-03",
+      "parent_permission_mode": "read-only",
+      "configured_sandbox_mode": "read-only",
+      "expected_effective_mode": "read-only",
+      "authorized_workspace": "none; response returned to parent",
+      "check_result": "PASS"
+    },
+    {
+      "agent_run_id": "ES-RA-04-ES-CAL-2026-001-RUN-01",
+      "custom_agent_name": "equinesync_machine_validation_agent",
+      "agent_id": "ES-RA-04",
+      "parent_permission_mode": "workspace-write",
+      "configured_sandbox_mode": "workspace-write",
+      "expected_effective_mode": "workspace-write",
+      "authorized_workspace": "synthetic response only; no agent-created file",
+      "check_result": "PASS"
+    },
+    {
+      "agent_run_id": "ES-RA-05-ES-CAL-2026-001-RUN-01",
+      "custom_agent_name": "equinesync_evidence_custodian",
+      "agent_id": "ES-RA-05",
+      "parent_permission_mode": "workspace-write",
+      "configured_sandbox_mode": "workspace-write",
+      "expected_effective_mode": "workspace-write",
+      "authorized_workspace": "synthetic response only; no agent-created file",
+      "check_result": "PASS"
+    },
+    {
+      "agent_run_id": "ES-RA-06-ES-CAL-2026-001-RUN-01",
+      "custom_agent_name": "equinesync_domain_reviewer",
+      "agent_id": "ES-RA-06-CAL",
+      "parent_permission_mode": "read-only",
+      "configured_sandbox_mode": "read-only",
+      "expected_effective_mode": "read-only",
+      "authorized_workspace": "none; response returned to parent",
+      "check_result": "PASS"
+    },
+    {
+      "agent_run_id": "ES-RA-07-ES-CAL-2026-001-RUN-01",
+      "custom_agent_name": "equinesync_synthetic_golden_path_agent",
+      "agent_id": "ES-RA-07",
+      "parent_permission_mode": "workspace-write",
+      "configured_sandbox_mode": "workspace-write",
+      "expected_effective_mode": "workspace-write",
+      "authorized_workspace": "synthetic response only; no agent-created file",
+      "check_result": "PASS"
+    },
+    {
+      "agent_run_id": "ES-RA-08-ES-CAL-2026-001-RUN-01",
+      "custom_agent_name": "equinesync_executable_golden_path_controller",
+      "agent_id": "ES-RA-08",
+      "parent_permission_mode": "workspace-write",
+      "configured_sandbox_mode": "workspace-write",
+      "expected_effective_mode": "workspace-write",
+      "authorized_workspace": "synthetic response only; no agent-created file",
+      "check_result": "PASS"
+    }
+  ]
+}

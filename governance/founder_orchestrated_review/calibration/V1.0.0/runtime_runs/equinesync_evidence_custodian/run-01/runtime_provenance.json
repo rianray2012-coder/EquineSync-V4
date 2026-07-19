@@ -1,0 +1,33 @@
+{
+  "captured_at": "2026-07-19T20:48:49Z",
+  "requested_agent_name": "equinesync_evidence_custodian",
+  "parent_thread_id": "019f7c21-60b1-78f0-811e-4bd5e876bf3c",
+  "parent_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T15-46-30-019f7c21-60b1-78f0-811e-4bd5e876bf3c.jsonl",
+  "spawn_call_observed": true,
+  "spawn_requested_task_name": "equinesync_evidence_custodian",
+  "spawn_result_task_path": "/root/equinesync_evidence_custodian",
+  "child_thread_id": "019f7c22-935b-7ab0-9772-b16f64881634",
+  "child_rollout": "/Users/rianray/.codex/sessions/2026/07/19/rollout-2026-07-19T15-47-48-019f7c22-935b-7ab0-9772-b16f64881634.jsonl",
+  "child_agent_path": "/root/equinesync_evidence_custodian",
+  "child_agent_role_metadata": null,
+  "parent_runtime": {
+    "approval_policy": "never",
+    "sandbox_mode": "workspace-write",
+    "network_access": false,
+    "network_policy": "restricted",
+    "permission_profile_type": "managed"
+  },
+  "child_runtime": {
+    "approval_policy": "never",
+    "sandbox_mode": "workspace-write",
+    "network_access": false,
+    "network_policy": "restricted",
+    "permission_profile_type": "managed"
+  },
+  "child_read_custom_agent_config": false,
+  "limitations": [
+    "This is a sanitized extraction of Codex runtime records; encrypted reasoning and message payloads are not copied.",
+    "A registration marker plus named child path and absence of child self-discovery is used to evidence custom-instruction loading."
+  ],
+  "spawn_fork_turns": "none"
+}

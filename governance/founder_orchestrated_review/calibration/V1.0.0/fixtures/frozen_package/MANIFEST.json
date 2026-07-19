@@ -1,0 +1,16 @@
+{
+  "calibration_id": "ES-CAL-2026-001",
+  "package_id": "ES-CAL-PKG-2026-001-V001",
+  "version": "V001",
+  "frozen": true,
+  "synthetic_only": true,
+  "package_hash_basis": "single listed file SHA-256",
+  "package_hash": "4830618284b15c300efbbf35779fb86e713b7c4b91a674118601e60c6d839271",
+  "files": [
+    {
+      "path": "SYNTHETIC_BASELINE.md",
+      "sha256": "4830618284b15c300efbbf35779fb86e713b7c4b91a674118601e60c6d839271",
+      "bytes": 812
+    }
+  ]
+}
