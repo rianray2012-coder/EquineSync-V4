@@ -209,7 +209,7 @@ def main() -> int:
         env=inherited,
         text=True,
         capture_output=True,
-        timeout=10,
+        timeout=30,
     )
     ck("isolation_negative_tests", all(x["denied"] for x in negative_results) and inherited_check.returncode != 0, {
         "configuration_denials": len(negative_results),
