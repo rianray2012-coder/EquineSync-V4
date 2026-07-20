@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "frozen_predecessor": {
+    "path": "frozen_predecessor/EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Handoff_V1_0_0.zip",
+    "sha256": "91cdb1c24f13940814035036c2c76c7cec415945337edbf3778e2a77c4a140f6",
+    "preservation": "BYTE_FOR_BYTE_COPY"
+  },
+  "controlled_review_result": {
+    "path": "review_basis/EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Result_V1_0_0.zip",
+    "sha256": "a7cf1ffbb288d4fe29a50b2618c5ef3fc0426442b23bba7044bd670cca87d4de",
+    "review_cycle": "ES-REV-2026-002",
+    "disposition": "IDENTITY_AND_RELATIONSHIPS_REQUIRE_BOUNDED_REMEDIATION"
+  },
+  "repository_chain": {
+    "global_governance_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+    "controlled_review_authorization": "75c56ac67b0de694436c093fc2dc5ff5dffe4ff3",
+    "controlled_review_result_commit": "b8b46d80bebefca1ef42a10419479dd080126122",
+    "stage2a_closure": "56dc68ce761b84800caa60997af7fb62ab34f82d"
+  },
+  "historical_bytes_rewritten": false,
+  "candidate_files_are_successors": true
+}

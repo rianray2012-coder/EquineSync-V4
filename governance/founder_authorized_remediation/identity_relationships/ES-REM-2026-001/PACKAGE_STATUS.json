@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "package_version": "1.0.0",
+  "status": "SUCCESSOR_CANDIDATE_PACKAGE_COMPLETE_PENDING_FRESH_SEGREGATED_REVIEW",
+  "review_disposition_accepted": "IDENTITY_AND_RELATIONSHIPS_REQUIRE_BOUNDED_REMEDIATION",
+  "finding_counts": {
+    "p0": 2,
+    "p1": 16,
+    "p2": 7,
+    "candidate_remediation_mapped": 25
+  },
+  "proposed_redlines": {
+    "count": 19,
+    "status": "PROPOSED_NOT_APPROVED"
+  },
+  "candidate_adrs": {
+    "identity": 7,
+    "relationships": 7,
+    "ratified": 0,
+    "adopted": 0,
+    "locked": 0
+  },
+  "fresh_segregated_review": "REQUIRED_NOT_EXECUTED",
+  "implementation_authorized": false,
+  "application_started": false,
+  "database_started": false,
+  "schema_or_migration_created": false,
+  "custom_agent_activated": false,
+  "pull_request_created": false,
+  "merged": false,
+  "tagged": false,
+  "released": false,
+  "deployed": false,
+  "f_0001_closed": false
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "count": 19,
+  "all_status": "PROPOSED_NOT_APPROVED",
+  "independently_reconciled": 0,
+  "expressly_approved": 0,
+  "redlines": [
+    {
+      "redline_id": "CMT08-PR-001",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-002",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-003",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-004",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-005",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-006",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-007",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-008",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-009",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-010",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-011",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-012",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-013",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-014",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-015",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-016",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-017",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-018",
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "redline_id": "CMT08-PR-019",
+      "status": "PROPOSED_NOT_APPROVED"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "status": "SEPARATELY_DISPOSITIONED_FOR_SUCCESSOR_CANDIDATE_REVIEW",
+  "items": [
+    {
+      "topic": "authority_provenance",
+      "disposition": "CANDIDATE_REMEDIATED_PENDING_FRESH_REVIEW",
+      "control": "verbatim Founder authorization plus immutable predecessor and review hashes plus precedence map"
+    },
+    {
+      "topic": "source_lifecycle",
+      "disposition": "CANDIDATE_REMEDIATED_PENDING_FRESH_REVIEW",
+      "control": "exact active source path hash lifecycle role restrictions and unresolved markers"
+    },
+    {
+      "topic": "directory_immutability",
+      "disposition": "FORMALLY_DISPOSITIONED_AS_REVIEW_ENVIRONMENT_OBSERVABILITY_LIMITATION_WITH_COMPENSATING_BYTE_PROOF",
+      "control": "fresh object hash per-lane copy before-after inventories write-scope check and explicit host-permission disclosure"
+    }
+  ],
+  "ratification_effect": "NONE",
+  "implementation_effect": "NONE"
+}

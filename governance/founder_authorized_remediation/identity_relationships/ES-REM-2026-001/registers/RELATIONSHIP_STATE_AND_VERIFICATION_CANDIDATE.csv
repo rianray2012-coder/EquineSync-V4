@@ -1,0 +1,15 @@
+record_type,from_state,to_state_or_projection,event,required_evidence,authority_effect,redline_ids,status
+RelationshipClaim,NONE,ASSERTED,RELATIONSHIP_CLAIM_ASSERTED,typed parties source scope effective time and actor,None until governed activation,CMT08-PR-016;CMT08-PR-017,PROPOSED_NOT_APPROVED
+RelationshipClaim,ASSERTED,PROVISIONAL,RELATIONSHIP_CLAIM_PROVISIONAL,required checks and evidence plan,None unless separately supported,CMT08-PR-016;CMT08-PR-017,PROPOSED_NOT_APPROVED
+RelationshipClaim,PROVISIONAL,ACTIVE,RELATIONSHIP_ACTIVATED,current source identity agreement protection and policy versions,Relationship fact only not permission,CMT08-PR-016;CMT08-PR-017,PROPOSED_NOT_APPROVED
+RelationshipClaim,ANY,DISPUTED,RELATIONSHIP_DISPUTED,challenge evidence Claims reference restriction decision,Fail closed where required,CMT08-PR-014;CMT08-PR-017,PROPOSED_NOT_APPROVED
+RelationshipClaim,ACTIVE,SUSPENDED,RELATIONSHIP_SUSPENDED,actor reason effective time evidence and authority source,Dependent grants ineligible,CMT08-PR-014;CMT08-PR-017,PROPOSED_NOT_APPROVED
+RelationshipClaim,ACTIVE,ENDED,RELATIONSHIP_ENDED,actor reason effective time current authority and downstream references,Prospective effects end history preserved,CMT08-PR-016;CMT08-PR-017,PROPOSED_NOT_APPROVED
+RelationshipClaim,ANY,SUPERSEDED,RELATIONSHIP_SUPERSEDED,prior and successor versions correction evidence,No historical erasure,CMT08-PR-016;CMT08-PR-017,PROPOSED_NOT_APPROVED
+VerificationAssessment,NONE,PURPOSE_SCOPED_ASSESSMENT,VERIFICATION_ASSESSMENT_RECORDED,exact claim evidence reviewer purpose limitations effective interval and revalidation,No universal trust or permission,CMT08-PR-017,PROPOSED_NOT_APPROVED
+VerificationAssessment,PURPOSE_SCOPED_ASSESSMENT,EXPIRED,VERIFICATION_ASSESSMENT_EXPIRED,assessment version expiry and policy,No authority effect,CMT08-PR-017,PROPOSED_NOT_APPROVED
+DelegationGrant,NONE,PENDING_ACCEPTANCE,DELEGATION_PROPOSED,source authority scope restrictions expiry and delegate identity,Zero delegation authority,CMT08-PR-014;CMT08-PR-015;CMT08-PR-016,PROPOSED_NOT_APPROVED
+DelegationGrant,PENDING_ACCEPTANCE,ACTIVE,DELEGATION_ACCEPTED,delegate acceptance assurance source authority and current policy,Bounded by source and Authorization,CMT08-PR-014;CMT08-PR-015;CMT08-PR-016,PROPOSED_NOT_APPROVED
+DelegationGrant,ACTIVE,INELIGIBLE,DELEGATION_SOURCE_INVALIDATED,source expiry revocation suspension narrowing dispute or supersession,Zero delegation-derived authority,CMT08-PR-014,PROPOSED_NOT_APPROVED
+DelegationGrant,ACTIVE,EXPIRED,DELEGATION_EXPIRED,grant expiry exact source and policy versions,Zero authority after expiry,CMT08-PR-015,PROPOSED_NOT_APPROVED
+DelegationGrant,EXPIRED,PENDING_ACCEPTANCE,DELEGATION_RENEWAL_PROPOSED,current source restriction assurance protection and material-change analysis,No authority until required acceptance,CMT08-PR-015,PROPOSED_NOT_APPROVED

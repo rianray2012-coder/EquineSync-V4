@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "candidate_adrs": [
+    {
+      "candidate_adr": "candidate_adrs/identity/ADR-IDENTITY-001_FORMAL.md",
+      "domain": "Identity",
+      "founder_decisions": "IDENTITY-FD-002;IDENTITY-FD-008",
+      "candidate_clause_surface": "provider neutrality verified contact and attributable actor chain",
+      "redline_ids": "CMT08-PR-004",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/identity/ADR-IDENTITY-002_FORMAL.md",
+      "domain": "Identity",
+      "founder_decisions": "IDENTITY-FD-002;IDENTITY-FD-003",
+      "candidate_clause_surface": "passkeys lifecycle and implementation-parameter boundary",
+      "redline_ids": "CMT08-PR-005",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/identity/ADR-IDENTITY-003_FORMAL.md",
+      "domain": "Identity",
+      "founder_decisions": "IDENTITY-FD-003;IDENTITY-FD-006",
+      "candidate_clause_surface": "MFA TOTP step-up recovery restriction and parameter boundary",
+      "redline_ids": "CMT08-PR-002;CMT08-PR-005",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/identity/ADR-IDENTITY-004_FORMAL.md",
+      "domain": "Identity",
+      "founder_decisions": "IDENTITY-FD-003;IDENTITY-FD-006;IDENTITY-FD-009;IDENTITY-FD-011",
+      "candidate_clause_surface": "session architecture parameter boundary support attribution closure and stale denial",
+      "redline_ids": "CMT08-PR-004;CMT08-PR-005;CMT08-PR-010",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/identity/ADR-IDENTITY-005_FORMAL.md",
+      "domain": "Identity",
+      "founder_decisions": "IDENTITY-FD-006;IDENTITY-FD-007;IDENTITY-FD-009;IDENTITY-FD-011",
+      "candidate_clause_surface": "bounded recovery merge support closure and case evidence",
+      "redline_ids": "CMT08-PR-002;CMT08-PR-004;CMT08-PR-005;CMT08-PR-008",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/identity/ADR-IDENTITY-006_FORMAL.md",
+      "domain": "Identity",
+      "founder_decisions": "IDENTITY-FD-001;IDENTITY-FD-005;IDENTITY-FD-007;IDENTITY-FD-008;IDENTITY-FD-012",
+      "candidate_clause_surface": "invitation public signup topology boundary merge and onboarding completion",
+      "redline_ids": "CMT08-PR-003;CMT08-PR-004;CMT08-PR-006",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/identity/ADR-IDENTITY-007_FORMAL.md",
+      "domain": "Identity",
+      "founder_decisions": "IDENTITY-FD-004;IDENTITY-FD-010;IDENTITY-FD-011",
+      "candidate_clause_surface": "separate minor account protective pause transition and history",
+      "redline_ids": "CMT08-PR-001;CMT08-PR-004;CMT08-PR-007",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/relationships/ADR-REL-001_FORMAL.md",
+      "domain": "Relationships",
+      "founder_decisions": "REL-FD-001;REL-FD-002;REL-FD-003;REL-FD-004;REL-FD-007;REL-FD-011;REL-FD-013",
+      "candidate_clause_surface": "canonical typed party representation taxonomy organization facility and history",
+      "redline_ids": "CMT08-PR-011;CMT08-PR-016;CMT08-PR-019",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/relationships/ADR-REL-002_FORMAL.md",
+      "domain": "Relationships",
+      "founder_decisions": "REL-FD-002;REL-FD-013",
+      "candidate_clause_surface": "no-generic-barn type registry and version control",
+      "redline_ids": "CMT08-PR-016;CMT08-PR-019",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/relationships/ADR-REL-003_FORMAL.md",
+      "domain": "Relationships",
+      "founder_decisions": "REL-FD-005;REL-FD-006;REL-FD-014;REL-FD-016",
+      "candidate_clause_surface": "delegation acceptance zero-authority restriction expiry renewal and source dependency",
+      "redline_ids": "CMT08-PR-014;CMT08-PR-015;CMT08-PR-016",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/relationships/ADR-REL-004_FORMAL.md",
+      "domain": "Relationships",
+      "founder_decisions": "REL-FD-003;REL-FD-007;REL-FD-010;REL-FD-011",
+      "candidate_clause_surface": "claim-specific verification disputes restrictions and history",
+      "redline_ids": "CMT08-PR-017;CMT08-PR-019",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/relationships/ADR-REL-005_FORMAL.md",
+      "domain": "Relationships",
+      "founder_decisions": "REL-FD-004;REL-FD-008;REL-FD-009;REL-FD-010;REL-FD-012;REL-FD-015",
+      "candidate_clause_surface": "organization facility Care Circle emergency contact signup and emergency access",
+      "redline_ids": "CMT08-PR-016;CMT08-PR-019",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/relationships/ADR-REL-006_FORMAL.md",
+      "domain": "Relationships",
+      "founder_decisions": "REL-FD-005;REL-FD-006;REL-FD-007;REL-FD-010;REL-FD-014;REL-FD-016",
+      "candidate_clause_surface": "offline proposal authoritative time conflict and revalidation",
+      "redline_ids": "CMT08-PR-016;CMT08-PR-019",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    },
+    {
+      "candidate_adr": "candidate_adrs/relationships/ADR-REL-007_FORMAL.md",
+      "domain": "Relationships",
+      "founder_decisions": "REL-FD-001;REL-FD-003;REL-FD-004;REL-FD-007;REL-FD-011;REL-FD-012;REL-FD-013",
+      "candidate_clause_surface": "migration provisional status lineage and semantic separation",
+      "redline_ids": "CMT08-PR-016;CMT08-PR-017;CMT08-PR-019",
+      "status": "PROPOSED_NOT_APPROVED_PENDING_FRESH_REVIEW"
+    }
+  ]
+}

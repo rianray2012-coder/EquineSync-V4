@@ -1,0 +1,16 @@
+successor_path_id,domain,successor_scenario,predecessor_alias_or_surface,classification,status
+IDENTITY-GP-SR-001,Identity,Invitation issuance acceptance consumption and activation,Embedded in IDENTITY-GP-001 and IDENTITY-GP-002 plus Invitation state rows,REVIEW_DENOMINATOR_PATH,PROPOSED_NOT_APPROVED
+IDENTITY-GP-SR-002,Identity,Public signup provisional organization claim,ADR-IDENTITY-006 and OrganizationEnrollmentCase state rows,REVIEW_DENOMINATOR_PATH,PROPOSED_NOT_APPROVED
+IDENTITY-GP-SR-003,Identity,Passkey MFA and fresh step-up,ADR-IDENTITY-002 and ADR-IDENTITY-003,REVIEW_DENOMINATOR_PATH,PROPOSED_NOT_APPROVED
+IDENTITY-GP-SR-004,Identity,Bounded compromised-account recovery,IDENTITY-GP-004,PACKAGED_GOLDEN_PATH,PROPOSED_NOT_APPROVED
+IDENTITY-GP-SR-005,Identity,Support-assisted action without invisible impersonation,IDENTITY-GP-005,PACKAGED_GOLDEN_PATH,PROPOSED_NOT_APPROVED
+IDENTITY-GP-SR-006,Identity,Protected-account transition with hold,ADR-IDENTITY-007 and ProtectedAccountTransitionCase state rows,REVIEW_DENOMINATOR_PATH,PROPOSED_NOT_APPROVED
+IDENTITY-GP-SR-007,Identity,Duplicate identity suggestion review correction and reversal,ADR-IDENTITY-006 and IdentityMergeCase state rows,REVIEW_DENOMINATOR_PATH,PROPOSED_NOT_APPROVED
+REL-GP-SR-001,Relationships,Trainer across multiple program locations,REL-GP-001,PACKAGED_GOLDEN_PATH,PROPOSED_NOT_APPROVED
+REL-GP-SR-002,Relationships,Bounded horse-care delegation,REL-GP-002,PACKAGED_GOLDEN_PATH,PROPOSED_NOT_APPROVED
+REL-GP-SR-003,Relationships,Multiple guardians with different scopes,REL-GP-003,PACKAGED_GOLDEN_PATH,PROPOSED_NOT_APPROVED
+REL-GP-SR-004,Relationships,Horse relationship transfer and termination,REL-GP-004,PACKAGED_GOLDEN_PATH,PROPOSED_NOT_APPROVED
+REL-GP-SR-005,Relationships,Public-signup provisional claim,REL-GP-005,PACKAGED_GOLDEN_PATH,PROPOSED_NOT_APPROVED
+REL-GP-SR-006A,Relationships,Delegation renewal after source-authority change,REL-GP-006 in revised-candidate GOLDEN_PATHS.md,PREDECESSOR_ALIAS_DISAMBIGUATED,PROPOSED_NOT_APPROVED
+REL-GP-SR-006B,Relationships,Offline delegation proposal and revocation conflict,REL-GP-006 in pre-ratification documentary results and CMT-07 prompt,PREDECESSOR_ALIAS_DISAMBIGUATED,PROPOSED_NOT_APPROVED
+CMT07-DENOMINATOR,Combined,Seven Identity review paths plus six Relationships review paths,CMT-07 controlled prompt denominator,REVIEW_DENOMINATOR_13,PROPOSED_NOT_APPROVED

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "rules": [
+    "PRESERVE_HISTORICAL_STATUS_AND_BYTES",
+    "LATER_CHECKSUM_BACKED_ADOPTION_AND_LOCK_CONTROLS_CURRENT_CANON_LIFECYCLE",
+    "PIA_OR_RECOMMENDATION_APPROVAL_DOES_NOT_RATIFY_FORMAL_ADR_TEXT",
+    "REVIEW_DISPOSITION_DOES_NOT_APPROVE_REDLINE",
+    "FOUNDER_AUTHORIZATION_PERMITS_ONE_DOCUMENTARY_PACKAGE_ONLY",
+    "CANDIDATE_OVERLAY_CONTROLS_WITHIN_CANDIDATE_ONLY",
+    "FRESH_SEGREGATED_REVIEW_REQUIRED_BEFORE_RATIFICATION_REQUEST"
+  ],
+  "agreement_lineage": {
+    "raw_source_sha256": "af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20",
+    "locked_markdown_sha256": "1855d7f4419c236e4d8638f9587cf2e96ad58b079d69d34a9b2188ad1ba80cc9",
+    "lock_record": "docs/canon/locks/agreement_consent_authorization_v2_1/C0_019_AGREEMENT_CONSENT_AND_AUTHORIZATION_CONSTITUTIONAL_LOCK_RECORD.md"
+  },
+  "unresolved_for_ratification": [
+    {
+      "source_id": "ES-SRC-PIA-STANDARD",
+      "reason": "exact active repository bytes and checksum not found",
+      "effect": "BLOCKS_RATIFICATION_NOT_CANDIDATE_PACKAGING"
+    }
+  ]
+}

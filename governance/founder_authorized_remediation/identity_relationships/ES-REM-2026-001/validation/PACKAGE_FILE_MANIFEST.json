@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "hash_algorithm": "SHA-256",
+  "self_and_final_validation_exclusions": [
+    "validation/PACKAGE_FILE_MANIFEST.json",
+    "validation/SHA256SUMS.txt",
+    "validation/VALIDATION_REPORT.json",
+    "validation/VALIDATION_REPORT.md"
+  ],
+  "files": [
+    {
+      "path": "FOUNDER_AUTHORIZATION.md",
+      "bytes": 1665,
+      "sha256": "3048400638a390b79aae5d69b0f880d73f4f9c84745dd5b44796da502a70ddf1"
+    },
+    {
+      "path": "FRESH_SEGREGATED_REVIEW_HANDOFF.md",
+      "bytes": 1151,
+      "sha256": "813b39fb8bb20d89a8c99d5d0f6039e0ec01c2be131ae85a38e24876b6fa2131"
+    },
+    {
+      "path": "NON_IMPLEMENTATION_ATTESTATION.md",
+      "bytes": 664,
+      "sha256": "d31d1038ff5fe71233b6f1a0570f59d33859008d432c480e05d6765d1f1def76"
+    },
+    {
+      "path": "PACKAGE_STATUS.json",
+      "bytes": 953,
+      "sha256": "8900a0804bc8ac42a83ef61ce2594a0812cdcfc5d03c7d7f3ddcf5501f88933f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2388,
+      "sha256": "6e378045b91241f09f08a7bc965a195c7e619d8315bc9ce1cbe3fb9b0d78d4f1"
+    },
+    {
+      "path": "candidate_adrs/identity/ADR-IDENTITY-001_FORMAL.md",
+      "bytes": 4018,
+      "sha256": "3cb65be1ea5a069af41e725f9ce0d37f3c51f5b6413eb9cf11d96c5c1d270c52"
+    },
+    {
+      "path": "candidate_adrs/identity/ADR-IDENTITY-002_FORMAL.md",
+      "bytes": 3810,
+      "sha256": "605124062153e13054bd1b45b8f17d8fdd3dac2e48c2e2e7e25dab6dc1c2f857"
+    },
+    {
+      "path": "candidate_adrs/identity/ADR-IDENTITY-003_FORMAL.md",
+      "bytes": 3547,
+      "sha256": "715331d211718d649cc7d35423b65f31c9f6b9cbbb00c9a907a85ab8ce6296c9"
+    },
+    {
+      "path": "candidate_adrs/identity/ADR-IDENTITY-004_FORMAL.md",
+      "bytes": 3818,
+      "sha256": "4aaf23b75d8e70c9ca15952e9b2793bf88bbdd6d491851aa3c23f3bbb476b2e8"
+    },
+    {
+      "path": "candidate_adrs/identity/ADR-IDENTITY-005_FORMAL.md",
+      "bytes": 3805,
+      "sha256": "e5457b5c02700a55e44734875d4e2e4ed1415384e1e5b05235c9bb4b0242b210"
+    },
+    {
+      "path": "candidate_adrs/identity/ADR-IDENTITY-006_FORMAL.md",
+      "bytes": 4289,
+      "sha256": "098c4ed43d77ebd333816fcaaf932c739b5510f8d32132f80bd6dec78563676f"
+    },
+    {
+      "path": "candidate_adrs/identity/ADR-IDENTITY-007_FORMAL.md",
+      "bytes": 3951,
+      "sha256": "786bfd050d4acecf54b2aa8f9f077a65a29b22f83096c6ab6a2561c490ac0200"
+    },
+    {
+      "path": "candidate_adrs/relationships/ADR-REL-001_FORMAL.md",
+      "bytes": 8918,
+      "sha256": "b4fd9433e92206d29d32594630b49bd81cd41e8665c8a74ceb5bb8d7285c42bd"
+    },
+    {
+      "path": "candidate_adrs/relationships/ADR-REL-002_FORMAL.md",
+      "bytes": 8026,
+      "sha256": "005e54548e7445ce999ee4084376266342c9b940e6fd68128a775b2a6c582148"
+    },
+    {
+      "path": "candidate_adrs/relationships/ADR-REL-003_FORMAL.md",
+      "bytes": 8793,
+      "sha256": "d74916632a5df5d7d82c40ab9d3e82a7d2f71ef62773185371bca505370fa8a6"
+    },
+    {
+      "path": "candidate_adrs/relationships/ADR-REL-004_FORMAL.md",
+      "bytes": 8284,
+      "sha256": "c9ff14501c69d78fa47bf291a317639fe4429babbffbb8b94c754c4617d9d4b2"
+    },
+    {
+      "path": "candidate_adrs/relationships/ADR-REL-005_FORMAL.md",
+      "bytes": 8273,
+      "sha256": "9ab49f43246c237da27f01bcbd9276cd8e98bd091309d759aeba99e2db873b70"
+    },
+    {
+      "path": "candidate_adrs/relationships/ADR-REL-006_FORMAL.md",
+      "bytes": 8014,
+      "sha256": "67dba8a3ed0ae13360bd410bbaac30d40c14eee4561e14e3b81ceffb0d86dce4"
+    },
+    {
+      "path": "candidate_adrs/relationships/ADR-REL-007_FORMAL.md",
+      "bytes": 8364,
+      "sha256": "cc4dbcc37898cadbd0ee74b91fcda522e692a54beb8a9f4accb67646d59c4b3c"
+    },
+    {
+      "path": "candidate_contracts/AUTHORIZATION_INTERFACE_PIA_CANDIDATE.md",
+      "bytes": 3041,
+      "sha256": "0c792e4ac751fa712b141ab47c1d77bda65b6f33e423756854649d9d2e7b0f83"
+    },
+    {
+      "path": "candidate_contracts/IDENTITY_AUTHORIZATION_CONTRACT.md",
+      "bytes": 3037,
+      "sha256": "5a3d03dfbc352d7d85d170c5bd59216746cfb44f2ee6c68ad63d803d41a61967"
+    },
+    {
+      "path": "candidate_contracts/IDENTITY_PROTECTED_PARTICIPANT_CONTRACT.md",
+      "bytes": 2127,
+      "sha256": "fe17a3029fb8bbb79a0ff75114309b8efd014d23687c102179866e1055f199c4"
+    },
+    {
+      "path": "candidate_contracts/IDENTITY_RELATIONSHIPS_CONTRACT.md",
+      "bytes": 3266,
+      "sha256": "495f9559b53d22f5afb329a91f167dc9c00caf0950511d70e584fb42a4ef2cd8"
+    },
+    {
+      "path": "candidate_contracts/RELATIONSHIPS_AUTHORIZATION_CONTRACT.md",
+      "bytes": 3823,
+      "sha256": "692e5ce784d15de37ab83e6accb9712e9bed2751eb623df595728e510e5e78ec"
+    },
+    {
+      "path": "frozen_predecessor/EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Handoff_V1_0_0.zip",
+      "bytes": 301007,
+      "sha256": "91cdb1c24f13940814035036c2c76c7cec415945337edbf3778e2a77c4a140f6"
+    },
+    {
+      "path": "registers/ADR_FOUNDER_DECISION_TRACEABILITY.csv",
+      "bytes": 3695,
+      "sha256": "69e7a37e1c4a0ade7a4ae1a9b0afc6a12f4862d203835b889b0dd3e620709db7"
+    },
+    {
+      "path": "registers/ADR_FOUNDER_DECISION_TRACEABILITY.json",
+      "bytes": 6043,
+      "sha256": "158789443cf6a2b2c75f3fbbb07c85d22d449660cbc54e84522d4bcf4b6e18d9"
+    },
+    {
+      "path": "registers/ADR_TITLE_ALIAS_REGISTER.csv",
+      "bytes": 3314,
+      "sha256": "7d0cce1fdb718000ab3582ad0d66ee07554574349303fa20ced2f9d93f057909"
+    },
+    {
+      "path": "registers/AUTHORITY_COMMIT_VERIFICATION.json",
+      "bytes": 1724,
+      "sha256": "e8aba13e1747573ec864624cee0e11c7f6317b7b9b4c3c12e31e35047f92f025"
+    },
+    {
+      "path": "registers/AUTOMATION_ACCOUNTABILITY_CANDIDATE.md",
+      "bytes": 859,
+      "sha256": "9328ab5f5429fb08f5367f498f0a00c271b9f2a3b6de4ef919fbede4f1650598"
+    },
+    {
+      "path": "registers/CMT01_DISSENT_DISPOSITION.json",
+      "bytes": 981,
+      "sha256": "4ac1ca22897de53a1c8ac1e51b88238c2dd0b300b4790ceee12773198ec9e9af"
+    },
+    {
+      "path": "registers/CMT01_DISSENT_DISPOSITION.md",
+      "bytes": 1692,
+      "sha256": "5c2fcee924da79fd25ccd122f6f1d686d7b53d8e52d5b519506864f214297827"
+    },
+    {
+      "path": "registers/FIRST_USER_REQUIREMENT_TRACEABILITY.csv",
+      "bytes": 31827,
+      "sha256": "7bc66b950a6828fc3b6984ce92cbb29ca82d5689e6e4883872eb8382d978517a"
+    },
+    {
+      "path": "registers/FIRST_USER_TRACEABILITY_STATUS.json",
+      "bytes": 300,
+      "sha256": "ad1a2a3834042e47b99ff079295a643969af7720427dcf4e736c07750053e67f"
+    },
+    {
+      "path": "registers/GOLDEN_PATH_ALIAS_AND_DENOMINATOR_REGISTER.csv",
+      "bytes": 2405,
+      "sha256": "ce17894e7fb36c3b378cfbc3886f538bf8fb72220d6d8b8daf4ec5a8cdb500f2"
+    },
+    {
+      "path": "registers/IDENTITY_STATE_EVENT_CANDIDATE.csv",
+      "bytes": 5879,
+      "sha256": "47b22eb6b5abadacbf49af6081ae2314fa09ee57666dd16f5cfcdd3632ea209e"
+    },
+    {
+      "path": "registers/P2_DISPOSITION_REGISTER.csv",
+      "bytes": 2345,
+      "sha256": "7d0dcd854e9e5e215af9421b7ef32fcc5b0633d4d1b57c229c166506668d2e1a"
+    },
+    {
+      "path": "registers/PERMISSION_AND_AUDIT_CANDIDATE.csv",
+      "bytes": 1698,
+      "sha256": "d90fd6426cca8748e41727496cdc1644c2f485cb9a5cbf108a7a0d6140554b48"
+    },
+    {
+      "path": "registers/PREDECESSOR_AND_REVIEW_PROVENANCE.json",
+      "bytes": 1104,
+      "sha256": "c6e73ef9b1638a79cfba88f6545aedfc7a6897ce62de3aa5087c9fac3609e0b9"
+    },
+    {
+      "path": "registers/REDLINE_RECONCILIATION_REGISTER.csv",
+      "bytes": 15767,
+      "sha256": "a3e3824fe53e7c22a46f5bb6da912694af096c73efe2361b367c1c72e5fe7832"
+    },
+    {
+      "path": "registers/REDLINE_STATUS.json",
+      "bytes": 1894,
+      "sha256": "59688d93a6ebce9e43437d34f9f3508b9c6ff5b9fad38698a022d9dbd3e9f971"
+    },
+    {
+      "path": "registers/RELATIONSHIP_STATE_AND_VERIFICATION_CANDIDATE.csv",
+      "bytes": 2901,
+      "sha256": "978566c1a2bba621e2d880bd37d6429b821f5c7a101065cd34c4a88bb98717e3"
+    },
+    {
+      "path": "registers/REMEDIATION_STATUS.json",
+      "bytes": 274,
+      "sha256": "ff5f442c5f4fa07f13cd394487118987dc65aacf9ed8797b4b61e98692fd7748"
+    },
+    {
+      "path": "registers/REMEDIATION_TRACEABILITY.csv",
+      "bytes": 12318,
+      "sha256": "3534027e7a4e40c61b7fde8996fb8a4c94ef02582cbe475346dacdee5650a39c"
+    },
+    {
+      "path": "registers/SOURCE_AND_LIFECYCLE_PRECEDENCE.json",
+      "bytes": 1116,
+      "sha256": "7be97ae87404a09f7b7c7dbea1c82b8d518d2cb0f27c47d7f307275e591be4cc"
+    },
+    {
+      "path": "registers/SOURCE_AND_LIFECYCLE_PRECEDENCE.md",
+      "bytes": 2025,
+      "sha256": "21304538e39fe414c226ffb1e71ced1bde29fc2afcf2eef8ebc2ca9b19f3ce45"
+    },
+    {
+      "path": "registers/SOURCE_AUTHORITY_REGISTER.csv",
+      "bytes": 6641,
+      "sha256": "b017c622d717832f16a4d4ae3104ab9809212920fb9a430356b5b68d890c5185"
+    },
+    {
+      "path": "registers/SOURCE_AUTHORITY_REGISTER.json",
+      "bytes": 10271,
+      "sha256": "a9e0dfaa938999eb0281277b81613abd7b81a2cb44f6f6ca2e2c3942a0edb379"
+    },
+    {
+      "path": "registers/SOURCE_ID_CROSSWALK.csv",
+      "bytes": 4617,
+      "sha256": "d5ff01f6ef9d775be5be816533198e3e47d550c5985ee088c7ae5f76afdee871"
+    },
+    {
+      "path": "registers/SUCCESSOR_ACCEPTANCE_CRITERIA.csv",
+      "bytes": 10535,
+      "sha256": "df2da269d9ea97c84551cd029036c8a6d48fdd3e7e2f3bbd90b3e47858d52467"
+    },
+    {
+      "path": "review_basis/DISSENT_REGISTER.csv",
+      "bytes": 11279,
+      "sha256": "55c9cbc2dbf4baa8e25221ab45b8d720d7dbfc88320c261307ddc068e6f5745b"
+    },
+    {
+      "path": "review_basis/EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Result_V1_0_0.zip",
+      "bytes": 284640,
+      "sha256": "a7cf1ffbb288d4fe29a50b2618c5ef3fc0426442b23bba7044bd670cca87d4de"
+    },
+    {
+      "path": "review_basis/OPEN_FINDINGS_AND_DECISIONS_REGISTER.csv",
+      "bytes": 36974,
+      "sha256": "1fe8e07ceda410393fd6508cfdecd6d8328ee3edc0fe31cced0ff590dc091600"
+    },
+    {
+      "path": "review_basis/PROPOSED_REDLINE_REGISTER.csv",
+      "bytes": 28189,
+      "sha256": "0e7436e90cd538b9428858d8d45fa3d5b5c162b449b74a3b57c05e9ee4530a23"
+    },
+    {
+      "path": "review_basis/SYNTHESIZED_FINDINGS.csv",
+      "bytes": 36974,
+      "sha256": "1fe8e07ceda410393fd6508cfdecd6d8328ee3edc0fe31cced0ff590dc091600"
+    }
+  ]
+}

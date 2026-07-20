@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "denominator": {
+    "identity": 36,
+    "relationships": 47,
+    "total": 83
+  },
+  "explicit_links_created": 83,
+  "executed_test_evidence": 0,
+  "status": "TRACEABILITY_DESIGN_COMPLETE_EVIDENCE_PENDING_FRESH_SEGREGATED_REVIEW"
+}
