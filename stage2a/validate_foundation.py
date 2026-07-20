@@ -67,7 +67,14 @@ def wait_for(path: Path, timeout: float) -> bool:
 def source_recovery_rehearsal(implementation_commit: str) -> dict[str, object]:
     temp_root = Path(tempfile.mkdtemp(prefix="equinesync-stage2a-source-recovery-", dir="/private/tmp"))
     clone = temp_root / "repo"
-    subprocess.run(["git", "clone", "--quiet", "--shared", "--no-checkout", str(REPO), str(clone)], check=True, timeout=120)
+    subprocess.run(["git", "init", "--quiet", str(clone)], check=True, timeout=30)
+    alternates = clone / ".git/objects/info/alternates"
+    alternates.parent.mkdir(parents=True, exist_ok=True)
+    source_object_root = (REPO / ".git/objects").resolve()
+    stable_object_root = Path((source_object_root / "info/alternates").read_text(encoding="utf-8").splitlines()[0]).resolve()
+    alternates.write_text(f"{source_object_root}\n{stable_object_root}\n", encoding="utf-8")
+    subprocess.run(["git", "update-ref", "refs/heads/stage2a-recovery", implementation_commit], cwd=clone, check=True, timeout=30)
+    subprocess.run(["git", "symbolic-ref", "HEAD", "refs/heads/stage2a-recovery"], cwd=clone, check=True, timeout=30)
     try:
         fixture = clone / "stage2a/fixtures/foundation-v1.json"
         fixture.parent.mkdir(parents=True, exist_ok=True)
@@ -89,7 +96,7 @@ def source_recovery_rehearsal(implementation_commit: str) -> dict[str, object]:
             "restored_sha256": restored,
             "restored_matches": expected == restored and expected != mutated,
             "stage2a_absent_at_prechange_anchor": prechange_absent,
-            "clone_mode": "DISPOSABLE_SHARED_OBJECTS_DIRECT_SINGLE_BLOB_MATERIALIZATION_NO_WORKTREE_CHECKOUT",
+            "clone_mode": "DISPOSABLE_ISOLATED_GIT_DIRECTORY_WITH_EXPLICIT_READ_ONLY_OBJECT_ALTERNATES_AND_SINGLE_CONTROLLED_REF_NO_REMOTE_REFS_NO_WORKTREE_CHECKOUT",
             "fresh_clone_proof_role": "NOT_APPLICABLE_SEPARATE_POST_PUSH_CONTROL",
             "disposable_clone_removed": True,
         }

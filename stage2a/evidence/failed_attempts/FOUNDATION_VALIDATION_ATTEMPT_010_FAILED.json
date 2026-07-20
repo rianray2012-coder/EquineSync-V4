@@ -1,0 +1,11 @@
+{
+  "attempt": 10,
+  "result": "FAILED_NOT_PROMOTED",
+  "failure": "DISPOSABLE_SHARED_CLONE_REJECTED_INVALID_LOCAL_REMOTE_TRACKING_REF",
+  "services_started": true,
+  "business_workflows_executed": false,
+  "affected_results_discarded": true,
+  "cleanup": "PASS_VERIFIED_API_AND_MONGO_PROCESS_GROUPS_STOPPED_PORTS_CLOSED_RUNTIME_REMOVED",
+  "remediation": "use an isolated temporary Git directory with explicit read-only object alternates and one controlled implementation ref",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}
