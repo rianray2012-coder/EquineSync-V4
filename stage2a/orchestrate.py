@@ -153,21 +153,29 @@ def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: 
     process_group_id = os.getpgid(pid)
     if process_group_id != pid:
         raise RuntimeError(f"{kind} did not start as its own process group")
-    identity = _ps_identity(pid)
-    if not identity or identity["parent_pid"] != os.getpid() or identity["process_group_id"] != process_group_id:
-        raise RuntimeError(f"{kind} process identity unavailable or conflicting at creation")
-    if identity["observed_executable"] != _executable_path(command):
-        raise RuntimeError(f"{kind} executable identity unavailable or conflicting at creation")
-    files = _process_files(pid)
-    if (
-        not files
-        or files.get("cwd") != str(cwd.resolve())
-        or identity["observed_executable"] not in files.get("txt_paths", set())
-    ):
-        raise RuntimeError(f"{kind} exact executable or working-directory identity unavailable at creation")
     launch_nonce_sha256 = hashlib.sha256(launch_nonce.encode()).hexdigest()
-    if identity["launch_nonce_sha256"] != launch_nonce_sha256:
-        raise RuntimeError(f"{kind} launch-nonce identity unavailable or conflicting at creation")
+    expected_executable = _executable_path(command)
+    expected_cwd = str(cwd.resolve())
+    deadline = time.monotonic() + 5
+    identity = None
+    while True:
+        candidate_identity = _ps_identity(pid)
+        files = _process_files(pid) if candidate_identity else None
+        if (
+            candidate_identity
+            and candidate_identity["parent_pid"] == os.getpid()
+            and candidate_identity["process_group_id"] == process_group_id
+            and candidate_identity["observed_executable"] == expected_executable
+            and candidate_identity["launch_nonce_sha256"] == launch_nonce_sha256
+            and files
+            and files.get("cwd") == expected_cwd
+            and expected_executable in files.get("txt_paths", set())
+        ):
+            identity = candidate_identity
+            break
+        if not _process_exists(pid) or time.monotonic() >= deadline:
+            raise RuntimeError(f"{kind} exact process identity unavailable or conflicting at creation")
+        time.sleep(0.05)
     command_line_sha256 = hashlib.sha256(str(identity["command_line"]).encode()).hexdigest()
     pid_file.write_text(json.dumps({
         "owner": "ES-PKG-2026-004-V003",
@@ -176,8 +184,8 @@ def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: 
         "process_group_id": process_group_id,
         "parent_pid": identity["parent_pid"],
         "parent_pid_policy": "CREATION_PARENT_OR_INIT_REPARENT_ONLY",
-        "executable_path": _executable_path(command),
-        "working_directory": str(cwd.resolve()),
+        "executable_path": expected_executable,
+        "working_directory": expected_cwd,
         "controlled_port": port,
         "launch_nonce_sha256": launch_nonce_sha256,
         "identity_recorded_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
@@ -456,6 +464,7 @@ def start(profile: str = "full", failpoint: str | None = None) -> dict[str, obje
         stdout=mongo_log,
         stderr=subprocess.STDOUT,
         env=mongo_env,
+        cwd=ROOT,
         start_new_session=True,
     )
     try:

@@ -288,5 +288,23 @@ class ControlTests(unittest.TestCase):
         killpg.assert_called_once_with(42, orchestrate.signal.SIGTERM)
         self.assertEqual(result["controlled_port_attribution"], "EXPECTED_PORT_RECORDED_AND_VERIFIED_CLOSED_BEFORE_LISTEN")
 
+    def test_creation_identity_capture_retries_transient_lsof_unavailability(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            pid_file = Path(temporary) / "api.pid"
+            nonce = "creation-retry-nonce"
+            observed = "/controlled/python -m controlled"
+            identity = {
+                "parent_pid": os.getpid(), "process_group_id": 42,
+                "command_line": observed, "observed_executable": "/controlled/python",
+                "launch_nonce_sha256": hashlib.sha256(nonce.encode()).hexdigest(),
+            }
+            files = {"cwd": "/controlled/work", "txt_paths": {"/controlled/python"}}
+            with patch("orchestrate.os.getpgid", return_value=42), patch("orchestrate._executable_path", return_value="/controlled/python"), patch("orchestrate._ps_identity", return_value=identity), patch("orchestrate._process_files", side_effect=[None, files]), patch("orchestrate._process_exists", return_value=True), patch("orchestrate.time.monotonic", side_effect=[0.0, 0.1]), patch("orchestrate.time.sleep") as sleep:
+                orchestrate._write_record(pid_file, 42, "api", ["/controlled/python", "-m", "controlled"], Path("/controlled/work"), 8019, nonce)
+            sleep.assert_called_once_with(0.05)
+            record = json.loads(pid_file.read_text())
+            self.assertEqual(record["working_directory"], "/controlled/work")
+            self.assertEqual(record["controlled_port"], 8019)
+
 
 if __name__=="__main__": unittest.main()

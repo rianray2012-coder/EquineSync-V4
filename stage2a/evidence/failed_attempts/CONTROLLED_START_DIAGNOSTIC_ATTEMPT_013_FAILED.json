@@ -1,0 +1,13 @@
+{
+  "attempt": 13,
+  "classification": "CONTROLLED_START_CREATION_IDENTITY_CONFLICT_PERSISTED_THROUGH_BOUNDED_RETRY",
+  "error": "mongo exact process identity unavailable or conflicting at creation",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "finding": "The bounded exact-identity retry correctly refused to relax the deterministic working-directory conflict.",
+  "process_identity": "PID_AND_PGID_NOT_RETAINED_IN_COMMAND_OUTPUT",
+  "process_treatment": "THE_NEWLY_SPAWNED_CHILD_WAS_CONTAINED_BY_THE_EXISTING_EXACT_CHILD_FAIL_CLOSED_PATH",
+  "remediation": "MongoDB subprocess creation now explicitly sets cwd=REPOSITORY_ROOT/stage2a.",
+  "result_disposition": "DISCARDED_IN_FULL",
+  "runtime_cleanup": "PASS_RUNTIME_PURGED_PORTS_CLOSED_NO_PID_FILES",
+  "tests_or_evidence_promoted": false
+}
