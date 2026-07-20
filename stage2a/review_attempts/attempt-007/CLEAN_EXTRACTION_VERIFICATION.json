@@ -1,0 +1,14 @@
+{
+  "archive_sha256": "e89cbed1ac280e1acb4c9a2105177037a5b2335afe8f4f9df38ab3033902c04e",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "byte_parity_after_validation": true,
+  "byte_parity_before_validation": true,
+  "candidate_files": 277,
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-007",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "extracted_files_after_validation": 277,
+  "extracted_files_before_validation": 277,
+  "result": "PASS_256_OF_256",
+  "temporary_extraction_removed": true,
+  "validator_added_files": []
+}

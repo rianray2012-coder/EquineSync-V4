@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and archive the frozen Candidate 006 without modifying it."""
+"""Validate and archive the frozen Candidate 008 without modifying it."""
 from __future__ import annotations
 
 import hashlib
@@ -14,9 +14,9 @@ from pathlib import Path
 
 
 REPO = Path(__file__).resolve().parents[1]
-CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-007"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-008"
 CANDIDATE = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION" / CANDIDATE_ID
-ATTEMPT = REPO / "stage2a/review_attempts/attempt-007"
+ATTEMPT = REPO / "stage2a/review_attempts/attempt-008"
 OUTPUTS = REPO.parents[1] / "outputs"
 ARCHIVE = OUTPUTS / f"{CANDIDATE_ID}_FROZEN.zip"
 
@@ -71,11 +71,11 @@ def main() -> int:
     if not CANDIDATE.is_dir():
         raise RuntimeError(f"candidate unavailable: {CANDIDATE_ID}")
     if ARCHIVE.exists() or ATTEMPT.exists():
-        raise RuntimeError("refusing to overwrite Candidate 007 freeze artifacts")
+        raise RuntimeError("refusing to overwrite Candidate 008 freeze artifacts")
     manifest = CANDIDATE / "DRAFT_REVIEW_SHA256SUMS.txt"
     snapshot = json.loads((CANDIDATE / "DRAFT_REVIEW_SNAPSHOT_RECORD.json").read_text(encoding="utf-8"))
     if snapshot.get("candidate_id") != CANDIDATE_ID or snapshot.get("frozen") is not True or sha(manifest) != snapshot.get("manifest_sha256"):
-        raise RuntimeError("Candidate 007 snapshot or manifest changed before freeze")
+        raise RuntimeError("Candidate 008 snapshot or manifest changed before freeze")
     rows = manifest.read_text(encoding="utf-8").splitlines()
     manifest_errors: list[str] = []
     for row in rows:
@@ -85,7 +85,7 @@ def main() -> int:
             manifest_errors.append(relative)
     before = file_map(CANDIDATE)
     if manifest_errors or len(rows) != snapshot.get("payload_files") or len(before) != len(rows) + 3:
-        raise RuntimeError(f"Candidate 007 pre-freeze mismatch: {manifest_errors}")
+        raise RuntimeError(f"Candidate 008 pre-freeze mismatch: {manifest_errors}")
 
     invocations = [
         validate("PACKAGE_ROOT", CANDIDATE, CANDIDATE, "REPOSITORY_BACKED_PACKAGED_VALIDATOR"),
@@ -144,15 +144,15 @@ def main() -> int:
         "execution": "EXECUTION_NOT_AUTHORIZED",
         "assurance": "NOT_EXTERNALLY_ASSURED",
     }
-    write_pair("PRE_REVIEW_VALIDATION_MATRIX", "Candidate 007 Pre-Review Validation Matrix", matrix, "All four supported validator invocation locations passed the complete package-control suite; validation did not modify the frozen candidate.")
+    write_pair("PRE_REVIEW_VALIDATION_MATRIX", "Candidate 008 Pre-Review Validation Matrix", matrix, "All four supported validator invocation locations passed the complete package-control suite; validation did not modify the frozen candidate.")
     clean = extraction_parity | {
         "candidate_id": CANDIDATE_ID,
         "archive_sha256": sha(ARCHIVE),
-        "result": "PASS_256_OF_256",
+        "result": f"PASS_{len(before)}_OF_{len(before)}",
         "execution": "EXECUTION_NOT_AUTHORIZED",
         "assurance": "NOT_EXTERNALLY_ASSURED",
     }
-    write_pair("CLEAN_EXTRACTION_VERIFICATION", "Candidate 007 Clean Extraction Verification", clean, f"The deterministic archive extracted with byte parity `{len(before)}/{len(before)}` before and after detached validation; the validator added no files.")
+    write_pair("CLEAN_EXTRACTION_VERIFICATION", "Candidate 008 Clean Extraction Verification", clean, f"The deterministic archive extracted with byte parity `{len(before)}/{len(before)}` before and after detached validation; the validator added no files.")
     freeze = {
         "candidate_id": CANDIDATE_ID,
         "generated_utc": generated_utc,
@@ -164,11 +164,11 @@ def main() -> int:
         "archive_sha256": sha(ARCHIVE),
         "candidate_unchanged": True,
         "validation": "PASS_4_OF_4_LOCATIONS_23_OF_23_CHECKS",
-        "clean_extraction": "PASS_256_OF_256",
+        "clean_extraction": f"PASS_{len(before)}_OF_{len(before)}",
         "execution": "EXECUTION_NOT_AUTHORIZED",
         "assurance": "NOT_EXTERNALLY_ASSURED",
     }
-    write_pair("FROZEN_SNAPSHOT_RECORD", "Candidate 007 Frozen Snapshot Record", freeze, f"`{CANDIDATE_ID}` is frozen under archive SHA-256 `{freeze['archive_sha256']}` and manifest SHA-256 `{freeze['manifest_sha256']}`. Review functions must not modify it.")
+    write_pair("FROZEN_SNAPSHOT_RECORD", "Candidate 008 Frozen Snapshot Record", freeze, f"`{CANDIDATE_ID}` is frozen under archive SHA-256 `{freeze['archive_sha256']}` and manifest SHA-256 `{freeze['manifest_sha256']}`. Review functions must not modify it.")
     print(json.dumps(freeze, indent=2, sort_keys=True))
     return 0
 
