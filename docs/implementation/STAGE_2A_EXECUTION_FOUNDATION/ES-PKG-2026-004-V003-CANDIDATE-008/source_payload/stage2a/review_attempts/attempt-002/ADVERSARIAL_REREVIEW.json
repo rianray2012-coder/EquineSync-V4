@@ -1,0 +1,24 @@
+{
+  "review_id": "STAGE2A_ADVERSARIAL_REREVIEW_ATTEMPT_002",
+  "review_function": "ADVERSARIAL_REVIEW",
+  "snapshot_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+  "payload_verification_before": "108/108",
+  "payload_verification_after": "108/108",
+  "physical_files": 111,
+  "package_modified_by_review": false,
+  "overall_result": "FAIL",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "primary_blocked_readiness_cause": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "findings": [
+    {"finding_id": "ES-ADV-V003-R2-F-0001", "severity": "P1", "status": "OPEN_BLOCKING", "affected_gap": "S2-GAP-009", "title": "Provider-attempt and full-application startup evidence is not fail-closed"},
+    {"finding_id": "ES-ADV-V003-R2-F-0002", "severity": "P1", "status": "OPEN_BLOCKING", "affected_gap": "S2-GAP-006", "title": "Evidence semantics and redaction remain insufficiently enforced"},
+    {"finding_id": "ES-ADV-V003-R2-F-0003", "severity": "P2", "status": "OPEN_REMEDIATION_REQUIRED", "affected_gap": "PACKAGE_CONTROL", "title": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC"},
+    {"finding_id": "ES-ADV-V003-R2-F-0004", "severity": "P2", "status": "OPEN_REMEDIATION_REQUIRED", "affected_gap": "PACKAGE_CONTROL", "title": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT"},
+    {"finding_id": "ES-ADV-V003-R2-F-0005", "severity": "P2", "status": "OPEN_REMEDIATION_REQUIRED", "affected_gap": "S2-GAP-004", "title": "Stored process identity is not cryptographically enforced"}
+  ],
+  "gap_totals": {"ready_for_independent_closure_review": 7, "partially_remediated_blocking": 2, "not_attempted_blocking": 22, "formally_closed": 0},
+  "process_residue_relationship_to_runtime_selector": "NOT_ESTABLISHED_DO_NOT_CONFLATE",
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED"
+}

@@ -1,0 +1,144 @@
+{
+  "review_id": "STAGE2A_ADVERSARIAL_REREVIEW_ATTEMPT_006",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-006",
+  "reviewed_utc": "2026-07-20T10:32:19Z",
+  "review_mode": "INDEPENDENT_ADVERSARIAL_READ_ONLY_NO_SERVICE_START_WITH_DISPOSABLE_MUTATION_COPIES",
+  "result": "FAIL_REMEDIATION_AND_REFREEZE_REQUIRED",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "self_closed": false,
+  "immutable_snapshot": {
+    "manifest_sha256": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+    "payload_files": 253,
+    "physical_files": 256,
+    "payload_verification": "253_OF_253_PASS",
+    "archive_sha256": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+    "archive_files": 256,
+    "archive_integrity": "PASS",
+    "candidate_payload_modified": false,
+    "reviewer_induced_temporary_residue": {
+      "classification": "THREE_PYTHON_BYTECODE_CACHE_FILES_DETECTED_ARCHIVED_AND_REMOVED",
+      "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_POST_FREEZE_BYTECODE_RESIDUE.zip",
+      "archive_sha256": "829fb2df0175ab475a8abba27bf36539af7ad3a82bc5b05f09a21d2344eaa2c9",
+      "canonical_payload_overwritten": false
+    },
+    "post_residue_candidate_archive_parity": "RESTORED_256_OF_256_BYTE_IDENTICAL"
+  },
+  "implementation_anchors": {
+    "validated_implementation_commit": "edd8ac0a59c9c0fce4408538e8596b10a9a97428",
+    "packaging_commit": "d6c00b4cc067cc27be57916224b96d4bdf49fda5",
+    "assembly_commit": "2bf9958b3ab5b0f37e35e8bfd4b01eb02d0391ec",
+    "freeze_commit": "61b4851ad2d802834afb6bdf1b0981f778c68011",
+    "review_attempt": 6
+  },
+  "blocker_results": [
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "result": "TECHNICALLY_RESOLVED",
+      "basis": "Package-root, nested-working-directory, external-working-directory, and detached clean-extraction candidate invocations all returned PASS 23/23. Detached mode used frozen source_payload and produced no file or content changes."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "result": "TECHNICALLY_RESOLVED",
+      "basis": "Exact source-controlled relationships and JSON/CSV parity are enforced. Wrong-but-existing output and finding relationships, CSV divergence, and duplicate mapping, test, requirement, and finding identifiers all caused MV-011A and the assembly validator to fail."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "result": "NOT_RESOLVED_OPEN_P1",
+      "basis": "Runtime generation now emits process-bound capability events and rejects an empty supplied ledger, ordinary hash tamper, PID mismatch, and nonce mismatch. However derivation accepts fully rehashed events with invalid terminal arithmetic or a registry-inconsistent reason, and MV-016A passes when the embedded provider event chain is removed while asserted summary rows and proof booleans remain. The package therefore does not independently substantiate the event-derived measurement claim."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "result": "TECHNICALLY_RESOLVED",
+      "basis": "The independent projector detects the prior meaning-loss probe and unexpected placeholders, does not retain the secret value in projection serialization, redacts bare Bearer, access_token, client_secret, and authorization-bearer forms, preserves near-miss names, and the frozen semantic records pass schema plus semantic validation."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "result": "NOT_RESOLVED_OPEN_P2_AT_PACKAGE_EVIDENCE_LEVEL",
+      "basis": "Runtime controls correctly reject PPID, PGID, controlled-port, command-hash, executable, working-directory, nonce, and timestamp conflicts and send no signal when identity conflicts. However MV-016B accepts a forged packaged_command_line_sha256 and a forged packaged working directory, so the exported evidence is not independently checked for those claimed relationships."
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "ES-ADV-V003-R6-F-0001",
+      "severity": "P1",
+      "status": "OPEN_BLOCKING",
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "title": "Provider event-chain assertions are not semantically rederived by package validation",
+      "evidence": [
+        "A pure provider derivation probe rejected an empty fabricated zero ledger, an unrehashed event mutation, a PID mismatch, and a launch-nonce mismatch.",
+        "After recomputing the complete unkeyed event chain, derivation accepted a provider event with attempted=0 and every terminal outcome equal to zero, and separately accepted a reason_code that contradicted the source-controlled provider registry.",
+        "A detached assembly copy with every embedded foundation provider event removed, event_count set to zero, and the chain head set to zero still returned PASS 23/23; MV-014 and MV-016A both passed because asserted register rows and proof booleans were trusted instead of rederived.",
+        "The frozen Candidate 006 event chain itself is present, internally hash-consistent, and protected by its manifest; the finding concerns whether the candidate's validating control can independently substantiate that evidence before freeze."
+      ],
+      "impact": "A package can claim process-bound, hash-chained provider measurements while its underlying provider events are absent or semantically invalid. This retains the material provider/startup measurement blocker even though Candidate 006's immutable payload is unchanged.",
+      "required_remediation": "Require exact per-event schema, session identity, UTC, event type, boundary state, configuration state, reason code, source identity, value-handling flag, and one-terminal-state arithmetic; rederive and compare the complete event chain, provider register, proof, network-attempt totals, and duplicate exported provider artifacts. Add missing-event and fully rehashed semantic-mutation tests. Rebuild and freeze Candidate 007 for independent rereview."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R6-F-0002",
+      "severity": "P2",
+      "status": "OPEN_REMEDIATION_REQUIRED",
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "title": "Packaged process-identity evidence accepts internally forged command and working-directory fields",
+      "evidence": [
+        "Runtime _expected probes rejected PPID, PGID, port, command-hash, executable, working-directory, nonce, and future-timestamp conflicts.",
+        "A mocked _terminate conflict probe raised before signaling and os.killpg was not called.",
+        "Candidate 006 preserves both the pre-redaction command_line_sha256 and a packaged_command_line_sha256 over the path-redacted observed command; the frozen packaged hash is internally consistent.",
+        "A detached assembly mutation changed api_identity.packaged_command_line_sha256 to 64 zeroes; the validator returned PASS 23/23 and MV-016B passed.",
+        "A separate detached assembly mutation changed api_identity.working_directory to /forged/wrong/cwd; the validator again returned PASS 23/23 and MV-016B passed."
+      ],
+      "impact": "Runtime signaling is fail-closed, but the controlled package can still certify internally inconsistent process-identity evidence during assembly.",
+      "required_remediation": "Recompute packaged_command_line_sha256 from the path-redacted observed_command_line, validate the raw-hash-basis and path-redaction metadata plus all required identity value formats and relationships, cross-check startup and shutdown PID/PGID identities, and add packaged-evidence mutations for PPID, PGID, port, command, executable, working directory, nonce, and timestamp. Include the remediation in Candidate 007."
+    }
+  ],
+  "open_findings": {
+    "P0": 0,
+    "P1": 1,
+    "P2": 1
+  },
+  "challenge_results": {
+    "validator_candidate_invocations": "4_OF_4_PASS_23_OF_23_INCLUDING_DETACHED_CLEAN_EXTRACTION",
+    "detached_validator_file_changes": 0,
+    "repository_candidate_reviewer_bytecode_residue_files": 3,
+    "repository_candidate_residue_disposition": "DETECTED_ARCHIVED_REMOVED_PARITY_RESTORED_256_OF_256",
+    "post_cleanup_detached_validator": "PASS_23_OF_23_WITH_PYTHONDONTWRITEBYTECODE_1",
+    "unit_tests": "33_OF_33_PASS_READ_ONLY_AGAINST_CANDIDATE_006_SOURCE",
+    "trace_wrong_existing_relationships_rejected": true,
+    "trace_json_csv_divergence_rejected": true,
+    "trace_duplicate_mapping_test_requirement_finding_identifiers_rejected": true,
+    "provider_empty_zero_ledger_rejected": true,
+    "provider_unrehashed_tamper_rejected": true,
+    "provider_pid_mismatch_rejected": true,
+    "provider_nonce_mismatch_rejected": true,
+    "provider_fully_rehashed_invalid_terminal_arithmetic_rejected": false,
+    "provider_fully_rehashed_registry_reason_mismatch_rejected": false,
+    "provider_missing_embedded_event_chain_rejected_by_package_validator": false,
+    "semantic_bare_bearer_access_token_client_secret_redacted": true,
+    "semantic_meaning_loss_rejected": true,
+    "semantic_unexpected_placeholder_rejected": true,
+    "process_runtime_conflicts_rejected": true,
+    "process_signal_sent_on_identity_conflict": false,
+    "packaged_process_packaged_command_hash_tamper_rejected": false,
+    "packaged_process_working_directory_tamper_rejected": false,
+    "invalid_predecessor_reuse_found": false,
+    "hidden_execution_or_production_readiness_claim_found": false,
+    "plausible_live_secret_found": false
+  },
+  "prior_freezes": {
+    "failed_108_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+    "failed_candidate_003_manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+    "failed_candidate_004_manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+    "failed_candidate_005_assembly_manifest_sha256": "a0937895498704028cf8f450f18555ac7b54b5417a96248d62702a6fa7aff75f",
+    "unchanged": true
+  },
+  "runtime_selector": "OPEN_BLOCKING_SEPARATE_NOT_CAUSALLY_CONFLATED",
+  "services_started": false,
+  "next_candidate_required": "ES-PKG-2026-004-V003-CANDIDATE-007",
+  "final_adversarial_disposition": "FAIL_REMEDIATION_AND_REFREEZE_REQUIRED"
+}

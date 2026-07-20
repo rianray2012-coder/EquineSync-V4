@@ -1,0 +1,106 @@
+{
+  "changes": [
+    {
+      "change_id": "S2A-CHG-001",
+      "description": "Backend dependency-install contract",
+      "gap_id": "S2-GAP-001",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-002",
+      "description": "Runtime and toolchain contract",
+      "gap_id": "S2-GAP-002",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-003",
+      "description": "Disposable environment and provider isolation",
+      "gap_id": "S2-GAP-003",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-004",
+      "description": "Deterministic start stop and health orchestration",
+      "gap_id": "S2-GAP-004",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-005",
+      "description": "Synthetic fixture foundation",
+      "gap_id": "S2-GAP-005",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-006",
+      "description": "Evidence-capture harness",
+      "gap_id": "S2-GAP-006",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-007",
+      "description": "Exact cleanup and zero-residue proof",
+      "gap_id": "S2-GAP-007",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-008",
+      "description": "Rollback and recovery foundation",
+      "gap_id": "S2-GAP-008",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-009",
+      "description": "Startup side-effect control",
+      "gap_id": "S2-GAP-009",
+      "implementation_root": "stage2a/",
+      "status": "REMEDIATED_CANDIDATE"
+    },
+    {
+      "change_id": "S2A-CHG-010",
+      "description": "Deterministic packaged-validator repository-root resolution",
+      "gap_id": "S2-GAP-006",
+      "implementation_root": "stage2a/validate_stage2a_package.py",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "change_id": "S2A-CHG-011",
+      "description": "Specific requirement control artifact test finding remediation evidence traceability",
+      "gap_id": "S2-GAP-006",
+      "implementation_root": "stage2a/build_successor_package.py",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "change_id": "S2A-CHG-012",
+      "description": "Measured provider and startup-attempt outcome states",
+      "gap_id": "S2-GAP-009",
+      "implementation_root": "stage2a/network_guard.py",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "change_id": "S2A-CHG-013",
+      "description": "Evidence semantic redaction and meaning-preservation enforcement",
+      "gap_id": "S2-GAP-006",
+      "implementation_root": "stage2a/evidence_capture.py",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "change_id": "S2A-CHG-014",
+      "description": "PID command parent process-group working-path and port identity enforcement",
+      "gap_id": "S2-GAP-004",
+      "implementation_root": "stage2a/orchestrate.py",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    }
+  ],
+  "deleted": 0,
+  "modified_existing_files": 0,
+  "package_id": "ES-PKG-2026-004-V003",
+  "renamed": 0
+}

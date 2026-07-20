@@ -1,0 +1,33 @@
+{
+  "fixture_id": "STAGE2A-FOUNDATION-V1",
+  "fixture_version": "1.0.0",
+  "synthetic_only": true,
+  "owner": "ES-PKG-2026-004-V003",
+  "collection": "stage2a_foundation",
+  "records": [
+    {
+      "_id": "stage2a-foundation-v1-marker",
+      "kind": "foundation_marker",
+      "sequence": 1,
+      "synthetic": true,
+      "owner": "ES-PKG-2026-004-V003",
+      "payload": {"label": "synthetic foundation marker", "value": 1}
+    },
+    {
+      "_id": "stage2a-foundation-v1-determinism",
+      "kind": "determinism_probe",
+      "sequence": 2,
+      "synthetic": true,
+      "owner": "ES-PKG-2026-004-V003",
+      "payload": {"label": "canonical state probe", "value": 2}
+    },
+    {
+      "_id": "stage2a-foundation-v1-cleanup",
+      "kind": "cleanup_probe",
+      "sequence": 3,
+      "synthetic": true,
+      "owner": "ES-PKG-2026-004-V003",
+      "payload": {"label": "zero residue probe", "value": 3}
+    }
+  ]
+}

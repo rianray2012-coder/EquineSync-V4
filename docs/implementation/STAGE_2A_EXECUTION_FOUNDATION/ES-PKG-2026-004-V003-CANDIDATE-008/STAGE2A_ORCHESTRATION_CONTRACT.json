@@ -1,0 +1,15 @@
+{
+  "api": "127.0.0.1:8019",
+  "entry_point": "stage2a/orchestrate.py",
+  "foreign_process_policy": "FAIL_CLOSED_REFUSE_ADOPTION_OR_SIGNAL_WHEN_ANY_IDENTITY_FIELD_IS_INCOMPLETE_OR_CONFLICTING",
+  "full_application_routes": "UNKNOWN_NOT_EXPOSED_BY_HEALTH",
+  "gap_id": "S2-GAP-004",
+  "health": "/api/health/ready",
+  "mongo": "127.0.0.1:27029",
+  "pid_identity": "PID_PLUS_PGID_PLUS_PARENT_PID_PLUS_EXECUTABLE_PATH_PLUS_FULL_COMMAND_HASH_PLUS_WORKING_DIRECTORY_PLUS_CONTROLLED_PORT",
+  "shutdown_timeout_seconds": 15,
+  "start": "stage2a/.venv/bin/python stage2a/orchestrate.py start --profile full",
+  "startup_timeout_seconds": 180,
+  "status": "stage2a/.venv/bin/python stage2a/orchestrate.py status",
+  "stop": "stage2a/.venv/bin/python stage2a/orchestrate.py stop"
+}

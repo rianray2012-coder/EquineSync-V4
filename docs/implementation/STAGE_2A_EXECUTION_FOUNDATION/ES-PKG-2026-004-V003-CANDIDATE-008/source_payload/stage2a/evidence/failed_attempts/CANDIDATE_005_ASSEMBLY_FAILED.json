@@ -1,0 +1,23 @@
+{
+  "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-005_ASSEMBLY_FAILED.zip",
+  "archive_sha256": "41cc9ae595dbe640cc9aedf79fe84267d58ddb84355682626e237eccd5d3595c",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-005",
+  "candidate_directory_modified_by_preservation": false,
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-005",
+  "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "file_count": 249,
+  "manifest": "stage2a/evidence/failed_attempts/CANDIDATE_005_ASSEMBLY_FAILED_SHA256SUMS.txt",
+  "manifest_sha256": "a0937895498704028cf8f450f18555ac7b54b5417a96248d62702a6fa7aff75f",
+  "packaging_commit": "edd8ac0a59c9c0fce4408538e8596b10a9a97428",
+  "preserved_utc": "2026-07-20T10:19:23.603236+00:00",
+  "validated_implementation_commit": "edd8ac0a59c9c0fce4408538e8596b10a9a97428",
+  "validator_result": {
+    "cause": "dynamic detached source-module imports created two __pycache__ files inside source_payload",
+    "detached_clean_copy_score": "22/23",
+    "failed_check": "MV-011-source-register",
+    "repository_backed_locations_passed": 3,
+    "repository_backed_locations_required": 3
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "review_id": "STAGE2A_CUSTODIAN_REREVIEW_ATTEMPT_006",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-006",
+  "review_role": "INDEPENDENT_EVIDENCE_CUSTODIAN",
+  "generated_utc": "2026-07-20T10:30:44Z",
+  "result": "CUSTODY_PASS_CANDIDATE_NOT_CLOSURE_READY_PROVIDER_P1_PROCESS_EVIDENCE_P2",
+  "self_closed_findings": false,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "review_repository_context": {
+    "branch": "codex/stage2a-execution-foundation-remediation",
+    "review_time_head": "61b4851ad2d802834afb6bdf1b0981f778c68011",
+    "validated_implementation_commit": "edd8ac0a59c9c0fce4408538e8596b10a9a97428",
+    "packaging_commit": "d6c00b4cc067cc27be57916224b96d4bdf49fda5",
+    "frozen_archive_read_only": true,
+    "candidate_payload_files_not_edited": true,
+    "post_freeze_bytecode_residue_event_recorded": true
+  },
+  "integrity": {
+    "archive": {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_FROZEN.zip",
+      "sha256_before_review": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+      "sha256_after_review": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+      "crc_validation": "PASS",
+      "physical_files": 256
+    },
+    "payload_manifest": {
+      "path": "DRAFT_REVIEW_SHA256SUMS.txt",
+      "sha256_before_review": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+      "sha256_after_review": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+      "rows": 253,
+      "verified_rows": 253,
+      "mismatches": 0
+    },
+    "candidate_physical_tree": {
+      "aggregate_method": "SHA256_OF_SORTED_SHASUM_OUTPUT_FOR_ALL_PHYSICAL_FILES",
+      "sha256_before_review": "baca85f43e307b9655d596b0b93f6ca7040e93b57c2aee45b0af61c385d5df3c",
+      "sha256_after_review": "baca85f43e307b9655d596b0b93f6ca7040e93b57c2aee45b0af61c385d5df3c",
+      "physical_files": 256,
+      "archive_path_set_equal": true,
+      "archive_byte_mismatches": 0
+    },
+    "intentionally_unlisted_physical_files": [
+      "DRAFT_REVIEW_SHA256SUMS.txt",
+      "DRAFT_REVIEW_SNAPSHOT_RECORD.json",
+      "DRAFT_REVIEW_SNAPSHOT_RECORD.md"
+    ],
+    "canonical_candidate_payload_bytes_unchanged": true,
+    "final_candidate_directory_matches_archive": true,
+    "archive_unchanged": true
+  },
+  "independent_validation": {
+    "packaged_validator_repository_root_at_freeze": "PASS_23_OF_23",
+    "packaged_validator_repository_context_current_rerun": "FAIL_22_OF_23_EXPECTED_MV011_POST_FREEZE_ACTIVE_SOURCE_HASH_DRIFT",
+    "packaged_validator_current_detached_clean_extraction": "PASS_23_OF_23",
+    "recorded_post_freeze_matrix": "PASS_4_OF_4_LOCATIONS_23_OF_23_CHECKS",
+    "semantic_probes": {
+      "bare_bearer_redacted": true,
+      "authorization_bearer_scheme_preserved": true,
+      "access_token_redacted": true,
+      "client_secret_redacted": true,
+      "projection_contains_no_probe_secret": true,
+      "over_redaction_rejected": true,
+      "unexpected_placeholder_rejected": true,
+      "near_miss_names_preserved": true
+    },
+    "process_identity_probes": {
+      "valid_baseline_accepted": true,
+      "wrong_controlled_port_rejected": true,
+      "future_identity_timestamp_rejected": true,
+      "wrong_parent_pid_rejected": true,
+      "wrong_executable_rejected": true,
+      "wrong_working_directory_rejected": true,
+      "identity_conflict_signal_count": 0,
+      "port_conflict_signal_count": 0
+    },
+    "provider_and_startup_recomputation": {
+      "startup_provider_events": 11,
+      "provider_denial_events": 11,
+      "event_chain_errors": 0,
+      "chain_heads_match": true,
+      "provider_registry_hash_matches": true,
+      "unattributed_attempts": 0,
+      "startup_attempted": 3,
+      "startup_succeeded": 2,
+      "startup_failed": 1,
+      "startup_skipped": 1,
+      "startup_timed_out": 0,
+      "startup_unavailable": 0,
+      "startup_arithmetic_valid": true
+    },
+    "adversarial_package_evidence_mutation_checks": {
+      "MV-016A-provider-startup-measurement": {
+        "result": "GAP_CONFIRMED",
+        "accepted_mutations": [
+          "REMOVED_EMBEDDED_PROVIDER_EVENTS_WITH_SUMMARY_ROWS_AND_PROOF_UNCHANGED",
+          "ZEROED_EMBEDDED_PROVIDER_EVENTS_WITH_SUMMARY_ROWS_AND_PROOF_UNCHANGED"
+        ],
+        "severity": "P1",
+        "impact": "The frozen packaged validator does not require or recompute the embedded provider-event provenance from which its provider summary rows and proof fields claim to derive."
+      },
+      "MV-016B-process-identity": {
+        "result": "GAP_CONFIRMED",
+        "accepted_mutations": [
+          "FORGED_API_IDENTITY_COMMAND_LINE_SHA256",
+          "FORGED_API_IDENTITY_WORKING_DIRECTORY"
+        ],
+        "severity": "P2",
+        "impact": "The frozen packaged validator does not recompute command_line_sha256 from observed_command_line or cross-check working_directory against an independent trusted source."
+      }
+    }
+  },
+  "five_blocker_assessment": [
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "evidence_sufficiency": "SUFFICIENT",
+      "basis": "The frozen post-freeze four-location matrix records 23/23 at every supported location, and a current detached clean extraction independently passes 23/23 with the frozen embedded source payload. A current repository-context rerun after distinct post-freeze active-source changes returns 22/23 solely because MV-011 correctly detects source-register hash drift in three active files; that expected drift is not attributed to Candidate 006. The frozen validator is manifest-bound at SHA-256 63480ec8b3de6b8477685ff5145805648f7095b70d701c5b43700aa2c8e82c18.",
+      "closure_recommendation": "RECOMMEND_CONTROLLED_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "self_closed": false
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "evidence_sufficiency": "SUFFICIENT",
+      "basis": "Canonical relationship contracts bind requirements, findings, executable test identities, implementation paths, source evidence, and JSON/CSV parity. All eight independent traceability mutation tests passed, including bogus combined mappings, per-field mutations, nonexistent references, duplicate validation IDs, and CSV drift.",
+      "closure_recommendation": "RECOMMEND_CONTROLLED_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "self_closed": false
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "evidence_sufficiency": "INSUFFICIENT_RETAIN_P1",
+      "basis": "The frozen captured data is internally consistent: both 11-event chains recompute, chain heads and registry hashes match, and startup arithmetic reconciles. However, frozen MV-016A validates provider summary rows and proof booleans/counters without requiring or recomputing embedded network_guard.provider_events. Adversarial removal or zeroing of those embedded events while leaving the derived summary rows and proof fields unchanged is accepted, so claimed provider provenance can be severed without package rejection.",
+      "closure_recommendation": "DO_NOT_CLOSE_REMEDIATE_RERUN_REFREEZE_REREVIEW",
+      "self_closed": false
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "evidence_sufficiency": "SUFFICIENT",
+      "basis": "A separate semantic_projection module does not import the redactor, preserves non-sensitive bytes, omits sensitive values from persisted metadata, and gates before/after projection equality, slot counts, residual sensitive values, unexpected placeholders, and exact-line meaning. Independent probes passed for bare Bearer, Authorization Bearer, access_token, client_secret, near-miss preservation, and over-redaction rejection.",
+      "closure_recommendation": "RECOMMEND_CONTROLLED_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "self_closed": false
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "evidence_sufficiency": "INSUFFICIENT_RETAIN_P2_PACKAGE_EVIDENCE_VALIDATION",
+      "basis": "The frozen runtime implementation is fail-closed for controlled port, identity time, PPID, executable, working-directory, and termination conflicts, and independent runtime probes observed zero signals on identity or port conflict. However, frozen MV-016B only checks field presence and basic values; it does not recompute api_identity.command_line_sha256 from observed_command_line or validate working_directory against an independent trusted source. Adversarially forged command_line_sha256 and working_directory values are accepted by the package validator.",
+      "closure_recommendation": "DO_NOT_CLOSE_REMEDIATE_RERUN_REFREEZE_REREVIEW",
+      "self_closed": false
+    }
+  ],
+  "invalidated_and_rerun_checks": {
+    "all_five_prior_insufficient_checks_invalidated": true,
+    "all_five_have_current_candidate_rerun_entries": true,
+    "current_implementation_commit": "edd8ac0a59c9c0fce4408538e8596b10a9a97428",
+    "full_lifecycle_rerun": "PASS_16_OF_16",
+    "dependency_rerun": "PASS_127_ARTIFACTS",
+    "prior_results_controlling": false,
+    "rerun_validation_gaps_retained": [
+      "MV-016A_PROVIDER_EVENT_PROVENANCE_NOT_RECOMPUTED_OR_REQUIRED",
+      "MV-016B_COMMAND_HASH_AND_WORKING_DIRECTORY_NOT_INDEPENDENTLY_CROSS_CHECKED"
+    ],
+    "effect": "CURRENT_RERUN_ENTRIES_DO_NOT_SUPPORT_CLOSURE_OF_PROVIDER_P1_OR_PROCESS_EVIDENCE_P2"
+  },
+  "predecessor_reuse": {
+    "classification": "CORROBORATIVE_NONCONTROLLING_ONLY",
+    "lifecycle_artifact_sha256": "7e03815edf4c3ec8293d480029908e1b92286245f2c670f27d0d0756ff4315c7",
+    "dependency_artifact_sha256": "be248999b1b320afc9eaea18224d42bd102877c77ad6d9f27916230dfe1f4a70",
+    "containing_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+    "normalized_dependency_inventory_sha256_predecessor_and_current": "484d363380c4cdd8afa8765234e32d82d12157e1c1323b51bc15aaf94576b586",
+    "dependency_inventory_text_sha256_predecessor_and_current": "450e5933a3bb34ca2ad81fd5c62332006369ca4cd45ba510864406aaa23c7298",
+    "fixture_file_sha256_current_and_packaged": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+    "current_reruns_control": true,
+    "invalid_reuse_found": false
+  },
+  "failed_archive_continuity": [
+    {
+      "archive": "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+      "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+      "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "payload_files": 108,
+      "physical_files": 111,
+      "crc": "PASS",
+      "manifest_hash_mismatches": 0,
+      "unchanged": true
+    },
+    {
+      "archive": "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip",
+      "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+      "payload_files": 121,
+      "physical_files": 124,
+      "crc": "PASS",
+      "manifest_hash_mismatches": 0,
+      "unchanged": true
+    },
+    {
+      "archive": "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_004_FAILED.zip",
+      "archive_sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+      "manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+      "payload_files": 207,
+      "physical_files": 210,
+      "crc": "PASS",
+      "manifest_hash_mismatches": 0,
+      "unchanged": true
+    },
+    {
+      "archive": "ES-PKG-2026-004-V003-CANDIDATE-005_ASSEMBLY_FAILED.zip",
+      "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+      "archive_sha256": "41cc9ae595dbe640cc9aedf79fe84267d58ddb84355682626e237eccd5d3595c",
+      "manifest_sha256": "a0937895498704028cf8f450f18555ac7b54b5417a96248d62702a6fa7aff75f",
+      "manifest_files": 249,
+      "physical_files": 249,
+      "crc": "PASS",
+      "archive_manifest_path_set_equal": true,
+      "manifest_hash_mismatches": 0,
+      "unchanged": true
+    }
+  ],
+  "residue_event_separation": {
+    "segregated_review_event": {
+      "classification": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+      "status": "CONTAINED_TERMINATED_PORT_CLEARED",
+      "accepted_database_or_orchestration_results_while_active": false,
+      "affected_checks_rerun_after_clearance": true
+    },
+    "runtime_limitation": {
+      "classification": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+      "status": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+      "direct_evidence_of_resolution": false
+    },
+    "causal_relationship": "NOT_ESTABLISHED_DO_NOT_CONFLATE",
+    "separate_events_confirmed": true
+  },
+  "reviewer_environment_observations": [
+    {
+      "observation": "System Python 3.14 lacked jsonschema and could not import the embedded tests.",
+      "classification": "REVIEWER_ENVIRONMENT_DEPENDENCY_MISMATCH_NONCONTROLLING",
+      "candidate_toolchain_used_afterward": "stage2a/.venv Python 3.11.11 with jsonschema 4.26.0"
+    },
+    {
+      "observation": "Executing the embedded source_payload unit suite while it remained nested beneath the active repository produced 32 passes and one topology-specific root-resolution assertion failure because the test-local REPO is source_payload while locate_repository correctly found the enclosing active Git repository.",
+      "classification": "UNSUPPORTED_NESTED_SOURCE_PAYLOAD_TEST_TOPOLOGY_NONCONTROLLING",
+      "impact": "No frozen root-resolution discrepancy: the freeze-time matrix records 23/23 in four supported contexts and a current detached clean extraction passes 23/23. A current in-repository Candidate 006 invocation returns 22/23 only because MV-011 correctly detects three post-freeze active-source hash changes; it is not treated as Candidate 006 evidence. The controlling freeze-time root-repository unit run remains recorded PASS_33_OF_33."
+    },
+    {
+      "observation": "Three Python 3.11 bytecode cache files were generated in the local Candidate 006 materialization during read-only probing. They were not archive members or manifested payload files, and no frozen payload file was altered.",
+      "classification": "POST_FREEZE_REVIEW_BYTECODE_RESIDUE_QUARANTINED_AND_REMOVED",
+      "quarantine_archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_POST_FREEZE_BYTECODE_RESIDUE.zip",
+      "quarantine_archive_sha256": "829fb2df0175ab475a8abba27bf36539af7ad3a82bc5b05f09a21d2344eaa2c9",
+      "files": 3,
+      "final_state": "LOCAL_CANDIDATE_RESTORED_TO_EXACT_256_OF_256_ARCHIVE_PATH_AND_BYTE_PARITY",
+      "post_restoration_validation": "DETACHED_PASS_23_OF_23_WITH_PYTHONDONTWRITEBYTECODE_1"
+    }
+  ],
+  "custodian_boundaries": [
+    "This review does not self-close any finding.",
+    "This review does not authorize execution, promotion, release, lock, or production use.",
+    "This review does not provide external assurance.",
+    "This review is limited to frozen Candidate 006 bytes and does not incorporate or attest any post-freeze source change.",
+    "Provider P1 and process package-evidence P2 remain open and require remediation in a distinct successor candidate followed by rerun, refreeze, and independent rereview.",
+    "The open runtime-agent selector limitation still blocks Stage 2A readiness and is not an implementation failure.",
+    "Segregated/adversarial reconciliation and the authorized decision function remain controlling for closure."
+  ],
+  "closure_recommendation": "THREE_BLOCKERS_EVIDENTIALLY_SUFFICIENT_TWO_RETAINED_GAPS_REQUIRE_DISTINCT_SUCCESSOR_CANDIDATE_REMEDIATION_RERUN_REFREEZE_AND_REREVIEW"
+}

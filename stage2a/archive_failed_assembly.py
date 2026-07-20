@@ -11,13 +11,13 @@ from pathlib import Path
 
 
 REPO = Path(__file__).resolve().parents[1]
-CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-005"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-008"
 CANDIDATE = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION" / CANDIDATE_ID
 EVIDENCE = REPO / "stage2a/evidence/failed_attempts"
 OUTPUTS = REPO.parents[1] / "outputs"
-MANIFEST = EVIDENCE / "CANDIDATE_005_ASSEMBLY_FAILED_SHA256SUMS.txt"
-REPORT_JSON = EVIDENCE / "CANDIDATE_005_ASSEMBLY_FAILED.json"
-REPORT_MD = EVIDENCE / "CANDIDATE_005_ASSEMBLY_FAILED.md"
+MANIFEST = EVIDENCE / "CANDIDATE_008_ASSEMBLY_FAILED_SHA256SUMS.txt"
+REPORT_JSON = EVIDENCE / "CANDIDATE_008_ASSEMBLY_FAILED.json"
+REPORT_MD = EVIDENCE / "CANDIDATE_008_ASSEMBLY_FAILED.md"
 ARCHIVE = OUTPUTS / f"{CANDIDATE_ID}_ASSEMBLY_FAILED.zip"
 
 
@@ -65,22 +65,20 @@ def main() -> int:
         "validated_implementation_commit": provenance["validated_implementation_commit"],
         "packaging_commit": provenance["packaging_commit"],
         "validator_result": {
-            "repository_backed_locations_passed": 3,
-            "repository_backed_locations_required": 3,
-            "detached_clean_copy_score": "22/23",
-            "failed_check": "MV-011-source-register",
-            "cause": "dynamic detached source-module imports created two __pycache__ files inside source_payload",
+            "repository_backed_score": "22/23",
+            "failed_check": "MV-016C-candidate-provenance-reuse",
+            "cause": "the copied validator retained the predecessor Candidate 007 identifier while Candidate 008 provenance correctly declared Candidate 008",
         },
         "execution": "EXECUTION_NOT_AUTHORIZED",
         "assurance": "NOT_EXTERNALLY_ASSURED",
     }
     REPORT_JSON.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     REPORT_MD.write_text(
-        "# Candidate 005 Assembly Failure Preservation\n\n"
+        "# Candidate 008 Assembly Failure Preservation\n\n"
         f"`{CANDIDATE_ID}` is preserved as a distinct pre-freeze failed assembly. Its `{len(files)}` files "
-        "were not modified during preservation. Repository-backed validation passed all three supported "
-        "locations, but detached clean-copy validation scored `22/23` because dynamic imports created two "
-        "bytecode-cache files inside `source_payload`, causing `MV-011-source-register` to fail closed.\n\n"
+        "were not modified during preservation. Repository-backed validation scored `22/23`; "
+        "`MV-016C-candidate-provenance-reuse` failed closed because the copied validator retained the "
+        "predecessor Candidate 007 identifier while provenance correctly declared Candidate 008.\n\n"
         f"- Manifest SHA-256: `{report['manifest_sha256']}`\n"
         f"- Archive SHA-256: `{report['archive_sha256']}`\n"
         "- Execution: `EXECUTION_NOT_AUTHORIZED`\n"

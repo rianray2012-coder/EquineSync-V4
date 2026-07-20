@@ -1,0 +1,162 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-008",
+  "package_id": "ES-PKG-2026-004-V003",
+  "tests": [
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:cleanup_failure_and_interruption",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-CLEANUP-INTERRUPTED"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:cleanup_failure_and_interruption",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-CLEANUP-PARTIAL"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:controlled_shutdown",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-CONTROLLED-SHUTDOWN"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:durable_rollback_recovery",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-DATASTORE-ROLLBACK"
+    },
+    {
+      "executable_identity": "BACKEND_BOOTSTRAP_RUN.validation",
+      "implementation_path": "stage2a/bootstrap_backend.py",
+      "source_evidence_id": "S2A-SRC-1D735D44D5A3",
+      "test_id": "S2A-TEST-DEP-BOOTSTRAP"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:isolation_negative_tests",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-ENV-NEGATIVE"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:evidence_capture_semantics",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-EVIDENCE-SEMANTICS"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:exact_port_egress_denial",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-EXACT-PORT-DENIAL"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:fixture_reproducibility",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-FIXTURE-REPLAY"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:zero_residue",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-FIXTURE-RESET"
+    },
+    {
+      "executable_identity": "STAGE2A_VALIDATION_COMMAND_REGISTER:S2A-CMD-003",
+      "implementation_path": "stage2a/build_successor_package.py",
+      "source_evidence_id": "S2A-SRC-60288FE64B38",
+      "test_id": "S2A-TEST-FRONTEND-BUILD"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:interrupted_start_cleanup",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-INTERRUPTED-START"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:network_boundary",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-NETWORK-GUARD"
+    },
+    {
+      "executable_identity": "PACKAGE_VALIDATOR.check:MV-011A-specific-traceability",
+      "implementation_path": "stage2a/validate_stage2a_package.py",
+      "source_evidence_id": "S2A-SRC-91899BC8CA07",
+      "test_id": "S2A-TEST-PACKAGE-TRACE-ROW"
+    },
+    {
+      "executable_identity": "BACKEND_BOOTSTRAP_RUN.pip_check",
+      "implementation_path": "stage2a/dependency_inventory.py",
+      "source_evidence_id": "S2A-SRC-FE37047E052D",
+      "test_id": "S2A-TEST-PIP-CHECK"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:process_identity",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-PROCESS-IDENTITY"
+    },
+    {
+      "executable_identity": "unittest:test_controls.ControlTests.test_process_identity_fails_closed_on_command_or_group_conflict",
+      "implementation_path": "stage2a/tests/test_controls.py",
+      "source_evidence_id": "S2A-SRC-97001E3EBDE6",
+      "test_id": "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+    },
+    {
+      "executable_identity": "unittest:test_controls.ControlTests.test_provider_events_are_process_bound_hash_chained_and_attributable",
+      "implementation_path": "stage2a/tests/test_controls.py",
+      "source_evidence_id": "S2A-SRC-97001E3EBDE6",
+      "test_id": "S2A-TEST-PROVIDER-EVENT-CHAIN"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:provider_denial",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-PROVIDER-OUTCOME-STATES"
+    },
+    {
+      "executable_identity": "unittest:test_controls.ControlTests.test_independent_semantic_projection_rejects_over_redaction",
+      "implementation_path": "stage2a/tests/test_controls.py",
+      "source_evidence_id": "S2A-SRC-97001E3EBDE6",
+      "test_id": "S2A-TEST-REDACTION-MEANING"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:durable_rollback_recovery.source_recovery",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-SOURCE-RECOVERY"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:startup_side_effect_inventory",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-STARTUP-ORACLE"
+    },
+    {
+      "executable_identity": "STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT",
+      "implementation_path": "stage2a/toolchain.json",
+      "source_evidence_id": "S2A-SRC-0B090BAE0CB8",
+      "test_id": "S2A-TEST-TOOLCHAIN"
+    },
+    {
+      "executable_identity": "unittest:test_traceability_contract.TraceabilityContractTests.test_combined_bogus_output_mapping_is_rejected",
+      "implementation_path": "stage2a/tests/test_traceability_contract.py",
+      "source_evidence_id": "S2A-SRC-A77F37A8DFCD",
+      "test_id": "S2A-TEST-TRACE-SPECIFICITY"
+    },
+    {
+      "executable_identity": "PACKAGE_VALIDATOR.check:MV-001-runtime-root-resolution",
+      "implementation_path": "stage2a/validate_stage2a_package.py",
+      "source_evidence_id": "S2A-SRC-91899BC8CA07",
+      "test_id": "S2A-TEST-VALIDATOR-ROOT-MATRIX"
+    },
+    {
+      "executable_identity": "FOUNDATION_VALIDATION.check:zero_residue",
+      "implementation_path": "stage2a/validate_foundation.py",
+      "source_evidence_id": "S2A-SRC-87EC3E271778",
+      "test_id": "S2A-TEST-ZERO-RESIDUE"
+    }
+  ]
+}

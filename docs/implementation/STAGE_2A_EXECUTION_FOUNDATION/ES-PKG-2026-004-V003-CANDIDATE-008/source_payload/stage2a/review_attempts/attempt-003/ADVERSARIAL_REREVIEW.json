@@ -1,0 +1,19 @@
+{
+  "review_id": "STAGE2A_ADVERSARIAL_REREVIEW_ATTEMPT_003",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "result": "FAIL_REMEDIATION_AND_REFREEZE_REQUIRED",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "findings": [
+    {"finding_id": "ES-ADV-V003-R2-F-0004", "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT", "severity": "P2", "status": "OPEN_REMEDIATION_REQUIRED", "basis": "detached clean extraction cannot locate a repository root; packaged evidence reference VALIDATOR_INVOCATION_MATRIX.json is absent"},
+    {"finding_id": "ES-ADV-V003-R2-F-0003", "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC", "severity": "P2", "status": "OPEN_REMEDIATION_REQUIRED", "basis": "94 outputs collapse to nine repeated requirement bundles and named test identifiers are metadata rather than executable identities"},
+    {"finding_id": "ES-ADV-V003-R2-F-0001", "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT", "severity": "P1", "status": "OPEN_BLOCKING", "basis": "provider and startup state totals are hard-coded or configuration-derived rather than event-derived; unattributed nonzero network attempts do not fail closed"},
+    {"finding_id": "ES-ADV-V003-R2-F-0002", "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT", "severity": "P1", "status": "OPEN_BLOCKING", "basis": "quoted, multiword, and bearer secrets evade full redaction and required meaning can be weak caller-selected substrings"},
+    {"finding_id": "ES-ADV-V003-R2-F-0005", "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT", "severity": "P2", "status": "OPEN_REMEDIATION_REQUIRED", "basis": "no launch nonce or start identity and status does not bind saved PID identity to the controlled-port listener"}
+  ],
+  "open_findings": {"P0": 0, "P1": 2, "P2": 3},
+  "payload_verification": "121_OF_121_PASS",
+  "candidate_modified": false,
+  "services_started": false,
+  "self_closed": false,
+  "runtime_selector": "OPEN_BLOCKING_SEPARATE_NOT_CAUSALLY_CONFLATED"
+}

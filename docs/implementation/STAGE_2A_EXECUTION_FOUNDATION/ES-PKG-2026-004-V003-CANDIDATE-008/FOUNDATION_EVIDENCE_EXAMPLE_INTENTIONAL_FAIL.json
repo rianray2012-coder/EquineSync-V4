@@ -1,0 +1,68 @@
+{
+  "schema_version": "3.0",
+  "package_id": "ES-PKG-2026-004-V003",
+  "run_identifier": "foundation-example-intentional-fail",
+  "command": "python",
+  "sanitized_arguments": [
+    "stage2a/example_command.py",
+    "intentional-fail"
+  ],
+  "input_artifact_hashes": {
+    "stage2a/config/stage2a.env": "263f2b7500302a727cf0b6a2a0ca2f4e15ec715f0cd773ae89b8170d99832efa",
+    "stage2a/example_command.py": "b21e1263c8bac2ce4e3e7105da9cf155a3d8c56bc09f13a3a09c6f15ce708bc6",
+    "stage2a/execution-evidence-schema.json": "3605a243e982613e25ef113b54dc068f613942afa906ea534053d4281d04357a"
+  },
+  "configuration_identity": "263f2b7500302a727cf0b6a2a0ca2f4e15ec715f0cd773ae89b8170d99832efa",
+  "environment_identity": "9a84eb79b81e2b168b01d0799846ed3dd1d60b781cb4709a667431eef9aa7276",
+  "utc_start": "2026-07-20T10:58:24.019089+00:00",
+  "utc_end": "2026-07-20T10:58:24.074798+00:00",
+  "commit_hash": "3b9669231e01cf23edcfc2251674af15be1786dc",
+  "tree_hash": "c9f9ee68e57b03d890c6bfe6f8fed79876bb5a2b",
+  "expected_result": {
+    "exit_status": 7
+  },
+  "actual_result": {
+    "exit_status": 7
+  },
+  "exit_status": 7,
+  "stdout_location": "evidence/latest/stdout/foundation-example-intentional-fail.txt",
+  "stderr_location": "evidence/latest/stderr/foundation-example-intentional-fail.txt",
+  "datastore_digest_before": "NOT_APPLICABLE_NO_DATASTORE_WRITE",
+  "datastore_digest_after": "NOT_APPLICABLE_NO_DATASTORE_WRITE",
+  "cleanup_result": "PASS_NO_DATASTORE_WRITE",
+  "rollback_result": "NOT_APPLICABLE_NO_DATASTORE_WRITE",
+  "tool_versions": {
+    "python": "3.11.11",
+    "executable_sha256": "2c86b80772bc3e11c9490da09d7579c88a1713ef1d5af417563ddff714fa6aa2"
+  },
+  "evidence_file_hashes": {
+    "stdout": "14cc3601e4ab8e4285f2987441a3b39cdca8bc3ccf0e1e4a0b9a14822d52dc08",
+    "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "redaction_status": "PASS_VALUES_REDACTED_PATHS_REPOSITORY_RELATIVE",
+  "required_meaning": [
+    "stage2a foundation example: intentional-fail"
+  ],
+  "redaction_evidence": {
+    "policy": "SENSITIVE_ASSIGNMENTS_AND_KNOWN_SECRET_VALUE_PATTERNS_REDACTED",
+    "stdout_replacements": 0,
+    "stderr_replacements": 0,
+    "unredacted_sensitive_match_count": 0,
+    "projection_engine": "S2A-INDEPENDENT-SEMANTIC-PROJECTOR-V1",
+    "normalization_version": "S2A-REDACTION-PROJECTION-V3",
+    "semantic_projection_sha256_before": "c9fda80733a068a67708c05f6c8ade649408b5bebe5f2ce4068e77c61603dc84",
+    "semantic_projection_sha256_after": "c9fda80733a068a67708c05f6c8ade649408b5bebe5f2ce4068e77c61603dc84",
+    "sensitive_slot_count_before": 0,
+    "placeholder_slot_count_after": 0,
+    "sensitive_class_counts_before": {},
+    "unexpected_redaction_placeholder_count": 0,
+    "over_redaction_detected": false,
+    "required_exact_line_matches": {
+      "stage2a foundation example: intentional-fail": true
+    },
+    "meaning_preserved": true
+  },
+  "result": "PASS",
+  "execution_status": "EXECUTION_NOT_AUTHORIZED",
+  "record_content_sha256": "e13dfafda27537a33c3b55ce6e094e76dab80babba76e6f10efbd33963b05493"
+}

@@ -1,0 +1,18 @@
+{
+  "attempt_id": "FOUNDATION_VALIDATION_ATTEMPT_007_FAILED",
+  "detected_utc": "2026-07-20T08:43:00Z",
+  "implementation_commit": "6b69fcc953d9088f61eda76541bd4491c7725029",
+  "result": "FAIL_CLOSED",
+  "failed_control": "INTERRUPTED_START_IDENTITY_ATTRIBUTION_NOT_COMPLETED",
+  "failure": "Interrupted-start cleanup did not complete listener attribution before the next cold-start precondition; the precondition detected the still-owned datastore and refused to proceed.",
+  "effect": "No lifecycle conclusion from this attempt is reusable or promoted to Candidate-004 evidence.",
+  "containment": {
+    "cold_start_refused": true,
+    "emergency_cleanup": "PASS_VERIFIED_MONGO_PROCESS_GROUP_STOPPED",
+    "controlled_ports": "BOTH_CLEAR",
+    "repository_controlled_artifacts_changed": false,
+    "failed_candidate_changed": false
+  },
+  "remediation": "Scope listener attribution for an owned active process to the recorded PID and exact controlled port; retain unscoped attribution only for an unexpected open port with no ownership record.",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

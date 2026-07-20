@@ -1,0 +1,14 @@
+{
+  "attempt": 9,
+  "result": "FAILED_NOT_PROMOTED",
+  "failure": "API_STARTUP_TIMEOUT_DURING_CLOUD_PLACEHOLDER_MATERIALIZATION",
+  "api_pid": 67982,
+  "api_process_group_id": 67982,
+  "mongo_pid": 67977,
+  "mongo_process_group_id": 67977,
+  "affected_results_discarded": true,
+  "cleanup_event": "stage2a/evidence/events/CONTROLLED_STARTUP_FAILURE_PROCESS_RESIDUE.json",
+  "ports_closed_after": true,
+  "runtime_absent_after": true,
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

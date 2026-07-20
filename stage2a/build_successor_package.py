@@ -29,13 +29,14 @@ PRIOR_CANDIDATE_004_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDA
 PRIOR_CANDIDATE_005_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-005"
 PRIOR_CANDIDATE_006_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-006"
 PRIOR_CANDIDATE_007_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-007"
-ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-008"
+PRIOR_CANDIDATE_008_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-008"
+ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-009"
 EVIDENCE = STAGE / "evidence/latest"
 EVENTS = STAGE / "evidence/events"
 REVIEWS = STAGE / "review_attempts"
 OUTPUTS = REPO.parents[1] / "outputs"
 PACKAGE_ID = "ES-PKG-2026-004-V003"
-CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-008"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-009"
 PREDECESSOR = "ES-PKG-2026-003-V002"
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 BASELINE = "acb518ea5a160820e64681ff95a16b010fe1156c"
@@ -57,6 +58,8 @@ FAILED_ATTEMPT_006_SHA = "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6
 FAILED_ATTEMPT_006_MANIFEST_SHA = "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274"
 FAILED_ATTEMPT_007_SHA = "e89cbed1ac280e1acb4c9a2105177037a5b2335afe8f4f9df38ab3033902c04e"
 FAILED_ATTEMPT_007_MANIFEST_SHA = "cb63e7e2da83368ad737ade7cc3b37d4b6b4281b4a6ab2dc6770f3e481964f1d"
+FAILED_ATTEMPT_008_SHA = "d94da934bd820ed246f83e1a60453290c4178f6d15d57223103ee361fb61c9ca"
+FAILED_ATTEMPT_008_MANIFEST_SHA = "3f25672a322741603632b8c6b56522fce4eec807489ae18cde55c38a10101917"
 
 
 def sha(path: Path) -> str:
@@ -189,13 +192,14 @@ def verify_freeze(root: Path, expected_payload: int, expected_physical: int, exp
 
 
 def verify_failed_assembly(root: Path, expected_files: int, expected_manifest_sha: str, archive_name: str, expected_archive_sha: str) -> dict[str, object]:
-    manifest = STAGE / "evidence/failed_attempts/CANDIDATE_005_ASSEMBLY_FAILED_SHA256SUMS.txt"
+    attempt = root.name.rsplit("-", 1)[-1]
+    manifest = STAGE / f"evidence/failed_attempts/CANDIDATE_{attempt}_ASSEMBLY_FAILED_SHA256SUMS.txt"
     if not manifest.is_file() or sha(manifest) != expected_manifest_sha:
-        raise RuntimeError("Candidate 005 failed-assembly manifest changed")
+        raise RuntimeError(f"Candidate {attempt} failed-assembly manifest changed")
     rows = manifest.read_text(encoding="utf-8").splitlines()
     archive = OUTPUTS / archive_name
     if not archive.is_file() or sha(archive) != expected_archive_sha:
-        raise RuntimeError("Candidate 005 failed-assembly archive changed")
+        raise RuntimeError(f"Candidate {attempt} failed-assembly archive changed")
     prefix = f"{root.name}/"
     with zipfile.ZipFile(archive, "r") as frozen:
         members = {
@@ -212,7 +216,7 @@ def verify_failed_assembly(root: Path, expected_files: int, expected_manifest_sh
         if data is None or hashlib.sha256(data).hexdigest() != expected:
             errors.append(relative)
     if errors or len(rows) != expected_files or set(members) != listed_paths:
-        raise RuntimeError(f"Candidate 005 failed-assembly archive integrity mismatch: rows={len(rows)} physical={len(members)} errors={errors}")
+        raise RuntimeError(f"Candidate {attempt} failed-assembly archive integrity mismatch: rows={len(rows)} physical={len(members)} errors={errors}")
     return {
         "candidate_directory": root.relative_to(REPO).as_posix(),
         "archive": f"outputs/{archive_name}",
@@ -240,6 +244,7 @@ def main() -> int:
         verify_failed_assembly(PRIOR_CANDIDATE_005_ROOT, 249, FAILED_ATTEMPT_005_MANIFEST_SHA, "ES-PKG-2026-004-V003-CANDIDATE-005_ASSEMBLY_FAILED.zip", FAILED_ATTEMPT_005_SHA),
         verify_freeze(PRIOR_CANDIDATE_006_ROOT, 253, 256, FAILED_ATTEMPT_006_MANIFEST_SHA, "ES-PKG-2026-004-V003-CANDIDATE-006_FROZEN.zip", FAILED_ATTEMPT_006_SHA),
         verify_freeze(PRIOR_CANDIDATE_007_ROOT, 274, 277, FAILED_ATTEMPT_007_MANIFEST_SHA, "ES-PKG-2026-004-V003-CANDIDATE-007_FROZEN.zip", FAILED_ATTEMPT_007_SHA),
+        verify_failed_assembly(PRIOR_CANDIDATE_008_ROOT, 282, FAILED_ATTEMPT_008_MANIFEST_SHA, "ES-PKG-2026-004-V003-CANDIDATE-008_ASSEMBLY_FAILED.zip", FAILED_ATTEMPT_008_SHA),
     ]
     raw_validation = json.loads((EVIDENCE / "FOUNDATION_VALIDATION.json").read_text(encoding="utf-8"))
     validation = package_safe_validation(raw_validation)
@@ -687,14 +692,14 @@ def main() -> int:
     pair("EVIDENCE_REUSE_AND_RERUN_REGISTER", "Evidence Reuse and Rerun Register", reuse_register, "Prior lifecycle and dependency results are retained only as corroborative predecessor evidence where their inputs remain hash-identical. Every check affected by the five blockers was invalidated and rerun; the new reruns control this candidate.")
     blocker_results = [{"blocker": blocker, "status": "REMEDIATED_PENDING_REREVIEW", "finding_id": finding_id} for finding_id, blocker, *_ in finding_specs]
     provenance = {
-        "package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "candidate_attempt": 8,
+        "package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "candidate_attempt": 9,
         "distinct_from_failed_candidate": True, "failed_candidate_unchanged": True,
         "failed_candidates": failed_candidates, "validated_implementation_commit": implementation_commit,
         "packaging_commit": packaging_commit, "blocker_results": blocker_results,
         "freeze_commit": "RECORDED_EXTERNALLY_AFTER_BYTE_FREEZE_TO_AVOID_CIRCULAR_SELF_REFERENCE",
         "execution": "EXECUTION_NOT_AUTHORIZED", "assurance": "NOT_EXTERNALLY_ASSURED",
     }
-    pair("CORRECTED_CANDIDATE_PROVENANCE", "Corrected Candidate Provenance", provenance, f"`{CANDIDATE_ID}` is a distinct eighth candidate. The failed 108-file and Candidate-003 through Candidate-007 evidence remains byte-for-byte unchanged and is referenced by its original manifest and archive SHA-256 values.")
+    pair("CORRECTED_CANDIDATE_PROVENANCE", "Corrected Candidate Provenance", provenance, f"`{CANDIDATE_ID}` is a distinct ninth candidate. The failed 108-file and Candidate-003 through Candidate-008 evidence remains byte-for-byte unchanged and is referenced by its original manifest and archive SHA-256 values.")
 
     pair("IMMUTABLE_BASELINE_RECORD", "Immutable Baseline Record", {"package_id": PACKAGE_ID, "immutable_baseline": BASELINE, "modified": False, "reachable": True}, f"Governance baseline `{BASELINE}` remains unchanged and reachable.")
     pair("PREDECESSOR_REFERENCE_RECORD", "Predecessor Reference Record", {"package_id": PACKAGE_ID, "predecessor": PREDECESSOR, "commit": START, "archive_sha256": PREDECESSOR_SHA, "unchanged": True, "sealed_predecessor": "ES-PKG-2026-002-V001", "sealed_predecessor_sha256": SEALED_SHA}, f"Predecessor `{PREDECESSOR}` remains unchanged at archive SHA-256 `{PREDECESSOR_SHA}`.")
@@ -771,8 +776,8 @@ def main() -> int:
     rows = [f"{sha(ROOT / path)}  {path}" for path in payload]
     (ROOT / "DRAFT_REVIEW_SHA256SUMS.txt").write_text("\n".join(rows) + "\n", encoding="utf-8")
     manifest_hash = sha(ROOT / "DRAFT_REVIEW_SHA256SUMS.txt")
-    snapshot = {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "review_attempt": 8, "payload_files": len(payload), "manifest_sha256": manifest_hash, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "frozen": True, "execution": "EXECUTION_NOT_AUTHORIZED"}
-    pair("DRAFT_REVIEW_SNAPSHOT_RECORD", "Draft Review Snapshot Record", snapshot, f"Review attempt 8 freezes `{len(payload)}` payload files under manifest SHA-256 `{manifest_hash}`. Reviewers must not modify the candidate.")
+    snapshot = {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "review_attempt": 9, "payload_files": len(payload), "manifest_sha256": manifest_hash, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "frozen": True, "execution": "EXECUTION_NOT_AUTHORIZED"}
+    pair("DRAFT_REVIEW_SNAPSHOT_RECORD", "Draft Review Snapshot Record", snapshot, f"Review attempt 9 freezes `{len(payload)}` payload files under manifest SHA-256 `{manifest_hash}`. Reviewers must not modify the candidate.")
     print(json.dumps({"package_root": ROOT.relative_to(REPO).as_posix(), "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "payload_files": len(payload), "physical_files": len(payload) + 3, "manifest_sha256": manifest_hash, "validation": validation["validation"], "principal_disposition": DISPOSITION}, indent=2))
     return 0
 
