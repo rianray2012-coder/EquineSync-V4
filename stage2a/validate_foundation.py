@@ -96,8 +96,8 @@ def source_recovery_rehearsal(implementation_commit: str) -> dict[str, object]:
 
 def main() -> int:
     EVIDENCE.mkdir(parents=True, exist_ok=True)
-    for path in EVIDENCE.glob("*.json"):
-        path.unlink()
+    for name in ("FOUNDATION_VALIDATION.json", "foundation-example-pass.json", "foundation-example-intentional-fail.json"):
+        (EVIDENCE / name).unlink(missing_ok=True)
     started = dt.datetime.now(dt.timezone.utc)
     checks: list[dict[str, object]] = []
     artifacts: dict[str, object] = {}

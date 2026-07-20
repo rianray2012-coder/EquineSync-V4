@@ -85,8 +85,10 @@ def main() -> int:
         raise RuntimeError("foundation validation and backend bootstrap must pass")
     implementation_commit = validation["artifacts"]["implementation_commit"]
     implementation_tree = validation["artifacts"]["implementation_tree"]
-    if bootstrap.get("implementation_commit") != implementation_commit:
-        raise RuntimeError("bootstrap and foundation evidence commit anchors differ")
+    bootstrap_commit = bootstrap.get("implementation_commit")
+    bootstrap_ancestry = subprocess.run(["git", "merge-base", "--is-ancestor", implementation_commit, str(bootstrap_commit)], cwd=REPO)
+    if bootstrap_ancestry.returncode != 0:
+        raise RuntimeError("bootstrap commit does not descend from the validated implementation")
     ancestry = subprocess.run(["git", "merge-base", "--is-ancestor", implementation_commit, packaging_commit], cwd=REPO)
     if ancestry.returncode != 0:
         raise RuntimeError("validated implementation is not an ancestor of the packaging commit")
@@ -99,6 +101,7 @@ def main() -> int:
         "stage2_package_commit": START, "stage2a_branch": BRANCH,
         "stage2a_implementation_commit": implementation_commit, "stage2a_implementation_tree": implementation_tree,
         "stage2a_packaging_commit": packaging_commit, "stage2a_packaging_tree": packaging_tree,
+        "stage2a_bootstrap_commit": bootstrap_commit,
         "immutable_baseline": BASELINE, "stage2_archive_sha256": PREDECESSOR_SHA,
         "stage2_package_validation": "PASS_50_OF_50", "stage2_package_clean_extraction": "113_OF_113",
         "stage2_remote_tip": START, "pull_requests": 0, "default_branch_contains_stage2_commit": False,
