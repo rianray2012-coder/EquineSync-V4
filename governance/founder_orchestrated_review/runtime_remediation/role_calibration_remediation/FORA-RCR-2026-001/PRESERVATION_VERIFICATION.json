@@ -1,6 +1,6 @@
 {
   "authorization_id": "FORA-RCR-2026-001",
-  "generated_at": "2026-07-19T23:30:37Z",
+  "generated_at": "2026-07-20T03:01:40Z",
   "preserved_original_behavioral_failures": [
     "governance/founder_orchestrated_review/runtime_remediation/runs/behavioral_calibration/ES-CAL-2026-001/equinesync_machine_validation_agent/run-02",
     "governance/founder_orchestrated_review/runtime_remediation/runs/behavioral_calibration/ES-CAL-2026-001/equinesync_domain_reviewer/run-02"

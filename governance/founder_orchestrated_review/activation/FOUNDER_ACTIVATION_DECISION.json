@@ -1,0 +1,31 @@
+{
+  "$schema": "FOUNDER_ACTIVATION_DECISION.schema.json",
+  "schema_version": "1.0.0",
+  "review_id": "FORA-ACT-REV-2026-001",
+  "review_status": "READY_FOR_FOUNDER_DECISION",
+  "review_package_status": "FOUNDER_ACTIVATION_REVIEW_PACKAGE_READY",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "package_version": "V1.0.0",
+  "technical_evidence_commit": "860da19970604197117b94a2ef7f23dba2dca694",
+  "remediation_commit": "2d2efa9cc9aaaf14723283d94b716b5681c70df4",
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "founder_activation_approval": false,
+  "founder_decision": null,
+  "activation_authorized": false,
+  "substantive_review_commencement_authorized": false,
+  "merge_authorized": false,
+  "approved_by": null,
+  "approved_at": null,
+  "approval_reference": null,
+  "conditions": [],
+  "rationale": null,
+  "activation_gate": {
+    "file_existence_is_approval": false,
+    "explicit_founder_decision_required": true,
+    "exact_commit_reference_required": true,
+    "approval_evidence_required": true,
+    "condition_verification_required_when_conditional": true,
+    "separate_commencement_authorization_required": true
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0.0",
+  "verification_id": "FORA-FAR-2026-001-FINAL-CLONE-01",
+  "verified_at": "2026-07-20T02:51:40Z",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "repository_url": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "starting_commit": "35119dbfb873e0fd19fef2a1e574d2f8100286f3",
+  "remediation_commit": "2d2efa9cc9aaaf14723283d94b716b5681c70df4",
+  "earlier_fresh_clone_verified_commit": "2d2efa9cc9aaaf14723283d94b716b5681c70df4",
+  "final_evidence_commit": "860da19970604197117b94a2ef7f23dba2dca694",
+  "final_verified_commit": "860da19970604197117b94a2ef7f23dba2dca694",
+  "remote_branch_tip": "860da19970604197117b94a2ef7f23dba2dca694",
+  "remediation_commit_is_ancestor": true,
+  "clone_worktree_clean": true,
+  "checksum_reconciliation": {
+    "remediation_commit_manifest_entries": 142,
+    "remediation_commit_checksum_entries": 141,
+    "remediation_commit_checksum_failures": 0,
+    "final_evidence_commit_manifest_entries": 144,
+    "final_evidence_commit_checksum_entries": 143,
+    "final_evidence_commit_checksum_failures": 0,
+    "entries_added": 2,
+    "entries_removed": 0,
+    "files_responsible_for_increase": [
+      "governance/founder_orchestrated_review/runtime_remediation/role_calibration_remediation/FORA-RCR-2026-001/FRESH_CLONE_VERIFICATION.json",
+      "governance/founder_orchestrated_review/runtime_remediation/role_calibration_remediation/FORA-RCR-2026-001/FRESH_CLONE_VERIFICATION.md"
+    ],
+    "manifest_paths_not_checksummed": [
+      "governance/founder_orchestrated_review/runtime_remediation/role_calibration_remediation/FORA-RCR-2026-001/ROLE_CALIBRATION_REMEDIATION_CHECKSUMS.sha256"
+    ],
+    "both_historical_denominators_correct": true,
+    "final_manifest_internally_consistent": true
+  },
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "role_registration": {
+    "passed": 8,
+    "expected": 8
+  },
+  "custom_instruction_layers_loaded": {
+    "passed": 8,
+    "expected": 8
+  },
+  "individual_calibration": {
+    "ES-RA-04": {
+      "status": "PASS",
+      "behavior_cases": "15/15",
+      "harness_checks": "10/10"
+    },
+    "ES-RA-06": {
+      "status": "PASS",
+      "behavior_cases": "15/15",
+      "harness_checks": "10/10"
+    }
+  },
+  "bounded_eight_role_orchestration": {
+    "passed": 8,
+    "expected": 8,
+    "status": "PASS"
+  },
+  "behavioral_calibration": {
+    "accepted_passes": 120,
+    "denominator": 120,
+    "roles_with_passing_run": 8,
+    "roles_expected": 8,
+    "status": "PASS"
+  },
+  "sandbox_modes_verified": {
+    "passed": 8,
+    "expected": 8
+  },
+  "network_restriction_verified": {
+    "passed": 8,
+    "expected": 8
+  },
+  "approval_policy_evidence": {
+    "configured_policy": "on-request",
+    "observed_noninteractive_parent_policy": "never",
+    "observed_noninteractive_child_policy": "never",
+    "roles_observed": 8,
+    "actions_requiring_approval_attempted": false
+  },
+  "preserved_failed_attempts": {
+    "behavioral_runs": 3,
+    "bounded_orchestration_attempts": 2,
+    "deleted_or_rewritten": false
+  },
+  "unauthorized_child_created_files": [],
+  "sealed_configuration_or_calibration_diff_paths": [],
+  "prior_runtime_evidence_diff_paths": [],
+  "role_file_changes_after_remediation_commit": [],
+  "substantive_review_started": false,
+  "production_activity": false,
+  "operational_activation": false,
+  "founder_activation_approval": false,
+  "default_branch": "integrate-emergent-final-zip",
+  "default_branch_commit": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "final_commit_in_default_branch": false,
+  "pull_request_count": 0,
+  "merged": false,
+  "technical_disposition": "INSTALLATION_TECHNICALLY_READY_FOR_FOUNDER_ACTIVATION_REVIEW",
+  "commands": [
+    {
+      "command": "git clone --single-branch --branch agent/install-founder-review-agents-v1.0.0 https://github.com/rianray2012-coder/EquineSync-V4.git /private/tmp/equinesync-activation-review-5AyMZY/final",
+      "exit_code": 0
+    },
+    {
+      "command": "git -C /private/tmp/equinesync-activation-review-5AyMZY/final worktree add --detach /private/tmp/equinesync-activation-review-5AyMZY/remediation 2d2efa9cc9aaaf14723283d94b716b5681c70df4",
+      "exit_code": 0
+    },
+    {
+      "command": "git -C /private/tmp/equinesync-activation-review-5AyMZY/final fetch origin refs/heads/integrate-emergent-final-zip:refs/remotes/origin/integrate-emergent-final-zip",
+      "exit_code": 0
+    },
+    {
+      "command": "shasum -a 256 -c governance/founder_orchestrated_review/runtime_remediation/role_calibration_remediation/FORA-RCR-2026-001/ROLE_CALIBRATION_REMEDIATION_CHECKSUMS.sha256",
+      "working_copy": "remediation",
+      "verified_entries": 141,
+      "failed_entries": 0,
+      "exit_code": 0
+    },
+    {
+      "command": "shasum -a 256 -c governance/founder_orchestrated_review/runtime_remediation/role_calibration_remediation/FORA-RCR-2026-001/ROLE_CALIBRATION_REMEDIATION_CHECKSUMS.sha256",
+      "working_copy": "final",
+      "verified_entries": 143,
+      "failed_entries": 0,
+      "exit_code": 0
+    },
+    {
+      "command": "git merge-base --is-ancestor 860da19970604197117b94a2ef7f23dba2dca694 refs/remotes/origin/integrate-emergent-final-zip",
+      "exit_code": 1,
+      "classification": "EXPECTED_NEGATIVE_FINAL_COMMIT_NOT_IN_DEFAULT_BRANCH"
+    },
+    {
+      "command": "gh pr list --repo rianray2012-coder/EquineSync-V4 --head agent/install-founder-review-agents-v1.0.0 --state all --json number --jq length",
+      "output": "0",
+      "exit_code": 0
+    }
+  ],
+  "status": "PASS"
+}

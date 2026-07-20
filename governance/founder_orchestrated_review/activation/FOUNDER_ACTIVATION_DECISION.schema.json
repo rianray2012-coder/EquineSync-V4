@@ -1,0 +1,388 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "FOUNDER_ACTIVATION_DECISION.schema.json",
+  "title": "EquineSync Founder Activation Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "review_id",
+    "review_status",
+    "review_package_status",
+    "repository",
+    "branch",
+    "package_version",
+    "technical_evidence_commit",
+    "remediation_commit",
+    "package_zip_sha256",
+    "founder_activation_approval",
+    "founder_decision",
+    "activation_authorized",
+    "substantive_review_commencement_authorized",
+    "merge_authorized",
+    "approved_by",
+    "approved_at",
+    "approval_reference",
+    "conditions",
+    "rationale",
+    "activation_gate"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "FOUNDER_ACTIVATION_DECISION.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "review_id": {
+      "const": "FORA-ACT-REV-2026-001"
+    },
+    "review_status": {
+      "enum": [
+        "READY_FOR_FOUNDER_DECISION",
+        "FOUNDER_DECISION_RECORDED"
+      ]
+    },
+    "review_package_status": {
+      "const": "FOUNDER_ACTIVATION_REVIEW_PACKAGE_READY"
+    },
+    "repository": {
+      "const": "rianray2012-coder/EquineSync-V4"
+    },
+    "branch": {
+      "const": "agent/install-founder-review-agents-v1.0.0"
+    },
+    "package_version": {
+      "const": "V1.0.0"
+    },
+    "technical_evidence_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "remediation_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "package_zip_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "founder_activation_approval": {
+      "type": "boolean"
+    },
+    "founder_decision": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "FOUNDER_ACTIVATION_APPROVED",
+        "FOUNDER_ACTIVATION_APPROVED_WITH_CONDITIONS",
+        "FOUNDER_ACTIVATION_DEFERRED",
+        "FOUNDER_ACTIVATION_REJECTED"
+      ]
+    },
+    "activation_authorized": {
+      "type": "boolean"
+    },
+    "substantive_review_commencement_authorized": {
+      "type": "boolean"
+    },
+    "merge_authorized": {
+      "type": "boolean"
+    },
+    "approved_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "approved_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "approval_reference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rationale": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "activation_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file_existence_is_approval",
+        "explicit_founder_decision_required",
+        "exact_commit_reference_required",
+        "approval_evidence_required",
+        "condition_verification_required_when_conditional",
+        "separate_commencement_authorization_required"
+      ],
+      "properties": {
+        "file_existence_is_approval": {
+          "const": false
+        },
+        "explicit_founder_decision_required": {
+          "const": true
+        },
+        "exact_commit_reference_required": {
+          "const": true
+        },
+        "approval_evidence_required": {
+          "const": true
+        },
+        "condition_verification_required_when_conditional": {
+          "const": true
+        },
+        "separate_commencement_authorization_required": {
+          "const": true
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "review_status": {
+            "const": "READY_FOR_FOUNDER_DECISION"
+          }
+        },
+        "required": [
+          "review_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "founder_activation_approval": {
+            "const": false
+          },
+          "founder_decision": {
+            "type": "null"
+          },
+          "activation_authorized": {
+            "const": false
+          },
+          "substantive_review_commencement_authorized": {
+            "const": false
+          },
+          "approved_by": {
+            "type": "null"
+          },
+          "approved_at": {
+            "type": "null"
+          },
+          "approval_reference": {
+            "type": "null"
+          },
+          "merge_authorized": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "review_status": {
+            "const": "FOUNDER_DECISION_RECORDED"
+          }
+        },
+        "required": [
+          "review_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "founder_decision": {
+            "enum": [
+              "FOUNDER_ACTIVATION_APPROVED",
+              "FOUNDER_ACTIVATION_APPROVED_WITH_CONDITIONS",
+              "FOUNDER_ACTIVATION_DEFERRED",
+              "FOUNDER_ACTIVATION_REJECTED"
+            ]
+          },
+          "approved_by": {
+            "type": "string",
+            "minLength": 1
+          },
+          "approved_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "approval_reference": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "founder_activation_approval": {
+            "const": true
+          }
+        },
+        "required": [
+          "founder_activation_approval"
+        ]
+      },
+      "then": {
+        "properties": {
+          "review_status": {
+            "const": "FOUNDER_DECISION_RECORDED"
+          },
+          "founder_decision": {
+            "enum": [
+              "FOUNDER_ACTIVATION_APPROVED",
+              "FOUNDER_ACTIVATION_APPROVED_WITH_CONDITIONS"
+            ]
+          },
+          "activation_authorized": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "founder_decision": {
+            "enum": [
+              "FOUNDER_ACTIVATION_APPROVED",
+              "FOUNDER_ACTIVATION_APPROVED_WITH_CONDITIONS"
+            ]
+          }
+        },
+        "required": [
+          "founder_decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "founder_activation_approval": {
+            "const": true
+          },
+          "activation_authorized": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "founder_decision": {
+            "enum": [
+              "FOUNDER_ACTIVATION_DEFERRED",
+              "FOUNDER_ACTIVATION_REJECTED"
+            ]
+          }
+        },
+        "required": [
+          "founder_decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "founder_activation_approval": {
+            "const": false
+          },
+          "activation_authorized": {
+            "const": false
+          },
+          "substantive_review_commencement_authorized": {
+            "const": false
+          },
+          "merge_authorized": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "founder_decision": {
+            "const": "FOUNDER_ACTIVATION_APPROVED_WITH_CONDITIONS"
+          }
+        },
+        "required": [
+          "founder_decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "conditions": {
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "activation_authorized": {
+            "const": true
+          }
+        },
+        "required": [
+          "activation_authorized"
+        ]
+      },
+      "then": {
+        "properties": {
+          "founder_activation_approval": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "substantive_review_commencement_authorized": {
+            "const": true
+          }
+        },
+        "required": [
+          "substantive_review_commencement_authorized"
+        ]
+      },
+      "then": {
+        "properties": {
+          "founder_activation_approval": {
+            "const": true
+          },
+          "activation_authorized": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
+}

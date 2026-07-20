@@ -22,7 +22,22 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 - Custom instruction layers: `8/8 PASS`.
 - Sandbox modes with denied network: `8/8 PASS`.
 - ZIP SHA-256: `604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3` (`PASS`).
-- Fresh-clone proof for `2d2efa9cc9aaaf14723283d94b716b5681c70df4`: `PASS`.
+- Earlier fresh-clone proof for `2d2efa9cc9aaaf14723283d94b716b5681c70df4`: `PASS` with `141/141` checksum entries.
+- Superseding final-commit fresh-clone proof for `860da19970604197117b94a2ef7f23dba2dca694`: `PASS` with `143/143` checksum entries.
+
+## Evidence-chain reconciliation
+
+- Starting evidence baseline: `35119dbfb873e0fd19fef2a1e574d2f8100286f3`.
+- Remediation commit: `2d2efa9cc9aaaf14723283d94b716b5681c70df4`.
+- Final evidence commit: `860da19970604197117b94a2ef7f23dba2dca694`.
+- Final verified technical commit: `860da19970604197117b94a2ef7f23dba2dca694`.
+- The earlier machine-readable `resulting_commit` placeholder is resolved to the repository-derived final evidence commit above.
+- The `141` and `143` checksum totals are both historically correct: the remediation commit contained 141 checksummed paths, while the final evidence commit contained 143. The exact additions were `FRESH_CLONE_VERIFICATION.json` and `FRESH_CLONE_VERIFICATION.md`; no path was removed.
+- At both commits the change manifest contained one additional path because the checksum manifest intentionally excludes itself from its own content.
+- Sealed package and calibration content changed between the starting baseline and final evidence commit: none.
+- The final evidence commit is not contained in the default branch `integrate-emergent-final-zip`.
+- Pull requests for this branch: `0`; merge status: not merged.
+- Founder activation approval: `false`; operational activation: not performed; substantive review: not commenced.
 
 ## Preserved failures and retries
 
@@ -35,3 +50,7 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 Accepted analytical roles ran read-only; accepted writable roles ran workspace-write. Parent and child network were denied or restricted. Codex noninteractive sessions recorded `approval_policy=never`; no action requiring approval was attempted. Workspace-write is not a path-level role allowlist, so file-diff and response evidence corroborate that children created no files.
 
 This result establishes technical installation calibration only. It does not establish external independence, policy adequacy, product readiness, governance adoption, Founder activation approval, or authorization to begin operational review work.
+
+## Founder activation review preparation
+
+The formal activation-review package is prepared at `governance/founder_orchestrated_review/activation/`. Its machine-readable decision record remains neutral and unapproved. The review-package disposition is `FOUNDER_ACTIVATION_REVIEW_PACKAGE_READY`; this is a technical evidence status, not Founder approval or activation authorization.

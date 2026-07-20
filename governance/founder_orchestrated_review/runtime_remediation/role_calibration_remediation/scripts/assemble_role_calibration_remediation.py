@@ -15,9 +15,13 @@ HERE = Path(__file__).resolve().parent
 ROLE_REMEDIATION_DIR = HERE.parent
 CYCLE_DIR = ROLE_REMEDIATION_DIR / "FORA-RCR-2026-001"
 REPO_ROOT = ROLE_REMEDIATION_DIR.parents[3]
+ACTIVATION_DIR = REPO_ROOT / "governance/founder_orchestrated_review/activation"
 START_COMMIT = "35119dbfb873e0fd19fef2a1e574d2f8100286f3"
+REMEDIATION_COMMIT = "2d2efa9cc9aaaf14723283d94b716b5681c70df4"
+FINAL_EVIDENCE_COMMIT = "860da19970604197117b94a2ef7f23dba2dca694"
 BRANCH = "agent/install-founder-review-agents-v1.0.0"
 DISPOSITION = "INSTALLATION_TECHNICALLY_READY_FOR_FOUNDER_ACTIVATION_REVIEW"
+REVIEW_PACKAGE_DISPOSITION = "FOUNDER_ACTIVATION_REVIEW_PACKAGE_READY"
 ZIP_SHA256 = "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3"
 ZIP_REL = Path(
     "governance/founder_orchestrated_review/agent_config/packages/"
@@ -57,6 +61,15 @@ def git(*args: str) -> str:
     return subprocess.run(
         ["git", *args], cwd=REPO_ROOT, check=True, text=True, capture_output=True
     ).stdout.strip()
+
+
+def git_succeeds(*args: str) -> bool:
+    return (
+        subprocess.run(
+            ["git", *args], cwd=REPO_ROOT, check=False, capture_output=True
+        ).returncode
+        == 0
+    )
 
 
 def behavior_run_rows() -> list[dict]:
@@ -132,12 +145,16 @@ def bounded_run_rows() -> list[dict]:
 
 def changed_paths() -> list[str]:
     old_changes = git("diff", "--name-only", START_COMMIT).splitlines()
-    untracked = git(
-        "ls-files",
-        "--others",
-        "--exclude-standard",
-        str(ROLE_REMEDIATION_DIR.relative_to(REPO_ROOT)),
-    ).splitlines()
+    untracked = []
+    for scope in (ROLE_REMEDIATION_DIR, ACTIVATION_DIR):
+        untracked.extend(
+            git(
+                "ls-files",
+                "--others",
+                "--exclude-standard",
+                str(scope.relative_to(REPO_ROOT)),
+            ).splitlines()
+        )
     paths = {item for item in [*old_changes, *untracked] if item}
     paths.add(
         str(
@@ -163,6 +180,10 @@ def main() -> int:
     bounded = read_json(CYCLE_DIR / "BOUNDED_EIGHT_ROLE_FINAL_ACCEPTED_RESULT.json")
     fresh_clone_path = CYCLE_DIR / "FRESH_CLONE_VERIFICATION.json"
     fresh_clone = read_json(fresh_clone_path) if fresh_clone_path.exists() else None
+    final_fresh_clone_path = CYCLE_DIR / "FINAL_COMMIT_FRESH_CLONE_VERIFICATION.json"
+    final_fresh_clone = (
+        read_json(final_fresh_clone_path) if final_fresh_clone_path.exists() else None
+    )
     behavior_runs = behavior_run_rows()
     bounded_runs = bounded_run_rows()
 
@@ -236,6 +257,20 @@ def main() -> int:
         "sandbox_modes_verified": behavior["sandbox_modes_verified"] == 8,
         "final_disposition_exact": behavior["recommended_installation_disposition"] == DISPOSITION,
         "founder_activation_not_approved": behavior["founder_activation_approval"] is False,
+        "remediation_commit_exists": git_succeeds(
+            "cat-file", "-e", f"{REMEDIATION_COMMIT}^{{commit}}"
+        ),
+        "final_evidence_commit_exists": git_succeeds(
+            "cat-file", "-e", f"{FINAL_EVIDENCE_COMMIT}^{{commit}}"
+        ),
+        "remediation_is_ancestor_of_final_evidence": git_succeeds(
+            "merge-base", "--is-ancestor", REMEDIATION_COMMIT, FINAL_EVIDENCE_COMMIT
+        ),
+        "final_fresh_clone_verification_pass": (
+            final_fresh_clone is not None
+            and final_fresh_clone["status"] == "PASS"
+            and final_fresh_clone["final_verified_commit"] == FINAL_EVIDENCE_COMMIT
+        ),
     }
     validation_result = {
         "authorization_id": "FORA-RCR-2026-001",
@@ -327,13 +362,18 @@ def main() -> int:
     write_text(CYCLE_DIR / "RETRY_REGISTER.md", "\n".join(retry_lines))
 
     machine = {
-        "schema_version": "1.0.0",
+        "schema_version": "1.1.0",
         "authorization_id": "FORA-RCR-2026-001",
         "generated_at": generated_at,
         "repository": "rianray2012-coder/EquineSync-V4",
         "branch": BRANCH,
         "starting_commit": START_COMMIT,
-        "resulting_commit": "REPORT_FROM_GIT_AFTER_COMMIT",
+        "remediation_commit": REMEDIATION_COMMIT,
+        "resulting_commit": FINAL_EVIDENCE_COMMIT,
+        "earlier_fresh_clone_verified_commit": REMEDIATION_COMMIT,
+        "final_fresh_clone_verified_commit": FINAL_EVIDENCE_COMMIT,
+        "final_verified_commit": FINAL_EVIDENCE_COMMIT,
+        "branch_tip_at_reconciliation_start": FINAL_EVIDENCE_COMMIT,
         "roles_remediated": ["ES-RA-04", "ES-RA-06"],
         "individual_role_calibration": {"passed": 2, "expected": 2},
         "bounded_eight_role_orchestration": {"passed": 8, "expected": 8},
@@ -355,7 +395,7 @@ def main() -> int:
         "founder_activation_approval": False,
         "pull_request_created": False,
         "merged": False,
-        "fresh_clone_verification": (
+        "earlier_fresh_clone_verification": (
             {
                 "verified_commit": fresh_clone["verified_commit"],
                 "checksums_verified": fresh_clone["checksum_entries_verified"],
@@ -366,7 +406,28 @@ def main() -> int:
             if fresh_clone
             else {"status": "PENDING"}
         ),
+        "final_fresh_clone_verification": (
+            {
+                "verified_commit": final_fresh_clone["final_verified_commit"],
+                "checksums_verified": final_fresh_clone["checksum_reconciliation"][
+                    "final_evidence_commit_checksum_entries"
+                ],
+                "commit_in_default_branch": final_fresh_clone[
+                    "final_commit_in_default_branch"
+                ],
+                "pull_requests_for_branch": final_fresh_clone["pull_request_count"],
+                "status": final_fresh_clone["status"],
+            }
+            if final_fresh_clone
+            else {"status": "PENDING"}
+        ),
+        "checksum_reconciliation": (
+            final_fresh_clone["checksum_reconciliation"]
+            if final_fresh_clone
+            else {"status": "PENDING"}
+        ),
         "final_disposition": DISPOSITION,
+        "evidence_reconciliation_disposition": REVIEW_PACKAGE_DISPOSITION,
     }
     write_json(CYCLE_DIR / "MACHINE_READABLE_DISPOSITION.json", machine)
 
@@ -394,7 +455,22 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 - Custom instruction layers: `{behavior['custom_instruction_layers_loaded']}/8 PASS`.
 - Sandbox modes with denied network: `{behavior['sandbox_modes_verified']}/8 PASS`.
 - ZIP SHA-256: `{zip_hash}` (`PASS`).
-{f"- Fresh-clone proof for `{fresh_clone['verified_commit']}`: `{fresh_clone['status']}`." if fresh_clone else "- Fresh-clone proof: pending until after the first evidence commit is pushed."}
+- Earlier fresh-clone proof for `{REMEDIATION_COMMIT}`: `{fresh_clone['status'] if fresh_clone else 'PENDING'}` with `141/141` checksum entries.
+- Superseding final-commit fresh-clone proof for `{FINAL_EVIDENCE_COMMIT}`: `{final_fresh_clone['status'] if final_fresh_clone else 'PENDING'}` with `143/143` checksum entries.
+
+## Evidence-chain reconciliation
+
+- Starting evidence baseline: `{START_COMMIT}`.
+- Remediation commit: `{REMEDIATION_COMMIT}`.
+- Final evidence commit: `{FINAL_EVIDENCE_COMMIT}`.
+- Final verified technical commit: `{FINAL_EVIDENCE_COMMIT}`.
+- The earlier machine-readable `resulting_commit` placeholder is resolved to the repository-derived final evidence commit above.
+- The `141` and `143` checksum totals are both historically correct: the remediation commit contained 141 checksummed paths, while the final evidence commit contained 143. The exact additions were `FRESH_CLONE_VERIFICATION.json` and `FRESH_CLONE_VERIFICATION.md`; no path was removed.
+- At both commits the change manifest contained one additional path because the checksum manifest intentionally excludes itself from its own content.
+- Sealed package and calibration content changed between the starting baseline and final evidence commit: none.
+- The final evidence commit is not contained in the default branch `integrate-emergent-final-zip`.
+- Pull requests for this branch: `0`; merge status: not merged.
+- Founder activation approval: `false`; operational activation: not performed; substantive review: not commenced.
 
 ## Preserved failures and retries
 
@@ -407,6 +483,10 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 Accepted analytical roles ran read-only; accepted writable roles ran workspace-write. Parent and child network were denied or restricted. Codex noninteractive sessions recorded `approval_policy=never`; no action requiring approval was attempted. Workspace-write is not a path-level role allowlist, so file-diff and response evidence corroborate that children created no files.
 
 This result establishes technical installation calibration only. It does not establish external independence, policy adequacy, product readiness, governance adoption, Founder activation approval, or authorization to begin operational review work.
+
+## Founder activation review preparation
+
+The formal activation-review package is prepared at `governance/founder_orchestrated_review/activation/`. Its machine-readable decision record remains neutral and unapproved. The review-package disposition is `{REVIEW_PACKAGE_DISPOSITION}`; this is a technical evidence status, not Founder approval or activation authorization.
 """
     write_text(CYCLE_DIR / "ROLE_CALIBRATION_REMEDIATION_FINAL_REPORT.md", report)
 
