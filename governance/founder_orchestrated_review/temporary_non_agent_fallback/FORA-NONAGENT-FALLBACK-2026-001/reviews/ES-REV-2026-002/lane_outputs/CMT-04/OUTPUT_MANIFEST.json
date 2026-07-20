@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0.0",
+  "review_cycle_id": "ES-REV-2026-002",
+  "lane_id": "CMT-04",
+  "artifact_classification": "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+  "control_labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "generated_at_utc": "2026-07-20T19:50:39Z",
+  "generated_at_local": "2026-07-20T14:50:39-05:00",
+  "runtime_thread_provenance": {
+    "runtime_identity": "Generic Codex controlled non-agent thread",
+    "custom_agent_identity_claimed": false,
+    "es_ra_identity_loaded": false,
+    "source_delegation_thread_id": "019f8104-9235-7f03-8a3e-c68d4b199e09",
+    "lane_prompt": "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/EquineSync-V4-controlled-review/governance/founder_orchestrated_review/temporary_non_agent_fallback/FORA-NONAGENT-FALLBACK-2026-001/reviews/ES-REV-2026-002/lane_prompts/CMT-04_PROMPT.md",
+    "operating_contract": "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/EquineSync-V4-controlled-review/governance/founder_orchestrated_review/agent_config/V1.0.0/shared/COMMON_AGENT_OPERATING_CONTRACT.md",
+    "orchestration_directive": "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/EquineSync-V4-controlled-review/governance/founder_orchestrated_review/agent_config/V1.0.0/orchestration/CODEX_ORCHESTRATION_DIRECTIVE.md",
+    "runtime": "Codex desktop; Darwin 25.5.0 arm64; zsh 5.9",
+    "filesystem_capability": "unrestricted runtime capability; lane-enforced logical read-only input and output-directory-only writes"
+  },
+  "authorization": {
+    "allowed_input_root": "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials",
+    "allowed_output_root": "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/EquineSync-V4-controlled-review/governance/founder_orchestrated_review/temporary_non_agent_fallback/FORA-NONAGENT-FALLBACK-2026-001/reviews/ES-REV-2026-002/lane_outputs/CMT-04",
+    "network_used": false,
+    "application_run": false,
+    "git_or_frozen_input_modified": false,
+    "cmt_02_or_cmt_03_consulted": false,
+    "founder_decision_authorized": false,
+    "ratification_authorized": false,
+    "implementation_or_execution_authorized": false,
+    "pr_merge_tag_release_deployment_authorized": false,
+    "f_0001_closure_authorized": false
+  },
+  "frozen_input": {
+    "file_count": 140,
+    "package_count": 5,
+    "checksum_sets_verified": "5/5",
+    "checksum_result": "PASS",
+    "inventory_digest_method": "SHA-256 over lexically sorted shasum -a 256 output lines for all 140 files",
+    "inventory_digest_sha256": "20beefc7adf8b8a2ecbed805ebdd634cc47e00b5c537e1f443e7a5fdf4216e40",
+    "evidence_links": [
+      "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Identity_Account_Actor_Enrollment_Onboarding_PIA_V1_1_0_Controlled_Revision/SHA256SUMS.txt",
+      "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_ADR_Recommendations_V1_0_0/SHA256SUMS.txt",
+      "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Controlled_Sequence_V1_0_0/SHA256SUMS.txt",
+      "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Delegated_Authority_PIA_V1_1_0_Revised_Candidate/SHA256SUMS.txt",
+      "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Pre_Ratification_Completion_V1_0_0/SHA256SUMS.txt"
+    ]
+  },
+  "scope_denominators": {
+    "formal_adrs": "14/14",
+    "identity_founder_decisions": "12/12",
+    "relationships_founder_decisions": "16/16",
+    "relationships_approved_recommendations": "7/7",
+    "standalone_identity_approved_recommendations_available": "0/7",
+    "cross_domain_contract_areas": "16/16",
+    "work_completeness_ledger_rows": "25/25"
+  },
+  "findings_summary": {
+    "P0_CRITICAL": 0,
+    "P1_BLOCKING": 3,
+    "P2_NONBLOCKING": 1,
+    "overall_disposition": "NOT_READY_FOR_FINAL_FOUNDER_DISPOSITION",
+    "finding_ids": [
+      "ES-REV-2026-002-F-0401",
+      "ES-REV-2026-002-F-0402",
+      "ES-REV-2026-002-F-0403",
+      "ES-REV-2026-002-F-0404"
+    ]
+  },
+  "completion": {
+    "classification": "C3_COMPLETE_WITH_LIMITATIONS",
+    "reliability": "R2_INTERNALLY_CHECKED",
+    "completion_attestation": "I completed the procedures identified in the Work Completeness Ledger for the recorded scope. This attestation does not constitute Founder approval, external assurance, legal certification, or proof that undiscovered defects do not exist."
+  },
+  "evidence_links": [
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Identity_Account_Actor_Enrollment_Onboarding_PIA_V1_1_0_Controlled_Revision/FOUNDER_DECISION_REGISTER.csv",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Identity_Account_Actor_Enrollment_Onboarding_PIA_V1_1_0_Controlled_Revision/FORMAL_ADR_REGISTER.csv",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Controlled_Sequence_V1_0_0/FOUNDER_APPROVAL_INGESTION_RECORD.md",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Controlled_Sequence_V1_0_0/FOUNDER_DECISION_APPROVAL_INGESTION.csv",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Controlled_Sequence_V1_0_0/ADR_RECOMMENDATION_APPROVAL_INGESTION.csv",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Pre_Ratification_Completion_V1_0_0/ADR_RECOMMENDATION_TO_FORMAL_ADR_CONFORMANCE_MATRIX.csv",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Pre_Ratification_Completion_V1_0_0/CROSS_DOMAIN_CONTRACT_ALIGNMENT_REGISTER.csv"
+  ],
+  "limitations": [
+    "No standalone approved Identity recommendation corpus or approval-ingestion mapping was present.",
+    "The Relationships approval-ingestion record references a controlling conversation not included in the frozen evidence set.",
+    "Material source paths, hashes, lifecycles, PIAs, and contracts remain unresolved as recorded by the packages.",
+    "No application, repository implementation, executable test, environment, migration, rollback, or operational workflow was run.",
+    "A failed read-only extraction attempt caused by shell-variable interpolation was corrected and did not support any conclusion."
+  ],
+  "self_audit": {
+    "role_boundary_maintained": true,
+    "correct_frozen_scope_reviewed": true,
+    "all_assigned_items_accounted": true,
+    "claims_separated_from_evidence": true,
+    "verification_not_overstated": true,
+    "assumptions_conflicts_and_exclusions_disclosed": true,
+    "founder_authority_not_exercised": true,
+    "evidence_and_output_references_validated": true,
+    "invalidating_conditions_recorded_in_lane_report": true
+  },
+  "hash_algorithm": "SHA-256",
+  "outputs": [
+    {
+      "path": "LANE_REPORT.md",
+      "bytes": 23620,
+      "sha256": "4832ec54fac1cee2470fa234588264560e5c6736a2d3a9d680ecaa870e1c4615",
+      "control_labels_present": true
+    },
+    {
+      "path": "FOURTEEN_ADR_INDEPENDENT_MATRIX.csv",
+      "bytes": 20792,
+      "sha256": "d8a223fa14e861f0c3b2b7d5a68f84776ca9b8e3e72c7300d1ddc0d261deb9f2",
+      "records": 14,
+      "control_labels_present": true
+    },
+    {
+      "path": "CROSS_DOMAIN_TRACEABILITY.csv",
+      "bytes": 18981,
+      "sha256": "75a08f69eb1bfeb9d50ff4be2c9fbc6ef5b89ecf1dae540dceb690adcb2472c1",
+      "records": 16,
+      "control_labels_present": true
+    },
+    {
+      "path": "WORK_COMPLETENESS_LEDGER.csv",
+      "bytes": 18071,
+      "sha256": "a99a6bcbdf799b6be432609eb35aeaf55b96295d2b5df05873f426bab06e281d",
+      "records": 25,
+      "control_labels_present": true
+    }
+  ],
+  "self_integrity": {
+    "method": "SHA-256 over exact UTF-8 OUTPUT_MANIFEST.json bytes after replacing only the normalized_self_sha256 value with 64 ASCII zeroes",
+    "normalized_self_sha256": "8fe3f92dcd32ffe8b2fb3e7fcefde66dff67e194f5b1eef3a8b135bb3f3c9085",
+    "control_labels_present": true
+  },
+  "what_this_manifest_does_not_establish": "No Founder decision, ratification, implementation, execution, PR, merge, tag, release, deployment, production state, external assurance, or F-0001 closure is established."
+}

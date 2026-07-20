@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0.0",
+  "labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "review_cycle_id": "ES-REV-2026-002",
+  "lane_id": "CMT-01",
+  "lane_role": "Evidence Custody and Input Integrity",
+  "agent_run_id": "CMT-01-ES-REV-2026-002-RUN-01",
+  "thread_id": "019f810e-dfc4-7073-8fe0-16d3296c8b12",
+  "parent_thread_id": "019f8104-9235-7f03-8a3e-c68d4b199e09",
+  "custom_agent_identity_loaded": false,
+  "runtime": {
+    "model_provenance": "GPT-5 family; exact build not exposed",
+    "codex_version": "codex-cli 0.144.6",
+    "operating_system": "macOS 26.5.2 build 25F84",
+    "architecture": "arm64",
+    "effective_permission_profile": "danger-full-access",
+    "approval_policy": "never",
+    "path_isolation": "procedural_not_host_enforced"
+  },
+  "started_utc": "2026-07-20T19:46:13Z",
+  "evidence_procedures_ended_utc": "2026-07-20T20:01:02Z",
+  "manifest_finalized_utc": "2026-07-20T20:01:18Z",
+  "source_package": {
+    "package_id": "ES-IDENTITY-RELATIONSHIPS-CONTROLLED-MULTI-THREAD-REVIEW-HANDOFF-V1.0.0",
+    "external_zip_sha256": "91cdb1c24f13940814035036c2c76c7cec415945337edbf3778e2a77c4a140f6",
+    "base_commit": "75c56ac67b0de694436c093fc2dc5ff5dffe4ff3",
+    "global_governance_baseline_commit": "acb518ea5a160820e64681ff95a16b010fe1156c",
+    "stage2a_closure_commit": {
+      "expected": "56dc68ce761b84800caa60997af7fb62ab34f82d",
+      "local_status": "ABSENT_LOCAL_NON_SHALLOW_REPOSITORY",
+      "remote_status": "EXISTS_REPORTED_BY_COORDINATOR_VIA_AUTHENTICATED_GITHUB_API",
+      "cmt01_remote_evidence_classification": "REPORTED_BUT_NOT_VERIFIED_E1"
+    }
+  },
+  "lane_result": "CMT01_PROCEDURES_COMPLETE_INPUT_INTEGRITY_NOT_CLEARED",
+  "semantic_ratification_recommendation_made": false,
+  "finding_counts": {
+    "p0": 0,
+    "p1": 4,
+    "p2": 1,
+    "observations": 1
+  },
+  "prohibited_activity": {
+    "network_calls": 0,
+    "connector_calls": 0,
+    "application_executions": 0,
+    "git_mutations": 0,
+    "implementations": 0,
+    "pull_requests_merges_tags_releases_deployments": 0,
+    "founder_dispositions": 0
+  },
+  "output_files": [
+    {
+      "path": "LANE_REPORT.md",
+      "bytes": 16981,
+      "sha256": "423a7edb9a14b9f6f43638c7af9e7602f9403ef944d83120b8f9ddb37af80161"
+    },
+    {
+      "path": "EVIDENCE_INVENTORY.csv",
+      "bytes": 105289,
+      "sha256": "0708dd9a185f9d93bee41f5d2880112a4afab2b812598ec59985a6901cfcb1bf"
+    },
+    {
+      "path": "AUTHORITY_AND_LIFECYCLE.csv",
+      "bytes": 26135,
+      "sha256": "b4e3176bdf7754bdb8ac6ba03760df452f7c4759377ea5a6154c8b1f1051f6e9"
+    },
+    {
+      "path": "WORK_COMPLETENESS_LEDGER.csv",
+      "bytes": 6237,
+      "sha256": "6c42788c0e2ae9a1edbe81481c67429c4ff37d96e202fa8beeefa00c55d1daef"
+    },
+    {
+      "path": "OUTPUT_MANIFEST.json",
+      "bytes": null,
+      "sha256": "SELF_EXCLUDED"
+    }
+  ],
+  "self_hash_policy": "OUTPUT_MANIFEST.json excludes its own final-byte SHA-256 because embedding that value would be self-referential; compute and preserve its external SHA-256 during coordinator handoff.",
+  "completion_attestation_issued": true
+}

@@ -1,0 +1,156 @@
+{
+  "labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "review_cycle": "ES-REV-2026-002",
+  "directive_id": "ES-FORA-DIR-CMT-IDENTITY-RELATIONSHIPS-REVIEW-V1.0",
+  "lane_id": "CMT-08",
+  "thread_provenance": {
+    "thread_id": "019f811f-155f-7eb1-90eb-60b7f9bba4d5",
+    "delegating_source_thread_id": "019f8104-9235-7f03-8a3e-c68d4b199e09",
+    "runtime": "Codex desktop generic controlled thread",
+    "model_visibility": "GPT-5 family; exact deployed model identifier not exposed",
+    "codex_runtime": "codex-cli 0.144.6",
+    "host": "Darwin 25.5.0 arm64; macOS 26.5.2; zsh 5.9",
+    "custom_agent_identity_claimed": false,
+    "custom_agents_activated_or_executed": 0
+  },
+  "timestamps": {
+    "started_utc": "2026-07-20T20:02:05Z",
+    "report_generated_utc": "2026-07-20T20:06:25Z",
+    "manifest_finalized_utc": "2026-07-20T20:16:01Z"
+  },
+  "output_root": "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/EquineSync-V4-controlled-review/governance/founder_orchestrated_review/temporary_non_agent_fallback/FORA-NONAGENT-FALLBACK-2026-001/reviews/ES-REV-2026-002/lane_outputs/CMT-08",
+  "required_output_count": 7,
+  "files": [
+    {
+      "path": "LANE_REPORT.md",
+      "bytes": 13534,
+      "sha256": "d9cdeee5c8ebbff2b598a5c093f1fd7971db16027b1659b523e7752a6bb73855"
+    },
+    {
+      "path": "SYNTHESIZED_FINDINGS.csv",
+      "bytes": 36974,
+      "sha256": "1fe8e07ceda410393fd6508cfdecd6d8328ee3edc0fe31cced0ff590dc091600"
+    },
+    {
+      "path": "PROPOSED_REDLINE_REGISTER.csv",
+      "bytes": 28189,
+      "sha256": "0e7436e90cd538b9428858d8d45fa3d5b5c162b449b74a3b57c05e9ee4530a23"
+    },
+    {
+      "path": "DISSENT_REGISTER.csv",
+      "bytes": 11279,
+      "sha256": "55c9cbc2dbf4baa8e25221ab45b8d720d7dbfc88320c261307ddc068e6f5745b"
+    },
+    {
+      "path": "PROPOSED_DISPOSITION.json",
+      "bytes": 6372,
+      "sha256": "9567910fbe069b879637175c9324bc777e7e3895a7d7a1e26e4d11b1575c773c"
+    },
+    {
+      "path": "WORK_COMPLETENESS_LEDGER.csv",
+      "bytes": 11852,
+      "sha256": "58564d65775a261f0079e0b07cfe7ecbeeb335fa25c1c3fc4330e8eccb2c4d86"
+    },
+    {
+      "path": "OUTPUT_MANIFEST.json",
+      "bytes": null,
+      "sha256": null,
+      "manifest_self_hash": "87e909f26173eae0c5b7b29c593b9eaeb6cad0830fc6c361ebc3192f5a435597",
+      "self_hash_basis": "SHA-256 of final OUTPUT_MANIFEST.json bytes after replacing the 64 hexadecimal characters in manifest_self_hash with 64 zero characters; final ordinary byte hash and bytes are omitted to avoid self-reference"
+    }
+  ],
+  "source_lane_manifest_sha256": {
+    "CMT-01": "36e605ffcbbf95e90ef639a9ea16a37a2c49e94214c3d20d7f9835b03d3ddd6f",
+    "CMT-02": "ebdee9eed382b38e833471c36896ec788a9aa4131df28b6e7742b9aa77b15480",
+    "CMT-03": "a22d2175b59b64cd440838b2a5599735eda19334e8fe8597f49a3743a742694a",
+    "CMT-04": "244cb779b05ad39613231a6fd3c13c654bae9d60d57705be4e218915190bdbc2",
+    "CMT-05": "7472a36313c9127a4c45a67f8d17ed5de5c612e9f4cf79c84ba9483124c9cb93",
+    "CMT-06": "1d09ec680b9fef17f737176360ed002e0848d49738fc9b43e5aeafe59e1a1d34",
+    "CMT-07": "61b59fe79ffd562f136a9f4d4e4e52748f1ce7e014360f2b4431c410119d04d7"
+  },
+  "synthesis_summary": {
+    "positive_finding_rows": 3,
+    "open_P0": 2,
+    "open_P1": 16,
+    "open_P2": 7,
+    "proposed_redlines": 19,
+    "preserved_dissent_items": 8,
+    "directive_listed_dispositions_proposed": 1,
+    "final_disposition": "IDENTITY_AND_RELATIONSHIPS_REQUIRE_BOUNDED_REMEDIATION",
+    "ratification_ready": false,
+    "observed_byte_integrity": "PASS",
+    "authority_lifecycle_limitations_open": true,
+    "technical_directory_immutability_limitation_open": true,
+    "frozen_input_modifications": 0,
+    "other_lane_output_modifications": 0,
+    "custom_agents_executed": 0
+  },
+  "validation": {
+    "required_files_present": "7/7",
+    "csv_files_strict_parsed": "4/4",
+    "json_files_strict_parsed": "2/2",
+    "csv_row_counts": {
+      "SYNTHESIZED_FINDINGS.csv": 28,
+      "PROPOSED_REDLINE_REGISTER.csv": 19,
+      "DISSENT_REGISTER.csv": 8,
+      "WORK_COMPLETENESS_LEDGER.csv": 14
+    },
+    "required_labels_present_in_every_file": true,
+    "thread_and_runtime_provenance_present": true,
+    "timestamps_present": true,
+    "evidence_links_present": true,
+    "limitations_present": true,
+    "self_audit_present": true,
+    "completion_attestation_present": true,
+    "directive_classification_vocabulary_only": true,
+    "nonempty_severity_vocabulary_only": true,
+    "normalized_count_cross_check": true,
+    "redline_cross_references_valid": true,
+    "dissent_cross_references_valid": true,
+    "exactly_one_directive_listed_disposition": true,
+    "source_lane_manifest_hashes_recorded": "7/7",
+    "manifest_self_hash_valid": true
+  },
+  "evidence_links": [
+    "LANE_REPORT.md",
+    "SYNTHESIZED_FINDINGS.csv",
+    "PROPOSED_REDLINE_REGISTER.csv",
+    "DISSENT_REGISTER.csv",
+    "PROPOSED_DISPOSITION.json",
+    "WORK_COMPLETENESS_LEDGER.csv",
+    "../CMT-01/OUTPUT_MANIFEST.json",
+    "../CMT-02/OUTPUT_MANIFEST.json",
+    "../CMT-03/OUTPUT_MANIFEST.json",
+    "../CMT-04/OUTPUT_MANIFEST.json",
+    "../CMT-05/OUTPUT_MANIFEST.json",
+    "../CMT-06/OUTPUT_MANIFEST.json",
+    "../CMT-07/OUTPUT_MANIFEST.json",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/frozen_review_object/EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Handoff_V1_0_0/directive/CODEX_CONTROLLED_MULTI_THREAD_REVIEW_DIRECTIVE.md",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials"
+  ],
+  "limitations": [
+    "Documentary synthesis only; no application database provider schema migration product workflow executable test or production environment was used.",
+    "No network or remote repository refresh was used.",
+    "CMT-01 byte integrity authority lifecycle and technical segregation positions remain separately preserved.",
+    "Proposed redlines are not approved and no frozen ADR or other lane output was modified.",
+    "No external schema certification legal conclusion or external assurance is provided."
+  ],
+  "self_audit": {
+    "remained_generic_non_agent_thread": true,
+    "claimed_es_ra_identity": false,
+    "preserved_lane_attribution_and_dissent": true,
+    "did_not_silently_override_cmt01": true,
+    "distinguished_byte_integrity_from_authority_lifecycle_and_segregation": true,
+    "redlines_independently_supported": true,
+    "redlines_approved_by_cmt08": 0,
+    "frozen_adrs_changed": 0,
+    "founder_reserved_actions_taken": 0,
+    "network_calls": 0,
+    "application_executions": 0,
+    "git_mutations": 0
+  },
+  "completion_attestation": "CMT_08_SEGREGATED_SYNTHESIS_COMPLETE_WITH_OPEN_P0_P1_REMEDIATION_REQUIRED"
+}

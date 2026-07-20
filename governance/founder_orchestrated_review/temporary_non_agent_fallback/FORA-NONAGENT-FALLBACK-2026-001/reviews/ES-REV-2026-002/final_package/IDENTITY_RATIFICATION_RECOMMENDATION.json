@@ -1,0 +1,11 @@
+{
+  "labels": ["NON_AGENT_CONTROLLED_THREAD_REVIEW", "NOT_ES_RA_AGENT_EVIDENCE"],
+  "domain": "Identity",
+  "recommendation": "IDENTITY_REQUIRES_BOUNDED_REMEDIATION",
+  "ratification_ready": false,
+  "open_lane_findings": {"P0": 2, "P1": 15, "P2": 1},
+  "founder_action": "AUTHORIZE_BOUNDED_SUCCESSOR_DOCUMENTARY_REMEDIATION_AND_FRESH_REVIEW",
+  "founder_decision_made": false,
+  "implementation_authorized": false,
+  "custom_agents_executed": 0
+}

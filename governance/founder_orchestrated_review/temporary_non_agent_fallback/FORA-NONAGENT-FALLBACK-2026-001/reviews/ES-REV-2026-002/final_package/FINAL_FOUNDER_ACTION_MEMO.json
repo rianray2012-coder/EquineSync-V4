@@ -1,0 +1,23 @@
+{
+  "labels": ["NON_AGENT_CONTROLLED_THREAD_REVIEW", "NOT_ES_RA_AGENT_EVIDENCE"],
+  "review_cycle": "ES-REV-2026-002",
+  "handoff_zip_sha256": "91cdb1c24f13940814035036c2c76c7cec415945337edbf3778e2a77c4a140f6",
+  "review_branch": "codex/identity-relationships-controlled-thread-review-v1",
+  "base_commit": "75c56ac67b0de694436c093fc2dc5ff5dffe4ff3",
+  "lanes_completed": 8,
+  "custom_agents_executed": 0,
+  "frozen_input_modifications": 0,
+  "normalized_open_findings": {"P0": 2, "P1": 16, "P2": 7},
+  "identity_disposition": "REQUIRES_BOUNDED_REMEDIATION",
+  "relationships_disposition": "REQUIRES_BOUNDED_REMEDIATION",
+  "proposed_redlines": 19,
+  "redline_status": "PROPOSED_NOT_APPROVED",
+  "final_disposition": "IDENTITY_AND_RELATIONSHIPS_REQUIRE_BOUNDED_REMEDIATION",
+  "exact_recommended_founder_action": "Do not ratify the current Identity or Relationships formal ADR text. Authorize a bounded successor documentary-remediation package that preserves the frozen predecessor, resolves every P0 and P1 synthesized finding, separately resolves or formally dispositions the CMT-01 authority/lifecycle and directory-immutability dissent, carries exact source and approval provenance, applies only independently reviewed proposed redlines, regenerates manifests and checksums, and undergoes a fresh segregated review before any ratification request. Do not authorize implementation, execution, PR, merge, tag, release, deployment, enrollment, production use, or F-0001 closure through this action.",
+  "review_package_commit": "CONTAINING_COMMIT_REPORTED_OUT_OF_BAND",
+  "push_status": "REPORTED_OUT_OF_BAND_AFTER_PUSH",
+  "founder_decision_made": false,
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "f_0001_closed": false
+}

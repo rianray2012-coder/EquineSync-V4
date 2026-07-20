@@ -1,0 +1,13 @@
+{
+  "labels": ["NON_AGENT_CONTROLLED_THREAD_REVIEW", "NOT_ES_RA_AGENT_EVIDENCE"],
+  "review_cycle": "ES-REV-2026-002",
+  "domain": "Identity",
+  "scope": {"founder_decisions": 12, "formal_adrs": 7, "contracts": 3},
+  "lane_findings": {"P0": 2, "P1": 15, "P2": 1},
+  "disposition": "REQUIRES_BOUNDED_REMEDIATION",
+  "ratification_ready": false,
+  "primary_blockers": ["minor_account_control_weakening", "recovery_authorization_control_weakening", "incomplete_founder_decision_traceability", "unapproved_material_technical_choices", "source_and_lifecycle_gaps", "cross_domain_contract_gaps", "state_and_audit_matrix_gaps"],
+  "frozen_input_modifications": 0,
+  "custom_agents_executed": 0,
+  "evidence": ["IDENTITY_FORMAL_ADR_SEMANTIC_REVIEW.md", "IDENTITY_FOUNDER_DECISION_TO_ADR_TRACEABILITY.csv", "IDENTITY_ADR_CONFORMANCE_MATRIX.csv", "OPEN_FINDINGS_AND_DECISIONS_REGISTER.csv"]
+}

@@ -1,0 +1,134 @@
+{
+  "labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "review_cycle": "ES-REV-2026-002",
+  "directive_id": "ES-FORA-DIR-CMT-IDENTITY-RELATIONSHIPS-REVIEW-V1.0",
+  "lane_id": "CMT-08",
+  "thread_provenance": {
+    "thread_id": "019f811f-155f-7eb1-90eb-60b7f9bba4d5",
+    "delegating_source_thread_id": "019f8104-9235-7f03-8a3e-c68d4b199e09",
+    "runtime": "Codex desktop generic controlled thread",
+    "model_visibility": "GPT-5 family; exact deployed model identifier not exposed",
+    "codex_runtime": "codex-cli 0.144.6",
+    "host": "Darwin 25.5.0 arm64; macOS 26.5.2; zsh 5.9",
+    "custom_agent_identity_claimed": false,
+    "custom_agents_activated_or_executed": 0
+  },
+  "timestamps": {
+    "started_utc": "2026-07-20T20:02:05Z",
+    "generated_utc": "2026-07-20T20:06:25Z"
+  },
+  "final_disposition": "IDENTITY_AND_RELATIONSHIPS_REQUIRE_BOUNDED_REMEDIATION",
+  "directive_listed_disposition_count": 1,
+  "ratification_readiness": false,
+  "identity_disposition": "REQUIRES_BOUNDED_REMEDIATION",
+  "relationships_disposition": "REQUIRES_BOUNDED_REMEDIATION",
+  "normalized_open_finding_counts": {
+    "P0": 2,
+    "P1": 16,
+    "P2": 7
+  },
+  "integrity_dimensions": {
+    "observed_byte_integrity": "PASS",
+    "observed_byte_corruption_or_missing_package_file": false,
+    "authority_and_lifecycle": "OPEN_P1_LIMITATIONS",
+    "technical_directory_immutability": "OPEN_P1_LIMITATION",
+    "procedural_lane_segregation": "COMPLETE_WITH_DISCLOSED_LIMITATIONS",
+    "observed_cross_lane_input_contamination": false,
+    "cmt01_dissent_preserved": true
+  },
+  "lane_input_manifests": [
+    {
+      "lane": "CMT-01",
+      "thread_id": "019f810e-dfc4-7073-8fe0-16d3296c8b12",
+      "sha256": "36e605ffcbbf95e90ef639a9ea16a37a2c49e94214c3d20d7f9835b03d3ddd6f"
+    },
+    {
+      "lane": "CMT-02",
+      "thread_id": "019f810e-dcbb-7d03-bfdf-86a83e880a39",
+      "sha256": "ebdee9eed382b38e833471c36896ec788a9aa4131df28b6e7742b9aa77b15480"
+    },
+    {
+      "lane": "CMT-03",
+      "thread_id": "019f810e-f196-7bb0-9c28-319a61251f80",
+      "sha256": "a22d2175b59b64cd440838b2a5599735eda19334e8fe8597f49a3743a742694a"
+    },
+    {
+      "lane": "CMT-04",
+      "thread_id": "not separately exposed in preserved manifest; source thread 019f8104-9235-7f03-8a3e-c68d4b199e09",
+      "sha256": "244cb779b05ad39613231a6fd3c13c654bae9d60d57705be4e218915190bdbc2"
+    },
+    {
+      "lane": "CMT-05",
+      "thread_id": "not separately exposed in preserved report; source thread 019f8104-9235-7f03-8a3e-c68d4b199e09",
+      "sha256": "7472a36313c9127a4c45a67f8d17ed5de5c612e9f4cf79c84ba9483124c9cb93"
+    },
+    {
+      "lane": "CMT-06",
+      "thread_id": "019f810f-9602-7db0-8f92-e7dab25330d0",
+      "sha256": "1d09ec680b9fef17f737176360ed002e0848d49738fc9b43e5aeafe59e1a1d34"
+    },
+    {
+      "lane": "CMT-07",
+      "thread_id": "not separately exposed; lane label CMT-07 and source thread 019f8104-9235-7f03-8a3e-c68d4b199e09",
+      "sha256": "61b59fe79ffd562f136a9f4d4e4e52748f1ce7e014360f2b4431c410119d04d7"
+    }
+  ],
+  "evidence_links": [
+    "LANE_REPORT.md",
+    "SYNTHESIZED_FINDINGS.csv",
+    "PROPOSED_REDLINE_REGISTER.csv",
+    "DISSENT_REGISTER.csv",
+    "WORK_COMPLETENESS_LEDGER.csv",
+    "../CMT-01/LANE_REPORT.md",
+    "../CMT-02/LANE_REPORT.md",
+    "../CMT-03/LANE_REPORT.md",
+    "../CMT-04/LANE_REPORT.md",
+    "../CMT-05/LANE_REPORT.md",
+    "../CMT-06/LANE_REPORT.md",
+    "../CMT-07/LANE_REPORT.md",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/frozen_review_object/EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Handoff_V1_0_0/directive/CODEX_CONTROLLED_MULTI_THREAD_REVIEW_DIRECTIVE.md",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials"
+  ],
+  "exact_recommended_founder_action": "Do not ratify the current Identity or Relationships formal ADR text. Authorize a bounded successor documentary-remediation package that preserves the frozen predecessor, resolves every P0 and P1 synthesized finding, separately resolves or formally dispositions the CMT-01 authority/lifecycle and directory-immutability dissent, carries exact source and approval provenance, applies only independently reviewed proposed redlines, regenerates manifests and checksums, and undergoes a fresh segregated review before any ratification request. Do not authorize implementation, execution, PR, merge, tag, release, deployment, enrollment, production use, or F-0001 closure through this action.",
+  "authority_boundary": {
+    "founder_decision_made": false,
+    "ratification_made": false,
+    "adoption_made": false,
+    "implementation_authorized": false,
+    "execution_authorized": false,
+    "pull_request_authorized": false,
+    "merge_authorized": false,
+    "tag_authorized": false,
+    "release_authorized": false,
+    "deployment_authorized": false,
+    "f_0001_closed": false,
+    "coordinator_and_founder_retain_final_packaging_and_decision_authority": true
+  },
+  "limitations": [
+    "Documentary synthesis only; no application database provider schema migration product workflow executable test or production environment was used.",
+    "No network or remote repository refresh was used; CMT-01 local/remote authority provenance dissent remains open.",
+    "Byte integrity does not establish ongoing immutability and is not used to clear authority lifecycle or segregation limitations.",
+    "Proposed redlines are not approved text and no frozen ADR or other lane output was modified.",
+    "No legal external assurance security effectiveness or operational readiness conclusion is made."
+  ],
+  "self_audit": {
+    "required_labels_present": true,
+    "directive_classification_vocabulary_only": true,
+    "severity_vocabulary_only": true,
+    "exactly_one_directive_listed_disposition": true,
+    "cmt01_integrity_dissent_preserved": true,
+    "lane_attribution_preserved": true,
+    "redlines_independently_supported_and_not_approved": true,
+    "frozen_input_modifications": 0,
+    "other_lane_output_modifications": 0,
+    "network_calls": 0,
+    "application_executions": 0,
+    "git_mutations": 0,
+    "custom_agents_executed": 0
+  },
+  "completion_attestation": "CMT_08_SEGREGATED_SYNTHESIS_COMPLETE_WITH_OPEN_P0_P1_REMEDIATION_REQUIRED",
+  "output_hash_reference": "OUTPUT_MANIFEST.json"
+}

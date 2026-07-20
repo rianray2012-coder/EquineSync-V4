@@ -1,0 +1,30 @@
+{
+  "labels": ["NON_AGENT_CONTROLLED_THREAD_REVIEW", "NOT_ES_RA_AGENT_EVIDENCE"],
+  "review_cycle": "ES-REV-2026-002",
+  "handoff_zip_sha256": "91cdb1c24f13940814035036c2c76c7cec415945337edbf3778e2a77c4a140f6",
+  "observed_byte_integrity": "PASS",
+  "input_integrity_failure_stop_triggered": false,
+  "expanded_handoff_equal": {"numerator": 15, "denominator": 15},
+  "handoff_checksums_passed": {"numerator": 14, "denominator": 14},
+  "handoff_manifest_passed": {"numerator": 13, "denominator": 13},
+  "embedded_zip_crc_passed": {"numerator": 5, "denominator": 5},
+  "expanded_embedded_files_equal": {"numerator": 140, "denominator": 140},
+  "internal_checksums_passed": {"numerator": 130, "denominator": 130},
+  "json_parse_passed": {"numerator": 16, "denominator": 16},
+  "csv_parse_passed": {"numerator": 48, "denominator": 48, "data_rows": 841},
+  "frozen_input_modifications": 0,
+  "post_control_byte_drift": 0,
+  "named_hashes": {
+    "identity": "34dc47aa358d8d515186f2ed082b9c54e2ed351c6e02e55fb20163cf3137ff9b",
+    "relationships_controlled_sequence": "a03a805426ea8bb6c7b50179a4c594a21b242fcb5a6a79dfe57dd503afdec634",
+    "relationships_pre_ratification": "25ca5031ec9b26780c291d4a56f97bd74bb92e42d7c0b20ce39a869056740b2d"
+  },
+  "authority_commits": {
+    "governance_baseline": {"sha": "acb518ea5a160820e64681ff95a16b010fe1156c", "verification": "LOCAL_PASS"},
+    "stage2a_closure": {"sha": "56dc68ce761b84800caa60997af7fb62ab34f82d", "verification": "COORDINATOR_AUTHENTICATED_GITHUB_API_PASS_LOCAL_SINGLE_BRANCH_OBJECT_ABSENT"},
+    "authorization": {"sha": "75c56ac67b0de694436c093fc2dc5ff5dffe4ff3", "verification": "LOCAL_AND_REMOTE_BRANCH_PASS"}
+  },
+  "open_limitations": ["authority_and_source_lifecycle", "technical_directory_immutability", "host_level_path_isolation"],
+  "cmt01_dissent_preserved": true,
+  "custom_agents_executed": 0
+}

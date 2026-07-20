@@ -1,0 +1,105 @@
+{
+  "labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "schema_version": "1.0.0",
+  "review_cycle_id": "ES-REV-2026-002",
+  "lane_id": "CMT-06",
+  "lane_role": "MACHINE_VALIDATION",
+  "runtime_identity": "GENERIC_CONTROLLED_CODEX_THREAD_NOT_ES_RA_AGENT",
+  "current_thread_id": "019f810f-9602-7db0-8f92-e7dab25330d0",
+  "delegating_source_thread_id": "019f8104-9235-7f03-8a3e-c68d4b199e09",
+  "runtime": {
+    "host": "Darwin 25.5.0 arm64",
+    "macos": "26.5.2",
+    "python": "3.14.6",
+    "exact_backend_model_identifier": null,
+    "backend_model_limitation": "Not exposed through the runtime environment"
+  },
+  "started_utc": "2026-07-20T19:48:05Z",
+  "validation_completed_utc": "2026-07-20T19:53:23Z",
+  "artifact_finalized_utc": "2026-07-20T19:57:31Z",
+  "result": "CMT06_MACHINE_VALIDATION_COMPLETE_WITH_OPEN_P1_AND_P2_OBSERVATIONS",
+  "frozen_input_integrity": "PASS",
+  "input_integrity_blocker_triggered": false,
+  "finding_counts": {
+    "p0": 0,
+    "p1": 4,
+    "p2": 3
+  },
+  "input_snapshots": {
+    "frozen_handoff": {
+      "file_count": 15,
+      "byte_count": 336992,
+      "inventory_sha256_before": "756f78dc966e42c62be72cd6d06e55a8c73fb88aedb17fd7c28b2a42a85e17ba",
+      "inventory_sha256_after": "756f78dc966e42c62be72cd6d06e55a8c73fb88aedb17fd7c28b2a42a85e17ba"
+    },
+    "expanded_review_materials": {
+      "file_count": 140,
+      "byte_count": 811571,
+      "inventory_sha256_before": "e85e037e518aac4f9f8a1fbd416cb7fdc58d983b09c08f50235c8f2a4d371551",
+      "inventory_sha256_after": "e85e037e518aac4f9f8a1fbd416cb7fdc58d983b09c08f50235c8f2a4d371551"
+    },
+    "original_handoff_zip": {
+      "bytes": 301007,
+      "sha256": "91cdb1c24f13940814035036c2c76c7cec415945337edbf3778e2a77c4a140f6"
+    }
+  },
+  "files": [
+    {
+      "path": "LANE_REPORT.md",
+      "bytes": 17070,
+      "sha256": "cf46bc8d3eb7c7122605c7b59c28092a55a29437a61b46fbc4e15dcc979c39c9"
+    },
+    {
+      "path": "MACHINE_VALIDATION_RESULTS.csv",
+      "bytes": 11130,
+      "sha256": "31e10a098059551acab5bcacdc4bc3517d1c140afe7eec500ee1f10118665f84"
+    },
+    {
+      "path": "REFERENCE_AND_COVERAGE_RESULTS.csv",
+      "bytes": 8529,
+      "sha256": "0fb4f6459239aa98f7fbc08d754334794db96ea5efe4f519b9608ec2af3d3717"
+    },
+    {
+      "path": "WORK_COMPLETENESS_LEDGER.csv",
+      "bytes": 8043,
+      "sha256": "ee4798ed7e2ad1560043726849e44b6677493d8f0fcb4915fb48b466de852edd"
+    }
+  ],
+  "manifest_self_hash": {
+    "embedded": false,
+    "reason": "A file cannot embed its own final SHA-256 without recursion; compute after final write"
+  },
+  "limitations": [
+    "No published JSON Schema or CSV schema files were supplied",
+    "No network or repository-source re-fetch was permitted or used",
+    "No application code tests databases providers or product workflows were executed",
+    "Branch and base commit are controlling-plan provenance and were not independently Git-verified by this lane",
+    "Human prose semantics and ratification merit are outside the machine-validation lane"
+  ],
+  "attestations": {
+    "custom_agents_activated_or_executed": 0,
+    "es_ra_identity_claimed": false,
+    "frozen_input_modifications": 0,
+    "writes_outside_assigned_lane": 0,
+    "network_calls": 0,
+    "application_executions": 0,
+    "git_mutations": 0,
+    "founder_decision_made": false,
+    "ratification_performed": false,
+    "implementation_authorized": false,
+    "execution_authorized": false,
+    "pull_request_merge_tag_release_or_deployment_performed": false,
+    "f0001_closed": false
+  },
+  "self_audit": {
+    "required_filenames_present": "PASS",
+    "required_labels_present_in_every_file": "PASS",
+    "csv_strict_parse": "PASS",
+    "json_strict_parse": "PASS",
+    "output_hashes_verified": "PASS",
+    "frozen_inputs_unchanged": "PASS"
+  }
+}

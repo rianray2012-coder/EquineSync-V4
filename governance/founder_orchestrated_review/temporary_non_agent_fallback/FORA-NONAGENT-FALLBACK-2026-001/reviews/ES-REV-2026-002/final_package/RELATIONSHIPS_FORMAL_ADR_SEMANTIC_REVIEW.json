@@ -1,0 +1,14 @@
+{
+  "labels": ["NON_AGENT_CONTROLLED_THREAD_REVIEW", "NOT_ES_RA_AGENT_EVIDENCE"],
+  "review_cycle": "ES-REV-2026-002",
+  "domain": "Relationships",
+  "scope": {"founder_decisions": 16, "formal_adrs": 7},
+  "recommendation_to_formal_core_sections_exact": {"numerator": 35, "denominator": 35},
+  "lane_findings": {"P0": 0, "P1": 8, "P2": 1},
+  "disposition": "REQUIRES_BOUNDED_REMEDIATION",
+  "ratification_ready": false,
+  "primary_blockers": ["higher_authority_founder_decision_semantics_incomplete", "source_id_remapping", "privacy_source_gap", "approval_lifecycle_ambiguity", "delegation_expiry_and_disputed_source_weakening", "identity_and_authorization_contract_gaps", "unqualified_verified_state"],
+  "frozen_input_modifications": 0,
+  "custom_agents_executed": 0,
+  "evidence": ["RELATIONSHIPS_FORMAL_ADR_SEMANTIC_REVIEW.md", "RELATIONSHIPS_FOUNDER_DECISION_TO_ADR_TRACEABILITY.csv", "RELATIONSHIPS_ADR_CONFORMANCE_MATRIX.csv", "OPEN_FINDINGS_AND_DECISIONS_REGISTER.csv"]
+}

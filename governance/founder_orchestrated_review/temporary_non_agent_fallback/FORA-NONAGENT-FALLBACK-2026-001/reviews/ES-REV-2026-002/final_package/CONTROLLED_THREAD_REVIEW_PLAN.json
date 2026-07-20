@@ -1,0 +1,35 @@
+{
+  "labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "review_cycle_id": "ES-REV-2026-002",
+  "directive_id": "ES-FORA-DIR-CMT-IDENTITY-RELATIONSHIPS-REVIEW-V1.0",
+  "authorization_record": "FORA-NONAGENT-FALLBACK-2026-001",
+  "authorization_mode": "CONTROLLED_MULTI_THREAD_REVIEW_ORCHESTRATION_MODE",
+  "frozen_package_id": "ES-IDENTITY-RELATIONSHIPS-CONTROLLED-MULTI-THREAD-REVIEW-HANDOFF-V1.0.0",
+  "handoff_zip_sha256": "91cdb1c24f13940814035036c2c76c7cec415945337edbf3778e2a77c4a140f6",
+  "review_branch": "codex/identity-relationships-controlled-thread-review-v1",
+  "base_commit": "75c56ac67b0de694436c093fc2dc5ff5dffe4ff3",
+  "started_utc": "2026-07-20T19:42:33Z",
+  "lane_count": 8,
+  "lanes": [
+    {"lane_id": "CMT-01", "assignment": "Evidence Custody and Input Integrity", "may_make_semantic_recommendation": false},
+    {"lane_id": "CMT-02", "assignment": "Identity Domain Review", "may_approve_own_redlines": false},
+    {"lane_id": "CMT-03", "assignment": "Relationships Domain Review", "may_approve_own_redlines": false},
+    {"lane_id": "CMT-04", "assignment": "Independent Conformance and Traceability", "independent_of_domain_lanes": true},
+    {"lane_id": "CMT-05", "assignment": "Adversarial Challenge", "blind_to_proposed_redlines": true},
+    {"lane_id": "CMT-06", "assignment": "Machine Validation", "application_execution": false},
+    {"lane_id": "CMT-07", "assignment": "Documentary Golden-Path Reproduction", "application_execution": false},
+    {"lane_id": "CMT-08", "assignment": "Segregated Synthesis and Proposed Redlines", "starts_after": ["CMT-01", "CMT-02", "CMT-03", "CMT-04", "CMT-05", "CMT-06", "CMT-07"]}
+  ],
+  "custom_agents_activated_or_executed": 0,
+  "f_0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "pull_request_authorized": false,
+  "merge_authorized": false,
+  "release_authorized": false,
+  "deployment_authorized": false,
+  "external_assurance": false
+}

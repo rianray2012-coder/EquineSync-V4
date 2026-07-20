@@ -1,0 +1,119 @@
+{
+  "labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "review_cycle": "ES-REV-2026-002",
+  "lane": "CMT-03",
+  "runtime_provenance": {
+    "runtime_identity": "Generic controlled Codex thread; not an ES-RA custom agent",
+    "model_visibility": "Codex, GPT-5 family; exact deployed model identifier not exposed",
+    "thread_context_id": "019f810e-f196-7bb0-9c28-319a61251f80",
+    "source_thread_id": "019f8104-9235-7f03-8a3e-c68d4b199e09",
+    "custom_agents_activated_or_executed": 0
+  },
+  "timestamps_utc": {
+    "review_started": "2026-07-20T19:45:18Z",
+    "drafted": "2026-07-20T19:52:11Z",
+    "review_ended": "2026-07-20T19:56:38Z",
+    "manifest_created": "2026-07-20T19:56:38Z"
+  },
+  "scope_result": {
+    "completion_attestation": "CMT_03_DOCUMENTARY_SCOPE_COMPLETE_WITH_OPEN_P1_FINDINGS",
+    "ratification_ready_recommendation": false,
+    "lane_recommendation": "BOUNDED_REMEDIATION_AND_INDEPENDENT_REREVIEW_REQUIRED",
+    "p0_unique_findings": 0,
+    "p1_unique_findings": 8,
+    "p2_unique_findings": 1,
+    "formal_adrs_reviewed": 7,
+    "founder_decisions_reviewed": 16,
+    "formal_core_sections_matching_recommendations": "35/35",
+    "proposed_corrections_approved_by_lane": 0
+  },
+  "files": [
+    {
+      "path": "LANE_REPORT.md",
+      "bytes": 17274,
+      "sha256": "eb8e55d40ae3e905920b9ee541acdfc3ac7e4f634afeadf5feb1a4fcb64c0e31"
+    },
+    {
+      "path": "RELATIONSHIPS_TRACEABILITY.csv",
+      "bytes": 9252,
+      "sha256": "ccde01547dc254341e358d6d4ad53dc81aca4986bb8d15ad6406850167a15d25"
+    },
+    {
+      "path": "RELATIONSHIPS_ADR_MATRIX.csv",
+      "bytes": 4479,
+      "sha256": "9f5456ca5bf17af0fc08102406ac382d9f74646f89b36aedfa87a4f3b8dedff4"
+    },
+    {
+      "path": "RELATIONSHIPS_CONTRACT_FINDINGS.csv",
+      "bytes": 3303,
+      "sha256": "50c2e44f579da13f1f607025ea77af1177243f40554def206880dd86ed7cdf93"
+    },
+    {
+      "path": "RELATIONSHIPS_SOURCE_DELTAS.csv",
+      "bytes": 11093,
+      "sha256": "e7169d3c642e8e62c42ba4a27fe67a9ee9cf6d5b318d64e349026b637b29f9e1"
+    },
+    {
+      "path": "PROPOSED_CORRECTIONS.csv",
+      "bytes": 7840,
+      "sha256": "d2105b667ea66ea7c54cee3ac52f30e32334d1937a8ef8d1d350814eaed5637b"
+    },
+    {
+      "path": "WORK_COMPLETENESS_LEDGER.csv",
+      "bytes": 6254,
+      "sha256": "f7fc5989d3e262c7f992ce68d1f0f7d29a72619f37a14e38ef5a0187facf4a22"
+    },
+    {
+      "path": "OUTPUT_MANIFEST.json",
+      "bytes": null,
+      "sha256": null,
+      "manifest_self_hash": "34f9236472d165dfd9e7a66892cf0bb387fd8dcf1d02268b9ceeb435991e8529",
+      "self_hash_basis": "SHA-256 of final OUTPUT_MANIFEST.json bytes after replacing the 64 hexadecimal characters in manifest_self_hash with 64 zero characters; bytes and ordinary byte hash remain omitted because embedding either would be self-referential"
+    }
+  ],
+  "evidence_links": [
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Delegated_Authority_PIA_V1_1_0_Revised_Candidate/PIA_RELATIONSHIPS_DELEGATED_AUTHORITY_V1_1_0.md",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_ADR_Recommendations_V1_0_0",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Controlled_Sequence_V1_0_0",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Pre_Ratification_Completion_V1_0_0",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Identity_Account_Actor_Enrollment_Onboarding_PIA_V1_1_0_Controlled_Revision/IDENTITY_RELATIONSHIPS_CONTRACT.md"
+  ],
+  "limitations": [
+    "Documentary review only; no application, database, code, schema, migration, or executable test was run.",
+    "No network or connector was used.",
+    "No other lane output was read.",
+    "No Git mutation or frozen-input modification was performed.",
+    "Input custody and repository-source verification are outside CMT-03; unresolved source claims were not silently substituted.",
+    "No proposed correction is approved by CMT-03."
+  ],
+  "self_audit": {
+    "required_file_count": 8,
+    "actual_file_count": 8,
+    "required_labels_present_in_every_file": true,
+    "directive_classifications_only": true,
+    "severities_only_p0_p1_p2_or_blank_for_no_adverse_finding": true,
+    "csv_parse_validation": "PASS",
+    "json_parse_validation": "PASS",
+    "frozen_input_modifications": 0,
+    "writes_outside_authorized_lane_directory": 0,
+    "network_used": false,
+    "application_run": false,
+    "git_mutation": false,
+    "other_lane_outputs_read": false
+  },
+  "authority_boundary": {
+    "founder_decision_made": false,
+    "ratification_made": false,
+    "implementation_authorized": false,
+    "execution_authorized": false,
+    "pull_request_authorized": false,
+    "merge_authorized": false,
+    "tag_or_release_authorized": false,
+    "deployment_authorized": false,
+    "f_0001_closed": false,
+    "external_assurance": false
+  }
+}

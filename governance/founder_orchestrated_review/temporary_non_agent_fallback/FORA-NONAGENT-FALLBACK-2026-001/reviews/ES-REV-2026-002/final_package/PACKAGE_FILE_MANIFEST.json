@@ -1,0 +1,216 @@
+{
+  "labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "review_cycle": "ES-REV-2026-002",
+  "package_id": "ES-IDENTITY-RELATIONSHIPS-CONTROLLED-MULTI-THREAD-REVIEW-RESULT-V1.0.0",
+  "final_disposition": "IDENTITY_AND_RELATIONSHIPS_REQUIRE_BOUNDED_REMEDIATION",
+  "entry_scope": "all final package files except PACKAGE_FILE_MANIFEST.json and SHA256SUMS.txt",
+  "entry_count": 40,
+  "expected_final_package_file_count": 42,
+  "frozen_input_modifications": 0,
+  "custom_agents_executed": 0,
+  "files": [
+    {
+      "path": "AS_DESIGNED_BASELINE_FREEZE_READINESS.md",
+      "bytes": 578,
+      "sha256": "572769243ffb79332899fec5d95ff3c5ac0b4df1c7d305bd6b1a1b86aa9cd932"
+    },
+    {
+      "path": "CONTROLLED_THREAD_REVIEW_PLAN.json",
+      "bytes": 2011,
+      "sha256": "0d58b8057dc5e1753a6416cea9a8b9ad8ddf43cce320cbd7d6a1cd6057644a10"
+    },
+    {
+      "path": "CONTROLLED_THREAD_REVIEW_PLAN.md",
+      "bytes": 5005,
+      "sha256": "757309174ad2a15da9ad171bd5d95708bec3ad8de4bc20e45d99a3f4da0f6c20"
+    },
+    {
+      "path": "CORRECTED_ADR_FILES_STATUS.md",
+      "bytes": 639,
+      "sha256": "ca6fdcadb8336b7ebf0a50a8f267599f088d52dc0549e2e16eb589cea1957a67"
+    },
+    {
+      "path": "FINAL_FOUNDER_ACTION_MEMO.json",
+      "bytes": 1756,
+      "sha256": "b59eb8bcfe98a90a944427af54bea376ac30f697e4f72d3957a1b4fc2b110944"
+    },
+    {
+      "path": "FINAL_FOUNDER_ACTION_MEMO.md",
+      "bytes": 1771,
+      "sha256": "9c217088990f8e080bbeacdf65a7070bda8237ba9aacd58c362dde9a00bccefb"
+    },
+    {
+      "path": "FROZEN_INPUT_INTEGRITY_REPORT.json",
+      "bytes": 1862,
+      "sha256": "97b95ff40b5f5d58086ca690822c09dfa7c909c56afd87e5b456762d64b0dbe0"
+    },
+    {
+      "path": "FROZEN_INPUT_INTEGRITY_REPORT.md",
+      "bytes": 2061,
+      "sha256": "1f550c197698b9188730656e4a00a33bfc3e16008666c736e7eb03a33a8e7456"
+    },
+    {
+      "path": "IDENTITY_ADR_CONFORMANCE_MATRIX.csv",
+      "bytes": 7157,
+      "sha256": "faf363312b430bf80876865c825e17617a21a5ae10d1b08db0a58752384d2371"
+    },
+    {
+      "path": "IDENTITY_ADVERSARIAL_RESULTS.csv",
+      "bytes": 9348,
+      "sha256": "243317aecf2f4ad99cc81ab826c48856bbf134a68624b16a8c79c3f6e0d6bcd8"
+    },
+    {
+      "path": "IDENTITY_CONTRACT_REVIEW.md",
+      "bytes": 1462,
+      "sha256": "2c9260f045b4cc288654c32b70d6e66afc4c3239fb18c7e7a7e67e3d2d7ab406"
+    },
+    {
+      "path": "IDENTITY_FORMAL_ADR_SEMANTIC_REVIEW.json",
+      "bytes": 883,
+      "sha256": "155da4e8e54b5d0d436697745e6e97770bb0db6aea2c9ebca7e18eb32b306db9"
+    },
+    {
+      "path": "IDENTITY_FORMAL_ADR_SEMANTIC_REVIEW.md",
+      "bytes": 15670,
+      "sha256": "fedf5cbee487d5058c0e918e36d678501e262e195d1bb7ecb7d8cdac27125dcd"
+    },
+    {
+      "path": "IDENTITY_FOUNDER_DECISION_TO_ADR_TRACEABILITY.csv",
+      "bytes": 9199,
+      "sha256": "1560ca0aaf89d14e8a18a1452386231c440dea50c444c5c7d8d3c2e16a15059d"
+    },
+    {
+      "path": "IDENTITY_GOLDEN_PATH_RESULTS.csv",
+      "bytes": 21546,
+      "sha256": "e3468c3295a9c6dc83b87cc9dbb7f41b91612d5130fa14c3971fb45bc7e6ff6d"
+    },
+    {
+      "path": "IDENTITY_RATIFICATION_RECOMMENDATION.json",
+      "bytes": 448,
+      "sha256": "1f76d8201ce958a8845099aada59a3c2ba0dbe566f070ea0a2a1fb6e6d242347"
+    },
+    {
+      "path": "IDENTITY_RATIFICATION_RECOMMENDATION.md",
+      "bytes": 928,
+      "sha256": "4a82461f98a130c81ee01b5cdf8e88cc7e93120e2783b5fe5efe89aa651e4219"
+    },
+    {
+      "path": "IDENTITY_RELATIONSHIPS_CROSS_PIA_ALIGNMENT.csv",
+      "bytes": 18981,
+      "sha256": "75a08f69eb1bfeb9d50ff4be2c9fbc6ef5b89ecf1dae540dceb690adcb2472c1"
+    },
+    {
+      "path": "IDENTITY_RELATIONSHIPS_CROSS_PIA_ALIGNMENT.md",
+      "bytes": 1388,
+      "sha256": "af58475e39c1ff28d2974d2f63a5a65732bb0be8ad26ff63a3829fb78659727d"
+    },
+    {
+      "path": "IDENTITY_SOURCE_RECONCILIATION_DELTA.csv",
+      "bytes": 5917,
+      "sha256": "21e638eceab59b6652b791c57cd628faafefb1d910e0c15b794209b6b91db079"
+    },
+    {
+      "path": "IMPLEMENTATION_AUTHORIZATION_PRECHECK.md",
+      "bytes": 695,
+      "sha256": "ddbfd5ca4c4862c2d1f0b2efac294a7e15715d57de0481c2d5a8b2259de1b139"
+    },
+    {
+      "path": "LANE_EXECUTION_AND_SEGREGATION_REGISTER.csv",
+      "bytes": 2932,
+      "sha256": "8a296ba9297d2e6c3116887030b6ebe61db7b5236bea7e3bb4233bbcbacbc69c"
+    },
+    {
+      "path": "NON_AGENT_FALLBACK_ATTESTATION.md",
+      "bytes": 769,
+      "sha256": "b8d82ede9b92410aeb0e3ba0721eab40e354fad02129a0236c6322660a0d9b6f"
+    },
+    {
+      "path": "NON_IMPLEMENTATION_ATTESTATION.md",
+      "bytes": 614,
+      "sha256": "57808f360bac2d887b0939288d8cedb1b631990c82be1ed7f09471c5db76442d"
+    },
+    {
+      "path": "OPEN_FINDINGS_AND_DECISIONS_REGISTER.csv",
+      "bytes": 36974,
+      "sha256": "1fe8e07ceda410393fd6508cfdecd6d8328ee3edc0fe31cced0ff590dc091600"
+    },
+    {
+      "path": "PROPOSED_REDLINE_REGISTER.csv",
+      "bytes": 28189,
+      "sha256": "0e7436e90cd538b9428858d8d45fa3d5b5c162b449b74a3b57c05e9ee4530a23"
+    },
+    {
+      "path": "RELATIONSHIPS_ADR_CONFORMANCE_MATRIX.csv",
+      "bytes": 4479,
+      "sha256": "9f5456ca5bf17af0fc08102406ac382d9f74646f89b36aedfa87a4f3b8dedff4"
+    },
+    {
+      "path": "RELATIONSHIPS_ADVERSARIAL_RESULTS.csv",
+      "bytes": 9348,
+      "sha256": "243317aecf2f4ad99cc81ab826c48856bbf134a68624b16a8c79c3f6e0d6bcd8"
+    },
+    {
+      "path": "RELATIONSHIPS_CONTRACT_REVIEW.md",
+      "bytes": 1281,
+      "sha256": "b81744bb14e540674a9ab75949e260ee872b6d5fce19e404f5ed6147062571d3"
+    },
+    {
+      "path": "RELATIONSHIPS_FORMAL_ADR_SEMANTIC_REVIEW.json",
+      "bytes": 980,
+      "sha256": "7ab309f9f17d9c31e561ede2fde57a046bf5bfad093fc9fe1ee63ce248e5c160"
+    },
+    {
+      "path": "RELATIONSHIPS_FORMAL_ADR_SEMANTIC_REVIEW.md",
+      "bytes": 17274,
+      "sha256": "eb8e55d40ae3e905920b9ee541acdfc3ac7e4f634afeadf5feb1a4fcb64c0e31"
+    },
+    {
+      "path": "RELATIONSHIPS_FOUNDER_DECISION_TO_ADR_TRACEABILITY.csv",
+      "bytes": 9252,
+      "sha256": "ccde01547dc254341e358d6d4ad53dc81aca4986bb8d15ad6406850167a15d25"
+    },
+    {
+      "path": "RELATIONSHIPS_GOLDEN_PATH_RESULTS.csv",
+      "bytes": 17608,
+      "sha256": "8a124ced764b280af854e551662b21f6e63cb8976cd4652823bf8d7ac5923a47"
+    },
+    {
+      "path": "RELATIONSHIPS_RATIFICATION_RECOMMENDATION.json",
+      "bytes": 457,
+      "sha256": "8aa47c0d003497e7a1cf2f93faa9b08cc10e16fc30fba2e748516d1afefa74d5"
+    },
+    {
+      "path": "RELATIONSHIPS_RATIFICATION_RECOMMENDATION.md",
+      "bytes": 963,
+      "sha256": "b5c39d8e0a06672a273691967c31dfc62d2bebf1b43532dabe1f294391ac5e1e"
+    },
+    {
+      "path": "RELATIONSHIPS_SOURCE_RECONCILIATION_DELTA.csv",
+      "bytes": 11093,
+      "sha256": "e7169d3c642e8e62c42ba4a27fe67a9ee9cf6d5b318d64e349026b637b29f9e1"
+    },
+    {
+      "path": "REVIEW_EVIDENCE_INDEX.csv",
+      "bytes": 2743,
+      "sha256": "98c65f21e1664de7b48504dd169536c42724ee302ad419bafc70e95d14493494"
+    },
+    {
+      "path": "THREAD_RUNTIME_PROVENANCE_REGISTER.csv",
+      "bytes": 2676,
+      "sha256": "bdec6598a33b1418d574d2fad58e2b2091eccf9a508d9bcedce1cbee590d7369"
+    },
+    {
+      "path": "VALIDATION_REPORT.json",
+      "bytes": 1278,
+      "sha256": "d2bb977b0b530e51384f38f5580752c2d9a66c1e4a78de0853b25108c0fc110b"
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "bytes": 1505,
+      "sha256": "3f864fff19cba0e8d93d06db780ee5dca988a47b2664a48d01d118fee318ac92"
+    }
+  ]
+}

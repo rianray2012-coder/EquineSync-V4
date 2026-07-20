@@ -1,0 +1,145 @@
+{
+  "required_labels": [
+    "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+    "NOT_ES_RA_AGENT_EVIDENCE"
+  ],
+  "lane_id": "CMT-02",
+  "review_cycle": "ES-REV-2026-002",
+  "directive_id": "ES-FORA-DIR-CMT-IDENTITY-RELATIONSHIPS-REVIEW-V1.0",
+  "authorization_id": "FORA-NONAGENT-FALLBACK-2026-001",
+  "runtime_provenance": {
+    "runtime": "Codex desktop generic controlled thread",
+    "model_visibility": "GPT-5 family; exact model selector not exposed to lane",
+    "thread_id": "019f810e-dcbb-7d03-bfdf-86a83e880a39",
+    "delegating_source_thread_id": "019f8104-9235-7f03-8a3e-c68d4b199e09",
+    "host": "Darwin 25.5.0 arm64",
+    "shell": "zsh 5.9",
+    "custom_agent_identity_claimed": false,
+    "custom_agents_executed": 0
+  },
+  "timestamps": {
+    "observed_review_start_utc": "2026-07-20T19:48:31Z",
+    "report_generated_utc": "2026-07-20T19:50:46Z",
+    "completion_utc": "2026-07-20T19:56:14Z"
+  },
+  "paths": {
+    "input_root": "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Identity_Account_Actor_Enrollment_Onboarding_PIA_V1_1_0_Controlled_Revision",
+    "output_root": "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/EquineSync-V4-controlled-review/governance/founder_orchestrated_review/temporary_non_agent_fallback/FORA-NONAGENT-FALLBACK-2026-001/reviews/ES-REV-2026-002/lane_outputs/CMT-02"
+  },
+  "input_integrity": {
+    "sha256sums_entries_checked": 37,
+    "sha256sums_entries_passed": 37,
+    "result": "PASS",
+    "frozen_input_modifications": 0
+  },
+  "classification_vocabulary": [
+    "EXACTLY_ALIGNED",
+    "EDITORIAL_ONLY",
+    "CLARIFICATION_WITHIN_APPROVED_AUTHORITY",
+    "MATERIAL_ADDITION_REQUIRING_FOUNDER_DECISION",
+    "CONTROL_WEAKENING",
+    "CROSS_DOMAIN_CONFLICT",
+    "UNAUTHORIZED_IMPLEMENTATION_DECISION",
+    "SOURCE_GAP",
+    "MISSING_TRACEABILITY",
+    "TERMINOLOGY_DRIFT",
+    "AMBIGUOUS_REQUIRES_REMEDIATION"
+  ],
+  "severity_vocabulary": [
+    "P0",
+    "P1",
+    "P2"
+  ],
+  "result": {
+    "identity_ratification_ready": false,
+    "lane_disposition": "CMT02_IDENTITY_REQUIRES_BOUNDED_REMEDIATION_BEFORE_FOUNDER_RATIFICATION",
+    "open_findings": {
+      "P0": 2,
+      "P1": 15,
+      "P2": 1,
+      "total": 18
+    },
+    "adrs_reviewed": 7,
+    "founder_decisions_reviewed": 12,
+    "contracts_reviewed": 3,
+    "proposed_corrections": 18,
+    "redlines_self_approved": 0
+  },
+  "constraints_attestation": {
+    "other_lane_outputs_read": 0,
+    "network_calls": 0,
+    "connectors_used": 0,
+    "application_runs": 0,
+    "git_mutations": 0,
+    "provider_or_production_activity": 0,
+    "writes_outside_cmt_02_output": 0,
+    "implementation_authorized": false,
+    "execution_authorized": false,
+    "founder_ratification_declared": false,
+    "baseline_freeze_declared": false,
+    "f_0001_closure_declared": false
+  },
+  "artifacts": [
+    {
+      "path": "LANE_REPORT.md",
+      "sha256": "cc7e0702d780cd651cb7a7dc0659e50164361775be2121bdb513c64f34948149"
+    },
+    {
+      "path": "IDENTITY_TRACEABILITY.csv",
+      "sha256": "ca09fa7be6e4dae1bc81d7b07779c9ef31bdd9d7bc1a278a5544283749bf80bd"
+    },
+    {
+      "path": "IDENTITY_ADR_MATRIX.csv",
+      "sha256": "1c9e03d8ae6b9b0fe8e996cb773161c0d958ef6db2a63c8e6869c8ab1c23543b"
+    },
+    {
+      "path": "IDENTITY_CONTRACT_FINDINGS.csv",
+      "sha256": "6d5cb32aad87ac69b3b698a2c977e6cee4de241c5660222394256fe26b26d74b"
+    },
+    {
+      "path": "IDENTITY_SOURCE_DELTAS.csv",
+      "sha256": "69ec37102f7546dbea04a29e18fdfc1b18916b51a77bb78add7fb9be2f972bc5"
+    },
+    {
+      "path": "PROPOSED_CORRECTIONS.csv",
+      "sha256": "1733c0dfc8279e6beaaebf9640e8756230e34d478555e1e048019aad3ba588d7"
+    },
+    {
+      "path": "WORK_COMPLETENESS_LEDGER.csv",
+      "sha256": "88550dbdf3f5973a19b6e3e8cda6e43e26795be617131a41921f096ef71fb67b"
+    }
+  ],
+  "manifest_self_hash": {
+    "embedded": false,
+    "reason": "A file cannot embed its own final byte hash without recursive mutation. The final OUTPUT_MANIFEST.json SHA-256 is computed externally after write."
+  },
+  "claim_to_evidence": {
+    "primary_index": "LANE_REPORT.md#open-findings",
+    "traceability": "IDENTITY_TRACEABILITY.csv",
+    "adr_conformance": "IDENTITY_ADR_MATRIX.csv",
+    "contracts": "IDENTITY_CONTRACT_FINDINGS.csv",
+    "sources": "IDENTITY_SOURCE_DELTAS.csv",
+    "corrections": "PROPOSED_CORRECTIONS.csv"
+  },
+  "limitations": [
+    "Documentary review only; no application, provider, schema, migration, database, code, or production execution.",
+    "No network or repository fetch; external source bytes were not re-verified by this lane.",
+    "No other lane output or proposed redline was read.",
+    "No legal, jurisdiction-specific, compliance, or external-assurance determination.",
+    "CMT-02 cannot approve its own proposed corrections or issue the coordinator's final disposition."
+  ],
+  "self_audit": {
+    "required_files_present": true,
+    "required_labels_present_in_every_file": true,
+    "csv_shapes_valid": true,
+    "json_parse_valid": true,
+    "classification_vocabulary_valid": true,
+    "severity_vocabulary_valid": true,
+    "claim_to_evidence_present": true,
+    "limitations_present": true,
+    "completion_attestation_present": true,
+    "output_hashes_present": true,
+    "status": "PASS"
+  },
+  "completion_attestation": "CMT-02_DOCUMENTARY_REVIEW_COMPLETE_WITH_OPEN_P0_P1_REMEDIATION_REQUIRED"
+}

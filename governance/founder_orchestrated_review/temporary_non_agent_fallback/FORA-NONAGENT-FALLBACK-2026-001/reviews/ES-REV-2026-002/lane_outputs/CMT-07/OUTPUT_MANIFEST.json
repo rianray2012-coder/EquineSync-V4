@@ -1,0 +1,105 @@
+{
+  "review_label": "NON_AGENT_CONTROLLED_THREAD_REVIEW",
+  "evidence_label": "NOT_ES_RA_AGENT_EVIDENCE",
+  "generated_at_utc": "2026-07-20T19:48:01Z",
+  "thread_id": "CMT-07",
+  "thread_provenance": "Generic controlled Codex thread; no ES-RA custom-agent identity or activation claimed.",
+  "runtime_provenance": "Static documentary reading of frozen review_materials only; no application, database, provider, workflow, runtime simulation, or product test executed.",
+  "scope": {
+    "identity_denominator": 7,
+    "identity_completed": 7,
+    "relationships_denominator": 6,
+    "relationships_completed": 6,
+    "required_trace_dimensions_per_path": 8,
+    "required_trace_cells": 104,
+    "completed_trace_cells": 104,
+    "result": "13/13 PASS_DOCUMENTARY",
+    "highest_open_severity": "P1"
+  },
+  "directive_classifications_used": [
+    "REQUIRED_FOR_FIRST_USER_ENROLLMENT",
+    "REQUIRED_FOR_GENERAL_PRODUCTION",
+    "REQUIRED_BEFORE_PAID_ENROLLMENT"
+  ],
+  "severity_vocabulary": [
+    "P0",
+    "P1",
+    "P2"
+  ],
+  "artifacts": [
+    {
+      "file": "LANE_REPORT.md",
+      "bytes": 14069,
+      "sha256": "a5211dd09ce5bc67b90ebf78e05323b42f09787f56bebefc604451a32ac7e4e8",
+      "hash_scope": "Exact finalized file bytes"
+    },
+    {
+      "file": "IDENTITY_GOLDEN_PATH_RESULTS.csv",
+      "bytes": 21546,
+      "sha256": "e3468c3295a9c6dc83b87cc9dbb7f41b91612d5130fa14c3971fb45bc7e6ff6d",
+      "hash_scope": "Exact finalized file bytes"
+    },
+    {
+      "file": "RELATIONSHIPS_GOLDEN_PATH_RESULTS.csv",
+      "bytes": 17608,
+      "sha256": "8a124ced764b280af854e551662b21f6e63cb8976cd4652823bf8d7ac5923a47",
+      "hash_scope": "Exact finalized file bytes"
+    },
+    {
+      "file": "WORK_COMPLETENESS_LEDGER.csv",
+      "bytes": 12351,
+      "sha256": "ed989af1de06d106763b5ba0ea83dfbbc521ab0c44aaaae96eb45f8566768a79",
+      "hash_scope": "Exact finalized file bytes"
+    },
+    {
+      "file": "OUTPUT_MANIFEST.json",
+      "bytes": null,
+      "sha256": null,
+      "hash_scope": "SELF_HASH_EXCLUDED_TO_AVOID_CIRCULAR_CONTENT"
+    }
+  ],
+  "evidence_links": [
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/EquineSync-V4-controlled-review/governance/founder_orchestrated_review/temporary_non_agent_fallback/FORA-NONAGENT-FALLBACK-2026-001/reviews/ES-REV-2026-002/lane_prompts/CMT-07_PROMPT.md:1",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Identity_Account_Actor_Enrollment_Onboarding_PIA_V1_1_0_Controlled_Revision/PIA_IDENTITY_ACCOUNT_ACTOR_ENROLLMENT_ONBOARDING_V1_1_0.md:1",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Delegated_Authority_PIA_V1_1_0_Revised_Candidate/PIA_RELATIONSHIPS_DELEGATED_AUTHORITY_V1_1_0.md:1",
+    "/Users/rianray/Documents/Codex/2026-07-20/open-start-here-md-then-execute/work/review_materials/EquineSync_Relationships_Pre_Ratification_Completion_V1_0_0/DOCUMENTARY_GOLDEN_PATH_RESULTS.csv:1"
+  ],
+  "limitations": [
+    "PASS_DOCUMENTARY is a specification trace result only; it is not implementation, execution, test, operational, enrollment, launch, compliance, safeguarding, offline-reliability, production, or external-assurance evidence.",
+    "Formal ADR wording remains unratified or pending final ratification and implementation authorization is false.",
+    "Authorization, Protected Participant/Safeguarding, Claims, Horse Transfer, audit/source lifecycle, repository reconciliation, implementation, executable tests, revocation fan-out, rollback, and operational evidence remain open dependencies.",
+    "The Identity state-transition matrix omits several material case models declared by the PIA/ADRs.",
+    "REL-GP-006 has inconsistent scenario naming across frozen packages; the controlling prompt's offline delegation plus revocation denominator was used.",
+    "No other lane output was read."
+  ],
+  "prohibited_actions": {
+    "founder_decision": false,
+    "ratification": false,
+    "implementation": false,
+    "execution": false,
+    "pull_request": false,
+    "merge": false,
+    "tag": false,
+    "release": false,
+    "deployment": false,
+    "f_0001_closure": false
+  },
+  "self_audit": {
+    "required_files_present": "5/5",
+    "required_labels_present_in_every_file": true,
+    "timestamp_and_provenance_present_in_every_file": true,
+    "identity_rows": 7,
+    "relationships_rows": 6,
+    "trace_dimensions_populated": "104/104",
+    "csv_parse_validation": "PASS: 7x24, 6x24, 15x15",
+    "json_parse_validation": "PASS",
+    "network_used": false,
+    "other_lane_outputs_read": false,
+    "runtime_or_product_test_executed": false,
+    "git_or_frozen_inputs_modified": false,
+    "forbidden_authority_claim_made": false,
+    "manifest_self_hash_note": "A file cannot contain a stable hash of its own exact bytes; sibling output hashes are complete and the manifest self-hash is intentionally excluded."
+  },
+  "completion_attestation": "DOCUMENTARY_LANE_SCOPE_COMPLETE_NOT_IMPLEMENTATION_OR_AUTHORIZATION_EVIDENCE",
+  "completion_attestation_scope": "CMT-07 controlling prompt only. This does not decide, ratify, authorize, implement, execute, verify, release, deploy, enroll, or close F-0001."
+}
