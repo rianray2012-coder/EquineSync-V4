@@ -1,0 +1,28 @@
+{
+  "authorization": "CONTROLLED_MULTI_THREAD_REVIEW_ORCHESTRATION_MODE_AUTHORIZED_AS_TEMPORARY_NON_AGENT_FALLBACK",
+  "authorization_branch": "codex/founder-review-agent-runtime-requalification-v1",
+  "authorized_by": "Rian Ray, Founder, EquineSync",
+  "decision_date": "2026-07-20",
+  "es_ra_roles_activated": false,
+  "execution_authorized": false,
+  "f_0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "founder_orchestrated_review_agents_ready": false,
+  "implementation_authorized": false,
+  "merge_authorized": false,
+  "preceding_runtime_requalification_commit": "da84c25eaf7a5973f1b7309b7a99ba8fc0e72b60",
+  "production_activity_authorized": false,
+  "record_id": "FORA-NONAGENT-FALLBACK-2026-001",
+  "release_authorized": false,
+  "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "review_activity_authorized": [
+    "segregated_documentary_review",
+    "segregated_design_review",
+    "separate_controlled_codex_threads",
+    "separate_isolated_worktrees"
+  ],
+  "review_started_by_this_record": false,
+  "runtime_agent_type_selector": "UNAVAILABLE_CONFIRMED_PRODUCT_LIMITATION_REMAINS_OPEN",
+  "stage2_execution_baseline": "EXECUTION_BASELINE_STILL_NOT_READY",
+  "status": "AUTHORIZED_AVAILABLE_NOT_STARTED_PENDING_SCOPED_REVIEW_DIRECTIVE",
+  "substitution_for_es_ra_roles": false
+}
