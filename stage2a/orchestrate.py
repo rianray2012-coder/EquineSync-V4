@@ -409,7 +409,8 @@ def _terminate(kind: str, pid_file: Path, port: int) -> dict[str, object]:
         }
     if not _expected(record, kind, port):
         raise RuntimeError(f"refusing to signal unverified {kind} PID {pid}")
-    if listener != pid:
+    verified_pre_listener = listener is None and not _port_open("127.0.0.1", port)
+    if listener != pid and not verified_pre_listener:
         raise RuntimeError(f"refusing to signal {kind} PID {pid}: controlled port {port} is not attributed to that PID")
     if saved_pgid != pid:
         raise RuntimeError(f"refusing to signal {kind}: PID/PGID identity mismatch")
@@ -427,6 +428,7 @@ def _terminate(kind: str, pid_file: Path, port: int) -> dict[str, object]:
         "kind": kind, "pid": pid, "process_group_id": saved_pgid,
         "command_identity_verified": True, "status": "STOPPED",
         "forced": forced, "port_closed": True,
+        "controlled_port_attribution": "LISTENER_PID_MATCHED" if listener == pid else "EXPECTED_PORT_RECORDED_AND_VERIFIED_CLOSED_BEFORE_LISTEN",
     }
 
 

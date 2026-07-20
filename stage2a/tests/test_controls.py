@@ -241,5 +241,12 @@ class ControlTests(unittest.TestCase):
         self.assertIn("-a", command)
         self.assertEqual(command[command.index("-p") + 1], "42")
 
+    def test_verified_pre_listener_process_can_be_terminated_only_on_closed_expected_port(self):
+        record = {"pid": 42, "process_group_id": 42, "controlled_port": 8019}
+        with patch("orchestrate._read_record", return_value=record), patch("orchestrate._listener_pid", return_value=None), patch("orchestrate._process_exists", return_value=True), patch("orchestrate._expected", return_value=True), patch("orchestrate._port_open", return_value=False), patch("orchestrate._wait_exit", return_value=True), patch("orchestrate.os.killpg") as killpg:
+            result = orchestrate._terminate("api", Path("/nonexistent/api.pid"), 8019)
+        killpg.assert_called_once_with(42, orchestrate.signal.SIGTERM)
+        self.assertEqual(result["controlled_port_attribution"], "EXPECTED_PORT_RECORDED_AND_VERIFIED_CLOSED_BEFORE_LISTEN")
+
 
 if __name__=="__main__": unittest.main()

@@ -1,0 +1,53 @@
+{
+  "event_classification": "CONTROLLED_STARTUP_FAILURE_PROCESS_RESIDUE",
+  "detected_utc": "2026-07-20T09:51:35Z",
+  "cleanup_completed_before_utc": "2026-07-20T10:03:08Z",
+  "cause": "API_STARTUP_TIMED_OUT_WHILE_CLOUD_EVICTED_WORKSPACE_SOURCE_WAS_MATERIALIZING",
+  "causal_relationship_to_runtime_agent_limitation": "NOT_ESTABLISHED_DO_NOT_CONFLATE",
+  "api_process": {
+    "pid": 67982,
+    "process_group_id": 67982,
+    "parent_pid_at_creation": 67951,
+    "parent_pid_at_detection": 1,
+    "executable": "/Users/rianray/.pyenv/versions/3.11.11/bin/python3.11",
+    "full_command_line": "/Users/rianray/Documents/Codex/2026-07-16/files-mentioned-by-the-user-equinesync/work/EquineSync-V4-stage2-f0001/stage2a/.venv/bin/python -m uvicorn full_application_profile:app --app-dir /Users/rianray/Documents/Codex/2026-07-16/files-mentioned-by-the-user-equinesync/work/EquineSync-V4-stage2-f0001/stage2a --host 127.0.0.1 --port 8019 --log-level warning --no-access-log",
+    "working_directory": "/Users/rianray/Documents/Codex/2026-07-16/files-mentioned-by-the-user-equinesync/work/EquineSync-V4-stage2-f0001/stage2a",
+    "controlled_port": 8019,
+    "controlled_port_state_at_detection": "CLOSED_NOT_YET_BOUND",
+    "launch_nonce_sha256": "15f2aa0b20a13e5ae8bc7c21768b8f05a6650ab4ca2734d9bb91963f0722824c"
+  },
+  "attribution_method": [
+    "orchestrator owner-marked PID record",
+    "macOS KERN_PROCARGS2 full argv and executable measurement",
+    "lsof exact cwd and txt-path measurement",
+    "parent-PID and process-group measurement",
+    "launch-nonce SHA-256 comparison",
+    "controlled-port listener and open-state probes"
+  ],
+  "termination": {
+    "action": "SIGTERM_TO_PROCESS_GROUP_67982_AFTER_COMPLETE_IDENTITY_REVERIFICATION",
+    "result": "PASS_PROCESS_GROUP_EXITED",
+    "scope": "ONLY_EXACT_VERIFIED_CONTROLLED_API_PROCESS_GROUP_67982",
+    "mongo_followup": "VERIFIED_CONTROLLED_MONGO_PROCESS_GROUP_67977_STOPPED_BY_ORCHESTRATOR",
+    "forced_signal_required": false
+  },
+  "postconditions": {
+    "api_port_8019_listening": false,
+    "mongo_port_27029_listening": false,
+    "pid_records_absent": true,
+    "runtime_directory_absent": true,
+    "sealed_files_changed": false,
+    "repository_controlled_artifacts_changed_by_processes": false
+  },
+  "test_disposition": {
+    "tests_performed_while_residue_active": false,
+    "affected_lifecycle_attempt": "DISCARDED_NOT_PROMOTED",
+    "repository_state_influence": "NONE",
+    "agent_discovery_influence": "NONE",
+    "identity_probe_influence": "EVENT_CREATED_FROM_IDENTITY_PROBES_ONLY",
+    "calibration_influence": "NONE",
+    "orchestration_influence": "STARTUP_FAILURE_EXPOSED_PRE_LISTENER_CLEANUP_PATH",
+    "final_disposition_influence": "NONE_AFTER_CLEAN_RERUN"
+  },
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}
