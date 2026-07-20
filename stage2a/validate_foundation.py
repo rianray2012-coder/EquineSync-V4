@@ -68,26 +68,27 @@ def source_recovery_rehearsal(implementation_commit: str) -> dict[str, object]:
     clone = temp_root / "repo"
     subprocess.run(["git", "clone", "--quiet", "--shared", "--no-checkout", str(REPO), str(clone)], check=True, timeout=120)
     try:
-        subprocess.run(["git", "sparse-checkout", "init", "--no-cone"], cwd=clone, check=True, timeout=30)
-        subprocess.run(["git", "sparse-checkout", "set", "stage2a/fixtures/foundation-v1.json"], cwd=clone, check=True, timeout=30)
-        subprocess.run(["git", "checkout", "--quiet", "--detach", implementation_commit], cwd=clone, check=True, timeout=120)
         fixture = clone / "stage2a/fixtures/foundation-v1.json"
+        fixture.parent.mkdir(parents=True, exist_ok=True)
+        materialized = subprocess.run(["git", "show", f"{implementation_commit}:stage2a/fixtures/foundation-v1.json"], cwd=clone, check=True, capture_output=True, timeout=30).stdout
+        fixture.write_bytes(materialized)
         expected = file_sha(fixture)
         fixture.write_text("intentional Stage 2A source recovery mutation\n", encoding="utf-8")
         mutated = file_sha(fixture)
-        subprocess.run(["git", "restore", f"--source={implementation_commit}", "--", "stage2a/fixtures/foundation-v1.json"], cwd=clone, check=True, timeout=120)
+        restored_bytes = subprocess.run(["git", "show", f"{implementation_commit}:stage2a/fixtures/foundation-v1.json"], cwd=clone, check=True, capture_output=True, timeout=30).stdout
+        fixture.write_bytes(restored_bytes)
         restored = file_sha(fixture)
-        subprocess.run(["git", "checkout", "--quiet", "--detach", START], cwd=clone, check=True, timeout=120)
-        prechange_absent = not (clone / "stage2a").exists()
+        prechange_probe = subprocess.run(["git", "cat-file", "-e", f"{START}:stage2a/fixtures/foundation-v1.json"], cwd=clone, capture_output=True, timeout=30)
+        prechange_absent = prechange_probe.returncode != 0
         return {
-            "implementation_restore_command": "git restore --source=IMPLEMENTATION_COMMIT -- stage2a/fixtures/foundation-v1.json",
-            "prechange_restore_command": "git checkout --detach STARTING_COMMIT",
+            "implementation_restore_command": "git show IMPLEMENTATION_COMMIT:stage2a/fixtures/foundation-v1.json then write exact bytes to the authorized fixture path",
+            "prechange_restore_command": "git cat-file -e STARTING_COMMIT:stage2a/fixtures/foundation-v1.json (expected absent)",
             "expected_sha256": expected,
             "mutated_sha256": mutated,
             "restored_sha256": restored,
             "restored_matches": expected == restored and expected != mutated,
             "stage2a_absent_at_prechange_anchor": prechange_absent,
-            "clone_mode": "DISPOSABLE_SHARED_OBJECTS_SPARSE_SINGLE_FILE",
+            "clone_mode": "DISPOSABLE_SHARED_OBJECTS_DIRECT_SINGLE_BLOB_MATERIALIZATION_NO_WORKTREE_CHECKOUT",
             "fresh_clone_proof_role": "NOT_APPLICABLE_SEPARATE_POST_PUSH_CONTROL",
             "disposable_clone_removed": True,
         }
