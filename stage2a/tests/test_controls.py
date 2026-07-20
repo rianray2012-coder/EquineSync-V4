@@ -18,7 +18,7 @@ from lib.control import REPO, IsolationError, PROVIDER_NAMES, ROOT, digest, fixt
 from network_guard import _approved
 import orchestrate
 from orchestrate import _expected
-from validate_stage2a_package import locate_repository
+from validate_stage2a_package import KNOWN_SECRET_VALUE as PACKAGE_SECRET_VALUE, locate_repository
 
 
 class ControlTests(unittest.TestCase):
@@ -105,6 +105,12 @@ class ControlTests(unittest.TestCase):
         packaged = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003/validate_stage2a_package.py"
         self.assertEqual(locate_repository(packaged), REPO)
         self.assertIsNone(locate_repository(Path("/private/tmp/detached-candidate/validate_stage2a_package.py")))
+
+    def test_packaged_secret_scanner_distinguishes_rules_from_values(self):
+        detector_source = r"whsec_[A-Za-z0-9_-]+|AKIA[A-Z0-9]{12,}"
+        self.assertIsNone(PACKAGE_SECRET_VALUE.search(detector_source))
+        self.assertIsNotNone(PACKAGE_SECRET_VALUE.search("whsec_example0123456789"))
+        self.assertIsNotNone(PACKAGE_SECRET_VALUE.search("AKIA1234567890ABCD"))
 
     def test_application_network_guard_allows_only_controlled_endpoints(self):
         self.assertTrue(_approved(("127.0.0.1", 27029)))

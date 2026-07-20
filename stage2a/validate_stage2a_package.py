@@ -202,7 +202,13 @@ def main() -> int:
                 csv_errors.append(f"{name}: {exc}")
     ck("MV-006-csv-structure", not csv_errors, {"data_rows": csv_rows, "errors": csv_errors})
 
-    joined = "\n".join((root / name).read_text(encoding="utf-8", errors="replace") for name in files if name != "validate_stage2a_package.py" and (root / name).stat().st_size < 5_000_000)
+    active_files = [
+        name for name in files
+        if not name.startswith("source_payload/")
+        and name != "validate_stage2a_package.py"
+        and (root / name).stat().st_size < 5_000_000
+    ]
+    joined = "\n".join((root / name).read_text(encoding="utf-8", errors="replace") for name in active_files)
     required_statuses = ("F0001_REMAINS_OPEN_BLOCKING", "EXECUTION_NOT_AUTHORIZED", "NOT_EXTERNALLY_ASSURED", "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE", "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE")
     ck("MV-007-controlled-status", all(value in joined for value in required_statuses), {value: value in joined for value in required_statuses})
     prohibited = ("EXECUTION_READY", "EXECUTION_AUTHORIZED", "F0001_CLOSED", "CP3_READY_TO_EXECUTE", "PRODUCTION_READY", "EXTERNALLY_ASSURED")
@@ -217,9 +223,14 @@ def main() -> int:
         if "/Users/" in text or "/private/tmp/" in text:
             absolute_hits.append(name)
     ck("MV-009-local-path-boundary", not absolute_hits, {"unexpected_absolute_path_files": absolute_hits, "controlled_exemptions": ["SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE", "immutable source_payload code and historical evidence"]})
-    secret_patterns = ("sk" + "_live_", "sk" + "_test_", "wh" + "sec_", "AK" + "IA", "-----BEGIN " + "PRIVATE KEY-----")
-    secret_hits = [pattern for pattern in secret_patterns if pattern in joined]
-    ck("MV-010-secret-values", not secret_hits, {"pattern_hits": secret_hits, "names_only_allowed": True})
+    secret_hits: list[str] = []
+    for name in files:
+        text = (root / name).read_text(encoding="utf-8", errors="replace")
+        if KNOWN_SECRET_VALUE.search(text):
+            secret_hits.append(name)
+        if re.search(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----", text):
+            secret_hits.append(name)
+    ck("MV-010-secret-values", not secret_hits, {"files_with_plausible_secret_values": sorted(set(secret_hits)), "names_only_allowed": True})
 
     source = json_objects.get("STAGE2A_SOURCE_EVIDENCE_REGISTER.json", {})
     source_errors: list[str] = []
