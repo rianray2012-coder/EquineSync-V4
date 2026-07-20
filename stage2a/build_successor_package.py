@@ -466,7 +466,7 @@ def main() -> int:
         "docs/implementation/STAGE_2_EXECUTION_BASELINE/ES-PKG-2026-003-V002/EXECUTION_BASELINE_GAP_ANALYSIS.md",
     ]
     stage_sources = sorted(
-        path for path in git("ls-tree", "-r", "--name-only", packaging_commit, "--", "stage2a").splitlines()
+        path for path in git("ls-files", "stage2a").splitlines()
         if path and not any(part in {".venv", ".runtime", "__pycache__", "latest"} for part in Path(path).parts)
     )
     sources = []

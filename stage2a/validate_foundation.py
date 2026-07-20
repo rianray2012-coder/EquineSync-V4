@@ -173,11 +173,14 @@ def main() -> int:
     attestation = ambient_name_attestation()
     implementation_commit = git("rev-parse", "HEAD")
     implementation_tree = git("rev-parse", "HEAD^{tree}")
-    tracked_stage2a = git("ls-tree", "-r", "--name-only", implementation_commit, "--", "stage2a").splitlines()
-    ck("implementation_commit_anchor", bool(tracked_stage2a) and implementation_commit != START, {
+    tracked_stage2a = git("ls-files", "stage2a").splitlines()
+    stage2a_tree = git("rev-parse", f"{implementation_commit}:stage2a")
+    ck("implementation_commit_anchor", bool(tracked_stage2a) and len(stage2a_tree) == 40 and implementation_commit != START, {
         "commit": implementation_commit,
         "tree": implementation_tree,
+        "stage2a_tree": stage2a_tree,
         "tracked_stage2a_paths": len(tracked_stage2a),
+        "tracked_path_basis": "INDEX_PATHS_PLUS_COMMIT_BOUND_STAGE2A_TREE",
         "starting_commit": START,
     })
     ck("environment_contract", attestation["prohibited_name_count"] == 0, posture | {"ambient_attestation": attestation, "backend_dotenv_absent": not (REPO / "backend/.env").exists()})
