@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+from copy import deepcopy
 import hashlib
 import json
 import shutil
@@ -77,6 +78,47 @@ def check(validation: dict[str, object], name: str) -> dict[str, object]:
     return next(row for row in validation["checks"] if row["check"] == name)
 
 
+def package_safe_validation(raw: dict[str, object]) -> dict[str, object]:
+    """Redact only local path prefixes while preserving technical meaning."""
+    repo_prefix = REPO.resolve().as_posix()
+    replacements = {
+        repo_prefix: "REPOSITORY_ROOT",
+        "/Users/rianray/.pyenv/versions/3.11.11": "PYTHON_RUNTIME",
+        "/Users/rianray": "LOCAL_USER_HOME",
+    }
+
+    def transform(value: object) -> object:
+        if isinstance(value, str):
+            for source, target in replacements.items():
+                value = value.replace(source, target)
+            return value
+        if isinstance(value, list):
+            return [transform(item) for item in value]
+        if isinstance(value, dict):
+            return {key: transform(item) for key, item in value.items()}
+        return value
+
+    value = transform(deepcopy(raw))
+    assert isinstance(value, dict)
+    process_check = next(row for row in value["checks"] if row["check"] == "process_identity")
+    for key in ("mongo_identity", "api_identity"):
+        identity = process_check["detail"][key]
+        identity["command_line_hash_basis"] = "FULL_OBSERVED_COMMAND_BEFORE_LOCAL_PATH_PREFIX_REDACTION"
+        identity["packaged_command_line_sha256"] = hashlib.sha256(identity["observed_command_line"].encode()).hexdigest()
+        identity["path_redaction"] = {
+            "policy": "LOCAL_PATH_PREFIX_TO_STABLE_ALIAS",
+            "meaning_preserved": True,
+            "stable_aliases": ["REPOSITORY_ROOT", "PYTHON_RUNTIME", "LOCAL_USER_HOME"],
+        }
+    value["package_path_redaction"] = {
+        "policy": "LOCAL_PATH_PREFIX_TO_STABLE_ALIAS",
+        "meaning_preserved": True,
+        "raw_evidence_location": "stage2a/evidence/latest/FOUNDATION_VALIDATION.json",
+        "raw_evidence_promoted_to_package": False,
+    }
+    return value
+
+
 def verify_failed_candidate() -> dict[str, object]:
     manifest = FAILED_ROOT / "DRAFT_REVIEW_SHA256SUMS.txt"
     if sha(manifest) != FAILED_ATTEMPT_002_MANIFEST_SHA:
@@ -113,7 +155,8 @@ def main() -> int:
     if packaging_commit == START or not git("ls-tree", "-r", "--name-only", packaging_commit, "--", "stage2a"):
         raise RuntimeError("Stage 2A implementation must be committed before package assembly")
     failed_candidate = verify_failed_candidate()
-    validation = json.loads((EVIDENCE / "FOUNDATION_VALIDATION.json").read_text(encoding="utf-8"))
+    raw_validation = json.loads((EVIDENCE / "FOUNDATION_VALIDATION.json").read_text(encoding="utf-8"))
+    validation = package_safe_validation(raw_validation)
     bootstrap = json.loads((EVIDENCE / "BACKEND_BOOTSTRAP_RUN.json").read_text(encoding="utf-8"))
     if validation["validation"] != "PASS" or bootstrap["validation"] != "PASS":
         raise RuntimeError("foundation validation and backend bootstrap must pass")
@@ -356,7 +399,7 @@ def main() -> int:
         {"command_id": "S2A-CMD-006", "purpose": "candidate package validation", "cwd": "repository root", "command": "stage2a/.venv/bin/python stage2a/validate_stage2a_package.py PACKAGE --phase candidate", "expected_exit": 0, "timeout_seconds": 120, "observed": "PENDING_CANDIDATE_FREEZE"},
     ]
     pair("STAGE2A_VALIDATION_COMMAND_REGISTER", "Stage 2A Validation Command Register", {"package_id": PACKAGE_ID, "commands": commands, "cp3_commands": [], "business_workflow_commands": []}, "\n".join(f"- `{row['command_id']}` `{row['command']}` — `{row['observed']}`" for row in commands))
-    shutil.copy2(EVIDENCE / "FOUNDATION_VALIDATION.json", ROOT / "STAGE2A_FOUNDATION_VALIDATION.json")
+    write_json("STAGE2A_FOUNDATION_VALIDATION.json", validation)
     shutil.copy2(EVIDENCE / "FOUNDATION_VALIDATION.txt", ROOT / "STAGE2A_FOUNDATION_VALIDATION.txt")
 
     # Events and failed review attempt remain distinct evidence.
@@ -376,7 +419,11 @@ def main() -> int:
         failed_archive = OUTPUTS / archive_name
         if sha(failed_archive) != expected_sha:
             raise RuntimeError(f"failed review snapshot archive integrity mismatch: {archive_name}")
-        shutil.copy2(failed_archive, attempt_root / archive_name)
+        write_json(f"review_attempts/{attempt}/ARCHIVE_REFERENCE.json", {
+            "archive": f"outputs/{archive_name}", "archive_sha256": expected_sha,
+            "copied_into_corrected_candidate": False,
+            "reason": "preserved externally as immutable failed-candidate evidence; mutable duplication prohibited",
+        })
 
     # Committed source evidence and change controls.
     fixed_sources = [
