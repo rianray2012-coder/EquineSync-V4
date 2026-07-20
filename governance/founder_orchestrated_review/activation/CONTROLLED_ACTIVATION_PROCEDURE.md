@@ -1,6 +1,6 @@
 # Controlled Founder-Orchestrated Review Agent Activation Procedure
 
-**Procedure status:** Prepared, not executed
+**Procedure status:** Executed; activation blocked and inactive state preserved
 
 **Review ID:** `FORA-ACT-REV-2026-001`
 
@@ -70,8 +70,15 @@ Rollback must not delete or rewrite the failed activation evidence.
 
 ## Current state
 
-- Founder activation approval: `false`
-- Activation authorized: `false`
-- Operational activation: not performed
+- Founder activation approval: `true`, with conditions
+- Activation authorized: `true` for the bounded controlled sequence
+- Activation run: `FORA-ACT-2026-001`
+- Operational activation: blocked; not completed
+- Failure disposition: `ACTIVATION_BLOCKED_OR_ROLLBACK_REQUIRED`
+- Read-only canary batch: failed because exact registered agent types were not loaded; `agent_type` and runtime `agent_role` were null
+- Unauthorized connector activity: three failed Cloudflare MCP authentication attempts were recorded; no successful access or provider write was established
+- Workspace-write canary batch: not started
+- Retry: none; Founder condition 9 required all further review-agent use to stop
+- Rollback: the approved checkout remained clean and byte-identical, so the last verified inactive role and sealed-package configuration was already preserved; no role/configuration rollback mutation was required
 - Substantive-review commencement: not authorized and not performed
-- Procedure execution during preparation: none
+- Pull request, merge, default-branch modification, tag, release, deployment, production access, and provider write: not performed

@@ -1,0 +1,171 @@
+{
+  "activation_run_id": "FORA-ACT-2026-001",
+  "checksum_manifest_included": false,
+  "entries": [
+    {
+      "bytes": 5521,
+      "path": "governance/founder_orchestrated_review/activation/CONTROLLED_ACTIVATION_PROCEDURE.md",
+      "sha256": "af0d546ec52a5daf3626ed8df61ca0e9e7004145a2c03a9176e93b2fc5b84cf5"
+    },
+    {
+      "bytes": 3105,
+      "path": "governance/founder_orchestrated_review/activation/FOUNDER_ACTIVATION_DECISION.json",
+      "sha256": "fb7993f4f3f079892a8460a2288c6de602e9acd7b23b7214121f312777ffc2d8"
+    },
+    {
+      "bytes": 8772,
+      "path": "governance/founder_orchestrated_review/activation/FOUNDER_ACTIVATION_DECISION.schema.json",
+      "sha256": "ef539903a7c5a5c5fe69199e536decf2212849ebb20f5bed83b538e2c0920add"
+    },
+    {
+      "bytes": 2242,
+      "path": "governance/founder_orchestrated_review/activation/FOUNDER_ACTIVATION_REVIEW_PACKAGE_STATUS.json",
+      "sha256": "8945221fe71218e5f75d3a24ae90291ab63fc626ea9347e4b1e66cf8248a5f8a"
+    },
+    {
+      "bytes": 1984,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/ACTIVATION_EVIDENCE_VALIDATION.json",
+      "sha256": "15207d15064ee4691b8af4f1bba16c72853938a40e5f6b5856731d629fe8bc0a"
+    },
+    {
+      "bytes": 3780,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/ACTIVATION_FAILURE_RECONCILIATION.json",
+      "sha256": "32e3e5f28020d7a3789856f81cf8e84804bf7494413808d6a510b77d739235fa"
+    },
+    {
+      "bytes": 2033,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/ACTIVATION_OPERATOR_COMMAND_LOG.md",
+      "sha256": "ba65a46384bdd37533f767ef71ae06dfda65f716343368557dc4b156cc5aaf52"
+    },
+    {
+      "bytes": 2584,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/ACTIVATION_REPORT.md",
+      "sha256": "00390dadab09f06dea6e2f114c01f0bfdf4717054c391c90b1f918a51067a8ba"
+    },
+    {
+      "bytes": 2392,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/ACTIVATION_RESULT.json",
+      "sha256": "7518d302f3176108d52efb27a943442e4e2a0cc9fa725ceeda1d9f46fb25db30"
+    },
+    {
+      "bytes": 2668,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/FOUNDER_ACTIVATION_DECISION_SOURCE.md",
+      "sha256": "166ee88390da509ebba89bd81d62a2763b5158aead8c430969bf0d1bbbf3acf1"
+    },
+    {
+      "bytes": 1178,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/POST_ACTIVATION_CANARY_REPORT.md",
+      "sha256": "82447f2c0ed83eaa43478ecf0c3ca9336d6e3a2f465a072720c4c23595980ab8"
+    },
+    {
+      "bytes": 9301,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/POST_ACTIVATION_CANARY_RESULT.json",
+      "sha256": "07e1a5116fc3791206416d44767f2d314a5e708308ead0d4eb44cf64d247c648"
+    },
+    {
+      "bytes": 2420,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/PRE_ACTIVATION_VERIFICATION.json",
+      "sha256": "82dc61e69c6f6f38fbc619ba6ba4f2bd34b116d84254b76f8e99e52538eb0ac2"
+    },
+    {
+      "bytes": 1639,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/ROLLBACK_VERIFICATION.json",
+      "sha256": "3f7b02ad4159d9a8d566d1bebcb43143105387044bd4b910050e4e03e90f1f66"
+    },
+    {
+      "bytes": 1508,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/RUNTIME_ISOLATION_AND_CLEANUP.json",
+      "sha256": "2a80ad8a8306d00fa9c384d31dc17ecb18fdf670433c0b80572ad82bb279faa3"
+    },
+    {
+      "bytes": 908000,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/checkout_snapshot_after.json",
+      "sha256": "9a256aa9274d4e189877ffe1b3f3b916e1145269a8a6b9f868f3661731ab8b85"
+    },
+    {
+      "bytes": 908000,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/checkout_snapshot_before.json",
+      "sha256": "9a256aa9274d4e189877ffe1b3f3b916e1145269a8a6b9f868f3661731ab8b85"
+    },
+    {
+      "bytes": 1762,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/command.json",
+      "sha256": "a9e18b46783321ffffb2b913f496b5fbe5fb8e8ccef589461587a2a90d075cfd"
+    },
+    {
+      "bytes": 1683,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/events.jsonl",
+      "sha256": "a87ea72a5a41f69155772fb2df5b6fc0663b13f2ce2215bc3c775d4226935bbc"
+    },
+    {
+      "bytes": 1256,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/final_response.json",
+      "sha256": "ef8daee41c25addb95a8c24cc71e7609f5ea5b5c7a193470960aa6d1ef66d879"
+    },
+    {
+      "bytes": 0,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/git_diff_after.patch",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/git_status_after.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/git_status_before.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 9975,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/parent_prompt.txt",
+      "sha256": "d995d7eef712b1a95517baede161e2d1d15a2afb5156830e3ea35751da8e8404"
+    },
+    {
+      "bytes": 2212,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/permission_records/ES-RA-02_equinesync_segregated_review_agent.permission.json",
+      "sha256": "c2cda0c9f49e6a61735b41a5ad64f893885da5b7a8c41e3558f1c8ea5bf05936"
+    },
+    {
+      "bytes": 2216,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/permission_records/ES-RA-03_equinesync_adversarial_challenge_agent.permission.json",
+      "sha256": "223a68f77b35332a3bbadb0494a1a63109bdbe3076bebea7b0d8eb4c095ddc98"
+    },
+    {
+      "bytes": 2204,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/permission_records/ES-RA-06_equinesync_domain_reviewer.permission.json",
+      "sha256": "719e57b25e515bbdd8cace1218eafaca83271a6d7ab53fb8e05439ccd8c79fb2"
+    },
+    {
+      "bytes": 4983,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/sanitized_child_sessions.json",
+      "sha256": "e71b7e234adfcb56139eda7e0c54f79f184587956e129bb93b12dede4663171e"
+    },
+    {
+      "bytes": 7322,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/score.json",
+      "sha256": "57ddee20926c9a961bbd4d618357ff8213f516c5d28d66fdc46ca7783c0b859a"
+    },
+    {
+      "bytes": 1113,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/canaries/read-only-batch/stderr.txt",
+      "sha256": "1e2ed3e4d5942b45867bc764a2326b7329c3b72f4aef51f2542175dd63e855bb"
+    },
+    {
+      "bytes": 6088,
+      "path": "governance/founder_orchestrated_review/activation/scripts/build_activation_evidence_manifest.py",
+      "sha256": "6046e5b645b4de8f140fc16bfdfc30b211540f179b53b4ab71a48326fc18d65f"
+    },
+    {
+      "bytes": 38801,
+      "path": "governance/founder_orchestrated_review/activation/scripts/run_post_activation_canaries.py",
+      "sha256": "34e6d4839d215ccc71f9e016045f9a2ba95d69aee28b3d28f336a73d8201e9d6"
+    }
+  ],
+  "entry_count": 32,
+  "generated_at": "2026-07-20T03:45:08Z",
+  "manifest_self_included": false,
+  "schema_version": "1.0.0",
+  "scope": "All controlled activation status, decision, procedure, harness, report, raw-output, provenance, reconciliation, rollback, and run-evidence files changed or created by this activation attempt."
+}

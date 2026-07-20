@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "activation_run_id": "FORA-ACT-2026-001",
+  "validated_at": "2026-07-20T03:42:17Z",
+  "checks": [
+    {
+      "check": "activation_evidence_manifest_and_checksums",
+      "status": "PASS",
+      "detail": "24/24 manifest entries and 25/25 checksum entries verified before this validation record was added; the additive manifests are regenerated after every evidence addition."
+    },
+    {
+      "check": "approved_package_adjacent_checksum",
+      "status": "PASS",
+      "detail": "EquineSync_Founder_Orchestrated_Review_Agent_Config_Package_V1.0.0.zip: OK"
+    },
+    {
+      "check": "package_controlled_validator",
+      "status": "PASS",
+      "detail": "PACKAGE VALIDATION PASSED"
+    },
+    {
+      "check": "registered_agent_toml_parse",
+      "status": "PASS",
+      "detail": "Eight equinesync_*.toml files parsed, names matched filenames, and es_runtime_canary.toml remained separate."
+    },
+    {
+      "check": "founder_activation_decision_schema",
+      "status": "PASS",
+      "detail": "FOUNDER_ACTIVATION_DECISION.json validated against FOUNDER_ACTIVATION_DECISION.schema.json using Draft 2020-12 jsonschema tooling."
+    },
+    {
+      "check": "git_diff_check",
+      "status": "PASS",
+      "detail": "No whitespace errors."
+    },
+    {
+      "check": "failed_canary_disposition",
+      "status": "PASS",
+      "detail": "Machine-readable and human-readable final evidence both use ACTIVATION_BLOCKED_OR_ROLLBACK_REQUIRED."
+    },
+    {
+      "check": "no_further_agent_use_after_failure",
+      "status": "PASS",
+      "detail": "The workspace-write batch directory is absent, no retry exists, and the calibration-only agent was not spawned."
+    }
+  ],
+  "checks_expected": 8,
+  "checks_passed": 8,
+  "status": "PASS",
+  "scope_note": "Evidence validation confirms integrity and accurate blocked-state reporting. It does not convert the failed canary into a pass and does not authorize or establish operational activation."
+}

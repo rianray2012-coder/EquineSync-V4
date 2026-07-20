@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "activation_run_id": "FORA-ACT-2026-001",
+  "review_id": "FORA-ACT-REV-2026-001",
+  "generated_at": "2026-07-20T03:39:22Z",
+  "founder_decision": "FOUNDER_ACTIVATION_APPROVED_WITH_CONDITIONS",
+  "approved_technical_evidence_commit": "860da19970604197117b94a2ef7f23dba2dca694",
+  "approved_review_package_commit": "45c3bada313ba1196a52398780d1129255a000ee",
+  "approved_package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "pre_activation_verification": "PASS",
+  "activation_attempted": true,
+  "activation_completed": false,
+  "operational_activation": false,
+  "inactive_configuration_preserved": true,
+  "post_activation_canaries": {
+    "roles_expected": 8,
+    "roles_attempted": 3,
+    "roles_passed": 0,
+    "exact_registered_agent_types_observed": 0,
+    "batches_expected": 2,
+    "batches_attempted": 1,
+    "batches_passed": 0,
+    "workspace_write_batch_started": false,
+    "fork_turns_none_for_attempted_spawns": true,
+    "calibration_only_agent_spawned": false,
+    "retry_performed": false
+  },
+  "unauthorized_connector_activity": {
+    "detected": true,
+    "attempts": 3,
+    "connector": "Cloudflare MCP",
+    "result": "AUTHENTICATION_FAILED_MISSING_OR_INVALID_TOKEN",
+    "successful_access_established": false,
+    "provider_write_established": false
+  },
+  "scope_boundaries": {
+    "substantive_review_commencement_authorized": false,
+    "substantive_review_started": false,
+    "implementation_authorized": false,
+    "production_credentials_inherited": false,
+    "production_access_established": false,
+    "provider_write_established": false,
+    "deployment_performed": false,
+    "pull_request_created": false,
+    "merge_performed": false,
+    "default_branch_modified": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "stop_and_rollback": {
+    "further_agent_use_stopped_after_first_failed_batch": true,
+    "failed_evidence_preserved": true,
+    "configuration_rollback_mutation_required": false,
+    "last_verified_inactive_configuration_preserved": true
+  },
+  "status": "FAIL",
+  "disposition": "ACTIVATION_BLOCKED_OR_ROLLBACK_REQUIRED",
+  "founder_action_required": "Activation must not resume unless the Founder supplies new or reaffirmed explicit authorization after the custom-agent loading and connector-isolation failures are remediated and reviewed."
+}

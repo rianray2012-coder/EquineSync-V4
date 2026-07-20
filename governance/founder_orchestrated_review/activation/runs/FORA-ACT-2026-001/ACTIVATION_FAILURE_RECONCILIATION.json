@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "activation_run_id": "FORA-ACT-2026-001",
+  "review_id": "FORA-ACT-REV-2026-001",
+  "reconciled_at": "2026-07-20T03:39:22Z",
+  "source_evidence_preserved_unchanged": [
+    "POST_ACTIVATION_CANARY_RESULT.json",
+    "POST_ACTIVATION_CANARY_REPORT.md",
+    "canaries/read-only-batch/events.jsonl",
+    "canaries/read-only-batch/final_response.json",
+    "canaries/read-only-batch/sanitized_child_sessions.json",
+    "canaries/read-only-batch/score.json",
+    "canaries/read-only-batch/stderr.txt"
+  ],
+  "attempted_batch": "read-only-batch",
+  "roles_requested": [
+    "equinesync_segregated_review_agent",
+    "equinesync_adversarial_challenge_agent",
+    "equinesync_domain_reviewer"
+  ],
+  "roles_not_spawned_after_stop": [
+    "equinesync_drafting_agent",
+    "equinesync_machine_validation_agent",
+    "equinesync_evidence_custodian",
+    "equinesync_synthetic_golden_path_agent",
+    "equinesync_executable_golden_path_controller"
+  ],
+  "decisive_failures": [
+    {
+      "failure": "EXACT_REGISTERED_AGENT_TYPE_NOT_LOADED",
+      "count": 3,
+      "evidence": "Every preserved parent spawn call has agent_type=null and every child session has agent_role=null. The exact custom-agent loading requirement therefore failed."
+    },
+    {
+      "failure": "REGISTRATION_MARKER_NOT_INDEPENDENTLY_RETURNED",
+      "count": 3,
+      "evidence": "Each direct child response returned the requested custom-agent name in registration_marker rather than the registered ES-RA-NN-REGISTERED-V1.0.0 marker. The parent aggregate supplied the expected markers, but that substitution is not accepted as child identity evidence."
+    },
+    {
+      "failure": "UNAUTHORIZED_CONNECTOR_ACTIVITY_DETECTED",
+      "count": 3,
+      "evidence": "stderr.txt records three Cloudflare MCP transport authentication attempts. Each failed with Missing or invalid access token; no successful connector access or provider write was established."
+    }
+  ],
+  "preserved_safety_facts": {
+    "pre_activation_verification": "PASS",
+    "parent_sandbox": "read-only",
+    "child_runtime_sandbox_observed": "read-only",
+    "child_runtime_network_profile": "restricted",
+    "fork_turns_none_observed": true,
+    "child_tool_calls_observed": 0,
+    "child_file_writes_reported": 0,
+    "checkout_clean_before": true,
+    "checkout_clean_after": true,
+    "checkout_byte_snapshot_unchanged": true,
+    "checkout_diff_empty": true,
+    "workspace_write_batch_started": false,
+    "retry_performed": false,
+    "substantive_review_started": false,
+    "production_access_established": false,
+    "provider_write_established": false,
+    "deployment_performed": false
+  },
+  "scoring_reconciliation": "The immutable score maps children by runtime agent_role. Because the runtime recorded agent_role=null, its per-role direct-response and runtime checks fail closed rather than being remapped by task path. Task-path inspection confirms the generic children used no tools and inherited read-only/restricted runtime policy, but it does not cure the missing custom-agent identity or invalid registration markers.",
+  "stop_action": "The harness stopped immediately after the first failed batch. No workspace-write role and no calibration-only es_runtime_canary role was spawned. No retry was performed.",
+  "rollback_action": "No role, sealed-package, sandbox, or runtime configuration byte had been changed. The approved checkout remained clean and byte-identical, so preserving that inactive checkout completed the non-mutating rollback state. A further inactive canary was not run because Founder condition 9 required no further agent use.",
+  "disposition": "ACTIVATION_BLOCKED_OR_ROLLBACK_REQUIRED",
+  "further_activation_requires_new_or_reaffirmed_founder_authorization": true
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "activation_run_id": "FORA-ACT-2026-001",
+  "verified_at": "2026-07-20T03:39:22Z",
+  "approved_checkout": "/private/tmp/equinesync-controlled-activation.du8NIc/approved-checkout",
+  "approved_branch": "agent/install-founder-review-agents-v1.0.0",
+  "approved_checkout_head": "45c3bada313ba1196a52398780d1129255a000ee",
+  "technical_evidence_commit": "860da19970604197117b94a2ef7f23dba2dca694",
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "checks": {
+    "approved_checkout_git_status_empty": true,
+    "approved_checkout_git_diff_empty": true,
+    "before_and_after_byte_snapshots_identical": true,
+    "main_worktree_role_agent_files_unchanged_from_approved_review_commit": true,
+    "sealed_agent_configuration_unchanged_from_approved_review_commit": true,
+    "runtime_remediation_evidence_unchanged_from_approved_review_commit": true,
+    "workspace_write_batch_directory_absent": true,
+    "calibration_only_agent_not_spawned": true,
+    "substantive_review_not_started": true,
+    "operational_activation_not_completed": true
+  },
+  "configuration_rollback_mutation_required": false,
+  "configuration_rollback_reason": "The controlled canary was response-only and the approved checkout did not change. The last verified inactive role and sealed-package state remained intact.",
+  "additional_agent_canary_run": false,
+  "additional_agent_canary_reason": "Founder condition 9 required all further agent use to stop after the failed canary.",
+  "status": "INACTIVE_CONFIGURATION_PRESERVED",
+  "disposition": "ACTIVATION_BLOCKED_OR_ROLLBACK_REQUIRED"
+}

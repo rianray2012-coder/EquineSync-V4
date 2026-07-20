@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "activation_run_id": "FORA-ACT-2026-001",
+  "cleaned_at": "2026-07-20T03:43:41Z",
+  "isolated_runtime_root": "/private/tmp/equinesync-controlled-activation.du8NIc/runtime-FORA-ACT-2026-001",
+  "initial_codex_home_state": "Created fresh with only a copied Codex control-plane auth.json before invocation.",
+  "runtime_population_observed": {
+    "automatic_cache_and_plugin_population": true,
+    "remote_plugin_cache_present_after_run": true,
+    "cloudflare_mcp_authentication_attempts_in_stderr": 3,
+    "custom_registered_agent_types_exposed_to_spawn": false
+  },
+  "credential_cleanup": {
+    "isolated_auth_copy_removed": true,
+    "original_user_auth_file_preserved": true,
+    "credential_value_recorded_in_evidence": false,
+    "credential_fingerprint_recorded_in_evidence": false
+  },
+  "provenance_custody": {
+    "sanitized_parent_and_child_provenance_committed": true,
+    "raw_runtime_rollouts_retained_locally_under_isolated_runtime_root": true,
+    "hidden_system_or_developer_instructions_copied_to_repository": false,
+    "encrypted_reasoning_copied_to_repository": false
+  },
+  "conclusion": "The fresh isolated CODEX_HOME did not remain plugin-empty during execution. The runtime populated remote-plugin material and attempted Cloudflare MCP authentication despite --ignore-user-config. This is preserved as a technical activation failure, not treated as permission or successful connector access.",
+  "status": "ACTIVATION_BLOCKED_OR_ROLLBACK_REQUIRED"
+}
