@@ -49,12 +49,16 @@
     },
     "redaction_evidence": {
       "type": "object", "additionalProperties": false,
-      "required": ["policy", "stdout_replacements", "stderr_replacements", "unredacted_sensitive_match_count", "meaning_preserved"],
+      "required": ["policy", "stdout_replacements", "stderr_replacements", "unredacted_sensitive_match_count", "normalization_version", "semantic_projection_sha256_before", "semantic_projection_sha256_after", "required_exact_line_matches", "meaning_preserved"],
       "properties": {
         "policy": {"const": "SENSITIVE_ASSIGNMENTS_AND_KNOWN_SECRET_VALUE_PATTERNS_REDACTED"},
         "stdout_replacements": {"type": "integer", "minimum": 0},
         "stderr_replacements": {"type": "integer", "minimum": 0},
         "unredacted_sensitive_match_count": {"const": 0},
+        "normalization_version": {"const": "S2A-REDACTION-PROJECTION-V2"},
+        "semantic_projection_sha256_before": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "semantic_projection_sha256_after": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "required_exact_line_matches": {"type": "object", "minProperties": 1, "additionalProperties": {"const": true}},
         "meaning_preserved": {"const": true}
       }
     },

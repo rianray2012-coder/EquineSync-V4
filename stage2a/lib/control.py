@@ -23,6 +23,7 @@ ENV_FILE = ROOT / "config" / "stage2a.env"
 ALLOWED_NAMES = {
     "APP_ENV", "STAGE2A_DISPOSABLE", "STAGE2A_SYNTHETIC_ONLY", "MONGO_URL", "DB_NAME",
     "STAGE2A_STARTUP_PROFILE",
+    "STAGE2A_LAUNCH_NONCE",
     "STAGE2A_API_HOST", "STAGE2A_API_PORT", "STAGE2A_MONGO_PORT", "ALLOW_AUTO_SEED",
     "ALLOW_SEED_ROUTE", "DISABLE_TASK_MATERIALIZER", "DISABLE_NOTIFICATIONS",
     "DISABLE_OWNER_DIGEST", "DISABLE_OWNER_WEEKLY_RECAP", "DISABLE_AUTO_NUDGES",
@@ -235,25 +236,48 @@ def restore(db, rows: list[dict[str, object]]) -> dict[str, object]:
     return {"restored": len(rows), "state_digest": state_digest(db)}
 
 
-def provider_register(env: Mapping[str, str] | None = None, *, measured_unapproved_attempts: int = 0) -> list[dict[str, object]]:
-    values = {} if env is None else env
+def provider_register(env: Mapping[str, str], network_ledger: Mapping[str, object]) -> list[dict[str, object]]:
+    """Evaluate every provider path and bind skipped states to network evidence.
+
+    A nonzero or malformed global network ledger cannot be safely attributed to
+    an individual provider and therefore fails closed instead of being copied
+    into an otherwise all-zero register.
+    """
+    if network_ledger.get("guard") != "STAGE2A_APPLICATION_NETWORK_GUARD" or network_ledger.get("installed") is not True:
+        raise IsolationError("provider measurement requires the installed application network guard ledger")
+    measured = network_ledger.get("provider_or_external_attempt_count")
+    if not isinstance(measured, int) or measured < 0:
+        raise IsolationError("provider measurement ledger count is unavailable")
+    if measured != 0:
+        raise IsolationError(f"unattributed provider/external attempts prevent per-provider disposition: {measured}")
+    values = env
     rows = []
     for provider in sorted(set(PROVIDER_NAMES.values())):
         configured = any(bool((values.get(name) or "").strip()) for name, value in PROVIDER_NAMES.items() if value == provider)
+        state = "UNAVAILABLE_CONFIGURATION_SHOULD_HAVE_FAILED_CLOSED" if configured else "SKIPPED_NOT_CONFIGURED"
+        outcome = {
+            "attempted": 0,
+            "succeeded": 0,
+            "failed": 0,
+            "skipped": 0 if configured else 1,
+            "timed_out": 0,
+            "unavailable": 1 if configured else 0,
+        }
         rows.append({
             "provider": provider,
             "configuration_names": sorted(name for name, value in PROVIDER_NAMES.items() if value == provider),
             "configured": configured,
-            "attempt_count": 0,
-            "attempted_count": 0,
-            "succeeded_count": 0,
-            "failed_count": 0,
-            "skipped_count": 1 if not configured else 0,
-            "timed_out_count": 0,
-            "unavailable_count": 1 if configured else 0,
-            "state": "SKIPPED_NOT_CONFIGURED" if not configured else "UNAVAILABLE_CONFIGURATION_SHOULD_HAVE_FAILED_CLOSED",
-            "measurement_basis": "instrumented application network guard plus credential-name attestation and process socket inventory",
-            "global_unapproved_attempt_count": measured_unapproved_attempts,
+            "attempt_count": outcome["attempted"],
+            "attempted_count": outcome["attempted"],
+            "succeeded_count": outcome["succeeded"],
+            "failed_count": outcome["failed"],
+            "skipped_count": outcome["skipped"],
+            "timed_out_count": outcome["timed_out"],
+            "unavailable_count": outcome["unavailable"],
+            "state": state,
+            "outcome_event": {"state": state, "provider_path_evaluated": True, "configured_names_present": configured},
+            "measurement_basis": "runtime provider-path prerequisite evaluation bound to an installed zero-attempt application network ledger; nonzero unattributed attempts fail closed",
+            "global_unapproved_attempt_count": measured,
             "control": "credential excluded; exact-port sandbox; instrumented socket guard; deny proxy; process socket inventory",
         })
     return rows

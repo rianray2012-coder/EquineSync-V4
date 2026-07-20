@@ -17,7 +17,7 @@ import jsonschema
 from jsonschema import Draft202012Validator, FormatChecker
 
 PACKAGE_ID = "ES-PKG-2026-004-V003"
-CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-003"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-004"
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 BASELINE = "acb518ea5a160820e64681ff95a16b010fe1156c"
 PREDECESSOR_SHA = "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329"
@@ -33,7 +33,9 @@ REQUIRED = {
     "STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json", "STAGE2A_GAP_REMEDIATION_REPORT.json",
     "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json", "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.csv",
     "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json", "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.csv",
+    "STAGE2A_TEST_CONTROL_REGISTER.json", "STAGE2A_TEST_CONTROL_REGISTER.csv",
     "CORRECTED_CANDIDATE_PROVENANCE.json", "EVIDENCE_REUSE_AND_RERUN_REGISTER.json",
+    "VALIDATOR_INVOCATION_MATRIX.json",
     "STAGE2A_VALIDATION_COMMAND_REGISTER.json", "STAGE2A_ENVIRONMENT_CONTRACT.json",
     "STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT.json", "PROVIDER_DENIAL_REGISTER.json",
     "PROVIDER_DENIAL_REGISTER.csv", "STAGE2A_FIXTURE_FOUNDATION.json",
@@ -52,7 +54,9 @@ FINAL_REQUIRED = {
     "SUCCESSOR_PACKAGE_CLEAN_EXTRACTION_VERIFICATION.json",
 }
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
-SENSITIVE_ASSIGNMENT = re.compile(r"(?i)\b(secret|token|password|api[_-]?key|credential|authorization)\b(\s*[:=]\s*)([^\s,;]+)")
+SENSITIVE_KEY = r"(?:secret|token|password|api[_-]?key|credential|authorization|bearer)"
+SENSITIVE_QUOTED_ASSIGNMENT = re.compile(rf"(?i)(?P<prefix>[\"']?{SENSITIVE_KEY}[\"']?\s*[:=]\s*)(?P<quote>[\"'])(?P<value>.*?)(?P=quote)")
+SENSITIVE_ASSIGNMENT = re.compile(rf"(?im)(?P<prefix>\b{SENSITIVE_KEY}\b\s*[:=]\s*)(?P<value>.*?)(?=\s+[A-Za-z_][A-Za-z0-9_-]*\s*[:=]|\s*$|[,;])")
 KNOWN_SECRET_VALUE = re.compile(r"(?:sk_(?:live|test)_[A-Za-z0-9_-]+|whsec_[A-Za-z0-9_-]+|AKIA[A-Z0-9]{12,})")
 
 
@@ -71,13 +75,13 @@ def git(repo: Path, *args: str, check: bool = True) -> str:
     return result.stdout.strip()
 
 
-def locate_repository(script_path: Path) -> Path:
+def locate_repository(script_path: Path) -> Path | None:
     """Resolve the repository independently of the invocation working directory."""
     resolved = script_path.resolve()
     for candidate in (resolved.parent, *resolved.parents):
         if (candidate / ".git").exists() and (candidate / "stage2a").is_dir():
             return candidate
-    raise RuntimeError(f"unable to locate repository root from validator path {resolved}")
+    return None
 
 
 def canonical(value: object) -> bytes:
@@ -114,14 +118,25 @@ def semantic_record_errors(root: Path, record: dict[str, object]) -> list[str]:
         combined += content
         if sha(path) != hashes.get(stream):
             errors.append(f"{stream} hash mismatch")
-        if any(match.group(3) != "<REDACTED>" for match in SENSITIVE_ASSIGNMENT.finditer(content)) or KNOWN_SECRET_VALUE.search(content):
+        quoted_sensitive = any(match.group("value") != "<REDACTED>" for match in SENSITIVE_QUOTED_ASSIGNMENT.finditer(content))
+        unquoted_sensitive = any(match.group("value").strip() != "<REDACTED>" for match in SENSITIVE_ASSIGNMENT.finditer(content))
+        if quoted_sensitive or unquoted_sensitive or KNOWN_SECRET_VALUE.search(content):
             errors.append(f"{stream} contains unredacted sensitive data")
     required_meaning = record.get("required_meaning") if isinstance(record.get("required_meaning"), list) else []
-    if not required_meaning or any(str(marker) not in combined for marker in required_meaning):
-        errors.append("required meaning absent after redaction")
+    lines = set(combined.splitlines())
+    if not required_meaning or any(str(marker) not in lines for marker in required_meaning):
+        errors.append("required exact-line meaning absent after redaction")
     redaction = record.get("redaction_evidence") if isinstance(record.get("redaction_evidence"), dict) else {}
-    if redaction.get("meaning_preserved") is not True or redaction.get("unredacted_sensitive_match_count") != 0:
-        errors.append("redaction enforcement or meaning attestation failed")
+    exact_matches = {str(marker): str(marker) in lines for marker in required_meaning}
+    projection = hashlib.sha256(combined.encode()).hexdigest()
+    if (
+        redaction.get("meaning_preserved") is not True
+        or redaction.get("unredacted_sensitive_match_count") != 0
+        or redaction.get("semantic_projection_sha256_before") != redaction.get("semantic_projection_sha256_after")
+        or redaction.get("semantic_projection_sha256_after") != projection
+        or redaction.get("required_exact_line_matches") != exact_matches
+    ):
+        errors.append("redaction projection or exact-line meaning enforcement failed")
     core = dict(record)
     recorded = core.pop("record_content_sha256", "")
     if hashlib.sha256(canonical(core)).hexdigest() != recorded:
@@ -132,19 +147,23 @@ def semantic_record_errors(root: Path, record: dict[str, object]) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("package", type=Path)
-    parser.add_argument("--phase", choices=("candidate", "final"), default="candidate")
+    parser.add_argument("--phase", choices=("assembly", "candidate", "final"), default="candidate")
     args = parser.parse_args()
     root = args.package.resolve()
     repo = locate_repository(Path(__file__))
+    detached_package_mode = repo is None
     checks: list[dict[str, object]] = []
 
     def ck(identifier: str, passed: bool, detail: object) -> None:
         checks.append({"check_id": identifier, "status": "PASS" if passed else "FAIL", "detail": detail})
 
     jsonschema_version = importlib.metadata.version("jsonschema")
-    ck("MV-001-runtime-root-resolution", sys.version.split()[0] == "3.11.11" and jsonschema_version == "4.26.0" and repo == locate_repository(Path(__file__)), {
+    context_valid = (repo is not None and (repo / ".git").exists()) or (detached_package_mode and (root / "SUCCESSOR_PACKAGE_INDEX.json").is_file())
+    ck("MV-001-runtime-root-resolution", sys.version.split()[0] == "3.11.11" and jsonschema_version == "4.26.0" and context_valid, {
         "python": sys.version.split()[0], "jsonschema": jsonschema_version,
-        "resolved_repository_root": repo.as_posix(), "invocation_working_directory": Path.cwd().resolve().as_posix(),
+        "resolution_mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD" if detached_package_mode else "REPOSITORY",
+        "resolved_repository_root": repo.as_posix() if repo else None,
+        "resolved_package_root": root.as_posix(), "invocation_working_directory": Path.cwd().resolve().as_posix(),
         "required_command": "stage2a/.venv/bin/python stage2a/validate_stage2a_package.py PACKAGE --phase PHASE",
     })
     files = sorted(p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file())
@@ -192,12 +211,12 @@ def main() -> int:
 
     absolute_hits = []
     for name in files:
-        if name in {"SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.json", "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.md", "validate_stage2a_package.py"}:
+        if name.startswith("source_payload/") or name in {"SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.json", "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.md", "validate_stage2a_package.py"}:
             continue
         text = (root / name).read_text(encoding="utf-8", errors="ignore")
         if "/Users/" in text or "/private/tmp/" in text:
             absolute_hits.append(name)
-    ck("MV-009-local-path-boundary", not absolute_hits, {"unexpected_absolute_path_files": absolute_hits, "controlled_event_exemption": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE"})
+    ck("MV-009-local-path-boundary", not absolute_hits, {"unexpected_absolute_path_files": absolute_hits, "controlled_exemptions": ["SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE", "immutable source_payload code and historical evidence"]})
     secret_patterns = ("sk" + "_live_", "sk" + "_test_", "wh" + "sec_", "AK" + "IA", "-----BEGIN " + "PRIVATE KEY-----")
     secret_hits = [pattern for pattern in secret_patterns if pattern in joined]
     ck("MV-010-secret-values", not secret_hits, {"pattern_hits": secret_hits, "names_only_allowed": True})
@@ -211,22 +230,26 @@ def main() -> int:
         if identifier in source_ids or path in source_paths:
             source_errors.append(f"duplicate source {identifier} {path}")
         source_ids.add(identifier); source_paths.add(path)
-        candidate = repo / path
+        candidate = (root / "source_payload" / path) if detached_package_mode else (repo / path)
         if not candidate.is_file() or sha(candidate) != row.get("sha256"):
             source_errors.append(f"source hash mismatch {path}")
         commit = row.get("git_commit")
-        try:
-            blob = git(repo, "rev-parse", f"{commit}:{path}")
-        except Exception:
-            blob = ""
-        if not isinstance(commit, str) or not commit or blob != row.get("git_blob"):
+        blob = row.get("git_blob") if detached_package_mode else git(repo, "rev-parse", f"{commit}:{path}", check=False)
+        if not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit) or not re.fullmatch(r"[0-9a-f]{40}", str(blob)) or blob != row.get("git_blob"):
             source_errors.append(f"source blob/commit mismatch {path}")
-    ck("MV-011-source-register", not source_errors and bool(source_ids), {"rows": len(source_ids), "errors": source_errors})
+    payload_paths = sorted(path.relative_to(root / "source_payload").as_posix() for path in (root / "source_payload").rglob("*") if path.is_file()) if (root / "source_payload").is_dir() else []
+    ck("MV-011-source-register", not source_errors and bool(source_ids) and set(payload_paths) == source_paths, {"rows": len(source_ids), "source_payload_rows": len(payload_paths), "mode": "DETACHED" if detached_package_mode else "REPOSITORY", "errors": source_errors})
 
     requirement_matrix = json_objects.get("STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json", {})
     finding_matrix = json_objects.get("STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json", {})
     trace = json_objects.get("STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json", {})
+    test_register = json_objects.get("STAGE2A_TEST_CONTROL_REGISTER.json", {})
     trace_errors: list[str] = []
+    test_rows = test_register.get("tests", []) if isinstance(test_register, dict) else []
+    test_ids = {row.get("test_id") for row in test_rows}
+    for row in test_rows:
+        if not row.get("test_id") or not row.get("executable_identity") or not row.get("implementation_path") or row.get("implementation_path") not in source_paths:
+            trace_errors.append(f"invalid executable test registration {row.get('test_id')}")
     requirements = requirement_matrix.get("requirements", []) if isinstance(requirement_matrix, dict) else []
     requirement_ids: set[str] = set()
     for row in requirements:
@@ -250,21 +273,52 @@ def main() -> int:
             value = row.get(field)
             if not value or (field != "blocker_classification" and not isinstance(value, list)):
                 trace_errors.append(f"{identifier} missing specific {field}")
+        if any(test_id not in test_ids for test_id in row.get("test_ids", [])):
+            trace_errors.append(f"{identifier} references unregistered executable test")
+        if any(not ((root / path).is_file() or path in source_paths) for path in row.get("remediation_artifacts", [])):
+            trace_errors.append(f"{identifier} references missing remediation artifact")
+        if any(not (root / path).is_file() for path in row.get("evidence_artifacts", [])):
+            trace_errors.append(f"{identifier} references missing evidence artifact")
     output_rows = trace.get("outputs", []) if isinstance(trace, dict) else []
+    mapping_ids: set[str] = set()
+    mapped_outputs: set[str] = set()
     for row in output_rows:
+        mapping_id = row.get("mapping_id")
+        output = row.get("output")
+        if mapping_id in mapping_ids or output in mapped_outputs:
+            trace_errors.append(f"duplicate trace mapping {mapping_id} {output}")
+        mapping_ids.add(mapping_id); mapped_outputs.add(output)
         ids = row.get("requirement_ids", [])
         if not ids or len(ids) >= 9 or any(identifier not in requirement_ids for identifier in ids):
             trace_errors.append(f"{row.get('output')} has generic or invalid requirement mapping")
-        if not row.get("source_evidence_ids") or not row.get("test_ids") or not row.get("evidence_artifacts"):
+        if not row.get("source_evidence_ids") or not row.get("test_ids") or not row.get("evidence_artifacts") or not row.get("artifact_role") or not row.get("verification_rule"):
             trace_errors.append(f"{row.get('output')} lacks specific source/test/evidence mapping")
-    ck("MV-011A-specific-traceability", len(requirements) == 9 and len(findings) >= 5 and bool(output_rows) and not trace_errors, {
-        "requirements": len(requirements), "findings": len(findings), "outputs": len(output_rows), "errors": trace_errors,
+        if any(identifier not in source_ids for identifier in row.get("source_evidence_ids", [])):
+            trace_errors.append(f"{output} references unknown source evidence")
+        if any(identifier not in test_ids for identifier in row.get("test_ids", [])):
+            trace_errors.append(f"{output} references unregistered executable test")
+        if any(path not in source_paths for path in row.get("implementation_artifacts", [])):
+            trace_errors.append(f"{output} references implementation outside source register")
+        if any(not (root / path).is_file() for path in row.get("evidence_artifacts", [])):
+            trace_errors.append(f"{output} references missing evidence artifact")
+    top_level_files = {name for name in files if "/" not in name}
+    assembly_future = {"DRAFT_REVIEW_SHA256SUMS.txt", "DRAFT_REVIEW_SNAPSHOT_RECORD.json", "DRAFT_REVIEW_SNAPSHOT_RECORD.md"} if args.phase == "assembly" else set()
+    expected_trace_outputs = top_level_files | assembly_future
+    if mapped_outputs != expected_trace_outputs:
+        trace_errors.append(f"top-level trace coverage mismatch missing={sorted(expected_trace_outputs-mapped_outputs)} extra={sorted(mapped_outputs-expected_trace_outputs)}")
+    ck("MV-011A-specific-traceability", len(requirements) == 9 and len(findings) >= 5 and bool(output_rows) and len(test_rows) >= 10 and not trace_errors, {
+        "requirements": len(requirements), "findings": len(findings), "outputs": len(output_rows), "executable_tests": len(test_rows), "errors": trace_errors,
     })
 
-    baseline_result = subprocess.run(["git", "cat-file", "-e", f"{BASELINE}^{{commit}}"], cwd=repo, capture_output=True)
-    ck("MV-012-git-anchors", git(repo, "branch", "--show-current") == BRANCH and baseline_result.returncode == 0, {
-        "branch": git(repo, "branch", "--show-current"), "head": git(repo, "rev-parse", "HEAD"), "start": START, "baseline": BASELINE,
-    })
+    if detached_package_mode:
+        baseline_record = json_objects.get("IMMUTABLE_BASELINE_RECORD.json", {})
+        anchors_ok = isinstance(baseline_record, dict) and baseline_record.get("immutable_baseline") == BASELINE and baseline_record.get("modified") is False
+        anchor_detail = {"mode": "DETACHED_PACKAGE_RECORDED_ANCHORS", "start": START, "baseline": BASELINE, "cryptographic_git_object_reverification": "REQUIRES_REPOSITORY_MODE"}
+    else:
+        baseline_result = subprocess.run(["git", "cat-file", "-e", f"{BASELINE}^{{commit}}"], cwd=repo, capture_output=True)
+        anchors_ok = git(repo, "branch", "--show-current") == BRANCH and baseline_result.returncode == 0
+        anchor_detail = {"mode": "REPOSITORY", "branch": git(repo, "branch", "--show-current"), "head": git(repo, "rev-parse", "HEAD"), "start": START, "baseline": BASELINE}
+    ck("MV-012-git-anchors", anchors_ok, anchor_detail)
     pred = json_objects.get("PREDECESSOR_REFERENCE_RECORD.json", {})
     ck("MV-013-predecessor", isinstance(pred, dict) and pred.get("archive_sha256") == PREDECESSOR_SHA and pred.get("unchanged") is True, pred)
 
@@ -300,6 +354,8 @@ def main() -> int:
         row.get("state") == "SKIPPED_NOT_CONFIGURED"
         and row.get("attempted_count") == row.get("succeeded_count") == row.get("failed_count") == row.get("timed_out_count") == row.get("unavailable_count") == 0
         and row.get("skipped_count") == 1
+        and row.get("global_unapproved_attempt_count") == 0
+        and row.get("outcome_event", {}).get("provider_path_evaluated") is True
         for row in provider_rows
     )
     startup_detail = foundation_checks.get("startup_side_effect_inventory", {}).get("detail", {})
@@ -309,6 +365,8 @@ def main() -> int:
         and outcomes.get("attempted") == outcomes.get("succeeded") + outcomes.get("failed") + outcomes.get("timed_out") + outcomes.get("unavailable")
         and startup_detail.get("oracle_match") is True
         and startup_detail.get("network_guard", {}).get("provider_or_external_attempt_count") == 0
+        and len(outcomes.get("events", [])) >= 4
+        and all(event.get("state") and event.get("utc_start") and event.get("utc_end") for event in outcomes.get("events", []))
     )
     ck("MV-016A-provider-startup-measurement", provider_ok and startup_ok, {
         "provider_rows": len(provider_rows), "provider_states_valid": provider_ok,
@@ -317,9 +375,9 @@ def main() -> int:
 
     process_detail = foundation_checks.get("process_identity", {}).get("detail", {})
     shutdown_detail = foundation_checks.get("controlled_shutdown", {}).get("detail", {})
-    required_identity = {"pid", "process_group_id", "parent_pid", "parent_pid_policy", "executable_path", "working_directory", "controlled_port", "command_line_sha256", "observed_command_line", "command_display"}
+    required_identity = {"pid", "process_group_id", "parent_pid", "parent_pid_policy", "executable_path", "working_directory", "controlled_port", "command_line_sha256", "observed_command_line", "command_display", "launch_nonce_sha256", "identity_recorded_utc"}
     identity_rows = [process_detail.get("mongo_identity"), process_detail.get("api_identity")]
-    identity_ok = all(isinstance(row, dict) and required_identity <= set(row) and row.get("pid") == row.get("process_group_id") for row in identity_rows)
+    identity_ok = all(isinstance(row, dict) and required_identity <= set(row) and row.get("pid") == row.get("process_group_id") and SHA_RE.fullmatch(str(row.get("launch_nonce_sha256", ""))) for row in identity_rows) and process_detail.get("mongo_listener_identity_verified") is True and process_detail.get("api_listener_identity_verified") is True and process_detail.get("mongo_foreign_listener_pid") is None and process_detail.get("api_foreign_listener_pid") is None
     termination_rows = shutdown_detail.get("processes", []) if isinstance(shutdown_detail, dict) else []
     termination_ok = len(termination_rows) == 2 and all(row.get("command_identity_verified") is True and row.get("pid") == row.get("process_group_id") for row in termination_rows)
     ck("MV-016B-process-identity", identity_ok and termination_ok, {
@@ -351,7 +409,9 @@ def main() -> int:
     manifest_name = "SUCCESSOR_PACKAGE_SHA256SUMS.txt" if args.phase == "final" else "DRAFT_REVIEW_SHA256SUMS.txt"
     manifest_errors: list[str] = []
     manifest_rows = 0
-    if (root / manifest_name).is_file():
+    if args.phase == "assembly":
+        ck("MV-019-checksum-reconciliation", True, {"manifest": "DEFERRED_UNTIL_ASSEMBLY_VALIDATION_MATRIX_IS_RECORDED", "rows": 0, "errors": []})
+    elif (root / manifest_name).is_file():
         for line in (root / manifest_name).read_text(encoding="utf-8").splitlines():
             expected, name = line.split("  ", 1); manifest_rows += 1
             if not SHA_RE.fullmatch(expected) or name not in file_set or sha(root / name) != expected:

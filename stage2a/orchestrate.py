@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import ctypes
+import datetime as dt
 import hashlib
 import json
 import os
@@ -15,6 +16,7 @@ import subprocess
 import sys
 import time
 import struct
+import uuid
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
@@ -41,6 +43,8 @@ def _read_record(pid_file: Path) -> dict[str, object] | None:
             or not isinstance(value.get("working_directory"), str)
             or not isinstance(value.get("controlled_port"), int)
             or not isinstance(value.get("observed_command_line"), str)
+            or not isinstance(value.get("launch_nonce_sha256"), str)
+            or not isinstance(value.get("identity_recorded_utc"), str)
             or value.get("parent_pid_policy") != "CREATION_PARENT_OR_INIT_REPARENT_ONLY"
         ):
             return None
@@ -92,9 +96,22 @@ def _ps_identity(pid: int) -> dict[str, object] | None:
             return None
         argv.append(raw[cursor:end].decode(errors="surrogateescape"))
         cursor = end + 1
+    launch_nonce = None
+    while cursor < len(raw):
+        end = raw.find(b"\0", cursor)
+        if end < 0:
+            break
+        item = raw[cursor:end].decode(errors="surrogateescape")
+        if item.startswith("STAGE2A_LAUNCH_NONCE="):
+            launch_nonce = item.split("=", 1)[1]
+            break
+        cursor = end + 1
+    if not launch_nonce:
+        return None
     return {
         "parent_pid": int(fields["R"]), "process_group_id": int(fields["g"]),
         "command_line": shlex.join(argv), "observed_executable": str(Path(observed_executable).resolve()),
+        "launch_nonce_sha256": hashlib.sha256(launch_nonce.encode()).hexdigest(),
     }
 
 
@@ -103,7 +120,7 @@ def _executable_path(command: list[str]) -> str:
     return str(candidate.resolve())
 
 
-def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: Path, port: int) -> None:
+def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: Path, port: int, launch_nonce: str) -> None:
     process_group_id = os.getpgid(pid)
     if process_group_id != pid:
         raise RuntimeError(f"{kind} did not start as its own process group")
@@ -112,6 +129,9 @@ def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: 
         raise RuntimeError(f"{kind} process identity unavailable or conflicting at creation")
     if identity["observed_executable"] != _executable_path(command):
         raise RuntimeError(f"{kind} executable identity unavailable or conflicting at creation")
+    launch_nonce_sha256 = hashlib.sha256(launch_nonce.encode()).hexdigest()
+    if identity["launch_nonce_sha256"] != launch_nonce_sha256:
+        raise RuntimeError(f"{kind} launch-nonce identity unavailable or conflicting at creation")
     command_line_sha256 = hashlib.sha256(str(identity["command_line"]).encode()).hexdigest()
     pid_file.write_text(json.dumps({
         "owner": "ES-PKG-2026-004-V003",
@@ -123,6 +143,8 @@ def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: 
         "executable_path": _executable_path(command),
         "working_directory": str(cwd.resolve()),
         "controlled_port": port,
+        "launch_nonce_sha256": launch_nonce_sha256,
+        "identity_recorded_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "command_line_sha256": command_line_sha256,
         "observed_command_line": identity["command_line"],
         "command_display": shlex.join(command),
@@ -201,6 +223,7 @@ def _expected(record: dict[str, object] | None, kind: str) -> bool:
         or identity["parent_pid"] not in {record.get("parent_pid"), 1}
         or hashlib.sha256(str(identity["command_line"]).encode()).hexdigest() != record.get("command_line_sha256")
         or identity["observed_executable"] != record.get("executable_path")
+        or identity["launch_nonce_sha256"] != record.get("launch_nonce_sha256")
         or str(record.get("executable_path")) not in files
         or str(record.get("working_directory")) not in files
     ):
@@ -350,15 +373,17 @@ def start(profile: str = "full", failpoint: str | None = None) -> dict[str, obje
 
     mongo_log = (RUNTIME / "logs/mongod.log").open("ab")
     mongo_command = ["mongod", "--dbpath", str(RUNTIME / "mongo"), "--port", str(MONGO_PORT), "--bind_ip", "127.0.0.1", "--nounixsocket", "--quiet"]
+    mongo_nonce = uuid.uuid4().hex
+    mongo_env = env | {"STAGE2A_LAUNCH_NONCE": mongo_nonce}
     mongo = subprocess.Popen(
         mongo_command,
         stdout=mongo_log,
         stderr=subprocess.STDOUT,
-        env=env,
+        env=mongo_env,
         start_new_session=True,
     )
     try:
-        _write_record(MONGO_PID, mongo.pid, "mongo", mongo_command, ROOT, MONGO_PORT)
+        _write_record(MONGO_PID, mongo.pid, "mongo", mongo_command, ROOT, MONGO_PORT, mongo_nonce)
     except Exception:
         _contain_unrecorded_spawn(mongo, "mongo")
         MONGO_PID.unlink(missing_ok=True)
@@ -379,9 +404,11 @@ def start(profile: str = "full", failpoint: str | None = None) -> dict[str, obje
             command = [sys.executable, str(ROOT / "foundation_api.py")]
             cwd = ROOT
             ready_url = "http://127.0.0.1:8019/health/ready"
-        api = subprocess.Popen(command, stdout=api_log, stderr=subprocess.STDOUT, env=env, cwd=cwd, start_new_session=True)
+        api_nonce = uuid.uuid4().hex
+        api_env = env | {"STAGE2A_LAUNCH_NONCE": api_nonce}
+        api = subprocess.Popen(command, stdout=api_log, stderr=subprocess.STDOUT, env=api_env, cwd=cwd, start_new_session=True)
         try:
-            _write_record(API_PID, api.pid, "api", command, cwd, API_PORT)
+            _write_record(API_PID, api.pid, "api", command, cwd, API_PORT, api_nonce)
         except Exception:
             _contain_unrecorded_spawn(api, "api")
             API_PID.unlink(missing_ok=True)
@@ -427,16 +454,22 @@ def status() -> dict[str, object]:
     api_record = _read_record(API_PID)
     mongo_listener = _listener_pid(MONGO_PORT)
     api_listener = _listener_pid(API_PORT)
+    mongo_expected = _alive(mongo_record, "mongo")
+    api_expected = _alive(api_record, "api")
+    mongo_listener_bound = bool(mongo_record and mongo_listener == mongo_record.get("pid") and mongo_expected)
+    api_listener_bound = bool(api_record and api_listener == api_record.get("pid") and api_expected)
     return {
         "mongo_pid": mongo_record.get("pid") if mongo_record else None,
-        "mongo_alive": _alive(mongo_record, "mongo"),
+        "mongo_alive": mongo_listener_bound,
         "mongo_port_open": _port_open("127.0.0.1", MONGO_PORT),
-        "mongo_foreign_listener_pid": mongo_listener if mongo_record is None and mongo_listener else None,
+        "mongo_listener_identity_verified": mongo_listener_bound,
+        "mongo_foreign_listener_pid": mongo_listener if mongo_listener and not mongo_listener_bound else None,
         "mongo_identity": mongo_record,
         "api_pid": api_record.get("pid") if api_record else None,
-        "api_alive": _alive(api_record, "api"),
+        "api_alive": api_listener_bound,
         "api_port_open": _port_open("127.0.0.1", API_PORT),
-        "api_foreign_listener_pid": api_listener if api_record is None and api_listener else None,
+        "api_listener_identity_verified": api_listener_bound,
+        "api_foreign_listener_pid": api_listener if api_listener and not api_listener_bound else None,
         "api_identity": api_record,
         "profile": API_PROFILE.read_text(encoding="utf-8").strip() if API_PROFILE.exists() else None,
     }

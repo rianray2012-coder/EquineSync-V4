@@ -20,7 +20,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 import cleanup as cleanup_cli
 import orchestrate
-from evidence_capture import capture, redact_output, validate_record_semantics
+from evidence_capture import capture, redact_output, sensitive_output_matches, validate_record_semantics
 from lib.control import (
     COLLECTION,
     ENV_FILE,
@@ -106,6 +106,40 @@ def main() -> int:
     def ck(name: str, ok: bool, detail: object) -> None:
         checks.append({"check": name, "status": "PASS" if ok else "FAIL", "detail": detail})
 
+    startup_attempt_events: list[dict[str, object]] = []
+
+    def measured_start(attempt_id: str, profile: str, failpoint: str | None = None) -> dict[str, object]:
+        began = dt.datetime.now(dt.timezone.utc)
+        event: dict[str, object] = {
+            "attempt_id": attempt_id, "profile": profile, "attempted": 1,
+            "succeeded": 0, "failed": 0, "skipped": 0, "timed_out": 0, "unavailable": 0,
+        }
+        try:
+            result = orchestrate.start(profile, failpoint)
+        except TimeoutError as exc:
+            event.update({"state": "TIMED_OUT", "timed_out": 1, "error_type": type(exc).__name__})
+            raise
+        except (FileNotFoundError, ModuleNotFoundError) as exc:
+            event.update({"state": "UNAVAILABLE", "unavailable": 1, "error_type": type(exc).__name__})
+            raise
+        except Exception as exc:
+            event.update({"state": "FAILED", "failed": 1, "error_type": type(exc).__name__})
+            raise
+        else:
+            event.update({"state": "SUCCEEDED", "succeeded": 1})
+            return result
+        finally:
+            event["utc_start"] = began.isoformat()
+            event["utc_end"] = dt.datetime.now(dt.timezone.utc).isoformat()
+            startup_attempt_events.append(event)
+
+    def startup_summary() -> dict[str, object]:
+        states = ("attempted", "succeeded", "failed", "skipped", "timed_out", "unavailable")
+        totals = {state: sum(int(event[state]) for event in startup_attempt_events) for state in states}
+        totals["arithmetic_valid"] = totals["attempted"] == totals["succeeded"] + totals["failed"] + totals["timed_out"] + totals["unavailable"]
+        totals["events"] = deepcopy(startup_attempt_events)
+        return totals
+
     env = load_env()
     posture = validate_env(env)
     attestation = ambient_name_attestation()
@@ -167,7 +201,7 @@ def main() -> int:
 
     pre_stop = orchestrate.stop()
     try:
-        orchestrate.start("full", "after_datastore_ready")
+        measured_start("S2A-START-001-INTERRUPTED_FAILPOINT", "full", "after_datastore_ready")
         interrupted_denied = False
         interrupted_error = "failpoint did not fire"
     except RuntimeError as exc:
@@ -180,10 +214,16 @@ def main() -> int:
         "precondition_stop": pre_stop,
     })
 
-    start = orchestrate.start("full")
+    start = measured_start("S2A-START-002-COLD_FULL_APPLICATION", "full")
+    startup_attempt_events.append({
+        "attempt_id": "S2A-START-ALT-FOUNDATION-PROFILE", "profile": "foundation",
+        "attempted": 0, "succeeded": 0, "failed": 0, "skipped": 1, "timed_out": 0, "unavailable": 0,
+        "state": "SKIPPED_NOT_SELECTED_FULL_APPLICATION_REQUIRED",
+        "utc_start": dt.datetime.now(dt.timezone.utc).isoformat(), "utc_end": dt.datetime.now(dt.timezone.utc).isoformat(),
+    })
     ck("cold_start_full_application", start["profile"] == "full" and start["health"].get("status") == "ok", start)
     status = orchestrate.status()
-    ck("process_identity", status["mongo_alive"] and status["api_alive"] and status["mongo_port_open"] and status["api_port_open"], status)
+    ck("process_identity", status["mongo_alive"] and status["api_alive"] and status["mongo_port_open"] and status["api_port_open"] and status["mongo_listener_identity_verified"] and status["api_listener_identity_verified"] and status["mongo_foreign_listener_pid"] is None and status["api_foreign_listener_pid"] is None, status)
 
     client = mongo_client(env)
     db = client[env["DB_NAME"]]
@@ -200,7 +240,8 @@ def main() -> int:
         and len(startup_inventory["collections"]) == startup_oracle["expected_collection_count"]
         and startup_documents == startup_oracle["expected_document_count"]
     )
-    ck("startup_side_effect_inventory", startup_oracle_match and all(required_log_markers.values()) and not any(prohibited_log_markers.values()) and network_guard["provider_or_external_attempt_count"] == 0, {
+    startup_attempt_summary = startup_summary()
+    ck("startup_side_effect_inventory", startup_oracle_match and all(required_log_markers.values()) and not any(prohibited_log_markers.values()) and network_guard["provider_or_external_attempt_count"] == 0 and startup_attempt_summary["arithmetic_valid"], {
         "profile": "full EquineSync application",
         "profile_control": env["STAGE2A_STARTUP_PROFILE"],
         "catalog_materialization": "DISABLED_BY_STAGE2A_WRAPPER",
@@ -213,11 +254,8 @@ def main() -> int:
         "required_log_markers": required_log_markers,
         "prohibited_log_markers": prohibited_log_markers,
         "network_guard": network_guard,
-        "attempt_outcomes": {
-            "attempted": 1, "succeeded": 1, "failed": 0, "skipped": 7,
-            "timed_out": 0, "unavailable": 0,
-            "skipped_basis": "six disabled background categories plus billing catalog materialization disabled by the controlled wrapper"
-        },
+        "attempt_outcomes": startup_attempt_summary,
+        "disabled_side_effect_paths": {"skipped": 7, "basis": "six disabled background categories plus billing catalog materialization disabled by the controlled wrapper"},
         "known_side_effect_paths": startup_oracle["known_side_effect_paths"],
         "background_flags": {name: env[name] for name in sorted(k for k in env if k.startswith("DISABLE_"))},
         "auto_seed": env["ALLOW_AUTO_SEED"],
@@ -302,7 +340,9 @@ def main() -> int:
     forced_failure = state_digest(db)
     client.close()
     rollback_stop = orchestrate.stop()
-    rollback_restart = orchestrate.start("full")
+    rollback_restart = measured_start("S2A-START-003-ROLLBACK_RESTART", "full")
+    startup_attempt_summary.clear()
+    startup_attempt_summary.update(startup_summary())
     client = mongo_client(env)
     db = client[env["DB_NAME"]]
     restored = restore_snapshot(db)
@@ -335,13 +375,22 @@ def main() -> int:
     contradictory = deepcopy(passed_example); contradictory["actual_result"]["exit_status"] = 9
     reverse = deepcopy(passed_example); reverse["utc_start"], reverse["utc_end"] = reverse["utc_end"], reverse["utc_start"]
     bad_stream = deepcopy(passed_example); bad_stream["evidence_file_hashes"]["stdout"] = "0" * 64
+    weak_meaning = deepcopy(passed_example); weak_meaning["required_meaning"] = ["pass"]
     semantic_negative_results = {
         "contradictory_exit_rejected": bool(validate_record_semantics(rehash(contradictory), ROOT)),
         "reverse_chronology_rejected": bool(validate_record_semantics(rehash(reverse), ROOT)),
         "stream_hash_mismatch_rejected": bool(validate_record_semantics(rehash(bad_stream), ROOT)),
+        "weak_substring_meaning_rejected": bool(validate_record_semantics(rehash(weak_meaning), ROOT)),
     }
-    redacted_probe, redaction_replacements = redact_output("operation=evidence-check api_key=synthetic-sensitive result=pass\n")
-    semantic_negative_results["sensitive_value_redacted"] = redaction_replacements == 1 and "api_key=<REDACTED>" in redacted_probe
+    redaction_probes = [
+        "operation=evidence-check api_key=synthetic-sensitive result=pass\n",
+        "\"password\": \"correct horse battery staple\"\n",
+        "password=correct horse battery staple\n",
+        "bearer=supersecret\n",
+    ]
+    redacted_values = [redact_output(value) for value in redaction_probes]
+    redacted_probe, redaction_replacements = redacted_values[0]
+    semantic_negative_results["sensitive_value_redacted"] = redaction_replacements == 1 and "api_key=<REDACTED>" in redacted_probe and all(count >= 1 and not sensitive_output_matches(redacted) for redacted, count in redacted_values)
     semantic_negative_results["required_meaning_preserved"] = "operation=evidence-check" in redacted_probe and "result=pass" in redacted_probe
     blank = {name: "" for name in schema["required"]}
     blank_rejected = bool(list(validator.iter_errors(blank)))
@@ -356,23 +405,24 @@ def main() -> int:
     })
 
     final_network_guard = json.loads((RUNTIME / "network-guard.json").read_text(encoding="utf-8"))
-    providers = provider_register(env, measured_unapproved_attempts=final_network_guard["provider_or_external_attempt_count"])
+    providers = provider_register(env, final_network_guard)
     configured = [x for x in providers if x["configured"]]
     provider_outcomes_valid = all(
         x["attempted_count"] == x["succeeded_count"] == x["failed_count"] == x["timed_out_count"] == x["unavailable_count"] == 0
         and x["skipped_count"] == 1 and x["state"] == "SKIPPED_NOT_CONFIGURED"
         for x in providers
     )
+    provider_totals = {
+        state: sum(int(row[f"{state}_count"]) for row in providers)
+        for state in ("attempted", "succeeded", "failed", "skipped", "timed_out", "unavailable")
+    }
     ck("provider_denial", not configured and provider_outcomes_valid and final_network_guard["provider_or_external_attempt_count"] == 0, {
         "providers": len(providers),
         "configuration_names": len(PROVIDER_NAMES),
         "register": providers,
         "configured": [x["provider"] for x in configured],
-        "attempt_count": 0,
-        "outcome_totals": {
-            "attempted": 0, "succeeded": 0, "failed": 0,
-            "skipped": len(providers), "timed_out": 0, "unavailable": 0
-        },
+        "attempt_count": provider_totals["attempted"],
+        "outcome_totals": provider_totals,
         "network_guard": final_network_guard,
         "attempt_count_basis": "application-level socket instrumentation measured zero provider/external attempts; every provider was explicitly classified SKIPPED_NOT_CONFIGURED; exact-port sandbox and process socket inventory independently corroborated zero external activity",
     })
@@ -427,7 +477,7 @@ def main() -> int:
         "checks": checks,
         "check_count": len(checks),
         "pass_count": len(checks) - len(failed),
-        "provider_attempt_count": 0,
+        "provider_attempt_count": provider_totals["attempted"],
         "provider_attempt_count_basis": "application-level socket instrumentation measured zero provider/external attempts; every provider has an explicit skipped state; exact-port sandbox and full-process socket inventory independently corroborated zero",
         "production_access_count": 0,
         "production_access_count_basis": "loopback-only datastore/API and exact-port sandbox",
@@ -442,7 +492,7 @@ def main() -> int:
     }
     (EVIDENCE / "FOUNDATION_VALIDATION.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     (EVIDENCE / "FOUNDATION_VALIDATION.txt").write_text(
-        f"validation={report['validation']}\nscore={report['pass_count']}/{report['check_count']}\nprovider_attempt_count=0\nproduction_access_count=0\nlive_data_access_count=0\ncp3_suites_executed=0\ngolden_paths_executed=0\nbusiness_workflows_executed=0\n",
+        f"validation={report['validation']}\nscore={report['pass_count']}/{report['check_count']}\nprovider_attempt_count={report['provider_attempt_count']}\nproduction_access_count=0\nlive_data_access_count=0\ncp3_suites_executed=0\ngolden_paths_executed=0\nbusiness_workflows_executed=0\n",
         encoding="utf-8",
     )
     print(json.dumps(report, indent=2))

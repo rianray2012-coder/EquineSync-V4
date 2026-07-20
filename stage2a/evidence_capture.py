@@ -16,8 +16,10 @@ from jsonschema import Draft202012Validator, FormatChecker
 from lib.control import ENV_FILE, EVIDENCE, REPO, ROOT, canonical, digest, file_sha, load_env, validate_env
 
 SCHEMA_PATH = ROOT / "execution-evidence-schema.json"
-SENSITIVE = re.compile(r"(?i)(secret|token|password|api[_-]?key|credential|authorization)")
-SENSITIVE_ASSIGNMENT = re.compile(r"(?i)\b(secret|token|password|api[_-]?key|credential|authorization)\b(\s*[:=]\s*)([^\s,;]+)")
+SENSITIVE_KEY = r"(?:secret|token|password|api[_-]?key|credential|authorization|bearer)"
+SENSITIVE = re.compile(rf"(?i){SENSITIVE_KEY}")
+SENSITIVE_QUOTED_ASSIGNMENT = re.compile(rf"(?i)(?P<prefix>[\"']?{SENSITIVE_KEY}[\"']?\s*[:=]\s*)(?P<quote>[\"'])(?P<value>.*?)(?P=quote)")
+SENSITIVE_ASSIGNMENT = re.compile(rf"(?im)(?P<prefix>\b{SENSITIVE_KEY}\b\s*[:=]\s*)(?P<value>.*?)(?=\s+[A-Za-z_][A-Za-z0-9_-]*\s*[:=]|\s*$|[,;])")
 KNOWN_SECRET_VALUE = re.compile(r"(?:sk_(?:live|test)_[A-Za-z0-9_-]+|whsec_[A-Za-z0-9_-]+|AKIA[A-Z0-9]{12,})")
 
 
@@ -64,13 +66,21 @@ def sanitize_arguments(arguments: list[str]) -> list[str]:
 def redact_output(value: str) -> tuple[str, int]:
     replacements = 0
 
-    def assignment(match: re.Match[str]) -> str:
+    def quoted_assignment(match: re.Match[str]) -> str:
         nonlocal replacements
-        if match.group(3) == "<REDACTED>":
+        if match.group("value") == "<REDACTED>":
             return match.group(0)
         replacements += 1
-        return f"{match.group(1)}{match.group(2)}<REDACTED>"
+        return f"{match.group('prefix')}{match.group('quote')}<REDACTED>{match.group('quote')}"
 
+    def assignment(match: re.Match[str]) -> str:
+        nonlocal replacements
+        if match.group("value").strip() == "<REDACTED>":
+            return match.group(0)
+        replacements += 1
+        return f"{match.group('prefix')}<REDACTED>"
+
+    value = SENSITIVE_QUOTED_ASSIGNMENT.sub(quoted_assignment, value)
     value = SENSITIVE_ASSIGNMENT.sub(assignment, value)
     value, token_count = KNOWN_SECRET_VALUE.subn("<REDACTED>", value)
     return value, replacements + token_count
@@ -78,9 +88,12 @@ def redact_output(value: str) -> tuple[str, int]:
 
 def sensitive_output_matches(value: str) -> list[str]:
     matches = []
+    for match in SENSITIVE_QUOTED_ASSIGNMENT.finditer(value):
+        if match.group("value") != "<REDACTED>":
+            matches.append("quoted_sensitive_assignment")
     for match in SENSITIVE_ASSIGNMENT.finditer(value):
-        if match.group(3) != "<REDACTED>":
-            matches.append(match.group(1).lower())
+        if match.group("value").strip() != "<REDACTED>":
+            matches.append("sensitive_assignment")
     if KNOWN_SECRET_VALUE.search(value):
         matches.append("known_secret_value_pattern")
     return sorted(set(matches))
@@ -123,11 +136,19 @@ def validate_record_semantics(record: dict[str, object], evidence_root: Path) ->
         if sensitive_output_matches(content):
             errors.append(f"{stream} contains unredacted sensitive output")
     required_meaning = record.get("required_meaning") if isinstance(record.get("required_meaning"), list) else []
-    if not required_meaning or any(str(marker) not in combined for marker in required_meaning):
-        errors.append("required meaning is absent after redaction")
+    lines = set(combined.splitlines())
+    if not required_meaning or any(str(marker) not in lines for marker in required_meaning):
+        errors.append("required exact-line meaning is absent after redaction")
     redaction = record.get("redaction_evidence") if isinstance(record.get("redaction_evidence"), dict) else {}
-    if redaction.get("meaning_preserved") is not True:
-        errors.append("redaction meaning-preservation attestation absent")
+    after_digest = hashlib.sha256(combined.encode()).hexdigest()
+    exact_matches = {str(marker): str(marker) in lines for marker in required_meaning}
+    if (
+        redaction.get("meaning_preserved") is not True
+        or redaction.get("semantic_projection_sha256_before") != redaction.get("semantic_projection_sha256_after")
+        or redaction.get("semantic_projection_sha256_after") != after_digest
+        or redaction.get("required_exact_line_matches") != exact_matches
+    ):
+        errors.append("objective redaction projection or exact-line meaning proof failed")
     core = dict(record)
     recorded_hash = core.pop("record_content_sha256", "")
     if hashlib.sha256(canonical(core)).hexdigest() != recorded_hash:
@@ -160,6 +181,12 @@ def capture(
     err = err_dir / f"{run_id}.txt"
     safe_stdout, stdout_replacements = redact_output(proc.stdout)
     safe_stderr, stderr_replacements = redact_output(proc.stderr)
+    projected_stdout_before, _ = redact_output(proc.stdout)
+    projected_stderr_before, _ = redact_output(proc.stderr)
+    projected_before = projected_stdout_before + projected_stderr_before
+    projected_after = safe_stdout + safe_stderr
+    exact_lines = set(projected_after.splitlines())
+    exact_matches = {marker: marker in exact_lines for marker in required_meaning}
     out.write_text(safe_stdout, encoding="utf-8")
     err.write_text(safe_stderr, encoding="utf-8")
     artifacts = {_relative_or_name(str(path)): file_sha(path) for path in sorted(input_paths)}
@@ -198,7 +225,11 @@ def capture(
             "stdout_replacements": stdout_replacements,
             "stderr_replacements": stderr_replacements,
             "unredacted_sensitive_match_count": len(sensitive_output_matches(safe_stdout + safe_stderr)),
-            "meaning_preserved": all(marker in safe_stdout + safe_stderr for marker in required_meaning),
+            "normalization_version": "S2A-REDACTION-PROJECTION-V2",
+            "semantic_projection_sha256_before": hashlib.sha256(projected_before.encode()).hexdigest(),
+            "semantic_projection_sha256_after": hashlib.sha256(projected_after.encode()).hexdigest(),
+            "required_exact_line_matches": exact_matches,
+            "meaning_preserved": all(exact_matches.values()) and projected_before == projected_after,
         },
         "result": "PASS" if proc.returncode == expected_exit else "FAIL",
         "execution_status": "EXECUTION_NOT_AUTHORIZED",

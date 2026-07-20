@@ -16,6 +16,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 from evidence_capture import redact_output, sanitize_arguments, sensitive_output_matches
 from lib.control import REPO, IsolationError, PROVIDER_NAMES, ROOT, digest, fixture_data, load_env, provider_register, validate_env
 from network_guard import _approved
+import orchestrate
 from orchestrate import _expected
 from validate_stage2a_package import locate_repository
 
@@ -36,12 +37,17 @@ class ControlTests(unittest.TestCase):
         value=fixture_data(); self.assertTrue(value["synthetic_only"]); self.assertEqual(digest(value),digest(fixture_data()))
 
     def test_provider_register_has_zero_attempts(self):
-        env=load_env(); register=provider_register(env)
+        env=load_env(); ledger={"guard":"STAGE2A_APPLICATION_NETWORK_GUARD","installed":True,"provider_or_external_attempt_count":0}; register=provider_register(env, ledger)
         self.assertTrue(all(
             x["attempted_count"] == x["succeeded_count"] == x["failed_count"] == x["timed_out_count"] == x["unavailable_count"] == 0
             and x["skipped_count"] == 1 and x["state"] == "SKIPPED_NOT_CONFIGURED" and not x["configured"]
             for x in register
         ))
+
+    def test_provider_register_fails_closed_on_unattributed_attempt(self):
+        ledger={"guard":"STAGE2A_APPLICATION_NETWORK_GUARD","installed":True,"provider_or_external_attempt_count":7}
+        with self.assertRaises(IsolationError):
+            provider_register(load_env(), ledger)
 
     def test_every_provider_name_fails_closed(self):
         for name in PROVIDER_NAMES:
@@ -73,6 +79,20 @@ class ControlTests(unittest.TestCase):
         self.assertIn("api_key=<REDACTED>", redacted)
         self.assertEqual(sensitive_output_matches(redacted), [])
 
+    def test_output_redaction_covers_quoted_multiword_and_bearer_values(self):
+        probes = [
+            ('"password": "correct horse battery staple"\n', '"password": "<REDACTED>"'),
+            ('password=correct horse battery staple\n', 'password=<REDACTED>'),
+            ('bearer=supersecret\n', 'bearer=<REDACTED>'),
+            ('Authorization: Bearer synthetic credential value\n', 'Authorization: <REDACTED>'),
+        ]
+        for raw, expected in probes:
+            with self.subTest(raw=raw):
+                redacted, replacements = redact_output(raw)
+                self.assertGreaterEqual(replacements, 1)
+                self.assertIn(expected, redacted)
+                self.assertEqual(sensitive_output_matches(redacted), [])
+
     def test_sandbox_is_exact_port_and_signal_scoped(self):
         profile=(ROOT/"config/loopback-only.sb").read_text()
         self.assertIn('(allow signal (target same-sandbox))',profile)
@@ -84,6 +104,7 @@ class ControlTests(unittest.TestCase):
         self.assertEqual(locate_repository(ROOT / "validate_stage2a_package.py"), REPO)
         packaged = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003/validate_stage2a_package.py"
         self.assertEqual(locate_repository(packaged), REPO)
+        self.assertIsNone(locate_repository(Path("/private/tmp/detached-candidate/validate_stage2a_package.py")))
 
     def test_application_network_guard_allows_only_controlled_endpoints(self):
         self.assertTrue(_approved(("127.0.0.1", 27029)))
@@ -99,16 +120,28 @@ class ControlTests(unittest.TestCase):
             "parent_pid_policy": "CREATION_PARENT_OR_INIT_REPARENT_ONLY",
             "executable_path": "/controlled/python", "working_directory": "/controlled/work",
             "controlled_port": 8019, "command_line_sha256": hashlib.sha256(observed.encode()).hexdigest(),
+            "launch_nonce_sha256": "a" * 64,
             "observed_command_line": observed, "command_display": observed,
         }
         files = "python 42 user cwd /controlled/work\npython 42 user txt /controlled/python"
-        identity = {"parent_pid": 7, "process_group_id": 42, "command_line": observed, "observed_executable": "/controlled/python"}
+        identity = {"parent_pid": 7, "process_group_id": 42, "command_line": observed, "observed_executable": "/controlled/python", "launch_nonce_sha256": "a" * 64}
         with patch("orchestrate._process_files", return_value=files), patch("orchestrate._ps_identity", return_value=identity):
             self.assertTrue(_expected(record, "api"))
             conflicted = deepcopy(record); conflicted["process_group_id"] = 43
             self.assertFalse(_expected(conflicted, "api"))
             conflicted = deepcopy(record); conflicted["command_line_sha256"] = "0" * 64
             self.assertFalse(_expected(conflicted, "api"))
+            conflicted = deepcopy(record); conflicted["launch_nonce_sha256"] = "0" * 64
+            self.assertFalse(_expected(conflicted, "api"))
+
+    def test_status_fails_closed_when_listener_pid_conflicts(self):
+        mongo = {"pid": 42}; api = {"pid": 43}
+        with patch("orchestrate._read_record", side_effect=[mongo, api]), patch("orchestrate._listener_pid", side_effect=[9002, 9001]), patch("orchestrate._alive", return_value=True), patch("orchestrate._port_open", return_value=True):
+            result = orchestrate.status()
+        self.assertFalse(result["mongo_alive"])
+        self.assertFalse(result["api_alive"])
+        self.assertEqual(result["mongo_foreign_listener_pid"], 9002)
+        self.assertEqual(result["api_foreign_listener_pid"], 9001)
 
 
 if __name__=="__main__": unittest.main()

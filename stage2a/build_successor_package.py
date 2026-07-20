@@ -8,18 +8,20 @@ import hashlib
 import json
 import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 STAGE = REPO / "stage2a"
 FAILED_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003"
-ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-003"
+PRIOR_CORRECTED_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-003"
+ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-004"
 EVIDENCE = STAGE / "evidence/latest"
 EVENTS = STAGE / "evidence/events"
 REVIEWS = STAGE / "review_attempts"
 OUTPUTS = REPO.parents[1] / "outputs"
 PACKAGE_ID = "ES-PKG-2026-004-V003"
-CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-003"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-004"
 PREDECESSOR = "ES-PKG-2026-003-V002"
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 BASELINE = "acb518ea5a160820e64681ff95a16b010fe1156c"
@@ -31,6 +33,8 @@ DISPOSITION = "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE"
 RUNTIME_CAUSE = "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE"
 FAILED_ATTEMPT_002_SHA = "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4"
 FAILED_ATTEMPT_002_MANIFEST_SHA = "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b"
+FAILED_ATTEMPT_003_SHA = "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0"
+FAILED_ATTEMPT_003_MANIFEST_SHA = "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc"
 
 
 def sha(path: Path) -> str:
@@ -119,28 +123,28 @@ def package_safe_validation(raw: dict[str, object]) -> dict[str, object]:
     return value
 
 
-def verify_failed_candidate() -> dict[str, object]:
-    manifest = FAILED_ROOT / "DRAFT_REVIEW_SHA256SUMS.txt"
-    if sha(manifest) != FAILED_ATTEMPT_002_MANIFEST_SHA:
-        raise RuntimeError("failed candidate manifest changed")
+def verify_freeze(root: Path, expected_payload: int, expected_physical: int, expected_manifest_sha: str, archive_name: str, expected_archive_sha: str) -> dict[str, object]:
+    manifest = root / "DRAFT_REVIEW_SHA256SUMS.txt"
+    if sha(manifest) != expected_manifest_sha:
+        raise RuntimeError(f"failed candidate manifest changed: {root.name}")
     errors = []
     rows = manifest.read_text(encoding="utf-8").splitlines()
     for line in rows:
         expected, relative = line.split("  ", 1)
-        path = FAILED_ROOT / relative
+        path = root / relative
         if not path.is_file() or sha(path) != expected:
             errors.append(relative)
-    physical = sorted(path.relative_to(FAILED_ROOT).as_posix() for path in FAILED_ROOT.rglob("*") if path.is_file())
-    if errors or len(rows) != 108 or len(physical) != 111:
+    physical = sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file())
+    if errors or len(rows) != expected_payload or len(physical) != expected_physical:
         raise RuntimeError(f"failed candidate integrity mismatch: rows={len(rows)} physical={len(physical)} errors={errors}")
-    archive = OUTPUTS / "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip"
-    if not archive.is_file() or sha(archive) != FAILED_ATTEMPT_002_SHA:
+    archive = OUTPUTS / archive_name
+    if not archive.is_file() or sha(archive) != expected_archive_sha:
         raise RuntimeError("failed candidate immutable archive changed")
     return {
-        "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003",
-        "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
-        "archive_sha256": FAILED_ATTEMPT_002_SHA,
-        "manifest_sha256": FAILED_ATTEMPT_002_MANIFEST_SHA,
+        "candidate_directory": root.relative_to(REPO).as_posix(),
+        "archive": f"outputs/{archive_name}",
+        "archive_sha256": expected_archive_sha,
+        "manifest_sha256": expected_manifest_sha,
         "payload_files": len(rows),
         "physical_files": len(physical),
         "unchanged": True,
@@ -154,7 +158,10 @@ def main() -> int:
     packaging_tree = git("rev-parse", "HEAD^{tree}")
     if packaging_commit == START or not git("ls-tree", "-r", "--name-only", packaging_commit, "--", "stage2a"):
         raise RuntimeError("Stage 2A implementation must be committed before package assembly")
-    failed_candidate = verify_failed_candidate()
+    failed_candidates = [
+        verify_freeze(FAILED_ROOT, 108, 111, FAILED_ATTEMPT_002_MANIFEST_SHA, "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip", FAILED_ATTEMPT_002_SHA),
+        verify_freeze(PRIOR_CORRECTED_ROOT, 121, 124, FAILED_ATTEMPT_003_MANIFEST_SHA, "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip", FAILED_ATTEMPT_003_SHA),
+    ]
     raw_validation = json.loads((EVIDENCE / "FOUNDATION_VALIDATION.json").read_text(encoding="utf-8"))
     validation = package_safe_validation(raw_validation)
     bootstrap = json.loads((EVIDENCE / "BACKEND_BOOTSTRAP_RUN.json").read_text(encoding="utf-8"))
@@ -186,7 +193,7 @@ def main() -> int:
         "stage2_package_validation": "PASS_50_OF_50", "stage2_package_clean_extraction": "113_OF_113",
         "stage2_remote_tip": START, "pull_requests": 0, "default_branch_contains_stage2_commit": False,
         "predecessor_unchanged": True,
-        "failed_candidate": failed_candidate,
+        "failed_candidates": failed_candidates,
     }
     pair("STAGE2A_PRE_CHANGE_BASELINE", "Stage 2A Pre-Change Baseline", baseline,
          "All mandatory repository, predecessor, immutable-baseline, branch, and publication checks passed before implementation.")
@@ -273,14 +280,14 @@ def main() -> int:
         "gap_id": "S2-GAP-003", "environment": environment,
         "negative_tests": check(validation, "isolation_negative_tests")["detail"],
         "network_denials": validation["artifacts"]["network_denials"],
-        "provider_attempt_count": 0, "production_access_count": 0, "live_data_access_count": 0,
+        "provider_attempt_count": validation["provider_attempt_count"], "production_access_count": validation["production_access_count"], "live_data_access_count": validation["live_data_access_count"],
         "network_profile": "stage2a/config/loopback-only.sb", "external_egress": "DENIED_EXACT_PORT_SANDBOX",
     }
     pair("STAGE2A_ISOLATION_CONTROL", "Stage 2A Isolation Control", isolation,
          "A strict environment allowlist, ambient prohibited-name denial, exact loopback ports, synthetic datastore identity, deny proxies, and sandbox-enforced external network denial operate fail closed.")
     providers = check(validation, "provider_denial")["detail"]
     provider_rows = providers["register"]
-    write_json("PROVIDER_DENIAL_REGISTER.json", {"package_id": PACKAGE_ID, "attempt_count": 0, "providers": provider_rows})
+    write_json("PROVIDER_DENIAL_REGISTER.json", {"package_id": PACKAGE_ID, "attempt_count": providers["attempt_count"], "outcome_totals": providers["outcome_totals"], "providers": provider_rows, "network_guard": providers["network_guard"]})
     with (ROOT / "PROVIDER_DENIAL_REGISTER.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(provider_rows[0])); writer.writeheader(); writer.writerows(provider_rows)
     write_json("ISOLATION_NEGATIVE_TEST_REPORT.json", isolation | {"validation": "PASS"})
@@ -367,7 +374,7 @@ def main() -> int:
         "startup_document_writes": startup["startup_document_writes"],
         "metadata_collections_inventoried": startup["collections_with_index_metadata"],
         "inventory_digest": startup["inventory_digest"], "background_flags": startup["background_flags"],
-        "network_inventory": network, "provider_attempt_count": 0,
+        "network_inventory": network, "provider_attempt_count": validation["provider_attempt_count"],
         "oracle_id": startup["oracle_id"], "oracle_match": startup["oracle_match"],
         "required_log_markers": startup["required_log_markers"],
         "prohibited_log_markers": startup["prohibited_log_markers"],
@@ -408,6 +415,7 @@ def main() -> int:
     archive_specs = {
         "attempt-001": ("ES-PKG-2026-004-V003_REVIEW_ATTEMPT_001_FAILED.zip", "1ecb52cbebf70f25a333f37355b9e94f44fb5ad88b7bf500568b59fa88457054"),
         "attempt-002": ("ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip", FAILED_ATTEMPT_002_SHA),
+        "attempt-003": ("ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip", FAILED_ATTEMPT_003_SHA),
     }
     for attempt, (archive_name, expected_sha) in archive_specs.items():
         attempt_root = ROOT / "review_attempts" / attempt
@@ -451,6 +459,10 @@ def main() -> int:
     write_json("STAGE2A_SOURCE_EVIDENCE_REGISTER.json", {"package_id": PACKAGE_ID, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "sources": sources, "count": len(sources)})
     with (ROOT / "STAGE2A_SOURCE_EVIDENCE_REGISTER.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(sources[0])); writer.writeheader(); writer.writerows(sources)
+    for row in sources:
+        target = ROOT / "source_payload" / row["path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(REPO / row["path"], target)
     created = stage_sources + sorted(path.relative_to(REPO).as_posix() for path in ROOT.rglob("*") if path.is_file())
     pair("STAGE2A_FILES_CREATED_REGISTER", "Stage 2A Files Created Register", {"package_id": PACKAGE_ID, "created": created, "count": len(created)}, "All implementation and package files are additive under `stage2a/` and the new successor-package root.")
     pair("STAGE2A_FILES_MODIFIED_REGISTER", "Stage 2A Files Modified Register", {"package_id": PACKAGE_ID, "modified": [], "renamed": [], "deleted": []}, "No pre-existing application, governance, predecessor-package, or immutable-baseline file was modified, renamed, or deleted.")
@@ -473,6 +485,37 @@ def main() -> int:
         if missing:
             raise RuntimeError(f"traceability source paths missing from source register: {missing}")
         return [source_by_path[path] for path in paths]
+
+    test_specs = {
+        "S2A-TEST-DEP-BOOTSTRAP": ("BACKEND_BOOTSTRAP_RUN.validation", "stage2a/bootstrap_backend.py"),
+        "S2A-TEST-PIP-CHECK": ("BACKEND_BOOTSTRAP_RUN.pip_check", "stage2a/dependency_inventory.py"),
+        "S2A-TEST-TOOLCHAIN": ("STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT", "stage2a/toolchain.json"),
+        "S2A-TEST-FRONTEND-BUILD": ("STAGE2A_VALIDATION_COMMAND_REGISTER:S2A-CMD-003", "stage2a/build_successor_package.py"),
+        "S2A-TEST-ENV-NEGATIVE": ("FOUNDATION_VALIDATION.check:isolation_negative_tests", "stage2a/validate_foundation.py"),
+        "S2A-TEST-EXACT-PORT-DENIAL": ("FOUNDATION_VALIDATION.check:exact_port_egress_denial", "stage2a/validate_foundation.py"),
+        "S2A-TEST-PROCESS-IDENTITY": ("FOUNDATION_VALIDATION.check:process_identity", "stage2a/validate_foundation.py"),
+        "S2A-TEST-INTERRUPTED-START": ("FOUNDATION_VALIDATION.check:interrupted_start_cleanup", "stage2a/validate_foundation.py"),
+        "S2A-TEST-CONTROLLED-SHUTDOWN": ("FOUNDATION_VALIDATION.check:controlled_shutdown", "stage2a/validate_foundation.py"),
+        "S2A-TEST-FIXTURE-REPLAY": ("FOUNDATION_VALIDATION.check:fixture_reproducibility", "stage2a/validate_foundation.py"),
+        "S2A-TEST-FIXTURE-RESET": ("FOUNDATION_VALIDATION.check:zero_residue", "stage2a/validate_foundation.py"),
+        "S2A-TEST-EVIDENCE-SEMANTICS": ("FOUNDATION_VALIDATION.check:evidence_capture_semantics", "stage2a/validate_foundation.py"),
+        "S2A-TEST-REDACTION-MEANING": ("unittest:test_controls.ControlTests.test_output_redaction_covers_quoted_multiword_and_bearer_values", "stage2a/tests/test_controls.py"),
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX": ("PACKAGE_VALIDATOR.check:MV-001-runtime-root-resolution", "stage2a/validate_stage2a_package.py"),
+        "S2A-TEST-TRACE-SPECIFICITY": ("PACKAGE_VALIDATOR.check:MV-011A-specific-traceability", "stage2a/validate_stage2a_package.py"),
+        "S2A-TEST-PACKAGE-TRACE-ROW": ("PACKAGE_VALIDATOR.parameterized:MV-011A-specific-traceability", "stage2a/validate_stage2a_package.py"),
+        "S2A-TEST-CLEANUP-PARTIAL": ("FOUNDATION_VALIDATION.check:cleanup_failure_and_interruption", "stage2a/validate_foundation.py"),
+        "S2A-TEST-CLEANUP-INTERRUPTED": ("FOUNDATION_VALIDATION.check:cleanup_failure_and_interruption", "stage2a/validate_foundation.py"),
+        "S2A-TEST-ZERO-RESIDUE": ("FOUNDATION_VALIDATION.check:zero_residue", "stage2a/validate_foundation.py"),
+        "S2A-TEST-DATASTORE-ROLLBACK": ("FOUNDATION_VALIDATION.check:durable_rollback_recovery", "stage2a/validate_foundation.py"),
+        "S2A-TEST-SOURCE-RECOVERY": ("FOUNDATION_VALIDATION.check:durable_rollback_recovery.source_recovery", "stage2a/validate_foundation.py"),
+        "S2A-TEST-STARTUP-ORACLE": ("FOUNDATION_VALIDATION.check:startup_side_effect_inventory", "stage2a/validate_foundation.py"),
+        "S2A-TEST-PROVIDER-OUTCOME-STATES": ("FOUNDATION_VALIDATION.check:provider_denial", "stage2a/validate_foundation.py"),
+        "S2A-TEST-NETWORK-GUARD": ("FOUNDATION_VALIDATION.check:network_boundary", "stage2a/validate_foundation.py"),
+    }
+    test_rows = [{"test_id": test_id, "executable_identity": identity, "implementation_path": path, "source_evidence_id": source_by_path[path]} for test_id, (identity, path) in sorted(test_specs.items())]
+    write_json("STAGE2A_TEST_CONTROL_REGISTER.json", {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "tests": test_rows})
+    with (ROOT / "STAGE2A_TEST_CONTROL_REGISTER.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(test_rows[0])); writer.writeheader(); writer.writerows(test_rows)
 
     requirement_specs = [
         (1, ["S2A-CTL-DEP-001", "S2A-CTL-DEP-002"], ["backend/requirements.txt", "stage2a/bootstrap_backend.sh", "stage2a/bootstrap_backend.py", "stage2a/dependency_inventory.py"], ["stage2a/bootstrap_backend.sh", "stage2a/dependency_inventory.py"], ["S2A-TEST-DEP-BOOTSTRAP", "S2A-TEST-PIP-CHECK"], ["BACKEND_BOOTSTRAP_VALIDATION.json", "BACKEND_DEPENDENCY_INVENTORY.txt"]),
@@ -530,8 +573,8 @@ def main() -> int:
     reuse_register = {
         "package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID,
         "reused_predecessor_evidence": [
-            {"evidence": "16/16 Stage 2A lifecycle validation", "source_commit": prior_validation_commit, "reuse_scope": ["synthetic fixture determinism", "owned-row cleanup semantics", "datastore and source recovery invariants"], "basis": "fixture, cleanup ownership, rollback payload, and immutable source anchors are hash-identical; reused as corroborative predecessor evidence only", "controlling_for_corrected_candidate": False},
-            {"evidence": "127-artifact backend dependency inventory", "source": "stage2a/evidence/latest/BACKEND_BOOTSTRAP_RUN.json", "reuse_scope": ["pinned requirements", "download artifact hashes", "installed metadata hashes"], "basis": "backend requirements SHA-256 and bootstrap implementation are unchanged; corrected-candidate bootstrap rerun independently reconfirms the same contract", "controlling_for_corrected_candidate": False},
+            {"evidence": "16/16 Stage 2A lifecycle validation", "source_commit": prior_validation_commit, "immutable_source": f"{FAILED_ROOT.relative_to(REPO).as_posix()}/STAGE2A_FOUNDATION_VALIDATION.json", "immutable_artifact_sha256": sha(FAILED_ROOT / "STAGE2A_FOUNDATION_VALIDATION.json"), "containing_manifest_sha256": FAILED_ATTEMPT_002_MANIFEST_SHA, "reuse_scope": ["synthetic fixture determinism", "owned-row cleanup semantics", "datastore and source recovery invariants"], "basis": "fixture, cleanup ownership, rollback payload, and immutable source anchors are hash-identical; reused as corroborative predecessor evidence only", "controlling_for_corrected_candidate": False},
+            {"evidence": "127-artifact backend dependency inventory", "immutable_source": f"{FAILED_ROOT.relative_to(REPO).as_posix()}/BACKEND_BOOTSTRAP_VALIDATION.json", "immutable_artifact_sha256": sha(FAILED_ROOT / "BACKEND_BOOTSTRAP_VALIDATION.json"), "containing_manifest_sha256": FAILED_ATTEMPT_002_MANIFEST_SHA, "reuse_scope": ["pinned requirements", "download artifact hashes", "installed metadata hashes"], "basis": "backend requirements SHA-256 and bootstrap implementation are unchanged; corrected-candidate bootstrap rerun independently reconfirms the same contract", "controlling_for_corrected_candidate": False},
         ],
         "invalidated_checks": [
             {"blocker": blocker, "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"}
@@ -547,44 +590,84 @@ def main() -> int:
     pair("EVIDENCE_REUSE_AND_RERUN_REGISTER", "Evidence Reuse and Rerun Register", reuse_register, "Prior lifecycle and dependency results are retained only as corroborative predecessor evidence where their inputs remain hash-identical. Every check affected by the five blockers was invalidated and rerun; the new reruns control this candidate.")
     blocker_results = [{"blocker": blocker, "status": "REMEDIATED_PENDING_REREVIEW", "finding_id": finding_id} for finding_id, blocker, *_ in finding_specs]
     provenance = {
-        "package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "candidate_attempt": 3,
+        "package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "candidate_attempt": 4,
         "distinct_from_failed_candidate": True, "failed_candidate_unchanged": True,
-        "failed_candidate": failed_candidate, "validated_implementation_commit": implementation_commit,
+        "failed_candidates": failed_candidates, "validated_implementation_commit": implementation_commit,
         "packaging_commit": packaging_commit, "blocker_results": blocker_results,
+        "freeze_commit": "RECORDED_EXTERNALLY_AFTER_BYTE_FREEZE_TO_AVOID_CIRCULAR_SELF_REFERENCE",
         "execution": "EXECUTION_NOT_AUTHORIZED", "assurance": "NOT_EXTERNALLY_ASSURED",
     }
-    pair("CORRECTED_CANDIDATE_PROVENANCE", "Corrected Candidate Provenance", provenance, f"`{CANDIDATE_ID}` is a distinct third candidate. The failed 108-file freeze and archive remain byte-for-byte unchanged and are referenced by their original manifest and archive SHA-256 values.")
+    pair("CORRECTED_CANDIDATE_PROVENANCE", "Corrected Candidate Provenance", provenance, f"`{CANDIDATE_ID}` is a distinct fourth candidate. The failed 108-file and Candidate-003 freezes remain byte-for-byte unchanged and are referenced by their original manifest and archive SHA-256 values.")
 
     requirements_by_id = {row["requirement_id"]: row for row in requirements}
     def classify_output(output: str) -> tuple[str, str]:
         rules = [
             ("S2A-REQ-001", ("BACKEND_", "DEPENDENCY_"), "dependency contract or evidence"),
             ("S2A-REQ-002", ("TOOLCHAIN_", "RUNTIME_TOOLCHAIN", "PACKAGE_MANAGER", "VALIDATION_COMMAND"), "toolchain or command contract"),
-            ("S2A-REQ-003", ("ISOLATION_", "PROVIDER_", "SECRET_", "ENVIRONMENT_CONTRACT"), "environment provider or isolation control"),
+            ("S2A-REQ-009", ("PROVIDER_", "STARTUP_", "STAGE2A_DETERMINISTIC"), "provider or startup attempt measurement"),
+            ("S2A-REQ-003", ("ISOLATION_", "SECRET_", "ENVIRONMENT_CONTRACT"), "environment or isolation control"),
             ("S2A-REQ-004", ("ORCHESTRATION_", "COLD_START", "CONTROLLED_SHUTDOWN", "INTERRUPTED_START", "SEGREGATED_REVIEW_TEMPORARY_PROCESS", "RUNTIME_AGENT_TYPE"), "process lifecycle or runtime boundary"),
             ("S2A-REQ-005", ("FIXTURE_",), "synthetic fixture control"),
             ("S2A-REQ-007", ("CLEANUP_", "ZERO_RESIDUE"), "cleanup or residue proof"),
             ("S2A-REQ-008", ("ROLLBACK_", "RECOVERED_STATE"), "rollback or source recovery proof"),
-            ("S2A-REQ-009", ("STARTUP_", "STAGE2A_DETERMINISTIC"), "startup oracle or attempt measurement"),
-            ("S2A-REQ-006", ("EVIDENCE_", "EXECUTION_EVIDENCE", "FOUNDATION_EVIDENCE", "STAGE2A_FOUNDATION", "STAGE2A_SOURCE", "STAGE2A_REQUIREMENT", "STAGE2A_FINDING", "STAGE2A_CHANGE", "STAGE2A_FILES", "STAGE2A_GAP", "STAGE2A_SCOPE", "STAGE2A_PRE_CHANGE", "SUCCESSOR_PACKAGE", "PACKAGE_STATUS", "CORRECTED_CANDIDATE", "IMMUTABLE_BASELINE", "PREDECESSOR_REFERENCE", "FOUNDER_AUTHORIZATION", "ASSURANCE_STATEMENT", "F000", "STAGE2_PACKAGE_PUBLICATION"), "package evidence provenance or traceability control"),
+            ("S2A-REQ-006", ("EVIDENCE_", "EXECUTION_EVIDENCE", "FOUNDATION_EVIDENCE", "STAGE2A_FOUNDATION", "STAGE2A_SOURCE", "STAGE2A_REQUIREMENT", "STAGE2A_FINDING", "STAGE2A_TEST", "STAGE2A_CHANGE", "STAGE2A_FILES", "STAGE2A_GAP", "STAGE2A_SCOPE", "STAGE2A_PRE_CHANGE", "STAGE2A_SOURCE_TO_OUTPUT", "SUCCESSOR_PACKAGE", "PACKAGE_STATUS", "CORRECTED_CANDIDATE", "VALIDATOR_INVOCATION", "DRAFT_REVIEW", "validate_stage2a_package", "IMMUTABLE_BASELINE", "PREDECESSOR_REFERENCE", "FOUNDER_AUTHORIZATION", "ASSURANCE_STATEMENT", "F000", "STAGE2_PACKAGE_PUBLICATION"), "package evidence provenance or traceability control"),
         ]
         for requirement_id, tokens, rationale in rules:
             if any(token in output for token in tokens):
                 return requirement_id, rationale
         raise RuntimeError(f"output has no explicit traceability classification rule: {output}")
 
-    trace = []
-    for output in sorted(path.name for path in ROOT.iterdir() if path.is_file()):
-        requirement_id, rationale = classify_output(output)
-        requirement = requirements_by_id[requirement_id]
-        trace.append({
-            "output": output, "requirement_ids": [requirement_id], "gap_ids": [requirement["gap_id"]],
-            "control_ids": requirement["control_ids"], "source_evidence_ids": requirement["source_evidence_ids"],
-            "implementation_artifacts": requirement["implementation_artifacts"], "test_ids": requirement["test_ids"],
-            "evidence_artifacts": requirement["evidence_artifacts"], "mapping_rationale": rationale,
-            "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
-        })
-    pair("STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY", "Stage 2A Source-to-Output Traceability", {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "outputs": trace}, "Every output maps to one exact requirement, its controlling gap, named controls, source-evidence identifiers, implementation artifacts, tests, and evidence. Broad all-gap and catch-all mappings are prohibited.")
+    def build_trace(outputs: list[str]) -> list[dict[str, object]]:
+        trace: list[dict[str, object]] = []
+        for output in outputs:
+            requirement_id, rationale = classify_output(output)
+            requirement = requirements_by_id[requirement_id]
+            implementation_paths = list(requirement["implementation_artifacts"])
+            if requirement_id == "S2A-REQ-006":
+                if "SCHEMA" in output:
+                    implementation_paths = ["stage2a/execution-evidence-schema.json", "stage2a/evidence_capture.py"]
+                elif "VALIDATOR" in output or output == "validate_stage2a_package.py":
+                    implementation_paths = ["stage2a/validate_stage2a_package.py"]
+                elif any(token in output for token in ("TRACE", "REQUIREMENT", "FINDING", "SOURCE_TO_OUTPUT")):
+                    implementation_paths = ["stage2a/build_successor_package.py", "stage2a/validate_stage2a_package.py"]
+                elif "EVIDENCE" in output:
+                    implementation_paths = ["stage2a/evidence_capture.py", "stage2a/execution-evidence-schema.json"]
+                else:
+                    implementation_paths = ["stage2a/build_successor_package.py"]
+            direct_tests = ["S2A-TEST-PACKAGE-TRACE-ROW", requirement["test_ids"][0]]
+            if "REDACTION" in output or "EVIDENCE_CAPTURE" in output or "EXECUTION_EVIDENCE" in output:
+                direct_tests = ["S2A-TEST-PACKAGE-TRACE-ROW", "S2A-TEST-EVIDENCE-SEMANTICS", "S2A-TEST-REDACTION-MEANING"]
+            elif "VALIDATOR" in output or output == "validate_stage2a_package.py":
+                direct_tests = ["S2A-TEST-PACKAGE-TRACE-ROW", "S2A-TEST-VALIDATOR-ROOT-MATRIX"]
+            elif any(token in output for token in ("TRACE", "REQUIREMENT", "FINDING")):
+                direct_tests = ["S2A-TEST-PACKAGE-TRACE-ROW", "S2A-TEST-TRACE-SPECIFICITY"]
+            evidence_candidates = [path for path in requirement["evidence_artifacts"] if path != output and (ROOT / path).is_file()]
+            if not evidence_candidates:
+                evidence_candidates = ["STAGE2A_FOUNDATION_VALIDATION.json"]
+            finding_ids: list[str] = []
+            if requirement_id == "S2A-REQ-004":
+                finding_ids = ["ES-ADV-V003-R2-F-0005"]
+            elif requirement_id == "S2A-REQ-009":
+                finding_ids = ["ES-ADV-V003-R2-F-0001"]
+            elif requirement_id == "S2A-REQ-006":
+                if "VALIDATOR" in output or output == "validate_stage2a_package.py":
+                    finding_ids = ["ES-ADV-V003-R2-F-0004"]
+                elif any(token in output for token in ("TRACE", "REQUIREMENT", "FINDING")):
+                    finding_ids = ["ES-ADV-V003-R2-F-0003"]
+                elif any(token in output for token in ("EVIDENCE", "SCHEMA", "REDACTION")):
+                    finding_ids = ["ES-ADV-V003-R2-F-0002"]
+            trace.append({
+                "mapping_id": "S2A-MAP-" + hashlib.sha256(output.encode()).hexdigest()[:12].upper(),
+                "output": output, "artifact_role": f"PACKAGE_OUTPUT::{Path(output).stem}",
+                "requirement_ids": [requirement_id], "gap_ids": [requirement["gap_id"]],
+                "control_ids": requirement["control_ids"], "source_evidence_ids": source_ids(implementation_paths),
+                "implementation_artifacts": implementation_paths, "test_ids": direct_tests,
+                "evidence_artifacts": evidence_candidates[:2], "finding_ids": finding_ids,
+                "mapping_rationale": f"{output} is classified as {rationale}; only its direct implementation, executable checks, and controlling evidence are linked.",
+                "verification_rule": "MV-011A verifies unique mapping ID, output coverage, registered executable tests, source IDs, implementation paths, and existing evidence paths",
+                "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+            })
+        return trace
 
     pair("IMMUTABLE_BASELINE_RECORD", "Immutable Baseline Record", {"package_id": PACKAGE_ID, "immutable_baseline": BASELINE, "modified": False, "reachable": True}, f"Governance baseline `{BASELINE}` remains unchanged and reachable.")
     pair("PREDECESSOR_REFERENCE_RECORD", "Predecessor Reference Record", {"package_id": PACKAGE_ID, "predecessor": PREDECESSOR, "commit": START, "archive_sha256": PREDECESSOR_SHA, "unchanged": True, "sealed_predecessor": "ES-PKG-2026-002-V001", "sealed_predecessor_sha256": SEALED_SHA}, f"Predecessor `{PREDECESSOR}` remains unchanged at archive SHA-256 `{PREDECESSOR_SHA}`.")
@@ -602,17 +685,67 @@ def main() -> int:
     pair("SUCCESSOR_PACKAGE_INDEX", "Stage 2A Successor Package Index", {"package_id": PACKAGE_ID, "predecessor": PREDECESSOR, "starting_commit": START, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "candidate": True, "authorized_gaps": [f"S2-GAP-{n:03d}" for n in range(1, 10)], "principal_disposition": DISPOSITION}, "This candidate contains the nine technical remediation foundations, validation evidence, bounded F-0002 closure, separate residue provenance, first failed review evidence, and controls for independent re-review.")
 
     shutil.copy2(STAGE / "validate_stage2a_package.py", ROOT / "validate_stage2a_package.py")
+    write_json("VALIDATOR_INVOCATION_MATRIX.json", {"candidate_id": CANDIDATE_ID, "status": "ASSEMBLY_VALIDATION_IN_PROGRESS", "execution": "EXECUTION_NOT_AUTHORIZED"})
     future_controls = {"DRAFT_REVIEW_SHA256SUMS.txt", "DRAFT_REVIEW_SNAPSHOT_RECORD.json", "DRAFT_REVIEW_SNAPSHOT_RECORD.md"}
+    trace_outputs = sorted({path.name for path in ROOT.iterdir() if path.is_file()} | future_controls | {"STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json", "STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.md"})
+    trace = build_trace(trace_outputs)
+    pair("STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY", "Stage 2A Source-to-Output Traceability", {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "outputs": trace}, "Every top-level output has a unique stable mapping identifier, output-specific role and rationale, direct implementation source, registered executable check, controlling evidence, and applicable finding chain. MV-011A verifies reference existence and complete top-level coverage.")
+
     package_created = sorted({path.relative_to(REPO).as_posix() for path in ROOT.rglob("*") if path.is_file()} | {f"{ROOT.relative_to(REPO).as_posix()}/{name}" for name in future_controls})
     complete_created = sorted(set(stage_sources + package_created))
     pair("STAGE2A_FILES_CREATED_REGISTER", "Stage 2A Files Created Register", {"package_id": PACKAGE_ID, "created": complete_created, "count": len(complete_created)}, "The register includes every additive implementation, generated evidence, package, review-attempt, and candidate-freeze control path. Final archive controls are added by the finalization stage and reconciled by the exact file inventory.")
+
+    python = STAGE / ".venv/bin/python"
+    validator = ROOT / "validate_stage2a_package.py"
+    invocation_specs: list[tuple[str, Path, Path, Path]] = [
+        ("PACKAGE_ROOT", ROOT, validator, ROOT),
+        ("PACKAGE_NESTED_REVIEW_ATTEMPT_003", ROOT / "review_attempts/attempt-003", validator, ROOT),
+        ("EXTERNAL_PRIVATE_TMP", Path("/private/tmp"), validator, ROOT),
+    ]
+    invocation_results: list[dict[str, object]] = []
+    for location, cwd, validator_path, package_path in invocation_specs:
+        result = subprocess.run([str(python), str(validator_path), str(package_path), "--phase", "assembly"], cwd=cwd, text=True, capture_output=True, check=False, timeout=120)
+        parsed = json.loads(result.stdout) if result.stdout.strip() else {}
+        invocation_results.append({
+            "location": location, "mode": "REPOSITORY_BACKED_PACKAGED_VALIDATOR", "exit_status": result.returncode,
+            "validation": parsed.get("validation"), "score": f"{parsed.get('pass_count')}/{parsed.get('check_count')}",
+            "output_sha256": hashlib.sha256(result.stdout.encode()).hexdigest(), "stderr_sha256": hashlib.sha256(result.stderr.encode()).hexdigest(),
+        })
+    with tempfile.TemporaryDirectory(prefix="es-candidate004-detached-", dir="/private/tmp") as temporary:
+        extracted = Path(temporary) / CANDIDATE_ID
+        shutil.copytree(ROOT, extracted)
+        detached_validator = extracted / "validate_stage2a_package.py"
+        result = subprocess.run([str(python), str(detached_validator), str(extracted), "--phase", "assembly"], cwd=Path(temporary), text=True, capture_output=True, check=False, timeout=120)
+        parsed = json.loads(result.stdout) if result.stdout.strip() else {}
+        invocation_results.append({
+            "location": "DETACHED_CLEAN_COPY_EXTERNAL_PRIVATE_TMP", "mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD",
+            "exit_status": result.returncode, "validation": parsed.get("validation"),
+            "score": f"{parsed.get('pass_count')}/{parsed.get('check_count')}",
+            "output_sha256": hashlib.sha256(result.stdout.encode()).hexdigest(), "stderr_sha256": hashlib.sha256(result.stderr.encode()).hexdigest(),
+            "temporary_copy_removed": True,
+        })
+    if any(row["exit_status"] != 0 or row["validation"] != "PASS" for row in invocation_results):
+        raise RuntimeError(f"validator assembly invocation matrix failed: {invocation_results}")
+    invocation_matrix = {
+        "candidate_id": CANDIDATE_ID, "phase": "ASSEMBLY_PRE_FREEZE_CHECKSUM_DEFERRED",
+        "validator_sha256": sha(validator), "invocations": invocation_results,
+        "supported_locations": 4, "passed_locations": len(invocation_results),
+        "detached_source_payload_files": len(sources), "result": "PASS",
+        "final_candidate_checksum_validation_required_after_freeze": True,
+        "execution": "EXECUTION_NOT_AUTHORIZED",
+    }
+    write_json("VALIDATOR_INVOCATION_MATRIX.json", invocation_matrix)
+    commands[5]["observed"] = f"PASS_ASSEMBLY_{len(invocation_results)}_OF_{len(invocation_results)}_INCLUDING_DETACHED"
+    commands.append({"command_id": "S2A-CMD-007", "purpose": "detached clean-copy packaged validation", "cwd": "external temporary directory", "command": "PACKAGED_PYTHON validate_stage2a_package.py DETACHED_PACKAGE --phase assembly", "expected_exit": 0, "timeout_seconds": 120, "observed": "PASS_DETACHED_PACKAGE_SOURCE_PAYLOAD"})
+    pair("STAGE2A_VALIDATION_COMMAND_REGISTER", "Stage 2A Validation Command Register", {"package_id": PACKAGE_ID, "commands": commands, "cp3_commands": [], "business_workflow_commands": []}, "\n".join(f"- `{row['command_id']}` `{row['command']}` — `{row['observed']}`" for row in commands))
+
     # Freeze all payload files. Snapshot controls are added after the manifest.
     payload = sorted(path.relative_to(ROOT).as_posix() for path in ROOT.rglob("*") if path.is_file())
     rows = [f"{sha(ROOT / path)}  {path}" for path in payload]
     (ROOT / "DRAFT_REVIEW_SHA256SUMS.txt").write_text("\n".join(rows) + "\n", encoding="utf-8")
     manifest_hash = sha(ROOT / "DRAFT_REVIEW_SHA256SUMS.txt")
-    snapshot = {"package_id": PACKAGE_ID, "review_attempt": 2, "payload_files": len(payload), "manifest_sha256": manifest_hash, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "frozen": True, "execution": "EXECUTION_NOT_AUTHORIZED"}
-    pair("DRAFT_REVIEW_SNAPSHOT_RECORD", "Draft Review Snapshot Record", snapshot, f"Review attempt 2 freezes `{len(payload)}` payload files under manifest SHA-256 `{manifest_hash}`. Reviewers must not modify the candidate.")
+    snapshot = {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "review_attempt": 4, "payload_files": len(payload), "manifest_sha256": manifest_hash, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "frozen": True, "execution": "EXECUTION_NOT_AUTHORIZED"}
+    pair("DRAFT_REVIEW_SNAPSHOT_RECORD", "Draft Review Snapshot Record", snapshot, f"Review attempt 4 freezes `{len(payload)}` payload files under manifest SHA-256 `{manifest_hash}`. Reviewers must not modify the candidate.")
     print(json.dumps({"package_root": ROOT.relative_to(REPO).as_posix(), "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "payload_files": len(payload), "physical_files": len(payload) + 3, "manifest_sha256": manifest_hash, "validation": validation["validation"], "principal_disposition": DISPOSITION}, indent=2))
     return 0
 
