@@ -60,12 +60,16 @@ def _ps_identity(pid: int) -> dict[str, object] | None:
     interfaces used here are available inside the same sandbox profile and
     fail closed when either half of the identity cannot be measured.
     """
-    result = subprocess.run(
-        ["lsof", "-a", "-p", str(pid), "-FpgR"],
-        text=True,
-        capture_output=True,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            ["lsof", "-a", "-p", str(pid), "-FpgR"],
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=5,
+        )
+    except subprocess.TimeoutExpired:
+        return None
     fields = {line[0]: line[1:] for line in result.stdout.splitlines() if line and line[0] in {"p", "g", "R"}}
     if result.returncode != 0 or fields.get("p") != str(pid) or not fields.get("g") or not fields.get("R"):
         return None
@@ -197,12 +201,16 @@ def _contain_unrecorded_spawn(process: subprocess.Popen[bytes], kind: str) -> di
 
 
 def _process_files(pid: int) -> str:
-    result = subprocess.run(
-        ["lsof", "-a", "-nP", "-p", str(pid), "-d", "txt,cwd"],
-        text=True,
-        capture_output=True,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            ["lsof", "-a", "-nP", "-p", str(pid), "-d", "txt,cwd"],
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=5,
+        )
+    except subprocess.TimeoutExpired:
+        return ""
     return result.stdout.strip() if result.returncode == 0 else ""
 
 
@@ -243,12 +251,18 @@ def _alive(record: dict[str, object] | None, kind: str) -> bool:
 
 
 def _listener_pid(port: int) -> int | None:
-    result = subprocess.run(
-        ["lsof", "-nP", "-t", f"-iTCP:{port}", "-sTCP:LISTEN"],
-        text=True,
-        capture_output=True,
-        check=False,
-    )
+    if not _port_open("127.0.0.1", port):
+        return None
+    try:
+        result = subprocess.run(
+            ["lsof", "-nP", "-t", f"-iTCP:{port}", "-sTCP:LISTEN"],
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=5,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise RuntimeError(f"listener identity probe timed out for controlled port {port}") from exc
     pids = sorted({int(x) for x in result.stdout.split() if x.isdigit()})
     if len(pids) > 1:
         raise RuntimeError(f"multiple listeners on controlled port {port}: {pids}")

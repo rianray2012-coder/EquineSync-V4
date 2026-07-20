@@ -149,5 +149,17 @@ class ControlTests(unittest.TestCase):
         self.assertEqual(result["mongo_foreign_listener_pid"], 9002)
         self.assertEqual(result["api_foreign_listener_pid"], 9001)
 
+    def test_closed_port_skips_process_identity_probe(self):
+        with patch("orchestrate._port_open", return_value=False), patch("orchestrate.subprocess.run") as run:
+            self.assertIsNone(orchestrate._listener_pid(8019))
+            run.assert_not_called()
+
+    def test_listener_identity_probe_timeout_fails_closed(self):
+        with patch("orchestrate._port_open", return_value=True), patch(
+            "orchestrate.subprocess.run", side_effect=orchestrate.subprocess.TimeoutExpired("lsof", 5)
+        ):
+            with self.assertRaisesRegex(RuntimeError, "listener identity probe timed out"):
+                orchestrate._listener_pid(8019)
+
 
 if __name__=="__main__": unittest.main()
