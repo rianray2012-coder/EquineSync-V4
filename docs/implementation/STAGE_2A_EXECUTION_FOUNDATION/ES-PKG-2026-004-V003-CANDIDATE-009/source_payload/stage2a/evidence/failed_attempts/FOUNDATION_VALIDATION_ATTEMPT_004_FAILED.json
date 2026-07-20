@@ -1,0 +1,20 @@
+{
+  "attempt_id": "FOUNDATION_VALIDATION_ATTEMPT_004_FAILED",
+  "detected_utc": "2026-07-20T07:33:22Z",
+  "implementation_commit": "7c7581bc4541f365b66fdce841c64af3d27c81aa",
+  "result": "FAIL_CLOSED",
+  "failed_control": "PROCESS_IDENTITY_MEASUREMENT",
+  "failure": "PermissionError: [Errno 1] Operation not permitted: 'ps'",
+  "cause": "The controlled macOS sandbox denied the ps subprocess used by the initial corrected process-identity implementation.",
+  "effect": "No lifecycle result from this attempt is reusable or promoted to corrected-candidate evidence.",
+  "containment": {
+    "orchestrator_stop": "STOPPED_NO_RECORDED_PROCESS",
+    "runtime_purge": "PASS_RUNTIME_ABSENT",
+    "mongo_controlled_port": "CLEAR",
+    "api_controlled_port": "CLEAR",
+    "repository_controlled_artifacts_changed": false,
+    "failed_candidate_changed": false
+  },
+  "remediation": "Replace ps inspection with sandbox-permitted lsof PPID/PGID fields plus macOS KERN_PROCARGS2 full argv and executable measurement; retain fail-closed behavior.",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

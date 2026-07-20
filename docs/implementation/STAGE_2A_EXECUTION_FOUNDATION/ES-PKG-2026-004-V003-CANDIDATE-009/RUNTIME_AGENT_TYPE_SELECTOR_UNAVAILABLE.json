@@ -1,0 +1,17 @@
+{
+  "event_classification": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "status": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+  "observation": "The available collaboration runtime exposes task name, model, reasoning effort, and context-fork controls but no custom review-agent type selector.",
+  "evidence_basis": "CURRENT_RUNTIME_TOOL_SCHEMA_OBSERVATION_AND_FOUNDER_DIRECTION",
+  "direct_evidence_of_resolution": false,
+  "effect": {
+    "stage2a_readiness": "BLOCKED",
+    "technical_implementation": "NOT_AN_IMPLEMENTATION_FAILURE",
+    "principal_disposition_required": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE"
+  },
+  "separate_event": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+  "causal_relationship_to_process_residue": "NOT_ESTABLISHED_DO_NOT_CONFLATE",
+  "foreign_process_policy": "REFUSE_ADOPTION_OR_MANAGEMENT_UNLESS_IDENTITY_AND_PATH_OWNERSHIP_ARE_VERIFIED",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED"
+}

@@ -1,0 +1,44 @@
+{
+  "attempt": 11,
+  "classification": "API_READINESS_TIMEOUT_CAUSE_UNDETERMINED",
+  "detected_before_evidence_promotion": true,
+  "ended_before_utc": "2026-07-20T10:50:04Z",
+  "error": "port 127.0.0.1:8019 not ready within 120s",
+  "error_type": "TimeoutError",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "implementation_commit": "f43a78bf71efd440c61ae0fa93d8d33948b6e816",
+  "pre_service_unit_tests": {
+    "passed": 35,
+    "result": "PASS"
+  },
+  "process_observation_during_timeout_investigation": {
+    "api_command": "PYTHON_RUNTIME -m uvicorn full_application_profile:app --app-dir REPOSITORY_ROOT/stage2a --host 127.0.0.1 --port 8019 --log-level warning --no-access-log",
+    "api_pid": 96515,
+    "api_process_group_id": 96515,
+    "mongo_command": "mongod --dbpath REPOSITORY_ROOT/stage2a/.runtime/mongo --port 27029 --bind_ip 127.0.0.1 --nounixsocket --quiet",
+    "mongo_pid": 96507,
+    "mongo_process_group_id": 96507,
+    "observation_precision": "DURING_TIMEOUT_INVESTIGATION_NO_EXACT_UTC_CAPTURE"
+  },
+  "result_disposition": "DISCARDED_IN_FULL",
+  "runtime_cleanup": {
+    "api_alive": false,
+    "mongo_alive": false,
+    "orchestrator_stop": "STOPPED_ALREADY_STOPPED_AT_EMERGENCY_CHECK",
+    "pid_files_absent": true,
+    "ports_closed": true,
+    "runtime_absent": true,
+    "runtime_purged": true
+  },
+  "service_failure_cause": "UNKNOWN_FOR_ATTEMPT_011_SUBSEQUENT_CONTROLLED_REPRODUCTION_IDENTIFIED_LOCAL_CLOUD_EVICTED_BYTECODE_READ_STALL",
+  "subsequent_controlled_reproduction": {
+    "api_pid": 98021,
+    "blocked_read_evidence": "lsof showed file descriptor 6 reading backend/core/__pycache__/lifespan.cpython-311.pyc while the API remained pre-listener",
+    "dataless_backend_bytecode_files_detected": 78,
+    "health_after_existing_byte_hydration": "PASS_STATUS_OK_DATABASE_CONNECTED",
+    "hydration_effect": "The same controlled API process became ready before its bounded timeout after the existing bytecode files were hydrated.",
+    "same_attempt_causation": "NOT_AVAILABLE_ATTEMPT_011_RUNTIME_WAS_ALREADY_PURGED",
+    "shutdown": "PASS_EXACT_PID_PGID_LISTENER_ATTRIBUTION_PORTS_CLOSED_RUNTIME_PURGED"
+  },
+  "tests_or_evidence_promoted": false
+}

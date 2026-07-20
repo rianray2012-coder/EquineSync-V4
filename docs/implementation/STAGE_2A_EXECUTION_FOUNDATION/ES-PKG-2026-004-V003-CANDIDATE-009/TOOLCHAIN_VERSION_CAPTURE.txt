@@ -1,0 +1,15 @@
+operating_system=macOS 26.5.2
+architecture=arm64
+shell=zsh
+python=3.11.11
+pip=24.0
+pyenv=2.8.1
+node=24.11.0
+npm=11.6.1
+mongodb=8.0.26
+mongosh=2.8.3
+git=2.50.1 (Apple Git-155)
+curl=8.7.1
+lsof=4.91
+sandbox_exec=macOS 26.5.2 OS component; no version flag
+zsh=5.9 (arm64-apple-darwin25.0)

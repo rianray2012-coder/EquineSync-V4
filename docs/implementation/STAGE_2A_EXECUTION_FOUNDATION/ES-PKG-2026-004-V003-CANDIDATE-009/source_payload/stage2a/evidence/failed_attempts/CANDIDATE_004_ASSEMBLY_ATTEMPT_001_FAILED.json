@@ -1,0 +1,26 @@
+{
+  "attempt_id": "CANDIDATE_004_ASSEMBLY_ATTEMPT_001_FAILED",
+  "detected_utc": "2026-07-20T08:32:15Z",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-004",
+  "implementation_commit": "91a900b84060ef611564e9a730c5968f2eb216d7",
+  "result": "FAIL_CLOSED_NOT_FROZEN",
+  "physical_file_count_at_failure": 197,
+  "validator_score": "22/24",
+  "failed_checks": [
+    "MV-008-forbidden-status",
+    "MV-010-secret-values"
+  ],
+  "root_cause": "The validator included immutable source_payload detection rules in the active-status and prefix-only secret scans, producing false positives from its own rule definitions.",
+  "validation_output_sha256": "af340a6e8980e1283486f0aa3363133a2a6ca48a2c001953d6736ab7582da7aa",
+  "builder_log_sha256": "befb6c97e59e16520f17ef4cb29db92c55aac341783b1ef59dd4a4cd363a9583",
+  "containment": {
+    "candidate_frozen": false,
+    "candidate_reviewed": false,
+    "candidate_promoted": false,
+    "prior_failed_freezes_changed": false,
+    "repository_runtime_active": false,
+    "controlled_ports_listening": false
+  },
+  "remediation": "Separate active package assertions from immutable source payload and require plausible secret-value syntax rather than bare detector prefixes; rebuild the unfrozen candidate from source.",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

@@ -1,0 +1,10 @@
+{
+  "attempt": 8,
+  "result": "FAILED_NOT_PROMOTED",
+  "failure": "INHERITED_SECRET_NEGATIVE_PROBE_EXCEEDED_10_SECOND_LOCAL_HYDRATION_ALLOWANCE",
+  "services_started": false,
+  "ports_closed_after": true,
+  "runtime_absent_after": true,
+  "remediation": "bounded probe allowance increased to 30 seconds",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

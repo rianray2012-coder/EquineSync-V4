@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "registry_id": "S2A-PROVIDER-CAPABILITY-REGISTRY-V1",
+  "providers": [
+    {
+      "provider_id": "stripe",
+      "provider": "Stripe",
+      "integration_state": "PRESENT",
+      "boundary_id": "STRIPE_STARTUP_CATALOG",
+      "source_path": "backend/core/billing_provisioning.py",
+      "source_symbol": "ensure_stripe_catalog",
+      "required_configuration_names": ["STRIPE_API_KEY"],
+      "unconfigured_state": "SKIPPED_CONTROLLED_STAGE2A_OVERRIDE",
+      "reason_code": "STAGE2A_ZERO_DOCUMENT_WRITE_OVERRIDE"
+    },
+    {
+      "provider_id": "resend",
+      "provider": "Resend",
+      "integration_state": "PRESENT",
+      "boundary_id": "RESEND_SEND",
+      "source_path": "backend/mailer.py",
+      "source_symbol": "send",
+      "required_configuration_names": ["RESEND_API_KEY"],
+      "unconfigured_state": "SKIPPED_NOT_CONFIGURED",
+      "reason_code": "BACKGROUND_EMAIL_PATHS_DISABLED"
+    },
+    {
+      "provider_id": "docusign",
+      "provider": "DocuSign",
+      "integration_state": "PRESENT",
+      "boundary_id": "DOCUSIGN_READINESS",
+      "source_path": "backend/core/document_signing.py",
+      "source_symbol": "provider_readiness",
+      "required_configuration_names": ["DOCUSIGN_ACCOUNT_ID", "DOCUSIGN_INTEGRATION_KEY", "DOCUSIGN_PRIVATE_KEY", "DOCUSIGN_PRIVATE_KEY_PATH", "DOCUSIGN_USER_ID"],
+      "unconfigured_state": "SKIPPED_NOT_CONFIGURED",
+      "reason_code": "PURE_READINESS_PREREQUISITE_UNSATISFIED"
+    },
+    {
+      "provider_id": "object_storage",
+      "provider": "Object storage",
+      "integration_state": "PRESENT",
+      "boundary_id": "OBJECT_STORAGE_PROVIDER_SELECTION",
+      "source_path": "backend/storage.py",
+      "source_symbol": "get_provider",
+      "required_configuration_names": ["STORAGE_ACCESS_KEY_ID", "STORAGE_BUCKET", "STORAGE_ENDPOINT_URL", "STORAGE_PROVIDER", "STORAGE_PUBLIC_BASE_URL", "STORAGE_SECRET_ACCESS_KEY"],
+      "unconfigured_state": "SKIPPED_LOCAL_STUB_SELECTED",
+      "reason_code": "STORAGE_PROVIDER_UNSET_LOCALDEV_SELECTED"
+    },
+    {
+      "provider_id": "cloudflare_api",
+      "provider": "Cloudflare API",
+      "integration_state": "ABSENT_FROM_RUNTIME_SOURCE",
+      "boundary_id": "NO_RUNTIME_BOUNDARY",
+      "source_path": "stage2a/provider-capability-registry.json",
+      "source_symbol": "cloudflare_api_absence_attestation",
+      "required_configuration_names": ["CLOUDFLARE_API_TOKEN"],
+      "unconfigured_state": "UNAVAILABLE_INTEGRATION_ABSENT",
+      "reason_code": "NO_APPLICATION_RUNTIME_CLIENT_SOURCE"
+    },
+    {
+      "provider_id": "render",
+      "provider": "Render",
+      "integration_state": "OUT_OF_PROCESS_DEPLOYMENT_CONTROL",
+      "boundary_id": "NO_APPLICATION_RUNTIME_BOUNDARY",
+      "source_path": "stage2a/provider-capability-registry.json",
+      "source_symbol": "render_out_of_process_attestation",
+      "required_configuration_names": ["RENDER_API_KEY"],
+      "unconfigured_state": "UNAVAILABLE_OUT_OF_PROCESS_CONTROL",
+      "reason_code": "DEPLOYMENT_CONTROL_OUTSIDE_APPLICATION_RUNTIME"
+    },
+    {
+      "provider_id": "vercel",
+      "provider": "Vercel",
+      "integration_state": "OUT_OF_PROCESS_DEPLOYMENT_CONTROL",
+      "boundary_id": "NO_APPLICATION_RUNTIME_BOUNDARY",
+      "source_path": "stage2a/provider-capability-registry.json",
+      "source_symbol": "vercel_out_of_process_attestation",
+      "required_configuration_names": ["VERCEL_TOKEN"],
+      "unconfigured_state": "UNAVAILABLE_OUT_OF_PROCESS_CONTROL",
+      "reason_code": "DEPLOYMENT_CONTROL_OUTSIDE_APPLICATION_RUNTIME"
+    },
+    {
+      "provider_id": "sendgrid",
+      "provider": "SendGrid",
+      "integration_state": "ABSENT_FROM_RUNTIME_SOURCE",
+      "boundary_id": "NO_RUNTIME_BOUNDARY",
+      "source_path": "stage2a/provider-capability-registry.json",
+      "source_symbol": "sendgrid_absence_attestation",
+      "required_configuration_names": ["SENDGRID_API_KEY"],
+      "unconfigured_state": "UNAVAILABLE_INTEGRATION_ABSENT",
+      "reason_code": "NO_APPLICATION_RUNTIME_CLIENT_SOURCE"
+    },
+    {
+      "provider_id": "twilio",
+      "provider": "Twilio",
+      "integration_state": "ABSENT_FROM_RUNTIME_SOURCE",
+      "boundary_id": "NO_RUNTIME_BOUNDARY",
+      "source_path": "stage2a/provider-capability-registry.json",
+      "source_symbol": "twilio_absence_attestation",
+      "required_configuration_names": ["TWILIO_AUTH_TOKEN"],
+      "unconfigured_state": "UNAVAILABLE_INTEGRATION_ABSENT",
+      "reason_code": "NO_APPLICATION_RUNTIME_CLIENT_SOURCE"
+    },
+    {
+      "provider_id": "external_ai",
+      "provider": "External AI",
+      "integration_state": "ABSENT_FROM_RUNTIME_SOURCE",
+      "boundary_id": "NO_RUNTIME_BOUNDARY",
+      "source_path": "stage2a/provider-capability-registry.json",
+      "source_symbol": "external_ai_absence_attestation",
+      "required_configuration_names": ["EMERGENT_LLM_KEY", "GEMINI_API_KEY", "GOOGLE_API_KEY", "OPENAI_API_KEY"],
+      "unconfigured_state": "UNAVAILABLE_INTEGRATION_ABSENT",
+      "reason_code": "NO_APPLICATION_RUNTIME_CLIENT_SOURCE"
+    },
+    {
+      "provider_id": "analytics",
+      "provider": "Analytics",
+      "integration_state": "ABSENT_FROM_RUNTIME_SOURCE",
+      "boundary_id": "NO_RUNTIME_BOUNDARY",
+      "source_path": "stage2a/provider-capability-registry.json",
+      "source_symbol": "analytics_absence_attestation",
+      "required_configuration_names": ["ANALYTICS_WRITE_KEY"],
+      "unconfigured_state": "UNAVAILABLE_INTEGRATION_ABSENT",
+      "reason_code": "NO_APPLICATION_RUNTIME_CLIENT_SOURCE"
+    }
+  ]
+}

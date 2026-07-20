@@ -1,0 +1,35 @@
+{
+  "evidence": [
+    {
+      "evidence_id": "F2C-E-001",
+      "status": "PASS",
+      "subject": "immutable commit",
+      "value": "acb518ea5a160820e64681ff95a16b010fe1156c"
+    },
+    {
+      "evidence_id": "F2C-E-002",
+      "status": "PASS",
+      "subject": "Stage 2 commit",
+      "value": "0be6172a28b75238c5facabf91d43ed09aaf0d54"
+    },
+    {
+      "evidence_id": "F2C-E-003",
+      "status": "PASS",
+      "subject": "Stage 2 archive SHA-256",
+      "value": "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329"
+    },
+    {
+      "evidence_id": "F2C-E-004",
+      "status": "PASS",
+      "subject": "independent materialization assessment",
+      "value": "F0002_READY_FOR_AUTHORIZED_CLOSURE"
+    },
+    {
+      "evidence_id": "F2C-E-005",
+      "status": "PASS",
+      "subject": "Founder closure scope",
+      "value": "immutable baseline materialization only"
+    }
+  ],
+  "package_id": "ES-PKG-2026-004-V003"
+}

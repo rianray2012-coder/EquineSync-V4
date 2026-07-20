@@ -1,0 +1,11 @@
+{
+  "review_attempt": 1,
+  "archive": "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_001_FAILED.zip",
+  "archive_sha256": "1ecb52cbebf70f25a333f37355b9e94f44fb5ad88b7bf500568b59fa88457054",
+  "archive_files": 102,
+  "payload_files": 99,
+  "snapshot_manifest_sha256": "08e8a5cb3044d556ef6fada565243d034679593058666284e7066f31114bdaac",
+  "unzip_test": "PASS",
+  "preservation": "IMMUTABLE_FAILED_REVIEW_EVIDENCE",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

@@ -1,0 +1,16 @@
+{
+  "application": "full EquineSync API at 127.0.0.1:8019",
+  "architecture": "arm64",
+  "database": "MongoDB 8.0.26 at 127.0.0.1:27029",
+  "live_data": false,
+  "network": "sandbox exact-port loopback only",
+  "operating_system": "macOS 26.5.2",
+  "package_id": "ES-PKG-2026-004-V003",
+  "process_residue_event": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+  "production_access": false,
+  "provider_writes": false,
+  "python": "3.11.11",
+  "runtime_readiness_limitation": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "secrets": "names only values excluded",
+  "synthetic_only": true
+}

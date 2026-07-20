@@ -1,0 +1,113 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "blocker_results": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    }
+  ],
+  "candidate_attempt": 9,
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "distinct_from_failed_candidate": true,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "failed_candidate_unchanged": true,
+  "failed_candidates": [
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+      "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003",
+      "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "payload_files": 108,
+      "physical_files": 111,
+      "unchanged": true,
+      "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EMBEDDED_MANIFEST"
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip",
+      "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-003",
+      "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+      "payload_files": 121,
+      "physical_files": 124,
+      "unchanged": true,
+      "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EMBEDDED_MANIFEST"
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_004_FAILED.zip",
+      "archive_sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-004",
+      "manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+      "payload_files": 207,
+      "physical_files": 210,
+      "unchanged": true,
+      "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EMBEDDED_MANIFEST"
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-005_ASSEMBLY_FAILED.zip",
+      "archive_sha256": "41cc9ae595dbe640cc9aedf79fe84267d58ddb84355682626e237eccd5d3595c",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-005",
+      "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+      "manifest": "stage2a/evidence/failed_attempts/CANDIDATE_005_ASSEMBLY_FAILED_SHA256SUMS.txt",
+      "manifest_sha256": "a0937895498704028cf8f450f18555ac7b54b5417a96248d62702a6fa7aff75f",
+      "physical_files": 249,
+      "unchanged": true,
+      "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EXTERNAL_MANIFEST"
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_FROZEN.zip",
+      "archive_sha256": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-006",
+      "manifest_sha256": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+      "payload_files": 253,
+      "physical_files": 256,
+      "unchanged": true,
+      "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EMBEDDED_MANIFEST"
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-007_FROZEN.zip",
+      "archive_sha256": "e89cbed1ac280e1acb4c9a2105177037a5b2335afe8f4f9df38ab3033902c04e",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-007",
+      "manifest_sha256": "cb63e7e2da83368ad737ade7cc3b37d4b6b4281b4a6ab2dc6770f3e481964f1d",
+      "payload_files": 274,
+      "physical_files": 277,
+      "unchanged": true,
+      "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EMBEDDED_MANIFEST"
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-008_ASSEMBLY_FAILED.zip",
+      "archive_sha256": "d94da934bd820ed246f83e1a60453290c4178f6d15d57223103ee361fb61c9ca",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-008",
+      "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+      "manifest": "stage2a/evidence/failed_attempts/CANDIDATE_008_ASSEMBLY_FAILED_SHA256SUMS.txt",
+      "manifest_sha256": "3f25672a322741603632b8c6b56522fce4eec807489ae18cde55c38a10101917",
+      "physical_files": 282,
+      "unchanged": true,
+      "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EXTERNAL_MANIFEST"
+    }
+  ],
+  "freeze_commit": "RECORDED_EXTERNALLY_AFTER_BYTE_FREEZE_TO_AVOID_CIRCULAR_SELF_REFERENCE",
+  "package_id": "ES-PKG-2026-004-V003",
+  "packaging_commit": "3245ec6f94b4c47653f7737a2083079de736ec6e",
+  "validated_implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc"
+}

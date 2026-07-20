@@ -1,0 +1,65 @@
+{
+  "event_classification": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+  "event_status": "CONTAINED_TERMINATED_PORT_CLEARED",
+  "detected_time": {
+    "local_minute": "2026-07-20T00:13-05:00",
+    "utc_minute": "2026-07-20T05:13Z",
+    "precision": "MINUTE_FROM_PROCESS_EVIDENCE_COMMAND",
+    "exact_second": "UNKNOWN_NOT_CAPTURED_AT_DETECTION"
+  },
+  "process": {
+    "pid": 62766,
+    "process_group_id": 62766,
+    "executable_observed": "mongod",
+    "full_command_line": "mongod --dbpath /private/tmp/es-stage2a-review.nRQaB7/repo/stage2a/.runtime/mongo --port 27029 --bind_ip 127.0.0.1 --nounixsocket --quiet",
+    "controlled_listener": "127.0.0.1:27029",
+    "database_path": "/private/tmp/es-stage2a-review.nRQaB7/repo/stage2a/.runtime/mongo",
+    "parent_pid": 1,
+    "started_local": "2026-07-20T00:06:22-05:00"
+  },
+  "attribution": {
+    "result": "VERIFIED_TEMPORARY_SEGREGATED_REVIEW_CLONE",
+    "method": [
+      "ps -p 62766 -o pid=,ppid=,pgid=,lstart=,command=",
+      "lsof -Pan -p 62766 -i",
+      "database path contains the segregated review temporary clone root es-stage2a-review.nRQaB7/repo",
+      "segregated reviewer reported temp-only validation during the same review cycle"
+    ],
+    "repository_worktree_path_match": false
+  },
+  "termination": {
+    "exact_action": "kill -TERM -62766",
+    "scope": "ONLY_VERIFIED_PROCESS_GROUP_62766",
+    "result": "PASS_PROCESS_ABSENT",
+    "post_termination_process_check": "ps -p 62766 returned no process",
+    "post_termination_port_check": "lsof -Pan -iTCP:27029 returned no listener"
+  },
+  "test_impact": {
+    "tests_performed_while_foreign_process_active": [
+      "pure Stage 2A unit tests with no MongoDB access",
+      "syntax and JSON parsing checks with no MongoDB access",
+      "a runtime-purge attempt that failed closed before mutation"
+    ],
+    "database_or_orchestration_validation_accepted_while_active": false,
+    "potentially_affected_results": "FIRST_FAILED_REVIEW_SNAPSHOT_ONLY",
+    "disposition": "FIRST_FAILED_REVIEW_PRESERVED; ALL_DATABASE_OR_ORCHESTRATION_VALIDATION_RERUN_AFTER_PORT_CLEARANCE; PURE_CHECKS_RERUN_BEFORE_FINALIZATION"
+  },
+  "influence_assessment": {
+    "repository_state": "NO_INFLUENCE_DETECTED",
+    "agent_discovery": "NO_INFLUENCE_DETECTED",
+    "identity_probes": "NO_INFLUENCE_DETECTED",
+    "calibration": "NO_INFLUENCE_DETECTED",
+    "orchestration": "FOREIGN_PORT_WAS_DETECTED_AND REFUSED; NO_PROCESS_ADOPTION",
+    "final_disposition": "NO_CAUSAL_INFLUENCE_ESTABLISHED"
+  },
+  "orchestrator_behavior": "CORRECT_FAIL_CLOSED_REFUSAL_OF_UNVERIFIED_FOREIGN_PATH_PROCESS",
+  "repository_control": {
+    "sealed_files_changed": 0,
+    "repository_controlled_artifacts_changed_by_event_cleanup": 0,
+    "immutable_baseline_changed": false,
+    "predecessor_changed": false
+  },
+  "separate_runtime_limitation": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "causal_relationship_to_runtime_limitation": "NOT_ESTABLISHED_DO_NOT_CONFLATE",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

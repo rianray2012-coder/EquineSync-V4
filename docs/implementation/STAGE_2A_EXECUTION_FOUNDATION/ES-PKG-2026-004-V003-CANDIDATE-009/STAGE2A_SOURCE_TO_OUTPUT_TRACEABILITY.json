@@ -1,0 +1,4427 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "outputs": [
+    {
+      "artifact_role": "PACKAGE_OUTPUT::ASSURANCE_STATEMENT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-7C4FACC1708B",
+      "mapping_rationale": "Exact contract entry for ASSURANCE_STATEMENT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "ASSURANCE_STATEMENT.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::BACKEND_BOOTSTRAP_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-DEP-001",
+        "S2A-CTL-DEP-002"
+      ],
+      "evidence_artifacts": [
+        "BACKEND_BOOTSTRAP_VALIDATION.json",
+        "BACKEND_DEPENDENCY_INVENTORY.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-001"
+      ],
+      "implementation_artifacts": [
+        "stage2a/bootstrap_backend.sh",
+        "stage2a/dependency_inventory.py"
+      ],
+      "mapping_id": "S2A-MAP-CBA24D385F9D",
+      "mapping_rationale": "Exact contract entry for BACKEND_BOOTSTRAP_CONTRACT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "BACKEND_BOOTSTRAP_CONTRACT.json",
+      "requirement_ids": [
+        "S2A-REQ-001"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-C9B599E18100",
+        "S2A-SRC-FE37047E052D"
+      ],
+      "test_ids": [
+        "S2A-TEST-DEP-BOOTSTRAP",
+        "S2A-TEST-PIP-CHECK"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::BACKEND_BOOTSTRAP_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-DEP-001",
+        "S2A-CTL-DEP-002"
+      ],
+      "evidence_artifacts": [
+        "BACKEND_BOOTSTRAP_VALIDATION.json",
+        "BACKEND_DEPENDENCY_INVENTORY.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-001"
+      ],
+      "implementation_artifacts": [
+        "stage2a/bootstrap_backend.sh",
+        "stage2a/dependency_inventory.py"
+      ],
+      "mapping_id": "S2A-MAP-26AFF7CE2EC7",
+      "mapping_rationale": "Exact contract entry for BACKEND_BOOTSTRAP_CONTRACT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "BACKEND_BOOTSTRAP_CONTRACT.md",
+      "requirement_ids": [
+        "S2A-REQ-001"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-C9B599E18100",
+        "S2A-SRC-FE37047E052D"
+      ],
+      "test_ids": [
+        "S2A-TEST-DEP-BOOTSTRAP",
+        "S2A-TEST-PIP-CHECK"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::BACKEND_BOOTSTRAP_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-DEP-001",
+        "S2A-CTL-DEP-002"
+      ],
+      "evidence_artifacts": [
+        "BACKEND_DEPENDENCY_INVENTORY.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-001"
+      ],
+      "implementation_artifacts": [
+        "stage2a/bootstrap_backend.sh",
+        "stage2a/dependency_inventory.py"
+      ],
+      "mapping_id": "S2A-MAP-3232C9A95F83",
+      "mapping_rationale": "Exact contract entry for BACKEND_BOOTSTRAP_VALIDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "BACKEND_BOOTSTRAP_VALIDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-001"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-C9B599E18100",
+        "S2A-SRC-FE37047E052D"
+      ],
+      "test_ids": [
+        "S2A-TEST-DEP-BOOTSTRAP",
+        "S2A-TEST-PIP-CHECK"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::BACKEND_BOOTSTRAP_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-DEP-001",
+        "S2A-CTL-DEP-002"
+      ],
+      "evidence_artifacts": [
+        "BACKEND_BOOTSTRAP_VALIDATION.json",
+        "BACKEND_DEPENDENCY_INVENTORY.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-001"
+      ],
+      "implementation_artifacts": [
+        "stage2a/bootstrap_backend.sh",
+        "stage2a/dependency_inventory.py"
+      ],
+      "mapping_id": "S2A-MAP-A1BBA93C3F3C",
+      "mapping_rationale": "Exact contract entry for BACKEND_BOOTSTRAP_VALIDATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "BACKEND_BOOTSTRAP_VALIDATION.md",
+      "requirement_ids": [
+        "S2A-REQ-001"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-C9B599E18100",
+        "S2A-SRC-FE37047E052D"
+      ],
+      "test_ids": [
+        "S2A-TEST-DEP-BOOTSTRAP",
+        "S2A-TEST-PIP-CHECK"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::BACKEND_DEPENDENCY_INVENTORY",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-DEP-001",
+        "S2A-CTL-DEP-002"
+      ],
+      "evidence_artifacts": [
+        "BACKEND_BOOTSTRAP_VALIDATION.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-001"
+      ],
+      "implementation_artifacts": [
+        "stage2a/bootstrap_backend.sh",
+        "stage2a/dependency_inventory.py"
+      ],
+      "mapping_id": "S2A-MAP-D5D5DD46718A",
+      "mapping_rationale": "Exact contract entry for BACKEND_DEPENDENCY_INVENTORY.txt binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "BACKEND_DEPENDENCY_INVENTORY.txt",
+      "requirement_ids": [
+        "S2A-REQ-001"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-C9B599E18100",
+        "S2A-SRC-FE37047E052D"
+      ],
+      "test_ids": [
+        "S2A-TEST-DEP-BOOTSTRAP",
+        "S2A-TEST-PIP-CHECK"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::CLEANUP_VALIDATION_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-CLEANUP-001",
+        "S2A-CTL-ZERO-RESIDUE-001"
+      ],
+      "evidence_artifacts": [
+        "ZERO_RESIDUE_PROOF.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-007"
+      ],
+      "implementation_artifacts": [
+        "stage2a/cleanup.py"
+      ],
+      "mapping_id": "S2A-MAP-9E926CA32E89",
+      "mapping_rationale": "Exact contract entry for CLEANUP_VALIDATION_REPORT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "CLEANUP_VALIDATION_REPORT.json",
+      "requirement_ids": [
+        "S2A-REQ-007"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-DDFD0174B8E7"
+      ],
+      "test_ids": [
+        "S2A-TEST-CLEANUP-PARTIAL",
+        "S2A-TEST-CLEANUP-INTERRUPTED"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::CLEANUP_VALIDATION_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-CLEANUP-001",
+        "S2A-CTL-ZERO-RESIDUE-001"
+      ],
+      "evidence_artifacts": [
+        "CLEANUP_VALIDATION_REPORT.json",
+        "ZERO_RESIDUE_PROOF.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-007"
+      ],
+      "implementation_artifacts": [
+        "stage2a/cleanup.py"
+      ],
+      "mapping_id": "S2A-MAP-0E9B7C05FB65",
+      "mapping_rationale": "Exact contract entry for CLEANUP_VALIDATION_REPORT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "CLEANUP_VALIDATION_REPORT.md",
+      "requirement_ids": [
+        "S2A-REQ-007"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-DDFD0174B8E7"
+      ],
+      "test_ids": [
+        "S2A-TEST-CLEANUP-PARTIAL",
+        "S2A-TEST-CLEANUP-INTERRUPTED"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::COLD_START_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-DBC0716EBB85",
+      "mapping_rationale": "Exact contract entry for COLD_START_VALIDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "COLD_START_VALIDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::COLD_START_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-CE21B8C66BA0",
+      "mapping_rationale": "Exact contract entry for COLD_START_VALIDATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "COLD_START_VALIDATION.md",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::CONTROLLED_SHUTDOWN_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "INTERRUPTED_START_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-17A382E905E0",
+      "mapping_rationale": "Exact contract entry for CONTROLLED_SHUTDOWN_VALIDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "CONTROLLED_SHUTDOWN_VALIDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-CONTROLLED-SHUTDOWN"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::CONTROLLED_SHUTDOWN_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-3CC93C2DD971",
+      "mapping_rationale": "Exact contract entry for CONTROLLED_SHUTDOWN_VALIDATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "CONTROLLED_SHUTDOWN_VALIDATION.md",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-CONTROLLED-SHUTDOWN"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::CORRECTED_CANDIDATE_PROVENANCE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-D8FED0A8A1C2",
+      "mapping_rationale": "Exact contract entry for CORRECTED_CANDIDATE_PROVENANCE.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "CORRECTED_CANDIDATE_PROVENANCE.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::CORRECTED_CANDIDATE_PROVENANCE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-63F2F111E65F",
+      "mapping_rationale": "Exact contract entry for CORRECTED_CANDIDATE_PROVENANCE.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "CORRECTED_CANDIDATE_PROVENANCE.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::DRAFT_REVIEW_SHA256SUMS",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-388CD0087047",
+      "mapping_rationale": "Exact contract entry for DRAFT_REVIEW_SHA256SUMS.txt binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "DRAFT_REVIEW_SHA256SUMS.txt",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::DRAFT_REVIEW_SNAPSHOT_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-C8E5546616EE",
+      "mapping_rationale": "Exact contract entry for DRAFT_REVIEW_SNAPSHOT_RECORD.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "DRAFT_REVIEW_SNAPSHOT_RECORD.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::DRAFT_REVIEW_SNAPSHOT_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-37865DAAA7E6",
+      "mapping_rationale": "Exact contract entry for DRAFT_REVIEW_SNAPSHOT_RECORD.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "DRAFT_REVIEW_SNAPSHOT_RECORD.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::EVIDENCE_CAPTURE_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EXECUTION_EVIDENCE_SCHEMA.json",
+        "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0002"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/evidence_capture.py",
+        "stage2a/semantic_projection.py",
+        "stage2a/execution-evidence-schema.json"
+      ],
+      "mapping_id": "S2A-MAP-C17CE8623EAC",
+      "mapping_rationale": "Exact contract entry for EVIDENCE_CAPTURE_VALIDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "EVIDENCE_CAPTURE_VALIDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-5910785933D3",
+        "S2A-SRC-05854EA9BBB9",
+        "S2A-SRC-1D3720DEDACF"
+      ],
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::EVIDENCE_CAPTURE_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0002"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/evidence_capture.py",
+        "stage2a/semantic_projection.py",
+        "stage2a/execution-evidence-schema.json"
+      ],
+      "mapping_id": "S2A-MAP-57CC7631C85A",
+      "mapping_rationale": "Exact contract entry for EVIDENCE_CAPTURE_VALIDATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "EVIDENCE_CAPTURE_VALIDATION.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-5910785933D3",
+        "S2A-SRC-05854EA9BBB9",
+        "S2A-SRC-1D3720DEDACF"
+      ],
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::EVIDENCE_REUSE_AND_RERUN_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-8E1226420171",
+      "mapping_rationale": "Exact contract entry for EVIDENCE_REUSE_AND_RERUN_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "EVIDENCE_REUSE_AND_RERUN_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::EVIDENCE_REUSE_AND_RERUN_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-AF1961563A46",
+      "mapping_rationale": "Exact contract entry for EVIDENCE_REUSE_AND_RERUN_REGISTER.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "EVIDENCE_REUSE_AND_RERUN_REGISTER.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::EXECUTION_EVIDENCE_SCHEMA",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0002"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/evidence_capture.py",
+        "stage2a/semantic_projection.py",
+        "stage2a/execution-evidence-schema.json"
+      ],
+      "mapping_id": "S2A-MAP-B9528363056F",
+      "mapping_rationale": "Exact contract entry for EXECUTION_EVIDENCE_SCHEMA.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "EXECUTION_EVIDENCE_SCHEMA.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-5910785933D3",
+        "S2A-SRC-05854EA9BBB9",
+        "S2A-SRC-1D3720DEDACF"
+      ],
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::EXECUTION_EVIDENCE_SCHEMA",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0002"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/evidence_capture.py",
+        "stage2a/semantic_projection.py",
+        "stage2a/execution-evidence-schema.json"
+      ],
+      "mapping_id": "S2A-MAP-97155F996DA5",
+      "mapping_rationale": "Exact contract entry for EXECUTION_EVIDENCE_SCHEMA.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "EXECUTION_EVIDENCE_SCHEMA.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-5910785933D3",
+        "S2A-SRC-05854EA9BBB9",
+        "S2A-SRC-1D3720DEDACF"
+      ],
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::F0001_UPDATED_READINESS_DETERMINATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-86A7DA8DC437",
+      "mapping_rationale": "Exact contract entry for F0001_UPDATED_READINESS_DETERMINATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "F0001_UPDATED_READINESS_DETERMINATION.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::F0001_UPDATED_READINESS_DETERMINATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-66A32866C42C",
+      "mapping_rationale": "Exact contract entry for F0001_UPDATED_READINESS_DETERMINATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "F0001_UPDATED_READINESS_DETERMINATION.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::F0002_CLOSURE_EVIDENCE_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-708B6DA159C2",
+      "mapping_rationale": "Exact contract entry for F0002_CLOSURE_EVIDENCE_REGISTER.csv binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "F0002_CLOSURE_EVIDENCE_REGISTER.csv",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::F0002_CLOSURE_EVIDENCE_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-ED762E84F202",
+      "mapping_rationale": "Exact contract entry for F0002_CLOSURE_EVIDENCE_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "F0002_CLOSURE_EVIDENCE_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::F0002_FOUNDER_AUTHORIZED_CLOSURE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-5CC09C1D7E12",
+      "mapping_rationale": "Exact contract entry for F0002_FOUNDER_AUTHORIZED_CLOSURE.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "F0002_FOUNDER_AUTHORIZED_CLOSURE.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::F0002_FOUNDER_AUTHORIZED_CLOSURE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-4B4A7E074DD0",
+      "mapping_rationale": "Exact contract entry for F0002_FOUNDER_AUTHORIZED_CLOSURE.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "F0002_FOUNDER_AUTHORIZED_CLOSURE.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::FIXTURE_DIGESTS",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-FIXTURE-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_FIXTURE_FOUNDATION.json",
+        "FIXTURE_REPRODUCIBILITY_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-005"
+      ],
+      "implementation_artifacts": [
+        "stage2a/fixture_loader.py",
+        "stage2a/fixtures/foundation-v1.json"
+      ],
+      "mapping_id": "S2A-MAP-4A26D53DC4F7",
+      "mapping_rationale": "Exact contract entry for FIXTURE_DIGESTS.txt binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "FIXTURE_DIGESTS.txt",
+      "requirement_ids": [
+        "S2A-REQ-005"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B1A50236728",
+        "S2A-SRC-3D37CD4F719F"
+      ],
+      "test_ids": [
+        "S2A-TEST-FIXTURE-REPLAY",
+        "S2A-TEST-FIXTURE-RESET"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::FIXTURE_REPRODUCIBILITY_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-FIXTURE-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_FIXTURE_FOUNDATION.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-005"
+      ],
+      "implementation_artifacts": [
+        "stage2a/fixture_loader.py",
+        "stage2a/fixtures/foundation-v1.json"
+      ],
+      "mapping_id": "S2A-MAP-F2DD8C81B154",
+      "mapping_rationale": "Exact contract entry for FIXTURE_REPRODUCIBILITY_REPORT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "FIXTURE_REPRODUCIBILITY_REPORT.json",
+      "requirement_ids": [
+        "S2A-REQ-005"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B1A50236728",
+        "S2A-SRC-3D37CD4F719F"
+      ],
+      "test_ids": [
+        "S2A-TEST-FIXTURE-REPLAY",
+        "S2A-TEST-FIXTURE-RESET"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::FIXTURE_REPRODUCIBILITY_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-FIXTURE-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_FIXTURE_FOUNDATION.json",
+        "FIXTURE_REPRODUCIBILITY_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-005"
+      ],
+      "implementation_artifacts": [
+        "stage2a/fixture_loader.py",
+        "stage2a/fixtures/foundation-v1.json"
+      ],
+      "mapping_id": "S2A-MAP-389F11C6DAEB",
+      "mapping_rationale": "Exact contract entry for FIXTURE_REPRODUCIBILITY_REPORT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "FIXTURE_REPRODUCIBILITY_REPORT.md",
+      "requirement_ids": [
+        "S2A-REQ-005"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B1A50236728",
+        "S2A-SRC-3D37CD4F719F"
+      ],
+      "test_ids": [
+        "S2A-TEST-FIXTURE-REPLAY",
+        "S2A-TEST-FIXTURE-RESET"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::FOUNDATION_EVIDENCE_EXAMPLE_INTENTIONAL_FAIL",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0002"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/evidence_capture.py",
+        "stage2a/semantic_projection.py",
+        "stage2a/execution-evidence-schema.json"
+      ],
+      "mapping_id": "S2A-MAP-E31F7E6E9643",
+      "mapping_rationale": "Exact contract entry for FOUNDATION_EVIDENCE_EXAMPLE_INTENTIONAL_FAIL.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "FOUNDATION_EVIDENCE_EXAMPLE_INTENTIONAL_FAIL.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-5910785933D3",
+        "S2A-SRC-05854EA9BBB9",
+        "S2A-SRC-1D3720DEDACF"
+      ],
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::FOUNDATION_EVIDENCE_EXAMPLE_PASS",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0002"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/evidence_capture.py",
+        "stage2a/semantic_projection.py",
+        "stage2a/execution-evidence-schema.json"
+      ],
+      "mapping_id": "S2A-MAP-9356FA48EEF2",
+      "mapping_rationale": "Exact contract entry for FOUNDATION_EVIDENCE_EXAMPLE_PASS.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "FOUNDATION_EVIDENCE_EXAMPLE_PASS.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-5910785933D3",
+        "S2A-SRC-05854EA9BBB9",
+        "S2A-SRC-1D3720DEDACF"
+      ],
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::FOUNDER_AUTHORIZATION_BOUNDARY",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-FC762B8DF616",
+      "mapping_rationale": "Exact contract entry for FOUNDER_AUTHORIZATION_BOUNDARY.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "FOUNDER_AUTHORIZATION_BOUNDARY.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::IMMUTABLE_BASELINE_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-E9507F150AD8",
+      "mapping_rationale": "Exact contract entry for IMMUTABLE_BASELINE_RECORD.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "IMMUTABLE_BASELINE_RECORD.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::IMMUTABLE_BASELINE_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-03579B1B15B5",
+      "mapping_rationale": "Exact contract entry for IMMUTABLE_BASELINE_RECORD.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "IMMUTABLE_BASELINE_RECORD.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::INTERRUPTED_START_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-994E6AC90EEA",
+      "mapping_rationale": "Exact contract entry for INTERRUPTED_START_VALIDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "INTERRUPTED_START_VALIDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-INTERRUPTED-START"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::INTERRUPTED_START_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-30E75F7670C3",
+      "mapping_rationale": "Exact contract entry for INTERRUPTED_START_VALIDATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "INTERRUPTED_START_VALIDATION.md",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-INTERRUPTED-START"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::ISOLATION_NEGATIVE_TEST_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ENV-001",
+        "S2A-CTL-NET-001",
+        "S2A-CTL-PROVIDER-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ISOLATION_CONTROL.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-003"
+      ],
+      "implementation_artifacts": [
+        "stage2a/lib/control.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json"
+      ],
+      "mapping_id": "S2A-MAP-331B98D24011",
+      "mapping_rationale": "Exact contract entry for ISOLATION_NEGATIVE_TEST_REPORT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "ISOLATION_NEGATIVE_TEST_REPORT.json",
+      "requirement_ids": [
+        "S2A-REQ-003"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-248CE3E8E629",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B"
+      ],
+      "test_ids": [
+        "S2A-TEST-ENV-NEGATIVE",
+        "S2A-TEST-EXACT-PORT-DENIAL"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::ISOLATION_NEGATIVE_TEST_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ENV-001",
+        "S2A-CTL-NET-001",
+        "S2A-CTL-PROVIDER-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ISOLATION_CONTROL.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-003"
+      ],
+      "implementation_artifacts": [
+        "stage2a/lib/control.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json"
+      ],
+      "mapping_id": "S2A-MAP-BB4066BDBC32",
+      "mapping_rationale": "Exact contract entry for ISOLATION_NEGATIVE_TEST_REPORT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "ISOLATION_NEGATIVE_TEST_REPORT.md",
+      "requirement_ids": [
+        "S2A-REQ-003"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-248CE3E8E629",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B"
+      ],
+      "test_ids": [
+        "S2A-TEST-ENV-NEGATIVE",
+        "S2A-TEST-EXACT-PORT-DENIAL"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::PACKAGE_MANAGER_AUTHORITY_DECISION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VALIDATION.json",
+        "TOOLCHAIN_VERSION_CAPTURE.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-002"
+      ],
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "mapping_id": "S2A-MAP-D5EC65114685",
+      "mapping_rationale": "Exact contract entry for PACKAGE_MANAGER_AUTHORITY_DECISION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "PACKAGE_MANAGER_AUTHORITY_DECISION.md",
+      "requirement_ids": [
+        "S2A-REQ-002"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849"
+      ],
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::PACKAGE_STATUS_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-75D754231A84",
+      "mapping_rationale": "Exact contract entry for PACKAGE_STATUS_RECORD.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "PACKAGE_STATUS_RECORD.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::PACKAGE_STATUS_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-A43A1B6D8AF1",
+      "mapping_rationale": "Exact contract entry for PACKAGE_STATUS_RECORD.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "PACKAGE_STATUS_RECORD.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::PREDECESSOR_REFERENCE_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-4A31CDDB819D",
+      "mapping_rationale": "Exact contract entry for PREDECESSOR_REFERENCE_RECORD.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "PREDECESSOR_REFERENCE_RECORD.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::PREDECESSOR_REFERENCE_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-BC127F473D99",
+      "mapping_rationale": "Exact contract entry for PREDECESSOR_REFERENCE_RECORD.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "PREDECESSOR_REFERENCE_RECORD.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::PROVIDER_DENIAL_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "STARTUP_SIDE_EFFECT_ORACLE.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-2C59F4424C20",
+      "mapping_rationale": "Exact contract entry for PROVIDER_DENIAL_REGISTER.csv binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "PROVIDER_DENIAL_REGISTER.csv",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::PROVIDER_DENIAL_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "STARTUP_SIDE_EFFECT_ORACLE.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-24B1F4F8CEF7",
+      "mapping_rationale": "Exact contract entry for PROVIDER_DENIAL_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "PROVIDER_DENIAL_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::RECOVERED_STATE_INVARIANT_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ROLLBACK-001",
+        "S2A-CTL-SOURCE-RECOVERY-001"
+      ],
+      "evidence_artifacts": [
+        "ROLLBACK_REHEARSAL_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-008"
+      ],
+      "implementation_artifacts": [
+        "stage2a/rollback_recovery.py"
+      ],
+      "mapping_id": "S2A-MAP-85CB825A4823",
+      "mapping_rationale": "Exact contract entry for RECOVERED_STATE_INVARIANT_REPORT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "RECOVERED_STATE_INVARIANT_REPORT.json",
+      "requirement_ids": [
+        "S2A-REQ-008"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-D0C7345341AF"
+      ],
+      "test_ids": [
+        "S2A-TEST-DATASTORE-ROLLBACK",
+        "S2A-TEST-SOURCE-RECOVERY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::RECOVERED_STATE_INVARIANT_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ROLLBACK-001",
+        "S2A-CTL-SOURCE-RECOVERY-001"
+      ],
+      "evidence_artifacts": [
+        "ROLLBACK_REHEARSAL_REPORT.json",
+        "RECOVERED_STATE_INVARIANT_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-008"
+      ],
+      "implementation_artifacts": [
+        "stage2a/rollback_recovery.py"
+      ],
+      "mapping_id": "S2A-MAP-EC2902600098",
+      "mapping_rationale": "Exact contract entry for RECOVERED_STATE_INVARIANT_REPORT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "RECOVERED_STATE_INVARIANT_REPORT.md",
+      "requirement_ids": [
+        "S2A-REQ-008"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-D0C7345341AF"
+      ],
+      "test_ids": [
+        "S2A-TEST-DATASTORE-ROLLBACK",
+        "S2A-TEST-SOURCE-RECOVERY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::ROLLBACK_REHEARSAL_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ROLLBACK-001",
+        "S2A-CTL-SOURCE-RECOVERY-001"
+      ],
+      "evidence_artifacts": [
+        "RECOVERED_STATE_INVARIANT_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-008"
+      ],
+      "implementation_artifacts": [
+        "stage2a/rollback_recovery.py"
+      ],
+      "mapping_id": "S2A-MAP-7A79AF04A857",
+      "mapping_rationale": "Exact contract entry for ROLLBACK_REHEARSAL_REPORT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "ROLLBACK_REHEARSAL_REPORT.json",
+      "requirement_ids": [
+        "S2A-REQ-008"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-D0C7345341AF"
+      ],
+      "test_ids": [
+        "S2A-TEST-DATASTORE-ROLLBACK",
+        "S2A-TEST-SOURCE-RECOVERY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::ROLLBACK_REHEARSAL_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ROLLBACK-001",
+        "S2A-CTL-SOURCE-RECOVERY-001"
+      ],
+      "evidence_artifacts": [
+        "ROLLBACK_REHEARSAL_REPORT.json",
+        "RECOVERED_STATE_INVARIANT_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-008"
+      ],
+      "implementation_artifacts": [
+        "stage2a/rollback_recovery.py"
+      ],
+      "mapping_id": "S2A-MAP-35D759AF9E50",
+      "mapping_rationale": "Exact contract entry for ROLLBACK_REHEARSAL_REPORT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "ROLLBACK_REHEARSAL_REPORT.md",
+      "requirement_ids": [
+        "S2A-REQ-008"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-D0C7345341AF"
+      ],
+      "test_ids": [
+        "S2A-TEST-DATASTORE-ROLLBACK",
+        "S2A-TEST-SOURCE-RECOVERY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-5AE310E93766",
+      "mapping_rationale": "Exact contract entry for RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.json",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-FBEA5D643944",
+      "mapping_rationale": "Exact contract entry for RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.md",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::SECRET_NAME_ALLOWLIST",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ENV-001",
+        "S2A-CTL-NET-001",
+        "S2A-CTL-PROVIDER-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ISOLATION_CONTROL.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-003"
+      ],
+      "implementation_artifacts": [
+        "stage2a/lib/control.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json"
+      ],
+      "mapping_id": "S2A-MAP-A2AE4550FDFF",
+      "mapping_rationale": "Exact contract entry for SECRET_NAME_ALLOWLIST.txt binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "SECRET_NAME_ALLOWLIST.txt",
+      "requirement_ids": [
+        "S2A-REQ-003"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-248CE3E8E629",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B"
+      ],
+      "test_ids": [
+        "S2A-TEST-ENV-NEGATIVE",
+        "S2A-TEST-EXACT-PORT-DENIAL"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-75900C39CCD1",
+      "mapping_rationale": "Exact contract entry for SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.json",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-F70CDEFC5405",
+      "mapping_rationale": "Exact contract entry for SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.md",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_CHANGE_MANIFEST",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-0E5C31ABFA76",
+      "mapping_rationale": "Exact contract entry for STAGE2A_CHANGE_MANIFEST.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_CHANGE_MANIFEST.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_CHANGE_MANIFEST",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-EFD5073281B5",
+      "mapping_rationale": "Exact contract entry for STAGE2A_CHANGE_MANIFEST.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_CHANGE_MANIFEST.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_CLEANUP_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-CLEANUP-001",
+        "S2A-CTL-ZERO-RESIDUE-001"
+      ],
+      "evidence_artifacts": [
+        "CLEANUP_VALIDATION_REPORT.json",
+        "ZERO_RESIDUE_PROOF.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-007"
+      ],
+      "implementation_artifacts": [
+        "stage2a/cleanup.py"
+      ],
+      "mapping_id": "S2A-MAP-3B89BEA56B06",
+      "mapping_rationale": "Exact contract entry for STAGE2A_CLEANUP_CONTRACT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_CLEANUP_CONTRACT.json",
+      "requirement_ids": [
+        "S2A-REQ-007"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-DDFD0174B8E7"
+      ],
+      "test_ids": [
+        "S2A-TEST-CLEANUP-PARTIAL",
+        "S2A-TEST-CLEANUP-INTERRUPTED"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_CLEANUP_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-CLEANUP-001",
+        "S2A-CTL-ZERO-RESIDUE-001"
+      ],
+      "evidence_artifacts": [
+        "CLEANUP_VALIDATION_REPORT.json",
+        "ZERO_RESIDUE_PROOF.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-007"
+      ],
+      "implementation_artifacts": [
+        "stage2a/cleanup.py"
+      ],
+      "mapping_id": "S2A-MAP-E24B1BCE1C2F",
+      "mapping_rationale": "Exact contract entry for STAGE2A_CLEANUP_CONTRACT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_CLEANUP_CONTRACT.md",
+      "requirement_ids": [
+        "S2A-REQ-007"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-DDFD0174B8E7"
+      ],
+      "test_ids": [
+        "S2A-TEST-CLEANUP-PARTIAL",
+        "S2A-TEST-CLEANUP-INTERRUPTED"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_DETERMINISTIC_EXECUTION_PROFILE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "STARTUP_SIDE_EFFECT_ORACLE.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-633F76336D11",
+      "mapping_rationale": "Exact contract entry for STAGE2A_DETERMINISTIC_EXECUTION_PROFILE.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_DETERMINISTIC_EXECUTION_PROFILE.json",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_DETERMINISTIC_EXECUTION_PROFILE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "STARTUP_SIDE_EFFECT_ORACLE.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-8649644E5028",
+      "mapping_rationale": "Exact contract entry for STAGE2A_DETERMINISTIC_EXECUTION_PROFILE.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_DETERMINISTIC_EXECUTION_PROFILE.md",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_ENVIRONMENT_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ENV-001",
+        "S2A-CTL-NET-001",
+        "S2A-CTL-PROVIDER-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ISOLATION_CONTROL.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-003"
+      ],
+      "implementation_artifacts": [
+        "stage2a/lib/control.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json"
+      ],
+      "mapping_id": "S2A-MAP-545E880A424B",
+      "mapping_rationale": "Exact contract entry for STAGE2A_ENVIRONMENT_CONTRACT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_ENVIRONMENT_CONTRACT.json",
+      "requirement_ids": [
+        "S2A-REQ-003"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-248CE3E8E629",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B"
+      ],
+      "test_ids": [
+        "S2A-TEST-ENV-NEGATIVE",
+        "S2A-TEST-EXACT-PORT-DENIAL"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_ENVIRONMENT_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ENV-001",
+        "S2A-CTL-NET-001",
+        "S2A-CTL-PROVIDER-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ISOLATION_CONTROL.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-003"
+      ],
+      "implementation_artifacts": [
+        "stage2a/lib/control.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json"
+      ],
+      "mapping_id": "S2A-MAP-FF1EE9A4EE8C",
+      "mapping_rationale": "Exact contract entry for STAGE2A_ENVIRONMENT_CONTRACT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_ENVIRONMENT_CONTRACT.md",
+      "requirement_ids": [
+        "S2A-REQ-003"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-248CE3E8E629",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B"
+      ],
+      "test_ids": [
+        "S2A-TEST-ENV-NEGATIVE",
+        "S2A-TEST-EXACT-PORT-DENIAL"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FILES_CREATED_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-45FBF031E4DB",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FILES_CREATED_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FILES_CREATED_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FILES_CREATED_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-4088AC603DEC",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FILES_CREATED_REGISTER.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FILES_CREATED_REGISTER.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FILES_MODIFIED_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-8AEA7D4D087A",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FILES_MODIFIED_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FILES_MODIFIED_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FILES_MODIFIED_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-BBF8419E1088",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FILES_MODIFIED_REGISTER.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FILES_MODIFIED_REGISTER.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FINDING_TO_REMEDIATION_MATRIX",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-A07A084F3FF5",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FINDING_TO_REMEDIATION_MATRIX.csv binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.csv",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FINDING_TO_REMEDIATION_MATRIX",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-B6C5C12115A7",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FIXTURE_FOUNDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-FIXTURE-001"
+      ],
+      "evidence_artifacts": [
+        "FIXTURE_REPRODUCIBILITY_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-005"
+      ],
+      "implementation_artifacts": [
+        "stage2a/fixture_loader.py",
+        "stage2a/fixtures/foundation-v1.json"
+      ],
+      "mapping_id": "S2A-MAP-10D2AF7D22CD",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FIXTURE_FOUNDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FIXTURE_FOUNDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-005"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B1A50236728",
+        "S2A-SRC-3D37CD4F719F"
+      ],
+      "test_ids": [
+        "S2A-TEST-FIXTURE-REPLAY",
+        "S2A-TEST-FIXTURE-RESET"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FIXTURE_FOUNDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-FIXTURE-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_FIXTURE_FOUNDATION.json",
+        "FIXTURE_REPRODUCIBILITY_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-005"
+      ],
+      "implementation_artifacts": [
+        "stage2a/fixture_loader.py",
+        "stage2a/fixtures/foundation-v1.json"
+      ],
+      "mapping_id": "S2A-MAP-7DCCA37AC777",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FIXTURE_FOUNDATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FIXTURE_FOUNDATION.md",
+      "requirement_ids": [
+        "S2A-REQ-005"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B1A50236728",
+        "S2A-SRC-3D37CD4F719F"
+      ],
+      "test_ids": [
+        "S2A-TEST-FIXTURE-REPLAY",
+        "S2A-TEST-FIXTURE-RESET"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FOUNDATION_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-AE57AE1B9F71",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FOUNDATION_VALIDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FOUNDATION_VALIDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_FOUNDATION_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-9D4E1575EC79",
+      "mapping_rationale": "Exact contract entry for STAGE2A_FOUNDATION_VALIDATION.txt binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_FOUNDATION_VALIDATION.txt",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_GAP_REMEDIATION_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-E7623F307012",
+      "mapping_rationale": "Exact contract entry for STAGE2A_GAP_REMEDIATION_REPORT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_GAP_REMEDIATION_REPORT.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_GAP_REMEDIATION_REPORT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-6A994B535E38",
+      "mapping_rationale": "Exact contract entry for STAGE2A_GAP_REMEDIATION_REPORT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_GAP_REMEDIATION_REPORT.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_ISOLATION_CONTROL",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ENV-001",
+        "S2A-CTL-NET-001",
+        "S2A-CTL-PROVIDER-001"
+      ],
+      "evidence_artifacts": [
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-003"
+      ],
+      "implementation_artifacts": [
+        "stage2a/lib/control.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json"
+      ],
+      "mapping_id": "S2A-MAP-321ED728E357",
+      "mapping_rationale": "Exact contract entry for STAGE2A_ISOLATION_CONTROL.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_ISOLATION_CONTROL.json",
+      "requirement_ids": [
+        "S2A-REQ-003"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-248CE3E8E629",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B"
+      ],
+      "test_ids": [
+        "S2A-TEST-ENV-NEGATIVE",
+        "S2A-TEST-EXACT-PORT-DENIAL"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_ISOLATION_CONTROL",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ENV-001",
+        "S2A-CTL-NET-001",
+        "S2A-CTL-PROVIDER-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ISOLATION_CONTROL.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-003"
+      ],
+      "implementation_artifacts": [
+        "stage2a/lib/control.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json"
+      ],
+      "mapping_id": "S2A-MAP-AF3DAF81E7D9",
+      "mapping_rationale": "Exact contract entry for STAGE2A_ISOLATION_CONTROL.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_ISOLATION_CONTROL.md",
+      "requirement_ids": [
+        "S2A-REQ-003"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-248CE3E8E629",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B"
+      ],
+      "test_ids": [
+        "S2A-TEST-ENV-NEGATIVE",
+        "S2A-TEST-EXACT-PORT-DENIAL"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_ORCHESTRATION_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "CONTROLLED_SHUTDOWN_VALIDATION.json",
+        "INTERRUPTED_START_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-3F4D07254E5D",
+      "mapping_rationale": "Exact contract entry for STAGE2A_ORCHESTRATION_CONTRACT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_ORCHESTRATION_CONTRACT.json",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_ORCHESTRATION_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0005"
+      ],
+      "gap_ids": [
+        "S2-GAP-004"
+      ],
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "mapping_id": "S2A-MAP-6D866E1E3BDE",
+      "mapping_rationale": "Exact contract entry for STAGE2A_ORCHESTRATION_CONTRACT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_ORCHESTRATION_CONTRACT.md",
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8"
+      ],
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_PRE_CHANGE_BASELINE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-FFBA8A4763D6",
+      "mapping_rationale": "Exact contract entry for STAGE2A_PRE_CHANGE_BASELINE.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_PRE_CHANGE_BASELINE.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_PRE_CHANGE_BASELINE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-5C70479ADB1F",
+      "mapping_rationale": "Exact contract entry for STAGE2A_PRE_CHANGE_BASELINE.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_PRE_CHANGE_BASELINE.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-85760D430739",
+      "mapping_rationale": "Exact contract entry for STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.csv binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.csv",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-2BE8F2AF3DD2",
+      "mapping_rationale": "Exact contract entry for STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_ROLLBACK_RECOVERY_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ROLLBACK-001",
+        "S2A-CTL-SOURCE-RECOVERY-001"
+      ],
+      "evidence_artifacts": [
+        "ROLLBACK_REHEARSAL_REPORT.json",
+        "RECOVERED_STATE_INVARIANT_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-008"
+      ],
+      "implementation_artifacts": [
+        "stage2a/rollback_recovery.py"
+      ],
+      "mapping_id": "S2A-MAP-C32F6E37AD72",
+      "mapping_rationale": "Exact contract entry for STAGE2A_ROLLBACK_RECOVERY_CONTRACT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_ROLLBACK_RECOVERY_CONTRACT.json",
+      "requirement_ids": [
+        "S2A-REQ-008"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-D0C7345341AF"
+      ],
+      "test_ids": [
+        "S2A-TEST-DATASTORE-ROLLBACK",
+        "S2A-TEST-SOURCE-RECOVERY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_ROLLBACK_RECOVERY_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-ROLLBACK-001",
+        "S2A-CTL-SOURCE-RECOVERY-001"
+      ],
+      "evidence_artifacts": [
+        "ROLLBACK_REHEARSAL_REPORT.json",
+        "RECOVERED_STATE_INVARIANT_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-008"
+      ],
+      "implementation_artifacts": [
+        "stage2a/rollback_recovery.py"
+      ],
+      "mapping_id": "S2A-MAP-93F889ED696C",
+      "mapping_rationale": "Exact contract entry for STAGE2A_ROLLBACK_RECOVERY_CONTRACT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_ROLLBACK_RECOVERY_CONTRACT.md",
+      "requirement_ids": [
+        "S2A-REQ-008"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-D0C7345341AF"
+      ],
+      "test_ids": [
+        "S2A-TEST-DATASTORE-ROLLBACK",
+        "S2A-TEST-SOURCE-RECOVERY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VALIDATION.json",
+        "TOOLCHAIN_VERSION_CAPTURE.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-002"
+      ],
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "mapping_id": "S2A-MAP-6609CD934AFE",
+      "mapping_rationale": "Exact contract entry for STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT.json",
+      "requirement_ids": [
+        "S2A-REQ-002"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849"
+      ],
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VALIDATION.json",
+        "TOOLCHAIN_VERSION_CAPTURE.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-002"
+      ],
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "mapping_id": "S2A-MAP-CEB8E5440DF8",
+      "mapping_rationale": "Exact contract entry for STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT.md",
+      "requirement_ids": [
+        "S2A-REQ-002"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849"
+      ],
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_SCOPE_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-6A7B8D1ED8E4",
+      "mapping_rationale": "Exact contract entry for STAGE2A_SCOPE_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_SCOPE_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_SCOPE_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-FEB25850B9F9",
+      "mapping_rationale": "Exact contract entry for STAGE2A_SCOPE_REGISTER.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_SCOPE_REGISTER.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_SOURCE_EVIDENCE_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-86AF07C81A71",
+      "mapping_rationale": "Exact contract entry for STAGE2A_SOURCE_EVIDENCE_REGISTER.csv binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_SOURCE_EVIDENCE_REGISTER.csv",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_SOURCE_EVIDENCE_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-36705A47354D",
+      "mapping_rationale": "Exact contract entry for STAGE2A_SOURCE_EVIDENCE_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_SOURCE_EVIDENCE_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-4DB2A0A80232",
+      "mapping_rationale": "Exact contract entry for STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-C6C4C86B01B4",
+      "mapping_rationale": "Exact contract entry for STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_TEST_CONTROL_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-4E6D9475F5A7",
+      "mapping_rationale": "Exact contract entry for STAGE2A_TEST_CONTROL_REGISTER.csv binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_TEST_CONTROL_REGISTER.csv",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_TEST_CONTROL_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-104A0507BF22",
+      "mapping_rationale": "Exact contract entry for STAGE2A_TEST_CONTROL_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_TEST_CONTROL_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_VALIDATION_COMMAND_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VALIDATION.json",
+        "TOOLCHAIN_VERSION_CAPTURE.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-002"
+      ],
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "mapping_id": "S2A-MAP-9E92C9C686FD",
+      "mapping_rationale": "Exact contract entry for STAGE2A_VALIDATION_COMMAND_REGISTER.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_VALIDATION_COMMAND_REGISTER.json",
+      "requirement_ids": [
+        "S2A-REQ-002"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849"
+      ],
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD",
+        "S2A-TEST-TRACE-SPECIFICITY",
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2A_VALIDATION_COMMAND_REGISTER",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VALIDATION.json",
+        "TOOLCHAIN_VERSION_CAPTURE.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-002"
+      ],
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "mapping_id": "S2A-MAP-BA9BE9A732A0",
+      "mapping_rationale": "Exact contract entry for STAGE2A_VALIDATION_COMMAND_REGISTER.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2A_VALIDATION_COMMAND_REGISTER.md",
+      "requirement_ids": [
+        "S2A-REQ-002"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849"
+      ],
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD",
+        "S2A-TEST-TRACE-SPECIFICITY",
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2_PACKAGE_PUBLICATION_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-015BA2DC91EE",
+      "mapping_rationale": "Exact contract entry for STAGE2_PACKAGE_PUBLICATION_RECORD.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2_PACKAGE_PUBLICATION_RECORD.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STAGE2_PACKAGE_PUBLICATION_RECORD",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-9685250F895C",
+      "mapping_rationale": "Exact contract entry for STAGE2_PACKAGE_PUBLICATION_RECORD.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STAGE2_PACKAGE_PUBLICATION_RECORD.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STARTUP_ISOLATION_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "STARTUP_SIDE_EFFECT_ORACLE.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-5D206C363468",
+      "mapping_rationale": "Exact contract entry for STARTUP_ISOLATION_VALIDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STARTUP_ISOLATION_VALIDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STARTUP_ISOLATION_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "STARTUP_SIDE_EFFECT_ORACLE.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-1C755A2D0459",
+      "mapping_rationale": "Exact contract entry for STARTUP_ISOLATION_VALIDATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STARTUP_ISOLATION_VALIDATION.md",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STARTUP_SIDE_EFFECT_INVENTORY",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_ORACLE.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-B28E7FBB7B64",
+      "mapping_rationale": "Exact contract entry for STARTUP_SIDE_EFFECT_INVENTORY.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STARTUP_SIDE_EFFECT_INVENTORY.json",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STARTUP_SIDE_EFFECT_INVENTORY",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "STARTUP_SIDE_EFFECT_ORACLE.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-0333B2450840",
+      "mapping_rationale": "Exact contract entry for STARTUP_SIDE_EFFECT_INVENTORY.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STARTUP_SIDE_EFFECT_INVENTORY.md",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::STARTUP_SIDE_EFFECT_ORACLE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0001"
+      ],
+      "gap_ids": [
+        "S2-GAP-009"
+      ],
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "mapping_id": "S2A-MAP-9717FDE136A3",
+      "mapping_rationale": "Exact contract entry for STARTUP_SIDE_EFFECT_ORACLE.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "STARTUP_SIDE_EFFECT_ORACLE.json",
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::SUCCESSOR_PACKAGE_INDEX",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-01A4A2FB48FE",
+      "mapping_rationale": "Exact contract entry for SUCCESSOR_PACKAGE_INDEX.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "SUCCESSOR_PACKAGE_INDEX.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::SUCCESSOR_PACKAGE_INDEX",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0003"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/build_successor_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-0513C1954018",
+      "mapping_rationale": "Exact contract entry for SUCCESSOR_PACKAGE_INDEX.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "SUCCESSOR_PACKAGE_INDEX.md",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-60288FE64B38",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-PACKAGE-TRACE-ROW",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::TOOLCHAIN_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VERSION_CAPTURE.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-002"
+      ],
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "mapping_id": "S2A-MAP-74535EF14BD8",
+      "mapping_rationale": "Exact contract entry for TOOLCHAIN_VALIDATION.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "TOOLCHAIN_VALIDATION.json",
+      "requirement_ids": [
+        "S2A-REQ-002"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849"
+      ],
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::TOOLCHAIN_VALIDATION",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VALIDATION.json",
+        "TOOLCHAIN_VERSION_CAPTURE.txt"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-002"
+      ],
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "mapping_id": "S2A-MAP-F04EF2D768C6",
+      "mapping_rationale": "Exact contract entry for TOOLCHAIN_VALIDATION.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "TOOLCHAIN_VALIDATION.md",
+      "requirement_ids": [
+        "S2A-REQ-002"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849"
+      ],
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::TOOLCHAIN_VERSION_CAPTURE",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VALIDATION.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-002"
+      ],
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "mapping_id": "S2A-MAP-7466C01F1523",
+      "mapping_rationale": "Exact contract entry for TOOLCHAIN_VERSION_CAPTURE.txt binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "TOOLCHAIN_VERSION_CAPTURE.txt",
+      "requirement_ids": [
+        "S2A-REQ-002"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849"
+      ],
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::VALIDATOR_INVOCATION_MATRIX",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0004"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-0BDB4E89C898",
+      "mapping_rationale": "Exact contract entry for VALIDATOR_INVOCATION_MATRIX.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "VALIDATOR_INVOCATION_MATRIX.json",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::ZERO_RESIDUE_PROOF",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-CLEANUP-001",
+        "S2A-CTL-ZERO-RESIDUE-001"
+      ],
+      "evidence_artifacts": [
+        "CLEANUP_VALIDATION_REPORT.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-007"
+      ],
+      "implementation_artifacts": [
+        "stage2a/cleanup.py"
+      ],
+      "mapping_id": "S2A-MAP-19A2EF8E50F3",
+      "mapping_rationale": "Exact contract entry for ZERO_RESIDUE_PROOF.json binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "ZERO_RESIDUE_PROOF.json",
+      "requirement_ids": [
+        "S2A-REQ-007"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-DDFD0174B8E7"
+      ],
+      "test_ids": [
+        "S2A-TEST-ZERO-RESIDUE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::ZERO_RESIDUE_PROOF",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-CLEANUP-001",
+        "S2A-CTL-ZERO-RESIDUE-001"
+      ],
+      "evidence_artifacts": [
+        "CLEANUP_VALIDATION_REPORT.json",
+        "ZERO_RESIDUE_PROOF.json"
+      ],
+      "finding_ids": [],
+      "gap_ids": [
+        "S2-GAP-007"
+      ],
+      "implementation_artifacts": [
+        "stage2a/cleanup.py"
+      ],
+      "mapping_id": "S2A-MAP-2FCC3ACC1340",
+      "mapping_rationale": "Exact contract entry for ZERO_RESIDUE_PROOF.md binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "ZERO_RESIDUE_PROOF.md",
+      "requirement_ids": [
+        "S2A-REQ-007"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-DDFD0174B8E7"
+      ],
+      "test_ids": [
+        "S2A-TEST-ZERO-RESIDUE"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    },
+    {
+      "artifact_role": "PACKAGE_OUTPUT::validate_stage2a_package",
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json"
+      ],
+      "finding_ids": [
+        "ES-ADV-V003-R2-F-0004"
+      ],
+      "gap_ids": [
+        "S2-GAP-006"
+      ],
+      "implementation_artifacts": [
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "mapping_id": "S2A-MAP-1B03AA75A9E5",
+      "mapping_rationale": "Exact contract entry for validate_stage2a_package.py binds its direct requirement, controls, implementation, tests, findings, and evidence.",
+      "output": "validate_stage2a_package.py",
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "source_evidence_ids": [
+        "S2A-SRC-91899BC8CA07"
+      ],
+      "test_ids": [
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX"
+      ],
+      "verification_rule": "MV-011A requires exact equality with the source-controlled traceability contract and JSON/CSV parity"
+    }
+  ],
+  "package_id": "ES-PKG-2026-004-V003"
+}

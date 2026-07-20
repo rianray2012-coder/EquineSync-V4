@@ -1,0 +1,59 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "recorded_utc": "2026-07-20T07:40:52Z",
+  "candidate_root": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-003",
+  "validated_implementation_commit": "a5c11b512248bfb043b60fa7749baab152e238fc",
+  "packaging_commit": "ce5df9292f00fc28348c70f8c4c47f35453ac715",
+  "freeze": {
+    "payload_files": 121,
+    "physical_files": 124,
+    "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+    "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-003_FROZEN.zip",
+    "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+    "archive_entries": 124,
+    "archive_integrity": "PASS"
+  },
+  "validator": {
+    "packaged_copy_sha256": "a202eebdb9fdbb3d214f2a5834d5ab926af6fb12e33640f8382dd58add09b9e0",
+    "score": "23/23",
+    "phase": "candidate"
+  },
+  "invocations": [
+    {
+      "location": "REPOSITORY_ROOT",
+      "validator_copy": "SOURCE_AND_PACKAGED_COPY",
+      "result": "PASS",
+      "score": "23/23",
+      "source_output_sha256": "0158f70346a493e1bd4ba21600dceec654b0d71fe2e4a7cf39c1792337124c4a",
+      "packaged_output_sha256": "0158f70346a493e1bd4ba21600dceec654b0d71fe2e4a7cf39c1792337124c4a"
+    },
+    {
+      "location": "PACKAGE_ROOT",
+      "validator_copy": "PACKAGED_COPY",
+      "result": "PASS",
+      "score": "23/23",
+      "output_sha256": "908916f12d3c640d614335865788d425127c074d49dcbdf22634c0498881e1ae"
+    },
+    {
+      "location": "PACKAGE_NESTED_REVIEW_ATTEMPT_002",
+      "validator_copy": "PACKAGED_COPY_RELATIVE_INVOCATION",
+      "result": "PASS",
+      "score": "23/23",
+      "output_sha256": "1bac13915c60be93be2c743f8f9e4a40289e768c4e63742d5518b0113a84a89d"
+    },
+    {
+      "location": "EXTERNAL_PRIVATE_TMP",
+      "validator_copy": "PACKAGED_COPY_ABSOLUTE_INVOCATION",
+      "result": "PASS",
+      "score": "23/23",
+      "output_sha256": "8d3dca7d14e6aee1bdbde047c51c6c7648918d132de35356a7a79f5d810c9ca4"
+    }
+  ],
+  "failed_candidate_reverification": {
+    "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+    "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+    "unchanged": true
+  },
+  "candidate_modified_by_validation": false,
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}
