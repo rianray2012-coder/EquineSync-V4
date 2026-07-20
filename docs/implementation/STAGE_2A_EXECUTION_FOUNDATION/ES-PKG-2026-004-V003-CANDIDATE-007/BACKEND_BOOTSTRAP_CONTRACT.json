@@ -1,0 +1,15 @@
+{
+  "all_requirements_exactly_pinned": true,
+  "artifact_hash_basis": "PIP_INSTALL_REPORT_ARCHIVE_SHA256_PLUS_DIST_INFO_METADATA_SHA256",
+  "bootstrap_command": "sh stage2a/bootstrap_backend.sh",
+  "cleanup_on_failure": "remove ignored stage2a/.venv",
+  "dependency_resolution": "NO_DEPS_ALL_REQUIREMENTS_EXPLICITLY_PINNED",
+  "expected_exit": 0,
+  "gap_id": "S2-GAP-001",
+  "pip_configuration": "ISOLATED_DEV_NULL",
+  "python": "3.11.11",
+  "requirements": "backend/requirements.txt",
+  "requirements_sha256": "868ba96cc66725ea3a514bc547acd44846ff90adb00d74e65b3961d88807f430",
+  "timeout_seconds_per_command": 900,
+  "working_directory": "repository root"
+}

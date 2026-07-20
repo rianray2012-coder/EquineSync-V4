@@ -1,0 +1,55 @@
+{
+  "archive_quarantine": {
+    "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_POST_FREEZE_BYTECODE_RESIDUE.zip",
+    "archive_sha256": "829fb2df0175ab475a8abba27bf36539af7ad3a82bc5b05f09a21d2344eaa2c9",
+    "files": 3
+  },
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "attribution": {
+    "basis": "The adversarial reviewer acknowledged that one import from the packaged source payload created the bytecode cache before the no-execution warning.",
+    "classification": "REVIEWER_INDUCED_LOCAL_BYTECODE_CACHE",
+    "process_identity_at_creation": "NOT_CAPTURED",
+    "relationship_to_runtime_agent_selector": "NONE",
+    "relationship_to_segregated_review_mongodb_residue": "NONE"
+  },
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-006",
+  "cleanup": {
+    "action": "Removed only the three verified archive-absent bytecode files and their now-empty __pycache__ directories after quarantine.",
+    "canonical_payload_files_modified": 0,
+    "post_cleanup_candidate_files": 256,
+    "post_cleanup_detached_validation": "PASS_23_OF_23",
+    "post_cleanup_parity": "PASS_256_OF_256_BYTE_IDENTICAL_TO_FROZEN_ARCHIVE",
+    "result": "CONTAINED_AND_RESTORED"
+  },
+  "detected_utc": "2026-07-20T10:35:42Z",
+  "event_classification": "FROZEN_CANDIDATE_LOCAL_DIRECTORY_BYTECODE_RESIDUE",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "frozen_archive": {
+    "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_FROZEN.zip",
+    "archive_sha256_after_cleanup": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+    "archive_sha256_before_cleanup": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+    "canonical_files": 256,
+    "manifest_sha256": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+    "modified": false
+  },
+  "residue_files": [
+    {
+      "path": "source_payload/stage2a/__pycache__/network_guard.cpython-311.pyc",
+      "sha256": "ca2d9afdb65950c26e7dac78346270def9293557f62f22c09843a2fea6dc34a6"
+    },
+    {
+      "path": "source_payload/stage2a/lib/__pycache__/__init__.cpython-311.pyc",
+      "sha256": "8503830c1df712509c7f9c984b4c1eca6145553be7a7fdac8cc1a5dde2c1179d"
+    },
+    {
+      "path": "source_payload/stage2a/lib/__pycache__/control.cpython-311.pyc",
+      "sha256": "506408a349ea3c04c1959bcfcc880fdbfa8dd17aa99fa943490af632bfdb74cd"
+    }
+  ],
+  "test_impact": {
+    "affected_candidate_directory_checks": "Any local-directory inventory or checksum check performed while the three files were present is invalidated.",
+    "archive_and_clean_extraction_checks": "UNAFFECTED",
+    "corrective_rerun": "Detached clean-extraction validation and full 256-file byte comparison were rerun after cleanup.",
+    "repository_implementation_state": "UNAFFECTED"
+  }
+}

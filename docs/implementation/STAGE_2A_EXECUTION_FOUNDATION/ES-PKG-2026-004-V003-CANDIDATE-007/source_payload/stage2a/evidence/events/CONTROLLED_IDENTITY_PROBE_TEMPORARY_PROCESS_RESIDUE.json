@@ -1,0 +1,46 @@
+{
+  "event_classification": "CONTROLLED_IDENTITY_PROBE_TEMPORARY_PROCESS_RESIDUE",
+  "detected_utc": "2026-07-20T08:38:00Z",
+  "terminated_utc": "2026-07-20T08:39:47Z",
+  "process": {
+    "pid": 49706,
+    "initial_parent_pid": 49347,
+    "post_parent_termination_parent_pid": 1,
+    "process_group_id": 49347,
+    "executable": "/usr/sbin/lsof",
+    "full_command_line": "lsof -nP -t -iTCP:8019 -sTCP:LISTEN",
+    "working_directory": "stage2a",
+    "controlled_port_examined": 8019,
+    "listener": false
+  },
+  "secondary_read_only_probe": {
+    "pid": 51198,
+    "initial_parent_pid": 51195,
+    "post_parent_termination_parent_pid": 1,
+    "process_group_id": 51195,
+    "executable": "/usr/sbin/lsof",
+    "full_command_line": "lsof -nP -iTCP:27029 -sTCP:LISTEN",
+    "controlled_port_examined": 27029,
+    "listener": false,
+    "disposition": "verified process group received TERM then KILL; socket-level port proof remained CLOSED"
+  },
+  "attribution_method": "ps PID/PPID/PGID/command capture plus lsof process working-directory capture and independent TCP connect probes",
+  "termination": {
+    "first_action": "kill -TERM -- -49347",
+    "first_result": "validator parent stopped; lsof remained temporarily in uninterruptible state and reparented to PID 1",
+    "final_action": "kill -KILL -- -49347",
+    "final_result": "verified process group absent",
+    "scope": "only verified process groups 49347 and 51195; each was attributed before signaling"
+  },
+  "postconditions": {
+    "port_8019_listening": false,
+    "port_27029_listening": false,
+    "application_or_database_process_terminated_by_final_action": false,
+    "repository_controlled_artifacts_changed": false,
+    "sealed_files_changed": false
+  },
+  "tests_while_residue_active": "No additional lifecycle or package tests were performed; only read-only attribution and TCP closure probes.",
+  "affected_results": "Attempt 006 discarded in full and rerun after remediation.",
+  "causal_boundaries": "Not attributed to the prior segregated-review MongoDB residue and not attributed to RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

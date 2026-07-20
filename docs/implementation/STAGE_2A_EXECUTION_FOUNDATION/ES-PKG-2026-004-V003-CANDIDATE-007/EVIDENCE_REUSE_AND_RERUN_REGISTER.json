@@ -1,0 +1,107 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-007",
+  "dependency_rerun": {
+    "artifact_count": 127,
+    "implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+    "result": "PASS"
+  },
+  "full_lifecycle_rerun": {
+    "implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+    "result": "PASS",
+    "score": "16/16"
+  },
+  "invalidated_checks": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    }
+  ],
+  "package_id": "ES-PKG-2026-004-V003",
+  "rerun_checks": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX"
+      ]
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ]
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-STARTUP-ORACLE"
+      ]
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ]
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE",
+        "S2A-TEST-CONTROLLED-SHUTDOWN"
+      ]
+    }
+  ],
+  "reused_predecessor_evidence": [
+    {
+      "basis": "fixture, cleanup ownership, rollback payload, and immutable source anchors are hash-identical; reused as corroborative predecessor evidence only",
+      "containing_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "controlling_for_corrected_candidate": false,
+      "evidence": "16/16 Stage 2A lifecycle validation",
+      "immutable_artifact_sha256": "7e03815edf4c3ec8293d480029908e1b92286245f2c670f27d0d0756ff4315c7",
+      "immutable_source": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003/STAGE2A_FOUNDATION_VALIDATION.json",
+      "reuse_scope": [
+        "synthetic fixture determinism",
+        "owned-row cleanup semantics",
+        "datastore and source recovery invariants"
+      ],
+      "source_commit": "83ccfac2bdeb0615e8818ffcbde03337d429dba5"
+    },
+    {
+      "basis": "backend requirements SHA-256 and bootstrap implementation are unchanged; corrected-candidate bootstrap rerun independently reconfirms the same contract",
+      "containing_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "controlling_for_corrected_candidate": false,
+      "evidence": "127-artifact backend dependency inventory",
+      "immutable_artifact_sha256": "be248999b1b320afc9eaea18224d42bd102877c77ad6d9f27916230dfe1f4a70",
+      "immutable_source": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003/BACKEND_BOOTSTRAP_VALIDATION.json",
+      "reuse_scope": [
+        "pinned requirements",
+        "download artifact hashes",
+        "installed metadata hashes"
+      ]
+    }
+  ]
+}

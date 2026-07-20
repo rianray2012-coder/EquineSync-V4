@@ -1,0 +1,69 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-007",
+  "default_branch_contains_stage2_commit": false,
+  "failed_candidates": [
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+      "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003",
+      "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "payload_files": 108,
+      "physical_files": 111,
+      "unchanged": true
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip",
+      "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-003",
+      "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+      "payload_files": 121,
+      "physical_files": 124,
+      "unchanged": true
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_004_FAILED.zip",
+      "archive_sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-004",
+      "manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+      "payload_files": 207,
+      "physical_files": 210,
+      "unchanged": true
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-005_ASSEMBLY_FAILED.zip",
+      "archive_sha256": "41cc9ae595dbe640cc9aedf79fe84267d58ddb84355682626e237eccd5d3595c",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-005",
+      "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+      "manifest": "stage2a/evidence/failed_attempts/CANDIDATE_005_ASSEMBLY_FAILED_SHA256SUMS.txt",
+      "manifest_sha256": "a0937895498704028cf8f450f18555ac7b54b5417a96248d62702a6fa7aff75f",
+      "physical_files": 249,
+      "unchanged": true
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_FROZEN.zip",
+      "archive_sha256": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-006",
+      "manifest_sha256": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+      "payload_files": 253,
+      "physical_files": 256,
+      "unchanged": true
+    }
+  ],
+  "immutable_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "package_id": "ES-PKG-2026-004-V003",
+  "predecessor_unchanged": true,
+  "pull_requests": 0,
+  "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "stage2_archive_sha256": "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329",
+  "stage2_package_branch": "codex/stage2-f0001-execution-baseline",
+  "stage2_package_clean_extraction": "113_OF_113",
+  "stage2_package_commit": "0be6172a28b75238c5facabf91d43ed09aaf0d54",
+  "stage2_package_validation": "PASS_50_OF_50",
+  "stage2_remote_tip": "0be6172a28b75238c5facabf91d43ed09aaf0d54",
+  "stage2a_bootstrap_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+  "stage2a_branch": "codex/stage2a-execution-foundation-remediation",
+  "stage2a_implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+  "stage2a_implementation_tree": "c9f9ee68e57b03d890c6bfe6f8fed79876bb5a2b",
+  "stage2a_packaging_commit": "9a0809c9fbb726f4a4789abed1cbb685c0f06e28",
+  "stage2a_packaging_tree": "f7508449a8e89b7612c4cd7c14535c7e3f97ffd7"
+}

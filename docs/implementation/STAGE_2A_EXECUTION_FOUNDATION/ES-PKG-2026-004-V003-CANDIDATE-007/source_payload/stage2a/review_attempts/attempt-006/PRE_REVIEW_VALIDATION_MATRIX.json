@@ -1,0 +1,49 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-006",
+  "candidate_unchanged": true,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "generated_utc": "2026-07-20T10:23:06.110225+00:00",
+  "invocations": [
+    {
+      "exit_status": 0,
+      "location": "PACKAGE_ROOT",
+      "mode": "REPOSITORY_BACKED_PACKAGED_VALIDATOR",
+      "output_sha256": "263b1fbeb93b1c51e4ac04da4078779b77fd51cb65c52bfb82a7bad2736a26fb",
+      "score": "23/23",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validation": "PASS"
+    },
+    {
+      "exit_status": 0,
+      "location": "PACKAGE_NESTED_REVIEW_ATTEMPT_004",
+      "mode": "REPOSITORY_BACKED_PACKAGED_VALIDATOR",
+      "output_sha256": "a9d15bf6cf185935472677d3fb2289bb62dd09294a330eca32f3b8930f8fda29",
+      "score": "23/23",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validation": "PASS"
+    },
+    {
+      "exit_status": 0,
+      "location": "EXTERNAL_PRIVATE_TMP",
+      "mode": "REPOSITORY_BACKED_PACKAGED_VALIDATOR",
+      "output_sha256": "124fb672dc6295e4e7a3e1d3424032b34b1bc3dc3be96d3423e2345e1c933ee1",
+      "score": "23/23",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validation": "PASS"
+    },
+    {
+      "exit_status": 0,
+      "location": "DETACHED_CLEAN_EXTRACTION",
+      "mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD",
+      "output_sha256": "a3b01c18bf1fca0e40694c0edc9f87224583cac4df79f0112c7f1391886c4dbf",
+      "score": "23/23",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validation": "PASS"
+    }
+  ],
+  "passed_locations": 4,
+  "phase": "CANDIDATE_POST_MANIFEST_PRE_REVIEW",
+  "result": "PASS",
+  "supported_locations": 4
+}

@@ -1,0 +1,15 @@
+{
+  "atlases_completed": false,
+  "closure_authority": "Rian Ray, Founder",
+  "disposition": "F0002_CLOSED_BY_FOUNDER_AUTHORITY_FOR_IMMUTABLE_BASELINE_MATERIALIZATION",
+  "does_not_close_f0001": true,
+  "execution_ready": false,
+  "external_assurance": false,
+  "finding_id": "ES-REV-2026-001-F-0002",
+  "gp05_implemented": false,
+  "immutable_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "package_id": "ES-PKG-2026-004-V003",
+  "production_ready": false,
+  "scope": "exact materialization identification verification and reproducibility of the immutable baseline only",
+  "workflow_execution_authorized": false
+}

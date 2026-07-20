@@ -1,0 +1,11 @@
+{
+  "review_id": "STAGE2A_EVIDENCE_CUSTODIAN_ATTEMPT_003",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "result": "BYTE_INTEGRITY_PASS_WITH_PROVENANCE_METADATA_WARNINGS",
+  "failed_attempt_002": {"payload": "108_OF_108_PASS", "physical_files": 111, "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b", "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4"},
+  "candidate_003": {"payload": "121_OF_121_PASS", "physical_files": 124, "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc", "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0"},
+  "reuse_rerun_treatment": "SUBSTANTIVELY_ACCURATE_PREDECESSOR_CORROBORATIVE_ONLY",
+  "warnings": ["candidate attempt metadata says attempt 2", "freeze commit omitted from provenance", "dependency predecessor points to mutable latest path", "package validator command remains pending", "current corrected commits have no official remote ref"],
+  "files_modified": false,
+  "services_started": false
+}

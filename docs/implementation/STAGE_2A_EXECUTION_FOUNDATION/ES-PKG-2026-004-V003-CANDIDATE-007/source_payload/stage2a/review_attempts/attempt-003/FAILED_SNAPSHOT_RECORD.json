@@ -1,0 +1,13 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "status": "IMMUTABLE_FAILED_CANDIDATE",
+  "failure_disposition": "FAIL_REMEDIATION_AND_REFREEZE_REQUIRED",
+  "payload_files": 121,
+  "physical_files": 124,
+  "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+  "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip",
+  "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+  "candidate_modified_by_review": false,
+  "successor_candidate_required": true,
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

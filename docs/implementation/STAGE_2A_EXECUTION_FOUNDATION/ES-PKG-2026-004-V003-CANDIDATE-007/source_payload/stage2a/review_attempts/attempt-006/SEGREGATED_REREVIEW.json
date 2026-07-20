@@ -1,0 +1,360 @@
+{
+  "schema_version": "1.0",
+  "review_id": "STAGE2A-SEGREGATED-REREVIEW-ATTEMPT-006",
+  "review_function": "SEGREGATED_INDEPENDENT_REREVIEW",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-006",
+  "completed_utc": "2026-07-20T10:30:37Z",
+  "read_only_review": false,
+  "read_only_exception": {
+    "event": "POST_FREEZE_PYTHON_BYTECODE_CACHE_RESIDUE",
+    "files": 3,
+    "substantive_frozen_artifact_changes": 0,
+    "disposition": "QUARANTINED_AND_REMOVED_FROM_LOCAL_WORKING_COPY",
+    "restoration_basis": "CANONICAL_FROZEN_ARCHIVE",
+    "final_candidate_archive_parity": "PASS_256_OF_256",
+    "final_detached_validator_with_bytecode_disabled": "PASS_23_OF_23"
+  },
+  "source_modified": false,
+  "package_modified": false,
+  "archive_modified": false,
+  "services_started": false,
+  "self_closed": false,
+  "technical_review_result": "FAIL",
+  "package_level_control_result": "FAIL_SEMANTIC_ENFORCEMENT_GAPS",
+  "disposition": "REMEDIATION_NOT_FULLY_VERIFIED_RETAIN_OPEN_FINDINGS",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "technical_finding_counts": {
+    "P0": 0,
+    "P1": 1,
+    "P2": 1
+  },
+  "freeze": {
+    "freeze_commit": "61b4851ad2d802834afb6bdf1b0981f778c68011",
+    "packaging_commit": "d6c00b4cc067cc27be57916224b96d4bdf49fda5",
+    "validated_implementation_commit": "edd8ac0a59c9c0fce4408538e8596b10a9a97428",
+    "manifest": "DRAFT_REVIEW_SHA256SUMS.txt",
+    "manifest_sha256": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+    "manifest_rows": 253,
+    "manifest_verified": 253,
+    "physical_files": 256,
+    "symlinks": 0,
+    "candidate_tree_digest_algorithm": "SHA256_OVER_SORTED_RELATIVE_PATH_NUL_FILE_SHA256_NEWLINE",
+    "candidate_tree_digest_sha256": "543c80cf7de31cccc20f851101989327e0c66154606431b1b3770acda601406a"
+  },
+  "archive": {
+    "path": "/Users/rianray/Documents/Codex/2026-07-16/files-mentioned-by-the-user-equinesync/outputs/ES-PKG-2026-004-V003-CANDIDATE-006_FROZEN.zip",
+    "sha256": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+    "file_count": 256,
+    "path_safety": "PASS",
+    "clean_extraction": "PASS",
+    "archive_candidate_byte_parity": "PASS",
+    "missing": 0,
+    "extra": 0,
+    "mismatched": 0,
+    "temporary_extraction_removed": true
+  },
+  "before_after_immutability": {
+    "before": {
+      "candidate_tree_digest_sha256": "543c80cf7de31cccc20f851101989327e0c66154606431b1b3770acda601406a",
+      "manifest_sha256": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+      "archive_sha256": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068"
+    },
+    "after": {
+      "candidate_tree_digest_sha256": "543c80cf7de31cccc20f851101989327e0c66154606431b1b3770acda601406a",
+      "manifest_sha256": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+      "archive_sha256": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068"
+    },
+    "unchanged": true
+  },
+  "packaged_validator": {
+    "result": "PASS",
+    "score": "23/23",
+    "invocations": [
+      {
+        "location": "CANDIDATE_PACKAGE_ROOT",
+        "mode": "REPOSITORY_BACKED",
+        "result": "PASS_23_OF_23",
+        "stdout_sha256": "97787d62692c485be0d40eaa58260f1dd4ad1a24165c03f560de1afb86dd97b9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "CANDIDATE_REVIEW_ATTEMPTS_ATTEMPT_004",
+        "mode": "REPOSITORY_BACKED",
+        "result": "PASS_23_OF_23",
+        "stdout_sha256": "b9d448a076d3049c28ee6bf1e2c7e8807474dd1b6554d87342e520347b6a9bd8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "/private/tmp",
+        "mode": "REPOSITORY_BACKED",
+        "result": "PASS_23_OF_23",
+        "stdout_sha256": "d97c14307c58280724b45de22b6fff9760939d531e23c97e695a85f661d78d86",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "DETACHED_CLEAN_ARCHIVE_EXTRACTION",
+        "mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD",
+        "result": "PASS_23_OF_23",
+        "stdout_sha256": "a72109cb47b508d2c925eaea093be6f6856eea8748cfe12e5f4c60a35cf99ba7",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "independent_controls": {
+    "json_parse": {
+      "result": "PASS",
+      "files": 116
+    },
+    "csv_parse": {
+      "result": "PASS",
+      "files": 6,
+      "data_rows": 167
+    },
+    "json_csv_exact_parity": {
+      "result": "PASS",
+      "registers": {
+        "STAGE2A_SOURCE_EVIDENCE_REGISTER": 111,
+        "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX": 9,
+        "STAGE2A_TEST_CONTROL_REGISTER": 26,
+        "STAGE2A_FINDING_TO_REMEDIATION_MATRIX": 5,
+        "PROVIDER_DENIAL_REGISTER": 11,
+        "F0002_CLOSURE_EVIDENCE_REGISTER": 5
+      }
+    },
+    "source_provenance": {
+      "result": "PASS",
+      "rows": 111,
+      "detached_payload_hash_failures": 0,
+      "recorded_commit_blob_failures": 0,
+      "validated_implementation_blob_failures": 0
+    },
+    "traceability": {
+      "result": "PASS",
+      "requirements": 9,
+      "findings": 5,
+      "executable_tests": 26,
+      "output_mappings": 115,
+      "dangling_references": 0,
+      "nonspecific_output_mappings": 0
+    },
+    "provider_guard": {
+      "result": "FAIL_SEMANTIC_ENFORCEMENT",
+      "recorded_evidence_integrity_result": "PASS",
+      "guard_session_id": "276e33f8ad79448a90873506bddc97f1",
+      "api_pid": 73778,
+      "api_process_group_id": 73778,
+      "launch_nonce_sha256": "38c96c4b5cee91debabf820593dafaf4fd293420e4f64cf39b29d0dc847f6814",
+      "provider_registry_sha256": "596a1707b8060e37c7dcbe3e42399173a928768521e22806818744bbef1db895",
+      "provider_events": 11,
+      "network_attempt_events": 0,
+      "event_chain_sha256": "216a28910b637f90523ccdee38f08672d957bbe9f288f1af1d47b01884d274af",
+      "event_chain_valid": true,
+      "process_identity_bound": true,
+      "configured_providers": 0,
+      "attempted": 0,
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 4,
+      "timed_out": 0,
+      "unavailable": 7,
+      "unattributed_attempts": 0,
+      "measurement_boundary": "PRESENT_INTEGRATIONS_HAVE_PREREQUISITE_EVALUATED_EVENTS_WITH_BOUNDARY_NOT_EXERCISED; ABSENT_OR_OUT_OF_PROCESS_INTEGRATIONS_ARE_UNAVAILABLE_NOT_SKIPPED",
+      "supplied_zero_ledger_api_rejected": true,
+      "adversarial_semantic_results": {
+        "fully_rehashed_zero_terminal_outcomes_accepted_by_derive_provider_register": true,
+        "fully_rehashed_registry_reason_mismatch_accepted_by_derive_provider_register": true,
+        "mv_016a_passed_with_all_four_embedded_foundation_network_guard_provider_event_arrays_removed_and_event_count_and_chain_head_zeroed": true,
+        "effect": "RECORDED_HASH_CHAIN_IS_INTERNALLY_CONSISTENT_BUT_TERMINAL_OUTCOME_AND_REGISTRY_REASON_SEMANTICS_ARE_NOT_FAIL_CLOSED"
+      }
+    },
+    "startup_side_effects": {
+      "result": "PASS",
+      "oracle_match": true,
+      "startup_document_writes": 0,
+      "provider_attempts": 0,
+      "attempted": 3,
+      "succeeded": 2,
+      "failed": 1,
+      "skipped": 1,
+      "timed_out": 0,
+      "unavailable": 0,
+      "arithmetic_valid": true
+    },
+    "evidence_semantics_and_redaction": {
+      "result": "PASS",
+      "pass_fixture_exit": 0,
+      "intentional_fail_fixture_exit": 7,
+      "expected_actual_exit_match": true,
+      "meaning_preserved": true,
+      "unredacted_sensitive_matches": 0
+    },
+    "process_identity": {
+      "result": "FAIL_PACKAGE_EVIDENCE_SEMANTIC_ENFORCEMENT",
+      "runtime_implementation_result": "PASS",
+      "identity_fields": [
+        "pid",
+        "parent_pid",
+        "process_group_id",
+        "command_line_sha256",
+        "executable_path",
+        "working_directory",
+        "controlled_port",
+        "launch_nonce_sha256",
+        "identity_recorded_utc"
+      ],
+      "fail_closed_conflict_paths_present": true,
+      "process_group_termination_present": true,
+      "adversarial_semantic_results": {
+        "mv_016b_passed_api_identity_with_all_zero_command_line_sha256": true,
+        "mv_016b_passed_api_identity_with_forged_working_directory": true,
+        "effect": "PACKAGED_PROCESS_EVIDENCE_IS_NOT_BOUND_TO_EXPECTED_COMMAND_OR_CONTROLLED_WORKING_DIRECTORY"
+      }
+    },
+    "pure_control_unit_tests": {
+      "result": "PASS",
+      "tests": 33,
+      "bytecode_writes_disabled": true
+    },
+    "controlled_port_residue_after_review": {
+      "result": "PASS",
+      "port_27029_listeners": 0,
+      "port_8019_listeners": 0
+    }
+  },
+  "review_findings": [
+    {
+      "finding_id": "ES-SEG-V003-R6-F-0001",
+      "severity": "P1",
+      "classification": "PROVIDER_EVENT_SEMANTIC_ENFORCEMENT_NOT_FAIL_CLOSED",
+      "status": "OPEN_BLOCKING",
+      "affected_prior_finding": "ES-ADV-V003-R2-F-0001",
+      "evidence": "Frozen derive_provider_register accepted fully rehashed provider events with every terminal outcome zero and accepted a fully rehashed registry reason mismatch. MV-016A passed after all four embedded foundation network-guard provider-event arrays were removed and their event counts and chain heads were zeroed while summary rows and proof remained asserted.",
+      "required_disposition": "RETAIN_PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_FINDING_OPEN"
+    },
+    {
+      "finding_id": "ES-SEG-V003-R6-F-0002",
+      "severity": "P2",
+      "classification": "PACKAGED_PROCESS_IDENTITY_EVIDENCE_SEMANTICS_NOT_FAIL_CLOSED",
+      "status": "OPEN",
+      "affected_prior_finding": "ES-ADV-V003-R2-F-0005",
+      "evidence": "MV-016B passed forged packaged API identity evidence with command_line_sha256 set to 64 zeroes and working_directory changed to an arbitrary nonempty path. Frozen runtime process controls themselves rejected PPID, PGID, port, command, executable, working-directory, nonce, and timestamp conflicts and issued no signal.",
+      "required_disposition": "RETAIN_PROCESS_IDENTITY_FINDING_OPEN_PENDING_PACKAGE_SEMANTIC_ENFORCEMENT"
+    }
+  ],
+  "five_blocker_assessment": [
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "blocker_classification": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "technical_result": "REMEDIATION_VERIFIED",
+      "recommended_disposition": "RECOMMEND_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "residual_severity": null,
+      "self_closed": false,
+      "basis": "Validator passed 23/23 from package root, nested package directory, external /private/tmp, and detached clean archive extraction."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "blocker_classification": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "technical_result": "REMEDIATION_VERIFIED",
+      "recommended_disposition": "RECOMMEND_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "residual_severity": null,
+      "self_closed": false,
+      "basis": "Nine requirements, five findings, 26 executable test controls, 111 source records, and 115 output mappings resolve without dangling or generic all-requirement mappings."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "blocker_classification": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "technical_result": "REMEDIATION_NOT_VERIFIED",
+      "recommended_disposition": "RETAIN_OPEN_BLOCKING",
+      "residual_severity": "P1",
+      "self_closed": false,
+      "basis": "The caller-supplied zero-ledger interface is rejected and the recorded chain recomputes, but frozen semantic enforcement accepts fully rehashed zero-terminal provider events and a registry reason mismatch. MV-016A also accepts summary assertions after all embedded foundation provider-event arrays are removed and their event count and chain head are zeroed."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "blocker_classification": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "technical_result": "REMEDIATION_VERIFIED",
+      "recommended_disposition": "RECOMMEND_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "residual_severity": null,
+      "self_closed": false,
+      "basis": "Pass and expected-failure records reconcile expected and actual exits, content and stream hashes, required meaning, projection equality, and zero unredacted sensitive matches."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "blocker_classification": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "technical_result": "RUNTIME_IMPLEMENTATION_VERIFIED_PACKAGE_EVIDENCE_ENFORCEMENT_NOT_VERIFIED",
+      "recommended_disposition": "RETAIN_OPEN",
+      "residual_severity": "P2",
+      "self_closed": false,
+      "basis": "Runtime controls reject PPID, PGID, port, command, executable, working-directory, nonce, and timestamp conflicts and issue no signal, but MV-016B accepts a 64-zero command hash and arbitrary nonempty working directory in packaged API identity evidence."
+    }
+  ],
+  "runtime_selector": {
+    "event_classification": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+    "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+    "status": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+    "direct_evidence_of_resolution": false,
+    "technical_implementation_failure": false,
+    "relationship_to_package_control_result": "SEPARATE_FROM_AND_ADDITIONAL_TO_PACKAGE_TECHNICAL_FINDINGS",
+    "effect": "STAGE2A_REMAINS_BLOCKED_PENDING_PRINCIPAL_DISPOSITION"
+  },
+  "commands_and_evidence": [
+    {
+      "command": "git rev-parse HEAD",
+      "result": "61b4851ad2d802834afb6bdf1b0981f778c68011"
+    },
+    {
+      "command": "shasum -a 256 DRAFT_REVIEW_SHA256SUMS.txt ES-PKG-2026-004-V003-CANDIDATE-006_FROZEN.zip",
+      "result": "manifest=e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274 archive=de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068"
+    },
+    {
+      "command": "stage2a/.venv/bin/python validate_stage2a_package.py <candidate>",
+      "result": "PASS 23/23"
+    },
+    {
+      "command": "cd <candidate>/review_attempts/attempt-004 && stage2a/.venv/bin/python <candidate>/validate_stage2a_package.py <candidate>",
+      "result": "PASS 23/23"
+    },
+    {
+      "command": "cd /private/tmp && stage2a/.venv/bin/python <candidate>/validate_stage2a_package.py <candidate>",
+      "result": "PASS 23/23"
+    },
+    {
+      "command": "extract frozen archive to TemporaryDirectory; run packaged validator against extracted package",
+      "result": "PASS 23/23 DETACHED_PACKAGE_SOURCE_PAYLOAD; 256/256 byte parity; temporary extraction removed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 stage2a/.venv/bin/python -m unittest stage2a/tests/test_controls.py stage2a/tests/test_traceability_contract.py",
+      "result": "Ran 33 tests; OK"
+    },
+    {
+      "command": "independent Python recomputation of manifests, archive paths/parity, JSON/CSV parity, source Git blobs, trace graph, provider registry and hash chain, startup arithmetic, evidence semantics, and process identity source controls",
+      "result": "PASS"
+    },
+    {
+      "command": "temporary frozen-source adversarial rehash: set every provider terminal outcome to zero; recompute all event hashes and chain head; invoke derive_provider_register",
+      "result": "ACCEPTED_11_ROWS_EVENT_CHAIN_VALID_TRUE"
+    },
+    {
+      "command": "temporary frozen-source adversarial rehash: change Stripe reason_code to FORGED_REASON_MISMATCH; recompute all event hashes and chain head; invoke derive_provider_register",
+      "result": "ACCEPTED_11_ROWS_EVENT_CHAIN_VALID_TRUE"
+    },
+    {
+      "command": "temporary detached package mutation: remove all four embedded foundation provider_events arrays and zero event_count and event_chain_sha256 while leaving provider summary rows and proof asserted",
+      "result": "MV-016A-provider-startup-measurement=PASS"
+    },
+    {
+      "command": "temporary detached package mutation: set api_identity.command_line_sha256 to 64 zeroes and working_directory to /forged/c006/path",
+      "result": "MV-016B-process-identity=PASS"
+    },
+    {
+      "command": "custodian quarantine and removal of three post-freeze pycache residue files; restore/check against canonical frozen archive; rerun detached validator with bytecode disabled",
+      "result": "FINAL_LOCAL_CANDIDATE_ARCHIVE_PARITY_256_OF_256; PASS_23_OF_23"
+    },
+    {
+      "command": "lsof -nP -iTCP:27029 -sTCP:LISTEN; lsof -nP -iTCP:8019 -sTCP:LISTEN",
+      "result": "NO_LISTENERS"
+    }
+  ]
+}

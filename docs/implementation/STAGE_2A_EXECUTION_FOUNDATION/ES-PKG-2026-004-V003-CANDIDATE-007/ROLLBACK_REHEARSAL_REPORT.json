@@ -1,0 +1,93 @@
+{
+  "forced_failure_digest": "d71875a45400c9767cb81e69b964ab8511f5c6d8159c400334ef5ca983f5e566",
+  "post_rollback_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+  "pre_rollback_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+  "process_restart": {
+    "api_pid": 99186,
+    "health": {
+      "config": {
+        "cors_configured": false,
+        "environment": "development",
+        "jwt_configured": false
+      },
+      "database": "connected",
+      "dependencies": {
+        "auto_seed_enabled": false,
+        "email_verification_enforced": false,
+        "mailer_configured": false,
+        "rate_limiting_enabled": true,
+        "seed_route_enabled": false
+      },
+      "indexes_ensured": true,
+      "service": "equinesync-api",
+      "started_at": "2026-07-20T10:57:44.340482+00:00",
+      "status": "ok",
+      "uptime_seconds": 0.1,
+      "version": "0.1.0"
+    },
+    "health_url": "LOOPBACK_API/api/health/ready",
+    "logs": [
+      ".runtime/logs/mongod.log",
+      ".runtime/logs/api.log"
+    ],
+    "mongo_pid": 99180,
+    "profile": "full",
+    "status": "STARTED"
+  },
+  "process_stop": {
+    "api_alive": false,
+    "mongo_alive": false,
+    "pid_files_absent": true,
+    "ports_closed": true,
+    "processes": [
+      {
+        "command_identity_verified": true,
+        "controlled_port_attribution": "LISTENER_PID_MATCHED",
+        "forced": false,
+        "kind": "api",
+        "pid": 98970,
+        "port_closed": true,
+        "process_group_id": 98970,
+        "status": "STOPPED"
+      },
+      {
+        "command_identity_verified": true,
+        "controlled_port_attribution": "LISTENER_PID_MATCHED",
+        "forced": false,
+        "kind": "mongo",
+        "pid": 98965,
+        "port_closed": true,
+        "process_group_id": 98965,
+        "status": "STOPPED"
+      }
+    ],
+    "status": "STOPPED"
+  },
+  "restore": {
+    "durable": true,
+    "payload_sha256": "1f0477daef4f5737b123250bbb3e1cd587c09b8181785cf8cf8b6a89ba694b53",
+    "restored": 3,
+    "state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b"
+  },
+  "session_cache_disposition": "NOT_APPLICABLE_NO_EXTERNAL_SESSION_OR_CACHE_SERVICE; full process restart completed",
+  "snapshot": {
+    "durable": true,
+    "payload_sha256": "1f0477daef4f5737b123250bbb3e1cd587c09b8181785cf8cf8b6a89ba694b53",
+    "row_count": 3,
+    "snapshot": ".runtime/recovery/stage2a-owned-records.json",
+    "snapshot_sha256": "353e590ac754adc79491b8722eab03aa6e121b05513f5df548c272bbeb2594b4",
+    "state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b"
+  },
+  "source_recovery": {
+    "clone_mode": "DISPOSABLE_ISOLATED_GIT_DIRECTORY_WITH_EXPLICIT_READ_ONLY_OBJECT_ALTERNATES_AND_SINGLE_CONTROLLED_REF_NO_REMOTE_REFS_NO_WORKTREE_CHECKOUT",
+    "disposable_clone_removed": true,
+    "expected_sha256": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+    "fresh_clone_proof_role": "NOT_APPLICABLE_SEPARATE_POST_PUSH_CONTROL",
+    "implementation_restore_command": "git show IMPLEMENTATION_COMMIT:stage2a/fixtures/foundation-v1.json then write exact bytes to the authorized fixture path",
+    "mutated_sha256": "7fd028873ec36d265cb2ca0340e0d756f9da0fa92fc0e146880e6df5f6f4b1a1",
+    "prechange_restore_command": "git cat-file -e STARTING_COMMIT:stage2a/fixtures/foundation-v1.json (expected absent)",
+    "restored_matches": true,
+    "restored_sha256": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+    "stage2a_absent_at_prechange_anchor": true
+  }
+}

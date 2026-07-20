@@ -1,0 +1,19 @@
+{
+  "review_attempt": 1,
+  "review_function": "ADVERSARIAL_REVIEW",
+  "snapshot_manifest_sha256": "08e8a5cb3044d556ef6fada565243d034679593058666284e7066f31114bdaac",
+  "snapshot_files_verified": "99/99",
+  "overall_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "finding_counts": {"P0": 0, "P1": 5, "P2": 3},
+  "findings": [
+    {"finding_id": "ES-ADV-V003-F-0001", "severity": "P1", "affected_gap": "S2-GAP-004", "title": "Controlled shutdown is a false pass"},
+    {"finding_id": "ES-ADV-V003-F-0002", "severity": "P1", "affected_gap": "S2-GAP-003", "title": "Isolation and provider evidence is partly asserted rather than measured"},
+    {"finding_id": "ES-ADV-V003-F-0003", "severity": "P1", "affected_gap": "S2-GAP-006", "title": "Evidence integrity is insufficient"},
+    {"finding_id": "ES-ADV-V003-F-0004", "severity": "P1", "affected_gap": "S2-GAP-005,S2-GAP-007,S2-GAP-008", "title": "Fixture cleanup and recovery evidence is incomplete"},
+    {"finding_id": "ES-ADV-V003-F-0005", "severity": "P1", "affected_gap": "S2-GAP-001,S2-GAP-002", "title": "Bootstrap and toolchain closure is not reproducible enough"},
+    {"finding_id": "ES-ADV-V003-F-0006", "severity": "P2", "affected_gap": "PACKAGE_CONTROL", "title": "Source-to-output traceability is aggregate rather than exact"},
+    {"finding_id": "ES-ADV-V003-F-0007", "severity": "P2", "affected_gap": "PACKAGE_CONTROL", "title": "Machine validation is not self-contained"},
+    {"finding_id": "ES-ADV-V003-F-0008", "severity": "P2", "affected_gap": "PACKAGE_STATUS", "title": "Status overclaim"}
+  ],
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

@@ -1,0 +1,11 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-007",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "frozen": true,
+  "manifest_sha256": "cb63e7e2da83368ad737ade7cc3b37d4b6b4281b4a6ab2dc6770f3e481964f1d",
+  "package_id": "ES-PKG-2026-004-V003",
+  "packaging_commit": "9a0809c9fbb726f4a4789abed1cbb685c0f06e28",
+  "payload_files": 274,
+  "review_attempt": 7,
+  "validated_implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc"
+}

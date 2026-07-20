@@ -1,0 +1,21 @@
+{
+  "attempt_id": "CANDIDATE_004_ASSEMBLY_ATTEMPT_002_FAILED",
+  "detected_utc": "2026-07-20T08:48:00Z",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-004",
+  "implementation_commit": "357307a30f2904fc817b90ad7fc3bbd3865c7050",
+  "result": "FAIL_CLOSED_NOT_FROZEN",
+  "physical_file_count_at_failure": 205,
+  "validator_score": "23/24",
+  "failed_check": "MV-010-secret-values",
+  "root_cause": "A unit test embedded two plausible test-secret values literally; the package secret scanner correctly rejected the copied source payload.",
+  "containment": {
+    "candidate_frozen": false,
+    "candidate_reviewed": false,
+    "candidate_promoted": false,
+    "prior_failed_freezes_changed": false,
+    "repository_runtime_active": false,
+    "controlled_ports_listening": false
+  },
+  "remediation": "Construct secret-detection probes at runtime so detector behavior remains tested without packaging plausible secret values.",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}
