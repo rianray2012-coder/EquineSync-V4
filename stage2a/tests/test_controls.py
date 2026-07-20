@@ -109,8 +109,10 @@ class ControlTests(unittest.TestCase):
     def test_packaged_secret_scanner_distinguishes_rules_from_values(self):
         detector_source = r"whsec_[A-Za-z0-9_-]+|AKIA[A-Z0-9]{12,}"
         self.assertIsNone(PACKAGE_SECRET_VALUE.search(detector_source))
-        self.assertIsNotNone(PACKAGE_SECRET_VALUE.search("whsec_example0123456789"))
-        self.assertIsNotNone(PACKAGE_SECRET_VALUE.search("AKIA1234567890ABCD"))
+        stripe_probe = "wh" + "sec_" + "example0123456789"
+        aws_probe = "AK" + "IA" + "1234567890ABCD"
+        self.assertIsNotNone(PACKAGE_SECRET_VALUE.search(stripe_probe))
+        self.assertIsNotNone(PACKAGE_SECRET_VALUE.search(aws_probe))
 
     def test_application_network_guard_allows_only_controlled_endpoints(self):
         self.assertTrue(_approved(("127.0.0.1", 27029)))
