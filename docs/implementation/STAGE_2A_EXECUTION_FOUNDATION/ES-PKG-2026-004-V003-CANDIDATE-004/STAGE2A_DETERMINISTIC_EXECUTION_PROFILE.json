@@ -1,0 +1,133 @@
+{
+  "application_network_guard": {
+    "approved_endpoints": [
+      "LOOPBACK_API_8019",
+      "LOOPBACK_MONGODB_27029"
+    ],
+    "attempts": [],
+    "guard": "STAGE2A_APPLICATION_NETWORK_GUARD",
+    "installed": true,
+    "provider_or_external_attempt_count": 0,
+    "unapproved_attempt_count": 0
+  },
+  "attempt_outcomes": {
+    "arithmetic_valid": true,
+    "attempted": 3,
+    "events": [
+      {
+        "attempt_id": "S2A-START-001-INTERRUPTED_FAILPOINT",
+        "attempted": 1,
+        "error_type": "RuntimeError",
+        "failed": 1,
+        "profile": "full",
+        "skipped": 0,
+        "state": "FAILED",
+        "succeeded": 0,
+        "timed_out": 0,
+        "unavailable": 0,
+        "utc_end": "2026-07-20T08:51:41.395899+00:00",
+        "utc_start": "2026-07-20T08:51:39.377598+00:00"
+      },
+      {
+        "attempt_id": "S2A-START-002-COLD_FULL_APPLICATION",
+        "attempted": 1,
+        "failed": 0,
+        "profile": "full",
+        "skipped": 0,
+        "state": "SUCCEEDED",
+        "succeeded": 1,
+        "timed_out": 0,
+        "unavailable": 0,
+        "utc_end": "2026-07-20T08:52:01.347547+00:00",
+        "utc_start": "2026-07-20T08:51:41.396449+00:00"
+      },
+      {
+        "attempt_id": "S2A-START-ALT-FOUNDATION-PROFILE",
+        "attempted": 0,
+        "failed": 0,
+        "profile": "foundation",
+        "skipped": 1,
+        "state": "SKIPPED_NOT_SELECTED_FULL_APPLICATION_REQUIRED",
+        "succeeded": 0,
+        "timed_out": 0,
+        "unavailable": 0,
+        "utc_end": "2026-07-20T08:52:01.347578+00:00",
+        "utc_start": "2026-07-20T08:52:01.347573+00:00"
+      },
+      {
+        "attempt_id": "S2A-START-003-ROLLBACK_RESTART",
+        "attempted": 1,
+        "failed": 0,
+        "profile": "full",
+        "skipped": 0,
+        "state": "SUCCEEDED",
+        "succeeded": 1,
+        "timed_out": 0,
+        "unavailable": 0,
+        "utc_end": "2026-07-20T08:52:10.853056+00:00",
+        "utc_start": "2026-07-20T08:52:07.258069+00:00"
+      }
+    ],
+    "failed": 1,
+    "skipped": 1,
+    "succeeded": 2,
+    "timed_out": 0,
+    "unavailable": 0
+  },
+  "background_flags": {
+    "DISABLE_AUTO_NUDGES": "true",
+    "DISABLE_NOTIFICATIONS": "true",
+    "DISABLE_OWNER_DIGEST": "true",
+    "DISABLE_OWNER_WEEKLY_RECAP": "true",
+    "DISABLE_SUBSCRIPTION_EMAIL_DISPATCHER": "true",
+    "DISABLE_TASK_MATERIALIZER": "true"
+  },
+  "catalog_materialization": "DISABLED_BY_STAGE2A_WRAPPER",
+  "full_application": true,
+  "gap_id": "S2-GAP-009",
+  "inventory_digest": "02bccf932bb7611851fb99f0accd23883797697227e824ae08882fca7c904817",
+  "metadata_collections_inventoried": 68,
+  "network_inventory": {
+    "approved_ports": [
+      27029,
+      8019
+    ],
+    "non_loopback": [],
+    "observed_lines": [
+      "mongod  53415 rianray    7u  IPv4 0x1cbd1a4bfc083d4a      0t0  TCP 127.0.0.1:27029 (LISTEN)",
+      "mongod  53415 rianray   24u  IPv4 0x444d7c012f9d4189      0t0  TCP 127.0.0.1:27029->127.0.0.1:51323 (ESTABLISHED)",
+      "mongod  53415 rianray   25u  IPv4 0x5a8f9fb7d05453d3      0t0  TCP 127.0.0.1:27029->127.0.0.1:51324 (ESTABLISHED)",
+      "mongod  53415 rianray   26u  IPv4 0xa56f59d5115b6080      0t0  TCP 127.0.0.1:27029->127.0.0.1:51325 (ESTABLISHED)",
+      "mongod  53415 rianray  306u  IPv4 0xe5eea1cddf6400c3      0t0  TCP 127.0.0.1:27029->127.0.0.1:51457 (ESTABLISHED)",
+      "mongod  53415 rianray  307u  IPv4 0x8c980c6642938f2a      0t0  TCP 127.0.0.1:27029->127.0.0.1:51458 (ESTABLISHED)",
+      "mongod  53415 rianray  308u  IPv4 0x9c0087f7a1cd3670      0t0  TCP 127.0.0.1:27029->127.0.0.1:51459 (ESTABLISHED)",
+      "python3.1 53421 rianray    6u  IPv4 0x2dc0bdfc2276a87c      0t0  TCP 127.0.0.1:51323->127.0.0.1:27029 (ESTABLISHED)",
+      "python3.1 53421 rianray    7u  IPv4 0x8d32879c0fcc31eb      0t0  TCP 127.0.0.1:51324->127.0.0.1:27029 (ESTABLISHED)",
+      "python3.1 53421 rianray    8u  IPv4 0xb50b4692a1a3b53b      0t0  TCP 127.0.0.1:51325->127.0.0.1:27029 (ESTABLISHED)",
+      "python3.1 53421 rianray    9u  IPv4 0x334998762bb3801c      0t0  TCP 127.0.0.1:8019 (LISTEN)"
+    ],
+    "sandbox_profile": "config/loopback-only.sb",
+    "wildcard_listeners": []
+  },
+  "oracle_id": "S2A-STARTUP-ORACLE-V1",
+  "oracle_match": true,
+  "permitted_startup_side_effects": "MongoDB collection and index metadata only; exact inventory captured",
+  "profile_control": "CONTROLLED_ZERO_DOCUMENT_WRITES",
+  "prohibited_log_markers": {
+    "ERROR": false,
+    "Stripe catalog provisioning failed": false,
+    "Traceback": false,
+    "external network": false,
+    "provider authentication": false
+  },
+  "provider_attempt_count": 0,
+  "required_log_markers": {
+    "auto_nudges=False": true,
+    "db_ok=True": true,
+    "indexes_ensured=True": true,
+    "notifications=False": true,
+    "startup complete:": true,
+    "task_materializer=False": true
+  },
+  "startup_document_writes": 0
+}

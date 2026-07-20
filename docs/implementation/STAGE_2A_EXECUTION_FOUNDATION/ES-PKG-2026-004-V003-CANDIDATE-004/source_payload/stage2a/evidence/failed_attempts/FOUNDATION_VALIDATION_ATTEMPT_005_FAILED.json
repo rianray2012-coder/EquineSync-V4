@@ -1,0 +1,19 @@
+{
+  "attempt_id": "FOUNDATION_VALIDATION_ATTEMPT_005_FAILED",
+  "detected_utc": "2026-07-20T08:12:27Z",
+  "implementation_commit": "d182ce0854d45a8e691b75915c7c9e2670f93654",
+  "result": "FAIL_CLOSED",
+  "failed_control": "DISPOSABLE_SOURCE_RECOVERY_CHECKOUT_TIMEOUT",
+  "failure": "git checkout --detach d182ce0854d45a8e691b75915c7c9e2670f93654 exceeded the 120-second bound in the disposable shared clone",
+  "effect": "No lifecycle conclusion from this attempt is reusable or promoted to Candidate-004 evidence.",
+  "runtime_controls_observed_before_failure": ["launch nonce measured", "PID and PGID matched", "parent PID measured", "full command and executable measured", "working directory measured", "controlled listeners bound to recorded PIDs"],
+  "containment": {
+    "orchestrator_stop": "PASS_BOTH_VERIFIED_PROCESS_GROUPS_STOPPED",
+    "runtime_purge": "PASS_RUNTIME_ABSENT",
+    "controlled_ports": "BOTH_CLEAR",
+    "repository_controlled_artifacts_changed": false,
+    "failed_candidate_changed": false
+  },
+  "remediation": "Materialize and restore only the authorized fixture directly from the immutable Git blob in a disposable clone; do not checkout unrelated cloud-backed paths.",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

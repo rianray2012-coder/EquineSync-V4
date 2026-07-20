@@ -1,0 +1,8 @@
+validation=PASS
+score=16/16
+provider_attempt_count=0
+production_access_count=0
+live_data_access_count=0
+cp3_suites_executed=0
+golden_paths_executed=0
+business_workflows_executed=0

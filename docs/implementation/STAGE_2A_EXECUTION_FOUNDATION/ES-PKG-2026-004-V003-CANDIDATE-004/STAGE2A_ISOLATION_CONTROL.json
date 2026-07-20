@@ -1,0 +1,41 @@
+{
+  "environment": {
+    "ambient_attestation": {
+      "prohibited_name_count": 0,
+      "prohibited_names_present": [],
+      "values_recorded": false
+    },
+    "api_endpoint_class": "LOOPBACK_ONLY",
+    "backend_dotenv_absent": true,
+    "datastore": "equinesync_stage2a_synthetic",
+    "environment": "stage2a",
+    "mongo_endpoint_class": "LOOPBACK_ONLY",
+    "provider_credentials_present": [],
+    "status": "PASS",
+    "unknown_names": []
+  },
+  "external_egress": "DENIED_EXACT_PORT_SANDBOX",
+  "gap_id": "S2-GAP-003",
+  "live_data_access_count": 0,
+  "negative_tests": {
+    "configuration_denials": 23,
+    "inherited_provider_name_exit": 1,
+    "provider_names_tested": 19,
+    "values_recorded": false
+  },
+  "network_denials": [
+    {
+      "denied_by_sandbox": true,
+      "endpoint_class": "UNAPPROVED_LOOPBACK",
+      "error": "PermissionError:errno=1"
+    },
+    {
+      "denied_by_sandbox": true,
+      "endpoint_class": "DOCUMENTATION_EXTERNAL",
+      "error": "PermissionError:errno=1"
+    }
+  ],
+  "network_profile": "stage2a/config/loopback-only.sb",
+  "production_access_count": 0,
+  "provider_attempt_count": 0
+}

@@ -1,0 +1,20 @@
+{
+  "evidence": {
+    "input_hash_count_each": 3,
+    "intentional_fail_run": "foundation-example-intentional-fail",
+    "pass_run": "foundation-example-pass",
+    "records_bound_to_implementation_commit": true,
+    "schema_errors": [],
+    "semantic_negative_tests": {
+      "contradictory_exit_rejected": true,
+      "required_meaning_preserved": true,
+      "reverse_chronology_rejected": true,
+      "sensitive_value_redacted": true,
+      "stream_hash_mismatch_rejected": true,
+      "weak_substring_meaning_rejected": true
+    },
+    "semantically_empty_record_rejected": true
+  },
+  "gap_id": "S2-GAP-006",
+  "result": "PASS"
+}

@@ -1,0 +1,6 @@
+{
+  "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+  "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+  "copied_into_corrected_candidate": false,
+  "reason": "preserved externally as immutable failed-candidate evidence; mutable duplication prohibited"
+}

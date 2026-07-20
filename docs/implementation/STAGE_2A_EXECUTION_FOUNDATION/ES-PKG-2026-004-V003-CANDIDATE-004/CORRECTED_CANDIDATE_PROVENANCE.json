@@ -1,0 +1,59 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "blocker_results": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    }
+  ],
+  "candidate_attempt": 4,
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-004",
+  "distinct_from_failed_candidate": true,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "failed_candidate_unchanged": true,
+  "failed_candidates": [
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+      "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003",
+      "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "payload_files": 108,
+      "physical_files": 111,
+      "unchanged": true
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip",
+      "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-003",
+      "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+      "payload_files": 121,
+      "physical_files": 124,
+      "unchanged": true
+    }
+  ],
+  "freeze_commit": "RECORDED_EXTERNALLY_AFTER_BYTE_FREEZE_TO_AVOID_CIRCULAR_SELF_REFERENCE",
+  "package_id": "ES-PKG-2026-004-V003",
+  "packaging_commit": "daa10387e073952b823afde9b681e602cb70c7b8",
+  "validated_implementation_commit": "daa10387e073952b823afde9b681e602cb70c7b8"
+}

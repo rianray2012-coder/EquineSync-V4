@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EquineSync Stage 2A Foundation Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "package_id", "run_identifier", "command", "sanitized_arguments",
+    "input_artifact_hashes", "configuration_identity", "environment_identity", "utc_start",
+    "utc_end", "commit_hash", "tree_hash", "expected_result", "actual_result", "exit_status",
+    "stdout_location", "stderr_location", "datastore_digest_before", "datastore_digest_after",
+    "cleanup_result", "rollback_result", "tool_versions", "evidence_file_hashes",
+    "redaction_status", "required_meaning", "redaction_evidence", "result", "execution_status", "record_content_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "package_id": {"const": "ES-PKG-2026-004-V003"},
+    "run_identifier": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"},
+    "command": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+    "sanitized_arguments": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "input_artifact_hashes": {
+      "type": "object", "minProperties": 2,
+      "propertyNames": {"pattern": "^(?!/)(?!.*\\.\\.).+$"},
+      "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+    },
+    "configuration_identity": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "environment_identity": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "utc_start": {"type": "string", "format": "date-time"},
+    "utc_end": {"type": "string", "format": "date-time"},
+    "commit_hash": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "tree_hash": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "expected_result": {"type": "object", "additionalProperties": false, "required": ["exit_status"], "properties": {"exit_status": {"type": "integer"}}},
+    "actual_result": {"type": "object", "additionalProperties": false, "required": ["exit_status"], "properties": {"exit_status": {"type": "integer"}}},
+    "exit_status": {"type": "integer"},
+    "stdout_location": {"type": "string", "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+    "stderr_location": {"type": "string", "pattern": "^(?!/)(?!.*\\.\\.).+$"},
+    "datastore_digest_before": {"type": "string", "pattern": "^(?:[a-f0-9]{64}|NOT_APPLICABLE_NO_DATASTORE_WRITE)$"},
+    "datastore_digest_after": {"type": "string", "pattern": "^(?:[a-f0-9]{64}|NOT_APPLICABLE_NO_DATASTORE_WRITE)$"},
+    "cleanup_result": {"enum": ["PASS", "PASS_NO_DATASTORE_WRITE", "FAIL"]},
+    "rollback_result": {"enum": ["PASS", "NOT_APPLICABLE_NO_DATASTORE_WRITE", "FAIL"]},
+    "tool_versions": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "minLength": 1}},
+    "evidence_file_hashes": {
+      "type": "object", "additionalProperties": false, "required": ["stdout", "stderr"],
+      "properties": {"stdout": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "stderr": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+    },
+    "redaction_status": {"const": "PASS_VALUES_REDACTED_PATHS_REPOSITORY_RELATIVE"},
+    "required_meaning": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "redaction_evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy", "stdout_replacements", "stderr_replacements", "unredacted_sensitive_match_count", "normalization_version", "semantic_projection_sha256_before", "semantic_projection_sha256_after", "required_exact_line_matches", "meaning_preserved"],
+      "properties": {
+        "policy": {"const": "SENSITIVE_ASSIGNMENTS_AND_KNOWN_SECRET_VALUE_PATTERNS_REDACTED"},
+        "stdout_replacements": {"type": "integer", "minimum": 0},
+        "stderr_replacements": {"type": "integer", "minimum": 0},
+        "unredacted_sensitive_match_count": {"const": 0},
+        "normalization_version": {"const": "S2A-REDACTION-PROJECTION-V2"},
+        "semantic_projection_sha256_before": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "semantic_projection_sha256_after": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "required_exact_line_matches": {"type": "object", "minProperties": 1, "additionalProperties": {"const": true}},
+        "meaning_preserved": {"const": true}
+      }
+    },
+    "result": {"enum": ["PASS", "FAIL"]},
+    "execution_status": {"const": "EXECUTION_NOT_AUTHORIZED"},
+    "record_content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}
