@@ -23,6 +23,10 @@ def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def git(*args: str) -> str:
+    return subprocess.run(["git", *args], cwd=ROOT, text=True, capture_output=True, check=True).stdout.strip()
+
+
 def run(command: list[str], *, env: dict[str, str] | None = None) -> dict[str, object]:
     completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=TIMEOUT, env=env)
     if completed.returncode != 0:
@@ -81,6 +85,8 @@ def main() -> int:
         compatibility = inventory_result["dependency_compatibility"]
         report = {
             "validation": "PASS",
+            "implementation_commit": git("rev-parse", "HEAD"),
+            "implementation_tree": git("rev-parse", "HEAD^{tree}"),
             "python": sys.version.split()[0],
             "requirements": "backend/requirements.txt",
             "requirements_sha256": sha(REQUIREMENTS),
