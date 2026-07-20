@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "branch_descends_from_controlling_commit": false,
+    "exact_commit_checkout": false,
+    "json_parse_pass": false,
+    "remote_branch_fetch": false,
+    "required_artifacts_present": false,
+    "sealed_package_63_of_63": false,
+    "sha256sums_pass": false
+  },
+  "note": "Publication candidate not yet verified from the remote branch.",
+  "remote_branch": "codex/founder-review-agent-runtime-requalification-v1",
+  "required_artifact_count": 19,
+  "run_id": "FORA-RUNTIME-REQUAL-2026-001",
+  "source_commit_ancestor": "57210494c1e82e60efd4c329ebf34fda236972d8",
+  "status": "PENDING",
+  "verified_commit": null
+}

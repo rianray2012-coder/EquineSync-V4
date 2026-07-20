@@ -1,0 +1,9 @@
+EQUINESYNC AUTHORIZED INTERACTIVE RUNTIME SELECTOR CANARY
+
+Directive: ES-FORA-DIR-RUNTIME-REMEDIATION-REQUALIFICATION-V1.0.
+
+This is calibration-only and not a registered review-role execution. No substantive review is authorized. Parent and child must remain read-only. Do not use shell, file, network, connector, browser, provider, production, or write tools.
+
+The pre-spawn permission record is RUNTIME-SELECTOR-INTERACTIVE-CANARY-RUN-03. It records the trusted disposable profile, read-only parent and child, on-request configured approval, denied agent-tool network, no production access, and a PASS check under the Founder directive.
+
+Call spawn_agent exactly once with task_name="runtime_selector_interactive_canary", agent_type="es_runtime_canary", fork_turns="none", and message="Return only the response required by your already-loaded custom instructions." Do not use a generic substitute. Wait for the child. Return only the child's exact direct response. If the selector field is unavailable, make no spawn, report that limitation concisely, and do not retry.

@@ -1,0 +1,18 @@
+{
+  "agent_type_supported": false,
+  "custom_agent_selector_fields": [],
+  "exposed_spawn_agent_input_fields": [
+    "task_name",
+    "message",
+    "fork_turns",
+    "model",
+    "reasoning_effort"
+  ],
+  "generic_substitute_used": false,
+  "observed_at": "2026-07-20T19:01:37+00:00",
+  "parent_approval_policy": "never",
+  "parent_sandbox": "danger-full-access",
+  "permission_control_result": "FORMAL_ROLE_SPAWN_PROHIBITED_WITHOUT_FOUNDER_EXCEPTION",
+  "spawn_attempted": false,
+  "surface": "Codex desktop current task"
+}

@@ -1,0 +1,11 @@
+{
+  "driver_exit_code": 1,
+  "generic_substitute_accepted": false,
+  "observed_child_agent_role": null,
+  "observed_child_response": null,
+  "observed_spawn_call": {},
+  "retry_performed": false,
+  "status": "FAIL",
+  "substantive_review_performed": false,
+  "terminal_contains_canary_marker": false
+}

@@ -1,0 +1,17 @@
+{
+  "disposition": "FOUNDER_REVIEW_AGENTS_BLOCKED_BY_RUNTIME_LIMITATION",
+  "located_directory": "/Users/rianray/Documents/Codex/2026-07-19/files-mentioned-by-the-user-codex/outputs/FORA-FRESH-2026-07-20-236E7CE8",
+  "note": "Four artifacts were present as macOS dataless placeholders during this run; no attempt was made to rewrite them. The supplied handoff preserved their locators and prior disposition.",
+  "other_located_artifacts": [
+    "AGENT_INDIVIDUAL_CALIBRATION_REGISTER.csv",
+    "AGENT_ORCHESTRATION_TEST_REPORT.md",
+    "AGENT_READINESS_EVIDENCE_MANIFEST.txt",
+    "AGENT_ACTIVATION_CHANGE_MANIFEST.txt"
+  ],
+  "run_id": "FORA-FRESH-2026-07-20-236E7CE8",
+  "verified_readable_sha256": {
+    "AGENT_IDENTITY_PROBE_REGISTER.csv": "dcf0850513bfe52ead45acb47805b7ae0ab018e88df108cd6fe465a5cd1cb000",
+    "EXECUTION_ENVIRONMENT_PROVENANCE.md": "12b44cca6284fdd4e29bd118ea39c1f6dcb923899a4046a255453b9789308a58",
+    "FRESH_AGENT_ACTIVATION_AND_READINESS_REPORT.md": "8db9655db5d83bb08981dbf80192ae02a21944556a6910681a3aa2124d4afb2b"
+  }
+}

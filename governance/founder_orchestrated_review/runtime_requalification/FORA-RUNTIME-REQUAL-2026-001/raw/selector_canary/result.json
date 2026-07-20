@@ -1,0 +1,11 @@
+{
+  "generic_substitute_accepted": false,
+  "observed_child_agent_role": null,
+  "observed_child_response": null,
+  "observed_spawn_call": {},
+  "parent_final_response": "FAILURE: The available `spawn_agent` interface cannot preserve or specify `agent_type=\"es_runtime_canary\"`; it supports only `task_name`, `fork_turns`, and `message`. No spawn was attempted.",
+  "process_exit_code": 0,
+  "retry_performed": false,
+  "status": "FAIL",
+  "substantive_review_performed": false
+}

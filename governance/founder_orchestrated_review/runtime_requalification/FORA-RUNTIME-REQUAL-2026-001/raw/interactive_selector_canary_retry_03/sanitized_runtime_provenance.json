@@ -1,0 +1,23 @@
+{
+  "children": [],
+  "parent_runtime": {
+    "approval_policy": "on-request",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": null,
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-20T13-46-23-019f80d9-c1a9-7c73-b0a5-baed33bb8444.jsonl",
+  "parent_spawn_calls": [],
+  "parent_thread_id": "019f80d9-c1a9-7c73-b0a5-baed33bb8444",
+  "sanitization": {
+    "credential_material_copied": false,
+    "hidden_instruction_text_copied": false,
+    "scope": "Runtime role metadata, policy, direct child response, and filenames only."
+  }
+}

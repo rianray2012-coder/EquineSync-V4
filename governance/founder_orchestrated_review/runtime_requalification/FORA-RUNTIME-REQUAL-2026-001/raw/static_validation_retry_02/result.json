@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "checkout_clean_before": true,
+    "controlled_inputs_unchanged_by_validation": true,
+    "installed_system_16_of_16": true,
+    "installed_system_validator_pass": false,
+    "package_zip_sha256_exact": true,
+    "sealed_checksum_denominator_63": true,
+    "sealed_package_validator_pass": true,
+    "source_branch_exact": true,
+    "source_commit_exact": true
+  },
+  "checks_passed": 8,
+  "checks_total": 9,
+  "controlled_files": 184,
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "sealed_package_checksum_entries": 63,
+  "source_branch": "agent/install-founder-review-agents-v1.0.0",
+  "source_commit": "57210494c1e82e60efd4c329ebf34fda236972d8",
+  "status": "FAIL",
+  "validator_python": "/Users/rianray/Documents/Codex/2026-07-20/repository-https-github-com-rianray2012-coder/work/validation-venv/bin/python"
+}

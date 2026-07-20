@@ -1,0 +1,4 @@
+missing close-brace
+    while executing
+"spawn {/Users/rianray/.npm-global/lib/node_modules/@openai/codex/bin/codex.js} {-C} {/Users/rianray/Documents/Codex/2026-07-20/repository-https-github..."
+    (file "/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/equinesync-interactive-canary-tcx328m7/drive.exp" line 4)

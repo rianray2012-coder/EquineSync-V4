@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"019f80d3-079b-7ed0-b94e-2ba0c5a685d5"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"FAILURE: The available `spawn_agent` interface cannot preserve or specify `agent_type=\"es_runtime_canary\"`; it supports only `task_name`, `fork_turns`, and `message`. No spawn was attempted."}}
+{"type":"turn.completed","usage":{"input_tokens":10268,"cached_input_tokens":2816,"output_tokens":82,"reasoning_output_tokens":31}}

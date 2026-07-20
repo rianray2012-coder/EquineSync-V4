@@ -1,0 +1,1 @@
+FAILURE: The available `spawn_agent` interface cannot preserve or specify `agent_type="es_runtime_canary"`; it supports only `task_name`, `fork_turns`, and `message`. No spawn was attempted.

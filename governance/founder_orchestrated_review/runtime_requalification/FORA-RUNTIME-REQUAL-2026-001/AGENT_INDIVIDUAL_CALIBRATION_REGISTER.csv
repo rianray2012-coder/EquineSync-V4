@@ -1,0 +1,9 @@
+agent_id,custom_agent_name,calibration_status,attempted,passed,generic_substitute_used,reason
+ES-RA-01,equinesync_drafting_agent,NOT_RUN_BLOCKED_BY_CUSTOM_AGENT_SELECTOR,NO,NO,NO,Identity probe stage was not reached
+ES-RA-02,equinesync_segregated_review_agent,NOT_RUN_BLOCKED_BY_CUSTOM_AGENT_SELECTOR,NO,NO,NO,Identity probe stage was not reached
+ES-RA-03,equinesync_adversarial_challenge_agent,NOT_RUN_BLOCKED_BY_CUSTOM_AGENT_SELECTOR,NO,NO,NO,Identity probe stage was not reached
+ES-RA-04,equinesync_machine_validation_agent,NOT_RUN_BLOCKED_BY_CUSTOM_AGENT_SELECTOR,NO,NO,NO,Identity probe stage was not reached
+ES-RA-05,equinesync_evidence_custodian,NOT_RUN_BLOCKED_BY_CUSTOM_AGENT_SELECTOR,NO,NO,NO,Identity probe stage was not reached
+ES-RA-06,equinesync_domain_reviewer,NOT_RUN_BLOCKED_BY_CUSTOM_AGENT_SELECTOR,NO,NO,NO,Identity probe stage was not reached
+ES-RA-07,equinesync_synthetic_golden_path_agent,NOT_RUN_BLOCKED_BY_CUSTOM_AGENT_SELECTOR,NO,NO,NO,Identity probe stage was not reached
+ES-RA-08,equinesync_executable_golden_path_controller,NOT_RUN_BLOCKED_BY_CUSTOM_AGENT_SELECTOR,NO,NO,NO,Identity probe stage was not reached

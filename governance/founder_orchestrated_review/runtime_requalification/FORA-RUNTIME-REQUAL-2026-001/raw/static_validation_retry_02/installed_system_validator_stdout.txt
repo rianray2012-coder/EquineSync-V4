@@ -1,0 +1,3 @@
+INSTALLED SYSTEM VALIDATION PASSED
+report=governance/founder_orchestrated_review/validation/INSTALLED_SYSTEM_VALIDATION_REPORT.md
+result=governance/founder_orchestrated_review/validation/INSTALLED_SYSTEM_VALIDATION_RESULT.json

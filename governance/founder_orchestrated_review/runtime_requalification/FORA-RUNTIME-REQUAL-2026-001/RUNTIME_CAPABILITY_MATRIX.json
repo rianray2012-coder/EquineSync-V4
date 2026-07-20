@@ -1,0 +1,50 @@
+{
+  "captured_at": "2026-07-20T19:01:37+00:00",
+  "codex_version": "codex-cli 0.144.6",
+  "conclusion": "CUSTOM_AGENT_SELECTOR_UNAVAILABLE_ON_EVERY_SUPPORTED_RUNTIME_SURFACE_TESTED",
+  "diagnostic_protocols_tested": 1,
+  "directive_id": "ES-FORA-DIR-RUNTIME-REMEDIATION-REQUALIFICATION-V1.0",
+  "official_documentation": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+  "official_documentation_summary": "Current local clients document project custom-agent files and identify a custom agent by its name field.",
+  "run_id": "FORA-RUNTIME-REQUAL-2026-001",
+  "supported_surfaces_tested": 3,
+  "supported_surfaces_with_selector": 0,
+  "surfaces": [
+    {
+      "evidence": "The exposed spawn_agent schema accepts task_name, message, fork_turns, model, and reasoning_effort; it exposes no agent_type or equivalent custom-agent field.",
+      "execution": "NOT_ATTEMPTED_PERMISSION_CONTROL_AND_SELECTOR_BLOCK",
+      "permission_state": "danger-full-access / approval never",
+      "selector_available": false,
+      "selector_tested": "spawn_agent agent_type/name selector",
+      "support_status": "SUPPORTED_LOCAL_CLIENT",
+      "surface": "Codex desktop current task"
+    },
+    {
+      "evidence": "raw/interactive_selector_canary_retry_03/raw_terminal.log",
+      "execution": "NO_SPAWN_CALL_NO_CHILD",
+      "permission_state": "read-only / approval on-request / network restricted",
+      "selector_available": false,
+      "selector_tested": "model-directed exact agent_type=es_runtime_canary spawn",
+      "support_status": "SUPPORTED_LOCAL_CLIENT",
+      "surface": "Codex CLI interactive"
+    },
+    {
+      "evidence": "raw/selector_canary/events.jsonl",
+      "execution": "NO_SPAWN_CALL_NO_CHILD",
+      "permission_state": "read-only / effective approval never / network restricted",
+      "selector_available": false,
+      "selector_tested": "model-directed exact agent_type=es_runtime_canary spawn",
+      "support_status": "SUPPORTED_NONINTERACTIVE_CLI",
+      "surface": "Codex CLI exec --json"
+    },
+    {
+      "evidence": "raw/config_and_app_server_probe/app_server_schema_analysis.json",
+      "execution": "CONFIG_READ_ONLY_NO_EXTERNAL_CUSTOM_AGENT_SPAWN_METHOD",
+      "permission_state": "no child execution",
+      "selector_available": false,
+      "selector_tested": "generated request/params schema search for agent_type or agentRole selector",
+      "support_status": "EXPERIMENTAL_PROTOCOL_DIAGNOSTIC_ONLY",
+      "surface": "Codex app-server protocol"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+attempt_id,attempt,evidence,result,cause,response,retried
+FA-001,Prior run,FORA-FRESH-2026-07-20-236E7CE8,BLOCKED,Runtime discovery 0/8; selector unavailable,Preserved as supplied prior evidence,NO
+FA-002,Static validation attempt 1,raw/static_validation/result.json,FAILED_HARNESS_DEPENDENCY,System Python lacked jsonschema,Created disposable pinned validation environment,YES
+FA-003,Static validation retry 2,raw/static_validation_retry_02/result.json,FAILED_HARNESS_SCORER,Validator passed 16/16 but wrapper read the wrong JSON field,Corrected wrapper to read top-level status,YES
+FA-004,Static validation retry 3,raw/static_validation_retry_03/result.json,PASS,Corrected static checks passed 9/9 and installed validation 16/16,Accepted as controlling static result,NO
+FA-005,CLI exec selector canary,raw/selector_canary/result.json,BLOCKED_SELECTOR,Spawn interface lacked agent_type/custom-agent selector,Tested supported interactive client separately,YES
+FA-006,Interactive harness attempt 1,raw/interactive_selector_canary/result.json,FAILED_HARNESS_PARSE,Automation script parse error before runtime probe,Repaired harness,YES
+FA-007,Interactive harness retry 2,raw/interactive_selector_canary_retry_02/result.json,FAILED_HARNESS_STALL,PTY harness stalled before usable log,Replaced with controlled native PTY capture,YES
+FA-008,Interactive selector retry 3,raw/interactive_selector_canary_retry_03/result.json,BLOCKED_SELECTOR,Runtime explicitly reported selector unavailable; no child,No unsupported workaround permitted,NO
+FA-009,Config/app-server diagnostic,raw/config_and_app_server_probe/result.json,PASS_DIAGNOSTIC,Project layer loaded; generated request schemas still lacked selector,Classified interface limitation,NO

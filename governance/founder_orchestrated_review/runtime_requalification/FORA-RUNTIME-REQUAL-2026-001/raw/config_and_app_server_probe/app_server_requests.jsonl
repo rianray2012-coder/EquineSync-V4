@@ -1,0 +1,3 @@
+{"id":1,"method":"initialize","params":{"clientInfo":{"name":"equinesync-current-runtime-probe","version":"1.0.0"}}}
+{"method":"initialized","params":{}}
+{"id":2,"method":"config/read","params":{"cwd":"/Users/rianray/Documents/Codex/2026-07-20/repository-https-github-com-rianray2012-coder/work/runtime-execution-5721049","includeLayers":true}}

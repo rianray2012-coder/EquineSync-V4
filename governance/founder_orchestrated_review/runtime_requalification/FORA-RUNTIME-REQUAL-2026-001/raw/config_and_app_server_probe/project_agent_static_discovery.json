@@ -1,0 +1,68 @@
+{
+  "roles": [
+    {
+      "approval_policy": "on-request",
+      "file": ".codex/agents/equinesync_drafting_agent.toml",
+      "name": "equinesync_drafting_agent",
+      "parse_status": "PASS",
+      "parsed_name": "equinesync_drafting_agent",
+      "sandbox_mode": "workspace-write"
+    },
+    {
+      "approval_policy": "on-request",
+      "file": ".codex/agents/equinesync_segregated_review_agent.toml",
+      "name": "equinesync_segregated_review_agent",
+      "parse_status": "PASS",
+      "parsed_name": "equinesync_segregated_review_agent",
+      "sandbox_mode": "read-only"
+    },
+    {
+      "approval_policy": "on-request",
+      "file": ".codex/agents/equinesync_adversarial_challenge_agent.toml",
+      "name": "equinesync_adversarial_challenge_agent",
+      "parse_status": "PASS",
+      "parsed_name": "equinesync_adversarial_challenge_agent",
+      "sandbox_mode": "read-only"
+    },
+    {
+      "approval_policy": "on-request",
+      "file": ".codex/agents/equinesync_machine_validation_agent.toml",
+      "name": "equinesync_machine_validation_agent",
+      "parse_status": "PASS",
+      "parsed_name": "equinesync_machine_validation_agent",
+      "sandbox_mode": "workspace-write"
+    },
+    {
+      "approval_policy": "on-request",
+      "file": ".codex/agents/equinesync_evidence_custodian.toml",
+      "name": "equinesync_evidence_custodian",
+      "parse_status": "PASS",
+      "parsed_name": "equinesync_evidence_custodian",
+      "sandbox_mode": "workspace-write"
+    },
+    {
+      "approval_policy": "on-request",
+      "file": ".codex/agents/equinesync_domain_reviewer.toml",
+      "name": "equinesync_domain_reviewer",
+      "parse_status": "PASS",
+      "parsed_name": "equinesync_domain_reviewer",
+      "sandbox_mode": "read-only"
+    },
+    {
+      "approval_policy": "on-request",
+      "file": ".codex/agents/equinesync_synthetic_golden_path_agent.toml",
+      "name": "equinesync_synthetic_golden_path_agent",
+      "parse_status": "PASS",
+      "parsed_name": "equinesync_synthetic_golden_path_agent",
+      "sandbox_mode": "workspace-write"
+    },
+    {
+      "approval_policy": "on-request",
+      "file": ".codex/agents/equinesync_executable_golden_path_controller.toml",
+      "name": "equinesync_executable_golden_path_controller",
+      "parse_status": "PASS",
+      "parsed_name": "equinesync_executable_golden_path_controller",
+      "sandbox_mode": "workspace-write"
+    }
+  ]
+}

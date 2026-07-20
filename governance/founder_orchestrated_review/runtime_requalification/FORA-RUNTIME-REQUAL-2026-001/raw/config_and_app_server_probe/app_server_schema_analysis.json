@@ -1,0 +1,9 @@
+{
+  "agent_role_in_request_or_params": false,
+  "agent_role_present_as_response_metadata": true,
+  "agent_type_in_request_or_params": false,
+  "external_app_server_custom_agent_spawn_method_documented": false,
+  "interpretation": "App-server exposes subagent role metadata in responses but no request parameter or method for selecting a project custom-agent type.",
+  "request_or_params_files": 124,
+  "schema_files": 337
+}

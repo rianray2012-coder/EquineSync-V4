@@ -1,0 +1,39 @@
+{
+  "argv": [
+    "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "-a",
+    "on-request",
+    "exec",
+    "--strict-config",
+    "--json",
+    "-C",
+    "/Users/rianray/Documents/Codex/2026-07-20/repository-https-github-com-rianray2012-coder/work/runtime-execution-5721049",
+    "-s",
+    "read-only",
+    "-c",
+    "web_search=\"disabled\"",
+    "-o",
+    "/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/equinesync-selector-canary-0suwgx8v/output/final.txt",
+    "-"
+  ],
+  "control_plane_auth_content_or_hash_recorded": false,
+  "control_plane_auth_copied": true,
+  "environment_variable_names_only": [
+    "CI",
+    "CODEX_HOME",
+    "HOME",
+    "LANG",
+    "LC_ALL",
+    "LOGNAME",
+    "NO_COLOR",
+    "PATH",
+    "SHELL",
+    "TERM",
+    "TMPDIR",
+    "USER"
+  ],
+  "mcp_servers_declared": 0,
+  "plugins_declared": 0,
+  "prompt_delivery": "stdin from parent_prompt.txt",
+  "working_directory": "/Users/rianray/Documents/Codex/2026-07-20/repository-https-github-com-rianray2012-coder/work/runtime-execution-5721049"
+}

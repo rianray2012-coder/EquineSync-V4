@@ -1,0 +1,22 @@
+{
+  "agent_activity": "NONE",
+  "app_server_external_selector": "UNAVAILABLE",
+  "checks": {
+    "all_eight_role_files_parse": true,
+    "app_server_config_read_returned": true,
+    "app_server_no_agent_selector_parameter": true,
+    "mcp_cli_reports_none": true,
+    "multi_agent_enabled": true,
+    "plugins_and_connector_features_disabled": true,
+    "project_agent_limits_loaded": true,
+    "project_layer_loaded_and_enabled": true,
+    "zero_effective_mcp_servers": true
+  },
+  "checks_passed": 9,
+  "checks_total": 9,
+  "effective_mcp_server_count": 0,
+  "effective_project_layer_count": 1,
+  "role_files_parsed": 8,
+  "status": "PASS",
+  "substantive_review_performed": false
+}

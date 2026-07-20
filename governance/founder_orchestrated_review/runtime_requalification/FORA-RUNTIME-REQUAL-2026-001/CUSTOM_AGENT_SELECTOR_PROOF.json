@@ -1,0 +1,39 @@
+{
+  "canary_is_review_role": false,
+  "canary_name": "es_runtime_canary",
+  "classification": "CONFIRMED_RUNTIME_PRODUCT_INTERFACE_LIMITATION_FOR_TESTED_VERSION_AND_SURFACES",
+  "configuration_discovery": "PASS_8_OF_8_STATIC_CONFIGS_PLUS_NON_ROLE_CANARY",
+  "fail_closed": true,
+  "run_id": "FORA-RUNTIME-REQUAL-2026-001",
+  "runtime_registration": "BLOCKED_0_OF_8",
+  "selector_requirement": "An execution interface must carry the exact repository-controlled custom-agent name/agent_type into the child session.",
+  "tests": [
+    {
+      "children": 0,
+      "evidence": "raw/selector_canary/result.json",
+      "generic_substitution": false,
+      "result": "FAIL_SELECTOR_UNAVAILABLE",
+      "spawn_calls": 0,
+      "substantive_work": false,
+      "surface": "Codex CLI exec --json"
+    },
+    {
+      "children": 0,
+      "evidence": "raw/interactive_selector_canary_retry_03/result.json",
+      "generic_substitution": false,
+      "result": "FAIL_SELECTOR_UNAVAILABLE",
+      "spawn_calls": 0,
+      "substantive_work": false,
+      "surface": "Codex CLI interactive"
+    },
+    {
+      "children": 0,
+      "evidence": "raw/current_desktop_surface_observation.json",
+      "generic_substitution": false,
+      "result": "FAIL_SELECTOR_SCHEMA_ABSENT",
+      "spawn_calls": 0,
+      "substantive_work": false,
+      "surface": "Codex desktop current task"
+    }
+  ]
+}

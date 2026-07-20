@@ -1,0 +1,11 @@
+{
+  "child_sessions": 0,
+  "classification": "CUSTOM_AGENT_SELECTOR_UNAVAILABLE",
+  "generic_substitute_accepted": false,
+  "limitation_observed_in_terminal": true,
+  "parent_spawn_calls": [],
+  "process_exit_code": 0,
+  "retry_performed_after_runtime_result": false,
+  "status": "FAIL",
+  "substantive_review_performed": false
+}

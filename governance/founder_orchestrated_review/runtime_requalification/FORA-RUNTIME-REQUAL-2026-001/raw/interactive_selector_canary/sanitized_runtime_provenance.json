@@ -1,0 +1,12 @@
+{
+  "children": [],
+  "parent_runtime": {},
+  "parent_source_rollout_basename": null,
+  "parent_spawn_calls": [],
+  "parent_thread_id": null,
+  "sanitization": {
+    "credential_material_copied": false,
+    "hidden_instruction_text_copied": false,
+    "scope": "Runtime role metadata, policy, direct child response, and filenames only."
+  }
+}
