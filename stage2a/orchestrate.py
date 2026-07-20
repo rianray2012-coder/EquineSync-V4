@@ -250,12 +250,16 @@ def _alive(record: dict[str, object] | None, kind: str) -> bool:
         return False
 
 
-def _listener_pid(port: int) -> int | None:
+def _listener_pid(port: int, expected_pid: int | None = None) -> int | None:
     if not _port_open("127.0.0.1", port):
         return None
+    command = ["lsof", "-nP", "-t"]
+    if expected_pid is not None:
+        command.extend(["-a", "-p", str(expected_pid)])
+    command.extend([f"-iTCP:{port}", "-sTCP:LISTEN"])
     try:
         result = subprocess.run(
-            ["lsof", "-nP", "-t", f"-iTCP:{port}", "-sTCP:LISTEN"],
+            command,
             text=True,
             capture_output=True,
             check=False,
@@ -328,7 +332,7 @@ def _wait_exit(record: dict[str, object], kind: str, timeout: float) -> bool:
 def _terminate(kind: str, pid_file: Path, port: int) -> dict[str, object]:
     record = _read_record(pid_file)
     saved_pid = int(record["pid"]) if record else None
-    listener = _listener_pid(port)
+    listener = _listener_pid(port, saved_pid)
     if saved_pid is None and listener is not None:
         raise RuntimeError(f"refusing to adopt unverified foreign-path listener PID {listener} on controlled port {port}")
     pid = saved_pid
@@ -466,8 +470,10 @@ def stop() -> dict[str, object]:
 def status() -> dict[str, object]:
     mongo_record = _read_record(MONGO_PID)
     api_record = _read_record(API_PID)
-    mongo_listener = _listener_pid(MONGO_PORT)
-    api_listener = _listener_pid(API_PORT)
+    mongo_port_open = _port_open("127.0.0.1", MONGO_PORT)
+    api_port_open = _port_open("127.0.0.1", API_PORT)
+    mongo_listener = _listener_pid(MONGO_PORT, int(mongo_record["pid"])) if mongo_record else _listener_pid(MONGO_PORT)
+    api_listener = _listener_pid(API_PORT, int(api_record["pid"])) if api_record else _listener_pid(API_PORT)
     mongo_expected = _alive(mongo_record, "mongo")
     api_expected = _alive(api_record, "api")
     mongo_listener_bound = bool(mongo_record and mongo_listener == mongo_record.get("pid") and mongo_expected)
@@ -475,15 +481,17 @@ def status() -> dict[str, object]:
     return {
         "mongo_pid": mongo_record.get("pid") if mongo_record else None,
         "mongo_alive": mongo_listener_bound,
-        "mongo_port_open": _port_open("127.0.0.1", MONGO_PORT),
+        "mongo_port_open": mongo_port_open,
         "mongo_listener_identity_verified": mongo_listener_bound,
         "mongo_foreign_listener_pid": mongo_listener if mongo_listener and not mongo_listener_bound else None,
+        "mongo_listener_attribution_conflict": mongo_port_open and not mongo_listener_bound,
         "mongo_identity": mongo_record,
         "api_pid": api_record.get("pid") if api_record else None,
         "api_alive": api_listener_bound,
-        "api_port_open": _port_open("127.0.0.1", API_PORT),
+        "api_port_open": api_port_open,
         "api_listener_identity_verified": api_listener_bound,
         "api_foreign_listener_pid": api_listener if api_listener and not api_listener_bound else None,
+        "api_listener_attribution_conflict": api_port_open and not api_listener_bound,
         "api_identity": api_record,
         "profile": API_PROFILE.read_text(encoding="utf-8").strip() if API_PROFILE.exists() else None,
     }

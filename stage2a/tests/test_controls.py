@@ -161,5 +161,15 @@ class ControlTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "listener identity probe timed out"):
                 orchestrate._listener_pid(8019)
 
+    def test_listener_identity_probe_can_scope_to_expected_pid(self):
+        completed = orchestrate.subprocess.CompletedProcess([], 0, stdout="42\n", stderr="")
+        with patch("orchestrate._port_open", return_value=True), patch(
+            "orchestrate.subprocess.run", return_value=completed
+        ) as run:
+            self.assertEqual(orchestrate._listener_pid(8019, 42), 42)
+        command = run.call_args.args[0]
+        self.assertIn("-a", command)
+        self.assertEqual(command[command.index("-p") + 1], "42")
+
 
 if __name__=="__main__": unittest.main()

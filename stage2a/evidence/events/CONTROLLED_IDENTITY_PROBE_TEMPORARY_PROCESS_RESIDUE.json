@@ -13,13 +13,24 @@
     "controlled_port_examined": 8019,
     "listener": false
   },
+  "secondary_read_only_probe": {
+    "pid": 51198,
+    "initial_parent_pid": 51195,
+    "post_parent_termination_parent_pid": 1,
+    "process_group_id": 51195,
+    "executable": "/usr/sbin/lsof",
+    "full_command_line": "lsof -nP -iTCP:27029 -sTCP:LISTEN",
+    "controlled_port_examined": 27029,
+    "listener": false,
+    "disposition": "verified process group received TERM then KILL; socket-level port proof remained CLOSED"
+  },
   "attribution_method": "ps PID/PPID/PGID/command capture plus lsof process working-directory capture and independent TCP connect probes",
   "termination": {
     "first_action": "kill -TERM -- -49347",
     "first_result": "validator parent stopped; lsof remained temporarily in uninterruptible state and reparented to PID 1",
     "final_action": "kill -KILL -- -49347",
     "final_result": "verified process group absent",
-    "scope": "only verified lifecycle validation process group 49347"
+    "scope": "only verified process groups 49347 and 51195; each was attributed before signaling"
   },
   "postconditions": {
     "port_8019_listening": false,
