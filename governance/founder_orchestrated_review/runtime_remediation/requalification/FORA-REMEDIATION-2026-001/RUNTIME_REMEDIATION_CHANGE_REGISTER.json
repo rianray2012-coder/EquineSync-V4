@@ -31,6 +31,26 @@
       "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
     },
     {
+      "after_sha256": "b5a4f1646484e526c457098b63e96aa994d6adcec3b0f14715da09b8245baa24",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/FRESH_CLONE_REMEDIATION_VERIFICATION.json",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e2b987aaea815d6e303ee178a3d0278b6624a120cf26ba08cfce7168974d1fc2",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/FRESH_CLONE_REMEDIATION_VERIFICATION.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
       "after_sha256": "64631ca466b2e63888207731f868cba7f9e8137b0e1a122287620531d5190620",
       "before_sha256": null,
       "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
@@ -131,7 +151,7 @@
       "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
     },
     {
-      "after_sha256": "286164c0723045a84bada9e2be999b3316c2e046222f10158cd181b541271497",
+      "after_sha256": "d933e0cbf0704d5b2e8db90ada6fcf44390c07d194419770c14f15b3024dec2e",
       "before_sha256": null,
       "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
       "inside_sealed_package": false,
@@ -141,7 +161,7 @@
       "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
     },
     {
-      "after_sha256": "e965e1343044f8959eb6bccc9597e13b6bbc57e86dbc28f9085094cbcce8e62e",
+      "after_sha256": "6a8036f896105e540e83492c6686359be4f25dbc3047502c411fb6eb9d6d464e",
       "before_sha256": null,
       "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
       "inside_sealed_package": false,
@@ -1079,9 +1099,19 @@
       "purpose": "Reproducible baseline, validation, probe, canary, or evidence assembly logic.",
       "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
       "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "223a41cfa5b5b7549eaa000bb9f6e8051ae4a39e7afe90a057a0dc52aa14cba7",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/scripts/verify_fresh_clone.py",
+      "purpose": "Reproducible baseline, validation, probe, canary, or evidence assembly logic.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
     }
   ],
-  "entry_count": 108,
+  "entry_count": 111,
   "run_id": "FORA-REMEDIATION-2026-001",
   "self_attestation": "The two register files and final manifest files are hashed by RUNTIME_REMEDIATION_SHA256SUMS.txt to avoid self-referential hashes.",
   "starting_commit": "e93d3acc65a45835d3f3c63473f5dd98e1d1bcf5"

@@ -27,7 +27,7 @@ A reversible disposable profile now trusts only the exact execution checkout, re
 - Other unauthorized connector attempts: `0`
 - Child tool calls: `0`; workspace writes: `0`; workspace-write roles started: `0`
 - Substantive review, production access, provider writes, PR, merge, tag, release, and deployment: none
-- Fresh-clone verification: `PENDING`
+- Fresh-clone verification: `PASS`
 
 The system remains inactive and blocked. A new Founder authorization and a runtime surface that preserves exact custom `agent_type` are required before any further agent attempt.
 
