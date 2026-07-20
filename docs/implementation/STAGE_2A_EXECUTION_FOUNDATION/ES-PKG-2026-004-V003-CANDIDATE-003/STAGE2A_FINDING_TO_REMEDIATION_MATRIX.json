@@ -1,0 +1,106 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "findings": [
+    {
+      "blocker_classification": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "evidence_artifacts": [
+        "VALIDATOR_INVOCATION_MATRIX.json"
+      ],
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "remediation_artifacts": [
+        "stage2a/validate_stage2a_package.py"
+      ],
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "self_closed": false,
+      "status": "REMEDIATED_PENDING_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX"
+      ]
+    },
+    {
+      "blocker_classification": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "evidence_artifacts": [
+        "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json"
+      ],
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "remediation_artifacts": [
+        "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json",
+        "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json",
+        "STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json"
+      ],
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "self_closed": false,
+      "status": "REMEDIATED_PENDING_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ]
+    },
+    {
+      "blocker_classification": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "evidence_artifacts": [
+        "PROVIDER_DENIAL_REGISTER.json",
+        "STARTUP_SIDE_EFFECT_INVENTORY.json"
+      ],
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "remediation_artifacts": [
+        "stage2a/network_guard.py",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "requirement_ids": [
+        "S2A-REQ-009"
+      ],
+      "self_closed": false,
+      "status": "REMEDIATED_PENDING_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-STARTUP-ORACLE"
+      ]
+    },
+    {
+      "blocker_classification": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "FOUNDATION_EVIDENCE_EXAMPLE_PASS.json"
+      ],
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "remediation_artifacts": [
+        "stage2a/evidence_capture.py",
+        "stage2a/execution-evidence-schema.json"
+      ],
+      "requirement_ids": [
+        "S2A-REQ-006"
+      ],
+      "self_closed": false,
+      "status": "REMEDIATED_PENDING_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ]
+    },
+    {
+      "blocker_classification": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json"
+      ],
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "remediation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "requirement_ids": [
+        "S2A-REQ-004"
+      ],
+      "self_closed": false,
+      "status": "REMEDIATED_PENDING_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-CONTROLLED-SHUTDOWN"
+      ]
+    }
+  ],
+  "package_id": "ES-PKG-2026-004-V003"
+}

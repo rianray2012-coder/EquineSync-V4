@@ -1,0 +1,61 @@
+{
+  "business_workflow_commands": [],
+  "commands": [
+    {
+      "command": "sh stage2a/bootstrap_backend.sh",
+      "command_id": "S2A-CMD-001",
+      "cwd": "repository root",
+      "expected_exit": 0,
+      "observed": "PASS",
+      "purpose": "backend bootstrap",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "npm ci --legacy-peer-deps --include=dev --no-audit --no-fund",
+      "command_id": "S2A-CMD-002",
+      "cwd": "frontend",
+      "expected_exit": 0,
+      "observed": "PASS",
+      "purpose": "frontend install",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "npm run build",
+      "command_id": "S2A-CMD-003",
+      "cwd": "frontend",
+      "expected_exit": 0,
+      "observed": "PASS",
+      "purpose": "frontend build",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "stage2a/.venv/bin/python -m unittest discover -s stage2a/tests -p test_*.py",
+      "command_id": "S2A-CMD-004",
+      "cwd": "repository root",
+      "expected_exit": 0,
+      "observed": "PASS_10_OF_10",
+      "purpose": "unit controls",
+      "timeout_seconds": 60
+    },
+    {
+      "command": "sh stage2a/run_validation.sh",
+      "command_id": "S2A-CMD-005",
+      "cwd": "repository root",
+      "expected_exit": 0,
+      "observed": "PASS_16_OF_16",
+      "purpose": "isolated foundation validation",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "stage2a/.venv/bin/python stage2a/validate_stage2a_package.py PACKAGE --phase candidate",
+      "command_id": "S2A-CMD-006",
+      "cwd": "repository root",
+      "expected_exit": 0,
+      "observed": "PENDING_CANDIDATE_FREEZE",
+      "purpose": "candidate package validation",
+      "timeout_seconds": 120
+    }
+  ],
+  "cp3_commands": [],
+  "package_id": "ES-PKG-2026-004-V003"
+}

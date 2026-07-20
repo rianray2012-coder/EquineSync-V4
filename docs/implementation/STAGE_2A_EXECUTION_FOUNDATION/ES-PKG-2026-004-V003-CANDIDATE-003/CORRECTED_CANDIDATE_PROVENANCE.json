@@ -1,0 +1,47 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "blocker_results": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    }
+  ],
+  "candidate_attempt": 3,
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "distinct_from_failed_candidate": true,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "failed_candidate": {
+    "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+    "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+    "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003",
+    "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+    "payload_files": 108,
+    "physical_files": 111,
+    "unchanged": true
+  },
+  "failed_candidate_unchanged": true,
+  "package_id": "ES-PKG-2026-004-V003",
+  "packaging_commit": "ce5df9292f00fc28348c70f8c4c47f35453ac715",
+  "validated_implementation_commit": "a5c11b512248bfb043b60fa7749baab152e238fc"
+}

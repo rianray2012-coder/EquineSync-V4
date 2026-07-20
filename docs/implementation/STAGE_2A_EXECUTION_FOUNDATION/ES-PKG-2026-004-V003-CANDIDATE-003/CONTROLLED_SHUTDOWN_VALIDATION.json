@@ -1,0 +1,30 @@
+{
+  "evidence": {
+    "api_alive": false,
+    "mongo_alive": false,
+    "pid_files_absent": true,
+    "ports_closed": true,
+    "processes": [
+      {
+        "command_identity_verified": true,
+        "forced": false,
+        "kind": "api",
+        "pid": 23649,
+        "port_closed": true,
+        "process_group_id": 23649,
+        "status": "STOPPED"
+      },
+      {
+        "command_identity_verified": true,
+        "forced": false,
+        "kind": "mongo",
+        "pid": 23641,
+        "port_closed": true,
+        "process_group_id": 23641,
+        "status": "STOPPED"
+      }
+    ],
+    "status": "STOPPED"
+  },
+  "result": "PASS"
+}

@@ -1,0 +1,14 @@
+{
+  "already_clean": "PASS",
+  "database_reset": "drop exact disposable database only",
+  "foreign_listener": "fail closed",
+  "gap_id": "S2-GAP-007",
+  "implementation": "stage2a/cleanup.py",
+  "owned_rows": "owner plus synthetic marker in exact disposable database",
+  "partial_failure": "PASS",
+  "real_interruption": "PASS",
+  "repeated_cleanup": "PASS",
+  "runtime_purge": "owner marker plus path boundary plus no listeners",
+  "successful_load": "PASS",
+  "zero_residue": true
+}

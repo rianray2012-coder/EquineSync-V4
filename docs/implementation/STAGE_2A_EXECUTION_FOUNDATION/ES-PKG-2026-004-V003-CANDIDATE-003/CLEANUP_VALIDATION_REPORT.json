@@ -1,0 +1,29 @@
+{
+  "already_clean": {
+    "deleted": 0,
+    "owned_after": 0,
+    "owned_before": 0,
+    "zero_residue": true
+  },
+  "interrupted_cleanup": {
+    "deleted": 1,
+    "owned_after": 0,
+    "owned_before": 1,
+    "zero_residue": true
+  },
+  "interrupted_exit": -15,
+  "interrupted_process_pid": 23589,
+  "interruption_marker_seen": true,
+  "partial_failure": {
+    "deleted": 1,
+    "owned_after": 0,
+    "owned_before": 1,
+    "zero_residue": true
+  },
+  "repeated": {
+    "deleted": 0,
+    "owned_after": 0,
+    "owned_before": 0,
+    "zero_residue": true
+  }
+}

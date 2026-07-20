@@ -1,0 +1,100 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "dependency_rerun": {
+    "artifact_count": 127,
+    "implementation_commit": "a5c11b512248bfb043b60fa7749baab152e238fc",
+    "result": "PASS"
+  },
+  "full_lifecycle_rerun": {
+    "implementation_commit": "a5c11b512248bfb043b60fa7749baab152e238fc",
+    "result": "PASS",
+    "score": "16/16"
+  },
+  "invalidated_checks": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "reason": "prior candidate evidence was insufficient for this exact control and is not controlling"
+    }
+  ],
+  "package_id": "ES-PKG-2026-004-V003",
+  "rerun_checks": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX"
+      ]
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ]
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-STARTUP-ORACLE"
+      ]
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING"
+      ]
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "result": "PASS_TECHNICAL_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-CONTROLLED-SHUTDOWN"
+      ]
+    }
+  ],
+  "reused_predecessor_evidence": [
+    {
+      "basis": "fixture, cleanup ownership, rollback payload, and immutable source anchors are hash-identical; reused as corroborative predecessor evidence only",
+      "controlling_for_corrected_candidate": false,
+      "evidence": "16/16 Stage 2A lifecycle validation",
+      "reuse_scope": [
+        "synthetic fixture determinism",
+        "owned-row cleanup semantics",
+        "datastore and source recovery invariants"
+      ],
+      "source_commit": "83ccfac2bdeb0615e8818ffcbde03337d429dba5"
+    },
+    {
+      "basis": "backend requirements SHA-256 and bootstrap implementation are unchanged; corrected-candidate bootstrap rerun independently reconfirms the same contract",
+      "controlling_for_corrected_candidate": false,
+      "evidence": "127-artifact backend dependency inventory",
+      "reuse_scope": [
+        "pinned requirements",
+        "download artifact hashes",
+        "installed metadata hashes"
+      ],
+      "source": "stage2a/evidence/latest/BACKEND_BOOTSTRAP_RUN.json"
+    }
+  ]
+}

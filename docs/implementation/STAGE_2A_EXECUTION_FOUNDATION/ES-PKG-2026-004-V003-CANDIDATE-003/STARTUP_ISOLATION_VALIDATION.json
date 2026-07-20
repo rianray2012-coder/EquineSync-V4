@@ -1,0 +1,81 @@
+{
+  "result": "PASS",
+  "startup": {
+    "application_network_guard": {
+      "approved_endpoints": [
+        "LOOPBACK_API_8019",
+        "LOOPBACK_MONGODB_27029"
+      ],
+      "attempts": [],
+      "guard": "STAGE2A_APPLICATION_NETWORK_GUARD",
+      "installed": true,
+      "provider_or_external_attempt_count": 0,
+      "unapproved_attempt_count": 0
+    },
+    "attempt_outcomes": {
+      "attempted": 1,
+      "failed": 0,
+      "skipped": 7,
+      "skipped_basis": "six disabled background categories plus billing catalog materialization disabled by the controlled wrapper",
+      "succeeded": 1,
+      "timed_out": 0,
+      "unavailable": 0
+    },
+    "background_flags": {
+      "DISABLE_AUTO_NUDGES": "true",
+      "DISABLE_NOTIFICATIONS": "true",
+      "DISABLE_OWNER_DIGEST": "true",
+      "DISABLE_OWNER_WEEKLY_RECAP": "true",
+      "DISABLE_SUBSCRIPTION_EMAIL_DISPATCHER": "true",
+      "DISABLE_TASK_MATERIALIZER": "true"
+    },
+    "catalog_materialization": "DISABLED_BY_STAGE2A_WRAPPER",
+    "full_application": true,
+    "gap_id": "S2-GAP-009",
+    "inventory_digest": "02bccf932bb7611851fb99f0accd23883797697227e824ae08882fca7c904817",
+    "metadata_collections_inventoried": 68,
+    "network_inventory": {
+      "approved_ports": [
+        27029,
+        8019
+      ],
+      "non_loopback": [],
+      "observed_lines": [
+        "mongod  23540 rianray    7u  IPv4 0x69f988b7a98597ab      0t0  TCP 127.0.0.1:27029 (LISTEN)",
+        "mongod  23540 rianray   24u  IPv4 0xe1ad7616b0e7b3fb      0t0  TCP 127.0.0.1:27029->127.0.0.1:49300 (ESTABLISHED)",
+        "mongod  23540 rianray   25u  IPv4 0xf2138463488bf0d5      0t0  TCP 127.0.0.1:27029->127.0.0.1:49301 (ESTABLISHED)",
+        "mongod  23540 rianray   26u  IPv4 0x35f056dbd0467ade      0t0  TCP 127.0.0.1:27029->127.0.0.1:49302 (ESTABLISHED)",
+        "mongod  23540 rianray  306u  IPv4  0xd0673306fb9eba2      0t0  TCP 127.0.0.1:27029->127.0.0.1:49340 (ESTABLISHED)",
+        "mongod  23540 rianray  307u  IPv4 0xea67432a1e10e2f4      0t0  TCP 127.0.0.1:27029->127.0.0.1:49341 (ESTABLISHED)",
+        "mongod  23540 rianray  308u  IPv4 0xd11bac1f253cbe6a      0t0  TCP 127.0.0.1:27029->127.0.0.1:49342 (ESTABLISHED)",
+        "python3.1 23545 rianray    6u  IPv4  0x67463bdae271d84      0t0  TCP 127.0.0.1:49300->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 23545 rianray    7u  IPv4 0xf0452008c8a072e8      0t0  TCP 127.0.0.1:49301->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 23545 rianray    8u  IPv4 0x1372ad8ebe784427      0t0  TCP 127.0.0.1:49302->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 23545 rianray    9u  IPv4 0x29c8ef0aa1a5a650      0t0  TCP 127.0.0.1:8019 (LISTEN)"
+      ],
+      "sandbox_profile": "config/loopback-only.sb",
+      "wildcard_listeners": []
+    },
+    "oracle_id": "S2A-STARTUP-ORACLE-V1",
+    "oracle_match": true,
+    "permitted_startup_side_effects": "MongoDB collection and index metadata only; exact inventory captured",
+    "profile_control": "CONTROLLED_ZERO_DOCUMENT_WRITES",
+    "prohibited_log_markers": {
+      "ERROR": false,
+      "Stripe catalog provisioning failed": false,
+      "Traceback": false,
+      "external network": false,
+      "provider authentication": false
+    },
+    "provider_attempt_count": 0,
+    "required_log_markers": {
+      "auto_nudges=False": true,
+      "db_ok=True": true,
+      "indexes_ensured=True": true,
+      "notifications=False": true,
+      "startup complete:": true,
+      "task_materializer=False": true
+    },
+    "startup_document_writes": 0
+  }
+}

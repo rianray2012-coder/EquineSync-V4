@@ -1,0 +1,35 @@
+{
+  "evidence": {
+    "api_pid": 23545,
+    "health": {
+      "config": {
+        "cors_configured": false,
+        "environment": "development",
+        "jwt_configured": false
+      },
+      "database": "connected",
+      "dependencies": {
+        "auto_seed_enabled": false,
+        "email_verification_enforced": false,
+        "mailer_configured": false,
+        "rate_limiting_enabled": true,
+        "seed_route_enabled": false
+      },
+      "indexes_ensured": true,
+      "service": "equinesync-api",
+      "started_at": "2026-07-20T07:37:40.785183+00:00",
+      "status": "ok",
+      "uptime_seconds": 3.5,
+      "version": "0.1.0"
+    },
+    "health_url": "LOOPBACK_API/api/health/ready",
+    "logs": [
+      ".runtime/logs/mongod.log",
+      ".runtime/logs/api.log"
+    ],
+    "mongo_pid": 23540,
+    "profile": "full",
+    "status": "STARTED"
+  },
+  "result": "PASS"
+}

@@ -1,0 +1,30 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "default_branch_contains_stage2_commit": false,
+  "failed_candidate": {
+    "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+    "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+    "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003",
+    "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+    "payload_files": 108,
+    "physical_files": 111,
+    "unchanged": true
+  },
+  "immutable_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "package_id": "ES-PKG-2026-004-V003",
+  "predecessor_unchanged": true,
+  "pull_requests": 0,
+  "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "stage2_archive_sha256": "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329",
+  "stage2_package_branch": "codex/stage2-f0001-execution-baseline",
+  "stage2_package_clean_extraction": "113_OF_113",
+  "stage2_package_commit": "0be6172a28b75238c5facabf91d43ed09aaf0d54",
+  "stage2_package_validation": "PASS_50_OF_50",
+  "stage2_remote_tip": "0be6172a28b75238c5facabf91d43ed09aaf0d54",
+  "stage2a_bootstrap_commit": "a5c11b512248bfb043b60fa7749baab152e238fc",
+  "stage2a_branch": "codex/stage2a-execution-foundation-remediation",
+  "stage2a_implementation_commit": "a5c11b512248bfb043b60fa7749baab152e238fc",
+  "stage2a_implementation_tree": "37e22c9497255bd8807680a81a1450f8c05c98cf",
+  "stage2a_packaging_commit": "ce5df9292f00fc28348c70f8c4c47f35453ac715",
+  "stage2a_packaging_tree": "ec472fa3011993e01fe4a47a17e39ae13194a439"
+}
