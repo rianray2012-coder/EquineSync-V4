@@ -1,0 +1,23 @@
+{
+  "attempt_id": "FOUNDATION_VALIDATION_ATTEMPT_002_FAILED",
+  "implementation_commit": "d9dbe6b2531af2ee53ac5e9fd9199aaedea1b801",
+  "failure_stage": "DISPOSABLE_SOURCE_RECOVERY_CLONE",
+  "failure_class": "LOCAL_HARNESS_RESOURCE_INEFFICIENCY",
+  "cause": "git clone --no-hardlinks copied loose objects into the cloud-backed runtime directory",
+  "scope_violation": false,
+  "production_access_count": 0,
+  "provider_attempt_count": 0,
+  "live_data_access_count": 0,
+  "results_accepted": false,
+  "termination": {
+    "validator_process_group": 9871,
+    "action": "SIGTERM_TO_OWNED_VALIDATION_PROCESS_GROUP",
+    "application_pid": 10022,
+    "datastore_pid": 10019,
+    "orchestrator_stop": "PASS_BOTH_OWNED_GROUPS_STOPPED",
+    "controlled_ports_closed": true,
+    "runtime_purge": "PASS_RUNTIME_ABSENT"
+  },
+  "remediation": "use a bounded disposable shared-object no-checkout clone in the system temporary directory and rerun the complete lifecycle",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

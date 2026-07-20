@@ -1,0 +1,32 @@
+{
+  "evidence": {
+    "api_alive": false,
+    "mongo_alive": false,
+    "pid_files_absent": true,
+    "ports_closed": true,
+    "processes": [
+      {
+        "command_identity_verified": true,
+        "controlled_port_attribution": "LISTENER_PID_MATCHED",
+        "forced": false,
+        "kind": "api",
+        "pid": 73778,
+        "port_closed": true,
+        "process_group_id": 73778,
+        "status": "STOPPED"
+      },
+      {
+        "command_identity_verified": true,
+        "controlled_port_attribution": "LISTENER_PID_MATCHED",
+        "forced": false,
+        "kind": "mongo",
+        "pid": 73773,
+        "port_closed": true,
+        "process_group_id": 73773,
+        "status": "STOPPED"
+      }
+    ],
+    "status": "STOPPED"
+  },
+  "result": "PASS"
+}

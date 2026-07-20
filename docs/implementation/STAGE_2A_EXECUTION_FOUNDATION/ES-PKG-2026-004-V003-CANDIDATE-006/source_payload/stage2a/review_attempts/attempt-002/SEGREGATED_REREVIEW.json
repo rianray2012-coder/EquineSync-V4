@@ -1,0 +1,22 @@
+{
+  "review_id": "STAGE2A_SEGREGATED_REREVIEW_ATTEMPT_002",
+  "review_function": "SEGREGATED_REVIEW",
+  "snapshot_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+  "payload_verification_before": "108/108",
+  "payload_verification_after": "108/108",
+  "package_modified_by_review": false,
+  "candidate_machine_validation": "PASS_19_OF_19",
+  "foundation_validation": "PASS_16_OF_16",
+  "prior_findings_reassessed": 7,
+  "prior_findings_remediation_verified": 7,
+  "open_package_defects": 0,
+  "open_runtime_limitations": 1,
+  "technical_rereview": "PASS",
+  "overall_readiness": "FAIL_BLOCKED_BY_RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "gap_disposition": "S2_GAP_001_THROUGH_009_TECHNICAL_REMEDIATION_VERIFIED_PENDING_AUTHORIZED_CLOSURE",
+  "process_residue": "CONTAINED_TERMINATED_PORT_CLEARED_NOT_CURRENT_BLOCKER",
+  "runtime_selector": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED"
+}

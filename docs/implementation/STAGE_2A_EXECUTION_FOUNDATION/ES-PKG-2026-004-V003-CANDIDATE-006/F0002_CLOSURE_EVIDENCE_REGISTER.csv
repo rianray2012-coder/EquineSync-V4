@@ -1,0 +1,6 @@
+evidence_id,subject,value,status
+F2C-E-001,immutable commit,acb518ea5a160820e64681ff95a16b010fe1156c,PASS
+F2C-E-002,Stage 2 commit,0be6172a28b75238c5facabf91d43ed09aaf0d54,PASS
+F2C-E-003,Stage 2 archive SHA-256,b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329,PASS
+F2C-E-004,independent materialization assessment,F0002_READY_FOR_AUTHORIZED_CLOSURE,PASS
+F2C-E-005,Founder closure scope,immutable baseline materialization only,PASS

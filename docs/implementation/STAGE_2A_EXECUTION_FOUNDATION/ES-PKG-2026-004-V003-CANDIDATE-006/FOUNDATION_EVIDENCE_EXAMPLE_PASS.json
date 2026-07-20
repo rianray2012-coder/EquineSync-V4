@@ -1,0 +1,68 @@
+{
+  "schema_version": "3.0",
+  "package_id": "ES-PKG-2026-004-V003",
+  "run_identifier": "foundation-example-pass",
+  "command": "python",
+  "sanitized_arguments": [
+    "stage2a/example_command.py",
+    "pass"
+  ],
+  "input_artifact_hashes": {
+    "stage2a/config/stage2a.env": "263f2b7500302a727cf0b6a2a0ca2f4e15ec715f0cd773ae89b8170d99832efa",
+    "stage2a/example_command.py": "b21e1263c8bac2ce4e3e7105da9cf155a3d8c56bc09f13a3a09c6f15ce708bc6",
+    "stage2a/execution-evidence-schema.json": "3605a243e982613e25ef113b54dc068f613942afa906ea534053d4281d04357a"
+  },
+  "configuration_identity": "263f2b7500302a727cf0b6a2a0ca2f4e15ec715f0cd773ae89b8170d99832efa",
+  "environment_identity": "9a84eb79b81e2b168b01d0799846ed3dd1d60b781cb4709a667431eef9aa7276",
+  "utc_start": "2026-07-20T10:07:24.567138+00:00",
+  "utc_end": "2026-07-20T10:07:24.608074+00:00",
+  "commit_hash": "edd8ac0a59c9c0fce4408538e8596b10a9a97428",
+  "tree_hash": "01d9a00a6e080720dc1f8bd61318451646482bca",
+  "expected_result": {
+    "exit_status": 0
+  },
+  "actual_result": {
+    "exit_status": 0
+  },
+  "exit_status": 0,
+  "stdout_location": "evidence/latest/stdout/foundation-example-pass.txt",
+  "stderr_location": "evidence/latest/stderr/foundation-example-pass.txt",
+  "datastore_digest_before": "NOT_APPLICABLE_NO_DATASTORE_WRITE",
+  "datastore_digest_after": "NOT_APPLICABLE_NO_DATASTORE_WRITE",
+  "cleanup_result": "PASS_NO_DATASTORE_WRITE",
+  "rollback_result": "NOT_APPLICABLE_NO_DATASTORE_WRITE",
+  "tool_versions": {
+    "python": "3.11.11",
+    "executable_sha256": "2c86b80772bc3e11c9490da09d7579c88a1713ef1d5af417563ddff714fa6aa2"
+  },
+  "evidence_file_hashes": {
+    "stdout": "ac70cafddefac9e4773788a157ab9bd165c83ea33c753e85f143c4568c1a4cb4",
+    "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "redaction_status": "PASS_VALUES_REDACTED_PATHS_REPOSITORY_RELATIVE",
+  "required_meaning": [
+    "stage2a foundation example: pass"
+  ],
+  "redaction_evidence": {
+    "policy": "SENSITIVE_ASSIGNMENTS_AND_KNOWN_SECRET_VALUE_PATTERNS_REDACTED",
+    "stdout_replacements": 0,
+    "stderr_replacements": 0,
+    "unredacted_sensitive_match_count": 0,
+    "projection_engine": "S2A-INDEPENDENT-SEMANTIC-PROJECTOR-V1",
+    "normalization_version": "S2A-REDACTION-PROJECTION-V3",
+    "semantic_projection_sha256_before": "1169fcd28f77db240eaddbddfd77f6d0e52929c15501fee69c93cc71c718636b",
+    "semantic_projection_sha256_after": "1169fcd28f77db240eaddbddfd77f6d0e52929c15501fee69c93cc71c718636b",
+    "sensitive_slot_count_before": 0,
+    "placeholder_slot_count_after": 0,
+    "sensitive_class_counts_before": {},
+    "unexpected_redaction_placeholder_count": 0,
+    "over_redaction_detected": false,
+    "required_exact_line_matches": {
+      "stage2a foundation example: pass": true
+    },
+    "meaning_preserved": true
+  },
+  "result": "PASS",
+  "execution_status": "EXECUTION_NOT_AUTHORIZED",
+  "record_content_sha256": "c83b7b7e29f880cd751389aa94ff798f2b6711a32fdf3c8d7e92b485dff21b47"
+}

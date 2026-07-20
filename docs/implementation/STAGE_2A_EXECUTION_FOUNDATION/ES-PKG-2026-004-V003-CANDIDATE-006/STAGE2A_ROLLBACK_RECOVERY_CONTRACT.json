@@ -1,0 +1,10 @@
+{
+  "datastore_restore": true,
+  "destructive_migration": false,
+  "durable_snapshot": "owner-marked JSON artifact with canonical payload SHA-256",
+  "environment_restart": true,
+  "gap_id": "S2-GAP-008",
+  "implementation": "stage2a/rollback_recovery.py",
+  "session_cache_disposition": "NOT_APPLICABLE_NO_EXTERNAL_SESSION_OR_CACHE_SERVICE; full process restart completed",
+  "source_recovery": "tested git restore in disposable local clone to implementation commit and checkout to starting commit"
+}

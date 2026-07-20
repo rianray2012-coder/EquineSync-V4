@@ -1,0 +1,73 @@
+{
+  "business_workflow_commands": [],
+  "commands": [
+    {
+      "command": "sh stage2a/bootstrap_backend.sh",
+      "command_id": "S2A-CMD-001",
+      "cwd": "repository root",
+      "expected_exit": 0,
+      "observed": "PASS",
+      "purpose": "backend bootstrap",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "npm ci --legacy-peer-deps --include=dev --no-audit --no-fund",
+      "command_id": "S2A-CMD-002",
+      "cwd": "frontend",
+      "expected_exit": 0,
+      "observed": "PASS",
+      "purpose": "frontend install",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "npm run build",
+      "command_id": "S2A-CMD-003",
+      "cwd": "frontend",
+      "expected_exit": 0,
+      "observed": "PASS",
+      "purpose": "frontend build",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "stage2a/.venv/bin/python -m unittest discover -s stage2a/tests -p test_*.py",
+      "command_id": "S2A-CMD-004",
+      "cwd": "repository root",
+      "expected_exit": 0,
+      "observed": "PASS_33_OF_33",
+      "observed_test_count": 33,
+      "purpose": "unit controls",
+      "stderr_sha256": "15c4d4b48159f9be8b2594e2c04d0c3951629dce20985f0707decbfc5e9ce2b2",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timeout_seconds": 120
+    },
+    {
+      "command": "sh stage2a/run_validation.sh",
+      "command_id": "S2A-CMD-005",
+      "cwd": "repository root",
+      "expected_exit": 0,
+      "observed": "PASS_16_OF_16",
+      "purpose": "isolated foundation validation",
+      "timeout_seconds": 900
+    },
+    {
+      "command": "stage2a/.venv/bin/python PACKAGED_VALIDATE_STAGE2A_PACKAGE PACKAGE --phase assembly",
+      "command_id": "S2A-CMD-006",
+      "cwd": "package root nested directory and external directory",
+      "expected_exit": 0,
+      "observed": "PASS_ASSEMBLY_4_OF_4_INCLUDING_DETACHED",
+      "purpose": "assembly-phase packaged-validator invocation matrix",
+      "timeout_seconds": 120
+    },
+    {
+      "command": "PACKAGED_PYTHON validate_stage2a_package.py DETACHED_PACKAGE --phase assembly",
+      "command_id": "S2A-CMD-007",
+      "cwd": "external temporary directory",
+      "expected_exit": 0,
+      "observed": "PASS_DETACHED_PACKAGE_SOURCE_PAYLOAD",
+      "purpose": "detached clean-copy packaged validation",
+      "timeout_seconds": 120
+    }
+  ],
+  "cp3_commands": [],
+  "package_id": "ES-PKG-2026-004-V003"
+}
