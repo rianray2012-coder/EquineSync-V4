@@ -11,6 +11,7 @@ import signal
 import socket
 import subprocess
 import sys
+import tempfile
 import time
 from copy import deepcopy
 from pathlib import Path
@@ -62,9 +63,9 @@ def wait_for(path: Path, timeout: float) -> bool:
 
 
 def source_recovery_rehearsal(implementation_commit: str) -> dict[str, object]:
-    clone = RUNTIME / "source-recovery-clone"
-    shutil.rmtree(clone, ignore_errors=True)
-    subprocess.run(["git", "clone", "--quiet", "--no-hardlinks", str(REPO), str(clone)], check=True, timeout=120)
+    temp_root = Path(tempfile.mkdtemp(prefix="equinesync-stage2a-source-recovery-", dir="/private/tmp"))
+    clone = temp_root / "repo"
+    subprocess.run(["git", "clone", "--quiet", "--shared", "--no-checkout", str(REPO), str(clone)], check=True, timeout=120)
     try:
         subprocess.run(["git", "checkout", "--quiet", "--detach", implementation_commit], cwd=clone, check=True, timeout=30)
         fixture = clone / "stage2a/fixtures/foundation-v1.json"
@@ -83,10 +84,12 @@ def source_recovery_rehearsal(implementation_commit: str) -> dict[str, object]:
             "restored_sha256": restored,
             "restored_matches": expected == restored and expected != mutated,
             "stage2a_absent_at_prechange_anchor": prechange_absent,
+            "clone_mode": "DISPOSABLE_SHARED_OBJECTS_NO_CHECKOUT",
+            "fresh_clone_proof_role": "NOT_APPLICABLE_SEPARATE_POST_PUSH_CONTROL",
             "disposable_clone_removed": True,
         }
     finally:
-        shutil.rmtree(clone, ignore_errors=True)
+        shutil.rmtree(temp_root, ignore_errors=True)
 
 
 def main() -> int:
