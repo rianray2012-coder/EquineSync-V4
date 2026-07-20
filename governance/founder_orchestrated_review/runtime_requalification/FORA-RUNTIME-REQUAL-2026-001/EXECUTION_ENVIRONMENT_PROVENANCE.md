@@ -1,7 +1,7 @@
 # Execution Environment Provenance
 
 - Run: `FORA-RUNTIME-REQUAL-2026-001`
-- Captured: `2026-07-20T19:01:37+00:00`
+- Captured: `2026-07-20T19:03:00+00:00`
 - Platform: `macOS-26.5.2-arm64-arm-64bit-Mach-O`
 - Machine: `arm64`
 - Codex: `codex-cli 0.144.6`

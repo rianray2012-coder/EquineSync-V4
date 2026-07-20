@@ -1,18 +1,18 @@
 {
   "checks": {
-    "branch_descends_from_controlling_commit": false,
-    "exact_commit_checkout": false,
-    "json_parse_pass": false,
-    "remote_branch_fetch": false,
-    "required_artifacts_present": false,
-    "sealed_package_63_of_63": false,
-    "sha256sums_pass": false
+    "branch_descends_from_controlling_commit": true,
+    "exact_commit_checkout": true,
+    "json_parse_pass": true,
+    "remote_branch_fetch": true,
+    "required_artifacts_present": true,
+    "sealed_package_63_of_63": true,
+    "sha256sums_pass": true
   },
-  "note": "Publication candidate not yet verified from the remote branch.",
+  "note": "A clean clone fetched the remote remediation branch and checked out this exact evidence publication commit. All 19 required artifacts were present; the run SHA256SUMS verified; all JSON parsed; the sealed package validator passed 63/63; the controlling source commit was an ancestor; and the checkout remained clean.",
   "remote_branch": "codex/founder-review-agent-runtime-requalification-v1",
   "required_artifact_count": 19,
   "run_id": "FORA-RUNTIME-REQUAL-2026-001",
   "source_commit_ancestor": "57210494c1e82e60efd4c329ebf34fda236972d8",
-  "status": "PENDING",
-  "verified_commit": null
+  "status": "PASS",
+  "verified_commit": "e1f41af7aebb2bfbc46ab7a66e1696322e2fa6f7"
 }

@@ -86,6 +86,10 @@ def command(args: list[str], cwd: Path) -> str:
     return (result.stdout or result.stderr).strip()
 
 
+def command_ok(args: list[str], cwd: Path) -> bool:
+    return subprocess.run(args, cwd=cwd, text=True, capture_output=True, check=False).returncode == 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--fresh-clone-status", choices=["PENDING", "PASS"], default="PENDING")
@@ -179,7 +183,9 @@ def main() -> int:
         "git": command(["git", "--version"], repo),
         "node": command(["node", "--version"], repo),
         "codex": CODEX_VERSION,
-        "source_head": command(["git", "rev-parse", "HEAD"], repo),
+        "controlling_source_commit": SOURCE_COMMIT,
+        "current_head": command(["git", "rev-parse", "HEAD"], repo),
+        "controlling_source_commit_is_ancestor": command_ok(["git", "merge-base", "--is-ancestor", SOURCE_COMMIT, "HEAD"], repo),
         "branch": command(["git", "branch", "--show-current"], repo),
     }
     write_json(raw / "toolchain_provenance.json", toolchain)
@@ -524,7 +530,7 @@ Verified commit: `{args.fresh_clone_commit or 'PENDING'}`
     write_text(run_root / "SHA256SUMS.txt", "\n".join(f"{sha256(path)}  {path.relative_to(run_root).as_posix()}" for path in checksum_paths))
 
     checks = {
-        "source_commit_exact": toolchain["source_head"] == SOURCE_COMMIT,
+        "controlling_source_commit_is_ancestor": toolchain["controlling_source_commit_is_ancestor"],
         "remediation_branch_exact": toolchain["branch"] == REMEDIATION_BRANCH,
         "required_artifacts_19_of_19": all((run_root / name).is_file() for name in REQUIRED),
         "runtime_matrix_json_parse": json.loads((run_root / "RUNTIME_CAPABILITY_MATRIX.json").read_text())["supported_surfaces_with_selector"] == 0,

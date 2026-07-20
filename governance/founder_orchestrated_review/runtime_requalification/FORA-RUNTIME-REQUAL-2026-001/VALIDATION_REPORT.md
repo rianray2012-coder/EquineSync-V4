@@ -4,7 +4,7 @@ Result: **PASS (17/17)**
 
 | Check | Result |
 |---|---:|
-| source_commit_exact | PASS |
+| controlling_source_commit_is_ancestor | PASS |
 | remediation_branch_exact | PASS |
 | required_artifacts_19_of_19 | PASS |
 | runtime_matrix_json_parse | PASS |

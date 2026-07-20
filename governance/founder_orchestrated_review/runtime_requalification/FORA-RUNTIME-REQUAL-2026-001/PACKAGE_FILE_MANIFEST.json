@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-07-20T19:01:37+00:00",
+  "created_at": "2026-07-20T19:03:00+00:00",
   "excluded_paths": [
     "PACKAGE_FILE_MANIFEST.json",
     "SHA256SUMS.txt",
@@ -41,7 +41,7 @@
     {
       "bytes": 1824,
       "path": "EXECUTION_ENVIRONMENT_PROVENANCE.md",
-      "sha256": "81fc405518a5b549e8088dea7eb5475ffac878af991892b5ac667cbc3fec4ed2"
+      "sha256": "3855f98ca00e9a2ae1028a83e6a11784ba0ed28d9a5da114dc5d4269071ac8d3"
     },
     {
       "bytes": 1734,
@@ -49,14 +49,14 @@
       "sha256": "37f51759e0c6900fbdf044ee4f7c893a14a4c62ac76ece7add37af1783883bad"
     },
     {
-      "bytes": 635,
+      "bytes": 917,
       "path": "FINAL_FRESH_CLONE_VERIFICATION.json",
-      "sha256": "22b0c26a625a6d2fc147ac463a2de38660c43194ad3b08a8891635b4dfbefeb4"
+      "sha256": "37caf95daa27ae94ae41a76046ac32cdff2950b1444f2a0b290ee8323d7a06f6"
     },
     {
-      "bytes": 461,
+      "bytes": 724,
       "path": "FINAL_FRESH_CLONE_VERIFICATION.md",
-      "sha256": "3725da5b0c19ee5eaaf912e6724ace22e30829f1b2b1cce947b77f5c328bcccf"
+      "sha256": "4d68d7f81d8297faa4f39a8bf91eed39780dbdf4875f22193114553c7ce5de2d"
     },
     {
       "bytes": 1649,
@@ -71,7 +71,7 @@
     {
       "bytes": 2513,
       "path": "RUNTIME_CAPABILITY_MATRIX.json",
-      "sha256": "968826cab724847dd5a53ee184f7bb15db360f207684fac08c4d4c16d4ef7707"
+      "sha256": "6cf55ed5b7a8ba811b8819132636265372e39f611b468248a732834e42d287f9"
     },
     {
       "bytes": 1662,
@@ -146,7 +146,7 @@
     {
       "bytes": 526,
       "path": "raw/current_desktop_surface_observation.json",
-      "sha256": "6ce1c3536da907c1c52c3f6fccffa09988df1bffa6e0291be9ae2d2b29523a04"
+      "sha256": "cbd6668484360fcde301797804d9e102490042ed6a96d71290b2745abe067982"
     },
     {
       "bytes": 964,
@@ -454,14 +454,14 @@
       "sha256": "3bb4009d1a770f41d473e44181e851649d0873907b5fa5c02719ccfe2524f0c7"
     },
     {
-      "bytes": 377,
+      "bytes": 502,
       "path": "raw/toolchain_provenance.json",
-      "sha256": "70879403b55c655dcf5f77c385200cdee07d44242068d9a25a1c245c281bec5a"
+      "sha256": "d0f9c1ccd62d3031fffe1ee7b8e7aedc4f7d6e6460a115b4d0ea83405dd7bbba"
     },
     {
-      "bytes": 31516,
+      "bytes": 31882,
       "path": "scripts/build_requalification_evidence.py",
-      "sha256": "e7d70c9758ce505586225107ab8f873561041cc62a27c8bedfea82d52df3e580"
+      "sha256": "0226fe142b09622e09764d448926ecfe683f1fde7c46d92db3e5a5d6e0e0a255"
     }
   ],
   "run_id": "FORA-RUNTIME-REQUAL-2026-001",

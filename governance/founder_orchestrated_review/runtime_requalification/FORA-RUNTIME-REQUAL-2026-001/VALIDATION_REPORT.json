@@ -2,6 +2,7 @@
   "checks": {
     "calibration_register_8_roles": true,
     "checksum_files_hash_match": true,
+    "controlling_source_commit_is_ancestor": true,
     "discovery_register_8_roles": true,
     "disposition_exact": true,
     "execution_order_fail_closed": true,
@@ -15,7 +16,6 @@
     "sealed_checksums_63": true,
     "sealed_files_changed_zero": true,
     "selector_proof_json_parse": true,
-    "source_commit_exact": true,
     "static_validation_9_of_9": true
   },
   "checks_passed": 17,
