@@ -262,15 +262,63 @@ def derive_provider_register(registry_path: Path) -> tuple[list[dict[str, Any]],
     rows: list[dict[str, Any]] = []
     for provider_id, spec in sorted(expected.items()):
         event = actual.get(provider_id, {})
+        expected_event_type = "PREREQUISITE_EVALUATED" if spec["integration_state"] == "PRESENT" else "INTEGRATION_ABSENCE_ATTESTED"
+        expected_boundary_state = "NOT_EXERCISED_NO_TRIGGER" if spec["integration_state"] == "PRESENT" else "NO_RUNTIME_BOUNDARY"
+        state = event.get("attempt_state")
+        expected_counts = {
+            "attempted": 0,
+            "succeeded": 0,
+            "failed": 0,
+            "skipped": 1 if str(state).startswith("SKIPPED_") else 0,
+            "timed_out": 0,
+            "unavailable": 1 if str(state).startswith("UNAVAILABLE_") else 0,
+        }
+        expected_event_keys = {
+            "schema_version", "guard_session_id", "sequence", "utc", "api_pid",
+            "api_process_group_id", "launch_nonce_sha256", "event_type", "provider_id",
+            "provider", "boundary_id", "source_path", "source_symbol", "source_evidence_id",
+            "required_configuration_names", "present_configuration_names",
+            "missing_configuration_names", "configuration_state", "integration_state",
+            "boundary_state", "attempt_state", "reason_code", "attempted", "succeeded",
+            "failed", "skipped", "timed_out", "unavailable", "values_recorded",
+            "previous_event_sha256", "event_sha256",
+        }
+        if set(event) != expected_event_keys:
+            errors.append(f"{provider_id} event schema keys mismatch")
+        for event_key, ledger_key in (
+            ("guard_session_id", "guard_session_id"),
+            ("api_pid", "api_pid"),
+            ("api_process_group_id", "api_process_group_id"),
+            ("launch_nonce_sha256", "launch_nonce_sha256"),
+        ):
+            if event.get(event_key) != value.get(ledger_key):
+                errors.append(f"{provider_id} event {event_key} mismatch")
+        try:
+            event_utc = dt.datetime.fromisoformat(str(event.get("utc")))
+            if event_utc.tzinfo is None or event_utc.utcoffset() != dt.timedelta(0):
+                raise ValueError
+        except (TypeError, ValueError):
+            errors.append(f"{provider_id} event UTC timestamp invalid")
         for field in ("provider", "boundary_id", "source_path", "source_symbol", "integration_state"):
             if event.get(field) != spec.get(field):
                 errors.append(f"{provider_id} event {field} mismatch")
         required = list(spec["required_configuration_names"])
         if event.get("required_configuration_names") != required or event.get("present_configuration_names") != [] or event.get("missing_configuration_names") != sorted(required):
             errors.append(f"{provider_id} prerequisite measurement mismatch")
-        state = event.get("attempt_state")
         if state != spec["unconfigured_state"]:
             errors.append(f"{provider_id} outcome state mismatch")
+        if event.get("event_type") != expected_event_type:
+            errors.append(f"{provider_id} event type mismatch")
+        if event.get("configuration_state") != "NOT_CONFIGURED" or event.get("boundary_state") != expected_boundary_state:
+            errors.append(f"{provider_id} configuration or boundary state mismatch")
+        if event.get("reason_code") != spec["reason_code"]:
+            errors.append(f"{provider_id} reason code mismatch")
+        if event.get("source_evidence_id") != "S2A-SRC-" + hashlib.sha256(spec["source_path"].encode()).hexdigest()[:12].upper():
+            errors.append(f"{provider_id} source evidence identity mismatch")
+        if any(type(event.get(field)) is not int or event.get(field) != count for field, count in expected_counts.items()):
+            errors.append(f"{provider_id} terminal outcome arithmetic mismatch")
+        if event.get("values_recorded") is not False:
+            errors.append(f"{provider_id} sensitive-value handling mismatch")
         rows.append({
             "provider_id": provider_id,
             "provider": spec["provider"],
@@ -295,6 +343,10 @@ def derive_provider_register(registry_path: Path) -> tuple[list[dict[str, Any]],
             "measurement_basis": "PROCESS_BOUND_HASH_CHAINED_RUNTIME_CAPABILITY_EVENT",
             "global_unapproved_attempt_count": value.get("provider_or_external_attempt_count"),
         })
+    if value.get("unapproved_attempt_count") != len(value.get("attempts", [])):
+        errors.append("unapproved network attempt total does not match attempt events")
+    if value.get("attempts"):
+        errors.append("provider or external network attempts are prohibited in Stage 2A")
     if errors:
         raise RuntimeError("provider guard evidence invalid: " + "; ".join(errors))
     proof = {

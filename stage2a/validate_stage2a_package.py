@@ -18,7 +18,7 @@ import jsonschema
 from jsonschema import Draft202012Validator, FormatChecker
 
 PACKAGE_ID = "ES-PKG-2026-004-V003"
-CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-006"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-007"
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 BASELINE = "acb518ea5a160820e64681ff95a16b010fe1156c"
 PREDECESSOR_SHA = "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329"
@@ -111,6 +111,188 @@ def record_check(checks: list[dict[str, object]], seen: set[str], identifier: st
         raise RuntimeError(f"duplicate validation check identifier: {identifier}")
     seen.add(identifier)
     checks.append({"check_id": identifier, "status": "PASS" if passed else "FAIL", "detail": detail})
+
+
+def provider_evidence_errors(
+    ledger: dict[str, object], registry: dict[str, object], registry_sha256: str,
+    provider_rows: list[dict[str, object]], proof: dict[str, object],
+    source_paths: set[str], source_ids: set[str],
+) -> list[str]:
+    errors: list[str] = []
+    expected = {row["provider_id"]: row for row in registry.get("providers", []) if isinstance(row, dict) and row.get("provider_id")}
+    events = ledger.get("provider_events", []) if isinstance(ledger.get("provider_events"), list) else []
+    attempts = ledger.get("attempts", []) if isinstance(ledger.get("attempts"), list) else []
+    if ledger.get("schema_version") != "2.0" or ledger.get("guard") != "STAGE2A_APPLICATION_NETWORK_GUARD" or ledger.get("installed") is not True:
+        errors.append("provider guard identity invalid")
+    if ledger.get("provider_registry_sha256") != registry_sha256:
+        errors.append("provider registry hash mismatch")
+    if ledger.get("approved_endpoints") != ["LOOPBACK_API_8019", "LOOPBACK_MONGODB_27029"]:
+        errors.append("approved endpoint boundary mismatch")
+    if attempts or ledger.get("provider_or_external_attempt_count") != 0 or ledger.get("unapproved_attempt_count") != 0:
+        errors.append("provider or external attempts must remain zero")
+    ordered = sorted(events + attempts, key=lambda event: int(event.get("sequence", -1)) if isinstance(event, dict) else -1)
+    previous = "0" * 64
+    for sequence, event in enumerate(ordered, 1):
+        if not isinstance(event, dict):
+            errors.append(f"invalid provider event at sequence {sequence}")
+            continue
+        core = dict(event)
+        recorded_hash = core.pop("event_sha256", "")
+        if event.get("sequence") != sequence or event.get("previous_event_sha256") != previous:
+            errors.append(f"provider event sequence or predecessor mismatch at {sequence}")
+        if hashlib.sha256(canonical(core)).hexdigest() != recorded_hash:
+            errors.append(f"provider event hash mismatch at {sequence}")
+        previous = str(recorded_hash)
+    if ledger.get("event_count") != len(ordered) or ledger.get("event_chain_sha256") != previous:
+        errors.append("provider event count or chain head mismatch")
+    actual: dict[str, dict[str, object]] = {}
+    for event in events:
+        if not isinstance(event, dict):
+            continue
+        provider_id = str(event.get("provider_id"))
+        if provider_id in actual:
+            errors.append(f"duplicate provider event {provider_id}")
+        actual[provider_id] = event
+    if set(actual) != set(expected):
+        errors.append("provider event coverage mismatch")
+    rows_by_id: dict[str, dict[str, object]] = {}
+    for row in provider_rows:
+        provider_id = str(row.get("provider_id"))
+        if provider_id in rows_by_id:
+            errors.append(f"duplicate provider outcome row {provider_id}")
+        rows_by_id[provider_id] = row
+    if set(rows_by_id) != set(expected):
+        errors.append("provider outcome coverage mismatch")
+    event_keys = {
+        "schema_version", "guard_session_id", "sequence", "utc", "api_pid",
+        "api_process_group_id", "launch_nonce_sha256", "event_type", "provider_id",
+        "provider", "boundary_id", "source_path", "source_symbol", "source_evidence_id",
+        "required_configuration_names", "present_configuration_names",
+        "missing_configuration_names", "configuration_state", "integration_state",
+        "boundary_state", "attempt_state", "reason_code", "attempted", "succeeded",
+        "failed", "skipped", "timed_out", "unavailable", "values_recorded",
+        "previous_event_sha256", "event_sha256",
+    }
+    for provider_id, spec in expected.items():
+        event = actual.get(provider_id, {})
+        row = rows_by_id.get(provider_id, {})
+        state = spec.get("unconfigured_state")
+        source_id = "S2A-SRC-" + hashlib.sha256(str(spec.get("source_path")).encode()).hexdigest()[:12].upper()
+        expected_event_type = "PREREQUISITE_EVALUATED" if spec.get("integration_state") == "PRESENT" else "INTEGRATION_ABSENCE_ATTESTED"
+        expected_boundary = "NOT_EXERCISED_NO_TRIGGER" if spec.get("integration_state") == "PRESENT" else "NO_RUNTIME_BOUNDARY"
+        counts = {
+            "attempted": 0, "succeeded": 0, "failed": 0, "timed_out": 0,
+            "skipped": 1 if str(state).startswith("SKIPPED_") else 0,
+            "unavailable": 1 if str(state).startswith("UNAVAILABLE_") else 0,
+        }
+        if set(event) != event_keys:
+            errors.append(f"{provider_id} provider event schema mismatch")
+        for event_key, ledger_key in (("guard_session_id", "guard_session_id"), ("api_pid", "api_pid"), ("api_process_group_id", "api_process_group_id"), ("launch_nonce_sha256", "launch_nonce_sha256")):
+            if event.get(event_key) != ledger.get(ledger_key):
+                errors.append(f"{provider_id} provider event process binding mismatch")
+        try:
+            stamp = dt.datetime.fromisoformat(str(event.get("utc")))
+            if stamp.tzinfo is None or stamp.utcoffset() != dt.timedelta(0):
+                raise ValueError
+        except (TypeError, ValueError):
+            errors.append(f"{provider_id} provider event timestamp invalid")
+        expected_fields = {
+            "provider": spec.get("provider"), "boundary_id": spec.get("boundary_id"),
+            "source_path": spec.get("source_path"), "source_symbol": spec.get("source_symbol"),
+            "source_evidence_id": source_id, "required_configuration_names": spec.get("required_configuration_names"),
+            "present_configuration_names": [], "missing_configuration_names": sorted(spec.get("required_configuration_names", [])),
+            "configuration_state": "NOT_CONFIGURED", "integration_state": spec.get("integration_state"),
+            "boundary_state": expected_boundary, "attempt_state": state, "reason_code": spec.get("reason_code"),
+            "event_type": expected_event_type, "values_recorded": False,
+        } | counts
+        if any(event.get(field) != value for field, value in expected_fields.items()):
+            errors.append(f"{provider_id} provider event semantics mismatch")
+        if spec.get("source_path") not in source_paths or source_id not in source_ids:
+            errors.append(f"{provider_id} provider source traceability mismatch")
+        expected_row = {
+            "provider": spec.get("provider"), "boundary_id": spec.get("boundary_id"),
+            "source_path": spec.get("source_path"), "source_symbol": spec.get("source_symbol"),
+            "source_evidence_id": source_id, "configuration_names": spec.get("required_configuration_names"),
+            "configured": False, "integration_state": spec.get("integration_state"), "state": state,
+            "attempt_count": 0, "attempted_count": 0, "succeeded_count": 0,
+            "failed_count": 0, "skipped_count": counts["skipped"], "timed_out_count": 0,
+            "unavailable_count": counts["unavailable"], "event_sequence": event.get("sequence"),
+            "event_sha256": event.get("event_sha256"), "guard_session_id": ledger.get("guard_session_id"),
+            "measurement_basis": "PROCESS_BOUND_HASH_CHAINED_RUNTIME_CAPABILITY_EVENT",
+            "global_unapproved_attempt_count": 0,
+        }
+        if any(row.get(field) != value for field, value in expected_row.items()):
+            errors.append(f"{provider_id} provider outcome derivation mismatch")
+    expected_proof = {
+        "guard_session_id": ledger.get("guard_session_id"), "api_pid": ledger.get("api_pid"),
+        "api_process_group_id": ledger.get("api_process_group_id"),
+        "launch_nonce_sha256": ledger.get("launch_nonce_sha256"),
+        "provider_registry_sha256": registry_sha256, "provider_event_count": len(events),
+        "network_attempt_event_count": 0, "unattributed_attempt_count": 0,
+        "event_chain_sha256": ledger.get("event_chain_sha256"), "event_chain_valid": True,
+        "process_identity_bound": True,
+    }
+    if any(proof.get(field) != value for field, value in expected_proof.items()):
+        errors.append("provider guard proof mismatch")
+    return errors
+
+
+def process_evidence_errors(foundation: dict[str, object], process_detail: dict[str, object], shutdown_detail: dict[str, object]) -> list[str]:
+    errors: list[str] = []
+    identities = (("mongo", 27029), ("api", 8019))
+    expected_commands = {
+        "mongo": "mongod --dbpath REPOSITORY_ROOT/stage2a/.runtime/mongo --port 27029 --bind_ip 127.0.0.1 --nounixsocket --quiet",
+        "api": "REPOSITORY_ROOT/stage2a/.venv/bin/python -m uvicorn full_application_profile:app --app-dir REPOSITORY_ROOT/stage2a --host 127.0.0.1 --port 8019 --log-level warning --no-access-log",
+    }
+    try:
+        started = dt.datetime.fromisoformat(str(foundation.get("started_utc")))
+        ended = dt.datetime.fromisoformat(str(foundation.get("ended_utc")))
+    except (TypeError, ValueError):
+        started = ended = None
+        errors.append("foundation chronology invalid for process evidence")
+    for kind, port in identities:
+        row = process_detail.get(f"{kind}_identity") if isinstance(process_detail, dict) else None
+        if not isinstance(row, dict):
+            errors.append(f"missing {kind} process identity")
+            continue
+        command = expected_commands[kind]
+        packaged_hash = hashlib.sha256(command.encode()).hexdigest()
+        required = {
+            "kind": kind, "owner": PACKAGE_ID, "controlled_port": port,
+            "working_directory": "REPOSITORY_ROOT/stage2a", "runtime": "REPOSITORY_ROOT/stage2a/.runtime",
+            "observed_command_line": command, "command_display": command,
+            "packaged_command_line_sha256": packaged_hash,
+            "command_line_hash_basis": "FULL_OBSERVED_COMMAND_BEFORE_LOCAL_PATH_PREFIX_REDACTION",
+            "parent_pid_policy": "CREATION_PARENT_OR_INIT_REPARENT_ONLY",
+        }
+        if any(row.get(field) != value for field, value in required.items()):
+            errors.append(f"{kind} packaged process identity semantics mismatch")
+        if row.get("pid") != row.get("process_group_id") or not isinstance(row.get("pid"), int) or not isinstance(row.get("parent_pid"), int):
+            errors.append(f"{kind} PID or process-group identity invalid")
+        if process_detail.get(f"{kind}_pid") != row.get("pid") or process_detail.get(f"{kind}_listener_identity_verified") is not True or process_detail.get(f"{kind}_foreign_listener_pid") is not None or process_detail.get(f"{kind}_port_open") is not True:
+            errors.append(f"{kind} listener attribution mismatch")
+        if not SHA_RE.fullmatch(str(row.get("command_line_sha256", ""))) or row.get("command_line_sha256") == "0" * 64 or not SHA_RE.fullmatch(str(row.get("launch_nonce_sha256", ""))):
+            errors.append(f"{kind} command or nonce hash invalid")
+        executable = str(row.get("executable_path", ""))
+        if (kind == "mongo" and not executable.endswith("/mongod")) or (kind == "api" and executable != "PYTHON_RUNTIME/bin/python3.11"):
+            errors.append(f"{kind} executable identity invalid")
+        try:
+            stamp = dt.datetime.fromisoformat(str(row.get("identity_recorded_utc")))
+            if stamp.tzinfo is None or stamp.utcoffset() != dt.timedelta(0) or (started and ended and not started <= stamp <= ended):
+                raise ValueError
+        except (TypeError, ValueError):
+            errors.append(f"{kind} identity timestamp invalid")
+        if row.get("path_redaction") != {"policy": "LOCAL_PATH_PREFIX_TO_STABLE_ALIAS", "meaning_preserved": True, "stable_aliases": ["REPOSITORY_ROOT", "PYTHON_RUNTIME", "LOCAL_USER_HOME"]}:
+            errors.append(f"{kind} path-redaction semantics mismatch")
+    processes = shutdown_detail.get("processes", []) if isinstance(shutdown_detail, dict) else []
+    if shutdown_detail.get("status") != "STOPPED" or shutdown_detail.get("api_alive") is not False or shutdown_detail.get("mongo_alive") is not False or shutdown_detail.get("pid_files_absent") is not True or shutdown_detail.get("ports_closed") is not True:
+        errors.append("controlled shutdown summary mismatch")
+    if len(processes) != 2 or {row.get("kind") for row in processes if isinstance(row, dict)} != {"api", "mongo"}:
+        errors.append("controlled shutdown process coverage mismatch")
+    for row in processes:
+        if not isinstance(row, dict) or row.get("pid") != row.get("process_group_id") or row.get("command_identity_verified") is not True or row.get("controlled_port_attribution") != "LISTENER_PID_MATCHED" or row.get("forced") is not False or row.get("port_closed") is not True or row.get("status") != "STOPPED":
+            errors.append(f"invalid controlled shutdown process row {row.get('kind') if isinstance(row, dict) else 'UNKNOWN'}")
+    return errors
 
 
 def semantic_record_errors(root: Path, record: dict[str, object], projector=None) -> list[str]:
@@ -501,19 +683,24 @@ def main() -> int:
     provider_detail = foundation_checks.get("provider_denial", {}).get("detail", {})
     provider_rows = provider_detail.get("register", []) if isinstance(provider_detail, dict) else []
     provider_proof = provider_detail.get("provider_guard_proof", {}) if isinstance(provider_detail, dict) else {}
-    provider_ids = {row.get("provider_id") for row in provider_rows}
-    provider_ok = len(provider_rows) == 11 and len(provider_ids) == 11 and all(
-        row.get("attempted_count") == row.get("succeeded_count") == row.get("failed_count") == row.get("timed_out_count") == 0
-        and row.get("skipped_count", 0) + row.get("unavailable_count", 0) == 1
-        and ((str(row.get("state", "")).startswith("SKIPPED_") and row.get("skipped_count") == 1)
-             or (str(row.get("state", "")).startswith("UNAVAILABLE_") and row.get("unavailable_count") == 1))
-        and row.get("global_unapproved_attempt_count") == 0
-        and row.get("measurement_basis") == "PROCESS_BOUND_HASH_CHAINED_RUNTIME_CAPABILITY_EVENT"
-        and row.get("source_path") in source_paths
-        and row.get("source_evidence_id") in source_ids
-        and SHA_RE.fullmatch(str(row.get("event_sha256", ""))) is not None
-        for row in provider_rows
-    ) and provider_proof.get("event_chain_valid") is True and provider_proof.get("process_identity_bound") is True and provider_proof.get("unattributed_attempt_count") == 0 and provider_proof.get("provider_event_count") == 11
+    artifacts = foundation.get("artifacts", {}) if isinstance(foundation, dict) else {}
+    ledger = artifacts.get("application_network_guard", {}) if isinstance(artifacts, dict) else {}
+    measurement = artifacts.get("provider_measurement", {}) if isinstance(artifacts, dict) else {}
+    measurement_ledger = measurement.get("network_guard", {}) if isinstance(measurement, dict) else {}
+    registry_path = (root / "source_payload/stage2a/provider-capability-registry.json") if detached_package_mode else (repo / "stage2a/provider-capability-registry.json")
+    provider_errors: list[str] = []
+    if not isinstance(ledger, dict) or not isinstance(measurement_ledger, dict) or ledger != measurement_ledger:
+        provider_errors.append("provider ledger copies missing or inconsistent")
+    if not registry_path.is_file():
+        provider_errors.append("provider registry source unavailable")
+        registry = {}
+        registry_sha256 = ""
+    else:
+        registry = json.loads(registry_path.read_text(encoding="utf-8"))
+        registry_sha256 = sha(registry_path)
+    if isinstance(ledger, dict) and isinstance(registry, dict):
+        provider_errors.extend(provider_evidence_errors(ledger, registry, registry_sha256, provider_rows, provider_proof, source_paths, source_ids))
+    provider_ok = not provider_errors
     startup_detail = foundation_checks.get("startup_side_effect_inventory", {}).get("detail", {})
     outcomes = startup_detail.get("attempt_outcomes", {}) if isinstance(startup_detail, dict) else {}
     startup_ok = (
@@ -529,36 +716,16 @@ def main() -> int:
     )
     ck("MV-016A-provider-startup-measurement", provider_ok and startup_ok, {
         "provider_rows": len(provider_rows), "provider_states_valid": provider_ok, "provider_guard_proof": provider_proof,
+        "provider_semantic_errors": provider_errors,
         "startup_attempt_outcomes": outcomes, "startup_measurement_valid": startup_ok,
     })
 
     process_detail = foundation_checks.get("process_identity", {}).get("detail", {})
     shutdown_detail = foundation_checks.get("controlled_shutdown", {}).get("detail", {})
-    required_identity = {"pid", "process_group_id", "parent_pid", "parent_pid_policy", "executable_path", "working_directory", "controlled_port", "command_line_sha256", "observed_command_line", "command_display", "launch_nonce_sha256", "identity_recorded_utc"}
-    identity_rows = [process_detail.get("mongo_identity"), process_detail.get("api_identity")]
-    expected_ports = [27029, 8019]
-    timestamp_validity = []
-    for row in identity_rows:
-        try:
-            stamp = dt.datetime.fromisoformat(str(row.get("identity_recorded_utc"))) if isinstance(row, dict) else None
-            timestamp_validity.append(bool(stamp and stamp.tzinfo is not None and stamp.utcoffset() == dt.timedelta(0)))
-        except ValueError:
-            timestamp_validity.append(False)
-    identity_ok = all(
-        isinstance(row, dict) and required_identity <= set(row)
-        and row.get("pid") == row.get("process_group_id")
-        and row.get("controlled_port") == expected_ports[index]
-        and isinstance(row.get("parent_pid"), int)
-        and bool(row.get("executable_path")) and bool(row.get("working_directory")) and bool(row.get("observed_command_line"))
-        and SHA_RE.fullmatch(str(row.get("launch_nonce_sha256", "")))
-        and timestamp_validity[index]
-        for index, row in enumerate(identity_rows)
-    ) and process_detail.get("mongo_listener_identity_verified") is True and process_detail.get("api_listener_identity_verified") is True and process_detail.get("mongo_foreign_listener_pid") is None and process_detail.get("api_foreign_listener_pid") is None
-    termination_rows = shutdown_detail.get("processes", []) if isinstance(shutdown_detail, dict) else []
-    termination_ok = len(termination_rows) == 2 and all(row.get("command_identity_verified") is True and row.get("pid") == row.get("process_group_id") for row in termination_rows)
-    ck("MV-016B-process-identity", identity_ok and termination_ok, {
-        "identity_fields": sorted(required_identity), "startup_identity_valid": identity_ok,
-        "termination_identity_valid": termination_ok, "foreign_process_policy": "FAIL_CLOSED",
+    process_errors = process_evidence_errors(foundation, process_detail, shutdown_detail)
+    ck("MV-016B-process-identity", not process_errors, {
+        "startup_and_termination_identity_valid": not process_errors,
+        "semantic_errors": process_errors, "foreign_process_policy": "FAIL_CLOSED",
     })
 
     provenance = json_objects.get("CORRECTED_CANDIDATE_PROVENANCE.json", {})

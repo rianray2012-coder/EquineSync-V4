@@ -11,7 +11,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import traceability_contract as contract
-from validate_stage2a_package import csv_parity_errors, load_source_module, record_check, traceability_errors
+from validate_stage2a_package import (
+    csv_parity_errors,
+    load_source_module,
+    process_evidence_errors,
+    provider_evidence_errors,
+    record_check,
+    traceability_errors,
+)
 
 
 class TraceabilityContractTests(unittest.TestCase):
@@ -141,6 +148,40 @@ class TraceabilityContractTests(unittest.TestCase):
         module = load_source_module(module_path, "stage2a_test_detached_module")
         self.assertEqual(module.VALUE, 1)
         self.assertFalse((self.root / "__pycache__").exists())
+
+    def test_packaged_provider_and_process_evidence_mutations_fail_closed(self):
+        repo = Path(__file__).resolve().parents[2]
+        candidate = repo / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-006"
+        foundation = json.loads((candidate / "STAGE2A_FOUNDATION_VALIDATION.json").read_text(encoding="utf-8"))
+        source = json.loads((candidate / "STAGE2A_SOURCE_EVIDENCE_REGISTER.json").read_text(encoding="utf-8"))
+        source_paths = {row["path"] for row in source["sources"]}
+        source_ids = {row["evidence_id"] for row in source["sources"]}
+        registry_path = repo / "stage2a/provider-capability-registry.json"
+        registry = json.loads(registry_path.read_text(encoding="utf-8"))
+        registry_sha = __import__("hashlib").sha256(registry_path.read_bytes()).hexdigest()
+        checks = {row["check"]: row for row in foundation["checks"]}
+        provider = checks["provider_denial"]["detail"]
+        ledger = foundation["artifacts"]["application_network_guard"]
+        self.assertEqual(provider_evidence_errors(
+            ledger, registry, registry_sha, provider["register"],
+            provider["provider_guard_proof"], source_paths, source_ids,
+        ), [])
+        emptied = deepcopy(ledger)
+        emptied["provider_events"] = []
+        emptied["event_count"] = 0
+        emptied["event_chain_sha256"] = "0" * 64
+        self.assertTrue(provider_evidence_errors(
+            emptied, registry, registry_sha, provider["register"],
+            provider["provider_guard_proof"], source_paths, source_ids,
+        ))
+        process_detail = checks["process_identity"]["detail"]
+        shutdown_detail = checks["controlled_shutdown"]["detail"]
+        self.assertEqual(process_evidence_errors(foundation, process_detail, shutdown_detail), [])
+        for field, value in (("command_line_sha256", "0" * 64), ("working_directory", "REPOSITORY_ROOT")):
+            mutated = deepcopy(process_detail)
+            mutated["api_identity"][field] = value
+            with self.subTest(field=field):
+                self.assertTrue(process_evidence_errors(foundation, mutated, shutdown_detail))
 
 
 if __name__ == "__main__":

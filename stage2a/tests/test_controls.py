@@ -26,6 +26,20 @@ from validate_stage2a_package import KNOWN_SECRET_VALUE as PACKAGE_SECRET_VALUE,
 
 
 class ControlTests(unittest.TestCase):
+    @staticmethod
+    def _rehash_ledger(value):
+        previous = "0" * 64
+        events = sorted(value["provider_events"] + value["attempts"], key=lambda event: event["sequence"])
+        for event in events:
+            event["previous_event_sha256"] = previous
+            core = dict(event)
+            core.pop("event_sha256", None)
+            event["event_sha256"] = hashlib.sha256(network_guard._canonical(core)).hexdigest()
+            previous = event["event_sha256"]
+        value["event_count"] = len(events)
+        value["event_chain_sha256"] = previous
+        return value
+
     def test_authorized_environment_passes(self):
         self.assertEqual(validate_env(load_env())["status"], "PASS")
 
@@ -72,6 +86,32 @@ class ControlTests(unittest.TestCase):
                 ledger_path.write_text(json.dumps(tampered), encoding="utf-8")
                 with self.assertRaisesRegex(RuntimeError, "event hash mismatch"):
                     network_guard.derive_provider_register(ROOT / "provider-capability-registry.json")
+
+    def test_fully_rehashed_provider_semantic_mutations_fail_closed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            runtime = Path(temporary)
+            ledger_path = runtime / "network-guard.json"
+            nonce = "unit-test-launch-nonce"
+            with patch.object(network_guard, "RUNTIME", runtime), patch.object(network_guard, "LEDGER", ledger_path), patch.dict(os.environ, {"STAGE2A_LAUNCH_NONCE": nonce}):
+                ledger_path.write_text(json.dumps(network_guard._initial()), encoding="utf-8")
+                (runtime / "api.pid").write_text(json.dumps({
+                    "pid": os.getpid(), "process_group_id": os.getpgrp(),
+                    "launch_nonce_sha256": hashlib.sha256(nonce.encode()).hexdigest(),
+                }), encoding="utf-8")
+                network_guard.record_provider_capabilities(load_env(), ROOT / "provider-capability-registry.json")
+                baseline = json.loads(ledger_path.read_text())
+                mutations = (
+                    ("terminal outcome arithmetic", lambda event: event.update({"skipped": 0})),
+                    ("reason code", lambda event: event.update({"reason_code": "VALID_LOOKING_BUT_WRONG"})),
+                    ("event api_pid", lambda event: event.update({"api_pid": event["api_pid"] + 1})),
+                    ("configuration or boundary state", lambda event: event.update({"boundary_state": "NO_RUNTIME_BOUNDARY"})),
+                )
+                for expected_error, mutate in mutations:
+                    changed = deepcopy(baseline)
+                    mutate(changed["provider_events"][0])
+                    ledger_path.write_text(json.dumps(self._rehash_ledger(changed)), encoding="utf-8")
+                    with self.subTest(expected_error=expected_error), self.assertRaisesRegex(RuntimeError, expected_error):
+                        network_guard.derive_provider_register(ROOT / "provider-capability-registry.json")
 
     def test_every_provider_name_fails_closed(self):
         for name in PROVIDER_NAMES:
