@@ -1,0 +1,15 @@
+{
+  "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-009_FROZEN.zip",
+  "archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-009",
+  "candidate_files": 288,
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "candidate_unchanged": true,
+  "clean_extraction": "PASS_288_OF_288",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "generated_utc": "2026-07-20T11:48:16.496777+00:00",
+  "manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+  "payload_files": 285,
+  "validation": "PASS_4_OF_4_LOCATIONS_23_OF_23_CHECKS"
+}
