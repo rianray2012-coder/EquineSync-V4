@@ -102,7 +102,7 @@ class ControlTests(unittest.TestCase):
             "observed_command_line": observed, "command_display": observed,
         }
         files = "python 42 user cwd /controlled/work\npython 42 user txt /controlled/python"
-        identity = {"parent_pid": 7, "process_group_id": 42, "command_line": observed}
+        identity = {"parent_pid": 7, "process_group_id": 42, "command_line": observed, "observed_executable": "/controlled/python"}
         with patch("orchestrate._process_files", return_value=files), patch("orchestrate._ps_identity", return_value=identity):
             self.assertTrue(_expected(record, "api"))
             conflicted = deepcopy(record); conflicted["process_group_id"] = 43

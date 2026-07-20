@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
 import hashlib
 import json
 import os
@@ -13,6 +14,7 @@ import socket
 import subprocess
 import sys
 import time
+import struct
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
@@ -48,16 +50,52 @@ def _read_record(pid_file: Path) -> dict[str, object] | None:
 
 
 def _ps_identity(pid: int) -> dict[str, object] | None:
+    """Measure PPID/PGID with lsof and full argv with macOS KERN_PROCARGS2.
+
+    The controlled sandbox does not permit ``ps`` process inspection. Both
+    interfaces used here are available inside the same sandbox profile and
+    fail closed when either half of the identity cannot be measured.
+    """
     result = subprocess.run(
-        ["ps", "-o", "ppid=,pgid=,command=", "-p", str(pid)],
+        ["lsof", "-a", "-p", str(pid), "-FpgR"],
         text=True,
         capture_output=True,
         check=False,
     )
-    fields = result.stdout.strip().split(None, 2)
-    if result.returncode != 0 or len(fields) != 3:
+    fields = {line[0]: line[1:] for line in result.stdout.splitlines() if line and line[0] in {"p", "g", "R"}}
+    if result.returncode != 0 or fields.get("p") != str(pid) or not fields.get("g") or not fields.get("R"):
         return None
-    return {"parent_pid": int(fields[0]), "process_group_id": int(fields[1]), "command_line": fields[2]}
+    libc = ctypes.CDLL("/usr/lib/libSystem.B.dylib", use_errno=True)
+    mib = (ctypes.c_int * 3)(1, 49, pid)  # CTL_KERN, KERN_PROCARGS2, pid
+    size = ctypes.c_size_t()
+    if libc.sysctl(mib, 3, None, ctypes.byref(size), None, 0) != 0 or size.value < 8:
+        return None
+    buffer = ctypes.create_string_buffer(size.value)
+    if libc.sysctl(mib, 3, buffer, ctypes.byref(size), None, 0) != 0:
+        return None
+    raw = buffer.raw[:size.value]
+    argc = struct.unpack_from("i", raw)[0]
+    if argc < 1:
+        return None
+    cursor = 4
+    executable_end = raw.find(b"\0", cursor)
+    if executable_end < 0:
+        return None
+    observed_executable = raw[cursor:executable_end].decode(errors="surrogateescape")
+    cursor = executable_end
+    while cursor < len(raw) and raw[cursor] == 0:
+        cursor += 1
+    argv: list[str] = []
+    for _ in range(argc):
+        end = raw.find(b"\0", cursor)
+        if end < 0:
+            return None
+        argv.append(raw[cursor:end].decode(errors="surrogateescape"))
+        cursor = end + 1
+    return {
+        "parent_pid": int(fields["R"]), "process_group_id": int(fields["g"]),
+        "command_line": shlex.join(argv), "observed_executable": str(Path(observed_executable).resolve()),
+    }
 
 
 def _executable_path(command: list[str]) -> str:
@@ -72,6 +110,8 @@ def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: 
     identity = _ps_identity(pid)
     if not identity or identity["parent_pid"] != os.getpid() or identity["process_group_id"] != process_group_id:
         raise RuntimeError(f"{kind} process identity unavailable or conflicting at creation")
+    if identity["observed_executable"] != _executable_path(command):
+        raise RuntimeError(f"{kind} executable identity unavailable or conflicting at creation")
     command_line_sha256 = hashlib.sha256(str(identity["command_line"]).encode()).hexdigest()
     pid_file.write_text(json.dumps({
         "owner": "ES-PKG-2026-004-V003",
@@ -160,6 +200,7 @@ def _expected(record: dict[str, object] | None, kind: str) -> bool:
         or identity["process_group_id"] != process_group_id
         or identity["parent_pid"] not in {record.get("parent_pid"), 1}
         or hashlib.sha256(str(identity["command_line"]).encode()).hexdigest() != record.get("command_line_sha256")
+        or identity["observed_executable"] != record.get("executable_path")
         or str(record.get("executable_path")) not in files
         or str(record.get("working_directory")) not in files
     ):
