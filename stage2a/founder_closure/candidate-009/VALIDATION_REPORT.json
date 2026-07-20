@@ -1,0 +1,185 @@
+{
+  "active_terminology": {
+    "erroneous_term_occurrences_in_active_closure_artifacts": 0,
+    "historical_sealed_occurrences_modified": 0,
+    "miap_authority_confirmed": true,
+    "result": "PASS"
+  },
+  "archive_integrity": {
+    "archive_path_scope": "WORKSPACE_EVIDENCE_ROOT_RELATIVE_NOT_REPOSITORY_RELATIVE",
+    "candidate_009_archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+    "candidate_009_manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+    "direct_post_change_rehash_mismatches": 0,
+    "direct_post_change_rehash_verified": 13,
+    "physically_read_during_closure_run": 13,
+    "pre_change_comparison_basis": "PRE_CHANGE_SHA256_SET_CAPTURED_BEFORE_ACTIVE_RECORD_WRITES",
+    "previously_verified_preserved_evidence": 1,
+    "result": "PASS_WITH_VERIFICATION_CLASSIFICATION"
+  },
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "checks": [
+    {
+      "check_id": "FCV-001-REPOSITORY-BRANCH-HEAD",
+      "result": "PASS",
+      "value": "codex/stage2a-execution-foundation-remediation@2ffdeeaff402ff6efbfebc192b728148c02fb617"
+    },
+    {
+      "check_id": "FCV-002-CANDIDATE-IDENTITY-AND-HASHES",
+      "result": "PASS",
+      "value": "ES-PKG-2026-004-V003-CANDIDATE-009"
+    },
+    {
+      "check_id": "FCV-003-EXACT-FIVE-FINDINGS",
+      "result": "PASS",
+      "value": 5
+    },
+    {
+      "check_id": "FCV-004-FOUNDER-NOT-REVIEWER-CLOSURE",
+      "result": "PASS",
+      "value": "FOUNDER_RIAN_RAY"
+    },
+    {
+      "check_id": "FCV-005-IMMUTABLE-ARCHIVE-PRESERVATION",
+      "result": "PASS",
+      "value": "13_OF_13_AVAILABLE_ARCHIVES_DIRECT_POST_CHANGE_REHASH_VERIFIED;SEALED_PREDECESSOR_PREVIOUSLY_VERIFIED_PRESERVED_EVIDENCE"
+    },
+    {
+      "check_id": "FCV-006-SEALED-SCOPE-EXCLUSION",
+      "result": "PASS",
+      "value": "NO_SEALED_PATH_IN_CHANGE_SET"
+    },
+    {
+      "check_id": "FCV-007-UNRELATED-FINDINGS",
+      "result": "PASS",
+      "value": "ZERO_CHANGED"
+    },
+    {
+      "check_id": "FCV-008-HUMAN-MACHINE-STATUS-PARITY",
+      "result": "PASS",
+      "value": "DECISION_RECONCILIATION_STATUS_MATCH"
+    },
+    {
+      "check_id": "FCV-009-MIAP-TERMINOLOGY",
+      "result": "PASS",
+      "value": "ZERO_ERRONEOUS_ACTIVE_TERM_OCCURRENCES"
+    },
+    {
+      "check_id": "FCV-010-AUTHORIZATION-BOUNDARIES",
+      "result": "PASS",
+      "value": "IMPLEMENTATION_EXECUTION_MERGE_RELEASE_DEPLOYMENT_ALL_FALSE"
+    },
+    {
+      "check_id": "FCV-011-RESIDUE-EVENT-SEPARATION",
+      "result": "PASS",
+      "value": "NOT_CONFLATED_WITH_FINDING_CLOSURE_OR_RUNTIME_SELECTOR"
+    },
+    {
+      "check_id": "FCV-012-REQUIRED-ARTIFACTS",
+      "result": "PASS",
+      "value": "10_OF_10"
+    },
+    {
+      "check_id": "FCV-013-CLOSURE-CHECKSUM-MANIFEST",
+      "result": "PASS",
+      "value": "9_OF_9_NON_SELF_ENTRIES"
+    }
+  ],
+  "decision": "FIVE_STAGE2A_PACKAGE_CONTROL_FINDINGS_CLOSED_BY_FOUNDER_AUTHORITY",
+  "directive_id": "ES-FOUNDER-DIR-STAGE2A-C009-FINDING-CLOSURE-V1.0",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "immutable_archive_hashes": [
+    {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-003_FROZEN.zip",
+      "sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-004_FROZEN.zip",
+      "sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-005_ASSEMBLY_FAILED.zip",
+      "sha256": "41cc9ae595dbe640cc9aedf79fe84267d58ddb84355682626e237eccd5d3595c",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_FROZEN.zip",
+      "sha256": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-006_POST_FREEZE_BYTECODE_RESIDUE.zip",
+      "sha256": "829fb2df0175ab475a8abba27bf36539af7ad3a82bc5b05f09a21d2344eaa2c9",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-007_FROZEN.zip",
+      "sha256": "e89cbed1ac280e1acb4c9a2105177037a5b2335afe8f4f9df38ab3033902c04e",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-008_ASSEMBLY_FAILED.zip",
+      "sha256": "d94da934bd820ed246f83e1a60453290c4178f6d15d57223103ee361fb61c9ca",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-009_FROZEN.zip",
+      "sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_001_FAILED.zip",
+      "sha256": "1ecb52cbebf70f25a333f37355b9e94f44fb5ad88b7bf500568b59fa88457054",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+      "sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip",
+      "sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_004_FAILED.zip",
+      "sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    },
+    {
+      "path": "outputs/EquineSync_Stage_2_ES-PKG-2026-003-V002.zip",
+      "sha256": "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329",
+      "verification_classification": "DIRECT_POST_CHANGE_REHASH_VERIFIED"
+    }
+  ],
+  "overall_result": "PASS",
+  "package_control_findings": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "recorded_utc": "2026-07-20T14:11:23Z",
+  "required_artifacts": {
+    "expected": 10,
+    "present": 10,
+    "result": "PASS"
+  },
+  "sealed_predecessor": {
+    "archive_direct_rehash": "NOT_AVAILABLE_ARCHIVE_NOT_PRESENT_IN_WORKTREE",
+    "identifier": "ES-PKG-2026-002-V001",
+    "not_included_in_direct_post_change_rehash_count": true,
+    "reference_sha256": "268fdd714264c5c0ae8f599a312c90e37ec44b908b438a1384c88f897bf03b9f",
+    "sealed_paths_in_change_set": 0,
+    "validation_basis": "UNCHANGED_HASH_REFERENCE_IN_UNCHANGED_STAGE2_AND_CANDIDATE009_ARCHIVES_PLUS_ZERO_SEALED_PATHS_IN_CHANGE_SET",
+    "verification_classification": "PREVIOUSLY_VERIFIED_PRESERVED_EVIDENCE"
+  },
+  "status_after_closure": {
+    "agent_readiness": "NO",
+    "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+    "runtime_selector": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+    "stage2_execution_baseline": "EXECUTION_BASELINE_STILL_NOT_READY"
+  }
+}

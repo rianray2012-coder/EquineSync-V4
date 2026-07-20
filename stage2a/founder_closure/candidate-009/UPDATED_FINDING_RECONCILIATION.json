@@ -1,0 +1,71 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "closure_authority": "FOUNDER_RIAN_RAY",
+  "decision": "FIVE_STAGE2A_PACKAGE_CONTROL_FINDINGS_CLOSED_BY_FOUNDER_AUTHORITY",
+  "directive_id": "ES-FOUNDER-DIR-STAGE2A-C009-FINDING-CLOSURE-V1.0",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "finding_reconciliation": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "prior_status": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION",
+      "reviewer_self_closed": false
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "prior_status": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION",
+      "reviewer_self_closed": false
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "prior_status": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION",
+      "reviewer_self_closed": false
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "prior_status": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION",
+      "reviewer_self_closed": false
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "prior_status": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION",
+      "reviewer_self_closed": false
+    }
+  ],
+  "formal_closures_recorded": 5,
+  "historical_reconciliation_record_modified": false,
+  "package_control_findings": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "recorded_utc": "2026-07-20T14:11:23Z",
+  "review_evidence": [
+    {
+      "path": "stage2a/review_attempts/attempt-009/SEGREGATED_REREVIEW.json",
+      "sha256": "4d4cd8ce9912d9fc1d9b2a62ba42b95472fd439afb1d34c59142bb51d3cbfd13"
+    },
+    {
+      "path": "stage2a/review_attempts/attempt-009/ADVERSARIAL_REREVIEW.json",
+      "sha256": "7320ccf4d14f0accbb8fad9af909e951f31a7e930d3d2bed04e05d1bed6e72b7"
+    },
+    {
+      "path": "stage2a/review_attempts/attempt-009/CUSTODIAN_REVIEW.json",
+      "sha256": "a8abb353d48ff64d26c42e262d6904426ad7c88f855ac1a945eca3200caf3934"
+    }
+  ],
+  "runtime_selector": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "stage2_execution_baseline": "EXECUTION_BASELINE_STILL_NOT_READY",
+  "unrelated_findings_changed": 0
+}

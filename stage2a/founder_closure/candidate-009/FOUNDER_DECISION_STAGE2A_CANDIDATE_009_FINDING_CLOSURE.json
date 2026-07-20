@@ -1,0 +1,79 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "branch": "codex/stage2a-execution-foundation-remediation",
+  "candidate": {
+    "archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+    "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+    "manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+    "preserved_unchanged": true
+  },
+  "closure_basis": {
+    "adversarial_review": "DOCUMENTARY_CHALLENGE_PASS_TECHNICAL_CLOSURE_RECOMMENDED_F0001_REMAINS_OPEN",
+    "custody_review": "CUSTODY_PASS_EVIDENCE_CHAIN_CONSISTENT_FOR_CONTROLLED_REREVIEW",
+    "dependency_evidence": "PASS_127_OF_127",
+    "lifecycle_evidence": "PASS_16_OF_16",
+    "package_validation": "PASS_4_OF_4_LOCATIONS_23_OF_23_CHECKS",
+    "segregated_review": "PASS_RECOMMEND_ACCEPTANCE_AND_CONTROLLED_FINDING_CLOSURE"
+  },
+  "closure_authority": {
+    "authority": "FOUNDER",
+    "founder": "Rian Ray",
+    "reviewer_self_closure": false
+  },
+  "closed_findings": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION"
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION"
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION"
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION"
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "resulting_status": "CLOSED_BY_FOUNDER_AUTHORITY_AFTER_TECHNICAL_CLOSURE_RECOMMENDATION"
+    }
+  ],
+  "closed_findings_count": 5,
+  "decision": "FIVE_STAGE2A_PACKAGE_CONTROL_FINDINGS_CLOSED_BY_FOUNDER_AUTHORITY",
+  "directive_id": "ES-FOUNDER-DIR-STAGE2A-C009-FINDING-CLOSURE-V1.0",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "founder": "Rian Ray",
+  "governance": {
+    "immutable_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+    "miap_authority": "MASTER_IMPLEMENTATION_ATLAS_PROGRAM",
+    "miap_relationship": "PRODUCT_IMPLEMENTATION_ATLASES_OPERATE_BENEATH_AND_WITHIN_MIAP"
+  },
+  "implementation_authorized": false,
+  "merge_authorized": false,
+  "not_changed_by_this_decision": {
+    "agent_readiness": "NO",
+    "authorization_pia": "NOT_FORMALLY_CLOSED",
+    "cp3": "NOT_FORMALLY_CLOSED",
+    "execution_baseline": "EXECUTION_BASELINE_STILL_NOT_READY",
+    "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+    "gp05_implementation_authorized": false,
+    "identity_pia": "NOT_FORMALLY_CLOSED",
+    "relationships_pia": "NOT_FORMALLY_CLOSED",
+    "runtime_selector": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE"
+  },
+  "packaging_commit": "3245ec6f94b4c47653f7737a2083079de736ec6e",
+  "recorded_utc": "2026-07-20T14:11:23Z",
+  "release_or_deployment_authorized": false,
+  "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "source_branch_commit": "2ffdeeaff402ff6efbfebc192b728148c02fb617",
+  "validated_implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc"
+}

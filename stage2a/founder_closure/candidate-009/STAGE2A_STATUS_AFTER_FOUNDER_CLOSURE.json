@@ -1,0 +1,33 @@
+{
+  "agent_readiness": "NO",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "authorization_pia": "NOT_FORMALLY_CLOSED",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "closed_package_control_findings": 5,
+  "cp3": "NOT_FORMALLY_CLOSED",
+  "decision": "FIVE_STAGE2A_PACKAGE_CONTROL_FINDINGS_CLOSED_BY_FOUNDER_AUTHORITY",
+  "directive_id": "ES-FOUNDER-DIR-STAGE2A-C009-FINDING-CLOSURE-V1.0",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "gp05_implementation_authorized": false,
+  "identity_pia": "NOT_FORMALLY_CLOSED",
+  "implementation_authorized": false,
+  "merge_authorized": false,
+  "next_required_action": "RESOLVE_RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE_UNDER_SEPARATE_AUTHORIZATION_COMPLETE_REQUIRED_RUNTIME_AGENT_CHECKS_AND_OBTAIN_INDEPENDENT_REVIEW_BEFORE_RECONSIDERING_F0001",
+  "package_control_findings": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "package_control_status": "FIVE_FINDINGS_CLOSED_BY_FOUNDER_AUTHORITY",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "recorded_utc": "2026-07-20T14:11:23Z",
+  "relationships_pia": "NOT_FORMALLY_CLOSED",
+  "release_or_deployment_authorized": false,
+  "runtime_agent_checks_complete": false,
+  "runtime_selector": {
+    "classification": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+    "status": "OPEN_BLOCKING_RUNTIME_LIMITATION"
+  },
+  "stage2_execution_baseline": "EXECUTION_BASELINE_STILL_NOT_READY"
+}
