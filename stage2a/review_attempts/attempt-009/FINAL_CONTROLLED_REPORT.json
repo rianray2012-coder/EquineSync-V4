@@ -1,0 +1,86 @@
+{
+  "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-009_FROZEN.zip",
+  "archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+  "archive_verification": "PASS_CRC_AND_288_OF_288_CLEAN_EXTRACTION_PARITY",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "branch": "codex/stage2a-execution-foundation-remediation",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "candidate_manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+  "candidate_payload_files": 285,
+  "candidate_physical_files": 288,
+  "candidate_tree_sha256_custodian_method": "4707ba7e12e0ef6ade5967bc120761b4f08d8b27214d23d2e3552f8ad73b2846",
+  "corrected_candidate_distinct": true,
+  "created_path_register_count": 410,
+  "deleted_path_register_count": 0,
+  "ending_commit": "RECORDED_IN_FINAL_HANDOFF_AFTER_REPORT_COMMIT_TO_AVOID_CIRCULAR_SELF_REFERENCE",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "f0002": "F0002_CLOSED_BY_FOUNDER_AUTHORITY_FOR_IMMUTABLE_BASELINE_MATERIALIZATION",
+  "failed_freezes_unchanged": true,
+  "final_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "five_blocker_result": "ALL_FIVE_REMEDIATIONS_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_FORMAL_CLOSURE_NOT_PERFORMED",
+  "generated_utc": "2026-07-20T12:09:10Z",
+  "immutable_governance_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+  "implementation_tree": "c9f9ee68e57b03d890c6bfe6f8fed79876bb5a2b",
+  "machine_validation": {
+    "assembly": "PASS_4_OF_4_LOCATIONS_23_OF_23",
+    "freeze": "PASS_4_OF_4_LOCATIONS_23_OF_23",
+    "segregated_rerun": "PASS_4_OF_4_LOCATIONS_23_OF_23",
+    "unit_controls_repository_context": "PASS_36_OF_36_WITH_48_SUBTESTS",
+    "noncontrolling_detached_full_harness_note": "34_OF_36; TWO_CONTEXT_COUPLED_TESTS; CONTROL_OBJECTIVES_INDEPENDENTLY_SATISFIED",
+    "lifecycle": "PASS_16_OF_16",
+    "dependency_inventory": "PASS_127_OF_127"
+  },
+  "modified_path_register_count": 0,
+  "package_control_findings": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "package_control_result": "PASS_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+  "package_id": "ES-PKG-2026-004-V003",
+  "packaging_commit": "3245ec6f94b4c47653f7737a2083079de736ec6e",
+  "pre_report_parent_commit": "553ad2a13c1a80c94f78239e25a20ab6fb477aa3",
+  "predecessor_evidence_reuse": [
+    {
+      "artifact": "FAILED_ATTEMPT_002_STAGE2A_FOUNDATION_VALIDATION",
+      "recorded_result": "PASS_16_OF_16",
+      "reuse_classification": "CORROBORATIVE_NONCONTROLLING_ONLY",
+      "basis": "HASH_IDENTICAL_FIXTURE_CLEANUP_ROLLBACK_AND_IMMUTABLE_SOURCE_INPUTS",
+      "controlling_candidate_009_rerun": "PASS_16_OF_16"
+    },
+    {
+      "artifact": "FAILED_ATTEMPT_002_BACKEND_BOOTSTRAP_VALIDATION",
+      "recorded_result": "PASS_127_OF_127",
+      "reuse_classification": "CORROBORATIVE_NONCONTROLLING_ONLY",
+      "basis": "HASH_IDENTICAL_PINNED_REQUIREMENTS_DOWNLOAD_ARTIFACTS_AND_INSTALLED_METADATA",
+      "controlling_candidate_009_rerun": "PASS_127_OF_127"
+    }
+  ],
+  "predecessor_identifier": "ES-PKG-2026-003-V002",
+  "predecessor_sha256": "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329",
+  "primary_blocked_readiness_cause": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "reviewed_archive_chain_physical_files": 1797,
+  "reviewed_candidate_files": 288,
+  "reviewer_results": {
+    "segregated": "PASS_RECOMMEND_ACCEPTANCE_AND_CONTROLLED_FINDING_CLOSURE",
+    "adversarial": "DOCUMENTARY_CHALLENGE_PASS_TECHNICAL_CLOSURE_RECOMMENDED_F0001_REMAINS_OPEN",
+    "custody": "CUSTODY_PASS_EVIDENCE_CHAIN_CONSISTENT_FOR_CONTROLLED_REREVIEW"
+  },
+  "runtime_agent_checks_complete": false,
+  "runtime_agent_readiness_declared": false,
+  "sealed_predecessor_identifier": "ES-PKG-2026-002-V001",
+  "sealed_predecessor_sha256": "268fdd714264c5c0ae8f599a312c90e37ec44b908b438a1384c88f897bf03b9f",
+  "starting_commit": "0be6172a28b75238c5facabf91d43ed09aaf0d54",
+  "checks_invalidated_and_rerun": [
+    "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+    "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+    "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+    "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+    "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT"
+  ],
+  "renamed_path_register_count": 0
+}

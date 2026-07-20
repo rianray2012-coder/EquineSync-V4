@@ -1,0 +1,187 @@
+{
+  "review_id": "STAGE2A_ADVERSARIAL_REREVIEW_ATTEMPT_009",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "reviewed_utc": "2026-07-20T11:58:15Z",
+  "review_mode": "INDEPENDENT_DOCUMENTARY_CHALLENGE_REVIEW_OF_FROZEN_RECORDS_AND_EXISTING_REPORTS_ONLY",
+  "result": "DOCUMENTARY_CHALLENGE_PASS_TECHNICAL_CLOSURE_RECOMMENDED_F0001_REMAINS_OPEN",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "self_closed": false,
+  "scope": {
+    "records_reviewed": "FROZEN_ARCHIVE_RECORDS_AND_EXISTING_VALIDATION_TEST_REPORTS",
+    "reviewer_execution_evidence_used": false,
+    "runtime_tests_used_as_independent_reviewer_evidence": false,
+    "network_behavior_inspected": false,
+    "services_started_for_this_review": false,
+    "security_or_mutation_scenarios_used_as_reviewer_evidence": false,
+    "formal_gate_closure_authorized": false
+  },
+  "immutable_snapshot": {
+    "archive": "outputs/ES-PKG-2026-004-V003-CANDIDATE-009_FROZEN.zip",
+    "archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+    "manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+    "manifest_payload_files": 285,
+    "physical_archive_files": 288,
+    "recorded_manifest_verification": "285_OF_285_PASS",
+    "recorded_archive_integrity": "PASS_NO_DUPLICATES_UNSAFE_PATHS_OR_SYMLINKS",
+    "validated_implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+    "packaging_commit": "3245ec6f94b4c47653f7737a2083079de736ec6e",
+    "review_attempt": 9,
+    "frozen": true
+  },
+  "severity_summary": {
+    "package_control_findings": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0
+    },
+    "separate_gate_blocking_limitations": 1,
+    "separate_limitation": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+    "formal_f0001_status": "OPEN_BLOCKING"
+  },
+  "closure_recommendations": [
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "control_area": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "recommendation": "RECOMMEND_TECHNICAL_CLOSURE_SUBJECT_TO_CONTROLLED_RECONCILIATION",
+      "formal_closure_performed": false,
+      "documentary_basis": [
+        "VALIDATOR_INVOCATION_MATRIX.json records four supported invocation locations, each at PASS 23/23 with exit code 0.",
+        "The four recorded locations are package root, nested review-attempt directory, external private temporary directory, and detached clean-copy external private temporary directory.",
+        "STAGE2A_VALIDATION_COMMAND_REGISTER.json and STAGE2A_TEST_CONTROL_REGISTER.json bind the root-resolution control to named commands, tests, source evidence, and the packaged validator hash."
+      ]
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "control_area": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "recommendation": "RECOMMEND_TECHNICAL_CLOSURE_SUBJECT_TO_CONTROLLED_RECONCILIATION",
+      "formal_closure_performed": false,
+      "documentary_basis": [
+        "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json maps the finding to exact requirement, remediation, test, and evidence artifact identities.",
+        "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json provides named controls, source evidence identifiers, implementation artifacts, test identifiers, and output evidence for requirements 003, 004, 006, and 009.",
+        "STAGE2A_TEST_CONTROL_REGISTER.json and the traceability contract provide executable identities rather than generic category-only mappings."
+      ]
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "control_area": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "recommendation": "RECOMMEND_TECHNICAL_CLOSURE_SUBJECT_TO_CONTROLLED_RECONCILIATION",
+      "formal_closure_performed": false,
+      "documentary_basis": [
+        "The frozen foundation validation records a measurable startup inventory of attempted=3, succeeded=2, failed=1, skipped=1, timed_out=0, and unavailable=0, with arithmetic_valid=true.",
+        "Four startup-attempt records have unique attempt identifiers, UTC start and end values, and exactly one terminal state: interrupted failpoint failed, cold full-app succeeded, foundation profile skipped as not selected, and rollback restart succeeded.",
+        "The provider event ledger contains 11 process-bound, hash-chained records with provider, boundary, configuration, source, reason, attempt, terminal-state, UTC, PID/PGID, and launch-nonce-hash fields.",
+        "EVIDENCE_REUSE_AND_RERUN_REGISTER.json classifies predecessor evidence as corroborative only and records a current-candidate lifecycle rerun as PASS 16/16."
+      ]
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "control_area": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "recommendation": "RECOMMEND_TECHNICAL_CLOSURE_SUBJECT_TO_CONTROLLED_RECONCILIATION",
+      "formal_closure_performed": false,
+      "documentary_basis": [
+        "EVIDENCE_CAPTURE_VALIDATION.json records PASS and rejects contradictory exit semantics, over-redaction, reverse chronology, sensitive-value retention, stream-hash mismatch, unexpected placeholders, and weak substring matching while preserving required meaning and near-miss values.",
+        "EXECUTION_EVIDENCE_SCHEMA.json requires documented evidence classification, redaction status, redaction metadata, and EXECUTION_NOT_AUTHORIZED status.",
+        "The packaged pass-evidence record contains projector and normalization versions, before/after projection hashes, sensitive and placeholder counts, exact-line matches, semantic-preservation status, stream hashes, and a record-content hash."
+      ]
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "control_area": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "recommendation": "RECOMMEND_TECHNICAL_CLOSURE_SUBJECT_TO_CONTROLLED_RECONCILIATION",
+      "formal_closure_performed": false,
+      "documentary_basis": [
+        "The frozen startup identity evidence records PID, PPID, PGID, command and command hashes, executable path, working directory, controlled port, launch-nonce hash, and identity timestamp for both MongoDB and API processes.",
+        "The controlled-shutdown report cross-checks identities, reports listener matches, records both processes STOPPED, confirms both ports closed and PID files absent, and records that no force action was required.",
+        "The orchestration contract and shutdown records state fail-closed behavior: identity conflicts prevent signaling or termination rather than permitting action against an unverified process."
+      ]
+    }
+  ],
+  "validator_location_reconciliation": {
+    "record": "VALIDATOR_INVOCATION_MATRIX.json",
+    "recorded_result": "PASS",
+    "supported_location_count": 4,
+    "locations": [
+      {
+        "location": "PACKAGE_ROOT",
+        "source_classification": "REPOSITORY_BACKED_PACKAGED",
+        "recorded_result": "PASS_23_OF_23",
+        "recorded_exit_code": 0
+      },
+      {
+        "location": "PACKAGE_NESTED_REVIEW_ATTEMPT_004",
+        "source_classification": "REPOSITORY_BACKED",
+        "recorded_result": "PASS_23_OF_23",
+        "recorded_exit_code": 0
+      },
+      {
+        "location": "EXTERNAL_PRIVATE_TMP",
+        "source_classification": "REPOSITORY_BACKED",
+        "recorded_result": "PASS_23_OF_23",
+        "recorded_exit_code": 0
+      },
+      {
+        "location": "DETACHED_CLEAN_COPY_EXTERNAL_PRIVATE_TMP",
+        "source_classification": "DETACHED_SOURCE_PAYLOAD",
+        "recorded_result": "PASS_23_OF_23",
+        "recorded_exit_code": 0,
+        "temporary_copy_removed": true
+      }
+    ],
+    "validator_sha256": "67a1301b376d745802a196b572157ed8c1333e17d427b45f86f0e6830b26d8e8"
+  },
+  "predecessor_preservation": {
+    "candidate_007": {
+      "status": "FAILED_PRESERVED_UNCHANGED",
+      "classification": "PRE_REVIEW_FREEZE_RECORD_PARITY_LABEL_DEFECT",
+      "archive_sha256": "e89cbed1ac280e1acb4c9a2105177037a5b2335afe8f4f9df38ab3033902c04e",
+      "manifest_sha256": "cb63e7e2da83368ad737ade7cc3b37d4b6b4281b4a6ab2dc6770f3e481964f1d",
+      "documented_observation": "The historical stale PASS_256_OF_256 literal remains confined to preserved failed-candidate source evidence; the record identifies observed 277/277 parity and states that the underlying content was not defective. No recurrence was identified in Candidate 009 active records."
+    },
+    "candidate_008": {
+      "status": "ASSEMBLY_FAILED_PRESERVED_UNCHANGED",
+      "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+      "archive_sha256": "d94da934bd820ed246f83e1a60453290c4178f6d15d57223103ee361fb61c9ca",
+      "external_manifest_sha256": "3f25672a322741603632b8c6b56522fce4eec807489ae18cde55c38a10101917",
+      "documented_observation": "The preserved validator retained the Candidate 007 identifier while Candidate 008 provenance correctly identified Candidate 008; the repository score was 22/23 and the failed assembly remains unchanged."
+    },
+    "candidate_009_provenance": "CORRECTED_CANDIDATE_PROVENANCE.json distinguishes Candidate 009 from both preserved predecessors and records all five controls as REMEDIATED_PENDING_REREVIEW with self-closure absent."
+  },
+  "separate_open_runtime_limitation": {
+    "record": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.json",
+    "status": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+    "direct_evidence_resolution": false,
+    "stage2a_readiness": "BLOCKED",
+    "implementation_failure": false,
+    "causally_conflated_with_process_residue": false,
+    "effect_on_package_control_recommendations": "NONE",
+    "effect_on_f0001": "F0001_REMAINS_OPEN_BLOCKING",
+    "required_principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE"
+  },
+  "limitations": [
+    "This report is a document-based challenge review. Its conclusions rely only on the frozen archive records and existing validation and test reports; no execution result from this reviewer is used as closure evidence.",
+    "The recorded validator, unit-control, lifecycle, evidence, process, and provider results were reconciled for specificity and internal documentary consistency, but were not promoted here as independently rerun or externally assured results.",
+    "No runtime behavior, live network behavior, service startup, data alteration, or security or mutation scenario forms part of this review disposition.",
+    "The five recommendations are technical closure recommendations only. They do not formally close their findings, authorize execution, close F0001, or establish external assurance.",
+    "The runtime agent-type selector remains an explicit, separate, open blocking limitation. Default execution readiness therefore remains blocked even though the five package-control records support closure recommendation."
+  ],
+  "evidence_sources": [
+    "DRAFT_REVIEW_SNAPSHOT_RECORD.json",
+    "VALIDATOR_INVOCATION_MATRIX.json",
+    "STAGE2A_VALIDATION_COMMAND_REGISTER.json",
+    "STAGE2A_TEST_CONTROL_REGISTER.json",
+    "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json",
+    "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json",
+    "EVIDENCE_REUSE_AND_RERUN_REGISTER.json",
+    "CORRECTED_CANDIDATE_PROVENANCE.json",
+    "FAILED_PRE_REVIEW_FREEZE_DISPOSITION.json",
+    "CANDIDATE_008_ASSEMBLY_FAILED.json",
+    "EVIDENCE_CAPTURE_VALIDATION.json",
+    "EXECUTION_EVIDENCE_SCHEMA.json",
+    "STAGE2A_GAP_REMEDIATION_REPORT.json",
+    "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.json",
+    "F0001_UPDATED_READINESS_DETERMINATION.json"
+  ],
+  "final_adversarial_disposition": "DOCUMENTED_EVIDENCE_SUPPORTS_FIVE_TECHNICAL_CLOSURE_RECOMMENDATIONS_FORMAL_CLOSURE_NOT_PERFORMED_F0001_REMAINS_OPEN"
+}

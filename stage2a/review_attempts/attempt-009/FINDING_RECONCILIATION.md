@@ -1,0 +1,26 @@
+# Candidate 009 Finding Reconciliation
+
+## Outcome
+
+Candidate 009 passes the package-control rereview. The segregated, documentary challenge, and custody functions support technical closure recommendations for all five named blockers. No review function self-closed a finding.
+
+- Package-control disposition: `PASS_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED`
+- Open package-control findings: `P0 0 / P1 0 / P2 0`
+- F-0001: `F0001_REMAINS_OPEN_BLOCKING`
+- Primary blocked-readiness cause: `RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE`
+- Agent readiness declared: `NO`
+- Execution: `EXECUTION_NOT_AUTHORIZED`
+- Assurance: `NOT_EXTERNALLY_ASSURED`
+- Principal disposition: `STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE`
+
+## Five blocker results
+
+| Blocker | Result |
+|---|---|
+| `PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT` | `REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED` |
+| `TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC` | `REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED` |
+| `PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT` | `REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED` |
+| `EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT` | `REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED` |
+| `PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT` | `REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED` |
+
+The runtime selector limitation is a separate open gate and is not conflated with the contained `SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE` event or any candidate failure.

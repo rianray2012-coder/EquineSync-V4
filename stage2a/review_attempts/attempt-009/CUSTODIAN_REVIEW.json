@@ -1,0 +1,249 @@
+{
+  "review_id": "STAGE2A_CUSTODIAN_REVIEW_ATTEMPT_009",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "review_role": "INDEPENDENT_EVIDENCE_CUSTODIAN",
+  "generated_utc": "2026-07-20T12:04:48Z",
+  "result": "CUSTODY_PASS_EVIDENCE_CHAIN_CONSISTENT_FOR_CONTROLLED_REREVIEW",
+  "self_closed_findings": false,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "finding_counts": {
+    "custodian_review": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0
+    },
+    "technical_segregated_and_adversarial_findings": "NOT_DETERMINED_PENDING_INDEPENDENT_REREVIEW"
+  },
+  "review_scope": {
+    "controlling_source": "FROZEN_ARCHIVE_AND_DISPOSABLE_CLEAN_EXTRACTION",
+    "repository_candidate_code_imported_or_executed": false,
+    "candidate_or_archive_payload_files_written": 0,
+    "review_outputs": [
+      "stage2a/review_attempts/attempt-009/CUSTODIAN_REVIEW.json",
+      "stage2a/review_attempts/attempt-009/CUSTODIAN_REVIEW.md"
+    ]
+  },
+  "candidate_009_integrity": {
+    "archive": {
+      "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-009_FROZEN.zip",
+      "sha256_before_review": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+      "sha256_after_review": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+      "crc_validation": "PASS",
+      "physical_files": 288,
+      "modified": false
+    },
+    "payload_manifest": {
+      "path": "DRAFT_REVIEW_SHA256SUMS.txt",
+      "sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+      "rows": 285,
+      "verified_rows": 285,
+      "hash_mismatches": 0
+    },
+    "physical_tree": {
+      "aggregate_method": "SHA256_OF_SORTED_RELATIVE_PATH_SHASUM_OUTPUT_FOR_ALL_PHYSICAL_FILES",
+      "sha256": "4707ba7e12e0ef6ade5967bc120761b4f08d8b27214d23d2e3552f8ad73b2846",
+      "physical_files": 288
+    },
+    "manifest_exclusions": {
+      "declared_control_files": [
+        "DRAFT_REVIEW_SHA256SUMS.txt",
+        "DRAFT_REVIEW_SNAPSHOT_RECORD.json",
+        "DRAFT_REVIEW_SNAPSHOT_RECORD.md"
+      ],
+      "unexpected_unmanifested_files": [],
+      "result": "PASS_ONLY_THREE_DECLARED_SNAPSHOT_CONTROL_FILES_OUTSIDE_MANIFEST"
+    },
+    "clean_extraction": {
+      "disposable": true,
+      "python_bytecode_disabled": true,
+      "files_before_validation": 288,
+      "files_after_validation": 288,
+      "validator_added_files": [],
+      "packaged_validator": "PASS_23_OF_23",
+      "result": "PASS"
+    },
+    "repository_directory_observation": {
+      "physical_files": 288,
+      "archive_path_set_differences": 0,
+      "recorded_pre_review_byte_parity": "PASS_288_OF_288",
+      "current_full_mutable_expansion_cache_byte_reread": "STOPPED_NONCONTROLLING_DUE_FILESYSTEM_EXPANSION_CACHE_LATENCY",
+      "impact": "NONE_ARCHIVE_AND_DISPOSABLE_EXTRACTION_ARE_CONTROLLING",
+      "candidate_mutation_by_custodian": false
+    }
+  },
+  "validation_and_provenance": {
+    "recorded_pre_review_matrix": "PASS_4_OF_4_LOCATIONS_23_OF_23_CHECKS",
+    "independent_detached_rerun": "PASS_23_OF_23",
+    "snapshot_candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+    "snapshot_review_attempt": 9,
+    "validated_implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+    "validated_implementation_tree": "c9f9ee68e57b03d890c6bfe6f8fed79876bb5a2b",
+    "packaging_commit": "3245ec6f94b4c47653f7737a2083079de736ec6e",
+    "packaging_tree": "fff64710a8f2ce18653c65c1a508816740305b83",
+    "freeze_commit_recording": "RECORDED_EXTERNALLY_AFTER_BYTE_FREEZE_TO_AVOID_CIRCULAR_SELF_REFERENCE",
+    "provenance_register_consistent_with_observed_archive_chain": true,
+    "candidate_status": "CANDIDATE_PENDING_SEGREGATED_AND_ADVERSARIAL_REREVIEW"
+  },
+  "predecessor_chain": [
+    {
+      "identity": "REVIEW_ATTEMPT_002_FAILED",
+      "classification": "IMMUTABLE_FAILED_REVIEW_ARCHIVE",
+      "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+      "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "payload_files": 108,
+      "physical_files": 111,
+      "physical_tree_sha256": "07cab5bf7187d8fccd8b157d2632496a37f95e53e6bf9bca8b13efca4bb388ed",
+      "manifest_hash_mismatches": 0,
+      "crc": "PASS"
+    },
+    {
+      "identity": "CANDIDATE_003_FAILED_FREEZE",
+      "classification": "IMMUTABLE_FAILED_REVIEW_ARCHIVE",
+      "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+      "payload_files": 121,
+      "physical_files": 124,
+      "physical_tree_sha256": "71140def629038807b9707c52279a937ee2c4c17c83e53c1147f801e206329f3",
+      "manifest_hash_mismatches": 0,
+      "crc": "PASS"
+    },
+    {
+      "identity": "CANDIDATE_004_FAILED_FREEZE",
+      "classification": "IMMUTABLE_FAILED_REVIEW_ARCHIVE",
+      "archive_sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+      "manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+      "payload_files": 207,
+      "physical_files": 210,
+      "physical_tree_sha256": "56c56077651b6db2a3faa5e78cac5f1822d62d87c583dec1644e40855eaff682",
+      "manifest_hash_mismatches": 0,
+      "crc": "PASS"
+    },
+    {
+      "identity": "CANDIDATE_005",
+      "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+      "archive_sha256": "41cc9ae595dbe640cc9aedf79fe84267d58ddb84355682626e237eccd5d3595c",
+      "external_manifest_sha256": "a0937895498704028cf8f450f18555ac7b54b5417a96248d62702a6fa7aff75f",
+      "manifest_rows": 249,
+      "physical_files": 249,
+      "physical_tree_sha256": "c862ad538d6c762879c74d6da3126f0ba36cde1cd8e286279b719a0e17abbea9",
+      "archive_manifest_path_set_equal": true,
+      "manifest_hash_mismatches": 0,
+      "crc": "PASS"
+    },
+    {
+      "identity": "CANDIDATE_006",
+      "classification": "IMMUTABLE_FROZEN_CANDIDATE",
+      "archive_sha256": "de4145d04779e0d1aa2b73bfff870f54637818c7ad895d74db82b6e9aa232068",
+      "manifest_sha256": "e75db726bd1ca48a8ecbd6dd9d204b7189d4d3f015c3ce4e07a460ad792b0274",
+      "payload_files": 253,
+      "physical_files": 256,
+      "physical_tree_sha256": "baca85f43e307b9655d596b0b93f6ca7040e93b57c2aee45b0af61c385d5df3c",
+      "manifest_hash_mismatches": 0,
+      "crc": "PASS"
+    },
+    {
+      "identity": "CANDIDATE_007",
+      "classification": "IMMUTABLE_FROZEN_CANDIDATE",
+      "archive_sha256": "e89cbed1ac280e1acb4c9a2105177037a5b2335afe8f4f9df38ab3033902c04e",
+      "manifest_sha256": "cb63e7e2da83368ad737ade7cc3b37d4b6b4281b4a6ab2dc6770f3e481964f1d",
+      "payload_files": 274,
+      "physical_files": 277,
+      "physical_tree_sha256": "f8d333006ef0b9381d626bcf097ad3d622b57e999f766fc8d5fa6288a717a43b",
+      "manifest_hash_mismatches": 0,
+      "crc": "PASS"
+    },
+    {
+      "identity": "CANDIDATE_008",
+      "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+      "archive_sha256": "d94da934bd820ed246f83e1a60453290c4178f6d15d57223103ee361fb61c9ca",
+      "external_manifest_sha256": "3f25672a322741603632b8c6b56522fce4eec807489ae18cde55c38a10101917",
+      "manifest_rows": 282,
+      "physical_files": 282,
+      "physical_tree_sha256": "124bd9cbc13547c30663297daf8d7e2663e7bbb33481d8b1d9c9d78e0dd8bd20",
+      "archive_manifest_path_set_equal": true,
+      "manifest_hash_mismatches": 0,
+      "crc": "PASS"
+    },
+    {
+      "identity": "CANDIDATE_009",
+      "classification": "CURRENT_IMMUTABLE_FROZEN_CANDIDATE",
+      "archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+      "manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+      "payload_files": 285,
+      "physical_files": 288,
+      "physical_tree_sha256": "4707ba7e12e0ef6ade5967bc120761b4f08d8b27214d23d2e3552f8ad73b2846",
+      "manifest_hash_mismatches": 0,
+      "crc": "PASS"
+    }
+  ],
+  "predecessor_reuse": {
+    "classification": "CORROBORATIVE_NONCONTROLLING_ONLY",
+    "controlling_for_candidate_009": false,
+    "containing_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+    "predecessor_lifecycle_artifact_sha256": "7e03815edf4c3ec8293d480029908e1b92286245f2c670f27d0d0756ff4315c7",
+    "predecessor_dependency_artifact_sha256": "be248999b1b320afc9eaea18224d42bd102877c77ad6d9f27916230dfe1f4a70",
+    "matching_dependency_inventory_sha256": "450e5933a3bb34ca2ad81fd5c62332006369ca4cd45ba510864406aaa23c7298",
+    "matching_fixture_foundation_sha256": "dd4447c925c97fdf23b4ac8c35e4306fe630b4dc5249b20049f29b4a3247e3ff",
+    "matching_fixture_digests_sha256": "95409294ef85c566dd390cf0301bb625e9e9d7602f191404d4238e0ea2a70e6c",
+    "fresh_candidate_009_controlling_evidence": {
+      "implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+      "lifecycle_result": "PASS_16_OF_16",
+      "lifecycle_artifact_sha256": "51069d440cda6468579b55211cd8eb9fb45d0dd194f8923a21d31229f50b373d",
+      "dependency_result": "PASS_127_OF_127",
+      "dependency_validation_sha256": "964161e034e9e1a4b683ebab19c6bf4863cad3b212cd910d8c2ca8493bd710e4",
+      "dependency_inventory_sha256": "450e5933a3bb34ca2ad81fd5c62332006369ca4cd45ba510864406aaa23c7298"
+    }
+  },
+  "residue_and_failure_separation": {
+    "candidate_006_bytecode_residue": {
+      "classification": "FROZEN_CANDIDATE_LOCAL_DIRECTORY_BYTECODE_RESIDUE",
+      "status": "CONTAINED_AND_RESTORED",
+      "quarantine_archive_sha256": "829fb2df0175ab475a8abba27bf36539af7ad3a82bc5b05f09a21d2344eaa2c9",
+      "quarantine_files": 3,
+      "quarantine_crc": "PASS",
+      "individual_hashes_verified": true,
+      "candidate_006_frozen_archive_modified": false,
+      "relationship_to_other_residue_or_runtime_selector": "NONE"
+    },
+    "segregated_mongodb_residue": {
+      "classification": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+      "process": "MONGOD_PID_62766_PGID_62766_PORT_27029",
+      "status": "CONTAINED_TERMINATED_PORT_CLEARED",
+      "accepted_database_or_orchestration_results_while_active": false,
+      "affected_checks_rerun": true,
+      "relationship_to_runtime_selector": "NOT_ESTABLISHED_DO_NOT_CONFLATE"
+    },
+    "controlled_identity_probe_residue": {
+      "classification": "CONTROLLED_IDENTITY_PROBE_TEMPORARY_PROCESS_RESIDUE",
+      "process_type": "READ_ONLY_LSOF_PROBES_NO_LISTENER",
+      "status": "VERIFIED_PROCESS_GROUPS_TERMINATED_PORTS_CLOSED",
+      "application_or_database_process_terminated": false,
+      "repository_or_sealed_files_changed": false,
+      "affected_attempt": "ATTEMPT_006_DISCARDED_AND_RERUN",
+      "relationship_to_mongodb_residue_or_runtime_selector": "NONE"
+    },
+    "candidate_008_failure": {
+      "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+      "cause": "COPIED_VALIDATOR_RETAINED_CANDIDATE_007_IDENTIFIER_WHILE_PROVENANCE_DECLARED_CANDIDATE_008",
+      "failed_check": "MV-016C-candidate-provenance-reuse",
+      "distinct_from_candidate_009": true
+    },
+    "separation_result": "PASS_EVENTS_AND_FAILED_ASSEMBLY_REMAIN_DISTINCT_AND_HASH_CONSISTENT"
+  },
+  "runtime_selector_boundary": {
+    "classification": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+    "status": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+    "direct_evidence_of_resolution": false,
+    "causal_relationship_to_residue_events": "NOT_ESTABLISHED_DO_NOT_CONFLATE",
+    "effect": "F0001_REMAINS_OPEN_BLOCKING_STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE"
+  },
+  "custodian_boundaries": [
+    "This review verifies custody, integrity, provenance, and evidence classification only.",
+    "This review does not self-close any finding.",
+    "This review does not authorize execution, promotion, release, lock, or production use.",
+    "This review does not provide external assurance.",
+    "Segregated and adversarial rereview and the authorized decision function remain controlling for technical closure."
+  ],
+  "recommendation": "PROCEED_TO_CONTROLLED_SEGREGATED_AND_ADVERSARIAL_REREVIEW_WITHOUT_FINDING_CLOSURE_OR_EXECUTION_AUTHORIZATION"
+}

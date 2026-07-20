@@ -1,0 +1,78 @@
+{
+  "archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "formal_closures_performed": 0,
+  "generated_utc": "2026-07-20T12:09:10Z",
+  "manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+  "package_control_disposition": "PASS_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+  "package_control_findings": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "reconciled_blockers": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "result": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "segregated_review": "PASS_23_OF_23_AT_FOUR_INVOCATION_LOCATIONS",
+      "adversarial_review": "DOCUMENTARY_CHALLENGE_PASS"
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "result": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "segregated_review": "PASS_9_REQUIREMENTS_5_FINDINGS_26_TESTS_143_SOURCES_115_OUTPUTS",
+      "adversarial_review": "DOCUMENTARY_CHALLENGE_PASS"
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "result": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "segregated_review": "PASS_PROVIDER_CHAIN_AND_STARTUP_STATE_ARITHMETIC_FAIL_CLOSED_NEGATIVE_CONTROLS",
+      "adversarial_review": "DOCUMENTARY_CHALLENGE_PASS"
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "result": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "segregated_review": "PASS_CONTENT_HASH_STREAM_HASH_EXIT_PROJECTION_MEANING_AND_REDACTION_CONTROLS",
+      "adversarial_review": "DOCUMENTARY_CHALLENGE_PASS"
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "result": "REMEDIATION_VERIFIED_TECHNICAL_CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "segregated_review": "PASS_PID_PPID_PGID_COMMAND_CWD_PORT_LISTENER_TIMESTAMP_AND_FAIL_CLOSED_CONTROLS",
+      "adversarial_review": "DOCUMENTARY_CHALLENGE_PASS"
+    }
+  ],
+  "review_evidence": [
+    {
+      "path": "stage2a/review_attempts/attempt-009/SEGREGATED_REREVIEW.json",
+      "sha256": "4d4cd8ce9912d9fc1d9b2a62ba42b95472fd439afb1d34c59142bb51d3cbfd13",
+      "result": "PASS_RECOMMEND_ACCEPTANCE_AND_CONTROLLED_FINDING_CLOSURE"
+    },
+    {
+      "path": "stage2a/review_attempts/attempt-009/ADVERSARIAL_REREVIEW.json",
+      "sha256": "7320ccf4d14f0accbb8fad9af909e951f31a7e930d3d2bed04e05d1bed6e72b7",
+      "result": "DOCUMENTARY_CHALLENGE_PASS_TECHNICAL_CLOSURE_RECOMMENDED_F0001_REMAINS_OPEN"
+    },
+    {
+      "path": "stage2a/review_attempts/attempt-009/CUSTODIAN_REVIEW.json",
+      "sha256": "a8abb353d48ff64d26c42e262d6904426ad7c88f855ac1a945eca3200caf3934",
+      "result": "CUSTODY_PASS_EVIDENCE_CHAIN_CONSISTENT_FOR_CONTROLLED_REREVIEW"
+    }
+  ],
+  "runtime_readiness": {
+    "agent_readiness_declared": false,
+    "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+    "primary_blocked_readiness_cause": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+    "runtime_agent_checks_complete": false,
+    "status": "OPEN_BLOCKING_RUNTIME_LIMITATION"
+  },
+  "self_closed": false,
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

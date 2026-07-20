@@ -1,0 +1,337 @@
+{
+  "schema_version": "1.0",
+  "review_id": "STAGE2A-SEGREGATED-REREVIEW-ATTEMPT-009",
+  "review_function": "SEGREGATED_INDEPENDENT_REREVIEW",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-009",
+  "completed_utc": "2026-07-20T12:00:45Z",
+  "review_source": "FROZEN_ARCHIVE_DISPOSABLE_EXTRACTION_ONLY",
+  "repository_candidate_executed_or_imported": false,
+  "python_bytecode_disabled": true,
+  "read_only_review": true,
+  "candidate_modified": false,
+  "archive_modified": false,
+  "services_started": false,
+  "self_closed": false,
+  "technical_review_result": "PASS",
+  "package_control_result": "PASS_RECOMMEND_ACCEPTANCE_AND_CONTROLLED_FINDING_CLOSURE",
+  "overall_readiness": "BLOCKED_BY_RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "technical_finding_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "freeze": {
+    "repository_head_observed_at_review": "553ad2a13c1a80c94f78239e25a20ab6fb477aa3",
+    "packaging_commit": "3245ec6f94b4c47653f7737a2083079de736ec6e",
+    "validated_implementation_commit": "3b9669231e01cf23edcfc2251674af15be1786dc",
+    "manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+    "manifest_rows": 285,
+    "manifest_verified": 285,
+    "physical_files": 288,
+    "symlinks": 0,
+    "candidate_tree_digest_algorithm": "SHA256_OVER_SORTED_RELATIVE_PATH_NUL_FILE_SHA256_NEWLINE",
+    "candidate_tree_digest_sha256": "7f12cb7c3240e9fa4ca0d2f163009f21327b18ba60b9eb963700fa0a5c04f874"
+  },
+  "archive": {
+    "path": "/Users/rianray/Documents/Codex/2026-07-16/files-mentioned-by-the-user-equinesync/outputs/ES-PKG-2026-004-V003-CANDIDATE-009_FROZEN.zip",
+    "sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81",
+    "file_count": 288,
+    "path_safety": "PASS",
+    "clean_extraction": "PASS",
+    "archive_candidate_byte_parity": "PASS",
+    "missing": 0,
+    "extra": 0,
+    "mismatched": 0,
+    "unsafe_paths": 0,
+    "temporary_extraction_removed": true
+  },
+  "before_after_immutability": {
+    "before": {
+      "candidate_tree_digest_sha256": "7f12cb7c3240e9fa4ca0d2f163009f21327b18ba60b9eb963700fa0a5c04f874",
+      "manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+      "archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81"
+    },
+    "after": {
+      "candidate_tree_digest_sha256": "7f12cb7c3240e9fa4ca0d2f163009f21327b18ba60b9eb963700fa0a5c04f874",
+      "manifest_sha256": "e2603777776a534abf23fe06efe26e92f35342c568be2c3c736f60909aa9f3be",
+      "archive_sha256": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81"
+    },
+    "unchanged": true,
+    "bytecode_residue": 0
+  },
+  "packaged_validator": {
+    "result": "PASS",
+    "score": "23/23",
+    "invocations": [
+      {
+        "location": "DISPOSABLE_EXTRACTED_PACKAGE_ROOT",
+        "resolution_mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD",
+        "result": "PASS_23_OF_23",
+        "stdout_sha256": "1021ba675b5e053ab0d418ea3f63b2bb3b4c790ae979457391f98bdbeabb34ba",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "DISPOSABLE_EXTRACTED_REVIEW_ATTEMPTS_ATTEMPT_004",
+        "resolution_mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD",
+        "result": "PASS_23_OF_23",
+        "stdout_sha256": "4f51eff7d214b0b9955300710e56e50a5da154762f022cf072b1c57a4a59c629",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "/private/tmp",
+        "resolution_mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD",
+        "result": "PASS_23_OF_23",
+        "stdout_sha256": "b6c668c8a1abc817ee8bbd3aba321702b9b151f2fa98fc50f277094495b1dc93",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "SECOND_FRESH_TEMPORARY_EXTRACTION",
+        "resolution_mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD",
+        "result": "PASS_23_OF_23",
+        "stdout_sha256": "2e3e0a2c185265b43654f6f9050d307b52e47f3498baf75e8cbf54ab719e3bee",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytecode_residue": 0
+      }
+    ]
+  },
+  "independent_controls": {
+    "json_parse": {
+      "result": "PASS",
+      "files": 131
+    },
+    "csv_parse": {
+      "result": "PASS",
+      "files": 6,
+      "data_rows": 199
+    },
+    "json_csv_exact_parity": {
+      "result": "PASS",
+      "registers": {
+        "STAGE2A_SOURCE_EVIDENCE_REGISTER": 143,
+        "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX": 9,
+        "STAGE2A_TEST_CONTROL_REGISTER": 26,
+        "STAGE2A_FINDING_TO_REMEDIATION_MATRIX": 5,
+        "PROVIDER_DENIAL_REGISTER": 11,
+        "F0002_CLOSURE_EVIDENCE_REGISTER": 5
+      }
+    },
+    "source_payload": {
+      "result": "PASS",
+      "rows": 143,
+      "missing_or_hash_mismatched": 0,
+      "authority_boundary": "DETACHED_PAYLOAD_HASHES_VERIFIED; RECORDED_GIT_ANCHORS_RETAINED_WITHOUT_EXECUTING_REPOSITORY_CANDIDATE"
+    },
+    "traceability": {
+      "result": "PASS",
+      "requirements": 9,
+      "findings": 5,
+      "executable_tests": 26,
+      "output_mappings": 115,
+      "dangling_references": 0,
+      "generic_all_requirement_mappings": 0
+    },
+    "provider_guard": {
+      "result": "PASS",
+      "guard_session_id": "9a545fc415554dab98a6c1537ad0a621",
+      "api_pid": 99186,
+      "api_process_group_id": 99186,
+      "provider_registry_sha256": "596a1707b8060e37c7dcbe3e42399173a928768521e22806818744bbef1db895",
+      "provider_events": 11,
+      "network_attempt_events": 0,
+      "event_chain_sha256": "3774229e4f584a7714ff30fd611fb74877c78e8926e2341c4dc5aba3009eb937",
+      "event_chain_valid": true,
+      "process_identity_bound": true,
+      "attempted": 0,
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 4,
+      "timed_out": 0,
+      "unavailable": 7,
+      "unattributed_attempts": 0,
+      "fully_rehashed_semantic_mutations": "FAIL_CLOSED",
+      "removed_embedded_provider_events_mutation": "MV-016A_FAIL_CLOSED"
+    },
+    "startup_side_effects": {
+      "result": "PASS",
+      "oracle_match": true,
+      "startup_document_writes": 0,
+      "provider_attempts": 0,
+      "attempted": 3,
+      "succeeded": 2,
+      "failed": 1,
+      "skipped": 1,
+      "timed_out": 0,
+      "unavailable": 0,
+      "arithmetic_valid": true
+    },
+    "evidence_semantics_and_redaction": {
+      "result": "PASS",
+      "pass_fixture_exit": 0,
+      "intentional_fail_fixture_exit": 7,
+      "record_content_hashes_recomputed": true,
+      "stream_hashes_recomputed": true,
+      "expected_actual_exit_match": true,
+      "meaning_preserved": true,
+      "unredacted_sensitive_matches": 0
+    },
+    "process_identity": {
+      "result": "PASS",
+      "packaged_command_hashes_recomputed": true,
+      "controlled_working_directory": "REPOSITORY_ROOT/stage2a",
+      "listener_identity_verified": true,
+      "foreign_listener_conflicts": 0,
+      "controlled_shutdown_processes": 2,
+      "process_groups_verified": true,
+      "runtime_conflict_tests": "PASS",
+      "forged_command_hash_and_working_directory_mutation": "MV-016B_FAIL_CLOSED"
+    },
+    "reuse_and_rerun": {
+      "result": "PASS",
+      "reused_predecessor_evidence": 2,
+      "reused_evidence_hashes_recomputed": true,
+      "reused_evidence_controlling": false,
+      "invalidated_blocker_checks": 5,
+      "rerun_blocker_checks": 5,
+      "mv_016c": "PASS"
+    },
+    "targeted_pure_unit_tests": {
+      "result": "PASS",
+      "tests": 5,
+      "coverage": [
+        "fully_rehashed provider semantic mutations",
+        "provider event chain and attribution",
+        "process command and group conflicts",
+        "process timestamp and reparenting conflicts",
+        "verified pre-listener termination boundary"
+      ]
+    },
+    "detached_full_unit_harness_note": {
+      "classification": "NONCONTROLLING_CONTEXT_LIMITATION",
+      "total": 36,
+      "passed": 34,
+      "context_coupled": 2,
+      "details": [
+        "validator root-resolution unit assumes a repository root and returns None in a detached source payload",
+        "packaged mutation unit contains a historical Candidate006 repository path and cannot locate that path inside the detached Candidate009 source payload"
+      ],
+      "control_objectives_independently_satisfied": true,
+      "basis": "Four detached validator locations passed, targeted current-Candidate009 provider/process mutations failed closed, and five targeted runtime tests passed."
+    }
+  },
+  "failed_artifact_preservation": {
+    "candidate_007": {
+      "result": "PASS",
+      "archive_sha256": "e89cbed1ac280e1acb4c9a2105177037a5b2335afe8f4f9df38ab3033902c04e",
+      "manifest_sha256": "cb63e7e2da83368ad737ade7cc3b37d4b6b4281b4a6ab2dc6770f3e481964f1d",
+      "payload_rows_verified": 274,
+      "physical_files": 277,
+      "failed_disposition_records_preserved": true
+    },
+    "candidate_008": {
+      "result": "PASS",
+      "archive_sha256": "d94da934bd820ed246f83e1a60453290c4178f6d15d57223103ee361fb61c9ca",
+      "external_manifest_sha256": "3f25672a322741603632b8c6b56522fce4eec807489ae18cde55c38a10101917",
+      "manifest_rows_verified": 282,
+      "physical_files": 282,
+      "failed_assembly_records_preserved": true
+    }
+  },
+  "five_blocker_assessment": [
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "blocker_classification": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "technical_result": "REMEDIATION_VERIFIED",
+      "recommended_disposition": "RECOMMEND_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "self_closed": false,
+      "basis": "The frozen validator passed 23/23 from extracted package root, nested package directory, external /private/tmp, and a second fresh extraction."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "blocker_classification": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "technical_result": "REMEDIATION_VERIFIED",
+      "recommended_disposition": "RECOMMEND_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "self_closed": false,
+      "basis": "Nine requirements, five findings, 26 registered executable controls, 143 source rows, and 115 output mappings resolve exactly without dangling or generic all-requirement mappings."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "blocker_classification": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "technical_result": "REMEDIATION_VERIFIED",
+      "recommended_disposition": "RECOMMEND_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "self_closed": false,
+      "basis": "Provider registry, event semantics, terminal arithmetic, process binding, and the 11-event hash chain independently recompute. Fully rehashed outcome/reason mutations and removal of embedded events now fail closed."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "blocker_classification": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "technical_result": "REMEDIATION_VERIFIED",
+      "recommended_disposition": "RECOMMEND_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "self_closed": false,
+      "basis": "Both evidence records pass independent content-hash, stream-hash, exit-result, projection, meaning-preservation, and redaction checks."
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "blocker_classification": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "technical_result": "REMEDIATION_VERIFIED",
+      "recommended_disposition": "RECOMMEND_CLOSURE_BY_AUTHORIZED_RECONCILIATION",
+      "self_closed": false,
+      "basis": "Packaged command hashes, controlled working directory, PID/PGID, listeners, timestamps, and shutdown controls reconcile; runtime conflicts and forged packaged process evidence fail closed."
+    }
+  ],
+  "runtime_selector_and_residue": {
+    "runtime_selector": {
+      "event_classification": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+      "status": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+      "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+      "direct_evidence_of_resolution": false,
+      "technical_implementation_failure": false
+    },
+    "mongo_residue": {
+      "event_classification": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+      "status": "CONTAINED_TERMINATED_PORT_CLEARED",
+      "attribution": "VERIFIED_TEMPORARY_SEGREGATED_REVIEW_CLONE",
+      "orchestrator_behavior": "CORRECT_FAIL_CLOSED_REFUSAL_OF_UNVERIFIED_FOREIGN_PATH_PROCESS",
+      "final_disposition": "NO_CAUSAL_INFLUENCE_ESTABLISHED"
+    },
+    "causal_relationship": "NOT_ESTABLISHED_DO_NOT_CONFLATE",
+    "package_control_effect": "NONE",
+    "readiness_effect": "RUNTIME_SELECTOR_CONTINUES_TO_BLOCK_STAGE2A"
+  },
+  "commands_and_evidence": [
+    {
+      "command": "shasum -a 256 ES-PKG-2026-004-V003-CANDIDATE-009_FROZEN.zip",
+      "result": "10a23100b1ccdcab2b7b05f5aa9deb1d5373b817fceb532d5474d6750e452a81"
+    },
+    {
+      "command": "extract frozen archive to disposable /private/tmp; independently verify DRAFT_REVIEW_SHA256SUMS.txt and archive parity",
+      "result": "MANIFEST_285_OF_285; ARCHIVE_PARITY_288_OF_288; NO_UNSAFE_PATHS_OR_SYMLINKS"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 <venv-python> <extracted>/validate_stage2a_package.py <extracted>",
+      "result": "PASS_23_OF_23_FROM_FOUR_INVOCATION_CLASSES"
+    },
+    {
+      "command": "independent JSON/CSV, detached source-payload, trace, provider-chain, startup, evidence, process, and reuse/rerun recomputation",
+      "result": "PASS"
+    },
+    {
+      "command": "temporary fresh-extraction mutation removing embedded provider events and zeroing chain count/head",
+      "result": "MV-016A-provider-startup-measurement=FAIL_AS_REQUIRED"
+    },
+    {
+      "command": "temporary fresh-extraction mutation forging packaged API command hash and working directory",
+      "result": "MV-016B-process-identity=FAIL_AS_REQUIRED"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 <venv-python> -m unittest <five targeted provider/process tests>",
+      "result": "RAN_5_TESTS_OK"
+    },
+    {
+      "command": "read-only verification of Candidate007 and Candidate008 archives and manifests",
+      "result": "CANDIDATE007_PASS_274_OF_274_277_PHYSICAL; CANDIDATE008_PASS_282_OF_282"
+    }
+  ]
+}
