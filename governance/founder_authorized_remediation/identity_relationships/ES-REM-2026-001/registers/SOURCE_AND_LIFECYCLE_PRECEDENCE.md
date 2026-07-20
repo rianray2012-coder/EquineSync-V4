@@ -14,6 +14,12 @@
 
 The historical raw V2.1 source hash `af34895d8248f0fa26f7c976c345caa7ac9fba7b7bf4f597d32bfb68e0797d20` is preserved in the C0-019 source event. The controlling locked Markdown adds lifecycle metadata and has hash `1855d7f4419c236e4d8638f9587cf2e96ad58b079d69d34a9b2188ad1ba80cc9`. The C0-019 lock record explicitly links both; neither hash is treated as an unexplained replacement.
 
-## Remaining source limitation
+## Product Implementation Atlas V1.1 lineage and resolved source gate
 
-The exact repository bytes for the Product Implementation Atlas Master Standard V1.1 are not present in the active source tree found during this remediation. Its Founder-approved/effective status remains preserved, but its exact source path and checksum remain an explicit ratification blocker. The successor narrows completeness claims accordingly and does not invent a hash.
+The Founder supplied the exact controlling substantive bytes for `ES-PIA-MASTER-STANDARD-V1.1`. Direct SHA-256 verification produced `c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc`, matching the Founder-declared source hash. The exact bytes are preserved at `source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf`.
+
+The V1.1 PDF's document header remains `REVISED_CANDIDATE_FOR_FOUNDER_REVIEW`. That historical header is not rewritten. The separately preserved `Founder Adoption and Approval Record` names `ES-PIA-MASTER-STANDARD-V1.1`, records disposition `FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE`, and states that V1.1 became the controlling PIA standard on July 19, 2026. The Founder source-supply directive binds the supplied exact bytes and declared checksum to that document identity. The supplementary adoption record confirms the adopted definition, purpose, mandatory content, five readiness questions, and implementation chain.
+
+The separately supplied `ES-PIA-MASTER-STANDARD-V1.0` PDF identifies itself as `DRAFT_FOR_FOUNDER_REVIEW`; the V1.1 adoption record says V1.1 supersedes that prior candidate. V1.0 is preserved only as historical evidence and is not used as a controlling source.
+
+Accordingly, `PIA_MASTER_STANDARD_V1_1_EXACT_SOURCE_BYTES_NOT_VERIFIED` is resolved for this package. This resolution does not approve or ratify any candidate ADR or proposed redline. Fresh segregated review remains required before any new ratification request.

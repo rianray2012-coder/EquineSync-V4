@@ -175,12 +175,42 @@
     {
       "source_id": "ES-SRC-PIA-STANDARD",
       "title": "Product Implementation Atlas Master Standard V1.1",
-      "active_path": "FOUNDER_CONTROLLED_INPUT_NOT_PRESENT_AS_EXACT_REPOSITORY_SOURCE",
-      "sha256": null,
-      "lifecycle": "FOUNDER_APPROVED_ADOPTED_EFFECTIVE",
+      "active_path": "source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf",
+      "sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc",
+      "lifecycle": "FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE_BY_SEPARATE_RECORD",
       "authority_role": "PIA structure lifecycle gates and evidence",
-      "evidence": "frozen predecessor source registers",
-      "ratification_eligibility": "UNRESOLVED_EXACT_BYTES_BLOCK_RATIFICATION"
+      "evidence": "FOUNDER_PIA_SOURCE_SUPPLY_RECORD.md;source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf;registers/PIA_MASTER_STANDARD_V1_1_INGESTION_RECORD.json",
+      "ratification_eligibility": "ELIGIBLE_CONTROLLING_SOURCE_EXACT_BYTES_VERIFIED"
+    },
+    {
+      "source_id": "ES-SRC-PIA-ADOPTION-APPROVAL",
+      "title": "Founder Adoption and Approval Record for ES-PIA-MASTER-STANDARD-V1.1",
+      "active_path": "source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf",
+      "sha256": "bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8",
+      "lifecycle": "FOUNDER_DECISION_EFFECTIVE_2026-07-19",
+      "authority_role": "Controlling adoption and effectiveness authority",
+      "evidence": "FOUNDER_PIA_SOURCE_SUPPLY_RECORD.md;registers/PIA_MASTER_STANDARD_V1_1_INGESTION_RECORD.json",
+      "ratification_eligibility": "CONTROLLING_LIFECYCLE_AUTHORITY"
+    },
+    {
+      "source_id": "ES-SRC-PIA-ADOPTION-SUPPLEMENTARY",
+      "title": "Founder Adoption Record for Product Implementation Atlas Framework",
+      "active_path": "source_evidence/adoption/Founder_Adoption_Record_PIA_Framework_Supplementary.pdf",
+      "sha256": "2e177a6e6542ef2fc9c8f83515a23d03595fc344ed03162121903cd3097fbfec",
+      "lifecycle": "FOUNDER_ADOPTED_PIA_DEFINITION_PURPOSE_AND_MANDATORY_CONTENT_REQUIREMENTS",
+      "authority_role": "Supplementary PIA definition purpose mandatory content five readiness questions and implementation chain",
+      "evidence": "registers/PIA_MASTER_STANDARD_V1_1_INGESTION_RECORD.json",
+      "ratification_eligibility": "SUPPLEMENTARY_AUTHORITY"
+    },
+    {
+      "source_id": "ES-SRC-PIA-STANDARD-V1.0",
+      "title": "Product Implementation Atlas Master Standard V1.0",
+      "active_path": "source_evidence/historical/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_0_SUPERSEDED.pdf",
+      "sha256": "32297da280312b7fbab1420aa21ca338ee4a8eecce46e0046a617d5e3aa04422",
+      "lifecycle": "SUPERSEDED_PREDECESSOR_CANDIDATE",
+      "authority_role": "Historical predecessor evidence only",
+      "evidence": "source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf",
+      "ratification_eligibility": "NOT_CONTROLLING_HISTORICAL_ONLY"
     }
   ]
 }

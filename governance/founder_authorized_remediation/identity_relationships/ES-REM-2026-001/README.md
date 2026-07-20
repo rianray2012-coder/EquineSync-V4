@@ -19,6 +19,14 @@ The package converts all 2 P0 and 16 P1 findings into explicit candidate correct
 - `review_basis/EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Result_V1_0_0.zip` is the completed controlled review result.
 - The copied review registers remain evidence; this successor does not rewrite them.
 
+## Product Implementation Atlas source evidence
+
+- `source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf` is the Founder-supplied exact-byte controlling substantive source for document `ES-PIA-MASTER-STANDARD-V1.1` (`SHA-256 c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc`).
+- `source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf` is the controlling adoption and effectiveness record (`SHA-256 bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8`). It establishes `FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE` on July 19, 2026.
+- `source_evidence/adoption/Founder_Adoption_Record_PIA_Framework_Supplementary.pdf` is supplementary authority for the PIA definition, purpose, mandatory content, five readiness questions, and implementation chain (`SHA-256 2e177a6e6542ef2fc9c8f83515a23d03595fc344ed03162121903cd3097fbfec`).
+- `source_evidence/historical/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_0_SUPERSEDED.pdf` is preserved only as a superseded predecessor candidate (`SHA-256 32297da280312b7fbab1420aa21ca338ee4a8eecce46e0046a617d5e3aa04422`). It is not a controlling source.
+- The V1.1 PDF's internal header remains `REVISED_CANDIDATE_FOR_FOUNDER_REVIEW`; its later lifecycle is established by the separate adoption record. Neither source file is rewritten.
+
 ## Candidate outputs
 
 - 14 corrected ADR candidates under `candidate_adrs/`.
@@ -29,5 +37,7 @@ The package converts all 2 P0 and 16 P1 findings into explicit candidate correct
 ## Gate
 
 This package is not a ratification request. Before any ratification request, a new immutable review object must be assembled and a fresh segregated controlled-thread review must verify exact candidate wording, source authority, contract concurrence, complete acceptance traceability, package integrity, and the absence of implementation effects.
+
+The prior gate `PIA_MASTER_STANDARD_V1_1_EXACT_SOURCE_BYTES_NOT_VERIFIED` is resolved for this package by direct hashing and exact-byte ingestion. Resolving that source gate does not ratify or approve any candidate ADR or proposed redline.
 
 The fresh review may reject or amend candidate text. No redline becomes approved merely because it appears in a candidate.

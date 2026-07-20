@@ -21,6 +21,15 @@
     "adopted": 0,
     "locked": 0
   },
+  "pia_master_standard_v1_1_source_gate": {
+    "gate_id": "PIA_MASTER_STANDARD_V1_1_EXACT_SOURCE_BYTES_NOT_VERIFIED",
+    "status": "RESOLVED_EXACT_BYTES_VERIFIED_AND_INGESTED",
+    "document_id": "ES-PIA-MASTER-STANDARD-V1.1",
+    "source_sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc",
+    "adoption_record_sha256": "bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8",
+    "effective_date": "2026-07-19",
+    "approval_effect_on_candidate_adrs": "NONE"
+  },
   "fresh_segregated_review": "REQUIRED_NOT_EXECUTED",
   "implementation_authorized": false,
   "application_started": false,

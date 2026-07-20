@@ -15,11 +15,34 @@
     "locked_markdown_sha256": "1855d7f4419c236e4d8638f9587cf2e96ad58b079d69d34a9b2188ad1ba80cc9",
     "lock_record": "docs/canon/locks/agreement_consent_authorization_v2_1/C0_019_AGREEMENT_CONSENT_AND_AUTHORIZATION_CONSTITUTIONAL_LOCK_RECORD.md"
   },
-  "unresolved_for_ratification": [
+  "pia_master_standard_v1_1_lineage": {
+    "document_id": "ES-PIA-MASTER-STANDARD-V1.1",
+    "exact_source_path": "source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf",
+    "exact_source_sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc",
+    "internal_header_status": "REVISED_CANDIDATE_FOR_FOUNDER_REVIEW",
+    "lifecycle_authority_path": "source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf",
+    "lifecycle_authority_sha256": "bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8",
+    "lifecycle_status": "FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE",
+    "effective_date": "2026-07-19",
+    "supplementary_authority_path": "source_evidence/adoption/Founder_Adoption_Record_PIA_Framework_Supplementary.pdf",
+    "supplementary_authority_sha256": "2e177a6e6542ef2fc9c8f83515a23d03595fc344ed03162121903cd3097fbfec",
+    "superseded_v1_0_path": "source_evidence/historical/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_0_SUPERSEDED.pdf",
+    "superseded_v1_0_sha256": "32297da280312b7fbab1420aa21ca338ee4a8eecce46e0046a617d5e3aa04422",
+    "superseded_v1_0_use": "HISTORICAL_NONCONTROLLING_ONLY"
+  },
+  "resolved_source_gates": [
     {
+      "gate_id": "PIA_MASTER_STANDARD_V1_1_EXACT_SOURCE_BYTES_NOT_VERIFIED",
       "source_id": "ES-SRC-PIA-STANDARD",
-      "reason": "exact active repository bytes and checksum not found",
-      "effect": "BLOCKS_RATIFICATION_NOT_CANDIDATE_PACKAGING"
+      "status": "RESOLVED_EXACT_BYTES_VERIFIED_AND_INGESTED",
+      "resolved_by": "DIRECT_SHA256_MATCH_AND_FOUNDER_SOURCE_IDENTIFICATION",
+      "approval_effect": "NONE"
     }
+  ],
+  "unresolved_for_ratification": [],
+  "remaining_controls": [
+    "FRESH_SEGREGATED_CONTROLLED_THREAD_REVIEW_REQUIRED",
+    "ALL_19_REDLINES_REMAIN_PROPOSED_NOT_APPROVED",
+    "EXPRESS_FOUNDER_APPROVAL_REQUIRED_BEFORE_ANY_CANDIDATE_ADR_RATIFICATION"
   ]
 }

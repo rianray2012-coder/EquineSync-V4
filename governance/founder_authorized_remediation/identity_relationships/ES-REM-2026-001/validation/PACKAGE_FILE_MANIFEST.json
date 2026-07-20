@@ -15,9 +15,14 @@
       "sha256": "3048400638a390b79aae5d69b0f880d73f4f9c84745dd5b44796da502a70ddf1"
     },
     {
+      "path": "FOUNDER_PIA_SOURCE_SUPPLY_RECORD.md",
+      "bytes": 1795,
+      "sha256": "6df8d7c0b2188e0a0e48cdd27d9127191c827ece2c25b8e8783a603e0dfbf6aa"
+    },
+    {
       "path": "FRESH_SEGREGATED_REVIEW_HANDOFF.md",
-      "bytes": 1151,
-      "sha256": "813b39fb8bb20d89a8c99d5d0f6039e0ec01c2be131ae85a38e24876b6fa2131"
+      "bytes": 1709,
+      "sha256": "6a1a94113a5ede386abe512b415711d4fdb2f2251b29139bfc730287439f6892"
     },
     {
       "path": "NON_IMPLEMENTATION_ATTESTATION.md",
@@ -26,13 +31,13 @@
     },
     {
       "path": "PACKAGE_STATUS.json",
-      "bytes": 953,
-      "sha256": "8900a0804bc8ac42a83ef61ce2594a0812cdcfc5d03c7d7f3ddcf5501f88933f"
+      "bytes": 1458,
+      "sha256": "d9e64692791f90e77dbdd53bbcf3d8c1474c5f0eb0f936c90960dc12ee4a5f03"
     },
     {
       "path": "README.md",
-      "bytes": 2388,
-      "sha256": "6e378045b91241f09f08a7bc965a195c7e619d8315bc9ce1cbe3fb9b0d78d4f1"
+      "bytes": 4015,
+      "sha256": "f767d8b699ea21eb03497ee37acb6f46c7a40ab5d10581dfa6b1942eff475bb3"
     },
     {
       "path": "candidate_adrs/identity/ADR-IDENTITY-001_FORMAL.md",
@@ -200,14 +205,24 @@
       "sha256": "d90fd6426cca8748e41727496cdc1644c2f485cb9a5cbf108a7a0d6140554b48"
     },
     {
+      "path": "registers/PIA_MASTER_STANDARD_V1_1_INGESTION_RECORD.json",
+      "bytes": 2290,
+      "sha256": "2961e3d939cc61d91e3870900527e84f380772f4bc125e4301a012bc57640236"
+    },
+    {
+      "path": "registers/PIA_MASTER_STANDARD_V1_1_INGESTION_RECORD.md",
+      "bytes": 2159,
+      "sha256": "e7da0c12b0cbb2b77fced6b060ca5d702001d11dd44baad202d908e77b1f4445"
+    },
+    {
       "path": "registers/PREDECESSOR_AND_REVIEW_PROVENANCE.json",
-      "bytes": 1104,
-      "sha256": "c6e73ef9b1638a79cfba88f6545aedfc7a6897ce62de3aa5087c9fac3609e0b9"
+      "bytes": 2604,
+      "sha256": "1ed5c1c0c2e53b8269504178655665143694333dcf0019d09b86821eb2af25fd"
     },
     {
       "path": "registers/REDLINE_RECONCILIATION_REGISTER.csv",
-      "bytes": 15767,
-      "sha256": "a3e3824fe53e7c22a46f5bb6da912694af096c73efe2361b367c1c72e5fe7832"
+      "bytes": 15917,
+      "sha256": "b26745f8146f7b407f9312ce37dbfb5defb9f5d57715e5c78e3847c6c08be02c"
     },
     {
       "path": "registers/REDLINE_STATUS.json",
@@ -226,38 +241,38 @@
     },
     {
       "path": "registers/REMEDIATION_TRACEABILITY.csv",
-      "bytes": 12318,
-      "sha256": "3534027e7a4e40c61b7fde8996fb8a4c94ef02582cbe475346dacdee5650a39c"
+      "bytes": 12468,
+      "sha256": "2b0f128daf820b1ed90ea196a71b965b88339ff091f162921a124c62bf44264d"
     },
     {
       "path": "registers/SOURCE_AND_LIFECYCLE_PRECEDENCE.json",
-      "bytes": 1116,
-      "sha256": "7be97ae87404a09f7b7c7dbea1c82b8d518d2cb0f27c47d7f307275e591be4cc"
+      "bytes": 2713,
+      "sha256": "7584bb5bd4a100df5be6ff8f562c5eb0f52d1078988379f979dbe98cdc43510e"
     },
     {
       "path": "registers/SOURCE_AND_LIFECYCLE_PRECEDENCE.md",
-      "bytes": 2025,
-      "sha256": "21304538e39fe414c226ffb1e71ced1bde29fc2afcf2eef8ebc2ca9b19f3ce45"
+      "bytes": 3208,
+      "sha256": "8ca00b4e645f402ccf61c9d222898a263651d764db4939db2d60442ea1e5c173"
     },
     {
       "path": "registers/SOURCE_AUTHORITY_REGISTER.csv",
-      "bytes": 6641,
-      "sha256": "b017c622d717832f16a4d4ae3104ab9809212920fb9a430356b5b68d890c5185"
+      "bytes": 8330,
+      "sha256": "c57d02b02aadfb57816fdbf994c13279a1240499a5118d8e2fb690a21cc59635"
     },
     {
       "path": "registers/SOURCE_AUTHORITY_REGISTER.json",
-      "bytes": 10271,
-      "sha256": "a9e0dfaa938999eb0281277b81613abd7b81a2cb44f6f6ca2e2c3942a0edb379"
+      "bytes": 12564,
+      "sha256": "4930375f94a15a1bc52e1eede13babad784eae76ed6b76262e3da92312a30b89"
     },
     {
       "path": "registers/SOURCE_ID_CROSSWALK.csv",
-      "bytes": 4617,
-      "sha256": "d5ff01f6ef9d775be5be816533198e3e47d550c5985ee088c7ae5f76afdee871"
+      "bytes": 4641,
+      "sha256": "82f12e44666112ab443bfc6d1a6aad19ab563033b1eaf9bed56d411007a91f7c"
     },
     {
       "path": "registers/SUCCESSOR_ACCEPTANCE_CRITERIA.csv",
-      "bytes": 10535,
-      "sha256": "df2da269d9ea97c84551cd029036c8a6d48fdd3e7e2f3bbd90b3e47858d52467"
+      "bytes": 10685,
+      "sha256": "b476a6a33b74cd73d73fccdd00404ab726d1d2c9e54b92fb6fd0e1dd24d2979f"
     },
     {
       "path": "review_basis/DISSENT_REGISTER.csv",
@@ -283,6 +298,26 @@
       "path": "review_basis/SYNTHESIZED_FINDINGS.csv",
       "bytes": 36974,
       "sha256": "1fe8e07ceda410393fd6508cfdecd6d8328ee3edc0fe31cced0ff590dc091600"
+    },
+    {
+      "path": "source_evidence/adoption/Founder_Adoption_Record_PIA_Framework_Supplementary.pdf",
+      "bytes": 23055,
+      "sha256": "2e177a6e6542ef2fc9c8f83515a23d03595fc344ed03162121903cd3097fbfec"
+    },
+    {
+      "path": "source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf",
+      "bytes": 31022,
+      "sha256": "bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8"
+    },
+    {
+      "path": "source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf",
+      "bytes": 348722,
+      "sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc"
+    },
+    {
+      "path": "source_evidence/historical/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_0_SUPERSEDED.pdf",
+      "bytes": 315317,
+      "sha256": "32297da280312b7fbab1420aa21ca338ee4a8eecce46e0046a617d5e3aa04422"
     }
   ]
 }

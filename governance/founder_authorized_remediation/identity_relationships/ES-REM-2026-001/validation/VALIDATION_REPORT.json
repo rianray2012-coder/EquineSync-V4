@@ -5,6 +5,11 @@
   "checks": {
     "frozen_predecessor_sha256": "PASS",
     "controlled_review_result_sha256": "PASS",
+    "pia_v1_1_exact_source_sha256": "PASS",
+    "pia_v1_1_adoption_record_sha256": "PASS",
+    "pia_supplementary_adoption_record_sha256": "PASS",
+    "pia_v1_0_superseded_candidate_sha256": "PASS",
+    "pia_master_standard_v1_1_exact_source_gate": "RESOLVED_EXACT_BYTES_VERIFIED_AND_INGESTED",
     "candidate_adrs_14": "PASS",
     "finding_counts_2_16_7": "PASS",
     "remediation_rows_25": "PASS",
@@ -16,5 +21,6 @@
     "fresh_review_executed": "NO_REQUIRED_NEXT_GATE",
     "implementation_authorized": "NO"
   },
-  "known_gate": "Exact Product Implementation Atlas Master Standard V1.1 repository bytes and checksum remain unresolved for ratification."
+  "resolved_gate": "PIA_MASTER_STANDARD_V1_1_EXACT_SOURCE_BYTES_NOT_VERIFIED",
+  "known_gate": "Fresh segregated controlled-thread review remains required before any new ratification request."
 }

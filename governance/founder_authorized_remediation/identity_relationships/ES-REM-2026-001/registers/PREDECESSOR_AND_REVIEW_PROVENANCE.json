@@ -12,6 +12,33 @@
     "review_cycle": "ES-REV-2026-002",
     "disposition": "IDENTITY_AND_RELATIONSHIPS_REQUIRE_BOUNDED_REMEDIATION"
   },
+  "founder_supplied_pia_source_set": {
+    "supply_record": "FOUNDER_PIA_SOURCE_SUPPLY_RECORD.md",
+    "direct_hash_verification": "PASS",
+    "controlling_substantive_source": {
+      "document_id": "ES-PIA-MASTER-STANDARD-V1.1",
+      "path": "source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf",
+      "sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc"
+    },
+    "controlling_adoption_and_effectiveness_record": {
+      "path": "source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf",
+      "sha256": "bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8",
+      "disposition": "FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE",
+      "effective_date": "2026-07-19"
+    },
+    "supplementary_authority": {
+      "path": "source_evidence/adoption/Founder_Adoption_Record_PIA_Framework_Supplementary.pdf",
+      "sha256": "2e177a6e6542ef2fc9c8f83515a23d03595fc344ed03162121903cd3097fbfec"
+    },
+    "superseded_predecessor_candidate": {
+      "document_id": "ES-PIA-MASTER-STANDARD-V1.0",
+      "path": "source_evidence/historical/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_0_SUPERSEDED.pdf",
+      "sha256": "32297da280312b7fbab1420aa21ca338ee4a8eecce46e0046a617d5e3aa04422",
+      "controlling_use": false
+    },
+    "source_gate": "PIA_MASTER_STANDARD_V1_1_EXACT_SOURCE_BYTES_NOT_VERIFIED",
+    "source_gate_status": "RESOLVED_EXACT_BYTES_VERIFIED_AND_INGESTED"
+  },
   "repository_chain": {
     "global_governance_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
     "controlled_review_authorization": "75c56ac67b0de694436c093fc2dc5ff5dffe4ff3",

@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "ES-REM-2026-001",
+  "gate_id": "PIA_MASTER_STANDARD_V1_1_EXACT_SOURCE_BYTES_NOT_VERIFIED",
+  "gate_status": "RESOLVED_EXACT_BYTES_VERIFIED_AND_INGESTED",
+  "verification_date": "2026-07-20",
+  "documents": [
+    {
+      "role": "CONTROLLING_SUBSTANTIVE_SOURCE",
+      "document_id": "ES-PIA-MASTER-STANDARD-V1.1",
+      "path": "source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf",
+      "sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc",
+      "declared_hash_match": true,
+      "internal_header_status": "REVISED_CANDIDATE_FOR_FOUNDER_REVIEW",
+      "current_lifecycle_status": "FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE_BY_SEPARATE_RECORD"
+    },
+    {
+      "role": "CONTROLLING_ADOPTION_AND_EFFECTIVENESS_RECORD",
+      "path": "source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf",
+      "sha256": "bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8",
+      "declared_hash_match": true,
+      "approved_document_id": "ES-PIA-MASTER-STANDARD-V1.1",
+      "disposition": "FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE",
+      "effective_date": "2026-07-19"
+    },
+    {
+      "role": "SUPPLEMENTARY_FOUNDER_AUTHORITY",
+      "path": "source_evidence/adoption/Founder_Adoption_Record_PIA_Framework_Supplementary.pdf",
+      "sha256": "2e177a6e6542ef2fc9c8f83515a23d03595fc344ed03162121903cd3097fbfec",
+      "declared_hash_match": null,
+      "disposition": "FOUNDER_ADOPTED_PIA_DEFINITION_PURPOSE_AND_MANDATORY_CONTENT_REQUIREMENTS"
+    },
+    {
+      "role": "SUPERSEDED_HISTORICAL_PREDECESSOR_CANDIDATE",
+      "document_id": "ES-PIA-MASTER-STANDARD-V1.0",
+      "path": "source_evidence/historical/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_0_SUPERSEDED.pdf",
+      "sha256": "32297da280312b7fbab1420aa21ca338ee4a8eecce46e0046a617d5e3aa04422",
+      "declared_hash_match": null,
+      "internal_header_status": "DRAFT_FOR_FOUNDER_REVIEW",
+      "controlling_use": false
+    }
+  ],
+  "copy_verification": "ALL_PACKAGE_COPY_HASHES_MATCH_SUPPLIED_BYTES",
+  "approval_effect_on_candidate_adrs": "NONE",
+  "approval_effect_on_proposed_redlines": "NONE",
+  "fresh_segregated_review": "REQUIRED_NOT_EXECUTED"
+}
