@@ -75,14 +75,21 @@ def check(validation: dict[str, object], name: str) -> dict[str, object]:
 def main() -> int:
     if git("branch", "--show-current") != BRANCH:
         raise RuntimeError("candidate package may only be built on the authorized Stage 2A branch")
-    head = git("rev-parse", "HEAD")
-    tree = git("rev-parse", "HEAD^{tree}")
-    if head == START or not git("ls-tree", "-r", "--name-only", head, "--", "stage2a"):
+    packaging_commit = git("rev-parse", "HEAD")
+    packaging_tree = git("rev-parse", "HEAD^{tree}")
+    if packaging_commit == START or not git("ls-tree", "-r", "--name-only", packaging_commit, "--", "stage2a"):
         raise RuntimeError("Stage 2A implementation must be committed before package assembly")
     validation = json.loads((EVIDENCE / "FOUNDATION_VALIDATION.json").read_text(encoding="utf-8"))
     bootstrap = json.loads((EVIDENCE / "BACKEND_BOOTSTRAP_RUN.json").read_text(encoding="utf-8"))
     if validation["validation"] != "PASS" or bootstrap["validation"] != "PASS":
         raise RuntimeError("foundation validation and backend bootstrap must pass")
+    implementation_commit = validation["artifacts"]["implementation_commit"]
+    implementation_tree = validation["artifacts"]["implementation_tree"]
+    if bootstrap.get("implementation_commit") != implementation_commit:
+        raise RuntimeError("bootstrap and foundation evidence commit anchors differ")
+    ancestry = subprocess.run(["git", "merge-base", "--is-ancestor", implementation_commit, packaging_commit], cwd=REPO)
+    if ancestry.returncode != 0:
+        raise RuntimeError("validated implementation is not an ancestor of the packaging commit")
     shutil.rmtree(ROOT, ignore_errors=True)
     ROOT.mkdir(parents=True)
 
@@ -90,7 +97,8 @@ def main() -> int:
         "package_id": PACKAGE_ID, "repository": REMOTE,
         "stage2_package_branch": "codex/stage2-f0001-execution-baseline",
         "stage2_package_commit": START, "stage2a_branch": BRANCH,
-        "stage2a_implementation_commit": head, "stage2a_implementation_tree": tree,
+        "stage2a_implementation_commit": implementation_commit, "stage2a_implementation_tree": implementation_tree,
+        "stage2a_packaging_commit": packaging_commit, "stage2a_packaging_tree": packaging_tree,
         "immutable_baseline": BASELINE, "stage2_archive_sha256": PREDECESSOR_SHA,
         "stage2_package_validation": "PASS_50_OF_50", "stage2_package_clean_extraction": "113_OF_113",
         "stage2_remote_tip": START, "pull_requests": 0, "default_branch_contains_stage2_commit": False,
@@ -326,10 +334,10 @@ def main() -> int:
     for index, path in enumerate(fixed_sources + stage_sources, 1):
         sources.append({
             "evidence_id": f"S2A-E-{index:04d}", "path": path, "sha256": sha(REPO / path),
-            "git_blob": git("rev-parse", f"{head}:{path}" if path.startswith("stage2a/") else f"{START}:{path}"),
+            "git_blob": git("rev-parse", f"{packaging_commit}:{path}" if path.startswith("stage2a/") else f"{START}:{path}"),
             "authority": "AUTHORIZED_STAGE2A_IMPLEMENTATION" if path.startswith("stage2a/") else "SEALED_STAGE2_REPOSITORY_EVIDENCE",
         })
-    write_json("STAGE2A_SOURCE_EVIDENCE_REGISTER.json", {"package_id": PACKAGE_ID, "implementation_commit": head, "sources": sources, "count": len(sources)})
+    write_json("STAGE2A_SOURCE_EVIDENCE_REGISTER.json", {"package_id": PACKAGE_ID, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "sources": sources, "count": len(sources)})
     with (ROOT / "STAGE2A_SOURCE_EVIDENCE_REGISTER.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(sources[0])); writer.writeheader(); writer.writerows(sources)
     created = stage_sources + sorted(path.relative_to(REPO).as_posix() for path in ROOT.rglob("*") if path.is_file())
@@ -369,17 +377,21 @@ def main() -> int:
     }
     pair("F0001_UPDATED_READINESS_DETERMINATION", "F-0001 Updated Readiness Determination", readiness, "F-0001 remains open and blocking. The runtime agent-type selector limitation remains the primary blocked-readiness cause and is distinct from the contained temporary-review process residue.")
     pair("PACKAGE_STATUS_RECORD", "Package Status Record", readiness | {"status": "CANDIDATE_PENDING_SEGREGATED_AND_ADVERSARIAL_REREVIEW", "f0002": closure["disposition"]}, "This is a remediated candidate pending independent re-review. The required principal disposition remains incomplete because the runtime agent-type selector limitation is unresolved.")
-    pair("SUCCESSOR_PACKAGE_INDEX", "Stage 2A Successor Package Index", {"package_id": PACKAGE_ID, "predecessor": PREDECESSOR, "starting_commit": START, "implementation_commit": head, "candidate": True, "authorized_gaps": [f"S2-GAP-{n:03d}" for n in range(1, 10)], "principal_disposition": DISPOSITION}, "This candidate contains the nine technical remediation foundations, validation evidence, bounded F-0002 closure, separate residue provenance, first failed review evidence, and controls for independent re-review.")
+    pair("SUCCESSOR_PACKAGE_INDEX", "Stage 2A Successor Package Index", {"package_id": PACKAGE_ID, "predecessor": PREDECESSOR, "starting_commit": START, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "candidate": True, "authorized_gaps": [f"S2-GAP-{n:03d}" for n in range(1, 10)], "principal_disposition": DISPOSITION}, "This candidate contains the nine technical remediation foundations, validation evidence, bounded F-0002 closure, separate residue provenance, first failed review evidence, and controls for independent re-review.")
 
     shutil.copy2(STAGE / "validate_stage2a_package.py", ROOT / "validate_stage2a_package.py")
+    future_controls = {"DRAFT_REVIEW_SHA256SUMS.txt", "DRAFT_REVIEW_SNAPSHOT_RECORD.json", "DRAFT_REVIEW_SNAPSHOT_RECORD.md"}
+    package_created = sorted({path.relative_to(REPO).as_posix() for path in ROOT.rglob("*") if path.is_file()} | {f"{ROOT.relative_to(REPO).as_posix()}/{name}" for name in future_controls})
+    complete_created = sorted(set(stage_sources + package_created))
+    pair("STAGE2A_FILES_CREATED_REGISTER", "Stage 2A Files Created Register", {"package_id": PACKAGE_ID, "created": complete_created, "count": len(complete_created)}, "The register includes every additive implementation, generated evidence, package, review-attempt, and candidate-freeze control path. Final archive controls are added by the finalization stage and reconciled by the exact file inventory.")
     # Freeze all payload files. Snapshot controls are added after the manifest.
     payload = sorted(path.relative_to(ROOT).as_posix() for path in ROOT.rglob("*") if path.is_file())
     rows = [f"{sha(ROOT / path)}  {path}" for path in payload]
     (ROOT / "DRAFT_REVIEW_SHA256SUMS.txt").write_text("\n".join(rows) + "\n", encoding="utf-8")
     manifest_hash = sha(ROOT / "DRAFT_REVIEW_SHA256SUMS.txt")
-    snapshot = {"package_id": PACKAGE_ID, "review_attempt": 2, "payload_files": len(payload), "manifest_sha256": manifest_hash, "implementation_commit": head, "frozen": True, "execution": "EXECUTION_NOT_AUTHORIZED"}
+    snapshot = {"package_id": PACKAGE_ID, "review_attempt": 2, "payload_files": len(payload), "manifest_sha256": manifest_hash, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "frozen": True, "execution": "EXECUTION_NOT_AUTHORIZED"}
     pair("DRAFT_REVIEW_SNAPSHOT_RECORD", "Draft Review Snapshot Record", snapshot, f"Review attempt 2 freezes `{len(payload)}` payload files under manifest SHA-256 `{manifest_hash}`. Reviewers must not modify the candidate.")
-    print(json.dumps({"package_root": ROOT.relative_to(REPO).as_posix(), "implementation_commit": head, "payload_files": len(payload), "physical_files": len(payload) + 3, "manifest_sha256": manifest_hash, "validation": validation["validation"], "principal_disposition": DISPOSITION}, indent=2))
+    print(json.dumps({"package_root": ROOT.relative_to(REPO).as_posix(), "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "payload_files": len(payload), "physical_files": len(payload) + 3, "manifest_sha256": manifest_hash, "validation": validation["validation"], "principal_disposition": DISPOSITION}, indent=2))
     return 0
 
 
