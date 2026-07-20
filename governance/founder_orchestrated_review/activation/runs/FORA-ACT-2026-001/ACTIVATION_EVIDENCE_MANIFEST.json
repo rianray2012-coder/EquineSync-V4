@@ -23,9 +23,9 @@
       "sha256": "8945221fe71218e5f75d3a24ae90291ab63fc626ea9347e4b1e66cf8248a5f8a"
     },
     {
-      "bytes": 1984,
+      "bytes": 2065,
       "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/ACTIVATION_EVIDENCE_VALIDATION.json",
-      "sha256": "15207d15064ee4691b8af4f1bba16c72853938a40e5f6b5856731d629fe8bc0a"
+      "sha256": "f3a76558c6b25c448b50259540e10a8652d5f66b72336e418aa359858e203c7f"
     },
     {
       "bytes": 3780,
@@ -51,6 +51,16 @@
       "bytes": 2668,
       "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/FOUNDER_ACTIVATION_DECISION_SOURCE.md",
       "sha256": "166ee88390da509ebba89bd81d62a2763b5158aead8c430969bf0d1bbbf3acf1"
+    },
+    {
+      "bytes": 2822,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/FRESH_CLONE_VERIFICATION.json",
+      "sha256": "4778a04d7b10f046322fad37374c3eba8f9732aa617ef164d8aa8c48884514ec"
+    },
+    {
+      "bytes": 1580,
+      "path": "governance/founder_orchestrated_review/activation/runs/FORA-ACT-2026-001/FRESH_CLONE_VERIFICATION.md",
+      "sha256": "ddc4d32d25fe29af8fbbb70d66b440ace44e6743a9b88dff3742218efe4c4cdb"
     },
     {
       "bytes": 1178,
@@ -163,8 +173,8 @@
       "sha256": "34e6d4839d215ccc71f9e016045f9a2ba95d69aee28b3d28f336a73d8201e9d6"
     }
   ],
-  "entry_count": 32,
-  "generated_at": "2026-07-20T03:45:08Z",
+  "entry_count": 34,
+  "generated_at": "2026-07-20T03:47:58Z",
   "manifest_self_included": false,
   "schema_version": "1.0.0",
   "scope": "All controlled activation status, decision, procedure, harness, report, raw-output, provenance, reconciliation, rollback, and run-evidence files changed or created by this activation attempt."

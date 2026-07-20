@@ -6,7 +6,7 @@
     {
       "check": "activation_evidence_manifest_and_checksums",
       "status": "PASS",
-      "detail": "24/24 manifest entries and 25/25 checksum entries verified before this validation record was added; the additive manifests are regenerated after every evidence addition."
+      "detail": "The additive manifests are regenerated and verified after every evidence addition; authoritative final counts are recorded in the manifest and fresh-clone verification."
     },
     {
       "check": "approved_package_adjacent_checksum",
@@ -46,6 +46,8 @@
   ],
   "checks_expected": 8,
   "checks_passed": 8,
+  "final_manifest_entries_expected": 34,
+  "final_checksum_entries_expected": 35,
   "status": "PASS",
   "scope_note": "Evidence validation confirms integrity and accurate blocked-state reporting. It does not convert the failed canary into a pass and does not authorize or establish operational activation."
 }
