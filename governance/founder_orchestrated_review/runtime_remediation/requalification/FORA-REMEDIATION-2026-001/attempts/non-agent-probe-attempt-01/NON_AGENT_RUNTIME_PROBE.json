@@ -1,0 +1,116 @@
+{
+  "checks": {
+    "app_server_probe_exit_zero": true,
+    "config_read_returned": false,
+    "connector_features_disabled": false,
+    "mcp_list_exit_zero": true,
+    "mcp_list_reports_none": true,
+    "multi_agent_enabled": false,
+    "no_cloudflare_start_or_auth": true,
+    "no_connector_auth_or_login": true,
+    "no_mcp_servers_effective": true,
+    "no_plugin_cache_created": true,
+    "project_agent_limits_loaded": false,
+    "project_layer_enabled": false,
+    "project_layer_present": false,
+    "three_target_registrations_statically_resolve": true
+  },
+  "checks_passed": 8,
+  "checks_total": 14,
+  "cloudflare_mcp_attempts": 0,
+  "effective_config_summary": {
+    "agents": null,
+    "features": {
+      "apps": null,
+      "auth_elicitation": null,
+      "browser_use": null,
+      "browser_use_external": null,
+      "browser_use_full_cdp_access": null,
+      "computer_use": null,
+      "enable_mcp_apps": null,
+      "in_app_browser": null,
+      "memories": null,
+      "multi_agent": null,
+      "plugins": null,
+      "remote_plugin": null,
+      "skill_mcp_dependency_install": null,
+      "tool_call_mcp_elicitation": null,
+      "tool_suggest": null,
+      "workspace_dependencies": null
+    },
+    "mcp_servers": null,
+    "project_layer_count": 0,
+    "project_layer_disabled_reason": "MISSING"
+  },
+  "other_unauthorized_connector_attempts": 0,
+  "role_registration_static_resolution": [
+    {
+      "agent_type": "equinesync_segregated_review_agent",
+      "checks": {
+        "file_exists": true,
+        "identity_marker_present": true,
+        "read_only_sandbox": true,
+        "registered_name_exact": true,
+        "role_identifier_present": true,
+        "role_prompt_path_present": true
+      },
+      "file_sha256": "a5574f8502f96a6fb2735aea10aa510edc50b7516d2f4e2f8a98c0b7194d23d7",
+      "role": "ES-RA-02",
+      "status": "PASS"
+    },
+    {
+      "agent_type": "equinesync_adversarial_challenge_agent",
+      "checks": {
+        "file_exists": true,
+        "identity_marker_present": true,
+        "read_only_sandbox": true,
+        "registered_name_exact": true,
+        "role_identifier_present": true,
+        "role_prompt_path_present": true
+      },
+      "file_sha256": "fb59173d8daf6e5de252031b20c798f1201f79493c30bef6c7539feefd3ea29d",
+      "role": "ES-RA-03",
+      "status": "PASS"
+    },
+    {
+      "agent_type": "equinesync_domain_reviewer",
+      "checks": {
+        "file_exists": true,
+        "identity_marker_present": true,
+        "read_only_sandbox": true,
+        "registered_name_exact": true,
+        "role_identifier_present": true,
+        "role_prompt_path_present": true
+      },
+      "file_sha256": "1f7fcc4cc7c4d7b958e8731020689671f027e1230d244337694c81c3a95583c6",
+      "role": "ES-RA-06",
+      "status": "PASS"
+    }
+  ],
+  "run_id": "FORA-REMEDIATION-2026-001",
+  "runtime_metadata": {
+    "ambient_sensitive_environment_variable_names_not_inherited": [],
+    "config_sha256": "bc5a6413e3abae7af2fb4be0a9e21448b24404db67a161e6139ea7a026a0c778",
+    "control_plane_auth_content_or_hash_recorded": false,
+    "control_plane_auth_copied": true,
+    "environment_variable_names_only": [
+      "CI",
+      "CODEX_HOME",
+      "HOME",
+      "LANG",
+      "LC_ALL",
+      "LOGNAME",
+      "NO_COLOR",
+      "PATH",
+      "SHELL",
+      "TERM",
+      "TMPDIR",
+      "USER"
+    ],
+    "execution_root": "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout",
+    "mcp_servers_declared": 0,
+    "plugins_declared": 0,
+    "template_sha256": "3762167644a8f4d41ff6e6c0c20ebb336db16f9e1d3f1749f477b3d510292b74"
+  },
+  "status": "FAIL"
+}

@@ -1,0 +1,2 @@
+{"id":1,"result":{"userAgent":"equinesync-runtime-probe/0.144.6 (Mac OS 26.5.2; arm64) dumb (equinesync-runtime-probe; 1.0.0)","codexHome":"/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime/codex-home","platformFamily":"unix","platformOs":"macos"}}
+{"method":"remoteControl/status/changed","params":{"status":"disabled","serverName":"Mac.lan","installationId":"28f0fc3d-41b1-4709-9fb5-32d78a474e61","environmentId":null}}

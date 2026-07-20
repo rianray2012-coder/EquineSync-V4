@@ -1,0 +1,1088 @@
+{
+  "entries": [
+    {
+      "after_sha256": "67b4d0f37851ee99232d8e8de43f52a4e160273cabc18170d1ac05a3eaefedb5",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/CONNECTOR_ISOLATION_CONFIGURATION.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "7f743cd8519828ef01f70c762ace53083ac8a5570341d30d1b819fc2cffaa109",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/CONNECTOR_ISOLATION_ROOT_CAUSE_ANALYSIS.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "fcead3759111f8021aabb29e26385cb7f3730fd49ffeb29c5c668a714c8487e5",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/CUSTOM_AGENT_LOADING_ROOT_CAUSE_ANALYSIS.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "64631ca466b2e63888207731f868cba7f9e8137b0e1a122287620531d5190620",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/NON_AGENT_RUNTIME_PROBE.json",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "dbcc1a09daac814b1349e241861717f9ce4b8b98c0c5965ecc6dbf43b8372759",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/NON_AGENT_RUNTIME_PROBE.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "ecc9bf2f5dc2ed8a9d23ada280d5f244d948e5d78c04d77c377d4f6e7f70b517",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/PRE_CANARY_STATIC_VALIDATION.json",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "485fbb285699cb9c168cf382b4f4e5494fe9ddab82fb1f7890843aa7cbd21450",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/PRE_CANARY_STATIC_VALIDATION.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "7a7a896228fd68d324187c7cd3cbd73495e12a764ce402c51c8396e12c4cdc71",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/READ_ONLY_CANARY_01_REPORT.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "0eb7e1e58c6307825de77e4c067abcc1cc789971caeb76a88f24d25ade4560b8",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/READ_ONLY_CANARY_01_RESULT.json",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "5b268a2297fcbc7f7e8e2580b203e049f822a355e32b3ba7a35fad75ae118347",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/REQUALIFICATION_EXECUTION_SUMMARY.json",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "f9d0a31d4a9941df19799c4bdb701fcd54f4fc02ee9e13d54b9c2ea49ca28ba9",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/RUNTIME_REMEDIATION_AUTHORITY.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3633aa17dd465b1cbb47aa9592f0fe3b1585af01ee58aa8188be7c533561a746",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/RUNTIME_REMEDIATION_BASELINE.json",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3eb9e9a82291baa90348ce44281c1d65f6190252aa2f3593e555054ab10d87a3",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/RUNTIME_REMEDIATION_BASELINE.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "286164c0723045a84bada9e2be999b3316c2e046222f10158cd181b541271497",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/RUNTIME_REMEDIATION_FINAL_REPORT.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e965e1343044f8959eb6bccc9597e13b6bbc57e86dbc28f9085094cbcce8e62e",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/RUNTIME_REMEDIATION_FINAL_RESULT.json",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "2130de39207d695f2a1c77402d38928d3c92a04a205fff57dbed30b668229174",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/SEALED_PACKAGE_PRESERVATION_REPORT.md",
+      "purpose": "Required additive remediation report or machine-readable result.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "5bd93341012eba1afd99ca39c0d4c42018fdd9e5d4fa5c5b7811e97090a4daa9",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/NON_AGENT_RUNTIME_PROBE.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "1339bf96f3bf7bcea79d50fb4f429b795a3cf6e90e7f89eb68342cd0aa84ca59",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/NON_AGENT_RUNTIME_PROBE.md",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "aa0e9e0d9d718bba82cd04e41ee39be06e645542108d2555e2e2c652b46d7108",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/raw/app_server.requests.jsonl",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/raw/app_server.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "a5b0aec9401edbf1d5236e387d7729ba0a2d769f0ae2e96e2911d10e7678c419",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/raw/app_server.stdout.jsonl",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/raw/config_read_result.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bc5a6413e3abae7af2fb4be0a9e21448b24404db67a161e6139ea7a026a0c778",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/raw/effective_isolated_config.toml",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/raw/mcp_list.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "2a262cfcb9a3ff1a657e48f4b9aee2dd2039c0c3e936eee37825fc9364f99cf8",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-01/raw/mcp_list.stdout.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "2990554990181ca4e79720e946266e280cc89360c02de0dcb867bc8e68578a84",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/NON_AGENT_RUNTIME_PROBE.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "12d40783f80f1bc3b482763c0df69fde7e30b37a7b8d94a8d7cae3642213788f",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/NON_AGENT_RUNTIME_PROBE.md",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "aa0e9e0d9d718bba82cd04e41ee39be06e645542108d2555e2e2c652b46d7108",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/raw/app_server.requests.jsonl",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/raw/app_server.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "fef71ac91abc4512ab0cc7a265d669d4a91c0ecaf2c068b4a49cd19ca3d40113",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/raw/app_server.stdout.jsonl",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3198e0fd5e0dff5cf7763086fff0c29332b86b1d1c8df6c5a36a114e1bb7036f",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/raw/config_read_result.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bc5a6413e3abae7af2fb4be0a9e21448b24404db67a161e6139ea7a026a0c778",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/raw/effective_isolated_config.toml",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/raw/mcp_list.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "2a262cfcb9a3ff1a657e48f4b9aee2dd2039c0c3e936eee37825fc9364f99cf8",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/non-agent-probe-attempt-02/raw/mcp_list.stdout.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e09f4f661d496567287365f206e57e4444edc7f5a9abed83a639eee0663c817b",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/PRE_CANARY_STATIC_VALIDATION.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bd61041013acc036f3283fc5a76fbfac4108d8c3feabe9eae38a668f5ccd6a24",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/PRE_CANARY_STATIC_VALIDATION.md",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "0ae79917918332377c9b888f4984548e5f0319af7cbe53551a8ad7b1ce595d00",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/INSTALLED_SYSTEM_VALIDATION_COMMAND_LOG.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "51ba30137babc9741edf4f84aacd8263068a38de394ae88b5f7cca1230807a70",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/INSTALLED_SYSTEM_VALIDATION_DEPENDENCIES.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bd52a3e0c242398bb5cf2c703e0dd68cb36ac28d3714f874de9fe817d8e4a96c",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/INSTALLED_SYSTEM_VALIDATION_REPORT.md",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "778b0734e2da272eb2ec855acaa7e363c31bd4c199792876f234ce8a18a805d0",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/INSTALLED_SYSTEM_VALIDATION_RESULT.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "0e94c8f5d8536231a4c2b7e227aa58d1a076597ff0c754b95bd5bbcc8f39b6ff",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/installed_system_validator.command.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "079f174459f5d05312a4b7b5f62a6bdb184b333e155ac984cce45f68384273ff",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/installed_system_validator.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/installed_system_validator.stdout.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/sealed_package_validator.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3bb4009d1a770f41d473e44181e851649d0873907b5fa5c02719ccfe2524f0c7",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-01/raw/sealed_package_validator.stdout.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e09f4f661d496567287365f206e57e4444edc7f5a9abed83a639eee0663c817b",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/PRE_CANARY_STATIC_VALIDATION.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bd61041013acc036f3283fc5a76fbfac4108d8c3feabe9eae38a668f5ccd6a24",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/PRE_CANARY_STATIC_VALIDATION.md",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "0ae79917918332377c9b888f4984548e5f0319af7cbe53551a8ad7b1ce595d00",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/INSTALLED_SYSTEM_VALIDATION_COMMAND_LOG.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "51ba30137babc9741edf4f84aacd8263068a38de394ae88b5f7cca1230807a70",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/INSTALLED_SYSTEM_VALIDATION_DEPENDENCIES.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bd52a3e0c242398bb5cf2c703e0dd68cb36ac28d3714f874de9fe817d8e4a96c",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/INSTALLED_SYSTEM_VALIDATION_REPORT.md",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "778b0734e2da272eb2ec855acaa7e363c31bd4c199792876f234ce8a18a805d0",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/INSTALLED_SYSTEM_VALIDATION_RESULT.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "20c9cbd43b349aeffd73f324f1ff7b3f4596d89d10c286b8103e71eac56ac795",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/installed_system_validator.command.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "079f174459f5d05312a4b7b5f62a6bdb184b333e155ac984cce45f68384273ff",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/installed_system_validator.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/installed_system_validator.stdout.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/sealed_package_validator.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3bb4009d1a770f41d473e44181e851649d0873907b5fa5c02719ccfe2524f0c7",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-02/raw/sealed_package_validator.stdout.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e09f4f661d496567287365f206e57e4444edc7f5a9abed83a639eee0663c817b",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/PRE_CANARY_STATIC_VALIDATION.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bd61041013acc036f3283fc5a76fbfac4108d8c3feabe9eae38a668f5ccd6a24",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/PRE_CANARY_STATIC_VALIDATION.md",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "0ae79917918332377c9b888f4984548e5f0319af7cbe53551a8ad7b1ce595d00",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/INSTALLED_SYSTEM_VALIDATION_COMMAND_LOG.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "51ba30137babc9741edf4f84aacd8263068a38de394ae88b5f7cca1230807a70",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/INSTALLED_SYSTEM_VALIDATION_DEPENDENCIES.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bd52a3e0c242398bb5cf2c703e0dd68cb36ac28d3714f874de9fe817d8e4a96c",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/INSTALLED_SYSTEM_VALIDATION_REPORT.md",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "778b0734e2da272eb2ec855acaa7e363c31bd4c199792876f234ce8a18a805d0",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/INSTALLED_SYSTEM_VALIDATION_RESULT.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "99d313a7f6bdbaf281195c8be3c5a4d3d3dfa6e91658add3070be791d83d79eb",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/installed_system_validator.command.json",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "a3cf27cbd90ff84e97b413631b5735a145c2daab06dfbfc26962b6bfaa3ab482",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/installed_system_validator.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/installed_system_validator.stdout.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/sealed_package_validator.stderr.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3bb4009d1a770f41d473e44181e851649d0873907b5fa5c02719ccfe2524f0c7",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/attempts/static-attempt-03/raw/sealed_package_validator.stdout.txt",
+      "purpose": "Preserved failed non-agent harness/probe attempt evidence.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "d752878ffa5412ca72cdb4a1901bd9531d1ac5ea901fda8691e84e684f40620f",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/baseline/BASELINE_BYTE_MANIFEST.json",
+      "purpose": "Immutable starting-commit byte baseline.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "f3a2e53233cf3654a48fbf732d9c9f77370d8adab0abccd6d94d782a42a99e61",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/checkout_snapshot_after.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "f3a2e53233cf3654a48fbf732d9c9f77370d8adab0abccd6d94d782a42a99e61",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/checkout_snapshot_before.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "72700bed935b909d54135b6b28d1c58e9c0a07439798709516a2ec7ad40e0ddb",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/command.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bc5a6413e3abae7af2fb4be0a9e21448b24404db67a161e6139ea7a026a0c778",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/effective_isolated_config.toml",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "055bb400b12da96f6e20ee7ae3e046509e191fa4e80f41786dbc83b5402608f6",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/environment_and_runtime_metadata.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "08c020605aa48a948d658ce9732cbe7c89e1177d4b13efd22880c322d6c1b664",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/events.jsonl",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "58529fcbc468f6862098a78889ddc08399f3c9312b2fb7dc47c60908559d765b",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/final_response.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/git_diff_after.patch",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/git_status_after.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/git_status_before.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "58d939ef328bd82ff66cf02519115f75a9c6b1cda4ddea49db817cbd713390fd",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/parent_prompt.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "b1d73edb453f95a247091a1ba39779cf72751c0d635cb783ea209ca0f1fe4d44",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/permission_records/ES-RA-02_equinesync_segregated_review_agent.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3e8376e398a891868b2161810141c5393cb6c207fcef568c1ae57c01d8746f50",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/sanitized_runtime_provenance.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "0eb7e1e58c6307825de77e4c067abcc1cc789971caeb76a88f24d25ade4560b8",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/score.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/canaries/read-only-canary-01/stderr.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "aa0e9e0d9d718bba82cd04e41ee39be06e645542108d2555e2e2c652b46d7108",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/non_agent_probe/app_server.requests.jsonl",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/non_agent_probe/app_server.stderr.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "1300d6c1d7b5cb3c51a4cf62af9cdc0c301c84a5d6914adacca000824092a0a0",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/non_agent_probe/app_server.stdout.jsonl",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e2720d7da28b4a2c1e30fb696604e7b184d7841766c4db0993f4b79a5a1a5872",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/non_agent_probe/config_read_result.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bc5a6413e3abae7af2fb4be0a9e21448b24404db67a161e6139ea7a026a0c778",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/non_agent_probe/effective_isolated_config.toml",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/non_agent_probe/mcp_list.stderr.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "2a262cfcb9a3ff1a657e48f4b9aee2dd2039c0c3e936eee37825fc9364f99cf8",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/non_agent_probe/mcp_list.stdout.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "1b4941e2aaff14ed40e65343d5c5bc7cddb50a5f7b213256689cc80cbbfaa772",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/INSTALLED_SYSTEM_VALIDATION_COMMAND_LOG.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "c4aa765db4855425d47f8f3a74f5ac8a45a3d0272ea0767653d3712ed51ddadb",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/INSTALLED_SYSTEM_VALIDATION_DEPENDENCIES.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "9c2b2f0d03766749d6ec20ca77d7d67a86e4f8340c076ca0f5d45f9e56873b9f",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/INSTALLED_SYSTEM_VALIDATION_REPORT.md",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "a3d57e0e8158f9214fdddc9b57d4f8dc9a9a262d645d602c925b8e2c81a7775c",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/INSTALLED_SYSTEM_VALIDATION_RESULT.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "99d313a7f6bdbaf281195c8be3c5a4d3d3dfa6e91658add3070be791d83d79eb",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/installed_system_validator.command.json",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/installed_system_validator.stderr.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "bb93a5ba0dc018d2afcf8199f39de4b07f24328dfe5a601db0b38d1a363e41ab",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/installed_system_validator.stdout.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/sealed_package_validator.stderr.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3bb4009d1a770f41d473e44181e851649d0873907b5fa5c02719ccfe2524f0c7",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/raw/static_validation/sealed_package_validator.stdout.txt",
+      "purpose": "Raw or sanitized evidence from the current authorized attempt.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "3762167644a8f4d41ff6e6c0c20ebb336db16f9e1d3f1749f477b3d510292b74",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/runtime/isolated_codex_config.template.toml",
+      "purpose": "Disposable trusted read-only runtime and connector-isolation configuration.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "95a0d3fbcb42c2654d181e093ac7e31c8c05de72de5aa54da1d55115a710d6c6",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/schemas/read_only_batch.schema.json",
+      "purpose": "Machine-readable response constraint for authorized canaries.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "24c2199280fc124f96825d93e59d92202b2411064a9b9901e32795504d5f40a2",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/schemas/read_only_canary.schema.json",
+      "purpose": "Machine-readable response constraint for authorized canaries.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "34dd8c7cefc2453441dc055f2ec3b7deb28caf0199580a6983a8da5b2764df59",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/scripts/capture_baseline.py",
+      "purpose": "Reproducible baseline, validation, probe, canary, or evidence assembly logic.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "53f159b3b7659240c045e4e8dece918203b3e243e52086bbca400e13af07dffe",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/scripts/finalize_requalification.py",
+      "purpose": "Reproducible baseline, validation, probe, canary, or evidence assembly logic.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "f41d956fd09f084858b4a47e10cbdc73aaf31e204b6a209408505875b1a3a4d6",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/scripts/probe_isolated_runtime.py",
+      "purpose": "Reproducible baseline, validation, probe, canary, or evidence assembly logic.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "21bc5528368a3f76adea54f9ab002e295aa2569a29f2bee5a512094c9ec81288",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/scripts/run_read_only_requalification.py",
+      "purpose": "Reproducible baseline, validation, probe, canary, or evidence assembly logic.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "7af94aecd2e118a90f6418f3d6c9646691ccae7d8a4d4f1703ec9408ec677168",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/scripts/run_static_validation.py",
+      "purpose": "Reproducible baseline, validation, probe, canary, or evidence assembly logic.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    },
+    {
+      "after_sha256": "cb34a3cee07d7dfabf01fdd1cbb62b3a6c1b549a4699cdeeaedec9c88cb948d8",
+      "before_sha256": null,
+      "exact_change": "Added new file inside the additive FORA-REMEDIATION-2026-001 evidence boundary; no predecessor existed at the starting commit.",
+      "inside_sealed_package": false,
+      "path": "governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/scripts/runtime_support.py",
+      "purpose": "Reproducible baseline, validation, probe, canary, or evidence assembly logic.",
+      "reason": "Required to remediate or evidence the two authorized runtime blockers and the bounded read-only requalification.",
+      "reversibility": "Delete this additive run file to return to the starting commit; no prior evidence or sealed package byte is changed."
+    }
+  ],
+  "entry_count": 108,
+  "run_id": "FORA-REMEDIATION-2026-001",
+  "self_attestation": "The two register files and final manifest files are hashed by RUNTIME_REMEDIATION_SHA256SUMS.txt to avoid self-referential hashes.",
+  "starting_commit": "e93d3acc65a45835d3f3c63473f5dd98e1d1bcf5"
+}

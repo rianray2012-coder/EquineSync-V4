@@ -1,0 +1,33 @@
+# Disposable read-only requalification profile. __EXECUTION_ROOT__ is replaced
+# with the absolute clean-checkout path by prepare_isolated_runtime.py.
+approval_policy = "on-request"
+sandbox_mode = "read-only"
+web_search = "disabled"
+check_for_update_on_startup = false
+personality = "pragmatic"
+
+[features]
+multi_agent = true
+apps = false
+remote_plugin = false
+plugins = false
+enable_mcp_apps = false
+auth_elicitation = false
+tool_call_mcp_elicitation = false
+skill_mcp_dependency_install = false
+tool_suggest = false
+browser_use = false
+browser_use_external = false
+browser_use_full_cdp_access = false
+computer_use = false
+in_app_browser = false
+workspace_dependencies = false
+memories = false
+
+[apps._default]
+enabled = false
+destructive_enabled = false
+open_world_enabled = false
+
+[projects."__EXECUTION_ROOT__"]
+trust_level = "trusted"

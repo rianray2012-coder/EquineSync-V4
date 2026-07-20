@@ -1,0 +1,432 @@
+{
+  "config": {
+    "agents": {
+      "interrupt_message": null,
+      "job_max_runtime_seconds": null,
+      "max_depth": 1,
+      "max_threads": 6
+    },
+    "allow_login_shell": true,
+    "analytics": null,
+    "approval_policy": "on-request",
+    "approvals_reviewer": null,
+    "apps": {
+      "_default": {
+        "approvals_reviewer": null,
+        "default_tools_approval_mode": null,
+        "destructive_enabled": false,
+        "enabled": false,
+        "open_world_enabled": false
+      }
+    },
+    "apps_mcp_product_sku": null,
+    "audio": null,
+    "auto_review": null,
+    "background_terminal_max_timeout": null,
+    "chatgpt_base_url": null,
+    "check_for_update_on_startup": false,
+    "cli_auth_credentials_store": null,
+    "compact_prompt": null,
+    "debug": null,
+    "default_permissions": null,
+    "desktop": null,
+    "developer_instructions": null,
+    "disable_paste_burst": null,
+    "experimental_compact_prompt_file": null,
+    "experimental_realtime_start_instructions": null,
+    "experimental_realtime_webrtc_call_base_url": null,
+    "experimental_realtime_ws_backend_prompt": null,
+    "experimental_realtime_ws_base_url": null,
+    "experimental_realtime_ws_model": null,
+    "experimental_realtime_ws_startup_context": null,
+    "experimental_thread_config_endpoint": null,
+    "experimental_thread_store": null,
+    "experimental_thread_store_endpoint": null,
+    "experimental_use_unified_exec_tool": null,
+    "features": {
+      "apps": false,
+      "auth_elicitation": false,
+      "browser_use": false,
+      "browser_use_external": false,
+      "browser_use_full_cdp_access": false,
+      "computer_use": false,
+      "enable_mcp_apps": false,
+      "in_app_browser": false,
+      "memories": false,
+      "mentions_v2": true,
+      "multi_agent": true,
+      "network_proxy": null,
+      "plugins": false,
+      "remote_control": false,
+      "remote_plugin": false,
+      "skill_mcp_dependency_install": false,
+      "tool_call_mcp_elicitation": false,
+      "tool_suggest": false,
+      "workspace_dependencies": false
+    },
+    "feedback": null,
+    "file_opener": null,
+    "forced_chatgpt_workspace_id": null,
+    "forced_login_method": null,
+    "ghost_snapshot": null,
+    "hide_agent_reasoning": false,
+    "history": {
+      "max_bytes": null,
+      "persistence": "save-all"
+    },
+    "hooks": null,
+    "include_apps_instructions": null,
+    "include_collaboration_mode_instructions": null,
+    "include_environment_context": null,
+    "include_permissions_instructions": null,
+    "instructions": null,
+    "js_repl_node_module_dirs": null,
+    "js_repl_node_path": null,
+    "log_dir": null,
+    "marketplaces": {},
+    "mcp_oauth_callback_port": null,
+    "mcp_oauth_callback_url": null,
+    "mcp_oauth_credentials_store": null,
+    "mcp_servers": {},
+    "memories": null,
+    "model": null,
+    "model_auto_compact_token_limit": null,
+    "model_auto_compact_token_limit_scope": null,
+    "model_catalog_json": null,
+    "model_context_window": null,
+    "model_instructions_file": null,
+    "model_provider": null,
+    "model_providers": {},
+    "model_reasoning_effort": null,
+    "model_reasoning_summary": null,
+    "model_supports_reasoning_summaries": null,
+    "model_verbosity": null,
+    "notice": null,
+    "notify": null,
+    "openai_base_url": null,
+    "orchestrator": null,
+    "oss_provider": null,
+    "otel": null,
+    "permissions": null,
+    "personality": "pragmatic",
+    "plan_mode_reasoning_effort": null,
+    "plugins": {},
+    "profile": null,
+    "profiles": {},
+    "project_doc_fallback_filenames": [],
+    "project_doc_max_bytes": 32768,
+    "project_root_markers": null,
+    "projects": {
+      "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout": {
+        "trust_level": "trusted"
+      }
+    },
+    "realtime": null,
+    "review_model": null,
+    "sandbox_mode": "read-only",
+    "sandbox_workspace_write": null,
+    "service_tier": null,
+    "shell_environment_policy": {
+      "exclude": null,
+      "experimental_use_profile": null,
+      "ignore_default_excludes": null,
+      "include_only": null,
+      "inherit": null,
+      "set": null
+    },
+    "show_raw_agent_reasoning": null,
+    "skills": null,
+    "sqlite_home": null,
+    "suppress_unstable_features_warning": null,
+    "tool_output_token_limit": null,
+    "tool_suggest": null,
+    "tools": null,
+    "tui": null,
+    "web_search": "disabled",
+    "windows": null
+  },
+  "layers": [
+    {
+      "config": {
+        "agents": {
+          "max_depth": 1,
+          "max_threads": 6
+        }
+      },
+      "name": {
+        "dotCodexFolder": "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout/.codex",
+        "type": "project"
+      },
+      "version": "sha256:03071ed54324299d72f307c06464e530cfcb1d699c88eb7615100b1a12859a2d"
+    },
+    {
+      "config": {
+        "approval_policy": "on-request",
+        "apps": {
+          "_default": {
+            "destructive_enabled": false,
+            "enabled": false,
+            "open_world_enabled": false
+          }
+        },
+        "check_for_update_on_startup": false,
+        "features": {
+          "apps": false,
+          "auth_elicitation": false,
+          "browser_use": false,
+          "browser_use_external": false,
+          "browser_use_full_cdp_access": false,
+          "computer_use": false,
+          "enable_mcp_apps": false,
+          "in_app_browser": false,
+          "memories": false,
+          "multi_agent": true,
+          "plugins": false,
+          "remote_plugin": false,
+          "skill_mcp_dependency_install": false,
+          "tool_call_mcp_elicitation": false,
+          "tool_suggest": false,
+          "workspace_dependencies": false
+        },
+        "personality": "pragmatic",
+        "projects": {
+          "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout": {
+            "trust_level": "trusted"
+          }
+        },
+        "sandbox_mode": "read-only",
+        "web_search": "disabled"
+      },
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    {
+      "config": {},
+      "name": {
+        "file": "/etc/codex/config.toml",
+        "type": "system"
+      },
+      "version": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  ],
+  "origins": {
+    "agents.max_depth": {
+      "name": {
+        "dotCodexFolder": "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout/.codex",
+        "type": "project"
+      },
+      "version": "sha256:03071ed54324299d72f307c06464e530cfcb1d699c88eb7615100b1a12859a2d"
+    },
+    "agents.max_threads": {
+      "name": {
+        "dotCodexFolder": "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout/.codex",
+        "type": "project"
+      },
+      "version": "sha256:03071ed54324299d72f307c06464e530cfcb1d699c88eb7615100b1a12859a2d"
+    },
+    "approval_policy": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "apps._default.destructive_enabled": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "apps._default.enabled": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "apps._default.open_world_enabled": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "check_for_update_on_startup": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.apps": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.auth_elicitation": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.browser_use": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.browser_use_external": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.browser_use_full_cdp_access": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.computer_use": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.enable_mcp_apps": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.in_app_browser": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.memories": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.multi_agent": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.plugins": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.remote_plugin": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.skill_mcp_dependency_install": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.tool_call_mcp_elicitation": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.tool_suggest": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "features.workspace_dependencies": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "personality": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "projects./private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout.trust_level": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "sandbox_mode": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    },
+    "web_search": {
+      "name": {
+        "file": "/private/tmp/equinesync-fora-remediation.ld1td0/probe-runtime-03/codex-home/config.toml",
+        "profile": null,
+        "type": "user"
+      },
+      "version": "sha256:a4c2c8ff145c3fa309796e81d7158c6aac8babf1b4b6e48652924be68345303c"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "batch_result": null,
+  "disposition": "REMEDIATION_REQUALIFICATION_FAILED_FIRST_CANARY",
+  "individual_results": [
+    {
+      "agent_role_values": [
+        null
+      ],
+      "agent_type_values": [
+        null
+      ],
+      "canary_id": "read-only-canary-01",
+      "child_tool_calls": 0,
+      "cloudflare_mcp_attempts": 0,
+      "duration_seconds": 51.967,
+      "general_checks": {
+        "aggregate_denominator": true,
+        "all_roles_pass": false,
+        "checkout_byte_snapshot_unchanged": true,
+        "checkout_clean_after": true,
+        "checkout_clean_before": true,
+        "checkout_diff_empty": true,
+        "child_denominator": true,
+        "exact_spawn_calls": false,
+        "no_cloudflare_mcp_activity": true,
+        "no_connector_auth_or_startup_failure": true,
+        "no_generic_fallback": false,
+        "no_parent_substitution": false,
+        "no_plugin_cache_created": true,
+        "parent_network_restricted": true,
+        "parent_prompt_omits_identity_markers": true,
+        "parent_prompt_omits_role_prompt_paths": true,
+        "parent_sandbox_read_only": true,
+        "parent_used_only_orchestration_tools": true,
+        "process_exit_zero": true
+      },
+      "generic_fallback_detected": true,
+      "kind": "individual-read-only-canary",
+      "other_unauthorized_connector_attempts": 0,
+      "parent_substitution_detected": true,
+      "process_exit_code": 0,
+      "production_access": false,
+      "provider_writes": 0,
+      "retry_performed": false,
+      "role_results": [
+        {
+          "agent_type": "equinesync_segregated_review_agent",
+          "checks": {
+            "authorized_capabilities_reported": false,
+            "calibration_only": false,
+            "child_used_no_tools": false,
+            "custom_instruction_layer_acknowledged": false,
+            "declared_agent_name": false,
+            "direct_child_json_object": false,
+            "es_ra_role": false,
+            "expected_sandbox": false,
+            "no_files_written": false,
+            "no_network_used": false,
+            "no_substantive_work": false,
+            "parent_aggregate_is_direct_child_response": false,
+            "parent_requested_name_exact": true,
+            "prohibited_capabilities_reported": false,
+            "registration_marker": false,
+            "role_prompt_path": false,
+            "runtime_agent_role": false,
+            "runtime_network_restricted": false,
+            "runtime_sandbox_read_only": false,
+            "shared_framework_paths": false
+          },
+          "child_thread_id": null,
+          "child_tool_calls": 0,
+          "expected_agent_role": "ES-RA-02",
+          "observed_agent_role": null,
+          "observed_direct_identity": {
+            "declared_agent_name": null,
+            "es_ra_role": null,
+            "registration_marker": null,
+            "role_prompt_path": null
+          },
+          "status": "FAIL"
+        }
+      ],
+      "roles_passed": 0,
+      "roles_requested": 1,
+      "run_id": "FORA-REMEDIATION-2026-001",
+      "status": "FAIL",
+      "substantive_review_performed": false,
+      "workspace_writes": 0
+    }
+  ],
+  "run_id": "FORA-REMEDIATION-2026-001"
+}

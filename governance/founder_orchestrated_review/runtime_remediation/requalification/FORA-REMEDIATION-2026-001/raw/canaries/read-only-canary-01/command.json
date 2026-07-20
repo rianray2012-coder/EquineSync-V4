@@ -1,0 +1,50 @@
+{
+  "argv": [
+    "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/bin/codex.js",
+    "-a",
+    "on-request",
+    "exec",
+    "--strict-config",
+    "--json",
+    "-C",
+    "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout",
+    "-s",
+    "read-only",
+    "-c",
+    "web_search=\"disabled\"",
+    "--output-schema",
+    "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package/governance/founder_orchestrated_review/runtime_remediation/requalification/FORA-REMEDIATION-2026-001/schemas/read_only_canary.schema.json",
+    "-o",
+    "/private/tmp/equinesync-fora-remediation.ld1td0/canary-runtimes/read-only-canary-01/output/final.json",
+    "-"
+  ],
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "environment_variable_names_only": [
+    "CI",
+    "CODEX_HOME",
+    "HOME",
+    "LANG",
+    "LC_ALL",
+    "LOGNAME",
+    "NO_COLOR",
+    "PATH",
+    "SHELL",
+    "TERM",
+    "TMPDIR",
+    "USER"
+  ],
+  "exact_agent_types": [
+    "equinesync_segregated_review_agent"
+  ],
+  "execution_commit": "e93d3acc65a45835d3f3c63473f5dd98e1d1bcf5",
+  "expected_noninteractive_approval_policy": "never",
+  "fork_turns": "none",
+  "production_access": false,
+  "prompt_delivery": "stdin from parent_prompt.txt",
+  "requested_approval_policy": "on-request",
+  "retry": false,
+  "sandbox": "read-only",
+  "substantive_review": false,
+  "user_config": "isolated disposable profile; project checkout explicitly trusted",
+  "working_directory": "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout"
+}

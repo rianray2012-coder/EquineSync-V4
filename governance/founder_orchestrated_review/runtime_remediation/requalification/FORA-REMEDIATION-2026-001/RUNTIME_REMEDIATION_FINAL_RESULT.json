@@ -1,0 +1,67 @@
+{
+  "agent_role_values": [
+    null
+  ],
+  "agent_type_values": [
+    null
+  ],
+  "authority": "Founder authorization limited to runtime loading, connector isolation, and read-only requalification",
+  "batch_attempted": false,
+  "batch_passed": false,
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "cloudflare_mcp_attempts": 0,
+  "connector_activity_root_cause": "remote_plugin defaulted true in the prior isolated profile and populated a required Cloudflare MCP plugin, producing three authentication attempts.",
+  "custom_agent_loading_root_cause": "The prior isolated profile did not trust the checkout, disabling project custom-agent configuration. Trust remediation loaded the project layer, but the first requalification still proved the available spawn interface stripped the requested agent_type and created a generic child with null agent_role.",
+  "default_branch": "integrate-emergent-final-zip",
+  "default_branch_modified": false,
+  "deployment_performed": false,
+  "failed_canary": {
+    "direct_child_custom_instruction_layer_acknowledged": false,
+    "direct_child_registration_marker": null,
+    "expected_role": "ES-RA-02",
+    "observed_child_agent_role": null,
+    "requested_agent": "equinesync_segregated_review_agent",
+    "requested_agent_type_runtime_value": null,
+    "retry_performed": false
+  },
+  "files_changed": 113,
+  "final_disposition": "REMEDIATION_REQUALIFICATION_FAILED_FIRST_CANARY",
+  "founder_reauthorization_required": true,
+  "fresh_clone_verification": "PENDING",
+  "generic_fallback_detected": true,
+  "inactive_configuration_preserved": true,
+  "individual_canaries_attempted": 1,
+  "individual_canaries_passed": 0,
+  "installed_system_validation": {
+    "passed": 16,
+    "status": "PASS",
+    "total": 16
+  },
+  "merged": false,
+  "non_agent_probe": {
+    "checks_passed": 14,
+    "checks_total": 14,
+    "status": "PASS"
+  },
+  "other_unauthorized_connector_attempts": 0,
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "parent_orchestration_tool_calls": 2,
+  "parent_substitution_detected": true,
+  "prior_activation_disposition": "ACTIVATION_BLOCKED_OR_ROLLBACK_REQUIRED",
+  "production_access": false,
+  "provider_writes": 0,
+  "pull_requests_created": false,
+  "release_created": false,
+  "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "resulting_commit": null,
+  "run_id": "FORA-REMEDIATION-2026-001",
+  "sealed_files_changed": 0,
+  "sealed_package_preserved": true,
+  "starting_commit": "e93d3acc65a45835d3f3c63473f5dd98e1d1bcf5",
+  "static_validation_result": "PASS",
+  "substantive_review_performed": false,
+  "tag_created": false,
+  "tool_calls": 0,
+  "workspace_write_roles_started": 0,
+  "workspace_writes": 0
+}

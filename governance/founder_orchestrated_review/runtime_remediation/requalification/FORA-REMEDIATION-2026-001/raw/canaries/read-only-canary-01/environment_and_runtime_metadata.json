@@ -1,0 +1,24 @@
+{
+  "ambient_sensitive_environment_variable_names_not_inherited": [],
+  "config_sha256": "bc5a6413e3abae7af2fb4be0a9e21448b24404db67a161e6139ea7a026a0c778",
+  "control_plane_auth_content_or_hash_recorded": false,
+  "control_plane_auth_copied": true,
+  "environment_variable_names_only": [
+    "CI",
+    "CODEX_HOME",
+    "HOME",
+    "LANG",
+    "LC_ALL",
+    "LOGNAME",
+    "NO_COLOR",
+    "PATH",
+    "SHELL",
+    "TERM",
+    "TMPDIR",
+    "USER"
+  ],
+  "execution_root": "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout",
+  "mcp_servers_declared": 0,
+  "plugins_declared": 0,
+  "template_sha256": "3762167644a8f4d41ff6e6c0c20ebb336db16f9e1d3f1749f477b3d510292b74"
+}

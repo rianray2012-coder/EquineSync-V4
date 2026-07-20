@@ -1,0 +1,3 @@
+{"id":1,"method":"initialize","params":{"clientInfo":{"name":"equinesync-runtime-probe","version":"1.0.0"}}}
+{"method":"initialized","params":{}}
+{"id":2,"method":"config/read","params":{"cwd":"/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout","includeLayers":true}}

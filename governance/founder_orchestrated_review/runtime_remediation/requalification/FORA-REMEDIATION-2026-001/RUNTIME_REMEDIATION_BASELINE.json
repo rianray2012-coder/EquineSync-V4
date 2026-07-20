@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "FORA-REMEDIATION-2026-001",
+  "captured_at": "2026-07-20T03:58:47Z",
+  "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "remote_names": [
+    "origin"
+  ],
+  "branch": "agent/install-founder-review-agents-v1.0.0",
+  "starting_commit": "e93d3acc65a45835d3f3c63473f5dd98e1d1bcf5",
+  "reported_latest_pushed_commit": "e93d3acc65a45835d3f3c63473f5dd98e1d1bcf5",
+  "reported_latest_pushed_commit_is_remote_tip": true,
+  "stale_remote_tracking_ref_observed_then_refreshed": true,
+  "remote_branch_tip_after_explicit_ref_refresh": "e93d3acc65a45835d3f3c63473f5dd98e1d1bcf5",
+  "default_branch": "integrate-emergent-final-zip",
+  "default_branch_tip": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "starting_commit_in_default_branch": false,
+  "pull_request_count": 0,
+  "working_tree_clean": true,
+  "working_tree_diff_empty": true,
+  "approved_review_package_commit": "45c3bada313ba1196a52398780d1129255a000ee",
+  "technical_installation_evidence_commit": "860da19970604197117b94a2ef7f23dba2dca694",
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "prior_activation_disposition": "ACTIVATION_BLOCKED_OR_ROLLBACK_REQUIRED",
+  "prior_activation_manifest": {
+    "status": "PASS",
+    "manifest_entries": 34,
+    "checksum_entries": 35
+  },
+  "installed_system_validation": {
+    "execution_environment": "Disposable clean checkout at the starting commit",
+    "status": "PASS",
+    "checks": 16,
+    "passed": 16,
+    "failed": 0
+  },
+  "runtime": {
+    "codex_cli_version": "0.144.6",
+    "codex_launcher_sha256": "134063e133f0b4244fa3b251acf973d4fe4b4aeeacbdc135211bf480f59f1477",
+    "codex_native_binary_sha256": "80a3933d11a9d13ef806aa24f7bb8afc9169cfe4e9b09d6da6a92922cbde9cff",
+    "operating_system": "macOS 26.5.2 build 25F84",
+    "architecture": "arm64"
+  },
+  "configuration": {
+    "repository_config_sha256": "b29e973bbba4a05769f443bb6bb4e34a52513e2dc27aaa21373712dceaed033c",
+    "user_config_sha256": "5fa449041f0c1d023236d3b6706cfb95f990794d06ced5ec50f63e09a2d817e9",
+    "prior_isolated_runtime_config_sha256": "29d57a7ee4bd7e5eed45f9e8694d0b7127e3206e1d42256dcc30366f15c1328b",
+    "repository_agent_max_threads": 6,
+    "repository_agent_max_depth": 1,
+    "user_config_sandbox_mode": "danger-full-access",
+    "canary_parent_explicit_sandbox_required": "read-only"
+  },
+  "active_user_mcp_configuration_names": [
+    "cloudflare-api",
+    "computer-use",
+    "node_repl",
+    "openaiDeveloperDocs"
+  ],
+  "active_plugin_or_app_mcp_names_observed_by_codex_mcp_list": [
+    "github",
+    "sites-design-picker"
+  ],
+  "user_enabled_plugin_count": 14,
+  "relevant_environment_variable_names": [
+    "CODEX_CI",
+    "CODEX_INTERNAL_ORIGINATOR_OVERRIDE",
+    "CODEX_SHELL",
+    "CODEX_THREAD_ID"
+  ],
+  "sensitive_or_production_environment_variable_names_detected": [],
+  "baseline_byte_manifest": "baseline/BASELINE_BYTE_MANIFEST.json",
+  "status": "PASS"
+}

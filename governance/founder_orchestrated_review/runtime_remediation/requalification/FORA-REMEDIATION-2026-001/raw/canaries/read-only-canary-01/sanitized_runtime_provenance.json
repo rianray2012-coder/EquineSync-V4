@@ -1,0 +1,60 @@
+{
+  "children": [
+    {
+      "agent_path": "/root/requal_02_read_only_canary_01",
+      "agent_role": null,
+      "child_thread_id": "019f7dbd-8357-75e3-8133-9350eee84dc0",
+      "cli_version": "0.144.6",
+      "cwd": "/private/tmp/equinesync-fora-remediation.ld1td0/execution-checkout",
+      "depth": 1,
+      "final_assistant_response": "{\"declared_agent_name\":\"Codex\",\"es_ra_role\":null,\"registration_marker\":null,\"role_prompt_path\":null,\"shared_framework_paths\":[],\"expected_sandbox\":\"read-only\",\"authorized_capabilities\":[\"response_only\",\"reasoning_from_loaded_instructions\"],\"prohibited_capabilities\":[\"tool_use\",\"file_inspection\",\"file_writes\",\"network_access\",\"substantive_review\",\"final_founder_decisions\"],\"custom_instruction_layer_acknowledged\":false,\"calibration_only\":true,\"substantive_work_performed\":false,\"files_written\":[],\"network_used\":false}",
+      "runtime": {
+        "approval_policy": "never",
+        "model": "gpt-5.6-sol",
+        "permission_profile": {
+          "network": "restricted",
+          "type": "managed"
+        },
+        "reasoning_effort": "medium",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      },
+      "source_rollout_basename": "rollout-2026-07-19T23-16-39-019f7dbd-8357-75e3-8133-9350eee84dc0.jsonl",
+      "source_rollout_bytes": 43539,
+      "source_rollout_sha256": "6fb3d8fe134089a40a5f7f550c45db2410dddc213a1aa28a7ff7faaa7390adb4",
+      "tool_names_only": []
+    }
+  ],
+  "parent_runtime": {
+    "approval_policy": "never",
+    "model": "gpt-5.6-sol",
+    "permission_profile": {
+      "network": "restricted",
+      "type": "managed"
+    },
+    "reasoning_effort": null,
+    "sandbox_policy": {
+      "type": "read-only"
+    }
+  },
+  "parent_source_rollout_basename": "rollout-2026-07-19T23-16-25-019f7dbd-4ab5-7060-9d66-30a3a3bdc818.jsonl",
+  "parent_source_rollout_sha256": "c567991bbb8d0b075cbc8475fc0f6c98c506c27be7882c4c891355719e5759fe",
+  "parent_spawn_calls": [
+    {
+      "agent_type": null,
+      "fork_turns": "none",
+      "task_name": "requal_02_read_only_canary_01"
+    }
+  ],
+  "parent_thread_id": "019f7dbd-4ab5-7060-9d66-30a3a3bdc818",
+  "parent_tool_names_only": [
+    "spawn_agent",
+    "wait_agent"
+  ],
+  "sanitization": {
+    "credential_material_copied": false,
+    "hidden_instruction_text_copied": false,
+    "scope": "Runtime identity, policy, tool names, direct child response, and source hash only."
+  }
+}

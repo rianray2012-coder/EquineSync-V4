@@ -1,0 +1,44 @@
+{
+  "baseline_entries_checked": 617,
+  "baseline_mismatches": [],
+  "category_mismatch_counts": {
+    "approved_package_artifacts": 0,
+    "orchestration_configuration": 0,
+    "prior_activation_evidence": 0,
+    "prior_runtime_and_calibration_evidence": 0,
+    "registered_role_files": 0,
+    "runtime_or_launcher_configuration": 0,
+    "sealed_package": 0
+  },
+  "checks": {
+    "approved_package_checksum_line_exact": true,
+    "approved_package_zip_hash": true,
+    "baseline_bytes_preserved": true,
+    "baseline_manifest_pass": true,
+    "inactive_configuration_preserved": true,
+    "installed_system_validation_16_of_16": false,
+    "installed_system_validation_pass": true,
+    "installed_system_validator_exit_zero": false,
+    "prior_activation_evidence_preserved": true,
+    "prior_runtime_and_calibration_evidence_preserved": true,
+    "registered_role_files_preserved": true,
+    "sealed_package_internal_validation": true,
+    "sealed_package_preserved": true,
+    "substantive_review_not_run": true,
+    "validation_clone_branch_is_authorized": true,
+    "validation_clone_head_is_starting_commit": true,
+    "workspace_write_roles_not_run": true
+  },
+  "checks_passed": 15,
+  "checks_total": 17,
+  "failure_disposition": "REMEDIATION_FAILED_STATIC_VALIDATION",
+  "installed_system_validation": {
+    "checks": 15,
+    "failed": 0,
+    "passed": 15
+  },
+  "package_zip_sha256": "604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3",
+  "run_id": "FORA-REMEDIATION-2026-001",
+  "sealed_package_validator_exit_code": 0,
+  "status": "FAIL"
+}

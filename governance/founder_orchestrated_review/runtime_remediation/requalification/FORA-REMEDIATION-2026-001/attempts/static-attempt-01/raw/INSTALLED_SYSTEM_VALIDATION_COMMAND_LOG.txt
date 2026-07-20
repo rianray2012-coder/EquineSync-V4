@@ -1,0 +1,23 @@
+# Installed system validation command log
+started_at=2026-07-19T20:58:30+00:00
+completed_at=2026-07-19T20:58:31+00:00
+validator=governance/founder_orchestrated_review/validation/validate_installed_agent_system.py
+python=/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/installed-validator-venv/bin/python
+argv=["governance/founder_orchestrated_review/validation/validate_installed_agent_system.py"]
+
+## command 1
+cwd=governance/founder_orchestrated_review/agent_config/packages
+command=["shasum", "-a", "256", "-c", "EquineSync_Founder_Orchestrated_Review_Agent_Config_Package_V1.0.0.zip.sha256"]
+return_code=0
+stdout:
+EquineSync_Founder_Orchestrated_Review_Agent_Config_Package_V1.0.0.zip: OK
+stderr:
+
+
+## command 2
+cwd=.
+command=["/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/installed-validator-venv/bin/python", "/Users/rianray/Documents/Codex/2026-07-19/place-the-approved-equinesync-founder-orchestrated/work/EquineSync-V4-founder-review-package/governance/founder_orchestrated_review/agent_config/V1.0.0/scripts/validate_package.py"]
+return_code=0
+stdout:
+PACKAGE VALIDATION PASSED
+stderr:

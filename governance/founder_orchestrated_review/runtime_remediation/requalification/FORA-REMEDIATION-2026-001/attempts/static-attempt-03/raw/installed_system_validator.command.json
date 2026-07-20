@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/private/tmp/equinesync-fora-remediation.ld1td0/validation-venv/bin/python",
+    "governance/founder_orchestrated_review/validation/validate_installed_agent_system.py"
+  ],
+  "cwd": "/private/tmp/equinesync-fora-remediation.ld1td0/approved-checkout",
+  "environment_variable_names_only": [
+    "LANG",
+    "LC_ALL",
+    "PATH",
+    "PYTHONDONTWRITEBYTECODE"
+  ],
+  "dependency_source": "validation/requirements.txt installed into a disposable validation-only virtual environment"
+}
