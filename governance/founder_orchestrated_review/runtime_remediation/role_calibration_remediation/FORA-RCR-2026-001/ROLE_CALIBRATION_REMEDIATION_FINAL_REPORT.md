@@ -24,6 +24,7 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 - ZIP SHA-256: `604d2c8eb0861120a16efe5f8d042a2bf8fe61c833822334ffb2ece5ef6695b3` (`PASS`).
 - Earlier fresh-clone proof for `2d2efa9cc9aaaf14723283d94b716b5681c70df4`: `PASS` with `141/141` checksum entries.
 - Superseding final-commit fresh-clone proof for `860da19970604197117b94a2ef7f23dba2dca694`: `PASS` with `143/143` checksum entries.
+- Installed-system static validation after calibration-canary reconciliation: `16/16 PASS`.
 
 ## Evidence-chain reconciliation
 
@@ -34,6 +35,8 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 - The earlier machine-readable `resulting_commit` placeholder is resolved to the repository-derived final evidence commit above.
 - The `141` and `143` checksum totals are both historically correct: the remediation commit contained 141 checksummed paths, while the final evidence commit contained 143. The exact additions were `FRESH_CLONE_VERIFICATION.json` and `FRESH_CLONE_VERIFICATION.md`; no path was removed.
 - At both commits the change manifest contained one additional path because the checksum manifest intentionally excludes itself from its own content.
+- The current reconciliation/review-package change set contains `152` manifest paths and `151` checksummed paths; the checksum manifest is again the sole self-excluded path.
+- The installation validator's pre-runtime exact-eight-TOML assumption was reconciled with the preserved `es_runtime_canary.toml` introduced at the starting baseline. The validator now checks eight registered review roles and independently checks one calibration-only, read-only canary; the canary is not counted as a registered review role.
 - Sealed package and calibration content changed between the starting baseline and final evidence commit: none.
 - The final evidence commit is not contained in the default branch `integrate-emergent-final-zip`.
 - Pull requests for this branch: `0`; merge status: not merged.

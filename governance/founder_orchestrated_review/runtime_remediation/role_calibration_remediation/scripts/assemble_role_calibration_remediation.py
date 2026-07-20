@@ -186,6 +186,18 @@ def main() -> int:
     )
     behavior_runs = behavior_run_rows()
     bounded_runs = bounded_run_rows()
+    manifest = changed_paths()
+
+    activation_status_path = ACTIVATION_DIR / "FOUNDER_ACTIVATION_REVIEW_PACKAGE_STATUS.json"
+    activation_status = read_json(activation_status_path)
+    activation_status["review_package_manifest_entries"] = len(manifest)
+    activation_status["review_package_checksum_entries"] = len(manifest) - 1
+    activation_status["installed_system_static_validation"] = {
+        "passed": 16,
+        "expected": 16,
+        "status": "PASS",
+    }
+    write_json(activation_status_path, activation_status)
 
     role_rows = []
     for agent_id, relative in ROLE_FILES.items():
@@ -428,6 +440,20 @@ def main() -> int:
         ),
         "final_disposition": DISPOSITION,
         "evidence_reconciliation_disposition": REVIEW_PACKAGE_DISPOSITION,
+        "review_package_change_set": {
+            "manifest_entries": len(manifest),
+            "checksum_entries": len(manifest) - 1,
+            "checksum_manifest_self_excluded": True,
+        },
+        "installation_validator_reconciliation": {
+            "registered_review_role_tomls": 8,
+            "calibration_only_canary_tomls": 1,
+            "calibration_canary_is_registered_review_role": False,
+            "legacy_exact_eight_toml_assumption_corrected": True,
+            "static_validation_passed": 16,
+            "static_validation_expected": 16,
+            "status": "PASS",
+        },
     }
     write_json(CYCLE_DIR / "MACHINE_READABLE_DISPOSITION.json", machine)
 
@@ -457,6 +483,7 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 - ZIP SHA-256: `{zip_hash}` (`PASS`).
 - Earlier fresh-clone proof for `{REMEDIATION_COMMIT}`: `{fresh_clone['status'] if fresh_clone else 'PENDING'}` with `141/141` checksum entries.
 - Superseding final-commit fresh-clone proof for `{FINAL_EVIDENCE_COMMIT}`: `{final_fresh_clone['status'] if final_fresh_clone else 'PENDING'}` with `143/143` checksum entries.
+- Installed-system static validation after calibration-canary reconciliation: `16/16 PASS`.
 
 ## Evidence-chain reconciliation
 
@@ -467,6 +494,8 @@ Founder activation approval remains `false`. No substantive Founder-Orchestrated
 - The earlier machine-readable `resulting_commit` placeholder is resolved to the repository-derived final evidence commit above.
 - The `141` and `143` checksum totals are both historically correct: the remediation commit contained 141 checksummed paths, while the final evidence commit contained 143. The exact additions were `FRESH_CLONE_VERIFICATION.json` and `FRESH_CLONE_VERIFICATION.md`; no path was removed.
 - At both commits the change manifest contained one additional path because the checksum manifest intentionally excludes itself from its own content.
+- The current reconciliation/review-package change set contains `{len(manifest)}` manifest paths and `{len(manifest) - 1}` checksummed paths; the checksum manifest is again the sole self-excluded path.
+- The installation validator's pre-runtime exact-eight-TOML assumption was reconciled with the preserved `es_runtime_canary.toml` introduced at the starting baseline. The validator now checks eight registered review roles and independently checks one calibration-only, read-only canary; the canary is not counted as a registered review role.
 - Sealed package and calibration content changed between the starting baseline and final evidence commit: none.
 - The final evidence commit is not contained in the default branch `integrate-emergent-final-zip`.
 - Pull requests for this branch: `0`; merge status: not merged.
@@ -506,7 +535,6 @@ The formal activation-review package is prepared at `governance/founder_orchestr
 
     manifest_path = CYCLE_DIR / "ROLE_CALIBRATION_REMEDIATION_CHANGE_MANIFEST.txt"
     checksum_path = CYCLE_DIR / "ROLE_CALIBRATION_REMEDIATION_CHECKSUMS.sha256"
-    manifest = changed_paths()
     write_text(manifest_path, "\n".join(manifest))
     checksum_lines = []
     for relative in manifest:

@@ -124,6 +124,8 @@ ROLE_MAP = {
         "registration_marker": "ES-RA-08-REGISTERED-V1.0.0",
     },
 }
+RUNTIME_CANARY_FILE = "es_runtime_canary.toml"
+RUNTIME_CANARY_NAME = "es_runtime_canary"
 
 
 def now_utc() -> str:
@@ -345,12 +347,14 @@ def check_archive_install_identity() -> dict[str, Any]:
 
 
 def parse_and_validate_agents() -> dict[str, dict[str, Any]]:
-    files = sorted(AGENT_DIR.glob("*.toml"))
-    if [path.name for path in files] != sorted(ROLE_MAP):
+    all_files = sorted(AGENT_DIR.glob("*.toml"))
+    expected_files = sorted([*ROLE_MAP, RUNTIME_CANARY_FILE])
+    if [path.name for path in all_files] != expected_files:
         raise ValueError(
-            f"agent file set mismatch: actual={[path.name for path in files]} "
-            f"expected={sorted(ROLE_MAP)}"
+            f"agent file set mismatch: actual={[path.name for path in all_files]} "
+            f"expected={expected_files}"
         )
+    files = [AGENT_DIR / name for name in sorted(ROLE_MAP)]
     parsed: dict[str, dict[str, Any]] = {}
     names: set[str] = set()
     for path in files:
@@ -403,6 +407,38 @@ def parse_and_validate_agents() -> dict[str, dict[str, Any]]:
                 raise ValueError(f"{path.name}: missing control phrase {phrase!r}")
         parsed[path.name] = data
     return parsed
+
+
+def validate_runtime_canary() -> dict[str, Any]:
+    path = AGENT_DIR / RUNTIME_CANARY_FILE
+    data = tomllib.loads(path.read_text(encoding="utf-8"))
+    missing = REQUIRED_AGENT_FIELDS - set(data)
+    unexpected = set(data) - ALLOWED_AGENT_FIELDS
+    if missing or unexpected:
+        raise ValueError(
+            f"{path.name}: missing={sorted(missing)} unexpected={sorted(unexpected)}"
+        )
+    if data["name"] != RUNTIME_CANARY_NAME:
+        raise ValueError(f"{path.name}: unexpected name {data['name']!r}")
+    if data["sandbox_mode"] != "read-only":
+        raise ValueError(f"{path.name}: sandbox_mode must be read-only")
+    if data["approval_policy"] != "on-request":
+        raise ValueError(f"{path.name}: approval_policy must be on-request")
+    instructions = data["developer_instructions"]
+    for phrase in (
+        "temporary calibration infrastructure for runtime discovery only",
+        "Return exactly ES_RUNTIME_CANARY_LOADED_V1 and no other text",
+        "Do not use tools, inspect files, perform substantive work, or claim activation",
+    ):
+        if phrase not in instructions:
+            raise ValueError(f"{path.name}: missing control phrase {phrase!r}")
+    return {
+        "file": path.relative_to(REPO_ROOT).as_posix(),
+        "name": data["name"],
+        "sandbox_mode": data["sandbox_mode"],
+        "approval_policy": data["approval_policy"],
+        "classification": "CALIBRATION_ONLY_NOT_A_REGISTERED_REVIEW_ROLE",
+    }
 
 
 def validate_schemas() -> dict[str, Any]:
@@ -744,9 +780,14 @@ def main() -> int:
         lambda: validate_instance(MANIFEST_PATH, SCHEMA_DIR / "package_manifest.schema.json"),
     )
 
+    validation.check(
+        "AGT-000",
+        "Calibration-only runtime canary controls",
+        validate_runtime_canary,
+    )
     agent_data = validation.check(
         "AGT-001",
-        "Eight custom-agent TOMLs and controls",
+        "Eight registered custom-agent TOMLs and controls",
         parse_and_validate_agents,
         lambda data: {
             "agent_count": len(data),

@@ -6,7 +6,7 @@
   "behavior_roles_passed": 8,
   "bounded_roles_expected": 8,
   "bounded_roles_passed": 8,
-  "generated_at": "2026-07-20T03:01:40Z",
+  "generated_at": "2026-07-20T03:06:49Z",
   "individual_authorized_roles_expected": 2,
   "individual_authorized_roles_passed": 2,
   "roles": [

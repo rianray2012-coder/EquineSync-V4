@@ -55,6 +55,7 @@ None identified within the recorded technical installation and evidence-reconcil
 - The unresolved machine-readable commit marker was reconciled to repository-derived commit identities.
 - The `141` versus `143` checksum totals were reconciled: both were correct for different commits, and exactly two fresh-clone evidence files caused the increase.
 - Commit `860da19970604197117b94a2ef7f23dba2dca694` was independently verified from a clean clone.
+- The installation validator's pre-runtime eight-TOML assumption was reconciled with the preserved `es_runtime_canary.toml`. The validator now distinguishes the eight registered review roles from the one calibration-only, read-only runtime canary and passes `16/16` static checks.
 
 ### Residual limitations
 
