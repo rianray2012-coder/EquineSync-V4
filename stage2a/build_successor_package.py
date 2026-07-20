@@ -10,6 +10,7 @@ import shutil
 import subprocess
 import tempfile
 import re
+import zipfile
 from pathlib import Path
 
 from traceability_contract import (
@@ -145,29 +146,44 @@ def package_safe_validation(raw: dict[str, object]) -> dict[str, object]:
 
 
 def verify_freeze(root: Path, expected_payload: int, expected_physical: int, expected_manifest_sha: str, archive_name: str, expected_archive_sha: str) -> dict[str, object]:
-    manifest = root / "DRAFT_REVIEW_SHA256SUMS.txt"
-    if sha(manifest) != expected_manifest_sha:
-        raise RuntimeError(f"failed candidate manifest changed: {root.name}")
-    errors = []
-    rows = manifest.read_text(encoding="utf-8").splitlines()
-    for line in rows:
-        expected, relative = line.split("  ", 1)
-        path = root / relative
-        if not path.is_file() or sha(path) != expected:
-            errors.append(relative)
-    physical = sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file())
-    if errors or len(rows) != expected_payload or len(physical) != expected_physical:
-        raise RuntimeError(f"failed candidate integrity mismatch: rows={len(rows)} physical={len(physical)} errors={errors}")
     archive = OUTPUTS / archive_name
     if not archive.is_file() or sha(archive) != expected_archive_sha:
         raise RuntimeError("failed candidate immutable archive changed")
+    prefix = f"{root.name}/"
+    with zipfile.ZipFile(archive, "r") as frozen:
+        members = {
+            info.filename[len(prefix):]: frozen.read(info)
+            for info in frozen.infolist()
+            if not info.is_dir() and info.filename.startswith(prefix)
+        }
+    manifest_bytes = members.get("DRAFT_REVIEW_SHA256SUMS.txt", b"")
+    if hashlib.sha256(manifest_bytes).hexdigest() != expected_manifest_sha:
+        raise RuntimeError(f"failed candidate embedded manifest changed: {root.name}")
+    rows = manifest_bytes.decode("utf-8").splitlines()
+    errors = []
+    listed: set[str] = set()
+    for line in rows:
+        expected, relative = line.split("  ", 1)
+        listed.add(relative)
+        data = members.get(relative)
+        if data is None or hashlib.sha256(data).hexdigest() != expected:
+            errors.append(relative)
+    expected_controls = {"DRAFT_REVIEW_SHA256SUMS.txt", "DRAFT_REVIEW_SNAPSHOT_RECORD.json", "DRAFT_REVIEW_SNAPSHOT_RECORD.md"}
+    unexpected = set(members) - listed - expected_controls
+    missing_controls = expected_controls - set(members)
+    if errors or unexpected or missing_controls or len(rows) != expected_payload or len(members) != expected_physical:
+        raise RuntimeError(
+            f"failed candidate archive integrity mismatch: rows={len(rows)} physical={len(members)} "
+            f"errors={errors} unexpected={sorted(unexpected)} missing_controls={sorted(missing_controls)}"
+        )
     return {
         "candidate_directory": root.relative_to(REPO).as_posix(),
         "archive": f"outputs/{archive_name}",
         "archive_sha256": expected_archive_sha,
         "manifest_sha256": expected_manifest_sha,
         "payload_files": len(rows),
-        "physical_files": len(physical),
+        "physical_files": len(members),
+        "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EMBEDDED_MANIFEST",
         "unchanged": True,
     }
 
@@ -177,28 +193,35 @@ def verify_failed_assembly(root: Path, expected_files: int, expected_manifest_sh
     if not manifest.is_file() or sha(manifest) != expected_manifest_sha:
         raise RuntimeError("Candidate 005 failed-assembly manifest changed")
     rows = manifest.read_text(encoding="utf-8").splitlines()
+    archive = OUTPUTS / archive_name
+    if not archive.is_file() or sha(archive) != expected_archive_sha:
+        raise RuntimeError("Candidate 005 failed-assembly archive changed")
+    prefix = f"{root.name}/"
+    with zipfile.ZipFile(archive, "r") as frozen:
+        members = {
+            info.filename[len(prefix):]: frozen.read(info)
+            for info in frozen.infolist()
+            if not info.is_dir() and info.filename.startswith(prefix)
+        }
     errors: list[str] = []
     listed_paths: set[str] = set()
     for line in rows:
         expected, relative = line.split("  ", 1)
         listed_paths.add(relative)
-        path = root / relative
-        if not path.is_file() or sha(path) != expected:
+        data = members.get(relative)
+        if data is None or hashlib.sha256(data).hexdigest() != expected:
             errors.append(relative)
-    physical = sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file())
-    if errors or len(rows) != expected_files or set(physical) != listed_paths:
-        raise RuntimeError(f"Candidate 005 failed-assembly integrity mismatch: rows={len(rows)} physical={len(physical)} errors={errors}")
-    archive = OUTPUTS / archive_name
-    if not archive.is_file() or sha(archive) != expected_archive_sha:
-        raise RuntimeError("Candidate 005 failed-assembly archive changed")
+    if errors or len(rows) != expected_files or set(members) != listed_paths:
+        raise RuntimeError(f"Candidate 005 failed-assembly archive integrity mismatch: rows={len(rows)} physical={len(members)} errors={errors}")
     return {
         "candidate_directory": root.relative_to(REPO).as_posix(),
         "archive": f"outputs/{archive_name}",
         "archive_sha256": expected_archive_sha,
         "manifest": manifest.relative_to(REPO).as_posix(),
         "manifest_sha256": expected_manifest_sha,
-        "physical_files": len(physical),
+        "physical_files": len(members),
         "classification": "PRE_FREEZE_ASSEMBLY_VALIDATION_FAILED",
+        "verification_basis": "IMMUTABLE_ARCHIVE_BYTES_AND_EXTERNAL_MANIFEST",
         "unchanged": True,
     }
 
