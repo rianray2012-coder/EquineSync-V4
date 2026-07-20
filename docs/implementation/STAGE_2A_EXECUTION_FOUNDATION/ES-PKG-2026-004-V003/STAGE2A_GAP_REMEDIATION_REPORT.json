@@ -1,0 +1,88 @@
+{
+  "authorized_gaps": [
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-001",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Backend dependency-install contract"
+    },
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-002",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Runtime and toolchain contract"
+    },
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-003",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Disposable environment and provider isolation"
+    },
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-004",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Deterministic start stop and health orchestration"
+    },
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-005",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Synthetic fixture foundation"
+    },
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-006",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Evidence-capture harness"
+    },
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-007",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Exact cleanup and zero-residue proof"
+    },
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-008",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Rollback and recovery foundation"
+    },
+    {
+      "f0001_effect": "F0001_REMAINS_OPEN_BLOCKING",
+      "formally_closed": false,
+      "gap_id": "S2-GAP-009",
+      "implementation_status": "REMEDIATED_CANDIDATE",
+      "independent_verification": "PENDING_REREVIEW",
+      "scope": "AUTHORIZED_STAGE2A",
+      "title": "Startup side-effect control"
+    }
+  ],
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "formal_gap_closures": 0,
+  "package_id": "ES-PKG-2026-004-V003"
+}

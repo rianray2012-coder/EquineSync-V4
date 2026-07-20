@@ -1,0 +1,10 @@
+{
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "frozen": true,
+  "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+  "package_id": "ES-PKG-2026-004-V003",
+  "packaging_commit": "639717c50798cef48211ff02f777afc8ecf656c0",
+  "payload_files": 108,
+  "review_attempt": 2,
+  "validated_implementation_commit": "83ccfac2bdeb0615e8818ffcbde03337d429dba5"
+}

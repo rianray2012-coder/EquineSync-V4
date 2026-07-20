@@ -1,0 +1,20 @@
+{
+  "authorized_gaps": [
+    "S2-GAP-001",
+    "S2-GAP-002",
+    "S2-GAP-003",
+    "S2-GAP-004",
+    "S2-GAP-005",
+    "S2-GAP-006",
+    "S2-GAP-007",
+    "S2-GAP-008",
+    "S2-GAP-009"
+  ],
+  "candidate": true,
+  "package_id": "ES-PKG-2026-004-V003",
+  "packaging_commit": "639717c50798cef48211ff02f777afc8ecf656c0",
+  "predecessor": "ES-PKG-2026-003-V002",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "starting_commit": "0be6172a28b75238c5facabf91d43ed09aaf0d54",
+  "validated_implementation_commit": "83ccfac2bdeb0615e8818ffcbde03337d429dba5"
+}

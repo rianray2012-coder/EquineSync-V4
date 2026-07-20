@@ -1,0 +1,13 @@
+{
+  "review_attempt": 2,
+  "archive": "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+  "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+  "archive_files": 111,
+  "payload_files": 108,
+  "snapshot_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+  "candidate_machine_validation": "PASS_19_OF_19",
+  "segregated_rereview": "TECHNICAL_PASS_RUNTIME_SELECTOR_BLOCKED",
+  "adversarial_rereview": "FAIL_FIVE_OPEN_FINDINGS",
+  "preservation": "IMMUTABLE_FAILED_REVIEW_EVIDENCE",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

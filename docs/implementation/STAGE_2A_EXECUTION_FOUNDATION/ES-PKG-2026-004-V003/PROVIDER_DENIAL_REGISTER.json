@@ -1,0 +1,124 @@
+{
+  "attempt_count": 0,
+  "package_id": "ES-PKG-2026-004-V003",
+  "providers": [
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "ANALYTICS_WRITE_KEY"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "Analytics"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "CLOUDFLARE_API_TOKEN"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "Cloudflare"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "DOCUSIGN_INTEGRATION_KEY"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "DocuSign"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "EMERGENT_LLM_KEY",
+        "GEMINI_API_KEY",
+        "GOOGLE_API_KEY",
+        "OPENAI_API_KEY"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "External AI"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "STORAGE_ACCESS_KEY_ID",
+        "STORAGE_SECRET_ACCESS_KEY"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "Object storage"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "RENDER_API_KEY"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "Render"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "RESEND_API_KEY"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "Resend"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "SENDGRID_API_KEY"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "SendGrid"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "STRIPE_API_KEY",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "Stripe"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "TWILIO_AUTH_TOKEN"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "Twilio"
+    },
+    {
+      "attempt_count": 0,
+      "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+      "configuration_names": [
+        "VERCEL_TOKEN"
+      ],
+      "configured": false,
+      "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
+      "provider": "Vercel"
+    }
+  ]
+}

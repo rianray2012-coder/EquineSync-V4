@@ -1,0 +1,44 @@
+{
+  "result": "PASS",
+  "startup": {
+    "background_flags": {
+      "DISABLE_AUTO_NUDGES": "true",
+      "DISABLE_NOTIFICATIONS": "true",
+      "DISABLE_OWNER_DIGEST": "true",
+      "DISABLE_OWNER_WEEKLY_RECAP": "true",
+      "DISABLE_SUBSCRIPTION_EMAIL_DISPATCHER": "true",
+      "DISABLE_TASK_MATERIALIZER": "true"
+    },
+    "catalog_materialization": "DISABLED_BY_STAGE2A_WRAPPER",
+    "full_application": true,
+    "gap_id": "S2-GAP-009",
+    "inventory_digest": "02bccf932bb7611851fb99f0accd23883797697227e824ae08882fca7c904817",
+    "metadata_collections_inventoried": 68,
+    "network_inventory": {
+      "approved_ports": [
+        27029,
+        8019
+      ],
+      "non_loopback": [],
+      "observed_lines": [
+        "mongod  12093 rianray    7u  IPv4 0x5ebd1c280e4a0bed      0t0  TCP 127.0.0.1:27029 (LISTEN)",
+        "mongod  12093 rianray   24u  IPv4 0x649a12c55b7005b8      0t0  TCP 127.0.0.1:27029->127.0.0.1:64550 (ESTABLISHED)",
+        "mongod  12093 rianray   25u  IPv4 0xf162da95a72d04fe      0t0  TCP 127.0.0.1:27029->127.0.0.1:64551 (ESTABLISHED)",
+        "mongod  12093 rianray   26u  IPv4 0x97bd0eee57099d98      0t0  TCP 127.0.0.1:27029->127.0.0.1:64552 (ESTABLISHED)",
+        "mongod  12093 rianray  306u  IPv4 0x706818102ca08277      0t0  TCP 127.0.0.1:27029->127.0.0.1:64628 (ESTABLISHED)",
+        "mongod  12093 rianray  307u  IPv4 0x77932da6052bba62      0t0  TCP 127.0.0.1:27029->127.0.0.1:64629 (ESTABLISHED)",
+        "mongod  12093 rianray  308u  IPv4 0x7a9af1b1020482be      0t0  TCP 127.0.0.1:27029->127.0.0.1:64630 (ESTABLISHED)",
+        "python3.1 12094 rianray    6u  IPv4 0x9eafe72d93adebe2      0t0  TCP 127.0.0.1:64550->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 12094 rianray    7u  IPv4 0xbff77b538b2e317e      0t0  TCP 127.0.0.1:64552->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 12094 rianray    8u  IPv4 0xaffef6225ab0264f      0t0  TCP 127.0.0.1:64551->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 12094 rianray    9u  IPv4 0xe1ad7616b0e7b3fb      0t0  TCP 127.0.0.1:8019 (LISTEN)"
+      ],
+      "sandbox_profile": "config/loopback-only.sb",
+      "wildcard_listeners": []
+    },
+    "permitted_startup_side_effects": "MongoDB collection and index metadata only; exact inventory captured",
+    "profile_control": "CONTROLLED_ZERO_DOCUMENT_WRITES",
+    "provider_attempt_count": 0,
+    "startup_document_writes": 0
+  }
+}

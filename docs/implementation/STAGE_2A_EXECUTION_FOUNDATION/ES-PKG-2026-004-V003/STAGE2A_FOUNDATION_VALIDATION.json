@@ -1,0 +1,4327 @@
+{
+  "schema_version": "2.0",
+  "package_id": "ES-PKG-2026-004-V003",
+  "validation": "PASS",
+  "started_utc": "2026-07-20T06:18:37.304651+00:00",
+  "ended_utc": "2026-07-20T06:19:04.845820+00:00",
+  "checks": [
+    {
+      "check": "implementation_commit_anchor",
+      "status": "PASS",
+      "detail": {
+        "commit": "83ccfac2bdeb0615e8818ffcbde03337d429dba5",
+        "tree": "99b234bd2da3c499bc29962637c40d2b3b4282bb",
+        "tracked_stage2a_paths": 38,
+        "starting_commit": "0be6172a28b75238c5facabf91d43ed09aaf0d54"
+      }
+    },
+    {
+      "check": "environment_contract",
+      "status": "PASS",
+      "detail": {
+        "status": "PASS",
+        "environment": "stage2a",
+        "datastore": "equinesync_stage2a_synthetic",
+        "mongo_endpoint_class": "LOOPBACK_ONLY",
+        "api_endpoint_class": "LOOPBACK_ONLY",
+        "provider_credentials_present": [],
+        "unknown_names": [],
+        "ambient_attestation": {
+          "prohibited_names_present": [],
+          "prohibited_name_count": 0,
+          "values_recorded": false
+        },
+        "backend_dotenv_absent": true
+      }
+    },
+    {
+      "check": "isolation_negative_tests",
+      "status": "PASS",
+      "detail": {
+        "configuration_denials": 23,
+        "provider_names_tested": 19,
+        "inherited_provider_name_exit": 1,
+        "values_recorded": false
+      }
+    },
+    {
+      "check": "exact_port_egress_denial",
+      "status": "PASS",
+      "detail": [
+        {
+          "endpoint_class": "UNAPPROVED_LOOPBACK",
+          "denied_by_sandbox": true,
+          "error": "PermissionError:errno=1"
+        },
+        {
+          "endpoint_class": "DOCUMENTATION_EXTERNAL",
+          "denied_by_sandbox": true,
+          "error": "PermissionError:errno=1"
+        }
+      ]
+    },
+    {
+      "check": "interrupted_start_cleanup",
+      "status": "PASS",
+      "detail": {
+        "error": "intentional Stage 2A interrupted-start failpoint",
+        "post_failure_status": {
+          "mongo_pid": null,
+          "mongo_alive": false,
+          "mongo_port_open": false,
+          "mongo_foreign_listener_pid": null,
+          "api_pid": null,
+          "api_alive": false,
+          "api_port_open": false,
+          "api_foreign_listener_pid": null,
+          "profile": null
+        },
+        "precondition_stop": {
+          "status": "STOPPED",
+          "processes": [
+            {
+              "kind": "api",
+              "pid": null,
+              "status": "ALREADY_STOPPED",
+              "port_closed": true
+            },
+            {
+              "kind": "mongo",
+              "pid": null,
+              "status": "ALREADY_STOPPED",
+              "port_closed": true
+            }
+          ],
+          "api_alive": false,
+          "mongo_alive": false,
+          "ports_closed": true,
+          "pid_files_absent": true
+        }
+      }
+    },
+    {
+      "check": "cold_start_full_application",
+      "status": "PASS",
+      "detail": {
+        "status": "STARTED",
+        "profile": "full",
+        "mongo_pid": 12093,
+        "api_pid": 12094,
+        "health": {
+          "status": "ok",
+          "service": "equinesync-api",
+          "version": "0.1.0",
+          "database": "connected",
+          "config": {
+            "jwt_configured": false,
+            "cors_configured": false,
+            "environment": "development"
+          },
+          "dependencies": {
+            "mailer_configured": false,
+            "email_verification_enforced": false,
+            "rate_limiting_enabled": true,
+            "auto_seed_enabled": false,
+            "seed_route_enabled": false
+          },
+          "started_at": "2026-07-20T06:18:46.815838+00:00",
+          "uptime_seconds": 7.4,
+          "indexes_ensured": true
+        },
+        "health_url": "LOOPBACK_API/api/health/ready",
+        "logs": [
+          ".runtime/logs/mongod.log",
+          ".runtime/logs/api.log"
+        ]
+      }
+    },
+    {
+      "check": "process_identity",
+      "status": "PASS",
+      "detail": {
+        "mongo_pid": 12093,
+        "mongo_alive": true,
+        "mongo_port_open": true,
+        "mongo_foreign_listener_pid": null,
+        "api_pid": 12094,
+        "api_alive": true,
+        "api_port_open": true,
+        "api_foreign_listener_pid": null,
+        "profile": "full"
+      }
+    },
+    {
+      "check": "startup_side_effect_inventory",
+      "status": "PASS",
+      "detail": {
+        "profile": "full EquineSync application",
+        "profile_control": "CONTROLLED_ZERO_DOCUMENT_WRITES",
+        "catalog_materialization": "DISABLED_BY_STAGE2A_WRAPPER",
+        "collections_with_index_metadata": 68,
+        "startup_document_writes": 0,
+        "inventory_digest": "02bccf932bb7611851fb99f0accd23883797697227e824ae08882fca7c904817",
+        "background_flags": {
+          "DISABLE_AUTO_NUDGES": "true",
+          "DISABLE_NOTIFICATIONS": "true",
+          "DISABLE_OWNER_DIGEST": "true",
+          "DISABLE_OWNER_WEEKLY_RECAP": "true",
+          "DISABLE_SUBSCRIPTION_EMAIL_DISPATCHER": "true",
+          "DISABLE_TASK_MATERIALIZER": "true"
+        },
+        "auto_seed": "false",
+        "seed_route": "false"
+      }
+    },
+    {
+      "check": "network_boundary",
+      "status": "PASS",
+      "detail": {
+        "observed_lines": [
+          "mongod  12093 rianray    7u  IPv4 0x5ebd1c280e4a0bed      0t0  TCP 127.0.0.1:27029 (LISTEN)",
+          "mongod  12093 rianray   24u  IPv4 0x649a12c55b7005b8      0t0  TCP 127.0.0.1:27029->127.0.0.1:64550 (ESTABLISHED)",
+          "mongod  12093 rianray   25u  IPv4 0xf162da95a72d04fe      0t0  TCP 127.0.0.1:27029->127.0.0.1:64551 (ESTABLISHED)",
+          "mongod  12093 rianray   26u  IPv4 0x97bd0eee57099d98      0t0  TCP 127.0.0.1:27029->127.0.0.1:64552 (ESTABLISHED)",
+          "mongod  12093 rianray  306u  IPv4 0x706818102ca08277      0t0  TCP 127.0.0.1:27029->127.0.0.1:64628 (ESTABLISHED)",
+          "mongod  12093 rianray  307u  IPv4 0x77932da6052bba62      0t0  TCP 127.0.0.1:27029->127.0.0.1:64629 (ESTABLISHED)",
+          "mongod  12093 rianray  308u  IPv4 0x7a9af1b1020482be      0t0  TCP 127.0.0.1:27029->127.0.0.1:64630 (ESTABLISHED)",
+          "python3.1 12094 rianray    6u  IPv4 0x9eafe72d93adebe2      0t0  TCP 127.0.0.1:64550->127.0.0.1:27029 (ESTABLISHED)",
+          "python3.1 12094 rianray    7u  IPv4 0xbff77b538b2e317e      0t0  TCP 127.0.0.1:64552->127.0.0.1:27029 (ESTABLISHED)",
+          "python3.1 12094 rianray    8u  IPv4 0xaffef6225ab0264f      0t0  TCP 127.0.0.1:64551->127.0.0.1:27029 (ESTABLISHED)",
+          "python3.1 12094 rianray    9u  IPv4 0xe1ad7616b0e7b3fb      0t0  TCP 127.0.0.1:8019 (LISTEN)"
+        ],
+        "wildcard_listeners": [],
+        "non_loopback": [],
+        "approved_ports": [
+          27029,
+          8019
+        ],
+        "sandbox_profile": "config/loopback-only.sb"
+      }
+    },
+    {
+      "check": "fixture_reproducibility",
+      "status": "PASS",
+      "detail": {
+        "starting_state_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "first_loaded_state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+        "second_loaded_state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+        "ending_state_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "fixture_sha256": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+        "cleanups": [
+          {
+            "owned_before": 0,
+            "deleted": 0,
+            "owned_after": 0,
+            "zero_residue": true
+          },
+          {
+            "owned_before": 3,
+            "deleted": 3,
+            "owned_after": 0,
+            "zero_residue": true
+          },
+          {
+            "owned_before": 3,
+            "deleted": 3,
+            "owned_after": 0,
+            "zero_residue": true
+          }
+        ],
+        "foundation_targets": [
+          "loader",
+          "evidence harness",
+          "cleanup",
+          "rollback"
+        ],
+        "domain_fixture_scope": "PROHIBITED_NOT_IMPLEMENTED"
+      }
+    },
+    {
+      "check": "cleanup_failure_and_interruption",
+      "status": "PASS",
+      "detail": {
+        "partial_failure": {
+          "owned_before": 1,
+          "deleted": 1,
+          "owned_after": 0,
+          "zero_residue": true
+        },
+        "repeated": {
+          "owned_before": 0,
+          "deleted": 0,
+          "owned_after": 0,
+          "zero_residue": true
+        },
+        "interrupted_process_pid": 12145,
+        "interruption_marker_seen": true,
+        "interrupted_exit": -15,
+        "interrupted_cleanup": {
+          "owned_before": 1,
+          "deleted": 1,
+          "owned_after": 0,
+          "zero_residue": true
+        },
+        "already_clean": {
+          "owned_before": 0,
+          "deleted": 0,
+          "owned_after": 0,
+          "zero_residue": true
+        }
+      }
+    },
+    {
+      "check": "durable_rollback_recovery",
+      "status": "PASS",
+      "detail": {
+        "snapshot": {
+          "snapshot": ".runtime/recovery/stage2a-owned-records.json",
+          "snapshot_sha256": "353e590ac754adc79491b8722eab03aa6e121b05513f5df548c272bbeb2594b4",
+          "payload_sha256": "1f0477daef4f5737b123250bbb3e1cd587c09b8181785cf8cf8b6a89ba694b53",
+          "row_count": 3,
+          "state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+          "durable": true
+        },
+        "pre_rollback_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+        "forced_failure_digest": "d71875a45400c9767cb81e69b964ab8511f5c6d8159c400334ef5ca983f5e566",
+        "post_rollback_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+        "restore": {
+          "restored": 3,
+          "state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+          "payload_sha256": "1f0477daef4f5737b123250bbb3e1cd587c09b8181785cf8cf8b6a89ba694b53",
+          "durable": true
+        },
+        "process_stop": {
+          "status": "STOPPED",
+          "processes": [
+            {
+              "kind": "api",
+              "pid": 12094,
+              "status": "STOPPED",
+              "forced": false,
+              "port_closed": true
+            },
+            {
+              "kind": "mongo",
+              "pid": 12093,
+              "status": "STOPPED",
+              "forced": false,
+              "port_closed": true
+            }
+          ],
+          "api_alive": false,
+          "mongo_alive": false,
+          "ports_closed": true,
+          "pid_files_absent": true
+        },
+        "process_restart": {
+          "status": "STARTED",
+          "profile": "full",
+          "mongo_pid": 12201,
+          "api_pid": 12205,
+          "health": {
+            "status": "ok",
+            "service": "equinesync-api",
+            "version": "0.1.0",
+            "database": "connected",
+            "config": {
+              "jwt_configured": false,
+              "cors_configured": false,
+              "environment": "development"
+            },
+            "dependencies": {
+              "mailer_configured": false,
+              "email_verification_enforced": false,
+              "rate_limiting_enabled": true,
+              "auto_seed_enabled": false,
+              "seed_route_enabled": false
+            },
+            "started_at": "2026-07-20T06:18:59.805576+00:00",
+            "uptime_seconds": 0.2,
+            "indexes_ensured": true
+          },
+          "health_url": "LOOPBACK_API/api/health/ready",
+          "logs": [
+            ".runtime/logs/mongod.log",
+            ".runtime/logs/api.log"
+          ]
+        },
+        "source_recovery": {
+          "implementation_restore_command": "git restore --source=IMPLEMENTATION_COMMIT -- stage2a/fixtures/foundation-v1.json",
+          "prechange_restore_command": "git checkout --detach STARTING_COMMIT",
+          "expected_sha256": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+          "mutated_sha256": "7fd028873ec36d265cb2ca0340e0d756f9da0fa92fc0e146880e6df5f6f4b1a1",
+          "restored_sha256": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+          "restored_matches": true,
+          "stage2a_absent_at_prechange_anchor": true,
+          "clone_mode": "DISPOSABLE_SHARED_OBJECTS_SPARSE_SINGLE_FILE",
+          "fresh_clone_proof_role": "NOT_APPLICABLE_SEPARATE_POST_PUSH_CONTROL",
+          "disposable_clone_removed": true
+        },
+        "session_cache_disposition": "NOT_APPLICABLE_NO_EXTERNAL_SESSION_OR_CACHE_SERVICE; full process restart completed"
+      }
+    },
+    {
+      "check": "evidence_capture_semantics",
+      "status": "PASS",
+      "detail": {
+        "pass_run": "foundation-example-pass",
+        "intentional_fail_run": "foundation-example-intentional-fail",
+        "input_hash_count_each": 3,
+        "schema_errors": [],
+        "semantically_empty_record_rejected": true,
+        "records_bound_to_implementation_commit": true
+      }
+    },
+    {
+      "check": "provider_denial",
+      "status": "PASS",
+      "detail": {
+        "providers": 11,
+        "configuration_names": 19,
+        "register": [
+          {
+            "provider": "Analytics",
+            "configuration_names": [
+              "ANALYTICS_WRITE_KEY"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "Cloudflare",
+            "configuration_names": [
+              "CLOUDFLARE_API_TOKEN"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "DocuSign",
+            "configuration_names": [
+              "DOCUSIGN_INTEGRATION_KEY"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "External AI",
+            "configuration_names": [
+              "EMERGENT_LLM_KEY",
+              "GEMINI_API_KEY",
+              "GOOGLE_API_KEY",
+              "OPENAI_API_KEY"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "Object storage",
+            "configuration_names": [
+              "AWS_ACCESS_KEY_ID",
+              "AWS_SECRET_ACCESS_KEY",
+              "STORAGE_ACCESS_KEY_ID",
+              "STORAGE_SECRET_ACCESS_KEY"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "Render",
+            "configuration_names": [
+              "RENDER_API_KEY"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "Resend",
+            "configuration_names": [
+              "RESEND_API_KEY"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "SendGrid",
+            "configuration_names": [
+              "SENDGRID_API_KEY"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "Stripe",
+            "configuration_names": [
+              "STRIPE_API_KEY",
+              "STRIPE_SECRET_KEY",
+              "STRIPE_WEBHOOK_SECRET"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "Twilio",
+            "configuration_names": [
+              "TWILIO_AUTH_TOKEN"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          },
+          {
+            "provider": "Vercel",
+            "configuration_names": [
+              "VERCEL_TOKEN"
+            ],
+            "configured": false,
+            "attempt_count": 0,
+            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
+            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory"
+          }
+        ],
+        "configured": [],
+        "attempt_count": 0,
+        "attempt_count_basis": "full application ran under exact-port sandbox; provider configuration absent; provider-name negative tests denied; observed process sockets were approved loopback only"
+      }
+    },
+    {
+      "check": "controlled_shutdown",
+      "status": "PASS",
+      "detail": {
+        "status": "STOPPED",
+        "processes": [
+          {
+            "kind": "api",
+            "pid": 12205,
+            "status": "STOPPED",
+            "forced": false,
+            "port_closed": true
+          },
+          {
+            "kind": "mongo",
+            "pid": 12201,
+            "status": "STOPPED",
+            "forced": false,
+            "port_closed": true
+          }
+        ],
+        "api_alive": false,
+        "mongo_alive": false,
+        "ports_closed": true,
+        "pid_files_absent": true
+      }
+    },
+    {
+      "check": "zero_residue",
+      "status": "PASS",
+      "detail": {
+        "starting_state_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "ending_state_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "owned_cleanup": {
+          "owned_before": 3,
+          "deleted": 3,
+          "owned_after": 0,
+          "zero_residue": true
+        },
+        "database_reset": {
+          "database": "equinesync_stage2a_synthetic",
+          "before_digest": "f5ed0403104adec01db6f0a81be1213f86be1b30779ada6d1964c46b82b408ec",
+          "before_collections": 69,
+          "database_absent_after": true,
+          "ending_inventory_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        },
+        "runtime_cleanup": {
+          "runtime_absent": true,
+          "removed": true
+        },
+        "final_process_and_port_status": {
+          "mongo_pid": null,
+          "mongo_alive": false,
+          "mongo_port_open": false,
+          "mongo_foreign_listener_pid": null,
+          "api_pid": null,
+          "api_alive": false,
+          "api_port_open": false,
+          "api_foreign_listener_pid": null,
+          "profile": null
+        }
+      }
+    }
+  ],
+  "check_count": 16,
+  "pass_count": 16,
+  "provider_attempt_count": 0,
+  "provider_attempt_count_basis": "instrumented configuration denials, exact-port sandbox, full-process socket inventory",
+  "production_access_count": 0,
+  "production_access_count_basis": "loopback-only datastore/API and exact-port sandbox",
+  "live_data_access_count": 0,
+  "live_data_access_count_basis": "empty disposable database and owner-tagged synthetic fixture only",
+  "cp3_suites_executed": 0,
+  "golden_paths_executed": 0,
+  "business_workflows_executed": 0,
+  "fixture_digest": "036656b9d95b3dc6edecc02d68f5e0a0ae61f18ff28fc3b39a8b6809a27989d0",
+  "artifacts": {
+    "implementation_commit": "83ccfac2bdeb0615e8818ffcbde03337d429dba5",
+    "implementation_tree": "99b234bd2da3c499bc29962637c40d2b3b4282bb",
+    "environment": {
+      "status": "PASS",
+      "environment": "stage2a",
+      "datastore": "equinesync_stage2a_synthetic",
+      "mongo_endpoint_class": "LOOPBACK_ONLY",
+      "api_endpoint_class": "LOOPBACK_ONLY",
+      "provider_credentials_present": [],
+      "unknown_names": [],
+      "ambient_attestation": {
+        "prohibited_names_present": [],
+        "prohibited_name_count": 0,
+        "values_recorded": false
+      }
+    },
+    "isolation_negative_tests": [
+      {
+        "names": [
+          "MONGO_URL"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "DB_NAME"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "STAGE2A_DISPOSABLE"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "DISABLE_NOTIFICATIONS"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "ANALYTICS_WRITE_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "AWS_ACCESS_KEY_ID"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "AWS_SECRET_ACCESS_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "CLOUDFLARE_API_TOKEN"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "DOCUSIGN_INTEGRATION_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "EMERGENT_LLM_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "GEMINI_API_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "GOOGLE_API_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "OPENAI_API_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "RENDER_API_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "RESEND_API_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "SENDGRID_API_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "STORAGE_ACCESS_KEY_ID"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "STORAGE_SECRET_ACCESS_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "STRIPE_API_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "STRIPE_SECRET_KEY"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "STRIPE_WEBHOOK_SECRET"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "TWILIO_AUTH_TOKEN"
+        ],
+        "denied": true,
+        "values_recorded": false
+      },
+      {
+        "names": [
+          "VERCEL_TOKEN"
+        ],
+        "denied": true,
+        "values_recorded": false
+      }
+    ],
+    "network_denials": [
+      {
+        "endpoint_class": "UNAPPROVED_LOOPBACK",
+        "denied_by_sandbox": true,
+        "error": "PermissionError:errno=1"
+      },
+      {
+        "endpoint_class": "DOCUMENTATION_EXTERNAL",
+        "denied_by_sandbox": true,
+        "error": "PermissionError:errno=1"
+      }
+    ],
+    "interrupted_start": {
+      "error": "intentional Stage 2A interrupted-start failpoint",
+      "status": {
+        "mongo_pid": null,
+        "mongo_alive": false,
+        "mongo_port_open": false,
+        "mongo_foreign_listener_pid": null,
+        "api_pid": null,
+        "api_alive": false,
+        "api_port_open": false,
+        "api_foreign_listener_pid": null,
+        "profile": null
+      }
+    },
+    "cold_start": {
+      "status": "STARTED",
+      "profile": "full",
+      "mongo_pid": 12093,
+      "api_pid": 12094,
+      "health": {
+        "status": "ok",
+        "service": "equinesync-api",
+        "version": "0.1.0",
+        "database": "connected",
+        "config": {
+          "jwt_configured": false,
+          "cors_configured": false,
+          "environment": "development"
+        },
+        "dependencies": {
+          "mailer_configured": false,
+          "email_verification_enforced": false,
+          "rate_limiting_enabled": true,
+          "auto_seed_enabled": false,
+          "seed_route_enabled": false
+        },
+        "started_at": "2026-07-20T06:18:46.815838+00:00",
+        "uptime_seconds": 7.4,
+        "indexes_ensured": true
+      },
+      "health_url": "LOOPBACK_API/api/health/ready",
+      "logs": [
+        ".runtime/logs/mongod.log",
+        ".runtime/logs/api.log"
+      ]
+    },
+    "startup_inventory": {
+      "database": "equinesync_stage2a_synthetic",
+      "collections": [
+        {
+          "name": "account_memberships",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "am_account_status",
+              "keys": [
+                [
+                  "account_id",
+                  1
+                ],
+                [
+                  "membership_status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "am_barn_role_status",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "role",
+                  1
+                ],
+                [
+                  "membership_status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "am_compatibility_key_unique",
+              "keys": [
+                [
+                  "compatibility_key",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": true
+            },
+            {
+              "name": "am_id_unique",
+              "keys": [
+                [
+                  "id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            },
+            {
+              "name": "am_user_status",
+              "keys": [
+                [
+                  "user_id",
+                  1
+                ],
+                [
+                  "membership_status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "account_subscriptions",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "account_id_1",
+              "keys": [
+                [
+                  "account_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            },
+            {
+              "name": "billing_provider_1_subscription_status_1",
+              "keys": [
+                [
+                  "billing_provider",
+                  1
+                ],
+                [
+                  "subscription_status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "account_usage_limits",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "account_id_1",
+              "keys": [
+                [
+                  "account_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "arena_schedule_blocks",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "arena_schedule_share_settings",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "audit_log",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "action_1_ts_-1",
+              "keys": [
+                [
+                  "action",
+                  1
+                ],
+                [
+                  "ts",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "actor_user_id_1_ts_-1",
+              "keys": [
+                [
+                  "actor_user_id",
+                  1
+                ],
+                [
+                  "ts",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_ts_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "ts",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "auth_tokens",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "expires_at_1",
+              "keys": [
+                [
+                  "expires_at",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "token_hash_1",
+              "keys": [
+                [
+                  "token_hash",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "user_id_1",
+              "keys": [
+                [
+                  "user_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "automation_suggestions",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "backlog_audit_events",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "record_id_1_created_at_-1",
+              "keys": [
+                [
+                  "record_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "barn_location_share_settings",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "billing_events",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "stripe_event_id_1",
+              "keys": [
+                [
+                  "stripe_event_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "digital_forms",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "document_scan_jobs",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "emergency_contacts",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "emergency_workflows",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "equipment_items",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "expenses",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "farrier_history",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "horse_id_1_date_-1",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "date",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "linked_task_id_1",
+              "keys": [
+                [
+                  "linked_task_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "group_messages",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "guardian_links",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "gl_barn_student_status",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "student_profile_id",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "gl_guardian_status",
+              "keys": [
+                [
+                  "guardian_user_id",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "gl_id_unique",
+              "keys": [
+                [
+                  "id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            },
+            {
+              "name": "gl_student_status",
+              "keys": [
+                [
+                  "student_profile_id",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "health_documents",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "health_reminders",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "horse_care_profiles",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "horse_id_1",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "horse_daily_check_logs",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hdcl_barn_check_type_checked_at",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "check_type",
+                  1
+                ],
+                [
+                  "checked_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hdcl_barn_horse_checked_at",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "checked_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hdcl_horse_checked_at",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "checked_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hdcl_task_id",
+              "keys": [
+                [
+                  "task_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": true
+            }
+          ]
+        },
+        {
+          "name": "horse_equipment",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_category_1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "category",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "horse_id_1",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "horse_ledger_alert_events",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hlae_alert_ts",
+              "keys": [
+                [
+                  "alert_id",
+                  1
+                ],
+                [
+                  "ts",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hlae_barn_ts",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "ts",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hlae_horse_ts",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "ts",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "horse_ledger_alerts",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_severity_1_closed_at_1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "severity",
+                  1
+                ],
+                [
+                  "closed_at",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hla_barn_status_last_seen",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ],
+                [
+                  "last_seen_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hla_horse_status_rank_last_seen",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ],
+                [
+                  "severity_rank",
+                  -1
+                ],
+                [
+                  "last_seen_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hla_horse_type_status",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "alert_type",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "horse_id_1_opened_at_-1",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "opened_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "horse_ledger_audit",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "actor_user_id_1_ts_-1",
+              "keys": [
+                [
+                  "actor_user_id",
+                  1
+                ],
+                [
+                  "ts",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_ts_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "ts",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "horse_id_1_ts_-1",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "ts",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "horse_owner_visibility_policy",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "horse_id_1",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "horse_owner_visibility_templates",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "hovt_barn_unique",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "horse_provider_assignments",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_next_due_date_1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "next_due_date",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "horse_id_1",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "injury_lameness_cases",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "integration_connections",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "invoices",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "uniq_recurring_invoice_period",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "recurring_charge_id",
+                  1
+                ],
+                [
+                  "period_key",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "medication_administration_logs",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "notification_preferences",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "user_id_1",
+              "keys": [
+                [
+                  "user_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "notifications",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "user_id_1_created_at_-1",
+              "keys": [
+                [
+                  "user_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "user_id_1_read_at_1",
+              "keys": [
+                [
+                  "user_id",
+                  1
+                ],
+                [
+                  "read_at",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "offline_sync_queue",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "owner_media_updates",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "pasture_schedules",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "payment_profiles",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "payments",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "stripe_payment_intent_id_1",
+              "keys": [
+                [
+                  "stripe_payment_intent_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "qr_horse_ids",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "recurring_billing_rules",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "refresh_tokens",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "expires_at_1",
+              "keys": [
+                [
+                  "expires_at",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "token_hash_1",
+              "keys": [
+                [
+                  "token_hash",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            },
+            {
+              "name": "user_id_1",
+              "keys": [
+                [
+                  "user_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "ride_gps_tracks",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "service_providers",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_category_1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "category",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "service_requests",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "sr_owner_horse_created",
+              "keys": [
+                [
+                  "source",
+                  1
+                ],
+                [
+                  "owner_user_id",
+                  1
+                ],
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "sr_source_barn_horse_created",
+              "keys": [
+                [
+                  "source",
+                  1
+                ],
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "shift_handoff_reports",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "show_entries",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "staff_shifts",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "staff_task_assignments",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "stall_assignments",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "student_profiles",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "sp_barn_minor_status",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "minor_status",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "sp_barn_status",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "sp_id_unique",
+              "keys": [
+                [
+                  "id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "subscription_addons",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "addon_code_1",
+              "keys": [
+                [
+                  "addon_code",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            },
+            {
+              "name": "stripe_price_id_1",
+              "keys": [
+                [
+                  "stripe_price_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": true
+            }
+          ]
+        },
+        {
+          "name": "subscription_invoices",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "stripe_invoice_id_1",
+              "keys": [
+                [
+                  "stripe_invoice_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "subscription_plans",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "plan_code_1",
+              "keys": [
+                [
+                  "plan_code",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "subscriptions",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "stripe_subscription_id_1",
+              "keys": [
+                [
+                  "stripe_subscription_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": true
+            }
+          ]
+        },
+        {
+          "name": "supply_inventory_items",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "task_completions",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "task_id_1_client_completion_id_1",
+              "keys": [
+                [
+                  "task_id",
+                  1
+                ],
+                [
+                  "client_completion_id",
+                  1
+                ]
+              ],
+              "unique": true,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_completed_at_-1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "completed_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "task_events",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_actor_user_id_1_occurred_at_-1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "actor_user_id",
+                  1
+                ],
+                [
+                  "occurred_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_event_type_1_occurred_at_-1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "event_type",
+                  1
+                ],
+                [
+                  "occurred_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_subject_horse_ids_1_occurred_at_-1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "subject_horse_ids",
+                  1
+                ],
+                [
+                  "occurred_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "task_templates",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_active_1_category_1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "active",
+                  1
+                ],
+                [
+                  "category",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "tasks",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_assignee_user_id_1_status_1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "assignee_user_id",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_linked_horse_ids_1_scheduled_at_-1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "linked_horse_ids",
+                  1
+                ],
+                [
+                  "scheduled_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_scheduled_at_1_status_1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "scheduled_at",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "tenant_id_1_template_id_1_scheduled_at_1",
+              "keys": [
+                [
+                  "tenant_id",
+                  1
+                ],
+                [
+                  "template_id",
+                  1
+                ],
+                [
+                  "scheduled_at",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "time_clock_entries",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "training_plans",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "vet_records",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "horse_id_1_date_-1",
+              "keys": [
+                [
+                  "horse_id",
+                  1
+                ],
+                [
+                  "date",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "linked_task_id_1",
+              "keys": [
+                [
+                  "linked_task_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "waitlist_entries",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        },
+        {
+          "name": "weight_condition_entries",
+          "document_count": 0,
+          "indexes": [
+            {
+              "name": "_id_",
+              "keys": [
+                [
+                  "_id",
+                  1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_created_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "created_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            },
+            {
+              "name": "barn_id_1_updated_at_-1",
+              "keys": [
+                [
+                  "barn_id",
+                  1
+                ],
+                [
+                  "updated_at",
+                  -1
+                ]
+              ],
+              "unique": false,
+              "sparse": false
+            }
+          ]
+        }
+      ],
+      "digest": "02bccf932bb7611851fb99f0accd23883797697227e824ae08882fca7c904817"
+    },
+    "network_inventory": {
+      "observed_lines": [
+        "mongod  12093 rianray    7u  IPv4 0x5ebd1c280e4a0bed      0t0  TCP 127.0.0.1:27029 (LISTEN)",
+        "mongod  12093 rianray   24u  IPv4 0x649a12c55b7005b8      0t0  TCP 127.0.0.1:27029->127.0.0.1:64550 (ESTABLISHED)",
+        "mongod  12093 rianray   25u  IPv4 0xf162da95a72d04fe      0t0  TCP 127.0.0.1:27029->127.0.0.1:64551 (ESTABLISHED)",
+        "mongod  12093 rianray   26u  IPv4 0x97bd0eee57099d98      0t0  TCP 127.0.0.1:27029->127.0.0.1:64552 (ESTABLISHED)",
+        "mongod  12093 rianray  306u  IPv4 0x706818102ca08277      0t0  TCP 127.0.0.1:27029->127.0.0.1:64628 (ESTABLISHED)",
+        "mongod  12093 rianray  307u  IPv4 0x77932da6052bba62      0t0  TCP 127.0.0.1:27029->127.0.0.1:64629 (ESTABLISHED)",
+        "mongod  12093 rianray  308u  IPv4 0x7a9af1b1020482be      0t0  TCP 127.0.0.1:27029->127.0.0.1:64630 (ESTABLISHED)",
+        "python3.1 12094 rianray    6u  IPv4 0x9eafe72d93adebe2      0t0  TCP 127.0.0.1:64550->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 12094 rianray    7u  IPv4 0xbff77b538b2e317e      0t0  TCP 127.0.0.1:64552->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 12094 rianray    8u  IPv4 0xaffef6225ab0264f      0t0  TCP 127.0.0.1:64551->127.0.0.1:27029 (ESTABLISHED)",
+        "python3.1 12094 rianray    9u  IPv4 0xe1ad7616b0e7b3fb      0t0  TCP 127.0.0.1:8019 (LISTEN)"
+      ],
+      "wildcard": [],
+      "non_loopback": []
+    },
+    "fixture": {
+      "starting_state_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "first_loaded_state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+      "second_loaded_state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+      "ending_state_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "fixture_sha256": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+      "cleanups": [
+        {
+          "owned_before": 0,
+          "deleted": 0,
+          "owned_after": 0,
+          "zero_residue": true
+        },
+        {
+          "owned_before": 3,
+          "deleted": 3,
+          "owned_after": 0,
+          "zero_residue": true
+        },
+        {
+          "owned_before": 3,
+          "deleted": 3,
+          "owned_after": 0,
+          "zero_residue": true
+        }
+      ],
+      "foundation_targets": [
+        "loader",
+        "evidence harness",
+        "cleanup",
+        "rollback"
+      ],
+      "domain_fixture_scope": "PROHIBITED_NOT_IMPLEMENTED"
+    },
+    "cleanup": {
+      "partial_failure": {
+        "owned_before": 1,
+        "deleted": 1,
+        "owned_after": 0,
+        "zero_residue": true
+      },
+      "repeated": {
+        "owned_before": 0,
+        "deleted": 0,
+        "owned_after": 0,
+        "zero_residue": true
+      },
+      "interrupted_process_pid": 12145,
+      "interruption_marker_seen": true,
+      "interrupted_exit": -15,
+      "interrupted_cleanup": {
+        "owned_before": 1,
+        "deleted": 1,
+        "owned_after": 0,
+        "zero_residue": true
+      },
+      "already_clean": {
+        "owned_before": 0,
+        "deleted": 0,
+        "owned_after": 0,
+        "zero_residue": true
+      }
+    },
+    "rollback": {
+      "snapshot": {
+        "snapshot": ".runtime/recovery/stage2a-owned-records.json",
+        "snapshot_sha256": "353e590ac754adc79491b8722eab03aa6e121b05513f5df548c272bbeb2594b4",
+        "payload_sha256": "1f0477daef4f5737b123250bbb3e1cd587c09b8181785cf8cf8b6a89ba694b53",
+        "row_count": 3,
+        "state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+        "durable": true
+      },
+      "pre_rollback_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+      "forced_failure_digest": "d71875a45400c9767cb81e69b964ab8511f5c6d8159c400334ef5ca983f5e566",
+      "post_rollback_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+      "restore": {
+        "restored": 3,
+        "state_digest": "1984c60f2114a4a4b4ea8e686af1d689d33d683ef985ef185a1d09bb9c7c3b5b",
+        "payload_sha256": "1f0477daef4f5737b123250bbb3e1cd587c09b8181785cf8cf8b6a89ba694b53",
+        "durable": true
+      },
+      "process_stop": {
+        "status": "STOPPED",
+        "processes": [
+          {
+            "kind": "api",
+            "pid": 12094,
+            "status": "STOPPED",
+            "forced": false,
+            "port_closed": true
+          },
+          {
+            "kind": "mongo",
+            "pid": 12093,
+            "status": "STOPPED",
+            "forced": false,
+            "port_closed": true
+          }
+        ],
+        "api_alive": false,
+        "mongo_alive": false,
+        "ports_closed": true,
+        "pid_files_absent": true
+      },
+      "process_restart": {
+        "status": "STARTED",
+        "profile": "full",
+        "mongo_pid": 12201,
+        "api_pid": 12205,
+        "health": {
+          "status": "ok",
+          "service": "equinesync-api",
+          "version": "0.1.0",
+          "database": "connected",
+          "config": {
+            "jwt_configured": false,
+            "cors_configured": false,
+            "environment": "development"
+          },
+          "dependencies": {
+            "mailer_configured": false,
+            "email_verification_enforced": false,
+            "rate_limiting_enabled": true,
+            "auto_seed_enabled": false,
+            "seed_route_enabled": false
+          },
+          "started_at": "2026-07-20T06:18:59.805576+00:00",
+          "uptime_seconds": 0.2,
+          "indexes_ensured": true
+        },
+        "health_url": "LOOPBACK_API/api/health/ready",
+        "logs": [
+          ".runtime/logs/mongod.log",
+          ".runtime/logs/api.log"
+        ]
+      },
+      "source_recovery": {
+        "implementation_restore_command": "git restore --source=IMPLEMENTATION_COMMIT -- stage2a/fixtures/foundation-v1.json",
+        "prechange_restore_command": "git checkout --detach STARTING_COMMIT",
+        "expected_sha256": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+        "mutated_sha256": "7fd028873ec36d265cb2ca0340e0d756f9da0fa92fc0e146880e6df5f6f4b1a1",
+        "restored_sha256": "0aa525c43285874a3dd7887d466a185bae6fa07fcf1bf4ed45dae42da03eb81e",
+        "restored_matches": true,
+        "stage2a_absent_at_prechange_anchor": true,
+        "clone_mode": "DISPOSABLE_SHARED_OBJECTS_SPARSE_SINGLE_FILE",
+        "fresh_clone_proof_role": "NOT_APPLICABLE_SEPARATE_POST_PUSH_CONTROL",
+        "disposable_clone_removed": true
+      },
+      "session_cache_disposition": "NOT_APPLICABLE_NO_EXTERNAL_SESSION_OR_CACHE_SERVICE; full process restart completed"
+    },
+    "evidence_capture": {
+      "pass_run": "foundation-example-pass",
+      "intentional_fail_run": "foundation-example-intentional-fail",
+      "input_hash_count_each": 3,
+      "schema_errors": [],
+      "semantically_empty_record_rejected": true,
+      "records_bound_to_implementation_commit": true
+    },
+    "shutdown": {
+      "status": "STOPPED",
+      "processes": [
+        {
+          "kind": "api",
+          "pid": 12205,
+          "status": "STOPPED",
+          "forced": false,
+          "port_closed": true
+        },
+        {
+          "kind": "mongo",
+          "pid": 12201,
+          "status": "STOPPED",
+          "forced": false,
+          "port_closed": true
+        }
+      ],
+      "api_alive": false,
+      "mongo_alive": false,
+      "ports_closed": true,
+      "pid_files_absent": true
+    },
+    "zero_residue": {
+      "starting_state_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "ending_state_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "owned_cleanup": {
+        "owned_before": 3,
+        "deleted": 3,
+        "owned_after": 0,
+        "zero_residue": true
+      },
+      "database_reset": {
+        "database": "equinesync_stage2a_synthetic",
+        "before_digest": "f5ed0403104adec01db6f0a81be1213f86be1b30779ada6d1964c46b82b408ec",
+        "before_collections": 69,
+        "database_absent_after": true,
+        "ending_inventory_digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "runtime_cleanup": {
+        "runtime_absent": true,
+        "removed": true
+      },
+      "final_process_and_port_status": {
+        "mongo_pid": null,
+        "mongo_alive": false,
+        "mongo_port_open": false,
+        "mongo_foreign_listener_pid": null,
+        "api_pid": null,
+        "api_alive": false,
+        "api_port_open": false,
+        "api_foreign_listener_pid": null,
+        "profile": null
+      }
+    }
+  },
+  "execution_status": "EXECUTION_NOT_AUTHORIZED"
+}

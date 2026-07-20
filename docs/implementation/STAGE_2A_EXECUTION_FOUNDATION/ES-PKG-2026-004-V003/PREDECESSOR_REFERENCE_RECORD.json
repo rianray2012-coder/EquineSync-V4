@@ -1,0 +1,9 @@
+{
+  "archive_sha256": "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329",
+  "commit": "0be6172a28b75238c5facabf91d43ed09aaf0d54",
+  "package_id": "ES-PKG-2026-004-V003",
+  "predecessor": "ES-PKG-2026-003-V002",
+  "sealed_predecessor": "ES-PKG-2026-002-V001",
+  "sealed_predecessor_sha256": "268fdd714264c5c0ae8f599a312c90e37ec44b908b438a1384c88f897bf03b9f",
+  "unchanged": true
+}

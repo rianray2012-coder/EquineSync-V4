@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import argparse
 import csv
+import datetime as dt
 import hashlib
+import importlib.metadata
 import json
 import re
 import subprocess
@@ -15,6 +17,7 @@ import jsonschema
 from jsonschema import Draft202012Validator, FormatChecker
 
 PACKAGE_ID = "ES-PKG-2026-004-V003"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-003"
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 BASELINE = "acb518ea5a160820e64681ff95a16b010fe1156c"
 PREDECESSOR_SHA = "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329"
@@ -28,11 +31,15 @@ REQUIRED = {
     "STAGE2A_FILES_CREATED_REGISTER.json", "STAGE2A_FILES_MODIFIED_REGISTER.json",
     "STAGE2A_SOURCE_EVIDENCE_REGISTER.json", "STAGE2A_SOURCE_EVIDENCE_REGISTER.csv",
     "STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json", "STAGE2A_GAP_REMEDIATION_REPORT.json",
+    "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json", "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.csv",
+    "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json", "STAGE2A_FINDING_TO_REMEDIATION_MATRIX.csv",
+    "CORRECTED_CANDIDATE_PROVENANCE.json", "EVIDENCE_REUSE_AND_RERUN_REGISTER.json",
     "STAGE2A_VALIDATION_COMMAND_REGISTER.json", "STAGE2A_ENVIRONMENT_CONTRACT.json",
     "STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT.json", "PROVIDER_DENIAL_REGISTER.json",
     "PROVIDER_DENIAL_REGISTER.csv", "STAGE2A_FIXTURE_FOUNDATION.json",
     "EXECUTION_EVIDENCE_SCHEMA.json", "CLEANUP_VALIDATION_REPORT.json",
     "ROLLBACK_REHEARSAL_REPORT.json", "STARTUP_SIDE_EFFECT_INVENTORY.json",
+    "STARTUP_SIDE_EFFECT_ORACLE.json",
     "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.json",
     "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.json", "ASSURANCE_STATEMENT.md",
     "F0001_UPDATED_READINESS_DETERMINATION.json", "validate_stage2a_package.py",
@@ -45,6 +52,8 @@ FINAL_REQUIRED = {
     "SUCCESSOR_PACKAGE_CLEAN_EXTRACTION_VERIFICATION.json",
 }
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
+SENSITIVE_ASSIGNMENT = re.compile(r"(?i)\b(secret|token|password|api[_-]?key|credential|authorization)\b(\s*[:=]\s*)([^\s,;]+)")
+KNOWN_SECRET_VALUE = re.compile(r"(?:sk_(?:live|test)_[A-Za-z0-9_-]+|whsec_[A-Za-z0-9_-]+|AKIA[A-Z0-9]{12,})")
 
 
 def sha(path: Path) -> str:
@@ -62,20 +71,80 @@ def git(repo: Path, *args: str, check: bool = True) -> str:
     return result.stdout.strip()
 
 
+def locate_repository(script_path: Path) -> Path:
+    """Resolve the repository independently of the invocation working directory."""
+    resolved = script_path.resolve()
+    for candidate in (resolved.parent, *resolved.parents):
+        if (candidate / ".git").exists() and (candidate / "stage2a").is_dir():
+            return candidate
+    raise RuntimeError(f"unable to locate repository root from validator path {resolved}")
+
+
+def canonical(value: object) -> bytes:
+    return (json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True) + "\n").encode()
+
+
+def semantic_record_errors(root: Path, record: dict[str, object]) -> list[str]:
+    errors: list[str] = []
+    expected = record.get("expected_result", {}).get("exit_status") if isinstance(record.get("expected_result"), dict) else None
+    actual = record.get("actual_result", {}).get("exit_status") if isinstance(record.get("actual_result"), dict) else None
+    if actual != record.get("exit_status"):
+        errors.append("actual/top-level exit mismatch")
+    if record.get("result") != ("PASS" if actual == expected else "FAIL"):
+        errors.append("result does not match expected-versus-actual exit status")
+    try:
+        if dt.datetime.fromisoformat(str(record["utc_end"])) < dt.datetime.fromisoformat(str(record["utc_start"])):
+            errors.append("reverse chronology")
+    except (KeyError, ValueError):
+        errors.append("invalid chronology")
+    combined = ""
+    hashes = record.get("evidence_file_hashes") if isinstance(record.get("evidence_file_hashes"), dict) else {}
+    for stream in ("stdout", "stderr"):
+        location = record.get(f"{stream}_location")
+        path = (root / str(location)).resolve()
+        try:
+            path.relative_to(root.resolve())
+        except ValueError:
+            errors.append(f"{stream} escapes package")
+            continue
+        if not path.is_file():
+            errors.append(f"{stream} missing")
+            continue
+        content = path.read_text(encoding="utf-8")
+        combined += content
+        if sha(path) != hashes.get(stream):
+            errors.append(f"{stream} hash mismatch")
+        if any(match.group(3) != "<REDACTED>" for match in SENSITIVE_ASSIGNMENT.finditer(content)) or KNOWN_SECRET_VALUE.search(content):
+            errors.append(f"{stream} contains unredacted sensitive data")
+    required_meaning = record.get("required_meaning") if isinstance(record.get("required_meaning"), list) else []
+    if not required_meaning or any(str(marker) not in combined for marker in required_meaning):
+        errors.append("required meaning absent after redaction")
+    redaction = record.get("redaction_evidence") if isinstance(record.get("redaction_evidence"), dict) else {}
+    if redaction.get("meaning_preserved") is not True or redaction.get("unredacted_sensitive_match_count") != 0:
+        errors.append("redaction enforcement or meaning attestation failed")
+    core = dict(record)
+    recorded = core.pop("record_content_sha256", "")
+    if hashlib.sha256(canonical(core)).hexdigest() != recorded:
+        errors.append("record content hash mismatch")
+    return errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("package", type=Path)
     parser.add_argument("--phase", choices=("candidate", "final"), default="candidate")
     args = parser.parse_args()
     root = args.package.resolve()
-    repo = Path(__file__).resolve().parents[1]
+    repo = locate_repository(Path(__file__))
     checks: list[dict[str, object]] = []
 
     def ck(identifier: str, passed: bool, detail: object) -> None:
         checks.append({"check_id": identifier, "status": "PASS" if passed else "FAIL", "detail": detail})
 
-    ck("MV-001-runtime", sys.version.split()[0] == "3.11.11" and jsonschema.__version__ == "4.26.0", {
-        "python": sys.version.split()[0], "jsonschema": jsonschema.__version__,
+    jsonschema_version = importlib.metadata.version("jsonschema")
+    ck("MV-001-runtime-root-resolution", sys.version.split()[0] == "3.11.11" and jsonschema_version == "4.26.0" and repo == locate_repository(Path(__file__)), {
+        "python": sys.version.split()[0], "jsonschema": jsonschema_version,
+        "resolved_repository_root": repo.as_posix(), "invocation_working_directory": Path.cwd().resolve().as_posix(),
         "required_command": "stage2a/.venv/bin/python stage2a/validate_stage2a_package.py PACKAGE --phase PHASE",
     })
     files = sorted(p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file())
@@ -145,14 +214,52 @@ def main() -> int:
         candidate = repo / path
         if not candidate.is_file() or sha(candidate) != row.get("sha256"):
             source_errors.append(f"source hash mismatch {path}")
-        if path.startswith("stage2a/"):
-            try:
-                blob = git(repo, "rev-parse", f"HEAD:{path}")
-            except Exception:
-                blob = ""
-            if blob != row.get("git_blob"):
-                source_errors.append(f"source blob mismatch {path}")
+        commit = row.get("git_commit")
+        try:
+            blob = git(repo, "rev-parse", f"{commit}:{path}")
+        except Exception:
+            blob = ""
+        if not isinstance(commit, str) or not commit or blob != row.get("git_blob"):
+            source_errors.append(f"source blob/commit mismatch {path}")
     ck("MV-011-source-register", not source_errors and bool(source_ids), {"rows": len(source_ids), "errors": source_errors})
+
+    requirement_matrix = json_objects.get("STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json", {})
+    finding_matrix = json_objects.get("STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json", {})
+    trace = json_objects.get("STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json", {})
+    trace_errors: list[str] = []
+    requirements = requirement_matrix.get("requirements", []) if isinstance(requirement_matrix, dict) else []
+    requirement_ids: set[str] = set()
+    for row in requirements:
+        identifier = row.get("requirement_id")
+        if identifier in requirement_ids:
+            trace_errors.append(f"duplicate requirement {identifier}")
+        requirement_ids.add(identifier)
+        for field in ("control_ids", "source_evidence_ids", "implementation_artifacts", "test_ids", "evidence_artifacts"):
+            if not isinstance(row.get(field), list) or not row[field]:
+                trace_errors.append(f"{identifier} missing specific {field}")
+        if row.get("gap_id") not in {f"S2-GAP-{number:03d}" for number in range(1, 10)}:
+            trace_errors.append(f"{identifier} invalid gap")
+    findings = finding_matrix.get("findings", []) if isinstance(finding_matrix, dict) else []
+    finding_ids: set[str] = set()
+    for row in findings:
+        identifier = row.get("finding_id")
+        if identifier in finding_ids:
+            trace_errors.append(f"duplicate finding {identifier}")
+        finding_ids.add(identifier)
+        for field in ("blocker_classification", "requirement_ids", "remediation_artifacts", "test_ids", "evidence_artifacts"):
+            value = row.get(field)
+            if not value or (field != "blocker_classification" and not isinstance(value, list)):
+                trace_errors.append(f"{identifier} missing specific {field}")
+    output_rows = trace.get("outputs", []) if isinstance(trace, dict) else []
+    for row in output_rows:
+        ids = row.get("requirement_ids", [])
+        if not ids or len(ids) >= 9 or any(identifier not in requirement_ids for identifier in ids):
+            trace_errors.append(f"{row.get('output')} has generic or invalid requirement mapping")
+        if not row.get("source_evidence_ids") or not row.get("test_ids") or not row.get("evidence_artifacts"):
+            trace_errors.append(f"{row.get('output')} lacks specific source/test/evidence mapping")
+    ck("MV-011A-specific-traceability", len(requirements) == 9 and len(findings) >= 5 and bool(output_rows) and not trace_errors, {
+        "requirements": len(requirements), "findings": len(findings), "outputs": len(output_rows), "errors": trace_errors,
+    })
 
     baseline_result = subprocess.run(["git", "cat-file", "-e", f"{BASELINE}^{{commit}}"], cwd=repo, capture_output=True)
     ck("MV-012-git-anchors", git(repo, "branch", "--show-current") == BRANCH and baseline_result.returncode == 0, {
@@ -181,13 +288,59 @@ def main() -> int:
                 evidence_errors.append(f"missing {name}")
                 continue
             evidence_errors.extend(f"{name}: {x.message}" for x in validator.iter_errors(record))
-            core = dict(record); recorded = core.pop("record_content_sha256", "")
-            actual = hashlib.sha256((json.dumps(core, sort_keys=True, separators=(",", ":"), ensure_ascii=True) + "\n").encode()).hexdigest()
-            if recorded != actual:
-                evidence_errors.append(f"{name}: record hash mismatch")
+            evidence_errors.extend(f"{name}: {message}" for message in semantic_record_errors(root, record))
     else:
         evidence_errors.append("missing schema")
     ck("MV-016-evidence-semantics", not evidence_errors, {"errors": evidence_errors})
+
+    foundation_checks = {row.get("check"): row for row in foundation.get("checks", [])} if isinstance(foundation, dict) else {}
+    provider_detail = foundation_checks.get("provider_denial", {}).get("detail", {})
+    provider_rows = provider_detail.get("register", []) if isinstance(provider_detail, dict) else []
+    provider_ok = bool(provider_rows) and all(
+        row.get("state") == "SKIPPED_NOT_CONFIGURED"
+        and row.get("attempted_count") == row.get("succeeded_count") == row.get("failed_count") == row.get("timed_out_count") == row.get("unavailable_count") == 0
+        and row.get("skipped_count") == 1
+        for row in provider_rows
+    )
+    startup_detail = foundation_checks.get("startup_side_effect_inventory", {}).get("detail", {})
+    outcomes = startup_detail.get("attempt_outcomes", {}) if isinstance(startup_detail, dict) else {}
+    startup_ok = (
+        set(outcomes) >= {"attempted", "succeeded", "failed", "skipped", "timed_out", "unavailable"}
+        and outcomes.get("attempted") == outcomes.get("succeeded") + outcomes.get("failed") + outcomes.get("timed_out") + outcomes.get("unavailable")
+        and startup_detail.get("oracle_match") is True
+        and startup_detail.get("network_guard", {}).get("provider_or_external_attempt_count") == 0
+    )
+    ck("MV-016A-provider-startup-measurement", provider_ok and startup_ok, {
+        "provider_rows": len(provider_rows), "provider_states_valid": provider_ok,
+        "startup_attempt_outcomes": outcomes, "startup_measurement_valid": startup_ok,
+    })
+
+    process_detail = foundation_checks.get("process_identity", {}).get("detail", {})
+    shutdown_detail = foundation_checks.get("controlled_shutdown", {}).get("detail", {})
+    required_identity = {"pid", "process_group_id", "parent_pid", "parent_pid_policy", "executable_path", "working_directory", "controlled_port", "command_line_sha256", "observed_command_line", "command_display"}
+    identity_rows = [process_detail.get("mongo_identity"), process_detail.get("api_identity")]
+    identity_ok = all(isinstance(row, dict) and required_identity <= set(row) and row.get("pid") == row.get("process_group_id") for row in identity_rows)
+    termination_rows = shutdown_detail.get("processes", []) if isinstance(shutdown_detail, dict) else []
+    termination_ok = len(termination_rows) == 2 and all(row.get("command_identity_verified") is True and row.get("pid") == row.get("process_group_id") for row in termination_rows)
+    ck("MV-016B-process-identity", identity_ok and termination_ok, {
+        "identity_fields": sorted(required_identity), "startup_identity_valid": identity_ok,
+        "termination_identity_valid": termination_ok, "foreign_process_policy": "FAIL_CLOSED",
+    })
+
+    provenance = json_objects.get("CORRECTED_CANDIDATE_PROVENANCE.json", {})
+    reuse = json_objects.get("EVIDENCE_REUSE_AND_RERUN_REGISTER.json", {})
+    blocker_results = provenance.get("blocker_results", []) if isinstance(provenance, dict) else []
+    provenance_ok = (
+        provenance.get("candidate_id") == CANDIDATE_ID
+        and provenance.get("failed_candidate_unchanged") is True
+        and len(blocker_results) == 5
+        and all(row.get("status") == "REMEDIATED_PENDING_REREVIEW" for row in blocker_results)
+        and isinstance(reuse, dict) and bool(reuse.get("reused_predecessor_evidence")) and bool(reuse.get("invalidated_checks")) and bool(reuse.get("rerun_checks"))
+    )
+    ck("MV-016C-candidate-provenance-reuse", provenance_ok, {
+        "candidate_id": provenance.get("candidate_id") if isinstance(provenance, dict) else None,
+        "blocker_results": len(blocker_results), "reuse_register_present": isinstance(reuse, dict),
+    })
 
     residue = json_objects.get("SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.json", {})
     residue_ok = isinstance(residue, dict) and residue.get("event_classification") == "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE" and residue.get("termination", {}).get("scope") == "ONLY_VERIFIED_PROCESS_GROUP_62766" and residue.get("causal_relationship_to_runtime_limitation") == "NOT_ESTABLISHED_DO_NOT_CONFLATE"

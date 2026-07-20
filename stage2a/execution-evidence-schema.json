@@ -9,7 +9,7 @@
     "utc_end", "commit_hash", "tree_hash", "expected_result", "actual_result", "exit_status",
     "stdout_location", "stderr_location", "datastore_digest_before", "datastore_digest_after",
     "cleanup_result", "rollback_result", "tool_versions", "evidence_file_hashes",
-    "redaction_status", "result", "execution_status", "record_content_sha256"
+    "redaction_status", "required_meaning", "redaction_evidence", "result", "execution_status", "record_content_sha256"
   ],
   "properties": {
     "schema_version": {"const": "2.0"},
@@ -43,6 +43,21 @@
       "properties": {"stdout": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "stderr": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
     },
     "redaction_status": {"const": "PASS_VALUES_REDACTED_PATHS_REPOSITORY_RELATIVE"},
+    "required_meaning": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "redaction_evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy", "stdout_replacements", "stderr_replacements", "unredacted_sensitive_match_count", "meaning_preserved"],
+      "properties": {
+        "policy": {"const": "SENSITIVE_ASSIGNMENTS_AND_KNOWN_SECRET_VALUE_PATTERNS_REDACTED"},
+        "stdout_replacements": {"type": "integer", "minimum": 0},
+        "stderr_replacements": {"type": "integer", "minimum": 0},
+        "unredacted_sensitive_match_count": {"const": 0},
+        "meaning_preserved": {"const": true}
+      }
+    },
     "result": {"enum": ["PASS", "FAIL"]},
     "execution_status": {"const": "EXECUTION_NOT_AUTHORIZED"},
     "record_content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}

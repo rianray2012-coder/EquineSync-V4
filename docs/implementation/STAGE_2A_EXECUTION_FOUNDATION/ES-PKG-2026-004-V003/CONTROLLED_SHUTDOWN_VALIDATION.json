@@ -1,0 +1,26 @@
+{
+  "evidence": {
+    "api_alive": false,
+    "mongo_alive": false,
+    "pid_files_absent": true,
+    "ports_closed": true,
+    "processes": [
+      {
+        "forced": false,
+        "kind": "api",
+        "pid": 12205,
+        "port_closed": true,
+        "status": "STOPPED"
+      },
+      {
+        "forced": false,
+        "kind": "mongo",
+        "pid": 12201,
+        "port_closed": true,
+        "status": "STOPPED"
+      }
+    ],
+    "status": "STOPPED"
+  },
+  "result": "PASS"
+}

@@ -235,16 +235,25 @@ def restore(db, rows: list[dict[str, object]]) -> dict[str, object]:
     return {"restored": len(rows), "state_digest": state_digest(db)}
 
 
-def provider_register(env: Mapping[str, str] | None = None) -> list[dict[str, object]]:
+def provider_register(env: Mapping[str, str] | None = None, *, measured_unapproved_attempts: int = 0) -> list[dict[str, object]]:
     values = {} if env is None else env
-    return [
-        {
-            "provider": p,
-            "configuration_names": sorted(k for k,v in PROVIDER_NAMES.items() if v == p),
-            "configured": any(bool((values.get(k) or "").strip()) for k,v in PROVIDER_NAMES.items() if v == p),
+    rows = []
+    for provider in sorted(set(PROVIDER_NAMES.values())):
+        configured = any(bool((values.get(name) or "").strip()) for name, value in PROVIDER_NAMES.items() if value == provider)
+        rows.append({
+            "provider": provider,
+            "configuration_names": sorted(name for name, value in PROVIDER_NAMES.items() if value == provider),
+            "configured": configured,
             "attempt_count": 0,
-            "attempt_count_basis": "no provider module is invoked; exact-port sandbox denies every non-approved socket; process socket inventory contains approved loopback endpoints only",
-            "control": "credential excluded; exact-port loopback sandbox; deny proxy; process socket inventory",
-        }
-        for p in sorted(set(PROVIDER_NAMES.values()))
-    ]
+            "attempted_count": 0,
+            "succeeded_count": 0,
+            "failed_count": 0,
+            "skipped_count": 1 if not configured else 0,
+            "timed_out_count": 0,
+            "unavailable_count": 1 if configured else 0,
+            "state": "SKIPPED_NOT_CONFIGURED" if not configured else "UNAVAILABLE_CONFIGURATION_SHOULD_HAVE_FAILED_CLOSED",
+            "measurement_basis": "instrumented application network guard plus credential-name attestation and process socket inventory",
+            "global_unapproved_attempt_count": measured_unapproved_attempts,
+            "control": "credential excluded; exact-port sandbox; instrumented socket guard; deny proxy; process socket inventory",
+        })
+    return rows

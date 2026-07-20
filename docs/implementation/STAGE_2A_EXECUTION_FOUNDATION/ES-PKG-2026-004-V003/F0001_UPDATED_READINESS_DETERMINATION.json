@@ -1,0 +1,13 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "business_workflows_executed": 0,
+  "cp3_suites_executed": 0,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "golden_paths_executed": 0,
+  "independently_verified_gaps": 0,
+  "package_id": "ES-PKG-2026-004-V003",
+  "primary_blocked_readiness_cause": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "technical_candidate_gaps": 9
+}

@@ -20,6 +20,7 @@ sys.path.insert(0, str(BACKEND))
 sys.path.insert(0, str(ROOT))
 
 from lib.control import ALLOWED_NAMES, load_env, validate_env  # noqa: E402
+from network_guard import install as install_network_guard  # noqa: E402
 
 # ``load_env`` performs the ambient-secret and backend-dotenv denials.  The
 # second validation is deliberately against the process environment so a
@@ -27,6 +28,7 @@ from lib.control import ALLOWED_NAMES, load_env, validate_env  # noqa: E402
 load_env()
 runtime_environment = {name: value for name, value in os.environ.items() if name in ALLOWED_NAMES}
 validate_env(runtime_environment)
+install_network_guard()
 
 from core import billing_provisioning  # noqa: E402
 

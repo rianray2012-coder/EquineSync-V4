@@ -1,0 +1,12 @@
+{
+  "evidence": {
+    "input_hash_count_each": 3,
+    "intentional_fail_run": "foundation-example-intentional-fail",
+    "pass_run": "foundation-example-pass",
+    "records_bound_to_implementation_commit": true,
+    "schema_errors": [],
+    "semantically_empty_record_rejected": true
+  },
+  "gap_id": "S2-GAP-006",
+  "result": "PASS"
+}

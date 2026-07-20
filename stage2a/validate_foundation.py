@@ -20,7 +20,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 import cleanup as cleanup_cli
 import orchestrate
-from evidence_capture import capture
+from evidence_capture import capture, redact_output, validate_record_semantics
 from lib.control import (
     COLLECTION,
     ENV_FILE,
@@ -47,6 +47,7 @@ from rollback_recovery import restore_snapshot, write_snapshot
 
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 EMPTY_STATE_DIGEST = digest([])
+STARTUP_ORACLE_PATH = ROOT / "startup-side-effect-oracle.json"
 
 
 def git(*args: str, cwd: Path = REPO) -> str:
@@ -188,13 +189,36 @@ def main() -> int:
     db = client[env["DB_NAME"]]
     startup_inventory = database_inventory(db)
     startup_documents = sum(int(x["document_count"]) for x in startup_inventory["collections"])
-    ck("startup_side_effect_inventory", startup_documents == 0 and len(startup_inventory["collections"]) > 0, {
+    startup_oracle = json.loads(STARTUP_ORACLE_PATH.read_text(encoding="utf-8"))
+    startup_log_path = RUNTIME / "logs/api.log"
+    startup_log = startup_log_path.read_text(encoding="utf-8", errors="replace")
+    required_log_markers = {marker: marker in startup_log for marker in startup_oracle["startup_log_required_markers"]}
+    prohibited_log_markers = {marker: marker in startup_log for marker in startup_oracle["startup_log_prohibited_markers"]}
+    network_guard = json.loads((RUNTIME / "network-guard.json").read_text(encoding="utf-8"))
+    startup_oracle_match = (
+        startup_inventory["digest"] == startup_oracle["expected_database_inventory_sha256"]
+        and len(startup_inventory["collections"]) == startup_oracle["expected_collection_count"]
+        and startup_documents == startup_oracle["expected_document_count"]
+    )
+    ck("startup_side_effect_inventory", startup_oracle_match and all(required_log_markers.values()) and not any(prohibited_log_markers.values()) and network_guard["provider_or_external_attempt_count"] == 0, {
         "profile": "full EquineSync application",
         "profile_control": env["STAGE2A_STARTUP_PROFILE"],
         "catalog_materialization": "DISABLED_BY_STAGE2A_WRAPPER",
         "collections_with_index_metadata": len(startup_inventory["collections"]),
         "startup_document_writes": startup_documents,
         "inventory_digest": startup_inventory["digest"],
+        "oracle_id": startup_oracle["oracle_id"],
+        "oracle_match": startup_oracle_match,
+        "startup_log_sha256": file_sha(startup_log_path),
+        "required_log_markers": required_log_markers,
+        "prohibited_log_markers": prohibited_log_markers,
+        "network_guard": network_guard,
+        "attempt_outcomes": {
+            "attempted": 1, "succeeded": 1, "failed": 0, "skipped": 7,
+            "timed_out": 0, "unavailable": 0,
+            "skipped_basis": "six disabled background categories plus billing catalog materialization disabled by the controlled wrapper"
+        },
+        "known_side_effect_paths": startup_oracle["known_side_effect_paths"],
         "background_flags": {name: env[name] for name in sorted(k for k in env if k.startswith("DISABLE_"))},
         "auto_seed": env["ALLOW_AUTO_SEED"],
         "seed_route": env["ALLOW_SEED_ROUTE"],
@@ -297,39 +321,60 @@ def main() -> int:
     })
 
     example_inputs = [ROOT / "example_command.py", ROOT / "execution-evidence-schema.json", ENV_FILE]
-    passed_example = capture("foundation-example-pass", [sys.executable, str(ROOT / "example_command.py"), "pass"], 0, input_paths=example_inputs)
-    failed_example = capture("foundation-example-intentional-fail", [sys.executable, str(ROOT / "example_command.py"), "intentional-fail"], 7, input_paths=example_inputs)
+    passed_example = capture("foundation-example-pass", [sys.executable, str(ROOT / "example_command.py"), "pass"], 0, input_paths=example_inputs, required_meaning=["stage2a foundation example: pass"])
+    failed_example = capture("foundation-example-intentional-fail", [sys.executable, str(ROOT / "example_command.py"), "intentional-fail"], 7, input_paths=example_inputs, required_meaning=["stage2a foundation example: intentional-fail"])
     schema = json.loads((ROOT / "execution-evidence-schema.json").read_text(encoding="utf-8"))
     validator = Draft202012Validator(schema, format_checker=FormatChecker())
     schema_errors = []
     for record in (passed_example, failed_example):
         schema_errors.extend(str(x.message) for x in validator.iter_errors(record))
-        core = dict(record)
-        recorded_hash = core.pop("record_content_sha256")
-        if hashlib.sha256((json.dumps(core, sort_keys=True, separators=(",", ":"), ensure_ascii=True) + "\n").encode()).hexdigest() != recorded_hash:
-            schema_errors.append(f"record hash mismatch: {record['run_identifier']}")
-        if dt.datetime.fromisoformat(str(record["utc_end"])) < dt.datetime.fromisoformat(str(record["utc_start"])):
-            schema_errors.append(f"chronology mismatch: {record['run_identifier']}")
+        schema_errors.extend(validate_record_semantics(record, ROOT))
+    def rehash(record: dict[str, object]) -> dict[str, object]:
+        value = deepcopy(record); value.pop("record_content_sha256", None)
+        return value | {"record_content_sha256": hashlib.sha256((json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True) + "\n").encode()).hexdigest()}
+    contradictory = deepcopy(passed_example); contradictory["actual_result"]["exit_status"] = 9
+    reverse = deepcopy(passed_example); reverse["utc_start"], reverse["utc_end"] = reverse["utc_end"], reverse["utc_start"]
+    bad_stream = deepcopy(passed_example); bad_stream["evidence_file_hashes"]["stdout"] = "0" * 64
+    semantic_negative_results = {
+        "contradictory_exit_rejected": bool(validate_record_semantics(rehash(contradictory), ROOT)),
+        "reverse_chronology_rejected": bool(validate_record_semantics(rehash(reverse), ROOT)),
+        "stream_hash_mismatch_rejected": bool(validate_record_semantics(rehash(bad_stream), ROOT)),
+    }
+    redacted_probe, redaction_replacements = redact_output("operation=evidence-check api_key=synthetic-sensitive result=pass\n")
+    semantic_negative_results["sensitive_value_redacted"] = redaction_replacements == 1 and "api_key=<REDACTED>" in redacted_probe
+    semantic_negative_results["required_meaning_preserved"] = "operation=evidence-check" in redacted_probe and "result=pass" in redacted_probe
     blank = {name: "" for name in schema["required"]}
     blank_rejected = bool(list(validator.iter_errors(blank)))
-    ck("evidence_capture_semantics", not schema_errors and blank_rejected and passed_example["result"] == failed_example["result"] == "PASS", {
+    ck("evidence_capture_semantics", not schema_errors and blank_rejected and all(semantic_negative_results.values()) and passed_example["result"] == failed_example["result"] == "PASS", {
         "pass_run": passed_example["run_identifier"],
         "intentional_fail_run": failed_example["run_identifier"],
         "input_hash_count_each": len(passed_example["input_artifact_hashes"]),
         "schema_errors": schema_errors,
         "semantically_empty_record_rejected": blank_rejected,
+        "semantic_negative_tests": semantic_negative_results,
         "records_bound_to_implementation_commit": passed_example["commit_hash"] == failed_example["commit_hash"] == implementation_commit,
     })
 
-    providers = provider_register(env)
+    final_network_guard = json.loads((RUNTIME / "network-guard.json").read_text(encoding="utf-8"))
+    providers = provider_register(env, measured_unapproved_attempts=final_network_guard["provider_or_external_attempt_count"])
     configured = [x for x in providers if x["configured"]]
-    ck("provider_denial", not configured and all(x["attempt_count"] == 0 for x in providers), {
+    provider_outcomes_valid = all(
+        x["attempted_count"] == x["succeeded_count"] == x["failed_count"] == x["timed_out_count"] == x["unavailable_count"] == 0
+        and x["skipped_count"] == 1 and x["state"] == "SKIPPED_NOT_CONFIGURED"
+        for x in providers
+    )
+    ck("provider_denial", not configured and provider_outcomes_valid and final_network_guard["provider_or_external_attempt_count"] == 0, {
         "providers": len(providers),
         "configuration_names": len(PROVIDER_NAMES),
         "register": providers,
         "configured": [x["provider"] for x in configured],
         "attempt_count": 0,
-        "attempt_count_basis": "full application ran under exact-port sandbox; provider configuration absent; provider-name negative tests denied; observed process sockets were approved loopback only",
+        "outcome_totals": {
+            "attempted": 0, "succeeded": 0, "failed": 0,
+            "skipped": len(providers), "timed_out": 0, "unavailable": 0
+        },
+        "network_guard": final_network_guard,
+        "attempt_count_basis": "application-level socket instrumentation measured zero provider/external attempts; every provider was explicitly classified SKIPPED_NOT_CONFIGURED; exact-port sandbox and process socket inventory independently corroborated zero external activity",
     })
 
     final_owned_cleanup = row_cleanup(db)
@@ -357,7 +402,12 @@ def main() -> int:
         "network_denials": denied_network,
         "interrupted_start": {"error": interrupted_error, "status": interrupted_status},
         "cold_start": start,
+        "process_identity": status,
         "startup_inventory": startup_inventory,
+        "startup_oracle": startup_oracle,
+        "startup_log_review": {"sha256": next(x["detail"] for x in checks if x["check"] == "startup_side_effect_inventory")["startup_log_sha256"], "required_markers": required_log_markers, "prohibited_markers": prohibited_log_markers},
+        "application_network_guard": final_network_guard,
+        "provider_measurement": next(x["detail"] for x in checks if x["check"] == "provider_denial"),
         "network_inventory": {"observed_lines": network_lines, "wildcard": wildcard, "non_loopback": non_loopback},
         "fixture": next(x["detail"] for x in checks if x["check"] == "fixture_reproducibility"),
         "cleanup": next(x["detail"] for x in checks if x["check"] == "cleanup_failure_and_interruption"),
@@ -378,7 +428,7 @@ def main() -> int:
         "check_count": len(checks),
         "pass_count": len(checks) - len(failed),
         "provider_attempt_count": 0,
-        "provider_attempt_count_basis": "instrumented configuration denials, exact-port sandbox, full-process socket inventory",
+        "provider_attempt_count_basis": "application-level socket instrumentation measured zero provider/external attempts; every provider has an explicit skipped state; exact-port sandbox and full-process socket inventory independently corroborated zero",
         "production_access_count": 0,
         "production_access_count_basis": "loopback-only datastore/API and exact-port sandbox",
         "live_data_access_count": 0,

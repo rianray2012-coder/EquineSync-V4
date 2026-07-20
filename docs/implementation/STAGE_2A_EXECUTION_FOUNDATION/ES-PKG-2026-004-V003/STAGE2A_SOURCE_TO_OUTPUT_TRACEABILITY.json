@@ -1,0 +1,1131 @@
+{
+  "outputs": [
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "BACKEND_BOOTSTRAP_CONTRACT.json",
+      "source_evidence_ids": [
+        "S2A-E-0002",
+        "S2A-E-0014",
+        "S2A-E-0020"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "BACKEND_BOOTSTRAP_CONTRACT.md",
+      "source_evidence_ids": [
+        "S2A-E-0002",
+        "S2A-E-0014",
+        "S2A-E-0020"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "BACKEND_BOOTSTRAP_VALIDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0002",
+        "S2A-E-0014",
+        "S2A-E-0020"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "BACKEND_BOOTSTRAP_VALIDATION.md",
+      "source_evidence_ids": [
+        "S2A-E-0002",
+        "S2A-E-0014",
+        "S2A-E-0020"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "BACKEND_DEPENDENCY_INVENTORY.txt",
+      "source_evidence_ids": [
+        "S2A-E-0002",
+        "S2A-E-0014",
+        "S2A-E-0020"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "CLEANUP_VALIDATION_REPORT.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "CLEANUP_VALIDATION_REPORT.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "COLD_START_VALIDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "COLD_START_VALIDATION.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "CONTROLLED_SHUTDOWN_VALIDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "CONTROLLED_SHUTDOWN_VALIDATION.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "EVIDENCE_CAPTURE_VALIDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "EVIDENCE_CAPTURE_VALIDATION.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "EXECUTION_EVIDENCE_SCHEMA.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "EXECUTION_EVIDENCE_SCHEMA.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "F0002_CLOSURE_EVIDENCE_REGISTER.csv",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "F0002_CLOSURE_EVIDENCE_REGISTER.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "F0002_FOUNDER_AUTHORIZED_CLOSURE.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "F0002_FOUNDER_AUTHORIZED_CLOSURE.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "FIXTURE_DIGESTS.txt",
+      "source_evidence_ids": [
+        "S2A-E-0033",
+        "S2A-E-0032"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "FIXTURE_REPRODUCIBILITY_REPORT.json",
+      "source_evidence_ids": [
+        "S2A-E-0033",
+        "S2A-E-0032"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "FIXTURE_REPRODUCIBILITY_REPORT.md",
+      "source_evidence_ids": [
+        "S2A-E-0033",
+        "S2A-E-0032"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "FOUNDATION_EVIDENCE_EXAMPLE_INTENTIONAL_FAIL.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "FOUNDATION_EVIDENCE_EXAMPLE_PASS.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "INTERRUPTED_START_VALIDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "INTERRUPTED_START_VALIDATION.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "ISOLATION_NEGATIVE_TEST_REPORT.json",
+      "source_evidence_ids": [
+        "S2A-E-0038",
+        "S2A-E-0019",
+        "S2A-E-0018"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "ISOLATION_NEGATIVE_TEST_REPORT.md",
+      "source_evidence_ids": [
+        "S2A-E-0038",
+        "S2A-E-0019",
+        "S2A-E-0018"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "PACKAGE_MANAGER_AUTHORITY_DECISION.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "PROVIDER_DENIAL_REGISTER.csv",
+      "source_evidence_ids": [
+        "S2A-E-0038",
+        "S2A-E-0019",
+        "S2A-E-0018"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "PROVIDER_DENIAL_REGISTER.json",
+      "source_evidence_ids": [
+        "S2A-E-0038",
+        "S2A-E-0019",
+        "S2A-E-0018"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "RECOVERED_STATE_INVARIANT_REPORT.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "RECOVERED_STATE_INVARIANT_REPORT.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "ROLLBACK_REHEARSAL_REPORT.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "ROLLBACK_REHEARSAL_REPORT.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.json",
+      "source_evidence_ids": [
+        "S2A-E-0008",
+        "S2A-E-0009",
+        "S2A-E-0039",
+        "S2A-E-0035"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE.md",
+      "source_evidence_ids": [
+        "S2A-E-0008",
+        "S2A-E-0009",
+        "S2A-E-0039",
+        "S2A-E-0035"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "SECRET_NAME_ALLOWLIST.txt",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_CHANGE_MANIFEST.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_CHANGE_MANIFEST.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_CLEANUP_CONTRACT.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_CLEANUP_CONTRACT.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_DETERMINISTIC_EXECUTION_PROFILE.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_DETERMINISTIC_EXECUTION_PROFILE.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_ENVIRONMENT_CONTRACT.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_ENVIRONMENT_CONTRACT.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_FILES_CREATED_REGISTER.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_FILES_CREATED_REGISTER.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_FILES_MODIFIED_REGISTER.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_FILES_MODIFIED_REGISTER.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_FIXTURE_FOUNDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0033",
+        "S2A-E-0032"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_FIXTURE_FOUNDATION.md",
+      "source_evidence_ids": [
+        "S2A-E-0033",
+        "S2A-E-0032"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_FOUNDATION_VALIDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_FOUNDATION_VALIDATION.txt",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_GAP_REMEDIATION_REPORT.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_GAP_REMEDIATION_REPORT.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_ISOLATION_CONTROL.json",
+      "source_evidence_ids": [
+        "S2A-E-0038",
+        "S2A-E-0019",
+        "S2A-E-0018"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_ISOLATION_CONTROL.md",
+      "source_evidence_ids": [
+        "S2A-E-0038",
+        "S2A-E-0019",
+        "S2A-E-0018"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_ORCHESTRATION_CONTRACT.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_ORCHESTRATION_CONTRACT.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_PRE_CHANGE_BASELINE.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_PRE_CHANGE_BASELINE.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_ROLLBACK_RECOVERY_CONTRACT.json",
+      "source_evidence_ids": [
+        "S2A-E-0017",
+        "S2A-E-0043"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_ROLLBACK_RECOVERY_CONTRACT.md",
+      "source_evidence_ids": [
+        "S2A-E-0017",
+        "S2A-E-0043"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT.json",
+      "source_evidence_ids": [
+        "S2A-E-0008",
+        "S2A-E-0009",
+        "S2A-E-0039",
+        "S2A-E-0035"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_RUNTIME_TOOLCHAIN_CONTRACT.md",
+      "source_evidence_ids": [
+        "S2A-E-0008",
+        "S2A-E-0009",
+        "S2A-E-0039",
+        "S2A-E-0035"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_SCOPE_REGISTER.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_SCOPE_REGISTER.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_SOURCE_EVIDENCE_REGISTER.csv",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_SOURCE_EVIDENCE_REGISTER.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_VALIDATION_COMMAND_REGISTER.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [
+        "S2-GAP-001",
+        "S2-GAP-002",
+        "S2-GAP-003",
+        "S2-GAP-004",
+        "S2-GAP-005",
+        "S2-GAP-006",
+        "S2-GAP-007",
+        "S2-GAP-008",
+        "S2-GAP-009"
+      ],
+      "output": "STAGE2A_VALIDATION_COMMAND_REGISTER.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "STAGE2_PACKAGE_PUBLICATION_RECORD.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "STAGE2_PACKAGE_PUBLICATION_RECORD.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "STARTUP_ISOLATION_VALIDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0038",
+        "S2A-E-0019",
+        "S2A-E-0018"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "STARTUP_ISOLATION_VALIDATION.md",
+      "source_evidence_ids": [
+        "S2A-E-0038",
+        "S2A-E-0019",
+        "S2A-E-0018"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "STARTUP_SIDE_EFFECT_INVENTORY.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "STARTUP_SIDE_EFFECT_INVENTORY.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "TOOLCHAIN_VALIDATION.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "TOOLCHAIN_VALIDATION.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "TOOLCHAIN_VERSION_CAPTURE.txt",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "ZERO_RESIDUE_PROOF.json",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    },
+    {
+      "authority_effect": "TECHNICAL_FOUNDATION_ONLY",
+      "gap_ids": [],
+      "output": "ZERO_RESIDUE_PROOF.md",
+      "source_evidence_ids": [
+        "S2A-E-0029",
+        "S2A-E-0031"
+      ]
+    }
+  ],
+  "package_id": "ES-PKG-2026-004-V003"
+}

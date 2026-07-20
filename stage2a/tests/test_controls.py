@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 import sys
 import unittest
@@ -12,8 +13,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from jsonschema import Draft202012Validator, FormatChecker
 
-from evidence_capture import sanitize_arguments
-from lib.control import IsolationError, PROVIDER_NAMES, ROOT, digest, fixture_data, load_env, provider_register, validate_env
+from evidence_capture import redact_output, sanitize_arguments, sensitive_output_matches
+from lib.control import REPO, IsolationError, PROVIDER_NAMES, ROOT, digest, fixture_data, load_env, provider_register, validate_env
+from network_guard import _approved
+from orchestrate import _expected
+from validate_stage2a_package import locate_repository
 
 
 class ControlTests(unittest.TestCase):
@@ -33,7 +37,11 @@ class ControlTests(unittest.TestCase):
 
     def test_provider_register_has_zero_attempts(self):
         env=load_env(); register=provider_register(env)
-        self.assertTrue(all(x["attempt_count"]==0 and not x["configured"] for x in register))
+        self.assertTrue(all(
+            x["attempted_count"] == x["succeeded_count"] == x["failed_count"] == x["timed_out_count"] == x["unavailable_count"] == 0
+            and x["skipped_count"] == 1 and x["state"] == "SKIPPED_NOT_CONFIGURED" and not x["configured"]
+            for x in register
+        ))
 
     def test_every_provider_name_fails_closed(self):
         for name in PROVIDER_NAMES:
@@ -57,12 +65,50 @@ class ControlTests(unittest.TestCase):
         empty={name:"" for name in schema["required"]}
         self.assertTrue(list(Draft202012Validator(schema,format_checker=FormatChecker()).iter_errors(empty)))
 
+    def test_output_redaction_preserves_required_nonsensitive_meaning(self):
+        redacted, replacements = redact_output("operation=fixture-load api_key=do-not-preserve result=pass\n")
+        self.assertEqual(replacements, 1)
+        self.assertIn("operation=fixture-load", redacted)
+        self.assertIn("result=pass", redacted)
+        self.assertIn("api_key=<REDACTED>", redacted)
+        self.assertEqual(sensitive_output_matches(redacted), [])
+
     def test_sandbox_is_exact_port_and_signal_scoped(self):
         profile=(ROOT/"config/loopback-only.sb").read_text()
         self.assertIn('(allow signal (target same-sandbox))',profile)
         self.assertNotIn('localhost:*',profile)
         self.assertIn('localhost:27029',profile)
         self.assertIn('localhost:8019',profile)
+
+    def test_validator_root_resolution_is_working_directory_independent(self):
+        self.assertEqual(locate_repository(ROOT / "validate_stage2a_package.py"), REPO)
+        packaged = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003/validate_stage2a_package.py"
+        self.assertEqual(locate_repository(packaged), REPO)
+
+    def test_application_network_guard_allows_only_controlled_endpoints(self):
+        self.assertTrue(_approved(("127.0.0.1", 27029)))
+        self.assertTrue(_approved(("127.0.0.1", 8019)))
+        self.assertFalse(_approved(("127.0.0.1", 9)))
+        self.assertFalse(_approved(("192.0.2.1", 443)))
+
+    def test_process_identity_fails_closed_on_command_or_group_conflict(self):
+        observed = "python -m uvicorn controlled"
+        record = {
+            "owner": "ES-PKG-2026-004-V003", "kind": "api", "pid": 42,
+            "process_group_id": 42, "parent_pid": 7,
+            "parent_pid_policy": "CREATION_PARENT_OR_INIT_REPARENT_ONLY",
+            "executable_path": "/controlled/python", "working_directory": "/controlled/work",
+            "controlled_port": 8019, "command_line_sha256": hashlib.sha256(observed.encode()).hexdigest(),
+            "observed_command_line": observed, "command_display": observed,
+        }
+        files = "python 42 user cwd /controlled/work\npython 42 user txt /controlled/python"
+        identity = {"parent_pid": 7, "process_group_id": 42, "command_line": observed}
+        with patch("orchestrate._process_files", return_value=files), patch("orchestrate._ps_identity", return_value=identity):
+            self.assertTrue(_expected(record, "api"))
+            conflicted = deepcopy(record); conflicted["process_group_id"] = 43
+            self.assertFalse(_expected(conflicted, "api"))
+            conflicted = deepcopy(record); conflicted["command_line_sha256"] = "0" * 64
+            self.assertFalse(_expected(conflicted, "api"))
 
 
 if __name__=="__main__": unittest.main()
