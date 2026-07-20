@@ -67,14 +67,16 @@ def source_recovery_rehearsal(implementation_commit: str) -> dict[str, object]:
     clone = temp_root / "repo"
     subprocess.run(["git", "clone", "--quiet", "--shared", "--no-checkout", str(REPO), str(clone)], check=True, timeout=120)
     try:
-        subprocess.run(["git", "checkout", "--quiet", "--detach", implementation_commit], cwd=clone, check=True, timeout=30)
+        subprocess.run(["git", "sparse-checkout", "init", "--no-cone"], cwd=clone, check=True, timeout=30)
+        subprocess.run(["git", "sparse-checkout", "set", "stage2a/fixtures/foundation-v1.json"], cwd=clone, check=True, timeout=30)
+        subprocess.run(["git", "checkout", "--quiet", "--detach", implementation_commit], cwd=clone, check=True, timeout=120)
         fixture = clone / "stage2a/fixtures/foundation-v1.json"
         expected = file_sha(fixture)
         fixture.write_text("intentional Stage 2A source recovery mutation\n", encoding="utf-8")
         mutated = file_sha(fixture)
-        subprocess.run(["git", "restore", f"--source={implementation_commit}", "--", "stage2a/fixtures/foundation-v1.json"], cwd=clone, check=True, timeout=30)
+        subprocess.run(["git", "restore", f"--source={implementation_commit}", "--", "stage2a/fixtures/foundation-v1.json"], cwd=clone, check=True, timeout=120)
         restored = file_sha(fixture)
-        subprocess.run(["git", "checkout", "--quiet", "--detach", START], cwd=clone, check=True, timeout=30)
+        subprocess.run(["git", "checkout", "--quiet", "--detach", START], cwd=clone, check=True, timeout=120)
         prechange_absent = not (clone / "stage2a").exists()
         return {
             "implementation_restore_command": "git restore --source=IMPLEMENTATION_COMMIT -- stage2a/fixtures/foundation-v1.json",
@@ -84,7 +86,7 @@ def source_recovery_rehearsal(implementation_commit: str) -> dict[str, object]:
             "restored_sha256": restored,
             "restored_matches": expected == restored and expected != mutated,
             "stage2a_absent_at_prechange_anchor": prechange_absent,
-            "clone_mode": "DISPOSABLE_SHARED_OBJECTS_NO_CHECKOUT",
+            "clone_mode": "DISPOSABLE_SHARED_OBJECTS_SPARSE_SINGLE_FILE",
             "fresh_clone_proof_role": "NOT_APPLICABLE_SEPARATE_POST_PUSH_CONTROL",
             "disposable_clone_removed": True,
         }
@@ -398,4 +400,19 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except SystemExit:
+        raise
+    except BaseException as exc:
+        emergency: dict[str, object] = {"error_type": type(exc).__name__, "error": str(exc)}
+        try:
+            emergency["orchestrator_stop"] = orchestrate.stop()
+        except Exception as stop_exc:
+            emergency["orchestrator_stop_error"] = f"{type(stop_exc).__name__}: {stop_exc}"
+        try:
+            emergency["runtime_purge"] = cleanup_cli.purge_runtime()
+        except Exception as purge_exc:
+            emergency["runtime_purge_error"] = f"{type(purge_exc).__name__}: {purge_exc}"
+        print(json.dumps({"emergency_cleanup": emergency}, indent=2), file=sys.stderr)
+        raise
