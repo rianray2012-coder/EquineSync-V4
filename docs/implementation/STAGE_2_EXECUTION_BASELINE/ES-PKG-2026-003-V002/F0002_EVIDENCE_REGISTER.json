@@ -1,0 +1,77 @@
+{
+  "finding_id": "ES-REV-2026-001-F-0002",
+  "evidence": [
+    {
+      "evidence_id": "F2-E-001",
+      "command": "git remote get-url origin",
+      "result": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+      "status": "PASS"
+    },
+    {
+      "evidence_id": "F2-E-002",
+      "command": "git rev-parse HEAD; git rev-parse 'HEAD^{tree}'",
+      "result": "acb518ea5a160820e64681ff95a16b010fe1156c; a85a59e414016c7b0beb91f16ead1fb187c868d0",
+      "status": "PASS"
+    },
+    {
+      "evidence_id": "F2-E-003",
+      "command": "git symbolic-ref -q --short HEAD",
+      "result": "codex/stage2-f0001-execution-baseline",
+      "status": "PASS_ATTACHED_LOCAL_BRANCH"
+    },
+    {
+      "evidence_id": "F2-E-004",
+      "command": "git fsck --full --strict --no-reflogs",
+      "result": "exit 0; no output",
+      "status": "PASS"
+    },
+    {
+      "evidence_id": "F2-E-005",
+      "command": "git rev-list --objects acb518ea5a160820e64681ff95a16b010fe1156c | git cat-file --batch-check",
+      "result": "5228 checked; 156 commits; 1287 trees; 3785 blobs; 0 missing",
+      "status": "PASS"
+    },
+    {
+      "evidence_id": "F2-E-006",
+      "command": "git ls-files -s; diff-files; diff-index --cached",
+      "result": "3340 stage0; 0 higher stage; exact clean before work",
+      "status": "PASS"
+    },
+    {
+      "evidence_id": "F2-E-007",
+      "command": "partial/sparse/promisor/alternates configuration audit",
+      "result": "all absent",
+      "status": "PASS"
+    },
+    {
+      "evidence_id": "F2-E-008",
+      "command": "submodule/LFS pointer audit",
+      "result": "none detected; git-lfs tool absent but not required",
+      "status": "PASS_WITH_SCOPE_NOTE"
+    },
+    {
+      "evidence_id": "F2-E-009",
+      "command": "git ls-remote --heads origin codex/es-ip-v1.1.0-remediation",
+      "result": "0 lines",
+      "status": "PASS_BRANCH_ABSENT"
+    },
+    {
+      "evidence_id": "F2-E-010",
+      "command": "git ls-remote --symref origin HEAD",
+      "result": "integrate-emergent-final-zip -> acb518ea5a160820e64681ff95a16b010fe1156c at verification time",
+      "status": "PASS_OBSERVATION_ONLY"
+    },
+    {
+      "evidence_id": "F2-E-011",
+      "command": "git verify-tag equinesync-governance-v1.0-locked-2026-07-16",
+      "result": "exit 1: error: no signature found",
+      "status": "PASS_ACCURATE_UNSIGNED_ANNOTATED_TAG_RECORD"
+    },
+    {
+      "evidence_id": "F2-E-012",
+      "command": "sealed predecessor branch-not-found log",
+      "result": "sha256 ff055c54c35be8e81d8c70a856f9fa1ff277dce4f92aae21392b120b7ee92f39",
+      "status": "PASS_IMMUTABLE_HISTORICAL_EVIDENCE"
+    }
+  ]
+}

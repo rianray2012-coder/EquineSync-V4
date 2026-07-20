@@ -1,0 +1,16 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "snapshot_purpose": "segregated and adversarial read-only review",
+  "frozen_utc": "2026-07-20T03:47:59Z",
+  "snapshot_file_count": 80,
+  "snapshot_manifest": "DRAFT_REVIEW_SNAPSHOT_SHA256SUMS.txt",
+  "snapshot_manifest_sha256": "51b59d9dd3794db7486fb12da67aa2913b725058c47c3d648498b32ee0b8a3a6",
+  "algorithm": "For each regular file except the three snapshot-control files: POSIX-relative path; lexicographic byte ordering; lowercase SHA-256; two ASCII spaces; path; LF. The snapshot digest is SHA-256 of the exact manifest bytes.",
+  "excluded_snapshot_controls": [
+    "DRAFT_REVIEW_SNAPSHOT_RECORD.json",
+    "DRAFT_REVIEW_SNAPSHOT_RECORD.md",
+    "DRAFT_REVIEW_SNAPSHOT_SHA256SUMS.txt"
+  ],
+  "mutation_rule": "Any change to a listed file invalidates the review and requires a new freeze and both reviews.",
+  "execution_performed": false
+}

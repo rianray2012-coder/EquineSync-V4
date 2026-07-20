@@ -1,0 +1,12 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "validation": "PASS",
+  "archive_member_files": 113,
+  "extracted_files": 113,
+  "parity": "113/113",
+  "path_traversal": 0,
+  "symlinks": 0,
+  "case_collisions": 0,
+  "checksum_scope": "SUCCESSOR_PACKAGE_SHA256SUMS.txt",
+  "execution_performed": false
+}

@@ -1,0 +1,42 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "reconciliation": [
+    {
+      "finding_id": "ES-ADV-V002-F-0001",
+      "disposition": "REMEDIATED_CONFIRMED"
+    },
+    {
+      "finding_id": "ES-ADV-V002-F-0002",
+      "disposition": "REMEDIATED_CONFIRMED"
+    },
+    {
+      "finding_id": "ES-ADV-V002-F-0003",
+      "disposition": "RECONCILED_AS_F0001_OPERATIONAL_BLOCKER"
+    },
+    {
+      "finding_id": "ES-ADV-V002-F-0004",
+      "disposition": "REMEDIATED_CONFIRMED"
+    },
+    {
+      "finding_id": "ES-ADV-V002-F-0005",
+      "disposition": "REMEDIATED_F0002_NOT_SELF_CLOSED"
+    },
+    {
+      "finding_id": "ES-ADV-V002-F-0006",
+      "disposition": "PARTIALLY_REMEDIATED_RESIDUAL_R2_F_0002"
+    },
+    {
+      "finding_id": "ES-ADV-V002-F-0007",
+      "disposition": "REMEDIATED_CONFIRMED"
+    },
+    {
+      "finding_id": "ES-ADV-V002-R2-F-0001",
+      "disposition": "REMEDIATED_CONFIRMED"
+    },
+    {
+      "finding_id": "ES-ADV-V002-R2-F-0002",
+      "disposition": "OPEN_RETAINED_NONBLOCKING"
+    }
+  ],
+  "drafting_function_self_closed_material_finding": false
+}

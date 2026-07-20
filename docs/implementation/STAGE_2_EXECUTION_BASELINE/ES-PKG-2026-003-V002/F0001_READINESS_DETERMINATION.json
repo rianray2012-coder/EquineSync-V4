@@ -1,0 +1,80 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "finding_id": "ES-REV-2026-001-F-0001",
+  "disposition": "F0001_REMAINS_OPEN_BLOCKING",
+  "criteria": [
+    {
+      "criterion": "three Atlas mappings complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "dependency installation exact",
+      "satisfied": false
+    },
+    {
+      "criterion": "build exact",
+      "satisfied": false
+    },
+    {
+      "criterion": "runtime exact",
+      "satisfied": false
+    },
+    {
+      "criterion": "isolated environment complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "fixtures complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "expected results complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "oracles complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "CP-3 complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "rollback complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "cleanup complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "evidence capture complete",
+      "satisfied": false
+    },
+    {
+      "criterion": "GP-05 implemented or validly resolved",
+      "satisfied": false
+    },
+    {
+      "criterion": "no P0/P1 blocker",
+      "satisfied": false
+    },
+    {
+      "criterion": "no unsupported assertion",
+      "satisfied": false
+    }
+  ],
+  "blocking_gaps": 31,
+  "code_required_gaps": 28,
+  "atlas_dispositions": {
+    "Identity": "INCOMPLETE_MULTIPLE_BLOCKERS",
+    "Relationships": "INCOMPLETE_MULTIPLE_BLOCKERS",
+    "Authorization": "INCOMPLETE_MULTIPLE_BLOCKERS"
+  },
+  "gp05": "GP05_DOCUMENTED_NOT_IMPLEMENTED",
+  "cp3": "13_SUITES_52_DOCUMENTARY_SCENARIOS_ZERO_EXECUTED",
+  "principal_final_disposition": "EXECUTION_BASELINE_STILL_NOT_READY",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "self_closed": false
+}

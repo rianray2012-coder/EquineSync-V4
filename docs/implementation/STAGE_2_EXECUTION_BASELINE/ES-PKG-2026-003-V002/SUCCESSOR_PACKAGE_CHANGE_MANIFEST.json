@@ -1,0 +1,33 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "starting_commit": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "created": [
+    {
+      "change_id": "CHG-001",
+      "path": "MIAP_TERMINOLOGY_INTEGRITY_REGISTER.csv",
+      "change": "Correct TERM-013 to complete nested Stage1 locator",
+      "control": "Reviewer-verified change control"
+    },
+    {
+      "change_id": "CHG-002",
+      "path": "GP05_* and source registers",
+      "change": "Classify v1.2.2 internal-assurance corpus as non-approved documentary candidate",
+      "control": "No authority promotion"
+    },
+    {
+      "change_id": "CHG-003",
+      "path": "validate_successor_package.py",
+      "change": "Add live source, archive, snapshot, row-equality, and bounded parity checks",
+      "control": "Read-only validation"
+    },
+    {
+      "change_id": "CHG-004",
+      "path": "Stage 2 successor package",
+      "change": "Create separate V002 successor; predecessor unchanged",
+      "control": "268fdd714264c5c0ae8f599a312c90e37ec44b908b438a1384c88f897bf03b9f"
+    }
+  ],
+  "modified_repository_baseline": [],
+  "renamed": [],
+  "deleted": []
+}

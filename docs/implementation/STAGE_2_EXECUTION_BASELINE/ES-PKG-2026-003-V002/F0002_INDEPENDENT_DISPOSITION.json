@@ -1,0 +1,60 @@
+{
+  "finding_id": "ES-REV-2026-001-F-0002",
+  "historical_status": "CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+  "assessment": "RESOLVED_FOR_THIS_IMMUTABLE_COMMIT_BASELINE",
+  "recommended_disposition": "F0002_READY_FOR_AUTHORIZED_CLOSURE",
+  "closure_effect": "CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+  "scope_commit": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "audit_completed_utc": "2026-07-20T03:02:28Z",
+  "repository_modified": false,
+  "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "tree": "a85a59e414016c7b0beb91f16ead1fb187c868d0",
+  "parent": "8b7541f0d93b2ed9a8bc70e54874a339311ef7cf",
+  "materialization": {
+    "baseline_objects_checked": 5228,
+    "missing": 0,
+    "all_ref_objects": 5905,
+    "strict_fsck_exit": 0,
+    "tracked_stage0_paths": 3340,
+    "index_worktree": "EXACT_CLEAN",
+    "shallow": false,
+    "partial": false,
+    "promisor": false,
+    "sparse": false,
+    "alternates": false,
+    "submodules": 0,
+    "lfs_pointers": 0
+  },
+  "checkout": {
+    "detached": false,
+    "branch": "codex/stage2-f0001-execution-baseline",
+    "upstream": "ABSENT",
+    "remote_branch": "ABSENT"
+  },
+  "requested_predecessor_branch": {
+    "name": "codex/es-ip-v1.1.0-remediation",
+    "official_remote_status": "ABSENT"
+  },
+  "remote_default_observation": {
+    "branch": "integrate-emergent-final-zip",
+    "commit": "acb518ea5a160820e64681ff95a16b010fe1156c",
+    "observed_utc": "2026-07-20T03:00:34Z",
+    "continuing_pin_required": false
+  },
+  "governance_tag": {
+    "name": "equinesync-governance-v1.0-locked-2026-07-16",
+    "type": "annotated",
+    "tag_object": "df475478ddcb6b69838a5c9e266ae804aaa3207a",
+    "dereferenced_commit": "acb518ea5a160820e64681ff95a16b010fe1156c",
+    "signature": "absent",
+    "signed_tag_authentication": "not available",
+    "consistency": "verified",
+    "effect_on_lock": "none"
+  },
+  "scope_limits": [
+    "Does not prove F-0001 mappings",
+    "Does not prove dependencies/build/runtime/tests",
+    "Does not authorize execution",
+    "Does not self-close F-0002"
+  ]
+}

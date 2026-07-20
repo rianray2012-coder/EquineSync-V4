@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "status": "INCOMPLETE_MULTIPLE_BLOCKERS",
+  "os": "UNKNOWN",
+  "architecture": "UNKNOWN",
+  "shell": "UNKNOWN",
+  "python": "3.11.11",
+  "node": "UNKNOWN",
+  "npm_or_yarn": "CONFLICT_REQUIRES_DECISION",
+  "mongodb": "UNKNOWN",
+  "cache": "No required dedicated cache substantiated",
+  "queue": "No required dedicated queue substantiated; background loops exist",
+  "object_storage": "PROHIBITED_UNLESS_SEPARATELY_MOCKED_AND_AUTHORIZED",
+  "local_services": [
+    "MongoDB",
+    "FastAPI/Uvicorn",
+    "frontend only for UI scope"
+  ],
+  "ports": {
+    "api": "8001 appears in source example; approved contract UNKNOWN",
+    "mongodb": "UNKNOWN",
+    "frontend": "UNKNOWN"
+  },
+  "isolation": {
+    "network": "Localhost and enforceable outbound deny required; implementation missing",
+    "filesystem": "Disposable worktree/temp roots; exact control UNKNOWN",
+    "database": "Unique disposable non-production database; exact creation/reset UNKNOWN",
+    "tenant": "Synthetic tenants only; complete isolation oracle missing"
+  },
+  "prohibited": [
+    "production access",
+    "live data",
+    "human participants",
+    "clinical or medication-administration actions",
+    "payment processing",
+    "external provider interaction",
+    "deployment",
+    "release",
+    "migration"
+  ],
+  "execution_authorization": "EXECUTION_NOT_AUTHORIZED"
+}

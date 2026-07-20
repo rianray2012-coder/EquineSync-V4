@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "results": [
+    {
+      "result_id": "ER-ID-001",
+      "workflow": "ATL-FND-IDENTITY",
+      "positive": "Verified bounded session permits only intended step",
+      "negative": "Missing/unknown/expired/replayed/suspended/unverified/stale context denies",
+      "audit": "Actor/account/session/context/reason/policy version required",
+      "state_transition": "Canonical lifecycle transition; implementation incomplete",
+      "status": "EXPECTED_NOT_EXECUTED"
+    },
+    {
+      "result_id": "ER-REL-001",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "positive": "Active verified in-scope relationship may be supplied to Authorization",
+      "negative": "Role-only, expired, revoked, disputed, wrong-scope, inferred relation denies/reviews",
+      "audit": "Version/source/temporal/dispute/correlation required",
+      "state_transition": "History-preserving lifecycle; implementation absent",
+      "status": "EXPECTED_NOT_EXECUTED"
+    },
+    {
+      "result_id": "ER-AUTH-001",
+      "workflow": "ATL-FND-AUTHZ",
+      "positive": "All current predicates permit minimum scope with explanation",
+      "negative": "Unknown/cross-tenant/stale/revoked/overbroad/audit-failure denies or quarantines",
+      "audit": "Input, decision, reason, policy/authority version and correlation required",
+      "state_transition": "No silent authority expansion",
+      "status": "EXPECTED_NOT_EXECUTED"
+    },
+    {
+      "result_id": "ER-GP05-001",
+      "workflow": "GP-05",
+      "positive": "Documentary 202 pending/200 accepted observation only",
+      "negative": "Wrong scope, instruction change, administration, duplicate, conflict, revocation denies/quarantines",
+      "audit": "Full observation/grant/instruction/audit/notification correlation required",
+      "state_transition": "Documentary only; implementation absent",
+      "status": "EXPECTED_NOT_EXECUTED"
+    }
+  ]
+}

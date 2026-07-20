@@ -1,0 +1,12 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "attempt": 6,
+  "phase": "final",
+  "validation": "FAIL",
+  "score": "49/50",
+  "check_count": 50,
+  "failed_check": "paired_format_identifier_parity",
+  "cause": "Seven newly generated Markdown summaries omitted package or finding identifiers present in JSON companions.",
+  "disposition": "PRESERVED_AND_CORRECTED",
+  "equinesync_execution_performed": false
+}

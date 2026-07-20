@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "gaps": [
+    {
+      "gap_id": "CP3-G-001",
+      "suite_id": "CP3-01",
+      "status": "AVAILABLE_INCOMPLETE",
+      "missing": "No complete authorized execution evidence",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    },
+    {
+      "gap_id": "CP3-G-002",
+      "suite_id": "CP3-02",
+      "status": "DOCUMENTED_NOT_IMPLEMENTED",
+      "missing": "Canonical relationship implementation absent",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    },
+    {
+      "gap_id": "CP3-G-003",
+      "suite_id": "CP3-03",
+      "status": "AVAILABLE_INCOMPLETE",
+      "missing": "Central policy/delegation absent",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    },
+    {
+      "gap_id": "CP3-G-004",
+      "suite_id": "CP3-04",
+      "status": "AVAILABLE_INCOMPLETE",
+      "missing": "Separate global dependency remains",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    },
+    {
+      "gap_id": "CP3-G-005",
+      "suite_id": "CP3-05",
+      "status": "DOCUMENTED_NOT_IMPLEMENTED",
+      "missing": "No executable target evidence",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    },
+    {
+      "gap_id": "CP3-G-006",
+      "suite_id": "CP3-06",
+      "status": "AVAILABLE_INCOMPLETE",
+      "missing": "No complete target evidence",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    },
+    {
+      "gap_id": "CP3-G-007",
+      "suite_id": "CP3-07",
+      "status": "DOCUMENTED_NOT_IMPLEMENTED",
+      "missing": "GP-05 not implemented",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    },
+    {
+      "gap_id": "CP3-G-008",
+      "suite_id": "CP3-08",
+      "status": "NOT_FOUND",
+      "missing": "Not triggered by current four-target scope",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": false
+    },
+    {
+      "gap_id": "CP3-G-009",
+      "suite_id": "CP3-09",
+      "status": "NOT_FOUND",
+      "missing": "Not triggered by current four-target scope",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": false
+    },
+    {
+      "gap_id": "CP3-G-010",
+      "suite_id": "CP3-10",
+      "status": "DOCUMENTED_NOT_IMPLEMENTED",
+      "missing": "Destructive migration prohibited",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": false
+    },
+    {
+      "gap_id": "CP3-G-011",
+      "suite_id": "CP3-11",
+      "status": "DOCUMENTED_NOT_IMPLEMENTED",
+      "missing": "Production access prohibited",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": false
+    },
+    {
+      "gap_id": "CP3-G-012",
+      "suite_id": "CP3-12",
+      "status": "DOCUMENTED_NOT_IMPLEMENTED",
+      "missing": "Revocation/offline implementation absent",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    },
+    {
+      "gap_id": "CP3-G-013",
+      "suite_id": "CP3-13",
+      "status": "DOCUMENTED_NOT_IMPLEMENTED",
+      "missing": "Notification state implementation absent",
+      "remediation": "Implement missing control/command/fixture/oracle/environment then obtain execution authorization",
+      "blocks_f0001": true
+    }
+  ]
+}

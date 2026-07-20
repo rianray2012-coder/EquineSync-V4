@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "status": "NOT_EXECUTABLE_COMMANDS_UNKNOWN",
+  "steps": [
+    {
+      "sequence": 1,
+      "step": "Confirm named disposable database and run ID",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 2,
+      "step": "Stop API/background processes and deny network/provider access",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 3,
+      "step": "Remove only synthetic fixture-owned records and temporary credentials",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 4,
+      "step": "Remove generated build/test artifacts under retention rules",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 5,
+      "step": "Restore configuration without recording secret values",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 6,
+      "step": "Verify zero process/port/data/file/cache/queue/session/authority/network residue",
+      "command_or_oracle": "ORACLE_UNKNOWN",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 7,
+      "step": "Compare final state to starting digest after success/failure/interruption/rollback/repeat",
+      "command_or_oracle": "ORACLE_UNKNOWN",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 8,
+      "step": "Preserve cleanup logs/checksums and quarantine on mismatch",
+      "command_or_oracle": "CAPTURE_COMMAND_UNKNOWN",
+      "status": "REQUIRED_NOT_EXECUTED"
+    }
+  ]
+}

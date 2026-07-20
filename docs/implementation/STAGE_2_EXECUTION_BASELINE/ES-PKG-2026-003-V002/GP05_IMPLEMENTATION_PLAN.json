@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "status": "GP05_DOCUMENTED_NOT_IMPLEMENTED",
+  "controlling_requirement": "GP-05 candidate documentary corpus bounded by locked Equine Health, Identity, Relationship, Permission, Audit, Offline, Communication, Privacy, and Release governance; candidate corpus itself is not Founder-approved implementation authority",
+  "purpose": "Adult-only delegated medication observation support; never prescribing, instruction change, administration record, or clinical advice",
+  "affected_components": [
+    "proposed GP-05 domain aggregate",
+    "proposed API",
+    "proposed bounded delegation and authority version controls",
+    "protected audit",
+    "offline reconciliation",
+    "notifications",
+    "observation-only UI"
+  ],
+  "dependencies": [
+    "Canonical Identity",
+    "Canonical Relationships",
+    "Central Authorization",
+    "Revocation watermark",
+    "Protected audit failure policy",
+    "Offline reconciliation",
+    "Notification state model",
+    "Qualified health/safety review"
+  ],
+  "data_requirements": [
+    "immutable operation ID",
+    "actor/horse/facility/grant/instruction versions",
+    "observed/queued/server times",
+    "state and conflict history",
+    "audit/notification correlation"
+  ],
+  "security_boundaries": [
+    "adult-only",
+    "exact purpose/task/scope/time",
+    "no redelegation",
+    "no authority escalation",
+    "default deny",
+    "no clinical or provider action"
+  ],
+  "tests": [
+    "GP-T-001..016",
+    "CP3-07",
+    "CP3-12",
+    "wrong-scope",
+    "revocation",
+    "duplicate",
+    "conflict",
+    "audit/notification failure",
+    "rollback/cleanup"
+  ],
+  "migration": "Additive only; existing medication logs must not be reclassified",
+  "release": "Separate authorization, review, and release decision required",
+  "estimate_basis": "12-20 engineering person-weeks after IAM prerequisites; planning estimate only",
+  "unresolved_founder_decisions": [
+    "persistence schema",
+    "protected audit failure policy",
+    "offline reconciliation policy",
+    "notification escalation policy",
+    "qualified safety review outcome"
+  ],
+  "implementation_authorized": false
+}

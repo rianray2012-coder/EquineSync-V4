@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "variables": [
+    {
+      "name": "APP_ENV",
+      "classification": "configuration",
+      "boundary": "Required environment identity; exact allowed Stage 2 value UNKNOWN",
+      "source": "docs/ONBOARDING_GUIDE.md",
+      "status": "REQUIRED_UNKNOWN_VALUE",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "MONGO_URL",
+      "classification": "secret_or_sensitive_locator",
+      "boundary": "Disposable non-production database only; value prohibited",
+      "source": "backend/core/config.py",
+      "status": "REQUIRED_NAME_ONLY",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "DB_NAME",
+      "classification": "configuration",
+      "boundary": "Unique synthetic database name; exact value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "REQUIRED_UNKNOWN_VALUE",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "JWT_SECRET",
+      "classification": "secret",
+      "boundary": "Synthetic non-production secret; value prohibited",
+      "source": "backend/core/config.py",
+      "status": "REQUIRED_NAME_ONLY",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "CORS_ORIGINS",
+      "classification": "configuration",
+      "boundary": "Localhost-only future profile; exact committed value absent",
+      "source": "backend/core/config.py",
+      "status": "REQUIRED_UNKNOWN_VALUE",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "REACT_APP_BACKEND_URL",
+      "classification": "configuration",
+      "boundary": "Local API endpoint; exact approved value absent",
+      "source": "frontend source and README",
+      "status": "REQUIRED_UNKNOWN_VALUE",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "ALLOW_AUTO_SEED",
+      "classification": "safety_control",
+      "boundary": "Must not enable unbounded/demo mutations; approved value contract absent",
+      "source": "backend/core/lifespan.py",
+      "status": "BLOCKING_DECISION",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "DISABLE_TASK_MATERIALIZER",
+      "classification": "safety_control",
+      "boundary": "Future isolated profile must disable or explicitly bound task materialization",
+      "source": "backend/core/lifespan.py",
+      "status": "BLOCKING_DECISION",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "DISABLE_NOTIFICATIONS",
+      "classification": "safety_control",
+      "boundary": "Future profile must prevent external notification activity",
+      "source": "backend/core/lifespan.py",
+      "status": "BLOCKING_DECISION",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "DISABLE_OWNER_DIGEST",
+      "classification": "safety_control",
+      "boundary": "Future profile must disable background provider activity",
+      "source": "backend/core/lifespan.py",
+      "status": "BLOCKING_DECISION",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "DISABLE_OWNER_WEEKLY_RECAP",
+      "classification": "safety_control",
+      "boundary": "Future profile must disable background provider activity",
+      "source": "backend/core/lifespan.py",
+      "status": "BLOCKING_DECISION",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "DISABLE_AUTO_NUDGES",
+      "classification": "safety_control",
+      "boundary": "Future profile must disable background provider activity",
+      "source": "backend/core/lifespan.py",
+      "status": "BLOCKING_DECISION",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "DISABLE_SUBSCRIPTION_EMAIL_DISPATCHER",
+      "classification": "safety_control",
+      "boundary": "Future profile must disable email dispatch",
+      "source": "backend/core/lifespan.py",
+      "status": "BLOCKING_DECISION",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "ENFORCE_EMAIL_VERIFICATION",
+      "classification": "security_control",
+      "boundary": "Exact isolated-run value requires approval",
+      "source": "backend/core/config.py",
+      "status": "REQUIRED_UNKNOWN_VALUE",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "RATE_LIMIT_ENABLED",
+      "classification": "security_control",
+      "boundary": "Exact isolated-run value requires approval",
+      "source": "backend/core/config.py",
+      "status": "REQUIRED_UNKNOWN_VALUE",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "AUTH_RATE_LIMIT",
+      "classification": "security_control",
+      "boundary": "Exact value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "LOGIN_LOCKOUT_ENABLED",
+      "classification": "security_control",
+      "boundary": "Exact value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "LOGIN_MAX_ATTEMPTS",
+      "classification": "security_control",
+      "boundary": "Exact value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "LOGIN_LOCKOUT_MINUTES",
+      "classification": "security_control",
+      "boundary": "Exact value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "LOGIN_ATTEMPT_WINDOW_MINUTES",
+      "classification": "security_control",
+      "boundary": "Exact value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "EMAIL_VERIFY_TTL_HOURS",
+      "classification": "security_control",
+      "boundary": "Exact value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "PASSWORD_RESET_TTL_HOURS",
+      "classification": "security_control",
+      "boundary": "Exact value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "JWT_EXP_HOURS",
+      "classification": "security_control",
+      "boundary": "Repository default exists; approved Stage 2 value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "REFRESH_EXP_DAYS",
+      "classification": "security_control",
+      "boundary": "Repository default exists; approved Stage 2 value UNKNOWN",
+      "source": "backend/core/config.py",
+      "status": "UNKNOWN",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "STRIPE_API_KEY",
+      "classification": "prohibited_secret",
+      "boundary": "Payment processing prohibited",
+      "source": "provider configuration",
+      "status": "PROHIBITED",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "classification": "prohibited_secret",
+      "boundary": "Payment processing prohibited",
+      "source": "provider configuration",
+      "status": "PROHIBITED",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "STRIPE_WEBHOOK_SECRET",
+      "classification": "prohibited_secret",
+      "boundary": "Payment processing prohibited",
+      "source": "provider configuration",
+      "status": "PROHIBITED",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "RESEND_API_KEY",
+      "classification": "prohibited_secret",
+      "boundary": "External email/provider interaction prohibited",
+      "source": "provider configuration",
+      "status": "PROHIBITED",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "DOCUSIGN_*",
+      "classification": "prohibited_secret_family",
+      "boundary": "Provider interaction prohibited",
+      "source": "provider configuration",
+      "status": "PROHIBITED",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "AWS_* / object-storage credentials",
+      "classification": "prohibited_secret_family",
+      "boundary": "External storage interaction prohibited",
+      "source": "provider configuration",
+      "status": "PROHIBITED",
+      "value_in_package": "PROHIBITED"
+    },
+    {
+      "name": "AI/provider API keys",
+      "classification": "prohibited_secret_family",
+      "boundary": "External AI/provider interaction prohibited",
+      "source": "provider configuration",
+      "status": "PROHIBITED",
+      "value_in_package": "PROHIBITED"
+    }
+  ],
+  "secret_values_included": false
+}

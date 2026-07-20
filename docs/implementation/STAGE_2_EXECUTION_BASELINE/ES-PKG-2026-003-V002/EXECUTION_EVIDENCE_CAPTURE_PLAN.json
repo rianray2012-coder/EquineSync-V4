@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "status": "SCHEMA_DEFINED_CAPTURE_COMMAND_UNKNOWN",
+  "requirements": [
+    {
+      "sequence": 1,
+      "requirement": "Record command ID, exact command, working directory, prerequisite and timeout",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 2,
+      "requirement": "Record commit/tree/tag, branch state, environment/tool versions and allowed variable names",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 3,
+      "requirement": "Hash fixture, starting state and configuration template without secret values",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 4,
+      "requirement": "Capture stdout/stderr, exit status, start/end UTC, expected and actual results",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 5,
+      "requirement": "Capture audit, notification, reconciliation, rollback and cleanup evidence",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 6,
+      "requirement": "Hash every evidence artifact and deterministic manifest",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 7,
+      "requirement": "Record deviations, partial failure and environmental contamination",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 8,
+      "requirement": "Require segregated review; drafting function cannot self-close material findings",
+      "status": "REQUIRED_NOT_EXECUTED"
+    }
+  ]
+}

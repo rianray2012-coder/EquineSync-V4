@@ -1,0 +1,22 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "attempt": 3,
+  "phase": "draft",
+  "utc": "2026-07-20T03:37:58Z",
+  "validation": "PASS",
+  "score": "36/36",
+  "check_count": 36,
+  "package_files_observed": 74,
+  "required_outputs_present": 70,
+  "required_outputs_total": 70,
+  "equinesync_execution_performed": false,
+  "semantic_controls_added": [
+    "raw F-0002 machine evidence",
+    "GP-05 candidate authority",
+    "nested archive custody",
+    "source evidence row verification",
+    "command source reconciliation",
+    "required mapping sources",
+    "99-row Atlas assessment"
+  ]
+}

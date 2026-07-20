@@ -1,0 +1,11 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "validation": "PASS",
+  "score": "50/50",
+  "check_count": 50,
+  "required_outputs": "99/99",
+  "source_rows_live_recomputed": 142,
+  "checksum_entries": 112,
+  "equinesync_execution_performed": false,
+  "final_disposition": "EXECUTION_BASELINE_STILL_NOT_READY"
+}

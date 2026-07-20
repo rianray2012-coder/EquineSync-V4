@@ -1,0 +1,140 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "findings": [
+    {
+      "finding_id": "IA-P1-003",
+      "severity": "P1",
+      "status": "OPEN_RETAINED",
+      "title": "Stage 1 internal pilot not executed",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": true
+    },
+    {
+      "finding_id": "IA-P1-004",
+      "severity": "P1",
+      "status": "OPEN_RETAINED",
+      "title": "Founder walkthrough and risk acceptance absent",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": true
+    },
+    {
+      "finding_id": "IA-P1-005",
+      "severity": "P1",
+      "status": "OPEN_RETAINED",
+      "title": "Executable golden-path reproduction absent",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": true
+    },
+    {
+      "finding_id": "IA-P2-001",
+      "severity": "P2",
+      "status": "OPEN_RETAINED",
+      "title": "Repository adoption not executed",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "IA-P2-002",
+      "severity": "P2",
+      "status": "OPEN_RETAINED",
+      "title": "Source-of-Truth limitations remain",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "IA-P2-003",
+      "severity": "P2",
+      "status": "OPEN_RETAINED",
+      "title": "Human usability not measured",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "ES-REV-2026-001-F-0001",
+      "severity": "P1",
+      "status": "OPEN_BLOCKING",
+      "title": "Execution baseline incomplete",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": true
+    },
+    {
+      "finding_id": "ES-REV-2026-001-F-0002",
+      "severity": "P1",
+      "status": "CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+      "title": "Materialization resolved for immutable commit only",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": true
+    },
+    {
+      "finding_id": "ES-REV-2026-001-F-0003",
+      "severity": "P2",
+      "status": "OPEN_RETAINED",
+      "title": "Framework conflict and calibration gap",
+      "evidence": "Sealed predecessor plus Stage 2 assessment",
+      "required_remediation": "See predecessor and gap analysis",
+      "closure_authority": "Authorized independent review and Founder where required",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "S2-SR-001",
+      "severity": "P1",
+      "status": "REMEDIATION_VERIFIED",
+      "title": "Nested MIAP and candidate custody locators",
+      "evidence": "Complete 268f to 78f to e46f to 5e494 archive chain independently reopened.",
+      "required_remediation": "None remaining; reconcile controlled history.",
+      "closure_authority": "Segregated reviewer and package orchestrator",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "S2-SR-002",
+      "severity": "P1",
+      "status": "REMEDIATION_VERIFIED",
+      "title": "Active command source traceability",
+      "evidence": "All active source and target paths reconcile; zero missing.",
+      "required_remediation": "None remaining; reconcile controlled history.",
+      "closure_authority": "Segregated reviewer and package orchestrator",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "S2-SR-003",
+      "severity": "P2",
+      "status": "REMEDIATION_VERIFIED",
+      "title": "Direct material source verification",
+      "evidence": "Required validator mode directly recomputed 142 Git and nested-archive rows and row equality.",
+      "required_remediation": "None remaining for source recomputation.",
+      "closure_authority": "Segregated reviewer and package orchestrator",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "ES-ADV-V002-R2-F-0002",
+      "severity": "P2",
+      "status": "OPEN_RETAINED_NONBLOCKING",
+      "title": "Paired-format validation is bounded rather than full prose-semantic equivalence",
+      "evidence": "24 JSON-to-Markdown pairs passed identifier presence and source aggregates passed; full prose equivalence is not automated.",
+      "required_remediation": "Add field-level semantic schemas if full prose equivalence becomes a package-control requirement.",
+      "closure_authority": "Package-control owner plus authorized independent reviewer",
+      "blocks_f0001": false
+    }
+  ],
+  "open_counts": {
+    "P0": 0,
+    "P1": 5,
+    "P2": 5
+  }
+}

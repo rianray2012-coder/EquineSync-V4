@@ -1,0 +1,163 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "finding_id": "ES-REV-2026-001-F-0002",
+  "validation": "PASS",
+  "recommended_disposition": "F0002_READY_FOR_AUTHORIZED_CLOSURE",
+  "closure_effect": "CLOSURE_RECOMMENDED_NOT_SELF_CLOSED",
+  "commit": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "tree": "a85a59e414016c7b0beb91f16ead1fb187c868d0",
+  "baseline_object_count": 5228,
+  "object_types": {
+    "commit": 156,
+    "tree": 1287,
+    "blob": 3785,
+    "tag": 0,
+    "missing": 0,
+    "other": 0
+  },
+  "missing_objects": 0,
+  "index_entries": 3340,
+  "index_stages": {
+    "0": 3340,
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "raw_commands": [
+    {
+      "command": "git rev-parse --is-inside-work-tree",
+      "exit_code": 0,
+      "stdout": "true",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git remote get-url origin",
+      "exit_code": 0,
+      "stdout": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git rev-parse HEAD",
+      "exit_code": 0,
+      "stdout": "acb518ea5a160820e64681ff95a16b010fe1156c",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git rev-parse HEAD^{tree}",
+      "exit_code": 0,
+      "stdout": "a85a59e414016c7b0beb91f16ead1fb187c868d0",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git symbolic-ref -q --short HEAD",
+      "exit_code": 0,
+      "stdout": "codex/stage2-f0001-execution-baseline",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git config --get branch.codex/stage2-f0001-execution-baseline.remote",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git config --get branch.codex/stage2-f0001-execution-baseline.merge",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git fsck --full --strict --no-reflogs",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git rev-parse --is-shallow-repository",
+      "exit_code": 0,
+      "stdout": "false",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git status --porcelain=v2 --branch",
+      "exit_code": 0,
+      "stdout": "# branch.oid acb518ea5a160820e64681ff95a16b010fe1156c\n# branch.head codex/stage2-f0001-execution-baseline\n? docs/implementation/STAGE_2_EXECUTION_BASELINE/",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git submodule status --recursive",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git sparse-checkout list",
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: this worktree is not sparse",
+      "network": false
+    },
+    {
+      "command": "git cat-file -t equinesync-governance-v1.0-locked-2026-07-16",
+      "exit_code": 0,
+      "stdout": "tag",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git rev-parse equinesync-governance-v1.0-locked-2026-07-16",
+      "exit_code": 0,
+      "stdout": "df475478ddcb6b69838a5c9e266ae804aaa3207a",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git rev-parse equinesync-governance-v1.0-locked-2026-07-16^{}",
+      "exit_code": 0,
+      "stdout": "acb518ea5a160820e64681ff95a16b010fe1156c",
+      "stderr": "",
+      "network": false
+    },
+    {
+      "command": "git verify-tag equinesync-governance-v1.0-locked-2026-07-16",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "error: no signature found",
+      "network": false
+    },
+    {
+      "command": "git ls-remote --symref origin HEAD",
+      "exit_code": 0,
+      "stdout": "ref: refs/heads/integrate-emergent-final-zip\tHEAD\nacb518ea5a160820e64681ff95a16b010fe1156c\tHEAD",
+      "stderr": "",
+      "network": true
+    },
+    {
+      "command": "git ls-remote --heads origin codex/es-ip-v1.1.0-remediation",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "network": true
+    },
+    {
+      "command": "git ls-remote --heads origin codex/stage2-f0001-execution-baseline",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "network": true
+    }
+  ],
+  "scope": "SOURCE_MATERIALIZATION_ONLY",
+  "repository_modified": false
+}

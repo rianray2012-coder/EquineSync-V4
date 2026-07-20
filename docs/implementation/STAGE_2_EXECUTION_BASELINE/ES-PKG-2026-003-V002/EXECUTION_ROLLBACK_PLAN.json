@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "status": "NOT_EXECUTABLE_COMMANDS_UNKNOWN",
+  "steps": [
+    {
+      "sequence": 1,
+      "step": "Freeze exact source commit and starting datastore/configuration digest",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 2,
+      "step": "Permit only approved additive/non-destructive work and snapshot disposable datastore",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 3,
+      "step": "Record sessions, authority versions, relationships/delegations, pending operations, audit/notification queues",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 4,
+      "step": "On failure block new protected actions, quarantine pending work, terminate runtime",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 5,
+      "step": "Restore source/datastore with approved commands",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 6,
+      "step": "Restart with egress/providers disabled and repeat health/invariants",
+      "command_or_oracle": "UNKNOWN_COMMAND",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 7,
+      "step": "Prove no stale authority, history loss, administration reclassification, duplicate effect, production/live-data impact",
+      "command_or_oracle": "ORACLE_UNKNOWN",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "sequence": 8,
+      "step": "Hash recovered state and submit independent evidence",
+      "command_or_oracle": "CAPTURE_COMMAND_UNKNOWN",
+      "status": "REQUIRED_NOT_EXECUTED"
+    }
+  ]
+}

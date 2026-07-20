@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "status": "GP05_DOCUMENTED_NOT_IMPLEMENTED",
+  "exact_identifier_in_repository": false,
+  "historical_or_alias_implementation": false,
+  "partial_runtime_implementation": false,
+  "documentary_sources_present": true,
+  "searched": [
+    "repository source code",
+    "tests",
+    "fixtures",
+    "workflows",
+    "scripts",
+    "CI configuration",
+    "implementation plans",
+    "Atlas materials",
+    "review packages",
+    "issue registers",
+    "architecture records",
+    "release evidence",
+    "historical references"
+  ],
+  "documentary_authority": "SEALED_INTERNAL_ASSURANCE_CANDIDATE_NOT_FOUNDER_APPROVED",
+  "documentary_sources": [
+    "Sealed internal-assurance candidate GP-05 PRD",
+    "requirement register",
+    "data model",
+    "API contract",
+    "offline matrix",
+    "test plan",
+    "synthetic result CSVs"
+  ],
+  "adjacent_not_equivalent": [
+    "backend/routes/care.py",
+    "backend/task_engine.py",
+    "frontend/src/pages/Medications.jsx",
+    "generic care tests"
+  ],
+  "implementation_authorized": false,
+  "separate_authorization_required": true
+}

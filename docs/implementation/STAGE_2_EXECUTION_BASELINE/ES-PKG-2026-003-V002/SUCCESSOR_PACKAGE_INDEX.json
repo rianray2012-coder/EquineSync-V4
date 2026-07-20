@@ -1,0 +1,14 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "predecessor": {
+    "id": "ES-PKG-2026-002-V001",
+    "sha256": "268fdd714264c5c0ae8f599a312c90e37ec44b908b438a1384c88f897bf03b9f",
+    "unchanged": true
+  },
+  "baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "f0002": "F0002_READY_FOR_AUTHORIZED_CLOSURE_NOT_SELF_CLOSED",
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "final_disposition": "EXECUTION_BASELINE_STILL_NOT_READY"
+}

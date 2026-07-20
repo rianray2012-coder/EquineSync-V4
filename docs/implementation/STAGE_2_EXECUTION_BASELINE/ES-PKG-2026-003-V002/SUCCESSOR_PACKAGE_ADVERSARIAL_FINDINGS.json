@@ -1,0 +1,25 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "review_mode": "FINAL_FRESH_ADVERSARIAL_READ_ONLY",
+  "snapshot_manifest_sha256": "51b59d9dd3794db7486fb12da67aa2913b725058c47c3d648498b32ee0b8a3a6",
+  "listed_files": 80,
+  "verified_files": 80,
+  "snapshot_unchanged": true,
+  "validator": "PASS 41/41",
+  "findings": [
+    {
+      "finding_id": "ES-ADV-V002-R2-F-0002",
+      "severity": "P2",
+      "status": "OPEN_RETAINED_NONBLOCKING",
+      "title": "Paired-format validation is bounded rather than full prose-semantic equivalence",
+      "evidence": "24 JSON-to-Markdown pairs passed identifier presence and source aggregates passed; full prose equivalence is not automated.",
+      "required_remediation": "Add field-level semantic schemas if full prose equivalence becomes a package-control requirement.",
+      "closure_authority": "Package-control owner plus authorized independent reviewer",
+      "blocks_f0001": false
+    }
+  ],
+  "open_p0": 0,
+  "open_p1": 0,
+  "open_p2": 1,
+  "disposition": "PACKAGE_INTEGRITY_VERIFIED_NO_P0_OR_P1_PACKAGE_FINDINGS_ONE_P2_VALIDATOR_SCOPE_LIMITATION_RETAINED_F0001_REMAINS_OPEN_BLOCKING_EXECUTION_NOT_AUTHORIZED_NOT_EXTERNALLY_ASSURED"
+}

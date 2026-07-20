@@ -1,0 +1,16 @@
+{
+  "attempt": 1,
+  "phase": "draft",
+  "validation": "FAIL",
+  "score": "27/29",
+  "package_files": 66,
+  "required_outputs_present": 66,
+  "required_outputs_expected": 66,
+  "failed_checks": [
+    "no_unresolved_placeholders",
+    "no_secret_values"
+  ],
+  "root_cause": "VALIDATOR_SELF_SCAN_FALSE_POSITIVE",
+  "corrective_action": "Exclude validator source from content-value scan only",
+  "application_execution": "NOT_PERFORMED"
+}

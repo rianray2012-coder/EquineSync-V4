@@ -1,0 +1,12 @@
+{
+  "attempt": 2,
+  "phase": "draft",
+  "validation": "PASS",
+  "score": "29/29",
+  "package_files": 68,
+  "required_outputs_present": 66,
+  "required_outputs_expected": 66,
+  "failed_checks": [],
+  "application_execution": "NOT_PERFORMED",
+  "next_gate": "SEGREGATED_AND_ADVERSARIAL_REVIEW"
+}

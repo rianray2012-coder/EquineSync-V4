@@ -1,0 +1,15 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "attempt": 4,
+  "phase": "draft",
+  "utc": "2026-07-20T03:45:00Z",
+  "validation": "FAIL",
+  "score": "38/40",
+  "check_count": 40,
+  "equinesync_execution_performed": false,
+  "failed_checks": [
+    "draft_snapshot_recomputation",
+    "paired_format_identifier_parity"
+  ],
+  "disposition": "PRESERVED_AND_CORRECTED_BEFORE_REFREEZE"
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "package_candidate": "ES-PKG-2026-003-V002",
+  "checkpoint_utc": "2026-07-20T02:59:40Z",
+  "controlled_disposition": "STAGE_2_EXECUTION_BASELINE_REMEDIATION_IN_PROGRESS_EXECUTION_NOT_AUTHORIZED",
+  "repository": {
+    "official_remote": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+    "branch": "codex/stage2-f0001-execution-baseline",
+    "branch_control": "EXISTING_CONTROLLED_LOCAL_BRANCH",
+    "head": "acb518ea5a160820e64681ff95a16b010fe1156c",
+    "immutable_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+    "baseline_tree": "a85a59e414016c7b0beb91f16ead1fb187c868d0",
+    "immutable_commit_object_type": "commit",
+    "immutable_commit_reachable_from_head": true,
+    "tracked_path_count": 3340,
+    "staged_path_count_before_work": 0,
+    "modified_tracked_path_count_before_work": 0,
+    "untracked_path_count_before_work": 0,
+    "detached_head": false
+  },
+  "sealed_predecessor": {
+    "package_id": "ES-PKG-2026-002-V001",
+    "archive_filename": "EquineSync_ES_IP_V1_2_2_Execution_Baseline_Resolution_Package.zip",
+    "expected_sha256": "268fdd714264c5c0ae8f599a312c90e37ec44b908b438a1384c88f897bf03b9f",
+    "recomputed_sha256": "268fdd714264c5c0ae8f599a312c90e37ec44b908b438a1384c88f897bf03b9f",
+    "sha256_match": true,
+    "zip_member_count": 183,
+    "expanded_file_count": 183,
+    "zip_integrity": "PASS",
+    "recorded_package_control": "PASS_71_OF_71",
+    "recorded_archive_parity": "PASS_183_OF_183",
+    "incorporated_as_mutable_duplicate": false,
+    "verification_artifacts": [
+      {
+        "filename": "EquineSync_ES_IP_V1_2_2_Execution_Baseline_Resolution_Package_EXTERNAL_VERIFICATION.json",
+        "sha256": "c53e370d3004ebbdb79d8a65dc5456c145e6de4a91aaec53b2b3eb6f2787322d"
+      },
+      {
+        "filename": "EquineSync_ES_IP_V1_2_2_Execution_Baseline_Resolution_Package_EXTERNAL_VERIFICATION.md",
+        "sha256": "a73fadadc97b9abccac8927f829baae60f2fd7bfe0a4ace1f315fe7db48985e3"
+      },
+      {
+        "filename": "EquineSync_ES_IP_V1_2_2_Execution_Baseline_Resolution_Package_EXTERNAL_VERIFICATION_SHA256SUMS.txt",
+        "sha256": "f763a90436670018d165e18a0617178fe800cbbfa679472c0b36a34f6ae7655f"
+      }
+    ]
+  },
+  "initial_filename_discovery_counts": {
+    "identity": 94,
+    "relationships": 27,
+    "authorization": 204,
+    "permission": 24,
+    "atlas": 20,
+    "release": 82,
+    "cp3": 0,
+    "gp05": 0,
+    "qualification": "FILENAME_DISCOVERY_ONLY_NOT_ABSENCE_PROOF"
+  },
+  "execution_authorization": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED"
+}

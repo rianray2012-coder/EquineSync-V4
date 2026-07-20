@@ -1,0 +1,896 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "outputs": [
+    {
+      "output": "ASSURANCE_STATEMENT.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "ATLAS_COMPLETION_REPORT.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "ATLAS_COMPLETION_REPORT.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "ATLAS_READINESS_MATRIX.csv",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "AUTHORIZATION_EXECUTION_MAPPING.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "AUTHORIZATION_EXECUTION_MAPPING.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "AUTHORIZATION_TRACEABILITY_MATRIX.csv",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "AUTHORIZATION_UNRESOLVED_EVIDENCE_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "BUILD_SPECIFICATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "CP3_EXECUTION_MAPPING.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "CP3_EXECUTION_MAPPING.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "CP3_GAP_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "CP3_GAP_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "DEPENDENCY_INSTALL_SPECIFICATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "DRAFT_REVIEW_SNAPSHOT_RECORD.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "DRAFT_REVIEW_SNAPSHOT_RECORD.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "DRAFT_REVIEW_SNAPSHOT_SHA256SUMS.txt",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "ENVIRONMENT_VARIABLE_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "ENVIRONMENT_VARIABLE_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXACT_FILE_INVENTORY.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_BASELINE_GAP_ANALYSIS.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_BASELINE_GAP_ANALYSIS.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_CLEANUP_PLAN.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_CLEANUP_PLAN.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_ENVIRONMENT_CONTRACT.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_ENVIRONMENT_CONTRACT.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_EVIDENCE_CAPTURE_PLAN.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_EVIDENCE_CAPTURE_PLAN.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_EXPECTED_RESULTS.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_EXPECTED_RESULTS.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_FIXTURE_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_FIXTURE_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_ORACLE_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_ORACLE_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_ROLLBACK_PLAN.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "EXECUTION_ROLLBACK_PLAN.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "F0001_READINESS_DETERMINATION.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "F0001_READINESS_DETERMINATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "F0002_EVIDENCE_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "F0002_EVIDENCE_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "F0002_INDEPENDENT_DISPOSITION.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "F0002_INDEPENDENT_DISPOSITION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "F0002_RAW_MACHINE_EVIDENCE.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "F0002_RAW_MACHINE_EVIDENCE.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "FOUNDER_AUTHORIZATION_BOUNDARY.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "GP05_IMPLEMENTATION_PLAN.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "GP05_IMPLEMENTATION_PLAN.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "GP05_IMPLEMENTATION_STATUS_REPORT.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "GP05_IMPLEMENTATION_STATUS_REPORT.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "GP05_TRACEABILITY_MATRIX.csv",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "IDENTITY_EXECUTION_MAPPING.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "IDENTITY_EXECUTION_MAPPING.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "IDENTITY_TRACEABILITY_MATRIX.csv",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "IDENTITY_UNRESOLVED_EVIDENCE_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "IMMUTABLE_BASELINE_RECORD.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "MIAP_TERMINOLOGY_AND_AUTHORITY_CONFIRMATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "MIAP_TERMINOLOGY_INTEGRITY_REGISTER.csv",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "NEGATIVE_TEST_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "NEGATIVE_TEST_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "PACKAGE_STATUS_RECORD.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "PREDECESSOR_REFERENCE_RECORD.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "PRE_CHANGE_BASELINE.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "PRE_CHANGE_BASELINE.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "README.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "RELATIONSHIPS_EXECUTION_MAPPING.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "RELATIONSHIPS_EXECUTION_MAPPING.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "RELATIONSHIPS_TRACEABILITY_MATRIX.csv",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "RELATIONSHIPS_UNRESOLVED_EVIDENCE_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "REVIEW_EVIDENCE_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "RUNTIME_SPECIFICATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SOURCE_EVIDENCE_REGISTER.csv",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SOURCE_EVIDENCE_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SOURCE_EVIDENCE_VERIFICATION.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SOURCE_EVIDENCE_VERIFICATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SOURCE_TO_OUTPUT_TRACEABILITY.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SOURCE_TO_OUTPUT_TRACEABILITY.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_ADVERSARIAL_FINDINGS.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_ADVERSARIAL_REVIEW.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_CHANGE_MANIFEST.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_CHANGE_MANIFEST.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_CLEAN_EXTRACTION_VERIFICATION.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_CLEAN_EXTRACTION_VERIFICATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_EXCLUDED_FILES_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_FINDINGS_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_FINDINGS_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_FINDING_RECONCILIATION.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_FINDING_RECONCILIATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_INDEX.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_INDEX.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_MACHINE_VALIDATION.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_MACHINE_VALIDATION.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_MANIFEST.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_MANIFEST.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_SEGREGATED_FINDINGS.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_SEGREGATED_REVIEW.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "SUCCESSOR_PACKAGE_SHA256SUMS.txt",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "VALIDATION_COMMAND_REGISTER.json",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "VALIDATION_COMMAND_REGISTER.md",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    },
+    {
+      "output": "validate_successor_package.py",
+      "source_classes": [
+        "FOUNDER_STAGE2_DIRECTIVE",
+        "LOCKED_GOVERNANCE_OR_IMMUTABLE_REPOSITORY_EVIDENCE",
+        "SEALED_PREDECESSOR_WHERE_APPLICABLE"
+      ],
+      "authority_effect": "DOCUMENTARY_ONLY_NOT_EXECUTION_AUTHORITY"
+    }
+  ]
+}

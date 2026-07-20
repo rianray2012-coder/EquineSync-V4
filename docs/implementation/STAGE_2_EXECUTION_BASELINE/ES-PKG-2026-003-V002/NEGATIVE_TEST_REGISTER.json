@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "tests": [
+    {
+      "test_id": "NT-ID-001",
+      "workflow": "ATL-FND-IDENTITY",
+      "case": "Missing/unknown/malformed credential",
+      "expected_outcome": "deny without enumeration",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-ID-002",
+      "workflow": "ATL-FND-IDENTITY",
+      "case": "Unverified/suspended/restricted account",
+      "expected_outcome": "deny and preserve audit evidence",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-ID-003",
+      "workflow": "ATL-FND-IDENTITY",
+      "case": "Expired/replayed/stolen refresh token and concurrent rotation",
+      "expected_outcome": "deny, revoke family, prevent duplicate effect",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-ID-004",
+      "workflow": "ATL-FND-IDENTITY",
+      "case": "Wrong-purpose/expired/reused recovery token",
+      "expected_outcome": "deny without account disclosure",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-ID-005",
+      "workflow": "ATL-FND-IDENTITY",
+      "case": "Duplicate identity/protected-account merge",
+      "expected_outcome": "no automated disputed or protected merge",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-ID-006",
+      "workflow": "ATL-FND-IDENTITY",
+      "case": "Stale/suspended/rejected active context",
+      "expected_outcome": "deny protected operation",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-ID-007",
+      "workflow": "ATL-FND-IDENTITY",
+      "case": "Public signup requests elevated role",
+      "expected_outcome": "no authority elevation",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-REL-001",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "case": "Role without relationship",
+      "expected_outcome": "no relationship inference",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-REL-002",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "case": "Relationship without permission",
+      "expected_outcome": "authorization deny",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-REL-003",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "case": "Expired/revoked/disputed/suspended/former relation",
+      "expected_outcome": "deny or governed review",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-REL-004",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "case": "Conflicting ownership/custody claims",
+      "expected_outcome": "preserve conflict; no silent overwrite",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-REL-005",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "case": "Inferred guardian/delegation from proximity or role",
+      "expected_outcome": "deny",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-REL-006",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "case": "Relationship termination during session",
+      "expected_outcome": "invalidate downstream authority",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-AUTH-001",
+      "workflow": "ATL-FND-AUTHZ",
+      "case": "Unknown capability/action/policy version",
+      "expected_outcome": "default deny",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-AUTH-002",
+      "workflow": "ATL-FND-AUTHZ",
+      "case": "Cross-tenant/facility/horse/resource access",
+      "expected_outcome": "deny and record boundary evidence",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-AUTH-003",
+      "workflow": "ATL-FND-AUTHZ",
+      "case": "Stale role or relationship revision",
+      "expected_outcome": "deny",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-AUTH-004",
+      "workflow": "ATL-FND-AUTHZ",
+      "case": "Expired/revoked/overbroad delegation",
+      "expected_outcome": "deny",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-AUTH-005",
+      "workflow": "ATL-FND-AUTHZ",
+      "case": "Privilege escalation through public role or request payload",
+      "expected_outcome": "deny and preserve attempted escalation",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-AUTH-006",
+      "workflow": "ATL-FND-AUTHZ",
+      "case": "Protected audit write failure",
+      "expected_outcome": "block or quarantine under approved future policy",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-AUTH-007",
+      "workflow": "ATL-FND-AUTHZ",
+      "case": "Offline action after authority revocation",
+      "expected_outcome": "reject/quarantine on reconciliation",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-GP05-001",
+      "workflow": "GP-05",
+      "case": "Wrong actor/horse/facility/purpose/task/grant/time",
+      "expected_outcome": "deny observation",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-GP05-002",
+      "workflow": "GP-05",
+      "case": "Attempt to prescribe/change dose/record administration",
+      "expected_outcome": "deny as outside observation support",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-GP05-003",
+      "workflow": "GP-05",
+      "case": "Duplicate/interrupted/replayed observation",
+      "expected_outcome": "single effect or conflict escalation",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-GP05-004",
+      "workflow": "GP-05",
+      "case": "Notification/audit failure",
+      "expected_outcome": "block/quarantine/escalate under approved policy",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-ALL-001",
+      "workflow": "ALL",
+      "case": "Production endpoint/live data/provider secret present",
+      "expected_outcome": "abort before run",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    },
+    {
+      "test_id": "NT-ALL-002",
+      "workflow": "ALL",
+      "case": "Cleanup or rollback cannot restore starting digest",
+      "expected_outcome": "quarantine environment and keep F-0001 open",
+      "fixture_dependency": "Complete synthetic fixture UNKNOWN unless referenced in fixture register",
+      "environment_dependency": "Approved isolated contract required",
+      "evidence_output": "Command/input/expected/actual/audit/recovery/exit/hash record",
+      "status": "REQUIRED_NOT_EXECUTED"
+    }
+  ]
+}

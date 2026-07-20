@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "package_id": "ES-PKG-2026-003-V002",
+  "oracles": [
+    {
+      "oracle_id": "OR-ID-001",
+      "workflow": "ATL-FND-IDENTITY",
+      "source": "test_auth_tokens.py",
+      "oracle_type": "Exact in-memory token assertions",
+      "availability": "AVAILABLE_INCOMPLETE",
+      "independent_of_implementation": false
+    },
+    {
+      "oracle_id": "OR-ID-002",
+      "workflow": "ATL-FND-IDENTITY",
+      "source": "test_core_auth_verification_gate.py",
+      "oracle_type": "Verification/current-user assertions",
+      "availability": "AVAILABLE_INCOMPLETE",
+      "independent_of_implementation": false
+    },
+    {
+      "oracle_id": "OR-ID-003",
+      "workflow": "ATL-FND-IDENTITY",
+      "source": "Canonical full lifecycle",
+      "oracle_type": "Account/actor/session/device/recovery/merge lifecycle",
+      "availability": "NOT_FOUND",
+      "independent_of_implementation": true
+    },
+    {
+      "oracle_id": "OR-REL-001",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "source": "BN3A/BN3B tests",
+      "oracle_type": "Compatibility projection/context assertions",
+      "availability": "AVAILABLE_INCOMPLETE",
+      "independent_of_implementation": false
+    },
+    {
+      "oracle_id": "OR-REL-002",
+      "workflow": "ATL-FND-RELATIONSHIPS",
+      "source": "Relationship canon",
+      "oracle_type": "Complete relationship state/event/conflict oracle",
+      "availability": "DOCUMENTED_NOT_IMPLEMENTED",
+      "independent_of_implementation": true
+    },
+    {
+      "oracle_id": "OR-AUTH-001",
+      "workflow": "ATL-FND-AUTHZ",
+      "source": "test_permissions.py; tenancy/isolation tests",
+      "oracle_type": "Partial capability/scope allow-deny assertions",
+      "availability": "AVAILABLE_INCOMPLETE",
+      "independent_of_implementation": false
+    },
+    {
+      "oracle_id": "OR-AUTH-002",
+      "workflow": "ATL-FND-AUTHZ",
+      "source": "Permission canon; W1 matrices",
+      "oracle_type": "Complete decision/delegation/revocation/offline/audit oracle",
+      "availability": "DOCUMENTED_NOT_IMPLEMENTED",
+      "independent_of_implementation": true
+    },
+    {
+      "oracle_id": "OR-GP05-001",
+      "workflow": "GP-05",
+      "source": "GP-T-001..016 documentary corpus",
+      "oracle_type": "Synthetic documented outcomes",
+      "availability": "DOCUMENTED_NOT_IMPLEMENTED",
+      "independent_of_implementation": true
+    },
+    {
+      "oracle_id": "OR-ALL-001",
+      "workflow": "ALL",
+      "source": "Required successor evidence schema",
+      "oracle_type": "Command/config/input/expected/actual/audit/recovery/hash validator",
+      "availability": "NOT_FOUND",
+      "independent_of_implementation": true
+    }
+  ]
+}

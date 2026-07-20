@@ -1,0 +1,44 @@
+{
+  "package_id": "ES-PKG-2026-003-V002",
+  "review_mode": "FINAL_FRESH_SEGREGATED_READ_ONLY",
+  "snapshot_manifest_sha256": "51b59d9dd3794db7486fb12da67aa2913b725058c47c3d648498b32ee0b8a3a6",
+  "listed_files": 80,
+  "verified_files": 80,
+  "snapshot_unchanged": true,
+  "validator": "PASS 41/41",
+  "source_rows_live_recomputed": 142,
+  "findings": [
+    {
+      "finding_id": "S2-SR-001",
+      "severity": "P1",
+      "status": "REMEDIATION_VERIFIED",
+      "title": "Nested MIAP and candidate custody locators",
+      "evidence": "Complete 268f to 78f to e46f to 5e494 archive chain independently reopened.",
+      "required_remediation": "None remaining; reconcile controlled history.",
+      "closure_authority": "Segregated reviewer and package orchestrator",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "S2-SR-002",
+      "severity": "P1",
+      "status": "REMEDIATION_VERIFIED",
+      "title": "Active command source traceability",
+      "evidence": "All active source and target paths reconcile; zero missing.",
+      "required_remediation": "None remaining; reconcile controlled history.",
+      "closure_authority": "Segregated reviewer and package orchestrator",
+      "blocks_f0001": false
+    },
+    {
+      "finding_id": "S2-SR-003",
+      "severity": "P2",
+      "status": "REMEDIATION_VERIFIED",
+      "title": "Direct material source verification",
+      "evidence": "Required validator mode directly recomputed 142 Git and nested-archive rows and row equality.",
+      "required_remediation": "None remaining for source recomputation.",
+      "closure_authority": "Segregated reviewer and package orchestrator",
+      "blocks_f0001": false
+    }
+  ],
+  "open_material_package_defects": 0,
+  "disposition": "SEGREGATED_REREVIEW_PASS_NO_OPEN_MATERIAL_PACKAGE_DEFECTS_EXECUTION_BASELINE_STILL_NOT_READY"
+}
