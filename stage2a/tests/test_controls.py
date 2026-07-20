@@ -4,7 +4,9 @@ import json
 import hashlib
 import os
 import sys
+import tempfile
 import unittest
+import datetime as dt
 from copy import deepcopy
 from pathlib import Path
 from unittest.mock import patch
@@ -16,8 +18,10 @@ from jsonschema import Draft202012Validator, FormatChecker
 from evidence_capture import redact_output, sanitize_arguments, sensitive_output_matches
 from lib.control import REPO, IsolationError, PROVIDER_NAMES, ROOT, digest, fixture_data, load_env, provider_register, validate_env
 from network_guard import _approved
+import network_guard
 import orchestrate
 from orchestrate import _expected
+from semantic_projection import project_outputs
 from validate_stage2a_package import KNOWN_SECRET_VALUE as PACKAGE_SECRET_VALUE, locate_repository
 
 
@@ -36,18 +40,38 @@ class ControlTests(unittest.TestCase):
     def test_fixture_is_synthetic_and_deterministic(self):
         value=fixture_data(); self.assertTrue(value["synthetic_only"]); self.assertEqual(digest(value),digest(fixture_data()))
 
-    def test_provider_register_has_zero_attempts(self):
-        env=load_env(); ledger={"guard":"STAGE2A_APPLICATION_NETWORK_GUARD","installed":True,"provider_or_external_attempt_count":0}; register=provider_register(env, ledger)
-        self.assertTrue(all(
-            x["attempted_count"] == x["succeeded_count"] == x["failed_count"] == x["timed_out_count"] == x["unavailable_count"] == 0
-            and x["skipped_count"] == 1 and x["state"] == "SKIPPED_NOT_CONFIGURED" and not x["configured"]
-            for x in register
-        ))
+    def test_provider_register_rejects_supplied_zero_ledger(self):
+        with self.assertRaises(TypeError):
+            provider_register(load_env(), {"provider_or_external_attempt_count": 0})
 
-    def test_provider_register_fails_closed_on_unattributed_attempt(self):
-        ledger={"guard":"STAGE2A_APPLICATION_NETWORK_GUARD","installed":True,"provider_or_external_attempt_count":7}
-        with self.assertRaises(IsolationError):
-            provider_register(load_env(), ledger)
+    def test_provider_events_are_process_bound_hash_chained_and_attributable(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            runtime = Path(temporary)
+            ledger_path = runtime / "network-guard.json"
+            nonce = "unit-test-launch-nonce"
+            with patch.object(network_guard, "RUNTIME", runtime), patch.object(network_guard, "LEDGER", ledger_path), patch.dict(os.environ, {"STAGE2A_LAUNCH_NONCE": nonce}):
+                value = network_guard._initial()
+                ledger_path.write_text(json.dumps(value), encoding="utf-8")
+                (runtime / "api.pid").write_text(json.dumps({
+                    "pid": os.getpid(), "process_group_id": os.getpgrp(),
+                    "launch_nonce_sha256": hashlib.sha256(nonce.encode()).hexdigest(),
+                }), encoding="utf-8")
+                network_guard.record_provider_capabilities(load_env(), ROOT / "provider-capability-registry.json")
+                register, proof = network_guard.derive_provider_register(ROOT / "provider-capability-registry.json")
+                self.assertEqual(len(register), 11)
+                self.assertTrue(proof["event_chain_valid"])
+                self.assertTrue(proof["process_identity_bound"])
+                self.assertEqual(proof["unattributed_attempt_count"], 0)
+                states = {row["provider_id"]: row["state"] for row in register}
+                self.assertEqual(states["stripe"], "SKIPPED_CONTROLLED_STAGE2A_OVERRIDE")
+                self.assertEqual(states["resend"], "SKIPPED_NOT_CONFIGURED")
+                self.assertEqual(states["sendgrid"], "UNAVAILABLE_INTEGRATION_ABSENT")
+                self.assertTrue(all(row["attempted_count"] == 0 for row in register))
+                tampered = json.loads(ledger_path.read_text())
+                tampered["provider_events"][0]["reason_code"] = "TAMPERED"
+                ledger_path.write_text(json.dumps(tampered), encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "event hash mismatch"):
+                    network_guard.derive_provider_register(ROOT / "provider-capability-registry.json")
 
     def test_every_provider_name_fails_closed(self):
         for name in PROVIDER_NAMES:
@@ -65,6 +89,7 @@ class ControlTests(unittest.TestCase):
         self.assertEqual(values[2],"stage2a/example_command.py")
         self.assertEqual(values[3],"PASSWORD=<REDACTED>")
         self.assertNotIn("secret-value",values)
+        self.assertEqual(sanitize_arguments(["--token-count=3", "authorization_mode=disabled"]), ["--token-count=3", "authorization_mode=disabled"])
 
     def test_schema_rejects_semantically_empty_record(self):
         schema=json.loads((ROOT/"execution-evidence-schema.json").read_text())
@@ -84,7 +109,10 @@ class ControlTests(unittest.TestCase):
             ('"password": "correct horse battery staple"\n', '"password": "<REDACTED>"'),
             ('password=correct horse battery staple\n', 'password=<REDACTED>'),
             ('bearer=supersecret\n', 'bearer=<REDACTED>'),
-            ('Authorization: Bearer synthetic credential value\n', 'Authorization: <REDACTED>'),
+            ('Authorization: Bearer synthetic-credential-value\n', 'Authorization: Bearer <REDACTED>'),
+            ('Bearer abc.def.ghi\n', 'Bearer <REDACTED>'),
+            ('access_token=synthetic-token result=pass\n', 'access_token=<REDACTED> result=pass'),
+            ('client_secret=synthetic-secret operation=ok\n', 'client_secret=<REDACTED> operation=ok'),
         ]
         for raw, expected in probes:
             with self.subTest(raw=raw):
@@ -92,6 +120,21 @@ class ControlTests(unittest.TestCase):
                 self.assertGreaterEqual(replacements, 1)
                 self.assertIn(expected, redacted)
                 self.assertEqual(sensitive_output_matches(redacted), [])
+
+    def test_independent_semantic_projection_rejects_over_redaction(self):
+        raw = "operation=login password=hunter2 authentication denied\n"
+        redacted, _ = redact_output(raw)
+        before = project_outputs(raw, "", sanitized=False)
+        after = project_outputs(redacted, "", sanitized=True)
+        self.assertNotEqual(before.sha256, after.sha256)
+        self.assertNotIn("hunter2", before.serialization)
+
+    def test_semantic_projection_detects_unexpected_placeholder_and_near_misses(self):
+        ordinary = "token_count=3 secretary=present bearer_species=horse authorization_mode=disabled\n"
+        redacted, count = redact_output(ordinary)
+        self.assertEqual((redacted, count), (ordinary, 0))
+        projection = project_outputs("operation=<REDACTED>\n", "", sanitized=True)
+        self.assertEqual(projection.unexpected_placeholder_count, 1)
 
     def test_sandbox_is_exact_port_and_signal_scoped(self):
         profile=(ROOT/"config/loopback-only.sb").read_text()
@@ -130,10 +173,11 @@ class ControlTests(unittest.TestCase):
             "controlled_port": 8019, "command_line_sha256": hashlib.sha256(observed.encode()).hexdigest(),
             "launch_nonce_sha256": "a" * 64,
             "observed_command_line": observed, "command_display": observed,
+            "identity_recorded_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         }
-        files = "python 42 user cwd /controlled/work\npython 42 user txt /controlled/python"
+        files = {"cwd": "/controlled/work", "txt_paths": {"/controlled/python"}}
         identity = {"parent_pid": 7, "process_group_id": 42, "command_line": observed, "observed_executable": "/controlled/python", "launch_nonce_sha256": "a" * 64}
-        with patch("orchestrate._process_files", return_value=files), patch("orchestrate._ps_identity", return_value=identity):
+        with patch("orchestrate._process_files", return_value=files), patch("orchestrate._ps_identity", return_value=identity), patch("orchestrate._process_exists", return_value=True):
             self.assertTrue(_expected(record, "api"))
             conflicted = deepcopy(record); conflicted["process_group_id"] = 43
             self.assertFalse(_expected(conflicted, "api"))
@@ -141,6 +185,30 @@ class ControlTests(unittest.TestCase):
             self.assertFalse(_expected(conflicted, "api"))
             conflicted = deepcopy(record); conflicted["launch_nonce_sha256"] = "0" * 64
             self.assertFalse(_expected(conflicted, "api"))
+            conflicted = deepcopy(record); conflicted["controlled_port"] = 9999
+            self.assertFalse(_expected(conflicted, "api"))
+            conflicted = deepcopy(record); conflicted["working_directory"] = "/controlled"
+            self.assertFalse(_expected(conflicted, "api"))
+
+    def test_process_identity_timestamp_and_reparenting_fail_closed(self):
+        now = dt.datetime.now(dt.timezone.utc)
+        self.assertTrue(orchestrate._identity_timestamp_valid(now.isoformat(), now))
+        self.assertFalse(orchestrate._identity_timestamp_valid(now.replace(tzinfo=None).isoformat(), now))
+        self.assertFalse(orchestrate._identity_timestamp_valid((now + dt.timedelta(minutes=1)).isoformat(), now))
+        observed = "python -m uvicorn controlled"
+        record = {
+            "kind": "api", "pid": 42, "process_group_id": 42, "parent_pid": 7,
+            "executable_path": "/controlled/python", "working_directory": "/controlled/work",
+            "controlled_port": 8019, "command_line_sha256": hashlib.sha256(observed.encode()).hexdigest(),
+            "launch_nonce_sha256": "a" * 64, "identity_recorded_utc": now.isoformat(),
+        }
+        files = {"cwd": "/controlled/work", "txt_paths": {"/controlled/python"}}
+        identity = {"parent_pid": 1, "process_group_id": 42, "command_line": observed, "observed_executable": "/controlled/python", "launch_nonce_sha256": "a" * 64}
+        with patch("orchestrate._process_files", return_value=files), patch("orchestrate._ps_identity", return_value=identity):
+            with patch("orchestrate._process_exists", return_value=True):
+                self.assertFalse(_expected(record, "api"))
+            with patch("orchestrate._process_exists", return_value=False):
+                self.assertTrue(_expected(record, "api"))
 
     def test_status_fails_closed_when_listener_pid_conflicts(self):
         mongo = {"pid": 42}; api = {"pid": 43}

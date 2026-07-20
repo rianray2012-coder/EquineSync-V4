@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import json
-from lib.control import ambient_name_attestation, load_env, provider_register, validate_env
+from lib.control import ambient_name_attestation, load_env, validate_env
 
 if __name__ == "__main__":
-    env=load_env(); posture=validate_env(env); providers=provider_register(env)
-    print(json.dumps({"posture":posture,"ambient_name_attestation":ambient_name_attestation(),"providers":providers,"provider_attempt_count":0,"provider_attempt_count_basis":"configuration denied; exact-port sandbox; socket inventory required","production_access_count":0,"production_access_count_basis":"loopback-only","live_data_access_count":0,"live_data_access_count_basis":"synthetic-only owned fixtures"},indent=2,sort_keys=True))
+    env=load_env(); posture=validate_env(env)
+    print(json.dumps({"posture":posture,"ambient_name_attestation":ambient_name_attestation(),"provider_runtime_measurement":"REQUIRES_ACTIVE_PROCESS_BOUND_GUARD_SESSION","provider_attempt_count":"NOT_MEASURED_BY_STATIC_CHECK","production_access_count":0,"production_access_count_basis":"loopback-only","live_data_access_count":0,"live_data_access_count_basis":"synthetic-only owned fixtures"},indent=2,sort_keys=True))

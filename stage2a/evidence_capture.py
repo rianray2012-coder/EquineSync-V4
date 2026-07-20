@@ -14,12 +14,16 @@ from pathlib import Path
 from jsonschema import Draft202012Validator, FormatChecker
 
 from lib.control import ENV_FILE, EVIDENCE, REPO, ROOT, canonical, digest, file_sha, load_env, validate_env
+from semantic_projection import project_outputs, safe_projection_metadata
 
 SCHEMA_PATH = ROOT / "execution-evidence-schema.json"
-SENSITIVE_KEY = r"(?:secret|token|password|api[_-]?key|credential|authorization|bearer)"
+SENSITIVE_KEY = r"(?:authorization|access_token|client_secret|password|api_key|api-key|token|secret|credential|bearer)"
 SENSITIVE = re.compile(rf"(?i){SENSITIVE_KEY}")
+SENSITIVE_ARGUMENT_KEYS = {"authorization", "access_token", "client_secret", "password", "api_key", "api-key", "token", "secret", "credential", "bearer"}
 SENSITIVE_QUOTED_ASSIGNMENT = re.compile(rf"(?i)(?P<prefix>[\"']?{SENSITIVE_KEY}[\"']?\s*[:=]\s*)(?P<quote>[\"'])(?P<value>.*?)(?P=quote)")
-SENSITIVE_ASSIGNMENT = re.compile(rf"(?im)(?P<prefix>\b{SENSITIVE_KEY}\b\s*[:=]\s*)(?P<value>.*?)(?=\s+[A-Za-z_][A-Za-z0-9_-]*\s*[:=]|\s*$|[,;])")
+AUTHORIZATION_BEARER_ASSIGNMENT = re.compile(r"(?i)(?P<prefix>[\"']?authorization[\"']?\s*[:=]\s*Bearer\s+)(?P<value><REDACTED>|[^\s,;]+)")
+SENSITIVE_ASSIGNMENT = re.compile(rf"(?im)(?P<prefix>(?<![A-Za-z0-9_-]){SENSITIVE_KEY}(?![A-Za-z0-9_-])\s*[:=]\s*)(?P<value>.*?)(?=\s+[A-Za-z_][A-Za-z0-9_-]*\s*[:=]|\s*$|[,;])")
+BARE_BEARER = re.compile(r"(?i)(?P<prefix>(?<![A-Za-z0-9_-])Bearer\s+)(?P<value><REDACTED>|[^\s,;]+)")
 KNOWN_SECRET_VALUE = re.compile(r"(?:sk_(?:live|test)_[A-Za-z0-9_-]+|whsec_[A-Za-z0-9_-]+|AKIA[A-Z0-9]{12,})")
 
 
@@ -49,14 +53,15 @@ def sanitize_arguments(arguments: list[str]) -> list[str]:
             sanitized.append(raw)
             redact_next = True
             continue
-        if raw.startswith("--") and SENSITIVE.search(raw.split("=", 1)[0]):
+        argument_key = raw.split("=", 1)[0].lstrip("-").lower()
+        if raw.startswith("--") and argument_key in SENSITIVE_ARGUMENT_KEYS:
             if "=" in raw:
                 sanitized.append(raw.split("=", 1)[0] + "=<REDACTED>")
             else:
                 sanitized.append(raw)
                 redact_next = True
             continue
-        if "=" in raw and SENSITIVE.search(raw.split("=", 1)[0]):
+        if "=" in raw and raw.split("=", 1)[0].lower() in SENSITIVE_ARGUMENT_KEYS:
             sanitized.append(raw.split("=", 1)[0] + "=<REDACTED>")
             continue
         sanitized.append(_relative_or_name(raw))
@@ -75,13 +80,19 @@ def redact_output(value: str) -> tuple[str, int]:
 
     def assignment(match: re.Match[str]) -> str:
         nonlocal replacements
-        if match.group("value").strip() == "<REDACTED>":
+        current = match.group("value").strip()
+        if current == "<REDACTED>" or (
+            "authorization" in match.group("prefix").lower()
+            and current == "Bearer <REDACTED>"
+        ):
             return match.group(0)
         replacements += 1
         return f"{match.group('prefix')}<REDACTED>"
 
+    value = AUTHORIZATION_BEARER_ASSIGNMENT.sub(assignment, value)
     value = SENSITIVE_QUOTED_ASSIGNMENT.sub(quoted_assignment, value)
     value = SENSITIVE_ASSIGNMENT.sub(assignment, value)
+    value = BARE_BEARER.sub(assignment, value)
     value, token_count = KNOWN_SECRET_VALUE.subn("<REDACTED>", value)
     return value, replacements + token_count
 
@@ -92,8 +103,18 @@ def sensitive_output_matches(value: str) -> list[str]:
         if match.group("value") != "<REDACTED>":
             matches.append("quoted_sensitive_assignment")
     for match in SENSITIVE_ASSIGNMENT.finditer(value):
-        if match.group("value").strip() != "<REDACTED>":
+        current = match.group("value").strip()
+        if (
+            current != "<REDACTED>"
+            and not ("authorization" in match.group("prefix").lower() and current == "Bearer <REDACTED>")
+        ):
             matches.append("sensitive_assignment")
+    for match in AUTHORIZATION_BEARER_ASSIGNMENT.finditer(value):
+        if match.group("value") != "<REDACTED>":
+            matches.append("authorization_bearer")
+    for match in BARE_BEARER.finditer(value):
+        if match.group("value") != "<REDACTED>":
+            matches.append("bare_bearer")
     if KNOWN_SECRET_VALUE.search(value):
         matches.append("known_secret_value_pattern")
     return sorted(set(matches))
@@ -116,7 +137,7 @@ def validate_record_semantics(record: dict[str, object], evidence_root: Path) ->
             errors.append("utc_end precedes utc_start")
     except (KeyError, ValueError):
         errors.append("timestamps are not comparable ISO date-times")
-    combined = ""
+    streams: dict[str, str] = {}
     hashes = record.get("evidence_file_hashes") if isinstance(record.get("evidence_file_hashes"), dict) else {}
     for stream in ("stdout", "stderr"):
         location = record.get(f"{stream}_location")
@@ -130,22 +151,29 @@ def validate_record_semantics(record: dict[str, object], evidence_root: Path) ->
             errors.append(f"{stream} file missing")
             continue
         content = path.read_text(encoding="utf-8")
-        combined += content
+        streams[stream] = content
         if file_sha(path) != hashes.get(stream):
             errors.append(f"{stream} SHA-256 mismatch")
         if sensitive_output_matches(content):
             errors.append(f"{stream} contains unredacted sensitive output")
     required_meaning = record.get("required_meaning") if isinstance(record.get("required_meaning"), list) else []
+    combined = streams.get("stdout", "") + streams.get("stderr", "")
     lines = set(combined.splitlines())
     if not required_meaning or any(str(marker) not in lines for marker in required_meaning):
         errors.append("required exact-line meaning is absent after redaction")
     redaction = record.get("redaction_evidence") if isinstance(record.get("redaction_evidence"), dict) else {}
-    after_digest = hashlib.sha256(combined.encode()).hexdigest()
+    after_projection = project_outputs(streams.get("stdout", ""), streams.get("stderr", ""), sanitized=True)
     exact_matches = {str(marker): str(marker) in lines for marker in required_meaning}
     if (
         redaction.get("meaning_preserved") is not True
         or redaction.get("semantic_projection_sha256_before") != redaction.get("semantic_projection_sha256_after")
-        or redaction.get("semantic_projection_sha256_after") != after_digest
+        or redaction.get("semantic_projection_sha256_after") != after_projection.sha256
+        or redaction.get("sensitive_slot_count_before") != after_projection.sensitive_slot_count
+        or redaction.get("placeholder_slot_count_after") != after_projection.placeholder_slot_count
+        or redaction.get("sensitive_class_counts_before") != after_projection.sensitive_class_counts
+        or redaction.get("unredacted_sensitive_match_count") != after_projection.unredacted_sensitive_count
+        or redaction.get("unexpected_redaction_placeholder_count") != after_projection.unexpected_placeholder_count
+        or redaction.get("over_redaction_detected") is not False
         or redaction.get("required_exact_line_matches") != exact_matches
     ):
         errors.append("objective redaction projection or exact-line meaning proof failed")
@@ -179,14 +207,25 @@ def capture(
     end = dt.datetime.now(dt.timezone.utc)
     out = out_dir / f"{run_id}.txt"
     err = err_dir / f"{run_id}.txt"
+    before_projection = project_outputs(proc.stdout, proc.stderr, sanitized=False)
     safe_stdout, stdout_replacements = redact_output(proc.stdout)
     safe_stderr, stderr_replacements = redact_output(proc.stderr)
-    projected_stdout_before, _ = redact_output(proc.stdout)
-    projected_stderr_before, _ = redact_output(proc.stderr)
-    projected_before = projected_stdout_before + projected_stderr_before
+    after_projection = project_outputs(safe_stdout, safe_stderr, sanitized=True)
     projected_after = safe_stdout + safe_stderr
     exact_lines = set(projected_after.splitlines())
     exact_matches = {marker: marker in exact_lines for marker in required_meaning}
+    meaning_preserved = (
+        before_projection.sha256 == after_projection.sha256
+        and before_projection.sensitive_slot_count == after_projection.placeholder_slot_count
+        and after_projection.unredacted_sensitive_count == 0
+        and after_projection.unexpected_placeholder_count == 0
+        and all(exact_matches.values())
+    )
+    if not meaning_preserved:
+        raise RuntimeError(
+            "independent evidence redaction projection failed: "
+            + json.dumps({"before": safe_projection_metadata(before_projection), "after": safe_projection_metadata(after_projection), "required_exact_line_matches": exact_matches}, sort_keys=True)
+        )
     out.write_text(safe_stdout, encoding="utf-8")
     err.write_text(safe_stderr, encoding="utf-8")
     artifacts = {_relative_or_name(str(path)): file_sha(path) for path in sorted(input_paths)}
@@ -195,7 +234,7 @@ def capture(
     if executable.is_file():
         tool_versions["executable_sha256"] = file_sha(executable)
     core: dict[str, object] = {
-        "schema_version": "2.0",
+        "schema_version": "3.0",
         "package_id": "ES-PKG-2026-004-V003",
         "run_identifier": run_id,
         "command": _relative_or_name(command[0]),
@@ -225,11 +264,17 @@ def capture(
             "stdout_replacements": stdout_replacements,
             "stderr_replacements": stderr_replacements,
             "unredacted_sensitive_match_count": len(sensitive_output_matches(safe_stdout + safe_stderr)),
-            "normalization_version": "S2A-REDACTION-PROJECTION-V2",
-            "semantic_projection_sha256_before": hashlib.sha256(projected_before.encode()).hexdigest(),
-            "semantic_projection_sha256_after": hashlib.sha256(projected_after.encode()).hexdigest(),
+            "projection_engine": "S2A-INDEPENDENT-SEMANTIC-PROJECTOR-V1",
+            "normalization_version": "S2A-REDACTION-PROJECTION-V3",
+            "semantic_projection_sha256_before": before_projection.sha256,
+            "semantic_projection_sha256_after": after_projection.sha256,
+            "sensitive_slot_count_before": before_projection.sensitive_slot_count,
+            "placeholder_slot_count_after": after_projection.placeholder_slot_count,
+            "sensitive_class_counts_before": before_projection.sensitive_class_counts,
+            "unexpected_redaction_placeholder_count": after_projection.unexpected_placeholder_count,
+            "over_redaction_detected": after_projection.unexpected_placeholder_count != 0 or before_projection.sha256 != after_projection.sha256,
             "required_exact_line_matches": exact_matches,
-            "meaning_preserved": all(exact_matches.values()) and projected_before == projected_after,
+            "meaning_preserved": meaning_preserved,
         },
         "result": "PASS" if proc.returncode == expected_exit else "FAIL",
         "execution_status": "EXECUTION_NOT_AUTHORIZED",

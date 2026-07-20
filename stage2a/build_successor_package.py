@@ -9,19 +9,29 @@ import json
 import shutil
 import subprocess
 import tempfile
+import re
 from pathlib import Path
+
+from traceability_contract import (
+    FINDING_SPECS,
+    finding_rows as canonical_finding_rows,
+    output_rows as canonical_output_rows,
+    requirement_rows as canonical_requirement_rows,
+    test_rows as canonical_test_rows,
+)
 
 REPO = Path(__file__).resolve().parents[1]
 STAGE = REPO / "stage2a"
 FAILED_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003"
 PRIOR_CORRECTED_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-003"
-ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-004"
+PRIOR_CANDIDATE_004_ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-004"
+ROOT = REPO / "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-005"
 EVIDENCE = STAGE / "evidence/latest"
 EVENTS = STAGE / "evidence/events"
 REVIEWS = STAGE / "review_attempts"
 OUTPUTS = REPO.parents[1] / "outputs"
 PACKAGE_ID = "ES-PKG-2026-004-V003"
-CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-004"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-005"
 PREDECESSOR = "ES-PKG-2026-003-V002"
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 BASELINE = "acb518ea5a160820e64681ff95a16b010fe1156c"
@@ -35,6 +45,8 @@ FAILED_ATTEMPT_002_SHA = "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a85
 FAILED_ATTEMPT_002_MANIFEST_SHA = "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b"
 FAILED_ATTEMPT_003_SHA = "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0"
 FAILED_ATTEMPT_003_MANIFEST_SHA = "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc"
+FAILED_ATTEMPT_004_SHA = "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c"
+FAILED_ATTEMPT_004_MANIFEST_SHA = "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f"
 
 
 def sha(path: Path) -> str:
@@ -161,6 +173,7 @@ def main() -> int:
     failed_candidates = [
         verify_freeze(FAILED_ROOT, 108, 111, FAILED_ATTEMPT_002_MANIFEST_SHA, "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip", FAILED_ATTEMPT_002_SHA),
         verify_freeze(PRIOR_CORRECTED_ROOT, 121, 124, FAILED_ATTEMPT_003_MANIFEST_SHA, "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip", FAILED_ATTEMPT_003_SHA),
+        verify_freeze(PRIOR_CANDIDATE_004_ROOT, 207, 210, FAILED_ATTEMPT_004_MANIFEST_SHA, "ES-PKG-2026-004-V003_REVIEW_ATTEMPT_004_FAILED.zip", FAILED_ATTEMPT_004_SHA),
     ]
     raw_validation = json.loads((EVIDENCE / "FOUNDATION_VALIDATION.json").read_text(encoding="utf-8"))
     validation = package_safe_validation(raw_validation)
@@ -287,7 +300,7 @@ def main() -> int:
          "A strict environment allowlist, ambient prohibited-name denial, exact loopback ports, synthetic datastore identity, deny proxies, and sandbox-enforced external network denial operate fail closed.")
     providers = check(validation, "provider_denial")["detail"]
     provider_rows = providers["register"]
-    write_json("PROVIDER_DENIAL_REGISTER.json", {"package_id": PACKAGE_ID, "attempt_count": providers["attempt_count"], "outcome_totals": providers["outcome_totals"], "providers": provider_rows, "network_guard": providers["network_guard"]})
+    write_json("PROVIDER_DENIAL_REGISTER.json", {"package_id": PACKAGE_ID, "attempt_count": providers["attempt_count"], "outcome_totals": providers["outcome_totals"], "providers": provider_rows, "network_guard": providers["network_guard"], "provider_guard_proof": providers["provider_guard_proof"]})
     with (ROOT / "PROVIDER_DENIAL_REGISTER.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(provider_rows[0])); writer.writeheader(); writer.writerows(provider_rows)
     write_json("ISOLATION_NEGATIVE_TEST_REPORT.json", isolation | {"validation": "PASS"})
@@ -397,13 +410,21 @@ def main() -> int:
     }
     pair("STAGE2A_ENVIRONMENT_CONTRACT", "Stage 2A Environment Contract", env_contract, "The environment is disposable, synthetic-only, exact-port loopback, provider-denied, resettable, and isolated from production. The separately contained temporary-review residue and the independent runtime selector limitation are both recorded without causal conflation.")
 
+    unit_result = subprocess.run(
+        [str(STAGE / ".venv/bin/python"), "-m", "unittest", "discover", "-s", "stage2a/tests", "-p", "test_*.py"],
+        cwd=REPO, text=True, capture_output=True, check=False, timeout=120,
+    )
+    unit_match = re.search(r"Ran (\d+) tests?", unit_result.stdout + unit_result.stderr)
+    if unit_result.returncode != 0 or not unit_match:
+        raise RuntimeError("unit-control command did not complete with a measurable test count")
+    unit_count = int(unit_match.group(1))
     commands = [
         {"command_id": "S2A-CMD-001", "purpose": "backend bootstrap", "cwd": "repository root", "command": "sh stage2a/bootstrap_backend.sh", "expected_exit": 0, "timeout_seconds": 900, "observed": "PASS"},
         {"command_id": "S2A-CMD-002", "purpose": "frontend install", "cwd": "frontend", "command": "npm ci --legacy-peer-deps --include=dev --no-audit --no-fund", "expected_exit": 0, "timeout_seconds": 900, "observed": "PASS"},
         {"command_id": "S2A-CMD-003", "purpose": "frontend build", "cwd": "frontend", "command": "npm run build", "expected_exit": 0, "timeout_seconds": 900, "observed": "PASS"},
-        {"command_id": "S2A-CMD-004", "purpose": "unit controls", "cwd": "repository root", "command": "stage2a/.venv/bin/python -m unittest discover -s stage2a/tests -p test_*.py", "expected_exit": 0, "timeout_seconds": 60, "observed": "PASS_10_OF_10"},
+        {"command_id": "S2A-CMD-004", "purpose": "unit controls", "cwd": "repository root", "command": "stage2a/.venv/bin/python -m unittest discover -s stage2a/tests -p test_*.py", "expected_exit": 0, "timeout_seconds": 120, "observed": f"PASS_{unit_count}_OF_{unit_count}", "observed_test_count": unit_count, "stdout_sha256": hashlib.sha256(unit_result.stdout.encode()).hexdigest(), "stderr_sha256": hashlib.sha256(unit_result.stderr.encode()).hexdigest()},
         {"command_id": "S2A-CMD-005", "purpose": "isolated foundation validation", "cwd": "repository root", "command": "sh stage2a/run_validation.sh", "expected_exit": 0, "timeout_seconds": 900, "observed": f"PASS_{validation['pass_count']}_OF_{validation['check_count']}"},
-        {"command_id": "S2A-CMD-006", "purpose": "candidate package validation", "cwd": "repository root", "command": "stage2a/.venv/bin/python stage2a/validate_stage2a_package.py PACKAGE --phase candidate", "expected_exit": 0, "timeout_seconds": 120, "observed": "PENDING_CANDIDATE_FREEZE"},
+        {"command_id": "S2A-CMD-006", "purpose": "assembly-phase packaged-validator invocation matrix", "cwd": "package root nested directory and external directory", "command": "stage2a/.venv/bin/python PACKAGED_VALIDATE_STAGE2A_PACKAGE PACKAGE --phase assembly", "expected_exit": 0, "timeout_seconds": 120, "observed": "PENDING_ASSEMBLY_INVOCATION_MATRIX"},
     ]
     pair("STAGE2A_VALIDATION_COMMAND_REGISTER", "Stage 2A Validation Command Register", {"package_id": PACKAGE_ID, "commands": commands, "cp3_commands": [], "business_workflow_commands": []}, "\n".join(f"- `{row['command_id']}` `{row['command']}` — `{row['observed']}`" for row in commands))
     write_json("STAGE2A_FOUNDATION_VALIDATION.json", validation)
@@ -416,6 +437,7 @@ def main() -> int:
         "attempt-001": ("ES-PKG-2026-004-V003_REVIEW_ATTEMPT_001_FAILED.zip", "1ecb52cbebf70f25a333f37355b9e94f44fb5ad88b7bf500568b59fa88457054"),
         "attempt-002": ("ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip", FAILED_ATTEMPT_002_SHA),
         "attempt-003": ("ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip", FAILED_ATTEMPT_003_SHA),
+        "attempt-004": ("ES-PKG-2026-004-V003_REVIEW_ATTEMPT_004_FAILED.zip", FAILED_ATTEMPT_004_SHA),
     }
     for attempt, (archive_name, expected_sha) in archive_specs.items():
         attempt_root = ROOT / "review_attempts" / attempt
@@ -437,10 +459,16 @@ def main() -> int:
     fixed_sources = [
         "backend/.python-version", "backend/requirements.txt", "frontend/package.json", "frontend/package-lock.json", "frontend/vercel.json",
         "backend/core/config.py", "backend/core/db.py", "backend/core/lifespan.py", "backend/core/billing_provisioning.py", "backend/server.py",
+        "backend/core/provider_live_proof.py", "backend/mailer.py", "backend/routes/system.py",
+        "backend/core/document_signing.py", "backend/routes/document_signatures.py", "backend/storage.py",
+        "backend/routes/backlog.py", "backend/routes/subscriptions.py", "backend/routes/membership.py",
         "docs/implementation/STAGE_2_EXECUTION_BASELINE/ES-PKG-2026-003-V002/EXECUTION_BASELINE_GAP_ANALYSIS.json",
         "docs/implementation/STAGE_2_EXECUTION_BASELINE/ES-PKG-2026-003-V002/EXECUTION_BASELINE_GAP_ANALYSIS.md",
     ]
-    stage_sources = sorted(path.relative_to(REPO).as_posix() for path in STAGE.rglob("*") if path.is_file() and not any(part in {".venv", ".runtime", "__pycache__", "latest"} for part in path.parts))
+    stage_sources = sorted(
+        path for path in git("ls-tree", "-r", "--name-only", packaging_commit, "--", "stage2a").splitlines()
+        if path and not any(part in {".venv", ".runtime", "__pycache__", "latest"} for part in Path(path).parts)
+    )
     sources = []
     for path in fixed_sources + stage_sources:
         at_start = subprocess.run(["git", "cat-file", "-e", f"{START}:{path}"], cwd=REPO, capture_output=True).returncode == 0
@@ -512,7 +540,7 @@ def main() -> int:
         "S2A-TEST-PROVIDER-OUTCOME-STATES": ("FOUNDATION_VALIDATION.check:provider_denial", "stage2a/validate_foundation.py"),
         "S2A-TEST-NETWORK-GUARD": ("FOUNDATION_VALIDATION.check:network_boundary", "stage2a/validate_foundation.py"),
     }
-    test_rows = [{"test_id": test_id, "executable_identity": identity, "implementation_path": path, "source_evidence_id": source_by_path[path]} for test_id, (identity, path) in sorted(test_specs.items())]
+    test_rows = canonical_test_rows(source_by_path)
     write_json("STAGE2A_TEST_CONTROL_REGISTER.json", {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "tests": test_rows})
     with (ROOT / "STAGE2A_TEST_CONTROL_REGISTER.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(test_rows[0])); writer.writeheader(); writer.writerows(test_rows)
@@ -537,6 +565,7 @@ def main() -> int:
             "test_ids": tests, "evidence_artifacts": evidence_artifacts,
             "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
         })
+    requirements = canonical_requirement_rows(gap_titles, source_by_path)
     write_json("STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json", {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "requirements": requirements})
     requirement_csv = [{
         "requirement_id": row["requirement_id"], "gap_id": row["gap_id"],
@@ -559,6 +588,8 @@ def main() -> int:
         "remediation_artifacts": artifacts, "test_ids": tests, "evidence_artifacts": evidence_artifacts,
         "status": "REMEDIATED_PENDING_REREVIEW", "self_closed": False,
     } for finding_id, blocker, requirement_ids, artifacts, tests, evidence_artifacts in finding_specs]
+    finding_specs = FINDING_SPECS
+    findings = canonical_finding_rows()
     write_json("STAGE2A_FINDING_TO_REMEDIATION_MATRIX.json", {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "findings": findings})
     finding_csv = [{
         "finding_id": row["finding_id"], "blocker_classification": row["blocker_classification"],
@@ -590,84 +621,14 @@ def main() -> int:
     pair("EVIDENCE_REUSE_AND_RERUN_REGISTER", "Evidence Reuse and Rerun Register", reuse_register, "Prior lifecycle and dependency results are retained only as corroborative predecessor evidence where their inputs remain hash-identical. Every check affected by the five blockers was invalidated and rerun; the new reruns control this candidate.")
     blocker_results = [{"blocker": blocker, "status": "REMEDIATED_PENDING_REREVIEW", "finding_id": finding_id} for finding_id, blocker, *_ in finding_specs]
     provenance = {
-        "package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "candidate_attempt": 4,
+        "package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "candidate_attempt": 5,
         "distinct_from_failed_candidate": True, "failed_candidate_unchanged": True,
         "failed_candidates": failed_candidates, "validated_implementation_commit": implementation_commit,
         "packaging_commit": packaging_commit, "blocker_results": blocker_results,
         "freeze_commit": "RECORDED_EXTERNALLY_AFTER_BYTE_FREEZE_TO_AVOID_CIRCULAR_SELF_REFERENCE",
         "execution": "EXECUTION_NOT_AUTHORIZED", "assurance": "NOT_EXTERNALLY_ASSURED",
     }
-    pair("CORRECTED_CANDIDATE_PROVENANCE", "Corrected Candidate Provenance", provenance, f"`{CANDIDATE_ID}` is a distinct fourth candidate. The failed 108-file and Candidate-003 freezes remain byte-for-byte unchanged and are referenced by their original manifest and archive SHA-256 values.")
-
-    requirements_by_id = {row["requirement_id"]: row for row in requirements}
-    def classify_output(output: str) -> tuple[str, str]:
-        rules = [
-            ("S2A-REQ-001", ("BACKEND_", "DEPENDENCY_"), "dependency contract or evidence"),
-            ("S2A-REQ-002", ("TOOLCHAIN_", "RUNTIME_TOOLCHAIN", "PACKAGE_MANAGER", "VALIDATION_COMMAND"), "toolchain or command contract"),
-            ("S2A-REQ-009", ("PROVIDER_", "STARTUP_", "STAGE2A_DETERMINISTIC"), "provider or startup attempt measurement"),
-            ("S2A-REQ-003", ("ISOLATION_", "SECRET_", "ENVIRONMENT_CONTRACT"), "environment or isolation control"),
-            ("S2A-REQ-004", ("ORCHESTRATION_", "COLD_START", "CONTROLLED_SHUTDOWN", "INTERRUPTED_START", "SEGREGATED_REVIEW_TEMPORARY_PROCESS", "RUNTIME_AGENT_TYPE"), "process lifecycle or runtime boundary"),
-            ("S2A-REQ-005", ("FIXTURE_",), "synthetic fixture control"),
-            ("S2A-REQ-007", ("CLEANUP_", "ZERO_RESIDUE"), "cleanup or residue proof"),
-            ("S2A-REQ-008", ("ROLLBACK_", "RECOVERED_STATE"), "rollback or source recovery proof"),
-            ("S2A-REQ-006", ("EVIDENCE_", "EXECUTION_EVIDENCE", "FOUNDATION_EVIDENCE", "STAGE2A_FOUNDATION", "STAGE2A_SOURCE", "STAGE2A_REQUIREMENT", "STAGE2A_FINDING", "STAGE2A_TEST", "STAGE2A_CHANGE", "STAGE2A_FILES", "STAGE2A_GAP", "STAGE2A_SCOPE", "STAGE2A_PRE_CHANGE", "STAGE2A_SOURCE_TO_OUTPUT", "SUCCESSOR_PACKAGE", "PACKAGE_STATUS", "CORRECTED_CANDIDATE", "VALIDATOR_INVOCATION", "DRAFT_REVIEW", "validate_stage2a_package", "IMMUTABLE_BASELINE", "PREDECESSOR_REFERENCE", "FOUNDER_AUTHORIZATION", "ASSURANCE_STATEMENT", "F000", "STAGE2_PACKAGE_PUBLICATION"), "package evidence provenance or traceability control"),
-        ]
-        for requirement_id, tokens, rationale in rules:
-            if any(token in output for token in tokens):
-                return requirement_id, rationale
-        raise RuntimeError(f"output has no explicit traceability classification rule: {output}")
-
-    def build_trace(outputs: list[str]) -> list[dict[str, object]]:
-        trace: list[dict[str, object]] = []
-        for output in outputs:
-            requirement_id, rationale = classify_output(output)
-            requirement = requirements_by_id[requirement_id]
-            implementation_paths = list(requirement["implementation_artifacts"])
-            if requirement_id == "S2A-REQ-006":
-                if "SCHEMA" in output:
-                    implementation_paths = ["stage2a/execution-evidence-schema.json", "stage2a/evidence_capture.py"]
-                elif "VALIDATOR" in output or output == "validate_stage2a_package.py":
-                    implementation_paths = ["stage2a/validate_stage2a_package.py"]
-                elif any(token in output for token in ("TRACE", "REQUIREMENT", "FINDING", "SOURCE_TO_OUTPUT")):
-                    implementation_paths = ["stage2a/build_successor_package.py", "stage2a/validate_stage2a_package.py"]
-                elif "EVIDENCE" in output:
-                    implementation_paths = ["stage2a/evidence_capture.py", "stage2a/execution-evidence-schema.json"]
-                else:
-                    implementation_paths = ["stage2a/build_successor_package.py"]
-            direct_tests = ["S2A-TEST-PACKAGE-TRACE-ROW", requirement["test_ids"][0]]
-            if "REDACTION" in output or "EVIDENCE_CAPTURE" in output or "EXECUTION_EVIDENCE" in output:
-                direct_tests = ["S2A-TEST-PACKAGE-TRACE-ROW", "S2A-TEST-EVIDENCE-SEMANTICS", "S2A-TEST-REDACTION-MEANING"]
-            elif "VALIDATOR" in output or output == "validate_stage2a_package.py":
-                direct_tests = ["S2A-TEST-PACKAGE-TRACE-ROW", "S2A-TEST-VALIDATOR-ROOT-MATRIX"]
-            elif any(token in output for token in ("TRACE", "REQUIREMENT", "FINDING")):
-                direct_tests = ["S2A-TEST-PACKAGE-TRACE-ROW", "S2A-TEST-TRACE-SPECIFICITY"]
-            evidence_candidates = [path for path in requirement["evidence_artifacts"] if path != output and (ROOT / path).is_file()]
-            if not evidence_candidates:
-                evidence_candidates = ["STAGE2A_FOUNDATION_VALIDATION.json"]
-            finding_ids: list[str] = []
-            if requirement_id == "S2A-REQ-004":
-                finding_ids = ["ES-ADV-V003-R2-F-0005"]
-            elif requirement_id == "S2A-REQ-009":
-                finding_ids = ["ES-ADV-V003-R2-F-0001"]
-            elif requirement_id == "S2A-REQ-006":
-                if "VALIDATOR" in output or output == "validate_stage2a_package.py":
-                    finding_ids = ["ES-ADV-V003-R2-F-0004"]
-                elif any(token in output for token in ("TRACE", "REQUIREMENT", "FINDING")):
-                    finding_ids = ["ES-ADV-V003-R2-F-0003"]
-                elif any(token in output for token in ("EVIDENCE", "SCHEMA", "REDACTION")):
-                    finding_ids = ["ES-ADV-V003-R2-F-0002"]
-            trace.append({
-                "mapping_id": "S2A-MAP-" + hashlib.sha256(output.encode()).hexdigest()[:12].upper(),
-                "output": output, "artifact_role": f"PACKAGE_OUTPUT::{Path(output).stem}",
-                "requirement_ids": [requirement_id], "gap_ids": [requirement["gap_id"]],
-                "control_ids": requirement["control_ids"], "source_evidence_ids": source_ids(implementation_paths),
-                "implementation_artifacts": implementation_paths, "test_ids": direct_tests,
-                "evidence_artifacts": evidence_candidates[:2], "finding_ids": finding_ids,
-                "mapping_rationale": f"{output} is classified as {rationale}; only its direct implementation, executable checks, and controlling evidence are linked.",
-                "verification_rule": "MV-011A verifies unique mapping ID, output coverage, registered executable tests, source IDs, implementation paths, and existing evidence paths",
-                "authority_effect": "TECHNICAL_FOUNDATION_ONLY_NO_FINDING_CLOSURE_OR_EXECUTION_AUTHORITY",
-            })
-        return trace
+    pair("CORRECTED_CANDIDATE_PROVENANCE", "Corrected Candidate Provenance", provenance, f"`{CANDIDATE_ID}` is a distinct fifth candidate. The failed 108-file, Candidate-003, and Candidate-004 freezes remain byte-for-byte unchanged and are referenced by their original manifest and archive SHA-256 values.")
 
     pair("IMMUTABLE_BASELINE_RECORD", "Immutable Baseline Record", {"package_id": PACKAGE_ID, "immutable_baseline": BASELINE, "modified": False, "reachable": True}, f"Governance baseline `{BASELINE}` remains unchanged and reachable.")
     pair("PREDECESSOR_REFERENCE_RECORD", "Predecessor Reference Record", {"package_id": PACKAGE_ID, "predecessor": PREDECESSOR, "commit": START, "archive_sha256": PREDECESSOR_SHA, "unchanged": True, "sealed_predecessor": "ES-PKG-2026-002-V001", "sealed_predecessor_sha256": SEALED_SHA}, f"Predecessor `{PREDECESSOR}` remains unchanged at archive SHA-256 `{PREDECESSOR_SHA}`.")
@@ -688,7 +649,7 @@ def main() -> int:
     write_json("VALIDATOR_INVOCATION_MATRIX.json", {"candidate_id": CANDIDATE_ID, "status": "ASSEMBLY_VALIDATION_IN_PROGRESS", "execution": "EXECUTION_NOT_AUTHORIZED"})
     future_controls = {"DRAFT_REVIEW_SHA256SUMS.txt", "DRAFT_REVIEW_SNAPSHOT_RECORD.json", "DRAFT_REVIEW_SNAPSHOT_RECORD.md"}
     trace_outputs = sorted({path.name for path in ROOT.iterdir() if path.is_file()} | future_controls | {"STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.json", "STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY.md"})
-    trace = build_trace(trace_outputs)
+    trace = canonical_output_rows(trace_outputs, requirements, source_by_path)
     pair("STAGE2A_SOURCE_TO_OUTPUT_TRACEABILITY", "Stage 2A Source-to-Output Traceability", {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "outputs": trace}, "Every top-level output has a unique stable mapping identifier, output-specific role and rationale, direct implementation source, registered executable check, controlling evidence, and applicable finding chain. MV-011A verifies reference existence and complete top-level coverage.")
 
     package_created = sorted({path.relative_to(REPO).as_posix() for path in ROOT.rglob("*") if path.is_file()} | {f"{ROOT.relative_to(REPO).as_posix()}/{name}" for name in future_controls})
@@ -699,7 +660,7 @@ def main() -> int:
     validator = ROOT / "validate_stage2a_package.py"
     invocation_specs: list[tuple[str, Path, Path, Path]] = [
         ("PACKAGE_ROOT", ROOT, validator, ROOT),
-        ("PACKAGE_NESTED_REVIEW_ATTEMPT_003", ROOT / "review_attempts/attempt-003", validator, ROOT),
+        ("PACKAGE_NESTED_REVIEW_ATTEMPT_004", ROOT / "review_attempts/attempt-004", validator, ROOT),
         ("EXTERNAL_PRIVATE_TMP", Path("/private/tmp"), validator, ROOT),
     ]
     invocation_results: list[dict[str, object]] = []
@@ -711,7 +672,7 @@ def main() -> int:
             "validation": parsed.get("validation"), "score": f"{parsed.get('pass_count')}/{parsed.get('check_count')}",
             "output_sha256": hashlib.sha256(result.stdout.encode()).hexdigest(), "stderr_sha256": hashlib.sha256(result.stderr.encode()).hexdigest(),
         })
-    with tempfile.TemporaryDirectory(prefix="es-candidate004-detached-", dir="/private/tmp") as temporary:
+    with tempfile.TemporaryDirectory(prefix="es-candidate005-detached-", dir="/private/tmp") as temporary:
         extracted = Path(temporary) / CANDIDATE_ID
         shutil.copytree(ROOT, extracted)
         detached_validator = extracted / "validate_stage2a_package.py"
@@ -744,8 +705,8 @@ def main() -> int:
     rows = [f"{sha(ROOT / path)}  {path}" for path in payload]
     (ROOT / "DRAFT_REVIEW_SHA256SUMS.txt").write_text("\n".join(rows) + "\n", encoding="utf-8")
     manifest_hash = sha(ROOT / "DRAFT_REVIEW_SHA256SUMS.txt")
-    snapshot = {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "review_attempt": 4, "payload_files": len(payload), "manifest_sha256": manifest_hash, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "frozen": True, "execution": "EXECUTION_NOT_AUTHORIZED"}
-    pair("DRAFT_REVIEW_SNAPSHOT_RECORD", "Draft Review Snapshot Record", snapshot, f"Review attempt 4 freezes `{len(payload)}` payload files under manifest SHA-256 `{manifest_hash}`. Reviewers must not modify the candidate.")
+    snapshot = {"package_id": PACKAGE_ID, "candidate_id": CANDIDATE_ID, "review_attempt": 5, "payload_files": len(payload), "manifest_sha256": manifest_hash, "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "frozen": True, "execution": "EXECUTION_NOT_AUTHORIZED"}
+    pair("DRAFT_REVIEW_SNAPSHOT_RECORD", "Draft Review Snapshot Record", snapshot, f"Review attempt 5 freezes `{len(payload)}` payload files under manifest SHA-256 `{manifest_hash}`. Reviewers must not modify the candidate.")
     print(json.dumps({"package_root": ROOT.relative_to(REPO).as_posix(), "validated_implementation_commit": implementation_commit, "packaging_commit": packaging_commit, "payload_files": len(payload), "physical_files": len(payload) + 3, "manifest_sha256": manifest_hash, "validation": validation["validation"], "principal_disposition": DISPOSITION}, indent=2))
     return 0
 

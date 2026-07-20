@@ -44,6 +44,7 @@ from lib.control import (
     validate_env,
 )
 from rollback_recovery import restore_snapshot, write_snapshot
+from semantic_projection import project_outputs
 
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 EMPTY_STATE_DIGEST = digest([])
@@ -137,7 +138,33 @@ def main() -> int:
     def startup_summary() -> dict[str, object]:
         states = ("attempted", "succeeded", "failed", "skipped", "timed_out", "unavailable")
         totals = {state: sum(int(event[state]) for event in startup_attempt_events) for state in states}
-        totals["arithmetic_valid"] = totals["attempted"] == totals["succeeded"] + totals["failed"] + totals["timed_out"] + totals["unavailable"]
+        event_ids = [str(event.get("attempt_id")) for event in startup_attempt_events]
+        event_validity = []
+        for event in startup_attempt_events:
+            began = dt.datetime.fromisoformat(str(event["utc_start"])); ended = dt.datetime.fromisoformat(str(event["utc_end"]))
+            terminal = sum(int(event[state]) for state in ("succeeded", "failed", "timed_out", "unavailable"))
+            event_validity.append(
+                began.tzinfo is not None and ended.tzinfo is not None and ended >= began
+                and int(event["attempted"]) in {0, 1}
+                and int(event["skipped"]) in {0, 1}
+                and ((int(event["attempted"]) == 1 and int(event["skipped"]) == 0 and terminal == 1)
+                     or (int(event["attempted"]) == 0 and int(event["skipped"]) == 1 and terminal == 0))
+            )
+        totals["arithmetic_valid"] = (
+            totals["attempted"] == totals["succeeded"] + totals["failed"] + totals["timed_out"] + totals["unavailable"]
+            and len(event_ids) == len(set(event_ids))
+            and all(event_validity)
+        )
+        totals["measurement_contract"] = {
+            "attempted": "orchestrator start function entered",
+            "succeeded": "health-ready result returned",
+            "failed": "non-timeout and non-unavailability exception returned",
+            "skipped": "registered alternative was deliberately not selected and start function was not entered",
+            "timed_out": "bounded readiness or process wait expired",
+            "unavailable": "required executable or module was unavailable after the start function was entered",
+            "one_terminal_state_per_attempt": True,
+            "unique_attempt_identifiers": len(event_ids) == len(set(event_ids)),
+        }
         totals["events"] = deepcopy(startup_attempt_events)
         return totals
 
@@ -388,11 +415,22 @@ def main() -> int:
         "\"password\": \"correct horse battery staple\"\n",
         "password=correct horse battery staple\n",
         "bearer=supersecret\n",
+        "Authorization: Bearer synthetic-token\n",
+        "Bearer synthetic-token\n",
+        "access_token=synthetic-token result=pass\n",
+        "client_secret=synthetic-secret operation=ok\n",
     ]
     redacted_values = [redact_output(value) for value in redaction_probes]
     redacted_probe, redaction_replacements = redacted_values[0]
     semantic_negative_results["sensitive_value_redacted"] = redaction_replacements == 1 and "api_key=<REDACTED>" in redacted_probe and all(count >= 1 and not sensitive_output_matches(redacted) for redacted, count in redacted_values)
     semantic_negative_results["required_meaning_preserved"] = "operation=evidence-check" in redacted_probe and "result=pass" in redacted_probe
+    ambiguous_raw = "operation=login password=hunter2 authentication denied\n"
+    ambiguous_redacted, _ = redact_output(ambiguous_raw)
+    semantic_negative_results["independent_projector_rejects_over_redaction"] = project_outputs(ambiguous_raw, "", sanitized=False).sha256 != project_outputs(ambiguous_redacted, "", sanitized=True).sha256
+    unexpected_placeholder = project_outputs("operation=<REDACTED>\n", "", sanitized=True)
+    semantic_negative_results["unexpected_placeholder_rejected"] = unexpected_placeholder.unexpected_placeholder_count == 1
+    near_misses = "token_count=3 secretary=present bearer_species=horse authorization_mode=disabled\n"
+    semantic_negative_results["near_miss_names_preserved"] = redact_output(near_misses) == (near_misses, 0)
     blank = {name: "" for name in schema["required"]}
     blank_rejected = bool(list(validator.iter_errors(blank)))
     ck("evidence_capture_semantics", not schema_errors and blank_rejected and all(semantic_negative_results.values()) and passed_example["result"] == failed_example["result"] == "PASS", {
@@ -406,18 +444,21 @@ def main() -> int:
     })
 
     final_network_guard = json.loads((RUNTIME / "network-guard.json").read_text(encoding="utf-8"))
-    providers = provider_register(env, final_network_guard)
+    providers, provider_proof = provider_register()
     configured = [x for x in providers if x["configured"]]
     provider_outcomes_valid = all(
-        x["attempted_count"] == x["succeeded_count"] == x["failed_count"] == x["timed_out_count"] == x["unavailable_count"] == 0
-        and x["skipped_count"] == 1 and x["state"] == "SKIPPED_NOT_CONFIGURED"
+        x["attempted_count"] == x["succeeded_count"] == x["failed_count"] == x["timed_out_count"] == 0
+        and x["skipped_count"] + x["unavailable_count"] == 1
+        and ((x["state"].startswith("SKIPPED_") and x["skipped_count"] == 1)
+             or (x["state"].startswith("UNAVAILABLE_") and x["unavailable_count"] == 1))
+        and x["measurement_basis"] == "PROCESS_BOUND_HASH_CHAINED_RUNTIME_CAPABILITY_EVENT"
         for x in providers
     )
     provider_totals = {
         state: sum(int(row[f"{state}_count"]) for row in providers)
         for state in ("attempted", "succeeded", "failed", "skipped", "timed_out", "unavailable")
     }
-    ck("provider_denial", not configured and provider_outcomes_valid and final_network_guard["provider_or_external_attempt_count"] == 0, {
+    ck("provider_denial", not configured and provider_outcomes_valid and provider_proof["event_chain_valid"] and provider_proof["process_identity_bound"] and provider_proof["unattributed_attempt_count"] == 0 and final_network_guard["provider_or_external_attempt_count"] == 0, {
         "providers": len(providers),
         "configuration_names": len(PROVIDER_NAMES),
         "register": providers,
@@ -425,7 +466,8 @@ def main() -> int:
         "attempt_count": provider_totals["attempted"],
         "outcome_totals": provider_totals,
         "network_guard": final_network_guard,
-        "attempt_count_basis": "application-level socket instrumentation measured zero provider/external attempts; every provider was explicitly classified SKIPPED_NOT_CONFIGURED; exact-port sandbox and process socket inventory independently corroborated zero external activity",
+        "provider_guard_proof": provider_proof,
+        "attempt_count_basis": "process-bound hash-chained capability events distinguish present, absent, out-of-process, skipped, unavailable, and attempted states; exact-port socket instrumentation and process inventory independently corroborate zero external activity",
     })
 
     final_owned_cleanup = row_cleanup(db)
@@ -479,7 +521,7 @@ def main() -> int:
         "check_count": len(checks),
         "pass_count": len(checks) - len(failed),
         "provider_attempt_count": provider_totals["attempted"],
-        "provider_attempt_count_basis": "application-level socket instrumentation measured zero provider/external attempts; every provider has an explicit skipped state; exact-port sandbox and full-process socket inventory independently corroborated zero",
+        "provider_attempt_count_basis": "process-bound hash-chained capability events and application-level socket instrumentation measured zero attempts; unavailable integrations are not mislabeled as skipped",
         "production_access_count": 0,
         "production_access_count_basis": "loopback-only datastore/API and exact-port sandbox",
         "live_data_access_count": 0,

@@ -31,13 +31,15 @@ ALLOWED_NAMES = {
     "ALL_PROXY", "PATH", "TMPDIR", "LANG", "LC_ALL", "PYTHONPATH",
 }
 PROVIDER_NAMES = {
-    "STRIPE_API_KEY": "Stripe", "STRIPE_SECRET_KEY": "Stripe", "STRIPE_WEBHOOK_SECRET": "Stripe",
+    "STRIPE_API_KEY": "Stripe", "STRIPE_SECRET_KEY": "Stripe", "STRIPE_WEBHOOK_SECRET": "Stripe", "STRIPE_PUBLISHABLE_KEY": "Stripe",
     "RESEND_API_KEY": "Resend", "SENDGRID_API_KEY": "SendGrid", "TWILIO_AUTH_TOKEN": "Twilio",
-    "AWS_ACCESS_KEY_ID": "Object storage", "AWS_SECRET_ACCESS_KEY": "Object storage",
+    "STORAGE_PROVIDER": "Object storage", "STORAGE_ENDPOINT_URL": "Object storage", "STORAGE_REGION": "Object storage",
+    "STORAGE_ACCESS_KEY_ID": "Object storage", "STORAGE_SECRET_ACCESS_KEY": "Object storage", "STORAGE_BUCKET": "Object storage", "STORAGE_PUBLIC_BASE_URL": "Object storage",
     "OPENAI_API_KEY": "External AI", "GOOGLE_API_KEY": "External AI", "GEMINI_API_KEY": "External AI",
     "CLOUDFLARE_API_TOKEN": "Cloudflare", "RENDER_API_KEY": "Render", "VERCEL_TOKEN": "Vercel",
-    "DOCUSIGN_INTEGRATION_KEY": "DocuSign", "ANALYTICS_WRITE_KEY": "Analytics",
-    "STORAGE_ACCESS_KEY_ID": "Object storage", "STORAGE_SECRET_ACCESS_KEY": "Object storage",
+    "DOCUSIGN_INTEGRATION_KEY": "DocuSign", "DOCUSIGN_USER_ID": "DocuSign", "DOCUSIGN_ACCOUNT_ID": "DocuSign",
+    "DOCUSIGN_PRIVATE_KEY": "DocuSign", "DOCUSIGN_PRIVATE_KEY_PATH": "DocuSign",
+    "ANALYTICS_WRITE_KEY": "Analytics",
     "EMERGENT_LLM_KEY": "External AI",
 }
 PROHIBITED_AMBIENT_NAMES = set(PROVIDER_NAMES) | {
@@ -236,48 +238,16 @@ def restore(db, rows: list[dict[str, object]]) -> dict[str, object]:
     return {"restored": len(rows), "state_digest": state_digest(db)}
 
 
-def provider_register(env: Mapping[str, str], network_ledger: Mapping[str, object]) -> list[dict[str, object]]:
-    """Evaluate every provider path and bind skipped states to network evidence.
+def provider_register() -> tuple[list[dict[str, object]], dict[str, object]]:
+    """Derive provider outcomes from the active process-bound guard ledger.
 
-    A nonzero or malformed global network ledger cannot be safely attributed to
-    an individual provider and therefore fails closed instead of being copied
-    into an otherwise all-zero register.
+    The API intentionally accepts no caller-provided environment or ledger;
+    supplied-zero evidence cannot be promoted into provider measurements.
     """
-    if network_ledger.get("guard") != "STAGE2A_APPLICATION_NETWORK_GUARD" or network_ledger.get("installed") is not True:
-        raise IsolationError("provider measurement requires the installed application network guard ledger")
-    measured = network_ledger.get("provider_or_external_attempt_count")
-    if not isinstance(measured, int) or measured < 0:
-        raise IsolationError("provider measurement ledger count is unavailable")
-    if measured != 0:
-        raise IsolationError(f"unattributed provider/external attempts prevent per-provider disposition: {measured}")
-    values = env
-    rows = []
-    for provider in sorted(set(PROVIDER_NAMES.values())):
-        configured = any(bool((values.get(name) or "").strip()) for name, value in PROVIDER_NAMES.items() if value == provider)
-        state = "UNAVAILABLE_CONFIGURATION_SHOULD_HAVE_FAILED_CLOSED" if configured else "SKIPPED_NOT_CONFIGURED"
-        outcome = {
-            "attempted": 0,
-            "succeeded": 0,
-            "failed": 0,
-            "skipped": 0 if configured else 1,
-            "timed_out": 0,
-            "unavailable": 1 if configured else 0,
-        }
-        rows.append({
-            "provider": provider,
-            "configuration_names": sorted(name for name, value in PROVIDER_NAMES.items() if value == provider),
-            "configured": configured,
-            "attempt_count": outcome["attempted"],
-            "attempted_count": outcome["attempted"],
-            "succeeded_count": outcome["succeeded"],
-            "failed_count": outcome["failed"],
-            "skipped_count": outcome["skipped"],
-            "timed_out_count": outcome["timed_out"],
-            "unavailable_count": outcome["unavailable"],
-            "state": state,
-            "outcome_event": {"state": state, "provider_path_evaluated": True, "configured_names_present": configured},
-            "measurement_basis": "runtime provider-path prerequisite evaluation bound to an installed zero-attempt application network ledger; nonzero unattributed attempts fail closed",
-            "global_unapproved_attempt_count": measured,
-            "control": "credential excluded; exact-port sandbox; instrumented socket guard; deny proxy; process socket inventory",
-        })
-    return rows
+    from network_guard import derive_provider_register
+
+    registry = ROOT / "provider-capability-registry.json"
+    try:
+        return derive_provider_register(registry)
+    except (FileNotFoundError, ValueError, json.JSONDecodeError, RuntimeError) as exc:
+        raise IsolationError(str(exc)) from exc

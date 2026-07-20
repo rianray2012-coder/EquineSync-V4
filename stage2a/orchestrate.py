@@ -28,9 +28,29 @@ API_PID = RUNTIME / "api.pid"
 API_PROFILE = RUNTIME / "api.profile"
 MONGO_PORT = 27029
 API_PORT = 8019
+CONTROLLED_PORTS = {"mongo": MONGO_PORT, "api": API_PORT}
 
 
-def _read_record(pid_file: Path) -> dict[str, object] | None:
+class ProcessIdentityError(RuntimeError):
+    pass
+
+
+def _identity_timestamp_valid(value: object, now: dt.datetime | None = None) -> bool:
+    try:
+        parsed = dt.datetime.fromisoformat(str(value))
+    except ValueError:
+        return False
+    current = now or dt.datetime.now(dt.timezone.utc)
+    return (
+        parsed.tzinfo is not None
+        and parsed.utcoffset() == dt.timedelta(0)
+        and parsed <= current + dt.timedelta(seconds=5)
+    )
+
+
+def _read_record(pid_file: Path, expected_kind: str | None = None, expected_port: int | None = None) -> dict[str, object] | None:
+    if not pid_file.exists():
+        return None
     try:
         value = json.loads(pid_file.read_text(encoding="utf-8"))
         if (
@@ -46,11 +66,14 @@ def _read_record(pid_file: Path) -> dict[str, object] | None:
             or not isinstance(value.get("launch_nonce_sha256"), str)
             or not isinstance(value.get("identity_recorded_utc"), str)
             or value.get("parent_pid_policy") != "CREATION_PARENT_OR_INIT_REPARENT_ONLY"
+            or not _identity_timestamp_valid(value.get("identity_recorded_utc"))
+            or (expected_kind is not None and value.get("kind") != expected_kind)
+            or (expected_port is not None and value.get("controlled_port") != expected_port)
         ):
-            return None
+            raise ProcessIdentityError(f"malformed or conflicting process identity record: {pid_file.name}")
         return value
-    except (FileNotFoundError, ValueError, json.JSONDecodeError):
-        return None
+    except (ValueError, json.JSONDecodeError) as exc:
+        raise ProcessIdentityError(f"unparseable process identity record: {pid_file.name}") from exc
 
 
 def _ps_identity(pid: int) -> dict[str, object] | None:
@@ -125,6 +148,8 @@ def _executable_path(command: list[str]) -> str:
 
 
 def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: Path, port: int, launch_nonce: str) -> None:
+    if CONTROLLED_PORTS.get(kind) != port:
+        raise ProcessIdentityError(f"{kind} controlled-port identity mismatch at creation")
     process_group_id = os.getpgid(pid)
     if process_group_id != pid:
         raise RuntimeError(f"{kind} did not start as its own process group")
@@ -133,6 +158,13 @@ def _write_record(pid_file: Path, pid: int, kind: str, command: list[str], cwd: 
         raise RuntimeError(f"{kind} process identity unavailable or conflicting at creation")
     if identity["observed_executable"] != _executable_path(command):
         raise RuntimeError(f"{kind} executable identity unavailable or conflicting at creation")
+    files = _process_files(pid)
+    if (
+        not files
+        or files.get("cwd") != str(cwd.resolve())
+        or identity["observed_executable"] not in files.get("txt_paths", set())
+    ):
+        raise RuntimeError(f"{kind} exact executable or working-directory identity unavailable at creation")
     launch_nonce_sha256 = hashlib.sha256(launch_nonce.encode()).hexdigest()
     if identity["launch_nonce_sha256"] != launch_nonce_sha256:
         raise RuntimeError(f"{kind} launch-nonce identity unavailable or conflicting at creation")
@@ -200,22 +232,41 @@ def _contain_unrecorded_spawn(process: subprocess.Popen[bytes], kind: str) -> di
     )
 
 
-def _process_files(pid: int) -> str:
+def _process_files(pid: int) -> dict[str, object] | None:
     try:
         result = subprocess.run(
-            ["lsof", "-a", "-nP", "-p", str(pid), "-d", "txt,cwd"],
+            ["lsof", "-a", "-nP", "-p", str(pid), "-d", "txt,cwd", "-Fftn"],
             text=True,
             capture_output=True,
             check=False,
             timeout=5,
         )
     except subprocess.TimeoutExpired:
-        return ""
-    return result.stdout.strip() if result.returncode == 0 else ""
+        return None
+    if result.returncode != 0:
+        return None
+    descriptor: str | None = None
+    cwd_values: set[str] = set()
+    txt_paths: set[str] = set()
+    for line in result.stdout.splitlines():
+        if line.startswith("f"):
+            descriptor = line[1:]
+        elif line.startswith("n") and descriptor in {"cwd", "txt"}:
+            resolved = str(Path(line[1:]).resolve())
+            if descriptor == "cwd":
+                cwd_values.add(resolved)
+            else:
+                txt_paths.add(resolved)
+    if len(cwd_values) != 1 or not txt_paths:
+        return None
+    return {"cwd": next(iter(cwd_values)), "txt_paths": txt_paths}
 
 
-def _expected(record: dict[str, object] | None, kind: str) -> bool:
-    if not record or record.get("kind") != kind:
+def _expected(record: dict[str, object] | None, kind: str, expected_port: int | None = None) -> bool:
+    controlled_port = CONTROLLED_PORTS.get(kind) if expected_port is None else expected_port
+    if not record or record.get("kind") != kind or controlled_port != CONTROLLED_PORTS.get(kind):
+        return False
+    if record.get("controlled_port") != controlled_port or not _identity_timestamp_valid(record.get("identity_recorded_utc")):
         return False
     pid = int(record["pid"])
     process_group_id = int(record["process_group_id"])
@@ -225,22 +276,27 @@ def _expected(record: dict[str, object] | None, kind: str) -> bool:
     identity = _ps_identity(pid)
     if not identity:
         return False
+    recorded_parent = int(record["parent_pid"])
+    observed_parent = int(identity["parent_pid"])
+    parent_valid = observed_parent == recorded_parent or (
+        observed_parent == 1 and recorded_parent > 1 and not _process_exists(recorded_parent)
+    )
     if (
         process_group_id != pid
         or identity["process_group_id"] != process_group_id
-        or identity["parent_pid"] not in {record.get("parent_pid"), 1}
+        or not parent_valid
         or hashlib.sha256(str(identity["command_line"]).encode()).hexdigest() != record.get("command_line_sha256")
         or identity["observed_executable"] != record.get("executable_path")
         or identity["launch_nonce_sha256"] != record.get("launch_nonce_sha256")
-        or str(record.get("executable_path")) not in files
-        or str(record.get("working_directory")) not in files
+        or str(record.get("executable_path")) not in files.get("txt_paths", set())
+        or str(record.get("working_directory")) != files.get("cwd")
     ):
         return False
     return True
 
 
-def _alive(record: dict[str, object] | None, kind: str) -> bool:
-    if not _expected(record, kind):
+def _alive(record: dict[str, object] | None, kind: str, expected_port: int | None = None) -> bool:
+    if not _expected(record, kind, expected_port):
         return False
     pid = int(record["pid"])
     try:
@@ -313,7 +369,7 @@ def _wait_health(url: str, timeout: float) -> dict[str, object]:
     raise TimeoutError(f"health endpoint not ready within {timeout}s: {last}")
 
 
-def _wait_exit(record: dict[str, object], kind: str, timeout: float) -> bool:
+def _wait_exit(record: dict[str, object], kind: str, timeout: float, expected_port: int | None = None) -> bool:
     pid = int(record["pid"])
     end = time.monotonic() + timeout
     while time.monotonic() < end:
@@ -323,14 +379,14 @@ def _wait_exit(record: dict[str, object], kind: str, timeout: float) -> bool:
                 return True
         except ChildProcessError:
             pass
-        if not _alive(record, kind):
+        if not _alive(record, kind, expected_port):
             return True
         time.sleep(0.1)
-    return not _alive(record, kind)
+    return not _alive(record, kind, expected_port)
 
 
 def _terminate(kind: str, pid_file: Path, port: int) -> dict[str, object]:
-    record = _read_record(pid_file)
+    record = _read_record(pid_file, kind, port)
     saved_pid = int(record["pid"]) if record else None
     listener = _listener_pid(port, saved_pid)
     if saved_pid is None and listener is not None:
@@ -351,7 +407,7 @@ def _terminate(kind: str, pid_file: Path, port: int) -> dict[str, object]:
             "status": "ALREADY_EXITED_NO_SIGNAL_SENT", "port_closed": True,
             "command_identity_verified": False,
         }
-    if not _expected(record, kind):
+    if not _expected(record, kind, port):
         raise RuntimeError(f"refusing to signal unverified {kind} PID {pid}")
     if listener != pid:
         raise RuntimeError(f"refusing to signal {kind} PID {pid}: controlled port {port} is not attributed to that PID")
@@ -359,10 +415,10 @@ def _terminate(kind: str, pid_file: Path, port: int) -> dict[str, object]:
         raise RuntimeError(f"refusing to signal {kind}: PID/PGID identity mismatch")
     os.killpg(saved_pgid, signal.SIGTERM)
     forced = False
-    if not _wait_exit(record, kind, 10):
+    if not _wait_exit(record, kind, 10, port):
         os.killpg(saved_pgid, signal.SIGKILL)
         forced = True
-        if not _wait_exit(record, kind, 5):
+        if not _wait_exit(record, kind, 5, port):
             raise RuntimeError(f"{kind} PID {pid} survived SIGTERM and SIGKILL")
     if _port_open("127.0.0.1", port) or _listener_pid(port) is not None:
         raise RuntimeError(f"{kind} port {port} remains open after process exit")
@@ -386,7 +442,7 @@ def start(profile: str = "full", failpoint: str | None = None) -> dict[str, obje
     )
     (RUNTIME / "mongo").mkdir(parents=True, exist_ok=True)
     (RUNTIME / "logs").mkdir(parents=True, exist_ok=True)
-    if _read_record(MONGO_PID) or _read_record(API_PID) or _listener_pid(MONGO_PORT) or _listener_pid(API_PORT):
+    if _read_record(MONGO_PID, "mongo", MONGO_PORT) or _read_record(API_PID, "api", API_PORT) or _listener_pid(MONGO_PORT) or _listener_pid(API_PORT):
         raise RuntimeError("Stage 2A runtime or controlled port is already active")
 
     mongo_log = (RUNTIME / "logs/mongod.log").open("ab")
@@ -410,6 +466,10 @@ def start(profile: str = "full", failpoint: str | None = None) -> dict[str, obje
         _wait_port("127.0.0.1", MONGO_PORT, 15)
         if failpoint == "after_datastore_ready":
             raise RuntimeError("intentional Stage 2A interrupted-start failpoint")
+        # No API process exists at this point. Remove only the completed prior
+        # guard-session file so the next API can create a new session with
+        # exclusive-create semantics; the guard itself never overwrites one.
+        (RUNTIME / "network-guard.json").unlink(missing_ok=True)
         api_log = (RUNTIME / "logs/api.log").open("ab")
         if profile == "full":
             command = [
@@ -434,7 +494,7 @@ def start(profile: str = "full", failpoint: str | None = None) -> dict[str, obje
         API_PROFILE.write_text(profile, encoding="utf-8")
         _wait_port("127.0.0.1", API_PORT, 120)
         health = _wait_health(ready_url, 60)
-        if not _alive(_read_record(MONGO_PID), "mongo") or not _alive(_read_record(API_PID), "api"):
+        if not _alive(_read_record(MONGO_PID, "mongo", MONGO_PORT), "mongo", MONGO_PORT) or not _alive(_read_record(API_PID, "api", API_PORT), "api", API_PORT):
             raise RuntimeError("process identity lost after readiness")
         return {
             "status": "STARTED",
@@ -468,14 +528,14 @@ def stop() -> dict[str, object]:
 
 
 def status() -> dict[str, object]:
-    mongo_record = _read_record(MONGO_PID)
-    api_record = _read_record(API_PID)
+    mongo_record = _read_record(MONGO_PID, "mongo", MONGO_PORT)
+    api_record = _read_record(API_PID, "api", API_PORT)
     mongo_port_open = _port_open("127.0.0.1", MONGO_PORT)
     api_port_open = _port_open("127.0.0.1", API_PORT)
     mongo_listener = _listener_pid(MONGO_PORT, int(mongo_record["pid"])) if mongo_record else _listener_pid(MONGO_PORT)
     api_listener = _listener_pid(API_PORT, int(api_record["pid"])) if api_record else _listener_pid(API_PORT)
-    mongo_expected = _alive(mongo_record, "mongo")
-    api_expected = _alive(api_record, "api")
+    mongo_expected = _alive(mongo_record, "mongo", MONGO_PORT)
+    api_expected = _alive(api_record, "api", API_PORT)
     mongo_listener_bound = bool(mongo_record and mongo_listener == mongo_record.get("pid") and mongo_expected)
     api_listener_bound = bool(api_record and api_listener == api_record.get("pid") and api_expected)
     return {
