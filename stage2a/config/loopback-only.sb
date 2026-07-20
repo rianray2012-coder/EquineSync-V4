@@ -1,0 +1,11 @@
+(version 1)
+(allow default)
+(deny network-inbound)
+(deny network-outbound)
+(allow signal (target same-sandbox))
+(allow network-inbound
+  (local ip "localhost:27029")
+  (local ip "localhost:8019"))
+(allow network-outbound
+  (remote ip "localhost:27029")
+  (remote ip "localhost:8019"))
