@@ -1,0 +1,37 @@
+{
+  "oracle_id": "S2A-STARTUP-ORACLE-V1",
+  "profile": "CONTROLLED_ZERO_DOCUMENT_WRITES",
+  "expected_database_inventory_sha256": "02bccf932bb7611851fb99f0accd23883797697227e824ae08882fca7c904817",
+  "expected_collection_count": 68,
+  "expected_document_count": 0,
+  "permitted_metadata_change": "EXACT_COLLECTION_AND_INDEX_INVENTORY_MATCH_ONLY",
+  "provider_or_external_attempt_count": 0,
+  "background_flags_required_false": 6,
+  "startup_log_required_markers": [
+    "startup complete:",
+    "db_ok=True",
+    "indexes_ensured=True",
+    "task_materializer=False",
+    "notifications=False",
+    "auto_nudges=False"
+  ],
+  "startup_log_prohibited_markers": [
+    "Traceback",
+    "ERROR",
+    "Stripe catalog provisioning failed",
+    "provider authentication",
+    "external network"
+  ],
+  "known_side_effect_paths": [
+    {"control_id": "S2A-SE-001", "source": "backend/core/lifespan.py", "side_effect": "automatic seed", "stage2a_control": "ALLOW_AUTO_SEED=false"},
+    {"control_id": "S2A-SE-002", "source": "backend/core/lifespan.py", "side_effect": "index creation", "stage2a_control": "permitted only when exact metadata digest matches"},
+    {"control_id": "S2A-SE-003", "source": "backend/core/lifespan.py", "side_effect": "user and account-membership backfills", "stage2a_control": "empty synthetic database plus zero-document oracle"},
+    {"control_id": "S2A-SE-004", "source": "backend/core/lifespan.py", "side_effect": "starter-template initialization and task materialization", "stage2a_control": "empty synthetic database plus disabled task materializer and zero-document oracle"},
+    {"control_id": "S2A-SE-005", "source": "backend/core/billing_provisioning.py", "side_effect": "billing catalog synchronization and provider validation", "stage2a_control": "Stage 2A wrapper no-op before application import"},
+    {"control_id": "S2A-SE-006", "source": "backend/core/lifespan.py", "side_effect": "task materializer loop", "stage2a_control": "DISABLE_TASK_MATERIALIZER=true"},
+    {"control_id": "S2A-SE-007", "source": "backend/core/lifespan.py", "side_effect": "notifications and subscription email dispatcher", "stage2a_control": "dedicated DISABLE flags true"},
+    {"control_id": "S2A-SE-008", "source": "backend/core/lifespan.py", "side_effect": "owner digest weekly recap and auto nudges", "stage2a_control": "dedicated DISABLE flags true"},
+    {"control_id": "S2A-SE-009", "source": "stage2a/network_guard.py", "side_effect": "provider or external network connection", "stage2a_control": "instrument deny and require measured count zero"},
+    {"control_id": "S2A-SE-010", "source": "stage2a/validate_foundation.py", "side_effect": "startup logs and configuration", "stage2a_control": "required and prohibited marker oracle plus SHA-256 capture"}
+  ]
+}

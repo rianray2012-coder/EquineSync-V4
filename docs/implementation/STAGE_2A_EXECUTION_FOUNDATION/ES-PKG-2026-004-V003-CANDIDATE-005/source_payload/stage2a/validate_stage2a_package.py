@@ -18,7 +18,7 @@ import jsonschema
 from jsonschema import Draft202012Validator, FormatChecker
 
 PACKAGE_ID = "ES-PKG-2026-004-V003"
-CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-006"
+CANDIDATE_ID = "ES-PKG-2026-004-V003-CANDIDATE-005"
 START = "0be6172a28b75238c5facabf91d43ed09aaf0d54"
 BASELINE = "acb518ea5a160820e64681ff95a16b010fe1156c"
 PREDECESSOR_SHA = "b7193e9a4cac078a87c45e31d708f787b40e7e7e973eee7c3f327680a7e32329"
@@ -95,14 +95,7 @@ def load_source_module(path: Path, name: str):
         raise RuntimeError(f"cannot load source module: {path}")
     module = importlib.util.module_from_spec(spec)
     sys.modules[name] = module
-    prior_dont_write_bytecode = sys.dont_write_bytecode
-    try:
-        # Detached package validation is read-only. Dynamic imports must not add
-        # __pycache__ files to the package they are validating.
-        sys.dont_write_bytecode = True
-        spec.loader.exec_module(module)
-    finally:
-        sys.dont_write_bytecode = prior_dont_write_bytecode
+    spec.loader.exec_module(module)
     return module
 
 

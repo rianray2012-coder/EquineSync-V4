@@ -1,0 +1,44 @@
+{
+  "evidence": {
+    "error": "intentional Stage 2A interrupted-start failpoint",
+    "post_failure_status": {
+      "api_alive": false,
+      "api_foreign_listener_pid": null,
+      "api_identity": null,
+      "api_listener_attribution_conflict": false,
+      "api_listener_identity_verified": false,
+      "api_pid": null,
+      "api_port_open": false,
+      "mongo_alive": false,
+      "mongo_foreign_listener_pid": null,
+      "mongo_identity": null,
+      "mongo_listener_attribution_conflict": false,
+      "mongo_listener_identity_verified": false,
+      "mongo_pid": null,
+      "mongo_port_open": false,
+      "profile": null
+    },
+    "precondition_stop": {
+      "api_alive": false,
+      "mongo_alive": false,
+      "pid_files_absent": true,
+      "ports_closed": true,
+      "processes": [
+        {
+          "kind": "api",
+          "pid": null,
+          "port_closed": true,
+          "status": "ALREADY_STOPPED"
+        },
+        {
+          "kind": "mongo",
+          "pid": null,
+          "port_closed": true,
+          "status": "ALREADY_STOPPED"
+        }
+      ],
+      "status": "STOPPED"
+    }
+  },
+  "result": "PASS"
+}

@@ -1,0 +1,273 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-005",
+  "package_id": "ES-PKG-2026-004-V003",
+  "requirements": [
+    {
+      "control_ids": [
+        "S2A-CTL-DEP-001",
+        "S2A-CTL-DEP-002"
+      ],
+      "evidence_artifacts": [
+        "BACKEND_BOOTSTRAP_VALIDATION.json",
+        "BACKEND_DEPENDENCY_INVENTORY.txt"
+      ],
+      "gap_id": "S2-GAP-001",
+      "implementation_artifacts": [
+        "stage2a/bootstrap_backend.sh",
+        "stage2a/dependency_inventory.py"
+      ],
+      "requirement": "Backend dependency-install contract",
+      "requirement_id": "S2A-REQ-001",
+      "source_evidence_ids": [
+        "S2A-SRC-A780F027052B",
+        "S2A-SRC-C9B599E18100",
+        "S2A-SRC-1D735D44D5A3",
+        "S2A-SRC-FE37047E052D"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-DEP-BOOTSTRAP",
+        "S2A-TEST-PIP-CHECK"
+      ]
+    },
+    {
+      "control_ids": [
+        "S2A-CTL-TOOL-001",
+        "S2A-CTL-PKG-MGR-001"
+      ],
+      "evidence_artifacts": [
+        "TOOLCHAIN_VALIDATION.json",
+        "TOOLCHAIN_VERSION_CAPTURE.txt"
+      ],
+      "gap_id": "S2-GAP-002",
+      "implementation_artifacts": [
+        "stage2a/toolchain.json",
+        "frontend/package-lock.json"
+      ],
+      "requirement": "Runtime and toolchain contract",
+      "requirement_id": "S2A-REQ-002",
+      "source_evidence_ids": [
+        "S2A-SRC-0B090BAE0CB8",
+        "S2A-SRC-4A2D9AA3E849",
+        "S2A-SRC-DA6498268E99"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-TOOLCHAIN",
+        "S2A-TEST-FRONTEND-BUILD"
+      ]
+    },
+    {
+      "control_ids": [
+        "S2A-CTL-ENV-001",
+        "S2A-CTL-NET-001",
+        "S2A-CTL-PROVIDER-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ISOLATION_CONTROL.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "gap_id": "S2-GAP-003",
+      "implementation_artifacts": [
+        "stage2a/lib/control.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json"
+      ],
+      "requirement": "Disposable environment and provider isolation",
+      "requirement_id": "S2A-REQ-003",
+      "source_evidence_ids": [
+        "S2A-SRC-248CE3E8E629",
+        "S2A-SRC-E0D33F293AA3",
+        "S2A-SRC-EF903072E234",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-ENV-NEGATIVE",
+        "S2A-TEST-EXACT-PORT-DENIAL"
+      ]
+    },
+    {
+      "control_ids": [
+        "S2A-CTL-PROCESS-001",
+        "S2A-CTL-PROCESS-002"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_ORCHESTRATION_CONTRACT.json",
+        "CONTROLLED_SHUTDOWN_VALIDATION.json",
+        "INTERRUPTED_START_VALIDATION.json"
+      ],
+      "gap_id": "S2-GAP-004",
+      "implementation_artifacts": [
+        "stage2a/orchestrate.py"
+      ],
+      "requirement": "Deterministic start stop and health orchestration",
+      "requirement_id": "S2A-REQ-004",
+      "source_evidence_ids": [
+        "S2A-SRC-97364CC96BA8",
+        "S2A-SRC-97001E3EBDE6"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-PROCESS-IDENTITY",
+        "S2A-TEST-PROCESS-IDENTITY-NEGATIVE",
+        "S2A-TEST-INTERRUPTED-START",
+        "S2A-TEST-CONTROLLED-SHUTDOWN"
+      ]
+    },
+    {
+      "control_ids": [
+        "S2A-CTL-FIXTURE-001"
+      ],
+      "evidence_artifacts": [
+        "STAGE2A_FIXTURE_FOUNDATION.json",
+        "FIXTURE_REPRODUCIBILITY_REPORT.json"
+      ],
+      "gap_id": "S2-GAP-005",
+      "implementation_artifacts": [
+        "stage2a/fixture_loader.py",
+        "stage2a/fixtures/foundation-v1.json"
+      ],
+      "requirement": "Synthetic fixture foundation",
+      "requirement_id": "S2A-REQ-005",
+      "source_evidence_ids": [
+        "S2A-SRC-3D37CD4F719F",
+        "S2A-SRC-0B1A50236728"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-FIXTURE-REPLAY",
+        "S2A-TEST-FIXTURE-RESET"
+      ]
+    },
+    {
+      "control_ids": [
+        "S2A-CTL-EVIDENCE-001",
+        "S2A-CTL-REDACTION-001",
+        "S2A-CTL-PACKAGE-ROOT-001",
+        "S2A-CTL-TRACE-001"
+      ],
+      "evidence_artifacts": [
+        "EVIDENCE_CAPTURE_VALIDATION.json",
+        "EXECUTION_EVIDENCE_SCHEMA.json",
+        "STAGE2A_REQUIREMENT_TRACEABILITY_MATRIX.json"
+      ],
+      "gap_id": "S2-GAP-006",
+      "implementation_artifacts": [
+        "stage2a/evidence_capture.py",
+        "stage2a/semantic_projection.py",
+        "stage2a/validate_stage2a_package.py",
+        "stage2a/traceability_contract.py",
+        "stage2a/build_successor_package.py"
+      ],
+      "requirement": "Evidence-capture harness",
+      "requirement_id": "S2A-REQ-006",
+      "source_evidence_ids": [
+        "S2A-SRC-5910785933D3",
+        "S2A-SRC-05854EA9BBB9",
+        "S2A-SRC-1D3720DEDACF",
+        "S2A-SRC-91899BC8CA07",
+        "S2A-SRC-EA21BF650692",
+        "S2A-SRC-60288FE64B38"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-EVIDENCE-SEMANTICS",
+        "S2A-TEST-REDACTION-MEANING",
+        "S2A-TEST-VALIDATOR-ROOT-MATRIX",
+        "S2A-TEST-TRACE-SPECIFICITY"
+      ]
+    },
+    {
+      "control_ids": [
+        "S2A-CTL-CLEANUP-001",
+        "S2A-CTL-ZERO-RESIDUE-001"
+      ],
+      "evidence_artifacts": [
+        "CLEANUP_VALIDATION_REPORT.json",
+        "ZERO_RESIDUE_PROOF.json"
+      ],
+      "gap_id": "S2-GAP-007",
+      "implementation_artifacts": [
+        "stage2a/cleanup.py"
+      ],
+      "requirement": "Exact cleanup and zero-residue proof",
+      "requirement_id": "S2A-REQ-007",
+      "source_evidence_ids": [
+        "S2A-SRC-DDFD0174B8E7",
+        "S2A-SRC-248CE3E8E629"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-CLEANUP-PARTIAL",
+        "S2A-TEST-CLEANUP-INTERRUPTED",
+        "S2A-TEST-ZERO-RESIDUE"
+      ]
+    },
+    {
+      "control_ids": [
+        "S2A-CTL-ROLLBACK-001",
+        "S2A-CTL-SOURCE-RECOVERY-001"
+      ],
+      "evidence_artifacts": [
+        "ROLLBACK_REHEARSAL_REPORT.json",
+        "RECOVERED_STATE_INVARIANT_REPORT.json"
+      ],
+      "gap_id": "S2-GAP-008",
+      "implementation_artifacts": [
+        "stage2a/rollback_recovery.py"
+      ],
+      "requirement": "Rollback and recovery foundation",
+      "requirement_id": "S2A-REQ-008",
+      "source_evidence_ids": [
+        "S2A-SRC-D0C7345341AF",
+        "S2A-SRC-87EC3E271778"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-DATASTORE-ROLLBACK",
+        "S2A-TEST-SOURCE-RECOVERY"
+      ]
+    },
+    {
+      "control_ids": [
+        "S2A-CTL-STARTUP-001",
+        "S2A-CTL-ATTEMPTS-001",
+        "S2A-CTL-PROVIDER-EVENT-001"
+      ],
+      "evidence_artifacts": [
+        "STARTUP_SIDE_EFFECT_INVENTORY.json",
+        "STARTUP_SIDE_EFFECT_ORACLE.json",
+        "PROVIDER_DENIAL_REGISTER.json"
+      ],
+      "gap_id": "S2-GAP-009",
+      "implementation_artifacts": [
+        "stage2a/full_application_profile.py",
+        "stage2a/network_guard.py",
+        "stage2a/provider-capability-registry.json",
+        "stage2a/startup-side-effect-oracle.json"
+      ],
+      "requirement": "Startup side-effect control",
+      "requirement_id": "S2A-REQ-009",
+      "source_evidence_ids": [
+        "S2A-SRC-E8782636D39C",
+        "S2A-SRC-D56B75262B02",
+        "S2A-SRC-47C839F00DCC",
+        "S2A-SRC-C3171954381B",
+        "S2A-SRC-F233586AA1C3",
+        "S2A-SRC-B88DE28A2053",
+        "S2A-SRC-769DD9D18253",
+        "S2A-SRC-6F3614BBAA5B",
+        "S2A-SRC-EE456DEE6150"
+      ],
+      "status": "REMEDIATED_CANDIDATE_PENDING_INDEPENDENT_REREVIEW",
+      "test_ids": [
+        "S2A-TEST-STARTUP-ORACLE",
+        "S2A-TEST-PROVIDER-OUTCOME-STATES",
+        "S2A-TEST-PROVIDER-EVENT-CHAIN",
+        "S2A-TEST-NETWORK-GUARD"
+      ]
+    }
+  ]
+}

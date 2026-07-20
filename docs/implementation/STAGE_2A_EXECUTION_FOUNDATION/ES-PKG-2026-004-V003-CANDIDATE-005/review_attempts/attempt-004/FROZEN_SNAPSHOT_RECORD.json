@@ -1,0 +1,32 @@
+{
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-004",
+  "review_attempt": 4,
+  "frozen_utc": "2026-07-20T08:55:06Z",
+  "validated_implementation_commit": "daa10387e073952b823afde9b681e602cb70c7b8",
+  "assembly_commit": "22ba2774a916d0c1df887d8dc4fe39538b95e67f",
+  "assembly_tree": "689bd800b7fefafb72cae4ecb9e4d6c3cc7202f6",
+  "package_path": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-004",
+  "archive_path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-004_FROZEN.zip",
+  "archive_sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+  "payload_files": 207,
+  "physical_files": 210,
+  "archive_files": 210,
+  "draft_checksum_manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+  "draft_snapshot_record_sha256": "c67a293e7d2ebc2f401a3e8bb8cb5f9f67de0196b03c8a47dfb770fa4ce08fea",
+  "assembly_validator": "PASS_24_OF_24_IN_4_OF_4_LOCATIONS",
+  "candidate_validator": "PASS_23_OF_23",
+  "clean_extraction": {
+    "parity": "210_OF_210",
+    "byte_diff_lines": 0,
+    "symlinks": 0,
+    "case_collisions": 0,
+    "path_traversal": false,
+    "detached_validator": "PASS_23_OF_23"
+  },
+  "failed_candidate_108_archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+  "failed_candidate_003_archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+  "failed_candidates_unchanged": true,
+  "candidate_directory_immutable_during_review": true,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED"
+}

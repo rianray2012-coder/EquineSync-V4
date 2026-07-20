@@ -1,0 +1,37 @@
+{
+  "architecture": "arm64",
+  "curl": "8.7.1",
+  "execution_status": "EXECUTION_NOT_AUTHORIZED",
+  "frontend_lockfile": "frontend/package-lock.json",
+  "frontend_lockfile_sha256": "7b5781f7164b0ac9250d670fb5ab27b62570d2fa7d6a22e1cad82deb704602fe",
+  "frontend_package_manager": "npm",
+  "gap_id": "S2-GAP-002",
+  "git": "2.50.1 (Apple Git-155)",
+  "lsof": "4.91",
+  "mongodb": "8.0.26",
+  "mongosh": "2.8.3",
+  "node": "24.11.0",
+  "npm": "11.6.1",
+  "operating_system": "macOS 26.5.2",
+  "package_manager_decision": "npm",
+  "pip": "24.0",
+  "profile": "equinesync-stage2a-foundation",
+  "pyenv": "2.8.1",
+  "python": "3.11.11",
+  "sandbox_exec": "macOS 26.5.2 OS component; no version flag",
+  "schema_version": "1.0",
+  "shell": "zsh",
+  "source_dependency_changes": 0,
+  "tool_binary_sha256": {
+    "curl": "5ab042572ea0e068644e3b8f9e8dd1ad197bfcf33d199316615b46ddc4390a41",
+    "git": "179301dcb41ea78accc3fa0048a7e6f6710d891945a751a34addd622020c1818",
+    "lsof": "28c36d6b6dfcce1f544717b0d1961aa03441ee0a736fee3e1eaeb215c0fbff4c",
+    "pyenv": "82c9465c71f93e0c4f5173893ab674c5c959e0fade0b343cc0ad5ad12ce905cc",
+    "sandbox-exec": "8290e4be7387a0df83cd1559e86afd880464f269450573d012795761fe298f16"
+  },
+  "unsupported_frontend_package_managers": [
+    "yarn for Stage 2A installation"
+  ],
+  "yarn_metadata_preserved": true,
+  "zsh": "5.9 (arm64-apple-darwin25.0)"
+}

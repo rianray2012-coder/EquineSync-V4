@@ -1,0 +1,238 @@
+{
+  "review_id": "STAGE2A_SEGREGATED_REREVIEW_ATTEMPT_004",
+  "review_function": "SEGREGATED_MACHINE_AND_PACKAGE_CONTROL_REVIEW",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-004",
+  "completed_utc": "2026-07-20T09:00:49Z",
+  "read_only_review": true,
+  "services_started": false,
+  "package_modified": false,
+  "archive_modified": false,
+  "source_modified": false,
+  "prior_freezes_modified": false,
+  "freeze": {
+    "commit": "52ec3c697dd731fd7e3b3a624333975ed1477d30",
+    "validated_implementation_commit": "daa10387e073952b823afde9b681e602cb70c7b8",
+    "manifest": "DRAFT_REVIEW_SHA256SUMS.txt",
+    "manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+    "payload_files": 207,
+    "payload_verification": "207_OF_207_PASS",
+    "physical_files": 210,
+    "allowed_unlisted_files": [
+      "DRAFT_REVIEW_SHA256SUMS.txt",
+      "DRAFT_REVIEW_SNAPSHOT_RECORD.json",
+      "DRAFT_REVIEW_SNAPSHOT_RECORD.md"
+    ]
+  },
+  "archive": {
+    "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-004_FROZEN.zip",
+    "sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+    "expected_sha256_match": true,
+    "integrity": "PASS",
+    "path_traversal_entries": 0,
+    "extracted_files": 210,
+    "package_archive_parity": "210_OF_210_BYTE_IDENTICAL",
+    "missing_files": [],
+    "extra_files": [],
+    "content_mismatches": [],
+    "temporary_extraction_removed": true
+  },
+  "packaged_validator": {
+    "phase": "candidate",
+    "python": "3.11.11",
+    "jsonschema": "4.26.0",
+    "supported_locations_passed": 4,
+    "supported_locations_tested": 4,
+    "checks_per_location": "23_OF_23_PASS",
+    "invocations": [
+      {
+        "location": "PACKAGE_ROOT",
+        "resolution_mode": "REPOSITORY",
+        "exit_status": 0,
+        "validation": "PASS",
+        "stdout_sha256": "37444a3292b9e603b9df31fb7588f0e182ebccebf3cfc30e5a31e7a45968a108",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "PACKAGE_NESTED_REVIEW_ATTEMPT_003",
+        "resolution_mode": "REPOSITORY",
+        "exit_status": 0,
+        "validation": "PASS",
+        "stdout_sha256": "1f85600fa8785ab9647ffe9369ed1c2cbe728cb8ae8961c14212e07c01345b0a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "EXTERNAL_PRIVATE_TMP",
+        "resolution_mode": "REPOSITORY",
+        "exit_status": 0,
+        "validation": "PASS",
+        "stdout_sha256": "40baaebe594051588f28f9f5595b87a5f2cdbc70a9023fcb19153215a98f3e25",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "location": "DETACHED_CLEAN_ARCHIVE_EXTRACTION_EXTERNAL_PRIVATE_TMP",
+        "resolution_mode": "DETACHED_PACKAGE_SOURCE_PAYLOAD",
+        "exit_status": 0,
+        "validation": "PASS",
+        "stdout_sha256": "c8800fb939cf59df05900a8ec0876e56f24ed851d7fad5c546a810e21669d895",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "independent_controls": {
+    "structured_data": {
+      "json_files_parsed": 99,
+      "json_errors": 0,
+      "csv_files_parsed": 6,
+      "csv_data_rows": 130,
+      "csv_errors": 0,
+      "json_csv_register_parity": "PASS_4_OF_4"
+    },
+    "source_payload": {
+      "register_rows": 76,
+      "payload_files": 76,
+      "payload_inventory_exact": true,
+      "payload_sha256_matches": "76_OF_76",
+      "git_commit_blob_matches": "76_OF_76",
+      "validated_implementation_blob_matches": "76_OF_76"
+    },
+    "specific_traceability": {
+      "requirements": 9,
+      "gap_coverage": "S2_GAP_001_THROUGH_S2_GAP_009",
+      "findings": 5,
+      "executable_test_controls": 24,
+      "outputs": 115,
+      "unique_mapping_ids": 115,
+      "generic_all_requirement_mappings": 0,
+      "reference_errors": 0,
+      "result": "PASS"
+    },
+    "package_boundaries": {
+      "unsafe_paths": 0,
+      "symlinks": 0,
+      "case_collisions": 0,
+      "unexpected_absolute_path_files": 0,
+      "plausible_secret_value_hits_across_all_210_files": 0,
+      "required_controlled_statuses_present": true,
+      "forbidden_status_hits": 0
+    },
+    "unit_controls": {
+      "tests_run": 21,
+      "tests_passed": 21,
+      "bytecode_writes_disabled": true,
+      "runtime_services_started": false
+    }
+  },
+  "runtime_evidence": {
+    "foundation_validation": "PASS_16_OF_16",
+    "evidence_records": {
+      "records_checked": 2,
+      "schema_errors": 0,
+      "record_content_hashes_valid": true,
+      "stream_hashes_valid": true,
+      "chronology_valid": true,
+      "exit_result_semantics_valid": true,
+      "exact_line_meaning_preserved": true,
+      "redaction_projection_before_after_equal": true,
+      "unredacted_sensitive_match_count": 0
+    },
+    "provider_measurement": {
+      "providers": 11,
+      "all_provider_paths_evaluated": true,
+      "all_states": "SKIPPED_NOT_CONFIGURED",
+      "provider_or_external_attempt_count": 0,
+      "application_network_guard_installed": true,
+      "nonzero_unattributed_attempt_policy": "FAIL_CLOSED"
+    },
+    "startup_measurement": {
+      "events": 4,
+      "attempted": 3,
+      "succeeded": 2,
+      "failed": 1,
+      "skipped": 1,
+      "timed_out": 0,
+      "unavailable": 0,
+      "arithmetic_valid": true,
+      "chronology_valid": true,
+      "oracle_match": true
+    },
+    "process_identity": {
+      "startup_identities": 2,
+      "pid_ppid_pgid_command_executable_cwd_port_fields_present": true,
+      "pid_equals_process_group_id": true,
+      "launch_nonce_sha256_valid": true,
+      "identity_recorded_utc_present": true,
+      "packaged_command_hashes_valid": true,
+      "listener_identity_verified": true,
+      "foreign_listener_conflicts": 0,
+      "shutdown_identities_verified": true,
+      "ports_closed_in_recorded_evidence": true,
+      "pid_files_absent_in_recorded_evidence": true,
+      "current_controlled_port_listeners": 0,
+      "foreign_process_policy": "FAIL_CLOSED"
+    },
+    "evidence_reuse": {
+      "invalidated_prior_checks": 5,
+      "rerun_checks": 5,
+      "reused_predecessor_evidence_items": 2,
+      "all_reused_evidence_noncontrolling": true
+    }
+  },
+  "five_blocker_assessment": [
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "segregated_result": "REMEDIATION_VERIFIED_PENDING_CONTROLLED_RECONCILIATION",
+      "self_closed": false
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "segregated_result": "REMEDIATION_VERIFIED_PENDING_CONTROLLED_RECONCILIATION",
+      "self_closed": false
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "segregated_result": "REMEDIATION_VERIFIED_PENDING_CONTROLLED_RECONCILIATION",
+      "self_closed": false
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "segregated_result": "REMEDIATION_VERIFIED_PENDING_CONTROLLED_RECONCILIATION",
+      "self_closed": false
+    },
+    {
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "segregated_result": "REMEDIATION_VERIFIED_PENDING_CONTROLLED_RECONCILIATION",
+      "self_closed": false
+    }
+  ],
+  "prior_freeze_verification": {
+    "candidate_003_manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+    "candidate_003_payload_verification": "121_OF_121_PASS",
+    "candidate_003_archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+    "failed_108_file_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+    "failed_108_file_payload_verification": "108_OF_108_PASS",
+    "unchanged": true
+  },
+  "findings": [],
+  "technical_finding_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "technical_review_result": "PASS",
+  "disposition": "REMEDIATION_VERIFIED_PENDING_CONTROLLED_RECONCILIATION",
+  "runtime_selector": {
+    "status": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+    "direct_evidence_of_resolution": false,
+    "technical_implementation_effect": "NOT_AN_IMPLEMENTATION_FAILURE",
+    "stage2a_readiness": "BLOCKED"
+  },
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "self_closed": false
+}

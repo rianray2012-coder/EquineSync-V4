@@ -1,0 +1,189 @@
+{
+  "review_id": "STAGE2A_EVIDENCE_CUSTODIAN_ATTEMPT_004",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-004",
+  "verified_utc": "2026-07-20T08:59:31Z",
+  "review_mode": "READ_ONLY_NO_RUNTIME",
+  "disposition": "CUSTODIAN_PASS_FOR_BYTE_INTEGRITY_PROVENANCE_AND_EVIDENCE_BOUNDARIES",
+  "candidate_archive": {
+    "path": "outputs/ES-PKG-2026-004-V003-CANDIDATE-004_FROZEN.zip",
+    "sha256_expected": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+    "sha256_observed": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+    "archive_entries": 210,
+    "archive_files": 210,
+    "archive_directories": 0,
+    "physical_files": 210,
+    "archive_physical_parity": "210_OF_210_PASS",
+    "zip_crc": "PASS",
+    "duplicate_names": 0,
+    "unsafe_paths": 0,
+    "symlinks": 0,
+    "case_collisions": 0
+  },
+  "checksum_reconciliation": {
+    "manifest": "DRAFT_REVIEW_SHA256SUMS.txt",
+    "manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+    "manifested_payload_files": 207,
+    "manifest_pass": 207,
+    "manifest_fail": 0,
+    "missing_members": 0,
+    "malformed_lines": 0,
+    "freeze_control_files": [
+      "DRAFT_REVIEW_SHA256SUMS.txt",
+      "DRAFT_REVIEW_SNAPSHOT_RECORD.json",
+      "DRAFT_REVIEW_SNAPSHOT_RECORD.md"
+    ],
+    "snapshot_record_json_sha256": "c67a293e7d2ebc2f401a3e8bb8cb5f9f67de0196b03c8a47dfb770fa4ce08fea",
+    "snapshot_record_md_sha256": "811e4e026d0c25dd3c2c5b2497604b597945f46c81688fd663d7678bba2fd46d",
+    "reconciliation": "207_PAYLOAD_PLUS_3_FREEZE_CONTROLS_EQUALS_210_PHYSICAL"
+  },
+  "clean_extraction_equality": {
+    "archive_files": 210,
+    "expanded_files": 210,
+    "archive_only": 0,
+    "expanded_only": 0,
+    "byte_mismatches": 0,
+    "result": "PASS_210_OF_210_BYTE_EQUAL"
+  },
+  "freeze_lineage": {
+    "validated_implementation_commit": "daa10387e073952b823afde9b681e602cb70c7b8",
+    "validated_implementation_tree": "4fa3b622d2b4f82d6423195bdf36c5af01fa95e4",
+    "assembly_commit": "22ba2774a916d0c1df887d8dc4fe39538b95e67f",
+    "assembly_tree": "689bd800b7fefafb72cae4ecb9e4d6c3cc7202f6",
+    "assembly_parent": "daa10387e073952b823afde9b681e602cb70c7b8",
+    "freeze_commit": "52ec3c697dd731fd7e3b3a624333975ed1477d30",
+    "freeze_tree": "c74c6aa747311eec333b1210ce687934c120f51b",
+    "freeze_parent": "22ba2774a916d0c1df887d8dc4fe39538b95e67f",
+    "freeze_commit_subject": "Freeze Stage 2A Candidate 004 for review",
+    "freeze_record_json_sha256": "f1a26a69eab472a1ebd67b0f42f2ed2acb9827ca71f183f60ac44e1327500e23",
+    "freeze_record_md_sha256": "735936806d0b42f3d0e78c3f2fbb8088286bdb9ee0dfce02e59bc7d46c732e49",
+    "lineage_result": "PASS_LINEAR_IMPLEMENTATION_ASSEMBLY_FREEZE"
+  },
+  "candidate_identity": {
+    "candidate_attempt": 4,
+    "review_attempt": 4,
+    "package_path": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-004",
+    "archive_root": "ES-PKG-2026-004-V003-CANDIDATE-004/",
+    "distinct_from_candidate_003": true,
+    "identity_result": "PASS_DISTINCT_FOURTH_CANDIDATE"
+  },
+  "predecessor_failed_archives": [
+    {
+      "attempt": 2,
+      "path": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+      "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+      "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "physical_files": 111,
+      "zip_crc": "PASS",
+      "preservation": "BYTE_FOR_BYTE_UNCHANGED"
+    },
+    {
+      "attempt": 3,
+      "path": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip",
+      "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+      "physical_files": 124,
+      "zip_crc": "PASS",
+      "equal_to_original_candidate_003_freeze": true,
+      "preservation": "BYTE_FOR_BYTE_UNCHANGED"
+    }
+  ],
+  "predecessor_reuse": {
+    "treatment": "CORROBORATIVE_ONLY_NOT_CONTROLLING",
+    "lifecycle_predecessor": {
+      "immutable_source": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003/STAGE2A_FOUNDATION_VALIDATION.json",
+      "immutable_artifact_sha256": "7e03815edf4c3ec8293d480029908e1b92286245f2c670f27d0d0756ff4315c7",
+      "containing_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "score": "16/16",
+      "source_commit": "83ccfac2bdeb0615e8818ffcbde03337d429dba5",
+      "controlling_for_candidate_004": false
+    },
+    "dependency_predecessor": {
+      "immutable_source": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003/BACKEND_BOOTSTRAP_VALIDATION.json",
+      "immutable_artifact_sha256": "be248999b1b320afc9eaea18224d42bd102877c77ad6d9f27916230dfe1f4a70",
+      "containing_manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "artifact_count": 127,
+      "normalized_inventory_sha256": "484d363380c4cdd8afa8765234e32d82d12157e1c1323b51bc15aaf94576b586",
+      "inventory_text_sha256": "450e5933a3bb34ca2ad81fd5c62332006369ca4cd45ba510864406aaa23c7298",
+      "controlling_for_candidate_004": false
+    },
+    "current_controlling_reruns": {
+      "implementation_commit": "daa10387e073952b823afde9b681e602cb70c7b8",
+      "lifecycle": "PASS_16_OF_16",
+      "dependency": "PASS_127_ARTIFACTS",
+      "dependency_failures": 0
+    },
+    "result": "PASS_REUSE_BOUNDARY_ACCURATE"
+  },
+  "residue_separation": {
+    "segregated_review_mongo": {
+      "classification": "SEGREGATED_REVIEW_TEMPORARY_PROCESS_RESIDUE",
+      "process": "mongod",
+      "pid": 62766,
+      "status": "CONTAINED_TERMINATED_PORT_CLEARED",
+      "database_or_orchestration_validation_accepted_while_active": false,
+      "affected_results": "FIRST_FAILED_REVIEW_SNAPSHOT_ONLY",
+      "final_rerun": "ALL_DATABASE_AND_ORCHESTRATION_VALIDATION_RERUN_AFTER_PORT_CLEARANCE"
+    },
+    "runtime_selector": {
+      "classification": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+      "status": "OPEN_BLOCKING_RUNTIME_LIMITATION",
+      "technical_implementation_failure": false,
+      "causal_relationship_to_mongo_residue": "NOT_ESTABLISHED_DO_NOT_CONFLATE"
+    },
+    "controlled_identity_lsof_probe": {
+      "classification": "CONTROLLED_IDENTITY_PROBE_TEMPORARY_PROCESS_RESIDUE",
+      "process": "/usr/sbin/lsof",
+      "pids": [49706, 51198],
+      "listener": false,
+      "application_or_database_process_terminated": false,
+      "repository_or_sealed_files_changed": false,
+      "affected_results": "ATTEMPT_006_DISCARDED_AND_RERUN",
+      "causal_relationship_to_mongo_or_runtime_selector": "NOT_ATTRIBUTED_SEPARATE_EVENT"
+    },
+    "source_payload_hash_equality": {
+      "mongo_json_sha256": "b3f8b238e6f71e0c3c9d7908b663465136e5fdd46ba75b42d7be6b3ebb87bde4",
+      "runtime_selector_json_sha256": "2a296c0256346425c21008082861d3375569089c5473bf705ce289395c3179ae",
+      "lsof_probe_json_sha256": "cb3de69c298fa203ea3366ff626567b61f55768310b4fe87386815619e748520",
+      "all_source_payload_copies_equal_source": true
+    },
+    "result": "PASS_THREE_DISTINCT_EVENTS_NOT_CONFLATED"
+  },
+  "findings": [
+    {
+      "finding_id": "CUST-004-001",
+      "severity": "INFO",
+      "status": "PASS",
+      "title": "Candidate archive, manifest, and expanded directory reconcile exactly"
+    },
+    {
+      "finding_id": "CUST-004-002",
+      "severity": "INFO",
+      "status": "PASS",
+      "title": "Predecessor failed archives remain byte-for-byte unchanged"
+    },
+    {
+      "finding_id": "CUST-004-003",
+      "severity": "INFO",
+      "status": "PASS",
+      "title": "Predecessor evidence is corroborative only and current reruns control Candidate 004"
+    },
+    {
+      "finding_id": "CUST-004-004",
+      "severity": "INFO",
+      "status": "PASS",
+      "title": "Mongo review residue, runtime selector limitation, and lsof probe residue remain separate"
+    }
+  ],
+  "discrepancies": [],
+  "scope_limits": [
+    "No services or runtime workflows were started by the custodian review.",
+    "This disposition covers byte integrity, provenance, reuse boundaries, and evidence classification only.",
+    "It does not close F-0001, authorize execution, or provide external assurance.",
+    "Segregated and adversarial review remain separate review functions."
+  ],
+  "files_written": [
+    "stage2a/review_attempts/attempt-004/CUSTODIAN_REVIEW.json",
+    "stage2a/review_attempts/attempt-004/CUSTODIAN_REVIEW.md"
+  ],
+  "services_started": false
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "STAGE2A_SEGREGATED_REREVIEW_ATTEMPT_003",
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-003",
+  "review_function": "SEGREGATED_REVIEW",
+  "result": "REMEDIATION_VERIFIED_PENDING_CONTROLLED_RECONCILIATION",
+  "technical_findings": {"P0": 0, "P1": 0, "P2": 0},
+  "package_validation": "PASS_23_OF_23",
+  "payload_verification": "121_OF_121_PASS",
+  "physical_files": 124,
+  "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+  "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+  "five_blocker_assessment": "TECHNICALLY_VERIFIED_BY_SEGREGATED_FUNCTION",
+  "self_closed": false,
+  "services_started": false,
+  "files_modified": false,
+  "runtime_selector": "OPEN_BLOCKING_RUNTIME_LIMITATION"
+}

@@ -1,0 +1,15 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "business_workflows_executed": 0,
+  "cp3_suites_executed": 0,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "f0001": "F0001_REMAINS_OPEN_BLOCKING",
+  "f0002": "F0002_CLOSED_BY_FOUNDER_AUTHORITY_FOR_IMMUTABLE_BASELINE_MATERIALIZATION",
+  "golden_paths_executed": 0,
+  "independently_verified_gaps": 0,
+  "package_id": "ES-PKG-2026-004-V003",
+  "primary_blocked_readiness_cause": "RUNTIME_AGENT_TYPE_SELECTOR_UNAVAILABLE",
+  "principal_disposition": "STAGE2A_EXECUTION_FOUNDATION_REMEDIATION_INCOMPLETE",
+  "status": "CANDIDATE_PENDING_SEGREGATED_AND_ADVERSARIAL_REREVIEW",
+  "technical_candidate_gaps": 9
+}

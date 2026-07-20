@@ -1,0 +1,68 @@
+{
+  "assurance": "NOT_EXTERNALLY_ASSURED",
+  "blocker_results": [
+    {
+      "blocker": "PACKAGED_VALIDATOR_ROOT_RESOLUTION_DEFECT",
+      "finding_id": "ES-ADV-V003-R2-F-0004",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "TRACEABILITY_MATRIX_MAPPING_INSUFFICIENTLY_SPECIFIC",
+      "finding_id": "ES-ADV-V003-R2-F-0003",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "PROVIDER_STARTUP_ATTEMPT_MEASUREMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0001",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "EVIDENCE_SEMANTIC_AND_REDACTION_ENFORCEMENT_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0002",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    },
+    {
+      "blocker": "PROCESS_IDENTITY_COMMAND_AND_PROCESS_GROUP_VERIFICATION_INSUFFICIENT",
+      "finding_id": "ES-ADV-V003-R2-F-0005",
+      "status": "REMEDIATED_PENDING_REREVIEW"
+    }
+  ],
+  "candidate_attempt": 5,
+  "candidate_id": "ES-PKG-2026-004-V003-CANDIDATE-005",
+  "distinct_from_failed_candidate": true,
+  "execution": "EXECUTION_NOT_AUTHORIZED",
+  "failed_candidate_unchanged": true,
+  "failed_candidates": [
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_002_FAILED.zip",
+      "archive_sha256": "6f984649f8465e3410d95deaf9ece76f642bb0ab70eddb89252a858cc0b470b4",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003",
+      "manifest_sha256": "e8a65076f1ed4b548223c8f158a0ae930fba85c041763a9ae972b69802e7a45b",
+      "payload_files": 108,
+      "physical_files": 111,
+      "unchanged": true
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_003_FAILED.zip",
+      "archive_sha256": "86d87ca6d289f9ca3b3b3c48e565781469a553d8219b0c8a720b60aebf034ec0",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-003",
+      "manifest_sha256": "f7bd73c7f28b3139f68fc0cd6d6af9d260a16f6ae8292425a24c91c6e832f4bc",
+      "payload_files": 121,
+      "physical_files": 124,
+      "unchanged": true
+    },
+    {
+      "archive": "outputs/ES-PKG-2026-004-V003_REVIEW_ATTEMPT_004_FAILED.zip",
+      "archive_sha256": "7d209ec231f9d8a0ad04809f7d8efd45630534ea24875042ae5b6893c16e7c0c",
+      "candidate_directory": "docs/implementation/STAGE_2A_EXECUTION_FOUNDATION/ES-PKG-2026-004-V003-CANDIDATE-004",
+      "manifest_sha256": "927cad3b2b8142188e2e9cce3a069fd121361f2ddf489ba7c5fc9d9d51af591f",
+      "payload_files": 207,
+      "physical_files": 210,
+      "unchanged": true
+    }
+  ],
+  "freeze_commit": "RECORDED_EXTERNALLY_AFTER_BYTE_FREEZE_TO_AVOID_CIRCULAR_SELF_REFERENCE",
+  "package_id": "ES-PKG-2026-004-V003",
+  "packaging_commit": "edd8ac0a59c9c0fce4408538e8596b10a9a97428",
+  "validated_implementation_commit": "edd8ac0a59c9c0fce4408538e8596b10a9a97428"
+}

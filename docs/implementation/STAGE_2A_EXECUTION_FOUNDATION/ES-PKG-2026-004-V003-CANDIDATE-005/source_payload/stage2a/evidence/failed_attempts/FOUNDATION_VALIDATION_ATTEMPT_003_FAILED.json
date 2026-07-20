@@ -1,0 +1,21 @@
+{
+  "attempt_id": "FOUNDATION_VALIDATION_ATTEMPT_003_FAILED",
+  "implementation_commit": "4ca25b630ec5d7cec0e456ac1647c6b6a0cc0c14",
+  "failure_stage": "DISPOSABLE_SOURCE_RECOVERY_CHECKOUT",
+  "failure_class": "BOUNDED_TIMEOUT_TOO_SHORT",
+  "cause": "the full-worktree checkout exceeded the 30-second bounded timeout",
+  "scope_violation": false,
+  "production_access_count": 0,
+  "provider_attempt_count": 0,
+  "live_data_access_count": 0,
+  "results_accepted": false,
+  "termination": {
+    "application_pid": 11220,
+    "datastore_pid": 11215,
+    "orchestrator_stop": "PASS_BOTH_VERIFIED_OWNED_GROUPS_STOPPED",
+    "controlled_ports_closed": true,
+    "runtime_purge": "PASS_RUNTIME_ABSENT"
+  },
+  "remediation": "sparse-checkout only the tested fixture path, retain bounded 120-second checkout and restore timeouts, and add validator emergency cleanup",
+  "execution": "EXECUTION_NOT_AUTHORIZED"
+}

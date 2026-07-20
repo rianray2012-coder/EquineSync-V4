@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import traceability_contract as contract
-from validate_stage2a_package import csv_parity_errors, load_source_module, record_check, traceability_errors
+from validate_stage2a_package import csv_parity_errors, record_check, traceability_errors
 
 
 class TraceabilityContractTests(unittest.TestCase):
@@ -134,13 +134,6 @@ class TraceabilityContractTests(unittest.TestCase):
         record_check(checks, seen, "MV-X", True, {})
         with self.assertRaisesRegex(RuntimeError, "duplicate validation check identifier"):
             record_check(checks, seen, "MV-X", True, {})
-
-    def test_detached_source_module_load_is_read_only(self):
-        module_path = self.root / "detached_module.py"
-        module_path.write_text("VALUE = 1\n", encoding="utf-8")
-        module = load_source_module(module_path, "stage2a_test_detached_module")
-        self.assertEqual(module.VALUE, 1)
-        self.assertFalse((self.root / "__pycache__").exists())
 
 
 if __name__ == "__main__":
