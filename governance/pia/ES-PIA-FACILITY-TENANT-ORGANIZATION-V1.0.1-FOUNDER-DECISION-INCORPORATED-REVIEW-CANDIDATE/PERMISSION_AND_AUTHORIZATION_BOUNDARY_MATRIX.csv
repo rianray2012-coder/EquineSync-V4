@@ -1,0 +1,23 @@
+action,owning_domain,required_authority_input,forbidden_inference,scope,audit_evidence
+Create/update Facility identity,Facility domain,Permission decision plus applicable Relationship/Agreement authority,Organization/facility association alone,Tenant + object + field,Audit mutation and actor chain
+Create Tenant,Facility/Tenant design; execution authority external,Explicit provisioning authority,"First user, payment, email domain, or Organization record",Platform provisioning scope,Dual control recommended
+Administer Tenant,Permission + Relationship,Current temporal relationship and explicit permission,Organization control link alone,Tenant,Context and permission version
+Associate Facility to Tenant,Facility domain,Explicit relationship/agreement evidence and permission,Shared address or staff,Impacted tenants,Both sides and effective time
+Manage facility topology,Facility domain,Scoped permission,Role label,Tenant + facility + area,Prior/new topology
+View sensitive location/security details,Permission + Privacy,Minimum-necessary field permission,Facility membership,Tenant + facility + field,Read audit for high-risk fields
+Publish facility projection,Search/Privacy + Facility source,"Competent actor, approved fields, and permission",Facility active state,Projection,Publish/revoke audit
+Switch active context,Identity/Permission,Eligible relationship and permission in target context,Prior access or shared device,Session + target tenant/facility,Prior/new context event
+Suspend Tenant,Governed administrative workflow,Explicit high-impact permission and evidence,Billing status alone,Tenant,"Reason, approver, notice, enforcement"
+Transfer Facility,Facility + Relationship + Agreement,Approved topology change and downstream reconciliation,Lease/payment/property ownership alone,Facility + impacted tenants,No cascade invariant
+Merge duplicate Facility,Facility,Human-reviewed merge permission,Similarity score,Impacted tenant set,Lineage and reversal evidence
+Assert stewardship,Record Stewardship/Claims,Evidence submission and review,Contact/payment/possession,Subject + scope + period,Claim and outcome
+Manage staff/membership,Relationship domain,Relationship-owned workflow,Facility PIA,Tenant/facility relationship scope,Facility stores reference only
+Grant permission,Permission domain,Permission-owned workflow,"Facility, lease, payment, agreement, or role by itself",Explicit resource/action/field/purpose/time,Decision explanation
+Support access,Identity/Permission/Security,"Ticket/incident, narrow scope, time limit",Support role alone,Tenant + purpose,Human actor never hidden
+Offline write,Permission/Resilience/domain owner,Unexpired authorization snapshot and conflict-safe mutation,Cached role or stale context,Tenant + resource,Sync result and rejection
+Cross-tenant search,Search/Privacy,Separately authorized function,Shared vendor/index/facility,Purpose-specific exception,Anti-enumeration and review
+Archive records,Record Stewardship,Retention/disposition authority,Facility closure alone,Record class + legal hold,Preservation evidence
+Complete horse-first onboarding,Onboarding orchestration plus owning domains,Authenticated principal and explicit minimum Tenant provisioning authority,"Facility, Organization, Barn, Business, stewardship, membership, or permission",Principal + new Tenant context + horse record,"Purpose, seed records, absence of optional entities, authority_conferred=false"
+Associate Facility later,Facility plus Relationship/Agreement,Explicit temporal association evidence and separately evaluated permission,"Shared address, barn name, boarding payment, contact, or onboarding history",Tenant + Facility + purpose + period,"Prior/new association, actor, evidence, permission outcome"
+Associate Organization later,Organization Identity plus Relationship,"Real Organization assertion, authority evidence, temporal relationship","Email domain, payment account, shared user, or provider type",Organization + Tenant + purpose + period,"Identity provenance, relationship, actor, separate access decision"
+Grant provider capability,Permission + Agreement + Organization,"Explicit capability, Tenant, purpose, period, agreement, accountable actor",Provider or vendor classification,Tenant + optional Facility + capability + period,"Grant, use, expiry/revocation, human actor"

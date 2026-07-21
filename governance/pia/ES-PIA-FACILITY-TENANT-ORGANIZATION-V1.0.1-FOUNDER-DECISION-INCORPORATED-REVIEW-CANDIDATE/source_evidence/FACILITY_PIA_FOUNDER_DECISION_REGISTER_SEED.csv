@@ -1,0 +1,19 @@
+decision_id,question
+FAC-FD-001,"Define Facility, Tenant, Organization, Barn, and Business."
+FAC-FD-002,Is Tenant the strict application data-isolation boundary?
+FAC-FD-003,"May one organization control multiple tenants, and under what evidence?"
+FAC-FD-004,May one physical facility be associated with multiple tenants?
+FAC-FD-005,What facility-area hierarchy is controlling?
+FAC-FD-006,Which organization types are first-class?
+FAC-FD-007,"What lifecycle states apply to facility, tenant, and organization?"
+FAC-FD-008,"How are transfer, merger, split, closure, suspension, and archival controlled?"
+FAC-FD-009,How is active tenant/facility context selected and audited?
+FAC-FD-010,Which topology facts may Relationships and Authorization consume?
+FAC-FD-011,Are memberships and staff assignments exclusively Relationship-domain facts?
+FAC-FD-012,What evidence establishes stewardship without treating payment/contact status as authority?
+FAC-FD-013,"How are providers, vendors, and service organizations represented?"
+FAC-FD-014,"What timezone, locale, and address rules apply?"
+FAC-FD-015,"How are duplicates detected, reviewed, and merged?"
+FAC-FD-016,What is publicly discoverable versus tenant-scoped?
+FAC-FD-017,What is the minimum first-user facility/tenant seed?
+FAC-FD-018,How are ambiguous legacy records quarantined?
