@@ -1,16 +1,27 @@
 {
   "adopted": false,
-  "base_archive_sha256": "caedeb798e5ebf337c077720ac6d9204f178110cb5e4900767a22c93c2808df3",
-  "base_package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0",
-  "base_package_manifest_sha256": "2a2fe7fef3d266e6f055872d6dcf94328ca5c96c128efc6439f3ba3e561ba1c5",
+  "application_or_service_started": false,
   "branch": "codex/facility-pia-founder-decisions-and-structured-review-v1",
-  "disposition": "FACILITY_PIA_FOUNDER_DECISIONS_INCORPORATED_READY_FOR_FRESH_STRUCTURED_REVIEW",
-  "file_count_excluding_manifest_and_checksums": 40,
+  "corrected_unverified_findings": {
+    "P1": 1
+  },
+  "custom_agent_execution_claimed": false,
+  "deployment_activity": false,
+  "design_freeze_commit": "78fd67a1687dd150f10a21d2507baab750f03490",
+  "design_freeze_tree": "2e6daf51752d680c76323b02d8d1a76a838ecd14",
+  "disposition": "FACILITY_PIA_REVIEW_BLOCKED_BY_PROVENANCE_OR_VALIDATION_FAILURE",
+  "enrollment_or_production_activity": false,
+  "file_count_excluding_manifest_and_checksums": 63,
   "files": [
     {
       "bytes": 21332,
       "path": "ACCEPTANCE_CRITERIA.csv",
       "sha256": "29df9e23c2841f564ba8ea47a9dd2611b6c8ea6914d423308d873d2483da442e"
+    },
+    {
+      "bytes": 1840,
+      "path": "ADVERSARIAL_CHALLENGE_REPORT.md",
+      "sha256": "0571c7faacf6bdd2d76a8b70a452a476a7a6a530ff33bcdfcf1e02c4f21135c5"
     },
     {
       "bytes": 2396,
@@ -33,9 +44,24 @@
       "sha256": "c495e2497fac98a539846f157bbfcaac047f163915206bce8c1f61fd13f81857"
     },
     {
+      "bytes": 2532,
+      "path": "CHANGE_MANIFEST.txt",
+      "sha256": "9492d162de84ed3fd6e1c1d3115ff6bfb8d92c6b0e9c2ace894a60b17dfeddb3"
+    },
+    {
+      "bytes": 2310,
+      "path": "CLAIM_TO_EVIDENCE_REGISTER.csv",
+      "sha256": "575887a4c441695f640d3cc60ef05632c814f266c9504d84f87d19e00b72dee6"
+    },
+    {
       "bytes": 1674,
       "path": "CONCURRENT_PACKAGE_RECONCILIATION.md",
       "sha256": "1fc89510a7b9fbb2a4627b99bc23bd5e58e78ed110bcc626c2c01eb9a59e2dfc"
+    },
+    {
+      "bytes": 861,
+      "path": "CROSS_AGENT_DISCREPANCY_REGISTER.csv",
+      "sha256": "bf37acc189453d4e6ca7f5d2f07633f8c9b6087f26c362e8fbdade53372014ce"
     },
     {
       "bytes": 4052,
@@ -48,14 +74,24 @@
       "sha256": "ea03557b8e2b713df35fdeac741d02e0a19fcb8f4bfc3b339a1267050ad92184"
     },
     {
+      "bytes": 1961,
+      "path": "DOMAIN_REVIEW_REPORT.md",
+      "sha256": "536a00914ea898ce99a9f82a68755c0bf730f07af936b359d9d83be7c3056102"
+    },
+    {
       "bytes": 1868,
       "path": "ENGINEERING_WORK_PACKAGE_REGISTER.csv",
       "sha256": "9eeecbe5102778c567a71d7b49382a38a95a51a2599a939cde1cd9890766236a"
     },
     {
-      "bytes": 11483,
+      "bytes": 3569,
+      "path": "EVIDENCE_CUSTODY_REPORT.md",
+      "sha256": "38d1795b5e28a2dd3adda7f4078ac94d447939f481055a622b78a2a416706096"
+    },
+    {
+      "bytes": 12109,
       "path": "EVIDENCE_MANIFEST.json",
-      "sha256": "afbf8f6fb0bde4f54c63eaec4e361438e70be66b61fa3db9aeaa528d8051b3b8"
+      "sha256": "c90922fd7af746f3fb16fc1820d5b96834f70702b1337d04a89552b51c09cf0f"
     },
     {
       "bytes": 5560,
@@ -68,24 +104,34 @@
       "sha256": "8c9a8ab39770c4f50f9a2dbc1bde4952bf096965f6097ac2be4779ed4935bfbc"
     },
     {
+      "bytes": 560,
+      "path": "FAILED_ATTEMPT_AND_RETRY_REGISTER.csv",
+      "sha256": "19a15b192fa4e8f0bb4b3837e3616313fcc5df3965f6b3547f40a0e7ac69c94d"
+    },
+    {
+      "bytes": 3130,
+      "path": "FINAL_STRUCTURED_REVIEW_DISPOSITION.md",
+      "sha256": "cdbaeb920b8ae95f87524dc62ac4b8ef3e4ed71ae32a1dc455522a358892e120"
+    },
+    {
       "bytes": 3241,
       "path": "FOUNDER_DECISION_INCORPORATION_PROVENANCE.md",
       "sha256": "995b68c98c0ca6804dd84378dc4a25935d3dc50bb174d2350920d38846130994"
     },
     {
-      "bytes": 34229,
+      "bytes": 34319,
       "path": "FOUNDER_DECISION_RECOMMENDATION_MATRIX.csv",
-      "sha256": "903009c7228916377c351996c9fbe855bb1513c5046aa9f0163d7f46acb79411"
+      "sha256": "7c8027f1462f8958ffc03f84551f18552ba278a87e16b66f716bd2844817ecdc"
     },
     {
-      "bytes": 43470,
+      "bytes": 43560,
       "path": "FOUNDER_DECISION_REGISTER.md",
-      "sha256": "87dcec3fa107399051649363c5d7e89abcdf10c39da8562e7290bf8917d7f172"
+      "sha256": "e4957b0c0e804ac1f58d0527812019fdd9cb77dd17b388975ee522ec03cad886"
     },
     {
-      "bytes": 12121,
+      "bytes": 12697,
       "path": "FOUNDER_DECISION_TRACEABILITY_MATRIX.csv",
-      "sha256": "e6cc05ade7b94c2ff3b23ba42e8f1bd1897600259febe1ffce360e95bfbe7e0b"
+      "sha256": "0f5352343a534d45a10d502e845f88c493413f87bc3dc970a1eb68a5830e9366"
     },
     {
       "bytes": 3055,
@@ -98,9 +144,19 @@
       "sha256": "ababc7421c3837fd9445ac608202c9e40690de0ec299ebe2f1dbbe3f5dc1fbab"
     },
     {
-      "bytes": 6241,
+      "bytes": 3100,
+      "path": "MACHINE_VALIDATION_REPORT.md",
+      "sha256": "049ea8283dc9a1ab6058e35900e9f19dffd03fe714a84c903de6cc39741a1be2"
+    },
+    {
+      "bytes": 3613,
+      "path": "OMISSION_REGISTER.csv",
+      "sha256": "8077a4c8ebf419c776e95e6944dd206c7d76037b260a979343ae79810d22c7ab"
+    },
+    {
+      "bytes": 10040,
       "path": "PACKAGE_FILE_INVENTORY.csv",
-      "sha256": "613ea101789b7f452241b65e7725bccd3ec3554bcffbc21f5e46f38929681322"
+      "sha256": "a81bedb2e8902edc2913bc913e175f4688cf8a40441240cabd1f2e8c766cf566"
     },
     {
       "bytes": 4360,
@@ -113,9 +169,9 @@
       "sha256": "d23bb4c5abda5df3c7e6dc285eb738d8e8eb240ea94ac4ac97dd02c401b49272"
     },
     {
-      "bytes": 124061,
+      "bytes": 125858,
       "path": "PIA_FACILITY_TENANT_ORGANIZATION_MACHINE_READABLE.json",
-      "sha256": "30601cca2bad6e93c5823feac764c6a7f03ca8fc79711ab44f172747baf801d6"
+      "sha256": "20b2bd174cc377b843f72e189ce9ac5636ec163597af217abf8a11fe576cf1f3"
     },
     {
       "bytes": 8316,
@@ -123,9 +179,9 @@
       "sha256": "33279b00b78ae5932e7c858cb1be815e702f37fb0a148fe22862c355eb31e714"
     },
     {
-      "bytes": 8982,
+      "bytes": 9706,
       "path": "PIA_PACKAGE_VALIDATOR.py",
-      "sha256": "2ae8693f39ac9ab6be05ad271d3e25d54e71969f55b1a818182b06e7abc714d7"
+      "sha256": "568a1cdb5fe0b199f0cd300067e7c3efa9e33d35af81d912c475a34cb50e75ce"
     },
     {
       "bytes": 18199,
@@ -138,9 +194,34 @@
       "sha256": "4ea177f9914b7aaa5bb7352de5ca4f24fae220800ac2057ce8e3cc5dc7ad8b6c"
     },
     {
-      "bytes": 3935,
+      "bytes": 3130,
+      "path": "REVIEW_DISPOSITION.md",
+      "sha256": "cdbaeb920b8ae95f87524dc62ac4b8ef3e4ed71ae32a1dc455522a358892e120"
+    },
+    {
+      "bytes": 803,
+      "path": "REVIEW_OUTPUT_INDEX.csv",
+      "sha256": "4a08723874b7ce01a244c0bf59962a67333d8c85a5b6eab9bbdd3f643eb41722"
+    },
+    {
+      "bytes": 4709,
       "path": "RISK_FINDING_DEVIATION_REGISTER.csv",
-      "sha256": "82f6ccfd5349f308dacf9a776349742e0b8685635be027cdca09bd8e1e218f07"
+      "sha256": "8681f7ff6ea69522e9b482414109dc27e8f8a12c008a10dac2d5c068b5bc14e0"
+    },
+    {
+      "bytes": 1451,
+      "path": "RUNTIME_PERMISSION_RECORDS.csv",
+      "sha256": "d4de2989b67eb198da5b9983cdd923063158e313b583462bac14c5efdd2c8b51"
+    },
+    {
+      "bytes": 968,
+      "path": "SCOPE_DENOMINATOR.csv",
+      "sha256": "374381c856b8cf862dba55a967eb75d56ef992860282cb460db4d960670a4a2c"
+    },
+    {
+      "bytes": 3158,
+      "path": "SEGREGATED_REVIEW_REPORT.md",
+      "sha256": "fe90bd110a1e8e2846cfb58caca076f602cbbcde808380440f7482da1e48b7da"
     },
     {
       "bytes": 1209,
@@ -163,14 +244,29 @@
       "sha256": "70aba76e6e58f6a0e33d97249acfbfb476ac683e275d6bca45c265d51fa2a158"
     },
     {
+      "bytes": 748,
+      "path": "STRUCTURED_REVIEW_CORRECTION_LOG.csv",
+      "sha256": "3c20b96db3716cf1ebb669c35b5cab614f0074033a1c24cba3e8eba2ccb7685d"
+    },
+    {
+      "bytes": 4359,
+      "path": "STRUCTURED_REVIEW_FINDINGS_REGISTER.csv",
+      "sha256": "f637f0727f21103225f8c1ee6c5b28c6659802dbd98e9b346eadbb7082d14007"
+    },
+    {
       "bytes": 4168,
       "path": "STRUCTURED_REVIEW_PLAN.md",
       "sha256": "a790a9b629fc93aa1656faca8ed480ad41271519f11d62985bfa8d95ea49be78"
     },
     {
-      "bytes": 12337,
+      "bytes": 13201,
       "path": "STRUCTURED_REVIEW_TRACEABILITY_MATRIX.csv",
-      "sha256": "e9e982d9cae6104d1120de561d98ace7dc81e9c353acecf7238776db867d2aa5"
+      "sha256": "2b431fce32f0f9cca002b917f0e5192c6d56cfcb2379b76be2f62fb0ecc3a16f"
+    },
+    {
+      "bytes": 2353,
+      "path": "SYNTHETIC_GOLDEN_PATH_REPORT.md",
+      "sha256": "2e48b120aa9ca0100fad2c44545ece4f94186ba6bf77dc5ac78c59b91d5ce2b9"
     },
     {
       "bytes": 27082,
@@ -178,9 +274,34 @@
       "sha256": "e3b50ea26c457204b54d9834cdd64496e06c45ba4978bd89e2585be292213998"
     },
     {
+      "bytes": 1291,
+      "path": "VALIDATION_COMMAND_LOG.txt",
+      "sha256": "90b22fb9c64a5977c52df22aa9a3777430cc73147465778f41fe4e42dee0792e"
+    },
+    {
+      "bytes": 9603,
+      "path": "VALIDATION_REPORT.json",
+      "sha256": "279c0b819bdfff33ea1b6332a3c0471e28f9d17f3c914521c2e0aabc1cc5cc07"
+    },
+    {
+      "bytes": 1442,
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "30c8bf3309c37e6eb405c79874f4173e4fb17bad07700b19a365372a6cb0e097"
+    },
+    {
+      "bytes": 1407,
+      "path": "WHAT_THIS_REVIEW_DID_NOT_ESTABLISH.md",
+      "sha256": "a6a6ed4f128ab479017071a271af3cb90b12a7a72d36ecb22530c2ac2e2c9e72"
+    },
+    {
       "bytes": 4359,
       "path": "WORKFLOW_REGISTER.md",
       "sha256": "3073503e1785eaed50a2dac5acadc9c2d7456a0fe86454a0b9c2bc4f0101bc54"
+    },
+    {
+      "bytes": 65239,
+      "path": "WORK_COMPLETENESS_LEDGER.csv",
+      "sha256": "bf49cadd7a8f2e966dd8f9305ab019bac604841b4e9226107308d09746555cca"
     },
     {
       "bytes": 674,
@@ -208,23 +329,35 @@
       "sha256": "bb348cc18cdfcf23702bf2e34c8d8d0f5c65161cc6b70dff6053e06c59b9163c"
     }
   ],
+  "formal_review_functions_completed": 0,
+  "formal_review_valid": false,
   "founder_approval": true,
   "founder_approval_scope": "DESIGN_DIRECTION_ONLY",
-  "founder_directive_sha256": "7bd8fa59f4720f261194f1148f4a0f19665f91700656e0632953e40079438ac4",
   "founder_disposition": "FAC-FD-001_THROUGH_FAC-FD-018_FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED",
   "identity_relationships_successor_founder_approved": false,
   "implementation_activity": false,
   "implementation_authority": false,
   "locked": false,
   "mandatory_exact_source_gap_count": 0,
+  "merged": false,
+  "migration_activity": false,
+  "open_findings": {
+    "P0": 0,
+    "P1": 4,
+    "P2": 2,
+    "P3": 1
+  },
   "package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE",
-  "package_run_id": "ES-PKG-2026-021-V101",
+  "package_revision": "1.0.1-R2",
+  "permission_control_result": "PERMISSION_CHECK_FAILED",
   "predecessor_commit": "b8f34aef390c5fec6f942a6253edf6acc9488c44",
+  "pull_request_created": false,
   "repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
   "review_cycle_id": "ES-REV-2026-021",
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "sealed_source_modification_count": 0,
-  "stage": "DESIGN_CANDIDATE_FROZEN_FOR_REVIEW",
+  "stage": "REVIEW_BLOCKED_FINAL_EVIDENCE_PACKAGE",
   "starting_commit": "a5cf78295ad43cde7f73e383b3d5e98a11000382",
+  "tag_created": false,
   "version": "1.0.1"
 }

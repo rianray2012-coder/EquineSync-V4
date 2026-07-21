@@ -1,0 +1,37 @@
+Review cycle: ES-REV-2026-021
+Package revision: 1.0.1-R2
+Formal ES-RA-04 role: NOT RUN - PERMISSION_CHECK_FAILED
+Environment: isolated temporary clone; parent unrestricted/danger-full-access; approval_policy=never
+Application/service startup: NONE
+
+RUN 1
+Command: python3 PIA_PACKAGE_VALIDATOR.py
+Exit code: 0
+Result: PASSED 21/21
+
+SEMANTIC PARITY CHECK
+Procedure: search non-sealed package content for FOUNDER_DECISION_REQUIRED and compare SOURCE_GAPS.csv with machine JSON
+Result: FAILED - ES-REV-2026-021-MV-F-0001
+First failure preserved: machine JSON retained FAC-SG-002 and FAC-SG-004 as FOUNDER_DECISION_REQUIRED
+
+CORRECTION
+Synchronized machine source_gaps to CSV; added MV-020A parity and MV-020B no-open-decision-status checks; advanced R1 to R2
+
+RUN 2
+Command: python3 PIA_PACKAGE_VALIDATOR.py
+Exit code: 1
+Result: FAILED 24/25
+Failure: CHANGE_MANIFEST.txt missing
+
+CORRECTION
+Created substantive CHANGE_MANIFEST.txt and regenerated inventory, manifest, and checksums
+
+RUN 3
+Command: python3 PIA_PACKAGE_VALIDATOR.py
+Exit code: 0
+Result: PASSED 25/25
+
+RUN 4 (after final validation-report update and manifest/checksum regeneration)
+Command: python3 PIA_PACKAGE_VALIDATOR.py
+Expected/recorded result: PASSED 25/25
+Formal independent verification: NOT RUN - PERMISSION_CHECK_FAILED

@@ -1,0 +1,54 @@
+PACKAGE: ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE
+REVIEW CYCLE: ES-REV-2026-021
+REVISION: 1.0.1-R2
+DESIGN FREEZE: 78fd67a1687dd150f10a21d2507baab750f03490
+DISPOSITION: FACILITY_PIA_REVIEW_BLOCKED_BY_PROVENANCE_OR_VALIDATION_FAILURE
+
+R1 PROVENANCE AND DESIGN INCORPORATION
+- Preserved the unchanged V1.0.0 candidate at a5cf78295ad43cde7f73e383b3d5e98a11000382.
+- Created a separate successor package.
+- Recorded FAC-FD-001 through FAC-FD-018 as FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED.
+- Added the mandatory FAC-FD-017 adaptive horse-first onboarding refinement.
+- Expanded the design population to 55 requirements, 55 acceptance criteria, 85 tests, 16 FAC-FD-017 cases, and 12 golden paths.
+- Preserved sealed source-evidence bytes and the separate Identity/Relationships review boundary.
+- Froze R1 at commit 78fd67a1687dd150f10a21d2507baab750f03490, tree 2e6daf51752d680c76323b02d8d1a76a838ecd14.
+
+R2 DOCUMENTARY CORRECTION
+- Corrected PIA_FACILITY_TENANT_ORGANIZATION_MACHINE_READABLE.json so FAC-SG-002 and FAC-SG-004 match the resolved Founder-design statuses in SOURCE_GAPS.csv.
+- Added MV-020A source-gap parity and MV-020B no-open-Founder-decision-status checks to PIA_PACKAGE_VALIDATOR.py.
+- Updated decision and traceability review status to REVIEW_BLOCKED_PERMISSION_CONTROL.
+- Added FAC-RISK-011 and FAC-RISK-012 without closing or accepting risk.
+
+R2 REVIEW EVIDENCE CREATED
+- SEGREGATED_REVIEW_REPORT.md
+- ADVERSARIAL_CHALLENGE_REPORT.md
+- DOMAIN_REVIEW_REPORT.md
+- MACHINE_VALIDATION_REPORT.md
+- SYNTHETIC_GOLDEN_PATH_REPORT.md
+- EVIDENCE_CUSTODY_REPORT.md
+- STRUCTURED_REVIEW_FINDINGS_REGISTER.csv
+- STRUCTURED_REVIEW_CORRECTION_LOG.csv
+- FINAL_STRUCTURED_REVIEW_DISPOSITION.md
+- REVIEW_DISPOSITION.md
+- RUNTIME_PERMISSION_RECORDS.csv
+- FAILED_ATTEMPT_AND_RETRY_REGISTER.csv
+- SCOPE_DENOMINATOR.csv
+- WORK_COMPLETENESS_LEDGER.csv
+- CLAIM_TO_EVIDENCE_REGISTER.csv
+- OMISSION_REGISTER.csv
+- CROSS_AGENT_DISCREPANCY_REGISTER.csv
+- REVIEW_OUTPUT_INDEX.csv
+- WHAT_THIS_REVIEW_DID_NOT_ESTABLISH.md
+- VALIDATION_COMMAND_LOG.txt
+- CHANGE_MANIFEST.txt
+
+FINALIZATION ARTIFACTS REGENERATED
+- PACKAGE_FILE_INVENTORY.csv
+- PACKAGE_MANIFEST.json
+- CHECKSUMS.sha256
+- CHECKSUM_MANIFEST.sha256
+- VALIDATION_REPORT.json
+- VALIDATION_REPORT.md
+
+AUTHORITY BOUNDARY
+Implementation authority remains false. No application code, database, schema, migration, startup, enrollment, production, PR, merge, tag, release, deployment, activation, adoption, or lock action occurred.
