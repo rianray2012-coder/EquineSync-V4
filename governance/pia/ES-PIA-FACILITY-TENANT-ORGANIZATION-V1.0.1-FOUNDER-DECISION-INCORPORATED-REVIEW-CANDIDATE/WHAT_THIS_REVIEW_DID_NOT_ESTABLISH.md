@@ -1,16 +1,17 @@
 # What This Review Did Not Establish
 
-This package does not establish:
+ES-REV-2026-022 did not establish:
 
-- a valid custom-agent or formal equivalent-role review run;
-- complete segregated, adversarial, domain, machine, evidence-custody, or synthetic-specification review;
-- absence of undiscovered P0, P1, P2, or P3 defects;
-- independent verification or re-performance of the documentary correction;
-- executable application, API, database, event, audit, offline, synchronization, or authorization behavior;
-- implementation coverage, environment coverage, actor-combination coverage, or failure-path coverage;
-- legal, privacy, security, safeguarding, accounting, or external professional certification;
-- correctness of the pending successor Identity and Relationships text or any claim that it is Founder-approved;
-- implementation authority, migration authority, deployment authority, operational activation, enrollment, or production readiness;
-- Founder adoption, constitutional lock, risk acceptance, waiver, or finding closure.
+- a valid segregated, adversarial, domain, machine, evidence-custody, or synthetic documentary review;
+- independent verification of FAC-FD-001 through FAC-FD-018 incorporation;
+- completeness or internal consistency of 55 requirements, 55 criteria, 85 tests, or 16 FAC-FD-017 cases;
+- substantive adequacy of Tenant, Facility, Organization, Barn, Business, membership, stewardship, relationship, authority, or provider-capability boundaries;
+- privacy, authorization, stale-context, offline revocation, shared-facility, duplicate, quarantine, lifecycle, or public-projection effectiveness;
+- machine-finding closure;
+- resolution or correct adoption impact of the inherited P1, P2, or P3 findings;
+- fresh review of the 12 documentary golden paths;
+- executable behavior, implementation coverage, runtime reliability, production readiness, or absence of undiscovered defects;
+- Founder adoption, constitutional lock, implementation authorization, release, deployment, or activation;
+- approval of the current Identity and Relationships successor text.
 
-Items sampled: none; formal review populations were blocked rather than sampled. Environments tested: an isolated temporary documentary clone only. Application and services were not started. The decisive revalidation trigger is a compliant permission environment or exact Founder exception followed by fresh role execution. Any package byte change creates another revision and requires rerun analysis.
+No sampling occurred. The formal populations were blocked before review. The only affirmative results are the exact R2 intake identity checks and the measured permission-gate failure. All substantive procedures require a new compliant runtime and fresh role execution.

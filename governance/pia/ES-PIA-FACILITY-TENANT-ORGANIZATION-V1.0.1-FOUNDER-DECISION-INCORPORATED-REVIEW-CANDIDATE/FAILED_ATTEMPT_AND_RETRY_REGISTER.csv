@@ -1,4 +1,7 @@
 attempt_id,requested_role,result,substantive_output_used,files_changed,network_or_connector_use,retry,reason
-ES-REV-2026-021-ATT-001,ES-RA-02,INTERRUPTED_PERMISSION_CHECK_FAILED,NO,0,NONE_REPORTED,NOT_AUTHORIZED,Unrestricted/never parent mode and missing pre-spawn PASS/exception
-ES-REV-2026-021-ATT-002,ES-RA-03,INTERRUPTED_PERMISSION_CHECK_FAILED,NO,0,NONE_PRESERVED,NOT_AUTHORIZED,Same parent permission conflict
-ES-REV-2026-021-ATT-003,ES-RA-06-FTO,INTERRUPTED_PERMISSION_CHECK_FAILED,NO,0,NONE_PRESERVED,NOT_AUTHORIZED,Same parent permission conflict
+ES-REV-2026-022-ATT-001,ES-RA-02,NOT_STARTED_PERMISSION_CHECK_FAILED,NO,0_BY_ROLE,NONE_BY_ROLE,NOT_AUTHORIZED_IN_CURRENT_RUNTIME,pre-spawn FAIL: unrestricted/never/network-enabled parent; unmeasurable effective role mode; no exception
+ES-REV-2026-022-ATT-002,ES-RA-03,NOT_STARTED_PERMISSION_CHECK_FAILED,NO,0_BY_ROLE,NONE_BY_ROLE,NOT_AUTHORIZED_IN_CURRENT_RUNTIME,pre-spawn FAIL: unrestricted/never/network-enabled parent; unmeasurable effective role mode; no exception
+ES-REV-2026-022-ATT-003,ES-RA-06,NOT_STARTED_PERMISSION_CHECK_FAILED,NO,0_BY_ROLE,NONE_BY_ROLE,NOT_AUTHORIZED_IN_CURRENT_RUNTIME,pre-spawn FAIL: unrestricted/never/network-enabled parent; unmeasurable effective role mode; no exception
+ES-REV-2026-022-ATT-004,ES-RA-04,NOT_STARTED_PERMISSION_CHECK_FAILED,NO,0_BY_ROLE,NONE_BY_ROLE,NOT_AUTHORIZED_IN_CURRENT_RUNTIME,pre-spawn FAIL: unrestricted/never/network-enabled parent; unmeasurable effective role mode; no exception
+ES-REV-2026-022-ATT-005,ES-RA-05,NOT_STARTED_PERMISSION_CHECK_FAILED,NO,0_BY_ROLE,NONE_BY_ROLE,NOT_AUTHORIZED_IN_CURRENT_RUNTIME,pre-spawn FAIL: unrestricted/never/network-enabled parent; unmeasurable effective role mode; no exception
+ES-REV-2026-022-ATT-006,ES-RA-07,NOT_STARTED_PERMISSION_CHECK_FAILED,NO,0_BY_ROLE,NONE_BY_ROLE,NOT_AUTHORIZED_IN_CURRENT_RUNTIME,pre-spawn FAIL: unrestricted/never/network-enabled parent; unmeasurable effective role mode; no exception
