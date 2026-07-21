@@ -1,0 +1,49 @@
+role_id,canonical_role,permission_category,authorized_requirement,configured_role_value,observed_parent_or_host_value,classification,execution_eligible,evidence
+ES-RA-02,Segregated Review Agent,configured_sandbox,read-only,read-only,danger-full-access,EXACT_MATCH,NO,.codex agent configuration matches but parent override is broader
+ES-RA-02,Segregated Review Agent,effective_sandbox,read-only,read-only,danger-full-access,BROADER_THAN_AUTHORIZED,NO,live parent runtime context
+ES-RA-02,Segregated Review Agent,approval_policy,on-request,on-request,never,BROADER_THAN_AUTHORIZED,NO,live parent runtime context
+ES-RA-02,Segregated Review Agent,candidate_access,FROZEN_READ_ONLY,FROZEN_READ_ONLY,unrestricted filesystem,BROADER_THAN_AUTHORIZED,NO,tool matrix and host filesystem profile
+ES-RA-02,Segregated Review Agent,repository_modification,frozen read-only candidate and assigned output only,frozen read-only candidate and assigned output only,unrestricted filesystem and repository write commands available,BROADER_THAN_AUTHORIZED,NO,tool matrix and host tool exposure
+ES-RA-02,Segregated Review Agent,shell,none by default,none by default,unrestricted shell available,BROADER_THAN_AUTHORIZED,NO,tool matrix and live command interface
+ES-RA-02,Segregated Review Agent,network,OFF,OFF,enabled,BROADER_THAN_AUTHORIZED,NO,profile and host runtime context
+ES-RA-02,Segregated Review Agent,plugins_and_mcp,OFF,not role-scoped,5 MCP servers and 14 plugins enabled,BROADER_THAN_AUTHORIZED,NO,codex mcp list and codex plugin list
+ES-RA-02,Segregated Review Agent,credential_access,prohibited,prohibited,GitHub bearer configuration and Cloudflare OAuth capability present,BROADER_THAN_AUTHORIZED,NO,codex mcp list with values masked
+ES-RA-02,Segregated Review Agent,production_access,absent,absent_by_instruction,absence not host-enforced or provable,UNVERIFIABLE,NO,unrestricted host and remote service capability
+ES-RA-02,Segregated Review Agent,runtime_role_identity,non-null ES-RA-02 authoritative identity,project config exists,no native selector or authoritative loaded identity record,UNVERIFIABLE,NO,use_agent_identity false and selector absent
+ES-RA-02,Segregated Review Agent,output_path_isolation,assigned output only,assigned output named procedurally,no host-enforced path boundary,UNVERIFIABLE,NO,danger-full-access parent profile
+ES-RA-03,Adversarial Challenge Agent,configured_sandbox,read-only,read-only,danger-full-access,EXACT_MATCH,NO,.codex agent configuration matches but parent override is broader
+ES-RA-03,Adversarial Challenge Agent,effective_sandbox,read-only,read-only,danger-full-access,BROADER_THAN_AUTHORIZED,NO,live parent runtime context
+ES-RA-03,Adversarial Challenge Agent,approval_policy,on-request,on-request,never,BROADER_THAN_AUTHORIZED,NO,live parent runtime context
+ES-RA-03,Adversarial Challenge Agent,candidate_access,FROZEN_READ_ONLY,FROZEN_READ_ONLY,unrestricted filesystem,BROADER_THAN_AUTHORIZED,NO,tool matrix and host filesystem profile
+ES-RA-03,Adversarial Challenge Agent,repository_modification,frozen read-only candidate and assigned output only,frozen read-only candidate and assigned output only,unrestricted filesystem and repository write commands available,BROADER_THAN_AUTHORIZED,NO,tool matrix and host tool exposure
+ES-RA-03,Adversarial Challenge Agent,shell,none by default,none by default,unrestricted shell available,BROADER_THAN_AUTHORIZED,NO,tool matrix and live command interface
+ES-RA-03,Adversarial Challenge Agent,network,OFF,OFF,enabled,BROADER_THAN_AUTHORIZED,NO,profile and host runtime context
+ES-RA-03,Adversarial Challenge Agent,plugins_and_mcp,OFF,not role-scoped,5 MCP servers and 14 plugins enabled,BROADER_THAN_AUTHORIZED,NO,codex mcp list and codex plugin list
+ES-RA-03,Adversarial Challenge Agent,credential_access,prohibited,prohibited,GitHub bearer configuration and Cloudflare OAuth capability present,BROADER_THAN_AUTHORIZED,NO,codex mcp list with values masked
+ES-RA-03,Adversarial Challenge Agent,production_access,absent,absent_by_instruction,absence not host-enforced or provable,UNVERIFIABLE,NO,unrestricted host and remote service capability
+ES-RA-03,Adversarial Challenge Agent,runtime_role_identity,non-null ES-RA-03 authoritative identity,project config exists,no native selector or authoritative loaded identity record,UNVERIFIABLE,NO,use_agent_identity false and selector absent
+ES-RA-03,Adversarial Challenge Agent,output_path_isolation,assigned output only,assigned output named procedurally,no host-enforced path boundary,UNVERIFIABLE,NO,danger-full-access parent profile
+ES-RA-04,Machine Validation Agent,configured_sandbox,workspace-write,workspace-write,danger-full-access,EXACT_MATCH,NO,.codex agent configuration matches but parent override is broader
+ES-RA-04,Machine Validation Agent,effective_sandbox,bounded workspace-write,workspace-write,danger-full-access,BROADER_THAN_AUTHORIZED,NO,live parent runtime context
+ES-RA-04,Machine Validation Agent,approval_policy,on-request,on-request,never,BROADER_THAN_AUTHORIZED,NO,live parent runtime context
+ES-RA-04,Machine Validation Agent,candidate_access,FROZEN_READ_ONLY,FROZEN_READ_ONLY,unrestricted filesystem,BROADER_THAN_AUTHORIZED,NO,tool matrix and host filesystem profile
+ES-RA-04,Machine Validation Agent,repository_modification,validation evidence directory write-only,validation evidence directory write-only,unrestricted filesystem and repository write commands available,BROADER_THAN_AUTHORIZED,NO,tool matrix and host tool exposure
+ES-RA-04,Machine Validation Agent,shell,allowlisted deterministic commands,allowlisted deterministic commands,unrestricted shell available,BROADER_THAN_AUTHORIZED,NO,tool matrix and live command interface
+ES-RA-04,Machine Validation Agent,network,OFF,OFF,enabled,BROADER_THAN_AUTHORIZED,NO,profile and host runtime context
+ES-RA-04,Machine Validation Agent,plugins_and_mcp,OFF,not role-scoped,5 MCP servers and 14 plugins enabled,BROADER_THAN_AUTHORIZED,NO,codex mcp list and codex plugin list
+ES-RA-04,Machine Validation Agent,credential_access,prohibited,prohibited,GitHub bearer configuration and Cloudflare OAuth capability present,BROADER_THAN_AUTHORIZED,NO,codex mcp list with values masked
+ES-RA-04,Machine Validation Agent,production_access,absent,absent_by_instruction,absence not host-enforced or provable,UNVERIFIABLE,NO,unrestricted host and remote service capability
+ES-RA-04,Machine Validation Agent,runtime_role_identity,non-null ES-RA-04 authoritative identity,project config exists,no native selector or authoritative loaded identity record,UNVERIFIABLE,NO,use_agent_identity false and selector absent
+ES-RA-04,Machine Validation Agent,output_path_isolation,validation evidence directory only,output path named procedurally,no host-enforced role path boundary,UNVERIFIABLE,NO,danger-full-access parent profile
+ES-RA-05,Evidence Custodian,configured_sandbox,workspace-write,workspace-write,danger-full-access,EXACT_MATCH,NO,.codex agent configuration matches but parent override is broader
+ES-RA-05,Evidence Custodian,effective_sandbox,bounded workspace-write,workspace-write,danger-full-access,BROADER_THAN_AUTHORIZED,NO,live parent runtime context
+ES-RA-05,Evidence Custodian,approval_policy,on-request,on-request,never,BROADER_THAN_AUTHORIZED,NO,live parent runtime context
+ES-RA-05,Evidence Custodian,candidate_access,FROZEN_READ_ONLY,FROZEN_READ_ONLY,unrestricted filesystem,BROADER_THAN_AUTHORIZED,NO,tool matrix and host filesystem profile
+ES-RA-05,Evidence Custodian,repository_modification,evidence directories only,evidence directories only,unrestricted filesystem and repository write commands available,BROADER_THAN_AUTHORIZED,NO,tool matrix and host tool exposure
+ES-RA-05,Evidence Custodian,shell,deterministic custody utilities only,deterministic custody utilities only,unrestricted shell available,BROADER_THAN_AUTHORIZED,NO,tool matrix and live command interface
+ES-RA-05,Evidence Custodian,network,OFF,OFF,enabled,BROADER_THAN_AUTHORIZED,NO,profile and host runtime context
+ES-RA-05,Evidence Custodian,plugins_and_mcp,OFF,not role-scoped,5 MCP servers and 14 plugins enabled,BROADER_THAN_AUTHORIZED,NO,codex mcp list and codex plugin list
+ES-RA-05,Evidence Custodian,credential_access,prohibited,prohibited,GitHub bearer configuration and Cloudflare OAuth capability present,BROADER_THAN_AUTHORIZED,NO,codex mcp list with values masked
+ES-RA-05,Evidence Custodian,production_access,absent,absent_by_instruction,absence not host-enforced or provable,UNVERIFIABLE,NO,unrestricted host and remote service capability
+ES-RA-05,Evidence Custodian,runtime_role_identity,non-null ES-RA-05 authoritative identity,project config exists,no native selector or authoritative loaded identity record,UNVERIFIABLE,NO,use_agent_identity false and selector absent
+ES-RA-05,Evidence Custodian,output_path_isolation,evidence directories only,output path named procedurally,no host-enforced role path boundary,UNVERIFIABLE,NO,danger-full-access parent profile

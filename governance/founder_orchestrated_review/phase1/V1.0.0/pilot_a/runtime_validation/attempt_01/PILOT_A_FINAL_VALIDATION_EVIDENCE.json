@@ -1,0 +1,58 @@
+{
+  "assurance_classification": "AI_ASSISTED_DOCUMENT_PREPARATION",
+  "counts": {
+    "BLOCKED": 3,
+    "FAIL": 0,
+    "PASS": 30,
+    "SKIPPED": 5,
+    "UNAVAILABLE": 8
+  },
+  "final_disposition": "PILOT_A_RUNTIME_VALIDATION_BLOCKED_BY_HOST_OR_ROLE_SELECTION",
+  "historical_files_modified": 0,
+  "predecessor_commit": "6565c87f2d2a1499ecd7f6efd83fbbbb67aeb29b",
+  "predecessor_validation": {
+    "authoritative_retry": {
+      "changed_condition": "Full Git history fetched so baseline ancestry was measurable",
+      "counts": {
+        "BLOCKED": 1,
+        "FAIL": 0,
+        "PASS": 31
+      },
+      "overall_status": "PASS_WITH_DECLARED_BLOCKERS",
+      "pilot_a_disposition": "PILOT_A_ROLE_EXECUTION_BLOCKED_PERMISSION_CONTROL",
+      "run_id": "ES-PH1-VAL-2026-001-RUN-07"
+    },
+    "first_attempt": {
+      "counts": {
+        "BLOCKED": 1,
+        "FAIL": 1,
+        "PASS": 30
+      },
+      "failure": "GIT_BASELINE ancestry could not be measured in a shallow clone",
+      "overall_status": "FAILED",
+      "run_id": "ES-PH1-VAL-2026-001-RUN-06"
+    },
+    "historical_repository_records_changed": false,
+    "phase1_disposition_supported": "PHASE_1_DOCUMENTATION_COMPLETE_PILOT_VALIDATION_PENDING"
+  },
+  "qualifying_executions": 0,
+  "recorded_at": "2026-07-21T21:55:02Z",
+  "roles_executed": [],
+  "roles_required": [
+    "ES-RA-02",
+    "ES-RA-03",
+    "ES-RA-04",
+    "ES-RA-05"
+  ],
+  "schema_version": "1.0.0",
+  "total_checks": 46,
+  "validation_boundaries": {
+    "behavioral_canary": "UNAVAILABLE",
+    "behavioral_injection": "UNAVAILABLE",
+    "defect_detection_by_roles": "UNAVAILABLE",
+    "reconciliation": "SKIPPED",
+    "replay": "SKIPPED",
+    "role_output_custody": "UNAVAILABLE",
+    "variance": "UNAVAILABLE"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "assessment_id": "ES-PH1-PILOT-A-RUNTIME-PREFLIGHT-2026-001-ATTEMPT-01",
+  "commands": [
+    "codex mcp list",
+    "codex plugin list",
+    "codex features list"
+  ],
+  "credential_values_inspected": false,
+  "enabled_mcp_count": 5,
+  "enabled_mcp_servers": [
+    {
+      "auth": "UNSUPPORTED",
+      "kind": "LOCAL_PROCESS",
+      "name": "node_repl",
+      "status": "enabled"
+    },
+    {
+      "auth": "UNSUPPORTED",
+      "kind": "LOCAL_PROCESS",
+      "name": "sites-design-picker",
+      "status": "enabled"
+    },
+    {
+      "auth": "OAUTH",
+      "kind": "REMOTE",
+      "name": "cloudflare-api",
+      "status": "enabled"
+    },
+    {
+      "auth": "BEARER_TOKEN_ENV_REFERENCE",
+      "kind": "REMOTE",
+      "name": "github",
+      "status": "enabled",
+      "token_environment_variable_name": "GITHUB_PAT_TOKEN"
+    },
+    {
+      "auth": "UNSUPPORTED",
+      "kind": "REMOTE",
+      "name": "openaiDeveloperDocs",
+      "status": "enabled"
+    }
+  ],
+  "disabled_mcp_servers": [
+    "computer-use"
+  ],
+  "enabled_plugin_count": 14,
+  "enabled_plugins": [
+    "browser@openai-bundled",
+    "canva@openai-curated",
+    "chrome@openai-bundled",
+    "computer-use@openai-bundled",
+    "documents@openai-primary-runtime",
+    "github@openai-curated",
+    "gmail@openai-curated",
+    "pdf@openai-primary-runtime",
+    "presentations@openai-primary-runtime",
+    "sites@openai-bundled",
+    "spreadsheets@openai-primary-runtime",
+    "stripe@openai-curated",
+    "template-creator@openai-primary-runtime",
+    "visualize@openai-bundled"
+  ],
+  "environment_credential_like_names_observed": [
+    "GH_PAGER"
+  ],
+  "external_capabilities_exposed": [
+    "apps",
+    "browser_use_external",
+    "computer_use",
+    "image_generation",
+    "in_app_browser",
+    "remote_plugin",
+    "web_and_network_access"
+  ],
+  "external_activity_during_preflight": [
+    "Git clone, fetch, ls-remote, and later authorized branch push against the official repository only",
+    "No MCP tool, connector, provider API, model provider API, Cloudflare API, browser, email, Stripe, Sites, image generation, or external content call was used"
+  ],
+  "hidden_inherited_configuration_status": "PRESENT_AND_NOT_ISOLATED",
+  "isolation_result": "BROADER_THAN_AUTHORIZED",
+  "network_required_by_roles": "OFF",
+  "observed_at": "2026-07-21T21:55:02Z",
+  "role_execution_eligible": false,
+  "schema_version": "1.0.0"
+}

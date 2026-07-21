@@ -1,0 +1,2 @@
+decision_id,item,current_state,founder_decision_required,recommendation,decision_status,next_controlled_action
+ES-PH1-PILOT-A-FD-001,Qualifying host runtime not available,PILOT_A_RUNTIME_VALIDATION_BLOCKED_BY_HOST_OR_ROLE_SELECTION,YES,"Provision or designate a host with canonical-role identity enforcement role-specific sandbox and approval controls network-off isolation and disabled plugins/MCP/connectors",FOUNDER_DECISION_PENDING,Rerun a new preserved preflight attempt only after the environment is technically enforced

@@ -1,0 +1,57 @@
+{
+  "approval_mode": "never",
+  "branch": "codex/founder-review-phase1-pilot-a-runtime-validation-v1",
+  "codex_cli_version": "0.144.6",
+  "current_user": "rianray",
+  "environment_variable_names_only": [
+    "GH_PAGER"
+  ],
+  "filesystem_permission_profile": "unrestricted",
+  "git_version": "2.50.1 (Apple Git-155)",
+  "host_process_evidence": {
+    "codex_command": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "codex_pid": 9568,
+    "codex_ppid": 9536,
+    "evidence_available_inside_sandbox": true,
+    "sample_child_shell_command": "/bin/zsh",
+    "sample_child_shell_pid": 93798,
+    "sample_child_shell_ppid": 9568
+  },
+  "inherited_configuration": {
+    "config_path_recorded_sanitized": "$HOME/.codex/config.toml",
+    "configured_mcp_servers_present": true,
+    "enabled_plugins_present": true,
+    "model_configuration_present": true,
+    "sandbox_configuration_present": true
+  },
+  "model_identifier": "gpt-5.6-sol",
+  "network_access": "enabled",
+  "operating_system": {
+    "architecture": "arm64",
+    "build": "25F84",
+    "kernel": "Darwin 25.5.0",
+    "name": "macOS",
+    "version": "26.5.2"
+  },
+  "predecessor_commit": "6565c87f2d2a1499ecd7f6efd83fbbbb67aeb29b",
+  "production_access_absence": "UNVERIFIABLE",
+  "python_version": "3.14.6",
+  "reasoning_level": "xhigh",
+  "recorded_at": "2026-07-21T21:55:02Z",
+  "remote_default_branch": "integrate-emergent-final-zip",
+  "remote_repository": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "repository_isolation": {
+    "candidate_manifest_sha256": "b385efe7bb7875f8edba93e4828db5c73af263e5ccb8dc1f442d7483248107ac",
+    "fresh_clone": true,
+    "phase1_predecessor_tree": "ce706c6356fe3dd7179d6dc6ddb18948759b8241",
+    "pilot_a_evidence_tree": "7c7dc70d6c8a7b6f6e90cbe783950d5e06a1df8c",
+    "pilot_a_fixtures_tree": "7534cffc668ca09425c973f42ec3cbaac86ebd64",
+    "pilot_a_tree": "ffeb0bafe39d6d55a2b73fc71aff7c9584d0e7d7",
+    "workspace_class": "ephemeral local fresh clone outside synchronized Documents storage"
+  },
+  "runtime_native_canonical_role_selection": "UNAVAILABLE",
+  "runtime_surface": "Codex Desktop host with local Codex CLI inspection",
+  "sandbox_mode": "danger-full-access",
+  "schema_version": "1.0.0",
+  "secret_or_credential_values_recorded": false
+}

@@ -1,0 +1,23 @@
+check_id,category,requirement,evidence,status,blocks_role_execution,detail
+PF-001,repository,official remote verified,git remote and ls-remote,PASS,NO,origin is the authorized GitHub repository
+PF-002,repository,all remote branches and tags synchronized,git fetch --all --tags --prune,PASS,NO,fetch completed before branch creation
+PF-003,repository,exact predecessor present locally and remotely,git rev-parse and git ls-remote,PASS,NO,local and remote both resolve to 6565c87f2d2a1499ecd7f6efd83fbbbb67aeb29b
+PF-004,repository,clean predecessor checkout and index,git status and git diff checks,PASS,NO,no tracked staged or untracked changes before branch creation
+PF-005,repository,dedicated branch created from exact predecessor,git branch and git rev-parse,PASS,NO,codex/founder-review-phase1-pilot-a-runtime-validation-v1 starts at the predecessor
+PF-006,roles,four Pilot A roles identified from authoritative artifacts,PHASE_1_PILOT_A_TEST_PLAN.md and PILOT_A_STATUS.json,PASS,NO,ES-RA-02 ES-RA-03 ES-RA-04 and ES-RA-05
+PF-007,roles,approved profile files and checksums verified,sha256sum and profile payload checks,PASS,NO,all four profile files match the predecessor
+PF-008,runtime,runtime identity captured,codex --version config runtime context and system commands,PASS,NO,identity fields are recorded in the sanitized environment record
+PF-009,runtime,process evidence captured,ps output,PASS,NO,parent Codex and child shell identities were observable
+PF-010,repository,prior Pilot A evidence unchanged,Git tree IDs and SHA-256 hashes,PASS,NO,prior evidence and failed canary bytes remain unchanged
+PF-011,repository,candidate and synthetic fixture identity recorded,Git fixture tree and file SHA-256 hashes,PASS,NO,no successor execution freeze was created because preflight did not pass
+PF-012,role_selection,explicit runtime-native canonical role selector available,codex exec help feature list and host delegation schema,BLOCKED,YES,no custom-agent selector is exposed and use_agent_identity is false
+PF-013,permissions,ES-RA-02 host permissions compliant,RUNTIME_PERMISSION_CONTROL.md and live runtime,BLOCKED,YES,danger-full-access never approval and enabled network exceed read-only on-request network-off
+PF-014,permissions,ES-RA-03 host permissions compliant,RUNTIME_PERMISSION_CONTROL.md and live runtime,BLOCKED,YES,danger-full-access never approval and enabled network exceed read-only on-request network-off
+PF-015,permissions,ES-RA-04 host permissions compliant,RUNTIME_PERMISSION_CONTROL.md and live runtime,BLOCKED,YES,unrestricted access exceeds bounded workspace-write on-request and allowlisted commands
+PF-016,permissions,ES-RA-05 host permissions compliant,RUNTIME_PERMISSION_CONTROL.md and live runtime,BLOCKED,YES,unrestricted access exceeds evidence-only workspace-write on-request and deterministic custody utilities
+PF-017,isolation,plugins MCP servers and external services disabled,codex plugin list and codex mcp list,BLOCKED,YES,5 MCP servers and 14 plugins are enabled
+PF-018,isolation,network disabled,host runtime context and enabled remote services,BLOCKED,YES,network access is enabled
+PF-019,isolation,provider and production credential absence proven,codex mcp list and sanitized environment names,BLOCKED,YES,remote OAuth and bearer-token capability exist and absence of all inherited credentials is not host-enforced
+PF-020,isolation,role-specific filesystem boundary host enforced,live sandbox mode,BLOCKED,YES,parent filesystem access is unrestricted
+PF-021,execution,no prohibited fallback or role simulation used,orchestration record,PASS,NO,zero role invocations and zero substitute outputs
+PF-022,scope,Phase 2 remains unauthorized,Founder directive and change inspection,PASS,NO,no Phase 2 work began
