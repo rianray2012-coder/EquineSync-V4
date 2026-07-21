@@ -1,30 +1,19 @@
 # As-Built Reconciliation
 
-- PIA: `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0`
-- Version: `1.0.0-candidate`
-- Date: `2026-07-20`
-- Status: `LEGACY_NONCONFORMANCE_RECORDED`
-- Final package disposition: `FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_DRAFT_COMPLETE_INTERNALLY_REVIEWED_AND_REVISED_PENDING_FOUNDER_DECISIONS_AND_FRESH_SEGREGATED_REVIEW`
+## Current evidence
 
-> No implementation, application or database startup, migration, PR, merge, tag, release, deployment, enrollment, production use, custom-agent activation, or F-0001 closure is authorized by this package.
->
-> All recommendations are candidate advice only. They are not approved Founder doctrine unless and until the Founder records a separate decision.
+- `backend/core/account_memberships.py` projects current `users.barn_id` and `users.role` into compatibility membership rows. It explicitly says this is not the final multi-role model.
+- `backend/routes/barns.py` provisions one barn and first admin together, uses `barn_id`, and documents one-barn/no-switching behavior as deferred.
+- `W1_RF01_TENANT_AND_FACILITY_ISOLATION_REPORT.md` records a `primary` fallback, single legacy user barn, limited membership-aware context, missing universal server context binding, and unresolved `barn` versus `barns` references.
 
-## Method
+## Candidate-to-as-built gaps
 
-Static read-only source inspection only. No application/database was started; no migration or test environment was created.
+The target design requires distinct Tenant, Facility, Organization, Relationship membership, and Permission concepts; explicit active context; multi-facility/multi-organization cardinalities; temporal lifecycle; public projections; legacy quarantine; and fail-closed online/offline/search/job behavior. Those requirements are not represented as implemented.
 
-## Evidence and classification
+## Reconciliation rule
 
-| Evidence | Observation | Target comparison | Classification |
-| --- | --- | --- | --- |
-| `backend/core/tenancy.py` | `PRIMARY_BARN_ID="primary"`; missing user barn resolves to primary; comments map task-engine `tenant_id="default"` to `barn_id="primary"`. | Missing/unknown target context must fail closed or quarantine. | PROHIBITED_LEGACY_FALLBACK / IMPLEMENTATION_GAP |
-| `backend/task_engine.py` and `backend/core/lifespan.py` | Task/media partition uses default tenant and primary barn compatibility mapping. | Tenant and Facility/Barn must remain distinct. | IMPLEMENTATION_GAP |
-| `backend/routes/barns.py` | Barn provisioning creates a barn and first admin with one-barn-per-user language; writes `db.barn` while status gates read `db.barns`. | Target requires explicit Tenant/Facility/Organization topology and contract consistency. | IMPLEMENTATION_GAP / REVIEW_REQUIRED |
-| `backend/core/account_memberships.py` | Additive facility account memberships mirror `users.barn_id` and role; comments acknowledge future transition. | Useful foundation but Role/relationship/account cannot become authority. | PARTIAL_CONFORMING_FOUNDATION |
-| `backend/core/account_route_context.py` | Selected facility context resolves membership then reads barn status. | Moves toward explicit context but does not demonstrate full Tenant/Organization model. | PARTIAL_CONFORMING_FOUNDATION |
-| application-wide `barn_id` fields | Many domain records are barn-scoped. | Provides partial isolation evidence, not proof of Tenant/Facility/Organization separation. | PARTIAL_CONFORMING_FOUNDATION |
+As-built behavior is evidence, never higher authority. No existing table, collection, route, UI label, or fallback is reclassified as canonical by this PIA. A later separately authorized plan must inventory all data, define deterministic mappings, quarantine ambiguity, prove access deltas, preserve rollback, and execute no customer or production mutation without explicit authority.
 
-## Disposition
+## Activity statement
 
-The current software is not claimed conformant to this candidate and was not dynamically verified. The PIA records a target design independent of the legacy shortcuts. Any remediation requires a separately authorized, inventoried, reversible migration and work-package sequence. No source file outside this documentary package was modified.
+No code, schema, database, migration, startup, route, UI, worker, provider, or production change occurred in Task B.

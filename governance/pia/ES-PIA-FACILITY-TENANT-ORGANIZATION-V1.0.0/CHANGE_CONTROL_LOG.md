@@ -1,21 +1,10 @@
-# Change-Control Log
+# Change Control Log
 
-- PIA: `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0`
-- Version: `1.0.0-candidate`
-- Date: `2026-07-20`
-- Status: `FOUNDER_DECISION_REQUIRED`
-- Final package disposition: `FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_DRAFT_COMPLETE_INTERNALLY_REVIEWED_AND_REVISED_PENDING_FOUNDER_DECISIONS_AND_FRESH_SEGREGATED_REVIEW`
+| Date | Change | Authority/effect |
+|---|---|---|
+| 2026-07-20 | Created `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0` from Task A final commit `b8f34aef390c5fec6f942a6253edf6acc9488c44`. | Documentary drafting only; no approval or implementation effect. |
+| 2026-07-20 | Added exact-source register, 18 open Founder decisions, 40 requirements, 12 workflows, lifecycle/data/boundary contracts, tests, risks, manifests, and validation. | Candidate treatment only. |
+| 2026-07-20 | Preserved current Identity/Relationships successor status as pending fresh segregated review. | No branch, artifact, or approval-state mutation to that review. |
+| 2026-07-20 | Reconciled concurrent remote parent `0beee6137183eb4079e7346c8596f6bec552f2f2` as a linear correction after exact-source hash mismatches and filename/disposition drift were found. | Parent history preserved; no merge or force push; final package revalidated. |
 
-> No implementation, application or database startup, migration, PR, merge, tag, release, deployment, enrollment, production use, custom-agent activation, or F-0001 closure is authorized by this package.
->
-> All recommendations are candidate advice only. They are not approved Founder doctrine unless and until the Founder records a separate decision.
-
-| Entry | Date | Change | Authority/effect |
-| --- | --- | --- | --- |
-| FAC-CHG-001 | 2026-07-20 | Verified Portfolio Realignment gate. | Preconditions only; no Facility doctrine. |
-| FAC-CHG-002 | 2026-07-20 | Assembled 33 exact sources and static as-built evidence. | Read-only evidence. |
-| FAC-CHG-003 | 2026-07-20 | Produced complete first draft and first-hash manifest. | Candidate only. |
-| FAC-CHG-004 | 2026-07-20 | Reviewed every Phase 2/7 drafted document and executed six isolated challenge passes. | Procedural segregation; not an ES-RA or fresh external review. |
-| FAC-CHG-005 | 2026-07-20 | Revised documents against 13 findings. | 11 resolved; 2 residual P2 items retained. |
-| FAC-CHG-006 | 2026-07-20 | Completed second document review and cross-document consistency pass. | No P0/P1 remain in documentary package. |
-| FAC-CHG-007 | 2026-07-20 | Ran machine validation and prepared Founder briefing. | Package integrity only; no approval or implementation effect. |
+No frozen, adopted, locked, or sealed source was modified.

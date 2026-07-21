@@ -1,30 +1,23 @@
 # API, Event, and Job Contracts
 
-- PIA: `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0`
-- Version: `1.0.0-candidate`
-- Date: `2026-07-20`
-- Status: `FOUNDER_DECISION_REQUIRED`
-- Final package disposition: `FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_DRAFT_COMPLETE_INTERNALLY_REVIEWED_AND_REVISED_PENDING_FOUNDER_DECISIONS_AND_FRESH_SEGREGATED_REVIEW`
+**Status:** `DESIGN_CANDIDATE_NOT_AUTHORIZED`
 
-> No implementation, application or database startup, migration, PR, merge, tag, release, deployment, enrollment, production use, custom-agent activation, or F-0001 closure is authorized by this package.
->
-> All recommendations are candidate advice only. They are not approved Founder doctrine unless and until the Founder records a separate decision.
+## API envelope
 
-| ID | Interface | Kind | Permission/actor | Input | Output/consumer | Evidence | Failure |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| FAC-API-001 | POST /tenants/{tenant}/facilities | Command | facility:create | tenant context, idempotency key, proposed identity/address | Facility candidate plus change_set_id | facility.created | 409 duplicate candidate; 403 generic deny |
-| FAC-API-002 | POST /contexts/select | Command | context:switch | tenant/facility/org association tuple | short-lived context reference and display labels | context.selected | 404 unavailable context |
-| FAC-API-003 | POST /facilities/{id}/areas | Command | facility_area:write | parent/version/type/provenance | area and change_set_id | facility_area.created | 409 cycle/stale version |
-| FAC-API-004 | POST /facilities/{id}/association-changes | Command | organization:associate | typed before/after associations and effective time | change proposal/result | facility.association_changed | 422 unresolved authority/evidence |
-| FAC-API-005 | POST /facilities/merge-proposals | Command | facility:merge | candidate ids, survivor proposal, evidence | quarantined proposal | facility.merge_proposed | 409 unresolved identity |
-| FAC-API-006 | POST /facilities/{id}/close | Command | facility:close | effective time, reason, impact acknowledgement | closed state/change set | facility.closed | 409 unresolved dependencies |
-| FAC-API-007 | PUT /facilities/{id}/public-projection | Command | facility:publish | approved field subset/purpose/expiry | projection version | facility.public_projection_changed | 422 sensitive field |
-| FAC-API-008 | GET /facility-search | Query | facility:read | active context, purpose, filter | permission-filtered results only | search.executed | generic empty/deny |
-| FAC-EVT-001 | facility.context_invalidated | Event | system | tenant/facility/org, cause, effective_at | Consumers revoke cached context | append-only | Dead-letter if context unknown |
-| FAC-EVT-002 | facility.topology_changed | Event | system | change_set_id, before/after refs, tenant | Consumers re-evaluate projections | append-only | Retry idempotently |
-| FAC-EVT-003 | organization.facility_association_changed | Event | system | association id/type/interval/status | Consumers recalculate only their owned effects | append-only | No authority side effect |
-| FAC-JOB-001 | context-expiry sweeper | Job | service identity | tenant partitions and current time | expire context caches | job evidence | Fail closed; retry partition |
-| FAC-JOB-002 | public-projection expiry | Job | service identity | projection expiry | unpublish expired fields | job evidence | Fail private |
-| FAC-JOB-003 | topology reconciliation | Job | service identity | quarantine/change-set ledgers | report only unless separately authorized | job evidence | Never auto-merge |
+Every request resolves authenticated principal, acting/represented actor chain, tenant, optional facility, context version, permission version, purpose, request ID, and idempotency key before resource lookup. Caller-supplied tenant or facility identifiers are constraints, never authority. Non-enumerating `404` or equivalent safe errors apply after authorization policy.
 
-All identifiers and routes are candidate contracts. They are not active endpoints, schemas, jobs, or implementation authority. Every command requires tenant context, idempotency, optimistic version, authorization reference and audit correlation unless explicitly documented otherwise.
+Candidate resources: `/tenants`, `/facilities`, `/organizations`, `/facility-areas`, `/topology-edges`, `/tenant-facility-associations`, `/organization-tenant-controls`, `/active-contexts`, `/duplicate-candidates`, `/topology-changes`, `/legacy-quarantine`, and `/facility-public-projections`. No route is authorized by this package.
+
+## Events
+
+Candidate event families include `tenant.lifecycle.changed`, `facility.lifecycle.changed`, `organization.lifecycle.changed`, `facility.topology.changed`, `tenant_facility.association.changed`, `organization_tenant.control.changed`, `active_context.switched`, `facility.public_projection.changed`, `facility.duplicate_candidate.changed`, `facility.topology_change.reconciliation_required`, and `legacy_topology.quarantine.changed`.
+
+Every event carries event ID, schema version, canonical entity and version, tenant or explicit governed cross-tenant scope, effective/recorded time, source/provenance, actor chain, reason, evidence references, prior/new state, idempotency key, correlation/causation IDs, privacy class, and replay policy. Consumers cannot infer permission from event receipt.
+
+## Jobs
+
+Candidate jobs include projection invalidation, lifecycle enforcement, duplicate-candidate generation, topology consistency validation, legacy quarantine analysis, retention handoff, external-ID reconciliation, and stale-context revocation. Every job is tenant-partitioned, checkpointed, idempotent, permission-aware, suspendable, rate-limited, and auditable. Cross-tenant aggregation requires a separately authorized purpose and minimum-necessary projection.
+
+## Failure and recovery
+
+Retries preserve idempotency and ordering constraints. Poison messages quarantine without cross-tenant spill. Replay re-evaluates current lifecycle and permission state. Recovery cannot resurrect closed, revoked, merged, or stale authority. External systems remain adapters and never overwrite canonical truth silently.

@@ -1,0 +1,66 @@
+{
+  "package_id": "ES-PIA-PORTFOLIO-FACILITY-HANDOFF-V1.0.0",
+  "file_count": 12,
+  "files": [
+    {
+      "path": "START_HERE.md",
+      "sha256": "ac84a99256e5095618324a97d7cb77882195e94475630a55767d881f82c2b40d",
+      "bytes": 281
+    },
+    {
+      "path": "directive/CODEX_SEQUENCED_PORTFOLIO_REALIGNMENT_AND_FACILITY_PIA_DIRECTIVE.md",
+      "sha256": "a3501e5f36b3f1bdc2b774e8a5eb1ca2a719047c32019e318495552a214b6dba",
+      "bytes": 3594
+    },
+    {
+      "path": "facility/FACILITY_PIA_FOUNDER_DECISION_REGISTER_SEED.csv",
+      "sha256": "c4b23a91fb9681e95a58fd8e82563414b3fbef9f92a2d24af3e9ae8780d72b45",
+      "bytes": 1349
+    },
+    {
+      "path": "facility/FACILITY_PIA_SCOPE_AND_BOUNDARY_SEED.md",
+      "sha256": "d01b40bf393a4dfab7e78dee321c55a9f01613e07e405a6a417d411a7d540f08",
+      "bytes": 2275
+    },
+    {
+      "path": "portfolio/EXISTING_PACKAGE_PLACEMENT_SEED.csv",
+      "sha256": "35ddae0ffe5e1e42f1b3e66e831e157d37f96d5c8f807cf9233be50d2ae878a8",
+      "bytes": 1743
+    },
+    {
+      "path": "portfolio/LOCKED_TEN_ITEM_PIA_PORTFOLIO.md",
+      "sha256": "d487df6cd36b8b4c62c4df59ea6f278a1358c3dee824bda17d74c94732b27dd2",
+      "bytes": 1326
+    },
+    {
+      "path": "portfolio/PIA_PORTFOLIO_REALIGNMENT_REGISTER_SEED.csv",
+      "sha256": "7893d8d8c296aa59ff33dca3463cc686582a88c6c0615f564c967671ccbdfa08",
+      "bytes": 831
+    },
+    {
+      "path": "sources/Founder_Approval_PIA_Master_Standard_V1_1.pdf",
+      "sha256": "bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8",
+      "bytes": 31022
+    },
+    {
+      "path": "sources/LATEST_SUCCESSOR_VALIDATION_REPORT.md",
+      "sha256": "b4a74d336a240d3e17615b399644816fe77435efc5eccbdbdab4137a2e3d8c8a",
+      "bytes": 844
+    },
+    {
+      "path": "sources/PIA_MASTER_STANDARD_V1_1_INGESTION_RECORD.md",
+      "sha256": "e7da0c12b0cbb2b77fced6b060ca5d702001d11dd44baad202d908e77b1f4445",
+      "bytes": 2159
+    },
+    {
+      "path": "sources/PIA_Master_Standard_V1_1.pdf",
+      "sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc",
+      "bytes": 348722
+    },
+    {
+      "path": "status/CURRENT_PIA_APPROVAL_STATUS.md",
+      "sha256": "8abfbe0b1be12fcdd9d488659ca68f691e92da47bce1291176791d709baf237e",
+      "bytes": 674
+    }
+  ]
+}

@@ -1,193 +1,25 @@
 {
-  "checks": [
-    {
-      "check": "required_files",
-      "detail": "required=41 missing=[]",
-      "status": "PASS"
-    },
-    {
-      "check": "document_overview_covers_every_package_file",
-      "detail": "package_files=50 missing=[]",
-      "status": "PASS"
-    },
-    {
-      "check": "mandatory_43_sections",
-      "detail": "found=43",
-      "status": "PASS"
-    },
-    {
-      "check": "machine_identity_and_disposition",
-      "detail": "PIA ID and exact disposition match",
-      "status": "PASS"
-    },
-    {
-      "check": "authority_all_false",
-      "detail": "{\"custom_agent_activated\": false, \"enrollment_authorized\": false, \"f0001_closed\": false, \"implementation_authorized\": false, \"migration_authorized\": false, \"production_authorized\": false, \"release_authorized\": false}",
-      "status": "PASS"
-    },
-    {
-      "check": "source_count_and_gaps",
-      "detail": "sources=33 gaps=0",
-      "status": "PASS"
-    },
-    {
-      "check": "design_counts",
-      "detail": "{\"contracts\": 14, \"entities\": 15, \"founder_decisions\": 28, \"permissions\": 17, \"requirements\": 36, \"risks\": 10, \"source_gaps\": 0, \"sources\": 33, \"state_transitions\": 26, \"workflows\": 13}",
-      "status": "PASS"
-    },
-    {
-      "check": "decision_ids_unique",
-      "detail": "rows=28",
-      "status": "PASS"
-    },
-    {
-      "check": "recommendations_not_decisions",
-      "detail": "all recommendations unresolved; Founder answer blank",
-      "status": "PASS"
-    },
-    {
-      "check": "decision_gate_counts",
-      "detail": "actual={'REQUIRED_BEFORE_DESIGN_APPROVAL': 12, 'REQUIRED_BEFORE_IMPLEMENTATION_AUTHORIZATION': 10, 'REQUIRED_BEFORE_ENROLLMENT': 6}",
-      "status": "PASS"
-    },
-    {
-      "check": "question_decision_parity",
-      "detail": "questions=28 decisions=28",
-      "status": "PASS"
-    },
-    {
-      "check": "seeded_decision_id_fidelity",
-      "detail": "errors=[]",
-      "status": "PASS"
-    },
-    {
-      "check": "requirement_ids_unique",
-      "detail": "rows=36",
-      "status": "PASS"
-    },
-    {
-      "check": "requirement_ac_test_coverage",
-      "detail": "requirements=36 ac=36 tests=36",
-      "status": "PASS"
-    },
-    {
-      "check": "implementation_tests_not_executed",
-      "detail": "no implementation test is represented as executed",
-      "status": "PASS"
-    },
-    {
-      "check": "source_requirement_acceptance_test_evidence_traceability",
-      "detail": "errors=[]",
-      "status": "PASS"
-    },
-    {
-      "check": "every_draft_reviewed_twice",
-      "detail": "ledger=28 first_manifest=28",
-      "status": "PASS"
-    },
-    {
-      "check": "first_hashes_preserved",
-      "detail": "first-draft manifest matches review ledger",
-      "status": "PASS"
-    },
-    {
-      "check": "first_pass_finding_counts",
-      "detail": "actual={'P0': 0, 'P1': 4, 'P2': 6, 'P3': 3}",
-      "status": "PASS"
-    },
-    {
-      "check": "second_pass_finding_counts",
-      "detail": "actual={'P0': 0, 'P1': 0, 'P2': 2, 'P3': 0}",
-      "status": "PASS"
-    },
-    {
-      "check": "no_p0_p1_open",
-      "detail": "open=2",
-      "status": "PASS"
-    },
-    {
-      "check": "six_challenge_passes",
-      "detail": "lanes=6",
-      "status": "PASS"
-    },
-    {
-      "check": "structured_identifier_references_resolve",
-      "detail": "references=230 unresolved=[]",
-      "status": "PASS"
-    },
-    {
-      "check": "declared_identifiers_unique",
-      "detail": "groups_with_duplicates=[] declarations=257",
-      "status": "PASS"
-    },
-    {
-      "check": "all_json_and_csv_parse",
-      "detail": "json_errors=[] csv_errors=[]",
-      "status": "PASS"
-    },
-    {
-      "check": "checksum_manifest",
-      "detail": "mismatches=[]",
-      "status": "PASS"
-    },
-    {
-      "check": "package_manifest",
-      "detail": "entries=46 mismatches=[]",
-      "status": "PASS"
-    },
-    {
-      "check": "frozen_sources_unmodified",
-      "detail": "pre-draft status clean; exact source hashes captured; all generated writes scoped to package root; modifications=0",
-      "status": "PASS"
-    },
-    {
-      "check": "status_boundary_language",
-      "detail": "required_terms=['FOUNDER_DECISION_REQUIRED', 'not approved', 'No implementation', 'fresh segregated review']",
-      "status": "PASS"
-    },
-    {
-      "check": "active_agent_claim_absent",
-      "detail": "no active custom-agent review claim",
-      "status": "PASS"
-    },
-    {
-      "check": "active_miap_terminology",
-      "detail": "MIAP present; superseded MAIP absent",
-      "status": "PASS"
-    }
-  ],
-  "checks_failed": 0,
-  "checks_passed": 31,
-  "counts": {
-    "challenge_passes": 6,
-    "final_open_findings": {
-      "P0": 0,
-      "P1": 0,
-      "P2": 2,
-      "P3": 0
-    },
-    "first_pass_findings": {
-      "P0": 0,
-      "P1": 4,
-      "P2": 6,
-      "P3": 3
-    },
-    "founder_decisions": 28,
-    "frozen_source_modifications": 0,
-    "package_files": 50,
-    "requirements": 36,
-    "reviewed_phase2_and_founder_documents": 28,
-    "source_gaps": 0,
-    "sources": 33
-  },
-  "disposition": "FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_DRAFT_COMPLETE_INTERNALLY_REVIEWED_AND_REVISED_PENDING_FOUNDER_DECISIONS_AND_FRESH_SEGREGATED_REVIEW",
-  "limitations": [
-    "Documentary/static validation only; no application or database was started.",
-    "No implementation tests were executed.",
-    "Procedurally separated internal review is not a fresh external/ES-RA/custom-agent review.",
-    "Recommendations are not Founder decisions."
-  ],
-  "package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0",
-  "status": "PASS",
-  "validation_date": "2026-07-20"
+  "acceptance_count": 40,
+  "adversarial_scenario_count": 12,
+  "application_started": false,
+  "database_or_migration_activity": false,
+  "disposition": "FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_DRAFT_COMPLETE_PENDING_FOUNDER_DECISIONS_AND_STRUCTURED_REVIEW",
+  "documented_gap_count": 4,
+  "file_count": 36,
+  "findings": [],
+  "founder_decision_count": 18,
+  "golden_path_count": 9,
+  "identity_relationships_successor_modified": false,
+  "implementation_activity": "NONE",
+  "mandatory_exact_source_gaps": 0,
+  "open_p1": 3,
+  "open_p2": 5,
+  "open_p3": 1,
+  "p0": 0,
+  "requirement_count": 40,
+  "result": "PASS",
+  "sealed_source_modifications": 0,
+  "source_count": 38,
+  "test_count": 40,
+  "workflow_count": 12
 }

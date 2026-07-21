@@ -1,65 +1,48 @@
 # Golden Paths
 
-- PIA: `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0`
-- Version: `1.0.0-candidate`
-- Date: `2026-07-20`
-- Status: `FOUNDER_DECISION_REQUIRED`
-- Final package disposition: `FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_DRAFT_COMPLETE_INTERNALLY_REVIEWED_AND_REVISED_PENDING_FOUNDER_DECISIONS_AND_FRESH_SEGREGATED_REVIEW`
+These are documentary reproductions; the application and database were not started.
 
-> No implementation, application or database startup, migration, PR, merge, tag, release, deployment, enrollment, production use, custom-agent activation, or F-0001 closure is authorized by this package.
->
-> All recommendations are candidate advice only. They are not approved Founder doctrine unless and until the Founder records a separate decision.
+## GP-01 - Create Organization, Tenant, and first Facility
 
-## FAC-GP-001 — First-user setup
+**Expected invariant:** Creates distinct records and explicit links; creates no membership or permission.  
+**Workflow:** `FAC-WF-001`
 
-One Tenant, one Organization association, one Facility and an unassigned Area are proposed; authority is established separately.
+## GP-02 - Add a second Facility
 
-**Invariant:** No topology seed grants membership, ownership, permission or payment authority.
+**Expected invariant:** Preserves one Tenant context, separate Facility identity, and private-by-default projection.  
+**Workflow:** `FAC-WF-002`
 
-## FAC-GP-002 — Multi-facility tenant
+## GP-03 - Trainer works across Facilities
 
-An authorized user explicitly selects Facility A or B and sees persistent context.
+**Expected invariant:** One person identity, separate relationships and permissions, visible context, no cross-tenant leakage.  
+**Workflow:** `FAC-WF-003`
 
-**Invariant:** No data from the unselected Facility appears.
+## GP-04 - Retire a Facility area
 
-## FAC-GP-003 — Multiple organizations at one facility
+**Expected invariant:** Effective-dated restriction and retirement preserve occupancy/topology history and invalidate current projections.  
+**Workflow:** `FAC-WF-004`
 
-Owner, lessee and operator associations coexist with effective dates.
+## GP-05 - Suspend and restore a Tenant
 
-**Invariant:** None grants blanket action authority.
+**Expected invariant:** Online/offline/API/search/jobs stop; records remain; restoration re-evaluates current authority.  
+**Workflow:** `FAC-WF-005`
 
-## FAC-GP-004 — Area move
+## GP-06 - Transfer or close a Facility
 
-A stall is moved under a new parent using an acyclic versioned change set.
+**Expected invariant:** Facility history remains; downstream horse, invoice, relationship, permission, agreement, and record reconciliation is explicit.  
+**Workflow:** `FAC-WF-006;FAC-WF-012`
 
-**Invariant:** Prior topology remains in lineage; horse authority does not change.
+## GP-07 - Merge duplicate Facility records
 
-## FAC-GP-005 — Operator transition
+**Expected invariant:** Human-reviewed lineage-preserving merge affects no unrelated Tenant or domain.  
+**Workflow:** `FAC-WF-007`
 
-Old operator association ends; new one begins; dependent domains re-evaluate.
+## GP-08 - Switch Tenant/Facility context
 
-**Invariant:** People, horses, agreements, permissions, billing and records do not cascade.
+**Expected invariant:** Target eligibility validated; visible context changes; event is attributable; stale work rejected.  
+**Workflow:** `FAC-WF-008`
 
-## FAC-GP-006 — Duplicate reconciliation
+## GP-09 - Import ambiguous legacy topology
 
-Candidates quarantine, evidence is compared, reviewed merge preserves aliases and rollback metadata.
-
-**Invariant:** No automated fuzzy merge.
-
-## FAC-GP-007 — Suspension and reinstatement
-
-All product surfaces deny ordinary consequential access; online revalidation restores allowed context.
-
-**Invariant:** Only separately governed safety evidence capture may remain.
-
-## FAC-GP-008 — Closure/decommission
-
-Facility closes, projections/credentials revoke, lineage and evidence remain.
-
-**Invariant:** No silent deletion or reassignment.
-
-## FAC-GP-009 — Public discovery
-
-An opt-in coarse public projection is published then revoked.
-
-**Invariant:** Exact layout, occupants and sensitive areas never enter the projection.
+**Expected invariant:** Ambiguity is quarantined, non-public, and non-authority-bearing until reviewed.  
+**Workflow:** `FAC-WF-009`

@@ -1,0 +1,5 @@
+gap_id,severity,status,gap,effect,blocking
+FAC-SG-001,P2,CONTROLLED_SEGREGATION,Fresh successor Identity and Relationships review output is intentionally absent from this branch.,No current successor text is treated as approved; locked canons supply cross-domain authority.,NO_FOR_DRAFT_YES_FOR_ANY_CLAIM_DEPENDING_ON_SUCCESSOR_RATIFICATION
+FAC-SG-002,P1,FOUNDER_DECISION_REQUIRED,No adopted source settles the final Tenant/Facility/Organization definitions and cardinalities for this PIA.,FAC-FD-001 through FAC-FD-005 must be decided before design approval.,YES_FOR_DESIGN_APPROVAL
+FAC-SG-003,P1,AS_BUILT_GAP,"No current as-built schema cleanly separates tenant, organization, facility, barn operation, and membership; primary barn fallback remains documented.",Implementation and migration planning require a separately authorized reconciliation.,YES_FOR_IMPLEMENTATION_AUTHORIZATION
+FAC-SG-004,P2,FOUNDER_DECISION_REQUIRED,"No final Founder-selected organization taxonomy, address/jurisdiction profile, or first-user seed policy exists.","FAC-FD-006, FAC-FD-014, and FAC-FD-017 remain open.",YES_AT_APPLICABLE_GATE

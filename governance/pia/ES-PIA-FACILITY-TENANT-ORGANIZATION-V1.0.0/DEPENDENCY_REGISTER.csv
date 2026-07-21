@@ -1,11 +1,9 @@
 dependency_id,dependency,type,status,effect
-FAC-DEP-001,PIA Master Standard V1.1,CONTROLLING,SATISFIED_FOR_DRAFT,Keep 43 sections/traceability/status discipline
-FAC-DEP-002,Ten-item portfolio realignment,PRECONDITION,SATISFIED,Gate validated and committed before Facility branch
-FAC-DEP-003,Founder design decisions,DECISION,OPEN,Blocks design approval
-FAC-DEP-004,Fresh segregated review,ASSURANCE,OPEN,Required before Founder approval decision
-FAC-DEP-005,Identity/Relationship/Authorization/Permission,CROSS_DOMAIN,SOURCE_AVAILABLE,Must remain authoritative owners
-FAC-DEP-006,Privacy/Audit/Stewardship/Search,CROSS_DOMAIN,SOURCE_AVAILABLE,Shared controls inherited
-FAC-DEP-007,Platform Operations/Resilience/Configuration/Security,CROSS_DOMAIN,SOURCE_AVAILABLE,Required for later operational gates
-FAC-DEP-008,Implementation authorization,AUTHORITY,NOT_GRANTED,Blocks code/schema/migration work
-FAC-DEP-009,As-built reconciliation and verification,EVIDENCE,NOT_STARTED,Blocks verified/operational status
-FAC-DEP-010,Enrollment authorization,AUTHORITY,NOT_GRANTED,Blocks first user
+FAC-DEP-001,Founder decisions FAC-FD-001..018,DECISION,OPEN,Blocks design approval; FD-017 blocks first-user gate.
+FAC-DEP-002,Locked Identity canon V2.0,CANON,AVAILABLE,"Supplies actor, account, session and context references."
+FAC-DEP-003,Locked Relationship canon V2.0,CANON,AVAILABLE,"Owns memberships, staff, representation and delegation."
+FAC-DEP-004,Locked Permission canon V1.1,CANON,AVAILABLE,Owns authorization and field projection.
+FAC-DEP-005,Fresh segregated Identity/Relationships successor review,GOVERNANCE,SEPARATE_PENDING,Must remain unmodified and cannot be represented as approved.
+FAC-DEP-006,As-built tenant/facility compatibility reconciliation,FUTURE_ENGINEERING,NOT_AUTHORIZED,Required before migration or implementation authorization.
+FAC-DEP-007,Offline and stale-context executable evidence,FUTURE_EVIDENCE,NOT_EXECUTED,Required before field or first-user readiness claims.
+FAC-DEP-008,Public discovery privacy and safeguarding review,FUTURE_STRUCTURED_REVIEW,PENDING,Required before public projection activation.

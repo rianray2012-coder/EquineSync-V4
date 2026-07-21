@@ -1,27 +1,25 @@
-state_model_id,entity,from_state,to_state,trigger,required_permission,guard,audit_event,failure_behavior
-FAC-SM-001,Tenant,DRAFT,PENDING_REVIEW,submit,tenant:submit,required fields present,tenant.submitted,Remain DRAFT
-FAC-SM-001,Tenant,PENDING_REVIEW,ACTIVE,activate,tenant:activate,Founder-approved design plus separately authorized activation workflow,tenant.activated,Remain PENDING_REVIEW
-FAC-SM-001,Tenant,ACTIVE,SUSPENDED,suspend,tenant:suspend,reason and scope,tenant.suspended,Remain ACTIVE
-FAC-SM-001,Tenant,SUSPENDED,ACTIVE,reinstate,tenant:reinstate,online revalidation,tenant.reinstated,Remain SUSPENDED
-FAC-SM-001,Tenant,ACTIVE,CLOSING,begin_close,tenant:close,impact review,tenant.closing,Remain ACTIVE
-FAC-SM-001,Tenant,CLOSING,CLOSED,complete_close,tenant:close,reconciliation complete,tenant.closed,Remain CLOSING
-FAC-SM-001,Tenant,CLOSED,ARCHIVED,archive,tenant:archive,retention gate,tenant.archived,Remain CLOSED
-FAC-SM-002,Facility,PLANNED,ACTIVE,activate,facility:activate,identity/topology validated,facility.activated,Remain PLANNED
-FAC-SM-002,Facility,ACTIVE,DEGRADED,degrade,facility:status,operational limitation,facility.degraded,Remain ACTIVE
-FAC-SM-002,Facility,ACTIVE,RESTRICTED,restrict,facility:restrict,risk or dispute,facility.restricted,Remain ACTIVE
-FAC-SM-002,Facility,ACTIVE,SUSPENDED,suspend,facility:suspend,governance reason,facility.suspended,Remain ACTIVE
-FAC-SM-002,Facility,ACTIVE,CLOSED,close,facility:close,impact review,facility.closed,Remain ACTIVE
-FAC-SM-002,Facility,CLOSED,DECOMMISSIONED,decommission,facility:decommission,lineage preserved and credentials revoked,facility.decommissioned,Remain CLOSED
-FAC-SM-002,Facility,DECOMMISSIONED,ARCHIVED,archive,facility:archive,retention gate,facility.archived,Remain DECOMMISSIONED
-FAC-SM-003,Organization,DRAFT,ACTIVE,activate,organization:activate,minimum identity evidence,organization.activated,Remain DRAFT
-FAC-SM-003,Organization,ACTIVE,RESTRICTED,restrict,organization:restrict,dispute or risk,organization.restricted,Remain ACTIVE
-FAC-SM-003,Organization,ACTIVE,SUSPENDED,suspend,organization:suspend,reason and impact,organization.suspended,Remain ACTIVE
-FAC-SM-003,Organization,ACTIVE,DISSOLVING,begin_dissolution,organization:close,successor assessment,organization.dissolving,Remain ACTIVE
-FAC-SM-003,Organization,DISSOLVING,CLOSED,close,organization:close,associations ended,organization.closed,Remain DISSOLVING
-FAC-SM-003,Organization,CLOSED,ARCHIVED,archive,organization:archive,retention gate,organization.archived,Remain CLOSED
-FAC-SM-004,FacilityArea,PLANNED,ACTIVE,activate,facility_area:write,valid acyclic parent,facility_area.activated,Remain PLANNED
-FAC-SM-004,FacilityArea,ACTIVE,RESTRICTED,restrict,facility_area:restrict,reason,facility_area.restricted,Remain ACTIVE
-FAC-SM-004,FacilityArea,ACTIVE,OUT_OF_SERVICE,take_out_of_service,facility_area:write,operational reason,facility_area.out_of_service,Remain ACTIVE
-FAC-SM-004,FacilityArea,OUT_OF_SERVICE,ACTIVE,restore,facility_area:write,inspection/evidence,facility_area.restored,Remain OUT_OF_SERVICE
-FAC-SM-004,FacilityArea,ACTIVE,RETIRED,retire,facility_area:retire,impact review,facility_area.retired,Remain ACTIVE
-FAC-SM-004,FacilityArea,RETIRED,ARCHIVED,archive,facility_area:archive,retention gate,facility_area.archived,Remain RETIRED
+entity,from_state,to_state,required_evidence,required_controls,automatic,decision_ids
+Tenant,DRAFT,PENDING_VERIFICATION,tenant profile and steward assertion,actor attribution; audit,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,PENDING_VERIFICATION,ACTIVE,verification outcome,Founder-approved design and later authorized implementation workflow,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,ACTIVE,RESTRICTED,scoped restriction basis,notice handoff; job/search/offline enforcement,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,ACTIVE,SUSPENDED,suspension authority and reason,immediate fail-closed enforcement; evidence preservation,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,SUSPENDED,ACTIVE,reviewed restoration evidence,fresh context and permission reevaluation,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,ACTIVE,WIND_DOWN,closure plan,dependency register and communications handoff,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,WIND_DOWN,CLOSED,reconciliation completion,no ordinary activity; records retained,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,CLOSED,ARCHIVED,retention classification,historical resolvability,FALSE,FAC-FD-007;FAC-FD-008
+Facility,DRAFT,VERIFIED,identity/location verification,provenance and duplicate review,FALSE,FAC-FD-007;FAC-FD-008
+Facility,VERIFIED,ACTIVE,operational activation evidence,separate implementation authority required,FALSE,FAC-FD-007;FAC-FD-008
+Facility,ACTIVE,PARTIALLY_RESTRICTED,affected-area restriction,topology-specific invalidation,FALSE,FAC-FD-007;FAC-FD-008
+Facility,ACTIVE,SUSPENDED,facility-wide restriction basis,tenant associations reevaluated,FALSE,FAC-FD-007;FAC-FD-008
+Facility,SUSPENDED,ACTIVE,reviewed restoration evidence,freshness and safety verification,FALSE,FAC-FD-007;FAC-FD-008
+Facility,ACTIVE,CLOSED,closure and continuity plan,no silent downstream transfer,FALSE,FAC-FD-007;FAC-FD-008
+Facility,CLOSED,DECOMMISSIONED,physical decommission evidence,credentials/devices/maps revoked,FALSE,FAC-FD-007;FAC-FD-008
+Facility,DECOMMISSIONED,ARCHIVED,retention classification,historical resolvability,FALSE,FAC-FD-007;FAC-FD-008
+Organization,DRAFT,PENDING_VERIFICATION,organization assertion,identity and duplicate review,FALSE,FAC-FD-007;FAC-FD-008
+Organization,PENDING_VERIFICATION,ACTIVE,verification evidence,actor authority remains external,FALSE,FAC-FD-007;FAC-FD-008
+Organization,ACTIVE,RESTRICTED,scoped restriction basis,tenant controls reevaluated,FALSE,FAC-FD-007;FAC-FD-008
+Organization,ACTIVE,SUSPENDED,suspension authority,no implicit identity deletion,FALSE,FAC-FD-007;FAC-FD-008
+Organization,SUSPENDED,ACTIVE,reviewed restoration evidence,relationships and permissions reevaluated,FALSE,FAC-FD-007;FAC-FD-008
+Organization,ACTIVE,WIND_DOWN,restructuring/closure plan,cross-domain reconciliation,FALSE,FAC-FD-007;FAC-FD-008
+Organization,WIND_DOWN,CLOSED,completion evidence,historical identity preserved,FALSE,FAC-FD-007;FAC-FD-008
+Organization,CLOSED,ARCHIVED,retention classification,no ordinary authority,FALSE,FAC-FD-007;FAC-FD-008
