@@ -1,40 +1,52 @@
 # Machine Validation Report
 
-**Review cycle:** `ES-REV-2026-021`  
-**Requested run:** `ES-RA-04-ES-REV-2026-021-RUN-01`  
-**Requested role:** ES-RA-04 machine validation equivalent  
-**Frozen candidate commit:** `78fd67a1687dd150f10a21d2507baab750f03490`  
-**Frozen package tree:** `2e6daf51752d680c76323b02d8d1a76a838ecd14`  
-**Formal run validity:** `PERMISSION_CHECK_FAILED`  
+**Review cycle:** `ES-REV-2026-022`
+**Agent run ID:** `ES-REV-2026-022-RA04-01`
+**Requested role:** ES-RA-04 Machine Validation Agent
+**Exact R2 input commit:** `56b0a88722d983e05baec0d3b1ea5b7b88c24001`
+**Exact R2 input tree:** `a60e900c2d0eef17c1f1b8a98f01f5ff1e30647d`
+**Permission record:** `RUNTIME_PERMISSION_RECORDS.csv`
+**Permission result:** `FAIL`
+**Formal run validity:** `NOT_STARTED_PERMISSION_CHECK_FAILED`
+**Role started:** `false`
 **Custom-agent execution claimed:** `false`
 
-## Formal-role status
+## Pre-spawn result
 
-No valid ES-RA-04 run occurred. The required workspace-write/on-request permission record and a compliant parent mode were absent. The results below are preliminary deterministic drafting checks performed by the orchestrator in an isolated temporary clone. They do not satisfy the formal independent machine-validation role.
+Required posture: `isolated bounded workspace-write/on-request/network-disabled`. Observed parent posture: unrestricted/danger-full-access equivalent, `approval_policy=never`, network enabled. Actual reviewer mode was not observed because the role was not spawned. No Founder exception exists. The role stopped before substantive work, as the authorization requires.
 
-## Preserved first failure
+## Scope denominator and accounting
 
-The initial design-freeze validator executed 21 checks and reported 21 passed. A separate semantic search then found that `SOURCE_GAPS.csv` correctly recorded two Founder-decision gaps as resolved, while `PIA_FACILITY_TENANT_ORGANIZATION_MACHINE_READABLE.json` retained the historical `FOUNDER_DECISION_REQUIRED` values. This is `ES-REV-2026-021-MV-F-0001`, P1, because machine consumers could contradict the approved decision status.
+Assigned population: the complete formal validation inventory for package structure, hashes, cross-format parity, requirement/acceptance/test traceability, machine-readable status, and correction re-verification.
 
-The documentary correction synchronized the machine JSON to the CSV, added explicit parity/status checks to `PIA_PACKAGE_VALIDATOR.py`, and advanced the package revision from R1 to R2. The orchestrator reran the validator, but independent verification is unavailable under the current permission control; the finding remains `REMEDIATED_UNVERIFIED`.
+- Validly completed: 0
+- Completed with limitation: 0
+- Blocked/not reviewed: complete assigned population
+- Formal coverage: 0%
+- Sampling: none
 
-## Preliminary validation inventory
+## Procedures not performed
 
-Checks cover manifest entries and hashes, checksums, inventory, filenames/file types, required artifacts, CSV/JSON parseability, measurable Markdown references, 18 unique decisions and approved status, FAC-FD-017 language, 55 requirements, 55 criteria, 85 tests, positive/negative/boundary mapping, identifier uniqueness, traceability, permission-matrix parity, sealed-source hashes, Founder-directive hash, source-gap parity, allowed status/severity values, implementation authority false, not-adopted/not-locked status, and Identity/Relationships segregation.
+No formal validation inventory was initialized; no independent command suite, repeatability test, tool-trust assessment, or separate re-performance occurred. Orchestrator intake reproduced the R2 checksums and 25/25 package checks only to establish immutable input identity. Those intake checks are not an ES-RA-04 run. Prior finding ES-REV-2026-021-MV-F-0001 therefore remains REMEDIATED_UNVERIFIED.
 
-Final preliminary result is recorded in `VALIDATION_REPORT.json` and `VALIDATION_REPORT.md`. Command, environment, exit-code, first-failure, and rerun evidence is in `VALIDATION_COMMAND_LOG.txt`.
+No substantive conclusion from ES-REV-2026-021 was copied or treated as evidence for this role.
 
 ## Classifications
 
-- Completeness: `C3_COMPLETE_WITH_LIMITATIONS` for the orchestrator check inventory; formal ES-RA-04 coverage is 0%.
-- Reliability: `R2_INTERNALLY_CHECKED`; no independent formal rerun.
-- Highest evidence: `E4` for deterministic hash/parse/count checks.
-- Formal role disposition: not issued.
+- Completeness: `C0_NOT_STARTED`
+- Reliability: `R0_UNASSESSED`
+- Substantive evidence sufficiency: `E0_NO_SUPPORTING_EVIDENCE`
+- Formal disposition: not issued
+- Orchestration gate result: `PERMISSION_CHECK_FAILED`
 
 ## Completion Attestation
 
-Not issued for ES-RA-04 because the formal role ledger and permission prerequisites are incomplete.
+Not issued. The role did not start and no Work Completeness Ledger for substantive role procedures exists.
 
 ## What This Work Did Not Establish
 
-The checks do not establish implementation behavior, executable coverage, runtime authorization, offline revocation behavior, cross-environment reproducibility, absence of semantic defects, adoption, lock, or implementation readiness.
+This blocked role did not establish correctness, completeness, absence of findings, pass status, adoption-review readiness, implementation status, executable behavior, or external assurance.
+
+## Required next action
+
+Launch a fresh ES-RA-04 in an isolated bounded workspace-write/on-request/network-disabled environment and independently reverify the R2 correction.

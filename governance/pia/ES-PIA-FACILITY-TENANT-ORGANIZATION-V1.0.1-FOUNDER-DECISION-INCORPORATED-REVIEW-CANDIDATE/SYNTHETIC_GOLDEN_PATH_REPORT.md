@@ -1,32 +1,52 @@
-# Synthetic Golden Path Report
+# Synthetic Golden Path Documentary Review Report
 
-**Review cycle:** `ES-REV-2026-021`  
-**Requested run:** `ES-RA-07-ES-REV-2026-021-RUN-01`  
-**Requested role:** ES-RA-07 synthetic golden-path specification equivalent  
-**Frozen candidate commit:** `78fd67a1687dd150f10a21d2507baab750f03490`  
-**Frozen package tree:** `2e6daf51752d680c76323b02d8d1a76a838ecd14`  
-**Formal run validity:** `PERMISSION_CHECK_FAILED`  
+**Review cycle:** `ES-REV-2026-022`
+**Agent run ID:** `ES-REV-2026-022-RA07-01`
+**Requested role:** ES-RA-07 Synthetic Golden-Path Specification Agent
+**Exact R2 input commit:** `56b0a88722d983e05baec0d3b1ea5b7b88c24001`
+**Exact R2 input tree:** `a60e900c2d0eef17c1f1b8a98f01f5ff1e30647d`
+**Permission record:** `RUNTIME_PERMISSION_RECORDS.csv`
+**Permission result:** `FAIL`
+**Formal run validity:** `NOT_STARTED_PERMISSION_CHECK_FAILED`
+**Role started:** `false`
 **Custom-agent execution claimed:** `false`
 
-## Formal-role status
+## Pre-spawn result
 
-No valid ES-RA-07 run occurred because its workspace-write/on-request permission prerequisites were not met. The orchestrator performed a preliminary, non-executable documentary mapping only. No application, service, database, migration, enrollment, production-like record, or runtime was started.
+Required posture: `authorized bounded workspace-write/on-request/network-disabled; documentary only`. Observed parent posture: unrestricted/danger-full-access equivalent, `approval_policy=never`, network enabled. Actual reviewer mode was not observed because the role was not spawned. No Founder exception exists. The role stopped before substantive work, as the authorization requires.
 
-## Preliminary documentary paths
+## Scope denominator and accounting
 
-All 12 directive paths were mapped to approved design requirements, registered tests, and observable design oracles: owner horse-first without Facility; later Facility association; independent trainer without Organization; later Organization association; Facility topology; two Tenants at one Facility; one Organization controlling multiple Tenants through explicit evidence; audited context switch; duplicate without automatic merge; ambiguous legacy quarantine; scoped provider capability; and Facility closure/transfer evidence.
+Assigned population: the 12 Founder-directed documentary golden paths.
 
-Preliminary mapping result: 12 specified, 12 requirement/test/oracle mappings resolved, 0 mapping failures. Fixture family is synthetic seed `FAC-20260721-017` with UTC clock `2026-07-21T12:00:00Z`. This is not executable reproduction and does not receive `SYNTHETIC_PATH_READY_FOR_EXECUTION`.
+- Validly completed: 0
+- Completed with limitation: 0
+- Blocked/not reviewed: complete assigned population
+- Formal coverage: 0%
+- Sampling: none
 
-## Coverage and classifications
+## Procedures not performed
 
-- Preliminary documentary denominator: 12; completed with limitation: 12; coverage 100% for mapping only.
-- Formal ES-RA-07 denominator: 12; validly completed: 0; blocked: 12; coverage 0%.
-- Completeness: `C3_COMPLETE_WITH_LIMITATIONS` for root mapping; `C0_NOT_STARTED` for formal role.
-- Reliability: `R2_INTERNALLY_CHECKED` for mapping; formal role `R0_UNASSESSED`.
-- Highest evidence: `E3` for approved-design plus requirement/test corroboration.
-- Completion Attestation: not issued for ES-RA-07.
+No fresh path-by-path authority, actor, permission, state, transition, action, expected-result, oracle, evidence, cleanup, timing, or integration review occurred. Existing R2 Golden 12 materials are historical input only. No executable controller was authorized or run.
+
+No substantive conclusion from ES-REV-2026-021 was copied or treated as evidence for this role.
+
+## Classifications
+
+- Completeness: `C0_NOT_STARTED`
+- Reliability: `R0_UNASSESSED`
+- Substantive evidence sufficiency: `E0_NO_SUPPORTING_EVIDENCE`
+- Formal disposition: not issued
+- Orchestration gate result: `PERMISSION_CHECK_FAILED`
+
+## Completion Attestation
+
+Not issued. The role did not start and no Work Completeness Ledger for substantive role procedures exists.
 
 ## What This Work Did Not Establish
 
-No executable path, UI/API/database/event/audit behavior, timing, cleanup execution, implementation coverage, or production readiness was established.
+This blocked role did not establish correctness, completeness, absence of findings, pass status, adoption-review readiness, implementation status, executable behavior, or external assurance.
+
+## Required next action
+
+Launch a fresh ES-RA-07 only after its pre-spawn record passes in a bounded workspace-write/on-request/network-disabled documentary specification environment.

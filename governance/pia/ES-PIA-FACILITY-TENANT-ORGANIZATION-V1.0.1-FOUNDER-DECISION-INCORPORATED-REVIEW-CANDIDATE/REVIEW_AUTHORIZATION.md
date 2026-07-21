@@ -1,12 +1,19 @@
-# Founder Review Authorization
+# Founder Review Authorization — ES-REV-2026-022
 
-**Review cycle:** `ES-REV-2026-021`  
-**Authorized by:** Rian Ray, Founder and Program Owner  
-**Authorization date:** `2026-07-21`  
-**Source evidence:** `source_evidence/FOUNDER_DIRECTIVE_FAC_FD_001_THROUGH_FAC_FD_018.md` (`7bd8fa59f4720f261194f1148f4a0f19665f91700656e0632953e40079438ac4`)
+**Review cycle:** `ES-REV-2026-022`
+**Authorized by:** Rian Ray, Founder and Program Owner
+**Authorization date:** `2026-07-21`
+**Fresh-review directive SHA-256:** `7c49bf8157d8c3bf3966d1669a3719de54bdf7ad195e1cfd5edfc94a38a529c6`
+**Exact R2 input commit:** `56b0a88722d983e05baec0d3b1ea5b7b88c24001`
+**Exact R2 input tree:** `a60e900c2d0eef17c1f1b8a98f01f5ff1e30647d`
+**R2 input manifest SHA-256:** `fc9ea834472aa603ebebe099b2270a091ce8af72a736bb6183a2066e42c81527`
 
-Authorized scope: incorporate `FAC-FD-001` through `FAC-FD-018`, apply the mandatory `FAC-FD-017` adaptive-onboarding refinement, and conduct a fresh documentary structured review using segregated, adversarial, machine, evidence-custody, domain, and synthetic golden-path functions.
+The Founder authorized an attempt at a fresh documentary structured review of the byte-unchanged `1.0.1-R2` Facility PIA candidate. The authorization requires a complete `PASS` pre-spawn permission record before each formal role begins. It grants no broad exception to `AGENTS.md` or `RUNTIME_PERMISSION_CONTROL.md`.
 
-Prohibited: implementation, application/database/schema/migration changes, startup, enrollment, production, release, deployment, activation, PR, merge, tag, adoption, lock, unrelated-finding closure, or sealed-source modification. The current Identity and Relationships successor remains separate and not Founder-approved.
+The required role posture is read-only/on-request/network-disabled for documentary reviewers and isolated bounded workspace-write/on-request/network-disabled for Machine Validation, Evidence Custody, and Synthetic Documentary Specification. Production access must be absent and measurable.
 
-Permitted final gate: recommendation for Founder adoption review only, or an evidence-based blocked/correction disposition.
+The live parent posture was unrestricted/danger-full-access equivalent, `approval_policy=never`, and network-enabled. The task exposed no compliant permission transition and no reliable way to measure the effective reviewer mode without a prohibited spawn. Six of six formal-role checks therefore failed and zero roles started.
+
+Authorized outcome under this condition: create review-cycle failure evidence and assign `FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE`. This authorization does not approve, adopt, lock, implement, release, deploy, activate, enroll, or start the application or any service.
+
+Prohibited: application-code, database, schema, migration, service-start, executable-test, enrollment, production, deployment, release, PR, merge, tag, adoption, lock, unrelated-finding closure, sealed-source modification, and any representation that the Identity and Relationships successor text is Founder-approved.

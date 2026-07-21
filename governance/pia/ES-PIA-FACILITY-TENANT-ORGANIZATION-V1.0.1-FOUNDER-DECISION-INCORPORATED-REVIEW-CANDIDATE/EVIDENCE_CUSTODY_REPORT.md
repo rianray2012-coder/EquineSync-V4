@@ -1,49 +1,52 @@
 # Evidence Custody Report
 
-**Review cycle:** `ES-REV-2026-021`  
-**Requested run:** `ES-RA-05-ES-REV-2026-021-RUN-01`  
-**Requested role:** ES-RA-05 evidence custodian equivalent  
-**Frozen candidate commit:** `78fd67a1687dd150f10a21d2507baab750f03490`  
-**Frozen package tree:** `2e6daf51752d680c76323b02d8d1a76a838ecd14`  
-**Formal run validity:** `PERMISSION_CHECK_FAILED`  
+**Review cycle:** `ES-REV-2026-022`
+**Agent run ID:** `ES-REV-2026-022-RA05-01`
+**Requested role:** ES-RA-05 Evidence Custodian
+**Exact R2 input commit:** `56b0a88722d983e05baec0d3b1ea5b7b88c24001`
+**Exact R2 input tree:** `a60e900c2d0eef17c1f1b8a98f01f5ff1e30647d`
+**Permission record:** `RUNTIME_PERMISSION_RECORDS.csv`
+**Permission result:** `FAIL`
+**Formal run validity:** `NOT_STARTED_PERMISSION_CHECK_FAILED`
+**Role started:** `false`
 **Custom-agent execution claimed:** `false`
 
-## Formal-role status
+## Pre-spawn result
 
-No valid ES-RA-05 run occurred because the required workspace-write/on-request permission record and compliant parent mode were absent. The orchestrator performed preliminary read/hash custody procedures only.
+Required posture: `controlled bounded workspace-write/on-request/network-disabled`. Observed parent posture: unrestricted/danger-full-access equivalent, `approval_policy=never`, network enabled. Actual reviewer mode was not observed because the role was not spawned. No Founder exception exists. The role stopped before substantive work, as the authorization requires.
 
-## Expected, received, and relied-upon evidence
+## Scope denominator and accounting
 
-| Evidence population | Expected | Received | Hash verified | Status |
-|---|---:|---:|---:|---|
-| V1.0.0 repository candidate files | 36 | 36 | 36 | complete, byte parity with local ZIP |
-| Original exact authority sources | 38 | 38 | 38 | complete at frozen commit |
-| Founder directive | 1 | 1 | 1 | exact bytes preserved |
-| Repository permission controls | 2 | 2 | 2 | exact commit paths/hash recorded |
-| Framework V1.3 PDF | 1 | 1 | 1 | external reference, not copied into package |
-| Nominal `/mnt/data/...Candidate(2).zip` | 1 | 0 | 0 | unavailable; byte-identical local archive supplied by matching required digest |
+Assigned population: expected, received, missing, unused, conflicting, derivative, and relied-upon evidence inventories plus the cross-agent completion gate.
 
-The 39 package-relied sources (38 repository sources plus the Founder directive) all resolved and matched their registered hashes at the design freeze. `AGENTS.md` SHA-256 is `c5cdc19b2b23ce4d52ea52898c40e82c76ec90834e746b58fd671f5b5dc426ff`; `RUNTIME_PERMISSION_CONTROL.md` SHA-256 is `8ab99a6a2440e4205ec46187e553cd58c42d55e2e650b26ed1a4935989086a06`; the Framework V1.3 PDF SHA-256 is `c7d2e9f558d69ac4fc6d7e1621d0fb72b81933f6987f0c7ab2167ccf35648abe`.
+- Validly completed: 0
+- Completed with limitation: 0
+- Blocked/not reviewed: complete assigned population
+- Formal coverage: 0%
+- Sampling: none
 
-## Derivative and custody lineage
+## Procedures not performed
 
-- V1.0.0 candidate commit `a5cf78295ad43cde7f73e383b3d5e98a11000382` -> successor R1 design-freeze commit `78fd67a1687dd150f10a21d2507baab750f03490`.
-- R1 package tree `2e6daf51752d680c76323b02d8d1a76a838ecd14` -> R2 documentary correction and blocked review-evidence package.
-- Local V1.0.0 archive SHA-256 `caedeb798e5ebf337c077720ac6d9204f178110cb5e4900767a22c93c2808df3` matched all 36 repository package members.
-- Existing sealed source-evidence files remain byte-identical; sealed-source modification count is zero.
-- Identity and Relationships successor text was neither copied nor treated as Founder-approved.
+No formal custody inventories, evidence-reliance map, derivative-parent confirmation, broken-reference closure check, independent hash recalculation, or cross-agent completion verification occurred. Orchestrator intake reproduced the exact R2 package identity and 39/39 relied-source hashes from Git objects; that intake evidence is not an ES-RA-05 completion.
 
-## Missing, unused, conflicting, and derivative evidence
+No substantive conclusion from ES-REV-2026-021 was copied or treated as evidence for this role.
 
-The nominal `/mnt/data` archive path is missing, but its directive digest is corroborated by the byte-identical local archive. The material conflict was procedural: the Founder review directive requires fallback passes, while repository permission control prohibits formal role delegation under the live unrestricted/never mode without a detailed exception. The stricter fail-closed control governed. Review reports and manifests are generated derivatives and identify their parent commit/tree.
+## Classifications
 
-## Classification and attestation
+- Completeness: `C0_NOT_STARTED`
+- Reliability: `R0_UNASSESSED`
+- Substantive evidence sufficiency: `E0_NO_SUPPORTING_EVIDENCE`
+- Formal disposition: not issued
+- Orchestration gate result: `PERMISSION_CHECK_FAILED`
 
-- Completeness: `C3_COMPLETE_WITH_LIMITATIONS` for preliminary custody; formal ES-RA-05 coverage is 0%.
-- Reliability: `R2_INTERNALLY_CHECKED`.
-- Highest evidence: `E4` direct hash verification; no E5 independent custodian rerun.
-- Formal Completion Attestation: not issued.
+## Completion Attestation
+
+Not issued. The role did not start and no Work Completeness Ledger for substantive role procedures exists.
 
 ## What This Work Did Not Establish
 
-It did not establish external assurance, immutable storage, independent custody, formally valid cross-agent completion, or Founder adoption. A fresh authorized Evidence Custodian run must reperform completion-gate checks.
+This blocked role did not establish correctness, completeness, absence of findings, pass status, adoption-review readiness, implementation status, executable behavior, or external assurance.
+
+## Required next action
+
+Launch a fresh ES-RA-05 only after its pre-spawn record passes in a controlled bounded workspace-write/on-request/network-disabled environment.

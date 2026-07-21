@@ -1,52 +1,52 @@
 # Segregated Review Report
 
-**Review cycle:** `ES-REV-2026-021`  
-**Requested run:** `ES-RA-02-ES-REV-2026-021-RUN-01`  
-**Requested role:** ES-RA-02 segregated review equivalent  
-**Frozen candidate commit:** `78fd67a1687dd150f10a21d2507baab750f03490`  
-**Frozen package tree:** `2e6daf51752d680c76323b02d8d1a76a838ecd14`  
-**Formal run validity:** `PERMISSION_CHECK_FAILED`  
+**Review cycle:** `ES-REV-2026-022`
+**Agent run ID:** `ES-REV-2026-022-RA02-01`
+**Requested role:** ES-RA-02 Segregated Review Agent
+**Exact R2 input commit:** `56b0a88722d983e05baec0d3b1ea5b7b88c24001`
+**Exact R2 input tree:** `a60e900c2d0eef17c1f1b8a98f01f5ff1e30647d`
+**Permission record:** `RUNTIME_PERMISSION_RECORDS.csv`
+**Permission result:** `FAIL`
+**Formal run validity:** `NOT_STARTED_PERMISSION_CHECK_FAILED`
+**Role started:** `false`
 **Custom-agent execution claimed:** `false`
 
-## Permission-control result
+## Pre-spawn result
 
-The requested isolated generic reviewer discovered that the parent live environment was `danger-full-access`/unrestricted with `approval_policy=never`. `AGENTS.md` and the installation-level mandatory `RUNTIME_PERMISSION_CONTROL.md` require read-only plus on-request approval for ES-RA-02 and prohibit unrestricted/never operation without an express, documented Founder exception containing the required environment fields. `REVIEW_AUTHORIZATION.md` does not contain that exception.
-
-The required pre-spawn permission record was also not created before delegation. The reviewer notified the orchestrator after partial read-only inspection; the orchestrator stopped the run. No files were written, no network or connector action was taken by the reviewer, and no role completion attestation or pass recommendation was issued.
+Required posture: `read-only/on-request/network-disabled`. Observed parent posture: unrestricted/danger-full-access equivalent, `approval_policy=never`, network enabled. Actual reviewer mode was not observed because the role was not spawned. No Founder exception exists. The role stopped before substantive work, as the authorization requires.
 
 ## Scope denominator and accounting
 
-| Population | Assigned | Validly completed | Blocked/not reviewed | Coverage |
-|---|---:|---:|---:|---:|
-| Founder decisions | 18 | 0 | 18 | 0% |
-| Requirements | 55 | 0 | 55 | 0% |
-| Acceptance criteria | 55 | 0 | 55 | 0% |
-| Test specifications | 85 | 0 | 85 | 0% |
-| Two review passes | 2 | 0 | 2 | 0% |
+Assigned population: 18 Founder decisions; 55 requirements; 55 acceptance criteria; 85 test specifications; 16 focused FAC-FD-017 cases; two independent review passes.
 
-Partial inspection is not counted because the permission gate failed and no itemized reviewer ledger was completed.
+- Validly completed: 0
+- Completed with limitation: 0
+- Blocked/not reviewed: complete assigned population
+- Formal coverage: 0%
+- Sampling: none
 
-## Findings and registers
+## Procedures not performed
 
-- Orchestration finding `ES-REV-2026-021-ORCH-F-0001` is substantiated P1 and blocking.
-- Independent detection, structured coverage, contradiction, ambiguity, omission, missing-evidence, untested-claim, and overstatement registers were not validly completed.
-- No substantive “no findings” claim is made.
+Independent detection, structured coverage, omission search, source-to-provision verification, P0/P1 evidence inspection, overstatement review, self-audit, and completion attestation were not performed.
+
+No substantive conclusion from ES-REV-2026-021 was copied or treated as evidence for this role.
 
 ## Classifications
 
-- Completeness: `C1_PARTIAL` (partial inspection occurred, but valid scope accounting is 0%).
-- Reliability: `R0_UNASSESSED`.
-- Highest evidence: `E4` for direct inspection of the permission-control conflict only.
-- Permitted role disposition: not issued; orchestration result is `PERMISSION_CHECK_FAILED`.
-
-## Self-audit
-
-The reviewer remained read-only and did not approve, adopt, lock, accept risk, or authorize implementation. The run did not satisfy initialization, permission, ledger, two-pass, or attestation requirements and is not presented as a valid ES-RA-02 completion.
+- Completeness: `C0_NOT_STARTED`
+- Reliability: `R0_UNASSESSED`
+- Substantive evidence sufficiency: `E0_NO_SUPPORTING_EVIDENCE`
+- Formal disposition: not issued
+- Orchestration gate result: `PERMISSION_CHECK_FAILED`
 
 ## Completion Attestation
 
-Not issued. The Work Completeness Ledger for the assigned role is incomplete.
+Not issued. The role did not start and no Work Completeness Ledger for substantive role procedures exists.
 
 ## What This Work Did Not Establish
 
-This stopped run did not establish substantive completeness, internal consistency, testability, source-to-provision accuracy, absence of P0/P1 defects, or readiness for Founder adoption review. A fresh review in read-only/on-request mode, or under an exact Founder exception satisfying `RUNTIME_PERMISSION_CONTROL.md`, is required.
+This blocked role did not establish correctness, completeness, absence of findings, pass status, adoption-review readiness, implementation status, executable behavior, or external assurance.
+
+## Required next action
+
+Launch a fresh ES-RA-02 only after its pre-spawn record passes in a read-only/on-request/network-disabled runtime.
