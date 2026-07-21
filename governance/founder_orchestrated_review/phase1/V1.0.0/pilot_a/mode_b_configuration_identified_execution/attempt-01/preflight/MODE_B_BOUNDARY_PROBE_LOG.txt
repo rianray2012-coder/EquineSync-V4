@@ -1,0 +1,54 @@
+ATTEMPT=ES-PH1-PILOT-A-MODE-B-ATTEMPT-01
+PROBE_STAGE=ORIGINAL_LAYOUT
+ORIGINAL_REPOSITORY_PATH=/tmp/equinesync-mode-b.PNQm91/EquineSync-V4
+
+ROLE=ES-RA-02
+OWN_SHASUM_EXIT=134
+SIBLING_READ_EXIT=1
+HIDDEN_ORACLE_READ_EXIT=0
+AUTH_FILE_READ_EXIT=1
+ASSIGNED_OUTPUT_WRITE_EXIT=0
+ROLE_ROOT_WRITE_EXIT=1
+NETWORK_PROBE_EXIT=6
+
+ROLE=ES-RA-03
+OWN_SHASUM_EXIT=134
+SIBLING_READ_EXIT=1
+HIDDEN_ORACLE_READ_EXIT=0
+AUTH_FILE_READ_EXIT=1
+ASSIGNED_OUTPUT_WRITE_EXIT=0
+ROLE_ROOT_WRITE_EXIT=1
+NETWORK_PROBE_EXIT=6
+
+ROLE=ES-RA-04
+OWN_SHASUM_EXIT=134
+SIBLING_READ_EXIT=1
+HIDDEN_ORACLE_READ_EXIT=0
+AUTH_FILE_READ_EXIT=1
+ASSIGNED_OUTPUT_WRITE_EXIT=0
+ROLE_ROOT_WRITE_EXIT=1
+NETWORK_PROBE_EXIT=6
+
+ROLE=ES-RA-05
+OWN_SHASUM_EXIT=134
+SIBLING_READ_EXIT=1
+HIDDEN_ORACLE_READ_EXIT=0
+AUTH_FILE_READ_EXIT=1
+ASSIGNED_OUTPUT_WRITE_EXIT=0
+ROLE_ROOT_WRITE_EXIT=1
+NETWORK_PROBE_EXIT=6
+
+INTERPRETATION:
+- Exit 0 on HIDDEN_ORACLE_READ is a failed prohibited-read control.
+- Exit 134 on OWN_SHASUM is a failed authorized-tool availability control; the sandbox denied a required system Perl runtime library.
+- Sibling, credential, and role-root access were denied as intended.
+- Assigned output write was allowed as intended.
+- Network resolution was denied as intended.
+
+PROBE_STAGE=BOUNDED_CORRECTIVE_OBSERVATION_NOT_A_NEW_ATTEMPT
+CORRECTIVE_CHANGE=Relocate clone outside /tmp and allow read-only /System/Library/Perl runtime support.
+ROLE=ES-RA-04
+OWN_SHASUM_EXIT=0
+HIDDEN_ORACLE_READ_EXIT=1
+
+The corrective observation demonstrates a candidate configuration for a separately authorized attempt. It does not erase, reset, retry, or convert the original failed Attempt 01 preflight.

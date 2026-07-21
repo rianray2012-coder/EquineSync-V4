@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-01",
+  "recorded_at": "2026-07-21T22:12:55Z",
+  "execution_mode": "CONFIGURATION_IDENTIFIED_MANUAL_ROLE_EXECUTION",
+  "host": {
+    "os": "macOS",
+    "architecture": "arm64",
+    "codex_cli_version": "0.144.6",
+    "generic_model": "gpt-5.6-sol",
+    "provider": "OpenAI",
+    "provider_transport_required": true
+  },
+  "parent_runtime": {
+    "filesystem": "unrestricted",
+    "network": "enabled",
+    "used_for_role_execution": false
+  },
+  "candidate_role_profile": {
+    "filesystem": "managed restricted allowlist",
+    "network": "restricted",
+    "approval_policy": "never",
+    "role_area_read": true,
+    "assigned_output_write": true,
+    "sibling_read": false,
+    "credential_store_read": false,
+    "repository_read_original_layout": true,
+    "repository_read_after_relocation": false
+  },
+  "auth": {
+    "storage": "/Users/rianray/.codex/auth.json",
+    "stored_chatgpt_tokens": true,
+    "stored_api_key": false,
+    "role_tool_read_probe": "DENIED",
+    "equinesync_production_credentials_supplied": false
+  },
+  "planned_persistence_and_tracing_overrides": {
+    "ephemeral": true,
+    "history_persistence": "none",
+    "analytics_enabled": false,
+    "feedback_enabled": false,
+    "otel_exporter": "none",
+    "otel_trace_exporter": "none",
+    "otel_log_user_prompt": false,
+    "effective_role_execution_observation": "NOT_EXECUTED"
+  },
+  "context_probe": {
+    "prior_drafting_conversation_present": false,
+    "prior_role_outputs_present": false,
+    "host_baseline_developer_instructions_present": true,
+    "host_skill_descriptions_present": true,
+    "disposition": "UNRESOLVED_FOR_FOUNDER"
+  },
+  "output_directories": {
+    "ES-RA-02": 0,
+    "ES-RA-03": 0,
+    "ES-RA-04": 0,
+    "ES-RA-05": 0
+  },
+  "roles_attempted": 0,
+  "roles_executed": 0,
+  "roles_qualified": 0,
+  "preflight_status": "FAILED"
+}

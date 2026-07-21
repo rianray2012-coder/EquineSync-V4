@@ -1,0 +1,34 @@
+MODE B ATTEMPT 01 CHANGE MANIFEST
+
+Change type: ADDITIVE EVIDENCE ONLY
+Authorized root: governance/founder_orchestrated_review/phase1/V1.0.0/pilot_a/mode_b_configuration_identified_execution/attempt-01/
+Predecessor: 6565c87f2d2a1499ecd7f6efd83fbbbb67aeb29b
+Disposition: PILOT_A_CONFIGURATION_IDENTIFIED_EXECUTION_BLOCKED
+Historical files modified: NONE
+Mode A blocked-evidence files modified: NONE
+Role outputs created: NONE
+
+FILES
+MODE_B_CHANGE_MANIFEST.txt
+MODE_B_CHECKSUMS.sha256
+MODE_B_EXECUTION_ENVIRONMENT_SPECIFICATION.md
+MODE_B_FILE_MANIFEST.csv
+MODE_B_FOUNDER_DECISION_REGISTER.csv
+MODE_B_REPOSITORY_CUSTODY_RECORD.md
+MODE_B_ROLE_CONFIGURATION_REGISTER.csv
+PHASE_1_MODE_B_ASSURANCE_ASSESSMENT.md
+PHASE_1_MODE_B_FOUNDER_PACKAGE.md
+authority/FOUNDER_DIRECTIVE_2026-07-21.md
+oracle/MODE_B_HIDDEN_DEFECT_ORACLE.csv
+packet_manifests/ES-RA-02_INPUT_MANIFEST.json
+packet_manifests/ES-RA-03_INPUT_MANIFEST.json
+packet_manifests/ES-RA-04_INPUT_MANIFEST.json
+packet_manifests/ES-RA-05_INPUT_MANIFEST.json
+preflight/MODE_B_BOUNDARY_PROBE_LOG.txt
+preflight/MODE_B_EFFECTIVE_RUNTIME_RECORD.json
+preflight/MODE_B_INTEGRATION_STATE.json
+preflight/MODE_B_PREFLIGHT_CHECKS.csv
+preflight/MODE_B_PREFLIGHT_REPORT.md
+validation/MODE_B_VALIDATION_EVIDENCE.json
+validation/MODE_B_VALIDATION_REPORT.md
+validation/MODE_B_VALIDATION_RESULTS.csv

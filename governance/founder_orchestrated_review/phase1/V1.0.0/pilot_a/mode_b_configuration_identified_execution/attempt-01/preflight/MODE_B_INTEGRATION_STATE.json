@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-01",
+  "measured_before_role_execution": true,
+  "plugins": {
+    "feature_enabled": false,
+    "installed": [],
+    "available": [],
+    "status": "PASS"
+  },
+  "mcp_servers": [
+    {"name": "cloudflare-api", "enabled": false},
+    {"name": "computer-use", "enabled": false},
+    {"name": "github", "enabled": false},
+    {"name": "node_repl", "enabled": false},
+    {"name": "openaiDeveloperDocs", "enabled": false}
+  ],
+  "features_resolved_disabled": [
+    "apps",
+    "browser_use",
+    "browser_use_external",
+    "browser_use_full_cdp_access",
+    "computer_use",
+    "goals",
+    "hooks",
+    "image_generation",
+    "in_app_browser",
+    "memories",
+    "multi_agent",
+    "plugin_sharing",
+    "plugins",
+    "remote_plugin",
+    "skill_mcp_dependency_install",
+    "tool_suggest",
+    "workspace_dependencies"
+  ],
+  "live_web_search_enabled": false,
+  "role_runtime_verification": "NOT_EXECUTED_AFTER_PREFLIGHT_FAILURE"
+}

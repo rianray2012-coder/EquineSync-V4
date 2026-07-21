@@ -1,0 +1,24 @@
+check_id,control,required_result,observed_result,status,blocking,evidence
+MB-PF-001,repository and predecessor custody,exact official origin and predecessor,origin and 6565c87 verified,PASS,false,MODE_B_REPOSITORY_CUSTODY_RECORD.md
+MB-PF-002,exact branch and commit,new branch from exact predecessor,branch created at 6565c87,PASS,false,MODE_B_REPOSITORY_CUSTODY_RECORD.md
+MB-PF-003,Role Configuration hashes,all four exact,all four source profile and payload hashes match,PASS,false,MODE_B_ROLE_CONFIGURATION_REGISTER.csv
+MB-PF-004,role packet hashes,all frozen before execution,four frozen file-list hashes recorded,PASS,false,packet_manifests/
+MB-PF-005,input manifest hashes,all exact,four manifest SHA-256 values recorded,PASS,false,MODE_B_ROLE_CONFIGURATION_REGISTER.csv
+MB-PF-006,filesystem own-read,authorized files readable,authorized shasum exited 134 in original profile,FAIL,true,MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-PF-007,filesystem prohibited sibling-read,denied,exit 1 for all four,PASS,false,MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-PF-008,filesystem hidden-oracle isolation,denied,exit 0 for all four in original layout,FAIL,true,MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-PF-009,filesystem write boundary,output only,output exit 0 and role-root exit 1 for all four,PASS,false,MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-PF-010,effective shell permissions,bounded and authorized,required shasum unavailable in original profile,FAIL,true,MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-PF-011,effective network state,no role network,DNS probe exit 6 for all four,PASS,false,MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-PF-012,effective plugin state,none enabled,installed and available plugin lists empty with plugins disabled,PASS,false,MODE_B_INTEGRATION_STATE.json
+MB-PF-013,effective MCP state,none enabled,five configured entries all resolved disabled,PASS,false,MODE_B_INTEGRATION_STATE.json
+MB-PF-014,effective connector state,none enabled,apps connector browser and remote-plugin features disabled at resolution,PASS,false,MODE_B_INTEGRATION_STATE.json
+MB-PF-015,credential absence,no production credential exposure,ChatGPT auth path denied and no EquineSync production credential supplied,PASS,false,MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-PF-016,tracing configuration,no external tracing containing content,disable overrides parsed but no role invocation occurred,UNVERIFIED,true,MODE_B_EFFECTIVE_RUNTIME_RECORD.json
+MB-PF-017,session or process separation,fresh per role,no role process started after gate failure,NOT_EXECUTED,true,MODE_B_EFFECTIVE_RUNTIME_RECORD.json
+MB-PF-018,canary placement,one unique canary per packet,each envelope contained only its assigned unique canary,PASS,false,packet_manifests/
+MB-PF-019,hidden-oracle seal,oracle frozen and excluded from packets,oracle SHA recorded and manifest flags false,PASS,false,oracle/MODE_B_HIDDEN_DEFECT_ORACLE.csv
+MB-PF-020,output directory emptiness,all empty before execution,zero files in every output directory,PASS,false,MODE_B_EFFECTIVE_RUNTIME_RECORD.json
+MB-PF-021,historical evidence integrity,predecessor trees unchanged,all historical tree identities match,PASS,false,MODE_B_REPOSITORY_CUSTODY_RECORD.md
+MB-PF-022,model-visible context,no drafting conversation or prior outputs,debug probe showed no prior drafting messages but host baseline instructions remain,UNRESOLVED,true,MODE_B_EFFECTIVE_RUNTIME_RECORD.json
+MB-PF-023,preflight retry authority,no unapproved retry,Attempt 01 remains failed; corrective observation not used to launch roles,PASS,false,MODE_B_BOUNDARY_PROBE_LOG.txt

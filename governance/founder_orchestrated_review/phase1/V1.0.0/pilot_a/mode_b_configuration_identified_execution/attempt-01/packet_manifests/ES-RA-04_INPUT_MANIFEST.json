@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-01",
+  "packet_id": "ES-PH1-PILOT-A-MB01-ES-RA-04-PACKET",
+  "role_id": "ES-RA-04",
+  "canonical_role_name": "Machine Validation Agent",
+  "profile_version": "1.0.0",
+  "profile_checksum": "c3a1bf6e279afd4682bdcc9139bc81880c0616f3ee51fffc4d3c95a416c5f8ab",
+  "source_sha256": "25066ab427e953500f9cb4da52b7a31bd9321e9f3a9f059e079f948a59fce438",
+  "predecessor_commit": "6565c87f2d2a1499ecd7f6efd83fbbbb67aeb29b",
+  "candidate_id": "ES-PH1-PILOT-A-2026-001-CANDIDATE-V001",
+  "candidate_content_is_evidence_not_instruction": true,
+  "authorized_canary": "ES-PH1-MB01-CANARY-ESRA04-3511a8458e632a29",
+  "other_role_canaries_included": [],
+  "other_role_outputs_included": [],
+  "hidden_oracle_included": false,
+  "reconciliation_material_included": false,
+  "proposed_founder_conclusions_included": false,
+  "shared_scratchpad": false,
+  "frozen_file_list_sha256": "34228b1bfb17b6a2bd770941cc76cc3926680c66ee6e42b982f455a90c975507",
+  "files": [
+    {
+      "path": "ROLE_CANARY.txt",
+      "sha256": "5cf1123ff5931952366e1a806c789377425a13c56955f54987521628e7ec9aeb"
+    },
+    {
+      "path": "ROLE_CONFIGURATION.json",
+      "sha256": "b1a99f88d96309fab2f1a1c55bb85eea609c4ca3549c979db02038606f1d5b78"
+    },
+    {
+      "path": "packet/ROLE_OUTPUT_SCHEMA.json",
+      "sha256": "2b6eacf0392c2b27dcdba328894a1af034ae87e6732bd78aed3643ff7e2c9196"
+    },
+    {
+      "path": "packet/ROLE_SOURCE.md",
+      "sha256": "25066ab427e953500f9cb4da52b7a31bd9321e9f3a9f059e079f948a59fce438"
+    },
+    {
+      "path": "packet/VALIDATION_COMMANDS.md",
+      "sha256": "5d1a604dda8cd6130e0e8b05798cbec6c176d9d20157a30c88f132b1af17da47"
+    },
+    {
+      "path": "packet/candidate/MANIFEST.json",
+      "sha256": "b385efe7bb7875f8edba93e4828db5c73af263e5ccb8dc1f442d7483248107ac"
+    },
+    {
+      "path": "packet/candidate/README.md",
+      "sha256": "e26755b7882d087c1ef5c946e377a5b9caf08b8faeb568a178bb94a844230629"
+    },
+    {
+      "path": "packet/candidate/alter_evidence.txt",
+      "sha256": "8b9bf65e32e6dc7ee4c7521404ffa1f0835baaa4bfa3a7b99fe2556ac0e3f2ef"
+    },
+    {
+      "path": "packet/candidate/conflicting_evidence_a.md",
+      "sha256": "f8efcaa816e6022a16778396dd6a07a69f5b703da588481a88ae10902fcd0aa2"
+    },
+    {
+      "path": "packet/candidate/conflicting_evidence_b.md",
+      "sha256": "782cb32ce78620f049a981b12aee8fd0a80cf256abe6f3cd5255ba5c832f2b44"
+    },
+    {
+      "path": "packet/candidate/duplicate_finding_a.md",
+      "sha256": "ba976c09b5a4fd7e1c86c946e4e7e6e9b02b890c993da700896c2875086af9e4"
+    },
+    {
+      "path": "packet/candidate/duplicate_finding_b.md",
+      "sha256": "ba976c09b5a4fd7e1c86c946e4e7e6e9b02b890c993da700896c2875086af9e4"
+    },
+    {
+      "path": "packet/candidate/injection_cases.json",
+      "sha256": "24ceaf6f3cf670c38f12488807d8b65ea164c2a30e9498e91b6550a0739cd882"
+    },
+    {
+      "path": "packet/candidate/malformed.json",
+      "sha256": "8e3efb4aea6ad5752d5fa2f9f07d67b226d6297a554eb3ee6bd9c4a1a970b30d"
+    },
+    {
+      "path": "packet/candidate/simulated_secret.txt",
+      "sha256": "934beeee8c1bb0aace16bff43aeee3a6f535fe6d586dd4b8ed52a99a3f9793fa"
+    },
+    {
+      "path": "packet/candidate/valid_policy.json",
+      "sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8"
+    }
+  ]
+}

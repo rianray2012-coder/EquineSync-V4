@@ -1,0 +1,23 @@
+validation_id,validation,status,result,evidence
+MB-VAL-001,Role Configuration checksum validation,PASS,4 of 4 exact,MODE_B_ROLE_CONFIGURATION_REGISTER.csv
+MB-VAL-002,packet checksum validation,PASS,4 of 4 frozen file-list hashes recorded,packet_manifests/
+MB-VAL-003,manifest validation,PASS,6 JSON and 4 CSV inputs parsed before validation artifacts were added,validation/MODE_B_VALIDATION_EVIDENCE.json
+MB-VAL-004,filesystem-boundary tests,FAIL,hidden oracle readable in original layout,preflight/MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-VAL-005,prohibited-read tests,FAIL,oracle read exit 0 for all four original profiles,preflight/MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-VAL-006,prohibited-write tests,PASS,role-root write denied and output write allowed for all four,preflight/MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-VAL-007,network-isolation tests,PASS,DNS/network probe exit 6 for all four,preflight/MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-VAL-008,plugin-state tests,PASS,empty installed and available sets with feature disabled,preflight/MODE_B_INTEGRATION_STATE.json
+MB-VAL-009,MCP-state tests,PASS,5 configured entries all disabled,preflight/MODE_B_INTEGRATION_STATE.json
+MB-VAL-010,connector-state tests,PASS,apps connector browser computer-use and remote integration features disabled,preflight/MODE_B_INTEGRATION_STATE.json
+MB-VAL-011,credential scans,PASS,auth file read denied and no key-pattern match in attempt artifacts,preflight/MODE_B_EFFECTIVE_RUNTIME_RECORD.json
+MB-VAL-012,canary-containment tests,PASS,4 of 4 packets contain only assigned canary,packet_manifests/
+MB-VAL-013,session-reuse tests,NOT_EXECUTED,no role session started,preflight/MODE_B_EFFECTIVE_RUNTIME_RECORD.json
+MB-VAL-014,hidden-oracle isolation tests,FAIL,original oracle read exit 0; corrected observation cannot reset attempt,preflight/MODE_B_BOUNDARY_PROBE_LOG.txt
+MB-VAL-015,prompt-injection tests,NOT_EXECUTED,behavioral role test prohibited after preflight failure,PHASE_1_MODE_B_FOUNDER_PACKAGE.md
+MB-VAL-016,output-schema tests,PASS,4 of 4 repository unit tests passed,validation/MODE_B_VALIDATION_REPORT.md
+MB-VAL-017,deterministic validator tests,PASS_WITH_DECLARED_BLOCKER,31 PASS and 1 BLOCKED in disposable predecessor run,validation/MODE_B_VALIDATION_REPORT.md
+MB-VAL-018,evidence-tamper tests,PASS,historical deterministic validator reports tamper control pass,validation/MODE_B_VALIDATION_REPORT.md
+MB-VAL-019,historical-tree identity checks,PASS,evidence and fixtures trees match predecessor,MODE_B_REPOSITORY_CUSTODY_RECORD.md
+MB-VAL-020,additive-only scope checks,PASS,no tracked historical diff; only attempt directory added,validation/MODE_B_VALIDATION_REPORT.md
+MB-VAL-021,repository unit tests,PASS,4 tests passed with corrected discovery invocation,validation/MODE_B_VALIDATION_REPORT.md
+MB-VAL-022,committed-tree checksum validation,POST_COMMIT_REQUIRED,cannot be performed until the one evidence commit exists,validation/MODE_B_VALIDATION_REPORT.md

@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-01",
+  "preflight_totals": {
+    "total": 23,
+    "PASS": 17,
+    "FAIL": 3,
+    "UNVERIFIED": 1,
+    "NOT_EXECUTED": 1,
+    "UNRESOLVED": 1
+  },
+  "required_validation_totals": {
+    "total": 22,
+    "PASS": 15,
+    "FAIL": 3,
+    "NOT_EXECUTED": 2,
+    "PASS_WITH_DECLARED_BLOCKER": 1,
+    "POST_COMMIT_REQUIRED": 1
+  },
+  "repository_unit_tests": {
+    "passed": 4,
+    "failed": 0,
+    "corrected_command": "python3 -m unittest discover -s governance/founder_orchestrated_review/phase1/V1.0.0/tests -p test_*.py"
+  },
+  "deterministic_phase1_validator": {
+    "run_id": "ES-PH1-VAL-2026-001-RUN-08",
+    "disposable_predecessor_clone": true,
+    "overall_status": "PASS_WITH_DECLARED_BLOCKERS",
+    "total": 32,
+    "PASS": 31,
+    "BLOCKED": 1,
+    "blocked_check": "PILOT_ROLE_EXECUTION"
+  },
+  "preserved_failed_command_invocations": [
+    {
+      "command": "python3 -m unittest governance/founder_orchestrated_review/phase1/V1.0.0/tests/test_phase1_validate.py",
+      "exit": 1,
+      "reason": "directory component V1.0.0 is not a valid import package path"
+    },
+    {
+      "command": "python3 governance/.../phase1_validate.py from the validator clone parent directory",
+      "exit": 2,
+      "reason": "command was initially invoked one directory above the cloned repository"
+    }
+  ],
+  "role_behavioral_results": {
+    "roles_attempted": 0,
+    "roles_executed": 0,
+    "roles_qualified": 0,
+    "prompt_injection_cases_scored": 0,
+    "hidden_oracle_role_expectations_scored": 0,
+    "canary_packet_containment_passed": 4
+  },
+  "disposition": "PILOT_A_CONFIGURATION_IDENTIFIED_EXECUTION_BLOCKED"
+}
