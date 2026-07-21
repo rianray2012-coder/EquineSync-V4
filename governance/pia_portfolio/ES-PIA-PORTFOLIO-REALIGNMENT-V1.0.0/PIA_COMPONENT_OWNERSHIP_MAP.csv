@@ -1,0 +1,14 @@
+portfolio_position,component,owning_domain,not_separate_pia
+01,Identity Account Actor,Identity,TRUE
+01,Enrollment and Onboarding,Identity,TRUE
+02,Facility Tenant Organization,Facility,TRUE
+03,A Relationships and Delegated Authority,Relationships,TRUE
+03,B Authorization Interface,Authorization,TRUE
+03,C Permission Enforcement,Authorization,TRUE
+04,Horse Identity Profile Lifecycle,Horse,TRUE
+05,Navigation Search Application Shell,Experience,TRUE
+06,Task Calendar Scheduling Notification,Scheduling,TRUE
+07,Care Operations,Care,TRUE
+08,Lessons Training Rider Guardian,Training,TRUE
+09,Billing Payments Financial Operations,Financial,TRUE
+10,Owner Portal Communications,Communications,TRUE

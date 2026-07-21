@@ -1,0 +1,87 @@
+{
+  "checks": [
+    {
+      "check": "EXACTLY_TEN_POSITIONS",
+      "detail": "positions=10",
+      "passed": true
+    },
+    {
+      "check": "NO_POSITION_OUTSIDE_01_10",
+      "detail": "allowed=01..10",
+      "passed": true
+    },
+    {
+      "check": "ITEM_03_COMBINED",
+      "detail": "Relationships, Authorization, and Permission remain combined",
+      "passed": true
+    },
+    {
+      "check": "NO_ELEVENTH_PIA",
+      "detail": "no position 11",
+      "passed": true
+    },
+    {
+      "check": "ALL_ARTIFACTS_CLASSIFIED",
+      "detail": "unclassified=0",
+      "passed": true
+    },
+    {
+      "check": "INVENTORY_DENOMINATOR_MATCH",
+      "detail": "inventory=64",
+      "passed": true
+    },
+    {
+      "check": "UNCLASSIFIED_COUNT_ZERO",
+      "detail": "unclassified=0",
+      "passed": true
+    },
+    {
+      "check": "ARTIFACT_IDS_UNIQUE",
+      "detail": "artifact identifiers unique",
+      "passed": true
+    },
+    {
+      "check": "IMPLEMENTATION_AUTHORITY_FALSE",
+      "detail": "no implementation authority",
+      "passed": true
+    },
+    {
+      "check": "ENROLLMENT_IN_ITEM_01",
+      "detail": "Enrollment is Item 01 component",
+      "passed": true
+    },
+    {
+      "check": "REVIEWS_NOT_PIAS",
+      "detail": "review artifacts are not primary PIAs",
+      "passed": true
+    },
+    {
+      "check": "STAGE2A_NOT_PIA",
+      "detail": "Stage 2A is MIAP cross-cutting",
+      "passed": true
+    },
+    {
+      "check": "RECOMMENDATIONS_NOT_APPROVED",
+      "detail": "recommendations carry no approval",
+      "passed": true
+    },
+    {
+      "check": "ACTIVE_TERMINOLOGY_USES_MIAP",
+      "detail": "transposed_term_files=[]",
+      "passed": true
+    },
+    {
+      "check": "MACHINE_STATUS_MATCH",
+      "detail": "TEN_ITEM_PIA_PORTFOLIO_REALIGNED_AND_DRIFT_CONTROLS_ACTIVE",
+      "passed": true
+    }
+  ],
+  "disposition": "TEN_ITEM_PIA_PORTFOLIO_REALIGNED_AND_DRIFT_CONTROLS_ACTIVE",
+  "implementation_activity": "NONE",
+  "inventory_denominator": 64,
+  "package_id": "ES-PIA-PORTFOLIO-REALIGNMENT-V1.0.0",
+  "portfolio_positions": 10,
+  "result": "PASS",
+  "source_gap_count": 1,
+  "unclassified_count": 0
+}

@@ -1,0 +1,24 @@
+{
+  "archives_explicitly_inspected": [
+    "governance/founder_authorized_remediation/identity_relationships/ES-REM-2026-001/frozen_predecessor/EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Handoff_V1_0_0.zip",
+    "EquineSync_Identity_PIA_V1_1_0_Controlled_Revision.zip",
+    "EquineSync_Relationships_PIA_V1_1_0_Revised_Candidate.zip",
+    "EquineSync_Relationships_ADR_Recommendations_V1_0_0.zip",
+    "EquineSync_Relationships_Controlled_Sequence_V1_0_0.zip",
+    "EquineSync_Relationships_Pre_Ratification_Completion_V1_0_0.zip",
+    "EquineSync_Identity_Relationships_Controlled_Multi_Thread_Review_Result_V1_0_0.zip",
+    "/Users/rianray/Downloads/EquineSync_Facility_PIA_Autonomous_Drafting_Review_Handoff_V1_0_0.zip",
+    "EquineSync_PIA_Portfolio_Realignment_and_Facility_PIA_Handoff_V1_0_0.zip"
+  ],
+  "classification_basis": "logical artifacts and packages, with exact files grouped only when they form one controlled package or canonical source family",
+  "logical_inventory_denominator": 64,
+  "method": "all refs plus reachable history plus nested archive and manifest inspection",
+  "name_path_hit_count": 33,
+  "reachable_commit_count": 216,
+  "reachable_object_count": 7829,
+  "ref_count": 13,
+  "source_gaps": [
+    "PIA-ART-007"
+  ],
+  "unclassified_count": 0
+}
