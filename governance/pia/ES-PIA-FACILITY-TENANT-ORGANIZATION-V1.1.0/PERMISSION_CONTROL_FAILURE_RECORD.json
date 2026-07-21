@@ -1,0 +1,43 @@
+{
+  "review_cycle_id": "ES-REV-2026-FAC-001",
+  "agent_run_id": "ES-RA-02-ES-REV-2026-FAC-001-RUN-02",
+  "requested_agent_name": "facility_fresh_review_2",
+  "requested_role": "ES-RA-02-equivalent segregated documentary reviewer",
+  "configured_registered_agent_loaded": false,
+  "founder_review_authorization_reference": "FOUNDER_DECISION_INCORPORATION_DIRECTIVE_SHA256:8158c9f2f00b2702f7057837289dc8395ca28a2a3f9cd7c34d00d8861706944f",
+  "parent_surface": "Codex desktop task",
+  "parent_permission_mode": "danger-full-access / unrestricted filesystem",
+  "active_live_overrides": {
+    "sandbox_mode": "danger-full-access",
+    "approval_policy": "never",
+    "network_access": "enabled at parent surface"
+  },
+  "role_matrix_expected": {
+    "sandbox_mode": "read-only",
+    "approval_policy": "on-request",
+    "network_access": "denied unless named Founder authorization exists",
+    "output_handling": "return response to parent for Evidence Custodian registration"
+  },
+  "observed_effective_mode": {
+    "sandbox_mode": "danger-full-access / unrestricted",
+    "approval_policy": "never",
+    "registered_custom_agent_identity": "not loaded"
+  },
+  "authorized_input_paths": [
+    "git:a17b82a3896193e355d77e930e300cfd43565409:governance/pia/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.1.0",
+    "git:a17b82a3896193e355d77e930e300cfd43565409:AGENTS.md",
+    "git:a17b82a3896193e355d77e930e300cfd43565409:governance/founder_orchestrated_review/RUNTIME_PERMISSION_CONTROL.md"
+  ],
+  "requested_output_path": "/tmp/equinesync-facility-founder-019f8212/segregated-review-output-second",
+  "environment": "local non-production clean checkout requested; parent remained unrestricted",
+  "network_status": "parent network capability enabled; reviewer was instructed not to use network",
+  "production_access": "not authorized or used; technical absence could not be proven under unrestricted parent mode",
+  "exception_reference": null,
+  "checker_identity": "/root primary orchestration agent",
+  "checked_at_utc": "2026-07-21T07:37:06Z",
+  "check_result": "FAIL",
+  "first_failure": "Effective unrestricted danger-full-access mode and approval_policy=never conflict with ES-RA-02 read-only/on-request requirements; no express documented Founder exception satisfies the mandatory fields.",
+  "substantive_review_started": false,
+  "review_outputs_created_by_run_02": false,
+  "required_rerun_condition": "Use a new read-only/on-request parent session with a complete PASS pre-spawn permission record and registered ES-RA-02 identity, or supply an express narrow Founder exception satisfying every field in RUNTIME_PERMISSION_CONTROL.md."
+}
