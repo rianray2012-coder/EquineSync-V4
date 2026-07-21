@@ -1,4 +1,4 @@
-# Facility, Tenant, and Organizational Structure PIA V1.0.0
+# Facility, Tenant, and Organizational Structure PIA V1.1.0
 
 - PIA: `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.1.0`
 - Version: `1.1.0-candidate`
@@ -20,7 +20,7 @@
 
 ## 1. Document Control and Status
 
-Identifier `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.1.0`; candidate version `1.0.0`; owner: Founder pending assignment; lifecycle: `FOUNDER_REVIEW`; disposition `FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_FOUNDER_DECISIONS_001_THROUGH_018_INCORPORATED_PENDING_FRESH_SEGREGATED_REVIEW`. This is an as-designed candidate. It is not an as-built or as-verified baseline. No implementation, application or database startup, migration, PR, merge, tag, release, deployment, enrollment, production use, custom-agent activation, or F-0001 closure is authorized by this package.
+Identifier `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.1.0`; candidate version `1.1.0-candidate`; owner: Founder pending assignment; lifecycle: `FOUNDER_REVIEW`; disposition `FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_FOUNDER_DECISIONS_001_THROUGH_018_INCORPORATED_PENDING_FRESH_SEGREGATED_REVIEW`. This is an as-designed candidate. It is not an as-built or as-verified baseline. No implementation, application or database startup, migration, PR, merge, tag, release, deployment, enrollment, production use, custom-agent activation, or F-0001 closure is authorized by this package.
 
 ## 2. Executive Summary
 
@@ -28,11 +28,11 @@ This PIA defines the candidate structural boundary among Tenant, Facility, Organ
 
 ## 3. Purpose, Outcomes, and Success Measures
 
-Outcomes are unambiguous topology, explicit active context, tenant isolation, preserved lineage, non-cascading transitions, and testable contracts. Success requires zero unresolved P0/P1 document defects, all identifiers resolved, fresh segregated review, Founder decisions, and separate authorization before any implementation.
+Outcomes are unambiguous topology, explicit active context, tenant isolation, preserved lineage, non-cascading transitions, and testable contracts. Success requires zero unresolved P0/P1 documentary defects, all identifiers resolved, a passing fresh segregated review, and a separate Founder design-approval decision. The ten later-gate decisions and separate implementation authorization remain required at their recorded gates.
 
 ## 4. Authoritative Sources and Inheritance
 
-`SOURCE_REGISTER.md` records 33 exact sources. Facility, Barn, and Business canons provide primary domain truth. Identity, Relationship, Authorization, Permission, Privacy, Audit, Retention, Communications, Claims, Search, Operations, Resilience, Security, Integration and Adapter controls are inherited without weakening. Adoption records control lifecycle where a source body retains pre-adoption wording.
+`SOURCE_REGISTER.md` records 34 exact sources, including the verified Founder incorporation directive. Facility, Barn, and Business canons provide primary domain truth. Identity, Relationship, Authorization, Permission, Privacy, Audit, Retention, Communications, Claims, Search, Operations, Resilience, Security, Integration and Adapter controls are inherited without weakening. Adoption records control lifecycle where a source body retains pre-adoption wording.
 
 ## 5. Scope, Boundaries, and Ownership
 
@@ -40,7 +40,7 @@ Owns structural definitions and identifiers; topology; lifecycle; typed Tenant/F
 
 ## 6. Definitions and Controlled Vocabulary
 
-Tenant: isolation/governance context. Facility: durable physical place. Organization: durable entity identity. Barn: named operational context associated to a Facility/Area. Facility Area: nested physical/topological element. Association: sourced, typed, effective-dated relationship that is never authority. Active Context: explicitly selected and revalidated Tenant/Facility/Organization tuple.
+Tenant: strict application isolation/governance context. Facility: durable physical place. Organization: durable entity identity. Barn: named operational context associated to a Facility/Area. Business: Organization-domain operating identity or classification; not a Tenant, physical Facility, Barn, relationship, or authority. Facility Area: nested physical/topological element. Association: sourced, typed, effective-dated relationship that is never authority. Active Context: explicitly selected and revalidated Tenant/Facility/Organization tuple.
 
 ## 7. Actors, Roles, Relationships, and Authorities
 
@@ -48,31 +48,31 @@ Actors include Founder/approval authority, tenant steward, facility steward, org
 
 ## 8. Capability Map and Release Classification
 
-DESIGN: definitions, topology, lifecycles, workflows and boundaries. IMPLEMENTATION: persistence, APIs, context service, migration, support, suspension, offline and integrations. ENROLLMENT: seed topology, context UX, public projection and closure notices. This package advances only design drafting/review and grants none of the later milestones.
+DESIGN: definitions, topology, lifecycles, workflows and boundaries. IMPLEMENTATION: persistence, APIs, context service, migration, support, suspension, offline and integrations. ENROLLMENT: adaptive onboarding, context UX, public projection and closure notices. This package advances only design drafting/review and grants none of the later milestones.
 
 ## 9. User and Operational Workflows
 
-Thirteen end-to-end workflows appear in `WORKFLOW_REGISTER.md`, covering first-user seed, creation, context selection, area change, organization association, operator change, duplicate merge, suspension, closure, public projection, import, correction and support investigation.
+Fifteen end-to-end workflows appear in `WORKFLOW_REGISTER.md`, including adaptive first-user path selection, individual-owner/horse-first onboarding, structured facility/organization onboarding, creation, context selection, area change, organization association, operator change, duplicate merge, suspension, closure, public projection, import, correction and support investigation.
 
 ## 10. Business Rules and Decision Logic
 
-Default deny; explicit context; associations are non-authorizing; topology changes are versioned and audited; closed identities are not reused; transfers and merges do not cascade; ambiguous imports quarantine; public data is a separate projection; disputed claims preserve uncertainty; recommendations are never doctrine.
+Default deny; explicit context; associations are non-authorizing; topology changes are versioned and audited; closed identities are not reused; transfers and merges do not cascade; ambiguous imports quarantine; public data is a separate projection; disputed claims preserve uncertainty; FAC-FD-001 through FAC-FD-018 are controlling design doctrine; later-gate recommendations remain unapproved.
 
 ## 11. Data Entities, Relationships, and Provenance
 
-Fifteen candidate entities are defined in `DATA_DICTIONARY.md`. Every material assertion includes stable identity, Tenant classification, source, time, actor/service, version and correction lineage. External identifiers are aliases or claims, never standalone authority.
+Sixteen candidate entities are defined in `DATA_DICTIONARY.md`, including the non-authorizing ephemeral OnboardingPlan. Every material assertion includes stable identity, Tenant classification, source, time, actor/service, version and correction lineage. External identifiers are aliases or claims, never standalone authority.
 
 ## 12. Record Ownership, Stewardship, Correction, and Retention
 
-Facility domain stewards physical identity/topology. Relationship domain stewards associations/membership. Authorization stewards action decisions. Corrections append change sets. Retention is field/purpose/hold-specific; numeric schedules remain `FOUNDER_DECISION_REQUIRED` under FAC-FD-022.
+Facility domain stewards physical identity/topology. Relationship domain stewards associations/membership. Authorization stewards action decisions. Corrections append change sets. Retention is field/purpose/hold-specific; numeric schedules remain `OPEN_BEFORE_IMPLEMENTATION_AUTHORIZATION` under FAC-FD-022.
 
 ## 13. State and Transition Models
 
-Candidate Tenant, Facility, Organization and Facility Area transitions are in `STATE_TRANSITION_MATRIX.csv`. No silent reactivation, destructive close, or state inference is permitted. Suspension must invalidate UI, API, jobs, search, exports, webhooks and integrations.
+Candidate Tenant, Facility, Organization, Facility Area, and OnboardingPlan transitions are in `STATE_TRANSITION_MATRIX.csv`. No silent reactivation, destructive close, or state inference is permitted. Suspension must invalidate UI, API, jobs, search, exports, webhooks and integrations.
 
 ## 14. Authorization and Permission Matrix
 
-`PERMISSION_AND_AUTHORIZATION_BOUNDARY_MATRIX.csv` defines 17 candidate actions. Every evaluation is action-, field-, tenant-, target-, facility-, organization-, purpose-, relationship-, and time-aware. Role, payment, agreement, facility assignment or organization association alone is insufficient.
+`PERMISSION_AND_AUTHORIZATION_BOUNDARY_MATRIX.csv` defines 19 candidate actions, including bounded onboarding initialization and later-context association. Every evaluation is action-, field-, tenant-, target-, facility-, organization-, purpose-, relationship-, and time-aware. Role, payment, agreement, facility assignment or organization association alone is insufficient.
 
 ## 15. User Interface and Experience Requirements
 
@@ -80,7 +80,7 @@ Persistent context header; explicit context switch; confirmation for consequenti
 
 ## 16. API, Event, Job, and Integration Contracts
 
-`API_EVENT_JOB_CONTRACTS.md` defines eight API, three event and three job candidates. They require explicit context, idempotency, version checks, audit, non-enumerating failures, partition-safe retry and dead-letter quarantine. They are design interfaces, not implementation authorization.
+`API_EVENT_JOB_CONTRACTS.md` defines ten API, four event, and three job candidates, including bounded onboarding-plan, horse-first, and later-association interfaces. They require explicit context, idempotency, version checks, audit, non-enumerating failures, partition-safe retry and dead-letter quarantine. They are design interfaces, not implementation authorization.
 
 ## 17. Notifications and Communications
 
@@ -140,11 +140,11 @@ No migration is authorized. Candidate future plan: inventory every record; resol
 
 ## 31. Golden-Path Reproduction Scenarios
 
-`GOLDEN_PATHS.md` includes first-user creation, multi-facility context, multi-organization operation, area change, operator transition, duplicate reconciliation, suspension/reinstatement, closure and public projection. Each preserves domain ownership and no-cascade rules.
+`GOLDEN_PATHS.md` includes eleven paths: adaptive path selection, individual-owner/horse-first onboarding, structured facility/organization onboarding, multi-facility context, multi-organization operation, area change, operator transition, duplicate reconciliation, suspension/reinstatement, closure, and public projection. Each preserves domain ownership and no-cascade rules.
 
 ## 32. Adversarial, Negative, and Abuse Scenarios
 
-`ADVERSARIAL_SCENARIOS.md` challenges ID substitution, stale context, association-as-authority, partial suspension, offline replay, hierarchy cycle, duplicate poisoning, mass assignment, search enumeration, support abuse, transfer cascade, stale recovery, webhook retry and public-location leakage.
+`ADVERSARIAL_SCENARIOS.md` contains twenty-two cases, including ID substitution, stale context, association-as-authority, partial suspension, offline replay, hierarchy cycles, duplicate poisoning, mass assignment, enumeration, support abuse, transfer cascade, public-location leakage, forced fictional topology, silent default assignment, account/entity conflation, and onboarding-derived authority.
 
 ## 33. Evidence Requirements, Coverage, and Manifest
 
@@ -156,11 +156,11 @@ No deployment/rollout is authorized. A future authorized plan must define enviro
 
 ## 35. Enrollment and Onboarding Readiness
 
-Not ready. Onboarding is adaptive: an individual-owner/horse-first path uses only the minimum technical Tenant isolation context and creates no Facility, Organization, Barn, or Business; a structured path creates only truthful selected entities and explicit associations. Neither path creates relationship or authority. Enrollment needs Founder decisions, fresh review, approved design, authorized/conformant implementation, evidence, support and release gates.
+Not ready. Onboarding is adaptive: an individual-owner/horse-first path uses only the minimum technical Tenant isolation context and creates no Facility, Organization, Barn, or Business; a structured path creates only truthful selected entities and explicit associations. Neither path creates relationship or authority. Enrollment needs the four enrollment-gate Founder decisions, the six implementation-gate decisions, a passing fresh review, approved design, authorized/conformant implementation, evidence, support, and release gates.
 
 ## 36. Dependencies and Critical Path
 
-`DEPENDENCY_REGISTER.csv` records canonical source, Founder decision, Authorization, Relationship, Privacy, Audit, Stewardship, Search, Platform Operations, implementation, migration, review and evidence dependencies. Open design decisions and fresh segregated review precede approval.
+`DEPENDENCY_REGISTER.csv` records canonical source, Founder decision, Authorization, Relationship, Privacy, Audit, Stewardship, Search, Platform Operations, implementation, migration, review and evidence dependencies. A passing fresh segregated review precedes Founder design approval; ten later-gate decisions remain required at their recorded implementation or enrollment gates.
 
 ## 37. Open Decisions, Assumptions, Findings, Deviations, and Risks
 
@@ -192,7 +192,7 @@ The PIA owner must monitor source changes and design drift. A material definitio
 
 ## Review incorporation record
 
-The revised candidate explicitly resolves first-pass P1 findings by separating Barn from Tenant/Facility, declaring every association non-authorizing, applying suspension to all surfaces, and prohibiting transfer/merge cascade across people, horses, permissions, agreements, billing, private records and evidence. It resolves P2/P3 drafting defects by bounding offline writes, defining the public projection, preserving source-lifecycle precedence, separating verification from authority, adding stable contract IDs, and clarifying the first-user seed. Residual Founder decisions and the legacy implementation gap remain visible.
+The revised candidate explicitly resolves first-pass P1 findings by separating Barn from Tenant/Facility, declaring every association non-authorizing, applying suspension to all surfaces, and prohibiting transfer/merge cascade across people, horses, permissions, agreements, billing, private records and evidence. It resolves P2/P3 drafting defects by bounding offline writes, defining the public projection, preserving source-lifecycle precedence, separating verification from authority, adding stable contract IDs, and clarifying adaptive first-user onboarding. Ten later-gate Founder decisions and the legacy implementation gap remain visible.
 
 ## Founder doctrine incorporation addendum
 

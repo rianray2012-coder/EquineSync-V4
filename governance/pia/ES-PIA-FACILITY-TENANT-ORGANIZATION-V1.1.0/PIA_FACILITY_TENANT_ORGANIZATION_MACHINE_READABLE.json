@@ -62,6 +62,7 @@
   "definitions": {
     "association": "typed and effective-dated relationship that is not authority",
     "barn": "named operational context associated with a Facility or Area",
+    "business": "Organization-domain operating identity or classification; not a Tenant isolation boundary, physical Facility, Barn context, relationship, stewardship fact, or authority",
     "facility": "durable physical-place identity",
     "organization": "durable entity identity",
     "tenant": "strict application isolation and governance context"

@@ -267,6 +267,46 @@ def validate_traceability() -> None:
     expected_counts = {"sources": 34, "founder_decisions": 28, "approved_design_decisions": 18, "open_decisions": 10, "requirements": 42, "workflows": 15, "entities": 16, "permissions": 19, "state_transitions": 30, "contracts": 17, "risks": 11, "source_gaps": 0}
     add("traceability", "VAL-TRC-011", machine.get("counts") == expected_counts, f"machine-readable counts={machine.get('counts')}")
 
+    risk_ids = {row["item_id"] for row in rows("RISK_FINDING_DEVIATION_REGISTER.csv")}
+    resolvable = True
+    unresolved: list[str] = []
+    for row in incorporation:
+        for artifact in row["affected_artifacts"].split(";"):
+            if not artifact or not (ROOT / artifact).is_file():
+                resolvable = False
+                unresolved.append(f"{row['decision_id']}:artifact:{artifact}")
+        for requirement in row["affected_requirements"].split(";"):
+            if requirement not in req_ids:
+                resolvable = False
+                unresolved.append(f"{row['decision_id']}:requirement:{requirement}")
+        for workflow in row["affected_workflows"].split(";"):
+            if workflow not in workflows:
+                resolvable = False
+                unresolved.append(f"{row['decision_id']}:workflow:{workflow}")
+        for interface in row["affected_interfaces"].split(";"):
+            if interface not in contracts:
+                resolvable = False
+                unresolved.append(f"{row['decision_id']}:interface:{interface}")
+        for risk in row["affected_risks_or_controls"].split(";"):
+            if risk not in risk_ids:
+                resolvable = False
+                unresolved.append(f"{row['decision_id']}:risk:{risk}")
+    add("traceability", "VAL-TRC-013", resolvable, "Every incorporation artifact path and stable requirement/workflow/interface/risk ID resolves" if resolvable else ";".join(unresolved))
+
+    evidence = json.loads((ROOT / "EVIDENCE_MANIFEST.json").read_text(encoding="utf-8"))
+    locator_failures: list[str] = []
+    for item in evidence.get("evidence_items", []):
+        locator = item.get("locator", "")
+        path_text, separator, fragment = locator.partition("#")
+        target = ROOT / path_text
+        if not path_text or not target.exists():
+            locator_failures.append(f"{item.get('evidence_id')}:{locator}:missing")
+            continue
+        if separator:
+            if not target.is_file() or fragment not in target.read_text(encoding="utf-8"):
+                locator_failures.append(f"{item.get('evidence_id')}:{locator}:fragment")
+    add("traceability", "VAL-TRC-014", not locator_failures, "Every evidence locator and fragment resolves from the package root" if not locator_failures else ";".join(locator_failures))
+
 
 def validate_consistency() -> None:
     texts = current_texts()
@@ -285,6 +325,15 @@ def validate_consistency() -> None:
     dictionary = texts["DATA_DICTIONARY.md"]
     distinct_ok = all(term in main and term in dictionary for term in ["Tenant", "Facility", "Organization", "Barn", "Business"]) and "Strict application isolation" in dictionary
     add("consistency", "VAL-CON-003", distinct_ok, "Canonical concepts remain distinct and Tenant remains the isolation boundary")
+
+    machine = json.loads(texts["PIA_FACILITY_TENANT_ORGANIZATION_MACHINE_READABLE.json"])
+    business_ok = (
+        "Business:" in main
+        and "Controlled domain term — Business" in dictionary
+        and "business" in machine.get("definitions", {})
+        and all(term in machine["definitions"]["business"] for term in ["Organization-domain", "not a Tenant", "physical Facility", "Barn", "authority"])
+    )
+    add("consistency", "VAL-CON-015", business_ok, "FAC-FD-001 Business meaning and responsibility are explicit in PIA, data dictionary, and machine-readable definitions")
 
     onboarding_docs = "\n".join(texts[name] for name in [
         "FAC_FD_017_ADAPTIVE_ONBOARDING_REFINEMENT.md", "WORKFLOW_REGISTER.md", "DATA_DICTIONARY.md",
@@ -331,8 +380,34 @@ def validate_consistency() -> None:
     open_accuracy = "FAC-FD-019 through FAC-FD-028 remain unapproved" in corpus and "18" in texts["FOUNDER_DECISION_INCORPORATION_SUMMARY.md"]
     add("consistency", "VAL-CON-011", open_accuracy, "Open decisions are not represented as approved doctrine")
 
+    risks = rows("RISK_FINDING_DEVIATION_REGISTER.csv")
+    risk_status_ok = (
+        not any("OPEN_FOUNDER" in row["status"] for row in risks)
+        and {row["item_id"] for row in risks if row["status"].startswith("OPEN_BEFORE_IMPLEMENTATION_AUTHORIZATION")} == {"FAC-RISK-004", "FAC-RISK-005", "FAC-RISK-008"}
+        and all(row["status"].startswith("CONTROLLED_BY_FOUNDER_APPROVED_DESIGN_DOCTRINE") for row in risks if row["item_id"] in {"FAC-RISK-001", "FAC-RISK-002", "FAC-RISK-003", "FAC-RISK-006", "FAC-RISK-007", "FAC-RISK-009", "FAC-RISK-011"})
+    )
+    add("consistency", "VAL-CON-016", risk_status_ok, "Risk statuses distinguish approved design controls from exact later implementation gates and remediation gaps")
+
     placeholders = [name for name, text in texts.items() if "PENDING_VALIDATOR_EXECUTION" in text]
     add("consistency", "VAL-CON-012", set(placeholders) <= {"TRACEABILITY_VALIDATION_REPORT.md", "INTERNAL_CONSISTENCY_VALIDATION_REPORT.md"}, "Only validator-owned reports are pending replacement")
+
+    main_facts = [
+        "# Facility, Tenant, and Organizational Structure PIA V1.1.0",
+        "candidate version `1.1.0-candidate`",
+        "records 34 exact sources",
+        "Fifteen end-to-end workflows",
+        "Sixteen candidate entities",
+        "defines 19 candidate actions",
+        "defines ten API, four event, and three job candidates",
+        "numeric schedules remain `OPEN_BEFORE_IMPLEMENTATION_AUTHORIZATION` under FAC-FD-022",
+    ]
+    stale_main = [
+        "Thirteen end-to-end workflows", "Fifteen candidate entities", "defines 17 candidate actions",
+        "defines eight API, three event and three job candidates", "recommendations are never doctrine",
+        "numeric schedules remain `FOUNDER_DECISION_REQUIRED`", "clarifying the first-user seed",
+    ]
+    main_facts_ok = all(item in main for item in main_facts) and not any(item in main for item in stale_main)
+    add("consistency", "VAL-CON-014", main_facts_ok, "Main PIA version, counts, decision statuses, and adaptive-onboarding narrative match successor registers")
 
     for name, text in texts.items():
         if name.endswith(".json"):

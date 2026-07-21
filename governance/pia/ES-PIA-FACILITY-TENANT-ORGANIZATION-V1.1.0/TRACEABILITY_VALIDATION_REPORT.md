@@ -11,7 +11,7 @@
 
 ## Result
 
-`PASS` — 26 of 26 traceability, authority, source, package, and integrity checks passed.
+`PASS` — 28 of 28 traceability, authority, source, package, and integrity checks passed.
 
 ## Checks
 
@@ -42,6 +42,8 @@
 | VAL-TRC-009 | PASS | 17 candidate contracts including all onboarding interfaces |
 | VAL-TRC-010 | PASS | Six dedicated FAC-FD-017 proof obligations have documentary PASS evidence |
 | VAL-TRC-011 | PASS | machine-readable counts={'approved_design_decisions': 18, 'contracts': 17, 'entities': 16, 'founder_decisions': 28, 'open_decisions': 10, 'permissions': 19, 'requirements': 42, 'risks': 11, 'source_gaps': 0, 'sources': 34, 'state_transitions': 30, 'workflows': 15} |
+| VAL-TRC-013 | PASS | Every incorporation artifact path and stable requirement/workflow/interface/risk ID resolves |
+| VAL-TRC-014 | PASS | Every evidence locator and fragment resolves from the package root |
 | VAL-TRC-012 | PASS | All 18 incorporation rows marked INTERNAL_VALIDATION_PASS |
 
 ## Boundary

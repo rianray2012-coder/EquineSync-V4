@@ -54,21 +54,30 @@ def successor_files() -> list[Path]:
         if path.is_file()
         and "__pycache__" not in path.parts
         and path.relative_to(ROOT).as_posix() not in EXCLUDED_FROM_FREEZE
-        and path.name != "PACKAGE_MANIFEST.json"
+        and path.relative_to(ROOT).as_posix() != "PACKAGE_MANIFEST.json"
     )
 
 
 def build_change_manifest() -> dict[str, int]:
+    relocated_predecessor_names = {
+        "CHECKSUM_MANIFEST.sha256", "CROSS_DOCUMENT_CONSISTENCY_REPORT.md",
+        "DOCUMENT_REVIEW_FINDINGS_REGISTER.csv", "DOCUMENT_REVIEW_LEDGER.csv",
+        "FINAL_OPEN_FINDINGS_REGISTER.csv", "FIRST_PASS_REVIEW_SUMMARY.md",
+        "PACKAGE_MANIFEST.json", "REVIEW_DISPOSITION.md", "REVISION_CHANGE_SUMMARY.md",
+        "REVISION_TRACEABILITY_REGISTER.csv", "SECOND_PASS_REVIEW_SUMMARY.md",
+        "VALIDATION_REPORT.json", "VALIDATION_REPORT.md", "build_facility_pia_package.py",
+        "validate_facility_pia_package.py",
+    }
     mappings: dict[str, str] = {}
     rows: list[dict[str, str]] = []
     for old in sorted(path for path in PREDECESSOR.rglob("*") if path.is_file() and "__pycache__" not in path.parts):
         old_rel = old.relative_to(PREDECESSOR).as_posix()
         if old_rel == "PIA_FACILITY_TENANT_ORGANIZATION_V1_0_0.md":
             target_rel = "PIA_FACILITY_TENANT_ORGANIZATION_V1_1_0.md"
+        elif (old_rel.startswith("review/") or old_rel in relocated_predecessor_names) and (ROOT / "predecessor_evidence/v1.0.0" / old_rel).is_file():
+            target_rel = f"predecessor_evidence/v1.0.0/{old_rel}"
         elif (ROOT / old_rel).is_file():
             target_rel = old_rel
-        elif (ROOT / "predecessor_evidence/v1.0.0" / old_rel).is_file():
-            target_rel = f"predecessor_evidence/v1.0.0/{old_rel}"
         else:
             target_rel = ""
         mappings[old_rel] = target_rel
@@ -243,8 +252,16 @@ def main() -> int:
         cwd=ROOT, capture_output=True, text=True, check=False,
     )
     passed = sum(line.endswith(": OK") for line in verify.stdout.splitlines())
-    result = "PASS" if verify.returncode == 0 and passed == count else "FAIL"
-    print(json.dumps({"result": result, "frozen_files": count, "checksum_entries_passed": passed, "checksum_envelope_sha256": envelope, "change_counts": change_counts}, indent=2, sort_keys=True))
+    expected = {path.relative_to(ROOT).as_posix() for path in successor_files()} | {"PACKAGE_MANIFEST.json"}
+    recorded = {
+        line.split("  ", 1)[1]
+        for line in (ROOT / "FROZEN_REVISED_CANDIDATE_SHA256SUMS.txt").read_text(encoding="utf-8").splitlines()
+        if "  " in line
+    }
+    unlisted = sorted(expected - recorded)
+    unexpected = sorted(recorded - expected)
+    result = "PASS" if verify.returncode == 0 and passed == count and not unlisted and not unexpected else "FAIL"
+    print(json.dumps({"result": result, "frozen_files": count, "checksum_entries_passed": passed, "checksum_envelope_sha256": envelope, "unlisted_files": unlisted, "unexpected_files": unexpected, "change_counts": change_counts}, indent=2, sort_keys=True))
     return 0 if result == "PASS" else 1
 
 

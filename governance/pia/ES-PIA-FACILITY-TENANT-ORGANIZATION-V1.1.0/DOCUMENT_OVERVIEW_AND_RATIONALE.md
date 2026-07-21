@@ -26,6 +26,8 @@
 | FAC_FD_017_ADAPTIVE_ONBOARDING_REFINEMENT.md | Adaptive-onboarding refinement and cross-artifact evidence | Founder / fresh reviewer / applicable control owner |
 | FAC_FD_017_CROSS_ARTIFACT_REVIEW.csv | Adaptive-onboarding refinement and cross-artifact evidence | Founder / fresh reviewer / applicable control owner |
 | FINAL_DISPOSITION.md | Human-readable design, review, risk, evidence, or control artifact | Founder / fresh reviewer / applicable control owner |
+| FIRST_FRESH_REVIEW_REMEDIATION_REGISTER.csv | Machine-readable governance register or matrix | Founder / fresh reviewer / applicable control owner |
+| FIRST_FRESH_REVIEW_REMEDIATION_SUMMARY.md | Human-readable design, review, risk, evidence, or control artifact | Founder / fresh reviewer / applicable control owner |
 | FOUNDER_DECISION_BRIEF.md | Founder authority, incorporation, gate, or briefing evidence | Founder / fresh reviewer / applicable control owner |
 | FOUNDER_DECISION_GATE_STATUS_REGISTER.csv | Founder authority, incorporation, gate, or briefing evidence | Founder / fresh reviewer / applicable control owner |
 | FOUNDER_DECISION_INCORPORATION_REGISTER.csv | Founder authority, incorporation, gate, or briefing evidence | Founder / fresh reviewer / applicable control owner |
@@ -61,6 +63,9 @@
 | WORKFLOW_REGISTER.md | Human-readable design, review, risk, evidence, or control artifact | Founder / fresh reviewer / applicable control owner |
 | build_founder_decision_incorporation.py | Reproducible documentary builder/validator; no product implementation | Founder / fresh reviewer / applicable control owner |
 | freeze_revised_candidate.py | Reproducible documentary builder/validator; no product implementation | Founder / fresh reviewer / applicable control owner |
+| review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_EVIDENCE_INDEX.csv | Machine-readable governance register or matrix | Founder / fresh reviewer / applicable control owner |
+| review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_FINDINGS.csv | Machine-readable governance register or matrix | Founder / fresh reviewer / applicable control owner |
+| review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_REPORT.md | Human-readable design, review, risk, evidence, or control artifact | Founder / fresh reviewer / applicable control owner |
 | source_evidence/FOUNDER_DECISION_INCORPORATION_DIRECTIVE.md | Founder authority, incorporation, gate, or briefing evidence | Founder / fresh reviewer / applicable control owner |
 | validate_founder_decision_incorporation.py | Reproducible documentary builder/validator; no product implementation | Founder / fresh reviewer / applicable control owner |
 

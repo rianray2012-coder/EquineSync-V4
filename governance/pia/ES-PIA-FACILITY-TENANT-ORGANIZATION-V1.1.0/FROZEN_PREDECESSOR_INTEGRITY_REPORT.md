@@ -10,7 +10,7 @@
 - Frozen V1.0.0 predecessor modifications: `0`.
 - Tracked source modifications outside V1.1.0 successor: `0`.
 - Predecessor checksum verification: `47/47 PASS` (see `TRACEABILITY_VALIDATION_REPORT.md`).
-- Documentary change rows: `65`.
+- Documentary change rows: `71`.
 - Relocated-preserved V1.0.0 evidence rows: `22`.
 - Removed artifact rows: `0`.
 

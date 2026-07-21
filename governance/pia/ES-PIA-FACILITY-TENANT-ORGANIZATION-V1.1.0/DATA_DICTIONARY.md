@@ -29,6 +29,10 @@
 | FAC-ENT-015 | CapacitySuitabilityAssertion | Dated operational assertion | assertion_id, target_id, type, value, unit, source, confidence, limitations | Not a guarantee of safety |
 | FAC-ENT-016 | OnboardingPlan | Ephemeral selection of a truthful individual-owner or structured path | plan_id, actor_id, selected_path, isolation_context_ref, requested_entities, expiry, audit_ref | Not Tenant, Facility, Organization, Barn, Business, relationship, or authority |
 
+## Controlled domain term — Business
+
+`Business` means an Organization-domain operating identity or classification used to represent how an Organization conducts an operation. It is not a separate Facility-domain entity, Tenant isolation boundary, physical Facility, Barn context, human identity, relationship, stewardship fact, or source of authority. Where Business attributes are required, the Organization domain owns their meaning, provenance, and lifecycle.
+
 ## Adaptive-onboarding invariant
 
 An `OnboardingPlan` may request creation or association but creates no canonical topology or authority by itself. The individual-owner path has no required Facility, Organization, Barn, or Business. Every protected record remains Tenant-isolated.

@@ -148,7 +148,7 @@ def header(title: str, status: str = "FOUNDER_DECISIONS_001_THROUGH_018_INCORPOR
 
 def common_transform() -> None:
     old_disposition = V1.DISPOSITION
-    skip_parts = {"predecessor_evidence", "source_evidence"}
+    skip_parts = {"predecessor_evidence", "source_evidence", "review_evidence"}
     for path in ROOT.rglob("*"):
         if not path.is_file() or any(part in skip_parts for part in path.relative_to(ROOT).parts):
             continue
@@ -214,7 +214,7 @@ def decision_records() -> tuple[list[dict[str, str]], list[dict[str, str]]]:
 
 
 def incorporation_mappings() -> dict[str, dict[str, str]]:
-    return {
+    mappings = {
         "FAC-FD-001": {"artifacts": "PIA;DATA_DICTIONARY;MACHINE_READABLE", "requirements": "FAC-REQ-001", "workflows": "FAC-WF-001;FAC-WF-003", "interfaces": "FAC-API-009;FAC-API-010", "risks": "FAC-RISK-001"},
         "FAC-FD-002": {"artifacts": "PIA;PERMISSION_MATRIX;AS_BUILT", "requirements": "FAC-REQ-002;FAC-REQ-034;FAC-REQ-039", "workflows": "FAC-WF-003;FAC-WF-014", "interfaces": "ALL_CONTEXT_BOUND_INTERFACES", "risks": "FAC-RISK-001;FAC-RISK-010"},
         "FAC-FD-003": {"artifacts": "DATA_DICTIONARY;WORKFLOW_REGISTER", "requirements": "FAC-REQ-004;FAC-REQ-005", "workflows": "FAC-WF-005;FAC-WF-006", "interfaces": "FAC-API-004;FAC-EVT-003", "risks": "FAC-RISK-002"},
@@ -234,6 +234,35 @@ def incorporation_mappings() -> dict[str, dict[str, str]]:
         "FAC-FD-017": {"artifacts": "ALL_ONBOARDING_AND_FIRST_USER_ARTIFACTS", "requirements": "FAC-REQ-031;FAC-REQ-037;FAC-REQ-038;FAC-REQ-039;FAC-REQ-040;FAC-REQ-041;FAC-REQ-042", "workflows": "FAC-WF-001;FAC-WF-014;FAC-WF-015", "interfaces": "FAC-API-009;FAC-API-010;FAC-EVT-004", "risks": "FAC-RISK-011"},
         "FAC-FD-018": {"artifacts": "AS_BUILT;DATA_DICTIONARY;RESIDUAL_P2_STATUS", "requirements": "FAC-REQ-033;FAC-REQ-034", "workflows": "FAC-WF-011", "interfaces": "FAC-JOB-003", "risks": "FAC-RISK-001;FAC-RISK-010"},
     }
+    artifact_aliases = {
+        "PIA": "PIA_FACILITY_TENANT_ORGANIZATION_V1_1_0.md",
+        "DATA_DICTIONARY": "DATA_DICTIONARY.md",
+        "MACHINE_READABLE": "PIA_FACILITY_TENANT_ORGANIZATION_MACHINE_READABLE.json",
+        "PERMISSION_MATRIX": "PERMISSION_AND_AUTHORIZATION_BOUNDARY_MATRIX.csv",
+        "AS_BUILT": "AS_BUILT_RECONCILIATION.md",
+        "WORKFLOW_REGISTER": "WORKFLOW_REGISTER.md",
+        "STATE_TRANSITION_MATRIX": "STATE_TRANSITION_MATRIX.csv",
+        "SOURCE_REGISTER": "SOURCE_REGISTER.md",
+        "GOLDEN_PATHS": "GOLDEN_PATHS.md",
+        "ADVERSARIAL_SCENARIOS": "ADVERSARIAL_SCENARIOS.md",
+        "INHERITANCE_REGISTER": "INHERITANCE_AND_SHARED_CONTROL_REGISTER.md",
+        "API_CONTRACTS": "API_EVENT_JOB_CONTRACTS.md",
+        "RESIDUAL_P2_STATUS": "RESIDUAL_P2_STATUS.md",
+        "ALL_ONBOARDING_AND_FIRST_USER_ARTIFACTS": (
+            "PIA_FACILITY_TENANT_ORGANIZATION_V1_1_0.md;FAC_FD_017_ADAPTIVE_ONBOARDING_REFINEMENT.md;"
+            "REQUIREMENT_REGISTER.csv;WORKFLOW_REGISTER.md;DATA_DICTIONARY.md;STATE_TRANSITION_MATRIX.csv;"
+            "PERMISSION_AND_AUTHORIZATION_BOUNDARY_MATRIX.csv;API_EVENT_JOB_CONTRACTS.md;ACCEPTANCE_CRITERIA.csv;"
+            "TEST_MATRIX.csv;GOLDEN_PATHS.md;ADVERSARIAL_SCENARIOS.md"
+        ),
+    }
+    for mapping in mappings.values():
+        resolved: list[str] = []
+        for token in mapping["artifacts"].split(";"):
+            resolved.extend(artifact_aliases.get(token, token).split(";"))
+        mapping["artifacts"] = ";".join(resolved)
+    mappings["FAC-FD-002"]["interfaces"] = "FAC-API-001;FAC-API-002;FAC-API-003;FAC-API-004;FAC-API-005;FAC-API-006;FAC-API-007;FAC-API-008;FAC-API-009;FAC-API-010;FAC-EVT-001;FAC-EVT-002;FAC-EVT-004"
+    mappings["FAC-FD-012"]["interfaces"] = "FAC-API-001;FAC-API-003;FAC-API-004;FAC-API-005;FAC-API-006;FAC-API-007;FAC-API-009;FAC-API-010"
+    return mappings
 
 
 def build_decision_documents(all_decisions: list[dict[str, str]], open_decisions: list[dict[str, str]]) -> None:
@@ -335,6 +364,10 @@ def build_requirements_and_tests() -> None:
         open_refs = refs - approved_ids
         row["decision_status"] = "PENDING_LATER_GATE" if open_refs else ("FOUNDER_DOCTRINE_INCORPORATED" if refs else "CANONICAL_SOURCE_BASED")
         row["status"] = "SPECIFIED_PENDING_LATER_GATE" if open_refs else "DESIGN_DOCTRINE_INCORPORATED_PENDING_PIA_APPROVAL"
+        if row["requirement_id"] == "FAC-REQ-031":
+            row["statement"] = "Every onboarding path SHALL create no relationship, permission, ownership, agreement, billing authority, stewardship, or record access merely from account or topology initialization."
+            row["required_behavior"] = "Keep relationship, authorization, ownership, billing, stewardship, and access facts separate from onboarding initialization."
+            row["prohibited_behavior"] = "No onboarding-derived relationship, authority, ownership, billing status, stewardship, or record access."
     additions = [
         ("FAC-REQ-037", "Onboarding SHALL provide a horse-first and individual-owner-first entry path when no real Facility, Organization, Barn, or Business is required.", "FAC-FD-017", "Onboarding service", "Offer an adaptive path based on truthful user context.", "Do not force fictional topology.", "Block and explain if a safe isolation context cannot be established."),
         ("FAC-REQ-038", "Individual-owner onboarding SHALL NOT create unnecessary Facility, Organization, Barn, or Business records.", "FAC-FD-017", "Onboarding service", "Create only user-selected truthful domain records.", "No convenience-driven automatic topology.", "Roll back unintended topology and preserve evidence."),
@@ -398,7 +431,16 @@ def build_workflows_data_states_permissions_contracts() -> None:
         ("FAC-ENT-016", "OnboardingPlan", "Ephemeral selection of a truthful individual-owner or structured path", "plan_id, actor_id, selected_path, isolation_context_ref, requested_entities, expiry, audit_ref", "Not Tenant, Facility, Organization, Barn, Business, relationship, or authority"),
     ]
     entities[0] = ("FAC-ENT-001", "Tenant", "Strict application isolation and governance context; an individual user need not manually invent or portray it as a physical/legal entity", "tenant_id, display_name, state, created_at, closed_at, version", "No physical, legal, billing or authority equivalence; minimum technical context may be system-provisioned transparently")
-    write("DATA_DICTIONARY.md", header("Data Dictionary") + "\n" + table(["Entity ID", "Entity", "Purpose", "Minimum fields", "Boundary"], entities) + "\n\n## Adaptive-onboarding invariant\n\nAn `OnboardingPlan` may request creation or association but creates no canonical topology or authority by itself. The individual-owner path has no required Facility, Organization, Barn, or Business. Every protected record remains Tenant-isolated.\n")
+    write("DATA_DICTIONARY.md", header("Data Dictionary") + "\n" + table(["Entity ID", "Entity", "Purpose", "Minimum fields", "Boundary"], entities) + """
+
+## Controlled domain term — Business
+
+`Business` means an Organization-domain operating identity or classification used to represent how an Organization conducts an operation. It is not a separate Facility-domain entity, Tenant isolation boundary, physical Facility, Barn context, human identity, relationship, stewardship fact, or source of authority. Where Business attributes are required, the Organization domain owns their meaning, provenance, and lifecycle.
+
+## Adaptive-onboarding invariant
+
+An `OnboardingPlan` may request creation or association but creates no canonical topology or authority by itself. The individual-owner path has no required Facility, Organization, Barn, or Business. Every protected record remains Tenant-isolated.
+""")
 
     states = read_csv(ROOT / "STATE_TRANSITION_MATRIX.csv")
     for from_state, to_state, trigger, guard, event, failure in [
@@ -486,12 +528,30 @@ def targeted_narrative_updates() -> None:
     path = ROOT / "PIA_FACILITY_TENANT_ORGANIZATION_V1_1_0.md"
     text = path.read_text(encoding="utf-8")
     replacements = {
+        "# Facility, Tenant, and Organizational Structure PIA V1.0.0": "# Facility, Tenant, and Organizational Structure PIA V1.1.0",
+        "candidate version `1.0.0`": "candidate version `1.1.0-candidate`",
         "Twenty-eight Founder decisions remain unresolved.": "FAC-FD-001 through FAC-FD-018 are incorporated as Founder-approved design doctrine; ten later-gate decisions remain open.",
         "There are `28` unresolved decisions: 12 before design approval, 10 before implementation authorization, and 6 before enrollment.": "There are `18` incorporated Founder design decisions and `10` later-gate open decisions: 6 before implementation authorization and 4 before enrollment.",
         "Twenty-eight items are `FOUNDER_DECISION_REQUIRED`. Two residual P2 findings remain open": "FAC-FD-001 through FAC-FD-018 are Founder-approved design doctrine. FAC-FD-019 through FAC-FD-028 remain open at later gates. Two residual P2 matters remain visible",
         "Candidate first-user topology is one Tenant, one Organization association, one Facility and one unassigned Area, with separate relationship/authority establishment.": "Onboarding is adaptive: an individual-owner/horse-first path uses only the minimum technical Tenant isolation context and creates no Facility, Organization, Barn, or Business; a structured path creates only truthful selected entities and explicit associations. Neither path creates relationship or authority.",
         "Complete enough to build? No—Founder decisions and authorization remain.": "Complete enough for a Founder design-approval decision after valid fresh review? Yes. Complete enough to build? No—six implementation-gate decisions and implementation authorization remain.",
         "Fresh segregated review and Founder decisions remain.": "Fresh segregated review remains before the design-approval decision; ten later-gate Founder decisions remain open but do not block that review.",
+        "Success requires zero unresolved P0/P1 document defects, all identifiers resolved, fresh segregated review, Founder decisions, and separate authorization before any implementation.": "Success requires zero unresolved P0/P1 documentary defects, all identifiers resolved, a passing fresh segregated review, and a separate Founder design-approval decision. The ten later-gate decisions and separate implementation authorization remain required at their recorded gates.",
+        "`SOURCE_REGISTER.md` records 33 exact sources.": "`SOURCE_REGISTER.md` records 34 exact sources, including the verified Founder incorporation directive.",
+        "ENROLLMENT: seed topology, context UX, public projection and closure notices.": "ENROLLMENT: adaptive onboarding, context UX, public projection and closure notices.",
+        "Thirteen end-to-end workflows appear in `WORKFLOW_REGISTER.md`, covering first-user seed, creation, context selection, area change, organization association, operator change, duplicate merge, suspension, closure, public projection, import, correction and support investigation.": "Fifteen end-to-end workflows appear in `WORKFLOW_REGISTER.md`, including adaptive first-user path selection, individual-owner/horse-first onboarding, structured facility/organization onboarding, creation, context selection, area change, organization association, operator change, duplicate merge, suspension, closure, public projection, import, correction and support investigation.",
+        "recommendations are never doctrine.": "FAC-FD-001 through FAC-FD-018 are controlling design doctrine; later-gate recommendations remain unapproved.",
+        "Fifteen candidate entities are defined in `DATA_DICTIONARY.md`.": "Sixteen candidate entities are defined in `DATA_DICTIONARY.md`, including the non-authorizing ephemeral OnboardingPlan.",
+        "numeric schedules remain `FOUNDER_DECISION_REQUIRED` under FAC-FD-022.": "numeric schedules remain `OPEN_BEFORE_IMPLEMENTATION_AUTHORIZATION` under FAC-FD-022.",
+        "Candidate Tenant, Facility, Organization and Facility Area transitions are in `STATE_TRANSITION_MATRIX.csv`.": "Candidate Tenant, Facility, Organization, Facility Area, and OnboardingPlan transitions are in `STATE_TRANSITION_MATRIX.csv`.",
+        "`PERMISSION_AND_AUTHORIZATION_BOUNDARY_MATRIX.csv` defines 17 candidate actions.": "`PERMISSION_AND_AUTHORIZATION_BOUNDARY_MATRIX.csv` defines 19 candidate actions, including bounded onboarding initialization and later-context association.",
+        "`API_EVENT_JOB_CONTRACTS.md` defines eight API, three event and three job candidates.": "`API_EVENT_JOB_CONTRACTS.md` defines ten API, four event, and three job candidates, including bounded onboarding-plan, horse-first, and later-association interfaces.",
+        "`GOLDEN_PATHS.md` includes first-user creation, multi-facility context, multi-organization operation, area change, operator transition, duplicate reconciliation, suspension/reinstatement, closure and public projection.": "`GOLDEN_PATHS.md` includes eleven paths: adaptive path selection, individual-owner/horse-first onboarding, structured facility/organization onboarding, multi-facility context, multi-organization operation, area change, operator transition, duplicate reconciliation, suspension/reinstatement, closure, and public projection.",
+        "`ADVERSARIAL_SCENARIOS.md` challenges ID substitution, stale context, association-as-authority, partial suspension, offline replay, hierarchy cycle, duplicate poisoning, mass assignment, search enumeration, support abuse, transfer cascade, stale recovery, webhook retry and public-location leakage.": "`ADVERSARIAL_SCENARIOS.md` contains twenty-two cases, including ID substitution, stale context, association-as-authority, partial suspension, offline replay, hierarchy cycles, duplicate poisoning, mass assignment, enumeration, support abuse, transfer cascade, public-location leakage, forced fictional topology, silent default assignment, account/entity conflation, and onboarding-derived authority.",
+        "Enrollment needs Founder decisions, fresh review, approved design, authorized/conformant implementation, evidence, support and release gates.": "Enrollment needs the four enrollment-gate Founder decisions, the six implementation-gate decisions, a passing fresh review, approved design, authorized/conformant implementation, evidence, support, and release gates.",
+        "Open design decisions and fresh segregated review precede approval.": "A passing fresh segregated review precedes Founder design approval; ten later-gate decisions remain required at their recorded implementation or enrollment gates.",
+        "clarifying the first-user seed. Residual Founder decisions and the legacy implementation gap remain visible.": "clarifying adaptive first-user onboarding. Ten later-gate Founder decisions and the legacy implementation gap remain visible.",
+        "Tenant: isolation/governance context. Facility: durable physical place. Organization: durable entity identity. Barn: named operational context associated to a Facility/Area. Facility Area: nested physical/topological element.": "Tenant: strict application isolation/governance context. Facility: durable physical place. Organization: durable entity identity. Barn: named operational context associated to a Facility/Area. Business: Organization-domain operating identity or classification; not a Tenant, physical Facility, Barn, relationship, or authority. Facility Area: nested physical/topological element.",
     }
     for old, new in replacements.items():
         text = text.replace(old, new)
@@ -543,7 +603,20 @@ A user operating in a real Facility/Organization context selects the structured 
 
 def build_residual_risk_dependency_work_packages() -> None:
     risks = read_csv(ROOT / "RISK_FINDING_DEVIATION_REGISTER.csv")
+    reconciled_risk_statuses = {
+        "FAC-RISK-001": "CONTROLLED_BY_FOUNDER_APPROVED_DESIGN_DOCTRINE_PENDING_IMPLEMENTATION_REMEDIATION",
+        "FAC-RISK-002": "CONTROLLED_BY_FOUNDER_APPROVED_DESIGN_DOCTRINE_PENDING_IMPLEMENTATION_VERIFICATION",
+        "FAC-RISK-003": "CONTROLLED_BY_FOUNDER_APPROVED_DESIGN_DOCTRINE_PENDING_IMPLEMENTATION_VERIFICATION",
+        "FAC-RISK-004": "OPEN_BEFORE_IMPLEMENTATION_AUTHORIZATION_FAC_FD_020",
+        "FAC-RISK-005": "OPEN_BEFORE_IMPLEMENTATION_AUTHORIZATION_FAC_FD_019",
+        "FAC-RISK-006": "CONTROLLED_BY_FOUNDER_APPROVED_DESIGN_DOCTRINE_PENDING_IMPLEMENTATION_AND_ENROLLMENT_VERIFICATION",
+        "FAC-RISK-007": "CONTROLLED_BY_FOUNDER_APPROVED_DESIGN_DOCTRINE_PENDING_IMPLEMENTATION_VERIFICATION",
+        "FAC-RISK-008": "OPEN_BEFORE_IMPLEMENTATION_AUTHORIZATION_FAC_FD_022",
+        "FAC-RISK-009": "CONTROLLED_BY_FOUNDER_APPROVED_DESIGN_DOCTRINE_PENDING_IMPLEMENTATION_VERIFICATION",
+        "FAC-RISK-010": "OPEN_IMPLEMENTATION_REMEDIATION_GAP",
+    }
     for row in risks:
+        row["status"] = reconciled_risk_statuses[row["item_id"]]
         if row["item_id"] in {"FAC-RISK-001", "FAC-RISK-010"}:
             row["mitigation_or_disposition"] += " FAC-FD-018 design quarantine doctrine approved; implementation remediation remains open."
     risks.append({
@@ -659,6 +732,26 @@ Freeze this revised candidate, commit it, then conduct a genuinely fresh segrega
 """)
 
 
+def build_first_review_remediation_record() -> None:
+    remediation_rows = [
+        {"finding_id": "FSR-P1-001", "priority": "P1", "first_review_status": "OPEN", "remediation": "Defined Business and its distinct responsibility in the PIA controlled vocabulary, data dictionary, and machine-readable definitions.", "affected_artifacts": "PIA_FACILITY_TENANT_ORGANIZATION_V1_1_0.md;DATA_DICTIONARY.md;PIA_FACILITY_TENANT_ORGANIZATION_MACHINE_READABLE.json", "author_validation": "VAL-CON-003;VAL-CON-015", "current_status": "REMEDIATED_PENDING_FRESH_VERIFICATION"},
+        {"finding_id": "FSR-P1-002", "priority": "P1", "first_review_status": "OPEN", "remediation": "Reclassified all risk statuses to distinguish approved design controls from exact implementation gates and remediation gaps.", "affected_artifacts": "RISK_FINDING_DEVIATION_REGISTER.csv;INTERNAL_CONSISTENCY_VALIDATION_REPORT.md", "author_validation": "VAL-CON-016", "current_status": "REMEDIATED_PENDING_FRESH_VERIFICATION"},
+        {"finding_id": "FSR-P1-003", "priority": "P1", "first_review_status": "OPEN", "remediation": "Corrected the exact-path package-manifest self-exclusion and added an equality check between intended and recorded frozen scope.", "affected_artifacts": "freeze_revised_candidate.py;FROZEN_REVISED_CANDIDATE_MANIFEST.txt;FROZEN_REVISED_CANDIDATE_SHA256SUMS.txt", "author_validation": "FREEZE_COMPLETENESS_ZERO_UNLISTED", "current_status": "REMEDIATED_PENDING_FRESH_VERIFICATION"},
+        {"finding_id": "FSR-P1-004", "priority": "P1", "first_review_status": "OPEN", "remediation": "Repointed relocated evidence locators, replaced aliases/wildcards with concrete paths and stable IDs, and added full locator/reference resolution checks.", "affected_artifacts": "EVIDENCE_MANIFEST.json;FOUNDER_DECISION_INCORPORATION_REGISTER.csv;validate_founder_decision_incorporation.py", "author_validation": "VAL-TRC-013;VAL-TRC-014", "current_status": "REMEDIATED_PENDING_FRESH_VERIFICATION"},
+        {"finding_id": "FSR-P2-001", "priority": "P2", "first_review_status": "OPEN", "remediation": "Corrected main PIA identity, source/workflow/entity/permission/contract counts, decision wording, and adaptive-onboarding narrative; added exact validation assertions.", "affected_artifacts": "PIA_FACILITY_TENANT_ORGANIZATION_V1_1_0.md;validate_founder_decision_incorporation.py", "author_validation": "VAL-CON-014", "current_status": "REMEDIATED_PENDING_FRESH_VERIFICATION"},
+    ]
+    write_csv("FIRST_FRESH_REVIEW_REMEDIATION_REGISTER.csv", list(remediation_rows[0]), remediation_rows)
+    write("FIRST_FRESH_REVIEW_REMEDIATION_SUMMARY.md", header("First Fresh Review Remediation Summary", "FIVE_FINDINGS_REMEDIATED_PENDING_FRESH_VERIFICATION") + """
+## First review result
+
+Frozen commit `b604bf2a4679457e533cc02af33563f51a88bca2` failed its fresh segregated review with `P0=0`, `P1=4`, `P2=1`, `P3=0`. The unchanged report, findings, and evidence index are preserved under `review_evidence/first_fresh_review/`.
+
+## Remediation posture
+
+All five findings have documentary corrections and stronger validation coverage. They remain `REMEDIATED_PENDING_FRESH_VERIFICATION`; this author record does not close a segregated-review finding. A new frozen commit and fresh clean-checkout verification are required.
+""")
+
+
 def update_machine_evidence_overview() -> None:
     machine_path = ROOT / "PIA_FACILITY_TENANT_ORGANIZATION_MACHINE_READABLE.json"
     machine = json.loads(machine_path.read_text(encoding="utf-8"))
@@ -670,6 +763,10 @@ def update_machine_evidence_overview() -> None:
     })
     machine["counts"].update({"sources": 34, "founder_decisions": 28, "approved_design_decisions": 18, "open_decisions": 10, "requirements": 42, "workflows": 15, "entities": 16, "permissions": 19, "state_transitions": 30, "contracts": 17, "risks": 11})
     machine["source_ids"] = sorted(set(machine["source_ids"] + ["FAC-SRC-034"]))
+    machine.setdefault("definitions", {})["business"] = (
+        "Organization-domain operating identity or classification; not a Tenant isolation boundary, "
+        "physical Facility, Barn context, relationship, stewardship fact, or authority"
+    )
     machine["requirement_ids"] += [f"FAC-REQ-{i:03d}" for i in range(37, 43)]
     machine["workflow_ids"] += ["FAC-WF-014", "FAC-WF-015"]
     machine["entity_ids"] += ["FAC-ENT-016"]
@@ -680,11 +777,26 @@ def update_machine_evidence_overview() -> None:
     evidence_path = ROOT / "EVIDENCE_MANIFEST.json"
     evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
     evidence["pia_id"] = PIA_ID
+    relocated_evidence = {
+        "review/first_pass/FIRST_DRAFT_HASH_MANIFEST.csv": "predecessor_evidence/v1.0.0/review/first_pass/FIRST_DRAFT_HASH_MANIFEST.csv",
+        "DOCUMENT_REVIEW_FINDINGS_REGISTER.csv": "predecessor_evidence/v1.0.0/DOCUMENT_REVIEW_FINDINGS_REGISTER.csv",
+        "review/first_pass/": "predecessor_evidence/v1.0.0/review/first_pass/",
+        "REVISION_TRACEABILITY_REGISTER.csv": "predecessor_evidence/v1.0.0/REVISION_TRACEABILITY_REGISTER.csv",
+        "SECOND_PASS_REVIEW_SUMMARY.md": "predecessor_evidence/v1.0.0/SECOND_PASS_REVIEW_SUMMARY.md",
+        "VALIDATION_REPORT.json": "predecessor_evidence/v1.0.0/VALIDATION_REPORT.json",
+    }
+    for item in evidence["evidence_items"]:
+        if item.get("locator") in relocated_evidence:
+            item["locator"] = relocated_evidence[item["locator"]]
     evidence["evidence_items"] += [
         {"evidence_id": "FAC-EVID-FOUNDER-001", "kind": "FOUNDER_DIRECTIVE", "locator": "source_evidence/FOUNDER_DECISION_INCORPORATION_DIRECTIVE.md", "sha256": DIRECTIVE_SHA256, "proves": "Approval of FAC-FD-001 through FAC-FD-018 and FAC-FD-017 refinement"},
         {"evidence_id": "FAC-EVID-INCORP-001", "kind": "INCORPORATION", "locator": "FOUNDER_DECISION_INCORPORATION_REGISTER.csv", "proves": "Decision-to-artifact incorporation"},
         {"evidence_id": "FAC-EVID-ONBOARD-001", "kind": "REFINEMENT", "locator": "FAC_FD_017_ADAPTIVE_ONBOARDING_REFINEMENT.md", "proves": "Controlling adaptive-onboarding interpretation"},
         {"evidence_id": "FAC-EVID-STARTUP-001", "kind": "INPUT_VERIFICATION", "locator": "STARTUP_VERIFICATION_EVIDENCE.json", "proves": "Hash, commit, branch and predecessor checks"},
+        {"evidence_id": "FAC-EVID-FSR1-001", "kind": "FIRST_FRESH_REVIEW_REPORT", "locator": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_REPORT.md", "proves": "Independent failed review methodology and before-remediation disposition"},
+        {"evidence_id": "FAC-EVID-FSR1-002", "kind": "FIRST_FRESH_REVIEW_FINDINGS", "locator": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_FINDINGS.csv", "proves": "Four P1 and one P2 findings before remediation"},
+        {"evidence_id": "FAC-EVID-FSR1-003", "kind": "FIRST_FRESH_REVIEW_EVIDENCE", "locator": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_EVIDENCE_INDEX.csv", "proves": "Independent evidence for all first-review checklist areas"},
+        {"evidence_id": "FAC-EVID-REMEDIATION-001", "kind": "REMEDIATION", "locator": "FIRST_FRESH_REVIEW_REMEDIATION_REGISTER.csv", "proves": "Finding-to-change and verification mapping pending fresh closure"},
     ] + [{"evidence_id": f"FAC-EVID-{i:03d}", "kind": "PLANNED_REQUIREMENT_PROOF", "locator": f"TEST_MATRIX.csv#FAC-TEST-{i:03d}", "proves": f"FAC-REQ-{i:03d}", "status": "DOCUMENTARY_ONLY_IMPLEMENTATION_NOT_AUTHORIZED"} for i in range(37, 43)]
     write_json(evidence_path.name, evidence)
 
@@ -694,6 +806,9 @@ def update_machine_evidence_overview() -> None:
         "PACKAGE_MANIFEST.json", "freeze_revised_candidate.py", "FRESH_SEGREGATED_REVIEW_REPORT.md",
         "FRESH_SEGREGATED_REVIEW_FINDINGS.csv", "FRESH_SEGREGATED_REVIEW_EVIDENCE_INDEX.csv",
         "FINAL_DISPOSITION.md",
+        "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_REPORT.md",
+        "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_FINDINGS.csv",
+        "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_EVIDENCE_INDEX.csv",
     }
     overview_files = sorted(
         {p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*") if p.is_file() and "predecessor_evidence" not in p.parts}
@@ -730,6 +845,7 @@ def main() -> None:
     targeted_narrative_updates()
     build_residual_risk_dependency_work_packages()
     build_source_startup_and_founder_brief(decisions, open_decisions)
+    build_first_review_remediation_record()
     preliminary_validation_placeholders()
     update_machine_evidence_overview()
     print(json.dumps({"pia_id": PIA_ID, "approved_decisions": 18, "open_decisions": 10, "requirements": 42, "workflows": 15, "interim_disposition": INTERIM_DISPOSITION}, indent=2))
