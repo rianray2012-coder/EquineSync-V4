@@ -64,6 +64,7 @@ requirements = read_csv("REQUIREMENT_REGISTER.csv")
 criteria = read_csv("ACCEPTANCE_CRITERIA.csv")
 tests = read_csv("TEST_MATRIX.csv")
 trace = read_csv("FOUNDER_DECISION_TRACEABILITY_MATRIX.csv")
+source_gaps = read_csv("SOURCE_GAPS.csv")
 
 check("MV-001-manifest-files", all((ROOT / row["path"]).is_file() for row in manifest["files"]), len(manifest["files"]))
 manifest_mismatch = [row["path"] for row in manifest["files"] if digest(ROOT / row["path"]) != row["sha256"] or (ROOT / row["path"]).stat().st_size != row["bytes"]]
@@ -114,10 +115,15 @@ check("MV-018-authority-false", manifest["implementation_authority"] is False an
 check("MV-019-not-adopted-locked", manifest["adopted"] is False and manifest["locked"] is False and machine["adopted"] is False and machine["locked"] is False, "manifest and machine record")
 machine_text = json.dumps(machine).lower()
 check("MV-020-identity-segregation", machine["segregation_boundary"]["identity_relationships_successor_founder_approved"] is False and "identity_relationships_successor_founder_approved\": true" not in machine_text, "explicit false")
+machine_gap_rows = machine.get("source_gaps", [])
+csv_gap_status = {row["gap_id"]: row["status"] for row in source_gaps}
+machine_gap_status = {row["gap_id"]: row["status"] for row in machine_gap_rows}
+check("MV-020A-source-gap-parity", csv_gap_status == machine_gap_status, {"csv": csv_gap_status, "machine": machine_gap_status})
+check("MV-020B-no-open-founder-decision-status", "FOUNDER_DECISION_REQUIRED" not in csv_gap_status.values() and "FOUNDER_DECISION_REQUIRED" not in machine_gap_status.values(), {"csv": csv_gap_status, "machine": machine_gap_status})
 
 md_refs = []
 broken_refs = []
-external_refs = {"W1_RF01_TENANT_AND_FACILITY_ISOLATION_REPORT.md"}
+external_refs = {"W1_RF01_TENANT_AND_FACILITY_ISOLATION_REPORT.md", "AGENTS.md", "RUNTIME_PERMISSION_CONTROL.md", "COMMON_AGENT_OPERATING_CONTRACT.md", "CODEX_ORCHESTRATION_DIRECTIVE.md"}
 for path in ROOT.glob("*.md"):
     text = path.read_text(encoding="utf-8")
     for ref in re.findall(r"`([^`]+\.(?:md|csv|json|sha256|txt))`", text):

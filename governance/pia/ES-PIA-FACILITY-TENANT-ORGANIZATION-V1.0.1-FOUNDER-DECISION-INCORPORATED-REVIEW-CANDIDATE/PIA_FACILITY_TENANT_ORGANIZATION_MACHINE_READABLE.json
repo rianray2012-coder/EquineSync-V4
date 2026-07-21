@@ -5,14 +5,21 @@
   "candidate_commit": "a5cf78295ad43cde7f73e383b3d5e98a11000382",
   "counts": {
     "acceptance_criteria": 55,
+    "corrected_p1_unverified": 1,
     "fac_fd_017_tests": 16,
+    "formal_review_functions_completed": 0,
     "founder_decisions": 18,
     "mandatory_exact_source_gaps": 0,
+    "open_p0_findings": 0,
+    "open_p1_findings": 4,
+    "open_p2_findings": 2,
+    "open_p3_findings": 1,
     "requirements": 55,
     "sealed_source_modifications": 0,
     "synthetic_golden_paths": 12,
     "tests": 85
   },
+  "custom_agent_execution_claimed": false,
   "decisions": [
     {
       "adoption_status": "NOT_ADOPTED",
@@ -37,7 +44,7 @@
       "question": "Define Facility, Tenant, Organization, Barn, and Business.",
       "rationale": "Conflation creates cross-tenant access, duplicate identity, lifecycle, and migration errors.",
       "recommended_candidate_treatment": "Use five distinct concepts: Tenant is the application isolation and operating-context boundary; Facility is a durable physical or operational place; Organization is a durable legal, operating, administrative, or service entity; Barn is a facility subtype or an operation at a facility, not a universal synonym; Business is an Organization participating in commercial activity.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -65,7 +72,7 @@
       "question": "Is Tenant the strict application data-isolation boundary?",
       "rationale": "Privacy, permission, search, recovery, and current RF01 evidence all require fail-closed separation.",
       "recommended_candidate_treatment": "Yes. Every tenant-scoped object, read, write, search projection, cache, export, job, event, and offline bundle must be bound to exactly one active tenant unless a separately governed cross-tenant workflow is explicitly authorized.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -93,7 +100,7 @@
       "question": "May one organization control multiple tenants, and under what evidence?",
       "rationale": "Supports multi-business operations without collapsing isolation.",
       "recommended_candidate_treatment": "Yes, through explicit, temporal Organization-Tenant control relationships with verified authority evidence; access remains separately granted per tenant and never inherits from common ownership or email domain.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -121,7 +128,7 @@
       "question": "May one physical facility be associated with multiple tenants?",
       "rationale": "Multiple operators may use one place, but shared place does not mean shared customer data or authority.",
       "recommended_candidate_treatment": "Yes, only through explicit temporal Tenant-Facility association records with purpose, scope, steward, status, and conflict rules; facility identity may be shared while tenant-private projections remain isolated.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -149,7 +156,7 @@
       "question": "What facility-area hierarchy is controlling?",
       "rationale": "Matches Facility canon while preventing ambiguous tree/DAG semantics.",
       "recommended_candidate_treatment": "Use stable Facility -> Managed Area/Parcel -> Structure -> Zone/Space -> Subspace/Fixture/Asset containment, with separately modeled adjacency, route, overlap, and shared-resource relationships. Each effective containment version has one parent; history and aliases remain resolvable.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -177,7 +184,7 @@
       "question": "Which organization types are first-class?",
       "rationale": "Avoids an inflexible legal-form enum and prevents type labels from becoming authority.",
       "recommended_candidate_treatment": "Use capability-oriented types: legal_entity, operating_business, service_provider_or_practice, nonprofit_or_association, public_body, and informal_operating_group. Type is multi-valued, jurisdiction-aware, evidenced, and never permission-bearing by itself.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -205,7 +212,7 @@
       "question": "What lifecycle states apply to Facility, Tenant, and Organization?",
       "rationale": "Distinct states preserve physical truth, operating access, and organizational continuity.",
       "recommended_candidate_treatment": "Adopt explicit entity-specific state machines: Tenant DRAFT/PENDING_VERIFICATION/ACTIVE/RESTRICTED/SUSPENDED/WIND_DOWN/CLOSED/ARCHIVED; Facility DRAFT/VERIFIED/ACTIVE/PARTIALLY_RESTRICTED/SUSPENDED/CLOSED/DECOMMISSIONED/ARCHIVED; Organization DRAFT/PENDING_VERIFICATION/ACTIVE/RESTRICTED/SUSPENDED/WIND_DOWN/CLOSED/ARCHIVED.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -233,7 +240,7 @@
       "question": "How are transfer, merger, split, closure, suspension, and archival controlled?",
       "rationale": "Material topology changes are not safe CRUD updates.",
       "recommended_candidate_treatment": "Use explicit proposed -> reviewed -> approved -> effective -> reconciled events; preserve lineage and prior identifiers; prohibit automatic transfer or merge of people, relationships, horses, invoices, permissions, agreements, or evidence.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -261,7 +268,7 @@
       "question": "How is active tenant/facility context selected and audited?",
       "rationale": "Prevents confused-deputy and stale-session errors.",
       "recommended_candidate_treatment": "Require a visible tenant context and, when relevant, a nested facility context. Bind both identifiers plus context version into server authorization, show them persistently, audit every switch, expire stale context, and require reconfirmation for consequential cross-context actions.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -289,7 +296,7 @@
       "question": "Which topology facts may Relationships and Authorization consume?",
       "rationale": "Supports authorization inputs without transferring domain ownership.",
       "recommended_candidate_treatment": "Expose stable IDs, entity type, lifecycle availability, tenant-scoped association, containment path, public/private projection, provenance, effective time, and freshness. Consumers may reference but not rewrite Facility truth.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -317,7 +324,7 @@
       "question": "Are memberships and staff assignments exclusively Relationship-domain facts?",
       "rationale": "Role and facility association must never silently become authority.",
       "recommended_candidate_treatment": "Yes. Facility stores no authoritative membership, employment, staff, delegation, guardianship, or representation fact; it may hold references to Relationship-owned records for display and evaluation.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -345,7 +352,7 @@
       "question": "What evidence establishes stewardship without treating payment/contact status as authority?",
       "rationale": "Preserves the distinction among custody, stewardship, ownership, and permission.",
       "recommended_candidate_treatment": "Require an explicit stewardship assertion with subject, scope, source type, source reference, claimant, verifier, effective period, confidence, dispute state, and review outcome. Payment, possession, contact, profile, lease, or role is corroborating evidence only.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -373,7 +380,7 @@
       "question": "How are providers, vendors, and service organizations represented?",
       "rationale": "Avoids treating vendor profile, contract, or payment row as organizational authority.",
       "recommended_candidate_treatment": "Represent each real entity as an Organization Identity with provider/service capabilities; connect it to tenants and facilities through Relationship- and Agreement-owned temporal records; retain accountable human actors for consequential actions.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -401,7 +408,7 @@
       "question": "What timezone, locale, and address rules apply?",
       "rationale": "Schedules, notices, privacy, and physical identity require explicit time and location semantics.",
       "recommended_candidate_treatment": "Use IANA timezone IDs, BCP 47 locale tags, structured postal-address components plus country/jurisdiction, and separate geocode precision/confidence/source. Preserve historical versions; never require precise address in a public projection.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -429,7 +436,7 @@
       "question": "How are duplicates detected, reviewed, and merged?",
       "rationale": "Same address or similar name is not identity.",
       "recommended_candidate_treatment": "Create duplicate candidates using name/address/geometry/external-ID/topology signals, but prohibit automatic merge. A governed merge requires human review, tenant-impact analysis, lineage, conflict register, downstream reconciliation, and a feasible reversal plan.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -457,7 +464,7 @@
       "question": "What is publicly discoverable versus tenant-scoped?",
       "rationale": "Public search must not turn tenant records into a directory or expose sensitive place data.",
       "recommended_candidate_treatment": "Private by default. Publish only a separate, field-specific, revocable public projection authorized by a competent actor, with generalized location where needed, anti-enumeration controls, no private topology, and no minor or security-sensitive data.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -485,7 +492,7 @@
       "question": "What is the minimum first-user Facility/Tenant seed?",
       "rationale": "Avoids fabricating a legal organization for individual owners while supporting facility operators.",
       "recommended_candidate_treatment": "Create one Tenant operating context. Create a DRAFT Facility only when the user is establishing a physical operation; create an Organization only when a real organization is asserted. Seeding creates no membership or permission beyond separately approved onboarding controls.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
@@ -513,14 +520,16 @@
       "question": "How are ambiguous legacy records quarantined?",
       "rationale": "Legacy convergence must preserve uncertainty and fail closed.",
       "recommended_candidate_treatment": "Import ambiguous rows into a tenant-scoped quarantine with source snapshot, candidates, confidence, conflicts, reviewer, and no authority-bearing or public projection. Promote only through reviewed reconciliation; never guess tenant, organization, facility, or permission.",
-      "review_status": "FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE",
+      "review_status": "FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL",
       "risks": "The recommendation may not match Founder business preference or future operating model until expressly decided.",
       "security_privacy_safeguarding_impact": "Material; affects isolation, discoverability, attribution, location sensitivity, or authority boundaries.",
       "status": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED"
     }
   ],
   "deployment_activity": false,
-  "disposition": "FACILITY_PIA_FOUNDER_DECISIONS_INCORPORATED_READY_FOR_FRESH_STRUCTURED_REVIEW",
+  "design_freeze_commit": "78fd67a1687dd150f10a21d2507baab750f03490",
+  "design_freeze_tree": "2e6daf51752d680c76323b02d8d1a76a838ecd14",
+  "disposition": "FACILITY_PIA_REVIEW_BLOCKED_BY_PROVENANCE_OR_VALIDATION_FAILURE",
   "documented_gap_count": 4,
   "enrollment_or_production_activity": false,
   "entities": [
@@ -690,6 +699,7 @@
   "mandatory_exact_source_gaps": 0,
   "migration_activity": false,
   "package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE",
+  "package_revision": "1.0.1-R2",
   "package_run_id": "ES-PKG-2026-021-V101",
   "portfolio_position": "02",
   "predecessor_commit": "b8f34aef390c5fec6f942a6253edf6acc9488c44",
@@ -1301,6 +1311,9 @@
       "test_id": "FAC-TEST-055-P;FAC-TEST-055-N;FAC-TEST-055-B"
     }
   ],
+  "review_blocked": true,
+  "review_blocker": "PERMISSION_CHECK_FAILED",
+  "review_complete": false,
   "review_cycle_id": "ES-REV-2026-021",
   "review_runtime": {
     "custom_agent_execution_claimed": false,
@@ -1407,6 +1420,26 @@
       "owner": "Structured review / Founder",
       "severity": "P1",
       "status": "OPEN_STRUCTURED_REVIEW_GATE"
+    },
+    {
+      "decision_ids": "NONE",
+      "effect": "Blocks valid structured review completion and Founder-adoption-review readiness.",
+      "finding": "Formal structured review roles cannot run under the live unrestricted/approval-never parent mode without a detailed Founder exception.",
+      "finding_id": "FAC-RISK-011",
+      "mitigation": "Fresh compliant-mode review or exact Founder exception with pre-spawn permission evidence.",
+      "owner": "Founder/orchestrator",
+      "severity": "P1",
+      "status": "OPEN_PERMISSION_CONTROL"
+    },
+    {
+      "decision_ids": "FAC-FD-001;FAC-FD-002;FAC-FD-003;FAC-FD-004;FAC-FD-005;FAC-FD-006;FAC-FD-014;FAC-FD-017",
+      "effect": "Machine consumers could contradict approved decision status.",
+      "finding": "R1 machine JSON retained historical Founder-decision-required source-gap statuses after CSV correction.",
+      "finding_id": "FAC-RISK-012",
+      "mitigation": "R2 synchronizes status and adds parity checks; independent verification remains required.",
+      "owner": "Structured review",
+      "severity": "P1",
+      "status": "REMEDIATED_UNVERIFIED"
     }
   ],
   "segregation_boundary": {
@@ -1426,12 +1459,12 @@
       "status": "CONTROLLED_SEGREGATION"
     },
     {
-      "blocking": "YES_FOR_DESIGN_APPROVAL",
-      "effect": "FAC-FD-001 through FAC-FD-005 must be decided before design approval.",
-      "gap": "No adopted source settles the final Tenant/Facility/Organization definitions and cardinalities for this PIA.",
+      "blocking": "NO_AFTER_FOUNDER_DESIGN_APPROVAL",
+      "effect": "No longer an open design-decision gap; implementation evidence remains separate.",
+      "gap": "Historical design-decision gap for definitions and cardinalities was resolved by FAC-FD-001 through FAC-FD-005.",
       "gap_id": "FAC-SG-002",
       "severity": "P1",
-      "status": "FOUNDER_DECISION_REQUIRED"
+      "status": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
     },
     {
       "blocking": "YES_FOR_IMPLEMENTATION_AUTHORIZATION",
@@ -1442,12 +1475,12 @@
       "status": "AS_BUILT_GAP"
     },
     {
-      "blocking": "YES_AT_APPLICABLE_GATE",
-      "effect": "FAC-FD-006, FAC-FD-014, and FAC-FD-017 remain open.",
-      "gap": "No final Founder-selected organization taxonomy, address/jurisdiction profile, or first-user seed policy exists.",
+      "blocking": "NO_FOR_DESIGN_REVIEW",
+      "effect": "Design direction incorporated; future implementation validation remains unauthorized.",
+      "gap": "Historical taxonomy, address, and first-user seed policy gap was resolved by FAC-FD-006, FAC-FD-014, and refined FAC-FD-017.",
       "gap_id": "FAC-SG-004",
       "severity": "P2",
-      "status": "FOUNDER_DECISION_REQUIRED"
+      "status": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
     }
   ],
   "sources": [

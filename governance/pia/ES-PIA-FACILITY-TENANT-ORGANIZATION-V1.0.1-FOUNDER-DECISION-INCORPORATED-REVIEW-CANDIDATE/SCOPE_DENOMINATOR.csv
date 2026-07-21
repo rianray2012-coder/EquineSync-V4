@@ -1,0 +1,11 @@
+function,denominator,completed,completed_with_limitation,blocked,not_reviewed,coverage_percent,classification
+Drafting/incorporation,18 decisions,18,0,0,0,100,C4_COMPLETE_FOR_RECORDED_SCOPE
+Requirements,55 requirements,55,0,0,0,100,C4_COMPLETE_FOR_RECORDED_SCOPE
+Acceptance,55 criteria,55,0,0,0,100,C4_COMPLETE_FOR_RECORDED_SCOPE
+Test specifications,85 tests,0,85,0,0,100 documentary mapping only,C3_COMPLETE_WITH_LIMITATIONS
+Segregated review,55 requirements plus 18 decisions and 2 passes,0,0,75,75,0,C1_PARTIAL
+Adversarial challenge,21 categories plus directive questions,0,0,21,21,0,C0_NOT_STARTED
+Domain review,defined FTO coverage model,0,0,1,1,0,C0_NOT_STARTED
+Machine validation,formal validation inventory,0,0,1,1,0 formal,C0_NOT_STARTED formal; C3 root preliminary
+Evidence custody,expected/received/relied evidence,0,1,1,0,preliminary only,C3 root preliminary
+Synthetic golden paths,12 paths,0,12,12,0,100 mapping; 0 formal,C3 mapping; C0 formal

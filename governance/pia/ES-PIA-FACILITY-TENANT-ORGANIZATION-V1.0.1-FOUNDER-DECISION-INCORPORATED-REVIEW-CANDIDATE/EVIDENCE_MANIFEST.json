@@ -1,14 +1,16 @@
 {
   "adopted": false,
+  "formal_review_valid": false,
   "founder_decision_disposition": "FAC-FD-001_THROUGH_FAC-FD-018_FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED",
   "implementation_activity": "NONE",
   "implementation_authority": false,
   "locked": false,
   "package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE",
   "review_cycle_id": "ES-REV-2026-021",
+  "review_disposition": "FACILITY_PIA_REVIEW_BLOCKED_BY_PROVENANCE_OR_VALIDATION_FAILURE",
   "schema": "equinesync.pia-evidence-manifest.v1",
   "sealed_source_modifications": 0,
-  "source_count": 39,
+  "source_count": 41,
   "sources": [
     {
       "path": "governance/founder_authorized_remediation/identity_relationships/ES-REM-2026-001/source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf",
@@ -243,6 +245,18 @@
       "sha256": "7bd8fa59f4720f261194f1148f4a0f19665f91700656e0632953e40079438ac4",
       "source_id": "FAC-SRC-FOUNDER-DIRECTIVE-2026-07-21",
       "status": "FOUNDER_DECISION_DESIGN_ONLY_AND_REVIEW_AUTHORIZATION"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "c5cdc19b2b23ce4d52ea52898c40e82c76ec90834e746b58fd671f5b5dc426ff",
+      "source_id": "FAC-SRC-AGENTS-AT-FREEZE",
+      "status": "VERIFIED_REPOSITORY_CONTROL"
+    },
+    {
+      "path": "governance/founder_orchestrated_review/RUNTIME_PERMISSION_CONTROL.md",
+      "sha256": "8ab99a6a2440e4205ec46187e553cd58c42d55e2e650b26ed1a4935989086a06",
+      "source_id": "FAC-SRC-RUNTIME-PERMISSION-CONTROL",
+      "status": "VERIFIED_REPOSITORY_CONTROL"
     }
   ],
   "task_a_base_commit": "b8f34aef390c5fec6f942a6253edf6acc9488c44"

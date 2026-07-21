@@ -37,7 +37,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Use five distinct concepts: Tenant is the application isolation and operating-context boundary; Facility is a durable physical or operational place; Organization is a durable legal, operating, administrative, or service entity; Barn is a facility subtype or an operation at a facility, not a universal synonym; Business is an Organization participating in commercial activity.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -59,7 +59,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Yes. Every tenant-scoped object, read, write, search projection, cache, export, job, event, and offline bundle must be bound to exactly one active tenant unless a separately governed cross-tenant workflow is explicitly authorized.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -81,7 +81,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Yes, through explicit, temporal Organization-Tenant control relationships with verified authority evidence; access remains separately granted per tenant and never inherits from common ownership or email domain.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -103,7 +103,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Yes, only through explicit temporal Tenant-Facility association records with purpose, scope, steward, status, and conflict rules; facility identity may be shared while tenant-private projections remain isolated.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -125,7 +125,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Use stable Facility -> Managed Area/Parcel -> Structure -> Zone/Space -> Subspace/Fixture/Asset containment, with separately modeled adjacency, route, overlap, and shared-resource relationships. Each effective containment version has one parent; history and aliases remain resolvable.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -147,7 +147,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Use capability-oriented types: legal_entity, operating_business, service_provider_or_practice, nonprofit_or_association, public_body, and informal_operating_group. Type is multi-valued, jurisdiction-aware, evidenced, and never permission-bearing by itself.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -169,7 +169,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Adopt explicit entity-specific state machines: Tenant DRAFT/PENDING_VERIFICATION/ACTIVE/RESTRICTED/SUSPENDED/WIND_DOWN/CLOSED/ARCHIVED; Facility DRAFT/VERIFIED/ACTIVE/PARTIALLY_RESTRICTED/SUSPENDED/CLOSED/DECOMMISSIONED/ARCHIVED; Organization DRAFT/PENDING_VERIFICATION/ACTIVE/RESTRICTED/SUSPENDED/WIND_DOWN/CLOSED/ARCHIVED.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -191,7 +191,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Use explicit proposed -> reviewed -> approved -> effective -> reconciled events; preserve lineage and prior identifiers; prohibit automatic transfer or merge of people, relationships, horses, invoices, permissions, agreements, or evidence.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -213,7 +213,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Require a visible tenant context and, when relevant, a nested facility context. Bind both identifiers plus context version into server authorization, show them persistently, audit every switch, expire stale context, and require reconfirmation for consequential cross-context actions.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -235,7 +235,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Expose stable IDs, entity type, lifecycle availability, tenant-scoped association, containment path, public/private projection, provenance, effective time, and freshness. Consumers may reference but not rewrite Facility truth.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -257,7 +257,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Yes. Facility stores no authoritative membership, employment, staff, delegation, guardianship, or representation fact; it may hold references to Relationship-owned records for display and evaluation.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -279,7 +279,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Require an explicit stewardship assertion with subject, scope, source type, source reference, claimant, verifier, effective period, confidence, dispute state, and review outcome. Payment, possession, contact, profile, lease, or role is corroborating evidence only.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -301,7 +301,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Represent each real entity as an Organization Identity with provider/service capabilities; connect it to tenants and facilities through Relationship- and Agreement-owned temporal records; retain accountable human actors for consequential actions.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -323,7 +323,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Use IANA timezone IDs, BCP 47 locale tags, structured postal-address components plus country/jurisdiction, and separate geocode precision/confidence/source. Preserve historical versions; never require precise address in a public projection.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -345,7 +345,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Create duplicate candidates using name/address/geometry/external-ID/topology signals, but prohibit automatic merge. A governed merge requires human review, tenant-impact analysis, lineage, conflict register, downstream reconciliation, and a feasible reversal plan.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -367,7 +367,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Private by default. Publish only a separate, field-specific, revocable public projection authorized by a competent actor, with generalized location where needed, anti-enumeration controls, no private topology, and no minor or security-sensitive data.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -389,7 +389,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Create one Tenant operating context. Create a DRAFT Facility only when the user is establishing a physical operation; create an Organization only when a real organization is asserted. Seeding creates no membership or permission beyond separately approved onboarding controls. Mandatory Founder refinement: onboarding is adaptive and role-sensitive; an individual horse owner may use a horse-first flow without creating a Facility or Organization unless a real relationship is asserted or needed.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
@@ -411,7 +411,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - **Approval date:** `2026-07-21`
 - **Authority:** Founder design approval
 - **Incorporated design consequence:** Import ambiguous rows into a tenant-scoped quarantine with source snapshot, candidates, confidence, conflicts, reviewer, and no authority-bearing or public projection. Promote only through reviewed reconciliation; never guess tenant, organization, facility, or permission.
-- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_PENDING_AT_DESIGN_FREEZE`
+- **Remaining review status:** `FRESH_STRUCTURED_REVIEW_BLOCKED_BY_PERMISSION_CONTROL`
 - **Implementation authorization status:** `FALSE_NOT_AUTHORIZED`
 - **Adoption/lock status:** `NOT_ADOPTED_NOT_LOCKED`
 
