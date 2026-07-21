@@ -1,12 +1,12 @@
 # Founder Decision Register - Facility, Tenant, and Organization PIA
 
-**Package:** `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE`  
-**Review cycle:** `ES-REV-2026-021`  
-**Founder approval date:** `2026-07-21`  
-**Approved disposition:** `FAC-FD-001_THROUGH_FAC-FD-018_FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED`  
-**Authority:** Founder design approval only  
-**Implementation authority:** `false`  
-**Adoption:** `false`  
+**Package:** `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE`
+**Review cycle:** `ES-REV-2026-022`
+**Founder approval date:** `2026-07-21`
+**Approved disposition:** `FAC-FD-001_THROUGH_FAC-FD-018_FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED`
+**Authority:** Founder design approval only
+**Implementation authority:** `false`
+**Adoption:** `false`
 **Lock:** `false`
 
 The original questions, recommendations, alternatives, rationales, benefits, risks, and engineering impacts are preserved below. The Founder approved the recommendations as design direction. This register does not authorize implementation, adoption, lock, migration, startup, release, deployment, enrollment, or production activity.
@@ -16,7 +16,7 @@ The original questions, recommendations, alternatives, rationales, benefits, ris
 - Original recommendation: preserved verbatim from the V1.0.0 candidate matrix.
 - Founder disposition: `FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED`.
 - Incorporated consequence: controlling design direction for this successor candidate.
-- Review status: fresh structured review pending at the design freeze.
+- Review status: ES-REV-2026-022 blocked before all formal roles by runtime permission failure.
 - Implementation status: not authorized and not performed.
 
 ## FAC-FD-001

@@ -1,6 +1,7 @@
 # Synthetic Golden Paths
 
-**Review cycle:** `ES-REV-2026-021`  
+**Originating cycle:** `ES-REV-2026-021`
+**ES-REV-2026-022 treatment:** `HISTORICAL_INPUT_NOT_FRESHLY_REVIEWED`
 **Mode:** design-level specification; no executable application run authorized
 
 The deterministic fixture family uses seed `FAC-20260721-017`, UTC clock `2026-07-21T12:00:00Z`, synthetic identifiers only, and no customer, child, health, payment, credential, communication, or production data.

@@ -32,6 +32,7 @@ FINAL_REQUIRED = {
     "OMISSION_REGISTER.csv",
     "CROSS_AGENT_DISCREPANCY_REGISTER.csv",
     "WHAT_THIS_REVIEW_DID_NOT_ESTABLISH.md",
+    "ES_REV_2026_021_TO_ES_REV_2026_022_REVIEW_CYCLE_RECONCILIATION.md",
 }
 SEALED = {
     "source_evidence/CURRENT_PIA_APPROVAL_STATUS.md": "8abfbe0b1be12fcdd9d488659ca68f691e92da47bce1291176791d709baf237e",
@@ -65,6 +66,7 @@ criteria = read_csv("ACCEPTANCE_CRITERIA.csv")
 tests = read_csv("TEST_MATRIX.csv")
 trace = read_csv("FOUNDER_DECISION_TRACEABILITY_MATRIX.csv")
 source_gaps = read_csv("SOURCE_GAPS.csv")
+permission_records = read_csv("RUNTIME_PERMISSION_RECORDS.csv")
 
 check("MV-001-manifest-files", all((ROOT / row["path"]).is_file() for row in manifest["files"]), len(manifest["files"]))
 manifest_mismatch = [row["path"] for row in manifest["files"] if digest(ROOT / row["path"]) != row["sha256"] or (ROOT / row["path"]).stat().st_size != row["bytes"]]
@@ -140,6 +142,58 @@ if final_stage:
     findings = read_csv("STRUCTURED_REVIEW_FINDINGS_REGISTER.csv")
     allowed_severity = {"P0", "P1", "P2", "P3"}
     check("MV-023-finding-severity-values", all(row["severity"] in allowed_severity for row in findings), sorted({row["severity"] for row in findings}))
+    check(
+        "MV-024-runtime-block-metadata-parity",
+        manifest.get("package_revision") == "1.0.1-R3"
+        and manifest.get("review_cycle_id") == "ES-REV-2026-022"
+        and manifest.get("disposition") == "FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE"
+        and machine.get("package_revision") == "1.0.1-R3"
+        and machine.get("review_cycle_id") == "ES-REV-2026-022"
+        and machine.get("disposition") == "FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE",
+        {
+            "manifest_revision": manifest.get("package_revision"),
+            "manifest_cycle": manifest.get("review_cycle_id"),
+            "manifest_disposition": manifest.get("disposition"),
+            "machine_revision": machine.get("package_revision"),
+            "machine_cycle": machine.get("review_cycle_id"),
+            "machine_disposition": machine.get("disposition"),
+        },
+    )
+    check(
+        "MV-025-permission-fail-closed",
+        len(permission_records) == 6
+        and all(row.get("check_result") == "FAIL" for row in permission_records)
+        and all(row.get("role_started") == "FALSE" for row in permission_records)
+        and manifest.get("formal_review_functions_completed") == 0
+        and manifest.get("formal_review_valid") is False,
+        {
+            "records": len(permission_records),
+            "failed": sum(row.get("check_result") == "FAIL" for row in permission_records),
+            "roles_started": sum(row.get("role_started") == "TRUE" for row in permission_records),
+        },
+    )
+    role_reports = [
+        "SEGREGATED_REVIEW_REPORT.md",
+        "ADVERSARIAL_CHALLENGE_REPORT.md",
+        "DOMAIN_REVIEW_REPORT.md",
+        "MACHINE_VALIDATION_REPORT.md",
+        "EVIDENCE_CUSTODY_REPORT.md",
+        "SYNTHETIC_GOLDEN_PATH_REPORT.md",
+    ]
+    role_report_status = {
+        name: "NOT_STARTED_PERMISSION_CHECK_FAILED" in (ROOT / name).read_text(encoding="utf-8")
+        and "**Role started:** `false`" in (ROOT / name).read_text(encoding="utf-8")
+        for name in role_reports
+    }
+    check("MV-026-blocked-role-report-parity", all(role_report_status.values()), role_report_status)
+    disposition_text = (ROOT / "FINAL_STRUCTURED_REVIEW_DISPOSITION.md").read_text(encoding="utf-8")
+    check(
+        "MV-027-final-disposition-parity",
+        disposition_text == (ROOT / "REVIEW_DISPOSITION.md").read_text(encoding="utf-8")
+        and "FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE" in disposition_text
+        and "Cross-agent completion gate:** `FAIL`" in disposition_text,
+        "final and alias byte parity; runtime-blocked disposition; completion gate FAIL",
+    )
 
 failed = [row for row in checks if row["result"] == "FAILED"]
 result = {

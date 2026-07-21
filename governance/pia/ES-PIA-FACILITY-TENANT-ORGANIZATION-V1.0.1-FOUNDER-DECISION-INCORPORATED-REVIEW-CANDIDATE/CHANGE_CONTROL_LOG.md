@@ -11,3 +11,7 @@ No frozen, adopted, locked, or sealed source was modified.
 ## 2026-07-21 - Founder decision incorporation
 
 +Created successor `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE` from `a5cf78295ad43cde7f73e383b3d5e98a11000382`. Incorporated `FAC-FD-001` through `FAC-FD-018`, added the mandatory adaptive-onboarding refinement, expanded requirements/acceptance/tests, and prepared a fresh structured review. Authority remains design-only; no implementation, adoption, or lock occurred.
+
+## 2026-07-21 - ES-REV-2026-022 runtime-permission block
+
+Created complete role-specific permission records before any formal spawn. All six failed under the unrestricted/never/network-enabled parent, so no role started. Advanced review evidence from R2 to R3, preserved the exact R2 input commit, retained every historical finding without closure, and assigned `FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE`. No design, implementation, adoption, or lock authority changed.

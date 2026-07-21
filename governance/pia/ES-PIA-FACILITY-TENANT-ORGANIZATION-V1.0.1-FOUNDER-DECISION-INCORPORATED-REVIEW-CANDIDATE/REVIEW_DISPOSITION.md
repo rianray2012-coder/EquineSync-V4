@@ -1,44 +1,60 @@
 # Final Structured Review Disposition
 
-**Package:** `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE`  
-**Package revision:** `1.0.1-R2`  
-**Review cycle:** `ES-REV-2026-021`  
-**Disposition:** `FACILITY_PIA_REVIEW_BLOCKED_BY_PROVENANCE_OR_VALIDATION_FAILURE`  
-**Founder design decisions:** `FAC-FD-001_THROUGH_FAC-FD-018_FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED`  
-**Implementation authority:** `false`  
-**Adopted:** `false`  
+**Package:** `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE`
+**Package revision:** `1.0.1-R3`
+**Review input:** byte-unchanged R2 commit `56b0a88722d983e05baec0d3b1ea5b7b88c24001`
+**Review cycle:** `ES-REV-2026-022`
+**Disposition:** `FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE`
+**Cross-agent completion gate:** `FAIL`
+**Implementation authority:** `false`
+**Adopted:** `false`
 **Locked:** `false`
 
-## Result
+## Outcome
 
-`FAC-FD-001` through `FAC-FD-018` and the mandatory `FAC-FD-017` adaptive-onboarding refinement are incorporated into a separate successor design candidate. Provenance, archive parity, exact sources, requirements, acceptance criteria, tests, and documentary traceability were assembled successfully.
+The exact R2 input reproduced before the review attempt: 66 files, the expected manifest digest, all package checksums, 25/25 existing deterministic package checks, zero sealed-source modifications, 39/39 original relied-source hashes from exact Git objects, zero mandatory exact-source gaps, explicit Identity and Relationships successor segregation, and the R2 machine-readable parity correction.
 
-The structured review gate did not pass. Repository `AGENTS.md` and `RUNTIME_PERMISSION_CONTROL.md` prohibit formal review-role delegation from the live unrestricted/`approval_policy=never` environment without a detailed Founder exception. The required pre-spawn permission record was missing. All requested generic reviewer sessions were stopped, and no custom-agent or valid equivalent-role completion is claimed.
+The fresh structured review did not begin. The live parent runtime was unrestricted/danger-full-access equivalent with `approval_policy=never` and network enabled. Repository control requires read-only/on-request/network-disabled for documentary roles and isolated bounded workspace-write/on-request/network-disabled for writable roles. The Founder granted no broad exception. Six complete pre-spawn records were created before any role start; all six were `FAIL`, and zero formal roles started.
 
-## Findings disposition
+Therefore no valid fresh segregated, adversarial, domain, machine, evidence-custody, or synthetic documentary conclusion exists. Cross-review discrepancy reconciliation could not compare independent conclusions, and the cross-agent completion gate fails. R3 records the blocked cycle; it does not modify the R2 design content or convert the blocked review into a completed review.
 
-- P0 open: 0.
-- P1 open/blocking: 4, including permission control, a corrected-but-independently-unverified machine-readable contradiction, the inherited as-built separation gap, and the inherited offline/stale-context execution-evidence gap.
-- P2 open: 2.
-- P3 open: 1.
-- Corrected findings: 1 P1, status `REMEDIATED_UNVERIFIED` because independent verification is blocked.
+## Review-function status
 
-Open P1 findings block readiness for Founder adoption review. The package is not ready for adoption review, implementation, migration, startup, deployment, enrollment, or production use.
+| Function | Run ID | Status | Formal coverage | Attestation |
+| --- | --- | --- | ---: | --- |
+| Segregated | ES-REV-2026-022-RA02-01 | NOT_STARTED_PERMISSION_CHECK_FAILED | 0% | Not issued |
+| Adversarial | ES-REV-2026-022-RA03-01 | NOT_STARTED_PERMISSION_CHECK_FAILED | 0% | Not issued |
+| Domain | ES-REV-2026-022-RA06-01 | NOT_STARTED_PERMISSION_CHECK_FAILED | 0% | Not issued |
+| Machine | ES-REV-2026-022-RA04-01 | NOT_STARTED_PERMISSION_CHECK_FAILED | 0% | Not issued |
+| Evidence custody | ES-REV-2026-022-RA05-01 | NOT_STARTED_PERMISSION_CHECK_FAILED | 0% | Not issued |
+| Synthetic documentary | ES-REV-2026-022-RA07-01 | NOT_STARTED_PERMISSION_CHECK_FAILED | 0% | Not issued |
+| Cross-review discrepancy | ES-REV-2026-022-DISC-001 | FORMAL_RECONCILIATION_NOT_PERFORMED | 0% | Not applicable |
+| Orchestrator synthesis | administrative blockage record | COMPLETED_WITH_LIMITATION | runtime block only | Not a role attestation |
 
-## Evidence summary
+## Findings
 
-- V1.0.0 candidate files: 36/36 matched the local archive and repository.
-- Relied-upon source hashes: 39/39 verified; mandatory exact-source gaps: 0.
-- Sealed-source modifications: 0.
-- Requirements: 55; acceptance criteria: 55; tests: 85.
-- FAC-FD-017 focused cases: 16 across at least eight contexts.
-- Preliminary documentary golden-path mappings: 12/12; executable paths: 0.
-- Formal review functions completed: 0 due permission control.
+- P0: 0 open, 0 closed.
+- P1: 4 open or unresolved, 0 closed.
+- P2: 2 open and not freshly reassessed, 0 closed.
+- P3: 1 open and not freshly reassessed, 0 closed.
+
+Status of prior P1 findings:
+
+- `ES-REV-2026-021-ORCH-F-0001`: `OPEN_RECURRED_IN_ES_REV_2026_022`; permission prerequisites again failed, but this time the stop occurred before spawn.
+- `ES-REV-2026-021-MV-F-0001`: `REMEDIATED_UNVERIFIED`; R2 intake parity checks pass, but the formal Machine Validation role did not start.
+- `ES-REV-2026-021-INH-F-0001`: `OPEN_NOT_REASSESSED_PERMISSION_BLOCKED`; this cycle did not determine whether its effect is adoption-review blocking or implementation-only.
+- `ES-REV-2026-021-INH-F-0002`: `OPEN_NOT_REASSESSED_PERMISSION_BLOCKED`; this cycle did not determine its documentary boundary, and executable testing was not authorized.
+
+Adoption-review readiness is blocked by the incomplete review and failed cross-agent completion gate. This cycle does not use the open historical findings to make a new substantive readiness determination.
+
+## Machine evidence boundary
+
+The final package assembly validator passes its mechanical checks, including R3 metadata parity and fail-closed permission-record parity. That root-run packaging validation is not an ES-RA-04 run, does not close `ES-REV-2026-021-MV-F-0001`, and does not establish substantive design correctness or implementation behavior.
 
 ## Required next action
 
-Rian Ray must either run a fresh cycle under read-only/on-request and role-appropriate workspace-write modes with pre-spawn permission records, or issue a documented exception satisfying every field required by `RUNTIME_PERMISSION_CONTROL.md`. The full segregated, adversarial, domain, machine, evidence-custody, and synthetic specification functions must then be freshly performed on the exact R2 package (or a newly versioned package if bytes change). Only a later passing review may proceed to Founder adoption review.
+Start a new review cycle in a runtime that can expose and preserve read-only/on-request/network-disabled reviewer sessions and isolated bounded workspace-write/on-request/network-disabled writable sessions. Create a complete `PASS` record before every role. Freshly run all required functions, then reconcile discrepancies and reassess every carried finding.
 
 ## Authority boundary
 
-No implementation, application code change, database change, schema change, migration, application/service startup, enrollment, production activity, PR, merge, tag, release, deployment, activation, adoption, lock, or unrelated-finding closure occurred or is authorized.
+Implementation authority remains false. No implementation, application-code change, database or schema change, migration, application or service start, executable golden-path run, enrollment, production activity, PR, merge, tag, release, deployment, activation, adoption, lock, or unrelated-finding closure occurred or is authorized. The current Identity and Relationships successor text remains separate and is not represented as Founder-approved.

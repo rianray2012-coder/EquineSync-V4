@@ -1,359 +1,352 @@
 {
-  "checks_executed": 25,
+  "checks": [
+    {
+      "check_id": "MV-001-manifest-files",
+      "evidence": 64,
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-002-manifest-hashes",
+      "evidence": [],
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-003-checksums",
+      "evidence": [],
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-004-checksum-alias",
+      "evidence": "byte parity",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-005-authorized-file-types",
+      "evidence": [],
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-006-decisions-complete",
+      "evidence": [
+        "FAC-FD-001",
+        "FAC-FD-002",
+        "FAC-FD-003",
+        "FAC-FD-004",
+        "FAC-FD-005",
+        "FAC-FD-006",
+        "FAC-FD-007",
+        "FAC-FD-008",
+        "FAC-FD-009",
+        "FAC-FD-010",
+        "FAC-FD-011",
+        "FAC-FD-012",
+        "FAC-FD-013",
+        "FAC-FD-014",
+        "FAC-FD-015",
+        "FAC-FD-016",
+        "FAC-FD-017",
+        "FAC-FD-018"
+      ],
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-007-decision-status",
+      "evidence": "18 approved-design statuses",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-008-decision-authority",
+      "evidence": "all false/not adopted/not locked",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-009-fd17-refinement",
+      "evidence": "adaptive spec",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-010-unique-identifiers",
+      "evidence": {
+        "criteria": 55,
+        "requirements": 55,
+        "tests": 85
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-011-counts",
+      "evidence": {
+        "criteria": 55,
+        "requirements": 55,
+        "tests": 85,
+        "trace": 18
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-012-requirement-mapping",
+      "evidence": "every requirement has acceptance and tests",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-013-positive-negative-boundary",
+      "evidence": {
+        "FAC-REQ-041": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-042": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-043": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-044": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-045": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-046": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-047": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-048": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-049": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-050": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-051": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-052": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-053": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-054": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ],
+        "FAC-REQ-055": [
+          "BOUNDARY_DESIGN",
+          "NEGATIVE_DESIGN",
+          "POSITIVE_DESIGN"
+        ]
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-014-decision-trace",
+      "evidence": [
+        "FAC-FD-001",
+        "FAC-FD-002",
+        "FAC-FD-003",
+        "FAC-FD-004",
+        "FAC-FD-005",
+        "FAC-FD-006",
+        "FAC-FD-007",
+        "FAC-FD-008",
+        "FAC-FD-009",
+        "FAC-FD-010",
+        "FAC-FD-011",
+        "FAC-FD-012",
+        "FAC-FD-013",
+        "FAC-FD-014",
+        "FAC-FD-015",
+        "FAC-FD-016",
+        "FAC-FD-017",
+        "FAC-FD-018"
+      ],
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-015-permission-alias",
+      "evidence": "byte parity",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-016-sealed-sources",
+      "evidence": [],
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-017-founder-directive-hash",
+      "evidence": "recalculated",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-018-authority-false",
+      "evidence": "manifest and machine record",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-019-not-adopted-locked",
+      "evidence": "manifest and machine record",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-020-identity-segregation",
+      "evidence": "explicit false",
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-020A-source-gap-parity",
+      "evidence": {
+        "csv": {
+          "FAC-SG-001": "CONTROLLED_SEGREGATION",
+          "FAC-SG-002": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL",
+          "FAC-SG-003": "AS_BUILT_GAP",
+          "FAC-SG-004": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
+        },
+        "machine": {
+          "FAC-SG-001": "CONTROLLED_SEGREGATION",
+          "FAC-SG-002": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL",
+          "FAC-SG-003": "AS_BUILT_GAP",
+          "FAC-SG-004": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
+        }
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-020B-no-open-founder-decision-status",
+      "evidence": {
+        "csv": {
+          "FAC-SG-001": "CONTROLLED_SEGREGATION",
+          "FAC-SG-002": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL",
+          "FAC-SG-003": "AS_BUILT_GAP",
+          "FAC-SG-004": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
+        },
+        "machine": {
+          "FAC-SG-001": "CONTROLLED_SEGREGATION",
+          "FAC-SG-002": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL",
+          "FAC-SG-003": "AS_BUILT_GAP",
+          "FAC-SG-004": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
+        }
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-021-measurable-references",
+      "evidence": {
+        "broken": [],
+        "examined": 23
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-022-final-required-artifacts",
+      "evidence": [],
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-023-finding-severity-values",
+      "evidence": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-024-runtime-block-metadata-parity",
+      "evidence": {
+        "machine_cycle": "ES-REV-2026-022",
+        "machine_disposition": "FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE",
+        "machine_revision": "1.0.1-R3",
+        "manifest_cycle": "ES-REV-2026-022",
+        "manifest_disposition": "FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE",
+        "manifest_revision": "1.0.1-R3"
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-025-permission-fail-closed",
+      "evidence": {
+        "failed": 6,
+        "records": 6,
+        "roles_started": 0
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-026-blocked-role-report-parity",
+      "evidence": {
+        "ADVERSARIAL_CHALLENGE_REPORT.md": true,
+        "DOMAIN_REVIEW_REPORT.md": true,
+        "EVIDENCE_CUSTODY_REPORT.md": true,
+        "MACHINE_VALIDATION_REPORT.md": true,
+        "SEGREGATED_REVIEW_REPORT.md": true,
+        "SYNTHETIC_GOLDEN_PATH_REPORT.md": true
+      },
+      "result": "PASSED"
+    },
+    {
+      "check_id": "MV-027-final-disposition-parity",
+      "evidence": "final and alias byte parity; runtime-blocked disposition; completion gate FAIL",
+      "result": "PASSED"
+    }
+  ],
+  "checks_executed": 29,
   "checks_failed": 0,
-  "checks_passed": 25,
-  "custom_agent_execution_claimed": false,
+  "checks_passed": 29,
   "environment": {
-    "application_started": false,
-    "approval_policy": "never",
-    "parent_permission": "unrestricted/danger-full-access",
-    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
-    "python": "3.14.6"
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.12.13"
   },
-  "first_failure": {
-    "condition": "R1 machine JSON retained historical FOUNDER_DECISION_REQUIRED source-gap statuses after CSV resolution",
+  "formal_machine_agent_run": false,
+  "formal_review_completed": false,
+  "limitations": [
+    "No formal ES-RA-04 role ran.",
+    "No independent review or executable behavior was tested.",
+    "Passing package checks do not establish substantive correctness or finding closure."
+  ],
+  "package_revision": "1.0.1-R3",
+  "permission_gate": {
+    "fail": 6,
+    "pass": 0,
+    "records": 6,
+    "roles_started": 0
+  },
+  "prior_finding": {
     "finding_id": "ES-REV-2026-021-MV-F-0001",
     "status": "REMEDIATED_UNVERIFIED"
   },
-  "formal_machine_run": false,
-  "formal_role_result": "PERMISSION_CHECK_FAILED",
-  "limitations": [
-    "not a valid ES-RA-04 run",
-    "no independent verifier",
-    "no application/runtime behavior tested",
-    "no implementation authority"
-  ],
-  "package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE",
-  "package_revision": "1.0.1-R2",
-  "preliminary_orchestrator_validation": {
-    "checks": [
-      {
-        "check_id": "MV-001-manifest-files",
-        "evidence": 63,
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-002-manifest-hashes",
-        "evidence": [],
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-003-checksums",
-        "evidence": [],
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-004-checksum-alias",
-        "evidence": "byte parity",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-005-authorized-file-types",
-        "evidence": [],
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-006-decisions-complete",
-        "evidence": [
-          "FAC-FD-001",
-          "FAC-FD-002",
-          "FAC-FD-003",
-          "FAC-FD-004",
-          "FAC-FD-005",
-          "FAC-FD-006",
-          "FAC-FD-007",
-          "FAC-FD-008",
-          "FAC-FD-009",
-          "FAC-FD-010",
-          "FAC-FD-011",
-          "FAC-FD-012",
-          "FAC-FD-013",
-          "FAC-FD-014",
-          "FAC-FD-015",
-          "FAC-FD-016",
-          "FAC-FD-017",
-          "FAC-FD-018"
-        ],
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-007-decision-status",
-        "evidence": "18 approved-design statuses",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-008-decision-authority",
-        "evidence": "all false/not adopted/not locked",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-009-fd17-refinement",
-        "evidence": "adaptive spec",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-010-unique-identifiers",
-        "evidence": {
-          "criteria": 55,
-          "requirements": 55,
-          "tests": 85
-        },
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-011-counts",
-        "evidence": {
-          "criteria": 55,
-          "requirements": 55,
-          "tests": 85,
-          "trace": 18
-        },
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-012-requirement-mapping",
-        "evidence": "every requirement has acceptance and tests",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-013-positive-negative-boundary",
-        "evidence": {
-          "FAC-REQ-041": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-042": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-043": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-044": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-045": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-046": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-047": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-048": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-049": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-050": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-051": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-052": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-053": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-054": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ],
-          "FAC-REQ-055": [
-            "BOUNDARY_DESIGN",
-            "NEGATIVE_DESIGN",
-            "POSITIVE_DESIGN"
-          ]
-        },
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-014-decision-trace",
-        "evidence": [
-          "FAC-FD-001",
-          "FAC-FD-002",
-          "FAC-FD-003",
-          "FAC-FD-004",
-          "FAC-FD-005",
-          "FAC-FD-006",
-          "FAC-FD-007",
-          "FAC-FD-008",
-          "FAC-FD-009",
-          "FAC-FD-010",
-          "FAC-FD-011",
-          "FAC-FD-012",
-          "FAC-FD-013",
-          "FAC-FD-014",
-          "FAC-FD-015",
-          "FAC-FD-016",
-          "FAC-FD-017",
-          "FAC-FD-018"
-        ],
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-015-permission-alias",
-        "evidence": "byte parity",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-016-sealed-sources",
-        "evidence": [],
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-017-founder-directive-hash",
-        "evidence": "recalculated",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-018-authority-false",
-        "evidence": "manifest and machine record",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-019-not-adopted-locked",
-        "evidence": "manifest and machine record",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-020-identity-segregation",
-        "evidence": "explicit false",
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-020A-source-gap-parity",
-        "evidence": {
-          "csv": {
-            "FAC-SG-001": "CONTROLLED_SEGREGATION",
-            "FAC-SG-002": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL",
-            "FAC-SG-003": "AS_BUILT_GAP",
-            "FAC-SG-004": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
-          },
-          "machine": {
-            "FAC-SG-001": "CONTROLLED_SEGREGATION",
-            "FAC-SG-002": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL",
-            "FAC-SG-003": "AS_BUILT_GAP",
-            "FAC-SG-004": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
-          }
-        },
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-020B-no-open-founder-decision-status",
-        "evidence": {
-          "csv": {
-            "FAC-SG-001": "CONTROLLED_SEGREGATION",
-            "FAC-SG-002": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL",
-            "FAC-SG-003": "AS_BUILT_GAP",
-            "FAC-SG-004": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
-          },
-          "machine": {
-            "FAC-SG-001": "CONTROLLED_SEGREGATION",
-            "FAC-SG-002": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL",
-            "FAC-SG-003": "AS_BUILT_GAP",
-            "FAC-SG-004": "RESOLVED_BY_FOUNDER_DESIGN_APPROVAL"
-          }
-        },
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-021-measurable-references",
-        "evidence": {
-          "broken": [],
-          "examined": 24
-        },
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-022-final-required-artifacts",
-        "evidence": [],
-        "result": "PASSED"
-      },
-      {
-        "check_id": "MV-023-finding-severity-values",
-        "evidence": [
-          "P1",
-          "P2",
-          "P3"
-        ],
-        "result": "PASSED"
-      }
-    ],
-    "checks_executed": 25,
-    "checks_failed": 0,
-    "checks_passed": 25,
-    "environment": {
-      "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
-      "python": "3.14.6"
-    },
-    "package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE",
-    "result": "PASSED",
-    "schema_version": "1.0.0",
-    "stage": "FINAL"
-  },
-  "preliminary_result": "PASSED",
-  "reruns": [
-    {
-      "failed": 0,
-      "passed": 21,
-      "result": "PASSED",
-      "run": "design-freeze validator"
-    },
-    {
-      "finding": "ES-REV-2026-021-MV-F-0001",
-      "result": "FAILED",
-      "run": "semantic parity search"
-    },
-    {
-      "failed": 1,
-      "failure": "CHANGE_MANIFEST.txt missing",
-      "passed": 24,
-      "result": "FAILED",
-      "run": "first final-artifact validator"
-    },
-    {
-      "failed": 0,
-      "passed": 25,
-      "result": "PASSED",
-      "run": "post-change-manifest validator"
-    },
-    {
-      "failed": 0,
-      "passed": 25,
-      "result": "PASSED_EXPECTED_AND_EXECUTED_AFTER_REPORT_WRITE",
-      "run": "post-report manifest/checksum validator"
-    }
-  ],
-  "review_cycle_id": "ES-REV-2026-021",
-  "schema_version": "1.0.0"
+  "result": "PASSED",
+  "review_cycle_id": "ES-REV-2026-022",
+  "run_type": "ORCHESTRATOR_PACKAGE_ASSEMBLY_CHECK",
+  "schema_version": "1.1.0"
 }

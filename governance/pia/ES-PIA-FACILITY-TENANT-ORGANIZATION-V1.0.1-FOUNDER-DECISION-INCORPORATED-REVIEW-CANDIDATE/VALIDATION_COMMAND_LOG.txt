@@ -1,37 +1,32 @@
-Review cycle: ES-REV-2026-021
-Package revision: 1.0.1-R2
-Formal ES-RA-04 role: NOT RUN - PERMISSION_CHECK_FAILED
-Environment: isolated temporary clone; parent unrestricted/danger-full-access; approval_policy=never
-Application/service startup: NONE
+Review cycle: ES-REV-2026-022
+Package revision: 1.0.1-R3
+Run type: ORCHESTRATOR_PACKAGE_ASSEMBLY_CHECK; NOT FORMAL ES-RA-04
 
-RUN 1
-Command: python3 PIA_PACKAGE_VALIDATOR.py
-Exit code: 0
-Result: PASSED 21/21
+Immutable R2 intake:
+- git rev-parse HEAD -> 56b0a88722d983e05baec0d3b1ea5b7b88c24001
+- find package -type f | wc -l -> 66
+- sha256 PACKAGE_MANIFEST.json -> fc9ea834472aa603ebebe099b2270a091ce8af72a736bb6183a2066e42c81527
+- sha256 prior blocked ZIP -> f99bbe6de544b1bd688b0c283a75608471c499c63d6745f595f1e522756cd5a8
+- shasum -a 256 -c CHECKSUMS.sha256 -> all OK
+- python PIA_PACKAGE_VALIDATOR.py -> 25/25 PASSED
+- 39 original relied sources verified from exact R2 Git objects -> 39/39
 
-SEMANTIC PARITY CHECK
-Procedure: search non-sealed package content for FOUNDER_DECISION_REQUIRED and compare SOURCE_GAPS.csv with machine JSON
-Result: FAILED - ES-REV-2026-021-MV-F-0001
-First failure preserved: machine JSON retained FAC-SG-002 and FAC-SG-004 as FOUNDER_DECISION_REQUIRED
+Preserved method correction:
+- A filesystem-only relied-source check found 5/39 because the clone is sparse.
+- The check was rerun against exact Git objects at the R2 commit and found 39/39.
+- Sparse worktree absence was not misclassified as source provenance failure.
 
-CORRECTION
-Synchronized machine source_gaps to CSV; added MV-020A parity and MV-020B no-open-decision-status checks; advanced R1 to R2
+Permission gate:
+- pre-spawn records -> 6
+- PASS -> 0
+- FAIL -> 6
+- roles started -> 0
 
-RUN 2
-Command: python3 PIA_PACKAGE_VALIDATOR.py
-Exit code: 1
-Result: FAILED 24/25
-Failure: CHANGE_MANIFEST.txt missing
+R3 finalization:
+- python PIA_PACKAGE_VALIDATOR.py -> expected 29/29 PASSED packaging checks
+- shasum -a 256 -c CHECKSUMS.sha256 -> expected all OK
 
-CORRECTION
-Created substantive CHANGE_MANIFEST.txt and regenerated inventory, manifest, and checksums
-
-RUN 3
-Command: python3 PIA_PACKAGE_VALIDATOR.py
-Exit code: 0
-Result: PASSED 25/25
-
-RUN 4 (after final validation-report update and manifest/checksum regeneration)
-Command: python3 PIA_PACKAGE_VALIDATOR.py
-Expected/recorded result: PASSED 25/25
-Formal independent verification: NOT RUN - PERMISSION_CHECK_FAILED
+Limitations:
+- No formal Machine Validation Agent ran.
+- No executable behavior or implementation was tested.
+- A packaging-validator pass does not close ES-REV-2026-021-MV-F-0001 or establish substantive review completion.

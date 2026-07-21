@@ -1,11 +1,11 @@
 # Facility, Tenant, and Organization PIA
 
-**Package:** `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE`  
-**Version:** `1.0.1`  
-**Review cycle:** `ES-REV-2026-021`  
-**Authority disposition:** `FAC-FD-001_THROUGH_FAC-FD-018_FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED`  
-**Implementation authority:** `false`  
-**Adopted:** `false`  
+**Package:** `ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE`
+**Version:** `1.0.1`
+**Review cycle:** `ES-REV-2026-022`
+**Authority disposition:** `FAC-FD-001_THROUGH_FAC-FD-018_FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED`
+**Implementation authority:** `false`
+**Adopted:** `false`
 **Locked:** `false`
 
 ## 1. Purpose and scope
