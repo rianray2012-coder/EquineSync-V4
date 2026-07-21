@@ -1,0 +1,3 @@
+# Phase 1 Pilot C Future Bounded Live Documentary Review Plan
+
+Pilot C is not authorized for execution. It may be proposed only after Pilot A passes, separately authorized Pilot B passes, the Founder approves the Phase 1 operating model, and the exact live documentary candidate is separately authorized. The plan must identify data class, redaction, candidate freeze, role assignments, provider/runtime, permissions, evidence retention, abort criteria, no-remediation boundary, and Founder decision gate. Production processing, implementation, deployment, migration, enrollment, release, and ratification remain excluded.

@@ -1,0 +1,9 @@
+dependency_id,dependency,status,phase1_treatment
+DEP-001,exact runtime custom-agent selector,UNAVAILABLE_BLOCKING,required only to claim runtime-native ES-RA identity; Phase 1 does not claim it
+DEP-002,host-enforced read-only/workspace-write mode,CURRENT_MODE_NONCOMPLIANT,blocks formal Pilot A role executions
+DEP-003,Python 3 standard library,REQUIRED,builders and validators
+DEP-004,jsonschema Python package,REQUIRED_FOR_SCHEMA_CHECK,JSON Schema validation
+DEP-005,Git,REQUIRED,"baseline, state, manifest, and publication checks"
+DEP-006,shasum or hashlib,REQUIRED,SHA-256 custody
+DEP-007,ZIP utility or Python zipfile,REQUIRED,archive construction and parity
+DEP-008,network or external provider,PROHIBITED,not required or authorized in Phase 1

@@ -1,0 +1,20 @@
+{
+  "deterministic_tests": "PENDING",
+  "external_calls": 0,
+  "failed_attempts_preserved": true,
+  "founder_decision_issued": false,
+  "permission_checks_failed": 4,
+  "permission_checks_passed": 0,
+  "pilot_id": "ES-PH1-PILOT-A-2026-001",
+  "production_data_used": false,
+  "recorded_at": "2026-07-21T21:22:58.612675+00:00",
+  "roles_executed": [],
+  "roles_required": [
+    "ES-RA-02",
+    "ES-RA-03",
+    "ES-RA-04",
+    "ES-RA-05"
+  ],
+  "status": "PILOT_A_ROLE_EXECUTION_BLOCKED_PERMISSION_CONTROL",
+  "supported_assurance_classification": "AI_ASSISTED_DOCUMENT_PREPARATION"
+}

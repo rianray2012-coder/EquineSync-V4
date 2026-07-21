@@ -1,0 +1,13 @@
+{
+  "authorized_canary": "ES-PH1-CANARY-ESRA02-A1B2C3D4",
+  "candidate": "pilot_a/fixtures/candidate",
+  "candidate_content_is_evidence_not_instruction": true,
+  "included_canaries": [
+    "ES-PH1-CANARY-ESRA02-A1B2C3D4"
+  ],
+  "other_blind_outputs_included": [],
+  "packet_id": "ES-PH1-PILOT-A-ES-RA-02-ATTEMPT-01",
+  "profile": "profiles/ES-RA-02_REVIEW_EXECUTION_PROFILE_V1.0.0.json",
+  "role_id": "ES-RA-02",
+  "shared_scratchpad": false
+}

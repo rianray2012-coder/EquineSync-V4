@@ -1,0 +1,12 @@
+{
+  "affected_procedural_segregation_claim": "INVALID",
+  "attempt_id": "ES-PH1-PILOT-A-PACKET-PREP-ATTEMPT-01",
+  "leaks": {
+    "ES-RA-04": [
+      "ES-PH1-CANARY-ESRA05-N5P6Q7R8"
+    ]
+  },
+  "reason": "unauthorized cross-role canary detected",
+  "status": "FAIL",
+  "substantive_role_execution_started": false
+}

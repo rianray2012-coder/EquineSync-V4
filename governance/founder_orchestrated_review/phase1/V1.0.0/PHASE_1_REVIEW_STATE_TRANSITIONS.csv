@@ -1,0 +1,17 @@
+from_state,to_state,authorized_actor,required_evidence,gate_enforced
+CREATED,SOURCE_INVENTORIED,authorized operator or assigned role,state event plus required gate evidence,YES
+SOURCE_INVENTORIED,CANDIDATE_FROZEN,authorized operator or assigned role,state event plus required gate evidence,YES
+CANDIDATE_FROZEN,ROLE_PACKETS_PREPARED,authorized operator or assigned role,state event plus required gate evidence,YES
+ROLE_PACKETS_PREPARED,BLIND_REVIEW_IN_PROGRESS,authorized operator or assigned role,state event plus required gate evidence,YES
+BLIND_REVIEW_IN_PROGRESS,BLIND_REVIEW_OUTPUTS_SEALED,authorized operator or assigned role,state event plus required gate evidence,YES
+BLIND_REVIEW_OUTPUTS_SEALED,RECONCILIATION_IN_PROGRESS,authorized operator or assigned role,state event plus required gate evidence,YES
+RECONCILIATION_IN_PROGRESS,MACHINE_VALIDATION_COMPLETE,authorized operator or assigned role,state event plus required gate evidence,YES
+MACHINE_VALIDATION_COMPLETE,EVIDENCE_CUSTODY_COMPLETE,authorized operator or assigned role,state event plus required gate evidence,YES
+EVIDENCE_CUSTODY_COMPLETE,FOUNDER_REVIEW_PACKAGE_READY,authorized operator or assigned role,state event plus required gate evidence,YES
+FOUNDER_REVIEW_PACKAGE_READY,FOUNDER_DECISION_PENDING,authorized operator or assigned role,state event plus required gate evidence,YES
+FOUNDER_DECISION_PENDING,FOUNDER_APPROVED,FOUNDER_ONLY,express Founder decision,AI_TRANSITION_PROHIBITED
+FOUNDER_DECISION_PENDING,RATIFIED,FOUNDER_ONLY,express Founder decision,AI_TRANSITION_PROHIBITED
+FOUNDER_DECISION_PENDING,IMPLEMENTATION_AUTHORIZED,FOUNDER_ONLY,express Founder decision,AI_TRANSITION_PROHIBITED
+FOUNDER_DECISION_PENDING,RELEASE_AUTHORIZED,FOUNDER_ONLY,express Founder decision,AI_TRANSITION_PROHIBITED
+FOUNDER_DECISION_PENDING,ACTIVATED,FOUNDER_ONLY,express Founder decision,AI_TRANSITION_PROHIBITED
+FOUNDER_DECISION_PENDING,DEPLOYED,FOUNDER_ONLY,express Founder decision,AI_TRANSITION_PROHIBITED

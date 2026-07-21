@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "path": "valid_policy.json",
+      "sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8"
+    },
+    {
+      "path": "malformed.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "MISSING_REQUIRED_ARTIFACT.md",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    {
+      "path": "duplicate_finding_a.md",
+      "sha256": "ba976c09b5a4fd7e1c86c946e4e7e6e9b02b890c993da700896c2875086af9e4"
+    },
+    {
+      "path": "duplicate_finding_a.md",
+      "sha256": "ba976c09b5a4fd7e1c86c946e4e7e6e9b02b890c993da700896c2875086af9e4"
+    },
+    {
+      "path": "../escape.txt",
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+    }
+  ],
+  "package_id": "ES-PH1-PILOT-A-2026-001-CANDIDATE-V001",
+  "synthetic": true
+}

@@ -1,0 +1,10 @@
+item_id,artifact_family,disposition,rationale
+LEG-001,agent_config/V1.0.0,RETAINED_AS_ACTIVE_SOURCE,Founder-approved framework and canonical sources
+LEG-002,.codex/agents,RETAINED_UNCHANGED,static registration; not runtime identity proof
+LEG-003,calibration,RETAINED_AS_HISTORICAL_EVIDENCE,"preserve all passes, failures, and retries"
+LEG-004,installation reports,RETAINED_AS_HISTORICAL_EVIDENCE,installation proof only
+LEG-005,activation,RETAINED_AS_HISTORICAL_EVIDENCE,activation remained blocked
+LEG-006,runtime_remediation,RETAINED_AS_HISTORICAL_EVIDENCE,agent_type null and generic fallback preserved
+LEG-007,runtime_requalification,RETAINED_AS_HISTORICAL_EVIDENCE,confirmed product limitation
+LEG-008,temporary_non_agent_fallback,ADAPTED_BY_PHASE_1_SUCCESSOR,retained authorization; Phase 1 supplies stricter reusable controls
+LEG-009,failed canary and retry evidence,RETAINED_AS_HISTORICAL_EVIDENCE,no retroactive conversion

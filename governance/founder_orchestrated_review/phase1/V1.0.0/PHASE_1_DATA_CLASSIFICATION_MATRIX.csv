@@ -1,0 +1,8 @@
+classification,pilot_a,external_processing,handling
+PUBLIC,ALLOWED_IF_AUTHORIZED,PROHIBITED,ordinary public information
+INTERNAL,SYNTHETIC_ONLY,PROHIBITED,controlled EquineSync material
+CONFIDENTIAL,PROHIBITED,PROHIBITED,requires separate handling authority
+PRIVILEGED_OR_LEGALLY_SENSITIVE,PROHIBITED,PROHIBITED,not permitted in Pilot A
+PERSONAL_DATA,PROHIBITED,PROHIBITED,no real person data
+SECURITY_SENSITIVE,PROHIBITED,PROHIBITED,no credentials or live security material
+PROHIBITED_FROM_EXTERNAL_PROCESSING,PROHIBITED,PROHIBITED,never send externally

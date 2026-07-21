@@ -1,0 +1,7 @@
+level,classification,minimum_requirement,phase1_status
+1,AI_ASSISTED_DOCUMENT_PREPARATION,documented AI preparation and limitations,YES
+2,SINGLE_EXECUTION_AI_REVIEW,one valid bounded execution with custody,CONDITIONAL
+3,PROCEDURALLY_SEGREGATED_INTERNAL_AI_REVIEW,"all segregation, blind, custody, deterministic, and Founder controls pass",MAXIMUM_CONDITIONAL
+4,MULTI_PROVIDER_CORROBORATED_INTERNAL_AI_REVIEW,separate providers and corroboration,NOT_AUTHORIZED
+5,INDEPENDENT_HUMAN_INTERNAL_REVIEW,separately identifiable qualified internal human,NOT_ESTABLISHED
+6,INDEPENDENT_EXTERNAL_ASSURANCE,qualified external assurance engagement,NOT_ESTABLISHED

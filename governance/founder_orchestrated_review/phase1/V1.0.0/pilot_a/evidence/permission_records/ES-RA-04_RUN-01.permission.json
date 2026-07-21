@@ -1,0 +1,22 @@
+{
+  "active_approval_override": "never",
+  "actual_effective_mode": "danger-full-access",
+  "agent_run_id": "ES-RA-04-ES-PH1-PILOT-A-2026-001-RUN-01",
+  "authorized_input": "pilot_a/packets/attempt-01",
+  "authorized_output": "pilot_a/evidence/role_outputs/ES-RA-04",
+  "checked_at": "2026-07-21T21:22:58.612675+00:00",
+  "checker": "Codex parent",
+  "configured_expected_mode": "workspace-write",
+  "exception_reference": null,
+  "founder_authorization": "PHASE_1_FOUNDER_DIRECTIVE_2026-07-21",
+  "network": "OFF_BY_DIRECTIVE",
+  "parent_permission_mode": "danger-full-access",
+  "parent_surface": "Codex desktop",
+  "pilot_id": "ES-PH1-PILOT-A-2026-001",
+  "production_access_absent": true,
+  "reason": "Parent permission mode is broader than the role matrix and approval_policy=never is prohibited for formal review execution without an express Founder exception.",
+  "requested_role": "ES-RA-04",
+  "result": "FAIL",
+  "spawn_performed": false,
+  "substantive_role_work_performed": false
+}

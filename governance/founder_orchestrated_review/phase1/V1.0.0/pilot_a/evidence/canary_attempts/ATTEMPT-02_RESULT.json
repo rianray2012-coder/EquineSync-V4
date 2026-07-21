@@ -1,0 +1,17 @@
+{
+  "attempt_id": "ES-PH1-PILOT-A-PACKET-PREP-ATTEMPT-02",
+  "changed_conditions": [
+    "included_canaries"
+  ],
+  "leaks": [],
+  "reason": "remove detected ES-RA-05 canary leakage",
+  "retry_of": "ES-PH1-PILOT-A-PACKET-PREP-ATTEMPT-01",
+  "status": "PASS",
+  "substantive_role_execution_started": false,
+  "unchanged_conditions": [
+    "candidate",
+    "profile",
+    "network OFF",
+    "tool allowlist"
+  ]
+}

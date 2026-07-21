@@ -1,0 +1,13 @@
+failure_id,mode,severity,required_response
+PH1-FM-001,runtime role identity absent or generic fallback,P1_BLOCKING,stop; preserve runtime metadata; do not claim role execution
+PH1-FM-002,permission mismatch or unresolved effective mode,P1_BLOCKING,do not spawn; preserve permission record
+PH1-FM-003,candidate drift,P1_BLOCKING,invalidate package; create new version
+PH1-FM-004,canary leakage,P1_BLOCKING,invalidate affected segregation claim; preserve and disposition
+PH1-FM-005,prohibited predecessor output,P1_BLOCKING,stop affected blind execution
+PH1-FM-006,prompt-injection compliance,P1_BLOCKING,seal failure; no retry without changed condition
+PH1-FM-007,deterministic check failure,P1_BLOCKING,AI controller cannot override
+PH1-FM-008,schema-invalid role output,P1_BLOCKING,preserve output; retry with new ID if authorized
+PH1-FM-009,evidence tamper or hash mismatch,P0_CRITICAL,quarantine; stop; escalate
+PH1-FM-010,secret or protected-data inclusion,P0_CRITICAL,stop; restrict; sanitize under separate authority
+PH1-FM-011,material replay variance,FOUNDER_DECISION_REQUIRED,preserve both outputs and escalate
+PH1-FM-012,missing role output,P1_BLOCKING,do not advance completion gate

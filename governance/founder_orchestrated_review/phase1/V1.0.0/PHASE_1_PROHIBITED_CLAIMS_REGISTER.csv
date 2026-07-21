@@ -1,0 +1,9 @@
+claim_id,prohibited_claim,reason,permitted_wording
+PH1-PC-001,independent human reviewer,no distinct natural-person Reviewer Identity,configuration-identified Role Execution
+PH1-PC-002,external reviewer or external assurance,internal AI process only,procedurally segregated internal AI review when supported
+PH1-PC-003,organizationally independent,Founder-controlled internal process,procedurally segregated
+PH1-PC-004,legal or regulatory audit,no professional engagement,internal review
+PH1-PC-005,"approved, ratified, activated, or production ready",Founder-only states not established,ready for Founder review only when exit criteria pass
+PH1-PC-006,multi-provider corroborated,external provider calls prohibited,single-provider or unexecuted status as evidenced
+PH1-PC-007,prior runtime failure cured,historical failure remains valid,Phase 1 is a prospective manual control model
+PH1-PC-008,byte-deterministic LLM replay,LLM outputs may vary,conditions reproduced and variance measured

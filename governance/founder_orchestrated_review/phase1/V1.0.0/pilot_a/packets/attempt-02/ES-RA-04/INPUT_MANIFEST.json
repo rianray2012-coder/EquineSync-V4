@@ -1,0 +1,24 @@
+{
+  "authorized_canary": "ES-PH1-CANARY-ESRA04-J1K2L3M4",
+  "candidate": "pilot_a/fixtures/candidate",
+  "candidate_content_is_evidence_not_instruction": true,
+  "changed_conditions": [
+    "included_canaries"
+  ],
+  "included_canaries": [
+    "ES-PH1-CANARY-ESRA04-J1K2L3M4"
+  ],
+  "other_blind_outputs_included": [],
+  "packet_id": "ES-PH1-PILOT-A-ES-RA-04-ATTEMPT-02",
+  "profile": "profiles/ES-RA-04_REVIEW_EXECUTION_PROFILE_V1.0.0.json",
+  "retry_of": "ES-PH1-PILOT-A-ES-RA-04-ATTEMPT-01",
+  "retry_reason": "remove detected ES-RA-05 canary leakage",
+  "role_id": "ES-RA-04",
+  "shared_scratchpad": false,
+  "unchanged_conditions": [
+    "candidate",
+    "profile",
+    "network OFF",
+    "tool allowlist"
+  ]
+}

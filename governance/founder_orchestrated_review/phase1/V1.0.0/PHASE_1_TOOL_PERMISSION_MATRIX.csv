@@ -1,0 +1,9 @@
+role_id,candidate_access,repository_modification,network,shell,prohibited
+ES-RA-01,BOUNDED_SOURCE_READ,assigned output directory only,OFF,limited allowlisted authoring commands,unrestricted shell; provider APIs; production; credentials; commit/push/merge/PR
+ES-RA-02,FROZEN_READ_ONLY,frozen read-only candidate; assigned output only,OFF,none by default,unrestricted shell; provider APIs; production; credentials; commit/push/merge/PR
+ES-RA-03,FROZEN_READ_ONLY,frozen read-only candidate; assigned output only,OFF,none by default,unrestricted shell; provider APIs; production; credentials; commit/push/merge/PR
+ES-RA-04,FROZEN_READ_ONLY,frozen candidate read-only; validation evidence directory write-only,OFF,allowlisted deterministic commands,unrestricted shell; provider APIs; production; credentials; commit/push/merge/PR
+ES-RA-05,FROZEN_READ_ONLY,evidence directories only,OFF,deterministic custody utilities only,unrestricted shell; provider APIs; production; credentials; commit/push/merge/PR
+ES-RA-06,FROZEN_READ_ONLY,frozen read-only candidate; assigned output only,OFF,none by default,unrestricted shell; provider APIs; production; credentials; commit/push/merge/PR
+ES-RA-07,FROZEN_READ_ONLY,specification and synthetic-fixture directory only,OFF,allowlisted fixture-generation commands,unrestricted shell; provider APIs; production; credentials; commit/push/merge/PR
+ES-RA-08,FROZEN_READ_ONLY,isolated test copy and execution evidence directory only,OFF,allowlisted test commands only,unrestricted shell; provider APIs; production; credentials; commit/push/merge/PR

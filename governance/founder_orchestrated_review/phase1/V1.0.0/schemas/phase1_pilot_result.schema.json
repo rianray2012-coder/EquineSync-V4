@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "failed_attempts_preserved": {
+      "type": "boolean"
+    },
+    "pilot_id": {
+      "const": "ES-PH1-PILOT-A-2026-001"
+    },
+    "roles_executed": {
+      "type": "array"
+    },
+    "roles_required": {
+      "minItems": 4,
+      "type": "array"
+    }
+  },
+  "required": [
+    "pilot_id",
+    "status",
+    "roles_required",
+    "roles_executed",
+    "deterministic_tests",
+    "failed_attempts_preserved",
+    "supported_assurance_classification"
+  ],
+  "type": "object"
+}

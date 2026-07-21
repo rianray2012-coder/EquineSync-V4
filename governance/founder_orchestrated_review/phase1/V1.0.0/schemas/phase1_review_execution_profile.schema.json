@@ -1,0 +1,81 @@
+{
+  "$id": "https://equinesync.local/schemas/phase1-review-execution-profile-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_source": {
+      "type": "string"
+    },
+    "canonical_role_name": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "checksum_scope": {
+      "const": "RFC8785_STYLE_CANONICAL_JSON_OF_profile_payload"
+    },
+    "profile_checksum": {
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "profile_payload": {
+      "required": [
+        "role_purpose",
+        "authority",
+        "prohibited_authority",
+        "required_independence_controls",
+        "permitted_inputs",
+        "prohibited_inputs",
+        "permitted_predecessor_outputs",
+        "prohibited_predecessor_outputs",
+        "permitted_tools",
+        "prohibited_tools",
+        "repository_permissions",
+        "network_permissions",
+        "shell_permissions",
+        "output_directory",
+        "required_output_schema",
+        "citation_requirements",
+        "finding_requirements",
+        "confidence_requirements",
+        "abstention_requirements",
+        "escalation_requirements",
+        "failure_conditions",
+        "retry_rules",
+        "evidence_requirements",
+        "assurance_classification",
+        "limitations",
+        "prohibited_claims",
+        "founder_handoff_requirements",
+        "prompt_injection_defense"
+      ],
+      "type": "object"
+    },
+    "profile_version": {
+      "const": "1.0.0"
+    },
+    "role_id": {
+      "pattern": "^ES-RA-0[1-8]$"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source_sha256": {
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile_version",
+    "role_id",
+    "canonical_role_name",
+    "approved_source",
+    "source_version",
+    "source_sha256",
+    "profile_checksum",
+    "checksum_scope",
+    "profile_payload"
+  ],
+  "type": "object"
+}

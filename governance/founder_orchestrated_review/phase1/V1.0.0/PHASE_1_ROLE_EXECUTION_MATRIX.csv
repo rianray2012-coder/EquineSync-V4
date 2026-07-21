@@ -1,0 +1,9 @@
+role_id,canonical_role,profile_version,profile_file,expected_permission,network,primary_output,founder_authority
+ES-RA-01,Drafting Agent,1.0.0,profiles/ES-RA-01_REVIEW_EXECUTION_PROFILE_V1.0.0.json,workspace-write,OFF,candidate artifact,NONE
+ES-RA-02,Segregated Review Agent,1.0.0,profiles/ES-RA-02_REVIEW_EXECUTION_PROFILE_V1.0.0.json,read-only,OFF,Segregated Review Report,NONE
+ES-RA-03,Adversarial Challenge Agent,1.0.0,profiles/ES-RA-03_REVIEW_EXECUTION_PROFILE_V1.0.0.json,read-only,OFF,challenge plan,NONE
+ES-RA-04,Machine Validation Agent,1.0.0,profiles/ES-RA-04_REVIEW_EXECUTION_PROFILE_V1.0.0.json,workspace-write,OFF,validation plan and inventory,NONE
+ES-RA-05,Evidence Custodian,1.0.0,profiles/ES-RA-05_REVIEW_EXECUTION_PROFILE_V1.0.0.json,workspace-write,OFF,evidence and hash manifests,NONE
+ES-RA-06,Domain Reviewer,1.0.0,profiles/ES-RA-06_REVIEW_EXECUTION_PROFILE_V1.0.0.json,read-only,OFF,domain boundary and authority list,NONE
+ES-RA-07,Synthetic Golden-Path Specification Agent,1.0.0,profiles/ES-RA-07_REVIEW_EXECUTION_PROFILE_V1.0.0.json,workspace-write,OFF,golden-path specification,NONE
+ES-RA-08,Executable Golden-Path Reproduction Controller,1.0.0,profiles/ES-RA-08_REVIEW_EXECUTION_PROFILE_V1.0.0.json,workspace-write,OFF,environment and execution records,NONE

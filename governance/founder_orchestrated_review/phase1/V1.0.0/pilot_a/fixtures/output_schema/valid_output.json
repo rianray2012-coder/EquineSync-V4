@@ -1,0 +1,34 @@
+{
+  "assumptions_and_conflicts": [],
+  "authorization_and_scope": {},
+  "claim_to_evidence": [],
+  "completeness": "C4_COMPLETE_FOR_RECORDED_SCOPE",
+  "completion_attestation": "Synthetic schema fixture only.",
+  "execution_identity": {
+    "completed_at": "2026-07-21T00:00:01Z",
+    "execution_id": "ES-RA-02-ES-PH1-PILOT-A-2026-001-RUN-SCHEMA-TEST",
+    "input_manifest": "synthetic",
+    "model": "synthetic-schema-fixture",
+    "output_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "profile_checksum": "0000000000000000000000000000000000000000000000000000000000000000",
+    "profile_version": "1.0.0",
+    "provider": "none",
+    "role_id": "ES-RA-02",
+    "runtime": "none",
+    "started_at": "2026-07-21T00:00:00Z",
+    "tool_permissions": []
+  },
+  "findings": [],
+  "inputs_examined": [],
+  "limitations": [],
+  "methodology": [],
+  "output_manifest": [],
+  "package_identity": {},
+  "reliability": "R1_SINGLE_AGENT_RESULT",
+  "required_next_actions": [],
+  "scope_denominator": [],
+  "self_audit": {},
+  "what_this_work_did_not_establish": [
+    "No substantive review occurred."
+  ]
+}

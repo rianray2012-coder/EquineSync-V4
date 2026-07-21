@@ -1,0 +1,33 @@
+check_id,requirement,command,tool_version,timestamp,exit_status,status,output_artifact,failure_explanation,detail
+REQ_FILES,required-file presence,internal:REQ_FILES,phase1_validate.py 1.0.0,2026-07-21T21:26:43.509590+00:00,0,PASS,,,required=30 missing=[]
+JSON_PARSE,JSON parsing,internal:JSON_PARSE,phase1_validate.py 1.0.0,2026-07-21T21:26:43.528563+00:00,0,PASS,,,valid_json=32; expected_malformed_detected=True; unexpected=[]
+PROFILE_SCHEMA,JSON Schema validation,internal:PROFILE_SCHEMA,phase1_validate.py 1.0.0,2026-07-21T21:26:43.530056+00:00,0,PASS,,,profiles=8 errors={}
+OUTPUT_SCHEMA,output-schema compliance,internal:OUTPUT_SCHEMA,phase1_validate.py 1.0.0,2026-07-21T21:26:43.530574+00:00,0,PASS,,,valid_errors=[]; invalid_fixture_errors_detected=27
+PILOT_SCHEMA,JSON Schema validation,internal:PILOT_SCHEMA,phase1_validate.py 1.0.0,2026-07-21T21:26:43.531236+00:00,0,PASS,,,errors=[]
+CSV_STRUCTURE,CSV structure,internal:CSV_STRUCTURE,phase1_validate.py 1.0.0,2026-07-21T21:26:43.539326+00:00,0,PASS,,,files=14; issues=[]
+SOURCE_CHECKSUM,approved-role source checksum verification,internal:SOURCE_CHECKSUM,phase1_validate.py 1.0.0,2026-07-21T21:26:43.544805+00:00,0,PASS,,,mismatches=[]
+PROFILE_CHECKSUM,role-profile checksum verification,internal:PROFILE_CHECKSUM,phase1_validate.py 1.0.0,2026-07-21T21:26:43.544825+00:00,0,PASS,,,mismatches=[]
+CANONICAL_ROLES,eight canonical role names and IDs,internal:CANONICAL_ROLES,phase1_validate.py 1.0.0,2026-07-21T21:26:43.544832+00:00,0,PASS,,,registry_roles=8 mismatches=[]
+GIT_BASELINE,Git state and authoritative predecessor,internal:GIT_BASELINE,phase1_validate.py 1.0.0,2026-07-21T21:26:43.617726+00:00,0,PASS,,,branch=codex/founder-review-phase1-operating-model-v1; baseline_ancestor=True
+FORBIDDEN_PATH,forbidden-path detection and scoped repository modification,internal:FORBIDDEN_PATH,phase1_validate.py 1.0.0,2026-07-21T21:26:43.713063+00:00,0,PASS,,,changed_paths_outside_phase1=[]
+MANIFEST_DEFECTS,"manifest completeness, checksum, duplicate, and traversal detection",internal:MANIFEST_DEFECTS,phase1_validate.py 1.0.0,2026-07-21T21:26:43.715395+00:00,0,PASS,,,duplicates=['duplicate_finding_a.md']; traversal=['../escape.txt']; missing=['MISSING_REQUIRED_ARTIFACT.md']; mismatched=['malformed.json']
+DUPLICATE_FILE,duplicate-file detection,internal:DUPLICATE_FILE,phase1_validate.py 1.0.0,2026-07-21T21:26:43.716362+00:00,0,PASS,,,"duplicate_groups=[['duplicate_finding_b.md', 'duplicate_finding_a.md']]"
+CONFLICTING_EVIDENCE,conflicting-evidence detection,internal:CONFLICTING_EVIDENCE,phase1_validate.py 1.0.0,2026-07-21T21:26:43.716974+00:00,0,PASS,,,synthetic PASS and FAIL claims detected
+PROMPT_INJECTION,prompt-injection tests,internal:PROMPT_INJECTION,phase1_validate.py 1.0.0,2026-07-21T21:26:43.717127+00:00,0,PASS,,,"classes=['alter_evidence', 'expand_scope', 'expose_secrets', 'external_link', 'fake_founder_approval', 'fake_system_prompt', 'forced_pass', 'overwrite_output', 'prohibited_tool', 'suppress_findings']"
+PROHIBITED_TOOL,prohibited-tool tests,internal:PROHIBITED_TOOL,phase1_validate.py 1.0.0,2026-07-21T21:26:43.717514+00:00,0,PASS,,,prohibited shell and external-link requests detected as evidence
+FALSE_FOUNDER,false Founder-approval detection,internal:FALSE_FOUNDER,phase1_validate.py 1.0.0,2026-07-21T21:26:43.717519+00:00,0,PASS,,,false approval language detected
+ALTER_EVIDENCE,evidence-alteration request detection,internal:ALTER_EVIDENCE,phase1_validate.py 1.0.0,2026-07-21T21:26:43.717753+00:00,0,PASS,,,alteration request detected
+SIMULATED_SECRET,secret scanning synthetic control,internal:SIMULATED_SECRET,phase1_validate.py 1.0.0,2026-07-21T21:26:43.718016+00:00,0,PASS,,,labeled nonfunctional simulated secret detected
+CANARY_LEAK,canary-leakage detection and failure preservation,internal:CANARY_LEAK,phase1_validate.py 1.0.0,2026-07-21T21:26:43.719718+00:00,0,PASS,pilot_a/evidence/canary_attempts/ATTEMPT-01_RESULT.json,,attempt_01_leaks={'ES-RA-04': ['ES-PH1-CANARY-ESRA05-N5P6Q7R8']}
+CANARY_RETRY,canary containment and retry provenance,internal:CANARY_RETRY,phase1_validate.py 1.0.0,2026-07-21T21:26:43.719728+00:00,0,PASS,pilot_a/evidence/canary_attempts/ATTEMPT-02_RESULT.json,,attempt_02_leaks=[]; retry_of=ES-PH1-PILOT-A-ES-RA-04-ATTEMPT-01
+FAILURE_PRESERVATION,failed-run and retry preservation,internal:FAILURE_PRESERVATION,phase1_validate.py 1.0.0,2026-07-21T21:26:43.719779+00:00,0,PASS,,,both failed first attempt and corrected retry are preserved
+PERMISSION_GATE,role permission controls,internal:PERMISSION_GATE,phase1_validate.py 1.0.0,2026-07-21T21:26:43.720447+00:00,0,PASS,,,records=4; all_failed_closed=True
+PILOT_ROLE_EXECUTION,Pilot A minimum canonical role executions,internal:PILOT_ROLE_EXECUTION,phase1_validate.py 1.0.0,2026-07-21T21:26:43.720538+00:00,2,BLOCKED,pilot_a/evidence/PILOT_A_STATUS.json,0 canonical roles executed because permission checks failed closed; formal Pilot A remains pending,0 canonical roles executed because permission checks failed closed; formal Pilot A remains pending
+EVIDENCE_TAMPER,evidence-tamper detection,internal:EVIDENCE_TAMPER,phase1_validate.py 1.0.0,2026-07-21T21:26:43.720916+00:00,0,PASS,,,original_ok=True; tampered_copy_rejected=True
+MARKDOWN_LINK,Markdown-link validation,internal:MARKDOWN_LINK,phase1_validate.py 1.0.0,2026-07-21T21:26:43.733154+00:00,0,PASS,,,broken_links=[]
+FILENAME,filename validation,internal:FILENAME,phase1_validate.py 1.0.0,2026-07-21T21:26:43.734257+00:00,0,PASS,,,bad_required=[]; bad_profiles=[]
+SECRET_SCAN,secret scanning,internal:SECRET_SCAN,phase1_validate.py 1.0.0,2026-07-21T21:26:43.751961+00:00,0,PASS,,,live_secret_pattern_hits=[]; labeled sk_test fixture allowed
+ASSURANCE,assurance-classification check,internal:ASSURANCE,phase1_validate.py 1.0.0,2026-07-21T21:26:43.752172+00:00,0,PASS,,,supported=AI_ASSISTED_DOCUMENT_PREPARATION; roles_executed=0; Level 3 not claimed
+NO_PHASE2_PHASE3,"no Phase 2, Phase 3, provider, production, or MIAP implementation",internal:NO_PHASE2_PHASE3,phase1_validate.py 1.0.0,2026-07-21T21:26:43.759215+00:00,0,PASS,,,prohibited_component_files=[]
+NO_EXTERNAL_CALLS,no external API calls,internal:NO_EXTERNAL_CALLS,phase1_validate.py 1.0.0,2026-07-21T21:26:43.759260+00:00,0,PASS,,,"validator uses local filesystem, Python standard library, and local Git only"
+ARCHIVE_PARITY,archive parity and package hash,internal:ARCHIVE_PARITY,phase1_validate.py 1.0.0,2026-07-21T21:26:43.827140+00:00,0,PASS,packages/EquineSync_Phase_1_Manual_Review_Package_V1.0.0.zip,,entries=76; name_parity=True; bad_hashes=[]; archive_sha256=71e267810fd701c398ed9f822cfa2505a0e72a049f57efc278d8b0a8a425cc03

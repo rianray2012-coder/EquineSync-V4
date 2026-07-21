@@ -1,0 +1,14 @@
+requirement_id,future_phase,component,high_level_requirement,status
+FUT-001,2,provider adapters,separate provider requests with explicit allowlist,NOT_AUTHORIZED
+FUT-002,2,execution controller,strict context and permission boundaries,NOT_AUTHORIZED
+FUT-003,2,evidence ledger,append-only storage and custody API,NOT_AUTHORIZED
+FUT-004,2,schema validation service,validate every packet and output,NOT_AUTHORIZED
+FUT-005,2,role registry,versioned profiles and checksums,NOT_AUTHORIZED
+FUT-006,2,candidate freezer,immutable package identity,NOT_AUTHORIZED
+FUT-007,2,context builder,deny-by-default inputs and canaries,NOT_AUTHORIZED
+FUT-008,2,finding reconciliation,preserve original findings and conflicts,NOT_AUTHORIZED
+FUT-009,2,Founder console,Founder-only decision handoffs,NOT_AUTHORIZED
+FUT-010,2,multi-provider comparison,separate providers and correlation analysis,NOT_AUTHORIZED
+FUT-011,2,security validation,"threat model, red-team, secrets, egress",NOT_AUTHORIZED
+FUT-012,3,MIAP registration,register approved orchestrator under MIAP,NOT_AUTHORIZED
+FUT-013,3,repository and administrative integration,controlled product integration and admin UI,NOT_AUTHORIZED

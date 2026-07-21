@@ -1,0 +1,66 @@
+{
+  "$id": "https://equinesync.local/schemas/phase1-role-output-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "completeness": {
+      "pattern": "^C[0-5]_"
+    },
+    "completion_attestation": {
+      "type": "string"
+    },
+    "confidence": {
+      "enum": [
+        "HIGH",
+        "MODERATE",
+        "LOW",
+        "UNRESOLVED"
+      ]
+    },
+    "execution_identity": {
+      "required": [
+        "execution_id",
+        "role_id",
+        "profile_version",
+        "profile_checksum",
+        "model",
+        "provider",
+        "runtime",
+        "input_manifest",
+        "tool_permissions",
+        "started_at",
+        "completed_at",
+        "output_sha256"
+      ],
+      "type": "object"
+    },
+    "findings": {
+      "type": "array"
+    },
+    "output_manifest": {
+      "type": "array"
+    },
+    "reliability": {
+      "pattern": "^R[0-5]_"
+    }
+  },
+  "required": [
+    "execution_identity",
+    "authorization_and_scope",
+    "package_identity",
+    "inputs_examined",
+    "methodology",
+    "scope_denominator",
+    "findings",
+    "claim_to_evidence",
+    "assumptions_and_conflicts",
+    "limitations",
+    "required_next_actions",
+    "completeness",
+    "reliability",
+    "self_audit",
+    "completion_attestation",
+    "what_this_work_did_not_establish",
+    "output_manifest"
+  ],
+  "type": "object"
+}
