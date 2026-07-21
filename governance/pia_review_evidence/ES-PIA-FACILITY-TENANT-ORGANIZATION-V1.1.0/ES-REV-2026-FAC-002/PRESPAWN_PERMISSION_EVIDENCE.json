@@ -1,0 +1,54 @@
+{
+  "review_cycle_id": "ES-REV-2026-FAC-002",
+  "intended_agent_run_id": "ES-RA-02-ES-REV-2026-FAC-002-RUN-01",
+  "intended_reviewer_role": "ES-RA-02 Segregated Review Agent",
+  "founder_authorization": {
+    "artifact": "VALID_FRESH_SEGREGATED_REVIEW_DIRECTIVE",
+    "sha256": "ce9de1ea05619ce3748742d9c0d034ba63555057e48906bf4857cce1f115b9d0"
+  },
+  "recorded_before_process_creation": true,
+  "timestamp_utc": "2026-07-21T08:08:40Z",
+  "repository": {
+    "remote": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+    "starting_branch": "codex/facility-pia-founder-decisions-v1",
+    "starting_commit": "de7b0166a440673d023160ed7c3af214d49cd40f",
+    "review_branch": "codex/facility-pia-valid-fresh-segregated-review-v1"
+  },
+  "inputs": {
+    "candidate_zip_sha256": "9665172277ea50eb7a3f1c6e04ae3540211adcf8b9c471937180b4488931e5eb",
+    "evidence_zip_sha256": "ad8857bee32e8b0b2c7986ef3d065c5896af992776bdfe97137826a742be3bdd"
+  },
+  "required": {
+    "reviewer_identity": "registered ES-RA-02",
+    "sandbox_mode": "read-only",
+    "approval_mode": "on-request",
+    "unrestricted_override": false,
+    "network_enabled": false,
+    "candidate_mutation_possible": false,
+    "clean_isolated_checkout": true,
+    "sanitized_environment": true
+  },
+  "observed": {
+    "reviewer_identity": "registered configuration located but runtime identity not established",
+    "sandbox_mode": "danger-full-access / unrestricted",
+    "approval_mode": "never",
+    "unrestricted_override": true,
+    "network_enabled": true,
+    "candidate_mutation_possible": true,
+    "reviewer_process_created": false,
+    "reviewer_process_id": null,
+    "parent_process": "Codex desktop /root primary agent",
+    "parent_process_id": "not exposed",
+    "clean_isolated_checkout": false,
+    "sanitized_environment": false,
+    "shell_disabled": false,
+    "connector_mcp_plugin_disablement_proven": false
+  },
+  "writable_paths": "unrestricted by current technical profile",
+  "intended_review_output_path": "governance/pia_review_evidence/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.1.0/ES-REV-2026-FAC-002",
+  "launch_command": "NOT_LAUNCHED",
+  "first_failure": "Mandatory read-only/on-request effective mode cannot be established; unrestricted and approval_policy=never remain active.",
+  "check_result": "FAIL",
+  "substantive_review_started": false,
+  "disposition": "FACILITY_PIA_FRESH_SEGREGATED_REVIEW_BLOCKED_MANDATORY_PERMISSION_CONTROL_NOT_SATISFIED"
+}

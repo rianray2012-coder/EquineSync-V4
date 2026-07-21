@@ -1,0 +1,13 @@
+concept,required_distinction,review_status,review_result
+Tenant,Data-isolation and governance context distinct from every physical/legal/operational concept,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+Facility,Durable physical place distinct from Tenant and Organization,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+Organization,Entity identity distinct from Facility and authority,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+Barn,Operational context distinct from Tenant and Facility identity,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+Business,Organization-domain operating identity/classification distinct from other concepts,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+account,Authentication/account construct not conflated with Tenant or domain entities,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+user,Human or account user not conflated with organization/facility context,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+actor,Action-performing identity distinct from role labels and authority,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+provider,Provider organization or person identity distinguished from relationship and context,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+vendor,Vendor identity distinguished from service relationship and authority,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+service relationship,Typed relationship distinct from provider/vendor identities and authority,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION
+public Facility projection,Separate revocable projection distinct from private canonical topology,NOT_REVIEWED_PERMISSION_BLOCKED,NO_CONCLUSION

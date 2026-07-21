@@ -1,0 +1,7 @@
+finding_id,prior_priority,prior_status,claimed_remediation,verification_result,objective_evidence,current_status
+FSR-CONTROL-001,P1,OPEN,"Establish correct pre-spawn read-only/on-request ES-RA-02 runtime.",NOT_REMEDIATED,"PRESPAWN_PERMISSION_RECORD.md;PRESPAWN_PERMISSION_EVIDENCE.json",OPEN
+FSR-P1-001,P1,REMEDIATED_UNVERIFIED,"Business definition added across claimed surfaces.",UNVERIFIABLE,"Substantive ES-RA-02 review did not start.",REMEDIATED_UNVERIFIED
+FSR-P1-002,P1,REMEDIATED_UNVERIFIED,"Risk gates reconciled with approved decisions.",UNVERIFIABLE,"Substantive ES-RA-02 review did not start.",REMEDIATED_UNVERIFIED
+FSR-P1-003,P1,REMEDIATED_UNVERIFIED,"Frozen manifest scope corrected.",UNVERIFIABLE,"Parent startup confirmed recorded checksums only; ES-RA-02 completeness review did not start.",REMEDIATED_UNVERIFIED
+FSR-P1-004,P1,REMEDIATED_UNVERIFIED,"Traceability locators and identifiers made resolvable.",UNVERIFIABLE,"Substantive ES-RA-02 review did not start.",REMEDIATED_UNVERIFIED
+FSR-P2-001,P2,REMEDIATED_UNVERIFIED,"PIA identity and structural counts corrected.",UNVERIFIABLE,"Substantive ES-RA-02 review did not start.",REMEDIATED_UNVERIFIED

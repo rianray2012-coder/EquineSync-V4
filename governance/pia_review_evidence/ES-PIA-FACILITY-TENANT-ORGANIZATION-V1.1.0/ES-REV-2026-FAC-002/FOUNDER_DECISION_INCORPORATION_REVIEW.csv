@@ -1,0 +1,19 @@
+decision_id,required_review,current_review_status,evidence_examined,review_result
+FAC-FD-001,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-002,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-003,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-004,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-005,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-006,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-007,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-008,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-009,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-010,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-011,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-012,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-013,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-014,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-015,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-016,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-017,Faithful incorporation including controlling adaptive-onboarding refinement,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
+FAC-FD-018,Faithful incorporation across all affected artifacts,NOT_REVIEWED_PERMISSION_BLOCKED,None by ES-RA-02,NO_CONCLUSION
