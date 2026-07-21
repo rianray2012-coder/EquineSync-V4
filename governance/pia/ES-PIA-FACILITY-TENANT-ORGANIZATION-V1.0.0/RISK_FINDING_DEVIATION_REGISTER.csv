@@ -1,0 +1,11 @@
+item_id,type,severity,summary,impact,mitigation_or_disposition,status,traceability,approved_deviation
+FAC-RISK-001,RISK,P1,Legacy tenant/barn/facility conflation,Cross-tenant disclosure or mis-scoping during transition,Target distinctions plus quarantine and separately authorized migration,OPEN_FOUNDER_AND_IMPLEMENTATION_GATE,FAC-FD-001;FAC-FD-002;FAC-REQ-034,NO
+FAC-RISK-002,RISK,P1,Association mistaken for authority,Organization admins or facility members gain blanket access,Non-authorizing associations plus Authorization-owned decisions,OPEN_FOUNDER_GATE,FAC-FD-012;FAC-REQ-004;FAC-REQ-005,NO
+FAC-RISK-003,RISK,P1,Facility transfer cascades unrelated records,"Horse, payment, private data or evidence moves silently",Explicit non-cascade and dependent-domain recalculation,OPEN_FOUNDER_GATE,FAC-FD-008;FAC-REQ-009;FAC-REQ-010,NO
+FAC-RISK-004,RISK,P1,Suspension is enforced on only some surfaces,"Jobs, search, export or integration continues",Single invalidation event and surface matrix,OPEN_FOUNDER_AND_IMPLEMENTATION_GATE,FAC-FD-020;FAC-REQ-019,NO
+FAC-RISK-005,RISK,P2,Offline cache outlives authority,Revoked actor changes or reads topology,"Minimum cache, expiry and online consequential writes",OPEN_FOUNDER_GATE,FAC-FD-019;FAC-REQ-020;FAC-REQ-021,NO
+FAC-RISK-006,RISK,P2,Public projection exposes sensitive location,"Theft, stalking, safeguarding or privacy harm",Separate opt-in projection and denylist,OPEN_FOUNDER_GATE,FAC-FD-016;FAC-REQ-013;FAC-REQ-014,NO
+FAC-RISK-007,RISK,P2,Duplicate Facility merge is incorrect,Lineage and records attach to wrong site,"Quarantine, evidence and reversible reviewed merge",OPEN_FOUNDER_GATE,FAC-FD-015;FAC-REQ-012,NO
+FAC-RISK-008,RISK,P2,Unsupported retention precision,Evidence destroyed or data retained too long,Field schedules after legal/operational review,OPEN_FOUNDER_GATE,FAC-FD-022;FAC-REQ-029,NO
+FAC-RISK-009,RISK,P2,Organization impersonation or over-verification,Fraud or exclusion,Evidence-backed states with dispute handling,OPEN_FOUNDER_GATE,FAC-FD-012;FAC-REQ-026,NO
+FAC-RISK-010,RISK,P2,Current code defaults unknown context to primary,Legacy records may appear valid in wrong context,No target fallback; inventory and quarantine before migration,OPEN_IMPLEMENTATION_GATE,FAC-REQ-002;FAC-REQ-033;FAC-REQ-034,NO

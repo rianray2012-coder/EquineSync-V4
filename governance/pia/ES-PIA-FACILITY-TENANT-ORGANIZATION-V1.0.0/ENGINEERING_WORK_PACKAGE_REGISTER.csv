@@ -1,0 +1,11 @@
+work_package_id,title,candidate_scope,dependencies,implementation_authorized
+FAC-WP-001,Decision and baseline closure,Resolve design decisions; fresh segregated review; Founder design decision,FAC-FD-001;FAC-FD-002;FAC-FD-003;FAC-FD-004;FAC-FD-005;FAC-FD-006;FAC-FD-007;FAC-FD-008;FAC-FD-009;FAC-FD-010;FAC-FD-011;FAC-FD-012;FAC-FD-028,NO
+FAC-WP-002,Canonical entity and context schemas,Tenant/Facility/Organization/Area/association/change-set schemas,FAC-WP-001,NO
+FAC-WP-003,Authorization and context boundary,Request/job/event/search/export enforcement,FAC-WP-002;Authorization PIA,NO
+FAC-WP-004,Legacy inventory and migration rehearsal,"No-write inventory, mapping, quarantine, reversible rehearsal",FAC-WP-002;FAC-FD-013;FAC-FD-014;FAC-FD-015;FAC-FD-018;FAC-FD-019;FAC-FD-020;FAC-FD-021;FAC-FD-022;FAC-FD-025;FAC-FD-026,NO
+FAC-WP-005,Topology workflows and lifecycle,"Versioned change sets, transitions and non-cascade behavior",FAC-WP-002;FAC-WP-003,NO
+FAC-WP-006,Privacy/search/public projection,"Field policies, projection, non-enumeration",FAC-WP-003,NO
+FAC-WP-007,Offline/integration/recovery,"Expiry, idempotency, reconciliation and dead letters",FAC-WP-003;FAC-WP-005,NO
+FAC-WP-008,Onboarding/context UX/support,"Seed, context UX, support path and notices",FAC-WP-003;FAC-WP-005;FAC-FD-016;FAC-FD-017;FAC-FD-023;FAC-FD-024;FAC-FD-027,NO
+FAC-WP-009,Verification and evidence,Execute test matrix; as-built reconciliation; evidence package,FAC-WP-002;FAC-WP-003;FAC-WP-004;FAC-WP-005;FAC-WP-006;FAC-WP-007;FAC-WP-008,NO
+FAC-WP-010,Release/enrollment gates,Separate operational/release/enrollment approval,FAC-WP-009,NO

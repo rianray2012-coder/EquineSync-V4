@@ -1,0 +1,3 @@
+finding_id,severity,summary,status,blocking_gate,traceability
+FAC-FIND-P2-005,P2,Retention schedule requires Founder/legal/operational decision,OPEN_FOUNDER_DECISION,IMPLEMENTATION_AUTHORIZATION,FAC-FD-022;FAC-RISK-008
+FAC-FIND-P2-006,P2,Legacy default/primary context and incomplete target topology remain in current code,OPEN_IMPLEMENTATION_GAP,IMPLEMENTATION_AUTHORIZATION_AND_VERIFICATION,FAC-RISK-001;FAC-RISK-010;FAC-REQ-034
