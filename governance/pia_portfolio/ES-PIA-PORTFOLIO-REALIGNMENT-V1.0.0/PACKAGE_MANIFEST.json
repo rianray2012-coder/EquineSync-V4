@@ -1,89 +1,100 @@
 {
-  "base_commit": "3b17840aae3b0693e006e9378606c1ca1c11286a",
-  "branch": "codex/pia-portfolio-realignment-v1",
+  "disposition": "TEN_ITEM_PIA_PORTFOLIO_REALIGNED_AND_DRIFT_CONTROLS_ACTIVE",
   "files": [
     {
-      "bytes": 1301,
-      "path": "ALL_REF_AND_ARCHIVE_DISCOVERY_EVIDENCE.json",
-      "sha256": "f2c1d6ccd2c12fd7ed6e069e69ec552fc57ccfd745d9f87f1a7b31609d215a78"
-    },
-    {
-      "bytes": 786,
-      "path": "ALL_REF_AND_ARCHIVE_DISCOVERY_EVIDENCE.md",
-      "sha256": "943087aa0985a2d59a47b70b3bb0ce48caada359979c6b84e8d14f181494a715"
-    },
-    {
-      "bytes": 713,
+      "bytes": 1257,
       "path": "FOUNDER_DIRECTED_PORTFOLIO_LOCK_RECORD.md",
-      "sha256": "98f8243c745d1ebee0749c37cdd257f32cf3a6126fe0ed2949fddb974d71cd10"
+      "sha256": "417002ce200865f93ef677c1854b179ac96bb16d83082b842178dec6e1c75c40"
     },
     {
-      "bytes": 704,
+      "bytes": 2277,
       "path": "PIA_COMPONENT_OWNERSHIP_MAP.csv",
-      "sha256": "cef795fdf13f2abd4c19bc299cb2f3ce2173cb5661d0cc633405191c6d8575df"
+      "sha256": "c0fa0b606aa93eba364c9d33d573c912551761bdd76b66111cf088841a47e556"
     },
     {
-      "bytes": 8019,
+      "bytes": 23692,
       "path": "PIA_CROSS_CUTTING_ARTIFACT_CLASSIFICATION.csv",
-      "sha256": "62fc47965641df3b5714f2be82cf0a24135f95494eab3d93b37ccdc9bc542d0d"
+      "sha256": "ad5b1f7b47789d90a8c9067ada0c3a34294b4bb25868b042d1b9371983f8eb71"
     },
     {
-      "bytes": 32212,
+      "bytes": 46577,
       "path": "PIA_PACKAGE_INVENTORY.csv",
-      "sha256": "22b2a2b80fb5baafe2239a4c13f0786e7fa406ada8ffe4463d232dc491ad124a"
+      "sha256": "03cf7177e66b7d781d1c087edd3b03e3396a4c623714e79715c31b06675760da"
     },
     {
-      "bytes": 12201,
+      "bytes": 26584,
       "path": "PIA_PACKAGE_PLACEMENT_AND_SUPERSESSION_MAP.csv",
-      "sha256": "4b41f57464beef00dbf3ca85a601e9642d3a8ad6323a26de338f15e8651c6b07"
+      "sha256": "bc9b89e06bb6b910b84dfd3fac00b449818905b95be8005eac8b2e49b7b7c230"
     },
     {
-      "bytes": 1040,
+      "bytes": 1892,
       "path": "PIA_PORTFOLIO_DRIFT_PREVENTION_RULES.md",
-      "sha256": "efdfa7a0f219785517593bc99fd379f78ec6246e8b3e9410d424ceb90da31842"
+      "sha256": "ec79fde028db0f294808f707c09a369a46126311cc884528379dde9e467ad9e3"
     },
     {
-      "bytes": 5393,
+      "bytes": 9785,
       "path": "PIA_PORTFOLIO_DRIFT_VALIDATOR.py",
-      "sha256": "0c7c01aa1616a065a927c875e5ca2a3d21f21a5192d72e3932e96e4bf8bf55fb"
+      "sha256": "dc2652a13ff46b33f88c7e6bd18d4e3b8edff51175fd7c291002ceb95fe78024"
     },
     {
-      "bytes": 66369,
+      "bytes": 101157,
       "path": "PIA_PORTFOLIO_MACHINE_READABLE.json",
-      "sha256": "790238d2441989ff65354b8b38953a93214c5a43037945a8109a05f9e3109859"
+      "sha256": "b43a3fb7e70133b4b9c67c682e77ed35ab8a40ddd05302adcd6f023a55000e67"
     },
     {
-      "bytes": 1038,
+      "bytes": 2551,
       "path": "PIA_PORTFOLIO_REALIGNMENT_REGISTER.csv",
-      "sha256": "fab7196db7ba948be44451fe422dd8cf13759f3e4a08e1ea6ce465db5fa8e41b"
+      "sha256": "a67679fd6e12ecb0fbf832c77b1e97c268be12fe0b8f405ecc4c5359bc1c1d3b"
     },
     {
-      "bytes": 1902,
+      "bytes": 2360,
       "path": "PIA_PORTFOLIO_REALIGNMENT_REGISTER.md",
-      "sha256": "d52d67d16cdf37ae439966cdc0f663a12020f2eb505a8f388770d366c573ed1b"
+      "sha256": "c70712a50fca78cd44c72b670206723b1ccad52b85ef44c3c7bbae0c7890ffab"
     },
     {
-      "bytes": 2154,
-      "path": "VALIDATION_REPORT.json",
-      "sha256": "ea8c213068aeb4a79d69f6670ebe0635a8c34e311982d077a4e4c8d3ee9b9fb6"
+      "bytes": 674,
+      "path": "sources/CURRENT_PIA_APPROVAL_STATUS.md",
+      "sha256": "8abfbe0b1be12fcdd9d488659ca68f691e92da47bce1291176791d709baf237e"
     },
     {
-      "bytes": 1249,
-      "path": "VALIDATION_REPORT.md",
-      "sha256": "cf86a62dab8bcc2402d6d9ed5ae98b44091c0422b03c9b71b3365316891c0ebd"
+      "bytes": 2276,
+      "path": "sources/HANDOFF_PACKAGE_MANIFEST.json",
+      "sha256": "731ebe6607fce51f428f6074e95f2b650b2caccea06667be76809dcbae490e87"
     },
     {
-      "bytes": 33917,
-      "path": "build_portfolio_package.py",
-      "sha256": "6b8e59cdfbe726d4c3224a30b9fb5995fadadef79f546e51f962df1816856353"
+      "bytes": 1326,
+      "path": "sources/LOCKED_TEN_ITEM_PIA_PORTFOLIO.md",
+      "sha256": "d487df6cd36b8b4c62c4df59ea6f278a1358c3dee824bda17d74c94732b27dd2"
+    },
+    {
+      "bytes": 442,
+      "path": "validation/DRIFT_VALIDATION_REPORT.json",
+      "sha256": "9dfbff16e5adc5bd17a12e89b6b3580cbb9cc666f49989797441ac16e7de7103"
+    },
+    {
+      "bytes": 531,
+      "path": "validation/DRIFT_VALIDATION_REPORT.md",
+      "sha256": "c97a555874133759556ddecd3c0499efd7c6cf8100ff83d70af0f04f18bf48ae"
+    },
+    {
+      "bytes": 1351,
+      "path": "validation/REPOSITORY_DISCOVERY_REPORT.json",
+      "sha256": "2d22bb8f14bcd4922bcb14b105f93d6ea2abc5615b577d3d01f93d1acb1617c4"
+    },
+    {
+      "bytes": 1010,
+      "path": "validation/REPOSITORY_DISCOVERY_REPORT.md",
+      "sha256": "07293ec64b161eee207b155b71cab77078f27c11e4e3d8d83710f88a65949012"
+    },
+    {
+      "bytes": 1198,
+      "path": "validation/SOURCE_GAPS.csv",
+      "sha256": "19cfdadad7cca02df38b27123ac9b9f5bf3bd2201b96614ab2ff4e78fc3ccf1a"
     }
   ],
-  "inventory_denominator": 64,
+  "implementation_authority": false,
+  "inventory_denominator": 81,
   "package_id": "ES-PIA-PORTFOLIO-REALIGNMENT-V1.0.0",
-  "self_exclusions": [
-    "PACKAGE_MANIFEST.json",
-    "CHECKSUM_MANIFEST.sha256"
-  ],
-  "status": "TEN_ITEM_PIA_PORTFOLIO_REALIGNED_AND_DRIFT_CONTROLS_ACTIVE",
-  "unclassified_count": 0
+  "unclassified_count": 0,
+  "version": "1.0.0"
 }

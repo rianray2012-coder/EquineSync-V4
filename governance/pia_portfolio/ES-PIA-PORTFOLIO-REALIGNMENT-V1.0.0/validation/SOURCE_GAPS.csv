@@ -1,0 +1,7 @@
+gap_id,severity,position,gap,effect
+PORT-GAP-001,P1,02,"No primary Facility, Tenant, and Organizational Structure PIA package existed in accessible refs at Task A discovery.",Task B may draft only; Founder decisions and structured review remain required.
+PORT-GAP-002,P1,03,No consolidated Item 03 primary package covering Components A-C was located.,Underlying Component A design status does not approve successor text or Components B-C.
+PORT-GAP-003,P1,04-10,No primary PIA packages were located for positions 04 through 10.,Canonical source availability is not PIA design completion.
+PORT-GAP-004,P2,01,Identity PIA V1.0.0 predecessor is referenced but its exact bytes/path/hash were not located.,Historical supersession is recorded as reference-only; V1.1.0 remains the located package.
+PORT-GAP-005,P1,01;03,The fresh segregated successor review object was not present in the accessible refs at discovery and is intentionally outside this branch.,No successor text may be represented as Founder-approved or ratified.
+PORT-GAP-006,P2,09,The Financial Truth source lifecycle was not independently re-adjudicated by Task A.,It is classified as a canonical input without asserting a new approval.

@@ -1,14 +1,18 @@
-portfolio_position,component,owning_domain,not_separate_pia
-01,Identity Account Actor,Identity,TRUE
-01,Enrollment and Onboarding,Identity,TRUE
-02,Facility Tenant Organization,Facility,TRUE
-03,A Relationships and Delegated Authority,Relationships,TRUE
-03,B Authorization Interface,Authorization,TRUE
-03,C Permission Enforcement,Authorization,TRUE
-04,Horse Identity Profile Lifecycle,Horse,TRUE
-05,Navigation Search Application Shell,Experience,TRUE
-06,Task Calendar Scheduling Notification,Scheduling,TRUE
-07,Care Operations,Care,TRUE
-08,Lessons Training Rider Guardian,Training,TRUE
-09,Billing Payments Financial Operations,Financial,TRUE
-10,Owner Portal Communications,Communications,TRUE
+position,component,name,owns,boundary,implementation_authority
+01,A,Identity,Owns person/service identity and identity lifecycle,"Account, authentication, Relationship and Permission boundaries",FALSE
+01,B,Account and Actor,Owns account/actor/principal representation within Item 01,Does not infer membership or permission,FALSE
+01,C,Enrollment and Onboarding,Owns controlled enrollment and onboarding inside Item 01,MUST_NOT_BECOME_SEPARATE_PIA,FALSE
+02,A,Facility,"Owns facility identity, profile, location and lifecycle","No people, relationship or permission ownership",FALSE
+02,B,Tenant,Owns isolation and operating-context identity,Tenant context is consumed by Permission; it does not grant permission,FALSE
+02,C,Organization,Owns organization identity and lifecycle,Organization association does not create authority,FALSE
+02,D,Topology,Owns organization-tenant-facility-area topology,Transfers and merges do not silently transfer authority,FALSE
+03,A,Relationships and Delegated Authority,Owns relationship truth and delegation evidence,MUST_NOT_BECOME_SEPARATE_PIA,FALSE
+03,B,Authorization,Owns authorization inputs/events and cross-domain interface,MUST_NOT_BECOME_SEPARATE_PIA,FALSE
+03,C,Permission,Owns final permission evaluation and enforcement contract,MUST_NOT_BECOME_SEPARATE_PIA,FALSE
+04,A,"Horse Identity, Profile, and Lifecycle",Owns horse identity and lifecycle,Consumes relationship/custody evidence without owning it,FALSE
+05,A,"Navigation, Search, and Shell",Owns application-shell and discovery experience,Permission filtering remains inherited,FALSE
+06,A,"Task, Calendar, Scheduling, and Notification",Owns coordinated work/time workflows,Communication delivery controls remain inherited,FALSE
+07,A,Care Operations,Owns daily care execution workflows,Horse and health records retain authoritative owners,FALSE
+08,A,"Lessons, Training, Rider, and Guardian",Owns lesson/training workflows,Guardian authority remains Relationship/Agreement/Safeguarding truth,FALSE
+09,A,"Billing, Payments, and Financial Operations",Owns financial workflows,Payment or billing status MUST_NOT_CREATE_AUTHORITY,FALSE
+10,A,Owner Portal and Communications,Owns owner-facing participation experience,"Identity, Relationship and Permission remain inherited boundaries",FALSE
