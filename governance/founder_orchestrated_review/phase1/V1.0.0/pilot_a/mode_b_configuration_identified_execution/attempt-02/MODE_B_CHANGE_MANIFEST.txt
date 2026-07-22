@@ -1,0 +1,13 @@
+Attempt ID: ES-PH1-PILOT-A-MODE-B-ATTEMPT-02
+Starting commit: 624d01af32fa3c04333be7ac2e65222d17d70a44
+Authorized branch: codex/founder-review-phase1-pilot-a-mode-b-attempt-02-v1
+Scope: additive blocked-attempt evidence under attempt-02 only
+Historical files changed: 0 intended
+Attempt 01 files changed: 0 intended
+Locked governance files changed: 0 intended
+Role executions: 0
+Provider requests: 0
+Pull requests: 0
+Merges: 0
+Deployments or releases: 0
+Disposition: PILOT_A_CONFIGURATION_IDENTIFIED_EXECUTION_BLOCKED

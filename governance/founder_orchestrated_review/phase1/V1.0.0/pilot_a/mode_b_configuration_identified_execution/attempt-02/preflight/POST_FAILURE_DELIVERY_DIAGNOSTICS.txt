@@ -1,0 +1,6 @@
+2026-07-22T01:37:32Z | brctl download . | exit 0 | .git/index remained hidden,compressed,dataless | shasum observed empty-stream digest | git status remained unavailable
+2026-07-22T01:38:17Z | brctl download .git/index | exit 0 | no hydration
+2026-07-22T01:38:17Z | brctl download .git | exit 0 | no hydration
+2026-07-22T01:38:17Z | dd if=.git/index of=/dev/null bs=4096 | exit 1 | Operation timed out | 0 bytes transferred
+
+These were post-failure evidence-delivery diagnostics. They did not requalify, restart, or amend formal preflight.

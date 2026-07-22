@@ -1,0 +1,12 @@
+# Formal Preflight Repository Custody Retry 01
+
+The packet-freeze receipt preserved an initial git status failure: .git/index unable to map index file: Operation timed out. No configuration, input, oracle, branch, index, or worktree change was made. This is one exact retry in the same preflight, not a restarted attempt. Both observations remain authoritative.
+
+2026-07-22T01:35:03Z
+fatal: .git/index: unable to map index file: Operation timed out
+GIT_STATUS_EXIT=128
+624d01af32fa3c04333be7ac2e65222d17d70a44
+codex/founder-review-phase1-pilot-a-mode-b-attempt-02-v1
+fatal: .git/index: unable to map index file: Operation timed out
+ATTEMPT01_TREE_DIFF_EXIT=128
+ATTEMPT01_CHECKSUM_EXIT=0

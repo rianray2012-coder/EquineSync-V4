@@ -1,0 +1,18 @@
+check_id,check,result,detail
+A02-VAL-001,Founder source attachment hash,PASS,3c969248a855052d33829cd0f6ceb90737f6d7960475f1d6f467336e35bb88c9
+A02-VAL-002,ES-RA-02 manifest file hashes,PASS,all listed files matched
+A02-VAL-003,ES-RA-03 manifest file hashes,PASS,all listed files matched
+A02-VAL-004,ES-RA-04 manifest file hashes,PASS,all listed files matched
+A02-VAL-005,ES-RA-05 manifest file hashes,PASS,all listed files matched
+A02-VAL-006,profile payload checksums with governing canonical serializer,PASS,all four matched
+A02-VAL-007,approved role source hashes,PASS,all four matched
+A02-VAL-008,cross-role canary containment,PASS,zero foreign canary hits in every packet
+A02-VAL-009,assigned output emptiness,PASS,zero files in every role output after cleanup
+A02-VAL-010,hidden oracle seal,PASS,f6d3d58a21f424d3d1229a50579833bbc0557824e4ce0755e44b8009f44c1c52
+A02-VAL-011,jq canonical profile checksum experiment,METHOD_MISMATCH,jq -cS did not reproduce the governing Python canonical serializer and was not treated as a profile failure
+A02-VAL-012,formal preflight qualification,FAIL,repository index unavailable and formal boundary harness error
+A02-VAL-013,role output schema,NOT_APPLICABLE,zero role outputs
+A02-VAL-014,prompt-injection role response,NOT_APPLICABLE,zero role executions
+A02-VAL-015,oracle scoring,NOT_APPLICABLE,zero sealed role outputs
+A02-VAL-016,replay and variance,NOT_APPLICABLE,original execution did not occur
+A02-VAL-017,attempt-specific credential-pattern scan,PASS,no live Stripe GitHub private-key or AWS-key pattern detected

@@ -1,0 +1,19 @@
+control_id,control,result,evidence,qualification_effect
+A02-PF-001,exact starting commit,PASS,HEAD returned 624d01af32fa3c04333be7ac2e65222d17d70a44,none
+A02-PF-002,exact Attempt 02 branch,PASS,symbolic-ref returned authorized branch,none
+A02-PF-003,clean index and worktree,FAIL,git status failed twice because .git/index could not be memory-mapped,blocks all roles
+A02-PF-004,Attempt 01 checksum file,PASS,MODE_B_CHECKSUMS.sha256 verification exit 0,none
+A02-PF-005,Attempt 01 historical-tree identity,UNVERIFIED,git diff could not read the dataless index,blocks all roles
+A02-PF-006,all four exact role profiles and sources,PASS,freeze receipt and role register,none
+A02-PF-007,all four packet hashes,PASS,freeze receipt,none
+A02-PF-008,hidden-oracle exclusion and seal,PASS,oracle outside role roots; SHA-256 f6d3d58a21f424d3d1229a50579833bbc0557824e4ce0755e44b8009f44c1c52,none
+A02-PF-009,formal filesystem boundary behavior,ERROR,formal harness command exited 2 before probes for every role,blocks all roles
+A02-PF-010,formal checksum known-answer and file test,NOT_EXECUTED,formal harness error; diagnostic probe cannot be carried forward,blocks all roles
+A02-PF-011,formal sibling and oracle read denial,NOT_EXECUTED,formal harness error; diagnostic probe cannot be carried forward,blocks all roles
+A02-PF-012,formal assigned-output and unrelated-write behavior,NOT_EXECUTED,formal harness error,blocks all roles
+A02-PF-013,formal direct role-network denial,NOT_EXECUTED,formal harness error; diagnostic probe cannot be carried forward,blocks all roles
+A02-PF-014,formal credential denial and scan,NOT_EXECUTED,formal harness error; diagnostic probe cannot be carried forward,blocks all roles
+A02-PF-015,formal plugin MCP connector state,NOT_EXECUTED,preflight halted fail-closed before role invocation,blocks all roles
+A02-PF-016,formal tracing and session separation,NOT_EXECUTED,preflight halted fail-closed before role invocation,blocks all roles
+A02-PF-017,initial role-output emptiness,PASS,temporary preflight sentinels removed and no role output created,none
+A02-PF-018,no model or role before complete preflight pass,PASS,zero provider requests and zero role executions,none

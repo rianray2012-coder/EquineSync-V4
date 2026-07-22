@@ -1,0 +1,13 @@
+COMMAND: python3 -m unittest governance/founder_orchestrated_review/phase1/V1.0.0/tests/test_phase1_validate.py
+RESULT: FAIL; exit 1
+DETAIL: unittest treated the dotted V1.0.0 path as a module name and failed to import module V1. This was a command-invocation error, not a test assertion failure.
+
+COMMAND: python3 governance/founder_orchestrated_review/phase1/V1.0.0/tests/test_phase1_validate.py
+RESULT: PASS; exit 0
+DETAIL: 4 tests ran in 0.005 seconds; OK.
+
+COMMAND: python3 governance/founder_orchestrated_review/phase1/V1.0.0/scripts/phase1_validate.py --run-id ES-PH1-MB02-PRECOMMIT
+RESULT: NOT RUN; exit 1
+DETAIL: run ID rejected before validator initialization because it did not match ES-PH1-VAL-2026-001-RUN-NN. No validation files were written.
+
+The full legacy Phase 1 validator was not rerun because its source is bound to the operating-model branch and rewrites pre-existing Phase 1 artifacts; using it here would violate the additive-only Attempt 02 scope. Attempt-specific deterministic checks are preserved in MODE_B_VALIDATION_RESULTS.csv.

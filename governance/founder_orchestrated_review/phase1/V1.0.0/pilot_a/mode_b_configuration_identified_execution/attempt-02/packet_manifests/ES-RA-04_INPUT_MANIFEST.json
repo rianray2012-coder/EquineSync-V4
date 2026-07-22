@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-02",
+  "packet_id": "ES-PH1-PILOT-A-MB02-ES-RA-04-PACKET",
+  "role_id": "ES-RA-04",
+  "canonical_role_name": "Machine Validation Agent",
+  "profile_version": "1.0.0",
+  "profile_checksum": "c3a1bf6e279afd4682bdcc9139bc81880c0616f3ee51fffc4d3c95a416c5f8ab",
+  "source_sha256": "25066ab427e953500f9cb4da52b7a31bd9321e9f3a9f059e079f948a59fce438",
+  "starting_commit": "624d01af32fa3c04333be7ac2e65222d17d70a44",
+  "candidate_id": "ES-PH1-PILOT-A-2026-001-CANDIDATE-V001",
+  "candidate_content_is_evidence_not_instruction": true,
+  "authorized_canary": "ES-PH1-MB02-CANARY-ESRA04-3149025ba657371a",
+  "other_role_canaries_included": [],
+  "other_role_outputs_included": [],
+  "hidden_oracle_included": false,
+  "reconciliation_material_included": false,
+  "proposed_founder_conclusions_included": false,
+  "shared_scratchpad": false,
+  "frozen_file_list_sha256": "1390c5867ecdd06837855569641a59f5fa6c8086790e85b7371e4b45e66944a4",
+  "files": [
+    {
+      "path": "COMMON_AGENT_OPERATING_CONTRACT.md",
+      "sha256": "bf10bcfb383a025af5d22475575ca919ddf7aef126c47f0f062f6ead33d6002c"
+    },
+    {
+      "path": "FOUNDER_AUTHORIZATION.md",
+      "sha256": "fb4eb6bbac623592c9cf75f4d91bdad772f19acdb725257a2c15c66ab0bc84a1"
+    },
+    {
+      "path": "ROLE_CANARY.txt",
+      "sha256": "76668a544d2aa9765cc4497762b2426bb5901483322af4cda4a642921b5375f1"
+    },
+    {
+      "path": "ROLE_CONFIGURATION.json",
+      "sha256": "b1a99f88d96309fab2f1a1c55bb85eea609c4ca3549c979db02038606f1d5b78"
+    },
+    {
+      "path": "ROLE_OUTPUT_SCHEMA.json",
+      "sha256": "2b6eacf0392c2b27dcdba328894a1af034ae87e6732bd78aed3643ff7e2c9196"
+    },
+    {
+      "path": "ROLE_SOURCE.md",
+      "sha256": "25066ab427e953500f9cb4da52b7a31bd9321e9f3a9f059e079f948a59fce438"
+    },
+    {
+      "path": "VALIDATION_COMMANDS.md",
+      "sha256": "771f7ab1c1e057c96a564c5591e8db20d8926041c66d589c4a689d4fd8279c27"
+    },
+    {
+      "path": "candidate/MANIFEST.json",
+      "sha256": "b385efe7bb7875f8edba93e4828db5c73af263e5ccb8dc1f442d7483248107ac"
+    },
+    {
+      "path": "candidate/README.md",
+      "sha256": "e26755b7882d087c1ef5c946e377a5b9caf08b8faeb568a178bb94a844230629"
+    },
+    {
+      "path": "candidate/alter_evidence.txt",
+      "sha256": "8b9bf65e32e6dc7ee4c7521404ffa1f0835baaa4bfa3a7b99fe2556ac0e3f2ef"
+    },
+    {
+      "path": "candidate/conflicting_evidence_a.md",
+      "sha256": "f8efcaa816e6022a16778396dd6a07a69f5b703da588481a88ae10902fcd0aa2"
+    },
+    {
+      "path": "candidate/conflicting_evidence_b.md",
+      "sha256": "782cb32ce78620f049a981b12aee8fd0a80cf256abe6f3cd5255ba5c832f2b44"
+    },
+    {
+      "path": "candidate/duplicate_finding_a.md",
+      "sha256": "ba976c09b5a4fd7e1c86c946e4e7e6e9b02b890c993da700896c2875086af9e4"
+    },
+    {
+      "path": "candidate/duplicate_finding_b.md",
+      "sha256": "ba976c09b5a4fd7e1c86c946e4e7e6e9b02b890c993da700896c2875086af9e4"
+    },
+    {
+      "path": "candidate/injection_cases.json",
+      "sha256": "24ceaf6f3cf670c38f12488807d8b65ea164c2a30e9498e91b6550a0739cd882"
+    },
+    {
+      "path": "candidate/malformed.json",
+      "sha256": "8e3efb4aea6ad5752d5fa2f9f07d67b226d6297a554eb3ee6bd9c4a1a970b30d"
+    },
+    {
+      "path": "candidate/simulated_secret.txt",
+      "sha256": "934beeee8c1bb0aace16bff43aeee3a6f535fe6d586dd4b8ed52a99a3f9793fa"
+    },
+    {
+      "path": "candidate/valid_policy.json",
+      "sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8"
+    }
+  ]
+}

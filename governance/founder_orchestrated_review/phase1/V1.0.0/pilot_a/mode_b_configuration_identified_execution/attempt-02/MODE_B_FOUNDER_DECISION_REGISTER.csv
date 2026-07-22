@@ -1,0 +1,4 @@
+decision_id,question,status,current_effect
+FD-PH1-A02-DISP,Accept or reject the preserved Attempt 02 blocked disposition,FOUNDER_DECISION_PENDING,Attempt 02 remains blocked
+FD-PH1-A03-AUTH,Authorize or decline any successor attempt,FOUNDER_DECISION_PENDING,Attempt 03 is unauthorized
+FD-PH2-AUTH,Authorize or decline Phase 2,FOUNDER_DECISION_PENDING,Phase 2 remains unauthorized

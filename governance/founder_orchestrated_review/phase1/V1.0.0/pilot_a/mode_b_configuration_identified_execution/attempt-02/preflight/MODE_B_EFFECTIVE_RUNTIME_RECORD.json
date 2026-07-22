@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-02",
+  "execution_mode": "CONFIGURATION_IDENTIFIED_MANUAL_ROLE_EXECUTION",
+  "starting_commit": "624d01af32fa3c04333be7ac2e65222d17d70a44",
+  "branch": "codex/founder-review-phase1-pilot-a-mode-b-attempt-02-v1",
+  "host": {
+    "os": "macOS",
+    "architecture": "arm64",
+    "codex_cli_version": "0.144.6",
+    "planned_model": "gpt-5.6-sol",
+    "planned_provider": "OpenAI"
+  },
+  "packet_freeze_at": "2026-07-22T01:34:05Z",
+  "repository_index": {
+    "logical_size_bytes": 770782,
+    "flags": ["hidden", "compressed", "dataless"],
+    "git_status_attempts": 2,
+    "git_status_exit": 128,
+    "error": ".git/index: unable to map index file: Operation timed out"
+  },
+  "formal_boundary_harness": {
+    "roles_targeted": ["ES-RA-02", "ES-RA-03", "ES-RA-04", "ES-RA-05"],
+    "exit_per_role": 2,
+    "error": "/bin/sh: -c: line 1: syntax error: unexpected end of file",
+    "individual_controls_executed": false
+  },
+  "provider_requests": 0,
+  "roles_attempted": 0,
+  "roles_executed": 0,
+  "roles_qualified": 0,
+  "preflight_status": "FAILED",
+  "disposition": "PILOT_A_CONFIGURATION_IDENTIFIED_EXECUTION_BLOCKED"
+}
