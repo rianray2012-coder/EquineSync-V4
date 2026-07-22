@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import csv
+import hashlib
+import json
 from pathlib import Path
 import re
 import sys
@@ -37,11 +39,44 @@ REQUIRED = {
     "REMAINING_PIA_FINAL_STATUS_REPORT.md",
     "REMAINING_PIA_FILE_MANIFEST.txt",
     "REMAINING_PIA_CHECKSUMS.sha256",
+    "REMAINING_PIAS_FOUNDER_APPROVAL_RECORD_2026-07-22.md",
     "BATCH_01_FOUNDATIONAL/ITEM_03_INITIAL_DRAFT_V0_1/ES-PIA-RELATIONSHIP-AUTHORIZATION-PERMISSION_V0_1_INITIAL_DRAFT.md",
     "BATCH_01_FOUNDATIONAL/ITEM_03_INITIAL_DRAFT_V0_1/ES-PIA-RELATIONSHIP-AUTHORIZATION-PERMISSION_FIVE_QUESTION_RESPONSE_MATRIX.csv",
     "BATCH_01_FOUNDATIONAL/ITEM_03_INITIAL_DRAFT_V0_1/ES-PIA-RELATIONSHIP-AUTHORIZATION-PERMISSION_INITIAL_TRACEABILITY_MATRIX.csv",
     "BATCH_01_FOUNDATIONAL/ITEM_03_INITIAL_DRAFT_V0_1/ES-PIA-RELATIONSHIP-AUTHORIZATION-PERMISSION_INITIAL_OPEN_ISSUES_REGISTER.csv",
     "BATCH_01_FOUNDATIONAL/ITEM_03_INITIAL_DRAFT_V0_1/REVIEW_GATE.md",
+}
+
+ITEM03_V02_REL = "BATCH_01_FOUNDATIONAL/ITEM_03_STRENGTHENED_V0_2"
+ITEM03_V02_REQUIRED = {
+    "ACCEPTANCE_CRITERIA.csv",
+    "ADVERSARIAL_SCENARIOS.md",
+    "API_EVENT_JOB_CONTRACTS.md",
+    "ARTIFACT_MANIFEST.json",
+    "AUDIT_AND_EVIDENCE_REQUIREMENTS.csv",
+    "AUTHORIZATION_INPUT_REGISTER.csv",
+    "CHECKSUM_LEDGER.sha256",
+    "ES-PIA-RELATIONSHIP-AUTHORIZATION-PERMISSION_V0_2_STRENGTHENED_DOCUMENTARY_CANDIDATE.md",
+    "FINDING_DISPOSITION_MATRIX.csv",
+    "FIVE_QUESTION_RESPONSE_MATRIX.csv",
+    "FOUNDER_DECISION_TRACEABILITY_MATRIX.csv",
+    "GOLDEN_PATHS.md",
+    "OFFLINE_AND_SYNCHRONIZATION_REQUIREMENTS.md",
+    "PERMISSION_EVALUATION_CONTRACT.md",
+    "PERMISSION_MATRIX.csv",
+    "PRIVACY_SAFEGUARDING_RECORDS_CLAIMS_CROSSWALK.csv",
+    "PROVIDER_RELATIONSHIP_AND_AUTHORITY_CONTRACT.md",
+    "RELATIONSHIP_TYPE_REGISTER.csv",
+    "REPRESENTATION_AND_DELEGATION_REGISTER.csv",
+    "REQUIREMENT_REGISTER.csv",
+    "RESTRICTION_AND_REVOCATION_REGISTER.csv",
+    "REVISED_TRACEABILITY_MATRIX.csv",
+    "REVISION_CHANGELOG.csv",
+    "SOURCE_REGISTER.csv",
+    "STATE_TRANSITION_MATRIX.csv",
+    "TEST_MATRIX.csv",
+    "UNRESOLVED_ITEMS_REGISTER.csv",
+    "VALIDATION_REPORT.md",
 }
 
 QUESTIONS = [
@@ -52,8 +87,8 @@ QUESTIONS = [
     "Can the Founder determine whether the capability is ready for first-user enrollment?",
 ]
 
-EXPECTED_TOTAL_FILES = 90
-EXPECTED_CHECKSUMMED_FILES = 89
+EXPECTED_TOTAL_FILES = 119
+EXPECTED_CHECKSUMMED_FILES = 118
 MANIFEST_NAME = "REMAINING_PIA_FILE_MANIFEST.txt"
 CHECKSUM_LEDGER_NAME = "REMAINING_PIA_CHECKSUMS.sha256"
 
@@ -81,6 +116,10 @@ def unique(rows: list[dict[str, str]], key: str, label: str, errors: list[str]) 
         errors.append(f"{label}: blank {key}")
     if len(values) != len(set(values)):
         errors.append(f"{label}: duplicate {key}")
+
+
+def ids(value: str, prefix: str) -> set[str]:
+    return set(re.findall(rf"{re.escape(prefix)}[0-9]+", value or ""))
 
 
 def main(root_arg: str) -> int:
@@ -190,9 +229,21 @@ def main(root_arg: str) -> int:
 
     decisions = csv_rows.get("REMAINING_PIAS_GLOBAL_FOUNDER_DECISION_REGISTER.csv", [])
     unique(decisions, "decision_id", "Founder decision register", errors)
+    expected_decisions = {
+        "ES-PIA-GFD-001",
+        "ES-PIA-GFD-002",
+        "ES-PIA-GFD-003",
+        "ES-PIA-GFD-004",
+        "ES-PIA-GFD-007",
+    }
+    if {row.get("decision_id") for row in decisions} != expected_decisions:
+        errors.append("Founder decision register must contain the five approved decision IDs exactly")
     for row in decisions:
-        if row.get("status") != "RECOMMENDED_NOT_APPROVED":
-            errors.append(f"{row.get('decision_id')}: recommendation status is not RECOMMENDED_NOT_APPROVED")
+        if row.get("status") != "FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY":
+            errors.append(
+                f"{row.get('decision_id')}: status is not "
+                "FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY"
+            )
         if not row.get("recommended_answer"):
             errors.append(f"{row.get('decision_id')}: missing recommended answer")
 
@@ -244,14 +295,194 @@ def main(root_arg: str) -> int:
         if row.get("answer") not in allowed_answers:
             errors.append(f"Item 03 question {row.get('question_number')}: invalid answer value")
 
+    item03_v02 = root / ITEM03_V02_REL
+    item03_v02_paths = sorted(path for path in item03_v02.glob("*") if path.is_file())
+    item03_v02_files = [path.name for path in item03_v02_paths]
+    if set(item03_v02_files) != ITEM03_V02_REQUIRED or len(item03_v02_files) != 28:
+        errors.append("Item 03 V0.2 must contain exactly the 28 required files")
+
+    item03_v02_main_path = item03_v02 / (
+        "ES-PIA-RELATIONSHIP-AUTHORIZATION-PERMISSION_V0_2_"
+        "STRENGTHENED_DOCUMENTARY_CANDIDATE.md"
+    )
+    item03_v02_text = (
+        item03_v02_main_path.read_text(encoding="utf-8")
+        if item03_v02_main_path.is_file()
+        else ""
+    )
+    item03_v02_sections = [
+        int(match.group(1))
+        for match in re.finditer(r"^## ([0-9]+)\. ", item03_v02_text, re.MULTILINE)
+    ]
+    if item03_v02_sections != list(range(1, 44)):
+        errors.append("Item 03 V0.2 must contain exactly ordered sections 1 through 43")
+    for question in QUESTIONS:
+        if question not in item03_v02_text:
+            errors.append(f"Item 03 V0.2 missing exact readiness question: {question}")
+    required_v02_statements = [
+        "**Implementation Authority:** `FALSE`",
+        "**Independent review completed:** `FALSE`",
+        "ITEM_03_V0_2_STRENGTHENED_DOCUMENTARY_CANDIDATE_READY_FOR_COMPLIANT_FRESH_REVIEW",
+        "Provider connection, profile status, API access, appointment participation, payment, or portal visibility",
+        "No runtime is provisioned or launched",
+    ]
+    for statement in required_v02_statements:
+        if statement not in item03_v02_text:
+            errors.append(f"Item 03 V0.2 missing required boundary statement: {statement}")
+    if re.search(r"\bMAIP\b", item03_v02_text):
+        errors.append("Legacy acronym MAIP appears in active Item 03 V0.2 draft")
+
+    v02_questions = csv_rows.get(f"{ITEM03_V02_REL}/FIVE_QUESTION_RESPONSE_MATRIX.csv", [])
+    if [row.get("question_text") for row in v02_questions] != QUESTIONS:
+        errors.append("Item 03 V0.2 five-question matrix must preserve exact wording and order")
+    expected_v02_answers = ["NO", "PARTIALLY_SATISFIED", "PARTIALLY_SATISFIED", "NO", "NO"]
+    if [row.get("answer") for row in v02_questions] != expected_v02_answers:
+        errors.append("Item 03 V0.2 five-question answers differ from the controlled result")
+
+    key_map = {
+        "SOURCE_REGISTER.csv": "source_id",
+        "REQUIREMENT_REGISTER.csv": "requirement_id",
+        "RELATIONSHIP_TYPE_REGISTER.csv": "relationship_type_id",
+        "REPRESENTATION_AND_DELEGATION_REGISTER.csv": "rule_id",
+        "AUTHORIZATION_INPUT_REGISTER.csv": "input_id",
+        "RESTRICTION_AND_REVOCATION_REGISTER.csv": "control_id",
+        "STATE_TRANSITION_MATRIX.csv": "transition_id",
+        "PERMISSION_MATRIX.csv": "permission_rule_id",
+        "AUDIT_AND_EVIDENCE_REQUIREMENTS.csv": "evidence_id",
+        "PRIVACY_SAFEGUARDING_RECORDS_CLAIMS_CROSSWALK.csv": "crosswalk_id",
+        "ACCEPTANCE_CRITERIA.csv": "acceptance_id",
+        "TEST_MATRIX.csv": "test_id",
+        "UNRESOLVED_ITEMS_REGISTER.csv": "unresolved_id",
+        "FINDING_DISPOSITION_MATRIX.csv": "finding_id",
+        "REVISION_CHANGELOG.csv": "change_id",
+        "FOUNDER_DECISION_TRACEABILITY_MATRIX.csv": "decision_id",
+    }
+    for filename, key in key_map.items():
+        unique(
+            csv_rows.get(f"{ITEM03_V02_REL}/{filename}", []),
+            key,
+            f"Item 03 V0.2 {filename}",
+            errors,
+        )
+
+    v02_sources = {
+        row.get("source_id", "")
+        for row in csv_rows.get(f"{ITEM03_V02_REL}/SOURCE_REGISTER.csv", [])
+    }
+    v02_requirements = {
+        row.get("requirement_id", "")
+        for row in csv_rows.get(f"{ITEM03_V02_REL}/REQUIREMENT_REGISTER.csv", [])
+    }
+    v02_acceptance = {
+        row.get("acceptance_id", "")
+        for row in csv_rows.get(f"{ITEM03_V02_REL}/ACCEPTANCE_CRITERIA.csv", [])
+    }
+    v02_tests = {
+        row.get("test_id", "")
+        for row in csv_rows.get(f"{ITEM03_V02_REL}/TEST_MATRIX.csv", [])
+    }
+    v02_unresolved = {
+        row.get("unresolved_id", "")
+        for row in csv_rows.get(f"{ITEM03_V02_REL}/UNRESOLVED_ITEMS_REGISTER.csv", [])
+    }
+    for relative, rows in csv_rows.items():
+        if not relative.startswith(f"{ITEM03_V02_REL}/"):
+            continue
+        for line_number, row in enumerate(rows, 2):
+            joined = ";".join(row.values())
+            for found in ids(joined, "RAP-SRC-"):
+                if found not in v02_sources:
+                    errors.append(f"{relative}:{line_number}: unknown source {found}")
+            for found in ids(joined, "RAP-REQ-"):
+                if found not in v02_requirements:
+                    errors.append(f"{relative}:{line_number}: unknown requirement {found}")
+            for found in ids(joined, "RAP-AC-"):
+                if found not in v02_acceptance:
+                    errors.append(f"{relative}:{line_number}: unknown acceptance criterion {found}")
+            for found in ids(joined, "RAP-TST-"):
+                if found not in v02_tests:
+                    errors.append(f"{relative}:{line_number}: unknown test {found}")
+            for found in ids(joined, "RAP-UNR-"):
+                if found not in v02_unresolved:
+                    errors.append(f"{relative}:{line_number}: unknown unresolved item {found}")
+            for found in re.findall(r"ES-PIA-GFD-[0-9]+", joined):
+                if found not in expected_decisions:
+                    errors.append(f"{relative}:{line_number}: unknown Founder decision {found}")
+
+    v02_trace = csv_rows.get(f"{ITEM03_V02_REL}/REVISED_TRACEABILITY_MATRIX.csv", [])
+    if [row.get("section") for row in v02_trace] != [str(n) for n in range(1, 44)]:
+        errors.append("Item 03 V0.2 traceability matrix must contain sections 1 through 43")
+
+    manifest = item03_v02 / "ARTIFACT_MANIFEST.json"
+    if manifest.is_file():
+        try:
+            manifest_data = json.loads(manifest.read_text(encoding="utf-8"))
+            manifest_files = [entry["filename"] for entry in manifest_data.get("files", [])]
+            if manifest_data.get("total_package_files") != 28:
+                errors.append("Item 03 V0.2 manifest total_package_files must be 28")
+            if manifest_data.get("checksum_covered_files") != 27:
+                errors.append("Item 03 V0.2 manifest checksum_covered_files must be 27")
+            if sorted(manifest_files) != sorted(item03_v02_files):
+                errors.append("Item 03 V0.2 manifest does not match package filenames")
+            if len(manifest_files) != len(set(manifest_files)):
+                errors.append("Item 03 V0.2 manifest contains duplicate filenames")
+        except Exception as exc:
+            errors.append(f"Item 03 V0.2 manifest invalid: {exc}")
+
+    v02_ledger = item03_v02 / "CHECKSUM_LEDGER.sha256"
+    v02_ledger_files: list[str] = []
+    if v02_ledger.is_file():
+        for line_number, line in enumerate(v02_ledger.read_text(encoding="utf-8").splitlines(), 1):
+            try:
+                digest, filename = line.split("  ", 1)
+            except ValueError:
+                errors.append(f"Item 03 V0.2 checksum line {line_number}: invalid format")
+                continue
+            if not re.fullmatch(r"[0-9a-f]{64}", digest):
+                errors.append(f"Item 03 V0.2 checksum line {line_number}: invalid SHA-256")
+                continue
+            v02_ledger_files.append(filename)
+            target = item03_v02 / filename
+            if not target.is_file():
+                errors.append(f"Item 03 V0.2 checksum target missing: {filename}")
+            elif hashlib.sha256(target.read_bytes()).hexdigest() != digest:
+                errors.append(f"Item 03 V0.2 checksum mismatch: {filename}")
+        expected_v02_covered = sorted(name for name in item03_v02_files if name != v02_ledger.name)
+        if len(v02_ledger_files) != 27:
+            errors.append("Item 03 V0.2 checksum ledger must contain exactly 27 entries")
+        if len(v02_ledger_files) != len(set(v02_ledger_files)):
+            errors.append("Item 03 V0.2 checksum ledger contains duplicate filenames")
+        if v02_ledger.name in v02_ledger_files:
+            errors.append("Item 03 V0.2 checksum ledger must intentionally self-exclude")
+        if sorted(v02_ledger_files) != expected_v02_covered:
+            errors.append("Item 03 V0.2 checksum ledger coverage mismatch")
+
     text = "\n".join(
         path.read_text(encoding="utf-8")
         for path in root.rglob("*.md")
     )
     if "Implementation authority:** `TRUE`" in text:
         errors.append("Implementation authority TRUE detected")
-    if "RECOMMENDED_NOT_APPROVED" not in text:
-        errors.append("Founder recommendation disclaimer missing")
+    exact_approval = (
+        "Founder approves ES-PIA-GFD-001, ES-PIA-GFD-002, ES-PIA-GFD-003, "
+        "ES-PIA-GFD-004, and ES-PIA-GFD-007 as recommended. This is documentary "
+        "design approval only and does not authorize implementation, migration, "
+        "deployment, activation, enrollment, or production use."
+    )
+    approval_record = root / "REMAINING_PIAS_FOUNDER_APPROVAL_RECORD_2026-07-22.md"
+    approval_text = approval_record.read_text(encoding="utf-8") if approval_record.is_file() else ""
+    if exact_approval not in approval_text:
+        errors.append("Founder approval record does not preserve the exact approval statement")
+    prohibited_claims = [
+        "**Implementation Authority:** `TRUE`",
+        "**Independent review completed:** `TRUE`",
+        "FRESH_SEGREGATED_REVIEW_COMPLETE",
+        "ITEM_03_V0_2_ADOPTED",
+        "ITEM_03_V0_2_RATIFIED",
+    ]
+    for claim in prohibited_claims:
+        if claim in item03_v02_text:
+            errors.append(f"Item 03 V0.2 prohibited authority/review claim: {claim}")
 
     if not (root / "REMAINING_PIA_FILE_MANIFEST.txt").exists():
         warnings.append("Manifest not yet generated")
@@ -267,6 +498,9 @@ def main(root_arg: str) -> int:
     print(f"Total package files: {len(package_files)}")
     print(f"Checksum-covered files: {len(ledger_files)}")
     print(f"Checksum ledger self-excluded: {CHECKSUM_LEDGER_NAME}")
+    print(f"Item 03 V0.2 files: {len(item03_v02_files)}")
+    print(f"Item 03 V0.2 checksum-covered files: {len(v02_ledger_files)}")
+    print("Item 03 V0.2 checksum ledger self-excluded: CHECKSUM_LEDGER.sha256")
     print(f"Intentional Markdown hard breaks: {intentional_markdown_hard_breaks}")
     for warning in warnings:
         print(f"WARNING: {warning}")

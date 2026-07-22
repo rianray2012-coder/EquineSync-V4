@@ -1,4 +1,4 @@
 decision_id,applies_to_batch,priority,recommendation_status,gate_effect
-ES-PIA-GFD-007,01,1,RECOMMENDED_NOT_APPROVED,"Blocks every formal review role and readiness claim"
-ES-PIA-GFD-002,01_AND_03,5,RECOMMENDED_NOT_APPROVED,"Blocks final asset and maintenance ownership across Items 02 06 and 07"
-ES-PIA-GFD-003,01_AND_04,6,RECOMMENDED_NOT_APPROVED,"Blocks final provider-network contracts across Items 03 07 and 10"
+ES-PIA-GFD-007,01,1,FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY,"Selects compliant future review policy; runtime not provisioned and formal review remains blocked"
+ES-PIA-GFD-002,01_AND_03,5,FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY,"Allocates asset/location use service-request state and financial obligations; owning-domain review remains pending"
+ES-PIA-GFD-003,01_AND_04,6,FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY,"Allocates provider authority care participation surfaces and financial truth; incorporated into Item 03 V0.2"

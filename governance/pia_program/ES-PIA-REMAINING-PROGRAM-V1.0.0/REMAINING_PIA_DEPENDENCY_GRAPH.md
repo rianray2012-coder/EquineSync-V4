@@ -1,11 +1,11 @@
 # Remaining PIA Dependency Graph
 
-**Status:** `RECOMMENDED_NOT_APPROVED`  
+**Status:** `FOUNDER_ALLOCATIONS_INCORPORATED_DOCUMENTARY_ONLY`
 **Implementation authority:** `FALSE`
 
 ```mermaid
 flowchart TD
-  G["Locked Governance and Founder Decisions"] --> S["PIA Master Standard V1.1"]
+  G["Locked Governance and Founder Documentary Decisions"] --> S["PIA Master Standard V1.1"]
   G --> M["MIAP Planning Authority"]
   S --> P01["01 Identity Account Actor Onboarding"]
   M --> P01
@@ -48,7 +48,21 @@ flowchart TD
   X -.-> P08
   X -.-> P09
   X -.-> P10
-  R["Qualified Review Runtime"] -. "currently unavailable" .-> P02
+  D1["GFD-001 competition/show/travel allocation"] -.-> P04
+  D1 -.-> P06
+  D1 -.-> P08
+  D1 -.-> P09
+  D2["GFD-002 asset/service-request allocation"] -.-> P02
+  D2 -.-> P06
+  D2 -.-> P07
+  D2 -.-> P09
+  D3["GFD-003 provider allocation"] -.-> P03
+  D3 -.-> P07
+  D3 -.-> P09
+  D3 -.-> P10
+  D4["GFD-004 no Item 11; domain truth plus Item 05 surfaces"] -.-> P05
+  R["GFD-007 compliant review runtime policy"] -. "approved policy; runtime not provisioned" .-> P02
+  R -. "fresh review pending" .-> P03
 ```
 
-Arrows express authority or contract dependencies, not implementation sequence alone. The bidirectional 02/03 edge must be resolved through explicit interfaces: context informs permission evaluation, while authority constrains who may create, change, or use facility/tenant/organization records.
+Arrows express documentary authority or contract dependencies, not implementation sequence or execution authority. The bidirectional 02/03 edge requires explicit interfaces: context informs permission evaluation, while authority constrains who may create, change, or use facility/tenant/organization records. The five GFD approvals do not complete review, provision a runtime, ratify a PIA, or authorize implementation.

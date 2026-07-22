@@ -1,10 +1,10 @@
 # EquineSync Remaining PIA Program
 
 **Program ID:** `ES-PIA-REMAINING-PROGRAM-V1.0.0`  
-**Status:** `PROGRAM_INVENTORY_COMPLETE_BATCH_01_DOCUMENTARY_REVISION_ACTIVE_REVIEW_BLOCKED`  
+**Status:** `FOUNDER_DECISIONS_INCORPORATED_ITEM_03_V0_2_DOCUMENTARY_CANDIDATE_READY_FOR_COMPLIANT_FRESH_REVIEW`
 **Repository:** `rianray2012-coder/EquineSync-V4`  
-**Branch:** `codex/remaining-pia-program-v1`  
-**Starting predecessor:** `5e549056ee25fd1992846bbd6fedaba4329ab668`  
+**Branch:** `codex/item-03-founder-decisions-strengthened-candidate-v1`
+**Starting preserved commit:** `05eaa53be3e5e6aa00814eaeee49f145b3bc6c49`
 **Constitutional baseline:** `acb518ea5a160820e64681ff95a16b010fe1156c`  
 **Implementation authority:** `FALSE`  
 **Production authority:** `FALSE`  
@@ -12,13 +12,13 @@
 
 ## Outcome of this controlled phase
 
-This package establishes the authoritative source baseline, canonical template, exact five-question framework, ten-item inventory, 41-domain consolidation map, dependency order, cross-PIA overlaps, risks, Founder decisions, completion dashboard, first-batch source handoff, a non-destructive Facility V0.2 conformance candidate, and an integrated Item 03 A/B/C V0.1 initial draft.
+This program successor preserves the accepted 90-file package at commit `05eaa53be3e5e6aa00814eaeee49f145b3bc6c49`, records the 2026-07-22 documentary approval of GFD-001, GFD-002, GFD-003, GFD-004, and GFD-007, updates the authorized program registers, and adds a separate 28-file Item 03 V0.2 strengthened documentary candidate. The integrated Item 03 A/B/C V0.1 and all prior evidence remain unchanged.
 
-It does not claim that any new PIA is complete. It does not convert the current Identity or Relationships successor into Founder-approved text. It does not convert Facility mechanical validation into an independent review. It does not authorize implementation.
+It does not approve, adopt, ratify, or lock the Item 03 V0.2 successor; convert the current Identity or Relationships successor into Founder-approved text; convert mechanical validation into independent review; provision GFD-007 roles; or authorize implementation, migration, deployment, activation, enrollment, or production use.
 
 ## Frozen package integrity model
 
-The frozen package contains exactly 90 files. `REMAINING_PIA_CHECKSUMS.sha256` intentionally excludes itself and contains exactly 89 entries, one for every other package file. `REMAINING_PIA_FILE_MANIFEST.txt` contains all 90 filenames, including the self-excluded checksum ledger. All program CSV files use LF line endings under the package-specific policy documented in `REMAINING_PIA_VALIDATION_REPORT.md`.
+The updated program contains exactly 119 files. `REMAINING_PIA_CHECKSUMS.sha256` intentionally excludes itself and contains exactly 118 entries, one for every other program file. `REMAINING_PIA_FILE_MANIFEST.txt` contains all 119 filenames, including the self-excluded program checksum ledger. The nested Item 03 V0.2 package contains 28 files; `CHECKSUM_LEDGER.sha256` intentionally excludes itself and covers the other 27. All program CSV files use LF line endings under the package-specific policy documented in `REMAINING_PIA_VALIDATION_REPORT.md`.
 
 ## Controlling determinations
 
@@ -27,21 +27,23 @@ The frozen package contains exactly 90 files. `REMAINING_PIA_CHECKSUMS.sha256` i
 - The portfolio remains ten PIAs. The assessment list creates no new PIA by itself.
 - Two earlier underlying designs—Identity and Relationships—retain Founder-approved design status. Their current successor text is not ratified.
 - Facility V1.0.1-R3 contains incorporated Founder decisions but remains adopted `false`, locked `false`, and review-blocked.
-- The current runtime is not qualified for formal segregated review.
+- GFD-001 through GFD-004 are approved as documentary allocations and are reflected in scope, dependency, traceability, status, and Item 03 artifacts.
+- GFD-007 selects compliant isolated future review roles as policy, but no runtime is provisioned or launched here.
+- Item 03 V0.2 is a documentary candidate ready only for compliant fresh review; independent review, adoption, ratification, implementation, and enrollment remain pending.
 
 ## Directory guide
 
 - `PIA_*` files establish template, questions, inventory, conflicts, and overlap determinations.
 - `REMAINING_PIA_*` files provide the ten-item program register, sequence, graph, matrix, dashboard, risk register, traceability, status, manifest, and checksums.
 - `REMAINING_PIAS_*` files provide the global Founder decision register, decision book, and recommended decision sequence.
-- `BATCH_01_FOUNDATIONAL/` preserves the first-batch source packets and the exact gates preventing review or successor claims.
+- `BATCH_01_FOUNDATIONAL/ITEM_03_INITIAL_DRAFT_V0_1/` remains the preserved starting review object.
+- `BATCH_01_FOUNDATIONAL/ITEM_03_STRENGTHENED_V0_2/` contains the separate 28-file strengthened documentary candidate.
 
 ## Next controlled action
 
-1. Founder resolves `ES-PIA-GFD-007`, or the review-runtime operator provisions the recommended qualified role sessions without an exception.
-2. Freeze and run the Facility V0.2 fresh review only in a runtime that records `PASS` before each qualified role.
-3. Freeze and fresh-review the integrated Item 03 V0.1 before creating a finding-driven V0.2 or approving dependent Item 04-10 drafts.
-4. Resolve `ES-PIA-GFD-001` through `ES-PIA-GFD-004` before affected scope becomes normative.
+1. Under separate Founder authority, provision the GFD-007-compliant isolated runtime and record passing permission evidence before each role.
+2. Submit the frozen Item 03 V0.2 package to a compliant fresh review while preserving predecessor qualifications and isolated outputs.
+3. Reconcile review findings and owning-domain concurrence in a separately versioned successor; do not infer approval, adoption, ratification, or implementation authority.
 
 ## Explicit prohibitions
 

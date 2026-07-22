@@ -1,0 +1,43 @@
+{
+  "package_id": "ES-PIA-RELATIONSHIP-AUTHORIZATION-PERMISSION-V0.2-STRENGTHENED-DOCUMENTARY-CANDIDATE",
+  "status": "ITEM_03_V0_2_STRENGTHENED_DOCUMENTARY_CANDIDATE_READY_FOR_COMPLIANT_FRESH_REVIEW",
+  "total_package_files": 28,
+  "checksum_covered_files": 27,
+  "checksum_ledger": "CHECKSUM_LEDGER.sha256",
+  "checksum_ledger_self_exclusion": "INTENTIONAL",
+  "files": [
+    {"filename": "ACCEPTANCE_CRITERIA.csv", "artifact_type": "acceptance_criteria"},
+    {"filename": "ADVERSARIAL_SCENARIOS.md", "artifact_type": "adversarial_scenarios"},
+    {"filename": "API_EVENT_JOB_CONTRACTS.md", "artifact_type": "api_event_job_contracts"},
+    {"filename": "ARTIFACT_MANIFEST.json", "artifact_type": "artifact_manifest"},
+    {"filename": "AUDIT_AND_EVIDENCE_REQUIREMENTS.csv", "artifact_type": "audit_evidence_requirements"},
+    {"filename": "AUTHORIZATION_INPUT_REGISTER.csv", "artifact_type": "authorization_input_register"},
+    {"filename": "CHECKSUM_LEDGER.sha256", "artifact_type": "checksum_ledger"},
+    {"filename": "ES-PIA-RELATIONSHIP-AUTHORIZATION-PERMISSION_V0_2_STRENGTHENED_DOCUMENTARY_CANDIDATE.md", "artifact_type": "primary_draft"},
+    {"filename": "FINDING_DISPOSITION_MATRIX.csv", "artifact_type": "finding_disposition"},
+    {"filename": "FIVE_QUESTION_RESPONSE_MATRIX.csv", "artifact_type": "five_question_matrix"},
+    {"filename": "FOUNDER_DECISION_TRACEABILITY_MATRIX.csv", "artifact_type": "founder_decision_traceability"},
+    {"filename": "GOLDEN_PATHS.md", "artifact_type": "golden_paths"},
+    {"filename": "OFFLINE_AND_SYNCHRONIZATION_REQUIREMENTS.md", "artifact_type": "offline_sync_requirements"},
+    {"filename": "PERMISSION_EVALUATION_CONTRACT.md", "artifact_type": "permission_evaluation_contract"},
+    {"filename": "PERMISSION_MATRIX.csv", "artifact_type": "permission_matrix"},
+    {"filename": "PRIVACY_SAFEGUARDING_RECORDS_CLAIMS_CROSSWALK.csv", "artifact_type": "control_crosswalk"},
+    {"filename": "PROVIDER_RELATIONSHIP_AND_AUTHORITY_CONTRACT.md", "artifact_type": "provider_authority_contract"},
+    {"filename": "RELATIONSHIP_TYPE_REGISTER.csv", "artifact_type": "relationship_type_register"},
+    {"filename": "REPRESENTATION_AND_DELEGATION_REGISTER.csv", "artifact_type": "representation_delegation_register"},
+    {"filename": "REQUIREMENT_REGISTER.csv", "artifact_type": "requirement_register"},
+    {"filename": "RESTRICTION_AND_REVOCATION_REGISTER.csv", "artifact_type": "restriction_revocation_register"},
+    {"filename": "REVISED_TRACEABILITY_MATRIX.csv", "artifact_type": "traceability_matrix"},
+    {"filename": "REVISION_CHANGELOG.csv", "artifact_type": "revision_changelog"},
+    {"filename": "SOURCE_REGISTER.csv", "artifact_type": "source_register"},
+    {"filename": "STATE_TRANSITION_MATRIX.csv", "artifact_type": "state_transition_matrix"},
+    {"filename": "TEST_MATRIX.csv", "artifact_type": "test_matrix"},
+    {"filename": "UNRESOLVED_ITEMS_REGISTER.csv", "artifact_type": "unresolved_items"},
+    {"filename": "VALIDATION_REPORT.md", "artifact_type": "validation_report"}
+  ],
+  "limitations": [
+    "mechanical validation is not independent review",
+    "no implementation migration deployment activation enrollment or production authority",
+    "formal review and predecessor authority remain pending"
+  ]
+}

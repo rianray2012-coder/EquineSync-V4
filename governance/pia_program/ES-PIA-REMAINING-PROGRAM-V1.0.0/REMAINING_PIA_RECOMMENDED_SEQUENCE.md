@@ -2,12 +2,12 @@
 
 **Sequence ID:** `ES-PIA-REMAINING-SEQUENCE-V1.0.0`  
 **Status:** `RECOMMENDED_NOT_APPROVED`  
-**Baseline:** `5e549056ee25fd1992846bbd6fedaba4329ab668`  
+**Baseline:** `05eaa53be3e5e6aa00814eaeee49f145b3bc6c49`
 **Implementation authority:** `FALSE`
 
 ## Entry conditions
 
-The canonical template and five questions are established. Input custody passed. The current branch is documentary-only. A PIA may enter substantive drafting only when its unresolved predecessor questions can be carried explicitly without requiring invented authority. A PIA may not enter fresh-review completion in the present runtime.
+The canonical template and five questions are established. Input custody passed. GFD-001, GFD-002, GFD-003, GFD-004, and GFD-007 are `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`. The current branch remains documentary-only. A PIA may enter drafting only when unresolved predecessor questions remain explicit and no authority is invented. GFD-007 does not provision a runtime, so fresh-review completion remains unavailable.
 
 ## Batch plan
 
@@ -15,9 +15,9 @@ The canonical template and five questions are established. Input custody passed.
 
 - Item 01 current-successor lifecycle carry-forward;
 - Item 02 Facility, Tenant, and Organizational Structure existing candidate;
-- Item 03 Relationship, Authorization, and Permission, with Components B and C completed around the separate Component A successor.
+- Item 03 Relationship, Authorization, and Permission V0.2 strengthened documentary successor candidate, with V0.1 and the separate Component A successor preserved.
 
-Batch objective: settle identity/context/authority contracts before dependent workflows. The existing Facility V1.0.0 and V1.0.1-R3 evidence remains immutable. The V0.2 conformance candidate is a separate documentary derivative; the next Facility lifecycle action is its compliant fresh review.
+Batch objective: settle identity/context/authority contracts before dependent workflows. The existing Facility V1.0.0 and V1.0.1-R3 evidence and Item 03 V0.1 remain immutable. Facility V0.2 and Item 03 V0.2 are separate documentary candidates; their next lifecycle action is compliant fresh review under separately provisioned roles.
 
 ### Batch 02 - Canonical horse entity and lifecycle
 
@@ -52,6 +52,6 @@ Stop only the affected lane when a missing source or predecessor decision can be
 
 ## Current gate
 
-`BATCH_01_FRESH_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE`
+`BATCH_01_DOCUMENTARY_CANDIDATES_READY_FOR_COMPLIANT_FRESH_REVIEW_RUNTIME_NOT_PROVISIONED`
 
-The current runtime is unrestricted with approval policy `never`. It does not satisfy the repository's role matrix. Zero formal roles may be claimed. Inventory, source packets, crosswalks, and Founder recommendations remain permissible documentary work.
+GFD-007 selects compliant isolated role policy, but the current directive provisions no runtime. Zero formal roles or independent-review results may be claimed. Documentary packages, source packets, crosswalks, and approved allocation incorporation remain permissible within the explicit scope.
