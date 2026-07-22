@@ -1,0 +1,51 @@
+EQUINESYNC PHASE 1 PILOT A MODE B ATTEMPT 03 CHANGE MANIFEST
+
+Additive scope: new attempt-03 evidence only.
+Attempt 01 modified: no
+Attempt 02 modified: no
+Default branch modified: no
+Pull request created: no
+Phase 2 activity: no
+
+FILES
+MODE_B_COMMAND_EXIT_REGISTER.csv
+MODE_B_EXECUTION_CHRONOLOGY.csv
+MODE_B_EXECUTION_ENVIRONMENT_SPECIFICATION.md
+MODE_B_FOUNDER_DECISION_REGISTER.csv
+MODE_B_INVOCATION_EVIDENCE.json
+MODE_B_PACKET_OUTPUT_MANIFEST.csv
+MODE_B_REPOSITORY_CUSTODY_RECORD.md
+MODE_B_ROLE_CONFIGURATION_REGISTER.csv
+PHASE_1_MODE_B_ASSURANCE_ASSESSMENT.md
+PHASE_1_MODE_B_FOUNDER_PACKAGE.md
+authority/FOUNDER_AUTHORIZATION_RECEIVED_TRANSCRIPTION.md
+control_envelopes/ES-RA-02_CONTROL_ENVELOPE.txt
+control_envelopes/ES-RA-03_CONTROL_ENVELOPE.txt
+control_envelopes/ES-RA-04_CONTROL_ENVELOPE.txt
+control_envelopes/ES-RA-05_CONTROL_ENVELOPE.txt
+oracle/MODE_B_ATTEMPT_03_HIDDEN_DEFECT_ORACLE.csv
+packet_manifests/ES-RA-02_INPUT_MANIFEST.json
+packet_manifests/ES-RA-03_INPUT_MANIFEST.json
+packet_manifests/ES-RA-04_INPUT_MANIFEST.json
+packet_manifests/ES-RA-05_INPUT_MANIFEST.json
+preflight/FORMAL_BOUNDARY_PROBE_LOG.txt
+preflight/HARNESS_SMOKE_TEST_LOG.txt
+preflight/MODE_B_EFFECTIVE_RUNTIME_RECORD.json
+preflight/MODE_B_PREFLIGHT_CHECKS.csv
+preflight/MODE_B_PREFLIGHT_REPORT.md
+preflight/PACKET_FREEZE_RECEIPT.txt
+preflight/PRE_FREEZE_CUSTODY_LOG.txt
+preflight/PROVIDER_PREFLIGHT_VIOLATION.json
+preflight/RUNTIME_SURFACE_PROBE.md
+scripts/build_attempt03_evidence_manifests.py
+scripts/formal_boundary_harness.sh
+scripts/prepare_attempt03_packets.py
+scripts/validate_attempt03_evidence.py
+scripts/verify_attempt03_packets.py
+scripts/verify_pre_freeze_custody.sh
+validation/MODE_B_VALIDATION_REPORT.md
+validation/MODE_B_VALIDATION_RESULTS.csv
+validation/PRECOMMIT_TEST_LOG.txt
+MODE_B_CHANGE_MANIFEST.txt
+MODE_B_FILE_MANIFEST.csv
+MODE_B_CHECKSUMS.sha256

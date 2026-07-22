@@ -1,0 +1,22 @@
+EQUINESYNC ATTEMPT 03 FORMAL BOUNDARY PROBE LOG
+
+packet_freeze_timestamp_utc=2026-07-22T02:19:22Z
+harness_version=A03-1
+harness_sha256=8777b511fa7d8c629d65c259711cb4af332b58fa1d81b7493b771391965d1429
+known_answer_sha256=ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+assigned_candidate_valid_policy_sha256=44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8
+
+role=ES-RA-02 process_exit=0 own_packet_read=0 known_answer=0 assigned_file_checksum=0 output_write=0 input_write_denial=1 sibling_input_read_denial=1 sibling_output_read_denial=1 oracle_read_denial=1 orchestration_read_denial=1 historical_read_denial=1 credential_read_denial=1 unrelated_read_denial=1 unrelated_write_denial=1 orchestration_write_denial=1 sibling_input_write_denial=1 network_denial=6
+role=ES-RA-03 process_exit=0 own_packet_read=0 known_answer=0 assigned_file_checksum=0 output_write=0 input_write_denial=1 sibling_input_read_denial=1 sibling_output_read_denial=1 oracle_read_denial=1 orchestration_read_denial=1 historical_read_denial=1 credential_read_denial=1 unrelated_read_denial=1 unrelated_write_denial=1 orchestration_write_denial=1 sibling_input_write_denial=1 network_denial=6
+role=ES-RA-04 process_exit=0 own_packet_read=0 known_answer=0 assigned_file_checksum=0 output_write=0 input_write_denial=1 sibling_input_read_denial=1 sibling_output_read_denial=1 oracle_read_denial=1 orchestration_read_denial=1 historical_read_denial=1 credential_read_denial=1 unrelated_read_denial=1 unrelated_write_denial=1 orchestration_write_denial=1 sibling_input_write_denial=1 network_denial=6
+role=ES-RA-05 process_exit=0 own_packet_read=0 known_answer=0 assigned_file_checksum=0 output_write=0 input_write_denial=1 sibling_input_read_denial=1 sibling_output_read_denial=1 oracle_read_denial=1 orchestration_read_denial=1 historical_read_denial=1 credential_read_denial=1 unrelated_read_denial=1 unrelated_write_denial=1 orchestration_write_denial=1 sibling_input_write_denial=1 network_denial=6
+
+DIRECT ACTUAL-PATH PROBES
+role=ES-RA-02 actual_sibling_packet_read=1 actual_sibling_output_read=1 actual_hidden_oracle_read=1 own_output_read=0
+role=ES-RA-03 actual_sibling_packet_read=1 actual_sibling_output_read=1 actual_hidden_oracle_read=1 own_output_read=0
+role=ES-RA-04 actual_sibling_packet_read=1 actual_sibling_output_read=1 actual_hidden_oracle_read=1 own_output_read=0
+role=ES-RA-05 actual_sibling_packet_read=1 actual_sibling_output_read=1 actual_hidden_oracle_read=1 own_output_read=0
+
+Exit 1 is the expected sandbox denial for prohibited path probes. Exit 6 is the expected no-DNS/direct-network denial. The assigned output permission is the only write grant; it also permits reading the assigned output directory under this runtime's permission semantics. No substantive role output existed or was read.
+
+result=PASS

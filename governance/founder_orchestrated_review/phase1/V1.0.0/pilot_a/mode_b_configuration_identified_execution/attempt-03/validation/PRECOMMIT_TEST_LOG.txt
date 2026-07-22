@@ -1,0 +1,14 @@
+Attempt 03 precommit documentary validation
+
+Python evidence-script compile: PASS (exit 0)
+Shell script syntax validation: PASS (exit 0)
+Attempt 03 evidence validator: PASS (exit 0)
+Phase 1 unit test file: PASS (4 tests, exit 0)
+git diff --check: PASS (exit 0)
+Attempt 01 checksum verification: PASS (exit 0)
+Attempt 02 checksum verification: PASS (exit 0)
+Attempt 03 checksum verification: PASS (40 artifacts, exit 0)
+
+Earlier incorrect unittest dotted-module invocation: exit 1, retained in the validation report. It was a command-construction error caused by the `V1.0.0` directory name; direct-file execution passed without changing test bytes.
+
+No provider, model, or canonical role command was run during documentary validation.

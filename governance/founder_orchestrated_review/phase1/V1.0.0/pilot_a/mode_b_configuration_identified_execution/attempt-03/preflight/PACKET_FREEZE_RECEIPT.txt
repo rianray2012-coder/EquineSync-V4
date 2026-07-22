@@ -1,0 +1,28 @@
+EQUINESYNC PHASE 1 PILOT A MODE B ATTEMPT 03 PACKET FREEZE RECEIPT
+
+freeze_timestamp_utc=2026-07-22T02:19:22Z
+attempt_id=ES-PH1-PILOT-A-MODE-B-ATTEMPT-03
+execution_mode=CONFIGURATION_IDENTIFIED_MANUAL_ROLE_EXECUTION
+starting_commit=dc5dc547df84eca59c265c355f86331f80c2ee59
+branch=codex/founder-review-phase1-pilot-a-mode-b-attempt-03-v1
+runtime_root=/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_03_runtime.nosync
+pre_freeze_custody=PASS
+pre_freeze_packet_verification=PASS
+shell_harness_syntax=PASS
+packet_generator_syntax=PASS
+packet_verifier_syntax=PASS
+harmless_smoke_ES-RA-02=PASS
+harmless_smoke_ES-RA-03=PASS
+harmless_smoke_ES-RA-04=PASS
+harmless_smoke_ES-RA-05=PASS
+model_requests_before_freeze=0
+provider_requests_before_freeze=0
+canonical_role_invocations_before_freeze=0
+
+ES-RA-02_INPUT_MANIFEST.json  7eeb6c20f3b6c8ddd0c199beb81b6dd0dde0199e795fc608f1e803e316a5e444
+ES-RA-03_INPUT_MANIFEST.json  3bfe13ea8b3ba80ee8122d9416ef663121573a245d5cc193293bde0e9dd27470
+ES-RA-04_INPUT_MANIFEST.json  f1f9090506fee6bd1a11dc73943cd832d410403709b7c81495c7f26a66e1c340
+ES-RA-05_INPUT_MANIFEST.json  65468a47746fff613fefeadadf8a55da71d2d60bb50f6b07ee16db4b51dd2bc8
+MODE_B_ATTEMPT_03_HIDDEN_DEFECT_ORACLE.csv  6451ffe911c607a6cef66ecc0604abfc965fb8ff33a78eb88db285ab2180ac51
+
+Packets are frozen read-only. Formal Attempt 03 preflight begins from zero after this receipt. No Attempt 02 preflight result is carried forward. Any post-freeze mandatory gate failure blocks all role/model/provider execution and must be preserved without in-place packet repair.

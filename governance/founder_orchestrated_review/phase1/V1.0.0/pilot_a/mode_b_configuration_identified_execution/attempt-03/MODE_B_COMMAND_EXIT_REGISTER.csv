@@ -1,0 +1,33 @@
+command_id,phase,command_or_probe,observed_exit,expected_interpretation,result
+A03-CMD-001,startup,git fetch --all --tags --prune,0,successful fetch,PASS
+A03-CMD-002,startup,checkout exact dc5dc547df84eca59c265c355f86331f80c2ee59,0,exact predecessor checked out,PASS
+A03-CMD-003,startup,create bounded Attempt 03 branch,0,authorized branch created,PASS
+A03-CMD-004,startup,initial complete file read and SHA scan,0,all 4489 files materialized,PASS
+A03-CMD-005,startup,git fsck,0,repository object database interpretable,PASS
+A03-CMD-006,harness,/bin/sh -n formal_boundary_harness.sh,0,shell syntax valid,PASS
+A03-CMD-007,smoke,ES-RA-02 harmless sandbox harness,0,all individual exits matched expected,PASS
+A03-CMD-008,smoke,ES-RA-03 harmless sandbox harness,0,all individual exits matched expected,PASS
+A03-CMD-009,smoke,ES-RA-04 harmless sandbox harness,0,all individual exits matched expected,PASS
+A03-CMD-010,smoke,ES-RA-05 harmless sandbox harness,0,all individual exits matched expected,PASS
+A03-CMD-011,packet preparation,Python compile prepare_attempt03_packets.py,0,script syntax valid,PASS
+A03-CMD-012,packet preparation,first packet generator run,1,Python compatibility error before completion,DIAGNOSTIC_ERROR_QUARANTINED
+A03-CMD-013,packet preparation,clean packet generator rerun from zero,0,four packets and oracle prepared,PASS
+A03-CMD-014,pre-freeze,/bin/sh -n verify_pre_freeze_custody.sh,0,shell syntax valid,PASS
+A03-CMD-015,pre-freeze,Python compile verify_attempt03_packets.py,0,script syntax valid,PASS
+A03-CMD-016,pre-freeze,verify_pre_freeze_custody.sh,0,Git materialization and history controls passed,PASS
+A03-CMD-017,pre-freeze,verify_attempt03_packets.py,0,packet manifest canary oracle and permission bits passed,PASS
+A03-CMD-018,formal preflight,ES-RA-02 formal boundary harness,0,individual probes matched expected,PASS
+A03-CMD-019,formal preflight,ES-RA-03 formal boundary harness,0,individual probes matched expected,PASS
+A03-CMD-020,formal preflight,ES-RA-04 formal boundary harness,0,individual probes matched expected,PASS
+A03-CMD-021,formal preflight,ES-RA-05 formal boundary harness,0,individual probes matched expected,PASS
+A03-CMD-022,formal preflight,16 actual sibling output oracle and own-output cat probes,"prohibited=1;own-output=0",prohibited reads denied and assigned output readable,PASS
+A03-CMD-023,formal preflight,strict-config debug prompt-input diagnostic,1,unsupported option for debug subcommand,DIAGNOSTIC_ONLY
+A03-CMD-024,formal preflight,custom-profile debug prompt-input probe,0,restricted custom profile resolved,PASS
+A03-CMD-025,formal preflight,isolated plugin list,0,installed and available arrays empty,PASS
+A03-CMD-026,formal preflight,isolated MCP list,0,empty array,PASS
+A03-CMD-027,formal preflight,isolated feature list,0,relevant features false,PASS
+A03-CMD-028,formal preflight,isolated doctor,1,performed prohibited provider reachability requests,FAIL_BLOCKING
+A03-CMD-029,role execution,ES-RA-02 canonical role command,NOT_RUN,prohibited after failed preflight,NOT_ATTEMPTED
+A03-CMD-030,role execution,ES-RA-03 canonical role command,NOT_RUN,prohibited after failed preflight,NOT_ATTEMPTED
+A03-CMD-031,role execution,ES-RA-04 canonical role command,NOT_RUN,prohibited after failed preflight,NOT_ATTEMPTED
+A03-CMD-032,role execution,ES-RA-05 canonical role command,NOT_RUN,prohibited after failed preflight,NOT_ATTEMPTED

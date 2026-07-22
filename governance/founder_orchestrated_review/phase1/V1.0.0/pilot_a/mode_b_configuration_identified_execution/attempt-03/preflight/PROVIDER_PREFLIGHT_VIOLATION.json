@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-03",
+  "control": "no provider request before complete formal preflight pass",
+  "result": "FAIL",
+  "command": "codex doctor --json under isolated no-config CODEX_HOME",
+  "command_exit": 1,
+  "credentials_present_in_isolated_home": false,
+  "model_invoked": false,
+  "canonical_role_invoked": false,
+  "provider_bound_requests": [
+    {
+      "target_class": "ChatGPT provider base URL",
+      "observed_result": "HTTP 404",
+      "doctor_check": "network.provider_reachability"
+    },
+    {
+      "target_class": "OpenAI Responses WebSocket endpoint",
+      "observed_result": "HTTP 401 Missing authentication",
+      "doctor_check": "network.websocket_reachability"
+    }
+  ],
+  "qualification_effect": "BLOCK_ALL_ROLE_MODEL_PROVIDER_EXECUTION",
+  "response": "FAIL_CLOSED_IMMEDIATELY",
+  "packets_modified_after_failure": false,
+  "replacement_probe_attempted": false,
+  "disposition": "PILOT_A_CONFIGURATION_IDENTIFIED_EXECUTION_BLOCKED"
+}

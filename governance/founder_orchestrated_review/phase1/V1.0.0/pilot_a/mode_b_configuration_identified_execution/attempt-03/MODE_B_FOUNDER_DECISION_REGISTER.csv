@@ -1,0 +1,5 @@
+decision_id,status,decision_required,default_if_no_decision
+A03-FD-001,PENDING,Accept or reject the preserved Attempt 03 blocked disposition,Remain blocked
+A03-FD-002,PENDING,Authorize or prohibit any bounded successor attempt,No successor authorized
+A03-FD-003,PENDING,If a successor is authorized specify an offline substitute for provider-reaching doctor diagnostics,No provider diagnostic permitted before full preflight pass
+A03-FD-004,CONFIRMED_BY_EXISTING_AUTHORITY,Phase 2 remains NOT_AUTHORIZED,NOT_AUTHORIZED

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-03",
+  "provider_bound_preflight_requests": 2,
+  "provider_bound_preflight_request_details": [
+    "ChatGPT base URL reachability request returned HTTP 404",
+    "OpenAI Responses WebSocket handshake returned HTTP 401"
+  ],
+  "provider_credentials_used_by_preflight_requests": false,
+  "model_requests": 0,
+  "model_responses": 0,
+  "canonical_roles_attempted": 0,
+  "canonical_roles_executed": 0,
+  "canonical_roles_qualified": 0,
+  "prompt_injection_scoring_runs": 0,
+  "oracle_scoring_runs": 0,
+  "reconciliation_runs": 0,
+  "replay_runs": 0,
+  "variance_analysis_runs": 0,
+  "phase_2_activity": 0,
+  "disposition": "PILOT_A_CONFIGURATION_IDENTIFIED_EXECUTION_BLOCKED"
+}

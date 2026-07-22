@@ -1,0 +1,16 @@
+validation_id,check,result,exit_or_count,qualification
+A03-VAL-001,Python syntax compilation for copied and authored evidence scripts,PASS,0,documentary only
+A03-VAL-002,shell syntax validation for copied harness and custody script,PASS,0,documentary only
+A03-VAL-003,Attempt 03 evidence validator,PASS,0,documentary only
+A03-VAL-004,JSON artifacts parsed,PASS,7,documentary only
+A03-VAL-005,packet manifests present,PASS,4,documentary only
+A03-VAL-006,control envelopes present,PASS,4,documentary only
+A03-VAL-007,role execution overclaim check,PASS,0 executions,documentary only
+A03-VAL-008,provider-prohibition failure preserved,PASS,1 decisive failure,documentary only
+A03-VAL-009,initial dotted-path unittest command construction,ERROR,1,retried without changing test bytes
+A03-VAL-010,direct Phase 1 validation unit-test file,PASS,4 tests,mechanical only
+A03-VAL-011,git diff whitespace check,PASS,0,mechanical only
+A03-VAL-012,Attempt 01 committed checksums,PASS,0,historical preservation only
+A03-VAL-013,Attempt 02 committed checksums,PASS,0,historical preservation only
+A03-VAL-014,substantive role-output validation,NOT_APPLICABLE,0 role outputs,blocked before role execution
+A03-VAL-015,Attempt 03 checksum ledger,PASS,40 artifacts,documentary integrity only

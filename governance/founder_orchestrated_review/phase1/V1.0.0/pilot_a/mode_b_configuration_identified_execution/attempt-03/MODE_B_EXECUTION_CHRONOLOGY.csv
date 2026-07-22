@@ -1,0 +1,17 @@
+sequence,timestamp_utc,event,result,qualification_effect
+1,2026-07-22T02:09:45Z,fresh .nosync checkout custody,passed,pre-branch custody established
+2,2026-07-22T02:10:00Z,bounded Attempt 03 branch created from dc5dc547df84eca59c265c355f86331f80c2ee59,passed,branch authorized
+3,2026-07-22T02:12:00Z,boundary harness shell syntax validation,passed,harness eligible for harmless smoke
+4,2026-07-22T02:13:00Z,four-profile harmless no-provider smoke,passed,packet preparation eligible
+5,2026-07-22T02:16:00Z,first packet-preparation script run,diagnostic error before packet completion,partial disposable root quarantined and no packet frozen
+6,2026-07-22T02:17:00Z,clean packet preparation rerun after Python compatibility correction,passed,packets prepared but not frozen
+7,2026-07-22T02:19:12Z,pre-freeze Git materialization packet manifest canary and oracle verification,passed,packet freeze eligible
+8,2026-07-22T02:19:22Z,packet freeze,passed,formal preflight began from zero
+9,2026-07-22T02:20:00Z,four formal filesystem and network boundary profiles,passed,remaining runtime controls permitted
+10,2026-07-22T02:21:00Z,direct actual sibling packet sibling output and hidden oracle read probes,passed by denial,boundaries affirmed
+11,2026-07-22T02:22:00Z,strict-config diagnostic construction probe,diagnostic command rejected because strict-config unsupported for debug,no model or provider request
+12,2026-07-22T02:22:30Z,custom permission and clean prompt-input configuration probe,passed,custom profile resolved without model or provider request
+13,2026-07-22T02:23:00Z,isolated plugin and MCP enumeration,passed,zero plugins and zero MCP servers
+14,2026-07-22T02:23:12Z,isolated doctor diagnostic,failed mandatory provider-request prohibition,HTTP and WebSocket provider reachability requests occurred before full preflight pass
+15,2026-07-22T02:23:13Z,fail-closed stop,passed,no model or canonical role invoked
+16,2026-07-22T02:24:20Z,blocked evidence assembly began,in progress,documentary preservation only

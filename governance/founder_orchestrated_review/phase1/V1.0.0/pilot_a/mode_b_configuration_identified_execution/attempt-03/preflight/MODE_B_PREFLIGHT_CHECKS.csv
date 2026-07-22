@@ -1,0 +1,29 @@
+control_id,control,result,evidence,qualification_effect
+A03-PF-001,exact starting commit,PASS,HEAD dc5dc547df84eca59c265c355f86331f80c2ee59,none
+A03-PF-002,exact bounded branch,PASS,symbolic ref codex/founder-review-phase1-pilot-a-mode-b-attempt-03-v1,none
+A03-PF-003,fresh local non-offloaded .nosync checkout,PASS,4489 readable files and zero compressed or dataless files,none
+A03-PF-004,clean index and worktree,PASS,status staged unstaged and untracked controls all exit 0 and empty,none
+A03-PF-005,Attempt 01 and Attempt 02 preservation,PASS,both committed checksum registers verify and historical diff exits 0,none
+A03-PF-006,boundary harness syntax,PASS,/bin/sh -n exit 0 and harness SHA-256 8777b511fa7d8c629d65c259711cb4af332b58fa1d81b7493b771391965d1429,none
+A03-PF-007,four harmless no-provider harness smoke profiles,PASS,ES-RA-02 through ES-RA-05 process exit 0 with expected individual probe exits,none
+A03-PF-008,packet generator and verifier syntax,PASS,Python bytecode compilation exit 0,none
+A03-PF-009,packet preparation retry provenance,PASS,first compatibility error quarantined before completion; clean rerun from zero,none
+A03-PF-010,all four exact role profiles and sources,PASS,role register and packet manifests,none
+A03-PF-011,all four fresh packet manifests and hashes,PASS,packet verifier result PASS,none
+A03-PF-012,cross-role canary containment,PASS,each own canary present and every sibling canary absent,none
+A03-PF-013,hidden-oracle exclusion and seal,PASS,outside all role roots; SHA-256 6451ffe911c607a6cef66ecc0604abfc965fb8ff33a78eb88db285ab2180ac51,none
+A03-PF-014,packet freeze ordering,PASS,freeze occurred only after pre-freeze controls passed,none
+A03-PF-015,ES-RA-02 formal input checksum output and prohibited-boundary behavior,PASS,formal harness and actual-path direct probes,none
+A03-PF-016,ES-RA-03 formal input checksum output and prohibited-boundary behavior,PASS,formal harness and actual-path direct probes,none
+A03-PF-017,ES-RA-04 formal input checksum output and prohibited-boundary behavior,PASS,formal harness and actual-path direct probes,none
+A03-PF-018,ES-RA-05 formal input checksum output and prohibited-boundary behavior,PASS,formal harness and actual-path direct probes,none
+A03-PF-019,credential denial for all four roles,PASS,/Users/rianray/.codex/auth.json read exit 1 in every formal profile,none
+A03-PF-020,direct role-network denial for all four roles,PASS,curl exit 6 with CODEX_SANDBOX_NETWORK_DISABLED=1,none
+A03-PF-021,plugin denial,PASS,isolated plugin list installed and available arrays empty,none
+A03-PF-022,MCP denial,PASS,isolated mcp list returned empty array,none
+A03-PF-023,connector and app surfaces disabled,PASS,relevant feature overrides false and plugin/MCP inventories empty,none
+A03-PF-024,tracing telemetry and ephemeral session boundary,NOT_COMPLETED,preflight stopped at decisive provider-request failure,blocks all roles
+A03-PF-025,final per-role invocation construction and generic-fallback absence,NOT_COMPLETED,no role command constructed or launched after decisive failure,blocks all roles
+A03-PF-026,no provider request before complete formal preflight,FAIL,doctor made ChatGPT HTTP and OpenAI WebSocket reachability requests,blocks all roles
+A03-PF-027,no model or canonical role after preflight failure,PASS,zero model responses and zero role invocations,none
+A03-PF-028,Phase 2 prohibition,PASS,zero Phase 2 activity,none

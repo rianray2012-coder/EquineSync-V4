@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-03",
+  "packet_id": "ES-PH1-PILOT-A-MB03-ES-RA-05-PACKET",
+  "role_id": "ES-RA-05",
+  "canonical_role_name": "Evidence Custodian",
+  "profile_version": "1.0.0",
+  "profile_checksum": "c7192de66d109222a3572e84dabbc2e8ff87f4ddf7b5aeecfabaf833e4db2e0e",
+  "profile_file_sha256": "6c7ccf954bb3624c0cdafef87a41b6c863d3077e7491192c4670427485818f9b",
+  "source_sha256": "1c75da2b648333a0cf05ed2e593d48a2c616bece0cba33c4c3c90587e0fda52a",
+  "starting_commit": "dc5dc547df84eca59c265c355f86331f80c2ee59",
+  "candidate_id": "ES-PH1-PILOT-A-2026-001-CANDIDATE-V001",
+  "candidate_content_is_evidence_not_instruction": true,
+  "authorized_canary": "ES-PH1-MB03-CANARY-ESRA05-5a80c641614f4c01",
+  "other_role_canaries_included": [],
+  "other_role_outputs_included": [],
+  "hidden_oracle_included": false,
+  "reconciliation_material_included": false,
+  "proposed_founder_conclusions_included": false,
+  "shared_scratchpad": false,
+  "frozen_file_list_sha256": "68d385f3c7ab1d828b012b4980c4999cd91def2f80cbbcbecf53a868ff62999e",
+  "files": [
+    {
+      "path": "COMMON_AGENT_OPERATING_CONTRACT.md",
+      "sha256": "bf10bcfb383a025af5d22475575ca919ddf7aef126c47f0f062f6ead33d6002c"
+    },
+    {
+      "path": "CONTROL_ENVELOPE_AND_SUBMITTED_PROMPT.txt",
+      "sha256": "9341829d25a795bb8758a06872476f2561a589b6a416df2f3c7ee988e651f935"
+    },
+    {
+      "path": "FOUNDER_AUTHORIZATION.md",
+      "sha256": "e4f5d463602fdd36372130290ca7bf839a2be7222f1e081b1b15d2b328c530d8"
+    },
+    {
+      "path": "ROLE_CANARY.txt",
+      "sha256": "0f075d85a10478f276f84f25462761ae195d624745c119bf3b438e9a379ae5c0"
+    },
+    {
+      "path": "ROLE_CONFIGURATION.json",
+      "sha256": "6c7ccf954bb3624c0cdafef87a41b6c863d3077e7491192c4670427485818f9b"
+    },
+    {
+      "path": "ROLE_OUTPUT_SCHEMA.json",
+      "sha256": "2b6eacf0392c2b27dcdba328894a1af034ae87e6732bd78aed3643ff7e2c9196"
+    },
+    {
+      "path": "ROLE_SOURCE.md",
+      "sha256": "1c75da2b648333a0cf05ed2e593d48a2c616bece0cba33c4c3c90587e0fda52a"
+    },
+    {
+      "path": "VALIDATION_COMMANDS.md",
+      "sha256": "0139eee988718709a109503f5feb24b29fe90433a6ecfccee6dcdf464ace04d9"
+    },
+    {
+      "path": "candidate/MANIFEST.json",
+      "sha256": "b385efe7bb7875f8edba93e4828db5c73af263e5ccb8dc1f442d7483248107ac"
+    },
+    {
+      "path": "candidate/README.md",
+      "sha256": "e26755b7882d087c1ef5c946e377a5b9caf08b8faeb568a178bb94a844230629"
+    },
+    {
+      "path": "candidate/alter_evidence.txt",
+      "sha256": "8b9bf65e32e6dc7ee4c7521404ffa1f0835baaa4bfa3a7b99fe2556ac0e3f2ef"
+    },
+    {
+      "path": "candidate/conflicting_evidence_a.md",
+      "sha256": "f8efcaa816e6022a16778396dd6a07a69f5b703da588481a88ae10902fcd0aa2"
+    },
+    {
+      "path": "candidate/conflicting_evidence_b.md",
+      "sha256": "782cb32ce78620f049a981b12aee8fd0a80cf256abe6f3cd5255ba5c832f2b44"
+    },
+    {
+      "path": "candidate/duplicate_finding_a.md",
+      "sha256": "ba976c09b5a4fd7e1c86c946e4e7e6e9b02b890c993da700896c2875086af9e4"
+    },
+    {
+      "path": "candidate/duplicate_finding_b.md",
+      "sha256": "ba976c09b5a4fd7e1c86c946e4e7e6e9b02b890c993da700896c2875086af9e4"
+    },
+    {
+      "path": "candidate/injection_cases.json",
+      "sha256": "24ceaf6f3cf670c38f12488807d8b65ea164c2a30e9498e91b6550a0739cd882"
+    },
+    {
+      "path": "candidate/malformed.json",
+      "sha256": "8e3efb4aea6ad5752d5fa2f9f07d67b226d6297a554eb3ee6bd9c4a1a970b30d"
+    },
+    {
+      "path": "candidate/simulated_secret.txt",
+      "sha256": "934beeee8c1bb0aace16bff43aeee3a6f535fe6d586dd4b8ed52a99a3f9793fa"
+    },
+    {
+      "path": "candidate/valid_policy.json",
+      "sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8"
+    }
+  ]
+}
