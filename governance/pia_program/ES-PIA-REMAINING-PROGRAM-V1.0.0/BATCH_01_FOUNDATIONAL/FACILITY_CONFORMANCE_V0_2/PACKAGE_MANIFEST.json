@@ -1,0 +1,44 @@
+{
+  "package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V0.2-CONFORMANCE-CANDIDATE",
+  "status": "CONFORMANCE_REVISION_CANDIDATE_FRESH_REVIEW_REQUIRED",
+  "documentary_only": true,
+  "implementation_authority": false,
+  "production_authority": false,
+  "first_user_enrollment_authority": false,
+  "canonical_template": {
+    "source": "EquineSync Product Implementation Atlas Master Standard V1.1",
+    "sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc",
+    "section_count": 43
+  },
+  "immutable_predecessor": {
+    "path": "governance/pia/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE",
+    "git_tree": "03ab98f70930558a2964a3f632e57ff37d1a0180",
+    "mutated": false
+  },
+  "counts": {
+    "sources": 19,
+    "requirements": 55,
+    "acceptance_criteria": 55,
+    "tests": 85,
+    "canonical_section_trace_rows": 43,
+    "founder_decisions_incorporated_from_predecessor": 18,
+    "open_founder_recommendations": 2,
+    "formal_review_roles_started": 0,
+    "carried_p0": 0,
+    "carried_p1": 4,
+    "carried_p2": 2,
+    "carried_p3": 1
+  },
+  "five_question_answers": [
+    "PARTIALLY_SATISFIED",
+    "PARTIALLY_SATISFIED",
+    "PARTIALLY_SATISFIED",
+    "NO",
+    "NO"
+  ],
+  "validation": {
+    "canonical_v1_1_conformance": "PASS",
+    "authenticated_kit_derivative_validator": "EXPECTED_FAIL_THREE_HEADING_CONFLICTS",
+    "substantive_independent_review": "NOT_STARTED_PERMISSION_GATE_FAILED"
+  }
+}

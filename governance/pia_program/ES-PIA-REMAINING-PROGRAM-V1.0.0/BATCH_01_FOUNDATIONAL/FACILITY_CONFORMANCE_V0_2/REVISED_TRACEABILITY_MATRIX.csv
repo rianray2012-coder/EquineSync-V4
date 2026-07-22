@@ -1,0 +1,44 @@
+section,canonical_heading,primary_inherited_evidence,new_conformance_artifact,status
+1,"Document Control and Status","Facility R3 package manifest and disposition","V0.2 primary document section 1",MAPPED
+2,"Executive Summary","Facility V1.0.1 primary document","V0.2 primary document section 2",MAPPED
+3,"Purpose Outcomes and Success Measures","V1.0.1 sections 1 and 13; package counts","V0.2 primary document section 3",MAPPED
+4,"Authoritative Sources and Inheritance","SOURCE_REGISTER.md; SOURCE_RECONCILIATION_REPORT.md","SOURCE_REGISTER.csv",MAPPED
+5,"Scope Boundaries and Ownership","V1.0.1 sections 1 2 14","V0.2 primary document section 5",MAPPED_WITH_OPEN_DECISION
+6,"Definitions and Controlled Vocabulary","DATA_DICTIONARY.md; V1.0.1 section 2","V0.2 primary document section 6",MAPPED
+7,"Actors Roles Relationships and Authorities","PERMISSION_MATRIX.csv; INHERITANCE register","V0.2 primary document section 7",MAPPED_WITH_PREDECESSOR_DEPENDENCY
+8,"Capability Map and Release Classification","REQUIREMENT_REGISTER.csv; authority boundary","V0.2 primary document section 8",MAPPED
+9,"User and Operational Workflows","WORKFLOW_REGISTER.md","V0.2 primary document section 9",MAPPED
+10,"Business Rules and Decision Logic","V1.0.1 sections 3-12; requirements","V0.2 primary document section 10",MAPPED
+11,"Data Entities Relationships and Provenance","DATA_DICTIONARY.md; machine-readable companion","V0.2 primary document section 11",MAPPED
+12,"Record Ownership Stewardship Correction and Retention","SOURCE_REGISTER.md; canons; requirements","V0.2 primary document section 12",MAPPED_WITH_TBD_RETENTION
+13,"State and Transition Models","STATE_TRANSITION_MATRIX.csv","V0.2 primary document section 13",MAPPED
+14,"Authorization and Permission Matrix","PERMISSION_MATRIX.csv","V0.2 primary document section 14",MAPPED_WITH_PREDECESSOR_DEPENDENCY
+15,"User Interface and Experience Requirements","Adaptive onboarding specification; requirements","V0.2 primary document section 15",MAPPED
+16,"API Event Job and Integration Contracts","API_EVENT_JOB_CONTRACTS.md","V0.2 primary document section 16",MAPPED_DESIGN_ONLY
+17,"Notifications and Communications","Requirements and Communication canon","V0.2 primary document section 17",MAPPED_DESIGN_ONLY
+18,"Files Media and Document Handling","Media Privacy and Records canons","V0.2 primary document section 18",MAPPED_DESIGN_ONLY
+19,"Search Reporting and Analytics","V1.0.1 privacy projection; Search and Reporting canons","V0.2 primary document section 19",MAPPED_DESIGN_ONLY
+20,"Offline Device and Synchronization","Requirements tests and adversarial scenarios","V0.2 primary document section 20",MAPPED_DESIGN_ONLY
+21,"Security Privacy Consent Safeguarding and Abuse Controls","Permission matrix; risk register; Privacy and Safeguarding canons","V0.2 primary document section 21",MAPPED
+22,"AI and Automation Controls","Risk register; current directive","V0.2 primary document section 22",MAPPED_DESIGN_ONLY
+23,"Failure Modes Recovery Correction and Reconciliation","Adversarial scenarios; requirements; tests","V0.2 primary document section 23",MAPPED
+24,"Observability Administration Support and Incident Operations","Requirements; Platform canons","V0.2 primary document section 24",MAPPED_WITH_TBD_IMPLEMENTATION
+25,"Nonfunctional and Quality Attribute Requirements","Requirements and tests","V0.2 primary document section 25",MAPPED_WITH_TBD_TARGETS
+26,"Environment Configuration Feature Flags and Secrets","Configuration and Platform canons","V0.2 primary document section 26",DEFERRED_TO_IMPLEMENTATION_ATLAS
+27,"Migration Seed Data and Reconciliation","Adaptive onboarding and reconciliation requirements","V0.2 primary document section 27",MAPPED_DESIGN_ONLY
+28,"Engineering Work Packages and Implementation Sequence","ENGINEERING_WORK_PACKAGE_REGISTER.csv","V0.2 primary document section 28",DEFERRED_TO_IMPLEMENTATION_ATLAS
+29,"Acceptance Criteria","ACCEPTANCE_CRITERIA.csv","V0.2 primary document section 29",MAPPED_DOCUMENTARY_ONLY
+30,"Test and Validation Matrix","TEST_MATRIX.csv","V0.2 primary document section 30",MAPPED_NOT_EXECUTED
+31,"Golden-Path Reproduction Scenarios","GOLDEN_PATHS.md","V0.2 primary document section 31",MAPPED_SYNTHETIC_ONLY
+32,"Adversarial Negative and Abuse Scenarios","ADVERSARIAL_SCENARIOS.md","V0.2 primary document section 32",MAPPED_NOT_FRESHLY_REVIEWED
+33,"Evidence Requirements Coverage and Manifest","EVIDENCE_MANIFEST.json; claim register","V0.2 primary document section 33",MAPPED_PACKAGE_FREEZE_PENDING
+34,"Deployment Rollout Rollback and Release Controls","Authority boundary and Platform canon","V0.2 primary document section 34",OUT_OF_SCOPE_FOR_THIS_PIA_PHASE
+35,"Enrollment and Onboarding Readiness","Adaptive onboarding specification; authority boundary","V0.2 primary document section 35",NOT_READY
+36,"Dependencies and Critical Path","DEPENDENCY_REGISTER.csv; program dependency matrix","V0.2 primary document section 36",MAPPED_WITH_BLOCKERS
+37,"Open Decisions Assumptions Findings Deviations and Risks","RISK register; structured findings; omissions","UNRESOLVED_ITEMS_REGISTER.csv",MAPPED_OPEN
+38,"Implementation Drift and As-Built Reconciliation","AS_BUILT_RECONCILIATION.md","V0.2 primary document section 38",NOT_ESTABLISHED
+39,"Change-Control History","CHANGE_CONTROL_LOG.md; correction log","REVISION_CHANGELOG.csv",MAPPED
+40,"Requirement Traceability Matrix","REQUIREMENT_REGISTER.csv; decision traceability","REQUIREMENT_REGISTER.csv",MAPPED
+41,"Five Mandatory Readiness Questions","Absent from predecessor primary document","FIVE_QUESTION_RESPONSE_MATRIX.csv",ADDED_PENDING_REVIEW
+42,"Review Approval Authorization and Disposition","FINAL_STRUCTURED_REVIEW_DISPOSITION.md","V0.2 primary document section 42",BLOCKED
+43,"Maintenance Supersession and Decommissioning","Change controls and records canon","V0.2 primary document section 43",MAPPED_DESIGN_ONLY

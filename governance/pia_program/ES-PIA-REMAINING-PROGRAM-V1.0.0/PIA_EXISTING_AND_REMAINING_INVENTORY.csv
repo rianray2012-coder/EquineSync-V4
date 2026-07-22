@@ -1,0 +1,42 @@
+assessment_domain,classification,portfolio_position,component_or_contract,current_evidence,reason_and_boundary,founder_scope_decision
+Identity and Account,DRAFT_REQUIRES_STRENGTHENING,01,A-B,"Underlying V1.1 design approved; current successor pending fresh review","Identity account actor enrollment and onboarding remain one PIA; current successor is not ratified",NO
+Relationships and Delegated Authority,DRAFT_REQUIRES_STRENGTHENING,03,A,"Underlying design approved; current V1.1 revised candidate and ADRs pending","Component A of Item 03; must remain separate from Identity and is not currently Founder-approved text",NO
+Permissions and Authorization,PARTIAL_PIA,03,B-C,"Authorization interface candidate and locked permission canon exist","Complete inside Item 03; must not become standalone PIAs",NO
+Facility Tenant and Organizational Structure,DRAFT_REQUIRES_STRENGTHENING,02,A-D,"V1.0.1-R3 Founder-decision-incorporated candidate; review blocked","Existing package must be preserved and re-reviewed in compliant runtime",NO
+Horse Lifecycle,REMAINING_PIA_REQUIRED,04,A,"Locked Horse Lifecycle V3.1 and Transfer policy","Distinct canonical entity and lifecycle ownership",NO
+Horse Care and Daily Operations,COVERED_BY_ANOTHER_PIA,07,A,"Barn and Equine Health canons","Core of Care Operations PIA",NO
+Equine Health,COVERED_BY_ANOTHER_PIA,07,A,"Equine Health V1.1 adopted source","Health truth is an authoritative input to Care Operations; not an eleventh PIA",NO
+Medication and Treatment,COVERED_BY_ANOTHER_PIA,07,A,"Equine Health and evidence canons","Care Operations owns operational workflows; clinical authority remains bounded",NO
+Safeguarding and Minor Participants,COVERED_BY_ANOTHER_PIA,08,A,"Safeguarding V1.2 adopted source","Cross-cutting invariant with primary workflow treatment in Item 08",NO
+Lesson and Training Operations,COVERED_BY_ANOTHER_PIA,08,A,"Product and safeguarding sources","Core of Item 08",NO
+Rider and Participant Management,COVERED_BY_ANOTHER_PIA,08,A,"Identity relationship and safeguarding sources","Item 08 workflow scope; identity remains Item 01",NO
+Calendar and Scheduling,COVERED_BY_ANOTHER_PIA,06,A,"MIAP phase and communication/facility sources","Core of Item 06",NO
+Competition Show and Travel Management,REQUIRES_FOUNDER_SCOPE_DECISION,08,"Cross-contract with 04 and 06","No dedicated PIA in locked portfolio","Recommend Item 08 primary workflow ownership with horse and scheduling contracts",YES
+Feed and Nutrition,COVERED_BY_ANOTHER_PIA,07,A,"Care and health sources","Care Operations scope; no separate PIA",NO
+Turnout Stall and Location Management,COVERED_BY_ANOTHER_PIA,07,"Contract with 02","Facility owns location identity; Care owns assignments and execution","Cross-PIA handoff required",NO
+Inventory Tack Equipment and Assets,REQUIRES_FOUNDER_SCOPE_DECISION,02,"Cross-contract with 07","Facility and care ownership overlap","Recommend Item 02 asset identity and Item 07 operational use",YES
+Maintenance and Facility Service Requests,REQUIRES_FOUNDER_SCOPE_DECISION,06,"Cross-contract with 02","Facility topology and task workflow ownership overlap","Recommend Item 06 work-order workflow and Item 02 asset/location truth",YES
+Staff Groom and Workforce Operations,COVERED_BY_ANOTHER_PIA,07,A,"Contracts with 01 and 03","Care Operations owns work execution; identity relationship and permission remain upstream",NO
+Financial Operations Billing and Invoicing,COVERED_BY_ANOTHER_PIA,09,A,"Locked Financial Truth V2.1","Core of Item 09",NO
+Agreements Consent and Authorization,COVERED_BY_ANOTHER_PIA,03,B,"Agreement and authorization canon","Item 03 owns authority contract; consuming domain PIAs own their workflows",NO
+Communication Notices and Messaging,COVERED_BY_ANOTHER_PIA,10,A,"Contract with 06","Item 10 owns owner-facing communication experience; Item 06 coordinates task/schedule notifications",NO
+Claims Incidents Disputes and Restrictions,COVERED_BY_ANOTHER_PIA,03,"B-C","Cross-cutting domain contracts","Item 03 owns authority and restriction contract; incidents remain in originating domain",NO
+Service Provider Network,REQUIRES_FOUNDER_SCOPE_DECISION,03,"Cross-contract with 07 and 10","No eleventh PIA permitted; provider identity relationship operations and portal surfaces cross boundaries","Recommend Item 03 relationship authority; Item 07 care coordination; Item 10 participation surface",YES
+Veterinary Farrier and External Provider Coordination,COVERED_BY_ANOTHER_PIA,07,A,"Contracts with 03;06;10","Care Operations primary; no provider may gain canonical authority",NO
+Reporting Analytics and Business Intelligence,REQUIRES_FOUNDER_SCOPE_DECISION,05,"Cross-cutting reporting contract","Locked reporting canon is a source not a PIA","Recommend domain-owned truth and Item 05 shared presentation/discovery",YES
+Search and Discovery,COVERED_BY_ANOTHER_PIA,05,A,"Locked Search V2.0","Core of Item 05",NO
+Mobile and Offline Operations,NOT_A_PIA,NONE,CROSS_PIA,"Mandatory cross-PIA requirement","Cross-cutting quality and failure behavior; Stage 2A and offline packages are not PIAs",NO
+Integrations and External Systems,NOT_A_PIA,NONE,CROSS_PIA,"Mandatory cross-PIA contract","Provider-neutral external architecture constrains every PIA; no standalone PIA in locked portfolio",NO
+AI-Assisted Operations,NOT_A_PIA,NONE,CROSS_PIA,"Mandatory cross-PIA boundary","AI cannot create authority or autonomous clinical legal financial or safeguarding conclusions",NO
+Privacy and Data Handling,NOT_A_PIA,NONE,CROSS_PIA,"Mandatory cross-PIA boundary","Locked privacy and data-protection canons constrain every PIA",NO
+Audit Evidence and Record Stewardship,NOT_A_PIA,NONE,CROSS_PIA,"Mandatory cross-PIA boundary","Locked audit evidence and stewardship canons constrain every PIA",NO
+Configuration and Feature Management,NOT_A_PIA,NONE,CROSS_PIA,"Mandatory cross-PIA boundary","Configuration canon constrains implementation choices; it is not a PIA",NO
+Platform Administration,COVERED_BY_ANOTHER_PIA,05,A,"Cross-contract with all domains","Shared administration surface belongs to shell; domain authority stays with source PIA",NO
+Onboarding and Adaptive Entity Creation,COVERED_BY_ANOTHER_PIA,01,C,"Contract with 02","Item 01 owns onboarding; Facility decisions prohibit unnecessary Facility or Organization creation",NO
+Horse Identity Profile and Lifecycle,REMAINING_PIA_REQUIRED,04,A,"Controlling ten-item position","Canonical remaining PIA title consolidates the Horse Lifecycle assessment",NO
+Core Navigation Search and Application Shell,REMAINING_PIA_REQUIRED,05,A,"Controlling ten-item position","Shared product surface after source domains stabilize",NO
+Task Calendar Scheduling and Notification,REMAINING_PIA_REQUIRED,06,A,"Controlling ten-item position","Coordinated work and time workflow owner",NO
+Care Operations,REMAINING_PIA_REQUIRED,07,A,"Controlling ten-item position","Consolidates daily care health feed turnout and provider coordination workflows",NO
+Lessons Training Rider and Guardian,REMAINING_PIA_REQUIRED,08,A,"Controlling ten-item position","Consolidates participation training and safeguarding-sensitive workflows",NO
+Billing Payments and Financial Operations,REMAINING_PIA_REQUIRED,09,A,"Controlling ten-item position","Financial workflow owner subordinate to Financial Truth V2.1",NO
+Owner Portal and Communications,REMAINING_PIA_REQUIRED,10,A,"Controlling ten-item position","Owner-facing participation and communication experience",NO

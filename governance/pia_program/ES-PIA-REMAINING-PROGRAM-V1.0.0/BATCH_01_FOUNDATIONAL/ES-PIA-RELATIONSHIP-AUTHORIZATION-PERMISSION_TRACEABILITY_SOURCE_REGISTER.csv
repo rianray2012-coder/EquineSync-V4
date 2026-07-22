@@ -1,0 +1,8 @@
+source_id,authority,status,locator,use,prohibited_use
+RAP-SRC-001,PIA_STANDARD,ADOPTED_EFFECTIVE,"ES-PIA-MASTER-STANDARD-V1.1","Template lifecycle readiness and evidence rules","Cannot authorize implementation"
+RAP-SRC-002,LOCKED_CANON,ADOPTED_LOCKED,docs/canon/MASTER_RELATIONSHIP_MODEL.md,"Relationship and delegation truth","Cannot grant permission by itself"
+RAP-SRC-003,LOCKED_CANON,ADOPTED_LOCKED,docs/canon/adopted_sources/MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_V1_1_ADOPTED_SOURCE.md,"Permission decision and access-control authority","Cannot create identity relationship or agreement truth"
+RAP-SRC-004,LOCKED_CANON,ADOPTED_AND_LOCKED,docs/canon/adoptions/c0_019_agreement_consent_authorization_v2_1/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1_ADOPTED_PRE_LOCK.md,"Agreement consent authorization source facts","Cannot replace Item 03 workflow and interface design"
+RAP-SRC-005,UNDERLYING_PIA,FOUNDER_APPROVED_DESIGN,"Frozen Relationships PIA V1.1.0 in ES-REM-2026-001 predecessor ZIP","Component A provenance","Cannot approve current successor"
+RAP-SRC-006,SUCCESSOR_CANDIDATE,PENDING_FRESH_REVIEW,governance/founder_authorized_remediation/identity_relationships/ES-REM-2026-001,"Candidate ADRs contracts and remediation","Cannot be represented as ratified"
+RAP-SRC-007,AUTHORIZATION_INTERFACE,PROPOSED_NOT_APPROVED,governance/founder_authorized_remediation/identity_relationships/ES-REM-2026-001/candidate_contracts/AUTHORIZATION_INTERFACE_PIA_CANDIDATE.md,"Bounded interface requirements","Cannot substitute for full Component B/C completion"

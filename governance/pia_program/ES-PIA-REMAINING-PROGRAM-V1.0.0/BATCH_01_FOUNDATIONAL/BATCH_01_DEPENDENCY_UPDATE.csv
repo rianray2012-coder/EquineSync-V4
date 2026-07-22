@@ -1,0 +1,6 @@
+dependency_id,prior_state,current_state,change,downstream_effect
+DEP-004,CURRENT_SUCCESSOR_REVIEW_PENDING,CURRENT_SUCCESSOR_REVIEW_PENDING,"No lifecycle change","Item 02 retains qualified Identity dependency"
+DEP-005,CURRENT_SUCCESSOR_REVIEW_PENDING,CURRENT_SUCCESSOR_REVIEW_PENDING,"No lifecycle change","Item 03 completion cannot treat successor as approved"
+DEP-006,FACILITY_REVIEW_BLOCKED,FACILITY_V0_2_CONFORMANCE_CANDIDATE_CREATED_REVIEW_BLOCKED,"Canonical structure and five questions mechanically corrected in a separate candidate","Facility approval remains blocked pending qualified fresh review and Item 03 contract reconciliation"
+DEP-007,PARTIAL_COMPONENTS_B_C,INTEGRATED_A_B_C_V0_1_INITIAL_DRAFT_REVIEW_BLOCKED,"One canonical 43-section initial review object created; detailed registers and review remain incomplete","All dependent PIAs retain explicit TBD predecessor authority until qualified review and bounded revision"
+DEP-025,UNAVAILABLE_CURRENT_RUNTIME,UNAVAILABLE_CURRENT_RUNTIME,"New program permission records confirm the same fail-closed condition","No formal review role may start"

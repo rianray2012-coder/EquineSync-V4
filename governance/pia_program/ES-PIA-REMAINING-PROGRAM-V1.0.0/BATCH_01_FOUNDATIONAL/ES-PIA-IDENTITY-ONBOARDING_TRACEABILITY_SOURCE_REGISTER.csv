@@ -1,0 +1,6 @@
+source_id,authority,status,locator,use,prohibited_use
+ID-SRC-001,PIA_STANDARD,ADOPTED_EFFECTIVE,"ES-PIA-MASTER-STANDARD-V1.1","Template lifecycle readiness and evidence rules","Cannot authorize implementation"
+ID-SRC-002,LOCKED_CANON,ADOPTED_LOCKED,docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0.md,"Identity account and actor truth","Cannot create relationship or permission"
+ID-SRC-003,UNDERLYING_PIA,FOUNDER_APPROVED_DESIGN,"Frozen Identity PIA V1.1.0 in ES-REM-2026-001 predecessor ZIP","Approved design provenance","Cannot approve current successor text"
+ID-SRC-004,SUCCESSOR_CANDIDATE,PENDING_FRESH_REVIEW,governance/founder_authorized_remediation/identity_relationships/ES-REM-2026-001,"Candidate corrections and cross-contracts","Cannot be represented as ratified"
+ID-SRC-005,CROSS_CUTTING_CANONS,STATE_QUALIFIED,"Privacy; Safeguarding; Records; Audit; Claims; Agreement; Relationship; Permission","Mandatory constraints and interfaces","Cannot be collapsed into Identity ownership"

@@ -1,0 +1,28 @@
+entity,from_state,to_state,required_evidence,required_controls,automatic,decision_ids
+Tenant,DRAFT,PENDING_VERIFICATION,tenant profile and steward assertion,actor attribution; audit,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,PENDING_VERIFICATION,ACTIVE,verification outcome,Founder-approved design and later authorized implementation workflow,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,ACTIVE,RESTRICTED,scoped restriction basis,notice handoff; job/search/offline enforcement,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,ACTIVE,SUSPENDED,suspension authority and reason,immediate fail-closed enforcement; evidence preservation,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,SUSPENDED,ACTIVE,reviewed restoration evidence,fresh context and permission reevaluation,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,ACTIVE,WIND_DOWN,closure plan,dependency register and communications handoff,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,WIND_DOWN,CLOSED,reconciliation completion,no ordinary activity; records retained,FALSE,FAC-FD-007;FAC-FD-008
+Tenant,CLOSED,ARCHIVED,retention classification,historical resolvability,FALSE,FAC-FD-007;FAC-FD-008
+Facility,DRAFT,VERIFIED,identity/location verification,provenance and duplicate review,FALSE,FAC-FD-007;FAC-FD-008
+Facility,VERIFIED,ACTIVE,operational activation evidence,separate implementation authority required,FALSE,FAC-FD-007;FAC-FD-008
+Facility,ACTIVE,PARTIALLY_RESTRICTED,affected-area restriction,topology-specific invalidation,FALSE,FAC-FD-007;FAC-FD-008
+Facility,ACTIVE,SUSPENDED,facility-wide restriction basis,tenant associations reevaluated,FALSE,FAC-FD-007;FAC-FD-008
+Facility,SUSPENDED,ACTIVE,reviewed restoration evidence,freshness and safety verification,FALSE,FAC-FD-007;FAC-FD-008
+Facility,ACTIVE,CLOSED,closure and continuity plan,no silent downstream transfer,FALSE,FAC-FD-007;FAC-FD-008
+Facility,CLOSED,DECOMMISSIONED,physical decommission evidence,credentials/devices/maps revoked,FALSE,FAC-FD-007;FAC-FD-008
+Facility,DECOMMISSIONED,ARCHIVED,retention classification,historical resolvability,FALSE,FAC-FD-007;FAC-FD-008
+Organization,DRAFT,PENDING_VERIFICATION,organization assertion,identity and duplicate review,FALSE,FAC-FD-007;FAC-FD-008
+Organization,PENDING_VERIFICATION,ACTIVE,verification evidence,actor authority remains external,FALSE,FAC-FD-007;FAC-FD-008
+Organization,ACTIVE,RESTRICTED,scoped restriction basis,tenant controls reevaluated,FALSE,FAC-FD-007;FAC-FD-008
+Organization,ACTIVE,SUSPENDED,suspension authority,no implicit identity deletion,FALSE,FAC-FD-007;FAC-FD-008
+Organization,SUSPENDED,ACTIVE,reviewed restoration evidence,relationships and permissions reevaluated,FALSE,FAC-FD-007;FAC-FD-008
+Organization,ACTIVE,WIND_DOWN,restructuring/closure plan,cross-domain reconciliation,FALSE,FAC-FD-007;FAC-FD-008
+Organization,WIND_DOWN,CLOSED,completion evidence,historical identity preserved,FALSE,FAC-FD-007;FAC-FD-008
+Organization,CLOSED,ARCHIVED,retention classification,no ordinary authority,FALSE,FAC-FD-007;FAC-FD-008
+OnboardingJourney,PURPOSE_CAPTURED,HORSE_FIRST_READY,individual-owner purpose and minimum Tenant context,Facility/Organization optional; authority_conferred=false; audit,FALSE,FAC-FD-017
+OnboardingJourney,HORSE_FIRST_READY,FACILITY_ASSOCIATED,real Facility relationship assertion,temporal scope; permission separate; reversible history,FALSE,FAC-FD-004;FAC-FD-017
+OnboardingJourney,HORSE_FIRST_READY,ORGANIZATION_ASSOCIATED,real Organization assertion and relationship evidence,no inferred access; prior history preserved,FALSE,FAC-FD-003;FAC-FD-017

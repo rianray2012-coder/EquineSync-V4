@@ -1,0 +1,10 @@
+ewp_id,title,scope,requirement_ids,status,authorization
+FAC-EWP-001,Canonical Tenant/Facility/Organization persistence design,"Identifiers, constraints, temporal associations, lifecycle and lineage",FAC-REQ-001..007;FAC-REQ-038,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE
+FAC-EWP-002,Context-bound authorization contract,"Server context binding, visible selection, versioning, switch audit",FAC-REQ-003;FAC-REQ-011..016;FAC-REQ-030,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE
+FAC-EWP-003,Topology and lifecycle services,"Hierarchy, restriction, transfer, merge, split, close and archive",FAC-REQ-006;FAC-REQ-007;FAC-REQ-021..029;FAC-REQ-038,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE
+FAC-EWP-004,Tenant-safe search and public projection,"Segmentation, public projection, location privacy, anti-enumeration",FAC-REQ-017..020;FAC-REQ-033;FAC-REQ-039,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE
+FAC-EWP-005,Legacy quarantine and reconciliation,"Source snapshots, candidate mapping, review, promotion and rollback",FAC-REQ-024;FAC-REQ-026;FAC-REQ-027;FAC-REQ-034,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE
+FAC-EWP-006,"Offline, suspension and recovery controls","Revocation, stale bundles, job stop, restore reconciliation",FAC-REQ-014;FAC-REQ-015;FAC-REQ-029;FAC-REQ-032;FAC-REQ-033,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE
+FAC-EWP-007,As-built compatibility migration plan,barn/users/account_memberships mapping and access-delta evidence,FAC-REQ-034,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE
+FAC-EWP-008,Documentary and executable assurance suite,"Golden paths, adversarial isolation, lifecycle, support and reconciliation tests",FAC-REQ-001..055,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE
+FAC-EWP-009,Adaptive onboarding design implementation,"Horse-first paths, progressive disclosure, optional Facility/Organization association, reversible non-authority-bearing seeds",FAC-REQ-041..048,DRAFT_BLOCKED_NOT_AUTHORIZED,FALSE

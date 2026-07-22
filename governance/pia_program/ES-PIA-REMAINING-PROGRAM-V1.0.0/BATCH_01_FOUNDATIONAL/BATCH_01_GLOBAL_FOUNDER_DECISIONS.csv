@@ -1,0 +1,4 @@
+decision_id,applies_to_batch,priority,recommendation_status,gate_effect
+ES-PIA-GFD-007,01,1,RECOMMENDED_NOT_APPROVED,"Blocks every formal review role and readiness claim"
+ES-PIA-GFD-002,01_AND_03,5,RECOMMENDED_NOT_APPROVED,"Blocks final asset and maintenance ownership across Items 02 06 and 07"
+ES-PIA-GFD-003,01_AND_04,6,RECOMMENDED_NOT_APPROVED,"Blocks final provider-network contracts across Items 03 07 and 10"

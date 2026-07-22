@@ -1,0 +1,7 @@
+change_id,source_artifact,target_location,change_type,description,authority_effect,status
+FAC-V02-CH-001,"Facility V1.0.1 primary document","Sections 1-43",STRUCTURAL_CONFORMANCE,"Reorganized inherited design content under every canonical V1.1 section without modifying predecessor bytes",NONE,COMPLETED
+FAC-V02-CH-002,"PIA Master Standard V1.1 section 44","Section 41 and FIVE_QUESTION_RESPONSE_MATRIX.csv",READINESS_CONFORMANCE,"Added all five exact active questions with evidence-qualified answers and explicit blockers",NONE,COMPLETED
+FAC-V02-CH-003,"Current Founder directive","Header and active terminology",TERMINOLOGY,"Applied MIAP in active text while preserving source lineage separately",NONE,COMPLETED
+FAC-V02-CH-004,"Facility R3 source and requirements","SOURCE_REGISTER.csv and REQUIREMENT_REGISTER.csv",TRACEABILITY,"Created validator-compatible crosswalks to exact predecessor sources and all 55 requirements",NONE,COMPLETED
+FAC-V02-CH-005,"Batch 01 findings","FINDING_DISPOSITION_MATRIX.csv",FINDING_DISPOSITION,"Partially corrected template defect; retained runtime and predecessor blockers",NONE,COMPLETED_PENDING_REVIEW
+FAC-V02-CH-006,"Cross-PIA overlap inventory","FOUNDER_DECISION_REGISTER.csv",DECISION_EXTRACTION,"Extracted asset ownership and qualified runtime decisions with recommendations",NONE,RECOMMENDED_NOT_APPROVED

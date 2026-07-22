@@ -1,0 +1,7 @@
+finding_id,severity,source,disposition,correction,founder_approval_required,review_required
+B01-F-001,P1_MATERIAL,BATCH_01_CROSS_PIA_FINDINGS.csv,PARTIALLY_CORRECTED,"Created 43-section primary candidate exact five questions and compatible registers; independent conformance review still required",FALSE,TRUE
+B01-F-002,P1_MATERIAL,BATCH_01_CROSS_PIA_FINDINGS.csv,BLOCKED_BY_SOURCE,"No formal role started; new runtime decision preserved",TRUE,TRUE
+B01-F-003,P1_MATERIAL,BATCH_01_CROSS_PIA_FINDINGS.csv,BLOCKED_BY_PREDECESSOR_AUTHORITY,"Item 03 dependency stated without inventing Component B/C answers",FALSE,TRUE
+B01-F-004,P1_MATERIAL,BATCH_01_CROSS_PIA_FINDINGS.csv,RETAINED_WITH_RATIONALE,"Current Item 01/03 successor status is repeated and not promoted",FALSE,TRUE
+B01-F-005,P2_STRENGTHENING,BATCH_01_CROSS_PIA_FINDINGS.csv,CORRECTED,"Active terminology uses MIAP with exact-source evidence kept separate",FALSE,TRUE
+B01-F-006,FOUNDER_DECISION_REQUIRED,BATCH_01_CROSS_PIA_FINDINGS.csv,ESCALATED_TO_FOUNDER,"Facility-relevant asset allocation extracted as ES-PIA-GFD-002",TRUE,TRUE

@@ -1,0 +1,8 @@
+item_id,type,description,owner,required_action,blocks,disposition
+FAC-UNR-001,FOUNDER_DECISION,"Asset identity use maintenance and service-request allocation",Founder,"Resolve ES-PIA-GFD-002",PIA_APPROVAL,RECOMMENDED_NOT_APPROVED
+FAC-UNR-002,RUNTIME,"Qualified fresh-review runtime unavailable",Founder and runtime operator,"Resolve ES-PIA-GFD-007 and record PASS before every role",FRESH_REVIEW,OPEN
+FAC-UNR-003,PREDECESSOR_AUTHORITY,"Item 03 Authorization and Permission components incomplete",Item 03 owner,"Complete integrated Item 03 package and cross-contract",PIA_APPROVAL,OPEN
+FAC-UNR-004,PREDECESSOR_REVIEW,"Current Identity and Relationships successor not ratified",Item 01 and 03 owners,"Run qualified fresh review and obtain applicable Founder action",PIA_APPROVAL,OPEN
+FAC-UNR-005,REVIEW_FINDINGS,"Carried P1 4 P2 2 P3 1 not freshly reassessed",Qualified reviewers,"Reassess against frozen V0.2 package",FOUNDER_DESIGN_REVIEW,OPEN
+FAC-UNR-006,IMPLEMENTATION,"As-built environments fixtures monitors support and recovery evidence absent",Future authorized implementation owners,"Address only under separate implementation authority",READINESS,DEFERRED_TO_IMPLEMENTATION_ATLAS
+FAC-UNR-007,SOURCE_VERIFICATION,"Quantitative SLO device data-volume retention and recovery targets not established in this PIA source set",Founder and source owners,"Provide or approve exact targets in later controlled lifecycle",IMPLEMENTATION_AND_READINESS,TBD_SOURCE_VERIFICATION

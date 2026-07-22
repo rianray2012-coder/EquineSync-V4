@@ -1,0 +1,13 @@
+check_id,check,result,evidence,limitation
+FAC-COMP-001,"All 43 canonical sections present",PASS,"V0.2 primary document headings 1-43","Independent review pending"
+FAC-COMP-002,"Five exact active readiness questions present",PASS,"Section 41 and FIVE_QUESTION_RESPONSE_MATRIX.csv","Answers include blockers and are not approval"
+FAC-COMP-003,"Authoritative sources identified",PASS,"SOURCE_REGISTER.csv","Later source changes require revalidation"
+FAC-COMP-004,"Requirements traceable",PASS,"55-row transformed REQUIREMENT_REGISTER.csv","Implementation evidence absent"
+FAC-COMP-005,"Acceptance criteria and tests present",PASS,"55 acceptance criteria and 85 design tests","Not executed"
+FAC-COMP-006,"Founder decisions extracted with recommendations",PASS,"FOUNDER_DECISION_REGISTER.csv and RECOMMENDED_FOUNDER_ANSWERS.md","RECOMMENDED_NOT_APPROVED"
+FAC-COMP-007,"Predecessor evidence preserved",PASS,"No changes outside new program directory","Git verification required at freeze"
+FAC-COMP-008,"Fresh critical review complete",FAIL,"PROGRAM_RUNTIME_PERMISSION_RECORDS.csv","Formal roles not started"
+FAC-COMP-009,"No unresolved P0",NOT_REASSESSED,"Carried P0 count 0","Fresh review unavailable"
+FAC-COMP-010,"P1 corrected or escalated",PARTIAL,"FINDING_DISPOSITION_MATRIX.csv","Four carried P1s await fresh reassessment"
+FAC-COMP-011,"Validation passes",PASS_WITH_DISCLOSED_SUBORDINATE_VALIDATOR_CONFLICT,"VALIDATION_REPORT.md; validate_facility_conformance.py","Mechanical validation only; independent review unavailable"
+FAC-COMP-012,"Implementation remains unauthorized",PASS,"Header and sections 28 34 42","No code schema migration deployment or enrollment"

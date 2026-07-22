@@ -1,0 +1,17 @@
+overlap_id,domain_a,domain_b,shared_concern,owner_a,owner_b,required_handoff,status
+OV-001,01,03,Identity versus authority,"01 owns identity account actor","03 owns relationship authorization permission","Stable principal IDs and attributed relationship/permission decisions",DEFINED_PENDING_SUCCESSOR_REVIEW
+OV-002,02,03,Context versus authority,"02 owns tenant facility organization topology","03 owns authority and permission","Context is an input and never grants authority",DEFINED_PENDING_FACILITY_AND_ITEM03_REVIEW
+OV-003,02,04,Horse location and custody,"02 owns location identity","04 owns horse lifecycle and custody evidence","Location references do not establish custody or ownership",DRAFT_REQUIRED
+OV-004,02,07,Stall turnout and asset use,"02 owns topology and proposed asset identity","07 owns care assignment and execution","Versioned location/asset references and correction behavior",FOUNDER_ALLOCATION_PENDING
+OV-005,03,07,Care authority,"03 owns authorization and permission","07 owns care workflow","Initiate approve perform view correct revoke and emergency contract",DRAFT_REQUIRED
+OV-006,03,08,Guardian and participant authority,"03 owns relationship and delegation truth","08 owns lesson/training workflow","Guardian consent restriction revocation and safeguarding projection",DRAFT_REQUIRED
+OV-007,04,07,Horse versus care record,"04 owns horse identity/lifecycle","07 owns care records and events","Stable horse reference and lifecycle eligibility",DRAFT_REQUIRED
+OV-008,04,08,Horse versus participation,"04 owns horse state","08 owns participant workflow","Eligibility restrictions and evidence projection",DRAFT_REQUIRED
+OV-009,06,07,Care scheduling,"06 owns task/calendar state","07 owns care trigger and outcome","Idempotent task handoff offline ordering completion and correction",DRAFT_REQUIRED
+OV-010,06,08,Lesson scheduling,"06 owns task/calendar state","08 owns lesson/training rules","Booking cancellation waitlist guardian notice and evidence",DRAFT_REQUIRED
+OV-011,06,10,Notification versus communication,"06 owns trigger and orchestration","10 owns user-facing communication experience","Recipient channel delivery acknowledgment escalation and evidence",DRAFT_REQUIRED
+OV-012,03,09,Authority versus payment,"03 owns authority","09 owns money workflow","Payment and billing status never create access or authority",DEFINED_CANONICALLY
+OV-013,07,09,Care service versus charge,"07 owns service evidence","09 owns invoice/payment evidence","No charge without attributable service and agreement basis",DRAFT_REQUIRED
+OV-014,08,09,Lesson service versus charge,"08 owns lesson outcome","09 owns invoice/payment evidence","Cancellation credit dispute and guardian/payer separation",DRAFT_REQUIRED
+OV-015,All,05,Domain truth versus shell,"Each PIA owns domain truth","05 owns shared presentation","Permission-filtered projections with source and freshness disclosure",FOUNDER_ANALYTICS_ALLOCATION_PENDING
+OV-016,03;07,10,Provider network participation,"03 owns provider relationship authority; 07 owns care coordination","10 owns participation surface","No provider gains canonical authority through portal or integration",FOUNDER_ALLOCATION_PENDING

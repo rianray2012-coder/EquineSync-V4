@@ -1,0 +1,7 @@
+source_id,authority,status,locator,use,prohibited_use
+FAC-SRC-001,PIA_STANDARD,ADOPTED_EFFECTIVE,"ES-PIA-MASTER-STANDARD-V1.1","Template lifecycle readiness and evidence rules","Cannot overwrite earlier evidence"
+FAC-SRC-002,FOUNDER_DECISIONS,APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED,"Facility V1.0.1 source_evidence/FOUNDER_DIRECTIVE_FAC_FD_001_THROUGH_FAC_FD_018.md","FAC-FD-001 through FAC-FD-018 and adaptive onboarding","Cannot authorize code schema migration or enrollment"
+FAC-SRC-003,LOCKED_CANON,ADOPTED_LOCKED,docs/canon/adopted_sources/MASTER_FACILITY_DOMAIN_MODEL_V2_1_ADOPTED_SOURCE.md,"Facility identity lifecycle and topology","Cannot grant permission"
+FAC-SRC-004,LOCKED_CANON,ADOPTED_LOCKED,docs/canon/adopted_sources/MASTER_BARN_LIFECYCLE_V3_1_ADOPTED_SOURCE.md,"Barn operations and lifecycle inputs","Cannot replace Facility PIA"
+FAC-SRC-005,EXISTING_PIA_CANDIDATE,NOT_ADOPTED,"governance/pia/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE","Current design and registers","Cannot be represented as reviewed or approved"
+FAC-SRC-006,REVIEW_EVIDENCE,BLOCKED,"governance/founder_orchestrated_review/review_cycles/ES-REV-2026-022","Permission failure and carried findings","Cannot establish substantive correctness"

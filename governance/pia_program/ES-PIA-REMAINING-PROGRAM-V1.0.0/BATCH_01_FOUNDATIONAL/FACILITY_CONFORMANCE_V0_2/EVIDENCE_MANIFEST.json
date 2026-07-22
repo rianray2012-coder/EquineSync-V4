@@ -1,0 +1,283 @@
+{
+  "adopted": false,
+  "exact_review_input": {
+    "bytes_unchanged_before_review": true,
+    "commit": "56b0a88722d983e05baec0d3b1ea5b7b88c24001",
+    "file_count": 66,
+    "manifest_sha256": "fc9ea834472aa603ebebe099b2270a091ce8af72a736bb6183a2066e42c81527",
+    "tree": "a60e900c2d0eef17c1f1b8a98f01f5ff1e30647d"
+  },
+  "formal_review_valid": false,
+  "founder_decision_disposition": "FAC-FD-001_THROUGH_FAC-FD-018_FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED",
+  "fresh_review_authorization": {
+    "preservation": "external Codex attachment; digest recorded in REVIEW_AUTHORIZATION.md",
+    "sha256": "7c49bf8157d8c3bf3966d1669a3719de54bdf7ad195e1cfd5edfc94a38a529c6"
+  },
+  "implementation_activity": false,
+  "implementation_authority": false,
+  "locked": false,
+  "original_relied_source_count": 39,
+  "original_relied_sources_verified": 39,
+  "package_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE",
+  "package_revision": "1.0.1-R3",
+  "permission_gate": {
+    "fail": 6,
+    "pass": 0,
+    "records": 6,
+    "roles_started": 0
+  },
+  "review_cycle_id": "ES-REV-2026-022",
+  "review_disposition": "FACILITY_PIA_REVIEW_BLOCKED_BY_RUNTIME_PERMISSION_FAILURE",
+  "schema": "equinesync.pia-evidence-manifest.v1",
+  "sealed_source_modifications": 0,
+  "source_count": 41,
+  "sources": [
+    {
+      "path": "governance/founder_authorized_remediation/identity_relationships/ES-REM-2026-001/source_evidence/controlling/EquineSync_Product_Implementation_Atlas_Master_Standard_V1_1.pdf",
+      "sha256": "c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc",
+      "source_id": "SRC-001",
+      "status": "FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE"
+    },
+    {
+      "path": "governance/founder_authorized_remediation/identity_relationships/ES-REM-2026-001/source_evidence/adoption/Founder_Adoption_and_Approval_Record_ES_PIA_Master_Standard_V1_1.pdf",
+      "sha256": "bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8",
+      "source_id": "SRC-002",
+      "status": "FOUNDER_APPROVED_ADOPTED_AND_EFFECTIVE"
+    },
+    {
+      "path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_LOCK_CERTIFICATE.json",
+      "sha256": "3dc9ae1d4cdd331c75fdc5883ea59d5d70243704ce13911ffe2da1d60f201f2f",
+      "source_id": "SRC-003",
+      "status": "LOCKED"
+    },
+    {
+      "path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_SCOPE.md",
+      "sha256": "6f46803d8074ba530a042f34f4c1f9f4dc31bd61dc83bbec811e758605182b52",
+      "source_id": "SRC-004",
+      "status": "LOCKED_BASELINE_COMPONENT"
+    },
+    {
+      "path": "docs/canon/CANON_INDEX.md",
+      "sha256": "4fa4e10369389728aa9116d9cfeece59b468a8dfe62f0a2088141a52a101ea4a",
+      "source_id": "SRC-005",
+      "status": "ACTIVE_GOVERNANCE_INDEX_WITH_RETAINED_HISTORICAL_TEXT"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_FACILITY_DOMAIN_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "sha256": "8323b8402c3d445fe2b8d363caf16bb2a8eb4e08b0b37bd36b90ee69092a698d",
+      "source_id": "SRC-006",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adoptions/c0_014_facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_ADOPTION_RECORD.md",
+      "sha256": "a95033f85b8efae4c39aa8e608cbc1122d67ca6185cb47ba56edc98ca531e5d4",
+      "source_id": "SRC-007",
+      "status": "ADOPTED"
+    },
+    {
+      "path": "docs/canon/locks/facility_domain_v2_1/C0_014_MASTER_FACILITY_DOMAIN_MODEL_CONSTITUTIONAL_LOCK_CERTIFICATE.json",
+      "sha256": "d2f2e6ff55ac26e7f5329878df881ada65204ac923eadac733a017710fff5dc3",
+      "source_id": "SRC-008",
+      "status": "LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_BARN_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+      "sha256": "c2a698ca1bbb8dc723ea7ac0270a9f66e8b06d0cbcb01535efefc517b6076d4a",
+      "source_id": "SRC-009",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_BUSINESS_LIFECYCLE_V2_1_ADOPTED_SOURCE.md",
+      "sha256": "a07b0ba2fc6c3c0ce5b9db3f56c5f26fcda8d87e5f4f115a02e19b6b5fb4b37d",
+      "source_id": "SRC-010",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_ECOSYSTEM_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "sha256": "67175779abfe8ff2dee0ff7b1b8c06eee42943052071bbad1f65439c73696d07",
+      "source_id": "SRC-011",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/MASTER_IDENTITY_ACCOUNT_AND_ACTOR_MODEL_V2_0.md",
+      "sha256": "1c79c20a2edd2e7e3907e875679c5871d53c146a226364fb0cc3f956d39f5d0e",
+      "source_id": "SRC-012",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/MASTER_RELATIONSHIP_MODEL.md",
+      "sha256": "f6715f0a02cad2eb8d8eb140d765b7906052c4d6bf3a5a40372c74c5c1e8ba01",
+      "source_id": "SRC-013",
+      "status": "FOUNDER_APPROVED_ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_V1_1_ADOPTED_SOURCE.md",
+      "sha256": "6e3f4160e4166831cfe4f154032ff7648a5a44b70762289252c615e98b899fa3",
+      "source_id": "SRC-014",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/founder_approved_sources/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1_FOUNDER_APPROVED.md",
+      "sha256": "1855d7f4419c236e4d8638f9587cf2e96ad58b079d69d34a9b2188ad1ba80cc9",
+      "source_id": "SRC-015",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/founder_approved_sources/MASTER_PRIVACY_AND_DATA_PROTECTION_MODEL_V2_0_FOUNDER_APPROVED.md",
+      "sha256": "8f323e3d4d0782c5aa017c6b904b7c42c9bf4ab8ee72170ea8f7a003505184fd",
+      "source_id": "SRC-016",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2",
+      "source_id": "SRC-017",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1_ADOPTED_SOURCE.md",
+      "sha256": "4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a",
+      "source_id": "SRC-018",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_COMMUNICATION_NOTIFICATION_AND_NOTICE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "bff9fd88cb312d6666677f924a5923134d995015ab6fbfd7a398bcbeb10dc761",
+      "source_id": "SRC-019",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_CLAIMS_DISPUTES_AND_AUTHORITY_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "a4787fb641dca1d28d98f10240957d0b09ea8ee1cee8358f64e80dd658b8b626",
+      "source_id": "SRC-020",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_HORSE_LIFECYCLE_V3_1_ADOPTED_SOURCE.md",
+      "sha256": "41313d11aae592d041decaf34e5a131863423e843057d47864e666bdea21e6bf",
+      "source_id": "SRC-021",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/MASTER_HORSE_TRANSFER_AND_CONTINUITY_POLICY.md",
+      "sha256": "a54fd42261d99819f26ac77a6e207f121049a3c4f6d2e69e3b6e7b5167435c6b",
+      "source_id": "SRC-022",
+      "status": "FOUNDER_APPROVED_ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_PLATFORM_OPERATIONS_RELIABILITY_AND_RELEASE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "bb1eae9fecf46403d05a91bf802d7ef4134ed11c22bf57b1092fb14229413596",
+      "source_id": "SRC-023",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_CONFIGURATION_AND_FEATURE_FLAG_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "d5e37ac7d475465f9c8fac5171851a136882cf4c57cb75ea0b17cf8dcec2a0f8",
+      "source_id": "SRC-024",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_PLATFORM_RESILIENCE_BACKUP_AND_RECOVERY_OPERATIONAL_MODEL_V1_0_ADOPTED_SOURCE.md",
+      "sha256": "9a75d2d0984c929afd6df3d51f3f6135c57443ea34a0205395325f1413095565",
+      "source_id": "SRC-025",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_SECURITY_INCIDENT_RESPONSE_AND_DISCLOSURE_MODEL_V1_0_ADOPTED_SOURCE.md",
+      "sha256": "3dafa7991acc40eb321cdfeae5b9caa59dbf0a41f5184bee36ec9defb0b59734",
+      "source_id": "SRC-026",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_SEARCH_DISCOVERY_RANKING_AND_RETRIEVAL_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "18ce9cde3f1ac8f8b01bfc72ed8dfcf066cd6434a1e1b3f0c40bfe127958ca67",
+      "source_id": "SRC-027",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/MASTER_EXTERNAL_ARCHITECTURE_AND_ADAPTER_MODEL_V2_0.md",
+      "sha256": "0cdad90cb5929588ee137e9835f6b499c3651159381960fbfad436dfcd0fa18d",
+      "source_id": "SRC-028",
+      "status": "FOUNDER_APPROVED_ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_DEVELOPER_PLATFORM_AND_INTEGRATION_GOVERNANCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "sha256": "6688f58a9fcfbe55eb22d4e87a77bda7bf95899c4d46d9c11aecb18f26eb546e",
+      "source_id": "SRC-029",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0_ADOPTED_SOURCE.md",
+      "sha256": "0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba",
+      "source_id": "SRC-030",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "docs/canon/adopted_sources/MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md",
+      "sha256": "83ed4cae3d88e8f9921f8bed971ac9e4c49007c5f847aa704ce4eecae814bdbd",
+      "source_id": "SRC-031",
+      "status": "ADOPTED_AND_LOCKED"
+    },
+    {
+      "path": "backend/core/account_memberships.py",
+      "sha256": "0bbd6db0552ecf2746aa443e91c0320fb6a953930b267b9bdef0a6126859dc6e",
+      "source_id": "SRC-032",
+      "status": "AS_BUILT_EVIDENCE_NOT_HIGHER_AUTHORITY"
+    },
+    {
+      "path": "backend/routes/barns.py",
+      "sha256": "928d1a9def8f8fc89bb15b095a262651be810b07bd21ae311c1fd5e8e4ec7f5a",
+      "source_id": "SRC-033",
+      "status": "AS_BUILT_EVIDENCE_NOT_HIGHER_AUTHORITY"
+    },
+    {
+      "path": "docs/implementation/W1_RF01/W1_RF01_TENANT_AND_FACILITY_ISOLATION_REPORT.md",
+      "sha256": "e983ebfa564495c5126c69d1aa86ec10fefb2755a1cb38278deb560448f86ea8",
+      "source_id": "SRC-034",
+      "status": "AS_BUILT_ASSESSMENT_NOT_IMPLEMENTATION_AUTHORITY"
+    },
+    {
+      "path": "governance/pia/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0/source_evidence/FACILITY_PIA_SCOPE_AND_BOUNDARY_SEED.md",
+      "sha256": "d01b40bf393a4dfab7e78dee321c55a9f01613e07e405a6a417d411a7d540f08",
+      "source_id": "SRC-035",
+      "status": "FOUNDER_DIRECTED_SEED_NO_IMPLEMENTATION_AUTHORITY"
+    },
+    {
+      "path": "governance/pia/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0/source_evidence/FACILITY_PIA_FOUNDER_DECISION_REGISTER_SEED.csv",
+      "sha256": "c4b23a91fb9681e95a58fd8e82563414b3fbef9f92a2d24af3e9ae8780d72b45",
+      "source_id": "SRC-036",
+      "status": "FOUNDER_DIRECTED_OPEN_QUESTIONS"
+    },
+    {
+      "path": "governance/pia/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0/source_evidence/CURRENT_PIA_APPROVAL_STATUS.md",
+      "sha256": "8abfbe0b1be12fcdd9d488659ca68f691e92da47bce1291176791d709baf237e",
+      "source_id": "SRC-037",
+      "status": "PASS_PACKAGE_COMPLETE_PENDING_FRESH_SEGREGATED_REVIEW"
+    },
+    {
+      "path": "governance/pia/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.0/source_evidence/HANDOFF_PACKAGE_MANIFEST.json",
+      "sha256": "bb348cc18cdfcf23702bf2e34c8d8d0f5c65161cc6b70dff6053e06c59b9163c",
+      "source_id": "SRC-038",
+      "status": "VERIFIED_HANDOFF_EVIDENCE"
+    },
+    {
+      "path": "source_evidence/FOUNDER_DIRECTIVE_FAC_FD_001_THROUGH_FAC_FD_018.md",
+      "sha256": "7bd8fa59f4720f261194f1148f4a0f19665f91700656e0632953e40079438ac4",
+      "source_id": "FAC-SRC-FOUNDER-DIRECTIVE-2026-07-21",
+      "status": "FOUNDER_DECISION_DESIGN_ONLY_AND_REVIEW_AUTHORIZATION"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "c5cdc19b2b23ce4d52ea52898c40e82c76ec90834e746b58fd671f5b5dc426ff",
+      "source_id": "FAC-SRC-AGENTS-AT-FREEZE",
+      "status": "VERIFIED_REPOSITORY_CONTROL"
+    },
+    {
+      "path": "governance/founder_orchestrated_review/RUNTIME_PERMISSION_CONTROL.md",
+      "sha256": "8ab99a6a2440e4205ec46187e553cd58c42d55e2e650b26ed1a4935989086a06",
+      "source_id": "FAC-SRC-RUNTIME-PERMISSION-CONTROL",
+      "status": "VERIFIED_REPOSITORY_CONTROL"
+    }
+  ],
+  "task_a_base_commit": "b8f34aef390c5fec6f942a6253edf6acc9488c44"
+}
