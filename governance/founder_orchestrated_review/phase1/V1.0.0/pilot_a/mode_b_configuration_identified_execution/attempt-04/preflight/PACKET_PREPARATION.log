@@ -1,0 +1,17 @@
+{
+  "result": "PACKETS_PREPARED_WRITABLE_NOT_YET_FROZEN",
+  "runtime_root": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync",
+  "role_packets": [
+    "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02",
+    "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03",
+    "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04",
+    "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05"
+  ],
+  "role_outputs": [
+    "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02",
+    "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03",
+    "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04",
+    "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05"
+  ],
+  "oracle_sha256": "4a862de152e7ba348c5250dc714aa2441f61b786b318112fc3e010de6f201de8"
+}

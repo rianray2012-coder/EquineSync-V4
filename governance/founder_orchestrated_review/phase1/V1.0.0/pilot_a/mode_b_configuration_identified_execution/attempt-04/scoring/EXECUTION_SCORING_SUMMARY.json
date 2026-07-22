@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "roles_required": 4,
+  "role_invocations_attempted": 5,
+  "role_outputs_completed": 4,
+  "roles_qualified": 4,
+  "replay_invocations": 1,
+  "replay_qualified": 1,
+  "initial_schema_transport_failures_preserved": 1,
+  "oracle_defects_detected": 12,
+  "oracle_defect_denominator": 12,
+  "blocking_misses": 0,
+  "severity_accuracy": 0.7391304347826086,
+  "replay_variance_class": "MINOR_NONDISPOSITIVE_VARIANCE",
+  "output_seals": [
+    {
+      "output_directory": "ES-RA-02",
+      "seal_sha256": "4a81a7ca989f9847b8d517c2946deeb42e52c663ecacf143e49f04cb24788b12",
+      "file_count_before_seal": 4
+    },
+    {
+      "output_directory": "ES-RA-02-RETRY-01",
+      "seal_sha256": "1e626e1cc9c9ca7a8fdec56f4d8eaafeb0b12c7a5c4bfe61caa2fc699861f65d",
+      "file_count_before_seal": 6
+    },
+    {
+      "output_directory": "ES-RA-03",
+      "seal_sha256": "fe51c938e23ceaa725d0cb64287d2f97b83eda5d048ed4637513aae9125bfbef",
+      "file_count_before_seal": 5
+    },
+    {
+      "output_directory": "ES-RA-04",
+      "seal_sha256": "aad886c1f7d327f562318b4939932fe0056de5b7d6c5834c61f548c459a46b0f",
+      "file_count_before_seal": 5
+    },
+    {
+      "output_directory": "ES-RA-04-REPLAY-01",
+      "seal_sha256": "cb94ce07d7329ce312f6de0404088930e2b6a1b9c50b77d7c63391ee6a9d766e",
+      "file_count_before_seal": 5
+    },
+    {
+      "output_directory": "ES-RA-05",
+      "seal_sha256": "be7ad0cefd7cfe2847a5c971a1506f9d031139be33c30ece8faff1d1412b5798",
+      "file_count_before_seal": 5
+    }
+  ],
+  "supported_assurance_classification": "PROCEDURALLY_SEGREGATED_INTERNAL_AI_REVIEW",
+  "candidate_disposition_recommendation": "REMEDIATION_REQUIRED_FOUNDER_DECISION_PENDING",
+  "pilot_disposition": "PILOT_A_CONFIGURATION_IDENTIFIED_EXECUTION_VALIDATED_READY_FOR_FOUNDER_REVIEW",
+  "phase_2": "NOT_AUTHORIZED"
+}

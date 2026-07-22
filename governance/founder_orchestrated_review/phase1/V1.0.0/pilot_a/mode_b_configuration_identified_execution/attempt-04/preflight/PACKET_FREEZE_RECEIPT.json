@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-04",
+  "event": "PACKET_AND_ORACLE_FREEZE",
+  "timestamp_utc": "2026-07-22T03:22:44Z",
+  "packet_manifest_sha256": {
+    "ES-RA-02": "ef27ddf92a5e4eaf6597d34cf9caad142d2e29cc81650bb6670676cd6511b34f",
+    "ES-RA-03": "bcddba144543a70a665f998facd7e8e95c4186f97e9b95cde7c16d9d9cb2eb22",
+    "ES-RA-04": "6486182feea52d99beb33652b45dc5fa2c39a6c27e2ac14deb7d0e9de3f7ade0",
+    "ES-RA-05": "d5e03b7b78b4a8187588c86f2f798d5fe71c1d4a2ff7aaf7334280e6ec143250"
+  },
+  "oracle_sha256": "4a862de152e7ba348c5250dc714aa2441f61b786b318112fc3e010de6f201de8",
+  "precondition": "all recorded pre-freeze custody and packet controls passed",
+  "result": "PASS"
+}

@@ -1,0 +1,17 @@
+{
+  "original_execution_id": "ES-PH1-PILOT-A-MB04-ESRA04-RUN-01",
+  "replay_execution_id": "ES-PH1-PILOT-A-MB04-ESRA04-REPLAY-01",
+  "profile_checksum_original": "c3a1bf6e279afd4682bdcc9139bc81880c0616f3ee51fffc4d3c95a416c5f8ab",
+  "profile_checksum_replay": "c3a1bf6e279afd4682bdcc9139bc81880c0616f3ee51fffc4d3c95a416c5f8ab",
+  "input_manifest_sha256": "6486182feea52d99beb33652b45dc5fa2c39a6c27e2ac14deb7d0e9de3f7ade0",
+  "original_finding_count": 10,
+  "replay_finding_count": 10,
+  "material_defect_denominator_reproduced": true,
+  "noted_variance": [
+    "Finding wording and identifiers differ.",
+    "The simulated-secret finding changed from P2_NONBLOCKING to OBSERVATION.",
+    "The environment limitation category changed wording without changing disposition."
+  ],
+  "variance_class": "MINOR_NONDISPOSITIVE_VARIANCE",
+  "replay_valid": true
+}

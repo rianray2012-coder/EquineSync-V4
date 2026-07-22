@@ -1,0 +1,70 @@
+python3: error: couldn't create cache file '/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/xcrun_db-V8kJAo2Z' (errno=Operation not permitted)
+2026-07-21 22:18:43.325 xcodebuild[91697:4966534]  DVTFilePathFSEvents: Failed to start fs event stream.
+python3: error: couldn't create cache file '/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/xcrun_db-fbwp0ukb' (errno=Operation not permitted)
+2026-07-21 22:18:46.893 xcodebuild[91727:4966597]  DVTFilePathFSEvents: Failed to start fs event stream.
+{"actual_credential_path_referenced": false, "argv": ["/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py", "ES-RA-02", "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02", "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02", "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03", "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03", "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv", "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt", "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt", "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"], "assigned_file_sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8", "assigned_output_readback": "ES-RA-02|ASSIGNED_OUTPUT_ONLY", "assigned_output_write": true, "denials": {"hidden_oracle_read": {"denied": true, "errno": 1, "error": "PermissionError", "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv"}, "input_write": {"denied": true, "errno": 1, "error": "PermissionError", "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02/PROHIBITED_INPUT_WRITE.txt"}, "orchestration_read": {"denied": true, "errno": 1, "error": "PermissionError", "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt"}, "sibling_input_read": {"denied": true, "errno": 1, "error": "PermissionError", "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03/ROLE_CANARY.txt"}, "sibling_output_read": {"denied": true, "errno": 1, "error": "PermissionError", "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03/SIBLING_OUTPUT_CANARY.txt"}, "synthetic_credential_read": {"denied": true, "errno": 1, "error": "PermissionError", "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt"}, "unrelated_read": {"denied": true, "errno": 1, "error": "PermissionError", "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"}, "unrelated_write": {"denied": true, "errno": 1, "error": "PermissionError", "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt"}}, "known_answer_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad", "network_disabled_environment": true, "network_probe_performed": false, "own_canary": "ES-PH1-MB04-CANARY-ESRA02-4a91d8c04c6b427e", "own_packet_read": true, "pid": 91679, "ppid": 91654, "probe_id": "A04-STATIC-ROLE-BOUNDARY-ES-RA-02", "provider_or_model_operation_performed": false, "role_id": "ES-RA-02", "schema_version": "1.0.0", "working_directory": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02"}
+
+=== Sandbox denials ===
+(python3) file-read-data /private/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/xcrun_db
+(python3) file-write-create /private/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/xcrun_db-V8kJAo2Z
+(xcodebuild) sysctl-read security.mac.lockdown_mode_state
+(xcodebuild) sysctl-read kern.bootargs
+(xcodebuild) file-read-metadata /System/Cryptexes/OS
+(xcodebuild) sysctl-read kern.iossupportversion
+(xcodebuild) file-read-data /System/Library/CoreServices/SystemVersion.bundle
+(sh) sysctl-read security.mac.lockdown_mode_state
+(sh) sysctl-read kern.bootargs
+(sh) file-read-metadata /System/Cryptexes/OS
+(sh) sysctl-read kern.iossupportversion
+(bash) sysctl-read security.mac.lockdown_mode_state
+(bash) sysctl-read kern.bootargs
+(bash) file-read-metadata /System/Cryptexes/OS
+(bash) sysctl-read kern.iossupportversion
+(bash) sysctl-read kern.ngroups
+(xcodebuild) file-read-data /Library/Developer/PrivateFrameworks/CoreDevice.framework/Versions/A/CoreDevice
+(xcodebuild) file-read-data /Library/Developer/PrivateFrameworks/CoreDevice.framework/Versions/A
+(xcodebuild) file-read-metadata /Library/Developer/PrivateFrameworks/CoreDevice.framework/Versions/A/CoreDevice
+(xcodebuild) mach-lookup com.apple.distributed_notifications@Uv3
+(xcodebuild) mach-lookup com.apple.CoreServices.coreservicesd
+(xcodebuild) mach-lookup com.apple.DiskArbitration.diskarbitrationd
+(xcodebuild) mach-lookup com.apple.FSEvents
+(xcodebuild) file-read-data /private/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/PlugInCache-xcodebuild.xcplugincache
+(xcodebuild) file-write-unlink /private/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/PlugInCache-xcodebuild.xcplugincache
+(xcodebuild) file-read-data /private/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/CachedSpecifications-xcodebuild
+(xcodebuild) file-write-unlink /private/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/CachedSpecifications-xcodebuild
+(xcodebuild) file-write-data /private/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/CachedSpecifications-xcodebuild
+(xcodebuild) mach-lookup com.apple.lsd.mapdb
+(xcodebuild) mach-lookup com.apple.lsd.modifydb
+(xcodebuild) file-read-metadata /System/Library/xpc/extensions.plist
+(xcodebuild) file-read-data /System/Library/ExtensionKit/ExtensionPoints
+(xcodebuild) file-read-data /System/iOSSupport/System/Library/ExtensionKit/ExtensionPoints
+(xcodebuild) file-read-metadata /System/Cryptexes/App
+(xcodebuild) file-read-data /Users/rianray/Library/Preferences/com.apple.LaunchServices/com.apple.LaunchServices.plist
+(xcodebuild) file-read-data /Users/rianray/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
+(xcodebuild) file-read-data /System/Library/CoreServices/SystemFolderLocalizations
+(xcodebuild) file-read-metadata /Users/rianray/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
+(xcodebuild) file-read-metadata /Users/rianray/Library/Preferences/com.apple.LaunchServices/com.apple.LaunchServices.plist
+(python3) file-write-create /private/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/xcrun_db-fbwp0ukb
+(xcodebuild) mach-lookup com.apple.SystemConfiguration.configd
+(xcodebuild) sysctl-read kern.hv_vmm_present
+(xcodebuild) sysctl-read hw.target
+(xcodebuild) sysctl-read hw.cpufrequency_max
+(xcodebuild) file-read-data /Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator
+(xcodebuild) file-read-data /Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A
+(xcodebuild) file-read-metadata /Library/Developer/PrivateFrameworks/CoreSimulator.framework/Versions/A/CoreSimulator
+(python3.9) sysctl-read security.mac.lockdown_mode_state
+(python3.9) sysctl-read kern.bootargs
+(python3.9) file-read-metadata /System/Cryptexes/OS
+(python3.9) sysctl-read kern.iossupportversion
+(Python) sysctl-read security.mac.lockdown_mode_state
+(Python) sysctl-read kern.bootargs
+(Python) file-read-metadata /System/Cryptexes/OS
+(Python) sysctl-read kern.iossupportversion
+(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02/PROHIBITED_INPUT_WRITE.txt
+(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03/ROLE_CANARY.txt
+(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03/SIBLING_OUTPUT_CANARY.txt
+(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv
+(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt
+(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt
+(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt
+(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt

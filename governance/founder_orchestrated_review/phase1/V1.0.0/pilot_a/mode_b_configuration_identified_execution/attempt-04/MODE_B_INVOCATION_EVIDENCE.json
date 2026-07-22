@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-04",
+  "starting_commit": "34c427c0196d3f8273ac3ea88ad05a2bbe5a2c29",
+  "pre_boundary": {
+    "provider_requests": 0,
+    "network_connections": 0,
+    "successful_network_resolutions": 0,
+    "actual_credential_accesses": 0,
+    "model_requests": 0,
+    "model_responses": 0,
+    "canonical_role_invocations": 0,
+    "codex_doctor_invocations": 0
+  },
+  "post_boundary": {
+    "provider_request_attempts": 6,
+    "provider_rejected_before_model_output": 1,
+    "completed_model_responses": 5,
+    "unique_canonical_roles_attempted": 4,
+    "unique_canonical_roles_executed": 4,
+    "unique_canonical_roles_qualified": 4,
+    "replay_executions": 1,
+    "host_provider_transport": "AUTHORIZED_ORCHESTRATION_BOUNDARY",
+    "direct_role_network": "DENIED_FOR_ALL_EXECUTIONS",
+    "exact_transport_connection_denominator": "NOT_ESTABLISHED_POST_BOUNDARY; application-level requests and outputs preserved"
+  },
+  "initial_output_schema_transport_failure": {
+    "execution_id": "ES-PH1-PILOT-A-MB04-ESRA02-RUN-01",
+    "provider_status": 400,
+    "error_code": "invalid_json_schema",
+    "model_output_received": false,
+    "failure_preserved": true,
+    "retry_execution_id": "ES-PH1-PILOT-A-MB04-ESRA02-RETRY-01",
+    "frozen_schema_modified": false,
+    "changed_condition": "provider-side schema transport enforcement omitted; exact frozen schema deterministically validated by host"
+  },
+  "oracle": {
+    "defects_detected": 12,
+    "defect_denominator": 12,
+    "blocking_misses": 0,
+    "severity_accuracy": 0.7391304347826086
+  },
+  "replay_variance_class": "MINOR_NONDISPOSITIVE_VARIANCE",
+  "reconciliation_rows": 34,
+  "packet_output_manifest_rows": 36,
+  "phase_2_activity": 0,
+  "disposition": "PILOT_A_CONFIGURATION_IDENTIFIED_EXECUTION_VALIDATED_READY_FOR_FOUNDER_REVIEW"
+}

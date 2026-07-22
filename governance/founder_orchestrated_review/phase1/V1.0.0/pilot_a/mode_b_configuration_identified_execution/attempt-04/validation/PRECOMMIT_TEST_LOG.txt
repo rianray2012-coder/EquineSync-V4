@@ -1,0 +1,22 @@
+Attempt 04 precommit validation summary
+
+Attempt 04 structural validator: PASS
+Phase 1 unit test file: PASS (4 tests)
+git diff --check before evidence packaging: PASS
+git diff --check on final staged exact evidence: PRESERVED_EVIDENCE_EXCEPTION (canonical Markdown hard-line spaces and CLI help whitespace; no normalization performed)
+Attempt 03 tree identity: PASS
+Attempt 03 checksums: PASS (40 entries)
+Additive-only scope: PASS
+Real credential-pattern scan: PASS (0 findings)
+Known synthetic marker: present by design and nonfunctional
+Qualified output schema validation: PASS (5 outputs)
+Oracle scoring: PASS (12/12 defects; zero blocking misses)
+Replay validation: PASS (minor nondispositive variance)
+Phase 2 status: NOT_AUTHORIZED
+
+Preserved diagnostic limitations:
+- Python 3.14 `-m pytest`: unavailable, exit 1
+- system Python `-m pytest`: unavailable, exit 1
+- direct repository unittest file: PASS, exit 0
+
+No historical evidence, default-branch content, application source, pull request, merge, deployment, or Phase 2 artifact was changed or created.

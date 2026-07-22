@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-04",
+  "retry_execution_id": "ES-PH1-PILOT-A-MB04-ESRA02-RETRY-01",
+  "preceding_execution_id": "ES-PH1-PILOT-A-MB04-ESRA02-RUN-01",
+  "preceding_invocation_sha256": "0f3359cf5007e48c291bb99b13b4e9d636c189d0975ffaf6a0f93042df8cb8d0",
+  "retry_reason": "Provider HTTP 400 invalid_json_schema before model output because the frozen standard JSON Schema is not compatible with provider-side strict structured output.",
+  "changed_condition": "Provider-side --output-schema transport enforcement omitted; exact frozen schema retained for prompt and deterministic host validation.",
+  "unchanged_conditions": [
+    "frozen packet bytes",
+    "canonical role profile and source",
+    "candidate bytes",
+    "canary",
+    "sandbox permissions",
+    "network denial",
+    "plugins/MCP/connectors disabled"
+  ],
+  "first_failure_preserved": true,
+  "timestamp_utc": "2026-07-22T03:26:38Z"
+}

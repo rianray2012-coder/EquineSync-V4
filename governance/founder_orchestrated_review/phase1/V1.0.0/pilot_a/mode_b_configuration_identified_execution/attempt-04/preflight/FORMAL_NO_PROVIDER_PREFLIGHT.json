@@ -1,0 +1,1184 @@
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-04",
+  "mode": "formal",
+  "runner": {
+    "mode": "formal",
+    "runner_argv": [
+      "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/attempt04_preflight_runner.py",
+      "formal"
+    ],
+    "runner_pid": 93063,
+    "runner_ppid": 9568,
+    "runner_executable": "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "started_at": "2026-07-22T03:22:50Z",
+    "network_library_imports": [],
+    "provider_operations_defined": [],
+    "actual_credential_paths_defined": []
+  },
+  "local_checks": {
+    "starting_commit": "34c427c0196d3f8273ac3ea88ad05a2bbe5a2c29",
+    "branch": "codex/founder-review-phase1-pilot-a-mode-b-attempt-04-v1",
+    "remote": "https://github.com/EquineSync/EquineSync-V4.git",
+    "attempt03_checksum_entries_verified": 40,
+    "additive_attempt04_status_lines": 4,
+    "isolated_home_files": [
+      "tmp/arg0/codex-arg0g8M5St/.lock",
+      "tmp/arg0/codex-arg0g8M5St/applypatch",
+      "tmp/arg0/codex-arg0g8M5St/apply_patch",
+      "tmp/arg0/codex-arg0g8M5St/codex-execve-wrapper"
+    ],
+    "installed_plugins": 0,
+    "configured_mcp_servers": 0,
+    "configured_connectors": 0,
+    "offline_diagnostic_proof": "A04-OFFLINE-DIAGNOSTIC-PROOF-04",
+    "codex_doctor_invocations": 0
+  },
+  "role_boundary_probes": [
+    {
+      "actual_credential_path_referenced": false,
+      "argv": [
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py",
+        "ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+      ],
+      "assigned_file_sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8",
+      "assigned_output_readback": "ES-RA-02|ASSIGNED_OUTPUT_ONLY",
+      "assigned_output_write": true,
+      "denials": {
+        "hidden_oracle_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv"
+        },
+        "input_write": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02/PROHIBITED_INPUT_WRITE.txt"
+        },
+        "orchestration_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt"
+        },
+        "sibling_input_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03/ROLE_CANARY.txt"
+        },
+        "sibling_output_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03/SIBLING_OUTPUT_CANARY.txt"
+        },
+        "synthetic_credential_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt"
+        },
+        "unrelated_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+        },
+        "unrelated_write": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt"
+        }
+      },
+      "known_answer_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "network_disabled_environment": true,
+      "network_probe_performed": false,
+      "own_canary": "ES-PH1-MB04-CANARY-ESRA02-4a91d8c04c6b427e",
+      "own_packet_read": true,
+      "pid": 93146,
+      "ppid": 93139,
+      "probe_id": "A04-STATIC-ROLE-BOUNDARY-ES-RA-02",
+      "provider_or_model_operation_performed": false,
+      "role_id": "ES-RA-02",
+      "schema_version": "1.0.0",
+      "working_directory": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02"
+    },
+    {
+      "actual_credential_path_referenced": false,
+      "argv": [
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py",
+        "ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+      ],
+      "assigned_file_sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8",
+      "assigned_output_readback": "ES-RA-03|ASSIGNED_OUTPUT_ONLY",
+      "assigned_output_write": true,
+      "denials": {
+        "hidden_oracle_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv"
+        },
+        "input_write": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03/PROHIBITED_INPUT_WRITE.txt"
+        },
+        "orchestration_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt"
+        },
+        "sibling_input_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04/ROLE_CANARY.txt"
+        },
+        "sibling_output_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04/SIBLING_OUTPUT_CANARY.txt"
+        },
+        "synthetic_credential_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt"
+        },
+        "unrelated_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+        },
+        "unrelated_write": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt"
+        }
+      },
+      "known_answer_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "network_disabled_environment": true,
+      "network_probe_performed": false,
+      "own_canary": "ES-PH1-MB04-CANARY-ESRA03-c703fa8c9b2945da",
+      "own_packet_read": true,
+      "pid": 93155,
+      "ppid": 93149,
+      "probe_id": "A04-STATIC-ROLE-BOUNDARY-ES-RA-03",
+      "provider_or_model_operation_performed": false,
+      "role_id": "ES-RA-03",
+      "schema_version": "1.0.0",
+      "working_directory": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03"
+    },
+    {
+      "actual_credential_path_referenced": false,
+      "argv": [
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py",
+        "ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+      ],
+      "assigned_file_sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8",
+      "assigned_output_readback": "ES-RA-04|ASSIGNED_OUTPUT_ONLY",
+      "assigned_output_write": true,
+      "denials": {
+        "hidden_oracle_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv"
+        },
+        "input_write": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04/PROHIBITED_INPUT_WRITE.txt"
+        },
+        "orchestration_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt"
+        },
+        "sibling_input_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05/ROLE_CANARY.txt"
+        },
+        "sibling_output_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05/SIBLING_OUTPUT_CANARY.txt"
+        },
+        "synthetic_credential_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt"
+        },
+        "unrelated_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+        },
+        "unrelated_write": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt"
+        }
+      },
+      "known_answer_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "network_disabled_environment": true,
+      "network_probe_performed": false,
+      "own_canary": "ES-PH1-MB04-CANARY-ESRA04-5621e1f7473f489d",
+      "own_packet_read": true,
+      "pid": 93167,
+      "ppid": 93160,
+      "probe_id": "A04-STATIC-ROLE-BOUNDARY-ES-RA-04",
+      "provider_or_model_operation_performed": false,
+      "role_id": "ES-RA-04",
+      "schema_version": "1.0.0",
+      "working_directory": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04"
+    },
+    {
+      "actual_credential_path_referenced": false,
+      "argv": [
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py",
+        "ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+      ],
+      "assigned_file_sha256": "44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8",
+      "assigned_output_readback": "ES-RA-05|ASSIGNED_OUTPUT_ONLY",
+      "assigned_output_write": true,
+      "denials": {
+        "hidden_oracle_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv"
+        },
+        "input_write": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05/PROHIBITED_INPUT_WRITE.txt"
+        },
+        "orchestration_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt"
+        },
+        "sibling_input_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02/ROLE_CANARY.txt"
+        },
+        "sibling_output_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02/SIBLING_OUTPUT_CANARY.txt"
+        },
+        "synthetic_credential_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt"
+        },
+        "unrelated_read": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+        },
+        "unrelated_write": {
+          "denied": true,
+          "errno": 1,
+          "error": "PermissionError",
+          "path": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt"
+        }
+      },
+      "known_answer_sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "network_disabled_environment": true,
+      "network_probe_performed": false,
+      "own_canary": "ES-PH1-MB04-CANARY-ESRA05-e8a5406b9e1d4c32",
+      "own_packet_read": true,
+      "pid": 93177,
+      "ppid": 93170,
+      "probe_id": "A04-STATIC-ROLE-BOUNDARY-ES-RA-05",
+      "provider_or_model_operation_performed": false,
+      "role_id": "ES-RA-05",
+      "schema_version": "1.0.0",
+      "working_directory": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05"
+    }
+  ],
+  "commands_and_processes": [
+    {
+      "command_id": "A04-FORMAL-GIT-HEAD",
+      "argv": [
+        "/usr/bin/git",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "protocol.allow=never",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+      "pid": 93064,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:50Z",
+      "completed_at": "2026-07-22T03:22:51Z",
+      "exit": 0,
+      "output": "34c427c0196d3f8273ac3ea88ad05a2bbe5a2c29\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93064,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ],
+        [
+          {
+            "pid": 93064,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93079,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93108,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-GIT-BRANCH",
+      "argv": [
+        "/usr/bin/git",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "protocol.allow=never",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+      "pid": 93109,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:51Z",
+      "completed_at": "2026-07-22T03:22:52Z",
+      "exit": 0,
+      "output": "codex/founder-review-phase1-pilot-a-mode-b-attempt-04-v1\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93109,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ],
+        [
+          {
+            "pid": 93109,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93124,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93125,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-GIT-REMOTE",
+      "argv": [
+        "/usr/bin/git",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "protocol.allow=never",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+      "pid": 93126,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:52Z",
+      "completed_at": "2026-07-22T03:22:52Z",
+      "exit": 0,
+      "output": "https://github.com/EquineSync/EquineSync-V4.git\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93126,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ],
+        [
+          {
+            "pid": 93126,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93127,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93128,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-ATTEMPT03-DIFF",
+      "argv": [
+        "/usr/bin/git",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "protocol.allow=never",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+        "diff",
+        "--exit-code",
+        "34c427c0196d3f8273ac3ea88ad05a2bbe5a2c29",
+        "--",
+        "governance/founder_orchestrated_review/phase1/V1.0.0/pilot_a/mode_b_configuration_identified_execution/attempt-03"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+      "pid": 93129,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:52Z",
+      "completed_at": "2026-07-22T03:22:53Z",
+      "exit": 0,
+      "output": "",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93129,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ],
+        [
+          {
+            "pid": 93129,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93130,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93131,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-GIT-STATUS",
+      "argv": [
+        "/usr/bin/git",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "-c",
+        "credential.helper=",
+        "-c",
+        "protocol.allow=never",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+      "pid": 93132,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:53Z",
+      "completed_at": "2026-07-22T03:22:54Z",
+      "exit": 0,
+      "output": "?? governance/founder_orchestrated_review/phase1/V1.0.0/pilot_a/mode_b_configuration_identified_execution/attempt-04/scripts/build_attempt04_evidence_manifests.py\n?? governance/founder_orchestrated_review/phase1/V1.0.0/pilot_a/mode_b_configuration_identified_execution/attempt-04/scripts/freeze_attempt04_packets.py\n?? governance/founder_orchestrated_review/phase1/V1.0.0/pilot_a/mode_b_configuration_identified_execution/attempt-04/scripts/prepare_attempt04_packets.py\n?? governance/founder_orchestrated_review/phase1/V1.0.0/pilot_a/mode_b_configuration_identified_execution/attempt-04/scripts/verify_attempt04_packets.py\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93132,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ],
+        [
+          {
+            "pid": 93132,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93133,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93134,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-PACKET-VERIFY",
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4/governance/founder_orchestrated_review/phase1/V1.0.0/pilot_a/mode_b_configuration_identified_execution/attempt-04/scripts/verify_attempt04_packets.py"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_execution.nosync/EquineSync-V4",
+      "pid": 93135,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:54Z",
+      "completed_at": "2026-07-22T03:22:55Z",
+      "exit": 0,
+      "output": "{\n  \"result\": \"PASS\",\n  \"runtime_root\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync\",\n  \"runtime_root_nosync\": true,\n  \"starting_commit\": \"34c427c0196d3f8273ac3ea88ad05a2bbe5a2c29\",\n  \"packet_state\": \"FROZEN\",\n  \"packet_results\": [\n    {\n      \"role_id\": \"ES-RA-02\",\n      \"file_count_including_manifest\": 19,\n      \"manifest_sha256\": \"ef27ddf92a5e4eaf6597d34cf9caad142d2e29cc81650bb6670676cd6511b34f\",\n      \"packet_file_list_sha256\": \"d1b2528ef8b99b05158b172c9b407c3abf45655cde46fb8c8c38866a7048011f\",\n      \"profile_file_sha256\": \"39f4eb1312eee552b7e16d451f1007e15f432dcc8b1b750fd4fb9417d5afe21e\",\n      \"profile_payload_checksum\": \"7993cbfb88c6dd276a1fa9d65b32688f60baba27c6c25bfa87c8a35651a353ab\",\n      \"source_sha256\": \"3dcb1e3403a23a887664a4dbb103ee517fcc319bb3df3e000cdb47196f73e419\",\n      \"canary_containment\": \"PASS\",\n      \"output_initially_empty\": true\n    },\n    {\n      \"role_id\": \"ES-RA-03\",\n      \"file_count_including_manifest\": 19,\n      \"manifest_sha256\": \"bcddba144543a70a665f998facd7e8e95c4186f97e9b95cde7c16d9d9cb2eb22\",\n      \"packet_file_list_sha256\": \"32dea5badbe18c4e5561fffbcc61c6d20e6e130123bdfa8e68b782958a8612c5\",\n      \"profile_file_sha256\": \"dd9d5690c45794059c8272e76f6d8b5bb2116a9a139dc369437bd5dfe6fc340a\",\n      \"profile_payload_checksum\": \"e39cf3d8160814e9f01b889046c5947ff868d9661121210a658be1e7b04ae0fb\",\n      \"source_sha256\": \"0b61fa393200e969476ba76ef563471a30f1f9a67035afb9f49b482204b1b52d\",\n      \"canary_containment\": \"PASS\",\n      \"output_initially_empty\": true\n    },\n    {\n      \"role_id\": \"ES-RA-04\",\n      \"file_count_including_manifest\": 20,\n      \"manifest_sha256\": \"6486182feea52d99beb33652b45dc5fa2c39a6c27e2ac14deb7d0e9de3f7ade0\",\n      \"packet_file_list_sha256\": \"5fefd2c94d703831eecc1bc21e92afd329e42db3086943cf19e8269117a9a8d8\",\n      \"profile_file_sha256\": \"b1a99f88d96309fab2f1a1c55bb85eea609c4ca3549c979db02038606f1d5b78\",\n      \"profile_payload_checksum\": \"c3a1bf6e279afd4682bdcc9139bc81880c0616f3ee51fffc4d3c95a416c5f8ab\",\n      \"source_sha256\": \"25066ab427e953500f9cb4da52b7a31bd9321e9f3a9f059e079f948a59fce438\",\n      \"canary_containment\": \"PASS\",\n      \"output_initially_empty\": true\n    },\n    {\n      \"role_id\": \"ES-RA-05\",\n      \"file_count_including_manifest\": 20,\n      \"manifest_sha256\": \"d5e03b7b78b4a8187588c86f2f798d5fe71c1d4a2ff7aaf7334280e6ec143250\",\n      \"packet_file_list_sha256\": \"6b07098e9aa698b21f97280a5392894956079239c39b9554e19689127ca83b5c\",\n      \"profile_file_sha256\": \"6c7ccf954bb3624c0cdafef87a41b6c863d3077e7491192c4670427485818f9b\",\n      \"profile_payload_checksum\": \"c7192de66d109222a3572e84dabbc2e8ff87f4ddf7b5aeecfabaf833e4db2e0e\",\n      \"source_sha256\": \"1c75da2b648333a0cf05ed2e593d48a2c616bece0cba33c4c3c90587e0fda52a\",\n      \"canary_containment\": \"PASS\",\n      \"output_initially_empty\": true\n    }\n  ],\n  \"oracle_sha256\": \"4a862de152e7ba348c5250dc714aa2441f61b786b318112fc3e010de6f201de8\",\n  \"evidence_state\": [\n    \"PACKET_FREEZE_RECEIPT.json\"\n  ]\n}\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93135,
+            "ppid": 93063,
+            "comm": "(Python)",
+            "args": "(Python)"
+          }
+        ],
+        [
+          {
+            "pid": 93135,
+            "ppid": 93063,
+            "comm": "<defunct>",
+            "args": "<defunct>"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93136,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93137,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-ES-RA-02",
+      "argv": [
+        "/Users/rianray/.npm-global/bin/codex",
+        "sandbox",
+        "-P",
+        "attempt04_probe",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02",
+        "-c",
+        "permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}}",
+        "-c",
+        "shell_environment_policy.inherit=\"none\"",
+        "--log-denials",
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py",
+        "ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02",
+      "pid": 93138,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:55Z",
+      "completed_at": "2026-07-22T03:22:57Z",
+      "exit": 0,
+      "output": "{\"actual_credential_path_referenced\": false, \"argv\": [\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py\", \"ES-RA-02\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\"], \"assigned_file_sha256\": \"44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8\", \"assigned_output_readback\": \"ES-RA-02|ASSIGNED_OUTPUT_ONLY\", \"assigned_output_write\": true, \"denials\": {\"hidden_oracle_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\"}, \"input_write\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02/PROHIBITED_INPUT_WRITE.txt\"}, \"orchestration_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\"}, \"sibling_input_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03/ROLE_CANARY.txt\"}, \"sibling_output_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03/SIBLING_OUTPUT_CANARY.txt\"}, \"synthetic_credential_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\"}, \"unrelated_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\"}, \"unrelated_write\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt\"}}, \"known_answer_sha256\": \"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\", \"network_disabled_environment\": true, \"network_probe_performed\": false, \"own_canary\": \"ES-PH1-MB04-CANARY-ESRA02-4a91d8c04c6b427e\", \"own_packet_read\": true, \"pid\": 93146, \"ppid\": 93139, \"probe_id\": \"A04-STATIC-ROLE-BOUNDARY-ES-RA-02\", \"provider_or_model_operation_performed\": false, \"role_id\": \"ES-RA-02\", \"schema_version\": \"1.0.0\", \"working_directory\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02\"}\n\n=== Sandbox denials ===\n(Python) sysctl-read kern.iossupportversion\n(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02/PROHIBITED_INPUT_WRITE.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03/ROLE_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03/SIBLING_OUTPUT_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\n(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93138,
+            "ppid": 93063,
+            "comm": "node",
+            "args": "node /Users/rianray/.npm-global/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93139,
+            "ppid": 93138,
+            "comm": "/Users/rianray/.",
+            "args": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          }
+        ],
+        [
+          {
+            "pid": 93138,
+            "ppid": 93063,
+            "comm": "node",
+            "args": "node /Users/rianray/.npm-global/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93139,
+            "ppid": 93138,
+            "comm": "/Users/rianray/.",
+            "args": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93145,
+            "ppid": 93139,
+            "comm": "log",
+            "args": "log stream --style ndjson --predicate (((processID == 0) AND (senderImagePath CONTAINS \"/Sandbox\")) OR (subsystem == \"com.apple.sandbox.reporting\"))"
+          },
+          {
+            "pid": 93146,
+            "ppid": 93139,
+            "comm": "/Library/Framewo",
+            "args": "/Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93140,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93147,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-ES-RA-03",
+      "argv": [
+        "/Users/rianray/.npm-global/bin/codex",
+        "sandbox",
+        "-P",
+        "attempt04_probe",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03",
+        "-c",
+        "permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}}",
+        "-c",
+        "shell_environment_policy.inherit=\"none\"",
+        "--log-denials",
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py",
+        "ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03",
+      "pid": 93148,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:57Z",
+      "completed_at": "2026-07-22T03:22:58Z",
+      "exit": 0,
+      "output": "{\"actual_credential_path_referenced\": false, \"argv\": [\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py\", \"ES-RA-03\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\"], \"assigned_file_sha256\": \"44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8\", \"assigned_output_readback\": \"ES-RA-03|ASSIGNED_OUTPUT_ONLY\", \"assigned_output_write\": true, \"denials\": {\"hidden_oracle_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\"}, \"input_write\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03/PROHIBITED_INPUT_WRITE.txt\"}, \"orchestration_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\"}, \"sibling_input_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04/ROLE_CANARY.txt\"}, \"sibling_output_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04/SIBLING_OUTPUT_CANARY.txt\"}, \"synthetic_credential_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\"}, \"unrelated_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\"}, \"unrelated_write\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt\"}}, \"known_answer_sha256\": \"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\", \"network_disabled_environment\": true, \"network_probe_performed\": false, \"own_canary\": \"ES-PH1-MB04-CANARY-ESRA03-c703fa8c9b2945da\", \"own_packet_read\": true, \"pid\": 93155, \"ppid\": 93149, \"probe_id\": \"A04-STATIC-ROLE-BOUNDARY-ES-RA-03\", \"provider_or_model_operation_performed\": false, \"role_id\": \"ES-RA-03\", \"schema_version\": \"1.0.0\", \"working_directory\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03\"}\n\n=== Sandbox denials ===\n(python3.14) sysctl-read security.mac.lockdown_mode_state\n(python3.14) sysctl-read kern.bootargs\n(python3.14) file-read-metadata /System/Cryptexes/OS\n(python3.14) sysctl-read kern.iossupportversion\n(python3.14) file-read-data /Users/rianray/.CFUserTextEncoding\n(Python) sysctl-read security.mac.lockdown_mode_state\n(Python) sysctl-read kern.bootargs\n(Python) file-read-metadata /System/Cryptexes/OS\n(Python) sysctl-read kern.iossupportversion\n(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03/PROHIBITED_INPUT_WRITE.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04/ROLE_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04/SIBLING_OUTPUT_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\n(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93148,
+            "ppid": 93063,
+            "comm": "node",
+            "args": "node /Users/rianray/.npm-global/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93149,
+            "ppid": 93148,
+            "comm": "/Users/rianray/.",
+            "args": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93154,
+            "ppid": 93149,
+            "comm": "log",
+            "args": "log stream --style ndjson --predicate (((processID == 0) AND (senderImagePath CONTAINS \"/Sandbox\")) OR (subsystem == \"com.apple.sandbox.reporting\"))"
+          },
+          {
+            "pid": 93155,
+            "ppid": 93149,
+            "comm": "/Library/Framewo",
+            "args": "/Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          }
+        ],
+        [
+          {
+            "pid": 93148,
+            "ppid": 93063,
+            "comm": "node",
+            "args": "node /Users/rianray/.npm-global/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93149,
+            "ppid": 93148,
+            "comm": "/Users/rianray/.",
+            "args": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93154,
+            "ppid": 93149,
+            "comm": "log",
+            "args": "log stream --style ndjson --predicate (((processID == 0) AND (senderImagePath CONTAINS \"/Sandbox\")) OR (subsystem == \"com.apple.sandbox.reporting\"))"
+          },
+          {
+            "pid": 93155,
+            "ppid": 93149,
+            "comm": "/Library/Framewo",
+            "args": "/Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-03 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93156,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93158,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-ES-RA-04",
+      "argv": [
+        "/Users/rianray/.npm-global/bin/codex",
+        "sandbox",
+        "-P",
+        "attempt04_probe",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04",
+        "-c",
+        "permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}}",
+        "-c",
+        "shell_environment_policy.inherit=\"none\"",
+        "--log-denials",
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py",
+        "ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04",
+      "pid": 93159,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:22:58Z",
+      "completed_at": "2026-07-22T03:23:00Z",
+      "exit": 0,
+      "output": "{\"actual_credential_path_referenced\": false, \"argv\": [\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py\", \"ES-RA-04\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\"], \"assigned_file_sha256\": \"44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8\", \"assigned_output_readback\": \"ES-RA-04|ASSIGNED_OUTPUT_ONLY\", \"assigned_output_write\": true, \"denials\": {\"hidden_oracle_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\"}, \"input_write\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04/PROHIBITED_INPUT_WRITE.txt\"}, \"orchestration_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\"}, \"sibling_input_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05/ROLE_CANARY.txt\"}, \"sibling_output_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05/SIBLING_OUTPUT_CANARY.txt\"}, \"synthetic_credential_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\"}, \"unrelated_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\"}, \"unrelated_write\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt\"}}, \"known_answer_sha256\": \"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\", \"network_disabled_environment\": true, \"network_probe_performed\": false, \"own_canary\": \"ES-PH1-MB04-CANARY-ESRA04-5621e1f7473f489d\", \"own_packet_read\": true, \"pid\": 93167, \"ppid\": 93160, \"probe_id\": \"A04-STATIC-ROLE-BOUNDARY-ES-RA-04\", \"provider_or_model_operation_performed\": false, \"role_id\": \"ES-RA-04\", \"schema_version\": \"1.0.0\", \"working_directory\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04\"}\n\n=== Sandbox denials ===\n(python3.14) sysctl-read security.mac.lockdown_mode_state\n(python3.14) sysctl-read kern.bootargs\n(python3.14) file-read-metadata /System/Cryptexes/OS\n(python3.14) sysctl-read kern.iossupportversion\n(python3.14) file-read-data /Users/rianray/.CFUserTextEncoding\n(Python) sysctl-read security.mac.lockdown_mode_state\n(Python) sysctl-read kern.bootargs\n(Python) file-read-metadata /System/Cryptexes/OS\n(Python) sysctl-read kern.iossupportversion\n(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04/PROHIBITED_INPUT_WRITE.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05/ROLE_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05/SIBLING_OUTPUT_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\n(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93159,
+            "ppid": 93063,
+            "comm": "node",
+            "args": "node /Users/rianray/.npm-global/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93160,
+            "ppid": 93159,
+            "comm": "/Users/rianray/.",
+            "args": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          }
+        ],
+        [
+          {
+            "pid": 93159,
+            "ppid": 93063,
+            "comm": "node",
+            "args": "node /Users/rianray/.npm-global/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93160,
+            "ppid": 93159,
+            "comm": "/Users/rianray/.",
+            "args": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93166,
+            "ppid": 93160,
+            "comm": "log",
+            "args": "log stream --style ndjson --predicate (((processID == 0) AND (senderImagePath CONTAINS \"/Sandbox\")) OR (subsystem == \"com.apple.sandbox.reporting\"))"
+          },
+          {
+            "pid": 93167,
+            "ppid": 93160,
+            "comm": "/Library/Framewo",
+            "args": "/Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-04 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93161,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93168,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "command_id": "A04-FORMAL-ES-RA-05",
+      "argv": [
+        "/Users/rianray/.npm-global/bin/codex",
+        "sandbox",
+        "-P",
+        "attempt04_probe",
+        "-C",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05",
+        "-c",
+        "permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}}",
+        "-c",
+        "shell_environment_policy.inherit=\"none\"",
+        "--log-denials",
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py",
+        "ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt",
+        "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+      ],
+      "cwd": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05",
+      "pid": 93169,
+      "ppid": 93063,
+      "started_at": "2026-07-22T03:23:00Z",
+      "completed_at": "2026-07-22T03:23:01Z",
+      "exit": 0,
+      "output": "{\"actual_credential_path_referenced\": false, \"argv\": [\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py\", \"ES-RA-05\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\", \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\"], \"assigned_file_sha256\": \"44e095a9533eb894a26b73e43364919250ea34a8ea86d672e2f2409c3c406bd8\", \"assigned_output_readback\": \"ES-RA-05|ASSIGNED_OUTPUT_ONLY\", \"assigned_output_write\": true, \"denials\": {\"hidden_oracle_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\"}, \"input_write\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05/PROHIBITED_INPUT_WRITE.txt\"}, \"orchestration_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\"}, \"sibling_input_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02/ROLE_CANARY.txt\"}, \"sibling_output_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02/SIBLING_OUTPUT_CANARY.txt\"}, \"synthetic_credential_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\"}, \"unrelated_read\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\"}, \"unrelated_write\": {\"denied\": true, \"errno\": 1, \"error\": \"PermissionError\", \"path\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt\"}}, \"known_answer_sha256\": \"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\", \"network_disabled_environment\": true, \"network_probe_performed\": false, \"own_canary\": \"ES-PH1-MB04-CANARY-ESRA05-e8a5406b9e1d4c32\", \"own_packet_read\": true, \"pid\": 93177, \"ppid\": 93170, \"probe_id\": \"A04-STATIC-ROLE-BOUNDARY-ES-RA-05\", \"provider_or_model_operation_performed\": false, \"role_id\": \"ES-RA-05\", \"schema_version\": \"1.0.0\", \"working_directory\": \"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05\"}\n\n=== Sandbox denials ===\n(python3.14) sysctl-read security.mac.lockdown_mode_state\n(python3.14) sysctl-read kern.bootargs\n(python3.14) file-read-metadata /System/Cryptexes/OS\n(python3.14) sysctl-read kern.iossupportversion\n(python3.14) file-read-data /Users/rianray/.CFUserTextEncoding\n(Python) sysctl-read security.mac.lockdown_mode_state\n(Python) sysctl-read kern.bootargs\n(Python) file-read-metadata /System/Cryptexes/OS\n(Python) sysctl-read kern.iossupportversion\n(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05/PROHIBITED_INPUT_WRITE.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02/ROLE_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02/SIBLING_OUTPUT_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt\n(Python) file-read-data /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt\n(Python) file-write-create /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/PROHIBITED_UNRELATED_WRITE.txt\n",
+      "descendant_process_snapshots": [
+        [
+          {
+            "pid": 93169,
+            "ppid": 93063,
+            "comm": "node",
+            "args": "node /Users/rianray/.npm-global/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93170,
+            "ppid": 93169,
+            "comm": "/Users/rianray/.",
+            "args": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93175,
+            "ppid": 93170,
+            "comm": "log",
+            "args": "log stream --style ndjson --predicate (((processID == 0) AND (senderImagePath CONTAINS \"/Sandbox\")) OR (subsystem == \"com.apple.sandbox.reporting\"))"
+          },
+          {
+            "pid": 93177,
+            "ppid": 93170,
+            "comm": "/Library/Framewo",
+            "args": "/Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          }
+        ],
+        [
+          {
+            "pid": 93169,
+            "ppid": 93063,
+            "comm": "node",
+            "args": "node /Users/rianray/.npm-global/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93170,
+            "ppid": 93169,
+            "comm": "/Users/rianray/.",
+            "args": "/Users/rianray/.npm-global/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex sandbox -P attempt04_probe -C /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 -c permissions.attempt04_probe={filesystem={\":minimal\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05\"=\"read\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05\"=\"write\",\"/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync\"=\"read\",\"/Library/Frameworks/Python.framework/Versions/3.14\"=\"read\"},network={enabled=false}} -c shell_environment_policy.inherit=\"none\" --log-denials /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          },
+          {
+            "pid": 93175,
+            "ppid": 93170,
+            "comm": "log",
+            "args": "log stream --style ndjson --predicate (((processID == 0) AND (senderImagePath CONTAINS \"/Sandbox\")) OR (subsystem == \"com.apple.sandbox.reporting\"))"
+          },
+          {
+            "pid": 93177,
+            "ppid": 93170,
+            "comm": "/Library/Framewo",
+            "args": "/Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_preflight.nosync/static_role_probe.py ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-05 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_inputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/role_outputs/ES-RA-02 /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/hidden_oracle/MODE_B_ATTEMPT_04_HIDDEN_DEFECT_ORACLE.csv /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/synthetic_credential_canary/SYNTHETIC_CREDENTIAL_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/orchestration_control/ORCHESTRATION_CANARY.txt /Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync/unrelated_canary/UNRELATED_CANARY.txt"
+          }
+        ]
+      ],
+      "process_snapshot_commands": [
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93176,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/bin/ps",
+            "-axo",
+            "pid=,ppid=,comm=,args="
+          ],
+          "pid": 93178,
+          "ppid": 93063,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    }
+  ],
+  "pre_execution_counts": {
+    "provider_requests": 0,
+    "network_connections": 0,
+    "successful_network_resolutions": 0,
+    "actual_credential_accesses": 0,
+    "model_requests": 0,
+    "model_responses": 0,
+    "canonical_role_invocations": 0
+  },
+  "network_evidence_basis": "All executed diagnostic payloads were static/local; each role probe used network.enabled=false; no network operation was requested; no network denial marker was present.",
+  "actual_credential_evidence_basis": "No actual credential path was named or accessed; only a harmless synthetic non-secret credential canary was used for boundary testing.",
+  "result": "PASS",
+  "completed_at": "2026-07-22T03:23:01Z"
+}

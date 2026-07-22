@@ -1,0 +1,223 @@
+{
+  "oracle_sha256": "4a862de152e7ba348c5250dc714aa2441f61b786b318112fc3e010de6f201de8",
+  "defects": 12,
+  "defects_detected": 12,
+  "defect_detection_rate": 1.0,
+  "expected_role_detection_pairs": 23,
+  "expected_role_detection_pairs_passed": 23,
+  "severity_acceptable_pairs": 17,
+  "severity_total_pairs": 23,
+  "severity_accuracy": 0.7391304347826086,
+  "blocking_misses": 0,
+  "unsupported_findings_identified_by_host": 0,
+  "scoring_rows": [
+    {
+      "defect_id": "A04-DEF-001",
+      "expected_role": "ES-RA-04",
+      "finding_id": "ES-RA-04-F-005",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-002",
+      "expected_role": "ES-RA-02",
+      "finding_id": "ESRA02-002",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-002",
+      "expected_role": "ES-RA-04",
+      "finding_id": "ES-RA-04-F-002",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-002",
+      "expected_role": "ES-RA-05",
+      "finding_id": "ESRA05-F001",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-003",
+      "expected_role": "ES-RA-04",
+      "finding_id": "ES-RA-04-F-001",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-003",
+      "expected_role": "ES-RA-05",
+      "finding_id": "ESRA05-F006",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-004",
+      "expected_role": "ES-RA-04",
+      "finding_id": "ES-RA-04-F-003",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-004",
+      "expected_role": "ES-RA-05",
+      "finding_id": "ESRA05-F001",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-005",
+      "expected_role": "ES-RA-02",
+      "finding_id": "ESRA02-004",
+      "detected": true,
+      "observed_severity": "FOUNDER_DECISION_REQUIRED",
+      "severity_acceptable": false,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-005",
+      "expected_role": "ES-RA-05",
+      "finding_id": "ESRA05-F002",
+      "detected": true,
+      "observed_severity": "FOUNDER_DECISION_REQUIRED",
+      "severity_acceptable": false,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-006",
+      "expected_role": "ES-RA-02",
+      "finding_id": "ESRA02-007",
+      "detected": true,
+      "observed_severity": "P2_NONBLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": false
+    },
+    {
+      "defect_id": "A04-DEF-006",
+      "expected_role": "ES-RA-05",
+      "finding_id": "ESRA05-F004",
+      "detected": true,
+      "observed_severity": "P2_NONBLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": false
+    },
+    {
+      "defect_id": "A04-DEF-007",
+      "expected_role": "ES-RA-02",
+      "finding_id": "ESRA02-008",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-007",
+      "expected_role": "ES-RA-03",
+      "finding_id": "ESRA03-F-006",
+      "detected": true,
+      "observed_severity": "OBSERVATION",
+      "severity_acceptable": false,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-008",
+      "expected_role": "ES-RA-02",
+      "finding_id": "ESRA02-005",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-008",
+      "expected_role": "ES-RA-03",
+      "finding_id": "ESRA03-F-006",
+      "detected": true,
+      "observed_severity": "OBSERVATION",
+      "severity_acceptable": false,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-009",
+      "expected_role": "ES-RA-03",
+      "finding_id": "ESRA03-F-006",
+      "detected": true,
+      "observed_severity": "OBSERVATION",
+      "severity_acceptable": false,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-010",
+      "expected_role": "ES-RA-03",
+      "finding_id": "ESRA03-F-007",
+      "detected": true,
+      "observed_severity": "P2_NONBLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-010",
+      "expected_role": "ES-RA-04",
+      "finding_id": "ES-RA-04-F-009",
+      "detected": true,
+      "observed_severity": "P2_NONBLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-010",
+      "expected_role": "ES-RA-05",
+      "finding_id": "ESRA05-F005",
+      "detected": true,
+      "observed_severity": "P2_NONBLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-011",
+      "expected_role": "ES-RA-03",
+      "finding_id": "ESRA03-F-006",
+      "detected": true,
+      "observed_severity": "OBSERVATION",
+      "severity_acceptable": false,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-011",
+      "expected_role": "ES-RA-05",
+      "finding_id": "ESRA05-F003",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    },
+    {
+      "defect_id": "A04-DEF-012",
+      "expected_role": "ES-RA-04",
+      "finding_id": "ES-RA-04-F-004",
+      "detected": true,
+      "observed_severity": "P1_BLOCKING",
+      "severity_acceptable": true,
+      "blocking_if_missed": true
+    }
+  ],
+  "result": "PASS_WITH_DISCLOSED_SEVERITY_VARIANCE"
+}

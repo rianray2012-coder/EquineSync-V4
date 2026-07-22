@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "output_directory": "ES-RA-02-RETRY-01",
+  "files": [
+    {
+      "path": "CODEX_EVENT_STREAM.jsonl",
+      "size_bytes": 32971,
+      "sha256": "2250e735e768baef27dfb1c331d6807e3d7357c7631827649ae55a2bfc1a885f"
+    },
+    {
+      "path": "CODEX_STDERR.log",
+      "size_bytes": 2167,
+      "sha256": "748a00680031f3352a37c860d1f5af865c7fcd4915c16e846df069ec56ff65e6"
+    },
+    {
+      "path": "INVOCATION_RECORD.json",
+      "size_bytes": 6848,
+      "sha256": "ff9c592801a3d0d23c5bdc502d9d6069c8002f976f87cd83880ebc58acb19b3a"
+    },
+    {
+      "path": "RAW_ROLE_OUTPUT.json",
+      "size_bytes": 30489,
+      "sha256": "e7eaf634245044399fcb9bfb5b02ed0ee3997762c2a7f2005cac1aa996e3a9f3"
+    },
+    {
+      "path": "RETRY_PROVENANCE.json",
+      "size_bytes": 960,
+      "sha256": "dd6df61f7d66c1f791de7e4df9e1064ea86eda438905f45a55847b14d7c2b878"
+    },
+    {
+      "path": "SUBMITTED_PROMPT.txt",
+      "size_bytes": 35405,
+      "sha256": "d70170c7a5e4144edf1a82192d7c5ace6e17c80efb37bb98fd4d6c442e201dc5"
+    }
+  ],
+  "seal_scope": "all files present before OUTPUT_SEAL.json",
+  "result": "SEALED_READ_ONLY"
+}

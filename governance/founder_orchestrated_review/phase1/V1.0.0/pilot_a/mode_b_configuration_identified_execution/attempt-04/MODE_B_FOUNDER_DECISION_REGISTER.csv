@@ -1,0 +1,5 @@
+decision_id,decision_needed,agent_recommendation,founder_status
+FD-PH1-A04-001,Accept reject or return recommended Attempt 04 Pilot disposition,ACCEPT_AS_VALIDATED_FOR_RECORDED_SYNTHETIC_SCOPE,PENDING
+FD-PH1-A04-002,Disposition six role-severity variances,RETAIN_DISCLOSED_OR_ORDER_TARGETED_REREVIEW,PENDING
+FD-PH1-A04-003,Future correction of provider-incompatible output schema,NEW_VERSION_ONLY_DO_NOT_CHANGE_ATTEMPT_04,PENDING
+FD-PH1-A04-004,Phase 2 authorization,REQUIRES_SEPARATE_WRITTEN_AUTHORIZATION,NOT_AUTHORIZED

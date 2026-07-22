@@ -1,0 +1,3 @@
+change_manifest_files=100
+file_manifest_rows=101
+checksum_entries=102

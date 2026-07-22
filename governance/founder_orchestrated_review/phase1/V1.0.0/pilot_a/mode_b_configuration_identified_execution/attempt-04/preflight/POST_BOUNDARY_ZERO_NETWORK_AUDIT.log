@@ -1,0 +1,27 @@
+TIMESTAMP_UTC|2026-07-22T03:23:32Z
+BOUNDARY_RECEIPT_BEGIN
+{
+  "schema_version": "1.0.0",
+  "attempt_id": "ES-PH1-PILOT-A-MODE-B-ATTEMPT-04",
+  "event": "AUTHORIZED_EXECUTION_BOUNDARY_OPENED",
+  "timestamp_utc": "2026-07-22T03:23:01Z",
+  "preflight_sha256": "9ca41e850709345355a00d960afb72efaf203b0374643b92c7be6f6194a077ff",
+  "provider_requests_before_boundary": 0,
+  "network_connections_before_boundary": 0,
+  "successful_network_resolutions_before_boundary": 0,
+  "actual_credential_accesses_before_boundary": 0,
+  "model_responses_before_boundary": 0,
+  "canonical_role_invocations_before_boundary": 0,
+  "codex_doctor_invocations": 0,
+  "phase_2": "NOT_AUTHORIZED",
+  "result": "PASS"
+}
+BOUNDARY_RECEIPT_END
+ROLE_OUTPUT_FILE_COUNT|0
+
+NETWORK_DENIAL_AUDIT_BEGIN
+Timestamp               Ty Process[PID:TID]
+NETWORK_DENIAL_AUDIT_END
+FORMAL_NETWORK_MARKERS_BEGIN
+FORMAL_NETWORK_MARKERS_END
+POST_BOUNDARY_AUDIT|PASS

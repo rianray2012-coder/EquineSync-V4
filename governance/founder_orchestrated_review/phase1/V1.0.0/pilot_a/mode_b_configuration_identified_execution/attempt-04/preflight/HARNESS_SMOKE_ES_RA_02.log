@@ -1,0 +1,6 @@
+error: the following required arguments were not provided:
+  --permission-profile <NAME>
+
+Usage: codex sandbox --permission-profile <NAME> --cd <DIR> --config <key=value> --log-denials <COMMAND>...
+
+For more information, try '--help'.

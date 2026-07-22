@@ -1,0 +1,21 @@
+control_id,control,denominator,passed,failed,status,evidence
+A04-VAL-001,formal no-provider preflight commands,10,10,0,PASS,preflight/FORMAL_NO_PROVIDER_PREFLIGHT.json
+A04-VAL-002,frozen role packets,4,4,0,PASS,preflight/FROZEN_PACKET_VERIFICATION.log
+A04-VAL-003,required canonical role outputs,4,4,0,PASS,scoring/ROLE_OUTPUT_VALIDATION.json
+A04-VAL-004,blind replay output,1,1,0,PASS,scoring/REPLAY_VARIANCE.json
+A04-VAL-005,oracle defects,12,12,0,PASS,scoring/ORACLE_SCORING.json
+A04-VAL-006,expected role severity pairs,23,17,6,PASS_WITH_DISCLOSED_VARIANCE,scoring/ORACLE_SCORING.csv
+A04-VAL-007,blocking oracle misses,12,12,0,PASS,scoring/ORACLE_SCORING.json
+A04-VAL-008,qualified output schema validation,5,5,0,PASS,scoring/ROLE_OUTPUT_VALIDATION.json
+A04-VAL-009,qualified output canary containment,5,5,0,PASS,scoring/ROLE_OUTPUT_VALIDATION.json
+A04-VAL-010,simulated secret non-reproduction,5,5,0,PASS,scoring/ROLE_OUTPUT_VALIDATION.json
+A04-VAL-011,cross-role reconciliation rows,34,34,0,PASS,MODE_B_RECONCILIATION_REGISTER.csv
+A04-VAL-012,sealed output manifest rows,36,36,0,PASS,MODE_B_PACKET_OUTPUT_MANIFEST.csv
+A04-VAL-013,Phase 1 unit tests,4,4,0,PASS,validation/PHASE1_UNITTEST_LOG.txt
+A04-VAL-014,Attempt 04 structural validation,1,1,0,PASS,validation/ATTEMPT04_STRUCTURAL_VALIDATION.log
+A04-VAL-015,Attempt 03 checksum preservation,40,40,0,PASS,validation/PRECOMMIT_CONTROL_LOG.txt
+A04-VAL-016,additive-only repository scope,1,1,0,PASS,validation/PRECOMMIT_CONTROL_LOG.txt
+A04-VAL-017,real credential pattern scan,1,1,0,PASS,validation/PRECOMMIT_CONTROL_LOG.txt
+A04-VAL-018,Phase 2 prohibition,1,1,0,PASS,MODE_B_INVOCATION_EVIDENCE.json
+A04-VAL-019,pytest runner availability attempts,2,0,2,UNAVAILABLE_NONBLOCKING,validation/PHASE1_TEST_LOG.txt;validation/PHASE1_TEST_LOG_RETRY.txt
+A04-VAL-020,final staged-byte whitespace check,1,0,1,PRESERVED_EVIDENCE_EXCEPTION,exact CLI help and submitted prompt bytes contain canonical Markdown trailing spaces and must not be normalized

@@ -1,0 +1,9 @@
+PROBE_ID|A04-OFFLINE-DIAGNOSTIC-PROOF-01
+NETWORK_POLICY|DENY_ALL
+CODEX_HOME|/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_isolated_codex_home.nosync
+COMMAND_01|/usr/bin/which codex
+/Users/rianray/.npm-global/bin/codex
+COMMAND_02|codex --version
+codex-cli 0.144.6
+COMMAND_03|codex sandbox macos --help
+sandbox-exec: sandbox_apply: Operation not permitted

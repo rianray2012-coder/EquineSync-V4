@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "json_files_parsed": 31,
+  "roles_required": 4,
+  "roles_qualified": 4,
+  "oracle_defects": 12,
+  "blocking_misses": 0,
+  "severity_pairs_acceptable": 17,
+  "severity_pairs_total": 23,
+  "reconciliation_rows": 34,
+  "output_manifest_rows": 36,
+  "attempt03_immutable": true,
+  "additive_only": true,
+  "phase_2": "NOT_AUTHORIZED"
+}

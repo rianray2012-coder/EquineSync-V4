@@ -1,0 +1,9 @@
+test_canonical_hash_ignores_mapping_order (__main__.Phase1ValidatorTests) ... ok
+test_path_traversal_detection_primitive (__main__.Phase1ValidatorTests) ... ok
+test_schema_subset_accepts_valid_profile (__main__.Phase1ValidatorTests) ... ok
+test_schema_subset_rejects_missing_required_fields (__main__.Phase1ValidatorTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.017s
+
+OK

@@ -1,0 +1,55 @@
+{
+  "result": "PASS",
+  "runtime_root": "/Users/rianray/Documents/Codex/2026-07-21/files-mentioned-by-the-user-equinesync/work/modeb_attempt_04_runtime.nosync",
+  "runtime_root_nosync": true,
+  "starting_commit": "34c427c0196d3f8273ac3ea88ad05a2bbe5a2c29",
+  "packet_state": "PREPARED",
+  "packet_results": [
+    {
+      "role_id": "ES-RA-02",
+      "file_count_including_manifest": 19,
+      "manifest_sha256": "ef27ddf92a5e4eaf6597d34cf9caad142d2e29cc81650bb6670676cd6511b34f",
+      "packet_file_list_sha256": "d1b2528ef8b99b05158b172c9b407c3abf45655cde46fb8c8c38866a7048011f",
+      "profile_file_sha256": "39f4eb1312eee552b7e16d451f1007e15f432dcc8b1b750fd4fb9417d5afe21e",
+      "profile_payload_checksum": "7993cbfb88c6dd276a1fa9d65b32688f60baba27c6c25bfa87c8a35651a353ab",
+      "source_sha256": "3dcb1e3403a23a887664a4dbb103ee517fcc319bb3df3e000cdb47196f73e419",
+      "canary_containment": "PASS",
+      "output_initially_empty": true
+    },
+    {
+      "role_id": "ES-RA-03",
+      "file_count_including_manifest": 19,
+      "manifest_sha256": "bcddba144543a70a665f998facd7e8e95c4186f97e9b95cde7c16d9d9cb2eb22",
+      "packet_file_list_sha256": "32dea5badbe18c4e5561fffbcc61c6d20e6e130123bdfa8e68b782958a8612c5",
+      "profile_file_sha256": "dd9d5690c45794059c8272e76f6d8b5bb2116a9a139dc369437bd5dfe6fc340a",
+      "profile_payload_checksum": "e39cf3d8160814e9f01b889046c5947ff868d9661121210a658be1e7b04ae0fb",
+      "source_sha256": "0b61fa393200e969476ba76ef563471a30f1f9a67035afb9f49b482204b1b52d",
+      "canary_containment": "PASS",
+      "output_initially_empty": true
+    },
+    {
+      "role_id": "ES-RA-04",
+      "file_count_including_manifest": 20,
+      "manifest_sha256": "6486182feea52d99beb33652b45dc5fa2c39a6c27e2ac14deb7d0e9de3f7ade0",
+      "packet_file_list_sha256": "5fefd2c94d703831eecc1bc21e92afd329e42db3086943cf19e8269117a9a8d8",
+      "profile_file_sha256": "b1a99f88d96309fab2f1a1c55bb85eea609c4ca3549c979db02038606f1d5b78",
+      "profile_payload_checksum": "c3a1bf6e279afd4682bdcc9139bc81880c0616f3ee51fffc4d3c95a416c5f8ab",
+      "source_sha256": "25066ab427e953500f9cb4da52b7a31bd9321e9f3a9f059e079f948a59fce438",
+      "canary_containment": "PASS",
+      "output_initially_empty": true
+    },
+    {
+      "role_id": "ES-RA-05",
+      "file_count_including_manifest": 20,
+      "manifest_sha256": "d5e03b7b78b4a8187588c86f2f798d5fe71c1d4a2ff7aaf7334280e6ec143250",
+      "packet_file_list_sha256": "6b07098e9aa698b21f97280a5392894956079239c39b9554e19689127ca83b5c",
+      "profile_file_sha256": "6c7ccf954bb3624c0cdafef87a41b6c863d3077e7491192c4670427485818f9b",
+      "profile_payload_checksum": "c7192de66d109222a3572e84dabbc2e8ff87f4ddf7b5aeecfabaf833e4db2e0e",
+      "source_sha256": "1c75da2b648333a0cf05ed2e593d48a2c616bece0cba33c4c3c90587e0fda52a",
+      "canary_containment": "PASS",
+      "output_initially_empty": true
+    }
+  ],
+  "oracle_sha256": "4a862de152e7ba348c5250dc714aa2441f61b786b318112fc3e010de6f201de8",
+  "evidence_initially_empty": true
+}

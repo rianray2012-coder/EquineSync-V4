@@ -1,0 +1,12 @@
+sequence,timestamp_utc,event,result,qualification_effect
+1,2026-07-22T03:16:32Z,Attempt 04 checkout verified at 34c427c0196d3f8273ac3ea88ad05a2bbe5a2c29 and branch created,PASS,starting custody established
+2,2026-07-22T03:22:50Z,offline diagnostic proof and four-profile pre-freeze harness smoke,PASS,packet freeze eligible
+3,2026-07-22T03:22:44Z,four role packets and hidden oracle frozen,PASS,formal preflight began
+4,2026-07-22T03:23:01Z,formal no-provider preflight completed and execution boundary opened,PASS,role provider execution authorized
+5,2026-07-22T03:25:20Z,ES-PH1-PILOT-A-MB04-ESRA02-RUN-01 execution,FAILED_PRESERVED,provider strict-schema incompatibility; retry required
+6,2026-07-22T03:26:38Z,ES-PH1-PILOT-A-MB04-ESRA02-RETRY-01 execution,PASS,output sealed and eligible for validation
+7,2026-07-22T03:29:29Z,ES-PH1-PILOT-A-MB04-ESRA03-RUN-01 execution,PASS,output sealed and eligible for validation
+8,2026-07-22T03:33:17Z,ES-PH1-PILOT-A-MB04-ESRA04-RUN-01 execution,PASS,output sealed and eligible for validation
+9,2026-07-22T03:44:36Z,ES-PH1-PILOT-A-MB04-ESRA04-REPLAY-01 execution,PASS,output sealed and eligible for validation
+10,2026-07-22T03:39:02Z,ES-PH1-PILOT-A-MB04-ESRA05-RUN-01 execution,PASS,output sealed and eligible for validation
+11,2026-07-22T03:55:37Z,deterministic output validation oracle scoring reconciliation and replay variance,PASS_WITH_DISCLOSED_VARIANCE,Founder review package eligible

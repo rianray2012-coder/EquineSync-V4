@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "output_directory": "ES-RA-03",
+  "files": [
+    {
+      "path": "CODEX_EVENT_STREAM.jsonl",
+      "size_bytes": 40324,
+      "sha256": "084ed69caac3e2cbe2a58feb8ba4ce2f814005f40bea1e8ac0a2086401913031"
+    },
+    {
+      "path": "CODEX_STDERR.log",
+      "size_bytes": 2167,
+      "sha256": "235af20309ec0d66489ddf1e96ebb2c67b175ccc826b150c7e0ff0a648c2f5c0"
+    },
+    {
+      "path": "INVOCATION_RECORD.json",
+      "size_bytes": 6783,
+      "sha256": "1ff3ec2ed721aa352d3bf92d0fbfb1c4a79f3fcd970b4259ba8a6585404756e1"
+    },
+    {
+      "path": "RAW_ROLE_OUTPUT.json",
+      "size_bytes": 37271,
+      "sha256": "1c0c04625b6e3e9d681aeb2d7216aa937a019197a852314dc1a11dcf120b6fcc"
+    },
+    {
+      "path": "SUBMITTED_PROMPT.txt",
+      "size_bytes": 34650,
+      "sha256": "98c5bc3752764d53250651abd6c2bc1f555f2876fbf1f97e841ab348a9f62c3b"
+    }
+  ],
+  "seal_scope": "all files present before OUTPUT_SEAL.json",
+  "result": "SEALED_READ_ONLY"
+}

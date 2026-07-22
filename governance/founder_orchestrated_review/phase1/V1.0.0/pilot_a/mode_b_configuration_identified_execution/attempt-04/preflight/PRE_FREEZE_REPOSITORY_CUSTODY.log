@@ -1,0 +1,53 @@
+TIMESTAMP_UTC|2026-07-22T03:16:32Z
+REPOSITORY|https://github.com/EquineSync/EquineSync-V4.git
+BRANCH|codex/founder-review-phase1-pilot-a-mode-b-attempt-04-v1
+HEAD|34c427c0196d3f8273ac3ea88ad05a2bbe5a2c29
+DEFAULT_REMOTE_REF_LOCAL_SNAPSHOT|refs/remotes/origin/codex/founder-review-phase1-pilot-a-mode-b-attempt-03-v1
+AUTHORIZED_SCOPE_STATUS_BEGIN
+?? governance/founder_orchestrated_review/phase1/V1.0.0/pilot_a/mode_b_configuration_identified_execution/attempt-04/
+AUTHORIZED_SCOPE_STATUS_END
+ATTEMPT03_TREE_IDENTITY|PASS
+MODE_B_CHANGE_MANIFEST.txt: OK
+MODE_B_COMMAND_EXIT_REGISTER.csv: OK
+MODE_B_EXECUTION_CHRONOLOGY.csv: OK
+MODE_B_EXECUTION_ENVIRONMENT_SPECIFICATION.md: OK
+MODE_B_FILE_MANIFEST.csv: OK
+MODE_B_FOUNDER_DECISION_REGISTER.csv: OK
+MODE_B_INVOCATION_EVIDENCE.json: OK
+MODE_B_PACKET_OUTPUT_MANIFEST.csv: OK
+MODE_B_REPOSITORY_CUSTODY_RECORD.md: OK
+MODE_B_ROLE_CONFIGURATION_REGISTER.csv: OK
+PHASE_1_MODE_B_ASSURANCE_ASSESSMENT.md: OK
+PHASE_1_MODE_B_FOUNDER_PACKAGE.md: OK
+authority/FOUNDER_AUTHORIZATION_RECEIVED_TRANSCRIPTION.md: OK
+control_envelopes/ES-RA-02_CONTROL_ENVELOPE.txt: OK
+control_envelopes/ES-RA-03_CONTROL_ENVELOPE.txt: OK
+control_envelopes/ES-RA-04_CONTROL_ENVELOPE.txt: OK
+control_envelopes/ES-RA-05_CONTROL_ENVELOPE.txt: OK
+oracle/MODE_B_ATTEMPT_03_HIDDEN_DEFECT_ORACLE.csv: OK
+packet_manifests/ES-RA-02_INPUT_MANIFEST.json: OK
+packet_manifests/ES-RA-03_INPUT_MANIFEST.json: OK
+packet_manifests/ES-RA-04_INPUT_MANIFEST.json: OK
+packet_manifests/ES-RA-05_INPUT_MANIFEST.json: OK
+preflight/FORMAL_BOUNDARY_PROBE_LOG.txt: OK
+preflight/HARNESS_SMOKE_TEST_LOG.txt: OK
+preflight/MODE_B_EFFECTIVE_RUNTIME_RECORD.json: OK
+preflight/MODE_B_PREFLIGHT_CHECKS.csv: OK
+preflight/MODE_B_PREFLIGHT_REPORT.md: OK
+preflight/PACKET_FREEZE_RECEIPT.txt: OK
+preflight/PRE_FREEZE_CUSTODY_LOG.txt: OK
+preflight/PROVIDER_PREFLIGHT_VIOLATION.json: OK
+preflight/RUNTIME_SURFACE_PROBE.md: OK
+scripts/build_attempt03_evidence_manifests.py: OK
+scripts/formal_boundary_harness.sh: OK
+scripts/prepare_attempt03_packets.py: OK
+scripts/validate_attempt03_evidence.py: OK
+scripts/verify_attempt03_packets.py: OK
+scripts/verify_pre_freeze_custody.sh: OK
+validation/MODE_B_VALIDATION_REPORT.md: OK
+validation/MODE_B_VALIDATION_RESULTS.csv: OK
+validation/PRECOMMIT_TEST_LOG.txt: OK
+ATTEMPT03_CHECKSUMS|PASS
+ATTEMPT03_CHECKSUM_ENTRIES|40
+
+PHASE2|NOT_AUTHORIZED
