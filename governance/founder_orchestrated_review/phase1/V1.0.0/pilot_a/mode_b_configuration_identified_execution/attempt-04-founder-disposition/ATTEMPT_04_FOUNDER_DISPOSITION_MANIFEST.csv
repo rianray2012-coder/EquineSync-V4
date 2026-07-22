@@ -1,0 +1,9 @@
+record_status,path,size_bytes,sha256,coverage_note
+FINAL_FOUNDER_DISPOSITION_RECORDED,README.md,3310,0c19cf3dac2bc177e644ffffb463b48c15216aad18f3b1dac43a287f3c25fd5c,"Package index, final status, contents, integrity model, and boundaries"
+FINAL_FOUNDER_DISPOSITION_RECORDED,FOUNDER_DECISION_BRIEF.md,10618,e8c58ce88d862d2a3d7489d06e530eaa34f8a6d488b4e959b81445ef43a8717f,"Source-faithful questions, evidence, options, recommendations, exact responses, qualifications, and effects"
+FINAL_FOUNDER_DISPOSITION_RECORDED,FOUNDER_DECISION_RECORD.md,3565,9953a8bfdcd521c38bd693b8186793f30a09016760c51064c7ad6f7672b3c882,"Controlling disposition, exact responses, classifications, and prohibitions"
+FINAL_FOUNDER_DISPOSITION_RECORDED,ATTEMPT_04_FOUNDER_DECISION_REGISTER.csv,1877,9fdbbe8cb46b03a074850e5e009842544e6dc41fe588f706f5aa5e698c551d35,"Four exact Founder decision rows and downstream authorization boundaries"
+FINAL_FOUNDER_DISPOSITION_RECORDED,ATTEMPT_04_EVIDENCE_LINKAGE.md,5473,41536bba9b37bfdcd96c65db7b68ee3611a5e4c77c90dd76c0800e545eff8509,"Commit, decision, response, variance, manifest, checksum, and role-output traceability"
+FINAL_FOUNDER_DISPOSITION_RECORDED,ATTEMPT_04_AUTHORIZATION_BOUNDARIES.md,2562,e49624093d3d3af75c3391b4d11e5b6aab5681b31abeca562149b2745418cc2f,"Continuing prohibitions and decision-specific downstream gates"
+FINAL_FOUNDER_DISPOSITION_RECORDED,EVIDENCE_MATERIALIZATION_RECORD.md,6887,a849e2673b5e7b51ae0de9d1d89bbd51d176716c06d90f621cc2df0ad28ca71a,"Authorized object retrieval, scope, timestamps, pack, disk, partial-clone, and state record"
+FINAL_FOUNDER_DISPOSITION_RECORDED,PACKAGE_SOURCE_AND_CHECKSUM_VERIFICATION_REPORT.md,3559,94c6a58e728ac31db163dfccbda61aa4b5334e568b1c98f93ed95bd8b23da485,"Final deterministic source, structure, exact-response, checksum, and boundary validation"
