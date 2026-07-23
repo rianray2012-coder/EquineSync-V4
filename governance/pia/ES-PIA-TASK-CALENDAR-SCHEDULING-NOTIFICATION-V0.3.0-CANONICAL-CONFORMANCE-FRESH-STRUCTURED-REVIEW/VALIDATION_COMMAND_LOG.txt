@@ -1,0 +1,6 @@
+branch_start=9e1041e64d5aa20282ef093fc520f84feb02c3f3
+created_branch=codex/item-06-tcsn-pia-canonical-remediation-fresh-review-v1
+package_validator=python3 PIA_PACKAGE_VALIDATOR.py
+checksum_verification=shasum -a 256 -c CHECKSUMS.sha256
+fresh_review_status=BLOCKED_BY_RUNTIME_OR_CONTROL_LIMITATION
+formal_roles_started=0

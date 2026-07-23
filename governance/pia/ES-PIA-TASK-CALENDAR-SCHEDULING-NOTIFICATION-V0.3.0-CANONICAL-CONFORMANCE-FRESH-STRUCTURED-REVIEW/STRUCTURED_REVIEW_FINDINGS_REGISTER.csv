@@ -1,0 +1,4 @@
+finding_id,severity,status,summary,closure_basis,remaining_gate
+P1-TCSN-001,P1,OPEN,Fresh structured review remains blocked by runtime/control limitation.,Not closed; no compliant segregated review completed.,Provision qualified review runtime and complete fresh structured review.
+P1-TCSN-002,P1,CLOSED,V0.3 successor draft preserves exact canonical ES-PIA-MASTER-STANDARD-V1.1 heading text and order.,Canonical heading matrix has 43/43 MATCH rows; deterministic validation reports canonical_heading_exact_match true.,None for heading conformance; substantive design still awaits compliant review.
+P2-TCSN-001,P2,RETAINED,Inherited source-family locator verification remains retained and nonblocking for heading remediation.,Not closed; exact source-family locator review requires compliant source-verification cycle.,Complete source-family locator verification in qualified review cycle.
