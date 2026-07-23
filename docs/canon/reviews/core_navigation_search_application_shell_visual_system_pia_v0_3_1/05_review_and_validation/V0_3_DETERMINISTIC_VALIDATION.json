@@ -1,0 +1,34 @@
+{
+  "file": "EquineSync_Core_Navigation_Visual_System_PIA_Section_V0_3_Second_Review_Strengthened_Draft.md",
+  "sha256": "958b45a4b100b7fe5c2fb9ffa8fad2974259a2c74eebcfb0c1db2dd39d15f188",
+  "sections_count": 43,
+  "sections_canonical_1_43": true,
+  "requirement_ids_unique_count": 30,
+  "acceptance_ids_unique_count": 39,
+  "test_ids_unique_count": 59,
+  "evidence_ids_unique_count": 27,
+  "exact_question_occurrences": {
+    "Can engineering build the capability without making unauthorized product decisions?": 1,
+    "Can quality assurance determine objectively whether the capability works?": 1,
+    "Can a reviewer trace the capability to EquineSync\u2019s controlling governance and the MIAP?": 1,
+    "Can EquineSync safely operate, support, monitor, recover, and maintain the capability?": 1,
+    "Can the Founder determine whether the capability is ready for first-user enrollment?": 1
+  },
+  "permitted_answers_present": {
+    "YES_WITH_EVIDENCE": 8,
+    "NO": 2,
+    "PARTIALLY_SATISFIED": 0
+  },
+  "answer_completeness_satisfied_count": 5,
+  "implementation_authority_false": true,
+  "enrollment_authority_false": true,
+  "unresolved_open_question_ids": [],
+  "forbidden_todo_markers": {
+    "TODO": 0,
+    "TBD": 0,
+    "PLACEHOLDER": 0
+  },
+  "open_p1_status_markers": 0,
+  "historical_steed_occurrences": 5,
+  "canonical_stead_occurrences": 25
+}

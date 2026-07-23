@@ -1,0 +1,23 @@
+{
+  "package_name": "EquineSync_Core_Navigation_Visual_System_Founder_Approved_Content_V0_3_2_Technical_Correction",
+  "package_version": "0.3.2",
+  "approved_pia_version": "0.3.1",
+  "date": "2026-07-22",
+  "correction_class": "INTEGRITY_CONTROL_ONLY",
+  "substantive_pia_change": false,
+  "founder_disposition": "FOUNDER_APPROVED_V0_3_DOCUMENTARY_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED",
+  "implementation_authority": false,
+  "deployment_authority": false,
+  "production_authority": false,
+  "enrollment_authority": false,
+  "approved_predecessor_sha256": "958b45a4b100b7fe5c2fb9ffa8fad2974259a2c74eebcfb0c1db2dd39d15f188",
+  "approved_pia_sha256": "da3848cfc64e5d32fa2545e7cbd419413381cee8cd0cc16713d87b7e87b49828",
+  "integrity_model": "ES-PKG-INTEGRITY-NONCIRCULAR-V1.0",
+  "checksum_ledger_exclusions": [
+    "07_integrity/CHECKSUMS.sha256",
+    "07_integrity/PACKAGE_MANIFEST.csv"
+  ],
+  "file_count": 29,
+  "manifest_row_count": 29,
+  "checksum_line_count": 27
+}

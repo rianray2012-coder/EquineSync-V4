@@ -1,0 +1,6 @@
+Asset_ID,Archive_Path,Original_Filename,SHA256,Classification,Production_Master
+NAV-ASSET-REF-001,04_reference_assets/NAV-ASSET-REF-001_EquineSync_App_Logos_Yellow_Stead.png,Equine Sync App Logos Yellow.png,fe7040cb6d9b3b66b706012ead8cb9fe9e0d569a28453acc743a4e3374a881ea,Stead/campaign artwork reference; not default app icon,FALSE
+NAV-ASSET-REF-002,04_reference_assets/NAV-ASSET-REF-002_EquineSync_App_Logos_Circuit_Horse.png,Equine Sync App Logos.png,c0f0c831832bd68786e35367b2cb895f9483bfafbf82fd0e81a197d32dd93d5a,"Circuit-horse app icon, favicon, logo and palette reference",FALSE
+NAV-ASSET-REF-003,04_reference_assets/NAV-ASSET-REF-003_EquineSync_Circuit_Horse_Icon.png,EquineSync Icon.png,b1074856f76d9df6dc35fc56d8157ccb1e7787163012a70cac41caedd58cd8e3,Simplified circuit-horse mark reference,FALSE
+NAV-ASSET-REF-004,04_reference_assets/NAV-ASSET-REF-004_EquineSync_Legacy_Full_Logo_Reference.png,ES Logo.png,37ebdff1da385725b3d077d04083230a0d440c32abb16bc6ca09c9d5989ec2cc,Legacy full-logo reference; current name-bearing lockup unresolved in artwork,FALSE
+NAV-ASSET-REF-005,04_reference_assets/NAV-ASSET-REF-005_9C_9D_Icon_Options.png,Screenshot 2026-07-22 at 6.49.25 PM.png,8cfdc2e94e31b42a38ed778178e5f0937942b4e19101366411a8b34e6e4082a3,9C Speed Lines and 9D Circle Monogram reference sheet,FALSE
