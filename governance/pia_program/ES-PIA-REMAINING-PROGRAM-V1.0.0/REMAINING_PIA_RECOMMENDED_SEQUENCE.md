@@ -1,15 +1,15 @@
 # Remaining PIA Recommended Sequence
 
-**Sequence ID:** `ES-PIA-REMAINING-SEQUENCE-V1.0.0`  
-**Status:** `RECOMMENDED_NOT_APPROVED`  
-**Baseline:** `05eaa53be3e5e6aa00814eaeee49f145b3bc6c49`
+**Sequence ID:** `ES-PIA-REMAINING-SEQUENCE-V1.0.0`
+**Status:** `ITEM04_DOCUMENTARY_DESIGN_INTEGRATED_PENDING_COMPLIANT_FRESH_REVIEW`
+**Baseline:** `da10e2f729bc5d98d6087ef846e3e6449557898f`
 **Implementation authority:** `FALSE`
 
-## Entry conditions
+## Entry Conditions
 
-The canonical template and five questions are established. Input custody passed. GFD-001, GFD-002, GFD-003, GFD-004, and GFD-007 are `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`. The current branch remains documentary-only. A PIA may enter drafting only when unresolved predecessor questions remain explicit and no authority is invented. GFD-007 does not provision a runtime, so fresh-review completion remains unavailable.
+The canonical template and five questions are established. GFD-001, GFD-002, GFD-003, GFD-004, and GFD-007 are `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`. Item 04 V0.3 is now a Founder-approved documentary design baseline with companion registers and checksum freeze. GFD-007 still does not provision a compliant runtime, so fresh-review completion remains unavailable.
 
-## Batch plan
+## Batch Plan
 
 ### Batch 01 - Foundational authority and context
 
@@ -17,13 +17,13 @@ The canonical template and five questions are established. Input custody passed.
 - Item 02 Facility, Tenant, and Organizational Structure existing candidate;
 - Item 03 Relationship, Authorization, and Permission V0.2 strengthened documentary successor candidate, with V0.1 and the separate Component A successor preserved.
 
-Batch objective: settle identity/context/authority contracts before dependent workflows. The existing Facility V1.0.0 and V1.0.1-R3 evidence and Item 03 V0.1 remain immutable. Facility V0.2 and Item 03 V0.2 are separate documentary candidates; their next lifecycle action is compliant fresh review under separately provisioned roles.
+Batch 01 packages remain pending compliant fresh review under separately provisioned roles.
 
 ### Batch 02 - Canonical horse entity and lifecycle
 
-- Item 04 Horse Identity, Profile, and Lifecycle.
+- Item 04 Horse Identity, Profile, and Lifecycle V0.3 Founder-approved documentary design baseline.
 
-Batch objective: establish canonical horse states, passport, custody evidence, corrections, and continuity before care, participation, or financial workflows define horse behavior.
+Batch objective is now satisfied at the documentary-design package level only: canonical horse states, Passport/export boundaries, custody evidence, corrections, duplicate/merge/unmerge, cross-tenant mediation, transfer continuity, and downstream reconciliation contracts are frozen for compliant fresh review. No implementation, schema, migration, deployment, production use, or enrollment is authorized.
 
 ### Batch 03 - Operational workflows
 
@@ -31,27 +31,23 @@ Batch objective: establish canonical horse states, passport, custody evidence, c
 2. Item 08 Lessons, Training, Rider, and Guardian source packet and draft;
 3. Item 06 Task, Calendar, Scheduling, and Notification consolidation after the source workflows expose their scheduling contracts.
 
-Batch objective: preserve horse safety, safeguarding, guardian authority, low-connectivity use, and auditable failure handling. Within the batch, 07 and 08 may proceed in bounded lanes after 04 is stable; 06 consolidates shared task/time behavior without owning domain truth.
+Items 07 and 08 may consume Item 04 only as a documentary source. Their approval and implementation remain blocked by their own drafts, dependencies, and compliant fresh review.
 
 ### Batch 04 - Financial and communication participation
 
 - Item 09 Billing, Payments, and Financial Operations;
 - Item 10 Owner Portal and Communications.
 
-Batch objective: define financial and communication workflows after actor, authority, horse, care, participation, and scheduling sources are stable. Payment never creates authority; message delivery never proves consent or receipt without evidence rules.
+Payment never creates authority; message delivery never proves consent or receipt without evidence rules.
 
 ### Batch 05 - Shared application experience
 
 - Item 05 Core Navigation, Search, and Application Shell.
 
-Batch objective: define permission-filtered discovery, shared navigation, administrative surfaces, and reporting presentation after source domains are stable. Item 05 does not become a competing source of domain truth.
+Item 05 remains last so shared discovery, reporting, and presentation do not become competing sources of domain truth.
 
-## Stop conditions
+## Current Gate
 
-Stop only the affected lane when a missing source or predecessor decision can be isolated. Stop the batch when proceeding would require inventing identity, relationship, permission, facility, horse, safeguarding, financial, evidence, or release authority. Never use code behavior to resolve a higher-level ambiguity.
+`BATCH_02_ITEM_04_FOUNDER_APPROVED_DOCUMENTARY_DESIGN_FROZEN_COMPLIANT_FRESH_REVIEW_PENDING`
 
-## Current gate
-
-`BATCH_01_DOCUMENTARY_CANDIDATES_READY_FOR_COMPLIANT_FRESH_REVIEW_RUNTIME_NOT_PROVISIONED`
-
-GFD-007 selects compliant isolated role policy, but the current directive provisions no runtime. Zero formal roles or independent-review results may be claimed. Documentary packages, source packets, crosswalks, and approved allocation incorporation remain permissible within the explicit scope.
+Formal review, independent-review claims, adoption, ratification, implementation, migration, deployment, activation, production use, and enrollment remain separately gated.

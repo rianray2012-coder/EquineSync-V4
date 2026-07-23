@@ -1,57 +1,37 @@
 # Remaining PIAs Founder Decision Book
 
 **Status:** `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`
-**Decision source of detail:** `REMAINING_PIAS_GLOBAL_FOUNDER_DECISION_REGISTER.csv`  
+**Decision source of detail:** `REMAINING_PIAS_GLOBAL_FOUNDER_DECISION_REGISTER.csv` and `BATCH_02_HORSE_DOMAIN/ITEM_04_FOUNDER_APPROVED_V0_3/FOUNDER_DECISION_REGISTER.csv`
 **Implementation authority:** `FALSE`
 
-The five recommendations below were approved as documentary design on 2026-07-22. The exact approval statement and authority boundary are preserved in `REMAINING_PIAS_FOUNDER_APPROVAL_RECORD_2026-07-22.md`. No approval below is implementation, migration, deployment, activation, enrollment, production, review-completion, adoption, ratification, or lock authority.
+The five global recommendations below were approved as documentary design on 2026-07-22. Item 04 V0.3 separately records Founder approval of `HOR-FD-001` through `HOR-FD-017` as documentary design only. No approval below is implementation, migration, deployment, activation, enrollment, production, review-completion, adoption, ratification, lock, provider activation, registry activation, marketplace activation, AI activation, or external-service authority.
 
-## Authorized documentary actions
+## Authorized Documentary Actions
 
-The current Founder directive authorizes documentary incorporation and the separate Item 03 V0.2 strengthened successor candidate. It also preserves that:
+The current Founder directive authorizes documentary incorporation of the Item 04 V0.3 Founder-approved package, preservation of V0.1, V0.2, and V0.3 separately, construction of companion registers, deterministic validation, checksum freeze, and publication of the dedicated documentary branch. It does not authorize product behavior.
 
-- preserve Facility V1.0.0 and V1.0.1-R3 and create the bounded V0.2 conformance candidate; or
-- complete Item 03 as the already-directed Relationship, Authorization, and Permission package with explicit Components A, B, and C.
+## Approved Global Decisions
 
-Neither action approves design, adopts a PIA, authorizes implementation, or changes the ten-item portfolio.
+1. `ES-PIA-GFD-007`: qualified future review-runtime policy; no runtime is provisioned or launched.
+2. `ES-PIA-GFD-001`: Item 08 owns competition/show/travel workflow; Item 04 owns horse lifecycle and eligibility facts; Item 06 owns scheduling; Item 09 owns money.
+3. `ES-PIA-GFD-002`: Item 02 owns asset/location identity; Item 07 owns care use and observations; Item 06 owns service-request state; Item 09 owns financial obligations.
+4. `ES-PIA-GFD-003`: Item 03 owns provider relationship and authority; Item 07 owns care coordination; Item 10 owns participation surfaces; Item 09 owns money.
+5. `ES-PIA-GFD-004`: no Item 11 Reporting PIA; domain PIAs own truth and metric definitions; Item 05 owns shared presentation and discovery.
 
-## Approved decision 1 - Qualified review runtime
+## Approved Item 04 Decisions
 
-**ID:** `ES-PIA-GFD-007`  
-**Status:** `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`
-**Recommendation:** Provision read-only/on-request/network-disabled review roles and isolated bounded workspace-write/on-request/network-disabled writable roles. Do not grant a broad unrestricted exception.  
-**Why now:** Current runtime permissions block all valid fresh-review and ready-for-Founder-review claims.
+`HOR-FD-001` through `HOR-FD-017` are approved as `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY` through `FOUNDER_APPROVAL_RECORD_ITEM_04_V0_3.md`.
 
-This approval selects the future policy only. No runtime or role is provisioned or launched.
+Key recorded effects include:
 
-## Approved decision 2 - Competition, show, and travel
+- `HOR-FD-001`: Horse Lifecycle V3.0 controls broad architecture; locked Transfer V2.0 controls transfer; V3.1 remains state-qualified until verified otherwise.
+- `HOR-FD-003`: horse-first adaptive onboarding is preserved; Facility or Organization creation is not mandatory for an individual owner to establish a horse record.
+- `HOR-FD-014`: external Passport copies may be invalidated for future trusted reliance, but EquineSync must not claim remote deletion outside its control.
+- `HOR-FD-016`: the layered horse identity posture is approved in documentary scope; implementation form remains separately gated.
+- `HOR-FD-017`: relationship, custody, possession, access, care responsibility, facility assignment, financial context, and transfer-case completion retain separate effective times.
 
-**ID:** `ES-PIA-GFD-001`  
-**Status:** `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`
-**Recommendation:** Item 08 owns the workflow; Item 04 supplies horse lifecycle and eligibility facts; Item 06 owns scheduling; Item 09 owns fees and refunds.  
-**Reason:** Participation and guardian/safeguarding risk belong with lessons and training, while canonical truth stays with its source owners.
+The complete Item 04 decision register and traceability matrix are in `BATCH_02_HORSE_DOMAIN/ITEM_04_FOUNDER_APPROVED_V0_3/`.
 
-## Approved decision 3 - Assets, maintenance, and service requests
+## Authority Boundary
 
-**ID:** `ES-PIA-GFD-002`  
-**Status:** `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`
-**Recommendation:** Item 02 owns asset and location identity; Item 07 owns care use, operational observations, and safety observations; Item 06 owns service-request scheduling, assignment, and workflow state; Item 09 owns charges and vendor financial obligations.  
-**Reason:** Durable entity truth, care execution, and generic task coordination are different responsibilities.
-
-## Approved decision 4 - Service-provider network
-
-**ID:** `ES-PIA-GFD-003`  
-**Status:** `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`
-**Recommendation:** Item 03 owns provider relationship, representation, delegation, and authority; Item 07 owns provider care coordination; Item 10 owns provider participation and portal surfaces; Item 09 owns provider fees, obligations, payments, and payouts.  
-**Reason:** A provider profile, portal connection, integration, or clinical interaction must never silently create canonical authority.
-
-## Approved decision 5 - Reporting and analytics
-
-**ID:** `ES-PIA-GFD-004`  
-**Status:** `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`
-**Recommendation:** Do not create an eleventh PIA. Domain PIAs own canonical truth and metric definitions; Item 05 owns shared reporting presentation, discovery, filtering, and administrative surfaces under the reporting, privacy, permission, audit, and record canons.  
-**Reason:** This preserves the portfolio and avoids a reporting layer becoming a competing system of record.
-
-## Authority boundary
-
-Approval changes documentary allocation only. Provider connection, profile, API access, appointment participation, payment, schedule assignment, or portal visibility does not create authority. Independent review, adoption, ratification, implementation, migration, deployment, activation, production use, and enrollment remain pending separate Founder action.
+Approval changes documentary design state only. Independent review, compliant runtime provisioning, adoption, ratification, constitutional lock, implementation, schema, migration, deployment, activation, production use, external assurance, and first-user enrollment remain pending separate Founder action.

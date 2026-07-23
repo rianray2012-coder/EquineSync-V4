@@ -1,6 +1,6 @@
 # Remaining PIA Dependency Graph
 
-**Status:** `FOUNDER_ALLOCATIONS_INCORPORATED_DOCUMENTARY_ONLY`
+**Status:** `ITEM04_DOCUMENTARY_DESIGN_INTEGRATED_FOUNDER_APPROVED_PENDING_REVIEW`
 **Implementation authority:** `FALSE`
 
 ```mermaid
@@ -12,7 +12,7 @@ flowchart TD
   P01 --> P02["02 Facility Tenant Organization"]
   P01 --> P03["03 Relationship Authorization Permission"]
   P02 <--> P03
-  P01 --> P04["04 Horse Identity Profile Lifecycle"]
+  P01 --> P04["04 Horse Identity Profile Lifecycle V0.3 Documentary"]
   P02 --> P04
   P03 --> P04
   P04 --> P07["07 Care Operations"]
@@ -61,8 +61,10 @@ flowchart TD
   D3 -.-> P09
   D3 -.-> P10
   D4["GFD-004 no Item 11; domain truth plus Item 05 surfaces"] -.-> P05
+  HFD["HOR-FD-001 through HOR-FD-017 Item 04 documentary approvals"] -.-> P04
   R["GFD-007 compliant review runtime policy"] -. "approved policy; runtime not provisioned" .-> P02
   R -. "fresh review pending" .-> P03
+  R -. "fresh review pending" .-> P04
 ```
 
-Arrows express documentary authority or contract dependencies, not implementation sequence or execution authority. The bidirectional 02/03 edge requires explicit interfaces: context informs permission evaluation, while authority constrains who may create, change, or use facility/tenant/organization records. The five GFD approvals do not complete review, provision a runtime, ratify a PIA, or authorize implementation.
+Arrows express documentary authority or contract dependencies, not implementation sequence or execution authority. Item 04 V0.3 may inform downstream documentary drafting, but it is not independently reviewed, adopted, ratified, implementation-ready, operational, released, or enrollment-ready. The GFD and HOR-FD approvals do not provision a review runtime, change schemas, modify product behavior, or authorize deployment.

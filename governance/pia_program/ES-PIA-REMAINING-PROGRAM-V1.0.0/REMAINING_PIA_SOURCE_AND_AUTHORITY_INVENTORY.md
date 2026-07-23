@@ -1,27 +1,31 @@
 # Remaining PIA Source and Authority Inventory
 
-**Status:** `COMPLETE_FOR_PROGRAM_INVENTORY`  
+**Status:** `COMPLETE_FOR_PROGRAM_INVENTORY_ITEM04_DOCUMENTARY_PACKAGE_INTEGRATED`
 **Detailed record:** `PIA_SOURCE_AND_AUTHORITY_INVENTORY.md`
+**Implementation authority:** `FALSE`
 
-## Authority result
+## Authority Result
 
 | Layer | Controlling result |
 | --- | --- |
-| Constitutional | Global Governance V1.0 exact baseline is locked at `acb518ea5a160820e64681ff95a16b010fe1156c`; lock inclusion preserves each artifact's own lifecycle status. |
-| Current Founder directive | Authorizes documentary PIA inventory, drafting, review preparation, bounded revision, recommendations, validation, and packaging only; active term is `MIAP`. |
-| PIA standard | `ES-PIA-MASTER-STANDARD-V1.1` is Founder-approved, adopted, and effective; exact PDF hash `c751a733...`. |
-| MIAP | Master EquineSync Implementation Atlas V1.0 is an adopted planning/orchestration artifact, not locked and not implementation authority. |
-| Portfolio | Ten PIA positions control; an eleventh requires Founder action. |
-| Existing PIA evidence | Identity and Relationships underlying designs approved; current successor text pending. Facility candidate advanced but not adopted and review-blocked. |
-| Canon sources | Locked/adopted canons exist for identity, relationship, permission, facility, horse, health, safeguarding, finance, communication, search, privacy, records, audit, platform, integration, reporting, configuration, and related cross-PIA controls. |
-| Code and tests | Non-authoritative as product-design sources; usable later only for explicit as-built reconciliation. |
+| Constitutional | Global Governance V1.0 exact baseline remains locked; lock inclusion preserves each artifact's own lifecycle status. |
+| Current Founder directive | Authorizes Item 04 documentary integration, companion registers, validation, checksum freeze, commit, and push on the dedicated branch only. |
+| PIA standard | `ES-PIA-MASTER-STANDARD-V1.1` remains Founder-approved, adopted, and effective. |
+| MIAP | Master EquineSync Implementation Atlas V1.0 remains planning/orchestration context only, not implementation authority. |
+| Portfolio | Ten PIA positions control; Item 04 is the Horse Identity, Profile, and Lifecycle position. |
+| Item 04 package | V0.1, V0.2, and V0.3 are preserved separately; V0.3 exact bytes remain unchanged; approval is recorded through the separate Founder approval record. |
+| Item 04 decisions | `HOR-FD-001` through `HOR-FD-017` are `FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY`. |
+| Code and tests | Non-authoritative as product-design sources; no product behavior was implemented or tested. |
 
-## Gate result
+## Gate Result
 
-- Master Template: `PASS`
-- Five-question framework: `PASS_WITH_RECORDED_TERMINOLOGY_OVERRIDE`
-- Inventory and scope mapping: `PASS`
-- First-batch independent review: `FAIL_RUNTIME_PERMISSION_GATE`
+- Item 04 package checksum verification: `PASS`
+- V0.3 exact-byte preservation: `PASS`
+- Companion register construction: `PASS`
+- Item 04 deterministic validation: `PASS_NOT_INDEPENDENT_REVIEW`
+- Program validation: `PASS_NOT_INDEPENDENT_REVIEW`
+- Formal review: `NOT_STARTED`
 - Implementation authority: `FALSE`
+- Production/enrollment authority: `FALSE`
 
-Exact locators, hashes, lifecycle qualifications, protected paths, and source-family mappings are in `PIA_SOURCE_AND_AUTHORITY_INVENTORY.md` and the inherited portfolio `PIA_PACKAGE_INVENTORY.csv`.
+Exact locators, hashes, lifecycle qualifications, protected paths, and source-family mappings are in `PIA_SOURCE_AND_AUTHORITY_INVENTORY.md`, `PIA_SOURCE_CONFLICT_REGISTER.csv`, and the Item 04 `SOURCE_REGISTER.csv`.

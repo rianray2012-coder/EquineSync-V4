@@ -79,6 +79,35 @@ ITEM03_V02_REQUIRED = {
     "VALIDATION_REPORT.md",
 }
 
+ITEM04_REL = "BATCH_02_HORSE_DOMAIN/ITEM_04_FOUNDER_APPROVED_V0_3"
+ITEM04_REQUIRED = {
+    "ACCEPTANCE_CRITERIA.csv",
+    "ADVERSARIAL_SCENARIOS.md",
+    "ARTIFACT_MANIFEST.json",
+    "AUDIT_AND_EVIDENCE_REQUIREMENTS.csv",
+    "CHECKSUM_LEDGER.sha256",
+    "DUPLICATE_MERGE_UNMERGE_CONTRACT.md",
+    "ES-PIA-HORSE-IDENTITY-LIFECYCLE_V0_3_FOUNDER_APPROVED_DESIGN_BASELINE.md",
+    "FIVE_QUESTION_RESPONSE_MATRIX.csv",
+    "FOUNDER_APPROVAL_RECORD_ITEM_04_V0_3.md",
+    "FOUNDER_DECISION_REGISTER.csv",
+    "FOUNDER_DECISION_TRACEABILITY_MATRIX.csv",
+    "GOLDEN_PATHS.md",
+    "OFFLINE_AND_SYNCHRONIZATION_REQUIREMENTS.md",
+    "PASSPORT_AND_EXPORT_CONTRACT.md",
+    "PRIVACY_RECORDS_CLAIMS_CROSSWALK.csv",
+    "REQUIREMENT_REGISTER.csv",
+    "REVISED_TRACEABILITY_MATRIX.csv",
+    "REVIEW_GATE.md",
+    "SOURCE_REGISTER.csv",
+    "STATE_TRANSITION_MATRIX.csv",
+    "TEST_MATRIX.csv",
+    "TRANSFER_EFFECTIVE_TIME_AND_CONTINUITY_CONTRACT.md",
+    "UNRESOLVED_ITEMS_REGISTER.csv",
+    "VALIDATION_REPORT.md",
+    "VERSION_LINEAGE.csv",
+}
+
 QUESTIONS = [
     "Can engineering build the capability without making unauthorized product decisions?",
     "Can quality assurance determine objectively whether the capability works?",
@@ -87,10 +116,15 @@ QUESTIONS = [
     "Can the Founder determine whether the capability is ready for first-user enrollment?",
 ]
 
-EXPECTED_TOTAL_FILES = 119
-EXPECTED_CHECKSUMMED_FILES = 118
+EXPECTED_TOTAL_FILES = 148
+EXPECTED_CHECKSUMMED_FILES = 147
 MANIFEST_NAME = "REMAINING_PIA_FILE_MANIFEST.txt"
 CHECKSUM_LEDGER_NAME = "REMAINING_PIA_CHECKSUMS.sha256"
+ITEM04_DISPOSITION = (
+    "ITEM_04_V0_3_FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY_"
+    "PENDING_COMPLIANT_FRESH_REVIEW"
+)
+ITEM04_V03_SHA256 = "daae9b0ebe1551217a96c0cb640939752807d12c1e2241f0a936bb9ce14a21e5"
 
 
 def read_csv(path: Path, errors: list[str]) -> list[dict[str, str]]:
@@ -457,6 +491,237 @@ def main(root_arg: str) -> int:
         if sorted(v02_ledger_files) != expected_v02_covered:
             errors.append("Item 03 V0.2 checksum ledger coverage mismatch")
 
+    item04 = root / ITEM04_REL
+    item04_paths = sorted(path for path in item04.glob("*") if path.is_file())
+    item04_files = [path.name for path in item04_paths]
+    if set(item04_files) != ITEM04_REQUIRED or len(item04_files) != 25:
+        errors.append("Item 04 V0.3 must contain exactly the 25 required files")
+
+    item04_main_path = (
+        item04
+        / "ES-PIA-HORSE-IDENTITY-LIFECYCLE_V0_3_FOUNDER_APPROVED_DESIGN_BASELINE.md"
+    )
+    item04_text = (
+        item04_main_path.read_text(encoding="utf-8")
+        if item04_main_path.is_file()
+        else ""
+    )
+    if item04_main_path.is_file():
+        actual_v03_hash = hashlib.sha256(item04_main_path.read_bytes()).hexdigest()
+        if actual_v03_hash != ITEM04_V03_SHA256:
+            errors.append("Item 04 V0.3 approved artifact SHA-256 mismatch")
+    item04_sections = [
+        int(match.group(1))
+        for match in re.finditer(r"^## ([0-9]+)\. ", item04_text, re.MULTILINE)
+    ]
+    if item04_sections != list(range(1, 44)):
+        errors.append("Item 04 V0.3 must contain exactly ordered sections 1 through 43")
+    for question in QUESTIONS:
+        if question not in item04_text:
+            errors.append(f"Item 04 V0.3 missing exact readiness question: {question}")
+    required_item04_statements = [
+        "**Formal independent review:** `NOT_STARTED`",
+        "**Founder approval of V0.3:** `NOT_REQUESTED`",
+        "**Implementation:** `FALSE`",
+        "**Schema:** `FALSE`",
+        "**Migration:** `FALSE`",
+        "**Deployment:** `FALSE`",
+        "**Production use:** `FALSE`",
+        "**Enrollment:** `FALSE`",
+        "NO_IMPLEMENTATION_NO_SCHEMA_NO_MIGRATION_NO_DEPLOYMENT_NO_PRODUCTION_NO_ENROLLMENT",
+    ]
+    for statement in required_item04_statements:
+        if statement not in item04_text:
+            errors.append(f"Item 04 V0.3 missing preserved boundary statement: {statement}")
+
+    item04_questions = csv_rows.get(f"{ITEM04_REL}/FIVE_QUESTION_RESPONSE_MATRIX.csv", [])
+    if [row.get("question") for row in item04_questions] != QUESTIONS:
+        errors.append("Item 04 five-question matrix must preserve exact wording and order")
+    expected_item04_answers = ["NO", "PARTIALLY_SATISFIED", "PARTIALLY_SATISFIED", "NO", "NO"]
+    if [row.get("answer") for row in item04_questions] != expected_item04_answers:
+        errors.append("Item 04 five-question answers differ from the controlled result")
+
+    item04_key_map = {
+        "SOURCE_REGISTER.csv": "source_id",
+        "REQUIREMENT_REGISTER.csv": "requirement_id",
+        "STATE_TRANSITION_MATRIX.csv": "transition_id",
+        "AUDIT_AND_EVIDENCE_REQUIREMENTS.csv": "evidence_id",
+        "PRIVACY_RECORDS_CLAIMS_CROSSWALK.csv": "crosswalk_id",
+        "ACCEPTANCE_CRITERIA.csv": "acceptance_id",
+        "TEST_MATRIX.csv": "test_id",
+        "UNRESOLVED_ITEMS_REGISTER.csv": "unresolved_id",
+        "FOUNDER_DECISION_REGISTER.csv": "decision_id",
+        "FOUNDER_DECISION_TRACEABILITY_MATRIX.csv": "decision_id",
+    }
+    for filename, key in item04_key_map.items():
+        unique(
+            csv_rows.get(f"{ITEM04_REL}/{filename}", []),
+            key,
+            f"Item 04 V0.3 {filename}",
+            errors,
+        )
+
+    item04_sources = {
+        row.get("source_id", "")
+        for row in csv_rows.get(f"{ITEM04_REL}/SOURCE_REGISTER.csv", [])
+    }
+    item04_requirements = {
+        row.get("requirement_id", "")
+        for row in csv_rows.get(f"{ITEM04_REL}/REQUIREMENT_REGISTER.csv", [])
+    }
+    item04_acceptance = {
+        row.get("acceptance_id", "")
+        for row in csv_rows.get(f"{ITEM04_REL}/ACCEPTANCE_CRITERIA.csv", [])
+    }
+    item04_tests = {
+        row.get("test_id", "")
+        for row in csv_rows.get(f"{ITEM04_REL}/TEST_MATRIX.csv", [])
+    }
+    item04_unresolved = {
+        row.get("unresolved_id", "")
+        for row in csv_rows.get(f"{ITEM04_REL}/UNRESOLVED_ITEMS_REGISTER.csv", [])
+    }
+    item04_decisions = {
+        row.get("decision_id", "")
+        for row in csv_rows.get(f"{ITEM04_REL}/FOUNDER_DECISION_REGISTER.csv", [])
+    }
+    if len(item04_sources) != 12:
+        errors.append("Item 04 source register must contain exactly 12 sources")
+    if len(item04_requirements) != 120:
+        errors.append("Item 04 requirement register must contain exactly 120 requirements")
+    if len(item04_acceptance) != 50:
+        errors.append("Item 04 acceptance matrix must contain exactly 50 criteria")
+    if len(item04_tests) != 60:
+        errors.append("Item 04 test matrix must contain exactly 60 tests")
+    expected_item04_decisions = {f"HOR-FD-{number:03d}" for number in range(1, 18)}
+    if item04_decisions != expected_item04_decisions:
+        errors.append("Item 04 Founder decision register must contain HOR-FD-001 through HOR-FD-017 exactly")
+    for row in csv_rows.get(f"{ITEM04_REL}/FOUNDER_DECISION_REGISTER.csv", []):
+        if row.get("approval_status") != "FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY":
+            errors.append(f"{row.get('decision_id')}: Item 04 decision status is not documentary-only")
+    for row in csv_rows.get(f"{ITEM04_REL}/TEST_MATRIX.csv", []):
+        if row.get("execution_status") != "DESIGN_TEST_DEFINED_NOT_EXECUTED":
+            errors.append(f"{row.get('test_id')}: Item 04 test is not marked unexecuted")
+
+    for relative, rows in csv_rows.items():
+        if not relative.startswith(f"{ITEM04_REL}/"):
+            continue
+        for line_number, row in enumerate(rows, 2):
+            joined = ";".join(row.values())
+            for found in ids(joined, "HOR-SRC-"):
+                if found not in item04_sources:
+                    errors.append(f"{relative}:{line_number}: unknown Item 04 source {found}")
+            for found in ids(joined, "HOR-REQ-"):
+                if found not in item04_requirements:
+                    errors.append(f"{relative}:{line_number}: unknown Item 04 requirement {found}")
+            for found in ids(joined, "HOR-AC-"):
+                if found not in item04_acceptance:
+                    errors.append(f"{relative}:{line_number}: unknown Item 04 acceptance criterion {found}")
+            for found in ids(joined, "HOR-TST-"):
+                if found not in item04_tests:
+                    errors.append(f"{relative}:{line_number}: unknown Item 04 test {found}")
+            for found in ids(joined, "HOR-UNR-"):
+                if found not in item04_unresolved:
+                    errors.append(f"{relative}:{line_number}: unknown Item 04 unresolved item {found}")
+            for found in ids(joined, "HOR-FD-"):
+                if found not in item04_decisions:
+                    errors.append(f"{relative}:{line_number}: unknown Item 04 Founder decision {found}")
+
+    item04_trace = csv_rows.get(f"{ITEM04_REL}/REVISED_TRACEABILITY_MATRIX.csv", [])
+    if [row.get("section") for row in item04_trace] != [str(n) for n in range(1, 44)]:
+        errors.append("Item 04 traceability matrix must contain sections 1 through 43")
+
+    item04_approval_record = item04 / "FOUNDER_APPROVAL_RECORD_ITEM_04_V0_3.md"
+    item04_approval_text = (
+        item04_approval_record.read_text(encoding="utf-8")
+        if item04_approval_record.is_file()
+        else ""
+    )
+    required_approval_fragments = [
+        ITEM04_DISPOSITION,
+        "The Founder approves the documentary design expressed in Item 04 V0.3",
+        "V0.3 bytes remain unchanged",
+        "formal or independent review completion",
+        "implementation or engineering execution",
+    ]
+    for fragment in required_approval_fragments:
+        if fragment not in item04_approval_text:
+            errors.append(f"Item 04 approval record missing required fragment: {fragment}")
+
+    item04_review_gate = item04 / "REVIEW_GATE.md"
+    item04_review_gate_text = (
+        item04_review_gate.read_text(encoding="utf-8")
+        if item04_review_gate.is_file()
+        else ""
+    )
+    for fragment in [
+        ITEM04_DISPOSITION,
+        "| Compliant fresh independent review | `NOT_STARTED` |",
+        "| Implementation authority | `FALSE` |",
+        "| First-user enrollment | `FALSE` |",
+    ]:
+        if fragment not in item04_review_gate_text:
+            errors.append(f"Item 04 review gate missing required fragment: {fragment}")
+
+    item04_manifest = item04 / "ARTIFACT_MANIFEST.json"
+    if item04_manifest.is_file():
+        try:
+            item04_manifest_data = json.loads(item04_manifest.read_text(encoding="utf-8"))
+            manifest_files = [entry["filename"] for entry in item04_manifest_data.get("files", [])]
+            if item04_manifest_data.get("total_package_files") != 25:
+                errors.append("Item 04 manifest total_package_files must be 25")
+            if item04_manifest_data.get("checksum_covered_files") != 24:
+                errors.append("Item 04 manifest checksum_covered_files must be 24")
+            if sorted(manifest_files) != sorted(item04_files):
+                errors.append("Item 04 manifest does not match package filenames")
+            if item04_manifest_data.get("approved_artifact_sha256") != ITEM04_V03_SHA256:
+                errors.append("Item 04 manifest approved artifact hash mismatch")
+            manifest_counts = item04_manifest_data.get("counts", {})
+            expected_counts = {
+                "canonical_sections": 43,
+                "sources": 12,
+                "requirements": 120,
+                "acceptance_criteria": 50,
+                "design_tests": 60,
+                "golden_paths": 10,
+                "adversarial_scenarios": 40,
+                "founder_decisions": 17,
+                "state_axes": 10,
+            }
+            for key, expected in expected_counts.items():
+                if manifest_counts.get(key) != expected:
+                    errors.append(f"Item 04 manifest count {key} must be {expected}")
+        except Exception as exc:
+            errors.append(f"Item 04 manifest invalid: {exc}")
+
+    item04_ledger = item04 / "CHECKSUM_LEDGER.sha256"
+    item04_ledger_files: list[str] = []
+    if item04_ledger.is_file():
+        for line_number, line in enumerate(item04_ledger.read_text(encoding="utf-8").splitlines(), 1):
+            try:
+                digest, filename = line.split("  ", 1)
+            except ValueError:
+                errors.append(f"Item 04 checksum line {line_number}: invalid format")
+                continue
+            if not re.fullmatch(r"[0-9a-f]{64}", digest):
+                errors.append(f"Item 04 checksum line {line_number}: invalid SHA-256")
+                continue
+            item04_ledger_files.append(filename)
+            target = item04 / filename
+            if not target.is_file():
+                errors.append(f"Item 04 checksum target missing: {filename}")
+            elif hashlib.sha256(target.read_bytes()).hexdigest() != digest:
+                errors.append(f"Item 04 checksum mismatch: {filename}")
+        expected_item04_covered = sorted(name for name in item04_files if name != item04_ledger.name)
+        if len(item04_ledger_files) != 24:
+            errors.append("Item 04 checksum ledger must contain exactly 24 entries")
+        if len(item04_ledger_files) != len(set(item04_ledger_files)):
+            errors.append("Item 04 checksum ledger contains duplicate filenames")
+        if item04_ledger.name in item04_ledger_files:
+            errors.append("Item 04 checksum ledger must intentionally self-exclude")
+        if sorted(item04_ledger_files) != expected_item04_covered:
+            errors.append("Item 04 checksum ledger coverage mismatch")
+
     text = "\n".join(
         path.read_text(encoding="utf-8")
         for path in root.rglob("*.md")
@@ -501,6 +766,9 @@ def main(root_arg: str) -> int:
     print(f"Item 03 V0.2 files: {len(item03_v02_files)}")
     print(f"Item 03 V0.2 checksum-covered files: {len(v02_ledger_files)}")
     print("Item 03 V0.2 checksum ledger self-excluded: CHECKSUM_LEDGER.sha256")
+    print(f"Item 04 V0.3 files: {len(item04_files)}")
+    print(f"Item 04 V0.3 checksum-covered files: {len(item04_ledger_files)}")
+    print("Item 04 V0.3 checksum ledger self-excluded: CHECKSUM_LEDGER.sha256")
     print(f"Intentional Markdown hard breaks: {intentional_markdown_hard_breaks}")
     for warning in warnings:
         print(f"WARNING: {warning}")

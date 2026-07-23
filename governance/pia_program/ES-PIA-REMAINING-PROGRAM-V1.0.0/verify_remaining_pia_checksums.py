@@ -9,8 +9,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "REMAINING_PIA_CHECKSUMS.sha256"
-EXPECTED_TOTAL_FILES = 119
-EXPECTED_LEDGER_ENTRIES = 118
+EXPECTED_TOTAL_FILES = 148
+EXPECTED_LEDGER_ENTRIES = 147
 
 
 def main() -> int:

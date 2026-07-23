@@ -1,9 +1,9 @@
 # PIA Source and Authority Inventory
 
-**Record ID:** `ES-PIA-REMAINING-SOURCE-INVENTORY-V1.0.0`  
-**Inventory baseline:** `5e549056ee25fd1992846bbd6fedaba4329ab668`  
-**Repository:** `rianray2012-coder/EquineSync-V4`  
-**Status:** `SOURCE_DISCOVERY_COMPLETE_FOR_PROGRAM_INVENTORY`  
+**Record ID:** `ES-PIA-REMAINING-SOURCE-INVENTORY-V1.0.0`
+**Inventory baseline:** `5e549056ee25fd1992846bbd6fedaba4329ab668`
+**Repository:** `rianray2012-coder/EquineSync-V4`
+**Status:** `SOURCE_DISCOVERY_COMPLETE_FOR_PROGRAM_INVENTORY`
 **Implementation authority:** `FALSE`
 
 ## Applied hierarchy
@@ -46,6 +46,7 @@ Lower levels do not silently override higher levels. Current code is evidence of
 | `SRC-PIA-02-R3` | 02 | `governance/pia/ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.0.1-FOUNDER-DECISION-INCORPORATED-REVIEW-CANDIDATE` | Founder decisions incorporated; formal fresh review blocked by runtime permission failure; adopted `false`. |
 | `SRC-REV-022` | 02 | `governance/founder_orchestrated_review/review_cycles/ES-REV-2026-022` | Six permission records failed before spawn; zero formal review roles started. Mechanical validation is not independent review. |
 | `SRC-FALLBACK-001` | All | `governance/founder_orchestrated_review/temporary_non_agent_fallback/FORA-NONAGENT-FALLBACK-2026-001` | Temporary procedural fallback evidence only; use remains subject to its authorization, frozen-input, and lane controls. |
+| `SRC-ITEM04-PKG-001` | 04 | Verified external Item 04 Founder-approved V0.3 package integrated under this branch | V0.3 approved documentary design baseline; HOR-FD-001 through HOR-FD-017 approved documentary-only; formal review and implementation remain pending. |
 
 ## Canonical source families
 
@@ -58,7 +59,7 @@ The detailed package inventory supplies exact versions, hashes, paths, positions
 | Permission and Access Control | 03C | `docs/canon/adopted_sources/MASTER_PERMISSION_AND_ACCESS_CONTROL_MODEL_V1_1_ADOPTED_SOURCE.md` |
 | Agreement, Consent, Authorization | 03B, cross-PIA | `docs/canon/adoptions/c0_019_agreement_consent_authorization_v2_1/MASTER_AGREEMENT_CONSENT_AND_AUTHORIZATION_MODEL_V2_1_ADOPTED_PRE_LOCK.md` |
 | Facility, Barn, Business, Ecosystem | 02 | adopted sources under `docs/canon/adopted_sources/` |
-| Horse Lifecycle and Transfer | 04 | `MASTER_HORSE_LIFECYCLE_V3_1_ADOPTED_SOURCE.md`; `MASTER_HORSE_TRANSFER_AND_CONTINUITY_POLICY.md` |
+| Horse Lifecycle and Transfer | 04 | Horse Lifecycle V3.0 broad architecture; locked Transfer and Continuity V2.0; V3.1 state-qualified successor input |
 | Equine Health and Barn Operations | 07 | `MASTER_EQUINE_HEALTH_WELFARE_MEDICAL_RECORD_AND_CLINICAL_SUPPORT_MODEL_V1_1_ADOPTED_SOURCE.md`; Barn V3.1 |
 | Safeguarding and protected participants | 08 | `MASTER_MINOR_GUARDIANSHIP_SAFEGUARDING_AND_PROTECTED_PARTICIPANT_MODEL_V1_2_ADOPTED_SOURCE.md` |
 | Search and Product Vision | 05 | Search V2.0 adopted source; `docs/canon/MASTER_PRODUCT_VISION.md` |

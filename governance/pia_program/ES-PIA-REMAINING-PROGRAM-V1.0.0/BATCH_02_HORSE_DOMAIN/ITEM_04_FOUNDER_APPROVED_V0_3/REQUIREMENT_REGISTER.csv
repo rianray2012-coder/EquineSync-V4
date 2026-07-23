@@ -1,0 +1,121 @@
+requirement_id,requirement,source_ids,decision_ids,section_refs,priority,status,unresolved_id
+HOR-REQ-001,One real-world horse should converge to one durable canonical identity within the Founder-approved identity-scope model.,"HOR-SRC-002, HOR-SRC-003, HOR-SRC-009",HOR-FD-016,29;40;41,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-002,"The horse subject must remain representable without an account, facility, organization, invoice, provider, or public profile.",HOR-SRC-001,HOR-FD-003,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-003,"Canonical Horse ID must remain stable through changes in name, relationship, facility, trainer, rider, provider, account, location, work, retirement, death, and archive.",HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-004,A canonical Horse ID must not be presented as legal title or registry title.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-005,"Planned, expected, pregnancy-loss, stillbirth, live-born, first-known, deceased, and erroneous existence states must remain distinct.",HOR-SRC-001,HOR-FD-013,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-006,A planned or expected foal must not silently become an active live-horse identity.,HOR-SRC-001,HOR-FD-013,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-007,A live-born or first-known horse identity must be independently durable and linked to predecessor planning or intake records.,HOR-SRC-001,HOR-FD-013,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-008,"The system must support exact, partial, approximate, conflicting, and unknown identity facts.",HOR-SRC-001,NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-009,"Every material horse fact must identify source, owner, version, effective time, verification state, confidence basis, and correction state.",HOR-SRC-001,NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-010,Imported data must remain a claim until governed reconciliation establishes its status.,HOR-SRC-001,HOR-FD-007,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-011,Estimated or asserted values must not display as verified exact facts.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-012,"Current truth, historical snapshots, source-owned references, and derived projections must remain distinguishable.",HOR-SRC-001,NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-013,A copied label or cached value must not become editable canonical truth.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-014,Conflicting material facts must be surfaced and must not use blind last-write-wins.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-015,Correction must preserve the original record and create an attributable successor.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-016,Historical decisions and exports must retain the exact fact versions they used.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-017,Identity disputes must route to Claims and Evidence governance.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-018,Configuration changes must not retroactively reinterpret historical horse facts without controlled reconciliation.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-019,Horse Profile must be a bounded projection rather than the canonical record.,"HOR-SRC-003, HOR-SRC-007, HOR-SRC-011",NONE,29;40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-020,"Horse Passport must be purpose-specific, permission-filtered, source-versioned, and time-stamped.",HOR-SRC-001,HOR-FD-014,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-021,"Passport must state omissions, limitations, expiry where applicable, and that it is not title or completeness proof.",HOR-SRC-001,HOR-FD-014,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-022,Passport omission must not delete the underlying source record.,HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-023,"Profile, Passport, search, report, export, public, provider, emergency, and memorial projections must be separately governed.",HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-024,"Projection generation must record policy version, source versions, permission watermark, purpose, and requesting actor.",HOR-SRC-001,HOR-FD-014,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-025,"Stale projections must be expired, revoked, or regenerated when material watermarks change.",HOR-SRC-001,HOR-FD-014,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-026,Public and marketplace projections must be private or off by default unless separately authorized.,HOR-SRC-001,HOR-FD-004;HOR-FD-015,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-027,Search must support current and former names without exposing restricted raw identifiers.,HOR-SRC-001,NONE,29;40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-028,"Reports must identify definition owner, population, time period, completeness, exclusions, and correction status.",HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-029,Horse lifecycle must use multiple axes rather than one global status field.,"HOR-SRC-002, HOR-SRC-004, HOR-SRC-005",HOR-FD-001;HOR-FD-006,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-030,Compatible time-bounded lifecycle statuses may coexist.,HOR-SRC-001,HOR-FD-001;HOR-FD-006,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-031,Lifecycle compatibility and precedence rules must be versioned and historically stable.,HOR-SRC-001,HOR-FD-001;HOR-FD-006,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-032,Current operational state must not erase historical state.,HOR-SRC-001,HOR-FD-006,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-033,Retirement must adapt operations without hiding the horse.,HOR-SRC-001,HOR-FD-006,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-034,"Missing, stolen, seized, impounded, disputed, and unknown-location states must support heightened restrictions.",HOR-SRC-001,HOR-FD-006,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-035,"Eligibility facts must identify requirement source, status, evidence, effective time, expiry, and dispute state.",HOR-SRC-001,NONE,29;40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-036,Eligibility workflow results must not rewrite canonical horse facts.,HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-037,"Item 04 eligibility facts must remain distinct from Item 08 workflow, Item 06 timing, and Item 09 financial consequences.",HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-038,"Reproductive and pedigree relationships must distinguish genetic, gestational, registry, ownership, and service roles.",HOR-SRC-001,HOR-FD-008,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-039,"Foal identity must be linked to, not collapsed into, parent or recipient-mare records.",HOR-SRC-001,HOR-FD-008,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-040,Duplicate candidates must be investigated before destructive convergence.,"HOR-SRC-002, HOR-SRC-003, HOR-SRC-009",HOR-FD-002,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-041,"No duplicate decision may rely solely on name, color, breed, owner, facility, photo similarity, or vendor ID.",HOR-SRC-001,HOR-FD-002,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-042,"Merge must require explicit authority, multi-source evidence, conflict review, and full lineage preservation.",HOR-SRC-001,HOR-FD-002,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-043,"Merge must preserve candidate IDs, source records, restrictions, disputes, and prior decisions.",HOR-SRC-001,HOR-FD-002,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-044,Merge must not grant new permission.,HOR-SRC-001,HOR-FD-002,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-045,Unmerge and split correction must be supported through governed reconciliation.,HOR-SRC-001,HOR-FD-002,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-046,"Every downstream horse reference must reconcile after merge, unmerge, or split correction.",HOR-SRC-001,HOR-FD-002,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-047,Duplicate and merge decisions must be reversible without deleting evidence.,HOR-SRC-001,HOR-FD-002,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-048,AI or probabilistic matching may propose but may not decide merge.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-049,Vendor deletion must not delete canonical horse identity or history.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-050,Transfer must be a governed state machine rather than an owner-field edit.,"HOR-SRC-003, HOR-SRC-007, HOR-SRC-008",HOR-FD-001;HOR-FD-017,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-051,Transfer must preserve canonical Horse ID.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-052,"Transfer must identify parties, authority, evidence, restrictions, disputes, and purpose-specific effective times.",HOR-SRC-001,HOR-FD-001;HOR-FD-012;HOR-FD-017,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-053,Transfer must prepare a permission-filtered continuity packet.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-054,Transfer must establish successor access and remove obsolete access through Item 03.,HOR-SRC-001,NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-055,"Transfer completion must be blocked while critical identity, access, care-continuity, evidence, or required notice obligations remain unresolved.",HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-056,Former parties must retain only purpose-specific history permitted by current governance.,HOR-SRC-001,HOR-FD-010,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-057,"Payment, possession, facility presence, authorship, or prior relationship must not create ownership or continuing authority.",HOR-SRC-001,NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-058,"Custody, possession, ownership, lease, care, payment, facility, and stewardship must remain distinct.",HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-059,"Current location, home facility, temporary location, transport, hospital, quarantine, evacuation, and historical location must remain distinct.",HOR-SRC-001,HOR-FD-005,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-060,Location references must point to Item 02 topology rather than duplicate it.,HOR-SRC-001,HOR-FD-005,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-061,"Precise location must support suppression or generalization for security, theft, dispute, safeguarding, and emergency risk.",HOR-SRC-001,HOR-FD-005,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-062,"Movement episodes must preserve origin, destination, responsible party, timing, handoff, condition, documents, and exceptions as applicable.",HOR-SRC-001,HOR-FD-012,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-063,"Death must not delete identity, history, evidence, or permitted memories.","HOR-SRC-002, HOR-SRC-003, HOR-SRC-009",HOR-FD-009,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-064,"Cause of death, euthanasia, remains, necropsy, insurance, and memorial content must be separately sensitivity-controlled.",HOR-SRC-001,HOR-FD-009,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-065,Public memorialization must be voluntary where required and permission-filtered.,HOR-SRC-001,HOR-FD-009,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-066,"Archive must prevent ordinary mutation while allowing authorized correction, claims, legal holds, retention actions, and memorial management.",HOR-SRC-001,HOR-FD-009,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-067,"Erroneous death, archive, activation, merge, or identity state must be corrected through attributable successor events.",HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-068,"Account closure, facility closure, relationship end, or vendor removal must not delete horse continuity.",HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-069,All access to horse data must use Item 03 permission and field-level projection.,"HOR-SRC-007, HOR-SRC-009, HOR-SRC-011",NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-070,Wrong-horse and wrong-tenant requests must fail closed without enumeration.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-071,"Sensitive location, dispute, reproductive, health-context, death, insurance, and protected-participant data must receive heightened controls.",HOR-SRC-001,HOR-FD-005,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-072,"Support access must be ticketed, purpose-bound, time-limited, attributable, revocable, and reviewable.",HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-073,"Exports must be purpose-bound, minimized, watermarked, attributable, and auditable.",HOR-SRC-001,HOR-FD-014,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-074,"Horse data must not create opaque value, danger, quality, suitability, lameness, welfare, temperament, insurability, or performance scores.",HOR-SRC-001,NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-075,Public search must prevent enumeration by restricted identifier or precise location.,HOR-SRC-001,HOR-FD-004,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-076,"Media and extracted metadata must remain evidence claims rather than conclusive identity, medical, behavior, or ownership proof.",HOR-SRC-001,NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-077,Offline work may preserve only non-authoritative proposals for permitted low-risk observations or evidence capture.,HOR-SRC-001,NONE,29;40;41,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-078,"Offline operation must not finalize identity activation, merge, unmerge, split correction, transfer, death, archive, memorial, permission, or unrestricted Passport.",HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-079,"Synchronization must reauthenticate, reauthorize, recheck duplicate state, compare versions, and detect wrong-horse, wrong-tenant, stale, replayed, or restriction-conflicting proposals.",HOR-SRC-001,NONE,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-080,Offline queue state must remain visible and materially conflicting changes must not use last-write-wins.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-081,"AI may summarize cited evidence, identify gaps, compare claims, and draft proposals.","HOR-SRC-001, HOR-SRC-011, HOR-SRC-012",NONE,29;40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-082,"AI may not make final identity, merge, ownership, custody, medical, welfare, legal, transfer, publication, or permission decisions.",HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-083,"Automation must use a named system actor, accountable human, narrow purpose, exact versions, evidence, idempotency, monitoring, and escalation.",HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-084,"External integrations must be typed, versioned, tenant-scoped, idempotent, and non-authority-creating.",HOR-SRC-001,NONE,29;40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-085,External data retraction must preserve prior source history and correction lineage.,HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-086,"Analytics must disclose context, missingness, uncertainty, and definition ownership.",HOR-SRC-001,NONE,40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-087,"Every consequential event must identify canonical and candidate IDs, actor, authority, source, policy, configuration, time, correlation, and reconciliation status.",HOR-SRC-001,NONE,29;40,P1,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-088,"Future implementation must be deterministic, non-destructive, tenant-isolated, explainable, auditable, source-aware, accessible, and resilient.",HOR-SRC-001,HOR-FD-011,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-089,Future implementation must prove referential integrity and no orphaned downstream references after convergence corrections.,HOR-SRC-001,HOR-FD-002,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-090,"Migration must preserve legacy IDs, provenance, approximate dates, disputes, restrictions, and source systems.",HOR-SRC-001,HOR-FD-003,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-091,Migration must quarantine ambiguity and prohibit automatic merge or authority manufacture.,HOR-SRC-001,HOR-FD-003,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-092,"Rollback must preserve horse identity, history, evidence, transfer state, convergence lineage, and corrections.",HOR-SRC-001,HOR-FD-002,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-093,"Operational targets, runbooks, alerts, staffing, recovery proof, and support readiness must be approved before production.",HOR-SRC-001,HOR-FD-011;HOR-FD-015,29;40;41,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-094,All 43 canonical sections must remain present and in order.,"HOR-SRC-001, HOR-SRC-012",HOR-FD-001,29;40;41,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-095,The five readiness questions must use exact active wording and permitted answer vocabulary.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-096,Questions 1 through 3 must be YES_WITH_EVIDENCE before implementation authorization.,HOR-SRC-001,HOR-FD-011,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-097,All five questions must be YES_WITH_EVIDENCE before first-user enrollment.,HOR-SRC-001,HOR-FD-015,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-098,"Every unresolved Founder decision must identify recommendation, rationale, source, affected requirements, and gate effect.",HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-099,"Independent review, approval, adoption, implementation, release, and enrollment must remain separately represented.",HOR-SRC-001,HOR-FD-001,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-100,"This candidate must not authorize schema, migration, deployment, production, external activation, public launch, or enrollment.",HOR-SRC-001,HOR-FD-015,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-101,"Horse identity scope across tenants must be explicit, versioned, and Founder-approved before implementation.","HOR-SRC-002, HOR-SRC-003, HOR-SRC-007, HOR-SRC-009, HOR-SRC-011",HOR-FD-016,29;40;41,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-102,"Cross-tenant matching must not disclose another tenant, horse-record existence, canonical internal ID, or protected content without authority.",HOR-SRC-001,HOR-FD-016,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-103,Cross-tenant identity and transfer matching must use blind or mediated workflows with attributable evidence and audit.,HOR-SRC-001,HOR-FD-016,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-104,Canonical internal Horse IDs must not be public or enumerable locators; shared surfaces must use public-safe references.,HOR-SRC-001,HOR-FD-004;HOR-FD-016,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-105,"External identifiers must be qualified by issuer, namespace, jurisdiction, type, and effective period before uniqueness or match decisions.",HOR-SRC-001,HOR-FD-007,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-106,"Replaced, duplicated, mistyped, fraudulent, retracted, or disputed identifiers must preserve prior claims and correction lineage.",HOR-SRC-001,HOR-FD-007,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-107,Horse age must be derived from source-qualified birth evidence and an explicit as-of date rather than stored as stale canonical truth.,HOR-SRC-001,NONE,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-108,"Twins, clones, and genetically identical horses must retain separate canonical identities; DNA or pedigree alone must not authorize merge.",HOR-SRC-001,HOR-FD-016,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-109,"Reproductive predecessor records must support zero, one, or multiple outcomes, with a separate Horse ID for every live-born horse.",HOR-SRC-001,HOR-FD-008;HOR-FD-013,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-110,"Every continuity packet must identify omissions, conflicts, stale sources, restricted items, and completeness limitations.",HOR-SRC-001,HOR-FD-010,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-111,"Transfer must preserve impact-specific effective times for relationship, custody, possession, access, care responsibility, facility assignment, financial context, and other governed consequences.",HOR-SRC-001,HOR-FD-012;HOR-FD-017,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-112,"Transfer approval, each impact's effect, downstream reconciliation, and case completion must remain separate states.",HOR-SRC-001,HOR-FD-012;HOR-FD-017,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-113,Revoking or invalidating a Passport or export must block future trusted reliance but must not be represented as remote deletion of external copies.,HOR-SRC-001,HOR-FD-014,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-114,Passport and export verification must return minimum safe validity metadata without expanding access to protected horse data.,HOR-SRC-001,HOR-FD-014,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-115,"Human personal data embedded in horse history must remain separately governed and capable of lawful minimization, restriction, correction, pseudonymization, or erasure without deleting horse continuity.",HOR-SRC-001,HOR-FD-010,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-116,"Public, shared, transfer, memorial, and broad projections must control EXIF, precise location, hidden document properties, embedded personal data, and unredacted sensitive metadata.",HOR-SRC-001,HOR-FD-005,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-117,"Death, missing, stolen, recovery, and archive states must trigger permission-filtered downstream reconciliation rather than directly mutating another PIA's truth.",HOR-SRC-001,HOR-FD-009,29;40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-118,"Public missing or stolen alerts must require separate authority, minimum content, expiry, and suppression of owner, minor, and precise-location data.",HOR-SRC-001,HOR-FD-005,40,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-119,"Merge, unmerge, and split correction must preserve durable, permission-checked tombstones or redirects and prevent broken downstream references.",HOR-SRC-001,HOR-FD-002;HOR-FD-016,40;41,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
+HOR-REQ-120,"Horse identity must support unknown, absent, disputed, or changing ownership without forcing or manufacturing an Item 03 relationship.",HOR-SRC-001,HOR-FD-003,29;40;41,P0,DOCUMENTED_FOUNDER_APPROVED_DESIGN_ONLY,NONE
