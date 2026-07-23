@@ -1,0 +1,12 @@
+path,role,required,checksum_covered,notes
+README.md,package orientation,true,true,Read first
+FOUNDER_DECISION_RECORD.md,approved documentary decisions,true,true,TCSN-FD-001 through TCSN-FD-020
+CODEX_EXECUTION_DIRECTIVE.md,bounded Codex instruction,true,true,No implementation authority
+CODEX_COMPLETION_RECEIPT_TEMPLATE.md,minimum completion receipt,true,true,Use repository equivalent if stricter
+PACKAGE_CONTROL.json,machine-readable package control,true,true,Authority and package identity
+PACKAGE_MANIFEST.csv,package inventory,true,true,Lists every package file
+CHECKSUMS.sha256,integrity ledger,true,false,Self-excluded
+assets/EquineSync_Item_06_Task_Calendar_Scheduling_Notification_PIA_V0_1_Draft.md,preserved predecessor,true,true,Do not overwrite
+assets/EquineSync_Item_06_Task_Calendar_Scheduling_Notification_PIA_V0_2_Strengthened_Draft.md,review candidate,true,true,Fresh review required
+assets/EquineSync_Item_06_V0_1_Internal_Review_and_V0_2_Revision_Report.md,internal review record,true,true,Not independent assurance
+assets/EquineSync_Item_06_V0_2_Documentary_Validation.json,deterministic validation,true,true,Authority effect none

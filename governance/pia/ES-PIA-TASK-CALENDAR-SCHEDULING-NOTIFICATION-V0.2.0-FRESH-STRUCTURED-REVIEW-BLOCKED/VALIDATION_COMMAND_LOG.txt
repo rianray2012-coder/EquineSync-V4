@@ -1,0 +1,5 @@
+package_outer_sha256=55e8280f7121f8ee864d8fb2e6ee82a18008de6af9dfad537a6d3ec71fae6ee2
+internal_shasum_check=PASS
+branch_baseline=origin/codex/remaining-pia-program-v1@05eaa53be3e5e6aa00814eaeee49f145b3bc6c49
+runtime_gate=FAIL_FOR_FORMAL_REVIEW
+formal_roles_started=0

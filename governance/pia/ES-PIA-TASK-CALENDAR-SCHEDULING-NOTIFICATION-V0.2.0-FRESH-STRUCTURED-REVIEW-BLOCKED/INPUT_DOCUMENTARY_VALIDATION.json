@@ -1,0 +1,31 @@
+{
+  "artifact": "EquineSync_Item_06_Task_Calendar_Scheduling_Notification_PIA_V0_2_Strengthened_Draft.md",
+  "version": "0.2.0",
+  "sha256": "5c69ee9258d8cd913f0673c93d36cfe264dba8297cd2cc7f4c90bfb82a33776d",
+  "reviewed_predecessor": "EquineSync_Item_06_Task_Calendar_Scheduling_Notification_PIA_V0_1_Draft.md",
+  "reviewed_predecessor_sha256": "21bb4b49eb9daef75c2fa579deb56afdb254b422982aeb1742931077fc838ce7",
+  "counts": {
+    "sections": 43,
+    "requirements": 120,
+    "acceptance_criteria": 55,
+    "tests": 65,
+    "golden_paths": 10,
+    "adversarial_scenarios": 45,
+    "founder_decisions": 20
+  },
+  "checks": {
+    "section_count_43": true,
+    "section_numbers_contiguous": true,
+    "requirements_001_120": true,
+    "acceptance_001_055": true,
+    "tests_001_065": true,
+    "golden_001_010": true,
+    "adversarial_001_045": true,
+    "all_five_yes_with_evidence": true,
+    "implementation_authority_false": true,
+    "enrollment_authority_false": true,
+    "documentary_notice_present": true
+  },
+  "overall": "PASS",
+  "authority_effect": "NONE"
+}

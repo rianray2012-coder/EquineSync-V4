@@ -1,0 +1,2 @@
+gate_id,role,required_runtime,observed_runtime,result,formal_role_started,independent_review_claimed,evidence
+ES-PIA-RUNTIME-2026-001,TCSN fresh structured review,read-only/on-request/network-disabled or bounded workspace-write/on-request/network-disabled,danger-full-access/unrestricted filesystem; approval_policy=never; network enabled,FAIL_FOR_FORMAL_REVIEW,0,FALSE,Repository PROGRAM_REVIEW_RUNTIME_GATE.md and current Codex environment

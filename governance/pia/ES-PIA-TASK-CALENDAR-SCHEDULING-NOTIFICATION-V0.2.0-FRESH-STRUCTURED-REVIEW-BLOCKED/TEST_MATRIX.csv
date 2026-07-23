@@ -1,0 +1,66 @@
+test_id,test,requirement_refs,evidence_refs,execution_status
+TCSN-TST-001,Unit test task/event separation.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-002,Unit test assignment mode authorization.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-003,Negative test assignment without authority.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-004,Unit test completion evidence fields.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-005,Backdated completion and escalation preservation.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-006,Recurring occurrence edit isolation.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-007,This-and-following recurrence split.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-008,Series cancellation history preservation.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-009,Imported event classification.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-010,External deletion conflict handling.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-011,Calendar duplicate and idempotency test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-012,Hard conflict block test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-013,Soft conflict warning test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-014,Unknown availability rendering test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-015,Travel buffer conflict test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-016,Timezone travel stability test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-017,DST spring-forward nonexistent-time test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-018,DST fall-back ambiguous-time test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-019,Notification state-machine test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-020,Acknowledgment versus completion negative test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-021,Quiet-hours routine suppression test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-022,Safety override test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-023,Digest exclusion for urgent notice.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-024,Email fallback behavior test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-025,SMS verified-destination test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-026,SMS opt-out and mandatory-notice coexistence test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-027,Provider webhook authenticity test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-028,Duplicate webhook idempotency test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-029,Retry and dead-letter test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-030,Partial multi-recipient failure test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-031,Risk-class escalation timing test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-032,Escalation stop and transform test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-033,Delegation least-privilege test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-034,Generated-item provenance test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-035,Source-change propagation test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-036,AI high-risk assignment prohibition test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-037,Personal versus mandatory reminder test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-038,Offline completion queue test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-039,Offline duplicate prevention test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-040,Offline conflict reconciliation test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-041,Offline revocation reconciliation test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-042,Failed-delivery admin permission test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-043,Feature-flag disable and rollback test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-044,Cross-tenant isolation test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-045,"Machine validation of IDs, readiness values, section order, and traceability completeness.",Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-046,Dependency-cycle rejection test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-047,"Parent, child, blocker, and checklist independence test.",Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-048,Bulk per-record authorization and partial-result test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-049,"Invitation, RSVP, waitlist, and capacity state test.",Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-050,Availability privacy and busy-only projection test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-051,Material schedule-change recipient-resolution test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-052,"Template version, locale, channel rendering, and redaction test.",Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-053,Correlation-key deduplication and suppression-evidence test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-054,"Notification rate limit, escalation ceiling, and circuit-breaker test.",Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-055,Optional SMS opt-out with mandatory-channel continuity test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-056,"SMS volume, spend-cap, abuse, and immediate-disable test.",Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-057,"Service, queue, sync, and provider-health telemetry test.",Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-058,Alert target and incident-record creation test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-059,Synthetic monitoring without real secrets or personal data test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-060,"Administrative replay, correction, and least-privilege test.",Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-061,Backup and relational restore rehearsal.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-062,Provider exit and credential revocation rehearsal.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-063,Migration dry-run repeatability and exception-report test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-064,Synthetic seed-data isolation and cleanup test.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY
+TCSN-TST-065,First-user readiness decision rehearsal and evidence-index validation.,Mapped by Section 40 requirement-family range,See EVIDENCE_MANIFEST.json,NOT_EXECUTED_DOCUMENTARY_DESIGN_ONLY

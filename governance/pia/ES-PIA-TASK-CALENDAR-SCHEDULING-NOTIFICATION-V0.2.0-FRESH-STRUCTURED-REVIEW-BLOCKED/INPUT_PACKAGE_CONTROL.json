@@ -1,0 +1,26 @@
+{
+  "package_id": "ES-PIA-TCSN-CODEX-HANDOFF-V1.0.0",
+  "package_version": "1.0.0",
+  "package_date": "2026-07-22",
+  "portfolio_item": "06",
+  "capability": "Task, Calendar, Scheduling, and Notification",
+  "candidate_version": "0.2.0",
+  "founder_decisions": {
+    "first": "TCSN-FD-001",
+    "last": "TCSN-FD-020",
+    "count": 20,
+    "sms_initial_scope": true
+  },
+  "requested_action": "repository-controlled integration and fresh structured review",
+  "authority": {
+    "documentary": true,
+    "implementation": false,
+    "schema": false,
+    "migration": false,
+    "deployment": false,
+    "production": false,
+    "enrollment": false
+  },
+  "recommended_next_founder_disposition": "FOUNDER_APPROVED_DESIGN_NOT_IMPLEMENTATION_AUTHORIZED",
+  "recommended_disposition_is_automatically_granted": false
+}

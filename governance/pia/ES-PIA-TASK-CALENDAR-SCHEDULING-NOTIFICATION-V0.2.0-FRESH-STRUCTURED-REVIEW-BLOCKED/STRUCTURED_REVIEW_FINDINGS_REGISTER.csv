@@ -1,0 +1,4 @@
+finding_id,severity,status,summary,disposition
+P1-TCSN-001,P1,OPEN,Fresh structured review blocked by runtime/control limitation.,Stop before formal review claim.
+P1-TCSN-002,P1,OPEN,Canonical V1.1 heading conformance not satisfied by candidate headings.,Requires documentary revision or explicit standard-tailoring rationale in compliant cycle.
+P2-TCSN-001,P2,RETAINED,Several inherited source-family locators require exact path/hash verification at next compliant freeze.,Recorded in SOURCE_REGISTER.csv.

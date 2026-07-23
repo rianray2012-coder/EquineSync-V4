@@ -1,0 +1,171 @@
+{
+  "validation_id": "ES-PIA-TCSN-DETVAL-2026-07-22-01",
+  "result": "DETERMINISTIC_VALIDATION_COMPLETED_WITH_BLOCKING_FINDINGS",
+  "input_zip_sha256": "55e8280f7121f8ee864d8fb2e6ee82a18008de6af9dfad537a6d3ec71fae6ee2",
+  "input_internal_checksums": "PASS",
+  "candidate_v0_2_sha256": "5c69ee9258d8cd913f0673c93d36cfe264dba8297cd2cc7f4c90bfb82a33776d",
+  "predecessor_v0_1_sha256": "21bb4b49eb9daef75c2fa579deb56afdb254b422982aeb1742931077fc838ce7",
+  "runtime_gate": "FAIL_FOR_FORMAL_REVIEW",
+  "formal_review_started": false,
+  "independent_review_claimed": false,
+  "section_numbers_contiguous_1_43": true,
+  "canonical_heading_exact_match": false,
+  "canonical_heading_mismatches": [
+    {
+      "section": 6,
+      "actual": "Domain Ownership and Cross-PIA Boundaries",
+      "canonical": "Definitions and Controlled Vocabulary"
+    },
+    {
+      "section": 7,
+      "actual": "Controlled Vocabulary",
+      "canonical": "Actors, Roles, Relationships, and Authorities"
+    },
+    {
+      "section": 8,
+      "actual": "Capability and Release Classification",
+      "canonical": "Capability Map and Release Classification"
+    },
+    {
+      "section": 10,
+      "actual": "Actor, Persona, Relationship, and Authority Model",
+      "canonical": "Business Rules and Decision Logic"
+    },
+    {
+      "section": 11,
+      "actual": "Functional Requirements",
+      "canonical": "Data Entities, Relationships, and Provenance"
+    },
+    {
+      "section": 12,
+      "actual": "Calendar and Scheduling Model",
+      "canonical": "Record Ownership, Stewardship, Correction, and Retention"
+    },
+    {
+      "section": 13,
+      "actual": "Task Model",
+      "canonical": "State and Transition Models"
+    },
+    {
+      "section": 14,
+      "actual": "Notification and Notice Model",
+      "canonical": "Authorization and Permission Matrix"
+    },
+    {
+      "section": 15,
+      "actual": "Data Model and Entity Ownership",
+      "canonical": "User Interface and Experience Requirements"
+    },
+    {
+      "section": 16,
+      "actual": "State and Transition Model",
+      "canonical": "API, Event, Job, and Integration Contracts"
+    },
+    {
+      "section": 17,
+      "actual": "Permission and Access-Control Model",
+      "canonical": "Notifications and Communications"
+    },
+    {
+      "section": 18,
+      "actual": "Privacy, Safeguarding, and Sensitive Data",
+      "canonical": "Files, Media, and Document Handling"
+    },
+    {
+      "section": 19,
+      "actual": "Security and Trust Requirements",
+      "canonical": "Search, Reporting, and Analytics"
+    },
+    {
+      "section": 20,
+      "actual": "Audit, Evidence, and Recordkeeping",
+      "canonical": "Offline, Device, and Synchronization"
+    },
+    {
+      "section": 21,
+      "actual": "External Integrations and Adapter Requirements",
+      "canonical": "Security, Privacy, Consent, Safeguarding, and Abuse Controls"
+    },
+    {
+      "section": 22,
+      "actual": "API, Event, Job, and Webhook Contracts",
+      "canonical": "AI and Automation Controls"
+    },
+    {
+      "section": 23,
+      "actual": "Offline, Mobile, and Synchronization Behavior",
+      "canonical": "Failure Modes, Recovery, Correction, and Reconciliation"
+    },
+    {
+      "section": 24,
+      "actual": "Time, Time Zone, Recurrence, and Daylight Saving",
+      "canonical": "Observability, Administration, Support, and Incident Operations"
+    },
+    {
+      "section": 25,
+      "actual": "Conflict Detection, Resolution, and Overrides",
+      "canonical": "Nonfunctional and Quality Attribute Requirements"
+    },
+    {
+      "section": 26,
+      "actual": "Accessibility, Field Ergonomics, and User Experience",
+      "canonical": "Environment, Configuration, Feature Flags, and Secrets"
+    },
+    {
+      "section": 27,
+      "actual": "Automation and AI Boundaries",
+      "canonical": "Migration, Seed Data, and Reconciliation"
+    },
+    {
+      "section": 28,
+      "actual": "Reporting, Search, Analytics, and Metrics",
+      "canonical": "Engineering Work Packages and Implementation Sequence"
+    },
+    {
+      "section": 30,
+      "actual": "Test Strategy and Test Matrix",
+      "canonical": "Test and Validation Matrix"
+    },
+    {
+      "section": 31,
+      "actual": "Golden Paths",
+      "canonical": "Golden-Path Reproduction Scenarios"
+    },
+    {
+      "section": 32,
+      "actual": "Adversarial and Negative Scenarios",
+      "canonical": "Adversarial, Negative, and Abuse Scenarios"
+    },
+    {
+      "section": 33,
+      "actual": "Operational Readiness, Monitoring, and Support",
+      "canonical": "Evidence Requirements, Coverage, and Manifest"
+    },
+    {
+      "section": 34,
+      "actual": "Deployment, Rollout, Rollback, Environment, and Configuration",
+      "canonical": "Deployment, Rollout, Rollback, and Release Controls"
+    },
+    {
+      "section": 35,
+      "actual": "Engineering Work Packages",
+      "canonical": "Enrollment and Onboarding Readiness"
+    },
+    {
+      "section": 43,
+      "actual": "First-User Enrollment, Maintenance, Supersession, and Decommissioning",
+      "canonical": "Maintenance, Supersession, and Decommissioning"
+    }
+  ],
+  "founder_decisions_001_020_mapped": true,
+  "requirements_unique_contiguous": true,
+  "acceptance_unique_contiguous": true,
+  "tests_unique_contiguous": true,
+  "sources_registered": 22,
+  "authority_contradiction_detected": false,
+  "allowed_readiness_answers_only": true,
+  "blocking_findings": [
+    "P1-TCSN-001: Formal fresh structured review blocked by runtime/control limitation.",
+    "P1-TCSN-002: V0.2 candidate section numbers are contiguous, but several headings do not exactly match canonical V1.1 Part II headings."
+  ]
+}

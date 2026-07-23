@@ -1,0 +1,34 @@
+{
+  "evidence_manifest_id": "ES-PIA-TCSN-EVIDENCE-MANIFEST-2026-07-22-01",
+  "status": "DOCUMENTARY_EVIDENCE_PLAN_PRESERVED_RUNTIME_EVIDENCE_ABSENT",
+  "input_package_sha256": "55e8280f7121f8ee864d8fb2e6ee82a18008de6af9dfad537a6d3ec71fae6ee2",
+  "candidate_sha256": "5c69ee9258d8cd913f0673c93d36cfe264dba8297cd2cc7f4c90bfb82a33776d",
+  "evidence_families": [
+    {
+      "family": "input_custody",
+      "status": "PASS",
+      "files": [
+        "INPUT_CHECKSUMS.sha256",
+        "INPUT_PACKAGE_MANIFEST.csv"
+      ]
+    },
+    {
+      "family": "structured_review",
+      "status": "BLOCKED_BY_RUNTIME_OR_CONTROL_LIMITATION",
+      "files": [
+        "STRUCTURED_REVIEW_REPORT.md",
+        "RUNTIME_PERMISSION_RECORDS.csv"
+      ]
+    },
+    {
+      "family": "as_built",
+      "status": "ABSENT_NOT_IMPLEMENTED",
+      "files": []
+    },
+    {
+      "family": "operations",
+      "status": "ABSENT_NOT_EXECUTED",
+      "files": []
+    }
+  ]
+}
