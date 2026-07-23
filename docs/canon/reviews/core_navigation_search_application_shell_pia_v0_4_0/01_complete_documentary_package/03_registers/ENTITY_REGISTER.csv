@@ -1,0 +1,23 @@
+id,entity,definition
+SHELL-ENT-001,Shell Projection,"Versioned actor/context-scoped routes, capabilities, badges, and safe preferences."
+SHELL-ENT-002,Route Definition,"Stable ID, owner, path pattern, capability, context rules, sensitivity, and lifecycle."
+SHELL-ENT-003,Navigation Item,Authorized presentation of a route or group; never a permission grant.
+SHELL-ENT-004,Context Selection,"Actor-selected tenant, organization, facility, role context, effective time, and source."
+SHELL-ENT-005,Persona Default,Non-authoritative ordering and landing preference.
+SHELL-ENT-006,Search Query Record,"Minimized query metadata, context, timing, and risk class."
+SHELL-ENT-007,Search Result Projection,"Permission-filtered pointer, title, safe snippet, type, freshness, source, and route."
+SHELL-ENT-008,Search Index Document,"Derived source fields, classification, permission keys, version, and revocation watermark."
+SHELL-ENT-009,Command Definition,Registered navigation/action command with owner and preconditions.
+SHELL-ENT-010,Quick Action Request,"Actor, context, action, domain, idempotency key, status, and evidence."
+SHELL-ENT-011,Shell Preference,"Private order, density, collapse, theme reference, pins, and saved views."
+SHELL-ENT-012,Recent Item Pointer,Private bounded pointer with display-safe metadata and expiry.
+SHELL-ENT-013,Saved View,Filter/sort/column configuration that stores no result data and expands no access.
+SHELL-ENT-014,Notification Summary,Minimum shell projection of communication-owned state.
+SHELL-ENT-015,Offline Shell Manifest,"Approved safe cache classes, version, tenant, expiry, and revocation watermark."
+SHELL-ENT-016,Shell Configuration Version,"Environment/tenant configuration, approver, validation, effective time, and rollback."
+SHELL-ENT-017,Feature Flag Evaluation,"Flag, scope, inputs, result, source version, and safe reason."
+SHELL-ENT-018,Support Session,"Operator, target, purpose, authority, scope, start, expiry, actions, and exit."
+SHELL-ENT-019,Shell Audit Event,"Attributable context, route, privileged search, support, config, or high-risk event."
+SHELL-ENT-020,Shell Diagnostic Event,Privacy-minimized failure/performance signal with version and correlation.
+SHELL-ENT-021,Deep-Link Descriptor,"Non-authoritative target pointer, context hint, expiry, and integrity control."
+SHELL-ENT-022,Visual-System Component Reference,"Immutable filename, SHA-256, approval status, and incorporation state."

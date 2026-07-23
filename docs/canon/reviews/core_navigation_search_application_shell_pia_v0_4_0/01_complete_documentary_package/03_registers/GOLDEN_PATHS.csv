@@ -1,0 +1,13 @@
+id,scenario,preconditions,expected_result
+SHELL-GP-001,Single-facility staff login to task-first landing,Valid session and one facility context,Authorized task-first shell with no context prompt and no unrelated owner data.
+SHELL-GP-002,Multi-facility trainer context selection,Valid memberships in two facilities,"Explicit context picker, clear context banner, no cross-context recents or badges."
+SHELL-GP-003,Owner opens horse from global search,Current horse relationship and active facility,Permission-filtered horse result opens through authorized deep link.
+SHELL-GP-004,Guardian uses invitation link,Valid invitation and required guardian workflow,"Minimal pre-auth shell, acceptance flow, then context-scoped shell."
+SHELL-GP-005,Mobile staff Quick Create,Current create authority and active facility,Domain-owned form opens with context visible and touch-accessible controls.
+SHELL-GP-006,Keyboard command navigation,Authorized navigation command,"Command is discoverable, announced, and navigates without mouse."
+SHELL-GP-007,Notification to authorized record,Minimum notification summary and current authority,Link reauthorizes and opens; mark-read remains independent.
+SHELL-GP-008,Saved view after permission change,Saved filter remains valid but one result is revoked,View regenerates and revoked result is absent.
+SHELL-GP-009,Offline field continuity,Approved safe shell cache and temporary outage,Offline/stale status remains visible; unauthorized effectful action is blocked or queued.
+SHELL-GP-010,Session expires on protected page,Expired session,Protected content masks before reauthentication; no stale flash.
+SHELL-GP-011,Support session,Approved bounded support authority,"Visible support banner, scoped actions, expiry, and complete audit."
+SHELL-GP-012,Shell release rollback,New route configuration causes threshold breach,Rollout stops and last verified configuration is restored.

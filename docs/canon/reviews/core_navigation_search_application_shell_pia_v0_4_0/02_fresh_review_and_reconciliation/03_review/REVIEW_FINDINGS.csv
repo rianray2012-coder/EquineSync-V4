@@ -1,0 +1,4 @@
+finding_id,severity,status,summary,treatment
+SHELL-REV-001,P2,ACCEPTED_WITH_OVERLAY,Frozen source contains pre-approval status language,Preserve bytes and apply separately controlled Founder overlay
+SHELL-REV-002,P1,RETAINED,Source register includes exact path/version/hash placeholders,Complete repository-native source-freeze register
+SHELL-REV-003,LIFECYCLE_GATE,OPEN_BY_DESIGN,Implementation operational and enrollment evidence absent,Retain Q4 and Q5 as NO

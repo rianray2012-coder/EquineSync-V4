@@ -1,0 +1,16 @@
+{
+  "validation_id": "ES-PIA-ITEM-05-V0.4.0-VAL-2026-07-23-01",
+  "result": "PASS",
+  "checks": {
+    "declared_sha_matches": true,
+    "43_sections": true,
+    "76_requirements": true,
+    "76_acceptance_criteria": true,
+    "76_tests": true,
+    "76_traceability_rows": true,
+    "all_tests_design_only_not_executed": true,
+    "manifest_32_rows": true,
+    "manifest_self_hash_intentionally_blank": true,
+    "machine_readable_companion_present": true
+  }
+}

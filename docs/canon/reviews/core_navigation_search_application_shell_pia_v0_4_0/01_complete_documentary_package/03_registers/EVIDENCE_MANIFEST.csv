@@ -1,0 +1,30 @@
+id,evidence,lifecycle
+SHELL-EVID-001,Approved visual component exact-byte and SHA verification,DOCUMENTARY
+SHELL-EVID-002,Master Standard and adoption-record verification,DOCUMENTARY
+SHELL-EVID-003,Source register with lifecycle/status/path/hash,DOCUMENTARY
+SHELL-EVID-004,Founder decision register and disposition,DOCUMENTARY
+SHELL-EVID-005,Route registry export and validation,IMPLEMENTATION
+SHELL-EVID-006,Shell bootstrap contract and fixtures,IMPLEMENTATION
+SHELL-EVID-007,Permission projection and negative results,VERIFICATION
+SHELL-EVID-008,Context-switch isolation evidence,VERIFICATION
+SHELL-EVID-009,Deep-link authorization evidence,VERIFICATION
+SHELL-EVID-010,Search field/exclusion register,IMPLEMENTATION
+SHELL-EVID-011,Search authorization and cross-tenant negative evidence,VERIFICATION
+SHELL-EVID-012,Index correction/revocation propagation evidence,VERIFICATION
+SHELL-EVID-013,Autocomplete enumeration and abuse evidence,VERIFICATION
+SHELL-EVID-014,Command registry and execution authorization evidence,VERIFICATION
+SHELL-EVID-015,Quick Create domain-boundary evidence,VERIFICATION
+SHELL-EVID-016,Accessibility conformance report,VERIFICATION
+SHELL-EVID-017,Responsive and field-use evidence,VERIFICATION
+SHELL-EVID-018,Serious-workflow suppression evidence,VERIFICATION
+SHELL-EVID-019,Offline cache and revocation evidence,VERIFICATION
+SHELL-EVID-020,Feature-flag/configuration evidence,IMPLEMENTATION
+SHELL-EVID-021,Support-mode authorization and audit evidence,OPERATIONS
+SHELL-EVID-022,Telemetry privacy and observability evidence,OPERATIONS
+SHELL-EVID-023,Job idempotency and reconciliation evidence,OPERATIONS
+SHELL-EVID-024,Migration inventory and reconciliation evidence,MIGRATION
+SHELL-EVID-025,"Rollout, stop-condition, and rollback rehearsal",OPERATIONS
+SHELL-EVID-026,"Backup, restore, and disaster-recovery evidence",OPERATIONS
+SHELL-EVID-027,As-built reconciliation and drift register,VERIFICATION
+SHELL-EVID-028,No-open-P0/P1 findings report,RELEASE
+SHELL-EVID-029,Founder enrollment disposition,ENROLLMENT

@@ -1,0 +1,22 @@
+source_id,status,resolution
+SHELL-SRC-001,VERIFIED,Global Governance V1.0 locked baseline commit acb518ea5a160820e64681ff95a16b010fe1156c
+SHELL-SRC-002,ARCHIVE_VERIFIED,PIA Master Standard V1.1 supplied in master archive; exact SHA declared in PIA
+SHELL-SRC-003,ARCHIVE_VERIFIED,Founder adoption record supplied in master archive; exact SHA declared in PIA
+SHELL-SRC-004,REPOSITORY_VERIFIED,Founder-approved visual-system V0.3.1 repository integration commit 40ad3ae6c5961bc81da4a98c21025215033c15bd
+SHELL-SRC-005,ARCHIVE_VERIFIED,V0.3.2 integrity wrapper preserved in archive
+SHELL-SRC-006,RETAINED_P1,Exact repository path/version/hash still required
+SHELL-SRC-007,RETAINED_P1,Exact repository path/version/hash still required
+SHELL-SRC-008,RECONCILED,Current canon identifies Master Search Discovery Ranking and Retrieval Model V2.0 as adopted and locked
+SHELL-SRC-009,RECONCILED,Current canon identifies Master Permission and Access-Control Model V1.1 as adopted and locked
+SHELL-SRC-010,RECONCILED,Current canon identifies Master Identity Account and Actor Model V2.0 as controlling and locked
+SHELL-SRC-011,RECONCILED,Current canon identifies Master Relationship Model V2.0 as founder-approved and locked
+SHELL-SRC-012,RECONCILED,Current canon identifies Master Privacy and Data Protection Model V2.0 as adopted and locked
+SHELL-SRC-013,RETAINED_P1,Security family must be bound to exact repository paths at implementation freeze
+SHELL-SRC-014,RECONCILED,Current canon identifies Master Audit Event and Evidence Model V2.0 as adopted and locked
+SHELL-SRC-015,RECONCILED,Current canon identifies Master Platform Operations Reliability and Release Model V2.0 as adopted and locked
+SHELL-SRC-016,RECONCILED,Current canon identifies Master Platform Resilience Backup and Recovery Model V1.0 as adopted and locked
+SHELL-SRC-017,RECONCILED,Current canon identifies Master Media Files and Digital Asset Governance Model V2.1 as adopted and locked
+SHELL-SRC-018,RECONCILED,Current canon identifies Master Minor Guardianship Safeguarding and Protected Participant Model V1.2 as adopted and locked
+SHELL-SRC-019,RECONCILED,Current canon identifies Master Communication Notification and Notice Model V2.0 as adopted and locked
+SHELL-SRC-020,RECONCILED,Current canon identifies Master Configuration and Feature Flag Governance Model V2.0 as adopted and locked
+SHELL-SRC-021,RETAINED_IMPLEMENTATION_GATE,Exact implementation branch and commit required only at implementation freeze
