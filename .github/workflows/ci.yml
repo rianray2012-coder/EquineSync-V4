@@ -1,0 +1,275 @@
+name: CI
+
+# The first automated verification this repository has ever had.
+#
+# Read this if a job is red: red is the honest starting state. Nothing here is
+# configured to look green when it isn't — no `continue-on-error` on a test step,
+# no skipped tests, no loosened assertions. `backend-tests` is expected to fail
+# until the underlying test debt is paid down; the number in the job summary is
+# the thing to drive toward zero.
+#
+# See backend/tests/README.md for what the markers mean and how to run each set
+# locally.
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+# A new push supersedes an in-flight run on the same ref.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '20'
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Guardrail: the suite must stay importable. Fast, and expected to be GREEN.
+  # ---------------------------------------------------------------------------
+  backend-collect:
+    name: Backend suite is collectable
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+
+      - name: Collect every test without running it
+        id: collect
+        # No MongoDB service here on purpose: collection must not require one.
+        # If this fails, a module raises at import time and has silently taken
+        # its whole file out of every future test run.
+        run: |
+          set -o pipefail
+          python -m pytest backend/tests --collect-only -q 2>&1 | tee /tmp/collect.log
+
+      - name: Summarize
+        if: always()
+        run: |
+          {
+            echo "## Suite collectability"
+            echo
+            if [ "${{ steps.collect.outcome }}" = "success" ]; then
+              echo "**PASS** — every test module imports cleanly."
+              echo
+              grep -E '[0-9]+ tests collected' /tmp/collect.log | tail -1 || true
+            else
+              echo "**FAIL** — at least one test module cannot be imported."
+              echo "A module that fails to import contributes zero tests and hides"
+              echo "whatever it was meant to verify."
+              echo
+              echo '```'
+              grep '^ERROR' /tmp/collect.log | head -40 || true
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-collect-log
+          path: /tmp/collect.log
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # The real gate. Expected RED initially. It must be allowed to fail honestly.
+  # ---------------------------------------------------------------------------
+  backend-tests:
+    name: Backend tests (not live)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      mongo:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+          --health-start-period 20s
+
+    env:
+      MONGO_URL: mongodb://localhost:27017
+      DB_NAME: equinesync_ci
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+
+      # The service health check already gates on this, but a clear failure here
+      # beats 900 confusing connection errors downstream.
+      - name: Wait for MongoDB
+        run: |
+          for _ in $(seq 1 30); do
+            if python -c "from pymongo import MongoClient; MongoClient('$MONGO_URL', serverSelectionTimeoutMS=1000).admin.command('ping')" 2>/dev/null; then
+              echo "MongoDB is up."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "MongoDB never became reachable at $MONGO_URL"
+          exit 1
+
+      # THE GATING STEP.
+      #
+      # Deliberately has no `continue-on-error`. When tests fail, this job fails
+      # and the board goes red. That is the point — a green badge over a suite
+      # that has never run is worse than no badge.
+      #
+      # `-m "not live"` excludes only the tests that require a separately
+      # deployed, seeded server over HTTP, which CI does not stand up. Those
+      # tests are still collected and still runnable (see the README); they are
+      # selected out, never skipped or deleted.
+      - name: Run CI-runnable tests
+        id: pytest
+        run: |
+          set -o pipefail
+          python -m pytest backend/tests \
+            -m "not live" \
+            --junitxml=junit-backend.xml \
+            -rf -q 2>&1 | tee pytest-output.txt
+
+      - name: Write result table to job summary
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import os
+          import xml.etree.ElementTree as ET
+
+          outcome = os.environ["PYTEST_OUTCOME"]
+          print("## Backend tests — CI-runnable set (`-m \"not live\"`)")
+          print()
+
+          try:
+              root = ET.parse("junit-backend.xml").getroot()
+              suite = root.find("testsuite") if root.tag == "testsuites" else root
+              total = int(suite.get("tests", 0))
+              failures = int(suite.get("failures", 0))
+              errors = int(suite.get("errors", 0))
+              skipped = int(suite.get("skipped", 0))
+              passed = total - failures - errors - skipped
+              seconds = float(suite.get("time", 0))
+          except Exception as exc:
+              print(f"Could not read the JUnit report: `{exc}`")
+              print()
+              print(f"Step outcome: **{outcome}**. See the raw log artifact.")
+              raise SystemExit(0)
+
+          print("| Result | Count |")
+          print("| --- | --- |")
+          print(f"| Passed | {passed} |")
+          print(f"| Failed | {failures} |")
+          print(f"| Errored | {errors} |")
+          print(f"| Skipped | {skipped} |")
+          print(f"| **Total run** | **{total}** |")
+          print()
+          print(f"Wall time: {seconds / 60:.1f} min")
+          print()
+
+          if failures or errors:
+              print(
+                  f"**This job is RED: {failures + errors} of {total} tests are not passing.**"
+              )
+              print()
+              print(
+                  "This is the expected and intended starting state. The suite had "
+                  "never been executed automatically before this workflow existed. "
+                  "Nothing was skipped, deleted, or weakened to reduce this number — "
+                  "driving it down means fixing real problems."
+              )
+              print()
+              print("### Failing tests")
+              print()
+              print("<details><summary>Expand</summary>")
+              print()
+              print("```")
+              for case in suite.iter("testcase"):
+                  if case.find("failure") is not None or case.find("error") is not None:
+                      print(f"{case.get('classname')}::{case.get('name')}")
+              print("```")
+              print()
+              print("</details>")
+          else:
+              print("**All CI-runnable tests passed.**")
+
+          print()
+          print(
+              "Excluded from this run: tests marked `live`, which need a deployed and "
+              "seeded API. They are still collected and still runnable — see "
+              "`backend/tests/README.md`."
+          )
+          PY
+        env:
+          PYTEST_OUTCOME: ${{ steps.pytest.outcome }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-test-report
+          path: |
+            junit-backend.xml
+            pytest-output.txt
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  frontend-build:
+    name: Frontend build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # --legacy-peer-deps is required: the dependency tree has peer conflicts
+      # (React 19 against packages that still declare React 18) that npm 7+
+      # treats as fatal. Removing the flag breaks install, not the build.
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
+
+      - name: Summarize
+        if: always()
+        working-directory: .
+        run: |
+          {
+            echo "## Frontend build"
+            echo
+            if [ "${{ job.status }}" = "success" ]; then
+              echo "**PASS** — \`npm run build\` produced a bundle."
+            else
+              echo "**FAIL** — the frontend does not build. See the job log."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

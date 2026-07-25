@@ -14,10 +14,12 @@ from __future__ import annotations
 
 import os
 import pathlib
+from collections.abc import Mapping
 
 import pymongo
 import requests
 
+from ._lazy_headers import LazyHeaders
 from ._test_creds import ADMIN
 
 
@@ -49,12 +51,20 @@ def mongo_db():
     return pymongo.MongoClient(url)[name]
 
 
-def auth_headers(creds: dict = ADMIN) -> dict:
-    """Log in (defaults to the demo ADMIN) and return a Bearer auth header."""
-    r = requests.post(f"{API}/auth/login",
-                      json={"email": creds["email"], "password": creds["password"]}, timeout=30)
-    r.raise_for_status()
-    return {"Authorization": f"Bearer {r.json()['token']}"}
+def auth_headers(creds: dict = ADMIN) -> Mapping:
+    """Log in (defaults to the demo ADMIN) and return a Bearer auth header.
+
+    The login is deferred to first use (see `_lazy_headers`) so that modules
+    which build their header at import time stay importable without a running
+    server. The request itself is unchanged.
+    """
+    def _login() -> dict:
+        r = requests.post(f"{API}/auth/login",
+                          json={"email": creds["email"], "password": creds["password"]}, timeout=30)
+        r.raise_for_status()
+        return {"Authorization": f"Bearer {r.json()['token']}"}
+
+    return LazyHeaders(_login)
 
 
 def cleanup_invoices(db, ids) -> None:
