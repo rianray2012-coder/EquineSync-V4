@@ -1,0 +1,66 @@
+{
+  "manifest_id": "ES-PIA-ITEMS-01-06-10-REMEDIATION-CONSOLIDATED-MANIFEST-2026-07-25-01",
+  "prepared_at": "2026-07-25T23:50:37Z",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "base_branch": "integrate-emergent-final-zip",
+  "base_commit": "577ed650ac5a8e620a49b85848ce3fe4bf9bc2d3",
+  "remediation_branch": "codex/pia-items-01-06-item10-documentary-remediation-v1",
+  "source_accession_commit": "c43ad8d20fe01146124b6aaa2be616351506f42a",
+  "receipt_commit": "THIS_COMMIT",
+  "scope": "documentary repository remediation for PIA Items 01-06, Item 10 V0.2 integration, and portfolio drift-control evidence",
+  "items": [
+    {
+      "item": "01",
+      "path": "governance/pia/items/01_identity_account_actor_onboarding",
+      "status": "REPOSITORY_NATIVE_DOCUMENTARY_INTEGRATED_WITH_RETAINED_CONDITIONS",
+      "primary_sha256": "144f1e49bb88d0ded02eedbbf3aa7d903eda8ab336bb6b0934da7bebedb4b8c2"
+    },
+    {
+      "item": "02",
+      "path": "governance/pia/items/02_facility_tenant_organizational_structure",
+      "status": "REPOSITORY_CUSTODY_INTEGRATED_BLOCKED_PENDING_VALID_FRESH_SEGREGATED_REVIEW",
+      "source_commit": "1741ab394e4b23c5ec85a71483d90ea1d95b6863"
+    },
+    {
+      "item": "03",
+      "path": "governance/pia/items/03_relationship_authorization_permission",
+      "status": "REPOSITORY_CUSTODY_INTEGRATED_BLOCKED_CANDIDATE_PENDING_COMPLIANT_FRESH_REVIEW_AND_FOUNDER_ACTION",
+      "source_commit": "da10e2f729bc5d98d6087ef846e3e6449557898f"
+    },
+    {
+      "item": "04",
+      "path": "governance/pia/items/04_horse_identity_profile_lifecycle",
+      "status": "REPOSITORY_NATIVE_FOUNDER_APPROVED_DESIGN_INTEGRATED_WITH_RETAINED_CONDITIONS",
+      "source_commit": "0eba16c8bf9670933a714634c6941446fa4fbcd2"
+    },
+    {
+      "item": "05",
+      "path": "governance/pia/items/05_core_navigation_search_application_shell",
+      "status": "REPOSITORY_NATIVE_EXACT_BYTE_INTEGRATED_WITH_RETAINED_LIFECYCLE_FINDINGS",
+      "source_commit": "458b5156859492773d014095e1c698a5df1da650",
+      "primary_sha256": "8698e1aa189f1faced0631cd7d9df629c152075a2519c93e80f57b9253a9049c",
+      "review_sha256": "89762bf2476f024e6016671f6418992110f19d5475cb63ed3022bfe08bee95f9"
+    },
+    {
+      "item": "06",
+      "path": "governance/pia/items/06_task_calendar_scheduling_notification",
+      "status": "REPOSITORY_CUSTODY_INTEGRATED_BLOCKED_PENDING_FRESH_STRUCTURED_REVIEW_AND_FOUNDER_APPROVAL",
+      "source_commit": "108e015cfc3cfdb6b07f40023b8e98c33f183f4d"
+    },
+    {
+      "item": "10",
+      "path": "governance/pia/items/10_owner_portal_communications",
+      "status": "SUCCESS_V0_2_DESIGN_APPROVAL_REPOSITORY_INTEGRATED_WITH_RETAINED_NON_ACTIVATION_BOUNDARIES",
+      "primary_sha256": "c9924fdf38e70d7669eeb204d87e648ecd198b9cf9508342ba007cc4334643cf",
+      "nested_opc_rev_006_sha256": "9af51d4e9ec3b2b56c77b8abbc3960c74e8f28e4c43375e04aea934574bdf823"
+    }
+  ],
+  "portfolio": {
+    "path": "governance/pia_portfolio/ES-PIA-PORTFOLIO-REALIGNMENT-V1.0.0",
+    "tag": "archive/pia-portfolio-realignment-v1",
+    "tag_object": "d5b8d07a9e731686ed6e2a90913092be8833edf8",
+    "peeled_commit": "b8f34aef390c5fec6f942a6253edf6acc9488c44",
+    "status": "INTEGRATED_AS_DRIFT_CONTROL_AND_NUMBERING_EVIDENCE_ONLY"
+  },
+  "non_authorization": "No implementation, schema, migration, deployment, production, support, pilot, AI activation, financial activation, owner messaging activation, community activation, moderation, operational rollout, or first-user enrollment authority is created."
+}
