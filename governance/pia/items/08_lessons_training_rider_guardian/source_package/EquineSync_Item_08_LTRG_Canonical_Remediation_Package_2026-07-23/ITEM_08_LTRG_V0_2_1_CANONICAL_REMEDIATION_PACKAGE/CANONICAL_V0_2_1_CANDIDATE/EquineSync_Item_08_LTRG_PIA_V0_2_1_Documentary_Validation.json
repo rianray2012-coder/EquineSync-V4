@@ -1,0 +1,47 @@
+{
+  "artifact": "EquineSync_Item_08_LTRG_PIA_V0_2_1_Canonical_Remediation_Candidate.md",
+  "version": "0.2.1",
+  "canonical_item": "Item 08",
+  "canonical_pia_id": "ES-PIA-LESSONS-TRAINING-RIDER-GUARDIAN",
+  "validation_type": "canonical_identity_wrapper_validation",
+  "source_basis": {
+    "historical_source_archive": "EquineSync_Item_07_LTRG_PIA_V0_2_Codex_Handoff.zip",
+    "historical_source_archive_sha256": "c3846e5bf8c7af00a5d7cd3676a7fbb9d1654b7ef63c0460135060273b80244c",
+    "historical_candidate_markdown_sha256": "27ce2ebf60456994ce890ca4ee363fed7401c7968614959783e325b1927b7e80",
+    "historical_candidate_docx_sha256": "123a47f0f30d9c41597448c47139f5e5e47e2aa71d6f412f10c0bc973b5cde7c"
+  },
+  "historical_v0_2_validation_counts": {
+    "sections": 43,
+    "requirements": 76,
+    "acceptance_criteria": 40,
+    "tests": 55,
+    "golden_paths": 10,
+    "adversarial_scenarios": 36,
+    "founder_decisions": 20,
+    "sources": 17,
+    "entities": 22,
+    "permissions": 15,
+    "apis": 19,
+    "events": 15,
+    "integrations": 8,
+    "dependencies": 12,
+    "evidence_families": 18
+  },
+  "checks": {
+    "historical_item_07_evidence_preserved": true,
+    "canonical_item_08_identity_recorded": true,
+    "canonical_pia_id_recorded": true,
+    "historical_item_07_not_promoted_without_disposition": true,
+    "founder_final_disposition_pending": true,
+    "repository_integration_not_authorized": true,
+    "implementation_authority_false": true,
+    "deployment_authority_false": true,
+    "production_authority_false": true,
+    "first_user_enrollment_authority_false": true
+  },
+  "overall": "PASS_AS_REMEDIATION_WRAPPER_ONLY",
+  "authority_effect": "NONE",
+  "formal_structured_review_completed": false,
+  "founder_final_disposition": "PENDING"
+}
+

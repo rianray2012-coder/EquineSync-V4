@@ -1,0 +1,177 @@
+{
+  "result": "PASS",
+  "date": "2026-07-22",
+  "counts": {
+    "sections": 43,
+    "requirements": 64,
+    "acceptance_criteria": 40,
+    "tests": 58,
+    "workflows": 14,
+    "entities": 22,
+    "permissions": 15,
+    "golden_paths": 10,
+    "adversarial_scenarios": 36,
+    "evidence": 25
+  },
+  "checks": [
+    {
+      "check": "43 contiguous sections",
+      "result": "PASS",
+      "detail": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ]
+    },
+    {
+      "check": "five permitted readiness answers",
+      "result": "PASS",
+      "detail": [
+        "YES_WITH_EVIDENCE",
+        "YES_WITH_EVIDENCE",
+        "YES_WITH_EVIDENCE",
+        "NO",
+        "NO"
+      ]
+    },
+    {
+      "check": "requirements count",
+      "result": "PASS",
+      "detail": 64
+    },
+    {
+      "check": "acceptance criteria count",
+      "result": "PASS",
+      "detail": 40
+    },
+    {
+      "check": "tests count",
+      "result": "PASS",
+      "detail": 58
+    },
+    {
+      "check": "workflows count",
+      "result": "PASS",
+      "detail": 14
+    },
+    {
+      "check": "entities count",
+      "result": "PASS",
+      "detail": 22
+    },
+    {
+      "check": "permissions count",
+      "result": "PASS",
+      "detail": 15
+    },
+    {
+      "check": "golden paths count",
+      "result": "PASS",
+      "detail": 10
+    },
+    {
+      "check": "adversarial scenarios count",
+      "result": "PASS",
+      "detail": 36
+    },
+    {
+      "check": "evidence count",
+      "result": "PASS",
+      "detail": 25
+    },
+    {
+      "check": "unique CARE-REQ",
+      "result": "PASS",
+      "detail": 64
+    },
+    {
+      "check": "unique CARE-AC",
+      "result": "PASS",
+      "detail": 40
+    },
+    {
+      "check": "unique CARE-TEST",
+      "result": "PASS",
+      "detail": 58
+    },
+    {
+      "check": "unique CARE-WF",
+      "result": "PASS",
+      "detail": 14
+    },
+    {
+      "check": "unique CARE-ENT",
+      "result": "PASS",
+      "detail": 22
+    },
+    {
+      "check": "unique CARE-SM",
+      "result": "PASS",
+      "detail": 7
+    },
+    {
+      "check": "unique CARE-PERM",
+      "result": "PASS",
+      "detail": 15
+    },
+    {
+      "check": "no TODO/TBD",
+      "result": "PASS",
+      "detail": "none"
+    },
+    {
+      "check": "authority flags false",
+      "result": "PASS",
+      "detail": "all false"
+    },
+    {
+      "check": "predecessor hashes recorded",
+      "result": "PASS",
+      "detail": {
+        "markdown": "9a05d3fa164f9c188209e8c9ba0a4c91a00993eea6e91667c9f37ea5342b7fb6",
+        "docx": "4fb375bb927d0aea3dbb6046ad248be32b20b34cde461277f1bea3c42079bd14",
+        "json": "e6d8c02916005687cdc2aa69a2a429d4f0d83cff8ebbfea2fc55391ee93c6e7d"
+      }
+    }
+  ]
+}

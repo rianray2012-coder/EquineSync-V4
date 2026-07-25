@@ -1,0 +1,78 @@
+{
+  "package_id": "ES-PIA-ITEM-10-OPC-V0.2.0-CODEX-INTEGRATION-PACKAGE",
+  "package_version": "1.0.0",
+  "created_date": "2026-07-22",
+  "official_repository": "rianray2012-coder/EquineSync-V4",
+  "pia_id": "ES-PIA-OWNER-PORTAL-COMMUNICATIONS-V0.2.0",
+  "portfolio_item": 10,
+  "status": "ITEM_10_V0_2_MATERIALLY_STRENGTHENED_DOCUMENTARY_DRAFT_READY_FOR_STRUCTURED_REVIEW",
+  "requested_disposition": "ACCEPT_V0_2_AS_MATERIALLY_STRENGTHENED_DOCUMENTARY_DRAFT_FOR_STRUCTURED_REVIEW_ONLY",
+  "founder_decisions": "OPC-FD-001 through OPC-FD-024",
+  "authority": {
+    "documentary_repository_accession": true,
+    "implementation": false,
+    "schema_or_migration": false,
+    "deployment_or_production": false,
+    "community_activation": false,
+    "pilot_or_first_user_enrollment": false
+  },
+  "readiness_answers": {
+    "engineering_buildability": "YES_WITH_EVIDENCE",
+    "objective_qa_verification": "YES_WITH_EVIDENCE",
+    "governance_and_miap_traceability": "PARTIALLY_SATISFIED",
+    "operational_safety_and_recovery": "NO",
+    "first_user_enrollment_readiness": "NO"
+  },
+  "file_count_excluding_manifest_and_checksum_ledger": 8,
+  "files": [
+    {
+      "path": "PACKAGE_README.md",
+      "role": "Package overview, status, contents, and verification instructions.",
+      "size_bytes": 2514,
+      "sha256": "c1d507b57fd26a4f90a39acbca187deed09d30894b12dcb7dea62f26c7608952"
+    },
+    {
+      "path": "artifacts/current/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_2_Strengthened_Draft.docx",
+      "role": "Current formatted documentary successor.",
+      "size_bytes": 135471,
+      "sha256": "f4a1cf6b7dc66895c943e6aeee80d4812d7d80e1d9a87878249976ffc0244cd5"
+    },
+    {
+      "path": "artifacts/current/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_2_Strengthened_Draft.md",
+      "role": "Current controlled Markdown companion.",
+      "size_bytes": 211796,
+      "sha256": "c68746f3eb2e1463fca17f81bebce416d420a2f2da7d8b6ba24d9987aff9c09a"
+    },
+    {
+      "path": "artifacts/historical/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_Draft.docx",
+      "role": "Preserved formatted predecessor.",
+      "size_bytes": 99409,
+      "sha256": "25041f250eb15273f6ee81de791412d299f638046a7d5b9fdde4c50c4cb03aa7"
+    },
+    {
+      "path": "artifacts/historical/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_Draft.md",
+      "role": "Preserved Markdown predecessor.",
+      "size_bytes": 83517,
+      "sha256": "3e9ed565ff9623704683e5e471dafeaaf4959014a720febc08057839f9f6061d"
+    },
+    {
+      "path": "review/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_to_V0_2_Review_Report.md",
+      "role": "V0.1 to V0.2 structured review and strengthening report.",
+      "size_bytes": 11268,
+      "sha256": "6db83934371c47b1c82cacf8e6ff3105c8fd1c573ad96ae05bba7b7bb1d93ee7"
+    },
+    {
+      "path": "controls/FOUNDER_APPROVAL_RECORD.md",
+      "role": "Founder decision and authority record.",
+      "size_bytes": 3580,
+      "sha256": "eb06dabbf502cff3c1006a743c40511edf69948a519f6fb94c7fc1ea7ea430fa"
+    },
+    {
+      "path": "controls/CODEX_INTEGRATION_DIRECTIVE.md",
+      "role": "Fail-closed repository integration directive.",
+      "size_bytes": 12400,
+      "sha256": "80e02fe78068bc03e0802e90cd89fdb02c1deaf81e8a773a07de9af0cc0c546f"
+    }
+  ],
+  "checksum_policy": "PACKAGE_CHECKSUMS.sha256 covers every package file except itself. It includes this manifest."
+}

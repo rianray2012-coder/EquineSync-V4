@@ -1,0 +1,105 @@
+{
+  "package_id": "ES-PIA-ITEM-08-LTRG-CANONICAL-REMEDIATION-PACKAGE-2026-07-23",
+  "generated_date": "2026-07-23",
+  "canonical_item": {
+    "item_number": "Item 08",
+    "pia_family": "Lessons, Training, Rider, and Guardian",
+    "pia_id": "ES-PIA-LESSONS-TRAINING-RIDER-GUARDIAN"
+  },
+  "candidate_version": "0.2.1",
+  "disposition": "PREPARED_NOT_APPROVED_NOT_REPOSITORY_INTEGRATED",
+  "authority_scope": {
+    "documentary_item_08_remediation_only": true,
+    "canonical_portfolio_integration_authorized": false,
+    "branch_creation_authorized": false,
+    "staging_authorized": false,
+    "commit_authorized": false,
+    "push_authorized": false,
+    "pull_request_authorized": false,
+    "merge_authorized": false,
+    "repository_evidence_rename_or_normalization_authorized": false,
+    "implementation_authorized": false,
+    "schema_authorized": false,
+    "migration_authorized": false,
+    "deployment_authorized": false,
+    "production_authorized": false,
+    "pilot_authorized": false,
+    "support_access_authorized": false,
+    "ai_activation_authorized": false,
+    "operational_rollout_authorized": false,
+    "first_user_enrollment_authorized": false
+  },
+  "required_artifacts": [
+    {
+      "artifact": "ITEM_08_LTRG_CANONICAL_NUMBERING_AND_LINEAGE_RECORD.md",
+      "status": "PREPARED"
+    },
+    {
+      "artifact": "ITEM_08_LTRG_V0_2_1_CANONICAL_REMEDIATION_PACKAGE",
+      "status": "PREPARED_WITH_HISTORICAL_ITEM_07_EVIDENCE_PRESERVED"
+    },
+    {
+      "artifact": "ITEM_08_LTRG_CANONICAL_MANIFEST_AND_SHA256SUMS",
+      "status": "PREPARED"
+    },
+    {
+      "artifact": "ITEM_08_LTRG_FRESH_STRUCTURED_REVIEW_REPORT.md",
+      "status": "FAIL_CLOSED_PENDING_FOUNDER_FINAL_DISPOSITION_AND_COMPLIANT_FORMAL_REVIEW"
+    },
+    {
+      "artifact": "ITEM_08_LTRG_FOUNDER_FINAL_DISPOSITION.md",
+      "status": "PENDING_FOUNDER_FINAL_DISPOSITION"
+    },
+    {
+      "artifact": "ITEM_08_LTRG_REPOSITORY_INTEGRATION_BLOCKED_RECEIPT.md",
+      "status": "BLOCKED_BEFORE_REPOSITORY_MUTATION"
+    }
+  ],
+  "historical_item_07_source": {
+    "preservation_status": "PRESERVED_EXACTLY_AS_HISTORICAL_ITEM_07_EVIDENCE",
+    "historical_package_id": "EQUINESYNC-ITEM-07-LTRG-PIA-V0.2-CODEX-HANDOFF",
+    "historical_candidate_pia_id": "ES-PIA-LESSONS-TRAINING-RIDERS-GUARDIANS-V0.2.0",
+    "historical_portfolio_position": "07",
+    "historical_candidate_status": "ITEM_07_V0_2_STRENGTHENED_DOCUMENTARY_CANDIDATE_READY_FOR_COMPLIANT_FRESH_REVIEW",
+    "historical_source_zip_path": "ITEM_08_LTRG_V0_2_1_CANONICAL_REMEDIATION_PACKAGE/HISTORICAL_ITEM_07_LTRG_EVIDENCE_PRESERVED/HISTORICAL_ITEM_07_BLOCKED_INTAKE/SOURCE_ARCHIVE/EquineSync_Item_07_LTRG_PIA_V0_2_Codex_Handoff.zip",
+    "historical_source_zip_sha256": "c3846e5bf8c7af00a5d7cd3676a7fbb9d1654b7ef63c0460135060273b80244c",
+    "historical_candidate_markdown_sha256": "27ce2ebf60456994ce890ca4ee363fed7401c7968614959783e325b1927b7e80",
+    "historical_candidate_docx_sha256": "123a47f0f30d9c41597448c47139f5e5e47e2aa71d6f412f10c0bc973b5cde7c",
+    "historical_fail_closed_receipt_sha256": "720dbda40581330e34eef7217fc5afb4fc7da213257cce22f712b08f908d428a",
+    "historical_package_checksum_ledger_status": "PASS",
+    "historical_v0_2_artifact_checksum_ledger_status": "PASS"
+  },
+  "canonical_v0_2_1_candidate": {
+    "candidate_record_path": "ITEM_08_LTRG_V0_2_1_CANONICAL_REMEDIATION_PACKAGE/CANONICAL_V0_2_1_CANDIDATE/EquineSync_Item_08_LTRG_PIA_V0_2_1_Canonical_Remediation_Candidate.md",
+    "validation_record_path": "ITEM_08_LTRG_V0_2_1_CANONICAL_REMEDIATION_PACKAGE/CANONICAL_V0_2_1_CANDIDATE/EquineSync_Item_08_LTRG_PIA_V0_2_1_Documentary_Validation.json",
+    "remediation_report_path": "ITEM_08_LTRG_V0_2_1_CANONICAL_REMEDIATION_PACKAGE/CANONICAL_V0_2_1_CANDIDATE/EquineSync_Item_08_LTRG_PIA_V0_2_1_Remediation_Report.md",
+    "regeneration_method": "canonical_identity_wrapper_bound_by_reference_to_exact_historical_v0_2_source_bytes",
+    "substantive_product_changes": false,
+    "canonical_docx_generated": false,
+    "founder_final_disposition": "PENDING",
+    "formal_structured_review_completed": false
+  },
+  "historical_v0_2_validation_counts": {
+    "sections": 43,
+    "requirements": 76,
+    "acceptance_criteria": 40,
+    "tests": 55,
+    "golden_paths": 10,
+    "adversarial_scenarios": 36,
+    "founder_decisions": 20,
+    "sources": 17,
+    "entities": 22,
+    "permissions": 15,
+    "apis": 19,
+    "events": 15,
+    "integrations": 8,
+    "dependencies": 12,
+    "evidence_families": 18
+  },
+  "checksum_model": {
+    "ledger_path": "ITEM_08_LTRG_CANONICAL_MANIFEST_AND_SHA256SUMS/ITEM_08_LTRG_CANONICAL_SHA256SUMS.txt",
+    "ledger_scope": "All files in this package except ITEM_08_LTRG_CANONICAL_SHA256SUMS.txt itself.",
+    "expected_file_count_excluding_checksum_ledger": 39
+  },
+  "closure_state": "ITEM_08_REMEDIATION_PACKAGE_PREPARED_WITH_FINAL_APPROVAL_AND_REPOSITORY_INTEGRATION_BLOCKED"
+}

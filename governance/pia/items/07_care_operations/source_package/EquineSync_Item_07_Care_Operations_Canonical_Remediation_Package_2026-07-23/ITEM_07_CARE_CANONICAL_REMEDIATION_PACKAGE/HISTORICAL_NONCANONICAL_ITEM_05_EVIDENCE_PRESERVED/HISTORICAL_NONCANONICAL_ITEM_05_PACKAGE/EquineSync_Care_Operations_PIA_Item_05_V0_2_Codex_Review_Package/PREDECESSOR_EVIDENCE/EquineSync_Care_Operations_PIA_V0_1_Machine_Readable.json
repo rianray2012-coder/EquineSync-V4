@@ -1,0 +1,2228 @@
+{
+  "pia_id": "ES-PIA-CARE-OPERATIONS-V0.1.0",
+  "title": "EquineSync Care Operations Product Implementation Atlas",
+  "version": "0.1.0",
+  "status": "ITEM_05_V0_1_INITIAL_DOCUMENTARY_DRAFT_REVIEW_NOT_STARTED",
+  "classification": [
+    "DOMAIN",
+    "CROSS-DOMAIN",
+    "EXPERIENCE"
+  ],
+  "owner": "Rian Ray until separately assigned",
+  "source_baseline": [
+    {
+      "id": "CARE-SRC-001",
+      "title": "EquineSync Global Governance V1.0",
+      "authority": "Controlling constitutional baseline",
+      "reference": "Commit acb518ea5a160820e64681ff95a16b010fe1156c; tag equinesync-governance-v1.0-locked-2026-07-16",
+      "verification": "Registered immutable reference"
+    },
+    {
+      "id": "CARE-SRC-002",
+      "title": "EquineSync Product Implementation Atlas Master Standard and Controlled Template",
+      "authority": "Founder-adopted controlling implementation standard",
+      "reference": "ES-PIA-MASTER-STANDARD-V1.1; SHA-256 c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc",
+      "verification": "Exact bytes previously verified in controlled ingestion record"
+    },
+    {
+      "id": "CARE-SRC-003",
+      "title": "Founder Adoption and Approval Record for ES-PIA-MASTER-STANDARD-V1.1",
+      "authority": "Controlling adoption and effectiveness record",
+      "reference": "SHA-256 bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8",
+      "verification": "Exact bytes previously verified in controlled ingestion record"
+    },
+    {
+      "id": "CARE-SRC-004",
+      "title": "CARE-FD-001 through CARE-FD-020",
+      "authority": "Founder decisions",
+      "reference": "Approved 2026-07-22",
+      "verification": "Approved for documentary drafting"
+    },
+    {
+      "id": "CARE-SRC-005",
+      "title": "Master Barn Lifecycle and Operations Canon",
+      "authority": "Primary domain authority under AUTH-014 and AUTH-017",
+      "reference": "Exact repository path and checksum pending source freeze",
+      "verification": "Source family identified; exact-source registration pending"
+    },
+    {
+      "id": "CARE-SRC-006",
+      "title": "Constitutional Authority Matrix V1.1 and Cross-Reference Index V1.1",
+      "authority": "Founder-accepted authority routing",
+      "reference": "AUTH-014 and AUTH-017",
+      "verification": "Content reviewed; exact-source registration pending"
+    },
+    {
+      "id": "CARE-SRC-007",
+      "title": "Master Horse Lifecycle and Passport Model",
+      "authority": "Boundary authority",
+      "reference": "Active locked family; exact path/hash pending",
+      "verification": "Family identified; exact-source registration pending"
+    },
+    {
+      "id": "CARE-SRC-008",
+      "title": "Master Facility Domain Model",
+      "authority": "Boundary authority",
+      "reference": "Active locked family; exact path/hash pending",
+      "verification": "Family identified; exact-source registration pending"
+    },
+    {
+      "id": "CARE-SRC-009",
+      "title": "Master Relationship Model and Relationships PIA",
+      "authority": "Inherited authority context",
+      "reference": "Locked canon; PIA V1.1.0 family",
+      "verification": "Contract references pending formal freeze"
+    },
+    {
+      "id": "CARE-SRC-010",
+      "title": "Master Permission and Access-Control Model",
+      "authority": "Inherited enforcement authority",
+      "reference": "Active locked family; exact path/hash pending",
+      "verification": "Contract references pending formal freeze"
+    },
+    {
+      "id": "CARE-SRC-011",
+      "title": "Master Audit Event and Evidence Model",
+      "authority": "Inherited evidence authority",
+      "reference": "Active locked family; exact path/hash pending",
+      "verification": "Contract references pending formal freeze"
+    },
+    {
+      "id": "CARE-SRC-012",
+      "title": "Master Communication, Notification, and Notice Model",
+      "authority": "Inherited communication authority",
+      "reference": "Active locked family; exact path/hash pending",
+      "verification": "Contract references pending formal freeze"
+    },
+    {
+      "id": "CARE-SRC-013",
+      "title": "RF29 Calendar Domain Canon and Task/Calendar/Scheduling/Notification PIA",
+      "authority": "Shared scheduling boundary",
+      "reference": "RF29 locked family; TCSN documentary draft family",
+      "verification": "Cross-PIA contract pending"
+    },
+    {
+      "id": "CARE-SRC-014",
+      "title": "Equine Health Governance and Health/Medication PIAs",
+      "authority": "Professional and clinical boundary",
+      "reference": "Locked governance family; downstream PIAs pending",
+      "verification": "Cross-PIA contract pending"
+    },
+    {
+      "id": "CARE-SRC-015",
+      "title": "Master Record Stewardship and Retention Model",
+      "authority": "Inherited record governance",
+      "reference": "Locked governance family",
+      "verification": "Exact mappings pending"
+    },
+    {
+      "id": "CARE-SRC-016",
+      "title": "Master Platform Resilience, Backup, and Recovery Model",
+      "authority": "Inherited operational resilience",
+      "reference": "Locked governance family",
+      "verification": "Exact mappings pending"
+    },
+    {
+      "id": "CARE-SRC-017",
+      "title": "Master AI Governance and Decision Boundary Model V2.0",
+      "authority": "Inherited AI boundary",
+      "reference": "Adopted and locked family",
+      "verification": "Exact mappings pending"
+    },
+    {
+      "id": "CARE-SRC-018",
+      "title": "Privacy and Data Protection Model",
+      "authority": "Inherited privacy authority",
+      "reference": "Adopted; lock status and exact path require source freeze",
+      "verification": "Exact mappings pending"
+    },
+    {
+      "id": "CARE-SRC-019",
+      "title": "Media Governance Model",
+      "authority": "Inherited media authority",
+      "reference": "Locked governance family",
+      "verification": "Exact mappings pending"
+    }
+  ],
+  "inherited_controls": [
+    "least_privilege",
+    "one_authoritative_owner",
+    "evidence_by_design",
+    "operational_realism",
+    "no_silent_invention",
+    "no_silent_scope_expansion"
+  ],
+  "founder_decisions": [
+    {
+      "id": "CARE-FD-001",
+      "text": "Care Operations owns execution and documentation of routine, nonclinical horse-care work, including turnout, stall care, water checks, blanketing, fly protection, grooming, hoof picking, routine body and environmental observations, authorized hand walking, housing coordination, care rounds, exceptions, and permitted owner summaries. It does not own diagnosis, veterinary instructions, medication truth, nutrition formulation, billing liability, employment discipline, or ownership.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-002",
+      "text": "Care Operations may display and execute authorized feed, supplement, medication, and treatment instructions, but the substantive instruction and authoritative record remain with the applicable Feed/Nutrition or Health/Medication domain.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-003",
+      "text": "A care plan is a governed, versioned operational record. Free-text notes may supplement but may not silently override structured instructions.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-004",
+      "text": "Care instructions may exist at horse, facility default, location or group, temporary stay or event, and seasonal or condition-based levels. Authorized horse-specific instructions take precedence with visible conflict handling.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-005",
+      "text": "Only actors with explicit role, relationship, horse, facility, and purpose authority may create or change care instructions. Assignment to perform care does not grant authority to alter the instruction.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-006",
+      "text": "Staff may make bounded safe operational substitutions but may not materially change care, diet, medication, housing restrictions, turnout compatibility, protective equipment, or professional instructions without authority. Emergency protective action must be recorded and escalated.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-007",
+      "text": "Assignments may target a named person, qualified role or team, open authorized queue, temporary substitute, supervised assignee, or recurring shift. Responsibility and actual performer must remain attributable.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-008",
+      "text": "Completion requires affirmative attestation. Higher-risk work may require structured fields, reason codes, measurements, second checks, or evidence. Time passage never auto-completes care.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-009",
+      "text": "Care workers may record observable facts but not diagnosis or professional conclusions.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-010",
+      "text": "Escalation uses four standardized semantic levels: Routine Note, Attention Required, Urgent, and Emergency. Timing targets may be configurable.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-011",
+      "text": "EquineSync may guide and document emergency escalation but does not replace human judgment, professionals, emergency services, or facility plans. Delivery must not be represented as receipt.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-012",
+      "text": "Overdue or missed care remains open until completed, excused, superseded, authorized-cancelled, documented impossible, or escalated and resolved. No silent auto-completion.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-013",
+      "text": "Care Operations owns the current operational location and housing assignment used for care coordination, while Horse Lifecycle and Facility domains own horse and facility identity. Moves preserve prior and new location, effective time, reason, authority, performer, and temporary status.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-014",
+      "text": "The system may display compatibility facts, warnings, restrictions, and templates, but may not autonomously determine that horses are safe together. Suggestions remain advisory and human-approved.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-015",
+      "text": "Condition-based care may use weather and environmental inputs. Warnings and proposed tasks are allowed, but high-risk care decisions may not be autonomously executed without later narrow approval.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-016",
+      "text": "Blanketing, fly protection, boots, masks, wraps, and similar routine equipment may use structured instructions. Routine protective equipment must remain distinct from medical or treatment equipment.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-017",
+      "text": "Authorized owners and guardians may see permitted care status, material exceptions, relevant observations, and selected evidence, but not internal staffing commentary, unrelated records, restricted investigations, protected safeguarding information, or other horses' data.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-018",
+      "text": "Photo, video, measurement, scan, or signature evidence is configurable rather than universally required. Designated high-risk or disputed activities may require evidence with preserved metadata, authorship, time, horse association, permissions, retention, and correction.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-019",
+      "text": "Initial scope must support low-connectivity care work with bounded cached instructions, completion and exception capture, observations, evidence, queued timestamps, visible unsynchronized status, and deterministic reconciliation without broadening offline access.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    },
+    {
+      "id": "CARE-FD-020",
+      "text": "AI is limited to bounded assistance such as drafting summaries, routing observations, identifying duplicates or missing records, and transcription. AI may not diagnose, alter care, prescribe treatment, decide compatibility, close tasks, suppress escalation, make emergency decisions, or present welfare conclusions as fact.",
+      "status": "APPROVED_FOR_DOCUMENTARY_DRAFTING"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "CARE-REQ-001",
+      "statement": "The system SHALL treat routine nonclinical care execution and documentation as the primary Care Operations scope.",
+      "source": "FD-001",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-002",
+      "statement": "The system SHALL prevent Care Operations from becoming the authoritative source for diagnosis, veterinary instructions, medication truth, nutrition formulation, billing liability, employment discipline, or horse ownership.",
+      "source": "FD-001, FD-002",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-003",
+      "statement": "The system SHALL preserve one authoritative owner for each care instruction, record, state, and decision.",
+      "source": "Master Standard, FD-002",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-004",
+      "statement": "The system SHALL display authoritative external feed, medication, treatment, or professional instructions without permitting Care Operations to silently mutate their substantive meaning.",
+      "source": "FD-002",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-005",
+      "statement": "The system SHALL record execution facts separately from substantive instruction truth.",
+      "source": "FD-002",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-006",
+      "statement": "The system SHALL represent care plans as versioned governed records with effective dates, applicability, source, authority, and supersession.",
+      "source": "FD-003",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-007",
+      "statement": "The system SHALL prevent unstructured notes from silently overriding structured active instructions.",
+      "source": "FD-003",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-008",
+      "statement": "The system SHALL resolve instruction applicability across horse, facility, location or group, temporary stay, event, season, and condition levels.",
+      "source": "FD-004",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-009",
+      "statement": "The system SHALL visibly surface conflicts among applicable instructions and require authorized resolution or a fail-safe treatment.",
+      "source": "FD-004",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-010",
+      "statement": "The system SHALL authorize care-plan creation and modification by actor, relationship, horse, facility, purpose, delegation, and time.",
+      "source": "FD-005",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-011",
+      "statement": "The system SHALL not infer instruction-edit authority from assignment to perform a task.",
+      "source": "FD-005",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-012",
+      "statement": "The system SHALL support bounded safe substitutions while preserving the original instruction, substitution reason, performer, time, and escalation where required.",
+      "source": "FD-006",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-013",
+      "statement": "The system SHALL require immediate recording and escalation of emergency protective actions taken outside the ordinary instruction.",
+      "source": "FD-006",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-014",
+      "statement": "The system SHALL support assignment to a named person, qualified role or team, authorized open queue, temporary substitute, supervised assignee, and recurring shift.",
+      "source": "FD-007",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-015",
+      "statement": "The system SHALL preserve both accountable responsibility and actual performer for every completed, missed, substituted, or cancelled care task.",
+      "source": "FD-007",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-016",
+      "statement": "The system SHALL require affirmative completion attestation by an authenticated or otherwise authorized attributable performer.",
+      "source": "FD-008",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-017",
+      "statement": "The system SHALL support configurable evidence, structured fields, reason codes, measurements, and second checks for designated task types.",
+      "source": "FD-008, FD-018",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-018",
+      "statement": "The system SHALL never auto-complete a care task solely because its due time passed.",
+      "source": "FD-008, FD-012",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-019",
+      "statement": "The system SHALL support start, pause, resume, block, complete, exception, miss, excuse, supersede, cancel, and correct states where applicable.",
+      "source": "Master Standard, FD-012",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-020",
+      "statement": "The system SHALL maintain an unresolved-care queue across shifts and handoffs.",
+      "source": "FD-012",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-021",
+      "statement": "The system SHALL record task completion with horse, instruction version, location, performer, responsible assignee, timestamps, result, evidence, offline status, and sync status.",
+      "source": "Barn Lifecycle, FD-008, FD-019",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-022",
+      "statement": "The system SHALL prevent duplicate completion from retries or repeated synchronization through idempotency and authoritative reconciliation.",
+      "source": "Master Standard, FD-019",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-023",
+      "statement": "The system SHALL permit factual observations while labeling them as observations rather than diagnoses or professional conclusions.",
+      "source": "FD-009",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-024",
+      "statement": "The system SHALL preserve observation wording, structured values, source, author, time, horse, location, attachments, and later correction history.",
+      "source": "FD-009, FD-018",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-025",
+      "statement": "The system SHALL provide four standardized escalation meanings: Routine Note, Attention Required, Urgent, and Emergency.",
+      "source": "FD-010",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-026",
+      "statement": "The system SHALL allow configurable response targets without changing the semantic meaning of escalation levels.",
+      "source": "FD-010",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-027",
+      "statement": "The system SHALL record escalation recipients, delivery attempts, delivery status, acknowledgments, actions, and closure evidence.",
+      "source": "FD-011",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-028",
+      "statement": "The system SHALL distinguish notification sent, delivered, opened, acknowledged, and acted upon.",
+      "source": "FD-011",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-029",
+      "statement": "The system SHALL provide prominent human contact actions and applicable authorized emergency context without representing software as a professional or emergency service.",
+      "source": "FD-011",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-030",
+      "statement": "The system SHALL preserve critical authorized emergency information for bounded offline access where policy permits.",
+      "source": "FD-011, FD-019",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-031",
+      "statement": "The system SHALL keep overdue or missed care open until an authorized terminal treatment is recorded.",
+      "source": "FD-012",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-032",
+      "statement": "The system SHALL require reasons and authority for excusal, cancellation, supersession, impossibility, or exception closure.",
+      "source": "FD-012",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-033",
+      "statement": "The system SHALL expose recurring misses and unresolved exceptions without reducing care quality to completion percentage alone.",
+      "source": "Barn Lifecycle",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-034",
+      "statement": "The system SHALL maintain current operational horse location and housing assignment for care coordination while referencing canonical horse and facility identities.",
+      "source": "FD-013",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-035",
+      "statement": "The system SHALL preserve prior location, new location, effective time, reason, authorizing actor, executing actor, and temporary or continuing status for movement.",
+      "source": "FD-013",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-036",
+      "statement": "The system SHALL prevent a task or care workflow from rewriting canonical facility hierarchy or permanent horse identity.",
+      "source": "FD-013",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-037",
+      "statement": "The system SHALL display turnout compatibility facts, restrictions, warnings, and approved group templates without autonomously declaring a pairing safe.",
+      "source": "FD-014",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-038",
+      "statement": "The system SHALL require authorized human approval for any advisory turnout grouping suggestion.",
+      "source": "FD-014",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-039",
+      "statement": "The system SHALL support weather and environmental condition inputs with freshness, source, location, and uncertainty indicators.",
+      "source": "FD-015",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-040",
+      "statement": "The system SHALL permit warnings and proposed tasks from environmental rules while prohibiting autonomous high-risk care decisions unless separately approved.",
+      "source": "FD-015",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-041",
+      "statement": "The system SHALL support structured protective-equipment instructions, including item or type, fit or placement, use conditions, inspections, removal, damage handling, and responsibility.",
+      "source": "FD-016",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-042",
+      "statement": "The system SHALL distinguish routine protective equipment from medical devices or treatment equipment.",
+      "source": "FD-016",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-043",
+      "statement": "The system SHALL provide owner and guardian projections limited to permitted care status, material exceptions, relevant observations, and selected evidence.",
+      "source": "FD-017",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-044",
+      "statement": "The system SHALL exclude internal staffing commentary, unrelated employee or customer data, other horses, protected investigations, and restricted safeguarding material from ordinary owner projections.",
+      "source": "FD-017",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-045",
+      "statement": "The system SHALL prevent facility visibility configuration from suppressing material welfare exceptions that policy requires to be disclosed.",
+      "source": "FD-017",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-046",
+      "statement": "The system SHALL preserve media evidence metadata, authorship, capture and upload time, horse association, access policy, retention class, and correction or withdrawal history.",
+      "source": "FD-018",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-047",
+      "statement": "The system SHALL make evidence requirements configurable by task type, condition, dispute state, and release class.",
+      "source": "FD-018",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-048",
+      "statement": "The system SHALL support bounded offline viewing of recently synchronized assigned care and critical authorized instructions.",
+      "source": "FD-019",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-049",
+      "statement": "The system SHALL support offline capture of completion, exceptions, observations, and evidence with clear pending status.",
+      "source": "FD-019",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-050",
+      "statement": "The system SHALL revalidate authorization, instruction version, horse state, location, and conflicts when offline operations synchronize.",
+      "source": "FD-019",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-051",
+      "statement": "The system SHALL encrypt offline data and enforce device, account, tenant, horse, purpose, and expiry boundaries.",
+      "source": "FD-019",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-052",
+      "statement": "The system SHALL provide deterministic accepted, rejected, conflicted, or quarantined outcomes for synchronized operations.",
+      "source": "FD-019",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-053",
+      "statement": "The system SHALL label AI-assisted content and preserve source and reviewer attribution.",
+      "source": "FD-020",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-054",
+      "statement": "The system SHALL require human review before AI-assisted text becomes an owner-visible summary or authoritative care record.",
+      "source": "FD-020",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-055",
+      "statement": "The system SHALL prohibit AI from diagnosing, prescribing, changing instructions, deciding compatibility, closing work, suppressing escalation, or making emergency decisions.",
+      "source": "FD-020",
+      "release_classification": "Internal build",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-056",
+      "statement": "The system SHALL provide an accessible correction and contest path for AI-assisted output.",
+      "source": "FD-020",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-057",
+      "statement": "The system SHALL preserve attributable audit events for care-plan changes, assignments, completion, exceptions, observations, escalation, evidence, corrections, owner projections, exports, and administrative action.",
+      "source": "Audit Model",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-058",
+      "statement": "The system SHALL provide administrative tools for authorized correction, reassignment, conflict review, sync quarantine, evidence restriction, escalation review, and account or device revocation.",
+      "source": "Master Standard",
+      "release_classification": "Operational readiness",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-059",
+      "statement": "The system SHALL expose operational metrics and alerts for unresolved urgent work, failed emergency delivery, stale instructions, sync backlog, duplicate attempts, authorization denial anomalies, and evidence-processing failures.",
+      "source": "Master Standard",
+      "release_classification": "Operational readiness",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-060",
+      "statement": "The system SHALL define backup, restore, rollback, incident, support, and maintenance procedures before production or first-user enrollment.",
+      "source": "Master Standard",
+      "release_classification": "Operational readiness",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-061",
+      "statement": "The system SHALL preserve historical truth through correction and supersession rather than silent overwrite or destructive deletion.",
+      "source": "Record Stewardship",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-062",
+      "statement": "The system SHALL support purpose-limited search, reports, and exports without creating employee surveillance or unsupported welfare conclusions.",
+      "source": "Reporting/Privacy",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-063",
+      "statement": "The system SHALL meet approved accessibility, mobile, low-connectivity, performance, security, privacy, and data-integrity baselines.",
+      "source": "Master Standard",
+      "release_classification": "First user",
+      "status": "DRAFT"
+    },
+    {
+      "id": "CARE-REQ-064",
+      "statement": "The system SHALL not claim implementation, operational readiness, or enrollment readiness without the applicable evidence and Founder disposition.",
+      "source": "Master Standard",
+      "release_classification": "All gates",
+      "status": "DRAFT"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "CARE-WF-001",
+      "name": "Create or amend care plan",
+      "summary": "Authorized care authority proposes, validates, reviews conflicts, records source and applicability, obtains required approval, activates a version, and preserves the prior version."
+    },
+    {
+      "id": "CARE-WF-002",
+      "name": "Generate daily care queue",
+      "summary": "The system resolves active instructions, schedule rules, horse state, location, assignments, and exceptions into a permission-filtered shift queue."
+    },
+    {
+      "id": "CARE-WF-003",
+      "name": "Assign, claim, substitute, or reassign care",
+      "summary": "An authorized actor assigns responsibility or an eligible worker claims work; substitutions preserve accountability, qualification, and reason."
+    },
+    {
+      "id": "CARE-WF-004",
+      "name": "Perform and attest routine care",
+      "summary": "The performer verifies horse and instruction, records result, evidence and exception, attests completion, and receives an authoritative status."
+    },
+    {
+      "id": "CARE-WF-005",
+      "name": "Record welfare observation",
+      "summary": "The worker records factual observations, selects severity, attaches evidence if allowed, and routes for review without diagnosis."
+    },
+    {
+      "id": "CARE-WF-006",
+      "name": "Urgent or emergency escalation",
+      "summary": "The user triggers the appropriate level, contacts humans directly, records delivery and acknowledgment, and preserves chronology until resolved."
+    },
+    {
+      "id": "CARE-WF-007",
+      "name": "Handle overdue, missed, blocked, or impossible care",
+      "summary": "The task remains open, reason and authority are recorded, escalation and handoff occur, and closure uses an authorized terminal treatment."
+    },
+    {
+      "id": "CARE-WF-008",
+      "name": "Move horse or change housing assignment",
+      "summary": "Authorized actor validates destination and restrictions, records effective move, updates operational location, and preserves movement history."
+    },
+    {
+      "id": "CARE-WF-009",
+      "name": "Apply weather-responsive care rule",
+      "summary": "Fresh environmental data produces a warning or proposed task; an authorized person confirms high-risk action and records the decision."
+    },
+    {
+      "id": "CARE-WF-010",
+      "name": "Apply, inspect, change, or remove protective equipment",
+      "summary": "The worker verifies the item and instruction, records fit or damage, completes or escalates, and preserves evidence when required."
+    },
+    {
+      "id": "CARE-WF-011",
+      "name": "Work offline and synchronize",
+      "summary": "Authorized data is cached, actions are captured as pending, synchronization revalidates authority and versions, and conflicts are accepted, rejected, or quarantined."
+    },
+    {
+      "id": "CARE-WF-012",
+      "name": "Publish owner care summary",
+      "summary": "Permitted source facts are projected, AI assistance is reviewed if used, sensitive material is excluded, and publication is attributable."
+    },
+    {
+      "id": "CARE-WF-013",
+      "name": "Correct or supersede care record",
+      "summary": "Authorized correction preserves original values, reason, evidence, affected downstream records, notices, and successor linkage."
+    },
+    {
+      "id": "CARE-WF-014",
+      "name": "Shift handoff and continuity",
+      "summary": "Outgoing and incoming workers review unresolved work, urgent observations, horse locations, changed instructions, and sync conflicts with acknowledgment."
+    }
+  ],
+  "entities": [
+    {
+      "id": "CARE-ENT-001",
+      "name": "CarePlan",
+      "purpose": "Versioned operational container for routine care instructions and applicability."
+    },
+    {
+      "id": "CARE-ENT-002",
+      "name": "CareInstruction",
+      "purpose": "One structured instruction with source, authority, timing, conditions, and evidence requirements."
+    },
+    {
+      "id": "CARE-ENT-003",
+      "name": "CarePlanVersion",
+      "purpose": "Immutable version snapshot and supersession link."
+    },
+    {
+      "id": "CARE-ENT-004",
+      "name": "ApplicabilityRule",
+      "purpose": "Horse, facility, location, group, event, season, weather, or temporary-stay scope."
+    },
+    {
+      "id": "CARE-ENT-005",
+      "name": "CareTask",
+      "purpose": "Executable work item derived from an instruction or authorized manual creation."
+    },
+    {
+      "id": "CARE-ENT-006",
+      "name": "CareAssignment",
+      "purpose": "Responsibility, qualification, assignment, claim, substitution, and handoff facts."
+    },
+    {
+      "id": "CARE-ENT-007",
+      "name": "CompletionAttestation",
+      "purpose": "Attributable result, performer, time, location, evidence, and exception state."
+    },
+    {
+      "id": "CARE-ENT-008",
+      "name": "CareException",
+      "purpose": "Missed, blocked, delayed, substituted, refused, impossible, or conflict condition."
+    },
+    {
+      "id": "CARE-ENT-009",
+      "name": "CareObservation",
+      "purpose": "Factual horse or environment observation separated from diagnosis."
+    },
+    {
+      "id": "CARE-ENT-010",
+      "name": "CareEscalation",
+      "purpose": "Severity, recipients, delivery, acknowledgment, action, and resolution chronology."
+    },
+    {
+      "id": "CARE-ENT-011",
+      "name": "CareEvidence",
+      "purpose": "Photo, video, measurement, scan, signature, or document evidence with governance metadata."
+    },
+    {
+      "id": "CARE-ENT-012",
+      "name": "HorseOperationalLocation",
+      "purpose": "Current care-coordination projection of canonical horse and facility location records."
+    },
+    {
+      "id": "CARE-ENT-013",
+      "name": "HorseMovementRecord",
+      "purpose": "Time-aware movement with reason, authority, performer, and temporary status."
+    },
+    {
+      "id": "CARE-ENT-014",
+      "name": "TurnoutConstraintReference",
+      "purpose": "Referenced compatibility facts, restrictions, warnings, and approved group template."
+    },
+    {
+      "id": "CARE-ENT-015",
+      "name": "ProtectiveEquipmentInstruction",
+      "purpose": "Structured routine equipment requirement and inspection/removal rules."
+    },
+    {
+      "id": "CARE-ENT-016",
+      "name": "EnvironmentalConditionSnapshot",
+      "purpose": "Source, location, observed or forecast time, freshness, values, and uncertainty."
+    },
+    {
+      "id": "CARE-ENT-017",
+      "name": "CareRound",
+      "purpose": "Shift or round grouping for tasks, staffing, status, and closing summary."
+    },
+    {
+      "id": "CARE-ENT-018",
+      "name": "CareHandoff",
+      "purpose": "Unresolved work, critical observations, changed instructions, acknowledgment, and responsibility transfer."
+    },
+    {
+      "id": "CARE-ENT-019",
+      "name": "OfflineCareOperation",
+      "purpose": "Idempotent queued operation with local, sync, validation, and final disposition state."
+    },
+    {
+      "id": "CARE-ENT-020",
+      "name": "OwnerCareProjection",
+      "purpose": "Purpose-limited owner-visible rendering of permitted care facts."
+    },
+    {
+      "id": "CARE-ENT-021",
+      "name": "CareConfiguration",
+      "purpose": "Approved task types, evidence rules, escalation targets, feature flags, and facility-local settings."
+    },
+    {
+      "id": "CARE-ENT-022",
+      "name": "CareAuditReference",
+      "purpose": "Correlation to canonical audit events and evidence manifest."
+    }
+  ],
+  "state_models": [
+    {
+      "id": "CARE-SM-001",
+      "record": "Care plan",
+      "states": "DRAFT -> PENDING_APPROVAL -> ACTIVE -> SUSPENDED or SUPERSEDED or EXPIRED -> ARCHIVED",
+      "rule": "Only an authorized plan authority may activate, suspend, supersede, or archive."
+    },
+    {
+      "id": "CARE-SM-002",
+      "record": "Care task",
+      "states": "SCHEDULED -> AVAILABLE -> CLAIMED -> IN_PROGRESS -> COMPLETED, EXCEPTION, MISSED, CANCELLED, or SUPERSEDED",
+      "rule": "No time-based auto-completion; correction preserves original completion."
+    },
+    {
+      "id": "CARE-SM-003",
+      "record": "Observation",
+      "states": "DRAFT -> SUBMITTED -> TRIAGED -> ESCALATED or ACKNOWLEDGED -> RESOLVED -> ARCHIVED; CORRECTED may supersede",
+      "rule": "Observation cannot transition to diagnosis."
+    },
+    {
+      "id": "CARE-SM-004",
+      "record": "Escalation",
+      "states": "OPEN -> ROUTING -> NOTIFIED -> ACKNOWLEDGED -> ACTIONING -> RESOLVED -> CLOSED; DELIVERY_FAILED remains visible",
+      "rule": "Sent does not equal received or acknowledged."
+    },
+    {
+      "id": "CARE-SM-005",
+      "record": "Location assignment",
+      "states": "PROPOSED -> ACTIVE -> ENDING -> ENDED; CORRECTED or DISPUTED are preserved branches",
+      "rule": "Canonical horse and facility identities are referenced, not rewritten."
+    },
+    {
+      "id": "CARE-SM-006",
+      "record": "Offline operation",
+      "states": "LOCAL_PENDING -> QUEUED -> SYNCING -> ACCEPTED, REJECTED, CONFLICTED, or QUARANTINED",
+      "rule": "Server revalidation determines authoritative result."
+    },
+    {
+      "id": "CARE-SM-007",
+      "record": "Owner projection",
+      "states": "DRAFT -> REVIEWED -> PUBLISHED -> CORRECTED, WITHDRAWN, or SUPERSEDED",
+      "rule": "Restricted source content never becomes visible through projection."
+    }
+  ],
+  "permission_rules": [
+    {
+      "actor": "Founder / platform approval authority",
+      "allowed": "Approve documentary scope, retained risk, implementation and enrollment dispositions",
+      "boundary": "No routine production care mutation by virtue of Founder role alone"
+    },
+    {
+      "actor": "Facility administrator",
+      "allowed": "Configure facility-local care types, assign qualified roles, view facility care status, manage approved corrections",
+      "boundary": "Cannot diagnose, alter professional instructions, or view unrelated tenants"
+    },
+    {
+      "actor": "Care manager / barn manager",
+      "allowed": "Create or approve care plans within authority, assign work, resolve routine exceptions, initiate escalations",
+      "boundary": "Cannot broaden access or override health, medication, safeguarding, or ownership authority"
+    },
+    {
+      "actor": "Trainer with delegated care authority",
+      "allowed": "Create or amend authorized horse-specific routine care instructions and view assigned horses",
+      "boundary": "No authority from trainer label alone; no unrelated facility or horse access"
+    },
+    {
+      "actor": "Staff / groom",
+      "allowed": "View minimum assigned instructions, perform care, record facts and exceptions, escalate",
+      "boundary": "Cannot edit underlying instructions unless separately authorized"
+    },
+    {
+      "actor": "Horse owner / authorized agent",
+      "allowed": "View permitted owner projection, propose or approve instructions where relationship grants authority, contest records",
+      "boundary": "Cannot view internal personnel data, other horses, or restricted investigations"
+    },
+    {
+      "actor": "Guardian",
+      "allowed": "View and act only within the protected participant and horse authority granted",
+      "boundary": "No authority inferred from payment or relationship label alone"
+    },
+    {
+      "actor": "Service provider",
+      "allowed": "View explicitly shared horse context and create professional records in provider domain",
+      "boundary": "Cannot receive broad care-operations access or mutate non-provider care plans without grant"
+    },
+    {
+      "actor": "Support agent",
+      "allowed": "Case-bound troubleshooting, metadata and sync review, controlled correction assistance",
+      "boundary": "No silent care decision, diagnosis, instruction change, or unrestricted content access"
+    },
+    {
+      "actor": "System jobs",
+      "allowed": "Generate tasks, route notices, reconcile sync, calculate due state under approved rules",
+      "boundary": "Cannot create product policy, auto-complete care, or infer authority"
+    },
+    {
+      "actor": "AI assistant",
+      "allowed": "Draft, classify, transcribe, or suggest within approved bounded use cases",
+      "boundary": "Cannot diagnose, prescribe, decide compatibility, close work, suppress escalation, or create authority"
+    }
+  ],
+  "api_contracts": [
+    {
+      "id": "CARE-API-001",
+      "name": "Resolve applicable care instructions",
+      "behavior": "Returns permission-filtered active instruction set with source, version, precedence, conflicts, and freshness."
+    },
+    {
+      "id": "CARE-API-002",
+      "name": "Create or amend care plan proposal",
+      "behavior": "Accepts authorized proposal and expected version; returns draft or conflict."
+    },
+    {
+      "id": "CARE-API-003",
+      "name": "Activate care plan version",
+      "behavior": "Requires authority and approvals; emits activation and supersession events."
+    },
+    {
+      "id": "CARE-API-004",
+      "name": "Create or materialize care task",
+      "behavior": "Uses approved task type, instruction, schedule, horse, location, and idempotency key."
+    },
+    {
+      "id": "CARE-API-005",
+      "name": "Assign, claim, substitute, or reassign",
+      "behavior": "Validates qualification and authority; preserves responsibility lineage."
+    },
+    {
+      "id": "CARE-API-006",
+      "name": "Attest task result",
+      "behavior": "Records completion or exception with expected version and evidence references."
+    },
+    {
+      "id": "CARE-API-007",
+      "name": "Submit observation",
+      "behavior": "Creates factual observation and optional escalation request."
+    },
+    {
+      "id": "CARE-API-008",
+      "name": "Open or update escalation",
+      "behavior": "Routes notices and records delivery, acknowledgment, and action chronology."
+    },
+    {
+      "id": "CARE-API-009",
+      "name": "Change operational location",
+      "behavior": "Validates horse, facility location, restrictions, authority, and effective time."
+    },
+    {
+      "id": "CARE-API-010",
+      "name": "Submit offline operation batch",
+      "behavior": "Processes idempotent operations with per-item accepted, rejected, conflicted, or quarantined result."
+    },
+    {
+      "id": "CARE-API-011",
+      "name": "Create owner care projection",
+      "behavior": "Builds minimum-necessary projection and requires review where configured."
+    },
+    {
+      "id": "CARE-API-012",
+      "name": "Correct or supersede record",
+      "behavior": "Creates successor with reason, authority, downstream impact, and audit linkage."
+    }
+  ],
+  "events": [
+    {
+      "id": "CARE-EVT-001",
+      "name": "CarePlanVersionActivated"
+    },
+    {
+      "id": "CARE-EVT-002",
+      "name": "CareInstructionConflictDetected"
+    },
+    {
+      "id": "CARE-EVT-003",
+      "name": "CareTaskCreated"
+    },
+    {
+      "id": "CARE-EVT-004",
+      "name": "CareTaskAssigned"
+    },
+    {
+      "id": "CARE-EVT-005",
+      "name": "CareTaskCompleted"
+    },
+    {
+      "id": "CARE-EVT-006",
+      "name": "CareTaskExceptionRecorded"
+    },
+    {
+      "id": "CARE-EVT-007",
+      "name": "CareTaskMissed"
+    },
+    {
+      "id": "CARE-EVT-008",
+      "name": "CareObservationSubmitted"
+    },
+    {
+      "id": "CARE-EVT-009",
+      "name": "CareEscalationOpened"
+    },
+    {
+      "id": "CARE-EVT-010",
+      "name": "CareEscalationAcknowledged"
+    },
+    {
+      "id": "CARE-EVT-011",
+      "name": "HorseOperationalLocationChanged"
+    },
+    {
+      "id": "CARE-EVT-012",
+      "name": "CareEvidenceAttached"
+    },
+    {
+      "id": "CARE-EVT-013",
+      "name": "OfflineCareOperationResolved"
+    },
+    {
+      "id": "CARE-EVT-014",
+      "name": "OwnerCareProjectionPublished"
+    },
+    {
+      "id": "CARE-EVT-015",
+      "name": "CareRecordCorrected"
+    },
+    {
+      "id": "CARE-EVT-016",
+      "name": "ShiftHandoffAcknowledged"
+    }
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "CARE-AC-001",
+      "criterion": "An unauthorized worker cannot create, activate, or change a care instruction."
+    },
+    {
+      "id": "CARE-AC-002",
+      "criterion": "A worker assigned to perform care can view only the minimum horse, instruction, location, and evidence context required."
+    },
+    {
+      "id": "CARE-AC-003",
+      "criterion": "Changing an active care plan creates a new version and preserves the prior version and effective interval."
+    },
+    {
+      "id": "CARE-AC-004",
+      "criterion": "A free-text note cannot override an active structured instruction."
+    },
+    {
+      "id": "CARE-AC-005",
+      "criterion": "Conflicting applicable instructions are visible and cannot be silently resolved by the client."
+    },
+    {
+      "id": "CARE-AC-006",
+      "criterion": "A task cannot become complete without an attributable affirmative attestation."
+    },
+    {
+      "id": "CARE-AC-007",
+      "criterion": "A timed-out or overdue task remains open and visible."
+    },
+    {
+      "id": "CARE-AC-008",
+      "criterion": "Duplicate completion retries produce one authoritative result."
+    },
+    {
+      "id": "CARE-AC-009",
+      "criterion": "A completion records instruction version, performer, responsibility, location, result, evidence, and sync state."
+    },
+    {
+      "id": "CARE-AC-010",
+      "criterion": "A staff substitution preserves the original assignment and substitution reason."
+    },
+    {
+      "id": "CARE-AC-011",
+      "criterion": "An observation is labeled as observation and cannot be presented as diagnosis."
+    },
+    {
+      "id": "CARE-AC-012",
+      "criterion": "Emergency escalation shows direct human contact actions and does not claim receipt without evidence."
+    },
+    {
+      "id": "CARE-AC-013",
+      "criterion": "Delivery, opening, acknowledgment, action, and closure are distinguishable."
+    },
+    {
+      "id": "CARE-AC-014",
+      "criterion": "A missed task cannot be closed without an authorized reason and terminal treatment."
+    },
+    {
+      "id": "CARE-AC-015",
+      "criterion": "Shift handoff exposes unresolved urgent work and requires acknowledgment."
+    },
+    {
+      "id": "CARE-AC-016",
+      "criterion": "A horse move preserves prior and new location, timing, reason, authority, and performer."
+    },
+    {
+      "id": "CARE-AC-017",
+      "criterion": "The system does not rewrite permanent horse identity or facility hierarchy through care workflows."
+    },
+    {
+      "id": "CARE-AC-018",
+      "criterion": "Turnout suggestions are advisory and require authorized human approval."
+    },
+    {
+      "id": "CARE-AC-019",
+      "criterion": "Stale or missing weather data is visibly identified and cannot silently trigger high-risk action."
+    },
+    {
+      "id": "CARE-AC-020",
+      "criterion": "Protective-equipment instructions include item/type, conditions, inspection, removal, and damage handling."
+    },
+    {
+      "id": "CARE-AC-021",
+      "criterion": "Owner projections exclude internal staffing notes and other horses."
+    },
+    {
+      "id": "CARE-AC-022",
+      "criterion": "Material welfare exceptions required by policy cannot be hidden by ordinary visibility configuration."
+    },
+    {
+      "id": "CARE-AC-023",
+      "criterion": "Required evidence preserves metadata and remains permission-filtered."
+    },
+    {
+      "id": "CARE-AC-024",
+      "criterion": "Offline screens clearly distinguish synchronized truth from local pending work."
+    },
+    {
+      "id": "CARE-AC-025",
+      "criterion": "Offline operations are revalidated on sync and receive deterministic final dispositions."
+    },
+    {
+      "id": "CARE-AC-026",
+      "criterion": "Revoked or expired offline access cannot be used to continue viewing or submitting protected care."
+    },
+    {
+      "id": "CARE-AC-027",
+      "criterion": "AI-assisted summaries are labeled, reviewed, attributable, and correctable."
+    },
+    {
+      "id": "CARE-AC-028",
+      "criterion": "AI cannot invoke prohibited care, escalation, diagnosis, compatibility, or completion actions."
+    },
+    {
+      "id": "CARE-AC-029",
+      "criterion": "Administrative correction preserves original record, reason, authority, and successor linkage."
+    },
+    {
+      "id": "CARE-AC-030",
+      "criterion": "Care search and reporting enforce the same permissions as primary interfaces."
+    },
+    {
+      "id": "CARE-AC-031",
+      "criterion": "Operational alerts identify failed emergency delivery, stale instructions, urgent unresolved work, and sync backlog."
+    },
+    {
+      "id": "CARE-AC-032",
+      "criterion": "Backup and restore preserve care-plan, task, observation, escalation, and evidence relationships."
+    },
+    {
+      "id": "CARE-AC-033",
+      "criterion": "Rollback does not erase care evidence or create false completion states."
+    },
+    {
+      "id": "CARE-AC-034",
+      "criterion": "All normative requirements map to acceptance criteria, tests, evidence type, work package, and gate before implementation authorization."
+    },
+    {
+      "id": "CARE-AC-035",
+      "criterion": "All first-user workflows pass accessibility and mobile-use review in bright outdoor, low-connectivity, and one-handed scenarios."
+    },
+    {
+      "id": "CARE-AC-036",
+      "criterion": "No first-user enrollment disposition is possible while any relevant P0 or P1 is open or Questions 1 through 5 are not YES_WITH_EVIDENCE."
+    }
+  ],
+  "tests": [
+    {
+      "id": "CARE-TEST-001",
+      "name": "Permission denial for unauthorized care-plan creation",
+      "acceptance_links": "AC-001"
+    },
+    {
+      "id": "CARE-TEST-002",
+      "name": "Assignment does not grant instruction-edit authority",
+      "acceptance_links": "AC-001, AC-002"
+    },
+    {
+      "id": "CARE-TEST-003",
+      "name": "Care-plan version activation and supersession",
+      "acceptance_links": "AC-003"
+    },
+    {
+      "id": "CARE-TEST-004",
+      "name": "Free-text override attempt rejected",
+      "acceptance_links": "AC-004"
+    },
+    {
+      "id": "CARE-TEST-005",
+      "name": "Instruction precedence and conflict display",
+      "acceptance_links": "AC-005"
+    },
+    {
+      "id": "CARE-TEST-006",
+      "name": "Completion requires attestation",
+      "acceptance_links": "AC-006"
+    },
+    {
+      "id": "CARE-TEST-007",
+      "name": "Overdue task remains open",
+      "acceptance_links": "AC-007"
+    },
+    {
+      "id": "CARE-TEST-008",
+      "name": "Idempotent repeated completion",
+      "acceptance_links": "AC-008"
+    },
+    {
+      "id": "CARE-TEST-009",
+      "name": "Completion field completeness",
+      "acceptance_links": "AC-009"
+    },
+    {
+      "id": "CARE-TEST-010",
+      "name": "Substitution lineage",
+      "acceptance_links": "AC-010"
+    },
+    {
+      "id": "CARE-TEST-011",
+      "name": "Observation versus diagnosis labeling",
+      "acceptance_links": "AC-011"
+    },
+    {
+      "id": "CARE-TEST-012",
+      "name": "Emergency direct-contact flow",
+      "acceptance_links": "AC-012"
+    },
+    {
+      "id": "CARE-TEST-013",
+      "name": "Delivery versus acknowledgment semantics",
+      "acceptance_links": "AC-013"
+    },
+    {
+      "id": "CARE-TEST-014",
+      "name": "Missed-care closure authority",
+      "acceptance_links": "AC-014"
+    },
+    {
+      "id": "CARE-TEST-015",
+      "name": "Shift handoff continuity",
+      "acceptance_links": "AC-015"
+    },
+    {
+      "id": "CARE-TEST-016",
+      "name": "Horse movement history",
+      "acceptance_links": "AC-016"
+    },
+    {
+      "id": "CARE-TEST-017",
+      "name": "Canonical identity boundary",
+      "acceptance_links": "AC-017"
+    },
+    {
+      "id": "CARE-TEST-018",
+      "name": "Turnout advisory human approval",
+      "acceptance_links": "AC-018"
+    },
+    {
+      "id": "CARE-TEST-019",
+      "name": "Weather freshness and uncertainty",
+      "acceptance_links": "AC-019"
+    },
+    {
+      "id": "CARE-TEST-020",
+      "name": "Protective equipment structure",
+      "acceptance_links": "AC-020"
+    },
+    {
+      "id": "CARE-TEST-021",
+      "name": "Owner projection minimum necessary",
+      "acceptance_links": "AC-021"
+    },
+    {
+      "id": "CARE-TEST-022",
+      "name": "Mandatory welfare exception visibility",
+      "acceptance_links": "AC-022"
+    },
+    {
+      "id": "CARE-TEST-023",
+      "name": "Evidence metadata and permissions",
+      "acceptance_links": "AC-023"
+    },
+    {
+      "id": "CARE-TEST-024",
+      "name": "Offline pending-state clarity",
+      "acceptance_links": "AC-024"
+    },
+    {
+      "id": "CARE-TEST-025",
+      "name": "Offline synchronization accepted result",
+      "acceptance_links": "AC-025"
+    },
+    {
+      "id": "CARE-TEST-026",
+      "name": "Offline stale-version conflict",
+      "acceptance_links": "AC-025"
+    },
+    {
+      "id": "CARE-TEST-027",
+      "name": "Offline revoked authority rejection",
+      "acceptance_links": "AC-026"
+    },
+    {
+      "id": "CARE-TEST-028",
+      "name": "AI label and review",
+      "acceptance_links": "AC-027"
+    },
+    {
+      "id": "CARE-TEST-029",
+      "name": "AI prohibited-action enforcement",
+      "acceptance_links": "AC-028"
+    },
+    {
+      "id": "CARE-TEST-030",
+      "name": "Correction and supersession",
+      "acceptance_links": "AC-029"
+    },
+    {
+      "id": "CARE-TEST-031",
+      "name": "Search permission parity",
+      "acceptance_links": "AC-030"
+    },
+    {
+      "id": "CARE-TEST-032",
+      "name": "Export permission parity",
+      "acceptance_links": "AC-030"
+    },
+    {
+      "id": "CARE-TEST-033",
+      "name": "Failed emergency delivery alert",
+      "acceptance_links": "AC-031"
+    },
+    {
+      "id": "CARE-TEST-034",
+      "name": "Urgent unresolved work alert",
+      "acceptance_links": "AC-031"
+    },
+    {
+      "id": "CARE-TEST-035",
+      "name": "Backup and restore relational integrity",
+      "acceptance_links": "AC-032"
+    },
+    {
+      "id": "CARE-TEST-036",
+      "name": "Rollback evidence preservation",
+      "acceptance_links": "AC-033"
+    },
+    {
+      "id": "CARE-TEST-037",
+      "name": "Machine traceability completeness",
+      "acceptance_links": "AC-034"
+    },
+    {
+      "id": "CARE-TEST-038",
+      "name": "Mobile outdoor contrast and target size",
+      "acceptance_links": "AC-035"
+    },
+    {
+      "id": "CARE-TEST-039",
+      "name": "Screen reader task execution",
+      "acceptance_links": "AC-035"
+    },
+    {
+      "id": "CARE-TEST-040",
+      "name": "One-handed and glove-use workflow",
+      "acceptance_links": "AC-035"
+    },
+    {
+      "id": "CARE-TEST-041",
+      "name": "Cross-tenant horse access denial",
+      "acceptance_links": "AC-002, AC-021"
+    },
+    {
+      "id": "CARE-TEST-042",
+      "name": "Other-horse data exclusion from owner summary",
+      "acceptance_links": "AC-021"
+    },
+    {
+      "id": "CARE-TEST-043",
+      "name": "Support case-bound access",
+      "acceptance_links": "AC-002, AC-029"
+    },
+    {
+      "id": "CARE-TEST-044",
+      "name": "Task cannot mutate medication dosage",
+      "acceptance_links": "AC-001, AC-017"
+    },
+    {
+      "id": "CARE-TEST-045",
+      "name": "Notification retry without duplicate escalation",
+      "acceptance_links": "AC-013"
+    },
+    {
+      "id": "CARE-TEST-046",
+      "name": "Evidence upload failure preserves task state",
+      "acceptance_links": "AC-023, AC-033"
+    },
+    {
+      "id": "CARE-TEST-047",
+      "name": "Wrong-horse scan or selection safeguard",
+      "acceptance_links": "AC-009, AC-017"
+    },
+    {
+      "id": "CARE-TEST-048",
+      "name": "Concurrent completion conflict",
+      "acceptance_links": "AC-008, AC-009"
+    },
+    {
+      "id": "CARE-TEST-049",
+      "name": "Plan change while task offline",
+      "acceptance_links": "AC-024, AC-025"
+    },
+    {
+      "id": "CARE-TEST-050",
+      "name": "Device loss and offline-cache revocation",
+      "acceptance_links": "AC-026"
+    },
+    {
+      "id": "CARE-TEST-051",
+      "name": "Emergency contact unavailable fallback",
+      "acceptance_links": "AC-012, AC-013"
+    },
+    {
+      "id": "CARE-TEST-052",
+      "name": "Owner summary correction and withdrawal",
+      "acceptance_links": "AC-027, AC-029"
+    },
+    {
+      "id": "CARE-TEST-053",
+      "name": "High-risk evidence second check",
+      "acceptance_links": "AC-023"
+    },
+    {
+      "id": "CARE-TEST-054",
+      "name": "Enrollment gate blocks open P1",
+      "acceptance_links": "AC-036"
+    }
+  ],
+  "golden_paths": [
+    {
+      "id": "CARE-GP-001",
+      "name": "Morning care round",
+      "summary": "Manager publishes active plan; staff claims shift; verifies horse; completes water, turnout, stall, and blanket tasks; records one routine observation; handoff shows no unresolved work."
+    },
+    {
+      "id": "CARE-GP-002",
+      "name": "Owner-specific blanket change",
+      "summary": "Authorized owner instruction overrides facility default; conflict is visible; assigned groom changes blanket and attaches required photo."
+    },
+    {
+      "id": "CARE-GP-003",
+      "name": "Urgent swelling observation",
+      "summary": "Groom records visible swelling as observation, selects Urgent, directly contacts manager, delivery and acknowledgment are recorded, and Health domain receives the handoff."
+    },
+    {
+      "id": "CARE-GP-004",
+      "name": "Missed night check",
+      "summary": "Task becomes overdue, remains open, escalates to shift lead, substitute completes it, and the original miss plus substitution remains visible."
+    },
+    {
+      "id": "CARE-GP-005",
+      "name": "Temporary stall move",
+      "summary": "Authorized manager moves horse from turnout to temporary observation stall, records reason and effective time, and later ends assignment without rewriting facility or horse identity."
+    },
+    {
+      "id": "CARE-GP-006",
+      "name": "Weather-responsive fly protection",
+      "summary": "Fresh conditions produce a proposed fly-mask task; manager approves; worker performs and records damaged equipment exception."
+    },
+    {
+      "id": "CARE-GP-007",
+      "name": "Offline evening round",
+      "summary": "Worker views cached assigned work, records completions and observation offline, later syncs; one task accepts and one conflicts because the plan changed, requiring review."
+    },
+    {
+      "id": "CARE-GP-008",
+      "name": "Owner care summary",
+      "summary": "Permitted completion and material exception facts are projected, internal staffing notes are excluded, AI-assisted prose is reviewed, and owner receives the corrected summary."
+    },
+    {
+      "id": "CARE-GP-009",
+      "name": "Emergency escalation",
+      "summary": "Worker selects Emergency, uses direct call action, records attempts, facility plan and horse context are available, and closure preserves professional handoff evidence."
+    },
+    {
+      "id": "CARE-GP-010",
+      "name": "Shift handoff after disruption",
+      "summary": "Outgoing shift transfers unresolved tasks, sync conflicts, location changes, and urgent observations; incoming lead acknowledges and assumes responsibility."
+    }
+  ],
+  "adversarial_scenarios": [
+    {
+      "id": "CARE-ADV-001",
+      "scenario": "Worker attempts to edit medication dosage through care task."
+    },
+    {
+      "id": "CARE-ADV-002",
+      "scenario": "Owner attempts to view another horse through shared location or task."
+    },
+    {
+      "id": "CARE-ADV-003",
+      "scenario": "Staff member marks all work complete without opening individual tasks."
+    },
+    {
+      "id": "CARE-ADV-004",
+      "scenario": "Client clock is changed to make late work appear timely."
+    },
+    {
+      "id": "CARE-ADV-005",
+      "scenario": "Duplicate offline retries create repeated completion or repeated escalation."
+    },
+    {
+      "id": "CARE-ADV-006",
+      "scenario": "A stale care plan is used after authority was revoked."
+    },
+    {
+      "id": "CARE-ADV-007",
+      "scenario": "Free text says the opposite of the active structured instruction."
+    },
+    {
+      "id": "CARE-ADV-008",
+      "scenario": "AI summary converts an observation into a diagnosis."
+    },
+    {
+      "id": "CARE-ADV-009",
+      "scenario": "AI suppresses a concerning observation as low priority."
+    },
+    {
+      "id": "CARE-ADV-010",
+      "scenario": "Weather provider returns stale or wrong-location data."
+    },
+    {
+      "id": "CARE-ADV-011",
+      "scenario": "Two staff members complete the same task concurrently with conflicting results."
+    },
+    {
+      "id": "CARE-ADV-012",
+      "scenario": "Task is assigned to an unqualified worker."
+    },
+    {
+      "id": "CARE-ADV-013",
+      "scenario": "Emergency message is sent but not delivered or acknowledged."
+    },
+    {
+      "id": "CARE-ADV-014",
+      "scenario": "Facility configuration hides a material welfare exception from the owner."
+    },
+    {
+      "id": "CARE-ADV-015",
+      "scenario": "Support agent accesses unrelated care media."
+    },
+    {
+      "id": "CARE-ADV-016",
+      "scenario": "Photo evidence contains another customer or horse."
+    },
+    {
+      "id": "CARE-ADV-017",
+      "scenario": "Device is lost with offline care records cached."
+    },
+    {
+      "id": "CARE-ADV-018",
+      "scenario": "Horse is moved physically but location update fails."
+    },
+    {
+      "id": "CARE-ADV-019",
+      "scenario": "Location is changed digitally without physical move authority."
+    },
+    {
+      "id": "CARE-ADV-020",
+      "scenario": "Turnout template implies a new pairing is safe without human approval."
+    },
+    {
+      "id": "CARE-ADV-021",
+      "scenario": "A worker completes a task for the wrong horse."
+    },
+    {
+      "id": "CARE-ADV-022",
+      "scenario": "A plan changes while a worker is offline."
+    },
+    {
+      "id": "CARE-ADV-023",
+      "scenario": "Evidence upload fails after the physical work is complete."
+    },
+    {
+      "id": "CARE-ADV-024",
+      "scenario": "A deleted account remains visible as anonymous performer rather than preserved attribution."
+    },
+    {
+      "id": "CARE-ADV-025",
+      "scenario": "A task is cancelled to improve completion statistics."
+    },
+    {
+      "id": "CARE-ADV-026",
+      "scenario": "A recurring miss is hidden through repeated supersession."
+    },
+    {
+      "id": "CARE-ADV-027",
+      "scenario": "An owner-facing report becomes an employee performance surveillance tool."
+    },
+    {
+      "id": "CARE-ADV-028",
+      "scenario": "Cross-tenant search leaks horse presence or facility membership."
+    },
+    {
+      "id": "CARE-ADV-029",
+      "scenario": "A service provider receives broad facility access after one visit."
+    },
+    {
+      "id": "CARE-ADV-030",
+      "scenario": "Rollback restores an old plan but leaves new tasks active."
+    },
+    {
+      "id": "CARE-ADV-031",
+      "scenario": "An emergency protective action is taken without later documentation."
+    },
+    {
+      "id": "CARE-ADV-032",
+      "scenario": "A minor or guardian relationship is used to broaden unrelated horse access."
+    },
+    {
+      "id": "CARE-ADV-033",
+      "scenario": "Media retention deletion removes evidence under legal hold."
+    },
+    {
+      "id": "CARE-ADV-034",
+      "scenario": "A system outage causes silent auto-completion or disappearance of overdue work."
+    },
+    {
+      "id": "CARE-ADV-035",
+      "scenario": "Imported spreadsheet rows create active authority-bearing instructions without review."
+    },
+    {
+      "id": "CARE-ADV-036",
+      "scenario": "Owner summary is published from unreviewed AI text."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "CARE-EVID-001",
+      "description": "Approved source register and exact-source checksums",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-002",
+      "description": "Founder decision register and approval record",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-003",
+      "description": "Frozen requirement, workflow, entity, state, permission, and contract registers",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-004",
+      "description": "Machine-readable PIA validation report",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-005",
+      "description": "Architecture and cross-PIA contract ADRs",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-006",
+      "description": "As-built reconciliation report",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-007",
+      "description": "Permission positive and negative test results",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-008",
+      "description": "Care-plan versioning and conflict test results",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-009",
+      "description": "Task lifecycle, idempotency, and concurrency test results",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-010",
+      "description": "Observation and escalation test results",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-011",
+      "description": "Notification delivery and acknowledgment evidence",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-012",
+      "description": "Offline sync, conflict, revocation, and device-loss evidence",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-013",
+      "description": "Location and movement integrity evidence",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-014",
+      "description": "Owner projection privacy and redaction evidence",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-015",
+      "description": "AI prohibition and review evidence",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-016",
+      "description": "Accessibility and mobile field-use report",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-017",
+      "description": "Performance, reliability, and data-integrity report",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-018",
+      "description": "Backup, restore, and rollback rehearsal",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-019",
+      "description": "Operational dashboards and alert test evidence",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-020",
+      "description": "Support runbook and incident exercise",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-021",
+      "description": "Golden-path reproduction package",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-022",
+      "description": "Adversarial and abuse-case results",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-023",
+      "description": "Deployment and cohort rollout record",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-024",
+      "description": "First-user onboarding and training materials",
+      "status": "PLANNED"
+    },
+    {
+      "id": "CARE-EVID-025",
+      "description": "Founder readiness and enrollment disposition",
+      "status": "PLANNED"
+    }
+  ],
+  "work_packages": [
+    {
+      "id": "CARE-WP-001",
+      "name": "Source and contract freeze",
+      "scope": "Register exact sources, checksums, PIA interfaces, terminology, and authority ownership.",
+      "authorized": false
+    },
+    {
+      "id": "CARE-WP-002",
+      "name": "Care plan and instruction foundation",
+      "scope": "Implement versioning, applicability, precedence, conflicts, approval, and supersession.",
+      "authorized": false
+    },
+    {
+      "id": "CARE-WP-003",
+      "name": "Task execution and assignment",
+      "scope": "Implement task states, responsibility, qualification, attestation, exception, and handoff.",
+      "authorized": false
+    },
+    {
+      "id": "CARE-WP-004",
+      "name": "Observations and escalation",
+      "scope": "Implement factual observations, severity, routing, delivery evidence, acknowledgment, and closure.",
+      "authorized": false
+    },
+    {
+      "id": "CARE-WP-005",
+      "name": "Location, turnout, weather, and equipment",
+      "scope": "Implement operational location references, movement, advisory constraints, environmental data, and protective equipment.",
+      "authorized": false
+    },
+    {
+      "id": "CARE-WP-006",
+      "name": "Evidence and owner projections",
+      "scope": "Implement media governance, evidence requirements, redaction, review, publication, correction, and export.",
+      "authorized": false
+    },
+    {
+      "id": "CARE-WP-007",
+      "name": "Offline and synchronization",
+      "scope": "Implement encrypted scoped cache, operation queue, idempotency, revalidation, conflict and quarantine.",
+      "authorized": false
+    },
+    {
+      "id": "CARE-WP-008",
+      "name": "Administration, observability, support, and recovery",
+      "scope": "Implement dashboards, alerts, support tools, runbooks, backup, restore, and incident handling.",
+      "authorized": false
+    },
+    {
+      "id": "CARE-WP-009",
+      "name": "Verification, reconciliation, and controlled release",
+      "scope": "Perform as-built reconciliation, tests, evidence packaging, rollout, rollback, and enrollment review.",
+      "authorized": false
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "CARE-DEP-001",
+      "supplier": "Identity, Account, and Actor PIA",
+      "capability": "Authenticated actor, principal, device, and account status",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-002",
+      "supplier": "Relationships and Delegated Authority PIA",
+      "capability": "Horse, facility, owner, trainer, staff, provider, guardian, and delegation facts",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-003",
+      "supplier": "Permission and Access-Control PIA",
+      "capability": "Final allow, deny, projection, step-up, emergency, and support access decisions",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-004",
+      "supplier": "Horse Identity and Lifecycle PIA",
+      "capability": "Canonical horse ID, lifecycle, restrictions, and current-state references",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-005",
+      "supplier": "Facility, Tenant, and Organizational Structure PIA",
+      "capability": "Canonical facility and location hierarchy, occupancy, hazards, and availability",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-006",
+      "supplier": "Task, Calendar, Scheduling, and Notification PIA",
+      "capability": "Recurrence, due time, scheduling, delivery, acknowledgment, and external sync",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-007",
+      "supplier": "Feed and Nutrition PIA",
+      "capability": "Authoritative feed and supplement instructions",
+      "blocking": "Blocking for applicable scope"
+    },
+    {
+      "id": "CARE-DEP-008",
+      "supplier": "Health, Medication, and Treatment PIA",
+      "capability": "Authoritative clinical, medication, treatment, and professional records",
+      "blocking": "Blocking for applicable scope"
+    },
+    {
+      "id": "CARE-DEP-009",
+      "supplier": "Audit and Evidence PIA",
+      "capability": "Canonical audit events, evidence integrity, and reconstruction",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-010",
+      "supplier": "Communication and Notice PIA",
+      "capability": "Message classification, routing, delivery evidence, and notice policy",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-011",
+      "supplier": "Media and Document Governance",
+      "capability": "Evidence storage, access, metadata, retention, and legal hold",
+      "blocking": "Blocking for evidence scope"
+    },
+    {
+      "id": "CARE-DEP-012",
+      "supplier": "Privacy and Data Protection",
+      "capability": "Purpose limitation, projections, sensitive data, export, and deletion",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-013",
+      "supplier": "Platform Resilience and Offline Architecture",
+      "capability": "Scoped cache, sync, backup, restore, and recovery",
+      "blocking": "Blocking"
+    },
+    {
+      "id": "CARE-DEP-014",
+      "supplier": "AI Governance and approved use-case registry",
+      "capability": "AI labeling, review, data handling, and prohibited actions",
+      "blocking": "Blocking for AI scope"
+    },
+    {
+      "id": "CARE-DEP-015",
+      "supplier": "Reporting and Analytics PIA",
+      "capability": "Operational metrics, privacy-safe reports, and anti-surveillance limits",
+      "blocking": "Nonblocking for internal build; blocking for first-user dashboards"
+    },
+    {
+      "id": "CARE-DEP-016",
+      "supplier": "Inventory and Equipment PIA",
+      "capability": "Canonical equipment identity and stock where equipment-specific care is enabled",
+      "blocking": "Conditional"
+    }
+  ],
+  "risks": [
+    {
+      "id": "CARE-RISK-001",
+      "risk": "Wrong-horse or wrong-instruction execution",
+      "likelihood": "Medium",
+      "impact": "Critical",
+      "control": "Strong horse verification, active-version display, task context, and negative testing"
+    },
+    {
+      "id": "CARE-RISK-002",
+      "risk": "Missed urgent care hidden by completion mechanics",
+      "likelihood": "Medium",
+      "impact": "Critical",
+      "control": "No auto-complete, unresolved queue, escalation, alerts, and audit"
+    },
+    {
+      "id": "CARE-RISK-003",
+      "risk": "Observation misrepresented as diagnosis",
+      "likelihood": "Medium",
+      "impact": "High",
+      "control": "Controlled vocabulary, labels, provider boundary, AI prohibition, review"
+    },
+    {
+      "id": "CARE-RISK-004",
+      "risk": "Offline stale authority or plan",
+      "likelihood": "High",
+      "impact": "High",
+      "control": "Scoped cache, expiry, server revalidation, conflict and quarantine"
+    },
+    {
+      "id": "CARE-RISK-005",
+      "risk": "Emergency notification mistaken for acknowledgment",
+      "likelihood": "Medium",
+      "impact": "Critical",
+      "control": "Delivery-state separation, direct contact actions, escalation fallback"
+    },
+    {
+      "id": "CARE-RISK-006",
+      "risk": "Owner privacy breach through care summaries",
+      "likelihood": "Medium",
+      "impact": "High",
+      "control": "Purpose-limited projections, redaction, permission parity, tests"
+    },
+    {
+      "id": "CARE-RISK-007",
+      "risk": "Facility configuration weakens welfare controls",
+      "likelihood": "Medium",
+      "impact": "High",
+      "control": "Canonical minimum controls and non-configurable mandatory disclosures"
+    },
+    {
+      "id": "CARE-RISK-008",
+      "risk": "AI overreach into consequential care decisions",
+      "likelihood": "Medium",
+      "impact": "Critical",
+      "control": "Use-case registry, deny list, human review, audit, kill switch"
+    },
+    {
+      "id": "CARE-RISK-009",
+      "risk": "Evidence tampering, deletion, or orphaning",
+      "likelihood": "Low",
+      "impact": "High",
+      "control": "Integrity metadata, retention, legal hold, audit, evidence manifest"
+    },
+    {
+      "id": "CARE-RISK-010",
+      "risk": "Metrics create staff surveillance or perverse incentives",
+      "likelihood": "Medium",
+      "impact": "Medium",
+      "control": "Contextual metrics, anti-ranking policy, no raw completion-only score"
+    }
+  ],
+  "findings": [
+    {
+      "id": "CARE-FIND-P1-001",
+      "severity": "P1",
+      "finding": "Exact repository paths, versions, and checksums for all controlling and inherited source families are not frozen.",
+      "required_action": "Source freeze required before implementation authorization.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P1-002",
+      "severity": "P1",
+      "finding": "Cross-PIA contracts for authorization, task scheduling, health, feed, facility location, notifications, media, and offline sync are not approved.",
+      "required_action": "Approve contract ADRs and versioned interfaces.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P1-003",
+      "severity": "P1",
+      "finding": "The machine-readable companion is documentary and has not undergone schema validation or full forward/backward reference validation.",
+      "required_action": "Run machine validation and close orphan references.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P1-004",
+      "severity": "P1",
+      "finding": "Numeric SLOs, escalation response targets, retention classes, and evidence thresholds are not approved for production.",
+      "required_action": "Assign operational owners and approve measurable targets.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P1-005",
+      "severity": "P1",
+      "finding": "No implementation or as-built reconciliation exists.",
+      "required_action": "Implement only after separate authorization and reconcile before verification.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P1-006",
+      "severity": "P1",
+      "finding": "No executed test, golden-path, adversarial, backup, restore, rollback, support, or incident evidence exists.",
+      "required_action": "Produce and preserve evidence before readiness claims.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P1-007",
+      "severity": "P1",
+      "finding": "Engineering, QA, operational, and evidence-custodian owners are unassigned.",
+      "required_action": "Assign accountable owners before implementation or operational readiness.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P1-008",
+      "severity": "P1",
+      "finding": "No controlled first-user cohort, onboarding material, training, support schedule, or release package exists.",
+      "required_action": "Prepare and approve enrollment package after verification and operations gates.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P2-001",
+      "severity": "P2",
+      "finding": "Facility-configurable terminology may drift across barns.",
+      "required_action": "Use controlled task and escalation registries with local labels mapped to canonical meanings.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P2-002",
+      "severity": "P2",
+      "finding": "Operational metrics could be misused for simplistic employee scoring.",
+      "required_action": "Apply anti-surveillance and contextual review controls.",
+      "status": "OPEN"
+    },
+    {
+      "id": "CARE-FIND-P2-003",
+      "severity": "P2",
+      "finding": "Photo evidence can unintentionally capture unrelated people, horses, documents, or locations.",
+      "required_action": "Provide capture guidance, redaction, review, and restricted access.",
+      "status": "OPEN"
+    }
+  ],
+  "deviations": [],
+  "release_scope": [
+    "DOCUMENTARY_DESIGN_ONLY"
+  ],
+  "environments": [],
+  "rollout_controls": [
+    "controlled_cohort",
+    "feature_flags",
+    "stop_conditions",
+    "rollback",
+    "founder_disposition"
+  ],
+  "readiness_questions": [
+    {
+      "question": 1,
+      "text": "Can engineering build the capability without making unauthorized product decisions?",
+      "answer": "PARTIALLY_SATISFIED",
+      "answer_completeness": "SATISFIED"
+    },
+    {
+      "question": 2,
+      "text": "Can quality assurance determine objectively whether the capability works?",
+      "answer": "PARTIALLY_SATISFIED",
+      "answer_completeness": "SATISFIED"
+    },
+    {
+      "question": 3,
+      "text": "Can a reviewer trace the capability to EquineSync controlling governance and the MIAP?",
+      "answer": "PARTIALLY_SATISFIED",
+      "answer_completeness": "SATISFIED"
+    },
+    {
+      "question": 4,
+      "text": "Can EquineSync safely operate, support, monitor, recover, and maintain the capability?",
+      "answer": "NO",
+      "answer_completeness": "SATISFIED"
+    },
+    {
+      "question": 5,
+      "text": "Can the Founder determine whether the capability is ready for first-user enrollment?",
+      "answer": "NO",
+      "answer_completeness": "SATISFIED"
+    }
+  ],
+  "approvals": [
+    {
+      "authority": "Rian Ray",
+      "scope": "CARE-FD-001 through CARE-FD-020 approved for documentary drafting",
+      "date": "2026-07-22",
+      "implementation_authority": false
+    }
+  ],
+  "change_history": [
+    {
+      "version": "0.1.0",
+      "date": "2026-07-22",
+      "change": "Initial complete documentary draft",
+      "authority_effect": "NONE"
+    }
+  ]
+}

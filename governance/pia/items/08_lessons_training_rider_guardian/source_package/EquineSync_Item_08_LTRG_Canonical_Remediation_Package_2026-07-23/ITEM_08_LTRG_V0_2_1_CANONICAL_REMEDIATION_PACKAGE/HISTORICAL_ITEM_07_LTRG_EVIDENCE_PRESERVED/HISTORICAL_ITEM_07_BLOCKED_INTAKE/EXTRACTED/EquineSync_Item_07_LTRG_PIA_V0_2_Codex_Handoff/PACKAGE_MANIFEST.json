@@ -1,0 +1,77 @@
+{
+  "package_id": "EQUINESYNC-ITEM-07-LTRG-PIA-V0.2-CODEX-HANDOFF",
+  "package_version": "1.0.0",
+  "created_date": "2026-07-22",
+  "designated_candidate_version": "0.2.0",
+  "founder_decisions": "LTRG-FD-001 through LTRG-FD-020 approved as recommended",
+  "authority_effect": "DOCUMENTARY_ONLY_NONE_IMPLEMENTATION",
+  "file_count_excluding_manifest_and_package_checksum": 11,
+  "files": [
+    {
+      "path": "EquineSync_Item_07_Lessons_Training_Riders_Guardians_PIA_V0_1_Draft.docx",
+      "role": "historical_predecessor_docx",
+      "size_bytes": 94075,
+      "sha256": "5577a5c3db6612920933aed3ad8ab39cf2d3b76f2a913709acd2c2aae69e2fba"
+    },
+    {
+      "path": "EquineSync_Item_07_Lessons_Training_Riders_Guardians_PIA_V0_1_Draft.md",
+      "role": "historical_predecessor_source",
+      "size_bytes": 113486,
+      "sha256": "e70ac9a7dbac23ef537c7675b4363d4e9ea374886ce6bb03bc6b4764368ceaa2"
+    },
+    {
+      "path": "EquineSync_Item_07_Lessons_Training_Riders_Guardians_PIA_V0_2_Strengthened_Draft.docx",
+      "role": "designated_candidate_docx",
+      "size_bytes": 112331,
+      "sha256": "123a47f0f30d9c41597448c47139f5e5e47e2aa71d6f412f10c0bc973b5cde7c"
+    },
+    {
+      "path": "EquineSync_Item_07_Lessons_Training_Riders_Guardians_PIA_V0_2_Strengthened_Draft.md",
+      "role": "designated_candidate_source",
+      "size_bytes": 164468,
+      "sha256": "27ce2ebf60456994ce890ca4ee363fed7401c7968614959783e325b1927b7e80"
+    },
+    {
+      "path": "EquineSync_Item_07_V0_1_Internal_Review_and_V0_2_Revision_Report.docx",
+      "role": "internal_review_report_docx",
+      "size_bytes": 27821,
+      "sha256": "be4b70dea96ba6c1ae33c3a6cfa1c9d05beb8e7ff23e8f3e30f0202895adb39f"
+    },
+    {
+      "path": "EquineSync_Item_07_V0_1_Internal_Review_and_V0_2_Revision_Report.md",
+      "role": "internal_review_report_source",
+      "size_bytes": 6954,
+      "sha256": "42c7f6f07b701e19a2a3c90a8bb98e91f75768951325983d8e651b68cd149ecd"
+    },
+    {
+      "path": "EquineSync_Item_07_V0_2_Documentary_Validation.json",
+      "role": "deterministic_validation_record",
+      "size_bytes": 1362,
+      "sha256": "3a8fc065f395d2f9ec3517aee5d8e64b9748f02a6940e3d3c30cdd6206218c4b"
+    },
+    {
+      "path": "EquineSync_Item_07_V0_2_Package.sha256",
+      "role": "candidate_artifact_checksum_ledger",
+      "size_bytes": 690,
+      "sha256": "1949e4fcbf5d5867c7d6073fc9e3e49c70897665f0204c9320eb8181869fd8df"
+    },
+    {
+      "path": "FOUNDER_APPROVAL_RECORD.md",
+      "role": "founder_approval_record",
+      "size_bytes": 1316,
+      "sha256": "9f2c06790b6aafd65d8828bc05ebdc16195e0e7e5f86c1c03101e5b4230cf3e8"
+    },
+    {
+      "path": "CODEX_DIRECTIVE.md",
+      "role": "codex_execution_directive",
+      "size_bytes": 9388,
+      "sha256": "38c230717c55fc4777bb40b283b54cd88c05a70e1c174ff1e057cd4a27c0efa1"
+    },
+    {
+      "path": "PACKAGE_README.md",
+      "role": "package_guide",
+      "size_bytes": 1413,
+      "sha256": "a63a76365ad907b6dac2df5fd6d16ca30fb6897ec0d9c5e23e4698bab9fd9288"
+    }
+  ]
+}
