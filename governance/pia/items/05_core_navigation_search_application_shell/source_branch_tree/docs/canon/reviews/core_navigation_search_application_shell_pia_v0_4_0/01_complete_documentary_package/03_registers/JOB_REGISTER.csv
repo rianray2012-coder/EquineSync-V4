@@ -1,0 +1,9 @@
+id,job
+SHELL-JOB-001,search-index-repair
+SHELL-JOB-002,revocation-propagation
+SHELL-JOB-003,recent-pointer-expiry
+SHELL-JOB-004,saved-view-validation
+SHELL-JOB-005,badge-refresh
+SHELL-JOB-006,offline-manifest-expiry
+SHELL-JOB-007,configuration-drift-scan
+SHELL-JOB-008,route-decommission-cleanup

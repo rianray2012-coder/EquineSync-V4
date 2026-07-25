@@ -1,0 +1,32 @@
+{
+  "class_counts": {
+    "ASSURANCE_TOOLING": 6,
+    "CONSTITUTIONAL_OR_CANONICAL_SOURCE": 30,
+    "CONTROLLING_PIA_STANDARD": 3,
+    "CROSS_PIA_REMEDIATION_PACKAGE": 1,
+    "CROSS_PIA_REVIEW_PACKAGE": 1,
+    "ENGINEERING_WORK_PACKAGE": 1,
+    "HISTORICAL_SUPERSEDED": 2,
+    "MIAP_CROSS_CUTTING_PROFILE": 9,
+    "NON_PIA_UNRELATED": 1,
+    "PIA_COMPONENT_PACKAGE": 4,
+    "PIA_HANDOFF_PACKAGE": 3,
+    "PRIMARY_PIA_PACKAGE": 1,
+    "SUBORDINATE_ADR_OR_CONTRACT": 19
+  },
+  "governance_baseline": "acb518ea5a160820e64681ff95a16b010fe1156c",
+  "heads_scanned": 9,
+  "inventory_denominator": 81,
+  "local_download_archives_inspected": 4,
+  "nested_archives_inspected": 5,
+  "refs_scanned": 10,
+  "remediation_anchor": "3b17840aae3b0693e006e9378606c1ca1c11286a",
+  "repository_archives_identified": 156,
+  "repository_commit_count_reachable": 216,
+  "repository_object_paths_scanned": 7829,
+  "result": "PASS",
+  "scope_note": "Reachable remote heads, tag, commit history, repository paths, package directories, manifests, the frozen review handoff, its five nested packages, the review-result archive, and four PIA-related Downloads archives were inspected. Exact external duplicates were collapsed into their logical artifact records. Unreachable/private refs cannot be asserted.",
+  "source_gaps": 6,
+  "tags_scanned": 1,
+  "unclassified_count": 0
+}

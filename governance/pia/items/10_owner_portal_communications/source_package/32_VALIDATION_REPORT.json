@@ -1,0 +1,89 @@
+{
+  "overall": "PASS",
+  "checks": [
+    {
+      "check": "required_files",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "finding_population",
+      "result": "PASS",
+      "detail": 7
+    },
+    {
+      "check": "opc_rev_006_founder_approved",
+      "result": "PASS",
+      "detail": "carry-forward"
+    },
+    {
+      "check": "source_population",
+      "result": "PASS",
+      "detail": 21
+    },
+    {
+      "check": "contract_population",
+      "result": "PASS",
+      "detail": 12
+    },
+    {
+      "check": "field_contract_rows",
+      "result": "PASS",
+      "detail": 40
+    },
+    {
+      "check": "field_contract_required_values",
+      "result": "PASS",
+      "detail": "all required fields populated"
+    },
+    {
+      "check": "adr_population",
+      "result": "PASS",
+      "detail": 11
+    },
+    {
+      "check": "adr_files",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "threat_population",
+      "result": "PASS",
+      "detail": 40
+    },
+    {
+      "check": "operational_gate_population",
+      "result": "PASS",
+      "detail": 25
+    },
+    {
+      "check": "lifecycle_population",
+      "result": "PASS",
+      "detail": 10
+    },
+    {
+      "check": "no_implementation_authority_claim",
+      "result": "PASS",
+      "detail": "documentary-only language"
+    },
+    {
+      "check": "v02_hashes_present",
+      "result": "PASS",
+      "detail": "both source hashes"
+    },
+    {
+      "check": "peer_attachment_deferred",
+      "result": "PASS",
+      "detail": "explicit scope decision"
+    }
+  ],
+  "metrics": {
+    "sources": 21,
+    "contracts": 12,
+    "field_contract_rows": 40,
+    "adrs": 11,
+    "threats": 40,
+    "operational_controls": 25,
+    "lifecycle_conditions": 10
+  }
+}

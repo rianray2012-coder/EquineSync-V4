@@ -1,0 +1,171 @@
+{
+  "schema_version": "1.0.0",
+  "overall": "PASS_WITH_RETAINED_NON_OPC_REV_006_CONDITIONS",
+  "target_finding": "OPC-REV-006",
+  "current_finding_alias": "OPC-FIND-P1-006",
+  "candidate_closure": "CLOSED_WITH_ROW_LEVEL_MACHINE_TRACEABILITY_EVIDENCE_PENDING_FOUNDER_EXECUTION",
+  "checks": [
+    {
+      "check": "required_columns",
+      "pass": true,
+      "detail": "30 columns"
+    },
+    {
+      "check": "row_count_84",
+      "pass": true,
+      "detail": 84
+    },
+    {
+      "check": "sequential_unique_requirement_ids",
+      "pass": true,
+      "detail": [
+        "OPC-REQ-001",
+        "OPC-REQ-002",
+        "OPC-REQ-083",
+        "OPC-REQ-084"
+      ]
+    },
+    {
+      "check": "no_blank_required_cells",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "source_sha256_format",
+      "pass": true,
+      "detail": "all rows"
+    },
+    {
+      "check": "source_hash_consistent",
+      "pass": true,
+      "detail": [
+        "c68746f3eb2e1463fca17f81bebce416d420a2f2da7d8b6ba24d9987aff9c09a"
+      ]
+    },
+    {
+      "check": "all_references_resolve_to_package_registers",
+      "pass": true,
+      "detail": {
+        "sources": [],
+        "dependencies": [],
+        "work_packages": [],
+        "risks": [],
+        "findings": []
+      }
+    },
+    {
+      "check": "every_requirement_maps_to_traceability_finding",
+      "pass": true,
+      "detail": "84/84"
+    },
+    {
+      "check": "no_implementation_authority_claim",
+      "pass": true,
+      "detail": "mapping status remains documentary"
+    },
+    {
+      "check": "forward_backward_catalog_coverage_computed",
+      "pass": true,
+      "detail": {
+        "sources": {
+          "catalog_count": 21,
+          "used_count": 21,
+          "unused": []
+        },
+        "dependencies": {
+          "catalog_count": 10,
+          "used_count": 4,
+          "unused": [
+            "OPC-DEP-002",
+            "OPC-DEP-003",
+            "OPC-DEP-004",
+            "OPC-DEP-006",
+            "OPC-DEP-007",
+            "OPC-DEP-009"
+          ]
+        },
+        "work_packages": {
+          "catalog_count": 13,
+          "used_count": 7,
+          "unused": [
+            "OPC-WP-002",
+            "OPC-WP-004",
+            "OPC-WP-005",
+            "OPC-WP-010",
+            "OPC-WP-012",
+            "OPC-WP-013"
+          ]
+        },
+        "risks": {
+          "catalog_count": 16,
+          "used_count": 9,
+          "unused": [
+            "OPC-RISK-005",
+            "OPC-RISK-007",
+            "OPC-RISK-010",
+            "OPC-RISK-011",
+            "OPC-RISK-013",
+            "OPC-RISK-014",
+            "OPC-RISK-015"
+          ]
+        },
+        "findings": {
+          "catalog_count": 7,
+          "used_count": 1,
+          "unused": [
+            "OPC-FIND-P1-001",
+            "OPC-FIND-P1-002",
+            "OPC-FIND-P1-003",
+            "OPC-FIND-P1-004",
+            "OPC-FIND-P1-005",
+            "OPC-FIND-P2-001"
+          ]
+        }
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "code": "RETAINED_SOURCE_ACCESSION_CONDITION",
+      "detail": [
+        "OPC-SRC-004",
+        "OPC-SRC-005",
+        "OPC-SRC-006",
+        "OPC-SRC-007",
+        "OPC-SRC-008",
+        "OPC-SRC-009",
+        "OPC-SRC-010",
+        "OPC-SRC-011",
+        "OPC-SRC-012",
+        "OPC-SRC-013",
+        "OPC-SRC-014",
+        "OPC-SRC-015",
+        "OPC-SRC-016",
+        "OPC-SRC-017",
+        "OPC-SRC-018",
+        "OPC-SRC-019",
+        "OPC-SRC-020",
+        "OPC-SRC-021"
+      ],
+      "related_finding": "OPC-FIND-P1-001"
+    },
+    {
+      "code": "FOUNDER_EXECUTION_REQUIRED",
+      "detail": "Candidate closure is not effective until the Founder executes the exact disposition."
+    },
+    {
+      "code": "NON_INDEPENDENT_REVIEW",
+      "detail": "Validation is deterministic and procedurally separated, not independent external assurance."
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "requirements": 84,
+    "columns": 30,
+    "source_catalog": 21,
+    "dependency_catalog": 10,
+    "work_package_catalog": 13,
+    "risk_catalog": 16,
+    "finding_catalog": 7
+  }
+}

@@ -1,0 +1,61 @@
+test_id,acceptance_ids,scenario,expected_result,execution_status,evidence_status
+HOR-TST-001,HOR-AC-001,Individual owner creates horse without facility.,Candidate created; no forced facility/org.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-002,HOR-AC-003,Expected foal record exists before live birth.,No active live-horse ID.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-003,HOR-AC-003,Live birth activates independent foal identity.,Linked predecessor; durable new Horse ID.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-004,HOR-AC-002,Same horse imported under former name.,"Duplicate candidate, not automatic new identity.",DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-005,HOR-AC-008,Two bay horses share name and facility.,No merge without stronger evidence.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-006,HOR-AC-006,Microchip conflicts with registry name.,Conflict visible; no overwrite.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-007,HOR-AC-004,Estimated year later replaced by exact date.,Successor fact preserves prior estimate.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-008,HOR-AC-019,User edits owner field in profile.,Denied; Item 03 workflow required.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-009,HOR-AC-002,Horse moves barns.,Horse ID stable; source-referenced location episode.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-010,HOR-AC-012,Horse is in training and rehabilitation.,Compatible parallel states retained.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-011,HOR-AC-013,Former trainer requests full Passport.,Minimum or denied projection.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-012,HOR-AC-014,Restriction changes after Passport generation.,Projection revoked or regenerated.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-013,HOR-AC-015,Public search by microchip.,Denied without enumeration.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-014,HOR-AC-009,Two records merge with source conflict.,Lineage and conflict preserved.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-015,HOR-AC-010,New evidence proves merged records are two horses.,Governed unmerge and reference reconciliation.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-016,HOR-AC-011,User has access to only one pre-merge record.,Merge does not expose the other record.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-017,HOR-AC-016,Sale changes owner relationship.,Horse ID unchanged.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-018,HOR-AC-017,Transfer approved but successor access fails.,Transfer remains blocked/partial.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-019,HOR-AC-018,Former owner retains access after transfer.,Access revoked; history preserved.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-020,HOR-AC-019,Non-owner pays invoice.,No ownership or authority created.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-021,HOR-AC-020,Horse reported stolen.,Precise location and broad profile restricted.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-022,HOR-AC-021,Travel document expires before show.,Eligibility expired; workflow consumes current fact.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-023,HOR-AC-022,Recipient mare differs from genetic dam.,Distinct roles remain.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-024,HOR-AC-023,Authorized death record entered.,Identity/history retained; sensitive records separated.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-025,HOR-AC-025,Horse incorrectly marked deceased.,Elevated correction restores state without deleting event.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-026,HOR-AC-024,Unauthorized former party requests memorial.,Denied.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-027,HOR-AC-026,Wrong-tenant export requested.,Denied without disclosure.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-028,HOR-AC-027,Authorized export includes restricted fields not needed for purpose.,Fields omitted; manifest records decision.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-029,HOR-AC-028,OCR extracts incorrect registry number.,Claim remains pending; source preserved.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-030,HOR-AC-029,Offline actor attempts sale finalization.,Proposal only; no effect.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-031,HOR-AC-030,Offline microchip scan belongs to another horse.,Conflict blocks synchronization.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-032,HOR-AC-031,AI proposes merge from photographs.,Suggestion only.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-033,HOR-AC-032,Registry adapter unavailable.,Existing truth remains; failure visible.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-034,HOR-AC-032,Marketplace deletes listing.,Canonical Horse ID remains.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-035,HOR-AC-033,Model creates danger score from notes.,Prohibited output.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-036,HOR-AC-034,Reviewer reconstructs identity correction.,"Exact sources, actors, times, and versions available.",DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-037,HOR-AC-035,Migration finds ambiguous same-name records.,Quarantine; no automatic merge.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-038,HOR-AC-036,Rollback follows failed merge reconciliation.,No orphan references or restored obsolete access.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-039,HOR-AC-025,Archived horse receives legal hold.,Authorized legal-hold action allowed.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-040,HOR-AC-007,Care record displayed in Passport.,Item 07 source and authorship retained.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-041,HOR-AC-017,Transfer includes disputed lien assertion.,Claim routed; no legal conclusion.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-042,HOR-AC-020,GPS source conflicts with authorized location.,No automatic canonical location overwrite.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-043,HOR-AC-037,Operational readiness reviewed without runbooks.,Production gate fails.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-044,HOR-AC-038;HOR-AC-039,Validator checks template and question wording.,Documentary structure and gate logic pass.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-045,HOR-AC-040,Authority-language scan checks candidate.,No implementation or enrollment authorization found.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-046,HOR-AC-041,Two tenants submit the same microchip without a transfer invitation.,Each receives a mediated result; neither learns the other tenant or record exists.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-047,HOR-AC-041,Authorized transfer invitation is accepted by a receiving tenant.,Handoff proceeds only after Item 03 checks; no unrelated source data is disclosed.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-048,HOR-AC-042,Attacker increments or guesses a Horse ID in a public URL.,No horse or existence information is returned.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-049,HOR-AC-043,Same registry number exists in different registries or jurisdictions.,Namespace-qualified claims remain distinct.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-050,HOR-AC-043,"Microchip is mistyped, replaced, or later disputed.",Prior claim remains; corrected claim supersedes without silent overwrite.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-051,HOR-AC-004,Profile displays age from an estimated birth year.,Age is labeled estimated and includes an as-of date.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-052,HOR-AC-044,Clone or identical twin shares DNA and pedigree with another horse.,Separate Horse IDs remain; no automatic merge.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-053,HOR-AC-045,Twin foals are born from one pregnancy record.,Two independent Horse IDs link to the same predecessor.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-054,HOR-AC-046,Transfer packet omits restricted provider notes.,Packet names the omission and does not claim completeness.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-055,HOR-AC-046,Custody changes before ownership relationship and billing context.,Each impact retains its own authorized effective time and reconciliation state.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-056,HOR-AC-047,A downloaded Passport is used after a restriction change.,Platform verification marks it invalid or superseded; no claim of remote deletion.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-057,HOR-AC-048,Public identity photo contains GPS EXIF and owner contact metadata.,Sanitized derivative removes protected metadata; source remains controlled.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-058,HOR-AC-048,Lawful erasure request concerns a former owner's contact data in horse history.,Personal detail is minimized or restricted while horse continuity and audit structure remain.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-059,HOR-AC-049,Horse death is recorded while future care tasks and invoices exist.,Dependency events request reconciliation; Item 04 does not silently delete or refund them.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED
+HOR-TST-060,HOR-AC-050,Rescue creates a horse record with unknown or disputed owner.,Horse candidate exists without a manufactured owner relationship.,DESIGN_TEST_DEFINED_NOT_EXECUTED,ABSENT_IMPLEMENTATION_NOT_AUTHORIZED

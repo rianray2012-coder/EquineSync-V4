@@ -1,0 +1,28 @@
+{
+  "evidence_manifest_id": "ES-PIA-TCSN-V0-3-EVIDENCE-MANIFEST-2026-07-22-01",
+  "status": "DETERMINISTIC_REMEDIATION_EVIDENCE_COMPLETE_FRESH_REVIEW_BLOCKED",
+  "successor_draft": "ES-PIA-TASK-CALENDAR-SCHEDULING-NOTIFICATION_V0_3_CANONICAL_CONFORMANCE_SUCCESSOR_DRAFT.md",
+  "successor_draft_sha256": "3da1e0fc8cd3dcec9bd786455dc3213c22f86d4db8078ed4e19fee1c95811da6",
+  "evidence": [
+    {
+      "id": "TCSN-V03-EV-001",
+      "file": "CANONICAL_HEADING_CONFORMANCE_MATRIX.csv",
+      "purpose": "Mechanical heading conformance"
+    },
+    {
+      "id": "TCSN-V03-EV-002",
+      "file": "DETERMINISTIC_VALIDATION_REPORT.json",
+      "purpose": "Validation results"
+    },
+    {
+      "id": "TCSN-V03-EV-003",
+      "file": "RUNTIME_PERMISSION_RECORDS.csv",
+      "purpose": "Runtime gate record"
+    },
+    {
+      "id": "TCSN-V03-EV-004",
+      "file": "STRUCTURED_REVIEW_FINDINGS_REGISTER.csv",
+      "purpose": "Finding status"
+    }
+  ]
+}

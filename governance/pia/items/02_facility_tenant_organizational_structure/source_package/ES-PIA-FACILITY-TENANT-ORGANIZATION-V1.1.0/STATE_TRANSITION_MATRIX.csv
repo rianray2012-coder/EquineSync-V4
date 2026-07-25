@@ -1,0 +1,31 @@
+state_model_id,entity,from_state,to_state,trigger,required_permission,guard,audit_event,failure_behavior
+FAC-SM-001,Tenant,DRAFT,PENDING_REVIEW,submit,tenant:submit,required fields present,tenant.submitted,Remain DRAFT
+FAC-SM-001,Tenant,PENDING_REVIEW,ACTIVE,activate,tenant:activate,Founder-approved design plus separately authorized activation workflow,tenant.activated,Remain PENDING_REVIEW
+FAC-SM-001,Tenant,ACTIVE,SUSPENDED,suspend,tenant:suspend,reason and scope,tenant.suspended,Remain ACTIVE
+FAC-SM-001,Tenant,SUSPENDED,ACTIVE,reinstate,tenant:reinstate,online revalidation,tenant.reinstated,Remain SUSPENDED
+FAC-SM-001,Tenant,ACTIVE,CLOSING,begin_close,tenant:close,impact review,tenant.closing,Remain ACTIVE
+FAC-SM-001,Tenant,CLOSING,CLOSED,complete_close,tenant:close,reconciliation complete,tenant.closed,Remain CLOSING
+FAC-SM-001,Tenant,CLOSED,ARCHIVED,archive,tenant:archive,retention gate,tenant.archived,Remain CLOSED
+FAC-SM-002,Facility,PLANNED,ACTIVE,activate,facility:activate,identity/topology validated,facility.activated,Remain PLANNED
+FAC-SM-002,Facility,ACTIVE,DEGRADED,degrade,facility:status,operational limitation,facility.degraded,Remain ACTIVE
+FAC-SM-002,Facility,ACTIVE,RESTRICTED,restrict,facility:restrict,risk or dispute,facility.restricted,Remain ACTIVE
+FAC-SM-002,Facility,ACTIVE,SUSPENDED,suspend,facility:suspend,governance reason,facility.suspended,Remain ACTIVE
+FAC-SM-002,Facility,ACTIVE,CLOSED,close,facility:close,impact review,facility.closed,Remain ACTIVE
+FAC-SM-002,Facility,CLOSED,DECOMMISSIONED,decommission,facility:decommission,lineage preserved and credentials revoked,facility.decommissioned,Remain CLOSED
+FAC-SM-002,Facility,DECOMMISSIONED,ARCHIVED,archive,facility:archive,retention gate,facility.archived,Remain DECOMMISSIONED
+FAC-SM-003,Organization,DRAFT,ACTIVE,activate,organization:activate,minimum identity evidence,organization.activated,Remain DRAFT
+FAC-SM-003,Organization,ACTIVE,RESTRICTED,restrict,organization:restrict,dispute or risk,organization.restricted,Remain ACTIVE
+FAC-SM-003,Organization,ACTIVE,SUSPENDED,suspend,organization:suspend,reason and impact,organization.suspended,Remain ACTIVE
+FAC-SM-003,Organization,ACTIVE,DISSOLVING,begin_dissolution,organization:close,successor assessment,organization.dissolving,Remain ACTIVE
+FAC-SM-003,Organization,DISSOLVING,CLOSED,close,organization:close,associations ended,organization.closed,Remain DISSOLVING
+FAC-SM-003,Organization,CLOSED,ARCHIVED,archive,organization:archive,retention gate,organization.archived,Remain CLOSED
+FAC-SM-004,FacilityArea,PLANNED,ACTIVE,activate,facility_area:write,valid acyclic parent,facility_area.activated,Remain PLANNED
+FAC-SM-004,FacilityArea,ACTIVE,RESTRICTED,restrict,facility_area:restrict,reason,facility_area.restricted,Remain ACTIVE
+FAC-SM-004,FacilityArea,ACTIVE,OUT_OF_SERVICE,take_out_of_service,facility_area:write,operational reason,facility_area.out_of_service,Remain ACTIVE
+FAC-SM-004,FacilityArea,OUT_OF_SERVICE,ACTIVE,restore,facility_area:write,inspection/evidence,facility_area.restored,Remain OUT_OF_SERVICE
+FAC-SM-004,FacilityArea,ACTIVE,RETIRED,retire,facility_area:retire,impact review,facility_area.retired,Remain ACTIVE
+FAC-SM-004,FacilityArea,RETIRED,ARCHIVED,archive,facility_area:archive,retention gate,facility_area.archived,Remain RETIRED
+FAC-SM-005,OnboardingPlan,INITIATED,PATH_SELECTED,select_path,onboarding:initialize,truthful path selected explicitly,onboarding.path_selected,Remain INITIATED
+FAC-SM-005,OnboardingPlan,PATH_SELECTED,ISOLATION_READY,prepare_isolation,onboarding:initialize,minimum Tenant isolation context established,onboarding.isolation_ready,No protected write
+FAC-SM-005,OnboardingPlan,ISOLATION_READY,DOMAIN_SETUP_COMPLETE,complete_selected_setup,onboarding:initialize,only requested truthful entities created,onboarding.domain_setup_complete,Reconcile partial changes
+FAC-SM-005,OnboardingPlan,DOMAIN_SETUP_COMPLETE,COMPLETED,confirm,onboarding:initialize,context visible and authority disclaimer acknowledged,onboarding.completed,Remain DOMAIN_SETUP_COMPLETE

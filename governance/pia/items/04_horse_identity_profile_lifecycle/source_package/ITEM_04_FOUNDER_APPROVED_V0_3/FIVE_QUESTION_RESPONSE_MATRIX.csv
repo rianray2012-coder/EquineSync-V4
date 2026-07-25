@@ -1,0 +1,6 @@
+question_number,question,answer,post_approval_effect
+1,Can engineering build the capability without making unauthorized product decisions?,NO,UNCHANGED_BY_DOCUMENTARY_APPROVAL
+2,Can quality assurance determine objectively whether the capability works?,PARTIALLY_SATISFIED,UNCHANGED_BY_DOCUMENTARY_APPROVAL
+3,Can a reviewer trace the capability to EquineSync's controlling governance and the MIAP?,PARTIALLY_SATISFIED,UNCHANGED_BY_DOCUMENTARY_APPROVAL
+4,"Can EquineSync safely operate, support, monitor, recover, and maintain the capability?",NO,UNCHANGED_BY_DOCUMENTARY_APPROVAL
+5,Can the Founder determine whether the capability is ready for first-user enrollment?,NO,UNCHANGED_BY_DOCUMENTARY_APPROVAL

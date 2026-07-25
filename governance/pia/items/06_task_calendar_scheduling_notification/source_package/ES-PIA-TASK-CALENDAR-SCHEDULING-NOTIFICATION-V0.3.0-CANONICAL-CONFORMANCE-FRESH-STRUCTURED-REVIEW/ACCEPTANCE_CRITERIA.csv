@@ -1,0 +1,56 @@
+acceptance_id,acceptance_criterion,requirement_refs,gate
+TCSN-AC-001,Creating an unscheduled task does not create a calendar event.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-002,Creating an arena reservation does not create a completion task unless a rule explicitly requires one.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-003,A direct assignment is immediately active only when the assigning actor has authority.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-004,An acceptance-required assignment remains pending until accepted or otherwise resolved.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-005,A claimable task can be claimed only by an actor in the authorized pool.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-006,"Completion records preserve actor, actual time, entry time, instruction version, evidence status, and sync status.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-007,Backdated completion preserves the original escalation history.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-008,Editing one recurrence occurrence does not alter completed history or unrelated future occurrences.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-009,Editing this-and-following splits or versions the series deterministically.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-010,An imported external event is visibly labeled and does not silently create an operational task.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-011,External event deletion follows the approved conflict policy and does not silently destroy EquineSync truth.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-012,A hard resource conflict blocks save absent an authorized override.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-013,A soft conflict requires a visible warning and confirmation.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-014,Unknown availability is displayed as unknown.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-015,Authoritative time remains stable when a user travels across time zones.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-016,DST ambiguity is handled deterministically and visibly.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-017,Viewing or acknowledging a notification does not complete its task.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-018,Quiet hours suppress routine notices but not an authorized safety-critical override.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-019,An urgent notice does not disappear inside a routine digest.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-020,A failed email can fall back to another approved channel according to policy.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-021,"Optional SMS is sent only to a verified, permitted destination under applicable consent and opt-out rules.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-022,SMS failure enters retry or failed-delivery administration without being treated as refusal.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-023,Duplicate provider webhooks do not duplicate notification state transitions.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-024,A missed welfare-sensitive task escalates according to its risk policy.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-025,"Completing, canceling, or reassigning a task changes escalation behavior according to the state model.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-026,"Delegation does not expose unrelated horse, owner, medical, billing, or facility records.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-027,A generated task identifies its source record and rule version.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-028,"Changing the source schedule produces the defined update, cancellation, or review behavior.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-029,AI cannot silently assign a high-risk task.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-030,A personal reminder may be disabled without deleting an authoritative operational requirement.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-031,A mandatory reminder cannot be disabled through ordinary user preferences.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-032,Offline completion remains visibly pending until synchronization.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-033,"Repeated sync does not duplicate completion, evidence, or notification.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-034,Conflicting offline completions enter reconciliation rather than silently overwriting one another.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-035,Revoked access prevents new offline retrieval and is reconciled on reconnect.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-036,"Administrators can inspect failed delivery, retry history, recipient resolution, and channel evidence without reading unrelated content.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-037,Support correction preserves the original record and reason.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-038,Feature-flag disablement stops new external sync while preserving recoverable state and evidence.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-039,The first-release capability set excludes advanced workforce and AI scheduling optimization.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-040,The readiness section uses only permitted answer values and does not claim implementation or enrollment authority.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-041,A task dependency cycle is rejected without altering existing valid dependencies.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-042,Bulk task action applies only to items for which the actor passes per-record authorization and returns item-level results.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-043,"RSVP acceptance does not create assignment, payment, consent, or professional authority.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-044,"An availability request may return busy without revealing a restricted title, horse, minor, location, or participant.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-045,A material schedule change sends versioned updates to the policy-defined affected recipients and resources.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-046,"A notification record preserves the exact template version, locale, channel rendering, and redaction policy used.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-047,An optional SMS opt-out stops future optional SMS while preserving required in-app or other lawful mandatory communication.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-048,SMS volume or spend exceeding the configured limit blocks or pauses additional optional sends and alerts an authorized operator.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-049,A provider outage is displayed as provider degradation and does not mark native tasks or notices successful.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-050,A P0 or P1 operational condition generates the defined alert and incident record within its target.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-051,"Backup restore reproduces linked task, event, occurrence, completion, notification, escalation, and audit relationships without orphaning.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-052,Provider exit revokes credentials and disables new sends or sync while preserving native records and evidence.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-053,A migration dry run produces no authoritative mutation and yields deterministic reconciliation reports.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-054,"Synthetic seed data is visibly labeled, isolated, and cannot be mistaken for a real horse, person, task, or notification.",Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED
+TCSN-AC-055,The first-user gate yields a reproducible ready or not-ready determination without implying authorization before Founder disposition.,Mapped by Section 40 requirement-family range,AS_BUILT_VERIFICATION_REQUIRED

@@ -1,0 +1,51 @@
+acceptance_id,requirement_ids,criterion,expected_result,status
+HOR-AC-001,HOR-REQ-002,Individual owner can create a horse candidate without Facility or Organization.,Candidate exists with no forced topology entity.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-002,HOR-REQ-001;HOR-REQ-003,"Name, owner, trainer, account, or facility change does not create a new Horse ID.",Horse ID remains stable.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-003,HOR-REQ-005;HOR-REQ-006;HOR-REQ-007,Planned/expected foal and live horse activation remain distinct.,No premature active Horse ID.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-004,HOR-REQ-008;HOR-REQ-011,"Exact, partial, approximate, and unknown birth data display distinctly.",No false exactness.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-005,HOR-REQ-009;HOR-REQ-015,Every material fact exposes provenance and correction lineage.,Reconstructable source history.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-006,HOR-REQ-010;HOR-REQ-014,Imported conflict does not overwrite verified truth.,Controlled reconciliation opens.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-007,HOR-REQ-012;HOR-REQ-013,"Current truth, historical snapshots, references, and projections remain distinct.",No copied-label authority.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-008,HOR-REQ-040;HOR-REQ-041,Possible duplicate never auto-merges.,Duplicate case opens.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-009,HOR-REQ-042;HOR-REQ-043;HOR-REQ-047,"Merge preserves all source IDs, evidence, restrictions, and lineage.",No silent loss.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-010,HOR-REQ-045;HOR-REQ-046,Incorrect merge can be unmerged and downstream references reconciled.,Both horse identities restored coherently.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-011,HOR-REQ-044;HOR-REQ-069,Merge does not expand permission.,Access remains separately evaluated.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-012,HOR-REQ-029;HOR-REQ-030;HOR-REQ-031,Compatible lifecycle statuses coexist under versioned rules.,No single-status collapse.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-013,HOR-REQ-019;HOR-REQ-020;HOR-REQ-021,Passport is purpose-bound and displays generation limits.,Minimum authorized projection.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-014,HOR-REQ-024;HOR-REQ-025,Passport becomes stale when governing watermark changes.,"Revoked, expired, or regenerated.",DOCUMENTED_NOT_EXECUTED
+HOR-AC-015,HOR-REQ-027;HOR-REQ-075,Restricted identifiers cannot be publicly enumerated.,Deny without disclosure.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-016,HOR-REQ-050;HOR-REQ-051,Transfer changes context but not Horse ID.,Identity continuity preserved.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-017,HOR-REQ-052;HOR-REQ-055,Transfer cannot falsely complete with critical reconciliation outstanding.,Blocked or partial state remains visible.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-018,HOR-REQ-054;HOR-REQ-056,Successor access is established and obsolete access removed.,History preserved; current access correct.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-019,HOR-REQ-057;HOR-REQ-058,"Payment, possession, facility presence, and authorship do not create ownership or authority.",No inference.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-020,HOR-REQ-059;HOR-REQ-060;HOR-REQ-061,Precise location is source-referenced and suppressible.,No sensitive location leakage.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-021,HOR-REQ-035;HOR-REQ-036;HOR-REQ-037,"Eligibility facts remain distinct from workflow, schedule, and money.",GFD-001 boundary holds.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-022,HOR-REQ-038;HOR-REQ-039,"Genetic, gestational, breeder, registry, and ownership roles remain distinct.",No reproductive-role collapse.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-023,HOR-REQ-063;HOR-REQ-064,Death preserves identity and separates sensitive subrecords.,No deletion or over-disclosure.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-024,HOR-REQ-065;HOR-REQ-026,Memorial/public projection requires current authority and minimum permitted content.,Private by default.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-025,HOR-REQ-066;HOR-REQ-067,Archive blocks ordinary mutation but permits governed correction.,Safe archive with restoration path.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-026,HOR-REQ-069;HOR-REQ-070,Wrong-tenant or wrong-horse action fails closed.,No enumeration or mutation.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-027,HOR-REQ-071;HOR-REQ-073,"Sensitive exports are minimized, watermarked, and audited.",No broad untracked export.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-028,HOR-REQ-076,OCR/image extraction remains a claim linked to source evidence.,No automatic canonicalization.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-029,HOR-REQ-077;HOR-REQ-078,Offline work cannot finalize high-risk state.,Proposal only.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-030,HOR-REQ-079;HOR-REQ-080,"Sync detects stale, replayed, wrong-horse, and restriction conflicts.",Blocked or reconciled visibly.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-031,HOR-REQ-081;HOR-REQ-082,AI recommendation never becomes final identity or merge decision.,Human-governed review required.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-032,HOR-REQ-084;HOR-REQ-085,Vendor outage or deletion does not erase canonical truth.,Visible adapter failure; history preserved.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-033,HOR-REQ-074;HOR-REQ-086,Analytics avoid opaque ranking and disclose limitations.,Contextual non-determinative output.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-034,HOR-REQ-087,Consequential event is fully reconstructable.,Audit reconstruction succeeds.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-035,HOR-REQ-090;HOR-REQ-091,Migration quarantines ambiguity and does not auto-merge.,No manufactured horse truth or authority.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-036,HOR-REQ-089;HOR-REQ-092,Merge/unmerge rollback leaves no orphaned downstream references.,Referential integrity passes.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-037,HOR-REQ-093,"Production cannot proceed without targets, runbooks, alerts, support, and recovery evidence.",Operational gate remains closed.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-038,HOR-REQ-094;HOR-REQ-095,All 43 sections and exact questions are present.,Master-template gate passes.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-039,HOR-REQ-096;HOR-REQ-097,Readiness answers block implementation and enrollment as required.,Gate logic is explicit.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-040,HOR-REQ-099;HOR-REQ-100,"Candidate language creates no implementation, production, or enrollment authority.",All authority flags remain false.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-041,HOR-REQ-101;HOR-REQ-102;HOR-REQ-103,Cross-tenant matching returns a mediated result without revealing another tenant or horse-record existence.,No cross-tenant enumeration or disclosure.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-042,HOR-REQ-104;HOR-REQ-119,Public and shared surfaces use non-enumerable public-safe references rather than canonical internal Horse IDs.,Guessing or modifying a URL does not reveal another horse.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-043,HOR-REQ-105;HOR-REQ-106,Same external identifier in different namespaces or periods does not force identity convergence.,Claims remain separately qualified and reviewable.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-044,HOR-REQ-108,"Twins, clones, and genetically identical horses remain distinct identities.",DNA similarity alone never merges records.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-045,HOR-REQ-109,One reproductive predecessor may create separate Horse IDs for each live-born outcome.,Multiple births preserve separate identities and shared predecessor lineage.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-046,HOR-REQ-110;HOR-REQ-111;HOR-REQ-112,Continuity packet limits and transfer impact-specific effective times remain explicit.,No false completeness or single-time collapse.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-047,HOR-REQ-113;HOR-REQ-114,Revoked external Passport copy is marked invalid for future reliance without a false remote-deletion claim.,Verification returns minimum safe status.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-048,HOR-REQ-115;HOR-REQ-116,Human personal data and hidden media metadata are minimized before broad projection.,Horse continuity remains while unnecessary personal/location data is excluded.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-049,HOR-REQ-117;HOR-REQ-118,"Death, missing, stolen, and recovery states trigger permission-filtered downstream reconciliation and bounded alerts.",Item 04 does not directly mutate other domains or leak protected facts.,DOCUMENTED_NOT_EXECUTED
+HOR-AC-050,HOR-REQ-120,"Horse identity may exist while owner is unknown, absent, or disputed.",No forced or manufactured owner relationship.,DOCUMENTED_NOT_EXECUTED

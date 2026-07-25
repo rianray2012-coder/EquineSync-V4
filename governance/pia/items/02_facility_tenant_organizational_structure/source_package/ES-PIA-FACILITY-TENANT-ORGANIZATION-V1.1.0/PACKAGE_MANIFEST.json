@@ -1,0 +1,420 @@
+{
+  "approved_design_doctrine": [
+    "FAC-FD-001",
+    "FAC-FD-002",
+    "FAC-FD-003",
+    "FAC-FD-004",
+    "FAC-FD-005",
+    "FAC-FD-006",
+    "FAC-FD-007",
+    "FAC-FD-008",
+    "FAC-FD-009",
+    "FAC-FD-010",
+    "FAC-FD-011",
+    "FAC-FD-012",
+    "FAC-FD-013",
+    "FAC-FD-014",
+    "FAC-FD-015",
+    "FAC-FD-016",
+    "FAC-FD-017",
+    "FAC-FD-018"
+  ],
+  "base_commit": "0beee6137183eb4079e7346c8596f6bec552f2f2",
+  "change_counts": {
+    "ADDED": 21,
+    "MODIFIED": 27,
+    "RELOCATED_AND_MODIFIED": 1,
+    "RELOCATED_PRESERVED": 22
+  },
+  "date": "2026-07-21",
+  "disposition": "FACILITY_TENANT_ORGANIZATIONAL_STRUCTURE_PIA_FOUNDER_DECISIONS_001_THROUGH_018_INCORPORATED_PENDING_FRESH_SEGREGATED_REVIEW",
+  "enrollment_authorized": false,
+  "files": [
+    {
+      "bytes": 11013,
+      "path": "ACCEPTANCE_CRITERIA.csv",
+      "sha256": "4926c07f07cd99ae5d25a3b88f274714494690c3723954ed0db8bc46be72c758"
+    },
+    {
+      "bytes": 3546,
+      "path": "ADVERSARIAL_SCENARIOS.md",
+      "sha256": "bb6c701f759a4b1157eac85b183d14df09cf424250b2d7022b72d28000b65412"
+    },
+    {
+      "bytes": 4910,
+      "path": "API_EVENT_JOB_CONTRACTS.md",
+      "sha256": "5a649a0f0f4271f2e8eeb2be88076e845723ed8fba968e19a0dd6ccd6bf79e33"
+    },
+    {
+      "bytes": 3307,
+      "path": "AS_BUILT_RECONCILIATION.md",
+      "sha256": "8303a9f77fd27a6a7e6b1386f02f13e67a33c5bbce6d2c787878818089e3bb27"
+    },
+    {
+      "bytes": 2091,
+      "path": "CHANGE_CONTROL_LOG.md",
+      "sha256": "db131d788602d716bcf828d78133cc6599c557c39d5b97495aa7d51020ffeeaa"
+    },
+    {
+      "bytes": 5160,
+      "path": "DATA_DICTIONARY.md",
+      "sha256": "da5b402bc9422d4259448914e08b62f934a26e115212720b6bd185ec442706ee"
+    },
+    {
+      "bytes": 1361,
+      "path": "DEPENDENCY_REGISTER.csv",
+      "sha256": "f774897d9dde3f6b1cb576f1629f9989a6eff6609ed98eec24a0d986e0f347db"
+    },
+    {
+      "bytes": 20290,
+      "path": "DOCUMENTARY_CHANGE_MANIFEST.csv",
+      "sha256": "0f1c0f42339f782123d64521a50a0108fd05f74ab93a465bb42c355a7c622c65"
+    },
+    {
+      "bytes": 9699,
+      "path": "DOCUMENT_OVERVIEW_AND_RATIONALE.md",
+      "sha256": "62443a70159f58576d0a51c59f9849eb8fd8adc0022d9990644065bc1832d665"
+    },
+    {
+      "bytes": 1772,
+      "path": "ENGINEERING_WORK_PACKAGE_REGISTER.csv",
+      "sha256": "ed50202edf0f69959e30041f9826cb7fcab312b73fbf41aefa1c2731db141b4e"
+    },
+    {
+      "bytes": 12544,
+      "path": "EVIDENCE_MANIFEST.json",
+      "sha256": "7a198e610664c43e5017fbc40f9c219e3d5f1708e3b5928a8dc625d1ced9d08a"
+    },
+    {
+      "bytes": 2914,
+      "path": "FAC_FD_017_ADAPTIVE_ONBOARDING_REFINEMENT.md",
+      "sha256": "956e72b1b229ad26faecde37435e0cfa8a5fc76c1c99ec6231e4021dd9ddd67b"
+    },
+    {
+      "bytes": 3419,
+      "path": "FAC_FD_017_CROSS_ARTIFACT_REVIEW.csv",
+      "sha256": "8312df8c29e640c6dbec3220cad729ef516c037edbaff0fe64c6ed8987d743dc"
+    },
+    {
+      "bytes": 1708,
+      "path": "FIRST_FRESH_REVIEW_REMEDIATION_REGISTER.csv",
+      "sha256": "ef067bee2724dcddafab84a4db2a9b8c0bfbbe11e67d8aef98e302b7a84b2254"
+    },
+    {
+      "bytes": 1464,
+      "path": "FIRST_FRESH_REVIEW_REMEDIATION_SUMMARY.md",
+      "sha256": "e2459e1e29bc89bcad738fdd1f178168e53158c01f912cc02c48ceb7c33ff3ec"
+    },
+    {
+      "bytes": 1672,
+      "path": "FOUNDER_DECISION_BRIEF.md",
+      "sha256": "8526ec8c5aff983cbdeaca596390997312246e6c263c6c4a253dbacbc0ec7781"
+    },
+    {
+      "bytes": 7502,
+      "path": "FOUNDER_DECISION_GATE_STATUS_REGISTER.csv",
+      "sha256": "ff75bdaed3f1aa5c349e3be3c0e9004b1881b4852ce12644be67e6be305f00e7"
+    },
+    {
+      "bytes": 8936,
+      "path": "FOUNDER_DECISION_INCORPORATION_REGISTER.csv",
+      "sha256": "c1444c963bfec4b2689c8ca759a8e9640b92a14e16974d623068b950c071c43c"
+    },
+    {
+      "bytes": 1990,
+      "path": "FOUNDER_DECISION_INCORPORATION_SUMMARY.md",
+      "sha256": "ed83d5982857ece82896fbe4ceba4525f5a420e1972a5dabb617c6136119dc90"
+    },
+    {
+      "bytes": 24717,
+      "path": "FOUNDER_DECISION_RECOMMENDATION_MATRIX.csv",
+      "sha256": "398a2a54f75bb054c6f02edcef4b72d24d4323428b247f1ee805ce16a7bc87eb"
+    },
+    {
+      "bytes": 36781,
+      "path": "FOUNDER_DECISION_RECOMMENDATION_MATRIX.json",
+      "sha256": "1f536610774be09b6f1e8e66c2842bd1c9348b05e9e72639bd1a7f3f2b0422a6"
+    },
+    {
+      "bytes": 17981,
+      "path": "FOUNDER_DECISION_REGISTER.md",
+      "sha256": "be253b55e72204a048461d769aaa736e4e747fe3d053739526264af173c1d319"
+    },
+    {
+      "bytes": 6005,
+      "path": "FOUNDER_INPUT_QUESTIONS.md",
+      "sha256": "3e265d9be67225e41858661f82a0c5d366971acf6224b28926201790a0efa094"
+    },
+    {
+      "bytes": 4126,
+      "path": "FOUNDER_INPUT_QUESTION_REGISTER.csv",
+      "sha256": "4d4c0e991fa8a2dcb2b697892888c70442d0a3bd00f92d5c69f71f88e36c55ca"
+    },
+    {
+      "bytes": 1662,
+      "path": "FOUNDER_REVIEW_PACKET.md",
+      "sha256": "5f277db639b981d97b926365b7ba6e7c8605a21020f2218838b452844df47920"
+    },
+    {
+      "bytes": 793,
+      "path": "FROZEN_PREDECESSOR_INTEGRITY_REPORT.md",
+      "sha256": "5d95bcb0bc52f99cbe114ff1982251dd8565bb8fd43e7d6e281e6fdf4bd51251"
+    },
+    {
+      "bytes": 3705,
+      "path": "GOLDEN_PATHS.md",
+      "sha256": "ee6158c96a9c0000d0ea242df9738e3aae43d48250af37672a510a147f054ef7"
+    },
+    {
+      "bytes": 3031,
+      "path": "INHERITANCE_AND_SHARED_CONTROL_REGISTER.md",
+      "sha256": "e4daa43dfb53295ba6cda5c6cc9a17bad6dedc5fcc2239998cb2b5dd0067d2eb"
+    },
+    {
+      "bytes": 2395,
+      "path": "INTERNAL_CONSISTENCY_VALIDATION_REPORT.md",
+      "sha256": "f1507b1858ea0275a2fd903227f14707427628c0ad58a40cd17058c682f88b12"
+    },
+    {
+      "bytes": 2802,
+      "path": "PERMISSION_AND_AUTHORIZATION_BOUNDARY_MATRIX.csv",
+      "sha256": "6daa285d10fdf86b6a781452fd784d28f52a058afc56d6d1c38c3d291b4486b0"
+    },
+    {
+      "bytes": 5007,
+      "path": "PIA_FACILITY_TENANT_ORGANIZATION_MACHINE_READABLE.json",
+      "sha256": "eb34029329b889a9841ee2b6cd3df71a73c64d9cfe52bd570783be0a8e80be50"
+    },
+    {
+      "bytes": 19507,
+      "path": "PIA_FACILITY_TENANT_ORGANIZATION_V1_1_0.md",
+      "sha256": "16f51845b8610ed7918cc671f83ae04656042f04a6bcbb0b0b15a9ef3fe5d2ab"
+    },
+    {
+      "bytes": 36311,
+      "path": "REQUIREMENT_REGISTER.csv",
+      "sha256": "5829d74789a5bc4850eaa5650a5882edac75ccebc8b626213709e2c56c8dea17"
+    },
+    {
+      "bytes": 1873,
+      "path": "RESIDUAL_P2_STATUS.md",
+      "sha256": "e73592c97e1cc78f36a2670032007e1a83822a2c469da5ae82e0ec54d5a5d63f"
+    },
+    {
+      "bytes": 3363,
+      "path": "RISK_FINDING_DEVIATION_REGISTER.csv",
+      "sha256": "55e01983160612fae35afe11f843a2d4fce88ffe76b9443afda55111c0876ea5"
+    },
+    {
+      "bytes": 8719,
+      "path": "SOURCE_REGISTER.md",
+      "sha256": "e9d69d894a045630c655f3e0e4366f51e2c601abb338a9569f9ca2c0d3ce74d4"
+    },
+    {
+      "bytes": 1471,
+      "path": "STARTUP_VERIFICATION_EVIDENCE.json",
+      "sha256": "a380a9cb94838a83f4a2208779cc0bcbd281771746adca54b2882faa1699d531"
+    },
+    {
+      "bytes": 1816,
+      "path": "STARTUP_VERIFICATION_EVIDENCE.md",
+      "sha256": "f51ad3ac9dc6618dc7631768738a772ef0607fb0ab0c4e7149f22a43638a1d8a"
+    },
+    {
+      "bytes": 4070,
+      "path": "STATE_TRANSITION_MATRIX.csv",
+      "sha256": "2ebbd4784417d4c5f3b9d8212f454b0c95209e2111a2f3bdeb94ebfe0c687615"
+    },
+    {
+      "bytes": 16661,
+      "path": "TEST_MATRIX.csv",
+      "sha256": "c3f4e9fbd2bdc75693d51ccd5845bfd87c6caa88b461d648dd125dcd9c3e6943"
+    },
+    {
+      "bytes": 3285,
+      "path": "TRACEABILITY_VALIDATION_REPORT.md",
+      "sha256": "94be4833fa573ea0a08f4230414b5c72691ad50a1d525a29743e2793b3bff5cf"
+    },
+    {
+      "bytes": 6609,
+      "path": "WORKFLOW_REGISTER.md",
+      "sha256": "17b4e2e73c84af4e810bc4793855616aa5ca452de0fc5a813c7f497f2a4cffcc"
+    },
+    {
+      "bytes": 72676,
+      "path": "build_founder_decision_incorporation.py",
+      "sha256": "0f4c7aba64101facc570687089740c81a95169379f329c750afc770f6fbde0fc"
+    },
+    {
+      "bytes": 11972,
+      "path": "freeze_revised_candidate.py",
+      "sha256": "f74d230d87cdddd36a0d359e83afd02c4b1a809e316121c880d8f2493d0cd5a8"
+    },
+    {
+      "bytes": 4659,
+      "path": "predecessor_evidence/v1.0.0/CHECKSUM_MANIFEST.sha256",
+      "sha256": "c2ebee0f4ddbd59f5a62b5f9c1f051d9ffac29d61281e36ba3b09c87ee15e84d"
+    },
+    {
+      "bytes": 1820,
+      "path": "predecessor_evidence/v1.0.0/CROSS_DOCUMENT_CONSISTENCY_REPORT.md",
+      "sha256": "896322f69edc3352c826f433fa389a4e4a945a5924f717f922ff6285420d6334"
+    },
+    {
+      "bytes": 3691,
+      "path": "predecessor_evidence/v1.0.0/DOCUMENT_REVIEW_FINDINGS_REGISTER.csv",
+      "sha256": "6c910772c0a0289ce282510f71cc16499742bde6f2a6600c834fa7e9bc55adbd"
+    },
+    {
+      "bytes": 6913,
+      "path": "predecessor_evidence/v1.0.0/DOCUMENT_REVIEW_LEDGER.csv",
+      "sha256": "e8ab554b2ec07c98a9b5e2bf149a211226305c0f1654dfed7a03e2494fa38325"
+    },
+    {
+      "bytes": 431,
+      "path": "predecessor_evidence/v1.0.0/FINAL_OPEN_FINDINGS_REGISTER.csv",
+      "sha256": "b84ef9dd85a86c710cc8298ec9ce92c0a38d4c9a927b4c8895d0c01ecdc351a3"
+    },
+    {
+      "bytes": 1468,
+      "path": "predecessor_evidence/v1.0.0/FIRST_PASS_REVIEW_SUMMARY.md",
+      "sha256": "1462050690c38b13fd018884d997e9d01608d043fd91c7d3f8c51099058ba5cb"
+    },
+    {
+      "bytes": 8462,
+      "path": "predecessor_evidence/v1.0.0/PACKAGE_MANIFEST.json",
+      "sha256": "f935360b4af017d70049d0ef5e9d958d9ce5850705087da0bde0029994da5187"
+    },
+    {
+      "bytes": 1802,
+      "path": "predecessor_evidence/v1.0.0/REVIEW_DISPOSITION.md",
+      "sha256": "cda3edb0530f44385271cbd68d8d1115f751e0ab653f33ecf16841fa0f8e1c15"
+    },
+    {
+      "bytes": 1901,
+      "path": "predecessor_evidence/v1.0.0/REVISION_CHANGE_SUMMARY.md",
+      "sha256": "d2c81c0b51a88e43968dfbe227403b35000173c5265393cc5cf3c000cd9dbd82"
+    },
+    {
+      "bytes": 2755,
+      "path": "predecessor_evidence/v1.0.0/REVISION_TRACEABILITY_REGISTER.csv",
+      "sha256": "f6a64f944360b3693d960bb67292f11b970e4f2719c3ab4cdc4a2967fff9b668"
+    },
+    {
+      "bytes": 1522,
+      "path": "predecessor_evidence/v1.0.0/SECOND_PASS_REVIEW_SUMMARY.md",
+      "sha256": "826ec95c48d46bcfeed7518ab36a431b70ab2284da1f4dfe43dc50d515f7975b"
+    },
+    {
+      "bytes": 5644,
+      "path": "predecessor_evidence/v1.0.0/VALIDATION_REPORT.json",
+      "sha256": "957ef90e0e81dd0bf62a83179eef22a8382adf97b71b2f60a2031e0f494bfe5b"
+    },
+    {
+      "bytes": 3361,
+      "path": "predecessor_evidence/v1.0.0/VALIDATION_REPORT.md",
+      "sha256": "423a135203e27866f65207fed5b34e4656b11443a9a8e7c4fa894f067cdd1f9f"
+    },
+    {
+      "bytes": 123240,
+      "path": "predecessor_evidence/v1.0.0/build_facility_pia_package.py",
+      "sha256": "4dac7c8605511c3ecb0fb38e4fc7d7e15d50d1af29ec83bc41ef067d465fc63c"
+    },
+    {
+      "bytes": 1224,
+      "path": "predecessor_evidence/v1.0.0/review/first_pass/ADVERSARIAL_REVIEW.md",
+      "sha256": "b3a5516ff15d61e506ad24e6977ed6bb106c22a4b041b5d1ec5d763953b6eed0"
+    },
+    {
+      "bytes": 1347,
+      "path": "predecessor_evidence/v1.0.0/review/first_pass/CROSS_DOMAIN_OWNERSHIP_REVIEW.md",
+      "sha256": "f4cacb60076b9544f6a9d2ad0ec0f7c0d63236074c5271f061a10ff41cb0d533"
+    },
+    {
+      "bytes": 1265,
+      "path": "predecessor_evidence/v1.0.0/review/first_pass/DOCUMENTARY_GOLDEN_PATH_REVIEW.md",
+      "sha256": "211e8e2466332facfc24b52e7429ec4f934d446f08708ed0b39812ec1109735f"
+    },
+    {
+      "bytes": 1299,
+      "path": "predecessor_evidence/v1.0.0/review/first_pass/DOMAIN_OPERATIONAL_REVIEW.md",
+      "sha256": "c448d471c631f502d1a8c387ce0be979f8dd3006563350261171693775ad6882"
+    },
+    {
+      "bytes": 4202,
+      "path": "predecessor_evidence/v1.0.0/review/first_pass/FIRST_DRAFT_HASH_MANIFEST.csv",
+      "sha256": "28aa700761ae3028edad65c5e41490034118207ac01d370a676a60a26a13896c"
+    },
+    {
+      "bytes": 1315,
+      "path": "predecessor_evidence/v1.0.0/review/first_pass/MACHINE_TRACEABILITY_REVIEW.md",
+      "sha256": "fe82c43abe472c85c22e567b9dee4ac3c94ff27b0748c09b3ced06fe91f62287"
+    },
+    {
+      "bytes": 1350,
+      "path": "predecessor_evidence/v1.0.0/review/first_pass/SECURITY_PRIVACY_TENANT_ISOLATION_REVIEW.md",
+      "sha256": "4579146e5a71da24155b73910d9994a5994f8cfaf21de9d5c13cd240f3f19449"
+    },
+    {
+      "bytes": 20543,
+      "path": "predecessor_evidence/v1.0.0/validate_facility_pia_package.py",
+      "sha256": "37112a6d758d91ab90c62183f3d1dce05aec8a8eb91b2d7cf1b3cd040e6234c9"
+    },
+    {
+      "bytes": 10905,
+      "path": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_EVIDENCE_INDEX.csv",
+      "sha256": "5f36950bbc2f3654e8447c429fc0c86651630ebae601cbab38e2447e619c77aa"
+    },
+    {
+      "bytes": 6618,
+      "path": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_FINDINGS.csv",
+      "sha256": "403cf79c887b1c70790f9b9dac65518bd30af90ce83c80874b140ad57a7f0bc6"
+    },
+    {
+      "bytes": 9167,
+      "path": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_REPORT.md",
+      "sha256": "95991dc66031f6c9cd85cd7e7869a967322184f8a2e75718637903c9aed2a112"
+    },
+    {
+      "bytes": 16942,
+      "path": "source_evidence/FOUNDER_DECISION_INCORPORATION_DIRECTIVE.md",
+      "sha256": "8158c9f2f00b2702f7057837289dc8395ca28a2a3f9cd7c34d00d8861706944f"
+    },
+    {
+      "bytes": 26956,
+      "path": "validate_founder_decision_incorporation.py",
+      "sha256": "26b8b6f6040f5b1069fd406abdc697bd22b079025ad97faffab42d8fb5a1039e"
+    }
+  ],
+  "frozen_predecessor_modification_count": 0,
+  "future_review_envelope_excluded": [
+    "FINAL_DISPOSITION.md",
+    "FRESH_SEGREGATED_REVIEW_EVIDENCE_INDEX.csv",
+    "FRESH_SEGREGATED_REVIEW_FINDINGS.csv",
+    "FRESH_SEGREGATED_REVIEW_REPORT.md",
+    "FROZEN_REVISED_CANDIDATE_MANIFEST.txt",
+    "FROZEN_REVISED_CANDIDATE_SHA256SUMS.txt",
+    "POST_REVIEW_EVIDENCE_MANIFEST.json",
+    "POST_REVIEW_EVIDENCE_SHA256SUMS.txt"
+  ],
+  "implementation_authorized": false,
+  "manifest_self_excluded": true,
+  "open_before_enrollment": [
+    "FAC-FD-023",
+    "FAC-FD-024",
+    "FAC-FD-027",
+    "FAC-FD-028"
+  ],
+  "open_before_implementation_authorization": [
+    "FAC-FD-019",
+    "FAC-FD-020",
+    "FAC-FD-021",
+    "FAC-FD-022",
+    "FAC-FD-025",
+    "FAC-FD-026"
+  ],
+  "phase": "FROZEN_REVISED_CANDIDATE_PRE_FRESH_REVIEW",
+  "pia_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.1.0",
+  "source_modification_count": 0,
+  "version": "1.1.0-candidate"
+}
