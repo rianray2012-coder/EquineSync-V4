@@ -1,0 +1,39 @@
+{
+  "optional_sources_included": [
+    "EquineSync_Item_10_OPC_PIA_V0_2_Codex_Integration_Directive.md"
+  ],
+  "required_sources": [
+    {
+      "bytes": 99409,
+      "filename": "EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_Draft.docx",
+      "sha256": "25041f250eb15273f6ee81de791412d299f638046a7d5b9fdde4c50c4cb03aa7",
+      "validation": "PASS"
+    },
+    {
+      "bytes": 83517,
+      "filename": "EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_Draft.md",
+      "sha256": "3e9ed565ff9623704683e5e471dafeaaf4959014a720febc08057839f9f6061d",
+      "validation": "PASS"
+    },
+    {
+      "bytes": 135471,
+      "filename": "EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_2_Strengthened_Draft.docx",
+      "sha256": "f4a1cf6b7dc66895c943e6aeee80d4812d7d80e1d9a87878249976ffc0244cd5",
+      "validation": "PASS"
+    },
+    {
+      "bytes": 211796,
+      "filename": "EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_2_Strengthened_Draft.md",
+      "sha256": "c68746f3eb2e1463fca17f81bebce416d420a2f2da7d8b6ba24d9987aff9c09a",
+      "validation": "PASS"
+    }
+  ],
+  "result": "PASS",
+  "rules": [
+    "All required source files present and nonempty",
+    "DOCX package integrity verified",
+    "PIA identity markers verified",
+    "Exact source hashes computed from supplied bytes"
+  ],
+  "validation_id": "ES-PIA-OPC-SOURCE-VALIDATION-2026-07-23-01"
+}

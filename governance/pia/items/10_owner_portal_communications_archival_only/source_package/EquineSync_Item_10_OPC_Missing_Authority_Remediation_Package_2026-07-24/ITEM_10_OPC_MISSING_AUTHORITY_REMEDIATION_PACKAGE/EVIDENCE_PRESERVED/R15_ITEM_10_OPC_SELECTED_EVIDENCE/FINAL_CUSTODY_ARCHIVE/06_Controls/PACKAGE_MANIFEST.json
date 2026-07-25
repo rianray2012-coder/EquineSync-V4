@@ -1,0 +1,125 @@
+{
+  "assembled_date": "2026-07-23",
+  "authority": {
+    "community_activation": false,
+    "deployment": false,
+    "documentary_archival_custody": true,
+    "first_user_enrollment": false,
+    "founder_design_approval": false,
+    "implementation": false,
+    "migration": false,
+    "pilot_enrollment": false,
+    "production": false,
+    "provider_activation": false,
+    "schema": false,
+    "structured_repository_review": true
+  },
+  "control_note": "The checksum ledger hashes every final file except itself and is the complete byte-integrity record.",
+  "current_documentary_status": "ITEM_10_V0_2_MATERIALLY_STRENGTHENED_DOCUMENTARY_DRAFT_READY_FOR_STRUCTURED_REVIEW",
+  "current_pia_id": "ES-PIA-OWNER-PORTAL-COMMUNICATIONS-V0.2.0",
+  "domain": "Owner Portal and Communications",
+  "files": [
+    {
+      "bytes": 1549,
+      "path": "00_PACKAGE_README.md",
+      "role": "package_readme",
+      "sha256": "17b4f87b7fb2075070fced3895c7c0c9db75988b7993139a12b00cc5e51ec0b5"
+    },
+    {
+      "bytes": 135471,
+      "path": "01_Current_Approved/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_2_Strengthened_Draft.docx",
+      "role": "current_successor_docx",
+      "sha256": "f4a1cf6b7dc66895c943e6aeee80d4812d7d80e1d9a87878249976ffc0244cd5"
+    },
+    {
+      "bytes": 211796,
+      "path": "01_Current_Approved/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_2_Strengthened_Draft.md",
+      "role": "current_successor_markdown",
+      "sha256": "c68746f3eb2e1463fca17f81bebce416d420a2f2da7d8b6ba24d9987aff9c09a"
+    },
+    {
+      "bytes": 99409,
+      "path": "02_Historical_Predecessors/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_Draft.docx",
+      "role": "historical_predecessor_docx",
+      "sha256": "25041f250eb15273f6ee81de791412d299f638046a7d5b9fdde4c50c4cb03aa7"
+    },
+    {
+      "bytes": 83517,
+      "path": "02_Historical_Predecessors/EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_Draft.md",
+      "role": "historical_predecessor_markdown",
+      "sha256": "3e9ed565ff9623704683e5e471dafeaaf4959014a720febc08057839f9f6061d"
+    },
+    {
+      "bytes": 8357,
+      "path": "03_Review_History/EquineSync_Item_10_OPC_V0_1_to_V0_2_Strengthening_Review_Report.md",
+      "role": "strengthening_review_report",
+      "sha256": "80dc9210a51038bdde3b78d0ae6ff4d8920bd92ae39a5672b2ead9c999a8d1f8"
+    },
+    {
+      "bytes": 1163,
+      "path": "04_Founder_Approval/FOUNDER_APPROVAL_CERTIFICATE.md",
+      "role": "founder_approval_certificate",
+      "sha256": "c04337802b4b95ab3a73e307b95931fdc8f667a2e17ede429c10aee269f2828b"
+    },
+    {
+      "bytes": 43046,
+      "path": "04_Founder_Approval/FOUNDER_APPROVAL_RECORD.docx",
+      "role": "founder_approval_record_docx",
+      "sha256": "51a131256df43021ee83cc13575e850a517309f12f4e46ab5af030f7bfbc0b78"
+    },
+    {
+      "bytes": 5408,
+      "path": "04_Founder_Approval/FOUNDER_APPROVAL_RECORD.md",
+      "role": "founder_approval_record_markdown",
+      "sha256": "a72a351b22af00e5166bce59047d7b932a4920f32ca157314e5f2d1d967cf281"
+    },
+    {
+      "bytes": 8263,
+      "path": "05_Codex_Integration/EquineSync_Item_10_OPC_Founder_Approved_Archive_Integration_Directive_V1_0_0.md",
+      "role": "founder_approved_archive_integration_directive",
+      "sha256": "894e372267966f9eb6a659b96c877b9b242a3d30b659dc1cd6f26476e24aa0d0"
+    },
+    {
+      "bytes": 12400,
+      "path": "05_Codex_Integration/EquineSync_Item_10_OPC_PIA_V0_2_Codex_Integration_Directive.md",
+      "role": "historical_pre_approval_integration_directive",
+      "sha256": "80e02fe78068bc03e0802e90cd89fdb02c1deaf81e8a773a07de9af0cc0c546f"
+    },
+    {
+      "bytes": 735,
+      "path": "05_Codex_Integration/REPOSITORY_INTEGRATION_RECEIPT_PENDING.md",
+      "role": "repository_receipt_pending_notice",
+      "sha256": "38cfdabfa9fade164d5e12099af33c2ba393983be77b0b4d43a865a7e20ea897"
+    },
+    {
+      "bytes": 1386,
+      "path": "06_Controls/SOURCE_VALIDATION.json",
+      "role": "source_validation",
+      "sha256": "10b52a9a385c51238fcccf45aab8b06eb3222443dcc71f1856f57e7ae95e1e9e"
+    }
+  ],
+  "founder_approval_record_id": "ES-PIA-OPC-FAR-2026-07-23-01",
+  "founder_disposition": "FOUNDER_APPROVED_FOR_DOCUMENTARY_GOVERNANCE_ARCHIVAL_CUSTODY_AND_STRUCTURED_REPOSITORY_REVIEW_ONLY",
+  "historical_pia_id": "ES-PIA-OWNER-PORTAL-COMMUNICATIONS-V0.1.0",
+  "optional_historical_sources_included": [
+    "EquineSync_Item_10_OPC_PIA_V0_2_Codex_Integration_Directive.md"
+  ],
+  "package_id": "ES-PIA-OPC-FOUNDER-ARCHIVE-V1.0.0",
+  "package_name": "EquineSync_Item_10_Owner_Portal_Communications_Founder_Approved_V1.0.0",
+  "portfolio_position": 10,
+  "readiness_questions": {
+    "engineering_buildability": "YES_WITH_EVIDENCE",
+    "first_user_enrollment": "NO",
+    "governance_miap_traceability": "PARTIALLY_SATISFIED",
+    "objective_qa_verification": "YES_WITH_EVIDENCE",
+    "operational_safety_recovery": "NO"
+  },
+  "requested_repository_disposition": "ACCEPT_V0_2_AS_MATERIALLY_STRENGTHENED_DOCUMENTARY_DRAFT_FOR_STRUCTURED_REVIEW_ONLY",
+  "schema_version": "1.0",
+  "source_hashes": {
+    "EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_Draft.docx": "25041f250eb15273f6ee81de791412d299f638046a7d5b9fdde4c50c4cb03aa7",
+    "EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_1_Draft.md": "3e9ed565ff9623704683e5e471dafeaaf4959014a720febc08057839f9f6061d",
+    "EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_2_Strengthened_Draft.docx": "f4a1cf6b7dc66895c943e6aeee80d4812d7d80e1d9a87878249976ffc0244cd5",
+    "EquineSync_Item_10_Owner_Portal_Communications_PIA_V0_2_Strengthened_Draft.md": "c68746f3eb2e1463fca17f81bebce416d420a2f2da7d8b6ba24d9987aff9c09a"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "package_id": "ES-PIA-ITEM-07-CARE-OPERATIONS-CANONICAL-REMEDIATION-PACKAGE-2026-07-23",
+  "generated_date": "2026-07-23",
+  "canonical_item": {
+    "item_number": "Item 07",
+    "pia_family": "Care Operations"
+  },
+  "disposition": "PREPARED_NOT_APPROVED_NOT_REPOSITORY_INTEGRATED",
+  "authority_scope": {
+    "documentary_item_07_remediation_only": true,
+    "canonical_portfolio_integration_authorized": false,
+    "branch_creation_authorized": false,
+    "staging_authorized": false,
+    "commit_authorized": false,
+    "push_authorized": false,
+    "pull_request_authorized": false,
+    "merge_authorized": false,
+    "repository_evidence_rename_or_normalization_authorized": false,
+    "implementation_authorized": false,
+    "schema_authorized": false,
+    "migration_authorized": false,
+    "deployment_authorized": false,
+    "production_authorized": false,
+    "pilot_authorized": false,
+    "support_access_authorized": false,
+    "ai_activation_authorized": false,
+    "operational_rollout_authorized": false,
+    "first_user_enrollment_authorized": false
+  },
+  "required_artifacts": [
+    {
+      "artifact": "ITEM_07_CARE_CANONICAL_NUMBERING_AND_LINEAGE_RECORD.md",
+      "status": "PREPARED"
+    },
+    {
+      "artifact": "ITEM_07_CARE_CANONICAL_REMEDIATION_PACKAGE",
+      "status": "PREPARED_WITH_HISTORICAL_ITEM_05_EVIDENCE_PRESERVED"
+    },
+    {
+      "artifact": "ITEM_07_CARE_CANONICAL_MANIFEST_AND_SHA256SUMS",
+      "status": "PREPARED"
+    },
+    {
+      "artifact": "ITEM_07_CARE_FRESH_REVIEW_REPORT.md",
+      "status": "FAIL_CLOSED_PENDING_FOUNDER_FINAL_DISPOSITION_AND_COMPLIANT_FORMAL_REVIEW"
+    },
+    {
+      "artifact": "ITEM_07_CARE_FOUNDER_FINAL_DISPOSITION.md",
+      "status": "PENDING_FOUNDER_FINAL_DISPOSITION"
+    },
+    {
+      "artifact": "ITEM_07_CARE_REPOSITORY_INTEGRATION_BLOCKED_RECEIPT.md",
+      "status": "BLOCKED_BEFORE_REPOSITORY_MUTATION"
+    }
+  ],
+  "historical_noncanonical_source": {
+    "preservation_status": "PRESERVED_EXACTLY_AS_HISTORICAL_NONCANONICAL_EVIDENCE",
+    "historical_package_id": "ES-PIA-CARE-OPERATIONS-ITEM-05-V0.2-CODEX-REVIEW-PACKAGE",
+    "historical_pia_id": "ES-PIA-CARE-OPERATIONS-V0.2.0",
+    "historical_portfolio_position": "Item 05",
+    "historical_candidate_status": "ITEM_05_V0_2_STRENGTHENED_DOCUMENTARY_CANDIDATE_READY_FOR_COMPLIANT_FRESH_REVIEW",
+    "historical_source_zip_path": "ITEM_07_CARE_CANONICAL_REMEDIATION_PACKAGE/HISTORICAL_NONCANONICAL_ITEM_05_EVIDENCE_PRESERVED/EquineSync_Care_Operations_PIA_Item_05_V0_2_Codex_Review_Package.zip",
+    "historical_source_zip_sha256": "b900bccecf9f31bb631ce308c3ff85bb012900dbd889a748e6cc687fe5ab29e7",
+    "historical_source_sidecar_path": "ITEM_07_CARE_CANONICAL_REMEDIATION_PACKAGE/HISTORICAL_NONCANONICAL_ITEM_05_EVIDENCE_PRESERVED/EquineSync_Care_Operations_PIA_Item_05_V0_2_Codex_Review_Package.zip.sha256",
+    "historical_extracted_package_path": "ITEM_07_CARE_CANONICAL_REMEDIATION_PACKAGE/HISTORICAL_NONCANONICAL_ITEM_05_EVIDENCE_PRESERVED/HISTORICAL_NONCANONICAL_ITEM_05_PACKAGE/EquineSync_Care_Operations_PIA_Item_05_V0_2_Codex_Review_Package",
+    "historical_extracted_checksum_ledger_status": "PASS"
+  },
+  "historical_candidate_summary": {
+    "founder_decisions_documentary_drafting": "CARE-FD-001 through CARE-FD-020",
+    "independent_formal_review_completed": false,
+    "founder_approval_of_v0_2": false,
+    "requirements": 64,
+    "acceptance_criteria": 40,
+    "tests": 58,
+    "workflows": 14,
+    "entities": 22,
+    "permissions": 15,
+    "golden_paths": 10,
+    "adversarial_scenarios": 36,
+    "open_p1_findings": 8,
+    "open_p2_findings": 3,
+    "closed_internal_review_findings": 7
+  },
+  "checksum_model": {
+    "ledger_path": "ITEM_07_CARE_CANONICAL_MANIFEST_AND_SHA256SUMS/ITEM_07_CARE_CANONICAL_SHA256SUMS.txt",
+    "ledger_scope": "All files in this package except ITEM_07_CARE_CANONICAL_SHA256SUMS.txt itself.",
+    "expected_file_count_excluding_checksum_ledger": 22
+  },
+  "closure_state": "ITEM_07_REMEDIATION_PACKAGE_PREPARED_WITH_FINAL_APPROVAL_AND_REPOSITORY_INTEGRATION_BLOCKED"
+}

@@ -1,0 +1,96 @@
+{
+  "package_id": "ES-PIA-CARE-OPERATIONS-ITEM-05-V0.2-CODEX-REVIEW-PACKAGE",
+  "package_version": "1.0.0",
+  "created_date": "2026-07-22",
+  "portfolio_position": "Item 05",
+  "pia_id": "ES-PIA-CARE-OPERATIONS-V0.2.0",
+  "master_template": "ES-PIA-MASTER-STANDARD-V1.1",
+  "candidate_status": "ITEM_05_V0_2_STRENGTHENED_DOCUMENTARY_CANDIDATE_READY_FOR_COMPLIANT_FRESH_REVIEW",
+  "founder_decisions": [
+    "CARE-FD-001",
+    "CARE-FD-002",
+    "CARE-FD-003",
+    "CARE-FD-004",
+    "CARE-FD-005",
+    "CARE-FD-006",
+    "CARE-FD-007",
+    "CARE-FD-008",
+    "CARE-FD-009",
+    "CARE-FD-010",
+    "CARE-FD-011",
+    "CARE-FD-012",
+    "CARE-FD-013",
+    "CARE-FD-014",
+    "CARE-FD-015",
+    "CARE-FD-016",
+    "CARE-FD-017",
+    "CARE-FD-018",
+    "CARE-FD-019",
+    "CARE-FD-020"
+  ],
+  "authority_effect": "NONE",
+  "implementation_authority": false,
+  "schema_authority": false,
+  "migration_authority": false,
+  "deployment_authority": false,
+  "production_authority": false,
+  "pilot_authority": false,
+  "enrollment_authority": false,
+  "payload_file_count": 10,
+  "payload_files": [
+    {
+      "path": "CODEX_DIRECTIVE.md",
+      "size_bytes": 13362,
+      "sha256": "682b4659205cc28a4d013012c641be71c261ed527291f50a540311056689857a"
+    },
+    {
+      "path": "CURRENT_CANDIDATE/EquineSync_Care_Operations_PIA_V0_2_Machine_Readable.json",
+      "size_bytes": 323784,
+      "sha256": "ac7cd7be62e075a478e7c55b1266f2eeaee10e3b9f0d6a0b4f051849695ee6f0"
+    },
+    {
+      "path": "CURRENT_CANDIDATE/EquineSync_Care_Operations_PIA_V0_2_Strengthened_Draft.docx",
+      "size_bytes": 106672,
+      "sha256": "3cd9f29a4208a62282027f5b061bb9a55c957a33f23b18d0ed1180cfe4bab467"
+    },
+    {
+      "path": "CURRENT_CANDIDATE/EquineSync_Care_Operations_PIA_V0_2_Strengthened_Draft.md",
+      "size_bytes": 326956,
+      "sha256": "37220d43c4c9735c1446a649bbc7fe7ea26cd3ad386e1a61d6f24d0037fa611d"
+    },
+    {
+      "path": "PREDECESSOR_EVIDENCE/EquineSync_Care_Operations_PIA_V0_1_Draft.docx",
+      "size_bytes": 75961,
+      "sha256": "4fb375bb927d0aea3dbb6046ad248be32b20b34cde461277f1bea3c42079bd14"
+    },
+    {
+      "path": "PREDECESSOR_EVIDENCE/EquineSync_Care_Operations_PIA_V0_1_Draft.md",
+      "size_bytes": 94380,
+      "sha256": "9a05d3fa164f9c188209e8c9ba0a4c91a00993eea6e91667c9f37ea5342b7fb6"
+    },
+    {
+      "path": "PREDECESSOR_EVIDENCE/EquineSync_Care_Operations_PIA_V0_1_Internal_Review_and_V0_2_Revision_Report.md",
+      "size_bytes": 2917,
+      "sha256": "c07144222ccb01a3af7b4b4659619bb86f62f359b82be5ce662bf42dcdd986e3"
+    },
+    {
+      "path": "PREDECESSOR_EVIDENCE/EquineSync_Care_Operations_PIA_V0_1_Machine_Readable.json",
+      "size_bytes": 84640,
+      "sha256": "e6d8c02916005687cdc2aa69a2a429d4f0d83cff8ebbfea2fc55391ee93c6e7d"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1748,
+      "sha256": "ac893afd7a1daf2f75d7e1985f770cf7367d2b1e4fa4386ab5732f1116171dba"
+    },
+    {
+      "path": "VALIDATION/EquineSync_Care_Operations_PIA_V0_2_Documentary_Validation_Report.json",
+      "size_bytes": 3174,
+      "sha256": "38c0bac46d5123b5052b2c30e97e19eec98e4e3fc4c9169c291a7cfbda756dd1"
+    }
+  ],
+  "integrity_notes": {
+    "manifest_scope": "All payload files except PACKAGE_MANIFEST.json and CHECKSUMS.sha256.",
+    "checksum_scope": "CHECKSUMS.sha256 covers every package file except itself, including PACKAGE_MANIFEST.json."
+  }
+}

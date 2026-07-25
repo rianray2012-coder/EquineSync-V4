@@ -1,0 +1,43 @@
+{
+  "artifact": "EquineSync_Item_07_Lessons_Training_Riders_Guardians_PIA_V0_2_Strengthened_Draft.md",
+  "version": "0.2.0",
+  "sha256": "27ce2ebf60456994ce890ca4ee363fed7401c7968614959783e325b1927b7e80",
+  "reviewed_predecessor": "EquineSync_Item_07_Lessons_Training_Riders_Guardians_PIA_V0_1_Draft.md",
+  "reviewed_predecessor_sha256": "e70ac9a7dbac23ef537c7675b4363d4e9ea374886ce6bb03bc6b4764368ceaa2",
+  "counts": {
+    "sections": 43,
+    "requirements": 76,
+    "acceptance_criteria": 40,
+    "tests": 55,
+    "golden_paths": 10,
+    "adversarial_scenarios": 36,
+    "founder_decisions": 20,
+    "sources": 17,
+    "entities": 22,
+    "permissions": 15,
+    "apis": 19,
+    "events": 15,
+    "integrations": 8,
+    "dependencies": 12,
+    "evidence_families": 18
+  },
+  "checks": {
+    "section_count_43": true,
+    "section_numbers_contiguous": true,
+    "requirements_001_076": true,
+    "acceptance_001_040": true,
+    "tests_001_055": true,
+    "golden_001_010": true,
+    "adversarial_001_036": true,
+    "founder_decisions_001_020": true,
+    "five_answers_present": true,
+    "three_yes_two_no": true,
+    "answer_completeness_five": true,
+    "implementation_authority_false": true,
+    "enrollment_authority_false": true,
+    "documentary_notice_present": true,
+    "no_placeholders": true
+  },
+  "overall": "PASS",
+  "authority_effect": "NONE"
+}
