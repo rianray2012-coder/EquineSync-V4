@@ -1,0 +1,76 @@
+name: Export Governance and Implementation Atlases
+
+on:
+  pull_request:
+    branches:
+      - integrate-emergent-final-zip
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="EquineSync_Governance_and_Implementation_Atlases_2026-07-25"
+          mkdir -p "$ROOT/repository"
+
+          copy_if_exists() {
+            src="$1"
+            dst="$ROOT/repository/$1"
+            if [ -e "$src" ]; then
+              mkdir -p "$(dirname "$dst")"
+              cp -a "$src" "$dst"
+            fi
+          }
+
+          copy_if_exists docs/canon
+          copy_if_exists docs/governance_v1_0
+          copy_if_exists docs/implementation
+          copy_if_exists governance
+
+          find . -maxdepth 4 -type f \
+            \( -iname '*atlas*' -o -iname '*governance*' -o -iname '*implementation*' \) \
+            ! -path './.git/*' \
+            ! -path './node_modules/*' \
+            ! -path './EquineSync_Governance_and_Implementation_Atlases_2026-07-25/*' \
+            -print0 | while IFS= read -r -d '' f; do
+              rel="${f#./}"
+              dst="$ROOT/repository/$rel"
+              mkdir -p "$(dirname "$dst")"
+              cp -a "$f" "$dst"
+            done
+
+          {
+            echo '# EquineSync Governance and Implementation Atlases Export'
+            echo
+            echo '- Repository: rianray2012-coder/EquineSync-V4'
+            echo "- Source ref: $GITHUB_SHA"
+            echo '- Export scope: docs/canon, docs/governance_v1_0, docs/implementation, governance, plus repository files whose names contain atlas, governance, or implementation.'
+            echo '- This archive is documentary only and does not alter authority or lifecycle status.'
+          } > "$ROOT/README.md"
+
+          find "$ROOT" -type f -print0 | sort -z | xargs -0 sha256sum > "$ROOT/SHA256SUMS.txt"
+          find "$ROOT" -type f | sort > "$ROOT/FILE_MANIFEST.txt"
+          zip -r -9 "${ROOT}.zip" "$ROOT"
+          sha256sum "${ROOT}.zip" > "${ROOT}.zip.sha256"
+
+      - name: Upload export artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: EquineSync-Governance-and-Implementation-Atlases-2026-07-25
+          path: |
+            EquineSync_Governance_and_Implementation_Atlases_2026-07-25.zip
+            EquineSync_Governance_and_Implementation_Atlases_2026-07-25.zip.sha256
+          if-no-files-found: error
+          retention-days: 7
