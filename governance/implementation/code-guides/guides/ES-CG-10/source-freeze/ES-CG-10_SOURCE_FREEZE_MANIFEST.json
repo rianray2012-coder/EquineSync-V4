@@ -1,0 +1,1864 @@
+{
+  "baseline_commit": "ff2748796bf858f49a3f85bad0578850e1deb846",
+  "candidate_count": 2103,
+  "classification": "NORMATIVE_GUIDE_SOURCE_FREEZE",
+  "created_date": "2026-07-26",
+  "curation_method": "GUIDE_SPECIFIC_MINIMUM_AUTHORITY_SET",
+  "directory_manifests": {
+    "CGSRC-CGP005-0207": {
+      "children": [
+        {
+          "path": "backend/tests/README.md",
+          "sha256_checksum": "dd46a21b051566b2814c11e600ed39b539b2ebd58ab8311bb3eccb264b88c823"
+        },
+        {
+          "path": "backend/tests/__init__.py",
+          "sha256_checksum": "79c6e5a78be8a41e68702449dc2b62780553b87465cb0f699e7f520e54df875c"
+        },
+        {
+          "path": "backend/tests/_api_helpers.py",
+          "sha256_checksum": "38f2d9ca0c807a455cf4e8c9fcd66608538da834c0d4bb12d884dec193bf4db1"
+        },
+        {
+          "path": "backend/tests/_billing_helpers.py",
+          "sha256_checksum": "697681752b7424cc4de7324bfd9e2621272115de7d908f3a46029a682f1cfbf2"
+        },
+        {
+          "path": "backend/tests/_care_helpers.py",
+          "sha256_checksum": "ebe42fe2588662935b367901586568c65af9983aa8d3e741840d9adeebca55c5"
+        },
+        {
+          "path": "backend/tests/_ci_classification.py",
+          "sha256_checksum": "bab31b8a76e10ee364370fa7179cb0e8e250351383e399a2de5e772b1e3c388e"
+        },
+        {
+          "path": "backend/tests/_isolation_world.py",
+          "sha256_checksum": "e6a1cca9a9cabdafe7693b80dc0887fb65584a515085b91e33727d42680740cd"
+        },
+        {
+          "path": "backend/tests/_lazy_headers.py",
+          "sha256_checksum": "b0ebd4e1d9beaaaccdbe4f480e923bd6332a86c55c2c1dd3e403f731ed88ec2e"
+        },
+        {
+          "path": "backend/tests/_owner_helpers.py",
+          "sha256_checksum": "cf86324084af27181a92beaf308b62a84010b9f87420b4420c382407005bcef3"
+        },
+        {
+          "path": "backend/tests/_test_creds.py",
+          "sha256_checksum": "663575d12e8ca75ae2cb6b6d416d8eb56d9c9a7ff86a9535684b7e428727efff"
+        },
+        {
+          "path": "backend/tests/ci_known_failure_baseline.json",
+          "sha256_checksum": "1b51922055edf5e02e2fe7c9c178d016141bdad22c629f31f05878370d09bf0b"
+        },
+        {
+          "path": "backend/tests/ci_known_failure_gate.py",
+          "sha256_checksum": "6db2abc3203078e13ec08ba09b3b7d66fb8f0da2e4ad83e842d86d10237eea1e"
+        },
+        {
+          "path": "backend/tests/conftest.py",
+          "sha256_checksum": "4915fbcd9dc6470c688f8ad8548013c1a2b755c1f300c0988051f107c01a6294"
+        },
+        {
+          "path": "backend/tests/live_test_allowlist.txt",
+          "sha256_checksum": "eace94fa57994ce86bcbf6ff64892ba8f0272d2bed793e29b4126060630a308d"
+        },
+        {
+          "path": "backend/tests/test_4e_isolation_core.py",
+          "sha256_checksum": "31028e1ebc913852f7eeb464c1361847d8f4fb38f4e4cf11c2cb78c0853de232"
+        },
+        {
+          "path": "backend/tests/test_4e_isolation_engine.py",
+          "sha256_checksum": "ff59bec2515d6706728ae236dfa82bd4cbf68976d230bc19376b295ad8425a32"
+        },
+        {
+          "path": "backend/tests/test_admin_8_seed_scripts.py",
+          "sha256_checksum": "6c3c9e6fd2f4cc5c148609505b495ce7407ddd3f5fa342860df0e341be6fe8b7"
+        },
+        {
+          "path": "backend/tests/test_admin_billing_15e.py",
+          "sha256_checksum": "1c5b8e3d1e1582858dc0d4ae5d2fca576c49c0b9888df57c619635f0bee5546a"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin1.py",
+          "sha256_checksum": "2e35f68f9378db4d2b5c6cd55561840c2d1f7fffe686b864b0c71195934fe720"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin2.py",
+          "sha256_checksum": "8c9a0afe721c12de90022a4731b791aea25b55c9cc2c9c1432f891f2dc4cee57"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin3.py",
+          "sha256_checksum": "02e24dcfdb5c2af344f62e7b1399de2b67de27304986ca72cce8d39554e4e58a"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin4.py",
+          "sha256_checksum": "4f485fc223a384d6227489d398505caa009e34561ab8ae3e8f1c8964d0b5e50b"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin4b.py",
+          "sha256_checksum": "f164ce137ec251883d8d25e5e55971e0c9e6a770bd4842ddb5accc73aaecaaa3"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin5.py",
+          "sha256_checksum": "5fdd850a17f6ca95792fe0d1eb35a85abcc2959cb7fab0d99e7addf4429909c6"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin6.py",
+          "sha256_checksum": "3573bb1b23aa770d91d6602e7d754bd5c9419db6fbf16cff895db621086a0406"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin7a.py",
+          "sha256_checksum": "b641dd0e7a5773a6cc1c9883c595a1c369d0113561ac1da35fe489806f37d5cd"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin7a2.py",
+          "sha256_checksum": "5370e68e4a88de1fce69ced5f6fed43d7de7cd1d99e99de498ec1e365b20b9cb"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin7b.py",
+          "sha256_checksum": "5afb938d1972facb3edc2e5f8913c806e524d030ad5e62cc94b7d7de372f286e"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_route_lock_guard.py",
+          "sha256_checksum": "f074463b9f0e9b7639b8715c51fa48ca877b3da094eeb7ee03e44c29c122a352"
+        },
+        {
+          "path": "backend/tests/test_admin_routes.py",
+          "sha256_checksum": "7afa39396ed22a8dcf3b15536da7552cf6149b88f5758b9a6625e7cae5714656"
+        },
+        {
+          "path": "backend/tests/test_analytics_routes.py",
+          "sha256_checksum": "9d7f23e87201a1befc52aa9d6d399f94d29c0cf1eaf96eea58ac5d7bbb208ffb"
+        },
+        {
+          "path": "backend/tests/test_app_assembly.py",
+          "sha256_checksum": "70fd4a467009031aa912fd2858aafff166dbc90638ae7053b40efc6f8fbca671"
+        },
+        {
+          "path": "backend/tests/test_audit_5b.py",
+          "sha256_checksum": "511bb4ebcdad93823b3ebbb667954b3cd7fef0f554ff2eac21ee934862400c68"
+        },
+        {
+          "path": "backend/tests/test_audit_5c.py",
+          "sha256_checksum": "d727fb522de56528888a57ed5765ba1f739555164a51b1cd1579115a88253aaf"
+        },
+        {
+          "path": "backend/tests/test_audit_5d.py",
+          "sha256_checksum": "b2963f5ad0a38747bcc6305a50fadbbbd0fee15ce421cf6047feb72884e69e26"
+        },
+        {
+          "path": "backend/tests/test_audit_service.py",
+          "sha256_checksum": "05d7e75832fe5781c1a545229c19cc27c2919baf99373fc8fdfb466ac596d3d9"
+        },
+        {
+          "path": "backend/tests/test_auth_tokens.py",
+          "sha256_checksum": "30cdce1fc4369e9b00281b65f0cdc1822b173e92f21e08b7668cdd90b4346d73"
+        },
+        {
+          "path": "backend/tests/test_backlog_contracts.py",
+          "sha256_checksum": "ef8bf4f1fdd03864ba2d230d46547dc2688457c05fcb4bf19077d2a197057c79"
+        },
+        {
+          "path": "backend/tests/test_backlog_foundations.py",
+          "sha256_checksum": "a41ef737b74531e1ac4009907ceff36e0c1b708cece3eff7197d98788c645262"
+        },
+        {
+          "path": "backend/tests/test_barn_binding.py",
+          "sha256_checksum": "8368a995e46238ac68a8585faf2617dc0a1beeebeb8178fe4d0d04fb85923c0c"
+        },
+        {
+          "path": "backend/tests/test_billing_9a.py",
+          "sha256_checksum": "3bc1f1b9fcdd730457d05545f653505c482a551d20006e3eb15bfb7c0dea04a6"
+        },
+        {
+          "path": "backend/tests/test_billing_routes.py",
+          "sha256_checksum": "2cc4b32384181b5de5456101752d50ebc7664c5b515183be170d0d801f702775"
+        },
+        {
+          "path": "backend/tests/test_billing_scoping.py",
+          "sha256_checksum": "2a0cd28b011e22bca1ad41e595f6b45bdea1de33ac6a76c77073a709c40bd8e8"
+        },
+        {
+          "path": "backend/tests/test_build_next_10_staging_uat_closure.py",
+          "sha256_checksum": "991bb3e9a5b19f270443f4b296b34b3d73894d209e05700c2afa28df6a17a926"
+        },
+        {
+          "path": "backend/tests/test_build_next_11_staging_environment_proof.py",
+          "sha256_checksum": "06cb34b62d746f6310881ec6bb5a364c45b32b7dac78c3dbfb26ebfb38015b27"
+        },
+        {
+          "path": "backend/tests/test_build_next_12_closure.py",
+          "sha256_checksum": "685b559c43d7f2a7250f1117f6a61923285cbde53caafafc057fa3eacb3c19d6"
+        },
+        {
+          "path": "backend/tests/test_build_next_12_prep_staging_inputs.py",
+          "sha256_checksum": "467694118d6034a21e9a0435eb0ccdb58e67e54f5606966e1f8d3bbb42817d51"
+        },
+        {
+          "path": "backend/tests/test_build_next_12a_uat_account_seed.py",
+          "sha256_checksum": "e26ddc132edc833df1334aef75313b7ca81214bc950e6a60426177201e910aea"
+        },
+        {
+          "path": "backend/tests/test_build_next_13a_role_routing.py",
+          "sha256_checksum": "a12c7e86a0297938eaff0615a56d0dbe278faeef051218dca5697f77f3689246"
+        },
+        {
+          "path": "backend/tests/test_build_next_13b_role_navigation.py",
+          "sha256_checksum": "6cf06f75f0229d455a323d819297a26caa5640b8495c1050214a12d069aaf1f6"
+        },
+        {
+          "path": "backend/tests/test_build_next_13c_rider_intake_shell.py",
+          "sha256_checksum": "a8c9c1cb02f7badc4ec155d2409463c2fe13a9c278724a714b2d199a1d064cc9"
+        },
+        {
+          "path": "backend/tests/test_build_next_13d_guardian_minor_intake.py",
+          "sha256_checksum": "3e9011166f8110bc7cbccac31bc16d6b307c0acc93d20de3a9944238924193f2"
+        },
+        {
+          "path": "backend/tests/test_build_next_13e_owner_intake_shell.py",
+          "sha256_checksum": "37f1ce6c8292efd32d30414cb3b5bb639aa79b707648d1ae4570fdfc51a81455"
+        },
+        {
+          "path": "backend/tests/test_build_next_13f_barn_owner_intake_shell.py",
+          "sha256_checksum": "759b5c3893ef6445c37c571afd2b1d0c46ff0993e996d704609ab7791b361d6e"
+        },
+        {
+          "path": "backend/tests/test_build_next_13g_trainer_intake_shell.py",
+          "sha256_checksum": "d536e01dc8466c8d704f3b6e2ca1182c13a6c826c77921546226dc79c620b1ca"
+        },
+        {
+          "path": "backend/tests/test_build_next_13h_manager_intake_shell.py",
+          "sha256_checksum": "73fae69f591e45c8fe97b2c99f5d403a3558e3ea9971ecbaa2a5733771496304"
+        },
+        {
+          "path": "backend/tests/test_build_next_13i_staff_intake_shell.py",
+          "sha256_checksum": "7f843fdff5c775200c6a6f58fd82e6a378fef65b363941df36506fdbedfd1c14"
+        },
+        {
+          "path": "backend/tests/test_build_next_13j_role_first_login_matrix.py",
+          "sha256_checksum": "3bebb6a33b354321dfbd6acd2df75a300ce2687755091c8eb5dab134ed631c0c"
+        },
+        {
+          "path": "backend/tests/test_build_next_13k_role_flow_smoke.py",
+          "sha256_checksum": "cbdbce32467fea0365ae44f7a9e53c6827b6b1f761796fb6ccd8b26c26e04a3c"
+        },
+        {
+          "path": "backend/tests/test_build_next_13l_role_smoke_prep.py",
+          "sha256_checksum": "7b4e6fe59d16ad6b559ebd4d8f5b273cac89b3af03713e5b5efaaf13783f967e"
+        },
+        {
+          "path": "backend/tests/test_build_next_13m_role_smoke_evidence.py",
+          "sha256_checksum": "76a6a8c3fcb08217ff0962e14d377ff7752e6d6b8acf958817367cd094dcacd0"
+        },
+        {
+          "path": "backend/tests/test_build_next_13n_role_credential_readiness.py",
+          "sha256_checksum": "87dab7d46b0192ac893e23cbbe7bcd9e8a0e279d7c837a369703c7386b029e56"
+        },
+        {
+          "path": "backend/tests/test_build_next_13o_role_screenshot_pass.py",
+          "sha256_checksum": "e11bbe53b3607efbcf4e9949050686d2bef6106331ad91b518484970d23c44ac"
+        },
+        {
+          "path": "backend/tests/test_build_next_13p_role_home_title_case.py",
+          "sha256_checksum": "6867b1fe0017e019e8784a75c31b9dda16857738ad59c6762ff6dfd13951edce"
+        },
+        {
+          "path": "backend/tests/test_build_next_15a_today_pulse_contract.py",
+          "sha256_checksum": "9b80a9e4eff7dd6d36a94a960a597ba0589459b5b374810b62ca7e4c6e02e1f5"
+        },
+        {
+          "path": "backend/tests/test_build_next_15c_a_today_pulse_frontend_wiring.py",
+          "sha256_checksum": "14920e5f794046fc5fd111ec61688ee0f580c1f9e2a417cb56f7ea41d033950d"
+        },
+        {
+          "path": "backend/tests/test_build_next_15c_b_barn_visibility_policy.py",
+          "sha256_checksum": "978e808029fba5e3885e9f4a8e990a291b28f010004ff580a40cac2faa69ba59"
+        },
+        {
+          "path": "backend/tests/test_build_next_15c_c_today_pulse_role_home_evidence.py",
+          "sha256_checksum": "e9aa29716e6b1bd71971e567f8c5203b72bd83d68f65e43a50e8e8236058473d"
+        },
+        {
+          "path": "backend/tests/test_build_next_15d_today_pulse_uat_evidence.py",
+          "sha256_checksum": "db9bd31d364dff49cedc14e70eb393c906c1ccff2ea82e0a946c65249fc25705"
+        },
+        {
+          "path": "backend/tests/test_build_next_15e_today_pulse_founder_acceptance_ledger.py",
+          "sha256_checksum": "ac41f4e7354f11ea2102e53f7397aff35607b427c1b98a37a42f9bc8be9a645e"
+        },
+        {
+          "path": "backend/tests/test_build_next_15f1_live_today_pulse_walkthrough.py",
+          "sha256_checksum": "7da523d4e060d5c400d505e2b075c6b436f2c2a69e9e1b8b9cca858e202c23b9"
+        },
+        {
+          "path": "backend/tests/test_build_next_15f_live_today_pulse_walkthrough.py",
+          "sha256_checksum": "19dfc81be37931dfcffef72d3bb534756f7ad6e5785008a05bba6aed17b42e33"
+        },
+        {
+          "path": "backend/tests/test_build_next_16b_setup_readiness_contract.py",
+          "sha256_checksum": "f5371b182968ccab06124ae6686f1419ce5deea2b241535cc9fd055ba295ad3c"
+        },
+        {
+          "path": "backend/tests/test_build_next_16c_frontend_route_separation.py",
+          "sha256_checksum": "606ca42e0cc6e575ca96e77a3ef2a4d96e5e3901ad8964e3b72d756eabf3709b"
+        },
+        {
+          "path": "backend/tests/test_build_next_17a_launch_trust_route_taxonomy.py",
+          "sha256_checksum": "d3f3820ae9a73cf8d3e2a8abd8a8cddce53a11631fcf27f1af597345cdf151a8"
+        },
+        {
+          "path": "backend/tests/test_build_next_17b_role_intake_split.py",
+          "sha256_checksum": "a70c677c681958eb72099f874fcc4f0fa1c6822dc5de50b75629662836ebd48a"
+        },
+        {
+          "path": "backend/tests/test_build_next_17c_role_journey_launch_trust_evidence.py",
+          "sha256_checksum": "1411d994e103362f07ebe40954dee85e52cd9b3c5c1ef37b656d71ba4c1752d1"
+        },
+        {
+          "path": "backend/tests/test_build_next_17d_role_journey_cleanup.py",
+          "sha256_checksum": "cc1dc1ce7cb37ea67135ee18318656288306317e7365265c1fd8fa641449cc3f"
+        },
+        {
+          "path": "backend/tests/test_build_next_18a_provider_live_proof.py",
+          "sha256_checksum": "a9a52d56384753153d23d25287ea5f6ae46f4901958f8955f04c349bb889aeaa"
+        },
+        {
+          "path": "backend/tests/test_build_next_18b_production_environment_proof.py",
+          "sha256_checksum": "c9345d848a928991b5b5d11a11039642f59edeb6228fb0183790383c9f129e47"
+        },
+        {
+          "path": "backend/tests/test_build_next_18c_uat_role_refresh.py",
+          "sha256_checksum": "2a7138658580db51ca66a7ff7761ac4bfc4f45229626e7557d7308493ab9d0ad"
+        },
+        {
+          "path": "backend/tests/test_build_next_18d_field_reliability_proof.py",
+          "sha256_checksum": "758ebd93cf9d7ca60e63a1ea154e02c88b6aaed5541817475547ed7c424dd520"
+        },
+        {
+          "path": "backend/tests/test_build_next_18e_app_store_readiness_proof.py",
+          "sha256_checksum": "d8cd2570a2f2c538eaa754f7fa18676e5157d0f6eb83981fcdb5f451fce252e0"
+        },
+        {
+          "path": "backend/tests/test_build_next_19_founder_acceptance_ledger.py",
+          "sha256_checksum": "439e9d52430c9c739c72b0d2788ca23adec5e605777984494a2adaf76d9e2b40"
+        },
+        {
+          "path": "backend/tests/test_build_next_1_billing_launch_readiness.py",
+          "sha256_checksum": "0d6b402a10fca8c15d3321cd05ba8c00983381048ad0946eb257dc7edea645ce"
+        },
+        {
+          "path": "backend/tests/test_build_next_20_bn12_closure.py",
+          "sha256_checksum": "aeaadb780b79d3dc0e6a01cfed55c97e633b8b89ea58f2bbd1685cb432727c70"
+        },
+        {
+          "path": "backend/tests/test_build_next_21_pilot_go_no_go.py",
+          "sha256_checksum": "4cd2e00ed4aa3c7873ebaf678ebc7253f7f3ca8fad09e060e205d2705b240278"
+        },
+        {
+          "path": "backend/tests/test_build_next_2_mobile_readiness.py",
+          "sha256_checksum": "5782c7892a79b633922a997f843895c16877e04a618341553a7933ff5b90f31b"
+        },
+        {
+          "path": "backend/tests/test_build_next_2b_mobile_screenshot_gate.py",
+          "sha256_checksum": "8e4e8b0c685d5928ddb9281f0458a93529f9866ddd169a072c856faf0cda19f1"
+        },
+        {
+          "path": "backend/tests/test_build_next_3_multi_barn_gap_report.py",
+          "sha256_checksum": "eddf102e9a52f8ed0e3eee15173ed2f626d5aba6afd8201bfd6870b3648eaaa2"
+        },
+        {
+          "path": "backend/tests/test_build_next_3a_account_memberships.py",
+          "sha256_checksum": "b89c7231a1e538367c1a8530dce537ae0fe61ca43966940b07b447d123870f9c"
+        },
+        {
+          "path": "backend/tests/test_build_next_3b_account_context.py",
+          "sha256_checksum": "bca197331f95acd5a86fd3bd5edcdbda3d8f950de5d2bb2b0a417621ca9eb8ca"
+        },
+        {
+          "path": "backend/tests/test_build_next_3c_route_context.py",
+          "sha256_checksum": "e5ec44dd6395cfbb622151ea2fd1884bdfa9e92ccfd4f2600454c0b1c0a9d41b"
+        },
+        {
+          "path": "backend/tests/test_build_next_3d_task_context.py",
+          "sha256_checksum": "b5b6ded06b065911c8a50192c8c64743db8816f57fffc478b624adb64e92c5b9"
+        },
+        {
+          "path": "backend/tests/test_build_next_4_invites_onboarding.py",
+          "sha256_checksum": "a4b4bf94f33c43bb71756a41a1fabb86d51f61e498612e076297fa62db4d0450"
+        },
+        {
+          "path": "backend/tests/test_build_next_5a_minor_safety_rules.py",
+          "sha256_checksum": "f6a246622831a4a7b7d3bd40648006e0f424d4c2742ebcab36657571d1f63559"
+        },
+        {
+          "path": "backend/tests/test_build_next_5b_guardian_student_invites.py",
+          "sha256_checksum": "02d732cbfa4a82a8334e15d26a7ebfb6f2848e0abf1cd60fa5514a062e45ab68"
+        },
+        {
+          "path": "backend/tests/test_build_next_5c_minor_communication_guard.py",
+          "sha256_checksum": "b6acc0fe0f478ae7322b5eed9639feec12b9114f7ad599dffd35e89d3b3bc1e5"
+        },
+        {
+          "path": "backend/tests/test_build_next_5d_minor_parent_evidence.py",
+          "sha256_checksum": "5676e3aee50d9fc005eafde048b6b627babeb2c82cb68b32a03376ca512fcce6"
+        },
+        {
+          "path": "backend/tests/test_build_next_6_signature_connector.py",
+          "sha256_checksum": "55637bc0cdb0c28f43194a00be5a5528b8f7cbd85f8222ba3acd6067b54c879a"
+        },
+        {
+          "path": "backend/tests/test_build_next_6b_document_workflow_contract.py",
+          "sha256_checksum": "214a9692cbd1c5eef1827123f8b4d13c0d8a3c4163e89c593651f2408ba0d6e8"
+        },
+        {
+          "path": "backend/tests/test_build_next_6c_document_request_foundation.py",
+          "sha256_checksum": "9b70b264df400dd7f033e0cbe8e12f4e98d468e96fffb6f956b1b04f1b10c285"
+        },
+        {
+          "path": "backend/tests/test_build_next_6d_docusign_jwt_smoke.py",
+          "sha256_checksum": "8774bcee9f1f419078f6ce9d5bd6c72df4a1bdf3bc63e749cf561d94e861eb2d"
+        },
+        {
+          "path": "backend/tests/test_build_next_6e_docusign_sandbox_envelope.py",
+          "sha256_checksum": "922bf3130a765abe0992a08a57350327c59e3001b358c289421ce3bd203e9d59"
+        },
+        {
+          "path": "backend/tests/test_build_next_6f_docusign_webhook_status_sync.py",
+          "sha256_checksum": "0cb3b868140d4b48009a4ece8ea69e7daf0fc816c63f4823c22f315703476eb2"
+        },
+        {
+          "path": "backend/tests/test_build_next_7_launch_gate.py",
+          "sha256_checksum": "e72f90f7756b35f06cfaa89ce33eab589a7350237fe01579714dfc9cb2bb72c7"
+        },
+        {
+          "path": "backend/tests/test_build_next_7a_staging_uat_evidence.py",
+          "sha256_checksum": "d046b9415104a1612e67f3c7167bbdaf3a883c683eba43c563c04837cf882730"
+        },
+        {
+          "path": "backend/tests/test_build_next_8_go_live_runbook.py",
+          "sha256_checksum": "6837f16d396d12e55f97c8e9edcb7a8da6d84932f3e0ddb9f5b16ff291470f60"
+        },
+        {
+          "path": "backend/tests/test_build_next_9_staging_uat_execution.py",
+          "sha256_checksum": "f9103a424be7875b7462bacbafba37e20dc98f9cfbe2f5025a175af85d160d0f"
+        },
+        {
+          "path": "backend/tests/test_care_filtering.py",
+          "sha256_checksum": "426862e4489f5cb0bc2e67fe8f18533e0435b56e40dfeb08271819e0f88f42e0"
+        },
+        {
+          "path": "backend/tests/test_care_integrity.py",
+          "sha256_checksum": "a0aa10cc4232fb643aa8617a249be11046214f213df438de80a26b31c7ebe228"
+        },
+        {
+          "path": "backend/tests/test_care_routes.py",
+          "sha256_checksum": "a5b40eb090b119509e955dff2d9fbc2b38fa1c9b860c559fa34d0fd209f54592"
+        },
+        {
+          "path": "backend/tests/test_care_scoping.py",
+          "sha256_checksum": "539d8018de898b2432ea91ea8ddded442e275a6332f239c934fddfe061442bdb"
+        },
+        {
+          "path": "backend/tests/test_care_state_guards.py",
+          "sha256_checksum": "86f88ffd147bed7e17678c66b69137159e18a1b5ae448c332d847946b8d0b212"
+        },
+        {
+          "path": "backend/tests/test_ci_database_isolation.py",
+          "sha256_checksum": "ec1c975ccde28da52f30f18067ecede6227bc30f8e6f070701ec77ce315bb94a"
+        },
+        {
+          "path": "backend/tests/test_ci_environment_defaults.py",
+          "sha256_checksum": "7973794c5fd329a5f7740da92092fb99a9fbe6bedca4b122ef9fb8e20732147a"
+        },
+        {
+          "path": "backend/tests/test_ci_marker_classification.py",
+          "sha256_checksum": "fa2c4e37f848d24d4f7ba5b0ff545f39b1c2b85c8bea00c5098a9e265900dbd4"
+        },
+        {
+          "path": "backend/tests/test_config.py",
+          "sha256_checksum": "7013b16fd1bcf66bce3a9deb7d8c1a3b1c02877d56615b2bf07a58691f8ab5ca"
+        },
+        {
+          "path": "backend/tests/test_core_auth_verification_gate.py",
+          "sha256_checksum": "791fcba26707227f8cd822d640355184ba1c0cd9a096e31471fa3bcea5385596"
+        },
+        {
+          "path": "backend/tests/test_dashboard_invites_scoping.py",
+          "sha256_checksum": "9f9c041183839bc9804104a811fb62c6c636bbfeb0b842c1e5952bb23f9e9285"
+        },
+        {
+          "path": "backend/tests/test_digest_branding.py",
+          "sha256_checksum": "89f539d9e742446acec05f054bd1415bf534251876d30fe6ceef08fc936a4f9c"
+        },
+        {
+          "path": "backend/tests/test_digests_routes.py",
+          "sha256_checksum": "41bd80218828f01f474c1bb9aede1dd6df3c83efd5e6a8f46f09c33855d6c550"
+        },
+        {
+          "path": "backend/tests/test_dispatch_retry.py",
+          "sha256_checksum": "09a3a68a9ea1f07635f76bb0856f6b48ec16da1299e4cc3d13d6cadba91c2402"
+        },
+        {
+          "path": "backend/tests/test_equinesync.py",
+          "sha256_checksum": "7d9fe077814995e88b0502e30c609aeb4d35398b1432818dd638fc8ce8df1862"
+        },
+        {
+          "path": "backend/tests/test_founder_crud_sprint.py",
+          "sha256_checksum": "f2886267a755bca0f1404fb4072ba947a6d48472bbe2263f27c76793b6874a13"
+        },
+        {
+          "path": "backend/tests/test_health_10b.py",
+          "sha256_checksum": "443bf17711d7834be90ef40f60ec50fa7dbcd1915c6b40c7b35bb602580baba5"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1a.py",
+          "sha256_checksum": "fb42105fa833e6fc9d507746467fec0ebb405ea98e26ee0b4592299f5e905198"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1b.py",
+          "sha256_checksum": "42158f634772ce778c3113a8d9beec717215f362470688e9ca74ad46df225d10"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1c.py",
+          "sha256_checksum": "871e322b0566d1696df8e2c14f216bb3aa29ca3e21b399ac1350abf706133aae"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1d.py",
+          "sha256_checksum": "03906e66c690c62267ead2bff9cb6210cc14e2b06b51065af67ceded0e6a0b09"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1e.py",
+          "sha256_checksum": "7f58949fe6a71eca02a8092af58f06fb115566abda1ad1f4788b3eba057ff4e9"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1f.py",
+          "sha256_checksum": "c2bc7610012c34eb894670aad19aef5f259efc2ea5196da02567246f6f6af63b"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1g.py",
+          "sha256_checksum": "441eb0636259f67cdbe9f6ddf64316ab03cdf7d3cfa6e98434845c92a04f4de1"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1h.py",
+          "sha256_checksum": "782a64c29e07053feb77763c092ef877d68fd86ea40085cf1f99cb5a6f7f9072"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1i.py",
+          "sha256_checksum": "2ebdc8d00a2947f7de1fac4e59153acce180f1c0a2b5855d57a65ee4022e65c0"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1j.py",
+          "sha256_checksum": "74edff659b6c6e4b1c4740a864dedfda5852c3d4d8eed459ca2e9e37339f1f15"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1k.py",
+          "sha256_checksum": "7fbd22fb30afcdd48f5f3b49b3a02d5e582ca87bdafe88d8513ff18ac5a24a25"
+        },
+        {
+          "path": "backend/tests/test_horses_routes.py",
+          "sha256_checksum": "17ee35e65f67e6d105db72299a7d040e6524bc730e813010e176f13c792c1229"
+        },
+        {
+          "path": "backend/tests/test_horses_scoping.py",
+          "sha256_checksum": "f03487eb9c9ac606d54bce29401679926ce6b52139e5b3ad9bf8098a6422fbd0"
+        },
+        {
+          "path": "backend/tests/test_inventory.json",
+          "sha256_checksum": "6ffdefddc939ea1df8b516498db78b2a67bcf930ff5d04ed4c5da745c9411ae6"
+        },
+        {
+          "path": "backend/tests/test_inventory.md",
+          "sha256_checksum": "d823a779d1fa373c02840e39122074dba8a16366ff378c651febf5baa71de8a6"
+        },
+        {
+          "path": "backend/tests/test_invites_and_analytics.py",
+          "sha256_checksum": "b1a01d14541f6f60ef39d717edd5c3be0a5607533e49675e438385ff4d889ec3"
+        },
+        {
+          "path": "backend/tests/test_logging_10a.py",
+          "sha256_checksum": "1f64d6342790c54ce41dd527a914bef56c2fc32798b79c625d7fbd86a69103c2"
+        },
+        {
+          "path": "backend/tests/test_login_lockout.py",
+          "sha256_checksum": "40525d21e45696fcdeebfc6a73fc20e7162e78c5fe0ae732d52511dfe780009c"
+        },
+        {
+          "path": "backend/tests/test_marketplace_signup.py",
+          "sha256_checksum": "9d5ff66cdbde976b8d906f7f28eaa83c5a8fc8200a7261629dd42abb2ee55c8b"
+        },
+        {
+          "path": "backend/tests/test_membership_legacy_stripe_webhook_security.py",
+          "sha256_checksum": "d259b030287a884b0aa85006b6b832869cb9aeaa96b86a0bf45679e381da3d30"
+        },
+        {
+          "path": "backend/tests/test_onboarding.py",
+          "sha256_checksum": "89a1c09c18814383e7e6f90e7636679a71ac37021385909d8bdea44b1c22c561"
+        },
+        {
+          "path": "backend/tests/test_onboarding_reports_scoping.py",
+          "sha256_checksum": "aa44480821b9edbaf3db3852014bc2887b8ddd1898e290f960ae45877571166f"
+        },
+        {
+          "path": "backend/tests/test_operations_routes.py",
+          "sha256_checksum": "14c07dfbb3047884ab467cca25b0aff99c0f3260aa9066ed30fb8f4aefb225c3"
+        },
+        {
+          "path": "backend/tests/test_operations_scoping.py",
+          "sha256_checksum": "a7589a2eaff19cd1518dd883bb8bcdb28e8b03d6c1ae46d32cc5c85126218d68"
+        },
+        {
+          "path": "backend/tests/test_owner_billing.py",
+          "sha256_checksum": "720570d2bfab930621f922cc98b1466b39ee1e1950288bc7fe394578b626b196"
+        },
+        {
+          "path": "backend/tests/test_owner_trust.py",
+          "sha256_checksum": "38c10dbaa73dbe28c8e44fa94ea9283ca62e54937adf46d893d8da4ed177afe6"
+        },
+        {
+          "path": "backend/tests/test_owner_trust_edges.py",
+          "sha256_checksum": "2746e73439f76508195702d784e44f639b000289a3a039a977201cad24e52b99"
+        },
+        {
+          "path": "backend/tests/test_owner_upcoming.py",
+          "sha256_checksum": "fe57e78f2f04031fc5cb5d7f4cd15a3f2836653e05c3628ee501c4de38eb5bcb"
+        },
+        {
+          "path": "backend/tests/test_owner_updates.py",
+          "sha256_checksum": "ed5cc29d408fbff1d3ff81283b6864a1069619b8acdd6a2ee6f15deab564d4d0"
+        },
+        {
+          "path": "backend/tests/test_permissions.py",
+          "sha256_checksum": "eb46b72dd73b94207ad1b73dc4345459749083c246a2ccec0eaeeecedbf23b09"
+        },
+        {
+          "path": "backend/tests/test_permissions_wiring.py",
+          "sha256_checksum": "09f00dabe81ad6ef4c0496431e9384268f45aef8ed9693cb71a46ac8da2e52e8"
+        },
+        {
+          "path": "backend/tests/test_phase15r_billing_channels.py",
+          "sha256_checksum": "61972ff200bae99fbcf5022d0d426dfc27c026e54adbc53d532fdab42f8f14fb"
+        },
+        {
+          "path": "backend/tests/test_phase15r_billing_seats.py",
+          "sha256_checksum": "a7ea3fa2142ee454edbc27541263a2a76eca997b3952b7aea483bea31a664325"
+        },
+        {
+          "path": "backend/tests/test_phase15r_entitlements.py",
+          "sha256_checksum": "c73b1510e2860b5490a0772048f97352f01c94e9ef313dbf3bee82bc84918f57"
+        },
+        {
+          "path": "backend/tests/test_phase15r_migration_dry_run.py",
+          "sha256_checksum": "ff165bfb80e7f563b9ff69fed3449f4878a90555c9111986889108c4606f4a0d"
+        },
+        {
+          "path": "backend/tests/test_phase15r_stripe_catalog.py",
+          "sha256_checksum": "f27ca1d66627c7999c6e08bcf69502abe9cca528ef872342e37dfbd4963e8a1d"
+        },
+        {
+          "path": "backend/tests/test_phase15r_usage_prompts.py",
+          "sha256_checksum": "1d8f2ff4c525c440fc3aa9bf6aeb09e67f9026f543e827a5f844f8aca166acc8"
+        },
+        {
+          "path": "backend/tests/test_phase2.py",
+          "sha256_checksum": "61d2f9cc237220e0d9ace8050faa476b695218022ca031e1a6a1ee0cbad36e70"
+        },
+        {
+          "path": "backend/tests/test_phase2c_auth.py",
+          "sha256_checksum": "2d80c78014419d7dcd7fe5a7ba043e29b5be9f81e6ff0dbb63c6563c37d94ebb"
+        },
+        {
+          "path": "backend/tests/test_phase4a_barn_id.py",
+          "sha256_checksum": "169e9a10f9043add9eff525da883ce58896a2f0c250836b724ddc3661f6b440c"
+        },
+        {
+          "path": "backend/tests/test_rate_limit.py",
+          "sha256_checksum": "18c3d8c39f10e49c5c87ca57516e244f5bb888c18d4ab6944312a158486f38a3"
+        },
+        {
+          "path": "backend/tests/test_recurring_charges.py",
+          "sha256_checksum": "7d73a915123644210c3420d495665044d80e5d2e50b6182888cf21195510215f"
+        },
+        {
+          "path": "backend/tests/test_reports_and_nudges.py",
+          "sha256_checksum": "d436e1dcecc037f77f0513c9a12a92d2a5a16b87934cc450df4f457a49d86749"
+        },
+        {
+          "path": "backend/tests/test_review_queue_and_lifecycle.py",
+          "sha256_checksum": "9948b507302fa6e3bd176d53e8b6d45994e489a3ddecb90c6372e9ab90559273"
+        },
+        {
+          "path": "backend/tests/test_rf10_service_provider_care_partner.py",
+          "sha256_checksum": "447c016927979c969607fc212671417484bc4b3bbeb00ddeebe215433c5a3544"
+        },
+        {
+          "path": "backend/tests/test_rf11_property_location_map_community_help.py",
+          "sha256_checksum": "d739caa103f3b3ab87faf457a822d45f24683fc6624e1a48e3a388a1814414ae"
+        },
+        {
+          "path": "backend/tests/test_rf12_billing_payments_exports_financial_truth.py",
+          "sha256_checksum": "9041f9812d4b214311d6467e0e2e5e2915c15114baa4b2a3da46a8aff0772bfe"
+        },
+        {
+          "path": "backend/tests/test_rf13_messaging_notifications_delivery_truth.py",
+          "sha256_checksum": "d38470a0ba80c81f8f91f83403f9efa918ab0d249b545a8ef5e83a02f1d55a84"
+        },
+        {
+          "path": "backend/tests/test_rf14_documents_signatures_storage_consolidation.py",
+          "sha256_checksum": "4121fb525584c4a0d484acc3081bc75f890c9f99c17e1bf56475b939125f872b"
+        },
+        {
+          "path": "backend/tests/test_rf15_offline_lock_screen_field_reliability.py",
+          "sha256_checksum": "a726501a62c8f0e19d6cc66b63e54835eb562aeec4911d55b243555e0560598e"
+        },
+        {
+          "path": "backend/tests/test_rf16_pwa_native_app_store_readiness.py",
+          "sha256_checksum": "2f76a2949ff540054e30f7623b7fe68b10ccb6d8ce29661760fa34be94f54b98"
+        },
+        {
+          "path": "backend/tests/test_rf17_feature_shell_ux_truth.py",
+          "sha256_checksum": "38cb99ff23c0ba0e60298f5a75782ab4321a74da1028425ecc48c71095a76258"
+        },
+        {
+          "path": "backend/tests/test_rf18_qa_uat_public_launch_readiness.py",
+          "sha256_checksum": "1ea48e4bd74a9869a8002da9de7aefbfd6a5f10399aee5670f33bfbf8ee8d706"
+        },
+        {
+          "path": "backend/tests/test_rf19_staging_uat_evidence_capture.py",
+          "sha256_checksum": "281c90e4b71f86208b23db4ae791ee0f99970bdb70177e89d4f686581ce2cd11"
+        },
+        {
+          "path": "backend/tests/test_rf1_data_fences_capability_gates.py",
+          "sha256_checksum": "e185006685bfcf8c9b691576a2619452b9b462df3a780619276abc989e4b0f67"
+        },
+        {
+          "path": "backend/tests/test_rf2_identity_access_migration.py",
+          "sha256_checksum": "4bb69d37fc670baa0d76657699d97b7d77b1b41eb91e173839011e59fa07fbed"
+        },
+        {
+          "path": "backend/tests/test_rf3_onboarding_import_setup.py",
+          "sha256_checksum": "b404976b93cd45a95834e507d1c13f9a6153ae102f522e4a8b63bed35d458a68"
+        },
+        {
+          "path": "backend/tests/test_rf4_feature_completion_certification.py",
+          "sha256_checksum": "bd2f3a4be73a0aa4ef912eb2968fdc6eb9f1f9f227998b913a5e3f2c9098030b"
+        },
+        {
+          "path": "backend/tests/test_rf5_web_enrollment_account_health.py",
+          "sha256_checksum": "3d063a1fa55c3504a1020902faf27a808cc4e4da4e26aba2ce2cc9b93156c69f"
+        },
+        {
+          "path": "backend/tests/test_rf6_canonical_systems_consolidation.py",
+          "sha256_checksum": "4e7a253efe560c8f1043e087a44a2a5475c573aefa1b0f56d4e477e610aad9d1"
+        },
+        {
+          "path": "backend/tests/test_rf7_owner_client_portal_hardening.py",
+          "sha256_checksum": "7ddec22bc83033453b7d969b9959cbbb67b9771db6b982edd1211af455730af9"
+        },
+        {
+          "path": "backend/tests/test_rf8_staff_workforce_model.py",
+          "sha256_checksum": "e1ca064af9589c917d34575d8ef79d4cb57b123b4b2da74f53c270a80063b866"
+        },
+        {
+          "path": "backend/tests/test_rf9_trainer_operating_center.py",
+          "sha256_checksum": "029e574b987d9d345d3bb9829ca70819a74c7c5f73773ae061be683a9c8c8ce5"
+        },
+        {
+          "path": "backend/tests/test_security_patch_2e.py",
+          "sha256_checksum": "fea0912032f8a73e7e155f6f16410d3e994f0319ad99e0494dd5eeeef4f5db0a"
+        },
+        {
+          "path": "backend/tests/test_subscription_emails_15d.py",
+          "sha256_checksum": "123687a3cfdc2734856593a66b0793263fa4fafe9f83b9e829fe4ebc17bda069"
+        },
+        {
+          "path": "backend/tests/test_subscriptions_15a.py",
+          "sha256_checksum": "6d4447a5b00ea3e7f6a75c6e562b71f9dbf729f83aadf5e5e8551296542c820e"
+        },
+        {
+          "path": "backend/tests/test_subscriptions_15b.py",
+          "sha256_checksum": "2bd382c094ef0113a99a32f26196a7a31286e366b0a4608555a232815d490335"
+        },
+        {
+          "path": "backend/tests/test_subscriptions_15g.py",
+          "sha256_checksum": "45c27953f6e48f1c06ed53c8ae5b749460bcb2598543c74e677cc5440195fde7"
+        },
+        {
+          "path": "backend/tests/test_system_routes.py",
+          "sha256_checksum": "4c6b8e13f95e264ceafa52ed5bde66d4a01d96bc70742e78058a722af9e21e96"
+        },
+        {
+          "path": "backend/tests/test_task_engine.py",
+          "sha256_checksum": "1b8577db2ccc35c5b0d5c47d65e9ddfbdee1591c8401c50e4a828643e782bf45"
+        },
+        {
+          "path": "backend/tests/test_task_routes_inventory.py",
+          "sha256_checksum": "38658535cb1c5884a52c4acf3116de4a026e29f1250acb809d62ade369a8eba8"
+        },
+        {
+          "path": "backend/tests/test_taskengine_reconciliation_scoping.py",
+          "sha256_checksum": "dd984b7023b5ad82eb839b84a086362eabe3071ab49cfe60f4c0b610b693103b"
+        },
+        {
+          "path": "backend/tests/test_tenancy.py",
+          "sha256_checksum": "83f17e674272b20b4232791476893a4fa81323d9ae3e918fb73a8d5f711dbf80"
+        },
+        {
+          "path": "backend/tests/test_weekly_recap.py",
+          "sha256_checksum": "e33c0e7c0dd6cb762849053f372f88b79a7972489c2548576158ac09c5fd2945"
+        },
+        {
+          "path": "backend/tests/test_wellness_pulse.py",
+          "sha256_checksum": "421fe5ab355e26b2955342f4df8b47b7b98204a4d812a85ad1985fe695ed9b1e"
+        }
+      ],
+      "repository_path": "backend/tests",
+      "tracked_child_count": 201
+    },
+    "CGSRC-TEST-0001": {
+      "children": [
+        {
+          "path": "backend/tests/README.md",
+          "sha256_checksum": "dd46a21b051566b2814c11e600ed39b539b2ebd58ab8311bb3eccb264b88c823"
+        },
+        {
+          "path": "backend/tests/__init__.py",
+          "sha256_checksum": "79c6e5a78be8a41e68702449dc2b62780553b87465cb0f699e7f520e54df875c"
+        },
+        {
+          "path": "backend/tests/_api_helpers.py",
+          "sha256_checksum": "38f2d9ca0c807a455cf4e8c9fcd66608538da834c0d4bb12d884dec193bf4db1"
+        },
+        {
+          "path": "backend/tests/_billing_helpers.py",
+          "sha256_checksum": "697681752b7424cc4de7324bfd9e2621272115de7d908f3a46029a682f1cfbf2"
+        },
+        {
+          "path": "backend/tests/_care_helpers.py",
+          "sha256_checksum": "ebe42fe2588662935b367901586568c65af9983aa8d3e741840d9adeebca55c5"
+        },
+        {
+          "path": "backend/tests/_ci_classification.py",
+          "sha256_checksum": "bab31b8a76e10ee364370fa7179cb0e8e250351383e399a2de5e772b1e3c388e"
+        },
+        {
+          "path": "backend/tests/_isolation_world.py",
+          "sha256_checksum": "e6a1cca9a9cabdafe7693b80dc0887fb65584a515085b91e33727d42680740cd"
+        },
+        {
+          "path": "backend/tests/_lazy_headers.py",
+          "sha256_checksum": "b0ebd4e1d9beaaaccdbe4f480e923bd6332a86c55c2c1dd3e403f731ed88ec2e"
+        },
+        {
+          "path": "backend/tests/_owner_helpers.py",
+          "sha256_checksum": "cf86324084af27181a92beaf308b62a84010b9f87420b4420c382407005bcef3"
+        },
+        {
+          "path": "backend/tests/_test_creds.py",
+          "sha256_checksum": "663575d12e8ca75ae2cb6b6d416d8eb56d9c9a7ff86a9535684b7e428727efff"
+        },
+        {
+          "path": "backend/tests/ci_known_failure_baseline.json",
+          "sha256_checksum": "1b51922055edf5e02e2fe7c9c178d016141bdad22c629f31f05878370d09bf0b"
+        },
+        {
+          "path": "backend/tests/ci_known_failure_gate.py",
+          "sha256_checksum": "6db2abc3203078e13ec08ba09b3b7d66fb8f0da2e4ad83e842d86d10237eea1e"
+        },
+        {
+          "path": "backend/tests/conftest.py",
+          "sha256_checksum": "4915fbcd9dc6470c688f8ad8548013c1a2b755c1f300c0988051f107c01a6294"
+        },
+        {
+          "path": "backend/tests/live_test_allowlist.txt",
+          "sha256_checksum": "eace94fa57994ce86bcbf6ff64892ba8f0272d2bed793e29b4126060630a308d"
+        },
+        {
+          "path": "backend/tests/test_4e_isolation_core.py",
+          "sha256_checksum": "31028e1ebc913852f7eeb464c1361847d8f4fb38f4e4cf11c2cb78c0853de232"
+        },
+        {
+          "path": "backend/tests/test_4e_isolation_engine.py",
+          "sha256_checksum": "ff59bec2515d6706728ae236dfa82bd4cbf68976d230bc19376b295ad8425a32"
+        },
+        {
+          "path": "backend/tests/test_admin_8_seed_scripts.py",
+          "sha256_checksum": "6c3c9e6fd2f4cc5c148609505b495ce7407ddd3f5fa342860df0e341be6fe8b7"
+        },
+        {
+          "path": "backend/tests/test_admin_billing_15e.py",
+          "sha256_checksum": "1c5b8e3d1e1582858dc0d4ae5d2fca576c49c0b9888df57c619635f0bee5546a"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin1.py",
+          "sha256_checksum": "2e35f68f9378db4d2b5c6cd55561840c2d1f7fffe686b864b0c71195934fe720"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin2.py",
+          "sha256_checksum": "8c9a0afe721c12de90022a4731b791aea25b55c9cc2c9c1432f891f2dc4cee57"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin3.py",
+          "sha256_checksum": "02e24dcfdb5c2af344f62e7b1399de2b67de27304986ca72cce8d39554e4e58a"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin4.py",
+          "sha256_checksum": "4f485fc223a384d6227489d398505caa009e34561ab8ae3e8f1c8964d0b5e50b"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin4b.py",
+          "sha256_checksum": "f164ce137ec251883d8d25e5e55971e0c9e6a770bd4842ddb5accc73aaecaaa3"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin5.py",
+          "sha256_checksum": "5fdd850a17f6ca95792fe0d1eb35a85abcc2959cb7fab0d99e7addf4429909c6"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin6.py",
+          "sha256_checksum": "3573bb1b23aa770d91d6602e7d754bd5c9419db6fbf16cff895db621086a0406"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin7a.py",
+          "sha256_checksum": "b641dd0e7a5773a6cc1c9883c595a1c369d0113561ac1da35fe489806f37d5cd"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin7a2.py",
+          "sha256_checksum": "5370e68e4a88de1fce69ced5f6fed43d7de7cd1d99e99de498ec1e365b20b9cb"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_admin7b.py",
+          "sha256_checksum": "5afb938d1972facb3edc2e5f8913c806e524d030ad5e62cc94b7d7de372f286e"
+        },
+        {
+          "path": "backend/tests/test_admin_portal_route_lock_guard.py",
+          "sha256_checksum": "f074463b9f0e9b7639b8715c51fa48ca877b3da094eeb7ee03e44c29c122a352"
+        },
+        {
+          "path": "backend/tests/test_admin_routes.py",
+          "sha256_checksum": "7afa39396ed22a8dcf3b15536da7552cf6149b88f5758b9a6625e7cae5714656"
+        },
+        {
+          "path": "backend/tests/test_analytics_routes.py",
+          "sha256_checksum": "9d7f23e87201a1befc52aa9d6d399f94d29c0cf1eaf96eea58ac5d7bbb208ffb"
+        },
+        {
+          "path": "backend/tests/test_app_assembly.py",
+          "sha256_checksum": "70fd4a467009031aa912fd2858aafff166dbc90638ae7053b40efc6f8fbca671"
+        },
+        {
+          "path": "backend/tests/test_audit_5b.py",
+          "sha256_checksum": "511bb4ebcdad93823b3ebbb667954b3cd7fef0f554ff2eac21ee934862400c68"
+        },
+        {
+          "path": "backend/tests/test_audit_5c.py",
+          "sha256_checksum": "d727fb522de56528888a57ed5765ba1f739555164a51b1cd1579115a88253aaf"
+        },
+        {
+          "path": "backend/tests/test_audit_5d.py",
+          "sha256_checksum": "b2963f5ad0a38747bcc6305a50fadbbbd0fee15ce421cf6047feb72884e69e26"
+        },
+        {
+          "path": "backend/tests/test_audit_service.py",
+          "sha256_checksum": "05d7e75832fe5781c1a545229c19cc27c2919baf99373fc8fdfb466ac596d3d9"
+        },
+        {
+          "path": "backend/tests/test_auth_tokens.py",
+          "sha256_checksum": "30cdce1fc4369e9b00281b65f0cdc1822b173e92f21e08b7668cdd90b4346d73"
+        },
+        {
+          "path": "backend/tests/test_backlog_contracts.py",
+          "sha256_checksum": "ef8bf4f1fdd03864ba2d230d46547dc2688457c05fcb4bf19077d2a197057c79"
+        },
+        {
+          "path": "backend/tests/test_backlog_foundations.py",
+          "sha256_checksum": "a41ef737b74531e1ac4009907ceff36e0c1b708cece3eff7197d98788c645262"
+        },
+        {
+          "path": "backend/tests/test_barn_binding.py",
+          "sha256_checksum": "8368a995e46238ac68a8585faf2617dc0a1beeebeb8178fe4d0d04fb85923c0c"
+        },
+        {
+          "path": "backend/tests/test_billing_9a.py",
+          "sha256_checksum": "3bc1f1b9fcdd730457d05545f653505c482a551d20006e3eb15bfb7c0dea04a6"
+        },
+        {
+          "path": "backend/tests/test_billing_routes.py",
+          "sha256_checksum": "2cc4b32384181b5de5456101752d50ebc7664c5b515183be170d0d801f702775"
+        },
+        {
+          "path": "backend/tests/test_billing_scoping.py",
+          "sha256_checksum": "2a0cd28b011e22bca1ad41e595f6b45bdea1de33ac6a76c77073a709c40bd8e8"
+        },
+        {
+          "path": "backend/tests/test_build_next_10_staging_uat_closure.py",
+          "sha256_checksum": "991bb3e9a5b19f270443f4b296b34b3d73894d209e05700c2afa28df6a17a926"
+        },
+        {
+          "path": "backend/tests/test_build_next_11_staging_environment_proof.py",
+          "sha256_checksum": "06cb34b62d746f6310881ec6bb5a364c45b32b7dac78c3dbfb26ebfb38015b27"
+        },
+        {
+          "path": "backend/tests/test_build_next_12_closure.py",
+          "sha256_checksum": "685b559c43d7f2a7250f1117f6a61923285cbde53caafafc057fa3eacb3c19d6"
+        },
+        {
+          "path": "backend/tests/test_build_next_12_prep_staging_inputs.py",
+          "sha256_checksum": "467694118d6034a21e9a0435eb0ccdb58e67e54f5606966e1f8d3bbb42817d51"
+        },
+        {
+          "path": "backend/tests/test_build_next_12a_uat_account_seed.py",
+          "sha256_checksum": "e26ddc132edc833df1334aef75313b7ca81214bc950e6a60426177201e910aea"
+        },
+        {
+          "path": "backend/tests/test_build_next_13a_role_routing.py",
+          "sha256_checksum": "a12c7e86a0297938eaff0615a56d0dbe278faeef051218dca5697f77f3689246"
+        },
+        {
+          "path": "backend/tests/test_build_next_13b_role_navigation.py",
+          "sha256_checksum": "6cf06f75f0229d455a323d819297a26caa5640b8495c1050214a12d069aaf1f6"
+        },
+        {
+          "path": "backend/tests/test_build_next_13c_rider_intake_shell.py",
+          "sha256_checksum": "a8c9c1cb02f7badc4ec155d2409463c2fe13a9c278724a714b2d199a1d064cc9"
+        },
+        {
+          "path": "backend/tests/test_build_next_13d_guardian_minor_intake.py",
+          "sha256_checksum": "3e9011166f8110bc7cbccac31bc16d6b307c0acc93d20de3a9944238924193f2"
+        },
+        {
+          "path": "backend/tests/test_build_next_13e_owner_intake_shell.py",
+          "sha256_checksum": "37f1ce6c8292efd32d30414cb3b5bb639aa79b707648d1ae4570fdfc51a81455"
+        },
+        {
+          "path": "backend/tests/test_build_next_13f_barn_owner_intake_shell.py",
+          "sha256_checksum": "759b5c3893ef6445c37c571afd2b1d0c46ff0993e996d704609ab7791b361d6e"
+        },
+        {
+          "path": "backend/tests/test_build_next_13g_trainer_intake_shell.py",
+          "sha256_checksum": "d536e01dc8466c8d704f3b6e2ca1182c13a6c826c77921546226dc79c620b1ca"
+        },
+        {
+          "path": "backend/tests/test_build_next_13h_manager_intake_shell.py",
+          "sha256_checksum": "73fae69f591e45c8fe97b2c99f5d403a3558e3ea9971ecbaa2a5733771496304"
+        },
+        {
+          "path": "backend/tests/test_build_next_13i_staff_intake_shell.py",
+          "sha256_checksum": "7f843fdff5c775200c6a6f58fd82e6a378fef65b363941df36506fdbedfd1c14"
+        },
+        {
+          "path": "backend/tests/test_build_next_13j_role_first_login_matrix.py",
+          "sha256_checksum": "3bebb6a33b354321dfbd6acd2df75a300ce2687755091c8eb5dab134ed631c0c"
+        },
+        {
+          "path": "backend/tests/test_build_next_13k_role_flow_smoke.py",
+          "sha256_checksum": "cbdbce32467fea0365ae44f7a9e53c6827b6b1f761796fb6ccd8b26c26e04a3c"
+        },
+        {
+          "path": "backend/tests/test_build_next_13l_role_smoke_prep.py",
+          "sha256_checksum": "7b4e6fe59d16ad6b559ebd4d8f5b273cac89b3af03713e5b5efaaf13783f967e"
+        },
+        {
+          "path": "backend/tests/test_build_next_13m_role_smoke_evidence.py",
+          "sha256_checksum": "76a6a8c3fcb08217ff0962e14d377ff7752e6d6b8acf958817367cd094dcacd0"
+        },
+        {
+          "path": "backend/tests/test_build_next_13n_role_credential_readiness.py",
+          "sha256_checksum": "87dab7d46b0192ac893e23cbbe7bcd9e8a0e279d7c837a369703c7386b029e56"
+        },
+        {
+          "path": "backend/tests/test_build_next_13o_role_screenshot_pass.py",
+          "sha256_checksum": "e11bbe53b3607efbcf4e9949050686d2bef6106331ad91b518484970d23c44ac"
+        },
+        {
+          "path": "backend/tests/test_build_next_13p_role_home_title_case.py",
+          "sha256_checksum": "6867b1fe0017e019e8784a75c31b9dda16857738ad59c6762ff6dfd13951edce"
+        },
+        {
+          "path": "backend/tests/test_build_next_15a_today_pulse_contract.py",
+          "sha256_checksum": "9b80a9e4eff7dd6d36a94a960a597ba0589459b5b374810b62ca7e4c6e02e1f5"
+        },
+        {
+          "path": "backend/tests/test_build_next_15c_a_today_pulse_frontend_wiring.py",
+          "sha256_checksum": "14920e5f794046fc5fd111ec61688ee0f580c1f9e2a417cb56f7ea41d033950d"
+        },
+        {
+          "path": "backend/tests/test_build_next_15c_b_barn_visibility_policy.py",
+          "sha256_checksum": "978e808029fba5e3885e9f4a8e990a291b28f010004ff580a40cac2faa69ba59"
+        },
+        {
+          "path": "backend/tests/test_build_next_15c_c_today_pulse_role_home_evidence.py",
+          "sha256_checksum": "e9aa29716e6b1bd71971e567f8c5203b72bd83d68f65e43a50e8e8236058473d"
+        },
+        {
+          "path": "backend/tests/test_build_next_15d_today_pulse_uat_evidence.py",
+          "sha256_checksum": "db9bd31d364dff49cedc14e70eb393c906c1ccff2ea82e0a946c65249fc25705"
+        },
+        {
+          "path": "backend/tests/test_build_next_15e_today_pulse_founder_acceptance_ledger.py",
+          "sha256_checksum": "ac41f4e7354f11ea2102e53f7397aff35607b427c1b98a37a42f9bc8be9a645e"
+        },
+        {
+          "path": "backend/tests/test_build_next_15f1_live_today_pulse_walkthrough.py",
+          "sha256_checksum": "7da523d4e060d5c400d505e2b075c6b436f2c2a69e9e1b8b9cca858e202c23b9"
+        },
+        {
+          "path": "backend/tests/test_build_next_15f_live_today_pulse_walkthrough.py",
+          "sha256_checksum": "19dfc81be37931dfcffef72d3bb534756f7ad6e5785008a05bba6aed17b42e33"
+        },
+        {
+          "path": "backend/tests/test_build_next_16b_setup_readiness_contract.py",
+          "sha256_checksum": "f5371b182968ccab06124ae6686f1419ce5deea2b241535cc9fd055ba295ad3c"
+        },
+        {
+          "path": "backend/tests/test_build_next_16c_frontend_route_separation.py",
+          "sha256_checksum": "606ca42e0cc6e575ca96e77a3ef2a4d96e5e3901ad8964e3b72d756eabf3709b"
+        },
+        {
+          "path": "backend/tests/test_build_next_17a_launch_trust_route_taxonomy.py",
+          "sha256_checksum": "d3f3820ae9a73cf8d3e2a8abd8a8cddce53a11631fcf27f1af597345cdf151a8"
+        },
+        {
+          "path": "backend/tests/test_build_next_17b_role_intake_split.py",
+          "sha256_checksum": "a70c677c681958eb72099f874fcc4f0fa1c6822dc5de50b75629662836ebd48a"
+        },
+        {
+          "path": "backend/tests/test_build_next_17c_role_journey_launch_trust_evidence.py",
+          "sha256_checksum": "1411d994e103362f07ebe40954dee85e52cd9b3c5c1ef37b656d71ba4c1752d1"
+        },
+        {
+          "path": "backend/tests/test_build_next_17d_role_journey_cleanup.py",
+          "sha256_checksum": "cc1dc1ce7cb37ea67135ee18318656288306317e7365265c1fd8fa641449cc3f"
+        },
+        {
+          "path": "backend/tests/test_build_next_18a_provider_live_proof.py",
+          "sha256_checksum": "a9a52d56384753153d23d25287ea5f6ae46f4901958f8955f04c349bb889aeaa"
+        },
+        {
+          "path": "backend/tests/test_build_next_18b_production_environment_proof.py",
+          "sha256_checksum": "c9345d848a928991b5b5d11a11039642f59edeb6228fb0183790383c9f129e47"
+        },
+        {
+          "path": "backend/tests/test_build_next_18c_uat_role_refresh.py",
+          "sha256_checksum": "2a7138658580db51ca66a7ff7761ac4bfc4f45229626e7557d7308493ab9d0ad"
+        },
+        {
+          "path": "backend/tests/test_build_next_18d_field_reliability_proof.py",
+          "sha256_checksum": "758ebd93cf9d7ca60e63a1ea154e02c88b6aaed5541817475547ed7c424dd520"
+        },
+        {
+          "path": "backend/tests/test_build_next_18e_app_store_readiness_proof.py",
+          "sha256_checksum": "d8cd2570a2f2c538eaa754f7fa18676e5157d0f6eb83981fcdb5f451fce252e0"
+        },
+        {
+          "path": "backend/tests/test_build_next_19_founder_acceptance_ledger.py",
+          "sha256_checksum": "439e9d52430c9c739c72b0d2788ca23adec5e605777984494a2adaf76d9e2b40"
+        },
+        {
+          "path": "backend/tests/test_build_next_1_billing_launch_readiness.py",
+          "sha256_checksum": "0d6b402a10fca8c15d3321cd05ba8c00983381048ad0946eb257dc7edea645ce"
+        },
+        {
+          "path": "backend/tests/test_build_next_20_bn12_closure.py",
+          "sha256_checksum": "aeaadb780b79d3dc0e6a01cfed55c97e633b8b89ea58f2bbd1685cb432727c70"
+        },
+        {
+          "path": "backend/tests/test_build_next_21_pilot_go_no_go.py",
+          "sha256_checksum": "4cd2e00ed4aa3c7873ebaf678ebc7253f7f3ca8fad09e060e205d2705b240278"
+        },
+        {
+          "path": "backend/tests/test_build_next_2_mobile_readiness.py",
+          "sha256_checksum": "5782c7892a79b633922a997f843895c16877e04a618341553a7933ff5b90f31b"
+        },
+        {
+          "path": "backend/tests/test_build_next_2b_mobile_screenshot_gate.py",
+          "sha256_checksum": "8e4e8b0c685d5928ddb9281f0458a93529f9866ddd169a072c856faf0cda19f1"
+        },
+        {
+          "path": "backend/tests/test_build_next_3_multi_barn_gap_report.py",
+          "sha256_checksum": "eddf102e9a52f8ed0e3eee15173ed2f626d5aba6afd8201bfd6870b3648eaaa2"
+        },
+        {
+          "path": "backend/tests/test_build_next_3a_account_memberships.py",
+          "sha256_checksum": "b89c7231a1e538367c1a8530dce537ae0fe61ca43966940b07b447d123870f9c"
+        },
+        {
+          "path": "backend/tests/test_build_next_3b_account_context.py",
+          "sha256_checksum": "bca197331f95acd5a86fd3bd5edcdbda3d8f950de5d2bb2b0a417621ca9eb8ca"
+        },
+        {
+          "path": "backend/tests/test_build_next_3c_route_context.py",
+          "sha256_checksum": "e5ec44dd6395cfbb622151ea2fd1884bdfa9e92ccfd4f2600454c0b1c0a9d41b"
+        },
+        {
+          "path": "backend/tests/test_build_next_3d_task_context.py",
+          "sha256_checksum": "b5b6ded06b065911c8a50192c8c64743db8816f57fffc478b624adb64e92c5b9"
+        },
+        {
+          "path": "backend/tests/test_build_next_4_invites_onboarding.py",
+          "sha256_checksum": "a4b4bf94f33c43bb71756a41a1fabb86d51f61e498612e076297fa62db4d0450"
+        },
+        {
+          "path": "backend/tests/test_build_next_5a_minor_safety_rules.py",
+          "sha256_checksum": "f6a246622831a4a7b7d3bd40648006e0f424d4c2742ebcab36657571d1f63559"
+        },
+        {
+          "path": "backend/tests/test_build_next_5b_guardian_student_invites.py",
+          "sha256_checksum": "02d732cbfa4a82a8334e15d26a7ebfb6f2848e0abf1cd60fa5514a062e45ab68"
+        },
+        {
+          "path": "backend/tests/test_build_next_5c_minor_communication_guard.py",
+          "sha256_checksum": "b6acc0fe0f478ae7322b5eed9639feec12b9114f7ad599dffd35e89d3b3bc1e5"
+        },
+        {
+          "path": "backend/tests/test_build_next_5d_minor_parent_evidence.py",
+          "sha256_checksum": "5676e3aee50d9fc005eafde048b6b627babeb2c82cb68b32a03376ca512fcce6"
+        },
+        {
+          "path": "backend/tests/test_build_next_6_signature_connector.py",
+          "sha256_checksum": "55637bc0cdb0c28f43194a00be5a5528b8f7cbd85f8222ba3acd6067b54c879a"
+        },
+        {
+          "path": "backend/tests/test_build_next_6b_document_workflow_contract.py",
+          "sha256_checksum": "214a9692cbd1c5eef1827123f8b4d13c0d8a3c4163e89c593651f2408ba0d6e8"
+        },
+        {
+          "path": "backend/tests/test_build_next_6c_document_request_foundation.py",
+          "sha256_checksum": "9b70b264df400dd7f033e0cbe8e12f4e98d468e96fffb6f956b1b04f1b10c285"
+        },
+        {
+          "path": "backend/tests/test_build_next_6d_docusign_jwt_smoke.py",
+          "sha256_checksum": "8774bcee9f1f419078f6ce9d5bd6c72df4a1bdf3bc63e749cf561d94e861eb2d"
+        },
+        {
+          "path": "backend/tests/test_build_next_6e_docusign_sandbox_envelope.py",
+          "sha256_checksum": "922bf3130a765abe0992a08a57350327c59e3001b358c289421ce3bd203e9d59"
+        },
+        {
+          "path": "backend/tests/test_build_next_6f_docusign_webhook_status_sync.py",
+          "sha256_checksum": "0cb3b868140d4b48009a4ece8ea69e7daf0fc816c63f4823c22f315703476eb2"
+        },
+        {
+          "path": "backend/tests/test_build_next_7_launch_gate.py",
+          "sha256_checksum": "e72f90f7756b35f06cfaa89ce33eab589a7350237fe01579714dfc9cb2bb72c7"
+        },
+        {
+          "path": "backend/tests/test_build_next_7a_staging_uat_evidence.py",
+          "sha256_checksum": "d046b9415104a1612e67f3c7167bbdaf3a883c683eba43c563c04837cf882730"
+        },
+        {
+          "path": "backend/tests/test_build_next_8_go_live_runbook.py",
+          "sha256_checksum": "6837f16d396d12e55f97c8e9edcb7a8da6d84932f3e0ddb9f5b16ff291470f60"
+        },
+        {
+          "path": "backend/tests/test_build_next_9_staging_uat_execution.py",
+          "sha256_checksum": "f9103a424be7875b7462bacbafba37e20dc98f9cfbe2f5025a175af85d160d0f"
+        },
+        {
+          "path": "backend/tests/test_care_filtering.py",
+          "sha256_checksum": "426862e4489f5cb0bc2e67fe8f18533e0435b56e40dfeb08271819e0f88f42e0"
+        },
+        {
+          "path": "backend/tests/test_care_integrity.py",
+          "sha256_checksum": "a0aa10cc4232fb643aa8617a249be11046214f213df438de80a26b31c7ebe228"
+        },
+        {
+          "path": "backend/tests/test_care_routes.py",
+          "sha256_checksum": "a5b40eb090b119509e955dff2d9fbc2b38fa1c9b860c559fa34d0fd209f54592"
+        },
+        {
+          "path": "backend/tests/test_care_scoping.py",
+          "sha256_checksum": "539d8018de898b2432ea91ea8ddded442e275a6332f239c934fddfe061442bdb"
+        },
+        {
+          "path": "backend/tests/test_care_state_guards.py",
+          "sha256_checksum": "86f88ffd147bed7e17678c66b69137159e18a1b5ae448c332d847946b8d0b212"
+        },
+        {
+          "path": "backend/tests/test_ci_database_isolation.py",
+          "sha256_checksum": "ec1c975ccde28da52f30f18067ecede6227bc30f8e6f070701ec77ce315bb94a"
+        },
+        {
+          "path": "backend/tests/test_ci_environment_defaults.py",
+          "sha256_checksum": "7973794c5fd329a5f7740da92092fb99a9fbe6bedca4b122ef9fb8e20732147a"
+        },
+        {
+          "path": "backend/tests/test_ci_marker_classification.py",
+          "sha256_checksum": "fa2c4e37f848d24d4f7ba5b0ff545f39b1c2b85c8bea00c5098a9e265900dbd4"
+        },
+        {
+          "path": "backend/tests/test_config.py",
+          "sha256_checksum": "7013b16fd1bcf66bce3a9deb7d8c1a3b1c02877d56615b2bf07a58691f8ab5ca"
+        },
+        {
+          "path": "backend/tests/test_core_auth_verification_gate.py",
+          "sha256_checksum": "791fcba26707227f8cd822d640355184ba1c0cd9a096e31471fa3bcea5385596"
+        },
+        {
+          "path": "backend/tests/test_dashboard_invites_scoping.py",
+          "sha256_checksum": "9f9c041183839bc9804104a811fb62c6c636bbfeb0b842c1e5952bb23f9e9285"
+        },
+        {
+          "path": "backend/tests/test_digest_branding.py",
+          "sha256_checksum": "89f539d9e742446acec05f054bd1415bf534251876d30fe6ceef08fc936a4f9c"
+        },
+        {
+          "path": "backend/tests/test_digests_routes.py",
+          "sha256_checksum": "41bd80218828f01f474c1bb9aede1dd6df3c83efd5e6a8f46f09c33855d6c550"
+        },
+        {
+          "path": "backend/tests/test_dispatch_retry.py",
+          "sha256_checksum": "09a3a68a9ea1f07635f76bb0856f6b48ec16da1299e4cc3d13d6cadba91c2402"
+        },
+        {
+          "path": "backend/tests/test_equinesync.py",
+          "sha256_checksum": "7d9fe077814995e88b0502e30c609aeb4d35398b1432818dd638fc8ce8df1862"
+        },
+        {
+          "path": "backend/tests/test_founder_crud_sprint.py",
+          "sha256_checksum": "f2886267a755bca0f1404fb4072ba947a6d48472bbe2263f27c76793b6874a13"
+        },
+        {
+          "path": "backend/tests/test_health_10b.py",
+          "sha256_checksum": "443bf17711d7834be90ef40f60ec50fa7dbcd1915c6b40c7b35bb602580baba5"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1a.py",
+          "sha256_checksum": "fb42105fa833e6fc9d507746467fec0ebb405ea98e26ee0b4592299f5e905198"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1b.py",
+          "sha256_checksum": "42158f634772ce778c3113a8d9beec717215f362470688e9ca74ad46df225d10"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1c.py",
+          "sha256_checksum": "871e322b0566d1696df8e2c14f216bb3aa29ca3e21b399ac1350abf706133aae"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1d.py",
+          "sha256_checksum": "03906e66c690c62267ead2bff9cb6210cc14e2b06b51065af67ceded0e6a0b09"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1e.py",
+          "sha256_checksum": "7f58949fe6a71eca02a8092af58f06fb115566abda1ad1f4788b3eba057ff4e9"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1f.py",
+          "sha256_checksum": "c2bc7610012c34eb894670aad19aef5f259efc2ea5196da02567246f6f6af63b"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1g.py",
+          "sha256_checksum": "441eb0636259f67cdbe9f6ddf64316ab03cdf7d3cfa6e98434845c92a04f4de1"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1h.py",
+          "sha256_checksum": "782a64c29e07053feb77763c092ef877d68fd86ea40085cf1f99cb5a6f7f9072"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1i.py",
+          "sha256_checksum": "2ebdc8d00a2947f7de1fac4e59153acce180f1c0a2b5855d57a65ee4022e65c0"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1j.py",
+          "sha256_checksum": "74edff659b6c6e4b1c4740a864dedfda5852c3d4d8eed459ca2e9e37339f1f15"
+        },
+        {
+          "path": "backend/tests/test_horse_ledger_1k.py",
+          "sha256_checksum": "7fbd22fb30afcdd48f5f3b49b3a02d5e582ca87bdafe88d8513ff18ac5a24a25"
+        },
+        {
+          "path": "backend/tests/test_horses_routes.py",
+          "sha256_checksum": "17ee35e65f67e6d105db72299a7d040e6524bc730e813010e176f13c792c1229"
+        },
+        {
+          "path": "backend/tests/test_horses_scoping.py",
+          "sha256_checksum": "f03487eb9c9ac606d54bce29401679926ce6b52139e5b3ad9bf8098a6422fbd0"
+        },
+        {
+          "path": "backend/tests/test_inventory.json",
+          "sha256_checksum": "6ffdefddc939ea1df8b516498db78b2a67bcf930ff5d04ed4c5da745c9411ae6"
+        },
+        {
+          "path": "backend/tests/test_inventory.md",
+          "sha256_checksum": "d823a779d1fa373c02840e39122074dba8a16366ff378c651febf5baa71de8a6"
+        },
+        {
+          "path": "backend/tests/test_invites_and_analytics.py",
+          "sha256_checksum": "b1a01d14541f6f60ef39d717edd5c3be0a5607533e49675e438385ff4d889ec3"
+        },
+        {
+          "path": "backend/tests/test_logging_10a.py",
+          "sha256_checksum": "1f64d6342790c54ce41dd527a914bef56c2fc32798b79c625d7fbd86a69103c2"
+        },
+        {
+          "path": "backend/tests/test_login_lockout.py",
+          "sha256_checksum": "40525d21e45696fcdeebfc6a73fc20e7162e78c5fe0ae732d52511dfe780009c"
+        },
+        {
+          "path": "backend/tests/test_marketplace_signup.py",
+          "sha256_checksum": "9d5ff66cdbde976b8d906f7f28eaa83c5a8fc8200a7261629dd42abb2ee55c8b"
+        },
+        {
+          "path": "backend/tests/test_membership_legacy_stripe_webhook_security.py",
+          "sha256_checksum": "d259b030287a884b0aa85006b6b832869cb9aeaa96b86a0bf45679e381da3d30"
+        },
+        {
+          "path": "backend/tests/test_onboarding.py",
+          "sha256_checksum": "89a1c09c18814383e7e6f90e7636679a71ac37021385909d8bdea44b1c22c561"
+        },
+        {
+          "path": "backend/tests/test_onboarding_reports_scoping.py",
+          "sha256_checksum": "aa44480821b9edbaf3db3852014bc2887b8ddd1898e290f960ae45877571166f"
+        },
+        {
+          "path": "backend/tests/test_operations_routes.py",
+          "sha256_checksum": "14c07dfbb3047884ab467cca25b0aff99c0f3260aa9066ed30fb8f4aefb225c3"
+        },
+        {
+          "path": "backend/tests/test_operations_scoping.py",
+          "sha256_checksum": "a7589a2eaff19cd1518dd883bb8bcdb28e8b03d6c1ae46d32cc5c85126218d68"
+        },
+        {
+          "path": "backend/tests/test_owner_billing.py",
+          "sha256_checksum": "720570d2bfab930621f922cc98b1466b39ee1e1950288bc7fe394578b626b196"
+        },
+        {
+          "path": "backend/tests/test_owner_trust.py",
+          "sha256_checksum": "38c10dbaa73dbe28c8e44fa94ea9283ca62e54937adf46d893d8da4ed177afe6"
+        },
+        {
+          "path": "backend/tests/test_owner_trust_edges.py",
+          "sha256_checksum": "2746e73439f76508195702d784e44f639b000289a3a039a977201cad24e52b99"
+        },
+        {
+          "path": "backend/tests/test_owner_upcoming.py",
+          "sha256_checksum": "fe57e78f2f04031fc5cb5d7f4cd15a3f2836653e05c3628ee501c4de38eb5bcb"
+        },
+        {
+          "path": "backend/tests/test_owner_updates.py",
+          "sha256_checksum": "ed5cc29d408fbff1d3ff81283b6864a1069619b8acdd6a2ee6f15deab564d4d0"
+        },
+        {
+          "path": "backend/tests/test_permissions.py",
+          "sha256_checksum": "eb46b72dd73b94207ad1b73dc4345459749083c246a2ccec0eaeeecedbf23b09"
+        },
+        {
+          "path": "backend/tests/test_permissions_wiring.py",
+          "sha256_checksum": "09f00dabe81ad6ef4c0496431e9384268f45aef8ed9693cb71a46ac8da2e52e8"
+        },
+        {
+          "path": "backend/tests/test_phase15r_billing_channels.py",
+          "sha256_checksum": "61972ff200bae99fbcf5022d0d426dfc27c026e54adbc53d532fdab42f8f14fb"
+        },
+        {
+          "path": "backend/tests/test_phase15r_billing_seats.py",
+          "sha256_checksum": "a7ea3fa2142ee454edbc27541263a2a76eca997b3952b7aea483bea31a664325"
+        },
+        {
+          "path": "backend/tests/test_phase15r_entitlements.py",
+          "sha256_checksum": "c73b1510e2860b5490a0772048f97352f01c94e9ef313dbf3bee82bc84918f57"
+        },
+        {
+          "path": "backend/tests/test_phase15r_migration_dry_run.py",
+          "sha256_checksum": "ff165bfb80e7f563b9ff69fed3449f4878a90555c9111986889108c4606f4a0d"
+        },
+        {
+          "path": "backend/tests/test_phase15r_stripe_catalog.py",
+          "sha256_checksum": "f27ca1d66627c7999c6e08bcf69502abe9cca528ef872342e37dfbd4963e8a1d"
+        },
+        {
+          "path": "backend/tests/test_phase15r_usage_prompts.py",
+          "sha256_checksum": "1d8f2ff4c525c440fc3aa9bf6aeb09e67f9026f543e827a5f844f8aca166acc8"
+        },
+        {
+          "path": "backend/tests/test_phase2.py",
+          "sha256_checksum": "61d2f9cc237220e0d9ace8050faa476b695218022ca031e1a6a1ee0cbad36e70"
+        },
+        {
+          "path": "backend/tests/test_phase2c_auth.py",
+          "sha256_checksum": "2d80c78014419d7dcd7fe5a7ba043e29b5be9f81e6ff0dbb63c6563c37d94ebb"
+        },
+        {
+          "path": "backend/tests/test_phase4a_barn_id.py",
+          "sha256_checksum": "169e9a10f9043add9eff525da883ce58896a2f0c250836b724ddc3661f6b440c"
+        },
+        {
+          "path": "backend/tests/test_rate_limit.py",
+          "sha256_checksum": "18c3d8c39f10e49c5c87ca57516e244f5bb888c18d4ab6944312a158486f38a3"
+        },
+        {
+          "path": "backend/tests/test_recurring_charges.py",
+          "sha256_checksum": "7d73a915123644210c3420d495665044d80e5d2e50b6182888cf21195510215f"
+        },
+        {
+          "path": "backend/tests/test_reports_and_nudges.py",
+          "sha256_checksum": "d436e1dcecc037f77f0513c9a12a92d2a5a16b87934cc450df4f457a49d86749"
+        },
+        {
+          "path": "backend/tests/test_review_queue_and_lifecycle.py",
+          "sha256_checksum": "9948b507302fa6e3bd176d53e8b6d45994e489a3ddecb90c6372e9ab90559273"
+        },
+        {
+          "path": "backend/tests/test_rf10_service_provider_care_partner.py",
+          "sha256_checksum": "447c016927979c969607fc212671417484bc4b3bbeb00ddeebe215433c5a3544"
+        },
+        {
+          "path": "backend/tests/test_rf11_property_location_map_community_help.py",
+          "sha256_checksum": "d739caa103f3b3ab87faf457a822d45f24683fc6624e1a48e3a388a1814414ae"
+        },
+        {
+          "path": "backend/tests/test_rf12_billing_payments_exports_financial_truth.py",
+          "sha256_checksum": "9041f9812d4b214311d6467e0e2e5e2915c15114baa4b2a3da46a8aff0772bfe"
+        },
+        {
+          "path": "backend/tests/test_rf13_messaging_notifications_delivery_truth.py",
+          "sha256_checksum": "d38470a0ba80c81f8f91f83403f9efa918ab0d249b545a8ef5e83a02f1d55a84"
+        },
+        {
+          "path": "backend/tests/test_rf14_documents_signatures_storage_consolidation.py",
+          "sha256_checksum": "4121fb525584c4a0d484acc3081bc75f890c9f99c17e1bf56475b939125f872b"
+        },
+        {
+          "path": "backend/tests/test_rf15_offline_lock_screen_field_reliability.py",
+          "sha256_checksum": "a726501a62c8f0e19d6cc66b63e54835eb562aeec4911d55b243555e0560598e"
+        },
+        {
+          "path": "backend/tests/test_rf16_pwa_native_app_store_readiness.py",
+          "sha256_checksum": "2f76a2949ff540054e30f7623b7fe68b10ccb6d8ce29661760fa34be94f54b98"
+        },
+        {
+          "path": "backend/tests/test_rf17_feature_shell_ux_truth.py",
+          "sha256_checksum": "38cb99ff23c0ba0e60298f5a75782ab4321a74da1028425ecc48c71095a76258"
+        },
+        {
+          "path": "backend/tests/test_rf18_qa_uat_public_launch_readiness.py",
+          "sha256_checksum": "1ea48e4bd74a9869a8002da9de7aefbfd6a5f10399aee5670f33bfbf8ee8d706"
+        },
+        {
+          "path": "backend/tests/test_rf19_staging_uat_evidence_capture.py",
+          "sha256_checksum": "281c90e4b71f86208b23db4ae791ee0f99970bdb70177e89d4f686581ce2cd11"
+        },
+        {
+          "path": "backend/tests/test_rf1_data_fences_capability_gates.py",
+          "sha256_checksum": "e185006685bfcf8c9b691576a2619452b9b462df3a780619276abc989e4b0f67"
+        },
+        {
+          "path": "backend/tests/test_rf2_identity_access_migration.py",
+          "sha256_checksum": "4bb69d37fc670baa0d76657699d97b7d77b1b41eb91e173839011e59fa07fbed"
+        },
+        {
+          "path": "backend/tests/test_rf3_onboarding_import_setup.py",
+          "sha256_checksum": "b404976b93cd45a95834e507d1c13f9a6153ae102f522e4a8b63bed35d458a68"
+        },
+        {
+          "path": "backend/tests/test_rf4_feature_completion_certification.py",
+          "sha256_checksum": "bd2f3a4be73a0aa4ef912eb2968fdc6eb9f1f9f227998b913a5e3f2c9098030b"
+        },
+        {
+          "path": "backend/tests/test_rf5_web_enrollment_account_health.py",
+          "sha256_checksum": "3d063a1fa55c3504a1020902faf27a808cc4e4da4e26aba2ce2cc9b93156c69f"
+        },
+        {
+          "path": "backend/tests/test_rf6_canonical_systems_consolidation.py",
+          "sha256_checksum": "4e7a253efe560c8f1043e087a44a2a5475c573aefa1b0f56d4e477e610aad9d1"
+        },
+        {
+          "path": "backend/tests/test_rf7_owner_client_portal_hardening.py",
+          "sha256_checksum": "7ddec22bc83033453b7d969b9959cbbb67b9771db6b982edd1211af455730af9"
+        },
+        {
+          "path": "backend/tests/test_rf8_staff_workforce_model.py",
+          "sha256_checksum": "e1ca064af9589c917d34575d8ef79d4cb57b123b4b2da74f53c270a80063b866"
+        },
+        {
+          "path": "backend/tests/test_rf9_trainer_operating_center.py",
+          "sha256_checksum": "029e574b987d9d345d3bb9829ca70819a74c7c5f73773ae061be683a9c8c8ce5"
+        },
+        {
+          "path": "backend/tests/test_security_patch_2e.py",
+          "sha256_checksum": "fea0912032f8a73e7e155f6f16410d3e994f0319ad99e0494dd5eeeef4f5db0a"
+        },
+        {
+          "path": "backend/tests/test_subscription_emails_15d.py",
+          "sha256_checksum": "123687a3cfdc2734856593a66b0793263fa4fafe9f83b9e829fe4ebc17bda069"
+        },
+        {
+          "path": "backend/tests/test_subscriptions_15a.py",
+          "sha256_checksum": "6d4447a5b00ea3e7f6a75c6e562b71f9dbf729f83aadf5e5e8551296542c820e"
+        },
+        {
+          "path": "backend/tests/test_subscriptions_15b.py",
+          "sha256_checksum": "2bd382c094ef0113a99a32f26196a7a31286e366b0a4608555a232815d490335"
+        },
+        {
+          "path": "backend/tests/test_subscriptions_15g.py",
+          "sha256_checksum": "45c27953f6e48f1c06ed53c8ae5b749460bcb2598543c74e677cc5440195fde7"
+        },
+        {
+          "path": "backend/tests/test_system_routes.py",
+          "sha256_checksum": "4c6b8e13f95e264ceafa52ed5bde66d4a01d96bc70742e78058a722af9e21e96"
+        },
+        {
+          "path": "backend/tests/test_task_engine.py",
+          "sha256_checksum": "1b8577db2ccc35c5b0d5c47d65e9ddfbdee1591c8401c50e4a828643e782bf45"
+        },
+        {
+          "path": "backend/tests/test_task_routes_inventory.py",
+          "sha256_checksum": "38658535cb1c5884a52c4acf3116de4a026e29f1250acb809d62ade369a8eba8"
+        },
+        {
+          "path": "backend/tests/test_taskengine_reconciliation_scoping.py",
+          "sha256_checksum": "dd984b7023b5ad82eb839b84a086362eabe3071ab49cfe60f4c0b610b693103b"
+        },
+        {
+          "path": "backend/tests/test_tenancy.py",
+          "sha256_checksum": "83f17e674272b20b4232791476893a4fa81323d9ae3e918fb73a8d5f711dbf80"
+        },
+        {
+          "path": "backend/tests/test_weekly_recap.py",
+          "sha256_checksum": "e33c0e7c0dd6cb762849053f372f88b79a7972489c2548576158ac09c5fd2945"
+        },
+        {
+          "path": "backend/tests/test_wellness_pulse.py",
+          "sha256_checksum": "421fe5ab355e26b2955342f4df8b47b7b98204a4d812a85ad1985fe695ed9b1e"
+        }
+      ],
+      "repository_path": "backend/tests",
+      "tracked_child_count": 201
+    },
+    "CGSRC-TEST-0002": {
+      "children": [
+        {
+          "path": "tests/__init__.py",
+          "sha256_checksum": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "repository_path": "tests",
+      "tracked_child_count": 1
+    }
+  },
+  "execution_id": "CGEXEC-20260726-0004",
+  "guide_id": "ES-CG-10",
+  "non_authorization": "Normative source selection is returned for Founder review only; it does not draft controls or start CGP-006.",
+  "normative_source_count": 31,
+  "prompt_id": "CGP-005",
+  "reference_corpus_only_count": 2085,
+  "sources": [
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0001",
+      "inclusion_category": "SUPPORTING_FROZEN",
+      "necessity_test": "NECESSARY_INTERPRETATION",
+      "repository_path": "docs/canon/registries/GOVERNANCE_FINDING_REGISTRY.md",
+      "source_id": "CGSRC-GOV-0007"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0002",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/registries/IMPLEMENTATION_AUTHORIZATION_REGISTRY.md",
+      "source_id": "CGSRC-GOV-0008"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0003",
+      "inclusion_category": "SUPPORTING_FROZEN",
+      "necessity_test": "NECESSARY_INTERPRETATION",
+      "repository_path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_VALIDATION_REPORT.json",
+      "source_id": "CGSRC-GOV-0016"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0004",
+      "inclusion_category": "SUPPORTING_FROZEN",
+      "necessity_test": "NECESSARY_INTERPRETATION",
+      "repository_path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_VALIDATION_REPORT.md",
+      "source_id": "CGSRC-GOV-0017"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0005",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/adopted_sources/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_ADOPTED_SOURCE.md",
+      "source_id": "CGSRC-GOV-0018"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0006",
+      "inclusion_category": "SUPPORTING_FROZEN",
+      "necessity_test": "NECESSARY_INTERPRETATION",
+      "repository_path": "docs/canon/companions/GLOBAL_GOVERNANCE_P2_REGISTER.json",
+      "source_id": "CGSRC-GOV-0140"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0007",
+      "inclusion_category": "SUPPORTING_FROZEN",
+      "necessity_test": "NECESSARY_INTERPRETATION",
+      "repository_path": "docs/canon/companions/GLOBAL_GOVERNANCE_P2_REGISTER.md",
+      "source_id": "CGSRC-GOV-0141"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0008",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_ADOPTION_READINESS_REPORT.md",
+      "source_id": "CGSRC-ATLAS-0006"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0009",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0.md",
+      "source_id": "CGSRC-ATLAS-0017"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0010",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_ADOPTION_DECISION.md",
+      "source_id": "CGSRC-ATLAS-0018"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0011",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_ADOPTION_MANIFEST.md",
+      "source_id": "CGSRC-ATLAS-0019"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0012",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_ADOPTION_REPORT.md",
+      "source_id": "CGSRC-ATLAS-0020"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0013",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_ADOPTION_VERIFICATION_MATRIX.md",
+      "source_id": "CGSRC-ATLAS-0021"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0014",
+      "inclusion_category": "SUPPORTING_FROZEN",
+      "necessity_test": "NECESSARY_INTERPRETATION",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_RETAINED_FINDINGS_REGISTER.md",
+      "source_id": "CGSRC-ATLAS-0022"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0015",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/validation/run_all_validations.py",
+      "source_id": "CGSRC-REPO-0006"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0016",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/validation/cgp_validation.py",
+      "source_id": "CGSRC-REPO-0007"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0017",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "backend/tests",
+      "source_id": "CGSRC-TEST-0001"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0018",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "tests",
+      "source_id": "CGSRC-TEST-0002"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0019",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "pytest.ini",
+      "source_id": "CGSRC-TEST-0004"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0020",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": ".github/workflows/ci.yml",
+      "source_id": "CGSRC-REPO-0629"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0021",
+      "inclusion_category": "SUPPORTING_FROZEN",
+      "necessity_test": "NECESSARY_INTERPRETATION",
+      "repository_path": ".github/workflows/ci.yml",
+      "source_id": "CGSRC-EXT-0002"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0022",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/assessment/CURRENT_REPOSITORY_COMPONENT_REGISTER.csv",
+      "source_id": "CGSRC-CGP005-0007"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0023",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/assessment/CURRENT_CODE_GUIDE_GAP_REGISTER.csv",
+      "source_id": "CGSRC-CGP005-0008"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0024",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/assessment/REPOSITORY_TO_SOURCE_EVIDENCE_MAP.csv",
+      "source_id": "CGSRC-CGP005-0009"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0025",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "backend/core/lifespan.py",
+      "source_id": "CGSRC-CGP005-0205"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0026",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "backend/task_engine.py",
+      "source_id": "CGSRC-CGP005-0206"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0027",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "backend/tests",
+      "source_id": "CGSRC-CGP005-0207"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0028",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "pytest.ini",
+      "source_id": "CGSRC-CGP005-0208"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0029",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": ".github/workflows/ci.yml",
+      "source_id": "CGSRC-CGP005-0209"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0030",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "backend/tests/live_test_allowlist.txt",
+      "source_id": "CGSRC-CGP005-0210"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-10-0031",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "backend/tests/ci_known_failure_gate.py",
+      "source_id": "CGSRC-CGP005-0211"
+    }
+  ]
+}

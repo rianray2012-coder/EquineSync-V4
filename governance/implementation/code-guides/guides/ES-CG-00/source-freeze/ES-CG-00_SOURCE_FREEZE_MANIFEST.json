@@ -1,0 +1,219 @@
+{
+  "baseline_commit": "ff2748796bf858f49a3f85bad0578850e1deb846",
+  "candidate_count": 2214,
+  "classification": "NORMATIVE_GUIDE_SOURCE_FREEZE",
+  "created_date": "2026-07-26",
+  "curation_method": "GUIDE_SPECIFIC_MINIMUM_AUTHORITY_SET",
+  "directory_manifests": {},
+  "execution_id": "CGEXEC-20260726-0004",
+  "guide_id": "ES-CG-00",
+  "non_authorization": "Normative source selection is returned for Founder review only; it does not draft controls or start CGP-006.",
+  "normative_source_count": 29,
+  "prompt_id": "CGP-005",
+  "reference_corpus_only_count": 2196,
+  "sources": [
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0001",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/registries/CANON_ARTIFACT_INVENTORY.md",
+      "source_id": "CGSRC-GOV-0002"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0002",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/registries/CANON_DEPENDENCY_REGISTRY.md",
+      "source_id": "CGSRC-GOV-0003"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0003",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/registries/CANON_STATE_AND_LOCK_REGISTRY.md",
+      "source_id": "CGSRC-GOV-0005"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0004",
+      "inclusion_category": "SUPPORTING_FROZEN",
+      "necessity_test": "NECESSARY_INTERPRETATION",
+      "repository_path": "docs/canon/registries/DOMAIN_OWNER_AND_STEWARD_REGISTRY.md",
+      "source_id": "CGSRC-GOV-0006"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0005",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/registries/IMPLEMENTATION_AUTHORIZATION_REGISTRY.md",
+      "source_id": "CGSRC-GOV-0008"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0006",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_BASELINE_MANIFEST.json",
+      "source_id": "CGSRC-GOV-0009"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0007",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_LOCK_CERTIFICATE.json",
+      "source_id": "CGSRC-GOV-0011"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0008",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_LOCK_RECORD.md",
+      "source_id": "CGSRC-GOV-0012"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0009",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/governance_v1_0/GLOBAL_GOVERNANCE_V1_0_SCOPE.md",
+      "source_id": "CGSRC-GOV-0014"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0010",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/MASTER_ATLAS_GOVERNANCE.md",
+      "source_id": "CGSRC-GOV-0084"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0011",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/companions/GLOBAL_ADOPTION_STATE_REGISTER.json",
+      "source_id": "CGSRC-GOV-0138"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0012",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/companions/GLOBAL_ADOPTION_STATE_REGISTER.md",
+      "source_id": "CGSRC-GOV-0139"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0013",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/companions/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.json",
+      "source_id": "CGSRC-GOV-0152"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0014",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/canon/companions/MASTER_EQUINESYNC_GOVERNANCE_REQUIREMENT_INDEX_V1_0.md",
+      "source_id": "CGSRC-GOV-0153"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0015",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_ADOPTION_READINESS_REPORT.md",
+      "source_id": "CGSRC-ATLAS-0006"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0016",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0.md",
+      "source_id": "CGSRC-ATLAS-0017"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0017",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_ADOPTION_DECISION.md",
+      "source_id": "CGSRC-ATLAS-0018"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0018",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_ADOPTION_MANIFEST.md",
+      "source_id": "CGSRC-ATLAS-0019"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0019",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_ADOPTION_REPORT.md",
+      "source_id": "CGSRC-ATLAS-0020"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0020",
+      "inclusion_category": "CONTROLLING_FROZEN",
+      "necessity_test": "CONTROLLING_AUTHORITY",
+      "repository_path": "docs/implementation/MASTER_EQUINESYNC_IMPLEMENTATION_ATLAS_V1_0_ADOPTION_VERIFICATION_MATRIX.md",
+      "source_id": "CGSRC-ATLAS-0021"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0021",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/receipts/CGP_001_REPOSITORY_INTEGRATION_RECEIPT.md",
+      "source_id": "CGSRC-REPO-0001"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0022",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/receipts/CGP_002_REPOSITORY_INTEGRATION_RECEIPT.md",
+      "source_id": "CGSRC-REPO-0002"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0023",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/CANONICAL_GUIDE_INVENTORY.md",
+      "source_id": "CGSRC-REPO-0008"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0024",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/NON_AUTHORIZATION_BOUNDARY.md",
+      "source_id": "CGSRC-REPO-0009"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0025",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/receipts/CGP_003_REPOSITORY_INTEGRATION_RECEIPT.md",
+      "source_id": "CGSRC-CGP005-0001"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0026",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/receipts/CGP_004_REPOSITORY_INTEGRATION_RECEIPT.md",
+      "source_id": "CGSRC-CGP005-0002"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0027",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_REGISTER.csv",
+      "source_id": "CGSRC-CGP005-0003"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0028",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_TO_GUIDE_MAP.csv",
+      "source_id": "CGSRC-CGP005-0004"
+    },
+    {
+      "freeze_record_id": "CGP005-NF-ES-CG-00-0029",
+      "inclusion_category": "IMPLEMENTATION_EVIDENCE_FROZEN",
+      "necessity_test": "NECESSARY_IMPLEMENTATION_EVIDENCE",
+      "repository_path": "backend/server.py",
+      "source_id": "CGSRC-CGP005-0201"
+    }
+  ]
+}

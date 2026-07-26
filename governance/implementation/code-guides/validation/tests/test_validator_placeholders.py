@@ -30,6 +30,8 @@ VALIDATOR_FILES = [
     "validate_repository_component_register.py",
     "validate_repository_authority_alignment.py",
     "validate_current_state_assessment.py",
+    "validate_source_freeze.py",
+    "validate_wave_1_drafting_readiness.py",
 ]
 
 

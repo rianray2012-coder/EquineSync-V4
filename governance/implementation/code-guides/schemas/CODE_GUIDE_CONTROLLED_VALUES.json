@@ -123,7 +123,8 @@
     "ACCEPTED",
     "REVISION_REQUIRED",
     "BLOCKED",
-    "SUPERSEDED"
+    "SUPERSEDED",
+    "FOUNDER_APPROVED_FOR_REPOSITORY_INTEGRATION"
   ],
   "repository_authority_alignment_states": [
     "ALIGNED_WITH_CONTROLLING_AUTHORITY",
@@ -147,7 +148,7 @@
     "MISSING",
     "UNKNOWN"
   ],
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "source_authority_statuses": [
     "CONTROLLING",
     "SUPPORTING",
@@ -199,6 +200,27 @@
     "HISTORICAL_PRESERVED",
     "EXTERNAL_REFERENCE",
     "UNKNOWN"
+  ],
+  "source_freeze_inclusion_categories": [
+    "CONTROLLING_FROZEN",
+    "SUPPORTING_FROZEN",
+    "HISTORICAL_FROZEN",
+    "IMPLEMENTATION_EVIDENCE_FROZEN",
+    "EXCLUDED_SUPERSEDED",
+    "EXCLUDED_PROPOSED",
+    "EXCLUDED_BLOCKED",
+    "EXCLUDED_OUT_OF_SCOPE",
+    "PENDING_AUTHORITY",
+    "MISSING_REQUIRED_SOURCE",
+    "REFERENCE_CORPUS_INDEXED_NOT_NORMATIVE"
+  ],
+  "source_freeze_readiness_dispositions": [
+    "SOURCE_FREEZE_COMPLETE_READY_FOR_CGP_006_WHEN_AUTHORIZED",
+    "SOURCE_FREEZE_COMPLETE_WITH_RETAINED_NON_BLOCKING_GAPS",
+    "BLOCKED_BY_SOURCE_CUSTODY",
+    "BLOCKED_BY_AUTHORITY_DECISION",
+    "NOT_IN_WAVE_1",
+    "CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW"
   ],
   "source_gap_types": [
     "SOURCE_MISSING",
