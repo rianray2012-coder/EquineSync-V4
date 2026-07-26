@@ -21,8 +21,8 @@
 - Initial scaffold commit: `625ea6de980eabcf376aeac7de78aca1ab40aab4`
 - Scaffold metadata commit and approved PR head: `b3971a49727340824d023a0a67e9914f24bcc8a6`
 - Merge commit: `b2d0a35db11c75d39d9227ae2a67c72728daa62b`
-- Repository-integration receipt commit: `PENDING_POST_MERGE_RECEIPT_COMMIT`
-- Resulting remote default-branch head recorded for this receipt: `PENDING_POST_MERGE_RECEIPT_COMMIT`
+- Repository-integration receipt commit: `3c9ffbeee874ef22f95f05b682a5340e0da79ecf`
+- Resulting remote default-branch head recorded for this receipt: `0b2ac3ac1a38611af2a66ba6597fe7ac71a85cfd`
 
 ## CGP-001 State
 
