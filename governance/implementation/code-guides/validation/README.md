@@ -16,6 +16,12 @@ Run a single validator:
 python3 governance/implementation/code-guides/validation/validate_control_registry.py --json
 ```
 
+Run the CGP-003 source-accession validator:
+
+```bash
+python3 governance/implementation/code-guides/validation/validate_source_accession.py --json
+```
+
 ## Output Classifications
 
 `PASS`, `FAIL`, `WARNING`, `NOT_YET_APPLICABLE`, and `BLOCKED` are supported. `NOT_YET_APPLICABLE` is not counted as a passing substantive validation.
@@ -27,3 +33,7 @@ Fixtures live under `validation/tests/fixtures/`. Positive fixtures are minimal 
 ## Future Validators
 
 Add new validators by implementing a function in `cgp_validation.py`, adding a wrapper entrypoint, and adding fixtures plus tests.
+
+## CGP-003 Source Accession
+
+`validate_source_accession.py` validates the master source register, source-to-guide map, retained source gaps, conflicts, and supersession records. It verifies source IDs, controlled values, repository path resolution, file checksums, deterministic directory aggregate checksums, guide mappings, and controlling-source approval basis. It does not validate or create substantive Code Guide controls.

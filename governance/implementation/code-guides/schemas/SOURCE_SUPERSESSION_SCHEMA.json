@@ -1,0 +1,41 @@
+{
+  "$id": "https://equinesync.local/schemas/code-guide/source_supersession.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "affected_guides": {
+      "type": "string"
+    },
+    "evidence_path": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "predecessor_source_id": {
+      "type": "string"
+    },
+    "successor_source_id": {
+      "type": "string"
+    },
+    "supersession_id": {
+      "type": "string"
+    },
+    "supersession_status": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "supersession_id",
+    "predecessor_source_id",
+    "successor_source_id",
+    "supersession_status",
+    "evidence_path",
+    "affected_guides",
+    "notes"
+  ],
+  "schema_version": "0.3.0",
+  "source_prompt": "CGP-003",
+  "title": "Source Supersession",
+  "type": "object"
+}

@@ -1,0 +1,41 @@
+{
+  "$id": "https://equinesync.local/schemas/code-guide/source_to_guide_map.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_status": {
+      "type": "string"
+    },
+    "coverage_note": {
+      "type": "string"
+    },
+    "gap_references": {
+      "type": "string"
+    },
+    "guide_id": {
+      "type": "string"
+    },
+    "mapping_id": {
+      "type": "string"
+    },
+    "mapping_type": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "mapping_id",
+    "source_id",
+    "guide_id",
+    "mapping_type",
+    "authority_status",
+    "coverage_note",
+    "gap_references"
+  ],
+  "schema_version": "0.3.0",
+  "source_prompt": "CGP-003",
+  "title": "Source To Guide Map",
+  "type": "object"
+}

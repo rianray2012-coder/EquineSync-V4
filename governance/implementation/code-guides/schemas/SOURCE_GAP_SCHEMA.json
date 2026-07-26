@@ -1,0 +1,61 @@
+{
+  "$id": "https://equinesync.local/schemas/code-guide/source_gap.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "affected_guide_or_program_area": {
+      "type": "string"
+    },
+    "affected_source": {
+      "type": "string"
+    },
+    "blocks_adoption_or_activation": {
+      "type": "string"
+    },
+    "drafting_may_proceed": {
+      "type": "string"
+    },
+    "gap_id": {
+      "type": "string"
+    },
+    "gap_type": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "required_next_action": {
+      "type": "string"
+    },
+    "responsible_authority": {
+      "type": "string"
+    },
+    "risk": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "gap_id",
+    "source_id",
+    "gap_type",
+    "affected_source",
+    "affected_guide_or_program_area",
+    "risk",
+    "required_next_action",
+    "responsible_authority",
+    "drafting_may_proceed",
+    "blocks_adoption_or_activation",
+    "status",
+    "notes"
+  ],
+  "schema_version": "0.3.0",
+  "source_prompt": "CGP-003",
+  "title": "Source Gap",
+  "type": "object"
+}

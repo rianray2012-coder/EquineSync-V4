@@ -1,0 +1,384 @@
+{
+  "package_id": "ES-CGP-003-MASTER-SOURCE-INVENTORY-2026-07-26",
+  "prompt_id": "CGP-003",
+  "execution_id": "CGEXEC-20260726-0002",
+  "baseline": "905f9503e3d3a2dad7d74599fa53efa3eaee240d",
+  "branch": "codex/code-guide-master-source-inventory-cgp-003-v1",
+  "created_date": "2026-07-26",
+  "authorized_scope": "governance/implementation/code-guides",
+  "checksum_ledger": "governance/implementation/code-guides/packages/CGP_003_SHA256SUMS.txt",
+  "ledger_self_hashing": false,
+  "artifact_count": 37,
+  "files": [
+    {
+      "path": "governance/implementation/code-guides/CONTROLLED_VALUES.md",
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "purpose": "CGP-003 strengthened program documentation artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/REGISTER_DATA_DICTIONARY.md",
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "purpose": "CGP-003 strengthened program documentation artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
+      "artifact_type": "PACKAGE_CUSTODY",
+      "purpose": "CGP-003 package manifest or checksum custody artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/packages/CGP_003_CREATED_ARTIFACT_MANIFEST.json",
+      "artifact_type": "PACKAGE_CUSTODY",
+      "purpose": "CGP-003 package manifest or checksum custody artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/packages/CGP_003_SHA256SUMS.txt",
+      "artifact_type": "PACKAGE_CUSTODY",
+      "purpose": "CGP-003 package manifest or checksum custody artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "EXCLUDED_SELF_REFERENCE",
+      "validation_status": "PASS",
+      "notes": "Checksum ledger excludes itself by directive."
+    },
+    {
+      "path": "governance/implementation/code-guides/receipts/CGP_003_EXECUTION_RECEIPT.md",
+      "artifact_type": "RECEIPT",
+      "purpose": "CGP-003 execution receipt and non-authorization boundary evidence.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/receipts/CGP_003_FOUNDER_DECISION_RECONCILIATION.md",
+      "artifact_type": "RECEIPT",
+      "purpose": "CGP-003 Founder decision reconciliation and source-freeze alignment receipt.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_ARTIFACT_INVENTORY.csv",
+      "artifact_type": "REGISTER",
+      "purpose": "CGP-003 program tracking, findings, open decisions, dependency, or artifact inventory update.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_DEPENDENCY_REGISTER.csv",
+      "artifact_type": "REGISTER",
+      "purpose": "CGP-003 program tracking, findings, open decisions, dependency, or artifact inventory update.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_FINDING_REGISTER.csv",
+      "artifact_type": "REGISTER",
+      "purpose": "CGP-003 program tracking, findings, open decisions, dependency, or artifact inventory update.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_OPEN_DECISION_REGISTER.csv",
+      "artifact_type": "REGISTER",
+      "purpose": "CGP-003 program tracking, findings, open decisions, dependency, or artifact inventory update.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv",
+      "artifact_type": "REGISTER",
+      "purpose": "CGP-003 program tracking, findings, open decisions, dependency, or artifact inventory update.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROMPT_EXECUTION_LOG.csv",
+      "artifact_type": "REGISTER",
+      "purpose": "CGP-003 program tracking, findings, open decisions, dependency, or artifact inventory update.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/registers/GUIDE_REVIEW_FINDING_REGISTER.csv",
+      "artifact_type": "REGISTER",
+      "purpose": "CGP-003 program tracking, findings, open decisions, dependency, or artifact inventory update.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/registers/OPEN_DECISION_REGISTER.csv",
+      "artifact_type": "REGISTER",
+      "purpose": "CGP-003 program tracking, findings, open decisions, dependency, or artifact inventory update.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/reviews/CGP_003_SEARCH_COVERAGE_REPORT.md",
+      "artifact_type": "REVIEW_REPORT",
+      "purpose": "CGP-003 assurance, validation, or reproducible search coverage evidence.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/reviews/CGP_003_SOURCE_ASSURANCE_REPORT.md",
+      "artifact_type": "REVIEW_REPORT",
+      "purpose": "CGP-003 assurance, validation, or reproducible search coverage evidence.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/reviews/CGP_003_VALIDATION_REPORT.json",
+      "artifact_type": "REVIEW_REPORT",
+      "purpose": "CGP-003 assurance, validation, or reproducible search coverage evidence.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/schemas/CODE_GUIDE_CONTROLLED_VALUES.json",
+      "artifact_type": "SCHEMA",
+      "purpose": "CGP-003 backward-compatible source accession schema or controlled-value extension.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/schemas/README.md",
+      "artifact_type": "SCHEMA",
+      "purpose": "CGP-003 backward-compatible source accession schema or controlled-value extension.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/schemas/SOURCE_CONFLICT_SCHEMA.json",
+      "artifact_type": "SCHEMA",
+      "purpose": "CGP-003 backward-compatible source accession schema or controlled-value extension.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/schemas/SOURCE_GAP_SCHEMA.json",
+      "artifact_type": "SCHEMA",
+      "purpose": "CGP-003 backward-compatible source accession schema or controlled-value extension.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/schemas/SOURCE_RECORD_SCHEMA.json",
+      "artifact_type": "SCHEMA",
+      "purpose": "CGP-003 backward-compatible source accession schema or controlled-value extension.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/schemas/SOURCE_SUPERSESSION_SCHEMA.json",
+      "artifact_type": "SCHEMA",
+      "purpose": "CGP-003 backward-compatible source accession schema or controlled-value extension.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/schemas/SOURCE_TO_GUIDE_MAP_SCHEMA.json",
+      "artifact_type": "SCHEMA",
+      "purpose": "CGP-003 backward-compatible source accession schema or controlled-value extension.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_CONFLICT_REGISTER.csv",
+      "artifact_type": "SOURCE_ACCESSION_REGISTER",
+      "purpose": "CGP-003 master source inventory, reconciliation, custody, gap, conflict, supersession, or guide mapping artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_CUSTODY_REPORT.md",
+      "artifact_type": "SOURCE_ACCESSION_REPORT",
+      "purpose": "CGP-003 master source inventory, reconciliation, custody, gap, conflict, supersession, or guide mapping artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_GAP_REGISTER.csv",
+      "artifact_type": "SOURCE_ACCESSION_REGISTER",
+      "purpose": "CGP-003 master source inventory, reconciliation, custody, gap, conflict, supersession, or guide mapping artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_RECONCILIATION_REPORT.md",
+      "artifact_type": "SOURCE_ACCESSION_REPORT",
+      "purpose": "CGP-003 master source inventory, reconciliation, custody, gap, conflict, supersession, or guide mapping artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_REGISTER.csv",
+      "artifact_type": "SOURCE_ACCESSION_REGISTER",
+      "purpose": "CGP-003 master source inventory, reconciliation, custody, gap, conflict, supersession, or guide mapping artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_SUPERSESSION_REGISTER.csv",
+      "artifact_type": "SOURCE_ACCESSION_REGISTER",
+      "purpose": "CGP-003 master source inventory, reconciliation, custody, gap, conflict, supersession, or guide mapping artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_TO_GUIDE_MAP.csv",
+      "artifact_type": "SOURCE_ACCESSION_REGISTER",
+      "purpose": "CGP-003 master source inventory, reconciliation, custody, gap, conflict, supersession, or guide mapping artifact.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/validation/README.md",
+      "artifact_type": "VALIDATION_DOCUMENTATION",
+      "purpose": "CGP-003 source accession validator, wrapper, documentation, or test coverage.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/validation/cgp_validation.py",
+      "artifact_type": "VALIDATOR",
+      "purpose": "CGP-003 source accession validator, wrapper, documentation, or test coverage.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/validation/tests/test_cgp003_source_accession.py",
+      "artifact_type": "VALIDATOR_TEST",
+      "purpose": "CGP-003 source accession validator, wrapper, documentation, or test coverage.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/validation/tests/test_validator_placeholders.py",
+      "artifact_type": "VALIDATOR_TEST",
+      "purpose": "CGP-003 source accession validator, wrapper, documentation, or test coverage.",
+      "originating_prompt": "CGP-003",
+      "status": "STRENGTHENED",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/validation/validate_source_accession.py",
+      "artifact_type": "VALIDATOR",
+      "purpose": "CGP-003 source accession validator, wrapper, documentation, or test coverage.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    }
+  ]
+}

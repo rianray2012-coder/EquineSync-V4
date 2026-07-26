@@ -1,0 +1,125 @@
+{
+  "$id": "https://equinesync.local/schemas/code-guide/source-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "applicable_code_guides": {
+      "type": "string"
+    },
+    "approval_authority": {
+      "type": "string"
+    },
+    "approval_record_path": {
+      "type": "string"
+    },
+    "authority_status": {
+      "type": "string"
+    },
+    "checksum": {
+      "type": "string"
+    },
+    "checksum_verification_status": {
+      "type": "string"
+    },
+    "conflicts": {
+      "type": "string"
+    },
+    "custody_status": {
+      "type": "string"
+    },
+    "effective_date": {
+      "type": "string"
+    },
+    "exact_approved_bytes_accessioned": {
+      "type": "string"
+    },
+    "filename": {
+      "type": "string"
+    },
+    "limitations": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "originating_commit": {
+      "type": "string"
+    },
+    "predecessor": {
+      "type": "string"
+    },
+    "related_atlases": {
+      "type": "string"
+    },
+    "related_controls_or_domains": {
+      "type": "string"
+    },
+    "related_pias": {
+      "type": "string"
+    },
+    "repository_integration_receipt_path": {
+      "type": "string"
+    },
+    "repository_path": {
+      "type": "string"
+    },
+    "review_status": {
+      "type": "string"
+    },
+    "source_class": {
+      "type": "string"
+    },
+    "source_format": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "successor": {
+      "type": "string"
+    },
+    "supersession_status": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "title",
+    "filename",
+    "repository_path",
+    "source_class",
+    "authority_status",
+    "version",
+    "effective_date",
+    "approval_authority",
+    "approval_record_path",
+    "checksum",
+    "checksum_verification_status",
+    "exact_approved_bytes_accessioned",
+    "source_format",
+    "related_pias",
+    "related_atlases",
+    "applicable_code_guides",
+    "related_controls_or_domains",
+    "predecessor",
+    "successor",
+    "supersession_status",
+    "conflicts",
+    "limitations",
+    "custody_status",
+    "review_status",
+    "originating_commit",
+    "repository_integration_receipt_path",
+    "notes"
+  ],
+  "schema_version": "0.3.0",
+  "source_prompt": "CGP-003",
+  "title": "Code Guide Source Record",
+  "type": "object"
+}

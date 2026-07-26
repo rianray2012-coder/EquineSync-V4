@@ -26,6 +26,7 @@ VALIDATOR_FILES = [
     "validate_supersession.py",
     "validate_package_integrity.py",
     "validate_portfolio_consistency.py",
+    "validate_source_accession.py",
 ]
 
 
