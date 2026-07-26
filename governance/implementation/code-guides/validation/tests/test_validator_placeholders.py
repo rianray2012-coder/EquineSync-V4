@@ -27,6 +27,9 @@ VALIDATOR_FILES = [
     "validate_package_integrity.py",
     "validate_portfolio_consistency.py",
     "validate_source_accession.py",
+    "validate_repository_component_register.py",
+    "validate_repository_authority_alignment.py",
+    "validate_current_state_assessment.py",
 ]
 
 
