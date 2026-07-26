@@ -1,0 +1,9 @@
+path,change_type,scope,runtime_effect,notes
+governance/implementation/technical-audit/remediation/ES-TA-PRF-001-cross-barn-authorization-v1/ES_TA_PRF_001_REMEDIATION_SUMMARY.md,add,PRF-001 evidence summary,none,No runtime code change
+governance/implementation/technical-audit/remediation/ES-TA-PRF-001-cross-barn-authorization-v1/CROSS_BARN_AUTHORIZATION_FLOW_MAP.md,add,Task authorization source and route flow map,none,Records observed tenant/barn predicates
+governance/implementation/technical-audit/remediation/ES-TA-PRF-001-cross-barn-authorization-v1/CROSS_BARN_AUTHORIZATION_TEST_MATRIX.csv,add,Validation matrix,none,Includes exact-node setup blocker and direct probe outcomes
+governance/implementation/technical-audit/remediation/ES-TA-PRF-001-cross-barn-authorization-v1/CROSS_BARN_FINDING_REPRODUCTION_REPORT.md,add,Reproduction report,none,Records exact retained-node result and direct probe result
+governance/implementation/technical-audit/remediation/ES-TA-PRF-001-cross-barn-authorization-v1/ES_TA_PRF_001_VALIDATION_REPORT.md,add,Validation report,none,Records no runtime/test/baseline delta
+governance/implementation/technical-audit/remediation/ES-TA-PRF-001-cross-barn-authorization-v1/ES_TA_PRF_001_CHANGED_FILE_REGISTER.csv,add,Changed file register,none,This register
+governance/implementation/technical-audit/remediation/ES-TA-PRF-001-cross-barn-authorization-v1/ES_TA_PRF_001_RISK_AND_ROLLBACK_RECORD.md,add,Risk and rollback record,none,Documentary rollback only
+governance/implementation/technical-audit/remediation/ES-TA-PRF-001-cross-barn-authorization-v1/ES_TA_PRF_001_SHA256SUMS.txt,add,Checksum ledger,none,Generated after peer files
