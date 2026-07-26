@@ -25,16 +25,6 @@
     "sourcegrep_candidate_tests": 98,
     "category_overlap": "possible; markers are not mutually exclusive"
   },
-  "ci_runnable_result": {
-    "selected_tests": 1080,
-    "passed": 920,
-    "failed": 157,
-    "errored": 3,
-    "skipped": 0,
-    "deselected_live": 1206,
-    "duration_seconds": 112.534,
-    "exit_code": 1
-  },
   "artifact_test_inventory_status": {
     "status": "inventoried_not_remediated",
     "artifact_candidate_nodeids": [
@@ -59,5 +49,16 @@
       "backend/tests/test_rf19_staging_uat_evidence_capture.py::test_rf19_script_generates_report_and_zip_without_fail_on_blockers"
     ],
     "restriction": "No artifact-dependent tests were deleted, skipped, xfailed, or remediated under this directive."
+  },
+  "local_ci_runnable_result": {
+    "selected_tests": 1080,
+    "passed": 920,
+    "failed": 157,
+    "errored": 3,
+    "skipped": 0,
+    "deselected_live": 1206,
+    "duration_seconds": 112.534,
+    "exit_code": 1,
+    "provenance": "local clean-clone run after branch sync; GitHub Actions run counts are recorded in the PR body and action artifacts."
   }
 }

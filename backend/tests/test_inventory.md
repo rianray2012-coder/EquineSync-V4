@@ -28,7 +28,11 @@ Generated during PR #3 CI methodology hardening.
 | artifact | 19 | Preliminary `outputs/` source signal only. |
 | sourcegrep | 98 | Preliminary `read_text()` source signal only. |
 
-## CI-Runnable Result
+## Local CI-Runnable Result
+
+This table records the local clean-clone measurement run after the branch was
+synchronized with the current base. GitHub Actions run counts are recorded in
+the PR body and in the uploaded Actions artifacts.
 
 | Result | Count |
 | --- | ---: |
