@@ -11,7 +11,7 @@
 
 ## Revision Treatment
 
-Founder disposition `CGP-005_REVISION_REQUIRED_OVERINCLUSIVE_SOURCE_FREEZE` was addressed by separating the broad corpus from curated normative guide freezes.
+Founder disposition `CGP-005_REVISION_ACCEPTED_AND_APPROVED_FOR_REPOSITORY_INTEGRATION` accepted the curated two-layer source-freeze model and authorized repository integration after pre-merge reconciliation.
 
 ## Output Summary
 
@@ -22,11 +22,11 @@ Founder disposition `CGP-005_REVISION_REQUIRED_OVERINCLUSIVE_SOURCE_FREEZE` was 
 - `ES-CG-01` normative source rows: `34`
 - `ES-CG-13` normative source rows: `45`
 - `ES-CG-10` normative source rows: `31`
-- Wave 1 guides marked `SOURCE_FROZEN`: `0`
+- Wave 1 guides marked `SOURCE_FROZEN`: `4`
 - Guides adopted: `0`
 - Guides active: `0`
-- Open CGP-005 findings: `CGP005-F-0001`
+- CGP-005 finding closure: `CGP005-F-0001 = RESOLVED_CURATED_TWO_LAYER_SOURCE_MODEL_ACCEPTED`
 
 ## Actions Not Taken
 
-CGP-006 was not begun. No substantive Code Guide controls, implementation profiles, application-code changes, application-test changes, CI changes, PIA amendments, atlas amendments, deployment actions, pilot actions, production actions, provider executions, financial activation, messaging activation, moderation activation, AI activation, archival migration, enrollment, PR opening, or merge action were created or exercised.
+CGP-006 was not begun. No substantive Code Guide controls, implementation profiles, application-code changes, application-test changes, CI changes, PIA amendments, atlas amendments, deployment actions, pilot actions, production actions, provider executions, financial activation, messaging activation, moderation activation, AI activation, archival migration, enrollment, or merge action were created or exercised.

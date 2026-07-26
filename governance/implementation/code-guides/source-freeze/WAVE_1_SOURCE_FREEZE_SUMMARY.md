@@ -2,9 +2,9 @@
 
 **Prompt:** `CGP-005`
 **Execution ID:** `CGEXEC-20260726-0004`
-**Revision disposition addressed:** `CGP-005_REVISION_REQUIRED_OVERINCLUSIVE_SOURCE_FREEZE`
+**Founder disposition:** `CGP-005_REVISION_ACCEPTED_AND_APPROVED_FOR_REPOSITORY_INTEGRATION`
 
-CGP-005 now uses a two-layer model: a non-normative reference corpus and curated guide-specific normative freezes returned for Founder review.
+CGP-005 uses a Founder-accepted two-layer model: a non-normative reference corpus and curated guide-specific normative freezes.
 
 - Reference corpus records: `2511`
 - Normative crosswalk rows: `139`
@@ -14,4 +14,4 @@ CGP-005 now uses a two-layer model: a non-normative reference corpus and curated
 - `ES-CG-13` normative rows: `45`
 - `ES-CG-10` normative rows: `31`
 
-All Wave 1 guides remain `PLANNED`; CGP-006 was not begun.
+All Wave 1 guides are `SOURCE_FROZEN` for drafting prerequisite purposes only; they remain `NOT_ADOPTED`, `NOT_ACTIVE`, not implemented, and not activated as gates. CGP-006 was not begun.

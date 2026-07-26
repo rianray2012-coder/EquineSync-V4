@@ -24501,14 +24501,14 @@
       "curation_status": "REFERENCE_CORPUS_ONLY",
       "freeze_record_id": "CGP005-RC-1606",
       "repository_path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
-      "sha256_checksum": "a556cff1d9f9f54e92617cc13681acd89f2e39100bb70e14afaa98a5c4d5b2d0",
+      "sha256_checksum": "1c90c031e3877e4e5daeab644669e5036390a17fe2b5af15416ae307d97c1c57",
       "source_id": "CGSRC-REPO-0004"
     },
     {
       "curation_status": "REFERENCE_CORPUS_ONLY",
       "freeze_record_id": "CGP005-RC-1607",
       "repository_path": "governance/implementation/code-guides/schemas/CODE_GUIDE_CONTROLLED_VALUES.json",
-      "sha256_checksum": "aa39594d9c789a572e4e3bdb00a493501c7234e0c4310eac33f358f1efe3bf4b",
+      "sha256_checksum": "46342b93f17b477c98acc301968af9a142320b7fabd1a33340c60141d9f50a84",
       "source_id": "CGSRC-REPO-0005"
     },
     {
@@ -24522,7 +24522,7 @@
       "curation_status": "REFERENCE_CORPUS_ONLY",
       "freeze_record_id": "CGP005-RC-1609",
       "repository_path": "governance/implementation/code-guides/validation/cgp_validation.py",
-      "sha256_checksum": "6de7730426fe36f20970249d8f741151ddf169b50b27a1ce94a20d73c3a7a8ce",
+      "sha256_checksum": "c6b437b18c983c3946c0d598be74207edcedd62691d1d5cc9f163b5804608364",
       "source_id": "CGSRC-REPO-0007"
     },
     {

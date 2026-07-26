@@ -29,6 +29,8 @@ DATE = "2026-07-26"
 WAVE_GUIDES = ("ES-CG-00", "ES-CG-01", "ES-CG-13", "ES-CG-10")
 REFERENCE_CATEGORY = "REFERENCE_CORPUS_INDEXED_NOT_NORMATIVE"
 NORMATIVE_CLASSIFICATION = "NORMATIVE_GUIDE_SOURCE_FREEZE"
+FOUNDER_APPROVED_STATUS = "FOUNDER_APPROVED_FOR_REPOSITORY_INTEGRATION"
+SOURCE_FREEZE_READINESS = "SOURCE_FREEZE_COMPLETE_READY_FOR_CGP_006_WHEN_AUTHORIZED"
 CYCLE_CHECKSUM_TREATMENTS = {
     "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt": "VALIDATED_BY_CGP_002_PACKAGE_INTEGRITY",
     "governance/implementation/code-guides/packages/CGP_003_SHA256SUMS.txt": "VALIDATED_BY_CGP_003_PACKAGE_INTEGRITY",
@@ -483,6 +485,9 @@ def update_controlled_values() -> None:
     dispositions = data.setdefault("source_freeze_readiness_dispositions", [])
     if "CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW" not in dispositions:
         dispositions.append("CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW")
+    prompt_states = data.setdefault("prompt_execution_states", [])
+    if FOUNDER_APPROVED_STATUS not in prompt_states:
+        prompt_states.append(FOUNDER_APPROVED_STATUS)
     write_json(path, data)
 
 
@@ -769,15 +774,15 @@ def build_guide_freezes(origin: dict[str, dict[str, str]], candidates: dict[str,
                     "coverage_note": row["guide_requirement_area"],
                     "source_freeze_record_id": row["freeze_record_id"],
                     "freeze_manifest_path": f"governance/implementation/code-guides/guides/{guide}/source-freeze/{guide}_SOURCE_FREEZE_MANIFEST.json",
-                    "readiness_effect": "SUPPORTS_FOUNDER_REVIEW_NOT_CGP006_READY",
+                    "readiness_effect": "SUPPORTS_SOURCE_FROZEN_PREREQUISITE_NOT_CGP006_ISSUED",
                 }
             )
         write_guide_reports(guide, rows, guide_exclusions, candidates[guide], counts)
         readiness.append(
             {
                 "guide_id": guide,
-                "readiness_disposition": "CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW",
-                "maturity_after_cgp005": "PLANNED",
+                "readiness_disposition": SOURCE_FREEZE_READINESS,
+                "maturity_after_cgp005": "SOURCE_FROZEN",
                 "controlling_sources_complete": "YES",
                 "checksums_verified": "YES",
                 "approval_basis_identified": "YES",
@@ -786,12 +791,12 @@ def build_guide_freezes(origin: dict[str, dict[str, str]], candidates: dict[str,
                 "conflicts_resolved_or_retained": "YES",
                 "repository_evidence_baseline_recorded": "YES",
                 "drafting_questions_identified": "YES",
-                "blocking_findings": "CGP005-F-0001",
+                "blocking_findings": "NONE",
                 "decision_count": "0",
                 "retained_gaps": retained_gaps_for(guide),
                 "cgp006_ready": "NO",
-                "status": "REVISION_RETURNED_PENDING_FOUNDER_REVIEW",
-                "notes": f"{guide} has {len(rows)} curated normative rows and remains PLANNED pending Founder acceptance.",
+                "status": "FOUNDER_APPROVED_PENDING_REPOSITORY_INTEGRATION",
+                "notes": f"{guide} has {len(rows)} curated normative rows and is SOURCE_FROZEN for drafting prerequisite purposes only; it remains NOT_ADOPTED, NOT_ACTIVE, not implemented, and not activated as a gate.",
             }
         )
     write_csv(
@@ -929,24 +934,24 @@ def write_guide_reports(guide: str, rows: list[dict[str, str]], exclusions: list
     source_report = [
         f"# {guide} Source Freeze Report",
         "",
-        f"CGP-005 revision separates the broad reference corpus from this curated normative source freeze for `{guide}`.",
+        f"CGP-005 separates the broad reference corpus from this Founder-accepted curated normative source freeze for `{guide}`.",
         "",
         f"- Normative rows: `{len(rows)}`",
         f"- Reference-only exclusions: `{len(exclusions)}`",
-        f"- Maturity after CGP-005 revision: `PLANNED`",
+        f"- Maturity after CGP-005 acceptance: `SOURCE_FROZEN`",
         "",
-        "This is returned for Founder review and is not adoption, activation, implementation, or CGP-006 authority.",
+        "This source freeze is a drafting prerequisite only and is not adoption, activation, implementation, gate activation, or CGP-006 authority.",
     ]
     (guide_dir / f"{guide}_SOURCE_FREEZE_REPORT.md").write_text("\n".join(source_report) + "\n", encoding="utf-8")
     readiness = [
         f"# {guide} Drafting Readiness Report",
         "",
-        f"- Readiness disposition: `CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW`",
-        "- Maturity after CGP-005 revision: `PLANNED`",
+        f"- Readiness disposition: `{SOURCE_FREEZE_READINESS}`",
+        "- Maturity after CGP-005 acceptance: `SOURCE_FROZEN`",
         "- CGP-006 ready: `NO`",
-        "- Blocking revision finding: `CGP005-F-0001`",
+        "- Blocking revision finding: `NONE`",
         "",
-        "Founder acceptance is required before the guide may be represented as source-frozen.",
+        "The guide remains NOT_ADOPTED, NOT_ACTIVE, not implemented, and not activated as a gate. CGP-006 was not begun.",
     ]
     (guide_dir / f"{guide}_DRAFTING_READINESS_REPORT.md").write_text("\n".join(readiness) + "\n", encoding="utf-8")
 
@@ -1027,11 +1032,11 @@ def update_readmes_and_tracker() -> None:
     for guide in WAVE_GUIDES:
         path = ROOT / "guides" / guide / "README.md"
         text = path.read_text(encoding="utf-8")
-        text = text.replace("Current maturity state: `SOURCE_FROZEN`", "Current maturity state: `PLANNED`")
-        text = text.replace("source freeze complete only", "curated source-freeze revision returned for Founder review only")
+        text = text.replace("Current maturity state: `PLANNED`", "Current maturity state: `SOURCE_FROZEN`")
+        text = text.replace("curated source-freeze revision returned for Founder review only", "source freeze complete only")
         text = text.replace(
-            "CGP-005 records an exact-byte source freeze and drafting-question inventory for this guide.",
             "CGP-005 revision records a curated normative source-freeze package for Founder review while preserving the broad reference corpus.",
+            "CGP-005 records a Founder-accepted curated normative source-freeze package while preserving the broad reference corpus as non-normative.",
         )
         path.write_text(text, encoding="utf-8")
     tracker_path = ROOT / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv"
@@ -1042,13 +1047,13 @@ def update_readmes_and_tracker() -> None:
         if rid == "CGP-005":
             row.update(
                 {
-                    "maturity_state": "REVISION_REQUIRED",
-                    "prompt_status": "REVISION_REQUIRED",
-                    "next_action": "Founder review of revised two-layer CGP-005 source-freeze package; CGP-006 remains not issued.",
+                    "maturity_state": FOUNDER_APPROVED_STATUS,
+                    "prompt_status": FOUNDER_APPROVED_STATUS,
+                    "next_action": "Open repository-integration pull request after final pre-merge validation; CGP-006 remains not issued.",
                     "last_updated": DATE,
                     "receipt_path": "governance/implementation/code-guides/receipts/CGP_005_EXECUTION_RECEIPT.md",
-                    "notes": "CGP-005 revised after Founder disposition CGP-005_REVISION_REQUIRED_OVERINCLUSIVE_SOURCE_FREEZE; broad corpus reclassified as non-normative reference corpus; curated normative freezes returned for review.",
-                    "work_status": "REVISION_REQUIRED",
+                    "notes": "Founder accepted the revised two-layer CGP-005 package as CGP-005_CURATED_WAVE_1_SOURCE_FREEZE_APPROVED_FOR_REPOSITORY_INTEGRATION; repository integration remains pending.",
+                    "work_status": FOUNDER_APPROVED_STATUS,
                 }
             )
         elif rid == "CGP-006":
@@ -1056,21 +1061,21 @@ def update_readmes_and_tracker() -> None:
                 {
                     "maturity_state": "PLANNED",
                     "prompt_status": "NOT_ISSUED",
-                    "next_action": "Await Founder acceptance of revised CGP-005 before any CGP-006 authority.",
+                    "next_action": "Await CGP-005 repository integration, repository-integration receipt, final default-branch verification, and separate Founder issuance before any CGP-006 authority.",
                     "last_updated": DATE,
-                    "notes": "CGP-006 remains NOT_ISSUED after CGP-005 revision; no drafting begun.",
+                    "notes": "CGP-006 remains NOT_ISSUED after CGP-005 Founder acceptance; no drafting begun.",
                     "work_status": "NOT_STARTED",
                 }
             )
         elif rid in WAVE_GUIDES:
             row.update(
                 {
-                    "maturity_state": "PLANNED",
-                    "prompt_status": "REVISION_REQUIRED",
-                    "next_action": "Await Founder review of revised CGP-005 source-freeze curation.",
+                    "maturity_state": "SOURCE_FROZEN",
+                    "prompt_status": FOUNDER_APPROVED_STATUS,
+                    "next_action": "Await CGP-005 repository integration and separate CGP-006 drafting authorization.",
                     "last_updated": DATE,
-                    "notes": "Guide remains PLANNED; curated normative source-freeze package is returned for Founder review and is not accepted, adopted, active, or implementation-authorizing.",
-                    "work_status": "REVISION_REQUIRED",
+                    "notes": "Guide source freeze accepted by Founder for drafting prerequisite purposes only; guide remains NOT_ADOPTED, NOT_ACTIVE, not implemented, and not activated as a gate.",
+                    "work_status": "SOURCE_FROZEN",
                 }
             )
     write_csv(tracker_path, fields, rows)
@@ -1092,10 +1097,10 @@ def append_finding() -> None:
             "evidence_path": "governance/implementation/code-guides/source-freeze/WAVE_1_REFERENCE_CORPUS_REPORT.md;governance/implementation/code-guides/reviews/CGP_005_SOURCE_FREEZE_ASSURANCE_REPORT.md",
             "affected_source_ids": "WAVE_1_REFERENCE_CORPUS",
             "affected_guides": "ES-CG-00;ES-CG-01;ES-CG-13;ES-CG-10",
-            "status": "OPEN",
-            "required_action": "Founder review must accept the revised two-layer source model before any Wave 1 guide may be represented as SOURCE_FROZEN.",
+            "status": "RESOLVED_CURATED_TWO_LAYER_SOURCE_MODEL_ACCEPTED",
+            "required_action": "Preserve the finding history and record the repository-integration receipt path after CGP-005 integration.",
             "owner": "Founder/Codex later prompt",
-            "notes": "Revision performed but closure is retained for Founder acceptance; CGP-006 remains NOT_ISSUED.",
+            "notes": "Original P2 overinclusion finding preserved. Revised branch head 717aa22da916671eba6753a0999b9f887e339a32 accepted by Founder on 2026-07-26 under CGP-005_REVISION_ACCEPTED_AND_APPROVED_FOR_REPOSITORY_INTEGRATION. Repository-integration receipt path: governance/implementation/code-guides/receipts/CGP_005_REPOSITORY_INTEGRATION_RECEIPT.md when available. CGP-006 remains NOT_ISSUED.",
         }
     )
     write_csv(code_path, fields, rows)
@@ -1115,12 +1120,12 @@ def append_finding() -> None:
             "affected_controls": "",
             "affected_atlas_tasks": "",
             "owner": "Founder/Codex later prompt",
-            "status": "OPEN",
-            "required_action": "Accept or disposition the revised two-layer source-freeze package before guide maturity can advance.",
+            "status": "RESOLVED_CURATED_TWO_LAYER_SOURCE_MODEL_ACCEPTED",
+            "required_action": "Preserve the finding history and record repository-integration receipt evidence after CGP-005 integration.",
             "disposition_authority": "Founder",
-            "closure_evidence": "",
-            "closed_date": "",
-            "retained_reason": "Founder acceptance is required before SOURCE_FROZEN treatment or CGP-006 readiness.",
+            "closure_evidence": "Founder disposition CGP-005_REVISION_ACCEPTED_AND_APPROVED_FOR_REPOSITORY_INTEGRATION; revised branch head 717aa22da916671eba6753a0999b9f887e339a32; repository-integration receipt path governance/implementation/code-guides/receipts/CGP_005_REPOSITORY_INTEGRATION_RECEIPT.md when available.",
+            "closed_date": DATE,
+            "retained_reason": "Preserved as audit evidence of the initial overinclusive freeze and accepted two-layer correction; CGP-006 remains NOT_ISSUED.",
         }
     )
     write_csv(guide_path, gfields, grows)
@@ -1133,9 +1138,9 @@ def write_program_reports(reference_rows: list[dict[str, str]], guide_result: di
         "",
         f"**Prompt:** `{PROMPT}`",
         f"**Execution ID:** `{EXECUTION}`",
-        f"**Revision disposition addressed:** `CGP-005_REVISION_REQUIRED_OVERINCLUSIVE_SOURCE_FREEZE`",
+        f"**Founder disposition:** `CGP-005_REVISION_ACCEPTED_AND_APPROVED_FOR_REPOSITORY_INTEGRATION`",
         "",
-        "CGP-005 now uses a two-layer model: a non-normative reference corpus and curated guide-specific normative freezes returned for Founder review.",
+        "CGP-005 uses a Founder-accepted two-layer model: a non-normative reference corpus and curated guide-specific normative freezes.",
         "",
         f"- Reference corpus records: `{len(reference_rows)}`",
         f"- Normative crosswalk rows: `{guide_result['crosswalk_rows']}`",
@@ -1143,7 +1148,7 @@ def write_program_reports(reference_rows: list[dict[str, str]], guide_result: di
     ]
     for guide, data in guide_result["counts"].items():
         summary.append(f"- `{guide}` normative rows: `{data['total']}`")
-    summary.extend(["", "All Wave 1 guides remain `PLANNED`; CGP-006 was not begun."])
+    summary.extend(["", "All Wave 1 guides are `SOURCE_FROZEN` for drafting prerequisite purposes only; they remain `NOT_ADOPTED`, `NOT_ACTIVE`, not implemented, and not activated as gates. CGP-006 was not begun."])
     (ROOT / "source-freeze" / "WAVE_1_SOURCE_FREEZE_SUMMARY.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
     assurance = [
         "# CGP-005 Source Freeze Assurance Report",
@@ -1162,7 +1167,7 @@ def write_program_reports(reference_rows: list[dict[str, str]], guide_result: di
     assurance.append("## Normative Counts")
     for guide, data in guide_result["counts"].items():
         assurance.append(f"- `{guide}`: `{data['total']}` curated rows")
-    assurance.extend(["", "`CGP005-F-0001` remains open pending Founder acceptance. CGP-006 was not begun."])
+    assurance.extend(["", "`CGP005-F-0001` is closed as `RESOLVED_CURATED_TWO_LAYER_SOURCE_MODEL_ACCEPTED` while preserving the original P2 finding history. CGP-006 was not begun."])
     (ROOT / "reviews" / "CGP_005_SOURCE_FREEZE_ASSURANCE_REPORT.md").write_text("\n".join(assurance) + "\n", encoding="utf-8")
     readiness = [
         "# CGP-005 Wave 1 Drafting Readiness Report",
@@ -1170,17 +1175,17 @@ def write_program_reports(reference_rows: list[dict[str, str]], guide_result: di
         f"**Prompt:** `{PROMPT}`",
         f"**Execution ID:** `{EXECUTION}`",
         "",
-        "| Guide | Maturity After CGP-005 Revision | Readiness | Blocking Finding |",
+        "| Guide | Maturity After CGP-005 Acceptance | Readiness | Blocking Finding |",
         "|---|---|---|---|",
     ]
     for guide in WAVE_GUIDES:
-        readiness.append(f"| `{guide}` | `PLANNED` | `CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW` | `CGP005-F-0001` |")
-    readiness.extend(["", "Founder acceptance is required before any guide may be represented as `SOURCE_FROZEN`. CGP-006 was not begun."])
+        readiness.append(f"| `{guide}` | `SOURCE_FROZEN` | `{SOURCE_FREEZE_READINESS}` | `NONE` |")
+    readiness.extend(["", "The Wave 1 guides remain `NOT_ADOPTED`, `NOT_ACTIVE`, not implemented, and not activated as gates. CGP-006 was not begun."])
     (ROOT / "reviews" / "CGP_005_WAVE_1_DRAFTING_READINESS_REPORT.md").write_text("\n".join(readiness) + "\n", encoding="utf-8")
     retained = [
         "# CGP-005 Retained Gap Report",
         "",
-        "- `CGP005-F-0001`: open pending Founder review of the revised two-layer source-freeze package.",
+        "- `CGP005-F-0001`: closed as `RESOLVED_CURATED_TWO_LAYER_SOURCE_MODEL_ACCEPTED`; retained as audit history of the overinclusive source-freeze deficiency and correction.",
         "- `CGP004-F-0001`: retained for non-Wave 1 source freezes and later adoption or activation treatment.",
         "- `CGP004-F-0002`: retained downstream offline authorization finding.",
         "- `CGP004-F-0003`: retained downstream feature-surface mapping finding.",
@@ -1218,7 +1223,7 @@ def write_receipt(guide_result: dict, reference_count: int) -> None:
         "",
         "## Revision Treatment",
         "",
-        "Founder disposition `CGP-005_REVISION_REQUIRED_OVERINCLUSIVE_SOURCE_FREEZE` was addressed by separating the broad corpus from curated normative guide freezes.",
+        "Founder disposition `CGP-005_REVISION_ACCEPTED_AND_APPROVED_FOR_REPOSITORY_INTEGRATION` accepted the curated two-layer source-freeze model and authorized repository integration after pre-merge reconciliation.",
         "",
         "## Output Summary",
         "",
@@ -1230,14 +1235,14 @@ def write_receipt(guide_result: dict, reference_count: int) -> None:
         lines.append(f"- `{guide}` normative source rows: `{data['total']}`")
     lines.extend(
         [
-            "- Wave 1 guides marked `SOURCE_FROZEN`: `0`",
+            "- Wave 1 guides marked `SOURCE_FROZEN`: `4`",
             "- Guides adopted: `0`",
             "- Guides active: `0`",
-            "- Open CGP-005 findings: `CGP005-F-0001`",
+            "- CGP-005 finding closure: `CGP005-F-0001 = RESOLVED_CURATED_TWO_LAYER_SOURCE_MODEL_ACCEPTED`",
             "",
             "## Actions Not Taken",
             "",
-            "CGP-006 was not begun. No substantive Code Guide controls, implementation profiles, application-code changes, application-test changes, CI changes, PIA amendments, atlas amendments, deployment actions, pilot actions, production actions, provider executions, financial activation, messaging activation, moderation activation, AI activation, archival migration, enrollment, PR opening, or merge action were created or exercised.",
+            "CGP-006 was not begun. No substantive Code Guide controls, implementation profiles, application-code changes, application-test changes, CI changes, PIA amendments, atlas amendments, deployment actions, pilot actions, production actions, provider executions, financial activation, messaging activation, moderation activation, AI activation, archival migration, enrollment, or merge action were created or exercised.",
         ]
     )
     (ROOT / "receipts" / "CGP_005_EXECUTION_RECEIPT.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

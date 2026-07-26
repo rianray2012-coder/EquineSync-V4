@@ -20,4 +20,4 @@ The broad 2,511-record result is retained only as `WAVE_1_REFERENCE_CORPUS` and 
 - `ES-CG-13`: `45` curated rows
 - `ES-CG-10`: `31` curated rows
 
-`CGP005-F-0001` remains open pending Founder acceptance. CGP-006 was not begun.
+`CGP005-F-0001` is closed as `RESOLVED_CURATED_TWO_LAYER_SOURCE_MODEL_ACCEPTED` while preserving the original P2 finding history. CGP-006 was not begun.

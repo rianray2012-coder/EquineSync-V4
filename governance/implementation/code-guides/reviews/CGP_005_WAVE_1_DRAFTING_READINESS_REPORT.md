@@ -3,11 +3,11 @@
 **Prompt:** `CGP-005`
 **Execution ID:** `CGEXEC-20260726-0004`
 
-| Guide | Maturity After CGP-005 Revision | Readiness | Blocking Finding |
+| Guide | Maturity After CGP-005 Acceptance | Readiness | Blocking Finding |
 |---|---|---|---|
-| `ES-CG-00` | `PLANNED` | `CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW` | `CGP005-F-0001` |
-| `ES-CG-01` | `PLANNED` | `CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW` | `CGP005-F-0001` |
-| `ES-CG-13` | `PLANNED` | `CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW` | `CGP005-F-0001` |
-| `ES-CG-10` | `PLANNED` | `CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW` | `CGP005-F-0001` |
+| `ES-CG-00` | `SOURCE_FROZEN` | `SOURCE_FREEZE_COMPLETE_READY_FOR_CGP_006_WHEN_AUTHORIZED` | `NONE` |
+| `ES-CG-01` | `SOURCE_FROZEN` | `SOURCE_FREEZE_COMPLETE_READY_FOR_CGP_006_WHEN_AUTHORIZED` | `NONE` |
+| `ES-CG-13` | `SOURCE_FROZEN` | `SOURCE_FREEZE_COMPLETE_READY_FOR_CGP_006_WHEN_AUTHORIZED` | `NONE` |
+| `ES-CG-10` | `SOURCE_FROZEN` | `SOURCE_FREEZE_COMPLETE_READY_FOR_CGP_006_WHEN_AUTHORIZED` | `NONE` |
 
-Founder acceptance is required before any guide may be represented as `SOURCE_FROZEN`. CGP-006 was not begun.
+The Wave 1 guides remain `NOT_ADOPTED`, `NOT_ACTIVE`, not implemented, and not activated as gates. CGP-006 was not begun.

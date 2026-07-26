@@ -1,6 +1,6 @@
 # CGP-005 Retained Gap Report
 
-- `CGP005-F-0001`: open pending Founder review of the revised two-layer source-freeze package.
+- `CGP005-F-0001`: closed as `RESOLVED_CURATED_TWO_LAYER_SOURCE_MODEL_ACCEPTED`; retained as audit history of the overinclusive source-freeze deficiency and correction.
 - `CGP004-F-0001`: retained for non-Wave 1 source freezes and later adoption or activation treatment.
 - `CGP004-F-0002`: retained downstream offline authorization finding.
 - `CGP004-F-0003`: retained downstream feature-surface mapping finding.

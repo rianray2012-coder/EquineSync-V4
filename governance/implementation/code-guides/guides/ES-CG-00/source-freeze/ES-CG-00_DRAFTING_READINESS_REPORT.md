@@ -1,8 +1,8 @@
 # ES-CG-00 Drafting Readiness Report
 
-- Readiness disposition: `CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW`
-- Maturity after CGP-005 revision: `PLANNED`
+- Readiness disposition: `SOURCE_FREEZE_COMPLETE_READY_FOR_CGP_006_WHEN_AUTHORIZED`
+- Maturity after CGP-005 acceptance: `SOURCE_FROZEN`
 - CGP-006 ready: `NO`
-- Blocking revision finding: `CGP005-F-0001`
+- Blocking revision finding: `NONE`
 
-Founder acceptance is required before the guide may be represented as source-frozen.
+The guide remains NOT_ADOPTED, NOT_ACTIVE, not implemented, and not activated as a gate. CGP-006 was not begun.

@@ -1448,6 +1448,12 @@ def validate_wave_1_drafting_readiness(root: Path, wave_guides: tuple[str, ...] 
     _, tracker_rows = read_csv_strict(tracker_path, result)
     readiness_by_guide = {row.get("guide_id"): row for row in readiness_rows}
     tracker_by_guide = {row.get("record_id"): row for row in tracker_rows if row.get("record_type") == "GUIDE"}
+    cgp005 = next((row for row in tracker_rows if row.get("record_id") == "CGP-005"), {})
+    cgp005_founder_approved = "FOUNDER_APPROVED_FOR_REPOSITORY_INTEGRATION" in {
+        cgp005.get("maturity_state", ""),
+        cgp005.get("prompt_status", ""),
+        cgp005.get("work_status", ""),
+    } or cgp005.get("prompt_status") == "ACCEPTED"
     required_columns = [
         "guide_id",
         "readiness_disposition",
@@ -1489,12 +1495,13 @@ def validate_wave_1_drafting_readiness(root: Path, wave_guides: tuple[str, ...] 
             guide_dir / f"{guide}_DRAFTING_QUESTION_INVENTORY.csv",
         ]
         if row.get("maturity_after_cgp005") == "SOURCE_FROZEN":
-            result.add("premature_source_frozen_maturity", "CGP-005 revision must not mark a Wave 1 guide SOURCE_FROZEN before Founder acceptance.", readiness_path, guide)
+            if not cgp005_founder_approved:
+                result.add("premature_source_frozen_maturity", "CGP-005 must not mark a Wave 1 guide SOURCE_FROZEN before Founder approval.", readiness_path, guide)
             for path in required_paths:
                 if not path.exists():
                     result.add("source_frozen_missing_artifact", "SOURCE_FROZEN guide is missing required source-freeze/readiness artifact.", path, guide)
         elif row.get("maturity_after_cgp005") != "PLANNED":
-            result.add("invalid_revised_maturity", "CGP-005 revision readiness must leave Wave 1 guide maturity as PLANNED.", readiness_path, guide)
+            result.add("invalid_revised_maturity", "CGP-005 readiness must leave Wave 1 guide maturity as PLANNED or Founder-approved SOURCE_FROZEN.", readiness_path, guide)
         question_path = guide_dir / f"{guide}_DRAFTING_QUESTION_INVENTORY.csv"
         if question_path.exists():
             _, question_rows = read_csv_strict(question_path, result)
@@ -1507,7 +1514,7 @@ def validate_wave_1_drafting_readiness(root: Path, wave_guides: tuple[str, ...] 
             result.add("missing_drafting_question_inventory", "Drafting-question inventory is missing.", question_path, guide)
         blocking = row.get("blocking_findings", "")
         if row.get("cgp006_ready") == "YES":
-            result.add("cgp006_ready_before_founder_acceptance", "CGP-006 readiness must remain NO until Founder accepts the revised source freeze.", readiness_path, guide)
+            result.add("cgp006_ready_before_founder_acceptance", "CGP-006 readiness must remain NO until CGP-005 repository integration is complete and CGP-006 is separately issued.", readiness_path, guide)
         if row.get("cgp006_ready") == "YES" and blocking not in {"0", "NONE", ""}:
             result.add("readiness_conflicts_with_blocking_findings", "CGP-006 readiness cannot be YES with blocking findings.", readiness_path, guide)
         if disposition.startswith("SOURCE_FREEZE_COMPLETE") or disposition == "CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW":

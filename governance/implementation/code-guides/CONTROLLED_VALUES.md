@@ -36,6 +36,7 @@ CGP-002 establishes one canonical machine-readable source. Markdown below mirror
 - `RETURNED`
 - `ACCEPTED`
 - `REVISION_REQUIRED`
+- `FOUNDER_APPROVED_FOR_REPOSITORY_INTEGRATION`
 - `BLOCKED`
 - `SUPERSEDED`
 

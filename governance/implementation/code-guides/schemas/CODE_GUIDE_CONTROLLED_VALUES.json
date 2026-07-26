@@ -123,7 +123,8 @@
     "ACCEPTED",
     "REVISION_REQUIRED",
     "BLOCKED",
-    "SUPERSEDED"
+    "SUPERSEDED",
+    "FOUNDER_APPROVED_FOR_REPOSITORY_INTEGRATION"
   ],
   "repository_authority_alignment_states": [
     "ALIGNED_WITH_CONTROLLING_AUTHORITY",
