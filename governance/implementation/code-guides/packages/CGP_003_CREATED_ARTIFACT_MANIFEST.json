@@ -8,7 +8,7 @@
   "authorized_scope": "governance/implementation/code-guides",
   "checksum_ledger": "governance/implementation/code-guides/packages/CGP_003_SHA256SUMS.txt",
   "ledger_self_hashing": false,
-  "artifact_count": 37,
+  "artifact_count": 38,
   "files": [
     {
       "path": "governance/implementation/code-guides/CONTROLLED_VALUES.md",
@@ -74,6 +74,16 @@
       "path": "governance/implementation/code-guides/receipts/CGP_003_FOUNDER_DECISION_RECONCILIATION.md",
       "artifact_type": "RECEIPT",
       "purpose": "CGP-003 Founder decision reconciliation and source-freeze alignment receipt.",
+      "originating_prompt": "CGP-003",
+      "status": "NEW",
+      "checksum_inclusion": "INCLUDED",
+      "validation_status": "PASS",
+      "notes": "Checksum recorded in CGP-003 checksum ledger."
+    },
+    {
+      "path": "governance/implementation/code-guides/receipts/CGP_003_REPOSITORY_INTEGRATION_RECEIPT.md",
+      "artifact_type": "RECEIPT",
+      "purpose": "CGP-003 repository integration receipt and post-merge custody record.",
       "originating_prompt": "CGP-003",
       "status": "NEW",
       "checksum_inclusion": "INCLUDED",
