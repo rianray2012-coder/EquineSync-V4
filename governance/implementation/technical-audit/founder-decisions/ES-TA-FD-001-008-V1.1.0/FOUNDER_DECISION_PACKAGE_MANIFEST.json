@@ -1,0 +1,78 @@
+{
+  "package_id": "ES-TA-FD-001-008-V1.1.0",
+  "directive_id": "ES-FOUNDER-DISPOSITION-TA-FD-001-008-2026-07-26-01",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "status": "FOUNDER_APPROVED_DOCUMENTARY_PRODUCT_POLICY_DISPOSITIONS",
+  "created_date": "2026-07-26",
+  "source_package": {
+    "directory": "/Users/rianray/Documents/Codex/2026-07-23/n/outputs/Technical_Audit_Founder_Decision_Packet_2026-07-26/",
+    "determination": "FOUNDER_DECISION_PACKET_READY_FOR_REVIEW",
+    "checksum_ledger_verified": true
+  },
+  "integration_context": {
+    "protected_integration_branch": "integrate-emergent-final-zip",
+    "current_remote_integration_head": "636b104a8766f08eb1e4b57d1bc840ef217187e9",
+    "protected_production_branch": "release/production",
+    "current_remote_production_head": "92e9ccae8695aa523181b4cfe60e554e6c5245bd"
+  },
+  "files": [
+    {
+      "path": "TECHNICAL_AUDIT_FOUNDER_DECISION_PACKET_V1_1_0.md",
+      "role": "controlled founder decision packet"
+    },
+    {
+      "path": "TECHNICAL_AUDIT_FOUNDER_DECISION_REGISTER_V1_1_0.csv",
+      "role": "machine-readable decision register"
+    },
+    {
+      "path": "DECISION_TO_FINDING_CROSSWALK_V1_1_0.csv",
+      "role": "decision-to-finding crosswalk"
+    },
+    {
+      "path": "PROPOSED_REMEDIATION_SEQUENCE_V1_1_0.md",
+      "role": "revised remediation sequencing"
+    },
+    {
+      "path": "FOUNDER_APPROVAL_RECORD_ES_TA_FD_001_008.md",
+      "role": "founder approval record"
+    },
+    {
+      "path": "FOUNDER_DECISION_CHANGE_LOG_V1_1_0.md",
+      "role": "change log from predecessor packet"
+    },
+    {
+      "path": "FOUNDER_DECISION_PACKAGE_SOURCE_REGISTER.md",
+      "role": "source custody and drift register"
+    },
+    {
+      "path": "FOUNDER_DECISION_PACKAGE_VALIDATION_REPORT.md",
+      "role": "validation report"
+    },
+    {
+      "path": "FOUNDER_DECISION_PACKAGE_MANIFEST.json",
+      "role": "package manifest"
+    },
+    {
+      "path": "FOUNDER_DECISION_PACKAGE_SHA256SUMS.txt",
+      "role": "checksum ledger"
+    }
+  ],
+  "non_authorization": [
+    "runtime remediation",
+    "backend changes",
+    "frontend changes",
+    "test changes",
+    "CI changes",
+    "implementation branches",
+    "remediation pull requests",
+    "database migration",
+    "provider activation",
+    "production deployment",
+    "release promotion",
+    "payment activation",
+    "pilot enrollment",
+    "public app-store release",
+    "governance supersession",
+    "M4 work"
+  ]
+}
