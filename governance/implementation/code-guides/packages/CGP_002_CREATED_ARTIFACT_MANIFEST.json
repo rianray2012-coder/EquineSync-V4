@@ -2,7 +2,7 @@
   "baseline": "7975cf2d88540a9b7c9cbfdfa6d6d5b0ec1912c0",
   "branch": "codex/code-guide-program-foundation-cgp-002-v1",
   "checksum_ledger": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
-  "commit_sha": "PENDING_COMMIT",
+  "commit_sha": "f99af63f2aa5526bdf973a2a4ac23ed332eb6a33",
   "execution_id": "CGEXEC-20260726-0001",
   "files": [
     {
