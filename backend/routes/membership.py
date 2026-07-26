@@ -17,7 +17,7 @@ import logging
 import os
 import uuid
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Any, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
@@ -61,12 +61,18 @@ class CheckoutRequestBody(BaseModel):
     origin_url: str  # frontend window.location.origin for success/cancel URLs
 
 
+def _stripe_value(obj: Any, key: str, default: Any = None) -> Any:
+    if isinstance(obj, dict):
+        return obj.get(key, default)
+    return getattr(obj, key, default)
+
+
 class _LegacyCheckoutEvent:
-    def __init__(self, *, event_type: str, session: dict):
+    def __init__(self, *, event_type: str, session: Any):
         self.event_type = event_type
-        self.session_id = session.get("id")
-        self.payment_status = session.get("payment_status")
-        self.status = session.get("status")
+        self.session_id = _stripe_value(session, "id")
+        self.payment_status = _stripe_value(session, "payment_status")
+        self.status = _stripe_value(session, "status")
 
 
 async def _parse_legacy_checkout_event(request: Request) -> _LegacyCheckoutEvent:
@@ -75,22 +81,41 @@ async def _parse_legacy_checkout_event(request: Request) -> _LegacyCheckoutEvent
         raise HTTPException(500, "Stripe is not configured on this server.")
     stripe.api_key = api_key
     body = await request.body()
-    secret = os.environ.get("STRIPE_WEBHOOK_SECRET")
+    secret = (os.environ.get("STRIPE_WEBHOOK_SECRET") or "").strip()
+    if not secret:
+        logger.error(
+            "legacy stripe webhook rejected",
+            extra={"reason": "webhook_secret_missing"},
+        )
+        raise HTTPException(500, "Stripe webhook signing is not configured.")
+    sig_header = request.headers.get("Stripe-Signature")
+    if not sig_header:
+        logger.warning(
+            "legacy stripe webhook rejected",
+            extra={"reason": "signature_header_missing"},
+        )
+        raise HTTPException(400, "Invalid webhook signature.")
     try:
-        if secret:
-            event = stripe.Webhook.construct_event(
-                payload=body,
-                sig_header=request.headers.get("Stripe-Signature"),
-                secret=secret,
-            )
-        else:
-            event = stripe.Event.construct_from(await request.json(), stripe.api_key)
+        event = stripe.Webhook.construct_event(
+            payload=body,
+            sig_header=sig_header,
+            secret=secret,
+        )
     except Exception as ex:
-        logger.exception("stripe webhook handler failed")
-        raise HTTPException(400, f"Invalid webhook: {ex}") from ex
-    data = event.get("data", {}) if isinstance(event, dict) else getattr(event, "data", {})
-    session = data.get("object", {}) if isinstance(data, dict) else getattr(data, "object", {})
-    return _LegacyCheckoutEvent(event_type=event.get("type", ""), session=dict(session))
+        logger.warning(
+            "legacy stripe webhook rejected",
+            extra={
+                "reason": "signature_or_payload_invalid",
+                "stripe_exception_type": type(ex).__name__,
+            },
+        )
+        raise HTTPException(400, "Invalid webhook signature.") from ex
+    data = _stripe_value(event, "data", {}) or {}
+    session = _stripe_value(data, "object", {}) or {}
+    return _LegacyCheckoutEvent(
+        event_type=_stripe_value(event, "type", ""),
+        session=session,
+    )
 
 
 def build_router(*, db, get_current_user) -> APIRouter:
