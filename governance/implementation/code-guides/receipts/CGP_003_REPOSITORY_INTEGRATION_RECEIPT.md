@@ -19,8 +19,8 @@
 - Receipt pull request: `#14`
 - Receipt commit: `eb6a25bf13a25f264d7a963db2947b9b98a9a7e5`
 - Receipt merge commit: `4b52f96fbc90cbb998a7815875db85918ab152d2`
-- Metadata pull request: `PENDING_METADATA_PR_ASSIGNMENT`
-- Metadata commit: `PENDING_METADATA_COMMIT`
+- Metadata pull request: `#15`
+- Metadata commit: `ffdf1714d2a378c78bd875de2e7c881b912f6cb8`
 
 ## Source Inventory Counts
 
@@ -94,3 +94,7 @@ Verified on remote default branch after PR `#13` merge:
 No pull-request gate, merge gate, release gate, deployment gate, pilot gate, production gate, product policy, substantive Code Guide control, implementation profile, application-code change, PIA amendment, implementation-atlas amendment, production CI change, deployment action, pilot action, activation action, financial activation, messaging activation, moderation activation, AI activation, archival migration, or enrollment action was created or exercised by CGP-003.
 
 CGP-004 was not begun.
+
+## Metadata Finalization Note
+
+Metadata PR `#15` records receipt PR `#14` merge metadata. The metadata PR merge commit and final remote default-branch head are verified after PR `#15` merges and reported in the final integration handoff.
