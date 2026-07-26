@@ -24501,7 +24501,7 @@
       "curation_status": "REFERENCE_CORPUS_ONLY",
       "freeze_record_id": "CGP005-RC-1606",
       "repository_path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
-      "sha256_checksum": "1c90c031e3877e4e5daeab644669e5036390a17fe2b5af15416ae307d97c1c57",
+      "sha256_checksum": "aaad3fb3de6c81bf6bc7c658f900e853bf1eb1b3c5a910febebf0cff7a83ddfc",
       "source_id": "CGSRC-REPO-0004"
     },
     {

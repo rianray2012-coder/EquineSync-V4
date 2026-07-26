@@ -17,10 +17,10 @@
 - Primary merge commit: `e5b5f6e091bf66a77963b6acaff45957ea4915b9`
 - Base head at primary merge: `991d9ea816e5f1309431e7bb66640a3aa8805445`
 - Remote default-branch head after primary merge: `e5b5f6e091bf66a77963b6acaff45957ea4915b9`
-- Receipt pull request: `PENDING_RECEIPT_PR_CREATED_AFTER_THIS_COMMIT`
-- Receipt commit: `PENDING_RECEIPT_BRANCH_COMMIT_VERIFIED_AFTER_PUSH`
-- Receipt merge commit: `PENDING_RECEIPT_MERGE_COMMIT_REPORTED_IN_METADATA_PR`
-- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_RECEIPT_MERGE`
+- Receipt pull request: `#21`
+- Receipt commit: `293d73220e85efc724d116912d70a6b3965c8251`
+- Receipt merge commit: `99312ecdfd3832b5370c25c38547e80ce21a94fd`
+- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_THIS_COMMIT`
 - Metadata commit: `PENDING_METADATA_BRANCH_COMMIT_VERIFIED_AFTER_PUSH`
 - Final remote default-branch head after metadata reconciliation: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF`
 
@@ -87,7 +87,7 @@ The broader source-freeze requirement remains open for guides outside Wave 1.
 - CGP-002 checksum ledger: `132` entries OK
 - CGP-003 checksum ledger: `37` entries OK
 - CGP-004 checksum ledger: `42` entries OK
-- CGP-005 checksum ledger: `75` entries OK
+- CGP-005 checksum ledger: `76` entries OK
 - Ledger treatment: checksum ledgers exclude themselves from self-hashing where documented.
 - Checksum verification: `PASS`
 
