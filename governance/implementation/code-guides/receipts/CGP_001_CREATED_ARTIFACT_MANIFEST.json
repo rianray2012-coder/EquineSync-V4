@@ -1,5 +1,5 @@
 {
-  "artifact_count": 89,
+  "artifact_count": 90,
   "baseline_commit": "0dec8031ca96ed20941cee1b3a277f630cd37904",
   "branch": "codex/code-guide-program-initialization-v1",
   "checksum_ledger": "governance/implementation/code-guides/receipts/CGP_001_SHA256SUMS.txt",
@@ -110,6 +110,10 @@
     {
       "artifact_type": "CUSTODY_ARTIFACT",
       "path": "governance/implementation/code-guides/receipts/CGP_001_PROGRAM_INITIALIZATION_RECEIPT.md"
+    },
+    {
+      "artifact_type": "CUSTODY_ARTIFACT",
+      "path": "governance/implementation/code-guides/receipts/CGP_001_REPOSITORY_INTEGRATION_RECEIPT.md"
     },
     {
       "artifact_type": "CUSTODY_ARTIFACT",
@@ -368,5 +372,12 @@
   "prompt_id": "CGP-001",
   "remote_verified": "YES",
   "repository": "rianray2012-coder/EquineSync-V4",
+  "repository_integration": {
+    "approved_branch_head": "b3971a49727340824d023a0a67e9914f24bcc8a6",
+    "merge_commit": "b2d0a35db11c75d39d9227ae2a67c72728daa62b",
+    "merge_method": "merge",
+    "pull_request": 5,
+    "receipt_path": "governance/implementation/code-guides/receipts/CGP_001_REPOSITORY_INTEGRATION_RECEIPT.md"
+  },
   "self_hash_note": "The checksum ledger excludes itself from self-hashing."
 }
