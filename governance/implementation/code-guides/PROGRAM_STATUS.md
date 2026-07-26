@@ -1,42 +1,26 @@
-
 # Code Guide Program Status
 
 **Program:** EquineSync Code Implementation Guide Program
-**Current prompt:** `CGP-001`
-**Execution ID:** `CGEXEC-20260725-0001`
-**Prompt status:** `ACCEPTED`
-**Program maturity:** Repository-integrated documentary scaffold
+**Current prompt:** `CGP-002`
+**Execution ID:** `CGEXEC-20260726-0001`
+**Prompt status:** `RETURNED`
+**Program maturity:** Foundation validators and schemas returned for Founder review
 **Current guide maturity:** `PLANNED`
 **Guide adoption state:** `NOT_ADOPTED`
-**Guide accession state:** `NOT_ACCESSIONED`
-**Next prompt:** `CGP-002`
+**Guide activation state:** `NOT_ACTIVE`
+**Next prompt:** `CGP-003`
 
 ## Baseline
 
 - Repository: `rianray2012-coder/EquineSync-V4`
-- Starting default branch: `integrate-emergent-final-zip`
-- Starting remote head before CGP-001 branch: `0dec8031ca96ed20941cee1b3a277f630cd37904`
-- Historical Founder-confirmed receipt commit: `46b93b1f0cec3a50734a744912836636dd74e0fd`
-- Created branch: `codex/code-guide-program-initialization-v1`
-- Initial scaffold commit: `625ea6de980eabcf376aeac7de78aca1ab40aab4`
-- Scaffold metadata commit and approved PR head: `b3971a49727340824d023a0a67e9914f24bcc8a6`
-- Merge commit: `b2d0a35db11c75d39d9227ae2a67c72728daa62b`
-- Repository-integration receipt commit: `3c9ffbeee874ef22f95f05b682a5340e0da79ecf`
-- Resulting remote default-branch head recorded for this receipt: `0b2ac3ac1a38611af2a66ba6597fe7ac71a85cfd`
+- Default branch: `integrate-emergent-final-zip`
+- CGP-002 verified baseline: `7975cf2d88540a9b7c9cbfdfa6d6d5b0ec1912c0`
+- Working branch: `codex/code-guide-program-foundation-cgp-002-v1`
 
-## CGP-001 State
+## CGP-002 State
 
-CGP-001 created the controlled repository skeleton, initialized the registers, created non-substantive guide placeholders, added schema and template skeletons, added validator placeholders, created custody records, and was merged into the default branch after Founder acceptance.
-
-## Counts
-
-- Guides registered: 14
-- Program prompts registered: CGP-001 through CGP-009
-- Work packages registered: WP-01 through WP-06
-- Created artifacts inventoried: 90
-- Findings registered: 0
-- Open decisions registered: 0
+CGP-002 strengthens the shared Code Guide foundation: controlled values, schemas, templates, deterministic validators, fixtures, tests, documentation, and custody artifacts.
 
 ## Retained Boundary
 
-Substantive Code Guide drafting, full schema constraints, substantive validators, implementation profiles, guide adoption, and activation remain reserved for `CGP-002` and later authorized prompts. CGP-002 remains `NOT_ISSUED`.
+All fourteen guides remain `PLANNED`, `NOT_ADOPTED`, and `NOT_ACTIVE`. CGP-002 does not create substantive guide controls, product policy, implementation profiles, application-code changes, deployment, production, pilot, financial, messaging, AI, moderation, archival, or enrollment authority.

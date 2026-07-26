@@ -1,0 +1,2 @@
+exception_id,guide_id,affected_controls,reason,risk,alternative,compensating_controls,owner,approval_authority,status,approved_date,expiration_date,remediation,evidence_path,notes
+CGEXC-9001,ES-CG-00,ES-CG-00-CTRL-0001,Fixture only.,Fixture risk.,Fixture alternative.,Fixture compensating control.,Fixture owner,Fixture authority,PLANNED,2026-07-26,2099-12-31,Fixture remediation.,,Fixture only.

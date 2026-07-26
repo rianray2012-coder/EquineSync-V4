@@ -336,3 +336,25 @@ The register headers below preserve the required CGP-001 column contracts. The p
 | `notes` | Non-substantive notes. |
 
 Additional columns are not authorized unless added here with an explicit definition and controlled value reference.
+## CGP-002 Additional Register Columns
+
+CGP-002 adds the following columns while preserving all CGP-001 minimum column contracts.
+
+| Register | Column | Definition |
+|---|---|---|
+| `CODE_GUIDE_CONTROL_REGISTER.csv` | `failure_effect` | Non-policy description of validation failure effect for a future control. |
+| `CODE_GUIDE_CONTROL_REGISTER.csv` | `supersedes` | Prior control ID if this future control supersedes one. |
+| `CODE_GUIDE_CONTROL_REGISTER.csv` | `superseded_by` | Successor control ID if this future control is superseded. |
+| `CODE_GUIDE_CONTROL_REGISTER.csv` | `supersession_compatibility` | Compatibility treatment required when a superseded control remains referenced. |
+| `CODE_GUIDE_INVARIANT_REGISTER.csv` | `governing_sources` | Source or authority references for an invariant. |
+| `CODE_GUIDE_INVARIANT_REGISTER.csv` | `affected_resources_or_actors` | Resource or actor categories affected by an invariant, without creating product policy. |
+| `CODE_GUIDE_INVARIANT_REGISTER.csv` | `required_evidence` | Controlled evidence grade required for future validation. |
+| `CODE_GUIDE_INVARIANT_REGISTER.csv` | `assurance_class` | Controlled assurance class. |
+| `CODE_GUIDE_INVARIANT_REGISTER.csv` | `failure_severity` | Controlled finding severity for invariant failure. |
+| `CODE_GUIDE_QUESTION_REGISTER.csv` | `rationale` | Rationale required for not-applicable or deferred question responses. |
+| `CODE_GUIDE_QUESTION_REGISTER.csv` | `decision_reference` | Decision reference required for blocked questions. |
+| `CODE_GUIDE_DEPENDENCY_REGISTER.csv` | `compatibility_treatment` | Required treatment when a dependency references superseded material. |
+| `CONTROL_TO_VERIFICATION_REGISTER.csv` | `retained_gates` | Gates retained after validation. |
+| `CONTROL_TO_REPOSITORY_REGISTER.csv` | `activation_boundary` | Boundary preventing repository mapping from implying activation. |
+| `IMPLEMENTATION_EVIDENCE_REGISTER.csv` | `result` | Evidence result or outcome. |
+| `IMPLEMENTATION_EVIDENCE_REGISTER.csv` | `retained_gates` | Gates retained by an evidence record. |

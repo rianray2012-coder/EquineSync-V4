@@ -1,0 +1,22 @@
+{
+  "affected_resources_or_actors": [],
+  "assurance_class": "A1_STANDARD",
+  "failure_severity": "P3",
+  "governing_sources": [
+    {
+      "authority": "Founder",
+      "reference": "CGP-002 directive",
+      "source_id": "CGP-002",
+      "source_type": "prompt"
+    }
+  ],
+  "guide_id": "ES-CG-00",
+  "invariant_id": "ES-CG-00-INV-0001",
+  "protected_outcome": "Fixture.",
+  "required_evidence": "E2_REPRODUCIBLE_LOCAL",
+  "schema_version": "0.2.0",
+  "statement": "Fixture.",
+  "verification_methods": [
+    "fixture"
+  ]
+}

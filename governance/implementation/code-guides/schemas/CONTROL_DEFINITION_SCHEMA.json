@@ -1,16 +1,187 @@
 {
-  "$id": "https://equinesync.local/governance/implementation/code-guides/schemas/CONTROL_DEFINITION_SCHEMA.json",
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "additionalProperties": true,
-  "description": "CGP-001 initialization skeleton. Full substantive constraints are reserved for CGP-002.",
-  "properties": {
-    "prompt_id": {
-      "const": "CGP-001"
+  "$defs": {
+    "source_reference": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "reference": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_type": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_type",
+        "authority",
+        "reference"
+      ],
+      "type": "object"
     },
-    "schema_stage": {
-      "const": "CGP-001_INITIALIZATION_SKELETON"
+    "supersession": {
+      "additionalProperties": false,
+      "properties": {
+        "compatibility_treatment": {
+          "type": "string"
+        },
+        "superseded_by": {
+          "type": "string"
+        },
+        "supersedes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "supersedes",
+        "superseded_by",
+        "compatibility_treatment"
+      ],
+      "type": "object"
     }
   },
+  "$id": "https://equinesync.local/governance/implementation/code-guides/schemas/CONTROL_DEFINITION_SCHEMA.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "CGP-002 shared foundation schema. It defines structure, identifiers, evidence, authority, retained gaps, and activation-boundary metadata without creating EquineSync product policy.",
+  "properties": {
+    "activation_gate": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "applicability_profiles": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "assurance_class": {
+      "enum": [
+        "A1_STANDARD",
+        "A2_IMPORTANT",
+        "A3_HIGH",
+        "A4_CRITICAL"
+      ],
+      "type": "string"
+    },
+    "control_id": {
+      "pattern": "^ES-CG-(0[0-9]|1[0-3])-CTRL-\\d{4}$",
+      "type": "string"
+    },
+    "evidence_grade": {
+      "enum": [
+        "E0_ASSERTION",
+        "E1_MANUAL_OBSERVATION",
+        "E2_REPRODUCIBLE_LOCAL",
+        "E3_INDEPENDENT_CI",
+        "E4_CONTROLLED_ENVIRONMENT",
+        "E5_PRODUCTION"
+      ],
+      "type": "string"
+    },
+    "exception_allowed": {
+      "type": "boolean"
+    },
+    "failure_effect": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "governing_sources": {
+      "items": {
+        "$ref": "#/$defs/source_reference"
+      },
+      "type": "array"
+    },
+    "guide_id": {
+      "pattern": "^ES-CG-(0[0-9]|1[0-3])$",
+      "type": "string"
+    },
+    "implementation_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "independent_review_required": {
+      "type": "boolean"
+    },
+    "negative_tests": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "positive_tests": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "requirement": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "risk_domains": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "schema_revision_notes": {
+      "description": "Controlled extension notes. Substantive product policy is not encoded in CGP-002 schemas.",
+      "type": "string"
+    },
+    "schema_revision_status": {
+      "const": "CGP-002_FOUNDATION"
+    },
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "supersession": {
+      "$ref": "#/$defs/supersession"
+    },
+    "title": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "version": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9_.-]+)?$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "control_id",
+    "guide_id",
+    "title",
+    "requirement",
+    "governing_sources",
+    "assurance_class",
+    "risk_domains",
+    "applicability_profiles",
+    "implementation_obligations",
+    "positive_tests",
+    "negative_tests",
+    "evidence_grade",
+    "independent_review_required",
+    "exception_allowed",
+    "failure_effect",
+    "activation_gate",
+    "version",
+    "supersession"
+  ],
+  "schema_version": "0.2.0",
   "title": "Control Definition Schema",
-  "type": "object"
+  "type": "object",
+  "x-controlled-values-source": "governance/implementation/code-guides/schemas/CODE_GUIDE_CONTROLLED_VALUES.json",
+  "x-source-prompt": "CGP-002"
 }

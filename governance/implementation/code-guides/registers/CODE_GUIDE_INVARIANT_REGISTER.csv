@@ -1,1 +1,1 @@
-invariant_id,guide_id,title,statement,protected_outcome,risk_addressed,verification_methods,status,version,notes
+invariant_id,guide_id,title,statement,protected_outcome,risk_addressed,verification_methods,status,version,notes,governing_sources,affected_resources_or_actors,required_evidence,assurance_class,failure_severity

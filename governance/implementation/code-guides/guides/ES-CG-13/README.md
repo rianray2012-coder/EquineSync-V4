@@ -1,11 +1,19 @@
-
 # ES-CG-13 - Completion, Evidence, and Traceability
 
 - Canonical guide ID: `ES-CG-13`
 - Canonical guide title: Completion, Evidence, and Traceability
+- Guide version: `0.0.0-placeholder`
 - Current maturity state: `PLANNED`
-- Substantive content status: Not authorized by `CGP-001`
+- Adoption state: `NOT_ADOPTED`
+- Activation state: `NOT_ACTIVE`
+- Accession state: `NOT_ACCESSIONED`
+- Dependency wave: `1`
+- Substantive content status: Not authorized by `CGP-001` or `CGP-002`
 - Expected drafting prompt ID: `CG-13-DRAFT`
-- Upstream dependencies: ES-CG-00 and ES-CG-01.
-- Downstream dependencies, if known: ES-CG-10 and later assurance, release, and activation guides.
+- Governing source references: `CGP-001`, `CGP-002`, Founder-issued future drafting prompt
+- Machine-readable companion reference: Reserved for later authorized guide draft package
 - Non-authorization boundary: This placeholder creates no controls, requirements, product rules, implementation policy, adoption authority, accession authority, merge authority, deployment authority, or activation authority.
+
+## Placeholder Handling
+
+Validators may confirm this placeholder is structurally valid for `PLANNED` maturity. They must not report this guide as complete, adopted, active, or implementation-authorizing.

@@ -1,0 +1,3 @@
+dependency_id,downstream_guide,upstream_guide,upstream_control,minimum_version,maximum_version,dependency_type,status,impact_if_unavailable,last_verified,notes,compatibility_treatment
+CGDEP-9003,ES-CG-00,ES-CG-01,,,,FIXTURE,PLANNED,Fixture impact.,2026-07-26,,
+CGDEP-9004,ES-CG-01,ES-CG-00,,,,FIXTURE,PLANNED,Fixture impact.,2026-07-26,,

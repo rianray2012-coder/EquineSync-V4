@@ -1,0 +1,2 @@
+invariant_id,guide_id,title,statement,protected_outcome,risk_addressed,verification_methods,status,version,notes,governing_sources,affected_resources_or_actors,required_evidence,assurance_class,failure_severity
+ES-CG-00-INV-0001,ES-CG-00,A,s,o,r,,PLANNED,0.2.0,,g,a,E2_REPRODUCIBLE_LOCAL,A1_STANDARD,P3

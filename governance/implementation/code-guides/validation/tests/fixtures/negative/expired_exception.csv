@@ -1,0 +1,2 @@
+exception_id,guide_id,affected_controls,reason,risk,alternative,compensating_controls,owner,approval_authority,status,approved_date,expiration_date,remediation,evidence_path,notes
+CGEXC-9002,ES-CG-00,ES-CG-00-CTRL-0001,Fixture,Fixture,,Fixture,Fixture,Fixture,PLANNED,2026-01-01,2026-01-02,Fixture,,

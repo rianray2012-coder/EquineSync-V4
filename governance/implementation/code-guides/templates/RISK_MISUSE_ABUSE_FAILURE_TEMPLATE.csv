@@ -1,1 +1,1 @@
-risk_id,guide_id,scenario_type,scenario,misuse_or_abuse_case,failure_mode,affected_outcome,source_authority,required_decision,status,notes
+risk_id,guide_id,scenario_type,scenario,misuse_or_abuse_case,failure_mode,affected_outcome,source_authority,assurance_class,evidence_grade,required_decision,activation_boundary,status,notes

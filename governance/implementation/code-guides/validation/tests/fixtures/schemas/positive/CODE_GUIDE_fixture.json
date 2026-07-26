@@ -1,0 +1,29 @@
+{
+  "activation_boundary": "No activation.",
+  "assurance_class": "A1_STANDARD",
+  "control_families": [],
+  "governing_sources": [
+    {
+      "authority": "Founder",
+      "reference": "CGP-002 directive",
+      "source_id": "CGP-002",
+      "source_type": "prompt"
+    }
+  ],
+  "guide_id": "ES-CG-00",
+  "guide_title": "Fixture Guide",
+  "machine_readable_companions": [],
+  "maturity_state": "PLANNED",
+  "non_authorization_boundary": "No activation.",
+  "related_atlases": [],
+  "related_guides": [],
+  "related_pias": [],
+  "required_reviews": [],
+  "risk_domains": [
+    "fixture"
+  ],
+  "schema_version": "0.2.0",
+  "supported_environments": [],
+  "supported_platforms": [],
+  "version": "0.2.0"
+}

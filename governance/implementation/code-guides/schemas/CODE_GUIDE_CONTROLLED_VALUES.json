@@ -1,0 +1,136 @@
+{
+  "accession_states": [
+    "NOT_ACCESSIONED",
+    "ACCESSION_PENDING",
+    "REPOSITORY_ACCESSIONED",
+    "CUSTODY_GAP",
+    "SUPERSEDED"
+  ],
+  "activation_states": [
+    "NOT_ACTIVE",
+    "ACTIVE",
+    "BLOCKED",
+    "SUPERSEDED",
+    "RETIRED"
+  ],
+  "adoption_dispositions": [
+    "APPROVED_FOR_CONTROLLED_ADOPTION",
+    "APPROVED_WITH_RETAINED_GAPS",
+    "REVISION_REQUIRED",
+    "BLOCKED_PENDING_DECISION",
+    "REJECTED"
+  ],
+  "adoption_states": [
+    "NOT_ADOPTED",
+    "APPROVED_FOR_CONTROLLED_ADOPTION",
+    "APPROVED_WITH_RETAINED_GAPS",
+    "REVISION_REQUIRED",
+    "BLOCKED_PENDING_DECISION",
+    "REJECTED",
+    "SUPERSEDED"
+  ],
+  "answer_statuses": [
+    "UNANSWERED",
+    "ANSWERED",
+    "NOT_APPLICABLE",
+    "BLOCKED_PENDING_DECISION",
+    "DEFERRED"
+  ],
+  "applicability_and_record_states": [
+    "REQUIRED",
+    "OPTIONAL",
+    "NOT_APPLICABLE",
+    "NOT_YET_APPLICABLE",
+    "PLANNED",
+    "PARTIAL",
+    "COMPLETE",
+    "VERIFIED",
+    "STALE",
+    "INVALID",
+    "MISSING"
+  ],
+  "assurance_classes": [
+    "A1_STANDARD",
+    "A2_IMPORTANT",
+    "A3_HIGH",
+    "A4_CRITICAL"
+  ],
+  "boolean_text": [
+    "YES",
+    "NO"
+  ],
+  "evidence_grades": [
+    "E0_ASSERTION",
+    "E1_MANUAL_OBSERVATION",
+    "E2_REPRODUCIBLE_LOCAL",
+    "E3_INDEPENDENT_CI",
+    "E4_CONTROLLED_ENVIRONMENT",
+    "E5_PRODUCTION"
+  ],
+  "finding_severities": [
+    "P0",
+    "P1",
+    "P2",
+    "P3"
+  ],
+  "guide_maturity_states": [
+    "PLANNED",
+    "CHARTERED",
+    "SOURCE_FROZEN",
+    "CURRENT_STATE_ASSESSED",
+    "DRAFTING",
+    "INTERNAL_REVIEW",
+    "TECHNICAL_REVIEW",
+    "PRODUCT_REVIEW",
+    "CROSS_GUIDE_REVIEW",
+    "ADVERSARIAL_REVIEW",
+    "SCENARIO_VALIDATED",
+    "ASSURANCE_REVIEW",
+    "ADOPTION_CANDIDATE",
+    "ADOPTED",
+    "REPOSITORY_ACCESSIONED",
+    "ACTIVE",
+    "REVISION_PENDING",
+    "SUPERSEDED",
+    "RETIRED",
+    "BLOCKED"
+  ],
+  "mapping_states": [
+    "IMPLEMENTED",
+    "PARTIALLY_IMPLEMENTED",
+    "PLANNED",
+    "MISSING",
+    "CONFLICTING",
+    "NOT_APPLICABLE"
+  ],
+  "prompt_execution_states": [
+    "NOT_ISSUED",
+    "ISSUED",
+    "IN_PROGRESS",
+    "RETURNED",
+    "ACCEPTED",
+    "REVISION_REQUIRED",
+    "BLOCKED",
+    "SUPERSEDED"
+  ],
+  "schema_version": "0.2.0",
+  "source_prompt": "CGP-002",
+  "task_dispositions": [
+    "COMPLETE_READY_FOR_NEXT_STAGE",
+    "COMPLETE_WITH_RETAINED_FINDINGS",
+    "PARTIALLY_COMPLETE",
+    "BLOCKED_FAIL_CLOSED",
+    "REVISION_REQUIRED"
+  ],
+  "validator_result_statuses": [
+    "PASS",
+    "FAIL",
+    "WARNING",
+    "NOT_YET_APPLICABLE",
+    "BLOCKED"
+  ],
+  "verification_polarity": [
+    "POSITIVE",
+    "NEGATIVE"
+  ]
+}
