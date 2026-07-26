@@ -15,9 +15,9 @@
 - Merge commit: `880fbd6ff7a4af7e161eb9f8fb8d3620089581a4`
 - Base head at merge: `550b3b91fb030dcfc898b4935c07f1d9fc1d9449`
 - Remote default-branch head after source inventory merge: `880fbd6ff7a4af7e161eb9f8fb8d3620089581a4`
-- Receipt pull request: `PENDING_RECEIPT_PR_ASSIGNMENT`
-- Receipt commit: `PENDING_RECEIPT_COMMIT`
-- Receipt merge commit: `PENDING_RECEIPT_MERGE`
+- Receipt pull request: `#14`
+- Receipt commit: `eb6a25bf13a25f264d7a963db2947b9b98a9a7e5`
+- Receipt merge commit: `PENDING_RECEIPT_MERGE_COMMIT_UNTIL_PR_14_MERGES`
 - Metadata pull request: `PENDING_IF_USED`
 - Metadata commit: `PENDING_IF_USED`
 
