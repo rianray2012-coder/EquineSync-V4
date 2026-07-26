@@ -1,0 +1,215 @@
+{
+  "authorized_scope": "governance/implementation/code-guides/",
+  "baseline_commit": "92e9ccae8695aa523181b4cfe60e554e6c5245bd",
+  "checksum_treatment": "CGP_004_SHA256SUMS.txt intentionally excludes itself from self-hashing. Existing CGP-002 and CGP-003 ledgers were refreshed for authorized Code Guide program artifact mutations.",
+  "created_date": "2026-07-26",
+  "execution_id": "CGEXEC-20260726-0003",
+  "local_application_probe_limits": {
+    "backend_pytest_collect_only": "NOT_EXECUTED_DEPENDENCY_ABSENT: system Python reported No module named pytest during safe probe.",
+    "frontend_build": "NOT_EXECUTED_DEPENDENCY_ABSENT: frontend/node_modules was absent; CGP-004 did not install dependencies."
+  },
+  "non_authorization": "CGP-005 was not begun. No substantive Code Guide controls, implementation profiles, application-code changes, test changes, CI changes, PIA amendments, atlas amendments, deployment actions, pilot actions, production actions, or activation authority were created or exercised.",
+  "package_id": "ES-CGP-004-CURRENT-STATE-ASSESSMENT-2026-07-26",
+  "portfolio_validation": {
+    "counts": {
+      "BLOCKED": 0,
+      "FAIL": 0,
+      "NOT_YET_APPLICABLE": 10,
+      "PASS": 8,
+      "WARNING": 0
+    },
+    "not_yet_applicable_is_substantive_pass": false,
+    "status": "PASS",
+    "unit_tests": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/rianray/Documents/Codex/2026-07-25/fo/work/repos/EquineSync-V4-CGP-001/governance/implementation/code-guides/validation/tests"
+      ],
+      "exit_code": 0,
+      "stderr": "..............\n----------------------------------------------------------------------\nRan 14 tests in 9.722s\n\nOK\n",
+      "stdout": ""
+    },
+    "validators": [
+      {
+        "issues": [],
+        "status": "PASS",
+        "summary": {
+          "guides_checked": 14
+        },
+        "validator": "code-guide-structure"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "control-registry"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "invariant-registry"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "guide-questions"
+      },
+      {
+        "issues": [],
+        "status": "PASS",
+        "summary": {
+          "rows_checked": 13
+        },
+        "validator": "guide-dependencies"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "atlas-traceability"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "repository-mapping"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "control-verification"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "profiles_checked": 0
+        },
+        "validator": "implementation-profiles"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "evidence-records"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "exceptions"
+      },
+      {
+        "issues": [],
+        "status": "NOT_YET_APPLICABLE",
+        "summary": {
+          "rows_checked": 0
+        },
+        "validator": "supersession"
+      },
+      {
+        "issues": [],
+        "status": "PASS",
+        "summary": {
+          "ledger_entries": 138,
+          "manifest_files": 133
+        },
+        "validator": "package-integrity"
+      },
+      {
+        "issues": [],
+        "status": "PASS",
+        "summary": {
+          "guide_rows_checked": 14
+        },
+        "validator": "portfolio-consistency"
+      },
+      {
+        "issues": [],
+        "status": "PASS",
+        "summary": {
+          "conflicts_checked": 4,
+          "gaps_checked": 7,
+          "mappings_checked": 14176,
+          "sources_checked": 2620,
+          "supersessions_checked": 4
+        },
+        "validator": "source-accession"
+      },
+      {
+        "issues": [],
+        "status": "PASS",
+        "summary": {
+          "components_checked": 21
+        },
+        "validator": "repository-component-register"
+      },
+      {
+        "issues": [],
+        "status": "PASS",
+        "summary": {
+          "alignments_checked": 21
+        },
+        "validator": "repository-authority-alignment"
+      },
+      {
+        "issues": [],
+        "status": "PASS",
+        "summary": {
+          "required_markdown": 11,
+          "required_registers": 6
+        },
+        "validator": "current-state-assessment"
+      }
+    ]
+  },
+  "portfolio_validation_exit_code": 0,
+  "premerge_reconciliation": {
+    "cgp004_findings_retained_downstream": [
+      "CGP004-F-0001",
+      "CGP004-F-0002",
+      "CGP004-F-0003",
+      "CGP004-F-0004",
+      "CGP004-F-0005",
+      "CGP004-F-0006",
+      "CGP004-F-0007"
+    ],
+    "decision_records_closed": [
+      "CGP004-D-0001",
+      "CGP004-D-0002",
+      "CGP004-D-0003"
+    ],
+    "disposition": "CGP-004_APPROVED_FOR_DOCUMENTARY_CURRENT_STATE_ASSESSMENT_MERGE_AFTER_REQUIRED_RECONCILIATION",
+    "superseded_finding": "CGP003-F-0002 -> CGP004-F-0003_AND_CGP004-GAP-0002"
+  },
+  "program": "EquineSync Code Implementation Guide Program",
+  "prompt_id": "CGP-004",
+  "py_compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": ""
+  }
+}

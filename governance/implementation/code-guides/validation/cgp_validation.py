@@ -123,8 +123,27 @@ def split_refs(value: str) -> list[str]:
     return [part.strip() for part in re.split(r"[;,]", value) if part.strip()]
 
 
+def split_paths(value: str) -> list[str]:
+    if not value:
+        return []
+    return [part.strip() for part in value.split(";") if part.strip()]
+
+
 def guide_ids(root: Path) -> set[str]:
     return {path.parent.name for path in (root / "guides").glob("ES-CG-*/README.md")}
+
+
+def source_ids(root: Path) -> set[str]:
+    path = root / "source-accession" / "MASTER_CODE_GUIDE_SOURCE_REGISTER.csv"
+    if not path.exists():
+        return set()
+    result = ValidationResult("source-id-lookup")
+    _, rows = read_csv_strict(path, result)
+    return {row.get("source_id", "") for row in rows if row.get("source_id")}
+
+
+def row_by_id(rows: list[dict[str, str]], field: str) -> dict[str, dict[str, str]]:
+    return {row.get(field, ""): row for row in rows if row.get(field)}
 
 
 def control_rows(root: Path) -> list[dict[str, str]]:
@@ -736,6 +755,273 @@ def validate_portfolio_consistency(root: Path) -> ValidationResult:
     return result.finalize()
 
 
+def validate_repository_component_register(root: Path, path: Path | None = None) -> ValidationResult:
+    result = ValidationResult("repository-component-register")
+    values = load_values(root)
+    repo = root.parents[2]
+    path = path or root / "assessment" / "CURRENT_REPOSITORY_COMPONENT_REGISTER.csv"
+    if not path.exists():
+        result.add("missing_component_register", "Current repository component register is missing.", path)
+        return result.finalize()
+    fieldnames, rows = read_csv_strict(path, result)
+    required_fields = [
+        "component_id",
+        "component_name",
+        "component_type",
+        "repository_path",
+        "deployable_unit",
+        "implementation_state",
+        "authority_alignment",
+        "confidence",
+        "evidence_basis",
+        "source_ids",
+        "applicable_guides",
+        "owner_or_boundary",
+        "risk_domains",
+        "notes",
+    ]
+    for field in required_fields:
+        if field not in fieldnames:
+            result.add("missing_required_column", f"Missing required column `{field}`.", path)
+    if result.issues:
+        return result.finalize()
+
+    allowed_impl = set(values.get("repository_implementation_states", []))
+    allowed_alignment = set(values.get("repository_authority_alignment_states", []))
+    allowed_confidence = set(values.get("confidence_levels", []))
+    gids = guide_ids(root) | {"PROGRAM_WIDE"}
+    sids = source_ids(root)
+    seen: set[str] = set()
+    existing_states = {
+        "IMPLEMENTED",
+        "PARTIALLY_IMPLEMENTED",
+        "SCAFFOLDED",
+        "STUB",
+        "TEST_ONLY",
+        "LEGACY_ACTIVE",
+        "LEGACY_INACTIVE",
+        "DEAD_OR_UNREFERENCED",
+    }
+    for row in rows:
+        cid = row.get("component_id", "")
+        if cid in seen:
+            result.add("duplicate_component_id", "Duplicate component ID.", path, cid)
+        seen.add(cid)
+        if not re.fullmatch(r"CGP004-COMP-\d{4}", cid):
+            result.add("malformed_component_id", "Component ID must use CGP004-COMP-####.", path, cid)
+        for field in required_fields:
+            require(row, field, result, path, cid, f"missing_{field}")
+        if row.get("implementation_state") not in allowed_impl:
+            result.add("invalid_implementation_state", "Implementation state is not controlled.", path, cid)
+        if row.get("authority_alignment") not in allowed_alignment:
+            result.add("invalid_authority_alignment", "Authority alignment is not controlled.", path, cid)
+        if row.get("confidence") not in allowed_confidence:
+            result.add("invalid_confidence", "Confidence level is not controlled.", path, cid)
+        for guide in split_refs(row.get("applicable_guides", "")):
+            if guide not in gids:
+                result.add("invalid_guide_reference", "Component references an unknown guide.", path, cid)
+        for source in split_refs(row.get("source_ids", "")):
+            if source not in sids:
+                result.add("invalid_source_reference", "Component references an unknown source ID.", path, cid)
+        repo_paths = split_paths(row.get("repository_path", ""))
+        if row.get("implementation_state") in existing_states and not repo_paths:
+            result.add("missing_repository_path", "Existing component state requires at least one repository path.", path, cid)
+        for rel in repo_paths:
+            rel_path = Path(rel)
+            if rel_path.is_absolute() or ".." in rel_path.parts:
+                result.add("invalid_repository_path", "Repository path must be relative and not traverse upward.", path, cid)
+                continue
+            if row.get("implementation_state") in existing_states and not (repo / rel).exists():
+                result.add("unresolved_repository_path", "Repository path does not resolve for existing component.", path, cid)
+    result.summary["components_checked"] = len(rows)
+    return result.finalize()
+
+
+def validate_repository_authority_alignment(
+    root: Path,
+    path: Path | None = None,
+    component_path: Path | None = None,
+) -> ValidationResult:
+    result = ValidationResult("repository-authority-alignment")
+    values = load_values(root)
+    path = path or root / "assessment" / "REPOSITORY_AUTHORITY_ALIGNMENT_REGISTER.csv"
+    component_path = component_path or root / "assessment" / "CURRENT_REPOSITORY_COMPONENT_REGISTER.csv"
+    if not path.exists():
+        result.add("missing_authority_alignment_register", "Repository authority alignment register is missing.", path)
+        return result.finalize()
+    if not component_path.exists():
+        result.add("missing_component_register", "Component register is required for alignment cross-reference.", component_path)
+        return result.finalize()
+    _, component_rows = read_csv_strict(component_path, result)
+    component_ids = set(row_by_id(component_rows, "component_id"))
+    fieldnames, rows = read_csv_strict(path, result)
+    required_fields = [
+        "alignment_id",
+        "component_id",
+        "repository_component",
+        "repository_path",
+        "authority_source_ids",
+        "applicable_guides",
+        "authority_alignment",
+        "evidence_basis",
+        "classification_rationale",
+        "required_next_action",
+        "confidence",
+        "status",
+        "notes",
+    ]
+    for field in required_fields:
+        if field not in fieldnames:
+            result.add("missing_required_column", f"Missing required column `{field}`.", path)
+    if result.issues:
+        return result.finalize()
+
+    allowed_alignment = set(values.get("repository_authority_alignment_states", []))
+    allowed_confidence = set(values.get("confidence_levels", []))
+    allowed_status = set(values.get("applicability_and_record_states", []))
+    gids = guide_ids(root) | {"PROGRAM_WIDE"}
+    sids = source_ids(root)
+    seen: set[str] = set()
+    for row in rows:
+        aid = row.get("alignment_id", "")
+        if aid in seen:
+            result.add("duplicate_alignment_id", "Duplicate alignment ID.", path, aid)
+        seen.add(aid)
+        if not re.fullmatch(r"CGP004-ALIGN-\d{4}", aid):
+            result.add("malformed_alignment_id", "Alignment ID must use CGP004-ALIGN-####.", path, aid)
+        for field in required_fields:
+            require(row, field, result, path, aid, f"missing_{field}")
+        if row.get("component_id") not in component_ids:
+            result.add("unknown_component_id", "Alignment references an unknown component.", path, aid)
+        if row.get("authority_alignment") not in allowed_alignment:
+            result.add("invalid_authority_alignment", "Authority alignment is not controlled.", path, aid)
+        if row.get("confidence") not in allowed_confidence:
+            result.add("invalid_confidence", "Confidence level is not controlled.", path, aid)
+        if row.get("status") not in allowed_status:
+            result.add("invalid_status", "Status is not controlled.", path, aid)
+        for guide in split_refs(row.get("applicable_guides", "")):
+            if guide not in gids:
+                result.add("invalid_guide_reference", "Alignment references an unknown guide.", path, aid)
+        for source in split_refs(row.get("authority_source_ids", "")):
+            if source not in sids:
+                result.add("invalid_source_reference", "Alignment references an unknown source ID.", path, aid)
+        if row.get("authority_alignment") in {
+            "PARTIALLY_ALIGNED",
+            "IMPLEMENTED_BEYOND_DOCUMENTED_AUTHORITY",
+            "CONFLICTS_WITH_CONTROLLING_AUTHORITY",
+            "AUTHORITY_AMBIGUOUS",
+            "NO_AUTHORITY_MAPPING_FOUND",
+        } and row.get("required_next_action") in {"NONE", "NOT_APPLICABLE"}:
+            result.add("missing_alignment_action", "Non-aligned authority treatment requires a next action.", path, aid)
+    result.summary["alignments_checked"] = len(rows)
+    return result.finalize()
+
+
+def validate_current_state_assessment(root: Path) -> ValidationResult:
+    result = ValidationResult("current-state-assessment")
+    values = load_values(root)
+    assessment_root = root / "assessment"
+    required_markdown = [
+        "CURRENT_REPOSITORY_ARCHITECTURE_ASSESSMENT.md",
+        "CURRENT_DATA_AND_STATE_ASSESSMENT.md",
+        "CURRENT_IDENTITY_TENANCY_AUTHORIZATION_ASSESSMENT.md",
+        "CURRENT_OFFLINE_SYNC_ASSESSMENT.md",
+        "CURRENT_API_EVENT_JOB_ADAPTER_ASSESSMENT.md",
+        "CURRENT_WEB_MOBILE_ACCESSIBILITY_ASSESSMENT.md",
+        "CURRENT_TESTING_AND_CI_ASSESSMENT.md",
+        "CURRENT_OPERATIONS_AND_RELIABILITY_ASSESSMENT.md",
+        "CURRENT_SECURITY_PRIVACY_SAFEGUARDING_AI_ASSESSMENT.md",
+        "CGP_004_REPRESENTATIVE_SCENARIO_ASSESSMENTS.md",
+        "CGP_004_CURRENT_STATE_EXECUTIVE_SUMMARY.md",
+    ]
+    required_csv = [
+        "CURRENT_REPOSITORY_COMPONENT_REGISTER.csv",
+        "CURRENT_IMPLEMENTATION_PATTERN_REGISTER.csv",
+        "CURRENT_CODE_GUIDE_GAP_REGISTER.csv",
+        "UNMAPPED_REPOSITORY_COMPONENT_REGISTER.csv",
+        "REPOSITORY_AUTHORITY_ALIGNMENT_REGISTER.csv",
+        "REPOSITORY_TO_SOURCE_EVIDENCE_MAP.csv",
+    ]
+    required_support = [
+        root / "receipts" / "CGP_004_EXECUTION_RECEIPT.md",
+        root / "packages" / "CGP_004_CREATED_ARTIFACT_MANIFEST.json",
+        root / "packages" / "CGP_004_SHA256SUMS.txt",
+        root / "reviews" / "CGP_004_ARCHITECTURE_ASSURANCE_REPORT.md",
+        root / "reviews" / "CGP_004_TEST_EXECUTION_SAFETY_REPORT.md",
+        root / "reviews" / "CGP_004_SEARCH_AND_INSPECTION_COVERAGE_REPORT.md",
+    ]
+    for name in required_markdown:
+        path = assessment_root / name
+        if not path.exists():
+            result.add("missing_assessment_document", "Required CGP-004 assessment document is missing.", path)
+            continue
+        text = path.read_text(encoding="utf-8")
+        if len(text.strip()) < 500:
+            result.add("thin_assessment_document", "Required assessment document is too thin for CGP-004 custody.", path)
+        if "CGP-005 was not begun" not in text and name in {
+            "CURRENT_REPOSITORY_ARCHITECTURE_ASSESSMENT.md",
+            "CGP_004_CURRENT_STATE_EXECUTIVE_SUMMARY.md",
+        }:
+            result.add("missing_non_authorization_statement", "Assessment must preserve CGP-005 non-execution boundary.", path)
+    for name in required_csv:
+        path = assessment_root / name
+        if not path.exists():
+            result.add("missing_assessment_register", "Required CGP-004 assessment register is missing.", path)
+        else:
+            _, rows = read_csv_strict(path, result)
+            if not rows:
+                result.add("empty_assessment_register", "Required CGP-004 assessment register must contain rows.", path)
+    for path in required_support:
+        if not path.exists():
+            result.add("missing_custody_artifact", "Required CGP-004 custody artifact is missing.", path)
+        elif len(path.read_text(encoding="utf-8").strip()) < 100:
+            result.add("thin_custody_artifact", "Required CGP-004 custody artifact is too thin.", path)
+
+    gap_path = assessment_root / "CURRENT_CODE_GUIDE_GAP_REGISTER.csv"
+    if gap_path.exists():
+        fieldnames, rows = read_csv_strict(gap_path, result)
+        required_gap_fields = [
+            "gap_id",
+            "gap_title",
+            "gap_type",
+            "affected_guides",
+            "repository_evidence",
+            "authority_alignment",
+            "implementation_state",
+            "severity",
+            "blocks_drafting",
+            "blocks_adoption",
+            "blocks_activation",
+            "required_next_action",
+            "status",
+            "notes",
+        ]
+        for field in required_gap_fields:
+            if field not in fieldnames:
+                result.add("missing_gap_column", f"Gap register missing `{field}`.", gap_path)
+        allowed_alignment = set(values.get("repository_authority_alignment_states", []))
+        allowed_impl = set(values.get("repository_implementation_states", []))
+        for row in rows:
+            gap_id = row.get("gap_id", "")
+            if not re.fullmatch(r"CGP004-GAP-\d{4}", gap_id):
+                result.add("malformed_gap_id", "Gap ID must use CGP004-GAP-####.", gap_path, gap_id)
+            for guide in split_refs(row.get("affected_guides", "")):
+                if guide not in guide_ids(root) | {"PROGRAM_WIDE"}:
+                    result.add("invalid_gap_guide", "Gap references an unknown guide.", gap_path, gap_id)
+            if row.get("authority_alignment") not in allowed_alignment:
+                result.add("invalid_gap_alignment", "Gap authority alignment is not controlled.", gap_path, gap_id)
+            if row.get("implementation_state") not in allowed_impl:
+                result.add("invalid_gap_implementation_state", "Gap implementation state is not controlled.", gap_path, gap_id)
+            if row.get("severity") not in values.get("finding_severities", []):
+                result.add("invalid_gap_severity", "Gap severity is not controlled.", gap_path, gap_id)
+            for flag in ("blocks_drafting", "blocks_adoption", "blocks_activation"):
+                if row.get(flag) not in values.get("boolean_text", []):
+                    result.add("invalid_gap_boolean", f"{flag} must use YES or NO.", gap_path, gap_id)
+    result.summary["required_markdown"] = len(required_markdown)
+    result.summary["required_registers"] = len(required_csv)
+    return result.finalize()
+
+
 VALIDATOR_FUNCTIONS = {
     "code-guide-structure": validate_code_guide_structure,
     "control-registry": validate_control_registry,
@@ -752,6 +1038,9 @@ VALIDATOR_FUNCTIONS = {
     "package-integrity": validate_package_integrity,
     "portfolio-consistency": validate_portfolio_consistency,
     "source-accession": validate_source_accession,
+    "repository-component-register": validate_repository_component_register,
+    "repository-authority-alignment": validate_repository_authority_alignment,
+    "current-state-assessment": validate_current_state_assessment,
 }
 
 

@@ -159,3 +159,36 @@ CGP-002 does not authorize new product policy, guide controls, implementation pr
 CGP-003 extends the shared controlled values with source accession classes, authority statuses, checksum statuses, custody statuses, source-gap types, source-conflict types, source supersession statuses, and source-to-guide mapping types. The canonical machine-readable source is `schemas/CODE_GUIDE_CONTROLLED_VALUES.json`.
 
 These additions classify source evidence only. They do not adopt external standards, draft guide controls, or activate any guide.
+## CGP-004 Current-State Assessment Controlled Values
+
+CGP-004 extends the shared controlled values with implementation-state, authority-alignment, and confidence vocabularies for repository assessment. These values classify inspected repository evidence only. They do not draft Code Guide controls, create implementation profiles, adopt product policy, or activate engineering gates.
+
+### Repository Implementation States
+
+- `IMPLEMENTED`
+- `PARTIALLY_IMPLEMENTED`
+- `SCAFFOLDED`
+- `STUB`
+- `TEST_ONLY`
+- `LEGACY_ACTIVE`
+- `LEGACY_INACTIVE`
+- `DEAD_OR_UNREFERENCED`
+- `PROPOSED_IN_DOCUMENTATION_ONLY`
+- `MISSING`
+- `UNKNOWN`
+
+### Repository Authority Alignment States
+
+- `ALIGNED_WITH_CONTROLLING_AUTHORITY`
+- `PARTIALLY_ALIGNED`
+- `IMPLEMENTED_BEYOND_DOCUMENTED_AUTHORITY`
+- `CONFLICTS_WITH_CONTROLLING_AUTHORITY`
+- `AUTHORITY_AMBIGUOUS`
+- `NO_AUTHORITY_MAPPING_FOUND`
+- `NOT_APPLICABLE`
+
+### Confidence Levels
+
+- `HIGH`
+- `MEDIUM`
+- `LOW`

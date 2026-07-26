@@ -1,0 +1,225 @@
+{
+  "artifact_inventory_last_updated": "2026-07-26",
+  "authorized_scope": "governance/implementation/code-guides/",
+  "baseline_commit": "92e9ccae8695aa523181b4cfe60e554e6c5245bd",
+  "created_date": "2026-07-26",
+  "execution_id": "CGEXEC-20260726-0003",
+  "files": [
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_REPOSITORY_ARCHITECTURE_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_REPOSITORY_COMPONENT_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_IMPLEMENTATION_PATTERN_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_CODE_GUIDE_GAP_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/UNMAPPED_REPOSITORY_COMPONENT_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/REPOSITORY_AUTHORITY_ALIGNMENT_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_DATA_AND_STATE_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_IDENTITY_TENANCY_AUTHORIZATION_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_OFFLINE_SYNC_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_API_EVENT_JOB_ADAPTER_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_WEB_MOBILE_ACCESSIBILITY_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_TESTING_AND_CI_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_OPERATIONS_AND_RELIABILITY_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CURRENT_SECURITY_PRIVACY_SAFEGUARDING_AI_ASSESSMENT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/REPOSITORY_TO_SOURCE_EVIDENCE_MAP.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CGP_004_REPRESENTATIVE_SCENARIO_ASSESSMENTS.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/assessment/CGP_004_CURRENT_STATE_EXECUTIVE_SUMMARY.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/receipts/CGP_004_EXECUTION_RECEIPT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/packages/CGP_004_CREATED_ARTIFACT_MANIFEST.json"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "EXCLUDED_SELF_HASH",
+      "path": "governance/implementation/code-guides/packages/CGP_004_SHA256SUMS.txt"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/reviews/CGP_004_VALIDATION_REPORT.json"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/reviews/CGP_004_ARCHITECTURE_ASSURANCE_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/reviews/CGP_004_TEST_EXECUTION_SAFETY_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/reviews/CGP_004_SEARCH_AND_INSPECTION_COVERAGE_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/schemas/CODE_GUIDE_CONTROLLED_VALUES.json"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/CONTROLLED_VALUES.md"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/cgp_validation.py"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/validate_repository_component_register.py"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/validate_repository_authority_alignment.py"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/validate_current_state_assessment.py"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/tests/test_cgp004_current_state.py"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/tests/test_validator_placeholders.py"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_ARTIFACT_INVENTORY.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_DEPENDENCY_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_FINDING_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/GUIDE_REVIEW_FINDING_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_OPEN_DECISION_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/OPEN_DECISION_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv"
+    },
+    {
+      "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROMPT_EXECUTION_LOG.csv"
+    },
+    {
+      "artifact_role": "CGP-004 Founder decision reconciliation receipt",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/receipts/CGP_004_FOUNDER_DECISION_RECONCILIATION.md"
+    }
+  ],
+  "ledger_note": "CGP_004_SHA256SUMS.txt intentionally excludes itself from self-hashing; ledger entries may be one fewer than manifest files.",
+  "non_authorization": "CGP-005 was not begun. No substantive Code Guide controls, implementation profiles, application-code changes, test changes, CI changes, PIA amendments, atlas amendments, deployment actions, pilot actions, production actions, or activation authority were created or exercised.",
+  "package_id": "ES-CGP-004-CURRENT-STATE-ASSESSMENT-2026-07-26",
+  "premerge_reconciliation": "CGP-004 Founder decision dispositions recorded before repository integration.",
+  "program": "EquineSync Code Implementation Guide Program",
+  "prompt_id": "CGP-004"
+}
