@@ -1,5 +1,4 @@
 {
-  "baseline_commit": "ff2748796bf858f49a3f85bad0578850e1deb846",
   "counts": {
     "BLOCKED": 0,
     "FAIL": 0,
@@ -7,19 +6,7 @@
     "PASS": 10,
     "WARNING": 0
   },
-  "created_date": "2026-07-26",
-  "execution_id": "CGEXEC-20260726-0004",
-  "non_authorization": "CGP-006 not begun; no substantive guide controls, implementation profiles, application code, test changes, CI changes, PIA amendments, atlas amendments, deployment, pilot, production, or activation authority.",
   "not_yet_applicable_is_substantive_pass": false,
-  "package_id": "ES-CGP-005-WAVE-1-SOURCE-FREEZE-2026-07-26",
-  "prompt_id": "CGP-005",
-  "source_freeze_counts": {
-    "conflict_treatments": 4,
-    "crosswalk_rows": 8796,
-    "exclusion_rows": 277,
-    "repository_evidence_rows": 11,
-    "unique_sources": 2511
-  },
   "status": "PASS",
   "unit_tests": {
     "command": [
@@ -31,7 +18,7 @@
       "/Users/rianray/Documents/Codex/2026-07-25/fo/work/repos/EquineSync-V4-CGP-001/governance/implementation/code-guides/validation/tests"
     ],
     "exit_code": 0,
-    "stderr": ".............................\n----------------------------------------------------------------------\nRan 29 tests in 30.021s\n\nOK\n",
+    "stderr": "...................................\n----------------------------------------------------------------------\nRan 35 tests in 12.200s\n\nOK\n",
     "stdout": ""
   },
   "validators": [
@@ -190,16 +177,16 @@
       "status": "PASS",
       "summary": {
         "conflicts_checked": 4,
-        "crosswalk_rows": 8796,
-        "exclusion_rows": 277,
+        "crosswalk_rows": 139,
+        "exclusion_rows": 8714,
         "guide_register_rows": {
-          "ES-CG-00": 2214,
-          "ES-CG-01": 2214,
-          "ES-CG-10": 2103,
-          "ES-CG-13": 2265
+          "ES-CG-00": 29,
+          "ES-CG-01": 34,
+          "ES-CG-10": 31,
+          "ES-CG-13": 45
         },
-        "repository_evidence_rows": 11,
-        "sources_checked": 2511
+        "reference_corpus_sources_checked": 2511,
+        "repository_evidence_rows": 10
       },
       "validator": "source-freeze"
     },

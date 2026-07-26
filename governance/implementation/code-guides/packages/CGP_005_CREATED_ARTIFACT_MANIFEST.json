@@ -1,5 +1,5 @@
 {
-  "artifact_count": 64,
+  "artifact_count": 76,
   "authorized_scope": "governance/implementation/code-guides/",
   "baseline_commit": "ff2748796bf858f49a3f85bad0578850e1deb846",
   "branch": "codex/code-guide-wave-1-source-freeze-cgp-005-v1",
@@ -8,329 +8,390 @@
   "execution_id": "CGEXEC-20260726-0004",
   "files": [
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/CANONICAL_GUIDE_INVENTORY.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/CONTROLLED_VALUES.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-00/ES-CG-00_DRAFTING_QUESTION_INVENTORY.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-00/README.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_DRAFTING_READINESS_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_NORMATIVE_SOURCE_SELECTION_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_PACKAGE_VS_CHILD_TREATMENT_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_REFERENCE_CORPUS_RECONCILIATION.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_SOURCE_BURDEN_SUMMARY.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_SOURCE_EXCLUSION_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_SOURCE_FREEZE_MANIFEST.json"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_SOURCE_FREEZE_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_SOURCE_FREEZE_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-01/ES-CG-01_DRAFTING_QUESTION_INVENTORY.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-01/README.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_DRAFTING_READINESS_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_NORMATIVE_SOURCE_SELECTION_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_PACKAGE_VS_CHILD_TREATMENT_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_REFERENCE_CORPUS_RECONCILIATION.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_SOURCE_BURDEN_SUMMARY.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_SOURCE_EXCLUSION_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_SOURCE_FREEZE_MANIFEST.json"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_SOURCE_FREEZE_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-01/source-freeze/ES-CG-01_SOURCE_FREEZE_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-10/ES-CG-10_DRAFTING_QUESTION_INVENTORY.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-10/README.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_DRAFTING_READINESS_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_NORMATIVE_SOURCE_SELECTION_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_PACKAGE_VS_CHILD_TREATMENT_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_REFERENCE_CORPUS_RECONCILIATION.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_SOURCE_BURDEN_SUMMARY.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_SOURCE_EXCLUSION_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_SOURCE_FREEZE_MANIFEST.json"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_SOURCE_FREEZE_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_SOURCE_FREEZE_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-13/ES-CG-13_DRAFTING_QUESTION_INVENTORY.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-13/README.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_DRAFTING_READINESS_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_NORMATIVE_SOURCE_SELECTION_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_PACKAGE_VS_CHILD_TREATMENT_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_REFERENCE_CORPUS_RECONCILIATION.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_SOURCE_BURDEN_SUMMARY.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_SOURCE_EXCLUSION_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_SOURCE_FREEZE_MANIFEST.json"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_SOURCE_FREEZE_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_SOURCE_FREEZE_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
-      "checksum_inclusion": "INCLUDED",
-      "path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt"
-    },
-    {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
-      "checksum_inclusion": "INCLUDED",
-      "path": "governance/implementation/code-guides/packages/CGP_003_SHA256SUMS.txt"
-    },
-    {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
-      "checksum_inclusion": "INCLUDED",
-      "path": "governance/implementation/code-guides/packages/CGP_004_SHA256SUMS.txt"
-    },
-    {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_005_CREATED_ARTIFACT_MANIFEST.json"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "EXCLUDED_SELF_HASH",
       "path": "governance/implementation/code-guides/packages/CGP_005_SHA256SUMS.txt"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/receipts/CGP_005_EXECUTION_RECEIPT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_ARTIFACT_INVENTORY.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
-      "checksum_inclusion": "INCLUDED",
-      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_DEPENDENCY_REGISTER.csv"
-    },
-    {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_FINDING_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROMPT_EXECUTION_LOG.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
-      "checksum_inclusion": "INCLUDED",
-      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_VERSION_REGISTER.csv"
-    },
-    {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/GUIDE_REVIEW_FINDING_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/reviews/CGP_005_BASELINE_AND_DRIFT_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/reviews/CGP_005_RETAINED_GAP_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/reviews/CGP_005_SOURCE_FREEZE_ASSURANCE_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/reviews/CGP_005_VALIDATION_REPORT.json"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/reviews/CGP_005_WAVE_1_DRAFTING_READINESS_REPORT.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/schemas/CODE_GUIDE_CONTROLLED_VALUES.json"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
-      "checksum_inclusion": "INCLUDED",
-      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_REGISTER.csv"
-    },
-    {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
-      "checksum_inclusion": "INCLUDED",
-      "path": "governance/implementation/code-guides/source-freeze/WAVE_1_COMMON_SOURCE_FREEZE_MANIFEST.json"
-    },
-    {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
-      "checksum_inclusion": "INCLUDED",
-      "path": "governance/implementation/code-guides/source-freeze/WAVE_1_COMMON_SOURCE_FREEZE_REGISTER.csv"
-    },
-    {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-freeze/WAVE_1_DRAFTING_READINESS_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/source-freeze/WAVE_1_REFERENCE_CORPUS_MANIFEST.json"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/source-freeze/WAVE_1_REFERENCE_CORPUS_REGISTER.csv"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/source-freeze/WAVE_1_REFERENCE_CORPUS_REPORT.md"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-freeze/WAVE_1_REPOSITORY_EVIDENCE_BASELINE.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-freeze/WAVE_1_SOURCE_CONFLICT_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-freeze/WAVE_1_SOURCE_EXCLUSION_REGISTER.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-freeze/WAVE_1_SOURCE_FREEZE_CROSSWALK.csv"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-freeze/WAVE_1_SOURCE_FREEZE_SUMMARY.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/tools/generate_cgp005_revision.py"
+    },
+    {
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/validation/README.md"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/validation/cgp_validation.py"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/validation/tests/test_cgp005_source_freeze.py"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/validation/tests/test_validator_placeholders.py"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/validation/validate_source_freeze.py"
     },
     {
-      "artifact_role": "CGP-005 Wave 1 source-freeze, readiness, validation, register, or custody artifact",
+      "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/validation/validate_wave_1_drafting_readiness.py"
     }
   ],
-  "ledger_note": "CGP_005_SHA256SUMS.txt intentionally excludes itself from self-hashing; all other included files are checksummed.",
-  "ledger_self_hashing": false,
-  "non_authorization": "CGP-005 did not begin CGP-006 and did not create controls, implementation profiles, application changes, CI changes, deployment, production, or activation authority.",
+  "ledger_note": "CGP_005_SHA256SUMS.txt intentionally excludes itself from self-hashing.",
+  "ledger_self_hashing": "EXCLUDED",
+  "non_authorization": "No PR, merge, CGP-006 drafting, implementation, deployment, pilot, production, or activation authority.",
   "package_id": "ES-CGP-005-WAVE-1-SOURCE-FREEZE-2026-07-26",
-  "prompt_id": "CGP-005"
+  "prompt_id": "CGP-005",
+  "revision_treatment": "Broad source freeze reclassified as non-normative reference corpus; curated normative guide freezes returned for Founder review."
 }

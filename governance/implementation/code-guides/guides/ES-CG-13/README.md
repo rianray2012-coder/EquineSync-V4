@@ -3,12 +3,12 @@
 - Canonical guide ID: `ES-CG-13`
 - Canonical guide title: Completion, Evidence, and Traceability
 - Guide version: `0.0.0-placeholder`
-- Current maturity state: `SOURCE_FROZEN`
+- Current maturity state: `PLANNED`
 - Adoption state: `NOT_ADOPTED`
 - Activation state: `NOT_ACTIVE`
 - Accession state: `NOT_ACCESSIONED`
 - Dependency wave: `1`
-- Substantive content status: Not authorized by `CGP-005`; source freeze complete only
+- Substantive content status: Not authorized by `CGP-005`; curated source-freeze revision returned for Founder review only
 - Expected drafting prompt ID: `CG-13-DRAFT`
 - Governing source references: `CGP-001`, `CGP-002`, `CGP-003`, `CGP-004`, `CGP-005`, Founder-issued future drafting prompt
 - Machine-readable companion reference: `source-freeze/ES-CG-13_SOURCE_FREEZE_MANIFEST.json`
@@ -21,4 +21,4 @@ Validators may confirm this placeholder is structurally valid for `PLANNED` matu
 
 ## Source Freeze Boundary
 
-CGP-005 records an exact-byte source freeze and drafting-question inventory for this guide. This guide remains non-substantive, `NOT_ADOPTED`, `NOT_ACTIVE`, and not implementation-authorizing. CGP-005 did not begin `CG-13-DRAFT` or CGP-006.
+CGP-005 revision records a curated normative source-freeze package for Founder review while preserving the broad reference corpus. This guide remains non-substantive, `NOT_ADOPTED`, `NOT_ACTIVE`, and not implementation-authorizing. CGP-005 did not begin `CG-13-DRAFT` or CGP-006.

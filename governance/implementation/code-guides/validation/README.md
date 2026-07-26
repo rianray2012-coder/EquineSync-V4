@@ -47,4 +47,6 @@ Add new validators by implementing a function in `cgp_validation.py`, adding a w
 
 ## CGP-005 Source Freeze
 
-`validate_source_freeze.py` validates Wave 1 source-freeze registers, manifests, exclusions, conflict treatments, repository evidence baselines, checksums, and directory child-file manifest bindings. `validate_wave_1_drafting_readiness.py` validates that source-frozen Wave 1 guides have the required freeze artifacts and drafting-question inventories while remaining not adopted, not active, and not implementation-authorizing.
+`validate_source_freeze.py` validates the two-layer Wave 1 model: a non-normative reference corpus plus curated guide-specific normative freezes. It rejects bulk CGP-003 map passthrough, generic rationales, reference-corpus rows treated as normative, unnecessary package-child promotion, and implementation evidence without a CGP-004 component or Code Guide program evidence basis.
+
+`validate_wave_1_drafting_readiness.py` validates that the CGP-005 revision leaves Wave 1 guides `PLANNED`, keeps CGP-006 not ready before Founder acceptance, preserves required freeze artifacts and drafting-question inventories, and remains not adopted, not active, and not implementation-authorizing.

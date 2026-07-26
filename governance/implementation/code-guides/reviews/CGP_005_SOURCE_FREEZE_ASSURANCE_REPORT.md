@@ -4,23 +4,20 @@
 **Execution ID:** `CGEXEC-20260726-0004`
 **Baseline:** `ff2748796bf858f49a3f85bad0578850e1deb846`
 
-CGP-005 selected all CGP-003 source records mapped to Wave 1 guides and froze their current baseline bytes. File sources are verified by SHA-256 and Git object SHA. Directory sources are verified by tracked-tree aggregate SHA-256 and child-file manifest entries in `governance/implementation/code-guides/source-freeze/WAVE_1_COMMON_SOURCE_FREEZE_MANIFEST.json`.
+The broad 2,511-record result is retained only as `WAVE_1_REFERENCE_CORPUS` and classified as `REFERENCE_CORPUS_INDEXED_NOT_NORMATIVE`.
 
-## Counts
-
+## Reference Corpus Counts
 - `CONTROLLING_FROZEN`: `403`
-- `SUPPORTING_FROZEN`: `1363`
+- `EXCLUDED_BLOCKED`: `4`
+- `EXCLUDED_PROPOSED`: `70`
 - `HISTORICAL_FROZEN`: `38`
 - `IMPLEMENTATION_EVIDENCE_FROZEN`: `633`
-- `EXCLUDED_PROPOSED`: `70`
-- `EXCLUDED_BLOCKED`: `4`
+- `SUPPORTING_FROZEN`: `1363`
 
-- Unique Wave 1 source records: `2511`
-- Directory sources with child manifests: `103`
-- Child file bindings: `3158`
+## Normative Counts
+- `ES-CG-00`: `29` curated rows
+- `ES-CG-01`: `34` curated rows
+- `ES-CG-13`: `45` curated rows
+- `ES-CG-10`: `31` curated rows
 
-## Assurance Result
-
-No P0 or P1 source-custody issue was identified. No controlling source is frozen from code, tests, CI, runtime behavior, proposed material, blocked material, or historical-only material. Repository evidence remains implementation evidence only.
-
-CGP-006 was not begun.
+`CGP005-F-0001` remains open pending Founder acceptance. CGP-006 was not begun.

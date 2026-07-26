@@ -9,34 +9,23 @@
 **Authorized baseline:** `ff2748796bf858f49a3f85bad0578850e1deb846`
 **Working branch:** `codex/code-guide-wave-1-source-freeze-cgp-005-v1`
 
-## Startup Gates
+## Revision Treatment
 
-- Remote refs fetched: `YES`
-- Remote default branch confirmed: `integrate-emergent-final-zip`
-- Remote default head verified: `ff2748796bf858f49a3f85bad0578850e1deb846`
-- CGP-001 through CGP-004 repository-integration receipts present: `YES`
-- CGP-002 foundation validation: `PASS`
-- CGP-003 source-accession validation: `PASS`
-- CGP-004 current-state assessment validation: `PASS`
-- Worktree and index clean before mutation: `YES`
+Founder disposition `CGP-005_REVISION_REQUIRED_OVERINCLUSIVE_SOURCE_FREEZE` was addressed by separating the broad corpus from curated normative guide freezes.
 
 ## Output Summary
 
-- Unique Wave 1 source records frozen or explicitly excluded: `2511`
-- Source-to-guide crosswalk rows: `8796`
-- Directory sources with child-file manifests: `103`
-- Directory child-file hash bindings: `3158`
-- Exclusion rows: `277`
-- Conflict treatments: `4`
-- Repository evidence baseline rows: `11`
-- Wave 1 guides marked `SOURCE_FROZEN`: `4`
+- Reference corpus records: `2511`
+- Normative source crosswalk rows: `139`
+- Reference-only exclusion rows: `8714`
+- `ES-CG-00` normative source rows: `29`
+- `ES-CG-01` normative source rows: `34`
+- `ES-CG-13` normative source rows: `45`
+- `ES-CG-10` normative source rows: `31`
+- Wave 1 guides marked `SOURCE_FROZEN`: `0`
 - Guides adopted: `0`
 - Guides active: `0`
-- Open CGP-005 decisions: `0`
-
-## Branch Verification Treatment
-
-This receipt records the generated CGP-005 source-freeze package. The final branch commit and remote branch head are reported after commit and push verification because embedding this receipt's own final commit hash would alter the hash being recorded. No `PENDING_SELF_REFERENCE` placeholder is used.
+- Open CGP-005 findings: `CGP005-F-0001`
 
 ## Actions Not Taken
 
