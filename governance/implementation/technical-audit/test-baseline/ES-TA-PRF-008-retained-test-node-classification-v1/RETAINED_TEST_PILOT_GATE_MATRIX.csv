@@ -1,0 +1,10 @@
+gate_id,gate_name,node_count,p0_count,p1_count,p2_count,status,notes
+P0_ZERO_GATE,Zero unresolved P0 nodes,0,0,0,0,SATISFIED_FOR_CLASSIFICATION_ONLY,No retained node was classified P0 in this pass; this is not a release or pilot approval.
+P1_TREATMENT_GATE,"Every P1 has remediation, controlled exclusion, or Founder risk treatment",88,0,88,0,OPEN_REMEDIATION_OR_EXCLUSION_REQUIRED,"Classification exists; remediation, baseline reduction, or Founder risk treatment remains separate."
+AUTHORIZATION_GATE,Cross-barn and multi-barn authorization evidence,8,0,8,0,OPEN_REMEDIATION_OR_EXCLUSION_REQUIRED,"Classification exists; remediation, baseline reduction, or Founder risk treatment remains separate."
+ADMIN_FINANCIAL_GATE,Admin portal and financial/provider boundaries,22,0,22,0,OPEN_REMEDIATION_OR_EXCLUSION_REQUIRED,"Classification exists; remediation, baseline reduction, or Founder risk treatment remains separate."
+LEGAL_ESIGN_GATE,DocuSign/legal e-signature readiness,1,0,1,0,OPEN_REMEDIATION_OR_EXCLUSION_REQUIRED,"Classification exists; remediation, baseline reduction, or Founder risk treatment remains separate."
+ROLE_JOURNEY_GATE,"Role first-login, intake, and navigation evidence",48,0,7,41,OPEN_REMEDIATION_OR_EXCLUSION_REQUIRED,"Classification exists; remediation, baseline reduction, or Founder risk treatment remains separate."
+UAT_RELEASE_GATE,"Official staging, UAT, launch, and feature-certification evidence",62,0,45,17,OPEN_REMEDIATION_OR_EXCLUSION_REQUIRED,"Classification exists; remediation, baseline reduction, or Founder risk treatment remains separate."
+MOBILE_NATIVE_GATE,Mobile/PWA/native readiness evidence,11,0,0,11,OPEN_REMEDIATION_OR_EXCLUSION_REQUIRED,"Classification exists; remediation, baseline reduction, or Founder risk treatment remains separate."
+HORSEOPS_GATE,HorseOps ledger/index/evidence readiness,8,0,5,3,OPEN_REMEDIATION_OR_EXCLUSION_REQUIRED,"Classification exists; remediation, baseline reduction, or Founder risk treatment remains separate."
