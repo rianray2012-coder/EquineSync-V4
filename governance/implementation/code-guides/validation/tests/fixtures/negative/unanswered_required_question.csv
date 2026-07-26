@@ -1,0 +1,2 @@
+question_id,guide_id,question_category,question,required,answer_status,answer_location,source_support,evidence_reference,reviewer_disposition,rationale,decision_reference,notes
+ES-CG-00-Q-0001,ES-CG-00,fixture,Q?,YES,UNANSWERED,,,,,,,

@@ -1,0 +1,38 @@
+{
+  "activation_gate": "No activation.",
+  "applicability_profiles": [],
+  "assurance_class": "A9_UNKNOWN",
+  "control_id": "ES-CG-00-CTRL-0001",
+  "evidence_grade": "E2_REPRODUCIBLE_LOCAL",
+  "exception_allowed": false,
+  "failure_effect": "Fixture.",
+  "governing_sources": [
+    {
+      "authority": "Founder",
+      "reference": "CGP-002 directive",
+      "source_id": "CGP-002",
+      "source_type": "prompt"
+    }
+  ],
+  "guide_id": "ES-CG-00",
+  "implementation_obligations": [],
+  "independent_review_required": false,
+  "negative_tests": [
+    "fixture"
+  ],
+  "positive_tests": [
+    "fixture"
+  ],
+  "requirement": "Fixture.",
+  "risk_domains": [
+    "fixture"
+  ],
+  "schema_version": "0.2.0",
+  "supersession": {
+    "compatibility_treatment": "",
+    "superseded_by": "",
+    "supersedes": ""
+  },
+  "title": "Fixture",
+  "version": "0.2.0"
+}

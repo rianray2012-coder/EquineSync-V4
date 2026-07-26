@@ -1,16 +1,134 @@
 {
-  "$id": "https://equinesync.local/governance/implementation/code-guides/schemas/IMPLEMENTATION_PROFILE_SCHEMA.json",
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "additionalProperties": true,
-  "description": "CGP-001 initialization skeleton. Full substantive constraints are reserved for CGP-002.",
-  "properties": {
-    "prompt_id": {
-      "const": "CGP-001"
+  "$defs": {
+    "source_reference": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "reference": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_type": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_type",
+        "authority",
+        "reference"
+      ],
+      "type": "object"
     },
-    "schema_stage": {
-      "const": "CGP-001_INITIALIZATION_SKELETON"
+    "supersession": {
+      "additionalProperties": false,
+      "properties": {
+        "compatibility_treatment": {
+          "type": "string"
+        },
+        "superseded_by": {
+          "type": "string"
+        },
+        "supersedes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "supersedes",
+        "superseded_by",
+        "compatibility_treatment"
+      ],
+      "type": "object"
     }
   },
+  "$id": "https://equinesync.local/governance/implementation/code-guides/schemas/IMPLEMENTATION_PROFILE_SCHEMA.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "CGP-002 shared foundation schema. It defines structure, identifiers, evidence, authority, retained gaps, and activation-boundary metadata without creating EquineSync product policy.",
+  "properties": {
+    "activation_boundary": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "dependency_references": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "imported_controls": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "minimum_evidence_grade": {
+      "enum": [
+        "E0_ASSERTION",
+        "E1_MANUAL_OBSERVATION",
+        "E2_REPRODUCIBLE_LOCAL",
+        "E3_INDEPENDENT_CI",
+        "E4_CONTROLLED_ENVIRONMENT",
+        "E5_PRODUCTION"
+      ],
+      "type": "string"
+    },
+    "profile_id": {
+      "pattern": "^CGPROFILE-[A-Z0-9-]+$",
+      "type": "string"
+    },
+    "profile_title": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_revision_notes": {
+      "description": "Controlled extension notes. Substantive product policy is not encoded in CGP-002 schemas.",
+      "type": "string"
+    },
+    "schema_revision_status": {
+      "const": "CGP-002_FOUNDATION"
+    },
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "status": {
+      "enum": [
+        "REQUIRED",
+        "OPTIONAL",
+        "NOT_APPLICABLE",
+        "NOT_YET_APPLICABLE",
+        "PLANNED",
+        "PARTIAL",
+        "COMPLETE",
+        "VERIFIED",
+        "STALE",
+        "INVALID",
+        "MISSING"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile_id",
+    "profile_title",
+    "imported_controls",
+    "minimum_evidence_grade",
+    "dependency_references",
+    "activation_boundary",
+    "status"
+  ],
+  "schema_version": "0.2.0",
   "title": "Implementation Profile Schema",
-  "type": "object"
+  "type": "object",
+  "x-controlled-values-source": "governance/implementation/code-guides/schemas/CODE_GUIDE_CONTROLLED_VALUES.json",
+  "x-source-prompt": "CGP-002"
 }

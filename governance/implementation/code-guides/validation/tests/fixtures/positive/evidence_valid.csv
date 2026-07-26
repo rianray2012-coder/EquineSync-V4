@@ -1,0 +1,2 @@
+evidence_id,guide_id,atlas_task_id,control_ids,evidence_type,evidence_grade,environment,artifact_path,commit_sha,ci_run,reviewer,status,created_date,last_reproduced,notes,result,retained_gates
+CGEVID-9001,ES-CG-00,FIXTURE-ATLAS-0001,ES-CG-00-CTRL-0001,fixture,E2_REPRODUCIBLE_LOCAL,fixture,governance/implementation/code-guides/validation/tests/fixtures/positive/evidence_artifact.txt,fixture,,Fixture reviewer,PLANNED,2026-07-26,2026-07-26,Fixture only.,fixture result,fixture retained gate

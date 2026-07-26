@@ -1,0 +1,1061 @@
+{
+  "baseline": "7975cf2d88540a9b7c9cbfdfa6d6d5b0ec1912c0",
+  "branch": "codex/code-guide-program-foundation-cgp-002-v1",
+  "checksum_ledger": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
+  "commit_sha": "PENDING_COMMIT",
+  "execution_id": "CGEXEC-20260726-0001",
+  "files": [
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/CANONICAL_GUIDE_INVENTORY.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/CGP_002_VALIDATION_AND_USAGE_GUIDE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/CONTROLLED_VALUES.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/NON_AUTHORIZATION_BOUNDARY.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/PROGRAM_CHARTER_PLACEHOLDER.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/PROGRAM_DEPENDENCY_WAVES.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/PROGRAM_STATUS.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/REGISTER_DATA_DICTIONARY.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-00/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-01/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-02/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-03/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-04/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-05/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-06/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-07/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-08/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-09/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-10/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-11/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-12/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/guides/ES-CG-13/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/packages/.gitkeep",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/packages/CGP_002_CREATED_ARTIFACT_MANIFEST.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "PACKAGE_ARTIFACT",
+      "checksum_inclusion": "EXCLUDED_SELF_LEDGER",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/profiles/.gitkeep",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "RECEIPT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/receipts/CGP_002_EXECUTION_RECEIPT.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/ATLAS_TO_CODE_TRACEABILITY_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_ARTIFACT_INVENTORY.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_CONTROL_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_DEPENDENCY_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_INVARIANT_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROMPT_EXECUTION_LOG.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_QUESTION_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_SESSION_RECEIPT_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_VERSION_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CONTROL_TO_REPOSITORY_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/CONTROL_TO_VERIFICATION_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/GUIDE_REVIEW_FINDING_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/GUIDE_SUPERSESSION_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/IMPLEMENTATION_EVIDENCE_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/IMPLEMENTATION_EXCEPTION_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/registers/OPEN_DECISION_REGISTER.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REVIEW_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/reviews/.gitkeep",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "REVIEW_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/reviews/CGP_002_FOUNDATION_GAP_REPORT.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "REVIEW_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/reviews/CGP_002_VALIDATION_REPORT.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/ATLAS_TRACEABILITY_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/CODE_GUIDE_CONTROLLED_VALUES.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/CODE_GUIDE_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/CONTROL_DEFINITION_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/EXCEPTION_RECORD_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/GUIDE_DEPENDENCY_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/IMPLEMENTATION_EVIDENCE_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/IMPLEMENTATION_PROFILE_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/INVARIANT_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/QUESTION_RESPONSE_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "SCHEMA",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/schemas/REVIEW_FINDING_SCHEMA.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "PROGRAM_DOCUMENT",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/source-accession/.gitkeep",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/ADOPTION_DISPOSITION_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/BLOCKED_RECEIPT_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/CHANGE_IMPACT_REPORT_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/CODE_GUIDE_DRAFT_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/CONTROL_DEFINITION_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/CONTROL_VERIFICATION_TEMPLATE.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/DECISION_REQUEST_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/GUIDE_DRAFTING_CHARTER_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/GUIDE_SOURCE_REGISTER_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/INVARIANT_DEFINITION_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/QUESTION_RESPONSE_MATRIX_TEMPLATE.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/REPOSITORY_ACCESSION_RECEIPT_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/REPOSITORY_IMPACT_MAP_TEMPLATE.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/REVIEW_REPORT_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/RISK_MISUSE_ABUSE_FAILURE_TEMPLATE.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/templates/SESSION_RECEIPT_TEMPLATE.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/README.md",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/cgp_validation.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/run_all_validations.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/adopted_without_accession_tracker.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/broken_guide_dependency.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/checksum_mismatch_package/file.txt",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/checksum_mismatch_package/packages/CGP_002_CREATED_ARTIFACT_MANIFEST.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/checksum_mismatch_package/packages/CGP_002_SHA256SUMS.txt",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/circular_dependency.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/duplicate_control_ids.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/duplicate_invariant_ids.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/evidence_missing_artifact.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/expired_exception.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/high_risk_no_negative_test.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/invalid_assurance_class.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/invalid_evidence_grade.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/malformed.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/manifest_omission_package/packages/CGP_002_CREATED_ARTIFACT_MANIFEST.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/manifest_omission_package/packages/CGP_002_SHA256SUMS.txt",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/missing_activation_boundary.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/missing_governing_authority.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/missing_verification_method.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/superseded_control_no_compatibility.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/unanswered_required_question.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/negative/unrecognized_controlled_value.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/positive/control_register_valid.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/positive/dependency_valid.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/positive/evidence_artifact.txt",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/positive/evidence_valid.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/positive/exceptions_valid.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/positive/guide_questions_valid.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/positive/invariant_register_valid.csv",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/schemas/negative/invalid_control_assurance_class.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/schemas/negative/malformed_json.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/schemas/positive/CODE_GUIDE_fixture.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/schemas/positive/CONTROL_DEFINITION_fixture.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATION_FIXTURE",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/fixtures/schemas/positive/INVARIANT_fixture.json",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATOR_TEST",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/test_cgp002_validators.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "NEW"
+    },
+    {
+      "artifact_type": "VALIDATOR_TEST",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/tests/test_validator_placeholders.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_atlas_traceability.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_code_guide_structure.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_control_registry.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_control_verification.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_evidence_records.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_exceptions.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_guide_dependencies.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_guide_questions.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_implementation_profiles.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_invariant_registry.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_package_integrity.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_portfolio_consistency.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_repository_mapping.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "checksum_inclusion": "INCLUDED",
+      "originating_prompt": "CGP-002",
+      "path": "governance/implementation/code-guides/validation/validate_supersession.py",
+      "purpose": "CGP-002 shared foundation, validation, documentation, or custody artifact.",
+      "status": "STRENGTHENED"
+    }
+  ],
+  "ledger_self_hashing": "excluded",
+  "package_id": "ES-CGP-002-FOUNDATION-2026-07-26",
+  "prompt_id": "CGP-002",
+  "remote_verified": "NO"
+}

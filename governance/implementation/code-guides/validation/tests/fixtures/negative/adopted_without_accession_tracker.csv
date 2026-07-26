@@ -1,0 +1,2 @@
+record_id,record_type,guide_id,work_item,wave,primary_dependency,maturity_state,current_prompt,prompt_status,adoption_state,accession_state,owner,next_action,next_prompt,blocked_by,last_updated,receipt_path,notes,work_status
+ES-CG-00,GUIDE,ES-CG-00,Fixture,1,,ADOPTED,,NOT_ISSUED,APPROVED_FOR_CONTROLLED_ADOPTION,NOT_ACCESSIONED,Fixture,,,,2026-07-26,,,NOT_STARTED

@@ -1,29 +1,36 @@
-
 # Decision Request Template
 
-**Template status:** CGP-001 structural placeholder
-**Source prompt:** `CGP-001`
-**Substantive content:** Not authorized
+**Template version:** `0.2.0`
+**Source prompt:** `CGP-002`
+**Template status:** Foundation template
+**Substantive product policy:** Not included
 
 ## Required Metadata
 
-- Template ID:
-- Prompt ID:
-- Execution ID:
-- Guide ID:
-- Source freeze ID:
-- Artifact ID:
-- Receipt path:
-- Review state:
+- Stable ID:
+- Version:
+- Status:
+- Owner:
+- Reviewer:
+- Governing source:
+- Assurance class:
+- Risk domains:
+- Applicability profile:
+- Evidence grade:
+- Repository references:
+- Retained gaps:
+- Exception status:
+- Activation boundary:
+- Supersession:
+- Checksum or custody reference:
 
-## Reserved Body Sections
+## Required Content
 
-- Purpose
-- Scope
-- Source references
-- Required records
-- Review disposition
-- Retained gaps
-- Next action
+- Requirement or question:
+- Positive verification:
+- Negative verification:
+- Review or decision disposition:
+- Open dependencies:
+- Non-authorization boundary:
 
-The section names above are structural placeholders only. They do not define EquineSync engineering controls, product policy, or implementation requirements.
+This template is generic and must not be pre-filled with guide-specific engineering controls until a later authorized prompt supplies that scope.
