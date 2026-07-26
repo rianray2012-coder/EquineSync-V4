@@ -214,6 +214,11 @@
       "artifact_role": "CGP-004 Founder decision reconciliation receipt",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/receipts/CGP_004_FOUNDER_DECISION_RECONCILIATION.md"
+    },
+    {
+      "artifact_role": "CGP-004 repository integration receipt and post-merge custody record",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/receipts/CGP_004_REPOSITORY_INTEGRATION_RECEIPT.md"
     }
   ],
   "ledger_note": "CGP_004_SHA256SUMS.txt intentionally excludes itself from self-hashing; ledger entries may be one fewer than manifest files.",
@@ -221,5 +226,6 @@
   "package_id": "ES-CGP-004-CURRENT-STATE-ASSESSMENT-2026-07-26",
   "premerge_reconciliation": "CGP-004 Founder decision dispositions recorded before repository integration.",
   "program": "EquineSync Code Implementation Guide Program",
-  "prompt_id": "CGP-004"
+  "prompt_id": "CGP-004",
+  "repository_integration_receipt": "CGP_004_REPOSITORY_INTEGRATION_RECEIPT.md"
 }
