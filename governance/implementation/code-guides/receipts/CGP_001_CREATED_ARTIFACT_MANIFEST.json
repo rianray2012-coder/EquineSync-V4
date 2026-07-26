@@ -1,0 +1,372 @@
+{
+  "artifact_count": 89,
+  "baseline_commit": "0dec8031ca96ed20941cee1b3a277f630cd37904",
+  "branch": "codex/code-guide-program-initialization-v1",
+  "checksum_ledger": "governance/implementation/code-guides/receipts/CGP_001_SHA256SUMS.txt",
+  "commit_sha_recorded": "PENDING_COMMIT",
+  "directive_id": "ES-DIR-CGP-001-CODE-GUIDE-PROGRAM-INITIALIZATION-2026-07-25",
+  "execution_id": "CGEXEC-20260725-0001",
+  "files": [
+    {
+      "artifact_type": "PROGRAM_ARTIFACT",
+      "path": "governance/implementation/code-guides/CANONICAL_GUIDE_INVENTORY.md"
+    },
+    {
+      "artifact_type": "PROGRAM_ARTIFACT",
+      "path": "governance/implementation/code-guides/CONTROLLED_VALUES.md"
+    },
+    {
+      "artifact_type": "PROGRAM_ARTIFACT",
+      "path": "governance/implementation/code-guides/NON_AUTHORIZATION_BOUNDARY.md"
+    },
+    {
+      "artifact_type": "PROGRAM_ARTIFACT",
+      "path": "governance/implementation/code-guides/PROGRAM_CHARTER_PLACEHOLDER.md"
+    },
+    {
+      "artifact_type": "PROGRAM_ARTIFACT",
+      "path": "governance/implementation/code-guides/PROGRAM_DEPENDENCY_WAVES.md"
+    },
+    {
+      "artifact_type": "PROGRAM_ARTIFACT",
+      "path": "governance/implementation/code-guides/PROGRAM_STATUS.md"
+    },
+    {
+      "artifact_type": "PROGRAM_ARTIFACT",
+      "path": "governance/implementation/code-guides/README.md"
+    },
+    {
+      "artifact_type": "PROGRAM_ARTIFACT",
+      "path": "governance/implementation/code-guides/REGISTER_DATA_DICTIONARY.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-00/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-01/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-02/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-03/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-04/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-05/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-06/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-07/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-08/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-09/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-10/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-11/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-12/README.md"
+    },
+    {
+      "artifact_type": "GUIDE_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/guides/ES-CG-13/README.md"
+    },
+    {
+      "artifact_type": "EMPTY_DIRECTORY_MARKER",
+      "path": "governance/implementation/code-guides/packages/.gitkeep"
+    },
+    {
+      "artifact_type": "EMPTY_DIRECTORY_MARKER",
+      "path": "governance/implementation/code-guides/profiles/.gitkeep"
+    },
+    {
+      "artifact_type": "CUSTODY_ARTIFACT",
+      "path": "governance/implementation/code-guides/receipts/CGP_001_CREATED_ARTIFACT_MANIFEST.json"
+    },
+    {
+      "artifact_type": "CUSTODY_ARTIFACT",
+      "path": "governance/implementation/code-guides/receipts/CGP_001_PROGRAM_INITIALIZATION_RECEIPT.md"
+    },
+    {
+      "artifact_type": "CUSTODY_ARTIFACT",
+      "path": "governance/implementation/code-guides/receipts/CGP_001_SESSION_RECEIPT.md"
+    },
+    {
+      "artifact_type": "CUSTODY_ARTIFACT",
+      "path": "governance/implementation/code-guides/receipts/CGP_001_SHA256SUMS.txt"
+    },
+    {
+      "artifact_type": "CUSTODY_ARTIFACT",
+      "path": "governance/implementation/code-guides/receipts/CGP_001_VALIDATION_REPORT.md"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/ATLAS_TO_CODE_TRACEABILITY_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_ARTIFACT_INVENTORY.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_CONTROL_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_DEPENDENCY_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_INVARIANT_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROMPT_EXECUTION_LOG.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_QUESTION_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_SESSION_RECEIPT_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_VERSION_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CONTROL_TO_REPOSITORY_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/CONTROL_TO_VERIFICATION_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/GUIDE_REVIEW_FINDING_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/GUIDE_SUPERSESSION_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/IMPLEMENTATION_EVIDENCE_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/IMPLEMENTATION_EXCEPTION_REGISTER.csv"
+    },
+    {
+      "artifact_type": "REGISTER",
+      "path": "governance/implementation/code-guides/registers/OPEN_DECISION_REGISTER.csv"
+    },
+    {
+      "artifact_type": "EMPTY_DIRECTORY_MARKER",
+      "path": "governance/implementation/code-guides/reviews/.gitkeep"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/ATLAS_TRACEABILITY_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/CODE_GUIDE_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/CONTROL_DEFINITION_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/EXCEPTION_RECORD_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/GUIDE_DEPENDENCY_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/IMPLEMENTATION_EVIDENCE_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/IMPLEMENTATION_PROFILE_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/INVARIANT_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/QUESTION_RESPONSE_SCHEMA.json"
+    },
+    {
+      "artifact_type": "SCHEMA_SKELETON",
+      "path": "governance/implementation/code-guides/schemas/REVIEW_FINDING_SCHEMA.json"
+    },
+    {
+      "artifact_type": "EMPTY_DIRECTORY_MARKER",
+      "path": "governance/implementation/code-guides/source-accession/.gitkeep"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/ADOPTION_DISPOSITION_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/BLOCKED_RECEIPT_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/CHANGE_IMPACT_REPORT_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/CODE_GUIDE_DRAFT_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/CONTROL_DEFINITION_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/CONTROL_VERIFICATION_TEMPLATE.csv"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/DECISION_REQUEST_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/GUIDE_DRAFTING_CHARTER_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/GUIDE_SOURCE_REGISTER_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/INVARIANT_DEFINITION_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/QUESTION_RESPONSE_MATRIX_TEMPLATE.csv"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/REPOSITORY_ACCESSION_RECEIPT_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/REPOSITORY_IMPACT_MAP_TEMPLATE.csv"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/REVIEW_REPORT_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/RISK_MISUSE_ABUSE_FAILURE_TEMPLATE.csv"
+    },
+    {
+      "artifact_type": "TEMPLATE",
+      "path": "governance/implementation/code-guides/templates/SESSION_RECEIPT_TEMPLATE.md"
+    },
+    {
+      "artifact_type": "VALIDATOR_TEST",
+      "path": "governance/implementation/code-guides/validation/tests/test_validator_placeholders.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_atlas_traceability.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_code_guide_structure.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_control_registry.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_control_verification.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_evidence_records.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_exceptions.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_guide_dependencies.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_guide_questions.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_implementation_profiles.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_invariant_registry.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_package_integrity.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_portfolio_consistency.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_repository_mapping.py"
+    },
+    {
+      "artifact_type": "VALIDATOR_PLACEHOLDER",
+      "path": "governance/implementation/code-guides/validation/validate_supersession.py"
+    }
+  ],
+  "package_id": "ES-CGP-001-SCAFFOLD-2026-07-26",
+  "prompt_id": "CGP-001",
+  "remote_verified": "NO",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "self_hash_note": "The checksum ledger excludes itself from self-hashing."
+}

@@ -1,0 +1,16 @@
+{
+  "$id": "https://equinesync.local/governance/implementation/code-guides/schemas/EXCEPTION_RECORD_SCHEMA.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "description": "CGP-001 initialization skeleton. Full substantive constraints are reserved for CGP-002.",
+  "properties": {
+    "prompt_id": {
+      "const": "CGP-001"
+    },
+    "schema_stage": {
+      "const": "CGP-001_INITIALIZATION_SKELETON"
+    }
+  },
+  "title": "Exception Record Schema",
+  "type": "object"
+}

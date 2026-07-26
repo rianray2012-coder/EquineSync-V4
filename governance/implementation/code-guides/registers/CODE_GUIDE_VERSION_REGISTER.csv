@@ -1,0 +1,15 @@
+guide_id,version,status,effective_date,repository_path,package_id,checksum,approval_record,supersedes,superseded_by,compatibility_notes
+ES-CG-00,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-00/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-01,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-01/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-13,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-13/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-10,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-10/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-02,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-02/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-03,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-03/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-04,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-04/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-05,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-05/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-06,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-06/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-07,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-07/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-08,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-08/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-09,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-09/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-11,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-11/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
+ES-CG-12,0.0.0-placeholder,PLANNED,,governance/implementation/code-guides/guides/ES-CG-12/README.md,ES-CGP-001-SCAFFOLD-2026-07-26,,NOT_ADOPTED,,,Placeholder only; substantive versioning reserved for later prompts.
