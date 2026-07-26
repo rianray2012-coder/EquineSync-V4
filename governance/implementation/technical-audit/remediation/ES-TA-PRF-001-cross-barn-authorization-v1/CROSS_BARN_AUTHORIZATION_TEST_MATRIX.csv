@@ -1,0 +1,21 @@
+test_id,area,scenario,actor,target,expected,observed,mutation_result,status,evidence
+PRF001-T01,setup,Exact retained node: complete/skip/void,pytest non-live/live helper,shared isolation world,Reach task assertions or report setup blocker,ERROR at invite accept 401,No task assertion reached,RETAINED_SETUP_BLOCKER,/tmp/es_ta_prf_001_three_node_reproduction.xml
+PRF001-T02,setup,Exact retained node: task patch/reassign,pytest non-live/live helper,shared isolation world,Reach task assertions or report setup blocker,ERROR at invite accept 401,No task assertion reached,RETAINED_SETUP_BLOCKER,/tmp/es_ta_prf_001_three_node_reproduction.xml
+PRF001-T03,setup,Exact retained node: template patch/delete,pytest non-live/live helper,shared isolation world,Reach task assertions or report setup blocker,ERROR at invite accept 401,No task assertion reached,RETAINED_SETUP_BLOCKER,/tmp/es_ta_prf_001_three_node_reproduction.xml
+PRF001-T04,task mutation,Patch foreign task,Barn A admin,Barn B task,404,404,Victim title unchanged,PASS,ba3910165c
+PRF001-T05,task mutation,Patch foreign task,Barn B admin,Barn A task,404,404,Victim title unchanged,PASS,ba3910165c
+PRF001-T06,task mutation,Reassign foreign task,Barn A admin,Barn B task,404,404,Victim assignment unchanged,PASS,ba3910165c
+PRF001-T07,task mutation,Reassign foreign task,Barn B admin,Barn A task,404,404,Victim assignment unchanged,PASS,ba3910165c
+PRF001-T08,task mutation,Complete foreign task,Barn A admin,Barn B task,404,404,No completion or event created in actor barn,PASS,ba3910165c
+PRF001-T09,task mutation,Complete foreign task,Barn B admin,Barn A task,404,404,No completion or event created in actor barn,PASS,ba3910165c
+PRF001-T10,task mutation,Skip foreign task,Barn A admin,Barn B task,404,404,No completion or event created in actor barn,PASS,ba3910165c
+PRF001-T11,task mutation,Skip foreign task,Barn B admin,Barn A task,404,404,No completion or event created in actor barn,PASS,ba3910165c
+PRF001-T12,task mutation,Void foreign task completion,Barn A admin,Barn B task,404,404,Victim completion count unchanged,PASS,ba3910165c
+PRF001-T13,task mutation,Void foreign task completion,Barn B admin,Barn A task,404,404,Victim completion count unchanged,PASS,ba3910165c
+PRF001-T14,template mutation,Patch foreign template,Barn A admin,Barn B template,404,404,Victim title unchanged,PASS,ba3910165c
+PRF001-T15,template mutation,Patch foreign template,Barn B admin,Barn A template,404,404,Victim title unchanged,PASS,ba3910165c
+PRF001-T16,template mutation,Delete foreign template,Barn A admin,Barn B template,404,404,Victim active state unchanged,PASS,ba3910165c
+PRF001-T17,template mutation,Delete foreign template,Barn B admin,Barn A template,404,404,Victim active state unchanged,PASS,ba3910165c
+PRF001-T18,authorization invalidation,Relationship removed before task mutation,Current branch,N/A,Separate validation evidence,Not executed,No runtime change,RETAINED_FUTURE_SCOPE,Founder decision retained condition
+PRF001-T19,authorization invalidation,Role or capability removed before task mutation,Current branch,N/A,Separate validation evidence,Not executed,No runtime change,RETAINED_FUTURE_SCOPE,Founder decision retained condition
+PRF001-T20,offline replay,Stale queued task replay after context change,Current branch,N/A,Separate PRF-005 validation evidence,Not executed,No runtime change,RETAINED_FUTURE_SCOPE,Founder decision retained condition
