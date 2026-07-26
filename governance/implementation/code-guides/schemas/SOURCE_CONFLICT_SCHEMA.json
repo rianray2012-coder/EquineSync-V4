@@ -1,0 +1,49 @@
+{
+  "$id": "https://equinesync.local/schemas/code-guide/source_conflict.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "affected_area": {
+      "type": "string"
+    },
+    "conflict_id": {
+      "type": "string"
+    },
+    "conflict_type": {
+      "type": "string"
+    },
+    "current_treatment": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "required_next_action": {
+      "type": "string"
+    },
+    "source_ids": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "conflict_id",
+    "source_ids",
+    "conflict_type",
+    "affected_area",
+    "description",
+    "current_treatment",
+    "required_next_action",
+    "status",
+    "notes"
+  ],
+  "schema_version": "0.3.0",
+  "source_prompt": "CGP-003",
+  "title": "Source Conflict",
+  "type": "object"
+}

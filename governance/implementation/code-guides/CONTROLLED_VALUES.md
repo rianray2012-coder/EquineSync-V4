@@ -154,3 +154,8 @@ CGP-002 establishes one canonical machine-readable source. Markdown below mirror
 - `NEGATIVE`
 
 CGP-002 does not authorize new product policy, guide controls, implementation profiles, deployment, adoption, or activation.
+## CGP-003 Source Accession Controlled Values
+
+CGP-003 extends the shared controlled values with source accession classes, authority statuses, checksum statuses, custody statuses, source-gap types, source-conflict types, source supersession statuses, and source-to-guide mapping types. The canonical machine-readable source is `schemas/CODE_GUIDE_CONTROLLED_VALUES.json`.
+
+These additions classify source evidence only. They do not adopt external standards, draft guide controls, or activate any guide.

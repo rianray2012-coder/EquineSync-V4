@@ -26,6 +26,7 @@ CONTROL_RE = re.compile(r"^ES-CG-(0[0-9]|1[0-3])-CTRL-\d{4}$")
 INVARIANT_RE = re.compile(r"^ES-CG-(0[0-9]|1[0-3])-INV-\d{4}$")
 QUESTION_RE = re.compile(r"^ES-CG-(0[0-9]|1[0-3])-Q-\d{4}$")
 VERSION_RE = re.compile(r"^\d+\.\d+\.\d+(-[A-Za-z0-9_.-]+)?$")
+SOURCE_RE = re.compile(r"^CGSRC-[A-Z0-9]+-\d{4}$")
 
 
 @dataclass
@@ -495,6 +496,26 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def sha256_tracked_tree(repo: Path, rel: str) -> str:
+    """Hash a directory as sorted tracked child paths plus child file hashes."""
+    proc = subprocess.run(
+        ["git", "-C", str(repo), "ls-files", rel],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    h = hashlib.sha256()
+    for child in sorted(line for line in proc.stdout.splitlines() if line.strip()):
+        path = repo / child
+        if not path.is_file():
+            continue
+        h.update(child.encode())
+        h.update(b"\0")
+        h.update(sha256_file(path).encode())
+        h.update(b"\n")
+    return h.hexdigest()
+
+
 def validate_package_integrity(root: Path, manifest_path: Path | None = None) -> ValidationResult:
     result = ValidationResult("package-integrity")
     manifest_path = manifest_path or root / "packages" / "CGP_002_CREATED_ARTIFACT_MANIFEST.json"
@@ -551,6 +572,134 @@ def validate_package_integrity(root: Path, manifest_path: Path | None = None) ->
     return result.finalize()
 
 
+def validate_source_accession(root: Path) -> ValidationResult:
+    result = ValidationResult("source-accession")
+    values = load_values(root)
+    repo = root.parents[2]
+    source_path = root / "source-accession" / "MASTER_CODE_GUIDE_SOURCE_REGISTER.csv"
+    gap_path = root / "source-accession" / "MASTER_CODE_GUIDE_SOURCE_GAP_REGISTER.csv"
+    conflict_path = root / "source-accession" / "MASTER_CODE_GUIDE_SOURCE_CONFLICT_REGISTER.csv"
+    supersession_path = root / "source-accession" / "MASTER_CODE_GUIDE_SOURCE_SUPERSESSION_REGISTER.csv"
+    map_path = root / "source-accession" / "MASTER_CODE_GUIDE_SOURCE_TO_GUIDE_MAP.csv"
+    for required_path in [source_path, gap_path, conflict_path, supersession_path, map_path]:
+        if not required_path.exists():
+            result.add("missing_source_accession_artifact", "Required source accession artifact is missing.", required_path)
+    if result.issues:
+        return result.finalize()
+
+    _, source_rows = read_csv_strict(source_path, result)
+    _, gap_rows = read_csv_strict(gap_path, result)
+    _, conflict_rows = read_csv_strict(conflict_path, result)
+    _, supersession_rows = read_csv_strict(supersession_path, result)
+    _, map_rows = read_csv_strict(map_path, result)
+    gids = guide_ids(root) | {"PROGRAM_WIDE"}
+    source_ids: set[str] = set()
+    gap_sources = {row.get("source_id", "") for row in gap_rows if row.get("source_id")}
+
+    for row in source_rows:
+        sid = row.get("source_id", "")
+        if sid in source_ids:
+            result.add("duplicate_source_id", "Duplicate source ID.", source_path, sid)
+        source_ids.add(sid)
+        if not SOURCE_RE.match(sid):
+            result.add("malformed_source_id", "Source ID is malformed.", source_path, sid)
+        for field in [
+            "title",
+            "repository_path",
+            "source_class",
+            "authority_status",
+            "checksum",
+            "checksum_verification_status",
+            "exact_approved_bytes_accessioned",
+            "custody_status",
+            "review_status",
+        ]:
+            require(row, field, result, source_path, sid, f"missing_{field}")
+        if row.get("source_class") not in values.get("source_classes", []):
+            result.add("invalid_source_class", "Source class is not controlled.", source_path, sid)
+        if row.get("authority_status") not in values.get("source_authority_statuses", []):
+            result.add("invalid_authority_status", "Authority status is not controlled.", source_path, sid)
+        if row.get("checksum_verification_status") not in values.get("source_checksum_statuses", []):
+            result.add("invalid_checksum_status", "Checksum status is not controlled.", source_path, sid)
+        if row.get("exact_approved_bytes_accessioned") not in values.get("exact_approved_byte_states", []):
+            result.add("invalid_exact_byte_state", "Exact-approved-byte state is not controlled.", source_path, sid)
+        if row.get("custody_status") not in values.get("source_custody_statuses", []):
+            result.add("invalid_custody_status", "Custody status is not controlled.", source_path, sid)
+        if row.get("review_status") not in values.get("source_review_statuses", []):
+            result.add("invalid_review_status", "Review status is not controlled.", source_path, sid)
+        checksum = row.get("checksum", "")
+        if checksum and not re.fullmatch(r"[0-9a-f]{64}", checksum):
+            result.add("malformed_checksum", "Checksum must be 64 lowercase hex characters.", source_path, sid)
+        rel = row.get("repository_path", "")
+        rel_path = Path(rel)
+        if rel_path.is_absolute() or ".." in rel_path.parts:
+            result.add("invalid_repository_path", "Source path must be relative and not traverse upward.", source_path, sid)
+            continue
+        actual = repo / rel
+        if not actual.exists():
+            result.add("unresolved_source_path", "Source repository path does not resolve.", source_path, sid)
+            continue
+        status = row.get("checksum_verification_status")
+        if checksum and status == "VERIFIED_FILE" and actual.is_file() and sha256_file(actual) != checksum:
+            result.add("checksum_mismatch", "File checksum does not match recorded source checksum.", source_path, sid)
+        if checksum and status == "VERIFIED_DIRECTORY_AGGREGATE" and actual.is_dir() and sha256_tracked_tree(repo, rel) != checksum:
+            result.add("checksum_mismatch", "Directory aggregate checksum does not match recorded source checksum.", source_path, sid)
+        if row.get("authority_status") == "CONTROLLING" and not row.get("approval_record_path") and sid not in gap_sources:
+            result.add("controlling_source_without_approval_basis", "Controlling source lacks approval basis or retained gap.", source_path, sid)
+
+    for row in gap_rows:
+        gid = row.get("gap_id", "")
+        if row.get("gap_type") not in values.get("source_gap_types", []):
+            result.add("invalid_gap_type", "Gap type is not controlled.", gap_path, gid)
+        if row.get("source_id") and row.get("source_id") not in source_ids:
+            result.add("orphan_gap_source", "Gap references unknown source.", gap_path, gid)
+        for flag in ("drafting_may_proceed", "blocks_adoption_or_activation"):
+            if row.get(flag) not in values.get("boolean_text", []):
+                result.add("invalid_boolean_value", f"{flag} must use YES or NO.", gap_path, gid)
+        for field in ["risk", "required_next_action", "responsible_authority"]:
+            require(row, field, result, gap_path, gid, f"missing_{field}")
+
+    for row in map_rows:
+        mid = row.get("mapping_id", "")
+        if row.get("source_id") not in source_ids:
+            result.add("orphan_source_mapping", "Source-to-guide mapping references unknown source.", map_path, mid)
+        if row.get("guide_id") not in gids:
+            result.add("invalid_guide_mapping", "Source-to-guide mapping references invalid guide.", map_path, mid)
+        if row.get("mapping_type") not in values.get("source_mapping_types", []):
+            result.add("invalid_mapping_type", "Source-to-guide mapping type is not controlled.", map_path, mid)
+
+    for row in conflict_rows:
+        cid = row.get("conflict_id", "")
+        if row.get("conflict_type") not in values.get("source_conflict_types", []):
+            result.add("invalid_conflict_type", "Conflict type is not controlled.", conflict_path, cid)
+        for sid in split_refs(row.get("source_ids", "")):
+            if sid not in source_ids:
+                result.add("orphan_conflict_source", "Conflict references unknown source.", conflict_path, cid)
+
+    for row in supersession_rows:
+        sid = row.get("supersession_id", "")
+        if row.get("supersession_status") not in values.get("source_supersession_statuses", []):
+            result.add("invalid_source_supersession_status", "Source supersession status is not controlled.", supersession_path, sid)
+        for field in ("predecessor_source_id", "successor_source_id"):
+            ref = row.get(field, "")
+            if ref and ref not in source_ids:
+                result.add("orphan_supersession_source", f"{field} references unknown source.", supersession_path, sid)
+        for guide in split_refs(row.get("affected_guides", "")):
+            if guide not in gids:
+                result.add("invalid_supersession_guide", "Supersession references invalid guide.", supersession_path, sid)
+
+    source_guides = {row.get("guide_id") for row in map_rows}
+    for guide in guide_ids(root):
+        if guide not in source_guides:
+            result.add("guide_without_source_coverage", "Guide lacks source coverage mapping.", map_path, guide)
+    result.summary["sources_checked"] = len(source_rows)
+    result.summary["mappings_checked"] = len(map_rows)
+    result.summary["gaps_checked"] = len(gap_rows)
+    result.summary["conflicts_checked"] = len(conflict_rows)
+    result.summary["supersessions_checked"] = len(supersession_rows)
+    return result.finalize()
+
+
 def validate_portfolio_consistency(root: Path) -> ValidationResult:
     result = ValidationResult("portfolio-consistency")
     values = load_values(root)
@@ -602,6 +751,7 @@ VALIDATOR_FUNCTIONS = {
     "supersession": validate_supersession,
     "package-integrity": validate_package_integrity,
     "portfolio-consistency": validate_portfolio_consistency,
+    "source-accession": validate_source_accession,
 }
 
 

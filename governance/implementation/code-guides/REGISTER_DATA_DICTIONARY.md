@@ -358,3 +358,19 @@ CGP-002 adds the following columns while preserving all CGP-001 minimum column c
 | `CONTROL_TO_REPOSITORY_REGISTER.csv` | `activation_boundary` | Boundary preventing repository mapping from implying activation. |
 | `IMPLEMENTATION_EVIDENCE_REGISTER.csv` | `result` | Evidence result or outcome. |
 | `IMPLEMENTATION_EVIDENCE_REGISTER.csv` | `retained_gates` | Gates retained by an evidence record. |
+
+## CGP-003 Source Accession Registers
+
+CGP-003 adds the following source-accession registers without creating substantive guide controls.
+
+| Register | Purpose |
+|---|---|
+| `source-accession/MASTER_CODE_GUIDE_SOURCE_REGISTER.csv` | Master inventory of repository sources that may govern, constrain, inform, or evidence future Code Guides. |
+| `source-accession/MASTER_CODE_GUIDE_SOURCE_TO_GUIDE_MAP.csv` | Initial source-to-guide coverage map using `MANDATORY`, `SUPPORTING`, `HISTORICAL`, `POTENTIALLY_CONFLICTING`, or `PENDING_REVIEW`. |
+| `source-accession/MASTER_CODE_GUIDE_SOURCE_GAP_REGISTER.csv` | Retained source gaps, risk, next action, responsible authority, drafting treatment, and adoption/activation effect. |
+| `source-accession/MASTER_CODE_GUIDE_SOURCE_CONFLICT_REGISTER.csv` | Source conflicts that must remain visible until later authority resolves them. |
+| `source-accession/MASTER_CODE_GUIDE_SOURCE_SUPERSESSION_REGISTER.csv` | Source predecessor/successor treatment for candidate, adoption, lock, historical, and program-sequence source families. |
+| `registers/CODE_GUIDE_FINDING_REGISTER.csv` | CGP-level source assurance findings by severity. |
+| `registers/CODE_GUIDE_OPEN_DECISION_REGISTER.csv` | CGP-level decision requests created because existing authority is insufficient. |
+
+The corresponding schemas are `SOURCE_RECORD_SCHEMA.json`, `SOURCE_TO_GUIDE_MAP_SCHEMA.json`, `SOURCE_GAP_SCHEMA.json`, `SOURCE_CONFLICT_SCHEMA.json`, and `SOURCE_SUPERSESSION_SCHEMA.json`.
