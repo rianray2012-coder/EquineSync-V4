@@ -227,5 +227,14 @@
   "premerge_reconciliation": "CGP-004 Founder decision dispositions recorded before repository integration.",
   "program": "EquineSync Code Implementation Guide Program",
   "prompt_id": "CGP-004",
+  "repository_integration": {
+    "approved_head": "ba47e8e73e7404c10828b79849c017f77302b480",
+    "merge_commit": "13b08f79f24af54acd6337e806ac4616a7c65e69",
+    "metadata_reconciliation": "PENDING_METADATA_PR_MERGE",
+    "primary_pr": 16,
+    "receipt_commit": "ebbab60b82afdbd481b3d7b0ab801e4a6c39c282",
+    "receipt_merge_commit": "b1a51fda99aaef4bc306c2ee253751bed956e3c3",
+    "receipt_pr": 17
+  },
   "repository_integration_receipt": "CGP_004_REPOSITORY_INTEGRATION_RECEIPT.md"
 }

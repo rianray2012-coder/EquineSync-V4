@@ -16,12 +16,12 @@
 - Merge commit: `13b08f79f24af54acd6337e806ac4616a7c65e69`
 - Base head at merge: `92e9ccae8695aa523181b4cfe60e554e6c5245bd`
 - Remote default-branch head after CGP-004 assessment merge: `13b08f79f24af54acd6337e806ac4616a7c65e69`
-- Receipt pull request: `PENDING_RECEIPT_PR`
-- Receipt commit: `PENDING_RECEIPT_COMMIT`
-- Receipt merge commit: `PENDING_RECEIPT_MERGE_COMMIT`
-- Metadata pull request: `PENDING_METADATA_PR`
-- Metadata commit: `PENDING_METADATA_COMMIT`
-- Final remote default-branch head after metadata reconciliation: `PENDING_METADATA_MERGE_COMMIT`
+- Receipt pull request: `#17`
+- Receipt commit: `ebbab60b82afdbd481b3d7b0ab801e4a6c39c282`
+- Receipt merge commit: `b1a51fda99aaef4bc306c2ee253751bed956e3c3`
+- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_THIS_COMMIT`
+- Metadata commit: `PENDING_METADATA_BRANCH_COMMIT_VERIFIED_AFTER_PUSH`
+- Final remote default-branch head after metadata reconciliation: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF`
 
 ## Source And Assessment Counts
 
@@ -83,11 +83,11 @@ Verified on remote default branch after PR `#16` merge:
 
 ## Tracker Updates
 
-Final tracker updates are reserved for the branch-protection-compliant metadata reconciliation PR:
+Final tracker updates recorded by this branch-protection-compliant metadata reconciliation PR:
 
-- `CGP-004`: pending update to `ACCEPTED`
-- CGP-004 repository state: pending update to `REPOSITORY_ACCESSIONED`
-- `CGP-005`: must remain `NOT_ISSUED`
+- `CGP-004`: `ACCEPTED`
+- CGP-004 repository state: `REPOSITORY_ACCESSIONED`
+- `CGP-005`: `NOT_ISSUED`
 
 ## Actions Not Taken
 
@@ -96,3 +96,7 @@ CGP-005 was not begun. No substantive Code Guide controls, implementation profil
 ## Metadata Finalization Note
 
 The receipt PR and final metadata PR numbers, commits, merge commits, and resulting final remote default-branch head are recorded by the follow-up metadata reconciliation PR and returned in the final integration handoff.
+
+## Metadata Reconciliation Status
+
+This metadata branch records CGP-004 as accepted and repository-accessioned, updates the prompt execution log, verifies receipt PR `#17`, and preserves `CGP-005` as `NOT_ISSUED`. The metadata PR number, metadata branch commit, metadata merge commit, and final remote default-branch head are verified after this branch is pushed and merged and are returned in the final handoff.
