@@ -209,11 +209,17 @@
       "artifact_role": "CGP-004 current-state assessment, validation, register, source-custody, or receipt artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROMPT_EXECUTION_LOG.csv"
+    },
+    {
+      "artifact_role": "CGP-004 Founder decision reconciliation receipt",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/receipts/CGP_004_FOUNDER_DECISION_RECONCILIATION.md"
     }
   ],
   "ledger_note": "CGP_004_SHA256SUMS.txt intentionally excludes itself from self-hashing; ledger entries may be one fewer than manifest files.",
   "non_authorization": "CGP-005 was not begun. No substantive Code Guide controls, implementation profiles, application-code changes, test changes, CI changes, PIA amendments, atlas amendments, deployment actions, pilot actions, production actions, or activation authority were created or exercised.",
   "package_id": "ES-CGP-004-CURRENT-STATE-ASSESSMENT-2026-07-26",
+  "premerge_reconciliation": "CGP-004 Founder decision dispositions recorded before repository integration.",
   "program": "EquineSync Code Implementation Guide Program",
   "prompt_id": "CGP-004"
 }

@@ -187,6 +187,24 @@
     ]
   },
   "portfolio_validation_exit_code": 0,
+  "premerge_reconciliation": {
+    "cgp004_findings_retained_downstream": [
+      "CGP004-F-0001",
+      "CGP004-F-0002",
+      "CGP004-F-0003",
+      "CGP004-F-0004",
+      "CGP004-F-0005",
+      "CGP004-F-0006",
+      "CGP004-F-0007"
+    ],
+    "decision_records_closed": [
+      "CGP004-D-0001",
+      "CGP004-D-0002",
+      "CGP004-D-0003"
+    ],
+    "disposition": "CGP-004_APPROVED_FOR_DOCUMENTARY_CURRENT_STATE_ASSESSMENT_MERGE_AFTER_REQUIRED_RECONCILIATION",
+    "superseded_finding": "CGP003-F-0002 -> CGP004-F-0003_AND_CGP004-GAP-0002"
+  },
   "program": "EquineSync Code Implementation Guide Program",
   "prompt_id": "CGP-004",
   "py_compile": {

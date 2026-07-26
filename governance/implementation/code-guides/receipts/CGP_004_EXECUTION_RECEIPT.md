@@ -8,8 +8,10 @@
 **Default branch:** `integrate-emergent-final-zip`
 **Execution baseline:** `92e9ccae8695aa523181b4cfe60e554e6c5245bd`
 **Working branch:** `codex/code-guide-current-state-assessment-cgp-004-v1`
-**Pull-request authority:** Not granted
-**Merge authority:** Not granted
+**Returned branch head before pre-merge reconciliation:** `1500c053009b2b47509a12796108db78fc7a8c2c`
+**Pre-merge reconciliation disposition:** `CGP-004_APPROVED_FOR_DOCUMENTARY_CURRENT_STATE_ASSESSMENT_MERGE_AFTER_REQUIRED_RECONCILIATION`
+**Pull-request authority:** Granted by Founder continuation for CGP-004 repository integration only
+**Merge authority:** Granted by Founder continuation for CGP-004 repository integration only
 
 ## Startup Verification
 
@@ -21,6 +23,7 @@
 - Program tracker pre-state confirmed CGP-001, CGP-002, and CGP-003 accepted and CGP-004 not issued.
 - Worktree and index were clean before CGP-004 branch mutation.
 - Branch `codex/code-guide-current-state-assessment-cgp-004-v1` was created from the verified default-branch head.
+- Returned branch head `1500c053009b2b47509a12796108db78fc7a8c2c` was pushed and remote-verified before Founder reconciliation authorization.
 
 ## Work Performed
 
@@ -33,30 +36,34 @@ CGP-004 assessed current repository architecture, implementation patterns, evide
 - Repository-to-source evidence mappings: 21
 - Unmapped component groups: 4
 - Retained current-state gaps: 12
-- Open decisions raised: 3
-- Findings: 0 P0, 0 P1, 5 P2, 2 P3
+- CGP-004 decision records raised before reconciliation: 3
+- CGP-004 decision records closed by Founder disposition during pre-merge reconciliation: 3
+- Findings retained downstream: 0 P0, 0 P1, 5 P2, 2 P3
+- CGP-003 finding reconciled: `CGP003-F-0002` superseded by `CGP004-F-0003` and `CGP004-GAP-0002`
 
 ## Validation Summary
 
 - Added CGP-004 validators for repository component register, repository authority alignment, and current-state assessment artifact completeness.
 - Added validator wrappers and unit tests.
 - Final validation status is recorded in `governance/implementation/code-guides/reviews/CGP_004_VALIDATION_REPORT.json`.
-- Checksum ledgers were regenerated after artifact creation.
+- Checksum ledgers were regenerated after artifact creation and after pre-merge reconciliation.
 - CGP-004 checksum ledger intentionally excludes itself from self-hashing; this may make ledger entries one fewer than the manifest file count.
 
-## Remote Verification Treatment
+## Founder Decision Reconciliation
 
-This receipt is committed before the final branch head exists. The execution log therefore records `PENDING_POST_COMMIT_VERIFICATION` and `PENDING_PUSH` for self-referential fields. The final local commit and remote branch head are verified after commit and push and reported with the returned execution summary.
+Founder dispositions for `CGP004-D-0001`, `CGP004-D-0002`, and `CGP004-D-0003` are recorded in `governance/implementation/code-guides/receipts/CGP_004_FOUNDER_DECISION_RECONCILIATION.md` and mirrored in both decision registers.
 
-## Retained Gaps And Decisions
+## Retained Gaps And Findings
 
-Retained gaps and decisions are recorded in:
+Retained gaps and findings are recorded in:
 
 - `governance/implementation/code-guides/assessment/CURRENT_CODE_GUIDE_GAP_REGISTER.csv`
 - `governance/implementation/code-guides/registers/CODE_GUIDE_FINDING_REGISTER.csv`
 - `governance/implementation/code-guides/registers/GUIDE_REVIEW_FINDING_REGISTER.csv`
-- `governance/implementation/code-guides/registers/CODE_GUIDE_OPEN_DECISION_REGISTER.csv`
-- `governance/implementation/code-guides/registers/OPEN_DECISION_REGISTER.csv`
+
+## Self-Reference Treatment
+
+The exact pre-merge reconciliation commit and remote branch head are verified after this receipt is committed and pushed because a commit cannot embed its own final SHA. The repository integration receipt records the approved reconciled branch head after the pull request is merged.
 
 ## Actions Not Taken
 
