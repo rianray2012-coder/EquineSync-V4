@@ -1,0 +1,216 @@
+{
+  "baseline_commit": "ff2748796bf858f49a3f85bad0578850e1deb846",
+  "counts": {
+    "BLOCKED": 0,
+    "FAIL": 0,
+    "NOT_YET_APPLICABLE": 10,
+    "PASS": 10,
+    "WARNING": 0
+  },
+  "created_date": "2026-07-26",
+  "execution_id": "CGEXEC-20260726-0004",
+  "non_authorization": "CGP-006 not begun; no substantive guide controls, implementation profiles, application code, test changes, CI changes, PIA amendments, atlas amendments, deployment, pilot, production, or activation authority.",
+  "not_yet_applicable_is_substantive_pass": false,
+  "package_id": "ES-CGP-005-WAVE-1-SOURCE-FREEZE-2026-07-26",
+  "prompt_id": "CGP-005",
+  "source_freeze_counts": {
+    "conflict_treatments": 4,
+    "crosswalk_rows": 8796,
+    "exclusion_rows": 277,
+    "repository_evidence_rows": 11,
+    "unique_sources": 2511
+  },
+  "status": "PASS",
+  "unit_tests": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/Users/rianray/Documents/Codex/2026-07-25/fo/work/repos/EquineSync-V4-CGP-001/governance/implementation/code-guides/validation/tests"
+    ],
+    "exit_code": 0,
+    "stderr": ".............................\n----------------------------------------------------------------------\nRan 29 tests in 30.021s\n\nOK\n",
+    "stdout": ""
+  },
+  "validators": [
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "guides_checked": 14
+      },
+      "validator": "code-guide-structure"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "control-registry"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "invariant-registry"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "guide-questions"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "rows_checked": 14
+      },
+      "validator": "guide-dependencies"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "atlas-traceability"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "repository-mapping"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "control-verification"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "profiles_checked": 0
+      },
+      "validator": "implementation-profiles"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "evidence-records"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "exceptions"
+    },
+    {
+      "issues": [],
+      "status": "NOT_YET_APPLICABLE",
+      "summary": {
+        "rows_checked": 0
+      },
+      "validator": "supersession"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "ledger_entries": 132,
+        "manifest_files": 133
+      },
+      "validator": "package-integrity"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "guide_rows_checked": 14
+      },
+      "validator": "portfolio-consistency"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "conflicts_checked": 4,
+        "gaps_checked": 7,
+        "mappings_checked": 14176,
+        "sources_checked": 2620,
+        "supersessions_checked": 4
+      },
+      "validator": "source-accession"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "components_checked": 21
+      },
+      "validator": "repository-component-register"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "alignments_checked": 21
+      },
+      "validator": "repository-authority-alignment"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "required_markdown": 11,
+        "required_registers": 6
+      },
+      "validator": "current-state-assessment"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "conflicts_checked": 4,
+        "crosswalk_rows": 8796,
+        "exclusion_rows": 277,
+        "guide_register_rows": {
+          "ES-CG-00": 2214,
+          "ES-CG-01": 2214,
+          "ES-CG-10": 2103,
+          "ES-CG-13": 2265
+        },
+        "repository_evidence_rows": 11,
+        "sources_checked": 2511
+      },
+      "validator": "source-freeze"
+    },
+    {
+      "issues": [],
+      "status": "PASS",
+      "summary": {
+        "readiness_rows": 4,
+        "wave_guides_checked": 4
+      },
+      "validator": "wave-1-drafting-readiness"
+    }
+  ]
+}

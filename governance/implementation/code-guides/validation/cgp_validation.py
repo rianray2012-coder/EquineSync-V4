@@ -27,6 +27,27 @@ INVARIANT_RE = re.compile(r"^ES-CG-(0[0-9]|1[0-3])-INV-\d{4}$")
 QUESTION_RE = re.compile(r"^ES-CG-(0[0-9]|1[0-3])-Q-\d{4}$")
 VERSION_RE = re.compile(r"^\d+\.\d+\.\d+(-[A-Za-z0-9_.-]+)?$")
 SOURCE_RE = re.compile(r"^CGSRC-[A-Z0-9]+-\d{4}$")
+WAVE_1_GUIDES = ("ES-CG-00", "ES-CG-01", "ES-CG-13", "ES-CG-10")
+CGP005_BASELINE_RE = re.compile(r"^[0-9a-f]{40}$")
+SOURCE_FREEZE_INCLUSION_CATEGORIES = {
+    "CONTROLLING_FROZEN",
+    "SUPPORTING_FROZEN",
+    "HISTORICAL_FROZEN",
+    "IMPLEMENTATION_EVIDENCE_FROZEN",
+    "EXCLUDED_SUPERSEDED",
+    "EXCLUDED_PROPOSED",
+    "EXCLUDED_BLOCKED",
+    "EXCLUDED_OUT_OF_SCOPE",
+    "PENDING_AUTHORITY",
+    "MISSING_REQUIRED_SOURCE",
+}
+NON_CONTROLLING_SOURCE_CLASSES = {
+    "REPOSITORY_EVIDENCE",
+    "TEST_EVIDENCE",
+    "HISTORICAL_PREDECESSOR",
+    "PROPOSED_NOT_ADOPTED",
+    "BLOCKED_OR_CONDITIONAL",
+}
 
 
 @dataclass
@@ -164,7 +185,6 @@ def validate_code_guide_structure(root: Path) -> ValidationResult:
     _, tracker_rows = read_csv_strict(tracker_path, result)
     tracker_by_guide = {row.get("guide_id"): row for row in tracker_rows if row.get("record_type") == "GUIDE"}
     required_phrases = [
-        "Current maturity state: `PLANNED`",
         "Guide version: `0.0.0-placeholder`",
         "Activation state: `NOT_ACTIVE`",
         "Non-authorization boundary:",
@@ -178,15 +198,34 @@ def validate_code_guide_structure(root: Path) -> ValidationResult:
             result.add("missing_guide_placeholder", "Guide placeholder README is missing.", path, guide_id)
             continue
         text = path.read_text(encoding="utf-8")
+        row = tracker_by_guide.get(guide_id)
+        maturity = row.get("maturity_state", "") if row else ""
+        expected_maturity = "SOURCE_FROZEN" if guide_id in WAVE_1_GUIDES and maturity == "SOURCE_FROZEN" else "PLANNED"
+        expected_phrase = f"Current maturity state: `{expected_maturity}`"
+        if expected_phrase not in text:
+            result.add("missing_guide_metadata", f"Missing guide metadata phrase: {expected_phrase}", path, guide_id)
         for phrase in required_phrases:
             if phrase not in text:
                 result.add("missing_guide_metadata", f"Missing guide metadata phrase: {phrase}", path, guide_id)
-        row = tracker_by_guide.get(guide_id)
         if not row:
             result.add("missing_tracker_guide_row", "Guide has no tracker row.", tracker_path, guide_id)
             continue
-        if row.get("maturity_state") != "PLANNED":
-            result.add("invalid_placeholder_maturity", "Guide placeholder must remain PLANNED.", tracker_path, guide_id)
+        if guide_id in WAVE_1_GUIDES and row.get("maturity_state") == "SOURCE_FROZEN":
+            freeze_dir = root / "guides" / guide_id / "source-freeze"
+            for suffix in [
+                "SOURCE_FREEZE_REGISTER.csv",
+                "SOURCE_FREEZE_MANIFEST.json",
+                "SOURCE_FREEZE_REPORT.md",
+                "DRAFTING_READINESS_REPORT.md",
+            ]:
+                freeze_path = freeze_dir / f"{guide_id}_{suffix}"
+                if not freeze_path.exists():
+                    result.add("missing_source_freeze_artifact", "SOURCE_FROZEN guide is missing source-freeze artifact.", freeze_path, guide_id)
+            question_path = root / "guides" / guide_id / f"{guide_id}_DRAFTING_QUESTION_INVENTORY.csv"
+            if not question_path.exists():
+                result.add("missing_source_freeze_artifact", "SOURCE_FROZEN guide is missing drafting-question inventory.", question_path, guide_id)
+        elif row.get("maturity_state") != "PLANNED":
+            result.add("invalid_placeholder_maturity", "Guide placeholder must remain PLANNED unless Wave 1 source-freeze artifacts are present.", tracker_path, guide_id)
         if row.get("adoption_state") != "NOT_ADOPTED":
             result.add("placeholder_falsely_adopted", "Guide placeholder must not be adopted.", tracker_path, guide_id)
         if row.get("accession_state") not in {"NOT_ACCESSIONED", ""}:
@@ -1022,6 +1061,376 @@ def validate_current_state_assessment(root: Path) -> ValidationResult:
     return result.finalize()
 
 
+def _source_freeze_fields() -> list[str]:
+    return [
+        "freeze_record_id",
+        "source_id",
+        "guide_id",
+        "title",
+        "filename",
+        "repository_path",
+        "source_class",
+        "authority_status",
+        "inclusion_category",
+        "version",
+        "effective_date",
+        "approval_authority",
+        "approval_record_path",
+        "repository_commit",
+        "git_object_sha",
+        "git_object_type",
+        "sha256_checksum",
+        "checksum_verification_result",
+        "package_checksum",
+        "package_manifest_path",
+        "repository_integration_receipt",
+        "custody_status",
+        "predecessor",
+        "successor",
+        "supersession_status",
+        "conflict_status",
+        "reason_for_inclusion",
+        "authority_rationale",
+        "retained_limitations",
+    ]
+
+
+def _repo_for_code_root(root: Path) -> Path:
+    if root.name == "code-guides" and len(root.parents) >= 3:
+        return root.parents[2]
+    return repo_root_from(root)
+
+
+def _tracked_children_for(repo: Path, rel: str) -> list[str]:
+    proc = subprocess.run(
+        ["git", "-C", str(repo), "ls-files", rel],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if proc.returncode == 0 and proc.stdout.strip():
+        return sorted(line for line in proc.stdout.splitlines() if line.strip())
+    path = repo / rel
+    if not path.is_dir():
+        return []
+    return sorted(str(child.relative_to(repo)) for child in path.rglob("*") if child.is_file())
+
+
+def _sha256_tree_for(repo: Path, rel: str) -> str:
+    h = hashlib.sha256()
+    for child in _tracked_children_for(repo, rel):
+        path = repo / child
+        if not path.is_file():
+            continue
+        h.update(child.encode())
+        h.update(b"\0")
+        h.update(sha256_file(path).encode())
+        h.update(b"\n")
+    return h.hexdigest()
+
+
+def _load_json(path: Path, result: ValidationResult) -> dict:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        result.add("missing_json_file", "Required JSON file is missing.", path)
+    except json.JSONDecodeError as exc:
+        result.add("malformed_json", f"JSON parsing failed: {exc}", path)
+    return {}
+
+
+def validate_source_freeze(root: Path, wave_guides: tuple[str, ...] = WAVE_1_GUIDES) -> ValidationResult:
+    result = ValidationResult("source-freeze")
+    repo = _repo_for_code_root(root)
+    source_freeze_root = root / "source-freeze"
+    common_register = source_freeze_root / "WAVE_1_COMMON_SOURCE_FREEZE_REGISTER.csv"
+    common_manifest_path = source_freeze_root / "WAVE_1_COMMON_SOURCE_FREEZE_MANIFEST.json"
+    crosswalk_path = source_freeze_root / "WAVE_1_SOURCE_FREEZE_CROSSWALK.csv"
+    exclusion_path = source_freeze_root / "WAVE_1_SOURCE_EXCLUSION_REGISTER.csv"
+    conflict_path = source_freeze_root / "WAVE_1_SOURCE_CONFLICT_REGISTER.csv"
+    readiness_path = source_freeze_root / "WAVE_1_DRAFTING_READINESS_REGISTER.csv"
+    evidence_path = source_freeze_root / "WAVE_1_REPOSITORY_EVIDENCE_BASELINE.csv"
+    required_paths = [
+        common_register,
+        common_manifest_path,
+        crosswalk_path,
+        exclusion_path,
+        conflict_path,
+        readiness_path,
+        evidence_path,
+    ]
+    for path in required_paths:
+        if not path.exists():
+            result.add("missing_source_freeze_artifact", "Required CGP-005 source-freeze artifact is missing.", path)
+    if result.issues:
+        return result.finalize()
+
+    values = load_values(root)
+    allowed_inclusions = set(values.get("source_freeze_inclusion_categories", [])) or SOURCE_FREEZE_INCLUSION_CATEGORIES
+    allowed_checksum = set(values.get("source_checksum_statuses", []))
+    fieldnames, common_rows = read_csv_strict(common_register, result)
+    for field in _source_freeze_fields():
+        if field not in fieldnames:
+            result.add("missing_source_freeze_column", f"Common source-freeze register missing `{field}`.", common_register)
+    if result.issues:
+        return result.finalize()
+
+    common_manifest = _load_json(common_manifest_path, result)
+    manifest_source_ids = {item.get("source_id", "") for item in common_manifest.get("sources", [])}
+    directory_manifests = common_manifest.get("directory_manifests", {})
+    baseline_commit = common_manifest.get("baseline_commit", "")
+    if not CGP005_BASELINE_RE.fullmatch(baseline_commit):
+        result.add("invalid_baseline_commit", "Common source-freeze manifest baseline must be a 40-character SHA.", common_manifest_path)
+
+    all_rows = list(common_rows)
+    per_guide_counts: dict[str, int] = {}
+    for guide in wave_guides:
+        guide_dir = root / "guides" / guide / "source-freeze"
+        guide_register = guide_dir / f"{guide}_SOURCE_FREEZE_REGISTER.csv"
+        guide_manifest_path = guide_dir / f"{guide}_SOURCE_FREEZE_MANIFEST.json"
+        guide_report = guide_dir / f"{guide}_SOURCE_FREEZE_REPORT.md"
+        guide_exclusion = guide_dir / f"{guide}_SOURCE_EXCLUSION_REGISTER.csv"
+        guide_readiness = guide_dir / f"{guide}_DRAFTING_READINESS_REPORT.md"
+        for path in [guide_register, guide_manifest_path, guide_report, guide_exclusion, guide_readiness]:
+            if not path.exists():
+                result.add("missing_guide_source_freeze_artifact", "Guide source-freeze artifact is missing.", path, guide)
+        if not guide_register.exists() or not guide_manifest_path.exists():
+            continue
+        guide_fields, guide_rows = read_csv_strict(guide_register, result)
+        for field in _source_freeze_fields():
+            if field not in guide_fields:
+                result.add("missing_source_freeze_column", f"Guide source-freeze register missing `{field}`.", guide_register, guide)
+        guide_manifest = _load_json(guide_manifest_path, result)
+        guide_manifest_ids = {item.get("source_id", "") for item in guide_manifest.get("sources", [])}
+        for row in guide_rows:
+            if row.get("source_id", "") not in guide_manifest_ids:
+                result.add("manifest_omission", "Guide manifest omits source-freeze register row.", guide_manifest_path, row.get("source_id", ""))
+        per_guide_counts[guide] = len(guide_rows)
+        all_rows.extend(guide_rows)
+
+    duplicates: dict[str, tuple[str, str]] = {}
+    excluded_ids = {
+        row.get("source_id", "")
+        for row in common_rows
+        if row.get("inclusion_category", "").startswith("EXCLUDED") or row.get("inclusion_category") in {"PENDING_AUTHORITY", "MISSING_REQUIRED_SOURCE"}
+    }
+    _, exclusion_rows = read_csv_strict(exclusion_path, result)
+    exclusion_source_ids = {row.get("source_id", "") for row in exclusion_rows}
+    for row in exclusion_rows:
+        eid = row.get("exclusion_id", "")
+        if not row.get("exclusion_reason", "").strip():
+            result.add("missing_exclusion_rationale", "Excluded source row must state a rationale.", exclusion_path, eid)
+        if row.get("inclusion_category", "") not in allowed_inclusions:
+            result.add("invalid_inclusion_category", "Exclusion row uses invalid source-freeze category.", exclusion_path, eid)
+    for sid in excluded_ids:
+        if sid not in exclusion_source_ids:
+            result.add("missing_exclusion_record", "Excluded source is missing from the exclusion register.", exclusion_path, sid)
+
+    for row in all_rows:
+        rid = row.get("freeze_record_id", "")
+        sid = row.get("source_id", "")
+        category = row.get("inclusion_category", "")
+        if not rid:
+            result.add("missing_freeze_record_id", "Source-freeze row lacks freeze_record_id.", common_register, sid)
+        if not SOURCE_RE.fullmatch(sid):
+            result.add("malformed_source_id", "Source-freeze source ID is malformed.", common_register, sid)
+        if row.get("guide_id") not in set(wave_guides) | {"WAVE_1_COMMON", "PROGRAM_WIDE"}:
+            result.add("invalid_guide_id", "Source-freeze row references invalid guide.", common_register, sid)
+        if category not in allowed_inclusions:
+            result.add("invalid_inclusion_category", "Source-freeze inclusion category is not controlled.", common_register, sid)
+        if row.get("checksum_verification_result") and row.get("checksum_verification_result") not in allowed_checksum:
+            result.add("invalid_checksum_status", "Checksum verification result is not controlled.", common_register, sid)
+        for field in ["repository_path", "repository_commit", "git_object_sha", "sha256_checksum", "checksum_verification_result", "custody_status"]:
+            require(row, field, result, common_register, sid, f"missing_{field}")
+        checksum = row.get("sha256_checksum", "")
+        if checksum and not re.fullmatch(r"[0-9a-f]{64}", checksum):
+            result.add("malformed_checksum", "Source-freeze checksum must be 64 lowercase hex characters.", common_register, sid)
+        if row.get("repository_commit") != baseline_commit:
+            result.add("stale_baseline_commit", "Source-freeze row baseline does not match common manifest baseline.", common_register, sid)
+        if sid not in manifest_source_ids and row.get("guide_id") == "WAVE_1_COMMON":
+            result.add("manifest_omission", "Common manifest omits source-freeze register row.", common_manifest_path, sid)
+        rel = row.get("repository_path", "")
+        rel_path = Path(rel)
+        if rel_path.is_absolute() or ".." in rel_path.parts:
+            result.add("invalid_repository_path", "Source-freeze repository path must be relative and not traverse upward.", common_register, sid)
+            continue
+        actual = repo / rel
+        if category != "MISSING_REQUIRED_SOURCE" and not actual.exists():
+            result.add("unresolved_source_path", "Source-freeze repository path does not resolve.", common_register, sid)
+            continue
+        if actual.is_file():
+            if row.get("checksum_verification_result") != "VERIFIED_FILE":
+                result.add("incorrect_checksum_result", "File source must use VERIFIED_FILE.", common_register, sid)
+            elif checksum and sha256_file(actual) != checksum:
+                result.add("checksum_mismatch", "File checksum mismatch.", common_register, sid)
+        elif actual.is_dir():
+            if row.get("checksum_verification_result") != "VERIFIED_DIRECTORY_AGGREGATE":
+                result.add("incorrect_checksum_result", "Directory source must use VERIFIED_DIRECTORY_AGGREGATE.", common_register, sid)
+            if category == "CONTROLLING_FROZEN" and not row.get("package_manifest_path"):
+                result.add("directory_only_controlling_reference", "Controlling directory source lacks child-file manifest reference.", common_register, sid)
+            directory_entry = directory_manifests.get(sid)
+            if category == "CONTROLLING_FROZEN" and not directory_entry:
+                result.add("directory_only_controlling_reference", "Controlling directory source is missing child-file manifest entry.", common_manifest_path, sid)
+            if directory_entry and int(directory_entry.get("tracked_child_count", 0)) <= 0:
+                result.add("empty_directory_manifest", "Directory manifest has no tracked child bindings.", common_manifest_path, sid)
+            if checksum and _sha256_tree_for(repo, rel) != checksum:
+                result.add("checksum_mismatch", "Directory aggregate checksum mismatch.", common_register, sid)
+        if category == "CONTROLLING_FROZEN":
+            if row.get("authority_status") != "CONTROLLING":
+                result.add("non_controlling_marked_controlling", "CONTROLLING_FROZEN row must have CONTROLLING authority status.", common_register, sid)
+            if row.get("source_class") in NON_CONTROLLING_SOURCE_CLASSES:
+                result.add("non_authority_marked_controlling", "Implementation, historical, proposed, or blocked source cannot be controlling.", common_register, sid)
+            for field in ["approval_authority", "approval_record_path"]:
+                require(row, field, result, common_register, sid, f"controlling_source_without_{field}")
+            approval = row.get("approval_record_path", "")
+            if approval:
+                approval_path = Path(approval)
+                if approval_path.is_absolute() or ".." in approval_path.parts:
+                    result.add("invalid_approval_path", "Approval path must be relative and not traverse upward.", common_register, sid)
+                elif not (repo / approval).exists():
+                    result.add("unresolved_approval_path", "Approval record path does not resolve.", common_register, sid)
+        if row.get("source_class") in {"PROPOSED_NOT_ADOPTED", "BLOCKED_OR_CONDITIONAL"} and category == "CONTROLLING_FROZEN":
+            result.add("proposed_or_blocked_marked_controlling", "Proposed or blocked source cannot be controlling.", common_register, sid)
+        signature = (row.get("repository_path", ""), row.get("sha256_checksum", ""))
+        if sid in duplicates and duplicates[sid] != signature:
+            result.add("duplicate_inconsistent_source", "Duplicate source ID has inconsistent path or checksum.", common_register, sid)
+        duplicates[sid] = signature
+
+    _, conflict_rows = read_csv_strict(conflict_path, result)
+    for row in conflict_rows:
+        cid = row.get("conflict_id", "")
+        if row.get("blocks_drafting") == "YES" or row.get("status") in {"OPEN", "UNRESOLVED"}:
+            result.add("unresolved_source_conflict", "Source-freeze conflict remains unresolved for drafting.", conflict_path, cid)
+        if not row.get("freeze_treatment", "").strip():
+            result.add("missing_conflict_treatment", "Conflict row must record source-freeze treatment.", conflict_path, cid)
+
+    _, evidence_rows = read_csv_strict(evidence_path, result)
+    if not evidence_rows:
+        result.add("missing_repository_evidence_baseline", "Repository evidence baseline must contain rows.", evidence_path)
+    for row in evidence_rows:
+        eid = row.get("baseline_id", "")
+        if row.get("baseline_commit") != baseline_commit:
+            result.add("stale_baseline_commit", "Repository evidence baseline does not match common manifest baseline.", evidence_path, eid)
+        if row.get("authority_treatment") != "IMPLEMENTATION_EVIDENCE_ONLY":
+            result.add("invalid_repository_evidence_authority", "Repository evidence baseline must remain implementation evidence only.", evidence_path, eid)
+
+    _, crosswalk_rows = read_csv_strict(crosswalk_path, result)
+    if not crosswalk_rows:
+        result.add("missing_crosswalk_rows", "Wave 1 source-freeze crosswalk must contain rows.", crosswalk_path)
+
+    result.summary["sources_checked"] = len(common_rows)
+    result.summary["guide_register_rows"] = per_guide_counts
+    result.summary["crosswalk_rows"] = len(crosswalk_rows)
+    result.summary["exclusion_rows"] = len(exclusion_rows)
+    result.summary["conflicts_checked"] = len(conflict_rows)
+    result.summary["repository_evidence_rows"] = len(evidence_rows)
+    return result.finalize()
+
+
+def validate_wave_1_drafting_readiness(root: Path, wave_guides: tuple[str, ...] = WAVE_1_GUIDES) -> ValidationResult:
+    result = ValidationResult("wave-1-drafting-readiness")
+    values = load_values(root)
+    allowed_dispositions = set(values.get("source_freeze_readiness_dispositions", []))
+    readiness_path = root / "source-freeze" / "WAVE_1_DRAFTING_READINESS_REGISTER.csv"
+    tracker_path = root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv"
+    if not readiness_path.exists():
+        result.add("missing_readiness_register", "Wave 1 drafting-readiness register is missing.", readiness_path)
+        return result.finalize()
+    _, readiness_rows = read_csv_strict(readiness_path, result)
+    _, tracker_rows = read_csv_strict(tracker_path, result)
+    readiness_by_guide = {row.get("guide_id"): row for row in readiness_rows}
+    tracker_by_guide = {row.get("record_id"): row for row in tracker_rows if row.get("record_type") == "GUIDE"}
+    required_columns = [
+        "guide_id",
+        "readiness_disposition",
+        "maturity_after_cgp005",
+        "controlling_sources_complete",
+        "checksums_verified",
+        "approval_basis_identified",
+        "supersession_treatment_complete",
+        "exclusions_recorded",
+        "conflicts_resolved_or_retained",
+        "repository_evidence_baseline_recorded",
+        "drafting_questions_identified",
+        "blocking_findings",
+        "decision_count",
+        "retained_gaps",
+        "cgp006_ready",
+        "status",
+    ]
+    fieldnames = list(readiness_rows[0].keys()) if readiness_rows else []
+    for field in required_columns:
+        if field not in fieldnames:
+            result.add("missing_readiness_column", f"Readiness register missing `{field}`.", readiness_path)
+
+    for guide in wave_guides:
+        row = readiness_by_guide.get(guide)
+        if not row:
+            result.add("missing_guide_readiness", "Wave 1 guide has no drafting-readiness row.", readiness_path, guide)
+            continue
+        disposition = row.get("readiness_disposition", "")
+        if allowed_dispositions and disposition not in allowed_dispositions:
+            result.add("invalid_readiness_disposition", "Readiness disposition is not controlled.", readiness_path, guide)
+        guide_dir = root / "guides" / guide
+        required_paths = [
+            guide_dir / "source-freeze" / f"{guide}_SOURCE_FREEZE_REGISTER.csv",
+            guide_dir / "source-freeze" / f"{guide}_SOURCE_FREEZE_MANIFEST.json",
+            guide_dir / "source-freeze" / f"{guide}_SOURCE_FREEZE_REPORT.md",
+            guide_dir / "source-freeze" / f"{guide}_SOURCE_EXCLUSION_REGISTER.csv",
+            guide_dir / "source-freeze" / f"{guide}_DRAFTING_READINESS_REPORT.md",
+            guide_dir / f"{guide}_DRAFTING_QUESTION_INVENTORY.csv",
+        ]
+        if row.get("maturity_after_cgp005") == "SOURCE_FROZEN":
+            for path in required_paths:
+                if not path.exists():
+                    result.add("source_frozen_missing_artifact", "SOURCE_FROZEN guide is missing required source-freeze/readiness artifact.", path, guide)
+        question_path = guide_dir / f"{guide}_DRAFTING_QUESTION_INVENTORY.csv"
+        if question_path.exists():
+            _, question_rows = read_csv_strict(question_path, result)
+            if not question_rows:
+                result.add("missing_drafting_question_inventory", "Drafting-question inventory must contain rows.", question_path, guide)
+            for qrow in question_rows:
+                if qrow.get("required_for_drafting") == "YES" and qrow.get("answer_status") not in {"UNANSWERED", "DEFERRED", "BLOCKED_PENDING_DECISION"}:
+                    result.add("drafting_question_answered_by_cgp005", "CGP-005 must not answer drafting questions.", question_path, qrow.get("question_id", ""))
+        else:
+            result.add("missing_drafting_question_inventory", "Drafting-question inventory is missing.", question_path, guide)
+        blocking = row.get("blocking_findings", "")
+        if row.get("cgp006_ready") == "YES" and blocking not in {"0", "NONE", ""}:
+            result.add("readiness_conflicts_with_blocking_findings", "CGP-006 readiness cannot be YES with blocking findings.", readiness_path, guide)
+        if disposition.startswith("SOURCE_FREEZE_COMPLETE"):
+            for field in [
+                "controlling_sources_complete",
+                "checksums_verified",
+                "approval_basis_identified",
+                "supersession_treatment_complete",
+                "exclusions_recorded",
+                "conflicts_resolved_or_retained",
+                "repository_evidence_baseline_recorded",
+                "drafting_questions_identified",
+            ]:
+                if row.get(field) != "YES":
+                    result.add("incomplete_readiness_check", f"Readiness field `{field}` must be YES.", readiness_path, guide)
+        tracker = tracker_by_guide.get(guide, {})
+        if tracker:
+            if tracker.get("maturity_state") != row.get("maturity_after_cgp005"):
+                result.add("tracker_readiness_mismatch", "Tracker maturity does not match readiness register.", tracker_path, guide)
+            if tracker.get("adoption_state") != "NOT_ADOPTED":
+                result.add("guide_falsely_adopted", "Source-frozen guide must remain NOT_ADOPTED.", tracker_path, guide)
+            if tracker.get("accession_state") not in {"NOT_ACCESSIONED", ""}:
+                result.add("guide_falsely_accessioned", "Source-frozen guide must not be guide-accessioned.", tracker_path, guide)
+        readme = guide_dir / "README.md"
+        if readme.exists() and "Activation state: `NOT_ACTIVE`" not in readme.read_text(encoding="utf-8"):
+            result.add("guide_falsely_active", "Source-frozen guide README must remain NOT_ACTIVE.", readme, guide)
+
+    cgp006 = next((row for row in tracker_rows if row.get("record_id") == "CGP-006"), {})
+    if cgp006 and cgp006.get("prompt_status") != "NOT_ISSUED":
+        result.add("cgp006_started", "CGP-006 must remain NOT_ISSUED.", tracker_path, "CGP-006")
+
+    result.summary["readiness_rows"] = len(readiness_rows)
+    result.summary["wave_guides_checked"] = len(wave_guides)
+    return result.finalize()
+
+
 VALIDATOR_FUNCTIONS = {
     "code-guide-structure": validate_code_guide_structure,
     "control-registry": validate_control_registry,
@@ -1041,6 +1450,8 @@ VALIDATOR_FUNCTIONS = {
     "repository-component-register": validate_repository_component_register,
     "repository-authority-alignment": validate_repository_authority_alignment,
     "current-state-assessment": validate_current_state_assessment,
+    "source-freeze": validate_source_freeze,
+    "wave-1-drafting-readiness": validate_wave_1_drafting_readiness,
 }
 
 

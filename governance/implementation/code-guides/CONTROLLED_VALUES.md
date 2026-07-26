@@ -192,3 +192,29 @@ CGP-004 extends the shared controlled values with implementation-state, authorit
 - `HIGH`
 - `MEDIUM`
 - `LOW`
+
+
+## CGP-005 Source-Freeze Controlled Values
+
+CGP-005 extends the shared controlled values with source-freeze inclusion categories and drafting-readiness dispositions. These values classify exact-byte source-freeze and readiness records only. They do not draft Code Guide controls, adopt a guide, activate an engineering gate, or authorize implementation.
+
+### Source Freeze Inclusion Categories
+
+- `CONTROLLING_FROZEN`
+- `SUPPORTING_FROZEN`
+- `HISTORICAL_FROZEN`
+- `IMPLEMENTATION_EVIDENCE_FROZEN`
+- `EXCLUDED_SUPERSEDED`
+- `EXCLUDED_PROPOSED`
+- `EXCLUDED_BLOCKED`
+- `EXCLUDED_OUT_OF_SCOPE`
+- `PENDING_AUTHORITY`
+- `MISSING_REQUIRED_SOURCE`
+
+### Source Freeze Readiness Dispositions
+
+- `SOURCE_FREEZE_COMPLETE_READY_FOR_CGP_006_WHEN_AUTHORIZED`
+- `SOURCE_FREEZE_COMPLETE_WITH_RETAINED_NON_BLOCKING_GAPS`
+- `BLOCKED_BY_SOURCE_CUSTODY`
+- `BLOCKED_BY_AUTHORITY_DECISION`
+- `NOT_IN_WAVE_1`
