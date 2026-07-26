@@ -1,0 +1,13 @@
+id,objective,blocking_inputs
+SHELL-WP-001,"Freeze sources, candidate decisions, approved visual component, and documentary baseline","Exact bytes, statuses, hashes, and Founder dispositions"
+SHELL-WP-002,"Define route registry, ownership, context, and lifecycle contracts",WP-001
+SHELL-WP-003,"Define shell bootstrap, context selection, and permission projection contracts",WP-001; WP-002
+SHELL-WP-004,"Implement responsive navigation, breadcrumbs, Back, deep links, account/help, and state system",WP-002; WP-003
+SHELL-WP-005,"Implement search authorization, indexes, exclusions, suggestions, ranking, and correction propagation",WP-001; adopted search authority or approved state-qualified design
+SHELL-WP-006,Implement command palette and Quick Create registries with domain execution contracts,WP-002; WP-003
+SHELL-WP-007,"Implement private recents, pins, favorites, saved views, and badges",WP-003
+SHELL-WP-008,"Implement offline manifest, cache controls, queues, freshness, and reconnect reconciliation",WP-003
+SHELL-WP-009,"Implement accessibility, serious-workflow suppression, and exact visual-component integration",WP-001; approved V0.3.1 exact bytes
+SHELL-WP-010,"Implement telemetry, jobs, support tools, admin validation, and emergency disablement",WP-002 through WP-009
+SHELL-WP-011,"Migrate legacy routes, labels, preferences, deep links, search fields, and assets",WP-002 through WP-010
+SHELL-WP-012,"Execute verification, adversarial review, as-built reconciliation, operational rehearsal, and evidence packaging",WP-001 through WP-011

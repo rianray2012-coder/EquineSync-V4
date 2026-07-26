@@ -1,0 +1,32 @@
+{
+  "authority_ceiling": "DOCUMENTARY_EXACT_BYTE_REPOSITORY_INTEGRATION_ONLY",
+  "blocked_receipt_byte_preservation": "PASS",
+  "canonical_path": "/Users/rianray/Documents/Codex/2026-07-23/n/work/EquineSync-V4-item05-integration/docs/canon/reviews/core_navigation_search_application_shell_pia_v0_4_0",
+  "controlling_markdown_sha256": "700dccb832bde4b69eb72e3e7b0add95a042cbcfe6eadc0e2562a01aa51e632b",
+  "documentary_checksum_entries_verified": 30,
+  "documentary_files_copied": 32,
+  "documentary_manifest_rows_verified": 32,
+  "documentary_payload_files": 32,
+  "documentary_zip_sha256": "8698e1aa189f1faced0631cd7d9df629c152075a2519c93e80f57b9253a9049c",
+  "duplicate_controlling_sources": "BYTE_IDENTICAL",
+  "duplicate_markdown_and_machine_readable_companion": "BYTE_IDENTICAL",
+  "existing_blocked_receipt_path": "docs/canon/reviews/core_navigation_search_application_shell_pia_v0_4_0/REPOSITORY_BLOCKED_RECEIPT.md",
+  "files_changed_outside_canonical_path": [],
+  "fresh_review_checksum_entries_verified": 11,
+  "fresh_review_files_copied": 13,
+  "fresh_review_manifest_rows_verified": 13,
+  "fresh_review_payload_files": 13,
+  "fresh_review_zip_sha256": "89762bf2476f024e6016671f6418992110f19d5475cb63ed3022bfe08bee95f9",
+  "historical_blocked_receipt_preserved": true,
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "repository_copy_byte_comparison": "PASS",
+  "repository_root": "/Users/rianray/Documents/Codex/2026-07-23/n/work/EquineSync-V4-item05-integration",
+  "resulting_branch": "codex/item-05-core-navigation-shell-v0-4-exact-byte-integration-v1",
+  "secret_scan": {
+    "high_confidence_findings": 0,
+    "status": "PASS"
+  },
+  "starting_commit": "f2a0be100bf2f400388ccc36d3aa5facc9367a3e",
+  "status": "PASS",
+  "verified_remote": "https://github.com/rianray2012-coder/EquineSync-V4.git"
+}

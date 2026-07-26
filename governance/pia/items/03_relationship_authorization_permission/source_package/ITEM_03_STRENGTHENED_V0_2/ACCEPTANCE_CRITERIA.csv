@@ -1,0 +1,31 @@
+acceptance_id,requirement_ids,criterion,method,expected_result,execution_status,review_status
+RAP-AC-001,"RAP-REQ-001;RAP-REQ-010","Identity or account without authority sources cannot grant action","Documentary negative trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-002,"RAP-REQ-001;RAP-REQ-010","Role label without source authority cannot grant action","Documentary negative trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-003,"RAP-REQ-002;RAP-REQ-012","Active relationship alone does not grant final permission","Contract trace","Requires full evaluation and bounded result",NOT_EXECUTED,PENDING
+RAP-AC-004,"RAP-REQ-004;RAP-REQ-010","Acting for another principal without current representation denies","Documentary negative trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-005,"RAP-REQ-005;RAP-REQ-011","Protective guardian/minor restriction overrides claimed guardian authority","Crosswalk trace","DENY_OR_NARROW",NOT_EXECUTED,PENDING
+RAP-AC-006,"RAP-REQ-006;RAP-REQ-007","Delegation cannot exceed source action resource field purpose tenant time or state scope","Register trace","Excess scope denied",NOT_EXECUTED,PENDING
+RAP-AC-007,"RAP-REQ-006;RAP-REQ-013","Expired or revoked delegation cannot be reused","State/watermark trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-008,"RAP-REQ-008;RAP-REQ-012","Authorization inputs and final permission output remain distinct","Contract/schema trace","Inputs do not self-grant",NOT_EXECUTED,PENDING
+RAP-AC-009,"RAP-REQ-009;RAP-REQ-010","Missing stale disputed revoked expired wrong-tenant or incompatible required input fails closed","Input matrix trace","DENY_OR_STEP_UP",NOT_EXECUTED,PENDING
+RAP-AC-010,"RAP-REQ-011;RAP-REQ-013","Restriction/revocation watermark change invalidates affected cached projection","Event/state trace","Projection invalidated",NOT_EXECUTED,PENDING
+RAP-AC-011,"RAP-REQ-012;RAP-REQ-028","Allowed result contains only minimum fields and safe reasons","Permission/privacy trace","No excess fields or enumeration",NOT_EXECUTED,PENDING
+RAP-AC-012,"RAP-REQ-014;RAP-REQ-027","Correction preserves original evidence and links an attributable successor","Evidence trace","No destructive history",NOT_EXECUTED,PENDING
+RAP-AC-013,"RAP-REQ-015;RAP-REQ-031","Offline device can queue only a non-authoritative visible proposal","Offline contract trace","No local authority creation",NOT_EXECUTED,PENDING
+RAP-AC-014,"RAP-REQ-015;RAP-REQ-016","Stale duplicate revoked disputed or wrong-tenant offline proposal fails closed","Reconciliation trace","DENY_CONFLICT_OR_SUPERSEDE",NOT_EXECUTED,PENDING
+RAP-AC-015,"RAP-REQ-017;RAP-REQ-018","Provider profile or directory status alone cannot create authority","Provider negative trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-016,"RAP-REQ-018;RAP-REQ-029","Provider API credential or integration connection alone cannot create authority","API/provider negative trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-017,"RAP-REQ-018;RAP-REQ-022","Provider appointment or schedule assignment alone cannot create authority","Cross-PIA negative trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-018,"RAP-REQ-018;RAP-REQ-025","Provider payment payout or financial status alone cannot create authority","Financial negative trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-019,"RAP-REQ-018;RAP-REQ-026","Provider portal access or visibility alone cannot create authority","Portal negative trace","DENY",NOT_EXECUTED,PENDING
+RAP-AC-020,"RAP-REQ-019;RAP-REQ-023;RAP-REQ-026","Provider handoffs preserve Item 03 authority Item 07 care Item 10 surfaces and Item 09 financial ownership","Decision/cross-PIA trace","No ownership collapse",NOT_EXECUTED,PENDING
+RAP-AC-021,RAP-REQ-020,"Facility tenant organization or asset context cannot create permission","Context negative trace","DENY without authority basis",NOT_EXECUTED,PENDING
+RAP-AC-022,RAP-REQ-021,"Horse possession location or payment cannot create ownership/custody authority","Horse boundary trace","DENY without source authority",NOT_EXECUTED,PENDING
+RAP-AC-023,RAP-REQ-022,"Schedule assignment cannot create relationship representation or permission","Schedule boundary trace","DENY without authority basis",NOT_EXECUTED,PENDING
+RAP-AC-024,RAP-REQ-027,"Every consequential decision is reconstructable from exact input and policy versions","Evidence completeness trace","All required evidence fields present",NOT_EXECUTED,PENDING
+RAP-AC-025,RAP-REQ-028,"Privacy safeguarding records and claims controls map to affected authority flows","Crosswalk integrity","No missing mandatory domain",NOT_EXECUTED,PENDING
+RAP-AC-026,RAP-REQ-029,"API events and jobs are typed versioned tenant-scoped idempotent and non-authority-creating","Contract integrity","All required fields/invariants present",NOT_EXECUTED,PENDING
+RAP-AC-027,RAP-REQ-030,"AI or automation cannot create or infer relationship representation delegation or permission","Automation negative trace","DENY_OR_REQUIRE_APPROVED_HUMAN_SOURCE",NOT_EXECUTED,PENDING
+RAP-AC-028,RAP-REQ-032,"Package contains no implementation migration deployment activation production or enrollment authorization","Prohibited-language validation","All authority flags false",MECHANICALLY_CHECKED,PENDING
+RAP-AC-029,RAP-REQ-033,"Preserved V0.1 files are byte-identical to commit 05eaa53be3e5e6aa00814eaeee49f145b3bc6c49","Git object/hash comparison","Exact match",MECHANICALLY_CHECKED,PENDING
+RAP-AC-030,"RAP-REQ-035;RAP-REQ-036","Candidate passes deterministic structural manifest checksum and cross-register checks while claiming no independent review","Local validator and checksum verification","PASS with review pending",MECHANICALLY_CHECKED,PENDING

@@ -1,0 +1,21 @@
+id,contract,purpose
+SHELL-API-001,GET /shell/bootstrap,Resolve safe shell projection.
+SHELL-API-002,POST /shell/context/switch,Perform controlled context switch.
+SHELL-API-003,GET /shell/routes,Return eligible route projection.
+SHELL-API-004,POST /shell/deep-links/resolve,Resolve non-authoritative target pointer.
+SHELL-API-005,POST /search/query,Execute permission-filtered search.
+SHELL-API-006,GET /search/suggestions,Return bounded authorized suggestions.
+SHELL-API-007,POST /commands/execute,Execute registered command with fresh authorization.
+SHELL-API-008,GET /commands,Return discoverable authorized commands.
+SHELL-API-009,POST /quick-create/resolve,Resolve domain-owned create workflow.
+SHELL-API-010,GET /shell/preferences,Read private preferences.
+SHELL-API-011,PUT /shell/preferences,Update private preferences.
+SHELL-API-012,GET /shell/recents,Read reauthorized recent pointers.
+SHELL-API-013,GET /shell/saved-views,Read saved-view definitions.
+SHELL-API-014,POST /shell/saved-views,Create validated saved view.
+SHELL-API-015,GET /shell/notification-summary,Read minimum notification projection.
+SHELL-API-016,POST /support/sessions,Create bounded support session.
+SHELL-API-017,DELETE /support/sessions/{id},Terminate support session.
+SHELL-API-018,GET /admin/shell/configuration,Read authorized configuration.
+SHELL-API-019,POST /admin/shell/configuration/publish,Validate and publish configuration version.
+SHELL-API-020,POST /admin/shell/cache/invalidate,Run bounded invalidation action.

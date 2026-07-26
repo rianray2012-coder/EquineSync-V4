@@ -1,0 +1,12 @@
+adr_id,title,status,implementation_authorized,file,linked_finding
+ADR-OPC-001,"Portal Projection, Source Ownership, and Provenance",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/11_ADR_OPC_001.md,OPC-FIND-P1-003
+ADR-OPC-002,"Action-Time Authorization, Relationship Revalidation, and Revocation",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/12_ADR_OPC_002.md,OPC-FIND-P1-003
+ADR-OPC-003,"Communication Taxonomy, State Separation, and Evidence Semantics",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/13_ADR_OPC_003.md,OPC-FIND-P1-003
+ADR-OPC-004,"Provider Adapters, Regional Processing, Delivery Resilience, and Exit",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/14_ADR_OPC_004.md,OPC-FIND-P1-003
+ADR-OPC-005,"Privacy, Retention, Export, Correction, Claims, and Legal Hold",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/15_ADR_OPC_005.md,OPC-FIND-P1-003
+ADR-OPC-006,"Safeguarding, Minors, Guardian Scope, and Protected Communication",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/16_ADR_OPC_006.md,OPC-FIND-P1-003
+ADR-OPC-007,"Same-Facility Community Messaging, Moderation Cases, and Kill Switches",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/17_ADR_OPC_007.md,OPC-FIND-P1-003
+ADR-OPC-008,"Attachments, Media, Malware, Metadata, Consent, and Access Revocation",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/18_ADR_OPC_008.md,OPC-FIND-P1-003
+ADR-OPC-009,"Offline Drafts, Bounded Cache, Reconnect, and Device Revocation",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/19_ADR_OPC_009.md,OPC-FIND-P1-003
+ADR-OPC-010,"Migration, Reconciliation, Support Mode, Audit, Observability, and Recovery",PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/20_ADR_OPC_010.md,OPC-FIND-P1-003
+ADR-OPC-011,AI Drafting and Summarization Boundary,PROPOSED_FOR_FOUNDER_DOCUMENTARY_DESIGN_APPROVAL,FALSE,adrs/21_ADR_OPC_011.md,OPC-FIND-P1-003

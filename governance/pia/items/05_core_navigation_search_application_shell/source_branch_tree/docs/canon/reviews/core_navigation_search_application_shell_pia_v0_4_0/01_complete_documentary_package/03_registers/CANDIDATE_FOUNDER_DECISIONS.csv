@@ -1,0 +1,13 @@
+id,decision
+SHELL-FD-CAND-001,"One shared shell contract across web, iOS, and Android with platform-appropriate presentation but common authority and state semantics."
+SHELL-FD-CAND-002,Desktop/tablet use a persistent or collapsible rail; compact mobile uses a bounded bottom navigation plus an accessible More destination.
+SHELL-FD-CAND-003,"Landing and ordering are persona-aware: horse-first for owners, task-first for staff, schedule/training-first for trainers, operations-first for facility administrators."
+SHELL-FD-CAND-004,Multi-tenant and multi-facility users receive an explicit active-context indicator and controlled switcher; context is never silently inferred.
+SHELL-FD-CAND-005,Global search is active-context and permission bound; identifiable cross-tenant discovery is prohibited by default.
+SHELL-FD-CAND-006,"A command palette may navigate and invoke bounded actions, with separate execution-time authorization."
+SHELL-FD-CAND-007,Quick Create is limited to registered domain-owned forms and current create authority.
+SHELL-FD-CAND-008,"Recents, pins, favorites, and saved views are private, reauthorized on every read, and suppressed when authority ends."
+SHELL-FD-CAND-009,The shell supports useful degraded/offline states without treating cached visibility as continuing authority.
+SHELL-FD-CAND-010,"Public and pre-authentication routes use a separate minimal shell without private taxonomy, counts, names, recents, or tenant structure."
+SHELL-FD-CAND-011,Semantic or AI retrieval is separately gated and default OFF in the initial core shell.
+SHELL-FD-CAND-012,"The Founder-approved visual-system V0.3.1 remains immutable and incorporated by exact bytes and SHA-256, never silently rewritten."

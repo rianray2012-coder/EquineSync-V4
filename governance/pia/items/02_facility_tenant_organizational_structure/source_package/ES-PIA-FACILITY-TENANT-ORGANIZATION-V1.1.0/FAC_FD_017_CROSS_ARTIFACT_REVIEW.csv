@@ -1,0 +1,22 @@
+record_id,record_type,artifact_or_proof,review_scope_or_obligation,disposition,evidence_or_change
+FD17-ARTIFACT-001,ARTIFACT_REVIEW,PIA_FACILITY_TENANT_ORGANIZATION_V1_1_0.md,first-time setup; Tenant definition; enrollment,REVISED,Adaptive paths and technical-isolation distinction added
+FD17-ARTIFACT-002,ARTIFACT_REVIEW,FOUNDER_DECISION_REGISTER.md,FAC-FD-017,REVISED,Original recommendation replaced by controlling refinement
+FD17-ARTIFACT-003,ARTIFACT_REVIEW,FOUNDER_DECISION_RECOMMENDATION_MATRIX.csv,FAC-FD-017,REVISED,Approved refined answer and supersession classification
+FD17-ARTIFACT-004,ARTIFACT_REVIEW,REQUIREMENT_REGISTER.csv,onboarding and first-user requirements,REVISED,FAC-REQ-031 and FAC-REQ-037 through 042 cover six proof obligations
+FD17-ARTIFACT-005,ARTIFACT_REVIEW,WORKFLOW_REGISTER.md,first-user and context selection,REVISED,WF001 branched; WF014/WF015 added
+FD17-ARTIFACT-006,ARTIFACT_REVIEW,DATA_DICTIONARY.md,Tenant and onboarding plan,REVISED,No account/domain equivalence; no forced topology
+FD17-ARTIFACT-007,ARTIFACT_REVIEW,STATE_TRANSITION_MATRIX.csv,onboarding state,REVISED,SM005 requires path and isolation before writes
+FD17-ARTIFACT-008,ARTIFACT_REVIEW,PERMISSION_AND_AUTHORIZATION_BOUNDARY_MATRIX.csv,initialization and later association,REVISED,PERM018/019 added
+FD17-ARTIFACT-009,ARTIFACT_REVIEW,API_EVENT_JOB_CONTRACTS.md,onboarding plan and individual-owner interfaces,REVISED,API009/API010/EVT004 added
+FD17-ARTIFACT-010,ARTIFACT_REVIEW,ACCEPTANCE_CRITERIA.csv,six refinement outcomes,REVISED,AC037 through AC042 added
+FD17-ARTIFACT-011,ARTIFACT_REVIEW,TEST_MATRIX.csv,six refinement outcomes,REVISED,TEST037 through TEST042 added; documentary only
+FD17-ARTIFACT-012,ARTIFACT_REVIEW,GOLDEN_PATHS.md,first-user setup,REVISED,Individual-owner and structured paths separated
+FD17-ARTIFACT-013,ARTIFACT_REVIEW,ADVERSARIAL_SCENARIOS.md,forced/default topology,REVISED,Negative cases added
+FD17-ARTIFACT-014,ARTIFACT_REVIEW,AS_BUILT_RECONCILIATION.md,default/primary behavior,REVISED,Legacy gap remains; new design prohibition reinforced
+FD17-ARTIFACT-015,ARTIFACT_REVIEW,FOUNDER_REVIEW_PACKET.md,enrollment prerequisite,REVISED,No mandatory fictional topology
+FD17-PROOF-001,PROOF_VALIDATION,Individual owner may begin horse-first,Founder directive Phase C proof obligation,DOCUMENTARY_PASS,FAC-REQ-037;FAC-AC-037;FAC-TEST-037;FAC-WF-014;FAC-GP-010
+FD17-PROOF-002,PROOF_VALIDATION,No unnecessary Facility or Organization is created,Founder directive Phase C proof obligation,DOCUMENTARY_PASS,FAC-REQ-038;FAC-AC-038;FAC-TEST-038;FAC-WF-014;FAC-ADV-019
+FD17-PROOF-003,PROOF_VALIDATION,Required Tenant isolation remains intact,Founder directive Phase C proof obligation,DOCUMENTARY_PASS,FAC-REQ-039;FAC-AC-039;FAC-TEST-039;FAC-SM-005;FAC-API-010
+FD17-PROOF-004,PROOF_VALIDATION,Later Facility or Organization association is explicit and controlled,Founder directive Phase C proof obligation,DOCUMENTARY_PASS,FAC-REQ-040;FAC-AC-040;FAC-TEST-040;FAC-PERM-019;FAC-EVT-004
+FD17-PROOF-005,PROOF_VALIDATION,Onboarding creates no authority or stewardship,Founder directive Phase C proof obligation,DOCUMENTARY_PASS,FAC-REQ-041;FAC-AC-041;FAC-TEST-041;FAC-PERM-018;FAC-ADV-022
+FD17-PROOF-006,PROOF_VALIDATION,Actual facility or organization users retain a structured path,Founder directive Phase C proof obligation,DOCUMENTARY_PASS,FAC-REQ-042;FAC-AC-042;FAC-TEST-042;FAC-WF-015;FAC-GP-011

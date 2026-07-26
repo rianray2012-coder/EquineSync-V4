@@ -1,0 +1,19 @@
+id,dependency,classification
+SHELL-DEP-001,Master Standard exact bytes,BLOCKING_DOCUMENTARY
+SHELL-DEP-002,Founder-approved V0.3.1 exact bytes,BLOCKING_DOCUMENTARY
+SHELL-DEP-003,Current source status/path/hash accession,BLOCKING_FRESH_REVIEW
+SHELL-DEP-004,Candidate Founder decisions SHELL-FD-CAND-001 through 012,BLOCKING_FOUNDER_DESIGN
+SHELL-DEP-005,Identity/session contracts,BLOCKING_IMPLEMENTATION
+SHELL-DEP-006,Relationship and permission evaluation contracts,BLOCKING_IMPLEMENTATION
+SHELL-DEP-007,Facility/tenant context contract,BLOCKING_IMPLEMENTATION
+SHELL-DEP-008,Search authority and searchable-field standard,BLOCKING_IMPLEMENTATION
+SHELL-DEP-009,Safeguarding and protected-participant rules,BLOCKING_IMPLEMENTATION
+SHELL-DEP-010,Communication notification-summary contract,BLOCKING_IMPLEMENTATION
+SHELL-DEP-011,Offline/session/cache standard,BLOCKING_IMPLEMENTATION
+SHELL-DEP-012,Platform operations and feature-flag controls,BLOCKING_IMPLEMENTATION
+SHELL-DEP-013,Audit/evidence event contracts,BLOCKING_IMPLEMENTATION
+SHELL-DEP-014,Repository route and architecture snapshot,BLOCKING_AS_BUILT
+SHELL-DEP-015,Production asset and font rights package,BLOCKING_RELEASE
+SHELL-DEP-016,Support ownership and operational staffing,BLOCKING_OPERATIONS
+SHELL-DEP-017,"Monitoring, backup, restore, and rollback rehearsal",BLOCKING_OPERATIONS
+SHELL-DEP-018,Founder release and enrollment disposition,BLOCKING_ENROLLMENT
