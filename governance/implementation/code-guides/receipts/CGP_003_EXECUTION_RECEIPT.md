@@ -42,7 +42,8 @@ CGP-004 was not begun. No substantive Code Guide controls, domain policies, impl
 
 ## Commit And Remote
 
-- Local commit: `PENDING_FINAL_COMMIT`
+- Primary source inventory commit: `a3481f6566d2e7c1fbc7866f10cc8e6327501722`
+- Metadata finalization commit: `PENDING_SELF_REFERENCE`
 - Remote branch verification: `PENDING_PUSH`
 
 ## Final Disposition
