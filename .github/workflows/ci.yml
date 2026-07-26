@@ -1,0 +1,236 @@
+name: CI
+
+# The first automated verification this repository has ever had.
+#
+# Read this if a job is red: red is the honest starting state. Nothing here is
+# configured to look green when it isn't: no skipped tests, no loosened
+# assertions. The backend non-live job runs the full selected suite, captures
+# its raw exit code, and then applies a reviewed known-failure non-regression
+# baseline. Known failures remain visible; new regressions fail the gate.
+#
+# See backend/tests/README.md for what the markers mean and how to run each set
+# locally.
+
+on:
+  push:
+    branches:
+      - integrate-emergent-final-zip
+  pull_request:
+
+# A new push supersedes an in-flight run on the same ref.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '20'
+  APP_ENV: test
+  RATE_LIMIT_ENABLED: 'false'
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Required-check candidate: the suite must stay importable. Fast and GREEN.
+  # ---------------------------------------------------------------------------
+  backend-collect:
+    name: Backend suite is collectable
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+
+      - name: Collect every test without running it
+        id: collect
+        # No MongoDB service here on purpose: collection must not require one.
+        # If this fails, a module raises at import time and has silently taken
+        # its whole file out of every future test run.
+        run: |
+          set -o pipefail
+          python -m pytest backend/tests --collect-only -q 2>&1 | tee /tmp/collect.log
+
+      - name: Summarize
+        if: always()
+        run: |
+          {
+            echo "## Suite collectability"
+            echo
+            if [ "${{ steps.collect.outcome }}" = "success" ]; then
+              echo "**PASS** — every test module imports cleanly."
+              echo
+              grep -E '[0-9]+ tests collected' /tmp/collect.log | tail -1 || true
+            else
+              echo "**FAIL** — at least one test module cannot be imported."
+              echo "A module that fails to import contributes zero tests and hides"
+              echo "whatever it was meant to verify."
+              echo
+              echo '```'
+              grep '^ERROR' /tmp/collect.log | head -40 || true
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: backend-collect-log
+          path: /tmp/collect.log
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Required-check candidate: full non-live suite with known-failure ratchet.
+  # ---------------------------------------------------------------------------
+  backend-tests:
+    name: Backend known-failure non-regression gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    services:
+      mongo:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+          --health-start-period 20s
+
+    env:
+      MONGO_URL: mongodb://localhost:27017
+      DB_NAME: equinesync_ci
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt
+
+      # The service health check already gates on this, but a clear failure here
+      # beats 900 confusing connection errors downstream.
+      - name: Wait for MongoDB
+        run: |
+          for _ in $(seq 1 30); do
+            if python -c "from pymongo import MongoClient; MongoClient('$MONGO_URL', serverSelectionTimeoutMS=1000).admin.command('ping')" 2>/dev/null; then
+              echo "MongoDB is up."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "MongoDB never became reachable at $MONGO_URL"
+          exit 1
+
+      - name: Collect explicit marker inventory
+        run: |
+          set -o pipefail
+          python -m pytest backend/tests --collect-only -q 2>&1 | tee collect.log
+          python -m pytest backend/tests -m live --collect-only -q 2>&1 | tee live-collect.txt
+          python -m pytest backend/tests -m "not live" --collect-only -q 2>&1 | tee not-live-collect.txt
+
+      # THE MEASUREMENT STEP.
+      #
+      # Deliberately captures the raw pytest exit code instead of allowing that
+      # code alone to decide the job. The following gate step parses JUnit and
+      # fails only on new regressions or inventory-control failures.
+      #
+      # `-m "not live"` excludes only explicitly allowlisted live tests that
+      # require a separately deployed, seeded HTTP API, which CI does not stand
+      # up. Those tests are still collected and still runnable; they are
+      # deselected, never skipped or deleted.
+      - name: Run CI-runnable tests
+        id: pytest
+        shell: bash
+        run: |
+          set +e
+          python -m pytest backend/tests \
+            -m "not live" \
+            --junitxml=junit-backend.xml \
+            -rf -q 2>&1 | tee pytest-output.txt
+          pytest_exit=${PIPESTATUS[0]}
+          set -e
+          echo "$pytest_exit" > pytest-exit-code.txt
+          echo "pytest exited with ${pytest_exit}; the known-failure gate decides the job result."
+
+      - name: Run known-failure non-regression gate
+        if: always()
+        run: |
+          python backend/tests/ci_known_failure_gate.py \
+            --baseline backend/tests/ci_known_failure_baseline.json \
+            --junit junit-backend.xml \
+            --collect-log collect.log \
+            --live-collect-log live-collect.txt \
+            --not-live-collect-log not-live-collect.txt \
+            --pytest-exit-code-file pytest-exit-code.txt \
+            --summary-output ci-known-failure-gate-summary.md
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: backend-test-report
+          path: |
+            collect.log
+            junit-backend.xml
+            pytest-output.txt
+            pytest-exit-code.txt
+            live-collect.txt
+            not-live-collect.txt
+            ci-known-failure-gate-summary.md
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Required-check candidate: frontend install and bundle build.
+  # ---------------------------------------------------------------------------
+  frontend-build:
+    name: Frontend build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # --legacy-peer-deps is required: the dependency tree has peer conflicts
+      # (React 19 against packages that still declare React 18) that npm 7+
+      # treats as fatal. Removing the flag breaks install, not the build.
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
+
+      - name: Summarize
+        if: always()
+        working-directory: .
+        run: |
+          {
+            echo "## Frontend build"
+            echo
+            if [ "${{ job.status }}" = "success" ]; then
+              echo "**PASS** — \`npm run build\` produced a bundle."
+            else
+              echo "**FAIL** — the frontend does not build. See the job log."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

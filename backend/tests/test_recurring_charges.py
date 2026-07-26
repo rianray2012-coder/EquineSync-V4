@@ -19,10 +19,29 @@ H = auth_headers(ADMIN)
 H_OWNER = auth_headers(OWNER)
 
 # Real owner/horse ids in the primary barn (for ref validation).
-_owner = DB.users.find_one({"role": "horse_owner", "barn_id": "primary"}, {"_id": 0, "id": 1})
-_horse = DB.horses.find_one({"barn_id": "primary"}, {"_id": 0, "id": 1})
-OWNER_ID = _owner["id"] if _owner else None
-HORSE_ID = _horse["id"] if _horse else None
+#
+# Looked up on first use rather than at import: these are database queries, and
+# running them at module scope meant a file that could not even be collected
+# without a reachable MongoDB. Same queries, same values, resolved when a test
+# asks for them.
+_ID_CACHE = {}
+
+
+def _primary_id(cache_key, collection, query):
+    if cache_key not in _ID_CACHE:
+        doc = collection.find_one(query, {"_id": 0, "id": 1})
+        _ID_CACHE[cache_key] = doc["id"] if doc else None
+    return _ID_CACHE[cache_key]
+
+
+def owner_id():
+    return _primary_id(
+        "owner", DB.users, {"role": "horse_owner", "barn_id": "primary"}
+    )
+
+
+def horse_id():
+    return _primary_id("horse", DB.horses, {"barn_id": "primary"})
 
 
 def teardown_module(module):
@@ -35,8 +54,8 @@ def teardown_module(module):
 
 def _payload(**over):
     p = {
-        "owner_id": OWNER_ID,
-        "horse_id": HORSE_ID,
+        "owner_id": owner_id(),
+        "horse_id": horse_id(),
         "description": "Monthly board",
         "items": [{"description": "Board", "quantity": 1, "unit_amount": 1200}],
         "discount": 0,
@@ -92,13 +111,13 @@ def test_horse_of_different_owner_rejected():
     # A same-barn horse owned by a DIFFERENT owner must be rejected, and no
     # recurring charge may be created as a side effect.
     other = DB.horses.find_one(
-        {"barn_id": "primary", "owner_id": {"$nin": [OWNER_ID, None]}}, {"_id": 0, "id": 1}
+        {"barn_id": "primary", "owner_id": {"$nin": [owner_id(), None]}}, {"_id": 0, "id": 1}
     )
     if not other:
         import pytest
         pytest.skip("no second-owner horse in seed data")
     before = DB.recurring_charges.count_documents({})
-    _create(_payload(owner_id=OWNER_ID, horse_id=other["id"]), expect=404)
+    _create(_payload(owner_id=owner_id(), horse_id=other["id"]), expect=404)
     assert DB.recurring_charges.count_documents({}) == before  # nothing created
 
 
