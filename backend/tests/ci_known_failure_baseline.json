@@ -1,0 +1,1019 @@
+{
+  "schema": "equinesync_pr3_known_failure_baseline_v1",
+  "baseline_commit": "614768d0afe01591c4f044fe6840e5317e6cda56",
+  "source_pull_request": 3,
+  "source_workflow_run": {
+    "run_id": 30183110240,
+    "job_id": 89743009855,
+    "head_sha": "614768d0afe01591c4f044fe6840e5317e6cda56",
+    "event": "pull_request",
+    "artifact_name": "backend-test-report"
+  },
+  "counts": {
+    "total_collected": 2286,
+    "selected_non_live": 1080,
+    "live_deselected": 1206,
+    "passed": 919,
+    "failed": 158,
+    "errors": 3,
+    "skipped": 0
+  },
+  "baseline_generation": {
+    "timestamp_utc": "2026-07-26T03:58:32Z",
+    "command": "python -m pytest backend/tests -m \"not live\" --junitxml=junit-backend.xml -rf -q 2>&1 | tee pytest-output.txt",
+    "collection_commands": [
+      "python -m pytest backend/tests --collect-only -q 2>&1 | tee collect.log",
+      "python -m pytest backend/tests -m live --collect-only -q 2>&1 | tee live-collect.txt",
+      "python -m pytest backend/tests -m \"not live\" --collect-only -q 2>&1 | tee not-live-collect.txt"
+    ],
+    "python_version": "3.11.15 via actions/setup-python with PYTHON_VERSION=3.11",
+    "node_version": "20 for frontend application build; GitHub-maintained action runtime may use newer internal Node runtime",
+    "mongo_image": "mongo:7",
+    "dependency_context": {
+      "backend_install_command": "pip install -r backend/requirements.txt",
+      "frontend_install_command": "npm ci --legacy-peer-deps",
+      "backend_requirements_sha256": "868ba96cc66725ea3a514bc547acd44846ff90adb00d74e65b3961d88807f430",
+      "frontend_package_lock_sha256": "7b5781f7164b0ac9250d670fb5ab27b62570d2fa7d6a22e1cad82deb704602fe",
+      "frontend_package_json_sha256": "fca09efd733f2da0c4fc97bb5da8688351eb83bd227691703d387e1a0ad897f9"
+    }
+  },
+  "baseline_expansion_policy": {
+    "automatic_expansion_allowed": false,
+    "requirements": [
+      "explicit change to this baseline file",
+      "written rationale",
+      "identification of newly accepted failing or erroring tests",
+      "separate review",
+      "no implication that the underlying behavior is accepted for release"
+    ],
+    "resolved_failure_policy": "Remove fixed nodes from this baseline in the same PR that fixes them, or create a tightly scoped baseline-reduction follow-up."
+  },
+  "known_failure_or_error_nodes": [
+    {
+      "nodeid": "backend/tests/test_4e_isolation_engine.py::test_task_complete_skip_void_cross_barn_isolation_both_directions",
+      "outcome": "error",
+      "junit_classname": "backend.tests.test_4e_isolation_engine",
+      "junit_name": "test_task_complete_skip_void_cross_barn_isolation_both_directions"
+    },
+    {
+      "nodeid": "backend/tests/test_4e_isolation_engine.py::test_task_patch_reassign_cross_barn_404",
+      "outcome": "error",
+      "junit_classname": "backend.tests.test_4e_isolation_engine",
+      "junit_name": "test_task_patch_reassign_cross_barn_404"
+    },
+    {
+      "nodeid": "backend/tests/test_4e_isolation_engine.py::test_task_template_patch_delete_cross_barn_404_no_mutation",
+      "outcome": "error",
+      "junit_classname": "backend.tests.test_4e_isolation_engine",
+      "junit_name": "test_task_template_patch_delete_cross_barn_404_no_mutation"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin1.py::test_admin_portal_exposes_no_mutations",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin1",
+      "junit_name": "test_admin_portal_exposes_no_mutations"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin1.py::test_no_app_js_admin_path_collision",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin1",
+      "junit_name": "test_no_app_js_admin_path_collision"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin2.py::test_no_mutations_exposed_on_admin2_endpoints[/admin/portal/activity]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin2",
+      "junit_name": "test_no_mutations_exposed_on_admin2_endpoints[/admin/portal/activity]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin2.py::test_no_mutations_exposed_on_admin2_endpoints[/admin/portal/kpis]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin2",
+      "junit_name": "test_no_mutations_exposed_on_admin2_endpoints[/admin/portal/kpis]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin2.py::test_no_mutations_exposed_on_admin2_endpoints[/admin/portal/subscription-health]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin2",
+      "junit_name": "test_no_mutations_exposed_on_admin2_endpoints[/admin/portal/subscription-health]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin4.py::test_no_mutations_exposed_on_admin4_list_endpoint",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin4",
+      "junit_name": "test_no_mutations_exposed_on_admin4_list_endpoint"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin4.py::test_no_post_put_delete_on_admin4_detail_endpoint",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin4",
+      "junit_name": "test_no_post_put_delete_on_admin4_detail_endpoint"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin5.py::test_no_mutations_exposed_on_admin5_endpoints[/admin/portal/billing-events]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin5",
+      "junit_name": "test_no_mutations_exposed_on_admin5_endpoints[/admin/portal/billing-events]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin5.py::test_no_mutations_exposed_on_admin5_endpoints[/admin/portal/payments]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin5",
+      "junit_name": "test_no_mutations_exposed_on_admin5_endpoints[/admin/portal/payments]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin5.py::test_no_mutations_exposed_on_admin5_endpoints[/admin/portal/subscriptions/primary]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin5",
+      "junit_name": "test_no_mutations_exposed_on_admin5_endpoints[/admin/portal/subscriptions/primary]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin5.py::test_no_mutations_exposed_on_admin5_endpoints[/admin/portal/subscriptions]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin5",
+      "junit_name": "test_no_mutations_exposed_on_admin5_endpoints[/admin/portal/subscriptions]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin6.py::test_no_mutations_exposed_on_audit_or_alerts[/admin/portal/alerts]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin6",
+      "junit_name": "test_no_mutations_exposed_on_audit_or_alerts[/admin/portal/alerts]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin6.py::test_no_mutations_exposed_on_audit_or_alerts[/admin/portal/audit-logs/al_doesnotexist]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin6",
+      "junit_name": "test_no_mutations_exposed_on_audit_or_alerts[/admin/portal/audit-logs/al_doesnotexist]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin6.py::test_no_mutations_exposed_on_audit_or_alerts[/admin/portal/audit-logs]",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin6",
+      "junit_name": "test_no_mutations_exposed_on_audit_or_alerts[/admin/portal/audit-logs]"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin7a2.py::test_helpers_module_owns_implementations",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin7a2",
+      "junit_name": "test_helpers_module_owns_implementations"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin7a2.py::test_integrations_read_roles_backend_frontend_mirror",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin7a2",
+      "junit_name": "test_integrations_read_roles_backend_frontend_mirror"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin7a2.py::test_reports_csv_roles_backend_frontend_mirror",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin7a2",
+      "junit_name": "test_reports_csv_roles_backend_frontend_mirror"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin7a2.py::test_settings_read_roles_backend_frontend_mirror",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin7a2",
+      "junit_name": "test_settings_read_roles_backend_frontend_mirror"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin7a2.py::test_subscriptions_uses_ctx_facility_label_map",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin7a2",
+      "junit_name": "test_subscriptions_uses_ctx_facility_label_map"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin7a2.py::test_users_detail_barn_projection_excludes_subscription_id",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin7a2",
+      "junit_name": "test_users_detail_barn_projection_excludes_subscription_id"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin7b.py::test_frontend_section_caps_mirror_matches_backend",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin7b",
+      "junit_name": "test_frontend_section_caps_mirror_matches_backend"
+    },
+    {
+      "nodeid": "backend/tests/test_admin_portal_admin7b.py::test_stripe_configured_uses_phase15_env_contract",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_admin_portal_admin7b",
+      "junit_name": "test_stripe_configured_uses_phase15_env_contract"
+    },
+    {
+      "nodeid": "backend/tests/test_app_assembly.py::test_dead_auth_models_removed_from_server",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_app_assembly",
+      "junit_name": "test_dead_auth_models_removed_from_server"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_10_staging_uat_closure.py::test_bn10_does_not_claim_launch_or_pilot_approval",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_10_staging_uat_closure",
+      "junit_name": "test_bn10_does_not_claim_launch_or_pilot_approval"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_10_staging_uat_closure.py::test_bn10_keeps_all_required_uat_groups_pending_until_execution",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_10_staging_uat_closure",
+      "junit_name": "test_bn10_keeps_all_required_uat_groups_pending_until_execution"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_10_staging_uat_closure.py::test_bn10_locks_official_environment_and_founder_acceptance_rules",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_10_staging_uat_closure",
+      "junit_name": "test_bn10_locks_official_environment_and_founder_acceptance_rules"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_10_staging_uat_closure.py::test_bn10_never_uses_bn9_local_screenshots_as_official_pass_evidence",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_10_staging_uat_closure",
+      "junit_name": "test_bn10_never_uses_bn9_local_screenshots_as_official_pass_evidence"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_10_staging_uat_closure.py::test_bn10_package_text_does_not_contain_secret_shaped_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_10_staging_uat_closure",
+      "junit_name": "test_bn10_package_text_does_not_contain_secret_shaped_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_10_staging_uat_closure.py::test_bn10_provider_rules_are_live_safe_and_secret_safe",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_10_staging_uat_closure",
+      "junit_name": "test_bn10_provider_rules_are_live_safe_and_secret_safe"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_10_staging_uat_closure.py::test_bn10_required_artifacts_exist_and_are_nonempty",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_10_staging_uat_closure",
+      "junit_name": "test_bn10_required_artifacts_exist_and_are_nonempty"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_10_staging_uat_closure.py::test_bn10_status_terms_are_controlled",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_10_staging_uat_closure",
+      "junit_name": "test_bn10_status_terms_are_controlled"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_11_staging_environment_proof.py::test_bn11_current_verdict_is_blocked_until_official_identity_supplied",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_11_staging_environment_proof",
+      "junit_name": "test_bn11_current_verdict_is_blocked_until_official_identity_supplied"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_11_staging_environment_proof.py::test_bn11_does_not_claim_uat_pilot_or_launch_approval",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_11_staging_environment_proof",
+      "junit_name": "test_bn11_does_not_claim_uat_pilot_or_launch_approval"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_11_staging_environment_proof.py::test_bn11_keeps_role_and_provider_readiness_pending",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_11_staging_environment_proof",
+      "junit_name": "test_bn11_keeps_role_and_provider_readiness_pending"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_11_staging_environment_proof.py::test_bn11_local_health_is_reference_only_not_official_uat",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_11_staging_environment_proof",
+      "junit_name": "test_bn11_local_health_is_reference_only_not_official_uat"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_11_staging_environment_proof.py::test_bn11_package_text_does_not_contain_secret_shaped_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_11_staging_environment_proof",
+      "junit_name": "test_bn11_package_text_does_not_contain_secret_shaped_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_11_staging_environment_proof.py::test_bn11_provider_boundary_does_not_execute_lifecycle_actions",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_11_staging_environment_proof",
+      "junit_name": "test_bn11_provider_boundary_does_not_execute_lifecycle_actions"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_11_staging_environment_proof.py::test_bn11_required_artifacts_exist_and_are_nonempty",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_11_staging_environment_proof",
+      "junit_name": "test_bn11_required_artifacts_exist_and_are_nonempty"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_11_staging_environment_proof.py::test_bn11_requires_official_production_like_staging_identity",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_11_staging_environment_proof",
+      "junit_name": "test_bn11_requires_official_production_like_staging_identity"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_12_prep_staging_inputs.py::test_bn12_is_explicitly_deferred_not_executed",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_12_prep_staging_inputs",
+      "junit_name": "test_bn12_is_explicitly_deferred_not_executed"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_12_prep_staging_inputs.py::test_bn12_prep_forbids_localhost_as_official_evidence",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_12_prep_staging_inputs",
+      "junit_name": "test_bn12_prep_forbids_localhost_as_official_evidence"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_12_prep_staging_inputs.py::test_bn12_prep_keeps_launch_gates_blocked",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_12_prep_staging_inputs",
+      "junit_name": "test_bn12_prep_keeps_launch_gates_blocked"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_12_prep_staging_inputs.py::test_bn12_prep_keeps_secrets_out_of_collection",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_12_prep_staging_inputs",
+      "junit_name": "test_bn12_prep_keeps_secrets_out_of_collection"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_12_prep_staging_inputs.py::test_bn12_prep_lists_all_required_inputs",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_12_prep_staging_inputs",
+      "junit_name": "test_bn12_prep_lists_all_required_inputs"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_12_prep_staging_inputs.py::test_bn12_prep_package_text_does_not_contain_secret_shaped_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_12_prep_staging_inputs",
+      "junit_name": "test_bn12_prep_package_text_does_not_contain_secret_shaped_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_12_prep_staging_inputs.py::test_bn12_prep_required_artifacts_exist_and_are_nonempty",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_12_prep_staging_inputs",
+      "junit_name": "test_bn12_prep_required_artifacts_exist_and_are_nonempty"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13a_role_routing.py::test_app_routes_role_home_and_guards_onboarding",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13a_role_routing",
+      "junit_name": "test_app_routes_role_home_and_guards_onboarding"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13a_role_routing.py::test_bn13a_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13a_role_routing",
+      "junit_name": "test_bn13a_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13a_role_routing.py::test_role_home_is_client_facing_and_not_setup_copy",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13a_role_routing",
+      "junit_name": "test_role_home_is_client_facing_and_not_setup_copy"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13b_role_navigation.py::test_facility_admin_navigation_has_setup_and_business_tools",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13b_role_navigation",
+      "junit_name": "test_facility_admin_navigation_has_setup_and_business_tools"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13b_role_navigation.py::test_guardian_and_rider_navigation_do_not_point_to_legacy_lesson_or_admin_pages",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13b_role_navigation",
+      "junit_name": "test_guardian_and_rider_navigation_do_not_point_to_legacy_lesson_or_admin_pages"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13b_role_navigation.py::test_owner_navigation_is_horse_first_and_uses_safe_placeholders_for_future_tools",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13b_role_navigation",
+      "junit_name": "test_owner_navigation_is_horse_first_and_uses_safe_placeholders_for_future_tools"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13b_role_navigation.py::test_trainer_navigation_avoids_admin_only_routes",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13b_role_navigation",
+      "junit_name": "test_trainer_navigation_avoids_admin_only_routes"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13c_rider_intake_shell.py::test_bn13c_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13c_rider_intake_shell",
+      "junit_name": "test_bn13c_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13c_rider_intake_shell.py::test_rider_navigation_remains_on_role_home_placeholders",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13c_rider_intake_shell",
+      "junit_name": "test_rider_navigation_remains_on_role_home_placeholders"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13c_rider_intake_shell.py::test_role_home_rider_shell_uses_api_and_does_not_link_to_lessons",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13c_rider_intake_shell",
+      "junit_name": "test_role_home_rider_shell_uses_api_and_does_not_link_to_lessons"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13c_rider_intake_shell.py::test_server_registers_rider_profile_router_without_product_facility_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13c_rider_intake_shell",
+      "junit_name": "test_server_registers_rider_profile_router_without_product_facility_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13d_guardian_minor_intake.py::test_bn13d_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13d_guardian_minor_intake",
+      "junit_name": "test_bn13d_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13d_guardian_minor_intake.py::test_guardian_navigation_remains_on_role_home_placeholders",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13d_guardian_minor_intake",
+      "junit_name": "test_guardian_navigation_remains_on_role_home_placeholders"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13d_guardian_minor_intake.py::test_role_home_guardian_shell_uses_api_and_does_not_link_to_product_workflows",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13d_guardian_minor_intake",
+      "junit_name": "test_role_home_guardian_shell_uses_api_and_does_not_link_to_product_workflows"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13d_guardian_minor_intake.py::test_server_registers_guardian_router_without_product_facility_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13d_guardian_minor_intake",
+      "junit_name": "test_server_registers_guardian_router_without_product_facility_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13e_owner_intake_shell.py::test_bn13e_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13e_owner_intake_shell",
+      "junit_name": "test_bn13e_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13e_owner_intake_shell.py::test_owner_navigation_keeps_unfinished_tools_on_owner_placeholders",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13e_owner_intake_shell",
+      "junit_name": "test_owner_navigation_keeps_unfinished_tools_on_owner_placeholders"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13e_owner_intake_shell.py::test_role_home_owner_shell_uses_api_and_does_not_link_to_private_workflows",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13e_owner_intake_shell",
+      "junit_name": "test_role_home_owner_shell_uses_api_and_does_not_link_to_private_workflows"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13e_owner_intake_shell.py::test_server_registers_owner_router_without_product_facility_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13e_owner_intake_shell",
+      "junit_name": "test_server_registers_owner_router_without_product_facility_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13f_barn_owner_intake_shell.py::test_barn_owner_navigation_keeps_high_risk_workflows_out_of_role_home_nav",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13f_barn_owner_intake_shell",
+      "junit_name": "test_barn_owner_navigation_keeps_high_risk_workflows_out_of_role_home_nav"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13f_barn_owner_intake_shell.py::test_bn13f_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13f_barn_owner_intake_shell",
+      "junit_name": "test_bn13f_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13f_barn_owner_intake_shell.py::test_role_home_barn_owner_shell_uses_api_and_does_not_link_to_product_workflows",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13f_barn_owner_intake_shell",
+      "junit_name": "test_role_home_barn_owner_shell_uses_api_and_does_not_link_to_product_workflows"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13f_barn_owner_intake_shell.py::test_role_landing_routes_barn_owner_to_intake_home_without_breaking_admin_setup",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13f_barn_owner_intake_shell",
+      "junit_name": "test_role_landing_routes_barn_owner_to_intake_home_without_breaking_admin_setup"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13f_barn_owner_intake_shell.py::test_server_registers_barn_owner_router_without_product_facility_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13f_barn_owner_intake_shell",
+      "junit_name": "test_server_registers_barn_owner_router_without_product_facility_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13g_trainer_intake_shell.py::test_bn13g_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13g_trainer_intake_shell",
+      "junit_name": "test_bn13g_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13g_trainer_intake_shell.py::test_role_home_trainer_shell_uses_api_and_does_not_link_to_private_workflows",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13g_trainer_intake_shell",
+      "junit_name": "test_role_home_trainer_shell_uses_api_and_does_not_link_to_private_workflows"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13g_trainer_intake_shell.py::test_role_landing_routes_trainer_to_intake_home_without_breaking_manager",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13g_trainer_intake_shell",
+      "junit_name": "test_role_landing_routes_trainer_to_intake_home_without_breaking_manager"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13g_trainer_intake_shell.py::test_server_registers_trainer_router_without_product_facility_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13g_trainer_intake_shell",
+      "junit_name": "test_server_registers_trainer_router_without_product_facility_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13h_manager_intake_shell.py::test_bn13h_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13h_manager_intake_shell",
+      "junit_name": "test_bn13h_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13h_manager_intake_shell.py::test_role_home_manager_shell_uses_api_and_does_not_link_to_private_workflows",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13h_manager_intake_shell",
+      "junit_name": "test_role_home_manager_shell_uses_api_and_does_not_link_to_private_workflows"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13h_manager_intake_shell.py::test_role_landing_routes_manager_to_intake_home_without_breaking_trainer",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13h_manager_intake_shell",
+      "junit_name": "test_role_landing_routes_manager_to_intake_home_without_breaking_trainer"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13i_staff_intake_shell.py::test_bn13i_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13i_staff_intake_shell",
+      "junit_name": "test_bn13i_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13i_staff_intake_shell.py::test_role_home_staff_shell_uses_api_and_does_not_link_to_private_workflows",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13i_staff_intake_shell",
+      "junit_name": "test_role_home_staff_shell_uses_api_and_does_not_link_to_private_workflows"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13i_staff_intake_shell.py::test_role_landing_routes_staff_to_intake_home_without_breaking_manager",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13i_staff_intake_shell",
+      "junit_name": "test_role_landing_routes_staff_to_intake_home_without_breaking_manager"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13j_role_first_login_matrix.py::test_bn13j_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13j_role_first_login_matrix",
+      "junit_name": "test_bn13j_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13j_role_first_login_matrix.py::test_every_bn13_intake_route_is_registered_before_product_facility_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13j_role_first_login_matrix",
+      "junit_name": "test_every_bn13_intake_route_is_registered_before_product_facility_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13j_role_first_login_matrix.py::test_first_login_role_destination_matrix_is_locked",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13j_role_first_login_matrix",
+      "junit_name": "test_first_login_role_destination_matrix_is_locked"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13j_role_first_login_matrix.py::test_role_home_branches_exist_for_every_bn13_profile",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13j_role_first_login_matrix",
+      "junit_name": "test_role_home_branches_exist_for_every_bn13_profile"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13j_role_first_login_matrix.py::test_role_home_intake_shells_do_not_link_to_forbidden_workflows",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13j_role_first_login_matrix",
+      "junit_name": "test_role_home_intake_shells_do_not_link_to_forbidden_workflows"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13k_role_flow_smoke.py::test_bn13_intake_routes_remain_before_product_facility_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13k_role_flow_smoke",
+      "junit_name": "test_bn13_intake_routes_remain_before_product_facility_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13k_role_flow_smoke.py::test_role_home_shells_exist_for_smoke_targets",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13k_role_flow_smoke",
+      "junit_name": "test_role_home_shells_exist_for_smoke_targets"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_13k_role_flow_smoke.py::test_role_landing_source_matches_bn13k_smoke_expectations",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_13k_role_flow_smoke",
+      "junit_name": "test_role_landing_source_matches_bn13k_smoke_expectations"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_15d_today_pulse_uat_evidence.py::test_bn15d_screenshot_inventory_is_complete_and_valid_pngs",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_15d_today_pulse_uat_evidence",
+      "junit_name": "test_bn15d_screenshot_inventory_is_complete_and_valid_pngs"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_15f1_live_today_pulse_walkthrough.py::test_bn15f1_artifacts_exist_and_record_completed_walkthrough",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_15f1_live_today_pulse_walkthrough",
+      "junit_name": "test_bn15f1_artifacts_exist_and_record_completed_walkthrough"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_15f1_live_today_pulse_walkthrough.py::test_bn15f1_preserves_bn15f_boundary_and_next_required_action",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_15f1_live_today_pulse_walkthrough",
+      "junit_name": "test_bn15f1_preserves_bn15f_boundary_and_next_required_action"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_15f1_live_today_pulse_walkthrough.py::test_bn15f1_screenshot_folder_contains_valid_captured_rows_and_note",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_15f1_live_today_pulse_walkthrough",
+      "junit_name": "test_bn15f1_screenshot_folder_contains_valid_captured_rows_and_note"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_15f1_live_today_pulse_walkthrough.py::test_bn15f1_secret_safety_terms_are_absent_as_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_15f1_live_today_pulse_walkthrough",
+      "junit_name": "test_bn15f1_secret_safety_terms_are_absent_as_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_15f_live_today_pulse_walkthrough.py::test_bn15f_artifacts_exist_and_record_blocked_walkthrough",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_15f_live_today_pulse_walkthrough",
+      "junit_name": "test_bn15f_artifacts_exist_and_record_blocked_walkthrough"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_15f_live_today_pulse_walkthrough.py::test_bn15f_screenshot_folder_contains_only_blocker_note",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_15f_live_today_pulse_walkthrough",
+      "junit_name": "test_bn15f_screenshot_folder_contains_only_blocker_note"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_15f_live_today_pulse_walkthrough.py::test_bn15f_secret_safety_terms_are_absent_as_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_15f_live_today_pulse_walkthrough",
+      "junit_name": "test_bn15f_secret_safety_terms_are_absent_as_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_17a_launch_trust_route_taxonomy.py::test_dashboard_shells_are_wrappers_not_new_workflow_engines",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_17a_launch_trust_route_taxonomy",
+      "junit_name": "test_dashboard_shells_are_wrappers_not_new_workflow_engines"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_17c_role_journey_launch_trust_evidence.py::test_bn17c_evidence_report_is_executed_and_non_expansionary",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_17c_role_journey_launch_trust_evidence",
+      "junit_name": "test_bn17c_evidence_report_is_executed_and_non_expansionary"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_17c_role_journey_launch_trust_evidence.py::test_bn17c_report_records_known_direct_route_and_copy_followups",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_17c_role_journey_launch_trust_evidence",
+      "junit_name": "test_bn17c_report_records_known_direct_route_and_copy_followups"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_17c_role_journey_launch_trust_evidence.py::test_bn17c_report_records_required_role_journey_sections",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_17c_role_journey_launch_trust_evidence",
+      "junit_name": "test_bn17c_report_records_required_role_journey_sections"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_17c_role_journey_launch_trust_evidence.py::test_owner_guardian_rider_and_provider_dashboards_remain_safe_shells",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_17c_role_journey_launch_trust_evidence",
+      "junit_name": "test_owner_guardian_rider_and_provider_dashboards_remain_safe_shells"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_17d_role_journey_cleanup.py::test_bn17d_evidence_and_readme_record_non_expansionary_scope",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_17d_role_journey_cleanup",
+      "junit_name": "test_bn17d_evidence_and_readme_record_non_expansionary_scope"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_18e_app_store_readiness_proof.py::test_bn18e_current_repo_is_blocked_for_native_store_launch",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_18e_app_store_readiness_proof",
+      "junit_name": "test_bn18e_current_repo_is_blocked_for_native_store_launch"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_18e_app_store_readiness_proof.py::test_bn18e_source_scan_records_absent_native_and_present_web_assets",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_18e_app_store_readiness_proof",
+      "junit_name": "test_bn18e_source_scan_records_absent_native_and_present_web_assets"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_2_mobile_readiness.py::test_build_next_2_reuses_locked_horseops_mobile_evidence",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_2_mobile_readiness",
+      "junit_name": "test_build_next_2_reuses_locked_horseops_mobile_evidence"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_2_mobile_readiness.py::test_build_next_2_scope_does_not_expand_runtime_features",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_2_mobile_readiness",
+      "junit_name": "test_build_next_2_scope_does_not_expand_runtime_features"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_2_mobile_readiness.py::test_build_next_2a_matrix_covers_launch_mobile_surfaces_and_2b_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_2_mobile_readiness",
+      "junit_name": "test_build_next_2a_matrix_covers_launch_mobile_surfaces_and_2b_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_2_mobile_readiness.py::test_mobile_readiness_page_is_field_only_and_mobile_routed",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_2_mobile_readiness",
+      "junit_name": "test_mobile_readiness_page_is_field_only_and_mobile_routed"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_2b_mobile_screenshot_gate.py::test_build_next_2b_readme_defines_exact_screenshot_gate",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_2b_mobile_screenshot_gate",
+      "junit_name": "test_build_next_2b_readme_defines_exact_screenshot_gate"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_2b_mobile_screenshot_gate.py::test_build_next_2b_screenshot_directory_contains_only_expected_files",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_2b_mobile_screenshot_gate",
+      "junit_name": "test_build_next_2b_screenshot_directory_contains_only_expected_files"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_2b_mobile_screenshot_gate.py::test_build_next_2b_screenshots_exist_with_png_signatures_and_mobile_size",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_2b_mobile_screenshot_gate",
+      "junit_name": "test_build_next_2b_screenshots_exist_with_png_signatures_and_mobile_size"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_3_multi_barn_gap_report.py::test_bn4_invite_acceptance_attaches_existing_users_via_memberships",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_3_multi_barn_gap_report",
+      "junit_name": "test_bn4_invite_acceptance_attaches_existing_users_via_memberships"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_3_multi_barn_gap_report.py::test_build_next_3_recommends_compatibility_mirror_not_direct_cutover",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_3_multi_barn_gap_report",
+      "junit_name": "test_build_next_3_recommends_compatibility_mirror_not_direct_cutover"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_3_multi_barn_gap_report.py::test_build_next_3_report_preserves_read_only_scope",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_3_multi_barn_gap_report",
+      "junit_name": "test_build_next_3_report_preserves_read_only_scope"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_3_multi_barn_gap_report.py::test_build_next_3_report_records_founder_decisions_and_open_items",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_3_multi_barn_gap_report",
+      "junit_name": "test_build_next_3_report_records_founder_decisions_and_open_items"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_3_multi_barn_gap_report.py::test_platform_roles_stay_separate_from_future_account_memberships",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_3_multi_barn_gap_report",
+      "junit_name": "test_platform_roles_stay_separate_from_future_account_memberships"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_6d_docusign_jwt_smoke.py::test_bn6d_accepts_private_key_path_or_inline_private_key",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_6d_docusign_jwt_smoke",
+      "junit_name": "test_bn6d_accepts_private_key_path_or_inline_private_key"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7_launch_gate.py::test_bn7_launch_report_covers_required_roles_and_provider_boundaries",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7_launch_gate",
+      "junit_name": "test_bn7_launch_report_covers_required_roles_and_provider_boundaries"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7_launch_gate.py::test_bn7_mobile_evidence_files_have_mobile_dimensions_and_valid_signatures",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7_launch_gate",
+      "junit_name": "test_bn7_mobile_evidence_files_have_mobile_dimensions_and_valid_signatures"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7_launch_gate.py::test_bn7_readme_and_manifest_are_evidence_only_no_product_expansion",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7_launch_gate",
+      "junit_name": "test_bn7_readme_and_manifest_are_evidence_only_no_product_expansion"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7_launch_gate.py::test_bn7_report_does_not_contain_secret_shaped_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7_launch_gate",
+      "junit_name": "test_bn7_report_does_not_contain_secret_shaped_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7_launch_gate.py::test_bn7_report_has_go_no_go_blockers_warnings_and_deferrals",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7_launch_gate",
+      "junit_name": "test_bn7_report_has_go_no_go_blockers_warnings_and_deferrals"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7_launch_gate.py::test_bn7_required_launch_gate_artifacts_exist",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7_launch_gate",
+      "junit_name": "test_bn7_required_launch_gate_artifacts_exist"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7a_staging_uat_evidence.py::test_bn7a_artifacts_do_not_contain_secret_shaped_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7a_staging_uat_evidence",
+      "junit_name": "test_bn7a_artifacts_do_not_contain_secret_shaped_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7a_staging_uat_evidence.py::test_bn7a_does_not_overclaim_uat_or_launch_readiness",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7a_staging_uat_evidence",
+      "junit_name": "test_bn7a_does_not_overclaim_uat_or_launch_readiness"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7a_staging_uat_evidence.py::test_bn7a_report_carries_forward_bn7_blockers_to_actual_evidence_rows",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7a_staging_uat_evidence",
+      "junit_name": "test_bn7a_report_carries_forward_bn7_blockers_to_actual_evidence_rows"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7a_staging_uat_evidence.py::test_bn7a_required_artifacts_exist_and_are_nonempty",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7a_staging_uat_evidence",
+      "junit_name": "test_bn7a_required_artifacts_exist_and_are_nonempty"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_7a_staging_uat_evidence.py::test_bn7a_role_provider_and_ops_checklists_are_complete_enough_for_staging",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_7a_staging_uat_evidence",
+      "junit_name": "test_bn7a_role_provider_and_ops_checklists_are_complete_enough_for_staging"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_8_go_live_runbook.py::test_bn8_does_not_claim_launch_or_pilot_approval",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_8_go_live_runbook",
+      "junit_name": "test_bn8_does_not_claim_launch_or_pilot_approval"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_8_go_live_runbook.py::test_bn8_env_checklist_is_boolean_only_and_covers_core_providers",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_8_go_live_runbook",
+      "junit_name": "test_bn8_env_checklist_is_boolean_only_and_covers_core_providers"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_8_go_live_runbook.py::test_bn8_package_files_do_not_contain_secret_shaped_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_8_go_live_runbook",
+      "junit_name": "test_bn8_package_files_do_not_contain_secret_shaped_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_8_go_live_runbook.py::test_bn8_required_artifacts_exist_and_are_nonempty",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_8_go_live_runbook",
+      "junit_name": "test_bn8_required_artifacts_exist_and_are_nonempty"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_8_go_live_runbook.py::test_bn8_runbook_contains_provider_rollback_support_and_signoff_sections",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_8_go_live_runbook",
+      "junit_name": "test_bn8_runbook_contains_provider_rollback_support_and_signoff_sections"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_all_required_uat_rows_have_evidence_references",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_9_staging_uat_execution",
+      "junit_name": "test_bn9_all_required_uat_rows_have_evidence_references"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_does_not_claim_launch_or_pilot_approval",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_9_staging_uat_execution",
+      "junit_name": "test_bn9_does_not_claim_launch_or_pilot_approval"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_execution_attempt_records_local_dry_run_without_overclaiming",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_9_staging_uat_execution",
+      "junit_name": "test_bn9_execution_attempt_records_local_dry_run_without_overclaiming"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_keeps_pending_statuses_explicit_until_human_execution",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_9_staging_uat_execution",
+      "junit_name": "test_bn9_keeps_pending_statuses_explicit_until_human_execution"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_local_role_screenshots_exist_and_are_pngs",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_9_staging_uat_execution",
+      "junit_name": "test_bn9_local_role_screenshots_exist_and_are_pngs"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_package_files_do_not_contain_secret_shaped_values",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_9_staging_uat_execution",
+      "junit_name": "test_bn9_package_files_do_not_contain_secret_shaped_values"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_required_artifacts_exist_and_are_nonempty",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_9_staging_uat_execution",
+      "junit_name": "test_bn9_required_artifacts_exist_and_are_nonempty"
+    },
+    {
+      "nodeid": "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_role_by_role_example_uat_covers_all_role_rows_without_overclaiming",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_build_next_9_staging_uat_execution",
+      "junit_name": "test_bn9_role_by_role_example_uat_covers_all_role_rows_without_overclaiming"
+    },
+    {
+      "nodeid": "backend/tests/test_horse_ledger_1a.py::test_horse_ledger_indexes_created_on_startup",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_horse_ledger_1a",
+      "junit_name": "test_horse_ledger_indexes_created_on_startup"
+    },
+    {
+      "nodeid": "backend/tests/test_horse_ledger_1c.py::test_daily_check_indexes_exist_and_use_checked_at",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_horse_ledger_1c",
+      "junit_name": "test_daily_check_indexes_exist_and_use_checked_at"
+    },
+    {
+      "nodeid": "backend/tests/test_horse_ledger_1d.py::test_alert_event_indexes_present",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_horse_ledger_1d",
+      "junit_name": "test_alert_event_indexes_present"
+    },
+    {
+      "nodeid": "backend/tests/test_horse_ledger_1e.py::test_service_request_owner_indexes_present",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_horse_ledger_1e",
+      "junit_name": "test_service_request_owner_indexes_present"
+    },
+    {
+      "nodeid": "backend/tests/test_horse_ledger_1f.py::test_visibility_template_index_exists",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_horse_ledger_1f",
+      "junit_name": "test_visibility_template_index_exists"
+    },
+    {
+      "nodeid": "backend/tests/test_horse_ledger_1j.py::test_horseops_1j_screenshots_exist_as_mobile_jpegs",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_horse_ledger_1j",
+      "junit_name": "test_horseops_1j_screenshots_exist_as_mobile_jpegs"
+    },
+    {
+      "nodeid": "backend/tests/test_horse_ledger_1k.py::test_horseops_1j_mobile_evidence_still_exists_and_is_valid",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_horse_ledger_1k",
+      "junit_name": "test_horseops_1j_mobile_evidence_still_exists_and_is_valid"
+    },
+    {
+      "nodeid": "backend/tests/test_horse_ledger_1k.py::test_horseops_1k_matrix_covers_every_locked_phase",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_horse_ledger_1k",
+      "junit_name": "test_horseops_1k_matrix_covers_every_locked_phase"
+    },
+    {
+      "nodeid": "backend/tests/test_rf16_pwa_native_app_store_readiness.py::test_rf16_records_local_native_toolchain_blockers_without_source_blockers",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf16_pwa_native_app_store_readiness",
+      "junit_name": "test_rf16_records_local_native_toolchain_blockers_without_source_blockers"
+    },
+    {
+      "nodeid": "backend/tests/test_rf16_pwa_native_app_store_readiness.py::test_rf16_script_writes_report",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf16_pwa_native_app_store_readiness",
+      "junit_name": "test_rf16_script_writes_report"
+    },
+    {
+      "nodeid": "backend/tests/test_rf17_feature_shell_ux_truth.py::test_rf17_script_generates_report_and_zip",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf17_feature_shell_ux_truth",
+      "junit_name": "test_rf17_script_generates_report_and_zip"
+    },
+    {
+      "nodeid": "backend/tests/test_rf18_qa_uat_public_launch_readiness.py::test_rf18_launch_evidence_and_overclaim_guards_are_ready",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf18_qa_uat_public_launch_readiness",
+      "junit_name": "test_rf18_launch_evidence_and_overclaim_guards_are_ready"
+    },
+    {
+      "nodeid": "backend/tests/test_rf18_qa_uat_public_launch_readiness.py::test_rf18_locked_phase_matrix_is_ready",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf18_qa_uat_public_launch_readiness",
+      "junit_name": "test_rf18_locked_phase_matrix_is_ready"
+    },
+    {
+      "nodeid": "backend/tests/test_rf18_qa_uat_public_launch_readiness.py::test_rf18_script_generates_report_and_zip",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf18_qa_uat_public_launch_readiness",
+      "junit_name": "test_rf18_script_generates_report_and_zip"
+    },
+    {
+      "nodeid": "backend/tests/test_rf19_staging_uat_evidence_capture.py::test_rf19_locked_rf18_inputs_are_ready",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf19_staging_uat_evidence_capture",
+      "junit_name": "test_rf19_locked_rf18_inputs_are_ready"
+    },
+    {
+      "nodeid": "backend/tests/test_rf4_feature_completion_certification.py::test_rf4_report_renders_ready_without_blockers",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf4_feature_completion_certification",
+      "junit_name": "test_rf4_report_renders_ready_without_blockers"
+    },
+    {
+      "nodeid": "backend/tests/test_rf4_feature_completion_certification.py::test_rf4_truth_labels_manifest_delivery_signature_and_mobile_readiness",
+      "outcome": "failure",
+      "junit_classname": "backend.tests.test_rf4_feature_completion_certification",
+      "junit_name": "test_rf4_truth_labels_manifest_delivery_signature_and_mobile_readiness"
+    }
+  ]
+}

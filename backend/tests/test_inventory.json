@@ -60,5 +60,19 @@
     "duration_seconds": 112.534,
     "exit_code": 1,
     "provenance": "local clean-clone run after branch sync; GitHub Actions run counts are recorded in the PR body and action artifacts."
+  },
+  "known_failure_baseline": {
+    "baseline_file": "backend/tests/ci_known_failure_baseline.json",
+    "baseline_commit": "614768d0afe01591c4f044fe6840e5317e6cda56",
+    "source_workflow_run": 30183110240,
+    "selected_tests": 1080,
+    "passed": 919,
+    "failed": 158,
+    "errored": 3,
+    "skipped": 0,
+    "deselected_live": 1206,
+    "gate_status_role": "known_failure_non_regression_gate_required_check_candidate",
+    "gate_pass_condition": "current failures and errors must already be listed in the reviewed baseline and collection/inventory controls must pass",
+    "automatic_baseline_expansion_allowed": false
   }
 }

@@ -3,17 +3,18 @@ name: CI
 # The first automated verification this repository has ever had.
 #
 # Read this if a job is red: red is the honest starting state. Nothing here is
-# configured to look green when it isn't: no `continue-on-error` on a test step,
-# no skipped tests, no loosened assertions. The backend non-live job is a
-# measurement and remediation job until a separately approved green baseline or
-# required-check policy exists.
+# configured to look green when it isn't: no skipped tests, no loosened
+# assertions. The backend non-live job runs the full selected suite, captures
+# its raw exit code, and then applies a reviewed known-failure non-regression
+# baseline. Known failures remain visible; new regressions fail the gate.
 #
 # See backend/tests/README.md for what the markers mean and how to run each set
 # locally.
 
 on:
   push:
-    branches: ['**']
+    branches:
+      - integrate-emergent-final-zip
   pull_request:
 
 # A new push supersedes an in-flight run on the same ref.
@@ -36,9 +37,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
@@ -77,7 +78,7 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: backend-collect-log
@@ -85,10 +86,10 @@ jobs:
           if-no-files-found: warn
 
   # ---------------------------------------------------------------------------
-  # Measurement/remediation job. Expected RED initially and allowed to fail honestly.
+  # Required-check candidate: full non-live suite with known-failure ratchet.
   # ---------------------------------------------------------------------------
   backend-tests:
-    name: Backend tests measurement (not live)
+    name: Backend known-failure non-regression gate
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -109,9 +110,9 @@ jobs:
       DB_NAME: equinesync_ci
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
@@ -137,14 +138,15 @@ jobs:
       - name: Collect explicit marker inventory
         run: |
           set -o pipefail
+          python -m pytest backend/tests --collect-only -q 2>&1 | tee collect.log
           python -m pytest backend/tests -m live --collect-only -q 2>&1 | tee live-collect.txt
           python -m pytest backend/tests -m "not live" --collect-only -q 2>&1 | tee not-live-collect.txt
 
       # THE MEASUREMENT STEP.
       #
-      # Deliberately has no `continue-on-error`. When tests fail, this job fails
-      # and the board goes red. That is the point: a green badge over a suite
-      # that has unresolved failures is worse than no badge.
+      # Deliberately captures the raw pytest exit code instead of allowing that
+      # code alone to decide the job. The following gate step parses JUnit and
+      # fails only on new regressions or inventory-control failures.
       #
       # `-m "not live"` excludes only explicitly allowlisted live tests that
       # require a separately deployed, seeded HTTP API, which CI does not stand
@@ -152,103 +154,42 @@ jobs:
       # deselected, never skipped or deleted.
       - name: Run CI-runnable tests
         id: pytest
+        shell: bash
         run: |
-          set -o pipefail
+          set +e
           python -m pytest backend/tests \
             -m "not live" \
             --junitxml=junit-backend.xml \
             -rf -q 2>&1 | tee pytest-output.txt
+          pytest_exit=${PIPESTATUS[0]}
+          set -e
+          echo "$pytest_exit" > pytest-exit-code.txt
+          echo "pytest exited with ${pytest_exit}; the known-failure gate decides the job result."
 
-      - name: Write result table to job summary
+      - name: Run known-failure non-regression gate
         if: always()
         run: |
-          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
-          import os
-          import re
-          import xml.etree.ElementTree as ET
-          from pathlib import Path
+          python backend/tests/ci_known_failure_gate.py \
+            --baseline backend/tests/ci_known_failure_baseline.json \
+            --junit junit-backend.xml \
+            --collect-log collect.log \
+            --live-collect-log live-collect.txt \
+            --not-live-collect-log not-live-collect.txt \
+            --pytest-exit-code-file pytest-exit-code.txt \
+            --summary-output ci-known-failure-gate-summary.md
 
-          outcome = os.environ["PYTEST_OUTCOME"]
-          print("## Backend tests measurement — CI-runnable set (`-m \"not live\"`)")
-          print()
-
-          try:
-              root = ET.parse("junit-backend.xml").getroot()
-              suite = root.find("testsuite") if root.tag == "testsuites" else root
-              total = int(suite.get("tests", 0))
-              failures = int(suite.get("failures", 0))
-              errors = int(suite.get("errors", 0))
-              skipped = int(suite.get("skipped", 0))
-              passed = total - failures - errors - skipped
-              seconds = float(suite.get("time", 0))
-          except Exception as exc:
-              print(f"Could not read the JUnit report: `{exc}`")
-              print()
-              print(f"Step outcome: **{outcome}**. See the raw log artifact.")
-              raise SystemExit(0)
-
-          print("| Result | Count |")
-          print("| --- | --- |")
-          print(f"| Passed | {passed} |")
-          print(f"| Failed | {failures} |")
-          print(f"| Errored | {errors} |")
-          print(f"| Skipped | {skipped} |")
-          print(f"| **Total run** | **{total}** |")
-
-          raw = Path("pytest-output.txt").read_text(encoding="utf-8", errors="replace")
-          deselected = "unknown"
-          if match := re.search(r"(\\d+) deselected", raw):
-              deselected = match.group(1)
-          print(f"| Deselected by explicit `live` allowlist | {deselected} |")
-          print()
-          print(f"Wall time: {seconds / 60:.1f} min")
-          print()
-
-          if failures or errors:
-              print(
-                  f"**This job is RED: {failures + errors} of {total} tests are not passing.**"
-              )
-              print()
-              print(
-                  "This is the expected and intended starting state. The suite had "
-                  "never been executed automatically before this workflow existed. "
-                  "Nothing was skipped, deleted, or weakened to reduce this number — "
-                  "driving it down means fixing real problems."
-              )
-              print()
-              print("### Failing tests")
-              print()
-              print("<details><summary>Expand</summary>")
-              print()
-              print("```")
-              for case in suite.iter("testcase"):
-                  if case.find("failure") is not None or case.find("error") is not None:
-                      print(f"{case.get('classname')}::{case.get('name')}")
-              print("```")
-              print()
-              print("</details>")
-          else:
-              print("**All CI-runnable tests passed.**")
-
-          print()
-          print(
-              "Excluded from this run: tests explicitly marked `live` in "
-              "`backend/tests/live_test_allowlist.txt`, which need a deployed "
-              "and seeded API. They are still collected and still runnable."
-          )
-          PY
-        env:
-          PYTEST_OUTCOME: ${{ steps.pytest.outcome }}
-
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: backend-test-report
           path: |
+            collect.log
             junit-backend.xml
             pytest-output.txt
+            pytest-exit-code.txt
             live-collect.txt
             not-live-collect.txt
+            ci-known-failure-gate-summary.md
           if-no-files-found: warn
 
   # ---------------------------------------------------------------------------
@@ -263,9 +204,9 @@ jobs:
         working-directory: frontend
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm

@@ -45,3 +45,22 @@ the PR body and in the uploaded Actions artifacts.
 
 Artifact-related tests were inventoried, not remediated. No failing tests were
 deleted, weakened, blanket-skipped, or blanket-`xfail`ed.
+
+## Reviewed Known-Failure Baseline
+
+`ci_known_failure_baseline.json` records the reviewed GitHub Actions baseline
+from commit `614768d0afe01591c4f044fe6840e5317e6cda56`.
+
+| Result | Count |
+| --- | ---: |
+| Passed | 919 |
+| Failed | 158 |
+| Errored | 3 |
+| Skipped | 0 |
+| Selected | 1080 |
+| Deselected live | 1206 |
+
+The backend CI job is now a known-failure non-regression gate. It may pass with
+the reviewed failures still present, but it fails on any new failing/erroring
+node ID, collection decrease, non-live inventory decrease, live inventory
+expansion without review, JUnit parsing failure, or malformed baseline.

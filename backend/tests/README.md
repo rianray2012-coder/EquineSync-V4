@@ -7,10 +7,46 @@ different governance meanings.
 | --- | --- | --- |
 | Backend suite is collectable | Required-check candidate | Every intended backend test module imports and collection completes. |
 | Frontend build | Required-check candidate | The frontend dependency install and bundle build complete. |
-| Backend tests measurement (not live) | Measurement and remediation job | Runs the CI-runnable backend set and reports the real red/green numbers. It is not an enforceable merge gate while red. |
+| Backend known-failure non-regression gate | Required-check candidate | Runs the full non-live backend set, compares current failures/errors to the reviewed baseline, and fails on new regressions or inventory-control failures. |
 
-No job uses `continue-on-error`, blanket skips, blanket `xfail`, weakened
-assertions, or fake-success wrappers to hide failures.
+No job uses blanket skips, blanket `xfail`, weakened assertions, or
+fake-success wrappers to hide failures. The backend gate captures the raw pytest
+exit code and JUnit output, then lets the reviewed known-failure ratchet decide
+the job result.
+
+## Known-Failure Ratchet
+
+`backend/tests/ci_known_failure_baseline.json` records the reviewed PR #3
+baseline from commit `614768d0afe01591c4f044fe6840e5317e6cda56`:
+
+| Metric | Baseline |
+| --- | ---: |
+| Total collected | 2286 |
+| Selected non-live | 1080 |
+| Deselected live | 1206 |
+| Passed | 919 |
+| Failed | 158 |
+| Errored | 3 |
+| Skipped | 0 |
+
+The full non-live set still runs:
+
+```bash
+python -m pytest backend/tests -m "not live" --junitxml=junit-backend.xml -rf -q
+```
+
+The gate may pass while known failures remain only when every current failure or
+error is already listed in the reviewed baseline and the collection/inventory
+controls still pass. It fails if a new failure or error appears, collection
+decreases, selected non-live inventory decreases, the live inventory expands
+without baseline review, parsing fails, or the baseline is missing/malformed.
+
+New failures must not be added automatically. Any baseline expansion requires a
+direct baseline-file change, written rationale, identification of the newly
+accepted failing tests, separate review, and no claim that the underlying
+behavior is accepted for release. When a known failure is fixed, remove that
+node from the baseline in the same PR or in a tightly scoped baseline-reduction
+follow-up.
 
 ## Marker Methodology
 
@@ -49,6 +85,15 @@ python -m pytest backend/tests --collect-only -q
 
 # CI-runnable backend measurement set. Requires MongoDB.
 python -m pytest backend/tests -m "not live" --junitxml=junit-backend.xml -rf -q
+
+# Compare a completed non-live run against the reviewed baseline.
+python backend/tests/ci_known_failure_gate.py \
+  --baseline backend/tests/ci_known_failure_baseline.json \
+  --junit junit-backend.xml \
+  --collect-log collect.log \
+  --live-collect-log live-collect.txt \
+  --not-live-collect-log not-live-collect.txt \
+  --pytest-exit-code-file pytest-exit-code.txt
 
 # Explicit live inventory. Requires a running, seeded API if executed.
 python -m pytest backend/tests -m live --collect-only -q
