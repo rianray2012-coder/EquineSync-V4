@@ -18,11 +18,10 @@
 
 ## Post-Merge Receipt Commit
 
-- Post-merge repository-integration receipt commit: `PENDING_POST_MERGE_RECEIPT_COMMIT`
-- Post-merge receipt commit remote verified: `NO`
-- Resulting remote default-branch head recorded for this receipt: `PENDING_POST_MERGE_RECEIPT_COMMIT`
+- Post-merge repository-integration receipt commit: `3c9ffbeee874ef22f95f05b682a5340e0da79ecf`
+- Post-merge receipt commit remote verified: `YES`
+- Resulting remote default-branch head recorded for this receipt: `0b2ac3ac1a38611af2a66ba6597fe7ac71a85cfd`
 
-When `receipt_commit` is `PENDING_POST_MERGE_RECEIPT_COMMIT`, this file has been staged before the first receipt commit. A later metadata-only update records the first receipt commit after it exists.
 
 ## Files and Paths Verified
 
