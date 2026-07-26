@@ -1,0 +1,37 @@
+requirement_id,component,requirement,source_ids,decision_ids,section,priority,status,unresolved_id
+RAP-REQ-001,A,"Preserve identity; account; actor; principal; relationship; representation; delegation; authorization; permission; restriction; claim; agreement; provider; context; payment; and portal distinctions","RAP-SRC-001;RAP-SRC-002;RAP-SRC-003;RAP-SRC-004",NONE,6,P0,DOCUMENTED,NONE
+RAP-REQ-002,A,"Require canonical sourced and versioned relationship truth","RAP-SRC-002;RAP-SRC-005",NONE,11,P0,DOCUMENTED,RAP-UNR-001
+RAP-REQ-003,A,"Attribute every authority-changing action to accountable actors","RAP-SRC-002;RAP-SRC-011",NONE,7,P0,DOCUMENTED,NONE
+RAP-REQ-004,A,"Require evidence-backed representation for acting on behalf of a principal","RAP-SRC-002;RAP-SRC-004",NONE,7,P0,DOCUMENTED,RAP-UNR-006
+RAP-REQ-005,A,"Apply explicit guardian and minor-related authority and safeguarding boundaries","RAP-SRC-004;RAP-SRC-011",NONE,21,P0,DOCUMENTED,RAP-UNR-006
+RAP-REQ-006,A,"Define delegation proposal acceptance activation narrowing expiry revocation dispute and supersession","RAP-SRC-002;RAP-SRC-004",NONE,13,P0,DOCUMENTED,NONE
+RAP-REQ-007,A,"Prevent delegation from exceeding or outliving source authority","RAP-SRC-002;RAP-SRC-003",NONE,10,P0,DOCUMENTED,NONE
+RAP-REQ-008,B,"Separate authorization inputs from final permission evaluation","RAP-SRC-003;RAP-SRC-007",NONE,14,P0,DOCUMENTED,RAP-UNR-001
+RAP-REQ-009,B,"Require typed source version and freshness inputs","RAP-SRC-003;RAP-SRC-007",NONE,14,P0,DOCUMENTED,NONE
+RAP-REQ-010,C,"Deny by default on absent stale disputed revoked expired wrong-tenant or incompatible inputs","RAP-SRC-003;RAP-SRC-011",NONE,10,P0,DOCUMENTED,NONE
+RAP-REQ-011,C,"Give restriction revocation and protective narrowing precedence","RAP-SRC-003;RAP-SRC-011",NONE,23,P0,DOCUMENTED,NONE
+RAP-REQ-012,C,"Return only a minimum action resource field purpose tenant time and state projection","RAP-SRC-003",NONE,14,P0,DOCUMENTED,NONE
+RAP-REQ-013,C,"Propagate revocation using current watermarks and source versions","RAP-SRC-003;RAP-SRC-011",NONE,16,P0,DOCUMENTED,RAP-UNR-004
+RAP-REQ-014,ABC,"Preserve immutable decision and correction lineage without destructive history","RAP-SRC-001;RAP-SRC-011",NONE,12,P0,DOCUMENTED,NONE
+RAP-REQ-015,ABC,"Treat offline actions as non-authoritative proposals requiring current reauthorization","RAP-SRC-003;RAP-SRC-011",NONE,20,P0,DOCUMENTED,RAP-UNR-004
+RAP-REQ-016,ABC,"Resolve conflicts fail closed without expanding authority","RAP-SRC-003;RAP-SRC-011",NONE,23,P0,DOCUMENTED,NONE
+RAP-REQ-017,A,"Assign provider relationship representation delegation and authority to Item 03","RAP-SRC-008;RAP-SRC-009",ES-PIA-GFD-003,5,P0,DOCUMENTED,NONE
+RAP-REQ-018,ABC,"Prevent provider connection profile API appointment payment and portal state from creating authority","RAP-SRC-008;RAP-SRC-009",ES-PIA-GFD-003,10,P0,DOCUMENTED,NONE
+RAP-REQ-019,ABC,"Export bounded provider projections to Items 07 and 10 while Item 09 retains financial truth","RAP-SRC-008;RAP-SRC-009",ES-PIA-GFD-003,36,P0,DOCUMENTED,RAP-UNR-003
+RAP-REQ-020,ABC,"Define context-authority contract with Item 02","RAP-SRC-003;RAP-SRC-012",NONE,36,P1,DOCUMENTED,RAP-UNR-003
+RAP-REQ-021,ABC,"Define custody ownership representation contract with Item 04","RAP-SRC-002;RAP-SRC-012",NONE,36,P1,DOCUMENTED,RAP-UNR-003
+RAP-REQ-022,ABC,"Treat Item 06 scheduling assignment and time as context not authority","RAP-SRC-003;RAP-SRC-012",NONE,36,P0,DOCUMENTED,RAP-UNR-003
+RAP-REQ-023,ABC,"Define care-action authority projection for Item 07","RAP-SRC-003;RAP-SRC-012",ES-PIA-GFD-003,36,P0,DOCUMENTED,RAP-UNR-003
+RAP-REQ-024,ABC,"Define guardian and participation authority projection for Item 08","RAP-SRC-004;RAP-SRC-011;RAP-SRC-012",NONE,36,P0,DOCUMENTED,RAP-UNR-003
+RAP-REQ-025,ABC,"Prevent Item 09 payment or obligation status from creating authority","RAP-SRC-003;RAP-SRC-008",ES-PIA-GFD-003,36,P0,DOCUMENTED,RAP-UNR-003
+RAP-REQ-026,ABC,"Define permission-filtered participation and portal projection for Item 10","RAP-SRC-003;RAP-SRC-008",ES-PIA-GFD-003,36,P0,DOCUMENTED,RAP-UNR-003
+RAP-REQ-027,ABC,"Record complete evidence for every authority-changing action and decision","RAP-SRC-001;RAP-SRC-011",NONE,33,P0,DOCUMENTED,NONE
+RAP-REQ-028,ABC,"Apply privacy minimization safeguarding claims dispute records retention and correction controls","RAP-SRC-011",NONE,21,P0,DOCUMENTED,RAP-UNR-006
+RAP-REQ-029,ABC,"Define typed API event and job boundaries with idempotency and evidence","RAP-SRC-003;RAP-SRC-007;RAP-SRC-011",NONE,16,P1,DOCUMENTED,NONE
+RAP-REQ-030,ABC,"Prohibit AI and automation from creating or inferring authority truth","RAP-SRC-003;RAP-SRC-011",NONE,22,P0,DOCUMENTED,NONE
+RAP-REQ-031,ABC,"Require safe visible denial conflict queue and reconciliation states","RAP-SRC-003;RAP-SRC-011",NONE,20,P1,DOCUMENTED,NONE
+RAP-REQ-032,ABC,"Keep implementation migration deployment activation production and enrollment authority false","RAP-SRC-001;RAP-SRC-008",NONE,42,P0,DOCUMENTED,RAP-UNR-007
+RAP-REQ-033,ABC,"Preserve V0.1 and all prior evidence byte-for-byte","RAP-SRC-010",NONE,39,P0,DOCUMENTED,NONE
+RAP-REQ-034,ABC,"Keep predecessor-qualified authority explicit and do not invent answers","RAP-SRC-005;RAP-SRC-006;RAP-SRC-007",NONE,4,P0,DOCUMENTED,RAP-UNR-001
+RAP-REQ-035,ABC,"Require compliant fresh review while making no independent-review claim","RAP-SRC-001;RAP-SRC-008",ES-PIA-GFD-007,42,P0,DOCUMENTED,RAP-UNR-002
+RAP-REQ-036,ABC,"Maintain deterministic manifest checksum identifier and cross-register integrity","RAP-SRC-001",NONE,33,P1,DOCUMENTED,NONE

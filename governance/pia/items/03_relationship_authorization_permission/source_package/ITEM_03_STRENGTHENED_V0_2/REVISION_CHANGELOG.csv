@@ -1,0 +1,13 @@
+change_id,from_version,to_version,change,source_ids,decision_ids,requirement_ids,authority_effect
+RAP-CHG-001,0.1,0.2,"Created separate strengthened documentary successor; preserved V0.1 unchanged","RAP-SRC-001;RAP-SRC-010",NONE,"RAP-REQ-033;RAP-REQ-036","No implementation or supersession authority"
+RAP-CHG-002,0.1,0.2,"Incorporated GFD-003 provider ownership allocation","RAP-SRC-008;RAP-SRC-009",ES-PIA-GFD-003,"RAP-REQ-017;RAP-REQ-019;RAP-REQ-023;RAP-REQ-025;RAP-REQ-026","Documentary design only"
+RAP-CHG-003,0.1,0.2,"Made profile API appointment payment schedule and portal non-authority invariants explicit","RAP-SRC-003;RAP-SRC-008",ES-PIA-GFD-003,"RAP-REQ-018;RAP-REQ-022;RAP-REQ-025;RAP-REQ-026","No provider or operational activation"
+RAP-CHG-004,0.1,0.2,"Added relationship type and representation/delegation lifecycle registers","RAP-SRC-002;RAP-SRC-004",NONE,"RAP-REQ-002;RAP-REQ-004;RAP-REQ-005;RAP-REQ-006;RAP-REQ-007","Documentary clarification"
+RAP-CHG-005,0.1,0.2,"Added authorization input and permission evaluation contracts","RAP-SRC-003;RAP-SRC-007",NONE,"RAP-REQ-008;RAP-REQ-009;RAP-REQ-010;RAP-REQ-012","Documentary clarification"
+RAP-CHG-006,0.1,0.2,"Added restriction revocation state and permission matrices","RAP-SRC-002;RAP-SRC-003;RAP-SRC-011",NONE,"RAP-REQ-011;RAP-REQ-013;RAP-REQ-014;RAP-REQ-016","Documentary clarification"
+RAP-CHG-007,0.1,0.2,"Added API event job offline and synchronization contracts","RAP-SRC-003;RAP-SRC-007;RAP-SRC-011",NONE,"RAP-REQ-015;RAP-REQ-029;RAP-REQ-031","No runtime or integration activation"
+RAP-CHG-008,0.1,0.2,"Added audit evidence and privacy safeguarding records claims crosswalks","RAP-SRC-011",NONE,"RAP-REQ-027;RAP-REQ-028","Documentary evidence requirements only"
+RAP-CHG-009,0.1,0.2,"Added adversarial and golden paths acceptance and test matrices","RAP-SRC-001;RAP-SRC-003",NONE,"RAP-REQ-010;RAP-REQ-036","Design tests not executed"
+RAP-CHG-010,0.1,0.2,"Reconciled V0.1 open issues into explicit unresolved and documentary finding dispositions","RAP-SRC-010",NONE,"RAP-REQ-034;RAP-REQ-035","No formal reviewer finding claim"
+RAP-CHG-011,0.1,0.2,"Added Founder decision traceability and retained GFD-007 runtime-not-provisioned boundary","RAP-SRC-008;RAP-SRC-009",ES-PIA-GFD-007,RAP-REQ-035,"Policy record only; no runtime launch"
+RAP-CHG-012,0.1,0.2,"Added deterministic manifest checksum and validation controls","RAP-SRC-001",NONE,RAP-REQ-036,"Mechanical validation only"

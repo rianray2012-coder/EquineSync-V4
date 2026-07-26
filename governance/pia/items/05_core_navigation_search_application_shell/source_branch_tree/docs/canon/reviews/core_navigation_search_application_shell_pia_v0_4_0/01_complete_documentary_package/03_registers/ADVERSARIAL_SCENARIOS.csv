@@ -1,0 +1,31 @@
+id,scenario,expected_control
+SHELL-ADV-001,Direct URL to hidden route,Deny without confirming protected resource details.
+SHELL-ADV-002,Stale menu after role revocation,Refresh projection and deny destination.
+SHELL-ADV-003,Context switch with unsaved protected draft,Prevent cross-context carryover and offer safe resolution.
+SHELL-ADV-004,Deep link contains protected name,Reject or neutralize descriptor and reauthorize.
+SHELL-ADV-005,Search prefix enumerates minors,"Suppress, throttle, and alert."
+SHELL-ADV-006,Search result leaks precise horse location,Exclude field and investigate index mapping.
+SHELL-ADV-007,Cross-tenant search by shared email,Return no identifiable result by default.
+SHELL-ADV-008,Autocomplete reveals inaccessible owner,Suppress before presentation.
+SHELL-ADV-009,Revoked horse remains in recent items,Invalidate pointer and display metadata.
+SHELL-ADV-010,Saved view stores result rows,Reject and strip protected data.
+SHELL-ADV-011,Badge exposes medication error,Use generic authorized indicator or suppress.
+SHELL-ADV-012,Command visible before permission refresh,Reauthorize and deny execution.
+SHELL-ADV-013,Double-click Quick Create effect,Idempotency prevents duplicate record.
+SHELL-ADV-014,High-risk command without step-up,Hold or deny.
+SHELL-ADV-015,Offline action replays in wrong facility,Reject and reconcile.
+SHELL-ADV-016,Offline cache used after session revocation,Mask and require reconnection/reauthentication.
+SHELL-ADV-017,Support operator browses outside scope,Terminate and alert.
+SHELL-ADV-018,Support mode has no visible banner,Block session.
+SHELL-ADV-019,Telemetry captures full search query,Redact and correct instrumentation.
+SHELL-ADV-020,Error timing confirms protected record,Normalize disclosure-safe response.
+SHELL-ADV-021,Raw URL creates breadcrumb identifier leak,Use registered safe labels only.
+SHELL-ADV-022,Mobile navigation overflows,Fall back to bounded tabs plus More.
+SHELL-ADV-023,Focus trapped in command palette,Restore accessible focus path.
+SHELL-ADV-024,Reduced-motion preference ignored,Disable nonessential motion.
+SHELL-ADV-025,Stead appears during injury report,Suppress and block release.
+SHELL-ADV-026,Tenant admin renames Horse to Client,Reject protected taxonomy change.
+SHELL-ADV-027,Feature flag grants route access,Ignore as authority and deny.
+SHELL-ADV-028,Index correction job partially fails,"Expose stale state, retry idempotently, and alert."
+SHELL-ADV-029,Route removed but old link remains active,Quarantine and complete decommission.
+SHELL-ADV-030,AI search enabled without separate approval,Keep OFF and record unauthorized configuration.

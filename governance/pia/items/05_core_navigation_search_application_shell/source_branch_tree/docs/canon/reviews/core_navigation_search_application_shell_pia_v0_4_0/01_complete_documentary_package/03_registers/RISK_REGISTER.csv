@@ -1,0 +1,16 @@
+id,risk,severity,effect
+SHELL-RISK-001,Exact current status and immutable accession of several governance sources remain unfrozen.,P1,Blocks full governance-traceability YES.
+SHELL-RISK-002,Twelve product decisions are proposed but not yet Founder-approved for the complete shell.,P1,Blocks whole-PIA Founder design approval.
+SHELL-RISK-003,Current repository route architecture has not been reconciled to this candidate.,P1,Blocks implementation authorization and as-built claims.
+SHELL-RISK-004,Search source is currently identified as a first draft in available evidence.,P1,Requires lifecycle verification or approved state-qualified treatment.
+SHELL-RISK-005,"Support, monitoring, backup, restore, rollback, and operational owners are unproven.",P1,Questions 4 and 5 remain NO.
+SHELL-RISK-006,Exact approved visual component bytes are not duplicated into this runtime package.,P1,Controlled assembly must obtain and verify exact source bytes.
+SHELL-RISK-007,Mobile bottom-navigation item count and exact default destinations require Founder confirmation.,P2,May change presentation but not authority rules.
+SHELL-RISK-008,Command palette action scope may expand convenience into unsafe execution.,P2,Keep actions separately gated and deny by default.
+SHELL-RISK-009,Badge and recent-item summaries may leak sensitive context.,P2,Minimum-necessary projection and continuous tests required.
+SHELL-RISK-010,Offline state may be mistaken for current authority.,P2,Persistent freshness and reconnect gates required.
+SHELL-RISK-011,Search ranking can create perceived endorsement or obscure urgent work.,P2,Neutral explainable ranking and domain urgency rules required.
+SHELL-RISK-012,Tenant customization may fragment product language.,P2,Allowlist and protected labels required.
+SHELL-RISK-013,Support mode can become hidden impersonation.,P2,"Visible banner, purpose, time limit, and audit required."
+SHELL-RISK-014,Decorative brand behavior can trivialize serious workflows.,P2,Fail-closed suppression required.
+SHELL-RISK-015,Legacy links and cached assets may survive decommission.,P2,Migration inventory and cache invalidation required.

@@ -1,0 +1,396 @@
+{
+  "evidence_items": [
+    {
+      "evidence_id": "FAC-EVID-SOURCE-001",
+      "kind": "SOURCE",
+      "locator": "SOURCE_REGISTER.md",
+      "proves": "Source identities and source gaps"
+    },
+    {
+      "evidence_id": "FAC-EVID-DRAFT-001",
+      "kind": "FIRST_DRAFT",
+      "locator": "predecessor_evidence/v1.0.0/review/first_pass/FIRST_DRAFT_HASH_MANIFEST.csv",
+      "proves": "First-draft artifact hashes"
+    },
+    {
+      "evidence_id": "FAC-EVID-REVIEW-001",
+      "kind": "REVIEW",
+      "locator": "predecessor_evidence/v1.0.0/DOCUMENT_REVIEW_FINDINGS_REGISTER.csv",
+      "proves": "First-pass findings and disposition"
+    },
+    {
+      "evidence_id": "FAC-EVID-CHALLENGE-001",
+      "kind": "CHALLENGE",
+      "locator": "predecessor_evidence/v1.0.0/review/first_pass/",
+      "proves": "Six isolated challenge pass records"
+    },
+    {
+      "evidence_id": "FAC-EVID-REVISION-001",
+      "kind": "REVISION",
+      "locator": "predecessor_evidence/v1.0.0/REVISION_TRACEABILITY_REGISTER.csv",
+      "proves": "Finding-to-change mapping"
+    },
+    {
+      "evidence_id": "FAC-EVID-SECOND-001",
+      "kind": "SECOND_REVIEW",
+      "locator": "predecessor_evidence/v1.0.0/SECOND_PASS_REVIEW_SUMMARY.md",
+      "proves": "Second review and residual findings"
+    },
+    {
+      "evidence_id": "FAC-EVID-VALIDATION-001",
+      "kind": "VALIDATION",
+      "locator": "predecessor_evidence/v1.0.0/VALIDATION_REPORT.json",
+      "proves": "Documentary validation results"
+    },
+    {
+      "evidence_id": "FAC-EVID-ASBUILT-001",
+      "kind": "STATIC_AS_BUILT",
+      "locator": "AS_BUILT_RECONCILIATION.md",
+      "proves": "Legacy implementation comparison only"
+    },
+    {
+      "evidence_id": "FAC-EVID-001",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-001",
+      "proves": "FAC-REQ-001",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-002",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-002",
+      "proves": "FAC-REQ-002",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-003",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-003",
+      "proves": "FAC-REQ-003",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-004",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-004",
+      "proves": "FAC-REQ-004",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-005",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-005",
+      "proves": "FAC-REQ-005",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-006",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-006",
+      "proves": "FAC-REQ-006",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-007",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-007",
+      "proves": "FAC-REQ-007",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-008",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-008",
+      "proves": "FAC-REQ-008",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-009",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-009",
+      "proves": "FAC-REQ-009",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-010",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-010",
+      "proves": "FAC-REQ-010",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-011",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-011",
+      "proves": "FAC-REQ-011",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-012",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-012",
+      "proves": "FAC-REQ-012",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-013",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-013",
+      "proves": "FAC-REQ-013",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-014",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-014",
+      "proves": "FAC-REQ-014",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-015",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-015",
+      "proves": "FAC-REQ-015",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-016",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-016",
+      "proves": "FAC-REQ-016",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-017",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-017",
+      "proves": "FAC-REQ-017",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-018",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-018",
+      "proves": "FAC-REQ-018",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-019",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-019",
+      "proves": "FAC-REQ-019",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-020",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-020",
+      "proves": "FAC-REQ-020",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-021",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-021",
+      "proves": "FAC-REQ-021",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-022",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-022",
+      "proves": "FAC-REQ-022",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-023",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-023",
+      "proves": "FAC-REQ-023",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-024",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-024",
+      "proves": "FAC-REQ-024",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-025",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-025",
+      "proves": "FAC-REQ-025",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-026",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-026",
+      "proves": "FAC-REQ-026",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-027",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-027",
+      "proves": "FAC-REQ-027",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-028",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-028",
+      "proves": "FAC-REQ-028",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-029",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-029",
+      "proves": "FAC-REQ-029",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-030",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-030",
+      "proves": "FAC-REQ-030",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-031",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-031",
+      "proves": "FAC-REQ-031",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-032",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-032",
+      "proves": "FAC-REQ-032",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-033",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-033",
+      "proves": "FAC-REQ-033",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-034",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-034",
+      "proves": "FAC-REQ-034",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-035",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-035",
+      "proves": "FAC-REQ-035",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-036",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-036",
+      "proves": "FAC-REQ-036",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "evidence_id": "FAC-EVID-FOUNDER-001",
+      "kind": "FOUNDER_DIRECTIVE",
+      "locator": "source_evidence/FOUNDER_DECISION_INCORPORATION_DIRECTIVE.md",
+      "proves": "Approval of FAC-FD-001 through FAC-FD-018 and FAC-FD-017 refinement",
+      "sha256": "8158c9f2f00b2702f7057837289dc8395ca28a2a3f9cd7c34d00d8861706944f"
+    },
+    {
+      "evidence_id": "FAC-EVID-INCORP-001",
+      "kind": "INCORPORATION",
+      "locator": "FOUNDER_DECISION_INCORPORATION_REGISTER.csv",
+      "proves": "Decision-to-artifact incorporation"
+    },
+    {
+      "evidence_id": "FAC-EVID-ONBOARD-001",
+      "kind": "REFINEMENT",
+      "locator": "FAC_FD_017_ADAPTIVE_ONBOARDING_REFINEMENT.md",
+      "proves": "Controlling adaptive-onboarding interpretation"
+    },
+    {
+      "evidence_id": "FAC-EVID-STARTUP-001",
+      "kind": "INPUT_VERIFICATION",
+      "locator": "STARTUP_VERIFICATION_EVIDENCE.json",
+      "proves": "Hash, commit, branch and predecessor checks"
+    },
+    {
+      "evidence_id": "FAC-EVID-FSR1-001",
+      "kind": "FIRST_FRESH_REVIEW_REPORT",
+      "locator": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_REPORT.md",
+      "proves": "Independent failed review methodology and before-remediation disposition"
+    },
+    {
+      "evidence_id": "FAC-EVID-FSR1-002",
+      "kind": "FIRST_FRESH_REVIEW_FINDINGS",
+      "locator": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_FINDINGS.csv",
+      "proves": "Four P1 and one P2 findings before remediation"
+    },
+    {
+      "evidence_id": "FAC-EVID-FSR1-003",
+      "kind": "FIRST_FRESH_REVIEW_EVIDENCE",
+      "locator": "review_evidence/first_fresh_review/FRESH_SEGREGATED_REVIEW_EVIDENCE_INDEX.csv",
+      "proves": "Independent evidence for all first-review checklist areas"
+    },
+    {
+      "evidence_id": "FAC-EVID-REMEDIATION-001",
+      "kind": "REMEDIATION",
+      "locator": "FIRST_FRESH_REVIEW_REMEDIATION_REGISTER.csv",
+      "proves": "Finding-to-change and verification mapping pending fresh closure"
+    },
+    {
+      "evidence_id": "FAC-EVID-037",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-037",
+      "proves": "FAC-REQ-037",
+      "status": "DOCUMENTARY_ONLY_IMPLEMENTATION_NOT_AUTHORIZED"
+    },
+    {
+      "evidence_id": "FAC-EVID-038",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-038",
+      "proves": "FAC-REQ-038",
+      "status": "DOCUMENTARY_ONLY_IMPLEMENTATION_NOT_AUTHORIZED"
+    },
+    {
+      "evidence_id": "FAC-EVID-039",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-039",
+      "proves": "FAC-REQ-039",
+      "status": "DOCUMENTARY_ONLY_IMPLEMENTATION_NOT_AUTHORIZED"
+    },
+    {
+      "evidence_id": "FAC-EVID-040",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-040",
+      "proves": "FAC-REQ-040",
+      "status": "DOCUMENTARY_ONLY_IMPLEMENTATION_NOT_AUTHORIZED"
+    },
+    {
+      "evidence_id": "FAC-EVID-041",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-041",
+      "proves": "FAC-REQ-041",
+      "status": "DOCUMENTARY_ONLY_IMPLEMENTATION_NOT_AUTHORIZED"
+    },
+    {
+      "evidence_id": "FAC-EVID-042",
+      "kind": "PLANNED_REQUIREMENT_PROOF",
+      "locator": "TEST_MATRIX.csv#FAC-TEST-042",
+      "proves": "FAC-REQ-042",
+      "status": "DOCUMENTARY_ONLY_IMPLEMENTATION_NOT_AUTHORIZED"
+    }
+  ],
+  "pia_id": "ES-PIA-FACILITY-TENANT-ORGANIZATION-V1.1.0"
+}

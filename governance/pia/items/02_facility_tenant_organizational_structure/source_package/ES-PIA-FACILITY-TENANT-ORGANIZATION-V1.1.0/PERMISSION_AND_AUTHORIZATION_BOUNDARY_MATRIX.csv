@@ -1,0 +1,20 @@
+permission_rule_id,action,candidate_actor,scope,required_evidence,boundary
+FAC-PERM-001,tenant:read,Allowed tenant member/support grant,tenant_id + purpose,active membership and field policy,Default deny; suspension override
+FAC-PERM-002,tenant:write,Authorized tenant steward,tenant_id,action-specific authorization,Role/admin label insufficient
+FAC-PERM-003,tenant:suspend,Governance actor,tenant_id,"reason, approval and audit",No self-escalation
+FAC-PERM-004,facility:create,Authorized tenant actor,tenant_id,duplicate check and source provenance,Creates no membership/authority
+FAC-PERM-005,facility:read,Authorized actor,tenant_id + facility_id + field,relationship/purpose/visibility,Non-enumerating deny
+FAC-PERM-006,facility:write,Authorized facility steward,tenant_id + facility_id + field,current version and authority,Material changes require change set
+FAC-PERM-007,facility:transfer,Authorized parties/reviewer,source/destination tenant + facility,separate migration authority,No cross-tenant record cascade
+FAC-PERM-008,facility:merge,Reconciliation reviewer,tenant + candidate facilities,evidence and second review,No automatic merge
+FAC-PERM-009,facility:close,Authorized facility actor,tenant + facility,impact review and effective time,No deletion cascade
+FAC-PERM-010,facility_area:write,Authorized facility actor,tenant + facility + area,valid parent and state,No cycle
+FAC-PERM-011,organization:create,Authorized tenant actor,tenant,identity provenance,No verified state by default
+FAC-PERM-012,organization:associate,Relationship-authorized actor,tenant + organization + facility,typed/effective association,Association grants no action authority
+FAC-PERM-013,organization:verify,Approved verification actor,organization,method/evidence/expiry,No authorization side effect
+FAC-PERM-014,context:switch,Active member,allowed tenant/facility/org tuple,membership and association revalidation,No silent switch
+FAC-PERM-015,facility:publish,Authorized publication actor,facility + projection,field-level public approval,Exact/sensitive topology excluded
+FAC-PERM-016,support:access,Approved support actor,ticket + tenant + resources,"reason, approval, expiry, audit",No standing blanket access
+FAC-PERM-017,topology:export,Authorized export actor,tenant + facility + fields,"purpose, recipient, expiry",No public or cross-tenant fallback
+FAC-PERM-018,onboarding:initialize,Authenticated new user,own onboarding plan and minimum isolation context,verified actor and explicit path selection,No Facility/Organization/Barn/Business or authority created implicitly
+FAC-PERM-019,onboarding:associate_context,Authorized actor,specific Tenant/Facility/Organization association,"identity, relationship, purpose and action-time authorization",No default/primary or onboarding-derived authority

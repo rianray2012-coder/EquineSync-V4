@@ -1,0 +1,19 @@
+id,capability,release_class
+SHELL-CAP-001,Authenticated shell and bootstrap,INITIAL_REQUIRED_CORE
+SHELL-CAP-002,Primary desktop/tablet/mobile navigation,INITIAL_REQUIRED_CORE
+SHELL-CAP-003,Active tenant/facility context indicator,INITIAL_REQUIRED_CORE
+SHELL-CAP-004,Controlled context switching,INITIAL_REQUIRED_CORE
+SHELL-CAP-005,"Route registry, breadcrumbs, Back, and deep links",INITIAL_REQUIRED_CORE
+SHELL-CAP-006,Global permission-filtered search,INITIAL_REQUIRED_CORE
+SHELL-CAP-007,Command palette,INITIAL_SEPARATELY_GATED
+SHELL-CAP-008,Quick Create launcher,INITIAL_REQUIRED_CORE
+SHELL-CAP-009,Notification center and badges,INITIAL_REQUIRED_CORE
+SHELL-CAP-010,"Account, help, support, and session controls",INITIAL_REQUIRED_CORE
+SHELL-CAP-011,"Recents, pins, favorites, and saved views",INITIAL_REQUIRED_CORE
+SHELL-CAP-012,Complete loading/empty/denied/error state system,INITIAL_REQUIRED_CORE
+SHELL-CAP-013,Responsive and accessible field-use behavior,INITIAL_REQUIRED_CORE
+SHELL-CAP-014,Offline shell and synchronization indicators,INITIAL_SEPARATELY_GATED
+SHELL-CAP-015,Shell administration and feature flags,INITIAL_OPERATIONAL_CONTROL
+SHELL-CAP-016,"Telemetry, audit, diagnostics, and support tools",INITIAL_OPERATIONAL_CONTROL
+SHELL-CAP-017,Public and pre-authentication shell,INITIAL_REQUIRED_CORE
+SHELL-CAP-018,Semantic or AI-assisted retrieval,LATER_ENHANCEMENT

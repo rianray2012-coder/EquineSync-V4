@@ -1,0 +1,154 @@
+{
+  "package_id": "ES-PIA-TASK-CALENDAR-SCHEDULING-NOTIFICATION-V0.3.0-CANONICAL-CONFORMANCE-FRESH-STRUCTURED-REVIEW",
+  "generated_at": "2026-07-22T00:00:00+00:00",
+  "disposition": "ITEM_06_TCSN_PIA_CANONICAL_REMEDIATION_COMPLETE_FRESH_STRUCTURED_REVIEW_BLOCKED",
+  "fresh_structured_review_status": "BLOCKED_BY_RUNTIME_OR_CONTROL_LIMITATION",
+  "independent_review_claimed": false,
+  "files": [
+    {
+      "path": "ACCEPTANCE_CRITERIA.csv",
+      "sha256": "f8b3ea3bebe9079a63966560cf38077e454d5c323feb86919813717dfaa07e21",
+      "bytes": 9983
+    },
+    {
+      "path": "ADVERSARIAL_SCENARIOS.md",
+      "sha256": "f16ab9ae1bf97811883bbc6b8cce56f2803973fb0d67e9ae80403406368a2085",
+      "bytes": 32286
+    },
+    {
+      "path": "CANONICAL_HEADING_CONFORMANCE_MATRIX.csv",
+      "sha256": "f9f5ff2dd6471c4ac7437498083d4864e8a3e9658c01fd66ab3d45c28ec64c56",
+      "bytes": 11358
+    },
+    {
+      "path": "COMPLETION_RECEIPT.md",
+      "sha256": "d87ababc04b10945988192f373d3d9b5cd76b878ef5174ea5e1d325458267780",
+      "bytes": 990
+    },
+    {
+      "path": "DETERMINISTIC_VALIDATION_REPORT.json",
+      "sha256": "8788af9d6435a31c4479ec32ae19b28fdd40289f80f1ba0d288c189d1306c824",
+      "bytes": 1396
+    },
+    {
+      "path": "ES-PIA-TASK-CALENDAR-SCHEDULING-NOTIFICATION_V0_3_CANONICAL_CONFORMANCE_SUCCESSOR_DRAFT.md",
+      "sha256": "3da1e0fc8cd3dcec9bd786455dc3213c22f86d4db8078ed4e19fee1c95811da6",
+      "bytes": 115696
+    },
+    {
+      "path": "EVIDENCE_MANIFEST.json",
+      "sha256": "8a5c11fadb5096cac2f72928934f8c2ad70a2cb6c2f8a87d5798faa67df2e93c",
+      "bytes": 946
+    },
+    {
+      "path": "FIVE_QUESTION_RESPONSE_MATRIX.csv",
+      "sha256": "a3e2c9bf58081d59521bf4a1f1c392a44b39546b67ab6d296c13b54ff45e5a3e",
+      "bytes": 2511
+    },
+    {
+      "path": "FOUNDER_DECISION_BRIEF.md",
+      "sha256": "e66a9db0c4085aacd0422a051d8045f6fe9d939f26e9f28adfc3ff4fbeb9ea28",
+      "bytes": 791
+    },
+    {
+      "path": "FOUNDER_DECISION_REGISTER.csv",
+      "sha256": "ef800b5486a124037e6e9471931281e8e0e78378cf480fa1a5b8e985981eea10",
+      "bytes": 5581
+    },
+    {
+      "path": "GOLDEN_PATHS.md",
+      "sha256": "6ef0bffc41fd95919f04b414e9cb8de713fd6ff7e2f3bd17a4e2db85bf6491ce",
+      "bytes": 34020
+    },
+    {
+      "path": "PIA_PACKAGE_VALIDATOR.py",
+      "sha256": "55f22ec3ebcc8f333987a90d5a8ba937052657e054488f7e8378d7797ebeae15",
+      "bytes": 8281
+    },
+    {
+      "path": "PRESERVED_INPUT_CHECKSUM_RECORD.csv",
+      "sha256": "d977a341e9a7a10e4da998073d7d6630cda7b6547c229a92978b53b1203c94cd",
+      "bytes": 1310
+    },
+    {
+      "path": "README.md",
+      "sha256": "4bd8a67bfae11a5128748a33d147255bbb9acf3d2b4af4def41f86d189922d33",
+      "bytes": 778
+    },
+    {
+      "path": "REQUIREMENT_REGISTER.csv",
+      "sha256": "2ca00eb2e13e722e034e2f8eb97a7c52c91d951470109dc83e3146fc157ee99e",
+      "bytes": 47999
+    },
+    {
+      "path": "REVISED_TRACEABILITY_MATRIX.csv",
+      "sha256": "a4cbbc6072275372208387adf666a3405369d716e65d7635e4277f1b9bd1436d",
+      "bytes": 2725
+    },
+    {
+      "path": "RUNTIME_PERMISSION_RECORDS.csv",
+      "sha256": "ba692fbf8f3c0f729a79cd1d1ec1c2af92270fcff00c82757d1463c71686ce25",
+      "bytes": 504
+    },
+    {
+      "path": "SOURCE_INHERITANCE_REGISTER.md",
+      "sha256": "2b116bd840f749a436ce2e585d8146ea690f197cf91ac2dc3fb026fbbcb6266b",
+      "bytes": 97791
+    },
+    {
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "e5afa6e29876302975f5e3aa45e10bfad890a4d41b75a92fa608167e4adefabc",
+      "bytes": 7214
+    },
+    {
+      "path": "STATE_TRANSITION_MATRIX.md",
+      "sha256": "e496bc7851729cedbef88c012d6084b62c48c30a041311c3621420aac841a3da",
+      "bytes": 55374
+    },
+    {
+      "path": "STRUCTURED_REVIEW_FINDINGS_REGISTER.csv",
+      "sha256": "86135a1c02743700209e72e33badc844b5dfe90db10797889eb1866681611536",
+      "bytes": 890
+    },
+    {
+      "path": "STRUCTURED_REVIEW_PLAN.md",
+      "sha256": "db7ce9d8dce2d7afc74882717307a098d795667d53b6e9809debae7dfadb21a5",
+      "bytes": 533
+    },
+    {
+      "path": "STRUCTURED_REVIEW_REPORT.md",
+      "sha256": "037354a77a75cc4224ae290907f49c92e55ee7f5ff470d8d2bba0996233880a7",
+      "bytes": 718
+    },
+    {
+      "path": "TEST_MATRIX.csv",
+      "sha256": "690bf6a1827b759a107d2e3d3e628e41a93b993233031cc700b2d69f649e2515",
+      "bytes": 10873
+    },
+    {
+      "path": "VALIDATION_COMMAND_LOG.txt",
+      "sha256": "44e9e666eba003279b22107a66c9856205dab8be7207b164f40a7ae0ce878eba",
+      "bytes": 321
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "4658ae2c0aec13580b4a2beb2808b9365952e44a69ed9620e2296c0ca9a8eea7",
+      "bytes": 810
+    },
+    {
+      "path": "WHAT_THIS_REVIEW_DID_NOT_ESTABLISH.md",
+      "sha256": "d1d9426b654002fcc1b76be56f4545d15ee061f608ce8278fd84266d65605a4f",
+      "bytes": 458
+    },
+    {
+      "path": "WORKFLOW_REGISTER.md",
+      "sha256": "c3f967059b5bc3f61ed19cf346ab5e1040995b54951846d6d448475aeda3f62f",
+      "bytes": 84707
+    },
+    {
+      "path": "WORK_COMPLETENESS_LEDGER.csv",
+      "sha256": "1458793bba8060a5e2c664ee0c2dab8abaaa4ee54982a4ea9486447894887577",
+      "bytes": 379
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+id,workflow,contract
+SHELL-WF-001,Authenticate and bootstrap shell,"Resolve identity, session, memberships, context candidates, policy, permission projection, and shell version before protected render."
+SHELL-WF-002,Select initial landing,Apply an approved persona default only after permission filtering; otherwise use a neutral authorized landing.
+SHELL-WF-003,Switch context,"Confirm target, re-evaluate authority, clear incompatible artifacts, refresh all projections, and record an attributable event."
+SHELL-WF-004,Navigate registered route,"Reauthorize destination and produce deterministic loading, ready, denied, unavailable, or error state."
+SHELL-WF-005,Open deep link,"Authenticate, validate descriptor, establish or confirm context, reauthorize, and suppress protected details on denial."
+SHELL-WF-006,Use global search,"Pre-filter, retrieve, post-filter, rank, label source/freshness, and open through deep-link controls."
+SHELL-WF-007,Use command palette,"Display authorized commands, confirm or step up where required, execute idempotently, and preserve outcome evidence."
+SHELL-WF-008,Use Quick Create,"Validate active context and create authority, then open the domain-owned form."
+SHELL-WF-009,Review notifications,Show a minimum summary; mark read independently; reauthorize every linked action.
+SHELL-WF-010,"Use recents, pins, or saved views","Store private pointers/configuration, reauthorize every read, and suppress inaccessible items."
+SHELL-WF-011,Continue with degraded connectivity,Render safe cache with persistent freshness/offline status and restrict unapproved actions.
+SHELL-WF-012,Recover from expired session or revocation,"Mask protected content, reauthenticate, refresh authority, and prevent stale-content flash."
+SHELL-WF-013,Request help,Open contextual help without transmitting protected content by default.
+SHELL-WF-014,Enter support mode,"Verify operator, target, purpose, approval, scope, time limit, visible banner, and audit."
+SHELL-WF-015,Administer shell configuration,"Validate allowlisted labels/order/defaults, publish a version, and retain rollback."
+SHELL-WF-016,"Handle not-found, denied, or failed route",Use distinct internal states and disclosure-safe recovery.
+SHELL-WF-017,Use pre-authentication shell,"Show only sign-in, invitation, recovery, legal, and approved public information."
+SHELL-WF-018,Propagate correction or revocation,"Invalidate indexes, suggestions, recents, pins, badges, and caches within defined bounds."
+SHELL-WF-019,Release route/configuration change,"Validate registry, migration, accessibility, security, search, stop conditions, and rollback."
+SHELL-WF-020,Decommission route or capability,"Migrate lawful links/preferences, remove active exposure, and retain history/evidence."

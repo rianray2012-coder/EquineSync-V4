@@ -1,0 +1,28 @@
+{
+  "candidate_zip": {
+    "actual_sha256": "503721552da36b416ebb991893c2da2224961ba7f22bcdb76e5abd9b075baf48",
+    "checksum_entries_passed": 47,
+    "expected_sha256": "503721552da36b416ebb991893c2da2224961ba7f22bcdb76e5abd9b075baf48",
+    "repository_byte_diff_count": 0,
+    "resolved_locator": "outputs/EquineSync_Facility_Tenant_Organization_PIA_V1_0_0_Candidate.zip"
+  },
+  "date": "2026-07-21",
+  "directive_sha256": "8158c9f2f00b2702f7057837289dc8395ca28a2a3f9cd7c34d00d8861706944f",
+  "frozen_predecessor_modifications": 0,
+  "index_clean_before_change": true,
+  "new_branch": "codex/facility-pia-founder-decisions-v1",
+  "observed_later_candidate_branch_head": "a5cf78295ad43cde7f73e383b3d5e98a11000382",
+  "pinned_candidate_branch": "codex/facility-tenant-organizational-structure-pia-v1",
+  "pinned_candidate_commit": "0beee6137183eb4079e7346c8596f6bec552f2f2",
+  "pinned_parent_portfolio_commit": "b8f34aef390c5fec6f942a6253edf6acc9488c44",
+  "portfolio_zip": {
+    "actual_sha256": "5e8c3d3609827aa549f5597d17f6adb69798e67273394f3ed6208c7695d6dcb1",
+    "checksum_entries_passed": 19,
+    "expected_sha256": "5e8c3d3609827aa549f5597d17f6adb69798e67273394f3ed6208c7695d6dcb1",
+    "resolved_locator": "outputs/EquineSync_PIA_Portfolio_Realignment_V1_0_0_Evidence.zip"
+  },
+  "repository_remote": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "source_modifications": 0,
+  "verification_result": "PASS",
+  "worktree_clean_before_change": true
+}

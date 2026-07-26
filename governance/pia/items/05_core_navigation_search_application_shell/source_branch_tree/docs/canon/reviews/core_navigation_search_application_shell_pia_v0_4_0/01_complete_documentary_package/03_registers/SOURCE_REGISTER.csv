@@ -1,0 +1,22 @@
+id,source,version,authority
+SHELL-SRC-001,EquineSync Global Governance V1.0,Locked baseline commit acb518ea5a160820e64681ff95a16b010fe1156c; tag equinesync-governance-v1.0-locked-2026-07-16,Controlling constitutional baseline
+SHELL-SRC-002,PIA Master Standard V1.1,SHA-256 c751a73331d89eb4dd5d5ff3b059c81bb1d99284102c6f39a008aeb84620bbbc,Controlling 43-section standard
+SHELL-SRC-003,Master Standard Founder Adoption Record,SHA-256 bd5d466494bf24d5ec6942b8f8c7b9248881d4d731a5861b020cef8a7d6ffcd8,Adoption evidence
+SHELL-SRC-004,Founder-Approved Core Navigation Visual-System V0.3.1,EquineSync_Core_Navigation_Visual_System_PIA_Section_V0_3_1_Founder_Approved.md; SHA-256 da3848cfc64e5d32fa2545e7cbd419413381cee8cd0cc16713d87b7e87b49828,Immutable incorporated component
+SHELL-SRC-005,Visual-System V0.3.2 Technical-Correction Validation,Outer archive SHA-256 9ad32bba0fdb235e7aa2d5010a1b04e93eae69cb63e9551bce7314f5ca09c7c9,Integrity evidence
+SHELL-SRC-006,Constitutional Authority Matrix V1.2,Exact path/version/hash required at source freeze,State-qualified authority routing
+SHELL-SRC-007,Constitutional Cross-Reference Index V1.2,Exact path/version/hash required at source freeze,State-qualified governance routing
+SHELL-SRC-008,"Master Search, Discovery, Ranking, and Retrieval Model V2.0 First Draft",Exact path/hash and lifecycle status required,Non-controlling design input unless later adopted
+SHELL-SRC-009,Master Permission and Access-Control Model,Exact current path/version/hash required,Permission authority
+SHELL-SRC-010,"Master Identity, Account, and Actor Model",Exact current path/version/hash required,Identity and session authority
+SHELL-SRC-011,Master Relationship Model,Exact current path/version/hash required,Relationship and delegation authority
+SHELL-SRC-012,Privacy and Data Protection governance family,Exact current status/path/hash required,Privacy boundary
+SHELL-SRC-013,Security and Trust governance family,Exact current status/path/hash required,Security boundary
+SHELL-SRC-014,Master Audit Event and Evidence Model,Exact current path/version/hash required,Audit authority
+SHELL-SRC-015,"Platform Operations, Reliability, and Release family",Exact current status/path/hash required,Operations and release boundary
+SHELL-SRC-016,"Platform Resilience, Backup, and Recovery Model",Exact current path/version/hash required,Resilience boundary
+SHELL-SRC-017,"Media, Files, and Digital Asset Governance Model",Exact current path/version/hash required,Asset authority
+SHELL-SRC-018,Safeguarding and Protected Participant family,Exact current path/version/hash required,Protected-participant boundary
+SHELL-SRC-019,"Communication, Notification, and Notice Model",Exact current path/version/hash required,Notification boundary
+SHELL-SRC-020,Configuration and Feature-Flag family,Exact current status/path/hash required,Configuration boundary
+SHELL-SRC-021,Current EquineSync repository architecture snapshot,Exact branch and commit required at implementation freeze,Non-controlling as-built reference

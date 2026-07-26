@@ -1,0 +1,35 @@
+{
+  "validation_id": "ES-PIA-TCSN-V0-3-DETVAL-2026-07-22-01",
+  "result": "PASS_WITH_FRESH_STRUCTURED_REVIEW_BLOCKED",
+  "package_id": "ES-PIA-TASK-CALENDAR-SCHEDULING-NOTIFICATION-V0.3.0-CANONICAL-CONFORMANCE-FRESH-STRUCTURED-REVIEW",
+  "successor_draft_sha256": "3da1e0fc8cd3dcec9bd786455dc3213c22f86d4db8078ed4e19fee1c95811da6",
+  "prior_v0_2_sha256": "5c69ee9258d8cd913f0673c93d36cfe264dba8297cd2cc7f4c90bfb82a33776d",
+  "prior_v0_1_sha256": "21bb4b49eb9daef75c2fa579deb56afdb254b422982aeb1742931077fc838ce7",
+  "prior_package_manifest_sha256": "f4a5ddfeb805d161c2f7d978f8a48581eac2e141dc616630eab35d29e2b2b909",
+  "prior_blocked_package_checksum_verification": "PASS",
+  "prior_blocked_package_checksum_failures": [],
+  "canonical_heading_exact_match": true,
+  "sections_1_43_contiguous": true,
+  "duplicate_canonical_headings": false,
+  "empty_required_sections": [],
+  "all_five_questions_present": true,
+  "authority_boundary_intact": true,
+  "unauthorized_true_authority_detected": false,
+  "founder_decisions_mapped": true,
+  "requirements_count": 120,
+  "acceptance_count": 55,
+  "tests_count": 65,
+  "fresh_structured_review_status": "BLOCKED_BY_RUNTIME_OR_CONTROL_LIMITATION",
+  "formal_roles_started": 0,
+  "independent_review_claimed": false,
+  "p0_count": 0,
+  "open_p1": [
+    "P1-TCSN-001"
+  ],
+  "closed_p1": [
+    "P1-TCSN-002"
+  ],
+  "retained_p2": [
+    "P2-TCSN-001"
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "package_id": "ES-PIA-HORSE-IDENTITY-LIFECYCLE-ITEM-04-FOUNDER-APPROVED-V0.3-DOCUMENTARY-PACKAGE",
+  "controlled_disposition": "ITEM_04_V0_3_FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY_PENDING_COMPLIANT_FRESH_REVIEW",
+  "status": "FOUNDER_APPROVED_DOCUMENTARY_DESIGN_ONLY_PENDING_COMPLIANT_FRESH_REVIEW",
+  "approved_artifact": "ES-PIA-HORSE-IDENTITY-LIFECYCLE_V0_3_FOUNDER_APPROVED_DESIGN_BASELINE.md",
+  "approved_artifact_sha256": "daae9b0ebe1551217a96c0cb640939752807d12c1e2241f0a936bb9ce14a21e5",
+  "lineage_preserved_separately": [
+    "V0.1_INITIAL_DRAFT",
+    "V0.2_STRENGTHENED_DRAFT",
+    "V0.3_SECOND_REVIEW_STRENGTHENED_DRAFT"
+  ],
+  "counts": {
+    "canonical_sections": 43,
+    "sources": 12,
+    "requirements": 120,
+    "acceptance_criteria": 50,
+    "design_tests": 60,
+    "golden_paths": 10,
+    "adversarial_scenarios": 40,
+    "founder_decisions": 17,
+    "unresolved_items": 13,
+    "state_axes": 10
+  },
+  "five_question_answers": [
+    "NO",
+    "PARTIALLY_SATISFIED",
+    "PARTIALLY_SATISFIED",
+    "NO",
+    "NO"
+  ],
+  "total_package_files": 25,
+  "checksum_covered_files": 24,
+  "checksum_ledger": "CHECKSUM_LEDGER.sha256",
+  "checksum_ledger_self_exclusion": "INTENTIONAL",
+  "files": [
+    {
+      "filename": "ACCEPTANCE_CRITERIA.csv",
+      "artifact_type": "acceptance_criteria"
+    },
+    {
+      "filename": "ADVERSARIAL_SCENARIOS.md",
+      "artifact_type": "adversarial_scenarios"
+    },
+    {
+      "filename": "ARTIFACT_MANIFEST.json",
+      "artifact_type": "artifact_manifest"
+    },
+    {
+      "filename": "AUDIT_AND_EVIDENCE_REQUIREMENTS.csv",
+      "artifact_type": "audit_and_evidence_requirements"
+    },
+    {
+      "filename": "CHECKSUM_LEDGER.sha256",
+      "artifact_type": "checksum_ledger"
+    },
+    {
+      "filename": "DUPLICATE_MERGE_UNMERGE_CONTRACT.md",
+      "artifact_type": "duplicate_merge_unmerge_contract"
+    },
+    {
+      "filename": "ES-PIA-HORSE-IDENTITY-LIFECYCLE_V0_3_FOUNDER_APPROVED_DESIGN_BASELINE.md",
+      "artifact_type": "es-pia-horse-identity-lifecycle_v0_3_founder_approved_design_baseline"
+    },
+    {
+      "filename": "FIVE_QUESTION_RESPONSE_MATRIX.csv",
+      "artifact_type": "five_question_response_matrix"
+    },
+    {
+      "filename": "FOUNDER_APPROVAL_RECORD_ITEM_04_V0_3.md",
+      "artifact_type": "founder_approval_record_item_04_v0_3"
+    },
+    {
+      "filename": "FOUNDER_DECISION_REGISTER.csv",
+      "artifact_type": "founder_decision_register"
+    },
+    {
+      "filename": "FOUNDER_DECISION_TRACEABILITY_MATRIX.csv",
+      "artifact_type": "founder_decision_traceability_matrix"
+    },
+    {
+      "filename": "GOLDEN_PATHS.md",
+      "artifact_type": "golden_paths"
+    },
+    {
+      "filename": "OFFLINE_AND_SYNCHRONIZATION_REQUIREMENTS.md",
+      "artifact_type": "offline_and_synchronization_requirements"
+    },
+    {
+      "filename": "PASSPORT_AND_EXPORT_CONTRACT.md",
+      "artifact_type": "passport_and_export_contract"
+    },
+    {
+      "filename": "PRIVACY_RECORDS_CLAIMS_CROSSWALK.csv",
+      "artifact_type": "privacy_records_claims_crosswalk"
+    },
+    {
+      "filename": "REQUIREMENT_REGISTER.csv",
+      "artifact_type": "requirement_register"
+    },
+    {
+      "filename": "REVISED_TRACEABILITY_MATRIX.csv",
+      "artifact_type": "revised_traceability_matrix"
+    },
+    {
+      "filename": "REVIEW_GATE.md",
+      "artifact_type": "review_gate"
+    },
+    {
+      "filename": "SOURCE_REGISTER.csv",
+      "artifact_type": "source_register"
+    },
+    {
+      "filename": "STATE_TRANSITION_MATRIX.csv",
+      "artifact_type": "state_transition_matrix"
+    },
+    {
+      "filename": "TEST_MATRIX.csv",
+      "artifact_type": "test_matrix"
+    },
+    {
+      "filename": "TRANSFER_EFFECTIVE_TIME_AND_CONTINUITY_CONTRACT.md",
+      "artifact_type": "transfer_effective_time_and_continuity_contract"
+    },
+    {
+      "filename": "UNRESOLVED_ITEMS_REGISTER.csv",
+      "artifact_type": "unresolved_items_register"
+    },
+    {
+      "filename": "VALIDATION_REPORT.md",
+      "artifact_type": "validation_report"
+    },
+    {
+      "filename": "VERSION_LINEAGE.csv",
+      "artifact_type": "version_lineage"
+    }
+  ],
+  "authority_boundaries": {
+    "formal_independent_review_completed": false,
+    "implementation_authority": false,
+    "schema_authority": false,
+    "migration_authority": false,
+    "deployment_authority": false,
+    "production_use": false,
+    "enrollment_authority": false,
+    "external_activation": false
+  }
+}

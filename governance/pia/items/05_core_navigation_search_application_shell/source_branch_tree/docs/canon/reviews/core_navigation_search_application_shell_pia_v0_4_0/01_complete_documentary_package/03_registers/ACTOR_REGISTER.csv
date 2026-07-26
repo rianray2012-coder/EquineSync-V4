@@ -1,0 +1,12 @@
+id,actor,boundary
+SHELL-ACTOR-001,Authenticated participant,Uses one current actor/context-scoped shell projection.
+SHELL-ACTOR-002,Horse owner,Receives horse-first defaults without expanded access.
+SHELL-ACTOR-003,Staff member or groom,Receives task-first defaults scoped to assignments and facility context.
+SHELL-ACTOR-004,Trainer or instructor,Receives schedule/training entry points within current authority.
+SHELL-ACTOR-005,Guardian or representative,Receives function-specific authority distinct from ownership and universal minor access.
+SHELL-ACTOR-006,Facility or tenant administrator,Configures allowlisted presentation without manufacturing domain authority.
+SHELL-ACTOR-007,EquineSync support operator,"Uses separately authorized, visible, time-bounded support mode."
+SHELL-ACTOR-008,System or integration actor,"Builds indexes, badges, and caches under machine identity and least privilege."
+SHELL-ACTOR-009,"Anonymous, invited, or recovering user",Uses a minimal pre-authentication shell without private disclosure.
+SHELL-ACTOR-010,"Engineering, QA, and reviewer",Implements or verifies only an authorized baseline.
+SHELL-ACTOR-011,Founder,"Issues separate documentary, implementation, operational, release, and enrollment dispositions."

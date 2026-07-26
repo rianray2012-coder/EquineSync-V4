@@ -1,0 +1,2 @@
+gate_id,required_runtime,observed_runtime,result,formal_roles_started,independent_review_claimed,effect
+ES-PIA-TCSN-V0-3-RUNTIME-2026-07-22-01,Qualified segregated documentary review runtime; review context newly assembled; controls sufficient to support independence claim.,"Current Codex runtime has unrestricted filesystem access, approval_policy=never, and network enabled.",FAIL_FOR_FORMAL_REVIEW,0,FALSE,Stop before formal fresh structured review; preserve deterministic remediation evidence only.
