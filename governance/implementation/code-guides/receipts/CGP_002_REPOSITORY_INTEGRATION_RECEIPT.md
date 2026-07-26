@@ -19,8 +19,8 @@
 | Receipt pull request | `#10` |
 | Receipt commit | `49a5c2ab0e47d73c331b4ab689023705e6ad8a75` |
 | Receipt merge commit | `f09a7627addf438c5c8ae31f0ff215dcf6a3da66` |
-| Metadata finalization pull request | `PENDING_METADATA_PR` |
-| Metadata commit | `PENDING_METADATA_COMMIT` |
+| Metadata finalization pull request | `#11` |
+| Metadata commit | `f3768316b73f72fb78a8b437431248c6624e17f2` |
 | Final default-branch head | `f09a7627addf438c5c8ae31f0ff215dcf6a3da66` |
 
 ## Manifest And Checksum Reconciliation
@@ -96,4 +96,4 @@ CGP-003 was not begun. No substantive Code Guide controls, domain policies, impl
 
 ## Disposition
 
-`CGP-002_REPOSITORY_INTEGRATION_RECEIPT_METADATA_FINALIZATION_IN_PROGRESS`
+`CGP-002_REPOSITORY_INTEGRATION_RECEIPT_METADATA_FINALIZED_PENDING_METADATA_PR_MERGE`
