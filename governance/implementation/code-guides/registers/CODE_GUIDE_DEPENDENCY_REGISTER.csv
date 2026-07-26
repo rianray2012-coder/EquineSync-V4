@@ -1,0 +1,11 @@
+dependency_id,downstream_guide,upstream_guide,upstream_control,minimum_version,maximum_version,dependency_type,status,impact_if_unavailable,last_verified,notes
+CGDEP-0001,ES-CG-01,ES-CG-00,,,,GUIDE_SEQUENCE,PLANNED,Authority guide cannot be drafted before charter placeholder is accepted.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0002,ES-CG-13,ES-CG-00,,,,GUIDE_SEQUENCE,PLANNED,Completion and traceability requires charter context.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0003,ES-CG-13,ES-CG-01,,,,GUIDE_SEQUENCE,PLANNED,Completion and traceability requires authority and precedence context.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0004,ES-CG-10,ES-CG-13,,,,GUIDE_SEQUENCE,PLANNED,Testing and assurance requires evidence and traceability context.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0005,ES-CG-10,ES-CG-00,,,,GUIDE_SEQUENCE,PLANNED,Testing and assurance requires charter authority context.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0006,ES-CG-10,ES-CG-01,,,,GUIDE_SEQUENCE,PLANNED,Testing and assurance requires authority and precedence context.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0007,WAVE-2,WAVE-1,,SCENARIO_VALIDATED,,WAVE_GATE,PLANNED,Wave 2 requires Wave 1 foundation unless separately authorized.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0008,WAVE-3,WAVE-2,,,,WAVE_GATE,PLANNED,Wave 3 depends on relevant Wave 2 guides.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0009,WAVE-4,WAVES-1-3,,,,WAVE_GATE,PLANNED,Wave 4 depends on relevant Waves 1 through 3 guides.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
+CGDEP-0010,WAVE-5,WAVES-1-4,,,,WAVE_GATE,PLANNED,Wave 5 depends on relevant Waves 1 through 4 guides.,2026-07-26,High-level initialization dependency only; no control-level dependency is created.
