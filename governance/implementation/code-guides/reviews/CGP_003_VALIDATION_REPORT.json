@@ -18,7 +18,7 @@
       "/Users/rianray/Documents/Codex/2026-07-25/fo/work/repos/EquineSync-V4-CGP-001/governance/implementation/code-guides/validation/tests"
     ],
     "exit_code": 0,
-    "stderr": "...........\n----------------------------------------------------------------------\nRan 11 tests in 7.187s\n\nOK\n",
+    "stderr": "...........\n----------------------------------------------------------------------\nRan 11 tests in 10.922s\n\nOK\n",
     "stdout": ""
   },
   "validators": [

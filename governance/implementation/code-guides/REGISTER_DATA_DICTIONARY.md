@@ -254,6 +254,10 @@ The register headers below preserve the required CGP-001 column contracts. The p
 | `decision` | CGP-001 register field reserved for later authorized detail. |
 | `decision_date` | CGP-001 register field reserved for later authorized detail. |
 | `decision_record_path` | CGP-001 register field reserved for later authorized detail. |
+| `founder_disposition` | Founder disposition status applied to the decision record. |
+| `affected_guides` | Guide IDs affected by the decision disposition. |
+| `required_later_action` | Later drafting, implementation, activation, or review action required after disposition. |
+| `disposition_notes` | Notes preserving history and explaining the disposition treatment. |
 
 ## IMPLEMENTATION_EXCEPTION_REGISTER.csv
 

@@ -19,7 +19,8 @@ CGP-003 created a repository-native master inventory of sources that may govern,
 - Source conflicts: `4`
 - Supersession rows: `4`
 - Findings: `5`
-- Open decisions: `5`
+- Decision records: `5`
+- Open decisions after Founder disposition: `0`
 
 ## Classes
 
@@ -77,3 +78,10 @@ Findings are registered in `registers/CODE_GUIDE_FINDING_REGISTER.csv` and mirro
 ## Non-Authorization
 
 CGP-004 was not begun. No substantive Code Guide controls, domain policies, implementation profiles, application-code changes, PIA amendments, atlas amendments, production CI changes, deployment actions, pilot actions, or activation authority were created or exercised.
+
+
+## Founder Decision Disposition
+
+Founder disposition dated `2026-07-26` accepted the CGP-003 source inventory as a broad discovery and reconciliation index and closed the five CGP-003 decision records. The closed decision records remain preserved in the decision registers and are documented in `governance/implementation/code-guides/receipts/CGP_003_FOUNDER_DECISION_RECONCILIATION.md`.
+
+CGP-003 does not create a final frozen source set for any individual guide. Guide-specific source freezes remain required before an affected guide enters `DRAFTING`.

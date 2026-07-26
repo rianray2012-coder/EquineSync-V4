@@ -9,7 +9,7 @@
 **Default branch:** `integrate-emergent-final-zip`
 **Verified baseline:** `905f9503e3d3a2dad7d74599fa53efa3eaee240d`
 **Working branch:** `codex/code-guide-master-source-inventory-cgp-003-v1`
-**Status:** `RETURNED_FOR_FOUNDER_REVIEW`
+**Status:** `APPROVED_FOR_REPOSITORY_INTEGRATION_AFTER_PREMERGE_RECONCILIATION`
 
 ## Startup Gates
 
@@ -30,7 +30,8 @@
 - Source conflicts: `4`
 - Supersession rows: `4`
 - Findings: `P0=0`, `P1=0`, `P2=3`, `P3=2`
-- Open decisions: `5`
+- Decision records: `5`
+- Open decisions after Founder disposition: `0`
 
 ## Validation
 
@@ -43,9 +44,14 @@ CGP-004 was not begun. No substantive Code Guide controls, domain policies, impl
 ## Commit And Remote
 
 - Primary source inventory commit: `a3481f6566d2e7c1fbc7866f10cc8e6327501722`
-- Metadata finalization commit: `PENDING_SELF_REFERENCE`
-- Remote branch verification: `PENDING_PUSH`
+- Original metadata finalization commit: `c3b1447b4e6ded5851bf383a801b7bfc073ec8cc`
+- Pre-reconciliation verified local branch head: `c3b1447b4e6ded5851bf383a801b7bfc073ec8cc`
+- Pre-reconciliation verified remote branch head: `c3b1447b4e6ded5851bf383a801b7bfc073ec8cc`
+- Founder decision reconciliation record: `governance/implementation/code-guides/receipts/CGP_003_FOUNDER_DECISION_RECONCILIATION.md`
+- Final reconciled branch head: `RECORDED_BY_GIT_REF_VERIFICATION_AFTER_RECONCILIATION_PUSH`
+- Remote branch verification result: `RECORDED_BY_GIT_REF_VERIFICATION_AFTER_RECONCILIATION_PUSH`
+- Self-reference note: the exact commit containing this corrected receipt is verified by Git branch and PR head rather than embedded as its own file content.
 
 ## Final Disposition
 
-`COMPLETE_WITH_RETAINED_FINDINGS`
+`APPROVED_FOR_DOCUMENTARY_SOURCE_INVENTORY_MERGE_AFTER_REQUIRED_RECONCILIATION`
