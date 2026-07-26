@@ -1,5 +1,5 @@
 {
-  "artifact_count": 76,
+  "artifact_count": 77,
   "authorized_scope": "governance/implementation/code-guides/",
   "baseline_commit": "ff2748796bf858f49a3f85bad0578850e1deb846",
   "branch": "codex/code-guide-wave-1-source-freeze-cgp-005-v1",
@@ -253,6 +253,11 @@
       "path": "governance/implementation/code-guides/receipts/CGP_005_EXECUTION_RECEIPT.md"
     },
     {
+      "artifact_role": "CGP-005 repository-integration receipt artifact",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/receipts/CGP_005_REPOSITORY_INTEGRATION_RECEIPT.md"
+    },
+    {
       "artifact_role": "CGP-005 revised two-layer source-freeze, readiness, validation, register, or custody artifact",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_ARTIFACT_INVENTORY.csv"
@@ -393,5 +398,7 @@
   "non_authorization": "No PR, merge, CGP-006 drafting, implementation, deployment, pilot, production, or activation authority.",
   "package_id": "ES-CGP-005-WAVE-1-SOURCE-FREEZE-2026-07-26",
   "prompt_id": "CGP-005",
+  "repository_integration_receipt": "governance/implementation/code-guides/receipts/CGP_005_REPOSITORY_INTEGRATION_RECEIPT.md",
+  "repository_integration_status": "REPOSITORY_ACCESSIONED_PENDING_METADATA_FINALIZATION",
   "revision_treatment": "Broad source freeze reclassified as non-normative reference corpus; curated normative guide freezes returned for Founder review."
 }
