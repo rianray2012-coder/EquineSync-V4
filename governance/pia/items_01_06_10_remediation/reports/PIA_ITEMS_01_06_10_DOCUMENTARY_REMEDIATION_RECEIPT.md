@@ -7,8 +7,10 @@
 **Base commit:** `577ed650ac5a8e620a49b85848ce3fe4bf9bc2d3`
 **Remediation branch:** `codex/pia-items-01-06-item10-documentary-remediation-v1`
 **Source accession commit:** `c43ad8d20fe01146124b6aaa2be616351506f42a`
-**Receipt commit:** `THIS_COMMIT`
-**Disposition:** `DOCUMENTARY_REPOSITORY_REMEDIATION_COMPLETED_WITH_RETAINED_BLOCKERS`
+**Receipt generation commit:** `dc2c59a3c35bd486ee6a3745cd86d12a8884c136`
+**Correction commit:** `Git commit containing this corrected file`
+**Default branch integration commit:** `PENDING_FOUNDER_APPROVAL_AND_MERGE`
+**Disposition:** `CORRECTED_DOCUMENTARY_REMEDIATION_WITH_RETAINED_REPOSITORY_CUSTODY_GAPS_AND_NON_OPERATIONAL_GATES`
 
 ## Completed Repository Actions
 
@@ -19,12 +21,16 @@
 - Added the portfolio realignment package as numbering and drift-control evidence only.
 - Added per-item accession, custody, validation, and repository integration or blocked receipts.
 - Added a consolidated manifest, path/identifier reconciliation register, status matrix, and post-remediation baseline audit.
+- Corrected Item 02, Item 03, and Item 06 current authority status to recognize `ES-PIA-PROGRAM-FOUNDER-DISPOSITION-2026-07-23-01` as the controlling later documentary-design disposition.
+- Preserved Item 02 V1.1.0 `PERMISSION_CHECK_FAILED` evidence and Item 03 earlier `NOT_REQUESTED`/review-pending statements as historical source-state evidence rather than current controlling Founder approval status.
+- Distinguished `approved_canonical_artifact_sha256`, `accessioned_outer_package_sha256`, `nested_package_sha256`, and `normalized_repository_copy_sha256` where applicable.
+- Recorded that PR #4 has no GitHub Actions workflow run at the reviewed head; completed checks are manual, deterministic package, checksum, JSON, and repository-scope validation checks.
 
 ## Final Determination
 
-`PIA_PORTFOLIO_PARTIALLY_CLOSED_WITH_REMAINING_BLOCKERS`
+`PIA_PORTFOLIO_DOCUMENTARY_DESIGN_APPROVAL_RECOGNIZED_WITH_REPOSITORY_CUSTODY_GAPS_AND_RETAINED_NON_OPERATIONAL_GATES`
 
-The branch is a repository-native custody improvement and draft PR candidate, not a whole-program closure candidate.
+The branch is a repository-native documentary remediation and draft PR candidate, not a whole-program closure candidate. Item 02 and Item 03 still require exact approved canonical artifact bytes to be accessioned before repository-native custody can close. Item 06's approved V0.3.0 artifact bytes are present and hash-verified, with fresh-review and later gate conditions retained.
 
 ## Non-Authorization Boundary
 

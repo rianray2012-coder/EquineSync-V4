@@ -9,7 +9,9 @@
 **Resulting branch:** `codex/item-05-core-navigation-shell-v0-4-exact-byte-integration-v1`
 **Integration Commit A:** `5cd6ec7882c0897af1096e9d1ebd37dac69f5cf6`
 **Integration Commit A tree:** `67e04633265ea4c7f083890e83d271c5f3a916b0`
-**Receipt Commit B:** `THIS_COMMIT`
+**Receipt generation commit:** `dc2c59a3c35bd486ee6a3745cd86d12a8884c136`
+**Correction commit:** `Git commit containing this corrected file`
+**Default branch integration commit:** `PENDING_FOUNDER_APPROVAL_AND_MERGE`
 **Disposition:** `SUCCESS_EXACT_BYTE_REPOSITORY_INTEGRATION_REMOTE_VERIFIED`
 
 ## Relationship to Prior Blocked Receipt
@@ -39,8 +41,8 @@ This receipt supplements the earlier truthful blocked receipt at `REPOSITORY_BLO
 - Repository lifecycle metadata files in Commit A: `2`
 - Files changed outside canonical path: `NONE`
 - Integration Commit A remote ref: `5cd6ec7882c0897af1096e9d1ebd37dac69f5cf6`
-- Receipt Commit B remote ref: `THIS_COMMIT_AFTER_PUSH`
-- Final local HEAD after Commit B: `THIS_COMMIT`
+- Receipt Commit B remote ref: `VALUE_UNRESOLVED_IN_HISTORICAL_RECEIPT; SEE_PR4_CORRECTION_COMMIT`
+- Final local HEAD after Commit B: `VALUE_UNRESOLVED_IN_HISTORICAL_RECEIPT; SEE_PR4_CORRECTION_COMMIT`
 - Final worktree/index status after Commit B: verified in final execution response
 - Pull request created: `NO`
 - Merge performed: `NO`

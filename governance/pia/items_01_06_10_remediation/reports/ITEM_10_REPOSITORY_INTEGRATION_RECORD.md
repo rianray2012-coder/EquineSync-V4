@@ -2,12 +2,15 @@
 
 **Record ID:** `ES-PIA-ITEM-10-OPC-REPOSITORY-INTEGRATION-RECORD-2026-07-25-01`
 **Source accession commit:** `c43ad8d20fe01146124b6aaa2be616351506f42a`
-**Receipt commit:** `THIS_COMMIT`
+**Receipt generation commit:** `dc2c59a3c35bd486ee6a3745cd86d12a8884c136`
+**Correction commit:** `Git commit containing this corrected file`
+**Default branch integration commit:** `PENDING_FOUNDER_APPROVAL_AND_MERGE`
 
 ## Integrated Evidence
 
 - Exact V0.2 design approval readiness package: `governance/pia/items/10_owner_portal_communications/package_bytes/EquineSync_Item_10_OPC_V0_2_Design_Approval_Readiness_and_Findings_Disposition_2026-07-25.zip`
-- Package SHA-256: `c9924fdf38e70d7669eeb204d87e648ecd198b9cf9508342ba007cc4334643cf`
+- Accessioned outer package SHA-256: `c9924fdf38e70d7669eeb204d87e648ecd198b9cf9508342ba007cc4334643cf`
+- Nested package SHA-256: `9af51d4e9ec3b2b56c77b8abbc3960c74e8f28e4c43375e04aea934574bdf823`
 - Executed Founder disposition: `governance/pia/items/10_owner_portal_communications/founder_disposition/ITEM_10_OPC_V0_2_FOUNDER_DESIGN_APPROVAL_AND_FINDINGS_DISPOSITION_EXECUTED.md`
 - Founder execution receipt: `governance/pia/items/10_owner_portal_communications/founder_disposition/ITEM_10_OPC_V0_2_FOUNDER_EXECUTION_RECEIPT.md`
 - Retained archival-only path: `governance/pia/items/10_owner_portal_communications_archival_only/`

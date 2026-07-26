@@ -21,7 +21,12 @@
 | `CHECKSUMS.sha256` | `31/31 entries PASS` |
 | JSON parse checks | `PACKAGE_MANIFEST.json`, `EVIDENCE_MANIFEST.json`, and `DETERMINISTIC_VALIDATION_REPORT.json` passed |
 | Completion receipt disposition | `ITEM_06_TCSN_PIA_CANONICAL_REMEDIATION_COMPLETE_FRESH_STRUCTURED_REVIEW_BLOCKED` |
+| Founder-approved canonical artifact | `ES-PIA-TASK-CALENDAR-SCHEDULING-NOTIFICATION-V0.3.0` |
+| Approved canonical artifact SHA-256 | `3da1e0fc8cd3dcec9bd786455dc3213c22f86d4db8078ed4e19fee1c95811da6` |
+| Normalized repository copy SHA-256 | `3da1e0fc8cd3dcec9bd786455dc3213c22f86d4db8078ed4e19fee1c95811da6` |
 
 ## Authority Treatment
 
-The package establishes deterministic canonical heading remediation and preserved custody only. It expressly states that fresh structured review is blocked, independent review is not claimed, and implementation, schema, migration, deployment, production, and enrollment are not authorized.
+The later Founder Governance Disposition `ES-PIA-PROGRAM-FOUNDER-DISPOSITION-2026-07-23-01` is the controlling documentary-design disposition for Item 06 and records `ES-PIA-TASK-CALENDAR-SCHEDULING-NOTIFICATION-V0.3.0` as Founder-approved with approved canonical artifact SHA-256 `3da1e0fc8cd3dcec9bd786455dc3213c22f86d4db8078ed4e19fee1c95811da6`.
+
+The accessioned package still truthfully preserves blocked fresh-review evidence: independent review is not claimed, segregated review is not complete, and implementation, schema, migration, deployment, production, and enrollment remain unauthorized. Those retained later-gate conditions do not downgrade the current Founder-approved documentary design baseline.
