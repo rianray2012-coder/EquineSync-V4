@@ -20,10 +20,10 @@ Two things happen here, in this order, and the order matters:
    failing tests pass: a test that needs a live seeded server still fails, it
    just fails as a test result instead of destroying the whole collection.
 
-2. **Auto-marking by module inspection** (``pytest_collection_modifyitems``).
-   The suite mixes four incompatible testing styles. Rather than editing ~181
-   files, each module's source is inspected once and its tests are marked
-   accordingly. See ``backend/tests/README.md``.
+2. **Explicit live marking** (``pytest_collection_modifyitems``). The only
+   marker that changes CI selection is ``live``. It is assigned from the
+   reviewed selectors in ``live_test_allowlist.txt``. Source inspection remains
+   available as an audit signal, but it no longer decides which tests run.
 
 Nothing here skips, deselects, or weakens a test.
 """
@@ -31,7 +31,6 @@ from __future__ import annotations
 
 import os
 import pathlib
-import re
 import sys
 import uuid
 
@@ -50,6 +49,20 @@ REPO_ROOT = BACKEND_DIR.parent
 # which directory pytest was invoked from.
 if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))
+if str(TESTS_DIR) not in sys.path:
+    sys.path.insert(0, str(TESTS_DIR))
+
+from _ci_classification import (  # noqa: E402 - depends on TESTS_DIR sys.path
+    LIVE_ALLOWLIST_NAME,
+    MARKER_ARTIFACT,
+    MARKER_BEHAVIORAL,
+    MARKER_LIVE,
+    MARKER_SOURCEGREP,
+    auxiliary_markers_for_item,
+    is_live_nodeid,
+    load_live_selectors,
+    source_for_item,
+)
 
 
 # --------------------------------------------------------------------------
@@ -90,65 +103,40 @@ TEST_ENV_DEFAULTS = {
     "EMAIL_FROM": "tests@equinesync.invalid",
 }
 
-for _key, _value in TEST_ENV_DEFAULTS.items():
-    os.environ.setdefault(_key, _value)
+
+def apply_test_env_defaults(env=None) -> dict[str, str]:
+    """Apply CI/test defaults without overwriting explicit values."""
+
+    target = os.environ if env is None else env
+    for key, value in TEST_ENV_DEFAULTS.items():
+        target.setdefault(key, value)
+    return TEST_ENV_DEFAULTS
+
+
+apply_test_env_defaults()
 
 
 # --------------------------------------------------------------------------
 # Markers
 # --------------------------------------------------------------------------
 
-MARKER_BEHAVIORAL = "behavioral"
-MARKER_LIVE = "live"
-MARKER_ARTIFACT = "artifact"
-MARKER_SOURCEGREP = "sourcegrep"
-
-_LIVE_PATTERNS = (
-    re.compile(r"^\s*(?:import|from)\s+requests\b", re.MULTILINE),
-    re.compile(r"_base_url\s*\(", re.MULTILINE),
-    re.compile(r"_api_helpers|_billing_helpers|_owner_helpers|_care_helpers"),
-)
-_ARTIFACT_PATTERN = re.compile(r"""["']outputs["']|outputs/""")
-_SOURCEGREP_PATTERN = re.compile(r"read_text\s*\(")
-_BEHAVIORAL_PATTERN = re.compile(r"TestClient")
-
-_marker_cache: dict[str, frozenset[str]] = {}
-
-
-def _markers_for_source(source: str) -> frozenset[str]:
-    markers = set()
-    if any(pattern.search(source) for pattern in _LIVE_PATTERNS):
-        markers.add(MARKER_LIVE)
-    if _ARTIFACT_PATTERN.search(source):
-        markers.add(MARKER_ARTIFACT)
-    if _SOURCEGREP_PATTERN.search(source):
-        markers.add(MARKER_SOURCEGREP)
-    if _BEHAVIORAL_PATTERN.search(source):
-        markers.add(MARKER_BEHAVIORAL)
-    return frozenset(markers)
-
-
-def _markers_for_path(path: pathlib.Path) -> frozenset[str]:
-    key = str(path)
-    if key not in _marker_cache:
-        try:
-            source = path.read_text(encoding="utf-8")
-        except OSError:
-            source = ""
-        _marker_cache[key] = _markers_for_source(source)
-    return _marker_cache[key]
+LIVE_TEST_ALLOWLIST = TESTS_DIR / LIVE_ALLOWLIST_NAME
 
 
 def pytest_collection_modifyitems(config, items):
-    """Tag every collected test by the style of its module.
+    """Tag collected tests without using whole-module live heuristics.
 
-    Marking is derived from the module source instead of being written into 181
-    files. Markers only enable selection — every test stays collected and
-    runnable.
+    ``live`` is explicit and controls ``-m "not live"``. The other markers are
+    preliminary per-test inventory signals only.
     """
+    live_selectors = load_live_selectors(LIVE_TEST_ALLOWLIST)
     for item in items:
-        path = pathlib.Path(str(getattr(item, "fspath", "")))
-        for marker in _markers_for_path(path):
+        nodeid = str(getattr(item, "nodeid", ""))
+        if is_live_nodeid(nodeid, live_selectors):
+            item.add_marker(getattr(pytest.mark, MARKER_LIVE))
+
+        source = source_for_item(item)
+        for marker in auxiliary_markers_for_item(item, source):
             item.add_marker(getattr(pytest.mark, marker))
 
 
@@ -165,8 +153,7 @@ def test_environment():
     application module or an over-eager test can clear them mid-run. Restoring
     them here means a later module's import-time read still succeeds.
     """
-    for key, value in TEST_ENV_DEFAULTS.items():
-        os.environ.setdefault(key, value)
+    apply_test_env_defaults()
     yield TEST_ENV_DEFAULTS
 
 
@@ -223,6 +210,29 @@ def mongo_db(mongo_client):
         mongo_client.drop_database(name)
 
 
+def _clear_database(database) -> None:
+    for collection_name in database.list_collection_names():
+        if collection_name.startswith("system."):
+            continue
+        database[collection_name].delete_many({})
+
+
+@pytest.fixture
+def app_database(mongo_client):
+    """The concrete Mongo database handle the FastAPI app imports from core.db."""
+
+    return mongo_client[os.environ["DB_NAME"]]
+
+
+@pytest.fixture
+def isolated_app_database(app_database):
+    """Clean the application database around each shared-client test."""
+
+    _clear_database(app_database)
+    yield app_database
+    _clear_database(app_database)
+
+
 @pytest.fixture(scope="session")
 def app(test_environment):
     """The assembled FastAPI application (``server:app``)."""
@@ -231,17 +241,16 @@ def app(test_environment):
     return fastapi_app
 
 
-@pytest.fixture(scope="session")
-def client(app):
+@pytest.fixture
+def client(app, isolated_app_database):
     """A ``TestClient`` bound to the real application.
 
     In-process, so it needs no running server — this is the fixture behavioral
     tests should use.
 
-    Session-scoped because entering the context manager runs the application
-    lifespan (startup bootstrap plus the background loops), which takes about a
-    minute. Per-test isolation comes from ``mongo_db``, not from rebuilding the
-    app.
+    The app imports a module-level ``core.db.db`` handle from ``DB_NAME``. This
+    fixture therefore cleans that exact database before and after the client is
+    yielded; ``mongo_db`` alone does not isolate application behavior.
     """
     from fastapi.testclient import TestClient
 

@@ -1,0 +1,63 @@
+{
+  "schema": "equinesync_pr3_ci_test_inventory_v1",
+  "methodology": {
+    "live": "explicit allowlist selectors in backend/tests/live_test_allowlist.txt control -m \"not live\" deselection",
+    "behavioral": "preliminary per-test TestClient/client-fixture proxy, not a complete validated product-behavior count",
+    "artifact": "preliminary per-test source signal involving outputs/",
+    "sourcegrep": "preliminary per-test source signal involving read_text()"
+  },
+  "collection": {
+    "before_hardening_tests": 2269,
+    "after_hardening_tests": 2286,
+    "new_hardening_tests": 17,
+    "warnings": "4 FastAPI on_event deprecation warnings observed in local collection"
+  },
+  "live_inventory": {
+    "explicit_live_tests": 1206,
+    "ci_runnable_not_live_tests": 1080,
+    "live_only_modules": 43,
+    "mixed_modules": 28,
+    "allowlist_selectors": 768
+  },
+  "auxiliary_inventory": {
+    "behavioral_candidate_tests": 3,
+    "artifact_candidate_tests": 19,
+    "sourcegrep_candidate_tests": 98,
+    "category_overlap": "possible; markers are not mutually exclusive"
+  },
+  "ci_runnable_result": {
+    "selected_tests": 1080,
+    "passed": 920,
+    "failed": 157,
+    "errored": 3,
+    "skipped": 0,
+    "deselected_live": 1206,
+    "duration_seconds": 112.534,
+    "exit_code": 1
+  },
+  "artifact_test_inventory_status": {
+    "status": "inventoried_not_remediated",
+    "artifact_candidate_nodeids": [
+      "backend/tests/test_build_next_15c_a_today_pulse_frontend_wiring.py::test_readme_records_frontend_only_scope_and_deferred_visibility_policy",
+      "backend/tests/test_build_next_15c_c_today_pulse_role_home_evidence.py::test_phase_docs_and_evidence_report_record_scope_and_deferred_items",
+      "backend/tests/test_build_next_15d_today_pulse_uat_evidence.py::test_bn15d_screenshot_inventory_is_complete_and_valid_pngs",
+      "backend/tests/test_build_next_15f1_live_today_pulse_walkthrough.py::test_bn15f1_all_tp_rows_are_present_and_complete",
+      "backend/tests/test_build_next_18e_app_store_readiness_proof.py::test_bn18e_readiness_rows_follow_source_scan_when_store_artifacts_exist",
+      "backend/tests/test_build_next_18e_app_store_readiness_proof.py::test_bn18e_expected_package_file_list_is_explicit",
+      "backend/tests/test_build_next_19_founder_acceptance_ledger.py::test_bn19_expected_package_file_list_is_explicit",
+      "backend/tests/test_build_next_20_bn12_closure.py::test_bn20_expected_package_file_list_is_explicit",
+      "backend/tests/test_build_next_21_pilot_go_no_go.py::test_bn21_expected_package_file_list_is_explicit",
+      "backend/tests/test_build_next_2b_mobile_screenshot_gate.py::test_build_next_2b_readme_defines_exact_screenshot_gate",
+      "backend/tests/test_build_next_7_launch_gate.py::test_bn7_readme_and_manifest_are_evidence_only_no_product_expansion",
+      "backend/tests/test_build_next_7a_staging_uat_evidence.py::test_bn7a_readme_scope_is_docs_and_evidence_only",
+      "backend/tests/test_build_next_8_go_live_runbook.py::test_bn8_readme_scope_is_runbook_only_no_behavior_changes",
+      "backend/tests/test_build_next_9_staging_uat_execution.py::test_bn9_readme_scope_is_evidence_only_no_behavior_changes",
+      "backend/tests/test_ci_marker_classification.py::test_category_markers_do_not_add_skip_or_xfail_semantics",
+      "backend/tests/test_phase15r_migration_dry_run.py::test_cli_default_output_path_is_under_outputs",
+      "backend/tests/test_rf17_feature_shell_ux_truth.py::test_rf17_script_generates_report_and_zip",
+      "backend/tests/test_rf18_qa_uat_public_launch_readiness.py::test_rf18_script_generates_report_and_zip",
+      "backend/tests/test_rf19_staging_uat_evidence_capture.py::test_rf19_script_generates_report_and_zip_without_fail_on_blockers"
+    ],
+    "restriction": "No artifact-dependent tests were deleted, skipped, xfailed, or remediated under this directive."
+  }
+}

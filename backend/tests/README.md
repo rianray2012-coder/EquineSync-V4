@@ -1,93 +1,92 @@
-# Backend tests — what they are and how to run them
+# Backend Tests and CI Evidence Model
 
-There are about 2,270 tests in this folder. They were written over many phases of
-work but were never run automatically, so until now nobody knew which ones
-actually passed. They now run in GitHub Actions on every push (see
-`.github/workflows/ci.yml`).
+The backend suite is now collected and run by GitHub Actions, but the jobs have
+different governance meanings.
 
-**The test board is red right now, and that is deliberate.** A red number that is
-true is worth more than a green badge over tests that never ran. No test was
-deleted, skipped, or made easier in order to produce a green result.
-
-## The four kinds of test
-
-The tests are not all the same kind of thing. They fall into four styles, and the
-styles have very different requirements. Every test is automatically tagged with
-one or more of these labels based on what it does — no test file was edited to
-add a tag.
-
-| Label | What it does | What it needs |
+| Job | Status role | Meaning |
 | --- | --- | --- |
-| `behavioral` | Starts the API inside the test itself and calls real endpoints. **This is the most valuable kind** — it actually exercises the product. | Nothing external |
-| `live` | Calls the API over the network, expecting a fully deployed and seeded server to already be running somewhere. | A live, seeded server |
-| `artifact` | Checks that a generated report file exists in the `outputs/` folder. `outputs/` is deliberately not stored in git, so these fail on a fresh copy of the repo until the reports are regenerated. | Previously generated reports |
-| `sourcegrep` | Opens the source code as plain text and searches it for expected words or phrases. It does not run the product, so it proves a phrase exists, not that a feature works. | Nothing external |
+| Backend suite is collectable | Required-check candidate | Every intended backend test module imports and collection completes. |
+| Frontend build | Required-check candidate | The frontend dependency install and bundle build complete. |
+| Backend tests measurement (not live) | Measurement and remediation job | Runs the CI-runnable backend set and reports the real red/green numbers. It is not an enforceable merge gate while red. |
 
-A test can carry more than one label — for example, a test that starts the API
-*and* also greps the source is both `behavioral` and `sourcegrep`.
+No job uses `continue-on-error`, blanket skips, blanket `xfail`, weakened
+assertions, or fake-success wrappers to hide failures.
 
-## Running them
+## Marker Methodology
 
-All commands are run from the repository root.
+`live` is the only marker that changes the backend test selection used by CI.
+It is assigned from `backend/tests/live_test_allowlist.txt`, a reviewed list of
+repository-relative pytest selectors.
 
-```bash
-# Everything that CI treats as the gate. This is the number that matters.
-pytest backend/tests -m "not live"
+The allowlist uses two selector forms:
 
-# Just the tests that genuinely exercise the running product.
-pytest backend/tests -m behavioral
+| Form | Meaning |
+| --- | --- |
+| `backend/tests/test_example.py::*` | Every currently collected test in that module requires a separately deployed and seeded API. |
+| `backend/tests/test_example.py::test_name` | Only that reviewed test is live; other tests in the same file remain CI-runnable. |
 
-# Source-text checks only (fast, but weak evidence).
-pytest backend/tests -m sourcegrep
+Source-pattern scanning is now an audit signal only. It does not decide whether
+a test is excluded from `-m "not live"`.
 
-# Generated-report checks. Needs the outputs/ reports to exist first.
-pytest backend/tests -m artifact
+The auxiliary markers are preliminary inventory markers:
 
-# The network tests. Needs a running, seeded server — point them at it:
-REACT_APP_BACKEND_URL=https://your-server.example.com pytest backend/tests -m live
+| Marker | Assignment basis | Limitation |
+| --- | --- | --- |
+| `behavioral` | Per-test source or fixture signal indicating FastAPI `TestClient` usage. | A candidate/proxy for in-process product behavior, not a fully validated behavioral-coverage count. |
+| `artifact` | Per-test source signal involving `outputs/`. | Does not prove every generated-artifact dependency has been classified. |
+| `sourcegrep` | Per-test source signal involving `read_text()`. | Indicates source-text inspection, not product execution. |
 
-# Everything, no exclusions.
-pytest backend/tests
-```
+Category markers can overlap. They do not skip tests and they do not change
+assertions.
 
-Most tests need a MongoDB database. The easiest way to get one locally:
+## Running Locally
 
-```bash
-docker run -d -p 27017:27017 mongo:7
-```
-
-### The one command worth remembering
+Run all commands from the repository root.
 
 ```bash
-pytest backend/tests --collect-only
+# Collection guardrail. This should stay green and needs no MongoDB service.
+python -m pytest backend/tests --collect-only -q
+
+# CI-runnable backend measurement set. Requires MongoDB.
+python -m pytest backend/tests -m "not live" --junitxml=junit-backend.xml -rf -q
+
+# Explicit live inventory. Requires a running, seeded API if executed.
+python -m pytest backend/tests -m live --collect-only -q
+
+# Everything, with no marker exclusion.
+python -m pytest backend/tests
 ```
 
-This does not run any test — it only checks that every test file can be loaded.
-If this fails, some test file is broken in a way that silently removes it and
-everything around it from every future test run. Before this work, 65 files
-failed here, which meant roughly 1,270 tests were invisible: they looked absent
-rather than failing. CI now guards this on every push (the
-**Backend suite is collectable** job).
+Most executable backend tests need MongoDB. CI uses `mongo:7` and sets:
 
-## Why the suite used to be uncollectable
+```text
+APP_ENV=test
+MONGO_URL=mongodb://localhost:27017
+DB_NAME=equinesync_ci
+RATE_LIMIT_ENABLED=false
+```
 
-Three things were read at file-load time and blew up when absent:
+The test defaults in `conftest.py` are test-only defaults. They use
+`setdefault`, so explicit environment values win. `APP_ENV=test`, wildcard CORS,
+placeholder Stripe/Resend keys, and disabled rate limiting are not production
+configuration and must not be used as deployment evidence.
 
-1. `REACT_APP_BACKEND_URL` was not set, so a helper raised an error;
-2. that helper then tried to read `frontend/.env`, which is not stored in git;
-3. `core/db.py` read `MONGO_URL` and `DB_NAME` directly.
+## Shared Fixtures
 
-`conftest.py` in this folder now supplies safe test values for all of these
-before any test file loads. A fourth cause was eight files that performed an HTTP
-login while loading; that login now happens when the test runs instead. In every
-case the check still happens — it just can no longer take the whole suite down
-with it.
+`conftest.py` provides:
 
-## Shared fixtures
+- `mongo_db`: a unique empty database for tests that use the fixture directly.
+- `app_database`: the concrete database named by `DB_NAME`, which is the
+  database imported by the FastAPI application through `core.db`.
+- `client`: a function-scoped `TestClient` that cleans `app_database` before and
+  after use.
 
-`conftest.py` provides these for new tests:
+Do not claim `mongo_db` isolates application behavior by itself. Application
+behavior is isolated only when the application is shown to use the cleaned
+`app_database` or an equivalent dependency override.
 
-- `client` — a `TestClient` wired to the real application, in-process. Use this
-  for new tests; it needs no server and no network.
-- `mongo_db` — an empty database with a unique name, deleted when the test ends.
-- `jwt_secret`, `backend_base_url`, `mongo_url` — the test configuration values.
+## Retained Failure Families
+
+Generated artifact failures involving `outputs/` remain unresolved. They must
+not be deleted, blanket-skipped, blanket-`xfail`ed, or hidden under this PR #3
+hardening directive.

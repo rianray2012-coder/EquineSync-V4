@@ -3,10 +3,10 @@ name: CI
 # The first automated verification this repository has ever had.
 #
 # Read this if a job is red: red is the honest starting state. Nothing here is
-# configured to look green when it isn't — no `continue-on-error` on a test step,
-# no skipped tests, no loosened assertions. `backend-tests` is expected to fail
-# until the underlying test debt is paid down; the number in the job summary is
-# the thing to drive toward zero.
+# configured to look green when it isn't: no `continue-on-error` on a test step,
+# no skipped tests, no loosened assertions. The backend non-live job is a
+# measurement and remediation job until a separately approved green baseline or
+# required-check policy exists.
 #
 # See backend/tests/README.md for what the markers mean and how to run each set
 # locally.
@@ -24,10 +24,12 @@ concurrency:
 env:
   PYTHON_VERSION: '3.11'
   NODE_VERSION: '20'
+  APP_ENV: test
+  RATE_LIMIT_ENABLED: 'false'
 
 jobs:
   # ---------------------------------------------------------------------------
-  # Guardrail: the suite must stay importable. Fast, and expected to be GREEN.
+  # Required-check candidate: the suite must stay importable. Fast and GREEN.
   # ---------------------------------------------------------------------------
   backend-collect:
     name: Backend suite is collectable
@@ -83,10 +85,10 @@ jobs:
           if-no-files-found: warn
 
   # ---------------------------------------------------------------------------
-  # The real gate. Expected RED initially. It must be allowed to fail honestly.
+  # Measurement/remediation job. Expected RED initially and allowed to fail honestly.
   # ---------------------------------------------------------------------------
   backend-tests:
-    name: Backend tests (not live)
+    name: Backend tests measurement (not live)
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -132,16 +134,22 @@ jobs:
           echo "MongoDB never became reachable at $MONGO_URL"
           exit 1
 
-      # THE GATING STEP.
+      - name: Collect explicit marker inventory
+        run: |
+          set -o pipefail
+          python -m pytest backend/tests -m live --collect-only -q 2>&1 | tee live-collect.txt
+          python -m pytest backend/tests -m "not live" --collect-only -q 2>&1 | tee not-live-collect.txt
+
+      # THE MEASUREMENT STEP.
       #
       # Deliberately has no `continue-on-error`. When tests fail, this job fails
-      # and the board goes red. That is the point — a green badge over a suite
-      # that has never run is worse than no badge.
+      # and the board goes red. That is the point: a green badge over a suite
+      # that has unresolved failures is worse than no badge.
       #
-      # `-m "not live"` excludes only the tests that require a separately
-      # deployed, seeded server over HTTP, which CI does not stand up. Those
-      # tests are still collected and still runnable (see the README); they are
-      # selected out, never skipped or deleted.
+      # `-m "not live"` excludes only explicitly allowlisted live tests that
+      # require a separately deployed, seeded HTTP API, which CI does not stand
+      # up. Those tests are still collected and still runnable; they are
+      # deselected, never skipped or deleted.
       - name: Run CI-runnable tests
         id: pytest
         run: |
@@ -156,10 +164,12 @@ jobs:
         run: |
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import os
+          import re
           import xml.etree.ElementTree as ET
+          from pathlib import Path
 
           outcome = os.environ["PYTEST_OUTCOME"]
-          print("## Backend tests — CI-runnable set (`-m \"not live\"`)")
+          print("## Backend tests measurement — CI-runnable set (`-m \"not live\"`)")
           print()
 
           try:
@@ -184,6 +194,12 @@ jobs:
           print(f"| Errored | {errors} |")
           print(f"| Skipped | {skipped} |")
           print(f"| **Total run** | **{total}** |")
+
+          raw = Path("pytest-output.txt").read_text(encoding="utf-8", errors="replace")
+          deselected = "unknown"
+          if match := re.search(r"(\\d+) deselected", raw):
+              deselected = match.group(1)
+          print(f"| Deselected by explicit `live` allowlist | {deselected} |")
           print()
           print(f"Wall time: {seconds / 60:.1f} min")
           print()
@@ -216,9 +232,9 @@ jobs:
 
           print()
           print(
-              "Excluded from this run: tests marked `live`, which need a deployed and "
-              "seeded API. They are still collected and still runnable — see "
-              "`backend/tests/README.md`."
+              "Excluded from this run: tests explicitly marked `live` in "
+              "`backend/tests/live_test_allowlist.txt`, which need a deployed "
+              "and seeded API. They are still collected and still runnable."
           )
           PY
         env:
@@ -231,8 +247,12 @@ jobs:
           path: |
             junit-backend.xml
             pytest-output.txt
+            live-collect.txt
+            not-live-collect.txt
           if-no-files-found: warn
 
+  # ---------------------------------------------------------------------------
+  # Required-check candidate: frontend install and bundle build.
   # ---------------------------------------------------------------------------
   frontend-build:
     name: Frontend build
