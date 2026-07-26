@@ -3,6 +3,7 @@ from __future__ import annotations
 import hmac
 import hashlib
 import json
+import logging
 import time
 from typing import Any
 
@@ -17,16 +18,15 @@ from routes.subscriptions import build_router as build_subscriptions_router
 WEBHOOK_SECRET = "whsec_legacy_route_test"
 
 
-def _payload(event_type: str, session: dict[str, Any], event_id: str = "evt_legacy") -> bytes:
-    return json.dumps(
-        {
-            "id": event_id,
-            "object": "event",
-            "type": event_type,
-            "data": {"object": {"object": "checkout.session", **session}},
-        },
-        separators=(",", ":"),
-    ).encode("utf-8")
+def _payload(event_type: str | None, session: dict[str, Any], event_id: str = "evt_legacy") -> bytes:
+    event = {
+        "id": event_id,
+        "object": "event",
+        "data": {"object": {"object": "checkout.session", **session}},
+    }
+    if event_type is not None:
+        event["type"] = event_type
+    return json.dumps(event, separators=(",", ":")).encode("utf-8")
 
 
 def _stripe_signature(payload: bytes, secret: str = WEBHOOK_SECRET, timestamp: int | None = None) -> str:
@@ -169,6 +169,57 @@ def test_legacy_webhook_unsigned_json_cannot_reach_membership_mutation(legacy_cl
     assert response.status_code == 400
     assert db.users.rows[0]["subscription_status"] == "trialing"
     assert db.payment_transactions.rows[0]["payment_status"] == "unpaid"
+    assert db.users.update_calls == []
+    assert db.payment_transactions.update_calls == []
+
+
+def test_legacy_webhook_valid_signed_unrelated_event_acknowledges_without_mutation(
+    caplog,
+    legacy_client,
+):
+    caplog.set_level(logging.INFO, logger="routes.membership")
+    client, db = legacy_client
+    payload = _payload(
+        "invoice.expired",
+        {"id": "cs_complete", "payment_status": "paid", "status": "complete"},
+    )
+
+    response = _post_legacy(client, payload, _stripe_signature(payload))
+
+    assert response.status_code == 200
+    assert response.json() == {"received": True}
+    assert db.users.rows[0]["subscription_status"] == "trialing"
+    assert db.payment_transactions.rows[0]["payment_status"] == "unpaid"
+    assert db.payment_transactions.rows[0]["status"] == "pending"
+    assert db.users.update_calls == []
+    assert db.payment_transactions.update_calls == []
+    ignored = [
+        record
+        for record in caplog.records
+        if record.getMessage() == "legacy stripe webhook event ignored"
+    ]
+    assert ignored
+    assert ignored[-1].reason == "unsupported_event_type"
+    assert ignored[-1].stripe_event_type == "invoice.expired"
+    assert "cs_complete" not in ignored[-1].getMessage()
+    assert "payment_status" not in ignored[-1].getMessage()
+
+
+@pytest.mark.parametrize("event_type", ["", None])
+def test_legacy_webhook_valid_signed_empty_or_missing_event_type_acknowledges_without_mutation(
+    event_type,
+    legacy_client,
+):
+    client, db = legacy_client
+    payload = _payload(event_type, {"id": "cs_complete", "payment_status": "paid"})
+
+    response = _post_legacy(client, payload, _stripe_signature(payload))
+
+    assert response.status_code == 200
+    assert response.json() == {"received": True}
+    assert db.users.rows[0]["subscription_status"] == "trialing"
+    assert db.payment_transactions.rows[0]["payment_status"] == "unpaid"
+    assert db.payment_transactions.rows[0]["status"] == "pending"
     assert db.users.update_calls == []
     assert db.payment_transactions.update_calls == []
 

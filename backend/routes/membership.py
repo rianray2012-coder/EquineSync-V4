@@ -26,6 +26,16 @@ import stripe
 logger = logging.getLogger(__name__)
 
 
+LEGACY_CHECKOUT_COMPLETED_EVENT = "checkout.session.completed"
+LEGACY_CHECKOUT_EXPIRED_EVENT = "checkout.session.expired"
+LEGACY_CHECKOUT_EVENT_TYPES = frozenset(
+    {
+        LEGACY_CHECKOUT_COMPLETED_EVENT,
+        LEGACY_CHECKOUT_EXPIRED_EVENT,
+    }
+)
+
+
 # ---------- Server-authoritative tier catalog ----------
 # Amounts are FLOATS in USD per the playbook (Stripe rejects ints).
 TIERS = {
@@ -65,6 +75,14 @@ def _stripe_value(obj: Any, key: str, default: Any = None) -> Any:
     if isinstance(obj, dict):
         return obj.get(key, default)
     return getattr(obj, key, default)
+
+
+def _normalize_legacy_event_type(value: Any) -> str:
+    return str(value or "").strip().lower()
+
+
+def _bounded_event_type_for_log(event_type: str) -> str:
+    return event_type[:128] if event_type else "<missing>"
 
 
 class _LegacyCheckoutEvent:
@@ -245,6 +263,17 @@ def build_router(*, db, get_current_user) -> APIRouter:
         phase that would require migrating off one-time Checkout.
         """
         evt = await _parse_legacy_checkout_event(request)
+        evt_type = _normalize_legacy_event_type(getattr(evt, "event_type", ""))
+        if evt_type not in LEGACY_CHECKOUT_EVENT_TYPES:
+            logger.info(
+                "legacy stripe webhook event ignored",
+                extra={
+                    "reason": "unsupported_event_type",
+                    "stripe_event_type": _bounded_event_type_for_log(evt_type),
+                },
+            )
+            return {"received": True}
+
         session_id = evt.session_id
         if not session_id:
             return {"received": True}
@@ -253,9 +282,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
             return {"received": True}
 
         payment_status = getattr(evt, "payment_status", None)
-        evt_type = (getattr(evt, "event_type", "") or "").lower()
         # checkout.session.expired — close the local row without touching user.
-        if "expired" in evt_type or getattr(evt, "status", None) == "expired":
+        if evt_type == LEGACY_CHECKOUT_EXPIRED_EVENT:
             if tx.get("status") != "expired":
                 await db.payment_transactions.update_one(
                     {"session_id": session_id},
@@ -268,7 +296,11 @@ def build_router(*, db, get_current_user) -> APIRouter:
             return {"received": True}
 
         # checkout.session.completed → mark paid + flip user (idempotent).
-        if payment_status == "paid" and tx.get("payment_status") != "paid":
+        if (
+            evt_type == LEGACY_CHECKOUT_COMPLETED_EVENT
+            and payment_status == "paid"
+            and tx.get("payment_status") != "paid"
+        ):
             await db.users.update_one(
                 {"id": tx["user_id"]},
                 {"$set": {
