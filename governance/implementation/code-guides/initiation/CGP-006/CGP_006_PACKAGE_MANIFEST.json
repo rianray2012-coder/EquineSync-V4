@@ -1,0 +1,110 @@
+{
+  "artifact_count": 13,
+  "authority_boundary": "DOCUMENTARY_INITIATION_ONLY_NOT_DRAFTING_ADOPTION_OR_ACTIVATION",
+  "branch": "codex/code-guide-controlled-initiation-cgp-006-v1",
+  "checksum_ledger": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_CHECKSUMS.sha256",
+  "checksum_treatment": "Ledger excludes itself from self-hashing.",
+  "created_date": "2026-07-26",
+  "default_branch": "integrate-emergent-final-zip",
+  "determination": "CGP_006_INITIATION_PACKAGE_READY_FOR_FOUNDER_REVIEW",
+  "execution_id": "CGEXEC-20260726-0005",
+  "files": [
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_AUTHORITY_BOUNDARY.md",
+      "sha256": "ac6063e524d144d123a98b5e7b1e1ae9984a682a656805dfd8baa83847587c14"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_FOUNDER_DECISION_REGISTER.md",
+      "sha256": "1c00f7375ebd9832ff760458e3e1051b0defe97b0a5dfddc1e8873c396fa4025"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_INITIATION_ASSESSMENT.md",
+      "sha256": "b6990ac1a4992c4d3cfa1d2229cf49c0a48a036ed995871a0c01a868fa1d4b17"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_INPUT_REGISTER.md",
+      "sha256": "86eaf679e7b5a6ab989671702dbcf12d1f15b72a5dec565a2e551e336e7ba187"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_OUTPUT_REGISTER.md",
+      "sha256": "09d1da8bc0321485a1c8f236db99642b284136a18c359dfc1fd7687f3c60a842"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "EXCLUDED_SELF_REFERENCE",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_PACKAGE_MANIFEST.json",
+      "sha256": ""
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_PR23_CONFLICT_ASSESSMENT.md",
+      "sha256": "e8514814331b4c250edb72fe39dd993c54ed59671258a88c0a7f74f684f27dc8"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_REPOSITORY_LIFECYCLE_PLAN.md",
+      "sha256": "1201eb17e5cacfd5eb278f09b382490cdf21a1afdbf1191de8fe8da0ccd1b59c"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_RISK_FINDING_DEVIATION_REGISTER.csv",
+      "sha256": "0b65722c8f7399e6eb39b07b840b21a9d7600eb428e759ed1bdc9eecec9566f5"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_SCOPE_AND_BOUNDARY.md",
+      "sha256": "672e3529fcc20be598aa97d1dfb4c5c7bd75e769506dc84f031dfd150d88d157"
+    },
+    {
+      "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_VALIDATION_PLAN.md",
+      "sha256": "93f98f6d1bcafb903827a63ee3f555a03b0aecd9a398c1a1aa48d2b5d4b0649c"
+    },
+    {
+      "artifact_type": "CGP_006_VALIDATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/validate_cgp006_initiation.py",
+      "sha256": "201498f8e49c59b75e38d1edd9289e5e3ca8815c5acf3b435c88a7fa779e030e"
+    },
+    {
+      "artifact_type": "CGP_006_VALIDATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/tests/test_cgp006_initiation.py",
+      "sha256": "3d60c138dd0c26dabd097054f6501f64e6f909c118fe9b2acb309665408783d0"
+    }
+  ],
+  "normative_counts": {
+    "ES-CG-00": 29,
+    "ES-CG-01": 34,
+    "ES-CG-10": 31,
+    "ES-CG-13": 45
+  },
+  "package_id": "ES-CGP-006-CONTROLLED-INITIATION-2026-07-26",
+  "pr23_conflict_assessment": "PR23_REVIEWED_NON_CONFLICTING_WITH_CGP_BASELINE",
+  "prompt_id": "CGP-006",
+  "reference_corpus_classification": "REFERENCE_CORPUS_INDEXED_NOT_NORMATIVE",
+  "reference_corpus_count": 2511,
+  "reference_only_exclusion_count": 8714,
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "schema_version": "0.1.0",
+  "starting_commit": "3eb6825091241709f255b8ccf296987fa9b20724",
+  "validation_artifacts": [
+    "governance/implementation/code-guides/validation/validate_cgp006_initiation.py",
+    "governance/implementation/code-guides/validation/tests/test_cgp006_initiation.py"
+  ]
+}
