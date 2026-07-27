@@ -10,11 +10,13 @@
 **Previously reviewed base:** `4afe3ccd84d9f8be1bc5c79bb27068676d993a70`
 **Previously reviewed PR head:** `834334f41226aabedaa842057d39766b7ba4e524`
 **New controlling base:** `1feeccb5f35e8fbbd2185782377a17b831c2f3e9`
-**Determination:** `CGP_006_DOCUMENT_CLASSIFICATION_REFRESHED_WITH_NON_BLOCKING_WARNINGS_READY_FOR_FOUNDER_REVIEW`
+**Refreshed pre-Founder-review head:** `16392196d2bda1ef9fce608035622fe2ed9e624d`
+**Founder disposition:** `CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+**Determination:** `CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
 
 ## Refresh Result
 
-The CGP-006 document classification package has been refreshed after repository accession of the CGP-005 Technical Audit Appendix. The package is ready for Founder review with retained non-blocking warnings. It must not be merged until later Founder approval.
+The CGP-006 document classification package has been refreshed after repository accession of the CGP-005 Technical Audit Appendix. Founder disposition approves the refreshed classification gate for protected repository integration with retained non-blocking warnings preserved.
 
 This package does not draft substantive guide controls, invariants, mandatory-question answers, product policy, implementation profiles, or implementation instructions. It does not adopt or activate any Code Guide.
 
@@ -30,6 +32,12 @@ This package does not draft substantive guide controls, invariants, mandatory-qu
 - Appendix classification: `FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE`
 - Source-freeze amendment: `NOT_REQUIRED`
 - CGP-005 normative source bytes: `UNCHANGED`
+
+## Founder Disposition
+
+`CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+
+The approved disposition is recorded in `CGP_006_DOCUMENT_CLASSIFICATION_FOUNDER_DISPOSITION.md`. It preserves the non-blocking warning inventory, confirms no provenance gaps and no blocking conflicts, keeps appendix and PR `#23` materials non-normative context only, and authorizes only protected documentary integration plus custody receipt and metadata reconciliation.
 
 ## Classification Counts
 
@@ -78,11 +86,13 @@ All 139 normative rows reconcile to the CGP-005 guide-specific source-freeze reg
 
 ## Retained Warnings
 
-- External standards remain supporting and non-binding unless separately adopted.
-- Four retained source conflicts remain visible for downstream drafting and adoption review but do not block this refreshed classification package.
-- PR #23 technical-audit Founder-decision materials remain contextual and non-normative.
-- CGP-005 Technical Audit Appendix materials remain contextual and non-normative.
-- Proposed and blocked reference-corpus records remain excluded from drafting reliance.
+- `CGP006-CLF-0001`: External standards remain supporting and non-binding unless separately adopted.
+- `CGP006-CLF-0002`: Four retained source conflicts remain visible for downstream drafting and adoption review but do not block this refreshed classification package.
+- `CGP006-CLF-0003`: PR #23 technical-audit Founder-decision materials remain contextual and non-normative.
+- `CGP006-CLF-0004`: Proposed and blocked reference-corpus records remain excluded from drafting reliance.
+- `CGP006-CLF-0005`: CGP-005 Technical Audit Appendix materials remain contextual and non-normative.
+
+All retained warnings are accepted by Founder disposition as non-blocking for protected classification-gate integration and remain blocking for any later adoption or activation unless separately resolved, carried forward, or authorized.
 
 ## Authority Boundary
 

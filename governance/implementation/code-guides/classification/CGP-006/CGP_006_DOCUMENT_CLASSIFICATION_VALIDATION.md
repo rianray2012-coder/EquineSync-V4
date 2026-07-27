@@ -2,7 +2,8 @@
 
 **Prompt ID:** `CGP-006`
 **Package ID:** `ES-CGP-006-DOCUMENT-CLASSIFICATION-GATE-2026-07-27`
-**Determination:** `CGP_006_DOCUMENT_CLASSIFICATION_REFRESHED_WITH_NON_BLOCKING_WARNINGS_READY_FOR_FOUNDER_REVIEW`
+**Founder disposition:** `CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+**Determination:** `CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
 **Validation artifact updated:** `2026-07-27`
 
 ## Validator Coverage
@@ -34,6 +35,18 @@
 - CGP-005 approved normative source bytes remain unchanged.
 - PR #23 remains contextual only.
 - Retained gaps remain visible and non-blocking for this refresh.
+
+## Founder Disposition Validation
+
+- Disposition artifact present: `CGP_006_DOCUMENT_CLASSIFICATION_FOUNDER_DISPOSITION.md`
+- Retained non-blocking warnings accepted: `5`
+- Warnings converted to blocking status: `0`
+- Appendix gaps retained as visible and unresolved: `CGP005-TA-APP-GAP-0001`, `CGP005-TA-APP-GAP-0002`, `CGP005-TA-APP-GAP-0003`, `CGP005-TA-APP-GAP-0004`
+- Protected integration authorized: `PR_30_ONLY`
+- Source-freeze amendment: `NOT_REQUIRED`
+- Substantive drafting authorized by this disposition: `NO`
+- Implementation authority: `NOT_GRANTED`
+- CGP-007 authority: `NOT_ISSUED`
 
 ## Command Evidence
 

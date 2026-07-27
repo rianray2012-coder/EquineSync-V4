@@ -23,6 +23,7 @@ PASSING_OR_FOUNDER_REVIEW_DETERMINATIONS = {
     "CGP_006_DOCUMENT_CLASSIFICATION_COMPLETE_WITH_NON_BLOCKING_WARNINGS",
     "CGP_006_DOCUMENT_CLASSIFICATION_REFRESHED_AFTER_CGP_005_APPENDIX_READY_FOR_FOUNDER_REVIEW",
     "CGP_006_DOCUMENT_CLASSIFICATION_REFRESHED_WITH_NON_BLOCKING_WARNINGS_READY_FOR_FOUNDER_REVIEW",
+    "CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS",
 }
 ALLOWED_CLASSIFICATIONS = {
     "NORMATIVE_FROZEN_SOURCE",
@@ -52,6 +53,7 @@ REQUIRED_FILES = (
     "CGP_006_PROVENANCE_GAP_REGISTER.csv",
     "CGP_006_CLASSIFICATION_FINDING_REGISTER.csv",
     "CGP_006_DOCUMENT_CLASSIFICATION_VALIDATION.md",
+    "CGP_006_DOCUMENT_CLASSIFICATION_FOUNDER_DISPOSITION.md",
     "CGP_006_DOCUMENT_CLASSIFICATION_MANIFEST.json",
     "CGP_006_DOCUMENT_CLASSIFICATION_CHECKSUMS.sha256",
 )
@@ -242,8 +244,8 @@ def validate_cgp006_document_classification(root: Path, required_files: tuple[st
     cgp007 = tracker.get("CGP-007", {})
     if cgp006.get("work_status") != "ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING":
         result.add("cgp006_unbounded_work_status", "CGP-006 must remain bounded candidate drafting only.", tracker_path, "CGP-006")
-    if cgp006.get("blocked_by") != "DOCUMENT_CLASSIFICATION_GATE":
-        result.add("classification_gate_not_retained", "Refreshed classification package must retain the document classification gate pending Founder approval.", tracker_path, "CGP-006")
+    if cgp006.get("blocked_by") not in {"DOCUMENT_CLASSIFICATION_GATE", "DOCUMENT_CLASSIFICATION_GATE_PASSED"}:
+        result.add("classification_gate_not_retained", "CGP-006 must retain or complete the document classification gate before drafting.", tracker_path, "CGP-006")
     if cgp006.get("adoption_state") != "NOT_ADOPTED":
         result.add("cgp006_adopted", "CGP-006 classification must not create guide adoption.", tracker_path, "CGP-006")
     if cgp007.get("prompt_status") != "NOT_ISSUED":
