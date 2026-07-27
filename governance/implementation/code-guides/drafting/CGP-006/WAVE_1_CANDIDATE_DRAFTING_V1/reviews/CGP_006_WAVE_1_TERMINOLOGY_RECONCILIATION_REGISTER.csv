@@ -1,0 +1,8 @@
+term_id,term,review_scope,canonical_candidate_treatment,affected_guides,classification,revision_required,founder_decision_required
+CGP006-W1-TERM-0001,CANDIDATE_ONLY,CROSS_GUIDE,"Review material only; not adopted, active, merged, or implemented.",ES-CG-00;ES-CG-01;ES-CG-13;ES-CG-10,CONSISTENT,NO,NO
+CGP006-W1-TERM-0002,FROZEN_NORMATIVE_ROW,CROSS_GUIDE,Only normative source support for candidate mandatory language.,ES-CG-00;ES-CG-01;ES-CG-13;ES-CG-10,CONSISTENT,NO,NO
+CGP006-W1-TERM-0003,FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE,CROSS_GUIDE,Interpretive context only; not mandatory authority.,ES-CG-00;ES-CG-01;ES-CG-13;ES-CG-10,CONSISTENT,NO,NO
+CGP006-W1-TERM-0004,REFERENCE_CORPUS_INDEXED_NOT_NORMATIVE,CROSS_GUIDE,Background/navigation only; not mandatory authority.,ES-CG-00;ES-CG-01;ES-CG-13;ES-CG-10,CONSISTENT,NO,NO
+CGP006-W1-TERM-0005,IMPLEMENTATION_AUTHORITY_NOT_GRANTED,CROSS_GUIDE,No implementation authority exercised or implied.,ES-CG-00;ES-CG-01;ES-CG-13;ES-CG-10,CONSISTENT,NO,NO
+CGP006-W1-TERM-0006,RETAINED_NON_BLOCKING_WARNING,CROSS_GUIDE,Warning remains visible and non-blocking for candidate review.,ES-CG-00;ES-CG-01;ES-CG-13;ES-CG-10,CONSISTENT,NO,NO
+CGP006-W1-TERM-0007,RETAINED_OPEN_GAP,CROSS_GUIDE,Appendix gap remains open and non-blocking for candidate review.,ES-CG-00;ES-CG-01;ES-CG-13;ES-CG-10,CONSISTENT,NO,NO
