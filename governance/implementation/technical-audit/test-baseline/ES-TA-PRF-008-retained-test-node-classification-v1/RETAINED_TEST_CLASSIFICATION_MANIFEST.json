@@ -1,0 +1,87 @@
+{
+  "canonical_counts": {
+    "errors": 3,
+    "failed": 158,
+    "live_deselected": 1206,
+    "passed": 919,
+    "selected_non_live": 1080,
+    "skipped": 0,
+    "total_collected": 2286
+  },
+  "classification_totals": {
+    "disposition": {
+      "BLOCKS_PILOT_UNTIL_REMEDIATED_OR_EXPLICITLY_EXCLUDED": 85,
+      "RETAINED_ERROR_REQUIRES_TEST_SETUP_REMEDIATION_OR_CONTROLLED_EXCLUSION": 3,
+      "RETAINED_PRE_PILOT_TECHNICAL_DEBT": 73
+    },
+    "outcome": {
+      "error": 3,
+      "failure": 158
+    },
+    "remediation_wave": {
+      "Wave 1 - account membership and authorization model": 5,
+      "Wave 1 - admin and financial boundary hardening": 22,
+      "Wave 1 - authorization proof and exact-node repair": 3,
+      "Wave 1 - legal e-signature readiness": 1,
+      "Wave 2 - HorseOps ledger and evidence repair": 8,
+      "Wave 2 - role journey and onboarding shell hardening": 47,
+      "Wave 2 - staging UAT and launch evidence regeneration": 53,
+      "Wave 3 - feature shell evidence refresh": 1,
+      "Wave 3 - feature walkthrough evidence refresh": 8,
+      "Wave 3 - launch trust evidence cleanup": 1,
+      "Wave 3 - mobile and native readiness evidence": 11,
+      "Wave 3 - source contract cleanup": 1
+    },
+    "root_cause_cluster": {
+      "ADMIN_PORTAL_READ_ONLY_CONTRACT_DRIFT": 22,
+      "APP_ASSEMBLY_SOURCE_CONTRACT_DRIFT": 1,
+      "DOCUSIGN_PROVIDER_CONFIGURATION_GAP": 1,
+      "FEATURE_SHELL_UX_TRUTH_GAP": 1,
+      "GOVERNANCE_UAT_ARTIFACT_CUSTODY_GAPS": 53,
+      "HORSEOPS_LEDGER_AND_EVIDENCE_GAPS": 8,
+      "LAUNCH_TRUST_ROLE_JOURNEY_EVIDENCE_GAPS": 1,
+      "MULTI_BARN_ACCOUNT_MEMBERSHIP_GAPS": 5,
+      "NATIVE_MOBILE_APP_STORE_READINESS_GAPS": 11,
+      "PRF001_CROSS_BARN_TEST_SETUP_BLOCKER": 3,
+      "ROLE_ONBOARDING_NAVIGATION_CONTRACT_GAPS": 47,
+      "TODAY_PULSE_UAT_EVIDENCE_GAPS": 8
+    },
+    "severity": {
+      "P1": 88,
+      "P2": 73
+    }
+  },
+  "classified_node_count": 161,
+  "directive_id": "ES-FOUNDER-AUTH-TA-PRF-001-008-2026-07-26-01",
+  "non_authorization": [
+    "runtime remediation",
+    "test baseline mutation",
+    "test skip or xfail",
+    "CI weakening",
+    "schema or migration",
+    "provider configuration",
+    "production deployment",
+    "release promotion",
+    "payment activation",
+    "pilot enrollment",
+    "public app-store release",
+    "governance supersession",
+    "M4 work"
+  ],
+  "required_files": [
+    "RETAINED_TEST_NODE_CLASSIFICATION_REGISTER.csv",
+    "RETAINED_TEST_BASELINE_SUMMARY.md",
+    "RETAINED_TEST_ROOT_CAUSE_CLUSTERS.csv",
+    "RETAINED_TEST_PILOT_GATE_MATRIX.csv",
+    "RETAINED_TEST_REMEDIATION_WAVES.md",
+    "RETAINED_TEST_CLASSIFICATION_SOURCE_REGISTER.md",
+    "RETAINED_TEST_CLASSIFICATION_VALIDATION_REPORT.md",
+    "RETAINED_TEST_CLASSIFICATION_MANIFEST.json",
+    "RETAINED_TEST_CLASSIFICATION_SHA256SUMS.txt"
+  ],
+  "schema": "equinesync_prf008_retained_test_classification_manifest_v1",
+  "source_baseline": "backend/tests/ci_known_failure_baseline.json",
+  "source_baseline_sha256": "1b51922055edf5e02e2fe7c9c178d016141bdad22c629f31f05878370d09bf0b",
+  "starting_integration_sha": "3eb6825091241709f255b8ccf296987fa9b20724",
+  "unclassified_node_count": 0
+}
