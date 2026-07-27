@@ -1,0 +1,242 @@
+{
+  "artifact_count": 32,
+  "branch": "codex/cgp-006-document-classification-gate-v1",
+  "checksum_ledger": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_CHECKSUMS.sha256",
+  "checksum_treatment": "Ledger excludes itself and the classification manifest from self-hashing; manifest records both paths as EXCLUDED_SELF_REFERENCE.",
+  "classification_counts": {
+    "EXCLUDED_FROM_DRAFTING": 74,
+    "FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE": 41,
+    "HISTORICAL_PREDECESSOR": 38,
+    "NORMATIVE_FROZEN_SOURCE": 139,
+    "REFERENCE_ONLY_NON_NORMATIVE": 2396,
+    "SUPERSEDED": 3
+  },
+  "created_date": "2026-07-27",
+  "default_branch": "integrate-emergent-final-zip",
+  "determination": "CGP_006_DOCUMENT_CLASSIFICATION_COMPLETE_WITH_NON_BLOCKING_WARNINGS",
+  "execution_id": "CGEXEC-20260726-0005",
+  "files": [
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_REPORT.md",
+      "sha256": "9a4002fca3d40d71833f449ac9517cfd69553f67bdff879801985ea9c46e5a4c"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.csv",
+      "sha256": "232a8a726e49e2417fb085a0ecc2d7ea7f7c3bb027f5bd9c3a0d39f40e61ed53"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.json",
+      "sha256": "4ed87810562f05e33f9dbe54707e3ed713ebda9ebbe0ea139c022c68ef60dbe0"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_GUIDE_FAMILY_SOURCE_ALLOCATION.csv",
+      "sha256": "13f3272285122dce40a92885cde4470106c8c4ae840fef18cba5e2b9b0af7b11"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_NORMATIVE_ROW_RECONCILIATION.csv",
+      "sha256": "37dbe9cf6c39a4d794c6ae3abbd77efb4f8851048377b81e934fe1f679cf889a"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_REFERENCE_ONLY_REGISTER.csv",
+      "sha256": "adf8e3fc5865334961819a37998c8dce2108e170903530e85dd39b731571d33c"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_HISTORICAL_PREDECESSOR_REGISTER.csv",
+      "sha256": "a546be0fe61c0a2f22d8a90edff130ecc4d49a14665ae4933a41c8fe675b2dd4"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DUPLICATE_DERIVATIVE_REGISTER.csv",
+      "sha256": "ca8ce73ae71a3311cc27bc257050c4916e99547b492f94abbcd72aef1c79a3b3"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_SUPERSEDED_SOURCE_REGISTER.csv",
+      "sha256": "10d1d77db7ae555f3341306981820eca043349aeca053e426d6119cc7545674c"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_CONFLICT_REGISTER.csv",
+      "sha256": "2a5d8847ea535c1a75375157ca94ce77713a23f11ecf2620eddf0870d5f9b60c"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_EXCLUSION_REGISTER.csv",
+      "sha256": "d07fcea6ffc61f5b520bf8ae2b2864ac12a70a9d961eb679e7e7b32b33c1e9c8"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_PROVENANCE_GAP_REGISTER.csv",
+      "sha256": "3e6753126f912889dbf2a3bd4805a835f2061c716cbf46a3d31f1edd3fef62f1"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_CLASSIFICATION_FINDING_REGISTER.csv",
+      "sha256": "8ba7593dd9cb11cbc67dc97ec49db812c17aa130fd1c60b1edeea6d3f8ab57f6"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_VALIDATION.md",
+      "sha256": "e10f6f01e3777871c738f590122eaa43a7c843884216fb9d9bac0e75b3a97a6b"
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "EXCLUDED_SELF_REFERENCE",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_MANIFEST.json",
+      "sha256": ""
+    },
+    {
+      "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
+      "checksum_inclusion": "EXCLUDED_SELF_REFERENCE",
+      "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_CHECKSUMS.sha256",
+      "sha256": ""
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/PROGRAM_STATUS.md",
+      "sha256": "80a0d1a9f779e3ee35305cfc802e6c3f39d8ff1b7b4e7a013c6c8bb373f81a2f"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv",
+      "sha256": "13cccf64a2cdc616435f02975cb1cabf0a9e0ba2d0026e9b6498bf00893ca583"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/cgp_validation.py",
+      "sha256": "c2981bb77589ac5715fd3886351e7c021c957bc749cd6e538a5c2c6baaade67a"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/validate_cgp006_initiation.py",
+      "sha256": "a853c005ae4d4334a09e5ea2dc79cf063ead117b4775dfa95635a168175df694"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/validate_cgp006_document_classification.py",
+      "sha256": "3c9d8270488c526f5aeea96192d08c919f9bf25e1169bb98a6aeaf7aea72a18c"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/validation/tests/test_cgp006_document_classification.py",
+      "sha256": "d458f4e54b160c0c45ae29debd851c3f473c88c056418821c510357eceabcf33"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_REGISTER.csv",
+      "sha256": "2066714e1b863fdc3bc6af2e5e9c83682be79c63cc002bbc53676967c6b99610"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/source-freeze/WAVE_1_REFERENCE_CORPUS_REGISTER.csv",
+      "sha256": "ee5071147038d6cb861a6256b34a4ced681621fc6518dff2978238923dabde74"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/source-freeze/WAVE_1_REFERENCE_CORPUS_MANIFEST.json",
+      "sha256": "84abdfa68ca87dc53c05be998f37663d52cced63605b296d70a0595474179355"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/guides/ES-CG-10/source-freeze/ES-CG-10_SOURCE_FREEZE_REGISTER.csv",
+      "sha256": "dbe45daaf0ba17fadf6c5779ce7a9d3a8511af1663185cc464843964ea477a72"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
+      "sha256": "1d34e2832b29d8cd5ce77669afa990f2a205ce5334a43d25882a06f15ed042bf"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/packages/CGP_003_SHA256SUMS.txt",
+      "sha256": "6c2b168b7472af19000b72102eda5ae183c2ccec6544f6b5a20f6e5fc41a1c44"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/packages/CGP_004_SHA256SUMS.txt",
+      "sha256": "3821ffdc0e75cda68156b58e4d7a8af6271607d2c18f4f8df76915ab4be5e6d6"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/packages/CGP_005_SHA256SUMS.txt",
+      "sha256": "b152f321e403c44311d02e10a890348098199281887a736804ce69dcc752d7f5"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_PACKAGE_MANIFEST.json",
+      "sha256": "6a00dfadffa428806da535a121877e77fc2e9b17f1de3d3f65c0e6c26f47149c"
+    },
+    {
+      "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
+      "checksum_inclusion": "INCLUDED",
+      "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_CHECKSUMS.sha256",
+      "sha256": "5b3ca9359548cdc3e0ee57d8b621896ff9327ceb0609bb10d2bd27601de84667"
+    }
+  ],
+  "founder_review_required_before_merge": true,
+  "guide_normative_counts": {
+    "ES-CG-00": 29,
+    "ES-CG-01": 34,
+    "ES-CG-10": 31,
+    "ES-CG-13": 45
+  },
+  "non_authorization": [
+    "NO_SUBSTANTIVE_GUIDE_DRAFTING",
+    "NO_GUIDE_CONTROL_CREATION",
+    "NO_GUIDE_ADOPTION",
+    "NO_GUIDE_ACTIVATION",
+    "NO_APPLICATION_CODE_CHANGE",
+    "NO_CGP007_AUTHORITY"
+  ],
+  "normative_row_count": 139,
+  "package_id": "ES-CGP-006-DOCUMENT-CLASSIFICATION-GATE-2026-07-27",
+  "pr23_context_count": 10,
+  "prompt_id": "CGP-006",
+  "reference_corpus_count": 2511,
+  "reference_corpus_non_normative_count": 2511,
+  "starting_baseline": "4afe3ccd84d9f8be1bc5c79bb27068676d993a70",
+  "total_classification_records": 2691,
+  "unique_normative_source_ids": 68,
+  "wave_guides": [
+    "ES-CG-00",
+    "ES-CG-01",
+    "ES-CG-13",
+    "ES-CG-10"
+  ]
+}
