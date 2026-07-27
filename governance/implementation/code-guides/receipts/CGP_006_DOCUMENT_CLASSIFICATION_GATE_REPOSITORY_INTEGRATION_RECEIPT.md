@@ -11,9 +11,9 @@
 
 ## Integration Status
 
-`CGP_006_DOCUMENT_CLASSIFICATION_FOUNDER_APPROVED_PRIMARY_MERGE_COMPLETE`
+`CGP_006_DOCUMENT_CLASSIFICATION_GATE_RECEIPT_MERGED_PENDING_METADATA_FINALIZATION`
 
-The Founder-approved CGP-006 Document Classification Gate package has completed its protected primary merge through PR `#30`. Repository accession is not complete until this receipt and any required self-reference-safe metadata reconciliation are protected, merged, and verified on the remote default branch.
+The Founder-approved CGP-006 Document Classification Gate package completed its protected primary merge through PR `#30`, and this repository-native custody receipt completed protected receipt merge through PR `#34`. Repository accession metadata is finalized by the self-reference-safe metadata follow-up because the receipt could not truthfully contain its own merge commit before PR `#34` merged.
 
 ## Primary Pull Request Integration
 
@@ -31,12 +31,13 @@ The Founder-approved CGP-006 Document Classification Gate package has completed 
 
 ## Receipt Pull Request
 
-- Receipt pull request: `PENDING_RECEIPT_PR_CREATED_AFTER_THIS_COMMIT`
-- Receipt commit: `PENDING_RECEIPT_COMMIT_VERIFIED_AFTER_PUSH`
-- Receipt merge commit: `PENDING_RECEIPT_MERGE_COMMIT_RECORDED_BY_METADATA_FOLLOW_UP`
-- Receipt merge timestamp: `PENDING_RECEIPT_MERGE_TIMESTAMP_RECORDED_BY_METADATA_FOLLOW_UP`
-- Remote default-branch head after receipt merge: `PENDING_RECEIPT_HEAD_RECORDED_BY_METADATA_FOLLOW_UP`
-- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_RECEIPT_MERGE`
+- Receipt pull request: `#34`
+- Receipt commit: `7586e5158ef02dfe043bd304ed88c6acda1c08c1`
+- Receipt merge commit: `05155d8aa795bc94b70703b2d188d6d6bcbb5048`
+- Receipt merge timestamp: `2026-07-27T08:30:15Z`
+- Remote default-branch head after receipt merge: `05155d8aa795bc94b70703b2d188d6d6bcbb5048`
+- Metadata branch: `codex/cgp-006-classification-metadata-reconciliation`
+- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_THIS_COMMIT`
 - Metadata merge commit: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF`
 - Final remote default-branch head after custody completion: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF`
 
@@ -54,6 +55,7 @@ The Founder disposition approved protected integration of the refreshed classifi
 - Classification ledger SHA-256 recorded in manifest: `3d3324632266f545de40570ba658db7ebcbec53c98e243d3ce5df81fbffb1a6a`
 - Manifest determination: `CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
 - Classification gate status at primary merge: `FOUNDER_APPROVED_PENDING_PROTECTED_INTEGRATION`
+- Classification gate status after receipt and metadata reconciliation: `DOCUMENT_CLASSIFICATION_GATE_PASSED`
 - Self-reference treatment: the classification ledger excludes itself and the classification manifest from self-hashing.
 
 ## Accepted Classification Baseline
@@ -112,6 +114,7 @@ These gaps remain unresolved downstream gaps and do not create implementation au
 - `python3 -m unittest discover -s governance/implementation/code-guides/validation/tests`: `39/39 OK`
 - CGP-002, CGP-003, CGP-004, CGP-005, CGP-006 initiation, and CGP-006 document classification checksum ledgers: `PASS`
 - GitHub protected checks for PR `#30`: `PASS`
+- GitHub protected checks for PR `#34`: `PASS`
 
 ## Wave 1 Drafting Boundary
 
@@ -130,4 +133,4 @@ This receipt records protected primary merge custody for the CGP-006 Document Cl
 
 ## Self-Reference Treatment
 
-The primary merge metadata is fixed in this receipt. Receipt PR number, receipt commit, receipt merge commit, receipt merge timestamp, metadata PR number, metadata commit, metadata merge commit, and final remote default-branch head cannot be safely self-recorded before the corresponding protected PRs are created and merged. Those values must be recorded in the later metadata follow-up and final handoff.
+The primary merge metadata and receipt merge metadata are fixed in this receipt. Metadata PR number, metadata commit, metadata merge commit, and final remote default-branch head cannot be safely self-recorded before the metadata branch is created and merged. Those values are recorded in the final handoff after protected metadata integration and remote verification.

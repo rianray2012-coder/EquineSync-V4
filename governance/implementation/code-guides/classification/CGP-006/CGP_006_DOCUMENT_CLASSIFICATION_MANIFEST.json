@@ -22,7 +22,7 @@
     "REFERENCE_ONLY_NON_NORMATIVE": 2396,
     "SUPERSEDED": 3
   },
-  "classification_gate_status": "FOUNDER_APPROVED_PENDING_PROTECTED_INTEGRATION",
+  "classification_gate_status": "DOCUMENT_CLASSIFICATION_GATE_PASSED",
   "created_date": "2026-07-27",
   "default_branch": "integrate-emergent-final-zip",
   "determination": "CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS",
@@ -134,19 +134,19 @@
       "artifact_type": "CGP_006_DOCUMENT_CLASSIFICATION_ARTIFACT",
       "checksum_inclusion": "EXCLUDED_SELF_REFERENCE",
       "path": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_CHECKSUMS.sha256",
-      "sha256": "3d3324632266f545de40570ba658db7ebcbec53c98e243d3ce5df81fbffb1a6a"
+      "sha256": "7ae4d9c305affc77985f6bbd260892ee80c2f915e3bace257eb026154e261681"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/PROGRAM_STATUS.md",
-      "sha256": "5d6aeb81ff2940da271a9d7d3b2a7f138356613ca81f7673e0bedaeeef142755"
+      "sha256": "6c28f8748575b654e03afe636ea767ed34f1725230202f90c1593cdb513bcef9"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv",
-      "sha256": "8dfc6fa03ff3724c82b92f94fef1faeb32ab46a431cf594f8cd9fcc62cc229f8"
+      "sha256": "31b24a45267077677425af52fee69e2468e40b4f29b498867a796f1af2a4adba"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
@@ -176,13 +176,13 @@
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_REGISTER.csv",
-      "sha256": "3d8ed8160a79150cccedc2e61947db895b9a1cfca56ddb9f357da774050e75c3"
+      "sha256": "d94a550f278f9c99515a4c9b19d5421ac198f57abf0ecd28238a7fd9ffa00722"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-freeze/WAVE_1_REFERENCE_CORPUS_REGISTER.csv",
-      "sha256": "3fccae5dad0c623100fd5a9b0b05a7b9b80e84ee43e6afbfba6bb918c46c7b5b"
+      "sha256": "b585f6355b118574fff92cd7384aa447044652f2c151b20fe25041cf6373057b"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
@@ -200,39 +200,40 @@
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
-      "sha256": "a61d91b5ea42d76b9efc3fd20704b5813a9554f6f7e1012a28ba377397aa993d"
+      "sha256": "58618f45c213a206a9e25c7ddd8699fff2cc71bc1111b798f4050df56d6d13bd"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_003_SHA256SUMS.txt",
-      "sha256": "8cb9e92832aba66e5afc6b00413c67f8651332b335a7cf8c6e5bd8daebab4e60"
+      "sha256": "45b283a20147bc11b87586a5155602fbb2e50e9d0933d0d21f9db685e379cbee"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_004_SHA256SUMS.txt",
-      "sha256": "81e633d23810044f9de1895b780a87d63a73943b092bdb9bb27014a6f412a7a7"
+      "sha256": "811a41f3ed1d5054b1275a8095838d0462c024307c5bee6f1cd0d575765492f8"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_005_SHA256SUMS.txt",
-      "sha256": "726d2b7265ce6ea58c749e10deb09eb6b77a8563b847d180e10f56fe9fe5c8d0"
+      "sha256": "91811eb032dbd28a506939f07b026d28496d2b3a9e917b81c11121f8ca712322"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_PACKAGE_MANIFEST.json",
-      "sha256": "65593b8d58a6da6c7c5ccd0ae5c66452039e34f271f276d0eb3bb8b3e141bd03"
+      "sha256": "d8fea79e2f0ca0971363126b9c4d724322ba1bd8bd821352426f162f77278a6c"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_CHECKSUMS.sha256",
-      "sha256": "200921ac368fa61cd958ee16675cdb7cff5d2f4fea3ca111e33b6ce4370447e6"
+      "sha256": "dd724fc5c90f6a8aa679eccdb7853f7b00ff6c009652cda5acc256c8b390b1d0"
     }
   ],
+  "final_remote_default_branch_head": "PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF",
   "founder_context_record_count": 51,
   "founder_disposition": "CGP_006_DOCUMENT_CLASSIFICATION_GATE_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS",
   "founder_disposition_artifact": "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_FOUNDER_DISPOSITION.md",
@@ -252,6 +253,10 @@
     "ES-CG-10": "MAJOR_REFRESH / READY_AFTER_REFRESH",
     "ES-CG-13": "MAJOR_REFRESH / READY_AFTER_REFRESH"
   },
+  "metadata_merge_commit": "PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF",
+  "metadata_pull_request": "PENDING_METADATA_PR_CREATED_AFTER_THIS_COMMIT",
+  "metadata_reconciliation_branch": "codex/cgp-006-classification-metadata-reconciliation",
+  "metadata_reconciliation_required": true,
   "new_controlling_base": "1feeccb5f35e8fbbd2185782377a17b831c2f3e9",
   "non_authorization": [
     "NO_SUBSTANTIVE_GUIDE_DRAFTING",
@@ -271,6 +276,16 @@
   ],
   "normative_row_count": 139,
   "package_id": "ES-CGP-006-DOCUMENT-CLASSIFICATION-GATE-2026-07-27",
+  "post_integration_actual_state": {
+    "cgp006_accession_state": "REPOSITORY_ACCESSIONED",
+    "cgp006_authority": "ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING",
+    "cgp007_state": "NOT_ISSUED",
+    "classification_gate": "DOCUMENT_CLASSIFICATION_GATE_PASSED",
+    "founder_disposition": "FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS",
+    "implementation_authority": "NOT_GRANTED",
+    "normative_state": "SOURCE_FROZEN",
+    "wave_1_drafting_handoff_status": "WAVE_1_BOUNDED_CANDIDATE_DRAFTING_READY_TO_BEGIN_IN_SEPARATE_WORKSTREAM"
+  },
   "post_integration_target_state": {
     "cgp006_accession_state": "REPOSITORY_ACCESSIONED",
     "cgp006_authority": "ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING",
@@ -278,24 +293,36 @@
     "classification_gate": "DOCUMENT_CLASSIFICATION_GATE_PASSED",
     "founder_disposition": "FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS",
     "implementation_authority": "NOT_GRANTED",
-    "normative_state": "SOURCE_FROZEN"
+    "normative_state": "SOURCE_FROZEN",
+    "wave_1_drafting_handoff_status": "WAVE_1_BOUNDED_CANDIDATE_DRAFTING_READY_TO_BEGIN_IN_SEPARATE_WORKSTREAM"
   },
   "pr23_context_count": 10,
   "pr23_treatment": "FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE; NOT_PROMOTED_TO_NORMATIVE_SOURCE_SET",
   "previous_pr30_base": "4afe3ccd84d9f8be1bc5c79bb27068676d993a70",
   "previous_pr30_head": "834334f41226aabedaa842057d39766b7ba4e524",
+  "primary_integration_head": "975d606c569e999c7598ad1cc5ee26f0acc20a32",
+  "primary_integration_pull_request": 30,
+  "primary_merge_commit": "024163c657444a91eaaf46c59c87a9cbb63a549c",
+  "primary_merge_timestamp": "2026-07-27T08:24:35Z",
   "prompt_id": "CGP-006",
   "protected_integration_required": true,
   "provenance_gap_count": 0,
+  "receipt_head": "7586e5158ef02dfe043bd304ed88c6acda1c08c1",
+  "receipt_merge_commit": "05155d8aa795bc94b70703b2d188d6d6bcbb5048",
+  "receipt_merge_timestamp": "2026-07-27T08:30:15Z",
+  "receipt_pull_request": 34,
   "reference_corpus_count": 2511,
   "reference_corpus_non_normative_count": 2511,
+  "remote_head_after_receipt_merge": "05155d8aa795bc94b70703b2d188d6d6bcbb5048",
+  "repository_accession_state": "REPOSITORY_ACCESSIONED",
   "retained_appendix_gap_count": 4,
   "retained_non_blocking_warning_count": 5,
   "source_freeze_amendment": "NOT_REQUIRED",
   "starting_baseline": "4afe3ccd84d9f8be1bc5c79bb27068676d993a70",
   "total_classification_records": 2701,
   "unique_normative_source_ids": 68,
-  "wave_1_drafting_handoff_status": "PENDING_PROTECTED_INTEGRATION_AND_SEPARATE_WORKSTREAM",
+  "wave_1_drafting_handoff_artifact": "governance/implementation/code-guides/handoffs/CGP_006_WAVE_1_BOUNDED_CANDIDATE_DRAFTING_HANDOFF.md",
+  "wave_1_drafting_handoff_status": "WAVE_1_BOUNDED_CANDIDATE_DRAFTING_READY_TO_BEGIN_IN_SEPARATE_WORKSTREAM",
   "wave_guides": [
     "ES-CG-00",
     "ES-CG-01",

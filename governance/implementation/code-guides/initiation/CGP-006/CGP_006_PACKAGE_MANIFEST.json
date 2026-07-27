@@ -19,7 +19,7 @@
       "artifact_type": "CGP_006_STATUS_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/PROGRAM_STATUS.md",
-      "sha256": "5d6aeb81ff2940da271a9d7d3b2a7f138356613ca81f7673e0bedaeeef142755"
+      "sha256": "6c28f8748575b654e03afe636ea767ed34f1725230202f90c1593cdb513bcef9"
     },
     {
       "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
@@ -103,7 +103,7 @@
       "artifact_type": "CGP_006_REGISTER_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv",
-      "sha256": "8dfc6fa03ff3724c82b92f94fef1faeb32ab46a431cf594f8cd9fcc62cc229f8"
+      "sha256": "31b24a45267077677425af52fee69e2468e40b4f29b498867a796f1af2a4adba"
     },
     {
       "artifact_type": "CGP_006_REGISTER_RECONCILIATION_ARTIFACT",
@@ -139,13 +139,13 @@
       "artifact_type": "CGP_006_SOURCE_CUSTODY_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-accession/MASTER_CODE_GUIDE_SOURCE_REGISTER.csv",
-      "sha256": "3d8ed8160a79150cccedc2e61947db895b9a1cfca56ddb9f357da774050e75c3"
+      "sha256": "d94a550f278f9c99515a4c9b19d5421ac198f57abf0ecd28238a7fd9ffa00722"
     },
     {
       "artifact_type": "CGP_006_SOURCE_FREEZE_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/source-freeze/WAVE_1_REFERENCE_CORPUS_REGISTER.csv",
-      "sha256": "3fccae5dad0c623100fd5a9b0b05a7b9b80e84ee43e6afbfba6bb918c46c7b5b"
+      "sha256": "b585f6355b118574fff92cd7384aa447044652f2c151b20fe25041cf6373057b"
     },
     {
       "artifact_type": "CGP_006_SOURCE_FREEZE_RECONCILIATION_ARTIFACT",
@@ -163,37 +163,37 @@
       "artifact_type": "CGP_006_PACKAGE_LEDGER_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
-      "sha256": "a61d91b5ea42d76b9efc3fd20704b5813a9554f6f7e1012a28ba377397aa993d"
+      "sha256": "58618f45c213a206a9e25c7ddd8699fff2cc71bc1111b798f4050df56d6d13bd"
     },
     {
       "artifact_type": "CGP_006_PACKAGE_LEDGER_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_003_SHA256SUMS.txt",
-      "sha256": "8cb9e92832aba66e5afc6b00413c67f8651332b335a7cf8c6e5bd8daebab4e60"
+      "sha256": "45b283a20147bc11b87586a5155602fbb2e50e9d0933d0d21f9db685e379cbee"
     },
     {
       "artifact_type": "CGP_006_PACKAGE_LEDGER_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_004_SHA256SUMS.txt",
-      "sha256": "81e633d23810044f9de1895b780a87d63a73943b092bdb9bb27014a6f412a7a7"
+      "sha256": "811a41f3ed1d5054b1275a8095838d0462c024307c5bee6f1cd0d575765492f8"
     },
     {
       "artifact_type": "CGP_006_PACKAGE_LEDGER_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/packages/CGP_005_SHA256SUMS.txt",
-      "sha256": "726d2b7265ce6ea58c749e10deb09eb6b77a8563b847d180e10f56fe9fe5c8d0"
+      "sha256": "91811eb032dbd28a506939f07b026d28496d2b3a9e917b81c11121f8ca712322"
     },
     {
       "artifact_type": "CGP_006_SOURCE_FREEZE_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-00/source-freeze/ES-CG-00_SOURCE_FREEZE_REGISTER.csv",
-      "sha256": "2d195b8f2c82d940c86a285b63c4330cb8cbdc664f1cbbe5d559e6a185a88b04"
+      "sha256": "e9c3dd9335f1b8aa2a917e85088c0eedd3a247ed1014344205b96ec14a3083f5"
     },
     {
       "artifact_type": "CGP_006_SOURCE_FREEZE_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/guides/ES-CG-13/source-freeze/ES-CG-13_SOURCE_FREEZE_REGISTER.csv",
-      "sha256": "46701e073170395fda213a443757e50433f2ee31fc8f1bae4c1deadcddf7b1a3"
+      "sha256": "b0b3c3507dd4a90c1101e134dd34567076054ebc266c8a7cc4d0a53267c62d53"
     },
     {
       "artifact_type": "CGP_006_REPOSITORY_INTEGRATION_RECEIPT_ARTIFACT",
