@@ -19,7 +19,7 @@
       "artifact_type": "CGP_006_STATUS_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/PROGRAM_STATUS.md",
-      "sha256": "6c28f8748575b654e03afe636ea767ed34f1725230202f90c1593cdb513bcef9"
+      "sha256": "717ffe13802540f6b13cd3ac644872619da07bf790f238b8c5a03d02e980a755"
     },
     {
       "artifact_type": "CGP_006_INITIATION_PACKAGE_ARTIFACT",
@@ -103,7 +103,7 @@
       "artifact_type": "CGP_006_REGISTER_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv",
-      "sha256": "31b24a45267077677425af52fee69e2468e40b4f29b498867a796f1af2a4adba"
+      "sha256": "d5b249d18d5e7931b18cab8983086cedafca5df8d8b74c490f90c93ea0b864f3"
     },
     {
       "artifact_type": "CGP_006_REGISTER_RECONCILIATION_ARTIFACT",

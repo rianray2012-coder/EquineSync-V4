@@ -11,9 +11,9 @@
 
 ## Receipt Status
 
-`CGP_006_WAVE_1_CANDIDATE_BASELINE_FOUNDER_APPROVED_PRIMARY_MERGE_COMPLETE_RECEIPT_PENDING`
+`CGP_006_WAVE_1_CANDIDATE_BASELINE_CUSTODY_RECEIPT_MERGED_METADATA_RECONCILIATION_PENDING`
 
-This receipt records primary protected repository custody for the Founder-approved CGP-006 Wave 1 controlled candidate baseline after PR `#36` merged. Receipt PR number, receipt commit, receipt merge commit, receipt merge timestamp, metadata branch, metadata PR, metadata merge commit, and final remote default-branch head are self-reference-sensitive and are recorded in the follow-up metadata reconciliation after the receipt PR is protected-merged.
+This receipt records primary protected repository custody for the Founder-approved CGP-006 Wave 1 controlled candidate baseline after PR `#36` merged. Receipt PR number, receipt commit, receipt merge commit, and receipt merge timestamp are reconciled by this metadata branch. Metadata PR number, metadata commit, metadata merge commit, and final remote default-branch head are self-reference-sensitive and are reported after this metadata PR is protected-merged.
 
 ## Primary Pull Request Integration
 
@@ -32,15 +32,15 @@ This receipt records primary protected repository custody for the Founder-approv
 
 ## Receipt Pull Request
 
-- Receipt pull request: `PENDING_RECEIPT_PR_CREATED_AFTER_THIS_COMMIT`
-- Receipt commit: `PENDING_RECEIPT_COMMIT_RECORDED_AFTER_THIS_COMMIT`
-- Receipt PR head: `PENDING_RECEIPT_PR_HEAD_RECORDED_AFTER_PUSH`
-- Receipt merge commit: `PENDING_RECEIPT_MERGE_COMMIT_RECORDED_BY_METADATA_RECONCILIATION`
-- Receipt merge timestamp: `PENDING_RECEIPT_MERGE_TIMESTAMP_RECORDED_BY_METADATA_RECONCILIATION`
-- Metadata branch: `PENDING_METADATA_RECONCILIATION_AFTER_RECEIPT_MERGE`
-- Metadata pull request: `PENDING_METADATA_RECONCILIATION_AFTER_RECEIPT_MERGE`
-- Metadata merge commit: `PENDING_METADATA_RECONCILIATION_AFTER_RECEIPT_MERGE`
-- Final remote default-branch head after custody completion: `PENDING_METADATA_RECONCILIATION_AFTER_RECEIPT_MERGE`
+- Receipt pull request: `#37`
+- Receipt commit: `8a3b4f14bd4e69f3aac7622f7db6203e916b56e3`
+- Receipt PR head: `8a3b4f14bd4e69f3aac7622f7db6203e916b56e3`
+- Receipt merge commit: `298501b29e31843070fa13617860e238f8704a3b`
+- Receipt merge timestamp: `2026-07-27T18:15:47Z`
+- Metadata branch: `codex/cgp-006-wave-1-candidate-baseline-metadata-reconciliation`
+- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_THIS_COMMIT`
+- Metadata merge commit: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_ACCESSION_REPORT`
+- Final remote default-branch head after custody completion: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_ACCESSION_REPORT`
 
 ## Founder Disposition
 
@@ -57,16 +57,16 @@ The disposition is recorded in `governance/implementation/code-guides/drafting/C
 - Manifest/checksum result at primary merge: `PASS`
 - Package lifecycle at primary merge: `FOUNDER_APPROVED_CANDIDATE_BASELINE`
 - Repository state before primary merge: `INTEGRATION_PENDING`
-- Repository state after primary merge: `PRIMARY_MERGE_COMPLETE_RECEIPT_PENDING`
+- Repository state after primary merge: `PRIMARY_MERGE_COMPLETE_RECEIPT_MERGED_METADATA_PENDING`
 
 ## Approved Guide Baseline
 
 | Guide | Version | Controls | Invariants | Mandatory questions | Normative rows | Lifecycle | Repository state |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
-| `ES-CG-00` | `0.1.0-candidate.1` | 5 | 5 | 8 | 29 | `FOUNDER_APPROVED_CANDIDATE_BASELINE` | `PRIMARY_MERGE_COMPLETE_RECEIPT_PENDING` |
-| `ES-CG-01` | `0.1.0-candidate.1` | 5 | 5 | 8 | 34 | `FOUNDER_APPROVED_CANDIDATE_BASELINE` | `PRIMARY_MERGE_COMPLETE_RECEIPT_PENDING` |
-| `ES-CG-13` | `0.1.0-candidate.1` | 6 | 6 | 8 | 45 | `FOUNDER_APPROVED_CANDIDATE_BASELINE` | `PRIMARY_MERGE_COMPLETE_RECEIPT_PENDING` |
-| `ES-CG-10` | `0.1.0-candidate.1` | 6 | 6 | 8 | 31 | `FOUNDER_APPROVED_CANDIDATE_BASELINE` | `PRIMARY_MERGE_COMPLETE_RECEIPT_PENDING` |
+| `ES-CG-00` | `0.1.0-candidate.1` | 5 | 5 | 8 | 29 | `FOUNDER_APPROVED_CANDIDATE_BASELINE` | `REPOSITORY_ACCESSIONED` |
+| `ES-CG-01` | `0.1.0-candidate.1` | 5 | 5 | 8 | 34 | `FOUNDER_APPROVED_CANDIDATE_BASELINE` | `REPOSITORY_ACCESSIONED` |
+| `ES-CG-13` | `0.1.0-candidate.1` | 6 | 6 | 8 | 45 | `FOUNDER_APPROVED_CANDIDATE_BASELINE` | `REPOSITORY_ACCESSIONED` |
+| `ES-CG-10` | `0.1.0-candidate.1` | 6 | 6 | 8 | 31 | `FOUNDER_APPROVED_CANDIDATE_BASELINE` | `REPOSITORY_ACCESSIONED` |
 
 All `32` mandatory-question responses remain `PARTIALLY_ANSWERED` and are accepted only as `PARTIALLY_ANSWERED_ACCEPTABLE_FOR_CANDIDATE_STAGE`.
 
@@ -122,6 +122,12 @@ No retained gap was closed, hidden, promoted, or converted into implementation a
 - Manifest/checksum validation: `PASS`
 - GitHub protected checks for PR `#36`: `PASS`
 - Legacy source-accession/source-freeze treatment: `SUPERSEDED_BY_ACCESSIONED_BASELINE_VALIDATION`
+
+## Metadata Reconciliation
+
+- Metadata branch: `codex/cgp-006-wave-1-candidate-baseline-metadata-reconciliation`
+- Metadata scope: receipt merge identifiers, package repository-state metadata, program status, and tracker notes only.
+- Metadata exclusions: guide text substance, controls, invariants, mandatory-question answers, classifications, dependencies, warnings, gaps, adoption, activation, implementation, source promotion, and CGP-007.
 
 ## Authority Boundary
 

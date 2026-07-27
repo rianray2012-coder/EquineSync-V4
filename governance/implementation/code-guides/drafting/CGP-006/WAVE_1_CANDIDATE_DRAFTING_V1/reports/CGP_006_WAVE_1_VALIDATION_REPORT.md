@@ -35,8 +35,15 @@ Wave 1 validator PASS; Founder-review validator PASS; candidate-baseline approva
 
 Before approval update: `ALL_REPORTED_CHECKS_PASS: Backend known-failure non-regression gate; Backend suite is collectable; Frontend build; Vercel; Vercel Preview Comments`.
 
-After approval update: `PENDING_PROTECTED_CHECKS_AFTER_PUSH`.
+After approval update: `ALL_REPORTED_CHECKS_PASS` on PR `#36`; custody receipt checks passed on PR `#37`.
 
 ## Result Interpretation Boundary
 
 A validation pass means the documentary candidate package records Founder approval for controlled candidate-baseline custody. It does not adopt, activate, make effective, implement, deploy, promote sources, issue CGP-007, or close retained warnings or gaps.
+
+## Metadata Reconciliation
+
+- Primary merge commit: `c0f598822ede7a9b8fa079dde8603df027cf8510`
+- Receipt merge commit: `298501b29e31843070fa13617860e238f8704a3b`
+- Metadata branch: `codex/cgp-006-wave-1-candidate-baseline-metadata-reconciliation`
+- Repository state after protected metadata merge: `REPOSITORY_ACCESSIONED`
