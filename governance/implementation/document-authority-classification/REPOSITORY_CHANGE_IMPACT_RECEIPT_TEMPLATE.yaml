@@ -1,0 +1,94 @@
+receipt_id:
+repository:
+review_scope:
+base_commit:
+current_head:
+comparison_range:
+review_date:
+reviewer:
+
+changes:
+  normative:
+    changed_count:
+    added_count:
+    deleted_count:
+    renamed_count:
+    files: []
+
+  governance_with_normative_effect:
+    changed_count:
+    added_count:
+    deleted_count:
+    files: []
+
+  governance_only:
+    changed_count:
+    added_count:
+    deleted_count:
+    files: []
+
+  custody:
+    changed_count:
+    added_count:
+    deleted_count:
+    files: []
+
+  historical:
+    changed_count:
+    added_count:
+    deleted_count:
+    files: []
+
+  unclassified:
+    changed_count:
+    added_count:
+    deleted_count:
+    files: []
+
+authority_review:
+  controlling_artifact_changed:
+  approval_status_changed:
+  adoption_status_changed:
+  supersession_status_changed:
+  source_set_membership_changed:
+  source_hash_changed:
+  duplicate_authority_detected:
+  exact_byte_claim_verified:
+
+determinations:
+  normative_source_changed:
+  governance_normative_effect_found:
+  governance_only_change_found:
+  custody_only_change:
+  historical_only_change:
+  unclassified_change_found:
+  cgp_005_appendix_required:
+  cgp_005_amendment_required:
+  cgp_006_input_refresh_required:
+  code_guide_refresh_required:
+  affected_code_guides: []
+  drafting_may_continue:
+  implementation_may_continue:
+
+validation:
+  checksum_verification:
+  package_manifest_verification:
+  classification_register_verification:
+  cgp_005_source_set_verification:
+  authority_conflict_check:
+  result:
+
+allowed_results:
+  - PASS_NO_RELEVANT_CHANGE
+  - PASS_CUSTODY_ONLY
+  - PASS_HISTORICAL_ONLY
+  - PASS_NO_MATERIAL_CODE_GUIDE_IMPACT
+  - PASS_AFTER_CGP_006_INPUT_REFRESH
+  - PASS_AFTER_CGP_005_APPENDIX
+  - STOP_CGP_005_AMENDMENT_REQUIRED
+  - STOP_UNCLASSIFIED_ARTIFACT
+  - STOP_AUTHORITY_CONFLICT
+  - STOP_EXACT_BYTE_CLAIM_FAILED
+  - STOP_VALIDATION_FAILED
+
+notes:

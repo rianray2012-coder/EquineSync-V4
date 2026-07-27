@@ -1,0 +1,59 @@
+{
+  "package_id": "ES-DOC-AUTH-CLASSIFICATION-V1.0.0",
+  "package_version": "1.0.0",
+  "creation_date": "2026-07-27",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "base_branch": "integrate-emergent-final-zip",
+  "base_commit": "4afe3ccd84d9f8be1bc5c79bb27068676d993a70",
+  "working_branch": "codex/document-authority-classification-framework-v1",
+  "canonical_path": "governance/implementation/document-authority-classification/",
+  "file_count": 10,
+  "classification_counts": {
+    "NORMATIVE_AUTHORITY": 3,
+    "GOVERNANCE_AUTHORITY": 21,
+    "CUSTODY_EVIDENCE": 15,
+    "HISTORICAL_REFERENCE": 2,
+    "UNCLASSIFIED": 0
+  },
+  "authority_effect_counts": {
+    "DIRECT_NORMATIVE_EFFECT": 3,
+    "GOVERNANCE_WITH_NORMATIVE_EFFECT": 20,
+    "GOVERNANCE_ONLY": 1,
+    "CUSTODY_ONLY": 15,
+    "HISTORICAL_ONLY": 2,
+    "UNDETERMINED": 0
+  },
+  "validation_result": "DOCUMENT_CLASSIFICATION_FRAMEWORK_VALIDATED",
+  "workstream_determinations": {
+    "item_05": "ITEM_05_NORMATIVE_RELOCATION_WITH_IDENTICAL_BYTES",
+    "pr_23": "PR23_REQUIRES_CGP_005_APPENDIX",
+    "cgp_005": "CGP_005_APPENDIX_REQUIRED",
+    "cgp_006": "PROCEED_AFTER_CGP_005_APPENDIX"
+  },
+  "affected_wave_1_code_guides": [
+    "ES-CG-00",
+    "ES-CG-01",
+    "ES-CG-13",
+    "ES-CG-10"
+  ],
+  "drafting_may_proceed": false,
+  "implementation_may_proceed": false,
+  "cgp_005_appendix_required": true,
+  "cgp_005_amendment_required": false,
+  "cgp_006_input_refresh_required": true,
+  "unclassified_or_disputed_artifacts": [],
+  "no_runtime_change_statement": "This package adds documentary classification artifacts only and performs no runtime implementation.",
+  "approved_source_bytes_preserved_statement": "Existing approved source bytes were not modified by this package.",
+  "package_files": [
+    "governance/implementation/document-authority-classification/DOCUMENT_AUTHORITY_CLASSIFICATION_STANDARD.md",
+    "governance/implementation/document-authority-classification/DOCUMENT_AUTHORITY_CLASSIFICATION_REGISTER.csv",
+    "governance/implementation/document-authority-classification/DOCUMENT_CLASSIFICATION_DECISION_TREE.md",
+    "governance/implementation/document-authority-classification/CODE_GUIDE_FREEZE_IMPACT_MATRIX.csv",
+    "governance/implementation/document-authority-classification/CGP_SOURCE_FREEZE_INTEGRATION_RULES.md",
+    "governance/implementation/document-authority-classification/REPOSITORY_CHANGE_IMPACT_RECEIPT_TEMPLATE.yaml",
+    "governance/implementation/document-authority-classification/INITIAL_CLASSIFICATION_REPORT.md",
+    "governance/implementation/document-authority-classification/CLASSIFICATION_VALIDATION_REPORT.md",
+    "governance/implementation/document-authority-classification/DOCUMENT_CLASSIFICATION_PACKAGE_MANIFEST.json",
+    "governance/implementation/document-authority-classification/DOCUMENT_CLASSIFICATION_PACKAGE_SHA256SUMS.txt"
+  ]
+}
