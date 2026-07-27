@@ -1514,7 +1514,7 @@ def validate_wave_1_drafting_readiness(root: Path, wave_guides: tuple[str, ...] 
             result.add("missing_drafting_question_inventory", "Drafting-question inventory is missing.", question_path, guide)
         blocking = row.get("blocking_findings", "")
         if row.get("cgp006_ready") == "YES":
-            result.add("cgp006_ready_before_founder_acceptance", "CGP-006 readiness must remain NO until CGP-005 repository integration is complete and CGP-006 is separately issued.", readiness_path, guide)
+            result.add("cgp006_ready_before_classification_gate", "CGP-006 readiness must remain NO until the document classification gate passes.", readiness_path, guide)
         if row.get("cgp006_ready") == "YES" and blocking not in {"0", "NONE", ""}:
             result.add("readiness_conflicts_with_blocking_findings", "CGP-006 readiness cannot be YES with blocking findings.", readiness_path, guide)
         if disposition.startswith("SOURCE_FREEZE_COMPLETE") or disposition == "CURATED_NORMATIVE_FREEZE_READY_FOR_FOUNDER_REVIEW":
@@ -1543,8 +1543,16 @@ def validate_wave_1_drafting_readiness(root: Path, wave_guides: tuple[str, ...] 
             result.add("guide_falsely_active", "Source-frozen guide README must remain NOT_ACTIVE.", readme, guide)
 
     cgp006 = next((row for row in tracker_rows if row.get("record_id") == "CGP-006"), {})
-    if cgp006 and cgp006.get("prompt_status") != "NOT_ISSUED":
-        result.add("cgp006_started", "CGP-006 must remain NOT_ISSUED.", tracker_path, "CGP-006")
+    if cgp006:
+        if cgp006.get("prompt_status") not in {"NOT_ISSUED", "ISSUED"}:
+            result.add("cgp006_invalid_prompt_state", "CGP-006 must be NOT_ISSUED or ISSUED for bounded candidate drafting.", tracker_path, "CGP-006")
+        if cgp006.get("prompt_status") == "ISSUED":
+            if cgp006.get("work_status") != "ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING":
+                result.add("cgp006_unbounded_work_status", "Issued CGP-006 must remain bounded candidate drafting only.", tracker_path, "CGP-006")
+            if cgp006.get("blocked_by") != "DOCUMENT_CLASSIFICATION_GATE":
+                result.add("cgp006_missing_classification_gate", "Issued CGP-006 must remain blocked by the document classification gate.", tracker_path, "CGP-006")
+            if cgp006.get("adoption_state") != "NOT_ADOPTED":
+                result.add("cgp006_falsely_adopted", "Issued CGP-006 must not create guide adoption.", tracker_path, "CGP-006")
 
     result.summary["readiness_rows"] = len(readiness_rows)
     result.summary["wave_guides_checked"] = len(wave_guides)
