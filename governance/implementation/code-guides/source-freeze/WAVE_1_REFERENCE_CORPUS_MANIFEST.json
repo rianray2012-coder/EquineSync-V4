@@ -24501,7 +24501,7 @@
       "curation_status": "REFERENCE_CORPUS_ONLY",
       "freeze_record_id": "CGP005-RC-1606",
       "repository_path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
-      "sha256_checksum": "5719e159a5435a88f27e869f37989bb18ae965bc9083be9fccceb266e950afe4",
+      "sha256_checksum": "c0a64e1f3ac3db8c9ace7a78d8bf21cc9950ff9c07a82b31a64a664df56d8c1c",
       "source_id": "CGSRC-REPO-0004"
     },
     {
@@ -30841,6 +30841,6 @@
     }
   ],
   "last_checksum_reconciliation_prompt": "CGP-006",
-  "last_checksum_reconciliation_date": "2026-07-26",
-  "last_checksum_reconciliation_scope": "CGSRC-REPO-0004;CGSRC-REPO-0007"
+  "last_checksum_reconciliation_date": "2026-07-27",
+  "last_checksum_reconciliation_scope": "CGSRC-REPO-0004;CGSRC-REPO-0007;CGSRC-CGP005-0003"
 }
