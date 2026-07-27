@@ -18,12 +18,15 @@
 - Primary merge timestamp: `2026-07-27T06:10:10Z`
 - Base head at primary merge: `4afe3ccd84d9f8be1bc5c79bb27068676d993a70`
 - Remote default-branch head after primary merge: `e38f863fca312a5eee83d8631861b53a9e88aa2b`
-- Receipt pull request: `PENDING_RECEIPT_PR_CREATED_AFTER_THIS_COMMIT`
-- Receipt commit: `PENDING_RECEIPT_BRANCH_COMMIT_VERIFIED_AFTER_PUSH`
-- Receipt merge commit: `PENDING_RECEIPT_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF`
-- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_RECEIPT_MERGE_IF_REQUIRED`
+- Receipt pull request: `#32`
+- Receipt commit: `8832f7508af824c204b74adee96bcb6665fcf871`
+- Receipt merge commit: `362d66aae4f8354ab5aa3c58906988970c97913c`
+- Receipt merge timestamp: `2026-07-27T06:15:19Z`
+- Remote default-branch head after receipt merge: `362d66aae4f8354ab5aa3c58906988970c97913c`
+- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_THIS_COMMIT`
 - Metadata commit: `PENDING_METADATA_BRANCH_COMMIT_VERIFIED_AFTER_PUSH`
-- Final remote default-branch head after custody completion: `PENDING_FINAL_REMOTE_HEAD_REPORTED_IN_FINAL_HANDOFF`
+- Metadata merge commit: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF`
+- Final remote default-branch head after custody completion: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF`
 
 ## Appendix Package
 
@@ -93,4 +96,4 @@ This receipt records repository accession of the CGP-005 Technical Audit Appendi
 
 ## Self-Reference Treatment
 
-The primary merge metadata is fixed in this receipt. The receipt PR number, receipt commit, receipt merge commit, and final remote default-branch head cannot be safely self-recorded before this receipt branch is created and merged. Those values are recorded in the final handoff and, if required, in a bounded metadata follow-up PR.
+The primary merge metadata and receipt merge metadata are fixed in this receipt. The metadata PR number, metadata commit, metadata merge commit, and final remote default-branch head cannot be safely self-recorded before this metadata branch is created and merged. Those values are recorded in the final handoff.
