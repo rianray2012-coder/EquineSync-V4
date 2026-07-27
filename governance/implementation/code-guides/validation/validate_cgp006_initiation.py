@@ -165,8 +165,8 @@ def validate_cgp006_initiation(root: Path, required_files: tuple[str, ...] = REQ
         result.add("cgp006_not_issued_after_founder_approval", "CGP-006 must be ISSUED after Founder approval is recorded.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
     if cgp006.get("work_status") != "ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING":
         result.add("cgp006_unbounded_work_status", "CGP-006 work status must remain bounded candidate drafting only.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
-    if cgp006.get("blocked_by") != "DOCUMENT_CLASSIFICATION_GATE":
-        result.add("classification_gate_missing", "CGP-006 must remain blocked by the document classification gate.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
+    if cgp006.get("blocked_by") not in {"DOCUMENT_CLASSIFICATION_GATE", "DOCUMENT_CLASSIFICATION_GATE_PASSED"}:
+        result.add("classification_gate_missing", "CGP-006 must remain tied to the document classification gate.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
     if cgp006.get("adoption_state") != "NOT_ADOPTED":
         result.add("cgp006_adoption_state_changed", "CGP-006 must not create guide adoption.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
     for guide in WAVE_GUIDES:

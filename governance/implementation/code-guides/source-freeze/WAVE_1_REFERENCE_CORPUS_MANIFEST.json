@@ -13256,6 +13256,9 @@
     }
   },
   "execution_id": "CGEXEC-20260726-0004",
+  "last_checksum_reconciliation_date": "2026-07-27",
+  "last_checksum_reconciliation_prompt": "CGP-006",
+  "last_checksum_reconciliation_scope": "CGSRC-REPO-0004;CGSRC-REPO-0007;CGP-006_DOCUMENT_CLASSIFICATION_GATE",
   "layer_id": "WAVE_1_REFERENCE_CORPUS",
   "non_authorization": "The reference corpus is indexed evidence only and is not a normative guide-specific source freeze.",
   "package_id": "ES-CGP-005-WAVE-1-SOURCE-FREEZE-2026-07-26",
@@ -24501,7 +24504,7 @@
       "curation_status": "REFERENCE_CORPUS_ONLY",
       "freeze_record_id": "CGP005-RC-1606",
       "repository_path": "governance/implementation/code-guides/packages/CGP_002_SHA256SUMS.txt",
-      "sha256_checksum": "c0a64e1f3ac3db8c9ace7a78d8bf21cc9950ff9c07a82b31a64a664df56d8c1c",
+      "sha256_checksum": "a61d91b5ea42d76b9efc3fd20704b5813a9554f6f7e1012a28ba377397aa993d",
       "source_id": "CGSRC-REPO-0004"
     },
     {
@@ -24522,7 +24525,7 @@
       "curation_status": "REFERENCE_CORPUS_ONLY",
       "freeze_record_id": "CGP005-RC-1609",
       "repository_path": "governance/implementation/code-guides/validation/cgp_validation.py",
-      "sha256_checksum": "ce399e3d63b993e9638732d0fcd2a23f85fedb84d8471e37be80243158747ec6",
+      "sha256_checksum": "c2981bb77589ac5715fd3886351e7c021c957bc749cd6e538a5c2c6baaade67a",
       "source_id": "CGSRC-REPO-0007"
     },
     {
@@ -30839,8 +30842,5 @@
       "sha256_checksum": "4e6e13988098616f44af2574b9e5fd9b22ddf867da8a2f838219617dbfe89591",
       "source_id": "CGSRC-TEST-0004"
     }
-  ],
-  "last_checksum_reconciliation_prompt": "CGP-006",
-  "last_checksum_reconciliation_date": "2026-07-27",
-  "last_checksum_reconciliation_scope": "CGSRC-REPO-0004;CGSRC-REPO-0007;CGSRC-CGP005-0003"
+  ]
 }

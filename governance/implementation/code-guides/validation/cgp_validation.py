@@ -1549,14 +1549,24 @@ def validate_wave_1_drafting_readiness(root: Path, wave_guides: tuple[str, ...] 
         if cgp006.get("prompt_status") == "ISSUED":
             if cgp006.get("work_status") != "ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING":
                 result.add("cgp006_unbounded_work_status", "Issued CGP-006 must remain bounded candidate drafting only.", tracker_path, "CGP-006")
-            if cgp006.get("blocked_by") != "DOCUMENT_CLASSIFICATION_GATE":
-                result.add("cgp006_missing_classification_gate", "Issued CGP-006 must remain blocked by the document classification gate.", tracker_path, "CGP-006")
+            if cgp006.get("blocked_by") not in {"DOCUMENT_CLASSIFICATION_GATE", "DOCUMENT_CLASSIFICATION_GATE_PASSED"}:
+                result.add("cgp006_missing_classification_gate", "Issued CGP-006 must remain tied to the document classification gate.", tracker_path, "CGP-006")
             if cgp006.get("adoption_state") != "NOT_ADOPTED":
                 result.add("cgp006_falsely_adopted", "Issued CGP-006 must not create guide adoption.", tracker_path, "CGP-006")
 
     result.summary["readiness_rows"] = len(readiness_rows)
     result.summary["wave_guides_checked"] = len(wave_guides)
     return result.finalize()
+
+
+def validate_cgp006_document_classification_package(root: Path) -> ValidationResult:
+    try:
+        import validate_cgp006_document_classification as classification_validator
+    except Exception as exc:  # pragma: no cover - defensive import guard for CLI execution
+        result = ValidationResult("cgp006-document-classification")
+        result.add("classification_validator_import_failed", f"Could not import CGP-006 classification validator: {exc}")
+        return result.finalize()
+    return classification_validator.validate_cgp006_document_classification(root)
 
 
 VALIDATOR_FUNCTIONS = {
@@ -1580,6 +1590,7 @@ VALIDATOR_FUNCTIONS = {
     "current-state-assessment": validate_current_state_assessment,
     "source-freeze": validate_source_freeze,
     "wave-1-drafting-readiness": validate_wave_1_drafting_readiness,
+    "cgp006-document-classification": validate_cgp006_document_classification_package,
 }
 
 
