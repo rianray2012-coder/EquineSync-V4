@@ -1,0 +1,5 @@
+record_identifier,guide_identifier,lifecycle_stage,prerequisite,evidence_required,current_result,blocking_effect
+CGP006-AR-ACT-ES_CG_00,ES-CG-00,ACTIVATION,Separate activation authority plus GAP-0004 evidence review.,"Activation scope, operational readiness evidence, warning carry-forward, and GAP-0004 treatment.",NOT_YET_APPLICABLE,ACTIVATION_BLOCKED_UNTIL_SEPARATE_AUTHORITY
+CGP006-AR-ACT-ES_CG_01,ES-CG-01,ACTIVATION,Separate activation authority plus GAP-0004 evidence review.,"Activation scope, operational readiness evidence, warning carry-forward, and GAP-0004 treatment.",NOT_YET_APPLICABLE,ACTIVATION_BLOCKED_UNTIL_SEPARATE_AUTHORITY
+CGP006-AR-ACT-ES_CG_13,ES-CG-13,ACTIVATION,Separate activation authority plus GAP-0004 evidence review.,"Activation scope, operational readiness evidence, warning carry-forward, and GAP-0004 treatment.",NOT_YET_APPLICABLE,ACTIVATION_BLOCKED_UNTIL_SEPARATE_AUTHORITY
+CGP006-AR-ACT-ES_CG_10,ES-CG-10,ACTIVATION,Separate activation authority plus GAP-0004 evidence review.,"Activation scope, operational readiness evidence, warning carry-forward, and GAP-0004 treatment.",NOT_YET_APPLICABLE,ACTIVATION_BLOCKED_UNTIL_SEPARATE_AUTHORITY
