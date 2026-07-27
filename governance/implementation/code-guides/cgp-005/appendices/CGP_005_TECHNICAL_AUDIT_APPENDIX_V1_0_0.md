@@ -278,3 +278,11 @@ The drift from the original CGP-005 baseline to the current execution is governa
 `CGP_005_APPENDIX_VALIDATED_WITH_RETAINED_GAPS`
 
 The appendix is validated for protected review as an additive documentary package. Retained gaps are review and acceptance of this package, CGP-006 input incorporation, and all later implementation, provider, pilot, release, and activation gates.
+
+## Founder Disposition
+
+`CGP_005_TECHNICAL_AUDIT_APPENDIX_FOUNDER_APPROVED_FOR_PROTECTED_REPOSITORY_INTEGRATION`
+
+Founder disposition is recorded in `CGP_005_APPENDIX_FOUNDER_DISPOSITION.md`. The disposition approves protected repository integration of this supplemental governance-context appendix, preserves the unchanged CGP-005 normative source bytes, keeps PR `#23` and the Technical Audit artifacts outside the frozen normative source set, and does not authorize Code Guide adoption, activation, implementation, or CGP-007.
+
+The reviewed candidate contained eight appendix files. The Founder-disposition update adds one bounded disposition artifact to the appendix package and requires the manifest and checksum ledger to be refreshed before protected integration.

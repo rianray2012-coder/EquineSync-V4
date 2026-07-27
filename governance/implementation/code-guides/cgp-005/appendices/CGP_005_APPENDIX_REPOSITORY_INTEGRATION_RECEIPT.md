@@ -9,9 +9,17 @@ Receipt date: `2026-07-27`
 
 ## Integration Determination
 
-`CGP_005_TECHNICAL_AUDIT_APPENDIX_READY_FOR_REVIEW`
+`CGP_005_TECHNICAL_AUDIT_APPENDIX_FOUNDER_APPROVED_FOR_PROTECTED_REPOSITORY_INTEGRATION`
 
-This branch prepares an additive documentary appendix package under `governance/implementation/code-guides/cgp-005/appendices/`. It does not alter CGP-005 source-freeze rows, package hashes, runtime code, tests, CI, schemas, migrations, infrastructure, provider configuration, deployment behavior, pilot behavior, enrollment, payment, or remediation implementation.
+This branch prepares an additive documentary appendix package under `governance/implementation/code-guides/cgp-005/appendices/` and records Founder approval for protected repository integration. It does not alter CGP-005 source-freeze rows, runtime code, tests, CI, schemas, migrations, infrastructure, provider configuration, deployment behavior, pilot behavior, enrollment, payment, or remediation implementation.
+
+## Founder Disposition
+
+Founder disposition: `CGP_005_TECHNICAL_AUDIT_APPENDIX_FOUNDER_APPROVED_FOR_PROTECTED_REPOSITORY_INTEGRATION`
+
+Disposition record: `CGP_005_APPENDIX_FOUNDER_DISPOSITION.md`
+
+The disposition confirms the appendix is required, amendment is not required, approved CGP-005 normative source bytes remain unchanged, the appendix is supplemental CGP-006 input-refresh context, PR `#23` is not promoted into the frozen normative source set, no Code Guide is adopted or activated, implementation is not authorized, retained gaps remain visible, and all four Wave 1 guide inputs require refresh before drafting.
 
 ## Repository Gates
 
@@ -37,6 +45,7 @@ This branch prepares an additive documentary appendix package under `governance/
 | `TECHNICAL_AUDIT_TO_CODE_GUIDE_CROSSWALK.csv` | Decision-to-guide impact crosswalk. |
 | `CGP_005_APPENDIX_SOURCE_REGISTER.md` | Source and custody register. |
 | `CGP_005_APPENDIX_VALIDATION_REPORT.md` | Validation report and retained gaps. |
+| `CGP_005_APPENDIX_FOUNDER_DISPOSITION.md` | Founder disposition and retained-gap treatment. |
 | `CGP_005_APPENDIX_MANIFEST.json` | Package manifest. |
 | `CGP_005_APPENDIX_SHA256SUMS.txt` | Peer-file checksum ledger generated after peer files. |
 | `CGP_005_APPENDIX_REPOSITORY_INTEGRATION_RECEIPT.md` | This receipt. |

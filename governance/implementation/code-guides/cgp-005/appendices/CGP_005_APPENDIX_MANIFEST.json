@@ -11,7 +11,8 @@
     "cgp006": "READY_AFTER_REFRESH_FOR_AFFECTED_WAVE_1_DRAFTING_AFTER_PROTECTED_ACCEPTANCE",
     "repository_drift": "GOVERNANCE_DRIFT",
     "validation_status": "CGP_005_APPENDIX_VALIDATED_WITH_RETAINED_GAPS",
-    "final_status": "CGP_005_TECHNICAL_AUDIT_APPENDIX_READY_FOR_REVIEW"
+    "final_status": "CGP_005_TECHNICAL_AUDIT_APPENDIX_FOUNDER_APPROVED_FOR_PROTECTED_REPOSITORY_INTEGRATION",
+    "founder_disposition": "CGP_005_TECHNICAL_AUDIT_APPENDIX_FOUNDER_APPROVED_FOR_PROTECTED_REPOSITORY_INTEGRATION"
   },
   "scope": {
     "documentary_only": true,
@@ -25,6 +26,7 @@
     "cgp005_checksum_ledger_verified": true,
     "cgp006_initiation_checksum_ledger_verified": true,
     "technical_audit_founder_decision_checksum_ledger_verified": true,
+    "founder_disposition_recorded": true,
     "original_cgp005_source_freeze_replaced": false,
     "original_cgp005_source_hash_changed": false,
     "normative_source_set_changed": false
@@ -83,6 +85,10 @@
       "role": "validation_report"
     },
     {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_FOUNDER_DISPOSITION.md",
+      "role": "founder_disposition"
+    },
+    {
       "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_MANIFEST.json",
       "role": "manifest"
     },
@@ -96,5 +102,6 @@
       "role": "repository_integration_receipt"
     }
   ],
-  "artifact_count": 8
+  "artifact_count": 9,
+  "artifact_count_note": "Initial reviewed candidate contained 8 appendix files. Founder-disposition update adds one bounded disposition artifact before protected integration."
 }

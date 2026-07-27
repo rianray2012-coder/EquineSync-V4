@@ -13,6 +13,12 @@ Working branch: `codex/cgp005-technical-audit-appendix-v1`
 
 The appendix package is complete and validates as an additive documentary package. Retained gaps are not package defects: the package still requires protected review, CGP-006 input incorporation, and separate implementation/provider/pilot/release authorizations.
 
+## Founder Disposition Result
+
+`CGP_005_TECHNICAL_AUDIT_APPENDIX_FOUNDER_APPROVED_FOR_PROTECTED_REPOSITORY_INTEGRATION`
+
+Founder disposition is recorded in `CGP_005_APPENDIX_FOUNDER_DISPOSITION.md`. The disposition approves protected repository integration, confirms the appendix is required, confirms amendment of the approved CGP-005 normative source freeze is not required, confirms approved CGP-005 normative source bytes remain unchanged, and preserves all non-authorization boundaries.
+
 ## Required Artifact Checks
 
 | Required file | Status |
@@ -22,6 +28,7 @@ The appendix package is complete and validates as an additive documentary packag
 | `TECHNICAL_AUDIT_TO_CODE_GUIDE_CROSSWALK.csv` | `PASS` |
 | `CGP_005_APPENDIX_SOURCE_REGISTER.md` | `PASS` |
 | `CGP_005_APPENDIX_VALIDATION_REPORT.md` | `PASS` |
+| `CGP_005_APPENDIX_FOUNDER_DISPOSITION.md` | `PASS` |
 | `CGP_005_APPENDIX_MANIFEST.json` | `PASS` before checksum generation |
 | `CGP_005_APPENDIX_SHA256SUMS.txt` | `PASS` after ledger generation |
 | `CGP_005_APPENDIX_REPOSITORY_INTEGRATION_RECEIPT.md` | `PASS` |
@@ -88,3 +95,12 @@ The drift is governance-only for this appendix: PR `#23` added Founder-approved 
 | No frozen source hash changed | `PASS` |
 | No Code Guide adopted or activated | `PASS` |
 | Implementation remains blocked | `PASS` |
+
+## Retained Gap Treatment
+
+| Stable finding identifier | Affected artifact | Affected Code Guide | Issue | Required CGP-006 treatment | Later Founder review | Drafting impact | Implementation impact |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `CGP005-TA-APP-GAP-0001` | Appendix package and PR `#31` | `ES-CG-00`; `ES-CG-01`; `ES-CG-10`; `ES-CG-13` | Founder disposition and protected accession required before repository use. | Use only after accession and record PR head, merge commit, receipt, checksum, and authority boundary. | No further appendix accession review after protected integration; CGP-006 refresh still requires Founder review. | Appendix context cannot be used until accession and refresh evidence are recorded. | None; implementation remains blocked. |
+| `CGP005-TA-APP-GAP-0002` | Input refresh matrix, crosswalk, and PR `#30` | `ES-CG-00`; `ES-CG-01`; `ES-CG-10`; `ES-CG-13` | All four Wave 1 inputs require refresh. | Classify appendix artifacts, allocate affected guide families, preserve normative count `139`, and record approved refresh states. | Yes for refreshed PR `#30`. | Drafting remains pending refreshed classification approval. | None; implementation remains blocked. |
+| `CGP005-TA-APP-GAP-0003` | Source register, appendix, and CGP-006 classification registers | `ES-CG-00`; `ES-CG-01`; `ES-CG-10`; `ES-CG-13` | PR `#23` and Technical Audit artifacts are context only and must not be silently promoted. | Classify as `FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE` unless separately authorized otherwise. | Yes for any source-freeze amendment, source promotion, adoption, activation, or implementation use. | May inform risks, questions, guardrails, traceability, and reconciliation only. | None; no implementation authority. |
+| `CGP005-TA-APP-GAP-0004` | Appendix, crosswalk, and Technical Audit Founder Decision Packet V1.1.0 | `ES-CG-00`; `ES-CG-01`; `ES-CG-10`; `ES-CG-13` | Implementation, provider, pilot, release, enrollment, production, financial, messaging, moderation, AI, archival, and activation gates remain unresolved. | Preserve non-authorization language, keep implementation blocked, keep CGP-007 not issued, and distinguish retained gaps from unconditional pass states. | Yes for any implementation, provider, pilot, production, financial, messaging, moderation, AI, archival, enrollment, or CGP-007 action. | Drafting must preserve these limits as authority boundaries and evidence requirements. | Implementation remains blocked unless separately authorized and validated. |
