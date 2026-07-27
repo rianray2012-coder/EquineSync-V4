@@ -250,18 +250,33 @@ def validate_cgp006_wave1_candidate_drafting(root: Path) -> ValidationResult:
             "package_status": "CANDIDATE_ONLY",
             "adoption_status": "NOT_ADOPTED",
             "activation_status": "NOT_ACTIVE",
-            "merge_authority": "MERGE_NOT_AUTHORIZED",
             "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
             "cgp007_status": "NOT_ISSUED",
             "source_promotion_status": "NOT_AUTHORIZED",
         }
         allowed_founder_review_statuses = {"FOUNDER_REVIEW_PENDING", "FOUNDER_REVIEW_COMPLETE"}
+        allowed_lifecycle_statuses = {"CANDIDATE_WAVE_1_PACKAGE", "FOUNDER_APPROVED_CANDIDATE_BASELINE"}
+        allowed_merge_authorities = {"MERGE_NOT_AUTHORIZED", "PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY"}
         if manifest.get("founder_review_status") not in allowed_founder_review_statuses:
             result.add(
                 "invalid_package_status",
                 "Manifest `founder_review_status` must remain a candidate-stage Founder review state.",
                 package_dir / "CGP_006_WAVE_1_CANDIDATE_DRAFTING_MANIFEST.json",
                 "founder_review_status",
+            )
+        if manifest.get("lifecycle_status") not in allowed_lifecycle_statuses:
+            result.add(
+                "invalid_package_status",
+                "Manifest `lifecycle_status` must remain candidate-stage or Founder-approved candidate-baseline.",
+                package_dir / "CGP_006_WAVE_1_CANDIDATE_DRAFTING_MANIFEST.json",
+                "lifecycle_status",
+            )
+        if manifest.get("merge_authority") not in allowed_merge_authorities:
+            result.add(
+                "invalid_package_status",
+                "Manifest `merge_authority` must remain unavailable or custody-only integration.",
+                package_dir / "CGP_006_WAVE_1_CANDIDATE_DRAFTING_MANIFEST.json",
+                "merge_authority",
             )
         for key, expected in expected_statuses.items():
             if manifest.get(key) != expected:
@@ -460,15 +475,20 @@ def validate_cgp006_wave1_candidate_drafting(root: Path) -> ValidationResult:
                 result.add("missing_guide_section", "Guide is missing a required section.", guide_path, section)
         expected = {
             "candidate_status": "CANDIDATE_ONLY",
-            "lifecycle_status": "CANDIDATE_WAVE_1_GUIDE",
             "adoption_status": "NOT_ADOPTED",
             "activation_status": "NOT_ACTIVE",
             "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
-            "merge_authority": "MERGE_NOT_AUTHORIZED",
             "effective_date": "NOT_APPLICABLE",
         }
-        if companion.get("founder_review_status") != "FOUNDER_REVIEW_PENDING":
-            result.add("invalid_companion_status", "Companion `founder_review_status` must remain `FOUNDER_REVIEW_PENDING` until guide artifacts themselves are versioned for review completion.", companion_path, "founder_review_status")
+        allowed_companion_lifecycle_statuses = {"CANDIDATE_WAVE_1_GUIDE", "FOUNDER_APPROVED_CANDIDATE_BASELINE"}
+        allowed_companion_review_statuses = {"FOUNDER_REVIEW_PENDING", "FOUNDER_REVIEW_COMPLETE"}
+        allowed_companion_merge_authorities = {"MERGE_NOT_AUTHORIZED", "PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY"}
+        if companion.get("founder_review_status") not in allowed_companion_review_statuses:
+            result.add("invalid_companion_status", "Companion `founder_review_status` must remain a candidate-stage Founder review state.", companion_path, "founder_review_status")
+        if companion.get("lifecycle_status") not in allowed_companion_lifecycle_statuses:
+            result.add("invalid_companion_status", "Companion `lifecycle_status` must remain candidate-stage or Founder-approved candidate-baseline.", companion_path, "lifecycle_status")
+        if companion.get("merge_authority") not in allowed_companion_merge_authorities:
+            result.add("invalid_companion_status", "Companion `merge_authority` must remain unavailable or custody-only integration.", companion_path, "merge_authority")
         for key, value in expected.items():
             if companion.get(key) != value:
                 result.add("invalid_companion_status", f"Companion `{key}` must be `{value}`.", companion_path, key)

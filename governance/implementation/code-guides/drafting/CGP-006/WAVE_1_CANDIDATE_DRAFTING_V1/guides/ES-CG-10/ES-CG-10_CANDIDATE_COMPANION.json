@@ -1,8 +1,10 @@
 {
   "activation_status": "NOT_ACTIVE",
   "adoption_status": "NOT_ADOPTED",
+  "candidate_baseline_status": "FOUNDER_APPROVED_CANDIDATE_BASELINE",
   "candidate_status": "CANDIDATE_ONLY",
   "candidate_version": "0.1.0-candidate.1",
+  "cgp007_status": "NOT_ISSUED",
   "contextual_sources": "TRACEABILITY_REGISTER_ONLY_NON_NORMATIVE",
   "controls": [
     "ES-CG-10-CTRL-0001",
@@ -19,8 +21,10 @@
   ],
   "dependency_gate_status": "ES_CG_10_COMPLETE_CANDIDATE_DRAFT_PORTFOLIO_VALIDATION_READY",
   "effective_date": "NOT_APPLICABLE",
+  "founder_candidate_baseline_disposition": "CGP_006_WAVE_1_CANDIDATE_GUIDES_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS",
   "founder_decisions_required": [],
-  "founder_review_status": "FOUNDER_REVIEW_PENDING",
+  "founder_review_status": "FOUNDER_REVIEW_COMPLETE",
+  "gap_state": "RETAINED_OPEN",
   "gaps": [
     "CGP005-TA-APP-GAP-0001",
     "CGP005-TA-APP-GAP-0002",
@@ -30,7 +34,9 @@
   "guide_identifier": "ES-CG-10",
   "guide_title": "Testing, Verification, And Assurance",
   "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
+  "implementation_mapping_status": "NOT_AUTHORIZED",
   "input_refresh_state": "MAJOR_REFRESH_COMPLETE",
+  "integration_authority": "PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY",
   "invariants": [
     "ES-CG-10-INV-0001",
     "ES-CG-10-INV-0002",
@@ -39,7 +45,7 @@
     "ES-CG-10-INV-0005",
     "ES-CG-10-INV-0006"
   ],
-  "lifecycle_status": "CANDIDATE_WAVE_1_GUIDE",
+  "lifecycle_status": "FOUNDER_APPROVED_CANDIDATE_BASELINE",
   "mandatory_questions": [
     "ES-CG-10-DQ-0001",
     "ES-CG-10-DQ-0002",
@@ -50,7 +56,7 @@
     "ES-CG-10-DQ-0007",
     "ES-CG-10-DQ-0008"
   ],
-  "merge_authority": "MERGE_NOT_AUTHORIZED",
+  "merge_authority": "PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY",
   "normative_source_ids": [
     "CGSRC-ATLAS-0006",
     "CGSRC-ATLAS-0017",
@@ -139,6 +145,7 @@
     "CGP-007"
   ],
   "reference_corpus_usage": "BACKGROUND_ONLY_NOT_NORMATIVE",
+  "repository_state": "INTEGRATION_PENDING",
   "required_sections": [
     "Document Identity",
     "Guide Identifier",
@@ -223,6 +230,7 @@
     "TEST_EVIDENCE"
   ],
   "unresolved_questions": [],
+  "warning_state": "RETAINED_OPEN",
   "warnings": [
     "CGP006-CLF-0001",
     "CGP006-CLF-0002",

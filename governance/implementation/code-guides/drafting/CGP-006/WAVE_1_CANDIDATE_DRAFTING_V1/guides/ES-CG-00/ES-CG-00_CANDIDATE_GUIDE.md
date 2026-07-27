@@ -2,11 +2,13 @@
 
 **Package:** `ES-CGP-006-WAVE-1-CANDIDATE-DRAFTING-V1`
 **Candidate status:** `CANDIDATE_ONLY`
-**Lifecycle status:** `CANDIDATE_WAVE_1_GUIDE`
-**Founder review status:** `FOUNDER_REVIEW_PENDING`
+**Lifecycle status:** `FOUNDER_APPROVED_CANDIDATE_BASELINE`
+**Founder review status:** `FOUNDER_REVIEW_COMPLETE`
+**Founder candidate-baseline disposition:** `CGP_006_WAVE_1_CANDIDATE_GUIDES_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+**Repository state:** `INTEGRATION_PENDING`
 **Adoption status:** `NOT_ADOPTED`
 **Activation status:** `NOT_ACTIVE`
-**Merge authority:** `MERGE_NOT_AUTHORIZED`
+**Repository integration authority:** `PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY`
 **Implementation authority:** `IMPLEMENTATION_AUTHORITY_NOT_GRANTED`
 
 ## 1. Document Identity
@@ -26,14 +28,17 @@
 ## 4. Lifecycle And Authority Status
 
 - `CANDIDATE_ONLY`
-- `CANDIDATE_WAVE_1_GUIDE`
-- `FOUNDER_REVIEW_PENDING`
+- `FOUNDER_APPROVED_CANDIDATE_BASELINE`
+- `FOUNDER_REVIEW_COMPLETE`
+- `CGP_006_WAVE_1_CANDIDATE_GUIDES_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+- `INTEGRATION_PENDING`
 - `NOT_ADOPTED`
 - `NOT_ACTIVE`
-- `MERGE_NOT_AUTHORIZED`
+- `PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY`
 - `IMPLEMENTATION_AUTHORITY_NOT_GRANTED`
 - `PRODUCTION_AUTHORITY_NOT_GRANTED`
 - `EFFECTIVE_DATE_NOT_APPLICABLE`
+- `CGP-007_NOT_ISSUED`
 
 ## 5. Purpose
 
@@ -121,7 +126,7 @@
 
 ## 18. Mandatory-Question Answers
 
-- Mandatory-question answers are candidate-only and remain Founder-review-pending before adoption or activation.
+- Mandatory-question answers are candidate-only, remain partial, and are accepted as `PARTIALLY_ANSWERED_ACCEPTABLE_FOR_CANDIDATE_STAGE` for the Founder-approved candidate baseline only.
 
 | question_identifier | answer_status | validation_status |
 | --- | --- | --- |

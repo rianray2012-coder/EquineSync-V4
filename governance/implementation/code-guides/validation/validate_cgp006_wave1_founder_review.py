@@ -73,7 +73,6 @@ def validate_cgp006_wave1_founder_review(root: Path) -> ValidationResult:
             "founder_review_status": "FOUNDER_REVIEW_COMPLETE",
             "adoption_status": "NOT_ADOPTED",
             "activation_status": "NOT_ACTIVE",
-            "merge_authority": "MERGE_NOT_AUTHORIZED",
             "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
             "source_promotion_status": "NOT_AUTHORIZED",
             "cgp007_status": "NOT_ISSUED",
@@ -82,6 +81,8 @@ def validate_cgp006_wave1_founder_review(root: Path) -> ValidationResult:
         for key, value in expected.items():
             if manifest.get(key) != value:
                 result.add("invalid_review_manifest_status", f"Manifest `{key}` must be `{value}`.", package / "CGP_006_WAVE_1_CANDIDATE_DRAFTING_MANIFEST.json", key)
+        if manifest.get("merge_authority") not in {"MERGE_NOT_AUTHORIZED", "PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY"}:
+            result.add("invalid_review_manifest_status", "Manifest `merge_authority` must remain unavailable or custody-only integration.", package / "CGP_006_WAVE_1_CANDIDATE_DRAFTING_MANIFEST.json", "merge_authority")
 
     _, controls = read_csv_strict(package / "registers" / "CGP_006_WAVE_1_CONTROL_REGISTER.csv", result)
     _, invariants = read_csv_strict(package / "registers" / "CGP_006_WAVE_1_INVARIANT_REGISTER.csv", result)
