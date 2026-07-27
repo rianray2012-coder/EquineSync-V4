@@ -19,10 +19,10 @@
 - Primary merge commit: `d3da33f04098ae5195105a5de1a523a9d7940724`
 - Base head at primary merge: `36fa3c81f24d19708b9ee80377cf774b3122f07f`
 - Remote default-branch head after primary merge: `d3da33f04098ae5195105a5de1a523a9d7940724`
-- Receipt pull request: `PENDING_RECEIPT_PR_CREATED_AFTER_THIS_COMMIT`
-- Receipt commit: `PENDING_RECEIPT_BRANCH_COMMIT_VERIFIED_AFTER_PUSH`
-- Receipt merge commit: `PENDING_RECEIPT_MERGE_COMMIT_REPORTED_IN_METADATA_PR`
-- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_RECEIPT_MERGE`
+- Receipt pull request: `#27`
+- Receipt commit: `747b59a92521faf4b0240e300b7ab1af1e230623`
+- Receipt merge commit: `473183f4d5ba7afd6e01001ae3290991ff9a9382`
+- Metadata pull request: `PENDING_METADATA_PR_CREATED_AFTER_THIS_COMMIT`
 - Metadata commit: `PENDING_METADATA_BRANCH_COMMIT_VERIFIED_AFTER_PUSH`
 - Final remote default-branch head after metadata reconciliation: `PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF`
 
@@ -109,10 +109,10 @@ Verified on the remote default branch after PR `#24` merge:
 
 ## Tracker Updates
 
-Final tracker updates are reserved for the follow-up metadata reconciliation PR:
+Final tracker updates are recorded by the follow-up metadata reconciliation PR:
 
 - `CGP-006`: remains `ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING`
-- CGP-006 accession state: to be updated to `REPOSITORY_ACCESSIONED`
+- CGP-006 accession state: `REPOSITORY_ACCESSIONED`
 - Wave 1 guides: remain `SOURCE_FROZEN`, `NOT_ADOPTED`, and `NOT_ACTIVE`
 - `CGP-007`: remains `NOT_ISSUED`
 
@@ -122,4 +122,4 @@ CGP-007 was not begun. No guide was adopted or activated. No substantive guide c
 
 ## Metadata Finalization Note
 
-The receipt PR number, receipt commit, receipt merge commit, metadata PR number, metadata commit, metadata merge commit, and resulting final remote default-branch head are recorded by the follow-up metadata reconciliation PR and returned in the final integration handoff.
+The metadata PR number, metadata commit, metadata merge commit, and resulting final remote default-branch head are recorded by the follow-up metadata reconciliation PR and returned in the final integration handoff.
