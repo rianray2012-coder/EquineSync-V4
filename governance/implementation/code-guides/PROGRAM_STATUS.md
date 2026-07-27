@@ -4,13 +4,13 @@
 **Current prompt:** `CGP-006`
 **Execution ID:** `CGEXEC-20260726-0005`
 **Prompt status:** `FOUNDER_APPROVED_CANDIDATE_BASELINE_REPOSITORY_ACCESSIONED`
-**Program maturity:** CGP-006 Wave 1 controlled candidate baseline Founder-approved, protected primary-merged, custody-receipt-merged, and metadata-reconciled for repository accession
+**Program maturity:** CGP-006 Wave 1 controlled candidate baseline Founder-approved and repository-accessioned; documentary gaps `CGP005-TA-APP-GAP-0001` through `CGP005-TA-APP-GAP-0003` Founder-closed and repository-accessioned
 **Current guide maturity:** Wave 1 package `FOUNDER_APPROVED_CANDIDATE_BASELINE`; source-freeze placeholders remain `SOURCE_FROZEN`; all other guides `PLANNED`
 **Guide adoption state:** `NOT_ADOPTED`
 **Guide activation state:** `NOT_ACTIVE`
 **Implementation authority:** `NOT_GRANTED`
 **CGP-007 status:** `NOT_ISSUED`
-**Next prompt:** Separate Founder authority is required for any adoption-readiness review, activation planning, implementation mapping, warning/gap disposition, or CGP-007 work.
+**Next prompt:** `CGP_006_WAVE_1_ADOPTION_READINESS_REVIEW_READY_TO_BEGIN_IN_SEPARATE_WORKSTREAM`; separate Founder/Codex directive is still required to begin that workstream, activation planning, implementation mapping, additional warning/gap disposition, or CGP-007 work.
 
 ## Baseline
 
@@ -26,7 +26,12 @@
 - Receipt commit: `8a3b4f14bd4e69f3aac7622f7db6203e916b56e3`
 - Receipt merge commit: `298501b29e31843070fa13617860e238f8704a3b`
 - Metadata branch: `codex/cgp-006-wave-1-candidate-baseline-metadata-reconciliation`
+- Warning/gap closure PR: `#39`
+- Warning/gap closure merge commit: `88ece96ecb5b6ccbe6670bd0995845c9ab7c079a`
+- Warning/gap closure receipt PR: `#40`
+- Warning/gap closure receipt merge commit: `2ff335cbfe29bc4339141ff45d73e63769dd7a30`
 - Founder disposition: `CGP_006_WAVE_1_CANDIDATE_GUIDES_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+- Documentary gap closure disposition: `CGP_006_WAVE_1_DOCUMENTARY_GAPS_0001_0002_0003_FOUNDER_CLOSED_AND_REPOSITORY_ACCESSIONED`
 
 ## Prior CGP-006 Custody Lineage
 
@@ -53,16 +58,20 @@ The mandatory document sorting, classification, and source reconciliation gate r
 
 ## Retained Boundary
 
-All fourteen guides remain `NOT_ADOPTED` and `NOT_ACTIVE`. No guide is effective. No implementation, production, source-promotion, source-freeze amendment, warning closure, gap closure, app-code, product-test, CI, schema, migration, deployment, provider, pilot, financial, messaging, moderation, AI, archival, enrollment, PIA, atlas, or CGP-007 authority is granted.
+All fourteen guides remain `NOT_ADOPTED` and `NOT_ACTIVE`. No guide is effective. No implementation, production, source-promotion, source-freeze amendment, CGP-006 warning closure, `CGP005-TA-APP-GAP-0004` closure, app-code, product-test, CI, schema, migration, deployment, provider, pilot, financial, messaging, moderation, AI, archival, enrollment, PIA, atlas, or CGP-007 authority is granted. Documentary closure is limited to `CGP005-TA-APP-GAP-0001`, `CGP005-TA-APP-GAP-0002`, and `CGP005-TA-APP-GAP-0003`.
 
 ## Retained Warnings And Gaps
 
-The five CGP-006 classification warnings and four CGP-005 Technical Audit Appendix gaps remain visible, retained, open where applicable, and non-blocking only for candidate-baseline custody. They must be carried or separately dispositioned before any later adoption or activation authority.
+The five CGP-006 classification warnings remain visible, retained, open, and non-blocking. `CGP005-TA-APP-GAP-0001`, `CGP005-TA-APP-GAP-0002`, and `CGP005-TA-APP-GAP-0003` are Founder-closed with repository documentary evidence through PR `#39` and receipt PR `#40`. `CGP005-TA-APP-GAP-0004` remains open with `IMPLEMENTATION_EVIDENCE_REQUIRED`.
 
 ## Repository Integration
 
 CGP-006 Wave 1 candidate baseline custody is recorded in `governance/implementation/code-guides/receipts/CGP_006_WAVE_1_CANDIDATE_BASELINE_CUSTODY_RECEIPT.md`.
 
+CGP-006 Wave 1 documentary gap closure custody is recorded in `governance/implementation/code-guides/receipts/CGP_006_WAVE_1_DOCUMENTARY_GAP_CLOSURE_CUSTODY_RECEIPT.md`.
+
 - PR `#36` primary merge: `c0f598822ede7a9b8fa079dde8603df027cf8510`
 - PR `#37` custody receipt merge: `298501b29e31843070fa13617860e238f8704a3b`
+- PR `#39` documentary gap closure merge: `88ece96ecb5b6ccbe6670bd0995845c9ab7c079a`
+- PR `#40` documentary gap closure custody receipt merge: `2ff335cbfe29bc4339141ff45d73e63769dd7a30`
 - Metadata reconciliation branch records final package and program metadata; final metadata PR and merge commit are reported in the final accession report after protected merge and remote verification.

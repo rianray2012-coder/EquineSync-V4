@@ -8,12 +8,17 @@
 **Primary closure merged at:** `2026-07-27T20:37:10Z`
 **Primary closure head:** `94abd4b5648313e0bb57ba26fdc0d17f014fa8b1`
 **Receipt branch:** `codex/cgp-006-wave-1-warning-gap-closure-custody-receipt`
-**Receipt PR:** `PENDING`
-**Receipt merge commit:** `PENDING`
+**Receipt PR:** `#40`
+**Receipt merge commit:** `2ff335cbfe29bc4339141ff45d73e63769dd7a30`
+**Receipt merged at:** `2026-07-27T20:44:28Z`
 
 ## Custody Determination
 
 `CGP_006_WAVE_1_DOCUMENTARY_GAPS_0001_0002_0003_FOUNDER_CLOSED_WITH_REPOSITORY_EVIDENCE`
+
+Final repository accession determination after protected receipt merge:
+
+`CGP_006_WAVE_1_DOCUMENTARY_GAPS_0001_0002_0003_FOUNDER_CLOSED_AND_REPOSITORY_ACCESSIONED`
 
 The repository now carries Founder-approved documentary closure records for:
 
@@ -63,6 +68,16 @@ PR `#39` passed before ready-for-review conversion and merge:
 
 PR `#39` had `0` review threads at merge-readiness verification.
 
+PR `#40` passed before merge:
+
+- Backend known-failure non-regression gate: `PASS`
+- Backend suite is collectable: `PASS`
+- Frontend build: `PASS`
+- Vercel: `PASS`
+- Vercel Preview Comments: `PASS`
+
+PR `#40` had `0` review threads at merge-readiness verification.
+
 ## Local Validation Evidence
 
 - `python3 governance/implementation/code-guides/validation/validate_cgp006_wave1_warning_gap_disposition.py --json`: `PASS`
@@ -84,4 +99,4 @@ This receipt records documentary custody only. It does not close any CGP-006 war
 
 ## Next Custody Step
 
-This receipt must be merged by protected GitHub PR. After receipt merge, metadata reconciliation may record the receipt PR and merge identifiers without changing source bytes, guide lifecycle state, closure scope, or authority boundaries.
+Metadata reconciliation records the receipt PR and merge identifiers without changing source bytes, guide lifecycle state, closure scope, or authority boundaries. CGP-006 Wave 1 adoption-readiness review may be prepared as a separate workstream handoff; this receipt does not begin that review.
