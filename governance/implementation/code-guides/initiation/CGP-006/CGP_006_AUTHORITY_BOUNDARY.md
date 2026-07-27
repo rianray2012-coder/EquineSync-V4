@@ -5,14 +5,13 @@
 
 ## Authorized By This Package
 
-This package authorizes only documentary initiation evidence for Founder review. It records proposed scope, inputs, outputs, decisions, risks, validations, and lifecycle treatment.
+This package records documentary initiation evidence, Founder-approved CGP-006 decisions, and the protected repository-integration path. It authorizes bounded Wave 1 candidate drafting only after the mandatory document-classification gate passes.
 
 ## Not Authorized
 
 This package does not authorize:
 
-- substantive Code Guide drafting;
-- Code Guide controls or invariants;
+- active Code Guide controls or invariants;
 - guide adoption;
 - guide activation;
 - implementation profiles;
@@ -34,4 +33,4 @@ This package does not authorize:
 
 ## Source Authority Boundary
 
-The CGP-005 two-layer model remains controlling. Indexed reference material and PR #23 technical-audit material are not normative Code Guide source material merely because they exist in the repository. Only curated normative rows from the Wave 1 source-freeze registers may control later drafting, and only after Founder authorizes substantive CGP-006 drafting.
+The CGP-005 two-layer model remains controlling. Indexed reference material and PR #23 technical-audit material are not normative Code Guide source material merely because they exist in the repository. Only curated normative rows from the Wave 1 source-freeze registers may control later candidate drafting, and only after document classification records and validates the source treatment. Any source promotion requires separate Founder authority.

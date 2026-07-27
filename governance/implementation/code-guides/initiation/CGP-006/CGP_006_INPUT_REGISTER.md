@@ -6,7 +6,7 @@
 
 ## Input Classification Rule
 
-CGP-006 inputs are classified under the CGP-005 two-layer model. Curated guide-specific normative rows may be used to prepare candidate drafting material only if a later Founder disposition authorizes substantive CGP-006 drafting. The reference corpus, reference-only exclusions, repository evidence, and Technical Audit PR #23 material remain non-normative unless later authority explicitly promotes a specific source through traceable source-freeze treatment.
+CGP-006 inputs are classified under the CGP-005 two-layer model. Founder has authorized bounded Wave 1 candidate drafting, but curated guide-specific normative rows may influence candidate drafting material only after the mandatory document-classification gate passes. The reference corpus, reference-only exclusions, repository evidence, and Technical Audit PR #23 material remain non-normative unless later authority explicitly promotes a specific source through traceable source-freeze treatment.
 
 ## Aggregate Inputs
 

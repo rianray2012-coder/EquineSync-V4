@@ -21,15 +21,18 @@ Validation results must use only `PASS`, `FAIL`, `BLOCKED`, `WARNING`, or `NOT_Y
 | Unapproved source promotion | PASS | PR #23 and reference-only rows must not be promoted to normative status. |
 | Unapproved adoption | PASS | No Wave 1 guide may change from `NOT_ADOPTED`. |
 | Unapproved activation | PASS | No Wave 1 guide may become `ACTIVE`. |
-| Founder-decision completeness | PASS | All CGP006-D-* entries must remain `PENDING_FOUNDER_REVIEW`. |
-| Tracker consistency | PASS | `CGP-005` remains accepted/accessioned and `CGP-006` remains not issued for substantive drafting. |
+| Founder-decision completeness | PASS | All CGP006-D-* entries must be recorded as `FOUNDER_APPROVED` with exact Founder-approved dispositions. |
+| Tracker consistency | PASS | `CGP-005` remains accepted/accessioned and `CGP-006` is issued only for bounded Wave 1 candidate drafting with the document-classification gate required. |
+| Classification gate | PASS | No candidate guide drafting may proceed until all proposed Wave 1 sources are classified, all 139 normative rows reconcile, and reference-only/PR #23 materials remain non-normative. |
 | Path consistency and bounded diff | PASS | All package changes must remain under `governance/implementation/code-guides/`. |
 | Receipt readiness | PASS | Repository lifecycle plan must preserve self-reference-safe receipt treatment. |
 
 ## Implemented Validator
 
-`governance/implementation/code-guides/validation/validate_cgp006_initiation.py` validates package completeness, manifest and checksum accuracy, PR #23 conflict outcome, source-freeze preservation, Founder-decision status, tracker/adoption/activation boundaries, and path scope.
+`governance/implementation/code-guides/validation/validate_cgp006_initiation.py` validates package completeness, manifest and checksum accuracy, PR #23 conflict outcome, source-freeze preservation, Founder-decision approval status, tracker/adoption/activation boundaries, classification-gate preservation, and path scope.
 
-## Later Drafting Validators Proposed
+## Classification And Drafting Validators Required
 
-If Founder authorizes substantive CGP-006 drafting, additional validators should check candidate guide draft completeness, control identifier uniqueness, invariant identifier uniqueness, question-answer traceability, normative-source citations, cross-guide dependency order, retained findings, and explicit `NOT_ADOPTED` / `NOT_ACTIVE` markings.
+Before any candidate guide text is drafted, additional validators must check document classification, normative-source preservation, reference-only separation, PR #23 non-normative treatment, guide status markings, guide dependencies, source traceability, manifests, checksums, package completeness, and authority boundaries.
+
+If the classification gate passes and candidate drafting begins, additional validators must check candidate guide draft completeness, control identifier uniqueness, invariant identifier uniqueness, question-answer traceability, normative-source citations, cross-guide dependency order, retained findings, and explicit `NOT_ADOPTED` / `NOT_ACTIVE` / no-implementation markings.

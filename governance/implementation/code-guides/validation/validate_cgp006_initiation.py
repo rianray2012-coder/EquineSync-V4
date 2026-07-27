@@ -25,6 +25,21 @@ PR23_MERGE = "3eb6825091241709f255b8ccf296987fa9b20724"
 PACKAGE_REL = Path("initiation/CGP-006")
 WAVE_GUIDES = ("ES-CG-00", "ES-CG-01", "ES-CG-13", "ES-CG-10")
 EXPECTED_COUNTS = {"ES-CG-00": 29, "ES-CG-01": 34, "ES-CG-13": 45, "ES-CG-10": 31}
+EXPECTED_DECISION_DISPOSITIONS = {
+    "CGP006-D-0001": "APPROVED_FOR_BOUNDED_WAVE_1_CANDIDATE_DRAFTING_ONLY; NOT_ADOPTED; NOT_ACTIVE; NO_IMPLEMENTATION_OR_GATE_AUTHORITY",
+    "CGP006-D-0002": "APPROVED_SINGLE_PACKAGE_WITH_INTERNAL_DEPENDENCY_ORDER_ES_CG_00_ES_CG_01_ES_CG_13_ES_CG_10",
+    "CGP006-D-0003": "APPROVED_PR23_AS_NON_NORMATIVE_CONTEXT_ONLY; NO_SOURCE_PROMOTION_WITHOUT_SEPARATE_AUTHORITY",
+    "CGP006-D-0004": "APPROVED_FOR_CANDIDATE_CONTROLS_INVARIANTS_AND_QUESTION_ANSWERS_ONLY; NOT_ADOPTED; NOT_ACTIVE",
+    "CGP006-D-0005": "APPROVED_INITIATION_PACKAGE_VALIDATION_NOW; CANDIDATE_DRAFT_VALIDATORS_REQUIRED_IF_SUBSTANTIVE_DRAFTING_IS_AUTHORIZED",
+    "CGP006-D-0006": "APPROVED_FOR_REPOSITORY_INTEGRATION_REVIEW_PATH_ONLY; USE_PROTECTED_PR_AND_SELF_REFERENCE_SAFE_RECEIPT_PATTERN; NO_DRAFTING_AUTHORITY_BY_MERGE_ALONE",
+}
+EXPECTED_FINDING_STATUSES = {
+    "CGP006-F-0001": "RESOLVED_BY_FOUNDER_AUTHORIZATION_FOR_BOUNDED_CANDIDATE_DRAFTING",
+    "CGP006-F-0002": "RESOLVED_PR23_CLASSIFIED_NON_NORMATIVE_CONTEXT_ONLY",
+    "CGP006-F-0003": "RESOLVED_SOURCE_FROZEN_DOES_NOT_MEAN_ADOPTED_OR_ACTIVE",
+    "CGP006-F-0004": "RESOLVED_METADATA_RECONCILED",
+    "CGP006-F-0005": "RETAINED_CONTROL_REFERENCE_CORPUS_PROMOTION_GUARD_REQUIRED",
+}
 REQUIRED_FILES = (
     "CGP_006_INITIATION_ASSESSMENT.md",
     "CGP_006_PR23_CONFLICT_ASSESSMENT.md",
@@ -84,6 +99,12 @@ def validate_cgp006_initiation(root: Path, required_files: tuple[str, ...] = REQ
     if manifest:
         if manifest.get("starting_commit") != BASELINE:
             result.add("baseline_mismatch", "Manifest starting commit does not match refreshed baseline.", manifest_path)
+        if manifest.get("determination") != "CGP_006_FOUNDER_DISPOSITION_RECORDED_INTEGRATION_PENDING":
+            result.add("determination_mismatch", "Manifest must record the Founder-disposition reconciliation determination.", manifest_path)
+        if manifest.get("founder_decision_status") != "FOUNDER_APPROVED":
+            result.add("founder_decision_status_mismatch", "Manifest must record Founder-approved decision status.", manifest_path)
+        if manifest.get("classification_gate_required") is not True:
+            result.add("classification_gate_not_required", "Manifest must require document classification before candidate drafting.", manifest_path)
         if manifest.get("pr23_conflict_assessment") != "PR23_REVIEWED_NON_CONFLICTING_WITH_CGP_BASELINE":
             result.add("pr23_conflict_not_cleared", "Manifest does not record non-conflicting PR #23 assessment.", manifest_path)
         if manifest.get("reference_corpus_classification") != "REFERENCE_CORPUS_INDEXED_NOT_NORMATIVE":
@@ -140,8 +161,14 @@ def validate_cgp006_initiation(root: Path, required_files: tuple[str, ...] = REQ
     cgp006 = tracker.get("CGP-006", {})
     if cgp005.get("prompt_status") != "ACCEPTED" or cgp005.get("accession_state") != "REPOSITORY_ACCESSIONED":
         result.add("cgp005_state_mismatch", "CGP-005 must remain accepted and repository-accessioned.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-005")
-    if cgp006.get("prompt_status") != "NOT_ISSUED":
-        result.add("cgp006_issued_without_authority", "CGP-006 substantive drafting must remain NOT_ISSUED.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
+    if cgp006.get("prompt_status") != "ISSUED":
+        result.add("cgp006_not_issued_after_founder_approval", "CGP-006 must be ISSUED after Founder approval is recorded.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
+    if cgp006.get("work_status") != "ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING":
+        result.add("cgp006_unbounded_work_status", "CGP-006 work status must remain bounded candidate drafting only.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
+    if cgp006.get("blocked_by") != "DOCUMENT_CLASSIFICATION_GATE":
+        result.add("classification_gate_missing", "CGP-006 must remain blocked by the document classification gate.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
+    if cgp006.get("adoption_state") != "NOT_ADOPTED":
+        result.add("cgp006_adoption_state_changed", "CGP-006 must not create guide adoption.", root / "registers" / "CODE_GUIDE_PROGRAM_TRACKER.csv", "CGP-006")
     for guide in WAVE_GUIDES:
         row = tracker.get(guide, {})
         if row.get("maturity_state") != "SOURCE_FROZEN":
@@ -164,14 +191,35 @@ def validate_cgp006_initiation(root: Path, required_files: tuple[str, ...] = REQ
         if len(rows) != expected:
             result.add("guide_normative_count_mismatch", "Guide normative source row count changed.", root / "guides" / guide / "source-freeze" / f"{guide}_SOURCE_FREEZE_REGISTER.csv", guide)
 
-    _, decision_rows = read_csv_strict(package_dir / "CGP_006_RISK_FINDING_DEVIATION_REGISTER.csv", result)
-    result.summary["risk_rows_checked"] = len(decision_rows)
+    _, risk_rows = read_csv_strict(package_dir / "CGP_006_RISK_FINDING_DEVIATION_REGISTER.csv", result)
+    risk_by_id = {row.get("finding_id", ""): row for row in risk_rows}
+    for finding_id, expected_status in EXPECTED_FINDING_STATUSES.items():
+        row = risk_by_id.get(finding_id)
+        if not row:
+            result.add("missing_cgp006_finding", "Expected CGP-006 finding row is missing.", package_dir / "CGP_006_RISK_FINDING_DEVIATION_REGISTER.csv", finding_id)
+        elif row.get("status") != expected_status:
+            result.add("cgp006_finding_status_mismatch", "CGP-006 finding status does not match Founder disposition.", package_dir / "CGP_006_RISK_FINDING_DEVIATION_REGISTER.csv", finding_id)
+    result.summary["risk_rows_checked"] = len(risk_rows)
     decision_text = (package_dir / "CGP_006_FOUNDER_DECISION_REGISTER.md").read_text(encoding="utf-8") if (package_dir / "CGP_006_FOUNDER_DECISION_REGISTER.md").exists() else ""
-    for decision_id in [f"CGP006-D-{i:04d}" for i in range(1, 7)]:
+    for decision_id, expected_disposition in EXPECTED_DECISION_DISPOSITIONS.items():
         if decision_id not in decision_text:
             result.add("missing_founder_decision", "Expected CGP-006 Founder decision ID is missing.", package_dir / "CGP_006_FOUNDER_DECISION_REGISTER.md", decision_id)
-    if decision_text.count("PENDING_FOUNDER_REVIEW") < 6:
-        result.add("founder_decision_status_missing", "Founder decisions must remain pending review.", package_dir / "CGP_006_FOUNDER_DECISION_REGISTER.md")
+        if expected_disposition not in decision_text:
+            result.add("founder_decision_disposition_missing", "Expected Founder-approved disposition is missing.", package_dir / "CGP_006_FOUNDER_DECISION_REGISTER.md", decision_id)
+    if decision_text.count("FOUNDER_APPROVED") < 6:
+        result.add("founder_decision_status_missing", "Founder decisions must be recorded as approved.", package_dir / "CGP_006_FOUNDER_DECISION_REGISTER.md")
+    if "PENDING_FOUNDER_REVIEW" in decision_text:
+        result.add("founder_decision_still_pending", "Founder decision register must not retain pending status after approval.", package_dir / "CGP_006_FOUNDER_DECISION_REGISTER.md")
+
+    program_status_path = root / "PROGRAM_STATUS.md"
+    program_status = program_status_path.read_text(encoding="utf-8") if program_status_path.exists() else ""
+    for required_phrase in [
+        "**Current prompt:** `CGP-006`",
+        "mandatory document sorting, classification, and source reconciliation",
+        "CGP-007 remains `NOT_ISSUED`",
+    ]:
+        if required_phrase not in program_status:
+            result.add("program_status_not_reconciled", "PROGRAM_STATUS.md is missing required CGP-006 reconciliation text.", program_status_path, required_phrase)
 
     result.summary.update(
         {

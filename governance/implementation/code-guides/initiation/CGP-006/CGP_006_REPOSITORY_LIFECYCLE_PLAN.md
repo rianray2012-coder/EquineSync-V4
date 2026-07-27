@@ -16,11 +16,14 @@
 7. Produce bounded diff under `governance/implementation/code-guides/`.
 8. Commit and push the candidate package if validation passes.
 9. Open a pull request for Founder review if repository workflow allows.
-10. Do not merge, adopt, activate, or begin CGP-007 without separate authority.
+10. After Founder approval, record the six approved decisions, reconcile bounded metadata, rerun validation, and integrate through protected pull-request workflow.
+11. After initiation integration, create a repository-integration receipt using the self-reference-safe pattern.
+12. Complete mandatory document sorting and classification before any candidate guide text is drafted.
+13. Do not adopt, activate, implement, merge a substantive Wave 1 candidate package, or begin CGP-007 without separate authority.
 
 ## Self-Reference-Safe Receipt Plan
 
-If Founder later approves repository integration, use the CGP-004/CGP-005 pattern:
+Use the CGP-004/CGP-005 pattern:
 
 - primary package PR records candidate bytes and validation evidence;
 - repository-integration receipt is added by a follow-up PR;
@@ -30,3 +33,5 @@ If Founder later approves repository integration, use the CGP-004/CGP-005 patter
 ## Remote Advancement Rule
 
 If the remote default branch advances after this branch is created, inspect intervening commits before any rebase or restart. Do not rebase, merge, or restart if the conflict is material without refreshed authority.
+
+The remote default branch advanced from `3eb6825091241709f255b8ccf296987fa9b20724` to `36fa3c81f24d19708b9ee80377cf774b3122f07f` before Founder-disposition reconciliation. The intervening commits were inspected and affect `governance/implementation/technical-audit/` paths only; PR `#24` remains confined to `governance/implementation/code-guides/`.
