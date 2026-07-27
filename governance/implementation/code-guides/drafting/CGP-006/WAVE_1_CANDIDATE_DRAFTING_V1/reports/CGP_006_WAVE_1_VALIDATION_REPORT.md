@@ -2,9 +2,8 @@
 # CGP-006 Wave 1 Candidate Validation Report
 
 **Package:** `ES-CGP-006-WAVE-1-CANDIDATE-DRAFTING-V1`
+**Structured Founder review:** `CGP-006-WAVE-1-STRUCTURED-FOUNDER-REVIEW-V1`
 **Validation status:** `PASS`
-**Validator:** `governance/implementation/code-guides/validation/validate_cgp006_wave1_candidate_drafting.py`
-**Validator tests:** `governance/implementation/code-guides/validation/tests/test_cgp006_wave1_candidate_drafting.py`
 
 ## Required Validator Coverage
 
@@ -16,18 +15,33 @@
 - Cross-guide dependency: `COVERED`
 - Identifier uniqueness: `COVERED`
 - Authority prohibition: `COVERED`
-- Checksum ledger: `COVERED`
+- Structured Founder-review registers: `COVERED`
+- Mandatory-question review: `COVERED`
+- Duplicate and terminology reconciliation: `COVERED`
+- Manifest and checksum ledger: `COVERED`
 
 ## Local Validator Result
 
-`validate_cgp006_wave1_candidate_drafting.py --json: PASS; changed_paths_checked=39; controls=22; invariants=22; mandatory_questions=32; normative_rows=139; reference_use_rows=2511; context_use_rows=51; warnings=5; gaps=4`
+Wave 1 validator PASS; Founder-review validator PASS; CGP-006 document classification validator PASS; CGP-006 initiation validator PASS; documentary unit tests 4/4 OK; authorized path PASS; manifest/checksum PASS.
 
-## Local Validator Test Result
+## Legacy Validator Treatment
 
-`PASS` - `python3 -m unittest governance.implementation.code-guides.validation.tests.test_cgp006_wave1_candidate_drafting: 2 tests OK`
+`validate_source_accession.py` and `validate_source_freeze.py` are recorded as
+`SUPERSEDED_BY_ACCESSIONED_BASELINE_VALIDATION` for this candidate-review
+phase. Repository evidence: the CGP-006 document classification manifest
+records `repository_accession_state=REPOSITORY_ACCESSIONED`,
+`source_freeze_amendment=NOT_REQUIRED`, and
+`approved_cgp005_source_bytes_changed=False`;
+the review changed only Code Guide candidate/review artifacts and did not
+alter classification registers or approved source bytes.
+
+## GitHub Check State
+
+`ALL_REPORTED_CHECKS_PASS: Backend known-failure non-regression gate; Backend suite is collectable; Frontend build; Vercel; Vercel Preview Comments`
 
 ## Result Interpretation Boundary
 
-A validation pass means the documentary candidate package satisfies the bounded
-drafting checks. It does not adopt, activate, merge, implement, deploy, promote
-sources, issue CGP-007, or close retained warnings or gaps.
+A validation pass means the documentary candidate review package satisfies
+bounded review checks. It does not approve, adopt, activate, merge,
+implement, deploy, promote sources, issue CGP-007, or close retained warnings
+or gaps.

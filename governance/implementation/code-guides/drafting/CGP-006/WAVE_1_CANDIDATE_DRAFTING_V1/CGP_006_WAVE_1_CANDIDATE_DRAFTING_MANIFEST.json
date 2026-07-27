@@ -3,9 +3,10 @@
   "adoption_status": "NOT_ADOPTED",
   "artifact_counts": {
     "controls": 22,
-    "files": 37,
+    "files": 53,
     "invariants": 22,
-    "mandatory_questions": 32
+    "mandatory_questions": 32,
+    "review_registers": 11
   },
   "base_branch": "integrate-emergent-final-zip",
   "branch_point_commit": "01955bf81a51f8e42f40252c694ce70b67e68b76",
@@ -39,7 +40,7 @@
   "files": [
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/README.md",
-      "sha256": "62057625847301db54eff69418398366fc4fb58f9cfb86e7bbfd5b82fc000612"
+      "sha256": "427801b5a83efcbc034092b0cc5981716975cc353b3fb40c2f1327b49cba1e9a"
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-00/ES-CG-00_CANDIDATE_COMPANION.json",
@@ -87,7 +88,7 @@
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_FOUNDER_DECISION_NEEDED_REGISTER.csv",
-      "sha256": "4d20600d332282007f9d7c93e19731e442c04e999efb3e0510b70d2b2f95b178"
+      "sha256": "a83c073348c434a309032dc2be7c771c49f893a4ffa3aa0559c39958919fd469"
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_INVARIANT_REGISTER.csv",
@@ -95,7 +96,7 @@
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_MANDATORY_QUESTION_REGISTER.csv",
-      "sha256": "7a8bafd7e93bf4c01212320a5dd882466ba5e09f8734d429f8f5978749f3ffbd"
+      "sha256": "90191a22ee1559ebe435505acc82b14b43f3e2269d57289a476ba79fe7362fa2"
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_RETAINED_GAP_REGISTER.csv",
@@ -107,7 +108,7 @@
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_UNRESOLVED_QUESTION_REGISTER.csv",
-      "sha256": "97ff759a54e4d6f778e55113447fdfae767329b04a59f8e57db18f4a333809c6"
+      "sha256": "04675008603b777bba7b238640b9a30f2f6011b7b21b9bfa5bf6571965dcb6ad"
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_WARNING_TREATMENT_REGISTER.csv",
@@ -123,11 +124,67 @@
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reports/CGP_006_WAVE_1_REVIEW_DISPOSITION.md",
-      "sha256": "d6a5b62cf1093e9c9dc1a4767361b0230d16df00a8df5c3e0d7ab47220426846"
+      "sha256": "1f9b417fcdda5727c619f7de6d2343ba44b9d6bcc28d875f79309f6f0164c5f7"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reports/CGP_006_WAVE_1_STRUCTURED_FOUNDER_REVIEW_PRECHECK.md",
+      "sha256": "9dd28f9d9df0eea588b364be5a5202704d08cbafd9f9d09d9a445acfa8afa142"
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reports/CGP_006_WAVE_1_VALIDATION_REPORT.md",
-      "sha256": "cf1b091842a03c16a38f6a1a56236e127ce30db41438be6ce94647568da4adbf"
+      "sha256": "980dad5d763c0af34144ea973316d1dd6c965f617ce4785d470a46d97a1a1408"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_CONTROL_REVIEW_REGISTER.csv",
+      "sha256": "5bfa042b478efcc9cab7456281addb3b5eecf8d89558c655a657e35abfa77da9"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_DUPLICATE_CONTROL_REGISTER.csv",
+      "sha256": "0848e66aabb2df107942001e4ddca03166708aa612b59f3a10ed9490c44621c3"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_DUPLICATE_INVARIANT_REGISTER.csv",
+      "sha256": "bdc66f9417aead152edad49878ed00a43153a6bf0324aebb98e134002b768c5f"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_DUPLICATE_REQUIREMENT_REGISTER.csv",
+      "sha256": "b74aeb5990c15d7fafe9c86116ae8dda8141c774822170f9f48c732dd57eacd7"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_GUIDE_REVIEW_REGISTER.csv",
+      "sha256": "1f7e77c0f0077f5d1313d56f669c3686213e5e5a6d6f9a48c731b7d2c9463dcd"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_GUIDE_SECTION_REVIEW_REGISTER.csv",
+      "sha256": "43bc973760db1467190820a791df55172448e47935c78224c80c11deb43a95b0"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_INVARIANT_REVIEW_REGISTER.csv",
+      "sha256": "543494cd572f42b9b4d176d660f2428b2c31e6e0d01ac6b6f616680775b2b05b"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_MANDATORY_QUESTION_REVIEW_REGISTER.csv",
+      "sha256": "16ecd2788f48e5fe87ff90071cb352e63a0cab471e41c66bdd06c00a7a736994"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_MATERIAL_UPSTREAM_REVISION_REGISTER.csv",
+      "sha256": "240889a98a91c85875da622112cac9afcf4cd7932bcd829003c91ee1b0d71b43"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_RETAINED_GAP_REVIEW_REGISTER.csv",
+      "sha256": "836fb9b4aec79ca9a48985532edc25fc66ea6ce9d3fc2f30213574c74ddec8f7"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_STRUCTURED_FOUNDER_REVIEW_REPORT.md",
+      "sha256": "78021f849d711ec76997d0d2659d8a13a0ab63241d691cd61d08afdaddc8e9a2"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_TERMINOLOGY_RECONCILIATION_REGISTER.csv",
+      "sha256": "08abad50fa1b51828f612983f46ac418f91437fd8e509e1dd9a2c67bdfa18bc9"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reviews/CGP_006_WAVE_1_WARNING_REVIEW_REGISTER.csv",
+      "sha256": "9ed23434742eb00e85d9abe5ad974fbddfe078b23155fffe8cf99a989cd5b01c"
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_CONTEXTUAL_SOURCE_USE_REGISTER.csv",
@@ -143,7 +200,7 @@
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_CROSS_GUIDE_DEPENDENCY_MATRIX.csv",
-      "sha256": "d6f7605c5d9fb8a5d2521cddf198774175c54d08684e0c21ba2e5e4437508717"
+      "sha256": "577f3864bb4d57ba08bcce7724c30491c0f66dd8fe44fc7e5456621e32cfb254"
     },
     {
       "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_GAP_TO_GUIDE_MATRIX.csv",
@@ -182,11 +239,24 @@
       "sha256": "7afc416011aec3aea97e9ea5f2de411bb8d33d201008f2b92903b4f4362c7b1b"
     },
     {
+      "path": "governance/implementation/code-guides/validation/tests/test_cgp006_wave1_founder_review.py",
+      "sha256": "8e9a5d83e7f6e8422a9d3793b3e7badd4d3c914e95c7267de721d9677e364e6d"
+    },
+    {
       "path": "governance/implementation/code-guides/validation/validate_cgp006_wave1_candidate_drafting.py",
-      "sha256": "77fe623d3f3a429de6a5d82cad182081d93d131359b8b076d6b8ea63ed516f26"
+      "sha256": "2ebfec3b8d2a59b37953523381ba43384edc563a5f28bb081d78445568d1efed"
+    },
+    {
+      "path": "governance/implementation/code-guides/validation/validate_cgp006_wave1_founder_review.py",
+      "sha256": "596ba5d5147f5e395a93299444a97d142d1097984ad7024b95e9963b8c03058a"
     }
   ],
-  "founder_review_status": "FOUNDER_REVIEW_PENDING",
+  "founder_decisions_required": 0,
+  "founder_review_determination": "CGP_006_WAVE_1_FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS",
+  "founder_review_id": "CGP-006-WAVE-1-STRUCTURED-FOUNDER-REVIEW-V1",
+  "founder_review_status": "FOUNDER_REVIEW_COMPLETE",
+  "founder_review_validator": "governance/implementation/code-guides/validation/validate_cgp006_wave1_founder_review.py",
+  "founder_review_validator_tests": "governance/implementation/code-guides/validation/tests/test_cgp006_wave1_founder_review.py",
   "guide_input_refresh": {
     "ES-CG-00": "MINOR_REFRESH_COMPLETE",
     "ES-CG-01": "MAJOR_REFRESH_COMPLETE",
@@ -210,7 +280,7 @@
   "merge_authority": "MERGE_NOT_AUTHORIZED",
   "package_id": "ES-CGP-006-WAVE-1-CANDIDATE-DRAFTING-V1",
   "package_status": "CANDIDATE_ONLY",
-  "package_version": "0.1.0-candidate.1",
+  "package_version": "0.1.1-candidate-review.1",
   "repository": "rianray2012-coder/EquineSync-V4",
   "retained_gaps": [
     "CGP005-TA-APP-GAP-0001",
@@ -225,7 +295,24 @@
     "CGP006-CLF-0004",
     "CGP006-CLF-0005"
   ],
+  "review_authority_boundary": "REVIEW_AND_BOUNDED_CANDIDATE_REVISION_ONLY",
+  "review_branch": "codex/cgp-006-wave-1-candidate-drafting-v1",
+  "review_date": "2026-07-27",
+  "review_gate_statuses": {
+    "ES-CG-00": "ES_CG_00_STRUCTURED_REVIEW_COMPLETE_UPSTREAM_BASELINE_STABLE",
+    "ES-CG-01": "ES_CG_01_STRUCTURED_REVIEW_COMPLETE_DEPENDENCY_BASELINE_STABLE",
+    "ES-CG-10": "ES_CG_10_STRUCTURED_REVIEW_COMPLETE_PORTFOLIO_RECONCILIATION_READY",
+    "ES-CG-13": "ES_CG_13_STRUCTURED_REVIEW_COMPLETE_DEPENDENCY_BASELINE_STABLE"
+  },
+  "review_guide_dispositions": {
+    "ES-CG-00": "FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS",
+    "ES-CG-01": "FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS",
+    "ES-CG-10": "FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS",
+    "ES-CG-13": "FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS"
+  },
+  "review_initial_pr_head": "4a53353d8d2a4accb5a6fcb465cec0afd89427df",
   "source_promotion_status": "NOT_AUTHORIZED",
+  "unresolved_questions": 0,
   "validator": "governance/implementation/code-guides/validation/validate_cgp006_wave1_candidate_drafting.py",
   "validator_tests": "governance/implementation/code-guides/validation/tests/test_cgp006_wave1_candidate_drafting.py"
 }

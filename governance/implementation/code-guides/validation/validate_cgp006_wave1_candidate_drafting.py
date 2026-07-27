@@ -248,7 +248,6 @@ def validate_cgp006_wave1_candidate_drafting(root: Path) -> ValidationResult:
     if manifest:
         expected_statuses = {
             "package_status": "CANDIDATE_ONLY",
-            "founder_review_status": "FOUNDER_REVIEW_PENDING",
             "adoption_status": "NOT_ADOPTED",
             "activation_status": "NOT_ACTIVE",
             "merge_authority": "MERGE_NOT_AUTHORIZED",
@@ -256,6 +255,14 @@ def validate_cgp006_wave1_candidate_drafting(root: Path) -> ValidationResult:
             "cgp007_status": "NOT_ISSUED",
             "source_promotion_status": "NOT_AUTHORIZED",
         }
+        allowed_founder_review_statuses = {"FOUNDER_REVIEW_PENDING", "FOUNDER_REVIEW_COMPLETE"}
+        if manifest.get("founder_review_status") not in allowed_founder_review_statuses:
+            result.add(
+                "invalid_package_status",
+                "Manifest `founder_review_status` must remain a candidate-stage Founder review state.",
+                package_dir / "CGP_006_WAVE_1_CANDIDATE_DRAFTING_MANIFEST.json",
+                "founder_review_status",
+            )
         for key, expected in expected_statuses.items():
             if manifest.get(key) != expected:
                 result.add("invalid_package_status", f"Manifest `{key}` must be `{expected}`.", package_dir / "CGP_006_WAVE_1_CANDIDATE_DRAFTING_MANIFEST.json", key)
@@ -454,13 +461,14 @@ def validate_cgp006_wave1_candidate_drafting(root: Path) -> ValidationResult:
         expected = {
             "candidate_status": "CANDIDATE_ONLY",
             "lifecycle_status": "CANDIDATE_WAVE_1_GUIDE",
-            "founder_review_status": "FOUNDER_REVIEW_PENDING",
             "adoption_status": "NOT_ADOPTED",
             "activation_status": "NOT_ACTIVE",
             "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
             "merge_authority": "MERGE_NOT_AUTHORIZED",
             "effective_date": "NOT_APPLICABLE",
         }
+        if companion.get("founder_review_status") != "FOUNDER_REVIEW_PENDING":
+            result.add("invalid_companion_status", "Companion `founder_review_status` must remain `FOUNDER_REVIEW_PENDING` until guide artifacts themselves are versioned for review completion.", companion_path, "founder_review_status")
         for key, value in expected.items():
             if companion.get(key) != value:
                 result.add("invalid_companion_status", f"Companion `{key}` must be `{value}`.", companion_path, key)

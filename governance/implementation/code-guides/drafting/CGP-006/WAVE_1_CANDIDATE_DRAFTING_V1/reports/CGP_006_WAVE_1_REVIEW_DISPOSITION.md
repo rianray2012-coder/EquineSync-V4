@@ -2,17 +2,25 @@
 # CGP-006 Wave 1 Review Disposition
 
 **Package:** `ES-CGP-006-WAVE-1-CANDIDATE-DRAFTING-V1`
-**Review disposition:** `FOUNDER_REVIEW_PENDING`
+**Structured Founder review ID:** `CGP-006-WAVE-1-STRUCTURED-FOUNDER-REVIEW-V1`
+**Review disposition:** `CGP_006_WAVE_1_FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS`
 **Package status:** `CANDIDATE_ONLY`
+**Founder review status:** `FOUNDER_REVIEW_COMPLETE`
 **Adoption status:** `NOT_ADOPTED`
 **Activation status:** `NOT_ACTIVE`
 **Merge authority:** `MERGE_NOT_AUTHORIZED`
 **Implementation authority:** `IMPLEMENTATION_AUTHORITY_NOT_GRANTED`
 
-## Disposition
+## Guide Dispositions
 
-The Wave 1 candidate drafting package is prepared for Founder review only.
-No guide is approved, adopted, active, merged, implemented, or production-effective.
+- `ES-CG-00`: `FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+- `ES-CG-01`: `FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+- `ES-CG-13`: `FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+- `ES-CG-10`: `FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS`
+
+## Founder Decisions
+
+`NO_NEW_FOUNDER_DECISION_REQUIRED_FOR_APPROVAL_CONSIDERATION`
 
 ## Retained Conditions
 
@@ -23,6 +31,6 @@ No guide is approved, adopted, active, merged, implemented, or production-effect
 
 ## Next Allowed Step
 
-Founder review may evaluate the candidate package. Any later adoption,
-activation, source-freeze amendment, implementation, merge authorization, or
-CGP-007 work requires a separate explicit Founder directive.
+A later Founder directive may approve and authorize protected integration.
+This review does not approve, adopt, activate, merge, implement, or issue
+CGP-007.
