@@ -18,6 +18,12 @@ from cgp_validation import ValidationResult, code_root, read_csv_strict, repo_ro
 PACKAGE_REL = Path("classification/CGP-006")
 WAVE_GUIDES = ("ES-CG-00", "ES-CG-01", "ES-CG-13", "ES-CG-10")
 EXPECTED_NORMATIVE_COUNTS = {"ES-CG-00": 29, "ES-CG-01": 34, "ES-CG-13": 45, "ES-CG-10": 31}
+PASSING_OR_FOUNDER_REVIEW_DETERMINATIONS = {
+    "CGP_006_DOCUMENT_CLASSIFICATION_COMPLETE_DRAFTING_GATE_PASS",
+    "CGP_006_DOCUMENT_CLASSIFICATION_COMPLETE_WITH_NON_BLOCKING_WARNINGS",
+    "CGP_006_DOCUMENT_CLASSIFICATION_REFRESHED_AFTER_CGP_005_APPENDIX_READY_FOR_FOUNDER_REVIEW",
+    "CGP_006_DOCUMENT_CLASSIFICATION_REFRESHED_WITH_NON_BLOCKING_WARNINGS_READY_FOR_FOUNDER_REVIEW",
+}
 ALLOWED_CLASSIFICATIONS = {
     "NORMATIVE_FROZEN_SOURCE",
     "REFERENCE_ONLY_NON_NORMATIVE",
@@ -37,6 +43,7 @@ REQUIRED_FILES = (
     "CGP_006_GUIDE_FAMILY_SOURCE_ALLOCATION.csv",
     "CGP_006_NORMATIVE_ROW_RECONCILIATION.csv",
     "CGP_006_REFERENCE_ONLY_REGISTER.csv",
+    "CGP_006_FOUNDER_APPROVED_CONTEXT_REGISTER.csv",
     "CGP_006_HISTORICAL_PREDECESSOR_REGISTER.csv",
     "CGP_006_DUPLICATE_DERIVATIVE_REGISTER.csv",
     "CGP_006_SUPERSEDED_SOURCE_REGISTER.csv",
@@ -47,6 +54,18 @@ REQUIRED_FILES = (
     "CGP_006_DOCUMENT_CLASSIFICATION_VALIDATION.md",
     "CGP_006_DOCUMENT_CLASSIFICATION_MANIFEST.json",
     "CGP_006_DOCUMENT_CLASSIFICATION_CHECKSUMS.sha256",
+)
+APPENDIX_CONTEXT_PATHS = (
+    "governance/implementation/code-guides/cgp-005/appendices/CGP_005_TECHNICAL_AUDIT_APPENDIX_V1_0_0.md",
+    "governance/implementation/code-guides/cgp-005/appendices/CGP_006_INPUT_REFRESH_MATRIX.csv",
+    "governance/implementation/code-guides/cgp-005/appendices/TECHNICAL_AUDIT_TO_CODE_GUIDE_CROSSWALK.csv",
+    "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_SOURCE_REGISTER.md",
+    "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_VALIDATION_REPORT.md",
+    "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_FOUNDER_DISPOSITION.md",
+    "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_MANIFEST.json",
+    "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_SHA256SUMS.txt",
+    "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_REPOSITORY_INTEGRATION_RECEIPT.md",
+    "governance/implementation/code-guides/receipts/CGP_005_TECHNICAL_AUDIT_APPENDIX_REPOSITORY_INTEGRATION_RECEIPT.md",
 )
 
 
@@ -90,6 +109,7 @@ def validate_cgp006_document_classification(root: Path, required_files: tuple[st
     _, allocation_rows = read_csv_strict(package_dir / "CGP_006_GUIDE_FAMILY_SOURCE_ALLOCATION.csv", result)
     _, normative_rows = read_csv_strict(package_dir / "CGP_006_NORMATIVE_ROW_RECONCILIATION.csv", result)
     _, reference_rows = read_csv_strict(package_dir / "CGP_006_REFERENCE_ONLY_REGISTER.csv", result)
+    _, context_rows = read_csv_strict(package_dir / "CGP_006_FOUNDER_APPROVED_CONTEXT_REGISTER.csv", result)
     _, historical_rows = read_csv_strict(package_dir / "CGP_006_HISTORICAL_PREDECESSOR_REGISTER.csv", result)
     _, duplicate_rows = read_csv_strict(package_dir / "CGP_006_DUPLICATE_DERIVATIVE_REGISTER.csv", result)
     _, superseded_rows = read_csv_strict(package_dir / "CGP_006_SUPERSEDED_SOURCE_REGISTER.csv", result)
@@ -124,8 +144,21 @@ def validate_cgp006_document_classification(root: Path, required_files: tuple[st
             result.add("reference_marked_normative", "Reference-only source cannot be normative.", package_dir / "CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.csv", rid)
         if row.get("source_or_document_id", "").startswith("PR23-") and classification != "FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE":
             result.add("pr23_marked_normative", "PR #23 material must remain Founder-approved context only.", package_dir / "CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.csv", rid)
+        if row.get("source_or_document_id", "").startswith("CGP005-TA-APP-") and classification != "FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE":
+            result.add("appendix_marked_normative", "CGP-005 Technical Audit Appendix material must remain Founder-approved context only.", package_dir / "CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.csv", rid)
         if classification == "UNCLASSIFIED_PENDING_REVIEW" and row.get("normative_status") != "NOT_APPROVED_FOR_DRAFTING":
             result.add("unclassified_source_approved", "Unclassified sources cannot be approved for drafting.", package_dir / "CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.csv", rid)
+
+    for rel in APPENDIX_CONTEXT_PATHS:
+        matches = [row for row in classification_rows if row.get("repository_path") == rel]
+        if len(matches) != 1:
+            result.add("appendix_classification_coverage", "Every CGP-005 appendix and appendix receipt artifact must have exactly one classification row.", package_dir / "CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.csv", rel)
+            continue
+        row = matches[0]
+        if row.get("primary_classification") != "FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE":
+            result.add("appendix_invalid_classification", "CGP-005 appendix artifacts must be non-normative Founder-approved context.", package_dir / "CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.csv", row.get("classification_record_id", ""))
+        if row.get("normative_status") != "NON_NORMATIVE_CONTEXT":
+            result.add("appendix_invalid_normative_status", "CGP-005 appendix artifacts must not become normative rows.", package_dir / "CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.csv", row.get("classification_record_id", ""))
 
     json_payload = _load_json(package_dir / "CGP_006_DOCUMENT_CLASSIFICATION_REGISTER.json", result)
     json_records = json_payload.get("records", []) if isinstance(json_payload, dict) else []
@@ -162,6 +195,25 @@ def validate_cgp006_document_classification(root: Path, required_files: tuple[st
         if source and source.get("primary_classification") != "REFERENCE_ONLY_NON_NORMATIVE":
             result.add("reference_register_class_mismatch", "Reference-only register includes a non-reference source.", package_dir / "CGP_006_REFERENCE_ONLY_REGISTER.csv", sid)
 
+    context_ids = {row.get("source_or_document_id", "") for row in context_rows}
+    expected_context_ids = {
+        row.get("source_or_document_id", "")
+        for row in classification_rows
+        if row.get("primary_classification") == "FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE"
+    }
+    if context_ids != expected_context_ids:
+        result.add("context_register_coverage_mismatch", "Founder-approved context register must cover every context classification exactly once.", package_dir / "CGP_006_FOUNDER_APPROVED_CONTEXT_REGISTER.csv")
+    for row in context_rows:
+        sid = row.get("source_or_document_id", "")
+        source = by_source.get(sid)
+        if source and source.get("primary_classification") != "FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE":
+            result.add("context_register_class_mismatch", "Founder-approved context register includes a non-context source.", package_dir / "CGP_006_FOUNDER_APPROVED_CONTEXT_REGISTER.csv", sid)
+        if sid.startswith("CGP005-TA-APP-"):
+            if row.get("primary_classification") != "FOUNDER_APPROVED_CONTEXT_NON_NORMATIVE":
+                result.add("appendix_context_register_class_mismatch", "Appendix context row must preserve non-normative classification.", package_dir / "CGP_006_FOUNDER_APPROVED_CONTEXT_REGISTER.csv", sid)
+            if "NO_IMPLEMENTATION_AUTHORITY" not in row.get("authority_limitation", ""):
+                result.add("appendix_context_missing_authority_limit", "Appendix context row must preserve no-implementation authority limit.", package_dir / "CGP_006_FOUNDER_APPROVED_CONTEXT_REGISTER.csv", sid)
+
     for row in historical_rows:
         if row.get("controlling_or_contextual_role", "").startswith("CONTROLLING") and row.get("expressly_retained_by_normative_freeze") != "YES":
             result.add("historical_marked_controlling", "Historical predecessor cannot be controlling unless expressly retained by the source freeze.", package_dir / "CGP_006_HISTORICAL_PREDECESSOR_REGISTER.csv", row.get("historical_record_id", ""))
@@ -190,8 +242,8 @@ def validate_cgp006_document_classification(root: Path, required_files: tuple[st
     cgp007 = tracker.get("CGP-007", {})
     if cgp006.get("work_status") != "ISSUED_FOR_BOUNDED_CANDIDATE_DRAFTING":
         result.add("cgp006_unbounded_work_status", "CGP-006 must remain bounded candidate drafting only.", tracker_path, "CGP-006")
-    if cgp006.get("blocked_by") != "DOCUMENT_CLASSIFICATION_GATE_PASSED":
-        result.add("classification_gate_not_passed", "Passing classification package must mark only the document classification gate as passed.", tracker_path, "CGP-006")
+    if cgp006.get("blocked_by") != "DOCUMENT_CLASSIFICATION_GATE":
+        result.add("classification_gate_not_retained", "Refreshed classification package must retain the document classification gate pending Founder approval.", tracker_path, "CGP-006")
     if cgp006.get("adoption_state") != "NOT_ADOPTED":
         result.add("cgp006_adopted", "CGP-006 classification must not create guide adoption.", tracker_path, "CGP-006")
     if cgp007.get("prompt_status") != "NOT_ISSUED":
@@ -202,14 +254,16 @@ def validate_cgp006_document_classification(root: Path, required_files: tuple[st
             result.add("wave1_state_changed", "Wave 1 guides must remain SOURCE_FROZEN and NOT_ADOPTED.", tracker_path, guide)
 
     if manifest:
-        if manifest.get("determination") not in {"CGP_006_DOCUMENT_CLASSIFICATION_COMPLETE_DRAFTING_GATE_PASS", "CGP_006_DOCUMENT_CLASSIFICATION_COMPLETE_WITH_NON_BLOCKING_WARNINGS"}:
-            result.add("invalid_gate_determination", "Classification package does not record a passing determination.", manifest_path)
+        if manifest.get("determination") not in PASSING_OR_FOUNDER_REVIEW_DETERMINATIONS:
+            result.add("invalid_gate_determination", "Classification package does not record an allowed Founder-review-ready determination.", manifest_path)
         if manifest.get("total_classification_records") != len(classification_rows):
             result.add("manifest_classification_count_mismatch", "Manifest classification count does not match register.", manifest_path)
         if manifest.get("normative_row_count") != 139:
             result.add("manifest_normative_count_mismatch", "Manifest must record 139 normative rows.", manifest_path)
         if manifest.get("reference_corpus_count") != 2511:
             result.add("manifest_reference_count_mismatch", "Manifest must preserve the 2511 reference corpus count.", manifest_path)
+        if manifest.get("appendix_context_record_count", 0) != len([sid for sid in context_ids if sid.startswith("CGP005-TA-APP-")]):
+            result.add("manifest_appendix_context_count_mismatch", "Manifest appendix context count must match context register.", manifest_path)
         files = manifest.get("files", [])
         paths = [item.get("path", "") for item in files]
         if len(paths) != len(set(paths)):
@@ -249,6 +303,7 @@ def validate_cgp006_document_classification(root: Path, required_files: tuple[st
             "classification_counts": dict(Counter(row.get("primary_classification", "") for row in classification_rows)),
             "normative_rows": len(normative_rows),
             "reference_only_rows": len(reference_rows),
+            "context_rows": len(context_rows),
             "historical_rows": len(historical_rows),
             "duplicate_rows": len(duplicate_rows),
             "superseded_rows": len(superseded_rows),
