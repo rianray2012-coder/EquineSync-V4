@@ -22,6 +22,7 @@ class CGP006Wave1WarningGapDispositionValidatorTests(unittest.TestCase):
         self.assertEqual(result.summary["warnings_reviewed"], 5)
         self.assertEqual(result.summary["gaps_reviewed"], 4)
         self.assertEqual(result.summary["proposed_closures"], 3)
+        self.assertEqual(result.summary["closed_gaps"], 3)
 
     def test_missing_package_fails(self):
         original = validate_cgp006_wave1_warning_gap_disposition.PACKAGE_REL

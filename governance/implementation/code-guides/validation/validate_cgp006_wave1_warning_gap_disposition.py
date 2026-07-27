@@ -16,12 +16,19 @@ from cgp_validation import ValidationResult, read_csv_strict, repo_root_from
 PACKAGE_REL = Path("drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1")
 CANDIDATE_REL = Path("drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1")
 BASE_HEAD = "adc1b2dcdcaae52fa0cbcc65034cad95de3210fb"
-DETERMINATION = "CGP_006_WAVE_1_WARNING_GAP_DISPOSITION_REVIEW_COMPLETE_ADOPTION_READINESS_REVIEW_MAY_PROCEED"
-PACKAGE_VERSION = "0.1.0-warning-gap-disposition.1"
+DETERMINATION = "CGP_006_WAVE_1_DOCUMENTARY_GAPS_0001_0002_0003_FOUNDER_CLOSED_WITH_REPOSITORY_EVIDENCE"
+PACKAGE_VERSION = "0.1.1-founder-gap-closure.1"
 GUIDES = ("ES-CG-00", "ES-CG-01", "ES-CG-13", "ES-CG-10")
 WARNINGS = ("CGP006-CLF-0001", "CGP006-CLF-0002", "CGP006-CLF-0003", "CGP006-CLF-0004", "CGP006-CLF-0005")
 GAPS = ("CGP005-TA-APP-GAP-0001", "CGP005-TA-APP-GAP-0002", "CGP005-TA-APP-GAP-0003", "CGP005-TA-APP-GAP-0004")
 PROPOSED_CLOSURES = {"CGP005-TA-APP-GAP-0001", "CGP005-TA-APP-GAP-0002", "CGP005-TA-APP-GAP-0003"}
+CLOSED_GAPS = PROPOSED_CLOSURES
+FINAL_GAP_STATE = "CLOSED_WITH_REPOSITORY_DOCUMENTARY_EVIDENCE"
+FOUNDER_CLOSURE_DECISIONS = {
+    "CGP005-TA-APP-GAP-0001": "APPROVE_PROPOSED_CLOSURE",
+    "CGP005-TA-APP-GAP-0002": "APPROVE_PROPOSED_CLOSURE",
+    "CGP005-TA-APP-GAP-0003": "APPROVE_PROPOSED_CLOSURE",
+}
 IMPLEMENTATION_EVIDENCE_REQUIRED = {"CGP005-TA-APP-GAP-0004"}
 ALLOWED_DISPOSITIONS = {
     "RETAIN_OPEN_NON_BLOCKING",
@@ -38,6 +45,7 @@ ALLOWED_DISPOSITIONS = {
     "SUPERSEDED_WITH_TRACEABLE_SUCCESSOR",
     "DUPLICATE_WITH_TRACEABLE_CANONICAL_ITEM",
     "BLOCKED_VALIDATION_FAILURE",
+    FINAL_GAP_STATE,
 }
 ALLOWED_OUTCOMES = {
     "DISPOSITION_REVIEW_COMPLETE_RETAIN_OPEN_NON_BLOCKING",
@@ -48,6 +56,7 @@ ALLOWED_OUTCOMES = {
     "DISPOSITION_REVIEW_COMPLETE_ADOPTION_BLOCKING",
     "DISPOSITION_REVIEW_COMPLETE_ACTIVATION_BLOCKING",
     "DISPOSITION_REVIEW_COMPLETE_IMPLEMENTATION_BLOCKING",
+    "DISPOSITION_REVIEW_COMPLETE_FOUNDER_CLOSED_WITH_REPOSITORY_DOCUMENTARY_EVIDENCE",
     "DISPOSITION_REVIEW_BLOCKED_SOURCE_AUTHORITY",
     "DISPOSITION_REVIEW_BLOCKED_CONFLICT",
     "DISPOSITION_REVIEW_BLOCKED_VALIDATION_FAILURE",
@@ -151,7 +160,9 @@ def validate_cgp006_wave1_warning_gap_disposition(root: Path) -> ValidationResul
             "determination": DETERMINATION,
             "candidate_baseline_state": "FOUNDER_APPROVED_CANDIDATE_BASELINE_REPOSITORY_ACCESSIONED",
             "cgp007_status": "NOT_ISSUED",
-            "actual_closure_status": "NO_WARNING_OR_GAP_CLOSED",
+            "actual_closure_status": FINAL_GAP_STATE,
+            "closure_disposition": DETERMINATION,
+            "final_gap_state_for_closed_items": FINAL_GAP_STATE,
         }
         for key, value in expected.items():
             if manifest.get(key) != value:
@@ -190,6 +201,19 @@ def validate_cgp006_wave1_warning_gap_disposition(root: Path) -> ValidationResul
             result.add("gap_inventory_changed", "Manifest gap inventory must preserve all four gap identifiers.", manifest_path)
         if set(manifest.get("proposed_closures", [])) != PROPOSED_CLOSURES:
             result.add("proposed_closure_inventory_changed", "Proposed closure inventory changed.", manifest_path)
+        if set(manifest.get("closed_gaps", [])) != CLOSED_GAPS:
+            result.add("closed_gap_inventory_invalid", "Closed-gap inventory must contain exactly the three Founder-approved documentary gaps.", manifest_path)
+        if manifest.get("founder_closure_decisions") != FOUNDER_CLOSURE_DECISIONS:
+            result.add("founder_closure_decisions_invalid", "Founder closure decisions must match the approved directive exactly.", manifest_path)
+        expected_retained = set(WARNINGS) | IMPLEMENTATION_EVIDENCE_REQUIRED
+        if set(manifest.get("retained_open_items", [])) != expected_retained:
+            result.add("retained_open_items_invalid", "Retained-open manifest items must contain the five warnings and GAP-0004 only.", manifest_path)
+        if set(manifest.get("historical_retained_open_items_preserved", [])) != set(WARNINGS) | set(GAPS):
+            result.add("historical_retained_open_items_invalid", "Historical retained-open inventory must preserve all nine reviewed items.", manifest_path)
+        if manifest.get("founder_decisions_required") != []:
+            result.add("founder_decision_still_required", "Founder decisions must be recorded, not still required.", manifest_path)
+        if set(manifest.get("founder_decisions_recorded", [])) != {"CGP006-WG-FD-0001", "CGP006-WG-FD-0002", "CGP006-WG-FD-0003"}:
+            result.add("founder_decisions_recorded_invalid", "Recorded Founder decision IDs changed.", manifest_path)
         if set(manifest.get("implementation_evidence_required", [])) != IMPLEMENTATION_EVIDENCE_REQUIRED:
             result.add("implementation_evidence_inventory_changed", "Implementation evidence inventory changed.", manifest_path)
         if manifest.get("adoption_blocking_items") != []:
@@ -232,8 +256,17 @@ def validate_cgp006_wave1_warning_gap_disposition(root: Path) -> ValidationResul
         row = by_item.get(item_id, {})
         if row.get("item_type") != "Technical Audit Appendix gap":
             result.add("invalid_item_type", "Gap row has wrong item type.", disposition_path, item_id)
-        if item_id in PROPOSED_CLOSURES and row.get("recommended_disposition") != "EVIDENCE_SUFFICIENT_FOR_PROPOSED_CLOSURE":
-            result.add("invalid_gap_proposed_closure", "Gap must be proposed closure only.", disposition_path, item_id)
+        if item_id in CLOSED_GAPS:
+            if row.get("recommended_disposition") != FINAL_GAP_STATE:
+                result.add("invalid_gap_closure_state", "Founder-closed gap must use the final repository documentary evidence state.", disposition_path, item_id)
+            if row.get("item_level_review_outcome") != "DISPOSITION_REVIEW_COMPLETE_FOUNDER_CLOSED_WITH_REPOSITORY_DOCUMENTARY_EVIDENCE":
+                result.add("invalid_gap_closure_outcome", "Founder-closed gap outcome changed.", disposition_path, item_id)
+            if row.get("founder_closure_decision") != FOUNDER_CLOSURE_DECISIONS[item_id]:
+                result.add("invalid_founder_closure_decision", "Founder closure decision must match the approved directive.", disposition_path, item_id)
+            if row.get("final_gap_state") != FINAL_GAP_STATE or row.get("actual_closure_status") != FINAL_GAP_STATE:
+                result.add("invalid_final_gap_state", "Closed gap must record the exact final gap state.", disposition_path, item_id)
+            if row.get("closure_disposition") != DETERMINATION:
+                result.add("invalid_closure_disposition", "Closed gap must record the combined Founder disposition.", disposition_path, item_id)
         if item_id in IMPLEMENTATION_EVIDENCE_REQUIRED and row.get("recommended_disposition") != "IMPLEMENTATION_EVIDENCE_REQUIRED":
             result.add("invalid_gap_implementation_evidence", "Gap must require implementation evidence.", disposition_path, item_id)
     for row in disposition_rows:
@@ -261,8 +294,8 @@ def validate_cgp006_wave1_warning_gap_disposition(root: Path) -> ValidationResul
         ]:
             if not row.get(field):
                 result.add("missing_disposition_field", f"Disposition row missing `{field}`.", disposition_path, record_id)
-        if row.get("actual_closure_status") == "CLOSED":
-            result.add("silent_item_closure", "No item may be actually closed.", disposition_path, record_id)
+        if record_id not in CLOSED_GAPS and row.get("actual_closure_status") == FINAL_GAP_STATE:
+            result.add("silent_item_closure", "Only the three Founder-approved documentary gaps may be closed.", disposition_path, record_id)
 
     matrix_specs = [
         ("matrices/CGP_006_WAVE_1_WARNING_TO_GUIDE_MATRIX.csv", "item_identifier", 17),
@@ -313,24 +346,80 @@ def validate_cgp006_wave1_warning_gap_disposition(root: Path) -> ValidationResul
         result.add("proposed_closure_rows_invalid", "Proposed closure register must contain exactly the three proposed gap closures.", proposed_path)
     for row in proposed_rows:
         item_id = row.get("item_identifier", "")
-        if row.get("actual_closure_status") != "NOT_CLOSED":
-            result.add("actual_closure_claim", "Proposed closure must remain NOT_CLOSED.", proposed_path, item_id)
-        if row.get("closure_evidence_complete") != "YES" or row.get("founder_disposition_required") != "YES":
-            result.add("closure_evidence_incomplete", "Proposed closure must record complete evidence and Founder disposition requirement.", proposed_path, item_id)
+        if row.get("proposed_closure_status") != "APPROVED_BY_FOUNDER":
+            result.add("proposed_closure_not_approved", "Proposed closure must be Founder approved.", proposed_path, item_id)
+        if row.get("actual_closure_status") != FINAL_GAP_STATE:
+            result.add("actual_closure_claim", "Approved closure must record the final gap state.", proposed_path, item_id)
+        if row.get("closure_evidence_complete") != "YES" or row.get("founder_disposition_required") != "SATISFIED":
+            result.add("closure_evidence_incomplete", "Approved closure must record complete evidence and satisfied Founder disposition.", proposed_path, item_id)
+        if row.get("founder_decision_status") != FOUNDER_CLOSURE_DECISIONS.get(item_id):
+            result.add("proposed_closure_decision_invalid", "Proposed closure decision must match the Founder directive.", proposed_path, item_id)
+        if row.get("closure_disposition") != DETERMINATION:
+            result.add("proposed_closure_disposition_invalid", "Proposed closure register must record the combined disposition.", proposed_path, item_id)
 
     decision_path = package / "registers" / "CGP_006_WAVE_1_WARNING_GAP_FOUNDER_DECISION_NEEDED_REGISTER.csv"
     _, decision_rows = read_csv_strict(decision_path, result)
     if {row.get("related_warning_or_gap", "") for row in decision_rows} != PROPOSED_CLOSURES:
         result.add("founder_decision_records_invalid", "Founder decision records must cover proposed closure items.", decision_path)
     for row in decision_rows:
-        for field in ["decision_identifier", "precise_question", "available_options", "recommended_option", "effect_of_deferral"]:
+        item_id = row.get("related_warning_or_gap", "")
+        for field in ["decision_identifier", "precise_question", "available_options", "recommended_option", "effect_of_deferral", "founder_decision_status", "decision_record_status", "actual_closure_status", "closure_disposition"]:
             if not row.get(field):
                 result.add("incomplete_founder_decision_record", f"Founder decision record missing `{field}`.", decision_path, row.get("decision_identifier", ""))
+        if row.get("founder_decision_status") != FOUNDER_CLOSURE_DECISIONS.get(item_id):
+            result.add("founder_decision_status_invalid", "Founder decision status must match approved closure.", decision_path, item_id)
+        if row.get("decision_record_status") != "RECORDED":
+            result.add("founder_decision_record_not_recorded", "Founder decision record must be recorded.", decision_path, item_id)
+        if row.get("actual_closure_status") != FINAL_GAP_STATE or row.get("closure_disposition") != DETERMINATION:
+            result.add("founder_decision_closure_state_invalid", "Founder decision record must carry final closure state and disposition.", decision_path, item_id)
+
+    closure_decision_path = package / "registers" / "CGP_006_WAVE_1_WARNING_GAP_FOUNDER_CLOSURE_DECISION_REGISTER.csv"
+    _, closure_decision_rows = read_csv_strict(closure_decision_path, result)
+    closure_decision_map = {row.get("decision_identifier", ""): row for row in closure_decision_rows}
+    expected_decisions = {
+        "CGP006-WG-FD-0001": "CGP005-TA-APP-GAP-0001",
+        "CGP006-WG-FD-0002": "CGP005-TA-APP-GAP-0002",
+        "CGP006-WG-FD-0003": "CGP005-TA-APP-GAP-0003",
+    }
+    if {row.get("related_warning_or_gap", "") for row in closure_decision_rows} != CLOSED_GAPS:
+        result.add("closure_decision_inventory_invalid", "Founder closure decision register must cover exactly the closed documentary gaps.", closure_decision_path)
+    for decision_id, item_id in expected_decisions.items():
+        row = closure_decision_map.get(decision_id, {})
+        if row.get("related_warning_or_gap") != item_id:
+            result.add("closure_decision_id_mapping_invalid", "Founder decision ID must remain mapped to its approved gap.", closure_decision_path, decision_id)
+        if row.get("founder_decision_status") != FOUNDER_CLOSURE_DECISIONS[item_id]:
+            result.add("closure_decision_status_invalid", "Founder decision status must match approved closure.", closure_decision_path, decision_id)
+        if row.get("decision_record_status") != "RECORDED":
+            result.add("closure_decision_record_status_invalid", "Founder closure decision must be recorded.", closure_decision_path, decision_id)
+        if row.get("actual_closure_status") != FINAL_GAP_STATE or row.get("closure_disposition") != DETERMINATION:
+            result.add("closure_decision_final_state_invalid", "Founder closure decision must carry final closure state and disposition.", closure_decision_path, decision_id)
+
+    closure_path = package / "registers" / "CGP_006_WAVE_1_WARNING_GAP_CLOSURE_REGISTER.csv"
+    _, closure_rows = read_csv_strict(closure_path, result)
+    if {row.get("item_identifier", "") for row in closure_rows} != CLOSED_GAPS:
+        result.add("closure_register_inventory_invalid", "Closure register must contain exactly the three Founder-closed documentary gaps.", closure_path)
+    for row in closure_rows:
+        item_id = row.get("item_identifier", "")
+        if row.get("founder_decision_status") != FOUNDER_CLOSURE_DECISIONS.get(item_id):
+            result.add("closure_register_decision_invalid", "Closure register Founder decision must match the directive.", closure_path, item_id)
+        if row.get("final_gap_state") != FINAL_GAP_STATE:
+            result.add("closure_register_final_state_invalid", "Closure register must use the exact final gap state.", closure_path, item_id)
+        if row.get("combined_disposition") != DETERMINATION:
+            result.add("closure_register_disposition_invalid", "Closure register must use the exact combined disposition.", closure_path, item_id)
 
     retained_path = package / "registers" / "CGP_006_WAVE_1_WARNING_GAP_RETAINED_OPEN_REGISTER.csv"
     _, retained_rows = read_csv_strict(retained_path, result)
     if {row.get("item_identifier", "") for row in retained_rows} != expected_items:
-        result.add("retained_open_inventory_invalid", "Retained-open register must preserve all nine items because none are closed.", retained_path)
+        result.add("retained_open_inventory_invalid", "Retained-open history register must preserve all nine reviewed items.", retained_path)
+    retained_by_item = row_by(retained_rows, "item_identifier")
+    for item_id in WARNINGS:
+        if retained_by_item.get(item_id, {}).get("retained_open_status") != "RETAINED_OPEN_NON_BLOCKING":
+            result.add("warning_retained_open_status_invalid", "Warnings must remain retained open non-blocking.", retained_path, item_id)
+    for item_id in CLOSED_GAPS:
+        if retained_by_item.get(item_id, {}).get("retained_open_status") != "HISTORICAL_OPEN_STATE_PRESERVED_CLOSED_BY_FOUNDER":
+            result.add("closed_gap_historical_status_invalid", "Closed gaps must preserve historical open state without remaining open.", retained_path, item_id)
+    if retained_by_item.get("CGP005-TA-APP-GAP-0004", {}).get("retained_open_status") != "RETAINED_OPEN_IMPLEMENTATION_EVIDENCE_REQUIRED":
+        result.add("gap0004_retained_open_status_invalid", "GAP-0004 must remain open with implementation evidence required.", retained_path, "CGP005-TA-APP-GAP-0004")
 
     adoption_path = package / "registers" / "CGP_006_WAVE_1_WARNING_GAP_ADOPTION_IMPACT_REGISTER.csv"
     _, adoption_rows = read_csv_strict(adoption_path, result)
@@ -370,6 +459,7 @@ def validate_cgp006_wave1_warning_gap_disposition(root: Path) -> ValidationResul
         "gaps_reviewed": len(GAPS),
         "disposition_rows": len(disposition_rows),
         "proposed_closures": len(PROPOSED_CLOSURES),
+        "closed_gaps": len(CLOSED_GAPS),
         "founder_decision_records": len(decision_rows),
         "implementation_evidence_required": len(IMPLEMENTATION_EVIDENCE_REQUIRED),
         "adoption_blocking_items": 0,
