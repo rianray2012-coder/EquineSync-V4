@@ -51,6 +51,7 @@
     "ES-CG-00-DQ-0008"
   ],
   "merge_authority": "PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY",
+  "metadata_branch": "codex/cgp-006-wave-1-candidate-baseline-metadata-reconciliation",
   "normative_source_ids": [
     "CGSRC-ATLAS-0006",
     "CGSRC-ATLAS-0017",
@@ -114,6 +115,7 @@
     "CGP006-NR-0029"
   ],
   "package_id": "ES-CGP-006-WAVE-1-CANDIDATE-DRAFTING-V1",
+  "primary_merge_commit": "c0f598822ede7a9b8fa079dde8603df027cf8510",
   "production_authority": "NOT_GRANTED",
   "prohibited_authority": [
     "ADOPTION",
@@ -134,8 +136,11 @@
     "ENROLLMENT",
     "CGP-007"
   ],
+  "receipt_commit": "8a3b4f14bd4e69f3aac7622f7db6203e916b56e3",
+  "receipt_merge_commit": "298501b29e31843070fa13617860e238f8704a3b",
+  "receipt_pr": 37,
   "reference_corpus_usage": "BACKGROUND_ONLY_NOT_NORMATIVE",
-  "repository_state": "INTEGRATION_PENDING",
+  "repository_state": "REPOSITORY_ACCESSIONED",
   "required_sections": [
     "Document Identity",
     "Guide Identifier",

@@ -6,7 +6,7 @@
 **Lifecycle status:** `FOUNDER_APPROVED_CANDIDATE_BASELINE`
 **Founder review status:** `FOUNDER_REVIEW_COMPLETE`
 **Founder candidate-baseline disposition:** `CGP_006_WAVE_1_CANDIDATE_GUIDES_FOUNDER_APPROVED_WITH_RETAINED_NON_BLOCKING_WARNINGS`
-**Repository state:** `INTEGRATION_PENDING`
+**Repository state:** `REPOSITORY_ACCESSIONED`
 **Adoption status:** `NOT_ADOPTED`
 **Activation status:** `NOT_ACTIVE`
 **Repository integration authority:** `PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY`
@@ -38,6 +38,13 @@
 Founder approval records the four reviewed Wave 1 Code Guides as a controlled candidate baseline only. The approval accepts `22` candidate controls, `22` candidate invariants, and `32` mandatory-question responses as `PARTIALLY_ANSWERED_ACCEPTABLE_FOR_CANDIDATE_STAGE`.
 
 The controlled baseline remains bounded to the `139` frozen normative rows. The `2,511` reference-corpus rows and `51` Founder/context rows remain non-normative. PR `#23` materials and the CGP-005 Technical Audit Appendix remain context-only.
+
+## Repository Custody
+
+- Primary PR `#36` merged at `c0f598822ede7a9b8fa079dde8603df027cf8510`.
+- Custody receipt PR `#37` merged at `298501b29e31843070fa13617860e238f8704a3b`.
+- Metadata reconciliation branch: `codex/cgp-006-wave-1-candidate-baseline-metadata-reconciliation`.
+- Repository state after metadata reconciliation: `REPOSITORY_ACCESSIONED`.
 
 ## Authority Boundary
 

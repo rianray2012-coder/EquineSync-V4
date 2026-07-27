@@ -19,6 +19,8 @@ DISPOSITION = "CGP_006_WAVE_1_CANDIDATE_GUIDES_FOUNDER_APPROVED_WITH_RETAINED_NO
 PRIOR_REVIEW = "CGP_006_WAVE_1_FOUNDER_REVIEW_COMPLETE_READY_WITH_RETAINED_NON_BLOCKING_WARNINGS"
 LIFECYCLE = "FOUNDER_APPROVED_CANDIDATE_BASELINE"
 REPOSITORY_STATE = "INTEGRATION_PENDING"
+POST_ACCESSION_REPOSITORY_STATE = "REPOSITORY_ACCESSIONED"
+ALLOWED_REPOSITORY_STATES = {REPOSITORY_STATE, POST_ACCESSION_REPOSITORY_STATE}
 INTEGRATION_AUTHORITY = "PROTECTED_REPOSITORY_INTEGRATION_ALLOWED_FOR_CUSTODY_ONLY"
 GUIDES = ("ES-CG-00", "ES-CG-01", "ES-CG-13", "ES-CG-10")
 GUIDE_COUNTS = {
@@ -44,6 +46,10 @@ BLOCKED_DIFF_PREFIXES = (
     "governance/implementation/code-guides/source-accession/",
     "governance/implementation/code-guides/source-freeze/",
 )
+ALLOWED_METADATA_RECONCILIATION_PATHS = {
+    "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_CHECKSUMS.sha256",
+    "governance/implementation/code-guides/classification/CGP-006/CGP_006_DOCUMENT_CLASSIFICATION_MANIFEST.json",
+}
 FORBIDDEN_MARKERS = (
     "IMPLEMENTATION_AUTHORIZED",
     "MERGE_AUTHORIZED",
@@ -118,7 +124,6 @@ def validate_cgp006_wave1_candidate_baseline_approval(root: Path) -> ValidationR
             "founder_review_determination": PRIOR_REVIEW,
             "founder_candidate_baseline_disposition": DISPOSITION,
             "candidate_baseline_status": LIFECYCLE,
-            "repository_state": REPOSITORY_STATE,
             "adoption_status": "NOT_ADOPTED",
             "activation_status": "NOT_ACTIVE",
             "merge_authority": INTEGRATION_AUTHORITY,
@@ -134,6 +139,8 @@ def validate_cgp006_wave1_candidate_baseline_approval(root: Path) -> ValidationR
         for key, expected_value in expected.items():
             if manifest.get(key) != expected_value:
                 result.add("invalid_manifest_approval_status", f"Manifest `{key}` must be `{expected_value}`.", manifest_path, key)
+        if manifest.get("repository_state") not in ALLOWED_REPOSITORY_STATES:
+            result.add("invalid_manifest_approval_status", "Manifest `repository_state` must be integration-pending or repository-accessioned.", manifest_path, "repository_state")
         if manifest.get("approved_cgp005_source_bytes_changed") is not False:
             result.add("source_bytes_changed", "Approved CGP-005 source bytes must remain unchanged.", manifest_path)
         if manifest.get("approved_guides") != list(GUIDES):
@@ -241,7 +248,6 @@ def validate_cgp006_wave1_candidate_baseline_approval(root: Path) -> ValidationR
             "founder_review_status": "FOUNDER_REVIEW_COMPLETE",
             "founder_candidate_baseline_disposition": DISPOSITION,
             "candidate_baseline_status": LIFECYCLE,
-            "repository_state": REPOSITORY_STATE,
             "adoption_status": "NOT_ADOPTED",
             "activation_status": "NOT_ACTIVE",
             "merge_authority": INTEGRATION_AUTHORITY,
@@ -255,12 +261,14 @@ def validate_cgp006_wave1_candidate_baseline_approval(root: Path) -> ValidationR
         for key, expected_value in expected.items():
             if companion.get(key) != expected_value:
                 result.add("invalid_companion_approval_status", f"Companion `{key}` must be `{expected_value}`.", companion_path, guide)
+        if companion.get("repository_state") not in ALLOWED_REPOSITORY_STATES:
+            result.add("invalid_companion_approval_status", "Companion `repository_state` must be integration-pending or repository-accessioned.", companion_path, guide)
 
     paths = changed_paths(repo)
     for path in sorted(paths):
         if not path.startswith("governance/implementation/code-guides/"):
             result.add("changed_path_outside_authorized_scope", "Changed path is outside Code Guide governance scope.", path)
-        if path.startswith(BLOCKED_DIFF_PREFIXES) or "/source-freeze/" in path:
+        if path not in ALLOWED_METADATA_RECONCILIATION_PATHS and (path.startswith(BLOCKED_DIFF_PREFIXES) or "/source-freeze/" in path):
             result.add("blocked_scope_changed", "Approval update changed a blocked source/product scope.", path)
 
     all_text = "\n".join(path.read_text(encoding="utf-8") for path in package.rglob("*") if path.is_file() and path.suffix in {".md", ".csv", ".json"})

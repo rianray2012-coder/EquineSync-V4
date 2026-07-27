@@ -140,13 +140,13 @@
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/PROGRAM_STATUS.md",
-      "sha256": "6c28f8748575b654e03afe636ea767ed34f1725230202f90c1593cdb513bcef9"
+      "sha256": "717ffe13802540f6b13cd3ac644872619da07bf790f238b8c5a03d02e980a755"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/registers/CODE_GUIDE_PROGRAM_TRACKER.csv",
-      "sha256": "31b24a45267077677425af52fee69e2468e40b4f29b498867a796f1af2a4adba"
+      "sha256": "d5b249d18d5e7931b18cab8983086cedafca5df8d8b74c490f90c93ea0b864f3"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
@@ -224,13 +224,13 @@
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_PACKAGE_MANIFEST.json",
-      "sha256": "d8fea79e2f0ca0971363126b9c4d724322ba1bd8bd821352426f162f77278a6c"
+      "sha256": "c4ddf3d94a883a35ef663e88522337f1b21da59bf271f90b7fc56bb37bb23347"
     },
     {
       "artifact_type": "CGP_006_METADATA_RECONCILIATION_ARTIFACT",
       "checksum_inclusion": "INCLUDED",
       "path": "governance/implementation/code-guides/initiation/CGP-006/CGP_006_CHECKSUMS.sha256",
-      "sha256": "dd724fc5c90f6a8aa679eccdb7853f7b00ff6c009652cda5acc256c8b390b1d0"
+      "sha256": "1af4016d67c8589715240bd2d5c4fb2f5f4d7f3c6ca0496cdcf1ecf1f27a605a"
     }
   ],
   "final_remote_default_branch_head": "PENDING_METADATA_MERGE_COMMIT_REPORTED_IN_FINAL_HANDOFF",
