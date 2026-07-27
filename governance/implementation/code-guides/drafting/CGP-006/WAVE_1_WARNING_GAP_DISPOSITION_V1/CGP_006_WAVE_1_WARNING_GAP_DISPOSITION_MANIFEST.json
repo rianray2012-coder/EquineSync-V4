@@ -1,0 +1,224 @@
+{
+  "activation_blocking_items": [
+    "CGP005-TA-APP-GAP-0004"
+  ],
+  "actual_closure_status": "CLOSED_WITH_REPOSITORY_DOCUMENTARY_EVIDENCE",
+  "additional_documentary_evidence_required": [],
+  "adoption_blocking_items": [],
+  "artifact_counts": {
+    "controls_reviewed": 22,
+    "disposition_items": 9,
+    "files_in_checksum_scope": 24,
+    "gap_to_guide_rows": 16,
+    "gaps": 4,
+    "invariants_reviewed": 22,
+    "mandatory_questions_reviewed": 32,
+    "package_file_count_including_manifest_and_ledger": 26,
+    "warning_to_guide_rows": 17,
+    "warnings": 5
+  },
+  "authority_boundary": {
+    "activation": "NOT_AUTHORIZED",
+    "adoption": "NOT_AUTHORIZED",
+    "application_changes": "NOT_AUTHORIZED",
+    "cgp007": "NOT_ISSUED",
+    "implementation": "NOT_AUTHORIZED",
+    "implementation_mapping": "NOT_AUTHORIZED",
+    "source_freeze_amendment": "NOT_REQUIRED",
+    "source_promotion": "NOT_AUTHORIZED"
+  },
+  "base_branch": "integrate-emergent-final-zip",
+  "branch": "codex/cgp-006-wave-1-warning-gap-disposition-v1",
+  "branch_point_commit": "adc1b2dcdcaae52fa0cbcc65034cad95de3210fb",
+  "candidate_baseline_state": "FOUNDER_APPROVED_CANDIDATE_BASELINE_REPOSITORY_ACCESSIONED",
+  "cgp007_status": "NOT_ISSUED",
+  "closed_gaps": [
+    "CGP005-TA-APP-GAP-0001",
+    "CGP005-TA-APP-GAP-0002",
+    "CGP005-TA-APP-GAP-0003"
+  ],
+  "closure_disposition": "CGP_006_WAVE_1_DOCUMENTARY_GAPS_0001_0002_0003_FOUNDER_CLOSED_WITH_REPOSITORY_EVIDENCE",
+  "created_date": "2026-07-27",
+  "current_head_at_generation": "f15ee82ba78b55d28811fa83426555c1c5fbdd20",
+  "determination": "CGP_006_WAVE_1_DOCUMENTARY_GAPS_0001_0002_0003_FOUNDER_CLOSED_WITH_REPOSITORY_EVIDENCE",
+  "files": [
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/README.md",
+      "sha256": "8351edae396eda8a43abc881909b04e61d9f53a8b655819f1c951c4a5c188e89"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/matrices/CGP_006_WAVE_1_GAP_TO_CONTROL_MATRIX.csv",
+      "sha256": "97cc97e72723974d88d95a069dd25d887f35a35ed1b9cee937aeb4ee066114a0"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/matrices/CGP_006_WAVE_1_GAP_TO_GUIDE_MATRIX.csv",
+      "sha256": "6fb0ab07ae1c78db97949ecb115686f058eea2db4b5bcc84afafd1f3b2f68cf0"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/matrices/CGP_006_WAVE_1_GAP_TO_INVARIANT_MATRIX.csv",
+      "sha256": "8cf752fec434089beb7f9cce734ff5785376ffc4a55cf0c00dc3f1404216d218"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/matrices/CGP_006_WAVE_1_GAP_TO_QUESTION_MATRIX.csv",
+      "sha256": "0defcacf86d06c21e12281f75ee451dd71911b0229c821c1bfb0afb68a4475db"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/matrices/CGP_006_WAVE_1_WARNING_TO_CONTROL_MATRIX.csv",
+      "sha256": "0b5b6be978b44fc38fbf75fc94af548857e2a539531d8a8ea4361757a4f4a95a"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/matrices/CGP_006_WAVE_1_WARNING_TO_GUIDE_MATRIX.csv",
+      "sha256": "961eebfe04a3f275ff0130e243edfcf7cf954f3e92ce1305f74b9925a8f40898"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/matrices/CGP_006_WAVE_1_WARNING_TO_INVARIANT_MATRIX.csv",
+      "sha256": "0f72cfd27a40d19ce2317c47c722e911e24c8f26b9c0506a1d286deedded5236"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/matrices/CGP_006_WAVE_1_WARNING_TO_QUESTION_MATRIX.csv",
+      "sha256": "d8ebde0b81708d7956d1e0436c870eb4a2d4e32f6ee832432296116cc2dfd2e2"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_ACTIVATION_IMPACT_REGISTER.csv",
+      "sha256": "210bc0a7973317d8d24831695f162a2b37dafdc8adb4c21f25061716ed49b96a"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_ADOPTION_IMPACT_REGISTER.csv",
+      "sha256": "aae8ada1d0980e28d1a97b86821ad8ffa4d5f8575a9806f360451c8673b64bcc"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_CLOSURE_REGISTER.csv",
+      "sha256": "9b14fd3c1e3a8fd5f5c2a37fe53668b4fafc66ea00f040c79948b98a25075bea"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_DISPOSITION_REGISTER.csv",
+      "sha256": "bdf48a0676c1d7577e47ce44abedc4d5cef137ee94bcccc53d03e2ce771c6f65"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_EVIDENCE_REGISTER.csv",
+      "sha256": "676589157cd23dff3ea5d0bbda58cf74300a8b93f26c0521d002d5bc80dc9ae7"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_FOUNDER_CLOSURE_DECISION_REGISTER.csv",
+      "sha256": "0dc04408134eb885cd99d1676911d6d364f95bb649132ec7cba908379956aab3"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_FOUNDER_DECISION_NEEDED_REGISTER.csv",
+      "sha256": "05abe937e04a8d05745b48336e8019eca6ffa99871986742000290e0744ae459"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_IMPLEMENTATION_IMPACT_REGISTER.csv",
+      "sha256": "083e6ffa8417e5aea14be97eade4c0b8a5321b54f020daa88dabb8fcc62f97d6"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_MISSING_EVIDENCE_REGISTER.csv",
+      "sha256": "db4093aa90542fc5ab143a5d4a066b4a877f98fb732e479eaaca972f177c93e5"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_PROPOSED_CLOSURE_REGISTER.csv",
+      "sha256": "fa2eb6d99654cbf25e457df3d0f260dbb79db3b3bca22611f008c990064fa7df"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/registers/CGP_006_WAVE_1_WARNING_GAP_RETAINED_OPEN_REGISTER.csv",
+      "sha256": "43fe559a1c34c021b291e0d8d928431a5d03fdf71a8557bb65cc5dd4aeefe17a"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/reports/CGP_006_WAVE_1_WARNING_GAP_DISPOSITION_REPORT.md",
+      "sha256": "0c2de5a2fdbac58bbded714e264ee8915192d9946412ed433dce2c5ad7a80f39"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/reports/CGP_006_WAVE_1_WARNING_GAP_PREMUTATION_VERIFICATION.md",
+      "sha256": "0287e44873bb38983ae086d37601ff1a45debffd9188e3d5e3421c8a2a964973"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/reports/CGP_006_WAVE_1_WARNING_GAP_REVIEW_DISPOSITION.md",
+      "sha256": "c96108a9cb262646335520a491ff36bbc26f08b051ee1dc4b1915e34e848eb48"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1/reports/CGP_006_WAVE_1_WARNING_GAP_VALIDATION_REPORT.md",
+      "sha256": "c8666f3ff81750c20c50f657e23b4eccd110e95155a3e9bac9022603a5555cf3"
+    }
+  ],
+  "final_gap_state_for_closed_items": "CLOSED_WITH_REPOSITORY_DOCUMENTARY_EVIDENCE",
+  "founder_closure_decisions": {
+    "CGP005-TA-APP-GAP-0001": "APPROVE_PROPOSED_CLOSURE",
+    "CGP005-TA-APP-GAP-0002": "APPROVE_PROPOSED_CLOSURE",
+    "CGP005-TA-APP-GAP-0003": "APPROVE_PROPOSED_CLOSURE"
+  },
+  "founder_decisions_recorded": [
+    "CGP006-WG-FD-0001",
+    "CGP006-WG-FD-0002",
+    "CGP006-WG-FD-0003"
+  ],
+  "founder_decisions_required": [],
+  "gaps_reviewed": [
+    "CGP005-TA-APP-GAP-0001",
+    "CGP005-TA-APP-GAP-0002",
+    "CGP005-TA-APP-GAP-0003",
+    "CGP005-TA-APP-GAP-0004"
+  ],
+  "guide_lifecycle_states": {
+    "activation_status": "NOT_ACTIVE",
+    "adoption_status": "NOT_ADOPTED",
+    "candidate_baseline_status": "FOUNDER_APPROVED_CANDIDATE_BASELINE",
+    "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
+    "repository_state": "REPOSITORY_ACCESSIONED"
+  },
+  "historical_retained_open_items_preserved": [
+    "CGP006-CLF-0001",
+    "CGP006-CLF-0002",
+    "CGP006-CLF-0003",
+    "CGP006-CLF-0004",
+    "CGP006-CLF-0005",
+    "CGP005-TA-APP-GAP-0001",
+    "CGP005-TA-APP-GAP-0002",
+    "CGP005-TA-APP-GAP-0003",
+    "CGP005-TA-APP-GAP-0004"
+  ],
+  "implementation_blocking_items": [
+    "CGP005-TA-APP-GAP-0004"
+  ],
+  "implementation_evidence_required": [
+    "CGP005-TA-APP-GAP-0004"
+  ],
+  "observed_remote_head": "adc1b2dcdcaae52fa0cbcc65034cad95de3210fb",
+  "package_id": "CGP-006-WAVE-1-WARNING-GAP-DISPOSITION-V1",
+  "package_version": "0.1.1-founder-gap-closure.1",
+  "proposed_closures": [
+    "CGP005-TA-APP-GAP-0001",
+    "CGP005-TA-APP-GAP-0002",
+    "CGP005-TA-APP-GAP-0003"
+  ],
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "required_starting_head": "adc1b2dcdcaae52fa0cbcc65034cad95de3210fb",
+  "retained_open_items": [
+    "CGP006-CLF-0001",
+    "CGP006-CLF-0002",
+    "CGP006-CLF-0003",
+    "CGP006-CLF-0004",
+    "CGP006-CLF-0005",
+    "CGP005-TA-APP-GAP-0004"
+  ],
+  "source_integrity": {
+    "approved_source_byte_changes": false,
+    "blocking_source_conflicts": 0,
+    "classification_records": 2701,
+    "founder_approved_contextual_rows": 51,
+    "frozen_normative_rows": 139,
+    "normative_rows_dispositioned": 139,
+    "provenance_gaps": 0,
+    "reference_corpus_rows": 2511,
+    "source_freeze_amendment": "NOT_REQUIRED",
+    "source_promotions": 0,
+    "unique_normative_source_identifiers": 68
+  },
+  "validator": "governance/implementation/code-guides/validation/validate_cgp006_wave1_warning_gap_disposition.py",
+  "validator_tests": "governance/implementation/code-guides/validation/tests/test_cgp006_wave1_warning_gap_disposition.py",
+  "warnings_reviewed": [
+    "CGP006-CLF-0001",
+    "CGP006-CLF-0002",
+    "CGP006-CLF-0003",
+    "CGP006-CLF-0004",
+    "CGP006-CLF-0005"
+  ]
+}
