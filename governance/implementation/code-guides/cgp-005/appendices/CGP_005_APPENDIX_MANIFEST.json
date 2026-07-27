@@ -1,0 +1,107 @@
+{
+  "package_id": "ES-CGP-005-TECHNICAL-AUDIT-APPENDIX-V1.0.0",
+  "version": "1.0.0",
+  "created_at": "2026-07-27",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "base_branch": "integrate-emergent-final-zip",
+  "reviewed_repository_head": "4afe3ccd84d9f8be1bc5c79bb27068676d993a70",
+  "working_branch": "codex/cgp005-technical-audit-appendix-v1",
+  "determinations": {
+    "cgp005": "CGP005_APPENDIX_REQUIRED",
+    "cgp006": "READY_AFTER_REFRESH_FOR_AFFECTED_WAVE_1_DRAFTING_AFTER_PROTECTED_ACCEPTANCE",
+    "repository_drift": "GOVERNANCE_DRIFT",
+    "validation_status": "CGP_005_APPENDIX_VALIDATED_WITH_RETAINED_GAPS",
+    "final_status": "CGP_005_TECHNICAL_AUDIT_APPENDIX_FOUNDER_APPROVED_FOR_PROTECTED_REPOSITORY_INTEGRATION",
+    "founder_disposition": "CGP_005_TECHNICAL_AUDIT_APPENDIX_FOUNDER_APPROVED_FOR_PROTECTED_REPOSITORY_INTEGRATION"
+  },
+  "scope": {
+    "documentary_only": true,
+    "runtime_implementation_authorized": false,
+    "code_guide_adoption_authorized": false,
+    "code_guide_activation_authorized": false,
+    "implementation_remains_blocked": true,
+    "approved_source_bytes_changed": false
+  },
+  "source_integrity": {
+    "cgp005_checksum_ledger_verified": true,
+    "cgp006_initiation_checksum_ledger_verified": true,
+    "technical_audit_founder_decision_checksum_ledger_verified": true,
+    "founder_disposition_recorded": true,
+    "original_cgp005_source_freeze_replaced": false,
+    "original_cgp005_source_hash_changed": false,
+    "normative_source_set_changed": false
+  },
+  "affected_code_guides": [
+    {
+      "code_guide": "ES-CG-00",
+      "refresh_required": "MINOR_REFRESH",
+      "drafting_status": "READY_AFTER_REFRESH"
+    },
+    {
+      "code_guide": "ES-CG-01",
+      "refresh_required": "MAJOR_REFRESH",
+      "drafting_status": "READY_AFTER_REFRESH"
+    },
+    {
+      "code_guide": "ES-CG-10",
+      "refresh_required": "MAJOR_REFRESH",
+      "drafting_status": "READY_AFTER_REFRESH"
+    },
+    {
+      "code_guide": "ES-CG-13",
+      "refresh_required": "MAJOR_REFRESH",
+      "drafting_status": "READY_AFTER_REFRESH"
+    }
+  ],
+  "reviewed_decisions": [
+    "ES-TA-FD-001",
+    "ES-TA-FD-002",
+    "ES-TA-FD-003",
+    "ES-TA-FD-004",
+    "ES-TA-FD-005",
+    "ES-TA-FD-006",
+    "ES-TA-FD-007",
+    "ES-TA-FD-008"
+  ],
+  "artifacts": [
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_TECHNICAL_AUDIT_APPENDIX_V1_0_0.md",
+      "role": "appendix"
+    },
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_006_INPUT_REFRESH_MATRIX.csv",
+      "role": "input_refresh_matrix"
+    },
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/TECHNICAL_AUDIT_TO_CODE_GUIDE_CROSSWALK.csv",
+      "role": "decision_crosswalk"
+    },
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_SOURCE_REGISTER.md",
+      "role": "source_register"
+    },
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_VALIDATION_REPORT.md",
+      "role": "validation_report"
+    },
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_FOUNDER_DISPOSITION.md",
+      "role": "founder_disposition"
+    },
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_MANIFEST.json",
+      "role": "manifest"
+    },
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_SHA256SUMS.txt",
+      "role": "checksum_ledger",
+      "self_hash_excluded": true
+    },
+    {
+      "path": "governance/implementation/code-guides/cgp-005/appendices/CGP_005_APPENDIX_REPOSITORY_INTEGRATION_RECEIPT.md",
+      "role": "repository_integration_receipt"
+    }
+  ],
+  "artifact_count": 9,
+  "artifact_count_note": "Initial reviewed candidate contained 8 appendix files. Founder-disposition update adds one bounded disposition artifact before protected integration."
+}
