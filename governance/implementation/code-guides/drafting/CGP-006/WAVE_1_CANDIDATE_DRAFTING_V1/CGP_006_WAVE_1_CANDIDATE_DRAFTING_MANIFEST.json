@@ -1,0 +1,231 @@
+{
+  "activation_status": "NOT_ACTIVE",
+  "adoption_status": "NOT_ADOPTED",
+  "artifact_counts": {
+    "controls": 22,
+    "files": 37,
+    "invariants": 22,
+    "mandatory_questions": 32
+  },
+  "base_branch": "integrate-emergent-final-zip",
+  "branch_point_commit": "01955bf81a51f8e42f40252c694ce70b67e68b76",
+  "candidate_branch": "codex/cgp-006-wave-1-candidate-drafting-v1",
+  "cgp007_status": "NOT_ISSUED",
+  "checksum_treatment": "Manifest and checksum ledger are excluded from self-hashing; all other package, validator, and validator-test files are hashed.",
+  "classification_integrity": {
+    "approved_cgp005_source_bytes_changed": false,
+    "blocking_conflicts": 0,
+    "founder_context_rows": 51,
+    "frozen_normative_rows": 139,
+    "provenance_gaps": 0,
+    "reference_corpus_rows": 2511,
+    "source_freeze_amendment": "NOT_REQUIRED",
+    "total_classification_records": 2701,
+    "unique_normative_source_ids": 68
+  },
+  "created_date": "2026-07-27",
+  "dependency_gates": {
+    "ES-CG-00": "ES_CG_00_COMPLETE_CANDIDATE_DRAFT_INTERNAL_VALIDATION_PASS",
+    "ES-CG-01": "ES_CG_01_COMPLETE_CANDIDATE_DRAFT_DEPENDENCY_VALIDATION_PASS",
+    "ES-CG-10": "ES_CG_10_COMPLETE_CANDIDATE_DRAFT_PORTFOLIO_VALIDATION_READY",
+    "ES-CG-13": "ES_CG_13_COMPLETE_CANDIDATE_DRAFT_DEPENDENCY_VALIDATION_PASS"
+  },
+  "drafting_order": [
+    "ES-CG-00",
+    "ES-CG-01",
+    "ES-CG-13",
+    "ES-CG-10"
+  ],
+  "files": [
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/README.md",
+      "sha256": "62057625847301db54eff69418398366fc4fb58f9cfb86e7bbfd5b82fc000612"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-00/ES-CG-00_CANDIDATE_COMPANION.json",
+      "sha256": "a0ac542aff363174fff38b5dadbcb160458d3ece854ce868dd2045798eacdb19"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-00/ES-CG-00_CANDIDATE_GUIDE.md",
+      "sha256": "aaf413495626f65329706653a1e7ec01a633489ecbfb2deccd7b9694bd90475a"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-01/ES-CG-01_CANDIDATE_COMPANION.json",
+      "sha256": "e662898c51758111c9659bee4998d6366fa6b3373a815dc92d4e38e7b6d44ea6"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-01/ES-CG-01_CANDIDATE_GUIDE.md",
+      "sha256": "a25b7cd53fe626a54f182074b156627861fd6e3a6bfe81c252e9cfb810e16df4"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-10/ES-CG-10_CANDIDATE_COMPANION.json",
+      "sha256": "2346504f9f45b5833c45b546c696be7899f2b21e7717edb386874cfeaeb71378"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-10/ES-CG-10_CANDIDATE_GUIDE.md",
+      "sha256": "e815d97b5ae75be9da5973d39c8d8e2471ed2daa619b27bfee23b063eff4c389"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-13/ES-CG-13_CANDIDATE_COMPANION.json",
+      "sha256": "0134ede550ff4992d7ba7e6b6115108ac56c64ecac81e85073bf8b795f3d4186"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/guides/ES-CG-13/ES-CG-13_CANDIDATE_GUIDE.md",
+      "sha256": "0c507e83441a251bfb050f6ae7020a283faca53201ab409fcef63c65f6cec2e5"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_CONTROL_REGISTER.csv",
+      "sha256": "734279b203cc90f666572609d94c9eed2da4a6bff4d25342420a52d277468f9c"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_DEPENDENCY_GATE_REGISTER.csv",
+      "sha256": "8824b0387b7ae2402110ffe735722fffdba12274fa89fab0e80f539d3d2697ee"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_EXCEPTION_REGISTER.csv",
+      "sha256": "f9a240ca645708b5f8c4f9ff2a39ff54c416fdcbfb73f61ec4d1e7aeb7db0b51"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_FOUNDER_DECISION_NEEDED_REGISTER.csv",
+      "sha256": "4d20600d332282007f9d7c93e19731e442c04e999efb3e0510b70d2b2f95b178"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_INVARIANT_REGISTER.csv",
+      "sha256": "17269de7d464dcb4aaec663ec4908a3c24b886240dad8f50772af8ef01095fdf"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_MANDATORY_QUESTION_REGISTER.csv",
+      "sha256": "7a8bafd7e93bf4c01212320a5dd882466ba5e09f8734d429f8f5978749f3ffbd"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_RETAINED_GAP_REGISTER.csv",
+      "sha256": "75dc882c27ad2f06a5ec9b4b884b577edf20755ab2e7f778f0acff7863a01640"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_RISK_REGISTER.csv",
+      "sha256": "9428a2c5d00df3a83a58976ad8b8f92e63d2a942b36a12fc0c99a3ac24e3089e"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_UNRESOLVED_QUESTION_REGISTER.csv",
+      "sha256": "97ff759a54e4d6f778e55113447fdfae767329b04a59f8e57db18f4a333809c6"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/registers/CGP_006_WAVE_1_WARNING_TREATMENT_REGISTER.csv",
+      "sha256": "d9b984891c70024b3b51d11882e838fd311e36f14337e2bf21346e0f7bf9f59c"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reports/CGP_006_WAVE_1_CANDIDATE_DRAFTING_REPORT.md",
+      "sha256": "6442a164eb4b58dfc0edf5b3304e595a3a8188b7cdc0c7282cb2b32b603f0aeb"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reports/CGP_006_WAVE_1_PREMUTATION_VERIFICATION.md",
+      "sha256": "75627bac9eaf8a0168a56e45765522076bb72db129cfc98ae766701d12173735"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reports/CGP_006_WAVE_1_REVIEW_DISPOSITION.md",
+      "sha256": "d6a5b62cf1093e9c9dc1a4767361b0230d16df00a8df5c3e0d7ab47220426846"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/reports/CGP_006_WAVE_1_VALIDATION_REPORT.md",
+      "sha256": "cf1b091842a03c16a38f6a1a56236e127ce30db41438be6ce94647568da4adbf"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_CONTEXTUAL_SOURCE_USE_REGISTER.csv",
+      "sha256": "d35b67b31713fce5420ad65e527a66f9bab5f66a774e2010be133e85d4ffd9f5"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_CONTROL_TO_SOURCE_MATRIX.csv",
+      "sha256": "4cc3d29264fb2408f79c82854dbe2b763d13232125a881e16dcecd1c116a852b"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_CROSS_GUIDE_CONFLICT_REGISTER.csv",
+      "sha256": "a3cc5905e3087a014e55cb58b3cde6ecf2e334be25e4e0f9f4d6ac756445e9ed"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_CROSS_GUIDE_DEPENDENCY_MATRIX.csv",
+      "sha256": "d6f7605c5d9fb8a5d2521cddf198774175c54d08684e0c21ba2e5e4437508717"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_GAP_TO_GUIDE_MATRIX.csv",
+      "sha256": "419363dcc08292991bf3c5fa9f14cd6cd82b1564dd32e776b32822c370ef825c"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_GUIDE_TO_SOURCE_MATRIX.csv",
+      "sha256": "0aeb74b1f2e5cec8540e9b5227b15f9cc3ba97b0bb42c11b96fac7e5ba3c98d9"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_INVARIANT_TO_SOURCE_MATRIX.csv",
+      "sha256": "661b9fbef055a7fe852ce2d0b3a04e31ca4cdadb7b77074486fbce3dfa378ea1"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_MANDATORY_QUESTION_TO_SOURCE_MATRIX.csv",
+      "sha256": "a68230b79a1aeb2cdf7c3bef385a1a11517bbfc34bdda328ea86a8bf39e8559e"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_NORMATIVE_ROW_DISPOSITION_MATRIX.csv",
+      "sha256": "c17f43d7f3a82a4df06825f47b934e72621f765a872dcb4e4e1a9d994dfa7889"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_REFERENCE_CORPUS_USE_REGISTER.csv",
+      "sha256": "30927251676f1c87570f9f9114c2145eea1735179190dd02a0f932c12804d6e5"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_SOURCE_TO_GUIDE_MATRIX.csv",
+      "sha256": "6fd162c3b9c1461902f4b9a544b3f97cb7e89896b97b91106b6936bbe630f4dc"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1/traceability/CGP_006_WAVE_1_WARNING_TO_GUIDE_MATRIX.csv",
+      "sha256": "9dcd142aa5ba6d1c6def50ff9ab257380e1da31db6c012c24258aa10c51d97a3"
+    },
+    {
+      "path": "governance/implementation/code-guides/validation/tests/test_cgp006_wave1_candidate_drafting.py",
+      "sha256": "7afc416011aec3aea97e9ea5f2de411bb8d33d201008f2b92903b4f4362c7b1b"
+    },
+    {
+      "path": "governance/implementation/code-guides/validation/validate_cgp006_wave1_candidate_drafting.py",
+      "sha256": "77fe623d3f3a429de6a5d82cad182081d93d131359b8b076d6b8ea63ed516f26"
+    }
+  ],
+  "founder_review_status": "FOUNDER_REVIEW_PENDING",
+  "guide_input_refresh": {
+    "ES-CG-00": "MINOR_REFRESH_COMPLETE",
+    "ES-CG-01": "MAJOR_REFRESH_COMPLETE",
+    "ES-CG-10": "MAJOR_REFRESH_COMPLETE",
+    "ES-CG-13": "MAJOR_REFRESH_COMPLETE"
+  },
+  "guide_normative_counts": {
+    "ES-CG-00": 29,
+    "ES-CG-01": 34,
+    "ES-CG-10": 31,
+    "ES-CG-13": 45
+  },
+  "guide_versions": {
+    "ES-CG-00": "0.1.0-candidate.1",
+    "ES-CG-01": "0.1.0-candidate.1",
+    "ES-CG-10": "0.1.0-candidate.1",
+    "ES-CG-13": "0.1.0-candidate.1"
+  },
+  "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
+  "lifecycle_status": "CANDIDATE_WAVE_1_PACKAGE",
+  "merge_authority": "MERGE_NOT_AUTHORIZED",
+  "package_id": "ES-CGP-006-WAVE-1-CANDIDATE-DRAFTING-V1",
+  "package_status": "CANDIDATE_ONLY",
+  "package_version": "0.1.0-candidate.1",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "retained_gaps": [
+    "CGP005-TA-APP-GAP-0001",
+    "CGP005-TA-APP-GAP-0002",
+    "CGP005-TA-APP-GAP-0003",
+    "CGP005-TA-APP-GAP-0004"
+  ],
+  "retained_warnings": [
+    "CGP006-CLF-0001",
+    "CGP006-CLF-0002",
+    "CGP006-CLF-0003",
+    "CGP006-CLF-0004",
+    "CGP006-CLF-0005"
+  ],
+  "source_promotion_status": "NOT_AUTHORIZED",
+  "validator": "governance/implementation/code-guides/validation/validate_cgp006_wave1_candidate_drafting.py",
+  "validator_tests": "governance/implementation/code-guides/validation/tests/test_cgp006_wave1_candidate_drafting.py"
+}
