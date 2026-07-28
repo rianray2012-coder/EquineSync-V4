@@ -13,13 +13,13 @@
     },
     {
       "path": "AUTHORITY_BOUNDARY_REPORT.md",
-      "sha256": "08f920caac3eed0882ef51ae94a0f8b77a91c72969e7e64c61388619f22c8ecb",
-      "size_bytes": 1253
+      "sha256": "8548f830ea8fdf90f87bbd3f8b3812d925b11c656a35f0b02982b0f8c4d4c981",
+      "size_bytes": 1583
     },
     {
       "path": "AUTHORITY_MODEL_RECONCILIATION.md",
-      "sha256": "91dc69142bddc56aad8fb43dab4c5a6d872497257f8b10d62178c36128566613",
-      "size_bytes": 1736
+      "sha256": "20795e9556e5eaa4471b417cb64435353d7b757e72b10365422a74fd50974e52",
+      "size_bytes": 1375
     },
     {
       "path": "CODE_GUIDE_FAMILY_STATUS_MATRIX.csv",
@@ -38,13 +38,18 @@
     },
     {
       "path": "FOUNDER_DECISION_REGISTER.md",
-      "sha256": "4c230f81be1c522547d77c9470be61ba9d58dd47c98fde05f6da98041e1e5517",
-      "size_bytes": 907
+      "sha256": "8be7f9d0f60b193b46bb19cb1f89f123afe32419846328615ee0a4539cc97177",
+      "size_bytes": 1311
+    },
+    {
+      "path": "FOUNDER_DISPOSITION_OF_RECONCILIATION.md",
+      "sha256": "9633e444f8075ccd46f6f6954efb2e9ef2491ef1b1acba42a9d2e468c4675430",
+      "size_bytes": 3487
     },
     {
       "path": "FOUNDER_REVIEW_SUMMARY.md",
-      "sha256": "54905b3edb884fa39f8997fb34e2ee7bf8a292b1f004bbe8aeffe557bfe20303",
-      "size_bytes": 1676
+      "sha256": "b8c8a735062bb99085474a86f9c9df77ffdbf95bc04a64b5ca4f24c090b568be",
+      "size_bytes": 1426
     },
     {
       "path": "IMPLEMENTATION_PROFILE_INVENTORY.csv",
@@ -63,13 +68,13 @@
     },
     {
       "path": "PR_44_V1_1_IMPACT_ASSESSMENT.md",
-      "sha256": "0b8d603a8b4206d36b36d5a87efd44422532b93d721cef923c9f6fad3b3c13c2",
-      "size_bytes": 1836
+      "sha256": "7551e759749e953678054282e2a38c1fcb124ce4dd78fbb8f817cf7d5a58562d",
+      "size_bytes": 1570
     },
     {
       "path": "README.md",
-      "sha256": "e080442fade75eaacbb104ecefe6df0ec2dbb516ad507deec505d1b223c9af7a",
-      "size_bytes": 3912
+      "sha256": "61491bc20100512249e1da6420a07d11c8d56e5aed7d7e82326ead3994428631",
+      "size_bytes": 1944
     },
     {
       "path": "REPOSITORY_CUSTODY_CONFORMANCE_ASSESSMENT.md",
@@ -93,8 +98,8 @@
     },
     {
       "path": "REVIEW_DISPOSITION.md",
-      "sha256": "459bdc990c36de69883ad3346d580672d57a78e8e5770f18f7a8dcb1f744d96f",
-      "size_bytes": 1601
+      "sha256": "bff0cbfc548bf2241096d91cd46f187c0fbe51065aff8f4c20ed2fcde8915dc4",
+      "size_bytes": 1698
     },
     {
       "path": "RISK_FINDING_DEVIATION_REGISTER.csv",
@@ -103,13 +108,13 @@
     },
     {
       "path": "SOURCE_REGISTER.md",
-      "sha256": "e84cb59f38919483243c4184682407ffaf0d6bf622e4d5f6b625c2301e3d0fdf",
-      "size_bytes": 1461
+      "sha256": "873260873ad3400d3b2fefc7e47c2a622c0ea5ce33c24d52b9b43fd6a1167cf9",
+      "size_bytes": 1850
     },
     {
       "path": "SUCCESSOR_WORKSTREAM_PLAN.md",
-      "sha256": "e63937e7146e2b03c6d3a3954c9daa5d45eb8fd1d350c8e7fd7d4d09f5103e48",
-      "size_bytes": 1392
+      "sha256": "4e7c4cebb232cc73b76ed9bfe03da71583aa3890a1355748184b93f85851fa3b",
+      "size_bytes": 1826
     },
     {
       "path": "TEMPLATE_INVENTORY.csv",
@@ -123,13 +128,13 @@
     },
     {
       "path": "V1_1_REQUIREMENT_TO_REPOSITORY_CROSSWALK.csv",
-      "sha256": "0219f886fef392d94f10786ac42616e2fe27f30da6c1ea63fe75596fb5357a19",
-      "size_bytes": 4434
+      "sha256": "c48d842a61ab0e56ea5e25c8c96345619521675636a18ae8c0895e8a8eb8c631",
+      "size_bytes": 5043
     },
     {
       "path": "VALIDATION_REPORT.md",
-      "sha256": "8773bcafcf23a3bfe153bddd29e4b82dd5d2fae992c6a2bd05dc29b73988418a",
-      "size_bytes": 1132
+      "sha256": "731ff4660637b6af44309e92e45683a563745b4c49b8fc47514cfcf58977d0a2",
+      "size_bytes": 1393
     },
     {
       "path": "VALIDATOR_RELIABILITY_ASSESSMENT.csv",
@@ -138,18 +143,20 @@
     },
     {
       "path": "tests/test_code_guide_program_v1_1_reconciliation.py",
-      "sha256": "d7104a1e80e8bb4cc5a9ba41a05c579bf730b9440db0626a1121c81121cc8598",
-      "size_bytes": 1500
+      "sha256": "b7dec306dad442d01f88ae61ba85cab682a8644d64994ea796dc5a0df326f55a",
+      "size_bytes": 1641
     },
     {
       "path": "validators/validate_code_guide_program_v1_1_reconciliation.py",
-      "sha256": "b60072569d3d052ca1f54c293c11e954185b0d5e69c760181ba14f1142eb968c",
-      "size_bytes": 8442
+      "sha256": "3686291b2d5fc105b55dd36e4a8227f28f6ec4eddce49f7cfb1818289d232610",
+      "size_bytes": 9236
     }
   ],
-  "generated_utc": "2026-07-28T13:18:07Z",
+  "founder_disposition_sha256": "9633e444f8075ccd46f6f6954efb2e9ef2491ef1b1acba42a9d2e468c4675430",
   "package_id": "CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION",
   "pr_44_impact": "PR_44_REQUIRES_REBASE_AND_REVALIDATION_UNDER_NEW_CONTROLLING_BASELINE",
+  "pr_44_treatment": "PR_44_TO_BE_SUPERSEDED_BY_V1_1_CONFORMING_SUCCESSOR",
   "repository_base": "integrate-emergent-final-zip",
-  "repository_head": "6249c2fd79bfef897630855d633d62e830153414"
+  "repository_head": "6249c2fd79bfef897630855d633d62e830153414",
+  "updated_utc": "2026-07-28T13:54:11Z"
 }

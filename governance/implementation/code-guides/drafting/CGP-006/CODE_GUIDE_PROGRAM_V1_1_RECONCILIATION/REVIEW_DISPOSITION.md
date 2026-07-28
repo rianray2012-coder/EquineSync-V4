@@ -1,26 +1,30 @@
 # Review Disposition
 
-## Final Determination
+## Final Determinations
 
-`CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_COMPLETE_REVISION_PROGRAM_REQUIRED`
+- `CODE_GUIDE_PROGRAM_PLAN_V1_1_PROTECTEDLY_ACCESSIONED_AND_CUSTODY_COMPLETE`
+- `CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_COMPLETE_REVISION_PROGRAM_REQUIRED`
+- `PR_44_REQUIRES_REBASE_AND_REVALIDATION_UNDER_NEW_CONTROLLING_BASELINE`
+- `PR_44_TO_BE_SUPERSEDED_BY_V1_1_CONFORMING_SUCCESSOR`
 
-## Rationale
+## Founder Disposition
 
-The V1.1 program plan itself is Founder-approved, protectedly accessioned, and custody-complete. The existing Code Guide Program is not yet fully reconciled to V1.1 because required artifacts are missing, controlled values drift from V1.1, validator reliability needs revalidation, implementation profiles are absent, activation records are absent, and PR #44 predates the V1.1 custody baseline.
+The Founder accepts the determinations and approves PR #47 as a documentary reconciliation and successor-workstream decision-support package, subject to protected integration and separate post-merge custody.
 
-## PR #44 Determination
+This approval does not accept the existing Code Guide Program as fully V1.1-conforming.
 
-`PR_44_REQUIRES_REBASE_AND_REVALIDATION_UNDER_NEW_CONTROLLING_BASELINE`
+## PR #44 Treatment
 
-## Disposition
+PR #44 shall remain open, draft, unmerged, and unchanged until a V1.1-conforming successor package has been created and validated. The historical PR #44 branch shall not be rewritten in place. After the successor draft PR is opened and its lineage is verified, a separate Founder disposition may authorize closure of PR #44 as superseded.
 
-This draft package should be reviewed as a reconciliation and successor-workstream package only. It should not be treated as an activation package, implementation mapping package, implementation authorization, deployment authorization, pilot authorization, production-use authorization, or PR #44 modification package.
+## Authorized Successor
 
-## Required Closing Statements
+`CGP_006_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION_DIRECTIVE`
 
-- `PROGRAM_PLAN_V1_1_FOUNDER_APPROVED`
-- `PROGRAM_PLAN_V1_1_CONTROLLING_ONLY_AFTER_PROTECTED_ACCESSION_AND_CUSTODY`
-- `PR_44_REMAINS_OPEN_DRAFT_UNMERGED`
+The successor may prepare V1.1-conforming Code Guide program machinery and a V1.1-conforming successor to PR #44, but it remains bound by the continuing non-authorization statements below.
+
+## Continuing Boundary
+
 - `GUIDE_ACTIVATION_NOT_AUTHORIZED`
 - `IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
 - `IMPLEMENTATION_NOT_AUTHORIZED`
@@ -29,7 +33,5 @@ This draft package should be reviewed as a reconciliation and successor-workstre
 - `GAP_0004_REMAINS_OPEN`
 - `RETAINED_WARNINGS_REMAIN_OPEN`
 - `ACTIVATION_BLOCKERS_REMAIN_OPEN`
-- `PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED`
 - `NO_ADOPTED_GUIDE_BYTES_CHANGED`
 - `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
-- `RECONCILIATION_PR_OPEN_DRAFT_UNMERGED`

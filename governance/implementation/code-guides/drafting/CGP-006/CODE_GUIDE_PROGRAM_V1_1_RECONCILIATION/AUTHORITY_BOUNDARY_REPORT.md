@@ -2,13 +2,33 @@
 
 ## Boundary Determination
 
-This reconciliation package is documentary-only. It is permitted to record findings, inventories, impact assessments, and successor workstream needs. It is not permitted to alter adopted guide bytes, PR #44, application code, schemas, migrations, infrastructure, CI, integrations, operational systems, implementation maps, activation records, or deployment configuration.
+The Founder disposition approves PR #47 as a documentary reconciliation and successor-workstream decision-support package only. It does not accept the existing Code Guide Program as fully V1.1-conforming.
 
-## Explicit Prohibitions Preserved
+## Authorized
 
-- `PROGRAM_PLAN_V1_1_FOUNDER_APPROVED`
-- `PROGRAM_PLAN_V1_1_CONTROLLING_ONLY_AFTER_PROTECTED_ACCESSION_AND_CUSTODY`
-- `PR_44_REMAINS_OPEN_DRAFT_UNMERGED`
+- Add this Founder disposition to PR #47.
+- Reconcile manifests and checksums.
+- Rerun validations.
+- Prepare PR #47 for protected review and merger.
+- After PR #47 merges, create a separate custody receipt through a new protected PR.
+- Begin the V1.1 revision workstream only from the verified post-custody protected head.
+- In the successor directive, prepare controlled values and schemas, registers, generic implementation profiles, templates, validator reliability strengthening, guide-by-guide lifecycle reconciliation, PR #44 successor preparation, and a draft Founder review package.
+
+## Not Authorized
+
+- Repository-specific implementation mapping.
+- Application code or product test changes.
+- Application schema migrations.
+- Infrastructure or CI changes outside Code Guide program machinery.
+- Guide activation.
+- Deployment.
+- Pilot or production use.
+- Runtime evidence.
+- CGP-007.
+- Rewriting PR #44 in place.
+
+## Continuing Boundary
+
 - `GUIDE_ACTIVATION_NOT_AUTHORIZED`
 - `IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
 - `IMPLEMENTATION_NOT_AUTHORIZED`
@@ -17,11 +37,5 @@ This reconciliation package is documentary-only. It is permitted to record findi
 - `GAP_0004_REMAINS_OPEN`
 - `RETAINED_WARNINGS_REMAIN_OPEN`
 - `ACTIVATION_BLOCKERS_REMAIN_OPEN`
-- `PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED`
 - `NO_ADOPTED_GUIDE_BYTES_CHANGED`
 - `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
-- `RECONCILIATION_PR_OPEN_DRAFT_UNMERGED`
-
-## Required Follow-Up Authority
-
-Any repair package must separately state its baseline, permitted paths, scope, PR #44 treatment, and whether mapping or activation records are in scope.

@@ -1,17 +1,37 @@
 # Successor Workstream Plan
 
-This plan records the work needed after this draft reconciliation. It is not authority to perform the work.
+## Authorized Successor Directive
 
-| Step | Workstream | Purpose | Authority Gate |
-| --- | --- | --- | --- |
-| 1 | V1.1 authority and source baseline | Confirm accessioned source and permitted paths. | Founder-approved successor directive |
-| 2 | Controlled values and schemas | Revise A/E models, maturity states, activation schema, repository mapping schema. | No guide activation |
-| 3 | Registers and profiles | Create missing registers and implementation profiles. | No implementation mapping unless expressly authorized |
-| 4 | Templates and validators | Create missing templates and activation validator; revalidate no-silent-skip behavior. | Validators must fail closed |
-| 5 | Guide-by-guide lifecycle reconciliation | Map each guide to V1.1 stages and evidence. | No state advancement without disposition |
-| 6 | PR #44 disposition | Rebase, revise, or supersede PR #44 under V1.1. | PR #44 untouched until separately authorized |
-| 7 | Founder review package | Package findings, decisions, and retained gaps. | Draft-only until Founder disposition |
+`CGP_006_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION_DIRECTIVE`
 
-## Required Opening Gate
+The V1.1 revision workstream shall begin only from the verified post-custody protected head after PR #47 and its separate custody receipt have merged.
 
-The next workstream should begin only after a separate Founder-approved directive identifies scope, permitted paths, baseline head, relationship to PR #44, and whether any mapping work is authorized.
+## Authorized Scope
+
+| Area | Authorized Treatment |
+| --- | --- |
+| Controlled values and schemas | Create and implement V1.1 controlled-value and schema migration with historical preservation. |
+| Registers | Create or revise Code Guide program registers required by V1.1. |
+| Generic implementation profiles | Create generic profile schemas, templates, registers, validators, and documentary guidance. |
+| Templates | Create or strengthen V1.1 Code Guide program templates. |
+| Validators | Strengthen validator reliability and fail-closed behavior. |
+| Guide lifecycle reconciliation | Reconcile guide-by-guide lifecycle status to V1.1. |
+| PR #44 successor | Prepare a V1.1-conforming successor to PR #44 without rewriting PR #44 in place. |
+| Founder review | Prepare a draft Founder review package. |
+
+## Prohibited Scope
+
+The successor directive shall not authorize repository-specific implementation mapping, application code or product test changes, application schema migrations, infrastructure or CI changes outside Code Guide program machinery, guide activation, deployment, pilot or production use, runtime evidence, or CGP-007.
+
+## Continuing Boundary
+
+- `GUIDE_ACTIVATION_NOT_AUTHORIZED`
+- `IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+- `IMPLEMENTATION_NOT_AUTHORIZED`
+- `DEPLOYMENT_NOT_AUTHORIZED`
+- `PILOT_AND_PRODUCTION_USE_NOT_AUTHORIZED`
+- `GAP_0004_REMAINS_OPEN`
+- `RETAINED_WARNINGS_REMAIN_OPEN`
+- `ACTIVATION_BLOCKERS_REMAIN_OPEN`
+- `NO_ADOPTED_GUIDE_BYTES_CHANGED`
+- `NO_RUNTIME_IMPLEMENTATION_OCCURRED`

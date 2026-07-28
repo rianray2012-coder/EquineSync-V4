@@ -28,8 +28,11 @@ class ReconciliationPackageTests(unittest.TestCase):
     def test_required_files_exist(self) -> None:
         validator.assert_required_files(self.root)
 
-    def test_required_closing_statements_are_present(self) -> None:
-        validator.assert_closing_statements(self.root)
+    def test_required_continuing_statements_are_present(self) -> None:
+        validator.assert_continuing_statements(self.root)
+
+    def test_outdated_pre_disposition_statements_are_absent(self) -> None:
+        validator.assert_no_outdated_statements(self.root)
 
     def test_approved_source_integrity(self) -> None:
         validator.assert_source_integrity(self.root)

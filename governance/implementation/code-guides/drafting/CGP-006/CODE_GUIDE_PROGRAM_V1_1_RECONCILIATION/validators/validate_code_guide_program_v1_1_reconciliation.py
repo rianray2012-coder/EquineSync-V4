@@ -17,10 +17,8 @@ APPROVED_SOURCE_SHA256 = "9aa8cb29848ccf5b75a65320616a1196060589372bb0de09266fd3
 APPROVED_SOURCE_SIZE = 54852
 RECONCILIATION_DETERMINATION = "CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_COMPLETE_REVISION_PROGRAM_REQUIRED"
 PR44_IMPACT = "PR_44_REQUIRES_REBASE_AND_REVALIDATION_UNDER_NEW_CONTROLLING_BASELINE"
-REQUIRED_CLOSING_STATEMENTS = [
-    "PROGRAM_PLAN_V1_1_FOUNDER_APPROVED",
-    "PROGRAM_PLAN_V1_1_CONTROLLING_ONLY_AFTER_PROTECTED_ACCESSION_AND_CUSTODY",
-    "PR_44_REMAINS_OPEN_DRAFT_UNMERGED",
+PR44_SUPERSESSION = "PR_44_TO_BE_SUPERSEDED_BY_V1_1_CONFORMING_SUCCESSOR"
+CONTINUING_STATEMENTS = [
     "GUIDE_ACTIVATION_NOT_AUTHORIZED",
     "IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
     "IMPLEMENTATION_NOT_AUTHORIZED",
@@ -29,9 +27,11 @@ REQUIRED_CLOSING_STATEMENTS = [
     "GAP_0004_REMAINS_OPEN",
     "RETAINED_WARNINGS_REMAIN_OPEN",
     "ACTIVATION_BLOCKERS_REMAIN_OPEN",
-    "PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED",
     "NO_ADOPTED_GUIDE_BYTES_CHANGED",
-    "NO_RUNTIME_IMPLEMENTATION_OCCURRED",
+    "NO_RUNTIME_IMPLEMENTATION_OCCURRED"
+]
+OUTDATED_STATEMENTS = [
+    "PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED",
     "RECONCILIATION_PR_OPEN_DRAFT_UNMERGED"
 ]
 REQUIRED_FILES = [
@@ -44,6 +44,7 @@ REQUIRED_FILES = [
     "EVIDENCE_MODEL_RECONCILIATION.csv",
     "EXCEPTION_SUSPENSION_DEACTIVATION_ASSESSMENT.md",
     "FOUNDER_DECISION_REGISTER.md",
+    "FOUNDER_DISPOSITION_OF_RECONCILIATION.md",
     "FOUNDER_REVIEW_SUMMARY.md",
     "IMPLEMENTATION_PROFILE_INVENTORY.csv",
     "MAPPING_STATUS_ASSESSMENT.md",
@@ -96,20 +97,37 @@ def assert_required_files(root: Path) -> None:
         raise AssertionError(f"Missing package files: {missing}")
 
 
-def assert_closing_statements(root: Path) -> None:
+def assert_continuing_statements(root: Path) -> None:
     package = package_path(root)
     required_reports = [
         "README.md",
-        "AUTHORITY_MODEL_RECONCILIATION.md",
+        "FOUNDER_DISPOSITION_OF_RECONCILIATION.md",
         "AUTHORITY_BOUNDARY_REPORT.md",
         "REVIEW_DISPOSITION.md",
         "FOUNDER_REVIEW_SUMMARY.md",
+        "PR_44_V1_1_IMPACT_ASSESSMENT.md",
     ]
     for report in required_reports:
         text = read_text(package / report)
-        missing = [statement for statement in REQUIRED_CLOSING_STATEMENTS if statement not in text]
+        missing = [statement for statement in CONTINUING_STATEMENTS if statement not in text]
         if missing:
-            raise AssertionError(f"{report} missing closing statements: {missing}")
+            raise AssertionError(f"{report} missing continuing statements: {missing}")
+
+
+def assert_no_outdated_statements(root: Path) -> None:
+    package = package_path(root)
+    offenders = []
+    for path in package.rglob("*"):
+        if not path.is_file():
+            continue
+        if path.relative_to(package).as_posix() == "validators/validate_code_guide_program_v1_1_reconciliation.py":
+            continue
+        text = read_text(path)
+        for statement in OUTDATED_STATEMENTS:
+            if statement in text:
+                offenders.append(f"{path.relative_to(package)}:{statement}")
+    if offenders:
+        raise AssertionError(f"Outdated statements remain: {offenders}")
 
 
 def assert_source_integrity(root: Path) -> None:
@@ -128,6 +146,8 @@ def assert_reconciliation_determinations(root: Path) -> None:
         raise AssertionError("Missing reconciliation determination")
     if PR44_IMPACT not in impact:
         raise AssertionError("Missing PR #44 impact determination")
+    if PR44_SUPERSESSION not in impact:
+        raise AssertionError("Missing PR #44 supersession treatment")
 
 
 def assert_tracker_boundary(root: Path) -> None:
@@ -151,7 +171,7 @@ def assert_manifest_and_checksums(root: Path) -> None:
     expected_manifest_paths = sorted(
         path.relative_to(package).as_posix()
         for path in package.rglob("*")
-        if path.is_file() and path.name not in ('PACKAGE_MANIFEST.json', 'CHECKSUM_MANIFEST.sha256')
+        if path.is_file() and path.name not in {"PACKAGE_MANIFEST.json", "CHECKSUM_MANIFEST.sha256"}
     )
     if manifest_paths != expected_manifest_paths:
         raise AssertionError("Package manifest paths do not match package files")
@@ -202,7 +222,8 @@ def assert_csv_parse(root: Path) -> None:
 def validate() -> None:
     root = repo_root()
     assert_required_files(root)
-    assert_closing_statements(root)
+    assert_continuing_statements(root)
+    assert_no_outdated_statements(root)
     assert_source_integrity(root)
     assert_reconciliation_determinations(root)
     assert_tracker_boundary(root)

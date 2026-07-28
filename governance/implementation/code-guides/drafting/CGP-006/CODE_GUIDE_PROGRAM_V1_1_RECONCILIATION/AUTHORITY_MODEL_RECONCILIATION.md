@@ -2,28 +2,21 @@
 
 ## Finding
 
-The protected repository now contains the Founder-approved V1.1 program plan and a separate custody receipt. That satisfies plan accession and custody, but does not itself authorize guide activation, implementation mapping, implementation, deployment, pilot use, production use, or first-user enrollment.
+The protected repository contains the Founder-approved V1.1 program plan and a separate custody receipt. The Founder has now also approved PR #47 as a documentary reconciliation and successor-workstream decision-support package, subject to protected integration and separate post-merge custody.
 
-## Current State
+## Accepted Determinations
 
-- Protected base: `integrate-emergent-final-zip`
-- Current protected head: `6249c2fd79bfef897630855d633d62e830153414`
-- Program plan accession PR: `#45` merged at `77a1565f73cde94acf62d4137360ad7749321f4e`
-- Custody receipt PR: `#46` merged at `6249c2fd79bfef897630855d633d62e830153414`
-- Existing guide tracker rows remain non-active and non-adopted for the 14 guide family.
-- PR #44 remains draft-only and unmerged.
+- `CODE_GUIDE_PROGRAM_PLAN_V1_1_PROTECTEDLY_ACCESSIONED_AND_CUSTODY_COMPLETE`
+- `CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_COMPLETE_REVISION_PROGRAM_REQUIRED`
+- `PR_44_REQUIRES_REBASE_AND_REVALIDATION_UNDER_NEW_CONTROLLING_BASELINE`
+- `PR_44_TO_BE_SUPERSEDED_BY_V1_1_CONFORMING_SUCCESSOR`
 
-## Reconciliation Determination
+## Authority Effect
 
-`CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_COMPLETE_REVISION_PROGRAM_REQUIRED`
+The V1.1 revision workstream is authorized only through the successor directive `CGP_006_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION_DIRECTIVE` and only from the verified post-custody protected head. PR #44 is to be superseded by a V1.1-conforming successor and shall not be rewritten in place.
 
-The existing program must be revised under separate authority to align status vocabulary, adoption semantics, activation records, evidence grades, assurance classes, mappings, profiles, and validators with V1.1.
+## Continuing Boundary
 
-## Closing Statements
-
-- `PROGRAM_PLAN_V1_1_FOUNDER_APPROVED`
-- `PROGRAM_PLAN_V1_1_CONTROLLING_ONLY_AFTER_PROTECTED_ACCESSION_AND_CUSTODY`
-- `PR_44_REMAINS_OPEN_DRAFT_UNMERGED`
 - `GUIDE_ACTIVATION_NOT_AUTHORIZED`
 - `IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
 - `IMPLEMENTATION_NOT_AUTHORIZED`
@@ -32,7 +25,5 @@ The existing program must be revised under separate authority to align status vo
 - `GAP_0004_REMAINS_OPEN`
 - `RETAINED_WARNINGS_REMAIN_OPEN`
 - `ACTIVATION_BLOCKERS_REMAIN_OPEN`
-- `PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED`
 - `NO_ADOPTED_GUIDE_BYTES_CHANGED`
 - `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
-- `RECONCILIATION_PR_OPEN_DRAFT_UNMERGED`

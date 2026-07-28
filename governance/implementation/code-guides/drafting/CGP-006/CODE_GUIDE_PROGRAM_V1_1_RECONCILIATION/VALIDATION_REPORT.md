@@ -1,6 +1,6 @@
 # Validation Report
 
-Generated: 2026-07-28T13:18:07Z
+Updated: 2026-07-28T13:54:11Z
 
 ## Local Validation Commands
 
@@ -12,12 +12,21 @@ git diff --check HEAD^ HEAD -- governance/implementation/code-guides/drafting/CG
 
 ## Expected Result
 
-All package-local checks must pass before this branch is pushed as a draft reconciliation PR.
+All package-local checks must pass before this branch is pushed and PR #47 is prepared for protected review and merge.
 
 ## Validation Scope
 
-The validator checks package contents, package checksums, required closing statements, source hash and size, repository baseline, guide tracker non-activation boundary, PR #44 impact statement, and package-only path scope.
+The validator checks package contents, package checksums, required continuing statements, absence of outdated pre-disposition statements, source hash and size, repository baseline scope, guide tracker non-activation boundary, PR #44 successor treatment, and package-only path scope.
 
-## Non-Validation Scope
+## Continuing Boundary
 
-This validation does not validate PR #44, activate any guide, verify implementation conformance, deploy software, authorize pilot or production use, or close retained warnings.
+- `GUIDE_ACTIVATION_NOT_AUTHORIZED`
+- `IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+- `IMPLEMENTATION_NOT_AUTHORIZED`
+- `DEPLOYMENT_NOT_AUTHORIZED`
+- `PILOT_AND_PRODUCTION_USE_NOT_AUTHORIZED`
+- `GAP_0004_REMAINS_OPEN`
+- `RETAINED_WARNINGS_REMAIN_OPEN`
+- `ACTIVATION_BLOCKERS_REMAIN_OPEN`
+- `NO_ADOPTED_GUIDE_BYTES_CHANGED`
+- `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
