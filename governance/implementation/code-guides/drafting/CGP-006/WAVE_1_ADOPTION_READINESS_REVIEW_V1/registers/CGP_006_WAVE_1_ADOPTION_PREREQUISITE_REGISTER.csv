@@ -1,0 +1,41 @@
+prerequisite_identifier,guide_identifier,requirement,evidence,validation_method,current_result,blocking_effect
+CGP006-AR-PREREQ-ES_CG_00-01,ES-CG-00,Source traceability complete,"Guide, control, invariant, and question source matrices.",validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-02,ES-CG-00,Controls reviewed,Control adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-03,ES-CG-00,Invariants reviewed,Invariant adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-04,ES-CG-00,Mandatory questions dispositioned,Mandatory-question adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-05,ES-CG-00,Warnings carried,Warning adoption-impact register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-06,ES-CG-00,Closed gaps preserved and GAP-0004 carried,Gap closure register and GAP-0004 adoption-impact register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-07,ES-CG-00,Cross-guide dependencies valid,Cross-guide dependency confirmation.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-08,ES-CG-00,Adoption conditions identified,Adoption condition and covenant registers.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-09,ES-CG-00,No adoption-blocking conflict remains,Portfolio analysis and validator result.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_00-10,ES-CG-00,Validators pass,Validation report and unit tests.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-01,ES-CG-01,Source traceability complete,"Guide, control, invariant, and question source matrices.",validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-02,ES-CG-01,Controls reviewed,Control adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-03,ES-CG-01,Invariants reviewed,Invariant adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-04,ES-CG-01,Mandatory questions dispositioned,Mandatory-question adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-05,ES-CG-01,Warnings carried,Warning adoption-impact register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-06,ES-CG-01,Closed gaps preserved and GAP-0004 carried,Gap closure register and GAP-0004 adoption-impact register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-07,ES-CG-01,Cross-guide dependencies valid,Cross-guide dependency confirmation.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-08,ES-CG-01,Adoption conditions identified,Adoption condition and covenant registers.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-09,ES-CG-01,No adoption-blocking conflict remains,Portfolio analysis and validator result.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_01-10,ES-CG-01,Validators pass,Validation report and unit tests.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-01,ES-CG-13,Source traceability complete,"Guide, control, invariant, and question source matrices.",validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-02,ES-CG-13,Controls reviewed,Control adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-03,ES-CG-13,Invariants reviewed,Invariant adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-04,ES-CG-13,Mandatory questions dispositioned,Mandatory-question adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-05,ES-CG-13,Warnings carried,Warning adoption-impact register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-06,ES-CG-13,Closed gaps preserved and GAP-0004 carried,Gap closure register and GAP-0004 adoption-impact register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-07,ES-CG-13,Cross-guide dependencies valid,Cross-guide dependency confirmation.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-08,ES-CG-13,Adoption conditions identified,Adoption condition and covenant registers.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-09,ES-CG-13,No adoption-blocking conflict remains,Portfolio analysis and validator result.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_13-10,ES-CG-13,Validators pass,Validation report and unit tests.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-01,ES-CG-10,Source traceability complete,"Guide, control, invariant, and question source matrices.",validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-02,ES-CG-10,Controls reviewed,Control adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-03,ES-CG-10,Invariants reviewed,Invariant adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-04,ES-CG-10,Mandatory questions dispositioned,Mandatory-question adoption-readiness register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-05,ES-CG-10,Warnings carried,Warning adoption-impact register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-06,ES-CG-10,Closed gaps preserved and GAP-0004 carried,Gap closure register and GAP-0004 adoption-impact register.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-07,ES-CG-10,Cross-guide dependencies valid,Cross-guide dependency confirmation.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-08,ES-CG-10,Adoption conditions identified,Adoption condition and covenant registers.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-09,ES-CG-10,No adoption-blocking conflict remains,Portfolio analysis and validator result.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION
+CGP006-AR-PREREQ-ES_CG_10-10,ES-CG-10,Validators pass,Validation report and unit tests.,validate_cgp006_wave1_adoption_readiness.prerequisites,PASS,NOT_BLOCKING_CONDITIONAL_ADOPTION

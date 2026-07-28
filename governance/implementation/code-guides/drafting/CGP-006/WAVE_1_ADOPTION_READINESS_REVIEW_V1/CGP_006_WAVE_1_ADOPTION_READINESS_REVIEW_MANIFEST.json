@@ -1,0 +1,242 @@
+{
+  "adoption_model": "CONDITIONAL_PORTFOLIO_ADOPTION",
+  "authority_boundary": {
+    "activation_authorized": false,
+    "adoption_recorded": true,
+    "approved_source_byte_changes": false,
+    "cgp007": "NOT_ISSUED",
+    "conditional_adoption_record_identifier": "CGP006-W1-CAR-0001",
+    "conditional_adoption_recorded": true,
+    "gap0004_closure": "NOT_AUTHORIZED",
+    "implementation_authorized": false,
+    "implementation_mapping_authorized": false,
+    "source_freeze_amendment": "NOT_REQUIRED",
+    "source_promotion": "NOT_AUTHORIZED",
+    "warning_closure": "NOT_AUTHORIZED"
+  },
+  "authorized_pr": 42,
+  "base_branch": "integrate-emergent-final-zip",
+  "branch": "codex/cgp-006-wave-1-adoption-readiness-review-v1",
+  "branch_point_commit": "be0e68eeb698491f807745f0c4174dec28e96298",
+  "candidate_baseline_state": "FOUNDER_APPROVED_CANDIDATE_BASELINE_REPOSITORY_ACCESSIONED",
+  "closed_gap_state": "CLOSED_WITH_REPOSITORY_DOCUMENTARY_EVIDENCE",
+  "closed_gaps": [
+    "CGP005-TA-APP-GAP-0001",
+    "CGP005-TA-APP-GAP-0002",
+    "CGP005-TA-APP-GAP-0003"
+  ],
+  "conditions_preserved": [
+    "CGP006-AR-COND-0001",
+    "CGP006-AR-COND-0002",
+    "CGP006-AR-COND-0003",
+    "CGP006-AR-COND-0004",
+    "CGP006-AR-COND-0005"
+  ],
+  "counts": {
+    "adoption_conditions": 5,
+    "controls_reviewed": 22,
+    "files_in_checksum_scope": 24,
+    "founder_decisions_required": 0,
+    "gap0004_records": 1,
+    "guides_reviewed": 4,
+    "invariants_reviewed": 22,
+    "mandatory_questions_reviewed": 32,
+    "package_file_count_including_manifest_and_ledger": 26,
+    "warnings_reviewed": 5
+  },
+  "created_date": "2026-07-27",
+  "current_head_at_generation": "be0e68eeb698491f807745f0c4174dec28e96298",
+  "determination": "CGP_006_WAVE_1_CONDITIONAL_FOUNDER_ADOPTION_RECORDED_PENDING_PROTECTED_INTEGRATION",
+  "files": [
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/README.md",
+      "sha256": "5f4a7318104aa0a83f7e03e55440f81861583bbea2a8f6222a2512022958ee62"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_ACTIVATION_PREREQUISITE_REGISTER.csv",
+      "sha256": "5ea4a6452512952132a6a33764750a583b6c57f76a011869d16b05ef637daff1"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_ADOPTION_CONDITION_REGISTER.csv",
+      "sha256": "088b07c01ddfc6b12d80159ce84fb1d7daee9fde6a335b2de647779709e3e2af"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_ADOPTION_PREREQUISITE_REGISTER.csv",
+      "sha256": "a828d482498d28efd2078bd085e85332563a2ea57f84db252c27d8e384de3c26"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_CONDITIONAL_ADOPTION_REGISTER.csv",
+      "sha256": "ca5ac5dc65529dca2c0532664b8c693989b63056962e572431819395910b8c6e"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_CONTROL_ADOPTION_READINESS_REGISTER.csv",
+      "sha256": "04db1036642bd2071099c6410151c849fdb67b964939969ed7960c221c40c811"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_FOUNDER_DECISION_NEEDED_REGISTER.csv",
+      "sha256": "82502dbb4a8906ba896c8cc8726254e5e4a9cd048185d7dfbd8a91cf01763349"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_GAP_0004_ADOPTION_IMPACT_REGISTER.csv",
+      "sha256": "1dd0389739bb34bb16d3f257ef81b3b47e8d3f45e06efb855360396b0a15d383"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_GUIDE_ADOPTION_READINESS_REGISTER.csv",
+      "sha256": "945676792abd9054a230ac649d218948e2e56c8a5a48756b729e13f2aeb549f7"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_IMPLEMENTATION_MAPPING_PREREQUISITE_REGISTER.csv",
+      "sha256": "b54d51a29e41ea87a4753268f4eed9aed14a75383ead3bbff14418656d150176"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_IMPLEMENTATION_PREREQUISITE_REGISTER.csv",
+      "sha256": "ac139d2726a9aa1f2ca2818d1d5e1e785cb31f67f5dee43b53fe5cc86f74ee55"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_INVARIANT_ADOPTION_READINESS_REGISTER.csv",
+      "sha256": "2082e49c56c683b17ff4c0f53d9be19069e28d1d976e0bc422edfbf01fb78326"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_MANDATORY_QUESTION_ADOPTION_READINESS_REGISTER.csv",
+      "sha256": "cb2d557bf5ac58a5ce73f503d0910d9d43fc3807b366854758a8631ad6434ff6"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_POST_ADOPTION_COVENANT_REGISTER.csv",
+      "sha256": "bf7ecf5edfdd981659d7b07979ca556e044d2f2c98eae06095e1dc518db4f981"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/registers/CGP_006_WAVE_1_WARNING_ADOPTION_IMPACT_REGISTER.csv",
+      "sha256": "1d5edee314f30aab919a64142f9659ad6b62ca89904a16f331194d6015777cfc"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_ADOPTION_READINESS_PREMUTATION_VERIFICATION.md",
+      "sha256": "c76b9bb284aa3f6206fdf8f7fdb3b5acdbc82c127cd549ecf3b212ac64b0ec60"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_ADOPTION_READINESS_REVIEW_DISPOSITION.md",
+      "sha256": "80653e452b313ede1dedd541de5a0c2cee1fa9a1f9f94705027be4870cab59b6"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_ADOPTION_READINESS_REVIEW_REPORT.md",
+      "sha256": "5684554fa43ec338357ffbb381e1efaaad3dc059587bc7d450bb6620579b956d"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_ADOPTION_READINESS_VALIDATION_REPORT.md",
+      "sha256": "8cddcff37902f3c710c67101e3a239fe52e75110f6010cedfc44223a93874067"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_CONDITIONAL_ADOPTION_METADATA_RECONCILIATION.md",
+      "sha256": "778988892f00822d414ef7b977953de9dee724ba7c68bf88c7390572c891d978"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_CROSS_GUIDE_DEPENDENCY_CONFIRMATION.md",
+      "sha256": "40e5a1b6dceed0b622f0eca3ec237ed573f5615a75d616c7daad5a1ec05478fd"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_FOUNDER_CONDITIONAL_ADOPTION_RECORD.md",
+      "sha256": "7b94f3d0a244fb51cdbb27b4868d96fc46eea96e40260ca39a8df7f7b47f03d8"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_PORTFOLIO_ADOPTION_MODEL_ANALYSIS.md",
+      "sha256": "eab711ccdeeaf5734379173a45e416cd11b3be3b7874dbec5a6c601b9441937b"
+    },
+    {
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_SOURCE_INTEGRITY_CONFIRMATION.md",
+      "sha256": "b5f437c3d94ce175ebdf153ac03635aa9fc55a1d8b76561291c2fb3c9b81a7e3"
+    }
+  ],
+  "founder_adoption_record": {
+    "adopted_guides": [
+      "ES-CG-00",
+      "ES-CG-01",
+      "ES-CG-10",
+      "ES-CG-13"
+    ],
+    "adoption_model": "CONDITIONAL_PORTFOLIO_ADOPTION",
+    "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1/reports/CGP_006_WAVE_1_FOUNDER_CONDITIONAL_ADOPTION_RECORD.md",
+    "record_identifier": "CGP006-W1-CAR-0001",
+    "status": "CONDITIONALLY_ADOPTED_PENDING_PROTECTED_INTEGRATION"
+  },
+  "founder_directive": "CGP_006_WAVE_1_CONDITIONAL_FOUNDER_ADOPTION_AND_PROTECTED_INTEGRATION_DIRECTIVE_V1_0_0",
+  "gap0004_preservation": {
+    "adoption_treatment": "CONDITIONAL_ADOPTION_REQUIRED",
+    "closed": false,
+    "gap_identifier": "CGP005-TA-APP-GAP-0004",
+    "status": "IMPLEMENTATION_EVIDENCE_REQUIRED"
+  },
+  "gap_closure_state": "CGP_006_WAVE_1_DOCUMENTARY_GAPS_0001_0002_0003_FOUNDER_CLOSED_AND_REPOSITORY_ACCESSIONED",
+  "gate_outcomes": {
+    "ES-CG-00": "ES_CG_00_ADOPTION_READINESS_REVIEW_COMPLETE_UPSTREAM_BASELINE_STABLE",
+    "ES-CG-01": "ES_CG_01_ADOPTION_READINESS_REVIEW_COMPLETE_DEPENDENCY_BASELINE_STABLE",
+    "ES-CG-10": "ES_CG_10_ADOPTION_READINESS_REVIEW_COMPLETE_PORTFOLIO_RECONCILIATION_READY",
+    "ES-CG-13": "ES_CG_13_ADOPTION_READINESS_REVIEW_COMPLETE_DEPENDENCY_BASELINE_STABLE"
+  },
+  "guide_dispositions": {
+    "ES-CG-00": "READY_FOR_CONDITIONAL_ADOPTION",
+    "ES-CG-01": "READY_FOR_CONDITIONAL_ADOPTION",
+    "ES-CG-10": "READY_FOR_CONDITIONAL_ADOPTION",
+    "ES-CG-13": "READY_FOR_CONDITIONAL_ADOPTION"
+  },
+  "guide_lifecycle_states": {
+    "activation_status": "NOT_ACTIVE",
+    "adoption_status": "CONDITIONALLY_ADOPTED_PENDING_PROTECTED_INTEGRATION",
+    "candidate_baseline_status": "FOUNDER_APPROVED_CANDIDATE_BASELINE",
+    "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
+    "maximum_authorized_state_pre_merge": "CONDITIONALLY_ADOPTED_PENDING_PROTECTED_INTEGRATION",
+    "production_authority": "NOT_GRANTED",
+    "repository_state": "REPOSITORY_ACCESSIONED"
+  },
+  "guide_order": [
+    "ES-CG-00",
+    "ES-CG-01",
+    "ES-CG-13",
+    "ES-CG-10"
+  ],
+  "observed_remote_head": "be0e68eeb698491f807745f0c4174dec28e96298",
+  "open_gap": "CGP005-TA-APP-GAP-0004",
+  "open_gap_state": "IMPLEMENTATION_EVIDENCE_REQUIRED",
+  "package_id": "CGP-006-WAVE-1-ADOPTION-READINESS-REVIEW-V1",
+  "package_version": "0.1.1-conditional-adoption.1",
+  "pre_merge_pr_head": "5cff02e71721764e1713ba14c110847aab050dc3",
+  "protected_integration": {
+    "draft_conversion_allowed_after_validation": true,
+    "post_merge_custody_receipt_required": true,
+    "protected_merge_required": true,
+    "successor_workstream": "CGP_006_WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING"
+  },
+  "readiness_determination": "CGP_006_WAVE_1_ADOPTION_READINESS_REVIEW_COMPLETE_READY_FOR_CONDITIONAL_ADOPTION_DIRECTIVE",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "required_starting_head": "be0e68eeb698491f807745f0c4174dec28e96298",
+  "retained_warnings": [
+    "CGP006-CLF-0001",
+    "CGP006-CLF-0002",
+    "CGP006-CLF-0003",
+    "CGP006-CLF-0004",
+    "CGP006-CLF-0005"
+  ],
+  "source_integrity": {
+    "approved_source_byte_changes": false,
+    "blocking_source_conflicts": 0,
+    "classification_records": 2701,
+    "founder_approved_contextual_rows": 51,
+    "frozen_normative_rows": 139,
+    "normative_rows_dispositioned": 139,
+    "provenance_gaps": 0,
+    "reference_corpus_rows": 2511,
+    "source_freeze_amendment": "NOT_REQUIRED",
+    "source_promotions": 0,
+    "unique_normative_source_identifiers": 68
+  },
+  "validation": {
+    "validator": "governance/implementation/code-guides/validation/validate_cgp006_wave1_adoption_readiness.py",
+    "validator_tests": "governance/implementation/code-guides/validation/tests/test_cgp006_wave1_adoption_readiness.py"
+  },
+  "warning_state": "RETAIN_OPEN_NON_BLOCKING",
+  "warnings_preserved": [
+    "CGP006-CLF-0001",
+    "CGP006-CLF-0002",
+    "CGP006-CLF-0003",
+    "CGP006-CLF-0004",
+    "CGP006-CLF-0005"
+  ]
+}
