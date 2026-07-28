@@ -20,8 +20,11 @@
 - Approved source SHA-256: `9aa8cb29848ccf5b75a65320616a1196060589372bb0de09266fd32f3a9efd35`
 - Approved source byte length: `54852`
 - Accession package: `governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/`
-- Accession status before merge: `FOUNDER_APPROVED_PENDING_REPOSITORY_ACCESSION_AND_CUSTODY`
-- Required post-merge custody status: `PENDING_SEPARATE_CUSTODY_RECEIPT`
+- Accession PR: `#45`
+- Accession merge commit: `77a1565f73cde94acf62d4137360ad7749321f4e`
+- Accession status after PR #45 merge: `CODE_GUIDE_PROGRAM_PLAN_V1_1_PROTECTEDLY_MERGED_PENDING_CUSTODY`
+- Post-merge custody receipt: `governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_PLAN_V1_1_REPOSITORY_CUSTODY_RECEIPT.md`
+- Custody status after receipt merge: `CODE_GUIDE_PROGRAM_PLAN_V1_1_PROTECTEDLY_ACCESSIONED_AND_CUSTODY_COMPLETE`
 
 V1.1 approval and accession do not change guide maturity, adoption, accession, or activation states. PR `#44` remains open, draft, unmerged, and unmodified. `CGP005-TA-APP-GAP-0004`, retained CGP-006 warnings, activation blockers, and proposed Founder decisions remain open.
 
