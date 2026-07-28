@@ -1,0 +1,6 @@
+v1_1_assurance_class,current_repository_values,status,required_action
+A0 INFORMATIONAL,A1_STANDARD; A2_IMPORTANT; A3_HIGH; A4_CRITICAL,MISSING,Revise controlled values and reclassify guides and material controls under V1.1.
+A1 STANDARD,A1_STANDARD; A2_IMPORTANT; A3_HIGH; A4_CRITICAL,EXACT_PRESENT,Revise controlled values and reclassify guides and material controls under V1.1.
+A2 ELEVATED,A1_STANDARD; A2_IMPORTANT; A3_HIGH; A4_CRITICAL,CODE_PRESENT_LABEL_DRIFT,Revise controlled values and reclassify guides and material controls under V1.1.
+A3 HIGH,A1_STANDARD; A2_IMPORTANT; A3_HIGH; A4_CRITICAL,EXACT_PRESENT,Revise controlled values and reclassify guides and material controls under V1.1.
+A4 CRITICAL,A1_STANDARD; A2_IMPORTANT; A3_HIGH; A4_CRITICAL,EXACT_PRESENT,Revise controlled values and reclassify guides and material controls under V1.1.

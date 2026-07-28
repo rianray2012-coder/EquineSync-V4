@@ -1,0 +1,19 @@
+artifact_type,required_artifact,repository_status,current_location,v1_1_reconciliation_status,required_action
+profile,CORE_BACKEND_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,WEB_FEATURE_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,IOS_FEATURE_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,ANDROID_FEATURE_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,OFFLINE_WORKFLOW_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,FACILITY_SCOPED_WORKFLOW_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,MINOR_PROTECTED_WORKFLOW_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,FINANCIAL_WORKFLOW_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,EQUINE_HEALTH_WORKFLOW_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,AI_ASSISTED_WORKFLOW_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,EXTERNAL_INTEGRATION_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,BACKGROUND_JOB_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,REPORTING_AND_EXPORT_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,ADMINISTRATIVE_FEATURE_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,DATA_MIGRATION_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,PRIVILEGED_ACCESS_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,NOTIFICATION_AND_CALENDAR_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+profile,EVIDENCE_AND_AUDIT_PROFILE.yaml,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
