@@ -1,0 +1,2 @@
+exception_id,guide_id,control_id,exception_state,reason,approver,start_date,expiration_date,status
+CGP-V11-EXC-NONE,PORTFOLIO,NONE,NO_ACTIVE_EXCEPTION,No V1.1 waiver or exception is granted by this directive.,NONE,NONE,NONE,NOT_APPLICABLE

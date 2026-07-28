@@ -1,0 +1,70 @@
+artifact_type,artifact,status,impact
+schema,CODE_GUIDE_CONTROLLED_VALUES.json,PRESENT,V1.1 parseable documentary machinery
+schema,CODE_GUIDE_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,CONTROL_DEFINITION_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,INVARIANT_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,QUESTION_RESPONSE_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,GUIDE_DEPENDENCY_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,ATLAS_TRACEABILITY_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,REPOSITORY_MAPPING_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,IMPLEMENTATION_PROFILE_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,IMPLEMENTATION_EVIDENCE_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,EXCEPTION_RECORD_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,REVIEW_FINDING_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+schema,GUIDE_ACTIVATION_SCHEMA.json,PRESENT,V1.1 parseable documentary machinery
+register,CODE_GUIDE_AUTHORITY_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,CODE_GUIDE_CONTROL_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,CODE_GUIDE_INVARIANT_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,CODE_GUIDE_QUESTION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,CODE_GUIDE_DEPENDENCY_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,CODE_GUIDE_VERSION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,GUIDE_ACTIVATION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,GUIDE_WAIVER_AND_EXCEPTION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,IMPLEMENTATION_PROFILE_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,ATLAS_TO_CODE_TRACEABILITY_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,CONTROL_TO_VERIFICATION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,CONTROL_TO_REPOSITORY_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,GUIDE_REVIEW_FINDING_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,OPEN_DECISION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,IMPLEMENTATION_EXCEPTION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,IMPLEMENTATION_EVIDENCE_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,EVIDENCE_RETENTION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,VALIDATOR_VERSION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+register,GUIDE_SUPERSESSION_REGISTER.csv,PRESENT,V1.1 register identity reconciled
+profile,CORE_BACKEND_PROFILE.yaml,PRESENT,Generic profile only
+profile,WEB_FEATURE_PROFILE.yaml,PRESENT,Generic profile only
+profile,IOS_FEATURE_PROFILE.yaml,PRESENT,Generic profile only
+profile,ANDROID_FEATURE_PROFILE.yaml,PRESENT,Generic profile only
+profile,OFFLINE_WORKFLOW_PROFILE.yaml,PRESENT,Generic profile only
+profile,FACILITY_SCOPED_WORKFLOW_PROFILE.yaml,PRESENT,Generic profile only
+profile,MINOR_PROTECTED_WORKFLOW_PROFILE.yaml,PRESENT,Generic profile only
+profile,FINANCIAL_WORKFLOW_PROFILE.yaml,PRESENT,Generic profile only
+profile,EQUINE_HEALTH_WORKFLOW_PROFILE.yaml,PRESENT,Generic profile only
+profile,AI_ASSISTED_WORKFLOW_PROFILE.yaml,PRESENT,Generic profile only
+profile,EXTERNAL_INTEGRATION_PROFILE.yaml,PRESENT,Generic profile only
+profile,BACKGROUND_JOB_PROFILE.yaml,PRESENT,Generic profile only
+profile,REPORTING_AND_EXPORT_PROFILE.yaml,PRESENT,Generic profile only
+profile,ADMINISTRATIVE_FEATURE_PROFILE.yaml,PRESENT,Generic profile only
+profile,DATA_MIGRATION_PROFILE.yaml,PRESENT,Generic profile only
+profile,PRIVILEGED_ACCESS_PROFILE.yaml,PRESENT,Generic profile only
+profile,NOTIFICATION_AND_CALENDAR_PROFILE.yaml,PRESENT,Generic profile only
+profile,EVIDENCE_AND_AUDIT_PROFILE.yaml,PRESENT,Generic profile only
+template,CODE_GUIDE_DRAFT_TEMPLATE.md,PRESENT,Authority fields required
+template,GUIDE_DRAFTING_CHARTER_TEMPLATE.md,PRESENT,Authority fields required
+template,CONTROL_DEFINITION_TEMPLATE.md,PRESENT,Authority fields required
+template,INVARIANT_DEFINITION_TEMPLATE.md,PRESENT,Authority fields required
+template,IMPLEMENTATION_PLAN_TEMPLATE.md,PRESENT,Authority fields required
+template,ATLAS_MAPPING_TEMPLATE.csv,PRESENT,Authority fields required
+template,REPOSITORY_IMPACT_MAP_TEMPLATE.csv,PRESENT,Authority fields required
+template,CONTROL_VERIFICATION_TEMPLATE.csv,PRESENT,Authority fields required
+template,PULL_REQUEST_EVIDENCE_TEMPLATE.md,PRESENT,Authority fields required
+template,TASK_COMPLETION_RECORD_TEMPLATE.md,PRESENT,Authority fields required
+template,EXCEPTION_REQUEST_TEMPLATE.md,PRESENT,Authority fields required
+template,DECISION_REQUEST_TEMPLATE.md,PRESENT,Authority fields required
+template,BLOCKED_RECEIPT_TEMPLATE.md,PRESENT,Authority fields required
+template,REVIEW_REPORT_TEMPLATE.md,PRESENT,Authority fields required
+template,ADOPTION_DISPOSITION_TEMPLATE.md,PRESENT,Authority fields required
+template,GUIDE_ACTIVATION_RECORD_TEMPLATE.md,PRESENT,Authority fields required
+template,GUIDE_DEACTIVATION_RECORD_TEMPLATE.md,PRESENT,Authority fields required
+template,REPOSITORY_ACCESSION_RECEIPT_TEMPLATE.md,PRESENT,Authority fields required
+template,CHANGE_IMPACT_REPORT_TEMPLATE.md,PRESENT,Authority fields required

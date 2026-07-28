@@ -1,0 +1,6 @@
+condition_id,condition,status
+W1-V11-COND-0001,Founder review required,SATISFIED_FOR_PROTECTED_DOCUMENTARY_INTEGRATION
+W1-V11-COND-0002,All activation scopes false,SATISFIED
+W1-V11-COND-0003,No implementation mapping,SATISFIED
+W1-V11-COND-0004,PR #44 preserved,SATISFIED
+W1-V11-COND-0005,Future custody required before canonical effect,SUCCESSOR_CUSTODY_REQUIRED_BEFORE_CANONICAL_EFFECT_AND_PR_44_CLOSURE

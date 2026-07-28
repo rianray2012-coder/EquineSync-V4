@@ -1,0 +1,5 @@
+guide_id,guide_title,assurance_class,classification_status,activation_effect
+ES-CG-00,Code Guide Charter,A2_ELEVATED,PROVISIONAL_FOR_FOUNDER_REVIEW,NONE
+ES-CG-01,Engineering Authority and Precedence,A4_CRITICAL,PROVISIONAL_FOR_FOUNDER_REVIEW,NONE
+ES-CG-13,"Completion, Evidence, and Traceability",A3_HIGH,PROVISIONAL_FOR_FOUNDER_REVIEW,NONE
+ES-CG-10,"Testing, Verification, and Assurance",A3_HIGH,PROVISIONAL_FOR_FOUNDER_REVIEW,NONE

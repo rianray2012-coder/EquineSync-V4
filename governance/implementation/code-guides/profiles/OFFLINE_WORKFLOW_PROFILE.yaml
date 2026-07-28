@@ -1,0 +1,53 @@
+{
+  "applicability_questions": [
+    "Which actors and records are affected?",
+    "Which user-visible states must be clear?",
+    "Which failure, retry, and recovery conditions apply?"
+  ],
+  "authority_boundary": "REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+  "dependency_expectations": [
+    "Guide dependencies recorded",
+    "Exceptions time-bounded",
+    "No active scope without activation record"
+  ],
+  "evidence_obligations": [
+    "E2_DOCUMENTED source and review evidence",
+    "E3_REPEATABLE verification design when implementation is separately authorized"
+  ],
+  "profile_id": "OFFLINE_WORKFLOW_PROFILE",
+  "profile_name": "Offline workflow",
+  "profile_status": "GENERIC_DOCUMENTARY_PROFILE",
+  "profile_version": "1.1.0-candidate",
+  "prohibited_references": [
+    "source-code files",
+    "classes or methods",
+    "APIs or endpoints",
+    "schemas or tables",
+    "migrations",
+    "services",
+    "infrastructure resources",
+    "deployment targets",
+    "implementation tickets"
+  ],
+  "repository_specific_references": [],
+  "required_control_categories": [
+    "conflict handling",
+    "queued state",
+    "recovery"
+  ],
+  "required_tests": [
+    "documentary test plan",
+    "negative scenario design",
+    "accessibility or recovery review where applicable"
+  ],
+  "review_obligations": [
+    "technical review",
+    "domain or risk review when applicable",
+    "assurance review for A3 or A4"
+  ],
+  "risk_domains": [
+    "conflict handling",
+    "queued state",
+    "recovery"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "activation_id": {
+      "type": "string"
+    },
+    "activation_state": {
+      "enum": [
+        "NOT_ACTIVE",
+        "ACTIVE",
+        "BLOCKED",
+        "SUSPENDED",
+        "DEACTIVATED",
+        "SUPERSEDED",
+        "RETIRED"
+      ]
+    },
+    "effective_date": {
+      "type": "string"
+    },
+    "founder_disposition": {
+      "type": "string"
+    },
+    "guide_id": {
+      "type": "string"
+    },
+    "scopes": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "activation_id",
+    "guide_id",
+    "activation_state",
+    "scopes",
+    "effective_date"
+  ],
+  "title": "Code Guide Activation Record Schema",
+  "type": "object",
+  "x-authority-boundary": "DOCUMENTARY_PROGRAM_MACHINERY_ONLY"
+}

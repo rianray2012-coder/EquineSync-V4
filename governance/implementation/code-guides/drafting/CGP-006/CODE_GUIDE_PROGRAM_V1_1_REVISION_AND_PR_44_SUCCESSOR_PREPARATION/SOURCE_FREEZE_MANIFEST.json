@@ -1,0 +1,23 @@
+{
+  "pr44_head": "f94c26188e8d35c413b366135df12057b58c2d7d",
+  "protected_head": "c2759173279a8c7a986f0a6e980419b88621df31",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "source_freeze_id": "CGP-V11-REVISION-SOURCE-FREEZE",
+  "sources": [
+    {
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1.md",
+      "sha256": "9aa8cb29848ccf5b75a65320616a1196060589372bb0de09266fd32f3a9efd35",
+      "status": "CONTROLLING"
+    },
+    {
+      "path": "governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_PLAN_V1_1_REPOSITORY_CUSTODY_RECEIPT.md",
+      "sha256": "bdeac986555c4a3193a15edade69552d85314dc9488b5ff426fe08a6127085c1",
+      "status": "CUSTODY_COMPLETE"
+    },
+    {
+      "path": "governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_CUSTODY_RECEIPT.md",
+      "sha256": "d9a4adf6162557235177f96e6aaf72aee9181681b29659159473a068fd1f4a51",
+      "status": "CUSTODY_COMPLETE"
+    }
+  ]
+}
