@@ -1,0 +1,50 @@
+
+# CGP-006 Wave 1 Governance Lineage Report
+
+## Current Lineage
+
+| Item | State |
+| --- | --- |
+| PR #42 | MERGED |
+| PR #43 | MERGED |
+| Conditional adoption custody status | COMPLETE |
+| Expected protected head | 2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94 |
+| Verified protected head | 2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94 |
+| Guide status | CONDITIONALLY_ADOPTED_AND_PROTECTEDLY_MERGED_NOT_ACTIVATED |
+| Activation status | NOT_ACTIVE |
+| Implementation-mapping status | IMPLEMENTATION_MAPPING_NOT_AUTHORIZED |
+| Implementation status | IMPLEMENTATION_NOT_AUTHORIZED |
+
+## Preserved Conditions
+
+`CGP006-AR-COND-0001`, `CGP006-AR-COND-0002`, `CGP006-AR-COND-0003`, `CGP006-AR-COND-0004`, `CGP006-AR-COND-0005`
+
+## Preserved Warnings
+
+`CGP006-CLF-0001`, `CGP006-CLF-0002`, `CGP006-CLF-0003`, `CGP006-CLF-0004`, `CGP006-CLF-0005`
+
+All warnings remain `RETAIN_OPEN_NON_BLOCKING` with `POST_ADOPTION_COVENANT_REQUIRED`.
+
+## GAP-0004
+
+`CGP005-TA-APP-GAP-0004` remains open with `IMPLEMENTATION_EVIDENCE_REQUIRED` and `CONDITIONAL_ADOPTION_REQUIRED`.
+
+## Branch Lineage
+
+**Review branch:** `codex/cgp-006-wave-1-activation-evidence-planning-v1`
+
+**Branch point:** `2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94`
+
+**Head at package generation:** `2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94`
+
+## Closing Statements
+
+`ACTIVATION_NOT_AUTHORIZED`
+`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
+`IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+`IMPLEMENTATION_NOT_AUTHORIZED`
+`GAP_0004_REMAINS_OPEN`
+`RETAINED_WARNINGS_REMAIN_OPEN`
+`NO_ADOPTED_SOURCE_BYTES_CHANGED`
+`NO_RUNTIME_IMPLEMENTATION_OCCURRED`
+`DRAFT_PR_OPEN_UNMERGED`

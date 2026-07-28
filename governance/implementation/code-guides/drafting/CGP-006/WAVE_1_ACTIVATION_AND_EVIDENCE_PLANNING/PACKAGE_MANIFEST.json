@@ -1,0 +1,226 @@
+{
+  "authority_boundary": {
+    "activation_effective_date": "NONE",
+    "activation_status": "NOT_ACTIVE",
+    "adopted_source_bytes_changed": false,
+    "gap0004_status": "IMPLEMENTATION_EVIDENCE_REQUIRED",
+    "implementation_mapping_status": "IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+    "implementation_status": "IMPLEMENTATION_NOT_AUTHORIZED",
+    "runtime_implementation_status": "NO_RUNTIME_IMPLEMENTATION_OCCURRED",
+    "warnings_status": "RETAIN_OPEN_NON_BLOCKING"
+  },
+  "base_branch": "integrate-emergent-final-zip",
+  "branch_point_commit": "2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94",
+  "closing_statements": [
+    "ACTIVATION_NOT_AUTHORIZED",
+    "NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED",
+    "IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "GAP_0004_REMAINS_OPEN",
+    "RETAINED_WARNINGS_REMAIN_OPEN",
+    "NO_ADOPTED_SOURCE_BYTES_CHANGED",
+    "NO_RUNTIME_IMPLEMENTATION_OCCURRED",
+    "DRAFT_PR_OPEN_UNMERGED"
+  ],
+  "conditions_preserved": [
+    "CGP006-AR-COND-0001",
+    "CGP006-AR-COND-0002",
+    "CGP006-AR-COND-0003",
+    "CGP006-AR-COND-0004",
+    "CGP006-AR-COND-0005"
+  ],
+  "counts": {
+    "activation_blockers": 7,
+    "checksum_scoped_files": 24,
+    "controls": 22,
+    "crosswalk_records": 44,
+    "evidence_items": 64,
+    "founder_decisions": 6,
+    "guides": 4,
+    "implementation_dependent_evidence": 8,
+    "invariants": 22,
+    "package_files": 25,
+    "prerequisites": 65,
+    "risk_findings": 8,
+    "runtime_dependent_evidence": 4
+  },
+  "determination": "CGP_006_WAVE_1_READY_FOR_FOUNDER_ACTIVATION_CONSIDERATION_WITH_CONDITIONS",
+  "directive_id": "CGP_006_WAVE_1_ACTIVATION_READINESS_AND_EVIDENCE_PLANNING_DIRECTIVE_V1_1_0",
+  "draft_pr_number": "PENDING_DRAFT_PR_CREATION",
+  "draft_pr_status": "PR_NOT_OPEN_LOCAL_VALIDATION_PHASE",
+  "evidence_status_totals": {
+    "EXISTING_VERIFIED": 30,
+    "IMPLEMENTATION_DEPENDENT": 8,
+    "PLANNED_NOT_CREATED": 22,
+    "RUNTIME_DEPENDENT": 4
+  },
+  "expected_starting_protected_head": "2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94",
+  "files": [
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/ACTIVATION_BLOCKER_REGISTER.csv",
+      "sha256": "62e25b891ed0489ae71a13c021648c2996c61591b01d4a5b04e8035af925dc13"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/ACTIVATION_DEFINITION_REGISTER.md",
+      "sha256": "4447b3806c0953e72453aff3638b2991660ff0371f6892bf305a51cd6e514354"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/ACTIVATION_MODEL_ANALYSIS.md",
+      "sha256": "278b6fa5522dcc9eecbf575a7556067da2792b8fcbe98673cced87dd279fded5"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/ACTIVATION_PREREQUISITE_REGISTER.csv",
+      "sha256": "83f8228ed66a2d622a433a547b9028add4ee3c4c0971966042d962abc01c89e6"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/ACTIVATION_READINESS_REVIEW.md",
+      "sha256": "19c07d594e8d20fcf97bc0cf63ad571a8ce3f04634144872e9fa6b7dd6162064"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/AUTHORITY_BOUNDARY_REPORT.md",
+      "sha256": "f43184ed9f30250651bd4518c4598e39337f4b4e7d58c2a033be1a4746f2b132"
+    },
+    {
+      "checksum_scoped": false,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/CHECKSUM_MANIFEST.sha256",
+      "sha256": "EXCLUDED_LEDGER"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/CONTROL_INVARIANT_EVIDENCE_OBLIGATION_CROSSWALK.csv",
+      "sha256": "f5aece190f6f29302a5d44ffa24ef5acae383ab26f3cc01a9b637088809c20ed"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/EVIDENCE_REQUIREMENTS_REGISTER.csv",
+      "sha256": "b6a10c4ea784e38c3f86b67587505e8145bcea3058aa4692ea77b4b1f45673d7"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/EVIDENCE_TAXONOMY.md",
+      "sha256": "477ee2bd1ebf2cf5c5d6481b14fb07280b1b52939612664e99e395f2a20bfd32"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/FOUNDER_DECISION_REGISTER.md",
+      "sha256": "c7fa5e1c91ba88a036e64cff4399c96b2e6498cec627d698e1adbcedaf5df6c7"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/FOUNDER_REVIEW_SUMMARY.md",
+      "sha256": "19bc13cdd89acb01dd94b68fe0f0cb16cdf399f20f3e11765ac3a760c50dd078"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/GAP_0004_EVIDENCE_PLAN.md",
+      "sha256": "dfdd092d76c4ad53241a036d67332631b6ecf6d090fdd777ec9ac5ab3e98b42a"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/GOVERNANCE_LINEAGE_REPORT.md",
+      "sha256": "6acf8d1a1779afc9f1673dea0b4f94659f015090434d7d613a68fde5fc9704a1"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/PACKAGE_MANIFEST.json",
+      "sha256": "735651a88d1c5bf8d04790df4d5d82f14bb6722541d1846d79098dcbd08aca05"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/README.md",
+      "sha256": "3def28a129fbca8458ed3fe09ec202459556e2a235ff688ddc3d04da7313b51e"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/REVIEW_DISPOSITION.md",
+      "sha256": "6f0d2c0f1e2bea08d0fd5d2b73bea594e400c18f65fd05985648569357e2c41d"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/RISK_FINDING_DEVIATION_REGISTER.csv",
+      "sha256": "653b8355c552763f09c43ad4f7216d3a35362f6fbadd51870987875fad2600ae"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/SOURCE_RECONCILIATION_REPORT.md",
+      "sha256": "00e49a8356d4b9b470e6f38b6c8d893be4c65ee05b875579684cf665f2917df0"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/SOURCE_REGISTER.md",
+      "sha256": "d62a3c007c798505395c56a591b6c98fb448514f6d7c968a1164ef6467e3f634"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/VALIDATION_REPORT.md",
+      "sha256": "7a659c5d6b751c0d08d524a9190bd24a627074da502b109ce07e59b4e021b41f"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/WARNING_CARRY_FORWARD_PLAN.md",
+      "sha256": "eb9cd9b2358cb953a2c4d1ffa22525d859309b85efd774845b8a1e83029b497f"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/tests/test_activation_readiness_package.py",
+      "sha256": "f2a60cea8bded62066d90095d190716cf2aaffb55ef40c4bce466b56568046d4"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/tools/build_activation_readiness_package.py",
+      "sha256": "f830ecd7f91811226cfbfc58a8b8bce7e2a9bfb49484bf9d68f3fd7be02bb950"
+    },
+    {
+      "checksum_scoped": true,
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/validators/validate_activation_readiness_package.py",
+      "sha256": "320060bdfff94a41623f5b6e8e3f2c1704d19732873ada22c2b1c089cce2a5c1"
+    }
+  ],
+  "gap_preserved": "CGP005-TA-APP-GAP-0004",
+  "generated_at": "2026-07-28T06:01:43Z",
+  "guide_determinations": {
+    "ES-CG-00": "READY_FOR_FOUNDER_ACTIVATION_CONSIDERATION_WITH_CONDITIONS",
+    "ES-CG-01": "READY_FOR_FOUNDER_ACTIVATION_CONSIDERATION_WITH_CONDITIONS",
+    "ES-CG-10": "READY_FOR_FOUNDER_ACTIVATION_CONSIDERATION_WITH_CONDITIONS",
+    "ES-CG-13": "READY_FOR_FOUNDER_ACTIVATION_CONSIDERATION_WITH_CONDITIONS"
+  },
+  "head_at_manifest_generation": "2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94",
+  "package_id": "CGP_006_WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING",
+  "package_version": "0.1.0-activation-readiness-planning.1",
+  "prerequisite_status_totals": {
+    "FOUNDER_DECISION_REQUIRED": 12,
+    "IMPLEMENTATION_DEPENDENT": 4,
+    "NOT_SATISFIED": 8,
+    "PARTIALLY_SATISFIED": 15,
+    "RUNTIME_DEPENDENT": 4,
+    "SATISFIED_WITH_VERIFIED_EVIDENCE": 18,
+    "SEPARATE_AUTHORITY_REQUIRED": 4
+  },
+  "recommended_activation_model": "STAGED_ROLE_LIMITED_PORTFOLIO_ACTIVATION_FOR_GOVERNANCE_AND_EVIDENCE_PLANNING",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "review_branch": "codex/cgp-006-wave-1-activation-evidence-planning-v1",
+  "source_integrity": {
+    "approved_source_byte_changes": false,
+    "blocking_source_conflicts": 0,
+    "frozen_normative_rows": 139,
+    "provenance_gaps": 0,
+    "source_freeze_amendment": "NOT_REQUIRED",
+    "source_promotions": 0,
+    "unique_normative_source_identifiers": 68
+  },
+  "supersedes": "CGP_006_WAVE_1_ACTIVATION_READINESS_AND_EVIDENCE_PLANNING_DIRECTIVE_V1_0_0",
+  "verified_starting_protected_head": "2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94",
+  "warnings_preserved": [
+    "CGP006-CLF-0001",
+    "CGP006-CLF-0002",
+    "CGP006-CLF-0003",
+    "CGP006-CLF-0004",
+    "CGP006-CLF-0005"
+  ]
+}
