@@ -1,0 +1,122 @@
+{
+  "approval_date": "2026-07-28",
+  "authority_classification": "DOCUMENTARY_PROGRAM_PLAN_ACCESSION_CUSTODY_AND_RECONCILIATION_ONLY",
+  "base_head": "2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94",
+  "checksum_manifest": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/CHECKSUM_MANIFEST.sha256",
+  "directive_id": "CGP_006_CODE_GUIDE_PROGRAM_PLAN_V1_1_PROTECTED_ACCESSION_CUSTODY_AND_PR_44_RECONCILIATION_DIRECTIVE_V1_0_0",
+  "file_count_excluding_manifests_with_recursive_hash": 15,
+  "files": [
+    {
+      "artifact_type": "PACKAGE_ATTRIBUTE",
+      "byte_length": 78,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/.gitattributes",
+      "required": true,
+      "sha256": "63c01a8c8736b23326738beaede5f241ae45fe0b2c85fa6021fbb7c8859307e9"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 2154,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/AUTHORITY_AND_SUPERSESSION_ANALYSIS.md",
+      "required": true,
+      "sha256": "e39da9faf440364ffb63a2b4fdcf0858fa1a4449c0f4ec49dff3bd99dce402e1"
+    },
+    {
+      "artifact_type": "APPROVED_SOURCE",
+      "byte_length": 54852,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1.md",
+      "required": true,
+      "sha256": "9aa8cb29848ccf5b75a65320616a1196060589372bb0de09266fd32f3a9efd35"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 3570,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/FOUNDER_APPROVAL_AND_RATIFICATION_DISPOSITION.md",
+      "required": true,
+      "sha256": "71c794755ad07ddc4361c8708a93d3efeb712dc91f52f25c89e7046439a5ab66"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 2277,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/PRIOR_CGP_LIMITED_RATIFICATION_ANALYSIS.md",
+      "required": true,
+      "sha256": "5bb6699c1f9853610ade130c468545989cb9e434ce15560b373b7f6f7af3285a"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 2194,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/PROGRAM_DOCUMENT_OVERVIEW.md",
+      "required": true,
+      "sha256": "26a5ea7ef1725d76210bd021b384d7f35497a69f8387c102047a7ffe4d6704f8"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 1540,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/PROTECTED_INTEGRATION_PLAN.md",
+      "required": true,
+      "sha256": "e2041244a39613f87d618227417278f7f63ae71051f66128e406fab4b7ce6d13"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 1324,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/REVIEW_DISPOSITION.md",
+      "required": true,
+      "sha256": "09103b3682643a0efb4ef787d345bf70b2fdcc499ebe0772f918ede4d4903764"
+    },
+    {
+      "artifact_type": "MANIFEST",
+      "byte_length": 2116,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/SOURCE_FREEZE_MANIFEST.json",
+      "required": true,
+      "sha256": "43862f2f8178b400555efbf1995af097f08cc4f11ed7ea43696b50fde3a9afa7"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 1757,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/SOURCE_REGISTER.md",
+      "required": true,
+      "sha256": "18e43c69f90718c677a419502d7238e9166d5bd58ca3f20c7addc5b898362c9e"
+    },
+    {
+      "artifact_type": "CHECKSUM_LEDGER",
+      "byte_length": 119,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/SOURCE_SHA256SUMS.txt",
+      "required": true,
+      "sha256": "0a2e52ad4c98eeaf338b72c0cee598f594e5f63f5444ddb46129818d5316442d"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 2258,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/V1_0_TO_V1_1_CHANGE_AND_STRENGTHENING_SUMMARY.md",
+      "required": true,
+      "sha256": "d8642031d5b549688b5eab7906ad550a151ff877e54e8aef5665431b7e54c63e"
+    },
+    {
+      "artifact_type": "ACCESSION_RECORD",
+      "byte_length": 2396,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/VALIDATION_REPORT.md",
+      "required": true,
+      "sha256": "e48f140299943a2426efe9643a415c342b66d257630baa5bd359d90f61acb3e4"
+    },
+    {
+      "artifact_type": "TEST",
+      "byte_length": 1069,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/tests/test_validate_program_plan_v1_1_accession.py",
+      "required": true,
+      "sha256": "9a3b2d4535da76940ca4c108f0084ae199894d3b77d0f3cf265723dbaa0d2a56"
+    },
+    {
+      "artifact_type": "VALIDATOR",
+      "byte_length": 8899,
+      "path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/validation/validate_program_plan_v1_1_accession.py",
+      "required": true,
+      "sha256": "8fd7ce840b5820eefe007dabd4d07d84a016303a510be2dd2f7fbd94b1b6d6a3"
+    }
+  ],
+  "package_id": "ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1-PROTECTED-ACCESSION",
+  "package_root": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1",
+  "program_id": "ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1",
+  "recursive_exclusions": [
+    "CHECKSUM_MANIFEST.sha256",
+    "PACKAGE_MANIFEST.json"
+  ]
+}
