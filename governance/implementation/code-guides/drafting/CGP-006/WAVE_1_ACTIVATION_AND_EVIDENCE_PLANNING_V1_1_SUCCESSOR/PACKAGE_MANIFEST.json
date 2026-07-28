@@ -1,0 +1,118 @@
+{
+  "base_head": "c2759173279a8c7a986f0a6e980419b88621df31",
+  "files": [
+    {
+      "path": "FOUNDER_REVIEW_SUMMARY.md",
+      "sha256": "6e7e015296ea4e3a2e86281cf91362ebb7e8ca0c3ba73e51ea4ef461d2ce2f38",
+      "size_bytes": 970
+    },
+    {
+      "path": "GAP_0004_STATUS_REPORT.md",
+      "sha256": "2eb5ab3f1c89812c196c5893e341fa6ee79d0cae4fd7647fdef65301c7839b10",
+      "size_bytes": 150
+    },
+    {
+      "path": "IMPLEMENTATION_MAPPING_BOUNDARY_REPORT.md",
+      "sha256": "ef849726c7f2483d0ae411849f3ec3d5f7f127cf0ebc1221fb6e6de510a1d763",
+      "size_bytes": 299
+    },
+    {
+      "path": "PROPOSED_FOUNDER_DECISION_REGISTER.md",
+      "sha256": "afc272acdb7397478656a51180eed52db3cf439c6c151494cbc1463ccdac7319",
+      "size_bytes": 712
+    },
+    {
+      "path": "PR_44_SOURCE_AND_LINEAGE_REGISTER.md",
+      "sha256": "deedfb6bde3a5cfda9ba1fff08c8c67859fe8e86f3b30342bd7d49cb334cc904",
+      "size_bytes": 725
+    },
+    {
+      "path": "PR_44_TO_V1_1_SUCCESSOR_CROSSWALK.csv",
+      "sha256": "d24f086a38ee21c989865df202587cb020869abfd6e1dcbcbb0b24fa9a12875a",
+      "size_bytes": 6236
+    },
+    {
+      "path": "README.md",
+      "sha256": "93936fbadfc59621afd46e97632c7aab100ffeecc4ccaab45df47fc05f6faac8",
+      "size_bytes": 1264
+    },
+    {
+      "path": "REPRESENTATIVE_SCENARIO_CLASSIFICATION.md",
+      "sha256": "2e263422cef7b9d2736cb9a04e675d8a9b959e97934364a99b937a50711db440",
+      "size_bytes": 192
+    },
+    {
+      "path": "SOURCE_REGISTER.md",
+      "sha256": "ee196d3f6fffc0967831d10cce12917f9c0c6a9a3cd9407c5b11d92d82e699d1",
+      "size_bytes": 827
+    },
+    {
+      "path": "SUCCESSOR_REVIEW_DISPOSITION.md",
+      "sha256": "ca9b11b768a6a22f43b2fa251b193a18391df6a7ce28fc4aa57a041a6c0e50c2",
+      "size_bytes": 976
+    },
+    {
+      "path": "VALIDATOR_RELIABILITY_REPORT.md",
+      "sha256": "7cabaeb0fd6cbdb07faa69f27835991ef636ae30e1b0123ac7c56f212f3510d0",
+      "size_bytes": 153
+    },
+    {
+      "path": "WAVE_1_ACTIVATION_BLOCKER_REGISTER.csv",
+      "sha256": "7a11415a8037f5cd69b2bcfd1f3bc0a078584d929e2491d232974a146e7464a4",
+      "size_bytes": 1042
+    },
+    {
+      "path": "WAVE_1_ACTIVATION_SCOPE_ASSESSMENT.md",
+      "sha256": "6d2122f230ba97cf7d7269afb2501bbf981a85debbb3d7d3719fb19de406d839",
+      "size_bytes": 540
+    },
+    {
+      "path": "WAVE_1_ASSURANCE_CLASS_ASSESSMENT.csv",
+      "sha256": "fa9d49992c7a63578aa380d85096f782d61dbb1a2288e7a96deb73f6bb8c49e1",
+      "size_bytes": 433
+    },
+    {
+      "path": "WAVE_1_CONDITION_REGISTER.csv",
+      "sha256": "20666eaede3bb1c5c56ecf098c3c003c1063036c3a2c204c648009cbe58f2db4",
+      "size_bytes": 336
+    },
+    {
+      "path": "WAVE_1_EVIDENCE_GRADE_REGISTER.csv",
+      "sha256": "c125ab260297557a2281b25cd19158106660feb0a96dff1c3a7cea46e4ace16e",
+      "size_bytes": 616
+    },
+    {
+      "path": "WAVE_1_GUIDE_STATUS_MATRIX.csv",
+      "sha256": "5b2d56938effda37ba9af36e3b51aedb9bec3890a805be4ad1c5c8c220d25e2d",
+      "size_bytes": 643
+    },
+    {
+      "path": "WAVE_1_LIFECYCLE_STAGE_0_24_MATRIX.csv",
+      "sha256": "976dfd709fb9ca5e19b5ee15df7e5aaf5135453ded308a9fd29b292184c91040",
+      "size_bytes": 18616
+    },
+    {
+      "path": "WAVE_1_PREREQUISITE_REGISTER.csv",
+      "sha256": "72d11cef5d987328d29ebb26bb1e9c3313ee1c9e9530530a75d3dc7a158c82c3",
+      "size_bytes": 488
+    },
+    {
+      "path": "WAVE_1_WARNING_REGISTER.csv",
+      "sha256": "47fdbe39d87c26fbe3744f59788c952932ef6cd78ddb917cc0d3b0b50d950651",
+      "size_bytes": 371
+    },
+    {
+      "path": "tests/test_wave1_successor_package.py",
+      "sha256": "0a2e915e768b81b7d67d2b8c51a703576e89a13e7ed54063081b263cbe165f7b",
+      "size_bytes": 697
+    },
+    {
+      "path": "validators/validate_wave1_successor_package.py",
+      "sha256": "9fac0f1837c75a1fe49ab94b0b95e73d561a316032736e2ccda63ec514576efa",
+      "size_bytes": 4195
+    }
+  ],
+  "generated_utc": "2026-07-28T15:53:44Z",
+  "package": "WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING_V1_1_SUCCESSOR",
+  "repository": "rianray2012-coder/EquineSync-V4"
+}

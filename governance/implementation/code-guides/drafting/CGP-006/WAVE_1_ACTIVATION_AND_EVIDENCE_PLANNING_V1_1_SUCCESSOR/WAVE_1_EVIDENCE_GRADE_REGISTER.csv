@@ -1,0 +1,6 @@
+evidence_id,source,grade,category,status
+W1-V11-EVID-0001,V1.1 program plan and custody receipts,E2_DOCUMENTED,Source authority evidence,LOCATED_IN_PROTECTED_CUSTODY
+W1-V11-EVID-0002,Package-local validation commands,E3_REPEATABLE,Guide-quality evidence,REPEATABLE_LOCAL_VALIDATION
+W1-V11-EVID-0003,PR #44 historical branch,E2_DOCUMENTED,Historical draft evidence,PRESERVED_NOT_CANONICAL
+W1-V11-EVID-0004,Implementation conformance,E0_ABSENT,Implementation-conformance evidence,IMPLEMENTATION_NOT_AUTHORIZED
+W1-V11-EVID-0005,Runtime evidence,E0_ABSENT,Runtime or operational evidence,RUNTIME_EVIDENCE_NOT_AUTHORIZED

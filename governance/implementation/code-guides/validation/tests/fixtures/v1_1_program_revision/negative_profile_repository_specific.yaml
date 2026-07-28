@@ -1,0 +1,6 @@
+{
+  "authority_boundary": "REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+  "repository_specific_references": [
+    "src/example.py"
+  ]
+}

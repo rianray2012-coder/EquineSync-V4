@@ -6,10 +6,20 @@
     "CUSTODY_GAP",
     "SUPERSEDED"
   ],
+  "activation_scopes": [
+    "PLANNING_REFERENCE",
+    "IMPLEMENTATION_CONTROL",
+    "PULL_REQUEST_REVIEW",
+    "MERGE_GATE",
+    "RELEASE_GATE",
+    "OPERATIONS_REFERENCE"
+  ],
   "activation_states": [
     "NOT_ACTIVE",
     "ACTIVE",
     "BLOCKED",
+    "SUSPENDED",
+    "DEACTIVATED",
     "SUPERSEDED",
     "RETIRED"
   ],
@@ -50,10 +60,30 @@
     "MISSING"
   ],
   "assurance_classes": [
+    "A0_INFORMATIONAL",
     "A1_STANDARD",
-    "A2_IMPORTANT",
+    "A2_ELEVATED",
     "A3_HIGH",
     "A4_CRITICAL"
+  ],
+  "authority_types": [
+    "PROGRAM_PLAN_AUTHORITY",
+    "FOUNDER_DISPOSITION_AUTHORITY",
+    "DOCUMENTARY_RECONCILIATION_AUTHORITY",
+    "SUCCESSOR_WORKSTREAM_AUTHORITY",
+    "GUIDE_DRAFTING_AUTHORITY",
+    "GUIDE_ADOPTION_AUTHORITY",
+    "GUIDE_ACCESSION_AUTHORITY",
+    "GUIDE_ACTIVATION_AUTHORITY",
+    "IMPLEMENTATION_MAPPING_AUTHORITY",
+    "IMPLEMENTATION_AUTHORITY",
+    "DEPLOYMENT_AUTHORITY",
+    "PILOT_USE_AUTHORITY",
+    "PRODUCTION_USE_AUTHORITY",
+    "RUNTIME_EVIDENCE_AUTHORITY",
+    "WAIVER_EXCEPTION_AUTHORITY",
+    "SUPERSESSION_AUTHORITY",
+    "CUSTODY_AUTHORITY"
   ],
   "boolean_text": [
     "YES",
@@ -64,13 +94,18 @@
     "MEDIUM",
     "LOW"
   ],
+  "controlled_value_policy": {
+    "ambiguous_values": "No ambiguous legacy value is automatically migrated.",
+    "historical_records": "Historical records retain original values unless a separate authorized migration edits that record.",
+    "program_revision_status": "Candidate until separately adopted and protectedly integrated."
+  },
   "evidence_grades": [
-    "E0_ASSERTION",
-    "E1_MANUAL_OBSERVATION",
-    "E2_REPRODUCIBLE_LOCAL",
-    "E3_INDEPENDENT_CI",
-    "E4_CONTROLLED_ENVIRONMENT",
-    "E5_PRODUCTION"
+    "E0_ABSENT",
+    "E1_ASSERTED",
+    "E2_DOCUMENTED",
+    "E3_REPEATABLE",
+    "E4_INDEPENDENTLY_REPRODUCED",
+    "E5_OPERATIONALLY_OBSERVED"
   ],
   "exact_approved_byte_states": [
     "YES",
@@ -93,9 +128,10 @@
     "DRAFTING",
     "INTERNAL_REVIEW",
     "TECHNICAL_REVIEW",
-    "PRODUCT_REVIEW",
+    "DOMAIN_REVIEW",
     "CROSS_GUIDE_REVIEW",
     "ADVERSARIAL_REVIEW",
+    "IMPLEMENTER_USABILITY_REVIEW",
     "SCENARIO_VALIDATED",
     "ASSURANCE_REVIEW",
     "ADOPTION_CANDIDATE",
@@ -103,9 +139,65 @@
     "REPOSITORY_ACCESSIONED",
     "ACTIVE",
     "REVISION_PENDING",
+    "BLOCKED",
     "SUPERSEDED",
-    "RETIRED",
-    "BLOCKED"
+    "RETIRED"
+  ],
+  "legacy_activation_states": [
+    "NOT_ACTIVE",
+    "ACTIVE",
+    "BLOCKED",
+    "SUSPENDED",
+    "DEACTIVATED",
+    "SUPERSEDED",
+    "RETIRED"
+  ],
+  "legacy_assurance_classes": [
+    "A0_INFORMATIONAL",
+    "A1_STANDARD",
+    "A2_ELEVATED",
+    "A3_HIGH",
+    "A4_CRITICAL"
+  ],
+  "legacy_evidence_grades": [
+    "E0_ABSENT",
+    "E1_ASSERTED",
+    "E2_DOCUMENTED",
+    "E3_REPEATABLE",
+    "E4_INDEPENDENTLY_REPRODUCED",
+    "E5_OPERATIONALLY_OBSERVED"
+  ],
+  "legacy_guide_maturity_states": [
+    "PLANNED",
+    "CHARTERED",
+    "SOURCE_FROZEN",
+    "CURRENT_STATE_ASSESSED",
+    "DRAFTING",
+    "INTERNAL_REVIEW",
+    "TECHNICAL_REVIEW",
+    "DOMAIN_REVIEW",
+    "CROSS_GUIDE_REVIEW",
+    "ADVERSARIAL_REVIEW",
+    "IMPLEMENTER_USABILITY_REVIEW",
+    "SCENARIO_VALIDATED",
+    "ASSURANCE_REVIEW",
+    "ADOPTION_CANDIDATE",
+    "ADOPTED",
+    "REPOSITORY_ACCESSIONED",
+    "ACTIVE",
+    "REVISION_PENDING",
+    "BLOCKED",
+    "SUPERSEDED",
+    "RETIRED"
+  ],
+  "legacy_mapping_states": [
+    "IMPLEMENTED",
+    "PARTIALLY_IMPLEMENTED",
+    "PLANNED",
+    "MISSING",
+    "CONFLICTING",
+    "NOT_APPLICABLE",
+    "UNRESOLVED"
   ],
   "mapping_states": [
     "IMPLEMENTED",
@@ -113,7 +205,8 @@
     "PLANNED",
     "MISSING",
     "CONFLICTING",
-    "NOT_APPLICABLE"
+    "NOT_APPLICABLE",
+    "UNRESOLVED"
   ],
   "prompt_execution_states": [
     "NOT_ISSUED",
@@ -148,7 +241,7 @@
     "MISSING",
     "UNKNOWN"
   ],
-  "schema_version": "0.5.0",
+  "schema_version": "1.1.0",
   "source_authority_statuses": [
     "CONTROLLING",
     "SUPPORTING",
@@ -262,12 +355,27 @@
     "UNRESOLVED",
     "HISTORICAL_ONLY"
   ],
+  "suspension_deactivation_states": [
+    "NOT_SUSPENDED",
+    "SUSPENSION_PROPOSED",
+    "SUSPENDED",
+    "DEACTIVATION_PROPOSED",
+    "DEACTIVATED",
+    "SUPERSEDED",
+    "RETIRED"
+  ],
   "task_dispositions": [
     "COMPLETE_READY_FOR_NEXT_STAGE",
     "COMPLETE_WITH_RETAINED_FINDINGS",
     "PARTIALLY_COMPLETE",
     "BLOCKED_FAIL_CLOSED",
     "REVISION_REQUIRED"
+  ],
+  "validator_reliability_states": [
+    "DEVELOPMENT",
+    "SHADOW_VALIDATION",
+    "RELIABILITY_REVIEW_REQUIRED",
+    "ELIGIBLE_FOR_FUTURE_GATE_CONSIDERATION"
   ],
   "validator_result_statuses": [
     "PASS",

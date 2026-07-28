@@ -1,0 +1,7 @@
+prerequisite_id,prerequisite,status
+W1-V11-PREQ-0001,Founder review of successor package,PROPOSED_NOT_APPROVED
+W1-V11-PREQ-0002,Guide activation decision,GUIDE_ACTIVATION_NOT_AUTHORIZED
+W1-V11-PREQ-0003,Activation effective date,NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED
+W1-V11-PREQ-0004,Repository-specific implementation mapping authority,NOT_AUTHORIZED
+W1-V11-PREQ-0005,GAP-0004 evidence,GAP_0004_REMAINS_OPEN
+W1-V11-PREQ-0006,Retained warning disposition,RETAINED_WARNINGS_REMAIN_OPEN

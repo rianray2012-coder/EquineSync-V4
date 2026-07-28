@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "authority_boundary": {
+      "const": "DOCUMENTARY_MAPPING_ONLY"
+    },
+    "guide_id": {
+      "type": "string"
+    },
+    "mapping_id": {
+      "type": "string"
+    },
+    "mapping_state": {
+      "enum": [
+        "IMPLEMENTED",
+        "PARTIALLY_IMPLEMENTED",
+        "PLANNED",
+        "MISSING",
+        "CONFLICTING",
+        "NOT_APPLICABLE",
+        "UNRESOLVED"
+      ]
+    },
+    "repository_specific_target": {
+      "description": "Must remain empty unless separate authority permits repository-specific implementation mapping.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "mapping_id",
+    "guide_id",
+    "mapping_state",
+    "authority_boundary"
+  ],
+  "title": "Code Guide Repository Mapping Schema",
+  "type": "object",
+  "x-authority-boundary": "DOCUMENTARY_PROGRAM_MACHINERY_ONLY"
+}

@@ -1,0 +1,5 @@
+retention_id,evidence_category,minimum_grade,retention_rule,custody_method,status
+CGP-V11-RET-0001,Source authority evidence,E2_DOCUMENTED,Preserve exact source bytes and checksum.,Protected repository custody,ACTIVE_FOR_DOCUMENTARY_PROGRAM
+CGP-V11-RET-0002,Guide-quality evidence,E2_DOCUMENTED,"Preserve review reports, manifests, and decisions.",Protected repository or secure-custody reference,ACTIVE_FOR_DOCUMENTARY_PROGRAM
+CGP-V11-RET-0003,Implementation-conformance evidence,E0_ABSENT,Not authorized in this workstream.,NONE,RUNTIME_OR_IMPLEMENTATION_AUTHORITY_REQUIRED
+CGP-V11-RET-0004,Runtime or operational evidence,E0_ABSENT,Not authorized in this workstream.,NONE,RUNTIME_EVIDENCE_NOT_AUTHORIZED

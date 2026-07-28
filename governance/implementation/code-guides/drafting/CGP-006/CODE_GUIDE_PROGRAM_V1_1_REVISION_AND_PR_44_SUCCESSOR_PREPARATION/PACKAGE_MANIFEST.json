@@ -1,0 +1,128 @@
+{
+  "base_head": "c2759173279a8c7a986f0a6e980419b88621df31",
+  "files": [
+    {
+      "path": "AFFECTED_ARTIFACT_INVENTORY.csv",
+      "sha256": "96b7783d1f8d9f12c3ad73693c4cacd5f107e8a9475b6112996cf780ed959c87",
+      "size_bytes": 5395
+    },
+    {
+      "path": "AUTHORITY_BOUNDARY_REPORT.md",
+      "sha256": "e6eb2033c179eeec061190a1bfd428a01cca063b8ecd96ee1048303e864a70e4",
+      "size_bytes": 880
+    },
+    {
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "e47c49caa4fd69f6e03a6452e9ea2519753b40d4a8940ea1584df404bd0a1148",
+      "size_bytes": 532
+    },
+    {
+      "path": "CONTROLLED_VALUE_COMPATIBILITY_POLICY.md",
+      "sha256": "7bcf4338581a88a749bc21a77ebdb189d4b324aa5969f7ba4fce0b968b5030e3",
+      "size_bytes": 473
+    },
+    {
+      "path": "CONTROLLED_VALUE_MIGRATION_CROSSWALK.csv",
+      "sha256": "75648486edfbed74f998738e8a2bbd5a0ece3324962a7da7e0b99c9873d80cd6",
+      "size_bytes": 9866
+    },
+    {
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "89d511ec737c6b4eb47028b79c29cb850a05a49a0ae2e18acf51762d12863a62",
+      "size_bytes": 1027
+    },
+    {
+      "path": "FOUNDER_REVIEW_SUMMARY.md",
+      "sha256": "42f002c1e9b972d7c3a1c560b0ed3f47215238c56f6f2dab2fd5955329b79d15",
+      "size_bytes": 1098
+    },
+    {
+      "path": "GENERIC_IMPLEMENTATION_PROFILE_REPORT.md",
+      "sha256": "48110b59134712e4cb02e3e9d2730d7595fc1a98b107924038b19c81bb556dd4",
+      "size_bytes": 1405
+    },
+    {
+      "path": "GUIDE_LIFECYCLE_RECONCILIATION_MATRIX.csv",
+      "sha256": "db920249c34b70ba7d086a96b8fbbff50a800d44679aee83b9ae84b85195ad2b",
+      "size_bytes": 64601
+    },
+    {
+      "path": "OPEN_DECISION_REGISTER.md",
+      "sha256": "bda3ff2e21dd2cf2c3a96fbd1b814a825ed2175c3290485fce369178a0d10e9f",
+      "size_bytes": 522
+    },
+    {
+      "path": "PR_44_SUCCESSOR_PREPARATION_REPORT.md",
+      "sha256": "6badee7fb70714b6d554a15ef24af23f9274b8958498d91b5f99498a76ce8cf3",
+      "size_bytes": 512
+    },
+    {
+      "path": "README.md",
+      "sha256": "18eb1faeef47a21e728e2bc9f93c42ae68c0c8d22afde06e10b8946042afa2cb",
+      "size_bytes": 2157
+    },
+    {
+      "path": "REGISTER_RECONCILIATION_REPORT.md",
+      "sha256": "ab3954173ecfd910d380b0076a463bf006e02d5255c9d55039b9a9fa95d47095",
+      "size_bytes": 1108
+    },
+    {
+      "path": "REVIEW_DISPOSITION.md",
+      "sha256": "8cb5ed65050cffb7c5961048b5de74a6b47aae71858cb1e3e319bd28444c7abb",
+      "size_bytes": 1094
+    },
+    {
+      "path": "RISK_FINDING_DEVIATION_REGISTER.csv",
+      "sha256": "b57b20d2eeaaad667a77bec910a17dd83b2ae0afef4e31eb8b55195cec1160c4",
+      "size_bytes": 548
+    },
+    {
+      "path": "SCHEMA_REVISION_REPORT.md",
+      "sha256": "a3c16561ab5c5a751d8f1b1917413ec35b2526a19def0856aff9dc5035e31610",
+      "size_bytes": 685
+    },
+    {
+      "path": "SOURCE_FREEZE_MANIFEST.json",
+      "sha256": "9bdebd3aac46e2c0070808dea114a6c5a85acc5a47204ba9b9758e62c419ad03",
+      "size_bytes": 1065
+    },
+    {
+      "path": "SOURCE_REGISTER.md",
+      "sha256": "537ed11c69b69507510c79d48f399b4d8b25008cb4ed2198743312cb5a10cbbf",
+      "size_bytes": 983
+    },
+    {
+      "path": "SOURCE_SHA256SUMS.txt",
+      "sha256": "bc8cd7e051d9f1325573d217fd5cf76291e4476b3348c6bf4e6abd0624523753",
+      "size_bytes": 569
+    },
+    {
+      "path": "TEMPLATE_REVISION_REPORT.md",
+      "sha256": "960f7927adb1d60c2753bcbc43fcadd65505aeac17c1f11d77161f599509ba92",
+      "size_bytes": 1143
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "f00fc70ffff06ea575e9bc42863409f6994d721b25d659f903033fecb42fe3d6",
+      "size_bytes": 1241
+    },
+    {
+      "path": "VALIDATOR_RELIABILITY_REPORT.md",
+      "sha256": "0fd4b33817f5d0f4c9221fcfc0478a0cc8b3a923d3f3914042f3c4156e5732c6",
+      "size_bytes": 365
+    },
+    {
+      "path": "tests/test_revision_package.py",
+      "sha256": "a0e2315716aa819e84d27cdc29e9dee5765bb11b5a9fc4a5b88f2332fa32c1df",
+      "size_bytes": 696
+    },
+    {
+      "path": "validators/validate_revision_package.py",
+      "sha256": "3336e4ac631fcb4d5eb931109c22a39737a7a60b79a8ae27550ba01728e9bece",
+      "size_bytes": 3693
+    }
+  ],
+  "generated_utc": "2026-07-28T15:53:44Z",
+  "package": "CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION",
+  "repository": "rianray2012-coder/EquineSync-V4"
+}

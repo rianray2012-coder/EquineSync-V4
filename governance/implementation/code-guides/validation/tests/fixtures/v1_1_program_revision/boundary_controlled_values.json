@@ -1,0 +1,57 @@
+{
+  "activation_scopes": [
+    "PLANNING_REFERENCE",
+    "IMPLEMENTATION_CONTROL",
+    "PULL_REQUEST_REVIEW",
+    "MERGE_GATE",
+    "RELEASE_GATE",
+    "OPERATIONS_REFERENCE"
+  ],
+  "assurance_classes": [
+    "A0_INFORMATIONAL",
+    "A1_STANDARD",
+    "A2_ELEVATED",
+    "A3_HIGH",
+    "A4_CRITICAL"
+  ],
+  "evidence_grades": [
+    "E0_ABSENT",
+    "E1_ASSERTED",
+    "E2_DOCUMENTED",
+    "E3_REPEATABLE",
+    "E4_INDEPENDENTLY_REPRODUCED",
+    "E5_OPERATIONALLY_OBSERVED"
+  ],
+  "guide_maturity_states": [
+    "PLANNED",
+    "CHARTERED",
+    "SOURCE_FROZEN",
+    "CURRENT_STATE_ASSESSED",
+    "DRAFTING",
+    "INTERNAL_REVIEW",
+    "TECHNICAL_REVIEW",
+    "DOMAIN_REVIEW",
+    "CROSS_GUIDE_REVIEW",
+    "ADVERSARIAL_REVIEW",
+    "IMPLEMENTER_USABILITY_REVIEW",
+    "SCENARIO_VALIDATED",
+    "ASSURANCE_REVIEW",
+    "ADOPTION_CANDIDATE",
+    "ADOPTED",
+    "REPOSITORY_ACCESSIONED",
+    "ACTIVE",
+    "REVISION_PENDING",
+    "BLOCKED",
+    "SUPERSEDED",
+    "RETIRED"
+  ],
+  "mapping_states": [
+    "IMPLEMENTED",
+    "PARTIALLY_IMPLEMENTED",
+    "PLANNED",
+    "MISSING",
+    "CONFLICTING",
+    "NOT_APPLICABLE",
+    "UNRESOLVED"
+  ]
+}

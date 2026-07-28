@@ -1,0 +1,4 @@
+record_id,severity,finding,status,required_resolution
+CGP-V11-REV-RISK-0001,P1,Program revision is candidate only until Founder disposition.,OPEN,Founder review and separate protected integration authority.
+CGP-V11-REV-RISK-0002,P1,PR #44 activation proposal remains historical draft and must not be rewritten in place.,OPEN,Separate supersession closure disposition after successor lineage verification.
+CGP-V11-REV-RISK-0003,P1,Guide activation and repository-specific implementation mapping remain unauthorized.,OPEN,Separate Founder authority.
