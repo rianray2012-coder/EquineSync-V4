@@ -10,7 +10,10 @@
 **Guide activation state:** `NOT_ACTIVE`
 **Implementation authority:** `NOT_GRANTED`
 **CGP-007 status:** `NOT_ISSUED`
-**Next prompt:** `CGP_006_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION_DIRECTIVE`; the V1.1 revision workstream may begin only from the verified post-custody protected head. Repository-specific implementation mapping, guide activation, implementation, deployment, pilot or production use, runtime evidence, and CGP-007 remain unauthorized.
+**Next prompt:** `NONE_AUTHORIZED`
+**Post-custody closeout status:** `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
+**Historical PR #44 status:** `PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
+Repository-specific implementation mapping, guide activation, activation effective date, implementation, deployment, pilot or production use, runtime evidence, and CGP-007 remain unauthorized.
 
 ## Program Plan V1.1 Accession Status
 
@@ -26,7 +29,7 @@
 - Post-merge custody receipt: `governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_PLAN_V1_1_REPOSITORY_CUSTODY_RECEIPT.md`
 - Custody status after receipt merge: `CODE_GUIDE_PROGRAM_PLAN_V1_1_PROTECTEDLY_ACCESSIONED_AND_CUSTODY_COMPLETE`
 
-V1.1 approval and accession do not change guide maturity, adoption, accession, or activation states. PR `#44` remains open, draft, unmerged, and unmodified. `CGP005-TA-APP-GAP-0004`, retained CGP-006 warnings, and activation blockers remain open. PR #44 proposed activation decisions are not approved through PR #47 and are to be superseded only by a V1.1-conforming successor.
+V1.1 approval and accession do not change guide maturity, adoption, accession, or activation states. PR `#44` is now closed as superseded by the V1.1-conforming successor and was not merged; its preserved historical head is `f94c26188e8d35c413b366135df12057b58c2d7d`. `CGP005-TA-APP-GAP-0004`, retained CGP-006 warnings, and activation blockers remain open. PR #44 proposed activation decisions are not approved.
 
 
 ## Program Plan V1.1 Reconciliation Status
@@ -39,8 +42,8 @@ V1.1 approval and accession do not change guide maturity, adoption, accession, o
 - Reconciliation status after PR #47 merge: `CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_PROTECTEDLY_MERGED_PENDING_CUSTODY`
 - Post-merge custody receipt: `governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_CUSTODY_RECEIPT.md`
 - Custody status after receipt merge: `CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
-- PR #44 treatment: `PR_44_TO_BE_SUPERSEDED_BY_V1_1_CONFORMING_SUCCESSOR`
-- Next directive: `CGP_006_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION_DIRECTIVE`
+- PR #44 treatment after PR #49 and PR #50 custody completion: `PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
+- Next directive: `NONE_AUTHORIZED`
 
 PR #47 approval is documentary reconciliation and successor-workstream decision support only. It does not accept the existing Code Guide Program as fully V1.1-conforming. The V1.1 revision workstream shall begin only from the verified post-custody protected head.
 
@@ -53,18 +56,26 @@ PR #47 approval is documentary reconciliation and successor-workstream decision 
 - PR #49 final integration head: `5d73078c9a2b28022a934761bb00b1a0d34addcf`
 - PR #49 merge commit: `3e91dba89b940a4cb99ac867df1b9fb4d6854a47`
 - PR #49 disposition: `APPROVED_FOR_PROTECTED_DOCUMENTARY_INTEGRATION_WITH_CONDITIONS`
-- Integration status after PR #49 merge: `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_MERGED_PENDING_CUSTODY`
+- Integration and custody status after PR #49 and PR #50 merge: `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
 - Post-merge custody receipt: `governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_CUSTODY_RECEIPT.md`
 - Custody status after receipt merge: `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
-- PR #44 treatment until successor custody completion: `PR_44_REMAINS_OPEN_DRAFT_UNMERGED_UNTIL_SUCCESSOR_CUSTODY_COMPLETE`
+- PR #44 current treatment after successor custody completion: `PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
 
-This approval does not activate a guide, authorize repository-specific implementation mapping, authorize implementation, close retained warnings or `GAP-0004`, authorize deployment, or authorize pilot or production use. The revised controlled values, schemas, registers, generic implementation profiles, templates, and validators may become canonical only after PR #49 merges and separate custody is complete.
+This approval does not activate a guide, authorize repository-specific implementation mapping, authorize implementation, close retained warnings or `GAP-0004`, authorize deployment, or authorize pilot or production use. The revised controlled values, schemas, registers, generic implementation profiles, templates, and validators are repository-canonical program machinery after PR #49 and PR #50 protected custody completion, but they do not create activation, mapping, implementation, deployment, pilot, production, runtime, gap-closure, warning-closure, blocker-closure, or CGP-007 authority.
 
 Continuing statements:
 
+`PROGRAM_PLAN_V1_1_CONTROLLING`
+
+`CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
+
+`PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
+
 `GUIDE_ACTIVATION_NOT_AUTHORIZED`
 
-`IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
+
+`REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
 
 `IMPLEMENTATION_NOT_AUTHORIZED`
 
@@ -81,6 +92,8 @@ Continuing statements:
 `NO_ADOPTED_GUIDE_BYTES_CHANGED`
 
 `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
+
+`CGP_007_NOT_AUTHORIZED`
 
 ## Baseline
 

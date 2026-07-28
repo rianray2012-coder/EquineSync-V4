@@ -1,0 +1,83 @@
+{
+  "base_head": "2a7da5adc9d8c38ae3f85aaa0d4ddb5a0d997517",
+  "files": [
+    {
+      "path": "AUTHORITY_BOUNDARY_REPORT.md",
+      "sha256": "35580549c4edb199de713055b64e211a5f061812e663529f33da1c0b25158ac8",
+      "size_bytes": 891
+    },
+    {
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "4ed284f4ef832f7a1ccd62fbaf055f85112be355b35df57304535c9c8a735245",
+      "size_bytes": 810
+    },
+    {
+      "path": "CURRENT_STATUS_RECONCILIATION.md",
+      "sha256": "656013ecb03f2ef84a66b9a3a3610c5b54a6f30305890c18e9cecccf7a5cd2b5",
+      "size_bytes": 655
+    },
+    {
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "77a2903aa5e81faa9908bbe25df5d3217ee557727163d77d6cb64df60f47e230",
+      "size_bytes": 1356
+    },
+    {
+      "path": "HISTORICAL_RECORD_PRESERVATION_REPORT.md",
+      "sha256": "289dba93665ef97bf68bcbdaf5667a3720af4780fcde59e072d80c3a191c71bf",
+      "size_bytes": 604
+    },
+    {
+      "path": "PR_44_SUPERSESSION_CLOSEOUT.md",
+      "sha256": "40076602c82f3cc1c17cac485e1fd75df74081b694250d9d71352c2767bfd1b9",
+      "size_bytes": 1006
+    },
+    {
+      "path": "PR_49_INTEGRATION_VERIFICATION.md",
+      "sha256": "da20779b9fc642f5b602fe26a33773737cf947b2b1f8570c855a72abfb816ba7",
+      "size_bytes": 575
+    },
+    {
+      "path": "PR_50_CUSTODY_VERIFICATION.md",
+      "sha256": "78765ea7aaf6d31320064b7ec60383a627e6ae2d13d47e1d40572b9bfcefffa0",
+      "size_bytes": 588
+    },
+    {
+      "path": "README.md",
+      "sha256": "94c2d8b6e1091ffad694dd340bf9b38077248d53028fc718cf2b47db7eb639ef",
+      "size_bytes": 3999
+    },
+    {
+      "path": "REPOSITORY_STATE_VERIFICATION.md",
+      "sha256": "ee4bfd58cfc4ab45892741866346628be5c2f819217192554f3d7fcda4f70d5d",
+      "size_bytes": 746
+    },
+    {
+      "path": "REVIEW_DISPOSITION.md",
+      "sha256": "4aa73dc72ed2bf663a4272fa4459fcfc37125117fda222934f00067eaec31c2e",
+      "size_bytes": 1071
+    },
+    {
+      "path": "STALE_STATUS_ASSERTION_INVENTORY.csv",
+      "sha256": "8f495bef0c77330464b6f8b9507ad0bbf3a6ab0cb61282ed429d60a55291ee78",
+      "size_bytes": 23873
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "46b143d4248cbaa4518386d32448abbe07d3d5eac8f98ae4fd82775aa32c9ad1",
+      "size_bytes": 2551
+    },
+    {
+      "path": "tests/test_post_custody_closeout.py",
+      "sha256": "4e348b57bf518d65098a376e8d169fe547469a87cf7410b423716b14badd46fc",
+      "size_bytes": 1182
+    },
+    {
+      "path": "validators/validate_post_custody_closeout.py",
+      "sha256": "a77f7bf9c5430198440d69a03394c6d9f3a686e46b9ff9f76a576f987e74daba",
+      "size_bytes": 6574
+    }
+  ],
+  "generated_utc": "2026-07-28T23:54:09Z",
+  "package": "CODE_GUIDE_PROGRAM_V1_1_POST_CUSTODY_CLOSEOUT_AND_STATUS_RECONCILIATION",
+  "repository": "rianray2012-coder/EquineSync-V4"
+}
