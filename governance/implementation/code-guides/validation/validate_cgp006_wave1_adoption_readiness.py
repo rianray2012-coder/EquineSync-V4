@@ -17,8 +17,13 @@ PACKAGE_REL = Path("drafting/CGP-006/WAVE_1_ADOPTION_READINESS_REVIEW_V1")
 CANDIDATE_REL = Path("drafting/CGP-006/WAVE_1_CANDIDATE_DRAFTING_V1")
 GAP_REL = Path("drafting/CGP-006/WAVE_1_WARNING_GAP_DISPOSITION_V1")
 BASE_HEAD = "be0e68eeb698491f807745f0c4174dec28e96298"
-PACKAGE_VERSION = "0.1.0-adoption-readiness-review.1"
-DETERMINATION = "CGP_006_WAVE_1_ADOPTION_READINESS_REVIEW_COMPLETE_READY_FOR_CONDITIONAL_ADOPTION_DIRECTIVE"
+PACKAGE_VERSION = "0.1.1-conditional-adoption.1"
+READINESS_DETERMINATION = "CGP_006_WAVE_1_ADOPTION_READINESS_REVIEW_COMPLETE_READY_FOR_CONDITIONAL_ADOPTION_DIRECTIVE"
+DETERMINATION = "CGP_006_WAVE_1_CONDITIONAL_FOUNDER_ADOPTION_RECORDED_PENDING_PROTECTED_INTEGRATION"
+FOUNDER_DIRECTIVE = "CGP_006_WAVE_1_CONDITIONAL_FOUNDER_ADOPTION_AND_PROTECTED_INTEGRATION_DIRECTIVE_V1_0_0"
+PRE_MERGE_PR_HEAD = "5cff02e71721764e1713ba14c110847aab050dc3"
+ADOPTION_RECORD_ID = "CGP006-W1-CAR-0001"
+ADOPTION_STATUS = "CONDITIONALLY_ADOPTED_PENDING_PROTECTED_INTEGRATION"
 GUIDES = ("ES-CG-00", "ES-CG-01", "ES-CG-13", "ES-CG-10")
 WARNINGS = ("CGP006-CLF-0001", "CGP006-CLF-0002", "CGP006-CLF-0003", "CGP006-CLF-0004", "CGP006-CLF-0005")
 CLOSED_GAPS = ("CGP005-TA-APP-GAP-0001", "CGP005-TA-APP-GAP-0002", "CGP005-TA-APP-GAP-0003")
@@ -184,7 +189,10 @@ def validate_cgp006_wave1_adoption_readiness(root: Path) -> ValidationResult:
         package / "reports/CGP_006_WAVE_1_SOURCE_INTEGRITY_CONFIRMATION.md",
         package / "reports/CGP_006_WAVE_1_ADOPTION_READINESS_VALIDATION_REPORT.md",
         package / "reports/CGP_006_WAVE_1_ADOPTION_READINESS_REVIEW_DISPOSITION.md",
+        package / "reports/CGP_006_WAVE_1_FOUNDER_CONDITIONAL_ADOPTION_RECORD.md",
+        package / "reports/CGP_006_WAVE_1_CONDITIONAL_ADOPTION_METADATA_RECONCILIATION.md",
         package / "registers/CGP_006_WAVE_1_GUIDE_ADOPTION_READINESS_REGISTER.csv",
+        package / "registers/CGP_006_WAVE_1_CONDITIONAL_ADOPTION_REGISTER.csv",
         package / "registers/CGP_006_WAVE_1_CONTROL_ADOPTION_READINESS_REGISTER.csv",
         package / "registers/CGP_006_WAVE_1_INVARIANT_ADOPTION_READINESS_REGISTER.csv",
         package / "registers/CGP_006_WAVE_1_MANDATORY_QUESTION_ADOPTION_READINESS_REGISTER.csv",
@@ -215,6 +223,9 @@ def validate_cgp006_wave1_adoption_readiness(root: Path) -> ValidationResult:
             "observed_remote_head": BASE_HEAD,
             "branch_point_commit": BASE_HEAD,
             "determination": DETERMINATION,
+            "readiness_determination": READINESS_DETERMINATION,
+            "founder_directive": FOUNDER_DIRECTIVE,
+            "pre_merge_pr_head": PRE_MERGE_PR_HEAD,
             "adoption_model": "CONDITIONAL_PORTFOLIO_ADOPTION",
             "candidate_baseline_state": "FOUNDER_APPROVED_CANDIDATE_BASELINE_REPOSITORY_ACCESSIONED",
             "gap_closure_state": "CGP_006_WAVE_1_DOCUMENTARY_GAPS_0001_0002_0003_FOUNDER_CLOSED_AND_REPOSITORY_ACCESSIONED",
@@ -239,7 +250,8 @@ def validate_cgp006_wave1_adoption_readiness(root: Path) -> ValidationResult:
         lifecycle_expected = {
             "candidate_baseline_status": "FOUNDER_APPROVED_CANDIDATE_BASELINE",
             "repository_state": "REPOSITORY_ACCESSIONED",
-            "adoption_status": "NOT_ADOPTED",
+            "adoption_status": ADOPTION_STATUS,
+            "maximum_authorized_state_pre_merge": ADOPTION_STATUS,
             "activation_status": "NOT_ACTIVE",
             "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
             "production_authority": "NOT_GRANTED",
@@ -248,11 +260,29 @@ def validate_cgp006_wave1_adoption_readiness(root: Path) -> ValidationResult:
             if lifecycle.get(key) != expected:
                 result.add("lifecycle_state_changed", f"Guide lifecycle `{key}` changed.", manifest_path, key)
         boundary = manifest.get("authority_boundary", {})
-        for key in ["adoption_recorded", "activation_authorized", "implementation_mapping_authorized", "implementation_authorized", "approved_source_byte_changes"]:
+        if boundary.get("adoption_recorded") is not True or boundary.get("conditional_adoption_recorded") is not True:
+            result.add("conditional_adoption_not_recorded", "Conditional Founder adoption must be recorded.", manifest_path)
+        if boundary.get("conditional_adoption_record_identifier") != ADOPTION_RECORD_ID:
+            result.add("conditional_adoption_record_mismatch", "Conditional adoption record identifier changed.", manifest_path)
+        for key in ["activation_authorized", "implementation_mapping_authorized", "implementation_authorized", "approved_source_byte_changes"]:
             if boundary.get(key) is not False:
                 result.add("authority_boundary_changed", f"Authority boundary `{key}` must remain false.", manifest_path, key)
         if boundary.get("cgp007") != "NOT_ISSUED":
             result.add("cgp007_issued", "CGP-007 must remain NOT_ISSUED.", manifest_path)
+        adoption_record = manifest.get("founder_adoption_record", {})
+        if adoption_record.get("record_identifier") != ADOPTION_RECORD_ID:
+            result.add("missing_founder_adoption_record", "Founder conditional adoption record is missing.", manifest_path)
+        if tuple(adoption_record.get("adopted_guides", [])) != ("ES-CG-00", "ES-CG-01", "ES-CG-10", "ES-CG-13"):
+            result.add("conditional_adopted_guides_changed", "Conditionally adopted guide set changed.", manifest_path)
+        if adoption_record.get("status") != ADOPTION_STATUS:
+            result.add("conditional_adoption_status_invalid", "Conditional adoption status changed.", manifest_path)
+        gap0004 = manifest.get("gap0004_preservation", {})
+        if gap0004.get("gap_identifier") != OPEN_GAP or gap0004.get("closed") is not False:
+            result.add("gap0004_manifest_preservation_invalid", "GAP-0004 preservation is invalid.", manifest_path)
+        if tuple(manifest.get("conditions_preserved", [])) != tuple(f"CGP006-AR-COND-{idx:04d}" for idx in range(1, 6)):
+            result.add("condition_inventory_invalid", "Conditional adoption conditions changed.", manifest_path)
+        if tuple(manifest.get("warnings_preserved", [])) != WARNINGS:
+            result.add("warning_preservation_invalid", "Retained warning preservation changed.", manifest_path)
 
     manifest_files = {entry.get("path"): entry.get("sha256") for entry in manifest.get("files", [])}
     ledger_files: dict[str, str] = {}
@@ -284,7 +314,7 @@ def validate_cgp006_wave1_adoption_readiness(root: Path) -> ValidationResult:
         for field, expected in {
             "lifecycle_state": "FOUNDER_APPROVED_CANDIDATE_BASELINE",
             "repository_state": "REPOSITORY_ACCESSIONED",
-            "adoption_state": "NOT_ADOPTED",
+            "adoption_state": ADOPTION_STATUS,
             "activation_state": "NOT_ACTIVE",
             "implementation_authority": "IMPLEMENTATION_AUTHORITY_NOT_GRANTED",
             "production_authority": "NOT_GRANTED",
@@ -293,6 +323,38 @@ def validate_cgp006_wave1_adoption_readiness(root: Path) -> ValidationResult:
         }.items():
             if row.get(field) != expected:
                 result.add("guide_lifecycle_or_readiness_invalid", f"Guide `{field}` changed.", package, guide)
+
+    _, adoption_rows = read_csv_strict(package / "registers/CGP_006_WAVE_1_CONDITIONAL_ADOPTION_REGISTER.csv", result)
+    if len(adoption_rows) != 1:
+        result.add("conditional_adoption_register_invalid", "Conditional adoption register must contain exactly one record.", package)
+    else:
+        adoption = adoption_rows[0]
+        expected_adoption = {
+            "adoption_record_identifier": ADOPTION_RECORD_ID,
+            "directive_id": FOUNDER_DIRECTIVE,
+            "repository": "rianray2012-coder/EquineSync-V4",
+            "pr_number": "42",
+            "base_branch": "integrate-emergent-final-zip",
+            "base_head": BASE_HEAD,
+            "pre_merge_pr_head": PRE_MERGE_PR_HEAD,
+            "adoption_model": "CONDITIONAL_PORTFOLIO_ADOPTION",
+            "activation_status": "NOT_ACTIVE",
+            "implementation_mapping_status": "IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+            "implementation_status": "IMPLEMENTATION_NOT_AUTHORIZED",
+            "production_status": "NOT_GRANTED",
+            "status": ADOPTION_STATUS,
+        }
+        for field, expected in expected_adoption.items():
+            if adoption.get(field) != expected:
+                result.add("conditional_adoption_register_invalid", f"Conditional adoption `{field}` changed.", package, field)
+        if set(split_refs(adoption.get("adopted_guides", ""))) != {"ES-CG-00", "ES-CG-01", "ES-CG-10", "ES-CG-13"}:
+            result.add("conditional_adopted_guides_changed", "Conditional adoption guide set changed.", package)
+        if set(split_refs(adoption.get("conditions_preserved", ""))) != {f"CGP006-AR-COND-{idx:04d}" for idx in range(1, 6)}:
+            result.add("condition_inventory_invalid", "Conditional adoption conditions changed.", package)
+        if set(split_refs(adoption.get("warnings_retained", ""))) != set(WARNINGS):
+            result.add("warning_preservation_invalid", "Retained warning preservation changed.", package)
+        if "IMPLEMENTATION_EVIDENCE_REQUIRED" not in adoption.get("gap0004_status", ""):
+            result.add("gap0004_register_preservation_invalid", "GAP-0004 status was not preserved.", package)
 
     candidate_controls = read_csv_strict(candidate / "registers/CGP_006_WAVE_1_CONTROL_REGISTER.csv", result)[1]
     candidate_invariants = read_csv_strict(candidate / "registers/CGP_006_WAVE_1_INVARIANT_REGISTER.csv", result)[1]
@@ -446,6 +508,7 @@ def validate_cgp006_wave1_adoption_readiness(root: Path) -> ValidationResult:
         "mandatory_questions_reviewed": len(question_rows),
         "warnings_reviewed": len(warning_rows),
         "gap0004_records": len(gap_rows),
+        "conditional_adoption_records": len(adoption_rows),
         "adoption_conditions": len(condition_rows),
         "founder_decisions_required": len(decision_rows),
         "manifest_files": len(manifest_files),

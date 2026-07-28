@@ -26,6 +26,7 @@ class CGP006Wave1AdoptionReadinessValidatorTests(unittest.TestCase):
         self.assertEqual(result.summary["warnings_reviewed"], 5)
         self.assertEqual(result.summary["gap0004_records"], 1)
         self.assertEqual(result.summary["founder_decisions_required"], 0)
+        self.assertEqual(result.summary["conditional_adoption_records"], 1)
 
     def test_missing_package_fails(self):
         original = validate_cgp006_wave1_adoption_readiness.PACKAGE_REL

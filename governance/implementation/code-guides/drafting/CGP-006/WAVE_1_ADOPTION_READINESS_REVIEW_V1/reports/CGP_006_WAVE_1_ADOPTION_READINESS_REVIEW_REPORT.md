@@ -21,3 +21,10 @@ This package reviews `ES-CG-00`, `ES-CG-01`, `ES-CG-13`, and `ES-CG-10` in depen
 The four guides should be considered as a dependency-linked conditional portfolio adoption package. `ES-CG-00` may serve as the foundation, `ES-CG-01` depends on it, `ES-CG-13` depends on both, and `ES-CG-10` depends on all three. Separate adoption would create dependency and terminology risk unless the same conditions and covenants travel with each adopted guide.
 
 No new Founder decision is required for adoption consideration beyond the later adoption directive itself. No guide is adopted by this package.
+
+
+## Founder Conditional Adoption Update
+
+Under `CGP_006_WAVE_1_CONDITIONAL_FOUNDER_ADOPTION_AND_PROTECTED_INTEGRATION_DIRECTIVE_V1_0_0`, Founder conditional adoption has been recorded as `CGP006-W1-CAR-0001` for the Wave 1 portfolio. The prior readiness determination remains preserved as the evidentiary basis. The current package determination is `CGP_006_WAVE_1_CONDITIONAL_FOUNDER_ADOPTION_RECORDED_PENDING_PROTECTED_INTEGRATION` pending protected integration.
+
+This update preserves all adoption conditions, retained warnings, GAP-0004, source-integrity boundaries, and the absence of activation, implementation-mapping, implementation, and production authority.
