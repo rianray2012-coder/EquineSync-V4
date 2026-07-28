@@ -3,6 +3,7 @@
 **Current foundation prompt:** `CGP-002`
 **Execution ID:** `CGEXEC-20260726-0001`
 **Next prompt after CGP-002 return:** `CGP-003`
+**Current controlling program-plan accession:** `ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1`
 
 This directory is the canonical documentary and machine-readable home for the EquineSync Code Implementation Guide program.
 
@@ -16,6 +17,18 @@ This directory is the canonical documentary and machine-readable home for the Eq
 - `reviews/`, `receipts/`, and `packages/` preserve validation, custody, and package records.
 
 No official Code Guide program work exists without a prompt ID, execution ID, artifact inventory row, and receipt.
+
+## Program Plan V1.1
+
+The Founder-approved V1.1 Code Implementation Guide Creation, Review, and Assurance Plan is accessioned at:
+
+`program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1.md`
+
+Founder approval status:
+
+`APPROVED_AS_CONTROLLING_DOCUMENTARY_PROGRAM_PLAN_PENDING_PROTECTED_REPOSITORY_ACCESSION_AND_CUSTODY`
+
+Authority effect is controlling only after protected repository accession and separate post-merge custody are complete. The V1.1 plan does not authorize guide activation, implementation mapping, implementation, deployment, pilot use, production use, first-user enrollment, or runtime evidence by plan approval alone.
 
 ## Boundary
 

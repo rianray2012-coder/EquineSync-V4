@@ -1,0 +1,40 @@
+{
+  "approval_date": "2026-07-28",
+  "approval_effect_after_custody": "FOUNDER_APPROVED_CONTROLLING_DOCUMENTARY_PROGRAM_PLAN",
+  "approved_source": {
+    "attached_filename": "ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1_REVISED.md",
+    "byte_length": 54852,
+    "canonical_filename": "ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1.md",
+    "canonical_path": "governance/implementation/code-guides/program-plan/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1/ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1.md",
+    "internal_pre_approval_fields_preserved": true,
+    "program_id_present": true,
+    "sha256": "9aa8cb29848ccf5b75a65320616a1196060589372bb0de09266fd32f3a9efd35"
+  },
+  "authority_classification": "DOCUMENTARY_PROGRAM_PLAN_ACCESSION_CUSTODY_AND_RECONCILIATION_ONLY",
+  "directive_id": "CGP_006_CODE_GUIDE_PROGRAM_PLAN_V1_1_PROTECTED_ACCESSION_CUSTODY_AND_PR_44_RECONCILIATION_DIRECTIVE_V1_0_0",
+  "founder_disposition": "APPROVED_AS_CONTROLLING_DOCUMENTARY_PROGRAM_PLAN_PENDING_PROTECTED_REPOSITORY_ACCESSION_AND_CUSTODY",
+  "historical_v1_0_treatment": "HISTORICAL_SOURCE_NOT_LOCATED_IN_CANONICAL_REPOSITORY",
+  "manifest_id": "ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1-SOURCE-FREEZE-MANIFEST",
+  "non_authorization_boundaries": [
+    "IMPLEMENTATION_MAPPING_NOT_AUTHORIZED_BY_PLAN_APPROVAL_ALONE",
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "GUIDE_ACTIVATION_NOT_AUTHORIZED",
+    "DEPLOYMENT_NOT_AUTHORIZED",
+    "PILOT_AND_PRODUCTION_USE_NOT_AUTHORIZED",
+    "FIRST_USER_ENROLLMENT_NOT_AUTHORIZED"
+  ],
+  "pr_44_preservation_gate": {
+    "base": "integrate-emergent-final-zip",
+    "draft": true,
+    "head": "f94c26188e8d35c413b366135df12057b58c2d7d",
+    "modified_by_this_package": false,
+    "state": "OPEN"
+  },
+  "program_id": "ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1",
+  "repository_gate": {
+    "accession_branch": "codex/code-guide-program-plan-v1-1-accession-v1",
+    "protected_base_branch": "integrate-emergent-final-zip",
+    "repository": "rianray2012-coder/EquineSync-V4",
+    "verified_protected_head": "2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94"
+  }
+}
