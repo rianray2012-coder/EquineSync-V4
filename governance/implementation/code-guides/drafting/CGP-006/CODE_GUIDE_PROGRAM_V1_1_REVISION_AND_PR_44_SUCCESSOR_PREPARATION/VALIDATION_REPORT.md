@@ -14,4 +14,4 @@ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s governance/implementat
 git diff --check HEAD^ HEAD -- governance/implementation/code-guides
 ```
 
-Every mandatory validation must return `PASS` before the draft PR is opened.
+Every mandatory validation must return `PASS` after the Founder disposition is added and before PR #49 is marked ready, merged, or followed by separate custody.

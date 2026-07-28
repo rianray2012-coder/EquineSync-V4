@@ -2,9 +2,14 @@
   "base_head": "c2759173279a8c7a986f0a6e980419b88621df31",
   "files": [
     {
+      "path": "FOUNDER_DISPOSITION_OF_PR_49.md",
+      "sha256": "7457a8fd40b7a43a12add2cb63d8aee484cae98f2e0b163b97da61c91f180b94",
+      "size_bytes": 2501
+    },
+    {
       "path": "FOUNDER_REVIEW_SUMMARY.md",
-      "sha256": "6e7e015296ea4e3a2e86281cf91362ebb7e8ca0c3ba73e51ea4ef461d2ce2f38",
-      "size_bytes": 970
+      "sha256": "be63d9e8e295f80a800968d37678cf088e88cfa6b1caebd1b3dc6a054f8ac6a8",
+      "size_bytes": 934
     },
     {
       "path": "GAP_0004_STATUS_REPORT.md",
@@ -18,13 +23,13 @@
     },
     {
       "path": "PROPOSED_FOUNDER_DECISION_REGISTER.md",
-      "sha256": "afc272acdb7397478656a51180eed52db3cf439c6c151494cbc1463ccdac7319",
-      "size_bytes": 712
+      "sha256": "a18ea69c0b0b1ca5aceb35455cb141919540d6efe21973880c6b83537609dc8d",
+      "size_bytes": 882
     },
     {
       "path": "PR_44_SOURCE_AND_LINEAGE_REGISTER.md",
-      "sha256": "deedfb6bde3a5cfda9ba1fff08c8c67859fe8e86f3b30342bd7d49cb334cc904",
-      "size_bytes": 725
+      "sha256": "6d7ccd70dd00480c72bb597e2517c5f07215b4aacbec52108ec3687ad801cda6",
+      "size_bytes": 823
     },
     {
       "path": "PR_44_TO_V1_1_SUCCESSOR_CROSSWALK.csv",
@@ -33,8 +38,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "93936fbadfc59621afd46e97632c7aab100ffeecc4ccaab45df47fc05f6faac8",
-      "size_bytes": 1264
+      "sha256": "1855b8fe6db12aa370bdda53e022ad0c43f1f0485fdfc0611d3c8c55672913fb",
+      "size_bytes": 1377
     },
     {
       "path": "REPRESENTATIVE_SCENARIO_CLASSIFICATION.md",
@@ -43,13 +48,13 @@
     },
     {
       "path": "SOURCE_REGISTER.md",
-      "sha256": "ee196d3f6fffc0967831d10cce12917f9c0c6a9a3cd9407c5b11d92d82e699d1",
-      "size_bytes": 827
+      "sha256": "8cc863f6d919ce6fa81faeac7cf930b6a47bb1ddb0a9fee7958b0ba83db20111",
+      "size_bytes": 968
     },
     {
       "path": "SUCCESSOR_REVIEW_DISPOSITION.md",
-      "sha256": "ca9b11b768a6a22f43b2fa251b193a18391df6a7ce28fc4aa57a041a6c0e50c2",
-      "size_bytes": 976
+      "sha256": "a9b7595373e498772518949bc52c12a0160bb543413ab1ce28a1f5809f1443e4",
+      "size_bytes": 940
     },
     {
       "path": "VALIDATOR_RELIABILITY_REPORT.md",
@@ -73,8 +78,8 @@
     },
     {
       "path": "WAVE_1_CONDITION_REGISTER.csv",
-      "sha256": "20666eaede3bb1c5c56ecf098c3c003c1063036c3a2c204c648009cbe58f2db4",
-      "size_bytes": 336
+      "sha256": "6e8d70e0cf92e8798e9abaf8ce89306de92ef85a314903e846d10e91932c4d4f",
+      "size_bytes": 405
     },
     {
       "path": "WAVE_1_EVIDENCE_GRADE_REGISTER.csv",
@@ -93,8 +98,8 @@
     },
     {
       "path": "WAVE_1_PREREQUISITE_REGISTER.csv",
-      "sha256": "72d11cef5d987328d29ebb26bb1e9c3313ee1c9e9530530a75d3dc7a158c82c3",
-      "size_bytes": 488
+      "sha256": "60aeb14684a322c91480508fb2cd3f69bf6575cc7f4470be787364a3bbcc9659",
+      "size_bytes": 603
     },
     {
       "path": "WAVE_1_WARNING_REGISTER.csv",
@@ -108,11 +113,11 @@
     },
     {
       "path": "validators/validate_wave1_successor_package.py",
-      "sha256": "9fac0f1837c75a1fe49ab94b0b95e73d561a316032736e2ccda63ec514576efa",
-      "size_bytes": 4195
+      "sha256": "4541d2f5a8fa8382f4f6cb385a2361e416a704bcd9a542bc4c8c43b2711f8e2c",
+      "size_bytes": 4172
     }
   ],
-  "generated_utc": "2026-07-28T15:53:44Z",
+  "generated_utc": "2026-07-28T16:36:19Z",
   "package": "WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING_V1_1_SUCCESSOR",
   "repository": "rianray2012-coder/EquineSync-V4"
 }

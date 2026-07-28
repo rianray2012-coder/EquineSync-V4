@@ -7,11 +7,13 @@
 **Work branch:** `codex/cgp-006-v1-1-program-revision-pr44-successor-v1`
 **Branch created:** `2026-07-28T15:47:26Z`
 **Generated:** `2026-07-28T15:53:44Z`
-**Package status:** `PROGRAM_REVISION_CANDIDATE_NOT_YET_ADOPTED`
+**Package status:** `PROGRAM_REVISION_APPROVED_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
 
 ## Purpose
 
 This package revises Code Guide Program machinery for V1.1 and prepares the V1.1-conforming successor to PR #44 without advancing guide status, activating guides, authorizing repository-specific implementation mapping, or changing application code.
+
+Founder disposition of PR #49 is recorded in `FOUNDER_DISPOSITION_OF_PR_49.md`. The disposition approves this package for protected documentary integration only, subject to validation, protected merger, and separate post-merge custody.
 
 ## Results
 
@@ -29,11 +31,9 @@ This package revises Code Guide Program machinery for V1.1 and prepares the V1.1
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
 
-`PROGRAM_REVISION_CANDIDATE_NOT_YET_ADOPTED`
+`PROGRAM_REVISION_APPROVED_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
 
-`PR_44_REMAINS_OPEN_DRAFT_UNMERGED_AND_UNCHANGED`
-
-`PR_44_SUCCESSOR_DRAFT_PREPARED_UNDER_V1_1`
+`PR_44_REMAINS_OPEN_DRAFT_UNMERGED_UNTIL_SUCCESSOR_CUSTODY_COMPLETE`
 
 `GUIDE_ACTIVATION_NOT_AUTHORIZED`
 
@@ -53,10 +53,6 @@ This package revises Code Guide Program machinery for V1.1 and prepares the V1.1
 
 `ACTIVATION_BLOCKERS_REMAIN_OPEN`
 
-`PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED`
-
 `NO_ADOPTED_GUIDE_BYTES_CHANGED`
 
 `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
-
-`SUCCESSOR_PR_OPEN_DRAFT_UNMERGED`

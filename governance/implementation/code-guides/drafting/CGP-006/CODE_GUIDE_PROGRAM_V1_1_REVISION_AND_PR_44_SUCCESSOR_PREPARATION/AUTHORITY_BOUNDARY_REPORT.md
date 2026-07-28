@@ -2,11 +2,9 @@
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
 
-`PROGRAM_REVISION_CANDIDATE_NOT_YET_ADOPTED`
+`PROGRAM_REVISION_APPROVED_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
 
-`PR_44_REMAINS_OPEN_DRAFT_UNMERGED_AND_UNCHANGED`
-
-`PR_44_SUCCESSOR_DRAFT_PREPARED_UNDER_V1_1`
+`PR_44_REMAINS_OPEN_DRAFT_UNMERGED_UNTIL_SUCCESSOR_CUSTODY_COMPLETE`
 
 `GUIDE_ACTIVATION_NOT_AUTHORIZED`
 
@@ -26,12 +24,10 @@
 
 `ACTIVATION_BLOCKERS_REMAIN_OPEN`
 
-`PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED`
-
 `NO_ADOPTED_GUIDE_BYTES_CHANGED`
 
 `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
 
-`SUCCESSOR_PR_OPEN_DRAFT_UNMERGED`
+Protected integration and post-merge custody are authorized for PR #49 only; no downstream activation, mapping, implementation, deployment, pilot, production, runtime, or CGP-007 authority is created.
 
 No draft package, validator result, successor determination, repository presence, recommendation, inference, or silence creates implied authority for a prohibited next-stage action.

@@ -44,6 +44,18 @@ V1.1 approval and accession do not change guide maturity, adoption, accession, o
 
 PR #47 approval is documentary reconciliation and successor-workstream decision support only. It does not accept the existing Code Guide Program as fully V1.1-conforming. The V1.1 revision workstream shall begin only from the verified post-custody protected head.
 
+## Program Revision V1.1 And PR #44 Successor Integration Status
+
+- Program revision package: `governance/implementation/code-guides/drafting/CGP-006/CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION/`
+- PR #44 successor package: `governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING_V1_1_SUCCESSOR/`
+- Founder disposition path: `governance/implementation/code-guides/drafting/CGP-006/CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION/FOUNDER_DISPOSITION_OF_PR_49.md`
+- PR #49 reviewed head: `0df2437966a1017e2d60e3af04a6a57e28a934ea`
+- PR #49 disposition: `APPROVED_FOR_PROTECTED_DOCUMENTARY_INTEGRATION_WITH_CONDITIONS`
+- Integration status before merge: `PROGRAM_REVISION_APPROVED_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
+- PR #44 treatment before successor custody: `PR_44_REMAINS_OPEN_DRAFT_UNMERGED_UNTIL_SUCCESSOR_CUSTODY_COMPLETE`
+
+This approval does not activate a guide, authorize repository-specific implementation mapping, authorize implementation, close retained warnings or `GAP-0004`, authorize deployment, or authorize pilot or production use. The revised controlled values, schemas, registers, generic implementation profiles, templates, and validators may become canonical only after PR #49 merges and separate custody is complete.
+
 Continuing statements:
 
 `GUIDE_ACTIVATION_NOT_AUTHORIZED`

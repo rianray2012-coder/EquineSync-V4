@@ -4,4 +4,6 @@ PR #44 is preserved as an unchanged historical draft at `f94c26188e8d35c413b3661
 
 Historical PR #44 package files inventoried: `25`.
 
-Required treatment: `PR_44_HISTORICAL_DRAFT_PRESERVED_PENDING_SEPARATE_SUPERSESSION_CLOSURE`.
+Required treatment: `PR_44_HISTORICAL_DRAFT_PRESERVED_PENDING_SUCCESSOR_CUSTODY_COMPLETE`.
+
+PR #44 may be closed as `SUPERSEDED_BY_V1_1_CONFORMING_SUCCESSOR` only after PR #49 protected merger, separate PR #49 custody receipt merger, final protected-head verification, and lineage confirmation.

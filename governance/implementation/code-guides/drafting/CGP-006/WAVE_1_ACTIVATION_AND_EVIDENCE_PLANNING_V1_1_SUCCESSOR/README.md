@@ -3,20 +3,18 @@
 **Historical PR:** `#44`
 **Historical PR head:** `f94c26188e8d35c413b366135df12057b58c2d7d`
 **Protected V1.1 baseline:** `c2759173279a8c7a986f0a6e980419b88621df31`
-**Successor status:** `OPEN_DRAFT_UNMERGED_CANDIDATE_AFTER_PR_CREATION`
+**Successor status:** `APPROVED_FOR_PROTECTED_DOCUMENTARY_INTEGRATION_WITH_CONDITIONS`
 **Successor determination:** `CGP_006_WAVE_1_V1_1_SUCCESSOR_READY_FOR_FOUNDER_REVIEW_WITH_CONDITIONS`
 
-This package supersedes PR #44 only as a draft successor candidate. PR #44 remains open, draft, unmerged, and unchanged until separate Founder disposition authorizes closure.
+Founder disposition of PR #49 is recorded in `FOUNDER_DISPOSITION_OF_PR_49.md`. This package is approved for protected documentary integration as the V1.1 successor package to PR #44, subject to protected merger and separate post-merge custody. PR #44 remains open, draft, unmerged, and unchanged until successor custody is complete and lineage is verified.
 
 ## Closing Statements
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
 
-`PROGRAM_REVISION_CANDIDATE_NOT_YET_ADOPTED`
+`PROGRAM_REVISION_APPROVED_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
 
-`PR_44_REMAINS_OPEN_DRAFT_UNMERGED_AND_UNCHANGED`
-
-`PR_44_SUCCESSOR_DRAFT_PREPARED_UNDER_V1_1`
+`PR_44_REMAINS_OPEN_DRAFT_UNMERGED_UNTIL_SUCCESSOR_CUSTODY_COMPLETE`
 
 `GUIDE_ACTIVATION_NOT_AUTHORIZED`
 
@@ -36,10 +34,6 @@ This package supersedes PR #44 only as a draft successor candidate. PR #44 remai
 
 `ACTIVATION_BLOCKERS_REMAIN_OPEN`
 
-`PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED`
-
 `NO_ADOPTED_GUIDE_BYTES_CHANGED`
 
 `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
-
-`SUCCESSOR_PR_OPEN_DRAFT_UNMERGED`

@@ -8,17 +8,15 @@ Successor determination:
 
 `CGP_006_WAVE_1_V1_1_SUCCESSOR_READY_FOR_FOUNDER_REVIEW_WITH_CONDITIONS`
 
-The work is ready for Founder review as a draft candidate only. It is not adopted, active, implemented, deployed, or runtime-authorized.
+Founder disposition of PR #49 approves the work for protected documentary integration, subject to successful validation, protected merger, and separate post-merge custody. It is not active, implemented, deployed, or runtime-authorized.
 
 ## Closing Statements
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
 
-`PROGRAM_REVISION_CANDIDATE_NOT_YET_ADOPTED`
+`PROGRAM_REVISION_APPROVED_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
 
-`PR_44_REMAINS_OPEN_DRAFT_UNMERGED_AND_UNCHANGED`
-
-`PR_44_SUCCESSOR_DRAFT_PREPARED_UNDER_V1_1`
+`PR_44_REMAINS_OPEN_DRAFT_UNMERGED_UNTIL_SUCCESSOR_CUSTODY_COMPLETE`
 
 `GUIDE_ACTIVATION_NOT_AUTHORIZED`
 
@@ -38,10 +36,6 @@ The work is ready for Founder review as a draft candidate only. It is not adopte
 
 `ACTIVATION_BLOCKERS_REMAIN_OPEN`
 
-`PROPOSED_FOUNDER_DECISIONS_REMAIN_UNAPPROVED`
-
 `NO_ADOPTED_GUIDE_BYTES_CHANGED`
 
 `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
-
-`SUCCESSOR_PR_OPEN_DRAFT_UNMERGED`

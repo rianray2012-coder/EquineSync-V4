@@ -12,6 +12,6 @@
 | Branch point | `c2759173279a8c7a986f0a6e980419b88621df31` |
 | Branch creation time | `2026-07-28T15:47:26Z` |
 | PR #44 preserved head | `f94c26188e8d35c413b366135df12057b58c2d7d` |
-| PR #44 treatment | `PR_44_HISTORICAL_DRAFT_PRESERVED_PENDING_SEPARATE_SUPERSESSION_CLOSURE` |
+| PR #44 treatment | `PR_44_HISTORICAL_DRAFT_PRESERVED_PENDING_SUCCESSOR_CUSTODY_COMPLETE` |
 
 Preflight verified required source, custody receipts, PR #44 preservation, clean worktree/index, no operation-in-progress state, and absence of existing successor paths before branch creation.
