@@ -50,9 +50,13 @@ PR #47 approval is documentary reconciliation and successor-workstream decision 
 - PR #44 successor package: `governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING_V1_1_SUCCESSOR/`
 - Founder disposition path: `governance/implementation/code-guides/drafting/CGP-006/CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION/FOUNDER_DISPOSITION_OF_PR_49.md`
 - PR #49 reviewed head: `0df2437966a1017e2d60e3af04a6a57e28a934ea`
+- PR #49 final integration head: `5d73078c9a2b28022a934761bb00b1a0d34addcf`
+- PR #49 merge commit: `3e91dba89b940a4cb99ac867df1b9fb4d6854a47`
 - PR #49 disposition: `APPROVED_FOR_PROTECTED_DOCUMENTARY_INTEGRATION_WITH_CONDITIONS`
-- Integration status before merge: `PROGRAM_REVISION_APPROVED_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
-- PR #44 treatment before successor custody: `PR_44_REMAINS_OPEN_DRAFT_UNMERGED_UNTIL_SUCCESSOR_CUSTODY_COMPLETE`
+- Integration status after PR #49 merge: `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_MERGED_PENDING_CUSTODY`
+- Post-merge custody receipt: `governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_CUSTODY_RECEIPT.md`
+- Custody status after receipt merge: `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
+- PR #44 treatment until successor custody completion: `PR_44_REMAINS_OPEN_DRAFT_UNMERGED_UNTIL_SUCCESSOR_CUSTODY_COMPLETE`
 
 This approval does not activate a guide, authorize repository-specific implementation mapping, authorize implementation, close retained warnings or `GAP-0004`, authorize deployment, or authorize pilot or production use. The revised controlled values, schemas, registers, generic implementation profiles, templates, and validators may become canonical only after PR #49 merges and separate custody is complete.
 
