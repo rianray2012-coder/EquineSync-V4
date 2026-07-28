@@ -1,0 +1,22 @@
+v1_1_state,current_controlled_value_status,transition_enforcement_status,required_action
+PLANNED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+CHARTERED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+SOURCE_FROZEN,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+CURRENT_STATE_ASSESSED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+DRAFTING,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+INTERNAL_REVIEW,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+TECHNICAL_REVIEW,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+DOMAIN_REVIEW,MISSING_FROM_CONTROLLED_VALUES,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+CROSS_GUIDE_REVIEW,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+ADVERSARIAL_REVIEW,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+IMPLEMENTER_USABILITY_REVIEW,MISSING_FROM_CONTROLLED_VALUES,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+SCENARIO_VALIDATED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+ASSURANCE_REVIEW,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+ADOPTION_CANDIDATE,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+ADOPTED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+REPOSITORY_ACCESSIONED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+ACTIVE,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+REVISION_PENDING,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+BLOCKED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+SUPERSEDED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.
+RETIRED,PRESENT,REQUIRES_V1_1_VALIDATION,Add or verify controlled value and transition enforcement before relying on this state.

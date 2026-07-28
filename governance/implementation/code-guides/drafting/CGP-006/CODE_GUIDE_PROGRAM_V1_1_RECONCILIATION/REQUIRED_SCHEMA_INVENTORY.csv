@@ -1,0 +1,14 @@
+artifact_type,required_artifact,repository_status,current_location,v1_1_reconciliation_status,required_action
+schema,CODE_GUIDE_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/CODE_GUIDE_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,CODE_GUIDE_CONTROLLED_VALUES.json,PRESENT,governance/implementation/code-guides/schemas/CODE_GUIDE_CONTROLLED_VALUES.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,CONTROL_DEFINITION_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/CONTROL_DEFINITION_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,INVARIANT_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/INVARIANT_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,QUESTION_RESPONSE_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/QUESTION_RESPONSE_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,GUIDE_DEPENDENCY_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/GUIDE_DEPENDENCY_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,ATLAS_TRACEABILITY_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/ATLAS_TRACEABILITY_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,REPOSITORY_MAPPING_SCHEMA.json,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+schema,IMPLEMENTATION_PROFILE_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/IMPLEMENTATION_PROFILE_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,IMPLEMENTATION_EVIDENCE_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/IMPLEMENTATION_EVIDENCE_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,EXCEPTION_RECORD_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/EXCEPTION_RECORD_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,REVIEW_FINDING_SCHEMA.json,PRESENT,governance/implementation/code-guides/schemas/REVIEW_FINDING_SCHEMA.json,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+schema,GUIDE_ACTIVATION_SCHEMA.json,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.

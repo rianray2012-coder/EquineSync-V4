@@ -1,0 +1,20 @@
+artifact_type,required_artifact,repository_status,current_location,v1_1_reconciliation_status,required_action
+template,CODE_GUIDE_DRAFT_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/CODE_GUIDE_DRAFT_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,GUIDE_DRAFTING_CHARTER_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/GUIDE_DRAFTING_CHARTER_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,CONTROL_DEFINITION_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/CONTROL_DEFINITION_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,INVARIANT_DEFINITION_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/INVARIANT_DEFINITION_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,IMPLEMENTATION_PLAN_TEMPLATE.md,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+template,ATLAS_MAPPING_TEMPLATE.csv,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+template,REPOSITORY_IMPACT_MAP_TEMPLATE.csv,PRESENT,governance/implementation/code-guides/templates/REPOSITORY_IMPACT_MAP_TEMPLATE.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,CONTROL_VERIFICATION_TEMPLATE.csv,PRESENT,governance/implementation/code-guides/templates/CONTROL_VERIFICATION_TEMPLATE.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,PULL_REQUEST_EVIDENCE_TEMPLATE.md,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+template,TASK_COMPLETION_RECORD_TEMPLATE.md,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+template,EXCEPTION_REQUEST_TEMPLATE.md,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+template,DECISION_REQUEST_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/DECISION_REQUEST_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,BLOCKED_RECEIPT_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/BLOCKED_RECEIPT_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,REVIEW_REPORT_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/REVIEW_REPORT_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,ADOPTION_DISPOSITION_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/ADOPTION_DISPOSITION_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,GUIDE_ACTIVATION_RECORD_TEMPLATE.md,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+template,GUIDE_DEACTIVATION_RECORD_TEMPLATE.md,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+template,REPOSITORY_ACCESSION_RECEIPT_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/REPOSITORY_ACCESSION_RECEIPT_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+template,CHANGE_IMPACT_REPORT_TEMPLATE.md,PRESENT,governance/implementation/code-guides/templates/CHANGE_IMPACT_REPORT_TEMPLATE.md,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.

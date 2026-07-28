@@ -1,0 +1,20 @@
+artifact_type,required_artifact,repository_status,current_location,v1_1_reconciliation_status,required_action
+register,CODE_GUIDE_CONTROL_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/CODE_GUIDE_CONTROL_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,CODE_GUIDE_INVARIANT_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/CODE_GUIDE_INVARIANT_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,CODE_GUIDE_QUESTION_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/CODE_GUIDE_QUESTION_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,CODE_GUIDE_DEPENDENCY_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/CODE_GUIDE_DEPENDENCY_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,CODE_GUIDE_VERSION_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/CODE_GUIDE_VERSION_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,CODE_GUIDE_AUTHORITY_REGISTER.csv,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+register,GUIDE_ACTIVATION_REGISTER.csv,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+register,GUIDE_WAIVER_AND_EXCEPTION_REGISTER.csv,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+register,IMPLEMENTATION_PROFILE_REGISTER.csv,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+register,ATLAS_TO_CODE_TRACEABILITY_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/ATLAS_TO_CODE_TRACEABILITY_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,CONTROL_TO_VERIFICATION_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/CONTROL_TO_VERIFICATION_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,CONTROL_TO_REPOSITORY_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/CONTROL_TO_REPOSITORY_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,GUIDE_REVIEW_FINDING_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/GUIDE_REVIEW_FINDING_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,OPEN_DECISION_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/OPEN_DECISION_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,IMPLEMENTATION_EXCEPTION_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/IMPLEMENTATION_EXCEPTION_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,IMPLEMENTATION_EVIDENCE_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/IMPLEMENTATION_EVIDENCE_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
+register,EVIDENCE_RETENTION_REGISTER.csv,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+register,VALIDATOR_VERSION_REGISTER.csv,MISSING,,MISSING_REQUIRED_ARTIFACT,Create in a separate authorized V1.1 revision workstream.
+register,GUIDE_SUPERSESSION_REGISTER.csv,PRESENT,governance/implementation/code-guides/registers/GUIDE_SUPERSESSION_REGISTER.csv,PARTIAL_REVALIDATION_REQUIRED,Retain and revalidate under V1.1 before using for adoption or activation.
