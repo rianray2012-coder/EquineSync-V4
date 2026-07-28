@@ -4,8 +4,8 @@
 **Disposition:** `CGP_006_WAVE_1_READY_FOR_FOUNDER_ACTIVATION_CONSIDERATION_WITH_CONDITIONS`
 **Recommended activation model:** `STAGED_ROLE_LIMITED_PORTFOLIO_ACTIVATION_FOR_GOVERNANCE_AND_EVIDENCE_PLANNING`
 **Package version:** `0.1.0-activation-readiness-planning.1`
-**Draft PR:** `PENDING_DRAFT_PR_CREATION`
-**Draft PR status:** `PR_NOT_OPEN_LOCAL_VALIDATION_PHASE`
+**Draft PR:** `44`
+**Draft PR status:** `DRAFT_PR_OPEN_UNMERGED`
 
 ## Guide-Level Determinations
 

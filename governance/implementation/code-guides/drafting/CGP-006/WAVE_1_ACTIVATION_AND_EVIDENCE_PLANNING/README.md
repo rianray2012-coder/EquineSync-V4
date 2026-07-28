@@ -10,8 +10,8 @@
 **Verified protected head:** `2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94`
 **Review branch:** `codex/cgp-006-wave-1-activation-evidence-planning-v1`
 **Package status:** `DOCUMENTARY_ACTIVATION_READINESS_ASSESSMENT_AND_EVIDENCE_PLANNING_ONLY`
-**Draft PR:** `PENDING_DRAFT_PR_CREATION`
-**Draft PR status:** `PR_NOT_OPEN_LOCAL_VALIDATION_PHASE`
+**Draft PR:** `44`
+**Draft PR status:** `DRAFT_PR_OPEN_UNMERGED`
 
 ## Purpose
 

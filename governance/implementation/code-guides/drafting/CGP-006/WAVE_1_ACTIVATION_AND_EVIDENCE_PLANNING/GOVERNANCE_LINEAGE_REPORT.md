@@ -35,7 +35,7 @@ All warnings remain `RETAIN_OPEN_NON_BLOCKING` with `POST_ADOPTION_COVENANT_REQU
 
 **Branch point:** `2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94`
 
-**Head at package generation:** `2125bd9d16f6bf78853ac3a2e8b7b609b7ac2e94`
+**Head at package generation:** `3baf4d512e75054758fefa21f6c0b310e1178be8`
 
 ## Closing Statements
 

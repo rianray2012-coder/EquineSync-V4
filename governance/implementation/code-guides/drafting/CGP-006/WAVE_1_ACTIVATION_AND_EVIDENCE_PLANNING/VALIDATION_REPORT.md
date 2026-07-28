@@ -2,7 +2,7 @@
 # CGP-006 Wave 1 Validation Report
 
 **Validation result:** `PASS`
-**Generated at:** `2026-07-28T06:01:43Z`
+**Generated at:** `2026-07-28T06:02:54Z`
 **Python version:** `Python 3.14.6`
 **Git version:** `git version 2.50.1 (Apple Git-155)`
 **GitHub CLI version:** `gh version 2.96.0 (2026-07-02)`
@@ -27,7 +27,7 @@
 | python3 governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/tests/test_activation_readiness_package.py | PASS |
 | shasum -a 256 -c governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/CHECKSUM_MANIFEST.sha256 | PASS |
 | git diff --check | PASS |
-| python3 governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/validators/validate_activation_readiness_package.py --require-draft-pr | PENDING_DRAFT_PR_CREATION |
+| python3 governance/implementation/code-guides/drafting/CGP-006/WAVE_1_ACTIVATION_AND_EVIDENCE_PLANNING/validators/validate_activation_readiness_package.py --require-draft-pr | PASS |
 
 ## Validator Coverage
 
