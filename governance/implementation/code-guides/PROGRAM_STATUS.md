@@ -10,7 +10,7 @@
 **Guide activation state:** `NOT_ACTIVE`
 **Implementation authority:** `NOT_GRANTED`
 **CGP-007 status:** `NOT_ISSUED`
-**Next prompt:** `CGP_006_WAVE_1_ADOPTION_READINESS_REVIEW_READY_TO_BEGIN_IN_SEPARATE_WORKSTREAM`; separate Founder/Codex directive is still required to begin that workstream, activation planning, implementation mapping, additional warning/gap disposition, or CGP-007 work.
+**Next prompt:** `CGP_006_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION_DIRECTIVE`; the V1.1 revision workstream may begin only from the verified post-custody protected head. Repository-specific implementation mapping, guide activation, implementation, deployment, pilot or production use, runtime evidence, and CGP-007 remain unauthorized.
 
 ## Program Plan V1.1 Accession Status
 
@@ -26,7 +26,45 @@
 - Post-merge custody receipt: `governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_PLAN_V1_1_REPOSITORY_CUSTODY_RECEIPT.md`
 - Custody status after receipt merge: `CODE_GUIDE_PROGRAM_PLAN_V1_1_PROTECTEDLY_ACCESSIONED_AND_CUSTODY_COMPLETE`
 
-V1.1 approval and accession do not change guide maturity, adoption, accession, or activation states. PR `#44` remains open, draft, unmerged, and unmodified. `CGP005-TA-APP-GAP-0004`, retained CGP-006 warnings, activation blockers, and proposed Founder decisions remain open.
+V1.1 approval and accession do not change guide maturity, adoption, accession, or activation states. PR `#44` remains open, draft, unmerged, and unmodified. `CGP005-TA-APP-GAP-0004`, retained CGP-006 warnings, and activation blockers remain open. PR #44 proposed activation decisions are not approved through PR #47 and are to be superseded only by a V1.1-conforming successor.
+
+
+## Program Plan V1.1 Reconciliation Status
+
+- Reconciliation package: `governance/implementation/code-guides/drafting/CGP-006/CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION/`
+- Founder disposition path: `governance/implementation/code-guides/drafting/CGP-006/CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION/FOUNDER_DISPOSITION_OF_RECONCILIATION.md`
+- Reconciliation PR: `#47`
+- Final reconciliation PR head: `cfa8e52f7e879703aada8adb82f0d8d9202a7728`
+- Reconciliation merge commit: `d17ead5c6b94bd9e2d1d65fb76608e397fb3cb01`
+- Reconciliation status after PR #47 merge: `CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_PROTECTEDLY_MERGED_PENDING_CUSTODY`
+- Post-merge custody receipt: `governance/implementation/code-guides/receipts/ES_CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_CUSTODY_RECEIPT.md`
+- Custody status after receipt merge: `CODE_GUIDE_PROGRAM_V1_1_RECONCILIATION_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
+- PR #44 treatment: `PR_44_TO_BE_SUPERSEDED_BY_V1_1_CONFORMING_SUCCESSOR`
+- Next directive: `CGP_006_CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PREPARATION_DIRECTIVE`
+
+PR #47 approval is documentary reconciliation and successor-workstream decision support only. It does not accept the existing Code Guide Program as fully V1.1-conforming. The V1.1 revision workstream shall begin only from the verified post-custody protected head.
+
+Continuing statements:
+
+`GUIDE_ACTIVATION_NOT_AUTHORIZED`
+
+`IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+
+`IMPLEMENTATION_NOT_AUTHORIZED`
+
+`DEPLOYMENT_NOT_AUTHORIZED`
+
+`PILOT_AND_PRODUCTION_USE_NOT_AUTHORIZED`
+
+`GAP_0004_REMAINS_OPEN`
+
+`RETAINED_WARNINGS_REMAIN_OPEN`
+
+`ACTIVATION_BLOCKERS_REMAIN_OPEN`
+
+`NO_ADOPTED_GUIDE_BYTES_CHANGED`
+
+`NO_RUNTIME_IMPLEMENTATION_OCCURRED`
 
 ## Baseline
 
