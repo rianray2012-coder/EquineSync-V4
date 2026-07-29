@@ -4,9 +4,9 @@
   "directive_id": "CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_DIRECTIVE_V1_0_0",
   "files": [
     {
-      "bytes": 8741326,
+      "bytes": 8743804,
       "path": "ADOPTION_ASSERTION_INVENTORY.csv",
-      "sha256": "e5bfcf8699431a63f5eb8bee814c7d0436738fbfd0272c70d190af0d32369e57"
+      "sha256": "30c517ae58b79396a84794526f71f4dfe043a77716d16dd50bba004b657efaed"
     },
     {
       "bytes": 689,
@@ -84,9 +84,9 @@
       "sha256": "c7f137b28b045616a96244fd136d5b723b992052aa94c2fa8c4bb1778200a0b8"
     },
     {
-      "bytes": 17822,
+      "bytes": 17968,
       "path": "validators/validate_adoption_authority_reconciliation.py",
-      "sha256": "39ad170fd082ba2514ee7924fdbc4d27557f5983fa2c46c87a07bee36cbc7b78"
+      "sha256": "45c17f4929143ad1fe223cd3d5c1d0d16c7e948c4ed3b7abc294a10ab2b7bc24"
     }
   ],
   "package": "CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION",

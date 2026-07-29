@@ -283,6 +283,8 @@ def classify(rel: str, line: str) -> str:
         return "HISTORICAL_PR_EVIDENCE_PRESERVE"
     if "CODE_GUIDE_PROGRAM_V1_1_POST_CUSTODY_CLOSEOUT_AND_STATUS_RECONCILIATION/STALE_STATUS_ASSERTION_INVENTORY.csv" in rel:
         return "HISTORICAL_PR_EVIDENCE_PRESERVE"
+    if rel.endswith("CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_CUSTODY_RECEIPT.md"):
+        return "CURRENT_V1_1_STATUS_CONTROLLING"
     if "/receipts/" in rel:
         return "HISTORICAL_CUSTODY_RECORD_PRESERVE"
     if "/program-plan/" in rel:
