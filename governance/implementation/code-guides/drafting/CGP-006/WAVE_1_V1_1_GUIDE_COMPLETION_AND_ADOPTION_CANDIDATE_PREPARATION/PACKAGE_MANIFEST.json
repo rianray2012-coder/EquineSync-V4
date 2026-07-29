@@ -630,8 +630,8 @@
     },
     {
       "path": "validators/validate_guide_completion_adoption_candidate.py",
-      "sha256": "d65e6b2af9dae0227f6483a97c4a7a865cc342240e446550f901f0e97b31976b",
-      "size_bytes": 35760
+      "sha256": "bdaeec6ff9c193a5932e7e65040441ffcc541022a3146305bf356d7a6cfb0998",
+      "size_bytes": 35880
     }
   ],
   "guide_stage_21_result": "ADOPTION_CANDIDATE_COMPLETE_WITH_CONDITIONS",

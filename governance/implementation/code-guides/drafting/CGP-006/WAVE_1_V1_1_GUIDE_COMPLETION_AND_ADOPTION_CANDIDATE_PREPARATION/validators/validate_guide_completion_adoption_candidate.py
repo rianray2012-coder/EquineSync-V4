@@ -603,6 +603,7 @@ def assert_changed_paths_authorized(paths: list[str]) -> None:
         (ROOT_REL / "registers/CODE_GUIDE_VERSION_REGISTER.csv").as_posix(),
         (ROOT_REL / "registers/CODE_GUIDE_PROGRAM_TRACKER.csv").as_posix(),
         (ROOT_REL / "registers/GUIDE_ACTIVATION_REGISTER.csv").as_posix(),
+        (ROOT_REL / "receipts/CGP_006_WAVE_1_V1_1_STAGE_22_ADOPTION_STAGE_23_ACCESSION_CUSTODY_RECEIPT.md").as_posix(),
     }
     outside = [
         path
