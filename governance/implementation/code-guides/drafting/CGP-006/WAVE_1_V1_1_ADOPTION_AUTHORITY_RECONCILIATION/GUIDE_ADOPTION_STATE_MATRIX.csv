@@ -1,0 +1,5 @@
+guide_id,guide_title,historical_pre_v1_1_treatment,current_v1_1_adoption,activation,activation_effective_date,implementation_mapping,implementation,notes
+ES-CG-00,Code Guide Charter,Conditional adoption preserved historically,NOT_ADOPTED,NOT_ACTIVE,NONE,NOT_AUTHORIZED,NOT_AUTHORIZED,PR #42 historical conditional adoption does not satisfy V1.1 Stage 22.
+ES-CG-01,Engineering Authority and Precedence,Conditional adoption preserved historically,NOT_ADOPTED,NOT_ACTIVE,NONE,NOT_AUTHORIZED,NOT_AUTHORIZED,PR #42 historical conditional adoption does not satisfy V1.1 Stage 22.
+ES-CG-10,"Testing, Verification, and Assurance",Conditional adoption preserved historically,NOT_ADOPTED,NOT_ACTIVE,NONE,NOT_AUTHORIZED,NOT_AUTHORIZED,PR #42 historical conditional adoption does not satisfy V1.1 Stage 22.
+ES-CG-13,"Completion, Evidence, and Traceability",Conditional adoption preserved historically,NOT_ADOPTED,NOT_ACTIVE,NONE,NOT_AUTHORIZED,NOT_AUTHORIZED,PR #42 historical conditional adoption does not satisfy V1.1 Stage 22.
