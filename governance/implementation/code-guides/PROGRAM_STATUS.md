@@ -15,6 +15,68 @@
 **Historical PR #44 status:** `PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
 Repository-specific implementation mapping, guide activation, activation effective date, implementation, deployment, pilot or production use, runtime evidence, and CGP-007 remain unauthorized.
 
+## Wave 1 V1.1 Adoption Authority Reconciliation Status
+
+- Authority-reconciliation directive: `CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_DIRECTIVE_V1_0_0`
+- Founder authorization date: `2026-07-28`
+- Protected baseline for reconciliation: `513458bd9f0f6b321407720d35521b239cdedb85`
+- Historical fact: `WAVE_1_PRE_V1_1_CONDITIONAL_ADOPTION_RECORDED_AND_PROTECTEDLY_MERGED`
+- Historical PR #42 final head: `83d8e3af9afa50a55af4b679016c2568c6d3c61d`
+- Historical PR #42 merge commit: `db4984ee8781534c8ad8731f89c7a882013cb592`
+- Historical adoption record: `CGP006-W1-CAR-0001`
+- Current controlling state: `WAVE_1_V1_1_ADOPTION_STATE_NOT_ADOPTED`
+- Required next lifecycle treatment: `WAVE_1_V1_1_LIFECYCLE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION_REQUIRED`
+- Current authority status: `FOUNDER_APPROVED_ADOPTION_AUTHORITY_RECONCILIATION_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
+
+PR #42 remains preserved as historical pre-V1.1 documentary authority and is not void, erased, or retroactively invalidated. PR #42 conditional adoption is not carried forward as V1.1 Stage 22 adoption and may not be used as evidence that `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, or `ES-CG-13` completed the V1.1 lifecycle.
+
+| Guide | Historical pre-V1.1 treatment | Current V1.1 adoption | Activation |
+| --- | --- | --- | --- |
+| `ES-CG-00` | Conditional adoption preserved historically | `NOT_ADOPTED` | `NOT_ACTIVE` |
+| `ES-CG-01` | Conditional adoption preserved historically | `NOT_ADOPTED` | `NOT_ACTIVE` |
+| `ES-CG-10` | Conditional adoption preserved historically | `NOT_ADOPTED` | `NOT_ACTIVE` |
+| `ES-CG-13` | Conditional adoption preserved historically | `NOT_ADOPTED` | `NOT_ACTIVE` |
+
+Continuing adoption-authority reconciliation statements:
+
+`PROGRAM_PLAN_V1_1_CONTROLLING`
+
+`PR_42_HISTORICAL_CONDITIONAL_ADOPTION_PRESERVED`
+
+`PR_42_CONDITIONAL_ADOPTION_NOT_CARRIED_FORWARD_AS_V1_1_STAGE_22_ADOPTION`
+
+`CURRENT_WAVE_1_V1_1_ADOPTION_STATE_NOT_ADOPTED`
+
+`V1_1_LIFECYCLE_COMPLETION_REQUIRED_BEFORE_NEW_ADOPTION_DISPOSITION`
+
+`NO_RETROACTIVE_INVALIDATION_OF_PR_42`
+
+`GUIDE_ACTIVATION_NOT_AUTHORIZED`
+
+`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
+
+`REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+
+`IMPLEMENTATION_NOT_AUTHORIZED`
+
+`DEPLOYMENT_NOT_AUTHORIZED`
+
+`PILOT_AND_PRODUCTION_USE_NOT_AUTHORIZED`
+
+`GAP_0004_REMAINS_OPEN`
+
+`RETAINED_WARNINGS_REMAIN_OPEN`
+
+`ACTIVATION_BLOCKERS_REMAIN_OPEN`
+
+`NO_ADOPTED_OR_CANDIDATE_GUIDE_BYTES_CHANGED`
+
+`NO_V1_1_LIFECYCLE_STATE_ADVANCEMENT_OCCURRED`
+
+`NO_RUNTIME_IMPLEMENTATION_OCCURRED`
+
+`CGP_007_NOT_AUTHORIZED`
+
 ## Program Plan V1.1 Accession Status
 
 - Program plan: `ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1`
