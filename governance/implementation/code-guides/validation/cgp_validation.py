@@ -28,6 +28,16 @@ QUESTION_RE = re.compile(r"^ES-CG-(0[0-9]|1[0-3])-Q-\d{4}$")
 VERSION_RE = re.compile(r"^\d+\.\d+\.\d+(-[A-Za-z0-9_.-]+)?$")
 SOURCE_RE = re.compile(r"^CGSRC-[A-Z0-9]+-\d{4}$")
 WAVE_1_GUIDES = ("ES-CG-00", "ES-CG-01", "ES-CG-13", "ES-CG-10")
+WAVE_1_STAGE23_CUSTODY_COMPLETE_STATUS = "CGP_006_WAVE_1_V1_1_STAGE_22_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_CUSTODY_COMPLETE"
+WAVE_1_CURRENT_STATUS_TABLE_HEADING = "## Wave 1 V1.1 Stage 22 Adoption And Stage 23 Accession Status"
+WAVE_1_CURRENT_STATUS_EXPECTED = {
+    "Stage 22 adoption": "ADOPTED",
+    "Stage 23 accession": "REPOSITORY_ACCESSIONED",
+    "Custody": "CUSTODY_COMPLETE",
+    "Activation": "NOT_ACTIVE",
+    "Implementation mapping": "NOT_AUTHORIZED",
+    "Implementation": "NOT_AUTHORIZED",
+}
 CGP005_BASELINE_RE = re.compile(r"^[0-9a-f]{40}$")
 SOURCE_FREEZE_INCLUSION_CATEGORIES = {
     "CONTROLLING_FROZEN",
@@ -163,6 +173,47 @@ def split_paths(value: str) -> list[str]:
     if not value:
         return []
     return [part.strip() for part in value.split(";") if part.strip()]
+
+
+def strip_markdown_code(value: str) -> str:
+    stripped = value.strip()
+    if len(stripped) >= 2 and stripped.startswith("`") and stripped.endswith("`"):
+        return stripped[1:-1].strip()
+    return stripped
+
+
+def markdown_table_cells(line: str) -> list[str]:
+    stripped = line.strip()
+    if not stripped.startswith("|"):
+        return []
+    return [cell.strip() for cell in stripped.strip("|").split("|")]
+
+
+def markdown_table_after_heading(text: str, heading: str) -> tuple[list[str], list[tuple[int, list[str]]]]:
+    lines = text.splitlines()
+    for idx, line in enumerate(lines):
+        if line.strip() != heading:
+            continue
+        table_start = None
+        for candidate in range(idx + 1, len(lines)):
+            if not lines[candidate].strip():
+                continue
+            if lines[candidate].lstrip().startswith("## "):
+                return [], []
+            if markdown_table_cells(lines[candidate]):
+                table_start = candidate
+                break
+        if table_start is None:
+            return [], []
+        headers = [strip_markdown_code(cell) for cell in markdown_table_cells(lines[table_start])]
+        rows: list[tuple[int, list[str]]] = []
+        for row_idx in range(table_start + 2, len(lines)):
+            cells = markdown_table_cells(lines[row_idx])
+            if not cells:
+                break
+            rows.append((row_idx + 1, cells))
+        return headers, rows
+    return [], []
 
 
 def guide_ids(root: Path) -> set[str]:
@@ -805,8 +856,59 @@ def validate_portfolio_consistency(root: Path) -> ValidationResult:
     for key in ["A1_STANDARD", "E2_REPRODUCIBLE_LOCAL", "NOT_YET_APPLICABLE"]:
         if key not in control_value_md:
             result.add("inconsistent_controlled_values", f"CONTROLLED_VALUES.md missing `{key}`.", root / "CONTROLLED_VALUES.md")
+    validate_wave1_current_status_custody_table(root, result)
     result.summary["guide_rows_checked"] = len([r for r in tracker_rows if r.get("record_type") == "GUIDE"])
     return result.finalize()
+
+
+def validate_wave1_current_status_custody_table(root: Path, result: ValidationResult) -> None:
+    status_path = root / "PROGRAM_STATUS.md"
+    try:
+        status_text = status_path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        result.add("missing_current_program_status", "PROGRAM_STATUS.md is required for current portfolio status validation.", status_path)
+        return
+    if WAVE_1_STAGE23_CUSTODY_COMPLETE_STATUS not in status_text:
+        result.summary["wave1_current_status_table_checked"] = "not_applicable"
+        return
+    headers, rows = markdown_table_after_heading(status_text, WAVE_1_CURRENT_STATUS_TABLE_HEADING)
+    if not headers or not rows:
+        result.add("missing_wave1_current_status_table", "Current Wave 1 Stage 22/23 status table was not found.", status_path)
+        return
+    required_columns = ["Guide", *WAVE_1_CURRENT_STATUS_EXPECTED]
+    missing_columns = [column for column in required_columns if column not in headers]
+    if missing_columns:
+        result.add("malformed_wave1_current_status_table", f"Current Wave 1 status table is missing columns: {missing_columns}.", status_path)
+        return
+    column_indexes = {column: headers.index(column) for column in required_columns}
+    rows_by_guide: dict[str, tuple[int, list[str]]] = {}
+    for line_no, cells in rows:
+        if len(cells) < len(headers):
+            result.add("malformed_wave1_current_status_row", "Current Wave 1 status row has fewer cells than the header.", status_path, str(line_no))
+            continue
+        guide = strip_markdown_code(cells[column_indexes["Guide"]])
+        if guide in WAVE_1_GUIDES and guide in rows_by_guide:
+            result.add("duplicate_wave1_current_status_row", "Current Wave 1 status table has duplicate guide rows.", status_path, guide)
+        if guide in WAVE_1_GUIDES:
+            rows_by_guide[guide] = (line_no, cells)
+    for guide in WAVE_1_GUIDES:
+        row = rows_by_guide.get(guide)
+        if not row:
+            result.add("missing_wave1_current_status_row", "Current Wave 1 status table is missing a required guide row.", status_path, guide)
+            continue
+        line_no, cells = row
+        for column, expected in WAVE_1_CURRENT_STATUS_EXPECTED.items():
+            actual = strip_markdown_code(cells[column_indexes[column]])
+            if actual == expected:
+                continue
+            code = "wave1_current_status_custody_inconsistent" if column == "Custody" else "wave1_current_status_boundary_changed"
+            result.add(
+                code,
+                f"Current Wave 1 status table has `{actual}` for {guide} {column}; expected `{expected}`.",
+                status_path,
+                f"{guide}:line {line_no}",
+            )
+    result.summary["wave1_current_status_rows_checked"] = len(rows_by_guide)
 
 
 def validate_repository_component_register(root: Path, path: Path | None = None) -> ValidationResult:
