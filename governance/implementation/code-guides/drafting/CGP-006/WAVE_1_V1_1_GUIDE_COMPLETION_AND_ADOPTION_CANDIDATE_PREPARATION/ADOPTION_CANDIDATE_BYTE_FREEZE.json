@@ -1,0 +1,79 @@
+{
+  "byte_freeze_status": "REVIEWED_BYTES_UNCHANGED",
+  "created_at": "2026-07-29T06:03:57Z",
+  "directive_id": "CGP_006_WAVE_1_V1_1_STAGE_22_FOUNDER_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_DIRECTIVE_V1_0_0",
+  "guide_count": 4,
+  "guides": [
+    {
+      "assurance_class": "A3 HIGH",
+      "byte_length": 2986,
+      "git_blob_sha": "d5bbfee77332401084ba5d8f6db51d5fbbd32a07",
+      "guide_id": "ES-CG-00",
+      "guide_title": "Code Guide Charter",
+      "line_count": 46,
+      "reviewed_pr_head": "3faf705480175c23c5c780aa4e5d8ead811907d5",
+      "sha256": "2275ca1b9674b4e05390f134470a37e7ee63ca423705b6579b1bc8eef874f0c1",
+      "source_path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/guides/ES-CG-00/ES-CG-00_V1_1_ADOPTION_CANDIDATE.md",
+      "stage_21_readiness": "ADOPTION_CANDIDATE_COMPLETE_WITH_CONDITIONS",
+      "stage_22_disposition": "FOUNDER_APPROVED_STAGE_22_ADOPTION_PENDING_PROTECTED_ACCESSION_AND_CUSTODY",
+      "substantive_byte_change_status": "REVIEWED_BYTES_UNCHANGED"
+    },
+    {
+      "assurance_class": "A3 HIGH",
+      "byte_length": 3008,
+      "git_blob_sha": "77fe033621a8654b27b6bf76733dc1fa4d3f1e43",
+      "guide_id": "ES-CG-01",
+      "guide_title": "Engineering Authority and Precedence",
+      "line_count": 46,
+      "reviewed_pr_head": "3faf705480175c23c5c780aa4e5d8ead811907d5",
+      "sha256": "e35ea6b9031bd4c727852b124ef9968fe0ef30afbc4e83efabd270f18248e9e6",
+      "source_path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/guides/ES-CG-01/ES-CG-01_V1_1_ADOPTION_CANDIDATE.md",
+      "stage_21_readiness": "ADOPTION_CANDIDATE_COMPLETE_WITH_CONDITIONS",
+      "stage_22_disposition": "FOUNDER_APPROVED_STAGE_22_ADOPTION_PENDING_PROTECTED_ACCESSION_AND_CUSTODY",
+      "substantive_byte_change_status": "REVIEWED_BYTES_UNCHANGED"
+    },
+    {
+      "assurance_class": "A3 HIGH",
+      "byte_length": 3250,
+      "git_blob_sha": "fb054d10c737d25291f4c1d4da82008c850db042",
+      "guide_id": "ES-CG-10",
+      "guide_title": "Testing, Verification, and Assurance",
+      "line_count": 48,
+      "reviewed_pr_head": "3faf705480175c23c5c780aa4e5d8ead811907d5",
+      "sha256": "435eb4940da15e6ffbbd66bbc207a05b4fa3ffd3405ff436a8ca15950dfd32c7",
+      "source_path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/guides/ES-CG-10/ES-CG-10_V1_1_ADOPTION_CANDIDATE.md",
+      "stage_21_readiness": "ADOPTION_CANDIDATE_COMPLETE_WITH_CONDITIONS",
+      "stage_22_disposition": "FOUNDER_APPROVED_STAGE_22_ADOPTION_PENDING_PROTECTED_ACCESSION_AND_CUSTODY",
+      "substantive_byte_change_status": "REVIEWED_BYTES_UNCHANGED"
+    },
+    {
+      "assurance_class": "A3 HIGH",
+      "byte_length": 3227,
+      "git_blob_sha": "d7caec1421de154ba84ff689757088147567f7a6",
+      "guide_id": "ES-CG-13",
+      "guide_title": "Completion, Evidence, and Traceability",
+      "line_count": 48,
+      "reviewed_pr_head": "3faf705480175c23c5c780aa4e5d8ead811907d5",
+      "sha256": "bf79a3762625bfaaa3ebbd4c446c460ab6a60ff9bbd264d2f4b9e9cdb55305e9",
+      "source_path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/guides/ES-CG-13/ES-CG-13_V1_1_ADOPTION_CANDIDATE.md",
+      "stage_21_readiness": "ADOPTION_CANDIDATE_COMPLETE_WITH_CONDITIONS",
+      "stage_22_disposition": "FOUNDER_APPROVED_STAGE_22_ADOPTION_PENDING_PROTECTED_ACCESSION_AND_CUSTODY",
+      "substantive_byte_change_status": "REVIEWED_BYTES_UNCHANGED"
+    }
+  ],
+  "prohibited_effects": [
+    "STAGE_24_GUIDE_ACTIVATION_NOT_AUTHORIZED",
+    "REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "DEPLOYMENT_NOT_AUTHORIZED",
+    "RUNTIME_EVIDENCE_NOT_AUTHORIZED",
+    "CGP_007_NOT_AUTHORIZED"
+  ],
+  "protected_baseline": "f2cbd5c75e5cc4e8f5ef5bc5ea80508f36600994",
+  "protected_branch": "integrate-emergent-final-zip",
+  "record_id": "CGP006-W1-V11-ADOPTION-CANDIDATE-BYTE-FREEZE-0001",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "reviewed_pr": "PR #54",
+  "reviewed_pr_head": "3faf705480175c23c5c780aa4e5d8ead811907d5",
+  "work_branch": "codex/cgp-006-wave1-v1-1-guide-completion-adoption-candidate-v1"
+}

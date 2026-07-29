@@ -32,6 +32,7 @@
   ],
   "adoption_states": [
     "NOT_ADOPTED",
+    "ADOPTED",
     "APPROVED_FOR_CONTROLLED_ADOPTION",
     "APPROVED_WITH_RETAINED_GAPS",
     "REVISION_REQUIRED",

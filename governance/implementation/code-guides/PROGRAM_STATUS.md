@@ -3,82 +3,77 @@
 **Program:** EquineSync Code Implementation Guide Program
 **Current prompt:** `CGP-006`
 **Execution ID:** `CGEXEC-20260726-0005`
-**Prompt status:** `FOUNDER_APPROVED_CANDIDATE_BASELINE_REPOSITORY_ACCESSIONED`
-**Program maturity:** CGP-006 Wave 1 controlled candidate baseline Founder-approved and repository-accessioned; documentary gaps `CGP005-TA-APP-GAP-0001` through `CGP005-TA-APP-GAP-0003` Founder-closed and repository-accessioned
-**Current guide maturity:** Wave 1 package `FOUNDER_APPROVED_CANDIDATE_BASELINE`; source-freeze placeholders remain `SOURCE_FROZEN`; all other guides `PLANNED`
-**Guide adoption state:** `NOT_ADOPTED`
+**Prompt status:** `FOUNDER_APPROVED_STAGE_22_ADOPTION_PENDING_PROTECTED_ACCESSION_AND_CUSTODY`
+**Program maturity:** CGP-006 Wave 1 V1.1 Stage 22 adoption Founder-approved for exact reviewed PR #54 guide bytes; Stage 23 protected repository accession through PR #54 pending protected merge and separate custody.
+**Current guide maturity:** Wave 1 guides `ADOPTED` and `REPOSITORY_ACCESSIONED_PENDING_CUSTODY`; all other guides `PLANNED`.
+**Guide adoption state:** `ADOPTED` for `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, and `ES-CG-13`; all other guides `NOT_ADOPTED`.
 **Guide activation state:** `NOT_ACTIVE`
 **Implementation authority:** `NOT_GRANTED`
 **CGP-007 status:** `NOT_ISSUED`
 **Next prompt:** `NONE_AUTHORIZED`
 **Post-custody closeout status:** `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
 **Historical PR #44 status:** `PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
-Repository-specific implementation mapping, guide activation, activation effective date, implementation, deployment, pilot or production use, runtime evidence, and CGP-007 remain unauthorized.
+Repository-specific implementation mapping, guide activation, activation effective date, implementation, deployment, pilot or production use, runtime evidence, Wave 2, and CGP-007 remain unauthorized.
 
 ## Wave 1 V1.1 Adoption Authority Reconciliation Status
 
 - Authority-reconciliation directive: `CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_DIRECTIVE_V1_0_0`
-- Founder authorization date: `2026-07-28`
-- Protected baseline for reconciliation: `513458bd9f0f6b321407720d35521b239cdedb85`
 - Historical fact: `WAVE_1_PRE_V1_1_CONDITIONAL_ADOPTION_RECORDED_AND_PROTECTEDLY_MERGED`
 - Historical PR #42 final head: `83d8e3af9afa50a55af4b679016c2568c6d3c61d`
 - Historical PR #42 merge commit: `db4984ee8781534c8ad8731f89c7a882013cb592`
 - Historical adoption record: `CGP006-W1-CAR-0001`
-- Current controlling state: `WAVE_1_V1_1_ADOPTION_STATE_NOT_ADOPTED`
-- Required next lifecycle treatment: `WAVE_1_V1_1_LIFECYCLE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION_REQUIRED`
-- Primary reconciliation PR: `#52`
-- Primary reconciliation PR final head: `5901f99340f9b9e664ab40fef03fccc3e3672eef`
-- Primary reconciliation PR merge commit: `de789d3a22e494781b1cb3ddbe1a0f3cd50c776f`
-- Custody receipt: `governance/implementation/code-guides/receipts/CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_CUSTODY_RECEIPT.md`
-- Current authority status: `CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
+- Current authority reconciliation status: `CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
+- Current Stage 22 treatment: `WAVE_1_V1_1_STAGE_22_ADOPTION_APPROVED`
 
-PR #42 remains preserved as historical pre-V1.1 documentary authority and is not void, erased, or retroactively invalidated. PR #42 conditional adoption is not carried forward as V1.1 Stage 22 adoption and may not be used as evidence that `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, or `ES-CG-13` completed the V1.1 lifecycle.
+PR #42 remains preserved as historical pre-V1.1 documentary authority and is not void, erased, or retroactively invalidated. PR #42 conditional adoption is not carried forward as V1.1 Stage 22 adoption evidence.
 
-| Guide | Historical pre-V1.1 treatment | Current V1.1 adoption | Activation |
-| --- | --- | --- | --- |
-| `ES-CG-00` | Conditional adoption preserved historically | `NOT_ADOPTED` | `NOT_ACTIVE` |
-| `ES-CG-01` | Conditional adoption preserved historically | `NOT_ADOPTED` | `NOT_ACTIVE` |
-| `ES-CG-10` | Conditional adoption preserved historically | `NOT_ADOPTED` | `NOT_ACTIVE` |
-| `ES-CG-13` | Conditional adoption preserved historically | `NOT_ADOPTED` | `NOT_ACTIVE` |
+## Wave 1 V1.1 Stage 22 Adoption And Stage 23 Accession Status
 
-Continuing adoption-authority reconciliation statements:
+- Stage 22 directive: `CGP_006_WAVE_1_V1_1_STAGE_22_FOUNDER_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_DIRECTIVE_V1_0_0`
+- Founder disposition: `FOUNDER_APPROVED_STAGE_22_ADOPTION_PENDING_PROTECTED_ACCESSION_AND_CUSTODY`
+- Reviewed PR #54 head: `3faf705480175c23c5c780aa4e5d8ead811907d5`
+- Required protected baseline: `f2cbd5c75e5cc4e8f5ef5bc5ea80508f36600994`
+- Stage 22 adoption record: `governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/STAGE_22_ADOPTION_RECORD.csv`
+- Exact-byte freeze: `governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/ADOPTION_CANDIDATE_BYTE_FREEZE.json`
+- Required post-PR #54 status: `CGP_006_WAVE_1_V1_1_STAGE_22_ADOPTION_PROTECTEDLY_MERGED_STAGE_23_ACCESSION_PENDING_CUSTODY`
+- Required final custody status: `CGP_006_WAVE_1_V1_1_STAGE_22_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_CUSTODY_COMPLETE`
+
+| Guide | Stage 22 adoption | Stage 23 accession | Custody | Activation | Implementation mapping | Implementation |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ES-CG-00` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-01` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-10` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-13` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+
+Retained conditions, retained warnings, retained findings `W1-V11-FIND-0001` through `W1-V11-FIND-0006`, `CGP005-TA-APP-GAP-0004`, activation blockers, implementation-mapping blockers, and implementation blockers remain open. `W1-V11-FIND-0007` is closed by the express Stage 22 Founder disposition.
+
+## Continuing Stage 22 Closing Statements
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
-
+`ADOPTION_AUTHORITY_RECONCILIATION_CUSTODY_COMPLETE`
 `PR_42_HISTORICAL_CONDITIONAL_ADOPTION_PRESERVED`
-
 `PR_42_CONDITIONAL_ADOPTION_NOT_CARRIED_FORWARD_AS_V1_1_STAGE_22_ADOPTION`
-
-`CURRENT_WAVE_1_V1_1_ADOPTION_STATE_NOT_ADOPTED`
-
-`V1_1_LIFECYCLE_COMPLETION_REQUIRED_BEFORE_NEW_ADOPTION_DISPOSITION`
-
-`NO_RETROACTIVE_INVALIDATION_OF_PR_42`
-
-`GUIDE_ACTIVATION_NOT_AUTHORIZED`
-
-`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
-
-`REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
-
-`IMPLEMENTATION_NOT_AUTHORIZED`
-
-`DEPLOYMENT_NOT_AUTHORIZED`
-
-`PILOT_AND_PRODUCTION_USE_NOT_AUTHORIZED`
-
+`WAVE_1_V1_1_STAGE_22_ADOPTION_APPROVED`
+`ES_CG_00_ADOPTED`
+`ES_CG_01_ADOPTED`
+`ES_CG_10_ADOPTED`
+`ES_CG_13_ADOPTED`
+`STAGE_23_PROTECTED_REPOSITORY_ACCESSION_AUTHORIZED`
+`INDEPENDENT_TECHNICAL_REVIEW_RETAINED_AS_PRE_ACTIVATION_CONDITION`
+`HUMAN_DOMAIN_EXPERT_REVIEW_RETAINED_AS_PRE_ACTIVATION_CONDITION`
 `GAP_0004_REMAINS_OPEN`
-
+`RETAINED_CONDITIONS_REMAIN_OPEN`
 `RETAINED_WARNINGS_REMAIN_OPEN`
-
 `ACTIVATION_BLOCKERS_REMAIN_OPEN`
-
-`NO_ADOPTED_OR_CANDIDATE_GUIDE_BYTES_CHANGED`
-
-`NO_V1_1_LIFECYCLE_STATE_ADVANCEMENT_OCCURRED`
-
+`STAGE_24_GUIDE_ACTIVATION_NOT_AUTHORIZED`
+`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
+`REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+`IMPLEMENTATION_NOT_AUTHORIZED`
+`DEPLOYMENT_NOT_AUTHORIZED`
+`PILOT_AND_PRODUCTION_USE_NOT_AUTHORIZED`
+`NO_ADOPTED_GUIDE_BYTES_CHANGED_AFTER_FOUNDER_REVIEW`
 `NO_RUNTIME_IMPLEMENTATION_OCCURRED`
-
+`WAVE_2_NOT_AUTHORIZED`
 `CGP_007_NOT_AUTHORIZED`
 
 ## Program Plan V1.1 Accession Status

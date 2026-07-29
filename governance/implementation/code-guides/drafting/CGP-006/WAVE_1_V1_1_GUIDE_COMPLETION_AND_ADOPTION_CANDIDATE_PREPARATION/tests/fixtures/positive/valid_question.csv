@@ -1,0 +1,2 @@
+question_id,guide_id,v1_1_answer_status,answer,source,rationale,affected_controls,affected_invariants,evidence_grade,unresolved_dependency,required_future_authority
+Q1,ES-CG-00,ANSWERED,Answer,Source,Rationale,ES-CG-00-CTRL-0001,ES-CG-00-INV-0001,E2 DOCUMENTED,NONE,NONE

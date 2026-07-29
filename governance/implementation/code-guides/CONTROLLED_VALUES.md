@@ -96,6 +96,7 @@ CGP-002 establishes one canonical machine-readable source. Markdown below mirror
 ## Adoption States
 
 - `NOT_ADOPTED`
+- `ADOPTED`
 - `APPROVED_FOR_CONTROLLED_ADOPTION`
 - `APPROVED_WITH_RETAINED_GAPS`
 - `REVISION_REQUIRED`
