@@ -34,14 +34,14 @@ Authority effect is controlling only after protected repository accession and se
 
 PR #42 and adoption record `CGP006-W1-CAR-0001` are preserved as historical pre-V1.1 conditional-adoption authority. Under the current V1.1 program plan, that historical conditional adoption is not carried forward as V1.1 Stage 22 adoption evidence.
 
-Founder Stage 22 documentary adoption is now approved for exact reviewed PR #54 bytes for `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, and `ES-CG-13`. Stage 23 protected repository accession is authorized through PR #54 protected integration and remains pending separate custody until the custody receipt is protectedly merged. All four guides remain `NOT_ACTIVE`.
+Founder Stage 22 documentary adoption is now approved for exact reviewed PR #54 bytes for `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, and `ES-CG-13`. Stage 23 protected repository accession through PR #54 is protectedly merged and separate custody is complete. All four guides remain `NOT_ACTIVE`.
 
 | guide | adoption | accession | custody | activation |
 | --- | --- | --- | --- | --- |
-| `ES-CG-00` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` |
-| `ES-CG-01` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` |
-| `ES-CG-10` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` |
-| `ES-CG-13` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` |
+| `ES-CG-00` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` |
+| `ES-CG-01` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` |
+| `ES-CG-10` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` |
+| `ES-CG-13` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` |
 
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
@@ -74,3 +74,69 @@ Founder Stage 22 documentary adoption is now approved for exact reviewed PR #54 
 ## Boundary
 
 CGP-002 establishes shared machinery only. It does not create substantive Code Guide controls, product policy, implementation authority, deployment authority, pilot authority, production authority, financial authority, messaging/community authority, AI authority, moderation authority, archival migration authority, or enrollment authority.
+
+## Wave 1 Stage 22/23 Custody Completion
+
+`CGP_006_WAVE_1_V1_1_STAGE_22_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_CUSTODY_COMPLETE`
+
+`PROGRAM_PLAN_V1_1_CONTROLLING`
+
+`ADOPTION_AUTHORITY_RECONCILIATION_CUSTODY_COMPLETE`
+
+`PR_42_HISTORICAL_CONDITIONAL_ADOPTION_PRESERVED`
+
+`PR_42_CONDITIONAL_ADOPTION_NOT_CARRIED_FORWARD_AS_V1_1_STAGE_22_ADOPTION`
+
+`WAVE_1_V1_1_STAGE_22_ADOPTION_APPROVED`
+
+`ES_CG_00_ADOPTED`
+
+`ES_CG_01_ADOPTED`
+
+`ES_CG_10_ADOPTED`
+
+`ES_CG_13_ADOPTED`
+
+`STAGE_23_PROTECTED_REPOSITORY_ACCESSION_AUTHORIZED`
+
+`INDEPENDENT_TECHNICAL_REVIEW_RETAINED_AS_PRE_ACTIVATION_CONDITION`
+
+`HUMAN_DOMAIN_EXPERT_REVIEW_RETAINED_AS_PRE_ACTIVATION_CONDITION`
+
+`GAP_0004_REMAINS_OPEN`
+
+`RETAINED_CONDITIONS_REMAIN_OPEN`
+
+`RETAINED_WARNINGS_REMAIN_OPEN`
+
+`ACTIVATION_BLOCKERS_REMAIN_OPEN`
+
+`STAGE_24_GUIDE_ACTIVATION_NOT_AUTHORIZED`
+
+`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
+
+`REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+
+`IMPLEMENTATION_NOT_AUTHORIZED`
+
+`DEPLOYMENT_NOT_AUTHORIZED`
+
+`PILOT_AND_PRODUCTION_USE_NOT_AUTHORIZED`
+
+`NO_ADOPTED_GUIDE_BYTES_CHANGED_AFTER_FOUNDER_REVIEW`
+
+`NO_RUNTIME_IMPLEMENTATION_OCCURRED`
+
+`WAVE_2_NOT_AUTHORIZED`
+
+`CGP_007_NOT_AUTHORIZED`
+
+`WAVE_1_V1_1_STAGE_22_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_CUSTODY_COMPLETE`
+
+`ES_CG_00_REPOSITORY_ACCESSIONED_CUSTODY_COMPLETE_NOT_ACTIVE`
+
+`ES_CG_01_REPOSITORY_ACCESSIONED_CUSTODY_COMPLETE_NOT_ACTIVE`
+
+`ES_CG_10_REPOSITORY_ACCESSIONED_CUSTODY_COMPLETE_NOT_ACTIVE`
+
+`ES_CG_13_REPOSITORY_ACCESSIONED_CUSTODY_COMPLETE_NOT_ACTIVE`

@@ -3,9 +3,9 @@
 **Program:** EquineSync Code Implementation Guide Program
 **Current prompt:** `CGP-006`
 **Execution ID:** `CGEXEC-20260726-0005`
-**Prompt status:** `FOUNDER_APPROVED_STAGE_22_ADOPTION_PENDING_PROTECTED_ACCESSION_AND_CUSTODY`
-**Program maturity:** CGP-006 Wave 1 V1.1 Stage 22 adoption Founder-approved for exact reviewed PR #54 guide bytes; Stage 23 protected repository accession through PR #54 pending protected merge and separate custody.
-**Current guide maturity:** Wave 1 guides `ADOPTED` and `REPOSITORY_ACCESSIONED_PENDING_CUSTODY`; all other guides `PLANNED`.
+**Prompt status:** `CGP_006_WAVE_1_V1_1_STAGE_22_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_CUSTODY_COMPLETE`
+**Program maturity:** CGP-006 Wave 1 V1.1 Stage 22 adoption Founder-approved for exact reviewed PR #54 guide bytes; Stage 23 protected repository accession through PR #54 is protectedly merged and separate custody is complete.
+**Current guide maturity:** Wave 1 guides `ADOPTED`, `REPOSITORY_ACCESSIONED`, and `CUSTODY_COMPLETE_NOT_ACTIVE`; all other guides `PLANNED`.
 **Guide adoption state:** `ADOPTED` for `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, and `ES-CG-13`; all other guides `NOT_ADOPTED`.
 **Guide activation state:** `NOT_ACTIVE`
 **Implementation authority:** `NOT_GRANTED`
