@@ -26,7 +26,11 @@ Repository-specific implementation mapping, guide activation, activation effecti
 - Historical adoption record: `CGP006-W1-CAR-0001`
 - Current controlling state: `WAVE_1_V1_1_ADOPTION_STATE_NOT_ADOPTED`
 - Required next lifecycle treatment: `WAVE_1_V1_1_LIFECYCLE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION_REQUIRED`
-- Current authority status: `FOUNDER_APPROVED_ADOPTION_AUTHORITY_RECONCILIATION_PENDING_PROTECTED_INTEGRATION_AND_CUSTODY`
+- Primary reconciliation PR: `#52`
+- Primary reconciliation PR final head: `5901f99340f9b9e664ab40fef03fccc3e3672eef`
+- Primary reconciliation PR merge commit: `de789d3a22e494781b1cb3ddbe1a0f3cd50c776f`
+- Custody receipt: `governance/implementation/code-guides/receipts/CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_CUSTODY_RECEIPT.md`
+- Current authority status: `CGP_006_WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
 
 PR #42 remains preserved as historical pre-V1.1 documentary authority and is not void, erased, or retroactively invalidated. PR #42 conditional adoption is not carried forward as V1.1 Stage 22 adoption and may not be used as evidence that `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, or `ES-CG-13` completed the V1.1 lifecycle.
 
