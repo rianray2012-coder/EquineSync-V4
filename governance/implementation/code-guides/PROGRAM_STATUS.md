@@ -40,10 +40,10 @@ PR #42 remains preserved as historical pre-V1.1 documentary authority and is not
 
 | Guide | Stage 22 adoption | Stage 23 accession | Custody | Activation | Implementation mapping | Implementation |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ES-CG-00` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
-| `ES-CG-01` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
-| `ES-CG-10` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
-| `ES-CG-13` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `PENDING_CUSTODY` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-00` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-01` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-10` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-13` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
 
 Retained conditions, retained warnings, retained findings `W1-V11-FIND-0001` through `W1-V11-FIND-0006`, `CGP005-TA-APP-GAP-0004`, activation blockers, implementation-mapping blockers, and implementation blockers remain open. `W1-V11-FIND-0007` is closed by the express Stage 22 Founder disposition.
 
