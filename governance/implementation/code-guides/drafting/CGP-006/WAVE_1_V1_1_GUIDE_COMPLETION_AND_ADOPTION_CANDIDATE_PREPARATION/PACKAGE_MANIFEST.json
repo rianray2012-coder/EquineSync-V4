@@ -1,0 +1,628 @@
+{
+  "activation_state": "NOT_ACTIVE",
+  "authorized_lifecycle_range": "V1_1_STAGES_3_THROUGH_21",
+  "branch": "codex/cgp-006-wave1-v1-1-guide-completion-adoption-candidate-v1",
+  "branch_point": "f2cbd5c75e5cc4e8f5ef5bc5ea80508f36600994",
+  "created_at": "2026-07-29T02:44:01Z",
+  "current_v1_1_adoption_state": "NOT_ADOPTED",
+  "directive_id": "CGP_006_WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION_DIRECTIVE_V1_0_0",
+  "files": [
+    {
+      "path": "ADOPTION_CANDIDATE_READINESS_MATRIX.csv",
+      "sha256": "1691524fcd506c64262f389e12b8026c90ddad4ff5d4042177290b1c438831aa",
+      "size_bytes": 2405
+    },
+    {
+      "path": "ADVERSARIAL_REVIEW_REPORT.md",
+      "sha256": "c19431821bb5b83cc06dd8ab34c4132c88f0e4447569958524f8f12b1d38d8a3",
+      "size_bytes": 1642
+    },
+    {
+      "path": "ASSURANCE_REVIEW_REPORT.md",
+      "sha256": "00c8331457188ae7a79edb8d1d39773487bdea5ad29f5f96f50996e7a2deb6ea",
+      "size_bytes": 1278
+    },
+    {
+      "path": "ATLAS_TRACEABILITY_MASTER_REGISTER.csv",
+      "sha256": "9570a9c538f2c767e7353360cbd8053fc845093634788def6ca55d8fb6c3f1f4",
+      "size_bytes": 8965
+    },
+    {
+      "path": "AUTHORITY_BOUNDARY_REPORT.md",
+      "sha256": "dd88dc03dfbd0d704587869d5a9e43c7f3c7794e52171972681d831d50fb8628",
+      "size_bytes": 921
+    },
+    {
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "f5abe68d24933130770c7f96fa8c6ffb8cb123c90fc2ef12ddffeccb206e50bd",
+      "size_bytes": 659
+    },
+    {
+      "path": "AUTHOR_SELF_REVIEW_REPORT.md",
+      "sha256": "b91caf886fc2247144ca33776fa23ab4239bac058cb39c6cc4c6587f4214e7af",
+      "size_bytes": 1072
+    },
+    {
+      "path": "CONTROL_MASTER_REGISTER.csv",
+      "sha256": "eaa145c3d10cad3bf326ba019ccf5c76fe5fd1b17df0f0f1bab3f979345c32de",
+      "size_bytes": 52123
+    },
+    {
+      "path": "CROSS_GUIDE_RECONCILIATION_REPORT.md",
+      "sha256": "65ab0cdd942d6233ebcc8daa2578dd6412263ce8231868aa609052245ed68874",
+      "size_bytes": 1113
+    },
+    {
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "7b74a9c56f2e1fb51174eea9e0d70e2936e68c2acbab4b30c5100ff7b7d060d2",
+      "size_bytes": 1371
+    },
+    {
+      "path": "DOMAIN_AND_WORKFLOW_REVIEW_REPORT.md",
+      "sha256": "8410428f8dddb6091e03c4dfea04663e77ca144ff31893313309340a8e4d3d03",
+      "size_bytes": 1505
+    },
+    {
+      "path": "FOUNDER_REVIEW_SUMMARY.md",
+      "sha256": "3eaa80e6d12a982e61084cf349dbe5e8bc15f9183f83168ee770d6739d87a6b1",
+      "size_bytes": 2001
+    },
+    {
+      "path": "IMPLEMENTER_USABILITY_REVIEW_REPORT.md",
+      "sha256": "5fe2363046873fbfe1d91727d27a2ef5ca372c634b1f11c0bda3120ad0516789",
+      "size_bytes": 1317
+    },
+    {
+      "path": "MACHINE_VALIDATION_REPORT.md",
+      "sha256": "0eafe7f21f22eafd1b32d4b2dadfe70f7a3c00318d4347272858e938e0920cf5",
+      "size_bytes": 1117
+    },
+    {
+      "path": "MANDATORY_QUESTION_MASTER_REGISTER.csv",
+      "sha256": "a84d4a3ee2756d185cef9c73255fccdb735df93d18db739878c766df4b99cf1d",
+      "size_bytes": 47070
+    },
+    {
+      "path": "OPEN_FINDING_REGISTER.csv",
+      "sha256": "261e75fe00ee16d6d5b102016d26d220b76383e2b571f6cc8f3a7822dda2d17d",
+      "size_bytes": 4083
+    },
+    {
+      "path": "OUTCOME_AND_INVARIANT_MASTER_REGISTER.csv",
+      "sha256": "5b3163494866965368c86338b409ca2e49c9dffba7188b3a720a13a2eda58687",
+      "size_bytes": 17680
+    },
+    {
+      "path": "PROPOSED_FOUNDER_DECISION_REGISTER.md",
+      "sha256": "498580e23666c4b304c6c704c2b5cf602aae7d008230b85da18d7c8561397eb3",
+      "size_bytes": 1264
+    },
+    {
+      "path": "QUALITY_USABILITY_ACCESSIBILITY_REQUIREMENTS.md",
+      "sha256": "0619dcdbdb0cce7b6fb7bd469fdfed650aafca98d0b52dd263679f2c872826c0",
+      "size_bytes": 2679
+    },
+    {
+      "path": "README.md",
+      "sha256": "553288fa49542de55f68eb568e89bdb87107241ea2d2c44f2677c14aa910fc1f",
+      "size_bytes": 2786
+    },
+    {
+      "path": "REPOSITORY_RESPONSIBILITY_TRACEABILITY_MASTER_REGISTER.csv",
+      "sha256": "ee71278b284a4276d6a7042d1449f94a30a45f0d01663cc992352e7ee41845b2",
+      "size_bytes": 12978
+    },
+    {
+      "path": "REPRESENTATIVE_SCENARIO_MASTER_REGISTER.csv",
+      "sha256": "698b42660c77cfabac17ffec26db2f804cd907254c3f8b041172ae7c7f080540",
+      "size_bytes": 18146
+    },
+    {
+      "path": "RETAINED_CONDITION_WARNING_GAP_REGISTER.csv",
+      "sha256": "e2844a712d4be57f88a82758a933a9d6e751050252e2d63ac63de0ecbd19ac8a",
+      "size_bytes": 7846
+    },
+    {
+      "path": "REVIEW_DISPOSITION.md",
+      "sha256": "d82d1e938a17a24f91788084cd4e8e140f74bfae6e6f060651f7acc4ff861547",
+      "size_bytes": 1659
+    },
+    {
+      "path": "RISK_MISUSE_ABUSE_FAILURE_MASTER_REGISTER.csv",
+      "sha256": "f7bbeb86cf5a5d16c158c9163176ab2e0049008af77d32e7692cf3fbfd1fcc74",
+      "size_bytes": 12603
+    },
+    {
+      "path": "SOURCE_FREEZE_MANIFEST.json",
+      "sha256": "48058c3d4780b716943790c8d289b93f489c6484aca4cc21d993ca4dc980b780",
+      "size_bytes": 107701
+    },
+    {
+      "path": "SOURCE_REGISTER.md",
+      "sha256": "194ff655bf76d1e8229809ba2938a125198617016355a57f67b14788f990487d",
+      "size_bytes": 83273
+    },
+    {
+      "path": "TECHNICAL_PEER_REVIEW_REPORT.md",
+      "sha256": "b36226d17a8512468cb550546c8b580da56a50a728cb77d46b8c30b52fb31bb1",
+      "size_bytes": 1497
+    },
+    {
+      "path": "V1_1_LIFECYCLE_STAGE_3_21_MATRIX.csv",
+      "sha256": "45ae5d7ab816cc1cd1cd4895a96eb1870c327203e8527a8a1d16db44327c376e",
+      "size_bytes": 18587
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "1da85dd1dd0ff9cb97f645da23c0eb7b557ab1b6a8b9a8c8180f99f27ea9c9c7",
+      "size_bytes": 1771
+    },
+    {
+      "path": "VERIFICATION_DESIGN_MASTER_REGISTER.csv",
+      "sha256": "1ef6abdce7ea80a49c4a89f4c50c8e0d084f1f0d2867f606465a3a06574c4696",
+      "size_bytes": 25112
+    },
+    {
+      "path": "guides/ES-CG-00/ADOPTION_CANDIDATE_CHECKLIST.md",
+      "sha256": "eb8e5d8a7ca196d7572c918992d4bccab1b59954bbacb048ee6949e85d4f7ca6",
+      "size_bytes": 1629
+    },
+    {
+      "path": "guides/ES-CG-00/ADVERSARIAL_REVIEW.md",
+      "sha256": "ccfbe0b9bac5708a9550d2ec46b0d01de6ae41ab90b8500291e4d50f14aac595",
+      "size_bytes": 336
+    },
+    {
+      "path": "guides/ES-CG-00/ASSURANCE_CLASSIFICATION.md",
+      "sha256": "e942d12bcbf225e483be52c45365ff9dd30b3057f5594ddbb1535ce2dfa0ed2d",
+      "size_bytes": 521
+    },
+    {
+      "path": "guides/ES-CG-00/ATLAS_TRACEABILITY.csv",
+      "sha256": "f9908dd9f84a6235d92cb45ee6537994895e0b772c7a76e0a75fa86d832a2ca0",
+      "size_bytes": 2170
+    },
+    {
+      "path": "guides/ES-CG-00/AUTHOR_SELF_REVIEW.md",
+      "sha256": "6bf0d81176534d2b9cc7cec55318bb7769555314396dc1e718bae6ea66cee385",
+      "size_bytes": 293
+    },
+    {
+      "path": "guides/ES-CG-00/CONTROL_CATALOG.csv",
+      "sha256": "b0f319dc792957ea721e509c9cc519e9ced63bb98fff32c1ac4bf321e61e0b1e",
+      "size_bytes": 10973
+    },
+    {
+      "path": "guides/ES-CG-00/CURRENT_STATE_ASSESSMENT.md",
+      "sha256": "7ef99eba23d6bac43ebd9fbb3c5763c9ae09ace27c9eb41381e7503575aaedc8",
+      "size_bytes": 3895
+    },
+    {
+      "path": "guides/ES-CG-00/DOMAIN_WORKFLOW_REVIEW.md",
+      "sha256": "112c50808d2974ad152943db2a4f1de483976233cc599d2abb1992731cd55655",
+      "size_bytes": 308
+    },
+    {
+      "path": "guides/ES-CG-00/ES-CG-00_V1_1_ADOPTION_CANDIDATE.md",
+      "sha256": "2275ca1b9674b4e05390f134470a37e7ee63ca423705b6579b1bc8eef874f0c1",
+      "size_bytes": 2986
+    },
+    {
+      "path": "guides/ES-CG-00/IMPLEMENTER_USABILITY_REVIEW.md",
+      "sha256": "06ecc03dfe00cfd1f35ab46b6728f76644a147dd9bcf011984f3672644c267a2",
+      "size_bytes": 367
+    },
+    {
+      "path": "guides/ES-CG-00/MANDATORY_QUESTION_RESPONSES.csv",
+      "sha256": "9b80bb69128d0ba26a61c2e31a62dcbaa8a2985d26a8c21b93f524efede848cb",
+      "size_bytes": 11322
+    },
+    {
+      "path": "guides/ES-CG-00/OPEN_FINDINGS.csv",
+      "sha256": "15ce731b4f41c385d46ab9ed03890f7b8f263277bdb3e839640922a9b4e3996c",
+      "size_bytes": 4076
+    },
+    {
+      "path": "guides/ES-CG-00/OUTCOMES_AND_INVARIANTS.csv",
+      "sha256": "a3fa1cb20b0e2b02a1d460b740edfef0a87828468bbb3c2ad24c1ff99230c0ef",
+      "size_bytes": 4190
+    },
+    {
+      "path": "guides/ES-CG-00/QUALITY_USABILITY_ACCESSIBILITY_REQUIREMENTS.md",
+      "sha256": "814f3cfe2f5b566e31a1556b339296f0ed0e0a862d2b8df6acd2ef783608d272",
+      "size_bytes": 2688
+    },
+    {
+      "path": "guides/ES-CG-00/REPOSITORY_RESPONSIBILITY_TRACEABILITY.csv",
+      "sha256": "ccfc281c23a70c6193891112ccdc4273e55ae3d1d9ffeb1fe9e3e5f643efa222",
+      "size_bytes": 3089
+    },
+    {
+      "path": "guides/ES-CG-00/REPRESENTATIVE_SCENARIO_VALIDATION.csv",
+      "sha256": "ad6e67058add0c86b58b11f0e1c1788022aaea7f4cc4dccce35826f76fec7263",
+      "size_bytes": 6813
+    },
+    {
+      "path": "guides/ES-CG-00/RISK_MISUSE_ABUSE_FAILURE_ANALYSIS.csv",
+      "sha256": "e8bee6968f2df8d532bf5dd293bfd3e65367afc140f02d082d21fc8fb1f23cfe",
+      "size_bytes": 2994
+    },
+    {
+      "path": "guides/ES-CG-00/TECHNICAL_REVIEW.md",
+      "sha256": "0b3258ed8299e88f7d70646d0bdaf9ad7b3260db84c52058fb37d40c7a6fec3a",
+      "size_bytes": 307
+    },
+    {
+      "path": "guides/ES-CG-00/VERIFICATION_DESIGN.csv",
+      "sha256": "767f264ff14133555b9a001c275770595227347178decf09300bf4a761d0ff9a",
+      "size_bytes": 5885
+    },
+    {
+      "path": "guides/ES-CG-01/ADOPTION_CANDIDATE_CHECKLIST.md",
+      "sha256": "92d55200642d6086fcc42733cb32b57230765f71be59da6184280253828ba6ff",
+      "size_bytes": 1629
+    },
+    {
+      "path": "guides/ES-CG-01/ADVERSARIAL_REVIEW.md",
+      "sha256": "57dd5ba2f4dc615b340fe8775c967a723797cde85a5da8969065cc9b6595bd86",
+      "size_bytes": 336
+    },
+    {
+      "path": "guides/ES-CG-01/ASSURANCE_CLASSIFICATION.md",
+      "sha256": "e72cd7dc222a552d9c2a5a88eff0413cdecdeb5ff56b6a7f23e48c7da44f8582",
+      "size_bytes": 519
+    },
+    {
+      "path": "guides/ES-CG-01/ATLAS_TRACEABILITY.csv",
+      "sha256": "5970ec0aefd7b9e0196db9302da4b63a47ba220d84795936360f0afd96e8f1a0",
+      "size_bytes": 2165
+    },
+    {
+      "path": "guides/ES-CG-01/AUTHOR_SELF_REVIEW.md",
+      "sha256": "4b86dbbb67d4e7e0d0c82b444207ea0d88e68c6e382bbb9310a8a30e97f19a44",
+      "size_bytes": 293
+    },
+    {
+      "path": "guides/ES-CG-01/CONTROL_CATALOG.csv",
+      "sha256": "e3e5128ac3855ae37531f0d8181f4962b0f3e079dbdeaadf30d1ea120799cda7",
+      "size_bytes": 11822
+    },
+    {
+      "path": "guides/ES-CG-01/CURRENT_STATE_ASSESSMENT.md",
+      "sha256": "c3712e6e3543879f0a511a4847c0e6e00d703bc4c9670297be3adb439f35b60c",
+      "size_bytes": 3895
+    },
+    {
+      "path": "guides/ES-CG-01/DOMAIN_WORKFLOW_REVIEW.md",
+      "sha256": "c38135a4e48b3f58f4548c67229e5094e248dce1be0b4a8b6b97fe4a087d942a",
+      "size_bytes": 308
+    },
+    {
+      "path": "guides/ES-CG-01/ES-CG-01_V1_1_ADOPTION_CANDIDATE.md",
+      "sha256": "e35ea6b9031bd4c727852b124ef9968fe0ef30afbc4e83efabd270f18248e9e6",
+      "size_bytes": 3008
+    },
+    {
+      "path": "guides/ES-CG-01/IMPLEMENTER_USABILITY_REVIEW.md",
+      "sha256": "994d459423d32a624eef13405beb6c99577544c78d004bb758e40fe4aac43b36",
+      "size_bytes": 367
+    },
+    {
+      "path": "guides/ES-CG-01/MANDATORY_QUESTION_RESPONSES.csv",
+      "sha256": "7d20198c4ad10338852c46fd4463a800a637d603da5b1b33743d8c51222d0af9",
+      "size_bytes": 11919
+    },
+    {
+      "path": "guides/ES-CG-01/OPEN_FINDINGS.csv",
+      "sha256": "1e1a54b66723b5b26c9657f2015c10d579708184e422b247a848a6ec97560bf1",
+      "size_bytes": 4076
+    },
+    {
+      "path": "guides/ES-CG-01/OUTCOMES_AND_INVARIANTS.csv",
+      "sha256": "98227b48f04ac4fee02ed71511d07b9acda2606668ee654b7d6e1b2b9e4ec451",
+      "size_bytes": 4199
+    },
+    {
+      "path": "guides/ES-CG-01/QUALITY_USABILITY_ACCESSIBILITY_REQUIREMENTS.md",
+      "sha256": "00a90a31e441e758f080fe34d6bfe671c8e538e90e24096dad14d25648a1c95c",
+      "size_bytes": 2688
+    },
+    {
+      "path": "guides/ES-CG-01/REPOSITORY_RESPONSIBILITY_TRACEABILITY.csv",
+      "sha256": "75b112c9cf9c9120eb959f16d0e0e8835d2c3cecb9d658a6109f5700b731f365",
+      "size_bytes": 3164
+    },
+    {
+      "path": "guides/ES-CG-01/REPRESENTATIVE_SCENARIO_VALIDATION.csv",
+      "sha256": "a775b943c92c74c1adbe9b81c0bdd6c1f40902c5ee1ba717f333d102bb8c0511",
+      "size_bytes": 15717
+    },
+    {
+      "path": "guides/ES-CG-01/RISK_MISUSE_ABUSE_FAILURE_ANALYSIS.csv",
+      "sha256": "22f12f4183563240923f185615bf7cb2d1104dd979a70d9737b238066e37ef71",
+      "size_bytes": 3014
+    },
+    {
+      "path": "guides/ES-CG-01/TECHNICAL_REVIEW.md",
+      "sha256": "8a1d3fbb5703df51a1ff64d3c10bfb6fd051773aea998476919c93f398b7f409",
+      "size_bytes": 307
+    },
+    {
+      "path": "guides/ES-CG-01/VERIFICATION_DESIGN.csv",
+      "sha256": "3eb2654016f4d764614252dd2ce9b0ef3f5a6787cc98c1743fa7c06d40d8a962",
+      "size_bytes": 5885
+    },
+    {
+      "path": "guides/ES-CG-10/ADOPTION_CANDIDATE_CHECKLIST.md",
+      "sha256": "479fbf7a5fe47d6df0e018da81101f7c556ee02e7e30e16c56af3b6d59855e2c",
+      "size_bytes": 1629
+    },
+    {
+      "path": "guides/ES-CG-10/ADVERSARIAL_REVIEW.md",
+      "sha256": "ff5e9cc7fc1475795220a1519d6d2b2e28de83784a8fcf121272afab11d61a74",
+      "size_bytes": 336
+    },
+    {
+      "path": "guides/ES-CG-10/ASSURANCE_CLASSIFICATION.md",
+      "sha256": "8212185f8c708a593761a19f081d8181d7fcd95aa631fc148f538310402442bc",
+      "size_bytes": 509
+    },
+    {
+      "path": "guides/ES-CG-10/ATLAS_TRACEABILITY.csv",
+      "sha256": "d69d85c78138596c35d765cb715e3ad87aff9ac56adf54122972374d892b5110",
+      "size_bytes": 2570
+    },
+    {
+      "path": "guides/ES-CG-10/AUTHOR_SELF_REVIEW.md",
+      "sha256": "1d729c4b10ea390a712edc3e0ca427e7384fe09e41df7a8c656a9be6edb67cb8",
+      "size_bytes": 293
+    },
+    {
+      "path": "guides/ES-CG-10/CONTROL_CATALOG.csv",
+      "sha256": "8e45cd71ed509ecadb674f4a83aa1bcf9c69738697527d83674cfaf22f545b2d",
+      "size_bytes": 13874
+    },
+    {
+      "path": "guides/ES-CG-10/CURRENT_STATE_ASSESSMENT.md",
+      "sha256": "9ff7a78ac6af06def3081728f6400b69f4434c171627bd6e11f0655265039b54",
+      "size_bytes": 3895
+    },
+    {
+      "path": "guides/ES-CG-10/DOMAIN_WORKFLOW_REVIEW.md",
+      "sha256": "b183a3235cf9b4f3cab75faa3e88732390d52acd42a6bc5348d13ac1f5fab4fc",
+      "size_bytes": 308
+    },
+    {
+      "path": "guides/ES-CG-10/ES-CG-10_V1_1_ADOPTION_CANDIDATE.md",
+      "sha256": "435eb4940da15e6ffbbd66bbc207a05b4fa3ffd3405ff436a8ca15950dfd32c7",
+      "size_bytes": 3250
+    },
+    {
+      "path": "guides/ES-CG-10/IMPLEMENTER_USABILITY_REVIEW.md",
+      "sha256": "635e3802e2ca8364c10c64df133a5f0d9003a3655afad86bc11cd7a3b170c191",
+      "size_bytes": 367
+    },
+    {
+      "path": "guides/ES-CG-10/MANDATORY_QUESTION_RESPONSES.csv",
+      "sha256": "6430af7642eb890241db55410ec530243b9b84efbddf51dad6008c0e38a6d7ad",
+      "size_bytes": 11326
+    },
+    {
+      "path": "guides/ES-CG-10/OPEN_FINDINGS.csv",
+      "sha256": "740b086f9e836700a0c414d0322f578406eefc1d9066a905dd6a23a25c4bd537",
+      "size_bytes": 4076
+    },
+    {
+      "path": "guides/ES-CG-10/OUTCOMES_AND_INVARIANTS.csv",
+      "sha256": "2c49330876fee5a06612191293d28595a17129c399d0d34ff71e7b9176f19f22",
+      "size_bytes": 4979
+    },
+    {
+      "path": "guides/ES-CG-10/QUALITY_USABILITY_ACCESSIBILITY_REQUIREMENTS.md",
+      "sha256": "a35ddb8cf6f66b0c33d467be48223e1ea9357115429369f54b75355b53d84a8f",
+      "size_bytes": 2688
+    },
+    {
+      "path": "guides/ES-CG-10/REPOSITORY_RESPONSIBILITY_TRACEABILITY.csv",
+      "sha256": "2e263507939ed869d4d7debce6edc35ce52f6a4630f972fcfe9d1b5be281d79a",
+      "size_bytes": 3685
+    },
+    {
+      "path": "guides/ES-CG-10/REPRESENTATIVE_SCENARIO_VALIDATION.csv",
+      "sha256": "cbdef78149b6ee7bbce1334b786f6063ca512e6efa847627e04dd8458fb964ab",
+      "size_bytes": 15480
+    },
+    {
+      "path": "guides/ES-CG-10/RISK_MISUSE_ABUSE_FAILURE_ANALYSIS.csv",
+      "sha256": "dfdeed73ac790d2ccb56d2175350957a45a9c5febe652911111eba363bba87df",
+      "size_bytes": 3587
+    },
+    {
+      "path": "guides/ES-CG-10/TECHNICAL_REVIEW.md",
+      "sha256": "a0f1df289dd4e0a78fa65cbc0ffa2b95db3d308e55655829115e3024ef5b2f45",
+      "size_bytes": 307
+    },
+    {
+      "path": "guides/ES-CG-10/VERIFICATION_DESIGN.csv",
+      "sha256": "c14776c088fbbe11cbb6bf3b5f32d1ff2d4d9889f9f2e174c1168a7c7e039c22",
+      "size_bytes": 7016
+    },
+    {
+      "path": "guides/ES-CG-13/ADOPTION_CANDIDATE_CHECKLIST.md",
+      "sha256": "d820cd86082c31dbf3c7fdc23cf21343e751f4e06321a12c510dddc3bfc36877",
+      "size_bytes": 1629
+    },
+    {
+      "path": "guides/ES-CG-13/ADVERSARIAL_REVIEW.md",
+      "sha256": "40b21b722e0e0f0ba70c3c532a3ae58e1a007c75ae77a90097996f1f31307f57",
+      "size_bytes": 336
+    },
+    {
+      "path": "guides/ES-CG-13/ASSURANCE_CLASSIFICATION.md",
+      "sha256": "a44603e037c0c8387b0219b1cec60e2d90381f4106e0eb4b3bd369bae10d5946",
+      "size_bytes": 529
+    },
+    {
+      "path": "guides/ES-CG-13/ATLAS_TRACEABILITY.csv",
+      "sha256": "5c54b68cd3834f4210f31a18915ebdeb8807c20fd8fa64ac927b2cbcc5eadf1b",
+      "size_bytes": 2570
+    },
+    {
+      "path": "guides/ES-CG-13/AUTHOR_SELF_REVIEW.md",
+      "sha256": "e82a7d59d886d5fa39e12c6c2a183c12612ac5c91a161c9d5a6b3c7e6330ec39",
+      "size_bytes": 293
+    },
+    {
+      "path": "guides/ES-CG-13/CONTROL_CATALOG.csv",
+      "sha256": "548b9b4a6786f01a8ff4b920a44a44b7411cbb59221d851ece402c5a355bcab6",
+      "size_bytes": 16378
+    },
+    {
+      "path": "guides/ES-CG-13/CURRENT_STATE_ASSESSMENT.md",
+      "sha256": "8be70cb4361b48ff9d1871f5d8bf8be9da93f504cd71ba8d258e2f49c4d70e42",
+      "size_bytes": 3895
+    },
+    {
+      "path": "guides/ES-CG-13/DOMAIN_WORKFLOW_REVIEW.md",
+      "sha256": "51484983e52238b2bc4ef59cf56b6ffbf9b659a15f546a66308eac064ea00342",
+      "size_bytes": 308
+    },
+    {
+      "path": "guides/ES-CG-13/ES-CG-13_V1_1_ADOPTION_CANDIDATE.md",
+      "sha256": "bf79a3762625bfaaa3ebbd4c446c460ab6a60ff9bbd264d2f4b9e9cdb55305e9",
+      "size_bytes": 3227
+    },
+    {
+      "path": "guides/ES-CG-13/IMPLEMENTER_USABILITY_REVIEW.md",
+      "sha256": "c30673c7ee41ed3bbd536c3c08c8e3fbf05b6975e05d84a1a5fb4e27b74ca98c",
+      "size_bytes": 367
+    },
+    {
+      "path": "guides/ES-CG-13/MANDATORY_QUESTION_RESPONSES.csv",
+      "sha256": "947b44a19333915568798756088a83951f1109bdcc319c524ac817f02d8dcd69",
+      "size_bytes": 13040
+    },
+    {
+      "path": "guides/ES-CG-13/OPEN_FINDINGS.csv",
+      "sha256": "bfc3ff524212154f82d5c074281d76d357b1bfda1bbe243c0d30af244db83388",
+      "size_bytes": 4076
+    },
+    {
+      "path": "guides/ES-CG-13/OUTCOMES_AND_INVARIANTS.csv",
+      "sha256": "f08f05c5a26ae0c91fe24a904b0e97ab92beb795a7fbb5e92fda7da0ed8564f6",
+      "size_bytes": 4957
+    },
+    {
+      "path": "guides/ES-CG-13/QUALITY_USABILITY_ACCESSIBILITY_REQUIREMENTS.md",
+      "sha256": "0d07bfc4bda0aaae2141603a6ef1997a58f5ee502ccade092bee77fe071708e5",
+      "size_bytes": 2688
+    },
+    {
+      "path": "guides/ES-CG-13/REPOSITORY_RESPONSIBILITY_TRACEABILITY.csv",
+      "sha256": "5f9af3fe7ef4e3f28d7f64a8dbf706a49cd38a575e175236090eca2ab04948c4",
+      "size_bytes": 3727
+    },
+    {
+      "path": "guides/ES-CG-13/REPRESENTATIVE_SCENARIO_VALIDATION.csv",
+      "sha256": "698b42660c77cfabac17ffec26db2f804cd907254c3f8b041172ae7c7f080540",
+      "size_bytes": 18146
+    },
+    {
+      "path": "guides/ES-CG-13/RISK_MISUSE_ABUSE_FAILURE_ANALYSIS.csv",
+      "sha256": "c833f869f8658880bcf9612e3d8488569b09adaf4a1306571ce6cb9d716e25e5",
+      "size_bytes": 3563
+    },
+    {
+      "path": "guides/ES-CG-13/TECHNICAL_REVIEW.md",
+      "sha256": "47486169d5342dabb30faebcfe69fb14d4c969eb8d962b3e70a75492b8ead207",
+      "size_bytes": 307
+    },
+    {
+      "path": "guides/ES-CG-13/VERIFICATION_DESIGN.csv",
+      "sha256": "6e620b3e2a1e8a53b0acd450b2d18c160e6fff3df411d1ac4232e774b523d7eb",
+      "size_bytes": 7016
+    },
+    {
+      "path": "tests/fixtures/broken_reference/control.csv",
+      "sha256": "4f702bd2b9adee4986c593467072eb204a14c5b1e98d2121fb569be112d83318",
+      "size_bytes": 62
+    },
+    {
+      "path": "tests/fixtures/checksum_failure/file.txt",
+      "sha256": "170696f87efa6a1ae958c597193b6942a74f2a81ac108d243526e682d1b85ca4",
+      "size_bytes": 17
+    },
+    {
+      "path": "tests/fixtures/duplicate_id/duplicate.csv",
+      "sha256": "94eeb07aa55ad4534b2a0f3d172ef8fb0b2843171500261f56b6b49afe3c12d3",
+      "size_bytes": 19
+    },
+    {
+      "path": "tests/fixtures/false_activation/readiness.csv",
+      "sha256": "b7a3d1c3b7eef27dc28fcd5e100e5a94b135776935273748c130551da3061f2a",
+      "size_bytes": 143
+    },
+    {
+      "path": "tests/fixtures/false_adoption/readiness.csv",
+      "sha256": "8f4736ccad7d88de95f4ca4ee6130a0e8dd40cf8bc9ac4b19ca3fa5b54b52554",
+      "size_bytes": 137
+    },
+    {
+      "path": "tests/fixtures/incomplete_question/question.csv",
+      "sha256": "2207661ba3220d3193f24248f90af39522b835cf3f0678ff4490a92eb2082bb8",
+      "size_bytes": 265
+    },
+    {
+      "path": "tests/fixtures/invalid_controlled_value/stage22.csv",
+      "sha256": "0a4bb70164d3eaa818b86d059b91c344244f0c785f340c6fad56e7b04356e185",
+      "size_bytes": 82
+    },
+    {
+      "path": "tests/fixtures/malformed_csv/broken.csv",
+      "sha256": "ee8fde97390f70f58a4c03bf9f0f273c36cb5a280b534b73667c2fd72c94601b",
+      "size_bytes": 19
+    },
+    {
+      "path": "tests/fixtures/malformed_json/broken.json",
+      "sha256": "c3e7d1b00a65589b59f816c0b0b668d795a3c28123697d5ab9555bdb8aa04604",
+      "size_bytes": 13
+    },
+    {
+      "path": "tests/fixtures/positive/valid_question.csv",
+      "sha256": "bcfd743b1b9387c2d022d262bd7d43142379c1b122b7278e80376278a388613c",
+      "size_bytes": 271
+    },
+    {
+      "path": "tests/fixtures/prohibited_mapping/mapping.csv",
+      "sha256": "4e45a2aa543c5052e0fae73e1a551dfe1aa9241bbf1c181b0b1c25923d87d50a",
+      "size_bytes": 374
+    },
+    {
+      "path": "tests/fixtures/unauthorized_path/path.txt",
+      "sha256": "1ac010b89dd2aa609d3dc983dbcd508afa2665eb71544f50873a99612284e302",
+      "size_bytes": 15
+    },
+    {
+      "path": "tests/fixtures/unsupported_evidence_grade/grade.csv",
+      "sha256": "8931383994e0f3f295df77d19913899e0a6adad29aefdc6118ae74ab834e47eb",
+      "size_bytes": 61
+    },
+    {
+      "path": "tests/test_guide_completion_adoption_candidate.py",
+      "sha256": "3fff0ff0f2b1e622d968dde54cf7807877af1240f7254d985382a1672a4008b6",
+      "size_bytes": 4258
+    },
+    {
+      "path": "validators/validate_guide_completion_adoption_candidate.py",
+      "sha256": "9bd637dfa04d02c0bda576ad85a976d5f0e7542ae2a82d872054709c8aa659c9",
+      "size_bytes": 21559
+    }
+  ],
+  "guide_stage_21_result": "ADOPTION_CANDIDATE_COMPLETE_WITH_CONDITIONS",
+  "package_id": "CGP-006-WAVE-1-V1-1-GUIDE-COMPLETION-ADOPTION-CANDIDATE-PREPARATION",
+  "portfolio_readiness_determination": "CGP_006_WAVE_1_V1_1_GUIDES_COMPLETE_READY_FOR_FOUNDER_ADOPTION_DISPOSITION_WITH_CONDITIONS",
+  "protected_branch": "integrate-emergent-final-zip",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "required_starting_head": "f2cbd5c75e5cc4e8f5ef5bc5ea80508f36600994",
+  "stopping_point": "ADOPTION_CANDIDATE_PREPARED_PENDING_FOUNDER_STAGE_22_DISPOSITION"
+}

@@ -1,0 +1,2 @@
+responsibility_id,guide_id,target_id,broad_repository_domain,high_level_subsystem_category,generic_implementation_profile,documentation_family,validation_family,responsibility_class,future_mapping_obligation,mapping_status,notes
+R1,ES-CG-00,C1,Governance,Subsystem,PROFILE,Docs,Validation,Owner,Future,IMPLEMENTATION_MAPPING_NOT_AUTHORIZED,Map backend/app.py endpoint route
