@@ -1,16 +1,22 @@
 {
   "activation_state": "NOT_ACTIVE",
-  "authorized_lifecycle_range": "V1_1_STAGES_3_THROUGH_21",
-  "branch": "codex/cgp-006-wave1-v1-1-guide-completion-adoption-candidate-v1",
-  "branch_point": "f2cbd5c75e5cc4e8f5ef5bc5ea80508f36600994",
-  "created_at": "2026-07-29T02:44:01Z",
-  "current_v1_1_adoption_state": "NOT_ADOPTED",
-  "directive_id": "CGP_006_WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION_DIRECTIVE_V1_0_0",
+  "custody_state": "PENDING_CUSTODY",
+  "directive_id": "CGP_006_WAVE_1_V1_1_STAGE_22_FOUNDER_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_DIRECTIVE_V1_0_0",
   "files": [
     {
+      "path": "ADOPTION_CANDIDATE_BYTE_FREEZE.json",
+      "sha256": "28a20c36332e028d5aa5f08fe446075f2d28d9bebd4ead097c44112a3a84c1cc",
+      "size_bytes": 4358
+    },
+    {
+      "path": "ADOPTION_CANDIDATE_BYTE_FREEZE_REPORT.md",
+      "sha256": "c8b6a6a09fe5f87d178ca13d22e4962104ecc25a554d3ba0f2e6bb7cc6975ff6",
+      "size_bytes": 1742
+    },
+    {
       "path": "ADOPTION_CANDIDATE_READINESS_MATRIX.csv",
-      "sha256": "1691524fcd506c64262f389e12b8026c90ddad4ff5d4042177290b1c438831aa",
-      "size_bytes": 2405
+      "sha256": "4d0956205175315fed55225ba7316aad7695963815138b57abc234157d7858ca",
+      "size_bytes": 2681
     },
     {
       "path": "ADVERSARIAL_REVIEW_REPORT.md",
@@ -64,8 +70,13 @@
     },
     {
       "path": "FOUNDER_REVIEW_SUMMARY.md",
-      "sha256": "3eaa80e6d12a982e61084cf349dbe5e8bc15f9183f83168ee770d6739d87a6b1",
-      "size_bytes": 2001
+      "sha256": "09a267c3209d2ff60b3d394476f5db4d65a0b9c7c04a1923904755fec3ead35a",
+      "size_bytes": 2593
+    },
+    {
+      "path": "FOUNDER_STAGE_22_ADOPTION_DISPOSITION.md",
+      "sha256": "915c49f7edc1c76755bc15ec49aae39a80cfcd6eafdeeaf8d4688331090b2f66",
+      "size_bytes": 6361
     },
     {
       "path": "IMPLEMENTER_USABILITY_REVIEW_REPORT.md",
@@ -74,8 +85,8 @@
     },
     {
       "path": "MACHINE_VALIDATION_REPORT.md",
-      "sha256": "0eafe7f21f22eafd1b32d4b2dadfe70f7a3c00318d4347272858e938e0920cf5",
-      "size_bytes": 1117
+      "sha256": "44fe9c93b1f4a1b2e1c4b5b20de341a3358736071dfe5fcb8b9f53e8a79326e0",
+      "size_bytes": 1617
     },
     {
       "path": "MANDATORY_QUESTION_MASTER_REGISTER.csv",
@@ -84,8 +95,8 @@
     },
     {
       "path": "OPEN_FINDING_REGISTER.csv",
-      "sha256": "261e75fe00ee16d6d5b102016d26d220b76383e2b571f6cc8f3a7822dda2d17d",
-      "size_bytes": 4083
+      "sha256": "5c2087e72cf4329fa9db6b82dacad6d237a4376e41b011298c7f4b06a764fc12",
+      "size_bytes": 4630
     },
     {
       "path": "OUTCOME_AND_INVARIANT_MASTER_REGISTER.csv",
@@ -94,8 +105,8 @@
     },
     {
       "path": "PROPOSED_FOUNDER_DECISION_REGISTER.md",
-      "sha256": "498580e23666c4b304c6c704c2b5cf602aae7d008230b85da18d7c8561397eb3",
-      "size_bytes": 1264
+      "sha256": "8317329f1435fb0852f42cdf1bb2ede3d756743f1fb9e2fed278947cb9c40ad6",
+      "size_bytes": 3002
     },
     {
       "path": "QUALITY_USABILITY_ACCESSIBILITY_REQUIREMENTS.md",
@@ -104,8 +115,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "553288fa49542de55f68eb568e89bdb87107241ea2d2c44f2677c14aa910fc1f",
-      "size_bytes": 2786
+      "sha256": "927be73e41a2cad8023fdc8fe219d4279efed3fdb91aa9f0cfcbed89e7e0ed2f",
+      "size_bytes": 3942
     },
     {
       "path": "REPOSITORY_RESPONSIBILITY_TRACEABILITY_MASTER_REGISTER.csv",
@@ -119,13 +130,13 @@
     },
     {
       "path": "RETAINED_CONDITION_WARNING_GAP_REGISTER.csv",
-      "sha256": "e2844a712d4be57f88a82758a933a9d6e751050252e2d63ac63de0ecbd19ac8a",
-      "size_bytes": 7846
+      "sha256": "ffc8901014d908f34fdfb1ab338e940f97bb5eeb4fa9515a2d553678ed000d46",
+      "size_bytes": 9879
     },
     {
       "path": "REVIEW_DISPOSITION.md",
-      "sha256": "d82d1e938a17a24f91788084cd4e8e140f74bfae6e6f060651f7acc4ff861547",
-      "size_bytes": 1659
+      "sha256": "35a2ece241bcd84ad7521b564d4be987d38b5f91d172cc84be87662f3d81c6f3",
+      "size_bytes": 2309
     },
     {
       "path": "RISK_MISUSE_ABUSE_FAILURE_MASTER_REGISTER.csv",
@@ -143,19 +154,24 @@
       "size_bytes": 83273
     },
     {
+      "path": "STAGE_22_ADOPTION_RECORD.csv",
+      "sha256": "76a440c07444bb11c8e2b18645bbb3285f07ef71c1de8dc88c70e7474472bea0",
+      "size_bytes": 8342
+    },
+    {
       "path": "TECHNICAL_PEER_REVIEW_REPORT.md",
       "sha256": "b36226d17a8512468cb550546c8b580da56a50a728cb77d46b8c30b52fb31bb1",
       "size_bytes": 1497
     },
     {
       "path": "V1_1_LIFECYCLE_STAGE_3_21_MATRIX.csv",
-      "sha256": "45ae5d7ab816cc1cd1cd4895a96eb1870c327203e8527a8a1d16db44327c376e",
-      "size_bytes": 18587
+      "sha256": "c07cc904978ec90a6f52d774a92b0a066ed690b0e426741f57bdbe4f05b88c78",
+      "size_bytes": 23938
     },
     {
       "path": "VALIDATION_REPORT.md",
-      "sha256": "1da85dd1dd0ff9cb97f645da23c0eb7b557ab1b6a8b9a8c8180f99f27ea9c9c7",
-      "size_bytes": 1771
+      "sha256": "a49c2b418eac5086f9fdbeb661dcc0919971c764afb0986183a26debc4d64209",
+      "size_bytes": 2778
     },
     {
       "path": "VERIFICATION_DESIGN_MASTER_REGISTER.csv",
@@ -609,13 +625,13 @@
     },
     {
       "path": "tests/test_guide_completion_adoption_candidate.py",
-      "sha256": "3fff0ff0f2b1e622d968dde54cf7807877af1240f7254d985382a1672a4008b6",
-      "size_bytes": 4258
+      "sha256": "6453957877ea6acc61ce3245a0b6706372d9de9036389b8af4941484028bfdc8",
+      "size_bytes": 8707
     },
     {
       "path": "validators/validate_guide_completion_adoption_candidate.py",
-      "sha256": "9bd637dfa04d02c0bda576ad85a976d5f0e7542ae2a82d872054709c8aa659c9",
-      "size_bytes": 21559
+      "sha256": "d65e6b2af9dae0227f6483a97c4a7a865cc342240e446550f901f0e97b31976b",
+      "size_bytes": 35760
     }
   ],
   "guide_stage_21_result": "ADOPTION_CANDIDATE_COMPLETE_WITH_CONDITIONS",
@@ -624,5 +640,10 @@
   "protected_branch": "integrate-emergent-final-zip",
   "repository": "rianray2012-coder/EquineSync-V4",
   "required_starting_head": "f2cbd5c75e5cc4e8f5ef5bc5ea80508f36600994",
-  "stopping_point": "ADOPTION_CANDIDATE_PREPARED_PENDING_FOUNDER_STAGE_22_DISPOSITION"
+  "reviewed_pr": "PR #54",
+  "reviewed_pr_head": "3faf705480175c23c5c780aa4e5d8ead811907d5",
+  "stage_22_adoption_state": "ADOPTED",
+  "stage_22_disposition": "FOUNDER_APPROVED_STAGE_22_ADOPTION_PENDING_PROTECTED_ACCESSION_AND_CUSTODY",
+  "stage_23_accession_state": "REPOSITORY_ACCESSIONED_PENDING_CUSTODY",
+  "stopping_point": "STAGE_22_ADOPTED_STAGE_23_ACCESSION_PENDING_CUSTODY"
 }

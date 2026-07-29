@@ -21,6 +21,7 @@ class GuideCompletionAdoptionCandidateTests(unittest.TestCase):
         self.assertEqual(result["result"], "PASS")
         self.assertEqual(result["controls"], 22)
         self.assertEqual(result["questions"], 32)
+        self.assertEqual(result["stage22_rows"], 4)
 
     def test_missing_file_fixture_fails(self) -> None:
         with tempfile.TemporaryDirectory() as td:
@@ -55,15 +56,96 @@ class GuideCompletionAdoptionCandidateTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             validator.assert_repository_traceability(rows)
 
-    def test_false_adoption_fixture_fails(self) -> None:
-        rows = validator.read_csv(PACKAGE / "tests/fixtures/false_adoption/readiness.csv")
+    def test_stage22_record_rejects_unreviewed_hash(self) -> None:
+        freeze = validator.read_json(PACKAGE / "ADOPTION_CANDIDATE_BYTE_FREEZE.json")["guides"]
+        rows = validator.read_csv(PACKAGE / "STAGE_22_ADOPTION_RECORD.csv")
+        rows[0]["source_sha256"] = "0" * 64
         with self.assertRaises(AssertionError):
-            validator.assert_no_false_adoption_activation(PACKAGE, rows)
+            validator.assert_stage22_record(rows, freeze)
 
-    def test_false_activation_fixture_fails(self) -> None:
-        rows = validator.read_csv(PACKAGE / "tests/fixtures/false_activation/readiness.csv")
+    def test_byte_freeze_rejects_changed_adopted_bytes(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            temp_package = Path(td)
+            source = validator.read_json(PACKAGE / "ADOPTION_CANDIDATE_BYTE_FREEZE.json")
+            source["guides"][0]["sha256"] = "0" * 64
+            (temp_package / "ADOPTION_CANDIDATE_BYTE_FREEZE.json").write_text(
+                __import__("json").dumps(source),
+                encoding="utf-8",
+            )
+            with self.assertRaises(AssertionError):
+                validator.assert_adoption_byte_freeze(ROOT, temp_package)
+
+    def test_guide_marked_active_fails(self) -> None:
+        rows = validator.read_csv(PACKAGE / "ADOPTION_CANDIDATE_READINESS_MATRIX.csv")
+        rows[0]["activation_state"] = "ACTIVE"
         with self.assertRaises(AssertionError):
-            validator.assert_no_false_adoption_activation(PACKAGE, rows)
+            validator.assert_stage22_adoption_boundaries(PACKAGE, rows)
+
+    def test_activation_date_introduced_fails(self) -> None:
+        rows = validator.read_csv(PACKAGE / "ADOPTION_CANDIDATE_READINESS_MATRIX.csv")
+        rows[0]["activation_effective_date"] = "2026-07-29"
+        with self.assertRaises(AssertionError):
+            validator.assert_stage22_adoption_boundaries(PACKAGE, rows)
+
+    def test_warning_closed_fails(self) -> None:
+        findings = validator.read_csv(PACKAGE / "OPEN_FINDING_REGISTER.csv")
+        retained = validator.read_csv(PACKAGE / "RETAINED_CONDITION_WARNING_GAP_REGISTER.csv")
+        for row in retained:
+            if row["record_id"] == "CGP006-CLF-0001":
+                row["current_state"] = "CLOSED"
+        with self.assertRaises(AssertionError):
+            validator.assert_finding_treatment(findings, retained)
+
+    def test_gap_0004_closed_fails(self) -> None:
+        findings = validator.read_csv(PACKAGE / "OPEN_FINDING_REGISTER.csv")
+        retained = validator.read_csv(PACKAGE / "RETAINED_CONDITION_WARNING_GAP_REGISTER.csv")
+        for row in retained:
+            if row["record_id"] == "CGP005-TA-APP-GAP-0004":
+                row["current_state"] = "GAP_0004_CLOSED"
+        with self.assertRaises(AssertionError):
+            validator.assert_finding_treatment(findings, retained)
+
+    def test_stage22_adoption_row_lacks_founder_disposition_fails(self) -> None:
+        freeze = validator.read_json(PACKAGE / "ADOPTION_CANDIDATE_BYTE_FREEZE.json")["guides"]
+        rows = validator.read_csv(PACKAGE / "STAGE_22_ADOPTION_RECORD.csv")
+        rows[0]["founder_disposition"] = ""
+        with self.assertRaises(AssertionError):
+            validator.assert_stage22_record(rows, freeze)
+
+    def test_premature_custody_claim_fails(self) -> None:
+        freeze = validator.read_json(PACKAGE / "ADOPTION_CANDIDATE_BYTE_FREEZE.json")["guides"]
+        rows = validator.read_csv(PACKAGE / "STAGE_22_ADOPTION_RECORD.csv")
+        rows[0]["custody_state"] = "CUSTODY_COMPLETE"
+        with self.assertRaises(AssertionError):
+            validator.assert_stage22_record(rows, freeze)
+
+    def test_custody_receipt_missing_merge_metadata_fails(self) -> None:
+        with self.assertRaises(AssertionError):
+            validator.assert_custody_receipt_complete(
+                "CGP_006_WAVE_1_V1_1_STAGE_22_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_CUSTODY_COMPLETE"
+            )
+
+    def test_historical_pr42_record_rewrite_fails(self) -> None:
+        with self.assertRaises(AssertionError):
+            validator.assert_historical_pr42_preserved([
+                "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_ADOPTION_AUTHORITY_RECONCILIATION/FOUNDER_ADOPTION_AUTHORITY_DISPOSITION.md"
+            ])
+
+    def test_implementation_claim_fails(self) -> None:
+        rows = validator.read_csv(PACKAGE / "ADOPTION_CANDIDATE_READINESS_MATRIX.csv")
+        with tempfile.TemporaryDirectory() as td:
+            temp_package = Path(td)
+            (temp_package / "claim.md").write_text("IMPLEMENTATION_CLAIMED", encoding="utf-8")
+            with self.assertRaises(AssertionError):
+                validator.assert_stage22_adoption_boundaries(temp_package, rows)
+
+    def test_runtime_evidence_claim_fails(self) -> None:
+        rows = validator.read_csv(PACKAGE / "ADOPTION_CANDIDATE_READINESS_MATRIX.csv")
+        with tempfile.TemporaryDirectory() as td:
+            temp_package = Path(td)
+            (temp_package / "claim.md").write_text("RUNTIME_EVIDENCE_CLAIMED", encoding="utf-8")
+            with self.assertRaises(AssertionError):
+                validator.assert_stage22_adoption_boundaries(temp_package, rows)
 
     def test_unsupported_evidence_grade_fixture_fails(self) -> None:
         rows = validator.read_csv(PACKAGE / "tests/fixtures/unsupported_evidence_grade/grade.csv")
