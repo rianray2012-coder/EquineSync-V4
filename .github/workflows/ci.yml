@@ -389,4 +389,3 @@ jobs:
           path: |
             frontend/npm-audit.json
           if-no-files-found: warn
-
