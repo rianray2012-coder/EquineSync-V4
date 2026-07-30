@@ -1,0 +1,84 @@
+# Workstream Charter
+
+**Directive ID:** `CGP_006_SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_DIRECTIVE_V1_0_0`
+**Authorized work classification:** `SOLO_FOUNDER_ASSURANCE_PROFILE_CANDIDATE_REVIEW_EXECUTION_FINDING_TREATMENT_AND_STAGE_24_DECISION_PREPARATION_ONLY`
+
+## Purpose And Scope
+
+This workstream translates the custody-complete Founder determination into a package of candidate documentary evidence for Founder Stage 24 review. The workstream prepares evidence and proposed dispositions only.
+
+## Authorized Activities
+
+1. Freeze the controlling source set.
+2. Prepare a candidate Solo-Founder Compensating Assurance Profile.
+3. Prepare and record Founder Domain-Owner Review and disclosed self-review records.
+4. Execute isolated machine-assisted review passes.
+5. Reassess retained findings, warnings, conditions, GAP-0004, and blockers.
+6. Prepare guide-specific readiness and proposed activation scope recommendations.
+7. Open one draft, unmerged PR for Founder review.
+
+## Prohibited Activities
+
+No canonical guide, register, status, receipt, program-plan, application, product test, schema, migration, CI, infrastructure, or deployment file may be modified. No activation or implementation authority is created.
+
+## Continuing Statements
+
+`PROGRAM_PLAN_V1_1_CONTROLLING`
+
+`SOLO_FOUNDER_COMPENSATING_ASSURANCE_DETERMINATION_CONTROLLING`
+
+`FOUNDER_SOLO_COMPENSATING_ASSURANCE_MODEL_APPLIES`
+
+`EQUINESYNC_IS_A_SOLO_FOUNDER_PROJECT`
+
+`FOUNDER_DOMAIN_OWNER_REVIEW_IS_NOT_INDEPENDENT`
+
+`FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_IS_NOT_INDEPENDENT`
+
+`MACHINE_ASSISTED_REVIEW_IS_NOT_INDEPENDENT_HUMAN_REVIEW`
+
+`NO_INDEPENDENT_HUMAN_TECHNICAL_REVIEW_PERFORMED`
+
+`NO_THIRD_PARTY_TECHNICAL_CERTIFICATION_CLAIMED`
+
+`NO_THIRD_PARTY_DOMAIN_CERTIFICATION_CLAIMED`
+
+`OBJECTIVE_TEST_AND_EVIDENCE_GATES_REQUIRED`
+
+`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED`
+
+`GAP_0004_REMAINS_OPEN`
+
+`NO_SILENT_FINDING_CLOSURE`
+
+`NO_SILENT_WARNING_CLOSURE`
+
+`NO_SILENT_CONDITION_CLOSURE`
+
+`STAGE_24_GUIDE_ACTIVATION_NOT_AUTHORIZED`
+
+`ES_CG_00_REMAINS_NOT_ACTIVE`
+
+`ES_CG_01_REMAINS_NOT_ACTIVE`
+
+`ES_CG_10_REMAINS_NOT_ACTIVE`
+
+`ES_CG_13_REMAINS_NOT_ACTIVE`
+
+`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
+
+`REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+
+`IMPLEMENTATION_NOT_AUTHORIZED`
+
+`DEPLOYMENT_NOT_AUTHORIZED`
+
+`PILOT_NOT_AUTHORIZED`
+
+`PRODUCTION_NOT_AUTHORIZED`
+
+`WAVE_2_NOT_AUTHORIZED`
+
+`CGP_007_NOT_AUTHORIZED`
+
+`DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION`

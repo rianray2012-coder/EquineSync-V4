@@ -1,0 +1,208 @@
+{
+  "continuing_statements": [
+    "PROGRAM_PLAN_V1_1_CONTROLLING",
+    "SOLO_FOUNDER_COMPENSATING_ASSURANCE_DETERMINATION_CONTROLLING",
+    "FOUNDER_SOLO_COMPENSATING_ASSURANCE_MODEL_APPLIES",
+    "EQUINESYNC_IS_A_SOLO_FOUNDER_PROJECT",
+    "FOUNDER_DOMAIN_OWNER_REVIEW_IS_NOT_INDEPENDENT",
+    "FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_IS_NOT_INDEPENDENT",
+    "MACHINE_ASSISTED_REVIEW_IS_NOT_INDEPENDENT_HUMAN_REVIEW",
+    "NO_INDEPENDENT_HUMAN_TECHNICAL_REVIEW_PERFORMED",
+    "NO_THIRD_PARTY_TECHNICAL_CERTIFICATION_CLAIMED",
+    "NO_THIRD_PARTY_DOMAIN_CERTIFICATION_CLAIMED",
+    "OBJECTIVE_TEST_AND_EVIDENCE_GATES_REQUIRED",
+    "FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED",
+    "GAP_0004_REMAINS_OPEN",
+    "NO_SILENT_FINDING_CLOSURE",
+    "NO_SILENT_WARNING_CLOSURE",
+    "NO_SILENT_CONDITION_CLOSURE",
+    "STAGE_24_GUIDE_ACTIVATION_NOT_AUTHORIZED",
+    "ES_CG_00_REMAINS_NOT_ACTIVE",
+    "ES_CG_01_REMAINS_NOT_ACTIVE",
+    "ES_CG_10_REMAINS_NOT_ACTIVE",
+    "ES_CG_13_REMAINS_NOT_ACTIVE",
+    "NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED",
+    "REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "DEPLOYMENT_NOT_AUTHORIZED",
+    "PILOT_NOT_AUTHORIZED",
+    "PRODUCTION_NOT_AUTHORIZED",
+    "WAVE_2_NOT_AUTHORIZED",
+    "CGP_007_NOT_AUTHORIZED",
+    "DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION"
+  ],
+  "directive_id": "CGP_006_SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_DIRECTIVE_V1_0_0",
+  "file_count_excluding_manifest_and_checksum": 33,
+  "files": [
+    {
+      "byte_length": 1712,
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "7f56e5648be2e5cd35ebb0251ce9922a000fb0af4a429ffb3a564cdaeb1cf185"
+    },
+    {
+      "byte_length": 2551,
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "cb0d54d129d237f6790eea57feab074ec72ee5fbc03e2f7d92ed6d4a1f0651ad"
+    },
+    {
+      "byte_length": 8208,
+      "path": "ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0_CANDIDATE.md",
+      "sha256": "e859e32932893923fc5b6d37541dea095955013e97372bb14c6545f8bfecac9d"
+    },
+    {
+      "byte_length": 3820,
+      "path": "FOUNDER_DOMAIN_OWNER_REVIEW_INSTRUMENT.md",
+      "sha256": "a932caac845b4530b9b12de8af16901f403e0e29b59ae6fc523d9cb47023ff27"
+    },
+    {
+      "byte_length": 47868,
+      "path": "FOUNDER_DOMAIN_OWNER_REVIEW_RECORD.md",
+      "sha256": "3effba48f22f90b84d4bf5dbd958390455e817b11e7fea7dd411f08693e47fe1"
+    },
+    {
+      "byte_length": 3185,
+      "path": "FOUNDER_QUALIFICATION_AND_NON_INDEPENDENCE_DISCLOSURE.md",
+      "sha256": "828a23f675e9e0722b94ec073e73bc4e0f87eb13e9824e5bef3fc744e247c2a7"
+    },
+    {
+      "byte_length": 8083,
+      "path": "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md",
+      "sha256": "09db50d5f4c420baf0acdb41c6ef3380fe4b97748a6ed69e72eed7b5e8ecd83f"
+    },
+    {
+      "byte_length": 2121,
+      "path": "FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_PROTOCOL.md",
+      "sha256": "75c1904326caf662bbe215319d10ebd355667835f566badfd7bbc9fc503460e5"
+    },
+    {
+      "byte_length": 38870,
+      "path": "FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_RECORD.md",
+      "sha256": "c76d768fad755ea7dacdf9965c83d597760186ba78110065f54b2ecb2d71d2e6"
+    },
+    {
+      "byte_length": 3126,
+      "path": "MULTI_PASS_REVIEW_RECONCILIATION_REPORT.md",
+      "sha256": "a7208db995482359f07719b7957a88773c36ced5dc2013ffd250e058ab3c9566"
+    },
+    {
+      "byte_length": 3804,
+      "path": "PASS_A_AUTHORITY_AND_SOURCE_FIDELITY_REVIEW.md",
+      "sha256": "299b68dba09ad2e0a5176da800090f20db5e060414a10c444abca24411907de5"
+    },
+    {
+      "byte_length": 4072,
+      "path": "PASS_B_ARCHITECTURE_AND_IMPLEMENTABILITY_REVIEW.md",
+      "sha256": "b5608ae7ddea8d24c81f74f56980b076b2581e5b2ecd31b990cbf99aad358536"
+    },
+    {
+      "byte_length": 4112,
+      "path": "PASS_C_SECURITY_TENANCY_PRIVACY_AND_SAFEGUARDING_REVIEW.md",
+      "sha256": "7314f239390935ad8c027a5d49bdfe60f13d05f12c25db86c9d772ca92fb9c29"
+    },
+    {
+      "byte_length": 4352,
+      "path": "PASS_D_TESTABILITY_VERIFICATION_AND_EVIDENCE_REVIEW.md",
+      "sha256": "4ed123fbb2ee94f7981a454746c155b937c7627549fad7526786a5d0fb10f720"
+    },
+    {
+      "byte_length": 4106,
+      "path": "PASS_E_FAILURE_RECOVERY_AND_OPERATIONAL_RELIABILITY_REVIEW.md",
+      "sha256": "a03d3dbc7a7117872c05c4bdbdb1837396f5151b042021813d1491957dfb6fb3"
+    },
+    {
+      "byte_length": 3630,
+      "path": "PASS_F_CLEAN_ROOM_IMPLEMENTER_USABILITY_REVIEW.md",
+      "sha256": "891d6c128604322234fff13cfe18711caedae1c9bc108c4ea52581733a2cfcd7"
+    },
+    {
+      "byte_length": 4222,
+      "path": "PASS_G_CROSS_GUIDE_RECONCILIATION_REVIEW.md",
+      "sha256": "43cb876cc1e19624aabcb2fd8be738c2e257cfe3a4d7bd8cd34bdf6643a12956"
+    },
+    {
+      "byte_length": 4506,
+      "path": "PASS_H_ADVERSARIAL_AND_RED_TEAM_REVIEW.md",
+      "sha256": "b947d02974d8ebe0b73abe86ffeae334f3254493de5778e8f8b239ccdc192f91"
+    },
+    {
+      "byte_length": 47019,
+      "path": "PROPOSED_STAGE_24_ACTIVATION_SCOPE_MATRIX.csv",
+      "sha256": "e2bab3b45cd7c78cba393b7c0843d31330ea3d30311484b8a4cc5c9976e32955"
+    },
+    {
+      "byte_length": 3541,
+      "path": "README.md",
+      "sha256": "c445aa5f1a54b7d7ea827c4c0cc52259359246bea525b06ff99726750cb4ce74"
+    },
+    {
+      "byte_length": 55232,
+      "path": "RETAINED_CONDITION_WARNING_GAP_AND_BLOCKER_MATRIX.csv",
+      "sha256": "5ead7bccef3fdbbc1d318fb9c3a5c014e60ab21940fe96c1545a9db62555ab87"
+    },
+    {
+      "byte_length": 16995,
+      "path": "SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_REGISTER.csv",
+      "sha256": "38c6c9d6beafd69361540125644032cc905e0747f58453a1c6998ead418f0ec7"
+    },
+    {
+      "byte_length": 71017,
+      "path": "SOURCE_AUTHORITY_MATRIX.csv",
+      "sha256": "0d97e121860c5f9fe1d17e581a1487d449585019805321f67565711cc4db2d03"
+    },
+    {
+      "byte_length": 40697,
+      "path": "SOURCE_FREEZE_MANIFEST.json",
+      "sha256": "d27c5e3a8eb04552f6afc9e4266fd24f25fbfbd640e7f4d82477cff3cf409c32"
+    },
+    {
+      "byte_length": 23964,
+      "path": "SOURCE_REGISTER.md",
+      "sha256": "3e77fdbd048f5dea4d64576110a067131e30334ff855804e067c18f5beed3230"
+    },
+    {
+      "byte_length": 9712,
+      "path": "SOURCE_SHA256SUMS.txt",
+      "sha256": "6fd427609fc8fd8ce49646c2a393a94fbe560c9b1db9e5c13a5b687e2c5ffd3b"
+    },
+    {
+      "byte_length": 4345,
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "d95f4fee11b1561cfb17ff94dc25b712d0f71942a62f6e52163792eb1431c618"
+    },
+    {
+      "byte_length": 13072,
+      "path": "WAVE_1_FINDING_TREATMENT_MATRIX.csv",
+      "sha256": "71197ba499c66a913aefe7b3c6f93f4146b1e3392a2b4927af0d64e93fd63509"
+    },
+    {
+      "byte_length": 9536,
+      "path": "WAVE_1_STAGE_24_READINESS_MATRIX.csv",
+      "sha256": "ed9f2bcf633c1fabffa62cdcf1306233e205c9b9cd956462699d005016504503"
+    },
+    {
+      "byte_length": 4178,
+      "path": "WAVE_1_STAGE_24_READINESS_REPORT.md",
+      "sha256": "03f599ab0c71379dfb4dbd59c76a370c337276292917d62577de6898675578bb"
+    },
+    {
+      "byte_length": 2494,
+      "path": "WORKSTREAM_CHARTER.md",
+      "sha256": "c37714d6aabee6d839a19d6d5cf4734ca7091a6f3c7fcec20a40381e7d152049"
+    },
+    {
+      "byte_length": 9412,
+      "path": "tests/test_solo_founder_assurance_stage24_readiness.py",
+      "sha256": "55eae7b17810715311f0fed940692166d0bb33e0389217dcba88acde64b2d10b"
+    },
+    {
+      "byte_length": 15695,
+      "path": "validators/validate_solo_founder_assurance_stage24_readiness.py",
+      "sha256": "8b81b57856d1c017b9c0051a6fcd400e61495ebc671fa4fdb95e525ee23caa77"
+    }
+  ],
+  "manifest_id": "CGP006-SFCA-STAGE24-READINESS-PACKAGE-MANIFEST",
+  "package_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1",
+  "protected_branch": "integrate-emergent-final-zip",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "required_starting_head": "150b24d65d25f79255959ee07a185e7b04601bcf"
+}
