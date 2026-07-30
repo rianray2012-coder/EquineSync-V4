@@ -1,0 +1,13 @@
+area,current_evidence,current_status,gap_classification,proposed_visibility,blocking_recommendation,rollback
+backend collectability,.github/workflows/ci.yml:35-87,PRESENT,NOT_A_GAP,retain existing job,already blocking through current workflow behavior,none
+backend known-failure non-regression gate,.github/workflows/ci.yml:91-193,PRESENT,NOT_A_GAP,retain existing job,already gate-like; no branch-protection change,none
+frontend build,.github/workflows/ci.yml:198-222,PRESENT,NOT_A_GAP,retain existing job,already build job; no install change,none
+backend format,backend/requirements.txt:10 black declared,TOOL_DECLARED_NO_CI_JOB,CONFIRMED_VISIBILITY_GAP,non-blocking black --check report,report-only until baseline/ratchet approved,remove report step
+backend lint,backend/requirements.txt:26 flake8 declared,TOOL_DECLARED_NO_CI_JOB,CONFIRMED_VISIBILITY_GAP,non-blocking flake8 report,report-only until baseline/ratchet approved,remove report step
+backend import sort,backend/requirements.txt:48 isort declared,TOOL_DECLARED_NO_CI_JOB,CONFIRMED_VISIBILITY_GAP,non-blocking isort --check-only report,report-only until baseline/ratchet approved,remove report step
+backend typing,backend/requirements.txt:64 mypy declared,TOOL_DECLARED_NO_CI_JOB,CONFIRMED_VISIBILITY_GAP,non-blocking mypy report,report-only until baseline/ratchet approved,remove report step
+frontend lint,frontend/package.json:83-90 eslint packages declared; no lint script,TOOL_DECLARED_NO_CI_JOB,PARTIAL_VISIBILITY_GAP,plan only unless runnable command is established,do not block until command/config confirmed,none
+npm audit,npm audit --package-lock-only produced 42 advisories,READ_ONLY_EVIDENCE_EXISTS_THIS_REVIEW,CONFIRMED_MONITORING_GAP,non-blocking npm audit summary,report-only; no auto-fix,remove audit step
+Python dependency audit,pip-audit not declared in backend requirements,TOOL_MISSING,BLOCKED_MISSING_TOOL,record missing tool; no installation,not blocking,none
+secret scan,.gitignore:34-38 and 86-94; no scanner workflow/config,NO_VERIFIED_SCAN_EVIDENCE,CONFIRMED_EVIDENCE_GAP,repository-local redacted pattern count only,report-only; never print values,remove pattern report
+Dependabot,.github contains CODEOWNERS and workflows/ci.yml only,MISSING,CONFIRMED_MONITORING_GAP,conservative .github/dependabot.yml with open PR limits and no auto-merge,not a check,remove dependabot.yml
