@@ -1,0 +1,243 @@
+{
+  "created_date": "2026-07-30",
+  "default_branch": "integrate-emergent-final-zip",
+  "directive": {
+    "bytes": 19768,
+    "sha256": "b8e982a5abd86c13b481430d794ab90c97e89320eca9835fc5a0c2a2ff141772",
+    "source_type": "standalone_pasted_text",
+    "title": "CGP-006_REPOSITORY_HYGIENE_AND_CI_ASSURANCE_FOUNDER_REVIEW_AND_DISPOSITION_PACKET_V1"
+  },
+  "expected_protected_head": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+  "package_id": "ES-CGP-006-REPOSITORY-HYGIENE-FOUNDER-REVIEW-DISPOSITION-V1",
+  "prior_custody": {
+    "pr62": {
+      "base": "integrate-emergent-final-zip",
+      "head": "e61912b673da65556767cd8fb463c9d86debe5ff",
+      "merge_commit": "185d37987c11eccabba4436619bdf11e91494711",
+      "state": "MERGED"
+    },
+    "pr63": {
+      "base": "integrate-emergent-final-zip",
+      "head": "aab66e033dcc2920db0ba858037077f1a0977cef",
+      "merge_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+      "merge_commit_matches_protected_head": true,
+      "state": "MERGED"
+    }
+  },
+  "protected_branch": "integrate-emergent-final-zip",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "repository_drift_detected": false,
+  "review_limitations": [
+    "Git clone and tarball materialization experienced network disconnect or excessive latency; review evidence was fetched from authenticated GitHub API refs and raw file contents instead.",
+    "GitHub code search reached API rate limit and was not used as controlling evidence; backend Python import scan used raw files materialized from the protected head.",
+    "No secrets or production mutations were attempted."
+  ],
+  "reviewed_prs": {
+    "64": {
+      "additions": 637,
+      "advisory_disposition": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
+      "advisory_reason": "Documentary package is scoped to CGP-006 review files, checksum manifest verifies, and no remediation code is included.",
+      "base_branch": "integrate-emergent-final-zip",
+      "base_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+      "changed_files": 19,
+      "checks": [
+        {
+          "name": "Backend suite is collectable",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Backend known-failure non-regression gate",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Frontend build",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Vercel",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Vercel Preview Comments",
+          "state": "SUCCESS"
+        }
+      ],
+      "commits": [
+        {
+          "authoredDate": "2026-07-30T15:31:41Z",
+          "headline": "Add CGP-006 repository hygiene CI assurance review",
+          "oid": "b47f92eac5e019a85cb7d296322c3df05bd62907"
+        },
+        {
+          "authoredDate": "2026-07-30T15:39:33Z",
+          "headline": "Fix CGP-006 review package checksum manifest",
+          "oid": "5c4a1b065d33064905f937b98cd938a6a7d33101"
+        }
+      ],
+      "deletions": 0,
+      "draft": true,
+      "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
+      "head_branch": "codex/cgp-006-repository-hygiene-dependency-ci-assurance-review-v1",
+      "head_commit": "5c4a1b065d33064905f937b98cd938a6a7d33101",
+      "matches_prior_execution_report_head": true,
+      "merge_commit": null,
+      "merge_state_status": "CLEAN",
+      "review_decision": "NONE",
+      "state": "OPEN",
+      "title": "CGP-006 repository hygiene dependency CI assurance review",
+      "url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/64"
+    },
+    "65": {
+      "additions": 102,
+      "advisory_disposition": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
+      "advisory_reason": "Documentation and env-template changes are bounded; no license grant, workflow, dependency, deployment, or product behavior change detected.",
+      "base_branch": "integrate-emergent-final-zip",
+      "base_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+      "changed_files": 5,
+      "checks": [
+        {
+          "name": "Backend suite is collectable",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Backend known-failure non-regression gate",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Frontend build",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Vercel",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Vercel Preview Comments",
+          "state": "SUCCESS"
+        }
+      ],
+      "commits": [
+        {
+          "authoredDate": "2026-07-30T15:33:17Z",
+          "headline": "Add repository hygiene docs metadata draft",
+          "oid": "518e648d57e560ba7e4f29bffbe0d1272cd4d78c"
+        }
+      ],
+      "deletions": 1,
+      "draft": true,
+      "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
+      "head_branch": "codex/repository-hygiene-docs-metadata-v1",
+      "head_commit": "518e648d57e560ba7e4f29bffbe0d1272cd4d78c",
+      "matches_prior_execution_report_head": true,
+      "merge_commit": null,
+      "merge_state_status": "CLEAN",
+      "review_decision": "NONE",
+      "state": "OPEN",
+      "title": "Repository hygiene docs metadata draft",
+      "url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/65"
+    },
+    "66": {
+      "additions": 18,
+      "advisory_disposition": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
+      "advisory_reason": "Dependency split is bounded to seven direct dev/test tools with exact versions preserved and backend CI installing the dev manifest.",
+      "base_branch": "integrate-emergent-final-zip",
+      "base_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+      "changed_files": 3,
+      "checks": [
+        {
+          "name": "Backend suite is collectable",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Backend known-failure non-regression gate",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Frontend build",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Vercel",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Vercel Preview Comments",
+          "state": "SUCCESS"
+        }
+      ],
+      "commits": [
+        {
+          "authoredDate": "2026-07-30T15:34:52Z",
+          "headline": "Split backend runtime and dev requirements draft",
+          "oid": "9f8b6e233a6ee9a23d9c9e9b8394376b3ab55606"
+        }
+      ],
+      "deletions": 11,
+      "draft": true,
+      "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
+      "head_branch": "codex/backend-runtime-dev-dependency-split-v1",
+      "head_commit": "9f8b6e233a6ee9a23d9c9e9b8394376b3ab55606",
+      "matches_prior_execution_report_head": true,
+      "merge_commit": null,
+      "merge_state_status": "CLEAN",
+      "review_decision": "NONE",
+      "state": "OPEN",
+      "title": "Backend runtime dev dependency split draft",
+      "url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/66"
+    },
+    "67": {
+      "additions": 201,
+      "advisory_disposition": "APPROVE_AFTER_ENUMERATED_CORRECTIONS",
+      "advisory_reason": "Correction required before Founder disposition: align the assurance job with PR #66 by installing backend/requirements-dev.txt after the dependency split and add explicit read-only workflow permissions.",
+      "base_branch": "integrate-emergent-final-zip",
+      "base_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+      "changed_files": 3,
+      "checks": [
+        {
+          "name": "Backend suite is collectable",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Backend known-failure non-regression gate",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Frontend build",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Assurance visibility report (non-blocking)",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Vercel",
+          "state": "SUCCESS"
+        },
+        {
+          "name": "Vercel Preview Comments",
+          "state": "SUCCESS"
+        }
+      ],
+      "commits": [
+        {
+          "authoredDate": "2026-07-30T15:36:45Z",
+          "headline": "Add CI assurance visibility monitoring draft",
+          "oid": "982e417a66d641e93fc905a690c94095c8ee8570"
+        }
+      ],
+      "deletions": 0,
+      "draft": true,
+      "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
+      "head_branch": "codex/ci-assurance-reporting-and-monitoring-v1",
+      "head_commit": "982e417a66d641e93fc905a690c94095c8ee8570",
+      "matches_prior_execution_report_head": true,
+      "merge_commit": null,
+      "merge_state_status": "CLEAN",
+      "review_decision": "NONE",
+      "state": "OPEN",
+      "title": "CI assurance reporting and monitoring draft",
+      "url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/67"
+    }
+  },
+  "verified_protected_head": "396f82c8a7600cae363142175d1d1448e9d2ece2"
+}

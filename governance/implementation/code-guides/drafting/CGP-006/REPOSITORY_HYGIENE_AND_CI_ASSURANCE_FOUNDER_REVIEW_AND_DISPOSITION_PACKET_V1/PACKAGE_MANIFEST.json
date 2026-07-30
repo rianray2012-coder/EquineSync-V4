@@ -1,0 +1,81 @@
+{
+  "advisory_dispositions": {
+    "64": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
+    "65": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
+    "66": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
+    "67": "APPROVE_AFTER_ENUMERATED_CORRECTIONS"
+  },
+  "completion_token": "CGP_006_REPOSITORY_HYGIENE_AND_CI_ASSURANCE_FOUNDER_REVIEW_COMPLETE_CORRECTIONS_REQUIRED_BEFORE_DISPOSITION",
+  "directive_bytes": 19768,
+  "directive_sha256": "b8e982a5abd86c13b481430d794ab90c97e89320eca9835fc5a0c2a2ff141772",
+  "files": {
+    "CROSS_PR_INTERACTION_AND_SEQUENCE_ANALYSIS.md": {
+      "bytes": 1626,
+      "sha256": "dec07c8c0a84ac2d8c77828e58539f45c2eeebb57023632fa61cbc26805791c5"
+    },
+    "FINDINGS_TO_REMEDIATION_TRACEABILITY_MATRIX.csv": {
+      "bytes": 5083,
+      "sha256": "461d74817d61e3dccaee282500222a3ff1bf230dfdd32fac0fa5102739b3c6d1"
+    },
+    "FOUNDER_DECISION_MATRIX.csv": {
+      "bytes": 6165,
+      "sha256": "9fb0c4633aecf6debcd6b7c54c1f9246f5127dfa84f2763d3403309fa9a8b088"
+    },
+    "FOUNDER_REVIEW_AND_DISPOSITION_PACKET.md": {
+      "bytes": 9406,
+      "sha256": "4387f3de4cdbcbe3844db9293bc8045b27250b41123df773e30fb00b61564606"
+    },
+    "PR64_DOCUMENTARY_REVIEW.md": {
+      "bytes": 1976,
+      "sha256": "0c2a9905ffd0f0e1cbbd8f787c9e65e61a65c5cc040ecf72c984ba124a15c0ae"
+    },
+    "PR65_TECHNICAL_REVIEW.md": {
+      "bytes": 1759,
+      "sha256": "2e4147e27b940028285500f025f25f3e59987a0be54a3ebcda6989e5d0101890"
+    },
+    "PR66_DEPENDENCY_CLASSIFICATION_AND_VALIDATION_REVIEW.md": {
+      "bytes": 3123,
+      "sha256": "e14f5d4bbf7b5baa0cff9b1cf0aca6e642147519301922578d461d886aa77a77"
+    },
+    "PR67_CI_PERMISSIONS_DEPENDABOT_REPORTING_REVIEW.md": {
+      "bytes": 2902,
+      "sha256": "4def3900237fc5bab740cf2b969f44ec3c4cc5e21bcaa5cc9f9adbebb6780f63"
+    },
+    "README.md": {
+      "bytes": 3045,
+      "sha256": "d1cb46c279d07bcd9886667df812ef6c55924669410d5584475ecd86ef7faa6d"
+    },
+    "REPOSITORY_AND_PR_AUTHENTICATION_RECORD.json": {
+      "bytes": 8872,
+      "sha256": "776608eba311af708049c8a97e646c140f1f3d7c2f352fa4b79d72e968e4bb65"
+    },
+    "RETAINED_RISKS_AND_NON_AUTHORIZATIONS.md": {
+      "bytes": 1114,
+      "sha256": "529a91dc415a841577c39f348f55dd7ce6de3319624e29667fe4ca4bc7e07ebb"
+    },
+    "VALIDATION_RECORD.md": {
+      "bytes": 1539,
+      "sha256": "2f1ccb47d8fd093b2fd9dae09205007742a28da8c67dc85cd4fb736b45b34be7"
+    },
+    "tests/test_founder_review_packet.py": {
+      "bytes": 432,
+      "sha256": "de51376d8e1cbc2958d3e284848ea83ee059ac53d545201667f12136141f0708"
+    },
+    "validators/validate_founder_review_packet.py": {
+      "bytes": 6053,
+      "sha256": "906e736c887a874cbe4565a19a670e03736921f2b886849feb8678155ff3604c"
+    }
+  },
+  "package_id": "ES-CGP-006-REPOSITORY-HYGIENE-FOUNDER-REVIEW-DISPOSITION-V1",
+  "package_name": "REPOSITORY_HYGIENE_AND_CI_ASSURANCE_FOUNDER_REVIEW_AND_DISPOSITION_PACKET_V1",
+  "protected_branch": "integrate-emergent-final-zip",
+  "protected_head": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "reviewed_pr_heads": {
+    "64": "5c4a1b065d33064905f937b98cd938a6a7d33101",
+    "65": "518e648d57e560ba7e4f29bffbe0d1272cd4d78c",
+    "66": "9f8b6e233a6ee9a23d9c9e9b8394376b3ab55606",
+    "67": "982e417a66d641e93fc905a690c94095c8ee8570"
+  },
+  "status": "FOUNDER_REVIEW_COMPLETE_CORRECTIONS_REQUIRED_BEFORE_DISPOSITION"
+}
