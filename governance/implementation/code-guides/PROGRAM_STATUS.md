@@ -3,17 +3,79 @@
 **Program:** EquineSync Code Implementation Guide Program
 **Current prompt:** `CGP-006`
 **Execution ID:** `CGEXEC-20260726-0005`
-**Prompt status:** `CGP_006_WAVE_1_V1_1_STAGE_22_ADOPTION_AND_STAGE_23_PROTECTED_ACCESSION_CUSTODY_COMPLETE`
-**Program maturity:** CGP-006 Wave 1 V1.1 Stage 22 adoption Founder-approved for exact reviewed PR #54 guide bytes; Stage 23 protected repository accession through PR #54 is protectedly merged and separate custody is complete.
-**Current guide maturity:** Wave 1 guides `ADOPTED`, `REPOSITORY_ACCESSIONED`, and `CUSTODY_COMPLETE_NOT_ACTIVE`; all other guides `PLANNED`.
+**Prompt status:** `CGP_006_STAGE_24_PROFILE_ADOPTION_LIMITED_ACTIVATION_AND_CUSTODY_COMPLETE`
+**Program maturity:** CGP-006 Stage 24 Solo-Founder profile adoption and limited guide activation custody complete for exact Wave 1 V1.1 guide bytes.
+**Current guide maturity:** Wave 1 guides `ADOPTED`, `REPOSITORY_ACCESSIONED`, `CUSTODY_COMPLETE`, and `ACTIVE_LIMITED_STAGE_24`; all other guides `PLANNED` and `NOT_ACTIVE`.
 **Guide adoption state:** `ADOPTED` for `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, and `ES-CG-13`; all other guides `NOT_ADOPTED`.
-**Guide activation state:** `NOT_ACTIVE`
+**Guide activation state:** `ACTIVE_LIMITED_STAGE_24_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW_ONLY`
 **Implementation authority:** `NOT_GRANTED`
 **CGP-007 status:** `NOT_ISSUED`
-**Next prompt:** `NEXT_WORKSTREAM_SOLO_FOUNDER_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE`
+**Next prompt:** `NONE_AUTHORIZED_FOR_IMPLEMENTATION_MAPPING_OR_IMPLEMENTATION`
 **Post-custody closeout status:** `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
 **Historical PR #44 status:** `PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
-Repository-specific implementation mapping, guide activation, activation effective date, implementation, deployment, pilot or production use, runtime evidence, Wave 2, and CGP-007 remain unauthorized.
+Repository-specific implementation mapping, implementation, deployment, staging, pilot or production use, runtime evidence, Wave 2, and CGP-007 remain unauthorized. MERGE_GATE, RELEASE_GATE, and OPERATIONS_REFERENCE remain inactive.
+
+## Stage 24 Profile Adoption And Limited Activation Custody Status
+
+- Founder disposition: `ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30`
+- PR #59 merge commit: `f5b2973c9a796d6864607dcae42aa6c89f894250`
+- PR #59 merge timestamp: `2026-07-30T07:03:09Z`
+- Stage 24 custody branch: `codex/cgp-006-stage24-profile-activation-custody-v1`
+- Activation effective event: `VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR`
+- Adopted profile SHA-256: `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
+- Adopted profile byte length: `9609`
+- Activation state after custody merge: `ACTIVE_LIMITED_STAGE_24_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW_ONLY`
+
+| Guide | Version | SHA-256 | Byte length | Active scopes | Inactive scopes |
+| --- | --- | --- | ---: | --- | --- |
+| `ES-CG-00` | `1.1.0` | `2275ca1b9674b4e05390f134470a37e7ee63ca423705b6579b1bc8eef874f0c1` | `2986` | `PLANNING_REFERENCE`; `IMPLEMENTATION_CONTROL`; `PULL_REQUEST_REVIEW` | `MERGE_GATE`; `RELEASE_GATE`; `OPERATIONS_REFERENCE` |
+| `ES-CG-01` | `1.1.0` | `e35ea6b9031bd4c727852b124ef9968fe0ef30afbc4e83efabd270f18248e9e6` | `3008` | `PLANNING_REFERENCE`; `IMPLEMENTATION_CONTROL`; `PULL_REQUEST_REVIEW` | `MERGE_GATE`; `RELEASE_GATE`; `OPERATIONS_REFERENCE` |
+| `ES-CG-10` | `1.1.0` | `435eb4940da15e6ffbbd66bbc207a05b4fa3ffd3405ff436a8ca15950dfd32c7` | `3250` | `PLANNING_REFERENCE`; `IMPLEMENTATION_CONTROL`; `PULL_REQUEST_REVIEW` | `MERGE_GATE`; `RELEASE_GATE`; `OPERATIONS_REFERENCE` |
+| `ES-CG-13` | `1.1.0` | `bf79a3762625bfaaa3ebbd4c446c460ab6a60ff9bbd264d2f4b9e9cdb55305e9` | `3227` | `PLANNING_REFERENCE`; `IMPLEMENTATION_CONTROL`; `PULL_REQUEST_REVIEW` | `MERGE_GATE`; `RELEASE_GATE`; `OPERATIONS_REFERENCE` |
+
+Final Stage 24 custody state:
+
+`SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_V1_0_0_ADOPTED_AND_ACTIVE`
+
+`ES_CG_00_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW`
+
+`ES_CG_01_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW`
+
+`ES_CG_10_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW`
+
+`ES_CG_13_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW`
+
+`MERGE_GATE_NOT_ACTIVE`
+
+`RELEASE_GATE_NOT_ACTIVE`
+
+`OPERATIONS_REFERENCE_NOT_ACTIVE`
+
+`TWELVE_RESIDUAL_RISKS_ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY`
+
+`GAP_0004_REMAINS_OPEN`
+
+`IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
+
+`IMPLEMENTATION_NOT_AUTHORIZED`
+
+`DEPLOYMENT_NOT_AUTHORIZED`
+
+`STAGING_USE_NOT_AUTHORIZED`
+
+`PILOT_NOT_AUTHORIZED`
+
+`PRODUCTION_NOT_AUTHORIZED`
+
+`WAVE_2_NOT_AUTHORIZED`
+
+`CGP_007_NOT_AUTHORIZED`
+
+`NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION`
+
+`NO_GRACE_PERIOD_FOR_NEWLY_AUTHORIZED_WORK`
+
+`NO_RETROACTIVE_APPLICATION_TO_HISTORICAL_RECORDS`
 
 ## Founder-Approved Solo-Founder Compensating Assurance Determination Status
 
@@ -30,7 +92,7 @@ Repository-specific implementation mapping, guide activation, activation effecti
 - Custody state after protected merger of the receipt: `POST_MERGE_CUSTODY_COMPLETE`
 - Next documentary workstream label: `NEXT_WORKSTREAM_SOLO_FOUNDER_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE`
 
-The Solo-Founder Assurance Profile and Stage 24 readiness rebase require a later Founder directive before work begins. All four Wave 1 guides remain `NOT_ACTIVE`; repository-specific implementation mapping remains `NOT_AUTHORIZED`; implementation remains `NOT_AUTHORIZED`; deployment, pilot use, and production use remain unauthorized. No finding, warning, retained condition, gap, activation blocker, implementation-mapping blocker, or implementation blocker is closed by this custody update.
+The Solo-Founder Assurance Profile and Stage 24 readiness rebase require a later Founder directive before work begins. All four Wave 1 guides are active only for `PLANNING_REFERENCE`, `IMPLEMENTATION_CONTROL`, and `PULL_REQUEST_REVIEW` after Stage 24 custody completion; repository-specific implementation mapping remains `NOT_AUTHORIZED`; implementation remains `NOT_AUTHORIZED`; deployment, staging, pilot use, and production use remain unauthorized. No finding, warning, retained condition, gap, activation blocker, implementation-mapping blocker, or implementation blocker is closed by this custody update.
 
 ## Wave 1 V1.1 Adoption Authority Reconciliation Status
 
@@ -57,10 +119,10 @@ PR #42 remains preserved as historical pre-V1.1 documentary authority and is not
 
 | Guide | Stage 22 adoption | Stage 23 accession | Custody | Activation | Implementation mapping | Implementation |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ES-CG-00` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
-| `ES-CG-01` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
-| `ES-CG-10` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
-| `ES-CG-13` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `NOT_ACTIVE` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-00` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `ACTIVE_LIMITED_STAGE_24` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-01` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `ACTIVE_LIMITED_STAGE_24` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-10` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `ACTIVE_LIMITED_STAGE_24` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
+| `ES-CG-13` | `ADOPTED` | `REPOSITORY_ACCESSIONED` | `CUSTODY_COMPLETE` | `ACTIVE_LIMITED_STAGE_24` | `NOT_AUTHORIZED` | `NOT_AUTHORIZED` |
 
 Retained conditions, retained warnings, retained findings `W1-V11-FIND-0001` through `W1-V11-FIND-0006`, `CGP005-TA-APP-GAP-0004`, activation blockers, implementation-mapping blockers, and implementation blockers remain open. `W1-V11-FIND-0007` is closed by the express Stage 22 Founder disposition.
 

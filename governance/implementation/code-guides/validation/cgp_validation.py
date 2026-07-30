@@ -34,7 +34,7 @@ WAVE_1_CURRENT_STATUS_EXPECTED = {
     "Stage 22 adoption": "ADOPTED",
     "Stage 23 accession": "REPOSITORY_ACCESSIONED",
     "Custody": "CUSTODY_COMPLETE",
-    "Activation": "NOT_ACTIVE",
+    "Activation": "ACTIVE_LIMITED_STAGE_24",
     "Implementation mapping": "NOT_AUTHORIZED",
     "Implementation": "NOT_AUTHORIZED",
 }
