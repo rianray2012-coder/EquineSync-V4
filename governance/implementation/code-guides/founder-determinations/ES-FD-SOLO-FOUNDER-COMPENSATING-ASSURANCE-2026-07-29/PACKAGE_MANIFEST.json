@@ -1,0 +1,78 @@
+{
+  "approved_document_byte_length": 29240,
+  "approved_document_sha256": "e777598974887456f22bfc77d8db6c9a235502fc552fb28ce6ff52a77ca3fb61",
+  "canonical_document": "FOUNDER_DETERMINATION_SOLO_FOUNDER_COMPENSATING_ASSURANCE_MODEL_2026-07-29.md",
+  "document_id": "ES-FD-SOLO-FOUNDER-COMPENSATING-ASSURANCE-2026-07-29",
+  "files": [
+    {
+      "byte_length": 2226,
+      "path": "ACCESSION_READINESS_REPORT.md",
+      "sha256": "e754b996c538c1c8461087c8c9f08d35457fc1bb7b13157f0ca0f63aaf79f5e1"
+    },
+    {
+      "byte_length": 2495,
+      "path": "AUTHORITY_AND_EFFECT_RECORD.md",
+      "sha256": "d057841c7bdf1b4926f5029cfbc32a78a332c658681727ecf0b8ecbe77f0e26c"
+    },
+    {
+      "byte_length": 2024,
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "7ba2215332945545760ef22ae981bafe11cd0cc9b4d30254b199e3b28dc314ef"
+    },
+    {
+      "byte_length": 4205,
+      "path": "FOUNDER_APPROVAL_RECORD.md",
+      "sha256": "2f236be86899553f6c0e03df085134120c053a9b89c8fbef53143494d40277b3"
+    },
+    {
+      "byte_length": 29240,
+      "path": "FOUNDER_DETERMINATION_SOLO_FOUNDER_COMPENSATING_ASSURANCE_MODEL_2026-07-29.md",
+      "sha256": "e777598974887456f22bfc77d8db6c9a235502fc552fb28ce6ff52a77ca3fb61"
+    },
+    {
+      "byte_length": 2692,
+      "path": "README.md",
+      "sha256": "f2bb6f079cd8ccf663c6e6f155414ac8289f3bef26f58212992e394d23caafe9"
+    },
+    {
+      "byte_length": 28948,
+      "path": "SOURCE_PAYLOAD_ORIGINAL.md",
+      "sha256": "284e5c61f4b27e94a80bc3f4f1590b277395a5543b8ad0954a83852e26377693"
+    },
+    {
+      "byte_length": 6792,
+      "path": "SOURCE_TO_APPROVED_TEXT_DIFF_REPORT.md",
+      "sha256": "b13eb099d3dc71f7b5424b54ee908022f0d80d0e6a22a280e47935b4ef19d3c0"
+    },
+    {
+      "byte_length": 5680,
+      "path": "TEXTUAL_CORRECTION_AND_APPROVAL_FINALIZATION_LEDGER.csv",
+      "sha256": "a397bf1a4fb5e74b17ac0954b4055fef62ac39107f23a4519b8bd242538f4331"
+    },
+    {
+      "byte_length": 222,
+      "path": "UNAUTHORIZED_EDITORIAL_OBSERVATIONS.md",
+      "sha256": "2bb4df1e9331c810d15e3aa943ca42d53b16c68226b797c15de3e821d563d7a8"
+    },
+    {
+      "byte_length": 2060,
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "25fd86262bd503a59517d9c3aba3a03fb21751ca780fe03f28b42ffe912f6dd6"
+    },
+    {
+      "byte_length": 7467,
+      "path": "tests/test_founder_approved_solo_founder_determination.py",
+      "sha256": "280b60dbbc966a2fa718f59db2d42d00112d84cffd19ab1fbebe6277142da3d4"
+    },
+    {
+      "byte_length": 14134,
+      "path": "validators/validate_founder_approved_solo_founder_determination.py",
+      "sha256": "68e089a5a38c1950e1ab3b856847d08bbc1eae94fb25cfb89c0be95c9ed789af"
+    }
+  ],
+  "manifest_id": "ES-FD-SOLO-FOUNDER-COMPENSATING-ASSURANCE-2026-07-29-PACKAGE-MANIFEST",
+  "required_starting_head": "7e42d7e0338d55c75fc6be766fcf08b24b687246",
+  "source_byte_length": 28948,
+  "source_sha256": "284e5c61f4b27e94a80bc3f4f1590b277395a5543b8ad0954a83852e26377693",
+  "version": "1.0.0"
+}
