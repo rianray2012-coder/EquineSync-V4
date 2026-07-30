@@ -1,0 +1,139 @@
+{
+  "active_guides": {
+    "ES-CG-00": {
+      "active_scopes": [
+        "PLANNING_REFERENCE",
+        "IMPLEMENTATION_CONTROL",
+        "PULL_REQUEST_REVIEW"
+      ],
+      "byte_length": 2986,
+      "inactive_scopes": [
+        "MERGE_GATE",
+        "RELEASE_GATE",
+        "OPERATIONS_REFERENCE"
+      ],
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/guides/ES-CG-00/ES-CG-00_V1_1_ADOPTION_CANDIDATE.md",
+      "sha256": "2275ca1b9674b4e05390f134470a37e7ee63ca423705b6579b1bc8eef874f0c1"
+    },
+    "ES-CG-01": {
+      "active_scopes": [
+        "PLANNING_REFERENCE",
+        "IMPLEMENTATION_CONTROL",
+        "PULL_REQUEST_REVIEW"
+      ],
+      "byte_length": 3008,
+      "inactive_scopes": [
+        "MERGE_GATE",
+        "RELEASE_GATE",
+        "OPERATIONS_REFERENCE"
+      ],
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/guides/ES-CG-01/ES-CG-01_V1_1_ADOPTION_CANDIDATE.md",
+      "sha256": "e35ea6b9031bd4c727852b124ef9968fe0ef30afbc4e83efabd270f18248e9e6"
+    },
+    "ES-CG-10": {
+      "active_scopes": [
+        "PLANNING_REFERENCE",
+        "IMPLEMENTATION_CONTROL",
+        "PULL_REQUEST_REVIEW"
+      ],
+      "byte_length": 3250,
+      "inactive_scopes": [
+        "MERGE_GATE",
+        "RELEASE_GATE",
+        "OPERATIONS_REFERENCE"
+      ],
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/guides/ES-CG-10/ES-CG-10_V1_1_ADOPTION_CANDIDATE.md",
+      "sha256": "435eb4940da15e6ffbbd66bbc207a05b4fa3ffd3405ff436a8ca15950dfd32c7"
+    },
+    "ES-CG-13": {
+      "active_scopes": [
+        "PLANNING_REFERENCE",
+        "IMPLEMENTATION_CONTROL",
+        "PULL_REQUEST_REVIEW"
+      ],
+      "byte_length": 3227,
+      "inactive_scopes": [
+        "MERGE_GATE",
+        "RELEASE_GATE",
+        "OPERATIONS_REFERENCE"
+      ],
+      "path": "governance/implementation/code-guides/drafting/CGP-006/WAVE_1_V1_1_GUIDE_COMPLETION_AND_ADOPTION_CANDIDATE_PREPARATION/guides/ES-CG-13/ES-CG-13_V1_1_ADOPTION_CANDIDATE.md",
+      "sha256": "bf79a3762625bfaaa3ebbd4c446c460ab6a60ff9bbd264d2f4b9e9cdb55305e9"
+    }
+  },
+  "active_profile": {
+    "byte_length": 9681,
+    "path": "governance/implementation/code-guides/profiles/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
+    "sha256": "ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b"
+  },
+  "authorized_package_path": "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1",
+  "cgp_007": "NOT_AUTHORIZED",
+  "copilot_reconciliation": {
+    "copilot_source_byte_length": 12416,
+    "copilot_source_sha256": "cd6e1315615d0f65664485d4ebc2f8906ff4e1f9c0bd19f3b7a6765da026386b",
+    "directive_id": "CGP_006_PR_62_COPILOT_FINDING_VALIDATION_AND_DOCUMENTARY_RECONCILIATION_DIRECTIVE_V1_0_0",
+    "duplicate_count": 1,
+    "expanded_gap_count": 1,
+    "finding_count": 10,
+    "new_gap_count": 6,
+    "no_remedy_executed": true,
+    "rejected_as_defect_count": 1,
+    "required_pre_update_pr_head": "7e99fb8ea2f6db8a6bf91c4a60164a749a931e54",
+    "root_tree_at_pre_update_head": "6a66df5553ecede3aa91eec07a912abef41afc67",
+    "status": "DOCUMENTARY_RECONCILIATION_COMPLETE_PENDING_PR_UPDATE",
+    "unverified_risk_count": 1
+  },
+  "deployment_staging_pilot_production": "NOT_AUTHORIZED",
+  "directive_file": {
+    "byte_length": 30722,
+    "sha256": "5b9465d3685243a13693fd46e09bb6092b1ee6383c91390a093e5b94a9e081e0"
+  },
+  "directive_id": "CGP_006_REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_DIRECTIVE_V1_0_0",
+  "gap_counts_by_severity": {
+    "P1_HIGH": 5,
+    "P2_MEDIUM": 6,
+    "P3_LOW": 1
+  },
+  "gap_counts_by_status": {
+    "OPEN": 12
+  },
+  "generated_at": "2026-07-30T09:27:31+00:00",
+  "guide_mapping_counts": {
+    "DOCUMENTARY_CONTROL_ONLY": 16,
+    "IMPLEMENTED_WITH_INCOMPLETE_EVIDENCE": 4,
+    "PARTIALLY_IMPLEMENTED": 2
+  },
+  "implementation_authority": "NOT_GRANTED",
+  "mapping_rollup": {
+    "conflicting": 0,
+    "fully_mapped": 20,
+    "partially_mapped": 2,
+    "unknown": 0,
+    "unmapped": 0
+  },
+  "package_id": "ES-CGP-006-REPOSITORY-MAPPING-GAP-AUDIT-DIRECTIVE-2026-07-30",
+  "pia_founder_mapping_count": 15,
+  "protected_branch": "integrate-emergent-final-zip",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "repository_inventory_counts": {
+    "backend_files": 379,
+    "backend_route_decorators": 279,
+    "backend_test_files": 185,
+    "docs_files": 2329,
+    "frontend_files": 314,
+    "frontend_route_lines": 112,
+    "governance_files": 1322,
+    "production_code_mongo_collections_static": 92,
+    "tracked_files": 4676
+  },
+  "required_protected_head": "1ad6fa436c31316ee192844106ca748cd6dc6d0b",
+  "source_zip": {
+    "byte_length": 12887,
+    "path": "/Users/rianray/Downloads/EquineSync_CGP006_Repository_Mapping_Gap_Audit_Directive_2026-07-30.zip",
+    "sha256": "741731e50d71d9334bda76e6628b47f12e097978cd9cc2819682a063fdbe2920",
+    "unzip_test": "PASS"
+  },
+  "verified_protected_head": "1ad6fa436c31316ee192844106ca748cd6dc6d0b",
+  "wave_2": "NOT_AUTHORIZED",
+  "work_branch": "codex/cgp-006-repository-specific-implementation-mapping-current-state-gap-audit-v1"
+}
