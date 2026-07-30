@@ -68,17 +68,9 @@
       "bytes": 2048,
       "sha256": "33fbb96fa313fd35b4e878c4d721c6ea613f9f7a8ecb6c8767fe6a95ef04df45"
     },
-    "tests/__pycache__/test_repository_hygiene_ci_assurance_review.cpython-314.pyc": {
-      "bytes": 1673,
-      "sha256": "148ffcb66eded67bdf36092d466d4718d0277ca9a8d0b0d7110a9eb30dbe3bbf"
-    },
     "tests/test_repository_hygiene_ci_assurance_review.py": {
       "bytes": 754,
       "sha256": "c5eef3998a92cb769480c809c45a5331e64cf875754c8138a4fe87d36857b264"
-    },
-    "validators/__pycache__/validate_repository_hygiene_ci_assurance_review.cpython-314.pyc": {
-      "bytes": 13566,
-      "sha256": "3ac9cfd46759862970d61003c8e97820d29f243870230b8c166261d052810949"
     },
     "validators/validate_repository_hygiene_ci_assurance_review.py": {
       "bytes": 7492,
