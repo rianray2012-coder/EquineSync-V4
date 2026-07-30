@@ -1,0 +1,19 @@
+integration_id,integration_or_tool,repository_evidence_paths,classification,current_state,current_action
+EXT-0001,GitHub Actions,.github/workflows/ci.yml,CONFIGURED_AND_EVIDENCED,CI workflow present for pull_request and protected branch push.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0002,Vercel,docs/VERCEL_FRONTEND_DEPLOYMENT.md;frontend/vercel.json,REFERENCED_ONLY,Deployment docs/config path referenced; no deploy action performed.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0003,MongoDB,backend/core/db.py;backend/core/config.py,REFERENCED_ONLY,MONGO_URL and DB_NAME are required env vars; no database contacted.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0004,Stripe,backend/routes/subscriptions.py;backend/routes/subscriptions_webhook_handlers.py;backend/routes/membership.py,REFERENCED_ONLY,Stripe SDK code and signature verification present; no provider call made.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0005,Resend email,backend/mailer.py,REFERENCED_ONLY,Mailer imports resend when API key exists; no email sent.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0006,DocuSign,backend/routes/document_signatures.py;backend/core/document_signing.py,REFERENCED_ONLY,Readiness/webhook/sandbox code present; no connector configured or called.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0007,S3/R2 storage,backend/storage.py,REFERENCED_ONLY,S3-compatible provider code present; local stub fallback observed.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0008,Google Calendar,backend/routes/backlog.py;docs/FEATURE_BACKLOG_FOUNDATIONS.md,PLANNED_NOT_CONFIGURED,Export placeholder/code references observed.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0009,QuickBooks,backend/routes/backlog.py;docs/RF12_BILLING_PAYMENTS_EXPORTS_FINANCIAL_TRUTH.md,PLANNED_NOT_CONFIGURED,Export manifest path observed; no external connection.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0010,OpenAI or AI providers,backend/requirements.txt;frontend/src/pages/AiAutomation.jsx,REFERENCED_ONLY,Dependencies and UI surface observed; no provider configured by this package.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0011,Codex,governance/implementation/code-guides/PROGRAM_STATUS.md,REFERENCED_ONLY,Codex workstream evidence only; no new tool setup.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0012,Cursor Bugbot,governance/implementation/code-guides/PROGRAM_STATUS.md,REFERENCED_ONLY,Historical PR check context only; no setup.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0013,Codex Security,governance/implementation/code-guides/PROGRAM_STATUS.md,NOT_FOUND,No repository configuration performed or found for this package.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0014,GitHub Copilot,governance/implementation/code-guides/PROGRAM_STATUS.md,NOT_FOUND,No repository configuration performed or found for this package.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0015,Playwright,backend/tests;frontend/package.json,REFERENCED_ONLY,Testing references/packages may exist elsewhere; no installation or browser run performed.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0016,CodeQL,github/codeql,NOT_FOUND,No CodeQL workflow found in static workflow inventory.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0017,Claude Code,governance/implementation/code-guides/PROGRAM_STATUS.md,NOT_FOUND,No repository configuration performed or found for this package.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0018,Google Jules,governance/implementation/code-guides/PROGRAM_STATUS.md,NOT_FOUND,No repository configuration performed or found for this package.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
