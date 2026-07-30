@@ -1,0 +1,87 @@
+
+# Directive Execution Record
+
+## Inputs authenticated
+
+- Prior directive ZIP SHA-256: `e5a9c9b1d2513ffa101bc217c2a69ac1df57b047e80f7ec7ca3e7d1a5b57a9fb`; bytes `7535`.
+- Prior directive SHA-256: `230d44a8582ac1acc3d6216e100115fb1fff7e9b39d4b2b617f3356596864c82`; bytes `14249`.
+- Corrective directive ZIP SHA-256: `55a8d1ea82e5d78f741189e2a5163631333f905d119fc7d7142e77e2257bc5d1`; bytes `6291`.
+- Corrective directive SHA-256: `20cc1637bd8f17670c3378c1b255c5a637846c6ee72b278d8da05814e42dfcf3`; bytes `9302`.
+
+## Prior stop
+
+The prior stop was correct and no mutation occurred before the corrective directive.
+
+```text
+CGP_006_PR_62_BASELINE_MERGE_BLOCKED_REPOSITORY_OR_PR_STATE_CHANGED
+```
+
+## Corrected preflight
+
+- Gate A exact source identity: `PASS`
+- Gate B non-source whitespace check: `PASS`
+- Gate C exception containment: `PASS`
+
+The single excluded path was exactly:
+
+```text
+governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt
+```
+
+No source bytes changed before merge.
+
+## Protected merge
+
+- PR #62 was marked ready only because GitHub draft PRs cannot be merged.
+- Merge method: `merge_commit`
+- Merge commit: `185d37987c11eccabba4436619bdf11e91494711`
+- Merge timestamp: `2026-07-30T12:39:59Z`
+- Protected head after merge: `185d37987c11eccabba4436619bdf11e91494711`
+
+## Custody branch
+
+```text
+codex/cgp-006-pr62-documentary-baseline-post-merge-custody-v1
+```
+
+Changed paths are limited to:
+
+```text
+governance/implementation/code-guides/drafting/CGP-006/PR_62_DOCUMENTARY_BASELINE_POST_MERGE_CUSTODY_V1/
+```
+
+## Terminal state statements
+
+- `PROGRAM_PLAN_V1_1_CONTROLLING`
+- `PR_62_DOCUMENTARY_BASELINE_APPROVED_AND_ACCESSIONED`
+- `PR_62_COPILOT_RECONCILIATION_ACCESSIONED`
+- `PR_62_POST_MERGE_CUSTODY_COMPLETE`
+- `REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_BASELINE_CUSTODY_COMPLETE`
+- `ALL_18_GAPS_REMAIN_OPEN`
+- `ALL_16_FINDINGS_RETAIN_RECORDED_STATUS`
+- `ALL_15_IWPS_REMAIN_CANDIDATES_ONLY`
+- `AUTHORIZED_IWPS_TOTAL_0`
+- `GAP_0004_REMAINS_OPEN`
+- `MERGE_GATE_NOT_ACTIVE`
+- `RELEASE_GATE_NOT_ACTIVE`
+- `OPERATIONS_REFERENCE_NOT_ACTIVE`
+- `IMPLEMENTATION_NOT_AUTHORIZED`
+- `PRODUCT_CODE_CHANGE_NOT_AUTHORIZED`
+- `DEPENDENCY_CHANGE_NOT_AUTHORIZED`
+- `CI_WORKFLOW_CHANGE_NOT_AUTHORIZED`
+- `EXTERNAL_TOOL_SETUP_NOT_AUTHORIZED`
+- `STRIPE_RUNTIME_TESTING_NOT_AUTHORIZED_BY_THIS_DIRECTIVE`
+- `DEPLOYMENT_NOT_AUTHORIZED`
+- `STAGING_NOT_AUTHORIZED`
+- `PILOT_NOT_AUTHORIZED`
+- `PRODUCTION_USE_NOT_AUTHORIZED`
+- `WAVE_2_NOT_AUTHORIZED`
+- `CGP_007_NOT_AUTHORIZED`
+- `PRIOR_PREFLIGHT_BLOCK_WAS_CORRECT`
+- `AUTHENTICATED_SOURCE_WHITESPACE_EXCEPTION_APPROVED`
+- `COPILOT_SOURCE_EXACT_BYTES_PRESERVED`
+- `COPILOT_SOURCE_SHA256_VERIFIED`
+- `COPILOT_SOURCE_BYTE_LENGTH_VERIFIED`
+- `NON_SOURCE_DIFF_CHECK_PASS`
+- `WHITESPACE_EXCEPTION_NARROWLY_CONTAINED`
+- `NO_PR_62_AMENDMENT_OCCURRED`

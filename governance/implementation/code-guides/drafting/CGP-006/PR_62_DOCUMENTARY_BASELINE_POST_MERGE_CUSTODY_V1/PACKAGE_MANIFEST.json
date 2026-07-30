@@ -1,0 +1,123 @@
+{
+  "approved_pr62_head": "e61912b673da65556767cd8fb463c9d86debe5ff",
+  "counts": {
+    "authorized_iwps": 0,
+    "candidate_iwps": 15,
+    "finding_observation": 1,
+    "finding_p1_high": 5,
+    "finding_p2_medium": 8,
+    "finding_p3_low": 2,
+    "finding_rows": 16,
+    "gap_p1_high": 5,
+    "gap_p2_medium": 11,
+    "gap_p3_low": 2,
+    "gap_rows": 18,
+    "required_artifacts": 16,
+    "source_identity_rows": 42
+  },
+  "custody_branch": "codex/cgp-006-pr62-documentary-baseline-post-merge-custody-v1",
+  "custody_package_path": "governance/implementation/code-guides/drafting/CGP-006/PR_62_DOCUMENTARY_BASELINE_POST_MERGE_CUSTODY_V1/",
+  "files": [
+    {
+      "byte_length": 812,
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "84f816a1fb86dc473d063f640cb9df26011de147f9fe725883d2605de92e379e"
+    },
+    {
+      "byte_length": 2915,
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "3c02dab7eeaa0b0b67421685437c1ba8e6bf6bdda18c6a889ee409ea1e74d7a8"
+    },
+    {
+      "byte_length": 15585,
+      "path": "PR_62_BASELINE_SOURCE_IDENTITY_REGISTER.csv",
+      "sha256": "9b92764afe94ee485ace3b7fdbced04b2b6066920ab26afe7a8240650541b9ea"
+    },
+    {
+      "byte_length": 1886,
+      "path": "PR_62_COPILOT_RECONCILIATION_CUSTODY_RECORD.md",
+      "sha256": "379608e94e4f63ee3714c94dbcd6ba661d5e0c33a3d6299d0765a8374aa1bd87"
+    },
+    {
+      "byte_length": 811,
+      "path": "PR_62_COUNT_AND_CLASSIFICATION_RECONCILIATION_RECORD.md",
+      "sha256": "4d304235f809970334c4edb0fc7818d3614baf3313f93c1eb6d1ac7cc5da67d9"
+    },
+    {
+      "byte_length": 2274,
+      "path": "PR_62_FOUNDER_DOCUMENTARY_BASELINE_APPROVAL_RECORD.md",
+      "sha256": "78a53b6ccfb7ab4675d5013ae32e85d4227b405f13d904311306ad15f269aca4"
+    },
+    {
+      "byte_length": 9956,
+      "path": "PR_62_GAP_FINDING_AND_IWP_CUSTODY_TABLE.csv",
+      "sha256": "bc48909c9b78af9864636c8d4d0d6f8b9451ffc51f1949b80716a162cd5672ba"
+    },
+    {
+      "byte_length": 2355,
+      "path": "PR_62_NON_AUTHORIZATION_AND_OPEN_STATE_RECORD.md",
+      "sha256": "c1efd58e81960b9327574f7bd26f08424249b8494605b15634283f3f0067260b"
+    },
+    {
+      "byte_length": 1015,
+      "path": "PR_62_POST_MERGE_PROTECTED_HEAD_RECORD.json",
+      "sha256": "8de6d68265f33963bfa1f66a659fa8cc7362a6d248110aa990924b325b173e63"
+    },
+    {
+      "byte_length": 3012,
+      "path": "PR_62_PROTECTED_MERGE_RECEIPT.json",
+      "sha256": "31effc850ea3dbf624a859749e8a6bf0b248c13e3fa38c6e5468903c2e6911b6"
+    },
+    {
+      "byte_length": 2061,
+      "path": "README.md",
+      "sha256": "5cadae5988691dbe6fb3ff457077db76542a9083569206ca1960da081f9fe636"
+    },
+    {
+      "byte_length": 2573,
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "b637fc62f1c43a5945b7514288710a86911f90fd530547a58660f689ae487a30"
+    },
+    {
+      "byte_length": 932,
+      "path": "tests/test_pr62_documentary_baseline_custody.py",
+      "sha256": "1deefa0d30a60796213fad89fdbbd8bcc20191914251a8b32df33293fb5dd2d9"
+    },
+    {
+      "byte_length": 13105,
+      "path": "validators/validate_pr62_documentary_baseline_custody.py",
+      "sha256": "d62f78dd6e74718b110b12b93492356859e9c924895ab1392c4bddef7599d4e3"
+    }
+  ],
+  "generated_at_utc": "2026-07-30T12:51:46Z",
+  "non_authorizations": [
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "PRODUCT_CODE_CHANGE_NOT_AUTHORIZED",
+    "DEPENDENCY_CHANGE_NOT_AUTHORIZED",
+    "LOCKFILE_CHANGE_NOT_AUTHORIZED",
+    "CI_WORKFLOW_CHANGE_NOT_AUTHORIZED",
+    "ROOT_README_CHANGE_NOT_AUTHORIZED",
+    "LICENSE_SELECTION_OR_ADDITION_NOT_AUTHORIZED",
+    "SCHEMA_OR_MIGRATION_CHANGE_NOT_AUTHORIZED",
+    "SECRET_SCANNER_SETUP_NOT_AUTHORIZED",
+    "EXTERNAL_TOOL_SETUP_NOT_AUTHORIZED",
+    "STRIPE_RUNTIME_TESTING_NOT_AUTHORIZED_BY_THIS_DIRECTIVE",
+    "STRIPE_KEY_OR_WEBHOOK_CONFIGURATION_NOT_AUTHORIZED",
+    "DOCUSIGN_CONFIGURATION_NOT_AUTHORIZED",
+    "DEPLOYMENT_NOT_AUTHORIZED",
+    "STAGING_NOT_AUTHORIZED",
+    "PILOT_NOT_AUTHORIZED",
+    "PRODUCTION_USE_NOT_AUTHORIZED",
+    "WAVE_2_NOT_AUTHORIZED",
+    "CGP_007_NOT_AUTHORIZED",
+    "GAP_CLOSURE_NOT_AUTHORIZED",
+    "FINDING_CLOSURE_NOT_AUTHORIZED",
+    "IWP_ACTIVATION_NOT_AUTHORIZED"
+  ],
+  "package_id": "ES-CGP-006-PR62-DOCUMENTARY-BASELINE-POST-MERGE-CUSTODY-V1",
+  "post_pr62_merge_protected_head": "185d37987c11eccabba4436619bdf11e91494711",
+  "pr62_merge_commit": "185d37987c11eccabba4436619bdf11e91494711",
+  "pre_merge_protected_head": "1ad6fa436c31316ee192844106ca748cd6dc6d0b",
+  "protected_branch": "integrate-emergent-final-zip",
+  "repository": "rianray2012-coder/EquineSync-V4"
+}

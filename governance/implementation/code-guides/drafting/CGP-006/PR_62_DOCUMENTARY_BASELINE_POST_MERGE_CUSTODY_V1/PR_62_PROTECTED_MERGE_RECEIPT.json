@@ -1,0 +1,65 @@
+{
+  "approved_pr_head": "e61912b673da65556767cd8fb463c9d86debe5ff",
+  "approved_pr_head_branch": "codex/cgp-006-repository-specific-implementation-mapping-current-state-gap-audit-v1",
+  "corrected_preflight": {
+    "exact_source_bytes": 12416,
+    "exact_source_git_blob_sha": "0d4e81ab45fac4feb77324a3f253f970c79fb803",
+    "exact_source_sha256": "cd6e1315615d0f65664485d4ebc2f8906ff4e1f9c0bd19f3b7a6765da026386b",
+    "exception_containment_result": "PASS",
+    "excluded_path": "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt",
+    "non_source_diff_check": "git diff --check 1ad6fa436c31316ee192844106ca748cd6dc6d0b e61912b673da65556767cd8fb463c9d86debe5ff -- . \":(exclude)governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt\"",
+    "non_source_diff_check_result": "PASS",
+    "prior_block_marker": "CGP_006_PR_62_BASELINE_MERGE_BLOCKED_REPOSITORY_OR_PR_STATE_CHANGED",
+    "prior_whole_diff_diagnostic": "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt:6: trailing whitespace.",
+    "source_bytes_unchanged": true
+  },
+  "github_checks": [
+    {
+      "name": "Backend suite is collectable",
+      "result": "SUCCESS",
+      "source": "GitHub Actions CI"
+    },
+    {
+      "name": "Backend known-failure non-regression gate",
+      "result": "SUCCESS",
+      "source": "GitHub Actions CI"
+    },
+    {
+      "name": "Frontend build",
+      "result": "SUCCESS",
+      "source": "GitHub Actions CI"
+    },
+    {
+      "name": "Vercel",
+      "result": "SUCCESS",
+      "source": "Vercel status context"
+    },
+    {
+      "name": "Vercel Preview Comments",
+      "result": "SUCCESS",
+      "source": "Vercel check run"
+    }
+  ],
+  "github_merged_at": "2026-07-30T12:39:59Z",
+  "merge_commit_committer_time": "2026-07-30T07:39:59-05:00",
+  "merge_commit_parents": [
+    "1ad6fa436c31316ee192844106ca748cd6dc6d0b",
+    "e61912b673da65556767cd8fb463c9d86debe5ff"
+  ],
+  "merge_commit_sha": "185d37987c11eccabba4436619bdf11e91494711",
+  "merge_method": "merge_commit",
+  "pr_additions": 2161,
+  "pr_changed_files": 34,
+  "pr_commits": 2,
+  "pr_deletions": 0,
+  "pre_merge_protected_branch": "integrate-emergent-final-zip",
+  "pre_merge_protected_head": "1ad6fa436c31316ee192844106ca748cd6dc6d0b",
+  "protected_branch_head_after_merge": "185d37987c11eccabba4436619bdf11e91494711",
+  "pull_request": 62,
+  "pull_request_url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/62",
+  "rebase_merge_used": false,
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "squash_merge_used": false,
+  "status_after_merge": "MERGED",
+  "status_before_merge": "OPEN_READY_UNMERGED_AFTER_DRAFT_REMOVAL_FOR_GITHUB_MERGE_MECHANICS"
+}
