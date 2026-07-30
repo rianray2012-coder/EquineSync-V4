@@ -1,0 +1,97 @@
+{
+  "effective_event": "VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR",
+  "file_count_excluding_manifest_and_checksum": 13,
+  "files": [
+    {
+      "byte_length": 2555,
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "d7e5b1e3cc352962dd612e9233333db440389b9f3d3ac58378d1872042afe051"
+    },
+    {
+      "byte_length": 2517,
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "3abfdf31431bdf1c079aaa8558d3603c193ad6bf86d10857d14c763bbe6e99ae"
+    },
+    {
+      "byte_length": 5767,
+      "path": "GUIDE_ACTIVATION_EFFECTIVE_SCOPE_MATRIX.csv",
+      "sha256": "d2e19129fe4f1fc477d2e273b166b341daec7443c8fc133211aa0f74b0afacf3"
+    },
+    {
+      "byte_length": 604,
+      "path": "PR_59_MERGE_METADATA.md",
+      "sha256": "eb95fb21e053c70454224578951ba195c415b101290987c6e728905e5eab16c7"
+    },
+    {
+      "byte_length": 3001,
+      "path": "README.md",
+      "sha256": "13c05ae47eb941de653b7cb9e89e2f3c5031b674ffa6f6d805dfd2e862230308"
+    },
+    {
+      "byte_length": 2457,
+      "path": "RESIDUAL_RISK_ACCEPTANCE_CUSTODY_MATRIX.csv",
+      "sha256": "7f249f62dc36fc44330f2595eeb0b8f904a48023f87fcc537f929c992e729c0b"
+    },
+    {
+      "byte_length": 4029,
+      "path": "RETAINED_ITEM_VISIBILITY_MATRIX.csv",
+      "sha256": "87b193ee3734fd0375e68aea4bb8336654777143540c0338639ff4eeacc3597b"
+    },
+    {
+      "byte_length": 6742,
+      "path": "SOURCE_FREEZE_MANIFEST.json",
+      "sha256": "3a814d04cd74661eeddb43e6855b00439c58860322d3528dfbb8a11f9738497a"
+    },
+    {
+      "byte_length": 2859,
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "c90fb736d16854e96078d925d7f1a935ab1294252bd39e0b6d7cde48ce629a15"
+    },
+    {
+      "byte_length": 2538,
+      "path": "STAGE_24_ACTIVATION_CUSTODY_RECORD.md",
+      "sha256": "0b3a30b07edfe3cf9a7d03f763088852dfea0b8ee725bd1448889a45223f4ee6"
+    },
+    {
+      "byte_length": 2508,
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "2203cebe8f9da0f47ff28813bd27b4ed03b14cddadb45a0110910962ab99c1a0"
+    },
+    {
+      "byte_length": 1149,
+      "path": "tests/test_stage24_profile_activation_custody.py",
+      "sha256": "cfa17b203d6f36abe7118cba2b55cd2c4633ccb7cc3b0362abc0c544238dc0db"
+    },
+    {
+      "byte_length": 7318,
+      "path": "validators/validate_stage24_profile_activation_custody.py",
+      "sha256": "22aba33fb4b5da35bd6bc71f0f3112b36d0608bc920740996a77d38737a114c3"
+    }
+  ],
+  "final_tokens": [
+    "SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_V1_0_0_ADOPTED_AND_ACTIVE",
+    "ES_CG_00_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW",
+    "ES_CG_01_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW",
+    "ES_CG_10_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW",
+    "ES_CG_13_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW",
+    "MERGE_GATE_NOT_ACTIVE",
+    "RELEASE_GATE_NOT_ACTIVE",
+    "OPERATIONS_REFERENCE_NOT_ACTIVE",
+    "TWELVE_RESIDUAL_RISKS_ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY",
+    "GAP_0004_REMAINS_OPEN",
+    "IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "DEPLOYMENT_NOT_AUTHORIZED",
+    "STAGING_USE_NOT_AUTHORIZED",
+    "PILOT_NOT_AUTHORIZED",
+    "PRODUCTION_NOT_AUTHORIZED",
+    "WAVE_2_NOT_AUTHORIZED",
+    "CGP_007_NOT_AUTHORIZED",
+    "NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION",
+    "NO_GRACE_PERIOD_FOR_NEWLY_AUTHORIZED_WORK",
+    "NO_RETROACTIVE_APPLICATION_TO_HISTORICAL_RECORDS"
+  ],
+  "founder_disposition": "ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30",
+  "package_id": "CGP006-STAGE24-PROFILE-ACTIVATION-CUSTODY-V1",
+  "pr59_merge_commit": "f5b2973c9a796d6864607dcae42aa6c89f894250"
+}

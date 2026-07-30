@@ -32,7 +32,7 @@ def status_text(overrides: dict[tuple[str, str], str] | None = None) -> str:
             "Stage 22 adoption": "ADOPTED",
             "Stage 23 accession": "REPOSITORY_ACCESSIONED",
             "Custody": "CUSTODY_COMPLETE",
-            "Activation": "NOT_ACTIVE",
+            "Activation": "ACTIVE_LIMITED_STAGE_24",
             "Implementation mapping": "NOT_AUTHORIZED",
             "Implementation": "NOT_AUTHORIZED",
         }
@@ -117,7 +117,7 @@ class Wave1CurrentStatusCustodyTableTests(unittest.TestCase):
         cases = [
             ("Stage 22 adoption", "NOT_ADOPTED"),
             ("Stage 23 accession", "NOT_ACCESSIONED"),
-            ("Activation", "ACTIVE"),
+            ("Activation", "NOT_ACTIVE"),
             ("Implementation mapping", "AUTHORIZED"),
             ("Implementation", "AUTHORIZED"),
         ]
