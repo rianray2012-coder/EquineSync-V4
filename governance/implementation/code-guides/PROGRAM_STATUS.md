@@ -22,8 +22,8 @@ Repository-specific implementation mapping, implementation, deployment, staging,
 - PR #59 merge timestamp: `2026-07-30T07:03:09Z`
 - Stage 24 custody branch: `codex/cgp-006-stage24-profile-activation-custody-v1`
 - Activation effective event: `VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR`
-- Adopted profile SHA-256: `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
-- Adopted profile byte length: `9609`
+- Adopted profile SHA-256: `ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b`
+- Adopted profile byte length: `9681`
 - Activation state after custody merge: `ACTIVE_LIMITED_STAGE_24_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW_ONLY`
 
 | Guide | Version | SHA-256 | Byte length | Active scopes | Inactive scopes |

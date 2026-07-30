@@ -2,13 +2,13 @@
 
 **Overall result:** `MULTI_PASS_MACHINE_ASSISTED_ADVERSARIAL_REVIEW_COMPLETE`
 **Reconciliation result:** `NO_OPEN_P0_OR_P1_IDENTIFIED_FOR_LIMITED_STAGE_24_RECOMMENDATION`
-**Unresolved uncertainty result:** `FOUNDER_DECISION_REQUIRED_FOR_RESIDUAL_RISK_ACCEPTANCE`
+**Residual-risk acceptance result:** `FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12`
 
 | Reconciliation ID | Originating pass | Affected guide | Affected controls | Severity | Evidence | Conflicting conclusions | Reconciliation result | Unresolved uncertainty | Proposed treatment | Reopening trigger |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `MPRR-0001` | Pass A | Portfolio | Authority boundary | P2 | Founder determination and custody receipt | Earlier records treated outside review as absolute blocker | Founder determination controls; disclose limitation | Founder final disposition pending | Treat as non-blocking limitation for proposed limited activation | Any independent-assurance claim |
-| `MPRR-0002` | Pass C | Portfolio | Guardian/minor/facility isolation | P2 | ES-CG-10 and ES-CG-13 controls | No runtime evidence exists | Assign to objective implementation/staging tests | Founder risk acceptance pending | Keep as condition and suspension trigger | Any pilot without tests |
-| `MPRR-0003` | Pass D | Portfolio | Evidence feasibility | P2 | Empty implementation evidence register | Implementation evidence required but cannot exist yet | Assign to post-authorization implementation stage | Founder decision pending | Do not close, do not block preparatory activation by circularity | Any evidence overclaim |
+| `MPRR-0001` | Pass A | Portfolio | Authority boundary | P2 | Founder determination and custody receipt | Earlier records treated outside review as absolute blocker | Founder determination controls; disclose limitation | Founder disposition recorded for limited Stage 24 activation | Treat as non-blocking disclosed limitation for the accepted limited activation scope only | Any independent-assurance claim |
+| `MPRR-0002` | Pass C | Portfolio | Guardian/minor/facility isolation | P2 | ES-CG-10 and ES-CG-13 controls | No runtime evidence exists | Assign to objective implementation/staging tests | Residual risk accepted for limited Stage 24 activation only; runtime evidence remains unresolved | Keep as condition and suspension trigger | Any pilot without tests |
+| `MPRR-0003` | Pass D | Portfolio | Evidence feasibility | P2 | Empty implementation evidence register | Implementation evidence required but cannot exist yet | Assign to post-authorization implementation stage | Founder residual-risk decision complete; implementation evidence remains unavailable until separately authorized work exists | Do not close, do not block preparatory activation by circularity | Any evidence overclaim |
 | `MPRR-0004` | Pass H | Portfolio | Silent closure controls | P3 | Finding and blocker matrices | Closure desire vs closure authority | No closure in this workstream | None | Keep visible and not closed | Any canonical status change |
 
 No finding is discarded merely because another pass did not identify it.
@@ -37,7 +37,9 @@ No finding is discarded merely because another pass did not identify it.
 
 `OBJECTIVE_TEST_AND_EVIDENCE_GATES_REQUIRED`
 
-`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED`
+`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12`
+
+`ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY`
 
 `GAP_0004_REMAINS_OPEN`
 
@@ -73,4 +75,4 @@ No finding is discarded merely because another pass did not identify it.
 
 `CGP_007_NOT_AUTHORIZED`
 
-`DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION`
+`CGP_006_STAGE_24_PROFILE_ADOPTION_LIMITED_ACTIVATION_AND_CUSTODY_COMPLETE`

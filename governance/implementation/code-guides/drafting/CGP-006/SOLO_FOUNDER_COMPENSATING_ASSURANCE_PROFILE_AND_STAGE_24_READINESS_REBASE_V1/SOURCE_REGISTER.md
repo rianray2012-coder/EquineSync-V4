@@ -143,8 +143,8 @@ The following sources are integrated under the Founder-issued Stage 24 dispositi
 ## Adopted Profile Source
 
 - `SFCA-SRC-0062`: `ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md`
-- SHA-256: `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
-- Byte length: `9609`
+- SHA-256: `ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b`
+- Byte length: `9681`
 - Authority class: `FOUNDER_ADOPTED_PROFILE_PENDING_EFFECTIVE_EVENT`
 - Source status: `founder_adopted_pending_effective_event`
 

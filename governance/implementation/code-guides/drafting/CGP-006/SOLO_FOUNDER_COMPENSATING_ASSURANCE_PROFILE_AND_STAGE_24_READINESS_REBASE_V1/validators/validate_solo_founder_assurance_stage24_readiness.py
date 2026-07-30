@@ -63,6 +63,7 @@ REQUIRED_FILES = [
     'SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_REGISTER.csv', 'SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_DECISION_REGISTER_STAGE24.csv',
     'FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md', 'AUTHORIZED_PATH_REPORT.md', 'DIRECTIVE_EXECUTION_RECORD.md',
     'VALIDATION_REPORT.md', 'PACKAGE_MANIFEST.json', 'CHECKSUM_MANIFEST.sha256',
+    'BUGBOT_PR59_FINDINGS_REPORT.md',
     'validators/validate_solo_founder_assurance_stage24_readiness.py', 'tests/test_solo_founder_assurance_stage24_readiness.py',
 ] + list(APPROVED_TOOLING_SOURCES) + list(APPROVED_DISPOSITION_SOURCES)
 REQUIRED_PHASE_A_STATEMENTS = [
@@ -106,6 +107,12 @@ CENTRAL_PHASE_A_FILES = [
     'AUTHORIZED_PATH_REPORT.md',
     'STAGE_24_FOUNDER_DISPOSITION_PRE_CUSTODY_RECORD.md',
 ]
+HISTORICAL_EVIDENCE_FILES = {
+    CANDIDATE_PROFILE['path'],
+    'BUGBOT_PR59_FINDINGS_REPORT.md',
+    'SOURCE_REGISTER.md',
+    'SOURCE_AUTHORITY_MATRIX.csv',
+}
 BAD_AUTHORITY_TOKENS = [
     "SOLO_FOUNDER_ASSURANCE_PROFILE_PROTECTED_ACCESSIONED",
     "SOLO_FOUNDER_ASSURANCE_PROFILE_CUSTODY_COMPLETE",
@@ -166,6 +173,36 @@ BAD_AUTHORITY_TOKENS = [
     "NEW_PR_OPENED",
 ]
 
+CONTRADICTORY_TOKEN_RULES = [
+    {
+        "name": "residual risk acceptance required after completion",
+        "tokens": (
+            "FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED",
+            "FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12",
+        ),
+    },
+]
+
+TERMINAL_STAGE24_LIFECYCLE_TOKENS = (
+    "FOUNDER_ADOPTED",
+    "PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT",
+    PHASE_A_STATE,
+    EFFECTIVE_EVENT,
+    "CGP_006_STAGE_24_PROFILE_ADOPTION_LIMITED_ACTIVATION_AND_CUSTODY_COMPLETE",
+    "SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_V1_0_0_ADOPTED_AND_ACTIVE",
+)
+
+CONTRADICTORY_TOKEN_RULES.extend(
+    {
+        "name": "stale draft PR disposition after terminal Stage 24 lifecycle state",
+        "tokens": (
+            "DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION",
+            token,
+        ),
+    }
+    for token in TERMINAL_STAGE24_LIFECYCLE_TOKENS
+)
+
 class ValidationError(Exception):
     pass
 
@@ -190,6 +227,20 @@ def check_authorized_paths(paths: list[str]) -> None:
     outside = [p for p in paths if p and not p.startswith(prefix)]
     if outside:
         raise ValidationError(f"files outside authorized package path changed: {outside}")
+
+def find_contradictory_governance_tokens(text_by_rel: dict[str, str]) -> list[str]:
+    contradictions = []
+    for rel, text in sorted(text_by_rel.items()):
+        for rule in CONTRADICTORY_TOKEN_RULES:
+            tokens = tuple(rule["tokens"])
+            if all(contains_controlled_token(text, token) for token in tokens):
+                contradictions.append(f"{rel}: {rule['name']} ({' + '.join(tokens)})")
+    return contradictions
+
+def check_contradictory_governance_tokens(text_by_rel: dict[str, str]) -> None:
+    contradictions = find_contradictory_governance_tokens(text_by_rel)
+    if contradictions:
+        raise ValidationError("contradictory governance-state tokens present: " + "; ".join(contradictions))
 
 def git_changed_paths(root: Path) -> list[str]:
     result = subprocess.run(["git", "diff", "--name-only", START_HEAD, "HEAD"], cwd=root, text=True, capture_output=True, check=True)
@@ -248,9 +299,10 @@ def validate(root: Path | None = None, *, package_override: Path | None = None, 
     text_by_rel = {}
     for rel in REQUIRED_FILES:
         if rel.endswith(('.md', '.csv', '.txt')):
-            if rel in APPROVED_DISPOSITION_SOURCES or rel in APPROVED_TOOLING_SOURCES or rel == CANDIDATE_PROFILE['path']:
+            if rel in APPROVED_DISPOSITION_SOURCES or rel in APPROVED_TOOLING_SOURCES or rel in HISTORICAL_EVIDENCE_FILES:
                 continue
             text_by_rel[rel] = (pkg / rel).read_text(encoding='utf-8')
+    check_contradictory_governance_tokens(text_by_rel)
     all_text = "\n".join(text_by_rel.values())
     for token in BAD_AUTHORITY_TOKENS:
         if contains_controlled_token(all_text, token):

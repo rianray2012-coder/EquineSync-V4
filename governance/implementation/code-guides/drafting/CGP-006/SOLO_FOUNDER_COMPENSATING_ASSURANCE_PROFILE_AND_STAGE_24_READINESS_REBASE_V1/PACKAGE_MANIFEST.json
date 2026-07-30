@@ -51,7 +51,7 @@
   "directive_id": "CGP_006_STAGE_24_PROFILE_ADOPTION_LIMITED_ACTIVATION_PROTECTED_MERGE_AND_CUSTODY_DIRECTIVE_V1_0_0",
   "effective_event": "VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR",
   "existing_pr": 59,
-  "file_count_excluding_manifest_and_checksum": 47,
+  "file_count_excluding_manifest_and_checksum": 48,
   "files": [
     {
       "byte_length": 3852,
@@ -64,14 +64,19 @@
       "sha256": "dd9b879b834e1b6d387f47e288f76738321f083c013dfde9bf4848081d2a431f"
     },
     {
-      "byte_length": 4854,
-      "path": "DIRECTIVE_EXECUTION_RECORD.md",
-      "sha256": "1fe9cc6122189c45065a2e868316147847472cdafac7e59c91468181a7af56e7"
+      "byte_length": 7683,
+      "path": "BUGBOT_PR59_FINDINGS_REPORT.md",
+      "sha256": "0caa210b9e7f0ca797f2e0aad81b87a4d3844c226fbb1e444458dcf6cb443680"
     },
     {
-      "byte_length": 9609,
+      "byte_length": 4854,
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "2dfe0e8ce41d62f3908d301deaa33284b7eed10e4e1e5f076208856de7ed5bd7"
+    },
+    {
+      "byte_length": 9681,
       "path": "ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
-      "sha256": "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2"
+      "sha256": "ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b"
     },
     {
       "byte_length": 9245,
@@ -131,7 +136,7 @@
     {
       "byte_length": 7290,
       "path": "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md",
-      "sha256": "6870e94e623c7ffcf36a8c42cc5247deb734cffb674830a14b20fba11703524c"
+      "sha256": "ed19bbf17a520a00b11e95b781e98b4d13bb5de3f234d72f4942519219d649b7"
     },
     {
       "byte_length": 2121,
@@ -159,9 +164,9 @@
       "sha256": "db99cd3cc9361b7a1ee9496bcbada9d6209b475ec1f90c477793af9f7a5dda5f"
     },
     {
-      "byte_length": 3126,
+      "byte_length": 3413,
       "path": "MULTI_PASS_REVIEW_RECONCILIATION_REPORT.md",
-      "sha256": "a7208db995482359f07719b7957a88773c36ced5dc2013ffd250e058ab3c9566"
+      "sha256": "9eea20004eb58cd7311ae64945c1b7570de7ce097f04f7fe77c26a0b0fc495b3"
     },
     {
       "byte_length": 3804,
@@ -211,7 +216,7 @@
     {
       "byte_length": 7060,
       "path": "README.md",
-      "sha256": "71bfdcafb8ceaaca78c13de74b38fb59446a3a718a011d67c29bf68ac0a10ed8"
+      "sha256": "0b5a417124058df10ecfaa6724aec2b34ab8b49e2b55aab23a5c0558e9db299b"
     },
     {
       "byte_length": 55232,
@@ -236,22 +241,22 @@
     {
       "byte_length": 53857,
       "path": "SOURCE_FREEZE_MANIFEST.json",
-      "sha256": "d29301bef84dac28d92afc720690c4a91fcaa18c95f0df1496568aebdb0f77dc"
+      "sha256": "ef3c7b478e896438ca97e5f955ebadeb46112fd8d67f95e9524e5f965c42319c"
     },
     {
       "byte_length": 31598,
       "path": "SOURCE_REGISTER.md",
-      "sha256": "529e5d9f1a120ac47ac02d3edd642e661386a1305a37ae9fa276c8910ad80526"
+      "sha256": "bb4e299aeb508fcc817625f82d84decd4a1d12c4ffb9c7de94638ce245b8518c"
     },
     {
       "byte_length": 12815,
       "path": "SOURCE_SHA256SUMS.txt",
-      "sha256": "0fffd1fa2df2a3a07dadf507d505f9efbda5648ec020efac384ad5ac529e1401"
+      "sha256": "a96c0008f267a08bd38db0b09df709f5a362ca45b47cd619f1681371eaa79d12"
     },
     {
       "byte_length": 4537,
       "path": "STAGE_24_FOUNDER_DISPOSITION_PRE_CUSTODY_RECORD.md",
-      "sha256": "c580f9eb4d380f30baa1ca8853f7f2959598e5a8d021b851b35257e152eb2465"
+      "sha256": "a46ea0990188b59f2cd9c36437bccf5035931c3ccf7da96d8822856330ddeb80"
     },
     {
       "byte_length": 3563,
@@ -279,14 +284,14 @@
       "sha256": "c37714d6aabee6d839a19d6d5cf4734ca7091a6f3c7fcec20a40381e7d152049"
     },
     {
-      "byte_length": 14759,
+      "byte_length": 16751,
       "path": "tests/test_solo_founder_assurance_stage24_readiness.py",
-      "sha256": "1bdd02da6bc8976656cb461ce607b0c4b75f02ff189a8c039ffd52c616762589"
+      "sha256": "ae1200040271844d38354760f40dd5cbc7fd645901415343c3235260d636c01b"
     },
     {
-      "byte_length": 28824,
+      "byte_length": 30695,
       "path": "validators/validate_solo_founder_assurance_stage24_readiness.py",
-      "sha256": "200be3f39264f95681ef144ecffb77f4f8c620e7452b52b18ef6ba3b6cb25570"
+      "sha256": "c3abee74bb9509084263c227a4cc8a0e1ddf790872291569f31845f881f70d5d"
     }
   ],
   "package_id": "CGP006-SFCA-STAGE24-FOUNDER-DISPOSITION-PHASE-A",

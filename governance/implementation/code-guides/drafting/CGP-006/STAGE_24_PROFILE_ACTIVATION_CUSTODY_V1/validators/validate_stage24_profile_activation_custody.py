@@ -8,10 +8,11 @@ import subprocess
 from pathlib import Path
 
 PACKAGE_REL = Path("governance/implementation/code-guides/drafting/CGP-006/STAGE_24_PROFILE_ACTIVATION_CUSTODY_V1")
+PHASE_A_PACKAGE_REL = Path("governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1")
 START_HEAD = "f5b2973c9a796d6864607dcae42aa6c89f894250"
 ADOPTED_PROFILE = Path("governance/implementation/code-guides/profiles/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md")
-ADOPTED_SHA = "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2"
-ADOPTED_BYTES = 9609
+ADOPTED_SHA = "ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b"
+ADOPTED_BYTES = 9681
 EFFECTIVE_EVENT = "VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR"
 DISPOSITION_ID = "ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30"
 FINAL_TOKENS = {
@@ -40,6 +41,25 @@ ALLOWED_PATHS = {
     "governance/implementation/code-guides/validation/cgp_validation.py",
     "governance/implementation/code-guides/validation/tests/test_wave1_current_status_custody_table.py",
 }
+ALLOWED_PR61_REMEDIATION_PATHS = {
+    (PHASE_A_PACKAGE_REL / rel).as_posix()
+    for rel in {
+        "BUGBOT_PR59_FINDINGS_REPORT.md",
+        "CHECKSUM_MANIFEST.sha256",
+        "DIRECTIVE_EXECUTION_RECORD.md",
+        "ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
+        "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md",
+        "MULTI_PASS_REVIEW_RECONCILIATION_REPORT.md",
+        "PACKAGE_MANIFEST.json",
+        "README.md",
+        "SOURCE_FREEZE_MANIFEST.json",
+        "SOURCE_REGISTER.md",
+        "SOURCE_SHA256SUMS.txt",
+        "STAGE_24_FOUNDER_DISPOSITION_PRE_CUSTODY_RECORD.md",
+        "tests/test_solo_founder_assurance_stage24_readiness.py",
+        "validators/validate_solo_founder_assurance_stage24_readiness.py",
+    }
+}
 
 class ValidationError(Exception):
     pass
@@ -57,7 +77,7 @@ def changed_paths(root: Path) -> list[str]:
 
 def check_authorized_paths(paths: list[str]) -> None:
     allowed_prefix = PACKAGE_REL.as_posix() + "/"
-    outside = [p for p in paths if not (p.startswith(allowed_prefix) or p in ALLOWED_PATHS)]
+    outside = [p for p in paths if not (p.startswith(allowed_prefix) or p in ALLOWED_PATHS or p in ALLOWED_PR61_REMEDIATION_PATHS)]
     if outside:
         raise ValidationError(f"unauthorized path changed: {outside}")
 

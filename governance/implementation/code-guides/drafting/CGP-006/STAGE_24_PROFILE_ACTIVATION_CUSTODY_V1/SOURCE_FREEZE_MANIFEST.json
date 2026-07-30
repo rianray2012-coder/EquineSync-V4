@@ -1,8 +1,8 @@
 {
   "adopted_profile": {
-    "byte_length": 9609,
+    "byte_length": 9681,
     "repository_path": "governance/implementation/code-guides/profiles/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
-    "sha256": "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2"
+    "sha256": "ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b"
   },
   "effective_event": "VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR",
   "final_tokens": [
@@ -116,14 +116,14 @@
       "authority_class": "STAGE24_CUSTODY_RECORD",
       "byte_length": "20112",
       "repository_path": "governance/implementation/code-guides/PROGRAM_STATUS.md",
-      "sha256": "7c593627213808e7bd9f6a8d075f0a0e6c9ed1d6977d0a15081d35d3885f32d2",
+      "sha256": "991a540609b92dba5e1f3f809b718c765ba028ee85053e1436b0649b11f10bfa",
       "source_id": "PROGRAM_STATUS.md"
     },
     {
       "authority_class": "STAGE24_CUSTODY_RECORD",
-      "byte_length": "9609",
+      "byte_length": "9681",
       "repository_path": "governance/implementation/code-guides/profiles/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
-      "sha256": "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2",
+      "sha256": "ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b",
       "source_id": "ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md"
     },
     {
