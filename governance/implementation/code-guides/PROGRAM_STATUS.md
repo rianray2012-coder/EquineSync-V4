@@ -10,10 +10,27 @@
 **Guide activation state:** `NOT_ACTIVE`
 **Implementation authority:** `NOT_GRANTED`
 **CGP-007 status:** `NOT_ISSUED`
-**Next prompt:** `NONE_AUTHORIZED`
+**Next prompt:** `NEXT_WORKSTREAM_SOLO_FOUNDER_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE`
 **Post-custody closeout status:** `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
 **Historical PR #44 status:** `PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
 Repository-specific implementation mapping, guide activation, activation effective date, implementation, deployment, pilot or production use, runtime evidence, Wave 2, and CGP-007 remain unauthorized.
+
+## Founder-Approved Solo-Founder Compensating Assurance Determination Status
+
+- Determination ID: `ES-FD-SOLO-FOUNDER-COMPENSATING-ASSURANCE-2026-07-29`
+- Founder approval date: `2026-07-29`
+- Canonical determination path: `governance/implementation/code-guides/founder-determinations/ES-FD-SOLO-FOUNDER-COMPENSATING-ASSURANCE-2026-07-29/FOUNDER_DETERMINATION_SOLO_FOUNDER_COMPENSATING_ASSURANCE_MODEL_2026-07-29.md`
+- Approved SHA-256: `e777598974887456f22bfc77d8db6c9a235502fc552fb28ce6ff52a77ca3fb61`
+- Approved byte length: `29240`
+- Accession PR: `#57`
+- Accession PR head: `7c276bd5db37681e7d7cca40e0ca7606ff58a996`
+- Accession merge commit: `041e6562538abe6537c7e993cf4f5ba61a161225`
+- Protected accession state: `PROTECTED_REPOSITORY_ACCESSION_COMPLETE`
+- Custody receipt: `governance/implementation/code-guides/receipts/ES_FD_SOLO_FOUNDER_COMPENSATING_ASSURANCE_2026_07_29_CUSTODY_RECEIPT.md`
+- Custody state after protected merger of the receipt: `POST_MERGE_CUSTODY_COMPLETE`
+- Next documentary workstream label: `NEXT_WORKSTREAM_SOLO_FOUNDER_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE`
+
+The Solo-Founder Assurance Profile and Stage 24 readiness rebase require a later Founder directive before work begins. All four Wave 1 guides remain `NOT_ACTIVE`; repository-specific implementation mapping remains `NOT_AUTHORIZED`; implementation remains `NOT_AUTHORIZED`; deployment, pilot use, and production use remain unauthorized. No finding, warning, retained condition, gap, activation blocker, implementation-mapping blocker, or implementation blocker is closed by this custody update.
 
 ## Wave 1 V1.1 Adoption Authority Reconciliation Status
 
