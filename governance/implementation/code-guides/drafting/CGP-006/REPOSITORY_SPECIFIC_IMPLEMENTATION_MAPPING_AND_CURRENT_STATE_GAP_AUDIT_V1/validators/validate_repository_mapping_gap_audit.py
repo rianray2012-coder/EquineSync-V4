@@ -11,6 +11,8 @@ import subprocess
 import sys
 
 EXPECTED_BASE = "1ad6fa436c31316ee192844106ca748cd6dc6d0b"
+COPILOT_SOURCE_SHA = "cd6e1315615d0f65664485d4ebc2f8906ff4e1f9c0bd19f3b7a6765da026386b"
+COPILOT_SOURCE_BYTES = 12416
 AUTHORIZED_PACKAGE_PATH = "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/"
 PROFILE = "governance/implementation/code-guides/profiles/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md"
 PROFILE_SHA = "ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b"
@@ -51,6 +53,9 @@ MANDATORY_ARTIFACTS = [
     "CHECKSUM_MANIFEST.sha256",
     "validators/validate_repository_mapping_gap_audit.py",
     "tests/test_repository_mapping_gap_audit.py",
+    "COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt",
+    "COPILOT_FINDING_VALIDATION_AND_RECONCILIATION_REPORT.md",
+    "COPILOT_FINDING_DISPOSITION_REGISTER.csv",
 ]
 
 PACKAGE_ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -237,6 +242,79 @@ def validate() -> dict[str, object]:
         rel = rel.strip()
         assert sha256(PACKAGE_ROOT / rel) == expected_hash, f"checksum mismatch {rel}"
 
+
+    # 24A. Copilot reconciliation source and disposition controls.
+    copilot_source = PACKAGE_ROOT / 'COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt'
+    assert copilot_source.exists(), 'missing Copilot source'
+    assert copilot_source.stat().st_size == COPILOT_SOURCE_BYTES, 'Copilot source byte mismatch'
+    assert sha256(copilot_source) == COPILOT_SOURCE_SHA, 'Copilot source sha mismatch'
+    disposition_rows = read_csv('COPILOT_FINDING_DISPOSITION_REGISTER.csv')
+    allowed_dispositions = {
+        'VALID_NEW_GAP',
+        'VALID_ALREADY_CAPTURED',
+        'VALID_PARTIALLY_CAPTURED_REQUIRES_EXPANSION',
+        'VALID_REPOSITORY_POLICY_DECISION_REQUIRED',
+        'VALID_MAINTAINABILITY_OBSERVATION',
+        'UNVERIFIED_RISK_REQUIRES_EVIDENCE',
+        'CONTEXT_DEPENDENT_REQUIRES_FOUNDER_DECISION',
+        'DUPLICATE_OF_OTHER_FINDING',
+        'UNSUPPORTED_BY_REPOSITORY_EVIDENCE',
+        'REJECTED_AS_DEFECT_WITH_RECORDED_RATIONALE',
+        'SUPERSEDED_BY_CURRENT_REPOSITORY_STATE',
+    }
+    assert len(disposition_rows) == 10, f"expected 10 Copilot rows, got {len(disposition_rows)}"
+    expected_ids = [f"CGP006-COPILOT-FIND-{i:04d}" for i in range(1, 11)]
+    assert [r['finding_id'] for r in disposition_rows] == expected_ids, 'Copilot IDs not stable/sequential'
+    required_cols = [
+        'source_assertion',
+        'exact_repository_evidence',
+        'file_identity',
+        'line_or_symbol',
+        'evidence_type',
+        'primary_disposition',
+        'severity',
+        'likelihood',
+        'affected_scope',
+        'existing_gap_or_iwp_relationship',
+        'required_documentary_treatment',
+        'later_authority_requirement',
+        'final_status',
+        'rationale',
+    ]
+    for row in disposition_rows:
+        assert row['primary_disposition'] in allowed_dispositions, row
+        for col in required_cols:
+            assert row.get(col), f"missing {col} in {row['finding_id']}"
+        if row['primary_disposition'] == 'DUPLICATE_OF_OTHER_FINDING':
+            assert 'DUPLICATE_OF=' in row['existing_gap_or_iwp_relationship'], row
+            assert 'NEW_GAP=' not in row['existing_gap_or_iwp_relationship'], row
+        if row['primary_disposition'] == 'REJECTED_AS_DEFECT_WITH_RECORDED_RATIONALE':
+            assert 'rationale' in row and len(row['rationale']) > 40, row
+        if row['primary_disposition'] == 'UNVERIFIED_RISK_REQUIRES_EVIDENCE':
+            lowered = ' '.join(row.values()).lower()
+            prohibited_affirmative_claims = [
+                'confirmed defect',
+                'secret exposure confirmed',
+                'exposed secret confirmed',
+                'confirmed exposed secret',
+            ]
+            assert not any(token in lowered for token in prohibited_affirmative_claims), row
+    report_text = (PACKAGE_ROOT / 'COPILOT_FINDING_VALIDATION_AND_RECONCILIATION_REPORT.md').read_text()
+    for token in [
+        'COPILOT_FINDINGS_VALIDATED_AGAINST_EXACT_PR_62_HEAD',
+        'COPILOT_OUTPUT_TREATED_AS_REVIEW_INPUT_NOT_PROOF',
+        'DUPLICATES_NOT_DOUBLE_COUNTED',
+        'UNVERIFIED_RISKS_NOT_PRESENTED_AS_CONFIRMED_DEFECTS',
+        'REJECTED_FINDINGS_RETAINED_WITH_EVIDENCED_RATIONALE',
+        'NO_DEPENDENCY_CHANGED',
+        'NO_LOCKFILE_CHANGED',
+        'NO_CI_WORKFLOW_CHANGED',
+        'NO_LICENSE_SELECTED_OR_ADDED',
+        'NO_ROOT_README_CHANGED',
+        'PR_62_REMAINS_DRAFT_UNMERGED_PENDING_FOUNDER_REVIEW',
+    ]:
+        assert token in package_text or token in report_text, f"missing Copilot token {token}"
+
     # 25. git diff --check.
     run(['git', 'diff', '--check', EXPECTED_BASE])
 
@@ -246,6 +324,7 @@ def validate() -> dict[str, object]:
         'gap_rows': len(gaps),
         'finding_rows': len(findings),
         'cited_file_identities': len(identity_rows),
+        'copilot_disposition_rows': len(disposition_rows) if 'disposition_rows' in locals() else 0,
     })
     return result
 

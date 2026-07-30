@@ -1,21 +1,53 @@
 {
   "authorized_package_path": "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1",
+  "copilot_reconciliation": {
+    "classification_totals": {
+      "CONTEXT_DEPENDENT_REQUIRES_FOUNDER_DECISION": 1,
+      "DUPLICATE_OF_OTHER_FINDING": 1,
+      "REJECTED_AS_DEFECT_WITH_RECORDED_RATIONALE": 1,
+      "UNVERIFIED_RISK_REQUIRES_EVIDENCE": 1,
+      "VALID_MAINTAINABILITY_OBSERVATION": 1,
+      "VALID_NEW_GAP": 3,
+      "VALID_PARTIALLY_CAPTURED_REQUIRES_EXPANSION": 1,
+      "VALID_REPOSITORY_POLICY_DECISION_REQUIRED": 1
+    },
+    "copilot_source_byte_length": 12416,
+    "copilot_source_sha256": "cd6e1315615d0f65664485d4ebc2f8906ff4e1f9c0bd19f3b7a6765da026386b",
+    "directive_id": "CGP_006_PR_62_COPILOT_FINDING_VALIDATION_AND_DOCUMENTARY_RECONCILIATION_DIRECTIVE_V1_0_0",
+    "duplicate_count": 1,
+    "expanded_gap_count": 1,
+    "finding_count": 10,
+    "new_gap_count": 6,
+    "no_copilot_remedy_executed": true,
+    "rejected_as_defect_count": 1,
+    "required_pre_update_pr_head": "7e99fb8ea2f6db8a6bf91c4a60164a749a931e54",
+    "unverified_risk_count": 1
+  },
   "counts": {
-    "candidate_work_packages": 8,
-    "cited_repository_file_identities": 98,
+    "candidate_work_packages": 15,
+    "cited_repository_file_identities": 100,
     "code_guide_requirements": 22,
-    "files_listed_excluding_manifest_and_checksum": 28,
-    "finding_rows": 8,
-    "gap_rows": 12,
-    "pia_founder_mappings": 15,
+    "copilot_disposition_rows": 10,
+    "external_integrations_and_tools": 19,
+    "files_listed_excluding_manifest_and_checksum": 32,
+    "finding_rows": 16,
+    "gap_rows": 18,
+    "pia_founder_mappings": 18,
+    "repository_components": 18,
+    "test_ci_evidence_surfaces": 10,
     "tracked_repository_files_at_base": 4676
   },
   "directive_id": "CGP_006_REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_DIRECTIVE_V1_0_0",
   "files": [
     {
-      "byte_length": 1383,
+      "byte_length": 60,
+      "path": ".gitattributes",
+      "sha256": "b1a5a66b5340e44840d6fd1c5ff82f691b541309080c6bb274ef827f99b8ee67"
+    },
+    {
+      "byte_length": 2384,
       "path": "ASSUMPTION_INFERENCE_AND_UNRESOLVED_QUESTION_REGISTER.csv",
-      "sha256": "20dc761dab5dc50021e95d0f0445b84c4d451e6fa3a3ddb206f9f140733a9c39"
+      "sha256": "04988f47574bc7fb940a7ec4509a865232d38d2be256dedd848a19c22b8ba298"
     },
     {
       "byte_length": 2888,
@@ -23,14 +55,14 @@
       "sha256": "8ef686cf6683ed6621455b9042e8fa34fdbb05910a97390fdc45c1b7a6fd8088"
     },
     {
-      "byte_length": 1159,
+      "byte_length": 1760,
       "path": "AUTHORIZED_PATH_REPORT.md",
-      "sha256": "0917901144f1b3ef6ae72b8db0caf4213f3d22862d1d89587612b823ca8eac36"
+      "sha256": "b196742fa75b2095ea17336ea1431d0e7aa1470f53e933f6681c8034783d4c67"
     },
     {
-      "byte_length": 14479,
+      "byte_length": 14702,
       "path": "CITED_REPOSITORY_FILE_IDENTITIES.csv",
-      "sha256": "1dc7aeb45f406b173095eeca0b7ace299ab0703acffa64f9bbf5184eaf007fee"
+      "sha256": "1982a591559e99fbabd0d90cb6981f5b161dcbc873643302e8dcbcf61b6f6bf8"
     },
     {
       "byte_length": 29532,
@@ -38,9 +70,24 @@
       "sha256": "0e91443b9f59ae1f07cf7d29d37ca79684ecdaea34046c30f234c5e0b85a136d"
     },
     {
-      "byte_length": 10826,
+      "byte_length": 11115,
+      "path": "COPILOT_FINDING_DISPOSITION_REGISTER.csv",
+      "sha256": "9e3d19aaf556fc37bd43eb8b754c08a01d5f9f7ba1b363f26320c4b558a0530d"
+    },
+    {
+      "byte_length": 5377,
+      "path": "COPILOT_FINDING_VALIDATION_AND_RECONCILIATION_REPORT.md",
+      "sha256": "b638a1c94e8f9b167b20c89f71afae1fcf69d89569b278d23851a84bb02bb63e"
+    },
+    {
+      "byte_length": 12416,
+      "path": "COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt",
+      "sha256": "cd6e1315615d0f65664485d4ebc2f8906ff4e1f9c0bd19f3b7a6765da026386b"
+    },
+    {
+      "byte_length": 16841,
       "path": "CURRENT_STATE_GAP_REGISTER.csv",
-      "sha256": "8f1d387f41fa6a2a6c418715218bd3cfdf0650b1f9a756f45f165504a62aa847"
+      "sha256": "52849ecaafcbc81aa5d0211eb85bb68eb877ffd4ec0f25c338a67e3778d7a87e"
     },
     {
       "byte_length": 2560,
@@ -53,19 +100,19 @@
       "sha256": "a732ccb434a962903dfb1543f6309075c0bc60c9a41fbdc9f88dfec5cc0f52ca"
     },
     {
-      "byte_length": 2336,
+      "byte_length": 4287,
       "path": "DIRECTIVE_EXECUTION_RECORD.md",
-      "sha256": "95599253c8e2881823dd7164dd8fb6934a6ae912d728b3e14c86ecb237e76315"
+      "sha256": "8e3d45f26f7d8190618c2b6be21421effede1bcb4172764b4f6d9ac93c0fa46e"
     },
     {
-      "byte_length": 3586,
+      "byte_length": 3940,
       "path": "EXTERNAL_INTEGRATION_AND_ASSURANCE_TOOLING_INVENTORY.csv",
-      "sha256": "1e9bbafccf6b819e055945cdd14c62e7d6119b44ca0754c5c87a1065b13b8228"
+      "sha256": "5f5901bd6d5a1ef5785b7f039ce174623d0216bb865831959341e7e172b30975"
     },
     {
-      "byte_length": 3616,
+      "byte_length": 4555,
       "path": "FOUNDER_IMPLEMENTATION_AUTHORIZATION_DECISION_PACKET.md",
-      "sha256": "206049dc2a6ad6b5a2a18a5788e2f652a1e123c18111071c2c7a341641c73cfd"
+      "sha256": "d4997e500667e44e99eb22a370ea278aa9e3a1b3355968ecb437284c5cf74939"
     },
     {
       "byte_length": 3097,
@@ -78,64 +125,64 @@
       "sha256": "9933ac57baa400dda0e1b90e50f25b750505e3c5249850a98ba5bcfb77315c52"
     },
     {
-      "byte_length": 2077,
+      "byte_length": 2939,
       "path": "IMPLEMENTATION_SEQUENCE_AND_DEPENDENCY_MAP.md",
-      "sha256": "f903108a52abd6e68eabc6be3b8c4b9a7bfb40000970a8f85216f7eaf1ddb3af"
+      "sha256": "466a25d62b0aaf913dd56e3d7a23416c72b64fd7451b471f176f6224a1b4f710"
     },
     {
-      "byte_length": 6655,
+      "byte_length": 13054,
       "path": "IMPLEMENTATION_WORK_PACKAGE_CANDIDATE_BACKLOG.csv",
-      "sha256": "f89035bb409ac4c0aaf826f74e7f7fd36ba5d6c87e13efb2e7c2a60db962a8be"
+      "sha256": "3ed8771e88b7f7ae01d1148f719bea1cdc21869d24bc54ae5fbd197e28868dda"
     },
     {
-      "byte_length": 6298,
+      "byte_length": 7479,
       "path": "PIA_AND_FOUNDER_DECISION_TO_REPOSITORY_TRACEABILITY_MATRIX.csv",
-      "sha256": "8680d8d843132c99a2d5e9e0c04420688852f6453ad10bda655191ff808f4a24"
+      "sha256": "e9d9a85313b16d6750834e70185f65106c09d31b9abc86e3fbfb61d61d31eb18"
     },
     {
-      "byte_length": 2891,
+      "byte_length": 3550,
       "path": "README.md",
-      "sha256": "ff2d71fabdad041699b4d33a99be031085a4cdfc10e59dd936bd46adb0e07af0"
+      "sha256": "fe6c03045692cf35da6d7d4484cd885ec408503fcdcb366fe8ac4e7cca568463"
     },
     {
-      "byte_length": 2845,
+      "byte_length": 3304,
       "path": "REPOSITORY_ARCHITECTURE_INVENTORY.md",
-      "sha256": "9b69e5e6dc1207ed1961fb6bd8ebf00d6ca7278d23d84451b2f6240db2ddc100"
+      "sha256": "522e2b5e03a6914de8b0d2f20ba7936ea10fa9264a9aa465268fbc443c9126c0"
     },
     {
-      "byte_length": 6454,
+      "byte_length": 6938,
       "path": "REPOSITORY_COMPONENT_INVENTORY.csv",
-      "sha256": "30bb3636c5ed67711761fe6ec4559887092476e31b76d7c9ea7247f25e6f8019"
+      "sha256": "500e630e6247eeedd7eda96b97c22636ed04b7fe1beae1a8d593e8b80a1d33ac"
     },
     {
-      "byte_length": 4655,
+      "byte_length": 5372,
       "path": "REPOSITORY_SNAPSHOT_AND_SOURCE_FREEZE_RECORD.json",
-      "sha256": "8bcd37e51e41524ed9a4de68226b017cc99c01276f44749f69f09c4d660b4fb5"
+      "sha256": "7ef6748c8a77174922a772db95d0fab666a7982cb3996d849be431f84e4ebc4f"
     },
     {
-      "byte_length": 4930,
+      "byte_length": 10211,
       "path": "SECURITY_PRIVACY_AND_SAFEGUARDING_FINDINGS_REGISTER.csv",
-      "sha256": "bfc4147937f8138c90bc233ea527d15dceab51572ab287fb2edb1ef71d5436f7"
+      "sha256": "2cb5f0a682bcc32b864311f527cd0251bdc73075282212e18218f7ae1050c34b"
     },
     {
-      "byte_length": 4159,
+      "byte_length": 5319,
       "path": "SOURCE_AUTHORITY_MATRIX.csv",
-      "sha256": "70852c5274e9e1b7f094f76636c1d24bb34e7902906b8fa80925a744a42e94a6"
+      "sha256": "075f78f6c2c8a0ceb73123d2f40ab57a7ce45c51388b14a9748a4912729479b2"
     },
     {
-      "byte_length": 6133,
+      "byte_length": 7181,
       "path": "SOURCE_REGISTER.md",
-      "sha256": "f236e56808ba0aa132320641bae8edac21977685cfd1249a91fc96c5a9d818a2"
+      "sha256": "002a65e3f084fdc3eaba9286baf37456b80aeafe68d15d1432b7b355b6195d51"
     },
     {
-      "byte_length": 2671,
+      "byte_length": 3912,
       "path": "TEST_CI_AND_EVIDENCE_INVENTORY.csv",
-      "sha256": "9e598d43de6619213296d8fdfc52e3c6ed41d28660d7000d49d82acbea90f0b8"
+      "sha256": "46a3a09947fb8dfaddc3ce3913913ca281a77965f9f6285e3a03298df2578473"
     },
     {
-      "byte_length": 3382,
+      "byte_length": 3653,
       "path": "VALIDATION_REPORT.md",
-      "sha256": "dfe5a02a1aa65b6d62cc578c7447d21fa199571657ccbb90a606817a893c8a97"
+      "sha256": "cdad627e79ec2299ca8e7ea2d38959c79c28535b60a78463c730d6f76a1bb95f"
     },
     {
       "byte_length": 1544,
@@ -143,34 +190,39 @@
       "sha256": "31c2cd286190c1485585514a87f969de26fbf42e8c5fe265b655950499c3bd85"
     },
     {
-      "byte_length": 752,
+      "byte_length": 804,
       "path": "tests/test_repository_mapping_gap_audit.py",
-      "sha256": "e5de65202c4d5b4ea1d7e0bd3a2ed87a28c3b5dedb437b791d36a715123d8982"
+      "sha256": "e92fbd3dac7c351c5dc52e88ad2f5fa007d184d0a2f0edd303dddbe70aa45ba3"
     },
     {
-      "byte_length": 12486,
+      "byte_length": 16409,
       "path": "validators/validate_repository_mapping_gap_audit.py",
-      "sha256": "df141442980403ad11e36454d390fe60350ab39fe5f3a782711513a04ea2eea1"
+      "sha256": "853dc452cb30e4960698cc233aba99037c00fe1c7d3271586fd724f575cb0e2e"
     }
   ],
-  "generated_at": "2026-07-30T09:27:31+00:00",
+  "generated_at": "2026-07-30T10:25:17+00:00",
   "implementation_authority": "NOT_GRANTED",
   "non_authorizations": [
-    "IMPLEMENTATION_NOT_AUTHORIZED",
-    "NO_PRODUCT_CODE_CHANGED",
-    "NO_SCHEMA_OR_MIGRATION_CHANGED",
-    "NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED",
+    "CGP_007_NOT_AUTHORIZED",
     "DEPLOYMENT_NOT_AUTHORIZED",
-    "STAGING_NOT_AUTHORIZED",
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "NO_CI_WORKFLOW_CHANGED",
+    "NO_DEPENDENCY_CHANGED",
+    "NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED",
+    "NO_LICENSE_SELECTED_OR_ADDED",
+    "NO_LOCKFILE_CHANGED",
+    "NO_PRODUCT_CODE_CHANGED",
+    "NO_ROOT_README_CHANGED",
+    "NO_SCHEMA_OR_MIGRATION_CHANGED",
     "PILOT_NOT_AUTHORIZED",
     "PRODUCTION_USE_NOT_AUTHORIZED",
-    "WAVE_2_NOT_AUTHORIZED",
-    "CGP_007_NOT_AUTHORIZED"
+    "STAGING_NOT_AUTHORIZED",
+    "WAVE_2_NOT_AUTHORIZED"
   ],
   "package_id": "ES-CGP-006-REPOSITORY-MAPPING-GAP-AUDIT-DIRECTIVE-2026-07-30",
   "protected_branch": "integrate-emergent-final-zip",
   "protected_head": "1ad6fa436c31316ee192844106ca748cd6dc6d0b",
   "repository": "rianray2012-coder/EquineSync-V4",
-  "status": "CURRENT_STATE_GAP_AUDIT_COMPLETE_READY_FOR_FOUNDER_REVIEW",
+  "status": "CGP_006_PR_62_COPILOT_FINDING_VALIDATION_AND_DOCUMENTARY_RECONCILIATION_COMPLETE_READY_FOR_FOUNDER_REVIEW",
   "work_branch": "codex/cgp-006-repository-specific-implementation-mapping-current-state-gap-audit-v1"
 }

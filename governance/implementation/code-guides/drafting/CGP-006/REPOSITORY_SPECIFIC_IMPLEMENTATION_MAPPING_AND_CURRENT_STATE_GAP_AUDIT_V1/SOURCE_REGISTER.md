@@ -61,3 +61,13 @@ The following sources were used for this documentary audit. Exact repository sou
 - Founder transmission of the directive ZIP authorizes this documentary audit only.
 - Stage 24 limited activation remains effective only for planning reference, implementation control, and pull request review.
 - Repository-specific implementation, deployment, staging, pilot, production use, Wave 2, and CGP-007 remain unauthorized.
+
+
+## PR #62 Copilot Reconciliation Sources
+
+- Founder-issued ZIP package: `/Users/rianray/Downloads/EquineSync_CGP006_PR62_Copilot_Finding_Reconciliation_2026-07-30.zip`; SHA-256 `67a50c31e9a4c529339b6ba06c3317e486dd015f7bafe1be0910257db6cd70cf`; bytes `14762`.
+- Embedded directive: `CGP_006_PR_62_COPILOT_FINDING_VALIDATION_AND_DOCUMENTARY_RECONCILIATION_DIRECTIVE_V1_0_0.md`; SHA-256 `2e58dc1f0d0b4c3f8aaaa60b4a89b4368fb18e3a014ac41cbebabfe9b64d031f`; bytes `14297`.
+- Founder-supplied review source copied byte-for-byte: `COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt`; SHA-256 `cd6e1315615d0f65664485d4ebc2f8906ff4e1f9c0bd19f3b7a6765da026386b`; bytes `12416`.
+- Founder approval record: `FOUNDER_SOURCE_AND_DIRECTIVE_APPROVAL_RECORD_2026-07-30.md`; SHA-256 `55fab19d7d73e10d65540861c07eed9445f679778e5ac289147b7b340e1aad1b`; bytes `967`.
+
+Copilot recommendations are review input only and do not grant implementation, dependency, CI, root README, license, external-tool, deployment, staging, pilot, production, Wave 2, or CGP-007 authority.

@@ -42,3 +42,8 @@ Backend code owns server-side authentication, authorization, tenancy, billing/we
 | Frontend route lines | 112 |
 | Production-code Mongo collections | 92 |
 | Backend test files | 185 |
+
+
+## Copilot Reconciliation Architecture Notes
+
+The Copilot reconciliation added documentary evidence for repository root documentation/policy, backend dependency-boundary, CI assurance, frontend peer-dependency, secret-scan evidence, large-module reviewability, lockfile, and deployment-model documentation surfaces. These notes do not change architecture, product code, CI, dependency manifests, lockfiles, deployment configuration, schemas, or migrations.

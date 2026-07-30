@@ -3,7 +3,7 @@
 
 ## Audit Completeness
 
-This documentary audit mapped `22` active Code Guide control requirements, `15` PIA/Founder/status rows, `17` architecture components, `92` static Mongo collection references, `7` test/CI evidence surfaces, and `18` integrations or assurance tools.
+This documentary audit mapped `22` active Code Guide control requirements, `15` PIA/Founder/status rows, `18` architecture components, `92` static Mongo collection references, `10` test/CI evidence surfaces, and `19` integrations or assurance tools.
 
 ## Material Limitations
 
@@ -18,6 +18,12 @@ This documentary audit mapped `22` active Code Guide control requirements, `15` 
 - `CGP006-MAP-FIND-0002` (P1_HIGH): Guardian/minor safeguards are partial across declared workflows - gaps `CGP006-MAP-GAP-0003`
 - `CGP006-MAP-FIND-0003` (P1_HIGH): GAP_0004 cannot be closed on current repository evidence - gaps `CGP006-MAP-GAP-0004`
 - `CGP006-MAP-FIND-0004` (P1_HIGH): Financial provider runtime evidence absent - gaps `CGP006-MAP-GAP-0005`
+
+## Copilot Reconciliation P0 And P1 Additions
+
+- `CGP006-MAP-FIND-0012` (P1_HIGH): CI static, dependency, and linter assurance enforcement incomplete - gap `CGP006-MAP-GAP-0011`
+
+Copilot duplicate, rejected, unverified, context-dependent, and observation rows are retained in `COPILOT_FINDING_DISPOSITION_REGISTER.csv` without double-counting or remedy execution.
 
 ## Unresolved Authority Conflicts
 
@@ -52,10 +58,17 @@ No irreconcilable authority conflict was found. The controlling boundary is that
 
 - Whether to authorize auth/tenancy endpoint remediation and evidence work.
 - Whether to authorize guardian/minor safeguarding remediation and evidence work.
-- Whether to authorize CI/workflow or test behavior changes.
+- Whether to authorize CI/workflow or test behavior changes, including lint, format, typing, SAST, secret-scan, license-scan, dependency-audit, or dependency-update automation.
 - Whether to authorize provider-safe Stripe/DocuSign/storage evidence.
 - Whether to authorize staging/runtime evidence access.
 - Whether and when GAP_0004 may enter closure review.
+- Whether to authorize root README/documentation remediation.
+- Whether to make a Founder/legal license decision.
+- Whether to authorize backend runtime/dev dependency separation.
+- Whether to authorize frontend peer-dependency and lockfile remediation.
+- Whether to authorize secret-scan evidence or scanner setup.
+- Whether to authorize large-module risk-reduction refactor planning.
+- Whether to select a deployment documentation/containerization model.
 
 ## Decision Options
 

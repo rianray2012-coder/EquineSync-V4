@@ -27,3 +27,16 @@ STAGING_NOT_AUTHORIZED
 PILOT_NOT_AUTHORIZED
 PRODUCTION_USE_NOT_AUTHORIZED
 ```
+
+
+## PR #62 Copilot Reconciliation Authorized-Path Result
+
+All tracked reconciliation writes are confined to this package path. The following prohibited paths/actions were not modified or executed: product code, root README, license files, dependency manifests outside this package, lockfiles, CI workflows, schemas, migrations, deployment configuration, staging, pilot, production, Wave 2, and CGP-007.
+
+`NO_PRODUCT_CODE_CHANGED`
+`NO_DEPENDENCY_CHANGED`
+`NO_LOCKFILE_CHANGED`
+`NO_CI_WORKFLOW_CHANGED`
+`NO_LICENSE_SELECTED_OR_ADDED`
+`NO_ROOT_README_CHANGED`
+`NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED`

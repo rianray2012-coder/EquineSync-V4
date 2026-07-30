@@ -22,3 +22,17 @@ All work packages are candidates only. No package is authorized for implementati
 IMPLEMENTATION_WORK_PACKAGES_ARE_CANDIDATES_ONLY
 IMPLEMENTATION_NOT_AUTHORIZED
 ```
+
+
+## Copilot Reconciliation Candidate Sequence
+
+All items below remain candidates only and require later Founder authorization:
+
+1. Decide root README/documentation scope and license policy before public-facing repository posture claims.
+2. Decide CI/static/dependency assurance scope before changing workflows or adding scanner/tooling setup.
+3. Decide backend runtime/dev dependency separation and frontend peer-dependency remediation before dependency or lockfile edits.
+4. Decide whether secret-scan evidence is collected through repository settings, CI, local scanner output, or independent review.
+5. Treat large-module risk reduction as an observation-driven refactor candidate, not a defect by size alone.
+6. Decide the deployment model before requiring Docker/container documentation or backend hosting standardization.
+
+`IMPLEMENTATION_NOT_AUTHORIZED`

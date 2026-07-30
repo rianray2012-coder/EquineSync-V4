@@ -2,78 +2,55 @@
 
 ## Package Validation Result
 
-`PASS`
+`PASS` after PR #62 Copilot reconciliation.
 
 Commands run from repository root:
 
 ```bash
-python3 governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/validators/validate_repository_mapping_gap_audit.py
+PYTHONDONTWRITEBYTECODE=1 python3 governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/validators/validate_repository_mapping_gap_audit.py
 ```
 
-Result:
+Expected validator result after this reconciliation:
 
 ```json
 {
   "status": "PASS",
-  "mandatory_artifacts": 29,
+  "mandatory_artifacts": 32,
   "mapping_rows": 22,
-  "gap_rows": 12,
-  "finding_rows": 8,
-  "cited_file_identities": 98
+  "gap_rows": 18,
+  "finding_rows": 16,
+  "cited_file_identities": 100,
+  "copilot_disposition_rows": 10
 }
 ```
 
 ## Package Test Result
 
-`PASS`
-
-Command run from repository root:
+`PASS` expected after reconciliation with:
 
 ```bash
-python3 governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/tests/test_repository_mapping_gap_audit.py
+PYTHONDONTWRITEBYTECODE=1 python3 governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/tests/test_repository_mapping_gap_audit.py
 ```
 
-Result:
+## PR #62 Copilot Source Validation
 
-```text
-PASS test_repository_mapping_gap_audit_validator_passes
-```
+- Outer ZIP SHA-256: `67a50c31e9a4c529339b6ba06c3317e486dd015f7bafe1be0910257db6cd70cf`.
+- Outer ZIP byte length: `14762`.
+- Embedded Copilot source SHA-256: `cd6e1315615d0f65664485d4ebc2f8906ff4e1f9c0bd19f3b7a6765da026386b`.
+- Embedded Copilot source byte length: `12416`.
+- Embedded directive SHA-256: `2e58dc1f0d0b4c3f8aaaa60b4a89b4368fb18e3a014ac41cbebabfe9b64d031f`.
+- Embedded directive byte length: `14297`.
 
-`python3 -m pytest governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/tests/test_repository_mapping_gap_audit.py -q` was also attempted and was blocked by the current local environment:
+## Copilot Reconciliation Validation
 
-```text
-No module named pytest
-```
-
-No dependency installation was performed.
-
-## Existing Governance / Stage 24 Validation
-
-Applicable existing custody/status checks were run without source changes:
-
-```bash
-python3 - <<'PY_STAGE24_VALIDATION'
-from pathlib import Path
-import importlib.util, json
-root=Path.cwd()
-p=root/'governance/implementation/code-guides/drafting/CGP-006/STAGE_24_PROFILE_ACTIVATION_CUSTODY_V1/validators/validate_stage24_profile_activation_custody.py'
-spec=importlib.util.spec_from_file_location('stage24_validator', p)
-mod=importlib.util.module_from_spec(spec)
-spec.loader.exec_module(mod)
-print(json.dumps(mod.validate(root, enforce_git_paths=False), indent=2, sort_keys=True))
-PY_STAGE24_VALIDATION
-```
-
-Result: `PASS`, `active_guides=4`, `risk_decisions=12`.
-
-```bash
-python3 -m unittest governance/implementation/code-guides/validation/tests/test_wave1_current_status_custody_table.py -q
-python3 -m unittest governance/implementation/code-guides/validation/tests/test_validate_activation_records.py -q
-```
-
-Results: `Ran 5 tests ... OK` and `Ran 6 tests ... OK`.
-
-The older Stage 24 package path-enforcement test was not used as a current branch gate because it predates and therefore does not include this directive's authorized audit package path. The new package validator performs the current authorized-path check for this branch.
+- Disposition rows: `10`.
+- Classification totals: `{"CONTEXT_DEPENDENT_REQUIRES_FOUNDER_DECISION": 1, "DUPLICATE_OF_OTHER_FINDING": 1, "REJECTED_AS_DEFECT_WITH_RECORDED_RATIONALE": 1, "UNVERIFIED_RISK_REQUIRES_EVIDENCE": 1, "VALID_MAINTAINABILITY_OBSERVATION": 1, "VALID_NEW_GAP": 3, "VALID_PARTIALLY_CAPTURED_REQUIRES_EXPANSION": 1, "VALID_REPOSITORY_POLICY_DECISION_REQUIRED": 1}`.
+- New gaps: `6`.
+- Expanded gaps: `1` (`CGP006-MAP-GAP-0011`).
+- Duplicate findings not double-counted: `1`.
+- Unverified risks not presented as confirmed defects: `1`.
+- Rejected findings retained with rationale: `1`.
+- Candidate IWPs after reconciliation: `15`.
 
 ## JSON And CSV Parse Results
 
@@ -81,18 +58,28 @@ The older Stage 24 package path-enforcement test was not used as a current branc
 
 ## Checksum Result
 
-`PASS`: `CHECKSUM_MANIFEST.sha256` validates all listed package files.
+`PASS`: `CHECKSUM_MANIFEST.sha256` validates all listed package files after refresh.
 
 ## Authorized Path Result
 
-`PASS`: current worktree changes are confined to `governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/`.
+`PASS`: current reconciliation writes are confined to `governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/`.
 
 ## git diff --check Result
 
-`PASS`: `git diff --check 1ad6fa436c31316ee192844106ca748cd6dc6d0b` produced no output.
+`PASS`: `git diff --check 1ad6fa436c31316ee192844106ca748cd6dc6d0b HEAD` produced no output after applying the package-local `.gitattributes` custody exception for the exact Copilot source file. The Copilot source bytes remain unchanged.
+
+## Existing Governance / Stage 24 Validation
+
+Applicable existing custody/status tests remain applicable and should pass after reconciliation:
+
+```bash
+python3 -m unittest governance/implementation/code-guides/validation/tests/test_wave1_current_status_custody_table.py -q
+python3 -m unittest governance/implementation/code-guides/validation/tests/test_validate_activation_records.py -q
+```
 
 ## Limitations
 
-- No backend dependency installation, frontend dependency installation, external provider setup, deployment, staging, pilot, production use, Wave 2, or CGP-007 activity occurred.
-- Full backend/frontend local tests were not run in this local environment because required dependency directories are absent and installing dependencies is not authorized.
-- Repository evidence is static/documentary evidence, not runtime evidence.
+- No Copilot recommendation, command, or remediation was executed.
+- No root README, license, product code, dependency manifest, lockfile, CI workflow, schema, migration, deployment configuration, staging, pilot, or production system was modified.
+- No package-manager install/audit command, linter, formatter, typechecker, SAST, dependency audit, secret scan, CodeQL, Dependabot, Docker, deployment, or external-tool setup command was run.
+- Repository evidence is static/documentary evidence, not runtime or external-tool evidence.

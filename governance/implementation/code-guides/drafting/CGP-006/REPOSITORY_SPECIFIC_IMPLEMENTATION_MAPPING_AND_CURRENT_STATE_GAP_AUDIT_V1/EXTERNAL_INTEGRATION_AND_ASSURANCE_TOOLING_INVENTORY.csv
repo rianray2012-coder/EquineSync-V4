@@ -17,3 +17,4 @@ EXT-0015,Playwright,backend/tests;frontend/package.json,REFERENCED_ONLY,Testing 
 EXT-0016,CodeQL,github/codeql,NOT_FOUND,No CodeQL workflow found in static workflow inventory.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
 EXT-0017,Claude Code,governance/implementation/code-guides/PROGRAM_STATUS.md,NOT_FOUND,No repository configuration performed or found for this package.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
 EXT-0018,Google Jules,governance/implementation/code-guides/PROGRAM_STATUS.md,NOT_FOUND,No repository configuration performed or found for this package.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED
+EXT-0019,GitHub Copilot repository review source,COPILOT_REPOSITORY_REVIEW_SOURCE_2026-07-30.txt,FOUNDER_SUPPLIED_REVIEW_INPUT_NOT_CONNECTED_TOOL,Exact source copied into package for documentary validation; no Copilot recommendation was executed and no Copilot tool was connected or configured by this directive.,NO_EXTERNAL_TOOL_CONNECTED_OR_CONFIGURED

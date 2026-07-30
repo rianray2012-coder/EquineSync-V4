@@ -11,8 +11,9 @@ def test_repository_mapping_gap_audit_validator_passes():
     spec.loader.exec_module(module)
     result = module.validate()
     assert result['status'] == 'PASS'
+    assert result['copilot_disposition_rows'] == 10
     assert result['mapping_rows'] == 22
-    assert result['gap_rows'] == 12
+    assert result['gap_rows'] == 18
 
 
 if __name__ == '__main__':
