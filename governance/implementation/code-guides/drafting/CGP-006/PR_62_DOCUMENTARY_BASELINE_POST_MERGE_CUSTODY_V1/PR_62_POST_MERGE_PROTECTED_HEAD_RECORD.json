@@ -1,0 +1,17 @@
+{
+  "approved_pr62_head": "e61912b673da65556767cd8fb463c9d86debe5ff",
+  "audit_package_path": "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AND_CURRENT_STATE_GAP_AUDIT_V1/",
+  "custody_branch": "codex/cgp-006-pr62-documentary-baseline-post-merge-custody-v1",
+  "custody_package_path": "governance/implementation/code-guides/drafting/CGP-006/PR_62_DOCUMENTARY_BASELINE_POST_MERGE_CUSTODY_V1/",
+  "pr62_head_is_ancestor_of_post_merge_head": true,
+  "pr62_merge_commit": "185d37987c11eccabba4436619bdf11e91494711",
+  "pr62_merge_commit_parents": [
+    "1ad6fa436c31316ee192844106ca748cd6dc6d0b",
+    "e61912b673da65556767cd8fb463c9d86debe5ff"
+  ],
+  "protected_branch": "integrate-emergent-final-zip",
+  "protected_head_after_pr62_merge": "185d37987c11eccabba4436619bdf11e91494711",
+  "protected_head_before_pr62_merge": "1ad6fa436c31316ee192844106ca748cd6dc6d0b",
+  "record_created_utc": "2026-07-30T12:44:11Z",
+  "repository": "rianray2012-coder/EquineSync-V4"
+}
