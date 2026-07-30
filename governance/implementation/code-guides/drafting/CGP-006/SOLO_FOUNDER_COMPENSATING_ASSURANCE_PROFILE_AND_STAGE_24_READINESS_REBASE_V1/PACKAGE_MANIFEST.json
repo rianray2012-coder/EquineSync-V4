@@ -1,4 +1,5 @@
 {
+  "approved_tooling_source_count": 7,
   "continuing_statements": [
     "PROGRAM_PLAN_V1_1_CONTROLLING",
     "SOLO_FOUNDER_COMPENSATING_ASSURANCE_DETERMINATION_CONTROLLING",
@@ -29,25 +30,54 @@
     "PRODUCTION_NOT_AUTHORIZED",
     "WAVE_2_NOT_AUTHORIZED",
     "CGP_007_NOT_AUTHORIZED",
-    "DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION"
+    "DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION",
+    "MULTI_AGENT_TOOLING_INTENT_FOUNDER_APPROVED",
+    "FOUNDER_APPROVAL_DATE_2026_07_30",
+    "APPROVED_SHA256_VALUES_RECORDED",
+    "APPROVED_BYTE_LENGTHS_RECORDED",
+    "NO_SUBSTITUTED_SOURCE_AUTHORIZED",
+    "TOOLING_INTENT_IS_NON_VENDOR_LOCKED",
+    "NAMED_TOOLS_NOT_REQUIRED_FOR_LIMITED_STAGE_24_ACTIVATION",
+    "NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION",
+    "PR_59_REMAINS_DRAFT_UNMERGED"
   ],
   "directive_id": "CGP_006_SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_DIRECTIVE_V1_0_0",
-  "file_count_excluding_manifest_and_checksum": 33,
+  "file_count_excluding_manifest_and_checksum": 40,
   "files": [
     {
-      "byte_length": 1712,
+      "byte_length": 3852,
+      "path": "AGENT_FINDING_RECORD_SCHEMA_V1_0_0.md",
+      "sha256": "f0a992322fef30d70747f5df9d58391a4a191c99e425077c04626b643c6c67c0"
+    },
+    {
+      "byte_length": 2330,
       "path": "AUTHORIZED_PATH_REPORT.md",
-      "sha256": "7f56e5648be2e5cd35ebb0251ce9922a000fb0af4a429ffb3a564cdaeb1cf185"
+      "sha256": "b608298ff70d01c2bf5737ba6eb72bc927d9249ca926b02ac14681bbda7f36ea"
     },
     {
-      "byte_length": 2551,
+      "byte_length": 4176,
       "path": "DIRECTIVE_EXECUTION_RECORD.md",
-      "sha256": "cb0d54d129d237f6790eea57feab074ec72ee5fbc03e2f7d92ed6d4a1f0651ad"
+      "sha256": "ac9f3f7639a4049f21f92cd144516b1ac5fe8e09a21257e745a8a7c23c8964a6"
     },
     {
-      "byte_length": 8208,
+      "byte_length": 9245,
       "path": "ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0_CANDIDATE.md",
-      "sha256": "e859e32932893923fc5b6d37541dea095955013e97372bb14c6545f8bfecac9d"
+      "sha256": "11c7b7169ed4c6537f7b9cd91f0a952ccb30c66ea86a94d94c826b19a1c28d99"
+    },
+    {
+      "byte_length": 4621,
+      "path": "EXTERNAL_AGENT_ACCESS_REGISTER_TEMPLATE_V1_0_0.md",
+      "sha256": "8c8754f5e5bda5ef36ea342e84f6ff83ac5fd275d95a936364614ac4717614e7"
+    },
+    {
+      "byte_length": 5084,
+      "path": "FOUNDER_APPROVAL_AND_DISPOSITION_MULTI_AGENT_TOOLING_INTENT_2026-07-30.md",
+      "sha256": "5c27311183021d1ff3c5f1ec05c6bfd0b3ceb0dc487a3f46fbd3c20cf80d19d9"
+    },
+    {
+      "byte_length": 2488,
+      "path": "FOUNDER_APPROVAL_RECORD_MULTI_AGENT_TOOLING_INTENT_2026-07-30.md",
+      "sha256": "79533235b659ac7a93f7de652f356ec36bedf3ddb14de6a3ab5ce84944e5dedb"
     },
     {
       "byte_length": 3820,
@@ -65,9 +95,9 @@
       "sha256": "828a23f675e9e0722b94ec073e73bc4e0f87eb13e9824e5bef3fc744e247c2a7"
     },
     {
-      "byte_length": 8083,
+      "byte_length": 9154,
       "path": "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md",
-      "sha256": "09db50d5f4c420baf0acdb41c6ef3380fe4b97748a6ed69e72eed7b5e8ecd83f"
+      "sha256": "0ff8717d11619116e3da84556029d43c4c55e89b730a92eee34a4b11c6c3d313"
     },
     {
       "byte_length": 2121,
@@ -78,6 +108,21 @@
       "byte_length": 38870,
       "path": "FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_RECORD.md",
       "sha256": "c76d768fad755ea7dacdf9965c83d597760186ba78110065f54b2ecb2d71d2e6"
+    },
+    {
+      "byte_length": 9262,
+      "path": "MULTI_AGENT_AND_ASSURANCE_TOOLING_INTENT_V1_0_0.md",
+      "sha256": "506326268a199d0641f822a59ecd1310cbd76a11c7b8991860a5258216e403bc"
+    },
+    {
+      "byte_length": 6182,
+      "path": "MULTI_AGENT_REVIEW_AND_FINDING_VALIDATION_POLICY_V1_0_0.md",
+      "sha256": "63066def7fd1a9cdebeef261d156706c0de162cc398b05ce2a7eb1a9e9c9a416"
+    },
+    {
+      "byte_length": 3817,
+      "path": "MULTI_AGENT_TOOL_ROLE_AND_ACCESS_MATRIX_V1_0_0.md",
+      "sha256": "db99cd3cc9361b7a1ee9496bcbada9d6209b475ec1f90c477793af9f7a5dda5f"
     },
     {
       "byte_length": 3126,
@@ -130,9 +175,9 @@
       "sha256": "e2bab3b45cd7c78cba393b7c0843d31330ea3d30311484b8a4cc5c9976e32955"
     },
     {
-      "byte_length": 3541,
+      "byte_length": 5728,
       "path": "README.md",
-      "sha256": "c445aa5f1a54b7d7ea827c4c0cc52259359246bea525b06ff99726750cb4ce74"
+      "sha256": "8d347d5ece509c5706ddd5ea75c7f817d0353bf96999f567fe9b1ae4729cd8d4"
     },
     {
       "byte_length": 55232,
@@ -145,29 +190,29 @@
       "sha256": "38c6c9d6beafd69361540125644032cc905e0747f58453a1c6998ead418f0ec7"
     },
     {
-      "byte_length": 71017,
+      "byte_length": 84337,
       "path": "SOURCE_AUTHORITY_MATRIX.csv",
-      "sha256": "0d97e121860c5f9fe1d17e581a1487d449585019805321f67565711cc4db2d03"
+      "sha256": "629f06bbcee2f1db7a5e6b0221c6994b1c202923ba2ce697ddff4890d1e7e885"
     },
     {
-      "byte_length": 40697,
+      "byte_length": 47276,
       "path": "SOURCE_FREEZE_MANIFEST.json",
-      "sha256": "d27c5e3a8eb04552f6afc9e4266fd24f25fbfbd640e7f4d82477cff3cf409c32"
+      "sha256": "135371fd2497ab9d5435fd496e516f557572f8d1c72e6d9d14048e2b627d17ca"
     },
     {
-      "byte_length": 23964,
+      "byte_length": 28117,
       "path": "SOURCE_REGISTER.md",
-      "sha256": "3e77fdbd048f5dea4d64576110a067131e30334ff855804e067c18f5beed3230"
+      "sha256": "f96a31fbf3de04c4e10d92fb53594566e38aa0b6c924da191fb453afa9d3c511"
     },
     {
-      "byte_length": 9712,
+      "byte_length": 11485,
       "path": "SOURCE_SHA256SUMS.txt",
-      "sha256": "6fd427609fc8fd8ce49646c2a393a94fbe560c9b1db9e5c13a5b687e2c5ffd3b"
+      "sha256": "b56ad32270672c604546fb9e682e6ecd40d81b8d433d9e2fed9eef213a5961e7"
     },
     {
-      "byte_length": 4345,
+      "byte_length": 5465,
       "path": "VALIDATION_REPORT.md",
-      "sha256": "d95f4fee11b1561cfb17ff94dc25b712d0f71942a62f6e52163792eb1431c618"
+      "sha256": "70e320f9bfad7e8167b8010282860e65f346ac72bcde6f6ff409cfd3afc44fa9"
     },
     {
       "byte_length": 13072,
@@ -190,19 +235,21 @@
       "sha256": "c37714d6aabee6d839a19d6d5cf4734ca7091a6f3c7fcec20a40381e7d152049"
     },
     {
-      "byte_length": 9412,
+      "byte_length": 12771,
       "path": "tests/test_solo_founder_assurance_stage24_readiness.py",
-      "sha256": "55eae7b17810715311f0fed940692166d0bb33e0389217dcba88acde64b2d10b"
+      "sha256": "c8b103bc2d0372b73c0d92e9752a61a4d9c5fa3be9960c7201319142cdd904ed"
     },
     {
-      "byte_length": 15695,
+      "byte_length": 24755,
       "path": "validators/validate_solo_founder_assurance_stage24_readiness.py",
-      "sha256": "8b81b57856d1c017b9c0051a6fcd400e61495ebc671fa4fdb95e525ee23caa77"
+      "sha256": "1161cef42533abc7de33ba016ef7e71ccfb7459f207aca990de349b87ca79dd3"
     }
   ],
   "manifest_id": "CGP006-SFCA-STAGE24-READINESS-PACKAGE-MANIFEST",
   "package_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1",
   "protected_branch": "integrate-emergent-final-zip",
   "repository": "rianray2012-coder/EquineSync-V4",
-  "required_starting_head": "150b24d65d25f79255959ee07a185e7b04601bcf"
+  "required_starting_head": "150b24d65d25f79255959ee07a185e7b04601bcf",
+  "superseded_directive_not_executed": "CGP_006_PR_59_FOUNDER_APPROVED_MULTI_AGENT_TOOLING_INTENT_INTEGRATION_DIRECTIVE_V1_0_0",
+  "tooling_integration_directive_id": "CGP_006_PR_59_FOUNDER_APPROVED_MULTI_AGENT_TOOLING_INTENT_INTEGRATION_DIRECTIVE_V1_0_1"
 }

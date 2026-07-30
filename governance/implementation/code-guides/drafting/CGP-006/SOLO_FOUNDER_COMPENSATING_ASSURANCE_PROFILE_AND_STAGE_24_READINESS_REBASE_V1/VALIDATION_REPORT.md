@@ -5,7 +5,7 @@
 
 ## Package Validator Scope
 
-The validator checks controlling determination hash and byte length, adopted guide bytes, source-freeze hashes, required files, required continuing disclosures, non-independence wording, domain-review completion integrity, finding/warning/GAP closure boundaries, activation and implementation non-authorization, package-only path control, manifest integrity, checksum integrity, JSON parsing, and CSV parsing.
+The validator checks controlling determination hash and byte length, adopted guide bytes, approved tooling-intent source hashes and byte lengths, source-freeze hashes, required files, required continuing disclosures, tooling approval boundaries, non-independence wording, domain-review completion integrity, finding/warning/GAP closure boundaries, activation and implementation non-authorization, package-only path control, manifest integrity, checksum integrity, JSON parsing, and CSV parsing.
 
 ## Expected Command Set
 
@@ -35,17 +35,46 @@ The validator checks controlling determination hash and byte length, adopted gui
 | Check | Result |
 | --- | --- |
 | Package-local validator | `PASS` |
-| Package-local tests | `PASS_25_TESTS` |
+| Package-local tests | `PASS_38_TESTS` |
 | Portfolio consistency | `PASS` |
 | Repository authority alignment | `PASS` |
 | Activation-record validation | `PASS` |
 | Current Wave 1 custody/status tests | `PASS` |
 | Controlled values schema parse | `PASS` |
 | Package JSON and CSV parse sweep | `PASS` |
-| Source SHA-256 ledger verification | `PASS_50_SOURCE_ENTRIES` |
-| Package checksum manifest verification | `PASS_34_CHECKSUM_ENTRIES` |
-| Authorized path verification | `PASS_35_PACKAGE_FILES_ONLY` |
+| Approved tooling source hash and byte-length verification | `PASS_7_APPROVED_SOURCES` |
+| Source SHA-256 ledger verification | `PASS_57_SOURCE_ENTRIES` |
+| Package checksum manifest verification | `PASS_41_CHECKSUM_ENTRIES` |
+| Authorized path verification | `PASS_42_PACKAGE_FILES_ONLY` |
 | `git diff --check` | `PASS` |
+
+## Founder-Approved Multi-Agent Tooling Intent Validation
+
+`MULTI_AGENT_TOOLING_INTENT_FOUNDER_APPROVED`
+
+`FOUNDER_APPROVAL_DATE_2026_07_30`
+
+`APPROVED_SHA256_VALUES_RECORDED`
+
+`APPROVED_BYTE_LENGTHS_RECORDED`
+
+`NO_SUBSTITUTED_SOURCE_AUTHORIZED`
+
+`TOOLING_INTENT_IS_NON_VENDOR_LOCKED`
+
+`NAMED_TOOLS_NOT_REQUIRED_FOR_LIMITED_STAGE_24_ACTIVATION`
+
+`NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION`
+
+`PR_59_REMAINS_DRAFT_UNMERGED`
+
+The package validator and tests cover missing or altered approved source files,
+candidate or pending-approval overclaims, external-tool setup authority,
+mandatory named-tool claims, Cursor Background Agent overreach, Claude Code write
+authority, Google Jules present implementation authority, unvalidated agent
+findings, agent self-approval or self-merge, path-scope violations, guide
+activation, implementation mapping, implementation, deployment, pilot,
+production, PR-ready markers, and second-PR markers.
 
 ## Legacy Validator Scope Note
 

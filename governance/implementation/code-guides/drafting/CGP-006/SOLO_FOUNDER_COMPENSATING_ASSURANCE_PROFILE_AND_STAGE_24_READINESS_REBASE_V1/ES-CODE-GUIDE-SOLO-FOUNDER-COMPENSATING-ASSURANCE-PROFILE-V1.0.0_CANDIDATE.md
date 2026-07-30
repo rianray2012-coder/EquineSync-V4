@@ -113,6 +113,29 @@ Every use of this profile must disclose the solo-Founder context, non-independen
 
 The profile prohibits claims of independent audit, third-party certification, veterinary certification, legal advice, cybersecurity certification, accounting certification, runtime assurance, implementation evidence, pilot evidence, production readiness, or guide activation unless separately and truthfully authorized.
 
+## 23. Founder-Approved Multi-Agent and Deterministic Assurance Tooling Intent
+
+The Founder-approved Multi-Agent and Assurance Tooling Intent establishes
+planned tool-role categories, named-tool intentions, finding-validation
+requirements, access boundaries, and deferred higher-risk agents.
+
+The named tools are not prerequisites to limited Stage 24 activation.
+
+Approval of the tooling-intent documents does not authorize connection,
+installation, repository permissions, CI changes, implementation mapping,
+implementation, deployment, pilot use, or production use for any external
+tool.
+
+Founder-approved references:
+
+- `MULTI_AGENT_AND_ASSURANCE_TOOLING_INTENT_V1_0_0.md`
+- `MULTI_AGENT_REVIEW_AND_FINDING_VALIDATION_POLICY_V1_0_0.md`
+- `AGENT_FINDING_RECORD_SCHEMA_V1_0_0.md`
+- `MULTI_AGENT_TOOL_ROLE_AND_ACCESS_MATRIX_V1_0_0.md`
+- `EXTERNAL_AGENT_ACCESS_REGISTER_TEMPLATE_V1_0_0.md`
+- `FOUNDER_APPROVAL_AND_DISPOSITION_MULTI_AGENT_TOOLING_INTENT_2026-07-30.md`
+- `FOUNDER_APPROVAL_RECORD_MULTI_AGENT_TOOLING_INTENT_2026-07-30.md`
+
 ## Continuing Statements
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
