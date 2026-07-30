@@ -14,6 +14,24 @@ Bugbot reviewed PR #59 and reported **4 potential issues** (3 Medium, 1 Low). Al
 
 PR #59 was **merged** at 2026-07-30 07:03:09 UTC, approximately one minute before Bugbot posted its review. These findings therefore apply to code now on `integrate-emergent-final-zip` and may warrant a follow-up remediation PR.
 
+## Post-Adoption Remediation Classification
+
+**Remediation directive:** `CGP_006_STAGE_24_POST_ADOPTION_DOCUMENTARY_CONSISTENCY_REMEDIATION_V1`
+**Classification:** `POST_ADOPTION_DOCUMENTARY_CONSISTENCY_REMEDIATION`
+**Remediation PR:** `#61`
+**Original adopted profile SHA-256:** `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
+**Remediated adopted profile SHA-256:** `ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b`
+
+`NO_STAGE_24_REOPENING_REQUIRED`
+
+`NO_FOUNDER_READJUDICATION_REQUIRED`
+
+`NO_ACTIVATION_SCOPE_EXPANSION_AUTHORIZED`
+
+`NO_IMPLEMENTATION_AUTHORIZATION_GRANTED`
+
+The four Bugbot findings are valid documentary-remediation inputs only. They do not invalidate the Founder disposition, Stage 24 adoption, custody completion, or limited activation.
+
 | Severity | Count |
 | --- | ---: |
 | Medium | 3 |

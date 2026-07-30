@@ -25,8 +25,8 @@ This package now records the Founder-approved Stage 24 disposition for existing 
 - Candidate SHA-256: `11c7b7169ed4c6537f7b9cd91f0a952ccb30c66ea86a94d94c826b19a1c28d99`
 - Candidate byte length: `9245`
 - Adopted profile: `ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md`
-- Adopted profile SHA-256: `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
-- Adopted profile byte length: `9609`
+- Adopted profile SHA-256: `ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b`
+- Adopted profile byte length: `9681`
 - Profile status: `FOUNDER_ADOPTED`
 - Profile effect: `PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
 

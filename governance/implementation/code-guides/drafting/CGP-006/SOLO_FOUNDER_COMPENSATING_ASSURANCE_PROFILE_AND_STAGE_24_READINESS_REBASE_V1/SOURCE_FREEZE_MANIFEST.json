@@ -1,13 +1,13 @@
 {
   "adopted_profile": {
-    "byte_length": 9609,
+    "byte_length": 9681,
     "candidate_byte_length": 9245,
     "candidate_repository_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0_CANDIDATE.md",
     "candidate_sha256": "11c7b7169ed4c6537f7b9cd91f0a952ccb30c66ea86a94d94c826b19a1c28d99",
     "effect": "PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT",
     "effective_event": "VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR",
     "repository_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
-    "sha256": "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2",
+    "sha256": "ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b",
     "status": "FOUNDER_ADOPTED"
   },
   "continuing_statements": [
@@ -867,12 +867,12 @@
     },
     {
       "authority_class": "FOUNDER_ADOPTED_PROFILE_PENDING_EFFECTIVE_EVENT",
-      "byte_length": 9609,
+      "byte_length": 9681,
       "conflict_or_supersession_treatment": "PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT; no activation effective before custody merge.",
       "document_or_record_id": "ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0",
       "inclusion_rationale": "Records the adopted Solo-Founder Compensating Assurance Profile generated from exact candidate bytes with ministerial finalization only.",
       "repository_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
-      "sha256": "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2",
+      "sha256": "ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b",
       "source_id": "SFCA-SRC-0062",
       "source_status": "founder_adopted_pending_effective_event",
       "version": "1.0.0"

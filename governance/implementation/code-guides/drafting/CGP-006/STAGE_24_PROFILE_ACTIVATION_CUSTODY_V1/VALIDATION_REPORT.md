@@ -5,8 +5,8 @@ Records required custody validation targets and local validation results.
 - Founder disposition: `ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30`
 - PR #59 merge commit: `f5b2973c9a796d6864607dcae42aa6c89f894250`
 - Activation effective event: `VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR`
-- Adopted profile SHA-256: `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
-- Adopted profile byte length: `9609`
+- Adopted profile SHA-256: `ef82faf0af5f33182014b75b35a59fbee25596f4ea1a5da52378de3ed54d2c2b`
+- Adopted profile byte length: `9681`
 
 | Guide | Version | SHA-256 | Byte length | Active scopes | Inactive scopes |
 | --- | --- | --- | ---: | --- | --- |

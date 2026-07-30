@@ -85,7 +85,44 @@ class SoloFounderStage24ReadinessValidatorTests(unittest.TestCase):
         self.assertIn("FOUNDER_ADOPTED", text)
         self.assertIn("PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT", text)
         self.assertIn(validator.EFFECTIVE_EVENT, text)
+        self.assertIn("FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12", text)
+        self.assertNotIn("FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED", text)
+        self.assertNotIn("DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION", text)
         self.assertNotIn("FOUNDER_ADOPTION_CANDIDATE_ONLY", text)
+
+    def test_completed_residual_risk_token_alone_passes_contradiction_rule(self):
+        validator.check_contradictory_governance_tokens({
+            "fixture.md": "`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12`"
+        })
+
+    def test_conflicting_residual_risk_tokens_fail_contradiction_rule(self):
+        with self.assertRaises(validator.ValidationError) as ctx:
+            validator.check_contradictory_governance_tokens({
+                "fixture.md": (
+                    "`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED`\n"
+                    "`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12`\n"
+                )
+            })
+        self.assertIn("fixture.md", str(ctx.exception))
+        self.assertIn("FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED", str(ctx.exception))
+        self.assertIn("FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12", str(ctx.exception))
+
+    def test_stale_draft_token_with_founder_adopted_fails_contradiction_rule(self):
+        with self.assertRaises(validator.ValidationError) as ctx:
+            validator.check_contradictory_governance_tokens({
+                "fixture.md": (
+                    "`DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION`\n"
+                    "`FOUNDER_ADOPTED`\n"
+                )
+            })
+        self.assertIn("fixture.md", str(ctx.exception))
+        self.assertIn("DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION", str(ctx.exception))
+        self.assertIn("FOUNDER_ADOPTED", str(ctx.exception))
+
+    def test_draft_token_alone_passes_contradiction_rule(self):
+        validator.check_contradictory_governance_tokens({
+            "fixture.md": "`DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION`"
+        })
 
     def test_missing_adopted_profile_fails(self):
         pkg = self.copy_pkg()
