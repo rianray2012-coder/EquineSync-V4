@@ -74,9 +74,9 @@
       "sha256": "5cadae5988691dbe6fb3ff457077db76542a9083569206ca1960da081f9fe636"
     },
     {
-      "byte_length": 2197,
+      "byte_length": 2573,
       "path": "VALIDATION_REPORT.md",
-      "sha256": "0e3fb1aaf19742bdb2814665031ccd22db5b8677493d2a0ec1cd689e1eb01c5c"
+      "sha256": "b637fc62f1c43a5945b7514288710a86911f90fd530547a58660f689ae487a30"
     },
     {
       "byte_length": 932,
@@ -84,12 +84,12 @@
       "sha256": "1deefa0d30a60796213fad89fdbbd8bcc20191914251a8b32df33293fb5dd2d9"
     },
     {
-      "byte_length": 11503,
+      "byte_length": 13105,
       "path": "validators/validate_pr62_documentary_baseline_custody.py",
-      "sha256": "8c4046cf6175de84a4638414ef195f24fd238a22bffc0e7a91903206ab6aeb54"
+      "sha256": "d62f78dd6e74718b110b12b93492356859e9c924895ab1392c4bddef7599d4e3"
     }
   ],
-  "generated_at_utc": "2026-07-30T12:45:53Z",
+  "generated_at_utc": "2026-07-30T12:51:46Z",
   "non_authorizations": [
     "IMPLEMENTATION_NOT_AUTHORIZED",
     "PRODUCT_CODE_CHANGE_NOT_AUTHORIZED",

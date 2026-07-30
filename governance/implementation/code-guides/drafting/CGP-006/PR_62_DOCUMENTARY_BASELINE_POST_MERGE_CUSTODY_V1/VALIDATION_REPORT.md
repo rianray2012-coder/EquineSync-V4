@@ -48,6 +48,8 @@ Result: `PASS`
 - Custody JSON/CSV parse: `PASS`
 - Custody checksum manifest: `PASS`
 - Custody validator: `PASS`
+- Custody validator review hardening: `PASS`; the validator compares each custody gap, finding, and IWP row to the source registers for ID, severity, status/classification, and mapped candidate relationship.
+- Protected branch identity assertion: `PASS`; the validator asserts the receipt, post-merge head record, and package manifest all name `integrate-emergent-final-zip`.
 - Custody wrapper test: `PASS`
 - Authorized-path verification: `PASS`
 - `git diff --check 185d37987c11eccabba4436619bdf11e91494711 HEAD`: `PASS`

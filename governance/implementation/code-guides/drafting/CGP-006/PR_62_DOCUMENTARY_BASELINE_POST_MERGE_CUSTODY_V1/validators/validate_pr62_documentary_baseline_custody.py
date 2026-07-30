@@ -86,6 +86,10 @@ def validate() -> dict[str, object]:
 
     receipt = json.loads((PACKAGE_ROOT / 'PR_62_PROTECTED_MERGE_RECEIPT.json').read_text(encoding='utf-8'))
     head_record = json.loads((PACKAGE_ROOT / 'PR_62_POST_MERGE_PROTECTED_HEAD_RECORD.json').read_text(encoding='utf-8'))
+    manifest = json.loads((PACKAGE_ROOT / 'PACKAGE_MANIFEST.json').read_text(encoding='utf-8'))
+    assert manifest['protected_branch'] == PROTECTED_BRANCH
+    assert receipt['pre_merge_protected_branch'] == PROTECTED_BRANCH
+    assert head_record['protected_branch'] == PROTECTED_BRANCH
     assert receipt['pre_merge_protected_head'] == BASE
     assert receipt['approved_pr_head'] == PR_HEAD
     assert receipt['merge_commit_sha'] == PR62_MERGE
@@ -121,6 +125,9 @@ def validate() -> dict[str, object]:
     gap_rows = [r for r in custody if r['record_type'] == 'GAP']
     finding_rows = [r for r in custody if r['record_type'] == 'FINDING']
     iwp_rows = [r for r in custody if r['record_type'] == 'IWP_CANDIDATE']
+    gap_by_id = {r['gap_id']: r for r in gaps}
+    finding_by_id = {r['finding_id']: r for r in findings}
+    iwp_by_id = {r['work_package_id']: r for r in iwps}
     assert len(gap_rows) == 18
     assert len(finding_rows) == 16
     assert len(iwp_rows) == 15
@@ -130,6 +137,24 @@ def validate() -> dict[str, object]:
     assert sorted(r['record_id'] for r in finding_rows) == sorted(r['finding_id'] for r in findings)
     assert all(r['recorded_status'] == 'IMPLEMENTATION_NOT_AUTHORIZED' for r in iwp_rows)
     assert sorted(r['record_id'] for r in iwp_rows) == sorted(r['work_package_id'] for r in iwps)
+    for row in gap_rows:
+        source = gap_by_id[row['record_id']]
+        assert row['severity'] == source['severity'], row['record_id']
+        assert row['classification'] == source['current_state_classification'], row['record_id']
+        assert row['recorded_status'] == source['status'], row['record_id']
+        assert row['candidate_iwp'] == source['proposed_implementation_work_package_id'], row['record_id']
+    for row in finding_rows:
+        source = finding_by_id[row['record_id']]
+        assert row['severity'] == source['severity'], row['record_id']
+        assert row['classification'] == source['status'], row['record_id']
+        assert row['recorded_status'] == source['status'], row['record_id']
+        assert row['candidate_iwp'] == source['gap_ids'], row['record_id']
+    for row in iwp_rows:
+        source = iwp_by_id[row['record_id']]
+        assert row['severity'] == source['repository_relative_complexity'], row['record_id']
+        assert row['classification'] == 'CANDIDATE_ONLY', row['record_id']
+        assert row['recorded_status'] == source['implementation_authorization_status'], row['record_id']
+        assert row['authorization_state'] == source['implementation_authorization_status'], row['record_id']
     assert sum(1 for r in gap_rows if r['severity'] == 'P1_HIGH') == 5
     assert sum(1 for r in gap_rows if r['severity'] == 'P2_MEDIUM') == 11
     assert sum(1 for r in gap_rows if r['severity'] == 'P3_LOW') == 2
@@ -166,7 +191,6 @@ def validate() -> dict[str, object]:
     assert not bad_status, bad_status
     run(['git', 'diff', '--check', PR62_MERGE, 'HEAD'])
 
-    manifest = json.loads((PACKAGE_ROOT / 'PACKAGE_MANIFEST.json').read_text(encoding='utf-8'))
     assert manifest['package_id'] == 'ES-CGP-006-PR62-DOCUMENTARY-BASELINE-POST-MERGE-CUSTODY-V1'
     return {
         'status': 'PASS',
