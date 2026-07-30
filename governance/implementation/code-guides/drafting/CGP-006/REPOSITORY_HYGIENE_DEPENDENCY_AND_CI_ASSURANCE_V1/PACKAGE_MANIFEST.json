@@ -1,0 +1,98 @@
+{
+  "counts": {
+    "authorized_iwps_total": 0,
+    "candidate_iwps_total": 15,
+    "copilot_leads_reviewed": 10,
+    "findings_total": 16,
+    "open_gaps_total": 18
+  },
+  "date": "2026-07-30",
+  "files": {
+    "AUTHORIZED_PATH_REPORT.md": {
+      "bytes": 823,
+      "sha256": "d97922a4c17000c2e67b498e859c5dd9108cdf681b6740fdd05b1307d2a9306b"
+    },
+    "CI_ASSURANCE_GAP_ANALYSIS.csv": {
+      "bytes": 2366,
+      "sha256": "a4b04fe5141735a5b37530843531cc4590ab688f34a12309009a5e2b9319f398"
+    },
+    "COMMAND_EXECUTION_AND_LIMITATION_LOG.md": {
+      "bytes": 2788,
+      "sha256": "21c5d5c8e0207cd7d558d5402c32b4b7b4762eedbe0741da0366f801317498c7"
+    },
+    "COPILOT_FINDING_VALIDATION_MATRIX.csv": {
+      "bytes": 11072,
+      "sha256": "76a435265419ad951f4434b711ac4b007349fcc3750295a6701fabe8afd45dbe"
+    },
+    "DEPENDENCY_CLASSIFICATION_INVENTORY.csv": {
+      "bytes": 3387,
+      "sha256": "42a5af49f70ca98e9166c0e2eb1467f67f5802a4c56fa4e045e6cb2c7e72b25e"
+    },
+    "DEPLOYMENT_MODEL_DETERMINATION.md": {
+      "bytes": 1087,
+      "sha256": "f4907010bfacc20059e5e6dadd42b325fd793ec874a49659db135d051f7af525"
+    },
+    "FOUNDER_DECISION_REGISTER.csv": {
+      "bytes": 2053,
+      "sha256": "5f568509aa6f7003d758558d24670fc88fdf6ace692abe4aae5df7c491acec7a"
+    },
+    "FRONTEND_PEER_CONFLICT_MATRIX.csv": {
+      "bytes": 1111,
+      "sha256": "fd4960370a8856fd45b69c01859cb9ebd05c8b562d99d10285a376f9870d4cad"
+    },
+    "LARGE_MODULE_RISK_OBSERVATION_REGISTER.csv": {
+      "bytes": 2092,
+      "sha256": "78dcb81aaa822e0862b5ac19f27aed8534cefea854047993c3e0b7398da22bf8"
+    },
+    "LICENSE_AND_DISTRIBUTION_DECISION_MEMORANDUM.md": {
+      "bytes": 1319,
+      "sha256": "02860b21ec961d5da93578e7c26e72496caeb01e823771a6e47b20f5c1bf366b"
+    },
+    "PROPOSED_PR_SEGMENTATION_AND_DEPENDENCY_PLAN.md": {
+      "bytes": 1914,
+      "sha256": "2cb7a9336e8f640ac26011aada74bcb87b6e49678835ed4aa05339f11d62b0a0"
+    },
+    "README.md": {
+      "bytes": 2473,
+      "sha256": "90bc9004ed230bee27ff6afd286022c0e8eb0628c4a5f3429df82ae8049027cd"
+    },
+    "REPOSITORY_STATE_VERIFICATION_RECEIPT.json": {
+      "bytes": 1366,
+      "sha256": "da2f07cfe5e6194a421593dc39dfc9cb2a33123b0c37fc5921d4ae5b71cf6d58"
+    },
+    "SECRET_AND_CONFIGURATION_REVIEW_REPORT.md": {
+      "bytes": 1492,
+      "sha256": "5b94a9f788bd7e5c72382c01886d47e98bf781eb78bc3baa145ba449843c4ab1"
+    },
+    "VALIDATION_REPORT.md": {
+      "bytes": 2048,
+      "sha256": "33fbb96fa313fd35b4e878c4d721c6ea613f9f7a8ecb6c8767fe6a95ef04df45"
+    },
+    "tests/__pycache__/test_repository_hygiene_ci_assurance_review.cpython-314.pyc": {
+      "bytes": 1673,
+      "sha256": "148ffcb66eded67bdf36092d466d4718d0277ca9a8d0b0d7110a9eb30dbe3bbf"
+    },
+    "tests/test_repository_hygiene_ci_assurance_review.py": {
+      "bytes": 754,
+      "sha256": "c5eef3998a92cb769480c809c45a5331e64cf875754c8138a4fe87d36857b264"
+    },
+    "validators/__pycache__/validate_repository_hygiene_ci_assurance_review.cpython-314.pyc": {
+      "bytes": 13566,
+      "sha256": "3ac9cfd46759862970d61003c8e97820d29f243870230b8c166261d052810949"
+    },
+    "validators/validate_repository_hygiene_ci_assurance_review.py": {
+      "bytes": 7492,
+      "sha256": "070d783469ea8bc163a81ff498d66a04acdd9e4f9d13764d78b5afc6e2e1a7e9"
+    }
+  },
+  "max_bounded_draft_remediation_prs": 3,
+  "max_documentary_review_prs": 1,
+  "package_id": "ES-CGP-006-REPOSITORY-HYGIENE-DEPENDENCY-CI-ASSURANCE-V1",
+  "protected_branch": "integrate-emergent-final-zip",
+  "protected_merge_authorized": false,
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "required_starting_head": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+  "required_terminal_marker": "REPOSITORY_HYGIENE_AND_CI_ASSURANCE_REVIEW_COMPLETE_DRAFT_REMEDIATION_PRS_READY_FOR_FOUNDER_REVIEW",
+  "review_branch": "codex/cgp-006-repository-hygiene-dependency-ci-assurance-review-v1",
+  "status": "DOCUMENTARY_REVIEW_PACKAGE_COMPLETE"
+}

@@ -1,0 +1,19 @@
+package,version,source_line,classification,evidence,moved_in_pr2,safety_gate
+fastapi,0.110.1,backend/requirements.txt:23,PRODUCTION_RUNTIME,"backend routes import fastapi, including backend/routes/billing.py and backend/task_engine.py",NO,Runtime API framework retained in runtime requirements.
+uvicorn,0.25.0,backend/requirements.txt:122,PRODUCTION_RUNTIME,ASGI server dependency for FastAPI startup/deployment.,NO,Startup/deployment dependency retained.
+motor,3.3.1,backend/requirements.txt:62,PRODUCTION_RUNTIME,backend scripts and runtime database access use motor.motor_asyncio.,NO,Mongo runtime dependency retained.
+pymongo,4.5.0,backend/requirements.txt:88,PRODUCTION_RUNTIME,CI Mongo health check and Mongo client compatibility.,NO,Database/runtime dependency retained.
+pydantic,2.13.4,backend/requirements.txt:83,PRODUCTION_RUNTIME,backend routes and task engine import pydantic models.,NO,Request/response model dependency retained.
+stripe,15.1.0,backend/requirements.txt:111,PRODUCTION_RUNTIME,backend/routes/membership.py imports stripe.,NO,Provider runtime dependency retained; no provider testing performed.
+requests,2.34.1,backend/requirements.txt:99,PRODUCTION_OR_MAINTENANCE_RUNTIME,backend/scripts/docusign_jwt_smoke.py imports requests; possible provider/maintenance use.,NO,Conservatively retained.
+python-dotenv,1.2.2,backend/requirements.txt:92,MAINTENANCE_RUNTIME_OR_LOCAL_DEVELOPMENT,multiple backend scripts load dotenv for local/maintenance execution.,NO,Conservatively retained because scripts may be maintenance entrypoints.
+bcrypt,4.1.3,backend/requirements.txt:9,PRODUCTION_RUNTIME,backend scripts import bcrypt; auth/password hashing boundary.,NO,Security-sensitive dependency retained.
+PyJWT,2.12.1,backend/requirements.txt:87,PRODUCTION_OR_MAINTENANCE_RUNTIME,backend/scripts/docusign_jwt_smoke.py imports jwt.,NO,Conservatively retained.
+black,26.3.1,backend/requirements.txt:10,LINT_FORMAT_TOOLING,formatter package; no runtime import found in bounded source review.,YES,Move only to requirements-dev; no version change.
+flake8,7.3.0,backend/requirements.txt:26,LINT_FORMAT_TOOLING,linter package; no runtime import found in bounded source review.,YES,Move only to requirements-dev; no version change.
+isort,8.0.1,backend/requirements.txt:48,LINT_FORMAT_TOOLING,import sorter package; no runtime import found in bounded source review.,YES,Move only to requirements-dev; no version change.
+mypy,2.1.0,backend/requirements.txt:64,TYPING_TOOLING,type checker package; no runtime import found in bounded source review.,YES,Move only to requirements-dev; no version change.
+pycodestyle,2.14.0,backend/requirements.txt:81,LINT_FORMAT_TOOLING,flake8/pycodestyle lint dependency; no runtime import found in bounded source review.,YES,Move only to requirements-dev; no version change.
+pyflakes,3.4.0,backend/requirements.txt:85,LINT_FORMAT_TOOLING,flake8/pyflakes lint dependency; no runtime import found in bounded source review.,YES,Move only to requirements-dev; no version change.
+pytest,9.0.3,backend/requirements.txt:90,TESTING_TOOLING,CI runs python -m pytest; not required for runtime startup.,YES,CI test jobs install requirements-dev; no version change.
+pip-audit,not declared,none,SECURITY_AUDIT_TOOLING_ABSENT,No Python dependency-audit package declared; external/tool install not performed.,NO,CI PR may report absence without installing new tool.

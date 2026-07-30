@@ -1,0 +1,6 @@
+package,declared,locked,peer_requirement,evidence,classification,remediation_status
+react,^19.0.0,19.2.7,n/a,frontend/package.json:48; package-lock node_modules/react version 19.2.7,CURRENT_REACT_MAJOR_19,PLAN_ONLY_NO_CHANGE
+react-dom,^19.0.0,19.2.7,react ^19.2.7,frontend/package.json:50; package-lock node_modules/react-dom,ALIGNED_WITH_REACT_LOCK,PLAN_ONLY_NO_CHANGE
+react-day-picker,8.10.1,8.10.1,react ^16.8.0 || ^17.0.0 || ^18.0.0,npm ls --package-lock-only exits ELSPROBLEMS; package-lock peerDependencies,CONFIRMED_PEER_CONFLICT,FRONTEND_DEPENDENCY_RESOLUTION_PLAN_READY_FOR_SEPARATE_FOUNDER_DISPOSITION
+npm install path,npm ci --legacy-peer-deps,n/a,legacy peer handling required by current tree,.github/workflows/ci.yml:215-219; frontend/vercel.json:2; docs/VERCEL_FRONTEND_DEPLOYMENT.md:10,CONFIRMED_LEGACY_PEER_INSTALL_RELIANCE,NO_LOCKFILE_OR_DEPENDENCY_CHANGE_AUTHORIZED
+npm audit,package-lock only,42 total advisories,n/a,"npm audit --package-lock-only --audit-level=moderate: 0 critical, 21 high, 9 moderate, 12 low",DEPENDENCY_AUDIT_EVIDENCE_REQUIRES_FOUNDER_UPDATE_POLICY,REPORT_ONLY_NO_UPDATE
