@@ -1,23 +1,15 @@
-# Founder Stage 24 Limited Activation Decision Packet
+# Stage 24 Founder Disposition Pre-Custody Record
 
-**Packet status:** `FOUNDER_DISPOSITION_RECORDED_PENDING_CUSTODY_EFFECTIVE_EVENT`
+**Record ID:** `CGP006-STAGE24-FOUNDER-DISPOSITION-PRE-CUSTODY-2026-07-30`
 **Founder disposition:** `ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30`
-**Founder decision date:** `2026-07-30`
-**PR state before Phase A merge:** `OPEN_UNMERGED_PENDING_PROTECTED_MERGE`
+**Record state:** `LIMITED_STAGE_24_ACTIVATION_APPROVED_PENDING_CUSTODY`
+**Profile state:** `PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
+**Guide state:** `GUIDES_REMAIN_NOT_ACTIVE_PENDING_CUSTODY`
 **Effective event:** `VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR`
 
-## 1. Executive Summary
+## Exact Source Package Treatment
 
-This packet records the Founder-approved Stage 24 disposition integrated into existing PR #59. The profile is adopted pending the custody effective event, limited Stage 24 activation is approved pending custody, and all guides remain not active until the post-PR #59 custody PR is protected-merged and verified.
-
-## 2. Controlling Authority
-
-- Program Plan: `ES-CODE-GUIDE-CREATION-REVIEW-ASSURANCE-PLAN-V1.1`
-- Founder determination: `governance/implementation/code-guides/founder-determinations/ES-FD-SOLO-FOUNDER-COMPENSATING-ASSURANCE-2026-07-29/FOUNDER_DETERMINATION_SOLO_FOUNDER_COMPENSATING_ASSURANCE_MODEL_2026-07-29.md`
-- Stage 24 disposition: `ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30`
-- Effective event: `VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR`
-
-## 3. Exact Founder Disposition Sources
+The four Founder-approved disposition sources are copied into this package with exact SHA-256 and byte-length identity.
 
 | Source | SHA-256 | Byte length | Source ID | Authority class |
 | --- | --- | ---: | --- | --- |
@@ -26,25 +18,14 @@ This packet records the Founder-approved Stage 24 disposition integrated into ex
 | `FOUNDER_STAGE_24_ACTIVATION_SCOPE_RECORD_2026-07-30.md` | `c5a4c05f25635ce5bec8ff805af7c3c0be3fdb8a8fbf8daa3b5199697ba41142` | `1869` | `SFCA-SRC-0060` | `FOUNDER_APPROVED_STAGE24_SCOPE_RECORD` |
 | `FOUNDER_APPROVAL_RECORD_CGP_006_STAGE_24_DISPOSITION_2026-07-30.md` | `7f228f1d81cf09801d0da951b7494c2639dd5ee317d11e1db6bd3832c005ad24` | `1254` | `SFCA-SRC-0061` | `FOUNDER_APPROVAL_RECORD` |
 
-## 4. Adopted Profile
-
-`PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
+## Adopted Profile Identity
 
 - Adopted profile SHA-256: `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
 - Adopted profile byte length: `9609`
 - Candidate source SHA-256: `11c7b7169ed4c6537f7b9cd91f0a952ccb30c66ea86a94d94c826b19a1c28d99`
 - Candidate source byte length: `9245`
 
-## 5. Exact Guide Identities And Phase A State
-
-| Guide | Title | Version | SHA-256 | Byte length | Phase A state |
-| --- | --- | --- | --- | ---: | --- |
-| `ES-CG-00` | Code Guide Charter | `1.1.0` | `2275ca1b9674b4e05390f134470a37e7ee63ca423705b6579b1bc8eef874f0c1` | `2986` | `NOT_ACTIVE_PENDING_CUSTODY` |
-| `ES-CG-01` | Engineering Authority and Precedence | `1.1.0` | `e35ea6b9031bd4c727852b124ef9968fe0ef30afbc4e83efabd270f18248e9e6` | `3008` | `NOT_ACTIVE_PENDING_CUSTODY` |
-| `ES-CG-10` | Testing, Verification, and Assurance | `1.1.0` | `435eb4940da15e6ffbbd66bbc207a05b4fa3ffd3405ff436a8ca15950dfd32c7` | `3250` | `NOT_ACTIVE_PENDING_CUSTODY` |
-| `ES-CG-13` | Completion, Evidence, and Traceability | `1.1.0` | `bf79a3762625bfaaa3ebbd4c446c460ab6a60ff9bbd264d2f4b9e9cdb55305e9` | `3227` | `NOT_ACTIVE_PENDING_CUSTODY` |
-
-## 6. Approved And Deferred Scopes
+## Guide Scope State Before Custody
 
 | Scope | Phase A treatment |
 | --- | --- |
@@ -55,39 +36,7 @@ This packet records the Founder-approved Stage 24 disposition integrated into ex
 | `RELEASE_GATE` | `RELEASE_GATE_DEFERRED` |
 | `OPERATIONS_REFERENCE` | `OPERATIONS_REFERENCE_DEFERRED` |
 
-`IMPLEMENTATION_CONTROL` is a control classification for later authorized work. It does not authorize repository-specific implementation mapping or implementation.
-
-## 7. Residual Risks
-
-All twelve risks in `SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_REGISTER.csv` and `SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_DECISION_REGISTER_STAGE24.csv` are recorded as `ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY` for limited Stage 24 activation only. Risk acceptance is not risk closure.
-
-## 8. Effective Event, Grace, And Historical Treatment
-
-`PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
-
-`LIMITED_STAGE_24_ACTIVATION_APPROVED_PENDING_CUSTODY`
-
-`GUIDES_REMAIN_NOT_ACTIVE_PENDING_CUSTODY`
-
-`NO_GRACE_PERIOD_FOR_NEWLY_AUTHORIZED_WORK`
-
-`NO_RETROACTIVE_APPLICATION_TO_HISTORICAL_RECORDS`
-
-The custody PR merge timestamp in UTC and resulting protected head become the activation effective timestamp and head only after protected custody merge verification.
-
-## 9. Retained Items
-
-`GAP_0004_REMAINS_OPEN`
-
-`NO_SILENT_FINDING_CLOSURE`
-
-`NO_SILENT_WARNING_CLOSURE`
-
-`NO_SILENT_CONDITION_CLOSURE`
-
-## 10. Non-Authorization Boundaries
-
-This packet does not authorize implementation mapping, implementation, product-code changes, schema changes, migrations, CI or ruleset changes beyond existing validation execution, external-tool setup, deployment, staging, pilot, production use, Wave 2, or CGP-007.
+All exact guide bytes remain `NOT_ACTIVE_PENDING_CUSTODY` until the post-PR #59 custody PR is protected-merged and verified.
 
 ## Continuing Statements
 

@@ -1,76 +1,56 @@
 # Directive Execution Record
 
-**Directive ID:** `CGP_006_SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_DIRECTIVE_V1_0_0`
-**Directive date:** `2026-07-29`
-**Repository:** `rianray2012-coder/EquineSync-V4`
-**Protected branch:** `integrate-emergent-final-zip`
-**Required starting protected head:** `150b24d65d25f79255959ee07a185e7b04601bcf`
-**Verified starting protected head:** `150b24d65d25f79255959ee07a185e7b04601bcf`
-**Work branch:** `codex/cgp-006-solo-founder-assurance-profile-stage24-readiness-v1`
-**Branch point:** `150b24d65d25f79255959ee07a185e7b04601bcf`
+**Directive executed:** `CGP_006_STAGE_24_PROFILE_ADOPTION_LIMITED_ACTIVATION_PROTECTED_MERGE_AND_CUSTODY_DIRECTIVE_V1_0_0`
+**Founder disposition:** `ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30`
+**Phase:** `PHASE_A_EXISTING_PR_59_DISPOSITION_INTEGRATION`
+**Required protected head before execution:** `150b24d65d25f79255959ee07a185e7b04601bcf`
+**Required PR #59 head before execution:** `979b5094bd5bee55b9ed559d4cff3bbdab734d76`
+**Package state before PR #59 protected merge:** `LIMITED_STAGE_24_ACTIVATION_APPROVED_PENDING_CUSTODY`
 
-## Preflight Results
+## Execution Summary
 
-- Repository identity: `PASS`
-- Protected branch: `PASS`
-- Protected head: `PASS`
-- Worktree/index clean before branch: `PASS`
-- No active merge/rebase/cherry-pick/revert: `PASS`
-- PR #57 merged: `PASS`
-- PR #58 merged: `PASS`
-- Founder determination hash and byte length: `PASS`
-- Custody receipt exists: `PASS`
-- Wave 1 guide status rows: `ADOPTED`, `REPOSITORY_ACCESSIONED`, `CUSTODY_COMPLETE`, `NOT_ACTIVE`
-- Implementation mapping and implementation authority: `NOT_AUTHORIZED`
-- Duplicate active workstream PR: `NONE_FOUND`
+The four exact Founder-approved Stage 24 source files were added to the existing PR #59 package. The adopted profile was generated from the authenticated candidate profile using only status-finalization changes authorized by the directive. Residual risk decisions, activation scope records, source-freeze records, authority matrices, package manifests, checksums, validator, and tests were updated for the pre-custody state.
 
-## Execution Result
+## Exact Founder Source Verification
 
-The package prepares review, treatment, readiness, and Founder decision evidence only. It stops at a draft PR for Founder Stage 24 disposition.
+| Source | SHA-256 | Byte length | Source ID | Authority class |
+| --- | --- | ---: | --- | --- |
+| `FOUNDER_DISPOSITION_SOLO_FOUNDER_PROFILE_AND_LIMITED_STAGE_24_ACTIVATION_2026-07-30.md` | `9bb300eb66e30410e1d6f56f1d337532310e9544e1c3e39eb7f0d848c3692d8f` | `11122` | `SFCA-SRC-0058` | `FOUNDER_APPROVED_STAGE24_DISPOSITION` |
+| `FOUNDER_RESIDUAL_RISK_ACCEPTANCE_RECORD_STAGE_24_2026-07-30.md` | `d8aa1f45d493bb7be5acb65e68b1eb5cc9af2517bc9423c3cbaa06ee7e2374e9` | `4214` | `SFCA-SRC-0059` | `FOUNDER_APPROVED_RESIDUAL_RISK_ACCEPTANCE` |
+| `FOUNDER_STAGE_24_ACTIVATION_SCOPE_RECORD_2026-07-30.md` | `c5a4c05f25635ce5bec8ff805af7c3c0be3fdb8a8fbf8daa3b5199697ba41142` | `1869` | `SFCA-SRC-0060` | `FOUNDER_APPROVED_STAGE24_SCOPE_RECORD` |
+| `FOUNDER_APPROVAL_RECORD_CGP_006_STAGE_24_DISPOSITION_2026-07-30.md` | `7f228f1d81cf09801d0da951b7494c2639dd5ee317d11e1db6bd3832c005ad24` | `1254` | `SFCA-SRC-0061` | `FOUNDER_APPROVAL_RECORD` |
 
-## Founder-Approved Multi-Agent Tooling Intent Integration
+## Adopted Profile
 
-**Integration directive:** `CGP_006_PR_59_FOUNDER_APPROVED_MULTI_AGENT_TOOLING_INTENT_INTEGRATION_DIRECTIVE_V1_0_1`
-**Superseded directive not executed:** `CGP_006_PR_59_FOUNDER_APPROVED_MULTI_AGENT_TOOLING_INTENT_INTEGRATION_DIRECTIVE_V1_0_0`
-**Correction classification:** `NON_SUBSTANTIVE_VERIFIED_REPOSITORY_HEAD_CORRECTION`
-**Corrected directive SHA-256:** `0089e4aab587af3d7f24d69b41b004725e26475779de0f3cb048ad217da3ec89`
-**Corrected directive byte length:** `12540`
-**Directive source correction record SHA-256:** `639881bdd4c812553c1c376556950d78b7f6dabbeb73f34d11d9cc6aa88fd10e`
-**Directive source correction record byte length:** `2563`
+- Candidate SHA-256: `11c7b7169ed4c6537f7b9cd91f0a952ccb30c66ea86a94d94c826b19a1c28d99`
+- Candidate byte length: `9245`
+- Adopted SHA-256: `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
+- Adopted byte length: `9609`
+- Profile state: `PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
 
-- Repository identity: `PASS`
-- Protected branch: `integrate-emergent-final-zip`
-- Verified protected head: `150b24d65d25f79255959ee07a185e7b04601bcf`
-- Work branch: `codex/cgp-006-solo-founder-assurance-profile-stage24-readiness-v1`
-- Pre-update work-branch head: `97ad54f7b2ff7cd0c0e0bbc20fe5553f36247a4c`
-- PR #59 state before update: `OPEN_DRAFT_UNMERGED_MERGEABLE`
-- Corrected ZIP archive test: `PASS`
-- Approved source hash and byte-length verification: `PASS`
-- Approved source files copied without substantive modification: `PASS`
+## Phase A Required State
 
-`MULTI_AGENT_TOOLING_INTENT_FOUNDER_APPROVED`
+`PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
 
-`FOUNDER_APPROVAL_DATE_2026_07_30`
+`LIMITED_STAGE_24_ACTIVATION_APPROVED_PENDING_CUSTODY`
 
-`APPROVED_SHA256_VALUES_RECORDED`
+`GUIDES_REMAIN_NOT_ACTIVE_PENDING_CUSTODY`
 
-`APPROVED_BYTE_LENGTHS_RECORDED`
+`REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
 
-`NO_SUBSTITUTED_SOURCE_AUTHORIZED`
+`IMPLEMENTATION_NOT_AUTHORIZED`
 
-`TOOLING_INTENT_IS_NON_VENDOR_LOCKED`
+## Explicit Non-Authorization
 
-`NAMED_TOOLS_NOT_REQUIRED_FOR_LIMITED_STAGE_24_ACTIVATION`
-
-`NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION`
-
-`PR_59_REMAINS_DRAFT_UNMERGED`
+No product code, implementation mapping, implementation, external-tool setup, deployment, staging, pilot, production use, Wave 2, or CGP-007 action is authorized or performed by this package.
 
 ## Continuing Statements
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
 
 `SOLO_FOUNDER_COMPENSATING_ASSURANCE_DETERMINATION_CONTROLLING`
+
+`FOUNDER_STAGE_24_DISPOSITION_CONTROLLING`
 
 `FOUNDER_SOLO_COMPENSATING_ASSURANCE_MODEL_APPLIES`
 
@@ -90,7 +70,41 @@ The package prepares review, treatment, readiness, and Founder decision evidence
 
 `OBJECTIVE_TEST_AND_EVIDENCE_GATES_REQUIRED`
 
-`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED`
+`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12`
+
+`RESIDUAL_RISKS_ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY`
+
+`PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
+
+`LIMITED_STAGE_24_ACTIVATION_APPROVED_PENDING_CUSTODY`
+
+`GUIDES_REMAIN_NOT_ACTIVE_PENDING_CUSTODY`
+
+`ES_CG_00_REMAINS_NOT_ACTIVE_PENDING_CUSTODY`
+
+`ES_CG_01_REMAINS_NOT_ACTIVE_PENDING_CUSTODY`
+
+`ES_CG_10_REMAINS_NOT_ACTIVE_PENDING_CUSTODY`
+
+`ES_CG_13_REMAINS_NOT_ACTIVE_PENDING_CUSTODY`
+
+`PLANNING_REFERENCE_APPROVED_PENDING_EFFECTIVE_EVENT`
+
+`IMPLEMENTATION_CONTROL_APPROVED_PENDING_EFFECTIVE_EVENT`
+
+`PULL_REQUEST_REVIEW_APPROVED_PENDING_EFFECTIVE_EVENT`
+
+`MERGE_GATE_DEFERRED`
+
+`RELEASE_GATE_DEFERRED`
+
+`OPERATIONS_REFERENCE_DEFERRED`
+
+`ACTIVATION_EFFECTIVE_EVENT_PENDING_CUSTODY_PR`
+
+`NO_GRACE_PERIOD_FOR_NEWLY_AUTHORIZED_WORK`
+
+`NO_RETROACTIVE_APPLICATION_TO_HISTORICAL_RECORDS`
 
 `GAP_0004_REMAINS_OPEN`
 
@@ -100,23 +114,13 @@ The package prepares review, treatment, readiness, and Founder decision evidence
 
 `NO_SILENT_CONDITION_CLOSURE`
 
-`STAGE_24_GUIDE_ACTIVATION_NOT_AUTHORIZED`
-
-`ES_CG_00_REMAINS_NOT_ACTIVE`
-
-`ES_CG_01_REMAINS_NOT_ACTIVE`
-
-`ES_CG_10_REMAINS_NOT_ACTIVE`
-
-`ES_CG_13_REMAINS_NOT_ACTIVE`
-
-`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
-
 `REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
 
 `IMPLEMENTATION_NOT_AUTHORIZED`
 
 `DEPLOYMENT_NOT_AUTHORIZED`
+
+`STAGING_USE_NOT_AUTHORIZED`
 
 `PILOT_NOT_AUTHORIZED`
 
@@ -126,4 +130,10 @@ The package prepares review, treatment, readiness, and Founder decision evidence
 
 `CGP_007_NOT_AUTHORIZED`
 
-`DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION`
+`MULTI_AGENT_TOOLING_INTENT_FOUNDER_APPROVED`
+
+`NAMED_TOOLS_NOT_REQUIRED_FOR_LIMITED_STAGE_24_ACTIVATION`
+
+`NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION`
+
+`CUSTODY_PR_REQUIRED_BEFORE_ACTIVATION_EFFECTIVE`

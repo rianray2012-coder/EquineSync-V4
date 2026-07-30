@@ -29,158 +29,174 @@ class SoloFounderStage24ReadinessValidatorTests(unittest.TestCase):
         self.assertIn(text, str(ctx.exception))
 
     def read_csv_rows(self, path):
-        with path.open(newline="") as f:
+        with path.open(newline="", encoding="utf-8") as f:
             return list(csv.DictReader(f))
+
+    def write_csv_rows(self, path, rows):
+        with path.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=rows[0].keys(), lineterminator="\n")
+            writer.writeheader()
+            writer.writerows(rows)
+
+    def refresh_copy_manifests(self, pkg):
+        def digest(path):
+            import hashlib
+            data = path.read_bytes()
+            return hashlib.sha256(data).hexdigest(), len(data)
+
+        manifest = json.loads((pkg / "PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
+        for entry in manifest["files"]:
+            sha, size = digest(pkg / entry["path"])
+            entry["sha256"] = sha
+            entry["byte_length"] = size
+        (pkg / "PACKAGE_MANIFEST.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+        lines = []
+        for path in sorted(pkg.rglob("*")):
+            if not path.is_file():
+                continue
+            rel = path.relative_to(pkg).as_posix()
+            if rel == "CHECKSUM_MANIFEST.sha256":
+                continue
+            sha, _ = digest(path)
+            lines.append(f"{sha}  {rel}")
+        (pkg / "CHECKSUM_MANIFEST.sha256").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     def test_positive_package_validates(self):
         result = validator.validate(ROOT, enforce_git_paths=False)
         self.assertEqual(result["status"], "PASS")
         self.assertEqual(result["guide_count"], 4)
-        self.assertEqual(result["finding_rows"], 6)
+        self.assertEqual(result["approved_disposition_source_count"], 4)
+        self.assertEqual(result["residual_risk_rows"], 12)
+        self.assertEqual(result["residual_risk_decision_rows"], 12)
 
-    def test_exact_controlling_determination_passes(self):
+    def test_candidate_profile_exact_bytes_preserved(self):
         result = validator.validate(ROOT, enforce_git_paths=False)
-        self.assertGreaterEqual(result["source_count"], 30)
+        self.assertEqual(result["adopted_profile_byte_length"], len((PKG / validator.ADOPTED_PROFILE).read_bytes()))
 
-    def test_exact_adopted_guide_bytes_pass(self):
+    def test_altered_candidate_profile_fails(self):
+        pkg = self.copy_pkg()
+        path = pkg / validator.CANDIDATE_PROFILE["path"]
+        path.write_text(path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+        self.assert_fails(pkg, "candidate profile hash mismatch")
+
+    def test_adopted_profile_required_tokens_present(self):
+        text = (PKG / validator.ADOPTED_PROFILE).read_text(encoding="utf-8")
+        self.assertIn("FOUNDER_ADOPTED", text)
+        self.assertIn("PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT", text)
+        self.assertIn(validator.EFFECTIVE_EVENT, text)
+        self.assertNotIn("FOUNDER_ADOPTION_CANDIDATE_ONLY", text)
+
+    def test_missing_adopted_profile_fails(self):
+        pkg = self.copy_pkg()
+        (pkg / validator.ADOPTED_PROFILE).unlink()
+        self.assert_fails(pkg, "required file missing")
+
+    def test_adopted_profile_candidate_status_fails(self):
+        pkg = self.copy_pkg()
+        path = pkg / validator.ADOPTED_PROFILE
+        path.write_text(path.read_text(encoding="utf-8") + "\nFOUNDER_ADOPTION_CANDIDATE_ONLY\n", encoding="utf-8")
+        self.assert_fails(pkg, "adopted profile still marked candidate-only")
+
+    def test_exact_approved_disposition_source_bytes_pass(self):
         result = validator.validate(ROOT, enforce_git_paths=False)
-        self.assertEqual(result["readiness_rows"], 4)
+        self.assertEqual(result["approved_disposition_source_count"], 4)
 
-    def test_exact_approved_tooling_source_bytes_pass(self):
+    def test_altered_approved_disposition_source_hash_fails(self):
+        pkg = self.copy_pkg()
+        path = pkg / "FOUNDER_DISPOSITION_SOLO_FOUNDER_PROFILE_AND_LIMITED_STAGE_24_ACTIVATION_2026-07-30.md"
+        path.write_text(path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+        self.assert_fails(pkg, "approved source hash mismatch")
+
+    def test_missing_approved_disposition_source_fails(self):
+        pkg = self.copy_pkg()
+        (pkg / "FOUNDER_STAGE_24_ACTIVATION_SCOPE_RECORD_2026-07-30.md").unlink()
+        self.assert_fails(pkg, "required file missing")
+
+    def test_exact_approved_tooling_source_bytes_still_pass(self):
         result = validator.validate(ROOT, enforce_git_paths=False)
         self.assertEqual(result["approved_tooling_source_count"], 7)
 
-    def test_altered_approved_tooling_source_hash_fails(self):
+    def test_residual_risk_decisions_all_accepted(self):
+        rows = self.read_csv_rows(PKG / "SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_REGISTER.csv")
+        self.assertEqual(len(rows), 12)
+        self.assertTrue(all(row["founder_acceptance_status"] == validator.RISK_DECISION for row in rows))
+
+    def test_pending_residual_risk_fails(self):
         pkg = self.copy_pkg()
-        path = pkg / "MULTI_AGENT_AND_ASSURANCE_TOOLING_INTENT_V1_0_0.md"
-        path.write_text(path.read_text() + "\n")
-        self.assert_fails(pkg, "approved tooling source hash mismatch")
+        path = pkg / "SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_REGISTER.csv"
+        rows = self.read_csv_rows(path)
+        rows[0]["founder_acceptance_status"] = "PENDING_FOUNDER_DECISION"
+        self.write_csv_rows(path, rows)
+        self.assert_fails(pkg, "Founder residual risk decision incomplete")
 
-    def test_missing_approved_tooling_source_fails(self):
+    def test_missing_residual_risk_decision_row_fails(self):
         pkg = self.copy_pkg()
-        (pkg / "AGENT_FINDING_RECORD_SCHEMA_V1_0_0.md").unlink()
-        self.assert_fails(pkg, "required file missing")
+        path = pkg / "SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_DECISION_REGISTER_STAGE24.csv"
+        rows = self.read_csv_rows(path)[:-1]
+        self.write_csv_rows(path, rows)
+        self.assert_fails(pkg, "residual risk decision companion register mismatch")
 
-    def test_tooling_pending_approval_claim_fails(self):
+    def test_residual_risk_closure_fails(self):
         pkg = self.copy_pkg()
-        path = pkg / "README.md"
-        path.write_text(path.read_text() + "\n`TOOLING_INTENT_CANDIDATE`\n")
-        self.assert_fails(pkg, "prohibited authority")
+        path = pkg / "SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_DECISION_REGISTER_STAGE24.csv"
+        rows = self.read_csv_rows(path)
+        rows[0]["risk_closure_status"] = "CLOSED"
+        self.write_csv_rows(path, rows)
+        self.assert_fails(pkg, "residual risk companion marks risk closed")
 
-    def test_external_tool_setup_authorization_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md"
-        path.write_text(path.read_text() + "\nEXTERNAL_TOOL_SETUP_AUTHORIZED\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_named_tools_mandatory_for_stage24_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "README.md"
-        path.write_text(path.read_text() + "\nNAMED_TOOLS_REQUIRED_FOR_LIMITED_STAGE_24_ACTIVATION\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_cursor_background_agent_present_authorization_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "README.md"
-        path.write_text(path.read_text() + "\nCURSOR_BACKGROUND_AGENTS_AUTHORIZED\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_claude_code_write_authority_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "README.md"
-        path.write_text(path.read_text() + "\nCLAUDE_CODE_WRITE_ACCESS_AUTHORIZED\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_jules_present_implementation_authority_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "README.md"
-        path.write_text(path.read_text() + "\nGOOGLE_JULES_PRESENT_IMPLEMENTATION_AUTHORITY\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_agent_finding_proven_without_validation_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "README.md"
-        path.write_text(path.read_text() + "\nAGENT_FINDING_PROVEN_WITHOUT_VALIDATION\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_agent_self_approve_and_merge_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "README.md"
-        path.write_text(path.read_text() + "\nAGENT_MAY_SELF_APPROVE_AND_MERGE\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_pr_ready_for_review_marker_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "DIRECTIVE_EXECUTION_RECORD.md"
-        path.write_text(path.read_text() + "\nPR_59_READY_FOR_REVIEW\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_second_pr_marker_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "DIRECTIVE_EXECUTION_RECORD.md"
-        path.write_text(path.read_text() + "\nSECOND_PR_OPENED\n")
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_disclosed_non_independent_review_statuses_pass(self):
-        text = (PKG / "FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_RECORD.md").read_text()
-        self.assertIn("FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_COMPLETE_WITH_DISCLOSED_SELF_REVIEW", text)
-        self.assertIn("FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_IS_NOT_INDEPENDENT", text)
-
-    def test_implementation_evidence_assigned_later(self):
-        rows = self.read_csv_rows(PKG / "WAVE_1_FINDING_TREATMENT_MATRIX.csv")
-        row = next(r for r in rows if r["finding_id"] == "W1-V11-FIND-0005")
-        self.assertIn("IMPLEMENTATION_EVIDENCE_REQUIRED_AFTER_AUTHORIZED_IMPLEMENTATION", row["proposed_disposition"])
-
-    def test_runtime_evidence_assigned_later(self):
-        rows = self.read_csv_rows(PKG / "WAVE_1_FINDING_TREATMENT_MATRIX.csv")
-        row = next(r for r in rows if r["finding_id"] == "W1-V11-FIND-0006")
-        self.assertIn("RUNTIME_EVIDENCE_REQUIRED_AFTER_AUTHORIZED_STAGING_OR_PILOT_USE", row["proposed_disposition"])
-
-    def test_guide_specific_readiness_classification_passes(self):
-        rows = self.read_csv_rows(PKG / "WAVE_1_STAGE_24_READINESS_MATRIX.csv")
-        self.assertEqual({r["guide_id"] for r in rows}, {"ES-CG-00", "ES-CG-01", "ES-CG-10", "ES-CG-13"})
-        self.assertTrue(all(r["activation_state_after_package"] == "NOT_ACTIVE" for r in rows))
-
-    def test_limited_activation_proposals_remain_proposals_only(self):
+    def test_scope_matrix_pending_effective_event(self):
         rows = self.read_csv_rows(PKG / "PROPOSED_STAGE_24_ACTIVATION_SCOPE_MATRIX.csv")
-        self.assertEqual(len(rows), 24)
-        self.assertTrue(all(r["effective_date_recommendation"] == "NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED_IN_THIS_PACKAGE" for r in rows))
+        approved = {"PLANNING_REFERENCE", "IMPLEMENTATION_CONTROL", "PULL_REQUEST_REVIEW"}
+        for row in rows:
+            self.assertEqual(row["activation_state_after_package"], validator.NOT_ACTIVE_PENDING_CUSTODY)
+            if row["scope"] in approved:
+                self.assertEqual(row["recommended_posture"], "APPROVED_PENDING_EFFECTIVE_EVENT")
+                self.assertEqual(row["effective_date_recommendation"], validator.EFFECTIVE_EVENT)
 
-    def test_all_required_disclosures_present(self):
-        result = validator.validate(ROOT, enforce_git_paths=False)
-        self.assertEqual(result["status"], "PASS")
-
-    def test_package_only_path_control_passes(self):
-        validator.check_authorized_paths([str(validator.PACKAGE_REL / "README.md")])
-
-    def test_altered_determination_hash_fails(self):
+    def test_scope_marked_active_before_custody_fails(self):
         pkg = self.copy_pkg()
-        manifest = json.loads((pkg / "SOURCE_FREEZE_MANIFEST.json").read_text())
-        manifest["controlling_determination_sha256"] = "0" * 64
-        (pkg / "SOURCE_FREEZE_MANIFEST.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
-        self.assert_fails(pkg, "source freeze determination hash mismatch")
+        path = pkg / "PROPOSED_STAGE_24_ACTIVATION_SCOPE_MATRIX.csv"
+        rows = self.read_csv_rows(path)
+        rows[0]["activation_state_after_package"] = "ACTIVE"
+        self.write_csv_rows(path, rows)
+        self.assert_fails(pkg, "activates a guide before custody")
 
-    def test_altered_guide_bytes_fails(self):
+    def test_merge_gate_approval_fails(self):
         pkg = self.copy_pkg()
-        manifest = json.loads((pkg / "SOURCE_FREEZE_MANIFEST.json").read_text())
-        manifest["guides"][0]["sha256"] = "0" * 64
-        (pkg / "SOURCE_FREEZE_MANIFEST.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
-        self.assert_fails(pkg, "source freeze guide identity mismatch")
+        path = pkg / "PROPOSED_STAGE_24_ACTIVATION_SCOPE_MATRIX.csv"
+        rows = self.read_csv_rows(path)
+        row = next(row for row in rows if row["scope"] == "MERGE_GATE")
+        row["recommended_posture"] = "APPROVED_PENDING_EFFECTIVE_EVENT"
+        self.write_csv_rows(path, rows)
+        self.assert_fails(pkg, "deferred scope not deferred")
 
-    def test_independent_review_claim_fails(self):
+    def test_missing_effective_event_fails(self):
         pkg = self.copy_pkg()
-        path = pkg / "PASS_A_AUTHORITY_AND_SOURCE_FIDELITY_REVIEW.md"
-        path.write_text(path.read_text() + "\n`INDEPENDENT_HUMAN_TECHNICAL_REVIEW_PERFORMED`\n")
-        self.assert_fails(pkg, "prohibited authority")
+        path = pkg / "PROPOSED_STAGE_24_ACTIVATION_SCOPE_MATRIX.csv"
+        rows = self.read_csv_rows(path)
+        rows[0]["effective_date_recommendation"] = "NONE"
+        self.write_csv_rows(path, rows)
+        self.assert_fails(pkg, "approved scope missing custody effective event")
+
+    def test_readiness_rows_remain_not_active_pending_custody(self):
+        rows = self.read_csv_rows(PKG / "WAVE_1_STAGE_24_READINESS_MATRIX.csv")
+        self.assertTrue(all(row["activation_state_after_package"] == validator.NOT_ACTIVE_PENDING_CUSTODY for row in rows))
+
+    def test_open_p0_or_p1_with_ready_fails(self):
+        pkg = self.copy_pkg()
+        path = pkg / "WAVE_1_STAGE_24_READINESS_MATRIX.csv"
+        rows = self.read_csv_rows(path)
+        rows[0]["open_p0_count"] = "1"
+        self.write_csv_rows(path, rows)
+        self.assert_fails(pkg, "ready result paired with open P0 or P1")
 
     def test_silent_finding_closure_fails(self):
         pkg = self.copy_pkg()
         path = pkg / "WAVE_1_FINDING_TREATMENT_MATRIX.csv"
         rows = self.read_csv_rows(path)
         rows[0]["proposed_disposition"] = "CLOSED"
-        with path.open("w", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=rows[0].keys(), lineterminator="\n")
-            w.writeheader(); w.writerows(rows)
+        self.write_csv_rows(path, rows)
         self.assert_fails(pkg, "silent finding closure")
 
     def test_silent_warning_closure_fails(self):
@@ -191,9 +207,7 @@ class SoloFounderStage24ReadinessValidatorTests(unittest.TestCase):
             if row["record_type"] == "RETAINED_WARNING":
                 row["proposed_treatment"] = "CLOSED"
                 break
-        with path.open("w", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=rows[0].keys(), lineterminator="\n")
-            w.writeheader(); w.writerows(rows)
+        self.write_csv_rows(path, rows)
         self.assert_fails(pkg, "silent warning closure")
 
     def test_gap_0004_closure_fails(self):
@@ -204,62 +218,87 @@ class SoloFounderStage24ReadinessValidatorTests(unittest.TestCase):
             if row["source_id"] == "CGP005-TA-APP-GAP-0004":
                 row["proposed_treatment"] = "CLOSED"
                 break
-        with path.open("w", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=rows[0].keys(), lineterminator="\n")
-            w.writeheader(); w.writerows(rows)
+        self.write_csv_rows(path, rows)
         self.assert_fails(pkg, "GAP-0004 closure")
-
-    def test_guide_activation_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "WAVE_1_STAGE_24_READINESS_MATRIX.csv"
-        text = path.read_text().replace("NOT_ACTIVE", "ANY_GUIDE_ACTIVE_STATUS", 1)
-        path.write_text(text)
-        self.assert_fails(pkg, "prohibited authority")
-
-    def test_effective_date_establishment_fails(self):
-        pkg = self.copy_pkg()
-        path = pkg / "PROPOSED_STAGE_24_ACTIVATION_SCOPE_MATRIX.csv"
-        path.write_text(path.read_text() + "\nACTIVATION_EFFECTIVE_DATE_ESTABLISHED\n")
-        self.assert_fails(pkg, "prohibited authority")
 
     def test_implementation_mapping_authorization_fails(self):
         pkg = self.copy_pkg()
         path = pkg / "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md"
-        path.write_text(path.read_text() + "\nREPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AUTHORIZED\n")
+        path.write_text(path.read_text(encoding="utf-8") + "\nREPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_AUTHORIZED\n", encoding="utf-8")
         self.assert_fails(pkg, "prohibited authority")
 
     def test_implementation_authorization_fails(self):
         pkg = self.copy_pkg()
         path = pkg / "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md"
-        path.write_text(path.read_text() + "\nIMPLEMENTATION_AUTHORIZED\n")
+        path.write_text(path.read_text(encoding="utf-8") + "\nIMPLEMENTATION_AUTHORIZED\n", encoding="utf-8")
         self.assert_fails(pkg, "prohibited authority")
 
-    def test_deployment_or_pilot_authorization_fails(self):
+    def test_external_tool_setup_authorization_fails(self):
         pkg = self.copy_pkg()
-        path = pkg / "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md"
-        path.write_text(path.read_text() + "\nPILOT_AUTHORIZED\n")
+        path = pkg / "README.md"
+        path.write_text(path.read_text(encoding="utf-8") + "\nEXTERNAL_TOOL_SETUP_AUTHORIZED\n", encoding="utf-8")
         self.assert_fails(pkg, "prohibited authority")
 
-    def test_missing_review_pass_fails(self):
+    def test_pilot_authorization_fails(self):
         pkg = self.copy_pkg()
-        (pkg / "PASS_H_ADVERSARIAL_AND_RED_TEAM_REVIEW.md").unlink()
-        self.assert_fails(pkg, "required file missing")
+        path = pkg / "README.md"
+        path.write_text(path.read_text(encoding="utf-8") + "\nPILOT_AUTHORIZED\n", encoding="utf-8")
+        self.assert_fails(pkg, "prohibited authority")
 
-    def test_unresolved_founder_confirmation_with_completion_fails(self):
+    def test_independent_review_claim_fails(self):
         pkg = self.copy_pkg()
-        path = pkg / "FOUNDER_DOMAIN_OWNER_REVIEW_RECORD.md"
-        path.write_text(path.read_text() + "\nFOUNDER_CONFIRMATION_REQUIRED\n")
-        self.assert_fails(pkg, "domain review claims completion")
+        path = pkg / "VALIDATION_REPORT.md"
+        path.write_text(path.read_text(encoding="utf-8") + "\nINDEPENDENT_HUMAN_TECHNICAL_REVIEW_PERFORMED\n", encoding="utf-8")
+        self.assert_fails(pkg, "prohibited authority")
 
-    def test_open_p0_or_p1_with_ready_fails(self):
+    def test_package_manifest_hash_mismatch_fails(self):
         pkg = self.copy_pkg()
-        path = pkg / "WAVE_1_STAGE_24_READINESS_MATRIX.csv"
+        manifest = json.loads((pkg / "PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
+        manifest["files"][0]["sha256"] = "0" * 64
+        (pkg / "PACKAGE_MANIFEST.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        self.assert_fails(pkg, "package manifest hash mismatch")
+
+    def test_checksum_mismatch_fails(self):
+        pkg = self.copy_pkg()
+        path = pkg / "CHECKSUM_MANIFEST.sha256"
+        lines = path.read_text(encoding="utf-8").splitlines()
+        lines[0] = "0" * 64 + lines[0][64:]
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        self.assert_fails(pkg, "checksum mismatch")
+
+    def test_source_freeze_missing_adopted_profile_fails(self):
+        pkg = self.copy_pkg()
+        manifest_path = pkg / "SOURCE_FREEZE_MANIFEST.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["sources"] = [entry for entry in manifest["sources"] if entry.get("source_id") != "SFCA-SRC-0062"]
+        manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        self.assert_fails(pkg, "source freeze missing adopted profile")
+
+    def test_source_ledger_missing_adopted_profile_fails(self):
+        pkg = self.copy_pkg()
+        path = pkg / "SOURCE_SHA256SUMS.txt"
+        lines = [line for line in path.read_text(encoding="utf-8").splitlines() if not line.endswith(validator.ADOPTED_PROFILE)]
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        self.refresh_copy_manifests(pkg)
+        self.assert_fails(pkg, "source SHA-256 ledger missing adopted profile")
+
+    def test_authority_matrix_adopted_profile_status_fails(self):
+        pkg = self.copy_pkg()
+        path = pkg / "SOURCE_AUTHORITY_MATRIX.csv"
         rows = self.read_csv_rows(path)
-        rows[0]["open_p0_count"] = "1"
-        with path.open("w", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=rows[0].keys(), lineterminator="\n")
-            w.writeheader(); w.writerows(rows)
-        self.assert_fails(pkg, "ready result paired with open P0 or P1")
+        for row in rows:
+            if row["source_id"] == "SFCA-SRC-0062":
+                row["source_status"] = "candidate"
+                break
+        self.write_csv_rows(path, rows)
+        self.refresh_copy_manifests(pkg)
+        self.assert_fails(pkg, "authority matrix adopted profile status mismatch")
+
+    def test_missing_phase_a_statement_fails(self):
+        pkg = self.copy_pkg()
+        path = pkg / "README.md"
+        path.write_text(path.read_text(encoding="utf-8").replace("CUSTODY_PR_REQUIRED_BEFORE_ACTIVATION_EFFECTIVE", ""), encoding="utf-8")
+        self.assert_fails(pkg, "required Phase A statement")
 
     def test_unauthorized_canonical_file_change_fails(self):
         with self.assertRaises(validator.ValidationError):

@@ -1,74 +1,78 @@
 # Solo-Founder Compensating Assurance Profile And Stage 24 Readiness Rebase
 
 **Directive ID:** `CGP_006_SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_DIRECTIVE_V1_0_0`
-**Package status:** `DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION`
-**Required stopping point:** `STAGE_24_LIMITED_ACTIVATION_DISPOSITION_PENDING_FOUNDER_APPROVAL`
+**Stage 24 disposition:** `ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30`
+**Package status:** `STAGE_24_FOUNDER_DISPOSITION_INTEGRATED_PENDING_PROTECTED_MERGE_AND_CUSTODY`
+**Required stopping point before custody:** `LIMITED_STAGE_24_ACTIVATION_APPROVED_PENDING_CUSTODY`
+**Effective event:** `VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR`
 **Required starting protected head:** `150b24d65d25f79255959ee07a185e7b04601bcf`
 **Work branch:** `codex/cgp-006-solo-founder-assurance-profile-stage24-readiness-v1`
 
-This package prepares a Founder-review candidate assurance profile, structured reviews, finding treatments, Stage 24 readiness recommendations, and a proposed Founder decision packet for Wave 1 guides. It does not adopt the profile, activate any guide, authorize repository-specific implementation mapping, authorize implementation, authorize deployment, authorize staging, authorize pilot use, or close retained items.
+This package now records the Founder-approved Stage 24 disposition for existing PR #59. It adopts the Solo-Founder Compensating Assurance Profile pending the post-PR #59 custody effective event, accepts all twelve residual risks only for limited Stage 24 activation, and approves planning reference, implementation control, and pull-request review scopes pending custody. It does not activate any guide before custody, authorize repository-specific implementation mapping, authorize implementation, authorize deployment, authorize staging, authorize pilot use, authorize production use, authorize external-tool setup, start Wave 2, start CGP-007, or close retained items.
+
+## Exact Founder Disposition Sources
+
+| Source | SHA-256 | Byte length | Source ID | Authority class |
+| --- | --- | ---: | --- | --- |
+| `FOUNDER_DISPOSITION_SOLO_FOUNDER_PROFILE_AND_LIMITED_STAGE_24_ACTIVATION_2026-07-30.md` | `9bb300eb66e30410e1d6f56f1d337532310e9544e1c3e39eb7f0d848c3692d8f` | `11122` | `SFCA-SRC-0058` | `FOUNDER_APPROVED_STAGE24_DISPOSITION` |
+| `FOUNDER_RESIDUAL_RISK_ACCEPTANCE_RECORD_STAGE_24_2026-07-30.md` | `d8aa1f45d493bb7be5acb65e68b1eb5cc9af2517bc9423c3cbaa06ee7e2374e9` | `4214` | `SFCA-SRC-0059` | `FOUNDER_APPROVED_RESIDUAL_RISK_ACCEPTANCE` |
+| `FOUNDER_STAGE_24_ACTIVATION_SCOPE_RECORD_2026-07-30.md` | `c5a4c05f25635ce5bec8ff805af7c3c0be3fdb8a8fbf8daa3b5199697ba41142` | `1869` | `SFCA-SRC-0060` | `FOUNDER_APPROVED_STAGE24_SCOPE_RECORD` |
+| `FOUNDER_APPROVAL_RECORD_CGP_006_STAGE_24_DISPOSITION_2026-07-30.md` | `7f228f1d81cf09801d0da951b7494c2639dd5ee317d11e1db6bd3832c005ad24` | `1254` | `SFCA-SRC-0061` | `FOUNDER_APPROVAL_RECORD` |
+
+## Adopted Profile
+
+- Candidate preserved as review history: `ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0_CANDIDATE.md`
+- Candidate SHA-256: `11c7b7169ed4c6537f7b9cd91f0a952ccb30c66ea86a94d94c826b19a1c28d99`
+- Candidate byte length: `9245`
+- Adopted profile: `ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md`
+- Adopted profile SHA-256: `24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2`
+- Adopted profile byte length: `9609`
+- Profile status: `FOUNDER_ADOPTED`
+- Profile effect: `PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
 
 ## Affected Guides
 
-| Guide | Title | Version | SHA-256 | Byte length | Activation |
-| --- | --- | --- | --- | --- | --- |
-| `ES-CG-00` | Code Guide Charter | `1.1.0` | `2275ca1b9674b4e05390f134470a37e7ee63ca423705b6579b1bc8eef874f0c1` | `2986` | `NOT_ACTIVE` |
-| `ES-CG-01` | Engineering Authority and Precedence | `1.1.0` | `e35ea6b9031bd4c727852b124ef9968fe0ef30afbc4e83efabd270f18248e9e6` | `3008` | `NOT_ACTIVE` |
-| `ES-CG-10` | Testing, Verification, and Assurance | `1.1.0` | `435eb4940da15e6ffbbd66bbc207a05b4fa3ffd3405ff436a8ca15950dfd32c7` | `3250` | `NOT_ACTIVE` |
-| `ES-CG-13` | Completion, Evidence, and Traceability | `1.1.0` | `bf79a3762625bfaaa3ebbd4c446c460ab6a60ff9bbd264d2f4b9e9cdb55305e9` | `3227` | `NOT_ACTIVE` |
+| Guide | Title | Version | SHA-256 | Byte length | Phase A state |
+| --- | --- | --- | --- | ---: | --- |
+| `ES-CG-00` | Code Guide Charter | `1.1.0` | `2275ca1b9674b4e05390f134470a37e7ee63ca423705b6579b1bc8eef874f0c1` | `2986` | `NOT_ACTIVE_PENDING_CUSTODY` |
+| `ES-CG-01` | Engineering Authority and Precedence | `1.1.0` | `e35ea6b9031bd4c727852b124ef9968fe0ef30afbc4e83efabd270f18248e9e6` | `3008` | `NOT_ACTIVE_PENDING_CUSTODY` |
+| `ES-CG-10` | Testing, Verification, and Assurance | `1.1.0` | `435eb4940da15e6ffbbd66bbc207a05b4fa3ffd3405ff436a8ca15950dfd32c7` | `3250` | `NOT_ACTIVE_PENDING_CUSTODY` |
+| `ES-CG-13` | Completion, Evidence, and Traceability | `1.1.0` | `bf79a3762625bfaaa3ebbd4c446c460ab6a60ff9bbd264d2f4b9e9cdb55305e9` | `3227` | `NOT_ACTIVE_PENDING_CUSTODY` |
 
-## Package Result
+## Phase A Scope State
 
-- Source freeze: `SOURCE_FREEZE_COMPLETE`
-- Assurance profile candidate: `SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_READY_FOR_FOUNDER_ADOPTION`
-- Founder Domain-Owner Review: `FOUNDER_DOMAIN_OWNER_REVIEW_COMPLETE_WITH_DISCLOSED_NON_INDEPENDENCE`
-- Founder Technical Governance Review: `FOUNDER_TECHNICAL_GOVERNANCE_REVIEW_COMPLETE_WITH_DISCLOSED_SELF_REVIEW`
-- Isolated review passes: `MULTI_PASS_MACHINE_ASSISTED_ADVERSARIAL_REVIEW_COMPLETE`
-- Readiness: `WAVE_1_STAGE_24_READINESS_REDETERMINED`
-- Decision packet: `STAGE_24_LIMITED_ACTIVATION_DISPOSITION_READY_FOR_FOUNDER_REVIEW`
+| Scope | Phase A treatment |
+| --- | --- |
+| `PLANNING_REFERENCE` | `PLANNING_REFERENCE_APPROVED_PENDING_EFFECTIVE_EVENT` |
+| `IMPLEMENTATION_CONTROL` | `IMPLEMENTATION_CONTROL_APPROVED_PENDING_EFFECTIVE_EVENT` |
+| `PULL_REQUEST_REVIEW` | `PULL_REQUEST_REVIEW_APPROVED_PENDING_EFFECTIVE_EVENT` |
+| `MERGE_GATE` | `MERGE_GATE_DEFERRED` |
+| `RELEASE_GATE` | `RELEASE_GATE_DEFERRED` |
+| `OPERATIONS_REFERENCE` | `OPERATIONS_REFERENCE_DEFERRED` |
+
+Before the post-PR #59 custody PR is merged and verified, all four guides remain `NOT_ACTIVE_PENDING_CUSTODY`.
+
+## Residual Risk
+
+All twelve residual-risk rows are recorded as `ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY`. No residual risk is closed.
 
 ## Founder-Approved Multi-Agent Tooling Intent
 
 `MULTI_AGENT_TOOLING_INTENT_FOUNDER_APPROVED`
 
-`FOUNDER_APPROVAL_DATE_2026_07_30`
-
-`APPROVED_SHA256_VALUES_RECORDED`
-
-`APPROVED_BYTE_LENGTHS_RECORDED`
-
-`NO_SUBSTITUTED_SOURCE_AUTHORIZED`
-
-`TOOLING_INTENT_IS_NON_VENDOR_LOCKED`
-
 `NAMED_TOOLS_NOT_REQUIRED_FOR_LIMITED_STAGE_24_ACTIVATION`
 
 `NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION`
 
-`PR_59_REMAINS_DRAFT_UNMERGED`
-
-The package now includes the Founder-approved Multi-Agent and Assurance Tooling
-Intent documents at the package root. These files are documentary tooling-intent
-and future assurance-planning inputs only. Their approval does not authorize
-external tool connection, repository permission changes, CI workflow changes,
-dependency installation, implementation mapping, implementation, deployment,
-staging, pilot, or production use.
-
-| Approved source | SHA-256 | Byte length | Authority classification |
-| --- | --- | ---: | --- |
-| `MULTI_AGENT_AND_ASSURANCE_TOOLING_INTENT_V1_0_0.md` | `506326268a199d0641f822a59ecd1310cbd76a11c7b8991860a5258216e403bc` | `9262` | `FOUNDER_APPROVED_TOOLING_INTENT` |
-| `MULTI_AGENT_REVIEW_AND_FINDING_VALIDATION_POLICY_V1_0_0.md` | `63066def7fd1a9cdebeef261d156706c0de162cc398b05ce2a7eb1a9e9c9a416` | `6182` | `FOUNDER_APPROVED_REVIEW_POLICY` |
-| `AGENT_FINDING_RECORD_SCHEMA_V1_0_0.md` | `f0a992322fef30d70747f5df9d58391a4a191c99e425077c04626b643c6c67c0` | `3852` | `FOUNDER_APPROVED_FINDING_SCHEMA` |
-| `MULTI_AGENT_TOOL_ROLE_AND_ACCESS_MATRIX_V1_0_0.md` | `db99cd3cc9361b7a1ee9496bcbada9d6209b475ec1f90c477793af9f7a5dda5f` | `3817` | `FOUNDER_APPROVED_TOOL_ROLE_MATRIX` |
-| `EXTERNAL_AGENT_ACCESS_REGISTER_TEMPLATE_V1_0_0.md` | `8c8754f5e5bda5ef36ea342e84f6ff83ac5fd275d95a936364614ac4717614e7` | `4621` | `FOUNDER_APPROVED_ACCESS_REGISTER_TEMPLATE` |
-| `FOUNDER_APPROVAL_AND_DISPOSITION_MULTI_AGENT_TOOLING_INTENT_2026-07-30.md` | `5c27311183021d1ff3c5f1ec05c6bfd0b3ceb0dc487a3f46fbd3c20cf80d19d9` | `5084` | `FOUNDER_APPROVED_TOOLING_DISPOSITION` |
-| `FOUNDER_APPROVAL_RECORD_MULTI_AGENT_TOOLING_INTENT_2026-07-30.md` | `79533235b659ac7a93f7de652f356ec36bedf3ddb14de6a3ab5ce84944e5dedb` | `2488` | `FOUNDER_APPROVAL_RECORD` |
+The tooling-intent records remain documentary and future assurance-planning inputs only. Their approval does not authorize external tool connection, repository permission changes, CI workflow changes, dependency installation, implementation mapping, implementation, deployment, staging, pilot, or production use.
 
 ## Continuing Statements
 
 `PROGRAM_PLAN_V1_1_CONTROLLING`
 
 `SOLO_FOUNDER_COMPENSATING_ASSURANCE_DETERMINATION_CONTROLLING`
+
+`FOUNDER_STAGE_24_DISPOSITION_CONTROLLING`
 
 `FOUNDER_SOLO_COMPENSATING_ASSURANCE_MODEL_APPLIES`
 
@@ -88,7 +92,41 @@ staging, pilot, or production use.
 
 `OBJECTIVE_TEST_AND_EVIDENCE_GATES_REQUIRED`
 
-`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED`
+`FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12`
+
+`RESIDUAL_RISKS_ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY`
+
+`PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT`
+
+`LIMITED_STAGE_24_ACTIVATION_APPROVED_PENDING_CUSTODY`
+
+`GUIDES_REMAIN_NOT_ACTIVE_PENDING_CUSTODY`
+
+`ES_CG_00_REMAINS_NOT_ACTIVE_PENDING_CUSTODY`
+
+`ES_CG_01_REMAINS_NOT_ACTIVE_PENDING_CUSTODY`
+
+`ES_CG_10_REMAINS_NOT_ACTIVE_PENDING_CUSTODY`
+
+`ES_CG_13_REMAINS_NOT_ACTIVE_PENDING_CUSTODY`
+
+`PLANNING_REFERENCE_APPROVED_PENDING_EFFECTIVE_EVENT`
+
+`IMPLEMENTATION_CONTROL_APPROVED_PENDING_EFFECTIVE_EVENT`
+
+`PULL_REQUEST_REVIEW_APPROVED_PENDING_EFFECTIVE_EVENT`
+
+`MERGE_GATE_DEFERRED`
+
+`RELEASE_GATE_DEFERRED`
+
+`OPERATIONS_REFERENCE_DEFERRED`
+
+`ACTIVATION_EFFECTIVE_EVENT_PENDING_CUSTODY_PR`
+
+`NO_GRACE_PERIOD_FOR_NEWLY_AUTHORIZED_WORK`
+
+`NO_RETROACTIVE_APPLICATION_TO_HISTORICAL_RECORDS`
 
 `GAP_0004_REMAINS_OPEN`
 
@@ -98,23 +136,13 @@ staging, pilot, or production use.
 
 `NO_SILENT_CONDITION_CLOSURE`
 
-`STAGE_24_GUIDE_ACTIVATION_NOT_AUTHORIZED`
-
-`ES_CG_00_REMAINS_NOT_ACTIVE`
-
-`ES_CG_01_REMAINS_NOT_ACTIVE`
-
-`ES_CG_10_REMAINS_NOT_ACTIVE`
-
-`ES_CG_13_REMAINS_NOT_ACTIVE`
-
-`NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED`
-
 `REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED`
 
 `IMPLEMENTATION_NOT_AUTHORIZED`
 
 `DEPLOYMENT_NOT_AUTHORIZED`
+
+`STAGING_USE_NOT_AUTHORIZED`
 
 `PILOT_NOT_AUTHORIZED`
 
@@ -124,4 +152,10 @@ staging, pilot, or production use.
 
 `CGP_007_NOT_AUTHORIZED`
 
-`DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION`
+`MULTI_AGENT_TOOLING_INTENT_FOUNDER_APPROVED`
+
+`NAMED_TOOLS_NOT_REQUIRED_FOR_LIMITED_STAGE_24_ACTIVATION`
+
+`NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION`
+
+`CUSTODY_PR_REQUIRED_BEFORE_ACTIVATION_EFFECTIVE`

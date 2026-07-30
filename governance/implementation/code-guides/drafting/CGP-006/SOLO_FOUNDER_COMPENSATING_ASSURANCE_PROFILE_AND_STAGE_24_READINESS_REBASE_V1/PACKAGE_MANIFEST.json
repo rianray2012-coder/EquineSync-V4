@@ -1,8 +1,9 @@
 {
-  "approved_tooling_source_count": 7,
+  "approved_disposition_source_count": 4,
   "continuing_statements": [
     "PROGRAM_PLAN_V1_1_CONTROLLING",
     "SOLO_FOUNDER_COMPENSATING_ASSURANCE_DETERMINATION_CONTROLLING",
+    "FOUNDER_STAGE_24_DISPOSITION_CONTROLLING",
     "FOUNDER_SOLO_COMPENSATING_ASSURANCE_MODEL_APPLIES",
     "EQUINESYNC_IS_A_SOLO_FOUNDER_PROJECT",
     "FOUNDER_DOMAIN_OWNER_REVIEW_IS_NOT_INDEPENDENT",
@@ -12,37 +13,45 @@
     "NO_THIRD_PARTY_TECHNICAL_CERTIFICATION_CLAIMED",
     "NO_THIRD_PARTY_DOMAIN_CERTIFICATION_CLAIMED",
     "OBJECTIVE_TEST_AND_EVIDENCE_GATES_REQUIRED",
-    "FOUNDER_RESIDUAL_RISK_ACCEPTANCE_REQUIRED",
+    "FOUNDER_RESIDUAL_RISK_ACCEPTANCE_COMPLETE_12_OF_12",
+    "RESIDUAL_RISKS_ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY",
+    "PROFILE_ADOPTED_PENDING_EFFECTIVE_EVENT",
+    "LIMITED_STAGE_24_ACTIVATION_APPROVED_PENDING_CUSTODY",
+    "GUIDES_REMAIN_NOT_ACTIVE_PENDING_CUSTODY",
+    "ES_CG_00_REMAINS_NOT_ACTIVE_PENDING_CUSTODY",
+    "ES_CG_01_REMAINS_NOT_ACTIVE_PENDING_CUSTODY",
+    "ES_CG_10_REMAINS_NOT_ACTIVE_PENDING_CUSTODY",
+    "ES_CG_13_REMAINS_NOT_ACTIVE_PENDING_CUSTODY",
+    "PLANNING_REFERENCE_APPROVED_PENDING_EFFECTIVE_EVENT",
+    "IMPLEMENTATION_CONTROL_APPROVED_PENDING_EFFECTIVE_EVENT",
+    "PULL_REQUEST_REVIEW_APPROVED_PENDING_EFFECTIVE_EVENT",
+    "MERGE_GATE_DEFERRED",
+    "RELEASE_GATE_DEFERRED",
+    "OPERATIONS_REFERENCE_DEFERRED",
+    "ACTIVATION_EFFECTIVE_EVENT_PENDING_CUSTODY_PR",
+    "NO_GRACE_PERIOD_FOR_NEWLY_AUTHORIZED_WORK",
+    "NO_RETROACTIVE_APPLICATION_TO_HISTORICAL_RECORDS",
     "GAP_0004_REMAINS_OPEN",
     "NO_SILENT_FINDING_CLOSURE",
     "NO_SILENT_WARNING_CLOSURE",
     "NO_SILENT_CONDITION_CLOSURE",
-    "STAGE_24_GUIDE_ACTIVATION_NOT_AUTHORIZED",
-    "ES_CG_00_REMAINS_NOT_ACTIVE",
-    "ES_CG_01_REMAINS_NOT_ACTIVE",
-    "ES_CG_10_REMAINS_NOT_ACTIVE",
-    "ES_CG_13_REMAINS_NOT_ACTIVE",
-    "NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED",
     "REPOSITORY_SPECIFIC_IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
     "IMPLEMENTATION_NOT_AUTHORIZED",
     "DEPLOYMENT_NOT_AUTHORIZED",
+    "STAGING_USE_NOT_AUTHORIZED",
     "PILOT_NOT_AUTHORIZED",
     "PRODUCTION_NOT_AUTHORIZED",
     "WAVE_2_NOT_AUTHORIZED",
     "CGP_007_NOT_AUTHORIZED",
-    "DRAFT_PR_OPEN_UNMERGED_PENDING_FOUNDER_STAGE_24_DISPOSITION",
     "MULTI_AGENT_TOOLING_INTENT_FOUNDER_APPROVED",
-    "FOUNDER_APPROVAL_DATE_2026_07_30",
-    "APPROVED_SHA256_VALUES_RECORDED",
-    "APPROVED_BYTE_LENGTHS_RECORDED",
-    "NO_SUBSTITUTED_SOURCE_AUTHORIZED",
-    "TOOLING_INTENT_IS_NON_VENDOR_LOCKED",
     "NAMED_TOOLS_NOT_REQUIRED_FOR_LIMITED_STAGE_24_ACTIVATION",
     "NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION",
-    "PR_59_REMAINS_DRAFT_UNMERGED"
+    "CUSTODY_PR_REQUIRED_BEFORE_ACTIVATION_EFFECTIVE"
   ],
-  "directive_id": "CGP_006_SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_DIRECTIVE_V1_0_0",
-  "file_count_excluding_manifest_and_checksum": 40,
+  "directive_id": "CGP_006_STAGE_24_PROFILE_ADOPTION_LIMITED_ACTIVATION_PROTECTED_MERGE_AND_CUSTODY_DIRECTIVE_V1_0_0",
+  "effective_event": "VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR",
+  "existing_pr": 59,
+  "file_count_excluding_manifest_and_checksum": 47,
   "files": [
     {
       "byte_length": 3852,
@@ -50,14 +59,19 @@
       "sha256": "f0a992322fef30d70747f5df9d58391a4a191c99e425077c04626b643c6c67c0"
     },
     {
-      "byte_length": 2330,
+      "byte_length": 2850,
       "path": "AUTHORIZED_PATH_REPORT.md",
-      "sha256": "b608298ff70d01c2bf5737ba6eb72bc927d9249ca926b02ac14681bbda7f36ea"
+      "sha256": "dd9b879b834e1b6d387f47e288f76738321f083c013dfde9bf4848081d2a431f"
     },
     {
-      "byte_length": 4176,
+      "byte_length": 4854,
       "path": "DIRECTIVE_EXECUTION_RECORD.md",
-      "sha256": "ac9f3f7639a4049f21f92cd144516b1ac5fe8e09a21257e745a8a7c23c8964a6"
+      "sha256": "1fe9cc6122189c45065a2e868316147847472cdafac7e59c91468181a7af56e7"
+    },
+    {
+      "byte_length": 9609,
+      "path": "ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
+      "sha256": "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2"
     },
     {
       "byte_length": 9245,
@@ -75,9 +89,19 @@
       "sha256": "5c27311183021d1ff3c5f1ec05c6bfd0b3ceb0dc487a3f46fbd3c20cf80d19d9"
     },
     {
+      "byte_length": 1254,
+      "path": "FOUNDER_APPROVAL_RECORD_CGP_006_STAGE_24_DISPOSITION_2026-07-30.md",
+      "sha256": "7f228f1d81cf09801d0da951b7494c2639dd5ee317d11e1db6bd3832c005ad24"
+    },
+    {
       "byte_length": 2488,
       "path": "FOUNDER_APPROVAL_RECORD_MULTI_AGENT_TOOLING_INTENT_2026-07-30.md",
       "sha256": "79533235b659ac7a93f7de652f356ec36bedf3ddb14de6a3ab5ce84944e5dedb"
+    },
+    {
+      "byte_length": 11122,
+      "path": "FOUNDER_DISPOSITION_SOLO_FOUNDER_PROFILE_AND_LIMITED_STAGE_24_ACTIVATION_2026-07-30.md",
+      "sha256": "9bb300eb66e30410e1d6f56f1d337532310e9544e1c3e39eb7f0d848c3692d8f"
     },
     {
       "byte_length": 3820,
@@ -95,9 +119,19 @@
       "sha256": "828a23f675e9e0722b94ec073e73bc4e0f87eb13e9824e5bef3fc744e247c2a7"
     },
     {
-      "byte_length": 9154,
+      "byte_length": 4214,
+      "path": "FOUNDER_RESIDUAL_RISK_ACCEPTANCE_RECORD_STAGE_24_2026-07-30.md",
+      "sha256": "d8aa1f45d493bb7be5acb65e68b1eb5cc9af2517bc9423c3cbaa06ee7e2374e9"
+    },
+    {
+      "byte_length": 1869,
+      "path": "FOUNDER_STAGE_24_ACTIVATION_SCOPE_RECORD_2026-07-30.md",
+      "sha256": "c5a4c05f25635ce5bec8ff805af7c3c0be3fdb8a8fbf8daa3b5199697ba41142"
+    },
+    {
+      "byte_length": 7290,
       "path": "FOUNDER_STAGE_24_LIMITED_ACTIVATION_DECISION_PACKET.md",
-      "sha256": "0ff8717d11619116e3da84556029d43c4c55e89b730a92eee34a4b11c6c3d313"
+      "sha256": "6870e94e623c7ffcf36a8c42cc5247deb734cffb674830a14b20fba11703524c"
     },
     {
       "byte_length": 2121,
@@ -170,14 +204,14 @@
       "sha256": "b947d02974d8ebe0b73abe86ffeae334f3254493de5778e8f8b239ccdc192f91"
     },
     {
-      "byte_length": 47019,
+      "byte_length": 65969,
       "path": "PROPOSED_STAGE_24_ACTIVATION_SCOPE_MATRIX.csv",
-      "sha256": "e2bab3b45cd7c78cba393b7c0843d31330ea3d30311484b8a4cc5c9976e32955"
+      "sha256": "dba44e69026326b86a718d9cf72521bc498520c2f6bbb2c3f7acd6e3bb1c26fd"
     },
     {
-      "byte_length": 5728,
+      "byte_length": 7060,
       "path": "README.md",
-      "sha256": "8d347d5ece509c5706ddd5ea75c7f817d0353bf96999f567fe9b1ae4729cd8d4"
+      "sha256": "71bfdcafb8ceaaca78c13de74b38fb59446a3a718a011d67c29bf68ac0a10ed8"
     },
     {
       "byte_length": 55232,
@@ -185,34 +219,44 @@
       "sha256": "5ead7bccef3fdbbc1d318fb9c3a5c014e60ab21940fe96c1545a9db62555ab87"
     },
     {
-      "byte_length": 16995,
+      "byte_length": 25786,
+      "path": "SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_DECISION_REGISTER_STAGE24.csv",
+      "sha256": "6390b8b6d0504adb1b928ec5cb99aba332c81aad2dd8c46d19d5c803e333fab2"
+    },
+    {
+      "byte_length": 26451,
       "path": "SOLO_FOUNDER_ASSURANCE_RESIDUAL_RISK_REGISTER.csv",
-      "sha256": "38c6c9d6beafd69361540125644032cc905e0747f58453a1c6998ead418f0ec7"
+      "sha256": "15440ea5d68f1a83a59d16b7215863c9e04cbe9ff3f66696ff809a91dd5ba888"
     },
     {
-      "byte_length": 84337,
+      "byte_length": 96013,
       "path": "SOURCE_AUTHORITY_MATRIX.csv",
-      "sha256": "629f06bbcee2f1db7a5e6b0221c6994b1c202923ba2ce697ddff4890d1e7e885"
+      "sha256": "c50d86b025ac5458f95cfc4b2177b237afb7f0ade9b20340a5804937d197a313"
     },
     {
-      "byte_length": 47276,
+      "byte_length": 53857,
       "path": "SOURCE_FREEZE_MANIFEST.json",
-      "sha256": "135371fd2497ab9d5435fd496e516f557572f8d1c72e6d9d14048e2b627d17ca"
+      "sha256": "d29301bef84dac28d92afc720690c4a91fcaa18c95f0df1496568aebdb0f77dc"
     },
     {
-      "byte_length": 28117,
+      "byte_length": 31598,
       "path": "SOURCE_REGISTER.md",
-      "sha256": "f96a31fbf3de04c4e10d92fb53594566e38aa0b6c924da191fb453afa9d3c511"
+      "sha256": "529e5d9f1a120ac47ac02d3edd642e661386a1305a37ae9fa276c8910ad80526"
     },
     {
-      "byte_length": 11485,
+      "byte_length": 12815,
       "path": "SOURCE_SHA256SUMS.txt",
-      "sha256": "b56ad32270672c604546fb9e682e6ecd40d81b8d433d9e2fed9eef213a5961e7"
+      "sha256": "0fffd1fa2df2a3a07dadf507d505f9efbda5648ec020efac384ad5ac529e1401"
     },
     {
-      "byte_length": 5465,
+      "byte_length": 4537,
+      "path": "STAGE_24_FOUNDER_DISPOSITION_PRE_CUSTODY_RECORD.md",
+      "sha256": "c580f9eb4d380f30baa1ca8853f7f2959598e5a8d021b851b35257e152eb2465"
+    },
+    {
+      "byte_length": 3563,
       "path": "VALIDATION_REPORT.md",
-      "sha256": "70e320f9bfad7e8167b8010282860e65f346ac72bcde6f6ff409cfd3afc44fa9"
+      "sha256": "f85f733ab25fbe418eb16c04a39de15b26859191515f10018521fbdfc82e267b"
     },
     {
       "byte_length": 13072,
@@ -220,9 +264,9 @@
       "sha256": "71197ba499c66a913aefe7b3c6f93f4146b1e3392a2b4927af0d64e93fd63509"
     },
     {
-      "byte_length": 9536,
+      "byte_length": 12812,
       "path": "WAVE_1_STAGE_24_READINESS_MATRIX.csv",
-      "sha256": "ed9f2bcf633c1fabffa62cdcf1306233e205c9b9cd956462699d005016504503"
+      "sha256": "d3c3a0c0f285b9a38da2f6990d9468e73ee4be53999816abdc5373c0452b7289"
     },
     {
       "byte_length": 4178,
@@ -235,21 +279,19 @@
       "sha256": "c37714d6aabee6d839a19d6d5cf4734ca7091a6f3c7fcec20a40381e7d152049"
     },
     {
-      "byte_length": 12771,
+      "byte_length": 14759,
       "path": "tests/test_solo_founder_assurance_stage24_readiness.py",
-      "sha256": "c8b103bc2d0372b73c0d92e9752a61a4d9c5fa3be9960c7201319142cdd904ed"
+      "sha256": "1bdd02da6bc8976656cb461ce607b0c4b75f02ff189a8c039ffd52c616762589"
     },
     {
-      "byte_length": 24755,
+      "byte_length": 28824,
       "path": "validators/validate_solo_founder_assurance_stage24_readiness.py",
-      "sha256": "1161cef42533abc7de33ba016ef7e71ccfb7459f207aca990de349b87ca79dd3"
+      "sha256": "200be3f39264f95681ef144ecffb77f4f8c620e7452b52b18ef6ba3b6cb25570"
     }
   ],
-  "manifest_id": "CGP006-SFCA-STAGE24-READINESS-PACKAGE-MANIFEST",
-  "package_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1",
+  "package_id": "CGP006-SFCA-STAGE24-FOUNDER-DISPOSITION-PHASE-A",
+  "package_status": "STAGE_24_FOUNDER_DISPOSITION_INTEGRATED_PENDING_PROTECTED_MERGE_AND_CUSTODY",
   "protected_branch": "integrate-emergent-final-zip",
   "repository": "rianray2012-coder/EquineSync-V4",
-  "required_starting_head": "150b24d65d25f79255959ee07a185e7b04601bcf",
-  "superseded_directive_not_executed": "CGP_006_PR_59_FOUNDER_APPROVED_MULTI_AGENT_TOOLING_INTENT_INTEGRATION_DIRECTIVE_V1_0_0",
-  "tooling_integration_directive_id": "CGP_006_PR_59_FOUNDER_APPROVED_MULTI_AGENT_TOOLING_INTENT_INTEGRATION_DIRECTIVE_V1_0_1"
+  "stage24_disposition_id": "ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30"
 }
