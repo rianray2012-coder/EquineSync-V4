@@ -234,3 +234,144 @@ jobs:
               echo "**FAIL** — the frontend does not build. See the job log."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
+
+  # ---------------------------------------------------------------------------
+  # Report-only assurance visibility. This job must not be treated as a required
+  # check until a Founder-approved baseline and ratchet are in place.
+  # ---------------------------------------------------------------------------
+  assurance-visibility:
+    name: Assurance visibility report (non-blocking)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install backend declared tooling
+        continue-on-error: true
+        run: pip install -r backend/requirements.txt
+
+      - name: Backend static tooling report
+        continue-on-error: true
+        shell: bash
+        run: |
+          {
+            echo "## Backend Static Tooling Report"
+            echo
+            echo "Report-only. Exit codes are evidence, not a blocking gate."
+          } >> "$GITHUB_STEP_SUMMARY"
+          for command in \
+            "black --check backend" \
+            "isort --check-only backend" \
+            "flake8 backend" \
+            "mypy backend"; do
+            set +e
+            output_file="$(mktemp)"
+            eval "$command" > "$output_file" 2>&1
+            code=$?
+            set -e
+            {
+              echo
+              echo "### ${command}"
+              echo
+              echo "exit_code=${code}"
+              echo
+              echo '```text'
+              head -200 "$output_file"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          done
+          exit 0
+
+      - name: Frontend npm audit report
+        continue-on-error: true
+        working-directory: frontend
+        shell: bash
+        run: |
+          set +e
+          npm audit --package-lock-only --audit-level=moderate --json > npm-audit.json
+          audit_exit=$?
+          set -e
+          node <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('npm-audit.json', 'utf8'));
+          const v = data.metadata?.vulnerabilities || {};
+          console.log('## Frontend npm audit report');
+          console.log('');
+          console.log('Report-only. npm audit exit code is evidence, not a blocking gate.');
+          console.log('');
+          console.log(`exit_code=${process.env.audit_exit || 'recorded in step log'}`);
+          console.log('');
+          console.log(`critical=${v.critical || 0}`);
+          console.log(`high=${v.high || 0}`);
+          console.log(`moderate=${v.moderate || 0}`);
+          console.log(`low=${v.low || 0}`);
+          console.log(`total=${v.total || 0}`);
+          NODE
+          echo "audit_exit=${audit_exit}" >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+
+      - name: Redacted secret-pattern location report
+        continue-on-error: true
+        shell: bash
+        run: |
+          python <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import pathlib, re, subprocess
+          patterns = {
+              'aws_access_key_id_shape': re.compile(r'AKIA[0-9A-Z]{16}'),
+              'stripe_key_shape': re.compile(r'\b[prsk]k_(?:live|test)_[A-Za-z0-9]+'),
+              'private_key_marker': re.compile(r'BEGIN [A-Z ]*PRIVATE KEY'),
+              'generic_assignment_name': re.compile(r'(?i)(secret|token|password|api[_-]?key)\s*[:=]'),
+          }
+          skip_suffixes = {'.png', '.jpg', '.jpeg', '.gif', '.pdf', '.zip', '.tar', '.gz', '.tgz', '.pack', '.deb', '.dylib', '.lock'}
+          skip_exact = {'frontend/package-lock.json'}
+          files = subprocess.check_output(['git', 'ls-files'], text=True).splitlines()
+          hits = []
+          for name in files:
+              path = pathlib.Path(name)
+              if name in skip_exact or path.suffix.lower() in skip_suffixes:
+                  continue
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              except FileNotFoundError:
+                  continue
+              for line_no, line in enumerate(text.splitlines(), 1):
+                  for label, pattern in patterns.items():
+                      if pattern.search(line):
+                          hits.append((label, name, line_no))
+                          break
+          print('## Redacted secret-pattern location report')
+          print('')
+          print('Report-only. Values are intentionally not printed.')
+          print('')
+          print(f'total_locations={len(hits)}')
+          print('')
+          for label, name, line_no in hits[:200]:
+              print(f'- {label}: `{name}:{line_no}`')
+          if len(hits) > 200:
+              print(f'- truncated_locations={len(hits) - 200}')
+          PY
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: assurance-visibility-reports
+          path: |
+            frontend/npm-audit.json
+          if-no-files-found: warn
+
