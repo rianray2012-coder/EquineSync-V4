@@ -14,12 +14,12 @@
       "sha256": "dec07c8c0a84ac2d8c77828e58539f45c2eeebb57023632fa61cbc26805791c5"
     },
     "FINDINGS_TO_REMEDIATION_TRACEABILITY_MATRIX.csv": {
-      "bytes": 5083,
-      "sha256": "461d74817d61e3dccaee282500222a3ff1bf230dfdd32fac0fa5102739b3c6d1"
+      "bytes": 5072,
+      "sha256": "4aa9da8cced1c9716a71be06a482359757302645499e74ea1aa87ed89aa2fe83"
     },
     "FOUNDER_DECISION_MATRIX.csv": {
-      "bytes": 6165,
-      "sha256": "9fb0c4633aecf6debcd6b7c54c1f9246f5127dfa84f2763d3403309fa9a8b088"
+      "bytes": 6160,
+      "sha256": "86c42215c65ba7b22fc876e78c566408c1264dbe1cd95f086b51757985da9deb"
     },
     "FOUNDER_REVIEW_AND_DISPOSITION_PACKET.md": {
       "bytes": 9406,
