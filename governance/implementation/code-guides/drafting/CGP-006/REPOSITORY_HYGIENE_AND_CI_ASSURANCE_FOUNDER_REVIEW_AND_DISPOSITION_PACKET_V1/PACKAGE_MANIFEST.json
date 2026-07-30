@@ -1,75 +1,93 @@
 {
   "advisory_dispositions": {
-    "64": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
-    "65": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
-    "66": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
-    "67": "APPROVE_AFTER_ENUMERATED_CORRECTIONS"
+    "64": "MERGED_UNDER_AUTHENTICATED_DIRECTIVE_POST_MERGE_CUSTODY_VALIDATED",
+    "65": "MERGED_UNDER_AUTHENTICATED_DIRECTIVE_POST_MERGE_CUSTODY_VALIDATED",
+    "66": "MERGED_UNDER_AUTHENTICATED_DIRECTIVE_POST_MERGE_CUSTODY_VALIDATED",
+    "67": "CORRECTIONS_VERIFIED_READY_FOR_FOUNDER_DISPOSITION"
   },
-  "completion_token": "CGP_006_REPOSITORY_HYGIENE_AND_CI_ASSURANCE_FOUNDER_REVIEW_COMPLETE_CORRECTIONS_REQUIRED_BEFORE_DISPOSITION",
-  "directive_bytes": 19768,
-  "directive_sha256": "b8e982a5abd86c13b481430d794ab90c97e89320eca9835fc5a0c2a2ff141772",
+  "authority_result": "PR_64_66_MERGES_AND_PR_67_CORRECTION_AUTHENTICATED_AS_DIRECTIVE_AUTHORIZED",
+  "completion_token": "CGP_006_POST_MERGE_AUTHORITY_AND_CUSTODY_RECONCILED_PR_68_REFRESHED_PR_67_READY_FOR_FOUNDER_DISPOSITION",
+  "current_directive_bytes": 18229,
+  "current_directive_sha256": "1039daa658e68e026d8adbece43ee7be20874a5f012ba9acba9b1a7cbc705442",
+  "effective_pr_heads": {
+    "64": "5c4a1b065d33064905f937b98cd938a6a7d33101",
+    "65": "2183e438166d6de59a27083c73b52ff0fd2b1406",
+    "66": "819708aefc2187d5556c06184c4cb688a189e045",
+    "67": "76842397debf37780bea850933b1102779e2b502"
+  },
   "files": {
     "CROSS_PR_INTERACTION_AND_SEQUENCE_ANALYSIS.md": {
-      "bytes": 1626,
-      "sha256": "dec07c8c0a84ac2d8c77828e58539f45c2eeebb57023632fa61cbc26805791c5"
+      "bytes": 1482,
+      "sha256": "d57a33e91fd93deaa0ef8758b91f426d0918f5786f0b038d105a1141e48dd71a"
+    },
+    "DIRECTIVE_AUTHORITY_RECORD.md": {
+      "bytes": 3571,
+      "sha256": "1e892d8afcb405a899ea6ac1941170e3f2f94bf7c983ff094c9bf75ee0b20606"
     },
     "FINDINGS_TO_REMEDIATION_TRACEABILITY_MATRIX.csv": {
-      "bytes": 5072,
-      "sha256": "4aa9da8cced1c9716a71be06a482359757302645499e74ea1aa87ed89aa2fe83"
+      "bytes": 3983,
+      "sha256": "173bd468d3eef16cf08b01bde3fca26517132d952b73d0a698facd9f3ba2b0e4"
     },
     "FOUNDER_DECISION_MATRIX.csv": {
-      "bytes": 6160,
-      "sha256": "86c42215c65ba7b22fc876e78c566408c1264dbe1cd95f086b51757985da9deb"
+      "bytes": 4844,
+      "sha256": "3074cd87b0cfeda8752110cbfba1b056e06a22ab5ea7185034d462f39c04dc43"
     },
     "FOUNDER_REVIEW_AND_DISPOSITION_PACKET.md": {
-      "bytes": 9406,
-      "sha256": "4387f3de4cdbcbe3844db9293bc8045b27250b41123df773e30fb00b61564606"
+      "bytes": 4627,
+      "sha256": "891185891b6a871e5099499b23d70ff4758512496bc9525ad6399bde8c0c4cfc"
+    },
+    "POST_MERGE_CUSTODY_LEDGER.csv": {
+      "bytes": 5877,
+      "sha256": "6c81c0771c4e19120657b5fce2285c65fdc6649f6e403f548c995cf9c64e868a"
     },
     "PR64_DOCUMENTARY_REVIEW.md": {
-      "bytes": 1976,
-      "sha256": "0c2a9905ffd0f0e1cbbd8f787c9e65e61a65c5cc040ecf72c984ba124a15c0ae"
+      "bytes": 4347,
+      "sha256": "1e538295967c4588441ec814f70602387c610aa3ed0484a78aacbe7f01cdc523"
     },
     "PR65_TECHNICAL_REVIEW.md": {
-      "bytes": 1759,
-      "sha256": "2e4147e27b940028285500f025f25f3e59987a0be54a3ebcda6989e5d0101890"
+      "bytes": 1802,
+      "sha256": "a6fe2a5834e48713e50342a66378712d43f5a87f5aa1ad4e54e0dd9d8b2751ec"
     },
     "PR66_DEPENDENCY_CLASSIFICATION_AND_VALIDATION_REVIEW.md": {
-      "bytes": 3123,
-      "sha256": "e14f5d4bbf7b5baa0cff9b1cf0aca6e642147519301922578d461d886aa77a77"
+      "bytes": 1785,
+      "sha256": "9d322ad8044ab082b6aec00c151eca4d9cc24ee8c35a959efee33a604bac1487"
     },
     "PR67_CI_PERMISSIONS_DEPENDABOT_REPORTING_REVIEW.md": {
-      "bytes": 2902,
-      "sha256": "4def3900237fc5bab740cf2b969f44ec3c4cc5e21bcaa5cc9f9adbebb6780f63"
+      "bytes": 2796,
+      "sha256": "714ca54a3cef4238957bd7517d0252ff8e13de6a9bc29045d5b34392136fad92"
     },
     "README.md": {
-      "bytes": 3045,
-      "sha256": "d1cb46c279d07bcd9886667df812ef6c55924669410d5584475ecd86ef7faa6d"
+      "bytes": 3561,
+      "sha256": "ac076de74a284a6447cb9a67a8321e7cf747407f77a69f0acf830a23cb85c852"
     },
     "REPOSITORY_AND_PR_AUTHENTICATION_RECORD.json": {
-      "bytes": 8872,
-      "sha256": "776608eba311af708049c8a97e646c140f1f3d7c2f352fa4b79d72e968e4bb65"
+      "bytes": 11412,
+      "sha256": "9005e267b213d21191d02ab42e1ca557bbe7da2cc99a82536c79b29e59b44fbe"
     },
     "RETAINED_RISKS_AND_NON_AUTHORIZATIONS.md": {
-      "bytes": 1114,
-      "sha256": "529a91dc415a841577c39f348f55dd7ce6de3319624e29667fe4ca4bc7e07ebb"
+      "bytes": 1513,
+      "sha256": "d4bfdfe0be3673064a1794484fd3a3a3620e80cea9d4c31c6d44046ce4c3c1c5"
     },
     "VALIDATION_RECORD.md": {
-      "bytes": 1539,
-      "sha256": "2f1ccb47d8fd093b2fd9dae09205007742a28da8c67dc85cd4fb736b45b34be7"
+      "bytes": 1891,
+      "sha256": "b79e5fdfb483fe36c246f58ae43748f44d26773e0ddf08899925ef32e3a9b24e"
     },
     "tests/test_founder_review_packet.py": {
       "bytes": 432,
       "sha256": "de51376d8e1cbc2958d3e284848ea83ee059ac53d545201667f12136141f0708"
     },
     "validators/validate_founder_review_packet.py": {
-      "bytes": 6053,
-      "sha256": "906e736c887a874cbe4565a19a670e03736921f2b886849feb8678155ff3604c"
+      "bytes": 8296,
+      "sha256": "202bdf63552b23e59153d276b5757323e923e2dab2cad296527b6795b5115dad"
     }
   },
-  "package_id": "ES-CGP-006-REPOSITORY-HYGIENE-FOUNDER-REVIEW-DISPOSITION-V1",
+  "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
+  "package_id": "ES-CGP-006-POST-MERGE-AUTHORITY-CUSTODY-REFRESH-V1",
   "package_name": "REPOSITORY_HYGIENE_AND_CI_ASSURANCE_FOUNDER_REVIEW_AND_DISPOSITION_PACKET_V1",
+  "prior_merge_directive_bytes": 17393,
+  "prior_merge_directive_sha256": "37ecbb31e15b7be7be6da3a0669ee614c3ffd53038416045f69e6736aea01799",
   "protected_branch": "integrate-emergent-final-zip",
-  "protected_head": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+  "protected_head": "9996e948ede39a968b8facd8afe15c2b1a345204",
   "repository": "rianray2012-coder/EquineSync-V4",
   "reviewed_pr_heads": {
     "64": "5c4a1b065d33064905f937b98cd938a6a7d33101",
@@ -77,5 +95,6 @@
     "66": "9f8b6e233a6ee9a23d9c9e9b8394376b3ab55606",
     "67": "982e417a66d641e93fc905a690c94095c8ee8570"
   },
-  "status": "FOUNDER_REVIEW_COMPLETE_CORRECTIONS_REQUIRED_BEFORE_DISPOSITION"
+  "starting_protected_head": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+  "status": "POST_MERGE_AUTHORITY_AND_CUSTODY_RECONCILED_PR_67_READY_FOR_FOUNDER_DISPOSITION"
 }

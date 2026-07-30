@@ -2,23 +2,26 @@
 
 ## Evidence Inputs
 
-- Standalone directive text SHA-256 verified as `b8e982a5abd86c13b481430d794ab90c97e89320eca9835fc5a0c2a2ff141772` with 19,768 bytes.
+- Refresh directive SHA-256 verified as `1039daa658e68e026d8adbece43ee7be20874a5f012ba9acba9b1a7cbc705442` with `18229` bytes.
+- Prior merge directive SHA-256 verified as `37ecbb31e15b7be7be6da3a0669ee614c3ffd53038416045f69e6736aea01799` with `17393` bytes.
 - Repository identity verified as `rianray2012-coder/EquineSync-V4`; default branch `integrate-emergent-final-zip`.
-- Protected branch verified at `396f82c8a7600cae363142175d1d1448e9d2ece2`.
-- PR #62 merged at `185d37987c11eccabba4436619bdf11e91494711`; PR #63 merged at `396f82c8a7600cae363142175d1d1448e9d2ece2` and matches the protected head.
-- PR #64 through #67 metadata, changed-file lists, comments, review threads, diffs, and changed file contents were fetched from authenticated GitHub refs.
+- Starting protected head before PR #64 verified as `396f82c8a7600cae363142175d1d1448e9d2ece2` through PR #63 merge commit.
+- Current protected head verified as `9996e948ede39a968b8facd8afe15c2b1a345204`.
+- PR #62 merged at `185d37987c11eccabba4436619bdf11e91494711`; PR #63 merged at `396f82c8a7600cae363142175d1d1448e9d2ece2`.
+- PR #64, #65, #66, #67, and #68 metadata, changed-file lists, checks, comments, review threads, and current bodies were fetched from live GitHub state.
 
-## Review Validation
+## Post-Merge Validation
 
-- PR #64 checksum manifest verified against fetched PR head files: PASS.
-- PR #65 changed-file scope contains only documentation/env-template/gitignore metadata: PASS.
-- PR #66 moved package version comparison: PASS, no upgrade or downgrade identified.
-- PR #66 backend raw Python import scan: 363 backend `.py` files fetched; 60 moved-tool imports found, all `pytest` under `backend/tests/`; non-test hits 0.
-- PR #67 nonblocking report intent: PASS.
-- PR #67 cross-PR install compatibility after PR #66: REQUIRES_CORRECTION.
-- PR #67 explicit workflow permissions: REQUIRES_CORRECTION.
+- PR #64 post-merge documentary scope: PASS.
+- PR #65 post-merge documentation/env-template scope: PASS.
+- PR #66 post-merge dependency split: PASS.
+- PR #67 corrected scope and CI evidence: PASS.
+- PR #67 local validation limitations recorded: PASS.
+- PR #68 refresh branch updated onto current protected baseline: PASS.
+- Founder decision fields remain `NO_FOUNDER_DECISION_RECORDED`: PASS.
+- No gap/finding/IWP closure recorded: PASS.
 
-## Package Validation
+## Package Validation Commands
 
 Run from the package root:
 
@@ -26,5 +29,10 @@ Run from the package root:
 python3 validators/validate_founder_review_packet.py .
 shasum -a 256 -c CHECKSUM_MANIFEST.sha256
 ```
+
+Additional local wrapper validation:
+
+- `python3 -m pytest .../tests/test_founder_review_packet.py`: NOT_RUN because local system Python and bundled Python did not have `pytest` installed.
+- Direct invocation of `test_founder_review_packet_validator_passes()`: PASS.
 
 Final validation status is recorded after checksum recalculation and validator execution.

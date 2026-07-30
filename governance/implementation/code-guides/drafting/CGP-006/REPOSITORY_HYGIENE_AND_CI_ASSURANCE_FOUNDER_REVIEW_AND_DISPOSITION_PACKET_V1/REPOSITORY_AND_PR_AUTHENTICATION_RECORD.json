@@ -1,243 +1,164 @@
 {
+  "authority_result": "PR_64_66_MERGES_AND_PR_67_CORRECTION_AUTHENTICATED_AS_DIRECTIVE_AUTHORIZED",
+  "completion_token": "CGP_006_POST_MERGE_AUTHORITY_AND_CUSTODY_RECONCILED_PR_68_REFRESHED_PR_67_READY_FOR_FOUNDER_DISPOSITION",
+  "continuing_statements": [
+    "NO_DIRECT_PROTECTED_BRANCH_PUSH",
+    "PR_64_66_POST_MERGE_CUSTODY_RECONCILED",
+    "PR_67_MERGE_NOT_AUTHORIZED",
+    "PR_68_MERGE_NOT_AUTHORIZED",
+    "NO_FOUNDER_DECISION_RECORDED",
+    "NO_FINDING_OR_GAP_CLOSED",
+    "NO_CLEAN_STATIC_ANALYSIS_CLAIM",
+    "NO_EXISTING_STATIC_FINDING_REMEDIATION_AUTHORIZED",
+    "NO_DEPENDENCY_VERSION_UPGRADE_AUTHORIZED",
+    "NO_BROAD_LOCKFILE_REGENERATION_AUTHORIZED",
+    "NO_BRANCH_PROTECTION_CHANGE_AUTHORIZED",
+    "NO_EXTERNAL_SCANNER_CONFIGURATION_AUTHORIZED",
+    "NO_DEPLOYMENT_CONFIGURATION_CHANGE_AUTHORIZED",
+    "NO_SECRET_DISCLOSURE_AUTHORIZED",
+    "NO_IWP_ACTIVATION_AUTHORIZED",
+    "NO_ACTIVATION_EFFECTIVE_DATE_ESTABLISHED",
+    "PRODUCTION_USE_NOT_AUTHORIZED"
+  ],
   "created_date": "2026-07-30",
-  "default_branch": "integrate-emergent-final-zip",
-  "directive": {
-    "bytes": 19768,
-    "sha256": "b8e982a5abd86c13b481430d794ab90c97e89320eca9835fc5a0c2a2ff141772",
-    "source_type": "standalone_pasted_text",
-    "title": "CGP-006_REPOSITORY_HYGIENE_AND_CI_ASSURANCE_FOUNDER_REVIEW_AND_DISPOSITION_PACKET_V1"
+  "current_directive": {
+    "bytes": 18229,
+    "sha256": "1039daa658e68e026d8adbece43ee7be20874a5f012ba9acba9b1a7cbc705442",
+    "source_path": "/Users/rianray/.codex/attachments/f03767a3-4f43-4840-b072-74a29d2f1f59/pasted-text.txt",
+    "title": "CGP_006_POST_MERGE_AUTHORITY_RECONCILIATION_CUSTODY_AUDIT_AND_FOUNDER_REVIEW_PACKET_REFRESH_V1"
   },
-  "expected_protected_head": "396f82c8a7600cae363142175d1d1448e9d2ece2",
-  "package_id": "ES-CGP-006-REPOSITORY-HYGIENE-FOUNDER-REVIEW-DISPOSITION-V1",
+  "current_protected_head": "9996e948ede39a968b8facd8afe15c2b1a345204",
+  "default_branch": "integrate-emergent-final-zip",
+  "package_id": "ES-CGP-006-POST-MERGE-AUTHORITY-CUSTODY-REFRESH-V1",
+  "package_name": "REPOSITORY_HYGIENE_AND_CI_ASSURANCE_FOUNDER_REVIEW_AND_DISPOSITION_PACKET_V1",
   "prior_custody": {
     "pr62": {
-      "base": "integrate-emergent-final-zip",
       "head": "e61912b673da65556767cd8fb463c9d86debe5ff",
       "merge_commit": "185d37987c11eccabba4436619bdf11e91494711",
       "state": "MERGED"
     },
     "pr63": {
-      "base": "integrate-emergent-final-zip",
       "head": "aab66e033dcc2920db0ba858037077f1a0977cef",
       "merge_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
-      "merge_commit_matches_protected_head": true,
+      "merge_commit_matches_starting_protected_head": true,
       "state": "MERGED"
     }
+  },
+  "prior_merge_directive": {
+    "bytes": 17393,
+    "sha256": "37ecbb31e15b7be7be6da3a0669ee614c3ffd53038416045f69e6736aea01799",
+    "source_path": "/Users/rianray/.codex/attachments/29edbb36-ce9c-4d31-8665-27e8869ba196/pasted-text.txt",
+    "title": "CGP-006 Repository Hygiene Merge Sequence and PR #67 Limited Remediation"
   },
   "protected_branch": "integrate-emergent-final-zip",
   "repository": "rianray2012-coder/EquineSync-V4",
   "repository_drift_detected": false,
   "review_limitations": [
-    "Git clone and tarball materialization experienced network disconnect or excessive latency; review evidence was fetched from authenticated GitHub API refs and raw file contents instead.",
-    "GitHub code search reached API rate limit and was not used as controlling evidence; backend Python import scan used raw files materialized from the protected head.",
-    "No secrets or production mutations were attempted."
+    "Local Python 3.14.6 dependency installation failed due to resolver/runtime incompatibility.",
+    "Local full-tree Isort, Flake8, Mypy, and Pytest collection did not complete after interruption.",
+    "No secrets, production systems, branch protection, deployment configuration, or application product code were modified."
   ],
   "reviewed_prs": {
     "64": {
-      "additions": 637,
-      "advisory_disposition": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
-      "advisory_reason": "Documentary package is scoped to CGP-006 review files, checksum manifest verifies, and no remediation code is included.",
-      "base_branch": "integrate-emergent-final-zip",
-      "base_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
-      "changed_files": 19,
-      "checks": [
-        {
-          "name": "Backend suite is collectable",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Backend known-failure non-regression gate",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Frontend build",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Vercel",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Vercel Preview Comments",
-          "state": "SUCCESS"
-        }
+      "authority": "Prior directive lines 35-43, 130-139, and 563-569.",
+      "checks": "Backend suite is collectable PASS; Backend known-failure non-regression gate PASS; Frontend build PASS; Vercel PASS; Vercel Preview Comments PASS; Cursor Bugbot SKIPPING.",
+      "disposition": "MERGED_UNDER_AUTHENTICATED_DIRECTIVE_POST_MERGE_CUSTODY_VALIDATED",
+      "effective_head": "5c4a1b065d33064905f937b98cd938a6a7d33101",
+      "merge_commit": "9208f6937f53faf8b47a5a9896ad6bdae110e385",
+      "paths": [
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/AUTHORIZED_PATH_REPORT.md",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/CHECKSUM_MANIFEST.sha256",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/CI_ASSURANCE_GAP_ANALYSIS.csv",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/COMMAND_EXECUTION_AND_LIMITATION_LOG.md",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/COPILOT_FINDING_VALIDATION_MATRIX.csv",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/DEPENDENCY_CLASSIFICATION_INVENTORY.csv",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/DEPLOYMENT_MODEL_DETERMINATION.md",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/FOUNDER_DECISION_REGISTER.csv",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/FRONTEND_PEER_CONFLICT_MATRIX.csv",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/LARGE_MODULE_RISK_OBSERVATION_REGISTER.csv",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/LICENSE_AND_DISTRIBUTION_DECISION_MEMORANDUM.md",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/PACKAGE_MANIFEST.json",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/PROPOSED_PR_SEGMENTATION_AND_DEPENDENCY_PLAN.md",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/README.md",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/REPOSITORY_STATE_VERIFICATION_RECEIPT.json",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/SECRET_AND_CONFIGURATION_REVIEW_REPORT.md",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/VALIDATION_REPORT.md",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/tests/test_repository_hygiene_ci_assurance_review.py",
+        "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_DEPENDENCY_AND_CI_ASSURANCE_V1/validators/validate_repository_hygiene_ci_assurance_review.py"
       ],
-      "commits": [
-        {
-          "authoredDate": "2026-07-30T15:31:41Z",
-          "headline": "Add CGP-006 repository hygiene CI assurance review",
-          "oid": "b47f92eac5e019a85cb7d296322c3df05bd62907"
-        },
-        {
-          "authoredDate": "2026-07-30T15:39:33Z",
-          "headline": "Fix CGP-006 review package checksum manifest",
-          "oid": "5c4a1b065d33064905f937b98cd938a6a7d33101"
-        }
-      ],
-      "deletions": 0,
-      "draft": true,
-      "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
-      "head_branch": "codex/cgp-006-repository-hygiene-dependency-ci-assurance-review-v1",
-      "head_commit": "5c4a1b065d33064905f937b98cd938a6a7d33101",
-      "matches_prior_execution_report_head": true,
-      "merge_commit": null,
-      "merge_state_status": "CLEAN",
-      "review_decision": "NONE",
-      "state": "OPEN",
-      "title": "CGP-006 repository hygiene dependency CI assurance review",
-      "url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/64"
+      "post_merge_validation": "PASS - protected branch contains only the authorized CGP-006 documentary review package from PR #64; no product, dependency, lockfile, workflow, deployment, or licensing change was introduced by this PR.",
+      "retained_risks": "The documentary findings remain evidence for Founder review. No gap, finding, or IWP was closed by the merge.",
+      "reviewed_head": "5c4a1b065d33064905f937b98cd938a6a7d33101",
+      "rollback": "Rollback would require a new protected pull request reverting merge commit 9208f6937f53faf8b47a5a9896ad6bdae110e385; no direct protected-branch mutation is authorized.",
+      "state": "MERGED",
+      "title": "CGP-006 repository hygiene dependency CI assurance review"
     },
     "65": {
-      "additions": 102,
-      "advisory_disposition": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
-      "advisory_reason": "Documentation and env-template changes are bounded; no license grant, workflow, dependency, deployment, or product behavior change detected.",
-      "base_branch": "integrate-emergent-final-zip",
-      "base_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
-      "changed_files": 5,
-      "checks": [
-        {
-          "name": "Backend suite is collectable",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Backend known-failure non-regression gate",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Frontend build",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Vercel",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Vercel Preview Comments",
-          "state": "SUCCESS"
-        }
+      "authority": "Prior directive lines 149-185 and 563-569.",
+      "checks": "Backend suite is collectable PASS; Backend known-failure non-regression gate PASS; Cursor Bugbot PASS; Frontend build PASS; Vercel PASS; Vercel Preview Comments PASS.",
+      "disposition": "MERGED_UNDER_AUTHENTICATED_DIRECTIVE_POST_MERGE_CUSTODY_VALIDATED",
+      "effective_head": "2183e438166d6de59a27083c73b52ff0fd2b1406",
+      "merge_commit": "eb2f47ac1c75490bb2c53b74f612ae92628e0e39",
+      "original_head": "518e648d57e560ba7e4f29bffbe0d1272cd4d78c",
+      "paths": [
+        ".env.example",
+        ".gitignore",
+        "README.md",
+        "backend/.env.example",
+        "frontend/.env.example"
       ],
-      "commits": [
-        {
-          "authoredDate": "2026-07-30T15:33:17Z",
-          "headline": "Add repository hygiene docs metadata draft",
-          "oid": "518e648d57e560ba7e4f29bffbe0d1272cd4d78c"
-        }
-      ],
-      "deletions": 1,
-      "draft": true,
-      "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
-      "head_branch": "codex/repository-hygiene-docs-metadata-v1",
-      "head_commit": "518e648d57e560ba7e4f29bffbe0d1272cd4d78c",
-      "matches_prior_execution_report_head": true,
-      "merge_commit": null,
-      "merge_state_status": "CLEAN",
-      "review_decision": "NONE",
-      "state": "OPEN",
-      "title": "Repository hygiene docs metadata draft",
-      "url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/65"
+      "post_merge_validation": "PASS - changed paths remain limited to .env.example, .gitignore, README.md, backend/.env.example, and frontend/.env.example; templates contain placeholders only; real env files remain ignored; no license was added or implied; README remains consistent after PR #66 because backend dev installation is now backed by backend/requirements-dev.txt.",
+      "retained_risks": "Documentation does not itself close license, deployment, secret-scan, frontend peer-conflict, or implementation gaps.",
+      "reviewed_head": "518e648d57e560ba7e4f29bffbe0d1272cd4d78c",
+      "rollback": "Rollback would require a new protected pull request reverting merge commit eb2f47ac1c75490bb2c53b74f612ae92628e0e39; no direct protected-branch mutation is authorized.",
+      "state": "MERGED",
+      "title": "Repository hygiene docs metadata draft"
     },
     "66": {
-      "additions": 18,
-      "advisory_disposition": "APPROVE_FOR_FOUNDER_AUTHORIZED_MERGE",
-      "advisory_reason": "Dependency split is bounded to seven direct dev/test tools with exact versions preserved and backend CI installing the dev manifest.",
-      "base_branch": "integrate-emergent-final-zip",
-      "base_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
-      "changed_files": 3,
-      "checks": [
-        {
-          "name": "Backend suite is collectable",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Backend known-failure non-regression gate",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Frontend build",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Vercel",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Vercel Preview Comments",
-          "state": "SUCCESS"
-        }
+      "authority": "Prior directive lines 195-234 and 563-569.",
+      "checks": "Backend suite is collectable PASS; Backend known-failure non-regression gate PASS; Cursor Bugbot PASS; Frontend build PASS; Vercel PASS; Vercel Preview Comments PASS.",
+      "disposition": "MERGED_UNDER_AUTHENTICATED_DIRECTIVE_POST_MERGE_CUSTODY_VALIDATED",
+      "effective_head": "819708aefc2187d5556c06184c4cb688a189e045",
+      "merge_commit": "9996e948ede39a968b8facd8afe15c2b1a345204",
+      "original_head": "9f8b6e233a6ee9a23d9c9e9b8394376b3ab55606",
+      "paths": [
+        ".github/workflows/ci.yml",
+        "backend/requirements-dev.txt",
+        "backend/requirements.txt"
       ],
-      "commits": [
-        {
-          "authoredDate": "2026-07-30T15:34:52Z",
-          "headline": "Split backend runtime and dev requirements draft",
-          "oid": "9f8b6e233a6ee9a23d9c9e9b8394376b3ab55606"
-        }
-      ],
-      "deletions": 11,
-      "draft": true,
-      "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
-      "head_branch": "codex/backend-runtime-dev-dependency-split-v1",
-      "head_commit": "9f8b6e233a6ee9a23d9c9e9b8394376b3ab55606",
-      "matches_prior_execution_report_head": true,
-      "merge_commit": null,
-      "merge_state_status": "CLEAN",
-      "review_decision": "NONE",
-      "state": "OPEN",
-      "title": "Backend runtime dev dependency split draft",
-      "url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/66"
+      "post_merge_validation": "PASS - backend/requirements-dev.txt exists, references -r requirements.txt, contains black 26.3.1, isort 8.0.1, flake8 7.3.0, mypy 2.1.0, pycodestyle 2.14.0, pyflakes 3.4.0, and pytest 9.0.3; runtime requirements no longer contain those direct dev/test tool pins; backend CI installs the dev requirements where tests/tooling need them.",
+      "retained_risks": "The split does not claim runtime dependency completeness beyond the reviewed movement of direct dev/test tools.",
+      "reviewed_head": "9f8b6e233a6ee9a23d9c9e9b8394376b3ab55606",
+      "rollback": "Rollback would require a new protected pull request reverting merge commit 9996e948ede39a968b8facd8afe15c2b1a345204; no direct protected-branch mutation is authorized.",
+      "state": "MERGED",
+      "title": "Backend runtime dev dependency split draft"
     },
     "67": {
-      "additions": 201,
-      "advisory_disposition": "APPROVE_AFTER_ENUMERATED_CORRECTIONS",
-      "advisory_reason": "Correction required before Founder disposition: align the assurance job with PR #66 by installing backend/requirements-dev.txt after the dependency split and add explicit read-only workflow permissions.",
-      "base_branch": "integrate-emergent-final-zip",
-      "base_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
-      "changed_files": 3,
-      "checks": [
-        {
-          "name": "Backend suite is collectable",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Backend known-failure non-regression gate",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Frontend build",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Assurance visibility report (non-blocking)",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Vercel",
-          "state": "SUCCESS"
-        },
-        {
-          "name": "Vercel Preview Comments",
-          "state": "SUCCESS"
-        }
-      ],
-      "commits": [
-        {
-          "authoredDate": "2026-07-30T15:36:45Z",
-          "headline": "Add CI assurance visibility monitoring draft",
-          "oid": "982e417a66d641e93fc905a690c94095c8ee8570"
-        }
-      ],
-      "deletions": 0,
+      "base_commit": "9996e948ede39a968b8facd8afe15c2b1a345204",
+      "base_updated_head": "780033244d4c1bb55c91056f312b95e135a22f50",
+      "ci_run": "30584512095",
+      "corrected_head": "76842397debf37780bea850933b1102779e2b502",
+      "disposition": "CORRECTIONS_VERIFIED_READY_FOR_FOUNDER_DISPOSITION",
       "draft": true,
-      "founder_decision": "NO_FOUNDER_DECISION_RECORDED",
-      "head_branch": "codex/ci-assurance-reporting-and-monitoring-v1",
-      "head_commit": "982e417a66d641e93fc905a690c94095c8ee8570",
-      "matches_prior_execution_report_head": true,
-      "merge_commit": null,
       "merge_state_status": "CLEAN",
-      "review_decision": "NONE",
-      "state": "OPEN",
-      "title": "CI assurance reporting and monitoring draft",
-      "url": "https://github.com/rianray2012-coder/EquineSync-V4/pull/67"
+      "merged": false,
+      "original_reviewed_head": "982e417a66d641e93fc905a690c94095c8ee8570",
+      "paths": [
+        ".github/dependabot.yml",
+        ".github/workflows/ci.yml",
+        "docs/CI_ASSURANCE_REPORTING_POLICY.md"
+      ],
+      "state": "OPEN"
+    },
+    "68": {
+      "base_before_refresh": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+      "draft": true,
+      "merged": false,
+      "package_path": "governance/implementation/code-guides/drafting/CGP-006/REPOSITORY_HYGIENE_AND_CI_ASSURANCE_FOUNDER_REVIEW_AND_DISPOSITION_PACKET_V1/",
+      "pre_refresh_head": "97e4ba1ae78dc50cd5912d60c4fde671c127d910",
+      "state": "OPEN"
     }
   },
-  "verified_protected_head": "396f82c8a7600cae363142175d1d1448e9d2ece2"
+  "starting_protected_head": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+  "verified_protected_head": "9996e948ede39a968b8facd8afe15c2b1a345204"
 }
