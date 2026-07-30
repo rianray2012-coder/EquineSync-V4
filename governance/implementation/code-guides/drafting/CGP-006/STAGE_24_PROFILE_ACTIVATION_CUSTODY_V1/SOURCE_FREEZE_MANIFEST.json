@@ -1,0 +1,137 @@
+{
+  "adopted_profile": {
+    "byte_length": 9609,
+    "repository_path": "governance/implementation/code-guides/profiles/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
+    "sha256": "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2"
+  },
+  "effective_event": "VERIFIED_PROTECTED_MERGE_OF_THE_POST_PR_59_STAGE_24_CUSTODY_PR",
+  "final_tokens": [
+    "SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_V1_0_0_ADOPTED_AND_ACTIVE",
+    "ES_CG_00_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW",
+    "ES_CG_01_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW",
+    "ES_CG_10_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW",
+    "ES_CG_13_ACTIVE_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW",
+    "MERGE_GATE_NOT_ACTIVE",
+    "RELEASE_GATE_NOT_ACTIVE",
+    "OPERATIONS_REFERENCE_NOT_ACTIVE",
+    "TWELVE_RESIDUAL_RISKS_ACCEPTED_FOR_LIMITED_STAGE_24_ACTIVATION_ONLY",
+    "GAP_0004_REMAINS_OPEN",
+    "IMPLEMENTATION_MAPPING_NOT_AUTHORIZED",
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "DEPLOYMENT_NOT_AUTHORIZED",
+    "STAGING_USE_NOT_AUTHORIZED",
+    "PILOT_NOT_AUTHORIZED",
+    "PRODUCTION_NOT_AUTHORIZED",
+    "WAVE_2_NOT_AUTHORIZED",
+    "CGP_007_NOT_AUTHORIZED",
+    "NO_EXTERNAL_TOOL_SETUP_AUTHORIZED_BY_THIS_DISPOSITION",
+    "NO_GRACE_PERIOD_FOR_NEWLY_AUTHORIZED_WORK",
+    "NO_RETROACTIVE_APPLICATION_TO_HISTORICAL_RECORDS"
+  ],
+  "founder_disposition": "ES-FD-CGP-006-STAGE-24-LIMITED-ACTIVATION-2026-07-30",
+  "guides": [
+    {
+      "byte_length": 2986,
+      "guide_id": "ES-CG-00",
+      "sha256": "2275ca1b9674b4e05390f134470a37e7ee63ca423705b6579b1bc8eef874f0c1",
+      "version": "1.1.0"
+    },
+    {
+      "byte_length": 3008,
+      "guide_id": "ES-CG-01",
+      "sha256": "e35ea6b9031bd4c727852b124ef9968fe0ef30afbc4e83efabd270f18248e9e6",
+      "version": "1.1.0"
+    },
+    {
+      "byte_length": 3250,
+      "guide_id": "ES-CG-10",
+      "sha256": "435eb4940da15e6ffbbd66bbc207a05b4fa3ffd3405ff436a8ca15950dfd32c7",
+      "version": "1.1.0"
+    },
+    {
+      "byte_length": 3227,
+      "guide_id": "ES-CG-13",
+      "sha256": "bf79a3762625bfaaa3ebbd4c446c460ab6a60ff9bbd264d2f4b9e9cdb55305e9",
+      "version": "1.1.0"
+    }
+  ],
+  "package_id": "CGP006-STAGE24-PROFILE-ACTIVATION-CUSTODY-V1",
+  "pr59": {
+    "base_before": "150b24d65d25f79255959ee07a185e7b04601bcf",
+    "head": "57438d1d032b6c34ebe882be22e07ef938d1fb37",
+    "merge_commit": "f5b2973c9a796d6864607dcae42aa6c89f894250",
+    "merged_at": "2026-07-30T07:03:09Z"
+  },
+  "sources": [
+    {
+      "authority_class": "FOUNDER_APPROVED_STAGE24_SOURCE",
+      "byte_length": "11122",
+      "repository_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1/FOUNDER_DISPOSITION_SOLO_FOUNDER_PROFILE_AND_LIMITED_STAGE_24_ACTIVATION_2026-07-30.md",
+      "sha256": "9bb300eb66e30410e1d6f56f1d337532310e9544e1c3e39eb7f0d848c3692d8f",
+      "source_id": "FOUNDER_DISPOSITION_SOLO_FOUNDER_PROFILE_AND_LIMITED_STAGE_24_ACTIVATION_2026-07-30.md"
+    },
+    {
+      "authority_class": "FOUNDER_APPROVED_STAGE24_SOURCE",
+      "byte_length": "4214",
+      "repository_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1/FOUNDER_RESIDUAL_RISK_ACCEPTANCE_RECORD_STAGE_24_2026-07-30.md",
+      "sha256": "d8aa1f45d493bb7be5acb65e68b1eb5cc9af2517bc9423c3cbaa06ee7e2374e9",
+      "source_id": "FOUNDER_RESIDUAL_RISK_ACCEPTANCE_RECORD_STAGE_24_2026-07-30.md"
+    },
+    {
+      "authority_class": "FOUNDER_APPROVED_STAGE24_SOURCE",
+      "byte_length": "1869",
+      "repository_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1/FOUNDER_STAGE_24_ACTIVATION_SCOPE_RECORD_2026-07-30.md",
+      "sha256": "c5a4c05f25635ce5bec8ff805af7c3c0be3fdb8a8fbf8daa3b5199697ba41142",
+      "source_id": "FOUNDER_STAGE_24_ACTIVATION_SCOPE_RECORD_2026-07-30.md"
+    },
+    {
+      "authority_class": "FOUNDER_APPROVED_STAGE24_SOURCE",
+      "byte_length": "1254",
+      "repository_path": "governance/implementation/code-guides/drafting/CGP-006/SOLO_FOUNDER_COMPENSATING_ASSURANCE_PROFILE_AND_STAGE_24_READINESS_REBASE_V1/FOUNDER_APPROVAL_RECORD_CGP_006_STAGE_24_DISPOSITION_2026-07-30.md",
+      "sha256": "7f228f1d81cf09801d0da951b7494c2639dd5ee317d11e1db6bd3832c005ad24",
+      "source_id": "FOUNDER_APPROVAL_RECORD_CGP_006_STAGE_24_DISPOSITION_2026-07-30.md"
+    },
+    {
+      "authority_class": "STAGE24_CUSTODY_RECORD",
+      "byte_length": "3553",
+      "repository_path": "governance/implementation/code-guides/registers/GUIDE_ACTIVATION_REGISTER.csv",
+      "sha256": "d2941d9d02c63dd9bd4f561ff91e36a13a0e9505b735bb9e10d32c1fb0e9381f",
+      "source_id": "GUIDE_ACTIVATION_REGISTER.csv"
+    },
+    {
+      "authority_class": "STAGE24_CUSTODY_RECORD",
+      "byte_length": "4383",
+      "repository_path": "governance/implementation/code-guides/registers/CODE_GUIDE_AUTHORITY_REGISTER.csv",
+      "sha256": "62f97a4cbd445b95621bdbb9de32d5699baf2141de28b0b209ea7bb803086461",
+      "source_id": "CODE_GUIDE_AUTHORITY_REGISTER.csv"
+    },
+    {
+      "authority_class": "STAGE24_CUSTODY_RECORD",
+      "byte_length": "3213",
+      "repository_path": "governance/implementation/code-guides/registers/IMPLEMENTATION_PROFILE_REGISTER.csv",
+      "sha256": "d3b5dd3e2ad5597434245f7a43b834e732ca1aa8090dca66f86e343d72587586",
+      "source_id": "IMPLEMENTATION_PROFILE_REGISTER.csv"
+    },
+    {
+      "authority_class": "STAGE24_CUSTODY_RECORD",
+      "byte_length": "20112",
+      "repository_path": "governance/implementation/code-guides/PROGRAM_STATUS.md",
+      "sha256": "7c593627213808e7bd9f6a8d075f0a0e6c9ed1d6977d0a15081d35d3885f32d2",
+      "source_id": "PROGRAM_STATUS.md"
+    },
+    {
+      "authority_class": "STAGE24_CUSTODY_RECORD",
+      "byte_length": "9609",
+      "repository_path": "governance/implementation/code-guides/profiles/ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md",
+      "sha256": "24e785a9b2a74bf77a9ff7afe4a8df0bbdf7f6945ca9ccdb239bd07728ff3cf2",
+      "source_id": "ES-CODE-GUIDE-SOLO-FOUNDER-COMPENSATING-ASSURANCE-PROFILE-V1.0.0.md"
+    },
+    {
+      "authority_class": "STAGE24_CUSTODY_RECORD",
+      "byte_length": "1889",
+      "repository_path": "governance/implementation/code-guides/receipts/CGP_006_STAGE_24_PROFILE_ACTIVATION_CUSTODY_RECEIPT.md",
+      "sha256": "98e17d857538bd52eecabec2d8b5cbe3832f4769d501972e6ba0f9163f779088",
+      "source_id": "CGP_006_STAGE_24_PROFILE_ACTIVATION_CUSTODY_RECEIPT.md"
+    }
+  ]
+}
