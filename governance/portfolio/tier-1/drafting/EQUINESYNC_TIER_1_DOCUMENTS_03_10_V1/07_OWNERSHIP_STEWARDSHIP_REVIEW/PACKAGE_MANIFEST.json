@@ -1,0 +1,58 @@
+{
+  "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "file_count_excluding_manifest_and_checksum": 10,
+  "files": [
+    {
+      "byte_length": 7547,
+      "path": "EQUINESYNC_GOVERNANCE_OWNERSHIP_STEWARDSHIP_AND_REVIEW_CALENDAR_V1_0.md",
+      "sha256": "7f79da18d867ec1ff75d3482fba94d224fe2d0142b2026add8d126fb4b477897"
+    },
+    {
+      "byte_length": 196,
+      "path": "OVERDUE_REVIEW_REGISTER.csv",
+      "sha256": "deecb8038c32a675abdd62e23bd5252fc1abf5c14889a8402a0c1918c577ed37"
+    },
+    {
+      "byte_length": 10811,
+      "path": "OWNERSHIP_MATRIX.csv",
+      "sha256": "74b65b69bde09538b8387c4d35c75bb0e8a269a8e338652ef1c79566ec67a373"
+    },
+    {
+      "byte_length": 23806,
+      "path": "OWNERSHIP_REVIEW_MODEL.json",
+      "sha256": "ce292bf9e580c19b90e599ccb232445fa5521036d604af69b7fa0e8f23c38b2e"
+    },
+    {
+      "byte_length": 369,
+      "path": "RACI_RESPONSIBILITY_MAP.csv",
+      "sha256": "2a0ad23c15fa2d05413e76d53ac90882552822d810890b2c690d71bbc03ef528"
+    },
+    {
+      "byte_length": 2472,
+      "path": "REVIEW_CALENDAR.csv",
+      "sha256": "f965ed44e3742a6bef3d9f8f37577fbd7be97f51b174129db073aed28d8c8428"
+    },
+    {
+      "byte_length": 18874,
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "01c4df7e6d45ca06da9250c356cf85b60b1b182106012bca9dc8dc6cc73ef51d"
+    },
+    {
+      "byte_length": 167,
+      "path": "VACANCY_AND_SUCCESSION_REGISTER.csv",
+      "sha256": "25293aa3c32c7940bb166469e69238c0361e295af3842ed496ba9eec9612a692"
+    },
+    {
+      "byte_length": 540,
+      "path": "tests/test_document_07.py",
+      "sha256": "af0c751f963b137dbd74c1085b8c92f8562a7145141aa4dd824fe6980f105666"
+    },
+    {
+      "byte_length": 2122,
+      "path": "validators/validate_document_07.py",
+      "sha256": "fe4ea9ced4ba50bc54d661c1c09be259fb887dc95f514090f9dfc08079c78b4b"
+    }
+  ],
+  "generated_at": "2026-08-01T15:39:10Z",
+  "package_root": "07_OWNERSHIP_STEWARDSHIP_REVIEW"
+}

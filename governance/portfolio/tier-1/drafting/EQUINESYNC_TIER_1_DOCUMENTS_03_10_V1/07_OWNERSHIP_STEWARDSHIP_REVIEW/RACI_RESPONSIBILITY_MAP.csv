@@ -1,0 +1,4 @@
+raci_id,activity,responsible,accountable,consulted,informed
+T1D07-RACI-001,Founder disposition,Founder,Founder,Reviewers,Stewards
+T1D07-RACI-002,Evidence custody,Evidence custodian,Documentary steward,Technical steward,Founder
+T1D07-RACI-003,Release authority,Release authority when separately assigned,Founder,"QA, security, privacy, operations",Affected stewards
