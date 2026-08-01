@@ -18,9 +18,9 @@
       "sha256": "51c1d885de80a76bdc6e59d5be5eaa0bd9b1dcbbb1f27e3754054535815b86d9"
     },
     {
-      "byte_length": 7604,
+      "byte_length": 8181,
       "path": "EQUINESYNC_CURRENT_GOVERNANCE_AUTHORITY_LIFECYCLE_LOCK_ACCESSION_CUSTODY_AND_SUPERSESSION_REGISTER_V2_0.md",
-      "sha256": "1624e8bffdabdb1b266f34967bada0dd911768fdc21bb00bee3aa92d56559b2d"
+      "sha256": "92ff35b2e21894ad1a4c65ce1caff1e08bef056026f14cd7b3e513857b081d9c"
     },
     {
       "byte_length": 591,
@@ -53,6 +53,6 @@
       "sha256": "cb92316bc042a645ba656c96f529926d149fa25a10b12488bae5545f7aabbc6f"
     }
   ],
-  "generated_at": "2026-08-01T15:39:10Z",
+  "generated_at": "2026-08-01T15:40:49Z",
   "package_root": "04_AUTHORITY_LIFECYCLE_REGISTER"
 }
