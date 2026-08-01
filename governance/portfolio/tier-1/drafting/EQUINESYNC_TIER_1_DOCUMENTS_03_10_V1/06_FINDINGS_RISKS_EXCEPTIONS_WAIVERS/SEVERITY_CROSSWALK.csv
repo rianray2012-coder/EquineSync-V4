@@ -1,0 +1,5 @@
+severity,meaning,authority
+P0,Blocks production or legal/safety-critical claim,Founder escalation required
+P1,Blocks pilot or material governance closure unless repaired or accepted,Founder or delegated risk authority
+P2,Retained material review issue or evidence gap,Documented steward and closure authority
+P3,Administrative cleanup without current authority effect,Documentary steward

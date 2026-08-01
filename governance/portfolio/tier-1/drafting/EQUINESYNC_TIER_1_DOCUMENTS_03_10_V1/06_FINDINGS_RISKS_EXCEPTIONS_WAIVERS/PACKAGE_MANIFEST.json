@@ -1,0 +1,58 @@
+{
+  "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "file_count_excluding_manifest_and_checksum": 10,
+  "files": [
+    {
+      "byte_length": 347,
+      "path": "CLOSURE_EVIDENCE_VALIDATION_REPORT.md",
+      "sha256": "21fcfb6db678013afb190817978604b8068bfb03522011aed758d3e3a32bbbb0"
+    },
+    {
+      "byte_length": 166,
+      "path": "DUPLICATE_FINDING_ANALYSIS.csv",
+      "sha256": "230f6d59a95dd03f4f807b22dfea6d26d73d40dea5d73ed7fa05d633c14b4307"
+    },
+    {
+      "byte_length": 7549,
+      "path": "EQUINESYNC_GOVERNANCE_FINDINGS_RESIDUAL_RISKS_EXCEPTIONS_AND_WAIVERS_REGISTER_V2_0.md",
+      "sha256": "a42011f4c5c30ca27a9b8b54b37a5c3d1d753b72d8dc38a3def52b3f8b3364e8"
+    },
+    {
+      "byte_length": 49281,
+      "path": "FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "sha256": "4dcf6b6324aec97e3fc953eef5062b5b85fcf8f8bea4d13eaa2a092caea3b578"
+    },
+    {
+      "byte_length": 84355,
+      "path": "FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.json",
+      "sha256": "abad97cc6e01a83000a87210b24fb046ff6d7c1e877faebb30afc989280a5395"
+    },
+    {
+      "byte_length": 393,
+      "path": "SEVERITY_CROSSWALK.csv",
+      "sha256": "4b0a016d0f80cce9404fa34b07cbcf03c71805861592a41014c6a3223c0a97af"
+    },
+    {
+      "byte_length": 28114,
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "b9140a3bbcdbd7ef8a5e959070ebc9840335aaa6f4a3144bc3e5d7fe05e4d9da"
+    },
+    {
+      "byte_length": 172,
+      "path": "STALE_FINDING_ANALYSIS.csv",
+      "sha256": "0d469e285bb923687487d82b611b9cfcd2642d80c3a707a85b7be337941dd157"
+    },
+    {
+      "byte_length": 540,
+      "path": "tests/test_document_06.py",
+      "sha256": "a2aafd6dc05502fbd5a26789dff565676f122d94b76e9d8658d67529719fb892"
+    },
+    {
+      "byte_length": 2189,
+      "path": "validators/validate_document_06.py",
+      "sha256": "e2b82e95e6afe53c86e2755e5dd0c1af3e37ca75a974f9e3685e6af6ac974bff"
+    }
+  ],
+  "generated_at": "2026-08-01T15:39:10Z",
+  "package_root": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS"
+}
