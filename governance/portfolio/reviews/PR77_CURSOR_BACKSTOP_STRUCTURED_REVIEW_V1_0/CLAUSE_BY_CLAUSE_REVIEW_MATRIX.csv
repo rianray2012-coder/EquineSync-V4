@@ -1,0 +1,21 @@
+clause_or_rule_id,artifact,section_or_row,review_question,result,severity,finding_id,notes
+ES-GPS-CLASS-001,JSON catalog,markdown_section L1150,Does section pointer resolve to MD heading?,FAIL,P1,CB-001,points to 4. Artifact Taxonomy; actual is 5
+ES-GPS-CLOSE-001,JSON catalog,markdown_section L1286,Does section pointer resolve to MD heading?,FAIL,P1,CB-001,points to 14 Closure; actual Closure is 16
+ES-GPS-MR-001,JSON catalog,markdown_section L1406,Does section pointer resolve to MD heading?,FAIL,P1,CB-001,points to 19 Machine-Readable; actual is 20
+ES-GPS-EXTLAW-001,JSON catalog,markdown_section L1422,Does section pointer resolve to MD heading?,FAIL,P1,CB-001,Limits Of Founder Exception Authority is not a heading
+ADV-002,JSON adversarial,L18,Exact section mapping?,FAIL,P1,CB-002,
+ADV-012,JSON adversarial,L138,Exact section mapping?,FAIL,P1,CB-002,cites 14 Closure; Closure is 16
+OQ-002,Conflict register,CSV L3,implemented_in_files section accurate?,FAIL,P1,CB-003,cites 16 with supersession matrix
+OQ-004,Conflict register,CSV L5,implemented_in_files section accurate?,FAIL,P1,CB-003,cites 17; reopening is 19
+OQ-009,Conflict register,CSV L10,implemented_in_files section accurate?,FAIL,P1,CB-003,cites 19; MR is 20
+ES-GPS-CLOSE-001,Completion matrix,L8-L14,Closure rows require full CLOSE-001 field set?,FAIL,P2,CB-004,
+FCR schema.required,Waiver template,L10-L29,Template captures date/certifying_founder/authority_effect?,FAIL,P2,CB-005,
+FCR-02 / FCR-09,Templates,package file set,Human template exists?,FAIL,P2,CB-006,
+VAL-016,Validation report,L398,Independent MD/JSON section compare?,FAIL,P2,CB-007,self-satisfies from generation
+ES-GPS-WAIVE-001,MD/FCR-03,§13 / FCR matrix,Can waived test be called passed?,PASS,,,prohibited claims hold
+ES-GPS-HIST-001,MD/FCR-01,§12 / hist template,Can missing bytes be called inspected?,PASS,,,truth statement holds
+ES-GPS-CERT-PROD-001,MD/FCR-10,§9 / FCR-10,Implicit production authority?,PASS,,,express FCR-10 required
+ES-GPS-AUTH-002,MD §2,Authority,Lower-order silent amend of locked canon?,PASS,,,constitutional precedence retained; FCR-09 prohibits locked-policy amend
+OQ-001..OQ-010 status,Conflict register,all rows,Stale open status?,PASS,,,all CLOSED_FOUNDER_DISPOSITION_INCORPORATED
+CHECKSUMS.sha256,package,ledger,Checksum consistency at head?,PASS,,,24/24 OK
+TR-020,Lifecycle matrix,L45,Bypasses review path?,OBSERVATION,Observation,CB-009,bounded cert from DRAFTING

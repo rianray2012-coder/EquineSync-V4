@@ -1,0 +1,11 @@
+scenario_id,attack_attempt,target_rule_or_control,result,evidence,severity_if_defect,notes
+ADV-B-01,Call Founder approval adoption,ES-GPS-FA-001 / POC-002 / ALACA-001,PASS_CONTROL_HOLDS,Approval and adoption remain distinct in MD §7-8 and matrices.,,
+ADV-B-02,Call waived test passed,ES-GPS-WAIVE-001 / FCR-03 / POC-006,PASS_CONTROL_HOLDS,Waiver language and prohibited claims forbid reporting waived tests as passed.,,
+ADV-B-03,Call missing document exact-byte verified,ES-GPS-HIST-001 / FCR-01,PASS_CONTROL_HOLDS,FCR-01 prohibited claims and truth statement require disclosing unavailable exact-byte verification.,,
+ADV-B-04,Call pilot evidence unrestricted production evidence,ES-GPS-PILOTEVD-001 / FCR-06 / FCR-10,PASS_CONTROL_HOLDS,Pilot substitution prohibited claims and CERT-PROD rules require express production authorization.,,
+ADV-B-05,Use procedural override to amend locked constitutional policy,ES-GPS-EXTLAW-001 / FCR-09 / POC-013,PASS_CONTROL_HOLDS,FCR-09 prohibited claims and EXTLAW rule block amending locked constitutional policy / external duties.,,
+ADV-B-06,Rely on package VAL PASS as proof of MD/JSON section integrity,VAL-016,FAIL_DEFECT_FOUND,VAL-016 self-satisfies; stale section pointers remain. See CB-007/CB-001/CB-002.,P2,Mapped to CB-007
+ADV-B-07,Use stale OQ section cites to open wrong maintenance/amendment sections,OQ-002/003/004/009,FAIL_DEFECT_FOUND,Closed OQ rows point to wrong section numbers. See CB-003.,P1,Mapped to CB-003
+ADV-B-08,Treat COMPLETE_* matrix row as full CLOSE-001 checklist,ES-GPS-CLOSE-001 / COMPLETION matrix,FAIL_DEFECT_FOUND,Several closure rows omit reopening/scope/risk/prohibited elements. See CB-004.,P2,Mapped to CB-004
+ADV-B-09,Complete waiver template without schema-required date/founder/authority_effect,FCR schema / waiver template,FAIL_DEFECT_FOUND,Template gaps vs schema.required. See CB-005.,P2,Mapped to CB-005
+ADV-B-10,Issue FCR-02 or FCR-09 using only existing templates,FCR-02 / FCR-09,FAIL_DEFECT_FOUND,No template coverage. See CB-006.,P2,Mapped to CB-006

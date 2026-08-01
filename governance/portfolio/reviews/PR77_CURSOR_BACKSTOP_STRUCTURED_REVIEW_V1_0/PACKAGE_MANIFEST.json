@@ -1,0 +1,90 @@
+{
+  "artifact_id": "PR77_CURSOR_BACKSTOP_STRUCTURED_REVIEW_V1_0",
+  "review_type": "CURSOR_AGENT_BACKSTOP",
+  "kit_prompt": "02_CURSOR_BUGBOT_OR_CURSOR_AGENT_BACKSTOP_PROMPT.md",
+  "kit_zip_sha256": "9060a4dd082ffd78ba9784a1c47b83483d84e7b67170d88cc6fbc132f5a30971",
+  "review_target_head": "95672eac54ae1be715e8c612c712506661e1df03",
+  "pull_request": 77,
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "protected_head_reviewed": "1eb384d80daa700ba2e71ee42872cc9bba926332",
+  "determination": "BLOCKED_BY_P0_OR_P1",
+  "finding_counts": {
+    "P0": 0,
+    "P1": 3,
+    "P2": 4,
+    "P3": 1,
+    "Observation": 2
+  },
+  "authority_boundary": "REVIEW_FINDINGS_ONLY_NO_ADOPTION_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "target_edited": false,
+  "file_count": 13,
+  "files": [
+    {
+      "path": "README_FIRST.md",
+      "sha256": "2b999d67e0c228434cd6627520962db1c4b37ce4750624ec324cf8d329276574",
+      "byte_length": 1234
+    },
+    {
+      "path": "REVIEWER_INDEPENDENCE_STATEMENT.md",
+      "sha256": "d096974baa2ce205122f1d96540861cc948faea763ee288fb2c106943abe04d0",
+      "byte_length": 1300
+    },
+    {
+      "path": "REVIEW_TARGET_AUTHENTICATION_REPORT.md",
+      "sha256": "e62e74979362ce54ba71a5da55ed2f2a60081580b82d07ecd0dee2bedf6c825b",
+      "byte_length": 2663
+    },
+    {
+      "path": "SOURCE_AUTHENTICATION_REGISTER.csv",
+      "sha256": "549d1b718d32e7dcf8663ff19395d4a63d45f58e607c72805c97908e0e33e4e4",
+      "byte_length": 11598
+    },
+    {
+      "path": "CLAUSE_BY_CLAUSE_REVIEW_MATRIX.csv",
+      "sha256": "eb9dceb6447634e3531f892e75f5fb0e263fc1d4fee7874ff0dab93927feb636",
+      "byte_length": 2461
+    },
+    {
+      "path": "INDEPENDENT_REVIEW_FINDINGS_REGISTER.csv",
+      "sha256": "55efbee3069806d4d42e8a97559c7688b027031f4db98f06af2ecb3ee1bc178a",
+      "byte_length": 15847
+    },
+    {
+      "path": "ADVERSARIAL_REVIEW_REGISTER.csv",
+      "sha256": "78b3420a72b653ab4a3d8e62a8fe4a6a84e30a40178af5a837ebc2065757f9b4",
+      "byte_length": 2050
+    },
+    {
+      "path": "BASE_DRIFT_COMPATIBILITY_REPORT.md",
+      "sha256": "f614faab0c58d7ed1e5660331183469477122140d5cf61376b1db09db1e3dca7",
+      "byte_length": 1697
+    },
+    {
+      "path": "HUMAN_MACHINE_CONSISTENCY_REPORT.md",
+      "sha256": "9b243d392757d0146fb3f83a1ef77cf751dd9d6a3491f5669431805703cd1f7b",
+      "byte_length": 2108
+    },
+    {
+      "path": "ADOPTION_READINESS_DETERMINATION.md",
+      "sha256": "565eabe061bf56126efa143b7512cdb30fa2be67043683c1a973bdb3fea0e7d9",
+      "byte_length": 2420
+    },
+    {
+      "path": "REVIEW_SUMMARY.md",
+      "sha256": "cf47351fbd67e78f14b1992ed6f8eb4f321d75a848f4f0eaaa4b3afddff31ded",
+      "byte_length": 2622
+    },
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "sha256": null,
+      "byte_length": null,
+      "hash_status": "SELF_REFERENTIAL_REPORTED_BY_CHECKSUMS"
+    },
+    {
+      "path": "CHECKSUMS.sha256",
+      "sha256": null,
+      "byte_length": null,
+      "hash_status": "SELF_REFERENTIAL_LEDGER"
+    }
+  ]
+}
