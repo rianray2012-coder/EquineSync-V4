@@ -32,10 +32,6 @@
       "bytes": 1113,
       "sha256": "c948ad8b75ab6a55b712931dfe29ab48539761fb60860c3cd6fa4260c1f90628"
     },
-    "PACKAGE_MANIFEST.json": {
-      "bytes": 3107,
-      "sha256": "4d6f3e23316ea5a0ea8757f34f641d2493c7c78d167c3066a76ab52085fc09e5"
-    },
     "PROTECTED_HEAD_AND_MERGED_FILE_IDENTITY_RECORD.json": {
       "bytes": 23023,
       "sha256": "545a76a15660e1d05108d2162648dcce0cb94e649793e0cff48ab541aec17a23"
