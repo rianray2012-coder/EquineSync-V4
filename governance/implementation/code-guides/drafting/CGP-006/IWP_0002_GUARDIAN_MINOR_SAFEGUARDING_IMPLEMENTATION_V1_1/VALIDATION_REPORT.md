@@ -1,6 +1,6 @@
 # Validation Report
 
-Status: `CORRECTIVE_REVISION_COMPLETE_PENDING_PACKAGE_VALIDATION_AND_PROTECTED_REVIEW`
+Status: `CORRECTIVE_REVISION_COMPLETE_PENDING_GITHUB_CHECKS_AND_PROTECTED_REVIEW`
 
 Recorded: `2026-08-01T04:58:00Z`
 
@@ -29,7 +29,8 @@ Unavailable checks:
 - Local backend collect-only command was interrupted after 41 tests collected in 62.15 seconds because the local macOS checkout was walking files slowly; GitHub CI remains the authoritative collectability gate.
 - Local `npm run build` started after dependency install but produced no build result before the bounded local wait; GitHub CI remains the authoritative frontend build gate.
 - BN13D guardian-minor intake file has unrelated pre-existing frontend/navigation failures outside the PR #71 corrective surface: `4 failed, 8 passed`.
-- Protected PR checks and merge are pending corrective commit push and GitHub check completion.
+- Corrective implementation/evidence commit pushed to PR #71: `ae6aed8512aac7327643554d1e9dab34ddac3bdb`.
+- Protected PR checks and merge are pending GitHub check completion, review-thread resolution, and exact-head protected merge eligibility on the final PR head.
 
 Boundary confirmations:
 - No deployment, staging, pilot, production, provider call, GAP_0004, Wave 2, CGP-007, or PR #67/#68/#69 mutation was performed.

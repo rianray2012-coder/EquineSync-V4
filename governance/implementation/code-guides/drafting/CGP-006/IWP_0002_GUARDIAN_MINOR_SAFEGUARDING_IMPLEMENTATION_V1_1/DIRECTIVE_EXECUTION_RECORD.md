@@ -1,6 +1,6 @@
 # Directive Execution Record
 
-Status: `PR_71_CORRECTIVE_REVISION_COMPLETE_PENDING_FINAL_PACKAGE_VALIDATION_AND_PROTECTED_REVIEW`
+Status: `PR_71_CORRECTIVE_IMPLEMENTATION_COMMIT_PUSHED_PENDING_REQUIRED_CHECKS_AND_THREAD_RESOLUTION`
 
 Recorded: `2026-08-01T04:58:00Z`
 
@@ -22,6 +22,8 @@ Completed:
 - Focused regression matrix now passes: `54 passed`.
 - RF14 document guardian-required regression passed: `1 passed`.
 - RF9 adult rider lesson positive control passed: `1 passed`.
+- Package manifest/checksum regeneration and implementation package validator passed after corrective evidence updates.
+- Corrective implementation/evidence commit pushed to PR #71: `ae6aed8512aac7327643554d1e9dab34ddac3bdb`.
 
 Not performed:
 - No deployment.
@@ -33,9 +35,7 @@ Not performed:
 - No administrative bypass, delayed auto-merge, or direct protected-branch push.
 
 Pending gates before protected merge and closure:
-- Package manifest/checksum regeneration and package validator re-run.
-- Corrective commit push to PR #71.
-- Required GitHub checks on the corrective head.
+- Required GitHub checks on the final PR head.
 - Review-thread replies and ordinary thread resolution after the corrective head is verified.
 - Exact-head protected merge only if all required checks and review-thread gates pass.
 - Post-merge custody-and-closure PR and validator only after protected implementation merge is verified.
