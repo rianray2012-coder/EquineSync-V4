@@ -1,0 +1,7 @@
+evidence_id,evidence_class,minimum_fields,acceptance_rule
+T1D10-EVID-001,SOURCE_MANIFEST,path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation,Every relied-upon source must be exact-byte identified or marked unavailable.
+T1D10-EVID-002,TEST_EXECUTION,path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation,"Command, environment, commit, result, and failure treatment required."
+T1D10-EVID-003,FOUNDER_CERTIFICATION,path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation,Certification may bound reliance but does not replace missing bytes unless expressly scoped.
+T1D10-EVID-004,WAIVER,path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation,Waiver permits exception only; it is not a passed test.
+T1D10-EVID-005,PILOT_EVIDENCE,path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation,"Pilot evidence is limited to cohort, duration, environment, and scope."
+T1D10-EVID-006,CLOSING_CERTIFICATE,path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation,Certificate cannot include excluded lifecycle states.

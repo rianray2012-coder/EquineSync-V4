@@ -1,0 +1,20 @@
+template_id,template_name,template_path,required
+T1D10-TPL-001,Audit plan,templates/01_AUDIT_PLAN.md,TRUE
+T1D10-TPL-002,Scope and exclusions schedule,templates/02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md,TRUE
+T1D10-TPL-003,Source manifest,templates/03_SOURCE_MANIFEST.md,TRUE
+T1D10-TPL-004,Evidence index,templates/04_EVIDENCE_INDEX.md,TRUE
+T1D10-TPL-005,Sampling record,templates/05_SAMPLING_RECORD.md,TRUE
+T1D10-TPL-006,Reviewer-independence disclosure,templates/06_REVIEWER_INDEPENDENCE_DISCLOSURE.md,TRUE
+T1D10-TPL-007,Conflict disclosure,templates/07_CONFLICT_DISCLOSURE.md,TRUE
+T1D10-TPL-008,Finding schedule,templates/08_FINDING_SCHEDULE.md,TRUE
+T1D10-TPL-009,Residual-risk schedule,templates/09_RESIDUAL_RISK_SCHEDULE.md,TRUE
+T1D10-TPL-010,Founder certification schedule,templates/10_FOUNDER_CERTIFICATION_SCHEDULE.md,TRUE
+T1D10-TPL-011,Closing exhibits index,templates/11_CLOSING_EXHIBITS_INDEX.md,TRUE
+T1D10-TPL-012,Founder ratification instrument,templates/12_FOUNDER_RATIFICATION_INSTRUMENT.md,TRUE
+T1D10-TPL-013,Adoption record,templates/13_ADOPTION_RECORD.md,TRUE
+T1D10-TPL-014,Accession receipt,templates/14_ACCESSION_RECEIPT.md,TRUE
+T1D10-TPL-015,Post-merge custody receipt,templates/15_POST_MERGE_CUSTODY_RECEIPT.md,TRUE
+T1D10-TPL-016,Final closing certificate,templates/16_FINAL_CLOSING_CERTIFICATE.md,TRUE
+T1D10-TPL-017,Bounded-scope closing certificate,templates/17_BOUNDED_SCOPE_CLOSING_CERTIFICATE.md,TRUE
+T1D10-TPL-018,Reopening notice,templates/18_REOPENING_NOTICE.md,TRUE
+T1D10-TPL-019,Recertification record,templates/19_RECERTIFICATION_RECORD.md,TRUE

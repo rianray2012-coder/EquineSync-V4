@@ -1,0 +1,491 @@
+{
+  "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "determinations": [
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "COMPLETE",
+      "meaning": "All in-scope audit requirements are satisfied with evidence."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "COMPLETE_WITH_RETAINED_RISKS",
+      "meaning": "Complete within scope while retained risks remain visible."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "COMPLETE_WITH_CERTIFIED_EXCEPTIONS",
+      "meaning": "Complete with explicit certified exceptions."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "COMPLETE_FOR_BOUNDED_SCOPE_ONLY",
+      "meaning": "Only the named bounded scope is complete."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "PARTIALLY_COMPLETE",
+      "meaning": "Some required evidence or review remains open."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "ACCEPTABLE_FOR_CONTROLLED_CONTINUATION",
+      "meaning": "Sufficient for a bounded next step but not full closure."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "BLOCKED",
+      "meaning": "A required gate failed or required evidence is unavailable."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "NOT_ASSESSED",
+      "meaning": "The scope did not assess this state."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "SUPERSEDED",
+      "meaning": "A successor audit controls."
+    },
+    {
+      "authority_effect": "NO_AUTHORITY_EFFECT_WITHOUT_FOUNDER_RATIFICATION",
+      "determination": "REOPENED",
+      "meaning": "Prior closure reopened by trigger."
+    }
+  ],
+  "document_id": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_CERTIFICATION_PACKAGE_V1_0",
+  "evidence_classes": [
+    {
+      "acceptance_rule": "Every relied-upon source must be exact-byte identified or marked unavailable.",
+      "evidence_class": "SOURCE_MANIFEST",
+      "evidence_id": "T1D10-EVID-001",
+      "minimum_fields": "path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation"
+    },
+    {
+      "acceptance_rule": "Command, environment, commit, result, and failure treatment required.",
+      "evidence_class": "TEST_EXECUTION",
+      "evidence_id": "T1D10-EVID-002",
+      "minimum_fields": "path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation"
+    },
+    {
+      "acceptance_rule": "Certification may bound reliance but does not replace missing bytes unless expressly scoped.",
+      "evidence_class": "FOUNDER_CERTIFICATION",
+      "evidence_id": "T1D10-EVID-003",
+      "minimum_fields": "path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation"
+    },
+    {
+      "acceptance_rule": "Waiver permits exception only; it is not a passed test.",
+      "evidence_class": "WAIVER",
+      "evidence_id": "T1D10-EVID-004",
+      "minimum_fields": "path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation"
+    },
+    {
+      "acceptance_rule": "Pilot evidence is limited to cohort, duration, environment, and scope.",
+      "evidence_class": "PILOT_EVIDENCE",
+      "evidence_id": "T1D10-EVID-005",
+      "minimum_fields": "path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation"
+    },
+    {
+      "acceptance_rule": "Certificate cannot include excluded lifecycle states.",
+      "evidence_class": "CLOSING_CERTIFICATE",
+      "evidence_id": "T1D10-EVID-006",
+      "minimum_fields": "path;commit_or_blob;sha256;byte_length;scope;reviewer;authority;limitation"
+    }
+  ],
+  "sections": [
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-001",
+      "section_number": "1",
+      "section_title": "Document control"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-002",
+      "section_number": "2",
+      "section_title": "Authority boundary"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-003",
+      "section_number": "3",
+      "section_title": "Audit objectives"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-004",
+      "section_number": "4",
+      "section_title": "Full portfolio audit"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-005",
+      "section_number": "5",
+      "section_title": "Bounded-scope audit"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-006",
+      "section_number": "6",
+      "section_title": "Audit scope"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-007",
+      "section_number": "7",
+      "section_title": "Audit exclusions"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-008",
+      "section_number": "8",
+      "section_title": "Evidence rules"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-009",
+      "section_number": "9",
+      "section_title": "Source-authentication rules"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-010",
+      "section_number": "10",
+      "section_title": "Exact-byte rules"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-011",
+      "section_number": "11",
+      "section_title": "Sampling rules"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-012",
+      "section_number": "12",
+      "section_title": "Mandatory validations"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-013",
+      "section_number": "13",
+      "section_title": "Reviewer independence"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-014",
+      "section_number": "14",
+      "section_title": "Role-segregation disclosure"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-015",
+      "section_number": "15",
+      "section_title": "Conflict handling"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-016",
+      "section_number": "16",
+      "section_title": "Finding classification"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-017",
+      "section_number": "17",
+      "section_title": "Risk and waiver treatment"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-018",
+      "section_number": "18",
+      "section_title": "Founder certification treatment"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-019",
+      "section_number": "19",
+      "section_title": "Historical-evidence exception treatment"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-020",
+      "section_number": "20",
+      "section_title": "Test-waiver treatment"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-021",
+      "section_number": "21",
+      "section_title": "Pilot-evidence substitution treatment"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-022",
+      "section_number": "22",
+      "section_title": "Required closing exhibits"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-023",
+      "section_number": "23",
+      "section_title": "Audit determination vocabulary"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-024",
+      "section_number": "24",
+      "section_title": "Founder ratification"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-025",
+      "section_number": "25",
+      "section_title": "Adoption treatment"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-026",
+      "section_number": "26",
+      "section_title": "Accession treatment"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-027",
+      "section_number": "27",
+      "section_title": "Custody treatment"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-028",
+      "section_number": "28",
+      "section_title": "Reopening triggers"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-029",
+      "section_number": "29",
+      "section_title": "Prohibited overclaims"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-030",
+      "section_number": "30",
+      "section_title": "Certificate limitations"
+    },
+    {
+      "closure_criterion": "Section completed, evidence indexed, limitations stated, and authority boundary preserved.",
+      "evidence_rule": "Exact source, scope, reviewer, authority, and limitation evidence required.",
+      "mandatory_validation": "TRUE",
+      "prohibited_overclaim": "Do not certify excluded lifecycle states.",
+      "requirement_id": "T1D10-REQ-031",
+      "section_number": "31",
+      "section_title": "Maintenance and recertification"
+    }
+  ],
+  "templates": [
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-001",
+      "template_name": "Audit plan",
+      "template_path": "templates/01_AUDIT_PLAN.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-002",
+      "template_name": "Scope and exclusions schedule",
+      "template_path": "templates/02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-003",
+      "template_name": "Source manifest",
+      "template_path": "templates/03_SOURCE_MANIFEST.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-004",
+      "template_name": "Evidence index",
+      "template_path": "templates/04_EVIDENCE_INDEX.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-005",
+      "template_name": "Sampling record",
+      "template_path": "templates/05_SAMPLING_RECORD.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-006",
+      "template_name": "Reviewer-independence disclosure",
+      "template_path": "templates/06_REVIEWER_INDEPENDENCE_DISCLOSURE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-007",
+      "template_name": "Conflict disclosure",
+      "template_path": "templates/07_CONFLICT_DISCLOSURE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-008",
+      "template_name": "Finding schedule",
+      "template_path": "templates/08_FINDING_SCHEDULE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-009",
+      "template_name": "Residual-risk schedule",
+      "template_path": "templates/09_RESIDUAL_RISK_SCHEDULE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-010",
+      "template_name": "Founder certification schedule",
+      "template_path": "templates/10_FOUNDER_CERTIFICATION_SCHEDULE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-011",
+      "template_name": "Closing exhibits index",
+      "template_path": "templates/11_CLOSING_EXHIBITS_INDEX.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-012",
+      "template_name": "Founder ratification instrument",
+      "template_path": "templates/12_FOUNDER_RATIFICATION_INSTRUMENT.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-013",
+      "template_name": "Adoption record",
+      "template_path": "templates/13_ADOPTION_RECORD.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-014",
+      "template_name": "Accession receipt",
+      "template_path": "templates/14_ACCESSION_RECEIPT.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-015",
+      "template_name": "Post-merge custody receipt",
+      "template_path": "templates/15_POST_MERGE_CUSTODY_RECEIPT.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-016",
+      "template_name": "Final closing certificate",
+      "template_path": "templates/16_FINAL_CLOSING_CERTIFICATE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-017",
+      "template_name": "Bounded-scope closing certificate",
+      "template_path": "templates/17_BOUNDED_SCOPE_CLOSING_CERTIFICATE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-018",
+      "template_name": "Reopening notice",
+      "template_path": "templates/18_REOPENING_NOTICE.md"
+    },
+    {
+      "required": "TRUE",
+      "template_id": "T1D10-TPL-019",
+      "template_name": "Recertification record",
+      "template_path": "templates/19_RECERTIFICATION_RECORD.md"
+    }
+  ]
+}
