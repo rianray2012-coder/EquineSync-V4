@@ -1,13 +1,23 @@
 # Finding and Gap Closure Disposition
 
-Status: `CGP_006_IWP_0002_POST_MERGE_CUSTODY_COMPLETE_CLOSURE_BLOCKED_PENDING_FOUNDER_REVIEW`
+Status: `CGP_006_IWP_0002_POST_MERGE_FINDINGS_CORRECTED_CUSTODY_REFRESHED_AND_SCOPE_LIMITED_CLOSURE_READY_FOR_PROTECTED_MERGE`
 
-Closure is not recorded.
+Staged protected-merge-effective dispositions:
 
-- `CGP006-MAP-FIND-0002`: `NOT_YET_CLOSED`
-- `CGP006-MAP-GAP-0003`: `NOT_YET_CLOSED`
-- `CGP006-IWP-0002`: `IMPLEMENTATION_PROTECTEDLY_MERGED_CUSTODY_RECORDED_CLOSURE_BLOCKED`
+- `CGP006-MAP-FIND-0002`: `CLOSED`
+- `CGP006-MAP-GAP-0003`: `CLOSED`
+- `CGP006-IWP-CANDIDATE-0002`: `IMPLEMENTED_CORRECTED_VERIFIED_MERGED_CUSTODY_COMPLETE`
 
-Reason: two new in-scope post-merge Medium review findings remain unresolved after PR #71 merge. The canonical current-state registers therefore remain open and unchanged in this draft custody PR.
+Closure tokens:
 
-Continuing limits: repository implementation evidence does not establish production safeguarding readiness, staging readiness, pilot readiness, deployment authority, provider-call authority, GAP_0004 closure, Wave 2, or CGP-007 authority.
+```text
+CGP006-MAP-FIND-0002=CLOSED
+CGP006-MAP-GAP-0003=CLOSED
+CGP006_MAP_FIND_0002_CLOSED_WITH_SERVER_SIDE_GUARDIAN_MINOR_ENFORCEMENT_POST_MERGE_CORRECTION_AND_REGRESSION_ABUSE_EVIDENCE
+CGP006_MAP_GAP_0003_CLOSED_WITH_REPOSITORY_IMPLEMENTATION_POST_MERGE_CORRECTION_VERIFICATION_AND_CUSTODY
+CGP006_IWP_0002=IMPLEMENTED_CORRECTED_VERIFIED_MERGED_CUSTODY_COMPLETE
+```
+
+Closure effective event: `VERIFIED_PROTECTED_MERGE_OF_REFRESHED_PR_72_POST_MERGE_CUSTODY_AND_CLOSURE`.
+
+Continuing limits: this closure does not establish production safeguarding readiness, staging readiness, pilot readiness, deployment authority, provider-call authority, production data access, GAP_0004 closure, Wave 2, CGP-007, or unrelated PR #67/#68/#69 authority.

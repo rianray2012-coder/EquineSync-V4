@@ -1,9 +1,9 @@
 workflow,post_merge_state,evidence
-LESSON_READY_AND_LESSON_PARTICIPATION,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
-MESSAGING,CLOSURE_BLOCKED_POST_MERGE_REVIEW_FINDING,New Bugbot finding affects this workflow family after implementation merge.
-WAIVER,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
-DOCUMENT_SIGNATURE,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
-MEDIA_RELEASE,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
-PAYMENT,CLOSURE_BLOCKED_POST_MERGE_REVIEW_FINDING,New Bugbot finding affects this workflow family after implementation merge.
-EVENT_SIGNUP,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
-GUARDIAN_LIFECYCLE_AND_PARTICIPANT_REMOVAL,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
+LESSON_READY_AND_LESSON_PARTICIPATION,IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED,PR #71 guard coverage preserved; PR #75 did not weaken lesson/training/event safeguards.
+MESSAGING,IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED,Verified legacy guardian-link expansion included through shared helper; unverified/cross-barn/contradictory links rejected.
+WAIVER,IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED,PR #71 guard evidence preserved; no PR #75 regression identified.
+DOCUMENT_SIGNATURE,IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED,PR #71 commit-time guard evidence preserved; no PR #75 regression identified.
+MEDIA_RELEASE,IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED,PR #71 guard evidence preserved; no PR #75 regression identified.
+PAYMENT,IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED,Verified legacy guardian-link payment expansion and materialized invoice state-token propagation corrected by PR #75.
+EVENT_SIGNUP,IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED,PR #71 approval revalidation evidence preserved; no PR #75 regression identified.
+GUARDIAN_LIFECYCLE_AND_PARTICIPANT_REMOVAL,IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED,Revocation/consent/state-token fail-closed behavior preserved and extended to materialized invoice payment.

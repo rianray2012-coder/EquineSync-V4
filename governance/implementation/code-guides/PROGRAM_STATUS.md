@@ -3,17 +3,48 @@
 **Program:** EquineSync Code Implementation Guide Program
 **Current prompt:** `CGP-006`
 **Execution ID:** `CGEXEC-20260726-0005`
-**Prompt status:** `CGP_006_STAGE_24_PROFILE_ADOPTION_LIMITED_ACTIVATION_AND_CUSTODY_COMPLETE`
-**Program maturity:** CGP-006 Stage 24 Solo-Founder profile adoption and limited guide activation custody complete for exact Wave 1 V1.1 guide bytes.
+**Prompt status:** `CGP_006_IWP_0002_POST_MERGE_FINDINGS_CORRECTED_CUSTODY_REFRESHED_AND_SCOPE_LIMITED_CLOSURE_COMPLETE`
+**Program maturity:** CGP-006 Stage 24 limited guide activation remains in force; CGP006-IWP-0002 guardian/minor safeguarding is implemented, corrected, verified, and custody-closed for the authorized repository scope only after protected merge of PR #72.
 **Current guide maturity:** Wave 1 guides `ADOPTED`, `REPOSITORY_ACCESSIONED`, `CUSTODY_COMPLETE`, and `ACTIVE_LIMITED_STAGE_24`; all other guides `PLANNED` and `NOT_ACTIVE`.
 **Guide adoption state:** `ADOPTED` for `ES-CG-00`, `ES-CG-01`, `ES-CG-10`, and `ES-CG-13`; all other guides `NOT_ADOPTED`.
 **Guide activation state:** `ACTIVE_LIMITED_STAGE_24_FOR_PLANNING_REFERENCE_IMPLEMENTATION_CONTROL_AND_PULL_REQUEST_REVIEW_ONLY`
-**Implementation authority:** `NOT_GRANTED`
+**Implementation authority:** `SCOPE_LIMITED_CGP006_IWP_0002_COMPLETE_NO_FURTHER_IMPLEMENTATION_AUTHORIZED`
 **CGP-007 status:** `NOT_ISSUED`
 **Next prompt:** `NONE_AUTHORIZED_FOR_IMPLEMENTATION_MAPPING_OR_IMPLEMENTATION`
 **Post-custody closeout status:** `CODE_GUIDE_PROGRAM_V1_1_REVISION_AND_PR_44_SUCCESSOR_PROTECTEDLY_INTEGRATED_AND_CUSTODY_COMPLETE`
 **Historical PR #44 status:** `PR_44_CLOSED_SUPERSEDED_NOT_MERGED`
 Repository-specific implementation mapping, implementation, deployment, staging, pilot or production use, runtime evidence, Wave 2, and CGP-007 remain unauthorized. MERGE_GATE, RELEASE_GATE, and OPERATIONS_REFERENCE remain inactive.
+
+
+## CGP-006 IWP-0002 Guardian/Minor Safeguarding Closure Status
+
+- Directive: `CGP_006_IWP_0002_POST_MERGE_FINDING_CORRECTION_CUSTODY_REFRESH_AND_CONDITIONAL_CLOSURE_CONTINUATION_DIRECTIVE_V1_0_0`
+- PR #71 implementation head: `74f79bc7e9452e593247aff7624c1668649da02b`
+- PR #71 merge commit: `d0d9528028982c1243f9e2a6b0f21a78f298276c`
+- Corrective PR #75 head: `4c144c08be7e4c25910694186972a91d2302fbb3`
+- Corrective PR #75 merge commit: `a5461072b36fd991b4cfcba343e53aa83d70df66`
+- Refreshed custody PR: `#72`
+- Closure effective event: `VERIFIED_PROTECTED_MERGE_OF_REFRESHED_PR_72_POST_MERGE_CUSTODY_AND_CLOSURE`
+- Closure status: `CGP_006_IWP_0002_POST_MERGE_FINDINGS_CORRECTED_CUSTODY_REFRESHED_AND_SCOPE_LIMITED_CLOSURE_COMPLETE`
+- Finding disposition: `CGP006_MAP_FIND_0002_CLOSED_WITH_SERVER_SIDE_GUARDIAN_MINOR_ENFORCEMENT_POST_MERGE_CORRECTION_AND_REGRESSION_ABUSE_EVIDENCE`
+- Gap disposition: `CGP006_MAP_GAP_0003_CLOSED_WITH_REPOSITORY_IMPLEMENTATION_POST_MERGE_CORRECTION_VERIFICATION_AND_CUSTODY`
+- IWP disposition: `CGP006_IWP_0002=IMPLEMENTED_CORRECTED_VERIFIED_MERGED_CUSTODY_COMPLETE`
+
+This closure is limited to the authorized server-side repository guardian/minor safeguarding implementation and evidence scope for `CGP006-MAP-FIND-0002`, `CGP006-MAP-GAP-0003`, and `CGP006-IWP-CANDIDATE-0002`. It does not authorize deployment, staging, pilot, production use, provider calls, production data access, destructive schema changes, dependency or lockfile changes, CI or branch-protection changes, GAP_0004 closure, Wave 2, CGP-007, or mutation of unrelated PRs #67, #68, or #69.
+
+Continuing boundary tokens:
+
+```text
+NO_DEPLOYMENT
+NO_STAGING
+NO_PILOT
+NO_PRODUCTION_USE
+NO_PROVIDER_CALL
+NO_PRODUCTION_DATA_ACCESS
+GAP_0004_REMAINS_OPEN
+NO_WAVE_2
+NO_CGP_007
+```
 
 ## Stage 24 Profile Adoption And Limited Activation Custody Status
 

@@ -1,7 +1,7 @@
 # Schema, Index, and Rollback Custody Record
 
-Status: `CUSTODY_RECORDED_CLOSURE_BLOCKED`
+Status: `CUSTODY_REFRESHED_NO_NEW_SCHEMA_INDEX_OR_RUNTIME_CHANGE_ON_PR_72`
 
-The implementation merge introduced additive safeguarding logic and recorded rollback/suspension evidence in the implementation package. This custody draft does not alter implementation code, schemas, indexes, dependencies, lockfiles, CI, or branch protection.
+PR #72 contains no product code, schema, index, dependency, lockfile, CI, branch-protection, provider-configuration, staging, deployment, pilot, production, or production-backfill change. Corrective product changes were isolated to PR #75 and are already protectedly merged.
 
-Rollback/suspension readiness is preserved as documentary evidence only. Because post-merge findings remain unresolved, no production readiness, staging readiness, pilot readiness, provider readiness, or operational activation is claimed.
+Rollback and suspension readiness remains documentary: if later evidence shows a guardian/minor safeguarding regression, suspend or hide the affected minor-facing workflow and open a separately authorized governed corrective package. This PR does not activate runtime use.

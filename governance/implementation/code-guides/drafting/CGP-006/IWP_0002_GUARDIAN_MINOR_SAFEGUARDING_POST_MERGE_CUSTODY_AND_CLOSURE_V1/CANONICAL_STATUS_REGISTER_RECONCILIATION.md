@@ -1,12 +1,14 @@
 # Canonical Status Register Reconciliation
 
-Status: `REGISTERS_RECONCILED_NO_CLOSURE_UPDATE`
+Status: `CANONICAL_STATUS_RECONCILIATION_PASS`
 
-Exact current-state rows inspected at protected merge head:
+Current-state rows staged for protected PR #72 merge effect:
 
-- `SECURITY_PRIVACY_AND_SAFEGUARDING_FINDINGS_REGISTER.csv`: `CGP006-MAP-FIND-0002` remains `OPEN`.
-- `CURRENT_STATE_GAP_REGISTER.csv`: `CGP006-MAP-GAP-0003` remains `OPEN`.
-- `IMPLEMENTATION_WORK_PACKAGE_CANDIDATE_BACKLOG.csv`: `CGP006-IWP-CANDIDATE-0002` remains a candidate/current-status record from the pre-implementation audit.
-- `PR_62_GAP_FINDING_AND_IWP_CUSTODY_TABLE.csv` is historical custody evidence and is not rewritten.
+- `SECURITY_PRIVACY_AND_SAFEGUARDING_FINDINGS_REGISTER.csv`: `CGP006-MAP-FIND-0002` -> `CLOSED`.
+- `CURRENT_STATE_GAP_REGISTER.csv`: `CGP006-MAP-GAP-0003` -> `CLOSED`.
+- `IMPLEMENTATION_WORK_PACKAGE_CANDIDATE_BACKLOG.csv`: `CGP006-IWP-CANDIDATE-0002` -> `IMPLEMENTED_CORRECTED_VERIFIED_MERGED_CUSTODY_COMPLETE`.
+- `GUARDIAN_MINOR_SAFEGUARDING_CONTROL_MAP.csv`: `CGP006-MAP-GAP-0003` rows -> `IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED`.
+- `PIA_AND_FOUNDER_DECISION_TO_REPOSITORY_TRACEABILITY_MATRIX.csv`: `PIA-MAP-0008` -> `IMPLEMENTED_CORRECTED_VERIFIED_SCOPE_LIMITED`.
+- `PROGRAM_STATUS.md`: records `CGP_006_IWP_0002_POST_MERGE_FINDINGS_CORRECTED_CUSTODY_REFRESHED_AND_SCOPE_LIMITED_CLOSURE_COMPLETE` with closure effective event `VERIFIED_PROTECTED_MERGE_OF_REFRESHED_PR_72_POST_MERGE_CUSTODY_AND_CLOSURE`.
 
-Because closure condition 6 failed after post-merge review, this draft custody PR intentionally makes no canonical closure update and creates no append-only closure overlay. The correct current disposition is not-yet-closed pending Founder review or separately authorized correction.
+`PR_62_GAP_FINDING_AND_IWP_CUSTODY_TABLE.csv` remains historical custody evidence and is not rewritten.

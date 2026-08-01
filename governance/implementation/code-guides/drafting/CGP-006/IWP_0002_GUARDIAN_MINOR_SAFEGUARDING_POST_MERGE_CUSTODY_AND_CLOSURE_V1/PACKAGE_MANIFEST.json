@@ -1,75 +1,108 @@
 {
+  "closure_effective_event": "VERIFIED_PROTECTED_MERGE_OF_REFRESHED_PR_72_POST_MERGE_CUSTODY_AND_CLOSURE",
+  "corrected_protected_head": "a5461072b36fd991b4cfcba343e53aa83d70df66",
+  "corrective_merge_commit": "a5461072b36fd991b4cfcba343e53aa83d70df66",
+  "corrective_pr": 75,
+  "directive_id": "CGP_006_IWP_0002_POST_MERGE_FINDING_CORRECTION_CUSTODY_REFRESH_AND_CONDITIONAL_CLOSURE_CONTINUATION_DIRECTIVE_V1_0_0",
   "files": {
     "AUTHORIZED_PATH_REPORT.md": {
-      "bytes": 567,
-      "sha256": "3c8b007718908a808745e7c9efb814fbc228a3e4071149ddf44281d11dd88d67"
+      "bytes": 1546,
+      "sha256": "ec3800e3a3e4e720651ffa7d695f114138b31b63fccd95c30cbce191c74e0e8d"
+    },
+    "BLOCKED_CUSTODY_HISTORICAL_RECORD.md": {
+      "bytes": 844,
+      "sha256": "7c75cb3e1993a64f192ab757ebbca14eda7055a3ac144d73a034511e5f333c70"
     },
     "CANONICAL_STATUS_REGISTER_RECONCILIATION.md": {
-      "bytes": 875,
-      "sha256": "9d2d820f8e675603a9631e93c2ef2200cb50eff97e4f769a79d62e635ce4e034"
+      "bytes": 1072,
+      "sha256": "8c11de4671742bb2cd3c55286fb3096fb1fe34bbaddded706f0208ed6a06861d"
     },
     "CLOSURE_CRITERIA_SATISFACTION_MATRIX.csv": {
-      "bytes": 1143,
-      "sha256": "20d999ffc1b2d8b1aba7fb0b7ac37a8396c193c5d669ae1018c29443e0f8fd3c"
+      "bytes": 1462,
+      "sha256": "31586d5b5fe815f006acc64a7c5b48f76f3f6180c0bb921e3451ad64de089a20"
+    },
+    "CORRECTED_PROTECTED_HEAD_AND_FILE_IDENTITY_RECORD.json": {
+      "bytes": 11066,
+      "sha256": "3f2f7cbdf62fb884a5f3867679f19acd655ef4499c3458f5001ac545c08fbfcf"
+    },
+    "CORRECTIVE_TEST_EVIDENCE_CUSTODY.csv": {
+      "bytes": 1233,
+      "sha256": "a48deb839f03b7a886dbcf4522ef4673c98eb5bb38fd55f7a7442aecbb4badc3"
     },
     "DIRECTIVE_EXECUTION_RECORD.md": {
-      "bytes": 945,
-      "sha256": "82ea2a3280335ffc825132f17c8f1967eda8d408e6092c943a8ba92e06d17c87"
+      "bytes": 1839,
+      "sha256": "dcfeba20e5253b2ead0abc43dd459f21dccbfd4be952a0943a89fab119a4b9db"
+    },
+    "FINAL_REVIEW_THREAD_RESOLUTION_RECORD.md": {
+      "bytes": 956,
+      "sha256": "fc3b04b0ac14b2e8a2c3f46154b03205ddcc8f0e3ed3c97faa4be05667cf9fba"
     },
     "FINDING_AND_GAP_CLOSURE_DISPOSITION.md": {
-      "bytes": 773,
-      "sha256": "98e487c6d07471c26de83ce7cb29b30b3e9d93d9c4635a8af3e31a641988fa81"
+      "bytes": 1129,
+      "sha256": "7ddef3d5adda303287a42faa71f561d3362f9a34572c1c4ba7b9e63ae0a99101"
     },
     "FOUNDER_CONDITIONAL_CLOSURE_AUTHORITY_RECORD.md": {
-      "bytes": 796,
-      "sha256": "6261d93d89c25b55cb4a11c6db46e91a3630e0bcd07c90508a56a2d8bad78043"
+      "bytes": 1399,
+      "sha256": "7d5f0c652a6bbcc50c48458d5e5ee82cf1be67307abd6fc97fa8476aa569b2fa"
     },
     "IMPLEMENTATION_EVIDENCE_CUSTODY_REGISTER.csv": {
       "bytes": 13250,
       "sha256": "c7698111be39edb32d35363f8891ff5e299cb8da43744481f4f26a00485901a0"
     },
     "IMPLEMENTATION_PR_MERGE_RECEIPT.md": {
-      "bytes": 1113,
-      "sha256": "c948ad8b75ab6a55b712931dfe29ab48539761fb60860c3cd6fa4260c1f90628"
+      "bytes": 872,
+      "sha256": "9c9fa067f0ba636f2d6f03f76daa7906f7d2c280be502164f61b763b4a4f1a12"
+    },
+    "POST_MERGE_CORRECTIVE_PR_MERGE_RECEIPT.md": {
+      "bytes": 1294,
+      "sha256": "0dad0a2f7cb54d6dcc52ba1a4138842d801cbc3954df1cca345cc51b6e63b9d4"
+    },
+    "POST_MERGE_FINDINGS_CORRECTION_CUSTODY_RECORD.md": {
+      "bytes": 2099,
+      "sha256": "cfa625bc02c1729babc74532a8964be3f86a52b48d10a1425e60beffde3d0089"
     },
     "PROTECTED_HEAD_AND_MERGED_FILE_IDENTITY_RECORD.json": {
-      "bytes": 23023,
-      "sha256": "545a76a15660e1d05108d2162648dcce0cb94e649793e0cff48ab541aec17a23"
+      "bytes": 1402,
+      "sha256": "1ae88d797479dd3b08e401cc7e19b9f58b0376978aa552d0634e060c484477d2"
     },
     "README.md": {
-      "bytes": 667,
-      "sha256": "839ec9ea02f1030ff3bb9b20ca0c2b83cd268dbb20e4d53a94466978298224b4"
+      "bytes": 1194,
+      "sha256": "cf97502a2763ea9ed7a8c53aa148c87ee436045df45d92efb4bb93f2e5258be7"
     },
     "REGRESSION_AND_ABUSE_TEST_CUSTODY_RECORD.csv": {
-      "bytes": 560,
-      "sha256": "8abab29788b0b8be99178a97e721d3dce637ed863fe4206234d12831d3e91908"
+      "bytes": 956,
+      "sha256": "8ea3724cc97b3c7733179f36da721d5dfdc4bf9651ead5b3091c845a62a364d8"
     },
     "REVIEW_AND_CORRECTION_CUSTODY_RECORD.md": {
-      "bytes": 780,
-      "sha256": "c0ea297c637bf8860a4f571dd57407ed312a44bae0d083bd74b7a890fd7c1d7e"
+      "bytes": 864,
+      "sha256": "8ebfd8080c2af9f0b7452289602aadf7e839223fcf604f6baf883af2557e11a3"
     },
     "SCHEMA_INDEX_AND_ROLLBACK_CUSTODY_RECORD.md": {
-      "bytes": 591,
-      "sha256": "fc9984014e492ba7dc1fcc44553f7ed9d83a26565d2543cf86565feab40b0e7a"
+      "bytes": 671,
+      "sha256": "cafd37e9645dcaf9535b0b5b67f5f51b3dc55066cf531ccd08cb8740f7fa900a"
+    },
+    "UPDATED_CLOSURE_CRITERIA_SATISFACTION_MATRIX.csv": {
+      "bytes": 1715,
+      "sha256": "687c38d761a8357f192be809f97aa4eea2f5ef002670f7d2538d3a9b27c0c9b4"
     },
     "VALIDATION_REPORT.md": {
-      "bytes": 965,
-      "sha256": "fb92455d7330966d760ca4efb69796b5779ab28c37a841f6a753142f40eab98c"
+      "bytes": 2099,
+      "sha256": "a70c452b94da6470a1a9c8b1229ae6aec51fe5297400874ebfaf542a9326f3a8"
     },
     "WORKFLOW_ENFORCEMENT_POST_MERGE_VERIFICATION.csv": {
-      "bytes": 1155,
-      "sha256": "8e975447c1a54c0af9675ba06455fecdc8b322b0e2b9425dd0005b928d407855"
+      "bytes": 1278,
+      "sha256": "db4b475930fbace5b5d2fdd120cb2e91694485b176a21e9222af59ba8fa091ae"
     },
     "validate_post_merge_custody_package.py": {
-      "bytes": 2974,
-      "sha256": "8f32be0e3b0fa70db20e14f8f95c22ff7e7d2efd048a171dcc63744c5758072a"
+      "bytes": 7919,
+      "sha256": "6d3a43dd099aacc582a2f29e735dcede89030d69898d5452bdbe9065a600e84b"
     }
   },
   "implementation_merge_commit": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
   "implementation_pr": 71,
   "package_id": "CGP006-IWP-0002-POST-MERGE-CUSTODY-AND-CLOSURE-V1",
-  "protected_head": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
-  "recorded_at": "2026-08-01T07:24:49Z",
+  "recorded_at": "2026-08-01T10:37:39Z",
   "repository": "rianray2012-coder/EquineSync-V4",
-  "status": "CGP_006_IWP_0002_POST_MERGE_CUSTODY_COMPLETE_CLOSURE_BLOCKED_PENDING_FOUNDER_REVIEW"
+  "status": "CGP_006_IWP_0002_POST_MERGE_FINDINGS_CORRECTED_CUSTODY_REFRESHED_AND_SCOPE_LIMITED_CLOSURE_READY_FOR_PROTECTED_MERGE",
+  "terminal_status_after_pr72_protected_merge": "CGP_006_IWP_0002_POST_MERGE_FINDINGS_CORRECTED_CUSTODY_REFRESHED_AND_SCOPE_LIMITED_CLOSURE_COMPLETE"
 }
