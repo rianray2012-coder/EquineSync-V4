@@ -1,0 +1,9 @@
+requirement_id,product_domain,permission_gate,backend_path,frontend_path,test_path,current_disposition
+T1D03-REQ-001,Identity Account Actor,PERMISSION_GATE_REQUIRED,backend/routes/auth.py,frontend/src/context/AuthContext.jsx,backend/tests/test_auth_tokens.py,MAPPED_WITH_RETAINED_EXECUTION_EVIDENCE_GAP
+T1D03-REQ-002,Permission And Access Control,PERMISSION_GATE_REQUIRED,backend/core/permissions.py,frontend/src/lib/permissions.js,backend/tests/test_permissions.py,MAPPED_WITH_RETAINED_EXECUTION_EVIDENCE_GAP
+T1D03-REQ-003,Billing Payments Financial Operations,PERMISSION_GATE_REQUIRED,backend/routes/billing.py,frontend/src/pages/Billing.jsx,backend/tests/test_billing_scoping.py,MAPPED_WITH_RETAINED_EXECUTION_EVIDENCE_GAP
+T1D03-REQ-004,Care Operations,PERMISSION_GATE_REQUIRED,backend/routes/care.py,frontend/src/features/care,backend/tests/test_care_routes.py,MAPPED_WITH_RETAINED_EXECUTION_EVIDENCE_GAP
+T1D03-REQ-005,Horse Identity Profile Lifecycle,PERMISSION_GATE_REQUIRED,backend/routes/horses.py,frontend/src/pages/Horses.jsx,backend/tests/test_horse_ledger_1a.py,MAPPED_WITH_RETAINED_EXECUTION_EVIDENCE_GAP
+T1D03-REQ-006,Lessons Training Rider Guardian,PERMISSION_GATE_REQUIRED,backend/routes/student_guardians.py,frontend/src/pages/GuardianIntake.jsx,backend/tests/test_build_next_5c_minor_communication_guard.py,MAPPED_WITH_RETAINED_EXECUTION_EVIDENCE_GAP
+T1D03-REQ-007,Audit Event And Evidence,PERMISSION_GATE_REQUIRED,backend/routes/audit.py,backend/core/audit.py,backend/tests/test_logging_10a.py,MAPPED_WITH_RETAINED_EXECUTION_EVIDENCE_GAP
+T1D03-REQ-008,Deployment And Release Control,PERMISSION_GATE_REQUIRED,governance/implementation/deployment-control/2026-07-26-release-branch-separation/PRODUCTION_RELEASE_PROCEDURE.md,.github/workflows/ci.yml,backend/tests/test_build_next_11_staging_environment_proof.py,MAPPED_WITH_RETAINED_EXECUTION_EVIDENCE_GAP

@@ -1,0 +1,3 @@
+conflict_id,source_a,source_b,conflict_type,resolution_rule,closure_criterion,current_disposition
+T1D03-CONFLICT-001,Protected repository evidence,Unmerged PR candidate evidence,AUTHORITY_AND_BASELINE,Protected source controls current state; unmerged PR is contextual candidate input only.,Merged/adopted/custody evidence or explicit Founder disposition.,RESOLVED_BY_PRECEDENCE_RULE
+T1D03-CONFLICT-002,Test file presence,Executed test result,EVIDENCE_STATUS,"Presence is not execution; execution requires command, environment, commit, and result.",Validated execution record.,RESOLVED_BY_EVIDENCE_RULE

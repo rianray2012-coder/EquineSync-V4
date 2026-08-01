@@ -1,0 +1,9 @@
+recovery_id,requirement_id,failure_mode,retry_rule,rollback_rule,recovery_evidence,current_disposition
+T1D03-REC-001,T1D03-REQ-001,MISSING_EVIDENCE_OR_RUNTIME_DRIFT,Retry only under bounded test or review authority.,Rollback requires source and evidence preservation.,RECOVERY_EVIDENCE_REQUIRED,RULE_DEFINED_EVIDENCE_REQUIRED
+T1D03-REC-002,T1D03-REQ-002,MISSING_EVIDENCE_OR_RUNTIME_DRIFT,Retry only under bounded test or review authority.,Rollback requires source and evidence preservation.,RECOVERY_EVIDENCE_REQUIRED,RULE_DEFINED_EVIDENCE_REQUIRED
+T1D03-REC-003,T1D03-REQ-003,MISSING_EVIDENCE_OR_RUNTIME_DRIFT,Retry only under bounded test or review authority.,Rollback requires source and evidence preservation.,RECOVERY_EVIDENCE_REQUIRED,RULE_DEFINED_EVIDENCE_REQUIRED
+T1D03-REC-004,T1D03-REQ-004,MISSING_EVIDENCE_OR_RUNTIME_DRIFT,Retry only under bounded test or review authority.,Rollback requires source and evidence preservation.,RECOVERY_EVIDENCE_REQUIRED,RULE_DEFINED_EVIDENCE_REQUIRED
+T1D03-REC-005,T1D03-REQ-005,MISSING_EVIDENCE_OR_RUNTIME_DRIFT,Retry only under bounded test or review authority.,Rollback requires source and evidence preservation.,RECOVERY_EVIDENCE_REQUIRED,RULE_DEFINED_EVIDENCE_REQUIRED
+T1D03-REC-006,T1D03-REQ-006,MISSING_EVIDENCE_OR_RUNTIME_DRIFT,Retry only under bounded test or review authority.,Rollback requires source and evidence preservation.,RECOVERY_EVIDENCE_REQUIRED,RULE_DEFINED_EVIDENCE_REQUIRED
+T1D03-REC-007,T1D03-REQ-007,MISSING_EVIDENCE_OR_RUNTIME_DRIFT,Retry only under bounded test or review authority.,Rollback requires source and evidence preservation.,RECOVERY_EVIDENCE_REQUIRED,RULE_DEFINED_EVIDENCE_REQUIRED
+T1D03-REC-008,T1D03-REQ-008,MISSING_EVIDENCE_OR_RUNTIME_DRIFT,Retry only under bounded test or review authority.,Rollback requires source and evidence preservation.,RECOVERY_EVIDENCE_REQUIRED,RULE_DEFINED_EVIDENCE_REQUIRED

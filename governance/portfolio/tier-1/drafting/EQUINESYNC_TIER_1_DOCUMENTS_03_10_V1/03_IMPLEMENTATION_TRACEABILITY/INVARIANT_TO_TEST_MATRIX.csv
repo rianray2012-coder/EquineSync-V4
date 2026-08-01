@@ -1,0 +1,9 @@
+invariant_id,requirement_id,test_id,test_path,test_specified,test_exists,test_executed,test_passed,test_waived,runtime_evidence_available,closure_certified
+T1D03-INV-001,T1D03-REQ-001,T1D03-TEST-001,backend/tests/test_auth_tokens.py,TRUE,TRUE,FALSE,NOT_CLAIMED,FALSE,FALSE,FALSE
+T1D03-INV-002,T1D03-REQ-002,T1D03-TEST-002,backend/tests/test_permissions.py,TRUE,TRUE,FALSE,NOT_CLAIMED,FALSE,FALSE,FALSE
+T1D03-INV-003,T1D03-REQ-003,T1D03-TEST-003,backend/tests/test_billing_scoping.py,TRUE,TRUE,FALSE,NOT_CLAIMED,FALSE,FALSE,FALSE
+T1D03-INV-004,T1D03-REQ-004,T1D03-TEST-004,backend/tests/test_care_routes.py,TRUE,TRUE,FALSE,NOT_CLAIMED,FALSE,FALSE,FALSE
+T1D03-INV-005,T1D03-REQ-005,T1D03-TEST-005,backend/tests/test_horse_ledger_1a.py,TRUE,TRUE,FALSE,NOT_CLAIMED,FALSE,FALSE,FALSE
+T1D03-INV-006,T1D03-REQ-006,T1D03-TEST-006,backend/tests/test_build_next_5c_minor_communication_guard.py,TRUE,TRUE,FALSE,NOT_CLAIMED,FALSE,FALSE,FALSE
+T1D03-INV-007,T1D03-REQ-007,T1D03-TEST-007,backend/tests/test_logging_10a.py,TRUE,TRUE,FALSE,NOT_CLAIMED,FALSE,FALSE,FALSE
+T1D03-INV-008,T1D03-REQ-008,T1D03-TEST-008,backend/tests/test_build_next_11_staging_environment_proof.py,TRUE,TRUE,FALSE,NOT_CLAIMED,FALSE,FALSE,FALSE

@@ -1,0 +1,83 @@
+{
+  "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "file_count_excluding_manifest_and_checksum": 15,
+  "files": [
+    {
+      "byte_length": 2217,
+      "path": "AUDIT_EVENT_AND_EVIDENCE_MATRIX.csv",
+      "sha256": "bb4f306f0ab0d31cac58c0820e61e9a6a65f6e19807d8cc215323fc34f9e2cff"
+    },
+    {
+      "byte_length": 4136,
+      "path": "CANONICAL_GUIDE_TO_REQUIREMENT_MATRIX.csv",
+      "sha256": "4db6b3365c36d24bc69faaf2185de7bd9cf0893cc8420171efed3dbaef8deccf"
+    },
+    {
+      "byte_length": 4107,
+      "path": "CONTROL_TO_FEATURE_SERVICE_AND_OWNER_MAP.csv",
+      "sha256": "56059bc3222f654aae0e3063b8fe00de1a6c6afa3da9aaecb35e0af8aeff92b5"
+    },
+    {
+      "byte_length": 7670,
+      "path": "EQUINESYNC_MASTER_IMPLEMENTATION_MAPPING_REQUIREMENT_TEST_AND_EVIDENCE_TRACEABILITY_PACKAGE_V1_0.md",
+      "sha256": "381814795dc413e7154463e355280b28f8b4dfdd7667044f566619bb4f8db5d7"
+    },
+    {
+      "byte_length": 1896,
+      "path": "FAILURE_RETRY_ROLLBACK_AND_RECOVERY_MATRIX.csv",
+      "sha256": "91016c1eee6e332ee1211aa24137b54d6746ce4c7c22dd25d008be41540f708c"
+    },
+    {
+      "byte_length": 1213,
+      "path": "INVARIANT_TO_TEST_MATRIX.csv",
+      "sha256": "6b9b3cb4e7a6f88425ed5b2e796b4afdfc4672923353017497896fb678f16ad3"
+    },
+    {
+      "byte_length": 3080,
+      "path": "OPEN_TRACEABILITY_GAP_REGISTER.csv",
+      "sha256": "69838bb560d91e35e17c55904b0c2e1ac246d09379ba9fd26915fe24490f1d1b"
+    },
+    {
+      "byte_length": 1881,
+      "path": "PERMISSION_ENFORCEMENT_MATRIX.csv",
+      "sha256": "b45a9abf700be48070d08e6fd724f2c265caecaeaf20c0296968830c6d7521ef"
+    },
+    {
+      "byte_length": 605,
+      "path": "REQUIREMENT_CONFLICT_RESOLUTION_REGISTER.csv",
+      "sha256": "f7f28a02c1e583e77993174b2ebb7ee4fb77376d0a62e18492c8d909a2a64a7b"
+    },
+    {
+      "byte_length": 10493,
+      "path": "REQUIREMENT_TO_IMPLEMENTATION_MAP.csv",
+      "sha256": "eadcbb2984c5f0607b90726294e89598fdec74107b4d4e70b48bb6384a4056b6"
+    },
+    {
+      "byte_length": 19071,
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "af023c2590c2a7624ceba67b1770dea940ddfddf263d9ce857ef33215f38e223"
+    },
+    {
+      "byte_length": 25947,
+      "path": "TRACEABILITY_MODEL.json",
+      "sha256": "b3ae96b285e5383d4d1789395d74b2e645ae37e7f31eda849f12933530825f97"
+    },
+    {
+      "byte_length": 612,
+      "path": "TRACEABILITY_VALIDATION_REPORT.md",
+      "sha256": "32336399bd142b175d2c1fba186c4f179bf181bfe9d1bfc37efff063a84d4f32"
+    },
+    {
+      "byte_length": 540,
+      "path": "tests/test_document_03.py",
+      "sha256": "ab96e085153fa1437e14d7ac7a831f617c92604f74954b6171cc46f378397bfb"
+    },
+    {
+      "byte_length": 2413,
+      "path": "validators/validate_document_03.py",
+      "sha256": "6b2e46214b629164fefeba4ef6e126e256bd82656df2468ed0975e9eb5e2ea51"
+    }
+  ],
+  "generated_at": "2026-08-01T15:39:10Z",
+  "package_root": "03_IMPLEMENTATION_TRACEABILITY"
+}
