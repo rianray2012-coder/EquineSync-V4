@@ -417,6 +417,52 @@ def _workflow_scope(workflow: str) -> str:
     return WORKFLOW_AUTHORITY_SCOPES.get((workflow or "").strip().lower(), "")
 
 
+def student_workflow_scope(student_profile_id: Any, workflow: str) -> str:
+    student_id = str(student_profile_id or "").strip()
+    workflow_key = (workflow or "").strip().lower()
+    return f"student:{student_id}:workflow:{workflow_key}" if student_id and workflow_key else ""
+
+
+def workflow_scope(workflow: str) -> str:
+    workflow_key = (workflow or "").strip().lower()
+    return f"workflow:{workflow_key}" if workflow_key else ""
+
+
+def _consent_scope_matches(
+    *,
+    consent: Dict[str, Any],
+    student_id: Any,
+    workflow: str,
+    scope_reference: Optional[str],
+) -> bool:
+    expected_scope = str(scope_reference or "").strip()
+    actual_scope = str(consent.get("scope_reference") or "").strip()
+    if not actual_scope:
+        return False
+    if expected_scope and actual_scope == expected_scope:
+        return True
+    student_scope = student_workflow_scope(student_id, workflow)
+    if actual_scope == student_scope:
+        return True
+    if (consent.get("scope_level") or "").strip().lower() == "workflow" and actual_scope == workflow_scope(workflow):
+        return True
+    return False
+
+
+def _legacy_link_barn_proven(link: Dict[str, Any], *, student: Dict[str, Any], barn_id: str) -> bool:
+    student_barn = str(student.get("barn_id") or "").strip()
+    active_barn = str(barn_id or "").strip()
+    if not active_barn or student_barn != active_barn:
+        return False
+    if link.get("barn_id"):
+        return str(link.get("barn_id")).strip() == active_barn
+    if str(link.get("migration_verified_barn_id") or "").strip() == active_barn:
+        return True
+    if str(link.get("legacy_barn_id") or "").strip() == active_barn:
+        return True
+    return bool(link.get("barn_scope_verified") or link.get("legacy_barn_scope_verified"))
+
+
 def _public_code_for_workflow(workflow: str, internal_reason: str) -> str:
     if internal_reason == INTERNAL_AUTHORIZATION_STATE_CHANGED_RETRY_REQUIRED:
         return PUBLIC_CODE_AUTHORIZATION_CHANGED_RETRY
@@ -590,7 +636,7 @@ def _link_failure_reason(
     required_scope: str,
     as_of: datetime,
 ) -> Optional[str]:
-    if (link.get("barn_id") or barn_id) != barn_id or link.get("barn_id") != student.get("barn_id"):
+    if not _legacy_link_barn_proven(link, student=student, barn_id=barn_id):
         return INTERNAL_GUARDIAN_CROSS_BARN
     status = (link.get("status") or "").strip().lower()
     if status != GUARDIAN_LINK_ACTIVE:
@@ -616,6 +662,7 @@ def _link_failure_reason(
 def _consent_failure_reason(
     consent: Dict[str, Any],
     *,
+    student_id: Any,
     barn_id: str,
     workflow: str,
     scope_reference: Optional[str],
@@ -635,9 +682,12 @@ def _consent_failure_reason(
         return INTERNAL_WORKFLOW_CONSENT_REQUIRED
     if _is_expired(consent.get("expires_at"), as_of):
         return INTERNAL_WORKFLOW_CONSENT_EXPIRED
-    expected_scope = str(scope_reference or "").strip()
-    actual_scope = str(consent.get("scope_reference") or "").strip()
-    if expected_scope and actual_scope != expected_scope:
+    if not _consent_scope_matches(
+        consent=consent,
+        student_id=student_id,
+        workflow=workflow,
+        scope_reference=scope_reference,
+    ):
         return INTERNAL_WORKFLOW_CONSENT_SCOPE_MISMATCH
     expected_version = str(policy_version or "").strip()
     actual_version = str(consent.get("policy_version") or "").strip()
@@ -817,6 +867,7 @@ def guardian_minor_workflow_gate(
                 continue
             failure = _consent_failure_reason(
                 consent,
+                student_id=student_id,
                 barn_id=active_barn_id or "",
                 workflow=workflow_key,
                 scope_reference=scope_reference,
@@ -893,7 +944,14 @@ async def load_guardian_minor_authority_rows(
     workflow_key = (workflow or "").strip().lower()
     for student_id in _clean_id_list(student_profile_ids):
         found_links = await db[GUARDIAN_LINK_COLLECTION].find(
-            {"barn_id": barn_id, "student_profile_id": student_id},
+            {
+                "student_profile_id": student_id,
+                "$or": [
+                    {"barn_id": barn_id},
+                    {"barn_id": None},
+                    {"barn_id": {"$exists": False}},
+                ],
+            },
             {"_id": 0},
         ).to_list(100)
         links.extend(found_links)

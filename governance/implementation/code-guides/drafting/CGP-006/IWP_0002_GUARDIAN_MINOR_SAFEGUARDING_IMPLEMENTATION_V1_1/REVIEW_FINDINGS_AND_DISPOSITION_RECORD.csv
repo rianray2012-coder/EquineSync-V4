@@ -16,3 +16,10 @@ GMS-RR-014,P2,payment,Payment authority ambiguous,RESOLVED_IN_IMPLEMENTATION,Pay
 GMS-RR-015,P2,audit,Audit privacy unclear,RESOLVED_IN_IMPLEMENTATION,Safe metadata projection excludes private body/legal/payment details.
 GMS-RR-016,P2,cache,Immediate revocation/cache invalidation unclear,RESOLVED_IN_TESTS,State-token/revocation tests implemented.
 GMS-RR-017,P2,rollback,Mixed-version rollback risk,RESOLVED_BY_PLAN,Rollback/suspension record preserves fail-closed fallback.
+GMS-RR-018,P1,messaging_participants,PR #71 Bugbot found omitted participant lookup,RESOLVED_IN_CORRECTIVE_REVISION,Message guard resolves participants through student profiles riders and guardian links; GMS-T-044 through GMS-T-046 pass.
+GMS-RR-019,P1,unlinked_riders,PR #71 Bugbot found unlinked rider bypass,RESOLVED_IN_CORRECTIVE_REVISION,Unknown-age riders remain guarded subjects; explicit adult RF9 positive control passes.
+GMS-RR-020,P1,consent_scope,PR #71 Bugbot found minted create scopes,RESOLVED_IN_CORRECTIVE_REVISION,Student workflow and stable billing/event scopes added; GMS-T-047 and GMS-T-053 pass.
+GMS-RR-021,P1,commit_revalidation,PR #71 Bugbot found route callers omitted expected state tokens,RESOLVED_IN_CORRECTIVE_REVISION,Guard state tokens are persisted and enforced across guarded transitions; GMS-T-048 GMS-T-051 GMS-T-054 pass.
+GMS-RR-022,P2,legacy_barn_links,PR #71 Bugbot found inconsistent missing barn_id treatment,RESOLVED_IN_CORRECTIVE_REVISION,Legacy links without barn proof fail closed; verified proof allows; GMS-T-049 and GMS-T-050 pass.
+GMS-RR-023,P2,payment_subject_resolution,PR #71 Bugbot found payment guard skipped unlinked invoices,RESOLVED_IN_CORRECTIVE_REVISION,Payment subjects resolve through student rider horse owner and guardian-link relationships; GMS-T-052 and GMS-T-053 pass.
+GMS-RR-024,P2,event_approval,PR #71 Bugbot found approval bypass,RESOLVED_IN_CORRECTIVE_REVISION,Event approval re-runs the central guard before approval; GMS-T-051 passes.

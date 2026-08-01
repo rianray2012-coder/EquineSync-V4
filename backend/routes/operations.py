@@ -38,6 +38,7 @@ from core.minor_safety import (
     load_guardian_minor_authority_rows,
     minor_status_for_student,
     normalize_minor_status,
+    student_workflow_scope,
 )
 from core.permissions import require
 from core.tenancy import barn_filter, stamp_barn
@@ -92,6 +93,8 @@ async def _stamp_trainer_identity(db, user: Dict[str, Any], doc: Dict[str, Any])
 class LessonIn(BaseModel):
     rider_id: str
     student_profile_id: Optional[str] = None
+    guardian_guard_scope_reference: Optional[str] = None
+    guardian_state_token: Optional[str] = None
     horse_id: Optional[str] = None
     trainer_id: Optional[str] = None
     start_time: str
@@ -104,6 +107,8 @@ class LessonIn(BaseModel):
 class TrainingSessionIn(BaseModel):
     horse_id: str
     student_profile_id: Optional[str] = None
+    guardian_guard_scope_reference: Optional[str] = None
+    guardian_state_token: Optional[str] = None
     trainer_id: Optional[str] = None
     date: str
     discipline: Optional[str] = None
@@ -129,6 +134,8 @@ class ServiceRequestIn(BaseModel):
     horse_id: str
     type: str
     student_profile_id: Optional[str] = None
+    guardian_guard_scope_reference: Optional[str] = None
+    guardian_state_token: Optional[str] = None
     event_id: Optional[str] = None
     event_policy_version: Optional[str] = None
     details: Optional[str] = None
@@ -187,8 +194,6 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
                 "barn_id": rider.get("barn_id") or user.get("barn_id") or "primary",
                 "minor_status": MINOR_STATUS_UNKNOWN,
             }
-        if not any(rider.get(field) is not None for field in ("minor_status", "birthdate", "age")):
-            return None
         minor_status = normalize_minor_status(rider.get("minor_status") or MINOR_STATUS_UNKNOWN)
         if minor_status == MINOR_STATUS_UNKNOWN and rider.get("age") is not None:
             minor_status = _minor_status_from_age(rider.get("age"))
@@ -225,9 +230,26 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
                 {"_id": 0},
             )
         from_rider = await _student_from_rider(user, rider_row)
-        if from_rider and from_rider.get("id") not in {student.get("id") for student in students}:
+        if from_rider and explicit_student:
+            linked_id = rider_row.get("student_profile_id") if rider_row else None
+            if linked_id and linked_id != explicit_student.get("id"):
+                students.append(from_rider)
+        elif from_rider and from_rider.get("id") not in {student.get("id") for student in students}:
             students.append(from_rider)
         return students
+
+    def _guarded_scope_reference(workflow: str, students: list[Dict[str, Any]], explicit_scope: Optional[str], fallback: str) -> str:
+        if explicit_scope and explicit_scope.strip():
+            return explicit_scope.strip()
+        guarded = [
+            student for student in students
+            if minor_status_for_student(student) != MINOR_STATUS_ADULT
+        ]
+        if len(guarded) == 1:
+            scoped = student_workflow_scope(guarded[0].get("id"), workflow)
+            if scoped:
+                return scoped
+        return fallback
 
     async def _enforce_guarded_students(
         *,
@@ -235,18 +257,22 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         workflow: str,
         scope_reference: str,
         policy_version: str,
+        expected_state_token: Optional[str] = None,
         action: str,
         request: Request,
         user: Dict[str, Any],
         status_code: int = 409,
-    ) -> None:
+    ) -> Dict[str, Any]:
         barn_id = user.get("barn_id") or "primary"
-        links, consents = await load_guardian_minor_authority_rows(
-            db,
-            barn_id=barn_id,
-            student_profile_ids=[student.get("id") for student in students],
-            workflow=workflow,
-        )
+        if students and all(minor_status_for_student(student) == MINOR_STATUS_ADULT for student in students):
+            links, consents = [], []
+        else:
+            links, consents = await load_guardian_minor_authority_rows(
+                db,
+                barn_id=barn_id,
+                student_profile_ids=[student.get("id") for student in students],
+                workflow=workflow,
+            )
         gate = guardian_minor_workflow_gate(
             workflow=workflow,
             students=students,
@@ -255,10 +281,11 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             barn_id=barn_id,
             scope_reference=scope_reference,
             policy_version=policy_version,
+            expected_state_token=expected_state_token,
             action=action,
         )
         if gate["decision"] == DECISION_ALLOW:
-            return
+            return gate
         await audit.record(
             action="guardian_minor.workflow_blocked",
             user=user,
@@ -305,15 +332,25 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             student_profile_id=body.student_profile_id,
             rider=rider,
         )
-        await _enforce_guarded_students(
+        guard_scope = _guarded_scope_reference(
+            WORKFLOW_LESSON_READY,
+            students,
+            body.guardian_guard_scope_reference,
+            f"lesson:{doc['id']}",
+        )
+        gate = await _enforce_guarded_students(
             students=students,
             workflow=WORKFLOW_LESSON_READY,
-            scope_reference=f"lesson:{doc['id']}",
+            scope_reference=guard_scope,
             policy_version="lesson-ready-v1",
+            expected_state_token=body.guardian_state_token,
             action="lesson.create",
             request=request,
             user=user,
         )
+        doc["guardian_guard_scope_reference"] = guard_scope
+        doc["guardian_guard_policy_version"] = "lesson-ready-v1"
+        doc["guardian_guard_state_token"] = gate.get("state_token")
         await db.lessons.insert_one(doc)
         return clean(doc)
 
@@ -341,15 +378,25 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             student_profile_id=body.student_profile_id,
             horse=horse,
         )
-        await _enforce_guarded_students(
+        guard_scope = _guarded_scope_reference(
+            WORKFLOW_LESSON_READY,
+            students,
+            body.guardian_guard_scope_reference,
+            f"training:{doc['id']}",
+        )
+        gate = await _enforce_guarded_students(
             students=students,
             workflow=WORKFLOW_LESSON_READY,
-            scope_reference=f"training:{doc['id']}",
+            scope_reference=guard_scope,
             policy_version="lesson-ready-v1",
+            expected_state_token=body.guardian_state_token,
             action="training.create",
             request=request,
             user=user,
         )
+        doc["guardian_guard_scope_reference"] = guard_scope
+        doc["guardian_guard_policy_version"] = "lesson-ready-v1"
+        doc["guardian_guard_state_token"] = gate.get("state_token")
         await db.training.insert_one(doc)
         return clean(doc)
 
@@ -452,15 +499,25 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
                 student_profile_id=body.student_profile_id,
                 horse=horse,
             )
-            await _enforce_guarded_students(
+            guard_scope = _guarded_scope_reference(
+                WORKFLOW_EVENT_SIGNUP,
+                students,
+                body.guardian_guard_scope_reference or (f"event:{body.event_id}" if body.event_id else None),
+                f"service_request:{doc['id']}",
+            )
+            gate = await _enforce_guarded_students(
                 students=students,
                 workflow=WORKFLOW_EVENT_SIGNUP,
-                scope_reference=body.event_id or f"service_request:{doc['id']}",
+                scope_reference=guard_scope,
                 policy_version=body.event_policy_version or "event-signup-v1",
+                expected_state_token=body.guardian_state_token,
                 action="service_request.event_signup.create",
                 request=request,
                 user=user,
             )
+            doc["guardian_guard_scope_reference"] = guard_scope
+            doc["guardian_guard_policy_version"] = body.event_policy_version or "event-signup-v1"
+            doc["guardian_guard_state_token"] = gate.get("state_token")
         await db.service_requests.insert_one(doc)
         return clean(doc)
 
@@ -473,6 +530,30 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             raise HTTPException(404, "Service request not found")
         if existing.get("status") != "pending":
             raise HTTPException(409, f"Request is already {existing.get('status')}")
+        if (existing.get("type") or "").strip().lower() in {"event_signup", "community_program_signup"}:
+            horse = None
+            if existing.get("horse_id"):
+                horse = await db.horses.find_one(barn_filter(user, {"id": existing["horse_id"]}), {"_id": 0})
+            students = await _students_for_subjects(
+                user=user,
+                student_profile_id=existing.get("student_profile_id"),
+                horse=horse,
+            )
+            gate = await _enforce_guarded_students(
+                students=students,
+                workflow=WORKFLOW_EVENT_SIGNUP,
+                scope_reference=existing.get("guardian_guard_scope_reference")
+                or (f"event:{existing.get('event_id')}" if existing.get("event_id") else f"service_request:{sr_id}"),
+                policy_version=existing.get("guardian_guard_policy_version") or existing.get("event_policy_version") or "event-signup-v1",
+                expected_state_token=existing.get("guardian_guard_state_token"),
+                action="service_request.event_signup.approve",
+                request=request,
+                user=user,
+            )
+            await db.service_requests.update_one(
+                scope,
+                {"$set": {"guardian_guard_state_token": gate.get("state_token")}},
+            )
         now = _iso(_now_utc())
         await db.service_requests.update_one(
             scope,

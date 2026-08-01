@@ -86,6 +86,7 @@ class DocumentRequestCreate(BaseModel):
     subject_user_id: Optional[str] = None
     subject_student_profile_id: Optional[str] = None
     minor_status: Optional[str] = None
+    guardian_state_token: Optional[str] = None
     guardian_user_ids: List[str] = Field(default_factory=list)
     facility_countersigner_user_id: Optional[str] = None
     platform_countersigner_user_id: Optional[str] = None
@@ -198,10 +199,11 @@ def build_router(*, get_current_user, db=None) -> APIRouter:
         guardian_user_ids: List[str],
         scope_reference: str,
         policy_version: str,
+        expected_state_token: Optional[str] = None,
         action: str,
         request: Request,
         user: Dict[str, Any],
-    ) -> None:
+    ) -> Optional[Dict[str, Any]]:
         if not student:
             return
         barn_id = resolve_barn_id(user)
@@ -220,11 +222,12 @@ def build_router(*, get_current_user, db=None) -> APIRouter:
             participant_user_ids=guardian_user_ids,
             scope_reference=scope_reference,
             policy_version=policy_version,
+            expected_state_token=expected_state_token,
             require_guardian_participant=True,
             action=action,
         )
         if gate["decision"] == DECISION_ALLOW:
-            return
+            return gate
         await audit.record(
             action="document_request.guardian_minor_blocked",
             user=user,
@@ -333,16 +336,19 @@ def build_router(*, get_current_user, db=None) -> APIRouter:
         guard_scope = f"document_template:{template['id']}:v{template.get('version') or 1}"
         guard_policy = f"{template['document_type']}-v{template.get('version') or 1}"
         if requires_guardian(minor_status) and student:
-            await _enforce_document_guard(
+            gate = await _enforce_document_guard(
                 workflow=guard_workflow,
                 student=student,
                 guardian_user_ids=body.guardian_user_ids,
                 scope_reference=guard_scope,
                 policy_version=guard_policy,
+                expected_state_token=body.guardian_state_token,
                 action="document_request.create",
                 request=request,
                 user=user,
             )
+        else:
+            gate = None
         required_signer_user_ids = _required_signer_ids(signer_roles, body)
         now = _now_iso()
         status = "draft"
@@ -374,6 +380,7 @@ def build_router(*, get_current_user, db=None) -> APIRouter:
             "guardian_guard_workflow": guard_workflow,
             "guardian_guard_scope_reference": guard_scope,
             "guardian_guard_policy_version": guard_policy,
+            "guardian_guard_state_token": gate.get("state_token") if gate else None,
         }
         await database[DOCUMENT_REQUESTS_COLLECTION].insert_one(doc)
         await audit.record(
@@ -415,16 +422,19 @@ def build_router(*, get_current_user, db=None) -> APIRouter:
         template = await _load_template_or_404(database, user, doc["template_id"])
         student = await _load_student_profile(database, user, doc.get("subject_student_profile_id"))
         if student:
-            await _enforce_document_guard(
+            gate = await _enforce_document_guard(
                 workflow=doc.get("guardian_guard_workflow") or WORKFLOW_DOCUMENT_SIGNATURE,
                 student=student,
                 guardian_user_ids=doc.get("required_signer_user_ids") or [],
                 scope_reference=doc.get("guardian_guard_scope_reference") or f"document_request:{doc['id']}",
                 policy_version=doc.get("guardian_guard_policy_version") or f"{doc.get('document_type')}-v{template.get('version') or 1}",
+                expected_state_token=doc.get("guardian_guard_state_token"),
                 action="document_request.sandbox_envelope",
                 request=request,
                 user=user,
             )
+        else:
+            gate = None
         provider_template_id = (template.get("provider_template_id") or "").strip()
         if not provider_template_id:
             raise HTTPException(status_code=422, detail="Provider template id is required for sandbox envelope creation")
@@ -452,6 +462,7 @@ def build_router(*, get_current_user, db=None) -> APIRouter:
             "local_status": local_status,
             "sandbox_envelope_created_at": now,
             "updated_at": now,
+            "guardian_guard_state_token": gate.get("state_token") if gate else doc.get("guardian_guard_state_token"),
         }
         await database[DOCUMENT_REQUESTS_COLLECTION].update_one(
             barn_filter(user, {"id": doc["id"]}),

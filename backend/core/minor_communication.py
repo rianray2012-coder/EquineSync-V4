@@ -13,11 +13,17 @@ from core.minor_safety import (
     DECISION_BLOCK,
     DECISION_REQUIRE_GUARDIAN,
     GUARDIAN_LINK_ACTIVE,
+    GUARDIAN_LINK_COLLECTION,
+    MINOR_STATUS_ADULT,
+    MINOR_STATUS_MINOR_13_TO_17,
+    MINOR_STATUS_UNDER_13,
+    MINOR_STATUS_UNKNOWN,
     STUDENT_PROFILE_COLLECTION,
     WORKFLOW_MESSAGING,
     guardian_minor_workflow_gate,
     load_guardian_minor_authority_rows,
     minor_status_for_student,
+    normalize_minor_status,
     requires_guardian,
 )
 
@@ -89,6 +95,66 @@ def _message_ids(message: Dict[str, Any], key: str) -> List[str]:
     if isinstance(raw, str):
         return _clean_ids([raw])
     return _clean_ids(raw)
+
+
+def _minor_status_from_age(age: Any) -> str:
+    try:
+        years = int(age)
+    except (TypeError, ValueError):
+        return MINOR_STATUS_UNKNOWN
+    if years < 13:
+        return MINOR_STATUS_UNDER_13
+    if years < 18:
+        return MINOR_STATUS_MINOR_13_TO_17
+    return MINOR_STATUS_ADULT
+
+
+async def _find_one(collection: Any, filt: Dict[str, Any], projection: Optional[Dict[str, int]] = None) -> Optional[Dict[str, Any]]:
+    if collection is None:
+        return None
+    row = await collection.find_one(filt, projection or {"_id": 0})
+    return dict(row) if row else None
+
+
+async def _student_from_profile_id(db: Any, *, barn_id: str, student_id: Any) -> Optional[Dict[str, Any]]:
+    sid = str(student_id or "").strip()
+    if not sid:
+        return None
+    return await _find_one(db[STUDENT_PROFILE_COLLECTION], {"id": sid, "barn_id": barn_id}, {"_id": 0})
+
+
+async def _student_from_rider_row(db: Any, *, barn_id: str, rider: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    if not rider:
+        return None
+    if rider.get("student_profile_id"):
+        linked = await _student_from_profile_id(db, barn_id=barn_id, student_id=rider["student_profile_id"])
+        if linked:
+            return linked
+        return {
+            "id": rider["student_profile_id"],
+            "barn_id": rider.get("barn_id") or barn_id,
+            "minor_status": MINOR_STATUS_UNKNOWN,
+        }
+    minor_status = normalize_minor_status(rider.get("minor_status") or MINOR_STATUS_UNKNOWN)
+    if minor_status == MINOR_STATUS_UNKNOWN and rider.get("age") is not None:
+        minor_status = _minor_status_from_age(rider.get("age"))
+    student = {
+        "id": f"rider:{rider.get('id')}",
+        "barn_id": rider.get("barn_id") or barn_id,
+        "birthdate": rider.get("birthdate"),
+        "minor_status": minor_status,
+    }
+    student["minor_status"] = minor_status_for_student(student)
+    return student
+
+
+def _remember_student(students: list[Dict[str, Any]], seen: set[str], student: Optional[Dict[str, Any]]) -> None:
+    if not student:
+        return
+    student_id = str(student.get("id") or "").strip()
+    if student_id and student_id not in seen:
+        students.append(student)
+        seen.add(student_id)
 
 
 def minor_communication_gate(
@@ -273,22 +339,34 @@ async def message_guardian_minor_safeguarding_gate(
     students: list[Dict[str, Any]] = []
     seen: set[str] = set()
     for student_id in explicit_student_ids:
-        student = await db[STUDENT_PROFILE_COLLECTION].find_one(
-            {"id": student_id, "barn_id": barn_id},
-            {"_id": 0},
-        )
-        if student and student.get("id") not in seen:
-            students.append(student)
-            seen.add(student["id"])
+        _remember_student(students, seen, await _student_from_profile_id(db, barn_id=barn_id, student_id=student_id))
     for participant_id in sorted(participant_ids):
         for field in ("user_id", "rider_user_id", "minor_user_id", "student_user_id"):
-            student = await db[STUDENT_PROFILE_COLLECTION].find_one(
-                {"barn_id": barn_id, field: participant_id},
-                {"_id": 0},
+            _remember_student(
+                students,
+                seen,
+                await _find_one(db[STUDENT_PROFILE_COLLECTION], {"barn_id": barn_id, field: participant_id}, {"_id": 0}),
             )
-            if student and student.get("id") not in seen:
-                students.append(student)
-                seen.add(student["id"])
+
+        riders = getattr(db, "riders", None)
+        for field in ("id", "user_id", "rider_user_id", "minor_user_id", "student_user_id"):
+            rider = await _find_one(riders, {"barn_id": barn_id, field: participant_id}, {"_id": 0})
+            _remember_student(students, seen, await _student_from_rider_row(db, barn_id=barn_id, rider=rider))
+
+        linked_guardians = await db[GUARDIAN_LINK_COLLECTION].find(
+            {
+                "barn_id": barn_id,
+                "guardian_user_id": participant_id,
+                "status": GUARDIAN_LINK_ACTIVE,
+            },
+            {"_id": 0},
+        ).to_list(100)
+        for link in linked_guardians:
+            _remember_student(
+                students,
+                seen,
+                await _student_from_profile_id(db, barn_id=barn_id, student_id=link.get("student_profile_id")),
+            )
 
     links, consents = await load_guardian_minor_authority_rows(
         db,

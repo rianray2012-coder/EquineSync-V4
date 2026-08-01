@@ -8,5 +8,6 @@ backend/routes/document_signatures.py,waiver_document_media_sinks,Guard minor wa
 backend/routes/billing.py,payment_sink,Guard repository invoice creation and local paid-status transition for minor-bound obligations without provider calls.
 backend/routes/recurring_charges.py,recurring_payment_sink,Guard recurring-charge create/update/materialization and generated invoice writes for minor-bound billing templates.
 backend/routes/care.py,student_resolution,Allow rider rows to carry canonical student/minor references so lesson/event/payment guards can resolve affected minors from authoritative same-barn data.
-backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py,regression_abuse_tests,Implement all 43 V1.1.0 regression and abuse-case objectives with focused unit and route-boundary tests.
+backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py,regression_abuse_tests,Preserve the original 43 V1.1.0 regression objectives and add corrective tests GMS-T-044 through GMS-T-054.
+backend/tests/test_rf9_trainer_operating_center.py,adult_positive_control_regression,Keep the existing trainer lesson positive control explicit as an adult-rider workflow after unknown-age riders became guarded subjects.
 governance/implementation/code-guides/drafting/CGP-006/IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_V1_1/**,implementation_evidence,"Directive-required implementation evidence package, source accession, manifests, validators, and authorization records."

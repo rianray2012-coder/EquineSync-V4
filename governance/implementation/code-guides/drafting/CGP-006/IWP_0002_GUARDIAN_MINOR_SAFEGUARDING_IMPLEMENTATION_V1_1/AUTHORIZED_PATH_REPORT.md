@@ -6,7 +6,7 @@ Changed, staged, and untracked paths reviewed against `AUTHORIZED_IMPLEMENTATION
 
 No unauthorized paths were detected.
 
-Changed path count: `55`
+Changed path count: `68`
 
 Unauthorized paths: `NONE`
 
@@ -21,6 +21,7 @@ Reviewed paths:
 - `backend/routes/recurring_charges.py`
 - `backend/routes/student_guardians.py`
 - `backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py`
+- `backend/tests/test_rf9_trainer_operating_center.py`
 - `governance/implementation/code-guides/drafting/CGP-006/IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_V1_1/.gitattributes`
 - `governance/implementation/code-guides/drafting/CGP-006/IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_V1_1/AFFECTED_PATH_AND_AUTHORITY_DRIFT_REVALIDATION.md`
 - `governance/implementation/code-guides/drafting/CGP-006/IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_V1_1/AUDIT_PRIVACY_AND_REDACTION_EVIDENCE.md`

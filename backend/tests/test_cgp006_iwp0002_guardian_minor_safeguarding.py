@@ -63,6 +63,7 @@ from core.minor_safety import (
     minor_status_from_birthdate,
     minor_status_for_student,
     student_workflow_gate,
+    student_workflow_scope,
 )
 
 
@@ -79,8 +80,16 @@ class FakeCursor:
 
 def _matches(row: Dict[str, Any], filt: Dict[str, Any]) -> bool:
     for key, value in (filt or {}).items():
+        if key == "$or":
+            if not any(_matches(row, branch) for branch in value):
+                return False
+            continue
         if isinstance(value, dict) and "$in" in value:
             if row.get(key) not in value["$in"]:
+                return False
+        elif isinstance(value, dict) and "$exists" in value:
+            exists = key in row
+            if bool(value["$exists"]) != exists:
                 return False
         elif row.get(key) != value:
             return False
@@ -102,10 +111,12 @@ class FakeCollection:
 
 
 class FakeDb:
-    def __init__(self, *, students=None, links=None, consents=None):
+    def __init__(self, *, students=None, links=None, consents=None, riders=None, users=None):
         self.student_profiles = FakeCollection(students or [])
         self.guardian_links = FakeCollection(links or [])
         self.guardian_workflow_consents = FakeCollection(consents or [])
+        self.riders = FakeCollection(riders or [])
+        self.users = FakeCollection(users or [])
 
     def __getitem__(self, name):
         if name == STUDENT_PROFILE_COLLECTION:
@@ -607,3 +618,120 @@ def test_gms_t_043_unrelated_adult_to_adult_message_remains_allowed():
     ))
     assert gate["decision"] == DECISION_ALLOW
     assert gate["minor_involved"] is False
+
+
+def test_gms_t_044_guardian_created_profile_without_user_id_resolves_from_guardian_link():
+    db = FakeDb(
+        students=[_student("student_no_login")],
+        links=[_link("student_no_login", "guardian_1", scopes=[AUTHORITY_SCOPE_COMMUNICATION])],
+    )
+    gate = asyncio.run(message_guardian_minor_safeguarding_gate(
+        db=db,
+        actor_user={"id": "staff_1", "barn_id": "barn_a"},
+        message={"to_user_id": "guardian_1", "body": "schedule note"},
+    ))
+    assert gate["decision"] == DECISION_ALLOW
+    assert gate["student_profile_ids"] == ["student_no_login"]
+
+
+def test_gms_t_045_minor_participant_resolves_through_rider_to_student_relationship():
+    db = FakeDb(
+        students=[_student("student_1")],
+        riders=[{"id": "rider_1", "barn_id": "barn_a", "user_id": "minor_user", "student_profile_id": "student_1"}],
+        links=[_link("student_1", "guardian_1", scopes=[AUTHORITY_SCOPE_COMMUNICATION])],
+    )
+    gate = asyncio.run(message_guardian_minor_safeguarding_gate(
+        db=db,
+        actor_user={"id": "staff_1", "barn_id": "barn_a"},
+        message={"to_user_id": "minor_user", "guardian_user_ids": ["guardian_1"], "body": "lesson note"},
+    ))
+    assert gate["decision"] == DECISION_ALLOW
+    assert gate["student_profile_ids"] == ["student_1"]
+
+
+def test_gms_t_046_unknown_age_rider_participant_fails_closed():
+    db = FakeDb(
+        riders=[{"id": "rider_unknown", "barn_id": "barn_a", "user_id": "minor_user"}],
+    )
+    gate = asyncio.run(message_guardian_minor_safeguarding_gate(
+        db=db,
+        actor_user={"id": "staff_1", "barn_id": "barn_a"},
+        message={"to_user_id": "minor_user", "body": "private note"},
+    ))
+    assert gate["decision"] == DECISION_BLOCK
+    assert gate["internal_reason_code"] == INTERNAL_MINOR_STATUS_UNKNOWN
+
+
+def test_gms_t_047_student_workflow_scope_allows_newly_created_lesson_without_minted_id_consent():
+    students = [_student("student_1")]
+    links = [_link("student_1", scopes=[AUTHORITY_SCOPE_LESSON_PARTICIPATION])]
+    consents = [
+        _consent(
+            WORKFLOW_LESSON_READY,
+            "student_1",
+            scope=student_workflow_scope("student_1", WORKFLOW_LESSON_READY),
+        )
+    ]
+    gate = _gate(WORKFLOW_LESSON_READY, students, links, consents, scope="lesson:new-server-id")
+    assert gate["decision"] == DECISION_ALLOW
+
+
+def test_gms_t_048_stale_token_after_consent_withdrawal_is_rejected():
+    students, links, consents = _valid_guard(WORKFLOW_PAYMENT, "invoice:stable")
+    token = _gate(WORKFLOW_PAYMENT, students, links, consents, scope="invoice:stable")["state_token"]
+    withdrawn = [_consent(WORKFLOW_PAYMENT, scope="invoice:stable", status="revoked")]
+    gate = _gate(WORKFLOW_PAYMENT, students, links, withdrawn, scope="invoice:stable", expected_state_token=token)
+    assert gate["internal_reason_code"] == INTERNAL_AUTHORIZATION_STATE_CHANGED_RETRY_REQUIRED
+
+
+def test_gms_t_049_legacy_guardian_link_without_barn_proof_fails_closed():
+    legacy = _link(scopes=[AUTHORITY_SCOPE_LESSON_PARTICIPATION])
+    legacy.pop("barn_id")
+    gate = _gate(WORKFLOW_LESSON_READY, [_student()], [legacy], [_consent(WORKFLOW_LESSON_READY)])
+    assert gate["internal_reason_code"] == INTERNAL_GUARDIAN_CROSS_BARN
+
+
+def test_gms_t_050_legacy_guardian_link_with_verified_barn_proof_allows():
+    legacy = _link(scopes=[AUTHORITY_SCOPE_LESSON_PARTICIPATION])
+    legacy.pop("barn_id")
+    legacy["barn_scope_verified"] = True
+    gate = _gate(WORKFLOW_LESSON_READY, [_student()], [legacy], [_consent(WORKFLOW_LESSON_READY)])
+    assert gate["decision"] == DECISION_ALLOW
+
+
+def test_gms_t_051_event_approval_revalidates_before_status_update():
+    operations = _read("backend/routes/operations.py")
+    approval = operations.split('async def approve_sr', 1)[1].split('@router.post("/service-requests/{sr_id}/decline")', 1)[0]
+    assert 'action="service_request.event_signup.approve"' in approval
+    assert approval.index("_enforce_guarded_students") < approval.index('"status": "approved"')
+    assert "expected_state_token=existing.get(\"guardian_guard_state_token\")" in approval
+
+
+def test_gms_t_052_payment_subject_resolution_no_longer_skips_unknown_rider():
+    billing = _read("backend/routes/billing.py")
+    recurring = _read("backend/routes/recurring_charges.py")
+    assert 'return None\n        minor_status = normalize_minor_status' not in billing
+    assert 'return None\n        minor_status = normalize_minor_status' not in recurring
+    assert "_students_for_payment_subjects" in billing
+    assert "_students_for_payment_subjects" in recurring
+
+
+def test_gms_t_053_payment_create_can_use_student_workflow_consent_scope():
+    students = [_student("student_1")]
+    links = [_link("student_1", scopes=[AUTHORITY_SCOPE_BILLING_PAYMENT])]
+    consents = [
+        _consent(
+            WORKFLOW_PAYMENT,
+            "student_1",
+            scope=student_workflow_scope("student_1", WORKFLOW_PAYMENT),
+        )
+    ]
+    gate = _gate(WORKFLOW_PAYMENT, students, links, consents, scope="invoice:new-server-id")
+    assert gate["decision"] == DECISION_ALLOW
+
+
+def test_gms_t_054_document_guard_persists_and_enforces_state_token():
+    documents = _read("backend/routes/document_signatures.py")
+    assert "guardian_state_token" in documents
+    assert "guardian_guard_state_token" in documents
+    assert "expected_state_token=doc.get(\"guardian_guard_state_token\")" in documents

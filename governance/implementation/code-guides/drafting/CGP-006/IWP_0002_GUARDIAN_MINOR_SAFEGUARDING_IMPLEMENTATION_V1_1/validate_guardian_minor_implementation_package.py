@@ -70,6 +70,18 @@ REQUIRED_PACKAGE_FILES = {
     "PATCH_CONTRACT_EXECUTION_RECORD.md",
     "PER_MINOR_COMMUNICATION_COVERAGE_EVIDENCE.md",
     "PRE_FIX_REPRODUCTION_AND_REGRESSION_EVIDENCE.md",
+    "PR_71_CORRECTIVE_CHANGE_RECORD.md",
+    "PR_71_MERGE_REJECTION_AND_CORRECTIVE_CONTINUATION_RECORD.md",
+    "PR_71_REVIEW_FINDINGS_VALIDATION_AND_DISPOSITION.csv",
+    "PARTICIPANT_AND_SUBJECT_RESOLUTION_MATRIX.csv",
+    "CONSENT_SCOPE_MODEL_AND_CREATE_WORKFLOW_RECORD.md",
+    "COMMIT_TIME_REVALIDATION_AND_CONCURRENCY_EVIDENCE.md",
+    "LEGACY_GUARDIAN_LINK_TENANT_RESOLUTION_RECORD.md",
+    "PAYMENT_SUBJECT_RESOLUTION_EVIDENCE.md",
+    "EVENT_TRANSITION_REVALIDATION_EVIDENCE.md",
+    "CORRECTIVE_REGRESSION_AND_POSITIVE_CONTROL_RESULTS.csv",
+    "FINAL_REVIEW_THREAD_CUSTODY_RECORD.md",
+    "PROTECTED_BRANCH_POLICY_SATISFACTION_RECORD.md",
     "REGRESSION_AND_ABUSE_TEST_RESULTS.csv",
     "RELATIONSHIP_AUTHORITY_AND_CONSENT_DATA_MODEL_RECORD.md",
     "REVIEW_FINDINGS_AND_DISPOSITION_MATRIX_V1_0_0.csv",
@@ -105,6 +117,7 @@ IMPLEMENTED_PATHS = {
     "backend/routes/recurring_charges.py",
     "backend/routes/care.py",
     "backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py",
+    "backend/tests/test_rf9_trainer_operating_center.py",
 }
 
 
@@ -151,6 +164,7 @@ def validate_package_files() -> None:
         fail("unexpected package_id")
     if manifest.get("status") not in {
         "IMPLEMENTATION_EVIDENCE_COMPLETE_PENDING_PROTECTED_PR_MERGE",
+        "CORRECTIVE_REVISION_COMPLETE_PENDING_PROTECTED_REVIEW_AND_MERGE",
         "POST_MERGE_CUSTODY_COMPLETE_CONDITIONAL_CLOSURE_READY",
     }:
         fail("unexpected implementation package status")
@@ -226,6 +240,13 @@ def validate_workflow_and_results_records() -> None:
     if any(row["status"] != "PASS" for row in results):
         fail("regression result has non-pass status")
 
+    corrective_rows = read_csv(ROOT / "CORRECTIVE_REGRESSION_AND_POSITIVE_CONTROL_RESULTS.csv")
+    expected_corrective_ids = [f"GMS-T-{idx:03d}" for idx in range(44, 55)]
+    if [row["test_id"] for row in corrective_rows] != expected_corrective_ids:
+        fail("corrective regression result IDs are incomplete or out of order")
+    if any(row["status"] != "PASS" for row in corrective_rows):
+        fail("corrective regression result has non-pass status")
+
 
 def validate_implementation_symbols() -> None:
     checks = {
@@ -234,10 +255,13 @@ def validate_implementation_symbols() -> None:
             "GUARDIAN_WORKFLOW_CONSENT_COLLECTION",
             "def ensure_guardian_minor_safeguarding_indexes(",
             "def guardian_minor_public_error_detail(",
+            "def student_workflow_scope(",
+            "def _legacy_link_barn_proven(",
         ],
         "backend/core/minor_communication.py": [
             "async def message_guardian_minor_safeguarding_gate(",
             "require_guardian_participant=True",
+            "GUARDIAN_LINK_COLLECTION",
         ],
         "backend/routes/student_guardians.py": [
             "guardian-consents",
@@ -249,6 +273,7 @@ def validate_implementation_symbols() -> None:
             "_enforce_guarded_students",
             "message_guardian_minor_safeguarding_gate",
             "service_request.event_signup.create",
+            "service_request.event_signup.approve",
         ],
         "backend/routes/document_signatures.py": [
             "_enforce_document_guard",
@@ -259,12 +284,14 @@ def validate_implementation_symbols() -> None:
             "_enforce_payment_guard",
             "invoice.create",
             "invoice.pay",
+            "_students_for_payment_subjects",
         ],
         "backend/routes/recurring_charges.py": [
             "_payment_gate",
             "recurring_charge.create",
             "recurring_charge.update",
             "recurring_charge.materialize",
+            "_students_for_payment_subjects",
         ],
         "backend/core/lifespan.py": [
             "ensure_guardian_minor_safeguarding_indexes",
@@ -275,8 +302,10 @@ def validate_implementation_symbols() -> None:
 
     test_text = (REPO / "backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py").read_text(encoding="utf-8")
     found_ids = re.findall(r"def test_gms_t_(\d{3})_", test_text)
-    if found_ids != [f"{idx:03d}" for idx in range(1, 44)]:
-        fail("focused test file does not contain exactly GMS-T-001 through GMS-T-043")
+    if found_ids[:43] != [f"{idx:03d}" for idx in range(1, 44)]:
+        fail("focused test file does not preserve original GMS-T-001 through GMS-T-043")
+    if found_ids[43:] != [f"{idx:03d}" for idx in range(44, 55)]:
+        fail("focused test file does not contain corrective GMS-T-044 through GMS-T-054")
 
 
 def validate_boundaries() -> None:
@@ -306,7 +335,7 @@ def main() -> int:
     validate_workflow_and_results_records()
     validate_implementation_symbols()
     validate_boundaries()
-    print("PASS guardian/minor implementation package: 8 workflows, 43 tests, controlled files unchanged")
+    print("PASS guardian/minor implementation package: 8 workflows, 43 original tests, 11 corrective tests, controlled files unchanged")
     return 0
 
 

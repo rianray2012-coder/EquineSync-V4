@@ -13,12 +13,12 @@
       "sha256": "950f7b0590132860d402d41a688b46d0ee3b026f1aa8fc3aed2e39649a46a3e6"
     },
     "AUTHORIZED_IMPLEMENTATION_PATHS.csv": {
-      "bytes": 2073,
-      "sha256": "f6f7a72dd188743f711946a9e36ae60f81bb0d3226a45f3a9025da05be05b077"
+      "bytes": 2297,
+      "sha256": "c8a971a1dd772e9453895b467fd69370fc4f97009cb39de1cf1fa1a3dc995b67"
     },
     "AUTHORIZED_PATH_REPORT.md": {
-      "bytes": 8008,
-      "sha256": "aa85f9980ae2918d4d8c7ede0434784433a4696acb3dc7fabf80809e0ccdeaed"
+      "bytes": 8063,
+      "sha256": "0791095a5d63f0c2156d5f855f45658ed3005b16b7f7e4ab9425d4a02de7e002"
     },
     "CGP_006_IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_DIRECTIVE_V1_1_0.md": {
       "bytes": 11287,
@@ -28,17 +28,37 @@
       "bytes": 903,
       "sha256": "52c1e341ca7dbf4d7932c27455c46dcb6220254b67432d06a9c301101cb8104d"
     },
+    "COMMIT_TIME_REVALIDATION_AND_CONCURRENCY_EVIDENCE.md": {
+      "bytes": 1263,
+      "sha256": "5f1ed0226b8081769aa11ff16a785cae8aba86e8ee4cae4eca334f4d0087193f"
+    },
     "CONCURRENCY_ATOMICITY_AND_CACHE_REVALIDATION_EVIDENCE.md": {
       "bytes": 956,
       "sha256": "fa34fc78e71ee1f8c79bb15b54fb956b40b73e9a8ed1883dbea8551b73598330"
     },
+    "CONSENT_SCOPE_MODEL_AND_CREATE_WORKFLOW_RECORD.md": {
+      "bytes": 1420,
+      "sha256": "fb7e4677e9d96045b22b0649b54f49cdb87d3a8aa8dcb81cb9e2dca9fc253fa3"
+    },
+    "CORRECTIVE_REGRESSION_AND_POSITIVE_CONTROL_RESULTS.csv": {
+      "bytes": 1520,
+      "sha256": "304ba4110b34a5c38d8ba147463a6439da4d7a8f50b1074e52697802dbd00972"
+    },
     "DIRECTIVE_EXECUTION_RECORD.md": {
-      "bytes": 1167,
-      "sha256": "6f96efe362d2be1d62639b0eb0688b6c0590b6bc3b1a33423e3a1ebd217440e4"
+      "bytes": 2184,
+      "sha256": "7252e86f08f0e354ff225ef38cb7be71935567b42583a8f7f35648806ccf6b9e"
+    },
+    "EVENT_TRANSITION_REVALIDATION_EVIDENCE.md": {
+      "bytes": 943,
+      "sha256": "d5a50383936c5a5690368c4a39da25f97844f425213d11e6f1c850b4615d085f"
     },
     "EXTERNAL_ERROR_AND_INTERNAL_AUDIT_CODE_MAP.csv": {
       "bytes": 1789,
       "sha256": "199f47030cff6134d65e8381344e9fa16a1d2b1dc6ecdc8e2eee8aa0983fcbfb"
+    },
+    "FINAL_REVIEW_THREAD_CUSTODY_RECORD.md": {
+      "bytes": 833,
+      "sha256": "92f4c1343c0b568c11db50166ea2175f511db8893cb0a3ddf1d4946274536767"
     },
     "FINDING_AND_GAP_TREATMENT_RECORD.md": {
       "bytes": 765,
@@ -92,6 +112,10 @@
       "bytes": 1335,
       "sha256": "1eeb4612eedf3bf4be253df2c151d49a0266f355d58bb359b3da0219a13db6f0"
     },
+    "LEGACY_GUARDIAN_LINK_TENANT_RESOLUTION_RECORD.md": {
+      "bytes": 892,
+      "sha256": "0c356d952e304ea6de76462ab57221c7045dacf1344e0f4aa4e23f54f8a1e6d8"
+    },
     "LEGITIMATE_BEHAVIOR_PRESERVATION_REPORT.md": {
       "bytes": 804,
       "sha256": "5d7ebf17d23530fc1244d02f01e511b9e5283ae03d22405d89734f94a568b51b"
@@ -104,9 +128,17 @@
       "bytes": 3109,
       "sha256": "e2bda7e8f166b57ea43cd827eb8cf7c5183fbc539a4eb16ab1718947d2321585"
     },
+    "PARTICIPANT_AND_SUBJECT_RESOLUTION_MATRIX.csv": {
+      "bytes": 1162,
+      "sha256": "ca083e4f5267edd13cea5fb544ca6aeb6674f41214aace236a1d76fe4fa080b3"
+    },
     "PATCH_CONTRACT_EXECUTION_RECORD.md": {
       "bytes": 853,
       "sha256": "567f879ecf628df4c0b443c6023bbba5914d0ec06554626b2b59d69f79d6dbba"
+    },
+    "PAYMENT_SUBJECT_RESOLUTION_EVIDENCE.md": {
+      "bytes": 1045,
+      "sha256": "efd347582bf655947c3bf73353933701498e3a5d9f74a655db7ee5e086350f40"
     },
     "PER_MINOR_COMMUNICATION_COVERAGE_EVIDENCE.md": {
       "bytes": 757,
@@ -119,6 +151,22 @@
     "PROPOSED_FOUNDER_IMPLEMENTATION_AUTHORIZATION_AND_SCOPE_DISPOSITION_CGP006_IWP_0002_V1_1_0_2026-07-30.md": {
       "bytes": 6719,
       "sha256": "ab7f9332da372afd4259749745d0ce1b1442cd9ee4b448e39ee95300db6b74a8"
+    },
+    "PROTECTED_BRANCH_POLICY_SATISFACTION_RECORD.md": {
+      "bytes": 1219,
+      "sha256": "924467f57b9a6a00815c2ac692f4b89772e01b2a8987aadcd98a4e5d89654e2d"
+    },
+    "PR_71_CORRECTIVE_CHANGE_RECORD.md": {
+      "bytes": 1927,
+      "sha256": "10a8ff645f5f68ca24716f173eddf77a35bfe49d36d94d0bb831e3f7af708dc5"
+    },
+    "PR_71_MERGE_REJECTION_AND_CORRECTIVE_CONTINUATION_RECORD.md": {
+      "bytes": 4112,
+      "sha256": "c702add4b38ec36f974f52add81a5cb61076e585358fd2dc02969afca0446d6e"
+    },
+    "PR_71_REVIEW_FINDINGS_VALIDATION_AND_DISPOSITION.csv": {
+      "bytes": 2252,
+      "sha256": "9f03b60a6203e3b623db621b25928f4a46867ebbb0ab235cc776307a52ff4c9a"
     },
     "README.md": {
       "bytes": 744,
@@ -137,8 +185,8 @@
       "sha256": "5ca67e8ede2dd313df32660c6c720bbcfd8596f43056926147de0e0a96c8f6c9"
     },
     "REVIEW_FINDINGS_AND_DISPOSITION_RECORD.csv": {
-      "bytes": 2544,
-      "sha256": "f09847a445b9c3d6bc9da87ccdc90562bba6a7368beb94246c7b3168f54cd1cf"
+      "bytes": 4050,
+      "sha256": "cd8883da260c860f0b7413b8740e463509b8bdfd946f94a9b0e8e9cdc72ce9ae"
     },
     "ROLLBACK_AND_SUSPENSION_RECORD.md": {
       "bytes": 875,
@@ -153,8 +201,8 @@
       "sha256": "42d1d06a642b00b2703af2c6f09e0050662e9527c001aa1d2efc6ae8e563f627"
     },
     "VALIDATION_REPORT.md": {
-      "bytes": 1443,
-      "sha256": "b6916bd2b36ef9062c7403e396702420b7f52ec3c9ef4eec17f89d7c27f3bd38"
+      "bytes": 2560,
+      "sha256": "98348b595d6f270bc039bc34dcc1f29c6355e04b5b92d2917273d659eadb356d"
     },
     "WORKFLOW_ENFORCEMENT_COMPLETION_MATRIX.csv": {
       "bytes": 1694,
@@ -165,8 +213,8 @@
       "sha256": "f4b844e6cf69af9f491a176136e68db52a3a22340a252f9fde238ec6cb2fd536"
     },
     "validate_guardian_minor_implementation_package.py": {
-      "bytes": 12705,
-      "sha256": "e213e467010b24e35cbe5a731d5ccfff502df87e9c94592434f0da6a7a28e84a"
+      "bytes": 14414,
+      "sha256": "87cabd5923ff8ec266cb2fc3d0495eaea34b3f95887568a1153d974c2d7d6b1a"
     },
     "validate_guardian_minor_revision_package.py": {
       "bytes": 4089,
@@ -175,8 +223,8 @@
   },
   "implementation_baseline_sha": "9996e948ede39a968b8facd8afe15c2b1a345204",
   "package_id": "CGP006-IWP0002-GUARDIAN-MINOR-SAFEGUARDING-IMPLEMENTATION-V1.1",
-  "recorded_at": "2026-08-01T03:40:01Z",
+  "recorded_at": "2026-08-01T05:14:00Z",
   "repository": "rianray2012-coder/EquineSync-V4",
-  "status": "IMPLEMENTATION_EVIDENCE_COMPLETE_PENDING_PROTECTED_PR_MERGE",
+  "status": "CORRECTIVE_REVISION_COMPLETE_PENDING_PROTECTED_REVIEW_AND_MERGE",
   "work_branch": "codex/cgp-006-iwp-0002-guardian-minor-safeguarding-v1-1"
 }
