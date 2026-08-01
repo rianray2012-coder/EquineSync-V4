@@ -13,9 +13,9 @@
       "sha256": "230f6d59a95dd03f4f807b22dfea6d26d73d40dea5d73ed7fa05d633c14b4307"
     },
     {
-      "byte_length": 7549,
+      "byte_length": 8098,
       "path": "EQUINESYNC_GOVERNANCE_FINDINGS_RESIDUAL_RISKS_EXCEPTIONS_AND_WAIVERS_REGISTER_V2_0.md",
-      "sha256": "a42011f4c5c30ca27a9b8b54b37a5c3d1d753b72d8dc38a3def52b3f8b3364e8"
+      "sha256": "1a5d0ca49dfe624f8dfe3f4c624354ef4c55e1d58b9b19c6ce111d1accff8aec"
     },
     {
       "byte_length": 49281,
@@ -53,6 +53,6 @@
       "sha256": "e2b82e95e6afe53c86e2755e5dd0c1af3e37ca75a974f9e3685e6af6ac974bff"
     }
   ],
-  "generated_at": "2026-08-01T15:39:10Z",
+  "generated_at": "2026-08-01T15:40:49Z",
   "package_root": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS"
 }
