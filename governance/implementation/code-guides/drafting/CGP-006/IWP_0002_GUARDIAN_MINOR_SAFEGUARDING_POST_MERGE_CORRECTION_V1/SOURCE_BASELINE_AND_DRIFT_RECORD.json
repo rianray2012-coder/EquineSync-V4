@@ -1,0 +1,78 @@
+{
+  "package_id": "CGP006-IWP0002-GUARDIAN-MINOR-SAFEGUARDING-POST-MERGE-CORRECTION-V1",
+  "recorded_at_utc": "2026-08-01T10:14:21Z",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "protected_branch": "integrate-emergent-final-zip",
+  "directive_identity": {
+    "path": "/Users/rianray/Downloads/CGP_006_IWP_0002_POST_MERGE_FINDING_CORRECTION_CUSTODY_REFRESH_AND_CONDITIONAL_CLOSURE_CONTINUATION_DIRECTIVE_V1_0_0.md",
+    "sha256": "094c39e51535f6f6dd4d3d4db370ad0485c490a308925848d6435513fc7047cd",
+    "bytes": 14231
+  },
+  "pasted_request_identity": {
+    "path": "/Users/rianray/.codex/attachments/7ffe0d89-7f5c-454f-99b5-dc253c662656/pasted-text.txt",
+    "sha256": "ba6613ff4e6ed839b60c32f37ff3c5f0866a4c26c0c2f887731c096426cab844",
+    "bytes": 14214,
+    "treatment": "secondary request copy; downloaded directive file is the exact controlling artifact"
+  },
+  "directive_declared_state": {
+    "pr_71_final_head": "74f79bc7e9452e593247aff7624c1668649da02b",
+    "pr_71_merge_commit": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+    "protected_head_at_directive_issuance": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+    "pr_72_state": "OPEN_DRAFT_UNMERGED",
+    "pr_72_head": "504d2bb49c946acc7cf9c26e7bd735a5a0eb8d7b",
+    "closure_status": "BLOCKED_PENDING_CORRECTION"
+  },
+  "live_state_before_mutation": {
+    "pr_71": {
+      "state": "MERGED",
+      "is_draft": false,
+      "base_ref": "integrate-emergent-final-zip",
+      "base_ref_oid_observed": "9996e948ede39a968b8facd8afe15c2b1a345204",
+      "head_ref": "codex/cgp-006-iwp-0002-guardian-minor-safeguarding-v1-1",
+      "head_ref_oid": "74f79bc7e9452e593247aff7624c1668649da02b",
+      "merge_commit": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+      "merged_at": "2026-08-01T07:16:35Z"
+    },
+    "pr_72": {
+      "state": "OPEN",
+      "is_draft": true,
+      "base_ref": "integrate-emergent-final-zip",
+      "base_ref_oid_observed": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+      "head_ref": "codex/cgp-006-iwp-0002-guardian-minor-custody-closure-v1",
+      "head_ref_oid": "504d2bb49c946acc7cf9c26e7bd735a5a0eb8d7b",
+      "mergeable": "MERGEABLE",
+      "treatment": "left draft and unmerged; not mutated during corrective implementation phase"
+    },
+    "correction_pr_preflight": {
+      "head_branch": "codex/cgp-006-iwp-0002-post-merge-correction-v1",
+      "existing_prs_for_head": []
+    }
+  },
+  "protected_head_refresh": {
+    "current_protected_head": "12d5ae6faf3627bb0786af46de953fda808d7156",
+    "current_protected_head_subject": "Merge pull request #74 from rianray2012-coder/codex/cgp006-gap0005-closure-plan-v1-1-custody",
+    "correction_branch_created_from": "12d5ae6faf3627bb0786af46de953fda808d7156",
+    "drift_from_directive_head": {
+      "from": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+      "to": "12d5ae6faf3627bb0786af46de953fda808d7156",
+      "commit_count": 4,
+      "commits": [
+        "016accf docs: accession CGP-006 GAP-0005 closure criteria plan",
+        "95a4c9b Merge pull request #73 from rianray2012-coder/codex/cgp006-gap0005-closure-plan-v1-1-accession",
+        "e1585d9 docs: add CGP-006 GAP-0005 post-merge custody",
+        "12d5ae6 Merge pull request #74 from rianray2012-coder/codex/cgp006-gap0005-closure-plan-v1-1-custody"
+      ],
+      "changed_path_scope": "CGP-006 GAP-0005 documentation/custody plus governance/implementation/code-guides/PROGRAM_STATUS.md",
+      "affected_product_or_test_paths_changed": false,
+      "affected_pr_72_custody_package_paths_changed": false,
+      "decision": "safe_to_branch_from_current_protected_head"
+    }
+  },
+  "authorized_product_paths": [
+    "backend/core/minor_safety.py",
+    "backend/core/minor_communication.py",
+    "backend/routes/billing.py",
+    "backend/routes/recurring_charges.py",
+    "backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py"
+  ]
+}

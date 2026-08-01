@@ -13,7 +13,6 @@ from core.minor_safety import (
     DECISION_BLOCK,
     DECISION_REQUIRE_GUARDIAN,
     GUARDIAN_LINK_ACTIVE,
-    GUARDIAN_LINK_COLLECTION,
     MINOR_STATUS_ADULT,
     MINOR_STATUS_MINOR_13_TO_17,
     MINOR_STATUS_UNDER_13,
@@ -22,6 +21,7 @@ from core.minor_safety import (
     WORKFLOW_MESSAGING,
     guardian_minor_workflow_gate,
     load_guardian_minor_authority_rows,
+    load_verified_guardian_linked_students,
     minor_status_for_student,
     normalize_minor_status,
     requires_guardian,
@@ -353,20 +353,14 @@ async def message_guardian_minor_safeguarding_gate(
             rider = await _find_one(riders, {"barn_id": barn_id, field: participant_id}, {"_id": 0})
             _remember_student(students, seen, await _student_from_rider_row(db, barn_id=barn_id, rider=rider))
 
-        linked_guardians = await db[GUARDIAN_LINK_COLLECTION].find(
-            {
-                "barn_id": barn_id,
-                "guardian_user_id": participant_id,
-                "status": GUARDIAN_LINK_ACTIVE,
-            },
-            {"_id": 0},
-        ).to_list(100)
-        for link in linked_guardians:
-            _remember_student(
-                students,
-                seen,
-                await _student_from_profile_id(db, barn_id=barn_id, student_id=link.get("student_profile_id")),
-            )
+        linked_guardians = await load_verified_guardian_linked_students(
+            db,
+            barn_id=barn_id,
+            guardian_user_id=participant_id,
+            status=GUARDIAN_LINK_ACTIVE,
+        )
+        for linked in linked_guardians:
+            _remember_student(students, seen, linked.get("student"))
 
     links, consents = await load_guardian_minor_authority_rows(
         db,

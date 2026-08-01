@@ -1,0 +1,5 @@
+test_scope,command,result,evidence
+PRIOR_PR_71_GUARDIAN_MINOR_CASES_GMS_T_001_THROUGH_GMS_T_054,"PYTHONPATH=backend python3 direct import runner over backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py",PASS,"All prior 54 Guardian/Minor safeguard cases re-executed as part of 59 direct functions."
+CORRECTIVE_FULL_FOCUSED_SET_GMS_T_001_THROUGH_GMS_T_059,"PYTHONPATH=backend python3 direct import runner over backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py",PASS,"ran 59 focused test functions; PASS direct guardian/minor focused tests."
+PYTEST_SYSTEM_RUNNER,"PYTHONPATH=backend python3 -m pytest backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py -q",UNAVAILABLE,"Local system Python did not have pytest installed."
+PYTEST_VENV_RUNNER,"PYTHONPATH=backend ../pytest-venv312/bin/python -m pytest backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py -q",UNAVAILABLE,"Local venv runner stalled during site import and was interrupted; GitHub CI remains authoritative for pytest execution."
