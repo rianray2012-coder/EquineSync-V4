@@ -1,0 +1,66 @@
+{
+  "edges": [
+    {
+      "basis": "DEPENDENCY_CONTEXT_ONLY",
+      "from": "T1D04-PR-77",
+      "to": "TIER_1_DOCUMENTS_03_10_CONTEXT"
+    },
+    {
+      "basis": "DEPENDENCY_CONTEXT_ONLY",
+      "from": "T1D04-PR-80",
+      "to": "DOCUMENT_03_TRACEABILITY_CONTEXT"
+    }
+  ],
+  "nodes": [
+    {
+      "artifact_id": "T1D04-AUTH-001",
+      "state": "PROTECTED_CURRENT",
+      "title": "EquineSync Canon Index"
+    },
+    {
+      "artifact_id": "T1D04-AUTH-002",
+      "state": "PROTECTED_CURRENT",
+      "title": "Canon State and Lock Registry"
+    },
+    {
+      "artifact_id": "T1D04-AUTH-003",
+      "state": "PROTECTED_CURRENT",
+      "title": "Canon Lock Ledger"
+    },
+    {
+      "artifact_id": "T1D04-AUTH-004",
+      "state": "LOCKED",
+      "title": "EquineSync Global Governance V1.0 Lock Record"
+    },
+    {
+      "artifact_id": "T1D04-AUTH-005",
+      "state": "LOCKED",
+      "title": "Founder-Directed PIA Portfolio Lock Record"
+    },
+    {
+      "artifact_id": "T1D04-AUTH-006",
+      "state": "PROTECTED_CURRENT",
+      "title": "Code Guide Program Status"
+    },
+    {
+      "artifact_id": "T1D04-PR-80",
+      "state": "UNMERGED_CANDIDATE",
+      "title": "Draft master product feature-to-governance coverage matrix V1.0"
+    },
+    {
+      "artifact_id": "T1D04-PR-77",
+      "state": "UNMERGED_CANDIDATE",
+      "title": "Draft governance portfolio scope taxonomy closure standard"
+    },
+    {
+      "artifact_id": "T1D04-PR-68",
+      "state": "UNMERGED_CANDIDATE",
+      "title": "CGP-006 repository hygiene and CI assurance Founder review packet"
+    },
+    {
+      "artifact_id": "T1D04-PR-67",
+      "state": "UNMERGED_CANDIDATE",
+      "title": "CI assurance reporting and monitoring draft"
+    }
+  ]
+}

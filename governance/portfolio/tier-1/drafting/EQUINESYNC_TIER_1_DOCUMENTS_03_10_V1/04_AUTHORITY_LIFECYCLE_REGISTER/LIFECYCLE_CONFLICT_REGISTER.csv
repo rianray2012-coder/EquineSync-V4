@@ -1,0 +1,3 @@
+conflict_id,artifact_id,conflict_type,description,resolution_rule,current_status
+T1D04-CONFLICT-001,T1D04-PR-77,UNMERGED_CANDIDATE_VS_CURRENT_PROTECTED_SOURCE,PR #77 is required context but remains open and draft; it is not current protected authority.,Record as candidate input only until separately merged/adopted/locked as authorized.,RECORDED
+T1D04-CONFLICT-002,T1D04-PR-80,UNMERGED_COVERAGE_MATRIX_DEPENDENCY,PR #80 provides a coverage matrix candidate and must not be treated as protected evidence.,Use for contextual design and record dependency for later reconciliation.,RECORDED
