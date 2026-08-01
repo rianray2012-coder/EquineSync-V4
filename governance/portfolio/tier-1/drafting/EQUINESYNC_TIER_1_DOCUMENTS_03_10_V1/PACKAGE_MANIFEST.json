@@ -70,7 +70,7 @@
     {
       "byte_length": 3287,
       "path": "03_IMPLEMENTATION_TRACEABILITY/PACKAGE_MANIFEST.json",
-      "sha256": "07cfdebe1bca4522766634a01c4011511c18696fa94ebbf98a0ac6d8e7320b6d"
+      "sha256": "450a95ebfb190924673b2815d31926f3b295a7ee257c1ade0f6693f6a9b189ad"
     },
     {
       "byte_length": 1872,
@@ -150,7 +150,7 @@
     {
       "byte_length": 2375,
       "path": "04_AUTHORITY_LIFECYCLE_REGISTER/PACKAGE_MANIFEST.json",
-      "sha256": "b4585f0ffeeac475a2574916fb08d326bb772486c4c868576b3e547f6a759d4f"
+      "sha256": "f8bc34bfd7bf7cd417f7419646b8fe96124d4971f1a78b0590adbc2c16189547"
     },
     {
       "byte_length": 23157,
@@ -215,7 +215,7 @@
     {
       "byte_length": 2152,
       "path": "05_FOUNDER_DECISION_REGISTER/PACKAGE_MANIFEST.json",
-      "sha256": "1aa1407f2723b37d946b23f6a744471d3a4dc69d2c413d9784d6354184508290"
+      "sha256": "6cbcebff614f2970837117b6868d9c319ce534322829dc2d093816a04fd09047"
     },
     {
       "byte_length": 24269,
@@ -275,7 +275,7 @@
     {
       "byte_length": 2368,
       "path": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/PACKAGE_MANIFEST.json",
-      "sha256": "7a1f3cb380341d44113fad052facb00f7bd0d41a647eac57c4627079c05d744b"
+      "sha256": "279472f3caaad8c45e7175ab9d2a95c40f3e0da3a559f649d1b08cb6fc21fac1"
     },
     {
       "byte_length": 388,
@@ -335,7 +335,7 @@
     {
       "byte_length": 2283,
       "path": "07_OWNERSHIP_STEWARDSHIP_REVIEW/PACKAGE_MANIFEST.json",
-      "sha256": "1afc4d862ce64f974d2674131685558bdc4f26fd7474af3a344f1dbfa75a6943"
+      "sha256": "a1d3866f0538671a9d9dc0bd81871f794db3e095eec043410f6d4a18c97fa780"
     },
     {
       "byte_length": 365,
@@ -410,7 +410,7 @@
     {
       "byte_length": 2507,
       "path": "08_SOURCE_RECONCILIATION/PACKAGE_MANIFEST.json",
-      "sha256": "c1d36b07493d0cb6431cd67c14c8bfc57fb338855246c9cb7d4cf95b8684e399"
+      "sha256": "72a3ed39245b3f80fcc0d45b12c52fb8e0f128c61b79bc46a322bd8c6dc593d8"
     },
     {
       "byte_length": 2163729,
@@ -470,7 +470,7 @@
     {
       "byte_length": 2348,
       "path": "09_WORKSTREAM_PR_BRANCH_DISPOSITION/PACKAGE_MANIFEST.json",
-      "sha256": "9f0ecfd8fe020377a23b58e891f977435ea17c9bf8b1c0edf628d930b38cab3d"
+      "sha256": "2f9297a280e044ee825e16562d1d57fa41125e5d621f86910586324bc1dcde50"
     },
     {
       "byte_length": 19754,
@@ -540,7 +540,7 @@
     {
       "byte_length": 5488,
       "path": "10_CLOSING_AUDIT_PROTOCOL/PACKAGE_MANIFEST.json",
-      "sha256": "cf4870e2081f3cbb52aa5adb970db0012741eb1a47c41cd23aecafa9838abba3"
+      "sha256": "8acb9d05e8c3341cda9da793700a3953baa4bbfa023175f74137079983cbe1fa"
     },
     {
       "byte_length": 19903,
@@ -668,9 +668,9 @@
       "sha256": "eac9915b145fdd0f0120ca344d86f2ac9e1eea7e965687e0a996ea98b3de566a"
     },
     {
-      "byte_length": 405,
+      "byte_length": 951,
       "path": "DOCUMENTARY_VALIDATION_REPORT.json",
-      "sha256": "5ca0459aa57087fa603f46446f99075833741bebaaeb5aea1f32daeb102136e6"
+      "sha256": "190315c4ab69b635cfb01af6a786dc390219dffc6d571893272eac7ff0038764"
     },
     {
       "byte_length": 2163729,
@@ -703,7 +703,7 @@
       "sha256": "308c508d46e27f12ba985bac5e3b99c1a60547a4bc78722275fd2bb7b3bcf059"
     }
   ],
-  "generated_at": "2026-08-01T15:43:51Z",
+  "generated_at": "2026-08-01T15:44:45Z",
   "observed_head": "1eb384d80daa700ba2e71ee42872cc9bba926332",
   "package_id": "EQUINESYNC_TIER_1_DOCUMENTS_03_10_V1",
   "protected_branch": "integrate-emergent-final-zip"

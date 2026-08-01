@@ -1,16 +1,23 @@
 {
   "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
-  "documents": [
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10"
+  "checks": [
+    "all eight document packages exist",
+    "required files exist",
+    "CSV files parse",
+    "JSON files parse",
+    "ID uniqueness checked",
+    "source paths resolve or are marked unavailable",
+    "SHA-256 syntax checked",
+    "PR references record current state",
+    "closing-audit evidence rules checked",
+    "candidate artifacts not adopted",
+    "documentary package does not claim implementation authority",
+    "manifests and checksums verified",
+    "git diff --check passed",
+    "changed paths remain authorized"
   ],
-  "generated_at": "2026-08-01T15:41:41Z",
-  "protected_head": "1eb384d80daa700ba2e71ee42872cc9bba926332",
-  "status": "GENERATED_FOR_VALIDATION"
+  "recorded_at": "2026-08-01T15:44:44Z",
+  "status": "DOCUMENTARY_VALIDATION_PASS",
+  "validator_output": "DOCUMENTARY_VALIDATION_PASS\ndocuments=8\nsource_rows=3776\nchanged_paths=142",
+  "validator_test_output": "TIER1_VALIDATOR_TESTS_PASS"
 }
