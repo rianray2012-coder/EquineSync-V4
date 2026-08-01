@@ -1,0 +1,3 @@
+# Preserve Founder-approved source bytes and suppress diff whitespace false positives for exact-source copies.
+CGP006_MAP_GAP_0005_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1_0.md -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+APPROVED_SOURCE/* -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab

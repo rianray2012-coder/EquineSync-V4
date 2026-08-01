@@ -298,3 +298,35 @@ CGP-006 Wave 1 documentary gap closure custody is recorded in `governance/implem
 - PR `#39` documentary gap closure merge: `88ece96ecb5b6ccbe6670bd0995845c9ab7c079a`
 - PR `#40` documentary gap closure custody receipt merge: `2ff335cbfe29bc4339141ff45d73e63769dd7a30`
 - Metadata reconciliation branch records final package and program metadata; final metadata PR and merge commit are reported in the final accession report after protected merge and remote verification.
+
+## CGP-006 GAP-0005 Closure Criteria Plan V1.1 Accession Status
+
+- Directive ID: `CGP_006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_PROTECTED_ACCESSION_AND_CUSTODY_DIRECTIVE_V1_0_0`
+- Founder approval ID: `ES-FD-CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-2026-08-01`
+- Founder-approved plan: `CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-FOUNDER-APPROVED-2026-08-01`
+- Accession package path: `governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/`
+- Accession branch: `codex/cgp006-gap0005-closure-plan-v1-1-accession`
+- Protected accession PR: `PR #73 https://github.com/rianray2012-coder/EquineSync-V4/pull/73`
+- Reviewed reference head: `9996e948ede39a968b8facd8afe15c2b1a345204`
+- Live protected starting head: `d0d9528028982c1243f9e2a6b0f21a78f298276c`
+- Effective event: `PROTECTED_MERGE_OF_THE_CGP006_GAP0005_CLOSURE_PLAN_V1_1_ACCESSION_PR`
+- Current pre-merge status: `FOUNDER_APPROVED_PENDING_PROTECTED_REPOSITORY_ACCESSION_AND_CUSTODY_NO_GAP_CLOSURE_EFFECT`
+- Post-accession interim status after protected merge only: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_AND_PROTECTEDLY_ACCESSIONED_PENDING_CUSTODY`
+- Required post-merge custody: `PENDING_AFTER_ACCESSION_MERGE`
+- Current gap status preserved: `CGP006_MAP_GAP_0005_REMAINS_OPEN`
+- Current PR #69 state: `PR #69 OPEN DRAFT head 6b8bdeb0657a397689f85de63200425ebca35fae; not modified by this directive.`
+- Current PR #70 state: `PR #70 OPEN DRAFT head e502d0065143eaf19e20e95cd2c21c4c065fe726; not modified by this directive.`
+- Provider-connected assurance authority: `PROVIDER_CONNECTED_ASSURANCE_WORKSTREAM_NOT_AUTHORIZED_BY_THIS_DIRECTIVE`
+- Implementation authority: `IMPLEMENTATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE`
+- Provider activation authority: `PROVIDER_ACTIVATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE`
+- Live payment authority: `LIVE_PAYMENT_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE`
+- Customer-funds movement: `NO_CUSTOMER_FUNDS_MOVEMENT_AUTHORIZED`
+- Production financial readiness: `PRODUCTION_FINANCIAL_READINESS_NOT_ESTABLISHED`
+- Deployment: `DEPLOYMENT_NOT_AUTHORIZED`
+- Staging: `STAGING_NOT_AUTHORIZED`
+- Pilot: `PILOT_NOT_AUTHORIZED`
+- Production use: `PRODUCTION_USE_NOT_AUTHORIZED`
+- Public launch: `PUBLIC_LAUNCH_NOT_AUTHORIZED`
+- Unrelated gaps, findings, and financial programs: `UNRELATED_GAPS_FINDINGS_AND_FINANCIAL_PROGRAMS_UNCHANGED`
+
+This bounded section does not rewrite the historical PR #62 gap register, does not close `CGP006-MAP-GAP-0005`, does not authorize provider-connected Stripe work, does not authorize PR #69 or PR #70 modification or merge, and does not authorize implementation, deployment, staging, pilot, production use, public launch, or customer-funds movement. Gap closure requires completed evidence, protected integration, express Founder closure disposition, and custody.

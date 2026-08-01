@@ -1,0 +1,121 @@
+{
+  "accession_branch": "codex/cgp006-gap0005-closure-plan-v1-1-accession",
+  "accession_pr": "PR #73 https://github.com/rianray2012-coder/EquineSync-V4/pull/73",
+  "classification": "FOUNDER_APPROVED_SUBORDINATE_CGP_006_IMPLEMENTATION_GOVERNANCE_ASSURANCE_PLAN",
+  "directive_id": "CGP_006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_PROTECTED_ACCESSION_AND_CUSTODY_DIRECTIVE_V1_0_0",
+  "files": [
+    {
+      "bytes": 321,
+      "path": ".gitattributes",
+      "sha256": "4084d2f3e9236dba032f6be711008abf18d199b43847d90785d5871934433341"
+    },
+    {
+      "bytes": 1734,
+      "path": "ACCESSION_RECORD.md",
+      "sha256": "c1f701e024a9bd6034d162dc0bab73f970e9b64cfa62e874fb9eff2fa1527589"
+    },
+    {
+      "bytes": 117450,
+      "path": "APPROVED_SOURCE/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_2026_08_01.zip",
+      "sha256": "56cec940bef67ca1a6932428398fdde7b3f7e78a9aee9f2b2f8e84b47ea49b95"
+    },
+    {
+      "bytes": 843,
+      "path": "APPROVED_SOURCE/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_CHECKSUMS.sha256",
+      "sha256": "9f4b551a3cf710c9807f4fa35eefc57713a9ab9987503ecc16e9dc2e9393c9cc"
+    },
+    {
+      "bytes": 1513,
+      "path": "APPROVED_SOURCE/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_PACKAGE_MANIFEST.json",
+      "sha256": "ef901c7033defeecd9444f58cbca8da822385c3fab3f225ddb21949abe564e32"
+    },
+    {
+      "bytes": 47636,
+      "path": "APPROVED_SOURCE/CGP006_MAP_GAP_0005_SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1_0_FOUNDER_APPROVED.md",
+      "sha256": "3dd7774cf35fc160e95209e1c7844028937f62176cbb184cc229d91267fc1bb1"
+    },
+    {
+      "bytes": 61742,
+      "path": "APPROVED_SOURCE/CGP006_MAP_GAP_0005_SaaS_Subscription_Financial_Provider_Runtime_Evidence_Closure_Criteria_and_Assurance_Plan_V1_1_0_FOUNDER_APPROVED.docx",
+      "sha256": "47233460c91e82a59b7bbe5a515d110438f71d690510db3897552e6c7e09f4d3"
+    },
+    {
+      "bytes": 39846,
+      "path": "APPROVED_SOURCE/FOUNDER_APPROVAL_RECORD_CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_2026_08_01.docx",
+      "sha256": "d9d8fd0f7680b083021d7057258b2f0b99b331f8c205d9eede0e04604922c894"
+    },
+    {
+      "bytes": 4517,
+      "path": "APPROVED_SOURCE/FOUNDER_APPROVAL_RECORD_CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_2026_08_01.md",
+      "sha256": "da3ae9f93365e6e7587176e273f622f685e605e9785bc74b607174dc0c053f47"
+    },
+    {
+      "bytes": 1972,
+      "path": "AUTHORITY_AND_SCOPE_MATRIX.csv",
+      "sha256": "a7dad14cd1ca12fb7fabedb33965fef358929c93986ebf187715ae9e4abfed4d"
+    },
+    {
+      "bytes": 712,
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "4aac232824ad855613ffcefa954db1e776aa6792f9dc90a790891e8acf3e503d"
+    },
+    {
+      "bytes": 47636,
+      "path": "CGP006_MAP_GAP_0005_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1_0.md",
+      "sha256": "3dd7774cf35fc160e95209e1c7844028937f62176cbb184cc229d91267fc1bb1"
+    },
+    {
+      "bytes": 2045,
+      "path": "CURRENT_GAP_STATUS_OVERLAY.md",
+      "sha256": "d64863351aa8cd9d5cdd5257439691aba2977f2956250de817ff18b3913a7833"
+    },
+    {
+      "bytes": 3172,
+      "path": "FOUNDER_APPROVAL_AND_SOURCE_IDENTITY_RECORD.md",
+      "sha256": "796dbd4165aaa82feb6b49797b2d96ee0d08faf2ba4d1bbbafdfd7c451b12766"
+    },
+    {
+      "bytes": 1873,
+      "path": "PLANNED_CLOSURE_ARTIFACT_REGISTER.csv",
+      "sha256": "1abc65909bbbd18d09bb94d834b5c92d3d10b54bc62c48906b26c437f01a5d18"
+    },
+    {
+      "bytes": 3691,
+      "path": "README.md",
+      "sha256": "16e608dddf24b115876a9c99f4e5e9dc2d2d09c715b9babd9b7062aae9e65f95"
+    },
+    {
+      "bytes": 2204,
+      "path": "REPOSITORY_STATE_RECONCILIATION_RECORD.md",
+      "sha256": "e80f672f9538c3bdd95c1a18d4142a43d062b69ec7d582d6d6d30553f316c1d1"
+    },
+    {
+      "bytes": 4110,
+      "path": "SOURCE_REGISTER.md",
+      "sha256": "14bf935831532cec737687228afbec49172a10908f31b59cb8b4d02bbec5071f"
+    },
+    {
+      "bytes": 1842,
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "ee3ea6042a3b54ccd899fbfd2042739ebcf35c436b0c3cdf7c9547b1778f883f"
+    },
+    {
+      "bytes": 461,
+      "path": "tests/test_cgp006_gap0005_closure_plan_accession.py",
+      "sha256": "4c6cb4d1e735a3859deec03d82322097f158d778b86c9c59357843750f9bcc91"
+    },
+    {
+      "bytes": 11564,
+      "path": "validators/validate_cgp006_gap0005_closure_plan_accession.py",
+      "sha256": "4cd104a70fa444beef8e1b50fda087aacb333526d9d23cbc2bdf43abc7c035be"
+    }
+  ],
+  "founder_approval_id": "ES-FD-CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-2026-08-01",
+  "gap_id": "CGP006-MAP-GAP-0005",
+  "gap_status": "OPEN",
+  "generated_at": "2026-08-01T08:08:45.587521+00:00",
+  "manifest_scope": "All package files except PACKAGE_MANIFEST.json, CHECKSUM_MANIFEST.sha256, __pycache__, and .pyc files.",
+  "package_id": "CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-FOUNDER-APPROVED-2026-08-01",
+  "protected_starting_head": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+  "reviewed_reference_head": "9996e948ede39a968b8facd8afe15c2b1a345204"
+}

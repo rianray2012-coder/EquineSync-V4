@@ -1,0 +1,12 @@
+artifact,source_plan_reference,truthful_status,not_evidence_statement
+CURRENT_EVIDENCE_POSTURE.csv,Appendix B / Section 14.1,PLANNED_NOT_CREATED,No FIN-001..FIN-018 evidence posture was collected or created by this accession.
+REQUIREMENT_TRACEABILITY_MATRIX.csv,Appendix B / Section 14.1,PLANNED_NOT_CREATED,No requirement-to-runtime-provider proof was collected by this accession.
+PROVIDER_TEST_SCENARIO_MATRIX.csv,Appendix B / Section 14.1,WORKSTREAM_NOT_AUTHORIZED_BY_THIS_DIRECTIVE,Provider-connected scenarios require separate Founder direction.
+WEBHOOK_AND_EVENT_CUSTODY_REPORT.md,Appendix B / Section 14.1,EVIDENCE_NOT_YET_COLLECTED,"No webhook endpoint, signing-secret, replay, retry, or event lifecycle proof was collected."
+SUBSCRIPTION_LIFECYCLE_ASSURANCE_REPORT.md,Appendix B / Section 14.1,EVIDENCE_NOT_YET_COLLECTED,No subscription lifecycle evidence was collected.
+RECONCILIATION_AND_CONTROL_TOTAL_REPORT.md,Appendix B / Section 14.1,EVIDENCE_NOT_YET_COLLECTED,No provider/local reconciliation evidence was collected.
+TAX_CALCULATION_BOUNDARY_REPORT.md,Appendix B / Section 14.1,REQUIRES_SEPARATE_FOUNDER_DIRECTION,No tax calculation scenario or legal/production tax determination was created.
+SECRET_AND_DATA_HYGIENE_REPORT.md,Appendix B / Section 14.1,PLANNED_NOT_CREATED,"This accession package was scanned for secrets, but the future provider-evidence hygiene report was not created."
+RESIDUAL_RISK_AND_CONTRADICTORY_EVIDENCE_REGISTER.csv,Appendix B / Section 14.1,PLANNED_NOT_CREATED,No future closure residual-risk register was fabricated.
+FOUNDER_CLOSURE_DISPOSITION.md,Appendix B / Section 14.1,REQUIRES_SEPARATE_FOUNDER_DIRECTION,No Founder closure disposition was issued or created.
+separate custody receipt,Appendix B / Section 14.1,NOT_APPLICABLE_PENDING_SCENARIO,Post-merge custody receipt is Phase B and only follows protected accession merge.
