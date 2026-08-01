@@ -1,0 +1,8 @@
+custody_record_id,PR_number,branch,custody_requirement,current_status
+T1D09-CUST-80,80,codex/master-product-feature-governance-coverage-matrix-v1,REQUIRED_IF_MERGED_OR_AUTHORITY_BEARING,OPEN_UNMERGED_NO_CUSTODY_CLAIM
+T1D09-CUST-77,77,codex/governance-portfolio-scope-taxonomy-closure-maintenance-standard-v1,REQUIRED_IF_MERGED_OR_AUTHORITY_BEARING,OPEN_UNMERGED_NO_CUSTODY_CLAIM
+T1D09-CUST-70,70,codex/stripe-sandbox-catalog-assurance-v1,REQUIRED_IF_MERGED_OR_AUTHORITY_BEARING,OPEN_UNMERGED_NO_CUSTODY_CLAIM
+T1D09-CUST-69,69,chatgpt/cgp-006-stripe-financial-provider-runtime-evidence-v1,REQUIRED_IF_MERGED_OR_AUTHORITY_BEARING,OPEN_UNMERGED_NO_CUSTODY_CLAIM
+T1D09-CUST-68,68,codex/cgp-006-repository-hygiene-founder-review-disposition-v1,REQUIRED_IF_MERGED_OR_AUTHORITY_BEARING,OPEN_UNMERGED_NO_CUSTODY_CLAIM
+T1D09-CUST-67,67,codex/ci-assurance-reporting-and-monitoring-v1,REQUIRED_IF_MERGED_OR_AUTHORITY_BEARING,OPEN_UNMERGED_NO_CUSTODY_CLAIM
+T1D09-CUST-29,29,codex/document-authority-classification-framework-v1,REQUIRED_IF_MERGED_OR_AUTHORITY_BEARING,OPEN_UNMERGED_NO_CUSTODY_CLAIM

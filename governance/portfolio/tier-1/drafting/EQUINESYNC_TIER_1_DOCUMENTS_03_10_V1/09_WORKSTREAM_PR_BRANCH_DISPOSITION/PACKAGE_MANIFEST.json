@@ -1,0 +1,58 @@
+{
+  "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "file_count_excluding_manifest_and_checksum": 10,
+  "files": [
+    {
+      "byte_length": 329,
+      "path": "CONFLICTING_WORKSTREAM_REPORT.csv",
+      "sha256": "8f1c90164cf4d03597bdfda019a7ae4dbff953712c9e4cf9a6e08589812faf35"
+    },
+    {
+      "byte_length": 1094,
+      "path": "CUSTODY_REQUIRED_REPORT.csv",
+      "sha256": "e0cd772c02995c3f90e92f693b1cf4329e18d2e6d476227f59b01ce61389d0c7"
+    },
+    {
+      "byte_length": 7579,
+      "path": "EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_V1_0.md",
+      "sha256": "25c2fd35d59eb44f2f9214b6512ae52b8b7bef6540d98d9aa3a0f37a3dadda32"
+    },
+    {
+      "byte_length": 1071,
+      "path": "OPEN_PR_EVIDENCE_SUMMARY.md",
+      "sha256": "7f54ff7b9b0f56a48f23e9eb96c7f82c5914258239994dedbc2e5e11cf983e10"
+    },
+    {
+      "byte_length": 19791,
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "8931e1ae5f014dce368ac5b882a4220addf0e140021b32708ab3e52b7c0bdd2d"
+    },
+    {
+      "byte_length": 6030,
+      "path": "STALE_BRANCH_REPORT.csv",
+      "sha256": "794fbead59a37d0f684578c3e4b9bd86489483783a0a6372053b1610e1b5b0d6"
+    },
+    {
+      "byte_length": 9343,
+      "path": "WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
+      "sha256": "0eaf9edf507525c6299a3ff06b05ca80cd5346e085ad5d76ecb5cdc5b6757f2f"
+    },
+    {
+      "byte_length": 16118,
+      "path": "WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.json",
+      "sha256": "9d2942fae9e9e9bbea771c5250510af5565ec094eb0265f916c5051311b79765"
+    },
+    {
+      "byte_length": 540,
+      "path": "tests/test_document_09.py",
+      "sha256": "69719d9fe5a9ca63956376f01694829d3c02344cb103506e1a1ca7f74f8e4925"
+    },
+    {
+      "byte_length": 2175,
+      "path": "validators/validate_document_09.py",
+      "sha256": "181ecfb26f1b9ed345c2c4b7965faf7bd75dc82090ea37e9dec37e2472ad4e64"
+    }
+  ],
+  "generated_at": "2026-08-01T15:39:11Z",
+  "package_root": "09_WORKSTREAM_PR_BRANCH_DISPOSITION"
+}

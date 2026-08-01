@@ -1,0 +1,3 @@
+conflict_id,workstream_id,conflict_type,treatment
+T1D09-CONFLICT-001,T1D09-PR-77,BEHIND_OR_UNMERGED_DEPENDENCY,Record as dependency context; do not treat as protected current standard.
+T1D09-CONFLICT-002,T1D09-PR-80,UNMERGED_COVERAGE_MATRIX_DEPENDENCY,Record as dependency context; later reconcile after separate disposition.
