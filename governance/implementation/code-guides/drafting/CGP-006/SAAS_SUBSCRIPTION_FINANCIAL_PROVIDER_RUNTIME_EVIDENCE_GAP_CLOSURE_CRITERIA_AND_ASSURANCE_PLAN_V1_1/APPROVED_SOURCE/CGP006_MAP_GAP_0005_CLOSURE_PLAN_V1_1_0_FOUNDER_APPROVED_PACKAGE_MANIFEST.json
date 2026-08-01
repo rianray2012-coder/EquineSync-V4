@@ -1,0 +1,32 @@
+{
+  "package_id": "CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-FOUNDER-APPROVED-2026-08-01",
+  "founder_approval_id": "ES-FD-CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-2026-08-01",
+  "founder_approval_timestamp": "2026-08-01T00:01:00-05:00",
+  "status": "FOUNDER_APPROVED_PENDING_PROTECTED_REPOSITORY_ACCESSION_AND_CUSTODY_NO_GAP_CLOSURE_EFFECT",
+  "gap_status": "OPEN",
+  "protected_repository_accession": "PENDING",
+  "custody": "PENDING",
+  "provider_connected_assurance_workstream_authority": "NOT_GRANTED_BY_THIS_APPROVAL",
+  "files": [
+    {
+      "name": "CGP006_MAP_GAP_0005_SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1_0_FOUNDER_APPROVED.md",
+      "sha256": "3dd7774cf35fc160e95209e1c7844028937f62176cbb184cc229d91267fc1bb1",
+      "bytes": 47636
+    },
+    {
+      "name": "CGP006_MAP_GAP_0005_SaaS_Subscription_Financial_Provider_Runtime_Evidence_Closure_Criteria_and_Assurance_Plan_V1_1_0_FOUNDER_APPROVED.docx",
+      "sha256": "47233460c91e82a59b7bbe5a515d110438f71d690510db3897552e6c7e09f4d3",
+      "bytes": 61742
+    },
+    {
+      "name": "FOUNDER_APPROVAL_RECORD_CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_2026_08_01.md",
+      "sha256": "da3ae9f93365e6e7587176e273f622f685e605e9785bc74b607174dc0c053f47",
+      "bytes": 4517
+    },
+    {
+      "name": "FOUNDER_APPROVAL_RECORD_CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_2026_08_01.docx",
+      "sha256": "d9d8fd0f7680b083021d7057258b2f0b99b331f8c205d9eede0e04604922c894",
+      "bytes": 39846
+    }
+  ]
+}
