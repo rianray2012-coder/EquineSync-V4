@@ -1,0 +1,101 @@
+{
+  "bugbot_findings": [
+    {
+      "finding_id": "a7811263-950b-4748-bfef-ff03e0a6ffc9",
+      "pr": 73,
+      "summary": "accession validator boundary-token self-validation"
+    },
+    {
+      "finding_id": "9b6947a1-d23f-4d1a-9ec5-b26786fad6b1",
+      "pr": 74,
+      "summary": "custody validator boundary-token self-validation"
+    },
+    {
+      "finding_id": "a5c02c51-35f1-48f3-bed1-f295f0476d31",
+      "pr": 74,
+      "summary": "custody validator did not enforce accession placeholder prohibitions"
+    }
+  ],
+  "current_corrected_working_tree_identities": {
+    "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/CHECKSUM_MANIFEST.sha256": {
+      "byte_length": 974,
+      "sha256": "5f8922f01f6ad96b6b3ce3276facb9aba49aa34b46faa301e413de48a79f1e1b",
+      "working_tree_path": "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/CHECKSUM_MANIFEST.sha256"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/PACKAGE_MANIFEST.json": {
+      "byte_length": 3042,
+      "sha256": "5549312f7573289b1912801b1064b3dd03ea997f145e894182f3a9c0ce76db3f",
+      "working_tree_path": "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/PACKAGE_MANIFEST.json"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/validators/validate_cgp006_gap0005_closure_plan_custody.py": {
+      "byte_length": 21876,
+      "sha256": "8e136cece8e7d15f0f0a9bd9e9ce2651d8244328c9561e9f13b2409a91c780c5",
+      "working_tree_path": "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/validators/validate_cgp006_gap0005_closure_plan_custody.py"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/CHECKSUM_MANIFEST.sha256": {
+      "byte_length": 2723,
+      "sha256": "9f9e937acc90f3db67924bc4b548c97971defc7d3666c3a548fde7392c0560c5",
+      "working_tree_path": "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/CHECKSUM_MANIFEST.sha256"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/PACKAGE_MANIFEST.json": {
+      "byte_length": 5016,
+      "sha256": "c6c62976a7dbe268705ee50567bbfe2aa8f005d79061792fafc262ca7c975c7e",
+      "working_tree_path": "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/PACKAGE_MANIFEST.json"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/validators/validate_cgp006_gap0005_closure_plan_accession.py": {
+      "byte_length": 16673,
+      "sha256": "044c485a201f2094f89a3e044d5df0ec61e00873db43e3f3f11fe51d7d8d95ce",
+      "working_tree_path": "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/validators/validate_cgp006_gap0005_closure_plan_accession.py"
+    }
+  },
+  "directive_id": "CGP_006_MAP_GAP_0005_CLOSURE_PLAN_CUSTODY_INTEGRITY_CORRECTION_AND_REFRESH_DIRECTIVE_V1_0_0",
+  "generated_at_utc": "2026-08-01T12:14:04Z",
+  "historical_original_identities": {
+    "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/CHECKSUM_MANIFEST.sha256": {
+      "byte_length": 974,
+      "git_blob_sha": "913d8526a94363616fb09341e453a5a779d86029",
+      "sha256": "5f8922f01f6ad96b6b3ce3276facb9aba49aa34b46faa301e413de48a79f1e1b",
+      "source": "HEAD before corrective edits"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/PACKAGE_MANIFEST.json": {
+      "byte_length": 3042,
+      "git_blob_sha": "65bbc799e5d8f225c6928f428b80e20541cfacdb",
+      "sha256": "5549312f7573289b1912801b1064b3dd03ea997f145e894182f3a9c0ce76db3f",
+      "source": "HEAD before corrective edits"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/validators/validate_cgp006_gap0005_closure_plan_custody.py": {
+      "byte_length": 17052,
+      "git_blob_sha": "b7f634813eee9b3d7ef50724bbfc6f4f4a0317e1",
+      "sha256": "12db69d8aa704909044ff69c12bde5d41fc12b5839a5b5d3778b7c41a40fea48",
+      "source": "HEAD before corrective edits"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/CHECKSUM_MANIFEST.sha256": {
+      "byte_length": 2723,
+      "git_blob_sha": "e29efed1d53f48f35dec5315bf64decf32590e8e",
+      "sha256": "9f9e937acc90f3db67924bc4b548c97971defc7d3666c3a548fde7392c0560c5",
+      "source": "HEAD before corrective edits"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/PACKAGE_MANIFEST.json": {
+      "byte_length": 5016,
+      "git_blob_sha": "c2577b4e1643c0a046acee893f02d3b0eaded036",
+      "sha256": "c6c62976a7dbe268705ee50567bbfe2aa8f005d79061792fafc262ca7c975c7e",
+      "source": "HEAD before corrective edits"
+    },
+    "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/validators/validate_cgp006_gap0005_closure_plan_accession.py": {
+      "byte_length": 11564,
+      "git_blob_sha": "d4f15c946e9fcb2941de24e68c45ebbc8486a28c",
+      "sha256": "4cd104a70fa444beef8e1b50fda087aacb333526d9d23cbc2bdf43abc7c035be",
+      "source": "HEAD before corrective edits"
+    }
+  },
+  "missing_zip_discovery": {
+    "git_blob_sha_from_exact_bytes": "1224e798f3d3afc5d5df1c6c2b67487e87c71878",
+    "ignored_by": "",
+    "path": "governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/APPROVED_SOURCE/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_2026_08_01.zip",
+    "pre_correction_cat_file_exit": 128,
+    "pre_correction_ls_files_exit": 1,
+    "pre_correction_ls_files_note": "Verified before force-add: git ls-files --error-unmatch returned exit 1 for the approved ZIP path.",
+    "required_byte_length": 117450,
+    "required_sha256": "56cec940bef67ca1a6932428398fdde7b3f7e78a9aee9f2b2f8e84b47ea49b95"
+  }
+}

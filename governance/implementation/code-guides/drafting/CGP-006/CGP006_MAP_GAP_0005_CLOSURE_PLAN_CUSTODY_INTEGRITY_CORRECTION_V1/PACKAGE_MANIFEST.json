@@ -1,0 +1,82 @@
+{
+  "directive_id": "CGP_006_MAP_GAP_0005_CLOSURE_PLAN_CUSTODY_INTEGRITY_CORRECTION_AND_REFRESH_DIRECTIVE_V1_0_0",
+  "files": [
+    {
+      "byte_length": 786,
+      "path": "ACCESSION_VALIDATOR_CORRECTION_RECORD.md",
+      "sha256": "9554128add21fba455af238301a164ef4a20f3b2d372a85529851a98cee7e628"
+    },
+    {
+      "byte_length": 1439,
+      "path": "APPROVED_ZIP_GIT_OBJECT_CUSTODY_RECORD.json",
+      "sha256": "d5912ce5be30b3a35d630bb714a56cceaebc411e73b943cb749cb9da004dcb28"
+    },
+    {
+      "byte_length": 881,
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "93cd030a28b39f185b368b901a4fcbfe66f4f69cf448a6052544b27186ea9419"
+    },
+    {
+      "byte_length": 1111,
+      "path": "BUGBOT_FINDING_DISPOSITION_MATRIX.csv",
+      "sha256": "e356fe95a3e91e4bce69d20d24ad0aefed9e5673151d723667c211cfd1c7198a"
+    },
+    {
+      "byte_length": 1266,
+      "path": "CUSTODY_INTEGRITY_DEFECT_AND_CORRECTION_RECORD.md",
+      "sha256": "10003283b06f5e967819a245b1aaeacb32ff69e3f45560b158ac0b87acaae05d"
+    },
+    {
+      "byte_length": 711,
+      "path": "CUSTODY_VALIDATOR_CORRECTION_RECORD.md",
+      "sha256": "8c314f66a3af7664d03100b630514a9cf459690d3e8dc614bd50b20cbb94f880"
+    },
+    {
+      "byte_length": 1719,
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "a8e66c4cce10166be4b48a4f7f712fe0c24186f61a3842099d2b8a8dc898ae73"
+    },
+    {
+      "byte_length": 6947,
+      "path": "HISTORICAL_VALIDATOR_AND_MANIFEST_IDENTITY_RECORD.json",
+      "sha256": "cfe08ee9ba412fdcc2e8027628f3d2ed4bd3f539dde29ba6ab676027842eeabe"
+    },
+    {
+      "byte_length": 867,
+      "path": "MISSING_APPROVED_ZIP_CUSTODY_FINDING.md",
+      "sha256": "cce59eeb936bd38ecf96bfc97a5c9999f1f1ab4133c8d70c908f151f89125ae1"
+    },
+    {
+      "byte_length": 1449,
+      "path": "NEGATIVE_TEST_MATRIX.csv",
+      "sha256": "8777cb42aedc7a3f2c1d9244099afdee94f6df164151ad3b6a6ff1c3cdad46cb"
+    },
+    {
+      "byte_length": 1214,
+      "path": "README.md",
+      "sha256": "2a17f701cf4b3326ba9d64c6febd46e9be808ed659738347a7e35fd06247d9f9"
+    },
+    {
+      "byte_length": 1705,
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "e90822dd41d158d9a212434f28dc605b97c1930e4e65415b83d9b6dede10dc33"
+    },
+    {
+      "byte_length": 1837,
+      "path": "tests/test_cgp006_gap0005_custody_integrity_correction.py",
+      "sha256": "aa5d1600e0c02c94f680fdabd6a72d812d4ea545e53a5bbc4dd452220db5ba7d"
+    },
+    {
+      "byte_length": 7696,
+      "path": "validators/validate_cgp006_gap0005_custody_integrity_correction.py",
+      "sha256": "b3a03a8da598775077f40b27227516b00819d81a7e97223b624755461f60a2e4"
+    }
+  ],
+  "gap_id": "CGP006-MAP-GAP-0005",
+  "gap_status": "OPEN",
+  "generated_at_utc": "2026-08-01T12:18:23Z",
+  "manifest_scope": "All correction package files except PACKAGE_MANIFEST.json, CHECKSUM_MANIFEST.sha256, __pycache__, and .pyc files.",
+  "package_id": "CGP006-MAP-GAP-0005-CLOSURE-PLAN-CUSTODY-INTEGRITY-CORRECTION-V1",
+  "protected_starting_head": "0863d3f58a1e3eaffbfd0c9778272c207d43c471",
+  "provider_assurance_status": "SUSPENDED_PENDING_CORRECTED_CUSTODY_REFRESH"
+}
