@@ -3,9 +3,9 @@
   "file_count_excluding_manifest_and_checksum": 10,
   "files": [
     {
-      "byte_length": 7547,
+      "byte_length": 8076,
       "path": "EQUINESYNC_GOVERNANCE_OWNERSHIP_STEWARDSHIP_AND_REVIEW_CALENDAR_V1_0.md",
-      "sha256": "7f79da18d867ec1ff75d3482fba94d224fe2d0142b2026add8d126fb4b477897"
+      "sha256": "6b0e7ca808ca226b986740e9fa46a2ece525d7a44d86d72b80cf997295a710e9"
     },
     {
       "byte_length": 196,
@@ -53,6 +53,6 @@
       "sha256": "fe4ea9ced4ba50bc54d661c1c09be259fb887dc95f514090f9dfc08079c78b4b"
     }
   ],
-  "generated_at": "2026-08-01T15:39:10Z",
+  "generated_at": "2026-08-01T15:40:49Z",
   "package_root": "07_OWNERSHIP_STEWARDSHIP_REVIEW"
 }
