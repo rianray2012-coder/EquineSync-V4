@@ -1,0 +1,53 @@
+{
+  "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "file_count_excluding_manifest_and_checksum": 9,
+  "files": [
+    {
+      "byte_length": 333,
+      "path": "DECISION_CONFLICT_REPORT.md",
+      "sha256": "cef1efdfc2ddd9ae0ea039c0173e6deefe940b3b79b1cf598a7bcc5ca423b7fb"
+    },
+    {
+      "byte_length": 7454,
+      "path": "EQUINESYNC_FOUNDER_DECISION_RATIFICATION_AND_ACCEPTANCE_REGISTER_V2_0.md",
+      "sha256": "7bfc7dc0c71dcb3c8ed1628ed9c116d247c1655eee686f8ed56b47558e0f5c0d"
+    },
+    {
+      "byte_length": 31994,
+      "path": "FOUNDER_DECISION_REGISTER.csv",
+      "sha256": "f055294645406bd4275fceeff2bff7320d80744d8be49b4151e4a53241c1f59e"
+    },
+    {
+      "byte_length": 61349,
+      "path": "FOUNDER_DECISION_REGISTER.json",
+      "sha256": "67a7f42dae48bf14d21a624d4b5c38f5729211a809c94f766f902ccba5195985"
+    },
+    {
+      "byte_length": 283,
+      "path": "HISTORICAL_TO_CURRENT_RECONCILIATION_REPORT.md",
+      "sha256": "aa31d55652db954523a6655717d9018609f3dccdb6c873c451dec440b7537762"
+    },
+    {
+      "byte_length": 24314,
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "4503b5812f7ce896325fa429927f8a1594ed32bcd405ba31478b2b140324475f"
+    },
+    {
+      "byte_length": 17179,
+      "path": "UNRESOLVED_DECISION_REGISTER.csv",
+      "sha256": "53df03e3f015b04369342d7db9d4835fe3d7d19168e1789b6b2bccc15b78f7a6"
+    },
+    {
+      "byte_length": 540,
+      "path": "tests/test_document_05.py",
+      "sha256": "1ddf3141a813ea7a5baa9a38535b188cd8717eeb921d8065fcb41ceef7b3d380"
+    },
+    {
+      "byte_length": 2128,
+      "path": "validators/validate_document_05.py",
+      "sha256": "e8439d40fe2cfe477fd834cd5015b6d6af38e7ea2a15906ca94a826af4cdf80b"
+    }
+  ],
+  "generated_at": "2026-08-01T15:39:10Z",
+  "package_root": "05_FOUNDER_DECISION_REGISTER"
+}
