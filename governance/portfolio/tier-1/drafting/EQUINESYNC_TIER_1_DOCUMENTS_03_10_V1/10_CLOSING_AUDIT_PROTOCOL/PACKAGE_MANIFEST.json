@@ -23,9 +23,9 @@
       "sha256": "462c0b07db438279d6dca19223c63c140bd20b3b98cd1d7aa2e8e04b5e67355b"
     },
     {
-      "byte_length": 7587,
+      "byte_length": 8093,
       "path": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_CERTIFICATION_PACKAGE_V1_0.md",
-      "sha256": "d985676c95047e873c1a2637cb0f8efb65602ff86c06d2d4f82880e976e6d35c"
+      "sha256": "389190c3886ac65e74724dfb49606ac687662d17c0f455e10adbd74f2c11d527"
     },
     {
       "byte_length": 19940,
@@ -143,6 +143,6 @@
       "sha256": "48e8c225119a7bc2832f83c8a8a6884f8b0bcf8f8477066a2b51a22414638b45"
     }
   ],
-  "generated_at": "2026-08-01T15:39:11Z",
+  "generated_at": "2026-08-01T15:40:50Z",
   "package_root": "10_CLOSING_AUDIT_PROTOCOL"
 }
