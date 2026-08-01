@@ -2,166 +2,157 @@
 
 ## 1. Document Control
 
-Artifact ID: `EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0`  
-Directive ID: `EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_DRAFTING_DIRECTIVE_V1_0_0`  
-Founder and approval authority: Rian Ray  
-Repository: `rianray2012-coder/EquineSync-V4`  
-Protected branch: `integrate-emergent-final-zip`  
-Baseline commit: `1eb384d80daa700ba2e71ee42872cc9bba926332`  
-Work branch: `codex/master-product-feature-governance-coverage-matrix-v1`  
+- Artifact ID: `EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0`
+- Directive ID: `EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_REVISION_DIRECTIVE_2026_08_01`
+- Founder and approval authority: Rian Ray
+- Repository: `rianray2012-coder/EquineSync-V4`
+- Protected branch: `integrate-emergent-final-zip`
+- Baseline commit: `1eb384d80daa700ba2e71ee42872cc9bba926332`
+- Work branch: `codex/master-product-feature-governance-coverage-matrix-v1`
+- Revision status: `EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_REVISION_COMPLETE_READY_FOR_FOUNDER_REVIEW`
 
 ## 2. Authority Notice
 
 `DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY`
 
-This package is documentary coverage analysis only. It does not adopt governance, create or approve a PIA, activate a Code Guide, authorize implementation, authorize provider mutation, authorize deployment, authorize staging, authorize pilot, authorize production use, or mutate the protected branch.
+- `NO_GOVERNANCE_ARTIFACT_ADOPTED`
+- `NO_NEW_PIA_APPROVED`
+- `NO_PIA_SUPPLEMENT_APPROVED`
+- `NO_CODE_GUIDE_ACTIVATED`
+- `NO_ADR_ADOPTED`
+- `NO_OPERATING_STANDARD_ADOPTED`
+- `NO_RUNBOOK_ADOPTED`
+- `NO_APPLICATION_CODE_MODIFIED`
+- `NO_SCHEMA_MODIFIED`
+- `NO_MIGRATION_CREATED_OR_RUN`
+- `NO_PROVIDER_CONFIGURATION_MODIFIED`
+- `NO_DEPLOYMENT_AUTHORIZED`
+- `NO_STAGING_ACTIVATION_AUTHORIZED`
+- `NO_PILOT_ACTIVATION_AUTHORIZED`
+- `NO_PRODUCTION_ACTIVATION_AUTHORIZED`
+- `NO_PROTECTED_BRANCH_DIRECT_MUTATION`
+- `NO_MERGE_AUTHORIZED`
+- `NO_RUNTIME_VERIFICATION_CLAIM_WITHOUT_EVIDENCE`
 
-## 3. Purpose
+This package is documentary coverage analysis only. It does not adopt governance, create or approve a PIA, approve a PIA supplement, activate a Code Guide, adopt an ADR, adopt an operating standard, adopt a runbook, authorize implementation, authorize provider mutation, authorize deployment, authorize staging, authorize pilot, authorize production use, claim runtime verification without evidence, merge, or mutate the protected branch.
 
-This matrix maps material EquineSync product capabilities to controlling governance sources, PIA ownership, Code Guide applicability, systems of truth, permission boundaries, implementation evidence, test evidence, retained gaps, and recommended documentary disposition.
+## 3. Executive Summary
 
-## 4. Scope
+The revised matrix preserves all `314` feature rows across `22` product domains and `25` distinct personas. It strengthens the draft into a documentary control plane for governance completion planning, PIA supplement planning, Code Guide planning, ADR/operating-standard/runbook planning, implementation verification, Founder decision tracking, risk-based sequencing, release-readiness analysis, and future governance-to-code conformity review.
 
-The scope includes repository inspection, governance-source reconciliation, product-feature discovery, as-built route/component/service/test inspection, source-register creation, deterministic validation, and draft-PR packaging.
+Governance completeness, governance readiness, implementation presence, implementation verification, and release readiness are intentionally separate. A repository path does not prove behavior, a draft PR does not grant adoption, and a planning priority does not authorize release.
 
-## 5. Out-of-Scope Matters
+## 4. Program Metrics
 
-Application code, schemas, migrations, providers, deployment, staging, pilot, production use, new PIA adoption, supplement approval, Code Guide activation, finding closure, and protected-branch mutation are out of scope.
+### Governance State
 
-## 6. Artifact Classification
+| governance_state | rows | percent |
+| --- | --- | --- |
+| PIA_SUPPLEMENT_CANDIDATE | 179 | 57.0% |
+| CODE_GUIDE_GAP | 49 | 15.6% |
+| OPERATING_STANDARD_GAP | 25 | 8.0% |
+| ADR_GAP | 16 | 5.1% |
+| RUNBOOK_GAP | 16 | 5.1% |
+| NEW_PIA_CANDIDATE | 14 | 4.5% |
+| FULLY_COVERED | 11 | 3.5% |
+| COVERED_WITH_RETAINED_GAP | 4 | 1.3% |
 
-Controlled portfolio-level governance coverage and analysis instrument. It is subordinate to locked constitutional governance, Founder directives, adopted PIAs, adopted implementation atlases, activated Code Guides, formally ratified ADRs, and lifecycle/authority records.
+### Implementation State
 
-## 7. Controlling Sources
+| implementation_state | rows | percent |
+| --- | --- | --- |
+| IMPLEMENTED_UNVERIFIED | 232 | 73.9% |
+| PARTIAL_IMPLEMENTATION | 65 | 20.7% |
+| NOT_FOUND | 13 | 4.1% |
+| DOCUMENTED_ONLY | 4 | 1.3% |
 
-The source register records `373` source entries with SHA-256 and byte length where exact repository bytes were available. Key controlling sources include the ten-item PIA portfolio, PIA component ownership map, current PIA approval status, Master Product Vision, Role Permission Matrix, Implementation Atlas, RF Index, Program Board, Code Guide Program Status, Code Guide registers, frontend route map, backend router assembly, backend permission map, and matched implementation/test files.
+### Risk Distribution
 
-## 8. Methodology
+| risk_severity | rows | percent |
+| --- | --- | --- |
+| HIGH | 163 | 51.9% |
+| MEDIUM | 136 | 43.3% |
+| CRITICAL | 15 | 4.8% |
 
-Rows were created from the directive's required product domains and atomic capability lists, then reconciled against repository-native PIA, canon, Code Guide, implementation, route, page, service, and test evidence. Implementation presence is not treated as runtime, UAT, pilot, or production evidence.
+### Readiness Distribution
 
-## 9. Feature Taxonomy
+| readiness_band | rows | percent |
+| --- | --- | --- |
+| PARTIAL_READINESS | 285 | 90.8% |
+| LOW_READINESS | 14 | 4.5% |
+| GOVERNANCE_READY | 11 | 3.5% |
+| HIGH_READINESS_WITH_RETAINED_GAPS | 4 | 1.3% |
 
-Feature IDs use `ES-FEAT-<DOMAIN>-<NUMBER>`. Domain parent records are maintained in `FEATURE_TAXONOMY_AND_ID_REGISTER.csv`; matrix rows use stable atomic IDs.
+### Gap Owner Distribution
 
-## 10. Governance Coverage Model
+| gap_owner | rows | percent |
+| --- | --- | --- |
+| GOVERNANCE | 193 | 61.5% |
+| ARCHITECTURE | 65 | 20.7% |
+| OPERATIONS | 41 | 13.1% |
+| ENGINEERING | 15 | 4.8% |
 
-Coverage state uses the directive vocabulary. Missing implementation, missing tests, missing provider evidence, and missing operational evidence are not automatically classified as PIA gaps.
+### Queue Counts
 
-## 11. PIA-Versus-Supplement Decision Standard
-
-A new PIA is recommended only when no existing PIA can own a distinct material product-governance domain without distorting the ten-item denominator. Otherwise the package recommends supplements, Code Guides, ADRs, operating standards, registers, runbooks, cross-domain contracts, implementation work, tests, or evidence.
-
-## 12. Non-PIA Gap Classification
-
-Non-PIA gaps are recorded in `NON_PIA_DOCUMENT_AND_CONTROL_GAP_REGISTER.csv` with feature IDs, severity, required action, and closure criteria.
-
-## 13. Current Implementation Methodology
-
-Implementation status is based on matched frontend pages/routes, backend route files, backend services, route assembly, permission map, RF/build evidence docs, and test filenames. No feature row is marked production active.
-
-## 14. Test and Evidence Methodology
-
-Feature-level test files were referenced where found, but not executed by this package. The package validator and validator tests are executed separately as documentary package validation.
-
-## 15. Product-Domain Coverage Summary
-
-| Domain | Rows |
+| queue_name | rows |
 | --- | --- |
-| Administration, support, security, and operations | 16 |
-| Artificial intelligence | 12 |
-| Care operations | 18 |
-| Communications and Owner Portal | 14 |
-| Developer platform and extensibility | 12 |
-| Documents, agreements, and electronic signatures | 15 |
-| Facility, barn, business, and physical operations | 17 |
-| Financial operations | 19 |
-| Horse identity and lifecycle | 13 |
-| Identity and access | 16 |
-| Incidents, emergency, welfare, and biosecurity | 14 |
-| Integrations and external providers | 16 |
-| Inventory and assets | 13 |
-| Lessons, training, riders, and guardians | 15 |
-| Marketplace, provider network, and community | 14 |
-| Media, files, and digital assets | 16 |
-| Mobile, offline, and synchronization | 13 |
-| Platform and shell | 10 |
-| Relationships and guardianship | 11 |
-| Reporting and analytics | 11 |
-| Shows, events, travel, and transport | 14 |
-| Tasks, calendar, scheduling, and notifications | 15 |
+| FOUNDER_DECISION_QUEUE | 314 |
+| IMPLEMENTATION_VERIFICATION_QUEUE | 314 |
+| RUNTIME_VERIFICATION_QUEUE | 297 |
+| PIA_SUPPLEMENT_QUEUE | 179 |
+| CONFLICT_RESOLUTION_QUEUE | 116 |
+| CODE_GUIDE_QUEUE | 49 |
+| OPERATING_STANDARD_QUEUE | 25 |
+| ADR_QUEUE | 16 |
+| RUNBOOK_QUEUE | 16 |
+| NEW_PIA_QUEUE | 14 |
 
-## 16. PIA Coverage Summary
+## 5. Fully Covered Criteria
 
-| pia_id | pia_title | features_governed | features_partially_governed | fully_covered_features | missing_supplements |
-| --- | --- | --- | --- | --- | --- |
-| PIA-01 | Identity, Account, Actor, and Onboarding | 27 | 22 | 4 | DOC-SUP-PIA-01-IDENTITY-ACCESS;DOC-SUP-PIA-03-RELATIONSHIP-GUARDIANSHIP |
-| PIA-02 | Facility, Tenant, and Organizational Structure | 60 | 28 | 0 | DOC-SUP-PIA-02-FACILITY-OPERATIONS;DOC-SUP-PIA-07-INVENTORY-ASSETS |
-| PIA-03 | Relationship, Authorization, and Permission | 111 | 87 | 7 | DOC-SUP-PIA-01-IDENTITY-ACCESS;DOC-SUP-PIA-03-RELATIONSHIP-GUARDIANSHIP;DOC-SUP-PIA-04-HORSE-LIFECYCLE;DOC-SUP-PIA-08-EVENTS-TRAVEL;DOC-SUP-PIA-08-LESSONS-GUARDIAN;DOC-SUP-PIA-10-COMMUNICATIONS-PORTAL;DOC-SUP-PIA-10-DOCUMENTS-SIGNATURES |
-| PIA-04 | Horse Identity, Profile, and Lifecycle | 60 | 45 | 1 | DOC-SUP-PIA-04-HORSE-LIFECYCLE;DOC-SUP-PIA-07-CARE-OPERATIONS;DOC-SUP-PIA-10-MEDIA-FILES |
-| PIA-05 | Core Navigation, Search, and Application Shell | 49 | 7 | 3 | DOC-SUP-PIA-05-PLATFORM-SHELL |
-| PIA-06 | Task, Calendar, Scheduling, and Notification | 91 | 55 | 1 | DOC-SUP-PIA-06-TASK-CALENDAR;DOC-SUP-PIA-07-CARE-OPERATIONS;DOC-SUP-PIA-08-EVENTS-TRAVEL;DOC-SUP-PIA-08-LESSONS-GUARDIAN |
-| PIA-07 | Care Operations | 97 | 45 | 0 | DOC-SUP-PIA-07-CARE-OPERATIONS;DOC-SUP-PIA-07-INVENTORY-ASSETS;DOC-SUP-PIA-10-MEDIA-FILES |
-| PIA-08 | Lessons, Training, Rider, and Guardian | 54 | 36 | 1 | DOC-SUP-PIA-03-RELATIONSHIP-GUARDIANSHIP;DOC-SUP-PIA-08-EVENTS-TRAVEL;DOC-SUP-PIA-08-LESSONS-GUARDIAN |
-| PIA-09 | Billing, Payments, and Financial Operations | 58 | 17 | 1 | DOC-SUP-PIA-09-FINANCIAL-OPERATIONS |
-| PIA-10 | Owner Portal and Communications | 73 | 42 | 1 | DOC-SUP-PIA-10-COMMUNICATIONS-PORTAL;DOC-SUP-PIA-10-DOCUMENTS-SIGNATURES;DOC-SUP-PIA-10-MEDIA-FILES |
+The count remains `11`. The standard is intentionally strict: a row must have identified PIA coverage, no Code Guide/ADR/operating-standard/runbook gap, no missing mandatory AI/safeguarding/privacy/reporting layer, documentary readiness score at or above 90, and no P0/P1 governance gap. `FULLY_COVERED` does not mean implementation, runtime, UAT, pilot, production, or adoption readiness.
 
-## 17. Proposed New PIAs
+## 6. PIA Supplement Mapping
 
-One new PIA candidate is ranked: `DOC-NEW-PIA-MARKETPLACE-PROVIDER-NETWORK-COMMUNITY`. It remains only a candidate requiring separate Founder decision before drafting or adoption.
+The `179` PIA supplement candidate rows remain mapped to the proposed fourteen supplements in `PIA_SUPPLEMENT_ROW_MAPPING.csv`. The mapping is row-level and deterministic from `Required new document or supplement`.
 
-## 18. Proposed PIA Supplements
+## 7. New PIA Candidate
 
-Recommended supplements are listed in `PROPOSED_NEW_PIA_AND_SUPPLEMENT_DECISION_REGISTER.csv`. They inherit parent PIA boundaries and must not create competing PIA owners.
+The `14` Marketplace, Provider Network, and Community rows remain one new-PIA decision family. `NEW_PIA_CANDIDATE_ANALYSIS.md` records alternatives and tradeoffs; no adoption or final structure is decided.
 
-## 19. Code Guide and ADR Gaps
+## 8. Ungoverned Rows
 
-Rows with `CODE_GUIDE_GAP` generally require planned Code Guides such as ES-CG-02 through ES-CG-12. Rows with `ADR_GAP` include offline/synchronization and architecture decisions that should be ratified before implementation expansion.
+`UNGOVERNED_CAPABILITY_REGISTER.csv` lists `14` no-current-PIA-owner candidate rows plus additional rows whose PIA owner remains not identified by current evidence. Each row has a likely governance owner, applicable layers, risk, recommended artifact, Founder decision requirement, and next action.
 
-## 20. Operating-Standard, Register, and Runbook Gaps
+## 9. Non-PIA Gaps
 
-Incident/welfare/biosecurity and reporting/analytics rows require operating standards; administration/support/security/operations rows require runbooks. Additional controlled registers are identified for provider, role, retention, and lifecycle values.
+`NON_PIA_DOCUMENT_AND_CONTROL_GAP_REGISTER.csv` still covers every feature for auditability, but no longer treats every row as equally deficient. It separates no non-PIA governance gap from Code Guide, ADR, operating-standard, runbook, implementation-verification, source-authority, dependency, conflict, and release-planning gaps.
 
-## 21. Ungoverned Capabilities
+## 10. Dependency Summary
 
-`UNGOVERNED_CAPABILITY_REGISTER.csv` lists rows without a current PIA owner or with a new-PIA candidate classification. Most are marketplace/provider/community rows.
+- Rows with at least one upstream dependency: `313`
+- Highest downstream block count: `313`
+- High-degree hubs: `8`
 
-## 22. Duplicate and Conflicting Authority
+Dependencies are stable feature-ID references inferred for planning. They are not architecture commitments.
 
-`DUPLICATE_OVERLAP_AND_AUTHORITY_CONFLICT_REGISTER.csv` records PIA source-status limits, PIA source-identity reconciliation needs, financial-authority boundaries, projection-versus-truth risks, and provider-authority risks.
+## 11. Implementation Verification
 
-## 23. Findings and Retained Risks
+All prior `IMPLEMENTED_UNVERIFIED` rows now include evidence paths where found, evidence type, evidence confidence, repository verification state, runtime verification state, test evidence, and limitation notes. No row is promoted to repository/test/runtime/Founder verified by this revision.
 
-- Total feature rows: 314
-- Fully covered: 11
-- Partially/supplement covered: 183
-- New PIA candidate rows: 14
-- Code Guide gap rows: 49
-- ADR gap rows: 16
-- Operating-standard gap rows: 25
-- Runbook gap rows: 16
-- Implementation statuses: DOCUMENTED_ONLY=4, IMPLEMENTED_UNVERIFIED=232, NOT_FOUND=13, PARTIAL_IMPLEMENTATION=65
+## 12. Dashboard and Queues
 
-## 24. Founder Questions
+`DASHBOARD_SUMMARY.md`, `DASHBOARD_SUMMARY.json`, and `PRIORITIZED_WORK_QUEUES.csv` are generated from the authoritative matrix. They cover governance by domain, implementation by domain, risk by domain, gap type by domain, persona impact, PIA distribution, top blockers, high-dependency features, highest-risk ungoverned rows, highest-risk implemented-unverified rows, new PIA candidates, PIA supplements, release targets, and owner distribution.
 
-Founder questions are recorded in `FOUNDER_DECISION_QUESTION_REGISTER.csv`. They include matrix disposition, marketplace PIA treatment, supplement sequencing, PIA source reconciliation, Code Guide sequencing, provider activation, implementation evidence, AI boundaries, offline architecture, and product-scope triage.
+## 13. File Size and Usability
 
-## 25. Recommended Drafting Sequence
+The denormalized CSV/JSON remain preserved for external review and row-level traceability. Normalized companion registers were added for dependencies, PIA mappings, Code Guide gaps, queues, dashboard summaries, fields, and version changes to reduce review burden without sacrificing traceability.
 
-1. Reconcile PIA source identity for PIA positions where the realignment register reports no primary package located.
-2. Decide whether Marketplace/Provider Network/Community is a new PIA candidate or formally deferred.
-3. Draft bounded supplements for PIA-05, PIA-01, PIA-03, PIA-02, PIA-04, PIA-06, PIA-07, PIA-08, PIA-09, and PIA-10 as prioritized by Founder decision.
-4. Draft or complete Code Guides/ADRs for external adapters, offline sync, AI, platform operations, and developer extensibility under separate authority.
-5. Only after documentary decisions, perform implementation/test/evidence work under separate explicit authority.
+## 14. Validation
 
-## 26. Closure Criteria
+Validation is deterministic and covers required columns, controlled vocabularies, dependency references and cycles, percentages, dashboard counts, queue derivation, Founder decision claims, implementation verification claims, fully-covered criteria, readiness scoring, unresolved gap ownership, risk scoring, manifest lengths and hashes, checksums, authorized path boundaries, and authority disclaimers.
 
-Closure requires Founder disposition, source-register update, deterministic validator pass, checksum verification, and row-specific closure evidence. This draft does not close product, implementation, runtime, UAT, pilot, production, or retained governance findings.
+## 15. Final Documentary Disposition
 
-## 27. Maintenance and Update Rules
+`EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_REVISION_COMPLETE_READY_FOR_FOUNDER_REVIEW`
 
-Future updates must preserve prior status, change date, source, authority, reason, evidence baseline, and row-level lineage when a canon, PIA, Code Guide, feature, test, provider, release, finding, waiver, or Founder certification changes.
-
-## 28. Final Documentary Disposition
-
-`EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_DRAFT_COMPLETE_READY_FOR_FOUNDER_REVIEW` if deterministic validation passes and the PR remains draft/unmerged. This disposition does not adopt any recommendation.
+This disposition is ready for Founder review only and does not adopt any recommendation.

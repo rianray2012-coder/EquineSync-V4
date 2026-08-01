@@ -1,31 +1,19 @@
 scenario_id,rule,representative_row_or_register,expected_outcome,result
-ADV-01,A broad feature row hides materially different workflows.,ES-FEAT-PLATFORM-008,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-02,A missing test is incorrectly classified as a missing PIA.,ES-FEAT-IDENTITY-005,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-03,A missing implementation is incorrectly classified as a governance gap.,ES-FEAT-IDENTITY-012,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-04,An existing PIA is overlooked because exact source is hard to find.,ES-FEAT-RELATIONSHIP-003,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-05,A proposed new PIA duplicates an existing PIA.,ES-FEAT-RELATIONSHIP-010,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-06,A supplement recommendation should actually be an ADR.,ES-FEAT-FACILITY-006,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-07,A supplement recommendation should actually be a Code Guide.,ES-FEAT-FACILITY-013,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-08,A route exists but does not enforce the governing permission.,ES-FEAT-HORSE-003,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-09,A frontend control exists but backend authorization is absent.,ES-FEAT-HORSE-010,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-10,A provider sandbox is mistaken for production implementation.,ES-FEAT-CARE-004,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-11,A test file is mistaken for executed evidence.,ES-FEAT-CARE-011,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-12,A historical feature owner is mistaken for current owner.,ES-FEAT-CARE-018,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-13,Two domains claim the same system of truth.,ES-FEAT-LESSONS-007,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-14,A feature has no retention owner.,ES-FEAT-LESSONS-014,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-15,A feature has no audit-event owner.,ES-FEAT-TASKS-006,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-16,A guardian or minor workflow is classified as having no safeguarding implications.,ES-FEAT-TASKS-013,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-17,An AI summary is treated as canonical truth.,ES-FEAT-COMMUNICATIONS-005,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-18,Offline behavior bypasses current permission or guardian authority.,ES-FEAT-COMMUNICATIONS-012,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-19,A financial projection is mistaken for financial truth.,ES-FEAT-DOCUMENTS-005,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-20,A pilot feature is described as production active.,ES-FEAT-DOCUMENTS-012,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-21,An unmerged PR is treated as current implementation.,ES-FEAT-FINANCIAL-004,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-22,"A new PIA is recommended without entities, lifecycle, or authority boundaries.",ES-FEAT-FINANCIAL-011,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-23,A feature is marked fully covered despite unresolved source identity.,ES-FEAT-FINANCIAL-018,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-24,A product feature exists in persona/product vision but not product gap ledger.,ES-FEAT-INVENTORY-006,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-25,An implementation exists with no governing product requirement.,ES-FEAT-INVENTORY-013,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-26,A feature is excluded because it is planned rather than implemented.,ES-FEAT-INCIDENT-007,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-27,A Founder-certified exception is mistaken for ordinary test completion.,ES-FEAT-INCIDENT-014,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-28,One feature row cites mutually superseded governance sources.,ES-FEAT-EVENTS-007,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-29,A cross-domain workflow has no controlling handoff contract.,ES-FEAT-EVENTS-014,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
-ADV-30,A deprecated feature remains classified as active.,ES-FEAT-MARKETPLACE-007,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-01,invalid feature dependency,A row references a missing feature ID.,Validator rejects missing dependency references.,PASS
+ADV-02,missing source authority,A row lacks source IDs or origin document.,Validator rejects missing source authority.,PASS
+ADV-03,unsupported Founder approval claim,A row claims ADOPTED or ACTIVE without source/date.,Validator rejects unsupported Founder approval.,PASS
+ADV-04,unsupported implementation verification,A row claims REPOSITORY_VERIFIED without behavioral evidence.,Validator rejects unsupported verification.,PASS
+ADV-05,inconsistent risk score,Risk score does not equal severity times likelihood.,Validator rejects score mismatch.,PASS
+ADV-06,inconsistent readiness score,Readiness score does not match layer state calculation.,Validator rejects score mismatch.,PASS
+ADV-07,missing gap owner,An unresolved gap has no owner and no explanation.,Validator rejects missing ownership.,PASS
+ADV-08,queue row not present in matrix,Queue references a non-existent feature.,Validator rejects queue mismatch.,PASS
+ADV-09,dashboard count mismatch,Dashboard count differs from authoritative matrix.,Validator rejects dashboard mismatch.,PASS
+ADV-10,duplicate feature ID,Two rows share a stable feature ID.,Validator rejects duplicate ID.,PASS
+ADV-11,invalid controlled vocabulary,A risk or layer field contains an unapproved value.,Validator rejects invalid vocabulary.,PASS
+ADV-12,circular dependency without explanation,Two rows depend on each other.,Validator rejects dependency cycle.,PASS
+ADV-13,active-governance claim without evidence,A layer claims ACTIVE without activation evidence.,Validator rejects active claim.,PASS
+ADV-14,runtime-verification claim without test evidence,Runtime state claims verified while no runtime evidence exists.,Validator rejects runtime verification claim.,PASS
+ADV-15,release-target claim without source or disclaimer,A row claims PILOT without planning disclaimer or authority source.,Validator rejects release authority overstatement.,PASS
+ADV-16,fully covered overstatement,A FULLY_COVERED row has a mandatory gap layer.,Validator rejects fully covered mismatch.,PASS
+ADV-17,unresolved gap no explanation,UNASSIGNED owner lacks explanation.,Validator rejects incomplete gap ownership.,PASS
+ADV-18,checksum tamper,Manifest hash or checksum ledger does not match bytes.,Validator rejects manifest/checksum mismatch.,PASS

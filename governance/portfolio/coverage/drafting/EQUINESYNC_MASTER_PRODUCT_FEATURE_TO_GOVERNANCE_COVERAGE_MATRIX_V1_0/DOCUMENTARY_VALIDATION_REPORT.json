@@ -1,102 +1,133 @@
 {
-  "adversarial_review_scenarios": 30,
+  "adversarial_review_scenarios": 18,
   "artifact_id": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0",
   "authority_confirmations": {
+    "adr_adopted": false,
     "application_code_changed": false,
     "code_guide_activated": false,
     "deployment_occurred": false,
     "governance_artifact_adopted": false,
     "merge_occurred": false,
-    "pia_created_or_approved": false,
+    "new_pia_approved": false,
+    "operating_standard_adopted": false,
+    "pia_supplement_approved": false,
     "pilot_or_production_authorized": false,
     "protected_branch_directly_mutated": false,
     "provider_mutation_occurred": false,
-    "schema_or_migration_changed": false
+    "runbook_adopted": false,
+    "runtime_verification_claim_without_evidence": false,
+    "schema_or_migration_changed": false,
+    "staging_activation_authorized": false
   },
   "authority_statement": "DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "authority_statements": [
+    "NO_GOVERNANCE_ARTIFACT_ADOPTED",
+    "NO_NEW_PIA_APPROVED",
+    "NO_PIA_SUPPLEMENT_APPROVED",
+    "NO_CODE_GUIDE_ACTIVATED",
+    "NO_ADR_ADOPTED",
+    "NO_OPERATING_STANDARD_ADOPTED",
+    "NO_RUNBOOK_ADOPTED",
+    "NO_APPLICATION_CODE_MODIFIED",
+    "NO_SCHEMA_MODIFIED",
+    "NO_MIGRATION_CREATED_OR_RUN",
+    "NO_PROVIDER_CONFIGURATION_MODIFIED",
+    "NO_DEPLOYMENT_AUTHORIZED",
+    "NO_STAGING_ACTIVATION_AUTHORIZED",
+    "NO_PILOT_ACTIVATION_AUTHORIZED",
+    "NO_PRODUCTION_ACTIVATION_AUTHORIZED",
+    "NO_PROTECTED_BRANCH_DIRECT_MUTATION",
+    "NO_MERGE_AUTHORIZED",
+    "NO_RUNTIME_VERIFICATION_CLAIM_WITHOUT_EVIDENCE"
+  ],
   "checks": [
-    {
-      "check": "unique_feature_ids",
-      "result": "PASS"
-    },
     {
       "check": "required_columns_present",
       "result": "PASS"
     },
     {
-      "check": "csv_json_agree",
+      "check": "unique_feature_ids",
       "result": "PASS"
     },
     {
-      "check": "source_ids_resolve",
+      "check": "controlled_vocabularies",
       "result": "PASS"
     },
     {
-      "check": "pia_references_map_to_inventory",
+      "check": "feature_dependencies_resolve_and_are_acyclic",
       "result": "PASS"
     },
     {
-      "check": "code_guide_references_map_to_inventory",
+      "check": "percentages_reconcile",
       "result": "PASS"
     },
     {
-      "check": "draft_new_pia_rows_have_analysis",
+      "check": "dashboard_counts_reconcile",
       "result": "PASS"
     },
     {
-      "check": "supplement_rows_identify_parent_pia",
+      "check": "queue_rows_derivable",
       "result": "PASS"
     },
     {
-      "check": "no_candidate_pia_adopted",
+      "check": "founder_claims_have_sources",
       "result": "PASS"
     },
     {
-      "check": "no_unmerged_pr_treated_as_current",
+      "check": "implementation_verification_claims_have_evidence",
       "result": "PASS"
     },
     {
-      "check": "no_waived_test_reported_as_passed",
+      "check": "fully_covered_rows_satisfy_criteria",
+      "result": "PASS"
+    },
+    {
+      "check": "governance_ready_rows_satisfy_scoring_rules",
+      "result": "PASS"
+    },
+    {
+      "check": "unresolved_gaps_have_owner_or_explanation",
+      "result": "PASS"
+    },
+    {
+      "check": "risk_scores_reconcile",
+      "result": "PASS"
+    },
+    {
+      "check": "manifest_hashes_and_byte_lengths_reconcile",
+      "result": "PASS"
+    },
+    {
+      "check": "authority_disclaimers_present",
       "result": "PASS"
     },
     {
       "check": "authorized_path_boundary",
       "result": "PASS"
-    },
-    {
-      "check": "no_application_schema_config_provider_deployment_changes",
-      "result": "PASS"
     }
   ],
+  "dashboard_row_count": 314,
   "executed_validation_commands": [
     {
       "command": "PYTHONDONTWRITEBYTECODE=1 python3 governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/validators/validate_master_product_feature_coverage_matrix.py",
-      "output_summary": "DOCUMENTARY_VALIDATION_PASS; feature_rows=314; source_rows=373",
-      "result": "PASS"
+      "expected_result": "DOCUMENTARY_VALIDATION_PASS"
     },
     {
       "command": "PYTHONDONTWRITEBYTECODE=1 python3 governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/tests/test_master_product_feature_coverage_matrix.py",
-      "output_summary": "VALIDATOR_TESTS_PASS",
-      "result": "PASS"
-    },
-    {
-      "command": "python3 -m pytest governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/tests/test_master_product_feature_coverage_matrix.py",
-      "output_summary": "No module named pytest; stdlib direct test fallback executed and passed",
-      "result": "NOT_RUN_ENVIRONMENT_MISSING_PYTEST"
+      "expected_result": "VALIDATOR_TESTS_PASS"
     }
   ],
   "feature_rows": 314,
-  "gap_rows": 314,
-  "generated_at_utc": "2026-08-01T15:10:08.598499+00:00",
-  "governance_artifact_rows": 54,
-  "pia_summary_rows": 10,
-  "source_rows": 373,
-  "status": "PASS",
-  "ungoverned_rows": 26,
-  "warnings": [
-    "Feature implementation evidence is keyword/path inspection and does not prove runtime completeness.",
-    "Feature tests were not executed for each product row; only package validator tests are in scope.",
-    "PIA source identity reconciliation remains required where realignment register and item directory evidence differ.",
-    "Persona Workflow Map and Product Gap Ledger exact artifacts were not located by repository search; Master Product Vision, RF Index, Program Board, and retained registers were used as context."
-  ]
+  "known_limitations": [
+    "No runtime verification was performed.",
+    "No application code, schema, migration, provider configuration, deployment, staging, pilot, or production system was modified.",
+    "Repository evidence remains documentary unless a later authorized phase verifies behavior.",
+    "Risk, effort, MVP, and owner fields are planning estimates pending Founder disposition.",
+    "Release targets remain UNASSIGNED because this revision grants no release authority."
+  ],
+  "pytest_available": false,
+  "queue_rows": 1340,
+  "revision_status": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_REVISION_COMPLETE_READY_FOR_FOUNDER_REVIEW",
+  "source_rows": 374,
+  "test_runner_used": "standard_library_direct_test_fallback"
 }

@@ -1,0 +1,411 @@
+{
+  "artifact_id": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0",
+  "authority_statements": [
+    "NO_GOVERNANCE_ARTIFACT_ADOPTED",
+    "NO_NEW_PIA_APPROVED",
+    "NO_PIA_SUPPLEMENT_APPROVED",
+    "NO_CODE_GUIDE_ACTIVATED",
+    "NO_ADR_ADOPTED",
+    "NO_OPERATING_STANDARD_ADOPTED",
+    "NO_RUNBOOK_ADOPTED",
+    "NO_APPLICATION_CODE_MODIFIED",
+    "NO_SCHEMA_MODIFIED",
+    "NO_MIGRATION_CREATED_OR_RUN",
+    "NO_PROVIDER_CONFIGURATION_MODIFIED",
+    "NO_DEPLOYMENT_AUTHORIZED",
+    "NO_STAGING_ACTIVATION_AUTHORIZED",
+    "NO_PILOT_ACTIVATION_AUTHORIZED",
+    "NO_PRODUCTION_ACTIVATION_AUTHORIZED",
+    "NO_PROTECTED_BRANCH_DIRECT_MUTATION",
+    "NO_MERGE_AUTHORIZED",
+    "NO_RUNTIME_VERIFICATION_CLAIM_WITHOUT_EVIDENCE"
+  ],
+  "baseline_commit": "1eb384d80daa700ba2e71ee42872cc9bba926332",
+  "counts": {
+    "gap_classification": {
+      "ADR_GAP": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "CODE_GUIDE_GAP": {
+        "percent": "15.6%",
+        "rows": 49
+      },
+      "EVIDENCE_ONLY_GAP": {
+        "percent": "3.5%",
+        "rows": 11
+      },
+      "IMPLEMENTATION_ONLY_GAP": {
+        "percent": "1.3%",
+        "rows": 4
+      },
+      "NEW_PIA_CANDIDATE": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "OPERATING_STANDARD_GAP": {
+        "percent": "8.0%",
+        "rows": 25
+      },
+      "PIA_SUPPLEMENT_CANDIDATE": {
+        "percent": "57.0%",
+        "rows": 179
+      },
+      "RUNBOOK_GAP": {
+        "percent": "5.1%",
+        "rows": 16
+      }
+    },
+    "gap_owner": {
+      "ARCHITECTURE": {
+        "percent": "20.7%",
+        "rows": 65
+      },
+      "ENGINEERING": {
+        "percent": "4.8%",
+        "rows": 15
+      },
+      "GOVERNANCE": {
+        "percent": "61.5%",
+        "rows": 193
+      },
+      "OPERATIONS": {
+        "percent": "13.1%",
+        "rows": 41
+      }
+    },
+    "governance_state": {
+      "ADR_GAP": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "CODE_GUIDE_GAP": {
+        "percent": "15.6%",
+        "rows": 49
+      },
+      "COVERED_WITH_RETAINED_GAP": {
+        "percent": "1.3%",
+        "rows": 4
+      },
+      "FULLY_COVERED": {
+        "percent": "3.5%",
+        "rows": 11
+      },
+      "NEW_PIA_CANDIDATE": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "OPERATING_STANDARD_GAP": {
+        "percent": "8.0%",
+        "rows": 25
+      },
+      "PIA_SUPPLEMENT_CANDIDATE": {
+        "percent": "57.0%",
+        "rows": 179
+      },
+      "RUNBOOK_GAP": {
+        "percent": "5.1%",
+        "rows": 16
+      }
+    },
+    "implementation_state": {
+      "DOCUMENTED_ONLY": {
+        "percent": "1.3%",
+        "rows": 4
+      },
+      "IMPLEMENTED_UNVERIFIED": {
+        "percent": "73.9%",
+        "rows": 232
+      },
+      "NOT_FOUND": {
+        "percent": "4.1%",
+        "rows": 13
+      },
+      "PARTIAL_IMPLEMENTATION": {
+        "percent": "20.7%",
+        "rows": 65
+      }
+    },
+    "personas": {
+      "Admin": {
+        "percent": "12.1%",
+        "rows": 38
+      },
+      "Auditor": {
+        "percent": "3.5%",
+        "rows": 11
+      },
+      "Barn Manager": {
+        "percent": "96.2%",
+        "rows": 302
+      },
+      "Billing Admin": {
+        "percent": "16.2%",
+        "rows": 51
+      },
+      "Community Member": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "Contractor": {
+        "percent": "5.4%",
+        "rows": 17
+      },
+      "Developer": {
+        "percent": "3.8%",
+        "rows": 12
+      },
+      "Facility Owner": {
+        "percent": "46.8%",
+        "rows": 147
+      },
+      "Farrier": {
+        "percent": "14.0%",
+        "rows": 44
+      },
+      "Guardian": {
+        "percent": "77.1%",
+        "rows": 242
+      },
+      "Guest": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "Integration Partner": {
+        "percent": "3.8%",
+        "rows": 12
+      },
+      "Minor Rider": {
+        "percent": "3.5%",
+        "rows": 11
+      },
+      "Owner": {
+        "percent": "86.9%",
+        "rows": 273
+      },
+      "Platform Admin": {
+        "percent": "28.0%",
+        "rows": 88
+      },
+      "Read Only Auditor": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "Rider": {
+        "percent": "39.5%",
+        "rows": 124
+      },
+      "Service Provider": {
+        "percent": "35.0%",
+        "rows": 110
+      },
+      "Staff": {
+        "percent": "67.2%",
+        "rows": 211
+      },
+      "Support": {
+        "percent": "23.2%",
+        "rows": 73
+      },
+      "Support Admin": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "Trainer": {
+        "percent": "86.0%",
+        "rows": 270
+      },
+      "Transporter": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "User": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "Veterinarian": {
+        "percent": "23.6%",
+        "rows": 74
+      }
+    },
+    "pia_state": {
+      "COVERED": {
+        "percent": "3.5%",
+        "rows": 11
+      },
+      "COVERED_WITH_RETAINED_GAP": {
+        "percent": "31.2%",
+        "rows": 98
+      },
+      "NOT_IDENTIFIED": {
+        "percent": "8.3%",
+        "rows": 26
+      },
+      "PARTIAL": {
+        "percent": "57.0%",
+        "rows": 179
+      }
+    },
+    "product_domains": {
+      "Administration, support, security, and operations": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "Artificial intelligence": {
+        "percent": "3.8%",
+        "rows": 12
+      },
+      "Care operations": {
+        "percent": "5.7%",
+        "rows": 18
+      },
+      "Communications and Owner Portal": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "Developer platform and extensibility": {
+        "percent": "3.8%",
+        "rows": 12
+      },
+      "Documents, agreements, and electronic signatures": {
+        "percent": "4.8%",
+        "rows": 15
+      },
+      "Facility, barn, business, and physical operations": {
+        "percent": "5.4%",
+        "rows": 17
+      },
+      "Financial operations": {
+        "percent": "6.1%",
+        "rows": 19
+      },
+      "Horse identity and lifecycle": {
+        "percent": "4.1%",
+        "rows": 13
+      },
+      "Identity and access": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "Incidents, emergency, welfare, and biosecurity": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "Integrations and external providers": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "Inventory and assets": {
+        "percent": "4.1%",
+        "rows": 13
+      },
+      "Lessons, training, riders, and guardians": {
+        "percent": "4.8%",
+        "rows": 15
+      },
+      "Marketplace, provider network, and community": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "Media, files, and digital assets": {
+        "percent": "5.1%",
+        "rows": 16
+      },
+      "Mobile, offline, and synchronization": {
+        "percent": "4.1%",
+        "rows": 13
+      },
+      "Platform and shell": {
+        "percent": "3.2%",
+        "rows": 10
+      },
+      "Relationships and guardianship": {
+        "percent": "3.5%",
+        "rows": 11
+      },
+      "Reporting and analytics": {
+        "percent": "3.5%",
+        "rows": 11
+      },
+      "Shows, events, travel, and transport": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "Tasks, calendar, scheduling, and notifications": {
+        "percent": "4.8%",
+        "rows": 15
+      }
+    },
+    "readiness_band": {
+      "GOVERNANCE_READY": {
+        "percent": "3.5%",
+        "rows": 11
+      },
+      "HIGH_READINESS_WITH_RETAINED_GAPS": {
+        "percent": "1.3%",
+        "rows": 4
+      },
+      "LOW_READINESS": {
+        "percent": "4.5%",
+        "rows": 14
+      },
+      "PARTIAL_READINESS": {
+        "percent": "90.8%",
+        "rows": 285
+      }
+    },
+    "release_target": {
+      "UNASSIGNED": {
+        "percent": "100.0%",
+        "rows": 314
+      }
+    },
+    "risk_score": {
+      "12": {
+        "percent": "44.9%",
+        "rows": 141
+      },
+      "16": {
+        "percent": "4.8%",
+        "rows": 15
+      },
+      "4": {
+        "percent": "1.3%",
+        "rows": 4
+      },
+      "6": {
+        "percent": "2.9%",
+        "rows": 9
+      },
+      "8": {
+        "percent": "41.4%",
+        "rows": 130
+      },
+      "9": {
+        "percent": "4.8%",
+        "rows": 15
+      }
+    },
+    "risk_severity": {
+      "CRITICAL": {
+        "percent": "4.8%",
+        "rows": 15
+      },
+      "HIGH": {
+        "percent": "51.9%",
+        "rows": 163
+      },
+      "MEDIUM": {
+        "percent": "43.3%",
+        "rows": 136
+      }
+    }
+  },
+  "domain_count": 22,
+  "feature_rows_after": 314,
+  "feature_rows_before": 314,
+  "generated_at_utc": "2026-08-01T16:06:47.379142+00:00",
+  "persona_count": 25,
+  "revision_status": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_REVISION_COMPLETE_READY_FOR_FOUNDER_REVIEW",
+  "source_rows": 374
+}
