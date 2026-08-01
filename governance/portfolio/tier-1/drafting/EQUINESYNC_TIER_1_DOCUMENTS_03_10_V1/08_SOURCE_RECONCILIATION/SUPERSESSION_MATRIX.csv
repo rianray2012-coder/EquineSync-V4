@@ -1,0 +1,3 @@
+supersession_id,predecessor,successor,basis,state
+T1D08-SUP-001,Historical Governance V1.0 or predecessor source where identified,"Protected adopted, locked, or current source row where identified","Only source-specific adoption, lock, or supersession evidence controls",PARTIAL_RECONCILIATION_REQUIRES_ROW_LEVEL_REVIEW
+T1D08-SUP-002,PR #77 candidate standard,No protected successor,Open draft PR context only,UNMERGED_CANDIDATE

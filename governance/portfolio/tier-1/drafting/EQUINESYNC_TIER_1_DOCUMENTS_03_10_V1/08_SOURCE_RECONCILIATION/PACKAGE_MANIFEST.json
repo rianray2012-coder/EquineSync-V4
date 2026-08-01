@@ -1,0 +1,63 @@
+{
+  "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "file_count_excluding_manifest_and_checksum": 11,
+  "files": [
+    {
+      "byte_length": 231,
+      "path": "BROKEN_REFERENCE_REPORT.md",
+      "sha256": "61c572b53cddd202bde672415ab8c3d2db28731fe6898c54ac89fcf0832f8515"
+    },
+    {
+      "byte_length": 84362,
+      "path": "DUPLICATE_SOURCE_REPORT.csv",
+      "sha256": "5d5fcaf061405a052330b76be4523410e870944707beb46e75c8b5663568f17f"
+    },
+    {
+      "byte_length": 7603,
+      "path": "EQUINESYNC_CURRENT_REPOSITORY_VERIFIED_SOURCE_PROVENANCE_AND_SUPERSESSION_RECONCILIATION_REPORT_V2_0.md",
+      "sha256": "1d49d306650c6f5aec45f7c36a837d5d41ae79ca94a92ff7da132445c57973db"
+    },
+    {
+      "byte_length": 67224,
+      "path": "FORMAT_COUNTERPART_MATRIX.csv",
+      "sha256": "b8a69bb5e9a021f3ba1e368e3aab9b7a630448294c380f18619a66a9e9d4b2cd"
+    },
+    {
+      "byte_length": 813,
+      "path": "MISSING_SOURCE_REGISTER.csv",
+      "sha256": "8e53b6608f748478e1001d9f1f5794d27ddea499e0101b11d03bd5235f585f57"
+    },
+    {
+      "byte_length": 215,
+      "path": "ORPHAN_SOURCE_REPORT.md",
+      "sha256": "7096ff3fe21455d1b561441f1e0d76c9b0c22daecd3b7f96423e97ad3658ee46"
+    },
+    {
+      "byte_length": 2167506,
+      "path": "SOURCE_INVENTORY.csv",
+      "sha256": "be166ef9bb50b23db7e7bdcc18cb4cb2cbaee9b5603aacbf0092cf251e435259"
+    },
+    {
+      "byte_length": 3775526,
+      "path": "SOURCE_INVENTORY.json",
+      "sha256": "4604479b66405a984b0cb22788ba8668d214ad363e3d5406abe7ec0ae684bb75"
+    },
+    {
+      "byte_length": 432,
+      "path": "SUPERSESSION_MATRIX.csv",
+      "sha256": "fc2dd0dd896d91f255a3ec3f98d61ed4c90d9a1320c273bade8c4661c69b4304"
+    },
+    {
+      "byte_length": 540,
+      "path": "tests/test_document_08.py",
+      "sha256": "aeb4ccde852cdfb0d5a7942c817d9f7e577cfd85e1fda94c39307f42e75f659d"
+    },
+    {
+      "byte_length": 2180,
+      "path": "validators/validate_document_08.py",
+      "sha256": "9f4b5efbe50329d76c558c06a80fff6e5726c6f6c7afcdca27302d1643dd4ca8"
+    }
+  ],
+  "generated_at": "2026-08-01T15:39:10Z",
+  "package_root": "08_SOURCE_RECONCILIATION"
+}
