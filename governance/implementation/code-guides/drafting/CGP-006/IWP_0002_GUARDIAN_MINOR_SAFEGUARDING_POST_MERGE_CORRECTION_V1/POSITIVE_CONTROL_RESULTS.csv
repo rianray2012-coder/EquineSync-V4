@@ -1,0 +1,7 @@
+control_id,requirement,result,evidence
+PC-LEGACY-ADULT-MESSAGE,ADULT_MESSAGE_POSITIVE_CONTROL,PASS,GMS-T-056 unverified legacy Guardian participant produces no minor-involved false positive.
+PC-ADULT-PAYMENT,ADULT_OWNER_INVOICE_POSITIVE_CONTROL,PASS,Existing payment subject tests remain in GMS-T-001 through GMS-T-054 and direct run passed.
+PC-MULTI-MINOR,MULTI_MINOR_PER_MINOR_GUARDIAN_COVERAGE_PRESERVED,PASS,Existing per-minor communication coverage tests remain in GMS-T-015 through GMS-T-017 and direct run passed.
+PC-MATERIALIZATION-SKIP,MATERIALIZATION_SKIP_ON_BLOCK_PRESERVED,PASS,GMS-T-058 verifies blocked materialization still skips when _payment_gate returns no gate.
+PC-NO-PROVIDER,NO_PROVIDER_CALL,PASS,Correction touches invoice bookkeeping/recurring materialization only; no provider integration or configuration path changed.
+PC-DEDUPE,CONCURRENT_MATERIALIZATION_DEDUP_PRESERVED,PASS,No deduplication query or duplicate-key handling was changed in recurring_charges.py.

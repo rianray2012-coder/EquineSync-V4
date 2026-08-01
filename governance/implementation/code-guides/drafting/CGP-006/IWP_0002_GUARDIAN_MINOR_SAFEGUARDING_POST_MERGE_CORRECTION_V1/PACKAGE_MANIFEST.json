@@ -1,0 +1,84 @@
+{
+  "branch": "codex/cgp-006-iwp-0002-post-merge-correction-v1",
+  "branch_baseline": "12d5ae6faf3627bb0786af46de953fda808d7156",
+  "directive_sha256": "094c39e51535f6f6dd4d3d4db370ad0485c490a308925848d6435513fc7047cd",
+  "files": {
+    "AUTHORIZED_CORRECTIVE_PATHS.csv": {
+      "bytes": 1136,
+      "sha256": "fcacef7a1b8c3cd158a815d2eb55e899aeb6aa2fc1d395113f08598f073b65ad"
+    },
+    "AUTHORIZED_PATH_REPORT.md": {
+      "bytes": 3486,
+      "sha256": "b46df5fad9c07166d7868ed64b1cd12fc27572b8c6a3066c0824ba65d5e64a5c"
+    },
+    "CHANGE_AWARE_BYPASS_REVIEW.md": {
+      "bytes": 1671,
+      "sha256": "18f84da29aa366671692d6c407ef3ab811413dd1fb61f26b1e5f3bb1b58f040a"
+    },
+    "DIRECTIVE_EXECUTION_RECORD.md": {
+      "bytes": 1626,
+      "sha256": "a7be024dd074e43c622092dbe1126c516a9a240d86361c84df68a4a7e5fae759"
+    },
+    "FOCUSED_TEST_RESULTS.csv": {
+      "bytes": 1974,
+      "sha256": "803d995c7d37653ad3df2d7924e4641aaa4d6c7f0746b3deb2dd1b181db87264"
+    },
+    "FOUNDER_CORRECTIVE_AUTHORITY_RECORD.md": {
+      "bytes": 1493,
+      "sha256": "8cd9d2ebbb8acc745822d7d7baff330e0a7c4612f1e6f2d3506f505e89a18d2a"
+    },
+    "LEGACY_LINK_EXPANSION_CORRECTION_RECORD.md": {
+      "bytes": 1842,
+      "sha256": "d9cd220fbb38c882655ace5dfb341f4d202d8f7678533d4a2bc4a20e21f0555c"
+    },
+    "POSITIVE_CONTROL_RESULTS.csv": {
+      "bytes": 988,
+      "sha256": "a1298efb22b3e7fba360a0e9ec2f21b6f191364cc08c4783dfc1596dbdaffc8a"
+    },
+    "POST_MERGE_FINDINGS_SOURCE_REGISTER.md": {
+      "bytes": 1594,
+      "sha256": "7ab4d55e8059031e4340dbefac35bc6c1078e83d7d5865a1bc90f9dc00f057c2"
+    },
+    "PRIOR_SAFEGUARD_REGRESSION_RESULTS.csv": {
+      "bytes": 1041,
+      "sha256": "e3e960d5e4b1477f220d41d9297c402f0d49d37865ccc5e88fe254b62cbac875"
+    },
+    "README.md": {
+      "bytes": 1078,
+      "sha256": "1113aaada49fbf616bcb2666ae8c00c798a35cef6cfa8f8fe94e5c172490e23c"
+    },
+    "REVIEW_FINDINGS_AND_DISPOSITION.csv": {
+      "bytes": 942,
+      "sha256": "8b007ded353ca6e51448a7bd3de7621f8ad4f9520e8c5156b80ddab13d65d866"
+    },
+    "ROLLBACK_AND_SUSPENSION_RECORD.md": {
+      "bytes": 1287,
+      "sha256": "fa1bf264850722514f39f704488813f587a44baeeb644deeefa9a210a345f29d"
+    },
+    "SOURCE_BASELINE_AND_DRIFT_RECORD.json": {
+      "bytes": 3862,
+      "sha256": "20388e5b076056dfb343188de434d5fd2c27ba1abde9f4eaa5ecf9c5935cd2ac"
+    },
+    "STATE_TOKEN_PROPAGATION_CORRECTION_RECORD.md": {
+      "bytes": 1765,
+      "sha256": "6978383e1955e87ea00551ba8b673f43271d94241c374548d6293656e6ea6d38"
+    },
+    "VALIDATION_REPORT.md": {
+      "bytes": 2142,
+      "sha256": "11ab4c83b564bdce26800f93075d40aa6ed09cddab9a693f4edf2bd7100932cb"
+    },
+    "test_validate_post_merge_correction_package.py": {
+      "bytes": 565,
+      "sha256": "b7709fd55bf05cfb7fc080345d4f7f6ab8ca224723c6dde636a49403afddb006"
+    },
+    "validate_post_merge_correction_package.py": {
+      "bytes": 10372,
+      "sha256": "cf6cf255e6d5e956ded1e99acadee93127267d11196010315301ead42f52746b"
+    }
+  },
+  "package_id": "CGP006-IWP0002-GUARDIAN-MINOR-SAFEGUARDING-POST-MERGE-CORRECTION-V1",
+  "protected_branch": "integrate-emergent-final-zip",
+  "recorded_at_utc": "2026-08-01T10:14:21Z",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "status": "CORRECTIVE_IMPLEMENTATION_VALIDATED_LOCALLY_PENDING_DRAFT_PR_REVIEW_AND_PROTECTED_MERGE"
+}

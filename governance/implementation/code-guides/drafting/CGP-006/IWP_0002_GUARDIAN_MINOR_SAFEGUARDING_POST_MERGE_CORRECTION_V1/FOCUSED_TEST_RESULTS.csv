@@ -1,0 +1,16 @@
+test_id,requirement,result,evidence
+GMS-T-055,LEGACY_LINK_EXPLICIT_SAME_BARN_INCLUDED,PASS,Direct helper test includes same-barn link.
+GMS-T-055,LEGACY_LINK_EXPLICIT_CROSS_BARN_EXCLUDED,PASS,Direct helper test excludes cross-barn link.
+GMS-T-055,LEGACY_LINK_MISSING_BARN_WITH_VERIFIED_PROVENANCE_INCLUDED,PASS,Direct helper test includes missing-barn link with matching legacy_barn_id.
+GMS-T-055,LEGACY_LINK_MISSING_BARN_WITHOUT_PROVENANCE_EXCLUDED,PASS,Direct helper test excludes missing-barn link without provenance.
+GMS-T-055,LEGACY_LINK_CONTRADICTORY_PROVENANCE_EXCLUDED,PASS,Direct helper test excludes migration_verified_barn_id and legacy_barn_id disagreement.
+GMS-T-056,MESSAGING_EXPANSION_INCLUDES_VERIFIED_LEGACY_LINK,PASS,Message guard resolves verified legacy Guardian-linked minor.
+GMS-T-056,MESSAGING_EXPANSION_EXCLUDES_UNVERIFIED_LEGACY_LINK,PASS,Message guard treats unverified legacy link as no minor involved.
+GMS-T-057,PAYMENT_EXPANSION_INCLUDES_VERIFIED_LEGACY_LINK,PASS,Billing and recurring owner expansion call load_verified_guardian_linked_students.
+GMS-T-057,PAYMENT_EXPANSION_EXCLUDES_UNVERIFIED_LEGACY_LINK,PASS,Exact-barn-only Guardian-link query removed; shared helper enforces provenance.
+GMS-T-058,MATERIALIZED_INVOICE_COPIES_REFRESHED_STATE_TOKEN,PASS,Materializer copies gate.get("state_token") into invoice document.
+GMS-T-058,MATERIALIZED_INVOICE_TOKEN_MATCHES_FINAL_GATE,PASS,Materializer captures gate returned by final _payment_gate decision.
+GMS-T-059,LEGACY_INVOICE_WITHOUT_TOKEN_FAILS_CLOSED_OR_REAUTHORIZES_EXPLICITLY,PASS,Missing invoice.pay token uses sentinel and returns authorization-changed retry.
+DIRECT-RUN,GMS-T-001_THROUGH_GMS-T-059,PASS,59 focused test functions executed directly with PYTHONPATH=backend python3.
+PY-COMPILE,TOUCHED_BACKEND_MODULES_AND_TEST,PASS,python3 -m py_compile succeeded for all touched backend Python files.
+DIFF-CHECK,FINAL_DIFF_CHECK,PASS,git diff --check succeeded before package generation.

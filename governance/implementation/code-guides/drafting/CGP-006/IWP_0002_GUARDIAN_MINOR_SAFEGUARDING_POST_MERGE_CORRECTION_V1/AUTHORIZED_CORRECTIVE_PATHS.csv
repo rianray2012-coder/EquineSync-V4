@@ -1,0 +1,7 @@
+path,authorization,status,necessity_determination
+backend/core/minor_safety.py,FOUNDER_DIRECTIVE_SECTION_6,USED,Defines shared verified Guardian-link expansion helper and strict provenance wrapper.
+backend/core/minor_communication.py,FOUNDER_DIRECTIVE_SECTION_6,USED,Uses shared verified Guardian-link expansion for messaging participant resolution.
+backend/routes/billing.py,FOUNDER_DIRECTIVE_SECTION_6,USED,Uses shared verified Guardian-link expansion for payment owner subjects and fails closed on legacy invoice.pay missing state token.
+backend/routes/recurring_charges.py,FOUNDER_DIRECTIVE_SECTION_6,USED,Uses shared verified Guardian-link expansion and propagates authoritative materialization state token.
+backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py,FOUNDER_DIRECTIVE_SECTION_6,USED,Adds focused corrective and prior-safeguard regression tests GMS-T-055 through GMS-T-059.
+governance/implementation/code-guides/drafting/CGP-006/IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_POST_MERGE_CORRECTION_V1/**,FOUNDER_DIRECTIVE_SECTION_6,USED,Narrow correction evidence package plus package-local validator and wrapper test.

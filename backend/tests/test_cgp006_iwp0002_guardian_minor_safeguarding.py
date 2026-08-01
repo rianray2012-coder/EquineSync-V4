@@ -60,6 +60,7 @@ from core.minor_safety import (
     audit_safe_guardian_minor_metadata,
     guardian_minor_public_error_detail,
     guardian_minor_workflow_gate,
+    load_verified_guardian_linked_students,
     minor_status_from_birthdate,
     minor_status_for_student,
     student_workflow_gate,
@@ -735,3 +736,106 @@ def test_gms_t_054_document_guard_persists_and_enforces_state_token():
     assert "guardian_state_token" in documents
     assert "guardian_guard_state_token" in documents
     assert "expected_state_token=doc.get(\"guardian_guard_state_token\")" in documents
+
+
+def test_gms_t_055_verified_legacy_guardian_link_expansion_filters_barn_provenance():
+    db = FakeDb(
+        students=[
+            _student("same_barn"),
+            _student("verified_legacy"),
+            _student("unverified_legacy"),
+            _student("contradictory_legacy"),
+            _student("cross_barn", barn="barn_b"),
+        ],
+        links=[
+            _link("same_barn", "guardian_1", scopes=[AUTHORITY_SCOPE_COMMUNICATION]),
+            _link("cross_barn", "guardian_1", barn="barn_b", scopes=[AUTHORITY_SCOPE_COMMUNICATION]),
+            _link(
+                "verified_legacy",
+                "guardian_1",
+                barn=None,
+                legacy_barn_id="barn_a",
+                scopes=[AUTHORITY_SCOPE_COMMUNICATION],
+            ),
+            _link("unverified_legacy", "guardian_1", barn=None, scopes=[AUTHORITY_SCOPE_COMMUNICATION]),
+            _link(
+                "contradictory_legacy",
+                "guardian_1",
+                barn=None,
+                migration_verified_barn_id="barn_a",
+                legacy_barn_id="barn_b",
+                scopes=[AUTHORITY_SCOPE_COMMUNICATION],
+            ),
+        ],
+    )
+    linked = asyncio.run(load_verified_guardian_linked_students(
+        db,
+        barn_id="barn_a",
+        guardian_user_id="guardian_1",
+    ))
+    assert [row["student"]["id"] for row in linked] == ["same_barn", "verified_legacy"]
+
+
+def test_gms_t_056_messaging_expansion_includes_only_verified_legacy_guardian_links():
+    db = FakeDb(
+        students=[_student("verified_legacy"), _student("unverified_legacy")],
+        links=[
+            _link(
+                "verified_legacy",
+                "guardian_1",
+                barn=None,
+                legacy_barn_id="barn_a",
+                scopes=[AUTHORITY_SCOPE_COMMUNICATION],
+            ),
+            _link("unverified_legacy", "guardian_2", barn=None, scopes=[AUTHORITY_SCOPE_COMMUNICATION]),
+        ],
+    )
+    allowed = asyncio.run(message_guardian_minor_safeguarding_gate(
+        db=db,
+        actor_user={"id": "staff_1", "barn_id": "barn_a"},
+        message={"to_user_id": "guardian_1", "body": "verified legacy note"},
+    ))
+    denied = asyncio.run(message_guardian_minor_safeguarding_gate(
+        db=db,
+        actor_user={"id": "staff_1", "barn_id": "barn_a"},
+        message={"to_user_id": "guardian_2", "body": "unverified legacy note"},
+    ))
+    assert allowed["decision"] == DECISION_ALLOW
+    assert allowed["student_profile_ids"] == ["verified_legacy"]
+    assert denied["decision"] == DECISION_ALLOW
+    assert denied["minor_involved"] is False
+
+
+def test_gms_t_057_payment_expansion_uses_verified_legacy_guardian_helper_and_rejects_missing_pay_token():
+    billing = _read("backend/routes/billing.py")
+    recurring = _read("backend/routes/recurring_charges.py")
+    assert "load_verified_guardian_linked_students" in billing
+    assert "load_verified_guardian_linked_students" in recurring
+    assert '{"barn_id": barn_id, "guardian_user_id": owner_id, "status": "active"}' not in billing
+    assert '{"barn_id": barn_id, "guardian_user_id": owner_id, "status": "active"}' not in recurring
+    assert 'action == "invoice.pay" and not expected_state_token' in billing
+    assert '__missing_guardian_guard_state_token__' in billing
+
+
+def test_gms_t_058_materialized_invoice_copies_authoritative_state_token():
+    recurring = _read("backend/routes/recurring_charges.py")
+    materializer = recurring.split('async def run_materializer', 1)[1]
+    assert 'gate = await _payment_gate' in materializer
+    assert '"guardian_guard_state_token": gate.get("state_token")' in materializer
+    assert 'if not gate:' in materializer
+    assert 'rc_update[key] = rc[key]' in materializer
+
+
+def test_gms_t_059_invoice_pay_missing_state_token_requires_retry():
+    students, links, consents = _valid_guard(WORKFLOW_PAYMENT, "invoice:legacy")
+    gate = _gate(
+        WORKFLOW_PAYMENT,
+        students,
+        links,
+        consents,
+        scope="invoice:legacy",
+        action="invoice.pay",
+        expected_state_token="__missing_guardian_guard_state_token__",
+    )
+    assert gate["internal_reason_code"] == INTERNAL_AUTHORIZATION_STATE_CHANGED_RETRY_REQUIRED
+    assert gate["state_token"] != "__missing_guardian_guard_state_token__"

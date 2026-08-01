@@ -456,11 +456,19 @@ def _legacy_link_barn_proven(link: Dict[str, Any], *, student: Dict[str, Any], b
         return False
     if link.get("barn_id"):
         return str(link.get("barn_id")).strip() == active_barn
-    if str(link.get("migration_verified_barn_id") or "").strip() == active_barn:
-        return True
-    if str(link.get("legacy_barn_id") or "").strip() == active_barn:
-        return True
+    verified_barns = {
+        str(link.get(field) or "").strip()
+        for field in ("migration_verified_barn_id", "legacy_barn_id")
+        if str(link.get(field) or "").strip()
+    }
+    if verified_barns:
+        return verified_barns == {active_barn}
     return bool(link.get("barn_scope_verified") or link.get("legacy_barn_scope_verified"))
+
+
+def guardian_link_barn_proven(link: Dict[str, Any], *, student: Dict[str, Any], barn_id: str) -> bool:
+    """Public wrapper for the central legacy Guardian-link barn provenance rule."""
+    return _legacy_link_barn_proven(link, student=student, barn_id=barn_id)
 
 
 def _public_code_for_workflow(workflow: str, internal_reason: str) -> str:
@@ -961,6 +969,54 @@ async def load_guardian_minor_authority_rows(
         ).to_list(100)
         consents.extend(found_consents)
     return links, consents
+
+
+async def load_verified_guardian_linked_students(
+    db,
+    *,
+    barn_id: str,
+    guardian_user_id: Any,
+    status: str = GUARDIAN_LINK_ACTIVE,
+) -> list[Dict[str, Any]]:
+    """Resolve students linked to a Guardian without treating all legacy links as local.
+
+    Explicit same-barn links are accepted. Missing/null-barn legacy links are
+    accepted only when the same provenance rule used by the central guard proves
+    that the link belongs to the active barn and matching canonical student.
+    """
+    active_barn = str(barn_id or "").strip()
+    guardian_id = str(guardian_user_id or "").strip()
+    if not active_barn or not guardian_id:
+        return []
+    found_links = await db[GUARDIAN_LINK_COLLECTION].find(
+        {
+            "guardian_user_id": guardian_id,
+            "status": status,
+            "$or": [
+                {"barn_id": active_barn},
+                {"barn_id": None},
+                {"barn_id": {"$exists": False}},
+            ],
+        },
+        {"_id": 0},
+    ).to_list(100)
+    linked: list[Dict[str, Any]] = []
+    seen_students: set[str] = set()
+    for link in found_links:
+        student_id = str(link.get("student_profile_id") or "").strip()
+        if not student_id:
+            continue
+        student = await db[STUDENT_PROFILE_COLLECTION].find_one(
+            {"id": student_id, "barn_id": active_barn},
+            {"_id": 0},
+        )
+        if not student or not _legacy_link_barn_proven(link, student=student, barn_id=active_barn):
+            continue
+        if student_id in seen_students:
+            continue
+        linked.append({"guardian_link": dict(link), "student": dict(student)})
+        seen_students.add(student_id)
+    return linked
 
 
 async def ensure_minor_safety_indexes(db) -> None:

@@ -25,7 +25,6 @@ from core.tenancy import barn_filter, stamp_barn
 from core import audit
 from core.minor_safety import (
     DECISION_ALLOW,
-    GUARDIAN_LINK_COLLECTION,
     MINOR_STATUS_ADULT,
     MINOR_STATUS_MINOR_13_TO_17,
     MINOR_STATUS_UNDER_13,
@@ -36,6 +35,7 @@ from core.minor_safety import (
     guardian_minor_public_error_detail,
     guardian_minor_workflow_gate,
     load_guardian_minor_authority_rows,
+    load_verified_guardian_linked_students,
     minor_status_for_student,
     normalize_minor_status,
     student_workflow_scope,
@@ -230,12 +230,13 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         if owner_id:
             owner = await db.users.find_one(barn_filter(user, {"id": owner_id}), {"_id": 0})
             _remember_student(students, seen, await _student_from_rider(user, owner if owner and owner.get("student_profile_id") else None))
-            guardian_links = await db[GUARDIAN_LINK_COLLECTION].find(
-                {"barn_id": barn_id, "guardian_user_id": owner_id, "status": "active"},
-                {"_id": 0},
-            ).to_list(100)
-            for link in guardian_links:
-                _remember_student(students, seen, await _student_from_profile_id(user, link.get("student_profile_id")))
+            guardian_links = await load_verified_guardian_linked_students(
+                db,
+                barn_id=barn_id,
+                guardian_user_id=owner_id,
+            )
+            for linked in guardian_links:
+                _remember_student(students, seen, linked.get("student"))
         return students
 
     def _payment_scope_reference(students: list[Dict[str, Any]], invoice_doc: dict) -> str:
@@ -267,6 +268,11 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
                 student_profile_ids=[student.get("id") for student in students],
                 workflow=WORKFLOW_PAYMENT,
             )
+        expected_state_token = invoice_doc.get("guardian_guard_state_token")
+        if action == "invoice.pay" and not expected_state_token and not all(
+            minor_status_for_student(student) == MINOR_STATUS_ADULT for student in students
+        ):
+            expected_state_token = "__missing_guardian_guard_state_token__"
         gate = guardian_minor_workflow_gate(
             workflow=WORKFLOW_PAYMENT,
             students=students,
@@ -275,7 +281,7 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             barn_id=barn_id,
             scope_reference=scope_reference,
             policy_version=invoice_doc.get("guardian_guard_policy_version") or "billing-payment-v1",
-            expected_state_token=invoice_doc.get("guardian_guard_state_token"),
+            expected_state_token=expected_state_token,
             action=action,
         )
         if gate["decision"] == DECISION_ALLOW:

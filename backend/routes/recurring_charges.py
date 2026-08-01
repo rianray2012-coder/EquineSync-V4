@@ -27,7 +27,6 @@ from core.permissions import require
 from core import audit
 from core.minor_safety import (
     DECISION_ALLOW,
-    GUARDIAN_LINK_COLLECTION,
     MINOR_STATUS_ADULT,
     MINOR_STATUS_MINOR_13_TO_17,
     MINOR_STATUS_UNDER_13,
@@ -38,6 +37,7 @@ from core.minor_safety import (
     guardian_minor_public_error_detail,
     guardian_minor_workflow_gate,
     load_guardian_minor_authority_rows,
+    load_verified_guardian_linked_students,
     minor_status_for_student,
     normalize_minor_status,
     student_workflow_scope,
@@ -281,12 +281,13 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
         if owner_id:
             owner = await db.users.find_one(barn_filter(user, {"id": owner_id}), {"_id": 0})
             _remember_student(students, seen, await _student_from_rider(user, owner if owner and owner.get("student_profile_id") else None))
-            guardian_links = await db[GUARDIAN_LINK_COLLECTION].find(
-                {"barn_id": barn_id, "guardian_user_id": owner_id, "status": "active"},
-                {"_id": 0},
-            ).to_list(100)
-            for link in guardian_links:
-                _remember_student(students, seen, await _student_from_profile_id(user, link.get("student_profile_id")))
+            guardian_links = await load_verified_guardian_linked_students(
+                db,
+                barn_id=barn_id,
+                guardian_user_id=owner_id,
+            )
+            for linked in guardian_links:
+                _remember_student(students, seen, linked.get("student"))
         return students
 
     def _payment_scope_reference(students: list[Dict[str, Any]], doc: dict) -> str:
@@ -303,10 +304,10 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
                 return scoped
         return f"recurring_charge:{doc['id']}"
 
-    async def _payment_gate(*, user, request: Request, doc: dict, action: str, raise_on_block: bool) -> bool:
+    async def _payment_gate(*, user, request: Request, doc: dict, action: str, raise_on_block: bool) -> Optional[Dict[str, Any]]:
         students = await _students_for_payment_subjects(user, doc)
         if not students:
-            return True
+            return {"decision": DECISION_ALLOW, "minor_involved": False}
         barn_id = user.get("barn_id") or doc.get("barn_id") or "primary"
         scope_reference = _payment_scope_reference(students, doc)
         if all(minor_status_for_student(student) == MINOR_STATUS_ADULT for student in students):
@@ -332,7 +333,7 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
         if gate["decision"] == DECISION_ALLOW:
             doc["guardian_guard_scope_reference"] = scope_reference
             doc["guardian_guard_state_token"] = gate.get("state_token")
-            return True
+            return gate
         await audit.record(
             action="recurring_charge.guardian_minor_payment_blocked",
             user=user,
@@ -346,7 +347,7 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
         )
         if raise_on_block:
             raise HTTPException(status_code=403, detail=guardian_minor_public_error_detail(gate))
-        return False
+        return None
 
     async def _validate_refs(user, owner_id, horse_id):
         owner = await db.users.find_one(
@@ -516,13 +517,14 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
             if not _eligible_for_period(rc, year, month):
                 skipped += 1
                 continue
-            if not await _payment_gate(
+            gate = await _payment_gate(
                 user=user,
                 request=request,
                 doc=rc,
                 action="recurring_charge.materialize",
                 raise_on_block=False,
-            ):
+            )
+            if not gate:
                 skipped += 1
                 continue
             # Dedup: one invoice per (barn, recurring_charge, period). Skip — never update.
@@ -564,6 +566,7 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
                 "created_at": _iso(_now_utc()),
                 "guardian_guard_scope_reference": rc.get("guardian_guard_scope_reference") or f"recurring_charge:{rc['id']}",
                 "guardian_guard_policy_version": rc.get("guardian_guard_policy_version") or "billing-payment-v1",
+                "guardian_guard_state_token": gate.get("state_token"),
             }
             stamp_barn(user, doc)
             try:
@@ -576,9 +579,13 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
             # (e.g. "2026-08" after "2026-10") must never regress it. Period keys
             # are zero-padded YYYY-MM, so lexical max == chronological max.
             new_last = max(rc.get("last_run_period") or "", period_key)
+            rc_update = {"last_run_period": new_last}
+            for key in ("guardian_guard_scope_reference", "guardian_guard_state_token"):
+                if rc.get(key):
+                    rc_update[key] = rc[key]
             await db.recurring_charges.update_one(
                 barn_filter(user, {"id": rc["id"]}),
-                {"$set": {"last_run_period": new_last}},
+                {"$set": rc_update},
             )
             generated += 1
             generated_invoice_ids.append(doc["id"])
