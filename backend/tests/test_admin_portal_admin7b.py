@@ -36,6 +36,8 @@ import requests
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+
 sys.path.insert(0, "/app/backend")
 load_dotenv("/app/backend/.env")
 
@@ -44,7 +46,7 @@ def _base_url() -> str:
     v = os.environ.get("REACT_APP_BACKEND_URL")
     if v:
         return v.rstrip("/")
-    env = pathlib.Path(__file__).resolve().parents[2] / "frontend" / ".env"
+    env = ROOT / "frontend" / ".env"
     for line in env.read_text().splitlines():
         if line.startswith("REACT_APP_BACKEND_URL="):
             return line.split("=", 1)[1].strip().rstrip("/")
@@ -557,79 +559,64 @@ def test_legacy_admin_routes_still_registered():
 # Codex round-2 fixes — Stripe env contract & FE/BE caps mirror.
 # ---------------------------------------------------------------------
 def test_stripe_configured_uses_phase15_env_contract(db, monkeypatch):
-    """Codex round-2 blocker #1: Phase 15 uses STRIPE_API_KEY (see
-    `routes/subscriptions.py`, `core/billing_provisioning.py`,
-    `routes/membership.py`). The Admin Portal "Stripe configured"
-    badge MUST therefore read STRIPE_API_KEY (with STRIPE_SECRET_KEY
-    as a non-authoritative fallback) — otherwise the badge can read
-    "not configured" on a working production env.
+    """Phase 15 now uses STRIPE_SECRET_KEY as canonical, with STRIPE_API_KEY
+    retained only as a compatibility fallback. Conflicting dual values must
+    not be reported as configured.
 
     Admin-7A.2a (Feb 2026): the Stripe-configured helper moved out of
     portal.py into the per-surface integrations module. We now assert
-    the contract on `integrations.stripe_configured` directly AND on
-    its source — both the import and the env precedence (API_KEY
-    first, SECRET_KEY fallback) must hold.
+    the contract on `integrations.stripe_configured` directly.
     """
     sys.path.insert(0, "/app/backend")
-    src = pathlib.Path(
-        "/app/backend/routes/admin_portal/integrations.py"
-    ).read_text()
-    assert "STRIPE_API_KEY" in src, (
-        "integrations.py must read STRIPE_API_KEY (Phase 15 contract)."
-    )
-    # Backwards tolerance: STRIPE_SECRET_KEY may still appear as a
-    # documented fallback, but STRIPE_API_KEY must be the first check.
-    api_idx = src.find("STRIPE_API_KEY")
-    sec_idx = src.find("STRIPE_SECRET_KEY")
-    if sec_idx != -1:
-        assert api_idx < sec_idx, (
-            "STRIPE_API_KEY must be checked before STRIPE_SECRET_KEY "
-            "fallback in integrations.py."
-        )
+    src = (ROOT / "backend" / "routes" / "admin_portal" / "integrations.py").read_text()
+    assert "resolve_stripe_secret_key" in src
 
-    # Behavioural assertion: with STRIPE_API_KEY set and SECRET_KEY
-    # explicitly unset, the helper must return True.
     from routes.admin_portal.integrations import stripe_configured
+
+    # Compatibility fallback: STRIPE_API_KEY-only still reports configured.
     monkeypatch.setenv("STRIPE_API_KEY", "sk_test_admin7a2a_assert")
     monkeypatch.delenv("STRIPE_SECRET_KEY", raising=False)
     assert stripe_configured() is True
 
-    # And with neither set, must return False.
+    # Canonical key works by itself.
+    monkeypatch.delenv("STRIPE_API_KEY", raising=False)
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_fallback")
+    assert stripe_configured() is True
+
+    # Mismatched dual values are unsafe and must not imply readiness.
+    monkeypatch.setenv("STRIPE_API_KEY", "sk_test_different")
+    assert stripe_configured() is False
+
     monkeypatch.delenv("STRIPE_API_KEY", raising=False)
     monkeypatch.delenv("STRIPE_SECRET_KEY", raising=False)
     assert stripe_configured() is False
 
-    # SECRET_KEY-only fallback continues to work.
-    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_fallback")
-    assert stripe_configured() is True
 
-
-def test_integrations_stripe_reports_configured_when_api_key_set(db):
-    """End-to-end positive case: with the live `STRIPE_API_KEY` env
+def test_integrations_stripe_reports_configured_when_server_key_set(db):
+    """End-to-end positive case: with a Stripe backend secret env
     populated (the dev pod ships sk_test_emergent), the integrations
     detail page must report `configured=True`. This is the regression
     Codex flagged — previously the badge would say "not configured"
     despite a working Phase 15 install."""
     s = _admin_session(db, "platform_admin")
-    has_api_key = bool((os.environ.get("STRIPE_API_KEY") or "").strip())
-    if not has_api_key:
-        pytest.skip("STRIPE_API_KEY not configured in this env")
+    has_server_key = bool((os.environ.get("STRIPE_SECRET_KEY") or os.environ.get("STRIPE_API_KEY") or "").strip())
+    if not has_server_key:
+        pytest.skip("Stripe backend secret not configured in this env")
     r = requests.get(f"{API}/admin/portal/integrations/stripe",
                      headers=_bearer(s), timeout=10)
     assert r.status_code == 200
     assert r.json()["configured"] is True, (
-        "Stripe must report configured=True when STRIPE_API_KEY is set "
+        "Stripe must report configured=True when a backend secret is set "
         "(Phase 15 env contract)."
     )
 
 
-def test_settings_stripe_configured_when_api_key_set(db):
-    """Same regression on the /settings surface — `billing.stripe_configured`
-    must reflect STRIPE_API_KEY, not STRIPE_SECRET_KEY."""
+def test_settings_stripe_configured_when_server_key_set(db):
+    """Same regression on the /settings surface."""
     s = _admin_session(db, "platform_admin")
-    has_api_key = bool((os.environ.get("STRIPE_API_KEY") or "").strip())
-    if not has_api_key:
-        pytest.skip("STRIPE_API_KEY not configured in this env")
+    has_server_key = bool((os.environ.get("STRIPE_SECRET_KEY") or os.environ.get("STRIPE_API_KEY") or "").strip())
+    if not has_server_key:
+        pytest.skip("Stripe backend secret not configured in this env")
     r = requests.get(f"{API}/admin/portal/settings",
                      headers=_bearer(s), timeout=10)
     assert r.status_code == 200

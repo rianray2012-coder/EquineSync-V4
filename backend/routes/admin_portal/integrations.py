@@ -7,8 +7,8 @@ Locked Admin-7B founder decisions (still binding):
   2. Integrations excludes `support_admin`.
   5. Static slugs only — `stripe`, `resend`, `webhooks`, `jobs` —
      never opaque Mongo refs.
-  Stripe env contract: `STRIPE_API_KEY` first, `STRIPE_SECRET_KEY`
-  fallback (Codex round-2 fix). See `core/billing_provisioning.py`
+  Stripe env contract: `STRIPE_SECRET_KEY` first, `STRIPE_API_KEY`
+  compatibility fallback. See `core/stripe_config.py`
   for the Phase 15 source of truth.
 
 Role + slug constants live at MODULE LEVEL so the source-level drift
@@ -24,6 +24,7 @@ from fastapi import Depends, HTTPException, Request
 
 from core import audit
 from core.permissions import platform_role, require_platform_role
+from core.stripe_config import StripeConfigurationError, resolve_stripe_secret_key
 
 
 # ----------------------------------------------------------------------
@@ -45,18 +46,14 @@ def _require_integrations_read(u: Dict[str, Any]) -> None:
 def stripe_configured() -> bool:
     """Mirror the Phase 15 Stripe contract.
 
-    Phase 15 (`routes/subscriptions.py`, `core/billing_provisioning.py`,
-    `routes/membership.py`) all read **`STRIPE_API_KEY`**. The Admin
-    Portal must therefore key its "configured" badge off the same
-    var or it will report a false negative ("not configured") on a
-    working production env. We also accept legacy `STRIPE_SECRET_KEY`
-    as a non-authoritative fallback so a transient mis-named .env
-    does not silently flip the badge.
+    ``STRIPE_SECRET_KEY`` is canonical. ``STRIPE_API_KEY`` is retained as a
+    compatibility fallback, but conflicting values are unsafe and are reported
+    as not configured.
     """
-    return bool(
-        (os.environ.get("STRIPE_API_KEY") or "").strip()
-        or (os.environ.get("STRIPE_SECRET_KEY") or "").strip()
-    )
+    try:
+        return resolve_stripe_secret_key(require_present=False) is not None
+    except StripeConfigurationError:
+        return False
 
 
 def register(router, ctx) -> None:

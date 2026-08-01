@@ -15,13 +15,15 @@ from __future__ import annotations
 
 import logging
 import os
-import uuid
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 import stripe
+
+from core.config import is_production
+from core.stripe_config import StripeConfigurationError, configure_stripe_api_key
 
 logger = logging.getLogger(__name__)
 
@@ -94,10 +96,11 @@ class _LegacyCheckoutEvent:
 
 
 async def _parse_legacy_checkout_event(request: Request) -> _LegacyCheckoutEvent:
-    api_key = os.environ.get("STRIPE_API_KEY")
-    if not api_key:
-        raise HTTPException(500, "Stripe is not configured on this server.")
-    stripe.api_key = api_key
+    expected_mode = "live" if is_production() else "sandbox"
+    try:
+        configure_stripe_api_key(require_present=True, expected_mode=expected_mode)
+    except StripeConfigurationError as ex:
+        raise HTTPException(500, f"Stripe is not safely configured on this server: {ex}") from ex
     body = await request.body()
     secret = (os.environ.get("STRIPE_WEBHOOK_SECRET") or "").strip()
     if not secret:

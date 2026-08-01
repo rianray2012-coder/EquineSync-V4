@@ -27,6 +27,7 @@ from pydantic import BaseModel
 from core.billing_provisioning import ADDON_PRICE_CATALOG, PLAN_CATALOG, PLAN_ORDER
 from core.entitlements import normalize_plan_code
 from core.permissions import require
+from core.stripe_config import StripeConfigurationError, configure_stripe_api_key
 from core.subscription_records import sync_account_subscription_records
 from core.subscription_usage import (
     build_addon_suggestions,
@@ -79,10 +80,11 @@ def _is_production() -> bool:
 
 
 def _stripe_init():
-    api_key = os.environ.get("STRIPE_API_KEY")
-    if not api_key:
-        raise HTTPException(500, "Stripe is not configured on this server.")
-    stripe.api_key = api_key
+    expected_mode = "live" if _is_production() else "sandbox"
+    try:
+        configure_stripe_api_key(require_present=True, expected_mode=expected_mode)
+    except StripeConfigurationError as ex:
+        raise HTTPException(500, f"Stripe is not safely configured on this server: {ex}") from ex
 
 
 class CheckoutBody(BaseModel):
@@ -602,11 +604,14 @@ def build_router(*, db, get_current_user) -> APIRouter:
         payload = await request.body()
         sig = request.headers.get("Stripe-Signature")
         secret = os.environ.get("STRIPE_WEBHOOK_SECRET")
-        api_key = os.environ.get("STRIPE_API_KEY")
-        if api_key:
-            stripe.api_key = api_key
-        elif _is_production():
-            raise HTTPException(500, "STRIPE_API_KEY is required in production.")
+        expected_mode = "live" if _is_production() else "sandbox"
+        try:
+            configure_stripe_api_key(
+                require_present=_is_production(),
+                expected_mode=expected_mode,
+            )
+        except StripeConfigurationError as ex:
+            raise HTTPException(500, f"Stripe is not safely configured on this server: {ex}") from ex
 
         if secret:
             try:
@@ -626,8 +631,6 @@ def build_router(*, db, get_current_user) -> APIRouter:
             except Exception as ex:
                 logger.warning("stripe-subscriptions webhook parse failed (dev): %s", ex)
                 raise HTTPException(400, "Invalid webhook payload.")
-
-        event_type = event.get("type") or ""
 
         # 15.B: status-gated idempotency model in subscriptions_webhook_handlers.
         # The dispatcher handles billing_events insert/update, idempotent

@@ -7,8 +7,8 @@ Locked Admin-7B founder decisions (still binding):
   3. Settings is `super_admin` + `platform_admin` only.
   4. Source: pure introspection of env / `core.config` — booleans +
      safe labels. No new `app_settings` collection.
-  Stripe env contract: `STRIPE_API_KEY` first, `STRIPE_SECRET_KEY`
-  fallback (delegated to `integrations.stripe_configured`).
+  Stripe env contract: `STRIPE_SECRET_KEY` first, `STRIPE_API_KEY`
+  compatibility fallback (delegated to `integrations.stripe_configured`).
 
 Role constants live at MODULE LEVEL so the source-level drift guard
 test can import them directly.

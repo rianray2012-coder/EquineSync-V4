@@ -1,0 +1,16 @@
+{
+  "backend_billing_cycle": "monthly",
+  "backend_tier": "individual_owner",
+  "backend_trial_days": 14,
+  "checkout_status": 200,
+  "customer_deleted": true,
+  "expired_status": "expired",
+  "generated_at": "2026-08-01T02:50:01.134220+00:00",
+  "session_id": "cs_test_b1WEbNeG44obAUXIfGkLnmo6oegw6UpYRg3IadMgUxcHTZCwccDLkJ30X2",
+  "session_initial_status": "open",
+  "session_livemode": false,
+  "session_mode": "subscription",
+  "session_url_present": true,
+  "signup_status": 200,
+  "status": "ok"
+}

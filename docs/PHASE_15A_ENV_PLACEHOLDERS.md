@@ -8,7 +8,8 @@
 
 ```
 # Stripe — Subscription billing v2 (Phase 15.A)
-STRIPE_API_KEY=                          # already exists (do not rotate here)
+STRIPE_SECRET_KEY=                       # canonical backend server key
+STRIPE_API_KEY=                          # compatibility fallback only; must match STRIPE_SECRET_KEY if both are set
 STRIPE_WEBHOOK_SECRET=                   # required in prod; warn-only in dev
 STRIPE_PRICE_INDIVIDUAL_OWNER_MONTHLY=       # required in prod
 STRIPE_PRICE_INDIVIDUAL_OWNER_ANNUAL=        # required in prod
@@ -34,6 +35,11 @@ STRIPE_PRICE_TRAINER_LESSON_50_ANNUAL=       # required in prod
 # + FRONTEND_URL (if set). Only scheme+host of each value is considered.
 ALLOWED_BILLING_ORIGINS=
 
+# Controlled sandbox catalog sync
+STRIPE_CATALOG_ENVIRONMENT=sandbox
+SKIP_STRIPE_CATALOG_PROVISIONING=true
+STRIPE_CATALOG_AUTOPROVISION_ON_STARTUP=false
+
 # Existing — controls provisioning mode + canonical app URL
 APP_ENV=development                      # any value != "production" → dev mode
 APP_BASE_URL=                            # canonical https://… of the app
@@ -43,8 +49,8 @@ APP_BASE_URL=                            # canonical https://… of the app
 
 | Mode | Behavior |
 |---|---|
-| `APP_ENV=development` (or anything ≠ "production") | Idempotently auto-create Stripe Products + Prices tagged with `metadata.equinesync_managed=true` + `metadata.tier_code=<new pricing tier>`. Local `plans` rows are upserted **always** for every public/catalog tier — even when Stripe is unreachable or the API key is missing — with `stripe_*_id = null` so `/billing/plans` keeps working. Checkout returns a clear 500 when `stripe_price_id_*` is absent (no silent failure). |
-| `APP_ENV=production` | **Validate-only.** `STRIPE_API_KEY` + all required `STRIPE_PRICE_*` env vars for public paid tiers are required; each is verified via `stripe.Price.retrieve`. Startup aborts with a clear error on any miss or invalid ID. **`lifespan.on_startup` re-raises in production**, so provisioning failure WILL bring the process down (no silent swallowing). No Products/Prices are created at startup in production. |
+| `APP_ENV=development` (or anything ≠ "production") | Startup upserts local catalog rows but does **not** create Stripe Products/Prices and does **not** write founder-approved live Stripe IDs into sandbox/dev rows. Use `backend/scripts/sync_stripe_catalog.py --environment sandbox --dry-run/--apply/--verify` for controlled sandbox object creation and Mongo row updates. Checkout returns a clear 500 when `stripe_price_id_*` is absent (no silent failure). |
+| `APP_ENV=production` | **Validate-only.** `STRIPE_SECRET_KEY` is canonical (`STRIPE_API_KEY` fallback allowed only when canonical is absent) and all required `STRIPE_PRICE_*` env vars or founder-approved live fallbacks for public paid tiers are required; each is verified via `stripe.Price.retrieve`. Startup aborts with a clear error on any miss or invalid ID. **`lifespan.on_startup` re-raises in production**, so provisioning failure WILL bring the process down (no silent swallowing). No Products/Prices are created at startup in production. |
 
 ## Origin allow-list (Codex finding #4)
 
@@ -78,7 +84,7 @@ they aren't surfaced to clients by default.
 
 ## Things to **not** leak to logs / docs / tests
 
-- The raw `STRIPE_API_KEY` value.
+- The raw `STRIPE_SECRET_KEY` or compatibility `STRIPE_API_KEY` value.
 - The raw `STRIPE_WEBHOOK_SECRET` value.
 - Stripe webhook payloads in their entirety (only `event.type`, `session.id`,
   `subscription.id`, and `metadata` fields are logged — never the full body).

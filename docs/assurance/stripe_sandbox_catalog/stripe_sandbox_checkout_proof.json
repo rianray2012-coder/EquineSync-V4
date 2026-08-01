@@ -1,0 +1,13 @@
+{
+  "expired_status": "expired",
+  "generated_at": "2026-08-01T02:47:13.804895+00:00",
+  "price_id": "price_1TzSwLQt8h2tFjE5nwRZOyNr",
+  "price_livemode": false,
+  "price_lookup_key": "equinesync.sandbox.plan.individual_owner.monthly",
+  "session_id": "cs_test_a1BRgfAbXFQJYUQAJU28Pmojn5or8wspnAAsZ8DoFPlvwnqsBV7QumYmuG",
+  "session_initial_status": "open",
+  "session_livemode": false,
+  "session_mode": "subscription",
+  "session_url_present": true,
+  "status": "ok"
+}

@@ -6,6 +6,7 @@ API calls or requiring secret keys.
 """
 from __future__ import annotations
 
+import asyncio
 import pathlib
 
 from core.billing_provisioning import (
@@ -13,8 +14,11 @@ from core.billing_provisioning import (
     LIVE_STRIPE_PRODUCT_IDS,
     LIVE_STRIPE_PRICE_IDS,
     PLAN_CATALOG,
+    ensure_stripe_catalog,
     normalize_stripe_plan_code,
 )
+from core.stripe_catalog_sync import build_stripe_catalog_definition, catalog_counts
+from core.stripe_config import StripeConfigurationError, resolve_stripe_secret_key
 from core.subscription_records import account_subscription_shape
 
 
@@ -173,8 +177,9 @@ def test_stripe_webhook_handlers_normalize_founder_alias_metadata_before_lookup(
 def test_dev_webhook_route_does_not_require_stripe_api_key_before_dispatch():
     src = (ROOT / "backend" / "routes" / "subscriptions.py").read_text()
     assert "_stripe_init()\n\n        if secret:" not in src
-    assert 'elif _is_production():\n            raise HTTPException(500, "STRIPE_API_KEY is required in production.")' in src
-    assert "if api_key:\n            stripe.api_key = api_key" in src
+    assert "configure_stripe_api_key(" in src
+    assert "require_present=_is_production()" in src
+    assert "STRIPE_API_KEY is required in production" not in src
 
 
 def test_no_secret_keys_were_committed_for_15r_h():
@@ -186,3 +191,101 @@ def test_no_secret_keys_were_committed_for_15r_h():
     combined = "\n".join(p.read_text() for p in paths)
     assert "sk_live_" not in combined
     assert "rk_live_" not in combined
+
+
+def test_stripe_secret_key_is_canonical_with_api_key_fallback():
+    key = "sk_test_same_value"
+    resolved = resolve_stripe_secret_key({
+        "STRIPE_SECRET_KEY": key,
+        "STRIPE_API_KEY": key,
+    })
+    assert resolved.source == "STRIPE_SECRET_KEY"
+    assert resolved.mode == "sandbox"
+
+    fallback = resolve_stripe_secret_key({"STRIPE_API_KEY": "sk_test_fallback"})
+    assert fallback.source == "STRIPE_API_KEY"
+    assert fallback.mode == "sandbox"
+
+
+def test_mismatched_stripe_secret_and_api_key_fail_closed():
+    try:
+        resolve_stripe_secret_key({
+            "STRIPE_SECRET_KEY": "sk_test_one",
+            "STRIPE_API_KEY": "sk_test_two",
+        })
+    except StripeConfigurationError as ex:
+        assert "differ" in str(ex)
+    else:
+        raise AssertionError("mismatched Stripe key env values must fail closed")
+
+
+def test_sandbox_catalog_lookup_keys_are_environment_scoped():
+    definition = build_stripe_catalog_definition("sandbox")
+    counts = catalog_counts(definition)
+    assert counts["plan_products"] == 11
+    assert counts["addon_products"] == 12
+    assert counts["plan_prices"] == 18
+    assert counts["addon_prices"] == 12
+    assert counts["blockers"] == 0
+    assert "free" in definition.local_only_plan_codes
+    assert "service_provider_free" in definition.local_only_plan_codes
+    assert set(definition.contact_sales_plan_codes) == {"enterprise", "community_program"}
+    lookup_keys = {price.lookup_key for price in definition.prices}
+    assert "equinesync.sandbox.plan.starter_barn.monthly" in lookup_keys
+    assert "equinesync.sandbox.plan.service_provider_premium.annual" in lookup_keys
+    assert "equinesync.sandbox.addon.quickbooks_integration.monthly" in lookup_keys
+
+
+def test_addons_have_canonical_amount_currency_and_interval_terms():
+    for addon_code, config in ADDON_PRICE_CATALOG.items():
+        assert isinstance(config.get("unit_amount_cents"), int), addon_code
+        assert config["unit_amount_cents"] > 0, addon_code
+        assert config.get("currency") == "usd", addon_code
+        assert config.get("interval") == "month", addon_code
+
+
+class _FakeCollection:
+    def __init__(self):
+        self.rows = {}
+
+    async def find_one(self, query, projection=None):
+        key = query.get("tier_code") or query.get("plan_code") or query.get("addon_code")
+        return self.rows.get(key)
+
+    async def update_one(self, query, update, upsert=False):
+        key = query.get("tier_code") or query.get("plan_code") or query.get("addon_code")
+        row = dict(self.rows.get(key) or {})
+        if upsert and "$setOnInsert" in update:
+            row.update(update["$setOnInsert"])
+        row.update(update.get("$set") or {})
+        self.rows[key] = row
+
+
+class _FakeBillingDB:
+    def __init__(self):
+        self.plans = _FakeCollection()
+        self.subscription_plans = _FakeCollection()
+        self.subscription_addons = _FakeCollection()
+
+
+def test_nonproduction_startup_does_not_write_live_ids(monkeypatch):
+    monkeypatch.setenv("APP_ENV", "development")
+    monkeypatch.delenv("STRIPE_SECRET_KEY", raising=False)
+    monkeypatch.delenv("STRIPE_API_KEY", raising=False)
+    monkeypatch.setenv("SKIP_STRIPE_CATALOG_PROVISIONING", "true")
+    db = _FakeBillingDB()
+
+    asyncio.run(ensure_stripe_catalog(db))
+
+    starter = db.plans.rows["starter_barn"]
+    assert starter["stripe_product_id"] is None
+    assert starter["stripe_price_id_monthly"] is None
+    assert starter["stripe_price_id_annual"] is None
+    assert starter["stripe_catalog_environment"] == "sandbox"
+    assert starter["stripe_catalog_ready"] is False
+    assert "stripe_key_missing" in starter["stripe_catalog_blockers"]
+
+    addon = db.subscription_addons.rows["quickbooks_integration"]
+    assert addon["stripe_product_id"] is None
+    assert addon["stripe_price_id"] is None
+    assert addon["stripe_catalog_environment"] == "sandbox"

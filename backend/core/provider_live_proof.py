@@ -142,8 +142,8 @@ def build_provider_live_proof(env: Mapping[str, str]) -> dict[str, Any]:
 
     issues: list[dict[str, str]] = []
 
+    stripe_secret_mode = stripe_key_mode(env.get("STRIPE_SECRET_KEY"))
     stripe_api_mode = stripe_key_mode(env.get("STRIPE_API_KEY"))
-    stripe_legacy_mode = stripe_key_mode(env.get("STRIPE_SECRET_KEY"))
     stripe_publishable_mode = stripe_key_mode(env.get("STRIPE_PUBLISHABLE_KEY") or env.get("REACT_APP_STRIPE_PUBLISHABLE_KEY"))
     stripe_webhook_configured = _configured(env, "STRIPE_WEBHOOK_SECRET")
     billing_catalog = build_billing_launch_readiness_report()
@@ -152,20 +152,20 @@ def build_provider_live_proof(env: Mapping[str, str]) -> dict[str, Any]:
         if issue.get("severity") == "blocker"
     ]
 
-    if not _live_stripe_mode(stripe_api_mode):
-        if stripe_api_mode == "missing" and _live_stripe_mode(stripe_legacy_mode):
+    if not _live_stripe_mode(stripe_secret_mode):
+        if stripe_secret_mode == "missing" and _live_stripe_mode(stripe_api_mode):
             issues.append(_issue(
                 strict_severity,
                 "stripe",
-                "stripe_api_key_legacy_only",
-                "Live Stripe key is present only in legacy STRIPE_SECRET_KEY; runtime uses STRIPE_API_KEY.",
+                "stripe_api_key_fallback_only",
+                "Live Stripe key is present only in compatibility STRIPE_API_KEY; runtime canonical key is STRIPE_SECRET_KEY.",
             ))
         else:
             issues.append(_issue(
                 strict_severity,
                 "stripe",
-                "stripe_api_key_not_live",
-                "STRIPE_API_KEY is not a live backend key class.",
+                "stripe_secret_key_not_live",
+                "STRIPE_SECRET_KEY is not a live backend key class.",
             ))
     if stripe_publishable_mode not in {"publishable_live", "missing"}:
         issues.append(_issue(
@@ -268,7 +268,7 @@ def build_provider_live_proof(env: Mapping[str, str]) -> dict[str, Any]:
             "label": "Stripe",
             "status": _provider_status(issues, "stripe"),
             "evidence": "live backend key class, webhook secret, locked catalog constants",
-            "configured": stripe_api_mode != "missing" or stripe_legacy_mode != "missing",
+            "configured": stripe_secret_mode != "missing" or stripe_api_mode != "missing",
         },
         {
             "provider": "resend",
@@ -312,8 +312,8 @@ def build_provider_live_proof(env: Mapping[str, str]) -> dict[str, Any]:
         "issues": issues,
         "providers": provider_rows,
         "stripe": {
-            "api_key_mode": stripe_api_mode,
-            "legacy_secret_key_mode": stripe_legacy_mode,
+            "secret_key_mode": stripe_secret_mode,
+            "compatibility_api_key_mode": stripe_api_mode,
             "publishable_key_mode": stripe_publishable_mode,
             "webhook_secret_configured": stripe_webhook_configured,
             "catalog_blockers": len(billing_blockers),
@@ -402,8 +402,8 @@ def render_provider_live_proof_markdown(report: Mapping[str, Any]) -> str:
     ])
     stripe = report.get("stripe") or {}
     for key in (
-        "api_key_mode",
-        "legacy_secret_key_mode",
+        "secret_key_mode",
+        "compatibility_api_key_mode",
         "publishable_key_mode",
         "webhook_secret_configured",
         "catalog_blockers",

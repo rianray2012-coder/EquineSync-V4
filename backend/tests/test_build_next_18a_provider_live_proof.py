@@ -20,7 +20,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 def _live_env() -> dict[str, str]:
     return {
         "APP_ENV": "production",
-        "STRIPE_API_KEY": "rk_live_FAKE_BACKEND_KEY_SHOULD_NOT_RENDER",
+        "STRIPE_SECRET_KEY": "rk_live_FAKE_BACKEND_KEY_SHOULD_NOT_RENDER",
         "STRIPE_PUBLISHABLE_KEY": "pk_live_FAKE_PUBLIC_KEY_SHOULD_NOT_RENDER",
         "STRIPE_WEBHOOK_SECRET": "whsec_FAKE_STRIPE_WEBHOOK_SHOULD_NOT_RENDER",
         "RESEND_API_KEY": "re_FAKE_RESEND_KEY_SHOULD_NOT_RENDER",
@@ -59,7 +59,8 @@ def test_live_like_env_can_prove_provider_readiness_without_blockers():
         "docusign": "pass",
         "background_jobs": "pass",
     }
-    assert report["stripe"]["api_key_mode"] == "restricted_live"
+    assert report["stripe"]["secret_key_mode"] == "restricted_live"
+    assert report["stripe"]["compatibility_api_key_mode"] == "missing"
     assert report["stripe"]["publishable_key_mode"] == "publishable_live"
     assert report["resend"]["sender_domain_is_equine_sync"] is True
     assert report["docusign"]["auth_server_mode"] == "live"
@@ -124,7 +125,7 @@ def test_production_missing_provider_values_are_blockers():
     assert report["overall_status"] == "blocked"
     assert report["issue_counts"]["blocker"] >= 3
     kinds = {issue["kind"] for issue in report["issues"]}
-    assert "stripe_api_key_not_live" in kinds
+    assert "stripe_secret_key_not_live" in kinds
     assert "stripe_webhook_secret_missing" in kinds
     assert "resend_api_key_missing" in kinds
     assert "docusign_credentials_missing" in kinds

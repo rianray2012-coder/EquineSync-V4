@@ -1,0 +1,408 @@
+{
+  "blockers": [],
+  "definition_blockers": [],
+  "definition_counts": {
+    "addon_prices": 12,
+    "addon_products": 12,
+    "blockers": 0,
+    "contact_sales_products": 2,
+    "local_only_plans": 2,
+    "plan_prices": 18,
+    "plan_products": 11,
+    "prices": 30,
+    "products": 23
+  },
+  "determination": "stripe_sandbox_catalog_dry_run_clean",
+  "environment": "sandbox",
+  "generated_at": "2026-08-01T02:46:08.970697+00:00",
+  "mode": "dry-run",
+  "mongo": {
+    "connected": true,
+    "updates": null,
+    "verification_blockers": []
+  },
+  "status": "ok",
+  "stripe_key": {
+    "key_mode": "sandbox",
+    "key_source": "STRIPE_SECRET_KEY",
+    "livemode": false
+  },
+  "stripe_reconciliation": {
+    "blockers": [],
+    "prices": [
+      {
+        "action": "would_create",
+        "code": "individual_owner",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.individual_owner.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "individual_owner",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.individual_owner.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_adopt",
+        "code": "service_provider_premium",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.service_provider_premium.monthly",
+        "object_id": "price_1TzMgsQt8h2tFjE5KkMdDvkk"
+      },
+      {
+        "action": "would_create",
+        "code": "service_provider_premium",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.service_provider_premium.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "private_owner_plus",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.private_owner_plus.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "private_owner_plus",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.private_owner_plus.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "starter_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.starter_barn.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "starter_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.starter_barn.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "advanced_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.advanced_barn.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "advanced_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.advanced_barn.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "elite_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.elite_barn.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "elite_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.elite_barn.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_no_lesson",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_no_lesson.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_no_lesson",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_no_lesson.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_lesson_15",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_lesson_15.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_lesson_15",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_lesson_15.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_lesson_50",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_lesson_50.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_lesson_50",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_lesson_50.annual",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_horse_standard",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_horse_standard.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_horse_starter",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_horse_starter.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_horse_advanced",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_horse_advanced.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_staff_seat",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_staff_seat.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_helper_seat",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_helper_seat.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_owner_manager_seat",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_owner_manager_seat.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "elite_owner_manager_seat",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.elite_owner_manager_seat.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_lesson_participant",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_lesson_participant.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "extra_storage",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.extra_storage.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "custom_branding",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.custom_branding.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "ai_owner_update_assistant",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.ai_owner_update_assistant.monthly",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "quickbooks_integration",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.quickbooks_integration.monthly",
+        "object_id": null
+      }
+    ],
+    "products": [
+      {
+        "action": "would_create",
+        "code": "individual_owner",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.individual_owner",
+        "object_id": null
+      },
+      {
+        "action": "would_adopt",
+        "code": "service_provider_premium",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.service_provider_premium",
+        "object_id": "prod_UzLNCs7uHX8zaR"
+      },
+      {
+        "action": "would_create",
+        "code": "private_owner_plus",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.private_owner_plus",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "starter_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.starter_barn",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "advanced_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.advanced_barn",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "elite_barn",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.elite_barn",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_no_lesson",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_no_lesson",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_lesson_15",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_lesson_15",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "trainer_lesson_50",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.trainer_lesson_50",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "enterprise",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.enterprise",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "community_program",
+        "kind": "plan",
+        "lookup_key": "equinesync.sandbox.plan.community_program",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_horse_standard",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_horse_standard",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_horse_starter",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_horse_starter",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_horse_advanced",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_horse_advanced",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_staff_seat",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_staff_seat",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_helper_seat",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_helper_seat",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_owner_manager_seat",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_owner_manager_seat",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "elite_owner_manager_seat",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.elite_owner_manager_seat",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "additional_lesson_participant",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.additional_lesson_participant",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "extra_storage",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.extra_storage",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "custom_branding",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.custom_branding",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "ai_owner_update_assistant",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.ai_owner_update_assistant",
+        "object_id": null
+      },
+      {
+        "action": "would_create",
+        "code": "quickbooks_integration",
+        "kind": "addon",
+        "lookup_key": "equinesync.sandbox.addon.quickbooks_integration",
+        "object_id": null
+      }
+    ]
+  }
+}

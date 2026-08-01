@@ -14,7 +14,6 @@ import os
 import pathlib
 import time
 import uuid
-from unittest.mock import MagicMock
 
 import pytest
 import requests
@@ -379,7 +378,8 @@ def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
         raise _StubError("simulated stripe outage")
 
     monkeypatch.setattr(stripe_sdk.Subscription, "retrieve", _boom)
-    monkeypatch.setenv("STRIPE_API_KEY", "stripe_test_key_placeholder")
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_subscription_route")
+    monkeypatch.delenv("STRIPE_API_KEY", raising=False)
     monkeypatch.delenv("STRIPE_WEBHOOK_SECRET", raising=False)
 
     # Build a stub DB whose subscriptions.find_one returns None (so the
@@ -464,7 +464,8 @@ def test_lifespan_production_fail_fast_is_not_swallowed(monkeypatch):
     from core import billing_provisioning
 
     monkeypatch.setenv("APP_ENV", "production")
-    monkeypatch.setenv("STRIPE_API_KEY", "stripe_test_key_placeholder")
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_live_test_placeholder")
+    monkeypatch.delenv("STRIPE_API_KEY", raising=False)
     # Clear any Price IDs that may be set in the env so the prod validator fails.
     for k in (
         "STRIPE_PRICE_INDIVIDUAL_OWNER_MONTHLY",
