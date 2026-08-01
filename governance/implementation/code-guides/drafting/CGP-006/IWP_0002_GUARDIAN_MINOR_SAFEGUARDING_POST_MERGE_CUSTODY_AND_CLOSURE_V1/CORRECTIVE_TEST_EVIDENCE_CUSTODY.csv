@@ -1,0 +1,10 @@
+evidence_id,scope,result,evidence
+CTE-001,LEGACY_LINK_EXPANSION,PASS,GMS-T-055 through GMS-T-057; shared helper accepts only explicit same-barn or independently verified legacy links and rejects contradictory provenance
+CTE-002,MESSAGING_AND_PAYMENT_EXPANSION,PASS,Messaging and billing owner/Guardian expansion now use load_verified_guardian_linked_students
+CTE-003,MATERIALIZED_INVOICE_STATE_TOKEN,PASS,Recurring charge materialization captures final authoritative gate state token and invoice.pay enforces expected_state_token
+CTE-004,LEGACY_INVOICE_WITHOUT_TOKEN,PASS,Minor-involved invoice.pay fail-closes when stored guard state token is missing
+CTE-005,NO_PROVIDER_CALL,PASS,Local tests and GitHub checks did not perform provider calls
+CTE-006,PACKAGE_VALIDATOR,PASS,validate_post_merge_custody_package.py passed on refreshed PR #72 branch
+CTE-007,PR_72_REBASED_FOCUSED_TEST_RERUN,PASS,PYTHONPATH=backend python3 direct runner executed 59 focused Guardian/Minor test functions on refreshed PR #72 branch
+CTE-008,PR_72_STRUCTURED_ARTIFACT_PARSE,PASS,Package and canonical mapping JSON/CSV artifacts parsed successfully on refreshed PR #72 branch
+CTE-009,PR_72_DIFF_CHECK,PASS,git diff --check passed on refreshed PR #72 branch

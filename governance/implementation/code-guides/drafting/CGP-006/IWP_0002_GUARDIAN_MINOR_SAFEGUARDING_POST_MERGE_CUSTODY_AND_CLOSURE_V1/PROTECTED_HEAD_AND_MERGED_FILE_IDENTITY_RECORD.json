@@ -1,0 +1,29 @@
+{
+  "current_corrected_identity_record": "CORRECTED_PROTECTED_HEAD_AND_FILE_IDENTITY_RECORD.json",
+  "historical_closure_status": "CGP_006_IWP_0002_POST_MERGE_CUSTODY_COMPLETE_CLOSURE_BLOCKED_PENDING_FOUNDER_REVIEW",
+  "historical_post_merge_findings": [
+    {
+      "current_status": "RESOLVED_AFTER_PR_75_MERGE",
+      "historical_status": "OPEN_IN_BLOCKED_CUSTODY_RECORD",
+      "thread_id": "PRRT_kwDOS5bRRs6Vmf5A",
+      "title": "Legacy links omitted from expansions"
+    },
+    {
+      "current_status": "RESOLVED_AFTER_PR_75_MERGE",
+      "historical_status": "OPEN_IN_BLOCKED_CUSTODY_RECORD",
+      "thread_id": "PRRT_kwDOS5bRRs6Vmf5B",
+      "title": "Materialized invoices omit state token"
+    }
+  ],
+  "implementation_base": "9996e948ede39a968b8facd8afe15c2b1a345204",
+  "implementation_final_head": "74f79bc7e9452e593247aff7624c1668649da02b",
+  "implementation_merge_commit": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+  "implementation_pr": 71,
+  "protected_branch": "integrate-emergent-final-zip",
+  "protected_head_after_pr71_merge": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+  "record_role": "HISTORICAL_PR_71_BLOCKED_CUSTODY_IDENTITY_SUPERSEDED_BY_PR_75_CORRECTION",
+  "recorded_at": "2026-08-01T10:36:18Z",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "superseding_corrective_merge_commit": "a5461072b36fd991b4cfcba343e53aa83d70df66",
+  "superseding_corrective_pr": 75
+}

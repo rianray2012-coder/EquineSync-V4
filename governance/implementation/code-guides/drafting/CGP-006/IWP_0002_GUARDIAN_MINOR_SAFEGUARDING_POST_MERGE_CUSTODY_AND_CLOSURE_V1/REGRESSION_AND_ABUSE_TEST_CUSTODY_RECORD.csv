@@ -1,0 +1,10 @@
+test_or_check,result,source
+Focused Guardian/Minor tests,59 passed,local PR #75 final-head direct focused test runner
+Original 54 safeguarding objectives,PASS,PR #75 reran prior Guardian/Minor safeguarding cases plus corrective additions
+Corrective tests GMS-T-055..059,PASS,PR #75 correction package and local focused test runner
+Legacy link provenance tests,PASS,"verified, unverified, cross-barn, contradictory, messaging, and payment expansion cases"
+State-token materialization/payment tests,PASS,"materialized token copy, final gate match, unchanged token pay, stale/missing token fail-closed cases"
+Backend suite is collectable,SUCCESS,GitHub Actions run 30695507111 job 91357600722
+Backend known-failure non-regression gate,SUCCESS,GitHub Actions run 30695507111 job 91357600705
+Frontend build,SUCCESS,GitHub Actions run 30695507111 job 91357600738
+Cursor Bugbot corrective PR inspection,SUCCESS,PR #75 Cursor Bugbot completed 2026-08-01T10:24:17Z

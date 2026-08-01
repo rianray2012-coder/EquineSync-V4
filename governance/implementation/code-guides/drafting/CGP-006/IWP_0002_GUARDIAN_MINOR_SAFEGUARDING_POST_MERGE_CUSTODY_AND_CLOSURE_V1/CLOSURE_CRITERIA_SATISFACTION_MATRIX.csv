@@ -1,0 +1,9 @@
+criterion_id,condition,status,evidence
+CC-01,implementation PR merged into protected branch,PASS,PR #71 merged at d0d9528028982c1243f9e2a6b0f21a78f298276c
+CC-02,protected head contains reviewed implementation bytes,PASS,PR #71 merge commit d0d9528028982c1243f9e2a6b0f21a78f298276c verified and later preserved through PR #75 corrected protected head a5461072b36fd991b4cfcba343e53aa83d70df66
+CC-03,implementation merge gates remain true against merged state,PASS,PR #71 required checks passed before merge; PR #75 corrected post-merge findings and passed required checks
+CC-04,post-merge package validator passes,PASS,validate_post_merge_custody_package.py passed on refreshed PR #72 branch
+CC-05,register reconciliation internally consistent,PASS,"canonical rows updated only for CGP006-MAP-FIND-0002, CGP006-MAP-GAP-0003, CGP006-IWP-CANDIDATE-0002, related control map, PIA traceability, and program status"
+CC-06,"no new post-merge regression, review finding, or authority conflict undermines closure",PASS,PR #75 Cursor Bugbot passed; two PR #71 post-merge findings resolved after protected correction merge
+CC-07,closure wording limited to CGP006-MAP-FIND-0002 and CGP006-MAP-GAP-0003,PASS,"closure disposition and canonical rows are limited to mapped finding, mapped gap, and IWP candidate 0002"
+CC-08,continuing non-authorization boundaries preserved,PASS,no deployment/provider/staging/pilot/production/runtime/GAP_0004/Wave2/CGP007/unrelated PR mutation
