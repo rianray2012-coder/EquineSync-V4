@@ -307,12 +307,16 @@ CGP-006 Wave 1 documentary gap closure custody is recorded in `governance/implem
 - Accession package path: `governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1/`
 - Accession branch: `codex/cgp006-gap0005-closure-plan-v1-1-accession`
 - Protected accession PR: `PR #73 https://github.com/rianray2012-coder/EquineSync-V4/pull/73`
+- Protected accession merge commit: `95a4c9b4006f4bd4377f75b3d0fef57d5f424dee`
 - Reviewed reference head: `9996e948ede39a968b8facd8afe15c2b1a345204`
 - Live protected starting head: `d0d9528028982c1243f9e2a6b0f21a78f298276c`
-- Effective event: `PROTECTED_MERGE_OF_THE_CGP006_GAP0005_CLOSURE_PLAN_V1_1_ACCESSION_PR`
-- Current pre-merge status: `FOUNDER_APPROVED_PENDING_PROTECTED_REPOSITORY_ACCESSION_AND_CUSTODY_NO_GAP_CLOSURE_EFFECT`
-- Post-accession interim status after protected merge only: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_AND_PROTECTEDLY_ACCESSIONED_PENDING_CUSTODY`
-- Required post-merge custody: `PENDING_AFTER_ACCESSION_MERGE`
+- Accession effective event: `PROTECTED_MERGE_OF_THE_CGP006_GAP0005_CLOSURE_PLAN_V1_1_ACCESSION_PR`
+- Accession pre-merge status preserved as historical: `FOUNDER_APPROVED_PENDING_PROTECTED_REPOSITORY_ACCESSION_AND_CUSTODY_NO_GAP_CLOSURE_EFFECT`
+- Post-accession interim status after PR #73 protected merge: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_AND_PROTECTEDLY_ACCESSIONED_PENDING_CUSTODY`
+- Required post-merge custody branch: `codex/cgp006-gap0005-closure-plan-v1-1-custody`
+- Required post-merge custody PR: `PR #74 https://github.com/rianray2012-coder/EquineSync-V4/pull/74`
+- Post-merge custody receipt: `governance/implementation/code-guides/receipts/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_CUSTODY_RECEIPT.md`
+- Final custody status after protected merge of custody PR only: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_PROTECTEDLY_ACCESSIONED_AND_POST_MERGE_CUSTODY_COMPLETE_NO_GAP_CLOSURE_EFFECT`
 - Current gap status preserved: `CGP006_MAP_GAP_0005_REMAINS_OPEN`
 - Current PR #69 state: `PR #69 OPEN DRAFT head 6b8bdeb0657a397689f85de63200425ebca35fae; not modified by this directive.`
 - Current PR #70 state: `PR #70 OPEN DRAFT head e502d0065143eaf19e20e95cd2c21c4c065fe726; not modified by this directive.`

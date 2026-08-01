@@ -1,0 +1,15 @@
+{
+  "accession_head_is_ancestor_of_post_accession_protected_head": true,
+  "accession_merge_commit_sha": "95a4c9b4006f4bd4377f75b3d0fef57d5f424dee",
+  "accession_merge_parents": [
+    "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+    "016accf4d6eb35ef2e436bcf26330c5a050dddd8"
+  ],
+  "accession_pr_head": "016accf4d6eb35ef2e436bcf26330c5a050dddd8",
+  "custody_branch_point": "95a4c9b4006f4bd4377f75b3d0fef57d5f424dee",
+  "post_accession_protected_head": "95a4c9b4006f4bd4377f75b3d0fef57d5f424dee",
+  "pre_accession_protected_head": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+  "protected_branch": "integrate-emergent-final-zip",
+  "protected_head_after_pr73_merge": "95a4c9b4006f4bd4377f75b3d0fef57d5f424dee",
+  "recorded_at_utc": "2026-08-01T08:15:18Z"
+}
