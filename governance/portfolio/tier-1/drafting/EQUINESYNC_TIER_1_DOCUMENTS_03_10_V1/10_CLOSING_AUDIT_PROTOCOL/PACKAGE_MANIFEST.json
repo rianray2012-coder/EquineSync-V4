@@ -1,16 +1,16 @@
 {
   "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
-  "file_count_excluding_manifest_and_checksum": 28,
+  "file_count_excluding_manifest_and_checksum": 29,
   "files": [
     {
-      "byte_length": 1215,
+      "byte_length": 1204,
       "path": "AUDIT_DETERMINATION_MATRIX.csv",
-      "sha256": "7aa6877c4860110255d20619419489ff71dbf9b8051b49f40416b1ccac9fba73"
+      "sha256": "b53cfd716d422dfe17d625f7b34e239c0077d6ff444e73b5a54977fe0421bcc9"
     },
     {
-      "byte_length": 1126,
+      "byte_length": 1119,
       "path": "AUDIT_EVIDENCE_MATRIX.csv",
-      "sha256": "3d6c7fae1316ecd3e8c65de655710425cc263f12f3b40506822f7168533b727a"
+      "sha256": "bae41b94a429a40cd95a2474cbe2e328292bf0fa8d626b46794da26b0a1ab196"
     },
     {
       "byte_length": 22228,
@@ -18,9 +18,9 @@
       "sha256": "5bc9c995b54c1eef9be3ed54290edb8418a4c04f7937459598ac7459ecc69b75"
     },
     {
-      "byte_length": 8127,
+      "byte_length": 8095,
       "path": "AUDIT_REQUIREMENTS_MATRIX.csv",
-      "sha256": "462c0b07db438279d6dca19223c63c140bd20b3b98cd1d7aa2e8e04b5e67355b"
+      "sha256": "0d8dee98b4d2507e592fd8592bb01aa92bb8191c59a789603f908d5b9597d47e"
     },
     {
       "byte_length": 8093,
@@ -28,14 +28,19 @@
       "sha256": "389190c3886ac65e74724dfb49606ac687662d17c0f455e10adbd74f2c11d527"
     },
     {
-      "byte_length": 19940,
-      "path": "SOURCE_REGISTER.csv",
-      "sha256": "7c76d7439db5443ebc676e903e023551c26c980801d1e79b73a9bb22b7e2c302"
+      "byte_length": 3166,
+      "path": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_CERTIFICATION_PACKAGE_V1_0_REVISION_AND_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "cb97f571379361f1852d489ea553dc55ecc2cb9cd6be3676aa8e0024dc3b2aaf"
     },
     {
-      "byte_length": 1590,
+      "byte_length": 19903,
+      "path": "SOURCE_REGISTER.csv",
+      "sha256": "6b737cca663d068eb64a6de87017e3b71e78dd0bfb85351387496d4e12e6abe0"
+    },
+    {
+      "byte_length": 1570,
       "path": "TEMPLATE_INDEX.csv",
-      "sha256": "067add9b231156aa216b5e04bda647c2a4a98c3043abb4d798ac212706df729f"
+      "sha256": "1e878b0d6f09d425e37df3b1bd714b63c65423877f8d05846aafa25ce758218e"
     },
     {
       "byte_length": 603,
@@ -143,6 +148,6 @@
       "sha256": "48e8c225119a7bc2832f83c8a8a6884f8b0bcf8f8477066a2b51a22414638b45"
     }
   ],
-  "generated_at": "2026-08-01T15:40:50Z",
+  "generated_at": "2026-08-01T15:43:51Z",
   "package_root": "10_CLOSING_AUDIT_PROTOCOL"
 }

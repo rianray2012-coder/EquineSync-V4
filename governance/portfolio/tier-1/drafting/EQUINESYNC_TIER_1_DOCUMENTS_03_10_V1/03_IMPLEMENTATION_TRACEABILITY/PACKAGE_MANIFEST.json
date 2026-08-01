@@ -1,21 +1,21 @@
 {
   "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
-  "file_count_excluding_manifest_and_checksum": 15,
+  "file_count_excluding_manifest_and_checksum": 16,
   "files": [
     {
-      "byte_length": 2217,
+      "byte_length": 2208,
       "path": "AUDIT_EVENT_AND_EVIDENCE_MATRIX.csv",
-      "sha256": "bb4f306f0ab0d31cac58c0820e61e9a6a65f6e19807d8cc215323fc34f9e2cff"
+      "sha256": "d809ee39477c0d7af20e854613e7b7d24f2ca82cfcc848c9528844ad478b2114"
     },
     {
-      "byte_length": 4136,
+      "byte_length": 4127,
       "path": "CANONICAL_GUIDE_TO_REQUIREMENT_MATRIX.csv",
-      "sha256": "4db6b3365c36d24bc69faaf2185de7bd9cf0893cc8420171efed3dbaef8deccf"
+      "sha256": "2ed145e81e5abf004325a9a8491475a6d2697512209aa852105a0e85d10860b9"
     },
     {
-      "byte_length": 4107,
+      "byte_length": 4098,
       "path": "CONTROL_TO_FEATURE_SERVICE_AND_OWNER_MAP.csv",
-      "sha256": "56059bc3222f654aae0e3063b8fe00de1a6c6afa3da9aaecb35e0af8aeff92b5"
+      "sha256": "dc5765d5a5701a9393cc84951ba7fd70ea9884332663f5dc106a92f5e992e3f6"
     },
     {
       "byte_length": 8301,
@@ -23,39 +23,44 @@
       "sha256": "bedaa9df2f2bd61fa74eea53bb65a28b6c893f6b1fafad9247d37e791e5edefc"
     },
     {
-      "byte_length": 1896,
+      "byte_length": 3187,
+      "path": "EQUINESYNC_MASTER_IMPLEMENTATION_MAPPING_REQUIREMENT_TEST_AND_EVIDENCE_TRACEABILITY_PACKAGE_V1_0_REVISION_AND_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "cbe07f5a9d9c71ad6e64c020fd13b6b63de31375272fd05bfcd630cd56751997"
+    },
+    {
+      "byte_length": 1887,
       "path": "FAILURE_RETRY_ROLLBACK_AND_RECOVERY_MATRIX.csv",
-      "sha256": "91016c1eee6e332ee1211aa24137b54d6746ce4c7c22dd25d008be41540f708c"
+      "sha256": "45f680123247ca554d7fa10e6743eba4293cc726cf56a82ae21974938423154c"
     },
     {
-      "byte_length": 1213,
+      "byte_length": 1204,
       "path": "INVARIANT_TO_TEST_MATRIX.csv",
-      "sha256": "6b9b3cb4e7a6f88425ed5b2e796b4afdfc4672923353017497896fb678f16ad3"
+      "sha256": "34271503d4709d3dfbe9eb2302821e502c73a6fab2aaeec8548395abf567088e"
     },
     {
-      "byte_length": 3080,
+      "byte_length": 3071,
       "path": "OPEN_TRACEABILITY_GAP_REGISTER.csv",
-      "sha256": "69838bb560d91e35e17c55904b0c2e1ac246d09379ba9fd26915fe24490f1d1b"
+      "sha256": "6cdca10da6cba7494a3ac878ffeb704420bf713b0ad40e009bbe492b35ccc292"
     },
     {
-      "byte_length": 1881,
+      "byte_length": 1872,
       "path": "PERMISSION_ENFORCEMENT_MATRIX.csv",
-      "sha256": "b45a9abf700be48070d08e6fd724f2c265caecaeaf20c0296968830c6d7521ef"
+      "sha256": "01c0cb4b4fe8df10ca68a5da086d80e5de4f39fcb79562cac859bfc75c4021e1"
     },
     {
-      "byte_length": 605,
+      "byte_length": 602,
       "path": "REQUIREMENT_CONFLICT_RESOLUTION_REGISTER.csv",
-      "sha256": "f7f28a02c1e583e77993174b2ebb7ee4fb77376d0a62e18492c8d909a2a64a7b"
+      "sha256": "6a9ec16296b5d4b62b08b6bf16ac049d87add648ea6a62d362510218d450cd47"
     },
     {
-      "byte_length": 10493,
+      "byte_length": 10484,
       "path": "REQUIREMENT_TO_IMPLEMENTATION_MAP.csv",
-      "sha256": "eadcbb2984c5f0607b90726294e89598fdec74107b4d4e70b48bb6384a4056b6"
+      "sha256": "3c048927df8da55a4cdc967f7caeed9ca7de0aa7f23f2a945f4ca463f47391de"
     },
     {
-      "byte_length": 19071,
+      "byte_length": 19034,
       "path": "SOURCE_REGISTER.csv",
-      "sha256": "af023c2590c2a7624ceba67b1770dea940ddfddf263d9ce857ef33215f38e223"
+      "sha256": "fabf3b0b03ae6a3ce1482bfdef7c033dd5cde5aa8400cf4b7aeb0f75ca2d1c32"
     },
     {
       "byte_length": 25955,
@@ -78,6 +83,6 @@
       "sha256": "6b2e46214b629164fefeba4ef6e126e256bd82656df2468ed0975e9eb5e2ea51"
     }
   ],
-  "generated_at": "2026-08-01T15:40:49Z",
+  "generated_at": "2026-08-01T15:43:51Z",
   "package_root": "03_IMPLEMENTATION_TRACEABILITY"
 }

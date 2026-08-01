@@ -1,11 +1,11 @@
 {
   "authority_boundary": "DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
-  "file_count_excluding_manifest_and_checksum": 10,
+  "file_count_excluding_manifest_and_checksum": 11,
   "files": [
     {
-      "byte_length": 9930,
+      "byte_length": 9919,
       "path": "AUTHORITY_LIFECYCLE_REGISTER.csv",
-      "sha256": "5c69c86b3cd2266d077ea5e48f83acee970ccbd33a15e785950bd1a0c1254f5c"
+      "sha256": "ee3fcf404c1f2dc3d96850f9acbfdfa23221545daf764945479f82c31e555af2"
     },
     {
       "byte_length": 20724,
@@ -23,14 +23,19 @@
       "sha256": "92ff35b2e21894ad1a4c65ce1caff1e08bef056026f14cd7b3e513857b081d9c"
     },
     {
-      "byte_length": 591,
-      "path": "LIFECYCLE_CONFLICT_REGISTER.csv",
-      "sha256": "e599fa2796f94e5852886c9a32c57e8c5419d9c9aecdabb564bdf2455110b852"
+      "byte_length": 3194,
+      "path": "EQUINESYNC_CURRENT_GOVERNANCE_AUTHORITY_LIFECYCLE_LOCK_ACCESSION_CUSTODY_AND_SUPERSESSION_REGISTER_V2_0_REVISION_AND_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "5b7076da963b205fddda91b15b97c0c4293b4cfa3e8f95bd0bfe6a15eeeff6be"
     },
     {
-      "byte_length": 23202,
+      "byte_length": 588,
+      "path": "LIFECYCLE_CONFLICT_REGISTER.csv",
+      "sha256": "6b067829f0df4354fe43fdf9add6d1610bccf675e10bad63d5f3b6847dfd61c5"
+    },
+    {
+      "byte_length": 23157,
       "path": "SOURCE_REGISTER.csv",
-      "sha256": "62f34052b39b264eae89e0f29c80843bfa72f2007b1de46117120f4f91683804"
+      "sha256": "110a3036572bfbe2e02c8c7f60a0b622590dbe615fda5a88e1b72e91a655ec54"
     },
     {
       "byte_length": 261,
@@ -53,6 +58,6 @@
       "sha256": "cb92316bc042a645ba656c96f529926d149fa25a10b12488bae5545f7aabbc6f"
     }
   ],
-  "generated_at": "2026-08-01T15:40:49Z",
+  "generated_at": "2026-08-01T15:43:51Z",
   "package_root": "04_AUTHORITY_LIFECYCLE_REGISTER"
 }
