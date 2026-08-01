@@ -5,9 +5,9 @@
   "directive_id": "CGP_006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_PROTECTED_ACCESSION_AND_CUSTODY_DIRECTIVE_V1_0_0",
   "files": [
     {
-      "bytes": 321,
+      "bytes": 435,
       "path": ".gitattributes",
-      "sha256": "4084d2f3e9236dba032f6be711008abf18d199b43847d90785d5871934433341"
+      "sha256": "a089a74a95f3770a9b87a23e0a0fa8599422326008e9f83c4c5364befeb10bc0"
     },
     {
       "bytes": 1734,
@@ -100,20 +100,20 @@
       "sha256": "ee3ea6042a3b54ccd899fbfd2042739ebcf35c436b0c3cdf7c9547b1778f883f"
     },
     {
-      "bytes": 461,
+      "bytes": 4847,
       "path": "tests/test_cgp006_gap0005_closure_plan_accession.py",
-      "sha256": "4c6cb4d1e735a3859deec03d82322097f158d778b86c9c59357843750f9bcc91"
+      "sha256": "8efa67bdb43a76e730da4313df310214305191cfa754d2268383ec593cee6d61"
     },
     {
-      "bytes": 11564,
+      "bytes": 16673,
       "path": "validators/validate_cgp006_gap0005_closure_plan_accession.py",
-      "sha256": "4cd104a70fa444beef8e1b50fda087aacb333526d9d23cbc2bdf43abc7c035be"
+      "sha256": "044c485a201f2094f89a3e044d5df0ec61e00873db43e3f3f11fe51d7d8d95ce"
     }
   ],
   "founder_approval_id": "ES-FD-CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-2026-08-01",
   "gap_id": "CGP006-MAP-GAP-0005",
   "gap_status": "OPEN",
-  "generated_at": "2026-08-01T08:08:45.587521+00:00",
+  "generated_at": "2026-08-01T12:16:51.284179+00:00",
   "manifest_scope": "All package files except PACKAGE_MANIFEST.json, CHECKSUM_MANIFEST.sha256, __pycache__, and .pyc files.",
   "package_id": "CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-FOUNDER-APPROVED-2026-08-01",
   "protected_starting_head": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
