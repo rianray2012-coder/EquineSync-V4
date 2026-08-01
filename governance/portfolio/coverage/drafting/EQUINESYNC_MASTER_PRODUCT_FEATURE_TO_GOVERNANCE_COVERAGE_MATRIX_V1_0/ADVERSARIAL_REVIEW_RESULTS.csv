@@ -1,0 +1,31 @@
+scenario_id,rule,representative_row_or_register,expected_outcome,result
+ADV-01,A broad feature row hides materially different workflows.,ES-FEAT-PLATFORM-008,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-02,A missing test is incorrectly classified as a missing PIA.,ES-FEAT-IDENTITY-005,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-03,A missing implementation is incorrectly classified as a governance gap.,ES-FEAT-IDENTITY-012,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-04,An existing PIA is overlooked because exact source is hard to find.,ES-FEAT-RELATIONSHIP-003,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-05,A proposed new PIA duplicates an existing PIA.,ES-FEAT-RELATIONSHIP-010,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-06,A supplement recommendation should actually be an ADR.,ES-FEAT-FACILITY-006,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-07,A supplement recommendation should actually be a Code Guide.,ES-FEAT-FACILITY-013,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-08,A route exists but does not enforce the governing permission.,ES-FEAT-HORSE-003,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-09,A frontend control exists but backend authorization is absent.,ES-FEAT-HORSE-010,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-10,A provider sandbox is mistaken for production implementation.,ES-FEAT-CARE-004,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-11,A test file is mistaken for executed evidence.,ES-FEAT-CARE-011,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-12,A historical feature owner is mistaken for current owner.,ES-FEAT-CARE-018,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-13,Two domains claim the same system of truth.,ES-FEAT-LESSONS-007,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-14,A feature has no retention owner.,ES-FEAT-LESSONS-014,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-15,A feature has no audit-event owner.,ES-FEAT-TASKS-006,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-16,A guardian or minor workflow is classified as having no safeguarding implications.,ES-FEAT-TASKS-013,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-17,An AI summary is treated as canonical truth.,ES-FEAT-COMMUNICATIONS-005,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-18,Offline behavior bypasses current permission or guardian authority.,ES-FEAT-COMMUNICATIONS-012,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-19,A financial projection is mistaken for financial truth.,ES-FEAT-DOCUMENTS-005,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-20,A pilot feature is described as production active.,ES-FEAT-DOCUMENTS-012,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-21,An unmerged PR is treated as current implementation.,ES-FEAT-FINANCIAL-004,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-22,"A new PIA is recommended without entities, lifecycle, or authority boundaries.",ES-FEAT-FINANCIAL-011,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-23,A feature is marked fully covered despite unresolved source identity.,ES-FEAT-FINANCIAL-018,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-24,A product feature exists in persona/product vision but not product gap ledger.,ES-FEAT-INVENTORY-006,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-25,An implementation exists with no governing product requirement.,ES-FEAT-INVENTORY-013,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-26,A feature is excluded because it is planned rather than implemented.,ES-FEAT-INCIDENT-007,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-27,A Founder-certified exception is mistaken for ordinary test completion.,ES-FEAT-INCIDENT-014,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-28,One feature row cites mutually superseded governance sources.,ES-FEAT-EVENTS-007,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-29,A cross-domain workflow has no controlling handoff contract.,ES-FEAT-EVENTS-014,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS
+ADV-30,A deprecated feature remains classified as active.,ES-FEAT-MARKETPLACE-007,Validator or register prevents overstatement; row remains documentary and gap-classified where needed.,PASS

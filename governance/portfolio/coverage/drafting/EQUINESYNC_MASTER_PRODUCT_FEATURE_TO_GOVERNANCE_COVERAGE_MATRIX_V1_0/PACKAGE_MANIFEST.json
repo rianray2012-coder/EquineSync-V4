@@ -1,0 +1,116 @@
+{
+  "artifact_id": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0",
+  "authority_statement": "DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "baseline_commit": "1eb384d80daa700ba2e71ee42872cc9bba926332",
+  "files": [
+    {
+      "byte_length": 5974,
+      "path": "ADVERSARIAL_REVIEW_RESULTS.csv",
+      "sha256": "3708961d2740e75cc6aaea5d08a275c32a75293e876c184923bc2a5c2c3794f3"
+    },
+    {
+      "byte_length": 2224,
+      "path": "CHECKSUMS.sha256",
+      "sha256": "LEDGER_SELF_REFERENCE_EXCLUDED"
+    },
+    {
+      "byte_length": 7884,
+      "path": "COVERAGE_ANALYSIS_AND_RECOMMENDATIONS_REPORT.md",
+      "sha256": "c93fcb1ea9a430749efe27d37e6d2f4c9fe3033c42f2381a9571d037b2d797ee"
+    },
+    {
+      "byte_length": 3634,
+      "path": "DOCUMENTARY_VALIDATION_REPORT.json",
+      "sha256": "76cc46ecffe626e2d37ea1170b8b89d565ea441991468b37711ea53699fa878b"
+    },
+    {
+      "byte_length": 2043,
+      "path": "DUPLICATE_OVERLAP_AND_AUTHORITY_CONFLICT_REGISTER.csv",
+      "sha256": "0d1586cfb9792a6d01e0032eebb17478849fca8bb6f0d91b684adf8225897ebc"
+    },
+    {
+      "byte_length": 1702793,
+      "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.csv",
+      "sha256": "766d937cb54a0f2fee7717fcf73f02bdd11d4df33151bb4bd0254f37a26b1e60"
+    },
+    {
+      "byte_length": 2424906,
+      "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.json",
+      "sha256": "c3828a25dec381adbe6b469336ad74caf13d0794e7b4e32c3c2be5ec1ee129d3"
+    },
+    {
+      "byte_length": 10917,
+      "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.md",
+      "sha256": "88981c0ff9cf90a077f1c891b8c7247be40ea577e082209d8e486cfca6a00453"
+    },
+    {
+      "byte_length": 151940,
+      "path": "FEATURE_TAXONOMY_AND_ID_REGISTER.csv",
+      "sha256": "b46a7ca9ce9bfda77a7fef30ce86789cf81f6d6c3ff60087c1bf6892686c1489"
+    },
+    {
+      "byte_length": 2869,
+      "path": "FOUNDER_DECISION_QUESTION_REGISTER.csv",
+      "sha256": "2630c7003d8af271b6a4e4efff8bdb184eba53470b3625161a4e4a18ab7b9a64"
+    },
+    {
+      "byte_length": 13099,
+      "path": "GOVERNANCE_ARTIFACT_INVENTORY.csv",
+      "sha256": "d4b7b0dc78d1dbbedcc706b4c3ed96cae6180cec83807eb9629d6a0960f5c8e6"
+    },
+    {
+      "byte_length": 3746,
+      "path": "IMPLEMENTATION_TEST_AND_EVIDENCE_STATUS_SUMMARY.csv",
+      "sha256": "e40fda0ec95efb19c149a1e2391bb293952880cc44972a097f20b47fa53f6184"
+    },
+    {
+      "byte_length": 425656,
+      "path": "NON_PIA_DOCUMENT_AND_CONTROL_GAP_REGISTER.csv",
+      "sha256": "3340153ad601ec5f222278ba8467b63742f288ff6bed3f5141a5248baeacc69a"
+    },
+    {
+      "byte_length": 4470,
+      "path": "PACKAGE_MANIFEST.json",
+      "sha256": "SELF_REFERENCE_NOT_SEALED"
+    },
+    {
+      "byte_length": 4560,
+      "path": "PIA_FEATURE_COVERAGE_SUMMARY.csv",
+      "sha256": "9dd6e47faedadfba7bc5c1c7cb90707a3abcf2445726e41632c78b9b7a482078"
+    },
+    {
+      "byte_length": 19897,
+      "path": "PROPOSED_NEW_PIA_AND_SUPPLEMENT_DECISION_REGISTER.csv",
+      "sha256": "07b6eda6242028eaa56a9571c7cc3354430a1df0f6d16caa5e284fff277e5bdc"
+    },
+    {
+      "byte_length": 1549,
+      "path": "README_FIRST.md",
+      "sha256": "d4ef2df36771a3d000cbe0b8533b907ec4d302c6daa337bf08d96c0396c37e9e"
+    },
+    {
+      "byte_length": 137058,
+      "path": "SOURCE_AND_AUTHORITY_REGISTER.csv",
+      "sha256": "115a646dc75d9ebf9721add42bc68eef63bf3bb83268562cc92f4e69f0d6672c"
+    },
+    {
+      "byte_length": 26178,
+      "path": "UNGOVERNED_CAPABILITY_REGISTER.csv",
+      "sha256": "6eadd75afb8abf420cf11d19fcefb44a34200ce05e73a29e6f13a57c53ad63c3"
+    },
+    {
+      "byte_length": 2635,
+      "path": "tests/test_master_product_feature_coverage_matrix.py",
+      "sha256": "a7f713654c3e73c48309a0f5968bfd536eae7456c0570ecccc2d56a2034e0a6f"
+    },
+    {
+      "byte_length": 10037,
+      "path": "validators/validate_master_product_feature_coverage_matrix.py",
+      "sha256": "5e857767aeda67174d9553f7e615e700832e393614613c878848ba88c1eaf07a"
+    }
+  ],
+  "protected_branch": "integrate-emergent-final-zip",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "self_reference_policy": "PACKAGE_MANIFEST.json and CHECKSUMS.sha256 are listed in the manifest with self-reference markers; CHECKSUMS.sha256 excludes itself from hashing.",
+  "work_branch": "codex/master-product-feature-governance-coverage-matrix-v1"
+}
