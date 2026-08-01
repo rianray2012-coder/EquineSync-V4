@@ -18,14 +18,23 @@ from pydantic import BaseModel, EmailStr, Field
 
 from core import audit
 from core.minor_safety import (
+    AUTHORITY_SCOPE_RELATIONSHIP_ADMINISTRATION,
     CONSENT_GRANTED,
     CONSENT_REQUIRED,
+    GUARDIAN_AUTHORITY_SCOPES,
     GUARDIAN_LINK_ACTIVE,
     GUARDIAN_LINK_PENDING,
+    GUARDIAN_WORKFLOW_CONSENT_COLLECTION,
     MINOR_STATUS_UNKNOWN,
     STUDENT_PROFILE_COLLECTION,
+    WORKFLOW_AUTHORITY_SCOPES,
+    WORKFLOW_CONSENT_REQUIRED,
     WORKFLOW_LESSON_READY,
+    audit_safe_guardian_minor_metadata,
     audit_safe_minor_metadata,
+    guardian_minor_public_error_detail,
+    guardian_minor_workflow_gate,
+    load_guardian_minor_authority_rows,
     minor_status_for_student,
     normalize_minor_status,
     requires_guardian,
@@ -71,6 +80,20 @@ class GuardianLinkCreate(BaseModel):
     invite_id: Optional[str] = None
     relationship: str = "parent"
     is_primary: bool = True
+    authority_scopes: Optional[list[str]] = None
+
+
+class GuardianWorkflowConsentCreate(BaseModel):
+    guardian_user_id: str
+    workflow: str
+    scope_reference: str = Field(..., min_length=1, max_length=200)
+    policy_version: str = Field(default="v1", min_length=1, max_length=80)
+    expires_at: Optional[str] = Field(default=None, max_length=80)
+    evidence_reference: Optional[str] = Field(default=None, max_length=200)
+
+
+class GuardianLinkRevoke(BaseModel):
+    reason: Optional[str] = Field(default=None, max_length=200)
 
 
 def _now_utc() -> datetime:
@@ -125,6 +148,62 @@ async def _active_guardian_links(db, barn_id: str, student_id: str) -> list[Dict
         },
         {"_id": 0},
     ).to_list(100)
+
+
+def _default_authority_scopes() -> list[str]:
+    return sorted(GUARDIAN_AUTHORITY_SCOPES)
+
+
+def _normalize_authority_scopes(values: Optional[list[str]]) -> list[str]:
+    if values is None:
+        return _default_authority_scopes()
+    scopes = []
+    for raw in values:
+        scope = str(raw or "").strip().upper()
+        if scope not in GUARDIAN_AUTHORITY_SCOPES:
+            raise HTTPException(status_code=422, detail="Invalid guardian authority scope")
+        if scope not in scopes:
+            scopes.append(scope)
+    if not scopes:
+        raise HTTPException(status_code=422, detail="authority_scopes cannot be empty")
+    return sorted(scopes)
+
+
+async def _touch_guardian_safeguarding_version(db, barn_id: str, student_id: str) -> None:
+    await db[STUDENT_PROFILE_COLLECTION].update_one(
+        {"id": student_id, "barn_id": barn_id},
+        {"$inc": {"guardian_safeguarding_version": 1}, "$set": {"updated_at": _iso(_now_utc())}},
+    )
+
+
+async def _guard_student_workflow(
+    *,
+    db,
+    student: Dict[str, Any],
+    workflow: str,
+    scope_reference: str,
+    policy_version: str,
+    action: str,
+    consent_required: Optional[bool] = None,
+) -> Dict[str, Any]:
+    barn_id = student.get("barn_id") or "primary"
+    links, consents = await load_guardian_minor_authority_rows(
+        db,
+        barn_id=barn_id,
+        student_profile_ids=[student.get("id")],
+        workflow=workflow,
+    )
+    return guardian_minor_workflow_gate(
+        workflow=workflow,
+        students=[student],
+        guardian_links=links,
+        workflow_consents=consents,
+        barn_id=barn_id,
+        scope_reference=scope_reference,
+        policy_version=policy_version,
+        consent_required=consent_required,
+        action=action,
+    )
 
 
 async def _user_has_barn_access(db, user_id: str, barn_id: str) -> bool:
@@ -426,11 +505,17 @@ def build_router(
             "is_primary": bool(body.is_primary),
             "status": GUARDIAN_LINK_ACTIVE,
             "consent_status": CONSENT_GRANTED if requires_guardian(student.get("minor_status")) else "not_required",
+            "authority_scopes": _normalize_authority_scopes(body.authority_scopes),
+            "restricted_scopes": [],
+            "restricted_workflows": [],
+            "disputed": False,
+            "version": 1,
             "invite_id": invite_id,
             "created_at": _iso(_now_utc()),
             "updated_at": _iso(_now_utc()),
         }
         await db.guardian_links.insert_one(link)
+        await _touch_guardian_safeguarding_version(db, barn_id, student_id)
         await _audit_minor_event(
             db=db,
             action="student_guardian.link_created",
@@ -443,6 +528,140 @@ def build_router(
             resource_id=link["id"],
         )
         return link
+
+    @router.post("/{student_id}/guardian-consents")
+    async def create_guardian_workflow_consent(
+        student_id: str,
+        body: GuardianWorkflowConsentCreate,
+        request: Request,
+        user=Depends(get_current_user),
+    ):
+        _require_student_manager(user)
+        student = await _load_student_or_404(db, user, student_id)
+        barn_id = resolve_barn_id(user)
+        workflow = (body.workflow or "").strip().lower()
+        if workflow not in WORKFLOW_CONSENT_REQUIRED:
+            raise HTTPException(status_code=422, detail="Workflow consent is not required for this workflow")
+        required_scope = WORKFLOW_AUTHORITY_SCOPES[workflow]
+        guardian_link = await db.guardian_links.find_one(
+            {
+                "barn_id": barn_id,
+                "student_profile_id": student_id,
+                "guardian_user_id": body.guardian_user_id,
+                "status": GUARDIAN_LINK_ACTIVE,
+            },
+            {"_id": 0},
+        )
+        if not guardian_link:
+            raise HTTPException(status_code=404, detail="Guardian relationship not found")
+        if required_scope not in {str(scope).strip().upper() for scope in guardian_link.get("authority_scopes") or []}:
+            raise HTTPException(status_code=409, detail="Guardian authority is incomplete")
+        now = _iso(_now_utc())
+        consent = {
+            "id": new_id(),
+            "barn_id": barn_id,
+            "student_profile_id": student_id,
+            "guardian_user_id": body.guardian_user_id,
+            "workflow": workflow,
+            "scope_reference": body.scope_reference.strip(),
+            "policy_version": body.policy_version.strip(),
+            "status": CONSENT_GRANTED,
+            "evidence_reference": (body.evidence_reference or "").strip() or None,
+            "granted_by_user_id": user.get("id"),
+            "grantor_authority_scope": required_scope,
+            "effective_at": now,
+            "expires_at": body.expires_at,
+            "revoked_at": None,
+            "version": 1,
+            "created_at": now,
+            "updated_at": now,
+        }
+        await db[GUARDIAN_WORKFLOW_CONSENT_COLLECTION].insert_one(consent)
+        await _touch_guardian_safeguarding_version(db, barn_id, student_id)
+        gate = await _guard_student_workflow(
+            db=db,
+            student=student,
+            workflow=workflow,
+            scope_reference=body.scope_reference,
+            policy_version=body.policy_version,
+            action="consent_granted",
+        )
+        await audit.record(
+            action="student_guardian.workflow_consent_granted",
+            user=user,
+            request=request,
+            resource_type="guardian_workflow_consent",
+            resource_id=consent["id"],
+            metadata=audit_safe_guardian_minor_metadata(gate),
+            _db=db,
+        )
+        return consent
+
+    @router.post("/{student_id}/guardian-links/{link_id}/revoke")
+    async def revoke_guardian_link(
+        student_id: str,
+        link_id: str,
+        request: Request,
+        body: Optional[GuardianLinkRevoke] = None,
+        user=Depends(get_current_user),
+    ):
+        _require_student_manager(user)
+        student = await _load_student_or_404(db, user, student_id)
+        barn_id = resolve_barn_id(user)
+        existing = await db.guardian_links.find_one(
+            {"id": link_id, "barn_id": barn_id, "student_profile_id": student_id},
+            {"_id": 0},
+        )
+        if not existing:
+            raise HTTPException(status_code=404, detail="Guardian relationship not found")
+        now = _iso(_now_utc())
+        await db.guardian_links.update_one(
+            {"id": link_id, "barn_id": barn_id, "student_profile_id": student_id},
+            {
+                "$set": {
+                    "status": "revoked",
+                    "revoked_at": now,
+                    "revoked_by_user_id": user.get("id"),
+                    "revocation_reason_present": bool(body and body.reason),
+                    "updated_at": now,
+                },
+                "$inc": {"version": 1},
+            },
+        )
+        await db[GUARDIAN_WORKFLOW_CONSENT_COLLECTION].update_many(
+            {
+                "barn_id": barn_id,
+                "student_profile_id": student_id,
+                "guardian_user_id": existing.get("guardian_user_id"),
+                "status": CONSENT_GRANTED,
+            },
+            {
+                "$set": {"status": "revoked", "revoked_at": now, "updated_at": now},
+                "$inc": {"version": 1},
+            },
+        )
+        await _touch_guardian_safeguarding_version(db, barn_id, student_id)
+        gate = guardian_minor_workflow_gate(
+            workflow=WORKFLOW_LESSON_READY,
+            students=[student],
+            guardian_links=[],
+            workflow_consents=[],
+            barn_id=barn_id,
+            scope_reference=f"student_profile:{student_id}:lesson_ready",
+            policy_version="lesson-ready-v1",
+            action="relationship_revoked",
+        )
+        await audit.record(
+            action="student_guardian.link_revoked",
+            user=user,
+            request=request,
+            resource_type="guardian_link",
+            resource_id=link_id,
+            outcome="success",
+            metadata=audit_safe_guardian_minor_metadata(gate),
+            _db=db,
+        )
+        return {"ok": True, "status": "revoked"}
 
     @router.patch("/{student_id}/status")
     async def patch_student_status(
@@ -473,6 +692,27 @@ def build_router(
                     status_code=409,
                 )
                 raise HTTPException(status_code=409, detail="Active guardian required")
+            v11_gate = await _guard_student_workflow(
+                db=db,
+                student=student,
+                workflow=WORKFLOW_LESSON_READY,
+                scope_reference=f"student_profile:{student_id}:lesson_ready",
+                policy_version="lesson-ready-v1",
+                action="student_profile.status_lesson_ready",
+            )
+            if v11_gate["decision"] != "allow":
+                await audit.record(
+                    action="student_profile.status_blocked",
+                    user=user,
+                    request=request,
+                    resource_type="student_profile",
+                    resource_id=student_id,
+                    outcome="denied",
+                    status_code=409,
+                    metadata=audit_safe_guardian_minor_metadata(v11_gate),
+                    _db=db,
+                )
+                raise HTTPException(status_code=409, detail=guardian_minor_public_error_detail(v11_gate))
 
         await db[STUDENT_PROFILE_COLLECTION].update_one(
             {"id": student_id, "barn_id": barn_id},

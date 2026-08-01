@@ -1,0 +1,9 @@
+workflow,status,enforcement_points,evidence
+lesson_ready_and_lesson_participation,IMPLEMENTED_AND_TESTED,student_guardians lesson-ready transition; operations lesson create; operations training create,"GMS-T-005, GMS-T-012, GMS-T-014, GMS-T-041; backend/routes/student_guardians.py; backend/routes/operations.py"
+messaging,IMPLEMENTED_AND_TESTED,operations message create; minor_communication per-participant resolver,"GMS-T-016, GMS-T-017, GMS-T-033, GMS-T-035, GMS-T-043; backend/core/minor_communication.py"
+waiver,IMPLEMENTED_AND_TESTED,document request creation for waiver templates and sandbox-envelope transition,"GMS-T-019, GMS-T-020, GMS-T-022, GMS-T-039; backend/routes/document_signatures.py"
+document_signature,IMPLEMENTED_AND_TESTED,document request creation and sandbox-envelope transition before provider-capable action,"GMS-T-021, GMS-T-022, GMS-T-039; backend/routes/document_signatures.py"
+media_release,IMPLEMENTED_AND_TESTED,document request creation for media/photo release templates,"GMS-T-023, GMS-T-039; backend/routes/document_signatures.py"
+payment,IMPLEMENTED_AND_TESTED,invoice create; invoice pay; recurring charge create/update/materialize,"GMS-T-030, GMS-T-031, GMS-T-039; backend/routes/billing.py; backend/routes/recurring_charges.py"
+event_signup,IMPLEMENTED_AND_TESTED,operations service request event/community-program signup write,"GMS-T-032, GMS-T-039; backend/routes/operations.py"
+guardian_lifecycle_and_participant_removal,IMPLEMENTED_AND_TESTED,guardian consent create; guardian link revoke; message participant coverage/last-guardian removal rule,"GMS-T-006, GMS-T-007, GMS-T-024, GMS-T-034, GMS-T-035, GMS-T-036; backend/routes/student_guardians.py"

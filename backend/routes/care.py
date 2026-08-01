@@ -46,6 +46,9 @@ class OwnerIn(BaseModel):
 class RiderIn(BaseModel):
     full_name: str
     age: Optional[int] = None
+    birthdate: Optional[str] = None
+    minor_status: Optional[str] = None
+    student_profile_id: Optional[str] = None
     skill_level: str = "beginner"
     goals: Optional[str] = None
     trainer_id: Optional[str] = None

@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import re
 from datetime import date, datetime, timedelta, timezone
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
@@ -25,6 +25,23 @@ from pymongo.errors import DuplicateKeyError
 from core.tenancy import barn_filter, stamp_barn
 from core.permissions import require
 from core import audit
+from core.minor_safety import (
+    DECISION_ALLOW,
+    GUARDIAN_LINK_COLLECTION,
+    MINOR_STATUS_ADULT,
+    MINOR_STATUS_MINOR_13_TO_17,
+    MINOR_STATUS_UNDER_13,
+    MINOR_STATUS_UNKNOWN,
+    STUDENT_PROFILE_COLLECTION,
+    WORKFLOW_PAYMENT,
+    audit_safe_guardian_minor_metadata,
+    guardian_minor_public_error_detail,
+    guardian_minor_workflow_gate,
+    load_guardian_minor_authority_rows,
+    minor_status_for_student,
+    normalize_minor_status,
+    student_workflow_scope,
+)
 from routes.billing import LineItem, _normalize_line, compute_money  # reuse 9A line-item shape + math
 
 
@@ -45,6 +62,12 @@ _VALID_CADENCE = {"monthly"}
 class RecurringChargeIn(BaseModel):
     owner_id: str
     horse_id: Optional[str] = None
+    rider_id: Optional[str] = None
+    student_profile_id: Optional[str] = None
+    billing_agreement_id: Optional[str] = None
+    guardian_guard_scope_reference: Optional[str] = None
+    guardian_state_token: Optional[str] = None
+    billing_policy_version: Optional[str] = None
     description: str
     items: List[LineItem]
     discount: float = 0.0
@@ -67,6 +90,12 @@ class RecurringChargeUpdate(BaseModel):
     end_date: Optional[str] = None
     due_days: Optional[int] = None
     active: Optional[bool] = None
+    rider_id: Optional[str] = None
+    student_profile_id: Optional[str] = None
+    billing_agreement_id: Optional[str] = None
+    guardian_guard_scope_reference: Optional[str] = None
+    guardian_state_token: Optional[str] = None
+    billing_policy_version: Optional[str] = None
 
 
 class DeactivateIn(BaseModel):
@@ -179,6 +208,146 @@ def _template_total(items, discount, tax_rate):
 def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
     router = APIRouter(tags=["billing"])
 
+    def _minor_status_from_age(age) -> str:
+        try:
+            years = int(age)
+        except (TypeError, ValueError):
+            return MINOR_STATUS_UNKNOWN
+        if years < 13:
+            return MINOR_STATUS_UNDER_13
+        if years < 18:
+            return MINOR_STATUS_MINOR_13_TO_17
+        return MINOR_STATUS_ADULT
+
+    async def _student_from_profile_id(user, student_profile_id):
+        if not student_profile_id:
+            return None
+        return await db[STUDENT_PROFILE_COLLECTION].find_one(
+            barn_filter(user, {"id": student_profile_id}),
+            {"_id": 0},
+        )
+
+    async def _student_from_rider(user, rider: Optional[Dict[str, Any]]):
+        if not rider:
+            return None
+        if rider.get("student_profile_id"):
+            linked = await _student_from_profile_id(user, rider["student_profile_id"])
+            if linked:
+                return linked
+            return {
+                "id": rider["student_profile_id"],
+                "barn_id": user.get("barn_id") or "primary",
+                "minor_status": MINOR_STATUS_UNKNOWN,
+            }
+        minor_status = normalize_minor_status(rider.get("minor_status") or MINOR_STATUS_UNKNOWN)
+        if minor_status == MINOR_STATUS_UNKNOWN and rider.get("age") is not None:
+            minor_status = _minor_status_from_age(rider.get("age"))
+        student = {
+            "id": f"rider:{rider.get('id')}",
+            "barn_id": rider.get("barn_id") or user.get("barn_id") or "primary",
+            "birthdate": rider.get("birthdate"),
+            "minor_status": minor_status,
+        }
+        student["minor_status"] = minor_status_for_student(student)
+        return student
+
+    async def _student_from_horse(user, horse_id):
+        if not horse_id:
+            return None
+        horse = await db.horses.find_one(barn_filter(user, {"id": horse_id}), {"_id": 0})
+        if not horse or not horse.get("rider_id"):
+            return None
+        rider = await db.riders.find_one(barn_filter(user, {"id": horse["rider_id"]}), {"_id": 0})
+        return await _student_from_rider(user, rider)
+
+    def _remember_student(students: list[Dict[str, Any]], seen: set[str], student: Optional[Dict[str, Any]]) -> None:
+        if not student:
+            return
+        student_id = str(student.get("id") or "").strip()
+        if student_id and student_id not in seen:
+            students.append(student)
+            seen.add(student_id)
+
+    async def _students_for_payment_subjects(user, doc: dict) -> list[Dict[str, Any]]:
+        students: list[Dict[str, Any]] = []
+        seen: set[str] = set()
+        _remember_student(students, seen, await _student_from_profile_id(user, doc.get("student_profile_id")))
+        if doc.get("rider_id"):
+            rider = await db.riders.find_one(barn_filter(user, {"id": doc["rider_id"]}), {"_id": 0})
+            _remember_student(students, seen, await _student_from_rider(user, rider))
+        _remember_student(students, seen, await _student_from_horse(user, doc.get("horse_id")))
+        barn_id = user.get("barn_id") or doc.get("barn_id") or "primary"
+        owner_id = str(doc.get("owner_id") or "").strip()
+        if owner_id:
+            owner = await db.users.find_one(barn_filter(user, {"id": owner_id}), {"_id": 0})
+            _remember_student(students, seen, await _student_from_rider(user, owner if owner and owner.get("student_profile_id") else None))
+            guardian_links = await db[GUARDIAN_LINK_COLLECTION].find(
+                {"barn_id": barn_id, "guardian_user_id": owner_id, "status": "active"},
+                {"_id": 0},
+            ).to_list(100)
+            for link in guardian_links:
+                _remember_student(students, seen, await _student_from_profile_id(user, link.get("student_profile_id")))
+        return students
+
+    def _payment_scope_reference(students: list[Dict[str, Any]], doc: dict) -> str:
+        explicit = str(doc.get("guardian_guard_scope_reference") or "").strip()
+        if explicit:
+            return explicit
+        agreement = str(doc.get("billing_agreement_id") or "").strip()
+        if agreement:
+            return f"billing_agreement:{agreement}"
+        guarded = [student for student in students if minor_status_for_student(student) != MINOR_STATUS_ADULT]
+        if len(guarded) == 1:
+            scoped = student_workflow_scope(guarded[0].get("id"), WORKFLOW_PAYMENT)
+            if scoped:
+                return scoped
+        return f"recurring_charge:{doc['id']}"
+
+    async def _payment_gate(*, user, request: Request, doc: dict, action: str, raise_on_block: bool) -> bool:
+        students = await _students_for_payment_subjects(user, doc)
+        if not students:
+            return True
+        barn_id = user.get("barn_id") or doc.get("barn_id") or "primary"
+        scope_reference = _payment_scope_reference(students, doc)
+        if all(minor_status_for_student(student) == MINOR_STATUS_ADULT for student in students):
+            links, consents = [], []
+        else:
+            links, consents = await load_guardian_minor_authority_rows(
+                db,
+                barn_id=barn_id,
+                student_profile_ids=[student.get("id") for student in students],
+                workflow=WORKFLOW_PAYMENT,
+            )
+        gate = guardian_minor_workflow_gate(
+            workflow=WORKFLOW_PAYMENT,
+            students=students,
+            guardian_links=links,
+            workflow_consents=consents,
+            barn_id=barn_id,
+            scope_reference=scope_reference,
+            policy_version=doc.get("guardian_guard_policy_version") or "billing-payment-v1",
+            expected_state_token=doc.get("guardian_guard_state_token"),
+            action=action,
+        )
+        if gate["decision"] == DECISION_ALLOW:
+            doc["guardian_guard_scope_reference"] = scope_reference
+            doc["guardian_guard_state_token"] = gate.get("state_token")
+            return True
+        await audit.record(
+            action="recurring_charge.guardian_minor_payment_blocked",
+            user=user,
+            request=request,
+            resource_type="recurring_charge",
+            resource_id=doc.get("id"),
+            outcome="denied",
+            status_code=403,
+            metadata=audit_safe_guardian_minor_metadata(gate),
+            _db=db,
+        )
+        if raise_on_block:
+            raise HTTPException(status_code=403, detail=guardian_minor_public_error_detail(gate))
+        return False
+
     async def _validate_refs(user, owner_id, horse_id):
         owner = await db.users.find_one(
             barn_filter(user, {"id": owner_id, "role": "horse_owner"}), {"_id": 0, "id": 1}
@@ -202,11 +371,15 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
         _validate_date_window(body.start_date, body.end_date)
         items = _validate_items(body.items)
         await _validate_refs(user, body.owner_id, body.horse_id)
+        rc_id = new_id()
         now = _iso(_now_utc())
         doc = {
-            "id": new_id(),
+            "id": rc_id,
             "owner_id": body.owner_id,
             "horse_id": body.horse_id,
+            "rider_id": body.rider_id,
+            "student_profile_id": body.student_profile_id,
+            "billing_agreement_id": body.billing_agreement_id,
             "description": body.description,
             "items": items,
             "discount": float(body.discount),
@@ -221,8 +394,12 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
             "created_by": user["id"],
             "created_at": now,
             "updated_at": now,
+            "guardian_guard_scope_reference": body.guardian_guard_scope_reference,
+            "guardian_guard_state_token": body.guardian_state_token,
+            "guardian_guard_policy_version": body.billing_policy_version or "billing-payment-v1",
         }
         stamp_barn(user, doc)
+        await _payment_gate(user=user, request=request, doc=doc, action="recurring_charge.create", raise_on_block=True)
         await db.recurring_charges.insert_one(doc)
         await audit.record(
             action="recurring_charge.created", user=user, request=request,
@@ -258,7 +435,7 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
     ):
         require(user, "recurring_charge:manage")
         scope = barn_filter(user, {"id": rc_id})
-        existing = await db.recurring_charges.find_one(scope, {"_id": 0, "id": 1, "start_date": 1, "end_date": 1})
+        existing = await db.recurring_charges.find_one(scope, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Recurring charge not found")
 
@@ -278,6 +455,17 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
         if "items" in fields:
             updates["items"] = _validate_items(body.items)
         updates["updated_at"] = _iso(_now_utc())
+        guarded_doc = {**existing, **updates}
+        await _payment_gate(
+            user=user,
+            request=request,
+            doc=guarded_doc,
+            action="recurring_charge.update",
+            raise_on_block=True,
+        )
+        for key in ("guardian_guard_scope_reference", "guardian_guard_state_token"):
+            if key in guarded_doc:
+                updates[key] = guarded_doc[key]
         await db.recurring_charges.update_one(scope, {"$set": updates})
         await audit.record(
             action="recurring_charge.updated", user=user, request=request,
@@ -328,6 +516,15 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
             if not _eligible_for_period(rc, year, month):
                 skipped += 1
                 continue
+            if not await _payment_gate(
+                user=user,
+                request=request,
+                doc=rc,
+                action="recurring_charge.materialize",
+                raise_on_block=False,
+            ):
+                skipped += 1
+                continue
             # Dedup: one invoice per (barn, recurring_charge, period). Skip — never update.
             existing_inv = await db.invoices.find_one(
                 barn_filter(user, {
@@ -349,6 +546,9 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
                 "id": new_id(),
                 "owner_id": rc["owner_id"],
                 "horse_id": rc.get("horse_id"),
+                "rider_id": rc.get("rider_id"),
+                "student_profile_id": rc.get("student_profile_id"),
+                "billing_agreement_id": rc.get("billing_agreement_id"),
                 "items": items,
                 "subtotal": subtotal,
                 "discount": disc,
@@ -362,6 +562,8 @@ def build_router(*, db, get_current_user, clean, new_id) -> APIRouter:
                 "period_key": period_key,
                 "source": "recurring",
                 "created_at": _iso(_now_utc()),
+                "guardian_guard_scope_reference": rc.get("guardian_guard_scope_reference") or f"recurring_charge:{rc['id']}",
+                "guardian_guard_policy_version": rc.get("guardian_guard_policy_version") or "billing-payment-v1",
             }
             stamp_barn(user, doc)
             try:

@@ -34,7 +34,10 @@ from core.account_memberships import (
     ensure_account_membership_indexes,
     backfill_account_memberships_from_users,
 )
-from core.minor_safety import ensure_minor_safety_indexes
+from core.minor_safety import (
+    ensure_guardian_minor_safeguarding_indexes,
+    ensure_minor_safety_indexes,
+)
 from routes.billing import ensure_billing_indexes
 from routes.backlog import BACKLOG_RESET_COLLECTIONS, ensure_backlog_indexes
 from mailer import send as send_email, render as render_email
@@ -154,6 +157,7 @@ def register_lifecycle(app, *, send_nudges):
             # founder-approved rule matrix is locked.
             try:
                 await ensure_minor_safety_indexes(db)
+                await ensure_guardian_minor_safeguarding_indexes(db)
             except Exception:
                 logger.exception("Build-Next-5A minor safety index foundation failed")
             # Retained compatibility hook; production no longer creates templates automatically.

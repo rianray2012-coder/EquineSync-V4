@@ -1,0 +1,13 @@
+path,authorization_category,necessity
+backend/core/minor_safety.py,central_guard,"Extend existing minor safety module into repository-native Guardian/Minor decision boundary with authority, consent, lifecycle, audit, version, and index helpers."
+backend/core/minor_communication.py,messaging_boundary,Derive minor participants server-side and invoke central guard before message writes and participant removal decisions.
+backend/core/lifespan.py,index_wiring,Create additive Guardian/Minor authority and consent indexes during startup without data backfill.
+backend/routes/student_guardians.py,guardian_lifecycle,"Add explicit authority scopes, workflow consent records, lifecycle revocation/suspension, and guarded lesson-ready transition."
+backend/routes/operations.py,lesson_messaging_event_sinks,"Guard lesson participation, training participation, message sends, and event-style service requests."
+backend/routes/document_signatures.py,waiver_document_media_sinks,Guard minor waiver/document/media request creation and sandbox-envelope transition before any provider-capable action.
+backend/routes/billing.py,payment_sink,Guard repository invoice creation and local paid-status transition for minor-bound obligations without provider calls.
+backend/routes/recurring_charges.py,recurring_payment_sink,Guard recurring-charge create/update/materialization and generated invoice writes for minor-bound billing templates.
+backend/routes/care.py,student_resolution,Allow rider rows to carry canonical student/minor references so lesson/event/payment guards can resolve affected minors from authoritative same-barn data.
+backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py,regression_abuse_tests,Preserve the original 43 V1.1.0 regression objectives and add corrective tests GMS-T-044 through GMS-T-054.
+backend/tests/test_rf9_trainer_operating_center.py,adult_positive_control_regression,Keep the existing trainer lesson positive control explicit as an adult-rider workflow after unknown-age riders became guarded subjects.
+governance/implementation/code-guides/drafting/CGP-006/IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_V1_1/**,implementation_evidence,"Directive-required implementation evidence package, source accession, manifests, validators, and authorization records."

@@ -1,0 +1,12 @@
+test_id,scope,status,evidence
+GMS-T-044,guardian-created profile without direct user id resolved from guardian link,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-045,minor participant discovered through rider-to-student relationship,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-046,unknown-age rider participant fails closed,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-047,lesson create uses stable student workflow consent scope,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-048,stale token after consent withdrawal is rejected,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-049,legacy guardian link without barn proof fails closed,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-050,legacy guardian link with verified barn proof allows,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-051,event approval revalidates before status update,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-052,payment subject resolution no longer skips unknown rider,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-053,payment create uses stable student workflow consent scope,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py
+GMS-T-054,document guard persists and enforces state token,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py

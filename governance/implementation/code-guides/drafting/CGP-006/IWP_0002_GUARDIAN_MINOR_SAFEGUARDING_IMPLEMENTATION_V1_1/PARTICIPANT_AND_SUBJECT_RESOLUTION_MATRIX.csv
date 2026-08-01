@@ -1,0 +1,8 @@
+finding,workflow,resolution_rule,evidence_test,status
+minor_message_participant_lookup,messaging,Resolve explicit student ids plus participant user ids through student profile fields rider rows and active guardian links,GMS-T-044;GMS-T-045,PASS
+minor_message_unknown_rider,messaging,Unknown-age rider participant is represented as synthetic guarded subject and fails closed,GMS-T-046,PASS
+multi_minor_message_coverage,messaging,Each resolved minor must have a qualifying guardian participant in the conversation,GMS-T-015;GMS-T-016,PASS
+adult_message_positive_control,messaging,No student rider or guardian-link relationship leaves adult-only conversation functional,GMS-T-043,PASS
+unlinked_rider_subjects,lesson_training_event,Referenced riders without age or student linkage remain unknown-age guarded subjects,GMS-T-052,PASS
+duplicate_suppression,lesson_training_event,Explicit canonical student profile suppresses duplicate unlinked synthetic rider subject for same route subject,GMS-T-051,PASS
+payment_subjects,payment,Resolve explicit student rider horse-to-rider owner/student and guardian-link relationships before payment guard,GMS-T-052;GMS-T-053,PASS

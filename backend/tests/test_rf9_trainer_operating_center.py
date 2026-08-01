@@ -85,7 +85,7 @@ class _FakeDB:
             {"id": "trainer-2", "barn_id": "barn-1", "role": "trainer", "full_name": "Blake Trainer", "email": "blake@example.test"},
         ])
         self.riders = _Collection([
-            {"id": "rider-1", "barn_id": "barn-1", "full_name": "Riley Rider", "skill_level": "intermediate"},
+            {"id": "rider-1", "barn_id": "barn-1", "full_name": "Riley Rider", "skill_level": "intermediate", "minor_status": "adult"},
         ])
         self.horses = _Collection([
             {"id": "horse-1", "barn_id": "barn-1", "name": "Juniper", "trainer_id": "trainer-1", "status": "active"},
