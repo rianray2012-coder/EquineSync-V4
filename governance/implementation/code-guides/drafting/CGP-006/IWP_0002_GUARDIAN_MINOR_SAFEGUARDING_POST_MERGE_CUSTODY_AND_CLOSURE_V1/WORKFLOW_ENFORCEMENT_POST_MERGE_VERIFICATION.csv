@@ -1,0 +1,9 @@
+workflow,post_merge_state,evidence
+LESSON_READY_AND_LESSON_PARTICIPATION,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
+MESSAGING,CLOSURE_BLOCKED_POST_MERGE_REVIEW_FINDING,New Bugbot finding affects this workflow family after implementation merge.
+WAIVER,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
+DOCUMENT_SIGNATURE,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
+MEDIA_RELEASE,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
+PAYMENT,CLOSURE_BLOCKED_POST_MERGE_REVIEW_FINDING,New Bugbot finding affects this workflow family after implementation merge.
+EVENT_SIGNUP,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.
+GUARDIAN_LIFECYCLE_AND_PARTICIPANT_REMOVAL,MERGED_EVIDENCE_PRESENT_CLOSURE_HELD,Implementation evidence merged; closure held pending unresolved post-merge findings.

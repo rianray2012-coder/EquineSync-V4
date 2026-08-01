@@ -1,0 +1,9 @@
+criterion_id,condition,status,evidence
+CC-01,implementation PR merged into protected branch,PASS,PR #71 merged at d0d9528028982c1243f9e2a6b0f21a78f298276c
+CC-02,protected head contains reviewed implementation bytes,PASS,protected head equals merge commit; merge parents verified
+CC-03,implementation merge gates remain true against merged state,BLOCKED,two new post-merge Medium findings undermine closure even though required PR #71 checks passed
+CC-04,post-merge package validator passes,PASS,validate_post_merge_custody_package.py generated for blocked custody package
+CC-05,register reconciliation internally consistent,PASS,canonical registers intentionally unchanged because closure blocked
+CC-06,"no new post-merge regression, review finding, or authority conflict undermines closure",FAIL,PRRT_kwDOS5bRRs6Vmf5A and PRRT_kwDOS5bRRs6Vmf5B remain unresolved
+CC-07,closure wording limited to CGP006-MAP-FIND-0002 and CGP006-MAP-GAP-0003,BLOCKED_NOT_RECORDED,closure is not recorded
+CC-08,continuing non-authorization boundaries preserved,PASS,governance-only draft custody package; no deployment/provider/staging/pilot/production activity

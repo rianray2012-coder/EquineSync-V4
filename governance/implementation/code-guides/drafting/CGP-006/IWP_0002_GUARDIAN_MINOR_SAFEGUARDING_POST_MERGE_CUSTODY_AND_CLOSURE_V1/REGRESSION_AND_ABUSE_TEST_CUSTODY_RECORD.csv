@@ -1,0 +1,8 @@
+test_or_check,result,source
+Focused Guardian/Minor tests,54 passed,local pre-merge validation recorded in PR #71 package
+Original 43 safeguarding objectives,PASS,PR #71 validation package
+Corrective tests GMS-T-044..054,11 passed,PR #71 validation package
+Backend suite is collectable,SUCCESS,GitHub Actions run 30689279440
+Backend known-failure non-regression gate,SUCCESS,GitHub Actions run 30689279440
+Frontend build,SUCCESS,GitHub Actions run 30689279440
+Cursor Bugbot post-merge inspection,NEW_UNRESOLVED_MEDIUM_FINDINGS,PR #71 review threads after merge
