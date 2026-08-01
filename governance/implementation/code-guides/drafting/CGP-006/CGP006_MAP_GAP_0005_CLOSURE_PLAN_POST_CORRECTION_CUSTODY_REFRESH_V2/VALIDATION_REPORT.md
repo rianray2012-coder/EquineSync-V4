@@ -22,6 +22,7 @@ Validation was run against the refresh branch after the correction was merged to
 | `git diff --check` | `PASS` |
 | Manifest and checksum consistency | `PASS` |
 | Boundary token location guard | `PASS` |
+| Late PR #78 Bugbot boundary-matrix finding | `CORRECTED_AND_VERIFIED_BY_PR_79` |
 | Placeholder rejection validation | `PASS` |
 | Secret-like scan | `PASS` |
 | Authorized paths | `PASS` |

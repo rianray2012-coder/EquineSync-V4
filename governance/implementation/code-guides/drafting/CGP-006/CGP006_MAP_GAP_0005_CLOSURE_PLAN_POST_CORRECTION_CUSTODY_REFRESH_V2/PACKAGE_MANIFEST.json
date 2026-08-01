@@ -23,9 +23,9 @@
       "sha256": "08b8762cd9996aa43b2032d016a57b84166031e0b004a680e426e4f680c2c17e"
     },
     {
-      "byte_length": 868,
+      "byte_length": 1175,
       "path": "BUGBOT_FINDING_FINAL_DISPOSITION_MATRIX.csv",
-      "sha256": "0bde419f7812b5acf1e8dfcdd909760c0eeb11d2103a5d3703c37389764c77af"
+      "sha256": "500e3c422843edd82541b4d6da489e883475e8a9eba7ae4c74904039770c0590"
     },
     {
       "byte_length": 1440,
@@ -63,24 +63,25 @@
       "sha256": "5be1db9b539ee2645e5853b25ee2b1945252075ce219010c1f3fbc6a0c69019e"
     },
     {
-      "byte_length": 1914,
+      "byte_length": 1997,
       "path": "VALIDATION_REPORT.md",
-      "sha256": "d27e7c38ff251c4fd505d96ca51e7fe4cf111f59fde2971356ebd9cb01a7b8ef"
+      "sha256": "9568a0087ece5a1613fe6505d779755e0fdcccdad9f7287edcfbb414659093b4"
     },
     {
-      "byte_length": 3142,
+      "byte_length": 3751,
       "path": "tests/test_cgp006_gap0005_post_correction_custody_refresh.py",
-      "sha256": "05136ec0150cea9764c0bf2c8cba2a81b8183977f71145bc8f31fb0bc8adbfb0"
+      "sha256": "7a2f4fb10efc572bbeb5cf25ce3a5d59a31db7ed0334f1a4636e3e6fe15cd6e1"
     },
     {
-      "byte_length": 16835,
+      "byte_length": 17925,
       "path": "validators/validate_cgp006_gap0005_post_correction_custody_refresh.py",
-      "sha256": "92ebf7d26c092fe05fb3fec25d09bfada050db9bf9a3361f6f036a00f5885471"
+      "sha256": "20922b7ebacde18e0e3589661ef54bb8a1afc06e47fda200119142ad4fc03815"
     }
   ],
   "gap_id": "CGP006-MAP-GAP-0005",
   "gap_status": "CGP006_MAP_GAP_0005_REMAINS_OPEN",
   "generated_at_utc": "2026-08-01T12:25:59Z",
+  "late_review_correction": "PR #79 correcting PR #78 Bugbot 974dabc2-c3c6-4219-ae6d-e13177f5eeb8",
   "manifest_scope": "post-correction custody refresh package files excluding PACKAGE_MANIFEST.json and CHECKSUM_MANIFEST.sha256",
   "package_id": "CGP006-MAP-GAP-0005-CLOSURE-PLAN-POST-CORRECTION-CUSTODY-REFRESH-V2",
   "protected_starting_head": "0863d3f58a1e3eaffbfd0c9778272c207d43c471"
