@@ -21,7 +21,7 @@ def test_post_correction_custody_refresh_package_passes():
     assert result["status"] == "PASS"
     assert result["approved_zip_git_sha256"] == module.EXPECTED_ZIP_SHA
     assert result["approved_zip_git_bytes"] == module.EXPECTED_ZIP_BYTES
-    assert result["bugbot_findings"] == 3
+    assert result["bugbot_findings"] == 4
 
 
 def test_refresh_validator_rejects_missing_zip_git_object(monkeypatch):
@@ -39,8 +39,24 @@ def test_refresh_validator_rejects_missing_zip_git_object(monkeypatch):
 
 def test_refresh_validator_rejects_boundary_self_satisfaction(monkeypatch):
     module = load_validator()
-    monkeypatch.setattr(module, "load_authoritative_text", lambda _root, _package: "")
+    monkeypatch.setattr(module, "load_authoritative_sources", lambda _root: {})
     with pytest.raises(AssertionError, match="boundary token missing"):
+        module.validate()
+
+
+def test_refresh_validator_rejects_matrix_only_boundary_token(monkeypatch):
+    module = load_validator()
+    original = Path.read_text
+    token = "NO_STRIPE_API_CALL_OCCURRED"
+
+    def strip_authoritative_sources(path, *args, **kwargs):
+        text = original(path, *args, **kwargs)
+        if path.name != "BOUNDARY_TOKEN_LOCATION_MATRIX.csv":
+            return text.replace(token, "")
+        return text
+
+    monkeypatch.setattr(Path, "read_text", strip_authoritative_sources)
+    with pytest.raises(AssertionError, match="boundary token missing|claimed authoritative locations"):
         module.validate()
 
 

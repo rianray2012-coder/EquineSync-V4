@@ -61,6 +61,7 @@ BUGBOT_FINDINGS = {
     "a7811263-950b-4748-bfef-ff03e0a6ffc9",
     "9b6947a1-d23f-4d1a-9ec5-b26786fad6b1",
     "a5c02c51-35f1-48f3-bed1-f295f0476d31",
+    "974dabc2-c3c6-4219-ae6d-e13177f5eeb8",
 }
 BOUNDARY_TOKENS = {
     "CGP006_MAP_GAP_0005_CLOSURE_PLAN_FOUNDER_APPROVAL_REMAINS_VALID",
@@ -86,6 +87,14 @@ BOUNDARY_TOKENS = {
     "NO_PUBLIC_LAUNCH_AUTHORIZED",
     "PR_69_NOT_MODIFIED_OR_MERGED",
     "PR_70_NOT_MODIFIED_OR_MERGED",
+}
+BOUNDARY_SOURCE_LABELS = {
+    "README.md": PACKAGE_PATH / "README.md",
+    "CURRENT_STATUS_RECONCILIATION.md": PACKAGE_PATH / "CURRENT_STATUS_RECONCILIATION.md",
+    "PLACEHOLDER_REJECTION_VALIDATION_REPORT.md": PACKAGE_PATH / "PLACEHOLDER_REJECTION_VALIDATION_REPORT.md",
+    "DIRECTIVE_EXECUTION_RECORD.md": PACKAGE_PATH / "DIRECTIVE_EXECUTION_RECORD.md",
+    "receipt": RECEIPT_PATH,
+    "PROGRAM_STATUS.md": PROGRAM_STATUS,
 }
 SECRET_RE = re.compile(r"(sk_live_[A-Za-z0-9_]+|sk_test_[A-Za-z0-9_]+|rk_live_[A-Za-z0-9_]+|rk_test_[A-Za-z0-9_]+|whsec_[A-Za-z0-9_]+|mongodb(?:\+srv)?://|JWT_SECRET\s*=|STRIPE_SECRET_KEY\s*=.+|STRIPE_API_KEY\s*=.+)", re.IGNORECASE)
 CONFLICT_RE = re.compile(r"^(<<<<<<<|=======|>>>>>>>)", re.MULTILINE)
@@ -230,27 +239,38 @@ def validate_clean_checkout_record(package: Path) -> None:
 
 
 def validate_boundary_tokens(root: Path, package: Path) -> None:
-    authoritative = load_authoritative_text(root, package)
-    missing = sorted(token for token in BOUNDARY_TOKENS if token not in authoritative)
-    if missing:
-        raise AssertionError(f"boundary token missing from authoritative records: {missing}")
     rows = read_csv_dicts(package / "BOUNDARY_TOKEN_LOCATION_MATRIX.csv")
     matrix_tokens = {row.get("token", "") for row in rows}
     if matrix_tokens != BOUNDARY_TOKENS:
         raise AssertionError("boundary token matrix does not match required tokens")
+    source_texts = load_authoritative_sources(root)
+    missing = sorted(token for token in BOUNDARY_TOKENS if not any(token in text for text in source_texts.values()))
+    if missing:
+        raise AssertionError(f"boundary token missing from authoritative records: {missing}")
     bad = [row for row in rows if row.get("result") != "PASS"]
     if bad:
         raise AssertionError("boundary token matrix contains non-pass rows")
+    for row in rows:
+        token = row["token"]
+        labels = [part.strip() for part in row.get("authoritative_locations", "").split(";") if part.strip()]
+        if not labels:
+            raise AssertionError(f"boundary token has no claimed authoritative locations: {token}")
+        unknown = sorted(label for label in labels if label not in source_texts)
+        if unknown:
+            raise AssertionError(f"boundary token has unknown source labels: {token}: {unknown}")
+        missing_locations = sorted(label for label in labels if token not in source_texts[label])
+        if missing_locations:
+            raise AssertionError(f"boundary token absent from claimed authoritative locations: {token}: {missing_locations}")
 
 
-def load_authoritative_text(root: Path, package: Path) -> str:
-    texts = []
-    for path in sorted(package.glob("*")):
-        if path.is_file() and path.name not in {"PACKAGE_MANIFEST.json", "CHECKSUM_MANIFEST.sha256"} and path.suffix in TEXT_SUFFIXES:
-            texts.append(path.read_text(encoding="utf-8"))
-    texts.append((root / RECEIPT_PATH).read_text(encoding="utf-8"))
-    texts.append((root / PROGRAM_STATUS).read_text(encoding="utf-8"))
-    return "\n".join(texts)
+def load_authoritative_sources(root: Path) -> dict[str, str]:
+    sources = {}
+    for label, rel in BOUNDARY_SOURCE_LABELS.items():
+        path = root / rel
+        if not path.is_file():
+            raise AssertionError(f"boundary source missing: {label}")
+        sources[label] = path.read_text(encoding="utf-8")
+    return sources
 
 
 def validate_bugbot_matrix(package: Path) -> None:
