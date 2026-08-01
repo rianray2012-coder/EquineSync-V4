@@ -6,8 +6,8 @@
 |---|---|
 | Document number | 05 |
 | Version | V2.0 |
-| Package status | INITIAL_V2_DRAFT |
-| Candidate phase | Initial candidate |
+| Package status | READY_FOR_FOUNDER_REVIEW |
+| Candidate phase | Revised final candidate |
 | Directive ID | `EQUINESYNC_TIER_1_GOVERNANCE_DOCUMENTS_03_10_V1_DRAFTING_REVISION_AND_CRITICAL_REVIEW_DIRECTIVE_V1_0_0` |
 | Founder and approval authority | Rian Ray |
 | Repository | `rianray2012-coder/EquineSync-V4` |
@@ -17,7 +17,7 @@
 | Protected-head delta from directive | `NONE` |
 | Work branch | `codex/tier-1-governance-documents-03-10-v1` |
 | Branch point | `1eb384d80daa700ba2e71ee42872cc9bba926332` |
-| Generated at | `2026-08-01T15:38:55Z` |
+| Generated at | `2026-08-01T15:40:37Z` |
 
 Authority boundary: `DOCUMENTARY_TIER_1_DRAFTING_AND_REVIEW_ONLY_NO_ADOPTION_LOCK_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY`.
 
@@ -88,12 +88,16 @@ The decision register records only durable Founder evidence or explicitly unreso
 
 ## Review And Revision Treatment
 
-This initial candidate is complete enough for review and intentionally exposes unresolved evidence, ownership, source, and authority issues as register rows.
+The critical review pass strengthened evidence thresholds, rejection rules for authority overclaim, open PR treatment, missing-source treatment, closure criteria, and reopening triggers.
+
+## Structured Critical Review Treatment
+
+Critical review found that Founder decision records could be polluted by recommendations, conversation summaries, or branch existence. The revised candidate records decisions only where durable source evidence exists and leaves PR-derived or recommendation-derived items in pending disposition states. Adversarial attempts to convert a candidate recommendation into ratification, waiver, certification, pilot authorization, production authorization, or finding closure are blocked by the decision-state vocabulary.
 
 Material ambiguity is either resolved in the revised wording or retained in the companion registers as an explicit open issue with an evidence rule, closure criterion, and Founder-decision path.
 
 ## Readiness Determination
 
-Status: `INITIAL_V2_DRAFT`.
+Status: `READY_FOR_FOUNDER_REVIEW`.
 
 Readiness means ready for Founder review as a documentary candidate only. It does not create current controlling authority or close any retained governance, implementation, runtime, pilot, production, source, evidence, or ownership gap.
