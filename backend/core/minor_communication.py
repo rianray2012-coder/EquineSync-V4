@@ -14,6 +14,9 @@ from core.minor_safety import (
     DECISION_REQUIRE_GUARDIAN,
     GUARDIAN_LINK_ACTIVE,
     STUDENT_PROFILE_COLLECTION,
+    WORKFLOW_MESSAGING,
+    guardian_minor_workflow_gate,
+    load_guardian_minor_authority_rows,
     minor_status_for_student,
     requires_guardian,
 )
@@ -241,4 +244,68 @@ async def message_minor_communication_gate(
         guardian_links=links,
         participants=message.get("participant_user_ids") or [],
         action=ACTION_CREATE_MESSAGE,
+    )
+
+
+async def message_guardian_minor_safeguarding_gate(
+    *,
+    db,
+    actor_user: Dict[str, Any],
+    message: Dict[str, Any],
+    action: str = ACTION_CREATE_MESSAGE,
+) -> Dict[str, Any]:
+    """Run the V1.1 guard against actual message participants.
+
+    The older BN5 helper accepted an optional `student_profile_id`. This
+    evaluator closes the omission path by also resolving student rows from
+    same-barn participant user ids when the caller omits student metadata.
+    """
+    barn_id = actor_user.get("barn_id") or "primary"
+    explicit_student_ids = _clean_ids([message.get("student_profile_id")])
+    explicit_student_ids.extend(_clean_ids(message.get("student_profile_ids")))
+    participant_ids = set(_clean_ids(message.get("participant_user_ids")))
+    participant_ids |= set(_clean_ids(message.get("guardian_user_ids")))
+    if message.get("to_user_id"):
+        participant_ids.add(str(message["to_user_id"]))
+    if actor_user.get("id"):
+        participant_ids.add(str(actor_user["id"]))
+
+    students: list[Dict[str, Any]] = []
+    seen: set[str] = set()
+    for student_id in explicit_student_ids:
+        student = await db[STUDENT_PROFILE_COLLECTION].find_one(
+            {"id": student_id, "barn_id": barn_id},
+            {"_id": 0},
+        )
+        if student and student.get("id") not in seen:
+            students.append(student)
+            seen.add(student["id"])
+    for participant_id in sorted(participant_ids):
+        for field in ("user_id", "rider_user_id", "minor_user_id", "student_user_id"):
+            student = await db[STUDENT_PROFILE_COLLECTION].find_one(
+                {"barn_id": barn_id, field: participant_id},
+                {"_id": 0},
+            )
+            if student and student.get("id") not in seen:
+                students.append(student)
+                seen.add(student["id"])
+
+    links, consents = await load_guardian_minor_authority_rows(
+        db,
+        barn_id=barn_id,
+        student_profile_ids=[student.get("id") for student in students],
+        workflow=WORKFLOW_MESSAGING,
+    )
+    return guardian_minor_workflow_gate(
+        workflow=WORKFLOW_MESSAGING,
+        students=students,
+        guardian_links=links,
+        workflow_consents=consents,
+        barn_id=barn_id,
+        participant_user_ids=participant_ids,
+        scope_reference=str(message.get("thread_id") or message.get("id") or "direct_message"),
+        policy_version="messaging-v1",
+        consent_required=False,
+        require_guardian_participant=True,
+        action=action,
     )

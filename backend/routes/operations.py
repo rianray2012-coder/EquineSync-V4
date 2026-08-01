@@ -19,8 +19,25 @@ from pydantic import BaseModel
 
 from core.minor_communication import (
     audit_safe_minor_communication_metadata,
+    message_guardian_minor_safeguarding_gate,
     message_minor_communication_gate,
     message_response_projection,
+)
+from core.minor_safety import (
+    DECISION_ALLOW,
+    MINOR_STATUS_ADULT,
+    MINOR_STATUS_MINOR_13_TO_17,
+    MINOR_STATUS_UNDER_13,
+    MINOR_STATUS_UNKNOWN,
+    STUDENT_PROFILE_COLLECTION,
+    WORKFLOW_EVENT_SIGNUP,
+    WORKFLOW_LESSON_READY,
+    audit_safe_guardian_minor_metadata,
+    guardian_minor_public_error_detail,
+    guardian_minor_workflow_gate,
+    load_guardian_minor_authority_rows,
+    minor_status_for_student,
+    normalize_minor_status,
 )
 from core.permissions import require
 from core.tenancy import barn_filter, stamp_barn
@@ -74,6 +91,7 @@ async def _stamp_trainer_identity(db, user: Dict[str, Any], doc: Dict[str, Any])
 
 class LessonIn(BaseModel):
     rider_id: str
+    student_profile_id: Optional[str] = None
     horse_id: Optional[str] = None
     trainer_id: Optional[str] = None
     start_time: str
@@ -85,6 +103,7 @@ class LessonIn(BaseModel):
 
 class TrainingSessionIn(BaseModel):
     horse_id: str
+    student_profile_id: Optional[str] = None
     trainer_id: Optional[str] = None
     date: str
     discipline: Optional[str] = None
@@ -101,6 +120,7 @@ class MessageIn(BaseModel):
     body: str
     visibility: str = "staff_only"
     student_profile_id: Optional[str] = None
+    student_profile_ids: Optional[list[str]] = None
     participant_user_ids: Optional[list[str]] = None
     guardian_user_ids: Optional[list[str]] = None
 
@@ -108,6 +128,9 @@ class MessageIn(BaseModel):
 class ServiceRequestIn(BaseModel):
     horse_id: str
     type: str
+    student_profile_id: Optional[str] = None
+    event_id: Optional[str] = None
+    event_policy_version: Optional[str] = None
     details: Optional[str] = None
     requested_date: Optional[str] = None
     requested_time: Optional[str] = None
@@ -132,6 +155,123 @@ class IncidentIn(BaseModel):
 def build_router(*, db, get_current_user, list_collection, clean, new_id) -> APIRouter:
     router = APIRouter(tags=["operations"])
 
+    def _minor_status_from_age(age: Any) -> str:
+        try:
+            years = int(age)
+        except (TypeError, ValueError):
+            return MINOR_STATUS_UNKNOWN
+        if years < 13:
+            return MINOR_STATUS_UNDER_13
+        if years < 18:
+            return MINOR_STATUS_MINOR_13_TO_17
+        return MINOR_STATUS_ADULT
+
+    async def _student_from_profile_id(user: Dict[str, Any], student_profile_id: Optional[str]) -> Optional[Dict[str, Any]]:
+        if not student_profile_id:
+            return None
+        return await db[STUDENT_PROFILE_COLLECTION].find_one(
+            barn_filter(user, {"id": student_profile_id}),
+            {"_id": 0},
+        )
+
+    async def _student_from_rider(user: Dict[str, Any], rider: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        if not rider:
+            return None
+        linked_student_id = rider.get("student_profile_id")
+        if linked_student_id:
+            linked = await _student_from_profile_id(user, linked_student_id)
+            if linked:
+                return linked
+            return {
+                "id": linked_student_id,
+                "barn_id": rider.get("barn_id") or user.get("barn_id") or "primary",
+                "minor_status": MINOR_STATUS_UNKNOWN,
+            }
+        if not any(rider.get(field) is not None for field in ("minor_status", "birthdate", "age")):
+            return None
+        minor_status = normalize_minor_status(rider.get("minor_status") or MINOR_STATUS_UNKNOWN)
+        if minor_status == MINOR_STATUS_UNKNOWN and rider.get("age") is not None:
+            minor_status = _minor_status_from_age(rider.get("age"))
+        student = {
+            "id": f"rider:{rider.get('id')}",
+            "barn_id": rider.get("barn_id") or user.get("barn_id") or "primary",
+            "birthdate": rider.get("birthdate"),
+            "minor_status": minor_status,
+        }
+        student["minor_status"] = minor_status_for_student(student)
+        return student
+
+    async def _students_for_subjects(
+        *,
+        user: Dict[str, Any],
+        student_profile_id: Optional[str] = None,
+        rider: Optional[Dict[str, Any]] = None,
+        horse: Optional[Dict[str, Any]] = None,
+    ) -> list[Dict[str, Any]]:
+        students: list[Dict[str, Any]] = []
+        explicit_student = await _student_from_profile_id(user, student_profile_id)
+        if student_profile_id and not explicit_student:
+            students.append({
+                "id": student_profile_id,
+                "barn_id": user.get("barn_id") or "primary",
+                "minor_status": MINOR_STATUS_UNKNOWN,
+            })
+        elif explicit_student:
+            students.append(explicit_student)
+        rider_row = rider
+        if not rider_row and horse and horse.get("rider_id"):
+            rider_row = await db.riders.find_one(
+                barn_filter(user, {"id": horse["rider_id"]}),
+                {"_id": 0},
+            )
+        from_rider = await _student_from_rider(user, rider_row)
+        if from_rider and from_rider.get("id") not in {student.get("id") for student in students}:
+            students.append(from_rider)
+        return students
+
+    async def _enforce_guarded_students(
+        *,
+        students: list[Dict[str, Any]],
+        workflow: str,
+        scope_reference: str,
+        policy_version: str,
+        action: str,
+        request: Request,
+        user: Dict[str, Any],
+        status_code: int = 409,
+    ) -> None:
+        barn_id = user.get("barn_id") or "primary"
+        links, consents = await load_guardian_minor_authority_rows(
+            db,
+            barn_id=barn_id,
+            student_profile_ids=[student.get("id") for student in students],
+            workflow=workflow,
+        )
+        gate = guardian_minor_workflow_gate(
+            workflow=workflow,
+            students=students,
+            guardian_links=links,
+            workflow_consents=consents,
+            barn_id=barn_id,
+            scope_reference=scope_reference,
+            policy_version=policy_version,
+            action=action,
+        )
+        if gate["decision"] == DECISION_ALLOW:
+            return
+        await audit.record(
+            action="guardian_minor.workflow_blocked",
+            user=user,
+            request=request,
+            resource_type="guardian_minor_guard",
+            resource_id=scope_reference,
+            outcome="denied",
+            status_code=status_code,
+            metadata=audit_safe_guardian_minor_metadata(gate),
+            _db=db,
+        )
+        raise HTTPException(status_code=status_code, detail=guardian_minor_public_error_detail(gate))
+
     # ---------------- Lessons ----------------
 
     @router.get("/lessons")
@@ -140,7 +280,7 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         return await list_collection("lessons", q, sort_field="start_time")
 
     @router.post("/lessons")
-    async def create_lesson(body: LessonIn, user=Depends(get_current_user)):
+    async def create_lesson(body: LessonIn, request: Request, user=Depends(get_current_user)):
         doc = body.model_dump()
         # Best-effort name resolution so list views render without an extra
         # lookup hop. Missing references are tolerated (operationally a
@@ -148,7 +288,7 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         # Phase 4B-3: all enrichment lookups are barn-scoped so a cross-barn id
         # resolves to None (no cross-barn name leak); RF9 now requires stable
         # same-barn references for lesson creates.
-        rider = await db.riders.find_one(barn_filter(user, {"id": body.rider_id}), {"_id": 0, "full_name": 1})
+        rider = await db.riders.find_one(barn_filter(user, {"id": body.rider_id}), {"_id": 0})
         if not rider:
             raise HTTPException(404, "Rider not found")
         doc["rider_name"] = rider["full_name"] if rider else None
@@ -160,6 +300,20 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         await _stamp_trainer_identity(db, user, doc)
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
         stamp_barn(user, doc)
+        students = await _students_for_subjects(
+            user=user,
+            student_profile_id=body.student_profile_id,
+            rider=rider,
+        )
+        await _enforce_guarded_students(
+            students=students,
+            workflow=WORKFLOW_LESSON_READY,
+            scope_reference=f"lesson:{doc['id']}",
+            policy_version="lesson-ready-v1",
+            action="lesson.create",
+            request=request,
+            user=user,
+        )
         await db.lessons.insert_one(doc)
         return clean(doc)
 
@@ -173,15 +327,29 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         return await list_collection("training", barn_filter(user, extra), sort_field="date")
 
     @router.post("/training")
-    async def create_training(body: TrainingSessionIn, user=Depends(get_current_user)):
+    async def create_training(body: TrainingSessionIn, request: Request, user=Depends(get_current_user)):
         doc = body.model_dump()
-        horse = await db.horses.find_one(barn_filter(user, {"id": body.horse_id}), {"_id": 0, "name": 1})
+        horse = await db.horses.find_one(barn_filter(user, {"id": body.horse_id}), {"_id": 0})
         if not horse:
             raise HTTPException(404, "Horse not found")
         doc["horse_name"] = horse["name"] if horse else None
         await _stamp_trainer_identity(db, user, doc)
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
         stamp_barn(user, doc)
+        students = await _students_for_subjects(
+            user=user,
+            student_profile_id=body.student_profile_id,
+            horse=horse,
+        )
+        await _enforce_guarded_students(
+            students=students,
+            workflow=WORKFLOW_LESSON_READY,
+            scope_reference=f"training:{doc['id']}",
+            policy_version="lesson-ready-v1",
+            action="training.create",
+            request=request,
+            user=user,
+        )
         await db.training.insert_one(doc)
         return clean(doc)
 
@@ -206,6 +374,18 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
                 metadata=audit_safe_minor_communication_metadata(gate),
             )
             raise HTTPException(status_code=403, detail="Guardian must be included")
+        v11_gate = await message_guardian_minor_safeguarding_gate(db=db, actor_user=user, message=doc)
+        if v11_gate["decision"] != "allow":
+            await audit.record(
+                action="minor_communication.blocked", user=user, request=request,
+                resource_type="student_profile",
+                resource_id=(doc.get("student_profile_id") or None),
+                outcome="denied",
+                status_code=403,
+                metadata=audit_safe_guardian_minor_metadata(v11_gate),
+                _db=db,
+            )
+            raise HTTPException(status_code=403, detail=guardian_minor_public_error_detail(v11_gate))
         doc.update({
             "id": new_id(),
             "from_user_id": user["id"],
@@ -251,10 +431,10 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         return await list_collection("service_requests", barn_filter(user, extra), sort_field="created_at")
 
     @router.post("/service-requests")
-    async def create_sr(body: ServiceRequestIn, user=Depends(get_current_user)):
+    async def create_sr(body: ServiceRequestIn, request: Request, user=Depends(get_current_user)):
         _validate_service_request(body)
         doc = body.model_dump()
-        horse = await db.horses.find_one(barn_filter(user, {"id": body.horse_id}), {"_id": 0, "name": 1})
+        horse = await db.horses.find_one(barn_filter(user, {"id": body.horse_id}), {"_id": 0})
         if not horse:
             raise HTTPException(404, "Horse not found")
         doc["horse_name"] = horse["name"] if horse else None
@@ -266,6 +446,21 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             "created_at": _iso(_now_utc()),
         })
         stamp_barn(user, doc)
+        if (body.type or "").strip().lower() in {"event_signup", "community_program_signup"}:
+            students = await _students_for_subjects(
+                user=user,
+                student_profile_id=body.student_profile_id,
+                horse=horse,
+            )
+            await _enforce_guarded_students(
+                students=students,
+                workflow=WORKFLOW_EVENT_SIGNUP,
+                scope_reference=body.event_id or f"service_request:{doc['id']}",
+                policy_version=body.event_policy_version or "event-signup-v1",
+                action="service_request.event_signup.create",
+                request=request,
+                user=user,
+            )
         await db.service_requests.insert_one(doc)
         return clean(doc)
 

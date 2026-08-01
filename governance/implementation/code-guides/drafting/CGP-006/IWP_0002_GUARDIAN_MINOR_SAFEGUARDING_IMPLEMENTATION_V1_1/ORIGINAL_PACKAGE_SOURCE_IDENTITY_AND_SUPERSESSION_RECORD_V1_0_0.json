@@ -1,0 +1,61 @@
+{
+  "original_approval_rule": "Original exact-byte approval remains historical and applies only to the original listed bytes.",
+  "original_manifest_files": {
+    "CGP_006_IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_DIRECTIVE_V1_0_0.md": {
+      "bytes": 12060,
+      "sha256": "4ec689d0ed4022f80ecb5e195884e5a12443f43e40ec6c9e769e133c19d4c183"
+    },
+    "FOUNDER_APPROVAL_RECORD_CGP006_IWP_0002_2026-07-30.md": {
+      "bytes": 2076,
+      "sha256": "f6ec43ac37567727fd74bb5c2bab8057b900f387f41218dcac3d63a8d1d4b097"
+    },
+    "FOUNDER_IMPLEMENTATION_AUTHORIZATION_AND_SCOPE_DISPOSITION_CGP006_IWP_0002_2026-07-30.md": {
+      "bytes": 5904,
+      "sha256": "16f345d58de89660ca9e16f8baa56e6b3f6b4f6cdc36f93a5553b3d4830e97f8"
+    },
+    "GUARDIAN_MINOR_REGRESSION_AND_ABUSE_CASE_TEST_MATRIX_V1_0_0.csv": {
+      "bytes": 3934,
+      "sha256": "42e3f3d5102a7131118aafd1c5eaf358d8e76ec0b044764cc54b9e21ac578e17"
+    },
+    "GUARDIAN_MINOR_ROLLBACK_SUSPENSION_AND_EVIDENCE_PLAN_V1_0_0.md": {
+      "bytes": 2645,
+      "sha256": "0c00569087943e88119a7d61648651a38d9079524e5e94187ced0ba20fbcccb6"
+    },
+    "GUARDIAN_MINOR_SAFEGUARDING_PATCH_CONTRACT_V1_0_0.md": {
+      "bytes": 4508,
+      "sha256": "2b293325d9d5ff7ba8effba03cd0e9f02c18ea3455869a410e86d159e71ca440"
+    },
+    "GUARDIAN_MINOR_SECURITY_INVARIANT_AND_WORKFLOW_SPECIFICATION_V1_0_0.md": {
+      "bytes": 4159,
+      "sha256": "e11ad90f7e3dc6ffce9d4628673b8166392ca449b0e1ca9e2b762b569cc29c6c"
+    },
+    "GUARDIAN_MINOR_WORKFLOW_ENFORCEMENT_MATRIX_V1_0_0.csv": {
+      "bytes": 3474,
+      "sha256": "f4055abaa47728c7e8b62d71754e9745317887659a4d879e73369fd6ab8aa986"
+    },
+    "GUARDIAN_RELATIONSHIP_CONSENT_AND_LIFECYCLE_DECISION_RECORD_V1_0_0.md": {
+      "bytes": 2927,
+      "sha256": "ce35d4fd8bf6b00663cf31e8bd5c1fb023b6bacdf7e99260317f0d74f6ad080b"
+    },
+    "README.md": {
+      "bytes": 2430,
+      "sha256": "73d3bfbe6654658011538124a208395bebe6f16a8b133c56870b73b3a220d231"
+    }
+  },
+  "original_package_status": "FOUNDER_APPROVED_CONDITIONAL_IMPLEMENTATION_PACKAGE",
+  "original_zip_bytes": 25399,
+  "original_zip_filename": "EquineSync_CGP006_IWP0002_Guardian_Minor_Safeguarding_Fix_2026-07-30.zip",
+  "original_zip_sha256": "0dc04ec881bc63486e71cfc693aa3d7e3d59051a9ada0d4deabd7268c7966470",
+  "record_id": "ES-CGP006-IWP0002-ORIGINAL-SOURCE-AND-SUPERSESSION-2026-07-30",
+  "repository_lineage": {
+    "approved_reconciled_audit_head": "e61912b673da65556767cd8fb463c9d86debe5ff",
+    "audit_merge_commit": "185d37987c11eccabba4436619bdf11e91494711",
+    "custody_head": "aab66e033dcc2920db0ba858037077f1a0977cef",
+    "custody_merge_commit": "396f82c8a7600cae363142175d1d1448e9d2ece2",
+    "original_pre_reconciliation_audit_head": "7e99fb8ea2f6db8a6bf91c4a60164a749a931e54",
+    "review_time_open_unrelated_pr": 67,
+    "review_time_protected_head": "9996e948ede39a968b8facd8afe15c2b1a345204"
+  },
+  "revision_effect": "No implementation authority until revised exact-byte approval is recorded.",
+  "revision_status": "REVIEWED_REVISION_CANDIDATE_PENDING_EXACT_BYTE_FOUNDER_REAPPROVAL"
+}

@@ -1,0 +1,18 @@
+review_id,severity,area,finding,implementation_disposition,evidence
+GMS-RR-001,P0,authority,Original exact-byte approval cannot apply to revised files,RESOLVED_BY_FOUNDER_REAPPROVAL,Exact-byte directive and ZIP identity recorded; eight controlling files preserved.
+GMS-RR-002,P1,repository_identity,Execution could anchor to wrong commit,RESOLVED_IN_IMPLEMENTATION,Baseline/protected head recorded before mutation.
+GMS-RR-003,P1,workflow_scope,Document signature coverage missing,RESOLVED_IN_IMPLEMENTATION,Document-signature workflow implemented and tested.
+GMS-RR-004,P1,messaging,Multi-minor coverage ambiguous,RESOLVED_IN_IMPLEMENTATION,Per-minor guardian coverage enforced.
+GMS-RR-005,P1,lifecycle,Last-guardian rule could block lawful revocation,RESOLVED_IN_IMPLEMENTATION,Revocation allowed; future workflows blocked; participant removal protected.
+GMS-RR-006,P1,privacy,Public/internal errors not separated,RESOLVED_IN_IMPLEMENTATION,Generic public error detail and safe audit projection implemented.
+GMS-RR-007,P1,concurrency,No TOCTOU/cache requirement,RESOLVED_WITH_REVALIDATION_EVIDENCE,Request-time load and state-token tests implemented; transaction limitation retained.
+GMS-RR-008,P1,consent,Consent scope/version too broad,RESOLVED_IN_IMPLEMENTATION,"Consent has workflow, scope reference, policy version, status, and lifecycle checks."
+GMS-RR-009,P1,guardian_authority,Relationship over-authorizes,RESOLVED_IN_IMPLEMENTATION,Authority scopes and restrictions implemented.
+GMS-RR-010,P2,legacy_data,Legacy missing evidence unclear,RESOLVED_IN_IMPLEMENTATION,Missing evidence fails closed; no backfill.
+GMS-RR-011,P2,age_lifecycle,Birthday/cache behavior unspecified,RESOLVED_IN_TESTS,Birthday boundary tests and request-time status helper implemented.
+GMS-RR-012,P2,emergency_override,Implicit override risk,RESOLVED_IN_TESTS,No emergency override allow path exists.
+GMS-RR-013,P2,path_scope,Overbroad UI path authorization,RESOLVED_BY_SCOPE_CONTROL,No frontend files modified.
+GMS-RR-014,P2,payment,Payment authority ambiguous,RESOLVED_IN_IMPLEMENTATION,Payment default-deny unless exact authority/consent exists; no provider calls.
+GMS-RR-015,P2,audit,Audit privacy unclear,RESOLVED_IN_IMPLEMENTATION,Safe metadata projection excludes private body/legal/payment details.
+GMS-RR-016,P2,cache,Immediate revocation/cache invalidation unclear,RESOLVED_IN_TESTS,State-token/revocation tests implemented.
+GMS-RR-017,P2,rollback,Mixed-version rollback risk,RESOLVED_BY_PLAN,Rollback/suspension record preserves fail-closed fallback.

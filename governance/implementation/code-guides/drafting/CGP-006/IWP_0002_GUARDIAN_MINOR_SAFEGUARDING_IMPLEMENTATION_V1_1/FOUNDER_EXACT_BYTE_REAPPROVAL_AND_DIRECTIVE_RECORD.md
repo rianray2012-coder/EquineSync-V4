@@ -1,0 +1,29 @@
+# Founder Exact-Byte Reapproval And Directive Record
+
+Status: `EXACT_BYTE_PACKAGE_REAPPROVAL_AUTHENTICATED`
+
+Recorded: `2026-08-01T03:29:01Z`
+
+Founder directive source:
+- File: `/Users/rianray/Documents/Codex/2026-07-31/files-mentioned-by-the-user-equinesync/work/EquineSync-V4/governance/implementation/code-guides/drafting/CGP-006/IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_V1_1/FOUNDER_DIRECTIVE_CGP_006_IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_REAPPROVAL_IMPLEMENTATION_MERGE_CUSTODY_AND_CONDITIONAL_CLOSURE_V1_0_0.md`
+- SHA-256: `2158eb46806e354b67fce284e6aadf32edd3739d39aa58ec68ac06d1172c1c6a`
+- Bytes: `30823`
+
+Reapproved ZIP source:
+- File: `/Users/rianray/Downloads/EquineSync_CGP006_IWP0002_Guardian_Minor_Safeguarding_Reviewed_Revision_Candidate_V1_1_0_2026-07-30.zip`
+- SHA-256: `6272108b389af3966f19dd14ab28a7f529ea31111cb8e1179e2ea86a51ce27ca`
+- Bytes: `39524`
+- `unzip -t`: `PASS`
+- Package validator: `PASS guardian/minor revision package: 14 manifested files, 8 workflows, 43 tests`
+
+Eight controlling source files preserved byte-for-byte:
+- `PROPOSED_FOUNDER_IMPLEMENTATION_AUTHORIZATION_AND_SCOPE_DISPOSITION_CGP006_IWP_0002_V1_1_0_2026-07-30.md`: PASS `ab7f9332da372afd4259749745d0ce1b1442cd9ee4b448e39ee95300db6b74a8` / `6719` bytes
+- `CGP_006_IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_DIRECTIVE_V1_1_0.md`: PASS `997a0e82afa51b415853b866e811dced7f61cbeece53e752d81858eb30a2c845` / `11287` bytes
+- `GUARDIAN_MINOR_SAFEGUARDING_PATCH_CONTRACT_V1_1_0.md`: PASS `a2748a22b08e8de192c061c85967d3cef5162c249a7e27d70933e497c1f45ea9` / `5289` bytes
+- `GUARDIAN_MINOR_SECURITY_INVARIANT_AND_WORKFLOW_SPECIFICATION_V1_1_0.md`: PASS `48db582df8e9177e233073f4de3a9b8d868e100ea0a0b487d64ff1d430e39bd5` / `6152` bytes
+- `GUARDIAN_RELATIONSHIP_AUTHORITY_CONSENT_AND_LIFECYCLE_DECISION_RECORD_V1_1_0.md`: PASS `99ec8fbbaff8722bd199deb07554c3a873b4429ef484db2ad287e57cbc21aaf6` / `3720` bytes
+- `GUARDIAN_MINOR_WORKFLOW_ENFORCEMENT_MATRIX_V1_1_0.csv`: PASS `c4b2b19ddebb44f84f78409b80844802ef38b0f2a5503903bb430ff9b2a6672c` / `6430` bytes
+- `GUARDIAN_MINOR_REGRESSION_AND_ABUSE_CASE_TEST_MATRIX_V1_1_0.csv`: PASS `e40d94ff1e41c7f95ed978a8e9bf200626f11d67a59f9b0a8e5956296f93182b` / `8142` bytes
+- `GUARDIAN_MINOR_ROLLBACK_SUSPENSION_AND_EVIDENCE_PLAN_V1_1_0.md`: PASS `44d74ee6dd036d404c632bb60259c2218e4716764118b3a1e848cee1f8b8841f` / `3101` bytes
+
+Directive boundaries preserved: no deployment, no staging, no pilot, no production action, no provider calls, no GAP_0004 work, no Wave 2, and no CGP-007 work.

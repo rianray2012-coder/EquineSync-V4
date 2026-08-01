@@ -1,0 +1,19 @@
+public_code,internal_reason_code,meaning
+STUDENT_WORKFLOW_BLOCKED,MINOR_STATUS_UNKNOWN,Unknown or ambiguous minor status; public message remains generic.
+STUDENT_WORKFLOW_BLOCKED,GUARDIAN_REQUIRED,Missing per-minor qualifying guardian.
+STUDENT_WORKFLOW_BLOCKED,GUARDIAN_LINK_PENDING,Pending relationship is not active.
+STUDENT_WORKFLOW_BLOCKED,GUARDIAN_LINK_REVOKED,Revoked relationship is not active.
+STUDENT_WORKFLOW_BLOCKED,GUARDIAN_LINK_EXPIRED,Expired relationship is not active.
+STUDENT_WORKFLOW_BLOCKED,GUARDIAN_LINK_DISPUTED,Disputed relationship is not treated active.
+STUDENT_WORKFLOW_BLOCKED,GUARDIAN_LINK_SUSPENDED,Suspended relationship is not active.
+STUDENT_WORKFLOW_BLOCKED,GUARDIAN_AUTHORITY_SCOPE_MISSING,Relationship lacks workflow authority scope.
+STUDENT_WORKFLOW_BLOCKED,GUARDIAN_AUTHORITY_RESTRICTED,Relationship or scope has a recorded restriction.
+STUDENT_WORKFLOW_BLOCKED,WORKFLOW_CONSENT_REQUIRED,Workflow-specific consent is missing.
+STUDENT_WORKFLOW_BLOCKED,WORKFLOW_CONSENT_REVOKED,Consent was revoked.
+STUDENT_WORKFLOW_BLOCKED,WORKFLOW_CONSENT_SCOPE_MISMATCH,Consent does not match exact scope reference.
+STUDENT_WORKFLOW_BLOCKED,WORKFLOW_POLICY_VERSION_STALE,Consent does not match current policy/document version.
+COMMUNICATION_BLOCKED,PRIVATE_ADULT_MINOR_COMMUNICATION_PROHIBITED,Private adult-minor communication is blocked.
+COMMUNICATION_BLOCKED,PER_MINOR_GUARDIAN_COVERAGE_INCOMPLETE,Each minor requires guardian coverage in participant set.
+AUTHORIZATION_CHANGED_RETRY,AUTHORIZATION_STATE_CHANGED_RETRY_REQUIRED,State token changed; caller must refresh/retry.
+DOCUMENT_ACTION_BLOCKED,WORKFLOW_CONSENT_REQUIRED,Document/waiver/media consent missing or stale.
+PAYMENT_ACTION_BLOCKED,WORKFLOW_CONSENT_REQUIRED,Billing authority/consent missing or stale.

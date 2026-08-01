@@ -1,0 +1,44 @@
+test_id,area,precondition,action,expected_result,test_level,security_purpose,required_for_closure
+GMS-T-001,age,student age missing or malformed,attempt any guarded action,deny; internal MINOR_STATUS_UNKNOWN; disclosure-safe public error,route_integration,fail closed on unknown age,TRUE
+GMS-T-002,age,birthdate indicates minor while explicit status says adult,attempt guarded action,use restrictive minor classification and require safeguards,route_integration,contradictory age cannot bypass,TRUE
+GMS-T-003,age,student turns 13 at authoritative date boundary,evaluate immediately before and after boundary,under-13 policy before boundary; 13-17 policy after boundary,unit_and_route,correct transition and no stale cache,TRUE
+GMS-T-004,age,student turns 18 at authoritative date boundary,evaluate immediately before and after boundary,minor controls before boundary; adult rules after boundary,unit_and_route,correct adulthood transition,TRUE
+GMS-T-005,guardian,minor has no guardian,attempt lesson signup,deny with internal GUARDIAN_REQUIRED,route_integration,guardian requirement,TRUE
+GMS-T-006,guardian,guardian link pending,attempt guarded action,deny with internal GUARDIAN_LINK_PENDING,route_integration,pending is not active,TRUE
+GMS-T-007,guardian,guardian link revoked expired disputed or suspended,attempt guarded action,deny with matching internal reason and generic public response,route_integration,lifecycle fail closed,TRUE
+GMS-T-008,tenancy,guardian and student are in different barns,attempt guarded action,deny with internal GUARDIAN_CROSS_BARN,route_integration,tenant isolation,TRUE
+GMS-T-009,authority,active guardian lacks workflow authority scope,attempt guarded action,deny with GUARDIAN_AUTHORITY_SCOPE_MISSING,route_integration,relationship is not universal authority,TRUE
+GMS-T-010,authority,guardian has a recorded restriction conflicting with requested action,attempt guarded action,deny with GUARDIAN_AUTHORITY_RESTRICTED,route_integration,restriction enforcement,TRUE
+GMS-T-011,account,student under 13 attempts independent login/self-service,perform action,deny or require parent-managed flow,route_integration,under-13 policy,TRUE
+GMS-T-012,lesson,minor has active authorized guardian but missing required waiver,create lesson participation,deny with internal WORKFLOW_CONSENT_REQUIRED,route_integration,lesson consent enforcement,TRUE
+GMS-T-013,lesson,minor has valid authority and current required consent,create lesson participation,allow and audit,route_integration,legitimate lesson behavior,TRUE
+GMS-T-014,messaging,adult sender and minor recipient; caller omits student_profile_id,send message,derive minor from actual recipient and deny private message,route_integration,metadata omission bypass closed,TRUE
+GMS-T-015,messaging,thread has two minors but guardian coverage for only one,send message,deny with PER_MINOR_GUARDIAN_COVERAGE_INCOMPLETE,route_integration,per-minor coverage,TRUE
+GMS-T-016,messaging,thread has two minors and qualifying guardian participant for each,send message,allow and audit,route_integration,valid multi-minor communication,TRUE
+GMS-T-017,messaging,guardian ID supplied but guardian cannot access thread,send message,do not count guardian; deny,route_integration,presence must equal actual access,TRUE
+GMS-T-018,messaging,minor thread has one qualifying guardian participant,remove guardian participant,deny with LAST_GUARDIAN_REMOVAL_PROHIBITED,route_integration,prevent guardian stripping,TRUE
+GMS-T-019,lifecycle,only guardian relationship is lawfully revoked by authorized actor,revoke relationship,allow revocation; block subsequent guarded actions; preserve evidence,route_integration,revocation must not be trapped,TRUE
+GMS-T-020,lifecycle,replacement guardian is added and prior guardian removed atomically,perform replacement,allow if replacement qualifies throughout commit,route_integration,safe handoff,TRUE
+GMS-T-021,lifecycle,guardian revoked after thread creation,send new message,deny until per-minor coverage restored,route_integration,revocation affects ongoing access,TRUE
+GMS-T-022,waiver,guardian active but no waiver consent,accept waiver-dependent action,deny with WORKFLOW_CONSENT_REQUIRED,route_integration,relationship is not consent,TRUE
+GMS-T-023,waiver,valid guardian signed prior waiver version,accept action requiring new version,deny with WORKFLOW_POLICY_VERSION_STALE,route_integration,version enforcement,TRUE
+GMS-T-024,waiver,consent scope references different lesson/event,accept action,deny with WORKFLOW_CONSENT_SCOPE_MISMATCH,route_integration,scope enforcement,TRUE
+GMS-T-025,waiver,valid guardian grants current scoped waiver,accept action,allow and store evidence reference,route_integration,valid waiver flow,TRUE
+GMS-T-026,document,guardian link active but no document-specific signature authority/consent,complete minor-bound document,deny,route_integration,document signature is distinct workflow,TRUE
+GMS-T-027,document,valid guardian signs exact current document request,complete document action,allow without provider runtime call and store evidence reference,route_integration,valid document flow,TRUE
+GMS-T-028,document,same signature request replayed or duplicate grant attempted,repeat action,idempotent result or deny duplicate without duplicate active record,route_integration,replay/duplicate protection,TRUE
+GMS-T-029,media,media consent revoked or purpose mismatched,attempt new media use,deny with internal revoked/scope reason,route_integration,media revocation/scope,TRUE
+GMS-T-030,payment,minor lacks exact approved billing authority,create or accept payment obligation,deny by default,route_integration,minor financial protection,TRUE
+GMS-T-031,payment,guardian authority is limited to another invoice or amount,create obligation outside scope,deny,route_integration,billing scope enforcement,TRUE
+GMS-T-032,event,minor lacks event-specific approval or current waiver,sign up for event,deny,route_integration,event approval,TRUE
+GMS-T-033,legacy,legacy guardian link exists but authority scope or consent record is absent,attempt guarded action,deny; no grandfathering,route_integration,safe legacy treatment,TRUE
+GMS-T-034,concurrency,guardian revoked concurrently after guard reads state but before write commits,attempt guarded write,conditional write fails or revalidation denies with retry-required reason,integration_concurrency,TOCTOU closure,TRUE
+GMS-T-035,concurrency,last guardian removal races with message send,execute concurrently,no message commits without required coverage,integration_concurrency,membership race closure,TRUE
+GMS-T-036,cache,authorization state cached then guardian revoked,attempt action using stale cache,deny through invalidation/version check,integration,stale cache closure,TRUE
+GMS-T-037,errors,unauthorized caller triggers revoked/disputed/cross-barn state,inspect API response and audit,public error is generic; precise internal code only in protected audit,route_integration,prevent relationship-state disclosure,TRUE
+GMS-T-038,audit,guarded action denied,inspect audit record,opaque IDs and internal reason present; no birthdate names message body consent text document or payment detail,unit_or_integration,privacy-safe audit,TRUE
+GMS-T-039,bypass,alternate route or direct service caller reaches guarded sink,attempt write without central guard,test fails unless guard/revalidation invoked,change_aware_review,equivalent sink review,TRUE
+GMS-T-040,emergency,caller asserts emergency without separately approved exception,attempt guarded action,deny; no implicit override,route_integration,prevent ad hoc override,TRUE
+GMS-T-041,adult,adult performs equivalent supported workflow,perform action,allow subject to normal authorization,route_integration,preserve adult behavior,TRUE
+GMS-T-042,ui,guardian pending consent incomplete or authorization changed,render workflow,truthful blocked/retry state shown; server remains controlling,frontend_test,UI/API consistency,TRUE
+GMS-T-043,regression,unrelated adult-to-adult conversation,send message,allow under normal authorization,route_integration,avoid overblocking,TRUE

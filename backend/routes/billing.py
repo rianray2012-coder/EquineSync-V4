@@ -23,6 +23,21 @@ from pydantic import BaseModel, ConfigDict
 
 from core.tenancy import barn_filter, stamp_barn
 from core import audit
+from core.minor_safety import (
+    DECISION_ALLOW,
+    MINOR_STATUS_ADULT,
+    MINOR_STATUS_MINOR_13_TO_17,
+    MINOR_STATUS_UNDER_13,
+    MINOR_STATUS_UNKNOWN,
+    STUDENT_PROFILE_COLLECTION,
+    WORKFLOW_PAYMENT,
+    audit_safe_guardian_minor_metadata,
+    guardian_minor_public_error_detail,
+    guardian_minor_workflow_gate,
+    load_guardian_minor_authority_rows,
+    minor_status_for_student,
+    normalize_minor_status,
+)
 
 
 def _now_utc() -> datetime:
@@ -46,6 +61,8 @@ class LineItem(BaseModel):
 class InvoiceIn(BaseModel):
     owner_id: str
     horse_id: Optional[str] = None
+    student_profile_id: Optional[str] = None
+    billing_policy_version: Optional[str] = None
     items: List[LineItem]
     # Accepted for backward-compatibility but IGNORED — the server computes the
     # authoritative total from the line items (Phase 9A).
@@ -134,6 +151,95 @@ async def ensure_billing_indexes(db) -> None:
 def build_router(*, db, get_current_user, list_collection, clean, new_id) -> APIRouter:
     router = APIRouter(tags=["billing"])
 
+    def _minor_status_from_age(age) -> str:
+        try:
+            years = int(age)
+        except (TypeError, ValueError):
+            return MINOR_STATUS_UNKNOWN
+        if years < 13:
+            return MINOR_STATUS_UNDER_13
+        if years < 18:
+            return MINOR_STATUS_MINOR_13_TO_17
+        return MINOR_STATUS_ADULT
+
+    async def _student_from_profile_id(user, student_profile_id):
+        if not student_profile_id:
+            return None
+        return await db[STUDENT_PROFILE_COLLECTION].find_one(
+            barn_filter(user, {"id": student_profile_id}),
+            {"_id": 0},
+        )
+
+    async def _student_from_horse(user, horse_id):
+        if not horse_id:
+            return None
+        horse = await db.horses.find_one(barn_filter(user, {"id": horse_id}), {"_id": 0})
+        if not horse or not horse.get("rider_id"):
+            return None
+        rider = await db.riders.find_one(barn_filter(user, {"id": horse["rider_id"]}), {"_id": 0})
+        if not rider:
+            return None
+        if rider.get("student_profile_id"):
+            linked = await _student_from_profile_id(user, rider["student_profile_id"])
+            if linked:
+                return linked
+            return {
+                "id": rider["student_profile_id"],
+                "barn_id": user.get("barn_id") or "primary",
+                "minor_status": MINOR_STATUS_UNKNOWN,
+            }
+        if not any(rider.get(field) is not None for field in ("minor_status", "birthdate", "age")):
+            return None
+        minor_status = normalize_minor_status(rider.get("minor_status") or MINOR_STATUS_UNKNOWN)
+        if minor_status == MINOR_STATUS_UNKNOWN and rider.get("age") is not None:
+            minor_status = _minor_status_from_age(rider.get("age"))
+        student = {
+            "id": f"rider:{rider.get('id')}",
+            "barn_id": rider.get("barn_id") or user.get("barn_id") or "primary",
+            "birthdate": rider.get("birthdate"),
+            "minor_status": minor_status,
+        }
+        student["minor_status"] = minor_status_for_student(student)
+        return student
+
+    async def _enforce_payment_guard(*, user, request: Request, invoice_doc: dict, action: str) -> None:
+        student = await _student_from_profile_id(user, invoice_doc.get("student_profile_id"))
+        if not student:
+            student = await _student_from_horse(user, invoice_doc.get("horse_id"))
+        if not student:
+            return
+        barn_id = user.get("barn_id") or invoice_doc.get("barn_id") or "primary"
+        links, consents = await load_guardian_minor_authority_rows(
+            db,
+            barn_id=barn_id,
+            student_profile_ids=[student.get("id")],
+            workflow=WORKFLOW_PAYMENT,
+        )
+        gate = guardian_minor_workflow_gate(
+            workflow=WORKFLOW_PAYMENT,
+            students=[student],
+            guardian_links=links,
+            workflow_consents=consents,
+            barn_id=barn_id,
+            scope_reference=invoice_doc.get("guardian_guard_scope_reference") or f"invoice:{invoice_doc['id']}",
+            policy_version=invoice_doc.get("guardian_guard_policy_version") or "billing-payment-v1",
+            action=action,
+        )
+        if gate["decision"] == DECISION_ALLOW:
+            return
+        await audit.record(
+            action="invoice.guardian_minor_payment_blocked",
+            user=user,
+            request=request,
+            resource_type="invoice",
+            resource_id=invoice_doc.get("id"),
+            outcome="denied",
+            status_code=403,
+            metadata=audit_safe_guardian_minor_metadata(gate),
+            _db=db,
+        )
+        raise HTTPException(status_code=403, detail=guardian_minor_public_error_detail(gate))
+
     # ---------------- Invoices ----------------
 
     @router.get("/invoices")
@@ -144,14 +250,16 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         return await list_collection("invoices", barn_filter(user, extra), sort_field="due_date")
 
     @router.post("/invoices")
-    async def create_invoice(body: InvoiceIn, user=Depends(get_current_user)):
+    async def create_invoice(body: InvoiceIn, request: Request, user=Depends(get_current_user)):
         if body.status not in _VALID_STATUS:
             raise HTTPException(422, f"Invalid status; must be one of {sorted(_VALID_STATUS)}")
         items, subtotal, discount, tax_rate, tax_amount, total = _compute_invoice(body)
+        invoice_id = new_id()
         doc = {
-            "id": new_id(),
+            "id": invoice_id,
             "owner_id": body.owner_id,
             "horse_id": body.horse_id,
+            "student_profile_id": body.student_profile_id,
             "items": items,
             "subtotal": subtotal,
             "discount": discount,
@@ -162,8 +270,11 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             "status": body.status,
             "notes": body.notes,
             "created_at": _iso(_now_utc()),
+            "guardian_guard_scope_reference": f"invoice:{invoice_id}",
+            "guardian_guard_policy_version": body.billing_policy_version or "billing-payment-v1",
         }
         stamp_barn(user, doc)
+        await _enforce_payment_guard(user=user, request=request, invoice_doc=doc, action="invoice.create")
         await db.invoices.insert_one(doc)
         return clean(doc)
 
@@ -172,9 +283,10 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         # Phase 4B-4: scope by id + barn so a cross-barn invoice 404s (no
         # existence leak / no mutation). Idempotent "set status=paid" preserved.
         scope = barn_filter(user, {"id": invoice_id})
-        existing = await db.invoices.find_one(scope, {"_id": 0, "total": 1})
+        existing = await db.invoices.find_one(scope, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Invoice not found")
+        await _enforce_payment_guard(user=user, request=request, invoice_doc=existing, action="invoice.pay")
         await db.invoices.update_one(
             scope,
             {"$set": {"status": "paid", "paid_at": _iso(_now_utc())}},

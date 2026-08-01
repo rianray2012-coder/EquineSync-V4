@@ -1,0 +1,88 @@
+{
+  "branch": "codex/cgp-006-iwp-0002-guardian-minor-safeguarding-v1-1",
+  "controlled_files": {
+    "CGP_006_IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_DIRECTIVE_V1_1_0.md": {
+      "bytes": 11287,
+      "expected_bytes": 11287,
+      "expected_sha256": "997a0e82afa51b415853b866e811dced7f61cbeece53e752d81858eb30a2c845",
+      "sha256": "997a0e82afa51b415853b866e811dced7f61cbeece53e752d81858eb30a2c845",
+      "status": "PASS"
+    },
+    "GUARDIAN_MINOR_REGRESSION_AND_ABUSE_CASE_TEST_MATRIX_V1_1_0.csv": {
+      "bytes": 8142,
+      "expected_bytes": 8142,
+      "expected_sha256": "e40d94ff1e41c7f95ed978a8e9bf200626f11d67a59f9b0a8e5956296f93182b",
+      "sha256": "e40d94ff1e41c7f95ed978a8e9bf200626f11d67a59f9b0a8e5956296f93182b",
+      "status": "PASS"
+    },
+    "GUARDIAN_MINOR_ROLLBACK_SUSPENSION_AND_EVIDENCE_PLAN_V1_1_0.md": {
+      "bytes": 3101,
+      "expected_bytes": 3101,
+      "expected_sha256": "44d74ee6dd036d404c632bb60259c2218e4716764118b3a1e848cee1f8b8841f",
+      "sha256": "44d74ee6dd036d404c632bb60259c2218e4716764118b3a1e848cee1f8b8841f",
+      "status": "PASS"
+    },
+    "GUARDIAN_MINOR_SAFEGUARDING_PATCH_CONTRACT_V1_1_0.md": {
+      "bytes": 5289,
+      "expected_bytes": 5289,
+      "expected_sha256": "a2748a22b08e8de192c061c85967d3cef5162c249a7e27d70933e497c1f45ea9",
+      "sha256": "a2748a22b08e8de192c061c85967d3cef5162c249a7e27d70933e497c1f45ea9",
+      "status": "PASS"
+    },
+    "GUARDIAN_MINOR_SECURITY_INVARIANT_AND_WORKFLOW_SPECIFICATION_V1_1_0.md": {
+      "bytes": 6152,
+      "expected_bytes": 6152,
+      "expected_sha256": "48db582df8e9177e233073f4de3a9b8d868e100ea0a0b487d64ff1d430e39bd5",
+      "sha256": "48db582df8e9177e233073f4de3a9b8d868e100ea0a0b487d64ff1d430e39bd5",
+      "status": "PASS"
+    },
+    "GUARDIAN_MINOR_WORKFLOW_ENFORCEMENT_MATRIX_V1_1_0.csv": {
+      "bytes": 6430,
+      "expected_bytes": 6430,
+      "expected_sha256": "c4b2b19ddebb44f84f78409b80844802ef38b0f2a5503903bb430ff9b2a6672c",
+      "sha256": "c4b2b19ddebb44f84f78409b80844802ef38b0f2a5503903bb430ff9b2a6672c",
+      "status": "PASS"
+    },
+    "GUARDIAN_RELATIONSHIP_AUTHORITY_CONSENT_AND_LIFECYCLE_DECISION_RECORD_V1_1_0.md": {
+      "bytes": 3720,
+      "expected_bytes": 3720,
+      "expected_sha256": "99ec8fbbaff8722bd199deb07554c3a873b4429ef484db2ad287e57cbc21aaf6",
+      "sha256": "99ec8fbbaff8722bd199deb07554c3a873b4429ef484db2ad287e57cbc21aaf6",
+      "status": "PASS"
+    },
+    "PROPOSED_FOUNDER_IMPLEMENTATION_AUTHORIZATION_AND_SCOPE_DISPOSITION_CGP006_IWP_0002_V1_1_0_2026-07-30.md": {
+      "bytes": 6719,
+      "expected_bytes": 6719,
+      "expected_sha256": "ab7f9332da372afd4259749745d0ce1b1442cd9ee4b448e39ee95300db6b74a8",
+      "sha256": "ab7f9332da372afd4259749745d0ce1b1442cd9ee4b448e39ee95300db6b74a8",
+      "status": "PASS"
+    }
+  },
+  "founder_directive": {
+    "bytes": 30823,
+    "path": "/Users/rianray/Documents/Codex/2026-07-31/files-mentioned-by-the-user-equinesync/work/EquineSync-V4/governance/implementation/code-guides/drafting/CGP-006/IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_IMPLEMENTATION_V1_1/FOUNDER_DIRECTIVE_CGP_006_IWP_0002_GUARDIAN_MINOR_SAFEGUARDING_REAPPROVAL_IMPLEMENTATION_MERGE_CUSTODY_AND_CONDITIONAL_CLOSURE_V1_0_0.md",
+    "sha256": "2158eb46806e354b67fce284e6aadf32edd3739d39aa58ec68ac06d1172c1c6a"
+  },
+  "implementation_baseline_sha": "9996e948ede39a968b8facd8afe15c2b1a345204",
+  "prohibited_actions_confirmed_absent": [
+    "deployment",
+    "staging",
+    "pilot",
+    "production",
+    "provider_calls",
+    "GAP_0004",
+    "Wave2",
+    "CGP007"
+  ],
+  "record_id": "CGP006-IWP0002-GUARDIAN-MINOR-SOURCE-FREEZE-AND-BASELINE-2026-08-01",
+  "recorded_at": "2026-08-01T03:29:01Z",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "source_zip": {
+    "bytes": 39524,
+    "package_validator_result": "PASS guardian/minor revision package: 14 manifested files, 8 workflows, 43 tests",
+    "path": "/Users/rianray/Downloads/EquineSync_CGP006_IWP0002_Guardian_Minor_Safeguarding_Reviewed_Revision_Candidate_V1_1_0_2026-07-30.zip",
+    "sha256": "6272108b389af3966f19dd14ab28a7f529ea31111cb8e1179e2ea86a51ce27ca",
+    "unzip_test": "PASS"
+  },
+  "working_head_before_commit": "9996e948ede39a968b8facd8afe15c2b1a345204"
+}

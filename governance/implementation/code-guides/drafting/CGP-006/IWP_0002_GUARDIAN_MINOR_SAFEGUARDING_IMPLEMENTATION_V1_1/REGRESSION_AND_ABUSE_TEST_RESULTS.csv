@@ -1,0 +1,44 @@
+test_id,status,pytest_selector,evidence
+GMS-T-001,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_001,deny; internal MINOR_STATUS_UNKNOWN; disclosure-safe public error
+GMS-T-002,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_002,use restrictive minor classification and require safeguards
+GMS-T-003,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_003,under-13 policy before boundary; 13-17 policy after boundary
+GMS-T-004,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_004,minor controls before boundary; adult rules after boundary
+GMS-T-005,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_005,deny with internal GUARDIAN_REQUIRED
+GMS-T-006,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_006,deny with internal GUARDIAN_LINK_PENDING
+GMS-T-007,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_007,deny with matching internal reason and generic public response
+GMS-T-008,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_008,deny with internal GUARDIAN_CROSS_BARN
+GMS-T-009,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_009,deny with GUARDIAN_AUTHORITY_SCOPE_MISSING
+GMS-T-010,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_010,deny with GUARDIAN_AUTHORITY_RESTRICTED
+GMS-T-011,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_011,deny or require parent-managed flow
+GMS-T-012,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_012,deny with internal WORKFLOW_CONSENT_REQUIRED
+GMS-T-013,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_013,allow and audit
+GMS-T-014,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_014,derive minor from actual recipient and deny private message
+GMS-T-015,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_015,deny with PER_MINOR_GUARDIAN_COVERAGE_INCOMPLETE
+GMS-T-016,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_016,allow and audit
+GMS-T-017,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_017,do not count guardian; deny
+GMS-T-018,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_018,deny with LAST_GUARDIAN_REMOVAL_PROHIBITED
+GMS-T-019,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_019,allow revocation; block subsequent guarded actions; preserve evidence
+GMS-T-020,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_020,allow if replacement qualifies throughout commit
+GMS-T-021,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_021,deny until per-minor coverage restored
+GMS-T-022,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_022,deny with WORKFLOW_CONSENT_REQUIRED
+GMS-T-023,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_023,deny with WORKFLOW_POLICY_VERSION_STALE
+GMS-T-024,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_024,deny with WORKFLOW_CONSENT_SCOPE_MISMATCH
+GMS-T-025,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_025,allow and store evidence reference
+GMS-T-026,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_026,deny
+GMS-T-027,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_027,allow without provider runtime call and store evidence reference
+GMS-T-028,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_028,idempotent result or deny duplicate without duplicate active record
+GMS-T-029,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_029,deny with internal revoked/scope reason
+GMS-T-030,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_030,deny by default
+GMS-T-031,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_031,deny
+GMS-T-032,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_032,deny
+GMS-T-033,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_033,deny; no grandfathering
+GMS-T-034,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_034,conditional write fails or revalidation denies with retry-required reason
+GMS-T-035,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_035,no message commits without required coverage
+GMS-T-036,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_036,deny through invalidation/version check
+GMS-T-037,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_037,public error is generic; precise internal code only in protected audit
+GMS-T-038,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_038,opaque IDs and internal reason present; no birthdate names message body consent text document or payment detail
+GMS-T-039,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_039,test fails unless guard/revalidation invoked
+GMS-T-040,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_040,deny; no implicit override
+GMS-T-041,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_041,allow subject to normal authorization
+GMS-T-042,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_042,truthful blocked/retry state shown; server remains controlling
+GMS-T-043,PASS,backend/tests/test_cgp006_iwp0002_guardian_minor_safeguarding.py::test_gms_t_043,allow under normal authorization
