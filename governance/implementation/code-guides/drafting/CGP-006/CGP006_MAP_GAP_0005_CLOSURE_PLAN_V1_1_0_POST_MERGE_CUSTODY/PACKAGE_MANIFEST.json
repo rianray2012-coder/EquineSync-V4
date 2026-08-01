@@ -1,0 +1,67 @@
+{
+  "accession_merge_commit": "95a4c9b4006f4bd4377f75b3d0fef57d5f424dee",
+  "accession_pr": "PR #73 https://github.com/rianray2012-coder/EquineSync-V4/pull/73",
+  "accession_pr_head": "016accf4d6eb35ef2e436bcf26330c5a050dddd8",
+  "custody_branch": "codex/cgp006-gap0005-closure-plan-v1-1-custody",
+  "custody_pr": "PR #74 https://github.com/rianray2012-coder/EquineSync-V4/pull/74",
+  "custody_receipt": "governance/implementation/code-guides/receipts/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_CUSTODY_RECEIPT.md",
+  "directive_id": "CGP_006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_PROTECTED_ACCESSION_AND_CUSTODY_DIRECTIVE_V1_0_0",
+  "files": [
+    {
+      "byte_length": 1180,
+      "path": "AUTHORIZED_PATH_REPORT.md",
+      "sha256": "7a9256fcc44702b8677084642152f53745074f274c9af789bc532dd5d9c3edc3"
+    },
+    {
+      "byte_length": 3135,
+      "path": "DIRECTIVE_EXECUTION_RECORD.md",
+      "sha256": "001334e03815a86ae157121320abc9695100f0ec335e857fce5fc73318387df0"
+    },
+    {
+      "byte_length": 755,
+      "path": "POST_MERGE_PROTECTED_HEAD_RECORD.json",
+      "sha256": "068e0d636e2605798c9bcc4f4a4debf03a853c7e85598b1ee39cf9e40cf8f97c"
+    },
+    {
+      "byte_length": 1705,
+      "path": "PROTECTED_MERGE_RECEIPT.json",
+      "sha256": "d8918f0fd6813e14a796aad528c0bdf883f08af463a68e3ee3346b8975ef1e73"
+    },
+    {
+      "byte_length": 2870,
+      "path": "README.md",
+      "sha256": "bfb106a61a373012736174cc8e75502d1afa3f0f94cbaeb7adac9052786c8270"
+    },
+    {
+      "byte_length": 3065,
+      "path": "SOURCE_IDENTITY_REGISTER.csv",
+      "sha256": "12eabaeee7bdec12d981abda114cd6cb64b35d3818f62422d12d5f87bd44915f"
+    },
+    {
+      "byte_length": 2797,
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "c311e566a38674ae086b30736726a6c26ff7af631f06edf0e9e447671cf31735"
+    },
+    {
+      "byte_length": 986,
+      "path": "tests/test_cgp006_gap0005_closure_plan_custody.py",
+      "sha256": "9747526bb0c602d530da090a14955dae2c0c3cf24627ca699d5be6ef72d4e7cc"
+    },
+    {
+      "byte_length": 17052,
+      "path": "validators/validate_cgp006_gap0005_closure_plan_custody.py",
+      "sha256": "12db69d8aa704909044ff69c12bde5d41fc12b5839a5b5d3778b7c41a40fea48"
+    }
+  ],
+  "final_custody_state": "CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_PROTECTEDLY_ACCESSIONED_AND_POST_MERGE_CUSTODY_COMPLETE_NO_GAP_CLOSURE_EFFECT",
+  "founder_approval_id": "ES-FD-CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-2026-08-01",
+  "gap_id": "CGP006-MAP-GAP-0005",
+  "gap_status": "OPEN",
+  "generated_at_utc": "2026-08-01T08:15:18Z",
+  "manifest_scope": "All custody package files except PACKAGE_MANIFEST.json, CHECKSUM_MANIFEST.sha256, __pycache__, and .pyc files.",
+  "package_id": "CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-POST-MERGE-CUSTODY",
+  "post_accession_protected_head": "95a4c9b4006f4bd4377f75b3d0fef57d5f424dee",
+  "pre_accession_protected_head": "d0d9528028982c1243f9e2a6b0f21a78f298276c",
+  "protected_branch": "integrate-emergent-final-zip",
+  "reviewed_reference_head": "9996e948ede39a968b8facd8afe15c2b1a345204"
+}
