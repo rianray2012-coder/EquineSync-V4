@@ -1,0 +1,1286 @@
+{
+  "assessment_limitation": "Report is stored inside the assessed package; final archive hash is reported separately after archive rebuild.",
+  "dependency_versions": {
+    "stdlib_only": true
+  },
+  "failures": 0,
+  "mode": "package-only",
+  "package_root": "/tmp/equinesync-review/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V1",
+  "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+  "python_version": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "results": [
+    {
+      "check": "required_file:README_FIRST.md",
+      "detail": "README_FIRST.md",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:SHARED_TIER_1_DOCUMENTARY_STANDARD_REVISION_ROUND_2_V1.md",
+      "detail": "SHARED_TIER_1_DOCUMENTARY_STANDARD_REVISION_ROUND_2_V1.md",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:PACKAGE_MANIFEST.json",
+      "detail": "PACKAGE_MANIFEST.json",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:CHECKSUMS.sha256",
+      "detail": "CHECKSUMS.sha256",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:MANIFEST_OF_MANIFESTS.csv",
+      "detail": "MANIFEST_OF_MANIFESTS.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:EXTERNAL_REVIEW/EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER.csv",
+      "detail": "EXTERNAL_REVIEW/EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:03_IMPLEMENTATION_TRACEABILITY/REQUIREMENT_TRACEABILITY_REGISTER.csv",
+      "detail": "03_IMPLEMENTATION_TRACEABILITY/REQUIREMENT_TRACEABILITY_REGISTER.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:04_AUTHORITY_LIFECYCLE_REGISTER/LIFECYCLE_TRANSITION_MATRIX.csv",
+      "detail": "04_AUTHORITY_LIFECYCLE_REGISTER/LIFECYCLE_TRANSITION_MATRIX.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:04_AUTHORITY_LIFECYCLE_REGISTER/INVALID_STATE_RULES.csv",
+      "detail": "04_AUTHORITY_LIFECYCLE_REGISTER/INVALID_STATE_RULES.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.csv",
+      "detail": "05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "detail": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:08_SOURCE_RECONCILIATION/DUPLICATE_COUNTERPART_CLUSTER_REGISTER.csv",
+      "detail": "08_SOURCE_RECONCILIATION/DUPLICATE_COUNTERPART_CLUSTER_REGISTER.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_INDEX.csv",
+      "detail": "10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_INDEX.csv",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:00_PROGRAM_CONTROL/REPOSITORY_STATE_RECONCILIATION_RECORD.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:00_PROGRAM_CONTROL/ROUND_2_PACKAGE_ZIP_RECORD.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:00_PROGRAM_CONTROL/SOURCE_AUTHENTICATION_AND_REPOSITORY_RECONCILIATION.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:00_PROGRAM_CONTROL/SOURCE_PACKAGE/EQUINESYNC_TIER_1_DOCUMENTS_03_10_V1_SOURCE.zip",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:03_IMPLEMENTATION_TRACEABILITY/COVERAGE_METRICS_BY_DOMAIN.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:03_IMPLEMENTATION_TRACEABILITY/EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:03_IMPLEMENTATION_TRACEABILITY/EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:03_IMPLEMENTATION_TRACEABILITY/REQUIREMENT_TRACEABILITY_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:03_IMPLEMENTATION_TRACEABILITY/TRACEABILITY_MODEL.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:03_IMPLEMENTATION_TRACEABILITY/tests/test_document_03_rr2_validator.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:03_IMPLEMENTATION_TRACEABILITY/validators/validate_document_03_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:04_AUTHORITY_LIFECYCLE_REGISTER/AUTHORITY_LIFECYCLE_MODEL.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:04_AUTHORITY_LIFECYCLE_REGISTER/AUTHORITY_LIFECYCLE_STATE_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:04_AUTHORITY_LIFECYCLE_REGISTER/EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:04_AUTHORITY_LIFECYCLE_REGISTER/EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:04_AUTHORITY_LIFECYCLE_REGISTER/INVALID_STATE_RULES.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:04_AUTHORITY_LIFECYCLE_REGISTER/LIFECYCLE_TRANSITION_MATRIX.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:04_AUTHORITY_LIFECYCLE_REGISTER/tests/test_document_04_rr2_validator.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:04_AUTHORITY_LIFECYCLE_REGISTER/validators/validate_document_04_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:05_FOUNDER_DECISION_REGISTER/EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:05_FOUNDER_DECISION_REGISTER/EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:05_FOUNDER_DECISION_REGISTER/tests/test_document_05_rr2_validator.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:05_FOUNDER_DECISION_REGISTER/validators/validate_document_05_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/DUPLICATE_AND_STALENESS_ANALYSIS.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/tests/test_document_06_rr2_validator.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/validators/validate_document_06_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:07_OWNERSHIP_STEWARDSHIP_REVIEW/EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:07_OWNERSHIP_STEWARDSHIP_REVIEW/EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:07_OWNERSHIP_STEWARDSHIP_REVIEW/OWNERSHIP_ACCOUNTABILITY_MATRIX.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:07_OWNERSHIP_STEWARDSHIP_REVIEW/REVIEW_CALENDAR.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:07_OWNERSHIP_STEWARDSHIP_REVIEW/VACANCY_AND_SUCCESSION_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:07_OWNERSHIP_STEWARDSHIP_REVIEW/tests/test_document_07_rr2_validator.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:07_OWNERSHIP_STEWARDSHIP_REVIEW/validators/validate_document_07_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:08_SOURCE_RECONCILIATION/DUPLICATE_COUNTERPART_CLUSTER_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:08_SOURCE_RECONCILIATION/EQUINESYNC_SOURCE_PROVENANCE_AUTHORITY_AND_SUPERSESSION_RECONCILIATION_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:08_SOURCE_RECONCILIATION/EQUINESYNC_SOURCE_PROVENANCE_AUTHORITY_AND_SUPERSESSION_RECONCILIATION_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:08_SOURCE_RECONCILIATION/SOURCE_AUTHORITY_DISPOSITION_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:08_SOURCE_RECONCILIATION/SOURCE_AUTHORITY_DISPOSITION_REGISTER.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:08_SOURCE_RECONCILIATION/SOURCE_DISPOSITION_DASHBOARD.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:08_SOURCE_RECONCILIATION/tests/test_document_08_rr2_validator.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:08_SOURCE_RECONCILIATION/validators/validate_document_08_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:09_WORKSTREAM_PR_BRANCH_DISPOSITION/EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:09_WORKSTREAM_PR_BRANCH_DISPOSITION/EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_DISPOSITION_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:09_WORKSTREAM_PR_BRANCH_DISPOSITION/tests/test_document_09_rr2_validator.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:09_WORKSTREAM_PR_BRANCH_DISPOSITION/validators/validate_document_09_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/AUDIT_MODEL.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/AUDIT_REQUIREMENTS_MATRIX.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_INDEX.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/01_INTERNAL_DOCUMENTARY_REVIEW_PLAN.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/03_SOURCE_MANIFEST.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/04_EVIDENCE_INDEX.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/05_SAMPLING_RECORD.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/07_CONFLICT_DISCLOSURE.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/08_FINDING_SCHEDULE.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/09_RESIDUAL_RISK_SCHEDULE.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/10_FOUNDER_ATTESTATION_SCHEDULE.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/11_CLOSING_EXHIBITS_INDEX.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/13_ADOPTION_RECORD.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/14_ACCESSION_RECEIPT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/15_POST_MERGE_CUSTODY_RECEIPT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/16_FINAL_SELF_DECLARATION_RECORD.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/17_BOUNDED_SCOPE_SELF_DECLARATION_RECORD.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/18_REOPENING_NOTICE.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/templates/19_PERIODIC_SELF_DECLARATION_REFRESH_RECORD.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/tests/test_document_10_rr2_validator.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:10_CLOSING_AUDIT_PROTOCOL/validators/validate_document_10_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:CROSS_DOCUMENT_RECONCILIATION_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/03_IMPLEMENTATION_TRACEABILITY__COVERAGE_METRICS_BY_DOMAIN_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/03_IMPLEMENTATION_TRACEABILITY__REQUIREMENT_TRACEABILITY_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__AUTHORITY_LIFECYCLE_STATE_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__INVALID_STATE_RULES_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__LIFECYCLE_TRANSITION_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/05_FOUNDER_DECISION_REGISTER__FOUNDER_DECISION_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__DUPLICATE_AND_STALENESS_ANALYSIS_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__OWNERSHIP_ACCOUNTABILITY_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__REVIEW_CALENDAR_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__VACANCY_AND_SUCCESSION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__DUPLICATE_COUNTERPART_CLUSTER_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__SOURCE_AUTHORITY_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__SOURCE_DISPOSITION_DASHBOARD_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/09_WORKSTREAM_PR_BRANCH_DISPOSITION__WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/10_CLOSING_AUDIT_PROTOCOL__AUDIT_REQUIREMENTS_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/10_CLOSING_AUDIT_PROTOCOL__TEMPLATE_INDEX_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/EXTERNAL_REVIEW__EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/FOUNDER_DECISION_PACKET_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/MANIFEST_OF_MANIFESTS_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/TIER_1_DOCUMENT_INVENTORY_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:DATA_DICTIONARIES/UNRESOLVED_ISSUE_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:EXTERNAL_REVIEW/ACCOMPANYING_STATEMENT_FOR_INDEPENDENT_EXTERNAL_REVIEW.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:EXTERNAL_REVIEW/EQUINESYNC_T1_RR2_EXTERNAL_STANDARDS_BENCHMARK_REVIEW.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:EXTERNAL_REVIEW/EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:EXTERNAL_REVIEW/EXTERNAL_REVIEW_REMEDIATION_SUMMARY.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:FOUNDER_DECISION_PACKET.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:FOUNDER_DECISION_PACKET.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:MANIFEST_OF_MANIFESTS.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:README_FIRST.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:REVIEWS/TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_CROSS_DOCUMENT_RECONCILIATION_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:REVISION_ROUND_2_DELTA_REPORT.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/03_IMPLEMENTATION_TRACEABILITY__COVERAGE_METRICS_BY_DOMAIN_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/03_IMPLEMENTATION_TRACEABILITY__REQUIREMENT_TRACEABILITY_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__AUTHORITY_LIFECYCLE_STATE_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__INVALID_STATE_RULES_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__LIFECYCLE_TRANSITION_MATRIX_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/05_FOUNDER_DECISION_REGISTER__FOUNDER_DECISION_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__DUPLICATE_AND_STALENESS_ANALYSIS_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__OWNERSHIP_ACCOUNTABILITY_MATRIX_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__REVIEW_CALENDAR_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__VACANCY_AND_SUCCESSION_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/08_SOURCE_RECONCILIATION__DUPLICATE_COUNTERPART_CLUSTER_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/08_SOURCE_RECONCILIATION__SOURCE_AUTHORITY_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/08_SOURCE_RECONCILIATION__SOURCE_DISPOSITION_DASHBOARD_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/09_WORKSTREAM_PR_BRANCH_DISPOSITION__WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/10_CLOSING_AUDIT_PROTOCOL__AUDIT_REQUIREMENTS_MATRIX_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/10_CLOSING_AUDIT_PROTOCOL__TEMPLATE_INDEX_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/EXTERNAL_REVIEW__EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/FOUNDER_DECISION_PACKET_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/MANIFEST_OF_MANIFESTS_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/TIER_1_DOCUMENT_INVENTORY_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SCHEMAS/UNRESOLVED_ISSUE_REGISTER_csv.schema.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:SHARED_TIER_1_DOCUMENTARY_STANDARD_REVISION_ROUND_2_V1.md",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:TIER_1_DOCUMENT_INVENTORY.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:UNRESOLVED_ISSUE_REGISTER.csv",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:VALIDATION/validate_tier1_documents_03_10_rr2.py",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:VALIDATION_RESULTS/REPOSITORY_MODE_VALIDATION_REPORT.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_integrity:VALIDATION_RESULTS/STANDALONE_EXTRACTED_PACKAGE_VALIDATION_REPORT.json",
+      "detail": "hash/byte check",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests_excludes_root_self_references",
+      "detail": "root manifest/checksum files are disclosed in PACKAGE_MANIFEST metadata and cannot be self-bound after final write",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:00_PROGRAM_CONTROL/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:00_PROGRAM_CONTROL/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:03_IMPLEMENTATION_TRACEABILITY/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:03_IMPLEMENTATION_TRACEABILITY/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:04_AUTHORITY_LIFECYCLE_REGISTER/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:04_AUTHORITY_LIFECYCLE_REGISTER/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:05_FOUNDER_DECISION_REGISTER/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:05_FOUNDER_DECISION_REGISTER/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:07_OWNERSHIP_STEWARDSHIP_REVIEW/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:07_OWNERSHIP_STEWARDSHIP_REVIEW/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:08_SOURCE_RECONCILIATION/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:08_SOURCE_RECONCILIATION/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:09_WORKSTREAM_PR_BRANCH_DISPOSITION/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:09_WORKSTREAM_PR_BRANCH_DISPOSITION/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:10_CLOSING_AUDIT_PROTOCOL/CHECKSUMS.sha256",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:10_CLOSING_AUDIT_PROTOCOL/PACKAGE_MANIFEST.json",
+      "detail": "manifest/checksum binding",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "doc03_no_unverified_normative_requirements",
+      "detail": "all rows must remain source candidates",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "doc03_verification_not_overclaimed",
+      "detail": "verification must not be inferred from discovery",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "doc03_test_id_assertion_locator_consistency",
+      "detail": "test_id requires assertion-level locator",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "lifecycle_transition_matrix_complete",
+      "detail": "states=13 rows=169",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_rules_marked_enforced",
+      "detail": "all invalid rules must be failure-capable",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-01",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-02",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-03",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-04",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-05",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-06",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-07",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-08",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-09",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-10",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-11",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "invalid_state_rule:T1R2-LIFE-RULE-12",
+      "detail": "invalid_rows=0",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "founder_decisions_no_disposition_selected",
+      "detail": "no decision recorded",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "founder_decisions_no_authority_granted",
+      "detail": "no authority",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "founder_question_text_consistency",
+      "detail": "register and packet question text",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "findings_root_cause_present",
+      "detail": "root cause required",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "no_accepted_residual_risk_without_authority",
+      "detail": "no accepted risk in package",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "ownership_gap_effect_present",
+      "detail": "vacancy effect required",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "review_calendar_not_operative_pending_appointment",
+      "detail": "no vacant schedule as operative control",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "source_duplicate_fk_populated",
+      "detail": "no blank duplicate_cluster_id",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "source_duplicate_fk_valid",
+      "detail": "source duplicate FK valid",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "source_adoption_label_not_package_adoption",
+      "detail": "adoption evidence labels scoped",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "workstream_github_fields_populated",
+      "detail": "review and CI analysis fields",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "review_template_count_and_distinct_names",
+      "detail": "templates=19 unique=19",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "terminology_exposure_reduced",
+      "detail": "template names avoid certification/certificate/audit plan terminology",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "per_document_validator_test:03",
+      "detail": "per-doc validator/test present",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "per_document_validator_test:04",
+      "detail": "per-doc validator/test present",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "per_document_validator_test:05",
+      "detail": "per-doc validator/test present",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "per_document_validator_test:06",
+      "detail": "per-doc validator/test present",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "per_document_validator_test:07",
+      "detail": "per-doc validator/test present",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "per_document_validator_test:08",
+      "detail": "per-doc validator/test present",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "per_document_validator_test:09",
+      "detail": "per-doc validator/test present",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "per_document_validator_test:10",
+      "detail": "per-doc validator/test present",
+      "failure_capable": true,
+      "status": "PASS"
+    },
+    {
+      "check": "git_metadata",
+      "detail": "package-only validation",
+      "failure_capable": false,
+      "status": "NOT_APPLICABLE_OUTSIDE_GIT"
+    }
+  ],
+  "status": "PASS"
+}
