@@ -6,6 +6,7 @@
 
 | Artifact | Current governed state | Founder approval | Active Canon Index | Lock | Evidence / blocker |
 | --- | --- | --- | --- | --- | --- |
+| ES-FD-GOV-LIFECYCLE-001 Governance Document Lifecycle Directive | `AUTHORITATIVE` | Founder approved 2026-01-23 | Yes, operational governance standard | Not locked; lock not required by directive accession | Authenticated canonical artifact SHA-256 `124054b0cd0b1ba1287d0785a022d32a97066f1c247af797aee3be15ac34a105`; byte count `27251`; accession record `docs/canon/governance/ES-FD-GOV-LIFECYCLE-001_ACCESSION_RECORD.md`; no implementation, runtime, deployment, production, certification, verification, or automatic finding-closure authority |
 | Global Constitutional Companion Artifact Family V1.0 | `CONTROLLING_GOVERNANCE_COMPANIONS`; `ADOPTED_WITH_RETAINED_NONBLOCKING_P2` | Founder adoption approved after independent verification of package `5b2a0e07...` | Instrument section | Not independently locked | 71 founder decisions; 232 requirements; 232 RTM rows; P0 0/P1 0; three P2 retained; historical standalone-source gaps preserved; all operational authority false |
 | Product Vision | Available controlling source | Existing founder source | Yes | Available, lock metadata not normalized | Canon Index |
 | Ecosystem Model | Available controlling source | Existing founder source | Yes | Available, lock metadata not normalized | Canon Index |

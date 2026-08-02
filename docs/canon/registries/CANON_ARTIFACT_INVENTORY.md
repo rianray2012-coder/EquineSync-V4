@@ -7,6 +7,7 @@
 
 | Artifact | Path | Version | SHA-256 | State | Provenance |
 | --- | --- | --- | --- | --- | --- |
+| ES-FD-GOV-LIFECYCLE-001 Governance Document Lifecycle Directive | `docs/canon/governance/ES-FD-GOV-LIFECYCLE-001.md` | 1.1.0 | `124054b0cd0b1ba1287d0785a022d32a97066f1c247af797aee3be15ac34a105` | `AUTHORITATIVE`; controlling governance document lifecycle standard | Founder approved 2026-01-23; repository accession 2026-08-02; no implementation, runtime, deployment, production, certification, or automatic finding-closure authority |
 | Master Data Protection, Encryption, and Key Management Model | `docs/canon/adopted_sources/MASTER_DATA_PROTECTION_ENCRYPTION_AND_KEY_MANAGEMENT_MODEL_V1_0_ADOPTED_SOURCE.md` | 1.0 | `0fa543e25a2cffe75e9d07b68ccf0adefb8ae31e10c05afd5f1b84ee452a23ba` | `ADOPTED`; `LOCKED`; controlling | Byte-identical C0 Batch 1 lock; three P2 retained; no operational authority |
 | Master Record Stewardship and Retention Model | `docs/canon/adopted_sources/MASTER_RECORD_STEWARDSHIP_AND_RETENTION_MODEL_V2_1_ADOPTED_SOURCE.md` | 2.1 | `4623fb036481a4ffea4e7edde53fa6e83e9a81f062251c8371e242219f524c2a` | `ADOPTED`; `LOCKED`; controlling | Byte-identical C0 Batch 1 lock; no operational authority |
 | Master Audit Event and Evidence Model | `docs/canon/adopted_sources/MASTER_AUDIT_EVENT_AND_EVIDENCE_MODEL_V2_0_ADOPTED_SOURCE.md` | 2.0 | `321aefaeee9f04ad927c01d96e4b05549713c118f9868b7fccf7a8e9b53d8ea2` | `ADOPTED`; `LOCKED`; controlling | Byte-identical C0 Batch 1 lock; provenance P2 retained; no operational authority |

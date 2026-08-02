@@ -6,6 +6,7 @@
 
 | Domain/workstream | Planning/review | Adoption | Lock | Runtime | Schema/migration | Permission | External processor | Production mutation | Release |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Governance Document Lifecycle Directive ES-FD-GOV-LIFECYCLE-001 | Documentary accession complete; Section 16 workflow follow-up required | Authoritative lifecycle standard only | No | No | No | No | No | No | No |
 | RF31 constitutional policy | Planning and constitutional decision phase complete | Yes, constitutional canon only | Yes, constitutional immutability only | No | No | No | No | No | No |
 | Horse Transfer Policy V2.0 | Final adoption and lock complete | Yes, constitutional canon only | Yes, constitutional immutability only | No | No | No | No | No | No |
 | Identity/Actor V2.0 | Final constitutional lock complete | Yes, constitutional canon only | Yes, constitutional immutability only | No | No | No | No | No | No |

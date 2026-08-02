@@ -46,6 +46,7 @@ Purpose: Preserve the founder canon documents and make them enforceable inputs f
 | 5 | Persona Workflow Map | `docs/product/PERSONA_WORKFLOW_MAP.md` | available | Workflow authority for persona needs, daily/weekly/emergency tasks, permissions, notifications, and missing surfaces. |
 | 5 | Product Gap Ledger | `docs/product/PRODUCT_GAP_LEDGER.md` | available | Gap authority for gated RF assignment and roadmap discipline. |
 | Operational | Master ATLAS Governance | `docs/canon/MASTER_ATLAS_GOVERNANCE.md` | available | Required governance standard for ATLAS lifecycle, gate states, evidence, severity, approvals, QA, and release-readiness claims. |
+| Operational | Governance Document Lifecycle Directive | `docs/canon/governance/ES-FD-GOV-LIFECYCLE-001.md` | `AUTHORITATIVE`; Version 1.1.0 controlling | Exclusive governance document lifecycle standard: Draft, Approved, Authoritative, Verified. Merge, activation, implementation, production use, certification, and finding closure remain separate events or attributes. No implementation, runtime, deployment, production, certification, or automatic finding-closure authority. |
 | Operational | Codex Canon Application Guide | `docs/canon/CODEX_CANON_APPLICATION_GUIDE.md` | available | Required operating guide for applying the canon during review, RF planning, implementation, testing, and evidence. |
 
 ## C0 Phase C Source-Identity Status
