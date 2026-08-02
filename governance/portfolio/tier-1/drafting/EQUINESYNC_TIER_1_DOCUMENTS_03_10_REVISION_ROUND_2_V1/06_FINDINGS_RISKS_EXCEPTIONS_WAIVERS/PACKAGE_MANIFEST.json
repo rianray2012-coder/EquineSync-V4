@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "byte_length": 270,
+      "path": "DUPLICATE_AND_STALENESS_ANALYSIS.csv",
+      "sha256": "1dd9c562f1b33c83ee1f31b870292220e42d1790a374b5e7b76802f004070625"
+    },
+    {
+      "byte_length": 1212,
+      "path": "EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1.md",
+      "sha256": "67dbb2ad586631432e016c047bf91064fcd551955943157ac596c6cd09901325"
+    },
+    {
+      "byte_length": 1954,
+      "path": "EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "7227856bdf2f6de10c3286637c012dca7b2e7a653777b904a86599f7126a1d3a"
+    },
+    {
+      "byte_length": 8158,
+      "path": "FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "sha256": "6b292fd3d31f30a674f85074b1247e2f0b93942b1b8eb10f23a97ffb483f226b"
+    },
+    {
+      "byte_length": 16408,
+      "path": "FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.json",
+      "sha256": "aa1cfc2b985af268895398a3938bde2eacf56461ec5f7c08469ab636560ae82e"
+    }
+  ],
+  "package_root": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS"
+}

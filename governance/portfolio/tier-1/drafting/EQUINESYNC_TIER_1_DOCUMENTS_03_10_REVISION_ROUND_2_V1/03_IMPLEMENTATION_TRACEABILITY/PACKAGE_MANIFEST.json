@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "byte_length": 1970,
+      "path": "COVERAGE_METRICS_BY_DOMAIN.csv",
+      "sha256": "be30f9f89699a7f2d2fb069076bb67a4d1b893ba3dfb984eef376c5b60aba90d"
+    },
+    {
+      "byte_length": 2125,
+      "path": "EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1.md",
+      "sha256": "c2b737ee562fb2038d61399e363d3268bc9098598d5ebce5087ea48c47de557a"
+    },
+    {
+      "byte_length": 1969,
+      "path": "EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "2719b10634fa8a0b2219bec1559e9aefa2171d383c0dc5085cd1339de85ddb1b"
+    },
+    {
+      "byte_length": 116946,
+      "path": "REQUIREMENT_TRACEABILITY_REGISTER.csv",
+      "sha256": "8900b1812329cf0092784eef9f0a924626c7477c38289a28451f9c7b26d68973"
+    },
+    {
+      "byte_length": 7372,
+      "path": "TRACEABILITY_MODEL.json",
+      "sha256": "730a68532aaaab0a816ce2fa7659c8ead4d28264f7f315e0f4e089da0df1eb21"
+    }
+  ],
+  "package_root": "03_IMPLEMENTATION_TRACEABILITY"
+}
