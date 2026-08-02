@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "activation_effect": {
+      "type": "string"
+    },
+    "authority_granted_by_approval": {
+      "type": "string"
+    },
+    "authority_not_granted": {
+      "type": "string"
+    },
+    "consequences_of_each_option": {
+      "type": "string"
+    },
+    "decision_id": {
+      "type": "string"
+    },
+    "implementation_effect": {
+      "type": "string"
+    },
+    "issue": {
+      "type": "string"
+    },
+    "options": {
+      "type": "string"
+    },
+    "recommended_option": {
+      "type": "string"
+    },
+    "relevant_evidence": {
+      "type": "string"
+    },
+    "unresolved_risks": {
+      "type": "string"
+    },
+    "why_founder_authority_is_required": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision_id",
+    "issue",
+    "why_founder_authority_is_required",
+    "relevant_evidence",
+    "options",
+    "recommended_option",
+    "consequences_of_each_option",
+    "authority_granted_by_approval",
+    "authority_not_granted",
+    "implementation_effect",
+    "activation_effect",
+    "unresolved_risks"
+  ],
+  "title": "FOUNDER_DECISION_PACKET.csv",
+  "type": "object"
+}

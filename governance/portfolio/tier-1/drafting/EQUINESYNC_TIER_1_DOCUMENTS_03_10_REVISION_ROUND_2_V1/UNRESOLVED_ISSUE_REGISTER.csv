@@ -1,0 +1,5 @@
+issue_id,issue,classification,blocking,next_action
+T1R2-UNRES-001,Named owner appointments absent,Founder decision required,NO_FOR_DOCUMENTARY_REVIEW_YES_FOR_ADOPTION,Founder appoints or delegates authority
+T1R2-UNRES-002,Runtime and production behavior not observed,Evidence missing,NO_FOR_DOCUMENTARY_REVIEW_YES_FOR_CERTIFICATION,Execute runtime evidence plan under separate authority
+T1R2-UNRES-003,Merge authority absent,Authority missing,YES_FOR_MERGE,Founder merge directive if desired
+T1R2-UNRES-004,Independent certification absent,Certification incomplete,YES_FOR_CERTIFICATION,Assign independent reviewer where required

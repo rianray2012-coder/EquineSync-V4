@@ -1,0 +1,133 @@
+{
+  "dependency_versions": {
+    "stdlib_only": true
+  },
+  "failures": 0,
+  "mode": "package-only",
+  "package_root": "/tmp/tier1_rr2_standalone.04VWbt/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V1",
+  "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.6 (v3.14.6:c63aec69bd5, Jun 10 2026, 08:07:54) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "results": [
+    {
+      "check": "required_file:README_FIRST.md",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:SHARED_TIER_1_DOCUMENTARY_STANDARD_REVISION_ROUND_2_V1.md",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:PACKAGE_MANIFEST.json",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:CHECKSUMS.sha256",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:03_IMPLEMENTATION_TRACEABILITY/REQUIREMENT_TRACEABILITY_REGISTER.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:04_AUTHORITY_LIFECYCLE_REGISTER/AUTHORITY_LIFECYCLE_STATE_REGISTER.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:04_AUTHORITY_LIFECYCLE_REGISTER/LIFECYCLE_TRANSITION_MATRIX.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:04_AUTHORITY_LIFECYCLE_REGISTER/INVALID_STATE_RULES.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:07_OWNERSHIP_STEWARDSHIP_REVIEW/OWNERSHIP_ACCOUNTABILITY_MATRIX.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:08_SOURCE_RECONCILIATION/SOURCE_AUTHORITY_DISPOSITION_REGISTER.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_INDEX.csv",
+      "detail": "present",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_accuracy",
+      "detail": "files=130",
+      "status": "PASS"
+    },
+    {
+      "check": "evidence_state_separation",
+      "detail": "execution/runtime/production evidence remains separated",
+      "status": "PASS"
+    },
+    {
+      "check": "lifecycle_invalid_combination_rules",
+      "detail": "invalid_rows=0",
+      "status": "PASS"
+    },
+    {
+      "check": "decision_authority_boundary",
+      "detail": "bad_decisions=0",
+      "status": "PASS"
+    },
+    {
+      "check": "waiver_expiration_controls",
+      "detail": "bad_waivers=0",
+      "status": "PASS"
+    },
+    {
+      "check": "ownership_vacancy_handling",
+      "detail": "invented_assignments=0",
+      "status": "PASS"
+    },
+    {
+      "check": "source_disposition_rules",
+      "detail": "sources=2961",
+      "status": "PASS"
+    },
+    {
+      "check": "workstream_completeness",
+      "detail": "prs=9",
+      "status": "PASS"
+    },
+    {
+      "check": "audit_template_completeness",
+      "detail": "templates=19",
+      "status": "PASS"
+    },
+    {
+      "check": "git_metadata",
+      "detail": "package-only validation",
+      "status": "NOT_APPLICABLE_OUTSIDE_GIT"
+    }
+  ],
+  "status": "PASS"
+}

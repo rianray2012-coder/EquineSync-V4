@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "acceptance_evidence": {
+      "type": "string"
+    },
+    "accountable_function": {
+      "type": "string"
+    },
+    "appointment_authority": {
+      "type": "string"
+    },
+    "appointment_evidence": {
+      "type": "string"
+    },
+    "conflict_restrictions": {
+      "type": "string"
+    },
+    "consulted_function": {
+      "type": "string"
+    },
+    "deputy": {
+      "type": "string"
+    },
+    "effective_date": {
+      "type": "string"
+    },
+    "informed_function": {
+      "type": "string"
+    },
+    "overdue_escalation": {
+      "type": "string"
+    },
+    "reassignment_trigger": {
+      "type": "string"
+    },
+    "response_deadline": {
+      "type": "string"
+    },
+    "responsible_function": {
+      "type": "string"
+    },
+    "review_responsibility": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "succession_process": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "role",
+    "accountable_function",
+    "responsible_function",
+    "consulted_function",
+    "informed_function",
+    "appointment_authority",
+    "appointment_evidence",
+    "acceptance_evidence",
+    "effective_date",
+    "deputy",
+    "succession_process",
+    "response_deadline",
+    "overdue_escalation",
+    "conflict_restrictions",
+    "review_responsibility",
+    "reassignment_trigger"
+  ],
+  "title": "07_OWNERSHIP_STEWARDSHIP_REVIEW/OWNERSHIP_ACCOUNTABILITY_MATRIX.csv",
+  "type": "object"
+}

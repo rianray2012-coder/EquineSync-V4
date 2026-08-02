@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "bounded_complete_allowed": {
+      "type": "string"
+    },
+    "evidence_register_linkage_required": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "source_register_linkage_required": {
+      "type": "string"
+    },
+    "template_id": {
+      "type": "string"
+    },
+    "template_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "template_id",
+    "template_name",
+    "path",
+    "bounded_complete_allowed",
+    "source_register_linkage_required",
+    "evidence_register_linkage_required"
+  ],
+  "title": "10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_INDEX.csv",
+  "type": "object"
+}

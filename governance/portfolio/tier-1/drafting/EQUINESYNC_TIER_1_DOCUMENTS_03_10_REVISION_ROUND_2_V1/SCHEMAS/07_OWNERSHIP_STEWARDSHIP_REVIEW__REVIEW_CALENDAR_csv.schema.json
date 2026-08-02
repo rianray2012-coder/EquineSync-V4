@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "completion_criteria": {
+      "type": "string"
+    },
+    "completion_record": {
+      "type": "string"
+    },
+    "escalation_deadline": {
+      "type": "string"
+    },
+    "next_review_date": {
+      "type": "string"
+    },
+    "overdue_state": {
+      "type": "string"
+    },
+    "required_evidence": {
+      "type": "string"
+    },
+    "responsible_owner": {
+      "type": "string"
+    },
+    "review_frequency": {
+      "type": "string"
+    },
+    "review_id": {
+      "type": "string"
+    },
+    "review_type": {
+      "type": "string"
+    },
+    "triggering_events": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "review_id",
+    "review_type",
+    "responsible_owner",
+    "review_frequency",
+    "next_review_date",
+    "triggering_events",
+    "required_evidence",
+    "completion_criteria",
+    "escalation_deadline",
+    "overdue_state",
+    "completion_record"
+  ],
+  "title": "07_OWNERSHIP_STEWARDSHIP_REVIEW/REVIEW_CALENDAR.csv",
+  "type": "object"
+}

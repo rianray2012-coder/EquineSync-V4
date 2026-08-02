@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "coverage_metrics": {
+      "type": "string"
+    },
+    "evidence_state_order": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "coverage_metrics",
+    "evidence_state_order"
+  ],
+  "title": "03_IMPLEMENTATION_TRACEABILITY/TRACEABILITY_MODEL.json",
+  "type": "object"
+}

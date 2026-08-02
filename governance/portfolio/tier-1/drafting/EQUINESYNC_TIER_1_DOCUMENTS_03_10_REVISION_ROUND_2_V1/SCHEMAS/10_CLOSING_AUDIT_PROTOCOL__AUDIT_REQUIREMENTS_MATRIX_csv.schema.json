@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "required_evidence": {
+      "type": "string"
+    },
+    "requirement_id": {
+      "type": "string"
+    },
+    "template_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "requirement_id",
+    "template_name",
+    "required_evidence"
+  ],
+  "title": "10_CLOSING_AUDIT_PROTOCOL/AUDIT_REQUIREMENTS_MATRIX.csv",
+  "type": "object"
+}
