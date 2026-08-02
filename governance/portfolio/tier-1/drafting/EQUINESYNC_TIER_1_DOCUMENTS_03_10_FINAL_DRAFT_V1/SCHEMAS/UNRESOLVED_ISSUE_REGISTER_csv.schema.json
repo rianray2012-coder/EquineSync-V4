@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "blocking": {
+      "type": "string"
+    },
+    "classification": {
+      "type": "string"
+    },
+    "issue": {
+      "type": "string"
+    },
+    "issue_id": {
+      "type": "string"
+    },
+    "next_action": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "issue_id",
+    "issue",
+    "classification",
+    "blocking",
+    "next_action"
+  ],
+  "title": "UNRESOLVED_ISSUE_REGISTER.csv",
+  "type": "object"
+}

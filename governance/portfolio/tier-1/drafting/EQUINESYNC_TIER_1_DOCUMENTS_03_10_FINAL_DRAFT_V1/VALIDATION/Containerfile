@@ -1,0 +1,11 @@
+# Reproduction environment for the Tier 1 package validator.
+# Pinned by digest so the image cannot change under the same tag.
+# Build:  podman build -t equinesync-t1-validate -f VALIDATION/Containerfile .
+# Run:    podman run --rm -v "$PWD":/pkg:ro,Z equinesync-t1-validate
+FROM docker.io/library/python:3.12-slim@sha256:PIN_NOT_RECORDED_SEE_REPRODUCIBILITY_MD
+
+WORKDIR /pkg
+ENV PYTHONHASHSEED=0
+ENV SOURCE_DATE_EPOCH=0
+ENTRYPOINT ["python3", "VALIDATION/validate_tier1_documents_03_10_rr2.py", \
+            "--package-root", "/pkg", "--mode", "package-only"]

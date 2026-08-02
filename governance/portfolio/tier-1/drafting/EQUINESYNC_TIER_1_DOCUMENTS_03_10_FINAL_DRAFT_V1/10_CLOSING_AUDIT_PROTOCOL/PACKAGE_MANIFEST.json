@@ -1,0 +1,30 @@
+{
+  "directory": "10_CLOSING_AUDIT_PROTOCOL",
+  "files": [
+    {
+      "path": "AUDIT_MODEL.json",
+      "sha256": "6a0bd4800f5d488987b47dd832236a0d7aefca1d46e6b4d6321674efa52268a3",
+      "byte_length": 6798
+    },
+    {
+      "path": "AUDIT_REQUIREMENTS_MATRIX.csv",
+      "sha256": "e956c9531e3d3108dfbdbacbe56811d133ef54c8705faee41e6dfece7162b082",
+      "byte_length": 5300
+    },
+    {
+      "path": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1.md",
+      "sha256": "87a2e85eaae0a0e15193db9b753aa00ff14456d13bd1591d7dd7a737c016d566",
+      "byte_length": 7727
+    },
+    {
+      "path": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "5bcd62b82e5763f0750938bf3c5b18dfbbf6adf1093f2a991fa40c1f370c4855",
+      "byte_length": 1970
+    },
+    {
+      "path": "TEMPLATE_INDEX.csv",
+      "sha256": "dcb2d88ad48fa40638d1f4c1153c67a0587ae02fe887db21c257278cc10f6597",
+      "byte_length": 6928
+    }
+  ]
+}

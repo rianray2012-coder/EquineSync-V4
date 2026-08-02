@@ -1,0 +1,25 @@
+{
+  "directory": "00_PROGRAM_CONTROL",
+  "files": [
+    {
+      "path": "REPOSITORY_STATE_RECONCILIATION_RECORD.md",
+      "sha256": "262f4fccf1304e9cb4188a478edbc6db9f0685843667c27a089779137e7003fa",
+      "byte_length": 866
+    },
+    {
+      "path": "ROUND_2_PACKAGE_ZIP_RECORD.json",
+      "sha256": "aeea7584429e602f0bebb94092c6358327e4c9ad8294e6166d1319b01838f1f6",
+      "byte_length": 350
+    },
+    {
+      "path": "ROUND_3_INTEGRITY_ROOT.json",
+      "sha256": "da88b0a1d652b05967ab82ffef65d3166f01ab3cca34c0162c92fca88b27d7a1",
+      "byte_length": 768
+    },
+    {
+      "path": "SOURCE_AUTHENTICATION_AND_REPOSITORY_RECONCILIATION.json",
+      "sha256": "aa0894b08ed683ab511edca8dd80982080c86eb671ebd64845e2a6ce5502a937",
+      "byte_length": 3146803
+    }
+  ]
+}

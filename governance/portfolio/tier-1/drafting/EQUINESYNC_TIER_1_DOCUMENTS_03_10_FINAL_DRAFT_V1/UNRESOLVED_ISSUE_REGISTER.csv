@@ -1,0 +1,4 @@
+issue_id,issue,status,closure_criteria
+T1FD-UNRES-001,Founder decisions FD-T1R2-001 through FD-T1R2-005 remain unanswered.,FOUNDER_DECISION_REQUIRED,Authenticated Founder instruction supplied.
+T1FD-UNRES-002,External attestation/signature of package integrity root is not supplied.,DEFERRED_WITH_RECORDED_BASIS,External attestation or signature supplied.
+T1FD-UNRES-003,Protected branch does not contain this final-draft package.,DRAFT_PR_REQUIRED,Separate authorized PR disposition.

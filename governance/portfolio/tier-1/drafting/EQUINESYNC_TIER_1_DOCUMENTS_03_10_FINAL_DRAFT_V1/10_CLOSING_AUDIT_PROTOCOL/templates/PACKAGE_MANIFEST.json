@@ -1,0 +1,100 @@
+{
+  "directory": "10_CLOSING_AUDIT_PROTOCOL/templates",
+  "files": [
+    {
+      "path": "01_INTERNAL_DOCUMENTARY_REVIEW_PLAN.md",
+      "sha256": "8523a3015edc26533afce6f49fe1daa3668cd27ca97a8aee96f662163f849e32",
+      "byte_length": 2151
+    },
+    {
+      "path": "02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
+      "sha256": "3584b15f93d88d36d7bf72139d982ab78a39072c3b6a99cb218452ce8f6025d9",
+      "byte_length": 1901
+    },
+    {
+      "path": "03_SOURCE_MANIFEST.md",
+      "sha256": "8bad2566bb4319957b7140332a4086d62c73b1c288238b5744cd1df453bdb227",
+      "byte_length": 1810
+    },
+    {
+      "path": "04_EVIDENCE_INDEX.md",
+      "sha256": "ac3c0d56b8a036e5179b97c81ad52fd9d40d7893c03a08ed6b4f8efd8aeb9401",
+      "byte_length": 1846
+    },
+    {
+      "path": "05_SAMPLING_RECORD.md",
+      "sha256": "6f8f9e87cb036a4a6141662d7207a0710a129afaa792e94b08678cc4830c0615",
+      "byte_length": 1842
+    },
+    {
+      "path": "06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
+      "sha256": "42d171ff30c11fe086b691023d269fd29461928f50d2bc47f8f6316a40038f1e",
+      "byte_length": 1940
+    },
+    {
+      "path": "07_CONFLICT_DISCLOSURE.md",
+      "sha256": "f68aafd769ba3c7dbb55b607a5bbbbf73b8041f3dbeeedfc1d370d8aa01b7ac7",
+      "byte_length": 1866
+    },
+    {
+      "path": "08_FINDING_SCHEDULE.md",
+      "sha256": "8fc505b9cfc78a745c617da96fd08416096879cd1f115687919f624a2bf41aa7",
+      "byte_length": 1860
+    },
+    {
+      "path": "09_RESIDUAL_RISK_SCHEDULE.md",
+      "sha256": "d9c692eb504ac21c0a5d30b485a9e4fdd19a677b6334f75531fccd121a432810",
+      "byte_length": 1845
+    },
+    {
+      "path": "10_FOUNDER_ATTESTATION_SCHEDULE.md",
+      "sha256": "d3d983276e3908635aae0aaf42d1a4e7aa5295fe02f5282983fa0a2011471211",
+      "byte_length": 1890
+    },
+    {
+      "path": "11_CLOSING_EXHIBITS_INDEX.md",
+      "sha256": "fd002d7fa32aa48c801d4b75cf5c4060fd7a571c38d44c7e5b9d2ce0fb2ded5e",
+      "byte_length": 1787
+    },
+    {
+      "path": "12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md",
+      "sha256": "f1ae112f95c0d44c0925ed02a378bee0cdb2b46f4e4fbae817c2546fa0ce443d",
+      "byte_length": 1948
+    },
+    {
+      "path": "13_ADOPTION_RECORD.md",
+      "sha256": "a38efc2869ea6942b38ba1ff3a545be3734c2cf4129feecd8c2643e5e2581edf",
+      "byte_length": 1856
+    },
+    {
+      "path": "14_ACCESSION_OR_REPOSITORY_CUSTODY_RECEIPT.md",
+      "sha256": "d887c294e56c5fdd9abea18001c58965a2c09c7abed5f925684407ccb76199fb",
+      "byte_length": 1831
+    },
+    {
+      "path": "15_POST_MERGE_CUSTODY_RECEIPT.md",
+      "sha256": "546e0c84953d2c869990e9e90dbe29f251028d4a0ae4781a63306c189b8a68ad",
+      "byte_length": 1832
+    },
+    {
+      "path": "16_FINAL_DOCUMENTARY_CLOSING_RECORD.md",
+      "sha256": "1030b83495d27d60f2181481f23f5fa131093488c9e53a3b30887a173c51807d",
+      "byte_length": 1910
+    },
+    {
+      "path": "17_BOUNDED_SCOPE_SELF_DECLARATION_RECORD.md",
+      "sha256": "71c81e8c9e598459f773446cb8cfb07520779e5fce5f9a417d6299f4b2fa5b4a",
+      "byte_length": 1887
+    },
+    {
+      "path": "18_REOPENING_NOTICE.md",
+      "sha256": "cce5745b7e58c6ce70fbd5ff40eae898c19af975080470d9af0ec1405b1a451d",
+      "byte_length": 1735
+    },
+    {
+      "path": "19_PERIODIC_REVIEW_OR_REFRESH_RECORD.md",
+      "sha256": "563e12aaf3973b855ab7fad2f41596f915ada5a9e4845e01bb52216f2d3dc922",
+      "byte_length": 1861
+    }
+  ]
+}
