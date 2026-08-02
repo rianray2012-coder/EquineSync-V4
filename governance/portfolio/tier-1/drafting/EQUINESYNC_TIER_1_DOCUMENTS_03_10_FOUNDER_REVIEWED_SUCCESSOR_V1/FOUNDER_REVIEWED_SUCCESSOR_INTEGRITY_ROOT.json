@@ -1,0 +1,11 @@
+{
+  "record_type": "FOUNDER_REVIEWED_SUCCESSOR_INTEGRITY_ROOT",
+  "authority_boundary": "NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED",
+  "founder_decision_source_sha256": "0d2d79dc99a4f76b97c72ce38ee7ecee5d4e7a8bc45183db0b5770a5bcc61825",
+  "founder_decision_source_byte_length": 13971,
+  "applicable_review_head": "1a3c65c992b1a2f23d205a9d5dcd878ad37cd146",
+  "package_manifest_sha256": "a739f2f3fa01535b0d31607e97449cc83485f8ce7aea9395bd785a7456dfe7ab",
+  "checksums_sha256": "dd4dec42b5bafd4254a2d5186277cea64f170eea65ec9b317443956450b814bd",
+  "manifest_of_manifests_sha256": "2cc97cf9b27473a7e376416a0d3833c51c875a637160891f2a4204bc6414e58a",
+  "files_covered": 183
+}

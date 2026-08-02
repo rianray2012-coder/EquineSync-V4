@@ -1,0 +1,40 @@
+{
+  "directory": "VALIDATION_RESULTS",
+  "files": [
+    {
+      "path": "FINAL_DRAFT_PACKAGE_ONLY_VALIDATION_REPORT.json",
+      "sha256": "062decc6c453f625c143327ee7dd78385df428e1bedbd3a03476654f3f194155",
+      "byte_length": 15091
+    },
+    {
+      "path": "FINAL_DRAFT_REPOSITORY_AWARE_VALIDATION_REPORT.json",
+      "sha256": "ab13ec2d319cbabfc68a71ea12003d11883fa3ca2b539489aacfb5c1847fdaac",
+      "byte_length": 15133
+    },
+    {
+      "path": "FINAL_DRAFT_VALIDATION_REPORT.json",
+      "sha256": "f02baccc3bf5cb498e3f14646e12f90be594d37915ac6d06067f571b299ce560",
+      "byte_length": 803
+    },
+    {
+      "path": "FINAL_DRAFT_VALIDATION_REPORT.md",
+      "sha256": "772d82fe6298300e27579012dc25960e47a3cf9415cecea63dbc5f9fb7707fba",
+      "byte_length": 458
+    },
+    {
+      "path": "FOUNDER_REVIEWED_PACKAGE_ONLY_VALIDATION_REPORT.json",
+      "sha256": "c0e6f239772ba81fa0a184ae9648e0bf3b5d4bdea0e57796e80a771917212ffb",
+      "byte_length": 4603
+    },
+    {
+      "path": "FOUNDER_REVIEWED_REPOSITORY_AWARE_VALIDATION_REPORT.json",
+      "sha256": "d0bbf033e524684d02e2a4241014a800e17f9136ad231a08d976f3bf9ed49539",
+      "byte_length": 4607
+    },
+    {
+      "path": "VALIDATION_REPRODUCTION_RECORD.json",
+      "sha256": "8665a1e400332b60d2ebe4cdc45dba150e574ebdc53ae64ff5b36312eabd2ac0",
+      "byte_length": 4273
+    }
+  ]
+}

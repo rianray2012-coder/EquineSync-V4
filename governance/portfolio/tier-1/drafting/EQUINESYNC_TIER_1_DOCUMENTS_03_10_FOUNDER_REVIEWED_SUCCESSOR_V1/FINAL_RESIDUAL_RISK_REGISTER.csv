@@ -1,0 +1,3 @@
+risk_id,risk,treatment,founder_action_required
+T1FD-RISK-001,Founder decision instruments could be mistaken for approval if authority boundary is hidden.,"Boundary repeated in reports, templates, validator, and PR body.",YES
+T1FD-RISK-002,First-party validation is not third-party certification.,Terminology converted to first-party documentary language.,NO

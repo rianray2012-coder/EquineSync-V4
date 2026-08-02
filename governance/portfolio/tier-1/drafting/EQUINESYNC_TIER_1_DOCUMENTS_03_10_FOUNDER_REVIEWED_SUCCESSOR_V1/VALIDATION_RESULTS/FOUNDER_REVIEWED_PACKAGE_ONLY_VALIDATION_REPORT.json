@@ -1,0 +1,131 @@
+{
+  "mode": "package-only",
+  "checks_executed": 20,
+  "checks_capable_of_failure": 20,
+  "checks_passed": 20,
+  "checks_failed": 0,
+  "negative_test_failures": [],
+  "results": [
+    {
+      "name": "founder_decision_source_authenticates",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "sha=0d2d79dc99a4f76b97c72ce38ee7ecee5d4e7a8bc45183db0b5770a5bcc61825 bytes=13971"
+    },
+    {
+      "name": "all_five_decisions_recorded",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "ids=['FD-T1R2-001', 'FD-T1R2-002', 'FD-T1R2-003', 'FD-T1R2-004', 'FD-T1R2-005']"
+    },
+    {
+      "name": "FD-T1R2-001_final_disposition_matches_source",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "FD-T1R2-001_APPROVED_WITH_DOCUMENTARY_SCOPE_ONLY"
+    },
+    {
+      "name": "FD-T1R2-001_non_authority_preserved",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "merge/activation/implementation withheld"
+    },
+    {
+      "name": "FD-T1R2-002_final_disposition_matches_source",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "FD-T1R2-002_ACCOUNTABILITY_STRUCTURE_APPROVED_NAMED_APPOINTMENTS_RETAINED_FOR_SEPARATE_FOUNDER_ACTION"
+    },
+    {
+      "name": "FD-T1R2-002_non_authority_preserved",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "merge/activation/implementation withheld"
+    },
+    {
+      "name": "FD-T1R2-003_final_disposition_matches_source",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "FD-T1R2-003_SOURCE_CONTROL_HIERARCHY_APPROVED_WITH_EVIDENCE_AND_NONINFERENCE_CONTROLS"
+    },
+    {
+      "name": "FD-T1R2-003_non_authority_preserved",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "merge/activation/implementation withheld"
+    },
+    {
+      "name": "FD-T1R2-004_final_disposition_matches_source",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "FD-T1R2-004_RISK_AND_FINDING_DISPOSITION_FRAMEWORK_APPROVED_NO_BULK_RISK_ACCEPTANCE"
+    },
+    {
+      "name": "FD-T1R2-004_non_authority_preserved",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "merge/activation/implementation withheld"
+    },
+    {
+      "name": "FD-T1R2-005_final_disposition_matches_source",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "FD-T1R2-005_FUTURE_SEQUENCE_APPROVED_MERGE_AND_ADOPTION_REMAIN_SEPARATELY_AUTHORIZED_ACTIONS"
+    },
+    {
+      "name": "FD-T1R2-005_non_authority_preserved",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "merge/activation/implementation withheld"
+    },
+    {
+      "name": "appointment_schedule_covers_14_roles",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "rows=14"
+    },
+    {
+      "name": "no_named_appointments_inferred",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "all roles remain Founder action required"
+    },
+    {
+      "name": "item_specific_disposition_queue_prepared_not_executed",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "rows=28"
+    },
+    {
+      "name": "no_bulk_risk_acceptance",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "bulk acceptance withheld"
+    },
+    {
+      "name": "residual_risks_not_accepted_by_package",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "rows=2"
+    },
+    {
+      "name": "future_sequence_records_merge_not_authorized",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "rows=10"
+    },
+    {
+      "name": "continuing_authority_limitations_visible",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority states present"
+    },
+    {
+      "name": "manifest_covers_successor_files",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    }
+  ],
+  "overall": "CHECK_EXECUTED_NO_FAILURE_DETECTED"
+}

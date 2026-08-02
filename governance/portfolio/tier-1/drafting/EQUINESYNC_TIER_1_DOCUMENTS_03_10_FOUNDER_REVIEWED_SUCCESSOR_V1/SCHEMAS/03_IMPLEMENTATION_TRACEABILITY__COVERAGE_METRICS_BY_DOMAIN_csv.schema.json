@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "coverage_percentage_for_executed_tests": {
+      "type": "string"
+    },
+    "coverage_percentage_for_implementation_candidates": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "implementation_candidates_identified": {
+      "type": "string"
+    },
+    "implementations_verified": {
+      "type": "string"
+    },
+    "mapped_requirements": {
+      "type": "string"
+    },
+    "negative_tests_present": {
+      "type": "string"
+    },
+    "requirements_with_no_owner": {
+      "type": "string"
+    },
+    "requirements_with_open_gaps": {
+      "type": "string"
+    },
+    "runtime_evidence_present": {
+      "type": "string"
+    },
+    "tests_executed": {
+      "type": "string"
+    },
+    "tests_located": {
+      "type": "string"
+    },
+    "tests_passed": {
+      "type": "string"
+    },
+    "tests_specified": {
+      "type": "string"
+    },
+    "total_canonical_requirements": {
+      "type": "string"
+    },
+    "unavailable_metric_treatment": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "domain",
+    "total_canonical_requirements",
+    "mapped_requirements",
+    "implementation_candidates_identified",
+    "implementations_verified",
+    "tests_specified",
+    "tests_located",
+    "tests_executed",
+    "tests_passed",
+    "negative_tests_present",
+    "runtime_evidence_present",
+    "requirements_with_open_gaps",
+    "requirements_with_no_owner",
+    "coverage_percentage_for_implementation_candidates",
+    "coverage_percentage_for_executed_tests",
+    "unavailable_metric_treatment"
+  ],
+  "title": "03_IMPLEMENTATION_TRACEABILITY/COVERAGE_METRICS_BY_DOMAIN.csv",
+  "type": "object"
+}

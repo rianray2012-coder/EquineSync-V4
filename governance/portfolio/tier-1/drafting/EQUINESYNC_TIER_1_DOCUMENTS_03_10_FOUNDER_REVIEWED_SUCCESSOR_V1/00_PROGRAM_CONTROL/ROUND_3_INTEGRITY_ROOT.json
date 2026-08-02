@@ -1,0 +1,10 @@
+{
+  "attestation_note": "This value is the single root of trust for the package. It is not self-authenticating. External attestation of this value is required before the integrity chain is complete.",
+  "authority_boundary": "NOT_ADOPTED; NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; FOUNDER_REVIEW_REQUIRED; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED",
+  "external_attestation_state": "NOT_ATTESTED",
+  "manifest_files_covered": 34,
+  "manifest_of_manifests_byte_length": 4077,
+  "manifest_of_manifests_path": "MANIFEST_OF_MANIFESTS.sha256",
+  "manifest_of_manifests_sha256": "a995b2dc85165ef10d9208897ec9099941729c3c9dbb8c241ce89bcdfd58a9f5",
+  "record_type": "ROUND_3_INTEGRITY_ROOT"
+}

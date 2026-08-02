@@ -1,0 +1,11 @@
+step,sequenced_action,status,founder_decision_item
+1,Complete Founder documentary review,COMPLETE_FOUNDER_DIRECTION_RECORDED,FD-T1R2-005
+2,Record and validate the five Founder decisions,COMPLETE_IN_THIS_SUCCESSOR_PACKAGE,FD-T1R2-005
+3,Complete any decision-directed corrections,COMPLETE_FOR_DOCUMENTARY_CORRECTIONS_IN_THIS_PACKAGE,FD-T1R2-005
+4,Rerun repository-aware and standalone package validation,COMPLETE_IN_THIS_SUCCESSOR_PACKAGE,FD-T1R2-005
+5,Complete CI and review-thread evaluation,CI_SUCCESS_REVIEW_THREADS_REQUIRE_LIVE_RECHECK_BEFORE_MERGE_CONSIDERATION,FD-T1R2-005
+6,Prepare Founder-approved documentary successor package,COMPLETE_IN_THIS_SUCCESSOR_PACKAGE,FD-T1R2-005
+7,Separately assess documentary adoption readiness,NOT_YET_AUTHORIZED_NEXT_DOCUMENTARY_STEP,FD-T1R2-005
+8,Separately assess merge readiness,NOT_YET_AUTHORIZED_NEXT_DOCUMENTARY_STEP,FD-T1R2-005
+9,Obtain express Founder merge authority before any merge,MERGE_NOT_AUTHORIZED,FD-T1R2-005
+10,Complete post-merge custody verification if merge is later authorized,NOT_APPLICABLE_NO_MERGE_AUTHORITY,FD-T1R2-005

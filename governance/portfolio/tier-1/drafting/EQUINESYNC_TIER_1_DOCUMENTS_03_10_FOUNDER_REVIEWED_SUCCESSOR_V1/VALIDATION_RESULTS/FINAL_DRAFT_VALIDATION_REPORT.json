@@ -1,0 +1,21 @@
+{
+  "overall": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+  "package_only": {
+    "checks_executed": 69,
+    "checks_capable_of_failure": 69,
+    "checks_passed": 69,
+    "checks_failed": 0,
+    "negative_test_failures": [],
+    "overall": "CHECK_EXECUTED_NO_FAILURE_DETECTED"
+  },
+  "repository_aware": {
+    "expected_head": "1eb384d80daa700ba2e71ee42872cc9bba926332",
+    "checks_executed": 69,
+    "checks_capable_of_failure": 69,
+    "checks_passed": 69,
+    "checks_failed": 0,
+    "negative_test_failures": [],
+    "overall": "CHECK_EXECUTED_NO_FAILURE_DETECTED"
+  },
+  "authority_boundary": "NOT_ADOPTED; NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; FOUNDER_REVIEW_REQUIRED; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED"
+}

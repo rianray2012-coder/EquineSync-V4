@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "accountable_authority": {
+      "type": "string"
+    },
+    "affected_actors": {
+      "type": "string"
+    },
+    "affected_product_surface": {
+      "type": "string"
+    },
+    "affected_requirement_or_control": {
+      "type": "string"
+    },
+    "affected_users_systems_or_data": {
+      "type": "string"
+    },
+    "age": {
+      "type": "string"
+    },
+    "approving_authority": {
+      "type": "string"
+    },
+    "automatic_reopening_upon_expiration": {
+      "type": "string"
+    },
+    "business_justification": {
+      "type": "string"
+    },
+    "closure_authority": {
+      "type": "string"
+    },
+    "closure_evidence": {
+      "type": "string"
+    },
+    "compensating_controls": {
+      "type": "string"
+    },
+    "creation_date": {
+      "type": "string"
+    },
+    "current_status": {
+      "type": "string"
+    },
+    "due_date": {
+      "type": "string"
+    },
+    "effective_date": {
+      "type": "string"
+    },
+    "expiration_date": {
+      "type": "string"
+    },
+    "exploitability_where_relevant": {
+      "type": "string"
+    },
+    "financial_relevance": {
+      "type": "string"
+    },
+    "health_or_welfare_relevance": {
+      "type": "string"
+    },
+    "impact": {
+      "type": "string"
+    },
+    "independent_validator": {
+      "type": "string"
+    },
+    "likelihood": {
+      "type": "string"
+    },
+    "mitigation": {
+      "type": "string"
+    },
+    "monitoring_requirement": {
+      "type": "string"
+    },
+    "originating_source": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "privacy_relevance": {
+      "type": "string"
+    },
+    "record_classification": {
+      "type": "string"
+    },
+    "record_id": {
+      "type": "string"
+    },
+    "renewal_evidence": {
+      "type": "string"
+    },
+    "renewal_limit": {
+      "type": "string"
+    },
+    "reopening_trigger": {
+      "type": "string"
+    },
+    "safeguarding_relevance": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string"
+    },
+    "severity_rationale": {
+      "type": "string"
+    },
+    "silent_permanent_continuation_prohibited": {
+      "type": "string"
+    },
+    "user_harm_analysis_where_relevant": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "accountable_authority",
+    "affected_actors",
+    "affected_product_surface",
+    "affected_requirement_or_control",
+    "affected_users_systems_or_data",
+    "age",
+    "approving_authority",
+    "automatic_reopening_upon_expiration",
+    "business_justification",
+    "closure_authority",
+    "closure_evidence",
+    "compensating_controls",
+    "creation_date",
+    "current_status",
+    "due_date",
+    "effective_date",
+    "expiration_date",
+    "exploitability_where_relevant",
+    "financial_relevance",
+    "health_or_welfare_relevance",
+    "impact",
+    "independent_validator",
+    "likelihood",
+    "mitigation",
+    "monitoring_requirement",
+    "originating_source",
+    "owner",
+    "privacy_relevance",
+    "record_classification",
+    "record_id",
+    "renewal_evidence",
+    "renewal_limit",
+    "reopening_trigger",
+    "safeguarding_relevance",
+    "severity",
+    "severity_rationale",
+    "silent_permanent_continuation_prohibited",
+    "user_harm_analysis_where_relevant"
+  ],
+  "title": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.json",
+  "type": "object"
+}

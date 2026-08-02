@@ -1,0 +1,426 @@
+{
+  "mode": "package-only",
+  "expected_head": null,
+  "checks_executed": 69,
+  "checks_capable_of_failure": 69,
+  "checks_passed": 69,
+  "checks_failed": 0,
+  "negative_test_failures": [],
+  "results": [
+    {
+      "name": "document_10_all_19_templates_exist",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "count=19"
+    },
+    {
+      "name": "document_10_required_sections_01_INTERNAL_DOCUMENTARY_REVIEW_PLAN.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_01_INTERNAL_DOCUMENTARY_REVIEW_PLAN.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_03_SOURCE_MANIFEST.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_03_SOURCE_MANIFEST.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_04_EVIDENCE_INDEX.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_04_EVIDENCE_INDEX.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_05_SAMPLING_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_05_SAMPLING_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_07_CONFLICT_DISCLOSURE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_07_CONFLICT_DISCLOSURE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_08_FINDING_SCHEDULE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_08_FINDING_SCHEDULE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_09_RESIDUAL_RISK_SCHEDULE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_09_RESIDUAL_RISK_SCHEDULE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_10_FOUNDER_ATTESTATION_SCHEDULE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_10_FOUNDER_ATTESTATION_SCHEDULE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_11_CLOSING_EXHIBITS_INDEX.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_11_CLOSING_EXHIBITS_INDEX.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_13_ADOPTION_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_13_ADOPTION_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_14_ACCESSION_OR_REPOSITORY_CUSTODY_RECEIPT.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_14_ACCESSION_OR_REPOSITORY_CUSTODY_RECEIPT.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_15_POST_MERGE_CUSTODY_RECEIPT.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_15_POST_MERGE_CUSTODY_RECEIPT.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_16_FINAL_DOCUMENTARY_CLOSING_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_16_FINAL_DOCUMENTARY_CLOSING_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_17_BOUNDED_SCOPE_SELF_DECLARATION_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_17_BOUNDED_SCOPE_SELF_DECLARATION_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_18_REOPENING_NOTICE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_18_REOPENING_NOTICE.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_required_sections_19_PERIODIC_REVIEW_OR_REFRESH_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    },
+    {
+      "name": "document_10_authority_boundary_19_PERIODIC_REVIEW_OR_REFRESH_RECORD.md",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "authority boundary present"
+    },
+    {
+      "name": "document_10_templates_not_functionally_identical",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "closest=(0.7405133928571429, '10_FOUNDER_ATTESTATION_SCHEDULE.md', '12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md')"
+    },
+    {
+      "name": "document_04_exact_13_state_membership",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "states=['DRAFT_UNMERGED', 'FOUNDER_REVIEW_READY', 'ADOPTED', 'ACCESSIONED', 'LOCKED', 'ACTIVE', 'SUSPENDED', 'SUPERSEDED', 'HISTORICAL_RETAINED', 'WITHDRAWN', 'BLOCKED_EVIDENCE_REQUIRED', 'REMEDIATION_REQUIRED', 'REJECTED']"
+    },
+    {
+      "name": "document_04_complete_transition_coverage",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "rows=169"
+    },
+    {
+      "name": "document_04_remediation_path",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "FOUNDER_REVIEW_READY -> REMEDIATION_REQUIRED"
+    },
+    {
+      "name": "document_04_rejection_path",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "FOUNDER_REVIEW_READY -> REJECTED"
+    },
+    {
+      "name": "document_05_all_five_decisions_present",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "packet=5 register=5"
+    },
+    {
+      "name": "document_05_exact_question_identity_FD-T1R2-001",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "packet/register exact text match"
+    },
+    {
+      "name": "document_05_no_implied_approval_FD-T1R2-001",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "no decision recorded"
+    },
+    {
+      "name": "document_05_authority_boundary_FD-T1R2-001",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "non-authorities present"
+    },
+    {
+      "name": "document_05_exact_question_identity_FD-T1R2-002",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "packet/register exact text match"
+    },
+    {
+      "name": "document_05_no_implied_approval_FD-T1R2-002",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "no decision recorded"
+    },
+    {
+      "name": "document_05_authority_boundary_FD-T1R2-002",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "non-authorities present"
+    },
+    {
+      "name": "document_05_exact_question_identity_FD-T1R2-003",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "packet/register exact text match"
+    },
+    {
+      "name": "document_05_no_implied_approval_FD-T1R2-003",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "no decision recorded"
+    },
+    {
+      "name": "document_05_authority_boundary_FD-T1R2-003",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "non-authorities present"
+    },
+    {
+      "name": "document_05_exact_question_identity_FD-T1R2-004",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "packet/register exact text match"
+    },
+    {
+      "name": "document_05_no_implied_approval_FD-T1R2-004",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "no decision recorded"
+    },
+    {
+      "name": "document_05_authority_boundary_FD-T1R2-004",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "non-authorities present"
+    },
+    {
+      "name": "document_05_exact_question_identity_FD-T1R2-005",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "packet/register exact text match"
+    },
+    {
+      "name": "document_05_no_implied_approval_FD-T1R2-005",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "no decision recorded"
+    },
+    {
+      "name": "document_05_authority_boundary_FD-T1R2-005",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "non-authorities present"
+    },
+    {
+      "name": "document_03_candidate_verified_separation",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "fields=['requirement_id', 'requirement_text', 'controlling_source', 'source_path', 'source_locator', 'source_version', 'source_version_declaration_state', 'authority_state', 'requirement_type', 'original_requirement_type_claim']"
+    },
+    {
+      "name": "document_03_no_unverified_normative_requirement",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "bad_count=0"
+    },
+    {
+      "name": "document_06_real_finding_rows_present",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "rows=28"
+    },
+    {
+      "name": "document_06_valid_disposition_enums",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "allowed disposition enum"
+    },
+    {
+      "name": "document_07_no_invented_appointments",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "invented_count=0"
+    },
+    {
+      "name": "document_08_duplicate_cluster_fk_integrity",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "blank=0 invalid=0"
+    },
+    {
+      "name": "document_09_pr_review_thread_state_available",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "rows=9"
+    },
+    {
+      "name": "package_authority_boundary_visible",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "executive summary boundary"
+    },
+    {
+      "name": "manifest_covers_package_files",
+      "failure_capable": true,
+      "result": "CHECK_EXECUTED_NO_FAILURE_DETECTED",
+      "details": "missing=[]"
+    }
+  ],
+  "overall": "CHECK_EXECUTED_NO_FAILURE_DETECTED"
+}

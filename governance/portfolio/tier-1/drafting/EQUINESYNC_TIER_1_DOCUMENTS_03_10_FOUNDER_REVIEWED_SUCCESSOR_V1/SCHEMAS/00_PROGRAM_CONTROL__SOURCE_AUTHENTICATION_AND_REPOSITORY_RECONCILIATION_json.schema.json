@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "branch_point": {
+      "type": "string"
+    },
+    "directive_bytes": {
+      "type": "string"
+    },
+    "directive_sha256": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "initial_head": {
+      "type": "string"
+    },
+    "outer_source_zip_bytes": {
+      "type": "string"
+    },
+    "outer_source_zip_sha256": {
+      "type": "string"
+    },
+    "protected_branch": {
+      "type": "string"
+    },
+    "protected_head": {
+      "type": "string"
+    },
+    "prs": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "requirements": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "string"
+    },
+    "v1_zip_bytes": {
+      "type": "string"
+    },
+    "v1_zip_sha256": {
+      "type": "string"
+    },
+    "work_branch": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "branch_point",
+    "directive_bytes",
+    "directive_sha256",
+    "generated_at",
+    "initial_head",
+    "outer_source_zip_bytes",
+    "outer_source_zip_sha256",
+    "protected_branch",
+    "protected_head",
+    "prs",
+    "repository",
+    "requirements",
+    "sources",
+    "v1_zip_bytes",
+    "v1_zip_sha256",
+    "work_branch"
+  ],
+  "title": "00_PROGRAM_CONTROL/SOURCE_AUTHENTICATION_AND_REPOSITORY_RECONCILIATION.json",
+  "type": "object"
+}

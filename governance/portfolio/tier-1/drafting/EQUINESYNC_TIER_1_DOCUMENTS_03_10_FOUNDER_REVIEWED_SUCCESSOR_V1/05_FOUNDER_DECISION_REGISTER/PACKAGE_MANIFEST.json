@@ -1,0 +1,25 @@
+{
+  "directory": "05_FOUNDER_DECISION_REGISTER",
+  "files": [
+    {
+      "path": "EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "sha256": "99d72bc3f6784721e1778e8a8dc19a2335cbc7b14bcce2f29231190b982173c9",
+      "byte_length": 4225
+    },
+    {
+      "path": "EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "c2120a15bf6e477b89543c2bf1358548e4dad53493b19cdc828ed5cb9b5f643b",
+      "byte_length": 1949
+    },
+    {
+      "path": "FOUNDER_DECISION_DISPOSITION_REGISTER.csv",
+      "sha256": "1a50979e01be97651611446a4f80f8cd6a88f36e5e610bc1f12f40f26f6c35b7",
+      "byte_length": 3326
+    },
+    {
+      "path": "FOUNDER_DECISION_DISPOSITION_REGISTER.json",
+      "sha256": "77ccd70b6251e973e5907184e16fbf675199d06b0abc441be15448b0e9324870",
+      "byte_length": 4623
+    }
+  ]
+}

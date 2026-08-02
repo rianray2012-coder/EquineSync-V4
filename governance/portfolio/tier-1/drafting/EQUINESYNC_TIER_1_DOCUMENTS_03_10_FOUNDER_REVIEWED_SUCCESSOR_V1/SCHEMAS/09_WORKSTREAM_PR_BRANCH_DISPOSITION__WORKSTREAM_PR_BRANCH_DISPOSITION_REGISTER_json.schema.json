@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "base_branch": {
+      "type": "string"
+    },
+    "base_drift": {
+      "type": "string"
+    },
+    "base_sha": {
+      "type": "string"
+    },
+    "changed_paths": {
+      "type": "string"
+    },
+    "ci_result": {
+      "type": "string"
+    },
+    "custody_requirement": {
+      "type": "string"
+    },
+    "deadline": {
+      "type": "string"
+    },
+    "dependency_state": {
+      "type": "string"
+    },
+    "draft_state": {
+      "type": "string"
+    },
+    "exact_next_action": {
+      "type": "string"
+    },
+    "founder_decision_required": {
+      "type": "string"
+    },
+    "governance_classification": {
+      "type": "string"
+    },
+    "head_branch": {
+      "type": "string"
+    },
+    "head_sha": {
+      "type": "string"
+    },
+    "implementation_effect": {
+      "type": "string"
+    },
+    "lifecycle_effect": {
+      "type": "string"
+    },
+    "merge_authority_state": {
+      "type": "string"
+    },
+    "merge_state": {
+      "type": "string"
+    },
+    "mergeability": {
+      "type": "string"
+    },
+    "overlap_with_other_prs": {
+      "type": "string"
+    },
+    "pr_number": {
+      "type": "string"
+    },
+    "recommended_disposition": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "responsible_owner": {
+      "type": "string"
+    },
+    "review_thread_state": {
+      "type": "string"
+    },
+    "schema_effect": {
+      "type": "string"
+    },
+    "supersession_risk": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "base_branch",
+    "base_drift",
+    "base_sha",
+    "changed_paths",
+    "ci_result",
+    "custody_requirement",
+    "deadline",
+    "dependency_state",
+    "draft_state",
+    "exact_next_action",
+    "founder_decision_required",
+    "governance_classification",
+    "head_branch",
+    "head_sha",
+    "implementation_effect",
+    "lifecycle_effect",
+    "merge_authority_state",
+    "merge_state",
+    "mergeability",
+    "overlap_with_other_prs",
+    "pr_number",
+    "recommended_disposition",
+    "repository",
+    "responsible_owner",
+    "review_thread_state",
+    "schema_effect",
+    "supersession_risk",
+    "title",
+    "url"
+  ],
+  "title": "09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.json",
+  "type": "object"
+}
