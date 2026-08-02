@@ -16,14 +16,24 @@
       "sha256": "8136004d77a270495c716cdb8162e504a6023e72be83208fc05f6c751294e25d"
     },
     {
-      "byte_length": 27732,
+      "byte_length": 28290,
       "path": "WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
-      "sha256": "1b5fd75e699f7a17dff451e22f20cff8402d26291af870ad4c1d67be98369075"
+      "sha256": "83fd241d182401917f8165a5b4332cb319bbff771fe6ffa6f1426b0d612972fc"
     },
     {
-      "byte_length": 33911,
+      "byte_length": 34719,
       "path": "WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.json",
-      "sha256": "d58852f7164a040a273806a408a2abc0255a611fe1a530856c6d426f36b83069"
+      "sha256": "5e7bd6d486238a790858d59363ba57a2fc1831bbe8ac2b65d6dee492cf80ec47"
+    },
+    {
+      "byte_length": 359,
+      "path": "tests/test_document_09_rr2_validator.py",
+      "sha256": "db3586472622db7c7f1a0f07236e6982f83ad4ce18a696f4ed21a5b0ff0a1c68"
+    },
+    {
+      "byte_length": 344,
+      "path": "validators/validate_document_09_rr2.py",
+      "sha256": "34dc37d332ab04327da2fb66b552d69e52bd3cd87212ea815adae3736836a50d"
     }
   ],
   "package_root": "09_WORKSTREAM_PR_BRANCH_DISPOSITION"

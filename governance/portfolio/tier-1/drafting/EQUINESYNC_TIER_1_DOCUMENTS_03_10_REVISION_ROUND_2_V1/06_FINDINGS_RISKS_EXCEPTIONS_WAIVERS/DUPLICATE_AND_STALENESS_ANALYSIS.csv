@@ -1,2 +1,2 @@
 analysis_id,tested_population,method,duplicates,semantic_overlaps,stale_findings,abandoned_findings,improperly_closed_findings,findings_lacking_evidence,conflicting_severity
-T1R2-DUP-001,8,normalized classification + affected control + severity comparison,0,2,0,0,0,8,0
+T1R2-DUP-EXT-001,9,"external finding ID uniqueness, root cause grouping, and status reconciliation",0,0,0,0,0,0,0

@@ -5,6 +5,9 @@
     "acceptance_evidence": {
       "type": "string"
     },
+    "accountability_gap_effect": {
+      "type": "string"
+    },
     "accountable_function": {
       "type": "string"
     },
@@ -67,7 +70,8 @@
     "overdue_escalation",
     "conflict_restrictions",
     "review_responsibility",
-    "reassignment_trigger"
+    "reassignment_trigger",
+    "accountability_gap_effect"
   ],
   "title": "07_OWNERSHIP_STEWARDSHIP_REVIEW/OWNERSHIP_ACCOUNTABILITY_MATRIX.csv",
   "type": "object"

@@ -27,3 +27,15 @@ Portable package/repository modes, manifest/checksum verification, schema presen
 ## Material Unresolved Items
 
 Founder appointments, adoption, activation, implementation authorization, production authorization, merge authorization, runtime evidence, production evidence, and certification remain unresolved.
+
+## External Review Remediation Delta
+
+Closed or remediated F-01 through F-07, F-10, and F-15. Added external-review evidence, finding disposition, source candidate retagging, lifecycle rejection/remediation states, failure-capable validator rules, manifest-of-manifests, corrected decision frames, actual findings register, duplicate-cluster foreign keys, terminology remediation, per-document validators/tests, and refreshed validation evidence.
+
+## External Review Remediation Delta
+
+Closed or remediated F-01 through F-07, F-10, and F-15. Added external-review evidence, finding disposition, source candidate retagging, lifecycle rejection/remediation states, failure-capable validator rules, manifest-of-manifests, corrected decision frames, actual findings register, duplicate-cluster foreign keys, terminology remediation, per-document validators/tests, and refreshed validation evidence.
+
+## External Review Remediation Delta
+
+Closed or remediated F-01 through F-07, F-10, and F-15. Added external-review evidence, finding disposition, source candidate retagging, lifecycle rejection/remediation states, failure-capable validator rules, manifest-of-manifests, corrected decision frames, actual findings register, duplicate-cluster foreign keys, terminology remediation, per-document validators/tests, and refreshed validation evidence.

@@ -17,6 +17,9 @@
     "conditions_precedent": {
       "type": "string"
     },
+    "decision_frame_preamble": {
+      "type": "string"
+    },
     "decision_id": {
       "type": "string"
     },
@@ -54,6 +57,9 @@
       "type": "string"
     },
     "question_presented": {
+      "type": "string"
+    },
+    "recommended_option": {
       "type": "string"
     },
     "retained_findings": {
@@ -103,7 +109,9 @@
     "implementation_effect",
     "activation_effect",
     "owner",
-    "next_action"
+    "next_action",
+    "decision_frame_preamble",
+    "recommended_option"
   ],
   "title": "05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.csv",
   "type": "object"

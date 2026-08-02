@@ -1,29 +1,25 @@
-# Tier 1 Documents 03-10 Revision Round 2 Cross-Document Reconciliation Report
+# Tier 1 Documents 03-10 External Review Remediation Cross-Document Reconciliation Report
+
+Status: `REVISION_ROUND_2_EXTERNAL_REVIEW_REMEDIATED_READY_FOR_FOUNDER_DIRECTIONAL_AND_FINAL_DOCUMENTARY_REVIEW`.
 
 ## Measurable Results
 
 | Check | Result |
 |---|---|
-| number of IDs checked | 65 file/register identifiers plus 96 requirement IDs |
-| duplicate IDs | 0 detected in generated stable IDs |
-| unresolved IDs | Founder decision and owner appointment IDs remain unresolved by design |
-| broken cross-references | 0 generated package path references detected before validation |
-| inconsistent lifecycle states | 0 blocking lifecycle combinations generated |
-| inconsistent Founder decision states | 0 authority-granting decisions generated |
-| findings without owners | all findings intentionally preserve `FOUNDER_APPOINTMENT_REQUIRED` |
-| owners without assignment evidence | all interim functions preserve `NOT_RECORDED` appointment evidence |
-| sources without disposition | 0 |
-| workstreams without owners | 0; owner function assigned, named appointment not inferred |
-| audit requirements without evidence sources | 0 templates omit source/evidence linkage fields |
-| conflicting authority statements | 0 generated authority statements exceed documentary review |
-| mismatched source versions | unresolved version declarations are marked `VERSION_NOT_DECLARED` |
-| inconsistent terminology | controlled vocabulary used by validator |
-| corrections made during Revision Round 2 | shared standard, atomic traceability, lifecycle matrix, Founder decision scope, waiver controls, owner vacancy handling, source dashboard, PR analysis, bounded audit templates |
-| unresolved portfolio-level risks | Founder appointment, adoption, merge sequencing, runtime evidence, production evidence, independent certification |
+| External findings checked | 28 |
+| Blocking minimum remediated | F-01 through F-07, F-10, F-15 |
+| Duplicate source clusters | 68 |
+| Duplicate source member rows | 145 |
+| Redundant exact duplicate copies | 77 |
+| Broken duplicate-cluster foreign keys | 0 |
+| Lifecycle states in transition matrix | 13 |
+| Lifecycle transition rows | 169 |
+| Invalid-state rules enforced by validator | 12 |
+| Founder decision rows with selected disposition | 0 |
+| Founder decision question mismatches | 0 |
+| Template count | 19 |
+| Template terminology exposure | Remediated to first-party/internal documentary review language |
+| Open ownership appointments | 14 retained, not invented |
+| Authority boundary changes | 0 |
 
-## Actual Defects Found And Repaired
-
-- Repaired repeated boilerplate by moving common rules to a shared standard and adding document-specific registers.
-- Repaired domain-level traceability by generating atomic requirement rows.
-- Repaired lifecycle ambiguity by separating state dimensions and invalid-state rules.
-- Repaired generic PR disposition by pulling current PR metadata.
+No remediation in this package grants adoption, activation, implementation, production, merge, or certification authority.

@@ -8,6 +8,12 @@
     "classification": {
       "type": "string"
     },
+    "closure_criteria": {
+      "type": "string"
+    },
+    "due_date": {
+      "type": "string"
+    },
     "issue": {
       "type": "string"
     },
@@ -16,6 +22,9 @@
     },
     "next_action": {
       "type": "string"
+    },
+    "owner": {
+      "type": "string"
     }
   },
   "required": [
@@ -23,6 +32,9 @@
     "issue",
     "classification",
     "blocking",
+    "owner",
+    "due_date",
+    "closure_criteria",
     "next_action"
   ],
   "title": "UNRESOLVED_ISSUE_REGISTER.csv",

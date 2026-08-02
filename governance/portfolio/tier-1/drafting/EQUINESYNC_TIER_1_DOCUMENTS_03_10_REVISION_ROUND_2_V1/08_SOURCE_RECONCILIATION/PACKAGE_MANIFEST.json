@@ -1,14 +1,14 @@
 {
   "files": [
     {
-      "byte_length": 59812,
+      "byte_length": 61518,
       "path": "DUPLICATE_COUNTERPART_CLUSTER_REGISTER.csv",
-      "sha256": "b175b4b8b2e53e50eb1b1849a8ded334537da541272fae0b1e2f190bd042ec68"
+      "sha256": "3fce4135591f485c71781aafbe8bc6f8bd7868f8e75de53f346601952d02edcd"
     },
     {
-      "byte_length": 1310,
+      "byte_length": 831,
       "path": "EQUINESYNC_SOURCE_PROVENANCE_AUTHORITY_AND_SUPERSESSION_RECONCILIATION_REVISION_ROUND_2_V1.md",
-      "sha256": "fe0f4ee912ab0a1e1080e6e6dee4a8d2c7f2530adf886e488de6f7579340316e"
+      "sha256": "de6bb70a6104552459c514f49d9e44f02e7b2eef57c333c80a67709c40a5bc85"
     },
     {
       "byte_length": 1943,
@@ -16,19 +16,29 @@
       "sha256": "1896135a1a6785652bcb1b53bc69e20b8d9ae5b1196991779a77f9c839e9f503"
     },
     {
-      "byte_length": 1635156,
+      "byte_length": 1707323,
       "path": "SOURCE_AUTHORITY_DISPOSITION_REGISTER.csv",
-      "sha256": "6530f7b144f0e08cc3193d47bee64cab5e951c605e2d23f15618247bb9aa7b19"
+      "sha256": "727253af1669c28f2f56454a462f11a7870d134763767dca1f914bdd639e0f31"
     },
     {
-      "byte_length": 2783382,
+      "byte_length": 2855549,
       "path": "SOURCE_AUTHORITY_DISPOSITION_REGISTER.json",
-      "sha256": "e9d354532490b980ecd6fb18746a362a57ccb449b41947c25b94f2de151f917d"
+      "sha256": "66237996fdf2559a298a6466e56009aad8a50a946adf1b47e9bec2c2ec092efa"
     },
     {
-      "byte_length": 487,
+      "byte_length": 606,
       "path": "SOURCE_DISPOSITION_DASHBOARD.csv",
-      "sha256": "2d84c8d45227ca20fdc7956e079a9d4ce24e50bf79c85c2c3a0d6b809fd16067"
+      "sha256": "5c8953561f7fa3bf4ed990fa2939c198dcc78071e67c9374e1f210b622c5950b"
+    },
+    {
+      "byte_length": 359,
+      "path": "tests/test_document_08_rr2_validator.py",
+      "sha256": "ef06b29cd9a56f7019903051f9c5d6bdfbb9ca429d7d1a5b271ecdb446c56723"
+    },
+    {
+      "byte_length": 344,
+      "path": "validators/validate_document_08_rr2.py",
+      "sha256": "b0623c7f38fe8e13b0cf13df336471a544f33b0ba0e975d73486bd675061ad59"
     }
   ],
   "package_root": "08_SOURCE_RECONCILIATION"

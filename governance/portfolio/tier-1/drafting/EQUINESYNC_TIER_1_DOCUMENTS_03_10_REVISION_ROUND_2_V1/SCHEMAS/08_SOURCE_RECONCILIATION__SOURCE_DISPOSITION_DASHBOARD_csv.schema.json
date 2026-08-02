@@ -11,7 +11,10 @@
     "broken_references": {
       "type": "string"
     },
-    "exact_duplicates": {
+    "exact_duplicate_cluster_member_rows": {
+      "type": "string"
+    },
+    "exact_duplicate_clusters": {
       "type": "string"
     },
     "format_counterparts": {
@@ -27,6 +30,9 @@
       "type": "string"
     },
     "orphan_sources": {
+      "type": "string"
+    },
+    "redundant_exact_duplicate_copies": {
       "type": "string"
     },
     "semantic_duplicates": {
@@ -56,7 +62,9 @@
     "unique_source_identities",
     "authoritative_current_sources",
     "historical_sources",
-    "exact_duplicates",
+    "exact_duplicate_clusters",
+    "redundant_exact_duplicate_copies",
+    "exact_duplicate_cluster_member_rows",
     "semantic_duplicates",
     "format_counterparts",
     "unresolved_identity_collisions",

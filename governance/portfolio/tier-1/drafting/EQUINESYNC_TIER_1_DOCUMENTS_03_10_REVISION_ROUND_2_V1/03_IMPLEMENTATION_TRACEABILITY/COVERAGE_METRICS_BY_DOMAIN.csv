@@ -1,10 +1,10 @@
-domain,total_canonical_requirements,mapped_requirements,implementation_candidates_identified,implementations_verified,tests_specified,tests_located,tests_executed,tests_passed,negative_tests_present,runtime_evidence_present,requirements_with_open_gaps,requirements_with_no_owner,coverage_percentage_for_implementation_candidates,coverage_percentage_for_executed_tests,unavailable_metric_treatment
-Equine Health And Welfare,1,0,0,0,1,1,0,0,0,0,1,1,0.0,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
-Facility And Tenant,7,7,7,0,5,5,0,0,0,0,7,7,100.0,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
-Financial Controls,2,2,2,0,2,2,0,0,0,0,2,2,100.0,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
-General Governance,74,13,13,0,53,53,0,0,0,0,74,74,17.6,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
-Identity Access,5,4,4,0,4,4,0,0,0,0,5,5,80.0,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
-Privacy,5,3,3,0,4,4,0,0,0,0,5,5,60.0,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
-Safeguarding,1,1,1,0,0,0,0,0,0,0,1,1,100.0,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
-Technical Implementation,1,0,0,0,1,1,0,0,0,0,1,1,0.0,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
-OVERALL,96,30,30,0,70,70,0,0,0,0,96,96,31.2,0.0,Executed/runtime/production metrics are zero because documentary review did not execute tests or observe runtime behavior.
+domain,total_source_text_candidates,accepted_normative_requirements,candidate_match_count,candidate_match_rate,verified_coverage,implementation_candidates_identified,implementations_verified,test_candidate_files_located,assertion_level_tests_verified,tests_executed,tests_passed,runtime_evidence_present,production_evidence_present,open_candidate_rows,metric_limitation
+Equine Health And Welfare,1,0,0,0.0,0.0,0,0,1,0,0,0,0,0,1,Candidate match rate is not requirement coverage; verified coverage remains 0%.
+Facility And Tenant,7,0,7,100.0,0.0,7,0,5,0,0,0,0,0,7,Candidate match rate is not requirement coverage; verified coverage remains 0%.
+Financial Controls,2,0,2,100.0,0.0,2,0,2,0,0,0,0,0,2,Candidate match rate is not requirement coverage; verified coverage remains 0%.
+General Governance,74,0,13,17.6,0.0,13,0,53,0,0,0,0,0,74,Candidate match rate is not requirement coverage; verified coverage remains 0%.
+Identity Access,5,0,4,80.0,0.0,4,0,4,0,0,0,0,0,5,Candidate match rate is not requirement coverage; verified coverage remains 0%.
+Privacy,5,0,3,60.0,0.0,3,0,4,0,0,0,0,0,5,Candidate match rate is not requirement coverage; verified coverage remains 0%.
+Safeguarding,1,0,1,100.0,0.0,1,0,0,0,0,0,0,0,1,Candidate match rate is not requirement coverage; verified coverage remains 0%.
+Technical Implementation,1,0,0,0.0,0.0,0,0,1,0,0,0,0,0,1,Candidate match rate is not requirement coverage; verified coverage remains 0%.
+OVERALL,96,0,30,31.2,0.0,30,0,70,0,0,0,0,0,96,Candidate match rate is not requirement coverage; verified coverage remains 0%.

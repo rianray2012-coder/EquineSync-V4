@@ -6,14 +6,14 @@
       "sha256": "6a0bd4800f5d488987b47dd832236a0d7aefca1d46e6b4d6321674efa52268a3"
     },
     {
-      "byte_length": 6536,
+      "byte_length": 4841,
       "path": "AUDIT_REQUIREMENTS_MATRIX.csv",
-      "sha256": "671bd68a2ecae9d575e8a798a6e0c5ba4f43a46160a6f93fa21c7cca6837b9b8"
+      "sha256": "c76f5cf74b915ec04ebd0545619cc0822abb4f73e7f26666bf44f662615762b7"
     },
     {
-      "byte_length": 1323,
+      "byte_length": 931,
       "path": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1.md",
-      "sha256": "e60ff00ce4ec6b5c04c310d817ccdd88f428843122ddf3f6d0f2846834ae30e5"
+      "sha256": "151f57bd0f5df2398fb8d899d5b75c0f8a931f0ef1c0a59469dfd3d407b2b499"
     },
     {
       "byte_length": 1970,
@@ -21,104 +21,114 @@
       "sha256": "5bcd62b82e5763f0750938bf3c5b18dfbbf6adf1093f2a991fa40c1f370c4855"
     },
     {
-      "byte_length": 2595,
+      "byte_length": 3853,
       "path": "TEMPLATE_INDEX.csv",
-      "sha256": "5ebf99fb22feefa65f333f04a6421e03fd719a9ac214ce44c5c2cf8932a21c67"
+      "sha256": "ed9d4c7a38a7b5dc72454d42d21a05198fce04d6c74299b6e9008aa684eee409"
     },
     {
-      "byte_length": 1841,
-      "path": "templates/01_AUDIT_PLAN.md",
-      "sha256": "090054feb0f9de710ef71c1ee39b5c9ca6a4eaf24d4467d81663567613170952"
+      "byte_length": 1587,
+      "path": "templates/01_INTERNAL_DOCUMENTARY_REVIEW_PLAN.md",
+      "sha256": "ad89f38c73348910a87e640963f5286046ef583c8fa07187b2de9f9d8bcf94a5"
     },
     {
-      "byte_length": 1879,
+      "byte_length": 1581,
       "path": "templates/02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
-      "sha256": "2427cd2f584d25a6f41653dc0f47a0a4ef9e8717aee6678675f47ef73740fd8a"
+      "sha256": "18260bfc232c306923849272999e0557b224d59980f9dabaf00b66d87b902d2c"
     },
     {
-      "byte_length": 1851,
+      "byte_length": 1553,
       "path": "templates/03_SOURCE_MANIFEST.md",
-      "sha256": "b5bfd36393c83c75ca12b64e7a096d2ac92a27c33e144322fb9c68a5b6f396be"
+      "sha256": "5233d91e4b21b6f7538e1513c7787ce70b0cad046455d46ef551541cde515842"
     },
     {
-      "byte_length": 1849,
+      "byte_length": 1551,
       "path": "templates/04_EVIDENCE_INDEX.md",
-      "sha256": "9e050c9eef47bfd3b74acfef854932480b679a56682fa5e3b6311e1d51d79a62"
+      "sha256": "6d91f608fe21875c8903c96169fcf1cfae857c62a54d8d9c05b09eac79dd0646"
     },
     {
-      "byte_length": 1851,
+      "byte_length": 1553,
       "path": "templates/05_SAMPLING_RECORD.md",
-      "sha256": "773045b35e6789346f2ef9cedd2978cfd7761d1e8c03a15fc7a1d3c0a1314844"
+      "sha256": "3e217802bbab22cd318c546ab0d8382d91de1009f45dfc56619e613fcf0db108"
     },
     {
-      "byte_length": 1885,
+      "byte_length": 1587,
       "path": "templates/06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
-      "sha256": "b014899bf95a2e26dc141cd2912334ff1cc865b718cd8620eb19b91fa1c5c9bf"
+      "sha256": "efb666e3cf5e83522db4168f306cc6250fade5b68eb62055bb53ee0e8ae9d52f"
     },
     {
-      "byte_length": 1859,
+      "byte_length": 1561,
       "path": "templates/07_CONFLICT_DISCLOSURE.md",
-      "sha256": "31bf1431a42519785f89596a1c895430f252ea46df89dac404ccc195d900ff89"
+      "sha256": "d4d9160863b0cbf93a900ca2f1105d8f10e4d115cec6a9615b357a32d90eec84"
     },
     {
-      "byte_length": 1853,
+      "byte_length": 1555,
       "path": "templates/08_FINDING_SCHEDULE.md",
-      "sha256": "fe56d64c4c21a70d199da92f4831797946e3c12dce432211d2569dcd0a66f4ca"
+      "sha256": "3ac5f1f0d575ccca617b0cf72f0dfcfcd76117ff722f30fb3a41bca5e3ad60b7"
     },
     {
-      "byte_length": 1865,
+      "byte_length": 1567,
       "path": "templates/09_RESIDUAL_RISK_SCHEDULE.md",
-      "sha256": "971a607832d808471f82f9509f2aae72af766a0a4f0232c5479cb99112e8e42b"
+      "sha256": "8de20abf69a58141b1176cda7b567db251354a61a56dc2e92fc50f4e1d6fafb1"
     },
     {
-      "byte_length": 1881,
-      "path": "templates/10_FOUNDER_CERTIFICATION_SCHEDULE.md",
-      "sha256": "7e653491bf968a193fdacc1255b6539fd1a588c3673159d2d48dae718dc86c00"
+      "byte_length": 1579,
+      "path": "templates/10_FOUNDER_ATTESTATION_SCHEDULE.md",
+      "sha256": "81adb72984fcbec5800b39a3877ee180d0b9a9580bcf7910a38bb596524a7015"
     },
     {
-      "byte_length": 1865,
+      "byte_length": 1567,
       "path": "templates/11_CLOSING_EXHIBITS_INDEX.md",
-      "sha256": "77cc80db933fd851139c72ce0acbac4c85963b8a6bd4c6533cbbb822f976868a"
+      "sha256": "c579f67fa6d379aadc2866fb1c7c310da4877800b08464dadcc8d42dc3bd938e"
     },
     {
-      "byte_length": 1883,
-      "path": "templates/12_FOUNDER_RATIFICATION_INSTRUMENT.md",
-      "sha256": "1e36f7d267fecbef5b8d633917fd8f1cf623ccd687736217901ea3f6a16f4401"
+      "byte_length": 1593,
+      "path": "templates/12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md",
+      "sha256": "653f751130217fcef41b543535d747d5135d4f87e188e1395b786528fd3954e7"
     },
     {
-      "byte_length": 1851,
+      "byte_length": 1553,
       "path": "templates/13_ADOPTION_RECORD.md",
-      "sha256": "ab2a4c0229e943e6a1e0210f138544372a23f9c635a58484e10aedd36dc275b2"
+      "sha256": "3338a23b01938b69aed29ae6c735e4aa9a6abbab94db778782abc6734abedaf2"
     },
     {
-      "byte_length": 1855,
+      "byte_length": 1557,
       "path": "templates/14_ACCESSION_RECEIPT.md",
-      "sha256": "7616ab46c141dc2466fa2cce302556124d29599abed6d0c49fc61856d23697ad"
+      "sha256": "80b7d344c9b54b73246efc2d8a7ea7cda16e9559f1a87b42fb72b75bde718279"
     },
     {
-      "byte_length": 1873,
+      "byte_length": 1575,
       "path": "templates/15_POST_MERGE_CUSTODY_RECEIPT.md",
-      "sha256": "9b2c9ffde91b1a93b5db214b35278e424316eb03a76c9a7c124c61c7aaa4a0f4"
+      "sha256": "ccc436f17a6a8d9ba7a4d16f8c932fe11724ec67e50117be71813f0d765b79a3"
     },
     {
-      "byte_length": 1871,
-      "path": "templates/16_FINAL_CLOSING_CERTIFICATE.md",
-      "sha256": "004dc4df38ce1e248e896744f626c6d602aaae1183b8453b38fd8c142bcb6123"
+      "byte_length": 1581,
+      "path": "templates/16_FINAL_SELF_DECLARATION_RECORD.md",
+      "sha256": "8016450bc3f0b2659455a16ee3876063c0ba19148d1840e82a3beb74ba29d0f7"
     },
     {
-      "byte_length": 1887,
-      "path": "templates/17_BOUNDED_SCOPE_CLOSING_CERTIFICATE.md",
-      "sha256": "f634de2bd291d5050675e4fe3a401d7e93122f0af997a79c909ddf53193e0311"
+      "byte_length": 1597,
+      "path": "templates/17_BOUNDED_SCOPE_SELF_DECLARATION_RECORD.md",
+      "sha256": "f8877ca13435929161f247ababd51e844bd32dcef389473e132a4885576c6ddf"
     },
     {
-      "byte_length": 1853,
+      "byte_length": 1555,
       "path": "templates/18_REOPENING_NOTICE.md",
-      "sha256": "fd9c6da6ec3a7344493fbb36a7a23eed3dd923d3cc8bcd9e18c24678b9aa1907"
+      "sha256": "aef4a8ecfdb5d1944fb4c4abd87b3d4d76704a319cb13326c6686fcef73a5c65"
     },
     {
-      "byte_length": 1865,
-      "path": "templates/19_RECERTIFICATION_RECORD.md",
-      "sha256": "0ad30e8294fd0d8281e99c7eec275483893948c0fa527b2dae8fe641c3fb182f"
+      "byte_length": 1603,
+      "path": "templates/19_PERIODIC_SELF_DECLARATION_REFRESH_RECORD.md",
+      "sha256": "74b21321d56fe3f7f174b3d53c3dd9f9047fedec5a284e3945bc187ea75ffb4e"
+    },
+    {
+      "byte_length": 359,
+      "path": "tests/test_document_10_rr2_validator.py",
+      "sha256": "16291b145a7be3420886086bbd5aaa2d5427d6a6a0aafe1f4b5b7626cc14839c"
+    },
+    {
+      "byte_length": 344,
+      "path": "validators/validate_document_10_rr2.py",
+      "sha256": "125f1bee0de999ea8cf5d0a4dc601d72ce0f104f67e99cb1262da9229dab795d"
     }
   ],
   "package_root": "10_CLOSING_AUDIT_PROTOCOL"

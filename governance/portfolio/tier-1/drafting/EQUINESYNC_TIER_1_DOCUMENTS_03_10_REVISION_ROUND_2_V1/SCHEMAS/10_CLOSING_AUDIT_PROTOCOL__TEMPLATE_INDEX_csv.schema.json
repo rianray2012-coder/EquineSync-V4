@@ -19,6 +19,9 @@
     },
     "template_name": {
       "type": "string"
+    },
+    "terminology_state": {
+      "type": "string"
     }
   },
   "required": [
@@ -27,7 +30,8 @@
     "path",
     "bounded_complete_allowed",
     "source_register_linkage_required",
-    "evidence_register_linkage_required"
+    "evidence_register_linkage_required",
+    "terminology_state"
   ],
   "title": "10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_INDEX.csv",
   "type": "object"

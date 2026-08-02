@@ -11,9 +11,9 @@
       "sha256": "9ade6c9ffe348973f8587fb038b91e8bc3cb5d924083ff7e86001a7a31cd5935"
     },
     {
-      "byte_length": 1421,
+      "byte_length": 991,
       "path": "EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1.md",
-      "sha256": "9d49c58250b2d418486028b4d18bd1dbd989eb3ba408a4e29f669f834f7b6c84"
+      "sha256": "6d8e360ec2d3bb450abf20d3f035ed580227e53eea562baff8289bcc4a4e9023"
     },
     {
       "byte_length": 1947,
@@ -21,14 +21,24 @@
       "sha256": "c1410cf4ba7c23255cf80f959527b12209416a7d598b8856c41558d8e5f807cb"
     },
     {
-      "byte_length": 1703,
+      "byte_length": 2053,
       "path": "INVALID_STATE_RULES.csv",
-      "sha256": "7d8f412369baf62e54c14577d24aa86d8a6a90c79e0c60e3a0a071b74176a67e"
+      "sha256": "0503416939a6062337bb2988f5dd554ff620cf15c681a92b7b8f02e891a23859"
     },
     {
-      "byte_length": 33827,
+      "byte_length": 74266,
       "path": "LIFECYCLE_TRANSITION_MATRIX.csv",
-      "sha256": "2fcd5a7f091999e9359d13cbaba269ff72c5ee1ca7073fc4b76ca892e7f42f7f"
+      "sha256": "1d08e1d4dafb3d24c477b366fabf91a6477afcae045d72d9b7cd58f67a272f47"
+    },
+    {
+      "byte_length": 359,
+      "path": "tests/test_document_04_rr2_validator.py",
+      "sha256": "cfb962ea52b16c2ee865fb4f56c4567b18836b93b021d998473d89dfa05154f3"
+    },
+    {
+      "byte_length": 344,
+      "path": "validators/validate_document_04_rr2.py",
+      "sha256": "6aa5abc130b6c5a852ba500fd00f863f2c4a5188fb9bf61cabaa0b3295ea6cf6"
     }
   ],
   "package_root": "04_AUTHORITY_LIFECYCLE_REGISTER"

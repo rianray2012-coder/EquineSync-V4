@@ -2,10 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": true,
   "properties": {
-    "coverage_percentage_for_executed_tests": {
+    "accepted_normative_requirements": {
       "type": "string"
     },
-    "coverage_percentage_for_implementation_candidates": {
+    "assertion_level_tests_verified": {
+      "type": "string"
+    },
+    "candidate_match_count": {
+      "type": "string"
+    },
+    "candidate_match_rate": {
       "type": "string"
     },
     "domain": {
@@ -17,57 +23,51 @@
     "implementations_verified": {
       "type": "string"
     },
-    "mapped_requirements": {
+    "metric_limitation": {
       "type": "string"
     },
-    "negative_tests_present": {
+    "open_candidate_rows": {
       "type": "string"
     },
-    "requirements_with_no_owner": {
-      "type": "string"
-    },
-    "requirements_with_open_gaps": {
+    "production_evidence_present": {
       "type": "string"
     },
     "runtime_evidence_present": {
       "type": "string"
     },
-    "tests_executed": {
+    "test_candidate_files_located": {
       "type": "string"
     },
-    "tests_located": {
+    "tests_executed": {
       "type": "string"
     },
     "tests_passed": {
       "type": "string"
     },
-    "tests_specified": {
+    "total_source_text_candidates": {
       "type": "string"
     },
-    "total_canonical_requirements": {
-      "type": "string"
-    },
-    "unavailable_metric_treatment": {
+    "verified_coverage": {
       "type": "string"
     }
   },
   "required": [
     "domain",
-    "total_canonical_requirements",
-    "mapped_requirements",
+    "total_source_text_candidates",
+    "accepted_normative_requirements",
+    "candidate_match_count",
+    "candidate_match_rate",
+    "verified_coverage",
     "implementation_candidates_identified",
     "implementations_verified",
-    "tests_specified",
-    "tests_located",
+    "test_candidate_files_located",
+    "assertion_level_tests_verified",
     "tests_executed",
     "tests_passed",
-    "negative_tests_present",
     "runtime_evidence_present",
-    "requirements_with_open_gaps",
-    "requirements_with_no_owner",
-    "coverage_percentage_for_implementation_candidates",
-    "coverage_percentage_for_executed_tests",
-    "unavailable_metric_treatment"
+    "production_evidence_present",
+    "open_candidate_rows",
+    "metric_limitation"
   ],
   "title": "03_IMPLEMENTATION_TRACEABILITY/COVERAGE_METRICS_BY_DOMAIN.csv",
   "type": "object"

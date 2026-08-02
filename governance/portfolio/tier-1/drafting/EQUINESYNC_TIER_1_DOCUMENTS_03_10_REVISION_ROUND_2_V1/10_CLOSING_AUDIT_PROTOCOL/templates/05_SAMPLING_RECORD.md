@@ -2,58 +2,42 @@
 
 ## Document Control
 
-Template ID: `SAMPLING_RECORD`.
+Template name: `SAMPLING_RECORD`.
 
-## Audit Objective
+## Purpose
 
-State the bounded objective and prohibit reliance beyond the reviewed scope.
+This first-party/internal documentary record is bounded to the named package, evidence population, repository state, and date.
 
-## Scope
+## Scope And Exclusions
 
-List included documents, registers, source rows, evidence rows, commits, and dates.
-
-## Exclusions
-
-List excluded lifecycle states, sources, runtime behavior, production behavior, unresolved findings, and ownership gaps.
+State included source rows, evidence rows, PRs, commits, documents, and excluded runtime, production, legal, regulatory, certification, and adoption states.
 
 ## Applicable Authority
 
 Record exact authority source and locator. If absent, state `AUTHORITY_NOT_RECORDED`.
 
-## Preparer And Reviewer
+## Evidence Population
 
-Preparer, reviewer, independence disclosure, review date, and conflict disclosure are required.
-
-## Repository State
-
-Record repository, protected branch, protected SHA, work branch, branch SHA, PR number, and merge state.
-
-## Evidence Population And Sampling Methodology
-
-Define population, sample size, sample selection method, exclusions, and limitations.
-
-## Mandatory Evidence Table
-
-| Evidence ID | Source register row | Evidence register row | Path | SHA-256 | Byte length | Result | Limitation |
-|---|---|---|---|---|---|---|---|
-| EXAMPLE | SRC-RR2-00001 | T1R2-REQ-0001 | example/path.md | example | 0 | NOT_REVIEWED_EXAMPLE_ONLY | Replace with real evidence |
+Identify row IDs, hashes, byte lengths, file paths, and sampling method specific to this template.
 
 ## Required Determinations
 
-State what is certified and what is not certified. Open items prevent unbounded completion.
+State what was reviewed, what was not reviewed, what is self-declared, what is not self-declared, and what remains unresolved.
 
-## Exceptions And Unresolved Items
+## Mandatory Evidence Table
 
-Every exception must link to Document 06. Every unresolved item must remain open.
+| Evidence ID | Register row | Source path | SHA-256 | Byte length | Result | Limitation |
+|---|---|---|---|---|---|---|
+| EXAMPLE | Replace before use | Replace before use | Replace before use | Replace before use | NOT_REVIEWED_EXAMPLE_ONLY | Example row is not evidence |
+
+## Exceptions And Open Items
+
+Every exception must link to Document 06 or the external review disposition register.
 
 ## Prohibited Conclusions
 
-Do not certify adoption, activation, implementation completion, production readiness, merge authority, or closure without exact authority and evidence.
+This record cannot certify, adopt, activate, authorize implementation, authorize production use, authorize merge, or close unresolved items without evidence.
 
-## Sign-Off And Ratification
+## Sign-Off Fields
 
-Sign-off fields and Founder ratification fields must remain blank until executed.
-
-## Validation Rules
-
-The validator must confirm required headings and source/evidence link placeholders.
+Preparer, reviewer, first-party acknowledgement, date, limitation statement, and Founder documentary acknowledgement where applicable.

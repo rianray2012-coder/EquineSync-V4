@@ -2,6 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": true,
   "properties": {
+    "accepted_risks": {
+      "type": "string"
+    },
     "accountable_authority": {
       "type": "string"
     },
@@ -65,9 +68,6 @@
     "impact": {
       "type": "string"
     },
-    "independent_validator": {
-      "type": "string"
-    },
     "likelihood": {
       "type": "string"
     },
@@ -101,7 +101,13 @@
     "reopening_trigger": {
       "type": "string"
     },
+    "root_cause": {
+      "type": "string"
+    },
     "safeguarding_relevance": {
+      "type": "string"
+    },
+    "second_reviewer_not_assigned": {
       "type": "string"
     },
     "severity": {
@@ -141,8 +147,9 @@
     "age",
     "current_status",
     "mitigation",
+    "root_cause",
     "closure_evidence",
-    "independent_validator",
+    "second_reviewer_not_assigned",
     "closure_authority",
     "reopening_trigger",
     "business_justification",
@@ -155,7 +162,8 @@
     "monitoring_requirement",
     "renewal_evidence",
     "automatic_reopening_upon_expiration",
-    "silent_permanent_continuation_prohibited"
+    "silent_permanent_continuation_prohibited",
+    "accepted_risks"
   ],
   "title": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
   "type": "object"

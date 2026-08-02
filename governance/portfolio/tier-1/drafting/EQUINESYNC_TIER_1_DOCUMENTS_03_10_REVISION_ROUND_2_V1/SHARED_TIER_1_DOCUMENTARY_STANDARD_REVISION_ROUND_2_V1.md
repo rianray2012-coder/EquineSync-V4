@@ -18,7 +18,7 @@ The package is a documentary revision and Founder-review candidate only. It is `
 
 ## Lifecycle Vocabulary
 
-Permitted lifecycle states are `CANDIDATE`, `DRAFT_UNMERGED`, `FOUNDER_REVIEW_READY`, `ADOPTED`, `LOCKED`, `ACCESSIONED`, `ACTIVE`, `SUSPENDED`, `SUPERSEDED`, `HISTORICAL_RETAINED`, and `BLOCKED_EVIDENCE_REQUIRED`. Round 2 uses candidate/review-ready states only unless exact authority evidence is recorded.
+Permitted lifecycle states are `CANDIDATE`, `DRAFT_UNMERGED`, `FOUNDER_REVIEW_READY`, `REMEDIATION_REQUIRED`, `REJECTED`, `ADOPTED`, `LOCKED`, `ACCESSIONED`, `ACTIVE`, `SUSPENDED`, `SUPERSEDED`, `HISTORICAL_RETAINED`, and `BLOCKED_EVIDENCE_REQUIRED`. Round 2 uses candidate/review-ready states only unless exact authority evidence is recorded.
 
 ## Prohibited Conclusions
 
@@ -35,3 +35,18 @@ Future amendments require explicit successor versioning, source authentication, 
 ## Repository Custody
 
 The branch must remain draft and unmerged unless a future Founder directive expressly authorizes merge. Protected branch mutation is outside this package.
+
+
+## External Standards Terminology Note
+
+This package uses `FIRST_PARTY_SELF_DECLARATION`, `INTERNAL_DOCUMENTARY_REVIEW_PROTOCOL`, and `FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT` terminology to avoid implying third-party certification, ISO 19011 audit, or binding corporate ratification.
+
+
+## External Standards Terminology Note
+
+This package uses `FIRST_PARTY_SELF_DECLARATION`, `INTERNAL_DOCUMENTARY_REVIEW_PROTOCOL`, and `FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT` terminology to avoid implying third-party certification, ISO 19011 audit, or binding corporate ratification.
+
+
+## External Standards Terminology Note
+
+This package uses `FIRST_PARTY_SELF_DECLARATION`, `INTERNAL_DOCUMENTARY_REVIEW_PROTOCOL`, and `FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT` terminology to avoid implying third-party certification, ISO 19011 audit, or binding corporate ratification.

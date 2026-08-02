@@ -14,6 +14,9 @@
     "changed_paths": {
       "type": "string"
     },
+    "ci_failure_analysis": {
+      "type": "string"
+    },
     "ci_result": {
       "type": "string"
     },
@@ -119,7 +122,8 @@
     "deadline",
     "founder_decision_required",
     "merge_authority_state",
-    "url"
+    "url",
+    "ci_failure_analysis"
   ],
   "title": "09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
   "type": "object"
