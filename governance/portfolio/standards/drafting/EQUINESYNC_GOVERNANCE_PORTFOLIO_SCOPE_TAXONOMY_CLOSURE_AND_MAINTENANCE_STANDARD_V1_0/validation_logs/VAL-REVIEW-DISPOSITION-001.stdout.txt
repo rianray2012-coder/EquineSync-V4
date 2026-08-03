@@ -1,1 +1,1 @@
-review disposition source limitations recorded
+review disposition rows authenticated: {'Cursor': 25, 'Claude': 54, 'Perplexity': 47}

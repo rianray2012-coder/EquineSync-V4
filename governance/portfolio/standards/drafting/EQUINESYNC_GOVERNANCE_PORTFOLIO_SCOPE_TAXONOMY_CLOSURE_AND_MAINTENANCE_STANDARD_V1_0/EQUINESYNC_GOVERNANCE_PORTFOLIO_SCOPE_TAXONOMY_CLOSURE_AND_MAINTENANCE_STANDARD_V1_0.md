@@ -5,8 +5,8 @@
 
 - Version: `1.0.2`
 - Status: `ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL`
-- Readiness status: `ROUND_2_FINDINGS_REVISION_INCOMPLETE_BLOCKING_DEFECTS_REMAIN`
-- Authority boundary: `ROUND_2_DOCUMENTARY_REMEDIATION_AND_REVALIDATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_CERTIFICATION_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY`
+- Readiness status: `ROUND_2_FINDINGS_REMEDIATED_READY_FOR_TARGETED_ROUND_3_REREVIEW`
+- Authority boundary: `ROUND_2_SOURCE_AUTHENTICATION_AND_DOCUMENTARY_REMEDIATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY`
 - Normative source: `EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.json`
 
 This package is documentary-only. It does not approve, adopt, lock, access, complete custody, activate, implement, authorize pilot use, authorize production use, issue certification, merge PR #77, or close findings automatically.
@@ -14,7 +14,7 @@ This package is documentary-only. It does not approve, adopt, lock, access, comp
 <a id="round-2-source-limitation"></a>
 ## Round 2 Source Limitation
 
-Exact Cursor, Claude, and Perplexity Round 2 report bytes were referenced by the Founder directive but not supplied as separate exact source files in this run. This blocks any claim of complete per-reviewer finding ingestion.
+Resolved for Cursor, Claude, and Perplexity Round 2 reports by authenticated repository-native source copies. Remaining external limitations concern independent Round 3 re-review, human/legal/privacy/regulatory review, and repository enforcement.
 
 <a id="dimension-model"></a>
 ## Dimension Model
@@ -88,4 +88,4 @@ The package must identify a separate Governance Maintenance Standard predecessor
 <a id="authority-limitation"></a>
 ## Authority Limitation
 
-`ROUND_2_DOCUMENTARY_REMEDIATION_AND_REVALIDATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_CERTIFICATION_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY`
+`ROUND_2_SOURCE_AUTHENTICATION_AND_DOCUMENTARY_REMEDIATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY`

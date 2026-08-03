@@ -1,6 +1,6 @@
 {
   "artifact_id": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0",
-  "authority_boundary": "ROUND_2_DOCUMENTARY_REMEDIATION_AND_REVALIDATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_CERTIFICATION_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY",
+  "authority_boundary": "ROUND_2_SOURCE_AUTHENTICATION_AND_DOCUMENTARY_REMEDIATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY",
   "checks": [
     {
       "blocking_effect": "BLOCKS_IF_FAIL",
@@ -100,6 +100,22 @@
     },
     {
       "blocking_effect": "BLOCKS_IF_FAIL",
+      "check_id": "VAL-REVIEW-SOURCE-001",
+      "check_type": "source_authentication",
+      "command_or_function": "check_review_sources",
+      "completed_at_utc": "2026-08-03T13:25:13Z",
+      "evidence_reference": "validation_logs/VAL-REVIEW-SOURCE-001.stdout.txt",
+      "executed_by": "tools/round2_package.py",
+      "exit_code": 0,
+      "limitations": "",
+      "requirement": "exact Cursor, Claude, and Perplexity Round 2 source reports authenticated",
+      "result": "PASS",
+      "started_at_utc": "2026-08-03T13:25:13Z",
+      "stderr_artifact": "validation_logs/VAL-REVIEW-SOURCE-001.stderr.txt",
+      "stdout_artifact": "validation_logs/VAL-REVIEW-SOURCE-001.stdout.txt"
+    },
+    {
+      "blocking_effect": "BLOCKS_IF_FAIL",
       "check_id": "VAL-REVIEW-DISPOSITION-001",
       "check_type": "review_disposition",
       "command_or_function": "check_review_disposition",
@@ -108,11 +124,27 @@
       "executed_by": "tools/round2_package.py",
       "exit_code": 0,
       "limitations": "",
-      "requirement": "Round 2 disposition rows retain source limitation",
+      "requirement": "Round 2 disposition rows map to authenticated reviewer findings",
       "result": "PASS",
       "started_at_utc": "2026-08-03T13:25:13Z",
       "stderr_artifact": "validation_logs/VAL-REVIEW-DISPOSITION-001.stderr.txt",
       "stdout_artifact": "validation_logs/VAL-REVIEW-DISPOSITION-001.stdout.txt"
+    },
+    {
+      "blocking_effect": "BLOCKS_IF_FAIL",
+      "check_id": "VAL-REVIEW-ATTRIBUTION-001",
+      "check_type": "review_attribution",
+      "command_or_function": "check_reviewer_attribution",
+      "completed_at_utc": "2026-08-03T13:25:13Z",
+      "evidence_reference": "validation_logs/VAL-REVIEW-ATTRIBUTION-001.stdout.txt",
+      "executed_by": "tools/round2_package.py",
+      "exit_code": 0,
+      "limitations": "",
+      "requirement": "reviewer attribution and severity reconciliation retained",
+      "result": "PASS",
+      "started_at_utc": "2026-08-03T13:25:13Z",
+      "stderr_artifact": "validation_logs/VAL-REVIEW-ATTRIBUTION-001.stderr.txt",
+      "stdout_artifact": "validation_logs/VAL-REVIEW-ATTRIBUTION-001.stdout.txt"
     },
     {
       "blocking_effect": "BLOCKS_UNQUALIFIED_PASS",
@@ -145,25 +177,9 @@
       "started_at_utc": "2026-08-03T13:25:13Z",
       "stderr_artifact": "NOT_APPLICABLE",
       "stdout_artifact": "NOT_APPLICABLE"
-    },
-    {
-      "blocking_effect": "BLOCKS_UNQUALIFIED_PASS",
-      "check_id": "VAL-REVIEW-SOURCE-001",
-      "check_type": "source_authentication",
-      "command_or_function": "not_executed_external_or_judgment_review",
-      "completed_at_utc": "2026-08-03T13:25:13Z",
-      "evidence_reference": "KNOWN_LIMITATIONS.md",
-      "executed_by": "not executed",
-      "exit_code": null,
-      "limitations": "Exact reviewer report bytes were not supplied; exact per-reviewer ingestion is blocked.",
-      "requirement": "exact Cursor, Claude, and Perplexity Round 2 source reports",
-      "result": "BLOCKED",
-      "started_at_utc": "2026-08-03T13:25:13Z",
-      "stderr_artifact": "NOT_APPLICABLE",
-      "stdout_artifact": "NOT_APPLICABLE"
     }
   ],
-  "overall_result": "BLOCKED_SOURCE_OR_REVIEW_CONDITION",
-  "readiness_status": "ROUND_2_FINDINGS_REVISION_INCOMPLETE_BLOCKING_DEFECTS_REMAIN",
+  "overall_result": "PASS_WITH_PENDING_JUDGMENT_CHECKS",
+  "readiness_status": "ROUND_2_FINDINGS_REMEDIATED_READY_FOR_TARGETED_ROUND_3_REREVIEW",
   "status": "ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL"
 }

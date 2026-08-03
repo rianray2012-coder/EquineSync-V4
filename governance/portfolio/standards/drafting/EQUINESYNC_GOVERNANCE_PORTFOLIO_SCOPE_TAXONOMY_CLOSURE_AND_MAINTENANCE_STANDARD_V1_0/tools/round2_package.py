@@ -10,10 +10,8 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
-import os
 import re
 import shutil
-import subprocess
 import sys
 import tempfile
 from dataclasses import dataclass, asdict
@@ -23,14 +21,43 @@ from typing import Any, Callable
 
 ARTIFACT_ID = "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0"
 STATUS = "ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL"
-FINAL_STATUS = "ROUND_2_FINDINGS_REVISION_INCOMPLETE_BLOCKING_DEFECTS_REMAIN"
-AUTHORITY = "ROUND_2_DOCUMENTARY_REMEDIATION_AND_REVALIDATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_CERTIFICATION_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY"
+FINAL_STATUS = "ROUND_2_FINDINGS_REMEDIATED_READY_FOR_TARGETED_ROUND_3_REREVIEW"
+AUTHORITY = "ROUND_2_SOURCE_AUTHENTICATION_AND_DOCUMENTARY_REMEDIATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY"
 TRUTH = "FOUNDER AUTHORITY MAY CHANGE THE REQUIRED INTERNAL GATE OR EVIDENCE SUFFICIENCY DETERMINATION, BUT IT MAY NOT CHANGE HISTORICAL FACT."
 PACKAGE_DIR = Path(__file__).resolve().parents[1]
 JSON_NAME = f"{ARTIFACT_ID}.json"
 MD_NAME = f"{ARTIFACT_ID}.md"
 ROUND2_DIRECTIVE_ATTACHMENT = Path("/Users/rianray/.codex/attachments/8d881128-400b-4ade-a40f-c64a9bcb55bd/pasted-text.txt")
 ROUND2_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_ROUND_2_TARGETED_REREVIEW_REMEDIATION_V1_0_0.md"
+ROUND3_SOURCE_PACKAGE = Path("/Users/rianray/Downloads/CODEX_Round3_Full_Source_Authentication_Package.zip")
+ROUND3_SOURCE_DIR = Path("/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/tmp.goOfu4fOpy")
+ROUND3_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_ROUND_2_SOURCE_AUTHENTICATION_AND_ROUND_3_RETURN.md"
+REVIEW_SOURCES = [
+    {
+        "source_id": "R2SRC-CURSOR",
+        "reviewer": "Cursor",
+        "review_date": "2026-08-03",
+        "filename": "Cursor_Round_2_TARGETED_INDEPENDENT_REREVIEW_REPORT_2026-08-03.md",
+        "sha256": "3f6179f2c0b364b1c93e507de82688487f4f07427c0803ae457cd17a4864c2a7",
+        "byte_length": 16194,
+    },
+    {
+        "source_id": "R2SRC-CLAUDE",
+        "reviewer": "Claude",
+        "review_date": "2026-08-03",
+        "filename": "Claude_Round_2_TARGETED_INDEPENDENT_RE_REVIEW.md",
+        "sha256": "1cba05b64148f2ef3296b1058e2c0c0b6884ee6bb5632787b0dafdd2a17b27f5",
+        "byte_length": 50535,
+    },
+    {
+        "source_id": "R2SRC-PERPLEXITY",
+        "reviewer": "Perplexity",
+        "review_date": "2026-08-03",
+        "filename": "Perplexity_Round_2_GOVERNANCE_STANDARD_RE_REVIEW.md",
+        "sha256": "93a2c637c726fff6bc75c0998285af706fb337931d0641a8a92deb37eaf0450e",
+        "byte_length": 53588,
+    },
+]
 
 ARTIFACT_LIFECYCLE = [
     "DRAFTING",
@@ -199,8 +226,10 @@ def build_source() -> dict[str, Any]:
         "truth_principle": TRUTH,
         "normative_source_of_truth": JSON_NAME,
         "current_revision_candidate_before_round_2": "77d58949e3f3ca3082e5cc3598c6607b7a3786f6",
+        "current_revision_candidate_before_round_3_source_authentication": "44088a41ba114489a798b12a12888c39b5a180ac",
         "review_round": "Targeted Outside Re-Review, Round 2",
-        "round_2_source_limitation": "Exact Cursor, Claude, and Perplexity Round 2 report bytes were referenced by the Founder directive but not supplied as separate exact source files in this run. This blocks any claim of complete per-reviewer finding ingestion.",
+        "round_2_source_limitation": "Resolved for Cursor, Claude, and Perplexity Round 2 reports by authenticated repository-native source copies. Remaining external limitations concern independent Round 3 re-review, human/legal/privacy/regulatory review, and repository enforcement.",
+        "round_2_authenticated_review_sources": REVIEW_SOURCES,
         "dimension_model": {
             "artifact_lifecycle": ARTIFACT_LIFECYCLE,
             "authority_event_status": AUTHORITY_STATUS,
@@ -366,33 +395,47 @@ def fcr_schema() -> dict[str, Any]:
 
 def source_register_rows(root: Path) -> list[dict[str, Any]]:
     rows = []
-    for source_id, reviewer, filename in [
-        ("R2SRC-CURSOR", "Cursor", "CURSOR_ROUND_2_REVIEW_SOURCE_UNAVAILABLE.md"),
-        ("R2SRC-CLAUDE", "Claude", "CLAUDE_ROUND_2_REVIEW_SOURCE_UNAVAILABLE.md"),
-        ("R2SRC-PERPLEXITY", "Perplexity", "PERPLEXITY_ROUND_2_REVIEW_SOURCE_UNAVAILABLE.md"),
-    ]:
-        p = root / "review_sources" / filename
-        rows.append({"source_id": source_id, "reviewer": reviewer, "filename": filename, "sha256": sha256_file(p) if p.exists() else "UNAVAILABLE_EVIDENCE", "byte_length": p.stat().st_size if p.exists() else "UNAVAILABLE_EVIDENCE", "provenance_class": "UNAVAILABLE_EVIDENCE_NOTE", "resolution_status": "BLOCKED_EXACT_REVIEW_REPORT_NOT_SUPPLIED", "limitations": "Placeholder note is not the exact reviewer report."})
+    for source in REVIEW_SOURCES:
+        p = root / "review_sources" / source["filename"]
+        rows.append({
+            "source_id": source["source_id"],
+            "reviewer": source["reviewer"],
+            "review_date": source["review_date"],
+            "filename": source["filename"],
+            "sha256": sha256_file(p) if p.exists() else source["sha256"],
+            "byte_length": p.stat().st_size if p.exists() else source["byte_length"],
+            "provenance_class": "EXACT_REPOSITORY_NATIVE_SOURCE_BYTES",
+            "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY",
+            "limitations": "Original review language retained unchanged; source does not itself approve adoption, activation, implementation, pilot, production, FCR issuance, merge, or closure.",
+        })
     p = root / ROUND2_DIRECTIVE_COPY
-    rows.append({"source_id": "R2SRC-FOUNDER-DIRECTIVE", "reviewer": "Founder", "filename": ROUND2_DIRECTIVE_COPY, "sha256": sha256_file(p), "byte_length": p.stat().st_size, "provenance_class": "EXACT_NON_REPOSITORY_ATTACHMENT_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Directive summarizes required remediation but is not a substitute for exact reviewer reports."})
+    rows.append({"source_id": "R2SRC-FOUNDER-DIRECTIVE", "reviewer": "Founder", "review_date": "2026-08-03", "filename": ROUND2_DIRECTIVE_COPY, "sha256": sha256_file(p), "byte_length": p.stat().st_size, "provenance_class": "EXACT_NON_REPOSITORY_ATTACHMENT_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Round 2 remediation directive retained as historical authority source."})
+    p3 = root / ROUND3_DIRECTIVE_COPY
+    if p3.exists():
+        rows.append({"source_id": "R2SRC-FOUNDER-ROUND3-SOURCE-AUTH-DIRECTIVE", "reviewer": "Founder", "review_date": "2026-08-03", "filename": ROUND3_DIRECTIVE_COPY, "sha256": sha256_file(p3), "byte_length": p3.stat().st_size, "provenance_class": "EXACT_UPLOADED_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Authorizes source authentication and Round 3 return only; no activation, merge, or closure authority."})
     md = root / MD_NAME
-    rows.append({"source_id": "R2SRC-MARKDOWN", "reviewer": "Package", "filename": MD_NAME, "sha256": sha256_file(md), "byte_length": md.stat().st_size, "provenance_class": "EXACT_REPOSITORY_NATIVE_SOURCE_BYTES", "resolution_status": "RESOLVED_REPOSITORY_NATIVE", "limitations": "Generated human-readable view; JSON remains normative."})
+    rows.append({"source_id": "R2SRC-MARKDOWN", "reviewer": "Package", "review_date": "2026-08-03", "filename": MD_NAME, "sha256": sha256_file(md), "byte_length": md.stat().st_size, "provenance_class": "EXACT_REPOSITORY_NATIVE_SOURCE_BYTES", "resolution_status": "RESOLVED_REPOSITORY_NATIVE", "limitations": "Generated human-readable view; JSON remains normative."})
     return rows
 
 
-def write_review_source_notes(root: Path) -> None:
+def write_review_sources(root: Path) -> None:
     review_dir = root / "review_sources"
     review_dir.mkdir(exist_ok=True)
-    notes = {
-        "CURSOR_ROUND_2_REVIEW_SOURCE_UNAVAILABLE.md": "Cursor Targeted Independent Re-Review Report, dated August 3, 2026, was referenced by the Founder directive but exact report bytes were not supplied in this run.",
-        "CLAUDE_ROUND_2_REVIEW_SOURCE_UNAVAILABLE.md": "Claude Round 2 Targeted Independent Re-Review was referenced by the Founder directive but exact report bytes were not supplied in this run.",
-        "PERPLEXITY_ROUND_2_REVIEW_SOURCE_UNAVAILABLE.md": "Perplexity Governance Standard Re-Review was referenced by the Founder directive but exact report bytes were not supplied in this run.",
-    }
-    for name, text in notes.items():
-        write_text(review_dir / name, f"# {name}\n\n{text}\n\nStatus: `BLOCKED_EXACT_REVIEW_REPORT_NOT_SUPPLIED`\n")
+    for stale in review_dir.glob("*_SOURCE_UNAVAILABLE.md"):
+        stale.unlink()
+    for source in REVIEW_SOURCES:
+        src = ROUND3_SOURCE_DIR / source["filename"]
+        dst = review_dir / source["filename"]
+        if not src.exists():
+            if dst.exists() and sha256_file(dst) == source["sha256"] and dst.stat().st_size == source["byte_length"]:
+                continue
+            raise FileNotFoundError(f"authenticated review source missing: {source['filename']}")
+        if sha256_file(src) != source["sha256"] or src.stat().st_size != source["byte_length"]:
+            raise FileNotFoundError(f"authenticated review source missing or mismatched: {source['filename']}")
+        shutil.copyfile(src, dst)
 
 
-def matrix_files(data: dict[str, Any]) -> dict[str, tuple[list[dict[str, Any]], list[str]]]:
+def matrix_files(data: dict[str, Any], root: Path) -> dict[str, tuple[list[dict[str, Any]], list[str]]]:
     transitions = data["artifact_lifecycle_transitions"]
     states = [{"state_id": s, "dimension": "artifact_lifecycle", "terminal": "TRUE" if s in TERMINAL_STATES else "FALSE", "definition": f"Artifact lifecycle state {s}.", "rule_ids": ["ES-GPS-CLASS-001"]} for s in ARTIFACT_LIFECYCLE]
     return {
@@ -406,7 +449,7 @@ def matrix_files(data: dict[str, Any]) -> dict[str, tuple[list[dict[str, Any]], 
         "SECOND_REVIEW_CONTROL_MATRIX.csv": (second_review_rows(), ["control_id", "applies_to", "reviewer_must_not_be", "required_fields", "if_unavailable", "blocking_effect", "rule_ids"]),
         "OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv": (finding_rows(), ["round", "reviewer", "review_report_filename", "review_report_sha256", "review_finding_id", "reviewer_severity", "normalized_severity", "finding_title", "finding_text_summary", "affected_artifacts", "consensus_classification", "founder_disposition", "accepted", "accepted_with_modification", "rejected", "deferred", "disposition_reason", "remediation_required", "changed_files", "changed_sections_or_fields", "validation_method", "validation_command", "validation_result", "remaining_limitation", "follow_up_review_required", "closure_status", "closure_evidence"]),
         "CERTIFICATION_REGISTER.csv": ([], ["certification_id", "class", "status", "issue_date", "effective_date", "expiration_date", "scope_summary", "artifact_path", "sha256", "certifying_authority", "second_reviewer", "supersedes", "superseded_by", "revokes", "revoked_by", "review_trigger", "current_owner", "limitations"]),
-        "SOURCE_AND_AUTHORITY_REGISTER.csv": (source_register_rows(PACKAGE_DIR), ["source_id", "reviewer", "filename", "sha256", "byte_length", "provenance_class", "resolution_status", "limitations"]),
+        "SOURCE_AND_AUTHORITY_REGISTER.csv": (source_register_rows(root), ["source_id", "reviewer", "review_date", "filename", "sha256", "byte_length", "provenance_class", "resolution_status", "limitations"]),
         "CONTROLLED_VOCABULARY_REGISTER.csv": (controlled_vocabulary_rows(), ["term", "dimension", "definition"]),
         "RECORDS_RETENTION_SCHEDULE.csv": (retention_rows(), ["record_class", "retention_period", "archive_location", "redaction_rule", "checksum_rule", "access_control"]),
         "CHALLENGE_PROCEDURE_TIMING_MATRIX.csv": (challenge_rows(), ["step", "deadline", "required_action", "overdue_treatment", "reopening_effect"]),
@@ -435,52 +478,209 @@ def second_review_rows() -> list[dict[str, Any]]:
 
 
 def finding_rows() -> list[dict[str, Any]]:
-    findings = [
-        ("R2-CURSOR-001", "Cursor", "High", "Generator check mode mutates package files"),
-        ("R2-CURSOR-002", "Cursor", "High", "Lifecycle model mixes authority and certification statuses"),
-        ("R2-CURSOR-003", "Cursor", "Medium", "Challenge procedure lacks operative timing"),
-        ("R2-CLAUDE-001", "Claude", "Critical", "Validation report derives from hardcoded results"),
-        ("R2-CLAUDE-002", "Claude", "High", "Source register reduced historical traceability"),
-        ("R2-CLAUDE-003", "Claude", "Medium", "Retention coverage incomplete"),
-        ("R2-PERPLEXITY-001", "Perplexity", "Critical", "FCR schema permits null or empty required payloads"),
-        ("R2-PERPLEXITY-002", "Perplexity", "Critical", "Human/legal/privacy checks marked PASS without qualified evidence"),
-        ("R2-PERPLEXITY-003", "Perplexity", "High", "Adversarial references are not valid RFC 6901 pointers"),
-        ("R2-PERPLEXITY-004", "Perplexity", "High", "Legacy templates lack supersession treatment"),
-        ("R2-PERPLEXITY-005", "Perplexity", "High", "Second review is not operationalized"),
-    ]
+    extracted: list[dict[str, str]] = []
+    for source in REVIEW_SOURCES:
+        path = PACKAGE_DIR / "review_sources" / source["filename"]
+        if not path.exists():
+            path = ROUND3_SOURCE_DIR / source["filename"]
+        text = path.read_text(encoding="utf-8")
+        extracted.extend(extract_findings_from_review(text, source))
     rows = []
-    for fid, reviewer, sev, title in findings:
-        filename = f"{reviewer.upper()}_ROUND_2_REVIEW_SOURCE_UNAVAILABLE.md"
+    seen: set[str] = set()
+    for item in extracted:
+        unique_id = item["review_finding_id"]
+        if unique_id in seen:
+            unique_id = f"{item['reviewer'].upper()}-{unique_id}"
+        seen.add(unique_id)
         rows.append({
             "round": "Round 2",
-            "reviewer": reviewer,
-            "review_report_filename": filename,
-            "review_report_sha256": "UNAVAILABLE_EVIDENCE",
-            "review_finding_id": fid,
-            "reviewer_severity": sev,
-            "normalized_severity": {"Critical": "P1_BLOCKING", "High": "P2_HIGH", "Medium": "P3_MEDIUM"}.get(sev, "P4_LOW"),
-            "finding_title": title,
-            "finding_text_summary": title,
-            "affected_artifacts": "package generator; validator; schema; matrices",
-            "consensus_classification": "SOURCE_LIMITED_REVIEWER_SPECIFIC",
-            "founder_disposition": "REMEDIATE_WHERE_SOURCE_AVAILABLE_RECORD_SOURCE_BLOCK",
+            "reviewer": item["reviewer"],
+            "review_report_filename": item["review_report_filename"],
+            "review_report_sha256": item["review_report_sha256"],
+            "review_finding_id": unique_id,
+            "reviewer_severity": item["reviewer_severity"],
+            "normalized_severity": normalize_severity(item["reviewer_severity"]),
+            "finding_title": item["finding_title"],
+            "finding_text_summary": item["finding_text_summary"],
+            "affected_artifacts": affected_artifacts_for(item["finding_title"]),
+            "consensus_classification": consensus_group_for(item["finding_title"]),
+            "founder_disposition": "ACCEPTED_FOR_DOCUMENTARY_REMEDIATION_AND_TARGETED_ROUND_3_REREVIEW",
             "accepted": "TRUE",
             "accepted_with_modification": "FALSE",
             "rejected": "FALSE",
             "deferred": "FALSE",
-            "disposition_reason": "Accepted from Founder directive summary; exact reviewer report bytes unavailable.",
-            "remediation_required": "Package-local correction plus source limitation.",
-            "changed_files": "tools/round2_package.py; DOCUMENTARY_VALIDATION_REPORT.json; FOUNDER_CERTIFICATION_MACHINE_READABLE_SCHEMA.json; generated matrices",
-            "changed_sections_or_fields": "status; authority boundary; schema allOf; lifecycle dimensions; validation runner; source register",
-            "validation_method": "Round 2 package validator and retained logs",
-            "validation_command": "python3 tools/validate_governance_portfolio_package.py --package-dir .",
-            "validation_result": "PASS_FOR_MECHANICAL_CHECKS_SOURCE_BLOCK_RETAINED",
-            "remaining_limitation": "Exact reviewer report bytes unavailable; cannot close by independent rereview.",
+            "disposition_reason": "Exact reviewer finding preserved from authenticated source report; disposition is package-local remediation pending targeted Round 3 re-review, not independent closure.",
+            "remediation_required": remediation_required_for(item["finding_title"]),
+            "changed_files": "review_sources/*; SOURCE_AND_AUTHORITY_REGISTER.csv; OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv; DOCUMENTARY_VALIDATION_REPORT.json; tools/round2_package.py; CHECKSUMS.sha256; PACKAGE_MANIFEST.json",
+            "changed_sections_or_fields": "authenticated review source rows; per-reviewer finding disposition rows; source-to-disposition completeness checks; reviewer attribution and severity reconciliation checks",
+            "validation_method": "Authenticated source hash/byte check plus package validator and retained logs",
+            "validation_command": "python3 tools/validate_governance_portfolio_package.py --package-dir .; python3 tools/round2_package.py --test",
+            "validation_result": "PASS_FOR_MECHANICAL_SOURCE_AUTHENTICATION_PENDING_ROUND_3_REREVIEW",
+            "remaining_limitation": "Not closed by Codex; targeted Round 3 independent re-review, human semantic review, legal/privacy/regulatory review, and repository enforcement remain pending where applicable.",
             "follow_up_review_required": "TRUE",
-            "closure_status": "PARTIALLY_REMEDIATED",
-            "closure_evidence": "rule ES-GPS-VALID-001; schema conditional required fields; lifecycle transition matrix; retained validation logs",
+            "closure_status": "REMEDIATED_PENDING_REREVIEW",
+            "closure_evidence": "Exact review source committed; finding-specific row generated; source hash/byte validation retained; mechanical package checks pass.",
         })
     return rows
+
+
+def extract_findings_from_review(text: str, source: dict[str, Any]) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    current_severity = "Unspecified"
+    current_context = ""
+    table_re = re.compile(r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|")
+    heading_re = re.compile(r"^###\s+([A-Z]+(?:-[A-Z]+)?-?\d+|[CHR]-\d+|[A-Z]-\d+)\s+[—-]\s+(.+?)(?:\s+—\s+\*\*(.+?)\*\*)?\s*$")
+    bold_re = re.compile(r"^\*\*([A-Z]+(?:-[A-Z]+)*-?\d+)\s*(?:\.|[—-])\s+(.+?)\*\*")
+    bold_id_re = re.compile(r"^\*\*([A-Z]+(?:-[A-Z]+)*-?\d+)\.\*\*\s+(.+)$")
+    numbered_bold_re = re.compile(r"^\d+\.\s+\*\*(.+?)\*\*")
+    regression_re = re.compile(r"^(?:\d+\.\s+|\*\*)?(Model duplication regression|Validation-label regression risk|No evidence that remediation weakened non-falsification core text|Generator/validator addition is net positive|R-\d+\s+[—-]\s+.+?)(?:\*\*)?$")
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        if re.match(r"^#+\s+(Critical|High|Medium|Low|Editorial)\b", line, re.I):
+            current_severity = re.sub(r"^#+\s+", "", line).strip().split()[0].title()
+            current_context = current_severity
+            continue
+        if "Regression Findings" in line:
+            current_context = "Regression"
+            current_severity = "Regression"
+            continue
+        if "Previous Findings Verification" in line or "Prior finding" in line:
+            current_context = "Previous"
+        m = table_re.match(line)
+        if m and not line.startswith("|---"):
+            fid = clean_cell(m.group(1))
+            title = clean_cell(m.group(2))
+            status = clean_cell(m.group(3))
+            if is_finding_id(fid) and title.lower() not in {"finding", "prior finding"}:
+                rows.append(finding_dict(source, fid, severity_from_id(fid, current_severity), title, status))
+                continue
+        m = heading_re.match(line)
+        if m:
+            fid, title, status = m.group(1), clean_cell(m.group(2)), clean_cell(m.group(3) or "")
+            rows.append(finding_dict(source, fid, severity_from_id(fid, current_severity), title, status))
+            continue
+        m = bold_re.match(line)
+        if m:
+            fid, title = m.group(1), clean_cell(m.group(2))
+            rows.append(finding_dict(source, fid, severity_from_id(fid, current_severity), title, ""))
+            continue
+        m = bold_id_re.match(line)
+        if m:
+            fid, title = m.group(1), clean_cell(m.group(2))
+            rows.append(finding_dict(source, fid, severity_from_id(fid, current_severity), title, ""))
+            continue
+        if current_context == "Regression":
+            m = numbered_bold_re.match(line)
+            if m:
+                fid = f"REG-{len([r for r in rows if r['reviewer_severity'] == 'Regression']) + 1:02d}"
+                rows.append(finding_dict(source, fid, "Regression", clean_cell(m.group(1)), ""))
+                continue
+            m = regression_re.match(line)
+            if m:
+                title = clean_cell(m.group(1))
+                if title.startswith("R-"):
+                    fid, title = re.split(r"\s+[—-]\s+", title, 1)
+                else:
+                    fid = f"REG-{len([r for r in rows if r['reviewer_severity'] == 'Regression']) + 1:02d}"
+                rows.append(finding_dict(source, fid, "Regression", title, ""))
+    deduped: list[dict[str, str]] = []
+    local_seen: set[tuple[str, str]] = set()
+    for row in rows:
+        key = (row["review_finding_id"], row["finding_title"])
+        if key not in local_seen:
+            local_seen.add(key)
+            deduped.append(row)
+    return deduped
+
+
+def clean_cell(value: str) -> str:
+    return re.sub(r"\s+", " ", value.replace("**", "").replace("`", "")).strip()
+
+
+def is_finding_id(value: str) -> bool:
+    return bool(re.match(r"^(C|H|M|N|R|REG|IC|B)[A-Z-]*-?\d+$", value.strip(), re.I))
+
+
+def severity_from_id(fid: str, fallback: str) -> str:
+    upper = fid.upper()
+    if upper.startswith("C") or "-C-" in upper:
+        return "Critical"
+    if upper.startswith("H") or "-H" in upper:
+        return "High"
+    if upper.startswith("M") or "-M" in upper:
+        return "Medium"
+    if upper.startswith("L") or "-L" in upper:
+        return "Low"
+    if upper.startswith("E") or "-E" in upper:
+        return "Editorial"
+    if upper.startswith("R") or upper.startswith("REG"):
+        return "Regression"
+    return fallback or "Unspecified"
+
+
+def finding_dict(source: dict[str, Any], fid: str, severity: str, title: str, status: str) -> dict[str, str]:
+    return {
+        "reviewer": source["reviewer"],
+        "review_report_filename": source["filename"],
+        "review_report_sha256": source["sha256"],
+        "review_finding_id": fid,
+        "reviewer_severity": severity,
+        "finding_title": title,
+        "finding_text_summary": f"{title}; reviewer disposition/status: {status or 'not separately stated'}",
+    }
+
+
+def normalize_severity(severity: str) -> str:
+    return {
+        "Critical": "P1_BLOCKING",
+        "High": "P2_HIGH",
+        "Medium": "P3_MEDIUM",
+        "Low": "P4_LOW",
+        "Editorial": "P5_EDITORIAL",
+        "Regression": "P2_HIGH_REGRESSION",
+    }.get(severity, "P3_MEDIUM")
+
+
+def consensus_group_for(title: str) -> str:
+    text = title.lower()
+    groups = [
+        ("validation-truthfulness", ["validation", "pass", "attestation", "check"]),
+        ("source-authentication-traceability", ["source", "disposition", "traceability", "changed_files"]),
+        ("schema-required-values", ["schema", "payload", "null", "empty", "fcr"]),
+        ("lifecycle-dimensional-model", ["lifecycle", "terminal", "state", "dimension"]),
+        ("production-authority", ["production", "release"]),
+        ("second-review-authority", ["second", "segregation", "succession", "founder"]),
+        ("privacy-legal-regulatory", ["privacy", "legal", "external", "pilot"]),
+        ("tamper-evidence-ci", ["checksum", "tamper", "ci", "check"]),
+        ("adversarial-reference-integrity", ["adversarial", "pointer", "reference", "anchor"]),
+        ("legacy-template-supersession", ["template", "supersession", "maintenance standard"]),
+    ]
+    for group, terms in groups:
+        if any(term in text for term in terms):
+            return group
+    return "reviewer-specific"
+
+
+def affected_artifacts_for(title: str) -> str:
+    group = consensus_group_for(title)
+    return {
+        "validation-truthfulness": "DOCUMENTARY_VALIDATION_REPORT.json; validation_logs/*; tools/round2_package.py; VALIDATION_CATEGORY_RESULT_MATRIX.csv",
+        "source-authentication-traceability": "review_sources/*; SOURCE_AND_AUTHORITY_REGISTER.csv; OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv",
+        "schema-required-values": "FOUNDER_CERTIFICATION_MACHINE_READABLE_SCHEMA.json; test_fixtures/*; templates/*",
+        "lifecycle-dimensional-model": "LIFECYCLE_STATE_DEFINITION_MATRIX.csv; LIFECYCLE_STATE_AND_TRANSITION_MATRIX.csv; AUTHORITY_EVENT_MODEL.csv; EVIDENCE_STATUS_MODEL.csv",
+        "production-authority": "AUTHORITY_EVENT_MODEL.csv; FOUNDER_CERTIFICATION_MACHINE_READABLE_SCHEMA.json; PROHIBITED_OVERCLAIM_MATRIX.csv",
+        "second-review-authority": "SECOND_REVIEW_CONTROL_MATRIX.csv; ROLE_DEFINITION_AND_ASSIGNMENT_MATRIX.csv; DELEGATION_AND_SUCCESSION_CONTROL_MATRIX.csv",
+        "privacy-legal-regulatory": "PILOT_PRIVACY_AND_EVIDENCE_CONTROL_MATRIX.csv; REGULATORY_AND_EXTERNAL_OBLIGATION_APPLICABILITY_REGISTER.csv; RECORDS_RETENTION_SCHEDULE.csv",
+        "tamper-evidence-ci": "CHECKSUMS.sha256; PACKAGE_MANIFEST.json; governance_portfolio_standard_validation_workflow.yml",
+        "adversarial-reference-integrity": "ADVERSARIAL_REVIEW_MATRIX.csv; MACHINE_READABLE_REFERENCE_INDEX.csv; tools/round2_package.py",
+        "legacy-template-supersession": "LEGACY_TEMPLATE_SUPERSESSION_RECORD.csv; GOVERNANCE_MAINTENANCE_STANDARD_SUPERSESSION_RECORD.csv; templates/*",
+    }.get(group, "package matrices; normative JSON; generated Markdown; validation report")
+
+
+def remediation_required_for(title: str) -> str:
+    return f"Maintain exact source evidence, preserve individual finding row, and present current package remediation for targeted Round 3 re-review: {consensus_group_for(title)}."
 
 
 def controlled_vocabulary_rows() -> list[dict[str, str]]:
@@ -559,9 +759,9 @@ def write_fixtures(root: Path) -> None:
 
 def write_static_docs(root: Path, data: dict[str, Any]) -> None:
     write_text(root / "README_FIRST.md", f"# README FIRST\n\nStatus: `{data['status']}`\n\nFinal status: `{data['readiness_status']}`\n\nRead `REVISION_SUMMARY.md`, `{MD_NAME}`, `DOCUMENTARY_VALIDATION_REPORT.json`, and `KNOWN_LIMITATIONS.md` first.\n\nThis is a Round 2 remediation candidate only.\n")
-    write_text(root / "REVISION_SUMMARY.md", f"# Revision Summary\n\nRound 2 remediation downgraded the package status, separated lifecycle/authority/certification/evidence/readiness dimensions, replaced hardcoded validation attestation with retained execution logs, superseded legacy templates, added FCR fixtures, and recorded the exact Round 2 reviewer source absence as blocking.\n\nFinal status: `{FINAL_STATUS}`.\n")
-    write_text(root / "KNOWN_LIMITATIONS.md", "# Known Limitations\n\n- Exact Cursor, Claude, and Perplexity Round 2 review report bytes were not supplied separately in this run.\n- Legal, privacy-law, regulatory, Founder, implementation, production, and independent outside-review checks are pending or blocked, not PASS.\n- Second review is operationally required; if no independent reviewer is available, FCR-09/FCR-10 and high-consequence closures are blocked.\n- Signed tags and branch-protection enforcement require separate repository administration.\n")
-    write_text(root / "ROUND_2_FINDING_CLOSURE_REPORT.md", "# Round 2 Finding Closure Report\n\nFindings are not closed by Codex changes alone. Current closure status is `PARTIALLY_REMEDIATED` or source-blocked pending exact reviewer report bytes and targeted Round 3 re-review.\n")
+    write_text(root / "REVISION_SUMMARY.md", f"# Revision Summary\n\nRound 3 source-authentication remediation commits exact Cursor, Claude, and Perplexity Round 2 review reports as repository-native evidence, rebuilds the disposition matrix at reviewer-finding granularity, and validates source-to-disposition traceability. Round 2 mechanical remediation also downgraded status, separated lifecycle/authority/certification/evidence/readiness dimensions, replaced hardcoded validation attestation with retained execution logs, superseded legacy templates, added FCR fixtures, and retained no-activation authority boundaries.\n\nFinal status: `{FINAL_STATUS}`.\n")
+    write_text(root / "KNOWN_LIMITATIONS.md", "# Known Limitations\n\n- Exact Cursor, Claude, and Perplexity Round 2 review report bytes are now committed as repository-native evidence; this does not itself close findings by independent re-review.\n- Legal, privacy-law, regulatory, Founder, implementation, production, and independent outside-review checks are pending or blocked, not PASS.\n- Second review is operationally required; if no independent reviewer is available, FCR-09/FCR-10 and high-consequence closures are blocked.\n- Signed tags and branch-protection enforcement require separate repository administration.\n")
+    write_text(root / "ROUND_2_FINDING_CLOSURE_REPORT.md", "# Round 2 Finding Closure Report\n\nFindings are not closed by Codex changes alone. Current closure status is `REMEDIATED_PENDING_REREVIEW` for authenticated reviewer findings; targeted Round 3 independent re-review is required before any independent closure claim.\n")
     write_text(root / "TARGETED_ROUND_3_REREVIEW_INSTRUCTIONS.md", "# Targeted Round 3 Re-Review Instructions\n\nReview the exact package bytes at the final PR #77 head. Re-execute committed checksum verification before any regeneration. Review validation logs, FCR fixtures, lifecycle dimensional separation, second-review controls, and source limitations.\n")
     write_text(root / "REPOSITORY_RECONCILIATION_REPORT.md", "# Repository Reconciliation Report\n\nRepository reconciliation is updated by final execution. This report records that PR #77 remained draft and unmerged, and protected-branch mutation was not authorized.\n")
     workflow = """name: Governance Portfolio Standard Validation
@@ -634,7 +834,10 @@ def generate_expected(root: Path) -> None:
     data = build_source()
     if ROUND2_DIRECTIVE_ATTACHMENT.exists():
         shutil.copyfile(ROUND2_DIRECTIVE_ATTACHMENT, root / ROUND2_DIRECTIVE_COPY)
-    write_review_source_notes(root)
+    round3_directive = ROUND3_SOURCE_DIR / ROUND3_DIRECTIVE_COPY
+    if round3_directive.exists():
+        shutil.copyfile(round3_directive, root / ROUND3_DIRECTIVE_COPY)
+    write_review_sources(root)
     md = render_markdown(data)
     write_text(root / MD_NAME, md)
     data["human_readable_source"] = {"path": MD_NAME, "sha256": sha256_file(root / MD_NAME), "byte_length": (root / MD_NAME).stat().st_size, "supersedes_stale_values_from_77d58949": True}
@@ -645,7 +848,7 @@ def generate_expected(root: Path) -> None:
     write_json(root / "FOUNDER_CERTIFICATION_MACHINE_READABLE_SCHEMA.json", fcr_schema())
     write_templates(root)
     write_fixtures(root)
-    for name, (rows, fields) in matrix_files(data).items():
+    for name, (rows, fields) in matrix_files(data, root).items():
         write_csv(root / name, rows, fields)
     write_static_docs(root, data)
     write_validation_report(root, data)
@@ -702,10 +905,11 @@ def run_checks(root: Path, data: dict[str, Any], logs: Path) -> list[CheckResult
     checks.append(result("VAL-REF-001", "JSON pointers and Markdown anchors resolve", "reference", "check_references", logs, lambda: check_references(root)))
     checks.append(result("VAL-LIFECYCLE-001", "lifecycle terminality matches transition graph", "lifecycle", "check_lifecycle", logs, lambda: check_lifecycle(root)))
     checks.append(result("VAL-OVERCLAIM-001", "prohibited overclaim fixtures fail and qualified statements pass", "overclaim", "check_overclaim_fixtures", logs, lambda: check_overclaim_fixtures(root)))
-    checks.append(result("VAL-REVIEW-DISPOSITION-001", "Round 2 disposition rows retain source limitation", "review_disposition", "check_review_disposition", logs, lambda: check_review_disposition(root)))
+    checks.append(result("VAL-REVIEW-SOURCE-001", "exact Cursor, Claude, and Perplexity Round 2 source reports authenticated", "source_authentication", "check_review_sources", logs, lambda: check_review_sources(root)))
+    checks.append(result("VAL-REVIEW-DISPOSITION-001", "Round 2 disposition rows map to authenticated reviewer findings", "review_disposition", "check_review_disposition", logs, lambda: check_review_disposition(root)))
+    checks.append(result("VAL-REVIEW-ATTRIBUTION-001", "reviewer attribution and severity reconciliation retained", "review_attribution", "check_reviewer_attribution", logs, lambda: check_reviewer_attribution(root)))
     checks.append(pending(root, "VAL-HUMAN-001", "qualified human semantic review", "human_review", "Qualified human semantic review not included as durable record."))
     checks.append(pending(root, "VAL-LEGAL-001", "legal/privacy/regulatory/external-obligation review", "legal_review", "Legal, privacy-law, regulatory, and external-obligation review not included as durable record."))
-    checks.append(pending(root, "VAL-REVIEW-SOURCE-001", "exact Cursor, Claude, and Perplexity Round 2 source reports", "source_authentication", "Exact reviewer report bytes were not supplied; exact per-reviewer ingestion is blocked."))
     return checks
 
 
@@ -805,15 +1009,64 @@ def check_overclaim_fixtures(root: Path) -> tuple[bool, str]:
     return not errors, "\n".join(errors or ["overclaim fixtures verified"])
 
 
+def check_review_sources(root: Path) -> tuple[bool, str]:
+    errors = []
+    lines = []
+    for source in REVIEW_SOURCES:
+        path = root / "review_sources" / source["filename"]
+        if not path.exists():
+            errors.append(f"missing {source['filename']}")
+            continue
+        digest = sha256_file(path)
+        size = path.stat().st_size
+        if digest != source["sha256"]:
+            errors.append(f"sha256 mismatch {source['filename']}: {digest}")
+        if size != source["byte_length"]:
+            errors.append(f"byte length mismatch {source['filename']}: {size}")
+        lines.append(f"{source['reviewer']}: {source['filename']} sha256={digest} bytes={size}")
+    return not errors, "\n".join(errors or lines)
+
+
 def check_review_disposition(root: Path) -> tuple[bool, str]:
     rows = read_csv(root / "OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv")
     errors = []
+    source_hashes = {s["sha256"] for s in REVIEW_SOURCES}
+    reviewers = {s["reviewer"] for s in REVIEW_SOURCES}
     for row in rows:
-        if row["closure_status"] in {"PARTIALLY_REMEDIATED", "REMEDIATED_PENDING_REREVIEW"} and not row["changed_files"]:
+        if row["reviewer"] not in reviewers:
+            errors.append(f"unknown reviewer {row['review_finding_id']}: {row['reviewer']}")
+        if row["review_report_sha256"] not in source_hashes:
+            errors.append(f"row not tied to authenticated report {row['review_finding_id']}")
+        if row["closure_status"] in {"PARTIALLY_REMEDIATED", "REMEDIATED_PENDING_REREVIEW", "REMEDIATED_PENDING_VALIDATION"} and not row["changed_files"]:
             errors.append(f"missing changed_files {row['review_finding_id']}")
-        if row["review_report_sha256"] == "UNAVAILABLE_EVIDENCE" and "unavailable" not in row["remaining_limitation"].lower():
-            errors.append(f"missing unavailable limitation {row['review_finding_id']}")
-    return not errors, "\n".join(errors or ["review disposition source limitations recorded"])
+        if row["closure_status"] == "CLOSED_BY_INDEPENDENT_REREVIEW":
+            errors.append(f"Codex may not close finding by independent rereview: {row['review_finding_id']}")
+        if row["finding_title"].strip() == "" or row["finding_text_summary"].strip() == "":
+            errors.append(f"missing finding-specific text {row['review_finding_id']}")
+    counts: dict[str, int] = {}
+    for row in rows:
+        counts[row["reviewer"]] = counts.get(row["reviewer"], 0) + 1
+    for reviewer in sorted(reviewers - set(counts)):
+        errors.append(f"no disposition rows for {reviewer}")
+    return not errors, "\n".join(errors or [f"review disposition rows authenticated: {counts}"])
+
+
+def check_reviewer_attribution(root: Path) -> tuple[bool, str]:
+    rows = read_csv(root / "OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv")
+    allowed_statuses = {"OPEN", "PARTIALLY_REMEDIATED", "REMEDIATED_PENDING_VALIDATION", "REMEDIATED_PENDING_REREVIEW", "CLOSED_BY_INDEPENDENT_REREVIEW", "REJECTED_WITH_RECORDED_RATIONALE", "DEFERRED_WITH_BLOCKING_LIMITATION"}
+    errors = []
+    for row in rows:
+        if not row["review_finding_id"]:
+            errors.append("missing review_finding_id")
+        if not row["reviewer_severity"]:
+            errors.append(f"missing reviewer severity {row['review_finding_id']}")
+        if not row["normalized_severity"].startswith("P"):
+            errors.append(f"bad normalized severity {row['review_finding_id']}")
+        if row["closure_status"] not in allowed_statuses:
+            errors.append(f"invalid closure status {row['review_finding_id']}: {row['closure_status']}")
+        if not row["consensus_classification"]:
+            errors.append(f"missing consensus group {row['review_finding_id']}")
+    return not errors, "\n".join(errors or [f"reviewer attribution and severity retained for {len(rows)} rows"])
 
 
 def write_manifest_and_checksums(root: Path) -> None:
