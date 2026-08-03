@@ -1,0 +1,771 @@
+{
+  "adversarial_review": [
+    {
+      "actual_result": "PASS",
+      "attack_or_misuse_case": "Unexecuted check reported as PASS",
+      "evidence_artifact_paths": [
+        "DOCUMENTARY_VALIDATION_REPORT.json"
+      ],
+      "evidence_examined": "/normative_rule_catalog/0/rule_id",
+      "expected_control_behavior": "Claim must fail closed, narrow, or remain pending unless exact evidence resolves it.",
+      "json_pointers": [
+        "/normative_rule_catalog/0/rule_id"
+      ],
+      "limitations": "ADV-005 remains blocked until exact reviewer report bytes are supplied.",
+      "markdown_anchors": [
+        "rule-es-gps-valid-001"
+      ],
+      "reopening_consequence": "Affected claim remains reopened or blocked.",
+      "rule_ids": [
+        "ES-GPS-VALID-001",
+        "ES-GPS-OVER-001"
+      ],
+      "scenario_id": "ADV-001",
+      "scenario_narrative": "Unexecuted check reported as PASS",
+      "test_method": "VAL-REPORT-001",
+      "validator_check_ids": [
+        "VAL-REPORT-001"
+      ]
+    },
+    {
+      "actual_result": "PASS",
+      "attack_or_misuse_case": "Production authorization inferred from documentary package",
+      "evidence_artifact_paths": [
+        "DOCUMENTARY_VALIDATION_REPORT.json"
+      ],
+      "evidence_examined": "/production_authorization_model/PRODUCTION_AUTHORIZED_NO_EXCEPTIONS",
+      "expected_control_behavior": "Claim must fail closed, narrow, or remain pending unless exact evidence resolves it.",
+      "json_pointers": [
+        "/production_authorization_model/PRODUCTION_AUTHORIZED_NO_EXCEPTIONS"
+      ],
+      "limitations": "ADV-005 remains blocked until exact reviewer report bytes are supplied.",
+      "markdown_anchors": [
+        "production-authorization"
+      ],
+      "reopening_consequence": "Affected claim remains reopened or blocked.",
+      "rule_ids": [
+        "ES-GPS-VALID-001",
+        "ES-GPS-OVER-001"
+      ],
+      "scenario_id": "ADV-002",
+      "scenario_narrative": "Production authorization inferred from documentary package",
+      "test_method": "VAL-OVERCLAIM-001",
+      "validator_check_ids": [
+        "VAL-OVERCLAIM-001"
+      ]
+    },
+    {
+      "actual_result": "PASS",
+      "attack_or_misuse_case": "FCR payload omits required value",
+      "evidence_artifact_paths": [
+        "DOCUMENTARY_VALIDATION_REPORT.json"
+      ],
+      "evidence_examined": "/certification_classes/0/required_fields",
+      "expected_control_behavior": "Claim must fail closed, narrow, or remain pending unless exact evidence resolves it.",
+      "json_pointers": [
+        "/certification_classes/0/required_fields"
+      ],
+      "limitations": "ADV-005 remains blocked until exact reviewer report bytes are supplied.",
+      "markdown_anchors": [
+        "fcr-controls"
+      ],
+      "reopening_consequence": "Affected claim remains reopened or blocked.",
+      "rule_ids": [
+        "ES-GPS-VALID-001",
+        "ES-GPS-OVER-001"
+      ],
+      "scenario_id": "ADV-003",
+      "scenario_narrative": "FCR payload omits required value",
+      "test_method": "VAL-FCR-001",
+      "validator_check_ids": [
+        "VAL-FCR-001"
+      ]
+    },
+    {
+      "actual_result": "PASS",
+      "attack_or_misuse_case": "Authority event represented as lifecycle state",
+      "evidence_artifact_paths": [
+        "DOCUMENTARY_VALIDATION_REPORT.json"
+      ],
+      "evidence_examined": "/dimension_model/authority_event_status",
+      "expected_control_behavior": "Claim must fail closed, narrow, or remain pending unless exact evidence resolves it.",
+      "json_pointers": [
+        "/dimension_model/authority_event_status"
+      ],
+      "limitations": "ADV-005 remains blocked until exact reviewer report bytes are supplied.",
+      "markdown_anchors": [
+        "dimension-model"
+      ],
+      "reopening_consequence": "Affected claim remains reopened or blocked.",
+      "rule_ids": [
+        "ES-GPS-VALID-001",
+        "ES-GPS-OVER-001"
+      ],
+      "scenario_id": "ADV-004",
+      "scenario_narrative": "Authority event represented as lifecycle state",
+      "test_method": "VAL-LIFECYCLE-001",
+      "validator_check_ids": [
+        "VAL-LIFECYCLE-001"
+      ]
+    },
+    {
+      "actual_result": "BLOCKED_SOURCE_UNAVAILABLE",
+      "attack_or_misuse_case": "Round 2 source report unavailable but marked complete",
+      "evidence_artifact_paths": [
+        "DOCUMENTARY_VALIDATION_REPORT.json"
+      ],
+      "evidence_examined": "/round_2_source_limitation",
+      "expected_control_behavior": "Claim must fail closed, narrow, or remain pending unless exact evidence resolves it.",
+      "json_pointers": [
+        "/round_2_source_limitation"
+      ],
+      "limitations": "ADV-005 remains blocked until exact reviewer report bytes are supplied.",
+      "markdown_anchors": [
+        "round-2-source-limitation"
+      ],
+      "reopening_consequence": "Affected claim remains reopened or blocked.",
+      "rule_ids": [
+        "ES-GPS-VALID-001",
+        "ES-GPS-OVER-001"
+      ],
+      "scenario_id": "ADV-005",
+      "scenario_narrative": "Round 2 source report unavailable but marked complete",
+      "test_method": "VAL-REVIEW-SOURCE-001",
+      "validator_check_ids": [
+        "VAL-REVIEW-SOURCE-001"
+      ]
+    }
+  ],
+  "artifact_id": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0",
+  "artifact_lifecycle_transitions": [
+    {
+      "from_state": "DRAFTING",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "REVIEW_PENDING",
+      "transition_id": "ALC-001"
+    },
+    {
+      "from_state": "REVIEW_PENDING",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "REVIEWED",
+      "transition_id": "ALC-002"
+    },
+    {
+      "from_state": "REVIEW_PENDING",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "DRAFTING",
+      "transition_id": "ALC-003"
+    },
+    {
+      "from_state": "REVIEW_PENDING",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "REJECTED",
+      "transition_id": "ALC-004"
+    },
+    {
+      "from_state": "REVIEWED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "APPROVED",
+      "transition_id": "ALC-005"
+    },
+    {
+      "from_state": "REVIEWED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "DRAFTING",
+      "transition_id": "ALC-006"
+    },
+    {
+      "from_state": "APPROVED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "ADOPTED",
+      "transition_id": "ALC-007"
+    },
+    {
+      "from_state": "ADOPTED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "LOCKED",
+      "transition_id": "ALC-008"
+    },
+    {
+      "from_state": "LOCKED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "ACCESSION_PENDING",
+      "transition_id": "ALC-009"
+    },
+    {
+      "from_state": "ACCESSION_PENDING",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "REPOSITORY_ACCESSIONED",
+      "transition_id": "ALC-010"
+    },
+    {
+      "from_state": "REPOSITORY_ACCESSIONED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "CUSTODY_COMPLETE",
+      "transition_id": "ALC-011"
+    },
+    {
+      "from_state": "CUSTODY_COMPLETE",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "ACTIVE",
+      "transition_id": "ALC-012"
+    },
+    {
+      "from_state": "ACTIVE",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "SUSPENDED",
+      "transition_id": "ALC-013"
+    },
+    {
+      "from_state": "ACTIVE",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "REOPENED",
+      "transition_id": "ALC-014"
+    },
+    {
+      "from_state": "SUSPENDED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "ACTIVE",
+      "transition_id": "ALC-015"
+    },
+    {
+      "from_state": "SUSPENDED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "SUPERSEDED",
+      "transition_id": "ALC-016"
+    },
+    {
+      "from_state": "SUSPENDED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "RETIRED",
+      "transition_id": "ALC-017"
+    },
+    {
+      "from_state": "REOPENED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "RECLOSED",
+      "transition_id": "ALC-018"
+    },
+    {
+      "from_state": "REOPENED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "SUSPENDED",
+      "transition_id": "ALC-019"
+    },
+    {
+      "from_state": "REOPENED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "SUPERSEDED",
+      "transition_id": "ALC-020"
+    },
+    {
+      "from_state": "REOPENED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "RETIRED",
+      "transition_id": "ALC-021"
+    },
+    {
+      "from_state": "RECLOSED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "ACTIVE",
+      "transition_id": "ALC-022"
+    },
+    {
+      "from_state": "RECLOSED",
+      "required_condition": "Durable lifecycle record with scope, evidence, authority, limitations, and prohibited claims.",
+      "rule_ids": [
+        "ES-GPS-CLASS-001"
+      ],
+      "to_state": "REOPENED",
+      "transition_id": "ALC-023"
+    }
+  ],
+  "authority_boundary": "ROUND_2_DOCUMENTARY_REMEDIATION_AND_REVALIDATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_CERTIFICATION_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY",
+  "certification_classes": [
+    {
+      "certification_class_id": "FCR-01",
+      "class_name": "Historical Evidence Certification",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "unavailable_historical_source",
+        "efforts_to_locate_source",
+        "substituted_evidence",
+        "limitations",
+        "affected_claims",
+        "review_trigger",
+        "expires_at",
+        "historical_fact_not_rewritten_statement"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-02",
+      "class_name": "Current-State Certification",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "exact_current_baseline",
+        "inspected_repository_state",
+        "evidence_examined",
+        "exclusions",
+        "unresolved_uncertainty",
+        "affected_claims",
+        "scope_limitations"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-03",
+      "class_name": "Test Waiver",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "exact_waived_test",
+        "reason",
+        "risk",
+        "duration",
+        "compensating_controls",
+        "expires_at",
+        "reopening_trigger",
+        "prohibited_claims"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-04",
+      "class_name": "Test Deferral",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "deferred_test",
+        "due_date",
+        "interim_controls",
+        "owner",
+        "blocking_consequences",
+        "expires_at",
+        "mandatory_completion_trigger"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-05",
+      "class_name": "Alternative Evidence Acceptance",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "original_evidence_requirement",
+        "alternative_evidence",
+        "equivalence_analysis",
+        "known_limitations",
+        "residual_risk",
+        "expires_at_or_review_trigger",
+        "affected_claims"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-06",
+      "class_name": "Pilot Evidence Substitution",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "environment",
+        "exact_build_or_commit",
+        "cohort",
+        "duration",
+        "feature_scope",
+        "data_scope",
+        "provenance",
+        "lawful_basis_or_consent",
+        "participant_notice",
+        "privacy_minimization",
+        "retention_period",
+        "limitations",
+        "anomalies",
+        "substituted_requirement",
+        "stop_conditions",
+        "incident_treatment",
+        "dpia_or_not_required_determination"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-07",
+      "class_name": "Soundness Certification",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "reviewed_scope",
+        "evidence_relied_upon",
+        "technical_basis",
+        "documentary_basis",
+        "operational_basis",
+        "unresolved_defects",
+        "reviewer_identity",
+        "prohibited_inferences",
+        "expires_at_or_reopening_trigger"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-08",
+      "class_name": "Residual-Risk Acceptance",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "risk_statement",
+        "likelihood",
+        "impact",
+        "affected_scope",
+        "compensating_controls",
+        "owner",
+        "review_date",
+        "trigger_for_reconsideration",
+        "hiring_or_maturity_trigger",
+        "consequences_if_risk_materializes"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-09",
+      "class_name": "Procedural Override",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "exact_gate_overridden",
+        "harm_or_burden_caused_by_gate",
+        "proportionality_analysis",
+        "external_obligation_check",
+        "compensating_control",
+        "duration",
+        "scope",
+        "second_review",
+        "non_waivable_core_confirmation",
+        "revocation_trigger"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    },
+    {
+      "certification_class_id": "FCR-10",
+      "class_name": "Production Authorization",
+      "non_waivable_core_binding": "This class lacks authority to waive, substitute, defer, override, or nullify any non-waivable-core requirement.",
+      "required_fields": [
+        "release_identity",
+        "environment",
+        "feature_scope",
+        "data_scope",
+        "user_scope",
+        "evidence_relied_upon",
+        "unresolved_risk_statement",
+        "exception_attestation",
+        "stop_conditions",
+        "rollback_conditions",
+        "effective_date",
+        "expires_at_or_review_trigger",
+        "second_review",
+        "release_scope_only_statement"
+      ],
+      "status_values": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ]
+    }
+  ],
+  "certification_id_grammar": "^ES-FCR-(0[1-9]|10)-[0-9]{4}-[0-9]{3}$",
+  "current_revision_candidate_before_round_2": "77d58949e3f3ca3082e5cc3598c6607b7a3786f6",
+  "dimension_model": {
+    "artifact_lifecycle": [
+      "DRAFTING",
+      "REVIEW_PENDING",
+      "REVIEWED",
+      "APPROVED",
+      "ADOPTED",
+      "LOCKED",
+      "ACCESSION_PENDING",
+      "REPOSITORY_ACCESSIONED",
+      "CUSTODY_COMPLETE",
+      "ACTIVE",
+      "SUSPENDED",
+      "REOPENED",
+      "RECLOSED",
+      "SUPERSEDED",
+      "RETIRED",
+      "REJECTED"
+    ],
+    "authority_event_status": [
+      "IMPLEMENTATION_AUTHORIZED",
+      "PILOT_AUTHORIZED",
+      "PRODUCTION_AUTHORIZED_NO_EXCEPTIONS",
+      "PRODUCTION_AUTHORIZED_WITH_EXPRESS_EXCEPTIONS",
+      "AUTHORIZATION_REVOKED",
+      "AUTHORIZATION_EXPIRED"
+    ],
+    "certification_status": [
+      "ACTIVE",
+      "EXPIRED",
+      "REVOKED",
+      "SUSPENDED",
+      "SUPERSEDED",
+      "NARROWED",
+      "SATISFIED_BY_EVIDENCE"
+    ],
+    "evidence_status": [
+      "VERIFIED",
+      "NOT_VERIFIED",
+      "WAIVED",
+      "DEFERRED",
+      "SUBSTITUTE_EVIDENCE_ACCEPTED",
+      "UNAVAILABLE",
+      "BLOCKED",
+      "PENDING"
+    ],
+    "readiness_status": [
+      "NOT_READY",
+      "READY_FOR_TARGETED_REREVIEW",
+      "PENDING_HUMAN_REVIEW",
+      "PENDING_LEGAL_REVIEW",
+      "BLOCKED_SOURCE_UNAVAILABLE"
+    ]
+  },
+  "human_readable_source": {
+    "byte_length": 5507,
+    "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.md",
+    "sha256": "c8f3e93505295da0cb9f32fea4d20abeb0490d421524b3ecc686a91349ad9311",
+    "supersedes_stale_values_from_77d58949": true
+  },
+  "normative_rule_catalog": [
+    {
+      "markdown_anchor": "rule-es-gps-valid-001",
+      "rule_id": "ES-GPS-VALID-001",
+      "statement": "Validation reports must be built only from captured executions or truthful pending/blocked records.",
+      "title": "Validation integrity"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-core-001",
+      "rule_id": "ES-GPS-CORE-001",
+      "statement": "FCR-01 through FCR-10 and every authority mechanism lack authority to waive non-falsification, external-law limits, durable authority records, exact release scope, truthful validation, overclaim prohibitions, historical preservation, revocation/supersession traceability, material-defect disclosure, machine-readable FCR records, pilot privacy minima, security/privacy baselines where applicable, or high-consequence independent-review requirements.",
+      "title": "Non-waivable governance core"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-class-001",
+      "rule_id": "ES-GPS-CLASS-001",
+      "statement": "Artifact lifecycle, authority-event status, certification status, evidence status, and readiness status are orthogonal dimensions and must not substitute for one another.",
+      "title": "Dimensional separation"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-prod-001",
+      "rule_id": "ES-GPS-PROD-001",
+      "statement": "Production authorization requires exact release identity and may be no-exception or with-express-exceptions; a clean production authorization must not require an artificial exception record.",
+      "title": "Production authorization"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-2rev-001",
+      "rule_id": "ES-GPS-2REV-001",
+      "statement": "FCR-09, FCR-10, critical-control waivers, material privacy/safeguarding/security exceptions, pilot evidence substitution, critical finding closure, and production authorization with exceptions require independent second review; absent that reviewer, issuance and closure are blocked.",
+      "title": "Second review"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-src-001",
+      "rule_id": "ES-GPS-SRC-001",
+      "statement": "Exact source bytes, SHA-256, byte length, source status, and limitations must be recorded; unavailable evidence must not be marked resolved.",
+      "title": "Source traceability"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-over-001",
+      "rule_id": "ES-GPS-OVER-001",
+      "statement": "No file may claim approval, adoption, activation, implementation verification, production authorization, Founder-review readiness, or independent validation unless exact evidence and authority are present.",
+      "title": "Unsupported overclaim prohibition"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-chal-001",
+      "rule_id": "ES-GPS-CHAL-001",
+      "statement": "Credible challenges require acknowledgement, triage, investigation, escalation, written disposition, and reopening effect deadlines.",
+      "title": "Challenge timing"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-maint-001",
+      "rule_id": "ES-GPS-MAINT-001",
+      "statement": "The package must identify a separate Governance Maintenance Standard predecessor or state that no separate predecessor was issued.",
+      "title": "Maintenance supersession truth"
+    }
+  ],
+  "normative_source_of_truth": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.json",
+  "production_authorization_model": {
+    "PRODUCTION_AUTHORIZED_NO_EXCEPTIONS": [
+      "exact release identity",
+      "exact commit or release tag",
+      "environment",
+      "feature scope",
+      "data scope",
+      "user scope",
+      "evidence relied upon",
+      "unresolved-risk statement",
+      "zero-exception attestation",
+      "stop conditions",
+      "rollback conditions",
+      "effective date",
+      "expiration or review trigger",
+      "required second review"
+    ],
+    "PRODUCTION_AUTHORIZED_WITH_EXPRESS_EXCEPTIONS": [
+      "all clean-path fields",
+      "explicit exception inventory",
+      "retained risk",
+      "second-review attestation"
+    ]
+  },
+  "readiness_status": "ROUND_2_FINDINGS_REVISION_INCOMPLETE_BLOCKING_DEFECTS_REMAIN",
+  "review_round": "Targeted Outside Re-Review, Round 2",
+  "round_2_source_limitation": "Exact Cursor, Claude, and Perplexity Round 2 report bytes were referenced by the Founder directive but not supplied as separate exact source files in this run. This blocks any claim of complete per-reviewer finding ingestion.",
+  "status": "ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL",
+  "terminal_lifecycle_states": [
+    "REJECTED",
+    "RETIRED",
+    "SUPERSEDED"
+  ],
+  "truth_principle": "FOUNDER AUTHORITY MAY CHANGE THE REQUIRED INTERNAL GATE OR EVIDENCE SUFFICIENCY DETERMINATION, BUT IT MAY NOT CHANGE HISTORICAL FACT.",
+  "validation_result_vocabulary": [
+    "BLOCKED",
+    "FAIL",
+    "NOT_APPLICABLE",
+    "NOT_EXECUTED",
+    "PASS",
+    "PENDING"
+  ],
+  "version": "1.0.2"
+}

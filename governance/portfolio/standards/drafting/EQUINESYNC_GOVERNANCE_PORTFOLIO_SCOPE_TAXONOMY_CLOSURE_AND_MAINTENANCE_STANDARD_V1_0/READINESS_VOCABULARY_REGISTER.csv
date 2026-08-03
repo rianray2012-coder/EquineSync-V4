@@ -1,0 +1,6 @@
+readiness_status,dimension,definition,evidence_requirement,allowed_change
+NOT_READY,readiness_status,Readiness status NOT_READY.,Durable evidence appropriate to this readiness dimension.,By validation or review record.
+READY_FOR_TARGETED_REREVIEW,readiness_status,Readiness status READY_FOR_TARGETED_REREVIEW.,Durable evidence appropriate to this readiness dimension.,By validation or review record.
+PENDING_HUMAN_REVIEW,readiness_status,Readiness status PENDING_HUMAN_REVIEW.,Durable evidence appropriate to this readiness dimension.,By validation or review record.
+PENDING_LEGAL_REVIEW,readiness_status,Readiness status PENDING_LEGAL_REVIEW.,Durable evidence appropriate to this readiness dimension.,By validation or review record.
+BLOCKED_SOURCE_UNAVAILABLE,readiness_status,Readiness status BLOCKED_SOURCE_UNAVAILABLE.,Durable evidence appropriate to this readiness dimension.,By validation or review record.

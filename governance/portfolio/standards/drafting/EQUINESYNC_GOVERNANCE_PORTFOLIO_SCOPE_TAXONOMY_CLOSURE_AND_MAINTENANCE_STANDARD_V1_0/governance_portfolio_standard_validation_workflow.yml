@@ -1,0 +1,30 @@
+name: Governance Portfolio Standard Validation
+
+on:
+  pull_request:
+    paths:
+      - 'governance/portfolio/standards/drafting/EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify committed checksums before generation
+        working-directory: governance/portfolio/standards/drafting/EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0
+        run: shasum -a 256 -c CHECKSUMS.sha256
+      - name: Read-only drift check
+        working-directory: governance/portfolio/standards/drafting/EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0
+        run: python3 tools/generate_governance_portfolio_package.py --check
+      - name: Validate package and run tests
+        working-directory: governance/portfolio/standards/drafting/EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0
+        run: |
+          python3 tools/validate_governance_portfolio_package.py --package-dir .
+          python3 tools/round2_package.py --test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: governance-portfolio-validation-logs
+          path: governance/portfolio/standards/drafting/EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0/validation_logs

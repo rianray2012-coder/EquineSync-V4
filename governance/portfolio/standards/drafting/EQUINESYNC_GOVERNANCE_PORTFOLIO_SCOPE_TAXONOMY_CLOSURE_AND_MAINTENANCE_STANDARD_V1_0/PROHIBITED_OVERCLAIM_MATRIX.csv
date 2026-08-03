@@ -1,0 +1,17 @@
+overclaim_id,unsupported_claim,unsupported_condition,correct_truthful_statement,rule_ids
+POC-001,Governance complete,Only a subset was reviewed.,"Governance review is complete only for the exact scope, with exclusions and retained findings listed.",ES-GPS-CLOSE-001
+POC-002,Founder approved means adopted,Founder approved recommendations or dispositions but did not execute adoption.,Founder approval is recorded for stated decisions; adoption is pending unless an adoption record exists.,ES-GPS-FA-001
+POC-003,Locked,No exact-byte lock record exists for the version.,The artifact is not locked unless exact bytes and lock effect are recorded.,ES-GPS-LOCK-001
+POC-004,Active,No activation record exists.,The artifact is inactive or candidate unless activation is separately recorded.,ES-GPS-ACT-001
+POC-005,Implementation authorized,Only governance drafting or adoption exists.,Implementation requires exact separate authorization.,ES-GPS-IMPL-001
+POC-006,Verification passed,"The test was waived, deferred, substituted, or not run.","The truthful status is waiver, deferral, substitution, or not executed.",ES-GPS-VER-001
+POC-007,Historical bytes verified,The source was unavailable and handled through certification.,Historical evidence was Founder-certified as sufficient for bounded purpose; direct exact-byte verification was unavailable.,ES-GPS-HIST-001
+POC-008,Production evidence,Evidence came from a controlled pilot and no production applicability decision exists.,Pilot-generated evidence was accepted or reviewed for the specified requirement only.,ES-GPS-PILOTEVD-001
+POC-009,Production authorized,"Certification, waiver, or pilot evidence exists without express production authorization.",Production authority is absent unless Founder exact-head production authorization expressly exists.,ES-GPS-CERT-PROD-001
+POC-010,Risk closed,"Risk was accepted, not eliminated.",Risk is retained and accepted inside stated scope with controls and review trigger.,ES-GPS-RISK-001
+POC-011,Exception applies portfolio-wide,Certification scope is narrower.,"Exception applies only to the exact scope, duration, baseline, and purpose recorded.",ES-GPS-FCR-001
+POC-012,Temporary waiver still valid,Expiration or review trigger occurred.,The waiver expired or requires renewal before reliance.,ES-GPS-EXPIRE-001
+POC-013,Founder waived legal duty,The requirement is external or cannot be internally waived.,Founder waiver affects only internal EquineSync process unless external authority permits otherwise.,ES-GPS-EXTLAW-001
+POC-014,Superseded records should be rewritten,A later decision exists.,Historical records are preserved and successor records identify changed current effect.,ES-GPS-SUP-001
+POC-015,Soundness certification equals production readiness,Certification only permits controlled continuation.,Work is certified acceptable for the stated next activity only.,ES-GPS-SOUND-001
+POC-016,Structured companion unnecessary,"Artifact supports authority, lifecycle, closure, risk, certification, waiver, or production.",Machine-readable record is required unless Founder certifies an alternative structured record.,ES-GPS-MR-001

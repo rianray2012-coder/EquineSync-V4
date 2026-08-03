@@ -1,0 +1,4 @@
+step,deadline,required_action,overdue_treatment,reopening_effect
+acknowledgement,2 business days,Record challenge and affected claim,Escalate to Founder,Affected claim qualified pending triage
+triage,5 business days,"Classify severity, owner, interim protections",Escalate and mark BLOCKED,Credible claim reopened
+investigation,15 business days unless extended by durable record,Review evidence and issue written disposition,Remain open with escalation,Claim remains suspended or narrowed

@@ -1,0 +1,13 @@
+control_id,requirement,evidence_required,automatic_suspension_trigger,rule_ids
+PILPRIV-001,lawful basis or participant consent,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-002,participant notice,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-003,data minimization,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-004,retention limits,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-005,pseudonymization where practical,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-006,minor data protection,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-007,payment and financial data treatment,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-008,subprocessor or vendor treatment,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-009,incident response and breach escalation,Durable pilot authorization or FCR-06 payload field,Material personal-data incident,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-010,deletion or redaction,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-011,DPIA or documented not-required determination,Durable pilot authorization or FCR-06 payload field,N/A,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"
+PILPRIV-012,automatic suspension after material personal-data incident,Durable pilot authorization or FCR-06 payload field,Material personal-data incident,"[""ES-GPS-PRIV-001"",""ES-GPS-PILOTEVD-001""]"

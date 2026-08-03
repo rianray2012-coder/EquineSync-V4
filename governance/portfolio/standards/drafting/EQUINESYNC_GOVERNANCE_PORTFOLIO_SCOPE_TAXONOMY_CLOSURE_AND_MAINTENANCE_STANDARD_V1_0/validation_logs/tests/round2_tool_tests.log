@@ -1,0 +1,12 @@
+generator_check_read_only: PASS - code=0
+validator_valid_package: PASS - validator returned zero
+schema_valid_fixture: PASS - valid fixture accepted
+schema_rejects_invalid_empty_required_string: PASS - invalid fixture rejected
+schema_rejects_invalid_malformed_commit_sha: PASS - invalid fixture rejected
+schema_rejects_invalid_null_required_value: PASS - invalid fixture rejected
+schema_rejects_invalid_whitespace_required_string: PASS - invalid fixture rejected
+schema_rejects_invalid_wrong_truth_statement: PASS - invalid fixture rejected
+overclaim_negative_fixture: PASS - overclaim detected
+qualified_status_fixture: PASS - qualified statement accepted
+generator_dirty_check_detects_drift: PASS - code=1
+generator_dirty_check_preserves_dirty_bytes: PASS - dirty copy unchanged by --check
