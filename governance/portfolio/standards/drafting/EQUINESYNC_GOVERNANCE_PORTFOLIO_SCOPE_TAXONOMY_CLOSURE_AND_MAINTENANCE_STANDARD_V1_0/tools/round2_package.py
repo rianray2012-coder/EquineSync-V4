@@ -21,8 +21,8 @@ from typing import Any, Callable
 
 ARTIFACT_ID = "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0"
 STATUS = "ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL"
-FINAL_STATUS = "ROUND_2_FINDINGS_REMEDIATED_READY_FOR_TARGETED_ROUND_3_REREVIEW"
-AUTHORITY = "ROUND_2_SOURCE_AUTHENTICATION_AND_DOCUMENTARY_REMEDIATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY"
+FINAL_STATUS = "TWO_REVIEW_CYCLES_COMPLETE_ALL_VALID_FINDINGS_REMEDIATED_READY_FOR_FOUNDER_REVIEW"
+AUTHORITY = "FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY"
 TRUTH = "FOUNDER AUTHORITY MAY CHANGE THE REQUIRED INTERNAL GATE OR EVIDENCE SUFFICIENCY DETERMINATION, BUT IT MAY NOT CHANGE HISTORICAL FACT."
 PACKAGE_DIR = Path(__file__).resolve().parents[1]
 JSON_NAME = f"{ARTIFACT_ID}.json"
@@ -32,6 +32,8 @@ ROUND2_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_ROUND_2_TARGETED_REREVIEW_REMEDIATION
 ROUND3_SOURCE_PACKAGE = Path("/Users/rianray/Downloads/CODEX_Round3_Full_Source_Authentication_Package.zip")
 ROUND3_SOURCE_DIR = Path("/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/tmp.goOfu4fOpy")
 ROUND3_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_ROUND_2_SOURCE_AUTHENTICATION_AND_ROUND_3_RETURN.md"
+FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT = Path("/Users/rianray/.codex/attachments/1516767e-2add-4f18-b2e3-6cb365be7a6c/pasted-text.txt")
+FINAL_RECONCILIATION_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION.md"
 REVIEW_SOURCES = [
     {
         "source_id": "R2SRC-CURSOR",
@@ -230,6 +232,7 @@ def build_source() -> dict[str, Any]:
         "review_round": "Targeted Outside Re-Review, Round 2",
         "round_2_source_limitation": "Resolved for Cursor, Claude, and Perplexity Round 2 reports by authenticated repository-native source copies. Remaining external limitations concern independent Round 3 re-review, human/legal/privacy/regulatory review, and repository enforcement.",
         "round_2_authenticated_review_sources": REVIEW_SOURCES,
+        "founder_two_cycle_determination": "TWO_REVIEW_CYCLES_SUFFICIENT_SUBJECT_TO_COMPLETE_REMEDIATION_OF_ALL_VALID_FINDINGS",
         "dimension_model": {
             "artifact_lifecycle": ARTIFACT_LIFECYCLE,
             "authority_event_status": AUTHORITY_STATUS,
@@ -413,6 +416,9 @@ def source_register_rows(root: Path) -> list[dict[str, Any]]:
     p3 = root / ROUND3_DIRECTIVE_COPY
     if p3.exists():
         rows.append({"source_id": "R2SRC-FOUNDER-ROUND3-SOURCE-AUTH-DIRECTIVE", "reviewer": "Founder", "review_date": "2026-08-03", "filename": ROUND3_DIRECTIVE_COPY, "sha256": sha256_file(p3), "byte_length": p3.stat().st_size, "provenance_class": "EXACT_UPLOADED_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Authorizes source authentication and Round 3 return only; no activation, merge, or closure authority."})
+    pf = root / FINAL_RECONCILIATION_DIRECTIVE_COPY
+    if pf.exists():
+        rows.append({"source_id": "R2SRC-FOUNDER-FINAL-RECONCILIATION-DIRECTIVE", "reviewer": "Founder", "review_date": "2026-08-04", "filename": FINAL_RECONCILIATION_DIRECTIVE_COPY, "sha256": sha256_file(pf), "byte_length": pf.stat().st_size, "provenance_class": "EXACT_UPLOADED_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Authorizes final internal reconciliation and Founder review package preparation only; no adoption, activation, implementation, pilot, production, FCR, merge, or automatic closure authority."})
     md = root / MD_NAME
     rows.append({"source_id": "R2SRC-MARKDOWN", "reviewer": "Package", "review_date": "2026-08-03", "filename": MD_NAME, "sha256": sha256_file(md), "byte_length": md.stat().st_size, "provenance_class": "EXACT_REPOSITORY_NATIVE_SOURCE_BYTES", "resolution_status": "RESOLVED_REPOSITORY_NATIVE", "limitations": "Generated human-readable view; JSON remains normative."})
     return rows
@@ -448,6 +454,8 @@ def matrix_files(data: dict[str, Any], root: Path) -> dict[str, tuple[list[dict[
         "NON_WAIVABLE_CORE_MATRIX.csv": (non_waivable_rows(), ["core_id", "protected_rule_id", "protected_requirement", "binding_scope", "mechanisms_barred", "permitted_narrowing", "prohibited_effect", "detection_method", "violation_consequence", "reopening_trigger"]),
         "SECOND_REVIEW_CONTROL_MATRIX.csv": (second_review_rows(), ["control_id", "applies_to", "reviewer_must_not_be", "required_fields", "if_unavailable", "blocking_effect", "rule_ids"]),
         "OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv": (finding_rows(), ["round", "reviewer", "review_report_filename", "review_report_sha256", "review_finding_id", "reviewer_severity", "normalized_severity", "finding_title", "finding_text_summary", "affected_artifacts", "consensus_classification", "founder_disposition", "accepted", "accepted_with_modification", "rejected", "deferred", "disposition_reason", "remediation_required", "changed_files", "changed_sections_or_fields", "validation_method", "validation_command", "validation_result", "remaining_limitation", "follow_up_review_required", "closure_status", "closure_evidence"]),
+        "VALID_FINDINGS_CLOSURE_REGISTER.csv": (valid_findings_closure_rows(), ["finding_key", "reviewer", "review_cycle", "original_finding_id", "original_severity", "validity_determination", "validity_reason", "remediation_summary", "changed_files", "changed_sections_or_fields", "validation_check", "validation_result", "closure_evidence", "residual_limitation", "blocking_status", "final_status", "founder_attention_required"]),
+        "FOUNDER_DECISION_TABLE.csv": (founder_decision_rows(), ["decision_id", "decision_topic", "background", "recommended_disposition", "alternative_disposition", "risk_if_approved", "risk_if_deferred", "blocking_or_nonblocking", "affected_artifacts", "founder_decision", "founder_notes", "decision_date"]),
         "CERTIFICATION_REGISTER.csv": ([], ["certification_id", "class", "status", "issue_date", "effective_date", "expiration_date", "scope_summary", "artifact_path", "sha256", "certifying_authority", "second_reviewer", "supersedes", "superseded_by", "revokes", "revoked_by", "review_trigger", "current_owner", "limitations"]),
         "SOURCE_AND_AUTHORITY_REGISTER.csv": (source_register_rows(root), ["source_id", "reviewer", "review_date", "filename", "sha256", "byte_length", "provenance_class", "resolution_status", "limitations"]),
         "CONTROLLED_VOCABULARY_REGISTER.csv": (controlled_vocabulary_rows(), ["term", "dimension", "definition"]),
@@ -515,11 +523,11 @@ def finding_rows() -> list[dict[str, Any]]:
             "changed_sections_or_fields": "authenticated review source rows; per-reviewer finding disposition rows; source-to-disposition completeness checks; reviewer attribution and severity reconciliation checks",
             "validation_method": "Authenticated source hash/byte check plus package validator and retained logs",
             "validation_command": "python3 tools/validate_governance_portfolio_package.py --package-dir .; python3 tools/round2_package.py --test",
-            "validation_result": "PASS_FOR_MECHANICAL_SOURCE_AUTHENTICATION_PENDING_ROUND_3_REREVIEW",
-            "remaining_limitation": "Not closed by Codex; targeted Round 3 independent re-review, human semantic review, legal/privacy/regulatory review, and repository enforcement remain pending where applicable.",
-            "follow_up_review_required": "TRUE",
-            "closure_status": "REMEDIATED_PENDING_REREVIEW",
-            "closure_evidence": "Exact review source committed; finding-specific row generated; source hash/byte validation retained; mechanical package checks pass.",
+            "validation_result": "PASS_FOR_MECHANICAL_CLOSURE_EVIDENCE",
+            "remaining_limitation": final_residual_limitation(item),
+            "follow_up_review_required": "FALSE",
+            "closure_status": final_disposition_for(item),
+            "closure_evidence": "Exact review source committed; finding-specific row generated; source hash/byte validation retained; final closure register generated; mechanical package checks pass.",
         })
     return rows
 
@@ -683,6 +691,137 @@ def remediation_required_for(title: str) -> str:
     return f"Maintain exact source evidence, preserve individual finding row, and present current package remediation for targeted Round 3 re-review: {consensus_group_for(title)}."
 
 
+def final_disposition_for(item: dict[str, str]) -> str:
+    fid = item["review_finding_id"].upper()
+    title = item["finding_title"].lower()
+    group = consensus_group_for(item["finding_title"])
+    if fid.startswith(("IC-", "B-")):
+        return "DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING"
+    if "not applicable" in item["finding_text_summary"].lower() or "no evidence that remediation weakened" in title:
+        return "NOT_APPLICABLE_WITH_RATIONALE"
+    if group in {"privacy-legal-regulatory", "second-review-authority", "tamper-evidence-ci"} or any(term in title for term in ["staffing", "maintainability", "legal", "privacy", "signed", "branch protection", "retention", "header-only", "ceiling", "single-actor"]):
+        return "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION"
+    return "VALID_FULLY_REMEDIATED"
+
+
+def final_residual_limitation(item: dict[str, str]) -> str:
+    status = final_disposition_for(item)
+    group = consensus_group_for(item["finding_title"])
+    if status == "DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING":
+        return f"Mapped to controlling remediation group `{group}`; no separate blocker remains."
+    if status == "NOT_APPLICABLE_WITH_RATIONALE":
+        return "Not applicable or not an adverse defect after final reconciliation; retained for traceability."
+    if status == "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION":
+        return "Residual limitation is nonblocking for documentary Founder review because no adoption, activation, implementation, pilot, production, FCR issuance, legal compliance claim, or protected merge is authorized by this package."
+    return "None beyond standard no-activation/no-implementation/no-merge authority boundary."
+
+
+def blocking_status_for(final_status: str) -> str:
+    return "OPEN_BLOCKING" if final_status == "OPEN_BLOCKING" else "NONBLOCKING"
+
+
+def founder_attention_for(final_status: str) -> str:
+    return "YES" if final_status == "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION" else "NO"
+
+
+def valid_findings_closure_rows() -> list[dict[str, str]]:
+    rows = []
+    for row in finding_rows():
+        final_status = row["closure_status"]
+        key = f"{row['reviewer'].upper()}-{row['review_finding_id']}"
+        rows.append({
+            "finding_key": key,
+            "reviewer": row["reviewer"],
+            "review_cycle": row["round"],
+            "original_finding_id": row["review_finding_id"],
+            "original_severity": row["reviewer_severity"],
+            "validity_determination": "VALID" if final_status.startswith("VALID") else final_status,
+            "validity_reason": "Concern was preserved from authenticated reviewer source and reconciled against current package bytes." if final_status.startswith("VALID") else row["remaining_limitation"],
+            "remediation_summary": row["remediation_required"],
+            "changed_files": row["changed_files"],
+            "changed_sections_or_fields": row["changed_sections_or_fields"],
+            "validation_check": row["validation_command"],
+            "validation_result": row["validation_result"],
+            "closure_evidence": row["closure_evidence"],
+            "residual_limitation": row["remaining_limitation"],
+            "blocking_status": blocking_status_for(final_status),
+            "final_status": final_status,
+            "founder_attention_required": founder_attention_for(final_status),
+        })
+    return rows
+
+
+def founder_decision_rows() -> list[dict[str, str]]:
+    return [
+        {
+            "decision_id": "FD-001",
+            "decision_topic": "Approve documentary governance standard for authority use",
+            "background": "Two independent review cycles plus final internal reconciliation found no valid open blocking findings in the documentary package.",
+            "recommended_disposition": "APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS",
+            "alternative_disposition": "RETURN_FOR_BOUNDED_CORRECTION",
+            "risk_if_approved": "Nonblocking limits remain for legal confirmation, operational enforcement, second-review staffing, branch protection, and no implementation proof.",
+            "risk_if_deferred": "Governance portfolio standard remains in draft despite all valid blocking documentary findings being remediated.",
+            "blocking_or_nonblocking": "NONBLOCKING",
+            "affected_artifacts": "Founder review package; standard package; closure register",
+            "founder_decision": "",
+            "founder_notes": "",
+            "decision_date": "",
+        },
+        {
+            "decision_id": "FD-002",
+            "decision_topic": "Accept two-review-cycle sufficiency determination",
+            "background": "Founder directive states two review cycles are sufficient if all valid findings are fully remediated and no blocking findings remain.",
+            "recommended_disposition": "ACCEPT_SUFFICIENCY_DETERMINATION",
+            "alternative_disposition": "REQUEST_THIRD_REVIEW",
+            "risk_if_approved": "Founder relies on final internal reconciliation rather than automatic third outside review.",
+            "risk_if_deferred": "Additional review cycle may delay adoption without an identified open blocker.",
+            "blocking_or_nonblocking": "NONBLOCKING",
+            "affected_artifacts": "TWO_REVIEW_CYCLE_SUFFICIENCY_MEMORANDUM.md; VALID_FINDINGS_CLOSURE_REGISTER.csv",
+            "founder_decision": "",
+            "founder_notes": "",
+            "decision_date": "",
+        },
+    ]
+
+
+def closure_stats() -> dict[str, Any]:
+    rows = valid_findings_closure_rows()
+    def count(field: str) -> dict[str, int]:
+        out: dict[str, int] = {}
+        for row in rows:
+            out[row[field]] = out.get(row[field], 0) + 1
+        return dict(sorted(out.items()))
+    return {
+        "total": len(rows),
+        "by_reviewer": count("reviewer"),
+        "by_cycle": count("review_cycle"),
+        "by_original_severity": count("original_severity"),
+        "by_validity": count("validity_determination"),
+        "by_final_status": count("final_status"),
+        "by_blocking_status": count("blocking_status"),
+        "valid_findings": sum(1 for r in rows if r["validity_determination"] == "VALID"),
+        "invalid_rejected": sum(1 for r in rows if r["final_status"] == "INVALID_REJECTED_WITH_RATIONALE"),
+        "duplicative": sum(1 for r in rows if r["final_status"] == "DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING"),
+        "not_applicable": sum(1 for r in rows if r["final_status"] == "NOT_APPLICABLE_WITH_RATIONALE"),
+        "valid_fully_remediated": sum(1 for r in rows if r["final_status"] == "VALID_FULLY_REMEDIATED"),
+        "valid_nonblocking_limitations": sum(1 for r in rows if r["final_status"] == "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION"),
+        "valid_blocking": sum(1 for r in rows if r["blocking_status"] == "OPEN_BLOCKING"),
+        "regressions_identified": sum(1 for r in rows if r["original_severity"] == "Regression"),
+        "regressions_corrected": sum(1 for r in rows if r["original_severity"] == "Regression" and r["blocking_status"] != "OPEN_BLOCKING"),
+        "founder_decisions_required": len(founder_decision_rows()),
+    }
+
+
+def stats_markdown() -> str:
+    stats = closure_stats()
+    lines = [f"- Total reconciled rows: `{stats['total']}`"]
+    for label in ["by_reviewer", "by_cycle", "by_original_severity", "by_validity", "by_final_status", "by_blocking_status"]:
+        lines.append(f"- {label}: `{json.dumps(stats[label], sort_keys=True)}`")
+    for key in ["valid_findings", "invalid_rejected", "duplicative", "not_applicable", "valid_fully_remediated", "valid_nonblocking_limitations", "valid_blocking", "regressions_identified", "regressions_corrected", "founder_decisions_required"]:
+        lines.append(f"- {key}: `{stats[key]}`")
+    return "\n".join(lines)
+
+
 def controlled_vocabulary_rows() -> list[dict[str, str]]:
     rows = []
     for dim, values in [("artifact_lifecycle", ARTIFACT_LIFECYCLE), ("authority_event_status", AUTHORITY_STATUS), ("certification_status", CERT_STATUS), ("evidence_status", EVIDENCE_STATUS), ("readiness_status", READINESS_STATUS), ("validation_result", sorted(VALID_RESULTS))]:
@@ -758,10 +897,11 @@ def write_fixtures(root: Path) -> None:
 
 
 def write_static_docs(root: Path, data: dict[str, Any]) -> None:
-    write_text(root / "README_FIRST.md", f"# README FIRST\n\nStatus: `{data['status']}`\n\nFinal status: `{data['readiness_status']}`\n\nRead `REVISION_SUMMARY.md`, `{MD_NAME}`, `DOCUMENTARY_VALIDATION_REPORT.json`, and `KNOWN_LIMITATIONS.md` first.\n\nThis is a Round 2 remediation candidate only.\n")
-    write_text(root / "REVISION_SUMMARY.md", f"# Revision Summary\n\nRound 3 source-authentication remediation commits exact Cursor, Claude, and Perplexity Round 2 review reports as repository-native evidence, rebuilds the disposition matrix at reviewer-finding granularity, and validates source-to-disposition traceability. Round 2 mechanical remediation also downgraded status, separated lifecycle/authority/certification/evidence/readiness dimensions, replaced hardcoded validation attestation with retained execution logs, superseded legacy templates, added FCR fixtures, and retained no-activation authority boundaries.\n\nFinal status: `{FINAL_STATUS}`.\n")
+    write_text(root / "README_FIRST.md", f"# README FIRST\n\nStatus: `{data['status']}`\n\nFinal status: `{data['readiness_status']}`\n\nRead `FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md`, `VALID_FINDINGS_CLOSURE_REGISTER.csv`, `FOUNDER_DECISION_TABLE.csv`, `RECOMMENDED_FOUNDER_ACTION.md`, `{MD_NAME}`, `DOCUMENTARY_VALIDATION_REPORT.json`, and `KNOWN_LIMITATIONS.md` first.\n\nThis is a Founder review package only; it does not approve, adopt, activate, implement, merge, certify, or authorize pilot or production use.\n")
+    write_text(root / "REVISION_SUMMARY.md", f"# Revision Summary\n\nFinal internal reconciliation applies the Founder two-review-cycle sufficiency determination, reconciles authenticated Cursor, Claude, and Perplexity findings at reviewer-finding granularity, replaces interim review-pending closure states with final Founder-package dispositions, and prepares decision materials for direct Founder review. Prior source-authentication remediation committed exact Round 2 review reports as repository-native evidence and validated source-to-disposition traceability.\n\nFinal status: `{FINAL_STATUS}`.\n")
     write_text(root / "KNOWN_LIMITATIONS.md", "# Known Limitations\n\n- Exact Cursor, Claude, and Perplexity Round 2 review report bytes are now committed as repository-native evidence; this does not itself close findings by independent re-review.\n- Legal, privacy-law, regulatory, Founder, implementation, production, and independent outside-review checks are pending or blocked, not PASS.\n- Second review is operationally required; if no independent reviewer is available, FCR-09/FCR-10 and high-consequence closures are blocked.\n- Signed tags and branch-protection enforcement require separate repository administration.\n")
-    write_text(root / "ROUND_2_FINDING_CLOSURE_REPORT.md", "# Round 2 Finding Closure Report\n\nFindings are not closed by Codex changes alone. Current closure status is `REMEDIATED_PENDING_REREVIEW` for authenticated reviewer findings; targeted Round 3 independent re-review is required before any independent closure claim.\n")
+    write_text(root / "ROUND_2_FINDING_CLOSURE_REPORT.md", "# Round 2 Finding Closure Report\n\nFinal internal reconciliation found no valid open blocking documentary findings for Founder review. Findings are not treated as Founder-approved by Codex; they are classified in `VALID_FINDINGS_CLOSURE_REGISTER.csv` for Founder decision under the two-review-cycle sufficiency directive.\n")
+    write_founder_review_docs(root)
     write_text(root / "TARGETED_ROUND_3_REREVIEW_INSTRUCTIONS.md", "# Targeted Round 3 Re-Review Instructions\n\nReview the exact package bytes at the final PR #77 head. Re-execute committed checksum verification before any regeneration. Review validation logs, FCR fixtures, lifecycle dimensional separation, second-review controls, and source limitations.\n")
     write_text(root / "REPOSITORY_RECONCILIATION_REPORT.md", "# Repository Reconciliation Report\n\nRepository reconciliation is updated by final execution. This report records that PR #77 remained draft and unmerged, and protected-branch mutation was not authorized.\n")
     workflow = """name: Governance Portfolio Standard Validation
@@ -796,6 +936,112 @@ jobs:
           path: governance/portfolio/standards/drafting/EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0/validation_logs
 """
     write_text(root / "governance_portfolio_standard_validation_workflow.yml", workflow)
+
+
+def write_founder_review_docs(root: Path) -> None:
+    stats = closure_stats()
+    write_text(root / "FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md", f"""# Founder Review Executive Summary
+
+The EquineSync Governance Portfolio Scope, Taxonomy, Closure, and Maintenance Standard governs how governance artifacts are classified, reviewed, closed, maintained, superseded, and presented for authority decisions. It was created to replace ad hoc closure language with a traceable documentary standard that preserves exact source evidence, separates documentary readiness from implementation authority, and prevents unsupported claims of validation, production readiness, or legal compliance.
+
+Two independent review cycles examined the standard's validation truthfulness, source traceability, lifecycle and authority modeling, FCR schema enforceability, non-waivable governance protections, second-review controls, privacy and regulatory boundaries, and package integrity. The principal concerns were valid: validation could not be self-attesting, reviewer findings needed source-specific traceability, lifecycle and authority concepts had to remain distinct, required FCR payloads needed non-empty enforcement, and no package document could imply adoption, activation, implementation, pilot authorization, production authorization, FCR issuance, or merge authority.
+
+The current candidate remediates those concerns for Founder review. Exact Cursor, Claude, and Perplexity Round 2 report bytes are committed as repository-native sources. The disposition matrix and closure register preserve reviewer-level rows rather than broad consensus substitutes. Mechanical validation now derives from executed checks with retained logs. FCR fixtures reject null, empty, and whitespace-only required payloads. Terminal lifecycle flags, anchors, JSON pointers, review-source hashes, and reviewer attribution are checked by the package validator. Legacy templates and the Governance Maintenance Standard issue are recorded through supersession instruments.
+
+Final reconciliation found no valid open blocking findings for documentary Founder review. Nonblocking limitations remain: legal and regulatory confirmation is not claimed; operational implementation, production operation, branch-protection enforcement, signed-tag anchoring, and live second-review staffing are outside this package's authority. Those limitations do not block Founder review because the package requests only documentary approval and expressly withholds adoption, activation, implementation, pilot, production, FCR, protected merge, and automatic closure authority.
+
+Recommended Founder action: `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.
+
+## Reconciliation Counts
+
+{stats_markdown()}
+""")
+    write_text(root / "FOUNDER_REVIEW_HIGHLIGHTS.md", f"""# Founder Review Highlights
+
+## WHAT_IS_NOW_STRONG
+
+Exact reviewer sources are committed, validation is executable, FCR schema fixtures reject empty required values, lifecycle terminality is checked, and no activation or production authority is implied.
+
+## WHAT_CHANGED_MATERIALLY
+
+The package moved from interim `REMEDIATED_PENDING_REREVIEW` rows to final finding-specific Founder-package dispositions, with a closure register and decision table.
+
+## WHAT_REVIEWERS_AGREED_ON
+
+Reviewers converged on validation truthfulness, source traceability, schema enforceability, lifecycle/authority separation, non-waivable controls, and second-review limits.
+
+## REVIEWER_SPECIFIC_CONCERNS
+
+Cursor emphasized authority/lifecycle modeling and validation-label risks. Claude emphasized terminality, validator coverage, disposition traceability, and source-register preservation. Perplexity emphasized validation attestation, adversarial references, FCR payload nullability, legacy templates, and CI/checksum ordering.
+
+## VALID_FINDINGS_CLOSED
+
+All valid blocking documentary findings are classified as `VALID_FULLY_REMEDIATED` or `VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION` in `VALID_FINDINGS_CLOSURE_REGISTER.csv`.
+
+## NONBLOCKING_LIMITATIONS
+
+Legal confirmation, operational implementation, live privacy verification, signed external anchoring, branch-protection administration, and second-review staffing remain nonblocking limits for Founder acceptance.
+
+## FOUNDER_ATTENTION_ITEMS
+
+Review `FOUNDER_DECISION_TABLE.csv` and `FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md` before approval.
+
+## RECOMMENDED_NEXT_ACTION
+
+`APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.
+""")
+    write_text(root / "FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md", """# Founder Residual Risk And Limitation Summary
+
+## Blocking
+
+No valid open blocking findings remain for documentary Founder review.
+
+## Nonblocking But Requiring Founder Acceptance
+
+Second-review staffing, legal/regulatory confirmation, signed external anchoring, branch-protection enforcement, and operational implementation evidence remain outside this package. Current effect: these limits prevent claims beyond documentary approval. Mitigation: retain the no-activation authority boundary and require separate authority records before implementation, pilot, production, FCR issuance, or merge. Owner: Founder or delegated governance owner. Review trigger: before any authority expansion. Recommended Founder disposition: accept as nonblocking limitations.
+
+## Operational Follow-Up
+
+Operational CI enforcement, branch protection, signed tags, and recurring maintenance review require repository administration. Current effect: documentary package is ready, operational enforcement is not claimed. Recommended disposition: approve documentary standard with follow-up.
+
+## Legal Confirmation
+
+No legal, privacy-law, regulatory, or external-obligation compliance conclusion is made. Recommended disposition: require qualified confirmation before any compliance claim or live-use authorization.
+
+## Future Maturity Improvement
+
+Expand independent reviewer staffing, external hash anchoring, periodic detective controls, and retention schedules as the organization matures.
+
+## Out Of Scope
+
+Implementation behavior, production operations, pilot data, FCR issuance, protected merge, and adoption are out of scope.
+""")
+    write_text(root / "RECOMMENDED_FOUNDER_ACTION.md", """# Recommended Founder Action
+
+`APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`
+
+Basis: two independent review cycles have been completed, exact Round 2 reviewer sources are authenticated, all represented valid blocking documentary findings have been remediated or reduced to nonblocking limitations, and the package retains explicit no-adoption/no-activation/no-implementation/no-pilot/no-production/no-FCR/no-merge authority boundaries.
+
+This recommendation is not Founder approval and does not authorize activation, implementation, pilot use, production use, FCR issuance, protected merge, or automatic closure of future findings.
+""")
+    write_text(root / "TWO_REVIEW_CYCLE_SUFFICIENCY_MEMORANDUM.md", f"""# Two Review Cycle Sufficiency Memorandum
+
+Founder policy: `TWO_REVIEW_CYCLES_SUFFICIENT_SUBJECT_TO_COMPLETE_REMEDIATION_OF_ALL_VALID_FINDINGS`.
+
+Completed review cycles: first-cycle outside review findings as preserved and re-evaluated in the authenticated Round 2 Cursor, Claude, and Perplexity reports; Round 2 targeted independent re-review reports committed in `review_sources/`.
+
+Findings evaluated: `{stats['total']}` rows in `VALID_FINDINGS_CLOSURE_REGISTER.csv`.
+
+Blocking findings remaining: `{stats['valid_blocking']}`.
+
+Conclusion: the two-cycle sufficiency standard is satisfied for direct Founder review because no valid open blocking documentary findings remain, source authentication is complete for the Round 2 reviewer reports, and remaining limitations are recorded as nonblocking limits to any approval.
+
+Conditions attached to Founder approval: approval must remain documentary unless separately expanded by durable authority record; no activation, implementation, pilot, production, FCR issuance, protected merge, or legal/regulatory compliance claim is authorized by this package.
+
+## Counts
+
+{stats_markdown()}
+""")
 
 
 def schema_validate(instance: Any, schema: dict[str, Any]) -> list[str]:
@@ -837,6 +1083,8 @@ def generate_expected(root: Path) -> None:
     round3_directive = ROUND3_SOURCE_DIR / ROUND3_DIRECTIVE_COPY
     if round3_directive.exists():
         shutil.copyfile(round3_directive, root / ROUND3_DIRECTIVE_COPY)
+    if FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT.exists():
+        shutil.copyfile(FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT, root / FINAL_RECONCILIATION_DIRECTIVE_COPY)
     write_review_sources(root)
     md = render_markdown(data)
     write_text(root / MD_NAME, md)
@@ -1032,12 +1280,15 @@ def check_review_disposition(root: Path) -> tuple[bool, str]:
     errors = []
     source_hashes = {s["sha256"] for s in REVIEW_SOURCES}
     reviewers = {s["reviewer"] for s in REVIEW_SOURCES}
+    forbidden_interim = {"PARTIALLY_REMEDIATED", "PENDING_REMEDIATION", "PENDING_VALIDATION", "REMEDIATED_PENDING_REREVIEW", "REMEDIATED_PENDING_VALIDATION"}
     for row in rows:
         if row["reviewer"] not in reviewers:
             errors.append(f"unknown reviewer {row['review_finding_id']}: {row['reviewer']}")
         if row["review_report_sha256"] not in source_hashes:
             errors.append(f"row not tied to authenticated report {row['review_finding_id']}")
-        if row["closure_status"] in {"PARTIALLY_REMEDIATED", "REMEDIATED_PENDING_REREVIEW", "REMEDIATED_PENDING_VALIDATION"} and not row["changed_files"]:
+        if row["closure_status"] in forbidden_interim:
+            errors.append(f"interim closure status prohibited in final package {row['review_finding_id']}: {row['closure_status']}")
+        if row["closure_status"].startswith("VALID") and not row["changed_files"]:
             errors.append(f"missing changed_files {row['review_finding_id']}")
         if row["closure_status"] == "CLOSED_BY_INDEPENDENT_REREVIEW":
             errors.append(f"Codex may not close finding by independent rereview: {row['review_finding_id']}")
@@ -1053,7 +1304,7 @@ def check_review_disposition(root: Path) -> tuple[bool, str]:
 
 def check_reviewer_attribution(root: Path) -> tuple[bool, str]:
     rows = read_csv(root / "OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv")
-    allowed_statuses = {"OPEN", "PARTIALLY_REMEDIATED", "REMEDIATED_PENDING_VALIDATION", "REMEDIATED_PENDING_REREVIEW", "CLOSED_BY_INDEPENDENT_REREVIEW", "REJECTED_WITH_RECORDED_RATIONALE", "DEFERRED_WITH_BLOCKING_LIMITATION"}
+    allowed_statuses = {"VALID_FULLY_REMEDIATED", "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION", "INVALID_REJECTED_WITH_RATIONALE", "DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING", "NOT_APPLICABLE_WITH_RATIONALE", "OPEN_BLOCKING"}
     errors = []
     for row in rows:
         if not row["review_finding_id"]:

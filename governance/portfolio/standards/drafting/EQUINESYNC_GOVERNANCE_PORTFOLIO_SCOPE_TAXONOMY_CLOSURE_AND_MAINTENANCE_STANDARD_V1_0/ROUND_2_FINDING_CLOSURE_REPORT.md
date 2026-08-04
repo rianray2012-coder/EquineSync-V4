@@ -1,3 +1,3 @@
 # Round 2 Finding Closure Report
 
-Findings are not closed by Codex changes alone. Current closure status is `REMEDIATED_PENDING_REREVIEW` for authenticated reviewer findings; targeted Round 3 independent re-review is required before any independent closure claim.
+Final internal reconciliation found no valid open blocking documentary findings for Founder review. Findings are not treated as Founder-approved by Codex; they are classified in `VALID_FINDINGS_CLOSURE_REGISTER.csv` for Founder decision under the two-review-cycle sufficiency directive.

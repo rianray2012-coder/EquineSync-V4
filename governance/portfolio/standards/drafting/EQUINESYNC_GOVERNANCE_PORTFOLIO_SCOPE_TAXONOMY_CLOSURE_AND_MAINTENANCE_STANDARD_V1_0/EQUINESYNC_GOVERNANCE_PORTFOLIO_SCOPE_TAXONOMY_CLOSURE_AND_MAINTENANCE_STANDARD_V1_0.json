@@ -346,7 +346,7 @@
       "transition_id": "ALC-023"
     }
   ],
-  "authority_boundary": "ROUND_2_SOURCE_AUTHENTICATION_AND_DOCUMENTARY_REMEDIATION_AUTHORIZED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY",
+  "authority_boundary": "FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY",
   "certification_classes": [
     {
       "certification_class_id": "FCR-01",
@@ -663,10 +663,11 @@
       "BLOCKED_SOURCE_UNAVAILABLE"
     ]
   },
+  "founder_two_cycle_determination": "TWO_REVIEW_CYCLES_SUFFICIENT_SUBJECT_TO_COMPLETE_REMEDIATION_OF_ALL_VALID_FINDINGS",
   "human_readable_source": {
-    "byte_length": 5529,
+    "byte_length": 5715,
     "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.md",
-    "sha256": "e156c10d9db72be9f2a80e3c6ba30e986ab805f2e649b5dbe81eea33936cd7ad",
+    "sha256": "f5fa825011ed350d7d4594259b4dfb669517f21752938fd1b370fa8319b2b39e",
     "supersedes_stale_values_from_77d58949": true
   },
   "normative_rule_catalog": [
@@ -750,7 +751,7 @@
       "second-review attestation"
     ]
   },
-  "readiness_status": "ROUND_2_FINDINGS_REMEDIATED_READY_FOR_TARGETED_ROUND_3_REREVIEW",
+  "readiness_status": "TWO_REVIEW_CYCLES_COMPLETE_ALL_VALID_FINDINGS_REMEDIATED_READY_FOR_FOUNDER_REVIEW",
   "review_round": "Targeted Outside Re-Review, Round 2",
   "round_2_authenticated_review_sources": [
     {
