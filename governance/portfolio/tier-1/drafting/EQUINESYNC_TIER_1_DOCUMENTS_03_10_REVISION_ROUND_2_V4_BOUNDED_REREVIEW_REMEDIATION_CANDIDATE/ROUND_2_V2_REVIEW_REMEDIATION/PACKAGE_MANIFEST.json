@@ -1,0 +1,16 @@
+{
+  "directory": "ROUND_2_V2_REVIEW_REMEDIATION",
+  "files": [
+    {
+      "byte_length": 1048,
+      "path": "SOURCE_REVIEW_AUTHENTICATION_RECORD.json",
+      "sha256": "2f34732dca694489c960ffadb781c0b0c85bd6b5230963870dd905782e6a6312"
+    },
+    {
+      "byte_length": 914,
+      "path": "V3_REMEDIATION_SUMMARY.md",
+      "sha256": "d213829c58418bbaa3a0c4446aa340301af3d9bf904d1ef4aa708073bcfbd151"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

@@ -1,0 +1,7 @@
+field,allowed_value,definition
+current_target_disposition,REMEDIATED_IN_V3_PENDING_REREVIEW,Evidence was changed in V3 but remains subject to outside reviewer confirmation.
+current_target_disposition,VALID_OPEN_RETAINED,Finding remains valid and open; no closure is asserted by this package.
+current_target_disposition,NOT_REMEDIATED_RETAINED_OPEN,Finding is expressly not remediated and is retained open.
+current_target_disposition,RETAINED_NONBLOCKING_OPEN,Finding is low consequence but still open for later reproduction or review.
+second_reviewer_state,NOT_PERFORMED_NOT_FABRICATED,No second review is represented as performed by this package.
+authority_effect,NONE,"The package creates no adoption, activation, implementation, production, merge, certification, waiver, or acceptance authority."

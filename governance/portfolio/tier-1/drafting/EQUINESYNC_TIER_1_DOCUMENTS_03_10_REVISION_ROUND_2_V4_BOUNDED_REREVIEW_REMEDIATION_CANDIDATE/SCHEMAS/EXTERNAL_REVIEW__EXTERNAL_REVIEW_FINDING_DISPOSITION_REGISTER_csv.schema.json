@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_effect": {
+      "type": "string"
+    },
+    "evidence_path": {
+      "type": "string"
+    },
+    "external_review_finding": {
+      "type": "string"
+    },
+    "finding_id": {
+      "type": "string"
+    },
+    "founder_review_needed": {
+      "type": "string"
+    },
+    "merge_effect": {
+      "type": "string"
+    },
+    "round_2_disposition": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "finding_id",
+    "severity",
+    "external_review_finding",
+    "round_2_disposition",
+    "authority_effect",
+    "merge_effect",
+    "founder_review_needed",
+    "evidence_path"
+  ],
+  "title": "EXTERNAL_REVIEW/EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER.csv",
+  "type": "object"
+}

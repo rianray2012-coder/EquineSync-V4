@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "consequence": {
+      "type": "string"
+    },
+    "founder_decision_item": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "vacancy_state": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "role",
+    "vacancy_state",
+    "consequence",
+    "founder_decision_item"
+  ],
+  "title": "07_OWNERSHIP_STEWARDSHIP_REVIEW/VACANCY_AND_SUCCESSION_REGISTER.csv",
+  "type": "object"
+}

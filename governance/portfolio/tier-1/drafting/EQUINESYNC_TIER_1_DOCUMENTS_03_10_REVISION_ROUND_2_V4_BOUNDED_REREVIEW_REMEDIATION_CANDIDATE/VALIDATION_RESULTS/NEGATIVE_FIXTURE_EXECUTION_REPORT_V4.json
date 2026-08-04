@@ -1,0 +1,31 @@
+{
+  "checks": [
+    {
+      "expected_check": "distinct_founder_decision_consequence_if_approved",
+      "expected_failure_detected": true,
+      "fixture": "founder_decision_consequence_collapse"
+    },
+    {
+      "expected_check": "distinct_findings_severity_rationale",
+      "expected_failure_detected": true,
+      "fixture": "findings_analysis_collapse"
+    },
+    {
+      "expected_check": "distinct_lifecycle_reversal_rules",
+      "expected_failure_detected": true,
+      "fixture": "lifecycle_rule_collapse"
+    },
+    {
+      "expected_check": "distinct_audit_required_evidence_prefix_stripped",
+      "expected_failure_detected": true,
+      "fixture": "audit_required_evidence_collapse"
+    },
+    {
+      "expected_check": "distinct_doc10_normalized_template_bodies",
+      "expected_failure_detected": true,
+      "fixture": "doc10_template_body_collapse"
+    }
+  ],
+  "fixture_count": 5,
+  "status": "PASS"
+}

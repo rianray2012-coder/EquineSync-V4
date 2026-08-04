@@ -1,0 +1,21 @@
+{
+  "directory": "ROUND_3_V3_REVIEW_REMEDIATION",
+  "files": [
+    {
+      "byte_length": 2214,
+      "path": "V3_REVIEW_AUTHENTICATION_RECORD.json",
+      "sha256": "281045e423c50c111ce1c4a922d0df50195db42841ec9fbe889a4bb3fadf4a28"
+    },
+    {
+      "byte_length": 1295,
+      "path": "V4_REMEDIATION_DISPOSITION_SUMMARY.csv",
+      "sha256": "a116bc4fed198f60b70c3069824914047d7b93b8adc8822ea61e46b3f4f693e2"
+    },
+    {
+      "byte_length": 1093,
+      "path": "V4_REMEDIATION_SUMMARY.md",
+      "sha256": "91dec73911fe290b87c63503dce4c718eb6f160ceb388bb82f1d538579030015"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

@@ -1,0 +1,10 @@
+legacy_finding_id,current_t1c_id,v4_state,reconciliation_note
+T1R2-EXT-F-01,T1C-006,OPEN,Doc03 source-text candidates and discovery rubric
+T1R2-EXT-F-02,T1C-004,OPEN_PENDING_INDEPENDENT_ADJUDICATION,Doc10 template purpose-specificity
+T1R2-EXT-F-03,T1C-008,REMEDIATED_PENDING_REREVIEW,Validator failure-capability
+T1R2-EXT-F-04,T1C-007,REMEDIATED_PENDING_REREVIEW,External finding carry-forward
+T1R2-EXT-F-05,T1C-007,REMEDIATED_PENDING_REREVIEW,Self-closure prevention
+T1R2-EXT-F-06,T1C-013,OPEN,PR/workstream staleness
+T1R2-EXT-F-07,T1C-011;T1C-014,REMEDIATED_PENDING_REREVIEW_WITH_CONTENT_OPEN,Lifecycle rule specificity
+T1R2-EXT-F-08,T1C-016,OPEN,Principal document thinness
+T1R2-EXT-F-09,T1C-020,OPEN_NONBLOCKING,Single-platform validation
