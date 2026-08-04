@@ -19,14 +19,14 @@ Conditions attached to Founder approval: approval must remain documentary unless
 - by_cycle: `{"Round 2": 126}`
 - by_original_severity: `{"Critical": 23, "Editorial": 2, "High": 46, "Low": 2, "Medium": 13, "Regression": 30, "Unspecified": 10}`
 - by_validity: `{"DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING": 16, "NOT_APPLICABLE_WITH_RATIONALE": 2, "VALID": 108}`
-- by_final_status: `{"DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING": 16, "NOT_APPLICABLE_WITH_RATIONALE": 2, "VALID_FULLY_REMEDIATED": 90, "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION": 18}`
+- by_final_status: `{"DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING": 16, "NOT_APPLICABLE_WITH_RATIONALE": 2, "VALID_FULLY_REMEDIATED": 96, "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION": 12}`
 - by_blocking_status: `{"NONBLOCKING": 126}`
 - valid_findings: `108`
 - invalid_rejected: `0`
 - duplicative: `16`
 - not_applicable: `2`
-- valid_fully_remediated: `90`
-- valid_nonblocking_limitations: `18`
+- valid_fully_remediated: `96`
+- valid_nonblocking_limitations: `12`
 - valid_blocking: `0`
 - regressions_identified: `30`
 - regressions_corrected: `30`

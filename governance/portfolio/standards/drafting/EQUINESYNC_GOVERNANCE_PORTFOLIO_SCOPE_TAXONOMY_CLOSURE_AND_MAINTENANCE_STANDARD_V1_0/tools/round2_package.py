@@ -34,6 +34,71 @@ ROUND3_SOURCE_DIR = Path("/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/tmp.g
 ROUND3_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_ROUND_2_SOURCE_AUTHENTICATION_AND_ROUND_3_RETURN.md"
 FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT = Path("/Users/rianray/.codex/attachments/1516767e-2add-4f18-b2e3-6cb365be7a6c/pasted-text.txt")
 FINAL_RECONCILIATION_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION.md"
+SECOND_REVIEWER_DESIGNATION_COPY = "FOUNDER_DESIGNATION_INDEPENDENT_SECOND_REVIEWER_PATRICK_K_SPOON_SR.md"
+SECOND_REVIEWER_ID = "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
+SECOND_REVIEWER_NAME = "Patrick K. Spoon Sr."
+SECOND_REVIEWER_TITLE = "Chief Operations Officer, EquineSync"
+SECOND_REVIEWER_DESIGNATION_TEXT = """# Founder Designation
+
+## Independent Second Reviewer Appointment
+
+The Founder hereby designates:
+
+**Patrick K. Spoon Sr.**
+**Chief Operations Officer, EquineSync**
+
+as EquineSync's **Independent Second Reviewer** for high-consequence governance actions.
+
+This designation applies to matters requiring second review under the Governance Portfolio Scope, Taxonomy, Closure, and Maintenance Standard, including:
+
+- FCR-09 procedural overrides;
+- FCR-10 production authorizations;
+- closure of critical findings;
+- material privacy, safeguarding, security, or regulatory exceptions;
+- acceptance of live pilot evidence as substitute evidence;
+- waivers affecting critical controls; and
+- other decisions expressly requiring second-review assurance.
+
+## Independence and Recusal Conditions
+
+Patrick K. Spoon Sr. may serve as Second Reviewer only when he:
+
+- did not author the underlying certification or decision;
+- did not perform the primary validation being reviewed;
+- is not the accountable risk owner for the same matter;
+- is not the operational owner whose work is being approved;
+- has no material personal or organizational conflict affecting impartial judgment; and
+- has sufficient information and competency to conduct the review.
+
+Where any of these conditions are not met, he shall recuse, and the affected action shall remain blocked until another qualified reviewer is appointed.
+
+## Required Review Record
+
+Each second-review record shall include:
+
+- reviewer name and title;
+- matter reviewed;
+- evidence examined;
+- review date;
+- conflicts assessment;
+- findings or concerns;
+- approval, rejection, or conditional disposition;
+- limitations;
+- required follow-up;
+- and durable reviewer attestation.
+
+## Governance Effect
+
+This designation cures the previously recorded absence of a named standing Second Reviewer, subject to the recusal and independence requirements above.
+
+The applicable governance records shall be updated to identify:
+
+`PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER`
+
+as the current holder of the Independent Second Reviewer role.
+
+This designation does not itself approve any FCR, production authorization, exception, finding closure, implementation action, pilot activity, or production use.
+"""
 REVIEW_SOURCES = [
     {
         "source_id": "R2SRC-CURSOR",
@@ -419,6 +484,9 @@ def source_register_rows(root: Path) -> list[dict[str, Any]]:
     pf = root / FINAL_RECONCILIATION_DIRECTIVE_COPY
     if pf.exists():
         rows.append({"source_id": "R2SRC-FOUNDER-FINAL-RECONCILIATION-DIRECTIVE", "reviewer": "Founder", "review_date": "2026-08-04", "filename": FINAL_RECONCILIATION_DIRECTIVE_COPY, "sha256": sha256_file(pf), "byte_length": pf.stat().st_size, "provenance_class": "EXACT_UPLOADED_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Authorizes final internal reconciliation and Founder review package preparation only; no adoption, activation, implementation, pilot, production, FCR, merge, or automatic closure authority."})
+    psr = root / SECOND_REVIEWER_DESIGNATION_COPY
+    if psr.exists():
+        rows.append({"source_id": "R2SRC-FOUNDER-SECOND-REVIEWER-DESIGNATION", "reviewer": "Founder", "review_date": "2026-08-04", "filename": SECOND_REVIEWER_DESIGNATION_COPY, "sha256": sha256_file(psr), "byte_length": psr.stat().st_size, "provenance_class": "FOUNDER_CONVERSATION_DESIGNATION_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Designates standing Independent Second Reviewer subject to recusal and independence conditions; does not approve any FCR, production authorization, exception, finding closure, implementation action, pilot activity, or production use."})
     md = root / MD_NAME
     rows.append({"source_id": "R2SRC-MARKDOWN", "reviewer": "Package", "review_date": "2026-08-03", "filename": MD_NAME, "sha256": sha256_file(md), "byte_length": md.stat().st_size, "provenance_class": "EXACT_REPOSITORY_NATIVE_SOURCE_BYTES", "resolution_status": "RESOLVED_REPOSITORY_NATIVE", "limitations": "Generated human-readable view; JSON remains normative."})
     return rows
@@ -453,6 +521,7 @@ def matrix_files(data: dict[str, Any], root: Path) -> dict[str, tuple[list[dict[
         "FOUNDER_CERTIFICATION_WAIVER_SUBSTITUTION_AND_OVERRIDE_MATRIX.csv": (data["certification_classes"], ["certification_class_id", "class_name", "required_fields", "status_values", "non_waivable_core_binding"]),
         "NON_WAIVABLE_CORE_MATRIX.csv": (non_waivable_rows(), ["core_id", "protected_rule_id", "protected_requirement", "binding_scope", "mechanisms_barred", "permitted_narrowing", "prohibited_effect", "detection_method", "violation_consequence", "reopening_trigger"]),
         "SECOND_REVIEW_CONTROL_MATRIX.csv": (second_review_rows(), ["control_id", "applies_to", "reviewer_must_not_be", "required_fields", "if_unavailable", "blocking_effect", "rule_ids"]),
+        "ROLE_DEFINITION_AND_ASSIGNMENT_MATRIX.csv": (role_definition_rows(), ["role_id", "role_name", "responsibilities", "authority", "required_competency", "current_holder", "backup_holder", "conflict_of_interest_limitations", "vacancy_treatment", "default_holder_rule", "source_authority"]),
         "OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv": (finding_rows(), ["round", "reviewer", "review_report_filename", "review_report_sha256", "review_finding_id", "reviewer_severity", "normalized_severity", "finding_title", "finding_text_summary", "affected_artifacts", "consensus_classification", "founder_disposition", "accepted", "accepted_with_modification", "rejected", "deferred", "disposition_reason", "remediation_required", "changed_files", "changed_sections_or_fields", "validation_method", "validation_command", "validation_result", "remaining_limitation", "follow_up_review_required", "closure_status", "closure_evidence"]),
         "VALID_FINDINGS_CLOSURE_REGISTER.csv": (valid_findings_closure_rows(), ["finding_key", "reviewer", "review_cycle", "original_finding_id", "original_severity", "validity_determination", "validity_reason", "remediation_summary", "changed_files", "changed_sections_or_fields", "validation_check", "validation_result", "closure_evidence", "residual_limitation", "blocking_status", "final_status", "founder_attention_required"]),
         "FOUNDER_DECISION_TABLE.csv": (founder_decision_rows(), ["decision_id", "decision_topic", "background", "recommended_disposition", "alternative_disposition", "risk_if_approved", "risk_if_deferred", "blocking_or_nonblocking", "affected_artifacts", "founder_decision", "founder_notes", "decision_date"]),
@@ -482,7 +551,51 @@ def non_waivable_rows() -> list[dict[str, Any]]:
 
 def second_review_rows() -> list[dict[str, Any]]:
     applies = ["FCR-09 procedural override", "FCR-10 production authorization", "critical-control waiver", "material privacy/safeguarding/security exception", "live pilot evidence substitution", "critical finding closure", "production authorization with exceptions"]
-    return [{"control_id": f"2REV-{i:03d}", "applies_to": item, "reviewer_must_not_be": "certifying authority; artifact author; primary validator; risk owner", "required_fields": "reviewer identity; role; competency; timestamp; outcome; conflict disclosure; evidence reviewed; attestation; durable identity binding", "if_unavailable": "BLOCKING limitation; issuance/closure prohibited", "blocking_effect": "Blocks FCR-09/FCR-10 issuance, critical closure, and production authorization with exceptions", "rule_ids": ["ES-GPS-2REV-001"]} for i, item in enumerate(applies, 1)]
+    return [{"control_id": f"2REV-{i:03d}", "applies_to": item, "reviewer_must_not_be": "certifying authority; artifact author; primary validator; accountable risk owner; operational owner whose work is being approved; person with material personal or organizational conflict", "required_fields": "reviewer name and title; matter reviewed; evidence examined; review date; conflicts assessment; findings or concerns; approval/rejection/conditional disposition; limitations; required follow-up; durable reviewer attestation", "if_unavailable": f"{SECOND_REVIEWER_ID} must recuse if independence conditions are not met; affected action remains blocked until another qualified reviewer is appointed", "blocking_effect": "Blocks FCR-09/FCR-10 issuance, critical closure, material privacy/safeguarding/security/regulatory exceptions, live pilot substitute-evidence acceptance, and critical-control waiver when independent second review is absent or recused", "rule_ids": ["ES-GPS-2REV-001"]} for i, item in enumerate(applies, 1)]
+
+
+def role_definition_rows() -> list[dict[str, str]]:
+    return [
+        {
+            "role_id": "GPS-ROLE-001",
+            "role_name": "Founder",
+            "responsibilities": "Final accountable authority within written scope",
+            "authority": "May issue directives, dispositions, and bounded approvals; cannot rewrite historical fact or waive external law",
+            "required_competency": "Founder authority and governance context",
+            "current_holder": "Founder",
+            "backup_holder": "None unless delegated",
+            "conflict_of_interest_limitations": "Concentration must be disclosed and second review sought where required",
+            "vacancy_treatment": "Succession instrument controls; otherwise affected certifications may suspend at review trigger",
+            "default_holder_rule": "Founder",
+            "source_authority": "Founder governance authority and retained directives",
+        },
+        {
+            "role_id": "GPS-ROLE-002",
+            "role_name": "Governance Steward",
+            "responsibilities": "Maintain package, registers, validation evidence, and review cadence",
+            "authority": "Administrative stewardship only unless delegated",
+            "required_competency": "Governance evidence and repository custody",
+            "current_holder": "Founder until delegated",
+            "backup_holder": "Unassigned",
+            "conflict_of_interest_limitations": "Cannot independently approve own material certification",
+            "vacancy_treatment": "Founder acts as default and records segregation risk where applicable",
+            "default_holder_rule": "Founder until written delegation",
+            "source_authority": "Founder governance authority and retained directives",
+        },
+        {
+            "role_id": "GPS-ROLE-003",
+            "role_name": "Independent Second Reviewer",
+            "responsibilities": "Review high-consequence governance actions requiring second-review assurance",
+            "authority": "Independent second-review attestation only; designation does not itself approve FCRs, production authorization, exceptions, finding closure, implementation, pilot activity, or production use",
+            "required_competency": "Sufficient information and competency for the matter reviewed",
+            "current_holder": SECOND_REVIEWER_ID,
+            "backup_holder": "Another qualified reviewer appointed by durable Founder record if recusal is required",
+            "conflict_of_interest_limitations": "Must not author the underlying certification or decision, perform the primary validation, be accountable risk owner, be operational owner whose work is approved, or have material personal or organizational conflict",
+            "vacancy_treatment": "Affected action remains blocked until another qualified reviewer is appointed",
+            "default_holder_rule": f"{SECOND_REVIEWER_NAME}, {SECOND_REVIEWER_TITLE}, subject to recusal and independence conditions",
+            "source_authority": SECOND_REVIEWER_DESIGNATION_COPY,
+        },
+    ]
 
 
 def finding_rows() -> list[dict[str, Any]]:
@@ -699,7 +812,7 @@ def final_disposition_for(item: dict[str, str]) -> str:
         return "DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING"
     if "not applicable" in item["finding_text_summary"].lower() or "no evidence that remediation weakened" in title:
         return "NOT_APPLICABLE_WITH_RATIONALE"
-    if group in {"privacy-legal-regulatory", "second-review-authority", "tamper-evidence-ci"} or any(term in title for term in ["staffing", "maintainability", "legal", "privacy", "signed", "branch protection", "retention", "header-only", "ceiling", "single-actor"]):
+    if group in {"privacy-legal-regulatory", "tamper-evidence-ci"} or any(term in title for term in ["staffing", "maintainability", "legal", "privacy", "signed", "branch protection", "retention", "header-only", "ceiling", "single-actor"]):
         return "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION"
     return "VALID_FULLY_REMEDIATED"
 
@@ -713,6 +826,8 @@ def final_residual_limitation(item: dict[str, str]) -> str:
         return "Not applicable or not an adverse defect after final reconciliation; retained for traceability."
     if status == "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION":
         return "Residual limitation is nonblocking for documentary Founder review because no adoption, activation, implementation, pilot, production, FCR issuance, legal compliance claim, or protected merge is authorized by this package."
+    if consensus_group_for(item["finding_title"]) == "second-review-authority":
+        return f"Standing Independent Second Reviewer designated as {SECOND_REVIEWER_ID}; recusal conditions block only affected high-consequence actions where independence is not met."
     return "None beyond standard no-activation/no-implementation/no-merge authority boundary."
 
 
@@ -759,7 +874,7 @@ def founder_decision_rows() -> list[dict[str, str]]:
             "background": "Two independent review cycles plus final internal reconciliation found no valid open blocking findings in the documentary package.",
             "recommended_disposition": "APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS",
             "alternative_disposition": "RETURN_FOR_BOUNDED_CORRECTION",
-            "risk_if_approved": "Nonblocking limits remain for legal confirmation, operational enforcement, second-review staffing, branch protection, and no implementation proof.",
+            "risk_if_approved": "Nonblocking limits remain for legal confirmation, operational enforcement, branch protection, and no implementation proof. The prior absence of a named standing Second Reviewer is cured subject to recusal conditions.",
             "risk_if_deferred": "Governance portfolio standard remains in draft despite all valid blocking documentary findings being remediated.",
             "blocking_or_nonblocking": "NONBLOCKING",
             "affected_artifacts": "Founder review package; standard package; closure register",
@@ -948,7 +1063,7 @@ Two independent review cycles examined the standard's validation truthfulness, s
 
 The current candidate remediates those concerns for Founder review. Exact Cursor, Claude, and Perplexity Round 2 report bytes are committed as repository-native sources. The disposition matrix and closure register preserve reviewer-level rows rather than broad consensus substitutes. Mechanical validation now derives from executed checks with retained logs. FCR fixtures reject null, empty, and whitespace-only required payloads. Terminal lifecycle flags, anchors, JSON pointers, review-source hashes, and reviewer attribution are checked by the package validator. Legacy templates and the Governance Maintenance Standard issue are recorded through supersession instruments.
 
-Final reconciliation found no valid open blocking findings for documentary Founder review. Nonblocking limitations remain: legal and regulatory confirmation is not claimed; operational implementation, production operation, branch-protection enforcement, signed-tag anchoring, and live second-review staffing are outside this package's authority. Those limitations do not block Founder review because the package requests only documentary approval and expressly withholds adoption, activation, implementation, pilot, production, FCR, protected merge, and automatic closure authority.
+Final reconciliation found no valid open blocking findings for documentary Founder review. Nonblocking limitations remain: legal and regulatory confirmation is not claimed; operational implementation, production operation, branch-protection enforcement, and signed-tag anchoring are outside this package's authority. The previously recorded absence of a named standing Second Reviewer is cured by the Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions. Those limitations do not block Founder review because the package requests only documentary approval and expressly withholds adoption, activation, implementation, pilot, production, FCR, protected merge, and automatic closure authority.
 
 Recommended Founder action: `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.
 
@@ -980,7 +1095,7 @@ All valid blocking documentary findings are classified as `VALID_FULLY_REMEDIATE
 
 ## NONBLOCKING_LIMITATIONS
 
-Legal confirmation, operational implementation, live privacy verification, signed external anchoring, branch-protection administration, and second-review staffing remain nonblocking limits for Founder acceptance.
+Legal confirmation, operational implementation, live privacy verification, signed external anchoring, and branch-protection administration remain nonblocking limits for Founder acceptance. Second-review staffing is updated by Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions.
 
 ## FOUNDER_ATTENTION_ITEMS
 
@@ -998,7 +1113,7 @@ No valid open blocking findings remain for documentary Founder review.
 
 ## Nonblocking But Requiring Founder Acceptance
 
-Second-review staffing, legal/regulatory confirmation, signed external anchoring, branch-protection enforcement, and operational implementation evidence remain outside this package. Current effect: these limits prevent claims beyond documentary approval. Mitigation: retain the no-activation authority boundary and require separate authority records before implementation, pilot, production, FCR issuance, or merge. Owner: Founder or delegated governance owner. Review trigger: before any authority expansion. Recommended Founder disposition: accept as nonblocking limitations.
+Legal/regulatory confirmation, signed external anchoring, branch-protection enforcement, and operational implementation evidence remain outside this package. The prior second-review staffing absence is cured by designation of Patrick K. Spoon Sr. as standing Independent Second Reviewer, subject to recusal and independence conditions. Current effect: remaining limits prevent claims beyond documentary approval. Mitigation: retain the no-activation authority boundary and require separate authority records before implementation, pilot, production, FCR issuance, or merge. Owner: Founder or delegated governance owner. Review trigger: before any authority expansion. Recommended Founder disposition: accept as nonblocking limitations.
 
 ## Operational Follow-Up
 
@@ -1085,6 +1200,7 @@ def generate_expected(root: Path) -> None:
         shutil.copyfile(round3_directive, root / ROUND3_DIRECTIVE_COPY)
     if FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT.exists():
         shutil.copyfile(FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT, root / FINAL_RECONCILIATION_DIRECTIVE_COPY)
+    write_text(root / SECOND_REVIEWER_DESIGNATION_COPY, SECOND_REVIEWER_DESIGNATION_TEXT)
     write_review_sources(root)
     md = render_markdown(data)
     write_text(root / MD_NAME, md)

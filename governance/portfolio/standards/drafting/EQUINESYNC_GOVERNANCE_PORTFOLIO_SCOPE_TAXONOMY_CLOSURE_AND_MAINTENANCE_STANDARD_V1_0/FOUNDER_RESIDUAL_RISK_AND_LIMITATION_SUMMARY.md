@@ -6,7 +6,7 @@ No valid open blocking findings remain for documentary Founder review.
 
 ## Nonblocking But Requiring Founder Acceptance
 
-Second-review staffing, legal/regulatory confirmation, signed external anchoring, branch-protection enforcement, and operational implementation evidence remain outside this package. Current effect: these limits prevent claims beyond documentary approval. Mitigation: retain the no-activation authority boundary and require separate authority records before implementation, pilot, production, FCR issuance, or merge. Owner: Founder or delegated governance owner. Review trigger: before any authority expansion. Recommended Founder disposition: accept as nonblocking limitations.
+Legal/regulatory confirmation, signed external anchoring, branch-protection enforcement, and operational implementation evidence remain outside this package. The prior second-review staffing absence is cured by designation of Patrick K. Spoon Sr. as standing Independent Second Reviewer, subject to recusal and independence conditions. Current effect: remaining limits prevent claims beyond documentary approval. Mitigation: retain the no-activation authority boundary and require separate authority records before implementation, pilot, production, FCR issuance, or merge. Owner: Founder or delegated governance owner. Review trigger: before any authority expansion. Recommended Founder disposition: accept as nonblocking limitations.
 
 ## Operational Follow-Up
 

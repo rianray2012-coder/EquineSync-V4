@@ -22,7 +22,7 @@ All valid blocking documentary findings are classified as `VALID_FULLY_REMEDIATE
 
 ## NONBLOCKING_LIMITATIONS
 
-Legal confirmation, operational implementation, live privacy verification, signed external anchoring, branch-protection administration, and second-review staffing remain nonblocking limits for Founder acceptance.
+Legal confirmation, operational implementation, live privacy verification, signed external anchoring, and branch-protection administration remain nonblocking limits for Founder acceptance. Second-review staffing is updated by Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions.
 
 ## FOUNDER_ATTENTION_ITEMS
 
