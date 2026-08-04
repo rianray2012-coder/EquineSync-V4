@@ -54,7 +54,7 @@
   },
   "freshness": {
     "derived_from": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.csv",
-    "regenerated_at_utc": "2026-08-04T05:34:18+00:00",
+    "regenerated_at_utc": "2026-08-04T07:28:43+00:00",
     "semantic_status": "STRUCTURAL_VALIDATION_PLUS_DOCUMENTED_HUMAN_SEMANTIC_REVIEW_READY_FOR_TARGETED_REREVIEW"
   }
 }

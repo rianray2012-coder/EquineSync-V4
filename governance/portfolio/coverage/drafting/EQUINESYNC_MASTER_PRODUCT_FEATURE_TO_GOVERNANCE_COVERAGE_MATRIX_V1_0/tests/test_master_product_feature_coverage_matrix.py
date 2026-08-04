@@ -66,6 +66,14 @@ def test_missing_source_authority_is_rejected():
     assert any("missing source authority" in e or "Source IDs" in e for e in errors)
 
 
+def test_wrong_but_valid_pia_for_domain_is_rejected():
+    rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
+    target = next(r for r in rows if r["Product domain"] == "Care operations")
+    target["Governing PIA"] = "PIA-09"
+    errors = errors_for(rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts)
+    assert any("not in declared domain-owner set" in e for e in errors)
+
+
 def test_unsupported_founder_approval_claim_is_rejected():
     rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
     rows[0]["FOUNDER_DECISION_STATE"] = "ADOPTED"

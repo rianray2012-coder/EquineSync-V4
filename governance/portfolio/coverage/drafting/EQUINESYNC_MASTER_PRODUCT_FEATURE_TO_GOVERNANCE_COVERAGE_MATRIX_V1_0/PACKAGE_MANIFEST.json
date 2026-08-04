@@ -1,7 +1,7 @@
 {
   "artifact_id": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0",
   "revision_status": "FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
-  "generated_at_utc": "2026-08-04T05:34:18+00:00",
+  "generated_at_utc": "2026-08-04T07:28:43+00:00",
   "authority": "DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
   "files": [
     {
@@ -21,13 +21,13 @@
     },
     {
       "path": "COVERAGE_ANALYSIS_AND_RECOMMENDATIONS_REPORT.md",
-      "byte_length": 1349,
-      "sha256": "30ba29cd0f139a91fdeb417c5b4c970b903ab568ed84d06caeaf0dcf4b59e73e"
+      "byte_length": 1609,
+      "sha256": "850aae556e0737ca7609c77951fff9d8f87bfa66b1c8dee16475d61af51e4bbe"
     },
     {
       "path": "DASHBOARD_SUMMARY.json",
       "byte_length": 1832,
-      "sha256": "e0a6c1201fcc3f540fbeb4ab979b517bc61f64f80f4c4bb647fdd94d26231567"
+      "sha256": "479168296737fa4b6a45f068fbcd272592c7986e3a4dc0354c920f12c8cad5e2"
     },
     {
       "path": "DASHBOARD_SUMMARY.md",
@@ -41,8 +41,8 @@
     },
     {
       "path": "DEPENDENCY_SEMANTIC_REVIEW_REPORT.md",
-      "byte_length": 771,
-      "sha256": "a9fd8ceb3e601071d80fb001c096ca4b3d455a8a20a77f825062194dd7d91b76"
+      "byte_length": 1031,
+      "sha256": "13c151b2b9261d1ea8cc066ffb14a3f8ca3899ece645eeecd7a44ac619610686"
     },
     {
       "path": "DOCUMENTARY_VALIDATION_REPORT.json",
@@ -56,13 +56,13 @@
     },
     {
       "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.csv",
-      "byte_length": 3735994,
-      "sha256": "81cc44755cd073fd5e7aeec02114232e87b6dfb7efc76750fb301c3e4d6f7812"
+      "byte_length": 3842719,
+      "sha256": "42865f8541be4c2a824724326c0c7777c7b0b6fcb801f17dde41867b4cbb8806"
     },
     {
       "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.json",
-      "byte_length": 5428729,
-      "sha256": "b5189bc6a8c56d3c80a45279b90780ed8bacbd39e181401ddaa12a370718af13"
+      "byte_length": 5535282,
+      "sha256": "3eb8b38f45a8ce48dbf1777e2967efd01d0962838b3efdcf9a38eefb5c8c4a62"
     },
     {
       "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.md",
@@ -71,8 +71,8 @@
     },
     {
       "path": "EVIDENCE_PATH_REVALIDATION_REPORT.md",
-      "byte_length": 755,
-      "sha256": "67698a14febceba96b783221a7723f8328084b359e7cfe4bf4c4dffb6f45c5d6"
+      "byte_length": 1015,
+      "sha256": "d0cab1bc5972c7c885fa775a660b708e665757e1a52190862d5539cb417df4d2"
     },
     {
       "path": "FEATURE_TAXONOMY_AND_ID_REGISTER.csv",
@@ -96,8 +96,8 @@
     },
     {
       "path": "GOVERNANCE_LAYER_AND_READINESS_METHODOLOGY.md",
-      "byte_length": 1347,
-      "sha256": "4f3fd5400a795a5688f614078f010463f89f39152163048a8e1ed62b0a60029c"
+      "byte_length": 1607,
+      "sha256": "9c6f8436017fc9851d6fa8b206b7ece3ccb04dcba274117b06a3792c16268778"
     },
     {
       "path": "IMPLEMENTATION_TEST_AND_EVIDENCE_STATUS_SUMMARY.csv",
@@ -106,8 +106,8 @@
     },
     {
       "path": "IMPLEMENTATION_VERIFICATION_METHODOLOGY.md",
-      "byte_length": 1344,
-      "sha256": "f1ec0274a6ff9713c98d976d9b824028382cd3895548d776fb94d2140c713325"
+      "byte_length": 1604,
+      "sha256": "a2e96038f2868709a852c6af3550313713baeabfd6ed78c2c13cd9476b811197"
     },
     {
       "path": "INDEPENDENT_REVIEW_FINDING_ADJUDICATION_REGISTER.csv",
@@ -116,8 +116,8 @@
     },
     {
       "path": "NEW_PIA_CANDIDATE_ANALYSIS.md",
-      "byte_length": 1331,
-      "sha256": "505985b066960681a03d074a831de096647a9d639869126d8a7eceac83c239ed"
+      "byte_length": 1591,
+      "sha256": "8358b0c7dcb688879dc7b367cb0384fc87c8edda0075ff8cae22e839b830d07f"
     },
     {
       "path": "NON_PIA_DOCUMENT_AND_CONTROL_GAP_REGISTER.csv",
@@ -136,8 +136,8 @@
     },
     {
       "path": "PIA_SOURCE_IDENTITY_AND_SUPPLEMENT_PREREQUISITE_REPORT.md",
-      "byte_length": 782,
-      "sha256": "413ca2ba81e6424ceae7b4ccefee67c93dacc8c220bcd16e526082abf65fb841"
+      "byte_length": 1042,
+      "sha256": "d3a225c4845b8ba937e3115d397caf17defb949ce1612d11c1c40b0816fa4a13"
     },
     {
       "path": "PIA_SUPPLEMENT_ROW_MAPPING.csv",
@@ -156,8 +156,8 @@
     },
     {
       "path": "README_FIRST.md",
-      "byte_length": 1317,
-      "sha256": "5933977109e922d9b0593b8f3f0a31d94823613c5fae77caeb46d268d98fc498"
+      "byte_length": 1577,
+      "sha256": "9eba288233994fac7fd9e1a019f3fad5f40ffa9e82342578af64fa0231190d19"
     },
     {
       "path": "REVIEWER_TO_CONSOLIDATED_FINDING_CROSSWALK.csv",
@@ -176,8 +176,8 @@
     },
     {
       "path": "REVIEW_INPUTS/CURSOR_INDEPENDENT_REVIEW_FEATURE_TO_GOVERNANCE_MATRIX.md",
-      "byte_length": 31160,
-      "sha256": "0736221d47978cb380ec5fcb4138fbe36ac02c187113b5a853010e9827d16475"
+      "byte_length": 31689,
+      "sha256": "91f6748244dac6ed920e14433dfc3fb2e7333d1d8f0414a7068949341f8001b3"
     },
     {
       "path": "REVIEW_INPUTS/PERPLEXITY_INDEPENDENT_REVIEW_FEATURE_TO_GOVERNANCE_MATRIX.md",
@@ -186,23 +186,23 @@
     },
     {
       "path": "REVISION_CLOSURE_REPORT.md",
-      "byte_length": 773,
-      "sha256": "e906ca5ff493d30e0e30575df09a7ada96ef6946ad98f4bf478fe4b6b3663a6e"
+      "byte_length": 1033,
+      "sha256": "f563416129397175896590b888e5b0d06d4ccaf448bd15ed94109e6f6794ecab"
     },
     {
       "path": "RISK_AND_READINESS_RECALIBRATION_REPORT.md",
-      "byte_length": 797,
-      "sha256": "1b030e24448f231a6db9b659699110a56f27ef68a76ec576e307cfe6812f83bb"
+      "byte_length": 1057,
+      "sha256": "ba60ac7cee4cf2c12785427cce3c06d63e6f984bdd493da4edd9d3190b713041"
     },
     {
       "path": "RISK_PRIORITY_METHODOLOGY.md",
-      "byte_length": 1330,
-      "sha256": "2635d192ef82fe62f753986c5d3a3408b20b45abe3a0f48ce25843934d9efc6e"
+      "byte_length": 1590,
+      "sha256": "fc0006e327948bab90946f2a8dd6243fbe69b14a5bff79df3e13d866f0b42120"
     },
     {
       "path": "SEMANTIC_VALIDATION_REPORT.md",
-      "byte_length": 1043,
-      "sha256": "d36076e949e86066030ecb38566445117e94d9c188ceddd923431298e703eeb4"
+      "byte_length": 1303,
+      "sha256": "b95e9d75242c6bc3e237add18431ac5a5dfa7fd511f3027f185d922c83c836c8"
     },
     {
       "path": "SOURCE_AND_AUTHORITY_REGISTER.csv",
@@ -216,32 +216,32 @@
     },
     {
       "path": "UNRESOLVED_FINDINGS_AND_FOUNDER_DECISIONS.md",
-      "byte_length": 798,
-      "sha256": "70967fcd11a370d0c172d2944ce49858d286705f765eb7bafcf26d7469c53ddb"
+      "byte_length": 1058,
+      "sha256": "f16d2d4a8d3369c5d5133979e727a4b2038de96e9e8807453039e069f7f9bc8f"
     },
     {
       "path": "VERSION_CHANGE_REPORT.md",
-      "byte_length": 1326,
-      "sha256": "ecb80be8aa39e8ab06efc616e0c647e2a09e2f311468d8fefa48c8e76847b390"
+      "byte_length": 1586,
+      "sha256": "b672289dd1661d7685a7343ce519d52e2f153b6be8896318ab7d2fd625be8593"
     },
     {
       "path": "tests/test_master_product_feature_coverage_matrix.py",
-      "byte_length": 12842,
-      "sha256": "dc70003a0d510a7fcb0b7f25192128abfcecf2e24772294083cb11f059a4944d"
+      "byte_length": 13321,
+      "sha256": "1106be982ba1982c52f6711ee48f6207f26504b08335f0c5087c75eb7c269bce"
     },
     {
       "path": "tools/rebuild_review_revision.py",
-      "byte_length": 48261,
-      "sha256": "98f35df8a01579a3ad819931030a15b1c640b94a4582bc3d6e21fc01d4869b71"
+      "byte_length": 51269,
+      "sha256": "a6ff072c139ff5bb534bd27b271c2dc946cabab936f6f17b700e7e07b8f6addd"
     },
     {
       "path": "validators/validate_master_product_feature_coverage_matrix.py",
-      "byte_length": 33152,
-      "sha256": "36e1c7fef4b15ebda7ba7635341ea7a0c37e401e53f5c3cd474ae1e35aab21ab"
+      "byte_length": 35119,
+      "sha256": "14e9d9321eeb4a1586a2a7896b70f29494343c27f59044db34b14ace319735c7"
     },
     {
       "path": "PACKAGE_MANIFEST.json",
-      "byte_length": 9322,
+      "byte_length": 9328,
       "sha256": "MANIFEST_SELF_REFERENCE_EXCLUDED"
     },
     {

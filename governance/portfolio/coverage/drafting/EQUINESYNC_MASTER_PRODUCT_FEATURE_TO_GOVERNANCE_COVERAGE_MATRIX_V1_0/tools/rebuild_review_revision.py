@@ -57,6 +57,30 @@ DOMAIN_INTENT = {
     "Administration, support, security, and operations": ("administer the platform safely", "admin tools, support workflows, monitoring, audit, configuration, security, and operations", "operational assurance"),
     "Mobile, offline, and synchronization": ("support mobile and offline continuity", "native/PWA surfaces, sync queues, cached data, conflict resolution, and device behavior", "field usability with server revalidation"),
 }
+DOMAIN_ORIGINS = {
+    "Platform and shell": "Platform and shell feature inventory planning inference",
+    "Identity and access": "Identity and access feature inventory planning inference",
+    "Relationships and guardianship": "Relationship and guardianship feature inventory planning inference",
+    "Horse identity and lifecycle": "Horse identity and lifecycle feature inventory planning inference",
+    "Care operations": "Care operations feature inventory planning inference",
+    "Facility, barn, business, and physical operations": "Facility and barn operations feature inventory planning inference",
+    "Inventory and assets": "Inventory and assets feature inventory planning inference",
+    "Lessons, training, riders, and guardians": "Lessons and guardianship feature inventory planning inference",
+    "Tasks, calendar, scheduling, and notifications": "Task, calendar, and notification feature inventory planning inference",
+    "Communications and Owner Portal": "Communications and Owner Portal feature inventory planning inference",
+    "Documents, agreements, and electronic signatures": "Documents and e-signature feature inventory planning inference",
+    "Financial operations": "Financial operations feature inventory planning inference",
+    "Incidents, emergency, welfare, and biosecurity": "Incident, emergency, welfare, and biosecurity feature inventory planning inference",
+    "Shows, events, travel, and transport": "Events, travel, and transport feature inventory planning inference",
+    "Marketplace, provider network, and community": "Marketplace, provider network, and community feature inventory planning inference",
+    "Media, files, and digital assets": "Media and digital assets feature inventory planning inference",
+    "Integrations and external providers": "Integration and external provider feature inventory planning inference",
+    "Reporting and analytics": "Reporting and analytics feature inventory planning inference",
+    "Artificial intelligence": "Artificial intelligence feature inventory planning inference",
+    "Developer platform and extensibility": "Developer platform and extensibility feature inventory planning inference",
+    "Administration, support, security, and operations": "Administration, support, security, and operations feature inventory planning inference",
+    "Mobile, offline, and synchronization": "Mobile, offline, and synchronization feature inventory planning inference",
+}
 
 FULLY_RETAINED = "Documentary governance layers referenced, but implementation, runtime, and parent-PIA source identity remain unverified; not an adoption, activation, conformity, or release-readiness claim."
 SENTINELS = [
@@ -195,6 +219,9 @@ def update_rows():
     pia_summary = {r["pia_id"]: r["source_status"] for r in read_csv("PIA_FEATURE_COVERAGE_SUMMARY.csv")}
     qualify_duplicate_names(rows)
     for idx, row in enumerate(rows):
+        row["ORIGIN_DOCUMENT"] = DOMAIN_ORIGINS.get(row["Product domain"], "Domain feature inventory planning inference")
+        row["ORIGIN_SECTION"] = f"{row['Product domain']}::{row['Feature ID']}"
+        row["ORIGIN_REQUIREMENT_ID"] = f"{row['Feature ID']}-PLANNING-INFERENCE"
         row["Feature or workflow description"] = build_description(row)
         row["PARENT_FEATURE_ID_TYPE"] = "TAXONOMY_ONLY_PARENT" if row.get("Parent feature ID", "").endswith("-000") else "FEATURE_ROW_PARENT"
         row["PARENT_PIA_SOURCE_STATE"] = source_state_for_pias(row.get("Governing PIA", ""), pia_summary)
@@ -206,7 +233,7 @@ def update_rows():
             row["Final disposition"] = "DOCUMENTARY_GOVERNANCE_LAYERS_COMPLETE_UNVERIFIED"
             row["Open gaps"] = (row.get("Open gaps", "") + "; " + FULLY_RETAINED).strip("; ")
         evidence_cleanup(row)
-        row["SOURCE_TRACEABILITY_STATE"] = "ROW_SPECIFIC_SOURCE_OR_PLANNING_INFERENCE_REQUIRED"
+        row["SOURCE_TRACEABILITY_STATE"] = "ROW_SPECIFIC_PLANNING_INFERENCE_WITH_PACKAGE_CONTEXT_SOURCES"
         row["PACKAGE_CONTEXT_SOURCES"] = "SRC-FOUNDER-DIRECTIVE;SRC-MASTER-PRODUCT-VISION;SRC-PIA-PORTFOLIO-TEN;SRC-PIA-REALIGNMENT-REGISTER"
         row["DEPENDENCY_TYPE"] = "AUTHORIZATION;DATA;SOFT_PLANNING_INFERENCE" if row.get("DEPENDS_ON_FEATURE_IDS") else "ROOT_OR_TAXONOMY_ANCHOR"
         if row.get("DEPENDENCY_BASIS") in {"CONFIRMED", "STRONGLY_INFERRED", "PRELIMINARY", "UNVERIFIED"}:
@@ -462,7 +489,7 @@ def write_reports(rows):
     write_csv("REVIEWER_TO_CONSOLIDATED_FINDING_CROSSWALK.csv", cross, list(cross[0].keys()))
     counts=Counter(r["final_validity"] for r in rows_out)
     sev=Counter(r["final_severity"] for r in rows_out)
-    report_common=f"Starting PR head: {START_HEAD}\nBase: {BASE_HEAD}\nDirective: {DIRECTIVE_ID}\nAuthority: {AUTHORITY}\nStatus: {REVISION_STATUS}\n"
+    report_common=f"Starting PR head: {START_HEAD}\nBase: {BASE_HEAD}\nDirective: {DIRECTIVE_ID}\nAuthority: {AUTHORITY}\nStatus: {REVISION_STATUS}\nExact-input note: REVIEW_INPUTS/CURSOR_INDEPENDENT_REVIEW_FEATURE_TO_GOVERNANCE_MATRIX.md is preserved from the authenticated 2026-08-04 (1) packet bytes, including Markdown hard-break trailing spaces; authored package files are whitespace-checked separately.\n"
     reports={
         "SEMANTIC_VALIDATION_REPORT.md": f"# Semantic Validation Report\n\n{report_common}\nScope: every row was regenerated with feature-specific descriptions, evidence tiering, risk rationale, persona rationale, parent PIA source-state linkage, dependency basis, and duplicate-name review. Human semantic review was documented for all domains, critical rows, formerly FULLY_COVERED rows, and new-PIA/supplement candidates. Exceptions remain targeted-rereview risks, not Founder-ready claims.\n\nTemplate detector result: 0 rows match `^Atomic coverage row for .+ within .+\\.$`.\nFormer FULLY_COVERED rows: 11 reclassified to retained-gap documentary language.\n",
         "PIA_SOURCE_IDENTITY_AND_SUPPLEMENT_PREREQUISITE_REPORT.md": f"# PIA Source Identity And Supplement Prerequisite Report\n\n{report_common}\nEach matrix row now carries PARENT_PIA_SOURCE_STATE. Supplement drafting is blocked where parent PIA source status is unlocated or successor-pending. Marketplace/Provider Network/Community remains a new-PIA proposal requiring Founder decision; no drafting authority is claimed.\n",

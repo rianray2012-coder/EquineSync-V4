@@ -126,6 +126,30 @@ REQUIRED_COLUMNS = [
 PATH_PATTERN = re.compile(r"^[A-Za-z0-9_./@+-]+$")
 TEMPLATE_DESCRIPTION = re.compile(r"^Atomic coverage row for .+ within .+\.$")
 FIELD_DICTIONARY_PATH = PACKAGE / "FIELD_DICTIONARY.csv"
+DOMAIN_ALLOWED_PIAS = {
+    "Administration, support, security, and operations": {"PIA-05", "PIA-02"},
+    "Artificial intelligence": {"PIA-05", "PIA-07", "PIA-09", "PIA-10"},
+    "Care operations": {"PIA-07", "PIA-04", "PIA-06"},
+    "Communications and Owner Portal": {"PIA-10", "PIA-03"},
+    "Developer platform and extensibility": {"NO_CURRENT_PIA_OWNER_IDENTIFIED"},
+    "Documents, agreements, and electronic signatures": {"PIA-10", "PIA-03"},
+    "Facility, barn, business, and physical operations": {"PIA-02"},
+    "Financial operations": {"PIA-09"},
+    "Horse identity and lifecycle": {"PIA-04", "PIA-03"},
+    "Identity and access": {"PIA-01", "PIA-03"},
+    "Incidents, emergency, welfare, and biosecurity": {"PIA-07", "PIA-02", "PIA-08"},
+    "Integrations and external providers": {"PIA-09", "PIA-10", "PIA-06"},
+    "Inventory and assets": {"PIA-07", "PIA-02"},
+    "Lessons, training, riders, and guardians": {"PIA-08", "PIA-03", "PIA-06"},
+    "Marketplace, provider network, and community": {"NO_CURRENT_PIA_OWNER_IDENTIFIED"},
+    "Media, files, and digital assets": {"PIA-10", "PIA-04", "PIA-07"},
+    "Mobile, offline, and synchronization": {"PIA-06", "PIA-07", "PIA-04", "PIA-03"},
+    "Platform and shell": {"PIA-05"},
+    "Relationships and guardianship": {"PIA-03", "PIA-01", "PIA-08"},
+    "Reporting and analytics": {"PIA-05", "PIA-09", "PIA-07"},
+    "Shows, events, travel, and transport": {"PIA-08", "PIA-06", "PIA-03"},
+    "Tasks, calendar, scheduling, and notifications": {"PIA-06"},
+}
 
 
 def read_csv(path: Path):
@@ -346,6 +370,9 @@ def validate_payload(csv_rows, json_obj, sources, pia_rows, gov_rows, decisions,
         for pia in [p for p in split_semis(row.get("Governing PIA", "")) if p.startswith("PIA-")]:
             if pia not in pia_ids:
                 errors.append(f"{rid}: PIA reference {pia} missing from PIA summary")
+            allowed = DOMAIN_ALLOWED_PIAS.get(row.get("Product domain"), set())
+            if allowed and pia not in allowed:
+                errors.append(f"{rid}: PIA reference {pia} not in declared domain-owner set for {row.get('Product domain')}")
         for guide in [g for g in split_semis(row.get("Applicable Code Guides", "")) if g.startswith("ES-CG-")]:
             if guide not in gov_ids:
                 errors.append(f"{rid}: Code Guide reference {guide} missing from governance inventory")
@@ -370,6 +397,8 @@ def validate_payload(csv_rows, json_obj, sources, pia_rows, gov_rows, decisions,
             errors.append(f"{fid}: conflict queue row lacks atomic conflict derivation")
     if has_dependency_cycle(deps):
         errors.append("circular dependency without explanation")
+    if len({r.get("ORIGIN_DOCUMENT", "") for r in csv_rows}) < len({r.get("Product domain", "") for r in csv_rows}):
+        errors.append("origin document traceability is not domain-specific")
     total = len(csv_rows)
     for key, values in metrics.get("counts", {}).items():
         if key == "product_domains":
