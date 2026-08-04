@@ -21,9 +21,12 @@ from typing import Any, Callable
 
 ARTIFACT_ID = "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0"
 OLD_STATUS = "ROUND_2_TARGETED_REREVIEW_COMPLETE_" + "ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL"
-STATUS = "TWO_REVIEW_CYCLES_COMPLETE_READY_FOR_FOUNDER_DOCUMENTARY_DECISION"
+STATUS = "FOUNDER_APPROVED_WITH_RECORDED_NONBLOCKING_LIMITATIONS_PENDING_PROTECTED_REPOSITORY_MERGE"
 FINAL_STATUS = "TWO_REVIEW_CYCLES_COMPLETE_ALL_VALID_FINDINGS_REMEDIATED_READY_FOR_FOUNDER_REVIEW"
-AUTHORITY = "FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY"
+AUTHORITY = "FOUNDER_DOCUMENTARY_APPROVAL_GRANTED_NO_DIRECT_PROTECTED_BRANCH_MUTATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_OR_VERIFIED_STATUS_AUTHORITY"
+DOCUMENT_LIFECYCLE_STATE = "APPROVED"
+AUTHORITATIVE_STATE = "PENDING_PROTECTED_REPOSITORY_MERGE"
+VERIFICATION_STATE = "NOT_VERIFIED"
 TRUTH = "FOUNDER AUTHORITY MAY CHANGE THE REQUIRED INTERNAL GATE OR EVIDENCE SUFFICIENCY DETERMINATION, BUT IT MAY NOT CHANGE HISTORICAL FACT."
 PACKAGE_DIR = Path(__file__).resolve().parents[1]
 JSON_NAME = f"{ARTIFACT_ID}.json"
@@ -37,6 +40,8 @@ FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT = Path("/Users/rianray/.codex/attachme
 FINAL_RECONCILIATION_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION.md"
 DOWNSTREAM_ASSURANCE_DIRECTIVE_ATTACHMENT = Path("/Users/rianray/.codex/attachments/7883cfc2-7fc2-4621-93bd-b2d7f2ccf6b3/pasted-text.txt")
 DOWNSTREAM_ASSURANCE_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_DOWNSTREAM_ASSURANCE_VERIFICATION_REPOSITORY_ENFORCEMENT_AND_INTEGRITY_ANCHORING_CONTROLS.md"
+FOUNDER_APPROVAL_RECORD_ATTACHMENT = Path("/Users/rianray/.codex/attachments/dc4af4e8-e184-44f1-ba16-e6e67d65acf0/pasted-text.txt")
+FOUNDER_APPROVAL_RECORD_COPY = "FOUNDER_APPROVAL_RECORD_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.md"
 SECOND_REVIEWER_DESIGNATION_COPY = "FOUNDER_DESIGNATION_INDEPENDENT_SECOND_REVIEWER_PATRICK_K_SPOON_SR.md"
 SECOND_REVIEWER_ID = "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
 SECOND_REVIEWER_NAME = "Patrick K. Spoon Sr."
@@ -318,6 +323,9 @@ def build_source() -> dict[str, Any]:
         "status": STATUS,
         "readiness_status": FINAL_STATUS,
         "authority_boundary": AUTHORITY,
+        "document_lifecycle_state": DOCUMENT_LIFECYCLE_STATE,
+        "authoritative_state": AUTHORITATIVE_STATE,
+        "verification_state": VERIFICATION_STATE,
         "truth_principle": TRUTH,
         "normative_source_of_truth": JSON_NAME,
         "current_revision_candidate_before_round_2": "77d58949e3f3ca3082e5cc3598c6607b7a3786f6",
@@ -535,10 +543,13 @@ def render_markdown(data: dict[str, Any]) -> str:
         f"- Version: `{data['version']}`",
         f"- Status: `{data['status']}`",
         f"- Readiness status: `{data['readiness_status']}`",
+        f"- Document lifecycle state: `{data['document_lifecycle_state']}`",
+        f"- Authoritative state: `{data['authoritative_state']}`",
+        f"- Verification state: `{data['verification_state']}`",
         f"- Authority boundary: `{data['authority_boundary']}`",
         f"- Normative source: `{JSON_NAME}`",
         "",
-        "This package is documentary-only. It does not approve, adopt, lock, access, complete custody, activate, implement, authorize pilot use, authorize production use, issue certification, merge PR #77, or close findings automatically.",
+        "This package records Founder documentary approval with nonblocking limitations. It does not by itself make the standard authoritative, verified, activated, implemented, pilot-authorized, production-authorized, FCR-issued, protected-branch merged, or future-finding closed.",
         "",
         '<a id="round-2-source-limitation"></a>',
         "## Round 2 Source Limitation",
@@ -646,6 +657,9 @@ def source_register_rows(root: Path) -> list[dict[str, Any]]:
     pds = root / DOWNSTREAM_ASSURANCE_DIRECTIVE_COPY
     if pds.exists():
         rows.append({"source_id": "R2SRC-FOUNDER-DOWNSTREAM-ASSURANCE-DIRECTIVE", "reviewer": "Founder", "review_date": "2026-08-04", "filename": DOWNSTREAM_ASSURANCE_DIRECTIVE_COPY, "sha256": sha256_file(pds), "byte_length": pds.stat().st_size, "provenance_class": "EXACT_UPLOADED_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Authorizes bounded documentary additions and validation only; does not establish legal compliance, implementation completion, production readiness, privacy-control effectiveness, repository enforcement, or external integrity anchoring."})
+    par = root / FOUNDER_APPROVAL_RECORD_COPY
+    if par.exists():
+        rows.append({"source_id": "R2SRC-FOUNDER-APPROVAL-RECORD", "reviewer": "Founder", "review_date": "2026-08-03", "filename": FOUNDER_APPROVAL_RECORD_COPY, "sha256": sha256_file(par), "byte_length": par.stat().st_size, "provenance_class": "EXACT_UPLOADED_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Approves documentary governance standard with recorded nonblocking limitations; authorizes protected repository accession and publication through controlled PR/custody process only; no direct protected-branch mutation, implementation, pilot, production, FCR, or verified-status authority."})
     psr = root / SECOND_REVIEWER_DESIGNATION_COPY
     if psr.exists():
         rows.append({"source_id": "R2SRC-FOUNDER-SECOND-REVIEWER-DESIGNATION", "reviewer": "Founder", "review_date": "2026-08-04", "filename": SECOND_REVIEWER_DESIGNATION_COPY, "sha256": sha256_file(psr), "byte_length": psr.stat().st_size, "provenance_class": "FOUNDER_CONVERSATION_DESIGNATION_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Designates standing Independent Second Reviewer subject to recusal and independence conditions; does not approve any FCR, production authorization, exception, finding closure, implementation action, pilot activity, or production use."})
@@ -1614,13 +1628,36 @@ def write_fixtures(root: Path) -> None:
 
 
 def write_static_docs(root: Path, data: dict[str, Any]) -> None:
-    write_text(root / "README_FIRST.md", f"# README FIRST\n\nStatus: `{data['status']}`\n\nFinal status: `{data['readiness_status']}`\n\nRead `FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md`, `DOWNSTREAM_ASSURANCE_AND_VERIFICATION_STATUS_MATRIX.csv`, `VALID_FINDINGS_CLOSURE_REGISTER.csv`, `FOUNDER_DECISION_TABLE.csv`, `RECOMMENDED_FOUNDER_ACTION.md`, `{MD_NAME}`, `DOCUMENTARY_VALIDATION_REPORT.json`, and `KNOWN_LIMITATIONS.md` first.\n\nThis is a Founder review package only; it does not approve, adopt, activate, implement, merge, certify, authorize pilot or production use, prove legal compliance, verify implementation completion, establish production readiness, prove live privacy-control effectiveness, verify branch-protection enforcement, or implement external integrity anchoring.\n\n`{DOWNSTREAM_AUTHORITY_LIMITATION}`\n")
-    write_text(root / "REVISION_SUMMARY.md", f"# Revision Summary\n\nFinal internal reconciliation applies the Founder two-review-cycle sufficiency determination, reconciles authenticated Cursor, Claude, and Perplexity findings at reviewer-finding granularity, replaces interim review-pending closure states with final Founder-package dispositions, and prepares decision materials for direct Founder review. Prior source-authentication remediation committed exact Round 2 review reports as repository-native evidence and validated source-to-disposition traceability.\n\nThis revision adds explicit downstream assurance and verification dimensions for legal/regulatory compliance, implementation completion, production readiness, live privacy-control effectiveness, branch-protection enforcement, and signed external hash anchoring. Approval of the standard establishes requirements and evidence gates only; it does not complete or verify those downstream outcomes.\n\nFinal status: `{FINAL_STATUS}`.\n")
+    write_text(root / "README_FIRST.md", f"# README FIRST\n\nStatus: `{data['status']}`\n\nFinal status: `{data['readiness_status']}`\n\nDocument lifecycle state: `{data['document_lifecycle_state']}`\n\nAuthoritative state: `{data['authoritative_state']}`\n\nVerification state: `{data['verification_state']}`\n\nRead `{FOUNDER_APPROVAL_RECORD_COPY}`, `FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md`, `DOWNSTREAM_ASSURANCE_AND_VERIFICATION_STATUS_MATRIX.csv`, `VALID_FINDINGS_CLOSURE_REGISTER.csv`, `FOUNDER_DECISION_TABLE.csv`, `{MD_NAME}`, `DOCUMENTARY_VALIDATION_REPORT.json`, and `KNOWN_LIMITATIONS.md` first.\n\nThis package records Founder documentary approval with recorded nonblocking limitations. It does not make the standard authoritative until the approval record is added, the package is regenerated and validated, PR #77 is reconciled with the protected branch, required repository checks pass, exact approved bytes are merged through the protected PR process, and the merge commit and authoritative paths are recorded. It does not verify implementation, authorize pilot or production use, prove legal compliance, verify privacy-control effectiveness, verify branch-protection enforcement, or implement external integrity anchoring.\n\n`{AUTHORITY}`\n")
+    write_text(root / "REVISION_SUMMARY.md", f"# Revision Summary\n\nFinal internal reconciliation applies the Founder two-review-cycle sufficiency determination, reconciles authenticated Cursor, Claude, and Perplexity findings at reviewer-finding granularity, replaces interim review-pending closure states with final Founder-package dispositions, and prepares decision materials for direct Founder review. Prior source-authentication remediation committed exact Round 2 review reports as repository-native evidence and validated source-to-disposition traceability.\n\nThis revision adds the exact Founder approval record, advances the document lifecycle state to `APPROVED`, and retains `AUTHORITATIVE` as pending protected repository merge and `VERIFIED` as not established. It preserves downstream assurance and verification dimensions for legal/regulatory compliance, implementation completion, production readiness, live privacy-control effectiveness, branch-protection enforcement, and signed external hash anchoring. Approval of the standard establishes requirements and evidence gates only; it does not complete or verify those downstream outcomes.\n\nFinal status: `{STATUS}`.\n")
     write_text(root / "KNOWN_LIMITATIONS.md", "# Known Limitations\n\n- Exact Cursor, Claude, and Perplexity Round 2 review report bytes are now committed as repository-native evidence; this does not itself close findings by independent re-review.\n- Legal, privacy-law, regulatory, Founder, implementation, production, and independent outside-review checks are pending or blocked, not PASS.\n- The downstream assurance domains are requirements-defined only unless their specific evidence artifacts later prove otherwise.\n- Current legal/regulatory status: `REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING`.\n- Current implementation-completion status: `IMPLEMENTATION_COMPLETION_NOT_VERIFIED`.\n- Current production-readiness status: `PRODUCTION_READINESS_NOT_ASSESSED`.\n- Current live privacy-control status: `PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED`.\n- Current branch-protection status: `BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED`.\n- Current external integrity-anchor status: `INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED`.\n- Second review is operationally required; if the designated Independent Second Reviewer must recuse, affected high-consequence actions remain blocked until another qualified reviewer is appointed.\n- Signed tags, external hash anchoring, and branch-protection enforcement require separate repository administration or external anchoring activity.\n")
-    write_text(root / "ROUND_2_FINDING_CLOSURE_REPORT.md", "# Round 2 Finding Closure Report\n\nFinal internal reconciliation found no valid open blocking documentary findings for Founder review. Findings are not treated as Founder-approved by Codex; they are classified in `VALID_FINDINGS_CLOSURE_REGISTER.csv` for Founder decision under the two-review-cycle sufficiency directive.\n")
+    write_text(root / "ROUND_2_FINDING_CLOSURE_REPORT.md", "# Round 2 Finding Closure Report\n\nFinal internal reconciliation found no valid open blocking documentary findings for Founder review. Findings are Founder-approved for documentary disposition through the exact approval record now retained in this package; future findings are not automatically closed.\n")
     write_founder_review_docs(root)
+    write_text(root / "FOUNDER_APPROVAL_AND_CUSTODY_COMPLETION_REPORT.md", f"""# Founder Approval And Custody Completion Report
+
+Approval status: `{STATUS}`
+
+Approved candidate commit: `07c0fcb1d43ee6c8e562c0449eed68dfd4a27342`
+
+Protected base observed in approval record: `integrate-emergent-final-zip` at `1eb384d80daa700ba2e71ee42872cc9bba926332`
+
+Document lifecycle state: `{DOCUMENT_LIFECYCLE_STATE}`
+
+Authoritative state: `{AUTHORITATIVE_STATE}`
+
+Verification state: `{VERIFICATION_STATE}`
+
+The exact Founder Approval Record is retained as `{FOUNDER_APPROVAL_RECORD_COPY}` and is recorded in `SOURCE_AND_AUTHORITY_REGISTER.csv` with SHA-256 and byte length.
+"""
+        + DOWNSTREAM_FOUNDER_STATEMENT
+        + """
+
+This package update completes the bounded approval-record accession step on PR #77. It does not directly mutate the protected branch, merge PR #77, activate the standard, issue an FCR, authorize implementation, authorize pilot use, authorize production use, prove legal or regulatory compliance, verify downstream assurance outcomes, or close future findings automatically.
+
+The standard becomes authoritative only after protected PR merge and post-merge custody records identify the exact merged bytes, merge commit, and authoritative repository paths.
+""")
     write_text(root / "TARGETED_ROUND_3_REREVIEW_INSTRUCTIONS.md", "# Targeted Round 3 Re-Review Instructions\n\nReview the exact package bytes at the final PR #77 head. Re-execute committed checksum verification before any regeneration. Review validation logs, FCR fixtures, lifecycle dimensional separation, second-review controls, and source limitations.\n")
-    write_text(root / "REPOSITORY_RECONCILIATION_REPORT.md", "# Repository Reconciliation Report\n\nRepository reconciliation is updated by final execution. This report records that PR #77 remained draft and unmerged, and protected-branch mutation was not authorized.\n")
+    write_text(root / "REPOSITORY_RECONCILIATION_REPORT.md", "# Repository Reconciliation Report\n\nRepository reconciliation is updated by final execution. This report records that PR #77 remained open and unmerged after the Founder approval record was added. Protected-branch mutation is authorized only through the protected pull-request workflow and was not performed by this package update.\n")
     workflow = """name: Governance Portfolio Standard Validation
 
 on:
@@ -1663,15 +1700,15 @@ The EquineSync Governance Portfolio Scope, Taxonomy, Closure, and Maintenance St
 
 Two independent review cycles examined the standard's validation truthfulness, source traceability, lifecycle and authority modeling, FCR schema enforceability, non-waivable governance protections, second-review controls, privacy and regulatory boundaries, and package integrity. The principal concerns were valid: validation could not be self-attesting, reviewer findings needed source-specific traceability, lifecycle and authority concepts had to remain distinct, required FCR payloads needed non-empty enforcement, and no package document could imply adoption, activation, implementation, pilot authorization, production authorization, FCR issuance, or merge authority.
 
-The current candidate remediates those concerns for Founder review. Exact Cursor, Claude, and Perplexity Round 2 report bytes are committed as repository-native sources. The disposition matrix and closure register preserve reviewer-level rows rather than broad consensus substitutes. Mechanical validation now derives from executed checks with retained logs. FCR fixtures reject null, empty, and whitespace-only required payloads. Terminal lifecycle flags, anchors, JSON pointers, review-source hashes, and reviewer attribution are checked by the package validator. Legacy templates and the Governance Maintenance Standard issue are recorded through supersession instruments.
+The approved candidate remediates those concerns for Founder documentary approval. Exact Cursor, Claude, and Perplexity Round 2 report bytes are committed as repository-native sources. The disposition matrix and closure register preserve reviewer-level rows rather than broad consensus substitutes. Mechanical validation now derives from executed checks with retained logs. FCR fixtures reject null, empty, and whitespace-only required payloads. Terminal lifecycle flags, anchors, JSON pointers, review-source hashes, and reviewer attribution are checked by the package validator. Legacy templates and the Governance Maintenance Standard issue are recorded through supersession instruments.
 
 Final reconciliation found no valid open blocking findings for documentary Founder review. The package now expressly governs six downstream assurance dimensions: legal and regulatory review, implementation-completion verification, production-readiness assessment, live privacy-control effectiveness testing, branch-protection verification, and independent integrity anchoring. Approval establishes their requirements only. Legal confirmation remains `REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING`; implementation completion remains `IMPLEMENTATION_COMPLETION_NOT_VERIFIED`; production readiness remains `PRODUCTION_READINESS_NOT_ASSESSED`; live privacy-control effectiveness remains `PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED`; branch-protection enforcement remains `BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED`; external anchoring remains `INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED`.
 
 """ + DOWNSTREAM_FOUNDER_STATEMENT + f"""
 
-The previously recorded absence of a named standing Second Reviewer is cured by the Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions. Remaining limitations do not block Founder review because the package requests only documentary approval and expressly withholds adoption, activation, implementation, pilot, production, FCR, protected merge, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, external integrity anchoring, and automatic closure authority.
+The previously recorded absence of a named standing Second Reviewer is cured by the Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions. Remaining limitations do not block documentary approval because the approval record expressly withholds activation, implementation, pilot, production, FCR, direct protected-branch mutation, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, external integrity anchoring, and automatic future closure authority.
 
-Recommended Founder action: `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.
+Founder disposition recorded: `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.
 
 ## Reconciliation Counts
 
@@ -1709,7 +1746,7 @@ Legal confirmation, implementation completion, production readiness, live privac
 
 Review `FOUNDER_DECISION_TABLE.csv` and `FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md` before approval.
 
-## RECOMMENDED_NEXT_ACTION
+## RECORDED_FOUNDER_ACTION
 
 `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.
 """)
@@ -1745,11 +1782,11 @@ Implementation behavior, production operations, pilot data, FCR issuance, protec
 
 `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`
 
-Basis: two independent review cycles have been completed, exact Round 2 reviewer sources are authenticated, all represented valid blocking documentary findings have been remediated or reduced to nonblocking limitations, and the package retains explicit no-adoption/no-activation/no-implementation/no-pilot/no-production/no-FCR/no-merge authority boundaries.
+Basis: the Founder Approval Record approves the documentary governance standard with recorded nonblocking limitations after two independent review cycles, authenticated Round 2 reviewer sources, and remediation or reduction of represented valid blocking documentary findings to nonblocking limitations. The package retains explicit no-activation/no-implementation/no-pilot/no-production/no-FCR/no-direct-protected-branch-mutation/no-verified-status authority boundaries.
 
 """ + DOWNSTREAM_FOUNDER_STATEMENT + """
 
-This recommendation is not Founder approval and does not authorize activation, implementation, pilot use, production use, FCR issuance, protected merge, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, external integrity anchoring, or automatic closure of future findings.
+This record is documentary approval only and does not authorize activation, implementation, pilot use, production use, FCR issuance, direct protected-branch mutation, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, external integrity anchoring, verified status, or automatic closure of future findings.
 """)
     write_text(root / "TWO_REVIEW_CYCLE_SUFFICIENCY_MEMORANDUM.md", f"""# Two Review Cycle Sufficiency Memorandum
 
@@ -1816,6 +1853,8 @@ def generate_expected(root: Path) -> None:
         shutil.copyfile(FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT, root / FINAL_RECONCILIATION_DIRECTIVE_COPY)
     if DOWNSTREAM_ASSURANCE_DIRECTIVE_ATTACHMENT.exists():
         shutil.copyfile(DOWNSTREAM_ASSURANCE_DIRECTIVE_ATTACHMENT, root / DOWNSTREAM_ASSURANCE_DIRECTIVE_COPY)
+    if FOUNDER_APPROVAL_RECORD_ATTACHMENT.exists():
+        shutil.copyfile(FOUNDER_APPROVAL_RECORD_ATTACHMENT, root / FOUNDER_APPROVAL_RECORD_COPY)
     write_text(root / SECOND_REVIEWER_DESIGNATION_COPY, SECOND_REVIEWER_DESIGNATION_TEXT)
     write_review_sources(root)
     md = render_markdown(data)
@@ -2255,11 +2294,15 @@ def check_founder_package_consistency(root: Path) -> tuple[bool, str]:
         "RECOMMENDED_FOUNDER_ACTION.md",
         "FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md",
         "TWO_REVIEW_CYCLE_SUFFICIENCY_MEMORANDUM.md",
+        "FOUNDER_APPROVAL_AND_CUSTODY_COMPLETION_REPORT.md",
         "DOCUMENTARY_VALIDATION_REPORT.json",
     ]
     required = [
         "APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS",
         "does not authorize activation, implementation, pilot use, production use",
+        "FOUNDER_APPROVED_WITH_RECORDED_NONBLOCKING_LIMITATIONS_PENDING_PROTECTED_REPOSITORY_MERGE",
+        "Authoritative state: `PENDING_PROTECTED_REPOSITORY_MERGE`",
+        "Verification state: `NOT_VERIFIED`",
     ]
     downstream_incomplete = [
         "IMPLEMENTATION_COMPLETION_NOT_VERIFIED",
@@ -2269,7 +2312,6 @@ def check_founder_package_consistency(root: Path) -> tuple[bool, str]:
         "INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED",
     ]
     prohibited = [
-        "FOUNDER_APPROVED",
         "STANDARD_AUTHORITATIVE",
         "LEGAL_COMPLIANCE_VERIFIED",
         "IMPLEMENTATION_COMPLETION_VERIFIED",
@@ -2292,6 +2334,18 @@ def check_founder_package_consistency(root: Path) -> tuple[bool, str]:
             errors.append(f"{name} missing downstream Founder statement")
     if STATUS not in (root / "README_FIRST.md").read_text(encoding="utf-8") or STATUS not in (root / MD_NAME).read_text(encoding="utf-8"):
         errors.append("current status not visible in primary package documents")
+    data = read_json(root / JSON_NAME)
+    if data.get("document_lifecycle_state") != DOCUMENT_LIFECYCLE_STATE:
+        errors.append(f"document lifecycle state mismatch: {data.get('document_lifecycle_state')}")
+    if data.get("authoritative_state") != AUTHORITATIVE_STATE:
+        errors.append(f"authoritative state mismatch: {data.get('authoritative_state')}")
+    if data.get("verification_state") != VERIFICATION_STATE:
+        errors.append(f"verification state mismatch: {data.get('verification_state')}")
+    approval = root / FOUNDER_APPROVAL_RECORD_COPY
+    if not approval.exists():
+        errors.append("Founder approval record copy missing")
+    elif sha256_file(approval) != "a21b8c2a1dad2f9354bd8d14a492e297c2bf2b89f8bc4a98b4eab4089e137243" or approval.stat().st_size != 12301:
+        errors.append("Founder approval record hash or byte length mismatch")
     for frag in required:
         if frag not in combined:
             errors.append(f"Founder package missing required posture fragment: {frag}")
@@ -2318,7 +2372,7 @@ def write_manifest_and_checksums(root: Path) -> None:
         if rel == "PACKAGE_MANIFEST.json":
             continue
         files.append({"path": rel, "sha256": sha256_file(p), "byte_length": p.stat().st_size, "hash_status": "RECORDED"})
-    write_json(root / "PACKAGE_MANIFEST.json", {"artifact_id": ARTIFACT_ID, "status": STATUS, "readiness_status": FINAL_STATUS, "authority_boundary": AUTHORITY, "file_count": len(files) + 1, "files": files, "manifest_policy": "CHECKSUMS.sha256 and PACKAGE_MANIFEST.json are not self-checked by CHECKSUMS.sha256; manifest records CHECKSUMS.sha256.", "generated_at_utc": package_timestamp(root)})
+    write_json(root / "PACKAGE_MANIFEST.json", {"artifact_id": ARTIFACT_ID, "status": STATUS, "readiness_status": FINAL_STATUS, "authority_boundary": AUTHORITY, "document_lifecycle_state": DOCUMENT_LIFECYCLE_STATE, "authoritative_state": AUTHORITATIVE_STATE, "verification_state": VERIFICATION_STATE, "file_count": len(files) + 1, "files": files, "manifest_policy": "CHECKSUMS.sha256 and PACKAGE_MANIFEST.json are not self-checked by CHECKSUMS.sha256; manifest records CHECKSUMS.sha256.", "generated_at_utc": package_timestamp(root)})
 
 
 def write_package(root: Path) -> None:

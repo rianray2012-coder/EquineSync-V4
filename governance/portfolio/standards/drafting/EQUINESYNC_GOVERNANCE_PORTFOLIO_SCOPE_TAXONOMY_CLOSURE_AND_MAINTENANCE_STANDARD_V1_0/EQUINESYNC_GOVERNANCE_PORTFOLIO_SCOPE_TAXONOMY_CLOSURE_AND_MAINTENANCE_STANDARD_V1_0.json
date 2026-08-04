@@ -346,7 +346,8 @@
       "transition_id": "ALC-023"
     }
   ],
-  "authority_boundary": "FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY",
+  "authoritative_state": "PENDING_PROTECTED_REPOSITORY_MERGE",
+  "authority_boundary": "FOUNDER_DOCUMENTARY_APPROVAL_GRANTED_NO_DIRECT_PROTECTED_BRANCH_MUTATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_OR_VERIFIED_STATUS_AUTHORITY",
   "certification_classes": [
     {
       "certification_class_id": "FCR-01",
@@ -663,6 +664,7 @@
       "BLOCKED_SOURCE_UNAVAILABLE"
     ]
   },
+  "document_lifecycle_state": "APPROVED",
   "downstream_assurance_domains": [
     {
       "applicability_trigger": "Any compliance, payment, privacy, minors, safeguarding, jurisdiction-specific, contractual, vendor, pilot, or production claim.",
@@ -784,9 +786,9 @@
   "downstream_authority_limitation": "DOWNSTREAM_ASSURANCE_REQUIREMENTS_DOCUMENTED_NO_LEGAL_COMPLIANCE_IMPLEMENTATION_COMPLETION_PRODUCTION_READINESS_LIVE_PRIVACY_EFFECTIVENESS_BRANCH_PROTECTION_ENFORCEMENT_OR_EXTERNAL_HASH_ANCHORING_CLAIM_AUTHORIZED",
   "founder_two_cycle_determination": "TWO_REVIEW_CYCLES_SUFFICIENT_SUBJECT_TO_COMPLETE_REMEDIATION_OF_ALL_VALID_FINDINGS",
   "human_readable_source": {
-    "byte_length": 12926,
+    "byte_length": 12907,
     "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.md",
-    "sha256": "b21e4b9d84b34c0926e8308486498be8a09d94c2bf6e5098991a3dbe9e23a1d5",
+    "sha256": "a17ff9866a4761e96e9af00766ce6f2c783d1cd699874e81a232ec3dc65b3ccf",
     "supersedes_stale_values_from_77d58949": true
   },
   "normative_rule_catalog": [
@@ -941,7 +943,7 @@
     }
   ],
   "round_2_source_limitation": "Resolved for Cursor, Claude, and Perplexity Round 2 reports by authenticated repository-native source copies. Remaining external limitations concern independent Round 3 re-review, human/legal/privacy/regulatory review, and repository enforcement.",
-  "status": "TWO_REVIEW_CYCLES_COMPLETE_READY_FOR_FOUNDER_DOCUMENTARY_DECISION",
+  "status": "FOUNDER_APPROVED_WITH_RECORDED_NONBLOCKING_LIMITATIONS_PENDING_PROTECTED_REPOSITORY_MERGE",
   "terminal_lifecycle_states": [
     "REJECTED",
     "RETIRED",
@@ -956,5 +958,6 @@
     "PASS",
     "PENDING"
   ],
+  "verification_state": "NOT_VERIFIED",
   "version": "1.0.3"
 }

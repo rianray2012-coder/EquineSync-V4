@@ -30,6 +30,6 @@ Approval of this documentary standard establishes the governing framework for le
 
 Review `FOUNDER_DECISION_TABLE.csv` and `FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md` before approval.
 
-## RECOMMENDED_NEXT_ACTION
+## RECORDED_FOUNDER_ACTION
 
 `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.

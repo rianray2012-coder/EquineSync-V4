@@ -4,12 +4,15 @@
 ## Document Control
 
 - Version: `1.0.3`
-- Status: `TWO_REVIEW_CYCLES_COMPLETE_READY_FOR_FOUNDER_DOCUMENTARY_DECISION`
+- Status: `FOUNDER_APPROVED_WITH_RECORDED_NONBLOCKING_LIMITATIONS_PENDING_PROTECTED_REPOSITORY_MERGE`
 - Readiness status: `TWO_REVIEW_CYCLES_COMPLETE_ALL_VALID_FINDINGS_REMEDIATED_READY_FOR_FOUNDER_REVIEW`
-- Authority boundary: `FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY`
+- Document lifecycle state: `APPROVED`
+- Authoritative state: `PENDING_PROTECTED_REPOSITORY_MERGE`
+- Verification state: `NOT_VERIFIED`
+- Authority boundary: `FOUNDER_DOCUMENTARY_APPROVAL_GRANTED_NO_DIRECT_PROTECTED_BRANCH_MUTATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_OR_VERIFIED_STATUS_AUTHORITY`
 - Normative source: `EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.json`
 
-This package is documentary-only. It does not approve, adopt, lock, access, complete custody, activate, implement, authorize pilot use, authorize production use, issue certification, merge PR #77, or close findings automatically.
+This package records Founder documentary approval with nonblocking limitations. It does not by itself make the standard authoritative, verified, activated, implemented, pilot-authorized, production-authorized, FCR-issued, protected-branch merged, or future-finding closed.
 
 <a id="round-2-source-limitation"></a>
 ## Round 2 Source Limitation
@@ -173,4 +176,4 @@ Independent tamper-evidence or external integrity anchoring may be claimed only 
 <a id="authority-limitation"></a>
 ## Authority Limitation
 
-`FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY`
+`FOUNDER_DOCUMENTARY_APPROVAL_GRANTED_NO_DIRECT_PROTECTED_BRANCH_MUTATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_OR_VERIFIED_STATUS_AUTHORITY`
