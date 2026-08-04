@@ -20,7 +20,8 @@ from pathlib import Path
 from typing import Any, Callable
 
 ARTIFACT_ID = "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0"
-STATUS = "ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL"
+OLD_STATUS = "ROUND_2_TARGETED_REREVIEW_COMPLETE_" + "ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL"
+STATUS = "TWO_REVIEW_CYCLES_COMPLETE_READY_FOR_FOUNDER_DOCUMENTARY_DECISION"
 FINAL_STATUS = "TWO_REVIEW_CYCLES_COMPLETE_ALL_VALID_FINDINGS_REMEDIATED_READY_FOR_FOUNDER_REVIEW"
 AUTHORITY = "FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY"
 TRUTH = "FOUNDER AUTHORITY MAY CHANGE THE REQUIRED INTERNAL GATE OR EVIDENCE SUFFICIENCY DETERMINATION, BUT IT MAY NOT CHANGE HISTORICAL FACT."
@@ -43,6 +44,7 @@ SECOND_REVIEWER_TITLE = "Chief Operations Officer, EquineSync"
 DOWNSTREAM_NO_OVERCLAIM_RULE = "APPROVAL_OF_THIS_STANDARD_ESTABLISHES_REQUIREMENTS_ONLY_AND_DOES_NOT_BY_ITSELF_PROVE_LEGAL_COMPLIANCE_IMPLEMENTATION_COMPLETION_PRODUCTION_READINESS_LIVE_PRIVACY_EFFECTIVENESS_BRANCH_PROTECTION_ENFORCEMENT_OR_EXTERNAL_INTEGRITY_ANCHORING"
 DOWNSTREAM_AUTHORITY_LIMITATION = "DOWNSTREAM_ASSURANCE_REQUIREMENTS_DOCUMENTED_NO_LEGAL_COMPLIANCE_IMPLEMENTATION_COMPLETION_PRODUCTION_READINESS_LIVE_PRIVACY_EFFECTIVENESS_BRANCH_PROTECTION_ENFORCEMENT_OR_EXTERNAL_HASH_ANCHORING_CLAIM_AUTHORIZED"
 DOWNSTREAM_FOUNDER_STATEMENT = "Approval of this documentary standard establishes the governing framework for legal and regulatory review, implementation-completion verification, production-readiness assessment, live privacy-control effectiveness testing, branch-protection verification, and independent integrity anchoring. Approval does not itself establish that any of those outcomes has been completed or verified."
+DOWNSTREAM_FOUNDER_PLACEHOLDER = "{" + "DOWNSTREAM_FOUNDER_STATEMENT" + "}"
 DOWNSTREAM_STATUS_VALUES = [
     "NOT_ASSESSED",
     "NOT_APPLICABLE_WITH_RATIONALE",
@@ -1555,7 +1557,7 @@ Status: `TEMPLATE_ONLY_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED`
 
 Independent tamper-evidence or external integrity anchoring may be claimed only where the exact digest is bound to a verifiable external or cryptographically signed record not silently replaceable through package regeneration.
 """,
-        "FOUNDER_FINAL_APPROVAL_RECORD_TEMPLATE.md": f"""# Founder Final Approval Record Template
+        "FOUNDER_FINAL_APPROVAL_RECORD_TEMPLATE.md": """# Founder Final Approval Record Template
 
 Status: `TEMPLATE_ONLY_NO_APPROVAL_ISSUED`
 
@@ -1570,7 +1572,7 @@ Status: `TEMPLATE_ONLY_NO_APPROVAL_ISSUED`
 
 ## Required Statement
 
-{DOWNSTREAM_FOUNDER_STATEMENT}
+""" + DOWNSTREAM_FOUNDER_STATEMENT + """
 
 Approval may be limited to documentary standard approval. It does not itself authorize adoption, activation, implementation, pilot use, production use, FCR issuance, protected merge, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, or external integrity anchoring.
 """,
@@ -1665,7 +1667,7 @@ The current candidate remediates those concerns for Founder review. Exact Cursor
 
 Final reconciliation found no valid open blocking findings for documentary Founder review. The package now expressly governs six downstream assurance dimensions: legal and regulatory review, implementation-completion verification, production-readiness assessment, live privacy-control effectiveness testing, branch-protection verification, and independent integrity anchoring. Approval establishes their requirements only. Legal confirmation remains `REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING`; implementation completion remains `IMPLEMENTATION_COMPLETION_NOT_VERIFIED`; production readiness remains `PRODUCTION_READINESS_NOT_ASSESSED`; live privacy-control effectiveness remains `PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED`; branch-protection enforcement remains `BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED`; external anchoring remains `INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED`.
 
-{DOWNSTREAM_FOUNDER_STATEMENT}
+""" + DOWNSTREAM_FOUNDER_STATEMENT + f"""
 
 The previously recorded absence of a named standing Second Reviewer is cured by the Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions. Remaining limitations do not block Founder review because the package requests only documentary approval and expressly withholds adoption, activation, implementation, pilot, production, FCR, protected merge, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, external integrity anchoring, and automatic closure authority.
 
@@ -1701,6 +1703,8 @@ All valid blocking documentary findings are classified as `VALID_FULLY_REMEDIATE
 
 Legal confirmation, implementation completion, production readiness, live privacy effectiveness, signed external anchoring, and branch-protection enforcement remain nonblocking limits for documentary Founder acceptance but may block affected downstream action. Second-review staffing is updated by Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions.
 
+""" + DOWNSTREAM_FOUNDER_STATEMENT + """
+
 ## FOUNDER_ATTENTION_ITEMS
 
 Review `FOUNDER_DECISION_TABLE.csv` and `FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md` before approval.
@@ -1718,6 +1722,8 @@ No valid open blocking findings remain for documentary Founder review.
 ## Nonblocking But Requiring Founder Acceptance
 
 Legal/regulatory confirmation, implementation completion, production readiness, live privacy-control effectiveness, signed external anchoring, and branch-protection enforcement remain outside completed/verifiable status in this package. The prior second-review staffing absence is cured by designation of Patrick K. Spoon Sr. as standing Independent Second Reviewer, subject to recusal and independence conditions. Current effect: remaining limits prevent claims beyond documentary approval and may block affected downstream legal, implementation, pilot, production, privacy, repository-custody, or integrity-anchor reliance. Mitigation: retain the no-activation authority boundary and require separate evidence artifacts before implementation, pilot, production, FCR issuance, merge, compliance claims, operational-effectiveness claims, branch-enforcement claims, or external-anchor claims. Owner: Founder or delegated governance owner. Review trigger: before any authority expansion. Recommended Founder disposition: accept as nonblocking limitations.
+
+""" + DOWNSTREAM_FOUNDER_STATEMENT + """
 
 ## Operational Follow-Up
 
@@ -1741,7 +1747,7 @@ Implementation behavior, production operations, pilot data, FCR issuance, protec
 
 Basis: two independent review cycles have been completed, exact Round 2 reviewer sources are authenticated, all represented valid blocking documentary findings have been remediated or reduced to nonblocking limitations, and the package retains explicit no-adoption/no-activation/no-implementation/no-pilot/no-production/no-FCR/no-merge authority boundaries.
 
-{DOWNSTREAM_FOUNDER_STATEMENT}
+""" + DOWNSTREAM_FOUNDER_STATEMENT + """
 
 This recommendation is not Founder approval and does not authorize activation, implementation, pilot use, production use, FCR issuance, protected merge, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, external integrity anchoring, or automatic closure of future findings.
 """)
@@ -1759,7 +1765,7 @@ Conclusion: the two-cycle sufficiency standard is satisfied for direct Founder r
 
 Conditions attached to Founder approval: approval must remain documentary unless separately expanded by durable authority record; no activation, implementation, pilot, production, FCR issuance, protected merge, legal/regulatory compliance claim, implementation-completion claim, production-readiness claim, live privacy-effectiveness claim, branch-protection-enforcement claim, or external integrity-anchor claim is authorized by this package.
 
-{DOWNSTREAM_FOUNDER_STATEMENT}
+""" + DOWNSTREAM_FOUNDER_STATEMENT + f"""
 
 ## Counts
 
@@ -1832,6 +1838,8 @@ def generate_expected(root: Path) -> None:
 def write_validation_report(root: Path, data: dict[str, Any]) -> None:
     logs = root / "validation_logs"
     logs.mkdir(exist_ok=True)
+    for stale in list(logs.glob("VAL-*.stdout.txt")) + list(logs.glob("VAL-*.stderr.txt")):
+        stale.unlink()
     results = run_checks(root, data, logs)
     report = {
         "artifact_id": ARTIFACT_ID,
@@ -1885,6 +1893,9 @@ def run_checks(root: Path, data: dict[str, Any], logs: Path) -> list[CheckResult
     checks.append(result("VAL-DOWNSTREAM-001", "six downstream assurance domains, rules, artifacts, owners, statuses, blockers, and truthful current statuses are present", "downstream_assurance", "check_downstream_assurance", logs, lambda: check_downstream_assurance(root)))
     checks.append(result("VAL-DOWNSTREAM-OVERCLAIM-001", "approval records do not mark unverified downstream assurance domains completed", "downstream_overclaim", "check_downstream_approval_records", logs, lambda: check_downstream_approval_records(root)))
     checks.append(result("VAL-DOWNSTREAM-REGRESSION-001", "downstream assurance additions do not reopen or contradict existing closure rows", "closure_regression", "check_downstream_closure_regression", logs, lambda: check_downstream_closure_regression(root)))
+    checks.append(result("VAL-STATUS-ALIGNMENT-001", "active package status is aligned for Founder documentary decision and stale status is absent from active artifacts", "status_alignment", "check_status_alignment", logs, lambda: check_status_alignment(root)))
+    checks.append(result("VAL-UNRESOLVED-MARKER-001", "active Founder-facing files contain no unresolved operative markers", "unresolved_marker_scan", "check_unresolved_placeholders", logs, lambda: check_unresolved_placeholders(root)))
+    checks.append(result("VAL-FOUNDER-CONSISTENCY-001", "Founder package agrees on ready-for-documentary-decision status without downstream completion claims", "founder_consistency", "check_founder_package_consistency", logs, lambda: check_founder_package_consistency(root)))
     checks.append(pending(root, "VAL-HUMAN-001", "qualified human semantic review", "human_review", "Qualified human semantic review not included as durable record."))
     checks.append(pending(root, "VAL-LEGAL-001", "legal/privacy/regulatory/external-obligation review", "legal_review", "Legal, privacy-law, regulatory, and external-obligation review not included as durable record."))
     return checks
@@ -1899,6 +1910,8 @@ def check_manifest(root: Path) -> tuple[bool, str]:
         return True, "pre-Round-2 manifest present before regeneration; committed manifest is verified by explicit checksum/manifest checks after write"
     errors = []
     for entry in data.get("files", []):
+        if entry["path"].startswith("validation_logs/VAL-"):
+            continue
         p = root / entry["path"]
         if not p.exists():
             errors.append(f"missing {entry['path']}")
@@ -2167,6 +2180,128 @@ def check_downstream_closure_regression(root: Path) -> tuple[bool, str]:
         if row["final_status"] not in {"VALID_FULLY_REMEDIATED", "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION", "DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING", "NOT_APPLICABLE_WITH_RATIONALE"}:
             errors.append(f"unexpected final status {row['finding_key']}: {row['final_status']}")
     return not errors, "\n".join(errors or [f"closure rows remain nonblocking: {len(rows)} rows"])
+
+
+def active_validation_files(root: Path) -> list[Path]:
+    excluded_dirs = {"review_sources", "test_fixtures", "__pycache__"}
+    excluded_prefixes = ("FOUNDER_DIRECTIVE_",)
+    excluded_suffixes = {".pyc", ".pyo"}
+    files = []
+    for p in package_files(root):
+        rel = p.relative_to(root)
+        if any(part in excluded_dirs for part in rel.parts):
+            continue
+        if rel.name.startswith(excluded_prefixes):
+            continue
+        if p.suffix in excluded_suffixes:
+            continue
+        files.append(p)
+    return files
+
+
+def check_status_alignment(root: Path) -> tuple[bool, str]:
+    errors = []
+    data = read_json(root / JSON_NAME)
+    manifest = read_json(root / "PACKAGE_MANIFEST.json")
+    report = read_json(root / "DOCUMENTARY_VALIDATION_REPORT.json")
+    for label, obj in [("normative JSON", data), ("manifest", manifest), ("validation report", report)]:
+        if obj.get("status") != STATUS:
+            errors.append(f"{label} status mismatch: {obj.get('status')}")
+    md = (root / MD_NAME).read_text(encoding="utf-8")
+    readme = (root / "README_FIRST.md").read_text(encoding="utf-8")
+    if STATUS not in md:
+        errors.append("human-readable standard missing current status")
+    if STATUS not in readme:
+        errors.append("README missing current status")
+    stale_hits = []
+    current_hits = []
+    for p in active_validation_files(root):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        if OLD_STATUS in text:
+            stale_hits.append(p.relative_to(root).as_posix())
+        if STATUS in text:
+            current_hits.append(p.relative_to(root).as_posix())
+    if stale_hits:
+        errors.append("stale status found in active artifacts: " + "; ".join(stale_hits))
+    required_current = {JSON_NAME, MD_NAME, "README_FIRST.md", "PACKAGE_MANIFEST.json", "DOCUMENTARY_VALIDATION_REPORT.json"}
+    missing = sorted(required_current - set(current_hits))
+    if missing:
+        errors.append("current status missing from required locations: " + "; ".join(missing))
+    return not errors, "\n".join(errors or [f"active stale status occurrences=0; current status locations={len(current_hits)}"])
+
+
+def check_unresolved_placeholders(root: Path) -> tuple[bool, str]:
+    errors = []
+    marker_re = re.compile(r"\{[A-Z][A-Z0-9_ -]{2,}\}")
+    for p in active_validation_files(root):
+        if p.suffix not in {".md", ".csv", ".txt", ".yml", ".yaml", ".json"}:
+            continue
+        text = p.read_text(encoding="utf-8", errors="replace")
+        rel = p.relative_to(root).as_posix()
+        if DOWNSTREAM_FOUNDER_PLACEHOLDER in text:
+            errors.append(f"Founder statement placeholder remains in {rel}")
+        for token in ["TODO", "TBD", "PLACEHOLDER"]:
+            if token in text:
+                errors.append(f"unresolved marker {token} found in {rel}")
+        for match in marker_re.finditer(text):
+            errors.append(f"unresolved brace placeholder {match.group(0)} found in {rel}")
+    return not errors, "\n".join(errors or ["no unresolved operative placeholders in active package files"])
+
+
+def check_founder_package_consistency(root: Path) -> tuple[bool, str]:
+    files = [
+        "FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md",
+        "FOUNDER_REVIEW_HIGHLIGHTS.md",
+        "RECOMMENDED_FOUNDER_ACTION.md",
+        "FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md",
+        "TWO_REVIEW_CYCLE_SUFFICIENCY_MEMORANDUM.md",
+        "DOCUMENTARY_VALIDATION_REPORT.json",
+    ]
+    required = [
+        "APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS",
+        "does not authorize activation, implementation, pilot use, production use",
+    ]
+    downstream_incomplete = [
+        "IMPLEMENTATION_COMPLETION_NOT_VERIFIED",
+        "PRODUCTION_READINESS_NOT_ASSESSED",
+        "PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED",
+        "BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED",
+        "INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED",
+    ]
+    prohibited = [
+        "FOUNDER_APPROVED",
+        "STANDARD_AUTHORITATIVE",
+        "LEGAL_COMPLIANCE_VERIFIED",
+        "IMPLEMENTATION_COMPLETION_VERIFIED",
+        "PRODUCTION_READY_NO_EXCEPTIONS",
+        "PRODUCTION_READY_WITH_EXPRESS_EXCEPTIONS",
+        "LIVE_PRIVACY_EFFECTIVENESS_VERIFIED",
+        "BRANCH_PROTECTION_ENFORCED",
+        "EXTERNAL_INTEGRITY_ANCHORED",
+    ]
+    errors = []
+    combined = ""
+    for name in files:
+        path = root / name
+        if not path.exists():
+            errors.append(f"missing Founder consistency file {name}")
+            continue
+        text = path.read_text(encoding="utf-8")
+        combined += "\n" + text
+        if name.endswith(".md") and DOWNSTREAM_FOUNDER_STATEMENT not in text:
+            errors.append(f"{name} missing downstream Founder statement")
+    if STATUS not in (root / "README_FIRST.md").read_text(encoding="utf-8") or STATUS not in (root / MD_NAME).read_text(encoding="utf-8"):
+        errors.append("current status not visible in primary package documents")
+    for frag in required:
+        if frag not in combined:
+            errors.append(f"Founder package missing required posture fragment: {frag}")
+    for frag in downstream_incomplete:
+        if frag not in combined:
+            errors.append(f"Founder package missing downstream incomplete status: {frag}")
+    for token in prohibited:
+        if token in combined:
+            errors.append(f"Founder package contains prohibited completed/approval token: {token}")
+    return not errors, "\n".join(errors or ["Founder package consistency verified"])
 
 
 def write_manifest_and_checksums(root: Path) -> None:

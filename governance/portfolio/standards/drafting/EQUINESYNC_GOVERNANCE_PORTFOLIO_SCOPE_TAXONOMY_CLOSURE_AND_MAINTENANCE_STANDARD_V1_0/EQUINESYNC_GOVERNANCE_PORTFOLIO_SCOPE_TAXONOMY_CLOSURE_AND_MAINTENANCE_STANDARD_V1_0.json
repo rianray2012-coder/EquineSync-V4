@@ -784,9 +784,9 @@
   "downstream_authority_limitation": "DOWNSTREAM_ASSURANCE_REQUIREMENTS_DOCUMENTED_NO_LEGAL_COMPLIANCE_IMPLEMENTATION_COMPLETION_PRODUCTION_READINESS_LIVE_PRIVACY_EFFECTIVENESS_BRANCH_PROTECTION_ENFORCEMENT_OR_EXTERNAL_HASH_ANCHORING_CLAIM_AUTHORIZED",
   "founder_two_cycle_determination": "TWO_REVIEW_CYCLES_SUFFICIENT_SUBJECT_TO_COMPLETE_REMEDIATION_OF_ALL_VALID_FINDINGS",
   "human_readable_source": {
-    "byte_length": 12955,
+    "byte_length": 12926,
     "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.md",
-    "sha256": "f2447fb9f28ac2118438de3b11f58f706e64a3a64180f60141564f9227fd9268",
+    "sha256": "b21e4b9d84b34c0926e8308486498be8a09d94c2bf6e5098991a3dbe9e23a1d5",
     "supersedes_stale_values_from_77d58949": true
   },
   "normative_rule_catalog": [
@@ -941,7 +941,7 @@
     }
   ],
   "round_2_source_limitation": "Resolved for Cursor, Claude, and Perplexity Round 2 reports by authenticated repository-native source copies. Remaining external limitations concern independent Round 3 re-review, human/legal/privacy/regulatory review, and repository enforcement.",
-  "status": "ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL",
+  "status": "TWO_REVIEW_CYCLES_COMPLETE_READY_FOR_FOUNDER_DOCUMENTARY_DECISION",
   "terminal_lifecycle_states": [
     "REJECTED",
     "RETIRED",

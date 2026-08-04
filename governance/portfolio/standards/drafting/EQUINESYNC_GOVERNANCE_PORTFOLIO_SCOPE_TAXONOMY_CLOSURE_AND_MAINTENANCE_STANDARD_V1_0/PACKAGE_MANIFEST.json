@@ -1,7 +1,7 @@
 {
   "artifact_id": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0",
   "authority_boundary": "FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY",
-  "file_count": 145,
+  "file_count": 151,
   "files": [
     {
       "byte_length": 827,
@@ -64,10 +64,10 @@
       "sha256": "885d8b546da3b3081414603398610ec7d9c0b63d4a63e6e5bec8fc9d63320b61"
     },
     {
-      "byte_length": 15847,
+      "byte_length": 16563,
       "hash_status": "RECORDED",
       "path": "CHECKSUMS.sha256",
-      "sha256": "1455b1183cc9ea8a622c8ede9d267d895b1f58b50c085f5dc132980271fc6c09"
+      "sha256": "8c66b9803556c9ff363c5437b3a0b63fa990134abf2605b35460d6d204dae556"
     },
     {
       "byte_length": 2669,
@@ -112,10 +112,10 @@
       "sha256": "e0c48c8a9d5728c67d19d42089796a7a9baa5402a4b75b019f1d0179478a0689"
     },
     {
-      "byte_length": 10761,
+      "byte_length": 13099,
       "hash_status": "RECORDED",
       "path": "DOCUMENTARY_VALIDATION_REPORT.json",
-      "sha256": "97e003fa9068dcb47f8cfd39e5f85a9d51ef36de055ab4240d45793a5f40b8ec"
+      "sha256": "687316872fbb3cb4a8722f37d5d246b879a3b1d55bea40d00cbf931ab9117afd"
     },
     {
       "byte_length": 10041,
@@ -130,16 +130,16 @@
       "sha256": "89e91beb7318e76aa5a8c5e7b3d7f774ab215d1236ac9d6c7f4aa90dd45b3367"
     },
     {
-      "byte_length": 43897,
+      "byte_length": 43868,
       "hash_status": "RECORDED",
       "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.json",
-      "sha256": "3359aab42c61659e6b6a413f2478d4dfac1c1108405a5c32bb853cf2054dc66f"
+      "sha256": "2011c50701f709a136e379d2fa1ecf3d0f77f617db85972d684dba87053dc458"
     },
     {
-      "byte_length": 12955,
+      "byte_length": 12926,
       "hash_status": "RECORDED",
       "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.md",
-      "sha256": "f2447fb9f28ac2118438de3b11f58f706e64a3a64180f60141564f9227fd9268"
+      "sha256": "b21e4b9d84b34c0926e8308486498be8a09d94c2bf6e5098991a3dbe9e23a1d5"
     },
     {
       "byte_length": 700,
@@ -250,10 +250,10 @@
       "sha256": "c422c4f2861ceb40ec727ebe113ff9b947ebedaea45e3cc991112464a8b998b1"
     },
     {
-      "byte_length": 2507,
+      "byte_length": 2895,
       "hash_status": "RECORDED",
       "path": "FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md",
-      "sha256": "ff8b6b59460aa49ab21ac926215a2df6ab02b4460ac5e5e8ad2c73ebc26dc831"
+      "sha256": "3a9b9bda8ca171fbfd231b02a411f7126aad101c9739aced97eded7ea77dad3d"
     },
     {
       "byte_length": 4797,
@@ -262,10 +262,10 @@
       "sha256": "bd0ffc450c26afdac093206ef4ebb55e9143d9e496367f50166f39eea5f3ef45"
     },
     {
-      "byte_length": 2057,
+      "byte_length": 2445,
       "hash_status": "RECORDED",
       "path": "FOUNDER_REVIEW_HIGHLIGHTS.md",
-      "sha256": "eb214d9f6ca8dbd10d0884b48182ac7cfa4fbdb9c1924e0d58ccc6cd73a5c6ca"
+      "sha256": "f3359ca911b286add8fbc5764e8e685c232bbd908fccd00f6d955ac2e57a8197"
     },
     {
       "byte_length": 1790,
@@ -406,16 +406,16 @@
       "sha256": "6cd6b241b8de3f18f5c6a92ad92e9e2c504fb634fed70fdf86d3c55ac1efc633"
     },
     {
-      "byte_length": 1158,
+      "byte_length": 1129,
       "hash_status": "RECORDED",
       "path": "README_FIRST.md",
-      "sha256": "a15e280735446f20a83aac073baacbc8cea11cb5d89287821f7e21adb821cc71"
+      "sha256": "af3f09a2ba9ece70f4dc42e98e1ae6f423624e145e588d98db45562f6594e856"
     },
     {
-      "byte_length": 820,
+      "byte_length": 1176,
       "hash_status": "RECORDED",
       "path": "RECOMMENDED_FOUNDER_ACTION.md",
-      "sha256": "4d6e4991f26bfbf5b42d2f0a0bd91023b35d098707f067cf3a0a12ca8041b7ed"
+      "sha256": "b70bc02b73ca1cecfcd002704fca7a96979c1d9ba98d35bdfbeb782b5fc8a77c"
     },
     {
       "byte_length": 8234,
@@ -481,7 +481,7 @@
       "byte_length": 3954,
       "hash_status": "RECORDED",
       "path": "SOURCE_AND_AUTHORITY_REGISTER.csv",
-      "sha256": "28b9ab988b6e198e1b946facbe8b792fbb9eb8da30010309d405f6b13b7cb1bb"
+      "sha256": "7ff03567a1ce3ab51d90aac59f9cc286588673091aa3c367ae312b6d8108ab5a"
     },
     {
       "byte_length": 637,
@@ -706,10 +706,10 @@
       "sha256": "092649089d252e2c20c3c20c6c9ca9afd9fb77e468692902bf21b370b1b905ce"
     },
     {
-      "byte_length": 163577,
+      "byte_length": 170456,
       "hash_status": "RECORDED",
       "path": "tools/round2_package.py",
-      "sha256": "20a82fc13efa48a9d0f1d03ff430f2b6336b530166b5bf07d44fb460611d3b20"
+      "sha256": "8dfb3dc92e98b41645f276dd6f31d513194319ac61475232a7e4d14abd32a903"
     },
     {
       "byte_length": 515,
@@ -764,6 +764,18 @@
       "hash_status": "RECORDED",
       "path": "validation_logs/VAL-FCR-001.stdout.txt",
       "sha256": "d13f8459a85d40e92591ade66aa22f0c687358f9f1e6f7fcfaa98847209ac94c"
+    },
+    {
+      "byte_length": 1,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-FOUNDER-CONSISTENCY-001.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "byte_length": 37,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-FOUNDER-CONSISTENCY-001.stdout.txt",
+      "sha256": "43005eb8e2836bfd7ea4277bcaf26d0d8642727fd0ea7cf5de508f36c876a496"
     },
     {
       "byte_length": 1,
@@ -862,6 +874,30 @@
       "sha256": "73cd7aec6a20bb2766fb822dfd73ba35d2cf3224182ad2b2bdc251cc54ba199e"
     },
     {
+      "byte_length": 1,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-STATUS-ALIGNMENT-001.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "byte_length": 62,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-STATUS-ALIGNMENT-001.stdout.txt",
+      "sha256": "516f42b079ae59ccda0df5c791730a6c820e1bb7b6afa5344c325113e5b64cff"
+    },
+    {
+      "byte_length": 1,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-UNRESOLVED-MARKER-001.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "byte_length": 61,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-UNRESOLVED-MARKER-001.stdout.txt",
+      "sha256": "2e3f028178f73020b51756d8350f18469c13d0f1d88e36dc36dcbe3bbb63ae86"
+    },
+    {
       "byte_length": 1531,
       "hash_status": "RECORDED",
       "path": "validation_logs/tests/round2_tool_tests.log",
@@ -871,5 +907,5 @@
   "generated_at_utc": "2026-08-03T13:25:13Z",
   "manifest_policy": "CHECKSUMS.sha256 and PACKAGE_MANIFEST.json are not self-checked by CHECKSUMS.sha256; manifest records CHECKSUMS.sha256.",
   "readiness_status": "TWO_REVIEW_CYCLES_COMPLETE_ALL_VALID_FINDINGS_REMEDIATED_READY_FOR_FOUNDER_REVIEW",
-  "status": "ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL"
+  "status": "TWO_REVIEW_CYCLES_COMPLETE_READY_FOR_FOUNDER_DOCUMENTARY_DECISION"
 }

@@ -24,6 +24,8 @@ All valid blocking documentary findings are classified as `VALID_FULLY_REMEDIATE
 
 Legal confirmation, implementation completion, production readiness, live privacy effectiveness, signed external anchoring, and branch-protection enforcement remain nonblocking limits for documentary Founder acceptance but may block affected downstream action. Second-review staffing is updated by Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions.
 
+Approval of this documentary standard establishes the governing framework for legal and regulatory review, implementation-completion verification, production-readiness assessment, live privacy-control effectiveness testing, branch-protection verification, and independent integrity anchoring. Approval does not itself establish that any of those outcomes has been completed or verified.
+
 ## FOUNDER_ATTENTION_ITEMS
 
 Review `FOUNDER_DECISION_TABLE.csv` and `FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md` before approval.

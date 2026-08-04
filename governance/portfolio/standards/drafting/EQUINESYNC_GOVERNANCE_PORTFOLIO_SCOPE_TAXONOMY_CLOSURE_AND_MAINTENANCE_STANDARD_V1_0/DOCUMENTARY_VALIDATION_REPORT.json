@@ -195,6 +195,54 @@
       "stdout_artifact": "validation_logs/VAL-DOWNSTREAM-REGRESSION-001.stdout.txt"
     },
     {
+      "blocking_effect": "BLOCKS_IF_FAIL",
+      "check_id": "VAL-STATUS-ALIGNMENT-001",
+      "check_type": "status_alignment",
+      "command_or_function": "check_status_alignment",
+      "completed_at_utc": "2026-08-03T13:25:13Z",
+      "evidence_reference": "validation_logs/VAL-STATUS-ALIGNMENT-001.stdout.txt",
+      "executed_by": "tools/round2_package.py",
+      "exit_code": 0,
+      "limitations": "",
+      "requirement": "active package status is aligned for Founder documentary decision and stale status is absent from active artifacts",
+      "result": "PASS",
+      "started_at_utc": "2026-08-03T13:25:13Z",
+      "stderr_artifact": "validation_logs/VAL-STATUS-ALIGNMENT-001.stderr.txt",
+      "stdout_artifact": "validation_logs/VAL-STATUS-ALIGNMENT-001.stdout.txt"
+    },
+    {
+      "blocking_effect": "BLOCKS_IF_FAIL",
+      "check_id": "VAL-UNRESOLVED-MARKER-001",
+      "check_type": "unresolved_marker_scan",
+      "command_or_function": "check_unresolved_placeholders",
+      "completed_at_utc": "2026-08-03T13:25:13Z",
+      "evidence_reference": "validation_logs/VAL-UNRESOLVED-MARKER-001.stdout.txt",
+      "executed_by": "tools/round2_package.py",
+      "exit_code": 0,
+      "limitations": "",
+      "requirement": "active Founder-facing files contain no unresolved operative markers",
+      "result": "PASS",
+      "started_at_utc": "2026-08-03T13:25:13Z",
+      "stderr_artifact": "validation_logs/VAL-UNRESOLVED-MARKER-001.stderr.txt",
+      "stdout_artifact": "validation_logs/VAL-UNRESOLVED-MARKER-001.stdout.txt"
+    },
+    {
+      "blocking_effect": "BLOCKS_IF_FAIL",
+      "check_id": "VAL-FOUNDER-CONSISTENCY-001",
+      "check_type": "founder_consistency",
+      "command_or_function": "check_founder_package_consistency",
+      "completed_at_utc": "2026-08-03T13:25:13Z",
+      "evidence_reference": "validation_logs/VAL-FOUNDER-CONSISTENCY-001.stdout.txt",
+      "executed_by": "tools/round2_package.py",
+      "exit_code": 0,
+      "limitations": "",
+      "requirement": "Founder package agrees on ready-for-documentary-decision status without downstream completion claims",
+      "result": "PASS",
+      "started_at_utc": "2026-08-03T13:25:13Z",
+      "stderr_artifact": "validation_logs/VAL-FOUNDER-CONSISTENCY-001.stderr.txt",
+      "stdout_artifact": "validation_logs/VAL-FOUNDER-CONSISTENCY-001.stdout.txt"
+    },
+    {
       "blocking_effect": "BLOCKS_UNQUALIFIED_PASS",
       "check_id": "VAL-HUMAN-001",
       "check_type": "human_review",
@@ -229,5 +277,5 @@
   ],
   "overall_result": "PASS_WITH_PENDING_JUDGMENT_CHECKS",
   "readiness_status": "TWO_REVIEW_CYCLES_COMPLETE_ALL_VALID_FINDINGS_REMEDIATED_READY_FOR_FOUNDER_REVIEW",
-  "status": "ROUND_2_TARGETED_REREVIEW_COMPLETE_ADDITIONAL_REVISION_REQUIRED_NOT_READY_FOR_FOUNDER_APPROVAL"
+  "status": "TWO_REVIEW_CYCLES_COMPLETE_READY_FOR_FOUNDER_DOCUMENTARY_DECISION"
 }

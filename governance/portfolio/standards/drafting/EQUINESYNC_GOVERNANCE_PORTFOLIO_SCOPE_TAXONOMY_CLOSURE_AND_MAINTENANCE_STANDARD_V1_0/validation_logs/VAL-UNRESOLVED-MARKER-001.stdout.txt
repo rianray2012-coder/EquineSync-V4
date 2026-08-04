@@ -1,0 +1,1 @@
+no unresolved operative placeholders in active package files
