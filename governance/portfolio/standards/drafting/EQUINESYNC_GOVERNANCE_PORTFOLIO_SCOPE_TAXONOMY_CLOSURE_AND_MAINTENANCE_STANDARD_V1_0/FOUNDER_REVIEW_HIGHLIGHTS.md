@@ -2,11 +2,11 @@
 
 ## WHAT_IS_NOW_STRONG
 
-Exact reviewer sources are committed, validation is executable, FCR schema fixtures reject empty required values, lifecycle terminality is checked, and no activation or production authority is implied.
+Exact reviewer sources are committed, validation is executable, FCR schema fixtures reject empty required values, lifecycle terminality is checked, downstream assurance domains are separately governed, and no activation or production authority is implied.
 
 ## WHAT_CHANGED_MATERIALLY
 
-The package moved from interim `REMEDIATED_PENDING_REREVIEW` rows to final finding-specific Founder-package dispositions, with a closure register and decision table.
+The package moved from interim `REMEDIATED_PENDING_REREVIEW` rows to final finding-specific Founder-package dispositions, with a closure register and decision table. It also adds six downstream assurance dimensions with owners, evidence artifacts, blocking conditions, permitted statuses, and prohibited-overclaim language.
 
 ## WHAT_REVIEWERS_AGREED_ON
 
@@ -22,7 +22,7 @@ All valid blocking documentary findings are classified as `VALID_FULLY_REMEDIATE
 
 ## NONBLOCKING_LIMITATIONS
 
-Legal confirmation, operational implementation, live privacy verification, signed external anchoring, and branch-protection administration remain nonblocking limits for Founder acceptance. Second-review staffing is updated by Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions.
+Legal confirmation, implementation completion, production readiness, live privacy effectiveness, signed external anchoring, and branch-protection enforcement remain nonblocking limits for documentary Founder acceptance but may block affected downstream action. Second-review staffing is updated by Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions.
 
 ## FOUNDER_ATTENTION_ITEMS
 

@@ -1,7 +1,7 @@
 {
   "artifact_id": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0",
   "authority_boundary": "FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION_AUTHORIZED_TWO_REVIEW_CYCLES_SUFFICIENT_ONLY_IF_ALL_VALID_FINDINGS_FULLY_REMEDIATED_NO_ADOPTION_ACTIVATION_IMPLEMENTATION_PILOT_PRODUCTION_FCR_MERGE_OR_AUTOMATIC_CLOSURE_AUTHORITY",
-  "file_count": 117,
+  "file_count": 145,
   "files": [
     {
       "byte_length": 827,
@@ -10,10 +10,10 @@
       "sha256": "d804e5acfeed69883339514b6f741c7abb8c3e1a7c1941c3b9931a32f74fc6ac"
     },
     {
-      "byte_length": 3055,
+      "byte_length": 3049,
       "hash_status": "RECORDED",
       "path": "ADVERSARIAL_REVIEW_MATRIX.csv",
-      "sha256": "358bdb91c0e2a916301cfd4b851ed1d0ff153c606a3e0a716956204ce96eb97d"
+      "sha256": "ae144c0fe3c71a00e8bfc15a43de3d327252dfb1fb4a43103398c4b98f8b1b4b"
     },
     {
       "byte_length": 608,
@@ -34,16 +34,22 @@
       "sha256": "353f98c97eb567cd4f4042e97f089ef6cf0fb448ea4188e12041f5ef639fdfff"
     },
     {
-      "byte_length": 822,
+      "byte_length": 815,
       "hash_status": "RECORDED",
       "path": "AUTHORITY_EVENT_MODEL.csv",
-      "sha256": "54561f586623026c6aa9801ce6ae89083b18b7874ad6dbe3d525d901ace8af7e"
+      "sha256": "ca94f37441af9464fcf20cb3f4ac6a3abd7ae9fcb84104cb763fb01b1f362ac9"
     },
     {
-      "byte_length": 230,
+      "byte_length": 489,
+      "hash_status": "RECORDED",
+      "path": "BRANCH_PROTECTION_VERIFICATION_TEMPLATE.md",
+      "sha256": "af7f8077c347cc97386c998d105f416cc77ad4b2a5575331fe28fa9dabf1a171"
+    },
+    {
+      "byte_length": 229,
       "hash_status": "RECORDED",
       "path": "CERTIFICATION_REGISTER.csv",
-      "sha256": "e50056dee4c4e8f1ede18963651fd7213f748b8eea9cf48195049bdec38346db"
+      "sha256": "facd6cfcbfcc1871d2b69fa0c93ef1ffb748b7d9f033b1f265cc6e7382502594"
     },
     {
       "byte_length": 640,
@@ -52,16 +58,16 @@
       "sha256": "db8fe50cfb4bf354020c079e03bbe98e5d315df079e59a70d2e8a1f1ab7b5d8c"
     },
     {
-      "byte_length": 493,
+      "byte_length": 489,
       "hash_status": "RECORDED",
       "path": "CHALLENGE_PROCEDURE_TIMING_MATRIX.csv",
-      "sha256": "11c7b333b062dbd37379abd7874b73989cb2354ed146d96e038c826920bd15e0"
+      "sha256": "885d8b546da3b3081414603398610ec7d9c0b63d4a63e6e5bec8fc9d63320b61"
     },
     {
-      "byte_length": 12528,
+      "byte_length": 15847,
       "hash_status": "RECORDED",
       "path": "CHECKSUMS.sha256",
-      "sha256": "bf27061cc861816b0ea34f4901e6b4adb8cd394155cee4e7df0a7212bc263fe6"
+      "sha256": "1455b1183cc9ea8a622c8ede9d267d895b1f58b50c085f5dc132980271fc6c09"
     },
     {
       "byte_length": 2669,
@@ -82,10 +88,10 @@
       "sha256": "baa3131ef079c2ed14f6d5e09ec24c01baaae9adaa305f30dd40d8fff11bbeb5"
     },
     {
-      "byte_length": 4115,
+      "byte_length": 5294,
       "hash_status": "RECORDED",
       "path": "CONTROLLED_VOCABULARY_REGISTER.csv",
-      "sha256": "5cfac02b30719f8a453ae24694379ea37339cb3ac75da59190064e4e088cb775"
+      "sha256": "70332e7fec8c93b8133441396ab4d8da566068861b0c643b31119819ca00d781"
     },
     {
       "byte_length": 795,
@@ -106,10 +112,16 @@
       "sha256": "e0c48c8a9d5728c67d19d42089796a7a9baa5402a4b75b019f1d0179478a0689"
     },
     {
-      "byte_length": 8389,
+      "byte_length": 10761,
       "hash_status": "RECORDED",
       "path": "DOCUMENTARY_VALIDATION_REPORT.json",
-      "sha256": "ea6eb2696fefe4b35899ab2fe74ec7d8648f2b23c0a8ef1ed472473464bca6cc"
+      "sha256": "97e003fa9068dcb47f8cfd39e5f85a9d51ef36de055ab4240d45793a5f40b8ec"
+    },
+    {
+      "byte_length": 10041,
+      "hash_status": "RECORDED",
+      "path": "DOWNSTREAM_ASSURANCE_AND_VERIFICATION_STATUS_MATRIX.csv",
+      "sha256": "1898e1777f87923548f5f80a1086a1e939093883f0bcf0e8335a71e09d2a6c05"
     },
     {
       "byte_length": 2476,
@@ -118,22 +130,22 @@
       "sha256": "89e91beb7318e76aa5a8c5e7b3d7f774ab215d1236ac9d6c7f4aa90dd45b3367"
     },
     {
-      "byte_length": 27851,
+      "byte_length": 43897,
       "hash_status": "RECORDED",
       "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.json",
-      "sha256": "0144172714885a9a33534381ebf62c4c427dbf0b303c18195a077ce48ae71438"
+      "sha256": "3359aab42c61659e6b6a413f2478d4dfac1c1108405a5c32bb853cf2054dc66f"
     },
     {
-      "byte_length": 5715,
+      "byte_length": 12955,
       "hash_status": "RECORDED",
       "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.md",
-      "sha256": "f5fa825011ed350d7d4594259b4dfb669517f21752938fd1b370fa8319b2b39e"
+      "sha256": "f2447fb9f28ac2118438de3b11f58f706e64a3a64180f60141564f9227fd9268"
     },
     {
-      "byte_length": 709,
+      "byte_length": 700,
       "hash_status": "RECORDED",
       "path": "EVIDENCE_STATUS_MODEL.csv",
-      "sha256": "933ed8cedeaaf17a9c7a81c6327b1f6336a9c0ef82fcb0d8e31d302a1160d3c2"
+      "sha256": "9b3e161a65923a76e6b5a785a0b844f62417c7f8c2c61866564992b4950c767e"
     },
     {
       "byte_length": 721,
@@ -148,6 +160,18 @@
       "sha256": "2031b22dbcf43ec8b06318af13012d4c999625a11c1ab2ee6542aab44655684a"
     },
     {
+      "byte_length": 606,
+      "hash_status": "RECORDED",
+      "path": "EXTERNAL_HASH_ANCHORING_RECORD_TEMPLATE.md",
+      "sha256": "c82f441f58405b56e81388c801fae1c093d252608e588c0a3a3ef63ca51dd99e"
+    },
+    {
+      "byte_length": 4494,
+      "hash_status": "RECORDED",
+      "path": "EXTERNAL_INTEGRITY_ANCHORING_CONTROL_MATRIX.csv",
+      "sha256": "c2ad45773515931a35743d6e209f51b73ddd7b8559f626109d53c821beb55845"
+    },
+    {
       "byte_length": 1739,
       "hash_status": "RECORDED",
       "path": "FINDING_RISK_EXCEPTION_AND_WAIVER_DISPOSITION_MATRIX.csv",
@@ -160,10 +184,10 @@
       "sha256": "f1e0a7fdae5d7e7f64b16bcb1d7f8d60b295ed9ae886c8da185027fbe055be70"
     },
     {
-      "byte_length": 4821,
+      "byte_length": 4810,
       "hash_status": "RECORDED",
       "path": "FOUNDER_CERTIFICATION_WAIVER_SUBSTITUTION_AND_OVERRIDE_MATRIX.csv",
-      "sha256": "bc5f73b76f1847d5d3f2e9741b9bdad75fc85b1e3a1a365fac5aac460a2c687d"
+      "sha256": "a8522bcf4b15448de2426ca9955e6580eda2cc2b822d3459532d6d46edc261b2"
     },
     {
       "byte_length": 10140,
@@ -172,10 +196,10 @@
       "sha256": "2bba23a711ad0647bc8cac82da252e5ebd6459a6c2a589c0521e9ccdf0869942"
     },
     {
-      "byte_length": 1400,
+      "byte_length": 1397,
       "hash_status": "RECORDED",
       "path": "FOUNDER_DECISION_TABLE.csv",
-      "sha256": "db85dffe174bad2367838610efd51dcdc7f73a25fe91fbdab1b84be2558ec379"
+      "sha256": "bc8cee8f8edbc86ac7059b7cc034bccec00168f874cc41bbf9e37220a1633159"
     },
     {
       "byte_length": 2232,
@@ -188,6 +212,12 @@
       "hash_status": "RECORDED",
       "path": "FOUNDER_DIRECTIVE_CONSOLIDATED_OUTSIDE_REVIEW_REMEDIATION_REVALIDATION_AND_REVISION_V1_0_0.md",
       "sha256": "4411273c1bb7bb4409ec6943dc7d274698aafc637c513902e1ad3c95a11e860b"
+    },
+    {
+      "byte_length": 21164,
+      "hash_status": "RECORDED",
+      "path": "FOUNDER_DIRECTIVE_DOWNSTREAM_ASSURANCE_VERIFICATION_REPOSITORY_ENFORCEMENT_AND_INTEGRITY_ANCHORING_CONTROLS.md",
+      "sha256": "ec7a7cfc79a7982eef96409cda9ea4d516328eaffac3f67f4152796c3fa55e53"
     },
     {
       "byte_length": 14728,
@@ -208,28 +238,34 @@
       "sha256": "3b42157f0fb9b3e115a5506ceeaa563cc96e29831830eccc4a9bf80dc9cfa54f"
     },
     {
+      "byte_length": 965,
+      "hash_status": "RECORDED",
+      "path": "FOUNDER_FINAL_APPROVAL_RECORD_TEMPLATE.md",
+      "sha256": "5c4659bd3ec255ea456e35268dd34ecfb63d1f5d927ba430d917bed6252f0972"
+    },
+    {
       "byte_length": 1361,
       "hash_status": "RECORDED",
       "path": "FOUNDER_HISTORICAL_EVIDENCE_CERTIFICATION_TEMPLATE.md",
       "sha256": "c422c4f2861ceb40ec727ebe113ff9b947ebedaea45e3cc991112464a8b998b1"
     },
     {
-      "byte_length": 1771,
+      "byte_length": 2507,
       "hash_status": "RECORDED",
       "path": "FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md",
-      "sha256": "e7869b1c4431f56fc5addd0762992aba411e87f1e3de3430c3d55769adb7393f"
+      "sha256": "ff8b6b59460aa49ab21ac926215a2df6ab02b4460ac5e5e8ad2c73ebc26dc831"
     },
     {
-      "byte_length": 3606,
+      "byte_length": 4797,
       "hash_status": "RECORDED",
       "path": "FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md",
-      "sha256": "edb1d43ba5d6bee554a423146177e913b3549c53976a1e56d8359043015a4c04"
+      "sha256": "bd0ffc450c26afdac093206ef4ebb55e9143d9e496367f50166f39eea5f3ef45"
     },
     {
-      "byte_length": 1773,
+      "byte_length": 2057,
       "hash_status": "RECORDED",
       "path": "FOUNDER_REVIEW_HIGHLIGHTS.md",
-      "sha256": "69c1cad0a54a4d2a6ab0694f0ff997a9b3d0400a2ee554534cb73a438679c92e"
+      "sha256": "eb214d9f6ca8dbd10d0884b48182ac7cfa4fbdb9c1924e0d58ccc6cd73a5c6ca"
     },
     {
       "byte_length": 1790,
@@ -244,40 +280,70 @@
       "sha256": "a911f3a2c1784fc298212b65094f72a1cacef9194846d075d4fc2cf65c8e0f41"
     },
     {
-      "byte_length": 511,
+      "byte_length": 509,
       "hash_status": "RECORDED",
       "path": "GOVERNANCE_MAINTENANCE_STANDARD_SUPERSESSION_RECORD.csv",
-      "sha256": "18e5146f42948a164ff1bbc1d2c6e235c977066568c7e24f0ff48c2b00348aea"
+      "sha256": "4ecd62bf2d3b7f525322d55d3a23f93a068d318e8676d984fbba5cdb8593248b"
     },
     {
-      "byte_length": 575,
+      "byte_length": 3192,
+      "hash_status": "RECORDED",
+      "path": "IMPLEMENTATION_COMPLETION_CRITERIA_MATRIX.csv",
+      "sha256": "c9e7bcaccaccf1a9222d066e3af965bba3059371667d2131220404439e85127a"
+    },
+    {
+      "byte_length": 597,
+      "hash_status": "RECORDED",
+      "path": "IMPLEMENTATION_COMPLETION_VERIFICATION_TEMPLATE.md",
+      "sha256": "ae02b432df452059cab89f491825e76b06c7faa7efcb2ef2c34db90a0d624d6f"
+    },
+    {
+      "byte_length": 1393,
       "hash_status": "RECORDED",
       "path": "KNOWN_LIMITATIONS.md",
-      "sha256": "364bf7b1378e7cd401b1cde44a882b4024b3d49072b4ded1391d9e5e02abb3b8"
+      "sha256": "e65f91103f816853383d769cf7b501ee795e4a3a2ed3fb0325b6deaef77ee31f"
     },
     {
-      "byte_length": 806,
+      "byte_length": 803,
       "hash_status": "RECORDED",
       "path": "LEGACY_TEMPLATE_SUPERSESSION_RECORD.csv",
-      "sha256": "98b74c3c54191ae3a007bd7c30597d60bda6d726dc9db7d6be449a4d68ca478b"
+      "sha256": "35f5479077a0d54339f9aac39c0373ec60696519309788003b2b8b4d4a547f0a"
     },
     {
-      "byte_length": 3544,
+      "byte_length": 5681,
+      "hash_status": "RECORDED",
+      "path": "LEGAL_AND_REGULATORY_APPLICABILITY_AND_CONFIRMATION_REGISTER.csv",
+      "sha256": "f2616b1ada8654cf7856d9e4c094dd752cd6f785d4d9323d49689ed621379aa9"
+    },
+    {
+      "byte_length": 768,
+      "hash_status": "RECORDED",
+      "path": "LEGAL_AND_REGULATORY_CONFIRMATION_TEMPLATE.md",
+      "sha256": "d0f562716983fea36befba0e24ec8cb72a358ba0d1ad5b2c62a3c617e0f6d537"
+    },
+    {
+      "byte_length": 3520,
       "hash_status": "RECORDED",
       "path": "LIFECYCLE_STATE_AND_TRANSITION_MATRIX.csv",
-      "sha256": "238f7aeac7fcde757e9d42939854779560523ff9311d8280efb58fcb3d8b8f6d"
+      "sha256": "6d70e45dbedcf04fb1b86da5f4e6bc5f762d9f49bc5af4687f4be0d391924f87"
     },
     {
-      "byte_length": 1634,
+      "byte_length": 1617,
       "hash_status": "RECORDED",
       "path": "LIFECYCLE_STATE_DEFINITION_MATRIX.csv",
-      "sha256": "d37178a66fb4b035a7df71a8be4b808cf78bbc63f384d5f3111ccfd485206301"
+      "sha256": "eaee770e5990c57e05f508943052cd271bb17e6022ed88ef80d6fdcff891e4ac"
     },
     {
-      "byte_length": 2870,
+      "byte_length": 708,
+      "hash_status": "RECORDED",
+      "path": "LIVE_PRIVACY_CONTROL_EFFECTIVENESS_REVIEW_TEMPLATE.md",
+      "sha256": "73eeaacf9c40e41478e9addaf7e3319d711aa2615754275cd9723242fd87f932"
+    },
+    {
+      "byte_length": 5646,
       "hash_status": "RECORDED",
       "path": "MACHINE_READABLE_REFERENCE_INDEX.csv",
-      "sha256": "3a40ef28aa17415715d3914350a15a02153431c8899fca84a6377c1f368664cf"
+      "sha256": "66a62db73cce5a2bcb4a54fedea1045c61356d4c879b7c1ebd10839580c140bb"
     },
     {
       "byte_length": 1115,
@@ -286,10 +352,10 @@
       "sha256": "9a6bb7cc97331ddf5f64643ca2de1bf4537e3d40de5960e70109c3de2442668e"
     },
     {
-      "byte_length": 3024,
+      "byte_length": 6623,
       "hash_status": "RECORDED",
       "path": "NON_WAIVABLE_CORE_MATRIX.csv",
-      "sha256": "4936cc95e291c25e2bc074bcadd89ba42e64b0ee0a590d0b66a61338e4dbb0bc"
+      "sha256": "a0b9f523539bba1aa0b7f951848e40a2c4a719ae2d880d17858269604012cc51"
     },
     {
       "byte_length": 667,
@@ -298,10 +364,10 @@
       "sha256": "a1a1d3269b965fae426228f138eaa1a663e37e80bca7618657f44843e275596d"
     },
     {
-      "byte_length": 227510,
+      "byte_length": 227383,
       "hash_status": "RECORDED",
       "path": "OUTSIDE_REVIEW_FINDING_DISPOSITION_MATRIX.csv",
-      "sha256": "7e953a04ce6429b28d00369818d8c6f6383f94b7a1a3ac604724e3351e81d1da"
+      "sha256": "890d27585569a70418c90ded8d6e3f0aec9461857f3c8a237d005a110146825b"
     },
     {
       "byte_length": 1922,
@@ -310,34 +376,52 @@
       "sha256": "f133cbedb24e3e4a90bd79ee2dbde34377bdb0f1339798239600d787e4cd9793"
     },
     {
-      "byte_length": 3150,
+      "byte_length": 9274,
+      "hash_status": "RECORDED",
+      "path": "PRIVACY_CONTROL_EFFECTIVENESS_MATRIX.csv",
+      "sha256": "77a11373fd090313b6dc4a8f0dd12bd2db5e57fb3719007c36349a258b81bc96"
+    },
+    {
+      "byte_length": 701,
+      "hash_status": "RECORDED",
+      "path": "PRODUCTION_READINESS_ASSESSMENT_TEMPLATE.md",
+      "sha256": "437abeb56435cd624be9b37d1e71254c3c168ab9390ade9bdf5e1ce4a3e46232"
+    },
+    {
+      "byte_length": 16211,
+      "hash_status": "RECORDED",
+      "path": "PRODUCTION_READINESS_GATE_MATRIX.csv",
+      "sha256": "0710a7f65d8e9038b1120f1753dc0957d06235b92e957406d68841d65f967724"
+    },
+    {
+      "byte_length": 5095,
       "hash_status": "RECORDED",
       "path": "PROHIBITED_OVERCLAIM_MATRIX.csv",
-      "sha256": "011b9a1b82423b69b653ec141ed75ac3fc8807747afe443f0b867788525846ca"
+      "sha256": "cd1765b25fe54e50f1b0202dcad9182a2fe3fec1357efaa66899779a1fa2eca5"
     },
     {
-      "byte_length": 919,
+      "byte_length": 913,
       "hash_status": "RECORDED",
       "path": "READINESS_VOCABULARY_REGISTER.csv",
-      "sha256": "a6df2bf203123cfed822d666324e709e6f099dcc6346729aaa7b66a9ef2a1391"
+      "sha256": "6cd6b241b8de3f18f5c6a92ad92e9e2c504fb634fed70fdf86d3c55ac1efc633"
     },
     {
-      "byte_length": 673,
+      "byte_length": 1158,
       "hash_status": "RECORDED",
       "path": "README_FIRST.md",
-      "sha256": "19bfb21481c64530a141315a1ecaaeca22065a2ed74a4c3dbcd0ab04fdf1c3ac"
+      "sha256": "a15e280735446f20a83aac073baacbc8cea11cb5d89287821f7e21adb821cc71"
     },
     {
-      "byte_length": 632,
+      "byte_length": 820,
       "hash_status": "RECORDED",
       "path": "RECOMMENDED_FOUNDER_ACTION.md",
-      "sha256": "828b381a0567cecf440dcfcd731a2eb0bc911814ccdf0906cd079bfb026c9cab"
+      "sha256": "4d6e4991f26bfbf5b42d2f0a0bd91023b35d098707f067cf3a0a12ca8041b7ed"
     },
     {
-      "byte_length": 6668,
+      "byte_length": 8234,
       "hash_status": "RECORDED",
       "path": "RECORDS_RETENTION_SCHEDULE.csv",
-      "sha256": "3aabefa0cd0c889054624cca5e71b93bea3e97f809588bf0b1f71a4b230a3c36"
+      "sha256": "63e80a246fb773ed3f52709dc49315de95fcfb242ecad51eb7dcd515402f76d1"
     },
     {
       "byte_length": 2517,
@@ -352,16 +436,22 @@
       "sha256": "c7683c812fabbdefc3d66ba1ac1894964ddcd441b5a49d1fba1f11e89c78da30"
     },
     {
+      "byte_length": 8033,
+      "hash_status": "RECORDED",
+      "path": "REPOSITORY_BRANCH_PROTECTION_CONTROL_MATRIX.csv",
+      "sha256": "d4eb0c41085796d269227477fa86c8b80344e7663fcbd63c7ad7fae9339aa094"
+    },
+    {
       "byte_length": 204,
       "hash_status": "RECORDED",
       "path": "REPOSITORY_RECONCILIATION_REPORT.md",
       "sha256": "3a10603930f4de97d11e7a4eca74cfb2e428953cfc1a14992dccc656899bfcdc"
     },
     {
-      "byte_length": 618,
+      "byte_length": 1014,
       "hash_status": "RECORDED",
       "path": "REVISION_SUMMARY.md",
-      "sha256": "c8897d41538971ddfe41af420f095e26be8162c490b9978f8407fdb3140ec8d1"
+      "sha256": "81b53d5670a3847ecd0aada60820efaf39db38f020e311bc0163b6c6c91647fa"
     },
     {
       "byte_length": 746,
@@ -370,10 +460,10 @@
       "sha256": "5df9509e0cecb1415c259f0a6c15b11202cfcf70ae4ec76d6bb4bbcc56e75eda"
     },
     {
-      "byte_length": 2089,
+      "byte_length": 2085,
       "hash_status": "RECORDED",
       "path": "ROLE_DEFINITION_AND_ASSIGNMENT_MATRIX.csv",
-      "sha256": "901769afd9dbfe95bda8d246a14bc49b2f97df4cd11ef6c441234b8aaf5d476d"
+      "sha256": "07894d78bc11ddb0fa9873f817fcbd21ccd500bd2e2bdb1ba7c40937ef990971"
     },
     {
       "byte_length": 321,
@@ -382,16 +472,16 @@
       "sha256": "97432e7cfdcaae1150c365700100f6ec320d3ed4883dced0f41b0364793509d0"
     },
     {
-      "byte_length": 6316,
+      "byte_length": 6308,
       "hash_status": "RECORDED",
       "path": "SECOND_REVIEW_CONTROL_MATRIX.csv",
-      "sha256": "e61b76e796045179e35c0550fb27f906f507498b52324725917136697f7a494e"
+      "sha256": "7a1b9b129f840010bc4eb3547a94ec393313170db55d1c6803c99a449ead051c"
     },
     {
-      "byte_length": 3395,
+      "byte_length": 3954,
       "hash_status": "RECORDED",
       "path": "SOURCE_AND_AUTHORITY_REGISTER.csv",
-      "sha256": "e3d44470be6061153db56a4b290d0029629f26eeec61370222573021cab22b2f"
+      "sha256": "28b9ab988b6e198e1b946facbe8b792fbb9eb8da30010309d405f6b13b7cb1bb"
     },
     {
       "byte_length": 637,
@@ -418,10 +508,10 @@
       "sha256": "cfc3e4de068a236d73ccb8b9727f809a5edfa2a6d2d5bd398062755da3cc4e2b"
     },
     {
-      "byte_length": 1964,
+      "byte_length": 2517,
       "hash_status": "RECORDED",
       "path": "TWO_REVIEW_CYCLE_SUFFICIENCY_MEMORANDUM.md",
-      "sha256": "1603d7b8967902d1d765af114157d4c4311bd4f6d24e176195aac5f4b8909e5d"
+      "sha256": "9e44fd8988814615b849082d0efe4fde5767734a7bbfcd28926726c003a50a5e"
     },
     {
       "byte_length": 2372,
@@ -430,10 +520,10 @@
       "sha256": "09709c553f006f151fa088d3649f39d614d34d9db5d1f947ef3007fad4bedd66"
     },
     {
-      "byte_length": 146083,
+      "byte_length": 145956,
       "hash_status": "RECORDED",
       "path": "VALID_FINDINGS_CLOSURE_REGISTER.csv",
-      "sha256": "aed743697ffa37636be0185e10969112493fe3d3a1ed137d2aa5c8d22cae9483"
+      "sha256": "4092118d27791dd79c4dc5d7065b406999dfa3afcc31059256386b844bafa494"
     },
     {
       "byte_length": 1522,
@@ -520,6 +610,48 @@
       "sha256": "1788ce3fae5dfbb53d3b39c005c22a5a24ae23558248a2edf9cad27bd4064473"
     },
     {
+      "byte_length": 144,
+      "hash_status": "RECORDED",
+      "path": "test_fixtures/documentary_approval_production_unverified.txt",
+      "sha256": "aeb5f22643c3e6179a45c70aa37263d1d5ebbb8ec51fbe3be018d36b6068754b"
+    },
+    {
+      "byte_length": 42,
+      "hash_status": "RECORDED",
+      "path": "test_fixtures/false_branch_protection_enforcement_claim.txt",
+      "sha256": "1a6b4203ca47573ac65e35159c17e2043fbc52d4dfc9d7202ba6ad71c58570f4"
+    },
+    {
+      "byte_length": 53,
+      "hash_status": "RECORDED",
+      "path": "test_fixtures/false_external_anchor_claim.txt",
+      "sha256": "80335dc2500cb99db0e786d5af56f3383e932de55a54e742980b51c8fcde389a"
+    },
+    {
+      "byte_length": 65,
+      "hash_status": "RECORDED",
+      "path": "test_fixtures/false_implementation_completion_claim.txt",
+      "sha256": "40af9dd17543b31a4693f201dcebf71c192a88c92d244ad72ac473a5febe15c5"
+    },
+    {
+      "byte_length": 66,
+      "hash_status": "RECORDED",
+      "path": "test_fixtures/false_legal_compliance_claim.txt",
+      "sha256": "cadf54f9088b632bc57d9d907257975dfbc11e31f2c92c369631ae785fd64537"
+    },
+    {
+      "byte_length": 64,
+      "hash_status": "RECORDED",
+      "path": "test_fixtures/false_live_privacy_effectiveness_claim.txt",
+      "sha256": "cc7828278209d8cb35c3d2946c98d0263dc3bf800fdf12d9bafdbe1d9891663d"
+    },
+    {
+      "byte_length": 70,
+      "hash_status": "RECORDED",
+      "path": "test_fixtures/false_production_readiness_claim.txt",
+      "sha256": "ce6dcc877142b6d253e71608769fb4fe3a0180725f118c8bd9222bfcbfab5e2f"
+    },
+    {
       "byte_length": 1299,
       "hash_status": "RECORDED",
       "path": "test_fixtures/invalid_empty_required_string.json",
@@ -574,16 +706,52 @@
       "sha256": "092649089d252e2c20c3c20c6c9ca9afd9fb77e468692902bf21b370b1b905ce"
     },
     {
-      "byte_length": 102630,
+      "byte_length": 163577,
       "hash_status": "RECORDED",
       "path": "tools/round2_package.py",
-      "sha256": "ccd83aba8eb3033fc78d8baa8644a29d2e2c4879b1f4f3139743c0467a8e7afd"
+      "sha256": "20a82fc13efa48a9d0f1d03ff430f2b6336b530166b5bf07d44fb460611d3b20"
     },
     {
       "byte_length": 515,
       "hash_status": "RECORDED",
       "path": "tools/validate_governance_portfolio_package.py",
       "sha256": "f127aa1ebefff62dc9abbcd3ce5568d7d1974545e51f942cde3e03634efc853c"
+    },
+    {
+      "byte_length": 1,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-DOWNSTREAM-001.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "byte_length": 38,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-DOWNSTREAM-001.stdout.txt",
+      "sha256": "c1c85ef9e893691930467fa0da2f4ead194c9c89590e217dd33929f9f977c521"
+    },
+    {
+      "byte_length": 1,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-DOWNSTREAM-OVERCLAIM-001.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "byte_length": 59,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-DOWNSTREAM-OVERCLAIM-001.stdout.txt",
+      "sha256": "e109e42bee6fcf863570a06089a194e759e5856985ba0b9c58ed7dcaec7c2900"
+    },
+    {
+      "byte_length": 1,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-DOWNSTREAM-REGRESSION-001.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "byte_length": 42,
+      "hash_status": "RECORDED",
+      "path": "validation_logs/VAL-DOWNSTREAM-REGRESSION-001.stdout.txt",
+      "sha256": "c68fd28389aa3d79c79bcaf7bce8100764b03af29d111e9b2cd38ab4e9c950f2"
     },
     {
       "byte_length": 1,
@@ -694,10 +862,10 @@
       "sha256": "73cd7aec6a20bb2766fb822dfd73ba35d2cf3224182ad2b2bdc251cc54ba199e"
     },
     {
-      "byte_length": 792,
+      "byte_length": 1531,
       "hash_status": "RECORDED",
       "path": "validation_logs/tests/round2_tool_tests.log",
-      "sha256": "a50ba4d9c91b38c1b8c0abb5b18aee2714a0bcfe028055b17c71010a241b4149"
+      "sha256": "3db0c685cc2aa842b5f0ddeaf9dd7de93c9db863d067925a0db08876b7cbad0c"
     }
   ],
   "generated_at_utc": "2026-08-03T13:25:13Z",

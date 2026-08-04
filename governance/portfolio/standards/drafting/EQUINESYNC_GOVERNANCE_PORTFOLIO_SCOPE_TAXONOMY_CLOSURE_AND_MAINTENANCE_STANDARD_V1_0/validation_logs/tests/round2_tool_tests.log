@@ -8,5 +8,12 @@ schema_rejects_invalid_whitespace_required_string: PASS - invalid fixture reject
 schema_rejects_invalid_wrong_truth_statement: PASS - invalid fixture rejected
 overclaim_negative_fixture: PASS - overclaim detected
 qualified_status_fixture: PASS - qualified statement accepted
+documentary_approval_downstream_unverified_fixture: PASS - documentary approval with unverified production accepted
+downstream_overclaim_rejects_false_branch_protection_enforcement_claim: PASS - false downstream claim rejected
+downstream_overclaim_rejects_false_external_anchor_claim: PASS - false downstream claim rejected
+downstream_overclaim_rejects_false_implementation_completion_claim: PASS - false downstream claim rejected
+downstream_overclaim_rejects_false_legal_compliance_claim: PASS - false downstream claim rejected
+downstream_overclaim_rejects_false_live_privacy_effectiveness_claim: PASS - false downstream claim rejected
+downstream_overclaim_rejects_false_production_readiness_claim: PASS - false downstream claim rejected
 generator_dirty_check_detects_drift: PASS - code=1
 generator_dirty_check_preserves_dirty_bytes: PASS - dirty copy unchanged by --check

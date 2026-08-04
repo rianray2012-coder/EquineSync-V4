@@ -663,11 +663,130 @@
       "BLOCKED_SOURCE_UNAVAILABLE"
     ]
   },
+  "downstream_assurance_domains": [
+    {
+      "applicability_trigger": "Any compliance, payment, privacy, minors, safeguarding, jurisdiction-specific, contractual, vendor, pilot, or production claim.",
+      "assurance_domain": "Legal and regulatory compliance",
+      "assurance_domain_id": "DASSURE-LEGAL-001",
+      "blocking_statuses": "BLOCKED; FAILED; REVIEW_PENDING when qualified legal interpretation is required before the affected downstream action",
+      "completion_authority": "Qualified legal or competent external-obligation reviewer for exact scope, accepted by Founder or delegated authority",
+      "future_evidence_artifact": "LEGAL_AND_REGULATORY_APPLICABILITY_AND_CONFIRMATION_REGISTER.csv; LEGAL_AND_REGULATORY_CONFIRMATION_TEMPLATE.md",
+      "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-LEGAL-001",
+      "notes": "Current truthful status: REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING. Nonblocking for documentary approval; may block affected downstream activity.",
+      "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+      "prohibited_claims": "Legal or regulatory compliance satisfied by internal approval alone; Founder waiver of external obligation; production readiness based on unreviewed legal scope.",
+      "purpose": "Govern applicability, qualified interpretation, evidence recording, and truthful compliance claims for laws, regulations, standards, contractual duties, and industry obligations.",
+      "reopening_trigger": "New jurisdiction, user class, data type, vendor, feature, payment flow, minors/safeguarding context, contract, incident, or legal change.",
+      "required_evidence": "Qualified determination where required; scope; affected features/data; internal-control mapping; external evidence; unresolved questions; reopening trigger.",
+      "required_owner": "Founder or delegated governance/legal owner",
+      "required_second_reviewer": "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
+    },
+    {
+      "applicability_trigger": "Any claim that a governance requirement, feature, control, migration, configuration, or release scope has been implemented.",
+      "assurance_domain": "Implementation completion",
+      "assurance_domain_id": "DASSURE-IMPL-001",
+      "blocking_statuses": "BLOCKED; FAILED; EVIDENCE_PENDING or REVIEW_PENDING when implementation completion is prerequisite to the affected action",
+      "completion_authority": "Qualified reviewer validates exact-scope evidence tied to repository head; Founder or delegated authority records acceptance",
+      "future_evidence_artifact": "IMPLEMENTATION_COMPLETION_CRITERIA_MATRIX.csv; IMPLEMENTATION_COMPLETION_VERIFICATION_TEMPLATE.md",
+      "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-IMPLCOMP-001",
+      "notes": "Current truthful status: IMPLEMENTATION_COMPLETION_NOT_VERIFIED. Approval of the standard does not alter that status.",
+      "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+      "prohibited_claims": "Implementation complete because documents exist, code is present, a repo was discovered, a feature appears available, tests are planned, or deployment occurred.",
+      "purpose": "Distinguish documentary design completion, code presence, discovery, partial implementation, feature availability, tests, deployment, and operational verification from completed implementation.",
+      "reopening_trigger": "Requirement change, repository-head change, failed test, reopened defect, configuration drift, migration failure, or scope expansion.",
+      "required_evidence": "Exact scope; exact repository head; mapped requirements; code evidence; executed tests; configuration and migration evidence; blocking-defect closure; qualified review.",
+      "required_owner": "Functional implementation owner",
+      "required_second_reviewer": "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
+    },
+    {
+      "applicability_trigger": "Any production-readiness or production-authorization claim for a release, cohort, data scope, feature scope, or environment.",
+      "assurance_domain": "Production readiness",
+      "assurance_domain_id": "DASSURE-PRODREADY-001",
+      "blocking_statuses": "BLOCKED; FAILED; NOT_ASSESSED; EVIDENCE_PENDING; REVIEW_PENDING for any production-readiness or production-authorization reliance",
+      "completion_authority": "Founder or authorized production authority with Independent Second Reviewer approval where required",
+      "future_evidence_artifact": "PRODUCTION_READINESS_GATE_MATRIX.csv; PRODUCTION_READINESS_ASSESSMENT_TEMPLATE.md",
+      "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-PRODREADY-001; ES-GPS-PROD-001",
+      "notes": "Current truthful status: PRODUCTION_READINESS_NOT_ASSESSED. Clean and exception paths remain distinct.",
+      "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+      "prohibited_claims": "Production ready due solely to documentary approval, implementation completion, pilot results, code presence, or release packaging.",
+      "purpose": "Govern release-specific production-readiness assessment separately from implementation completion, pilot authorization, documentary approval, release packaging, and production authorization.",
+      "reopening_trigger": "Release identity change, scope change, new exception, unresolved defect, failed gate, incident, rollback failure, or legal/privacy/vendor change.",
+      "required_evidence": "Exact release identity; feature/user/data scope; security; privacy; performance; reliability; rollback; observability; incident/support; migration; legal/vendor/defect/exception gates.",
+      "required_owner": "Release owner or delegated production-readiness owner",
+      "required_second_reviewer": "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
+    },
+    {
+      "applicability_trigger": "Any claim that privacy controls operate effectively for live, pilot, representative, minors, guardian, payment, vendor, retention, access, deletion, export, or breach-response workflows.",
+      "assurance_domain": "Live privacy-control effectiveness",
+      "assurance_domain_id": "DASSURE-PRIVEFF-001",
+      "blocking_statuses": "BLOCKED; FAILED; EVIDENCE_PENDING or REVIEW_PENDING when operating effectiveness is prerequisite to affected pilot, production, privacy, minors, or safeguarding activity",
+      "completion_authority": "Independent reviewer validates live or sufficiently representative test evidence for exact control scope",
+      "future_evidence_artifact": "PRIVACY_CONTROL_EFFECTIVENESS_MATRIX.csv; LIVE_PRIVACY_CONTROL_EFFECTIVENESS_REVIEW_TEMPLATE.md",
+      "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-PRIVEFF-001",
+      "notes": "Current truthful status: PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED.",
+      "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+      "prohibited_claims": "Privacy controls operate effectively because requirements or designs are written, code exists, or a policy was approved.",
+      "purpose": "Distinguish privacy requirements, design, implementation, testing, and operating effectiveness in live or representative environments.",
+      "reopening_trigger": "Control change, data/user/scope change, vendor change, incident, failed retest, legal change, retention/access/deletion/export defect, or minors/guardian impact.",
+      "required_evidence": "Control basis; affected data/users; minors/guardians; design and implementation evidence; test method/environment/date; sample; expected and actual result; exceptions; incident history; independent review.",
+      "required_owner": "Privacy/control owner",
+      "required_second_reviewer": "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
+    },
+    {
+      "applicability_trigger": "Any claim that protected-repository custody controls, branch protection, required reviews/checks, signed commits, deployment protection, or merge controls are fully operational.",
+      "assurance_domain": "Branch-protection enforcement",
+      "assurance_domain_id": "DASSURE-BRANCH-001",
+      "blocking_statuses": "BLOCKED; FAILED; EVIDENCE_PENDING or REVIEW_PENDING for claims that authoritative custody controls are fully operational",
+      "completion_authority": "Repository administrator evidence verified by governance custody owner and Independent Second Reviewer where high-consequence control reliance applies",
+      "future_evidence_artifact": "REPOSITORY_BRANCH_PROTECTION_CONTROL_MATRIX.csv; BRANCH_PROTECTION_VERIFICATION_TEMPLATE.md",
+      "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-BRANCH-001",
+      "notes": "Current truthful status: BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED.",
+      "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+      "prohibited_claims": "Branch protection is enforced because the standard requires it, PR #77 exists, or a protected merge process is desired.",
+      "purpose": "Govern repository controls needed for authoritative governance custody and distinguish required controls from verified repository enforcement.",
+      "reopening_trigger": "Branch rule change, ruleset change, required-check change, CODEOWNERS/reviewer change, admin bypass use, force-push/deletion event, protected-base change, or audit anomaly.",
+      "required_evidence": "Protected branch settings or authoritative repository evidence covering direct pushes, PRs, approvals, second review/CODEOWNERS, status checks, stale dismissal, conversations, force push, deletion, admin bypass, merge methods, deployment protection, and audit evidence.",
+      "required_owner": "Repository administrator or governance custody owner",
+      "required_second_reviewer": "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
+    },
+    {
+      "applicability_trigger": "Any claim of independent tamper evidence, signed anchoring, external retention, cryptographic proof, or package integrity beyond internal checksums and Git object identity.",
+      "assurance_domain": "Signed external hash anchoring",
+      "assurance_domain_id": "DASSURE-ANCHOR-001",
+      "blocking_statuses": "BLOCKED; FAILED; EVIDENCE_PENDING or REVIEW_PENDING for independent external-anchor claims",
+      "completion_authority": "Founder-approved anchoring method verified by governance custody owner and second reviewer where required",
+      "future_evidence_artifact": "EXTERNAL_INTEGRITY_ANCHORING_CONTROL_MATRIX.csv; EXTERNAL_HASH_ANCHORING_RECORD_TEMPLATE.md",
+      "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-ANCHOR-001",
+      "notes": "Current truthful status: INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED.",
+      "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+      "prohibited_claims": "Independent external anchoring exists because CHECKSUMS.sha256, PACKAGE_MANIFEST.json, or an unsigned in-package checksum exists.",
+      "purpose": "Distinguish internal checksum ledgers, Git identity, signed commits, signed tags, detached signatures, transparency records, and independently retained external hash anchors.",
+      "reopening_trigger": "Artifact digest change, signature revocation, key expiration, transparency-log issue, external register replacement, archive access failure, or package regeneration.",
+      "required_evidence": "Exact artifact digest bound to verifiable external or cryptographically signed record, method, signing identity, record id/location, verification method/time, revocation/expiration, owner, limitations.",
+      "required_owner": "Governance custody owner or designated integrity-anchor owner",
+      "required_second_reviewer": "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
+    }
+  ],
+  "downstream_assurance_status_vocabulary": [
+    "NOT_ASSESSED",
+    "NOT_APPLICABLE_WITH_RATIONALE",
+    "REQUIREMENTS_DEFINED",
+    "EVIDENCE_PENDING",
+    "REVIEW_PENDING",
+    "BLOCKED",
+    "PARTIALLY_VERIFIED",
+    "VERIFIED",
+    "COMPLETED",
+    "FAILED",
+    "SUSPENDED",
+    "SUPERSEDED"
+  ],
+  "downstream_authority_limitation": "DOWNSTREAM_ASSURANCE_REQUIREMENTS_DOCUMENTED_NO_LEGAL_COMPLIANCE_IMPLEMENTATION_COMPLETION_PRODUCTION_READINESS_LIVE_PRIVACY_EFFECTIVENESS_BRANCH_PROTECTION_ENFORCEMENT_OR_EXTERNAL_HASH_ANCHORING_CLAIM_AUTHORIZED",
   "founder_two_cycle_determination": "TWO_REVIEW_CYCLES_SUFFICIENT_SUBJECT_TO_COMPLETE_REMEDIATION_OF_ALL_VALID_FINDINGS",
   "human_readable_source": {
-    "byte_length": 5715,
+    "byte_length": 12955,
     "path": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.md",
-    "sha256": "f5fa825011ed350d7d4594259b4dfb669517f21752938fd1b370fa8319b2b39e",
+    "sha256": "f2447fb9f28ac2118438de3b11f58f706e64a3a64180f60141564f9227fd9268",
     "supersedes_stale_values_from_77d58949": true
   },
   "normative_rule_catalog": [
@@ -724,6 +843,48 @@
       "rule_id": "ES-GPS-MAINT-001",
       "statement": "The package must identify a separate Governance Maintenance Standard predecessor or state that no separate predecessor was issued.",
       "title": "Maintenance supersession truth"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-downstream-001",
+      "rule_id": "ES-GPS-DOWNSTREAM-001",
+      "statement": "APPROVAL_OF_THIS_STANDARD_ESTABLISHES_REQUIREMENTS_ONLY_AND_DOES_NOT_BY_ITSELF_PROVE_LEGAL_COMPLIANCE_IMPLEMENTATION_COMPLETION_PRODUCTION_READINESS_LIVE_PRIVACY_EFFECTIVENESS_BRANCH_PROTECTION_ENFORCEMENT_OR_EXTERNAL_INTEGRITY_ANCHORING",
+      "title": "Downstream assurance non-overclaim"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-legal-001",
+      "rule_id": "ES-GPS-LEGAL-001",
+      "statement": "No internal certification, waiver, procedural override, risk acceptance, Founder decision, or production authorization may represent that an external legal or regulatory obligation has been satisfied unless the required qualified determination and evidence are recorded for the exact scope.",
+      "title": "External legal and regulatory confirmation"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-implcomp-001",
+      "rule_id": "ES-GPS-IMPLCOMP-001",
+      "statement": "Implementation completion may be claimed only for an exact defined scope when all mapped requirements are implemented, required tests have actually executed, blocking defects are closed, configuration and migration requirements are complete, evidence is tied to an exact repository head, and a qualified reviewer has validated the result.",
+      "title": "Implementation completion verification"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-prodready-001",
+      "rule_id": "ES-GPS-PRODREADY-001",
+      "statement": "No production-readiness claim or production authorization may arise solely from documentary approval, implementation completion, pilot results, or code presence.",
+      "title": "Production readiness separation"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-priveff-001",
+      "rule_id": "ES-GPS-PRIVEFF-001",
+      "statement": "Privacy-control effectiveness may be claimed only when the control has been tested in a live or sufficiently representative environment, with recorded methodology, results, exceptions, reviewer identity, and scope limitations.",
+      "title": "Live privacy-control effectiveness"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-branch-001",
+      "rule_id": "ES-GPS-BRANCH-001",
+      "statement": "Protected-repository custody may not be claimed unless the required branch and merge controls have been directly verified against the repository settings or authoritative repository evidence.",
+      "title": "Branch-protection enforcement verification"
+    },
+    {
+      "markdown_anchor": "rule-es-gps-anchor-001",
+      "rule_id": "ES-GPS-ANCHOR-001",
+      "statement": "Independent tamper-evidence or external integrity anchoring may be claimed only where the exact artifact digest is bound to a verifiable external or cryptographically signed record not silently replaceable through regeneration of the governed package.",
+      "title": "External integrity anchoring"
     }
   ],
   "normative_source_of_truth": "EQUINESYNC_GOVERNANCE_PORTFOLIO_SCOPE_TAXONOMY_CLOSURE_AND_MAINTENANCE_STANDARD_V1_0.json",
@@ -795,5 +956,5 @@
     "PASS",
     "PENDING"
   ],
-  "version": "1.0.2"
+  "version": "1.0.3"
 }

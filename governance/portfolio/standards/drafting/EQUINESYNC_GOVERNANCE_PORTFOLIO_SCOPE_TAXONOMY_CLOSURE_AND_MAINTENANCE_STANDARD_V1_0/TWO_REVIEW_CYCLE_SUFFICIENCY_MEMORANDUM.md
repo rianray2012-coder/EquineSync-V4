@@ -10,7 +10,9 @@ Blocking findings remaining: `0`.
 
 Conclusion: the two-cycle sufficiency standard is satisfied for direct Founder review because no valid open blocking documentary findings remain, source authentication is complete for the Round 2 reviewer reports, and remaining limitations are recorded as nonblocking limits to any approval.
 
-Conditions attached to Founder approval: approval must remain documentary unless separately expanded by durable authority record; no activation, implementation, pilot, production, FCR issuance, protected merge, or legal/regulatory compliance claim is authorized by this package.
+Conditions attached to Founder approval: approval must remain documentary unless separately expanded by durable authority record; no activation, implementation, pilot, production, FCR issuance, protected merge, legal/regulatory compliance claim, implementation-completion claim, production-readiness claim, live privacy-effectiveness claim, branch-protection-enforcement claim, or external integrity-anchor claim is authorized by this package.
+
+Approval of this documentary standard establishes the governing framework for legal and regulatory review, implementation-completion verification, production-readiness assessment, live privacy-control effectiveness testing, branch-protection verification, and independent integrity anchoring. Approval does not itself establish that any of those outcomes has been completed or verified.
 
 ## Counts
 

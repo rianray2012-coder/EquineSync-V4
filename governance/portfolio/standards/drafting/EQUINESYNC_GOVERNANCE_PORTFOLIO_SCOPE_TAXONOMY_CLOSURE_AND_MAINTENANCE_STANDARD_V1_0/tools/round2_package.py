@@ -34,10 +34,29 @@ ROUND3_SOURCE_DIR = Path("/var/folders/q2/jsclmbv91tgdh8lns8pd2pdm0000gn/T/tmp.g
 ROUND3_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_ROUND_2_SOURCE_AUTHENTICATION_AND_ROUND_3_RETURN.md"
 FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT = Path("/Users/rianray/.codex/attachments/1516767e-2add-4f18-b2e3-6cb365be7a6c/pasted-text.txt")
 FINAL_RECONCILIATION_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_FINAL_INTERNAL_RECONCILIATION_AND_FOUNDER_REVIEW_PACKAGE_PREPARATION.md"
+DOWNSTREAM_ASSURANCE_DIRECTIVE_ATTACHMENT = Path("/Users/rianray/.codex/attachments/7883cfc2-7fc2-4621-93bd-b2d7f2ccf6b3/pasted-text.txt")
+DOWNSTREAM_ASSURANCE_DIRECTIVE_COPY = "FOUNDER_DIRECTIVE_DOWNSTREAM_ASSURANCE_VERIFICATION_REPOSITORY_ENFORCEMENT_AND_INTEGRITY_ANCHORING_CONTROLS.md"
 SECOND_REVIEWER_DESIGNATION_COPY = "FOUNDER_DESIGNATION_INDEPENDENT_SECOND_REVIEWER_PATRICK_K_SPOON_SR.md"
 SECOND_REVIEWER_ID = "PATRICK_K_SPOON_SR_CHIEF_OPERATIONS_OFFICER"
 SECOND_REVIEWER_NAME = "Patrick K. Spoon Sr."
 SECOND_REVIEWER_TITLE = "Chief Operations Officer, EquineSync"
+DOWNSTREAM_NO_OVERCLAIM_RULE = "APPROVAL_OF_THIS_STANDARD_ESTABLISHES_REQUIREMENTS_ONLY_AND_DOES_NOT_BY_ITSELF_PROVE_LEGAL_COMPLIANCE_IMPLEMENTATION_COMPLETION_PRODUCTION_READINESS_LIVE_PRIVACY_EFFECTIVENESS_BRANCH_PROTECTION_ENFORCEMENT_OR_EXTERNAL_INTEGRITY_ANCHORING"
+DOWNSTREAM_AUTHORITY_LIMITATION = "DOWNSTREAM_ASSURANCE_REQUIREMENTS_DOCUMENTED_NO_LEGAL_COMPLIANCE_IMPLEMENTATION_COMPLETION_PRODUCTION_READINESS_LIVE_PRIVACY_EFFECTIVENESS_BRANCH_PROTECTION_ENFORCEMENT_OR_EXTERNAL_HASH_ANCHORING_CLAIM_AUTHORIZED"
+DOWNSTREAM_FOUNDER_STATEMENT = "Approval of this documentary standard establishes the governing framework for legal and regulatory review, implementation-completion verification, production-readiness assessment, live privacy-control effectiveness testing, branch-protection verification, and independent integrity anchoring. Approval does not itself establish that any of those outcomes has been completed or verified."
+DOWNSTREAM_STATUS_VALUES = [
+    "NOT_ASSESSED",
+    "NOT_APPLICABLE_WITH_RATIONALE",
+    "REQUIREMENTS_DEFINED",
+    "EVIDENCE_PENDING",
+    "REVIEW_PENDING",
+    "BLOCKED",
+    "PARTIALLY_VERIFIED",
+    "VERIFIED",
+    "COMPLETED",
+    "FAILED",
+    "SUSPENDED",
+    "SUPERSEDED",
+]
 SECOND_REVIEWER_DESIGNATION_TEXT = """# Founder Designation
 
 ## Independent Second Reviewer Appointment
@@ -192,6 +211,13 @@ RULES = [
     ("ES-GPS-OVER-001", "Unsupported overclaim prohibition", "No file may claim approval, adoption, activation, implementation verification, production authorization, Founder-review readiness, or independent validation unless exact evidence and authority are present."),
     ("ES-GPS-CHAL-001", "Challenge timing", "Credible challenges require acknowledgement, triage, investigation, escalation, written disposition, and reopening effect deadlines."),
     ("ES-GPS-MAINT-001", "Maintenance supersession truth", "The package must identify a separate Governance Maintenance Standard predecessor or state that no separate predecessor was issued."),
+    ("ES-GPS-DOWNSTREAM-001", "Downstream assurance non-overclaim", DOWNSTREAM_NO_OVERCLAIM_RULE),
+    ("ES-GPS-LEGAL-001", "External legal and regulatory confirmation", "No internal certification, waiver, procedural override, risk acceptance, Founder decision, or production authorization may represent that an external legal or regulatory obligation has been satisfied unless the required qualified determination and evidence are recorded for the exact scope."),
+    ("ES-GPS-IMPLCOMP-001", "Implementation completion verification", "Implementation completion may be claimed only for an exact defined scope when all mapped requirements are implemented, required tests have actually executed, blocking defects are closed, configuration and migration requirements are complete, evidence is tied to an exact repository head, and a qualified reviewer has validated the result."),
+    ("ES-GPS-PRODREADY-001", "Production readiness separation", "No production-readiness claim or production authorization may arise solely from documentary approval, implementation completion, pilot results, or code presence."),
+    ("ES-GPS-PRIVEFF-001", "Live privacy-control effectiveness", "Privacy-control effectiveness may be claimed only when the control has been tested in a live or sufficiently representative environment, with recorded methodology, results, exceptions, reviewer identity, and scope limitations."),
+    ("ES-GPS-BRANCH-001", "Branch-protection enforcement verification", "Protected-repository custody may not be claimed unless the required branch and merge controls have been directly verified against the repository settings or authoritative repository evidence."),
+    ("ES-GPS-ANCHOR-001", "External integrity anchoring", "Independent tamper-evidence or external integrity anchoring may be claimed only where the exact artifact digest is bound to a verifiable external or cryptographically signed record not silently replaceable through regeneration of the governed package."),
 ]
 
 @dataclass
@@ -248,7 +274,7 @@ def write_json(path: Path, obj: Any) -> None:
 def write_csv(path: Path, rows: list[dict[str, Any]], fields: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow({field: cell(row.get(field, "")) for field in fields})
@@ -286,7 +312,7 @@ def package_files(root: Path) -> list[Path]:
 def build_source() -> dict[str, Any]:
     return {
         "artifact_id": ARTIFACT_ID,
-        "version": "1.0.2",
+        "version": "1.0.3",
         "status": STATUS,
         "readiness_status": FINAL_STATUS,
         "authority_boundary": AUTHORITY,
@@ -307,6 +333,9 @@ def build_source() -> dict[str, Any]:
         },
         "terminal_lifecycle_states": sorted(TERMINAL_STATES),
         "validation_result_vocabulary": sorted(VALID_RESULTS),
+        "downstream_assurance_status_vocabulary": DOWNSTREAM_STATUS_VALUES,
+        "downstream_authority_limitation": DOWNSTREAM_AUTHORITY_LIMITATION,
+        "downstream_assurance_domains": downstream_assurance_rows(),
         "certification_id_grammar": r"^ES-FCR-(0[1-9]|10)-[0-9]{4}-[0-9]{3}$",
         "normative_rule_catalog": [{"rule_id": rid, "title": title, "statement": statement, "markdown_anchor": f"rule-{rid.lower()}"} for rid, title, statement in RULES],
         "certification_classes": [
@@ -326,6 +355,114 @@ def build_source() -> dict[str, Any]:
         "artifact_lifecycle_transitions": lifecycle_transitions(),
         "adversarial_review": adversarial_scenarios(),
     }
+
+
+def downstream_assurance_rows() -> list[dict[str, str]]:
+    common_statuses = "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED"
+    return [
+        {
+            "assurance_domain_id": "DASSURE-LEGAL-001",
+            "assurance_domain": "Legal and regulatory compliance",
+            "purpose": "Govern applicability, qualified interpretation, evidence recording, and truthful compliance claims for laws, regulations, standards, contractual duties, and industry obligations.",
+            "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-LEGAL-001",
+            "applicability_trigger": "Any compliance, payment, privacy, minors, safeguarding, jurisdiction-specific, contractual, vendor, pilot, or production claim.",
+            "required_owner": "Founder or delegated governance/legal owner",
+            "required_second_reviewer": SECOND_REVIEWER_ID,
+            "required_evidence": "Qualified determination where required; scope; affected features/data; internal-control mapping; external evidence; unresolved questions; reopening trigger.",
+            "permitted_statuses": common_statuses,
+            "blocking_statuses": "BLOCKED; FAILED; REVIEW_PENDING when qualified legal interpretation is required before the affected downstream action",
+            "completion_authority": "Qualified legal or competent external-obligation reviewer for exact scope, accepted by Founder or delegated authority",
+            "reopening_trigger": "New jurisdiction, user class, data type, vendor, feature, payment flow, minors/safeguarding context, contract, incident, or legal change.",
+            "future_evidence_artifact": "LEGAL_AND_REGULATORY_APPLICABILITY_AND_CONFIRMATION_REGISTER.csv; LEGAL_AND_REGULATORY_CONFIRMATION_TEMPLATE.md",
+            "prohibited_claims": "Legal or regulatory compliance satisfied by internal approval alone; Founder waiver of external obligation; production readiness based on unreviewed legal scope.",
+            "notes": "Current truthful status: REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING. Nonblocking for documentary approval; may block affected downstream activity.",
+        },
+        {
+            "assurance_domain_id": "DASSURE-IMPL-001",
+            "assurance_domain": "Implementation completion",
+            "purpose": "Distinguish documentary design completion, code presence, discovery, partial implementation, feature availability, tests, deployment, and operational verification from completed implementation.",
+            "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-IMPLCOMP-001",
+            "applicability_trigger": "Any claim that a governance requirement, feature, control, migration, configuration, or release scope has been implemented.",
+            "required_owner": "Functional implementation owner",
+            "required_second_reviewer": SECOND_REVIEWER_ID,
+            "required_evidence": "Exact scope; exact repository head; mapped requirements; code evidence; executed tests; configuration and migration evidence; blocking-defect closure; qualified review.",
+            "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+            "blocking_statuses": "BLOCKED; FAILED; EVIDENCE_PENDING or REVIEW_PENDING when implementation completion is prerequisite to the affected action",
+            "completion_authority": "Qualified reviewer validates exact-scope evidence tied to repository head; Founder or delegated authority records acceptance",
+            "reopening_trigger": "Requirement change, repository-head change, failed test, reopened defect, configuration drift, migration failure, or scope expansion.",
+            "future_evidence_artifact": "IMPLEMENTATION_COMPLETION_CRITERIA_MATRIX.csv; IMPLEMENTATION_COMPLETION_VERIFICATION_TEMPLATE.md",
+            "prohibited_claims": "Implementation complete because documents exist, code is present, a repo was discovered, a feature appears available, tests are planned, or deployment occurred.",
+            "notes": "Current truthful status: IMPLEMENTATION_COMPLETION_NOT_VERIFIED. Approval of the standard does not alter that status.",
+        },
+        {
+            "assurance_domain_id": "DASSURE-PRODREADY-001",
+            "assurance_domain": "Production readiness",
+            "purpose": "Govern release-specific production-readiness assessment separately from implementation completion, pilot authorization, documentary approval, release packaging, and production authorization.",
+            "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-PRODREADY-001; ES-GPS-PROD-001",
+            "applicability_trigger": "Any production-readiness or production-authorization claim for a release, cohort, data scope, feature scope, or environment.",
+            "required_owner": "Release owner or delegated production-readiness owner",
+            "required_second_reviewer": SECOND_REVIEWER_ID,
+            "required_evidence": "Exact release identity; feature/user/data scope; security; privacy; performance; reliability; rollback; observability; incident/support; migration; legal/vendor/defect/exception gates.",
+            "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+            "blocking_statuses": "BLOCKED; FAILED; NOT_ASSESSED; EVIDENCE_PENDING; REVIEW_PENDING for any production-readiness or production-authorization reliance",
+            "completion_authority": "Founder or authorized production authority with Independent Second Reviewer approval where required",
+            "reopening_trigger": "Release identity change, scope change, new exception, unresolved defect, failed gate, incident, rollback failure, or legal/privacy/vendor change.",
+            "future_evidence_artifact": "PRODUCTION_READINESS_GATE_MATRIX.csv; PRODUCTION_READINESS_ASSESSMENT_TEMPLATE.md",
+            "prohibited_claims": "Production ready due solely to documentary approval, implementation completion, pilot results, code presence, or release packaging.",
+            "notes": "Current truthful status: PRODUCTION_READINESS_NOT_ASSESSED. Clean and exception paths remain distinct.",
+        },
+        {
+            "assurance_domain_id": "DASSURE-PRIVEFF-001",
+            "assurance_domain": "Live privacy-control effectiveness",
+            "purpose": "Distinguish privacy requirements, design, implementation, testing, and operating effectiveness in live or representative environments.",
+            "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-PRIVEFF-001",
+            "applicability_trigger": "Any claim that privacy controls operate effectively for live, pilot, representative, minors, guardian, payment, vendor, retention, access, deletion, export, or breach-response workflows.",
+            "required_owner": "Privacy/control owner",
+            "required_second_reviewer": SECOND_REVIEWER_ID,
+            "required_evidence": "Control basis; affected data/users; minors/guardians; design and implementation evidence; test method/environment/date; sample; expected and actual result; exceptions; incident history; independent review.",
+            "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+            "blocking_statuses": "BLOCKED; FAILED; EVIDENCE_PENDING or REVIEW_PENDING when operating effectiveness is prerequisite to affected pilot, production, privacy, minors, or safeguarding activity",
+            "completion_authority": "Independent reviewer validates live or sufficiently representative test evidence for exact control scope",
+            "reopening_trigger": "Control change, data/user/scope change, vendor change, incident, failed retest, legal change, retention/access/deletion/export defect, or minors/guardian impact.",
+            "future_evidence_artifact": "PRIVACY_CONTROL_EFFECTIVENESS_MATRIX.csv; LIVE_PRIVACY_CONTROL_EFFECTIVENESS_REVIEW_TEMPLATE.md",
+            "prohibited_claims": "Privacy controls operate effectively because requirements or designs are written, code exists, or a policy was approved.",
+            "notes": "Current truthful status: PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED.",
+        },
+        {
+            "assurance_domain_id": "DASSURE-BRANCH-001",
+            "assurance_domain": "Branch-protection enforcement",
+            "purpose": "Govern repository controls needed for authoritative governance custody and distinguish required controls from verified repository enforcement.",
+            "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-BRANCH-001",
+            "applicability_trigger": "Any claim that protected-repository custody controls, branch protection, required reviews/checks, signed commits, deployment protection, or merge controls are fully operational.",
+            "required_owner": "Repository administrator or governance custody owner",
+            "required_second_reviewer": SECOND_REVIEWER_ID,
+            "required_evidence": "Protected branch settings or authoritative repository evidence covering direct pushes, PRs, approvals, second review/CODEOWNERS, status checks, stale dismissal, conversations, force push, deletion, admin bypass, merge methods, deployment protection, and audit evidence.",
+            "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+            "blocking_statuses": "BLOCKED; FAILED; EVIDENCE_PENDING or REVIEW_PENDING for claims that authoritative custody controls are fully operational",
+            "completion_authority": "Repository administrator evidence verified by governance custody owner and Independent Second Reviewer where high-consequence control reliance applies",
+            "reopening_trigger": "Branch rule change, ruleset change, required-check change, CODEOWNERS/reviewer change, admin bypass use, force-push/deletion event, protected-base change, or audit anomaly.",
+            "future_evidence_artifact": "REPOSITORY_BRANCH_PROTECTION_CONTROL_MATRIX.csv; BRANCH_PROTECTION_VERIFICATION_TEMPLATE.md",
+            "prohibited_claims": "Branch protection is enforced because the standard requires it, PR #77 exists, or a protected merge process is desired.",
+            "notes": "Current truthful status: BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED.",
+        },
+        {
+            "assurance_domain_id": "DASSURE-ANCHOR-001",
+            "assurance_domain": "Signed external hash anchoring",
+            "purpose": "Distinguish internal checksum ledgers, Git identity, signed commits, signed tags, detached signatures, transparency records, and independently retained external hash anchors.",
+            "governing_rule_ids": "ES-GPS-DOWNSTREAM-001; ES-GPS-ANCHOR-001",
+            "applicability_trigger": "Any claim of independent tamper evidence, signed anchoring, external retention, cryptographic proof, or package integrity beyond internal checksums and Git object identity.",
+            "required_owner": "Governance custody owner or designated integrity-anchor owner",
+            "required_second_reviewer": SECOND_REVIEWER_ID,
+            "required_evidence": "Exact artifact digest bound to verifiable external or cryptographically signed record, method, signing identity, record id/location, verification method/time, revocation/expiration, owner, limitations.",
+            "permitted_statuses": "NOT_ASSESSED; NOT_APPLICABLE_WITH_RATIONALE; REQUIREMENTS_DEFINED; EVIDENCE_PENDING; REVIEW_PENDING; BLOCKED; PARTIALLY_VERIFIED; VERIFIED; COMPLETED; FAILED; SUSPENDED; SUPERSEDED",
+            "blocking_statuses": "BLOCKED; FAILED; EVIDENCE_PENDING or REVIEW_PENDING for independent external-anchor claims",
+            "completion_authority": "Founder-approved anchoring method verified by governance custody owner and second reviewer where required",
+            "reopening_trigger": "Artifact digest change, signature revocation, key expiration, transparency-log issue, external register replacement, archive access failure, or package regeneration.",
+            "future_evidence_artifact": "EXTERNAL_INTEGRITY_ANCHORING_CONTROL_MATRIX.csv; EXTERNAL_HASH_ANCHORING_RECORD_TEMPLATE.md",
+            "prohibited_claims": "Independent external anchoring exists because CHECKSUMS.sha256, PACKAGE_MANIFEST.json, or an unsigned in-package checksum exists.",
+            "notes": "Current truthful status: INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED.",
+        },
+    ]
 
 
 def lifecycle_transitions() -> list[dict[str, Any]]:
@@ -414,6 +551,26 @@ def render_markdown(data: dict[str, Any]) -> str:
     ]
     for name, values in data["dimension_model"].items():
         lines.append(f"- `{name}`: {', '.join(f'`{v}`' for v in values)}")
+    lines += [
+        "",
+        '<a id="downstream-assurance"></a>',
+        "## Downstream Assurance And Verification Dimensions",
+        "",
+        DOWNSTREAM_FOUNDER_STATEMENT,
+        "",
+        f"Controlling limitation: `{DOWNSTREAM_AUTHORITY_LIMITATION}`",
+        "",
+    ]
+    for row in data["downstream_assurance_domains"]:
+        lines += [
+            f"### {row['assurance_domain_id']} - {row['assurance_domain']}",
+            "",
+            f"- Current status: {row['notes']}",
+            f"- Required evidence: {row['required_evidence']}",
+            f"- Future evidence artifact: `{row['future_evidence_artifact']}`",
+            f"- Prohibited claims: {row['prohibited_claims']}",
+            "",
+        ]
     lines += ["", '<a id="production-authorization"></a>', "## Production Authorization", ""]
     lines.append("Production authority may be clean (`PRODUCTION_AUTHORIZED_NO_EXCEPTIONS`) or exception-bearing (`PRODUCTION_AUTHORIZED_WITH_EXPRESS_EXCEPTIONS`). A clean authorization does not require an artificial exception record.")
     lines += ["", '<a id="fcr-controls"></a>', "## FCR Controls", ""]
@@ -484,6 +641,9 @@ def source_register_rows(root: Path) -> list[dict[str, Any]]:
     pf = root / FINAL_RECONCILIATION_DIRECTIVE_COPY
     if pf.exists():
         rows.append({"source_id": "R2SRC-FOUNDER-FINAL-RECONCILIATION-DIRECTIVE", "reviewer": "Founder", "review_date": "2026-08-04", "filename": FINAL_RECONCILIATION_DIRECTIVE_COPY, "sha256": sha256_file(pf), "byte_length": pf.stat().st_size, "provenance_class": "EXACT_UPLOADED_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Authorizes final internal reconciliation and Founder review package preparation only; no adoption, activation, implementation, pilot, production, FCR, merge, or automatic closure authority."})
+    pds = root / DOWNSTREAM_ASSURANCE_DIRECTIVE_COPY
+    if pds.exists():
+        rows.append({"source_id": "R2SRC-FOUNDER-DOWNSTREAM-ASSURANCE-DIRECTIVE", "reviewer": "Founder", "review_date": "2026-08-04", "filename": DOWNSTREAM_ASSURANCE_DIRECTIVE_COPY, "sha256": sha256_file(pds), "byte_length": pds.stat().st_size, "provenance_class": "EXACT_UPLOADED_BYTES_AND_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Authorizes bounded documentary additions and validation only; does not establish legal compliance, implementation completion, production readiness, privacy-control effectiveness, repository enforcement, or external integrity anchoring."})
     psr = root / SECOND_REVIEWER_DESIGNATION_COPY
     if psr.exists():
         rows.append({"source_id": "R2SRC-FOUNDER-SECOND-REVIEWER-DESIGNATION", "reviewer": "Founder", "review_date": "2026-08-04", "filename": SECOND_REVIEWER_DESIGNATION_COPY, "sha256": sha256_file(psr), "byte_length": psr.stat().st_size, "provenance_class": "FOUNDER_CONVERSATION_DESIGNATION_REPOSITORY_NATIVE_COPY", "resolution_status": "RESOLVED_BY_REPOSITORY_NATIVE_COPY", "limitations": "Designates standing Independent Second Reviewer subject to recusal and independence conditions; does not approve any FCR, production authorization, exception, finding closure, implementation action, pilot activity, or production use."})
@@ -518,6 +678,14 @@ def matrix_files(data: dict[str, Any], root: Path) -> dict[str, tuple[list[dict[
         "AUTHORITY_EVENT_MODEL.csv": ([{"authority_status": s, "dimension": "authority_event_status", "definition": f"Authority-event status {s}.", "rule_ids": ["ES-GPS-PROD-001" if "PRODUCTION" in s else "ES-GPS-CLASS-001"]} for s in AUTHORITY_STATUS], ["authority_status", "dimension", "definition", "rule_ids"]),
         "EVIDENCE_STATUS_MODEL.csv": ([{"evidence_status": s, "dimension": "evidence_status", "definition": f"Evidence status {s}.", "rule_ids": ["ES-GPS-VALID-001"]} for s in EVIDENCE_STATUS], ["evidence_status", "dimension", "definition", "rule_ids"]),
         "READINESS_VOCABULARY_REGISTER.csv": ([{"readiness_status": s, "dimension": "readiness_status", "definition": f"Readiness status {s}.", "evidence_requirement": "Durable evidence appropriate to this readiness dimension.", "allowed_change": "By validation or review record."} for s in READINESS_STATUS], ["readiness_status", "dimension", "definition", "evidence_requirement", "allowed_change"]),
+        "DOWNSTREAM_ASSURANCE_AND_VERIFICATION_STATUS_MATRIX.csv": (downstream_assurance_rows(), ["assurance_domain_id", "assurance_domain", "purpose", "governing_rule_ids", "applicability_trigger", "required_owner", "required_second_reviewer", "required_evidence", "permitted_statuses", "blocking_statuses", "completion_authority", "reopening_trigger", "future_evidence_artifact", "prohibited_claims", "notes"]),
+        "LEGAL_AND_REGULATORY_APPLICABILITY_AND_CONFIRMATION_REGISTER.csv": (legal_confirmation_rows(), ["obligation_id", "jurisdiction_or_standard", "subject", "potential_applicability", "applicability_status", "qualified_reviewer_required", "reviewer", "review_date", "affected_features_or_data", "internal_control_mapping", "external_evidence", "unresolved_question", "blocking_effect", "reopening_trigger", "status"]),
+        "IMPLEMENTATION_COMPLETION_CRITERIA_MATRIX.csv": (implementation_completion_rows(), ["criterion_id", "implementation_scope", "requirement_source", "exact_repository_head", "affected_components", "required_code_evidence", "required_test_evidence", "required_configuration_evidence", "required_migration_evidence", "required_documentation", "owner", "second_reviewer", "completion_authority", "blocking_defects", "status", "evidence_artifact"]),
+        "PRODUCTION_READINESS_GATE_MATRIX.csv": (production_readiness_rows(), ["gate_id", "gate_name", "required_evidence", "owner", "second_reviewer", "clean_path_requirement", "exception_path_requirement", "blocking_condition", "result", "evidence_reference", "release_scope"]),
+        "PRIVACY_CONTROL_EFFECTIVENESS_MATRIX.csv": (privacy_effectiveness_rows(), ["privacy_control_id", "control_name", "legal_or_policy_basis", "affected_data", "affected_users", "minors_or_guardians_affected", "design_evidence", "implementation_evidence", "test_method", "test_environment", "test_date", "sample_or_population", "expected_result", "actual_result", "exceptions", "incident_history", "owner", "independent_reviewer", "effectiveness_status", "retest_trigger", "evidence_artifact"]),
+        "REPOSITORY_BRANCH_PROTECTION_CONTROL_MATRIX.csv": (branch_protection_rows(), ["control_id", "repository", "branch", "control", "required_state", "observed_state", "verification_method", "verified_by", "verified_at", "evidence_reference", "gap", "blocking_effect", "status"]),
+        "EXTERNAL_INTEGRITY_ANCHORING_CONTROL_MATRIX.csv": (external_anchor_rows(), ["anchor_id", "artifact_or_package", "artifact_sha256", "anchor_method", "signing_identity", "signature_or_record_id", "external_location", "created_at", "verified_at", "verification_method", "revocation_or_expiration", "owner", "second_reviewer", "status", "limitations"]),
+        "PROHIBITED_OVERCLAIM_MATRIX.csv": (prohibited_overclaim_rows(), ["overclaim_id", "unsupported_claim", "unsupported_condition", "correct_truthful_statement", "rule_ids"]),
         "FOUNDER_CERTIFICATION_WAIVER_SUBSTITUTION_AND_OVERRIDE_MATRIX.csv": (data["certification_classes"], ["certification_class_id", "class_name", "required_fields", "status_values", "non_waivable_core_binding"]),
         "NON_WAIVABLE_CORE_MATRIX.csv": (non_waivable_rows(), ["core_id", "protected_rule_id", "protected_requirement", "binding_scope", "mechanisms_barred", "permitted_narrowing", "prohibited_effect", "detection_method", "violation_consequence", "reopening_trigger"]),
         "SECOND_REVIEW_CONTROL_MATRIX.csv": (second_review_rows(), ["control_id", "applies_to", "reviewer_must_not_be", "required_fields", "if_unavailable", "blocking_effect", "rule_ids"]),
@@ -537,6 +705,253 @@ def matrix_files(data: dict[str, Any], root: Path) -> dict[str, tuple[list[dict[
     }
 
 
+def legal_confirmation_rows() -> list[dict[str, str]]:
+    obligations = [
+        ("LEGAL-001", "United States state privacy laws", "personal data and privacy notices", "POTENTIALLY_APPLICABLE"),
+        ("LEGAL-002", "CCPA/CPRA", "consumer privacy applicability", "REQUIRES_QUALIFIED_REVIEW"),
+        ("LEGAL-003", "GDPR/UK GDPR", "international user or data-transfer applicability", "REQUIRES_QUALIFIED_REVIEW"),
+        ("LEGAL-004", "children and minors privacy", "minor, guardian, and youth participant data", "REQUIRES_QUALIFIED_REVIEW"),
+        ("LEGAL-005", "payment-card and payment processor obligations", "payment data boundary and vendor duties", "POTENTIALLY_APPLICABLE"),
+        ("LEGAL-006", "safeguarding and facility duties", "facility, trainer, minor, guardian, and animal-related safety context", "POTENTIALLY_APPLICABLE"),
+        ("LEGAL-007", "contractual and vendor obligations", "customer, vendor, subprocessor, and data-processing contracts", "POTENTIALLY_APPLICABLE"),
+    ]
+    return [
+        {
+            "obligation_id": oid,
+            "jurisdiction_or_standard": jurisdiction,
+            "subject": subject,
+            "potential_applicability": potential,
+            "applicability_status": "REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING",
+            "qualified_reviewer_required": "TRUE",
+            "reviewer": "UNASSIGNED_QUALIFIED_REVIEWER",
+            "review_date": "",
+            "affected_features_or_data": "Exact features, users, data categories, vendors, and jurisdictions must be recorded before reliance.",
+            "internal_control_mapping": "DOWNSTREAM_ASSURANCE_AND_VERIFICATION_STATUS_MATRIX.csv:DASSURE-LEGAL-001",
+            "external_evidence": "PENDING",
+            "unresolved_question": "Applicability and compliance evidence require qualified determination for exact scope.",
+            "blocking_effect": "Nonblocking for documentary approval; blocks affected pilot, production, payment, privacy, minors, safeguarding, or jurisdiction-specific activity until resolved.",
+            "reopening_trigger": "New jurisdiction, data type, user class, vendor, payment flow, minors/guardian impact, contract, incident, or legal change.",
+            "status": "REVIEW_PENDING",
+        }
+        for oid, jurisdiction, subject, potential in obligations
+    ]
+
+
+def implementation_completion_rows() -> list[dict[str, str]]:
+    scopes = [
+        ("IMPL-001", "governance standard documentary package", "documentary requirements and generated package files", "governance/portfolio/standards/drafting"),
+        ("IMPL-002", "application runtime controls", "runtime privacy, security, access, audit, and retention requirements", "frontend; backend; infrastructure"),
+        ("IMPL-003", "repository workflow controls", "CI, branch protection, validation workflow, release and custody gates", ".github; repository settings; governance package"),
+    ]
+    return [
+        {
+            "criterion_id": cid,
+            "implementation_scope": scope,
+            "requirement_source": source,
+            "exact_repository_head": "PENDING_EXACT_HEAD_AT_VERIFICATION_TIME",
+            "affected_components": components,
+            "required_code_evidence": "Exact commit diff and file inventory for implemented scope.",
+            "required_test_evidence": "Executed test logs with command, timestamp, environment, result, and retained artifacts.",
+            "required_configuration_evidence": "Configuration files and runtime settings verified for exact scope.",
+            "required_migration_evidence": "Migration evidence or NOT_APPLICABLE_WITH_RATIONALE for exact scope.",
+            "required_documentation": "Verification record defining included and excluded requirements.",
+            "owner": "Functional implementation owner",
+            "second_reviewer": SECOND_REVIEWER_ID,
+            "completion_authority": "Qualified reviewer validates exact-scope implementation evidence; Founder or delegated authority accepts.",
+            "blocking_defects": "Any unmapped requirement, unexecuted required test, open blocking defect, missing configuration, missing migration, or absent exact-head evidence.",
+            "status": "IMPLEMENTATION_COMPLETION_NOT_VERIFIED",
+            "evidence_artifact": "IMPLEMENTATION_COMPLETION_VERIFICATION_TEMPLATE.md",
+        }
+        for cid, scope, source, components in scopes
+    ]
+
+
+def production_readiness_rows() -> list[dict[str, str]]:
+    gates = [
+        "exact release identity",
+        "feature scope",
+        "user scope",
+        "data scope",
+        "security",
+        "privacy",
+        "performance",
+        "reliability",
+        "rollback capability",
+        "observability",
+        "incident response",
+        "support readiness",
+        "data migration",
+        "backup and recovery",
+        "legal or regulatory gates",
+        "vendor dependencies",
+        "known defects",
+        "exception inventory",
+        "second-review approval",
+    ]
+    return [
+        {
+            "gate_id": f"PRODREADY-{idx:03d}",
+            "gate_name": gate,
+            "required_evidence": f"Release-specific evidence for {gate}; exact release, scope, owner, date, result, and limitations required.",
+            "owner": "Release owner or delegated production-readiness owner",
+            "second_reviewer": SECOND_REVIEWER_ID,
+            "clean_path_requirement": "PRODUCTION_READY_NO_EXCEPTIONS requires explicit zero-exception attestation across every gate.",
+            "exception_path_requirement": "PRODUCTION_READY_WITH_EXPRESS_EXCEPTIONS requires exact exception inventory, residual-risk treatment, compensating controls, expiration, stop conditions, rollback conditions, Founder or authorized approval, and Independent Second Reviewer approval.",
+            "blocking_condition": "Missing, failed, stale, or contradicted evidence blocks production-readiness reliance for the affected release scope.",
+            "result": "PRODUCTION_READINESS_NOT_ASSESSED",
+            "evidence_reference": "PRODUCTION_READINESS_ASSESSMENT_TEMPLATE.md",
+            "release_scope": "NO_RELEASE_SCOPE_ASSESSED_BY_THIS_DOCUMENTARY_PACKAGE",
+        }
+        for idx, gate in enumerate(gates, 1)
+    ]
+
+
+def privacy_effectiveness_rows() -> list[dict[str, str]]:
+    controls = [
+        ("PRIV-001", "lawful basis or consent", "personal-data processing basis", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-002", "guardian authorization", "guardian approval and verification", "YES"),
+        ("PRIV-003", "minors' data", "minor data minimization and safeguards", "YES"),
+        ("PRIV-004", "notice", "privacy notice and user-facing disclosures", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-005", "access controls", "role and account access boundaries", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-006", "role-based visibility", "trainer, facility, guardian, owner, admin visibility", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-007", "data minimization", "collection and retention limits", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-008", "retention and deletion", "retention schedule and deletion execution", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-009", "correction rights", "data correction workflow", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-010", "export or access requests", "subject access/export workflow", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-011", "payment-data boundaries", "processor boundary and no raw card-data custody", "NO_UNLESS_MINOR_PAYMENT_CONTEXT_EXISTS"),
+        ("PRIV-012", "vendor and subprocessor controls", "vendor data-processing and subprocessor obligations", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-013", "audit logging", "privacy-sensitive audit events", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-014", "breach detection", "detection and escalation signal", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-015", "incident response", "privacy incident handling", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+        ("PRIV-016", "suspension triggers", "control failure and high-risk stop conditions", "YES_IF_MINOR_USERS_OR_GUARDIANS_IN_SCOPE"),
+    ]
+    return [
+        {
+            "privacy_control_id": cid,
+            "control_name": name,
+            "legal_or_policy_basis": basis,
+            "affected_data": "PENDING_SCOPE_DEFINITION",
+            "affected_users": "PENDING_SCOPE_DEFINITION",
+            "minors_or_guardians_affected": minors,
+            "design_evidence": "REQUIREMENTS_DEFINED",
+            "implementation_evidence": "EVIDENCE_PENDING",
+            "test_method": "PENDING_LIVE_OR_REPRESENTATIVE_TEST_METHOD",
+            "test_environment": "PENDING",
+            "test_date": "",
+            "sample_or_population": "PENDING",
+            "expected_result": "PENDING",
+            "actual_result": "NOT_TESTED",
+            "exceptions": "PENDING",
+            "incident_history": "PENDING",
+            "owner": "Privacy/control owner",
+            "independent_reviewer": SECOND_REVIEWER_ID,
+            "effectiveness_status": "PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED",
+            "retest_trigger": "Control, data, user, vendor, environment, legal, incident, or release-scope change.",
+            "evidence_artifact": "LIVE_PRIVACY_CONTROL_EFFECTIVENESS_REVIEW_TEMPLATE.md",
+        }
+        for cid, name, basis, minors in controls
+    ]
+
+
+def branch_protection_rows() -> list[dict[str, str]]:
+    controls = [
+        ("BRANCH-001", "protected branch identity", "integrate-emergent-final-zip identified as protected base where relied upon"),
+        ("BRANCH-002", "prohibition on direct pushes", "direct pushes disabled or expressly governed"),
+        ("BRANCH-003", "pull-request requirement", "PR required before protected branch mutation"),
+        ("BRANCH-004", "required approvals", "required approval count configured"),
+        ("BRANCH-005", "required Independent Second Reviewer or CODEOWNERS approval", "high-consequence changes require configured reviewer/CODEOWNERS evidence where applicable"),
+        ("BRANCH-006", "required status checks", "package validation checks required before merge"),
+        ("BRANCH-007", "stale approval dismissal", "stale approvals dismissed on new commits"),
+        ("BRANCH-008", "conversation resolution", "required conversations resolved before merge"),
+        ("BRANCH-009", "signed commit requirement", "signed commits required if adopted as repository control"),
+        ("BRANCH-010", "force-push prohibition", "force pushes disabled"),
+        ("BRANCH-011", "deletion prohibition", "branch deletion disabled"),
+        ("BRANCH-012", "administrator bypass treatment", "admin bypass disabled or recorded with compensating control"),
+        ("BRANCH-013", "merge-method restrictions", "allowed merge methods configured"),
+        ("BRANCH-014", "deployment environment protection", "environment approvals/checks configured where deployments exist"),
+        ("BRANCH-015", "audit evidence", "settings/audit evidence retained"),
+    ]
+    return [
+        {
+            "control_id": cid,
+            "repository": "rianray2012-coder/EquineSync-V4",
+            "branch": "integrate-emergent-final-zip",
+            "control": control,
+            "required_state": required,
+            "observed_state": "NOT_VERIFIED_IN_REPOSITORY_SETTINGS_BY_THIS_PACKAGE",
+            "verification_method": "PENDING_AUTHORITATIVE_REPOSITORY_SETTINGS_OR_AUDIT_EVIDENCE",
+            "verified_by": "",
+            "verified_at": "",
+            "evidence_reference": "BRANCH_PROTECTION_VERIFICATION_TEMPLATE.md",
+            "gap": "Requirement defined; enforcement not verified.",
+            "blocking_effect": "Nonblocking for documentary approval; blocks claim that authoritative custody controls are fully operational.",
+            "status": "BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED",
+        }
+        for cid, control, required in controls
+    ]
+
+
+def external_anchor_rows() -> list[dict[str, str]]:
+    methods = [
+        ("ANCHOR-001", "signed Git commit"),
+        ("ANCHOR-002", "signed annotated tag"),
+        ("ANCHOR-003", "GPG detached signature"),
+        ("ANCHOR-004", "Sigstore or equivalent transparency-log record"),
+        ("ANCHOR-005", "trusted timestamping"),
+        ("ANCHOR-006", "external evidence repository"),
+        ("ANCHOR-007", "independently retained hash register"),
+        ("ANCHOR-008", "Founder-approved equivalent independent method"),
+    ]
+    return [
+        {
+            "anchor_id": aid,
+            "artifact_or_package": ARTIFACT_ID,
+            "artifact_sha256": "PENDING_EXACT_ARTIFACT_DIGEST_AT_ANCHOR_TIME",
+            "anchor_method": method,
+            "signing_identity": "NOT_IMPLEMENTED",
+            "signature_or_record_id": "NOT_IMPLEMENTED",
+            "external_location": "NOT_IMPLEMENTED",
+            "created_at": "",
+            "verified_at": "",
+            "verification_method": "PENDING",
+            "revocation_or_expiration": "PENDING",
+            "owner": "Governance custody owner or designated integrity-anchor owner",
+            "second_reviewer": SECOND_REVIEWER_ID,
+            "status": "INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED",
+            "limitations": "Internal CHECKSUMS.sha256 and PACKAGE_MANIFEST.json support integrity checking but are not independent external anchors.",
+        }
+        for aid, method in methods
+    ]
+
+
+def prohibited_overclaim_rows() -> list[dict[str, str]]:
+    rows = [
+        ("POC-001", "Governance complete", "Only a subset was reviewed.", "Governance review is complete only for the exact scope, with exclusions and retained findings listed.", "ES-GPS-CLOSE-001"),
+        ("POC-002", "Founder approved means adopted", "Founder approved recommendations or dispositions but did not execute adoption.", "Founder approval is recorded for stated decisions; adoption is pending unless an adoption record exists.", "ES-GPS-FA-001"),
+        ("POC-003", "Locked", "No exact-byte lock record exists for the version.", "The artifact is not locked unless exact bytes and lock effect are recorded.", "ES-GPS-LOCK-001"),
+        ("POC-004", "Active", "No activation record exists.", "The artifact is inactive or candidate unless activation is separately recorded.", "ES-GPS-ACT-001"),
+        ("POC-005", "Implementation authorized", "Only governance drafting or adoption exists.", "Implementation requires exact separate authorization.", "ES-GPS-IMPL-001"),
+        ("POC-006", "Verification passed", "The test was waived, deferred, substituted, or not run.", "The truthful status is waiver, deferral, substitution, or not executed.", "ES-GPS-VER-001"),
+        ("POC-007", "Historical bytes verified", "The source was unavailable and handled through certification.", "Historical evidence was Founder-certified as sufficient for bounded purpose; direct exact-byte verification was unavailable.", "ES-GPS-HIST-001"),
+        ("POC-008", "Production evidence", "Evidence came from a controlled pilot and no production applicability decision exists.", "Pilot-generated evidence was accepted or reviewed for the specified requirement only.", "ES-GPS-PILOTEVD-001"),
+        ("POC-009", "Production authorized", "Certification, waiver, or pilot evidence exists without express production authorization.", "Production authority is absent unless Founder exact-head production authorization expressly exists.", "ES-GPS-CERT-PROD-001"),
+        ("POC-010", "Risk closed", "Risk was accepted, not eliminated.", "Risk is retained and accepted inside stated scope with controls and review trigger.", "ES-GPS-RISK-001"),
+        ("POC-011", "Exception applies portfolio-wide", "Certification scope is narrower.", "Exception applies only to the exact scope, duration, baseline, and purpose recorded.", "ES-GPS-FCR-001"),
+        ("POC-012", "Temporary waiver still valid", "Expiration or review trigger occurred.", "The waiver expired or requires renewal before reliance.", "ES-GPS-EXPIRE-001"),
+        ("POC-013", "Founder waived legal duty", "The requirement is external or cannot be internally waived.", "Founder waiver affects only internal EquineSync process unless external authority permits otherwise.", "ES-GPS-EXTLAW-001"),
+        ("POC-014", "Superseded records should be rewritten", "A later decision exists.", "Historical records are preserved and successor records identify changed current effect.", "ES-GPS-SUP-001"),
+        ("POC-015", "Soundness certification equals production readiness", "Certification only permits controlled continuation.", "Work is certified acceptable for the stated next activity only.", "ES-GPS-SOUND-001"),
+        ("POC-016", "Structured companion unnecessary", "Artifact supports authority, lifecycle, closure, risk, certification, waiver, or production.", "Machine-readable record is required unless Founder certifies an alternative structured record.", "ES-GPS-MR-001"),
+        ("POC-017", "Standard approval proves legal compliance", "No qualified legal determination is recorded for exact scope.", "Approval defines legal-review requirements only; status remains REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING until qualified evidence exists.", "ES-GPS-DOWNSTREAM-001; ES-GPS-LEGAL-001"),
+        ("POC-018", "Standard approval proves implementation completion", "No exact-head implementation evidence and qualified review are recorded.", "Approval defines implementation-completion criteria only; status remains IMPLEMENTATION_COMPLETION_NOT_VERIFIED until exact-scope evidence is reviewed.", "ES-GPS-DOWNSTREAM-001; ES-GPS-IMPLCOMP-001"),
+        ("POC-019", "Standard approval proves production readiness", "No release-specific production-readiness evidence is recorded.", "Approval defines production-readiness gates only; status remains PRODUCTION_READINESS_NOT_ASSESSED until release evidence is reviewed.", "ES-GPS-DOWNSTREAM-001; ES-GPS-PRODREADY-001"),
+        ("POC-020", "Standard approval proves live privacy effectiveness", "No live or representative operating-effectiveness test evidence is recorded.", "Approval defines privacy effectiveness requirements only; status remains PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED until testing is reviewed.", "ES-GPS-DOWNSTREAM-001; ES-GPS-PRIVEFF-001"),
+        ("POC-021", "Standard approval proves branch-protection enforcement", "Repository settings or authoritative repository evidence have not been inspected.", "Approval defines branch-protection requirements only; status remains BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED until settings evidence is reviewed.", "ES-GPS-DOWNSTREAM-001; ES-GPS-BRANCH-001"),
+        ("POC-022", "Internal checksum proves external integrity anchoring", "Unsigned in-package checksum can be regenerated with the package.", "Internal checksums support integrity checking only; status remains INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED until an independent anchor exists.", "ES-GPS-DOWNSTREAM-001; ES-GPS-ANCHOR-001"),
+    ]
+    return [{"overclaim_id": oid, "unsupported_claim": claim, "unsupported_condition": condition, "correct_truthful_statement": truthful, "rule_ids": rule_ids} for oid, claim, condition, truthful, rule_ids in rows]
+
+
 def non_waivable_rows() -> list[dict[str, Any]]:
     items = [
         ("CORE-001", "ES-GPS-VALID-001", "truthful validation"),
@@ -545,6 +960,13 @@ def non_waivable_rows() -> list[dict[str, Any]]:
         ("CORE-004", "ES-GPS-PROD-001", "exact release scope and production identity"),
         ("CORE-005", "ES-GPS-OVER-001", "unsupported-overclaim prohibition"),
         ("CORE-006", "ES-GPS-2REV-001", "independent second review for high-consequence authority"),
+        ("CORE-007", "ES-GPS-DOWNSTREAM-001", "documentary approval does not prove downstream assurance outcomes"),
+        ("CORE-008", "ES-GPS-LEGAL-001", "external legal and regulatory obligations cannot be internally satisfied without required qualified evidence"),
+        ("CORE-009", "ES-GPS-IMPLCOMP-001", "implementation completion requires exact-scope evidence and qualified review"),
+        ("CORE-010", "ES-GPS-PRODREADY-001", "production readiness requires release-specific gate evidence"),
+        ("CORE-011", "ES-GPS-PRIVEFF-001", "privacy operating effectiveness requires live or representative testing evidence"),
+        ("CORE-012", "ES-GPS-BRANCH-001", "branch-protection enforcement requires authoritative repository evidence"),
+        ("CORE-013", "ES-GPS-ANCHOR-001", "external integrity anchoring requires independent signed or external record evidence"),
     ]
     return [{"core_id": cid, "protected_rule_id": rid, "protected_requirement": req, "binding_scope": "All FCR classes and authority mechanisms", "mechanisms_barred": "FCR-01 through FCR-10; waiver; deferral; substitution; override; risk acceptance", "permitted_narrowing": "Only narrower truthful scope with durable record", "prohibited_effect": "Cannot waive, nullify, or rewrite the protected requirement", "detection_method": "Validator, review, challenge procedure, or source reconciliation", "violation_consequence": "Blocks validation or reopens affected claim", "reopening_trigger": "Credible defect, missing evidence, or contradictory authority"} for cid, rid, req in items]
 
@@ -939,14 +1361,14 @@ def stats_markdown() -> str:
 
 def controlled_vocabulary_rows() -> list[dict[str, str]]:
     rows = []
-    for dim, values in [("artifact_lifecycle", ARTIFACT_LIFECYCLE), ("authority_event_status", AUTHORITY_STATUS), ("certification_status", CERT_STATUS), ("evidence_status", EVIDENCE_STATUS), ("readiness_status", READINESS_STATUS), ("validation_result", sorted(VALID_RESULTS))]:
+    for dim, values in [("artifact_lifecycle", ARTIFACT_LIFECYCLE), ("authority_event_status", AUTHORITY_STATUS), ("certification_status", CERT_STATUS), ("evidence_status", EVIDENCE_STATUS), ("readiness_status", READINESS_STATUS), ("downstream_assurance_status", DOWNSTREAM_STATUS_VALUES), ("validation_result", sorted(VALID_RESULTS))]:
         for value in values:
             rows.append({"term": value, "dimension": dim, "definition": f"Controlled {dim} value {value}."})
     return rows
 
 
 def retention_rows() -> list[dict[str, str]]:
-    classes = ["FCR records", "certification registers", "waivers", "deferrals", "overrides", "risk acceptances", "production authorizations", "pilot evidence", "privacy evidence", "minors and safeguarding records", "findings", "closure evidence", "delegations", "revocations", "supersession records", "source registers", "validation logs", "CI artifacts", "outside reviews", "Founder directives", "custody evidence", "personal-data redaction records"]
+    classes = ["FCR records", "certification registers", "waivers", "deferrals", "overrides", "risk acceptances", "production authorizations", "pilot evidence", "privacy evidence", "legal and regulatory confirmation records", "implementation completion evidence", "production readiness evidence", "branch protection verification evidence", "external integrity anchoring records", "minors and safeguarding records", "findings", "closure evidence", "delegations", "revocations", "supersession records", "source registers", "validation logs", "CI artifacts", "outside reviews", "Founder directives", "custody evidence", "personal-data redaction records"]
     return [{"record_class": c, "retention_period": "Product life plus 7 years unless stricter duty applies", "archive_location": "Repository governance path or controlled evidence archive", "redaction_rule": "Avoid raw personal data; redact by addendum where required", "checksum_rule": "SHA-256 and byte length required when exact bytes are retained", "access_control": "Founder/governance steward or delegated owner"} for c in classes]
 
 
@@ -973,6 +1395,8 @@ def reference_rows(data: dict[str, Any]) -> list[dict[str, str]]:
         rows.append({"reference_id": f"REF-RULE-{idx+1:03d}", "source_file": JSON_NAME, "json_pointer": f"/normative_rule_catalog/{idx}/rule_id", "markdown_anchor": rule["markdown_anchor"], "rule_id": rule["rule_id"], "validator_check_id": "VAL-REF-001", "resolution_status": "RESOLVED"})
     for idx, scenario in enumerate(data["adversarial_review"]):
         rows.append({"reference_id": f"REF-ADV-{idx+1:03d}", "source_file": JSON_NAME, "json_pointer": f"/adversarial_review/{idx}/scenario_id", "markdown_anchor": scenario["markdown_anchors"][0], "rule_id": scenario["rule_ids"][0], "validator_check_id": scenario["validator_check_ids"][0], "resolution_status": "RESOLVED"})
+    for idx, domain in enumerate(data["downstream_assurance_domains"]):
+        rows.append({"reference_id": f"REF-DASSURE-{idx+1:03d}", "source_file": JSON_NAME, "json_pointer": f"/downstream_assurance_domains/{idx}/assurance_domain_id", "markdown_anchor": "downstream-assurance", "rule_id": domain["governing_rule_ids"].split("; ")[0], "validator_check_id": "VAL-DOWNSTREAM-001", "resolution_status": "RESOLVED"})
     return rows
 
 
@@ -988,6 +1412,171 @@ def write_templates(root: Path) -> None:
             lines.append(f"- `{field}`: REQUIRED_NON_EMPTY")
         lines += ["", "No permanent waiver, production use, pilot use, adoption, activation, implementation, or certification is issued by this template."]
         write_text(tmpl / f"{cid}_TEMPLATE.md", "\n".join(lines))
+    write_downstream_templates(root)
+
+
+def write_downstream_templates(root: Path) -> None:
+    templates = {
+        "LEGAL_AND_REGULATORY_CONFIRMATION_TEMPLATE.md": """# Legal And Regulatory Confirmation Template
+
+Status: `TEMPLATE_ONLY_NO_COMPLIANCE_CONFIRMATION_ISSUED`
+
+## Scope
+
+- Obligation id:
+- Jurisdiction or standard:
+- Features, users, data, vendors, geography, and time period:
+- Qualified reviewer required: YES/NO with rationale
+
+## Disposition
+
+Select one and provide evidence:
+
+- `APPLICABILITY_CONFIRMED`
+- `APPLICABILITY_REJECTED_WITH_RATIONALE`
+- `QUALIFIED_LEGAL_REVIEW_PENDING`
+- `COMPLIANCE_EVIDENCE_INCOMPLETE`
+- `COMPLIANCE_CONFIRMED_FOR_DEFINED_SCOPE`
+
+No internal certification, waiver, procedural override, risk acceptance, Founder decision, or production authorization may represent that an external obligation has been satisfied unless qualified determination and evidence are recorded for the exact scope.
+""",
+        "IMPLEMENTATION_COMPLETION_VERIFICATION_TEMPLATE.md": """# Implementation Completion Verification Template
+
+Status: `TEMPLATE_ONLY_IMPLEMENTATION_COMPLETION_NOT_VERIFIED`
+
+## Exact Scope
+
+- Implementation scope:
+- Exact repository head:
+- Mapped requirements:
+- Affected components:
+
+## Required Evidence
+
+- Code evidence:
+- Executed test evidence:
+- Configuration evidence:
+- Migration evidence or not-applicable rationale:
+- Documentation evidence:
+- Blocking defects:
+- Qualified reviewer:
+- Second reviewer:
+
+Implementation completion may be claimed only after exact-scope evidence is tied to a repository head and validated by a qualified reviewer.
+""",
+        "PRODUCTION_READINESS_ASSESSMENT_TEMPLATE.md": """# Production Readiness Assessment Template
+
+Status: `TEMPLATE_ONLY_PRODUCTION_READINESS_NOT_ASSESSED`
+
+## Release Scope
+
+- Release identity:
+- Feature scope:
+- User scope:
+- Data scope:
+- Environment:
+
+## Path
+
+- `PRODUCTION_READY_NO_EXCEPTIONS`: requires explicit zero-exception attestation.
+- `PRODUCTION_READY_WITH_EXPRESS_EXCEPTIONS`: requires exception inventory, residual-risk treatment, compensating controls, expiration, stop conditions, rollback conditions, Founder or authorized approval, and Independent Second Reviewer approval.
+
+No production-readiness claim or production authorization arises solely from documentary approval, implementation completion, pilot results, or code presence.
+""",
+        "LIVE_PRIVACY_CONTROL_EFFECTIVENESS_REVIEW_TEMPLATE.md": """# Live Privacy Control Effectiveness Review Template
+
+Status: `TEMPLATE_ONLY_PRIVACY_OPERATING_EFFECTIVENESS_NOT_VERIFIED`
+
+## Control Scope
+
+- Privacy control id:
+- Control name:
+- Legal or policy basis:
+- Affected data and users:
+- Minors or guardians affected:
+
+## Test Record
+
+- Design evidence:
+- Implementation evidence:
+- Test method:
+- Test environment:
+- Test date:
+- Sample or population:
+- Expected result:
+- Actual result:
+- Exceptions:
+- Incident history:
+- Owner:
+- Independent reviewer:
+- Scope limitations:
+
+Privacy-control effectiveness may be claimed only after live or sufficiently representative testing with recorded methodology, results, exceptions, reviewer identity, and limitations.
+""",
+        "BRANCH_PROTECTION_VERIFICATION_TEMPLATE.md": """# Branch Protection Verification Template
+
+Status: `TEMPLATE_ONLY_BRANCH_PROTECTION_ENFORCEMENT_NOT_VERIFIED`
+
+## Repository Scope
+
+- Repository:
+- Branch:
+- Control:
+- Required state:
+- Observed state:
+- Verification method:
+- Verified by:
+- Verified at:
+- Evidence reference:
+- Gap:
+- Blocking effect:
+
+Protected-repository custody may not be claimed unless required branch and merge controls have been directly verified against repository settings or authoritative repository evidence.
+""",
+        "EXTERNAL_HASH_ANCHORING_RECORD_TEMPLATE.md": """# External Hash Anchoring Record Template
+
+Status: `TEMPLATE_ONLY_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED`
+
+## Anchor Record
+
+- Artifact or package:
+- Artifact SHA-256:
+- Anchor method:
+- Signing identity:
+- Signature or record id:
+- External location:
+- Created at:
+- Verified at:
+- Verification method:
+- Revocation or expiration:
+- Owner:
+- Second reviewer:
+- Limitations:
+
+Independent tamper-evidence or external integrity anchoring may be claimed only where the exact digest is bound to a verifiable external or cryptographically signed record not silently replaceable through package regeneration.
+""",
+        "FOUNDER_FINAL_APPROVAL_RECORD_TEMPLATE.md": f"""# Founder Final Approval Record Template
+
+Status: `TEMPLATE_ONLY_NO_APPROVAL_ISSUED`
+
+## Approval Scope
+
+- Artifact:
+- Version:
+- Exact package hash:
+- Decision date:
+- Founder decision:
+- Limitations accepted:
+
+## Required Statement
+
+{DOWNSTREAM_FOUNDER_STATEMENT}
+
+Approval may be limited to documentary standard approval. It does not itself authorize adoption, activation, implementation, pilot use, production use, FCR issuance, protected merge, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, or external integrity anchoring.
+""",
+    }
+    for name, text in templates.items():
+        write_text(root / name, text)
 
 
 def write_fixtures(root: Path) -> None:
@@ -1009,12 +1598,23 @@ def write_fixtures(root: Path) -> None:
         write_json(fixtures / f"invalid_{name}.json", bad)
     write_text(fixtures / "prohibited_overclaim.txt", "This package is READY_FOR_FOUNDER_APPROVAL and PRODUCTION_AUTHORIZED.")
     write_text(fixtures / "qualified_status_statement.txt", "This package is not ready for Founder approval and production is not authorized.")
+    write_text(fixtures / "documentary_approval_production_unverified.txt", "Documentary approval establishes production-readiness requirements only; production readiness is not assessed and production is not authorized.")
+    false_claims = {
+        "false_legal_compliance_claim.txt": "Founder approval proves LEGAL_COMPLIANCE_VERIFIED for EquineSync.",
+        "false_implementation_completion_claim.txt": "The governance package means IMPLEMENTATION_COMPLETION_VERIFIED.",
+        "false_production_readiness_claim.txt": "The documentary standard approval makes the release PRODUCTION_READY.",
+        "false_live_privacy_effectiveness_claim.txt": "Privacy policy text proves LIVE_PRIVACY_EFFECTIVENESS_VERIFIED.",
+        "false_branch_protection_enforcement_claim.txt": "PR #77 proves BRANCH_PROTECTION_ENFORCED.",
+        "false_external_anchor_claim.txt": "CHECKSUMS.sha256 proves EXTERNAL_INTEGRITY_ANCHORED.",
+    }
+    for name, text in false_claims.items():
+        write_text(fixtures / name, text)
 
 
 def write_static_docs(root: Path, data: dict[str, Any]) -> None:
-    write_text(root / "README_FIRST.md", f"# README FIRST\n\nStatus: `{data['status']}`\n\nFinal status: `{data['readiness_status']}`\n\nRead `FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md`, `VALID_FINDINGS_CLOSURE_REGISTER.csv`, `FOUNDER_DECISION_TABLE.csv`, `RECOMMENDED_FOUNDER_ACTION.md`, `{MD_NAME}`, `DOCUMENTARY_VALIDATION_REPORT.json`, and `KNOWN_LIMITATIONS.md` first.\n\nThis is a Founder review package only; it does not approve, adopt, activate, implement, merge, certify, or authorize pilot or production use.\n")
-    write_text(root / "REVISION_SUMMARY.md", f"# Revision Summary\n\nFinal internal reconciliation applies the Founder two-review-cycle sufficiency determination, reconciles authenticated Cursor, Claude, and Perplexity findings at reviewer-finding granularity, replaces interim review-pending closure states with final Founder-package dispositions, and prepares decision materials for direct Founder review. Prior source-authentication remediation committed exact Round 2 review reports as repository-native evidence and validated source-to-disposition traceability.\n\nFinal status: `{FINAL_STATUS}`.\n")
-    write_text(root / "KNOWN_LIMITATIONS.md", "# Known Limitations\n\n- Exact Cursor, Claude, and Perplexity Round 2 review report bytes are now committed as repository-native evidence; this does not itself close findings by independent re-review.\n- Legal, privacy-law, regulatory, Founder, implementation, production, and independent outside-review checks are pending or blocked, not PASS.\n- Second review is operationally required; if no independent reviewer is available, FCR-09/FCR-10 and high-consequence closures are blocked.\n- Signed tags and branch-protection enforcement require separate repository administration.\n")
+    write_text(root / "README_FIRST.md", f"# README FIRST\n\nStatus: `{data['status']}`\n\nFinal status: `{data['readiness_status']}`\n\nRead `FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md`, `DOWNSTREAM_ASSURANCE_AND_VERIFICATION_STATUS_MATRIX.csv`, `VALID_FINDINGS_CLOSURE_REGISTER.csv`, `FOUNDER_DECISION_TABLE.csv`, `RECOMMENDED_FOUNDER_ACTION.md`, `{MD_NAME}`, `DOCUMENTARY_VALIDATION_REPORT.json`, and `KNOWN_LIMITATIONS.md` first.\n\nThis is a Founder review package only; it does not approve, adopt, activate, implement, merge, certify, authorize pilot or production use, prove legal compliance, verify implementation completion, establish production readiness, prove live privacy-control effectiveness, verify branch-protection enforcement, or implement external integrity anchoring.\n\n`{DOWNSTREAM_AUTHORITY_LIMITATION}`\n")
+    write_text(root / "REVISION_SUMMARY.md", f"# Revision Summary\n\nFinal internal reconciliation applies the Founder two-review-cycle sufficiency determination, reconciles authenticated Cursor, Claude, and Perplexity findings at reviewer-finding granularity, replaces interim review-pending closure states with final Founder-package dispositions, and prepares decision materials for direct Founder review. Prior source-authentication remediation committed exact Round 2 review reports as repository-native evidence and validated source-to-disposition traceability.\n\nThis revision adds explicit downstream assurance and verification dimensions for legal/regulatory compliance, implementation completion, production readiness, live privacy-control effectiveness, branch-protection enforcement, and signed external hash anchoring. Approval of the standard establishes requirements and evidence gates only; it does not complete or verify those downstream outcomes.\n\nFinal status: `{FINAL_STATUS}`.\n")
+    write_text(root / "KNOWN_LIMITATIONS.md", "# Known Limitations\n\n- Exact Cursor, Claude, and Perplexity Round 2 review report bytes are now committed as repository-native evidence; this does not itself close findings by independent re-review.\n- Legal, privacy-law, regulatory, Founder, implementation, production, and independent outside-review checks are pending or blocked, not PASS.\n- The downstream assurance domains are requirements-defined only unless their specific evidence artifacts later prove otherwise.\n- Current legal/regulatory status: `REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING`.\n- Current implementation-completion status: `IMPLEMENTATION_COMPLETION_NOT_VERIFIED`.\n- Current production-readiness status: `PRODUCTION_READINESS_NOT_ASSESSED`.\n- Current live privacy-control status: `PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED`.\n- Current branch-protection status: `BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED`.\n- Current external integrity-anchor status: `INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED`.\n- Second review is operationally required; if the designated Independent Second Reviewer must recuse, affected high-consequence actions remain blocked until another qualified reviewer is appointed.\n- Signed tags, external hash anchoring, and branch-protection enforcement require separate repository administration or external anchoring activity.\n")
     write_text(root / "ROUND_2_FINDING_CLOSURE_REPORT.md", "# Round 2 Finding Closure Report\n\nFinal internal reconciliation found no valid open blocking documentary findings for Founder review. Findings are not treated as Founder-approved by Codex; they are classified in `VALID_FINDINGS_CLOSURE_REGISTER.csv` for Founder decision under the two-review-cycle sufficiency directive.\n")
     write_founder_review_docs(root)
     write_text(root / "TARGETED_ROUND_3_REREVIEW_INSTRUCTIONS.md", "# Targeted Round 3 Re-Review Instructions\n\nReview the exact package bytes at the final PR #77 head. Re-execute committed checksum verification before any regeneration. Review validation logs, FCR fixtures, lifecycle dimensional separation, second-review controls, and source limitations.\n")
@@ -1063,7 +1663,11 @@ Two independent review cycles examined the standard's validation truthfulness, s
 
 The current candidate remediates those concerns for Founder review. Exact Cursor, Claude, and Perplexity Round 2 report bytes are committed as repository-native sources. The disposition matrix and closure register preserve reviewer-level rows rather than broad consensus substitutes. Mechanical validation now derives from executed checks with retained logs. FCR fixtures reject null, empty, and whitespace-only required payloads. Terminal lifecycle flags, anchors, JSON pointers, review-source hashes, and reviewer attribution are checked by the package validator. Legacy templates and the Governance Maintenance Standard issue are recorded through supersession instruments.
 
-Final reconciliation found no valid open blocking findings for documentary Founder review. Nonblocking limitations remain: legal and regulatory confirmation is not claimed; operational implementation, production operation, branch-protection enforcement, and signed-tag anchoring are outside this package's authority. The previously recorded absence of a named standing Second Reviewer is cured by the Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions. Those limitations do not block Founder review because the package requests only documentary approval and expressly withholds adoption, activation, implementation, pilot, production, FCR, protected merge, and automatic closure authority.
+Final reconciliation found no valid open blocking findings for documentary Founder review. The package now expressly governs six downstream assurance dimensions: legal and regulatory review, implementation-completion verification, production-readiness assessment, live privacy-control effectiveness testing, branch-protection verification, and independent integrity anchoring. Approval establishes their requirements only. Legal confirmation remains `REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING`; implementation completion remains `IMPLEMENTATION_COMPLETION_NOT_VERIFIED`; production readiness remains `PRODUCTION_READINESS_NOT_ASSESSED`; live privacy-control effectiveness remains `PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED`; branch-protection enforcement remains `BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED`; external anchoring remains `INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED`.
+
+{DOWNSTREAM_FOUNDER_STATEMENT}
+
+The previously recorded absence of a named standing Second Reviewer is cured by the Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions. Remaining limitations do not block Founder review because the package requests only documentary approval and expressly withholds adoption, activation, implementation, pilot, production, FCR, protected merge, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, external integrity anchoring, and automatic closure authority.
 
 Recommended Founder action: `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.
 
@@ -1075,11 +1679,11 @@ Recommended Founder action: `APPROVE_WITH_RECORDED_NONBLOCKING_LIMITATIONS`.
 
 ## WHAT_IS_NOW_STRONG
 
-Exact reviewer sources are committed, validation is executable, FCR schema fixtures reject empty required values, lifecycle terminality is checked, and no activation or production authority is implied.
+Exact reviewer sources are committed, validation is executable, FCR schema fixtures reject empty required values, lifecycle terminality is checked, downstream assurance domains are separately governed, and no activation or production authority is implied.
 
 ## WHAT_CHANGED_MATERIALLY
 
-The package moved from interim `REMEDIATED_PENDING_REREVIEW` rows to final finding-specific Founder-package dispositions, with a closure register and decision table.
+The package moved from interim `REMEDIATED_PENDING_REREVIEW` rows to final finding-specific Founder-package dispositions, with a closure register and decision table. It also adds six downstream assurance dimensions with owners, evidence artifacts, blocking conditions, permitted statuses, and prohibited-overclaim language.
 
 ## WHAT_REVIEWERS_AGREED_ON
 
@@ -1095,7 +1699,7 @@ All valid blocking documentary findings are classified as `VALID_FULLY_REMEDIATE
 
 ## NONBLOCKING_LIMITATIONS
 
-Legal confirmation, operational implementation, live privacy verification, signed external anchoring, and branch-protection administration remain nonblocking limits for Founder acceptance. Second-review staffing is updated by Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions.
+Legal confirmation, implementation completion, production readiness, live privacy effectiveness, signed external anchoring, and branch-protection enforcement remain nonblocking limits for documentary Founder acceptance but may block affected downstream action. Second-review staffing is updated by Founder designation of Patrick K. Spoon Sr., subject to recusal and independence conditions.
 
 ## FOUNDER_ATTENTION_ITEMS
 
@@ -1113,23 +1717,23 @@ No valid open blocking findings remain for documentary Founder review.
 
 ## Nonblocking But Requiring Founder Acceptance
 
-Legal/regulatory confirmation, signed external anchoring, branch-protection enforcement, and operational implementation evidence remain outside this package. The prior second-review staffing absence is cured by designation of Patrick K. Spoon Sr. as standing Independent Second Reviewer, subject to recusal and independence conditions. Current effect: remaining limits prevent claims beyond documentary approval. Mitigation: retain the no-activation authority boundary and require separate authority records before implementation, pilot, production, FCR issuance, or merge. Owner: Founder or delegated governance owner. Review trigger: before any authority expansion. Recommended Founder disposition: accept as nonblocking limitations.
+Legal/regulatory confirmation, implementation completion, production readiness, live privacy-control effectiveness, signed external anchoring, and branch-protection enforcement remain outside completed/verifiable status in this package. The prior second-review staffing absence is cured by designation of Patrick K. Spoon Sr. as standing Independent Second Reviewer, subject to recusal and independence conditions. Current effect: remaining limits prevent claims beyond documentary approval and may block affected downstream legal, implementation, pilot, production, privacy, repository-custody, or integrity-anchor reliance. Mitigation: retain the no-activation authority boundary and require separate evidence artifacts before implementation, pilot, production, FCR issuance, merge, compliance claims, operational-effectiveness claims, branch-enforcement claims, or external-anchor claims. Owner: Founder or delegated governance owner. Review trigger: before any authority expansion. Recommended Founder disposition: accept as nonblocking limitations.
 
 ## Operational Follow-Up
 
-Operational CI enforcement, branch protection, signed tags, and recurring maintenance review require repository administration. Current effect: documentary package is ready, operational enforcement is not claimed. Recommended disposition: approve documentary standard with follow-up.
+Operational CI enforcement, branch protection, signed tags, external hash anchoring, implementation verification, production-readiness assessment, live privacy effectiveness testing, and recurring maintenance review require separate evidence. Current effect: documentary package is ready, downstream completion is not claimed. Recommended disposition: approve documentary standard with follow-up.
 
 ## Legal Confirmation
 
-No legal, privacy-law, regulatory, or external-obligation compliance conclusion is made. Recommended disposition: require qualified confirmation before any compliance claim or live-use authorization.
+No legal, privacy-law, regulatory, or external-obligation compliance conclusion is made. Recommended disposition: require qualified confirmation before any compliance claim, affected pilot, production, payment, privacy, minors, safeguarding, or jurisdiction-specific activity.
 
 ## Future Maturity Improvement
 
-Expand independent reviewer staffing, external hash anchoring, periodic detective controls, and retention schedules as the organization matures.
+Expand independent reviewer staffing, external hash anchoring, branch-protection evidence automation, periodic detective controls, operating-effectiveness testing, and retention schedules as the organization matures.
 
 ## Out Of Scope
 
-Implementation behavior, production operations, pilot data, FCR issuance, protected merge, and adoption are out of scope.
+Implementation behavior, production operations, pilot data, FCR issuance, protected merge, adoption, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, and external integrity anchoring are out of scope.
 """)
     write_text(root / "RECOMMENDED_FOUNDER_ACTION.md", """# Recommended Founder Action
 
@@ -1137,7 +1741,9 @@ Implementation behavior, production operations, pilot data, FCR issuance, protec
 
 Basis: two independent review cycles have been completed, exact Round 2 reviewer sources are authenticated, all represented valid blocking documentary findings have been remediated or reduced to nonblocking limitations, and the package retains explicit no-adoption/no-activation/no-implementation/no-pilot/no-production/no-FCR/no-merge authority boundaries.
 
-This recommendation is not Founder approval and does not authorize activation, implementation, pilot use, production use, FCR issuance, protected merge, or automatic closure of future findings.
+{DOWNSTREAM_FOUNDER_STATEMENT}
+
+This recommendation is not Founder approval and does not authorize activation, implementation, pilot use, production use, FCR issuance, protected merge, legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, external integrity anchoring, or automatic closure of future findings.
 """)
     write_text(root / "TWO_REVIEW_CYCLE_SUFFICIENCY_MEMORANDUM.md", f"""# Two Review Cycle Sufficiency Memorandum
 
@@ -1151,7 +1757,9 @@ Blocking findings remaining: `{stats['valid_blocking']}`.
 
 Conclusion: the two-cycle sufficiency standard is satisfied for direct Founder review because no valid open blocking documentary findings remain, source authentication is complete for the Round 2 reviewer reports, and remaining limitations are recorded as nonblocking limits to any approval.
 
-Conditions attached to Founder approval: approval must remain documentary unless separately expanded by durable authority record; no activation, implementation, pilot, production, FCR issuance, protected merge, or legal/regulatory compliance claim is authorized by this package.
+Conditions attached to Founder approval: approval must remain documentary unless separately expanded by durable authority record; no activation, implementation, pilot, production, FCR issuance, protected merge, legal/regulatory compliance claim, implementation-completion claim, production-readiness claim, live privacy-effectiveness claim, branch-protection-enforcement claim, or external integrity-anchor claim is authorized by this package.
+
+{DOWNSTREAM_FOUNDER_STATEMENT}
 
 ## Counts
 
@@ -1200,6 +1808,8 @@ def generate_expected(root: Path) -> None:
         shutil.copyfile(round3_directive, root / ROUND3_DIRECTIVE_COPY)
     if FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT.exists():
         shutil.copyfile(FINAL_RECONCILIATION_DIRECTIVE_ATTACHMENT, root / FINAL_RECONCILIATION_DIRECTIVE_COPY)
+    if DOWNSTREAM_ASSURANCE_DIRECTIVE_ATTACHMENT.exists():
+        shutil.copyfile(DOWNSTREAM_ASSURANCE_DIRECTIVE_ATTACHMENT, root / DOWNSTREAM_ASSURANCE_DIRECTIVE_COPY)
     write_text(root / SECOND_REVIEWER_DESIGNATION_COPY, SECOND_REVIEWER_DESIGNATION_TEXT)
     write_review_sources(root)
     md = render_markdown(data)
@@ -1272,6 +1882,9 @@ def run_checks(root: Path, data: dict[str, Any], logs: Path) -> list[CheckResult
     checks.append(result("VAL-REVIEW-SOURCE-001", "exact Cursor, Claude, and Perplexity Round 2 source reports authenticated", "source_authentication", "check_review_sources", logs, lambda: check_review_sources(root)))
     checks.append(result("VAL-REVIEW-DISPOSITION-001", "Round 2 disposition rows map to authenticated reviewer findings", "review_disposition", "check_review_disposition", logs, lambda: check_review_disposition(root)))
     checks.append(result("VAL-REVIEW-ATTRIBUTION-001", "reviewer attribution and severity reconciliation retained", "review_attribution", "check_reviewer_attribution", logs, lambda: check_reviewer_attribution(root)))
+    checks.append(result("VAL-DOWNSTREAM-001", "six downstream assurance domains, rules, artifacts, owners, statuses, blockers, and truthful current statuses are present", "downstream_assurance", "check_downstream_assurance", logs, lambda: check_downstream_assurance(root)))
+    checks.append(result("VAL-DOWNSTREAM-OVERCLAIM-001", "approval records do not mark unverified downstream assurance domains completed", "downstream_overclaim", "check_downstream_approval_records", logs, lambda: check_downstream_approval_records(root)))
+    checks.append(result("VAL-DOWNSTREAM-REGRESSION-001", "downstream assurance additions do not reopen or contradict existing closure rows", "closure_regression", "check_downstream_closure_regression", logs, lambda: check_downstream_closure_regression(root)))
     checks.append(pending(root, "VAL-HUMAN-001", "qualified human semantic review", "human_review", "Qualified human semantic review not included as durable record."))
     checks.append(pending(root, "VAL-LEGAL-001", "legal/privacy/regulatory/external-obligation review", "legal_review", "Legal, privacy-law, regulatory, and external-obligation review not included as durable record."))
     return checks
@@ -1353,10 +1966,10 @@ def check_lifecycle(root: Path) -> tuple[bool, str]:
 
 def overclaim_violations(text: str) -> list[str]:
     violations = []
-    for token in ["READY_FOR_FOUNDER_APPROVAL", "PRODUCTION_AUTHORIZED", "IMPLEMENTATION_VERIFIED", "INDEPENDENTLY_VALIDATED"]:
+    for token in ["READY_FOR_FOUNDER_APPROVAL", "PRODUCTION_AUTHORIZED", "IMPLEMENTATION_VERIFIED", "INDEPENDENTLY_VALIDATED", "LEGAL_COMPLIANCE_VERIFIED", "IMPLEMENTATION_COMPLETION_VERIFIED", "PRODUCTION_READY", "LIVE_PRIVACY_EFFECTIVENESS_VERIFIED", "BRANCH_PROTECTION_ENFORCED", "EXTERNAL_INTEGRITY_ANCHORED"]:
         for match in re.finditer(token, text):
             window = text[max(0, match.start() - 40):match.start()].lower()
-            if "not " not in window and "no " not in window and "without " not in window:
+            if "not " not in window and "no " not in window and "without " not in window and "requirements only" not in window:
                 violations.append(token)
     return violations
 
@@ -1365,11 +1978,17 @@ def check_overclaim_fixtures(root: Path) -> tuple[bool, str]:
     fixtures = root / "test_fixtures"
     bad = overclaim_violations((fixtures / "prohibited_overclaim.txt").read_text(encoding="utf-8"))
     good = overclaim_violations((fixtures / "qualified_status_statement.txt").read_text(encoding="utf-8"))
+    doc_good = overclaim_violations((fixtures / "documentary_approval_production_unverified.txt").read_text(encoding="utf-8"))
     errors = []
     if not bad:
         errors.append("prohibited fixture did not fail")
     if good:
         errors.append("qualified fixture failed")
+    if doc_good:
+        errors.append("documentary approval/unverified production fixture failed")
+    for p in sorted(fixtures.glob("false_*_claim.txt")):
+        if not overclaim_violations(p.read_text(encoding="utf-8")):
+            errors.append(f"false downstream claim fixture did not fail: {p.name}")
     return not errors, "\n".join(errors or ["overclaim fixtures verified"])
 
 
@@ -1434,6 +2053,120 @@ def check_reviewer_attribution(root: Path) -> tuple[bool, str]:
         if not row["consensus_classification"]:
             errors.append(f"missing consensus group {row['review_finding_id']}")
     return not errors, "\n".join(errors or [f"reviewer attribution and severity retained for {len(rows)} rows"])
+
+
+def check_downstream_assurance(root: Path) -> tuple[bool, str]:
+    data = read_json(root / JSON_NAME)
+    rows = read_csv(root / "DOWNSTREAM_ASSURANCE_AND_VERIFICATION_STATUS_MATRIX.csv")
+    errors = []
+    required = {
+        "DASSURE-LEGAL-001": ("ES-GPS-LEGAL-001", "LEGAL_AND_REGULATORY_APPLICABILITY_AND_CONFIRMATION_REGISTER.csv", "REQUIREMENTS_DEFINED_LEGAL_CONFIRMATION_PENDING"),
+        "DASSURE-IMPL-001": ("ES-GPS-IMPLCOMP-001", "IMPLEMENTATION_COMPLETION_CRITERIA_MATRIX.csv", "IMPLEMENTATION_COMPLETION_NOT_VERIFIED"),
+        "DASSURE-PRODREADY-001": ("ES-GPS-PRODREADY-001", "PRODUCTION_READINESS_GATE_MATRIX.csv", "PRODUCTION_READINESS_NOT_ASSESSED"),
+        "DASSURE-PRIVEFF-001": ("ES-GPS-PRIVEFF-001", "PRIVACY_CONTROL_EFFECTIVENESS_MATRIX.csv", "PRIVACY_REQUIREMENTS_DEFINED_OPERATING_EFFECTIVENESS_NOT_VERIFIED"),
+        "DASSURE-BRANCH-001": ("ES-GPS-BRANCH-001", "REPOSITORY_BRANCH_PROTECTION_CONTROL_MATRIX.csv", "BRANCH_PROTECTION_REQUIREMENTS_DEFINED_ENFORCEMENT_NOT_VERIFIED"),
+        "DASSURE-ANCHOR-001": ("ES-GPS-ANCHOR-001", "EXTERNAL_INTEGRITY_ANCHORING_CONTROL_MATRIX.csv", "INTERNAL_CHECKSUM_COMPLETE_EXTERNAL_INTEGRITY_ANCHOR_NOT_IMPLEMENTED"),
+    }
+    by_id = {r["assurance_domain_id"]: r for r in rows}
+    if len(rows) != 6:
+        errors.append(f"expected 6 downstream assurance domains, found {len(rows)}")
+    data_ids = {r["assurance_domain_id"] for r in data.get("downstream_assurance_domains", [])}
+    if data_ids != set(required):
+        errors.append(f"machine-readable downstream domain ids mismatch: {sorted(data_ids)}")
+    rule_ids = {r["rule_id"] for r in data.get("normative_rule_catalog", [])}
+    for domain_id, (rule_id, artifact, current_status) in required.items():
+        row = by_id.get(domain_id)
+        if not row:
+            errors.append(f"missing domain {domain_id}")
+            continue
+        if rule_id not in row["governing_rule_ids"] or rule_id not in rule_ids:
+            errors.append(f"{domain_id} missing normative rule {rule_id}")
+        if "ES-GPS-DOWNSTREAM-001" not in row["governing_rule_ids"]:
+            errors.append(f"{domain_id} missing downstream non-overclaim rule")
+        if not (root / artifact).exists():
+            errors.append(f"{domain_id} missing evidence artifact {artifact}")
+        template = row["future_evidence_artifact"].split("; ")[-1]
+        if not (root / template).exists():
+            errors.append(f"{domain_id} missing future evidence template {template}")
+        if not row["required_owner"]:
+            errors.append(f"{domain_id} missing owner")
+        if row["required_second_reviewer"] != SECOND_REVIEWER_ID:
+            errors.append(f"{domain_id} missing designated second reviewer")
+        if "BLOCKED" not in row["blocking_statuses"] or not row["blocking_statuses"]:
+            errors.append(f"{domain_id} missing blocking conditions")
+        if not row["prohibited_claims"]:
+            errors.append(f"{domain_id} missing prohibited-overclaim language")
+        if current_status not in row["notes"]:
+            errors.append(f"{domain_id} missing truthful current status {current_status}")
+        statuses = {s.strip() for s in row["permitted_statuses"].split(";")}
+        if not statuses <= set(DOWNSTREAM_STATUS_VALUES):
+            errors.append(f"{domain_id} has uncontrolled statuses {sorted(statuses - set(DOWNSTREAM_STATUS_VALUES))}")
+    poc = read_csv(root / "PROHIBITED_OVERCLAIM_MATRIX.csv")
+    poc_rules = " ".join(r["rule_ids"] for r in poc)
+    for rule_id, _, _ in required.values():
+        if rule_id not in poc_rules:
+            errors.append(f"prohibited-overclaim matrix missing {rule_id}")
+    core_rules = {r["protected_rule_id"] for r in read_csv(root / "NON_WAIVABLE_CORE_MATRIX.csv")}
+    for rule_id, _, _ in required.values():
+        if rule_id not in core_rules:
+            errors.append(f"non-waivable core missing {rule_id}")
+    if "ES-GPS-DOWNSTREAM-001" not in core_rules:
+        errors.append("non-waivable core missing ES-GPS-DOWNSTREAM-001")
+    return not errors, "\n".join(errors or ["downstream assurance domains verified"])
+
+
+def check_downstream_approval_records(root: Path) -> tuple[bool, str]:
+    errors = []
+    files = [
+        "FOUNDER_REVIEW_EXECUTIVE_SUMMARY.md",
+        "FOUNDER_REVIEW_HIGHLIGHTS.md",
+        "FOUNDER_RESIDUAL_RISK_AND_LIMITATION_SUMMARY.md",
+        "RECOMMENDED_FOUNDER_ACTION.md",
+        "TWO_REVIEW_CYCLE_SUFFICIENCY_MEMORANDUM.md",
+        "FOUNDER_FINAL_APPROVAL_RECORD_TEMPLATE.md",
+        "FOUNDER_DECISION_TABLE.csv",
+    ]
+    false_completed = [
+        "LEGAL_COMPLIANCE_VERIFIED",
+        "IMPLEMENTATION_COMPLETION_VERIFIED",
+        "PRODUCTION_READY_NO_EXCEPTIONS",
+        "PRODUCTION_READY_WITH_EXPRESS_EXCEPTIONS",
+        "LIVE_PRIVACY_EFFECTIVENESS_VERIFIED",
+        "BRANCH_PROTECTION_ENFORCED",
+        "EXTERNAL_INTEGRITY_ANCHORED",
+    ]
+    required_statements = [
+        "Approval does not itself establish that any of those outcomes has been completed or verified",
+        "does not authorize activation, implementation, pilot use, production use",
+        "legal compliance, implementation completion, production readiness, live privacy effectiveness, branch-protection enforcement, or external integrity anchoring",
+    ]
+    combined = []
+    for name in files:
+        path = root / name
+        if not path.exists():
+            errors.append(f"missing approval/founder record {name}")
+            continue
+        text = path.read_text(encoding="utf-8")
+        combined.append(text)
+        for token in false_completed:
+            if token in text:
+                errors.append(f"{name} contains unverified completed downstream claim {token}")
+    all_text = "\n".join(combined)
+    for statement in required_statements:
+        if statement not in all_text:
+            errors.append(f"Founder materials missing statement fragment: {statement}")
+    return not errors, "\n".join(errors or ["approval records preserve downstream non-overclaim posture"])
+
+
+def check_downstream_closure_regression(root: Path) -> tuple[bool, str]:
+    rows = read_csv(root / "VALID_FINDINGS_CLOSURE_REGISTER.csv")
+    errors = []
+    for row in rows:
+        if row["blocking_status"] == "OPEN_BLOCKING":
+            errors.append(f"unexpected open blocking row {row['finding_key']}")
+        if row["final_status"] not in {"VALID_FULLY_REMEDIATED", "VALID_REMEDIATED_WITH_NONBLOCKING_LIMITATION", "DUPLICATIVE_MAPPED_TO_CONTROLLING_FINDING", "NOT_APPLICABLE_WITH_RATIONALE"}:
+            errors.append(f"unexpected final status {row['finding_key']}: {row['final_status']}")
+    return not errors, "\n".join(errors or [f"closure rows remain nonblocking: {len(rows)} rows"])
 
 
 def write_manifest_and_checksums(root: Path) -> None:
@@ -1520,6 +2253,9 @@ def run_tests(root: Path = PACKAGE_DIR) -> int:
         checks.append((f"schema_rejects_{p.stem}", bool(schema_validate(read_json(p), schema)), "invalid fixture rejected"))
     checks.append(("overclaim_negative_fixture", bool(overclaim_violations((root / "test_fixtures" / "prohibited_overclaim.txt").read_text(encoding="utf-8"))), "overclaim detected"))
     checks.append(("qualified_status_fixture", not overclaim_violations((root / "test_fixtures" / "qualified_status_statement.txt").read_text(encoding="utf-8")), "qualified statement accepted"))
+    checks.append(("documentary_approval_downstream_unverified_fixture", not overclaim_violations((root / "test_fixtures" / "documentary_approval_production_unverified.txt").read_text(encoding="utf-8")), "documentary approval with unverified production accepted"))
+    for p in sorted((root / "test_fixtures").glob("false_*_claim.txt")):
+        checks.append((f"downstream_overclaim_rejects_{p.stem}", bool(overclaim_violations(p.read_text(encoding="utf-8"))), "false downstream claim rejected"))
     with tempfile.TemporaryDirectory() as tmp:
         temp_root = Path(tmp) / root.name
         shutil.copytree(root, temp_root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
