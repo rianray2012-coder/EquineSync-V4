@@ -10,6 +10,8 @@ Status: `PACKAGING_READY_FOR_BOUNDED_REREVIEW; CONTENT_REVISION_REQUIRED; NOT_AD
 
 Authority boundary: `NOT_ADOPTED; NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; FOUNDER_REVIEW_REQUIRED; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED`.
 
+Authoritative validator: `python3 VALIDATION/validate_tier1_documents_03_10_v4.py --package-root .`.
+
 This package performs bounded V4 remediation for PR #90. It is packaging-ready for bounded rereview and content-revision-required because unresolved findings remain open and no independent closure review has closed them.
 
 It does not adopt, activate, implement, deploy, merge, certify, waive, accept risk, assert Founder approval, or close unresolved findings.

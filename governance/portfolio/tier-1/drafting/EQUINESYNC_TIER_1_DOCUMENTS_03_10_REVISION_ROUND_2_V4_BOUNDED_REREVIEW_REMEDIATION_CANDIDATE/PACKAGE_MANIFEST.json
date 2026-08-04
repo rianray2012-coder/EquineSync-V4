@@ -579,7 +579,7 @@
     {
       "byte_length": 4436,
       "path": "MANIFEST_OF_MANIFESTS.csv",
-      "sha256": "db7b69a7e2d652ec56b992a3ebd11450110c6c852d9af6b32806c866ccbd851f"
+      "sha256": "a5560aea025f1abdd840c523dcdeabba05aaf53cdb111871ff3efb2fcfc41745"
     },
     {
       "byte_length": 7079,
@@ -632,9 +632,9 @@
       "sha256": "832a2a0a94a0f25ea1d93720b5f950e68ef2cfbf165d20fa2c3d4e4d5a0f9958"
     },
     {
-      "byte_length": 1017,
+      "byte_length": 1119,
       "path": "README_FIRST.md",
-      "sha256": "e40f10c248cbcf867ea6c9d5cfcc8f3d3c7138eac1c71a6c88da54a7b671c5ea"
+      "sha256": "afdfc03cacb64c93bf76c3bad195965853ec5a7f47bf0d01386f10d93f90de83"
     },
     {
       "byte_length": 1060,
@@ -689,7 +689,7 @@
     {
       "byte_length": 2214,
       "path": "ROUND_3_V3_REVIEW_REMEDIATION/V3_REVIEW_AUTHENTICATION_RECORD.json",
-      "sha256": "281045e423c50c111ce1c4a922d0df50195db42841ec9fbe889a4bb3fadf4a28"
+      "sha256": "380e83ec978c9aa36ccad757fe3f9f2d88be56c19d3cdcc06acdeffdfac1f9c9"
     },
     {
       "byte_length": 1295,
@@ -897,9 +897,9 @@
       "sha256": "13925ffd9fb7866b654ad76c4a0144d55a984c41541d2a17b0de898cd681804a"
     },
     {
-      "byte_length": 12617,
+      "byte_length": 569,
       "path": "VALIDATION/validate_tier1_documents_03_10_rr2.py",
-      "sha256": "3f18c609c313fbfa82b2845f5ffce0ecb6f0894097208c38a355edbfbddbab4c"
+      "sha256": "3e8b5bc7d5d783fdce3909165d06c82412381cab70d3e37a4ba2fcf0895f83c6"
     },
     {
       "byte_length": 568,
