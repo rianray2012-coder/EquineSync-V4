@@ -1,0 +1,26 @@
+{
+  "directory": "00_PROGRAM_CONTROL",
+  "files": [
+    {
+      "byte_length": 3055,
+      "path": "AUTHENTICATED_REPOSITORY_AND_PACKAGE_CUSTODY_RECORD_V2.json",
+      "sha256": "1bb820c3ca5b14e57a3b57e8f1eaeb6c2af0d3f386c007e3067df6db0cedf26d"
+    },
+    {
+      "byte_length": 866,
+      "path": "REPOSITORY_STATE_RECONCILIATION_RECORD.md",
+      "sha256": "262f4fccf1304e9cb4188a478edbc6db9f0685843667c27a089779137e7003fa"
+    },
+    {
+      "byte_length": 350,
+      "path": "ROUND_2_PACKAGE_ZIP_RECORD.json",
+      "sha256": "aeea7584429e602f0bebb94092c6358327e4c9ad8294e6166d1319b01838f1f6"
+    },
+    {
+      "byte_length": 3151733,
+      "path": "SOURCE_AUTHENTICATION_AND_REPOSITORY_RECONCILIATION.json",
+      "sha256": "4bc13c7737c5baf8cf5bd956c23002d15cffb0e10530ee93e018e997d938d879"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

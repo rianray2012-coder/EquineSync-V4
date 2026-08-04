@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "failure_capable": {
+      "type": "string"
+    },
+    "implementation_status": {
+      "type": "string"
+    },
+    "invalid_combination": {
+      "type": "string"
+    },
+    "rule_id": {
+      "type": "string"
+    },
+    "validation_effect": {
+      "type": "string"
+    },
+    "validator_expression": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "rule_id",
+    "invalid_combination",
+    "validator_expression",
+    "validation_effect",
+    "implementation_status",
+    "failure_capable"
+  ],
+  "title": "04_AUTHORITY_LIFECYCLE_REGISTER/INVALID_STATE_RULES.csv",
+  "type": "object"
+}

@@ -1,0 +1,1960 @@
+{
+  "archive_hash_location": "detached .sha256 and reviewer handoff report generated after archive creation",
+  "authority_boundary": "NOT_ADOPTED; NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; FOUNDER_REVIEW_REQUIRED; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED",
+  "failures": 0,
+  "package_root": "/Users/rianray/Documents/Codex/2026-08-01/fi/work/tier1_remediation_2026-08-04/EquineSync-V4-remediation/governance/portfolio/tier-1/drafting/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V3_REVIEW_FINDINGS_REMEDIATION_CANDIDATE",
+  "package_status": "REVISION_REQUIRED_PENDING_OUTSIDE_REVIEWER_REREVIEW",
+  "results": [
+    {
+      "check": "root_manifest:00_PROGRAM_CONTROL/AUTHENTICATED_REPOSITORY_AND_PACKAGE_CUSTODY_RECORD_V2.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:00_PROGRAM_CONTROL/REPOSITORY_STATE_RECONCILIATION_RECORD.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:00_PROGRAM_CONTROL/ROUND_2_PACKAGE_ZIP_RECORD.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:00_PROGRAM_CONTROL/SOURCE_AUTHENTICATION_AND_REPOSITORY_RECONCILIATION.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:00_PROGRAM_CONTROL/SOURCE_PACKAGE/EQUINESYNC_TIER_1_DOCUMENTS_03_10_V1_SOURCE.zip",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:03_IMPLEMENTATION_TRACEABILITY/COVERAGE_METRICS_BY_DOMAIN.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:03_IMPLEMENTATION_TRACEABILITY/EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:03_IMPLEMENTATION_TRACEABILITY/EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:03_IMPLEMENTATION_TRACEABILITY/REQUIREMENT_TRACEABILITY_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:03_IMPLEMENTATION_TRACEABILITY/TRACEABILITY_MODEL.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:03_IMPLEMENTATION_TRACEABILITY/tests/test_document_03_rr2_validator.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:03_IMPLEMENTATION_TRACEABILITY/validators/validate_document_03_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:04_AUTHORITY_LIFECYCLE_REGISTER/AUTHORITY_LIFECYCLE_MODEL.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:04_AUTHORITY_LIFECYCLE_REGISTER/AUTHORITY_LIFECYCLE_STATE_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:04_AUTHORITY_LIFECYCLE_REGISTER/EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:04_AUTHORITY_LIFECYCLE_REGISTER/EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:04_AUTHORITY_LIFECYCLE_REGISTER/INVALID_STATE_RULES.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:04_AUTHORITY_LIFECYCLE_REGISTER/LIFECYCLE_TRANSITION_MATRIX.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:04_AUTHORITY_LIFECYCLE_REGISTER/tests/test_document_04_rr2_validator.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:04_AUTHORITY_LIFECYCLE_REGISTER/validators/validate_document_04_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:05_FOUNDER_DECISION_REGISTER/EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:05_FOUNDER_DECISION_REGISTER/EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:05_FOUNDER_DECISION_REGISTER/tests/test_document_05_rr2_validator.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:05_FOUNDER_DECISION_REGISTER/validators/validate_document_05_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/DUPLICATE_AND_STALENESS_ANALYSIS.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/tests/test_document_06_rr2_validator.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/validators/validate_document_06_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:07_OWNERSHIP_STEWARDSHIP_REVIEW/EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:07_OWNERSHIP_STEWARDSHIP_REVIEW/EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:07_OWNERSHIP_STEWARDSHIP_REVIEW/OWNERSHIP_ACCOUNTABILITY_MATRIX.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:07_OWNERSHIP_STEWARDSHIP_REVIEW/REVIEW_CALENDAR.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:07_OWNERSHIP_STEWARDSHIP_REVIEW/VACANCY_AND_SUCCESSION_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:07_OWNERSHIP_STEWARDSHIP_REVIEW/tests/test_document_07_rr2_validator.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:07_OWNERSHIP_STEWARDSHIP_REVIEW/validators/validate_document_07_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:08_SOURCE_RECONCILIATION/DUPLICATE_COUNTERPART_CLUSTER_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:08_SOURCE_RECONCILIATION/EQUINESYNC_SOURCE_PROVENANCE_AUTHORITY_AND_SUPERSESSION_RECONCILIATION_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:08_SOURCE_RECONCILIATION/EQUINESYNC_SOURCE_PROVENANCE_AUTHORITY_AND_SUPERSESSION_RECONCILIATION_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:08_SOURCE_RECONCILIATION/SOURCE_AUTHORITY_DISPOSITION_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:08_SOURCE_RECONCILIATION/SOURCE_AUTHORITY_DISPOSITION_REGISTER.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:08_SOURCE_RECONCILIATION/SOURCE_DISPOSITION_DASHBOARD.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:08_SOURCE_RECONCILIATION/tests/test_document_08_rr2_validator.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:08_SOURCE_RECONCILIATION/validators/validate_document_08_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:09_WORKSTREAM_PR_BRANCH_DISPOSITION/EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:09_WORKSTREAM_PR_BRANCH_DISPOSITION/EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_DISPOSITION_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:09_WORKSTREAM_PR_BRANCH_DISPOSITION/tests/test_document_09_rr2_validator.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:09_WORKSTREAM_PR_BRANCH_DISPOSITION/validators/validate_document_09_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/AUDIT_MODEL.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/AUDIT_REQUIREMENTS_MATRIX.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_INDEX.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_PURPOSE_SPECIFICITY_EVIDENCE_TABLE.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/01_INTERNAL_DOCUMENTARY_REVIEW_PLAN.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/03_SOURCE_MANIFEST.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/04_EVIDENCE_INDEX.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/05_SAMPLING_RECORD.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/07_CONFLICT_DISCLOSURE.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/08_FINDING_SCHEDULE.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/09_RESIDUAL_RISK_SCHEDULE.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/10_FOUNDER_ATTESTATION_SCHEDULE.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/11_CLOSING_EXHIBITS_INDEX.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/13_ADOPTION_RECORD.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/14_ACCESSION_RECEIPT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/15_POST_MERGE_CUSTODY_RECEIPT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/16_FINAL_SELF_DECLARATION_RECORD.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/17_BOUNDED_SCOPE_SELF_DECLARATION_RECORD.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/18_REOPENING_NOTICE.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/templates/19_PERIODIC_SELF_DECLARATION_REFRESH_RECORD.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/tests/test_document_10_rr2_validator.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:10_CLOSING_AUDIT_PROTOCOL/validators/validate_document_10_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:CROSS_DOCUMENT_RECONCILIATION_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/03_IMPLEMENTATION_TRACEABILITY__COVERAGE_METRICS_BY_DOMAIN_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/03_IMPLEMENTATION_TRACEABILITY__REQUIREMENT_TRACEABILITY_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__AUTHORITY_LIFECYCLE_STATE_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__INVALID_STATE_RULES_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__LIFECYCLE_TRANSITION_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/05_FOUNDER_DECISION_REGISTER__FOUNDER_DECISION_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__DUPLICATE_AND_STALENESS_ANALYSIS_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__OWNERSHIP_ACCOUNTABILITY_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__REVIEW_CALENDAR_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__VACANCY_AND_SUCCESSION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__DUPLICATE_COUNTERPART_CLUSTER_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__SOURCE_AUTHORITY_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__SOURCE_DISPOSITION_DASHBOARD_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/09_WORKSTREAM_PR_BRANCH_DISPOSITION__WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/10_CLOSING_AUDIT_PROTOCOL__AUDIT_REQUIREMENTS_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/10_CLOSING_AUDIT_PROTOCOL__TEMPLATE_INDEX_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/CONTROLLED_VOCABULARY_DEFINITIONS_V3.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/EXTERNAL_REVIEW__EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/FOUNDER_DECISION_PACKET_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/MANIFEST_OF_MANIFESTS_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/TIER_1_DOCUMENT_INVENTORY_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:DATA_DICTIONARIES/UNRESOLVED_ISSUE_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:EXTERNAL_REVIEW/ACCOMPANYING_STATEMENT_FOR_INDEPENDENT_EXTERNAL_REVIEW.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:EXTERNAL_REVIEW/EQUINESYNC_T1_RR2_EXTERNAL_STANDARDS_BENCHMARK_REVIEW.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:EXTERNAL_REVIEW/EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:EXTERNAL_REVIEW/EXTERNAL_REVIEW_REMEDIATION_SUMMARY.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:FOUNDER_DECISION_PACKET.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:FOUNDER_DECISION_PACKET.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:INDEPENDENT_CLOSURE_REREVIEW_PACKAGE_AND_PROMPT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:MANIFEST_OF_MANIFESTS.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/EQUINESYNC_TIER_1_DOCS_03_10_CODEX_REMEDIATION_DIRECTIVE.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/EQUINESYNC_TIER_1_DOCS_03_10_CONSOLIDATED_OUTSIDE_REVIEW_REGISTER.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/PER_FINDING_CLOSURE_EVIDENCE_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/README_FIRST.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/SOURCE_REVIEWS/CLAUDE_OUTSIDE_REVIEW.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/SOURCE_REVIEWS/CURSOR_OUTSIDE_REVIEW.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/SOURCE_REVIEWS/PERPLEXITY_OUTSIDE_REVIEW.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:OUTSIDE_REVIEW/T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:README_FIRST.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:REVIEWS/TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_CROSS_DOCUMENT_RECONCILIATION_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:REVISION_ROUND_2_DELTA_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:REVISION_ROUND_2_TO_V2_DELTA_REPORT.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEWS/CLAUDE_V2_REMEDIATION_CANDIDATE_FEEDBACK.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEWS/PERPLEXITY_V2_REMEDIATION_REVIEW.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEW_AUTHENTICATION_RECORD.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:ROUND_2_V2_REVIEW_REMEDIATION/V3_REMEDIATION_SUMMARY.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/03_IMPLEMENTATION_TRACEABILITY__COVERAGE_METRICS_BY_DOMAIN_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/03_IMPLEMENTATION_TRACEABILITY__REQUIREMENT_TRACEABILITY_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__AUTHORITY_LIFECYCLE_STATE_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__INVALID_STATE_RULES_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__LIFECYCLE_TRANSITION_MATRIX_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/05_FOUNDER_DECISION_REGISTER__FOUNDER_DECISION_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__DUPLICATE_AND_STALENESS_ANALYSIS_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__OWNERSHIP_ACCOUNTABILITY_MATRIX_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__REVIEW_CALENDAR_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__VACANCY_AND_SUCCESSION_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/08_SOURCE_RECONCILIATION__DUPLICATE_COUNTERPART_CLUSTER_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/08_SOURCE_RECONCILIATION__SOURCE_AUTHORITY_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/08_SOURCE_RECONCILIATION__SOURCE_DISPOSITION_DASHBOARD_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/09_WORKSTREAM_PR_BRANCH_DISPOSITION__WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/10_CLOSING_AUDIT_PROTOCOL__AUDIT_REQUIREMENTS_MATRIX_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/10_CLOSING_AUDIT_PROTOCOL__TEMPLATE_INDEX_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/EXTERNAL_REVIEW__EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/FOUNDER_DECISION_PACKET_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/MANIFEST_OF_MANIFESTS_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER_V3.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/TIER_1_DOCUMENT_INVENTORY_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SCHEMAS/UNRESOLVED_ISSUE_REGISTER_csv.schema.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:SHARED_TIER_1_DOCUMENTARY_STANDARD_REVISION_ROUND_2_V1.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:TIER_1_DOCUMENT_INVENTORY.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:UNRESOLVED_ISSUE_REGISTER.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/ci_failure_without_analysis.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/decision_text_lifecycle_count_mismatch.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/duplicate_templates.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/missing_external_finding.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/non_requirement_as_normative.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/orphan_duplicate_cluster.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/path_keyword_authority_elevation.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/preselected_founder_disposition.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/production_claim_without_evidence.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/repeated_identical_markdown_sections.md",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/FIXTURES/negative/unknown_invalid_state_rule.csv",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/execute_negative_fixtures_v3.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/validate_tier1_documents_03_10_rr2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/validate_tier1_documents_03_10_v2.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION/validate_tier1_documents_03_10_v3.py",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_manifest:VALIDATION_RESULTS/STANDALONE_EXTRACTED_PACKAGE_VALIDATION_REPORT_V3.json",
+      "detail": "root manifest hash and byte-length binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:00_PROGRAM_CONTROL/AUTHENTICATED_REPOSITORY_AND_PACKAGE_CUSTODY_RECORD_V2.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:00_PROGRAM_CONTROL/REPOSITORY_STATE_RECONCILIATION_RECORD.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:00_PROGRAM_CONTROL/ROUND_2_PACKAGE_ZIP_RECORD.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:00_PROGRAM_CONTROL/SOURCE_AUTHENTICATION_AND_REPOSITORY_RECONCILIATION.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:00_PROGRAM_CONTROL/SOURCE_PACKAGE/EQUINESYNC_TIER_1_DOCUMENTS_03_10_V1_SOURCE.zip",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:03_IMPLEMENTATION_TRACEABILITY/COVERAGE_METRICS_BY_DOMAIN.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:03_IMPLEMENTATION_TRACEABILITY/EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:03_IMPLEMENTATION_TRACEABILITY/EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:03_IMPLEMENTATION_TRACEABILITY/REQUIREMENT_TRACEABILITY_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:03_IMPLEMENTATION_TRACEABILITY/TRACEABILITY_MODEL.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:03_IMPLEMENTATION_TRACEABILITY/tests/test_document_03_rr2_validator.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:03_IMPLEMENTATION_TRACEABILITY/validators/validate_document_03_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:04_AUTHORITY_LIFECYCLE_REGISTER/AUTHORITY_LIFECYCLE_MODEL.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:04_AUTHORITY_LIFECYCLE_REGISTER/AUTHORITY_LIFECYCLE_STATE_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:04_AUTHORITY_LIFECYCLE_REGISTER/EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:04_AUTHORITY_LIFECYCLE_REGISTER/EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:04_AUTHORITY_LIFECYCLE_REGISTER/INVALID_STATE_RULES.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:04_AUTHORITY_LIFECYCLE_REGISTER/LIFECYCLE_TRANSITION_MATRIX.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:04_AUTHORITY_LIFECYCLE_REGISTER/tests/test_document_04_rr2_validator.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:04_AUTHORITY_LIFECYCLE_REGISTER/validators/validate_document_04_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:05_FOUNDER_DECISION_REGISTER/EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:05_FOUNDER_DECISION_REGISTER/EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:05_FOUNDER_DECISION_REGISTER/FOUNDER_DECISION_DISPOSITION_REGISTER.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:05_FOUNDER_DECISION_REGISTER/tests/test_document_05_rr2_validator.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:05_FOUNDER_DECISION_REGISTER/validators/validate_document_05_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/DUPLICATE_AND_STALENESS_ANALYSIS.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/tests/test_document_06_rr2_validator.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/validators/validate_document_06_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:07_OWNERSHIP_STEWARDSHIP_REVIEW/EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:07_OWNERSHIP_STEWARDSHIP_REVIEW/EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:07_OWNERSHIP_STEWARDSHIP_REVIEW/OWNERSHIP_ACCOUNTABILITY_MATRIX.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:07_OWNERSHIP_STEWARDSHIP_REVIEW/REVIEW_CALENDAR.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:07_OWNERSHIP_STEWARDSHIP_REVIEW/VACANCY_AND_SUCCESSION_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:07_OWNERSHIP_STEWARDSHIP_REVIEW/tests/test_document_07_rr2_validator.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:07_OWNERSHIP_STEWARDSHIP_REVIEW/validators/validate_document_07_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:08_SOURCE_RECONCILIATION/DUPLICATE_COUNTERPART_CLUSTER_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:08_SOURCE_RECONCILIATION/EQUINESYNC_SOURCE_PROVENANCE_AUTHORITY_AND_SUPERSESSION_RECONCILIATION_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:08_SOURCE_RECONCILIATION/EQUINESYNC_SOURCE_PROVENANCE_AUTHORITY_AND_SUPERSESSION_RECONCILIATION_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:08_SOURCE_RECONCILIATION/SOURCE_AUTHORITY_DISPOSITION_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:08_SOURCE_RECONCILIATION/SOURCE_AUTHORITY_DISPOSITION_REGISTER.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:08_SOURCE_RECONCILIATION/SOURCE_DISPOSITION_DASHBOARD.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:08_SOURCE_RECONCILIATION/tests/test_document_08_rr2_validator.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:08_SOURCE_RECONCILIATION/validators/validate_document_08_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:09_WORKSTREAM_PR_BRANCH_DISPOSITION/EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:09_WORKSTREAM_PR_BRANCH_DISPOSITION/EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_DISPOSITION_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:09_WORKSTREAM_PR_BRANCH_DISPOSITION/WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:09_WORKSTREAM_PR_BRANCH_DISPOSITION/tests/test_document_09_rr2_validator.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:09_WORKSTREAM_PR_BRANCH_DISPOSITION/validators/validate_document_09_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/AUDIT_MODEL.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/AUDIT_REQUIREMENTS_MATRIX.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_INDEX.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/TEMPLATE_PURPOSE_SPECIFICITY_EVIDENCE_TABLE.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/01_INTERNAL_DOCUMENTARY_REVIEW_PLAN.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/03_SOURCE_MANIFEST.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/04_EVIDENCE_INDEX.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/05_SAMPLING_RECORD.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/07_CONFLICT_DISCLOSURE.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/08_FINDING_SCHEDULE.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/09_RESIDUAL_RISK_SCHEDULE.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/10_FOUNDER_ATTESTATION_SCHEDULE.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/11_CLOSING_EXHIBITS_INDEX.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/13_ADOPTION_RECORD.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/14_ACCESSION_RECEIPT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/15_POST_MERGE_CUSTODY_RECEIPT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/16_FINAL_SELF_DECLARATION_RECORD.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/17_BOUNDED_SCOPE_SELF_DECLARATION_RECORD.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/18_REOPENING_NOTICE.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/templates/19_PERIODIC_SELF_DECLARATION_REFRESH_RECORD.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/tests/test_document_10_rr2_validator.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:10_CLOSING_AUDIT_PROTOCOL/validators/validate_document_10_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:CROSS_DOCUMENT_RECONCILIATION_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/03_IMPLEMENTATION_TRACEABILITY__COVERAGE_METRICS_BY_DOMAIN_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/03_IMPLEMENTATION_TRACEABILITY__REQUIREMENT_TRACEABILITY_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__AUTHORITY_LIFECYCLE_STATE_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__INVALID_STATE_RULES_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/04_AUTHORITY_LIFECYCLE_REGISTER__LIFECYCLE_TRANSITION_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/05_FOUNDER_DECISION_REGISTER__FOUNDER_DECISION_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__DUPLICATE_AND_STALENESS_ANALYSIS_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__OWNERSHIP_ACCOUNTABILITY_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__REVIEW_CALENDAR_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/07_OWNERSHIP_STEWARDSHIP_REVIEW__VACANCY_AND_SUCCESSION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__DUPLICATE_COUNTERPART_CLUSTER_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__SOURCE_AUTHORITY_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/08_SOURCE_RECONCILIATION__SOURCE_DISPOSITION_DASHBOARD_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/09_WORKSTREAM_PR_BRANCH_DISPOSITION__WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/10_CLOSING_AUDIT_PROTOCOL__AUDIT_REQUIREMENTS_MATRIX_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/10_CLOSING_AUDIT_PROTOCOL__TEMPLATE_INDEX_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/CONTROLLED_VOCABULARY_DEFINITIONS_V3.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/EXTERNAL_REVIEW__EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/FOUNDER_DECISION_PACKET_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/MANIFEST_OF_MANIFESTS_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/TIER_1_DOCUMENT_INVENTORY_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:DATA_DICTIONARIES/UNRESOLVED_ISSUE_REGISTER_csv_DATA_DICTIONARY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:EXTERNAL_REVIEW/ACCOMPANYING_STATEMENT_FOR_INDEPENDENT_EXTERNAL_REVIEW.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:EXTERNAL_REVIEW/EQUINESYNC_T1_RR2_EXTERNAL_STANDARDS_BENCHMARK_REVIEW.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:EXTERNAL_REVIEW/EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:EXTERNAL_REVIEW/EXTERNAL_REVIEW_REMEDIATION_SUMMARY.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:FOUNDER_DECISION_PACKET.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:FOUNDER_DECISION_PACKET.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:INDEPENDENT_CLOSURE_REREVIEW_PACKAGE_AND_PROMPT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:MANIFEST_OF_MANIFESTS.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/EQUINESYNC_TIER_1_DOCS_03_10_CODEX_REMEDIATION_DIRECTIVE.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/EQUINESYNC_TIER_1_DOCS_03_10_CONSOLIDATED_OUTSIDE_REVIEW_REGISTER.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/PER_FINDING_CLOSURE_EVIDENCE_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/README_FIRST.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/SOURCE_REVIEWS/CLAUDE_OUTSIDE_REVIEW.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/SOURCE_REVIEWS/CURSOR_OUTSIDE_REVIEW.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/SOURCE_REVIEWS/PERPLEXITY_OUTSIDE_REVIEW.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:OUTSIDE_REVIEW/T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:README_FIRST.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:REVIEWS/TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_CROSS_DOCUMENT_RECONCILIATION_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:REVISION_ROUND_2_DELTA_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:REVISION_ROUND_2_TO_V2_DELTA_REPORT.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEWS/CLAUDE_V2_REMEDIATION_CANDIDATE_FEEDBACK.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEWS/PERPLEXITY_V2_REMEDIATION_REVIEW.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEW_AUTHENTICATION_RECORD.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:ROUND_2_V2_REVIEW_REMEDIATION/V3_REMEDIATION_SUMMARY.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/03_IMPLEMENTATION_TRACEABILITY__COVERAGE_METRICS_BY_DOMAIN_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/03_IMPLEMENTATION_TRACEABILITY__REQUIREMENT_TRACEABILITY_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__AUTHORITY_LIFECYCLE_STATE_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__INVALID_STATE_RULES_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/04_AUTHORITY_LIFECYCLE_REGISTER__LIFECYCLE_TRANSITION_MATRIX_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/05_FOUNDER_DECISION_REGISTER__FOUNDER_DECISION_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__DUPLICATE_AND_STALENESS_ANALYSIS_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__OWNERSHIP_ACCOUNTABILITY_MATRIX_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__REVIEW_CALENDAR_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/07_OWNERSHIP_STEWARDSHIP_REVIEW__VACANCY_AND_SUCCESSION_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/08_SOURCE_RECONCILIATION__DUPLICATE_COUNTERPART_CLUSTER_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/08_SOURCE_RECONCILIATION__SOURCE_AUTHORITY_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/08_SOURCE_RECONCILIATION__SOURCE_DISPOSITION_DASHBOARD_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/09_WORKSTREAM_PR_BRANCH_DISPOSITION__WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/10_CLOSING_AUDIT_PROTOCOL__AUDIT_REQUIREMENTS_MATRIX_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/10_CLOSING_AUDIT_PROTOCOL__TEMPLATE_INDEX_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/EXTERNAL_REVIEW__EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/FOUNDER_DECISION_PACKET_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/MANIFEST_OF_MANIFESTS_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER_V3.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/TIER_1_DOCUMENT_INVENTORY_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SCHEMAS/UNRESOLVED_ISSUE_REGISTER_csv.schema.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:SHARED_TIER_1_DOCUMENTARY_STANDARD_REVISION_ROUND_2_V1.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:TIER_1_DOCUMENT_INVENTORY.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:UNRESOLVED_ISSUE_REGISTER.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/ci_failure_without_analysis.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/decision_text_lifecycle_count_mismatch.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/duplicate_templates.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/missing_external_finding.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/non_requirement_as_normative.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/orphan_duplicate_cluster.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/path_keyword_authority_elevation.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/preselected_founder_disposition.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/production_claim_without_evidence.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/repeated_identical_markdown_sections.md",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/FIXTURES/negative/unknown_invalid_state_rule.csv",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/execute_negative_fixtures_v3.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/validate_tier1_documents_03_10_rr2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/validate_tier1_documents_03_10_v2.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION/validate_tier1_documents_03_10_v3.py",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "root_checksum:VALIDATION_RESULTS/STANDALONE_EXTRACTED_PACKAGE_VALIDATION_REPORT_V3.json",
+      "detail": "root checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests_no_root_self_reference",
+      "detail": "root/self references excluded",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests_only_manifest_checksum_files",
+      "detail": "only per-directory manifest/checksum files",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:00_PROGRAM_CONTROL/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:00_PROGRAM_CONTROL/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:03_IMPLEMENTATION_TRACEABILITY/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:03_IMPLEMENTATION_TRACEABILITY/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:04_AUTHORITY_LIFECYCLE_REGISTER/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:04_AUTHORITY_LIFECYCLE_REGISTER/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:05_FOUNDER_DECISION_REGISTER/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:05_FOUNDER_DECISION_REGISTER/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:07_OWNERSHIP_STEWARDSHIP_REVIEW/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:07_OWNERSHIP_STEWARDSHIP_REVIEW/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:08_SOURCE_RECONCILIATION/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:08_SOURCE_RECONCILIATION/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:09_WORKSTREAM_PR_BRANCH_DISPOSITION/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:09_WORKSTREAM_PR_BRANCH_DISPOSITION/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:10_CLOSING_AUDIT_PROTOCOL/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:10_CLOSING_AUDIT_PROTOCOL/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:DATA_DICTIONARIES/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:DATA_DICTIONARIES/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:OUTSIDE_REVIEW/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:OUTSIDE_REVIEW/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:ROUND_2_V2_REVIEW_REMEDIATION/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:ROUND_2_V2_REVIEW_REMEDIATION/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEWS/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEWS/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:SCHEMAS/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:SCHEMAS/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:VALIDATION/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:VALIDATION/FIXTURES/negative/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:VALIDATION/FIXTURES/negative/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:VALIDATION/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:VALIDATION_RESULTS/CHECKSUMS.sha256",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_of_manifests:VALIDATION_RESULTS/PACKAGE_MANIFEST.json",
+      "detail": "per-directory manifest/checksum binding",
+      "status": "PASS"
+    },
+    {
+      "check": "source_review_ids_populated",
+      "detail": "actual source review identifiers are populated",
+      "status": "PASS"
+    },
+    {
+      "check": "no_partial_remediated_status",
+      "detail": "ambiguous PARTIALLY_REMEDIATED status absent",
+      "status": "PASS"
+    },
+    {
+      "check": "closure_register_distinct",
+      "detail": "closure evidence register is not a byte duplicate",
+      "status": "PASS"
+    },
+    {
+      "check": "doc10_dispute_retained_open",
+      "detail": "Doc 10 dispute conservatively retained open",
+      "status": "PASS"
+    },
+    {
+      "check": "no_eleven_state_wording",
+      "detail": "eleven-state wording absent",
+      "status": "PASS"
+    },
+    {
+      "check": "source_authority_label_scoped",
+      "detail": "unsafe source authority label absent",
+      "status": "PASS"
+    },
+    {
+      "check": "authority_boundary_present",
+      "detail": "controlling boundary present",
+      "status": "PASS"
+    },
+    {
+      "check": "negative_fixtures_execute",
+      "detail": "{\n  \"checks\": [\n    {\n      \"detail\": \"declared state count is not thirteen\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"decision_text_lifecycle_count_mismatch.json\"\n    },\n    {\n      \"detail\": \"preselected Founder disposition detected\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"preselected_founder_disposition.csv\"\n    },\n    {\n      \"detail\": \"external finding missing marker detected\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"missing_external_finding.csv\"\n    },\n    {\n      \"detail\": \"normalized duplicate template bodies detected\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"duplicate_templates.json\"\n    },\n    {\n      \"detail\": \"path keyword authority elevation detected\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"path_keyword_authority_elevation.csv\"\n    },\n    {\n      \"detail\": \"unverified normative requirement detected\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"non_requirement_as_normative.csv\"\n    },\n    {\n      \"detail\": \"unenforced invalid-state rule detected\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"unknown_invalid_state_rule.csv\"\n    },\n    {\n      \"detail\": \"orphan duplicate cluster detected\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"orphan_duplicate_cluster.csv\"\n    },\n    {\n      \"detail\": \"production claim lacks evidence\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"production_claim_without_evidence.csv\"\n    },\n    {\n      \"detail\": \"CI failure lacks analysis\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"ci_failure_without_analysis.csv\"\n    },\n    {\n      \"detail\": \"repeated identical sections detected\",\n      \"expected_failure_detected\": true,\n      \"fixture\": \"repeated_identical_markdown_sections.md\"\n    }\n  ],\n  \"fixture_count\": 11,\n  \"status\": \"PASS\"\n}\n",
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS"
+}

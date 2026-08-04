@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "archival_rules": {
+      "type": "string"
+    },
+    "permitted": {
+      "type": "string"
+    },
+    "permitted_next_state": {
+      "type": "string"
+    },
+    "permitted_starting_state": {
+      "type": "string"
+    },
+    "prohibited_transitions": {
+      "type": "string"
+    },
+    "reactivation_rules": {
+      "type": "string"
+    },
+    "required_authority": {
+      "type": "string"
+    },
+    "required_evidence": {
+      "type": "string"
+    },
+    "reversal_rules": {
+      "type": "string"
+    },
+    "supersession_rules": {
+      "type": "string"
+    },
+    "suspension_rules": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "permitted_starting_state",
+    "permitted_next_state",
+    "permitted",
+    "required_authority",
+    "required_evidence",
+    "prohibited_transitions",
+    "reversal_rules",
+    "suspension_rules",
+    "supersession_rules",
+    "reactivation_rules",
+    "archival_rules"
+  ],
+  "title": "04_AUTHORITY_LIFECYCLE_REGISTER/LIFECYCLE_TRANSITION_MATRIX.csv",
+  "type": "object"
+}

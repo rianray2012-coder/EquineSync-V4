@@ -1,0 +1,121 @@
+{
+  "directory": "SCHEMAS",
+  "files": [
+    {
+      "byte_length": 1710,
+      "path": "03_IMPLEMENTATION_TRACEABILITY__COVERAGE_METRICS_BY_DOMAIN_csv.schema.json",
+      "sha256": "fbac9038f99364b3f1e5b36f6aaf95ad513d5e67fa82b47083c3cbb4daf5eb0f"
+    },
+    {
+      "byte_length": 4979,
+      "path": "03_IMPLEMENTATION_TRACEABILITY__REQUIREMENT_TRACEABILITY_REGISTER_csv.schema.json",
+      "sha256": "a038a4d82fad700d168f57ae67397e1ee0bdc603af1818ca0049a2d2953fb4e8"
+    },
+    {
+      "byte_length": 1771,
+      "path": "04_AUTHORITY_LIFECYCLE_REGISTER__AUTHORITY_LIFECYCLE_STATE_REGISTER_csv.schema.json",
+      "sha256": "f8356a6e8ab859de7fa4a59dba4e3d8a2689897c95df1e3195df49cea7626b7b"
+    },
+    {
+      "byte_length": 714,
+      "path": "04_AUTHORITY_LIFECYCLE_REGISTER__INVALID_STATE_RULES_csv.schema.json",
+      "sha256": "f6afee3164b017e2c9f93309822aa11e408f53467d1fc077de8908dd10993f0c"
+    },
+    {
+      "byte_length": 1144,
+      "path": "04_AUTHORITY_LIFECYCLE_REGISTER__LIFECYCLE_TRANSITION_MATRIX_csv.schema.json",
+      "sha256": "f5472a308f2bfeab7b59d8f873b5aabcc65e71c8694567531d748072bac09d9c"
+    },
+    {
+      "byte_length": 2485,
+      "path": "05_FOUNDER_DECISION_REGISTER__FOUNDER_DECISION_DISPOSITION_REGISTER_csv.schema.json",
+      "sha256": "96f50c55c191ec421281aa76fb4ae7cfbfceaec5dada0b18d85ab0a3d260b8ed"
+    },
+    {
+      "byte_length": 1054,
+      "path": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__DUPLICATE_AND_STALENESS_ANALYSIS_csv.schema.json",
+      "sha256": "5417fe6edb23d91146eb791bce4ccad5b2f6d32690686e96a5227ffdfe1d467b"
+    },
+    {
+      "byte_length": 3636,
+      "path": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS__FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER_csv.schema.json",
+      "sha256": "73b0304114d0403435a667f7a118498df70660a26bd5068bbe50b86357ccedcf"
+    },
+    {
+      "byte_length": 1654,
+      "path": "07_OWNERSHIP_STEWARDSHIP_REVIEW__OWNERSHIP_ACCOUNTABILITY_MATRIX_csv.schema.json",
+      "sha256": "124cc2fe86fb9ab15bf436dcc1483cd2ba905a54f794daddf78b9e56b3957426"
+    },
+    {
+      "byte_length": 1094,
+      "path": "07_OWNERSHIP_STEWARDSHIP_REVIEW__REVIEW_CALENDAR_csv.schema.json",
+      "sha256": "5d032461c07ad694e6ad5544b031dbab140f98a15cc6d06ba4ba21f3d20a872f"
+    },
+    {
+      "byte_length": 530,
+      "path": "07_OWNERSHIP_STEWARDSHIP_REVIEW__VACANCY_AND_SUCCESSION_REGISTER_csv.schema.json",
+      "sha256": "c70ff22b53839e51b482ad563911bc87c992982ec12da28dab022836781546ee"
+    },
+    {
+      "byte_length": 1010,
+      "path": "08_SOURCE_RECONCILIATION__DUPLICATE_COUNTERPART_CLUSTER_REGISTER_csv.schema.json",
+      "sha256": "0c9df7465e7565749530e551b774d94d5e9ab39d6d0a44f75ff113b2691f4d1e"
+    },
+    {
+      "byte_length": 1363,
+      "path": "08_SOURCE_RECONCILIATION__SOURCE_AUTHORITY_DISPOSITION_REGISTER_csv.schema.json",
+      "sha256": "52c62867c2e5dafbf8f4922655b7e192ea1c80860b28d3607804f85b875d1afd"
+    },
+    {
+      "byte_length": 1960,
+      "path": "08_SOURCE_RECONCILIATION__SOURCE_DISPOSITION_DASHBOARD_csv.schema.json",
+      "sha256": "5f9079084be23091d2a7b4cae4bc36fb962c46d7e1e1c45d583d0da1f428a6b2"
+    },
+    {
+      "byte_length": 2552,
+      "path": "09_WORKSTREAM_PR_BRANCH_DISPOSITION__WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER_csv.schema.json",
+      "sha256": "015468f8f16e972fe85ac7ff02670048cce4e3451ef8d1b125f9311f06cc66d0"
+    },
+    {
+      "byte_length": 460,
+      "path": "10_CLOSING_AUDIT_PROTOCOL__AUDIT_REQUIREMENTS_MATRIX_csv.schema.json",
+      "sha256": "df2aa2a736b2e13833cf3e0a617002110573c799bad21686ddfe53f6e0cc7ad6"
+    },
+    {
+      "byte_length": 823,
+      "path": "10_CLOSING_AUDIT_PROTOCOL__TEMPLATE_INDEX_csv.schema.json",
+      "sha256": "e5a4ce56cc39470a82bd8d8d37bfb78a363f3068d8eb3d71a3507cbd8118bd6d"
+    },
+    {
+      "byte_length": 865,
+      "path": "EXTERNAL_REVIEW__EXTERNAL_REVIEW_FINDING_DISPOSITION_REGISTER_csv.schema.json",
+      "sha256": "1f5c791f5f657ee55c08188c245fda5b69cac3f7bc7087214a421a8eff0e5bbe"
+    },
+    {
+      "byte_length": 1516,
+      "path": "FOUNDER_DECISION_PACKET_csv.schema.json",
+      "sha256": "5d579ae42c4f8b0ed81b0c82c04653ddaaf829eda2fcc1bafaec7658a9fbaa4d"
+    },
+    {
+      "byte_length": 384,
+      "path": "MANIFEST_OF_MANIFESTS_csv.schema.json",
+      "sha256": "3475d96d16b7d3481c4ab06951f66072fa576d8812f21dfe43dedbaba77eaa4d"
+    },
+    {
+      "byte_length": 1711,
+      "path": "T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER_V3.schema.json",
+      "sha256": "9ac70da930b23f03ba56611680cb35b9932508af48e2a0c60a53c7f4daa6a8ef"
+    },
+    {
+      "byte_length": 576,
+      "path": "TIER_1_DOCUMENT_INVENTORY_csv.schema.json",
+      "sha256": "a3414829b1b3f4390131f51e2e3c11862621b403f300b7ac6cb4e4befe07667c"
+    },
+    {
+      "byte_length": 736,
+      "path": "UNRESOLVED_ISSUE_REGISTER_csv.schema.json",
+      "sha256": "8af3098a1ecfb5501993026e6ba97d5323af01176fe8b46229d7d3326f5717b0"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}
