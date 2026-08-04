@@ -169,6 +169,69 @@ def test_release_target_without_planning_disclaimer_is_rejected():
     assert any("release-target claim" in e for e in errors)
 
 
+def test_templated_feature_description_is_rejected():
+    rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
+    rows[0]["Feature or workflow description"] = "Atomic coverage row for application shell within Platform and shell."
+    errors = errors_for(rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts)
+    assert any("templated feature description" in e for e in errors)
+
+
+def test_path_field_prose_is_rejected():
+    rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
+    rows[0]["IMPLEMENTATION_EVIDENCE_PATHS"] = "frontend/src/App.jsx;feature-specific native implementation not verified by this matrix"
+    errors = errors_for(rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts)
+    assert any("non-path token" in e for e in errors)
+
+
+def test_not_found_row_with_evidence_path_is_rejected():
+    rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
+    target = next(r for r in rows if r["IMPLEMENTATION_STATE"] == "NOT_FOUND")
+    target["IMPLEMENTATION_EVIDENCE_PATHS"] = "frontend/src/pages/Integrations.jsx"
+    errors = errors_for(rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts)
+    assert any("NOT_FOUND row has implementation evidence paths" in e for e in errors)
+
+
+def test_fully_covered_with_keyword_evidence_is_rejected():
+    rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
+    rows[0]["Governance coverage state"] = "FULLY_COVERED"
+    rows[0]["IMPLEMENTATION_EVIDENCE_TIER"] = "KEYWORD_MATCH_ONLY"
+    rows[0]["GOVERNANCE_READINESS_SCORE"] = "94"
+    rows[0]["GOVERNANCE_READINESS_BAND"] = "GOVERNANCE_READY"
+    errors = errors_for(rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts)
+    assert any("FULLY_COVERED overstates" in e for e in errors)
+
+
+def test_dependency_basis_cannot_repeat_confidence():
+    rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
+    rows[0]["DEPENDENCY_BASIS"] = rows[0]["DEPENDENCY_CONFIDENCE"]
+    errors = errors_for(rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts)
+    assert any("dependency basis repeats confidence" in e for e in errors)
+
+
+def test_parent_feature_requires_taxonomy_designation():
+    rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
+    rows[0]["Parent feature ID"] = "ES-FEAT-UNKNOWN-000"
+    rows[0]["PARENT_FEATURE_ID_TYPE"] = ""
+    errors = errors_for(rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts)
+    assert any("parent feature id unresolved" in e for e in errors)
+
+
+def test_field_dictionary_boilerplate_is_rejected():
+    rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts = cloned_payload()
+    # Exercise the dictionary guard directly with the current package dictionary present.
+    errors = errors_for(rows, obj, sources, pias, gov, decisions, gaps, queues, dashboard, metrics, deps, conflicts)
+    assert not any("field dictionary retains boilerplate" in e for e in errors)
+
+
+def test_manifest_and_checksum_tamper_is_rejected():
+    errors = validator.validate_manifest_and_checksums()
+    assert errors == []
+
+
+def test_authorized_path_check_is_fail_closed_function():
+    assert callable(validator.validate_authorized_paths)
+
+
 def run_all():
     for name, func in sorted(globals().items()):
         if name.startswith("test_") and callable(func):

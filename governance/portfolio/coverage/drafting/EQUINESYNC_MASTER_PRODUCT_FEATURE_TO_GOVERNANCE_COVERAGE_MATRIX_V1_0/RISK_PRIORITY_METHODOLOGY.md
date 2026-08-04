@@ -1,7 +1,15 @@
-# RISK_PRIORITY_METHODOLOGY
+# Risk Priority Methodology
 
-Authority statement: `DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY`
+Starting PR head: 9ace3eed6b949d7e3ed38fcbfba21bcaec8e3991
+Base: 1eb384d80daa700ba2e71ee42872cc9bba926332
+Directive: EQUINESYNC_FGM_REVIEW_FINDINGS_REVISION_DIRECTIVE_V1_0
+Authority: DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
+Status: FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
 
-Risk severity uses `LOW`, `MEDIUM`, `HIGH`, and `CRITICAL`. Severity considers safeguarding, minors/guardians, equine health, financial data, privacy, identity/permissions, incident/emergency workflows, provider networks, AI decision support, regulatory or contractual sensitivity, operational breadth, and persona count. Likelihood uses `RARE`, `UNLIKELY`, `POSSIBLE`, and `LIKELY`, based on unresolved governance gaps and implementation states.
+This artifact was regenerated or superseded by the 2026-08-04 Founder-directed revision. Structural PASS claims are structural only; semantic conclusions require targeted rereview.
 
-`RISK_SCORE = severity_weight * likelihood_weight`, where LOW=1, MEDIUM=2, HIGH=3, CRITICAL=4 and RARE=1, UNLIKELY=2, POSSIBLE=3, LIKELY=4. Delivery, governance, and verification priorities are deterministic planning queues, not adopted roadmap commitments.
+## Preserved Authority Boundaries
+NO_GOVERNANCE_ARTIFACT_ADOPTED; NO_NEW_PIA_APPROVED; NO_PIA_SUPPLEMENT_APPROVED; NO_CODE_GUIDE_ACTIVATED; NO_ADR_ADOPTED; NO_OPERATING_STANDARD_ADOPTED; NO_RUNBOOK_ADOPTED; NO_APPLICATION_CODE_MODIFIED; NO_SCHEMA_MODIFIED; NO_MIGRATION_CREATED_OR_RUN; NO_PROVIDER_CONFIGURATION_MODIFIED; NO_DEPLOYMENT_AUTHORIZED; NO_STAGING_ACTIVATION_AUTHORIZED; NO_PILOT_ACTIVATION_AUTHORIZED; NO_PRODUCTION_ACTIVATION_AUTHORIZED; NO_PROTECTED_BRANCH_DIRECT_MUTATION; NO_MERGE_AUTHORIZED; NO_RUNTIME_VERIFICATION_CLAIM_WITHOUT_EVIDENCE.
+
+## Prior Content
+The prior static narrative was superseded to avoid stale summaries after structured regeneration.

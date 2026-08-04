@@ -1,181 +1,253 @@
 {
   "artifact_id": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0",
-  "authority_statement": "DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
-  "baseline_commit": "1eb384d80daa700ba2e71ee42872cc9bba926332",
+  "revision_status": "FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "generated_at_utc": "2026-08-04T05:34:18+00:00",
+  "authority": "DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
   "files": [
     {
-      "byte_length": 2465,
       "path": "ADVERSARIAL_REVIEW_RESULTS.csv",
-      "sha256": "278aa5500e4feac47c1685d25f8b5e666cabb5b92feab3dd01ff14a9ef256908"
+      "byte_length": 3908,
+      "sha256": "0e2bbeb008c44c5f288b8683680cf6806e0818390f2170ebf978369a42a732ac"
     },
     {
-      "byte_length": 3364,
-      "path": "CHECKSUMS.sha256",
-      "sha256": "LEDGER_SELF_REFERENCE_EXCLUDED"
-    },
-    {
-      "byte_length": 14635,
       "path": "CODE_GUIDE_GAP_ANALYSIS.csv",
-      "sha256": "c4d77f320c21adca749880d48cecd83d9016f079ba61f812be6814a5bf892ac9"
+      "byte_length": 18593,
+      "sha256": "de1a9a33ee9be01262e552139de2e8a09555050698fe3ebe59cdeb090d7e6565"
     },
     {
-      "byte_length": 3118,
+      "path": "CONFLICT_DECOMPOSITION_REGISTER.csv",
+      "byte_length": 170616,
+      "sha256": "da5a7435856851e90442f04f87003238f93ffeb896cae6c0acef980798981d12"
+    },
+    {
       "path": "COVERAGE_ANALYSIS_AND_RECOMMENDATIONS_REPORT.md",
-      "sha256": "8a8692672ef88424be038a0a9adddd0415c09fec6beb84d4a1cecabeca97a94f"
+      "byte_length": 1349,
+      "sha256": "30ba29cd0f139a91fdeb417c5b4c970b903ab568ed84d06caeaf0dcf4b59e73e"
     },
     {
-      "byte_length": 3413,
       "path": "DASHBOARD_SUMMARY.json",
-      "sha256": "3db9e5f5d3f760a57f38f57740aa6c9a0d3e55eb82e7ab8d641777e2fc34b642"
+      "byte_length": 1832,
+      "sha256": "e0a6c1201fcc3f540fbeb4ab979b517bc61f64f80f4c4bb647fdd94d26231567"
     },
     {
-      "byte_length": 20211,
       "path": "DASHBOARD_SUMMARY.md",
-      "sha256": "4423037c0bf6e44cfc3e0cba4861cb854a042f59e93abcb1370b4598a951845a"
+      "byte_length": 595,
+      "sha256": "f7dfa3eb692d14c34b221bfef734e89bbdfa25dfdcb169d251c3be9b692c6e76"
     },
     {
-      "byte_length": 265772,
       "path": "DEPENDENCY_REGISTER.csv",
-      "sha256": "00ae5bf66880c8c4cd47f03b194ad7235e8da42dc3fde8c656bf92ee61d62eb1"
+      "byte_length": 295504,
+      "sha256": "4cee5aa3bea38543bfb5c477dccafc244a153af002ec2b2e3fa9b552cf74b942"
     },
     {
-      "byte_length": 4393,
+      "path": "DEPENDENCY_SEMANTIC_REVIEW_REPORT.md",
+      "byte_length": 771,
+      "sha256": "a9fd8ceb3e601071d80fb001c096ca4b3d455a8a20a77f825062194dd7d91b76"
+    },
+    {
       "path": "DOCUMENTARY_VALIDATION_REPORT.json",
-      "sha256": "01464145256077eedb4b06d2756b94264caba3b249524c7421785068a281293c"
+      "byte_length": 851,
+      "sha256": "e2f8ae509139b802962435cd358d64c87cad97f8964c1636eedc00392644a731"
     },
     {
-      "byte_length": 27083,
       "path": "DUPLICATE_OVERLAP_AND_AUTHORITY_CONFLICT_REGISTER.csv",
-      "sha256": "b05409e6bbf3279b67e057ba65ca45d46e3dd06828f8a28757bb403e9615a3f1"
+      "byte_length": 170616,
+      "sha256": "da5a7435856851e90442f04f87003238f93ffeb896cae6c0acef980798981d12"
     },
     {
-      "byte_length": 2906140,
       "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.csv",
-      "sha256": "948f43385722cd656de08d0a4526982dd4ff1ecafe2d55d5e21e566110f11309"
+      "byte_length": 3735994,
+      "sha256": "81cc44755cd073fd5e7aeec02114232e87b6dfb7efc76750fb301c3e4d6f7812"
     },
     {
-      "byte_length": 4488567,
       "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.json",
-      "sha256": "8fc25b03c90b930de3081f57658ef5b8837c91756d82900a2225a4fc2a538a7c"
+      "byte_length": 5428729,
+      "sha256": "b5189bc6a8c56d3c80a45279b90780ed8bacbd39e181401ddaa12a370718af13"
     },
     {
-      "byte_length": 7790,
       "path": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.md",
-      "sha256": "0309c54c196bbac0e32985a2475f0a073c39d98d782f0667b7ea8a66cd5e0ef6"
+      "byte_length": 11233,
+      "sha256": "848a76648785bb77553f0db4247640965813f8ae7f42b2bf8a1b253cea129792"
     },
     {
-      "byte_length": 151940,
+      "path": "EVIDENCE_PATH_REVALIDATION_REPORT.md",
+      "byte_length": 755,
+      "sha256": "67698a14febceba96b783221a7723f8328084b359e7cfe4bf4c4dffb6f45c5d6"
+    },
+    {
       "path": "FEATURE_TAXONOMY_AND_ID_REGISTER.csv",
+      "byte_length": 151940,
       "sha256": "b46a7ca9ce9bfda77a7fef30ce86789cf81f6d6c3ff60087c1bf6892686c1489"
     },
     {
-      "byte_length": 33384,
       "path": "FIELD_DICTIONARY.csv",
-      "sha256": "c68fcfc533153372ac6d86c30b6b5ef89289417365dd06e2398a04644ed949b6"
+      "byte_length": 204055,
+      "sha256": "4d0c1379bd56019cca4ab9cd7fadb8ee0388b54637ebdd1af1bd8f877a3cb3cf"
     },
     {
-      "byte_length": 8380,
       "path": "FOUNDER_DECISION_QUESTION_REGISTER.csv",
-      "sha256": "bfe25c65e1e9eb121e73cd6d7d7f736a8271ca14c35383250b1d589949c8c81c"
+      "byte_length": 10255,
+      "sha256": "2a304a99f86a555ec6dd918db70a216104871bbcf36ec6db0fd5147228e95a1d"
     },
     {
-      "byte_length": 13099,
       "path": "GOVERNANCE_ARTIFACT_INVENTORY.csv",
+      "byte_length": 13099,
       "sha256": "d4b7b0dc78d1dbbedcc706b4c3ed96cae6180cec83807eb9629d6a0960f5c8e6"
     },
     {
-      "byte_length": 1795,
       "path": "GOVERNANCE_LAYER_AND_READINESS_METHODOLOGY.md",
-      "sha256": "6a30e4cc80c113c737152b4e7f07358d4c451cadd7e127537fe7c7953e9a546f"
+      "byte_length": 1347,
+      "sha256": "4f3fd5400a795a5688f614078f010463f89f39152163048a8e1ed62b0a60029c"
     },
     {
-      "byte_length": 4124,
       "path": "IMPLEMENTATION_TEST_AND_EVIDENCE_STATUS_SUMMARY.csv",
+      "byte_length": 4124,
       "sha256": "ea888d01c8416919c7fb3c256f36dfd094aa72867b3db4a65ed66161298ad38b"
     },
     {
-      "byte_length": 796,
       "path": "IMPLEMENTATION_VERIFICATION_METHODOLOGY.md",
-      "sha256": "53dfc1c810bbdff5a4ab775a210591f25d5892aa94d44eb54371153a3165a01c"
+      "byte_length": 1344,
+      "sha256": "f1ec0274a6ff9713c98d976d9b824028382cd3895548d776fb94d2140c713325"
     },
     {
-      "byte_length": 4715,
+      "path": "INDEPENDENT_REVIEW_FINDING_ADJUDICATION_REGISTER.csv",
+      "byte_length": 14632,
+      "sha256": "754a2089cd680d660a9d838b5b9231aa26cb45940bba1eb266da8756ca593006"
+    },
+    {
       "path": "NEW_PIA_CANDIDATE_ANALYSIS.md",
-      "sha256": "25f1b3dbfef56fae3a4b3b966bd34b5cc5be2043c3a401785e207933369f4d3a"
+      "byte_length": 1331,
+      "sha256": "505985b066960681a03d074a831de096647a9d639869126d8a7eceac83c239ed"
     },
     {
-      "byte_length": 397759,
       "path": "NON_PIA_DOCUMENT_AND_CONTROL_GAP_REGISTER.csv",
+      "byte_length": 397759,
       "sha256": "cb7b5cc930745d818951f9c9a2145031369a5a9fcdd43330fb18e2d708e3bc2d"
     },
     {
-      "byte_length": 6639,
-      "path": "PACKAGE_MANIFEST.json",
-      "sha256": "MANIFEST_SELF_REFERENCE_EXCLUDED"
-    },
-    {
-      "byte_length": 9011,
       "path": "PACKAGE_METRICS.json",
-      "sha256": "18aa29f8fb5dab822a062a57a15dcf679760132756b37f509b01005446e20d79"
+      "byte_length": 6572,
+      "sha256": "b433d411b62ebc31babca49d5e2ae6b81ff52c83974313eb505a4cad97d51ff3"
     },
     {
-      "byte_length": 4560,
       "path": "PIA_FEATURE_COVERAGE_SUMMARY.csv",
+      "byte_length": 4560,
       "sha256": "9dd6e47faedadfba7bc5c1c7cb90707a3abcf2445726e41632c78b9b7a482078"
     },
     {
-      "byte_length": 62062,
+      "path": "PIA_SOURCE_IDENTITY_AND_SUPPLEMENT_PREREQUISITE_REPORT.md",
+      "byte_length": 782,
+      "sha256": "413ca2ba81e6424ceae7b4ccefee67c93dacc8c220bcd16e526082abf65fb841"
+    },
+    {
       "path": "PIA_SUPPLEMENT_ROW_MAPPING.csv",
-      "sha256": "c0e8acc3d9053f5c24349c96cf5b061e696b0767a260e36cdffb4eebebee2092"
+      "byte_length": 98231,
+      "sha256": "3c3704d750c2f96f64d2493fd1d49ddd9fa764b2590d892c33b130fea9bc6d70"
     },
     {
-      "byte_length": 737367,
       "path": "PRIORITIZED_WORK_QUEUES.csv",
-      "sha256": "7855a02d27cefe0ab6defea93dcbd7934f7c38ff78a51c90b0f8c4a7a510f7c5"
+      "byte_length": 758194,
+      "sha256": "b0224e3c1456dd42dbfd191c917f14ebdce64ea850337bfe7bc433994a8299e6"
     },
     {
-      "byte_length": 19897,
       "path": "PROPOSED_NEW_PIA_AND_SUPPLEMENT_DECISION_REGISTER.csv",
-      "sha256": "07b6eda6242028eaa56a9571c7cc3354430a1df0f6d16caa5e284fff277e5bdc"
+      "byte_length": 23987,
+      "sha256": "82b10cd4e3229a60a3219da2d04d5669840755f22e772f289fc8f17a917501eb"
     },
     {
-      "byte_length": 1982,
       "path": "README_FIRST.md",
-      "sha256": "e8e7efb746aa4610240df2e2f06e9c1a5f3fcbc37205f65203537f8c2159c39d"
+      "byte_length": 1317,
+      "sha256": "5933977109e922d9b0593b8f3f0a31d94823613c5fae77caeb46d268d98fc498"
     },
     {
-      "byte_length": 862,
+      "path": "REVIEWER_TO_CONSOLIDATED_FINDING_CROSSWALK.csv",
+      "byte_length": 4754,
+      "sha256": "5c0000874c828bd240c63f9f3f9bccb8e22578882b48f343666f69c0ba90ad77"
+    },
+    {
+      "path": "REVIEW_INPUTS/CLAUDE_INDEPENDENT_REVIEW_FEATURE_TO_GOVERNANCE_MATRIX.md",
+      "byte_length": 20293,
+      "sha256": "6ce430d74b4c0feff79caf40541d7a39501d16eece1879855a717d8080cd7848"
+    },
+    {
+      "path": "REVIEW_INPUTS/CODEX_DIRECTIVE_FEATURE_TO_GOVERNANCE_MATRIX_REVIEW_FINDINGS_REVISION_V1_0.md",
+      "byte_length": 17237,
+      "sha256": "d894a4f0e3c32dba6d8c3a155ac98f66c46ebbf98c0725351cdc30063558ff97"
+    },
+    {
+      "path": "REVIEW_INPUTS/CURSOR_INDEPENDENT_REVIEW_FEATURE_TO_GOVERNANCE_MATRIX.md",
+      "byte_length": 31160,
+      "sha256": "0736221d47978cb380ec5fcb4138fbe36ac02c187113b5a853010e9827d16475"
+    },
+    {
+      "path": "REVIEW_INPUTS/PERPLEXITY_INDEPENDENT_REVIEW_FEATURE_TO_GOVERNANCE_MATRIX.md",
+      "byte_length": 48539,
+      "sha256": "16c87a6403aa6cb6789c1420eadd33a304534ec1e5e603e70ad26ce360e5de95"
+    },
+    {
+      "path": "REVISION_CLOSURE_REPORT.md",
+      "byte_length": 773,
+      "sha256": "e906ca5ff493d30e0e30575df09a7ada96ef6946ad98f4bf478fe4b6b3663a6e"
+    },
+    {
+      "path": "RISK_AND_READINESS_RECALIBRATION_REPORT.md",
+      "byte_length": 797,
+      "sha256": "1b030e24448f231a6db9b659699110a56f27ef68a76ec576e307cfe6812f83bb"
+    },
+    {
       "path": "RISK_PRIORITY_METHODOLOGY.md",
-      "sha256": "32d9b8e13c3293d774c702e79622674d0155ca6978f7843ad0c7a0b1b942eaf6"
+      "byte_length": 1330,
+      "sha256": "2635d192ef82fe62f753986c5d3a3408b20b45abe3a0f48ce25843934d9efc6e"
     },
     {
-      "byte_length": 137413,
+      "path": "SEMANTIC_VALIDATION_REPORT.md",
+      "byte_length": 1043,
+      "sha256": "d36076e949e86066030ecb38566445117e94d9c188ceddd923431298e703eeb4"
+    },
+    {
       "path": "SOURCE_AND_AUTHORITY_REGISTER.csv",
+      "byte_length": 137413,
       "sha256": "9fd1a0b5d23d75f3b1d43b84dcdffb7174acb5208a2f24e90393a6632fc48aaa"
     },
     {
-      "byte_length": 33379,
       "path": "UNGOVERNED_CAPABILITY_REGISTER.csv",
+      "byte_length": 33379,
       "sha256": "8c0d13f1090ed2afa7dda06be60162950642380faef3d6a7e73f9239d7b437ed"
     },
     {
-      "byte_length": 994,
+      "path": "UNRESOLVED_FINDINGS_AND_FOUNDER_DECISIONS.md",
+      "byte_length": 798,
+      "sha256": "70967fcd11a370d0c172d2944ce49858d286705f765eb7bafcf26d7469c53ddb"
+    },
+    {
       "path": "VERSION_CHANGE_REPORT.md",
-      "sha256": "11a4ad5d37b198c2e0e497ca8a10870a505d6e333c18dced86e886b6e96a352b"
+      "byte_length": 1326,
+      "sha256": "ecb80be8aa39e8ab06efc616e0c647e2a09e2f311468d8fefa48c8e76847b390"
     },
     {
-      "byte_length": 9164,
       "path": "tests/test_master_product_feature_coverage_matrix.py",
-      "sha256": "e3880f7da16f63049d8fe5a65c757797a172cdb075e4329a0c9b2791ac7f6b3a"
+      "byte_length": 12842,
+      "sha256": "dc70003a0d510a7fcb0b7f25192128abfcecf2e24772294083cb11f059a4944d"
     },
     {
-      "byte_length": 28710,
+      "path": "tools/rebuild_review_revision.py",
+      "byte_length": 48261,
+      "sha256": "98f35df8a01579a3ad819931030a15b1c640b94a4582bc3d6e21fc01d4869b71"
+    },
+    {
       "path": "validators/validate_master_product_feature_coverage_matrix.py",
-      "sha256": "09a1cc788fa9e5c9bc8e6cf5b5c196593bf2cf092e647014896127cd7a9c299d"
+      "byte_length": 33152,
+      "sha256": "36e1c7fef4b15ebda7ba7635341ea7a0c37e401e53f5c3cd474ae1e35aab21ab"
+    },
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "byte_length": 9322,
+      "sha256": "MANIFEST_SELF_REFERENCE_EXCLUDED"
+    },
+    {
+      "path": "CHECKSUMS.sha256",
+      "byte_length": 0,
+      "sha256": "LEDGER_SELF_REFERENCE_EXCLUDED"
     }
-  ],
-  "generated_at_utc": "2026-08-01T16:06:47.500085+00:00",
-  "protected_branch": "integrate-emergent-final-zip",
-  "revision_status": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_REVISION_COMPLETE_READY_FOR_FOUNDER_REVIEW",
-  "work_branch": "codex/master-product-feature-governance-coverage-matrix-v1"
+  ]
 }

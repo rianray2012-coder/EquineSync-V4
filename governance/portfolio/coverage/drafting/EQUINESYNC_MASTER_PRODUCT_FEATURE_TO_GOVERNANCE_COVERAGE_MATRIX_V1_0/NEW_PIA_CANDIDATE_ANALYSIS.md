@@ -1,41 +1,15 @@
-# NEW_PIA_CANDIDATE_ANALYSIS
+# New Pia Candidate Analysis
 
-Authority statement: `DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY`
+Starting PR head: 9ace3eed6b949d7e3ed38fcbfba21bcaec8e3991
+Base: 1eb384d80daa700ba2e71ee42872cc9bba926332
+Directive: EQUINESYNC_FGM_REVIEW_FINDINGS_REVISION_DIRECTIVE_V1_0
+Authority: DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
+Status: FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
 
-Revision determination: `EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0_REVISION_COMPLETE_READY_FOR_FOUNDER_REVIEW`
+This artifact was regenerated or superseded by the 2026-08-04 Founder-directed revision. Structural PASS claims are structural only; semantic conclusions require targeted rereview.
 
-## Recommendation
+## Preserved Authority Boundaries
+NO_GOVERNANCE_ARTIFACT_ADOPTED; NO_NEW_PIA_APPROVED; NO_PIA_SUPPLEMENT_APPROVED; NO_CODE_GUIDE_ACTIVATED; NO_ADR_ADOPTED; NO_OPERATING_STANDARD_ADOPTED; NO_RUNBOOK_ADOPTED; NO_APPLICATION_CODE_MODIFIED; NO_SCHEMA_MODIFIED; NO_MIGRATION_CREATED_OR_RUN; NO_PROVIDER_CONFIGURATION_MODIFIED; NO_DEPLOYMENT_AUTHORIZED; NO_STAGING_ACTIVATION_AUTHORIZED; NO_PILOT_ACTIVATION_AUTHORIZED; NO_PRODUCTION_ACTIVATION_AUTHORIZED; NO_PROTECTED_BRANCH_DIRECT_MUTATION; NO_MERGE_AUTHORIZED; NO_RUNTIME_VERIFICATION_CLAIM_WITHOUT_EVIDENCE.
 
-The Marketplace, Provider Network, and Community decision family remains one `DRAFT_NEW_PIA` candidate for Founder review. This package does not decide adoption, final structure, drafting authorization, supplement approval, runtime use, provider activation, pilot use, or production use.
-
-## Alternatives
-
-| alternative | tradeoff | recommendation_state |
-| --- | --- | --- |
-| One new PIA | Cleanest ownership for provider credentials, listings, reviews, referrals, community moderation, marketplace disputes, and suspension lifecycle; adds an eleventh PIA boundary. | RECOMMENDED_FOR_FOUNDER_DECISION |
-| One new PIA with future supplements | Keeps core marketplace truth together while allowing later bounded supplements for reviews, disputes, and provider credentials. | ACCEPTABLE_IF_FOUNDER_PREFERS_INCREMENTAL_STRUCTURE |
-| Multiple PIAs | Could isolate provider credentials, bookings, reviews, and community moderation, but risks excessive fragmentation before the product boundary is approved. | NOT_RECOMMENDED_FOR_V1_BASELINE |
-| Existing PIA extension only | Avoids new denominator changes, but spreads two-sided marketplace truth across identity, relationship, financial, and communications PIAs. | NOT_RECOMMENDED_WITH_CURRENT_EVIDENCE |
-
-## Exact 14 Mapped Rows
-
-| feature_id | feature_name | domain | risk | priority | personas |
-| --- | --- | --- | --- | --- | --- |
-| ES-FEAT-MARKETPLACE-001 | provider profiles | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-002 | provider verification | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-003 | credentials | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-004 | listings | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-005 | discovery | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-006 | search ranking | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-007 | reviews | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-008 | referrals | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-009 | community features | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-010 | moderation | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-011 | disputes | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-012 | bookings | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-013 | payment responsibilities | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-| ES-FEAT-MARKETPLACE-014 | suspension and delisting | Marketplace, provider network, and community | HIGH/12 | P0 | Service Provider;Owner;Trainer;Facility Owner;Barn Manager;Community Member;Platform Admin |
-
-## Retained Founder Question
-
-Whether the Marketplace, Provider Network, and Community decision family should become one new PIA, one PIA with supplements, multiple PIAs, or an extension of existing PIAs remains `PENDING`.
+## Prior Content
+The prior static narrative was superseded to avoid stale summaries after structured regeneration.

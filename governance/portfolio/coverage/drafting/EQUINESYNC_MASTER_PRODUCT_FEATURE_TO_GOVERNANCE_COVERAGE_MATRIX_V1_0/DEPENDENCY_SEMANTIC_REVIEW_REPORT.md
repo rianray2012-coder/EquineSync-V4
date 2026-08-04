@@ -1,0 +1,9 @@
+# Dependency Semantic Review Report
+
+Starting PR head: 9ace3eed6b949d7e3ed38fcbfba21bcaec8e3991
+Base: 1eb384d80daa700ba2e71ee42872cc9bba926332
+Directive: EQUINESYNC_FGM_REVIEW_FINDINGS_REVISION_DIRECTIVE_V1_0
+Authority: DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
+Status: FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
+
+Dependency basis no longer repeats confidence enums. DEPENDENCY_TYPE distinguishes authorization, data, soft planning inference, and root/taxonomy anchors. Universal shell/root block counts are described as architecture-wide planning relationships, not runtime blast-radius verification.

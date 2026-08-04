@@ -1,27 +1,15 @@
-# GOVERNANCE_LAYER_AND_READINESS_METHODOLOGY
+# Governance Layer And Readiness Methodology
 
-Authority statement: `DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY`
+Starting PR head: 9ace3eed6b949d7e3ed38fcbfba21bcaec8e3991
+Base: 1eb384d80daa700ba2e71ee42872cc9bba926332
+Directive: EQUINESYNC_FGM_REVIEW_FINDINGS_REVISION_DIRECTIVE_V1_0
+Authority: DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
+Status: FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
 
-## Layer Model
+This artifact was regenerated or superseded by the 2026-08-04 Founder-directed revision. Structural PASS claims are structural only; semantic conclusions require targeted rereview.
 
-Every matrix row carries explicit documentary coverage fields for PIA, Code Guide, ADR, operating standard, runbook, AI governance, safeguarding, privacy, and reporting. The allowed layer vocabulary is `NOT_APPLICABLE`, `NOT_IDENTIFIED`, `GAP`, `CANDIDATE`, `PARTIAL`, `COVERED_WITH_RETAINED_GAP`, `COVERED`, `ADOPTED_NOT_ACTIVE`, and `ACTIVE`. This revision does not use `ACTIVE` because no separate activation evidence was supplied or authorized.
+## Preserved Authority Boundaries
+NO_GOVERNANCE_ARTIFACT_ADOPTED; NO_NEW_PIA_APPROVED; NO_PIA_SUPPLEMENT_APPROVED; NO_CODE_GUIDE_ACTIVATED; NO_ADR_ADOPTED; NO_OPERATING_STANDARD_ADOPTED; NO_RUNBOOK_ADOPTED; NO_APPLICATION_CODE_MODIFIED; NO_SCHEMA_MODIFIED; NO_MIGRATION_CREATED_OR_RUN; NO_PROVIDER_CONFIGURATION_MODIFIED; NO_DEPLOYMENT_AUTHORIZED; NO_STAGING_ACTIVATION_AUTHORIZED; NO_PILOT_ACTIVATION_AUTHORIZED; NO_PRODUCTION_ACTIVATION_AUTHORIZED; NO_PROTECTED_BRANCH_DIRECT_MUTATION; NO_MERGE_AUTHORIZED; NO_RUNTIME_VERIFICATION_CLAIM_WITHOUT_EVIDENCE.
 
-## Overall State Derivation
-
-Overall `Governance coverage state` is derived by priority: new-PIA missing ownership, PIA supplement partial coverage, Code Guide gap, ADR gap, operating-standard gap, runbook gap, fully covered documentary coverage, or retained implementation/evidence gap. The state is a documentary planning classification only.
-
-## Readiness Score
-
-Scores are calculated from weighted layer coverage: PIA 30, Code Guide 15, ADR 10, operating standard 10, runbook 8, AI 7, safeguarding 8, privacy 8, and reporting 4. State factors are: not applicable/covered 100 percent, covered with retained gap 78 percent, partial 55 percent, candidate 35 percent, gap 12 percent, not identified 0 percent. Scores are capped by overall state so a missing mandatory layer cannot appear governance-ready.
-
-## Bands
-
-| score_range | band |
-| --- | --- |
-| 0-24 | CRITICAL_GOVERNANCE_GAP |
-| 25-49 | LOW_READINESS |
-| 50-74 | PARTIAL_READINESS |
-| 75-89 | HIGH_READINESS_WITH_RETAINED_GAPS |
-| 90-100 | GOVERNANCE_READY |
-
-Readiness does not mean implementation completeness, runtime safety, production readiness, adoption, activation, or release approval.
+## Prior Content
+The prior static narrative was superseded to avoid stale summaries after structured regeneration.

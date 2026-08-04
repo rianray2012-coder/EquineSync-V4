@@ -1,34 +1,15 @@
-# VERSION_CHANGE_REPORT
+# Version Change Report
 
-Authority statement: `DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY`
+Starting PR head: 9ace3eed6b949d7e3ed38fcbfba21bcaec8e3991
+Base: 1eb384d80daa700ba2e71ee42872cc9bba926332
+Directive: EQUINESYNC_FGM_REVIEW_FINDINGS_REVISION_DIRECTIVE_V1_0
+Authority: DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
+Status: FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY
 
-## Dataset Continuity
+This artifact was regenerated or superseded by the 2026-08-04 Founder-directed revision. Structural PASS claims are structural only; semantic conclusions require targeted rereview.
 
-| category | count |
-| --- | ---: |
-| rows before | 314 |
-| rows after | 314 |
-| rows added | 0 |
-| rows removed | 0 |
-| rows merged | 0 |
-| rows split | 0 |
-| governance-state changes | 0 |
-| implementation-state changes | 0 |
-| risk classifications added | 314 |
-| ownership assignments added | 314 |
-| source-traceability updates | 314 |
-| dependency mappings added | 314 |
+## Preserved Authority Boundaries
+NO_GOVERNANCE_ARTIFACT_ADOPTED; NO_NEW_PIA_APPROVED; NO_PIA_SUPPLEMENT_APPROVED; NO_CODE_GUIDE_ACTIVATED; NO_ADR_ADOPTED; NO_OPERATING_STANDARD_ADOPTED; NO_RUNBOOK_ADOPTED; NO_APPLICATION_CODE_MODIFIED; NO_SCHEMA_MODIFIED; NO_MIGRATION_CREATED_OR_RUN; NO_PROVIDER_CONFIGURATION_MODIFIED; NO_DEPLOYMENT_AUTHORIZED; NO_STAGING_ACTIVATION_AUTHORIZED; NO_PILOT_ACTIVATION_AUTHORIZED; NO_PRODUCTION_ACTIVATION_AUTHORIZED; NO_PROTECTED_BRANCH_DIRECT_MUTATION; NO_MERGE_AUTHORIZED; NO_RUNTIME_VERIFICATION_CLAIM_WITHOUT_EVIDENCE.
 
-No row silently disappeared. All 314 prior feature IDs remain present.
-
-## Added Rows
-
-NONE
-
-## Removed Rows
-
-NONE
-
-## Notes
-
-The revision is classified as `EXPANDED`: it adds fields, generated registers, scoring, queues, dashboards, validation, and methodology without changing application code or protected branch state. Existing governance and implementation state counts are preserved unless future evidence authorizes reclassification.
+## Prior Content
+The prior static narrative was superseded to avoid stale summaries after structured regeneration.

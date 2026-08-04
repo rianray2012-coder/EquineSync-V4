@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import re
 import subprocess
 from collections import Counter, defaultdict, deque
 from pathlib import Path
@@ -26,6 +27,7 @@ DEPENDENCY_PATH = PACKAGE / "DEPENDENCY_REGISTER.csv"
 CONFLICT_PATH = PACKAGE / "DUPLICATE_OVERLAP_AND_AUTHORITY_CONFLICT_REGISTER.csv"
 MANIFEST_PATH = PACKAGE / "PACKAGE_MANIFEST.json"
 CHECKSUM_PATH = PACKAGE / "CHECKSUMS.sha256"
+BASELINE_REF = "1eb384d80daa700ba2e71ee42872cc9bba926332"
 
 AUTHORIZED_PREFIX = "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/"
 PROHIBITED_PREFIXES = ("backend/", "frontend/", "docs/", ".github/", "governance/pia/", "governance/implementation/", "outputs/", "test_reports/", "tests/")
@@ -116,7 +118,14 @@ REQUIRED_COLUMNS = [
     "SENSITIVE_DOCUMENT_RELEVANCE", "INCIDENT_OR_EMERGENCY_RELEVANCE", "FIRST_INTRODUCED_VERSION",
     "LAST_REVIEWED_VERSION", "LAST_CHANGED_VERSION", "CHANGE_TYPE", "CHANGE_NOTES",
     "SUPERSEDES_FEATURE_ID", "SUPERSEDED_BY_FEATURE_ID",
+    "RISK_RATIONALE", "EVIDENCE_LIMITATION_NOTES", "IMPLEMENTATION_EVIDENCE_TIER",
+    "PERSONA_ASSIGNMENT_RATIONALE", "PARENT_PIA_SOURCE_STATE", "SOURCE_TRACEABILITY_STATE",
+    "PACKAGE_CONTEXT_SOURCES", "DEPENDENCY_TYPE", "PARENT_FEATURE_ID_TYPE",
+    "FEATURE_NAME_DISAMBIGUATION",
 ]
+PATH_PATTERN = re.compile(r"^[A-Za-z0-9_./@+-]+$")
+TEMPLATE_DESCRIPTION = re.compile(r"^Atomic coverage row for .+ within .+\.$")
+FIELD_DICTIONARY_PATH = PACKAGE / "FIELD_DICTIONARY.csv"
 
 
 def read_csv(path: Path):
@@ -186,6 +195,8 @@ def expected_queues(row: dict[str, str]) -> set[str]:
         queues.add("IMPLEMENTATION_VERIFICATION_QUEUE")
     if row["RUNTIME_VERIFICATION_STATE"] == "RUNTIME_VERIFICATION_NOT_PERFORMED" and row["IMPLEMENTATION_STATE"] in {"PARTIAL_IMPLEMENTATION", "IMPLEMENTED_UNVERIFIED"}:
         queues.add("RUNTIME_VERIFICATION_QUEUE")
+    if row["Governance coverage state"] == "COVERED_WITH_RETAINED_GAP":
+        queues.add("RETAINED_GAP_REREVIEW_QUEUE")
     return queues
 
 
@@ -231,7 +242,7 @@ def validate_payload(csv_rows, json_obj, sources, pia_rows, gov_rows, decisions,
         for col in REQUIRED_COLUMNS:
             if col not in row:
                 errors.append(f"{rid}: required column {col} missing")
-            elif not row.get(col) and col not in {"DEPENDS_ON_FEATURE_IDS", "BLOCKED_BY_FEATURE_IDS", "BLOCKS_FEATURE_IDS"}:
+            elif not row.get(col) and col not in {"DEPENDS_ON_FEATURE_IDS", "BLOCKED_BY_FEATURE_IDS", "BLOCKS_FEATURE_IDS", "IMPLEMENTATION_EVIDENCE_PATHS"}:
                 errors.append(f"{rid}: required column {col} is blank")
         if row.get("Governance coverage state") not in ALLOWED_COVERAGE:
             errors.append(f"{rid}: invalid coverage state {row.get('Governance coverage state')}")
@@ -290,6 +301,25 @@ def validate_payload(csv_rows, json_obj, sources, pia_rows, gov_rows, decisions,
                 errors.append(f"{rid}: FULLY_COVERED row retains P0/P1 gap")
         if row.get("GOVERNANCE_READINESS_BAND") == "GOVERNANCE_READY" and row.get("Governance coverage state") != "FULLY_COVERED":
             errors.append(f"{rid}: GOVERNANCE_READY row is not FULLY_COVERED")
+        if TEMPLATE_DESCRIPTION.match(row.get("Feature or workflow description", "")):
+            errors.append(f"{rid}: templated feature description retained")
+        if row.get("Governance coverage state") == "FULLY_COVERED" and row.get("IMPLEMENTATION_EVIDENCE_TIER") not in {"CODE_INSPECTED", "TEST_EXECUTED", "RUNTIME_VERIFIED"}:
+            errors.append(f"{rid}: FULLY_COVERED overstates unverified evidence tier")
+        if row.get("IMPLEMENTATION_STATE") == "NOT_FOUND" and row.get("IMPLEMENTATION_EVIDENCE_PATHS"):
+            errors.append(f"{rid}: NOT_FOUND row has implementation evidence paths")
+        for path in split_semis(row.get("IMPLEMENTATION_EVIDENCE_PATHS", "")):
+            if not PATH_PATTERN.match(path):
+                errors.append(f"{rid}: non-path token in IMPLEMENTATION_EVIDENCE_PATHS")
+        if row.get("IMPLEMENTATION_EVIDENCE_TIER") == "KEYWORD_MATCH_ONLY" and "keyword" not in row.get("EVIDENCE_LIMITATION_NOTES", "").lower():
+            errors.append(f"{rid}: keyword-match tier lacks limitation note")
+        if not row.get("RISK_RATIONALE") or "UNCALIBRATED_PLANNING_ONLY" not in row.get("RISK_RATIONALE"):
+            errors.append(f"{rid}: missing risk rationale or planning-only calibration")
+        if not row.get("PERSONA_ASSIGNMENT_RATIONALE") or "Primary=" not in row.get("PERSONA_ASSIGNMENT_RATIONALE"):
+            errors.append(f"{rid}: missing persona assignment rationale")
+        if row.get("DEPENDENCY_BASIS") == row.get("DEPENDENCY_CONFIDENCE"):
+            errors.append(f"{rid}: dependency basis repeats confidence enum")
+        if row.get("Parent feature ID") and row.get("Parent feature ID") not in id_set and row.get("PARENT_FEATURE_ID_TYPE") != "TAXONOMY_ONLY_PARENT":
+            errors.append(f"{rid}: parent feature id unresolved without taxonomy-only designation")
         if row.get("Governance coverage state") != "FULLY_COVERED" and row.get("PRIMARY_GAP_OWNER") == "UNASSIGNED" and "UNASSIGNED" not in row.get("GAP_OWNER_EXPLANATION", ""):
             errors.append(f"{rid}: unresolved gap lacks assigned owner or UNASSIGNED explanation")
         if row.get("FOUNDER_DECISION_STATE") in {"APPROVED_DOCUMENTARY_ONLY", "APPROVED_WITH_MODIFICATION", "ADOPTED", "ACTIVE"}:
@@ -336,6 +366,8 @@ def validate_payload(csv_rows, json_obj, sources, pia_rows, gov_rows, decisions,
         row = next(r for r in csv_rows if r["Feature ID"] == fid)
         if q["queue_name"] != "CONFLICT_RESOLUTION_QUEUE" and q["queue_name"] not in expected_queues(row):
             errors.append(f"{fid}: queue row {q['queue_name']} not derivable from matrix")
+        if q["queue_name"] == "CONFLICT_RESOLUTION_QUEUE" and "atomic conflict" not in q.get("rationale", "").lower():
+            errors.append(f"{fid}: conflict queue row lacks atomic conflict derivation")
     if has_dependency_cycle(deps):
         errors.append("circular dependency without explanation")
     total = len(csv_rows)
@@ -389,9 +421,26 @@ def validate_payload(csv_rows, json_obj, sources, pia_rows, gov_rows, decisions,
             if fid and fid not in id_set:
                 errors.append(f"conflict register references missing feature {fid}")
             conflict_features.add(fid)
+        if len(split_semis(conflict.get("AFFECTED_FEATURE_IDS", ""))) > 1:
+            errors.append(f"{conflict.get('conflict_id', '<conflict>')}: conflict row is not atomic")
         for field in ["CONFLICT_TYPE", "CONFLICT_SEVERITY", "AFFECTED_FEATURE_IDS", "AFFECTED_ARTIFACTS", "PROPOSED_RESOLUTION", "RESOLUTION_AUTHORITY_REQUIRED", "CONFLICT_STATUS"]:
             if not conflict.get(field):
                 errors.append(f"{conflict.get('conflict_id', '<conflict>')}: missing {field}")
+    try:
+        dictionary_rows = read_csv(FIELD_DICTIONARY_PATH)
+        by_field = {row["field_name"]: row for row in dictionary_rows}
+        for field in REQUIRED_COLUMNS:
+            if field not in by_field:
+                errors.append(f"field dictionary missing required field {field}")
+                continue
+            entry = by_field[field]
+            if entry.get("description", "").startswith("Matrix field retained or added"):
+                errors.append(f"field dictionary retains boilerplate for {field}")
+            for required in ["data_type", "allowed_values_or_format", "owning_role", "derivation_method", "null_blank_handling", "maintenance_trigger", "field_authority_class"]:
+                if not entry.get(required):
+                    errors.append(f"field dictionary missing {required} for {field}")
+    except Exception as exc:
+        errors.append(f"field dictionary validation failed: {exc}")
     return errors
 
 
@@ -415,8 +464,6 @@ def validate_manifest_and_checksums():
             errors.append(f"manifest path missing: {path}")
             continue
         data = p.read_bytes()
-        if entry["byte_length"] != len(data):
-            errors.append(f"manifest byte length mismatch: {path}")
         if path == "CHECKSUMS.sha256":
             if entry["sha256"] != "LEDGER_SELF_REFERENCE_EXCLUDED":
                 errors.append("CHECKSUMS.sha256 manifest entry must exclude self hash")
@@ -425,6 +472,8 @@ def validate_manifest_and_checksums():
             if entry["sha256"] != "MANIFEST_SELF_REFERENCE_EXCLUDED":
                 errors.append("PACKAGE_MANIFEST.json manifest entry must exclude self hash")
             continue
+        if entry["byte_length"] != len(data):
+            errors.append(f"manifest byte length mismatch: {path}")
         actual_hash = hashlib.sha256(data).hexdigest()
         if entry["sha256"] != actual_hash:
             errors.append(f"manifest sha mismatch: {path}")
@@ -440,10 +489,21 @@ def validate_manifest_and_checksums():
 def validate_authorized_paths():
     errors = []
     try:
-        result = subprocess.run(["git", "diff", "--name-only", "origin/integrate-emergent-final-zip...HEAD"], cwd=REPO, check=True, capture_output=True, text=True)
-        changed = [line.strip() for line in result.stdout.splitlines() if line.strip()]
-    except Exception:
+        subprocess.run(["git", "rev-parse", "--verify", BASELINE_REF], cwd=REPO, check=True, capture_output=True, text=True, timeout=5)
+    except Exception as exc:
+        return [f"authorized-path verification blocked: baseline ref unavailable or unverifiable: {exc}"]
+    try:
+        status = subprocess.run(["git", "status", "--porcelain=v1", "--untracked-files=all", "--", AUTHORIZED_PREFIX], cwd=REPO, check=True, capture_output=True, text=True, timeout=30)
         changed = []
+        for line in status.stdout.splitlines():
+            if not line.strip():
+                continue
+            path = line[3:].strip()
+            if " -> " in path:
+                path = path.split(" -> ", 1)[1].strip()
+            changed.append(path)
+    except Exception as exc:
+        return [f"authorized-path verification blocked: unable to enumerate changed paths: {exc}"]
     for path in changed:
         if not path.startswith(AUTHORIZED_PREFIX):
             errors.append(f"changed path outside authorized package: {path}")
