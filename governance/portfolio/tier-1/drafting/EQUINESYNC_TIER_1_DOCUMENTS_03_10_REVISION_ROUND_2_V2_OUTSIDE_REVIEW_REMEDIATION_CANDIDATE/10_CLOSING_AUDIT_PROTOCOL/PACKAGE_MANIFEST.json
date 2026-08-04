@@ -1,0 +1,135 @@
+{
+  "files": [
+    {
+      "byte_length": 6798,
+      "path": "AUDIT_MODEL.json",
+      "sha256": "6a0bd4800f5d488987b47dd832236a0d7aefca1d46e6b4d6321674efa52268a3"
+    },
+    {
+      "byte_length": 4841,
+      "path": "AUDIT_REQUIREMENTS_MATRIX.csv",
+      "sha256": "c76f5cf74b915ec04ebd0545619cc0822abb4f73e7f26666bf44f662615762b7"
+    },
+    {
+      "byte_length": 931,
+      "path": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1.md",
+      "sha256": "151f57bd0f5df2398fb8d899d5b75c0f8a931f0ef1c0a59469dfd3d407b2b499"
+    },
+    {
+      "byte_length": 1970,
+      "path": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "5bcd62b82e5763f0750938bf3c5b18dfbbf6adf1093f2a991fa40c1f370c4855"
+    },
+    {
+      "byte_length": 3853,
+      "path": "TEMPLATE_INDEX.csv",
+      "sha256": "ed9d4c7a38a7b5dc72454d42d21a05198fce04d6c74299b6e9008aa684eee409"
+    },
+    {
+      "byte_length": 1587,
+      "path": "templates/01_INTERNAL_DOCUMENTARY_REVIEW_PLAN.md",
+      "sha256": "ad89f38c73348910a87e640963f5286046ef583c8fa07187b2de9f9d8bcf94a5"
+    },
+    {
+      "byte_length": 1581,
+      "path": "templates/02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
+      "sha256": "18260bfc232c306923849272999e0557b224d59980f9dabaf00b66d87b902d2c"
+    },
+    {
+      "byte_length": 1553,
+      "path": "templates/03_SOURCE_MANIFEST.md",
+      "sha256": "5233d91e4b21b6f7538e1513c7787ce70b0cad046455d46ef551541cde515842"
+    },
+    {
+      "byte_length": 1551,
+      "path": "templates/04_EVIDENCE_INDEX.md",
+      "sha256": "6d91f608fe21875c8903c96169fcf1cfae857c62a54d8d9c05b09eac79dd0646"
+    },
+    {
+      "byte_length": 1553,
+      "path": "templates/05_SAMPLING_RECORD.md",
+      "sha256": "3e217802bbab22cd318c546ab0d8382d91de1009f45dfc56619e613fcf0db108"
+    },
+    {
+      "byte_length": 1587,
+      "path": "templates/06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
+      "sha256": "efb666e3cf5e83522db4168f306cc6250fade5b68eb62055bb53ee0e8ae9d52f"
+    },
+    {
+      "byte_length": 1561,
+      "path": "templates/07_CONFLICT_DISCLOSURE.md",
+      "sha256": "d4d9160863b0cbf93a900ca2f1105d8f10e4d115cec6a9615b357a32d90eec84"
+    },
+    {
+      "byte_length": 1555,
+      "path": "templates/08_FINDING_SCHEDULE.md",
+      "sha256": "3ac5f1f0d575ccca617b0cf72f0dfcfcd76117ff722f30fb3a41bca5e3ad60b7"
+    },
+    {
+      "byte_length": 1567,
+      "path": "templates/09_RESIDUAL_RISK_SCHEDULE.md",
+      "sha256": "8de20abf69a58141b1176cda7b567db251354a61a56dc2e92fc50f4e1d6fafb1"
+    },
+    {
+      "byte_length": 1579,
+      "path": "templates/10_FOUNDER_ATTESTATION_SCHEDULE.md",
+      "sha256": "81adb72984fcbec5800b39a3877ee180d0b9a9580bcf7910a38bb596524a7015"
+    },
+    {
+      "byte_length": 1567,
+      "path": "templates/11_CLOSING_EXHIBITS_INDEX.md",
+      "sha256": "c579f67fa6d379aadc2866fb1c7c310da4877800b08464dadcc8d42dc3bd938e"
+    },
+    {
+      "byte_length": 1593,
+      "path": "templates/12_FOUNDER_DOCUMENTARY_ACKNOWLEDGEMENT.md",
+      "sha256": "653f751130217fcef41b543535d747d5135d4f87e188e1395b786528fd3954e7"
+    },
+    {
+      "byte_length": 1553,
+      "path": "templates/13_ADOPTION_RECORD.md",
+      "sha256": "3338a23b01938b69aed29ae6c735e4aa9a6abbab94db778782abc6734abedaf2"
+    },
+    {
+      "byte_length": 1557,
+      "path": "templates/14_ACCESSION_RECEIPT.md",
+      "sha256": "80b7d344c9b54b73246efc2d8a7ea7cda16e9559f1a87b42fb72b75bde718279"
+    },
+    {
+      "byte_length": 1575,
+      "path": "templates/15_POST_MERGE_CUSTODY_RECEIPT.md",
+      "sha256": "ccc436f17a6a8d9ba7a4d16f8c932fe11724ec67e50117be71813f0d765b79a3"
+    },
+    {
+      "byte_length": 1581,
+      "path": "templates/16_FINAL_SELF_DECLARATION_RECORD.md",
+      "sha256": "8016450bc3f0b2659455a16ee3876063c0ba19148d1840e82a3beb74ba29d0f7"
+    },
+    {
+      "byte_length": 1597,
+      "path": "templates/17_BOUNDED_SCOPE_SELF_DECLARATION_RECORD.md",
+      "sha256": "f8877ca13435929161f247ababd51e844bd32dcef389473e132a4885576c6ddf"
+    },
+    {
+      "byte_length": 1555,
+      "path": "templates/18_REOPENING_NOTICE.md",
+      "sha256": "aef4a8ecfdb5d1944fb4c4abd87b3d4d76704a319cb13326c6686fcef73a5c65"
+    },
+    {
+      "byte_length": 1603,
+      "path": "templates/19_PERIODIC_SELF_DECLARATION_REFRESH_RECORD.md",
+      "sha256": "74b21321d56fe3f7f174b3d53c3dd9f9047fedec5a284e3945bc187ea75ffb4e"
+    },
+    {
+      "byte_length": 359,
+      "path": "tests/test_document_10_rr2_validator.py",
+      "sha256": "16291b145a7be3420886086bbd5aaa2d5427d6a6a0aafe1f4b5b7626cc14839c"
+    },
+    {
+      "byte_length": 344,
+      "path": "validators/validate_document_10_rr2.py",
+      "sha256": "125f1bee0de999ea8cf5d0a4dc601d72ce0f104f67e99cb1262da9229dab795d"
+    }
+  ],
+  "package_root": "10_CLOSING_AUDIT_PROTOCOL"
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "activation_effect": {
+      "type": "string"
+    },
+    "authority_granted_by_approval": {
+      "type": "string"
+    },
+    "authority_not_granted": {
+      "type": "string"
+    },
+    "consequence_if_approved": {
+      "type": "string"
+    },
+    "consequence_if_deferred": {
+      "type": "string"
+    },
+    "consequence_if_rejected": {
+      "type": "string"
+    },
+    "consequence_if_remediation_required": {
+      "type": "string"
+    },
+    "decision_frame_only": {
+      "type": "string"
+    },
+    "decision_id": {
+      "type": "string"
+    },
+    "implementation_effect": {
+      "type": "string"
+    },
+    "options": {
+      "type": "string"
+    },
+    "question_presented": {
+      "type": "string"
+    },
+    "recommended_option": {
+      "type": "string"
+    },
+    "relevant_evidence": {
+      "type": "string"
+    },
+    "unresolved_risks": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision_id",
+    "question_presented",
+    "decision_frame_only",
+    "relevant_evidence",
+    "options",
+    "recommended_option",
+    "consequence_if_approved",
+    "consequence_if_deferred",
+    "consequence_if_rejected",
+    "consequence_if_remediation_required",
+    "authority_granted_by_approval",
+    "authority_not_granted",
+    "implementation_effect",
+    "activation_effect",
+    "unresolved_risks"
+  ],
+  "title": "FOUNDER_DECISION_PACKET.csv",
+  "type": "object"
+}
