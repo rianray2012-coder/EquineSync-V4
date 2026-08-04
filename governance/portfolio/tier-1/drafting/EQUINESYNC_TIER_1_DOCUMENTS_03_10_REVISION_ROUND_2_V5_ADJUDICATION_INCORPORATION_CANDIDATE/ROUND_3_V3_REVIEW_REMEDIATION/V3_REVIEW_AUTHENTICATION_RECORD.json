@@ -1,0 +1,39 @@
+{
+  "as_of_utc": "2026-08-04T20:21:25.046815+00:00",
+  "authority_boundary": "NOT_ADOPTED; NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; FOUNDER_REVIEW_REQUIRED; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED",
+  "predecessor_zip": {
+    "byte_length": 2711586,
+    "filename": "EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V3_REVIEW_FINDINGS_REMEDIATION_CANDIDATE.zip",
+    "sha256": "ad8805d5edb18e90ea6b838c75a77a162376e198e39b5b25ffca7b456d5bf785"
+  },
+  "record_type": "V3_REVIEW_AUTHENTICATION_RECORD",
+  "reviews": [
+    {
+      "byte_length": 17497,
+      "incorporated_byte_length": 17497,
+      "incorporated_path": "ROUND_3_V3_REVIEW_REMEDIATION/SOURCE_REVIEWS/Perplexity Tier 1 docs 3-10V3_REMEDIATION_REVIEW.md",
+      "incorporated_sha256": "0b5f16db40238588b2b3ad533a5c577c1d03abe9d279f39eee7043a534eb5d5c",
+      "review_id": "PERPLEXITY_V3_REMEDIATION_REVIEW",
+      "sha256": "0b5f16db40238588b2b3ad533a5c577c1d03abe9d279f39eee7043a534eb5d5c",
+      "source_filename": "Perplexity Tier 1 docs 3-10V3_REMEDIATION_REVIEW.md"
+    },
+    {
+      "byte_length": 11089,
+      "incorporated_byte_length": 11089,
+      "incorporated_path": "ROUND_3_V3_REVIEW_REMEDIATION/SOURCE_REVIEWS/Claude EQUINESYNC_V3_REMEDIATION_CANDIDATE_REVIEW.md",
+      "incorporated_sha256": "5e4666b1b800fbde348a12a4553bb13f2a8f055e25fb24c0ae0cf3b34a7c37b7",
+      "review_id": "CLAUDE_V3_REMEDIATION_CANDIDATE_REVIEW",
+      "sha256": "5e4666b1b800fbde348a12a4553bb13f2a8f055e25fb24c0ae0cf3b34a7c37b7",
+      "source_filename": "Claude EQUINESYNC_V3_REMEDIATION_CANDIDATE_REVIEW.md"
+    },
+    {
+      "byte_length": 12413,
+      "incorporated_byte_length": 12413,
+      "incorporated_path": "ROUND_3_V3_REVIEW_REMEDIATION/SOURCE_REVIEWS/cursor_EQUINESYNC_TIER_1_RR2_V3_OUTSIDE_REVIEW_REPORT_b6e98e0.md",
+      "incorporated_sha256": "b4659e4f923c303e6fce668adf9442a6cd75b0a03892b5b2d632da2c22f26ed1",
+      "review_id": "CURSOR_V3_OUTSIDE_REVIEW_REPORT",
+      "sha256": "b4659e4f923c303e6fce668adf9442a6cd75b0a03892b5b2d632da2c22f26ed1",
+      "source_filename": "cursor_EQUINESYNC_TIER_1_RR2_V3_OUTSIDE_REVIEW_REPORT_b6e98e0.md"
+    }
+  ]
+}

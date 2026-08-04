@@ -1,0 +1,6 @@
+item,adjudication,residual
+T1C-004,CORE_DOC10_REMEDIATION_ACCEPTED,Doc10 control-layer uniformity and certification-path naming debt retained nonblocking.
+T1C-006,QUARANTINE_ACCEPTED_T1C_REMAINS_OPEN,45 surviving candidates retain NOT_PERFORMED ISO checks.
+V4-01,ACCEPTED_AS_NEW_FINDING_REMEDIATED_IN_V5_PENDING_REREVIEW,Lifecycle rule class table requires bounded rereview.
+T1C-009,SOURCE_REVIEW_IDS_CORRECTED,Not Founder-approved or finally closed.
+T1C-011,SOURCE_REVIEW_IDS_CORRECTED_AND_LINKED_TO_V4_01,Retained open pending lifecycle rule rereview.

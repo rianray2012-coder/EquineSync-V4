@@ -1,0 +1,4 @@
+item_id,severity,item,state,authority_effect
+DOC10-RES-001,LOW,"Doc10 Collection Method, Required Determinations, and Completion Fields remain too uniform across 19 templates.",RESIDUAL_NONBLOCKING_OPEN,NONE
+DOC10-RES-002,LOW,Doc10 filename/path retains certification terminology.,RESIDUAL_NAMING_DEBT_OPEN,NONE
+V4-01,MEDIUM,"Lifecycle rules were mechanically uniquified in V4; V5 adds rule-class table and prefix-stripped validation, retained pending rereview.",REMEDIATED_IN_V5_PENDING_REREVIEW,NONE

@@ -1,0 +1,21 @@
+{
+  "directory": "ROUND_4_V4_ADJUDICATION_INCORPORATION",
+  "files": [
+    {
+      "byte_length": 2212,
+      "path": "V4_ADJUDICATION_AUTHENTICATION_RECORD.json",
+      "sha256": "6d299bd56a5a46cf27c448e1b4480aa5f3faabdae8d954f38726c87240c0031c"
+    },
+    {
+      "byte_length": 554,
+      "path": "V5_ADJUDICATION_DISPOSITION_SUMMARY.csv",
+      "sha256": "e1743f6a159104d3ff8d489983dee7b7026783441299c04a61e4687d0581e95e"
+    },
+    {
+      "byte_length": 1365,
+      "path": "V5_ADJUDICATION_SUMMARY.md",
+      "sha256": "f61fa8cfa430e31319e301b8755f2d1ec73e8be1ea7a5a43e4add29341277830"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

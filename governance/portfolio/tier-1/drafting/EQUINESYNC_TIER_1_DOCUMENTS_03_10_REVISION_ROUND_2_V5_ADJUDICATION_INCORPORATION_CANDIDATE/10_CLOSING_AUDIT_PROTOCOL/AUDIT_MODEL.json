@@ -1,0 +1,167 @@
+{
+  "prohibited_unbounded_complete_certification": true,
+  "required_limitation_statements": [
+    "NOT_ADOPTED",
+    "NOT_ACTIVE",
+    "IMPLEMENTATION_NOT_AUTHORIZED",
+    "PRODUCTION_USE_NOT_AUTHORIZED",
+    "MERGE_NOT_AUTHORIZED",
+    "CERTIFICATION_NOT_COMPLETE",
+    "FOUNDER_REVIEW_REQUIRED",
+    "UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED"
+  ],
+  "templates": [
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/01_AUDIT_PLAN.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-01",
+      "template_name": "AUDIT_PLAN"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/02_SCOPE_AND_EXCLUSIONS_SCHEDULE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-02",
+      "template_name": "SCOPE_AND_EXCLUSIONS_SCHEDULE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/03_SOURCE_MANIFEST.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-03",
+      "template_name": "SOURCE_MANIFEST"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/04_EVIDENCE_INDEX.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-04",
+      "template_name": "EVIDENCE_INDEX"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/05_SAMPLING_RECORD.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-05",
+      "template_name": "SAMPLING_RECORD"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/06_REVIEWER_INDEPENDENCE_DISCLOSURE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-06",
+      "template_name": "REVIEWER_INDEPENDENCE_DISCLOSURE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/07_CONFLICT_DISCLOSURE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-07",
+      "template_name": "CONFLICT_DISCLOSURE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/08_FINDING_SCHEDULE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-08",
+      "template_name": "FINDING_SCHEDULE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/09_RESIDUAL_RISK_SCHEDULE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-09",
+      "template_name": "RESIDUAL_RISK_SCHEDULE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/10_FOUNDER_CERTIFICATION_SCHEDULE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-10",
+      "template_name": "FOUNDER_CERTIFICATION_SCHEDULE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/11_CLOSING_EXHIBITS_INDEX.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-11",
+      "template_name": "CLOSING_EXHIBITS_INDEX"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/12_FOUNDER_RATIFICATION_INSTRUMENT.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-12",
+      "template_name": "FOUNDER_RATIFICATION_INSTRUMENT"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/13_ADOPTION_RECORD.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-13",
+      "template_name": "ADOPTION_RECORD"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/14_ACCESSION_RECEIPT.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-14",
+      "template_name": "ACCESSION_RECEIPT"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/15_POST_MERGE_CUSTODY_RECEIPT.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-15",
+      "template_name": "POST_MERGE_CUSTODY_RECEIPT"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/16_FINAL_CLOSING_CERTIFICATE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-16",
+      "template_name": "FINAL_CLOSING_CERTIFICATE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/17_BOUNDED_SCOPE_CLOSING_CERTIFICATE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-17",
+      "template_name": "BOUNDED_SCOPE_CLOSING_CERTIFICATE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/18_REOPENING_NOTICE.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-18",
+      "template_name": "REOPENING_NOTICE"
+    },
+    {
+      "bounded_complete_allowed": "NO_IF_EXCLUSIONS_OR_OPEN_ITEMS_REMAIN",
+      "evidence_register_linkage_required": "YES",
+      "path": "templates/19_RECERTIFICATION_RECORD.md",
+      "source_register_linkage_required": "YES",
+      "template_id": "T1R2-AUDIT-TEMPLATE-19",
+      "template_name": "RECERTIFICATION_RECORD"
+    }
+  ]
+}

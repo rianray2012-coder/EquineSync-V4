@@ -1,0 +1,16 @@
+{
+  "checks": [
+    {
+      "expected_check": "lifecycle_prefix_stripped_reversal_rules",
+      "expected_failure_detected": true,
+      "fixture": "mechanically_uniquified_lifecycle_rules"
+    },
+    {
+      "expected_check": "doc03_coverage_matches_non_rejected",
+      "expected_failure_detected": true,
+      "fixture": "doc03_coverage_reverts_to_96"
+    }
+  ],
+  "fixture_count": 2,
+  "status": "PASS"
+}

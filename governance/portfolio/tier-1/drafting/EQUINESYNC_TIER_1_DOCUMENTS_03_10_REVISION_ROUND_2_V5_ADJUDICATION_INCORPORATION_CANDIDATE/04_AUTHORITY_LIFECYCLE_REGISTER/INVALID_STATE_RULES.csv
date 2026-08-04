@@ -1,0 +1,13 @@
+rule_id,invalid_combination,validator_expression,validation_effect,implementation_status,failure_capable
+T1R2-LIFE-RULE-01,active but not adopted,activation_state=ACTIVE and adoption_state!=ADOPTED,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-02,adopted without approval evidence,adoption_state=ADOPTED and approval_evidence empty,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-03,accessioned without accession evidence,accession_state=ACCESSIONED and accession_evidence empty,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-04,custody complete without accession event,custody_state=CUSTODY_COMPLETE and accession_state!=ACCESSIONED,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-05,superseded without successor or basis,supersession_state starts SUPERSEDED and successor_or_basis empty,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-06,locked without lock evidence,document_lifecycle_state=LOCKED and lock_evidence empty,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-07,effective without required effective date,authority_state=EFFECTIVE and effective_date empty,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-08,implementation-authorizing while unauthorized,implementation_authority=AUTHORIZED and authority_state!=IMPLEMENTATION_AUTHORIZING,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-09,production-authorizing without activation authority,production_authority=AUTHORIZED and activation_state!=ACTIVE,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-10,suspended but unrestrictedly active,suspension_state=SUSPENDED and activation_state=ACTIVE,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-11,historical but presented as controlling,document_lifecycle_state=HISTORICAL_RETAINED and authority_state=CONTROLLING,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES
+T1R2-LIFE-RULE-12,candidate evidence represented as adopted authority,authority_state=DOCUMENTARY_CANDIDATE_ONLY and adoption_state=ADOPTED,BLOCKING_FAILURE,ENFORCED_BY_VALIDATOR,YES

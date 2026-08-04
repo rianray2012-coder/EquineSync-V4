@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "abandoned_findings": {
+      "type": "string"
+    },
+    "analysis_id": {
+      "type": "string"
+    },
+    "conflicting_severity": {
+      "type": "string"
+    },
+    "duplicates": {
+      "type": "string"
+    },
+    "findings_lacking_evidence": {
+      "type": "string"
+    },
+    "improperly_closed_findings": {
+      "type": "string"
+    },
+    "method": {
+      "type": "string"
+    },
+    "semantic_overlaps": {
+      "type": "string"
+    },
+    "stale_findings": {
+      "type": "string"
+    },
+    "tested_population": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "analysis_id",
+    "tested_population",
+    "method",
+    "duplicates",
+    "semantic_overlaps",
+    "stale_findings",
+    "abandoned_findings",
+    "improperly_closed_findings",
+    "findings_lacking_evidence",
+    "conflicting_severity"
+  ],
+  "title": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS/DUPLICATE_AND_STALENESS_ANALYSIS.csv",
+  "type": "object"
+}

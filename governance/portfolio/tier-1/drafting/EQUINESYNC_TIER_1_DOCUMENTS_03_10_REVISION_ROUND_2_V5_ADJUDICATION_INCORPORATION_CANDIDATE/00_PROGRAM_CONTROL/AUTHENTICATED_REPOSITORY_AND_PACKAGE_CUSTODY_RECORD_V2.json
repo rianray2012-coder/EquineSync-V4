@@ -1,0 +1,58 @@
+{
+  "as_of_utc": "2026-08-04T17:41:56Z",
+  "authenticated_current_target": {
+    "archive_byte_length": 2586324,
+    "archive_path": "governance/portfolio/tier-1/drafting/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V1.zip",
+    "archive_sha256": "909ba841a1b488ae61a370d74182a5841901a0b061accc568c3d609c3d8a4433",
+    "commit": "1c053c4a9658e5b47d0cbc0bbf4edf6a995a41e3",
+    "package_file_count": 161,
+    "package_root": "governance/portfolio/tier-1/drafting/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V1",
+    "root_manifest_sha256": "39f880a537b0c3c67782ed0667ce3928db0cbb1a7c79f70d9c08471fcbfe2481"
+  },
+  "authority_boundary": "NOT_ADOPTED; NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; FOUNDER_REVIEW_REQUIRED; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED",
+  "base_branch": "integrate-emergent-final-zip",
+  "base_sha": "1eb384d80daa700ba2e71ee42872cc9bba926332",
+  "local_remediation_branch": "codex/tier-1-docs-03-10-outside-review-remediation-20260804",
+  "local_remediation_start_sha": "1c053c4a9658e5b47d0cbc0bbf4edf6a995a41e3",
+  "no_adoption_activation_merge_or_certification": true,
+  "predecessor_successor_table": [
+    {
+      "archive_byte_length": 2545176,
+      "archive_sha256": "aa61978cf952a6b93abcb20c009ce28d862734258e7aae7a4a2b12788563545f",
+      "commit": "a1a1ff5cf056e7e78c99c4038fb8afcb95aebab7",
+      "target": "Cursor-reviewed commit",
+      "treatment": "historical reviewed predecessor"
+    },
+    {
+      "archive_byte_length": 2545176,
+      "archive_sha256": "aa61978cf952a6b93abcb20c009ce28d862734258e7aae7a4a2b12788563545f",
+      "commit": "a1a1ff5cf056e7e78c99c4038fb8afcb95aebab7",
+      "target": "Cursor-reviewed archive",
+      "treatment": "matches repository blob at a1a1ff5"
+    },
+    {
+      "archive_byte_length": 2586324,
+      "archive_sha256": "909ba841a1b488ae61a370d74182a5841901a0b061accc568c3d609c3d8a4433",
+      "commit": "1c053c4a9658e5b47d0cbc0bbf4edf6a995a41e3",
+      "target": "Later PR #83 tip",
+      "treatment": "authenticated current pre-remediation target"
+    },
+    {
+      "archive_byte_length": 2586324,
+      "archive_sha256": "909ba841a1b488ae61a370d74182a5841901a0b061accc568c3d609c3d8a4433",
+      "commit": "1c053c4a9658e5b47d0cbc0bbf4edf6a995a41e3",
+      "target": "Claude-reviewed archive",
+      "treatment": "matches current PR #83 committed ZIP"
+    }
+  ],
+  "record_type": "TIER_1_DOCS_03_10_V2_AUTHENTICATED_CUSTODY_RECORD",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "source_pr": 83,
+  "source_pr_head_branch": "codex/tier-1-documents-03-10-revision-round-2",
+  "source_pr_head_sha": "1c053c4a9658e5b47d0cbc0bbf4edf6a995a41e3",
+  "v2_package": {
+    "file_count_before_manifest_refresh": 168,
+    "package_root": "governance/portfolio/tier-1/drafting/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V5_ADJUDICATION_INCORPORATION_CANDIDATE",
+    "root_manifest_sha256_before_refresh": "39f880a537b0c3c67782ed0667ce3928db0cbb1a7c79f70d9c08471fcbfe2481"
+  }
+}

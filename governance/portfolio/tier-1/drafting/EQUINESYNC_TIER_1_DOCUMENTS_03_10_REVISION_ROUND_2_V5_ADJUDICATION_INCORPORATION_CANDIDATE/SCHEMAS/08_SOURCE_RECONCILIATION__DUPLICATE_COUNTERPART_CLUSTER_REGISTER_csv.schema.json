@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "archive_treatment": {
+      "type": "string"
+    },
+    "cluster_id": {
+      "type": "string"
+    },
+    "content_differs": {
+      "type": "string"
+    },
+    "controlling_version": {
+      "type": "string"
+    },
+    "counterpart_or_derivative": {
+      "type": "string"
+    },
+    "exact_byte_identity": {
+      "type": "string"
+    },
+    "other_copies_usable": {
+      "type": "string"
+    },
+    "preferred_canonical_representation": {
+      "type": "string"
+    },
+    "source_path": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "cluster_id",
+    "source_path",
+    "preferred_canonical_representation",
+    "exact_byte_identity",
+    "counterpart_or_derivative",
+    "content_differs",
+    "controlling_version",
+    "archive_treatment",
+    "other_copies_usable"
+  ],
+  "title": "08_SOURCE_RECONCILIATION/DUPLICATE_COUNTERPART_CLUSTER_REGISTER.csv",
+  "type": "object"
+}

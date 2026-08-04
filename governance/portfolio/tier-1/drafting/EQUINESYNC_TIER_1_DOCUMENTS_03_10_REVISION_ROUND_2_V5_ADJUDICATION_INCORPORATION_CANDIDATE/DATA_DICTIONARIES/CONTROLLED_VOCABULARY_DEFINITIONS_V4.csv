@@ -1,0 +1,7 @@
+field,allowed_value,definition
+decision_frame_only,YES,Decision row is presented for Founder consideration only and does not itself select or approve an option.
+recommended_option,NO_RECOMMENDATION_SELECTED,The package makes no recommendation and leaves all Founder choices unselected.
+source_disposition,candidate source requiring authority confirmation,Source is useful documentary input but cannot be treated as authoritative current source without explicit evidence.
+closure_state,OPEN_RETAINED_FOR_INDEPENDENT_ADJUDICATION,Issue remains open after V4 authoring because only an independent reviewer can adjudicate closure.
+validation_status,STRUCTURAL_PASS_SUBSTANTIVE_CLOSURE_BLOCKED,"Structural package checks passed, but substantive closure remains blocked by open findings."
+template_body_cluster,V4-PURPOSE-SPECIFIC-*,Template body has purpose-specific required fields and is distinct after normalized-body comparison.

@@ -1,0 +1,21 @@
+{
+  "directory": "ROUND_4_V4_ADJUDICATION_INCORPORATION/SOURCE_REVIEWS",
+  "files": [
+    {
+      "byte_length": 13489,
+      "path": "Claude_EQUINESYNC_V4_ADJUDICATION.md",
+      "sha256": "17fe77e2d201acb60e414cab85e17597850530eb4f3fa31e3c34eb17d561be1d"
+    },
+    {
+      "byte_length": 10425,
+      "path": "Cursor_EQUINESYNC_TIER_1_RR2_V4_BOUNDED_REREVIEW_ADJUDICATION_8b8f7a5.md",
+      "sha256": "1f646bbb0402e06352b089d41111184aed30787d3fa5dd14742f4fa30d03cc2b"
+    },
+    {
+      "byte_length": 14462,
+      "path": "Perplexity_V4_BOUNDED_REREVIEW_ADJUDICATION.md",
+      "sha256": "cf57cc3afb2e7128f15f5cf6fbf2f8010fad479b57a7307568dae7d4d28353bb"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}
