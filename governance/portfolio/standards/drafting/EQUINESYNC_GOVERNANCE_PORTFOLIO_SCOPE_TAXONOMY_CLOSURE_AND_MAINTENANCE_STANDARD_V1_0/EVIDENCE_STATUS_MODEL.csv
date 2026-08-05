@@ -1,0 +1,9 @@
+evidence_status,dimension,definition,rule_ids
+VERIFIED,evidence_status,Evidence status VERIFIED.,"[""ES-GPS-VALID-001""]"
+NOT_VERIFIED,evidence_status,Evidence status NOT_VERIFIED.,"[""ES-GPS-VALID-001""]"
+WAIVED,evidence_status,Evidence status WAIVED.,"[""ES-GPS-VALID-001""]"
+DEFERRED,evidence_status,Evidence status DEFERRED.,"[""ES-GPS-VALID-001""]"
+SUBSTITUTE_EVIDENCE_ACCEPTED,evidence_status,Evidence status SUBSTITUTE_EVIDENCE_ACCEPTED.,"[""ES-GPS-VALID-001""]"
+UNAVAILABLE,evidence_status,Evidence status UNAVAILABLE.,"[""ES-GPS-VALID-001""]"
+BLOCKED,evidence_status,Evidence status BLOCKED.,"[""ES-GPS-VALID-001""]"
+PENDING,evidence_status,Evidence status PENDING.,"[""ES-GPS-VALID-001""]"

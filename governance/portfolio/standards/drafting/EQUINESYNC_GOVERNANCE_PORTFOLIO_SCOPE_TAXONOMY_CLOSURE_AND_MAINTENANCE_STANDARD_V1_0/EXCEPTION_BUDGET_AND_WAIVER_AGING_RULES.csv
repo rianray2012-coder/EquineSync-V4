@@ -1,0 +1,6 @@
+trigger_id,trigger,threshold,required_action,rule_ids
+EXB-001,More than five waivers open,>5 open waivers,Quarterly review escalation and owner assignment,"[""ES-GPS-WAIVE-001""]"
+EXB-002,Critical control waived,Any critical control,Founder review plus second-review safeguard where available,"[""ES-GPS-CORE-001""]"
+EXB-003,Waiver age exceeds 180 days,>180 days,Highlight in quarterly governance review,"[""ES-GPS-EXPIRE-001""]"
+EXB-004,Waiver reaches expiration,expires_at <= review date,"Expire, renew by durable record, or satisfy by evidence","[""ES-GPS-EXPIRE-001""]"
+EXB-005,FCR-09 override open beyond approved period,past duration,Suspend or revoke unless renewed by durable record,"[""ES-GPS-OVER-001""]"

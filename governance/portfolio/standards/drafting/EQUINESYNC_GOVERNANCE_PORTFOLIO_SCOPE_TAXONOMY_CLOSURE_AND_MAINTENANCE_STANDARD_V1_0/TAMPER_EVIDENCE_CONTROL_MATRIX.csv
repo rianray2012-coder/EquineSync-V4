@@ -1,0 +1,5 @@
+control_id,mechanism,implemented_now,limitation,compensating_control,rule_ids
+TAMP-001,SHA-256 manifest,TRUE,Unsigned hash file,Package validator and git object identity,"[""ES-GPS-CUST-001""]"
+TAMP-002,Signed commits,FALSE,Not configured in this local run,Record limitation and use protected branch review,"[""ES-GPS-CUST-001""]"
+TAMP-003,CODEOWNERS,DRAFT,"Workflow/config proposed, branch protection pending",Targeted review required,"[""ES-GPS-MAINT-001""]"
+TAMP-004,Signed annotated tag or independent package hash anchoring,FALSE,Requires separate release authority,Manifest and checksum evidence retained,"[""ES-GPS-CUST-001""]"

@@ -1,0 +1,3 @@
+profile_id,required_for,cannot_be_used_for
+FULL_CONTROL,Tier 1 governance canon; production authorizations; procedural overrides; personal-data processing; safeguarding; financial operations; security; privacy; AI governance; minors; critical implementation atlases; production-behavior code guides; material residual-risk acceptance,Low-risk shortcuts that conceal material authority or evidence defects
+LIGHTWEIGHT,Low-risk internal guidance; non-authoritative working documents; non-material corrections; editorial changes; low-impact reference material,"Production, pilot, privacy, safeguarding, security, minors, financial, AI, or material authority effects"

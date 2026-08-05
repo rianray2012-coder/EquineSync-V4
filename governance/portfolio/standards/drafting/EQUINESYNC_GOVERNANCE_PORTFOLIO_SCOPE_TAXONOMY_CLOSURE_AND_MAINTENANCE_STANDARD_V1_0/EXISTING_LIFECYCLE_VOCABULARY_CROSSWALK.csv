@@ -1,0 +1,31 @@
+legacy_or_existing_term,controlled_term,use_status,notes
+PROPOSED,PROPOSED,CONTROLLED,Suggested artifact or action before authorized drafting.
+DRAFTING,DRAFTING,CONTROLLED,Authorized documentary work is in progress.
+DOCUMENTARY_REVISION_CANDIDATE,DOCUMENTARY_REVISION_CANDIDATE,CONTROLLED,"Revised package with Founder dispositions incorporated but not merged, adopted, locked, or active."
+UNDER_REVIEW,UNDER_REVIEW,CONTROLLED,Authorized reviewers are evaluating exact package bytes.
+FOUNDER_APPROVED,FOUNDER_APPROVED,CONTROLLED,"Founder approved specified content, disposition, or exception scope."
+ADOPTED,ADOPTED,CONTROLLED,Artifact accepted as governing authority within stated level and scope.
+LOCKED,LOCKED,CONTROLLED,Exact-byte immutable authority baseline is established.
+ACCESSION_PENDING,ACCESSION_PENDING,CONTROLLED,Approved/adopted bytes await repository inclusion or protected custody.
+REPOSITORY_ACCESSIONED,REPOSITORY_ACCESSIONED,CONTROLLED,Exact approved/adopted bytes exist in repository at authorized commit/path.
+CUSTODY_COMPLETE,CUSTODY_COMPLETE,CONTROLLED,Protected repository state verifies expected exact bytes.
+ACTIVE_LIMITED_SCOPE,ACTIVE_LIMITED_SCOPE,CONTROLLED,Artifact governs a stated bounded scope under activation record.
+ACTIVE,ACTIVE,CONTROLLED,Artifact governs its authorized scope under activation record.
+IMPLEMENTATION_AUTHORIZED,IMPLEMENTATION_AUTHORIZED,CONTROLLED,Exact implementation work is authorized.
+IMPLEMENTATION_COMPLETE,IMPLEMENTATION_COMPLETE,CONTROLLED,Authorized implementation work reports completion.
+VERIFIED,VERIFIED,CONTROLLED,Executed or accepted substitute verification is complete within scope.
+OPERATIONALLY_READY,OPERATIONALLY_READY,CONTROLLED,"Operational support, owners, runbooks, monitoring, rollback, and incident handling are ready or accepted by competent authority."
+PILOT_AUTHORIZED,PILOT_AUTHORIZED,CONTROLLED,Controlled pilot may proceed inside stated envelope.
+FOUNDER_CERTIFIED_EXCEPTION,FOUNDER_CERTIFIED_EXCEPTION,CONTROLLED,"Founder certification, waiver, substitution, override, or risk acceptance controls a bounded evidence or process exception."
+PRODUCTION_AUTHORIZED_WITH_EXPRESS_EXCEPTIONS,PRODUCTION_AUTHORIZED_WITH_EXPRESS_EXCEPTIONS,CONTROLLED,Founder grants production authority while expressly accepting identified exceptions and retained risks.
+SUSPENDED,SUSPENDED,CONTROLLED,"Authority effect paused due to trigger, defect, conflict, expiration, or decision."
+SUPERSEDED,SUPERSEDED,CONTROLLED,Artifact or claim replaced by explicit successor.
+RETIRED,RETIRED,CONTROLLED,Artifact no longer active for future use but preserved.
+REJECTED,REJECTED,CONTROLLED,Proposal or artifact not accepted for governing use.
+REOPENED,REOPENED,CONTROLLED,"Previously closed, active, or archived matter reopened due to trigger."
+RECLOSED,RECLOSED,CONTROLLED,A reopened item is closed again with updated evidence and retained limitations.
+EXPIRED,EXPIRED,CONTROLLED,Temporary authority or certification reached expiration.
+REVOKED,REVOKED,CONTROLLED,Authority or certification withdrawn by durable record.
+NARROWED,NARROWED,CONTROLLED,Scope narrowed by durable record.
+SATISFIED_BY_EVIDENCE,SATISFIED_BY_EVIDENCE,CONTROLLED,Temporary exception is replaced by direct evidence satisfying the original requirement.
+FOUNDER_REVIEW_PENDING,FOUNDER_REVIEW_PENDING,CONTROLLED,Candidate is awaiting Founder or targeted outside review; no approval effect exists.
