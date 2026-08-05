@@ -1,0 +1,37 @@
+{
+  "generated_at_utc": "2026-08-05T03:51:35Z",
+  "checks": [
+    {
+      "check": "required_register_columns",
+      "result": "PASS"
+    },
+    {
+      "check": "source_file_sha256_and_byte_length_present",
+      "result": "PASS"
+    },
+    {
+      "check": "source_bytes_from_git_head",
+      "result": "PASS"
+    },
+    {
+      "check": "package_authority_boundary_documented",
+      "result": "PASS"
+    },
+    {
+      "check": "retained_open_findings_not_closed",
+      "result": "PASS"
+    },
+    {
+      "check": "structural_csv_row_counts",
+      "result": "PASS"
+    }
+  ],
+  "counts": {
+    "accessioned_artifacts": 3035,
+    "canonical_index_rows": 2491,
+    "supersession_map_rows": 802,
+    "retained_open_findings_rows": 4156,
+    "stale_duplicate_conflict_rows": 1869,
+    "feature_inclusion_rows": 4792
+  }
+}

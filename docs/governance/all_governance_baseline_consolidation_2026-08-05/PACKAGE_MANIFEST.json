@@ -1,0 +1,56 @@
+{
+  "package_id": "EQUINESYNC_ALL_GOVERNANCE_BASELINE_CONSOLIDATION_AND_ACCESSION_PACKAGE",
+  "generated_at_utc": "2026-08-05T03:51:35Z",
+  "repository": "/Users/rianray/Documents/GitHub/EquineSync-V4",
+  "remote": "https://github.com/rianray2012-coder/EquineSync-V4.git",
+  "branch": "integrate-emergent-final-zip",
+  "commit_sha": "f5b2973c9a796d6864607dcae42aa6c89f894250",
+  "source_bytes": "Git blobs at HEAD, not local filesystem placeholders",
+  "authority_boundary": {
+    "documentary_consolidation_only": true,
+    "implementation_authority": false,
+    "runtime_authority": false,
+    "production_authority": false,
+    "public_launch_or_compliance_claim_authority": false
+  },
+  "counts": {
+    "accessioned_artifacts": 3035,
+    "canonical_index_rows": 2491,
+    "supersession_map_rows": 802,
+    "retained_open_findings_rows": 4156,
+    "stale_duplicate_conflict_rows": 1869,
+    "feature_inclusion_rows": 4792
+  },
+  "registers": [
+    {
+      "path": "MASTER_GOVERNANCE_ACCESSION_REGISTER.csv",
+      "sha256": "b8295bd1d111ace83a2c4c9991458d1dfb09bc50f687e115b8c163d77fe34fe5",
+      "byte_length": 4763314
+    },
+    {
+      "path": "CANONICAL_GOVERNANCE_SOURCE_OF_TRUTH_INDEX.csv",
+      "sha256": "34af61f446cdbe734540a5bd3e82bae00e7d332d445d3da3bc5f00a7a4ad1684",
+      "byte_length": 3822093
+    },
+    {
+      "path": "SUPERSESSION_AND_HISTORICAL_ARTIFACT_MAP.csv",
+      "sha256": "b3506fe77561044d0d15e90a873be4ef0edfb2cf37527c5e867b0be8feb8fd55",
+      "byte_length": 377194
+    },
+    {
+      "path": "RETAINED_OPEN_FINDINGS_AND_RESIDUAL_RISK_REGISTER.csv",
+      "sha256": "0c3a378452e724dff6fece63447be085979711b3e9d680795dc16fea9940db61",
+      "byte_length": 2106965
+    },
+    {
+      "path": "STALE_DUPLICATE_CONFLICT_REGISTER.csv",
+      "sha256": "8bde85a1cc4aef99c1cf22a38c5bf8d6d1f9e721a19c0d302e9d83d95493b882",
+      "byte_length": 855082
+    },
+    {
+      "path": "GOVERNANCE_TO_FEATURE_INCLUSION_MAP.csv",
+      "sha256": "c087aebb80bab61c87af54dea663d15311c83123d6d5b83126838a073d1aa4a7",
+      "byte_length": 2087009
+    }
+  ]
+}
