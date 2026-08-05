@@ -1,0 +1,8 @@
+disposition_id,record_type,permitted_status,closure_requirement,prohibited_claim,rule_ids
+FDISP-001,finding/risk/exception/waiver,OPEN,"Explicit evidence, authority, owner, limitations, and review trigger",Do not imply automatic closure or implementation verification,"[""ES-GPS-FIND-001"",""ES-GPS-CLOSE-001""]"
+FDISP-002,finding/risk/exception/waiver,REMEDIATED_PENDING_REREVIEW,"Explicit evidence, authority, owner, limitations, and review trigger",Do not imply automatic closure or implementation verification,"[""ES-GPS-FIND-001"",""ES-GPS-CLOSE-001""]"
+FDISP-003,finding/risk/exception/waiver,CLOSED_WITH_EVIDENCE,"Explicit evidence, authority, owner, limitations, and review trigger",Do not imply automatic closure or implementation verification,"[""ES-GPS-FIND-001"",""ES-GPS-CLOSE-001""]"
+FDISP-004,finding/risk/exception/waiver,DEFERRED_WITH_OWNER,"Explicit evidence, authority, owner, limitations, and review trigger",Do not imply automatic closure or implementation verification,"[""ES-GPS-FIND-001"",""ES-GPS-CLOSE-001""]"
+FDISP-005,finding/risk/exception/waiver,REJECTED_WITH_REASON,"Explicit evidence, authority, owner, limitations, and review trigger",Do not imply automatic closure or implementation verification,"[""ES-GPS-FIND-001"",""ES-GPS-CLOSE-001""]"
+FDISP-006,finding/risk/exception/waiver,REOPENED,"Explicit evidence, authority, owner, limitations, and review trigger",Do not imply automatic closure or implementation verification,"[""ES-GPS-FIND-001"",""ES-GPS-CLOSE-001""]"
+FDISP-007,finding/risk/exception/waiver,SUPERSEDED,"Explicit evidence, authority, owner, limitations, and review trigger",Do not imply automatic closure or implementation verification,"[""ES-GPS-FIND-001"",""ES-GPS-CLOSE-001""]"

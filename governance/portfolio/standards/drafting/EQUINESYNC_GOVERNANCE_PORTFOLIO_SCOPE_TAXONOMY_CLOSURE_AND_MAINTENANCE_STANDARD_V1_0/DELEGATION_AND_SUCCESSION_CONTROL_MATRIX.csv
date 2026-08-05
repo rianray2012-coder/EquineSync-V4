@@ -1,0 +1,4 @@
+control_id,topic,requirement,default_treatment,rule_ids
+DEL-001,Written scope,"Delegation must name grantor, delegate, exact scope, duration, limits, and revocation terms.",No delegation exists unless durable written record exists.,"[""ES-GPS-DELEG-001""]"
+DEL-002,Self-expansion prohibited,Delegate may not expand delegation or delegate production authority unless expressly permitted by Founder instrument.,Expansion fails closed.,"[""ES-GPS-DELEG-001"",""ES-GPS-CORE-001""]"
+DEL-003,Founder unavailability,Standing alternate authority must be named for expiring certifications or the affected record suspends/narrows per its review trigger.,Suspend or narrow; do not silently extend.,"[""ES-GPS-DELEG-001"",""ES-GPS-REVOKE-001""]"

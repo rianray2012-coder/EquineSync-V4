@@ -1,0 +1,27 @@
+scenario_id,rule,representative_row_or_register,expected_outcome,result
+ADV-01,invalid feature dependency,A row references a missing feature ID.,Validator rejects missing dependency references.,PASS
+ADV-02,missing source authority,A row lacks source IDs or origin document.,Validator rejects missing source authority.,PASS
+ADV-03,unsupported Founder approval claim,A row claims ADOPTED or ACTIVE without source/date.,Validator rejects unsupported Founder approval.,PASS
+ADV-04,unsupported implementation verification,A row claims REPOSITORY_VERIFIED without behavioral evidence.,Validator rejects unsupported verification.,PASS
+ADV-05,inconsistent risk score,Risk score does not equal severity times likelihood.,Validator rejects score mismatch.,PASS
+ADV-06,inconsistent readiness score,Readiness score does not match layer state calculation.,Validator rejects score mismatch.,PASS
+ADV-07,missing gap owner,An unresolved gap has no owner and no explanation.,Validator rejects missing ownership.,PASS
+ADV-08,queue row not present in matrix,Queue references a non-existent feature.,Validator rejects queue mismatch.,PASS
+ADV-09,dashboard count mismatch,Dashboard count differs from authoritative matrix.,Validator rejects dashboard mismatch.,PASS
+ADV-10,duplicate feature ID,Two rows share a stable feature ID.,Validator rejects duplicate ID.,PASS
+ADV-11,invalid controlled vocabulary,A risk or layer field contains an unapproved value.,Validator rejects invalid vocabulary.,PASS
+ADV-12,circular dependency without explanation,Two rows depend on each other.,Validator rejects dependency cycle.,PASS
+ADV-13,active-governance claim without evidence,A layer claims ACTIVE without activation evidence.,Validator rejects active claim.,PASS
+ADV-14,runtime-verification claim without test evidence,Runtime state claims verified while no runtime evidence exists.,Validator rejects runtime verification claim.,PASS
+ADV-15,release-target claim without source or disclaimer,A row claims PILOT without planning disclaimer or authority source.,Validator rejects release authority overstatement.,PASS
+ADV-16,fully covered overstatement,A FULLY_COVERED row has a mandatory gap layer.,Validator rejects fully covered mismatch.,PASS
+ADV-17,unresolved gap no explanation,UNASSIGNED owner lacks explanation.,Validator rejects incomplete gap ownership.,PASS
+ADV-18,checksum tamper,Manifest hash or checksum ledger does not match bytes.,Validator rejects manifest/checksum mismatch.,PASS
+ADV-19,templated description detector,Synthetic negative fixture in validator unit tests,Validator/test suite rejects materially wrong but vocabulary-valid package state.,PASS
+ADV-20,risk distribution clustering detector,Synthetic negative fixture in validator unit tests,Validator/test suite rejects materially wrong but vocabulary-valid package state.,PASS
+ADV-21,FULLY_COVERED overstatement detector,Synthetic negative fixture in validator unit tests,Validator/test suite rejects materially wrong but vocabulary-valid package state.,PASS
+ADV-22,NOT_FOUND with evidence path detector,Synthetic negative fixture in validator unit tests,Validator/test suite rejects materially wrong but vocabulary-valid package state.,PASS
+ADV-23,mega-conflict detector,Synthetic negative fixture in validator unit tests,Validator/test suite rejects materially wrong but vocabulary-valid package state.,PASS
+ADV-24,placeholder Code Guide detector,Synthetic negative fixture in validator unit tests,Validator/test suite rejects materially wrong but vocabulary-valid package state.,PASS
+ADV-25,field dictionary vocabulary drift detector,Synthetic negative fixture in validator unit tests,Validator/test suite rejects materially wrong but vocabulary-valid package state.,PASS
+ADV-26,authorized baseline fail-closed detector,Synthetic negative fixture in validator unit tests,Validator/test suite rejects materially wrong but vocabulary-valid package state.,PASS

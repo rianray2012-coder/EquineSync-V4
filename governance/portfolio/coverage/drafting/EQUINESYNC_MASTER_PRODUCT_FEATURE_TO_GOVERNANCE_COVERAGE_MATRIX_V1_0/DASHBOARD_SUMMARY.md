@@ -1,0 +1,17 @@
+# Dashboard Summary
+
+Status: `FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY`
+
+Rows: 314
+
+## Governance State
+- COVERED_WITH_RETAINED_GAP: 15
+- PIA_SUPPLEMENT_CANDIDATE: 179
+- CODE_GUIDE_GAP: 49
+- ADR_GAP: 16
+- OPERATING_STANDARD_GAP: 25
+- NEW_PIA_CANDIDATE: 14
+- RUNBOOK_GAP: 16
+
+## Evidence Boundary
+All implementation paths are syntax-clean normalized repository paths or blank; path-adjacent notes are in EVIDENCE_LIMITATION_NOTES; KEYWORD_MATCH_ONLY is not implementation verification.

@@ -1,0 +1,5 @@
+instrument,purpose,required_fields,effect,rule_ids
+Revocation record,Withdraw authority/certification,"record_id, target, authority, effective_at, dependent_claim_effect",REVOKED,"[""ES-GPS-REVOKE-001""]"
+Narrowing record,Limit scope without full revocation,"record_id, target, prior_scope, narrowed_scope, reason",NARROWED,"[""ES-GPS-REVOKE-001""]"
+Suspension record,Pause authority pending review,"record_id, target, reason, review_trigger",SUSPENDED,"[""ES-GPS-REOPEN-001""]"
+Supersession record,Replace prior artifact or authority,"predecessor, successor, retained provisions, effective scope",SUPERSEDED,"[""ES-GPS-SUP-001""]"

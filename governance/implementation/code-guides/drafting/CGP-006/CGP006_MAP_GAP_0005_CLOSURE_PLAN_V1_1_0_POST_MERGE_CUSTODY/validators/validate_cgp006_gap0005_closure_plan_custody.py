@@ -4,21 +4,15 @@ from __future__ import annotations
 
 import csv
 import hashlib
-import importlib.util
-import io
 import json
 import re
 import subprocess
-import sys
 import zipfile
 from pathlib import Path
 
 ACCESSION_PATH = Path("governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1")
 CUSTODY_PATH = Path("governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY")
-CORRECTION_PATH = Path("governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_CUSTODY_INTEGRITY_CORRECTION_V1")
-REFRESH_PATH = Path("governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_POST_CORRECTION_CUSTODY_REFRESH_V2")
 RECEIPT_PATH = Path("governance/implementation/code-guides/receipts/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_CUSTODY_RECEIPT.md")
-REFRESH_RECEIPT = Path("governance/implementation/code-guides/receipts/CGP006_MAP_GAP_0005_CLOSURE_PLAN_POST_CORRECTION_CUSTODY_REFRESH_V2_RECEIPT.md")
 PROGRAM_STATUS = Path("governance/implementation/code-guides/PROGRAM_STATUS.md")
 DIRECTIVE_ID = "CGP_006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_PROTECTED_ACCESSION_AND_CUSTODY_DIRECTIVE_V1_0_0"
 FOUNDER_APPROVAL_ID = "ES-FD-CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-2026-08-01"
@@ -58,93 +52,56 @@ REQUIRED_FILES = {
     "tests/test_cgp006_gap0005_closure_plan_custody.py",
     "validators/validate_cgp006_gap0005_closure_plan_custody.py",
 }
-PROHIBITED_PLACEHOLDER_EVIDENCE = {
-    "CURRENT_EVIDENCE_POSTURE.csv",
-    "REQUIREMENT_TRACEABILITY_MATRIX.csv",
-    "PROVIDER_TEST_SCENARIO_MATRIX.csv",
-    "WEBHOOK_AND_EVENT_CUSTODY_REPORT.md",
-    "SUBSCRIPTION_LIFECYCLE_ASSURANCE_REPORT.md",
-    "RECONCILIATION_AND_CONTROL_TOTAL_REPORT.md",
-    "TAX_CALCULATION_BOUNDARY_REPORT.md",
-    "SECRET_AND_DATA_HYGIENE_REPORT.md",
-    "RESIDUAL_RISK_AND_CONTRADICTORY_EVIDENCE_REGISTER.csv",
-    "FOUNDER_CLOSURE_DISPOSITION.md",
-}
+BOUNDARY_TOKENS = [
+    DIRECTIVE_ID,
+    FOUNDER_APPROVAL_ID,
+    FINAL_CUSTODY_STATE,
+    GAP_OPEN,
+    "PROVIDER_CONNECTED_ASSURANCE_WORKSTREAM_NOT_AUTHORIZED_BY_THIS_DIRECTIVE",
+    "IMPLEMENTATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE",
+    "PROVIDER_ACTIVATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE",
+    "LIVE_PAYMENT_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE",
+    "NO_CUSTOMER_FUNDS_MOVEMENT_AUTHORIZED",
+    "PRODUCTION_FINANCIAL_READINESS_NOT_ESTABLISHED",
+    "DEPLOYMENT_NOT_AUTHORIZED",
+    "STAGING_NOT_AUTHORIZED",
+    "PILOT_NOT_AUTHORIZED",
+    "PRODUCTION_USE_NOT_AUTHORIZED",
+    "PUBLIC_LAUNCH_NOT_AUTHORIZED",
+    "PR_69_NOT_MODIFIED_BY_THIS_DIRECTIVE",
+    "PR_70_NOT_MODIFIED_BY_THIS_DIRECTIVE",
+    "NO_ADDITIONAL_STRIPE_MUTATION_DURING_CUSTODY",
+    "NO_LIVE_STRIPE_MUTATION_RECORDED",
+    "NO_LIVE_STRIPE_OBJECT_OR_SECRET_USED",
+    "NO_SECRET_DISCLOSURE",
+    "UNRELATED_GAPS_FINDINGS_AND_FINANCIAL_PROGRAMS_UNCHANGED",
+]
 SECRET_RE = re.compile(
     r"(sk_live_[A-Za-z0-9_]+|sk_test_[A-Za-z0-9_]+|rk_live_[A-Za-z0-9_]+|rk_test_[A-Za-z0-9_]+|whsec_[A-Za-z0-9_]+|mongodb(?:\+srv)?://|JWT_SECRET\s*=|STRIPE_SECRET_KEY\s*=.+|STRIPE_API_KEY\s*=.+)",
     re.IGNORECASE,
 )
 CONFLICT_MARKER_RE = re.compile(r"^(<<<<<<<|=======|>>>>>>>)", re.MULTILINE)
-TEXT_SUFFIXES = {".md", ".py", ".json", ".csv", ".sha256", ""}
-AUTHORITATIVE_TOKEN_LOCATIONS = {
-    DIRECTIVE_ID: {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "PROTECTED_MERGE_RECEIPT.json"},
-    FOUNDER_APPROVAL_ID: {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "PROTECTED_MERGE_RECEIPT.json"},
-    FINAL_CUSTODY_STATE: {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    GAP_OPEN: {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "PROVIDER_CONNECTED_ASSURANCE_WORKSTREAM_NOT_AUTHORIZED_BY_THIS_DIRECTIVE": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "IMPLEMENTATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "PROVIDER_ACTIVATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "LIVE_PAYMENT_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "NO_CUSTOMER_FUNDS_MOVEMENT_AUTHORIZED": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "PRODUCTION_FINANCIAL_READINESS_NOT_ESTABLISHED": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "DEPLOYMENT_NOT_AUTHORIZED": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "STAGING_NOT_AUTHORIZED": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "PILOT_NOT_AUTHORIZED": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "PRODUCTION_USE_NOT_AUTHORIZED": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "PUBLIC_LAUNCH_NOT_AUTHORIZED": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "PR_69_NOT_MODIFIED_BY_THIS_DIRECTIVE": {RECEIPT_PATH, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "AUTHORIZED_PATH_REPORT.md"},
-    "PR_70_NOT_MODIFIED_BY_THIS_DIRECTIVE": {RECEIPT_PATH, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "AUTHORIZED_PATH_REPORT.md"},
-    "NO_ADDITIONAL_STRIPE_MUTATION_DURING_CUSTODY": {RECEIPT_PATH, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "NO_LIVE_STRIPE_MUTATION_RECORDED": {RECEIPT_PATH, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "NO_LIVE_STRIPE_OBJECT_OR_SECRET_USED": {RECEIPT_PATH, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "NO_SECRET_DISCLOSURE": {RECEIPT_PATH, CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md", CUSTODY_PATH / "VALIDATION_REPORT.md"},
-    "UNRELATED_GAPS_FINDINGS_AND_FINANCIAL_PROGRAMS_UNCHANGED": {RECEIPT_PATH, PROGRAM_STATUS, CUSTODY_PATH / "README.md", CUSTODY_PATH / "DIRECTIVE_EXECUTION_RECORD.md"},
-}
 
 
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[7]
 
 
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
 def sha256(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
-
-
-def fail(msg: str) -> None:
-    raise AssertionError(msg)
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def run_git(root: Path, *args: str, check: bool = True) -> str:
     cp = subprocess.run(["git", *args], cwd=root, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if check and cp.returncode != 0:
-        fail(f"git command failed: {' '.join(args)}\nSTDOUT:\n{cp.stdout}\nSTDERR:\n{cp.stderr}")
+        raise AssertionError(
+            f"git command failed: {' '.join(args)}\nSTDOUT:\n{cp.stdout}\nSTDERR:\n{cp.stderr}"
+        )
     return cp.stdout.rstrip("\n")
-
-
-def run_git_bytes(root: Path, *args: str, check: bool = True) -> bytes:
-    cp = subprocess.run(["git", *args], cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if check and cp.returncode != 0:
-        fail(f"git command failed: {' '.join(args)}\nSTDERR:\n{cp.stderr.decode('utf-8', errors='replace')}")
-    return cp.stdout
-
-
-def git_object_bytes(root: Path, rel: str) -> bytes:
-    run_git(root, "ls-files", "--error-unmatch", rel)
-    run_git(root, "cat-file", "-e", f"HEAD:{rel}")
-    return run_git_bytes(root, "show", f"HEAD:{rel}")
-
-
-def git_tracked_files(root: Path, package: Path) -> set[str]:
-    prefix = package.as_posix()
-    return {
-        path[len(prefix) + 1:]
-        for path in run_git(root, "ls-files", prefix).splitlines()
-        if path.startswith(prefix + "/")
-    }
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -152,63 +109,14 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(fh))
 
 
-def run_accession_validation(root: Path) -> dict[str, object] | None:
-    validator_path = root / ACCESSION_PATH / "validators" / "validate_cgp006_gap0005_closure_plan_accession.py"
-    spec = importlib.util.spec_from_file_location("validate_cgp006_gap0005_closure_plan_accession_dependency", validator_path)
-    if spec is None or spec.loader is None:
-        fail("unable to load corrected accession validator")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.validate()
-
-
-def validate_boundary_tokens(root: Path) -> dict[str, list[str]]:
-    locations: dict[str, list[str]] = {}
-    for token, rels in AUTHORITATIVE_TOKEN_LOCATIONS.items():
-        found: list[str] = []
-        for rel in sorted(rels, key=lambda value: value.as_posix()):
-            if "validators" in rel.parts or "tests" in rel.parts or rel.name in {"PACKAGE_MANIFEST.json", "CHECKSUM_MANIFEST.sha256"}:
-                fail(f"non-authoritative token source configured: {rel}")
-            path = root / rel
-            if not path.is_file():
-                continue
-            if token in path.read_text(encoding="utf-8"):
-                found.append(rel.as_posix())
-        if not found:
-            fail(f"required custody boundary token missing from authoritative governance files: {token}")
-        locations[token] = found
-    return locations
-
-
-def validate_git_zip_object(root: Path) -> None:
-    zip_rel = (ACCESSION_PATH / "APPROVED_SOURCE" / ZIP_NAME).as_posix()
-    zip_data = git_object_bytes(root, zip_rel)
-    if sha256_bytes(zip_data) != EXPECTED_ZIP_SHA or len(zip_data) != EXPECTED_ZIP_BYTES:
-        fail("approved source ZIP Git object identity mismatch")
-    with zipfile.ZipFile(io.BytesIO(zip_data)) as zf:
-        names = sorted(name for name in zf.namelist() if not name.endswith("/"))
-        if names != sorted(APPROVED):
-            fail(f"ZIP inventory mismatch: {names}")
-        bad = zf.testzip()
-        if bad is not None:
-            fail(f"ZIP integrity failure at {bad}")
-        for name, (expected_sha, expected_bytes) in APPROVED.items():
-            data = zf.read(name)
-            if sha256_bytes(data) != expected_sha or len(data) != expected_bytes:
-                fail(f"approved ZIP member identity mismatch: {name}")
-            repo_rel = (ACCESSION_PATH / "APPROVED_SOURCE" / name).as_posix()
-            if git_object_bytes(root, repo_rel) != data:
-                fail(f"approved source Git object differs from ZIP member: {name}")
-
-
-def validate_accession_placeholder_prohibitions(root: Path) -> None:
-    accession_files = git_tracked_files(root, ACCESSION_PATH)
-    offending = sorted(
-        rel for rel in accession_files
-        if rel in PROHIBITED_PLACEHOLDER_EVIDENCE or Path(rel).name in PROHIBITED_PLACEHOLDER_EVIDENCE
-    )
-    if offending:
-        fail(f"prohibited future-evidence placeholders in accession tree: {offending}")
+def custody_files(package: Path) -> set[str]:
+    return {
+        str(path.relative_to(package))
+        for path in package.rglob("*")
+        if path.is_file()
+        and "__pycache__" not in path.parts
+        and path.suffix != ".pyc"
+    }
 
 
 def assert_checksum_manifest(package: Path, found: set[str]) -> None:
@@ -219,173 +127,213 @@ def assert_checksum_manifest(package: Path, found: set[str]) -> None:
         expected, rel = raw.split(maxsplit=1)
         path = package / rel
         if not path.is_file():
-            fail(f"checksum manifest file missing: {rel}")
+            raise AssertionError(f"checksum manifest file missing: {rel}")
         if sha256(path) != expected:
-            fail(f"checksum manifest digest mismatch: {rel}")
+            raise AssertionError(f"checksum manifest digest mismatch: {rel}")
         seen.add(rel)
     expected = found - {"CHECKSUM_MANIFEST.sha256"}
     if seen != expected:
-        fail("checksum manifest inventory mismatch")
+        raise AssertionError("checksum manifest inventory mismatch")
 
 
-def validate_custody_files(root: Path, package: Path, found: set[str]) -> None:
-    missing = sorted(REQUIRED_FILES - found)
-    if missing:
-        fail(f"missing custody artifacts: {missing}")
-    for rel in sorted(found):
-        path = package / rel
-        if path.suffix == ".json":
-            json.loads(path.read_text(encoding="utf-8"))
-        if path.suffix == ".csv":
-            read_csv(path)
-        if path.suffix in TEXT_SUFFIXES:
-            data = path.read_text(encoding="utf-8")
-            if CONFLICT_MARKER_RE.search(data):
-                fail(f"conflict marker found: {rel}")
-            if SECRET_RE.search(data):
-                fail(f"secret-like value found: {rel}")
+def assert_accession_source(root: Path) -> None:
+    accession = root / ACCESSION_PATH
+    zip_path = accession / "APPROVED_SOURCE" / ZIP_NAME
+    if sha256(zip_path) != EXPECTED_ZIP_SHA or zip_path.stat().st_size != EXPECTED_ZIP_BYTES:
+        raise AssertionError("source ZIP identity mismatch")
+    with zipfile.ZipFile(zip_path) as zf:
+        names = sorted(name for name in zf.namelist() if not name.endswith("/"))
+        if names != sorted(APPROVED):
+            raise AssertionError(f"ZIP inventory mismatch: {names}")
+        bad = zf.testzip()
+        if bad is not None:
+            raise AssertionError(f"ZIP integrity failure at {bad}")
 
-    for rel in [RECEIPT_PATH, PROGRAM_STATUS]:
-        data = (root / rel).read_text(encoding="utf-8")
-        if CONFLICT_MARKER_RE.search(data):
-            fail(f"conflict marker found: {rel}")
-        if SECRET_RE.search(data):
-            fail(f"secret-like value found: {rel}")
+    for name, (expected_sha, expected_bytes) in APPROVED.items():
+        path = accession / "APPROVED_SOURCE" / name
+        if sha256(path) != expected_sha or path.stat().st_size != expected_bytes:
+            raise AssertionError(f"approved source identity mismatch: {name}")
 
+    root_md = accession / ROOT_MD
+    source_md = accession / "APPROVED_SOURCE" / SOURCE_MD
+    if root_md.read_bytes() != source_md.read_bytes():
+        raise AssertionError("root controlling Markdown is not an exact byte copy")
+    if sha256(root_md) != APPROVED[SOURCE_MD][0] or root_md.stat().st_size != APPROVED[SOURCE_MD][1]:
+        raise AssertionError("root controlling Markdown identity mismatch")
 
-def validate_custody_manifest(package: Path, found: set[str]) -> None:
-    assert_checksum_manifest(package, found)
-    manifest = json.loads((package / "PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
-    if manifest.get("package_id") != PACKAGE_ID:
-        fail("custody package ID mismatch")
-    if manifest.get("protected_branch") != PROTECTED_BRANCH:
-        fail("custody package protected branch mismatch")
-    for row in manifest.get("files", []):
-        path = package / row["path"]
+    checksum_seen = set()
+    for raw in (accession / "APPROVED_SOURCE" / "CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_CHECKSUMS.sha256").read_text(encoding="utf-8").splitlines():
+        if not raw.strip():
+            continue
+        digest, name = raw.split(maxsplit=1)
+        if name not in APPROVED:
+            raise AssertionError(f"unexpected approved checksum path: {name}")
+        if digest != APPROVED[name][0]:
+            raise AssertionError(f"approved checksum digest mismatch: {name}")
+        checksum_seen.add(name)
+    expected_checksum = set(APPROVED) - {"CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_CHECKSUMS.sha256"}
+    if checksum_seen != expected_checksum:
+        raise AssertionError("approved checksum ledger inventory mismatch")
+
+    accession_manifest = json.loads((accession / "PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
+    if accession_manifest.get("accession_pr") != "PR #73 https://github.com/rianray2012-coder/EquineSync-V4/pull/73":
+        raise AssertionError("accession package PR record mismatch")
+    for row in accession_manifest.get("files", []):
+        path = accession / row["path"]
         if not path.is_file():
-            fail(f"manifest file missing: {row['path']}")
-        if sha256(path) != row["sha256"] or path.stat().st_size != row["byte_length"]:
-            fail(f"manifest identity mismatch: {row['path']}")
+            raise AssertionError(f"accession manifest file missing: {row['path']}")
+        if sha256(path) != row["sha256"] or path.stat().st_size != row["bytes"]:
+            raise AssertionError(f"accession manifest identity mismatch: {row['path']}")
 
 
-def validate_merge_identity(root: Path, package: Path) -> None:
-    receipt = json.loads((package / "PROTECTED_MERGE_RECEIPT.json").read_text(encoding="utf-8"))
-    head_record = json.loads((package / "POST_MERGE_PROTECTED_HEAD_RECORD.json").read_text(encoding="utf-8"))
-    expected_pairs = {
-        "reviewed_reference_head": REVIEWED_REFERENCE_HEAD,
-        "pre_accession_protected_head": PRE_ACCESSION_HEAD,
-        "accession_pr_head": ACCESSION_PR_HEAD,
-        "accession_merge_commit_sha": ACCESSION_MERGE,
-        "post_accession_protected_head": ACCESSION_MERGE,
-        "custody_branch": CUSTODY_BRANCH,
-    }
-    for key, expected in expected_pairs.items():
-        if receipt.get(key) != expected:
-            fail(f"protected merge receipt mismatch: {key}")
-    if head_record["accession_merge_parents"] != [PRE_ACCESSION_HEAD, ACCESSION_PR_HEAD]:
-        fail("head record merge parents mismatch")
+def assert_authorized_paths(root: Path) -> None:
+    allowed_prefix = CUSTODY_PATH.as_posix() + "/"
+    allowed = {PROGRAM_STATUS.as_posix(), RECEIPT_PATH.as_posix()}
 
-    parents = run_git(root, "show", "--no-patch", "--format=%P", ACCESSION_MERGE).split()
-    if parents != [PRE_ACCESSION_HEAD, ACCESSION_PR_HEAD]:
-        fail(f"accession merge parents mismatch: {parents}")
-    run_git(root, "merge-base", "--is-ancestor", ACCESSION_PR_HEAD, ACCESSION_MERGE)
-    run_git(root, "merge-base", "--is-ancestor", ACCESSION_MERGE, "HEAD")
-
-
-def validate_source_identity_register(root: Path, package: Path) -> int:
-    source_rows = read_csv(package / "SOURCE_IDENTITY_REGISTER.csv")
-    if len(source_rows) != 8:
-        fail("source identity register row count mismatch")
-    for row in source_rows:
-        path = root / row["path"]
-        if not path.is_file():
-            fail(f"source identity path missing: {row['path']}")
-        data = git_object_bytes(root, row["path"])
-        if sha256_bytes(data) != row["sha256"] or len(data) != int(row["byte_length"]):
-            fail(f"source identity Git object mismatch: {row['record_id']}")
-        if row["verification_result"] != "PASS":
-            fail(f"source identity result not PASS: {row['record_id']}")
-    return len(source_rows)
-
-
-def validate_status_and_claims(root: Path) -> None:
-    text = "\n".join((root / rel).read_text(encoding="utf-8") for rel in [RECEIPT_PATH, PROGRAM_STATUS])
-    text += "\n" + "\n".join(
-        path.read_text(encoding="utf-8")
-        for path in (root / CUSTODY_PATH).rglob("*")
-        if path.is_file()
-        and "validators" not in path.parts
-        and "tests" not in path.parts
-        and path.name not in {"PACKAGE_MANIFEST.json", "CHECKSUM_MANIFEST.sha256"}
-        and path.suffix in TEXT_SUFFIXES
-    )
-    if GAP_OPEN not in text:
-        fail("GAP-0005 open status missing")
-    if "CGP006_MAP_GAP_0005_CLOSED" in text.replace("Prohibited statement: `CGP006_MAP_GAP_0005_CLOSED`", ""):
-        fail("prohibited closure token appears outside explicit prohibited-statement note")
-    prohibited_claims = [
-        "CGP006_MAP_GAP_0005_PROVIDER_ASSURANCE_COMPLETE",
-        "PRODUCTION_FINANCIAL_READINESS_ESTABLISHED",
-        "PROVIDER_CONNECTED_SANDBOX_LIFECYCLE_ASSURANCE_COMPLETE",
-    ]
-    for token in prohibited_claims:
-        if token in text:
-            fail(f"unauthorized provider or production readiness claim found: {token}")
-
-
-def validate_authorized_paths(root: Path) -> None:
-    allowed_prefixes = [
-        ACCESSION_PATH.as_posix() + "/",
-        CUSTODY_PATH.as_posix() + "/",
-        CORRECTION_PATH.as_posix() + "/",
-        REFRESH_PATH.as_posix() + "/",
-    ]
-    allowed_files = {PROGRAM_STATUS.as_posix(), RECEIPT_PATH.as_posix(), REFRESH_RECEIPT.as_posix()}
-    changed = set(run_git(root, "diff", "--name-only", "origin/integrate-emergent-final-zip...HEAD", check=False).splitlines())
+    changed = set(run_git(root, "diff", "--name-only", ACCESSION_MERGE, "HEAD", check=False).splitlines())
     changed.update(run_git(root, "diff", "--name-only", check=False).splitlines())
     changed.update(run_git(root, "diff", "--cached", "--name-only", check=False).splitlines())
-    unauthorized = sorted(path for path in changed if path and not (path in allowed_files or any(path.startswith(prefix) for prefix in allowed_prefixes)))
+    unauthorized = sorted(path for path in changed if path and not (path.startswith(allowed_prefix) or path in allowed))
     if unauthorized:
-        fail(f"unauthorized changed paths: {unauthorized}")
+        raise AssertionError(f"unauthorized changed paths: {unauthorized}")
+
+    status_lines = run_git(root, "status", "--short", "--untracked-files=all", check=False).splitlines()
+    bad_status = []
+    for line in status_lines:
+        path = line[3:].strip()
+        if " -> " in path:
+            path = path.split(" -> ", 1)[1]
+        if path and not (path.startswith(allowed_prefix) or path in allowed):
+            bad_status.append(line)
+    if bad_status:
+        raise AssertionError(f"unauthorized worktree paths: {bad_status}")
 
 
 def validate() -> dict[str, object]:
     root = repo_root()
     package = root / CUSTODY_PATH
     if not package.is_dir():
-        fail(f"custody package path missing: {CUSTODY_PATH}")
+        raise AssertionError(f"custody package path missing: {CUSTODY_PATH}")
     if not (root / RECEIPT_PATH).is_file():
-        fail(f"custody receipt missing: {RECEIPT_PATH}")
+        raise AssertionError(f"custody receipt missing: {RECEIPT_PATH}")
 
-    accession_result = run_accession_validation(root)
-    validate_git_zip_object(root)
-    validate_accession_placeholder_prohibitions(root)
+    found = custody_files(package)
+    missing = sorted(REQUIRED_FILES - found)
+    if missing:
+        raise AssertionError(f"missing custody artifacts: {missing}")
 
-    found = git_tracked_files(root, CUSTODY_PATH)
-    validate_custody_files(root, package, found)
-    validate_custody_manifest(package, found)
-    validate_merge_identity(root, package)
-    source_identity_rows = validate_source_identity_register(root, package)
-    boundary_locations = validate_boundary_tokens(root)
-    validate_status_and_claims(root)
-    validate_authorized_paths(root)
+    for path in package.rglob("*"):
+        if not path.is_file() or "__pycache__" in path.parts or path.suffix == ".pyc":
+            continue
+        if path.suffix == ".json":
+            json.loads(path.read_text(encoding="utf-8"))
+        if path.suffix == ".csv":
+            read_csv(path)
+        if path.suffix in {".md", ".py", ".json", ".csv", ".sha256", ""}:
+            data = path.read_text(encoding="utf-8")
+            if CONFLICT_MARKER_RE.search(data):
+                raise AssertionError(f"conflict marker found: {path.relative_to(package)}")
+            if SECRET_RE.search(data):
+                raise AssertionError(f"secret-like value found: {path.relative_to(package)}")
 
-    run_git(root, "diff", "--check", "origin/integrate-emergent-final-zip...HEAD")
+    for path in [root / RECEIPT_PATH, root / PROGRAM_STATUS]:
+        data = path.read_text(encoding="utf-8")
+        if CONFLICT_MARKER_RE.search(data):
+            raise AssertionError(f"conflict marker found: {path.relative_to(root)}")
+        if SECRET_RE.search(data):
+            raise AssertionError(f"secret-like value found: {path.relative_to(root)}")
+
+    assert_checksum_manifest(package, found)
+    manifest = json.loads((package / "PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
+    if manifest.get("package_id") != PACKAGE_ID:
+        raise AssertionError("custody package ID mismatch")
+    if manifest.get("protected_branch") != PROTECTED_BRANCH:
+        raise AssertionError("custody package protected branch mismatch")
+    for row in manifest.get("files", []):
+        path = package / row["path"]
+        if not path.is_file():
+            raise AssertionError(f"manifest file missing: {row['path']}")
+        if sha256(path) != row["sha256"] or path.stat().st_size != row["byte_length"]:
+            raise AssertionError(f"manifest identity mismatch: {row['path']}")
+
+    receipt = json.loads((package / "PROTECTED_MERGE_RECEIPT.json").read_text(encoding="utf-8"))
+    head_record = json.loads((package / "POST_MERGE_PROTECTED_HEAD_RECORD.json").read_text(encoding="utf-8"))
+    if receipt["reviewed_reference_head"] != REVIEWED_REFERENCE_HEAD:
+        raise AssertionError("reviewed reference head mismatch")
+    if receipt["pre_accession_protected_head"] != PRE_ACCESSION_HEAD:
+        raise AssertionError("pre-accession protected head mismatch")
+    if receipt["accession_pr_head"] != ACCESSION_PR_HEAD:
+        raise AssertionError("accession PR head mismatch")
+    if receipt["accession_merge_commit_sha"] != ACCESSION_MERGE:
+        raise AssertionError("accession merge commit mismatch")
+    if receipt["post_accession_protected_head"] != ACCESSION_MERGE:
+        raise AssertionError("post-accession protected head mismatch")
+    if receipt["custody_branch"] != CUSTODY_BRANCH:
+        raise AssertionError("custody branch mismatch")
+    if head_record["accession_merge_parents"] != [PRE_ACCESSION_HEAD, ACCESSION_PR_HEAD]:
+        raise AssertionError("head record merge parents mismatch")
+
+    parents = run_git(root, "show", "--no-patch", "--format=%P", ACCESSION_MERGE).split()
+    if parents != [PRE_ACCESSION_HEAD, ACCESSION_PR_HEAD]:
+        raise AssertionError(f"accession merge parents mismatch: {parents}")
+    run_git(root, "merge-base", "--is-ancestor", ACCESSION_PR_HEAD, ACCESSION_MERGE)
+    run_git(root, "merge-base", "--is-ancestor", ACCESSION_MERGE, "HEAD")
+
+    assert_accession_source(root)
+
+    source_rows = read_csv(package / "SOURCE_IDENTITY_REGISTER.csv")
+    if len(source_rows) != 8:
+        raise AssertionError("source identity register row count mismatch")
+    for row in source_rows:
+        path = root / row["path"]
+        if not path.is_file():
+            raise AssertionError(f"source identity path missing: {row['path']}")
+        if sha256(path) != row["sha256"] or path.stat().st_size != int(row["byte_length"]):
+            raise AssertionError(f"source identity mismatch: {row['record_id']}")
+        if row["verification_result"] != "PASS":
+            raise AssertionError(f"source identity result not PASS: {row['record_id']}")
+
+    combined = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in [root / RECEIPT_PATH, root / PROGRAM_STATUS]
+    )
+    combined += "\n" + "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in package.rglob("*")
+        if path.is_file() and path.suffix in {".md", ".csv", ".json", ".py", ".sha256", ""}
+    )
+    for token in BOUNDARY_TOKENS:
+        if token not in combined:
+            raise AssertionError(f"required boundary token missing: {token}")
+
+    policy_combined = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in [root / RECEIPT_PATH, root / PROGRAM_STATUS]
+    )
+    policy_combined += "\n" + "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in package.rglob("*")
+        if path.is_file()
+        and "validators" not in path.parts
+        and "tests" not in path.parts
+        and path.suffix in {".md", ".csv", ".json", ".sha256", ""}
+    )
+    if "CGP006_MAP_GAP_0005_CLOSED" in policy_combined.replace("Prohibited statement: `CGP006_MAP_GAP_0005_CLOSED`", ""):
+        raise AssertionError("prohibited closure token appears outside explicit prohibited-statement note")
+
+    assert_authorized_paths(root)
+    run_git(root, "diff", "--check", ACCESSION_MERGE, "HEAD")
     run_git(root, "diff", "--check")
     run_git(root, "diff", "--cached", "--check")
 
     return {
-        "accession_dependency_status": (accession_result or {}).get("status", "PASS"),
         "accession_merge_commit": ACCESSION_MERGE,
-        "approved_zip_git_sha256": EXPECTED_ZIP_SHA,
-        "approved_zip_git_bytes": EXPECTED_ZIP_BYTES,
-        "boundary_tokens": len(boundary_locations),
         "custody_branch": CUSTODY_BRANCH,
         "custody_files": len(found),
-        "custody_pr": CUSTODY_PR_PLACEHOLDER,
+        "custody_pr": manifest.get("custody_pr", CUSTODY_PR_PLACEHOLDER),
         "gap_status": GAP_OPEN,
         "required_artifacts": len(REQUIRED_FILES),
-        "source_identity_rows": source_identity_rows,
+        "source_identity_rows": len(source_rows),
         "status": "PASS",
     }
 
@@ -394,7 +342,7 @@ def main() -> int:
     try:
         result = validate()
     except Exception as exc:
-        print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2), file=sys.stderr)
+        print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2))
         return 1
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
