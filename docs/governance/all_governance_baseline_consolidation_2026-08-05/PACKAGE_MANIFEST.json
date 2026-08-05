@@ -52,5 +52,52 @@
       "sha256": "c087aebb80bab61c87af54dea663d15311c83123d6d5b83126838a073d1aa4a7",
       "byte_length": 2087009
     }
-  ]
+  ],
+  "triage": {
+    "generated_at_utc": "2026-08-05T04:35:08Z",
+    "source_register_rows": {
+      "retained_open_findings_and_residual_risk": 4156,
+      "stale_duplicate_conflict": 1869,
+      "total_triaged_rows": 6025
+    },
+    "triage_counts": {
+      "comparison_blockers": 831,
+      "must_fix_before_code_mutation": 1846,
+      "must_fix_before_runtime_mutation": 2062,
+      "must_fix_before_production": 2626,
+      "retain_during_comparison": 3363,
+      "founder_disposition_required": 1498,
+      "second_reviewer_or_outside_review_closure": 170
+    },
+    "authority_boundary": {
+      "documentary_triage_only": true,
+      "finding_closure": false,
+      "implementation_authority": false,
+      "runtime_authority": false,
+      "production_authority": false,
+      "public_launch_certification_or_claims": false
+    },
+    "outputs": [
+      {
+        "path": "GOVERNANCE_ACCESSION_RECONCILIATION_TRIAGE_REGISTER.csv",
+        "sha256": "b2ec640328cc4a863c105bf4dec56cdeed93b203b1444829987c768c2eaedd22",
+        "byte_length": 3425499
+      },
+      {
+        "path": "GOVERNANCE_ACCESSION_TRIAGE_DECISION_REPORT.md",
+        "sha256": "d22cd43d419d69f5bcf8acf4313a2b43bf78b2d92f44e92483bd2ed5b9713731",
+        "byte_length": 3853
+      },
+      {
+        "path": "GOVERNANCE_ACCESSION_TRIAGE_VALIDATION_REPORT.json",
+        "sha256": "ef66c165498809b29604e0001509c4a4ad4af58b50171375f1cdac2723567a85",
+        "byte_length": 1185
+      },
+      {
+        "path": "GOVERNANCE_ACCESSION_TRIAGE_VALIDATION_REPORT.md",
+        "sha256": "1414db93494683ca5e633b769366e01d7a0e9996bf4f4a48a5005b71db6757e8",
+        "byte_length": 449
+      }
+    ]
+  }
 }
