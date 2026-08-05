@@ -1,0 +1,40 @@
+{
+  "files": [
+    {
+      "byte_length": 1178,
+      "path": "EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1.md",
+      "sha256": "a9c64a4dfa9dbbb7113facbc1e9db7b8155ccad4ca6b0243f5e6591ff524d127"
+    },
+    {
+      "byte_length": 1948,
+      "path": "EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "6121922c558a8d9f1526cee391a86f22973b12f364c24ca0a73c240371814526"
+    },
+    {
+      "byte_length": 11182,
+      "path": "OWNERSHIP_ACCOUNTABILITY_MATRIX.csv",
+      "sha256": "3ef3555ed48541d2ad44758d916ab300e5199f7347e40bc5668db68903b8d7d4"
+    },
+    {
+      "byte_length": 5818,
+      "path": "REVIEW_CALENDAR.csv",
+      "sha256": "f981c72dae819efff21f0878b0138b800c3c07fe8c474d2789d5c06cc5a6d2d9"
+    },
+    {
+      "byte_length": 1730,
+      "path": "VACANCY_AND_SUCCESSION_REGISTER.csv",
+      "sha256": "3ba5f684e92ac03c4a12a7d7728e780818c00b10a2f0d0016b1ed1825f9275c7"
+    },
+    {
+      "byte_length": 359,
+      "path": "tests/test_document_07_rr2_validator.py",
+      "sha256": "e5e3fe3af49ad31f8340685c59c090ae0406f4e92fe1ab5783681ca1f9753608"
+    },
+    {
+      "byte_length": 344,
+      "path": "validators/validate_document_07_rr2.py",
+      "sha256": "b5bdf31c865a8ac457f330fd41e99559e216ca2d957d4603e1e157b99e98826e"
+    }
+  ],
+  "package_root": "07_OWNERSHIP_STEWARDSHIP_REVIEW"
+}

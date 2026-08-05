@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_effect": {
+      "enum": [
+        "NONE"
+      ],
+      "type": "string"
+    },
+    "closure_state": {
+      "enum": [
+        "REMEDIATED_PENDING_OUTSIDE_REVIEWER_REREVIEW",
+        "OPEN_RETAINED_FOR_OUTSIDE_REVIEWER_REREVIEW"
+      ],
+      "type": "string"
+    },
+    "consolidated_defect": {
+      "minLength": 12,
+      "type": "string"
+    },
+    "current_target_disposition": {
+      "enum": [
+        "REMEDIATED_IN_V3_PENDING_REREVIEW",
+        "VALID_OPEN_RETAINED",
+        "NOT_REMEDIATED_RETAINED_OPEN",
+        "RETAINED_NONBLOCKING_OPEN"
+      ],
+      "type": "string"
+    },
+    "current_target_evidence": {
+      "minLength": 20,
+      "type": "string"
+    },
+    "merge_effect": {
+      "enum": [
+        "MERGE_NOT_AUTHORIZED"
+      ],
+      "type": "string"
+    },
+    "second_reviewer_state": {
+      "enum": [
+        "NOT_PERFORMED_NOT_FABRICATED"
+      ],
+      "type": "string"
+    },
+    "severity": {
+      "enum": [
+        "BLOCKING",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "type": "string"
+    },
+    "source_review_ids": {
+      "pattern": "^(CLAUDE|PPLX)-",
+      "type": "string"
+    },
+    "t1c_id": {
+      "pattern": "^T1C-[0-9]{3}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "t1c_id",
+    "severity",
+    "consolidated_defect",
+    "current_target_disposition",
+    "closure_state",
+    "source_review_ids",
+    "current_target_evidence",
+    "second_reviewer_state",
+    "authority_effect",
+    "merge_effect"
+  ],
+  "title": "T1C Consolidated Findings Disposition Register V3 row",
+  "type": "object"
+}

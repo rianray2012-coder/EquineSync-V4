@@ -1,0 +1,10 @@
+review_finding,v4_treatment,evidence
+PPLX-V3-01,ACCEPTED_REMEDIATED_PENDING_REREVIEW,Negative harness now invokes V4 validator against temporary mutated package copies.
+PPLX-V3-02,ACCEPTED_REMEDIATED_PENDING_REREVIEW,T1C mappings corrected and current T1R2-to-T1C crosswalk added.
+PPLX-V3-03,ACCEPTED_REMEDIATED_PENDING_REREVIEW,V4 validator gates distinct values and normalized Doc10 bodies.
+PPLX-V3-04,ACCEPTED_PARTIAL_CONTENT_RETAINED_OPEN,Additional definitions and additionalProperties=false added; full dictionary coverage remains content-revision-required.
+CURSOR-VR3-001,ACCEPTED_AUTHORING_DONE_CLOSURE_RETAINED_OPEN,19 templates rewritten; Doc10 dispute remains open pending independent adjudication.
+CURSOR-VR3-002,ACCEPTED_REMEDIATED_PENDING_REREVIEW,Status strings revised to content-revision-required; stale ready declarations replaced.
+CURSOR-VR3-003,ACCEPTED_PARTIAL_REMEDIATED,Authority boundary normalized; triplicate note reduced where directly detected.
+CURSOR-VR3-004,ACCEPTED_REMEDIATED_PENDING_REREVIEW,Candidate-tree authoritative rows relabeled as requiring authority confirmation.
+CLAUDE_DOC10_DOWNGRADE_SUGGESTION,DISPUTED_NOT_ADOPTED,Normalized-body review and Perplexity/Cursor findings support retaining Doc10 open until independent adjudication after V4 authoring.

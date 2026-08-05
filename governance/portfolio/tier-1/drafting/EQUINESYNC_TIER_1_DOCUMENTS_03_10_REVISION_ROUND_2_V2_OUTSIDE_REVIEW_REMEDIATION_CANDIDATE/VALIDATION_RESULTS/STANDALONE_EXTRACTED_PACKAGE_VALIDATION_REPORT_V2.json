@@ -1,0 +1,80 @@
+{
+  "closure_blocked_by_second_review": true,
+  "failures": 0,
+  "package_status": "REVISION_REQUIRED_PENDING_BOUNDED_INDEPENDENT_CLOSURE_REREVIEW",
+  "results": [
+    {
+      "check": "required_file:README_FIRST.md",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:00_PROGRAM_CONTROL/AUTHENTICATED_REPOSITORY_AND_PACKAGE_CUSTODY_RECORD_V2.json",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:OUTSIDE_REVIEW/T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER.csv",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:OUTSIDE_REVIEW/PER_FINDING_CLOSURE_EVIDENCE_REGISTER.csv",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:OUTSIDE_REVIEW/EQUINESYNC_TIER_1_DOCS_03_10_CONSOLIDATED_OUTSIDE_REVIEW_REGISTER.md",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:FOUNDER_DECISION_PACKET.md",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "required_file:VALIDATION/FIXTURES/negative/decision_text_lifecycle_count_mismatch.json",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "t1c_population_complete",
+      "detail": "20",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "no_self_closed_findings",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "second_reviewer_not_fabricated",
+      "detail": "",
+      "kind": "STRUCTURAL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "founder_packet_no_preselected_approval",
+      "detail": "",
+      "kind": "SUBSTANTIVE_CONTROL_PASS",
+      "status": "PASS"
+    },
+    {
+      "check": "authority_boundary_present",
+      "detail": "",
+      "kind": "SUBSTANTIVE_CONTROL_PASS",
+      "status": "PASS"
+    }
+  ],
+  "status": "STRUCTURAL_PASS_SUBSTANTIVE_CONTROL_BLOCKED"
+}

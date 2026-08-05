@@ -1,0 +1,5 @@
+{
+  "archive_path": "governance/portfolio/tier-1/drafting/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V1.zip",
+  "note": "Archive hash is reported in final Codex report and git object state; this internal package record does not self-authenticate the archive that contains it.",
+  "record_type": "FINAL_ARCHIVE_BUILT_AFTER_MANIFEST_REFRESH"
+}

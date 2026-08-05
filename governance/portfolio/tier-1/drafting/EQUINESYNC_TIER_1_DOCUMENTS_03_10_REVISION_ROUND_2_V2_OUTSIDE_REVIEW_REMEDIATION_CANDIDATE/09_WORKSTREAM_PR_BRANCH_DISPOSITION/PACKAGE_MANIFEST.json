@@ -1,0 +1,40 @@
+{
+  "files": [
+    {
+      "byte_length": 1082,
+      "path": "EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "sha256": "e5630a8a1c8082fa6d79c0aacb554339c42dae4631ff5f8b721290497f8fd7f5"
+    },
+    {
+      "byte_length": 1972,
+      "path": "EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "c8b3d5175eb610f58ee0c0df5118f0de0276bdf2a67e9f7827cff90a4044cd87"
+    },
+    {
+      "byte_length": 1058,
+      "path": "WORKSTREAM_DISPOSITION_REPORT.md",
+      "sha256": "8136004d77a270495c716cdb8162e504a6023e72be83208fc05f6c751294e25d"
+    },
+    {
+      "byte_length": 28290,
+      "path": "WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
+      "sha256": "83fd241d182401917f8165a5b4332cb319bbff771fe6ffa6f1426b0d612972fc"
+    },
+    {
+      "byte_length": 34719,
+      "path": "WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.json",
+      "sha256": "5e7bd6d486238a790858d59363ba57a2fc1831bbe8ac2b65d6dee492cf80ec47"
+    },
+    {
+      "byte_length": 359,
+      "path": "tests/test_document_09_rr2_validator.py",
+      "sha256": "db3586472622db7c7f1a0f07236e6982f83ad4ce18a696f4ed21a5b0ff0a1c68"
+    },
+    {
+      "byte_length": 344,
+      "path": "validators/validate_document_09_rr2.py",
+      "sha256": "34dc37d332ab04327da2fb66b552d69e52bd3cd87212ea815adae3736836a50d"
+    }
+  ],
+  "package_root": "09_WORKSTREAM_PR_BRANCH_DISPOSITION"
+}

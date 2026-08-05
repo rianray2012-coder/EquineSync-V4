@@ -1,0 +1,46 @@
+{
+  "directory": "VALIDATION",
+  "files": [
+    {
+      "byte_length": 3161,
+      "path": "execute_negative_fixtures_v3.py",
+      "sha256": "077cb85b59510566d16aba30fc5318c114797c76e797eb59196f20c0b864ffcc"
+    },
+    {
+      "byte_length": 3329,
+      "path": "execute_negative_fixtures_v4.py",
+      "sha256": "13925ffd9fb7866b654ad76c4a0144d55a984c41541d2a17b0de898cd681804a"
+    },
+    {
+      "byte_length": 2738,
+      "path": "execute_negative_fixtures_v5.py",
+      "sha256": "3dedbf1513cc8f9f5ec1fc23b026ee5cfca52cc3d80ed9f54391d1782b9975cd"
+    },
+    {
+      "byte_length": 539,
+      "path": "validate_tier1_documents_03_10_rr2.py",
+      "sha256": "f2940a1f4c9709fc2975810714f3549b2c9117abbe28dc891184395e3f5038e5"
+    },
+    {
+      "byte_length": 538,
+      "path": "validate_tier1_documents_03_10_v2.py",
+      "sha256": "75a66dc41be0c8223aef0a31bd6d854fcb7af289f90cc814f78c9f4132113396"
+    },
+    {
+      "byte_length": 538,
+      "path": "validate_tier1_documents_03_10_v3.py",
+      "sha256": "da0c61be7142d7a49a8a19859864e13bffdfd152b11ab4a47c58489a423d5d96"
+    },
+    {
+      "byte_length": 538,
+      "path": "validate_tier1_documents_03_10_v4.py",
+      "sha256": "1f88f7f8c4413a3b9395f9b124968981c8489421b2ee9a7b0706169bcc8888d2"
+    },
+    {
+      "byte_length": 6951,
+      "path": "validate_tier1_documents_03_10_v5.py",
+      "sha256": "90aa635c7fbefe12a2dc3a44538feee576a09e59f0cc5fe41a2c361add8725de"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

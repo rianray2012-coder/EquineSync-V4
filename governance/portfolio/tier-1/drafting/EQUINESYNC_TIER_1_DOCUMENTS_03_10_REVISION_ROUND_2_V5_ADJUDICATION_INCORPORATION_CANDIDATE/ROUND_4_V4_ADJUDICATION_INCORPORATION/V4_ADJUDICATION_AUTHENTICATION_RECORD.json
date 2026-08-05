@@ -1,0 +1,39 @@
+{
+  "adjudications": [
+    {
+      "byte_length": 10427,
+      "incorporated_byte_length": 10427,
+      "incorporated_path": "ROUND_4_V4_ADJUDICATION_INCORPORATION/SOURCE_REVIEWS/Cursor_EQUINESYNC_TIER_1_RR2_V4_BOUNDED_REREVIEW_ADJUDICATION_8b8f7a5.md",
+      "incorporated_sha256": "4403bc7642da8623126b168e5b727016267b7871c4030891d797d3860b1c977b",
+      "review_id": "CURSOR_V4_ADJUDICATION",
+      "sha256": "4403bc7642da8623126b168e5b727016267b7871c4030891d797d3860b1c977b",
+      "source_filename": "Cursor_EQUINESYNC_TIER_1_RR2_V4_BOUNDED_REREVIEW_ADJUDICATION_8b8f7a5.md"
+    },
+    {
+      "byte_length": 14464,
+      "incorporated_byte_length": 14464,
+      "incorporated_path": "ROUND_4_V4_ADJUDICATION_INCORPORATION/SOURCE_REVIEWS/Perplexity_V4_BOUNDED_REREVIEW_ADJUDICATION.md",
+      "incorporated_sha256": "e3bf180e569863790234a3018881b55ede5411cce72018c7b7e37ecb7afe10c9",
+      "review_id": "PERPLEXITY_V4_BOUNDED_REREVIEW_ADJUDICATION",
+      "sha256": "e3bf180e569863790234a3018881b55ede5411cce72018c7b7e37ecb7afe10c9",
+      "source_filename": "Perplexity_V4_BOUNDED_REREVIEW_ADJUDICATION.md"
+    },
+    {
+      "byte_length": 13491,
+      "incorporated_byte_length": 13491,
+      "incorporated_path": "ROUND_4_V4_ADJUDICATION_INCORPORATION/SOURCE_REVIEWS/Claude_EQUINESYNC_V4_ADJUDICATION.md",
+      "incorporated_sha256": "9df141bc05926bb24ade80844453846eb8a905ac21f210b9098f8554a2639320",
+      "review_id": "CLAUDE_V4_ADJUDICATION",
+      "sha256": "9df141bc05926bb24ade80844453846eb8a905ac21f210b9098f8554a2639320",
+      "source_filename": "Claude_EQUINESYNC_V4_ADJUDICATION.md"
+    }
+  ],
+  "as_of_utc": "2026-08-04T22:49:50.444177+00:00",
+  "authority_boundary": "NOT_ADOPTED; NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; FOUNDER_REVIEW_REQUIRED; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED",
+  "predecessor_v4_zip": {
+    "byte_length": 2763428,
+    "filename": "EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V5_ADJUDICATION_INCORPORATION_CANDIDATE.zip",
+    "sha256": "7070c863890cd1a6fc3938256588602d9eaf71164a3dd53ef268a931835f482a"
+  },
+  "record_type": "V4_ADJUDICATION_AUTHENTICATION_RECORD"
+}

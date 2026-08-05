@@ -1,0 +1,41 @@
+{
+  "directory": "OUTSIDE_REVIEW",
+  "files": [
+    {
+      "byte_length": 7079,
+      "path": "EQUINESYNC_TIER_1_DOCS_03_10_CODEX_REMEDIATION_DIRECTIVE.md",
+      "sha256": "a2e0b257e46877b19b417f05950168f12827593cb2817788a535727e72acf85d"
+    },
+    {
+      "byte_length": 12135,
+      "path": "EQUINESYNC_TIER_1_DOCS_03_10_CONSOLIDATED_OUTSIDE_REVIEW_REGISTER.md",
+      "sha256": "7db595f0847d2a93b0473c66d8d0fbfc68cc145891863d44993bcd80559e0116"
+    },
+    {
+      "byte_length": 6855,
+      "path": "PER_FINDING_CLOSURE_EVIDENCE_REGISTER.csv",
+      "sha256": "3f42fb38fb4dbead5bd63fa576da7da8ef2381ada75c3dcf71be51a733a8f2fd"
+    },
+    {
+      "byte_length": 1037,
+      "path": "README_FIRST.md",
+      "sha256": "6cea2cf9d5828a61fe5214144368a03ce33fa2b60eabed0754c5ec2a3957de47"
+    },
+    {
+      "byte_length": 7215,
+      "path": "T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER.csv",
+      "sha256": "0705f3e95a94bc8855b89ddaf8622f91d2ff79d5712ffdf36d412df239ead272"
+    },
+    {
+      "byte_length": 3164,
+      "path": "T1C_CONSOLIDATED_FINDINGS_DISPOSITION_REGISTER.md",
+      "sha256": "cb6f81063b560b8431559dd41968f4dad999a0e9cc8fac1ce160ba702179ca73"
+    },
+    {
+      "byte_length": 743,
+      "path": "T1R2_EXT_TO_T1C_CURRENT_CROSSWALK.csv",
+      "sha256": "832a2a0a94a0f25ea1d93720b5f950e68ef2cfbf165d20fa2c3d4e4d5a0f9958"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

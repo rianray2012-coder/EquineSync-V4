@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accession_evidence": {
+      "type": "string"
+    },
+    "accession_state": {
+      "type": "string"
+    },
+    "activation_state": {
+      "type": "string"
+    },
+    "adoption_state": {
+      "type": "string"
+    },
+    "approval_evidence": {
+      "type": "string"
+    },
+    "artifact_id": {
+      "type": "string"
+    },
+    "authority_state": {
+      "type": "string"
+    },
+    "custody_state": {
+      "type": "string"
+    },
+    "document_lifecycle_state": {
+      "type": "string"
+    },
+    "effective_date": {
+      "type": "string"
+    },
+    "evidence_status": {
+      "type": "string"
+    },
+    "implementation_authority": {
+      "type": "string"
+    },
+    "lock_evidence": {
+      "type": "string"
+    },
+    "production_authority": {
+      "type": "string"
+    },
+    "record_id": {
+      "type": "string"
+    },
+    "successor_or_basis": {
+      "type": "string"
+    },
+    "supersession_state": {
+      "type": "string"
+    },
+    "suspension_state": {
+      "type": "string"
+    },
+    "uncertainty_status": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "record_id",
+    "artifact_id",
+    "document_lifecycle_state",
+    "authority_state",
+    "adoption_state",
+    "accession_state",
+    "activation_state",
+    "implementation_authority",
+    "production_authority",
+    "evidence_status",
+    "uncertainty_status",
+    "suspension_state",
+    "supersession_state",
+    "custody_state",
+    "effective_date",
+    "approval_evidence",
+    "accession_evidence",
+    "lock_evidence",
+    "successor_or_basis"
+  ],
+  "title": "04_AUTHORITY_LIFECYCLE_REGISTER/AUTHORITY_LIFECYCLE_STATE_REGISTER.csv",
+  "type": "object"
+}

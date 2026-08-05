@@ -1,0 +1,15 @@
+role,vacancy_state,consequence,founder_decision_item
+governance stewardship,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+product domain ownership,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+technical implementation,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+security,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+privacy,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+safeguarding,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+financial controls,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+equine health and welfare,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+records and evidence custody,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+release authority,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+incident response,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+review administration,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+source reconciliation,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002
+findings management,VACANT_PENDING_FOUNDER_APPOINTMENT,Cannot treat ownership as appointed or closure-ready,FD-T1R2-002

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_normative_requirements": {
+      "type": "string"
+    },
+    "assertion_level_tests_verified": {
+      "type": "string"
+    },
+    "candidate_match_count": {
+      "type": "string"
+    },
+    "candidate_match_rate": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "implementation_candidates_identified": {
+      "type": "string"
+    },
+    "implementations_verified": {
+      "type": "string"
+    },
+    "metric_limitation": {
+      "type": "string"
+    },
+    "open_candidate_rows": {
+      "type": "string"
+    },
+    "production_evidence_present": {
+      "type": "string"
+    },
+    "runtime_evidence_present": {
+      "type": "string"
+    },
+    "test_candidate_files_located": {
+      "type": "string"
+    },
+    "tests_executed": {
+      "type": "string"
+    },
+    "tests_passed": {
+      "type": "string"
+    },
+    "total_source_text_candidates": {
+      "type": "string"
+    },
+    "verified_coverage": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "domain",
+    "total_source_text_candidates",
+    "accepted_normative_requirements",
+    "candidate_match_count",
+    "candidate_match_rate",
+    "verified_coverage",
+    "implementation_candidates_identified",
+    "implementations_verified",
+    "test_candidate_files_located",
+    "assertion_level_tests_verified",
+    "tests_executed",
+    "tests_passed",
+    "runtime_evidence_present",
+    "production_evidence_present",
+    "open_candidate_rows",
+    "metric_limitation"
+  ],
+  "title": "03_IMPLEMENTATION_TRACEABILITY/COVERAGE_METRICS_BY_DOMAIN.csv",
+  "type": "object"
+}

@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "affected_actors": {
+      "type": "string"
+    },
+    "affected_data": {
+      "type": "string"
+    },
+    "appropriate_check": {
+      "type": "string"
+    },
+    "authority_state": {
+      "type": "string"
+    },
+    "bidirectional_trace_state": {
+      "type": "string"
+    },
+    "complete_check": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string"
+    },
+    "conforming_check": {
+      "type": "string"
+    },
+    "controlling_source": {
+      "type": "string"
+    },
+    "correct_check": {
+      "type": "string"
+    },
+    "derived_from": {
+      "type": "string"
+    },
+    "design_artifact_tier": {
+      "type": "string"
+    },
+    "discovery_method": {
+      "type": "string"
+    },
+    "evidence_artifact": {
+      "type": "string"
+    },
+    "exact_test_or_assertion_locator": {
+      "type": "string"
+    },
+    "execution_command": {
+      "type": "string"
+    },
+    "execution_commit": {
+      "type": "string"
+    },
+    "execution_date": {
+      "type": "string"
+    },
+    "execution_environment": {
+      "type": "string"
+    },
+    "feasible_check": {
+      "type": "string"
+    },
+    "financial_relevance": {
+      "type": "string"
+    },
+    "gap_state": {
+      "type": "string"
+    },
+    "health_or_welfare_relevance": {
+      "type": "string"
+    },
+    "implementation_path": {
+      "type": "string"
+    },
+    "implementation_summary": {
+      "type": "string"
+    },
+    "iso_29148_characteristic_check": {
+      "type": "string"
+    },
+    "known_divergence": {
+      "type": "string"
+    },
+    "necessary_check": {
+      "type": "string"
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "parent_requirement_id": {
+      "type": "string"
+    },
+    "path_verification_state": {
+      "type": "string"
+    },
+    "privacy_relevance": {
+      "type": "string"
+    },
+    "product_domain": {
+      "type": "string"
+    },
+    "requirement_id": {
+      "type": "string"
+    },
+    "requirement_satisfaction_analysis": {
+      "type": "string"
+    },
+    "requirement_text": {
+      "type": "string"
+    },
+    "requirement_type": {
+      "type": "string"
+    },
+    "result": {
+      "type": "string"
+    },
+    "review_date": {
+      "type": "string"
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "runtime_evidence": {
+      "type": "string"
+    },
+    "safeguarding_relevance": {
+      "type": "string"
+    },
+    "singular_check": {
+      "type": "string"
+    },
+    "source_locator": {
+      "type": "string"
+    },
+    "source_path": {
+      "type": "string"
+    },
+    "source_text_candidate_state": {
+      "type": "string"
+    },
+    "source_version": {
+      "type": "string"
+    },
+    "symbol_class_function_endpoint_component_migration_job_event_policy_identifier": {
+      "type": "string"
+    },
+    "test_id": {
+      "type": "string"
+    },
+    "test_path": {
+      "type": "string"
+    },
+    "test_type": {
+      "type": "string"
+    },
+    "unambiguous_check": {
+      "type": "string"
+    },
+    "verifiable_check": {
+      "type": "string"
+    },
+    "verification_commit": {
+      "type": "string"
+    },
+    "verification_method": {
+      "type": "string"
+    },
+    "verified_coverage_state": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "requirement_id",
+    "requirement_text",
+    "controlling_source",
+    "source_path",
+    "source_locator",
+    "source_version",
+    "authority_state",
+    "requirement_type",
+    "product_domain",
+    "affected_actors",
+    "affected_data",
+    "safeguarding_relevance",
+    "financial_relevance",
+    "privacy_relevance",
+    "health_or_welfare_relevance",
+    "implementation_path",
+    "symbol_class_function_endpoint_component_migration_job_event_policy_identifier",
+    "implementation_summary",
+    "path_verification_state",
+    "verification_commit",
+    "reviewer",
+    "review_date",
+    "requirement_satisfaction_analysis",
+    "known_divergence",
+    "test_id",
+    "test_type",
+    "test_path",
+    "exact_test_or_assertion_locator",
+    "execution_command",
+    "execution_environment",
+    "execution_date",
+    "execution_commit",
+    "result",
+    "runtime_evidence",
+    "evidence_artifact",
+    "confidence",
+    "gap_state",
+    "owner",
+    "next_action",
+    "source_text_candidate_state",
+    "iso_29148_characteristic_check",
+    "necessary_check",
+    "appropriate_check",
+    "unambiguous_check",
+    "complete_check",
+    "singular_check",
+    "feasible_check",
+    "verifiable_check",
+    "correct_check",
+    "conforming_check",
+    "discovery_method",
+    "parent_requirement_id",
+    "derived_from",
+    "design_artifact_tier",
+    "bidirectional_trace_state",
+    "verified_coverage_state",
+    "verification_method"
+  ],
+  "title": "03_IMPLEMENTATION_TRACEABILITY/REQUIREMENT_TRACEABILITY_REGISTER.csv",
+  "type": "object"
+}

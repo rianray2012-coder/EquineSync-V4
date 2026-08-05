@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_state": {
+      "type": "string"
+    },
+    "byte_length": {
+      "type": "string"
+    },
+    "canonical_representation": {
+      "type": "string"
+    },
+    "content_differs_from_canonical": {
+      "type": "string"
+    },
+    "controlling_version": {
+      "type": "string"
+    },
+    "duplicate_cluster_id": {
+      "type": "string"
+    },
+    "founder_disposition_required": {
+      "type": "string"
+    },
+    "git_blob": {
+      "type": "string"
+    },
+    "implementation_use": {
+      "type": "string"
+    },
+    "repository_path": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string"
+    },
+    "source_disposition": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "repository_path",
+    "title",
+    "source_disposition",
+    "authority_state",
+    "sha256",
+    "byte_length",
+    "git_blob",
+    "canonical_representation",
+    "controlling_version",
+    "implementation_use",
+    "duplicate_cluster_id",
+    "content_differs_from_canonical",
+    "founder_disposition_required"
+  ],
+  "title": "08_SOURCE_RECONCILIATION/SOURCE_AUTHORITY_DISPOSITION_REGISTER.csv",
+  "type": "object"
+}

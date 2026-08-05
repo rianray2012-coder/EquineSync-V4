@@ -1,0 +1,21 @@
+{
+  "directory": "ROUND_3_V3_REVIEW_REMEDIATION/SOURCE_REVIEWS",
+  "files": [
+    {
+      "byte_length": 11089,
+      "path": "Claude EQUINESYNC_V3_REMEDIATION_CANDIDATE_REVIEW.md",
+      "sha256": "5e4666b1b800fbde348a12a4553bb13f2a8f055e25fb24c0ae0cf3b34a7c37b7"
+    },
+    {
+      "byte_length": 17497,
+      "path": "Perplexity Tier 1 docs 3-10V3_REMEDIATION_REVIEW.md",
+      "sha256": "0b5f16db40238588b2b3ad533a5c577c1d03abe9d279f39eee7043a534eb5d5c"
+    },
+    {
+      "byte_length": 12413,
+      "path": "cursor_EQUINESYNC_TIER_1_RR2_V3_OUTSIDE_REVIEW_REPORT_b6e98e0.md",
+      "sha256": "b4659e4f923c303e6fce668adf9442a6cd75b0a03892b5b2d632da2c22f26ed1"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

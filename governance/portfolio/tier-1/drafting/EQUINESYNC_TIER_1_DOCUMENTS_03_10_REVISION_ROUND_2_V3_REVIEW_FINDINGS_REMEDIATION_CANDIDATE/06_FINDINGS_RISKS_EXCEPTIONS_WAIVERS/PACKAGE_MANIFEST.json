@@ -1,0 +1,31 @@
+{
+  "directory": "06_FINDINGS_RISKS_EXCEPTIONS_WAIVERS",
+  "files": [
+    {
+      "byte_length": 288,
+      "path": "DUPLICATE_AND_STALENESS_ANALYSIS.csv",
+      "sha256": "14a46c3afa5e445c65bef54ece0f0cf3e46077a4abb6432cadcfa4fb93c9d0b6"
+    },
+    {
+      "byte_length": 684,
+      "path": "EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1.md",
+      "sha256": "2bea8dad05bee8f81c0dc336c05f894f36f6fbbd7711ef819d87bd9dac4fd40f"
+    },
+    {
+      "byte_length": 1954,
+      "path": "EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "7227856bdf2f6de10c3286637c012dca7b2e7a653777b904a86599f7126a1d3a"
+    },
+    {
+      "byte_length": 11932,
+      "path": "FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.csv",
+      "sha256": "30b9a0ec8c81d8a340c66128de9b2e7d3cee76336bb392747de006f56c9bf86b"
+    },
+    {
+      "byte_length": 21729,
+      "path": "FINDINGS_RISKS_EXCEPTIONS_WAIVERS_REGISTER.json",
+      "sha256": "3b23a7a7fbdddf270b576f4c2f4a31114f02fd4fa9facca5b21c0519c2bb3f30"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

@@ -1,0 +1,22 @@
+{
+  "as_of_utc": "2026-08-04T19:05:58.331320+00:00",
+  "authority_boundary": "NOT_ADOPTED; NOT_ACTIVE; IMPLEMENTATION_NOT_AUTHORIZED; PRODUCTION_USE_NOT_AUTHORIZED; MERGE_NOT_AUTHORIZED; CERTIFICATION_NOT_COMPLETE; FOUNDER_REVIEW_REQUIRED; UNRESOLVED_ITEMS_REMAIN_OPEN_AS_IDENTIFIED",
+  "claude_named_files_byte_identical": true,
+  "claude_source_review_id_prefix": "CLAUDE",
+  "perplexity_source_review_id_prefix": "PPLX",
+  "record_type": "SOURCE_REVIEW_AUTHENTICATION_RECORD",
+  "source_reviews": {
+    "Claude_ EQUINESYNC_V2_REMEDIATION_CANDIDATE_FEEDBACK.md": {
+      "byte_length": 13702,
+      "sha256": "f305cc7f299b09301f732d8047a0a482b1f1601deda921eb6d501a3d251186b7"
+    },
+    "EQUINESYNC_V2_REMEDIATION_CANDIDATE_FEEDBACK.md": {
+      "byte_length": 13702,
+      "sha256": "f305cc7f299b09301f732d8047a0a482b1f1601deda921eb6d501a3d251186b7"
+    },
+    "Perplexity Tier 1 Docs 3 to 10 V2_REMEDIATION_REVIEW.md": {
+      "byte_length": 18250,
+      "sha256": "5375a01523fcd9c16a784e916f0d1e434f376deec93c9e52f7be839dd01ec64d"
+    }
+  }
+}

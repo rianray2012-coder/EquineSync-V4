@@ -1,0 +1,36 @@
+{
+  "directory": "04_AUTHORITY_LIFECYCLE_REGISTER",
+  "files": [
+    {
+      "byte_length": 9811,
+      "path": "AUTHORITY_LIFECYCLE_MODEL.json",
+      "sha256": "482d2d5b5715552d02a25d3538e100191b56094a7c344ffc358650c7bc5b4931"
+    },
+    {
+      "byte_length": 3976,
+      "path": "AUTHORITY_LIFECYCLE_STATE_REGISTER.csv",
+      "sha256": "9ade6c9ffe348973f8587fb038b91e8bc3cb5d924083ff7e86001a7a31cd5935"
+    },
+    {
+      "byte_length": 991,
+      "path": "EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "sha256": "6d8e360ec2d3bb450abf20d3f035ed580227e53eea562baff8289bcc4a4e9023"
+    },
+    {
+      "byte_length": 1947,
+      "path": "EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "c1410cf4ba7c23255cf80f959527b12209416a7d598b8856c41558d8e5f807cb"
+    },
+    {
+      "byte_length": 2053,
+      "path": "INVALID_STATE_RULES.csv",
+      "sha256": "0503416939a6062337bb2988f5dd554ff620cf15c681a92b7b8f02e891a23859"
+    },
+    {
+      "byte_length": 74266,
+      "path": "LIFECYCLE_TRANSITION_MATRIX.csv",
+      "sha256": "1d08e1d4dafb3d24c477b366fabf91a6477afcae045d72d9b7cd58f67a272f47"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

@@ -1,0 +1,8 @@
+domain,total_source_text_candidates,accepted_normative_requirements,candidate_match_count,candidate_match_rate,verified_coverage,implementation_candidates_identified,implementations_verified,test_candidate_files_located,assertion_level_tests_verified,tests_executed,tests_passed,runtime_evidence_present,production_evidence_present,open_candidate_rows,metric_limitation
+Facility And Tenant,1,0,1,100.0,0.0,1,0,1,0,0,0,0,0,1,Metrics count only non-rejected survivor candidates after V5 quarantine reconciliation; no ISO 29148 checks or runtime evidence were performed.
+General Governance,39,0,3,7.7,0.0,3,0,26,0,0,0,0,0,39,Metrics count only non-rejected survivor candidates after V5 quarantine reconciliation; no ISO 29148 checks or runtime evidence were performed.
+Identity Access,2,0,2,100.0,0.0,2,0,2,0,0,0,0,0,2,Metrics count only non-rejected survivor candidates after V5 quarantine reconciliation; no ISO 29148 checks or runtime evidence were performed.
+Privacy,1,0,1,100.0,0.0,1,0,0,0,0,0,0,0,1,Metrics count only non-rejected survivor candidates after V5 quarantine reconciliation; no ISO 29148 checks or runtime evidence were performed.
+Safeguarding,1,0,1,100.0,0.0,1,0,0,0,0,0,0,0,1,Metrics count only non-rejected survivor candidates after V5 quarantine reconciliation; no ISO 29148 checks or runtime evidence were performed.
+Technical Implementation,1,0,0,0.0,0.0,0,0,1,0,0,0,0,0,1,Metrics count only non-rejected survivor candidates after V5 quarantine reconciliation; no ISO 29148 checks or runtime evidence were performed.
+OVERALL,45,0,8,17.8,0.0,8,0,30,0,0,0,0,0,45,V5 reconciled coverage to 45 surviving candidates and 51 quarantined rejected fragments; verified coverage remains 0%.

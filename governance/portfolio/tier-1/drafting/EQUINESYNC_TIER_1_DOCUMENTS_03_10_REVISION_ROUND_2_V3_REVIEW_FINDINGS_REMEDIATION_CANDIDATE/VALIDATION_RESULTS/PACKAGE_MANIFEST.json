@@ -1,0 +1,11 @@
+{
+  "directory": "VALIDATION_RESULTS",
+  "files": [
+    {
+      "byte_length": 78415,
+      "path": "STANDALONE_EXTRACTED_PACKAGE_VALIDATION_REPORT_V3.json",
+      "sha256": "4879b3abec00afc95798e782d9dca54192aab8805960ba3d21c95db8017d1c5a"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

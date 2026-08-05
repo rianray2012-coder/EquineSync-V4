@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "byte_length": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "path",
+    "sha256",
+    "byte_length"
+  ],
+  "title": "MANIFEST_OF_MANIFESTS.csv",
+  "type": "object"
+}

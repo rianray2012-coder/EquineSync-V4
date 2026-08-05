@@ -1,0 +1,16 @@
+{
+  "directory": "ROUND_2_V2_REVIEW_REMEDIATION/SOURCE_REVIEWS",
+  "files": [
+    {
+      "byte_length": 13702,
+      "path": "CLAUDE_V2_REMEDIATION_CANDIDATE_FEEDBACK.md",
+      "sha256": "f305cc7f299b09301f732d8047a0a482b1f1601deda921eb6d501a3d251186b7"
+    },
+    {
+      "byte_length": 18250,
+      "path": "PERPLEXITY_V2_REMEDIATION_REVIEW.md",
+      "sha256": "5375a01523fcd9c16a784e916f0d1e434f376deec93c9e52f7be839dd01ec64d"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}

@@ -1,0 +1,222 @@
+{
+  "invalid_rules": [
+    [
+      "active but not adopted",
+      "activation_state=ACTIVE and adoption_state!=ADOPTED"
+    ],
+    [
+      "adopted without approval evidence",
+      "adoption_state=ADOPTED and approval_evidence empty"
+    ],
+    [
+      "accessioned without accession evidence",
+      "accession_state=ACCESSIONED and accession_evidence empty"
+    ],
+    [
+      "custody complete without accession event",
+      "custody_state=CUSTODY_COMPLETE and accession_state!=ACCESSIONED"
+    ],
+    [
+      "superseded without successor or basis",
+      "supersession_state starts SUPERSEDED and successor_or_basis empty"
+    ],
+    [
+      "locked without lock evidence",
+      "document_lifecycle_state=LOCKED and lock_evidence empty"
+    ],
+    [
+      "effective without required effective date",
+      "authority_state=EFFECTIVE and effective_date empty"
+    ],
+    [
+      "implementation-authorizing while unauthorized",
+      "implementation_authority=AUTHORIZED and authority_state!=IMPLEMENTATION_AUTHORIZING"
+    ],
+    [
+      "production-authorizing without activation authority",
+      "production_authority=AUTHORIZED and activation_state!=ACTIVE"
+    ],
+    [
+      "suspended but unrestrictedly active",
+      "suspension_state=SUSPENDED and activation_state=ACTIVE"
+    ],
+    [
+      "historical but presented as controlling",
+      "document_lifecycle_state=HISTORICAL_RETAINED and authority_state=CONTROLLING"
+    ],
+    [
+      "candidate evidence represented as adopted authority",
+      "authority_state=DOCUMENTARY_CANDIDATE_ONLY and adoption_state=ADOPTED"
+    ]
+  ],
+  "state_rows": [
+    {
+      "accession_evidence": "",
+      "accession_state": "NOT_ACCESSIONED",
+      "activation_state": "NOT_ACTIVE",
+      "adoption_state": "NOT_ADOPTED",
+      "approval_evidence": "",
+      "artifact_id": "EQUINESYNC_MASTER_REQUIREMENT_TO_IMPLEMENTATION_TEST_EVIDENCE_TRACEABILITY_FRAMEWORK_REVISION_ROUND_2_V1",
+      "authority_state": "DOCUMENTARY_CANDIDATE_ONLY",
+      "custody_state": "DRAFT_PR_CUSTODY_PENDING",
+      "document_lifecycle_state": "FOUNDER_REVIEW_READY",
+      "effective_date": "",
+      "evidence_status": "ROUND_2_DOCUMENTARY_EVIDENCE_PRESENT",
+      "implementation_authority": "IMPLEMENTATION_NOT_AUTHORIZED",
+      "lock_evidence": "",
+      "production_authority": "PRODUCTION_USE_NOT_AUTHORIZED",
+      "record_id": "T1R2-LIFE-03",
+      "successor_or_basis": "Revision Round 2 directive and package",
+      "supersession_state": "V1_CANDIDATE_SUPERSEDED_FOR_REVIEW_BY_ROUND_2_CANDIDATE",
+      "suspension_state": "NOT_SUSPENDED",
+      "uncertainty_status": "UNRESOLVED_ITEMS_REMAIN_OPEN"
+    },
+    {
+      "accession_evidence": "",
+      "accession_state": "NOT_ACCESSIONED",
+      "activation_state": "NOT_ACTIVE",
+      "adoption_state": "NOT_ADOPTED",
+      "approval_evidence": "",
+      "artifact_id": "EQUINESYNC_AUTHORITY_LIFECYCLE_STATE_AND_TRANSITION_REGISTER_REVISION_ROUND_2_V1",
+      "authority_state": "DOCUMENTARY_CANDIDATE_ONLY",
+      "custody_state": "DRAFT_PR_CUSTODY_PENDING",
+      "document_lifecycle_state": "FOUNDER_REVIEW_READY",
+      "effective_date": "",
+      "evidence_status": "ROUND_2_DOCUMENTARY_EVIDENCE_PRESENT",
+      "implementation_authority": "IMPLEMENTATION_NOT_AUTHORIZED",
+      "lock_evidence": "",
+      "production_authority": "PRODUCTION_USE_NOT_AUTHORIZED",
+      "record_id": "T1R2-LIFE-04",
+      "successor_or_basis": "Revision Round 2 directive and package",
+      "supersession_state": "V1_CANDIDATE_SUPERSEDED_FOR_REVIEW_BY_ROUND_2_CANDIDATE",
+      "suspension_state": "NOT_SUSPENDED",
+      "uncertainty_status": "UNRESOLVED_ITEMS_REMAIN_OPEN"
+    },
+    {
+      "accession_evidence": "",
+      "accession_state": "NOT_ACCESSIONED",
+      "activation_state": "NOT_ACTIVE",
+      "adoption_state": "NOT_ADOPTED",
+      "approval_evidence": "",
+      "artifact_id": "EQUINESYNC_FOUNDER_DECISION_SCOPE_AUTHORITY_AND_DISPOSITION_REGISTER_REVISION_ROUND_2_V1",
+      "authority_state": "DOCUMENTARY_CANDIDATE_ONLY",
+      "custody_state": "DRAFT_PR_CUSTODY_PENDING",
+      "document_lifecycle_state": "FOUNDER_REVIEW_READY",
+      "effective_date": "",
+      "evidence_status": "ROUND_2_DOCUMENTARY_EVIDENCE_PRESENT",
+      "implementation_authority": "IMPLEMENTATION_NOT_AUTHORIZED",
+      "lock_evidence": "",
+      "production_authority": "PRODUCTION_USE_NOT_AUTHORIZED",
+      "record_id": "T1R2-LIFE-05",
+      "successor_or_basis": "Revision Round 2 directive and package",
+      "supersession_state": "V1_CANDIDATE_SUPERSEDED_FOR_REVIEW_BY_ROUND_2_CANDIDATE",
+      "suspension_state": "NOT_SUSPENDED",
+      "uncertainty_status": "UNRESOLVED_ITEMS_REMAIN_OPEN"
+    },
+    {
+      "accession_evidence": "",
+      "accession_state": "NOT_ACCESSIONED",
+      "activation_state": "NOT_ACTIVE",
+      "adoption_state": "NOT_ADOPTED",
+      "approval_evidence": "",
+      "artifact_id": "EQUINESYNC_FINDINGS_RISKS_EXCEPTIONS_WAIVERS_AND_CLOSURE_CONTROL_REGISTER_REVISION_ROUND_2_V1",
+      "authority_state": "DOCUMENTARY_CANDIDATE_ONLY",
+      "custody_state": "DRAFT_PR_CUSTODY_PENDING",
+      "document_lifecycle_state": "FOUNDER_REVIEW_READY",
+      "effective_date": "",
+      "evidence_status": "ROUND_2_DOCUMENTARY_EVIDENCE_PRESENT",
+      "implementation_authority": "IMPLEMENTATION_NOT_AUTHORIZED",
+      "lock_evidence": "",
+      "production_authority": "PRODUCTION_USE_NOT_AUTHORIZED",
+      "record_id": "T1R2-LIFE-06",
+      "successor_or_basis": "Revision Round 2 directive and package",
+      "supersession_state": "V1_CANDIDATE_SUPERSEDED_FOR_REVIEW_BY_ROUND_2_CANDIDATE",
+      "suspension_state": "NOT_SUSPENDED",
+      "uncertainty_status": "UNRESOLVED_ITEMS_REMAIN_OPEN"
+    },
+    {
+      "accession_evidence": "",
+      "accession_state": "NOT_ACCESSIONED",
+      "activation_state": "NOT_ACTIVE",
+      "adoption_state": "NOT_ADOPTED",
+      "approval_evidence": "",
+      "artifact_id": "EQUINESYNC_GOVERNANCE_OWNERSHIP_ACCOUNTABILITY_AND_REVIEW_CALENDAR_REVISION_ROUND_2_V1",
+      "authority_state": "DOCUMENTARY_CANDIDATE_ONLY",
+      "custody_state": "DRAFT_PR_CUSTODY_PENDING",
+      "document_lifecycle_state": "FOUNDER_REVIEW_READY",
+      "effective_date": "",
+      "evidence_status": "ROUND_2_DOCUMENTARY_EVIDENCE_PRESENT",
+      "implementation_authority": "IMPLEMENTATION_NOT_AUTHORIZED",
+      "lock_evidence": "",
+      "production_authority": "PRODUCTION_USE_NOT_AUTHORIZED",
+      "record_id": "T1R2-LIFE-07",
+      "successor_or_basis": "Revision Round 2 directive and package",
+      "supersession_state": "V1_CANDIDATE_SUPERSEDED_FOR_REVIEW_BY_ROUND_2_CANDIDATE",
+      "suspension_state": "NOT_SUSPENDED",
+      "uncertainty_status": "UNRESOLVED_ITEMS_REMAIN_OPEN"
+    },
+    {
+      "accession_evidence": "",
+      "accession_state": "NOT_ACCESSIONED",
+      "activation_state": "NOT_ACTIVE",
+      "adoption_state": "NOT_ADOPTED",
+      "approval_evidence": "",
+      "artifact_id": "EQUINESYNC_SOURCE_PROVENANCE_AUTHORITY_AND_SUPERSESSION_RECONCILIATION_REVISION_ROUND_2_V1",
+      "authority_state": "DOCUMENTARY_CANDIDATE_ONLY",
+      "custody_state": "DRAFT_PR_CUSTODY_PENDING",
+      "document_lifecycle_state": "FOUNDER_REVIEW_READY",
+      "effective_date": "",
+      "evidence_status": "ROUND_2_DOCUMENTARY_EVIDENCE_PRESENT",
+      "implementation_authority": "IMPLEMENTATION_NOT_AUTHORIZED",
+      "lock_evidence": "",
+      "production_authority": "PRODUCTION_USE_NOT_AUTHORIZED",
+      "record_id": "T1R2-LIFE-08",
+      "successor_or_basis": "Revision Round 2 directive and package",
+      "supersession_state": "V1_CANDIDATE_SUPERSEDED_FOR_REVIEW_BY_ROUND_2_CANDIDATE",
+      "suspension_state": "NOT_SUSPENDED",
+      "uncertainty_status": "UNRESOLVED_ITEMS_REMAIN_OPEN"
+    },
+    {
+      "accession_evidence": "",
+      "accession_state": "NOT_ACCESSIONED",
+      "activation_state": "NOT_ACTIVE",
+      "adoption_state": "NOT_ADOPTED",
+      "approval_evidence": "",
+      "artifact_id": "EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1",
+      "authority_state": "DOCUMENTARY_CANDIDATE_ONLY",
+      "custody_state": "DRAFT_PR_CUSTODY_PENDING",
+      "document_lifecycle_state": "FOUNDER_REVIEW_READY",
+      "effective_date": "",
+      "evidence_status": "ROUND_2_DOCUMENTARY_EVIDENCE_PRESENT",
+      "implementation_authority": "IMPLEMENTATION_NOT_AUTHORIZED",
+      "lock_evidence": "",
+      "production_authority": "PRODUCTION_USE_NOT_AUTHORIZED",
+      "record_id": "T1R2-LIFE-09",
+      "successor_or_basis": "Revision Round 2 directive and package",
+      "supersession_state": "V1_CANDIDATE_SUPERSEDED_FOR_REVIEW_BY_ROUND_2_CANDIDATE",
+      "suspension_state": "NOT_SUSPENDED",
+      "uncertainty_status": "UNRESOLVED_ITEMS_REMAIN_OPEN"
+    },
+    {
+      "accession_evidence": "",
+      "accession_state": "NOT_ACCESSIONED",
+      "activation_state": "NOT_ACTIVE",
+      "adoption_state": "NOT_ADOPTED",
+      "approval_evidence": "",
+      "artifact_id": "EQUINESYNC_GOVERNANCE_CLOSING_AUDIT_PROTOCOL_AND_BOUNDED_CERTIFICATION_PACKAGE_REVISION_ROUND_2_V1",
+      "authority_state": "DOCUMENTARY_CANDIDATE_ONLY",
+      "custody_state": "DRAFT_PR_CUSTODY_PENDING",
+      "document_lifecycle_state": "FOUNDER_REVIEW_READY",
+      "effective_date": "",
+      "evidence_status": "ROUND_2_DOCUMENTARY_EVIDENCE_PRESENT",
+      "implementation_authority": "IMPLEMENTATION_NOT_AUTHORIZED",
+      "lock_evidence": "",
+      "production_authority": "PRODUCTION_USE_NOT_AUTHORIZED",
+      "record_id": "T1R2-LIFE-10",
+      "successor_or_basis": "Revision Round 2 directive and package",
+      "supersession_state": "V1_CANDIDATE_SUPERSEDED_FOR_REVIEW_BY_ROUND_2_CANDIDATE",
+      "suspension_state": "NOT_SUSPENDED",
+      "uncertainty_status": "UNRESOLVED_ITEMS_REMAIN_OPEN"
+    }
+  ]
+}

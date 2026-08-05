@@ -1,0 +1,31 @@
+{
+  "directory": "09_WORKSTREAM_PR_BRANCH_DISPOSITION",
+  "files": [
+    {
+      "byte_length": 2237,
+      "path": "EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1.md",
+      "sha256": "b57d618701a6163c6aa2597e95b3fbf717732bb2d4f65d346ba4bea21a2683ef"
+    },
+    {
+      "byte_length": 1954,
+      "path": "EQUINESYNC_OPEN_WORKSTREAM_PR_BRANCH_AND_EVIDENCE_DISPOSITION_REGISTER_REVISION_ROUND_2_V1_REVISION_ROUND_2_CRITICAL_REVIEW_REPORT.md",
+      "sha256": "6e24fbe8d69e8e86d4841c208e3a8cf07d20114f08d5666d31eee247077d0029"
+    },
+    {
+      "byte_length": 1058,
+      "path": "WORKSTREAM_DISPOSITION_REPORT.md",
+      "sha256": "8136004d77a270495c716cdb8162e504a6023e72be83208fc05f6c751294e25d"
+    },
+    {
+      "byte_length": 31620,
+      "path": "WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.csv",
+      "sha256": "d3a940991d5115ef786d6f84c5b1e11387e3ef6ab6bec11c450d69416a024d15"
+    },
+    {
+      "byte_length": 34719,
+      "path": "WORKSTREAM_PR_BRANCH_DISPOSITION_REGISTER.json",
+      "sha256": "5e7bd6d486238a790858d59363ba57a2fc1831bbe8ac2b65d6dee492cf80ec47"
+    }
+  ],
+  "manifest_type": "PER_DIRECTORY_PACKAGE_MANIFEST"
+}
