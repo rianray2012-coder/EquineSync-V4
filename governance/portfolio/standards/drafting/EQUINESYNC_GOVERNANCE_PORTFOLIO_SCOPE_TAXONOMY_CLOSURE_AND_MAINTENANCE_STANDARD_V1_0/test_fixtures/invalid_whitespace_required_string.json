@@ -1,0 +1,37 @@
+{
+  "artifact_path": "fixture",
+  "certification_id": "ES-FCR-10-2026-001",
+  "certifying_authority": "Fixture",
+  "class_id": "FCR-10",
+  "class_payload": {
+    "data_scope": "fixture-value",
+    "effective_date": "fixture-value",
+    "environment": "fixture-value",
+    "evidence_relied_upon": "fixture-value",
+    "exception_attestation": "fixture-value",
+    "expires_at_or_review_trigger": "fixture-value",
+    "feature_scope": "fixture-value",
+    "release_identity": "0123456789abcdef0123456789abcdef01234567",
+    "release_scope_only_statement": "fixture-value",
+    "rollback_conditions": "fixture-value",
+    "second_review": {
+      "reviewer_identity": "Second Reviewer"
+    },
+    "stop_conditions": "fixture-value",
+    "unresolved_risk_statement": "fixture-value",
+    "user_scope": "fixture-value"
+  },
+  "dependent_claim_effect": "Fixture only",
+  "effective_at": "2026-08-03T00:00:00Z",
+  "issued_at": "2026-08-03T00:00:00Z",
+  "limitations": [
+    "Fixture only"
+  ],
+  "review_trigger": "Fixture trigger",
+  "scope_summary": "   ",
+  "second_review": {
+    "reviewer_identity": "Second Reviewer"
+  },
+  "status": "ACTIVE",
+  "truth_statement": "FOUNDER AUTHORITY MAY CHANGE THE REQUIRED INTERNAL GATE OR EVIDENCE SUFFICIENCY DETERMINATION, BUT IT MAY NOT CHANGE HISTORICAL FACT."
+}

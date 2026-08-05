@@ -1,0 +1,17 @@
+trigger_id,trigger_type,trigger,immediate_effect,required_notification,rule_ids
+RT-001,automatic,Amendment or supersession of controlling canon,Affected artifacts and mappings reviewed or suspended.,"Founder, owners, stewards, affected leads",ES-GPS-REOPEN-001
+RT-002,automatic,"Source hash, byte length, or path mismatch",Affected source-based claims fail closed until reconciled.,Evidence steward and artifact owner,ES-GPS-SRC-001
+RT-003,automatic,Previously unavailable historical source becomes available,FCR-01 conclusions reviewed against source.,Founder and source steward,ES-GPS-HIST-001
+RT-004,automatic,Waiver used outside stated scope,Affected claim suspended.,"Founder, waiver owner, audit owner",ES-GPS-WAIVE-001
+RT-005,automatic,"Temporary waiver, deferral, certification, or substitution expires",Affected gate re-closes unless renewed or closed.,Risk owner and authority,ES-GPS-EXPIRE-001
+RT-006,automatic,Certification lacks durable record,Certification has no authority effect until durable record exists.,Founder and evidence steward,ES-GPS-FCR-001
+RT-007,automatic,Pilot evidence contradicts in-house evidence,Affected readiness or closure claim reviewed.,Pilot owner and evidence steward,ES-GPS-PILOTEVD-001
+RT-008,automatic,Accepted residual risk materializes or severity changes,Affected closure/readiness/release claim reviewed.,Risk owner and Founder where required,ES-GPS-RISK-001
+RT-009,automatic,"Overclaim detected in public, PR, release, or governance text",Statement corrected and affected claim reviewed.,Artifact owner and communications owner,ES-GPS-OVER-001
+RT-010,automatic,"Release head, environment, feature scope, or provider changes",Production/pilot readiness claim reviewed for new scope.,Release owner and Founder where required,ES-GPS-PROD-001
+RT-011,automatic,"External legal, contract, regulatory, or court obligation conflicts",Internal waiver or override suspended for affected obligation.,"Founder, legal, domain owners",ES-GPS-EXTLAW-001
+RT-012,automatic,Maintenance cadence missed without certified substitute cycle,Affected maintenance claim reviewed.,Governance maintainer,ES-GPS-MAINT-001
+RT-013,automatic,Closed finding receives contrary evidence,Finding reopened or closure narrowed.,Finding owner and reviewer,ES-GPS-FIND-001
+RT-EXB-001,EXCEPTION_BUDGET,Exception budget threshold exceeded,Quarterly review escalation,Founder and governance steward,"[""ES-GPS-WAIVE-001""]"
+RT-CHAL-001,CHALLENGE,Credible defect or overclaim report,Affected claim reopened or suspended,Governance steward and accountable owner,"[""ES-GPS-CHAL-001""]"
+RT-PRIV-001,PRIVACY_INCIDENT,Material personal-data incident,Pilot authorization or evidence substitution suspended,"Founder, privacy owner, and incident owner","[""ES-GPS-PRIV-001""]"
