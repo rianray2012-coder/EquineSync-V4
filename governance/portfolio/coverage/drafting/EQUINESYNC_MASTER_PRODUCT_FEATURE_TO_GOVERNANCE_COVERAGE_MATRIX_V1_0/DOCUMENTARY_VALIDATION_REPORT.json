@@ -1,0 +1,27 @@
+{
+  "artifact_id": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0",
+  "revision_status": "FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "checks": [
+    {
+      "name": "package checksum verification",
+      "result": "PASS"
+    },
+    {
+      "name": "package manifest verification",
+      "result": "PASS"
+    },
+    {
+      "name": "CSV and JSON parsing",
+      "result": "PASS"
+    },
+    {
+      "name": "CSV/JSON parity",
+      "result": "PASS"
+    },
+    {
+      "name": "semantic validation report generated",
+      "result": "PASS_STRUCTURAL_REPORT_READY_FOR_TARGETED_REREVIEW"
+    }
+  ],
+  "authority": "DOCUMENTARY_COVERAGE_ANALYSIS_ONLY_NO_ADOPTION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY"
+}
