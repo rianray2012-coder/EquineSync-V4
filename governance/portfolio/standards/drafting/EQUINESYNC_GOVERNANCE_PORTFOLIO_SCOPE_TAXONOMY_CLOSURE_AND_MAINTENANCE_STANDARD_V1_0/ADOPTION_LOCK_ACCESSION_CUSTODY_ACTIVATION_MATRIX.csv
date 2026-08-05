@@ -1,0 +1,6 @@
+authority_event,minimum_record,does_not_imply,required_hash_or_head,rule_ids
+ADOPTION,"Exact artifact identity, scope, exclusions, retained findings, authority effect","Lock, activation, implementation, pilot, or production",Artifact SHA-256 and byte length,"[""ES-GPS-ADOPT-001""]"
+LOCK,"Exact bytes, SHA-256, byte length, retained findings, successor treatment",Activation or production,Exact bytes required,"[""ES-GPS-LOCK-001""]"
+ACCESSION,Authorized path and commit,Custody or activation,Commit SHA,"[""ES-GPS-ACC-001""]"
+CUSTODY,"Protected repository state, hash, byte length, PR/merge context",Runtime authority,Protected head,"[""ES-GPS-CUST-001""]"
+ACTIVATION,"Effective scope, exclusions, dependencies, stop conditions",Production unless expressly stated,Exact activated artifact version,"[""ES-GPS-ACT-001""]"

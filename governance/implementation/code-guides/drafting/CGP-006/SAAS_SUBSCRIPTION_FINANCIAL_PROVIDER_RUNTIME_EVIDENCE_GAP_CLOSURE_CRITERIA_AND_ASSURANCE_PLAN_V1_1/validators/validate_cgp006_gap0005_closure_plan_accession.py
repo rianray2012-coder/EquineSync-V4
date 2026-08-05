@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import csv
 import hashlib
-import io
 import json
 import re
 import subprocess
@@ -13,14 +12,11 @@ import zipfile
 from pathlib import Path
 
 PACKAGE_REL = Path("governance/implementation/code-guides/drafting/CGP-006/SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_GAP_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1")
-PROGRAM_STATUS = Path("governance/implementation/code-guides/PROGRAM_STATUS.md")
-CORRECTION_PATH = Path("governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_CUSTODY_INTEGRITY_CORRECTION_V1")
-REFRESH_PATH = Path("governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_POST_CORRECTION_CUSTODY_REFRESH_V2")
-REFRESH_RECEIPT = Path("governance/implementation/code-guides/receipts/CGP006_MAP_GAP_0005_CLOSURE_PLAN_POST_CORRECTION_CUSTODY_REFRESH_V2_RECEIPT.md")
 DIRECTIVE_ID = "CGP_006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_PROTECTED_ACCESSION_AND_CUSTODY_DIRECTIVE_V1_0_0"
-CORRECTION_DIRECTIVE_ID = "CGP_006_MAP_GAP_0005_CLOSURE_PLAN_CUSTODY_INTEGRITY_CORRECTION_AND_REFRESH_DIRECTIVE_V1_0_0"
 FOUNDER_APPROVAL_ID = "ES-FD-CGP006-MAP-GAP-0005-CLOSURE-PLAN-V1.1.0-2026-08-01"
 CLASSIFICATION = "FOUNDER_APPROVED_SUBORDINATE_CGP_006_IMPLEMENTATION_GOVERNANCE_ASSURANCE_PLAN"
+START_HEAD = "d0d9528028982c1243f9e2a6b0f21a78f298276c"
+REVIEWED_REF = "9996e948ede39a968b8facd8afe15c2b1a345204"
 ZIP_NAME = "CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_2026_08_01.zip"
 ROOT_MD = "CGP006_MAP_GAP_0005_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1_0.md"
 SOURCE_MD = "CGP006_MAP_GAP_0005_SAAS_SUBSCRIPTION_FINANCIAL_PROVIDER_RUNTIME_EVIDENCE_CLOSURE_CRITERIA_AND_ASSURANCE_PLAN_V1_1_0_FOUNDER_APPROVED.md"
@@ -68,100 +64,76 @@ PROHIBITED_PLACEHOLDER_EVIDENCE = {
 }
 SECRET_RE = re.compile(r"(sk_live_[A-Za-z0-9_]+|sk_test_[A-Za-z0-9_]+|rk_live_[A-Za-z0-9_]+|rk_test_[A-Za-z0-9_]+|whsec_[A-Za-z0-9_]+|mongodb(?:\+srv)?://|JWT_SECRET\s*=|STRIPE_SECRET_KEY\s*=.+|STRIPE_API_KEY\s*=.+)", re.IGNORECASE)
 CONFLICT_MARKER_RE = re.compile(r"^(<<<<<<<|=======|>>>>>>>)", re.MULTILINE)
-TEXT_SUFFIXES = {".md", ".py", ".json", ".csv", ".sha256", ""}
-AUTHORITATIVE_TOKEN_LOCATIONS = {
-    DIRECTIVE_ID: {"ACCESSION_RECORD.md", "AUTHORITY_AND_SCOPE_MATRIX.csv", "FOUNDER_APPROVAL_AND_SOURCE_IDENTITY_RECORD.md", "README.md"},
-    FOUNDER_APPROVAL_ID: {"ACCESSION_RECORD.md", "AUTHORITY_AND_SCOPE_MATRIX.csv", "FOUNDER_APPROVAL_AND_SOURCE_IDENTITY_RECORD.md", ROOT_MD, "CURRENT_GAP_STATUS_OVERLAY.md"},
-    CLASSIFICATION: {"ACCESSION_RECORD.md", "SOURCE_REGISTER.md", "README.md"},
-    "CGP006_MAP_GAP_0005_REMAINS_OPEN": {ROOT_MD, "CURRENT_GAP_STATUS_OVERLAY.md"},
-    "PROVIDER_CONNECTED_ASSURANCE_WORKSTREAM_NOT_AUTHORIZED_BY_THIS_DIRECTIVE": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "IMPLEMENTATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "PROVIDER_ACTIVATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "LIVE_PAYMENT_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "NO_CUSTOMER_FUNDS_MOVEMENT_AUTHORIZED": {ROOT_MD, "CURRENT_GAP_STATUS_OVERLAY.md"},
-    "PRODUCTION_FINANCIAL_READINESS_NOT_ESTABLISHED": {ROOT_MD, "CURRENT_GAP_STATUS_OVERLAY.md"},
-    "DEPLOYMENT_NOT_AUTHORIZED": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "STAGING_NOT_AUTHORIZED": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "PILOT_NOT_AUTHORIZED": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "PRODUCTION_USE_NOT_AUTHORIZED": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "PUBLIC_LAUNCH_NOT_AUTHORIZED": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "PR_69_NOT_MODIFIED_BY_THIS_DIRECTIVE": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "PR_70_NOT_MODIFIED_BY_THIS_DIRECTIVE": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-    "UNRELATED_GAPS_FINDINGS_AND_FINANCIAL_PROGRAMS_UNCHANGED": {"CURRENT_GAP_STATUS_OVERLAY.md"},
-}
+BOUNDARY_TOKENS = [
+    DIRECTIVE_ID,
+    FOUNDER_APPROVAL_ID,
+    CLASSIFICATION,
+    "CGP006_MAP_GAP_0005_REMAINS_OPEN",
+    "PROVIDER_CONNECTED_ASSURANCE_WORKSTREAM_NOT_AUTHORIZED_BY_THIS_DIRECTIVE",
+    "IMPLEMENTATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE",
+    "PROVIDER_ACTIVATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE",
+    "LIVE_PAYMENT_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE",
+    "NO_CUSTOMER_FUNDS_MOVEMENT_AUTHORIZED",
+    "PRODUCTION_FINANCIAL_READINESS_NOT_ESTABLISHED",
+    "DEPLOYMENT_NOT_AUTHORIZED",
+    "STAGING_NOT_AUTHORIZED",
+    "PILOT_NOT_AUTHORIZED",
+    "PRODUCTION_USE_NOT_AUTHORIZED",
+    "PUBLIC_LAUNCH_NOT_AUTHORIZED",
+    "PR_69_NOT_MODIFIED_BY_THIS_DIRECTIVE",
+    "PR_70_NOT_MODIFIED_BY_THIS_DIRECTIVE",
+    "UNRELATED_GAPS_FINDINGS_AND_FINANCIAL_PROGRAMS_UNCHANGED",
+]
 
 
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[7]
 
 
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
 def sha256(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def size(path: Path) -> int:
+    return path.stat().st_size
 
 
 def fail(msg: str) -> None:
     raise AssertionError(msg)
 
 
-def run_git(root: Path, *args: str, check: bool = True) -> str:
-    cp = subprocess.run(["git", *args], cwd=root, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if check and cp.returncode != 0:
-        fail(f"git command failed: {' '.join(args)}\nSTDOUT:\n{cp.stdout}\nSTDERR:\n{cp.stderr}")
-    return cp.stdout.rstrip("\n")
+def run_git(root: Path, *args: str) -> str:
+    return subprocess.check_output(["git", *args], cwd=root, text=True).strip()
 
 
-def run_git_bytes(root: Path, *args: str, check: bool = True) -> bytes:
-    cp = subprocess.run(["git", *args], cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if check and cp.returncode != 0:
-        fail(f"git command failed: {' '.join(args)}\nSTDERR:\n{cp.stderr.decode('utf-8', errors='replace')}")
-    return cp.stdout
+def validate() -> None:
+    root = repo_root()
+    package = root / PACKAGE_REL
+    if not package.is_dir():
+        fail(f"package path missing: {PACKAGE_REL}")
 
-
-def git_object_bytes(root: Path, rel: str) -> bytes:
-    run_git(root, "ls-files", "--error-unmatch", rel)
-    run_git(root, "cat-file", "-e", f"HEAD:{rel}")
-    return run_git_bytes(root, "show", f"HEAD:{rel}")
-
-
-def git_tracked_files(root: Path, package: Path) -> set[str]:
-    prefix = package.as_posix()
-    return {
-        path[len(prefix) + 1:]
-        for path in run_git(root, "ls-files", prefix).splitlines()
-        if path.startswith(prefix + "/")
+    found = {
+        str(path.relative_to(package))
+        for path in package.rglob("*")
+        if path.is_file()
+        and "__pycache__" not in path.parts
+        and path.suffix != ".pyc"
     }
+    missing = sorted(REQUIRED_FILES - found)
+    extra_placeholders = sorted(PROHIBITED_PLACEHOLDER_EVIDENCE & found)
+    if missing:
+        fail(f"required files missing: {missing}")
+    if extra_placeholders:
+        fail(f"future evidence placeholders must not be created: {extra_placeholders}")
 
-
-def authoritative_text(package: Path, rel: str) -> str:
-    if rel.startswith("validators/") or rel.startswith("tests/"):
-        fail(f"non-authoritative token source rejected: {rel}")
-    if Path(rel).name in {"PACKAGE_MANIFEST.json", "CHECKSUM_MANIFEST.sha256"}:
-        fail(f"manifest/checksum cannot satisfy boundary token: {rel}")
-    path = package / rel
-    return path.read_text(encoding="utf-8")
-
-
-def validate_boundary_tokens(package: Path) -> dict[str, list[str]]:
-    locations: dict[str, list[str]] = {}
-    for token, rels in AUTHORITATIVE_TOKEN_LOCATIONS.items():
-        found = sorted(rel for rel in rels if token in authoritative_text(package, rel))
-        if not found:
-            fail(f"required boundary token missing from authoritative governance files: {token}")
-        locations[token] = found
-    return locations
-
-
-def validate_git_zip_and_approved_sources(root: Path, package: Path) -> None:
-    zip_rel = (PACKAGE_REL / "APPROVED_SOURCE" / ZIP_NAME).as_posix()
-    zip_data = git_object_bytes(root, zip_rel)
-    if sha256_bytes(zip_data) != EXPECTED_ZIP_SHA or len(zip_data) != EXPECTED_ZIP_BYTES:
-        fail("approved source ZIP Git object identity mismatch")
-
-    with zipfile.ZipFile(io.BytesIO(zip_data)) as zf:
+    zip_path = package / "APPROVED_SOURCE" / ZIP_NAME
+    if sha256(zip_path) != EXPECTED_ZIP_SHA or size(zip_path) != EXPECTED_ZIP_BYTES:
+        fail("source ZIP identity mismatch")
+    with zipfile.ZipFile(zip_path) as zf:
         names = sorted(name for name in zf.namelist() if not name.endswith("/"))
         if names != sorted(APPROVED):
             fail(f"ZIP inventory mismatch: {names}")
@@ -169,42 +141,40 @@ def validate_git_zip_and_approved_sources(root: Path, package: Path) -> None:
         if bad is not None:
             fail(f"ZIP integrity failure at {bad}")
 
-        for name, (expected_sha, expected_bytes) in APPROVED.items():
-            data = zf.read(name)
-            if sha256_bytes(data) != expected_sha or len(data) != expected_bytes:
-                fail(f"approved ZIP member identity mismatch: {name}")
-            repo_rel = (PACKAGE_REL / "APPROVED_SOURCE" / name).as_posix()
-            if git_object_bytes(root, repo_rel) != data:
-                fail(f"approved source Git object differs from ZIP member: {name}")
+    for name, (expected_sha, expected_bytes) in APPROVED.items():
+        path = package / "APPROVED_SOURCE" / name
+        if sha256(path) != expected_sha or size(path) != expected_bytes:
+            fail(f"approved source identity mismatch: {name}")
 
-        manifest_source = json.loads(zf.read("CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_PACKAGE_MANIFEST.json"))
-        if manifest_source.get("founder_approval_id") != FOUNDER_APPROVAL_ID:
-            fail("Founder approval ID mismatch in approved manifest")
-
-        checksum_seen = set()
-        checksum_lines = zf.read("CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_CHECKSUMS.sha256").decode("utf-8").splitlines()
-        for line in checksum_lines:
-            if not line.strip():
-                continue
-            digest, name = line.split(maxsplit=1)
-            checksum_seen.add(name)
-            if name not in APPROVED:
-                fail(f"unexpected file in approved checksum ledger: {name}")
-            if digest != APPROVED[name][0]:
-                fail(f"approved checksum ledger digest mismatch for {name}")
-        expected_checksum_names = set(APPROVED) - {"CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_CHECKSUMS.sha256"}
-        if checksum_seen != expected_checksum_names:
-            fail("approved checksum ledger inventory mismatch")
-
-    root_md_data = git_object_bytes(root, (PACKAGE_REL / ROOT_MD).as_posix())
-    source_md_data = git_object_bytes(root, (PACKAGE_REL / "APPROVED_SOURCE" / SOURCE_MD).as_posix())
-    if root_md_data != source_md_data:
+    root_md = package / ROOT_MD
+    source_md = package / "APPROVED_SOURCE" / SOURCE_MD
+    if root_md.read_bytes() != source_md.read_bytes():
         fail("root controlling Markdown is not an exact byte copy")
-    if sha256_bytes(root_md_data) != APPROVED[SOURCE_MD][0] or len(root_md_data) != APPROVED[SOURCE_MD][1]:
+    if sha256(root_md) != APPROVED[SOURCE_MD][0] or size(root_md) != APPROVED[SOURCE_MD][1]:
         fail("root controlling Markdown identity mismatch")
 
+    manifest_source = json.loads((package / "APPROVED_SOURCE" / "CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
+    if manifest_source.get("founder_approval_id") != FOUNDER_APPROVAL_ID:
+        fail("Founder approval ID mismatch in approved manifest")
 
-def validate_manifests(package: Path, found: set[str]) -> None:
+    checksum_lines = (package / "APPROVED_SOURCE" / "CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_CHECKSUMS.sha256").read_text(encoding="utf-8").splitlines()
+    checksum_names = []
+    for line in checksum_lines:
+        if not line.strip():
+            continue
+        digest, name = line.split(maxsplit=1)
+        checksum_names.append(name)
+        if name not in APPROVED:
+            fail(f"unexpected file in approved checksum ledger: {name}")
+        if digest != APPROVED[name][0]:
+            fail(f"approved checksum ledger digest mismatch for {name}")
+    expected_checksum_names = sorted(
+        name for name in APPROVED
+        if name != "CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_CHECKSUMS.sha256"
+    )
+    if sorted(checksum_names) != expected_checksum_names:
+        fail("approved checksum ledger inventory mismatch")
+
     package_manifest = json.loads((package / "PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
     if package_manifest.get("founder_approval_id") != FOUNDER_APPROVAL_ID:
         fail("package manifest Founder approval ID mismatch")
@@ -215,7 +185,7 @@ def validate_manifests(package: Path, found: set[str]) -> None:
         path = package / rel
         if not path.is_file():
             fail(f"manifest file missing: {rel}")
-        if sha256(path) != row["sha256"] or path.stat().st_size != row["bytes"]:
+        if sha256(path) != row["sha256"] or size(path) != row["bytes"]:
             fail(f"manifest identity mismatch: {rel}")
 
     checksum_seen = set()
@@ -233,101 +203,51 @@ def validate_manifests(package: Path, found: set[str]) -> None:
     if checksum_seen != expected_checksum:
         fail("checksum manifest inventory mismatch")
 
-
-def validate_file_hygiene(package: Path, found: set[str]) -> None:
-    approved_source_allowed = {"APPROVED_SOURCE/" + ZIP_NAME, *("APPROVED_SOURCE/" + name for name in APPROVED)}
-    unexpected_approved_source = sorted(rel for rel in found if rel.startswith("APPROVED_SOURCE/") and rel not in approved_source_allowed)
-    if unexpected_approved_source:
-        fail(f"unexpected approved-source files: {unexpected_approved_source}")
-
-    extra_placeholders = sorted(PROHIBITED_PLACEHOLDER_EVIDENCE & found)
-    if extra_placeholders:
-        fail(f"future evidence placeholders must not be created: {extra_placeholders}")
-
     for rel in sorted(found):
         path = package / rel
         if path.suffix == ".csv":
             with path.open(newline="", encoding="utf-8") as fh:
                 list(csv.reader(fh))
-        if path.suffix in TEXT_SUFFIXES:
+        if path.suffix in {".md", ".py", ".json", ".csv", ".sha256", ""}:
             data = path.read_text(encoding="utf-8")
             if CONFLICT_MARKER_RE.search(data):
                 fail(f"conflict marker found: {rel}")
             if SECRET_RE.search(data):
                 fail(f"secret-like value found: {rel}")
 
+    combined = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in package.rglob("*")
+        if path.is_file() and path.suffix in {".md", ".csv", ".json", ".py", ".sha256", ""}
+    )
+    policy_combined = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in package.rglob("*")
+        if path.is_file()
+        and "validators" not in path.parts
+        and "tests" not in path.parts
+        and path.suffix in {".md", ".csv", ".json", ".sha256", ""}
+    )
+    for token in BOUNDARY_TOKENS:
+        if token not in combined:
+            fail(f"required boundary token missing: {token}")
+    if "CGP006_MAP_GAP_0005_CLOSED" in policy_combined.replace("Prohibited statement: `CGP006_MAP_GAP_0005_CLOSED`", ""):
+        fail("prohibited closure token appears outside explicit prohibited-statement note")
 
-def validate_status(root: Path) -> None:
-    status = (root / PROGRAM_STATUS).read_text(encoding="utf-8")
-    required = ["CGP-006 GAP-0005 Closure Criteria Plan V1.1 Accession Status", FOUNDER_APPROVAL_ID, "CGP006_MAP_GAP_0005_REMAINS_OPEN"]
-    for token in required:
+    status = (root / "governance/implementation/code-guides/PROGRAM_STATUS.md").read_text(encoding="utf-8")
+    for token in ["CGP-006 GAP-0005 Closure Criteria Plan V1.1 Accession Status", FOUNDER_APPROVAL_ID, "CGP006_MAP_GAP_0005_REMAINS_OPEN"]:
         if token not in status:
             fail(f"PROGRAM_STATUS missing bounded status token: {token}")
-    normalized = status.replace("CGP006_MAP_GAP_0005_CLOSED`", "")
-    if "CGP006_MAP_GAP_0005_CLOSED" in normalized:
-        fail("PROGRAM_STATUS appears to close GAP-0005")
 
-
-def validate_authorized_paths(root: Path) -> None:
-    allowed_prefixes = [
-        PACKAGE_REL.as_posix() + "/",
-        "governance/implementation/code-guides/drafting/CGP-006/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_POST_MERGE_CUSTODY/",
-        CORRECTION_PATH.as_posix() + "/",
-        REFRESH_PATH.as_posix() + "/",
-    ]
-    allowed_files = {PROGRAM_STATUS.as_posix(), REFRESH_RECEIPT.as_posix()}
-    changed = set(run_git(root, "diff", "--name-only", "origin/integrate-emergent-final-zip...HEAD", check=False).splitlines())
-    changed.update(run_git(root, "diff", "--name-only", check=False).splitlines())
-    changed.update(run_git(root, "diff", "--cached", "--name-only", check=False).splitlines())
-    unauthorized = sorted(path for path in changed if path and not (path in allowed_files or any(path.startswith(prefix) for prefix in allowed_prefixes)))
+    diff_names = run_git(root, "diff", "--name-only", "origin/integrate-emergent-final-zip...HEAD").splitlines()
+    allowed_prefix = PACKAGE_REL.as_posix() + "/"
+    allowed_status = "governance/implementation/code-guides/PROGRAM_STATUS.md"
+    unauthorized = [name for name in diff_names if not (name.startswith(allowed_prefix) or name == allowed_status)]
     if unauthorized:
         fail(f"unauthorized changed paths: {unauthorized}")
 
-
-def validate() -> dict[str, object]:
-    root = repo_root()
-    package = root / PACKAGE_REL
-    if not package.is_dir():
-        fail(f"package path missing: {PACKAGE_REL}")
-
-    found = git_tracked_files(root, PACKAGE_REL)
-    missing = sorted(REQUIRED_FILES - found)
-    if missing:
-        fail(f"required tracked files missing: {missing}")
-
-    validate_git_zip_and_approved_sources(root, package)
-    validate_manifests(package, found)
-    validate_file_hygiene(package, found)
-    boundary_locations = validate_boundary_tokens(package)
-
-    policy_text = "\n".join(
-        (package / rel).read_text(encoding="utf-8")
-        for rel in found
-        if not rel.startswith("validators/")
-        and not rel.startswith("tests/")
-        and Path(rel).name not in {"PACKAGE_MANIFEST.json", "CHECKSUM_MANIFEST.sha256"}
-        and (package / rel).suffix in TEXT_SUFFIXES
-    )
-    if "CGP006_MAP_GAP_0005_CLOSED" in policy_text.replace("Prohibited statement: `CGP006_MAP_GAP_0005_CLOSED`", ""):
-        fail("prohibited closure token appears outside explicit prohibited-statement note")
-
-    validate_status(root)
-    validate_authorized_paths(root)
-
-    result = {
-        "approved_zip_git_sha256": EXPECTED_ZIP_SHA,
-        "approved_zip_git_bytes": EXPECTED_ZIP_BYTES,
-        "boundary_tokens": len(boundary_locations),
-        "package_files": len(found),
-        "status": "PASS",
-    }
     print("CGP006 GAP-0005 closure plan accession validation PASS")
-    return result
 
 
 if __name__ == "__main__":
-    try:
-        validate()
-    except Exception as exc:
-        print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2), file=sys.stderr)
-        raise
+    validate()

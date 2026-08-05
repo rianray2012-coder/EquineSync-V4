@@ -1,0 +1,16 @@
+requirement_id,requirement,minimum_evidence,bounded_scope_audit,full_portfolio_audit,blocks_closure_if_missing,rule_ids
+CAR-001,Scope and exclusions,Exact artifact/domain/finding/program scope and explicit exclusions.,REQUIRED,REQUIRED,YES unless certified as bounded scope.,ES-GPS-CLOSE-001
+CAR-002,Source identity,"Repository path, hash, byte length, source status, or FCR-01 exception.",REQUIRED_IF_IN_SCOPE,REQUIRED,YES unless FCR-01 applies.,ES-GPS-SRC-001
+CAR-003,Lifecycle state,"State, transition, authority, evidence, prohibited claims.",REQUIRED,REQUIRED,YES,ES-GPS-LC-001
+CAR-004,Founder decision reconciliation,"Founder approvals, dispositions, conditions, exclusions.",REQUIRED_IF_IN_SCOPE,REQUIRED,YES,ES-GPS-FA-001
+CAR-005,Certification and exception register,"FCR class, scope, evidence, effect, limits, triggers.",REQUIRED_IF_EXCEPTION_USED,REQUIRED,YES if exception used.,ES-GPS-FCR-001
+CAR-006,Waived or deferred tests,"FCR-03/FCR-04 record, baseline, controls, prohibited claims.",REQUIRED_IF_IN_SCOPE,REQUIRED_IF_IN_SCOPE,YES unless not applicable.,ES-GPS-WAIVE-001
+CAR-007,Pilot evidence substitution,"FCR-06 record with environment, commit, cohort, duration, scope, metrics.",REQUIRED_IF_IN_SCOPE,REQUIRED_IF_IN_SCOPE,YES if pilot evidence is used.,ES-GPS-PILOTEVD-001
+CAR-008,Soundness continuation acceptance,FCR-07 record with in-house results and retained risks.,REQUIRED_IF_IN_SCOPE,REQUIRED_IF_IN_SCOPE,YES if continuation relies on soundness.,ES-GPS-SOUND-001
+CAR-009,Finding disposition,"Finding IDs, closure evidence, owner, retained-risk or transfer decision.",REQUIRED_IF_IN_SCOPE,REQUIRED,YES unless excluded.,ES-GPS-FIND-001
+CAR-010,Residual risk,"Risk owner, rationale, controls, expiration/review trigger.",REQUIRED_IF_IN_SCOPE,REQUIRED,YES if risk exists and is not accepted.,ES-GPS-RISK-001
+CAR-011,Permitted and prohibited claims,Allowed statements and overclaim controls.,REQUIRED,REQUIRED,YES,ES-GPS-OVER-001
+CAR-012,Reopening triggers,"Triggers, notifications, suspension effect, owner.",REQUIRED,REQUIRED,YES,ES-GPS-REOPEN-001
+CAR-013,Machine-readable record,JSON/CSV companion or Founder-certified alternate structured record.,REQUIRED_IF_AUTHORITY_BEARING,REQUIRED,YES if authority-bearing.,ES-GPS-MR-001
+CAR-014,Production authority treatment,Exact-head authority or explicit statement that production authority is absent.,REQUIRED_IF_RELEASE_RELATED,REQUIRED_IF_RELEASE_RELATED,YES for release claims.,ES-GPS-PROD-001
+CAR-015,External obligation check,Statement that internal waiver does not waive external duties.,REQUIRED_IF_EXCEPTION_USED,REQUIRED_IF_EXCEPTION_USED,YES if affected.,ES-GPS-EXTLAW-001

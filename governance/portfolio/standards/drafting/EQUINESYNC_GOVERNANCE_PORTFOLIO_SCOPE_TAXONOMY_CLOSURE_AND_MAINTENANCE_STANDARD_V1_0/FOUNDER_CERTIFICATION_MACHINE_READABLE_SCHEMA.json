@@ -1,0 +1,1128 @@
+{
+  "$id": "https://equinesync.local/governance/fcr-schema-v1.0.2.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-01"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "affected_claims": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "efforts_to_locate_source": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "expires_at": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "historical_fact_not_rewritten_statement": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "limitations": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "review_trigger": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "substituted_evidence": {
+                "minProperties": 1,
+                "type": "object"
+              },
+              "unavailable_historical_source": {
+                "minProperties": 1,
+                "type": "object"
+              }
+            },
+            "required": [
+              "unavailable_historical_source",
+              "efforts_to_locate_source",
+              "substituted_evidence",
+              "limitations",
+              "affected_claims",
+              "review_trigger",
+              "expires_at",
+              "historical_fact_not_rewritten_statement"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-02"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "affected_claims": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "evidence_examined": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "exact_current_baseline": {
+                "minProperties": 1,
+                "type": "object"
+              },
+              "exclusions": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "inspected_repository_state": {
+                "minProperties": 1,
+                "type": "object"
+              },
+              "scope_limitations": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "unresolved_uncertainty": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              }
+            },
+            "required": [
+              "exact_current_baseline",
+              "inspected_repository_state",
+              "evidence_examined",
+              "exclusions",
+              "unresolved_uncertainty",
+              "affected_claims",
+              "scope_limitations"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-03"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "compensating_controls": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "duration": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "exact_waived_test": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "expires_at": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "prohibited_claims": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "reason": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "reopening_trigger": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "risk": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              }
+            },
+            "required": [
+              "exact_waived_test",
+              "reason",
+              "risk",
+              "duration",
+              "compensating_controls",
+              "expires_at",
+              "reopening_trigger",
+              "prohibited_claims"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-04"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "blocking_consequences": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "deferred_test": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "due_date": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "expires_at": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "interim_controls": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "mandatory_completion_trigger": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "owner": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              }
+            },
+            "required": [
+              "deferred_test",
+              "due_date",
+              "interim_controls",
+              "owner",
+              "blocking_consequences",
+              "expires_at",
+              "mandatory_completion_trigger"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-05"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "affected_claims": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "alternative_evidence": {
+                "minProperties": 1,
+                "type": "object"
+              },
+              "equivalence_analysis": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "expires_at_or_review_trigger": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "known_limitations": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "original_evidence_requirement": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "residual_risk": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              }
+            },
+            "required": [
+              "original_evidence_requirement",
+              "alternative_evidence",
+              "equivalence_analysis",
+              "known_limitations",
+              "residual_risk",
+              "expires_at_or_review_trigger",
+              "affected_claims"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-06"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "anomalies": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "cohort": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "data_scope": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "dpia_or_not_required_determination": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "duration": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "environment": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "exact_build_or_commit": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "feature_scope": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "incident_treatment": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "lawful_basis_or_consent": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "limitations": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "participant_notice": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "privacy_minimization": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "provenance": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "retention_period": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "stop_conditions": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "substituted_requirement": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              }
+            },
+            "required": [
+              "environment",
+              "exact_build_or_commit",
+              "cohort",
+              "duration",
+              "feature_scope",
+              "data_scope",
+              "provenance",
+              "lawful_basis_or_consent",
+              "participant_notice",
+              "privacy_minimization",
+              "retention_period",
+              "limitations",
+              "anomalies",
+              "substituted_requirement",
+              "stop_conditions",
+              "incident_treatment",
+              "dpia_or_not_required_determination"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-07"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "documentary_basis": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "evidence_relied_upon": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "expires_at_or_reopening_trigger": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "operational_basis": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "prohibited_inferences": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "reviewed_scope": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "reviewer_identity": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "technical_basis": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "unresolved_defects": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              }
+            },
+            "required": [
+              "reviewed_scope",
+              "evidence_relied_upon",
+              "technical_basis",
+              "documentary_basis",
+              "operational_basis",
+              "unresolved_defects",
+              "reviewer_identity",
+              "prohibited_inferences",
+              "expires_at_or_reopening_trigger"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-08"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "affected_scope": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "compensating_controls": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "consequences_if_risk_materializes": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "hiring_or_maturity_trigger": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "impact": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "likelihood": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "owner": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "review_date": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "risk_statement": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "trigger_for_reconsideration": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              }
+            },
+            "required": [
+              "risk_statement",
+              "likelihood",
+              "impact",
+              "affected_scope",
+              "compensating_controls",
+              "owner",
+              "review_date",
+              "trigger_for_reconsideration",
+              "hiring_or_maturity_trigger",
+              "consequences_if_risk_materializes"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-09"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "compensating_control": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "duration": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "exact_gate_overridden": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "external_obligation_check": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "harm_or_burden_caused_by_gate": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "non_waivable_core_confirmation": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "proportionality_analysis": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "revocation_trigger": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "scope": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "second_review": {
+                "minProperties": 1,
+                "type": "object"
+              }
+            },
+            "required": [
+              "exact_gate_overridden",
+              "harm_or_burden_caused_by_gate",
+              "proportionality_analysis",
+              "external_obligation_check",
+              "compensating_control",
+              "duration",
+              "scope",
+              "second_review",
+              "non_waivable_core_confirmation",
+              "revocation_trigger"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "class_id": {
+            "const": "FCR-10"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "class_payload": {
+            "additionalProperties": false,
+            "properties": {
+              "data_scope": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "effective_date": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "environment": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "evidence_relied_upon": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "exception_attestation": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "expires_at_or_review_trigger": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "feature_scope": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "release_identity": {
+                "pattern": "^([a-f0-9]{40}|[a-f0-9]{64}|v[0-9]+\\\\.[0-9]+\\\\.[0-9]+[-A-Za-z0-9.]*)$",
+                "type": "string"
+              },
+              "release_scope_only_statement": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "rollback_conditions": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "second_review": {
+                "minProperties": 1,
+                "type": "object"
+              },
+              "stop_conditions": {
+                "items": {
+                  "minLength": 1,
+                  "not": {
+                    "pattern": "^\\\\s*$"
+                  },
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "unresolved_risk_statement": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              },
+              "user_scope": {
+                "minLength": 1,
+                "not": {
+                  "pattern": "^\\\\s*$"
+                },
+                "type": "string"
+              }
+            },
+            "required": [
+              "release_identity",
+              "environment",
+              "feature_scope",
+              "data_scope",
+              "user_scope",
+              "evidence_relied_upon",
+              "unresolved_risk_statement",
+              "exception_attestation",
+              "stop_conditions",
+              "rollback_conditions",
+              "effective_date",
+              "expires_at_or_review_trigger",
+              "second_review",
+              "release_scope_only_statement"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "artifact_path": {
+      "minLength": 1,
+      "not": {
+        "pattern": "^\\\\s*$"
+      },
+      "type": "string"
+    },
+    "certification_id": {
+      "pattern": "^ES-FCR-(0[1-9]|10)-[0-9]{4}-[0-9]{3}$",
+      "type": "string"
+    },
+    "certifying_authority": {
+      "minLength": 1,
+      "not": {
+        "pattern": "^\\\\s*$"
+      },
+      "type": "string"
+    },
+    "class_id": {
+      "enum": [
+        "FCR-01",
+        "FCR-02",
+        "FCR-03",
+        "FCR-04",
+        "FCR-05",
+        "FCR-06",
+        "FCR-07",
+        "FCR-08",
+        "FCR-09",
+        "FCR-10"
+      ],
+      "type": "string"
+    },
+    "class_payload": {
+      "minProperties": 1,
+      "type": "object"
+    },
+    "dependent_claim_effect": {
+      "minLength": 1,
+      "not": {
+        "pattern": "^\\\\s*$"
+      },
+      "type": "string"
+    },
+    "effective_at": {
+      "format": "date-time",
+      "minLength": 20,
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "minLength": 20,
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "minLength": 1,
+        "not": {
+          "pattern": "^\\\\s*$"
+        },
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "review_trigger": {
+      "minLength": 1,
+      "not": {
+        "pattern": "^\\\\s*$"
+      },
+      "type": "string"
+    },
+    "scope_summary": {
+      "minLength": 1,
+      "not": {
+        "pattern": "^\\\\s*$"
+      },
+      "type": "string"
+    },
+    "second_review": {
+      "minProperties": 1,
+      "type": "object"
+    },
+    "status": {
+      "enum": [
+        "ACTIVE",
+        "EXPIRED",
+        "REVOKED",
+        "SUSPENDED",
+        "SUPERSEDED",
+        "NARROWED",
+        "SATISFIED_BY_EVIDENCE"
+      ],
+      "type": "string"
+    },
+    "truth_statement": {
+      "const": "FOUNDER AUTHORITY MAY CHANGE THE REQUIRED INTERNAL GATE OR EVIDENCE SUFFICIENCY DETERMINATION, BUT IT MAY NOT CHANGE HISTORICAL FACT.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "certification_id",
+    "class_id",
+    "status",
+    "issued_at",
+    "effective_at",
+    "scope_summary",
+    "artifact_path",
+    "certifying_authority",
+    "second_review",
+    "dependent_claim_effect",
+    "review_trigger",
+    "limitations",
+    "truth_statement",
+    "class_payload"
+  ],
+  "title": "EquineSync Founder Certification Record Schema",
+  "type": "object"
+}

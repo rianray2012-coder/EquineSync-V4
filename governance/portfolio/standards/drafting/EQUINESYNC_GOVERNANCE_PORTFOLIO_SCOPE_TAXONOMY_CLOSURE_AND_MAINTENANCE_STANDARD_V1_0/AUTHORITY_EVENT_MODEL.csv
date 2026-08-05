@@ -1,0 +1,7 @@
+authority_status,dimension,definition,rule_ids
+IMPLEMENTATION_AUTHORIZED,authority_event_status,Authority-event status IMPLEMENTATION_AUTHORIZED.,"[""ES-GPS-CLASS-001""]"
+PILOT_AUTHORIZED,authority_event_status,Authority-event status PILOT_AUTHORIZED.,"[""ES-GPS-CLASS-001""]"
+PRODUCTION_AUTHORIZED_NO_EXCEPTIONS,authority_event_status,Authority-event status PRODUCTION_AUTHORIZED_NO_EXCEPTIONS.,"[""ES-GPS-PROD-001""]"
+PRODUCTION_AUTHORIZED_WITH_EXPRESS_EXCEPTIONS,authority_event_status,Authority-event status PRODUCTION_AUTHORIZED_WITH_EXPRESS_EXCEPTIONS.,"[""ES-GPS-PROD-001""]"
+AUTHORIZATION_REVOKED,authority_event_status,Authority-event status AUTHORIZATION_REVOKED.,"[""ES-GPS-CLASS-001""]"
+AUTHORIZATION_EXPIRED,authority_event_status,Authority-event status AUTHORIZATION_EXPIRED.,"[""ES-GPS-CLASS-001""]"
