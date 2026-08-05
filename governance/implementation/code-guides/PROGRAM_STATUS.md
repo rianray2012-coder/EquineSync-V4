@@ -347,29 +347,10 @@ CGP-006 Wave 1 documentary gap closure custody is recorded in `governance/implem
 - Required post-merge custody branch: `codex/cgp006-gap0005-closure-plan-v1-1-custody`
 - Required post-merge custody PR: `PR #74 https://github.com/rianray2012-coder/EquineSync-V4/pull/74`
 - Post-merge custody receipt: `governance/implementation/code-guides/receipts/CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_CUSTODY_RECEIPT.md`
-- Historical custody status after protected merge of custody PR #74 only: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_PROTECTEDLY_ACCESSIONED_AND_POST_MERGE_CUSTODY_COMPLETE_NO_GAP_CLOSURE_EFFECT`
-- Corrective directive: `CGP_006_MAP_GAP_0005_CLOSURE_PLAN_CUSTODY_INTEGRITY_CORRECTION_AND_REFRESH_DIRECTIVE_V1_0_0`
-- Current corrective status: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_CUSTODY_INTEGRITY_CORRECTED`
-- Founder approval status: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_FOUNDER_APPROVAL_REMAINS_VALID`
-- Protected accession status: `CGP006_MAP_GAP_0005_APPROVED_SOURCE_ZIP_PROTECTEDLY_TRACKED`
-- Accession validator status: `CGP006_MAP_GAP_0005_ACCESSION_VALIDATOR_HARDENED`
-- Custody validator status: `CGP006_MAP_GAP_0005_CUSTODY_VALIDATOR_HARDENED`
-- Placeholder rejection status: `CGP006_MAP_GAP_0005_PROHIBITED_PLACEHOLDER_REJECTION_VERIFIED`
-- Boundary-token defect status: `CGP006_MAP_GAP_0005_BOUNDARY_TOKEN_SELF_VALIDATION_DEFECT_CORRECTED`
-- Prior custody reliance status: `CGP006_MAP_GAP_0005_PRIOR_CUSTODY_COMPLETION_RELIANCE_RESTORED_AFTER_CORRECTION_AND_REFRESH`
-- Custody correction status: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_CUSTODY_INTEGRITY_CORRECTED`
-- Post-correction refresh status: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_POST_MERGE_CUSTODY_REFRESH_COMPLETE`
-- Provider-assurance status: `PROVIDER_ASSURANCE_MAY_RESUME_ONLY_FROM_PHASE_0_AFTER_REFRESHED_CUSTODY`
-- Correction branch: `codex/cgp006-gap0005-closure-plan-custody-integrity-correction-v1`
-- Corrective PR: `PR #76 https://github.com/rianray2012-coder/EquineSync-V4/pull/76`
-- Corrective PR head: `7eb248ff6ec51d5d345f30dade02c6076ea130a2`
-- Corrective merge commit: `099abfbc27c77146b444048326d00fb3a5a7eb5f`
-- Post-correction refresh branch: `codex/cgp006-gap0005-closure-plan-custody-refresh-v2`
-- Post-correction refresh PR: `PR #78 https://github.com/rianray2012-coder/EquineSync-V4/pull/78`
-- Corrective finding: approved source ZIP was locally present with approved identity but ignored by `.gitignore` and absent from protected Git custody until the corrective PR.
+- Final custody status after protected merge of custody PR only: `CGP006_MAP_GAP_0005_CLOSURE_PLAN_V1_1_0_FOUNDER_APPROVED_PROTECTEDLY_ACCESSIONED_AND_POST_MERGE_CUSTODY_COMPLETE_NO_GAP_CLOSURE_EFFECT`
 - Current gap status preserved: `CGP006_MAP_GAP_0005_REMAINS_OPEN`
-- Current PR #69 state: `PR #69 OPEN DRAFT head 6b8bdeb0657a397689f85de63200425ebca35fae; PR_69_NOT_MODIFIED_OR_MERGED.`
-- Current PR #70 state: `PR #70 OPEN DRAFT head e502d0065143eaf19e20e95cd2c21c4c065fe726; PR_70_NOT_MODIFIED_OR_MERGED.`
+- Current PR #69 state: `PR #69 OPEN DRAFT head 6b8bdeb0657a397689f85de63200425ebca35fae; not modified by this directive.`
+- Current PR #70 state: `PR #70 OPEN DRAFT head e502d0065143eaf19e20e95cd2c21c4c065fe726; not modified by this directive.`
 - Provider-connected assurance authority: `PROVIDER_CONNECTED_ASSURANCE_WORKSTREAM_NOT_AUTHORIZED_BY_THIS_DIRECTIVE`
 - Implementation authority: `IMPLEMENTATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE`
 - Provider activation authority: `PROVIDER_ACTIVATION_AUTHORITY_NOT_CREATED_BY_THIS_DIRECTIVE`
@@ -383,4 +364,4 @@ CGP-006 Wave 1 documentary gap closure custody is recorded in `governance/implem
 - Public launch: `PUBLIC_LAUNCH_NOT_AUTHORIZED`
 - Unrelated gaps, findings, and financial programs: `UNRELATED_GAPS_FINDINGS_AND_FINANCIAL_PROGRAMS_UNCHANGED`
 
-This bounded section preserves PR #73 and PR #74 as historical protected merges while recording that the missing approved ZIP custody defect was corrected by PR #76 and that post-correction custody refresh is complete upon protected merger of the refresh PR. It does not rewrite the historical PR #62 gap register, does not close `CGP006-MAP-GAP-0005`, does not authorize provider-connected Stripe work except a new Phase 0 restart after refreshed custody, does not authorize PR #69 or PR #70 modification or merge, and does not authorize implementation, deployment, staging, pilot, production use, public launch, or customer-funds movement. Gap closure requires completed evidence, protected integration, express Founder closure disposition, and custody.
+This bounded section does not rewrite the historical PR #62 gap register, does not close `CGP006-MAP-GAP-0005`, does not authorize provider-connected Stripe work, does not authorize PR #69 or PR #70 modification or merge, and does not authorize implementation, deployment, staging, pilot, production use, public launch, or customer-funds movement. Gap closure requires completed evidence, protected integration, express Founder closure disposition, and custody.

@@ -1,0 +1,303 @@
+{
+  "artifact_id": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0",
+  "row_count": 314,
+  "counts": {
+    "product_domains": {
+      "Administration, support, security, and operations": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "Artificial intelligence": {
+        "rows": 12,
+        "percent": "3.8%"
+      },
+      "Care operations": {
+        "rows": 18,
+        "percent": "5.7%"
+      },
+      "Communications and Owner Portal": {
+        "rows": 14,
+        "percent": "4.5%"
+      },
+      "Developer platform and extensibility": {
+        "rows": 12,
+        "percent": "3.8%"
+      },
+      "Documents, agreements, and electronic signatures": {
+        "rows": 15,
+        "percent": "4.8%"
+      },
+      "Facility, barn, business, and physical operations": {
+        "rows": 17,
+        "percent": "5.4%"
+      },
+      "Financial operations": {
+        "rows": 19,
+        "percent": "6.1%"
+      },
+      "Horse identity and lifecycle": {
+        "rows": 13,
+        "percent": "4.1%"
+      },
+      "Identity and access": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "Incidents, emergency, welfare, and biosecurity": {
+        "rows": 14,
+        "percent": "4.5%"
+      },
+      "Integrations and external providers": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "Inventory and assets": {
+        "rows": 13,
+        "percent": "4.1%"
+      },
+      "Lessons, training, riders, and guardians": {
+        "rows": 15,
+        "percent": "4.8%"
+      },
+      "Marketplace, provider network, and community": {
+        "rows": 14,
+        "percent": "4.5%"
+      },
+      "Media, files, and digital assets": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "Mobile, offline, and synchronization": {
+        "rows": 13,
+        "percent": "4.1%"
+      },
+      "Platform and shell": {
+        "rows": 10,
+        "percent": "3.2%"
+      },
+      "Relationships and guardianship": {
+        "rows": 11,
+        "percent": "3.5%"
+      },
+      "Reporting and analytics": {
+        "rows": 11,
+        "percent": "3.5%"
+      },
+      "Shows, events, travel, and transport": {
+        "rows": 14,
+        "percent": "4.5%"
+      },
+      "Tasks, calendar, scheduling, and notifications": {
+        "rows": 15,
+        "percent": "4.8%"
+      }
+    },
+    "governance_state": {
+      "ADR_GAP": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "CODE_GUIDE_GAP": {
+        "rows": 49,
+        "percent": "15.6%"
+      },
+      "COVERED_WITH_RETAINED_GAP": {
+        "rows": 15,
+        "percent": "4.8%"
+      },
+      "NEW_PIA_CANDIDATE": {
+        "rows": 14,
+        "percent": "4.5%"
+      },
+      "OPERATING_STANDARD_GAP": {
+        "rows": 25,
+        "percent": "8.0%"
+      },
+      "PIA_SUPPLEMENT_CANDIDATE": {
+        "rows": 179,
+        "percent": "57.0%"
+      },
+      "RUNBOOK_GAP": {
+        "rows": 16,
+        "percent": "5.1%"
+      }
+    },
+    "implementation_state": {
+      "DOCUMENTED_ONLY": {
+        "rows": 4,
+        "percent": "1.3%"
+      },
+      "IMPLEMENTED_UNVERIFIED": {
+        "rows": 232,
+        "percent": "73.9%"
+      },
+      "NOT_FOUND": {
+        "rows": 13,
+        "percent": "4.1%"
+      },
+      "PARTIAL_IMPLEMENTATION": {
+        "rows": 65,
+        "percent": "20.7%"
+      }
+    },
+    "risk_severity": {
+      "CRITICAL": {
+        "rows": 86,
+        "percent": "27.4%"
+      },
+      "HIGH": {
+        "rows": 77,
+        "percent": "24.5%"
+      },
+      "LOW": {
+        "rows": 4,
+        "percent": "1.3%"
+      },
+      "MEDIUM": {
+        "rows": 147,
+        "percent": "46.8%"
+      }
+    },
+    "readiness_band": {
+      "HIGH_READINESS_WITH_RETAINED_GAPS": {
+        "rows": 15,
+        "percent": "4.8%"
+      },
+      "LOW_READINESS": {
+        "rows": 14,
+        "percent": "4.5%"
+      },
+      "PARTIAL_READINESS": {
+        "rows": 285,
+        "percent": "90.8%"
+      }
+    },
+    "gap_owner": {
+      "ARCHITECTURE": {
+        "rows": 65,
+        "percent": "20.7%"
+      },
+      "ENGINEERING": {
+        "rows": 15,
+        "percent": "4.8%"
+      },
+      "GOVERNANCE": {
+        "rows": 193,
+        "percent": "61.5%"
+      },
+      "OPERATIONS": {
+        "rows": 41,
+        "percent": "13.1%"
+      }
+    },
+    "release_target": {
+      "UNASSIGNED": {
+        "rows": 314,
+        "percent": "100.0%"
+      }
+    },
+    "personas": {
+      "Admin": {
+        "rows": 38,
+        "percent": "12.1%"
+      },
+      "Auditor": {
+        "rows": 11,
+        "percent": "3.5%"
+      },
+      "Barn Manager": {
+        "rows": 302,
+        "percent": "96.2%"
+      },
+      "Billing Admin": {
+        "rows": 51,
+        "percent": "16.2%"
+      },
+      "Community Member": {
+        "rows": 14,
+        "percent": "4.5%"
+      },
+      "Contractor": {
+        "rows": 17,
+        "percent": "5.4%"
+      },
+      "Developer": {
+        "rows": 12,
+        "percent": "3.8%"
+      },
+      "Facility Owner": {
+        "rows": 147,
+        "percent": "46.8%"
+      },
+      "Farrier": {
+        "rows": 44,
+        "percent": "14.0%"
+      },
+      "Guardian": {
+        "rows": 242,
+        "percent": "77.1%"
+      },
+      "Guest": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "Integration Partner": {
+        "rows": 12,
+        "percent": "3.8%"
+      },
+      "Minor Rider": {
+        "rows": 11,
+        "percent": "3.5%"
+      },
+      "Owner": {
+        "rows": 273,
+        "percent": "86.9%"
+      },
+      "Platform Admin": {
+        "rows": 88,
+        "percent": "28.0%"
+      },
+      "Read Only Auditor": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "Rider": {
+        "rows": 124,
+        "percent": "39.5%"
+      },
+      "Service Provider": {
+        "rows": 110,
+        "percent": "35.0%"
+      },
+      "Staff": {
+        "rows": 211,
+        "percent": "67.2%"
+      },
+      "Support": {
+        "rows": 73,
+        "percent": "23.2%"
+      },
+      "Support Admin": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "Trainer": {
+        "rows": 270,
+        "percent": "86.0%"
+      },
+      "Transporter": {
+        "rows": 14,
+        "percent": "4.5%"
+      },
+      "User": {
+        "rows": 16,
+        "percent": "5.1%"
+      },
+      "Veterinarian": {
+        "rows": 74,
+        "percent": "23.6%"
+      }
+    }
+  },
+  "revision_status": "FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY"
+}

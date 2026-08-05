@@ -1,0 +1,60 @@
+{
+  "artifact_id": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0",
+  "revision_status": "FOUNDER_DIRECTED_DOCUMENTARY_REVISION_COMPLETE_READY_FOR_TARGETED_REREVIEW_NO_MERGE_ACTIVATION_IMPLEMENTATION_DEPLOYMENT_PILOT_OR_PRODUCTION_AUTHORITY",
+  "row_count": 314,
+  "counts": {
+    "governance_state": {
+      "COVERED_WITH_RETAINED_GAP": 15,
+      "PIA_SUPPLEMENT_CANDIDATE": 179,
+      "CODE_GUIDE_GAP": 49,
+      "ADR_GAP": 16,
+      "OPERATING_STANDARD_GAP": 25,
+      "NEW_PIA_CANDIDATE": 14,
+      "RUNBOOK_GAP": 16
+    },
+    "implementation_state": {
+      "IMPLEMENTED_UNVERIFIED": 232,
+      "NOT_FOUND": 13,
+      "PARTIAL_IMPLEMENTATION": 65,
+      "DOCUMENTED_ONLY": 4
+    },
+    "risk_severity": {
+      "LOW": 4,
+      "MEDIUM": 147,
+      "CRITICAL": 86,
+      "HIGH": 77
+    },
+    "readiness_band": {
+      "HIGH_READINESS_WITH_RETAINED_GAPS": 15,
+      "PARTIAL_READINESS": 285,
+      "LOW_READINESS": 14
+    },
+    "release_target": {
+      "UNASSIGNED": 314
+    },
+    "gap_owner": {
+      "ENGINEERING": 15,
+      "GOVERNANCE": 193,
+      "ARCHITECTURE": 65,
+      "OPERATIONS": 41
+    },
+    "queue": {
+      "FOUNDER_DECISION_QUEUE": 314,
+      "IMPLEMENTATION_VERIFICATION_QUEUE": 314,
+      "RETAINED_GAP_REREVIEW_QUEUE": 15,
+      "RUNTIME_VERIFICATION_QUEUE": 297,
+      "PIA_SUPPLEMENT_QUEUE": 179,
+      "CODE_GUIDE_QUEUE": 49,
+      "ADR_QUEUE": 16,
+      "OPERATING_STANDARD_QUEUE": 25,
+      "NEW_PIA_QUEUE": 14,
+      "RUNBOOK_QUEUE": 16,
+      "CONFLICT_RESOLUTION_QUEUE": 208
+    }
+  },
+  "freshness": {
+    "derived_from": "EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0.csv",
+    "regenerated_at_utc": "2026-08-04T07:28:43+00:00",
+    "semantic_status": "STRUCTURAL_VALIDATION_PLUS_DOCUMENTED_HUMAN_SEMANTIC_REVIEW_READY_FOR_TARGETED_REREVIEW"
+  }
+}
