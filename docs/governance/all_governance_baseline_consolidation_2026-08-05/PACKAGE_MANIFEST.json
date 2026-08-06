@@ -99,5 +99,79 @@
         "byte_length": 449
       }
     ]
+  },
+  "implementation_reconciliation": {
+    "generated_at_utc": "2026-08-06T00:46:24Z",
+    "final_status": "READ_ONLY_CODE_TO_GOVERNANCE_RECONCILIATION_COMPLETE_PENDING_FOUNDER_REVIEW",
+    "pr91_commit_pin": "80b15898713676fe61d42e5f16ad0be9c3a9d6f2",
+    "code_scan_method": "read-only static path/pattern scan over backend/frontend/tests",
+    "output_row_counts": {
+      "comparison_allowlist": 2112,
+      "unassessed_or_blocked_scope": 1214,
+      "feature_status_matrix": 14,
+      "placeholder_register": 0,
+      "governance_to_code_gap_register": 2186,
+      "test_evidence_register": 207,
+      "authority_blocked_feature_register": 2638
+    },
+    "missing_or_not_joinable_required_input_families": [
+      "PR90_TIER1_DOCS_03_10_V5",
+      "MASTER_STANDARD",
+      "FEATURE_TO_GOVERNANCE_MATRIX",
+      "MIAP_STANDARDS"
+    ],
+    "authority_boundary": "READ_ONLY_COMPARISON_ONLY; no implementation, mutation, runtime, production, launch, certification, claims, waiver, risk acceptance, or finding closure authority",
+    "outputs": [
+      {
+        "path": "COMPARISON_ALLOWLIST.csv",
+        "sha256": "d8f5088ce39797f0892c8b3d03e41007c9ec4ad3060a5e25d021ffc1e96acecc",
+        "byte_length": 1202610
+      },
+      {
+        "path": "UNASSESSED_OR_BLOCKED_GOVERNANCE_SCOPE_REGISTER.csv",
+        "sha256": "e782a568893702c4c73cbc9b5ee40fa968ffa98c4e7030020dc3927e44348880",
+        "byte_length": 394831
+      },
+      {
+        "path": "FEATURE_TO_CODE_IMPLEMENTATION_STATUS_MATRIX.csv",
+        "sha256": "0698510f071c9c2903e8a886e1d8520e7af48a27d634d500459fe1fd0941bde2",
+        "byte_length": 19131
+      },
+      {
+        "path": "PLACEHOLDER_STUB_MOCK_TODO_REGISTER.csv",
+        "sha256": "bfc6f48bd002a298fe29c29297a78832c4feaf1fbf4dd9b8e46019accf82656c",
+        "byte_length": 107
+      },
+      {
+        "path": "GOVERNANCE_TO_CODE_GAP_REGISTER.csv",
+        "sha256": "23cf54bcaab05f842477c81b3cec6761e5eea6d7a8fec7d834ef39decc52ddf0",
+        "byte_length": 2088623
+      },
+      {
+        "path": "TEST_EVIDENCE_AND_WEAKNESS_REGISTER.csv",
+        "sha256": "c818454c974e6114a2496764edfc4b9725de3fba57816789ac6214bcd1111230",
+        "byte_length": 74184
+      },
+      {
+        "path": "AUTHORITY_BLOCKED_FEATURE_REGISTER.csv",
+        "sha256": "5bc55ade5ead2d890bd68e217d9e9c1367d1b0537969033b332901561a524f43",
+        "byte_length": 1600493
+      },
+      {
+        "path": "IMPLEMENTATION_RECONCILIATION_REPORT.md",
+        "sha256": "3fa05c86b43420c16c41ee0b84139dab1ba6956624ded8e2ae6ad958a6c7d3fd",
+        "byte_length": 7642
+      },
+      {
+        "path": "IMPLEMENTATION_RECONCILIATION_VALIDATION_REPORT.json",
+        "sha256": "ce389276148311ae4c5bf61262f26ca5b8286d8e654ff34753f3054531a612db",
+        "byte_length": 3288
+      },
+      {
+        "path": "IMPLEMENTATION_RECONCILIATION_VALIDATION_REPORT.md",
+        "sha256": "abd836dc17c27ef68407a84861c63f87a5527aaa4f3803b2c62e21a63cdbaa9e",
+        "byte_length": 800
+      }
+    ]
   }
 }
