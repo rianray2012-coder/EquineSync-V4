@@ -1,0 +1,88 @@
+{
+  "authority_class": "DOCUMENTARY_GOVERNANCE_PLANNING_STANDARD",
+  "bounded_exercise_disposition": "METHODOLOGY_CALIBRATION_EXERCISE_PASS_WITH_NONBLOCKING_CLARIFICATIONS",
+  "bounded_exercise_id": "ES-RCM-V3_2-BCE-001",
+  "canonical_methodology_frozen": false,
+  "canonical_repository_accession_complete": false,
+  "canonical_repository_commit": null,
+  "canonical_repository_path": null,
+  "canonical_repository_pr": null,
+  "clarifications": [
+    "AMB-01",
+    "AMB-02",
+    "AMB-03",
+    "AMB-07",
+    "AMB-08"
+  ],
+  "document_id": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2",
+  "files": [
+    {
+      "byte_length": 1689,
+      "path": "314_FEATURE_RECALIBRATION_GATE.md",
+      "sha256": "9fdb7f0c7b443decbfe4352b93ee1cb49333f9a770cc520fd885daa8cbf11779"
+    },
+    {
+      "byte_length": 3132,
+      "path": "CODEX_REPOSITORY_ACCESSION_HANDOFF.md",
+      "sha256": "6b58d5f3e0a282327d051353dfa41cb4594ffd660557d49b2880b938e0ba8de9"
+    },
+    {
+      "byte_length": 54415,
+      "path": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2.md",
+      "sha256": "6edf723e7c77a08927948e8a5ed6348e8dd1697ccd52b55e194827d082e21337"
+    },
+    {
+      "byte_length": 5200,
+      "path": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2_TARGETED_VERIFICATION_REPORT.md",
+      "sha256": "9bd56235ade66096e2883114a89f48d0b4b1880bcdaa2a808aaab8603dd14018"
+    },
+    {
+      "byte_length": 1765,
+      "path": "LOCAL_BYTE_FREEZE_RECEIPT.md",
+      "sha256": "9360651c1ccc9e4b7d26d33bfe9524c0310eaaafbe431acf9650224967c0c143"
+    },
+    {
+      "byte_length": 1357,
+      "path": "REPOSITORY_ACCESSION_BLOCKER.md",
+      "sha256": "efcd45dc8fba12c5611a894822e54f9c600f61782af67671d31d05150176dbb5"
+    },
+    {
+      "byte_length": 17486,
+      "path": "evidence/RISK_CALIBRATION_EXERCISE_AB_RECONCILIATION_REPORT_V1_0.md",
+      "sha256": "039b775b8a8c50315b82baa89d189e025d31372e6c714b1a08837e80a3c069b1"
+    },
+    {
+      "byte_length": 7257,
+      "path": "evidence/RISK_CALIBRATION_EXERCISE_COORDINATOR_FINAL_FEATURE_SUMMARY_V1_0.csv",
+      "sha256": "c79ca79c4015328daff52e4caa6a9790a70e6c54c3c07d36e2c029194b28f043"
+    },
+    {
+      "byte_length": 5619,
+      "path": "evidence/RISK_CALIBRATION_EXERCISE_COORDINATOR_FINAL_REPORT_V1_0.md",
+      "sha256": "a844a0054746fa8d7f9482399c04779d2debdc3c58ec0fa01b4103f4a1f3d661"
+    },
+    {
+      "byte_length": 27468,
+      "path": "evidence/RISK_CALIBRATION_EXERCISE_COORDINATOR_FINAL_SCENARIO_REGISTER_V1_0.csv",
+      "sha256": "c600acc841847681ef68990321325e97e4a049ced656429ed684fd08158e979d"
+    },
+    {
+      "byte_length": 7196,
+      "path": "evidence/RISK_CALIBRATION_EXERCISE_REVIEWER_B_AMBIGUITY_LOG_V1_0.csv",
+      "sha256": "7e2d37c91fb886ae6e729c132fe911b10c26185aa1e1ddcebc8e129e2b6ddc79"
+    },
+    {
+      "byte_length": 16256,
+      "path": "evidence/RISK_CALIBRATION_EXERCISE_REVIEWER_B_NORMALIZATION_REPORT_V1_1.md",
+      "sha256": "3742d59407ba863963e424c4fbd50c8ec165d5f1002227ccc4adeed4ef17f021"
+    }
+  ],
+  "generated_date": "2026-08-09",
+  "local_bytes_hash_frozen": true,
+  "package_id": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2_FREEZE_CANDIDATE_2026_08_09",
+  "recalibration_314_blocker": "CANONICAL_REPOSITORY_ACCESSION_AND_FREEZE",
+  "recalibration_314_ready": false,
+  "targeted_verification": "PASS",
+  "version": "3.2.2",
+  "version_label": "3.2.2-calibration-exercise-clarified-freeze-candidate.1"
+}
