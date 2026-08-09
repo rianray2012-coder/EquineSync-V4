@@ -1,88 +1,85 @@
 {
-  "authority_class": "DOCUMENTARY_GOVERNANCE_PLANNING_STANDARD",
-  "bounded_exercise_disposition": "METHODOLOGY_CALIBRATION_EXERCISE_PASS_WITH_NONBLOCKING_CLARIFICATIONS",
-  "bounded_exercise_id": "ES-RCM-V3_2-BCE-001",
-  "canonical_methodology_frozen": false,
-  "canonical_repository_accession_complete": false,
-  "canonical_repository_commit": null,
-  "canonical_repository_path": null,
-  "canonical_repository_pr": null,
-  "clarifications": [
-    "AMB-01",
-    "AMB-02",
-    "AMB-03",
-    "AMB-07",
-    "AMB-08"
-  ],
+  "package_id": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2_REPOSITORY_ACCESSION_V1_0",
+  "generated_date": "2026-08-09",
+  "repository": "rianray2012-coder/EquineSync-V4",
+  "target_protected_branch": "integrate-emergent-final-zip",
+  "accession_branch": "agent/risk-calibration-v3-2-2-accession",
   "document_id": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2",
-  "files": [
+  "version": "3.2.2",
+  "authority_class": "DOCUMENTARY_GOVERNANCE_PLANNING_STANDARD",
+  "founder_approval_recorded": true,
+  "bounded_exercise_id": "ES-RCM-V3_2-BCE-001",
+  "bounded_exercise_disposition": "METHODOLOGY_CALIBRATION_EXERCISE_PASS_WITH_NONBLOCKING_CLARIFICATIONS",
+  "clarifications_closed": ["AMB-01", "AMB-02", "AMB-03", "AMB-07", "AMB-08"],
+  "methodology": {
+    "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2.md",
+    "sha256": "6edf723e7c77a08927948e8a5ed6348e8dd1697ccd52b55e194827d082e21337",
+    "byte_length": 54415,
+    "git_blob_sha": "7c76112bc0c1a840ae2ec6dc2ababca3480369a7"
+  },
+  "repository_accession_inventory": [
     {
-      "byte_length": 1689,
-      "path": "314_FEATURE_RECALIBRATION_GATE.md",
-      "sha256": "9fdb7f0c7b443decbfe4352b93ee1cb49333f9a770cc520fd885daa8cbf11779"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2.md",
+      "sha256": "6edf723e7c77a08927948e8a5ed6348e8dd1697ccd52b55e194827d082e21337",
+      "byte_length": 54415
     },
     {
-      "byte_length": 3132,
-      "path": "CODEX_REPOSITORY_ACCESSION_HANDOFF.md",
-      "sha256": "6b58d5f3e0a282327d051353dfa41cb4594ffd660557d49b2880b938e0ba8de9"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/314_FEATURE_RECALIBRATION_GATE.md",
+      "sha256": "4f50c87c3d86d7f02e35e4d0deec0c1372e35abad0239ad14e8f9eecf661b2d7",
+      "byte_length": 1871
     },
     {
-      "byte_length": 54415,
-      "path": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2.md",
-      "sha256": "6edf723e7c77a08927948e8a5ed6348e8dd1697ccd52b55e194827d082e21337"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2_TARGETED_VERIFICATION_REPORT.md",
+      "sha256": "9bd56235ade66096e2883114a89f48d0b4b1880bcdaa2a808aaab8603dd14018",
+      "byte_length": 5200
     },
     {
-      "byte_length": 5200,
-      "path": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2_TARGETED_VERIFICATION_REPORT.md",
-      "sha256": "9bd56235ade66096e2883114a89f48d0b4b1880bcdaa2a808aaab8603dd14018"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/FOUNDER_APPROVAL_RECORD_V1_0.md",
+      "sha256": "ff8bca5561d3c2b383c35ad01578d1961a57a4ae4b83966164fafac6de892e11",
+      "byte_length": 1908
     },
     {
-      "byte_length": 1765,
-      "path": "LOCAL_BYTE_FREEZE_RECEIPT.md",
-      "sha256": "9360651c1ccc9e4b7d26d33bfe9524c0310eaaafbe431acf9650224967c0c143"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/LOCAL_BYTE_FREEZE_RECEIPT.md",
+      "sha256": "9360651c1ccc9e4b7d26d33bfe9524c0310eaaafbe431acf9650224967c0c143",
+      "byte_length": 1765
     },
     {
-      "byte_length": 1357,
-      "path": "REPOSITORY_ACCESSION_BLOCKER.md",
-      "sha256": "efcd45dc8fba12c5611a894822e54f9c600f61782af67671d31d05150176dbb5"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/PASS_CONDITION_IDENTIFIER_NORMALIZATION_V1_0.md",
+      "sha256": "20cc3c8b98fd605762af7bab1184be08275e12e70475339296196898bd06eb34",
+      "byte_length": 2078
     },
     {
-      "byte_length": 17486,
-      "path": "evidence/RISK_CALIBRATION_EXERCISE_AB_RECONCILIATION_REPORT_V1_0.md",
-      "sha256": "039b775b8a8c50315b82baa89d189e025d31372e6c714b1a08837e80a3c069b1"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/evidence/RISK_CALIBRATION_EXERCISE_COORDINATOR_FINAL_FEATURE_SUMMARY_V1_0.csv",
+      "sha256": "c79ca79c4015328daff52e4caa6a9790a70e6c54c3c07d36e2c029194b28f043",
+      "byte_length": 7257
     },
     {
-      "byte_length": 7257,
-      "path": "evidence/RISK_CALIBRATION_EXERCISE_COORDINATOR_FINAL_FEATURE_SUMMARY_V1_0.csv",
-      "sha256": "c79ca79c4015328daff52e4caa6a9790a70e6c54c3c07d36e2c029194b28f043"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/evidence/RISK_CALIBRATION_EXERCISE_COORDINATOR_FINAL_REPORT_V1_0.md",
+      "sha256": "a844a0054746fa8d7f9482399c04779d2debdc3c58ec0fa01b4103f4a1f3d661",
+      "byte_length": 5619
     },
     {
-      "byte_length": 5619,
-      "path": "evidence/RISK_CALIBRATION_EXERCISE_COORDINATOR_FINAL_REPORT_V1_0.md",
-      "sha256": "a844a0054746fa8d7f9482399c04779d2debdc3c58ec0fa01b4103f4a1f3d661"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/evidence/RISK_CALIBRATION_EXERCISE_REVIEWER_B_AMBIGUITY_LOG_V1_0.csv",
+      "sha256": "7e2d37c91fb886ae6e729c132fe911b10c26185aa1e1ddcebc8e129e2b6ddc79",
+      "byte_length": 7196
     },
     {
-      "byte_length": 27468,
-      "path": "evidence/RISK_CALIBRATION_EXERCISE_COORDINATOR_FINAL_SCENARIO_REGISTER_V1_0.csv",
-      "sha256": "c600acc841847681ef68990321325e97e4a049ced656429ed684fd08158e979d"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/evidence/RISK_CALIBRATION_EXERCISE_REVIEWER_B_NORMALIZATION_REPORT_V1_1.md",
+      "sha256": "3742d59407ba863963e424c4fbd50c8ec165d5f1002227ccc4adeed4ef17f021",
+      "byte_length": 16256
     },
     {
-      "byte_length": 7196,
-      "path": "evidence/RISK_CALIBRATION_EXERCISE_REVIEWER_B_AMBIGUITY_LOG_V1_0.csv",
-      "sha256": "7e2d37c91fb886ae6e729c132fe911b10c26185aa1e1ddcebc8e129e2b6ddc79"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/ACCESSION_MANIFEST.json",
+      "integrity": "MANIFEST_SELF_EXCLUDED_FROM_SHA256_LEDGER"
     },
     {
-      "byte_length": 16256,
-      "path": "evidence/RISK_CALIBRATION_EXERCISE_REVIEWER_B_NORMALIZATION_REPORT_V1_1.md",
-      "sha256": "3742d59407ba863963e424c4fbd50c8ec165d5f1002227ccc4adeed4ef17f021"
+      "repository_path": "governance/portfolio/coverage/drafting/EQUINESYNC_MASTER_PRODUCT_FEATURE_TO_GOVERNANCE_COVERAGE_MATRIX_V1_0/RISK_CALIBRATION/V3_2_2/SHA256SUMS.txt",
+      "integrity": "CHECKSUM_LEDGER_SELF_EXCLUDED"
     }
   ],
-  "generated_date": "2026-08-09",
-  "local_bytes_hash_frozen": true,
-  "package_id": "EQUINESYNC_RISK_CALIBRATION_METHODOLOGY_V3_2_2_FREEZE_CANDIDATE_2026_08_09",
-  "recalibration_314_blocker": "CANONICAL_REPOSITORY_ACCESSION_AND_FREEZE",
+  "local_source_archive_note": "The earlier local freeze-candidate archive contained transfer-only handoff/blocker and additional reconciliation artifacts. Those files are retained in the local evidence archive but are not falsely represented as repository-accessioned by this manifest.",
+  "canonical_repository_accession_complete": false,
+  "canonical_methodology_frozen": false,
   "recalibration_314_ready": false,
-  "targeted_verification": "PASS",
-  "version": "3.2.2",
-  "version_label": "3.2.2-calibration-exercise-clarified-freeze-candidate.1"
+  "post_merge_action": "VERIFY_PROTECTED_HEAD_THEN_CREATE_FREEZE_RECEIPT_AND_OPEN_GATE"
 }
