@@ -8,8 +8,8 @@
 
 The 314-feature documentary recalibration may open only when all are TRUE:
 
-- `V3_2_2_CLARIFICATION_INTEGRATION_COMPLETE = TRUE`
-- `V3_2_2_TARGETED_VERIFICATION_PASS = TRUE`
+- `METHODOLOGY_CLARIFICATION_INTEGRATION_COMPLETE = TRUE`
+- `TARGETED_CLARIFICATION_VERIFICATION = PASS`
 - `CANONICAL_REPOSITORY_ACCESSION_COMPLETE = TRUE`
 - `CANONICAL_METHODOLOGY_FROZEN = TRUE`
 - `METHODOLOGY_SHA256_RECORDED = TRUE`
@@ -18,17 +18,17 @@ The 314-feature documentary recalibration may open only when all are TRUE:
 - `PACKAGE_MANIFEST_VERIFIED = TRUE`
 - `AUTHORITATIVE_314_FEATURE_POPULATION_PINNED = TRUE`
 
-Current state:
+Current prepared state:
 
-- clarification integration: TRUE
-- targeted verification: TRUE
-- local byte freeze: TRUE
-- canonical repository accession: FALSE
-- canonical methodology freeze: FALSE
+- `METHODOLOGY_CLARIFICATION_INTEGRATION_COMPLETE = TRUE`
+- `TARGETED_CLARIFICATION_VERIFICATION = PASS`
+- `LOCAL_BYTES_HASH_FROZEN = TRUE`
+- `CANONICAL_REPOSITORY_ACCESSION_COMPLETE = FALSE_PENDING_PROTECTED_HEAD_MERGE`
+- `CANONICAL_METHODOLOGY_FROZEN = FALSE_PENDING_PROTECTED_HEAD_VERIFICATION`
 
 Therefore:
 
-`314_FEATURE_RECALIBRATION_GATE = CLOSED_PENDING_CANONICAL_ACCESSION`
+`314_FEATURE_RECALIBRATION_GATE = CLOSED_PENDING_CANONICAL_ACCESSION_AND_FREEZE`
 
 ## Authorized work after gate opens
 
@@ -46,4 +46,4 @@ Documentary only:
 10. conduct targeted independent rereview;
 11. prepare FDQ-003 Founder disposition.
 
-This gate does not authorize implementation, deployment, pilot activity, production, public launch, or risk acceptance.
+This gate does not authorize implementation, deployment, pilot activity or pilot-scope expansion, production, public launch, or risk acceptance.
