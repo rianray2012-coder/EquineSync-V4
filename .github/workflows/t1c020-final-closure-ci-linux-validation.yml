@@ -1,0 +1,46 @@
+name: T1C-020 Final Closure CI Linux Validation
+
+on:
+  push:
+    branches:
+      - codex/t1c020-final-closure-ci-linux-validation-20260813-0336
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  t1c020-final-closure-linux-validation:
+    name: T1C-020 final closure Linux validation evidence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Record runner environment
+        run: |
+          uname -a > "$GITHUB_WORKSPACE/t1c020-final-runner-uname.txt"
+          python --version > "$GITHUB_WORKSPACE/t1c020-final-python-version.txt"
+      - name: Extract final closure package
+        run: |
+          mkdir -p /tmp/t1c020-final
+          tar -xzf governance/ci-validation/t1c020-final/t1c020_final_closure_full_package_20260813.tar.gz -C /tmp/t1c020-final
+          find /tmp/t1c020-final -type f | sort > "$GITHUB_WORKSPACE/t1c020-final-extracted-files.txt"
+          wc -l "$GITHUB_WORKSPACE/t1c020-final-extracted-files.txt" > "$GITHUB_WORKSPACE/t1c020-final-extracted-file-count.txt"
+      - name: Run V19 validator on Ubuntu final closure package
+        run: |
+          PACKAGE_ROOT="/tmp/t1c020-final/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V6_CONTENT_REMEDIATION_CANDIDATE"
+          python "$PACKAGE_ROOT/VALIDATION/validate_tier1_documents_03_10_v19_t1c020_closure.py" --package-root "$PACKAGE_ROOT" --json-output "$GITHUB_WORKSPACE/t1c020_final_closure_ci_linux_v19_validation.json"
+      - name: Summarize validation
+        run: |
+          python -m json.tool "$GITHUB_WORKSPACE/t1c020_final_closure_ci_linux_v19_validation.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: t1c020-final-closure-ci-linux-validation-evidence
+          path: |
+            t1c020_final_closure_ci_linux_v19_validation.json
+            t1c020-final-runner-uname.txt
+            t1c020-final-python-version.txt
+            t1c020-final-extracted-files.txt
+            t1c020-final-extracted-file-count.txt
