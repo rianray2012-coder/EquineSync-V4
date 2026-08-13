@@ -1,0 +1,46 @@
+name: T1C-020 Full Package CI Linux Reproduction
+
+on:
+  push:
+    branches:
+      - codex/t1c020-full-package-ci-linux-reproduction-20260813-0315
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  t1c020-full-package-linux-reproduction:
+    name: T1C-020 full package Linux reproduction evidence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Record runner environment
+        run: |
+          uname -a > "$GITHUB_WORKSPACE/t1c020-full-runner-uname.txt"
+          python --version > "$GITHUB_WORKSPACE/t1c020-full-python-version.txt"
+      - name: Extract full validation package
+        run: |
+          mkdir -p /tmp/t1c020-full
+          tar -xzf governance/ci-validation/t1c020-full/t1c020_full_package_reproduction_candidate_20260813.tar.gz -C /tmp/t1c020-full
+          find /tmp/t1c020-full -type f | sort > "$GITHUB_WORKSPACE/t1c020-full-extracted-files.txt"
+          wc -l "$GITHUB_WORKSPACE/t1c020-full-extracted-files.txt" > "$GITHUB_WORKSPACE/t1c020-full-extracted-file-count.txt"
+      - name: Run V18 validator on Ubuntu full package
+        run: |
+          PACKAGE_ROOT="/tmp/t1c020-full/EQUINESYNC_TIER_1_DOCUMENTS_03_10_REVISION_ROUND_2_V6_CONTENT_REMEDIATION_CANDIDATE"
+          python "$PACKAGE_ROOT/VALIDATION/validate_tier1_documents_03_10_v18_t1c013_closure.py" --package-root "$PACKAGE_ROOT" --json-output "$GITHUB_WORKSPACE/t1c020_full_package_ci_linux_v18_validation.json"
+      - name: Summarize validation
+        run: |
+          python -m json.tool "$GITHUB_WORKSPACE/t1c020_full_package_ci_linux_v18_validation.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: t1c020-full-package-ci-linux-reproduction-evidence
+          path: |
+            t1c020_full_package_ci_linux_v18_validation.json
+            t1c020-full-runner-uname.txt
+            t1c020-full-python-version.txt
+            t1c020-full-extracted-files.txt
+            t1c020-full-extracted-file-count.txt
