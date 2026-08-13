@@ -1,0 +1,64 @@
+name: T1C-020 CI Linux Reproduction
+
+on:
+  push:
+    branches:
+      - codex/t1c020-ci-linux-reproduction-20260813-0243
+
+permissions:
+  contents: read
+
+jobs:
+  t1c020-linux-reproduction:
+    name: T1C-020 Linux reproduction evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Record runner environment
+        run: |
+          uname -a | tee t1c020-runner-uname.txt
+          python --version | tee t1c020-python-version.txt
+
+      - name: Extract minimal validation package
+        run: |
+          mkdir -p /tmp/t1c020
+          tar -xzf governance/ci-validation/t1c020/t1c020_ci_minimal_package.tar.gz -C /tmp/t1c020
+          find /tmp/t1c020 -maxdepth 3 -type f | sort | tee t1c020-extracted-files.txt
+
+      - name: Run V18 validator on Ubuntu
+        working-directory: /tmp/t1c020/t1c020-ci-minimal-package
+        run: |
+          python VALIDATION/validate_tier1_documents_03_10_v18_t1c013_closure.py \
+            --package-root . \
+            --json-output "$GITHUB_WORKSPACE/t1c020_ci_linux_v18_validation.json"
+
+      - name: Summarize validation
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p = pathlib.Path('t1c020_ci_linux_v18_validation.json')
+          if p.exists():
+              data = json.loads(p.read_text())
+              print('status', data.get('status'))
+              print('failures', data.get('failures'))
+          else:
+              print('validation output missing')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: t1c020-ci-linux-reproduction-evidence
+          path: |
+            t1c020_ci_linux_v18_validation.json
+            t1c020-runner-uname.txt
+            t1c020-python-version.txt
+            t1c020-extracted-files.txt
+          if-no-files-found: warn
