@@ -27,15 +27,15 @@ export MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED="${MAESTRO_CLI_ANALYSIS_NOTIFI
 
 denied_home_status_id() {
   case "$1" in
-    "Platform Admin Console") echo "role-home-platform-status" ;;
-    "Facility Dashboard") echo "role-home-facility-status" ;;
-    "Manager Dashboard") echo "role-home-manager-status" ;;
-    "Trainer Operating Center") echo "role-home-trainer-status" ;;
-    "Staff Work Queue") echo "role-home-staff-status" ;;
-    "Owner Dashboard") echo "role-home-owner-status" ;;
-    "Guardian Dashboard") echo "role-home-guardian-status" ;;
-    "Rider Dashboard") echo "role-home-rider-status" ;;
-    "Service Provider Center") echo "role-home-provider-status" ;;
+    "Platform Admin Console") echo "role-home-platform-denied-status" ;;
+    "Facility Dashboard") echo "role-home-facility-denied-status" ;;
+    "Manager Dashboard") echo "role-home-manager-denied-status" ;;
+    "Trainer Operating Center") echo "role-home-trainer-denied-status" ;;
+    "Staff Work Queue") echo "role-home-staff-denied-status" ;;
+    "Owner Dashboard") echo "role-home-owner-denied-status" ;;
+    "Guardian Dashboard") echo "role-home-guardian-denied-status" ;;
+    "Rider Dashboard") echo "role-home-rider-denied-status" ;;
+    "Service Provider Center") echo "role-home-provider-denied-status" ;;
     *) echo "" ;;
   esac
 }

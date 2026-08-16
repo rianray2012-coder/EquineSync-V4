@@ -559,7 +559,7 @@ export default function App() {
                         <Text
                           accessibilityLabel={`role-home-${home.key}-${home.status === 'allowed' ? 'ALLOWED' : 'DENIED'}`}
                           style={[styles.statusPill, home.status === 'allowed' ? styles.allowedPill : styles.deniedPill]}
-                          testID={`role-home-${home.key}-status`}
+                          testID={`role-home-${home.key}-${home.status}-status`}
                         >
                           {home.status === 'allowed' ? 'ALLOWED' : 'DENIED'}
                         </Text>
