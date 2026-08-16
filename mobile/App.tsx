@@ -100,10 +100,6 @@ function labelFor(value?: string | null) {
   return cleaned || 'unknown';
 }
 
-function titleFor(value?: string | null) {
-  return labelFor(value).replace(/\b\w/g, (letter) => letter.toUpperCase());
-}
-
 function nativeLandingFor(user?: SessionUser | null, context?: AccountContext | null) {
   const role = normalizeRole(context?.active_context?.role ?? user?.role);
   const accountType = context?.active_context?.account_type;
@@ -421,6 +417,7 @@ export default function App() {
   const roleHomes = roleHomesFor(session?.user, accountContext);
   const selectedLanding = nativeLandingFor(session?.user, accountContext);
   const allowedHome = roleHomes.find((home) => home.status === 'allowed');
+  const deniedProofHome = roleHomes.find((home) => home.status === 'denied');
   const availableContextCount = accountContext?.available_contexts?.length ?? 0;
 
   return (
@@ -528,19 +525,43 @@ export default function App() {
             {session ? (
               <View style={styles.roleDetails}>
                 <Text style={styles.healthMessage}>{selectedLanding}</Text>
-                <Text style={styles.detail}>role={labelFor(activeContext?.role ?? session.user.role)}</Text>
-                <Text style={styles.detail}>account={labelFor(activeContext?.account_type)}</Text>
-                <Text style={styles.detail}>membership={labelFor(activeContext?.membership_status)}</Text>
+                <Text style={styles.detail} testID="role-context-role">
+                  role={labelFor(activeContext?.role ?? session.user.role)}
+                </Text>
+                <Text style={styles.detail} testID="role-context-account">
+                  account={labelFor(activeContext?.account_type)}
+                </Text>
+                <Text style={styles.detail} testID="role-context-membership">
+                  membership={labelFor(activeContext?.membership_status)}
+                </Text>
                 <Text style={styles.detail}>contexts={availableContextCount}</Text>
                 <Text style={styles.caption}>{contextStatus}</Text>
 
+                <View style={styles.roleProofStrip} testID="role-proof-strip">
+                  <Text style={styles.proofText} testID="role-proof-membership">
+                    membership={labelFor(activeContext?.membership_status)}
+                  </Text>
+                  <Text style={styles.proofText} testID="role-proof-denied">
+                    DENIED{deniedProofHome ? ` ${deniedProofHome.title}` : ''}
+                  </Text>
+                </View>
+
                 <View style={styles.roleHomeList}>
                   {roleHomes.map((home) => (
-                    <View key={home.key} style={[styles.roleHome, home.status === 'allowed' ? styles.allowedRoleHome : styles.deniedRoleHome]}>
+                    <View
+                      accessibilityLabel={`${home.title} ${home.status === 'allowed' ? 'ALLOWED' : 'DENIED'}`}
+                      key={home.key}
+                      style={[styles.roleHome, home.status === 'allowed' ? styles.allowedRoleHome : styles.deniedRoleHome]}
+                      testID={`role-home-${home.key}`}
+                    >
                       <View style={styles.roleHomeHeader}>
                         <Text style={styles.roleHomeTitle}>{home.title}</Text>
-                        <Text style={[styles.statusPill, home.status === 'allowed' ? styles.allowedPill : styles.deniedPill]}>
-                          {titleFor(home.status)}
+                        <Text
+                          accessibilityLabel={`role-home-${home.key}-${home.status === 'allowed' ? 'ALLOWED' : 'DENIED'}`}
+                          style={[styles.statusPill, home.status === 'allowed' ? styles.allowedPill : styles.deniedPill]}
+                          testID={`role-home-${home.key}-${home.status}-status`}
+                        >
+                          {home.status === 'allowed' ? 'ALLOWED' : 'DENIED'}
                         </Text>
                       </View>
                       <Text style={styles.caption}>{home.subtitle}</Text>
@@ -548,7 +569,7 @@ export default function App() {
                   ))}
                 </View>
 
-                <View style={styles.deniedBox}>
+                <View accessibilityLabel="Denied-Access Guard DENIED" style={styles.deniedBox} testID="denied-access-guard">
                   <Text style={styles.deniedTitle}>Denied-Access Guard</Text>
                   <Text style={styles.caption}>
                     Cross-role homes remain unavailable unless the backend returns that role in the active account context.
@@ -660,6 +681,19 @@ const styles = StyleSheet.create({
   },
   roleDetails: {
     gap: 10,
+  },
+  roleProofStrip: {
+    backgroundColor: '#f8faf7',
+    borderColor: '#dfe5dd',
+    borderRadius: 8,
+    borderWidth: 1,
+    gap: 6,
+    padding: 10,
+  },
+  proofText: {
+    color: '#25352b',
+    fontSize: 14,
+    fontWeight: '800',
   },
   input: {
     backgroundColor: '#fbfcfa',
