@@ -1,0 +1,42 @@
+appId: com.equinesync.app
+---
+- launchApp:
+    clearState: true
+- assertVisible: "EquineSync"
+- assertVisible: "API health check passed"
+- scrollUntilVisible:
+    element:
+      id: "auth-email-input"
+    direction: DOWN
+- tapOn:
+    id: "auth-email-input"
+- inputText: ${EMAIL}
+- hideKeyboard
+- scrollUntilVisible:
+    element:
+      id: "auth-password-input"
+    direction: DOWN
+- tapOn:
+    id: "auth-password-input"
+- inputText: ${PASSWORD}
+- hideKeyboard
+- scrollUntilVisible:
+    element:
+      id: "auth-sign-in-button"
+    direction: DOWN
+- tapOn:
+    id: "auth-sign-in-button"
+- assertVisible: "Signed in"
+- scrollUntilVisible:
+    element:
+      text: ${EXPECTED_HOME}
+    direction: DOWN
+- assertVisible: ${EXPECTED_HOME}
+- assertVisible: ${EXPECTED_ROLE_LINE}
+- assertVisible: ${EXPECTED_ACCOUNT_LINE}
+- assertVisible: "membership=active"
+- scrollUntilVisible:
+    element:
+      text: ${DENIED_HOME}
+    direction: DOWN
+- assertVisible: "DENIED"

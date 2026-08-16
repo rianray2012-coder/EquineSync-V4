@@ -1,0 +1,27 @@
+appId: com.equinesync.app
+---
+- launchApp:
+    clearState: true
+- assertVisible: "EquineSync"
+- assertVisible: "Sign In"
+- tapOn:
+    id: "auth-email-input"
+- inputText: ${EMAIL}
+- hideKeyboard
+- tapOn:
+    id: "auth-password-input"
+- inputText: ${PASSWORD}
+- tapOn: "AUTH SESSION"
+- tapOn:
+    id: "auth-sign-in-button"
+- tapOn: "Not Now"
+- assertVisible: "Signed in"
+- assertVisible: ${EXPECTED_HOME}
+- assertVisible: ${EXPECTED_ROLE_LINE}
+- assertVisible: ${EXPECTED_ACCOUNT_LINE}
+- assertVisible: "membership=active"
+- scrollUntilVisible:
+    element:
+      text: ${DENIED_HOME}
+    direction: DOWN
+- assertVisible: "DENIED"
