@@ -25,6 +25,21 @@ fi
 export MAESTRO_CLI_NO_ANALYTICS="${MAESTRO_CLI_NO_ANALYTICS:-1}"
 export MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED="${MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED:-true}"
 
+denied_home_status_id() {
+  case "$1" in
+    "Platform Admin Console") echo "role-home-platform-status" ;;
+    "Facility Dashboard") echo "role-home-facility-status" ;;
+    "Manager Dashboard") echo "role-home-manager-status" ;;
+    "Trainer Operating Center") echo "role-home-trainer-status" ;;
+    "Staff Work Queue") echo "role-home-staff-status" ;;
+    "Owner Dashboard") echo "role-home-owner-status" ;;
+    "Guardian Dashboard") echo "role-home-guardian-status" ;;
+    "Rider Dashboard") echo "role-home-rider-status" ;;
+    "Service Provider Center") echo "role-home-provider-status" ;;
+    *) echo "" ;;
+  esac
+}
+
 run_role() {
   local slug="$1"
   local email="$2"
@@ -32,6 +47,8 @@ run_role() {
   local expected_role_line="$4"
   local expected_account_line="$5"
   local denied_home="$6"
+  local denied_status_id
+  denied_status_id="$(denied_home_status_id "$denied_home")"
 
   if [[ -n "$ROLE_FILTER" && "$ROLE_FILTER" != "$slug" ]]; then
     return 0
@@ -57,6 +74,7 @@ run_role() {
     -e EXPECTED_ROLE_LINE="$expected_role_line" \
     -e EXPECTED_ACCOUNT_LINE="$expected_account_line" \
     -e DENIED_HOME="$denied_home" \
+    -e DENIED_HOME_STATUS_ID="$denied_status_id" \
     "$FLOW"
 }
 

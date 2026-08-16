@@ -32,5 +32,9 @@ appId: com.equinesync.app
     id: "role-proof-membership"
 - assertVisible:
     id: "role-proof-denied"
+- scrollUntilVisible:
+    element:
+      id: ${DENIED_HOME_STATUS_ID}
+    direction: DOWN
 - assertVisible:
     id: ${DENIED_HOME_STATUS_ID}
