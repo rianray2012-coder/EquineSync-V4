@@ -1,0 +1,8 @@
+appId: com.equinesync.app
+---
+- launchApp:
+    clearState: true
+- assertVisible: "EquineSync"
+- assertVisible: "pilot"
+- assertVisible: "https://api.equine-sync.com"
+- assertVisible: "API health check passed"
