@@ -282,7 +282,28 @@ api_router.include_router(build_invites_router(
     issue_refresh_token=issue_refresh_token,
     jwt_exp_hours=JWT_EXP_HOURS,
     new_id=new_id,
+    include_public=False,
 ), dependencies=PRODUCT_FACILITY_DEPS)
+api_router.include_router(build_invites_router(
+    db=db,
+    get_current_user=get_current_user,
+    require_setup_role=require_setup_role,
+    roles=ROLES,
+    role_labels=ROLE_LABELS,
+    onboarding_steps=ONBOARDING_STEPS,
+    mailer_send=send_email,
+    track=_track,
+    base_url_from_request=_base_url,
+    create_token=create_token,
+    hash_pwd=hash_pwd,
+    verify_pwd=verify_pwd,
+    user_safe=_user_safe,
+    client_meta=_client_meta,
+    issue_refresh_token=issue_refresh_token,
+    jwt_exp_hours=JWT_EXP_HOURS,
+    new_id=new_id,
+    include_protected=False,
+))
 
 # Onboarding (routes/onboarding.py)
 api_router.include_router(build_onboarding_router(
