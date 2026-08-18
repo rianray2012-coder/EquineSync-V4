@@ -263,8 +263,7 @@ _reports_router = build_reports_router(
 _send_nudges = _reports_router._reports_helpers["send_nudges"]
 api_router.include_router(_reports_router, dependencies=PRODUCT_FACILITY_DEPS)
 
-# Invites (routes/invites.py)
-api_router.include_router(build_invites_router(
+_invite_router_kwargs = dict(
     db=db,
     get_current_user=get_current_user,
     require_setup_role=require_setup_role,
@@ -282,7 +281,16 @@ api_router.include_router(build_invites_router(
     issue_refresh_token=issue_refresh_token,
     jwt_exp_hours=JWT_EXP_HOURS,
     new_id=new_id,
-), dependencies=PRODUCT_FACILITY_DEPS)
+)
+
+# Invites (routes/invites.py)
+api_router.include_router(
+    build_invites_router(**_invite_router_kwargs, route_scope="protected"),
+    dependencies=PRODUCT_FACILITY_DEPS,
+)
+api_router.include_router(
+    build_invites_router(**_invite_router_kwargs, route_scope="public"),
+)
 
 # Onboarding (routes/onboarding.py)
 api_router.include_router(build_onboarding_router(

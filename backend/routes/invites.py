@@ -70,7 +70,11 @@ def build_router(
     issue_refresh_token,
     jwt_exp_hours: int,
     new_id,
+    route_scope: str = "all",
 ) -> APIRouter:
+    if route_scope not in {"all", "protected", "public"}:
+        raise ValueError("route_scope must be one of: all, protected, public")
+
     router = APIRouter(prefix="/invites", tags=["invites"])
 
     @router.get("")
@@ -346,5 +350,17 @@ def build_router(
             )},
             "auto_launch_onboarding": has_setup_role,
         }
+
+    public_paths = {"/invites/verify", "/invites/accept"}
+    if route_scope == "protected":
+        router.routes = [
+            route for route in router.routes
+            if getattr(route, "path", None) not in public_paths
+        ]
+    elif route_scope == "public":
+        router.routes = [
+            route for route in router.routes
+            if getattr(route, "path", None) in public_paths
+        ]
 
     return router
