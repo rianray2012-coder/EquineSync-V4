@@ -3,24 +3,30 @@ appId: com.equinesync.app
 - launchApp:
     clearState: true
 - assertVisible: "EquineSync"
-- assertVisible:
-    id: "auth-email-input"
-- tapOn:
-    id: "auth-email-input"
-- inputText: ${EMAIL}
-- hideKeyboard
-- tapOn:
-    id: "auth-password-input"
-- inputText: ${PASSWORD}
-- tapOn: "AUTH SESSION"
-- tapOn:
-    id: "auth-sign-in-button"
+- runFlow:
+    when:
+      visible:
+        id: "auth-email-input"
+    commands:
+      - tapOn:
+          id: "auth-email-input"
+      - inputText: ${EMAIL}
+      - hideKeyboard
+      - tapOn:
+          id: "auth-password-input"
+      - inputText: ${PASSWORD}
+      - tapOn: "AUTH SESSION"
+      - tapOn:
+          id: "auth-sign-in-button"
 - runFlow:
     when:
       visible: "Not Now"
     commands:
       - tapOn: "Not Now"
 - assertVisible: "Signed in"
+- scrollUntilVisible:
+    element: ${EXPECTED_HOME}
+    direction: DOWN
 - assertVisible: ${EXPECTED_HOME}
 - assertVisible:
     id: "role-context-role"
