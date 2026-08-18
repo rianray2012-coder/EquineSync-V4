@@ -3,10 +3,8 @@ appId: com.equinesync.app
 - launchApp:
     clearState: true
 - assertVisible: "EquineSync"
-- scrollUntilVisible:
-    element:
-      id: "auth-email-input"
-    direction: DOWN
+- assertVisible:
+    id: "auth-email-input"
 - tapOn:
     id: "auth-email-input"
 - inputText: ${EMAIL}
@@ -29,9 +27,7 @@ appId: com.equinesync.app
 - assertVisible:
     id: "role-context-account"
 - assertVisible:
-    id: "role-proof-membership"
-- assertVisible:
-    id: "role-proof-denied"
+    id: "role-context-membership"
 - scrollUntilVisible:
     element:
       id: ${DENIED_HOME_STATUS_ID}

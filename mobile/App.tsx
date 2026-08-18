@@ -419,6 +419,63 @@ export default function App() {
   const allowedHome = roleHomes.find((home) => home.status === 'allowed');
   const deniedProofHome = roleHomes.find((home) => home.status === 'denied');
   const availableContextCount = accountContext?.available_contexts?.length ?? 0;
+  const authPanel = (
+    <View style={[styles.panel, !session && styles.priorityPanel]}>
+      <View style={styles.statusHeader}>
+        <Text style={styles.panelLabel}>Auth Session</Text>
+        {authBusy || restoreBusy ? <ActivityIndicator /> : <View style={[styles.statusDot, { backgroundColor: session ? '#1f8a5b' : '#9aa3a0' }]} />}
+      </View>
+
+      {session ? (
+        <View style={styles.authDetails}>
+          <Text style={styles.healthMessage}>Signed in</Text>
+          <Text style={styles.detail}>email={session.user.email}</Text>
+          <Text style={styles.detail}>role={session.user.role ?? 'unknown'}</Text>
+          <Text style={styles.detail}>barn={session.user.barn_id ?? 'primary'}</Text>
+          <Text style={styles.detail}>facility={session.user.facility_status ?? 'unknown'}</Text>
+          <View style={styles.buttonRow}>
+            <Pressable accessibilityRole="button" disabled={authBusy} onPress={checkCurrentUser} style={styles.button}>
+              <Text style={styles.buttonText}>Check Me</Text>
+            </Pressable>
+            <Pressable accessibilityRole="button" disabled={authBusy} onPress={signOut} style={[styles.button, styles.secondaryButton]}>
+              <Text style={styles.secondaryButtonText}>Sign Out</Text>
+            </Pressable>
+          </View>
+        </View>
+      ) : (
+        <View style={styles.authDetails}>
+          <TextInput
+            accessibilityLabel="Email"
+            autoCapitalize="none"
+            autoComplete="email"
+            inputMode="email"
+            onChangeText={setEmail}
+            placeholder="Email"
+            style={styles.input}
+            testID="auth-email-input"
+            textContentType="username"
+            value={email}
+          />
+          <TextInput
+            accessibilityLabel="Password"
+            autoCapitalize="none"
+            autoComplete="password"
+            onChangeText={setPassword}
+            placeholder="Password"
+            secureTextEntry
+            style={styles.input}
+            testID="auth-password-input"
+            textContentType="password"
+            value={password}
+          />
+          <Pressable accessibilityLabel="Sign In" accessibilityRole="button" disabled={!canSignIn} onPress={signIn} style={[styles.button, !canSignIn && styles.disabledButton]} testID="auth-sign-in-button">
+            <Text style={styles.buttonText}>Sign In</Text>
+          </Pressable>
+        </View>
+      )}
+      <Text style={styles.caption}>{authStatus}</Text>
+    </View>
+  );
 
   return (
     <View style={styles.shell}>
@@ -430,6 +487,8 @@ export default function App() {
             <Text style={styles.title}>EquineSync</Text>
             <Text style={styles.subtitle}>React Native / Expo internal evidence track</Text>
           </View>
+
+          {!session ? authPanel : null}
 
           <View style={styles.panel}>
             <Text style={styles.panelLabel}>Environment</Text>
@@ -460,61 +519,7 @@ export default function App() {
             </Pressable>
           </View>
 
-          <View style={styles.panel}>
-            <View style={styles.statusHeader}>
-              <Text style={styles.panelLabel}>Auth Session</Text>
-              {authBusy || restoreBusy ? <ActivityIndicator /> : <View style={[styles.statusDot, { backgroundColor: session ? '#1f8a5b' : '#9aa3a0' }]} />}
-            </View>
-
-            {session ? (
-              <View style={styles.authDetails}>
-                <Text style={styles.healthMessage}>Signed in</Text>
-                <Text style={styles.detail}>email={session.user.email}</Text>
-                <Text style={styles.detail}>role={session.user.role ?? 'unknown'}</Text>
-                <Text style={styles.detail}>barn={session.user.barn_id ?? 'primary'}</Text>
-                <Text style={styles.detail}>facility={session.user.facility_status ?? 'unknown'}</Text>
-                <View style={styles.buttonRow}>
-                  <Pressable accessibilityRole="button" disabled={authBusy} onPress={checkCurrentUser} style={styles.button}>
-                    <Text style={styles.buttonText}>Check Me</Text>
-                  </Pressable>
-                  <Pressable accessibilityRole="button" disabled={authBusy} onPress={signOut} style={[styles.button, styles.secondaryButton]}>
-                    <Text style={styles.secondaryButtonText}>Sign Out</Text>
-                  </Pressable>
-                </View>
-              </View>
-            ) : (
-              <View style={styles.authDetails}>
-                <TextInput
-                  accessibilityLabel="Email"
-                  autoCapitalize="none"
-                  autoComplete="email"
-                  inputMode="email"
-                  onChangeText={setEmail}
-                  placeholder="Email"
-                  style={styles.input}
-                  testID="auth-email-input"
-                  textContentType="username"
-                  value={email}
-                />
-                <TextInput
-                  accessibilityLabel="Password"
-                  autoCapitalize="none"
-                  autoComplete="password"
-                  onChangeText={setPassword}
-                  placeholder="Password"
-                  secureTextEntry
-                  style={styles.input}
-                  testID="auth-password-input"
-                  textContentType="password"
-                  value={password}
-                />
-                <Pressable accessibilityLabel="Sign In" accessibilityRole="button" disabled={!canSignIn} onPress={signIn} style={[styles.button, !canSignIn && styles.disabledButton]} testID="auth-sign-in-button">
-                  <Text style={styles.buttonText}>Sign In</Text>
-                </Pressable>
-              </View>
-            )}
-            <Text style={styles.caption}>{authStatus}</Text>
-          </View>
+          {session ? authPanel : null}
 
           <View style={styles.panel}>
             <View style={styles.statusHeader}>
@@ -639,6 +644,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: '#ffffff',
     padding: 16,
+  },
+  priorityPanel: {
+    borderColor: '#b8d4c4',
   },
   panelLabel: {
     color: '#536158',
