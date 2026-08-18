@@ -8,7 +8,7 @@ Design goals:
   end-to-end without external dependencies.
 - Templates live in /app/backend/email_templates/*.html and are simple
   str.format_map(SafeDict()) substitutions to avoid template engine overhead.
-- Branded base layout wraps every email for a consistent luxury aesthetic.
+- Branded base layout wraps every email for a consistent EquineSync identity.
 """
 
 from __future__ import annotations
@@ -62,7 +62,7 @@ async def send(
         html = render(template, variables or {}, base=base)
 
     api_key = os.environ.get("RESEND_API_KEY", "").strip()
-    sender = os.environ.get("RESEND_FROM", "EquineSync <onboarding@resend.dev>")
+    sender = os.environ.get("RESEND_FROM", "EquineSync <hello@equine-sync.com>")
 
     if not api_key:
         logger.warning(
