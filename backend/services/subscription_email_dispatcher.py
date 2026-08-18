@@ -25,8 +25,7 @@ Strict guardrails
 * Does NOT mutate `subscriptions` apart from `$pull`ing event keys on
   terminal status (sent / permanent_failure). Stripe subscription state is
   owned by `subscriptions_webhook_handlers.py`.
-* Brand name in all subject lines + template copy is **Equine-Sync**
-  (hyphenated) — required by the 15.D guardrail.
+* Brand name in all subject lines + template copy is **EquineSync**.
 * Per-row try/except: one bad subscription cannot halt the loop.
 * Never references the legacy `invoices` collection or Phase-9 mailers.
 """
@@ -62,9 +61,9 @@ MAX_ATTEMPTS = 5
 # Subject lines — concierge-warm tone, but still recognizable as billing
 # emails (per round-2 user direction).
 SUBJECTS: Dict[str, str] = {
-    "trial_will_end":     "Equine-Sync — your trial ends soon",
-    "payment_succeeded":  "Equine-Sync — payment received, you're all set",
-    "payment_failed":     "Equine-Sync — payment issue, please review",
+    "trial_will_end":     "EquineSync — your trial ends soon",
+    "payment_succeeded":  "EquineSync — payment received, you're all set",
+    "payment_failed":     "EquineSync — payment issue, please review",
 }
 
 TEMPLATES: Dict[str, str] = {

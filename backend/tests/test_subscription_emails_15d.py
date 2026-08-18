@@ -8,7 +8,7 @@ Covers:
      never block the queue.
   4. No recipient (owner_user_id has no email) → failed, retried.
   5. Dev-mode mailer (status="dev") counts as success.
-  6. Subjects + brand copy use the hyphenated "Equine-Sync".
+  6. Subjects + brand copy use the approved "EquineSync" display name.
   7. Manual trigger endpoint:
      - returns 403 for a non-admin
      - returns 200 + stats for admin:access role
@@ -173,8 +173,8 @@ def test_happy_path_sent_and_pulled(db, seed_user):
         assert log["attempt"] == 1
         call = m.calls[0]
         assert call["to"] == email
-        assert "Equine-Sync" in call["subject"]
-        assert call["subject"] == "Equine-Sync — your trial ends soon"
+        assert "EquineSync" in call["subject"]
+        assert call["subject"] == "EquineSync — your trial ends soon"
         assert call["variables"]["full_name"] == "Test Owner"
         assert call["variables"]["plan_name"] == "Starter"
         assert call["variables"]["subscription_url"].endswith("/billing/subscription")
@@ -386,7 +386,7 @@ def test_payment_succeeded_reads_15b_invoice_schema(db, seed_user):
         stats = _run(lambda adb: run_subscription_email_pass(adb, _handle(m)))
         assert stats["sent"] == 1
         call = m.calls[0]
-        assert call["subject"] == "Equine-Sync — payment received, you're all set"
+        assert call["subject"] == "EquineSync — payment received, you're all set"
         vars_ = call["variables"]
         # Bug regression — must resolve to $149 from amount_cents, not "—".
         assert vars_["amount_friendly"] == "$149", \
@@ -432,7 +432,7 @@ def test_payment_failed_reads_15b_invoice_schema_with_payment_failed_at(db, seed
         stats = _run(lambda adb: run_subscription_email_pass(adb, _handle(m)))
         assert stats["sent"] == 1
         call = m.calls[0]
-        assert call["subject"] == "Equine-Sync — payment issue, please review"
+        assert call["subject"] == "EquineSync — payment issue, please review"
         vars_ = call["variables"]
         assert vars_["amount_friendly"] == "$49"
         assert vars_["invoice_ref"] == inv_id
