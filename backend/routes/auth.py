@@ -6,6 +6,8 @@ factory that depends only on the Mongo db handle.
 from __future__ import annotations
 
 import logging
+import html as html_lib
+import os
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 
@@ -229,6 +231,7 @@ class MarketplaceSignupBody(BaseModel):
 async def _send_verification_email(user: dict, raw: str, ttl_hours: int):
     base = app_base_url()
     verify_url = f"{base}/verify-email?token={raw}" if base else f"/verify-email?token={raw}"
+    verify_url_html = html_lib.escape(verify_url, quote=True)
     try:
         await send_email(
             to=user["email"],
@@ -237,12 +240,41 @@ async def _send_verification_email(user: dict, raw: str, ttl_hours: int):
             variables={
                 "full_name": user.get("full_name", "there"),
                 "verify_url": verify_url,
+                "verify_url_html": verify_url_html,
                 "ttl_label": f"{ttl_hours} hours",
             },
             base="_base_auth",
         )
     except Exception:
         logger.exception("verification email send failed")
+
+
+async def _send_email_verified_app_download(user: dict):
+    try:
+        await send_email(
+            to=user["email"],
+            subject="You're verified — download EquineSync",
+            template="email_verified_app_download",
+            variables={
+                "full_name": user.get("full_name", "there"),
+                "download_url": html_lib.escape(_app_download_url(), quote=True),
+            },
+            base="_base_auth",
+        )
+    except Exception:
+        logger.exception("email-verified app-download follow-up failed")
+
+
+def _app_download_url() -> str:
+    configured = (
+        os.environ.get("MOBILE_APP_DOWNLOAD_URL")
+        or os.environ.get("APP_DOWNLOAD_URL")
+        or ""
+    ).strip()
+    if configured.startswith(("https://", "http://")):
+        return configured
+    base = app_base_url()
+    return base or "https://app.equine-sync.com"
 
 
 async def _send_reset_email(user: dict, raw: str, ttl_hours: int):
@@ -325,7 +357,7 @@ def build_router(db) -> APIRouter:
 
     @router.post("/auth/signup", dependencies=[Depends(auth_rate_limiter)])
     async def marketplace_signup(request: Request, body: MarketplaceSignupBody):
-        """Equine Sync public marketplace signup (riders, owners, trainers,
+        """EquineSync public marketplace signup (riders, owners, trainers,
         barns, service providers). Distinct from /auth/register — that path
         remains role-locked per Security Patch 2E. Privileged marketplace
         roles get role_status='pending_review' for admin verification.
@@ -395,7 +427,7 @@ def build_router(db) -> APIRouter:
                 )
             html = f"""
             <div style='font-family: Inter, sans-serif; color: #232734; max-width: 560px; margin: 0 auto;'>
-              <div style='font-family: Cormorant Garamond, serif; font-size: 32px; margin-bottom: 8px;'>Welcome to Equine Sync.</div>
+              <div style='font-family: Cormorant Garamond, serif; font-size: 32px; margin-bottom: 8px;'>Welcome to EquineSync.</div>
               <p style='line-height: 1.6;'>Hi {user['full_name']},</p>
               <p style='line-height: 1.6;'>You're in as a <strong>{role_label}</strong>. {extra}</p>
               <p style='line-height: 1.6;'>Pop back into your dashboard whenever you're ready — your profile, network, and tools are waiting.</p>
@@ -404,7 +436,7 @@ def build_router(db) -> APIRouter:
             """
             await _send_mail(
                 to=user["email"],
-                subject="Welcome to Equine Sync",
+                subject="Welcome to EquineSync",
                 html=html,
             )
         except Exception:
@@ -637,8 +669,10 @@ def build_router(db) -> APIRouter:
         )
         u = await db.users.find_one(
             {"id": rec["user_id"]},
-            {"_id": 0, "id": 1, "email": 1, "role": 1, "barn_id": 1},
+            {"_id": 0, "id": 1, "email": 1, "full_name": 1, "role": 1, "barn_id": 1},
         )
+        if u and u.get("email"):
+            await _send_email_verified_app_download(u)
         await audit.record(
             action="auth.email.verified", request=request, user=u,
             resource_type="user", resource_id=rec["user_id"],
