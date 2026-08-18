@@ -14,6 +14,7 @@ Design goals:
 from __future__ import annotations
 
 import asyncio
+import html as html_lib
 import logging
 import os
 from pathlib import Path
@@ -42,10 +43,37 @@ def render(template: str, variables: Dict[str, Any], base: str = "_base") -> str
     ``base`` selects the wrapping layout (default ``_base``; auth/transactional
     emails use ``_base_auth`` which has a neutral, non-invite footer).
     """
-    body = _load_template(template).format_map(SafeDict(variables or {}))
+    merged_vars = _email_defaults()
+    merged_vars.update(variables or {})
+    body = _load_template(template).format_map(SafeDict(merged_vars))
     base_tpl = _load_template(base)
-    merged = {**(variables or {}), "content": body}
-    return base_tpl.format_map(SafeDict(merged))
+    return base_tpl.format_map(SafeDict({**merged_vars, "content": body}))
+
+
+def _clean_url(value: str, fallback: str) -> str:
+    value = (value or "").strip().rstrip("/")
+    if value.startswith(("https://", "http://")):
+        return value
+    return fallback
+
+
+def _email_defaults() -> Dict[str, str]:
+    website_url = _clean_url(os.environ.get("WEBSITE_URL", ""), "https://equine-sync.com")
+    app_url = _clean_url(
+        os.environ.get("APP_BASE_URL", "") or os.environ.get("PUBLIC_APP_URL", ""),
+        "https://app.equine-sync.com",
+    )
+    logo_url = _clean_url(os.environ.get("EMAIL_LOGO_URL", ""), f"{app_url}/icon-192.png")
+    download_url = _clean_url(
+        os.environ.get("MOBILE_APP_DOWNLOAD_URL", "") or os.environ.get("APP_DOWNLOAD_URL", ""),
+        app_url,
+    )
+    return {
+        "website_url": html_lib.escape(website_url, quote=True),
+        "app_url": html_lib.escape(app_url, quote=True),
+        "logo_url": html_lib.escape(logo_url, quote=True),
+        "download_url": html_lib.escape(download_url, quote=True),
+    }
 
 
 async def send(
