@@ -75,7 +75,7 @@ export default function SubscriptionSuccess() {
       <PageHeader
         eyebrow="All set"
         title="Welcome to your subscription"
-        subtitle="Stripe accepted your payment. Your facility tools are unlocking right now."
+        subtitle="Stripe accepted your payment. Your EquineSync membership is unlocking right now."
       />
 
       <Card hover={false} className="border-equine-saddle/40" data-testid="success-summary-card">

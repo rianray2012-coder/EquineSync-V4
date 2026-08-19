@@ -12,6 +12,7 @@ export const MARKETPLACE_ROLES = ["horse_owner", "rider", "trainer", "barn_owner
 // the Subscription Billing portal route + sidebar link. Stay in lockstep with
 // the backend; if the backend extends `barn:manage`, extend this set too.
 export const BARN_MANAGE_ROLES = [...ADMIN_ROLES];
+export const SUBSCRIPTION_BILLING_ROLES = [...BARN_MANAGE_ROLES, "horse_owner"];
 
 export const ROLE_GROUPS = {
   admin: ADMIN_ROLES,
@@ -26,6 +27,7 @@ export const ROLE_GROUPS = {
   integrations: ADMIN_ROLES,
   ownerPortal: ["admin", "barn_manager", "trainer", ...OWNER_ROLES],
   barnManage: BARN_MANAGE_ROLES,
+  subscriptionBilling: SUBSCRIPTION_BILLING_ROLES,
 };
 
 export const canAccessRole = (user, roles) => {
@@ -38,6 +40,7 @@ export const canAccessRole = (user, roles) => {
 // kick off a Stripe Checkout. Source of truth is the backend capability
 // table; this helper exists so individual pages don't hard-code role names.
 export const canManageBilling = (user) => canAccessRole(user, BARN_MANAGE_ROLES);
+export const canAccessSubscriptionBilling = (user) => canAccessRole(user, SUBSCRIPTION_BILLING_ROLES);
 
 // ----------------------------------------------------------------------
 // Admin Portal — platform-level roles (Admin-1, Feb 2026)

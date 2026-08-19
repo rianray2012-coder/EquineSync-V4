@@ -315,7 +315,7 @@ function App() {
               <Route path="/health-care-logs" element={permit(<HealthCareLogs />, ROLE_GROUPS.care)} />
               <Route path="/weight-trends" element={permit(<WeightTrends />, ROLE_GROUPS.care)} />
               <Route path="/billing" element={permit(<Billing />, ROLE_GROUPS.financial)} />
-              <Route path="/billing/subscription" element={permit(<SubscriptionBilling />, ROLE_GROUPS.barnManage)} />
+              <Route path="/billing/subscription" element={permit(<SubscriptionBilling />, ROLE_GROUPS.subscriptionBilling)} />
               <Route path="/billing/success" element={permit(<SubscriptionSuccess />, BN17D_DIRECT_ROUTE_ROLES.checkoutReturn)} />
               <Route path="/review-queue" element={permit(<ReviewQueue />, ROLE_GROUPS.communication)} />
               <Route path="/admin/review-queue" element={permit(<AdminReviewQueue />, ROLE_GROUPS.admin)} />
