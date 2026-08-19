@@ -153,7 +153,7 @@ export const INDIVIDUAL_OWNER_NAVIGATION = [
       item(dashboardFor("owner"), "Health", "health"),
       item(dashboardFor("owner"), "Schedule", "calendar"),
       item(dashboardFor("owner"), "Requests", "requests"),
-      item(dashboardFor("owner"), "Billing", "billing"),
+      item("/billing/subscription", "Membership", "billing"),
       item(dashboardFor("owner"), "Documents", "documents"),
       item("/settings", "Profile", "settings"),
     ],
@@ -220,6 +220,7 @@ export const isIndividualOwnerNavigation = (user) => {
     user?.customer_type,
     user?.account_type,
     user?.subscription_customer_type,
+    user?.membership_tier,
     user?.plan_code,
     user?.subscription_plan_code,
   ].map((v) => String(v || "").toLowerCase());
