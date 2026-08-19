@@ -115,7 +115,7 @@ async def _parse_legacy_checkout_event(request: Request) -> _LegacyCheckoutEvent
         raise HTTPException(400, "Invalid webhook signature.")
     try:
         event = stripe.Webhook.construct_event(
-            payload=body,
+            payload=body.decode("utf-8"),
             sig_header=sig_header,
             secret=secret,
         )

@@ -666,8 +666,17 @@ def build_router(*, db, get_current_user) -> APIRouter:
             try:
                 # construct_event returns a StripeObject; convert to dict-like
                 # so we can use .get() uniformly with the dev path.
-                ev_obj = stripe.Webhook.construct_event(payload, sig, secret)
-                event = ev_obj.to_dict_recursive() if hasattr(ev_obj, "to_dict_recursive") else dict(ev_obj)
+                ev_obj = stripe.Webhook.construct_event(
+                    payload.decode("utf-8"),
+                    sig,
+                    secret,
+                )
+                if hasattr(ev_obj, "to_dict"):
+                    event = ev_obj.to_dict()
+                elif hasattr(ev_obj, "_to_dict_recursive"):
+                    event = ev_obj._to_dict_recursive()
+                else:
+                    event = dict(ev_obj)
             except Exception as ex:
                 logger.warning("stripe-subscriptions webhook signature invalid: %s", ex)
                 raise HTTPException(400, "Invalid webhook signature.")
