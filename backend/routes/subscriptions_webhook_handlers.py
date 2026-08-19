@@ -359,7 +359,12 @@ async def _mirror_inactive_subscription_to_barn(db, *, barn_id: Optional[str], s
 def _safe_stripe_retrieve(retriever_fn):
     """Wrap a Stripe SDK call so transient failures become _TransientStripeError."""
     try:
-        return retriever_fn()
+        obj = retriever_fn()
+        if hasattr(obj, "to_dict"):
+            return obj.to_dict()
+        if hasattr(obj, "_to_dict_recursive"):
+            return obj._to_dict_recursive()
+        return obj
     except stripe.error.StripeError as ex:
         logger.warning("stripe transient failure: %s", ex)
         raise _TransientStripeError(str(ex))

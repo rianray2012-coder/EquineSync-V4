@@ -868,6 +868,20 @@ def test_non_duplicate_db_insert_failure_raises_502_without_recursion(monkeypatc
     assert "claim insert" in ex.value.detail.lower()
 
 
+def test_safe_stripe_retrieve_converts_stripe_like_objects():
+    """Stripe SDK 15 returns objects that do not support dict-style .get()."""
+    from routes import subscriptions_webhook_handlers as h
+
+    class _StripeLike:
+        def to_dict(self):
+            return {"id": "sub_sdk15", "status": "trialing"}
+
+    out = h._safe_stripe_retrieve(lambda: _StripeLike())
+
+    assert out == {"id": "sub_sdk15", "status": "trialing"}
+    assert out.get("status") == "trialing"
+
+
 def test_stale_processing_lock_with_invalid_iso_does_not_crash(db):
     """Codex round-3 #3: an existing 'processing' row with a non-ISO
     processed_at value must NOT crash the dispatcher; it should be reclaimed.
