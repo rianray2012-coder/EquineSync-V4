@@ -185,10 +185,10 @@ export default function Signup() {
         role: form.role,
         phone: form.phone || null,
         location: form.location || null,
-        // Tier is selected on Step 3 (membership). Always create the account
-        // on the free tier first so Step 3 can call /membership/start-trial
-        // or /membership/checkout without colliding with a pre-committed tier.
-        tier: "free",
+        // Persist the intended plan at account creation so email verification
+        // can return paid self-signups to Membership instead of dropping them
+        // into a completed-service state before Stripe Checkout.
+        tier: tier || "free",
         profile,
         enrollment_path: enrollmentContext?.id || null,
       };

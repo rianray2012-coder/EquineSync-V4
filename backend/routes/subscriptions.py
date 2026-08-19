@@ -25,8 +25,9 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel
 
 from core.billing_provisioning import ADDON_PRICE_CATALOG, PLAN_CATALOG, PLAN_ORDER
+from core.account_context import standalone_owner_membership_from_user
 from core.entitlements import normalize_plan_code
-from core.permissions import require
+from core.permissions import has_capability, require
 from core.subscription_records import sync_account_subscription_records
 from core.subscription_usage import (
     build_addon_suggestions,
@@ -65,6 +66,7 @@ SELF_SERVICE_ROLE_TIERS = {
     "advanced_barn": {"barn_owner", "admin", "barn_manager"},
     "elite_barn": {"barn_owner", "admin", "barn_manager"},
 }
+OWNER_BILLING_TIERS = {"individual_owner", "private_owner_plus"}
 TRIAL_DAYS = 14
 BILLABLE_STAFF_ROLES = ["trainer", "groom", "working_student", "veterinarian", "farrier"]
 BILLABLE_OWNER_MANAGER_ROLES = ["admin", "barn_manager", "barn_owner"]
@@ -121,33 +123,69 @@ def _require_checkout_permission(user: dict, tier: str) -> None:
     require(user, "barn:manage")
 
 
-async def _resolve_barn(db, user) -> dict:
+def _role(user: dict) -> str:
+    return ((user or {}).get("role") or "").strip().lower()
+
+
+def _uses_individual_owner_billing_workspace(user: dict, tier: Optional[str] = None) -> bool:
+    """True when subscription billing should use the owner's personal account.
+
+    Facility-attached owner visibility stays governed elsewhere. This only keeps
+    Stripe customer/subscription records for self-paid owner plans away from the
+    shared facility billing row.
+    """
+    if _role(user) != "horse_owner":
+        return False
+    return tier in OWNER_BILLING_TIERS or tier is None
+
+
+def _billing_workspace_id(user: dict, tier: Optional[str] = None) -> str:
+    if _uses_individual_owner_billing_workspace(user, tier):
+        return standalone_owner_membership_from_user(user)["account_id"]
+    return user.get("barn_id")
+
+
+async def _resolve_barn(db, user, *, tier: Optional[str] = None) -> dict:
     """READ-ONLY barn lookup. Returns a barn row OR a synthesized read-only
     placeholder when no row exists yet. NEVER writes to the DB. Used by
     `/billing/usage` and `/subscriptions/me` per Codex finding #2.
     """
-    barn_id = user.get("barn_id")
+    barn_id = _billing_workspace_id(user, tier)
     if not barn_id:
         raise HTTPException(400, "User is not associated with a barn.")
     barn = await db.barns.find_one({"id": barn_id})
     if barn:
         return barn
     # In-memory placeholder — never persisted from a read path.
-    return {"id": barn_id, "stripe_customer_id": None, "subscription_id": None}
+    placeholder = {"id": barn_id, "stripe_customer_id": None, "subscription_id": None}
+    if _uses_individual_owner_billing_workspace(user, tier):
+        placeholder.update({
+            "account_type": "individual_owner",
+            "billing_scope": "standalone_individual_owner",
+            "owner_user_id": user.get("id"),
+        })
+    return placeholder
 
 
-async def _resolve_or_create_barn(db, user) -> dict:
+async def _resolve_or_create_barn(db, user, *, tier: Optional[str] = None) -> dict:
     """READ-OR-CREATE barn lookup. Used by mutating endpoints (checkout) that
     legitimately need a persisted barn row to attach Stripe customer + sub
     references.
     """
-    barn_id = user.get("barn_id")
+    barn_id = _billing_workspace_id(user, tier)
     if not barn_id:
         raise HTTPException(400, "User is not associated with a barn.")
     barn = await db.barns.find_one({"id": barn_id})
     if barn:
         return barn
     barn = {"id": barn_id, "created_at": _now_iso()}
+    if _uses_individual_owner_billing_workspace(user, tier):
+        barn.update({
+            "account_type": "individual_owner",
+            "billing_scope": "standalone_individual_owner",
+            "owner_user_id": user.get("id"),
+            "name": f"{user.get('full_name') or user.get('email') or 'Horse Owner'} Membership",
+        })
     await db.barns.insert_one(barn)
     return barn
 
@@ -213,6 +251,8 @@ async def _ensure_stripe_customer(db, user, barn) -> str:
         name=user.get("full_name") or user.get("email"),
         metadata={
             "barn_id": barn["id"],
+            "billing_scope": barn.get("billing_scope") or "facility",
+            "account_type": barn.get("account_type") or "facility",
             "owner_user_id": user["id"],
             "equinesync_managed": "true",
         },
@@ -435,7 +475,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         # — no `barn:manage` requirement so marketplace signups can finalize
         # without an admin role.
         if tier in LOCAL_FREE_TIERS:
-            barn = await _resolve_or_create_barn(db, user)
+            barn = await _resolve_or_create_barn(db, user, tier=tier)
             plan = await db.plans.find_one({"tier_code": tier}, {"_id": 0})
             snapshot = (plan or {}).get("feature_limits") or {}
             now = _now_iso()
@@ -498,7 +538,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
 
         # Mutating endpoint — barn row may need to be created so we can
         # attach the Stripe customer + subscription references.
-        barn = await _resolve_or_create_barn(db, user)
+        barn = await _resolve_or_create_barn(db, user, tier=tier)
         customer_id = await _ensure_stripe_customer(db, user, barn)
 
         # 14-day trial only if this barn has no prior subscription.
@@ -508,7 +548,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
             trial_days = None
 
         success_url = f"{normalized_origin}/billing/success?session_id={{CHECKOUT_SESSION_ID}}"
-        cancel_url = f"{normalized_origin}/billing?cancelled=1"
+        cancel_url = f"{normalized_origin}/billing/subscription?cancelled=1"
 
         _stripe_init()
         sub_data = {}
@@ -525,6 +565,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 allow_promotion_codes=True,
                 metadata={
                     "barn_id": barn["id"],
+                    "billing_scope": barn.get("billing_scope") or "facility",
+                    "account_type": barn.get("account_type") or "facility",
                     "owner_user_id": user["id"],
                     "plan_tier_code": tier,
                     "billing_cycle": cycle,
@@ -547,11 +589,23 @@ def build_router(*, db, get_current_user) -> APIRouter:
     # ------------------------------------------------------------------
     @router.post("/subscriptions/customer-portal")
     async def create_customer_portal(body: PortalBody, user=Depends(get_current_user)):
-        require(user, "barn:manage")
         # Read-only resolver — portal does NOT need to mint a new barn row.
         # Existing Stripe customer is a prerequisite; if there's no barn or
         # no customer on it, return a clear 400.
         barn = await _resolve_barn(db, user)
+        sub = None
+        if barn.get("subscription_id"):
+            sub = await db.subscriptions.find_one({"id": barn["subscription_id"]}, {"_id": 0})
+        if not has_capability(user, "barn:manage"):
+            owns_individual_subscription = (
+                _role(user) == "horse_owner"
+                and barn.get("billing_scope") == "standalone_individual_owner"
+                and sub
+                and sub.get("owner_user_id") == user.get("id")
+                and sub.get("plan_tier_code") in OWNER_BILLING_TIERS
+            )
+            if not owns_individual_subscription:
+                require(user, "barn:manage")
         customer_id = barn.get("stripe_customer_id")
         if not customer_id:
             raise HTTPException(400, "No Stripe customer on file. Subscribe to a plan first.")
@@ -564,7 +618,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
         try:
             session = stripe.billing_portal.Session.create(
                 customer=customer_id,
-                return_url=f"{normalized_origin}/billing",
+                return_url=f"{normalized_origin}/billing/subscription",
             )
         except stripe.error.StripeError as ex:
             logger.exception("customer portal create failed")
