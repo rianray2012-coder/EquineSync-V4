@@ -10,6 +10,7 @@ from typing import Any, Dict, Optional
 from starlette.exceptions import HTTPException
 
 from core.account_context import is_facility_context, resolve_active_context
+from core.permissions import PLATFORM_ROLES, platform_role
 
 
 async def resolve_read_facility_barn_id(
@@ -34,6 +35,8 @@ async def resolve_read_facility_barn_id(
 
     barn = await db.barns.find_one({"id": barn_id}, {"_id": 0, "status": 1})
     if barn and (barn.get("status") or "").strip().lower() == "disabled":
+        if platform_role(user) in PLATFORM_ROLES:
+            return barn_id
         raise HTTPException(status_code=403, detail="Facility unavailable")
 
     return barn_id
