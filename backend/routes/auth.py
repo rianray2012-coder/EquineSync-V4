@@ -64,7 +64,33 @@ ROLES = ["admin", "barn_manager", "trainer", "groom", "working_student",
 # (login-with-banner UX) but their role-status is recorded explicitly.
 MARKETPLACE_ROLES = ["horse_owner", "rider", "trainer", "barn_owner", "service_provider"]
 MARKETPLACE_PENDING_REVIEW_ROLES = {"trainer", "barn_owner", "service_provider"}
-MARKETPLACE_TIERS = {"free", "owner_rider", "trainer_provider", "barn_facility"}
+MARKETPLACE_TIERS = {
+    "free",
+    "owner_rider",
+    "trainer_provider",
+    "barn_facility",
+    "individual_owner",
+    "private_owner_plus",
+    "service_provider_free",
+    "service_provider_premium",
+    "starter_barn",
+    "advanced_barn",
+    "elite_barn",
+    "trainer_no_lesson",
+    "trainer_lesson_15",
+    "trainer_lesson_50",
+}
+MODERN_STRIPE_PLAN_TIERS = {
+    "individual_owner",
+    "private_owner_plus",
+    "service_provider_premium",
+    "starter_barn",
+    "advanced_barn",
+    "elite_barn",
+    "trainer_no_lesson",
+    "trainer_lesson_15",
+    "trainer_lesson_50",
+}
 
 
 # ---------------- helpers ----------------
@@ -222,7 +248,7 @@ class MarketplaceSignupBody(BaseModel):
     role: str
     phone: Optional[str] = None
     location: Optional[str] = None
-    tier: Optional[str] = None  # free | owner_rider | trainer_provider | barn_facility
+    tier: Optional[str] = None  # legacy marketplace tier or modern plan code
     profile: Optional[dict] = None  # role-specific skippable fields
 
 
@@ -374,10 +400,15 @@ def build_router(db) -> APIRouter:
             raise HTTPException(400, "Email already registered")
         role_status = "pending_review" if role in MARKETPLACE_PENDING_REVIEW_ROLES else "active"
         chosen_tier = body.tier or "free"
-        is_paid = chosen_tier != "free"
-        # Phase 14 — 7-day trial only when user picks a paid tier ON SIGNUP.
-        # Upgrades from the free tier later in the dashboard pay normally.
-        if is_paid:
+        is_modern_stripe_plan = chosen_tier in MODERN_STRIPE_PLAN_TIERS
+        is_paid = chosen_tier not in {"free", "service_provider_free"}
+        # Legacy Phase 14 marketplace tiers used a local 7-day no-card trial.
+        # Modern subscription plans must complete Stripe Checkout first; Stripe
+        # owns the 14-day trial/payment state after checkout.session.completed.
+        if is_modern_stripe_plan:
+            sub_status = "pending_payment"
+            trial_expires_at = None
+        elif is_paid:
             sub_status = "trialing"
             from datetime import datetime as _dt, timedelta as _td, timezone as _tz
             trial_expires_at = (_dt.now(_tz.utc) + _td(days=7)).isoformat()
@@ -397,9 +428,21 @@ def build_router(db) -> APIRouter:
             "location": body.location,
             "profile": body.profile or {},
             "membership_tier": chosen_tier,
+            "subscription_plan_code": chosen_tier,
+            "subscription_customer_type": (
+                "individual_owner"
+                if chosen_tier in {"individual_owner", "private_owner_plus"}
+                else "facility"
+                if chosen_tier in {"starter_barn", "advanced_barn", "elite_barn"}
+                else "trainer"
+                if chosen_tier.startswith("trainer_")
+                else "service_provider"
+                if chosen_tier.startswith("service_provider")
+                else "legacy_marketplace"
+            ),
             "subscription_status": sub_status,
             "trial_expires_at": trial_expires_at,
-            "trial_used": is_paid,  # one trial per account; upgrades later don't get another.
+            "trial_used": is_paid and not is_modern_stripe_plan,
             "signup_source": "marketplace",
             "created_at": now_iso(),
         }

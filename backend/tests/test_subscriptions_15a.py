@@ -135,6 +135,36 @@ def test_usage_reports_used_and_limits_without_blocking():
 
 # ---------- subscription checkout ----------
 
+
+def test_individual_owner_checkout_uses_personal_billing_workspace():
+    import sys
+    import types
+
+    sys.modules.setdefault(
+        "stripe",
+        types.SimpleNamespace(error=types.SimpleNamespace(StripeError=Exception)),
+    )
+    from routes.subscriptions import (
+        _billing_workspace_id,
+        _uses_individual_owner_billing_workspace,
+    )
+
+    user = {
+        "id": "u_individual_owner",
+        "role": "horse_owner",
+        "barn_id": "primary",
+        "full_name": "Individual Owner",
+    }
+
+    assert _uses_individual_owner_billing_workspace(user, "individual_owner") is True
+    assert _uses_individual_owner_billing_workspace(user, "private_owner_plus") is True
+    assert _uses_individual_owner_billing_workspace(user, "starter_barn") is False
+
+    account_id = _billing_workspace_id(user, "individual_owner")
+    assert account_id.startswith("acct_owner_")
+    assert account_id != "primary"
+
+
 def test_checkout_rejects_enterprise():
     tok, _ = _admin_token()
     h = {"Authorization": f"Bearer {tok}"}

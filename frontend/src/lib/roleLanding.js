@@ -70,6 +70,18 @@ export const isRoleIntakeComplete = (user) =>
   user?.intake_completed === true ||
   user?.profile_completed === true;
 
+export const shouldRouteToSubscriptionBilling = (user) => {
+  const role = String(user?.role || "").toLowerCase();
+  const status = String(user?.subscription_status || "").toLowerCase();
+  const plan = String(user?.subscription_plan_code || user?.membership_tier || "").toLowerCase();
+
+  return (
+    role === "horse_owner" &&
+    ["individual_owner", "private_owner_plus"].includes(plan) &&
+    ["pending_payment", "incomplete", "incomplete_expired", "past_due", "unpaid"].includes(status)
+  );
+};
+
 export const resolveDashboardPath = (user) => {
   if (!user) return "/login";
   if (isPlatformAdmin(user)) return DASHBOARD_PATHS.platformAdmin;
@@ -119,6 +131,8 @@ export const resolvePostLoginPath = (user) => {
   if (isPlatformAdmin(user)) return DASHBOARD_PATHS.platformAdmin;
 
   const role = String(user.role || "").toLowerCase();
+
+  if (shouldRouteToSubscriptionBilling(user)) return "/billing/subscription";
 
   if (SETUP_ELIGIBLE_ROLES.includes(role)) {
     return shouldRouteToFacilitySetup(user) ? SETUP_ROUTE : resolveDashboardPath(user);
