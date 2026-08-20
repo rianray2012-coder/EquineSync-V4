@@ -13,6 +13,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { captureNativeMonitoringProof, sentryEnabled, sentryProofEnabled } from './monitoring';
 
 LogBox.ignoreAllLogs(true);
 
@@ -75,6 +76,7 @@ declare const process: {
 };
 
 const APP_ENV = process.env?.EXPO_PUBLIC_APP_ENV ?? 'native-dev';
+const SENTRY_PROOF_HASH = process.env?.EXPO_PUBLIC_SENTRY_PROOF_HASH ?? '';
 const configuredApiBaseUrl = (process.env?.EXPO_PUBLIC_API_BASE_URL ?? 'http://localhost:8000').replace(/\/$/, '');
 const API_BASE_URL =
   Platform.OS === 'android'
@@ -250,6 +252,7 @@ export default function App() {
   const [session, setSession] = useState<SessionState | null>(null);
   const [accountContext, setAccountContext] = useState<AccountContext | null>(null);
   const [contextStatus, setContextStatus] = useState('Waiting for signed-in session.');
+  const [monitoringProofStatus, setMonitoringProofStatus] = useState('Monitoring proof not sent.');
   const [authStatus, setAuthStatus] = useState('Checking stored session...');
   const [authBusy, setAuthBusy] = useState(false);
   const [restoreBusy, setRestoreBusy] = useState(true);
@@ -411,6 +414,15 @@ export default function App() {
     }
   }, [session]);
 
+  const sendMonitoringProof = useCallback(() => {
+    const result = captureNativeMonitoringProof(SENTRY_PROOF_HASH, Platform.OS);
+    setMonitoringProofStatus(
+      result.sent
+        ? `Monitoring proof sent: ${result.proofHash}`
+        : `Monitoring proof not sent: ${result.reason}`,
+    );
+  }, []);
+
   const statusColor = health.status === 'pass' ? '#1f8a5b' : health.status === 'fail' ? '#b42318' : '#5f6b7a';
   const canSignIn = email.trim().length > 3 && password.length > 0 && !authBusy && !restoreBusy;
   const activeContext = accountContext?.active_context ?? null;
@@ -441,6 +453,29 @@ export default function App() {
               <Text style={styles.secondaryButtonText}>Sign Out</Text>
             </Pressable>
           </View>
+          {sentryProofEnabled ? (
+            <View style={styles.monitoringProof}>
+              <Text style={styles.detail} testID="monitoring-proof-sdk">
+                sentry={sentryEnabled ? 'enabled' : 'disabled'}
+              </Text>
+              <Text style={styles.detail} testID="monitoring-proof-hash">
+                proof={SENTRY_PROOF_HASH || 'missing'}
+              </Text>
+              <Pressable
+                accessibilityLabel="Send Monitoring Proof"
+                accessibilityRole="button"
+                disabled={!sentryEnabled || !SENTRY_PROOF_HASH}
+                onPress={sendMonitoringProof}
+                style={[styles.button, (!sentryEnabled || !SENTRY_PROOF_HASH) && styles.disabledButton]}
+                testID="monitoring-proof-send"
+              >
+                <Text style={styles.buttonText}>Send Monitoring Proof</Text>
+              </Pressable>
+              <Text style={styles.caption} testID="monitoring-proof-result">
+                {monitoringProofStatus}
+              </Text>
+            </View>
+          ) : null}
         </View>
       ) : (
         <View style={styles.authDetails}>
@@ -686,6 +721,15 @@ const styles = StyleSheet.create({
   },
   authDetails: {
     gap: 10,
+  },
+  monitoringProof: {
+    backgroundColor: '#f8faf7',
+    borderColor: '#dfe5dd',
+    borderRadius: 8,
+    borderWidth: 1,
+    gap: 8,
+    marginTop: 4,
+    padding: 10,
   },
   roleDetails: {
     gap: 10,

@@ -25,6 +25,7 @@ const scrub = (value: unknown): unknown => {
 };
 
 export const sentryEnabled = Boolean(process.env.EXPO_PUBLIC_SENTRY_DSN);
+export const sentryProofEnabled = process.env.EXPO_PUBLIC_SENTRY_PROOF_ENABLED === 'true';
 
 if (sentryEnabled) {
   Sentry.init({
@@ -51,4 +52,30 @@ export const wrapWithSentry = <T extends ComponentType<any>>(Component: T): T =>
   }
 
   return Sentry.wrap(Component) as T;
+};
+
+export const captureNativeMonitoringProof = (proofHash?: string, platform?: string) => {
+  if (!sentryEnabled || !sentryProofEnabled) {
+    return {
+      sent: false,
+      reason: sentryEnabled ? 'proof_disabled' : 'sentry_disabled',
+    };
+  }
+
+  const safeProofHash = String(proofHash || process.env.EXPO_PUBLIC_SENTRY_PROOF_HASH || 'missing-proof-hash').slice(0, 64);
+
+  Sentry.withScope((scope) => {
+    scope.setTag('service', 'equinesync-mobile');
+    scope.setTag('proof_hash', safeProofHash);
+    if (platform) {
+      scope.setTag('platform', platform);
+    }
+    scope.setLevel('info');
+    Sentry.captureMessage('EquineSync native Sentry proof event');
+  });
+
+  return {
+    sent: true,
+    proofHash: safeProofHash,
+  };
 };
