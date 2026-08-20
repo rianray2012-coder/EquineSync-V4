@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {
+    "@sentry/react-native": "^8.23.0",
     "expo": "~57.0.13",
     "expo-secure-store": "^57.0.1",
     "expo-status-bar": "~57.0.1",
