@@ -34,6 +34,9 @@ load_dotenv(ROOT_DIR / '.env')
 from core.config import validate_config, get_cors_origins
 validate_config()
 
+from core.monitoring import init_sentry
+init_sentry()
+
 # Shared infrastructure (imported only after .env load + config validation).
 from core.db import db
 from core.auth import get_current_user, create_token, hash_pwd, verify_pwd, require_setup_role

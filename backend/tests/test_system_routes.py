@@ -53,6 +53,7 @@ def test_health_shape_and_dependencies():
     expected = {
         "mailer_configured", "email_verification_enforced",
         "rate_limiting_enabled", "auto_seed_enabled", "seed_route_enabled",
+        "sentry_configured",
     }
     assert set(deps.keys()) == expected
     for k, v in deps.items():
@@ -90,6 +91,7 @@ def test_dependencies_snapshot_booleans_only():
     expected = {
         "mailer_configured", "email_verification_enforced",
         "rate_limiting_enabled", "auto_seed_enabled", "seed_route_enabled",
+        "sentry_configured",
     }
     assert set(snap.keys()) == expected
     for k, v in snap.items():

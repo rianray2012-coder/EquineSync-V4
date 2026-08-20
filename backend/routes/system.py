@@ -19,6 +19,7 @@ from core.config import (
     auto_seed_enabled,
     allow_seed_route,
 )
+from core.monitoring import sentry_configured
 from core import runtime_state
 
 logger = logging.getLogger(__name__)
@@ -41,6 +42,7 @@ def dependencies_snapshot(env=None) -> dict:
         "rate_limiting_enabled": rate_limit_enabled(e),
         "auto_seed_enabled": auto_seed_enabled(e),
         "seed_route_enabled": (not is_production(e)) and allow_seed_route(e),
+        "sentry_configured": sentry_configured(e),
     }
 
 
