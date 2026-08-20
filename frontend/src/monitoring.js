@@ -6,6 +6,7 @@ const release = process.env.REACT_APP_SENTRY_RELEASE;
 const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const sentryEnabled = Boolean(dsn);
+export const sentryProofEnabled = process.env.REACT_APP_SENTRY_PROOF_ENABLED === "true";
 
 const sensitiveKeyPattern = /(authorization|cookie|password|token|secret|api[_-]?key|stripe|docusign|storage)/i;
 
@@ -57,3 +58,21 @@ if (sentryEnabled) {
 }
 
 export const reactRootErrorHandler = sentryEnabled ? Sentry.reactErrorHandler() : undefined;
+
+export const captureWebMonitoringProof = ({ proofHash, triggeredBy = "platform-admin" } = {}) => {
+  if (!sentryEnabled || !sentryProofEnabled) {
+    return { sent: false, reason: sentryEnabled ? "proof_disabled" : "sentry_disabled" };
+  }
+
+  const safeProofHash = String(proofHash || "missing-proof-hash").slice(0, 64);
+
+  Sentry.withScope((scope) => {
+    scope.setTag("service", "equinesync-web");
+    scope.setTag("proof_hash", safeProofHash);
+    scope.setTag("triggered_by", triggeredBy);
+    scope.setLevel("info");
+    Sentry.captureMessage("EquineSync web Sentry proof event");
+  });
+
+  return { sent: true, proofHash: safeProofHash };
+};

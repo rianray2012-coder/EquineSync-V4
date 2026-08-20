@@ -102,6 +102,7 @@ import AdminReports from "./pages/admin/AdminReports";
 import AdminIntegrations from "./pages/admin/AdminIntegrations";
 import AdminSettings from "./pages/admin/AdminSettings";
 import AdminLogin from "./pages/admin/AdminLogin";
+import AdminMonitoringProof from "./pages/admin/AdminMonitoringProof";
 
 const Protected = ({ children }) => {
   const { user, loading } = useAuth();
@@ -258,6 +259,7 @@ function App() {
               <Route path="integrations" element={<AdminIntegrations />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="audit-logs" element={<AdminAuditLogs />} />
+              <Route path="monitoring-proof" element={<AdminMonitoringProof />} />
             </Route>
             {/* Admin-7B — dedicated admin login route. Uses existing
                 /api/auth/login under the hood; no separate admin auth
