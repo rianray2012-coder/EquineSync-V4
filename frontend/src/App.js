@@ -32,6 +32,7 @@ import Onboarding from "./pages/Onboarding";
 import AcceptInvite from "./pages/AcceptInvite";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
+import MonitoringProof from "./pages/MonitoringProof";
 import Reports from "./pages/Reports";
 import ReviewQueue from "./pages/ReviewQueue";
 import AdminReviewQueue from "./pages/AdminReviewQueue";
@@ -227,6 +228,7 @@ function App() {
             <Route path="/accept-invite" element={<AcceptInvite />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/monitoring-proof" element={<MonitoringProof />} />
             <Route
               path="/owner/horses/:horseId"
               element={
