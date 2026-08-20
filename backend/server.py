@@ -36,7 +36,8 @@ validate_config()
 
 # Shared infrastructure (imported only after .env load + config validation).
 from core.db import db
-from core.auth import get_current_user, create_token, hash_pwd, verify_pwd, require_setup_role
+import core.auth as _core_auth
+from core.auth import get_current_user, create_token, hash_pwd, require_setup_role
 from core.helpers import (
     new_id, clean, list_collection, _user_safe, _client_meta,
 )
@@ -276,7 +277,7 @@ api_router.include_router(build_invites_router(
     base_url_from_request=_base_url,
     create_token=create_token,
     hash_pwd=hash_pwd,
-    verify_pwd=verify_pwd,
+    verify_pwd=_core_auth.verify_pwd,
     user_safe=_user_safe,
     client_meta=_client_meta,
     issue_refresh_token=issue_refresh_token,
@@ -296,7 +297,7 @@ api_router.include_router(build_invites_router(
     base_url_from_request=_base_url,
     create_token=create_token,
     hash_pwd=hash_pwd,
-    verify_pwd=verify_pwd,
+    verify_pwd=_core_auth.verify_pwd,
     user_safe=_user_safe,
     client_meta=_client_meta,
     issue_refresh_token=issue_refresh_token,
