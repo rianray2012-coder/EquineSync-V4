@@ -84,6 +84,9 @@ memory/test_credentials.md
 
 # Mobile development
 android-sdk/
+mobile/dist-sentry-*/
+.codex-generated/
+
 # Environment and credential files
 credentials.json
 *.pem
