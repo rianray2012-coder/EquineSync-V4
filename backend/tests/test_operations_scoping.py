@@ -62,13 +62,13 @@ LIST_CASES = [
     ("/incidents", "incidents", {"type": "injury", "title": "X", "occurred_at": _iso()}),
 ]
 
-# (create endpoint, payload, collection)
+# (create endpoint, payload key, collection)
 POST_CASES = [
-    ("/lessons", {"rider_id": "rX", "start_time": "2026-01-01T10:00:00"}, "lessons"),
-    ("/training", {"horse_id": "hX", "date": "2026-01-01"}, "training"),
-    ("/messages", {"subject": "Hello", "body": "Body"}, "messages"),
-    ("/service-requests", {"horse_id": "hX", "type": "farrier"}, "service_requests"),
-    ("/incidents", {"type": "injury", "title": "Cut", "description": "minor", "occurred_at": "2026-01-01T10:00:00"}, "incidents"),
+    ("/lessons", "lesson", "lessons"),
+    ("/training", "training", "training"),
+    ("/messages", "message", "messages"),
+    ("/service-requests", "service_request", "service_requests"),
+    ("/incidents", "incident", "incidents"),
 ]
 
 
@@ -87,10 +87,42 @@ def test_other_barn_doc_excluded_from_ops_list(endpoint, collection, fields):
         db[collection].delete_many({"id": doc_id})
 
 
-@pytest.mark.parametrize("endpoint,payload,collection", POST_CASES)
-def test_ops_create_stamps_primary_barn(endpoint, payload, collection):
+def _insert_primary_horse(db):
+    hid = "primaryhorse_" + uuid.uuid4().hex
+    db.horses.insert_one({"id": hid, "barn_id": "primary", "name": "Primary Horse", "created_at": _iso()})
+    return hid
+
+
+def _insert_primary_rider(db):
+    rid = "primaryrider_" + uuid.uuid4().hex
+    db.riders.insert_one({
+        "id": rid,
+        "barn_id": "primary",
+        "full_name": "Primary Rider",
+        "birthdate": "1990-01-01",
+        "minor_status": "adult",
+        "created_at": _iso(),
+    })
+    return rid
+
+
+def _payload_for_create_case(db, key):
+    if key == "lesson":
+        return {"rider_id": _insert_primary_rider(db), "start_time": "2026-01-01T10:00:00"}
+    if key == "training":
+        return {"horse_id": _insert_primary_horse(db), "date": "2026-01-01"}
+    if key == "service_request":
+        return {"horse_id": _insert_primary_horse(db), "type": "farrier"}
+    if key == "incident":
+        return {"type": "injury", "title": "Cut", "description": "minor", "occurred_at": "2026-01-01T10:00:00"}
+    return {"subject": "Hello", "body": "Body"}
+
+
+@pytest.mark.parametrize("endpoint,payload_key,collection", POST_CASES)
+def test_ops_create_stamps_primary_barn(endpoint, payload_key, collection):
     db = _mongo()
     H = _admin_headers()
+    payload = _payload_for_create_case(db, payload_key)
     r = requests.post(f"{API}{endpoint}", headers=H, json=payload, timeout=30)
     assert r.status_code == 200, r.text
     doc = r.json()
@@ -98,6 +130,8 @@ def test_ops_create_stamps_primary_barn(endpoint, payload, collection):
         assert doc.get("barn_id") == "primary", doc
     finally:
         db[collection].delete_many({"id": doc.get("id")})
+        db.horses.delete_many({"id": payload.get("horse_id")})
+        db.riders.delete_many({"id": payload.get("rider_id")})
 
 
 def _insert_other_sr(db):
@@ -139,17 +173,13 @@ def test_lesson_cross_barn_rider_name_not_leaked():
     H = _admin_headers()
     rid = "otherrider_" + uuid.uuid4().hex
     db.riders.insert_one({"id": rid, "barn_id": "other", "full_name": "Ghost Rider", "created_at": _iso()})
-    created = None
     try:
         r = requests.post(f"{API}/lessons", headers=H,
                           json={"rider_id": rid, "start_time": "2026-01-01T10:00:00"}, timeout=30)
-        assert r.status_code == 200, r.text
-        created = r.json()
-        assert created.get("rider_name") is None, created
+        assert r.status_code == 404, r.text
+        assert r.json()["detail"] == "Rider not found"
     finally:
         db.riders.delete_many({"id": rid})
-        if created:
-            db.lessons.delete_many({"id": created.get("id")})
 
 
 def test_incident_cross_barn_horse_name_not_leaked():
@@ -175,18 +205,19 @@ def test_incident_cross_barn_horse_name_not_leaked():
 def test_training_cross_barn_trainer_name_not_leaked():
     db = _mongo()
     H = _admin_headers()
+    hid = _insert_primary_horse(db)
     uid = "otheruser_" + uuid.uuid4().hex
     db.users.insert_one({"id": uid, "barn_id": "other", "full_name": "Ghost Trainer",
                          "role": "trainer", "email": f"{uid}@other.test", "created_at": _iso()})
     created = None
     try:
         r = requests.post(f"{API}/training", headers=H, json={
-            "horse_id": "hX", "trainer_id": uid, "date": "2026-01-01",
+            "horse_id": hid, "trainer_id": uid, "date": "2026-01-01",
         }, timeout=30)
-        assert r.status_code == 200, r.text
-        created = r.json()
-        assert created.get("trainer_name") is None, created
+        assert r.status_code == 422, r.text
+        assert r.json()["detail"] == "Unknown trainer"
     finally:
+        db.horses.delete_many({"id": hid})
         db.users.delete_many({"id": uid})
         if created:
             db.training.delete_many({"id": created.get("id")})

@@ -121,6 +121,14 @@ def _seed_barn(world, headers, label):
                                        "email": f"{label}owner_{suffix}@ex.com"})
     ids["owner"] = track("owners", owner["id"])
 
+    rider = _post(headers, "/riders", {
+        "full_name": f"{label}-Rider-{suffix}",
+        "email": f"{label}rider_{suffix}@ex.com",
+        "birthdate": "1990-01-01",
+        "minor_status": "adult",
+    })
+    ids["rider"] = track("riders", rider["id"])
+
     med = _post(headers, "/medications", {"horse_id": ids["horse"], "name": "Bute",
                                           "dosage": "1g", "frequency": "daily"})
     ids["medication"] = track("medications", med["id"])
@@ -135,7 +143,7 @@ def _seed_barn(world, headers, label):
     well = _post(headers, "/wellness", {"horse_id": ids["horse"]})
     ids["wellness"] = track("wellness", well["id"])
 
-    lesson = _post(headers, "/lessons", {"rider_id": "none", "horse_id": ids["horse"],
+    lesson = _post(headers, "/lessons", {"rider_id": ids["rider"], "horse_id": ids["horse"],
                                          "start_time": _today_at(10)})
     ids["lesson"] = track("lessons", lesson["id"])
 
