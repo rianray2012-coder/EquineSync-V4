@@ -128,6 +128,8 @@ export default function AdminSupportDrawer({ ticketRef, open, onClose, onMutated
                 <div className="rounded-lg bg-equinesync-frost p-3 text-[13px] text-equinesync-graphite space-y-1">
                   <div><span className="text-equinesync-graphite/55">From:</span> {ticket.submitter_email || ticket.submitter_user_id || "—"}</div>
                   <div><span className="text-equinesync-graphite/55">Channel:</span> {ticket.channel || "—"}</div>
+                  <div><span className="text-equinesync-graphite/55">Category:</span> {ticket.category || "support"}</div>
+                  <div><span className="text-equinesync-graphite/55">Severity:</span> {ticket.severity || "medium"}</div>
                   <div><span className="text-equinesync-graphite/55">Status:</span> <UserStatusBadge value={ticket.status} /></div>
                   <div><span className="text-equinesync-graphite/55">Assignee:</span> {ticket.assignee_email || "Unassigned"}</div>
                   <div><span className="text-equinesync-graphite/55">Updated:</span> {formatTs(ticket.updated_at)}</div>

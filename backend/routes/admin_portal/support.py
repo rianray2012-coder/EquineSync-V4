@@ -81,6 +81,8 @@ _SUPPORT_NOTE_MAX_LEN = 4096
 _SUPPORT_SAFE_FIELDS = {
     "_id": 1, "id": 1,
     "barn_id": 1, "subject": 1, "description": 1, "channel": 1,
+    "source": 1, "category": 1, "severity": 1, "page_url": 1,
+    "device_context": 1, "preferred_contact": 1,
     "submitter_user_id": 1, "submitter_email": 1,
     "status": 1, "assignee_user_id": 1, "assignee_email": 1,
     "internal_notes": 1, "created_at": 1, "updated_at": 1,
@@ -138,6 +140,7 @@ def register(router, ctx) -> None:
         # are intentionally OMITTED here; they only surface in detail.
         _ROSTER_FIELDS = {
             "_id": 1, "id": 1, "barn_id": 1, "subject": 1, "channel": 1,
+            "source": 1, "category": 1, "severity": 1,
             "submitter_user_id": 1, "submitter_email": 1,
             "status": 1, "assignee_user_id": 1, "assignee_email": 1,
             "created_at": 1, "updated_at": 1, "resolved_at": 1,
@@ -312,4 +315,3 @@ def register(router, ctx) -> None:
             metadata={"note_present": True},
         )
         return {"ok": True, "note_id": note["id"]}
-

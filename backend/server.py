@@ -97,6 +97,7 @@ from routes.trainer_operating_center import build_router as build_trainer_operat
 from routes.service_provider_center import build_router as build_service_provider_center_router
 from routes.manager_intake import build_router as build_manager_intake_router
 from routes.staff_intake import build_router as build_staff_intake_router
+from routes.support import build_router as build_support_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -420,6 +421,12 @@ api_router.include_router(build_admin_router(
 # Admin Portal — platform-level role foundation (Admin-1).
 from routes.admin_portal import build_router as build_admin_portal_router  # noqa: E402
 api_router.include_router(build_admin_portal_router(
+    db=db,
+    get_current_user=get_current_user,
+))
+
+# Support intake — authenticated pilot feedback/bug reports.
+api_router.include_router(build_support_router(
     db=db,
     get_current_user=get_current_user,
 ))
