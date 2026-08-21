@@ -1,7 +1,13 @@
 import pytest
 from pydantic import ValidationError
 
-from notifications import PUSH_PROOF_BODY, PushTokenIn, _redact_token_hash, _token_hash
+from notifications import (
+    PUSH_PROOF_BODY,
+    PushTokenIn,
+    _expo_ticket_diagnostics,
+    _redact_token_hash,
+    _token_hash,
+)
 
 
 def test_expo_push_token_accepts_expo_token_and_redacts_hash():
@@ -43,3 +49,23 @@ def test_founder_push_proof_copy_stays_generic():
     for fragment in forbidden_fragments:
         assert fragment not in lowered
     assert "open EquineSync".lower() in lowered
+
+
+def test_expo_ticket_diagnostics_keeps_only_safe_error_fields():
+    ticket = {
+        "status": "error",
+        "message": "DeviceNotRegistered",
+        "details": {
+            "error": "DeviceNotRegistered",
+            "expoPushToken": "ExpoPushToken[secret]",
+        },
+        "to": "ExpoPushToken[secret]",
+    }
+
+    diagnostics = _expo_ticket_diagnostics(ticket)
+
+    assert diagnostics == {
+        "ticket_error": "DeviceNotRegistered",
+        "ticket_details_error": "DeviceNotRegistered",
+    }
+    assert "ExpoPushToken[secret]" not in repr(diagnostics)
