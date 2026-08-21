@@ -1,0 +1,13 @@
+appId: com.equinesync.app
+---
+- launchApp
+- scrollUntilVisible:
+    element:
+      id: "monitoring-proof-hash"
+    direction: DOWN
+    timeout: 20000
+- assertVisible: "proof=7c8391bd563b07f1"
+- tapOn:
+    id: "monitoring-proof-send"
+- assertVisible:
+    id: "monitoring-proof-result"
