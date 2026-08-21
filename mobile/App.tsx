@@ -1,3 +1,6 @@
+import Constants from 'expo-constants';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
 import * as SecureStore from 'expo-secure-store';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -16,6 +19,15 @@ import {
 import { captureNativeMonitoringProof, sentryEnabled, sentryProofEnabled } from './monitoring';
 
 LogBox.ignoreAllLogs(true);
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowBanner: true,
+    shouldShowList: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 type HealthState =
   | { status: 'checking' }
@@ -71,6 +83,22 @@ type AuthResponse = {
   user: SessionUser;
 };
 
+type PushRegistrationResponse = {
+  ok: boolean;
+  provider: string;
+  platform: string;
+  enabled: boolean;
+  token_hash: string;
+};
+
+type PushProofResponse = {
+  ok: boolean;
+  provider: string;
+  purpose: string;
+  token_hash: string;
+  message: string;
+};
+
 declare const process: {
   env?: Record<string, string | undefined>;
 };
@@ -83,8 +111,13 @@ const API_BASE_URL =
     ? configuredApiBaseUrl.replace('localhost', '10.0.2.2').replace('127.0.0.1', '10.0.2.2')
     : configuredApiBaseUrl;
 const SESSION_KEY = 'equinesync.native.session.v1';
+const PUSH_DEVICE_KEY = 'equinesync.native.push.device.v1';
 const SERVICE_PROVIDER_ROLES = ['service_provider', 'veterinarian', 'farrier'];
 const STAFF_ROLES = ['groom', 'working_student'];
+const EAS_PROJECT_ID =
+  ((Constants.expoConfig?.extra as { eas?: { projectId?: string } } | undefined)?.eas?.projectId
+    ?? Constants.easConfig?.projectId
+    ?? '').trim();
 
 type RoleHome = {
   key: string;
@@ -245,6 +278,14 @@ async function clearStoredSession() {
   await SecureStore.deleteItemAsync(SESSION_KEY);
 }
 
+async function getOrCreatePushDeviceId() {
+  const stored = await SecureStore.getItemAsync(PUSH_DEVICE_KEY);
+  if (stored) return stored;
+  const next = `${Platform.OS}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  await SecureStore.setItemAsync(PUSH_DEVICE_KEY, next);
+  return next;
+}
+
 export default function App() {
   const [health, setHealth] = useState<HealthState>({ status: 'checking' });
   const [email, setEmail] = useState('');
@@ -253,6 +294,9 @@ export default function App() {
   const [accountContext, setAccountContext] = useState<AccountContext | null>(null);
   const [contextStatus, setContextStatus] = useState('Waiting for signed-in session.');
   const [monitoringProofStatus, setMonitoringProofStatus] = useState('Monitoring proof not sent.');
+  const [pushStatus, setPushStatus] = useState('Push proof not started.');
+  const [pushTokenHash, setPushTokenHash] = useState('');
+  const [pushBusy, setPushBusy] = useState(false);
   const [authStatus, setAuthStatus] = useState('Checking stored session...');
   const [authBusy, setAuthBusy] = useState(false);
   const [restoreBusy, setRestoreBusy] = useState(true);
@@ -423,6 +467,90 @@ export default function App() {
     );
   }, []);
 
+  const registerPushNotifications = useCallback(async () => {
+    if (!session?.token) return;
+    setPushBusy(true);
+    setPushStatus('Requesting notification permission...');
+    try {
+      if (!Device.isDevice) {
+        throw new Error('Physical device required for push proof.');
+      }
+      if (!EAS_PROJECT_ID) {
+        throw new Error('EAS project ID missing from app config.');
+      }
+      if (Platform.OS === 'android') {
+        await Notifications.setNotificationChannelAsync('default', {
+          name: 'EquineSync',
+          importance: Notifications.AndroidImportance.DEFAULT,
+        });
+      }
+
+      const currentPermission = await Notifications.getPermissionsAsync();
+      const finalPermission =
+        currentPermission.status === 'granted'
+          ? currentPermission
+          : await Notifications.requestPermissionsAsync();
+      if (finalPermission.status !== 'granted') {
+        throw new Error(`Notification permission ${finalPermission.status}.`);
+      }
+
+      const token = await Notifications.getExpoPushTokenAsync({ projectId: EAS_PROJECT_ID });
+      const deviceId = await getOrCreatePushDeviceId();
+      const response = await apiRequest<PushRegistrationResponse>('/api/notifications/push-token', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${session.token}` },
+        body: JSON.stringify({
+          expo_push_token: token.data,
+          platform: Platform.OS,
+          device_id: deviceId,
+          permission_status: finalPermission.status,
+          enabled: true,
+        }),
+      });
+      setPushTokenHash(response.token_hash);
+      setPushStatus(`Expo push token registered: ${response.token_hash}`);
+    } catch (error) {
+      setPushStatus(`Push registration failed: ${friendlyError(error)}`);
+    } finally {
+      setPushBusy(false);
+    }
+  }, [session]);
+
+  const disablePushNotifications = useCallback(async () => {
+    if (!session?.token) return;
+    setPushBusy(true);
+    setPushStatus('Disabling push tokens...');
+    try {
+      const response = await apiRequest<{ ok: boolean; disabled_count: number }>('/api/notifications/push-token/disable', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${session.token}` },
+      });
+      setPushStatus(`Push disabled: ${response.disabled_count} token(s).`);
+    } catch (error) {
+      setPushStatus(`Push disable failed: ${friendlyError(error)}`);
+    } finally {
+      setPushBusy(false);
+    }
+  }, [session]);
+
+  const sendPushProof = useCallback(async () => {
+    if (!session?.token) return;
+    setPushBusy(true);
+    setPushStatus('Sending Founder-only push proof...');
+    try {
+      const response = await apiRequest<PushProofResponse>('/api/notifications/push-proof/send-me', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${session.token}` },
+      });
+      setPushTokenHash(response.token_hash);
+      setPushStatus(`Push proof sent: ${response.message}`);
+    } catch (error) {
+      setPushStatus(`Push proof failed: ${friendlyError(error)}`);
+    } finally {
+      setPushBusy(false);
+    }
+  }, [session]);
+
   const statusColor = health.status === 'pass' ? '#1f8a5b' : health.status === 'fail' ? '#b42318' : '#5f6b7a';
   const canSignIn = email.trim().length > 3 && password.length > 0 && !authBusy && !restoreBusy;
   const activeContext = accountContext?.active_context ?? null;
@@ -555,6 +683,63 @@ export default function App() {
           </View>
 
           {session ? authPanel : null}
+
+          {session ? (
+            <View style={styles.panel} testID="push-proof-panel">
+              <View style={styles.statusHeader}>
+                <Text style={styles.panelLabel}>Push Notifications</Text>
+                {pushBusy ? <ActivityIndicator /> : <View style={[styles.statusDot, { backgroundColor: pushTokenHash ? '#1f8a5b' : '#9aa3a0' }]} />}
+              </View>
+              <Text style={styles.healthMessage}>Expo Push Proof</Text>
+              <Text style={styles.detail} testID="push-proof-provider">
+                provider=expo
+              </Text>
+              <Text style={styles.detail} testID="push-proof-platform">
+                platform={Platform.OS}
+              </Text>
+              <Text style={styles.detail} testID="push-proof-policy">
+                policy=generic_previews_only
+              </Text>
+              <Text style={styles.detail} testID="push-proof-token-hash">
+                token_hash={pushTokenHash || 'not_registered'}
+              </Text>
+              <View style={styles.buttonRow}>
+                <Pressable
+                  accessibilityLabel="Register Push Token"
+                  accessibilityRole="button"
+                  disabled={pushBusy}
+                  onPress={registerPushNotifications}
+                  style={[styles.button, pushBusy && styles.disabledButton]}
+                  testID="push-register-button"
+                >
+                  <Text style={styles.buttonText}>Register Push</Text>
+                </Pressable>
+                <Pressable
+                  accessibilityLabel="Send Push Proof"
+                  accessibilityRole="button"
+                  disabled={pushBusy || !pushTokenHash}
+                  onPress={sendPushProof}
+                  style={[styles.button, (pushBusy || !pushTokenHash) && styles.disabledButton]}
+                  testID="push-proof-send-button"
+                >
+                  <Text style={styles.buttonText}>Send Proof</Text>
+                </Pressable>
+              </View>
+              <Pressable
+                accessibilityLabel="Disable Push Notifications"
+                accessibilityRole="button"
+                disabled={pushBusy}
+                onPress={disablePushNotifications}
+                style={[styles.button, styles.secondaryButton, pushBusy && styles.disabledButton]}
+                testID="push-disable-button"
+              >
+                <Text style={styles.secondaryButtonText}>Disable Push</Text>
+              </Pressable>
+              <Text style={styles.caption} testID="push-proof-result">
+                {pushStatus}
+              </Text>
+            </View>
+          ) : null}
 
           <View style={styles.panel}>
             <View style={styles.statusHeader}>
