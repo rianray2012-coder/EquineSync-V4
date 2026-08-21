@@ -121,6 +121,19 @@ def _redact_token_hash(token: str) -> str:
     return _token_hash(token)[:12]
 
 
+def _expo_ticket_diagnostics(ticket: object) -> dict:
+    if not isinstance(ticket, dict):
+        return {}
+
+    details = ticket.get("details")
+    diagnostics = {
+        "ticket_error": ticket.get("message") or ticket.get("error"),
+    }
+    if isinstance(details, dict):
+        diagnostics["ticket_details_error"] = details.get("error")
+    return {key: value for key, value in diagnostics.items() if value}
+
+
 def _rule_matches(rules: Optional[dict], event_type: str, category: Optional[str]) -> bool:
     if not rules:
         return False
@@ -500,6 +513,7 @@ def build_router(db, get_current_user) -> APIRouter:
                     "provider_response_shape": "json" if provider_payload else "non_json",
                     "ticket_status": ticket_status,
                     "ticket_id_present": bool(isinstance(ticket, dict) and ticket.get("id")),
+                    **_expo_ticket_diagnostics(ticket),
                 }
             )
             await db[PUSH_SEND_COLLECTION].insert_one(record)
