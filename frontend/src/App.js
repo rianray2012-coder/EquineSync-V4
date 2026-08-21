@@ -70,6 +70,7 @@ import MobileReadiness from "./pages/MobileReadiness";
 import AuditLog from "./pages/AuditLog";
 import SubscriptionBilling from "./pages/SubscriptionBilling";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
+import Support from "./pages/Support";
 import RoleHome from "./pages/RoleHome";
 import RoleIntake from "./pages/RoleIntake";
 import { resolvePostLoginPath, SETUP_ROUTE } from "./lib/roleLanding";
@@ -350,6 +351,7 @@ function App() {
               <Route path="/reports" element={permit(<Reports />, ROLE_GROUPS.admin)} />
               <Route path="/owner-portal" element={permit(<OwnerPortal />, ROLE_GROUPS.ownerPortal)} />
               <Route path="/settings" element={permit(<Settings />, BN17D_DIRECT_ROUTE_ROLES.accountSettings)} />
+              <Route path="/support" element={<Support />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

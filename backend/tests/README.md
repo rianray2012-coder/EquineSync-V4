@@ -23,7 +23,7 @@ baseline from commit `614768d0afe01591c4f044fe6840e5317e6cda56`:
 | --- | ---: |
 | Total collected | 2286 |
 | Selected non-live | 1080 |
-| Deselected live | 1206 |
+| Deselected live | 1207 |
 | Passed | 919 |
 | Failed | 158 |
 | Errored | 3 |

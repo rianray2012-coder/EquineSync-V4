@@ -43,6 +43,7 @@ export const FACILITY_ADMIN_NAVIGATION = [
       item("/reports", "Reports", "reports"),
       item("/settings", "Facility Settings", "settings"),
       item("/messaging", "Messages", "messages"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -67,6 +68,7 @@ export const MANAGER_NAVIGATION = [
       item("/reports", "Reports", "reports"),
       item("/messaging", "Messages", "messages"),
       item("/settings", "Settings", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -90,6 +92,7 @@ export const TRAINER_NAVIGATION = [
       item("/reports", "Reports", "reports"),
       item("/messaging", "Messages", "messages"),
       item("/settings", "Settings", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -106,6 +109,7 @@ export const BARN_OWNER_NAVIGATION = [
       item("/today", "Tasks", "tasks"),
       item("/messaging", "Messages", "messages"),
       item("/settings", "Profile", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -122,6 +126,7 @@ export const STAFF_NAVIGATION = [
       item("/messaging", "Messages", "messages"),
       item("/today", "Shift Notes", "documents"),
       item("/settings", "Profile", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -139,6 +144,7 @@ export const OWNER_NAVIGATION = [
       item(dashboardFor("owner"), "Billing", "billing"),
       item(dashboardFor("owner"), "Documents", "documents"),
       item("/settings", "Profile", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -156,6 +162,7 @@ export const INDIVIDUAL_OWNER_NAVIGATION = [
       item("/billing/subscription", "Membership", "billing"),
       item(dashboardFor("owner"), "Documents", "documents"),
       item("/settings", "Profile", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -172,6 +179,7 @@ export const GUARDIAN_NAVIGATION = [
       item(dashboardFor("guardian"), "Requests", "requests"),
       item(dashboardFor("guardian"), "Emergency Info", "alert"),
       item("/settings", "Profile", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -189,6 +197,7 @@ export const RIDER_NAVIGATION = [
       item(dashboardFor("rider"), "Barn Announcements", "messages"),
       item(dashboardFor("rider"), "Documents", "documents"),
       item("/settings", "Profile", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -199,6 +208,7 @@ export const DEFAULT_NAVIGATION = [
     items: [
       item("/dashboard", "Dashboard", "dashboard", { end: true }),
       item("/settings", "Profile", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];
@@ -211,6 +221,7 @@ export const SERVICE_PROVIDER_NAVIGATION = [
       item(DASHBOARD_PATHS.serviceProvider, "Appointments", "calendar"),
       item(DASHBOARD_PATHS.serviceProvider, "Shared Horses", "horse"),
       item("/settings", "Profile", "settings"),
+      item("/support", "Support", "support"),
     ],
   },
 ];

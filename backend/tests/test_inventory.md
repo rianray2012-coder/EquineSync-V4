@@ -14,7 +14,7 @@ Generated during PR #3 CI methodology hardening.
 
 | Metric | Count |
 | --- | ---: |
-| Explicit live tests | 1206 |
+| Explicit live tests | 1207 |
 | CI-runnable not-live tests | 1080 |
 | Live-only modules | 43 |
 | Mixed modules | 28 |
@@ -41,7 +41,7 @@ the PR body and in the uploaded Actions artifacts.
 | Errored | 3 |
 | Skipped | 0 |
 | Selected | 1080 |
-| Deselected live | 1206 |
+| Deselected live | 1207 |
 
 Artifact-related tests were inventoried, not remediated. No failing tests were
 deleted, weakened, blanket-skipped, or blanket-`xfail`ed.
@@ -58,7 +58,7 @@ from commit `614768d0afe01591c4f044fe6840e5317e6cda56`.
 | Errored | 3 |
 | Skipped | 0 |
 | Selected | 1080 |
-| Deselected live | 1206 |
+| Deselected live | 1207 |
 
 The backend CI job is now a known-failure non-regression gate. It may pass with
 the reviewed failures still present, but it fails on any new failing/erroring
