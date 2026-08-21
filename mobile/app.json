@@ -26,6 +26,16 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "plugins": [
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "organization": "equine-sync",
+          "project": "equinesync-mobile"
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "8a336dce-eae5-4ba4-a02a-a31b0776c4ad"
