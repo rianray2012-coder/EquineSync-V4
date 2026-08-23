@@ -14,6 +14,8 @@ for `db.task_events.watch()` without touching the route layer.
 from __future__ import annotations
 
 import asyncio
+import base64
+import hmac
 import hashlib
 import logging
 import os
@@ -21,7 +23,7 @@ import re
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 
-from fastapi import APIRouter, Depends, Form, HTTPException, Response
+from fastapi import APIRouter, Depends, Form, HTTPException, Request, Response
 from pydantic import BaseModel, Field, field_validator
 import httpx
 
@@ -230,6 +232,43 @@ def _twilio_basic_auth() -> tuple[str, str]:
     if api_key and api_secret:
         return api_key, api_secret
     return os.environ["TWILIO_ACCOUNT_SID"], os.environ["TWILIO_AUTH_TOKEN"]
+
+
+def _twilio_signature_validation_enabled() -> bool:
+    return os.environ.get("TWILIO_VALIDATE_WEBHOOK_SIGNATURES", "false").lower() == "true"
+
+
+def _twilio_signature_url(request: Request) -> str:
+    configured_base = os.environ.get("TWILIO_WEBHOOK_BASE_URL")
+    if configured_base:
+        return f"{configured_base.rstrip('/')}{request.url.path}"
+    return str(request.url)
+
+
+def _expected_twilio_signature(url: str, params: dict[str, str], auth_token: str) -> str:
+    data = url + "".join(f"{key}{params[key]}" for key in sorted(params))
+    digest = hmac.new(
+        auth_token.encode("utf-8"),
+        data.encode("utf-8"),
+        hashlib.sha1,
+    ).digest()
+    return base64.b64encode(digest).decode("utf-8")
+
+
+def _validate_twilio_signature(request: Request, params: dict[str, str]) -> None:
+    if not _twilio_signature_validation_enabled():
+        return
+    auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
+    if not auth_token:
+        raise HTTPException(503, "Twilio webhook signature validation is not configured")
+    provided = request.headers.get("X-Twilio-Signature", "")
+    expected = _expected_twilio_signature(
+        _twilio_signature_url(request),
+        {key: value for key, value in params.items() if value is not None},
+        auth_token,
+    )
+    if not hmac.compare_digest(provided, expected):
+        raise HTTPException(403, "Invalid Twilio webhook signature")
 
 
 def _sms_send_enabled() -> bool:
@@ -612,10 +651,15 @@ def build_router(db, get_current_user) -> APIRouter:
 
     @router.post("/notifications/sms/inbound")
     async def sms_inbound(
+        request: Request,
         From: str = Form(...),  # noqa: N803 - Twilio form key
         Body: str = Form(""),  # noqa: N803 - Twilio form key
         MessageSid: str = Form(""),  # noqa: N803 - Twilio form key
     ):
+        _validate_twilio_signature(
+            request,
+            {"From": From, "Body": Body, "MessageSid": MessageSid},
+        )
         phone_e164 = _normalize_phone(From)
         body = (Body or "").strip().upper()
         now = _iso(_now())
@@ -675,11 +719,21 @@ def build_router(db, get_current_user) -> APIRouter:
 
     @router.post("/notifications/sms/status")
     async def sms_status_callback(
+        request: Request,
         MessageSid: str = Form(""),  # noqa: N803 - Twilio form key
         MessageStatus: str = Form(""),  # noqa: N803 - Twilio form key
         To: str = Form(""),  # noqa: N803 - Twilio form key
         ErrorCode: str = Form(""),  # noqa: N803 - Twilio form key
     ):
+        _validate_twilio_signature(
+            request,
+            {
+                "MessageSid": MessageSid,
+                "MessageStatus": MessageStatus,
+                "To": To,
+                "ErrorCode": ErrorCode,
+            },
+        )
         phone_e164 = _normalize_phone(To) if To else None
         await db.sms_delivery_events.insert_one({
             "id": _new_id(),

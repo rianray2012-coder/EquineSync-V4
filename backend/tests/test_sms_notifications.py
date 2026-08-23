@@ -7,6 +7,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from notifications import (
+    _expected_twilio_signature,
     _hash_value,
     _is_sms_configured,
     _safe_sms_body,
@@ -134,6 +135,43 @@ def test_twilio_help_keyword_returns_branded_help_message():
     assert response.status_code == 200
     assert "EquineSync: For help" in response.text
     assert "Reply STOP" in response.text
+
+
+def test_twilio_inbound_rejects_bad_signature_when_validation_enabled(monkeypatch):
+    monkeypatch.setenv("TWILIO_VALIDATE_WEBHOOK_SIGNATURES", "true")
+    monkeypatch.setenv("TWILIO_AUTH_TOKEN", "test-token")
+    monkeypatch.setenv("TWILIO_WEBHOOK_BASE_URL", "http://testserver")
+    client, _db = _client()
+
+    response = client.post(
+        "/api/notifications/sms/inbound",
+        data={"From": "+18166019036", "Body": "HELP", "MessageSid": "SM124"},
+        headers={"X-Twilio-Signature": "invalid"},
+    )
+
+    assert response.status_code == 403
+
+
+def test_twilio_inbound_accepts_valid_signature_when_validation_enabled(monkeypatch):
+    monkeypatch.setenv("TWILIO_VALIDATE_WEBHOOK_SIGNATURES", "true")
+    monkeypatch.setenv("TWILIO_AUTH_TOKEN", "test-token")
+    monkeypatch.setenv("TWILIO_WEBHOOK_BASE_URL", "http://testserver")
+    client, _db = _client()
+    params = {"From": "+18166019036", "Body": "HELP", "MessageSid": "SM124"}
+    signature = _expected_twilio_signature(
+        "http://testserver/api/notifications/sms/inbound",
+        params,
+        "test-token",
+    )
+
+    response = client.post(
+        "/api/notifications/sms/inbound",
+        data=params,
+        headers={"X-Twilio-Signature": signature},
+    )
+
+    assert response.status_code == 200
+    assert "EquineSync: For help" in response.text
 
 
 def test_twilio_status_callback_logs_status_without_raw_phone():
