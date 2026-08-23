@@ -23,29 +23,21 @@ import re
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 
-import httpx
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, field_validator
+import httpx
 
 logger = logging.getLogger(__name__)
 
 POLL_INTERVAL_SECONDS = int(os.environ.get("NOTIFY_POLL_SECONDS", "10"))
 BATCH_SIZE = int(os.environ.get("NOTIFY_BATCH_SIZE", "50"))
 MAX_DISPATCH_ATTEMPTS = int(os.environ.get("NOTIFY_MAX_ATTEMPTS", "3"))
-
-# Defaults: which event_type × category should ship by channel, when a user
-# has no explicit preferences saved.
-DEFAULT_INBOX_RULES = {
-    # event_type -> set of categories (or "*" for all)
-    "task.completed": {"medication", "farrier", "vet", "rehab"},
-    "task.skipped":   {"medication", "vet"},
-    "task.voided":    {"medication", "vet"},
-}
-DEFAULT_EMAIL_RULES = {
-    # email is intentionally narrower to avoid noise
-    "task.skipped":   {"medication"},
-    "task.voided":    {"medication"},
-}
+EXPO_PUSH_SEND_URL = "https://exp.host/--/api/v2/push/send"
+PUSH_TOKEN_COLLECTION = "push_device_tokens"
+PUSH_SEND_COLLECTION = "push_send_attempts"
+PUSH_PROOF_TITLE = "EquineSync"
+PUSH_PROOF_BODY = "Urgent barn update. Please open EquineSync for details."
+PUSH_PROOF_DATA = {"type": "founder_push_proof", "privacy": "generic"}
 
 SMS_CONSENT_LANGUAGE = (
     "Yes, I agree to receive automated customer care and urgent operational "
@@ -73,6 +65,20 @@ PRIVACY_SAFE_PROOF_MESSAGE = (
     "out or HELP for help."
 )
 
+# Defaults: which event_type × category should ship by channel, when a user
+# has no explicit preferences saved.
+DEFAULT_INBOX_RULES = {
+    # event_type -> set of categories (or "*" for all)
+    "task.completed": {"medication", "farrier", "vet", "rehab"},
+    "task.skipped":   {"medication", "vet"},
+    "task.voided":    {"medication", "vet"},
+}
+DEFAULT_EMAIL_RULES = {
+    # email is intentionally narrower to avoid noise
+    "task.skipped":   {"medication"},
+    "task.voided":    {"medication"},
+}
+
 
 # ---------- Pydantic models ----------
 
@@ -86,6 +92,41 @@ class NotificationPrefsIn(BaseModel):
     # event_type -> categories list ([] = none, ["*"] = all)
     inbox_rules: Optional[dict] = None
     email_rules: Optional[dict] = None
+
+
+class PushTokenIn(BaseModel):
+    expo_push_token: str = Field(..., min_length=20, max_length=256)
+    platform: str = Field(..., min_length=2, max_length=32)
+    device_id: Optional[str] = Field(default=None, max_length=128)
+    permission_status: Optional[str] = Field(default=None, max_length=64)
+    enabled: bool = True
+
+    @field_validator("expo_push_token")
+    @classmethod
+    def valid_expo_token(cls, value):  # noqa: N805
+        token = value.strip()
+        if not (
+            token.startswith("ExponentPushToken[")
+            or token.startswith("ExpoPushToken[")
+        ):
+            raise ValueError("Invalid Expo push token")
+        return token
+
+    @field_validator("platform")
+    @classmethod
+    def normalize_platform(cls, value):  # noqa: N805
+        platform = value.strip().lower()
+        if platform not in {"ios", "android"}:
+            raise ValueError("Unsupported push platform")
+        return platform
+
+    @field_validator("device_id", "permission_status")
+    @classmethod
+    def clean_optional_text(cls, value):  # noqa: N805
+        if value is None:
+            return None
+        cleaned = value.strip()
+        return cleaned or None
 
 
 class SmsConsentIn(BaseModel):
@@ -112,6 +153,29 @@ def _iso(dt: datetime) -> str:
 def _new_id() -> str:
     import uuid
     return str(uuid.uuid4())
+
+
+def _token_hash(token: str) -> str:
+    return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def _redact_token_hash(token: str) -> str:
+    return _token_hash(token)[:12]
+
+
+def _expo_ticket_diagnostics(ticket: object) -> dict:
+    if not isinstance(ticket, dict):
+        return {}
+
+    details = ticket.get("details")
+    diagnostics = {
+        "ticket_error": ticket.get("message") or ticket.get("error"),
+    }
+    if isinstance(details, dict):
+        diagnostics["ticket_details_error"] = details.get("error")
+    return {key: value for key, value in diagnostics.items() if value}
+
+
 
 
 def _hash_value(value: Optional[str]) -> Optional[str]:
@@ -474,8 +538,14 @@ async def ensure_indexes(db):
     await db.notifications.create_index([("user_id", 1), ("created_at", -1)])
     await db.notifications.create_index([("user_id", 1), ("read_at", 1)])
     await db.notification_preferences.create_index([("user_id", 1)], unique=True)
+    await db[PUSH_TOKEN_COLLECTION].create_index(
+        [("user_id", 1), ("token_hash", 1)],
+        unique=True,
+    )
+    await db[PUSH_TOKEN_COLLECTION].create_index([("user_id", 1), ("enabled", 1)])
+    await db[PUSH_SEND_COLLECTION].create_index([("user_id", 1), ("created_at", -1)])
     await db.sms_consent_records.create_index([("user_id", 1), ("created_at", -1)])
-    await db.sms_consent_records.create_index([("phone_e164", 1), ("created_at", -1)])
+    await db.sms_consent_records.create_index([("phone_hash", 1), ("created_at", -1)])
     await db.sms_delivery_events.create_index([("message_sid", 1), ("created_at", -1)])
     await db.sms_delivery_events.create_index([("phone_hash", 1), ("created_at", -1)])
 
@@ -535,6 +605,8 @@ def build_router(db, get_current_user) -> APIRouter:
         )
         return doc
 
+
+
     @router.put("/notifications/sms-consent")
     async def put_sms_consent(body: SmsConsentIn, user=Depends(get_current_user)):
         phone_e164 = _normalize_phone(body.phone_number) if body.sms_enabled else None
@@ -592,15 +664,14 @@ def build_router(db, get_current_user) -> APIRouter:
         body = (Body or "").strip().upper()
         now = _iso(_now())
         phone_hash = _hash_value(phone_e164)
-        event = {
+        await db.sms_delivery_events.insert_one({
             "id": _new_id(),
             "message_sid": MessageSid,
             "direction": "inbound",
             "phone_hash": phone_hash,
             "keyword": body[:20],
             "created_at": now,
-        }
-        await db.sms_delivery_events.insert_one(event)
+        })
         if body in {"STOP", "STOPALL", "UNSUBSCRIBE", "CANCEL", "END", "QUIT"}:
             await db.notification_preferences.update_many(
                 {"sms_phone_hash": phone_hash},
@@ -725,6 +796,117 @@ def build_router(db, get_current_user) -> APIRouter:
             "message_sid_hash": _hash_value(payload.get("sid")),
             "phone_hash": _hash_value(phone_e164),
             "status": payload.get("status"),
+        }
+
+    @router.post("/notifications/push-token")
+    async def register_push_token(body: PushTokenIn, user=Depends(get_current_user)):
+        await ensure_indexes(db)
+        now = _iso(_now())
+        token_hash = _token_hash(body.expo_push_token)
+        doc = {
+            "user_id": user["id"],
+            "barn_id": user.get("barn_id"),
+            "role": user.get("role"),
+            "provider": "expo",
+            "platform": body.platform,
+            "device_id": body.device_id,
+            "permission_status": body.permission_status,
+            "expo_push_token": body.expo_push_token,
+            "token_hash": token_hash,
+            "token_hash_short": token_hash[:12],
+            "enabled": body.enabled,
+            "privacy_policy": "generic_previews_only",
+            "updated_at": now,
+        }
+        await db[PUSH_TOKEN_COLLECTION].update_one(
+            {"user_id": user["id"], "token_hash": token_hash},
+            {"$set": doc, "$setOnInsert": {"created_at": now}},
+            upsert=True,
+        )
+        return {
+            "ok": True,
+            "provider": "expo",
+            "platform": body.platform,
+            "enabled": body.enabled,
+            "token_hash": token_hash[:12],
+        }
+
+    @router.post("/notifications/push-token/disable")
+    async def disable_push_tokens(user=Depends(get_current_user)):
+        now = _iso(_now())
+        result = await db[PUSH_TOKEN_COLLECTION].update_many(
+            {"user_id": user["id"], "enabled": True},
+            {"$set": {"enabled": False, "disabled_at": now, "updated_at": now}},
+        )
+        return {"ok": True, "disabled_count": result.modified_count}
+
+    @router.post("/notifications/push-proof/send-me")
+    async def send_push_proof_to_self(user=Depends(get_current_user)):
+        if user.get("role") not in ("admin", "barn_manager"):
+            raise HTTPException(403, "Admin/Manager only")
+        token_doc = await db[PUSH_TOKEN_COLLECTION].find_one(
+            {"user_id": user["id"], "provider": "expo", "enabled": True},
+            sort=[("updated_at", -1)],
+        )
+        if not token_doc:
+            raise HTTPException(404, "No enabled Expo push token registered")
+
+        payload = {
+            "to": token_doc["expo_push_token"],
+            "sound": "default",
+            "title": PUSH_PROOF_TITLE,
+            "body": PUSH_PROOF_BODY,
+            "data": PUSH_PROOF_DATA,
+        }
+        now = _iso(_now())
+        record = {
+            "id": _new_id(),
+            "user_id": user["id"],
+            "token_hash": token_doc.get("token_hash"),
+            "provider": "expo",
+            "purpose": "founder_push_proof",
+            "privacy_policy": "generic_previews_only",
+            "created_at": now,
+        }
+        try:
+            async with httpx.AsyncClient(timeout=15) as client:
+                response = await client.post(EXPO_PUSH_SEND_URL, json=payload)
+            provider_payload = response.json() if response.headers.get("content-type", "").startswith("application/json") else {}
+            ticket = provider_payload.get("data") if isinstance(provider_payload, dict) else None
+            ticket_status = ticket.get("status") if isinstance(ticket, dict) else None
+            record.update(
+                {
+                    "http_status": response.status_code,
+                    "provider_ok": response.status_code < 400 and ticket_status in (None, "ok"),
+                    "provider_response_shape": "json" if provider_payload else "non_json",
+                    "ticket_status": ticket_status,
+                    "ticket_id_present": bool(isinstance(ticket, dict) and ticket.get("id")),
+                    **_expo_ticket_diagnostics(ticket),
+                }
+            )
+            await db[PUSH_SEND_COLLECTION].insert_one(record)
+            if response.status_code >= 400:
+                raise HTTPException(502, "Expo push provider rejected proof send")
+            if ticket_status and ticket_status != "ok":
+                raise HTTPException(502, "Expo push proof ticket returned an error")
+        except HTTPException:
+            raise
+        except Exception:
+            logger.exception(
+                "Expo push proof failed for user=%s token_hash=%s",
+                user.get("id"),
+                token_doc.get("token_hash_short"),
+            )
+            record.update({"provider_ok": False, "error": "send_failed"})
+            await db[PUSH_SEND_COLLECTION].insert_one(record)
+            raise HTTPException(502, "Expo push proof failed")
+
+        return {
+            "ok": True,
+            "provider": "expo",
+            "purpose": "founder_push_proof",
+            "token_hash": token_doc.get("token_hash_short") or _redact_token_hash(token_doc["expo_push_token"]),
+            "message": PUSH_PROOF_BODY,
         }
 
     @router.post("/notifications/drain")
