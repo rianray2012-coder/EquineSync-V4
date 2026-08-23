@@ -236,9 +236,13 @@ api_router.include_router(build_staff_intake_router(
 ))
 
 # Notifications
+# Mixed-auth router: Twilio SMS inbound/status webhooks are anonymous provider
+# callbacks, while notification preferences, push proof, and SMS proof-send
+# still require route-level authenticated user dependencies. Use the optional
+# facility gate so anonymous provider callbacks can reach their handlers.
 api_router.include_router(
     build_notifications_router(db, get_current_user),
-    dependencies=PRODUCT_FACILITY_DEPS,
+    dependencies=PRODUCT_FACILITY_DEPS_OPTIONAL_AUTH,
 )
 
 # Dashboard (routes/dashboard.py)
