@@ -42,3 +42,5 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+# Firebase Android app config for EAS builds; keep local, do not commit
+google-services.json
