@@ -5,7 +5,7 @@ import {
   Stethoscope, Receipt, AlertTriangle, MessageSquare, BarChart3,
   Settings, LogOut, Sparkles, ListChecks, Map, ClipboardList,
   FileText, CalendarDays, UsersRound, PenLine, ShieldCheck,
-  Building2, Heart,
+  Building2, Heart, LifeBuoy,
 } from "lucide-react";
 import { Logo } from "./Logo";
 import HorseshoeIcon from "./icons/HorseshoeIcon";
@@ -32,6 +32,7 @@ const ICONS = {
   settings: Settings,
   shield: ShieldCheck,
   sparkles: Sparkles,
+  support: LifeBuoy,
   tasks: ListChecks,
   team: UsersRound,
   training: GraduationCap,

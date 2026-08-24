@@ -220,6 +220,8 @@ backend/tests/test_admin_portal_admin6.py::test_admin6_reads_excluded_from_activ
 backend/tests/test_admin_portal_admin6.py::test_admin6_does_not_reference_phase9[/admin/portal/audit-logs?limit=5]
 backend/tests/test_admin_portal_admin6.py::test_admin6_does_not_reference_phase9[/admin/portal/support?limit=5]
 backend/tests/test_admin_portal_admin6.py::test_admin6_does_not_reference_phase9[/admin/portal/alerts]
+# backend/tests/test_support_feedback_intake.py
+backend/tests/test_support_feedback_intake.py::test_authenticated_support_ticket_lands_in_admin_inbox_without_body_in_audit
 # backend/tests/test_admin_portal_admin7a.py
 backend/tests/test_admin_portal_admin7a.py::test_shape_admin1_me
 backend/tests/test_admin_portal_admin7a.py::test_shape_admin2_kpis

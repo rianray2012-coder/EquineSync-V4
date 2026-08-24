@@ -12,7 +12,7 @@
   "counts": {
     "total_collected": 2286,
     "selected_non_live": 1080,
-    "live_deselected": 1206,
+    "live_deselected": 1207,
     "passed": 919,
     "failed": 158,
     "errors": 3,
@@ -48,6 +48,15 @@
     ],
     "resolved_failure_policy": "Remove fixed nodes from this baseline in the same PR that fixes them, or create a tightly scoped baseline-reduction follow-up."
   },
+  "baseline_count_adjustments": [
+    {
+      "timestamp_utc": "2026-08-21T14:25:00Z",
+      "pull_request": 121,
+      "type": "live_inventory_count_only",
+      "selector": "backend/tests/test_support_feedback_intake.py::test_authenticated_support_ticket_lands_in_admin_inbox_without_body_in_audit",
+      "rationale": "PR #121 adds one authenticated support feedback intake live proof that calls a deployed API and must be deselected from the non-live CI run. No new failing or erroring test node is accepted by this count-only adjustment."
+    }
+  ],
   "known_failure_or_error_nodes": [
     {
       "nodeid": "backend/tests/test_4e_isolation_engine.py::test_task_complete_skip_void_cross_barn_isolation_both_directions",
