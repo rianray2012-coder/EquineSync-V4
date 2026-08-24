@@ -1,0 +1,17 @@
+resource_type,observed_count,mode,material_observation,closure_effect
+account,1,live,"Equine Sync account identifier redacted; account existence verified",PARTIAL_EVIDENCE
+customers,1,live,"Customer label redacted; no address; no email; no default payment method; zero balance",PARTIAL_EVIDENCE
+invoices,1,live,"Zero-dollar draft invoice; automatic tax requires location inputs; not finalized or paid",NOT_TRANSACTION_PROOF
+webhook_endpoints,0,live,"No webhook endpoint configured",BLOCKS_PROVIDER_EVENT_PROOF
+checkout_sessions,0,live,"No Checkout Sessions",BLOCKS_CHECKOUT_PROOF
+subscriptions,0,live,"No subscriptions",BLOCKS_SUBSCRIPTION_LIFECYCLE_PROOF
+payment_intents,0,live,"No PaymentIntents",BLOCKS_PAYMENT_RECONCILIATION
+charges,0,live,"No charges",BLOCKS_CUSTOMER_FUNDS_RECONCILIATION
+refunds,0,live,"No refunds",BLOCKS_REFUND_RECONCILIATION
+billing_portal_configurations,0,live,"No Billing Portal configurations",READINESS_GAP
+products,multiple,live,"Populated EquineSync main-plan and add-on catalog",CATALOG_EVIDENCE
+prices,multiple,live,"Recurring monthly and annual prices with lookup keys and metadata",CATALOG_EVIDENCE
+tax_registrations,1,live,"Active state sales-tax registration",TAX_CONFIGURATION_EVIDENCE
+tax_settings,1,live,"Stripe Tax active; Missouri head-office address",TAX_CONFIGURATION_EVIDENCE
+balance_transactions,multiple,live,"Provider operating-fee entries and matching balance entries observed",OPERATING_FEE_EVIDENCE_ONLY
+customer_payment_balance_transactions,0,live,"No customer-payment transaction dataset",BLOCKS_FINANCIAL_RECONCILIATION
