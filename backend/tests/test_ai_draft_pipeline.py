@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 from typing import Any, Dict
 
 import pytest
@@ -8,6 +9,7 @@ from fastapi.testclient import TestClient
 
 from routes.ai_assistant import build_router
 from services.ai_draft_extractor import (
+    OpenAIDraftExtractor,
     normalize_source_type,
     private_ai_storage_key,
     validate_ai_source,
@@ -118,6 +120,60 @@ class FakeExtractor:
             "review_questions": ["Confirm before saving."],
             "blocked_actions": ["official_record_save"],
         }
+
+
+class ManualReviewExtractor:
+    async def extract(self, **kwargs):
+        return {
+            "draft_only": True,
+            "review_required": True,
+            "source_category": kwargs["source_type"],
+            "extraction_status": "manual_review_required",
+            "review_questions": [
+                "This PDF could not be read automatically. Please upload a clearer copy or enter the key details manually.",
+            ],
+            "blocked_actions": ["official_record_save", "automatic_extraction"],
+        }
+
+
+class PdfTextFallbackExtractor(OpenAIDraftExtractor):
+    def __init__(self):
+        super().__init__(api_key="test-key")
+        self.text_seen = None
+
+    async def _extract_pdf_file(self, **kwargs):
+        raise RuntimeError("simulated direct PDF failure")
+
+    def _extract_pdf_text(self, file_bytes):
+        return "Farrier service invoice text with enough readable detail for fallback extraction."
+
+    def _render_pdf_pages_as_data_urls(self, file_bytes):
+        raise AssertionError("image fallback should not be used when text fallback succeeds")
+
+    async def _extract_text(self, *, source_type, prompt, text):
+        self.text_seen = text
+        return {
+            "draft_only": True,
+            "review_required": True,
+            "source_category": source_type,
+            "draft_service_history_candidates": [{"service_type": "farrier"}],
+            "review_questions": ["Confirm horse and service date."],
+            "blocked_actions": [],
+        }
+
+
+class PdfManualFallbackExtractor(OpenAIDraftExtractor):
+    def __init__(self):
+        super().__init__(api_key="test-key")
+
+    async def _extract_pdf_file(self, **kwargs):
+        raise RuntimeError("simulated direct PDF failure")
+
+    def _extract_pdf_text(self, file_bytes):
+        return ""
+
+    def _render_pdf_pages_as_data_urls(self, file_bytes):
+        return []
 
 
 def app_for(db, user, storage=None, extractor=None):
@@ -248,6 +304,75 @@ def test_private_upload_source_pipeline_reads_only_own_barn_source():
             "requested_output": "photo_to_inventory",
         })
         assert denied.status_code == 404
+
+
+def test_manual_review_pdf_fallback_returns_reviewable_draft_state():
+    db = FakeDb()
+    storage = FakeStorage()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "owner@example.test"}
+    app = app_for(db, user, storage=storage, extractor=ManualReviewExtractor())
+    with TestClient(app) as client:
+        intent = client.post("/api/ai/draft-jobs/upload-intents", json={
+            "source_type": "service_invoice",
+            "filename": "farrier.pdf",
+            "mime_type": "application/pdf",
+            "byte_size": 1024,
+        })
+        source = intent.json()["source"]
+        confirm = client.post(f"/api/ai/draft-jobs/upload-intents/{source['id']}/confirm", json={
+            "source_id": source["id"],
+            "sha256": "b" * 64,
+            "byte_size": 1024,
+        })
+        assert confirm.status_code == 200
+
+        job = client.post("/api/ai/draft-jobs", json={
+            "source_type": "service_invoice",
+            "source_id": source["id"],
+            "requested_output": "draft_service_history",
+        })
+        assert job.status_code == 201
+        body = job.json()["job"]
+        assert body["status"] == "draft_needs_manual_review"
+        assert body["draft_result"]["extraction_status"] == "manual_review_required"
+
+        reviewed = client.post(f"/api/ai/draft-jobs/{body['id']}/review", json={
+            "action": "rejected",
+            "note": "Manual review fallback needs a clearer source.",
+        })
+        assert reviewed.status_code == 200
+        assert reviewed.json()["review"]["official_records_written"] is False
+
+
+def test_pdf_text_fallback_used_when_direct_pdf_extraction_fails():
+    extractor = PdfTextFallbackExtractor()
+    result = asyncio.run(extractor._extract_pdf(
+        source_type="service_invoice",
+        prompt="Draft service-history candidates.",
+        file_bytes=b"%PDF simulated bytes",
+        filename="farrier.pdf",
+    ))
+    assert result["draft_only"] is True
+    assert result["review_required"] is True
+    assert result["extraction_status"] == "draft_ready"
+    assert result["fallback_used"] == "pdf_text"
+    assert result["attempted_methods"] == ["openai_file", "pdf_text"]
+    assert extractor.text_seen
+
+
+def test_pdf_manual_review_payload_when_all_pdf_fallbacks_fail():
+    extractor = PdfManualFallbackExtractor()
+    result = asyncio.run(extractor._extract_pdf(
+        source_type="service_invoice",
+        prompt="Draft service-history candidates.",
+        file_bytes=b"%PDF simulated bytes",
+        filename="farrier.pdf",
+    ))
+    assert result["draft_only"] is True
+    assert result["review_required"] is True
+    assert result["extraction_status"] == "manual_review_required"
+    assert result["attempted_methods"] == ["openai_file", "pdf_text", "pdf_page_images"]
+    assert "automatic_extraction" in result["blocked_actions"]
 
 
 def test_ai_source_validation_and_private_key_boundaries():

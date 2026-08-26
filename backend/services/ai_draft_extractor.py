@@ -46,6 +46,8 @@ AI_ALLOWED_MIME = {
 AI_IMAGE_MIME = {"image/jpeg", "image/png", "image/webp"}
 AI_TEXT_MIME = {"application/json", "text/plain", "text/csv", "text/markdown"}
 AI_MAX_BYTES = 20 * 1024 * 1024
+PDF_TEXT_MIN_CHARS = 40
+PDF_IMAGE_FALLBACK_MAX_PAGES = 3
 
 
 def normalize_source_type(value: str) -> str:
@@ -297,6 +299,65 @@ class OpenAIDraftExtractor:
         file_bytes: bytes,
         filename: str,
     ) -> Dict[str, Any]:
+        attempted_methods = ["openai_file"]
+        try:
+            parsed = await self._extract_pdf_file(
+                source_type=source_type,
+                prompt=prompt,
+                file_bytes=file_bytes,
+                filename=filename,
+            )
+            return self._with_fallback_metadata(parsed, attempted_methods)
+        except Exception:
+            pass
+
+        attempted_methods.append("pdf_text")
+        text = self._extract_pdf_text(file_bytes)
+        if len(text.strip()) >= PDF_TEXT_MIN_CHARS:
+            try:
+                parsed = await self._extract_text(
+                    source_type=source_type,
+                    prompt=(
+                        f"{prompt}\nFallback context: Direct PDF extraction failed. "
+                        "Use this extracted text cautiously and ask review questions "
+                        "for missing, garbled, or uncertain fields."
+                    ),
+                    text=text,
+                )
+                return self._with_fallback_metadata(parsed, attempted_methods)
+            except Exception:
+                pass
+
+        attempted_methods.append("pdf_page_images")
+        page_images = self._render_pdf_pages_as_data_urls(file_bytes)
+        if page_images:
+            try:
+                parsed = await self._extract_pdf_images(
+                    source_type=source_type,
+                    prompt=(
+                        f"{prompt}\nFallback context: Direct PDF and text extraction "
+                        "failed. Review these rendered PDF page images cautiously and "
+                        "ask review questions for missing or uncertain fields."
+                    ),
+                    page_image_urls=page_images,
+                )
+                return self._with_fallback_metadata(parsed, attempted_methods)
+            except Exception:
+                pass
+
+        return self._manual_pdf_review_payload(
+            source_type=source_type,
+            attempted_methods=attempted_methods,
+        )
+
+    async def _extract_pdf_file(
+        self,
+        *,
+        source_type: str,
+        prompt: str,
+        file_bytes: bytes,
+        filename: str,
+    ) -> Dict[str, Any]:
         safe_filename = filename
         if mimetypes.guess_type(safe_filename)[0] != "application/pdf":
             safe_filename = f"{safe_filename.rsplit('.', 1)[0]}.pdf"
@@ -337,6 +398,100 @@ class OpenAIDraftExtractor:
                 return parsed
             finally:
                 await self._delete_openai_file(client, file_id)
+
+    def _extract_pdf_text(self, file_bytes: bytes) -> str:
+        try:
+            import pymupdf
+        except Exception:
+            return ""
+        try:
+            chunks = []
+            with pymupdf.open(stream=file_bytes, filetype="pdf") as doc:
+                for page in doc:
+                    chunks.append(page.get_text("text") or "")
+            return "\n\n".join(chunk.strip() for chunk in chunks if chunk.strip())
+        except Exception:
+            return ""
+
+    def _render_pdf_pages_as_data_urls(self, file_bytes: bytes) -> list[str]:
+        try:
+            import pymupdf
+        except Exception:
+            return []
+        try:
+            urls = []
+            with pymupdf.open(stream=file_bytes, filetype="pdf") as doc:
+                for page_index in range(min(len(doc), PDF_IMAGE_FALLBACK_MAX_PAGES)):
+                    page = doc[page_index]
+                    pixmap = page.get_pixmap(
+                        matrix=pymupdf.Matrix(1.5, 1.5),
+                        alpha=False,
+                    )
+                    png_bytes = pixmap.tobytes("png")
+                    encoded = base64.b64encode(png_bytes).decode("ascii")
+                    urls.append(f"data:image/png;base64,{encoded}")
+            return urls
+        except Exception:
+            return []
+
+    async def _extract_pdf_images(
+        self,
+        *,
+        source_type: str,
+        prompt: str,
+        page_image_urls: list[str],
+    ) -> Dict[str, Any]:
+        content = [{
+            "type": "input_text",
+            "text": (
+                f"{draft_system_instruction()}\nTask: {prompt}\n"
+                f"Required JSON shape: {output_schema_hint(source_type)}"
+            ),
+        }]
+        content.extend(
+            {"type": "input_image", "image_url": url, "detail": "low"}
+            for url in page_image_urls
+        )
+        response = await self._responses({
+            "model": self.model,
+            "input": [{"role": "user", "content": content}],
+            "temperature": 0.1,
+            "max_output_tokens": 1800,
+        })
+        return self._parse_output(response)
+
+    def _with_fallback_metadata(
+        self,
+        parsed: Dict[str, Any],
+        attempted_methods: list[str],
+    ) -> Dict[str, Any]:
+        parsed["extraction_status"] = "draft_ready"
+        parsed["fallback_used"] = attempted_methods[-1] if len(attempted_methods) > 1 else None
+        parsed["attempted_methods"] = attempted_methods
+        return parsed
+
+    def _manual_pdf_review_payload(
+        self,
+        *,
+        source_type: str,
+        attempted_methods: list[str],
+    ) -> Dict[str, Any]:
+        payload = json.loads(output_schema_hint(source_type))
+        payload.update({
+            "draft_only": True,
+            "review_required": True,
+            "extraction_status": "manual_review_required",
+            "fallback_used": None,
+            "attempted_methods": attempted_methods,
+            "review_questions": [
+                "This PDF could not be read automatically. Please upload a clearer copy or enter the key details manually.",
+            ],
+            "blocked_actions": [
+                "official_record_save",
+                "automatic_extraction",
+            ],
+        })
+        return payload
 
     async def _delete_openai_file(self, client: httpx.AsyncClient, file_id: str) -> bool:
         try:

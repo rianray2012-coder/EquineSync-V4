@@ -340,8 +340,13 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             draft["draft_only"] = True
             draft["review_required"] = True
             completed = _now_iso()
+            job_status = (
+                "draft_needs_manual_review"
+                if draft.get("extraction_status") == "manual_review_required"
+                else "draft_ready"
+            )
             update = {
-                "status": "draft_ready",
+                "status": job_status,
                 "draft_result": draft,
                 "updated_at": completed,
                 "completed_at": completed,
@@ -358,7 +363,8 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 metadata={
                     "source_type": body.source_type,
                     "source_id": source_doc["id"],
-                    "draft_ready": True,
+                    "draft_ready": job_status == "draft_ready",
+                    "manual_review_required": job_status == "draft_needs_manual_review",
                     "official_records_written": False,
                 },
             )
@@ -424,7 +430,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         )
         if not job:
             raise HTTPException(404, "AI draft job not found")
-        if job.get("status") != "draft_ready":
+        if job.get("status") not in {"draft_ready", "draft_needs_manual_review"}:
             raise HTTPException(409, "AI draft job is not ready for review")
         now = _now_iso()
         review = {
