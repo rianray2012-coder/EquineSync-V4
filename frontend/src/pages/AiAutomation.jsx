@@ -182,7 +182,7 @@ export default function AiAutomation() {
       <PageHeader
         eyebrow="AI & Automation"
         title="Draft Extraction Review"
-        subtitle="Upload invoices, feed-room and tack-room photos, ride data, schedules, training notes, or voice transcripts. EquineSync creates draft-only suggestions that must be reviewed before any official record is saved."
+        subtitle="Upload invoices, feed-room and tack-room photos, ride data, schedules, training notes, or voice transcripts. Each extraction is a review-first automation item that must be reviewed before anything is approved and before any official record is saved."
         action={
           <button onClick={loadJobs} className="btn-secondary inline-flex items-center gap-2" data-testid="ai-draft-refresh">
             <RefreshCw className="w-4 h-4" /> Refresh
