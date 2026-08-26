@@ -99,6 +99,17 @@ type PushProofResponse = {
   message: string;
 };
 
+type AiDraftQueueResponse = {
+  jobs: Array<{
+    id: string;
+    status: string;
+    review_status?: string;
+    draft_only: boolean;
+    review_required: boolean;
+    source_type: string;
+  }>;
+};
+
 declare const process: {
   env?: Record<string, string | undefined>;
 };
@@ -297,6 +308,9 @@ export default function App() {
   const [pushStatus, setPushStatus] = useState('Push proof not started.');
   const [pushTokenHash, setPushTokenHash] = useState('');
   const [pushBusy, setPushBusy] = useState(false);
+  const [aiDraftStatus, setAiDraftStatus] = useState('AI draft review path not checked.');
+  const [aiDraftCount, setAiDraftCount] = useState<number | null>(null);
+  const [aiDraftBusy, setAiDraftBusy] = useState(false);
   const [authStatus, setAuthStatus] = useState('Checking stored session...');
   const [authBusy, setAuthBusy] = useState(false);
   const [restoreBusy, setRestoreBusy] = useState(true);
@@ -551,6 +565,24 @@ export default function App() {
     }
   }, [session]);
 
+  const checkAiDraftQueue = useCallback(async () => {
+    if (!session?.token) return;
+    setAiDraftBusy(true);
+    setAiDraftStatus('Checking draft-only review queue...');
+    try {
+      const response = await apiRequest<AiDraftQueueResponse>('/api/ai/draft-jobs?limit=5', {
+        headers: { Authorization: `Bearer ${session.token}` },
+      });
+      setAiDraftCount(response.jobs.length);
+      setAiDraftStatus(`Draft queue reachable: ${response.jobs.length} visible draft(s).`);
+    } catch (error) {
+      setAiDraftCount(null);
+      setAiDraftStatus(`Draft queue unavailable: ${friendlyError(error)}`);
+    } finally {
+      setAiDraftBusy(false);
+    }
+  }, [session]);
+
   const statusColor = health.status === 'pass' ? '#1f8a5b' : health.status === 'fail' ? '#b42318' : '#5f6b7a';
   const canSignIn = email.trim().length > 3 && password.length > 0 && !authBusy && !restoreBusy;
   const activeContext = accountContext?.active_context ?? null;
@@ -737,6 +769,38 @@ export default function App() {
               </Pressable>
               <Text style={styles.caption} testID="push-proof-result">
                 {pushStatus}
+              </Text>
+            </View>
+          ) : null}
+
+          {session ? (
+            <View style={styles.panel} testID="ai-draft-review-panel">
+              <View style={styles.statusHeader}>
+                <Text style={styles.panelLabel}>AI Draft Review</Text>
+                {aiDraftBusy ? <ActivityIndicator /> : <View style={[styles.statusDot, { backgroundColor: aiDraftCount !== null ? '#1f8a5b' : '#9aa3a0' }]} />}
+              </View>
+              <Text style={styles.healthMessage}>Mobile-Safe Review Path</Text>
+              <Text style={styles.detail} testID="ai-draft-boundary">
+                boundary=draft_only_review_required
+              </Text>
+              <Text style={styles.detail} testID="ai-draft-official-save">
+                official_save=blocked
+              </Text>
+              <Text style={styles.detail} testID="ai-draft-visible-count">
+                visible_drafts={aiDraftCount === null ? 'not_checked' : aiDraftCount}
+              </Text>
+              <Pressable
+                accessibilityLabel="Check AI Draft Queue"
+                accessibilityRole="button"
+                disabled={aiDraftBusy}
+                onPress={checkAiDraftQueue}
+                style={[styles.button, aiDraftBusy && styles.disabledButton]}
+                testID="ai-draft-check-button"
+              >
+                <Text style={styles.buttonText}>Check Draft Queue</Text>
+              </Pressable>
+              <Text style={styles.caption} testID="ai-draft-result">
+                {aiDraftStatus}
               </Text>
             </View>
           ) : null}
