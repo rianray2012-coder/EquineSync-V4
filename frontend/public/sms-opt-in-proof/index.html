@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EquineSync SMS Opt-In Proof</title>
+    <meta
+      name="description"
+      content="Public EquineSync SMS opt-in proof page for A2P campaign review."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172033;
+        --muted: #59657a;
+        --line: #d9e0eb;
+        --brand: #2f6f5f;
+        --accent: #8a5f2f;
+        --wash: #f5f7fb;
+        --panel: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--wash);
+        line-height: 1.55;
+      }
+
+      main {
+        width: min(980px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0 64px;
+      }
+
+      .masthead,
+      .proof,
+      section {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 28px;
+        margin-bottom: 18px;
+      }
+
+      .brand {
+        color: var(--brand);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 13px;
+      }
+
+      h1,
+      h2 {
+        line-height: 1.2;
+        margin: 0 0 12px;
+      }
+
+      h1 {
+        font-size: clamp(32px, 6vw, 52px);
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      p,
+      li,
+      label,
+      .field-note {
+        color: var(--muted);
+      }
+
+      a {
+        color: var(--brand);
+        font-weight: 700;
+      }
+
+      .form {
+        display: grid;
+        gap: 18px;
+        max-width: 720px;
+      }
+
+      .field-label {
+        display: block;
+        color: var(--ink);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      input[type="tel"] {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--ink);
+        font: inherit;
+        padding: 14px 16px;
+      }
+
+      .consent {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+
+      .consent input {
+        margin-top: 5px;
+      }
+
+      .button {
+        border: 0;
+        border-radius: 8px;
+        background: var(--brand);
+        color: white;
+        font: inherit;
+        font-weight: 800;
+        padding: 14px 18px;
+        width: fit-content;
+      }
+
+      .sample {
+        background: #f9fafc;
+        border-left: 4px solid var(--accent);
+        padding: 14px 16px;
+      }
+
+      footer {
+        color: var(--muted);
+        font-size: 14px;
+        padding: 10px 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="masthead">
+        <p class="brand">EquineSync</p>
+        <h1>SMS Opt-In Proof</h1>
+        <p>
+          This public page documents the EquineSync SMS consent experience for
+          A2P 10DLC campaign review. The live application will present this
+          disclosure before a user can opt in to urgent SMS notices.
+        </p>
+      </div>
+
+      <div class="proof">
+        <h2>Example Web Form Opt-In</h2>
+        <form class="form">
+          <div>
+            <label class="field-label" for="mobile-phone">Mobile Phone Number</label>
+            <input id="mobile-phone" type="tel" placeholder="(555) 123-4567" />
+            <p class="field-note">Enter the mobile number that should receive urgent EquineSync alerts.</p>
+          </div>
+
+          <label class="consent">
+            <input type="checkbox" />
+            <span>
+              Yes, I agree to receive urgent account, barn operations,
+              scheduling, and safety-related text messages from EquineSync at
+              the phone number provided. Message frequency varies, up to 4
+              messages per month during pilot. Message and data rates may
+              apply. Reply HELP for help. Reply STOP to opt out. Consent is
+              not required to purchase or use EquineSync.
+            </span>
+          </label>
+
+          <p>
+            By selecting the checkbox and submitting this form, the user
+            confirms SMS opt-in for EquineSync Urgent Alerts. The checkbox is
+            intentionally not pre-selected.
+          </p>
+
+          <p>
+            <a href="/terms">Terms Of Service</a> |
+            <a href="/privacy">Privacy Policy</a>
+          </p>
+
+          <button class="button" type="button">Agree To SMS Alerts</button>
+        </form>
+      </div>
+
+      <section>
+        <h2>Keyword Opt-In Reply</h2>
+        <p>
+          Supported opt-in keywords: START, YES, UNSTOP.
+        </p>
+        <p class="sample">
+          EquineSync: You are opted in to EquineSync Urgent Alerts. Msg freq
+          varies. Msg and data rates may apply. Reply HELP for help or STOP to
+          opt out.
+        </p>
+      </section>
+
+      <section>
+        <h2>Message Scope</h2>
+        <p>
+          SMS is reserved for urgent pilot alerts such as safety-sensitive barn
+          notices, time-sensitive schedule changes, account access issues,
+          critical care coordination, and service-provider arrival or delay
+          updates. SMS messages will not include detailed horse medical
+          information on the lock screen or in message preview text.
+        </p>
+      </section>
+
+      <footer>
+        Website: <a href="https://equine-sync.com">https://equine-sync.com</a>
+      </footer>
+    </main>
+  </body>
+</html>
