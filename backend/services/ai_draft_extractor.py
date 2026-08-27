@@ -1,0 +1,504 @@
+"""Draft-only AI extraction service for EquineSync.
+
+This module is deliberately conservative: it returns review-required draft
+payloads and never writes product records. Routes persist the draft job result;
+approval/rejection workflow remains separate and human-confirmed.
+"""
+from __future__ import annotations
+
+import base64
+import json
+import mimetypes
+import os
+from dataclasses import dataclass
+from typing import Any, Dict, Optional
+
+import httpx
+
+
+DEFAULT_MODEL = os.environ.get("OPENAI_EXTRACTION_MODEL", "gpt-4.1-mini")
+OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses"
+OPENAI_FILES_URL = "https://api.openai.com/v1/files"
+
+
+AI_SOURCE_TYPES = {
+    "invoice",
+    "service_invoice",
+    "ride_data",
+    "lesson_schedule",
+    "training_note",
+    "voice_transcript",
+    "health_observation",
+    "photo_inventory",
+}
+
+AI_ALLOWED_MIME = {
+    "application/pdf",
+    "application/json",
+    "text/plain",
+    "text/csv",
+    "text/markdown",
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+}
+
+AI_IMAGE_MIME = {"image/jpeg", "image/png", "image/webp"}
+AI_TEXT_MIME = {"application/json", "text/plain", "text/csv", "text/markdown"}
+AI_MAX_BYTES = 20 * 1024 * 1024
+PDF_TEXT_MIN_CHARS = 40
+PDF_IMAGE_FALLBACK_MAX_PAGES = 3
+
+
+def normalize_source_type(value: str) -> str:
+    source_type = (value or "").strip().lower()
+    if source_type not in AI_SOURCE_TYPES:
+        raise ValueError("Unsupported AI source type")
+    return source_type
+
+
+def validate_ai_source(*, source_type: str, mime_type: str, byte_size: int) -> str:
+    normalize_source_type(source_type)
+    normalized_mime = (mime_type or "").strip().lower()
+    if normalized_mime not in AI_ALLOWED_MIME:
+        raise ValueError("Unsupported AI source mime type")
+    if byte_size <= 0 or byte_size > AI_MAX_BYTES:
+        raise ValueError("AI source size out of bounds")
+    if source_type == "photo_inventory" and normalized_mime not in AI_IMAGE_MIME:
+        raise ValueError("Photo inventory sources must be images")
+    return normalized_mime
+
+
+def private_ai_storage_key(*, barn_id: str, source_id: str, filename: str) -> str:
+    safe_name = "".join(c for c in filename if c.isalnum() or c in ".-_")[-80:] or "source"
+    return f"{barn_id}/ai-draft-sources/{source_id}/{safe_name}"
+
+
+def draft_system_instruction() -> str:
+    return (
+        "Return JSON only. This is EquineSync staging/draft extraction. "
+        "All outputs must include draft_only=true and review_required=true. "
+        "Do not diagnose, mark payment status, send messages, save records, "
+        "identify private people, or make safety, billing, legal, messaging, "
+        "or access-control decisions. If unclear, use null and add a "
+        "review_questions entry."
+    )
+
+
+def output_schema_hint(source_type: str) -> str:
+    if source_type in {"invoice", "service_invoice"}:
+        return json.dumps({
+            "draft_only": True,
+            "review_required": True,
+            "source_category": source_type,
+            "vendor_or_provider": None,
+            "document_type": None,
+            "line_items": [],
+            "draft_inventory_candidates": [],
+            "draft_service_history_candidates": [],
+            "review_questions": [],
+            "blocked_actions": [],
+        })
+    if source_type == "photo_inventory":
+        return json.dumps({
+            "draft_only": True,
+            "review_required": True,
+            "source_category": "photo_inventory",
+            "visible_inventory_categories": [],
+            "draft_inventory_candidates": [],
+            "organization_or_reorder_suggestions": [],
+            "review_questions": [],
+            "blocked_actions": [],
+        })
+    return json.dumps({
+        "draft_only": True,
+        "review_required": True,
+        "source_category": source_type,
+        "draft_records": [],
+        "review_questions": [],
+        "blocked_actions": [],
+    })
+
+
+@dataclass
+class StoredSourceBytes:
+    bytes_value: bytes
+    mime_type: str
+
+
+class AIStorageClient:
+    """Private S3/R2 client for AI source bytes and presigned upload URLs."""
+
+    def __init__(self):
+        self.endpoint_url = os.environ.get("AI_STORAGE_ENDPOINT_URL") or os.environ.get("STORAGE_ENDPOINT_URL")
+        self.region = os.environ.get("AI_STORAGE_REGION") or os.environ.get("STORAGE_REGION") or "auto"
+        self.bucket = os.environ.get("AI_STORAGE_BUCKET") or os.environ.get("STORAGE_BUCKET_NAME") or os.environ.get("STORAGE_BUCKET")
+        self.access_key = os.environ.get("AI_STORAGE_ACCESS_KEY_ID") or os.environ.get("STORAGE_ACCESS_KEY_ID")
+        self.secret_key = os.environ.get("AI_STORAGE_SECRET_ACCESS_KEY") or os.environ.get("STORAGE_SECRET_ACCESS_KEY")
+        self._client = None
+
+    def configured(self) -> bool:
+        return all([self.endpoint_url, self.bucket, self.access_key, self.secret_key])
+
+    def _s3(self):
+        if not self.configured():
+            raise RuntimeError("Private AI storage is not configured")
+        if self._client is None:
+            import boto3
+
+            self._client = boto3.client(
+                "s3",
+                endpoint_url=self.endpoint_url,
+                region_name=self.region,
+                aws_access_key_id=self.access_key,
+                aws_secret_access_key=self.secret_key,
+            )
+        return self._client
+
+    def presigned_put(self, *, key: str, mime_type: str, ttl_seconds: int = 900) -> str:
+        return self._s3().generate_presigned_url(
+            "put_object",
+            Params={"Bucket": self.bucket, "Key": key, "ContentType": mime_type},
+            ExpiresIn=ttl_seconds,
+        )
+
+    def read_bytes(self, *, key: str, mime_type: str) -> StoredSourceBytes:
+        response = self._s3().get_object(Bucket=self.bucket, Key=key)
+        return StoredSourceBytes(bytes_value=response["Body"].read(), mime_type=mime_type)
+
+
+class OpenAIDraftExtractor:
+    """OpenAI-backed extractor. Tests should inject a fake extractor."""
+
+    def __init__(self, *, api_key: Optional[str] = None, model: str = DEFAULT_MODEL):
+        self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
+        self.model = model
+
+    def configured(self) -> bool:
+        return bool(self.api_key)
+
+    async def extract(
+        self,
+        *,
+        source_type: str,
+        prompt: str,
+        text: Optional[str] = None,
+        file_bytes: Optional[bytes] = None,
+        mime_type: Optional[str] = None,
+        filename: str = "source",
+    ) -> Dict[str, Any]:
+        if not self.configured():
+            raise RuntimeError("OpenAI extraction is not configured")
+        source_type = normalize_source_type(source_type)
+        mime_type = (mime_type or "text/plain").lower()
+        if text is not None:
+            return await self._extract_text(source_type=source_type, prompt=prompt, text=text)
+        if not file_bytes:
+            raise RuntimeError("No source content provided for extraction")
+        if mime_type in AI_IMAGE_MIME:
+            return await self._extract_image(
+                source_type=source_type,
+                prompt=prompt,
+                file_bytes=file_bytes,
+                mime_type=mime_type,
+            )
+        if mime_type in AI_TEXT_MIME:
+            decoded = file_bytes.decode("utf-8", errors="replace")
+            return await self._extract_text(source_type=source_type, prompt=prompt, text=decoded)
+        if mime_type == "application/pdf":
+            return await self._extract_pdf(
+                source_type=source_type,
+                prompt=prompt,
+                file_bytes=file_bytes,
+                filename=filename,
+            )
+        raise RuntimeError(f"Unsupported extractor mime type: {mime_type}")
+
+    async def _responses(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        async with httpx.AsyncClient(timeout=90) as client:
+            response = await client.post(
+                OPENAI_RESPONSES_URL,
+                headers={"Authorization": f"Bearer {self.api_key}"},
+                json=payload,
+            )
+            response.raise_for_status()
+            return response.json()
+
+    def _parse_output(self, response: Dict[str, Any]) -> Dict[str, Any]:
+        text = response.get("output_text") or ""
+        if not text:
+            for item in response.get("output") or []:
+                for content in item.get("content") or []:
+                    if content.get("type") == "output_text":
+                        text += content.get("text") or ""
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError:
+            start = text.find("{")
+            end = text.rfind("}")
+            if start < 0 or end <= start:
+                raise RuntimeError("AI output was not valid JSON")
+            parsed = json.loads(text[start:end + 1])
+        parsed["draft_only"] = True
+        parsed["review_required"] = True
+        return parsed
+
+    async def _extract_text(self, *, source_type: str, prompt: str, text: str) -> Dict[str, Any]:
+        response = await self._responses({
+            "model": self.model,
+            "input": [{
+                "role": "user",
+                "content": [{
+                    "type": "input_text",
+                    "text": (
+                        f"{draft_system_instruction()}\nTask: {prompt}\n"
+                        f"Required JSON shape: {output_schema_hint(source_type)}\n"
+                        f"Source text:\n{text}"
+                    ),
+                }],
+            }],
+            "temperature": 0.1,
+            "max_output_tokens": 1800,
+        })
+        return self._parse_output(response)
+
+    async def _extract_image(
+        self,
+        *,
+        source_type: str,
+        prompt: str,
+        file_bytes: bytes,
+        mime_type: str,
+    ) -> Dict[str, Any]:
+        image_url = f"data:{mime_type};base64,{base64.b64encode(file_bytes).decode('ascii')}"
+        response = await self._responses({
+            "model": self.model,
+            "input": [{
+                "role": "user",
+                "content": [
+                    {
+                        "type": "input_text",
+                        "text": (
+                            f"{draft_system_instruction()}\nTask: {prompt}\n"
+                            f"Required JSON shape: {output_schema_hint(source_type)}"
+                        ),
+                    },
+                    {"type": "input_image", "image_url": image_url, "detail": "low"},
+                ],
+            }],
+            "temperature": 0.1,
+            "max_output_tokens": 1800,
+        })
+        return self._parse_output(response)
+
+    async def _extract_pdf(
+        self,
+        *,
+        source_type: str,
+        prompt: str,
+        file_bytes: bytes,
+        filename: str,
+    ) -> Dict[str, Any]:
+        attempted_methods = ["openai_file"]
+        try:
+            parsed = await self._extract_pdf_file(
+                source_type=source_type,
+                prompt=prompt,
+                file_bytes=file_bytes,
+                filename=filename,
+            )
+            return self._with_fallback_metadata(parsed, attempted_methods)
+        except Exception:
+            pass
+
+        attempted_methods.append("pdf_text")
+        text = self._extract_pdf_text(file_bytes)
+        if len(text.strip()) >= PDF_TEXT_MIN_CHARS:
+            try:
+                parsed = await self._extract_text(
+                    source_type=source_type,
+                    prompt=(
+                        f"{prompt}\nFallback context: Direct PDF extraction failed. "
+                        "Use this extracted text cautiously and ask review questions "
+                        "for missing, garbled, or uncertain fields."
+                    ),
+                    text=text,
+                )
+                return self._with_fallback_metadata(parsed, attempted_methods)
+            except Exception:
+                pass
+
+        attempted_methods.append("pdf_page_images")
+        page_images = self._render_pdf_pages_as_data_urls(file_bytes)
+        if page_images:
+            try:
+                parsed = await self._extract_pdf_images(
+                    source_type=source_type,
+                    prompt=(
+                        f"{prompt}\nFallback context: Direct PDF and text extraction "
+                        "failed. Review these rendered PDF page images cautiously and "
+                        "ask review questions for missing or uncertain fields."
+                    ),
+                    page_image_urls=page_images,
+                )
+                return self._with_fallback_metadata(parsed, attempted_methods)
+            except Exception:
+                pass
+
+        return self._manual_pdf_review_payload(
+            source_type=source_type,
+            attempted_methods=attempted_methods,
+        )
+
+    async def _extract_pdf_file(
+        self,
+        *,
+        source_type: str,
+        prompt: str,
+        file_bytes: bytes,
+        filename: str,
+    ) -> Dict[str, Any]:
+        safe_filename = filename
+        if mimetypes.guess_type(safe_filename)[0] != "application/pdf":
+            safe_filename = f"{safe_filename.rsplit('.', 1)[0]}.pdf"
+        async with httpx.AsyncClient(timeout=90) as client:
+            upload = await client.post(
+                OPENAI_FILES_URL,
+                headers={"Authorization": f"Bearer {self.api_key}"},
+                data={"purpose": "user_data"},
+                files={"file": (safe_filename, file_bytes, "application/pdf")},
+            )
+            upload.raise_for_status()
+            file_id = upload.json()["id"]
+            try:
+                response = await client.post(
+                    OPENAI_RESPONSES_URL,
+                    headers={"Authorization": f"Bearer {self.api_key}"},
+                    json={
+                        "model": self.model,
+                        "input": [{
+                            "role": "user",
+                            "content": [
+                                {"type": "input_file", "file_id": file_id},
+                                {
+                                    "type": "input_text",
+                                    "text": (
+                                        f"{draft_system_instruction()}\nTask: {prompt}\n"
+                                        f"Required JSON shape: {output_schema_hint(source_type)}"
+                                    ),
+                                },
+                            ],
+                        }],
+                        "temperature": 0.1,
+                        "max_output_tokens": 1800,
+                    },
+                )
+                response.raise_for_status()
+                parsed = self._parse_output(response.json())
+                return parsed
+            finally:
+                await self._delete_openai_file(client, file_id)
+
+    def _extract_pdf_text(self, file_bytes: bytes) -> str:
+        try:
+            import pymupdf
+        except Exception:
+            return ""
+        try:
+            chunks = []
+            with pymupdf.open(stream=file_bytes, filetype="pdf") as doc:
+                for page in doc:
+                    chunks.append(page.get_text("text") or "")
+            return "\n\n".join(chunk.strip() for chunk in chunks if chunk.strip())
+        except Exception:
+            return ""
+
+    def _render_pdf_pages_as_data_urls(self, file_bytes: bytes) -> list[str]:
+        try:
+            import pymupdf
+        except Exception:
+            return []
+        try:
+            urls = []
+            with pymupdf.open(stream=file_bytes, filetype="pdf") as doc:
+                for page_index in range(min(len(doc), PDF_IMAGE_FALLBACK_MAX_PAGES)):
+                    page = doc[page_index]
+                    pixmap = page.get_pixmap(
+                        matrix=pymupdf.Matrix(1.5, 1.5),
+                        alpha=False,
+                    )
+                    png_bytes = pixmap.tobytes("png")
+                    encoded = base64.b64encode(png_bytes).decode("ascii")
+                    urls.append(f"data:image/png;base64,{encoded}")
+            return urls
+        except Exception:
+            return []
+
+    async def _extract_pdf_images(
+        self,
+        *,
+        source_type: str,
+        prompt: str,
+        page_image_urls: list[str],
+    ) -> Dict[str, Any]:
+        content = [{
+            "type": "input_text",
+            "text": (
+                f"{draft_system_instruction()}\nTask: {prompt}\n"
+                f"Required JSON shape: {output_schema_hint(source_type)}"
+            ),
+        }]
+        content.extend(
+            {"type": "input_image", "image_url": url, "detail": "low"}
+            for url in page_image_urls
+        )
+        response = await self._responses({
+            "model": self.model,
+            "input": [{"role": "user", "content": content}],
+            "temperature": 0.1,
+            "max_output_tokens": 1800,
+        })
+        return self._parse_output(response)
+
+    def _with_fallback_metadata(
+        self,
+        parsed: Dict[str, Any],
+        attempted_methods: list[str],
+    ) -> Dict[str, Any]:
+        parsed["extraction_status"] = "draft_ready"
+        parsed["fallback_used"] = attempted_methods[-1] if len(attempted_methods) > 1 else None
+        parsed["attempted_methods"] = attempted_methods
+        return parsed
+
+    def _manual_pdf_review_payload(
+        self,
+        *,
+        source_type: str,
+        attempted_methods: list[str],
+    ) -> Dict[str, Any]:
+        payload = json.loads(output_schema_hint(source_type))
+        payload.update({
+            "draft_only": True,
+            "review_required": True,
+            "extraction_status": "manual_review_required",
+            "fallback_used": None,
+            "attempted_methods": attempted_methods,
+            "review_questions": [
+                "This PDF could not be read automatically. Please upload a clearer copy or enter the key details manually.",
+            ],
+            "blocked_actions": [
+                "official_record_save",
+                "automatic_extraction",
+            ],
+        })
+        return payload
+
+    async def _delete_openai_file(self, client: httpx.AsyncClient, file_id: str) -> bool:
+        try:
+            response = await client.delete(
+                f"{OPENAI_FILES_URL}/{file_id}",
+                headers={"Authorization": f"Bearer {self.api_key}"},
+            )
+            return response.is_success
+        except Exception:
+            return False

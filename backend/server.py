@@ -100,6 +100,7 @@ from routes.service_provider_center import build_router as build_service_provide
 from routes.manager_intake import build_router as build_manager_intake_router
 from routes.staff_intake import build_router as build_staff_intake_router
 from routes.support import build_router as build_support_router
+from routes.ai_assistant import build_router as build_ai_assistant_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -424,6 +425,14 @@ api_router.include_router(build_support_router(
     db=db,
     get_current_user=get_current_user,
 ))
+
+# Draft-only AI intake/extraction pipeline. This surface creates private source
+# upload intents and review-required draft jobs only; it does not save official
+# product records or perform mutation-capable AI actions.
+api_router.include_router(build_ai_assistant_router(
+    db=db,
+    get_current_user=get_current_user,
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Analytics (routes/analytics.py)
 api_router.include_router(build_analytics_router(db, get_current_user, require_setup_role),

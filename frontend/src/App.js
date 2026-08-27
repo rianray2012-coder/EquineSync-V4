@@ -183,6 +183,7 @@ const BN17D_DIRECT_ROUTE_ROLES = {
   trainingWorkflow: ["admin", "barn_owner", "barn_manager", "trainer"],
   careWorkflow: ["admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"],
   inventoryWorkflow: ["admin", "barn_owner", "barn_manager"],
+  aiDraftWorkflow: ["admin", "barn_owner", "barn_manager", "trainer", "horse_owner"],
   operationalMessaging: ["admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"],
   checkoutReturn: [
     "admin",
@@ -347,7 +348,7 @@ function App() {
               <Route path="/competitions" element={permit(<Competitions />, ROLE_GROUPS.training)} />
               <Route path="/ride-gps" element={permit(<RideGps />, ROLE_GROUPS.training)} />
               <Route path="/performance-analytics" element={permit(<PerformanceAnalytics />, ROLE_GROUPS.training)} />
-              <Route path="/ai-automation" element={permit(<AiAutomation />, ROLE_GROUPS.admin)} />
+              <Route path="/ai-automation" element={permit(<AiAutomation />, BN17D_DIRECT_ROUTE_ROLES.aiDraftWorkflow)} />
               <Route path="/integrations" element={permit(<Integrations />, ROLE_GROUPS.integrations)} />
               <Route path="/mobile-readiness" element={permit(<MobileReadiness />, ROLE_GROUPS.integrations)} />
               <Route path="/advanced-reports" element={<Navigate to="/reports" replace />} />
