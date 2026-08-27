@@ -647,6 +647,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "stripe_price_id",
         }
         safe = {k: v for k, v in sub.items() if k not in STRIPE_FIELDS}
+        if safe.get("id") == sub.get("stripe_subscription_id"):
+            safe.pop("id", None)
         return {"barn_id": barn["id"], "subscription": safe}
 
     # ------------------------------------------------------------------
