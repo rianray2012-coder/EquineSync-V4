@@ -11,7 +11,7 @@ import json
 import mimetypes
 import os
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Mapping, Optional
 
 import httpx
 
@@ -48,6 +48,10 @@ AI_TEXT_MIME = {"application/json", "text/plain", "text/csv", "text/markdown"}
 AI_MAX_BYTES = 20 * 1024 * 1024
 PDF_TEXT_MIN_CHARS = 40
 PDF_IMAGE_FALLBACK_MAX_PAGES = 3
+AI_BLOCKED_ACTIONS = [
+    "official_record_save",
+    "ai_autonomous_mutation",
+]
 
 
 def normalize_source_type(value: str) -> str:
@@ -118,6 +122,46 @@ def output_schema_hint(source_type: str) -> str:
         "review_questions": [],
         "blocked_actions": [],
     })
+
+
+def _truthy(value: Optional[str]) -> bool:
+    return (value or "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def openai_api_key_mode(value: Optional[str]) -> str:
+    key = (value or "").strip()
+    if not key:
+        return "missing"
+    if key.startswith("sk-proj-"):
+        return "project_secret_configured"
+    if key.startswith("sk-"):
+        return "secret_configured"
+    return "configured_unknown"
+
+
+def ai_live_extraction_verification_snapshot(
+    *,
+    env: Optional[Mapping[str, str]] = None,
+) -> dict:
+    """Return a redacted readiness view for the opt-in live extraction proof."""
+    source = os.environ if env is None else env
+    model = (source.get("OPENAI_EXTRACTION_MODEL") or DEFAULT_MODEL or "").strip()
+    api_key_mode = openai_api_key_mode(source.get("OPENAI_API_KEY"))
+    proof_enabled = _truthy(source.get("RUN_AI_LIVE_EXTRACTION_PROOF"))
+    api_key_configured = api_key_mode != "missing"
+    return {
+        "provider": "openai",
+        "activation_target": "live_extraction_verification",
+        "api_key_mode": api_key_mode,
+        "model": model or "missing",
+        "proof_enabled": proof_enabled,
+        "api_key_configured": api_key_configured,
+        "ready_to_run_live_proof": proof_enabled and api_key_configured and bool(model),
+        "draft_only": True,
+        "review_required": True,
+        "official_record_save_enabled": False,
+        "autonomous_mutation_enabled": False,
+    }
 
 
 @dataclass
@@ -241,6 +285,13 @@ class OpenAIDraftExtractor:
             parsed = json.loads(text[start:end + 1])
         parsed["draft_only"] = True
         parsed["review_required"] = True
+        blocked_actions = parsed.get("blocked_actions")
+        if not isinstance(blocked_actions, list):
+            blocked_actions = []
+        for action in AI_BLOCKED_ACTIONS:
+            if action not in blocked_actions:
+                blocked_actions.append(action)
+        parsed["blocked_actions"] = blocked_actions
         return parsed
 
     async def _extract_text(self, *, source_type: str, prompt: str, text: str) -> Dict[str, Any]:
