@@ -199,15 +199,15 @@ def build_rf4_certification(root: Path = ROOT) -> Dict[str, object]:
                 [
                     "push-preview metadata",
                     "without sending external push notifications",
-                    "Record sent",
-                    "Local sent record",
-                    "recorded sent",
+                    "logged locally",
+                    "Log locally",
+                    "Local communication log",
                 ],
             )
             and 'delivery_status": "preview_only"' in backlog
             else "blocked",
             classification="readiness",
-            evidence="Group Messaging exposes local message status and push preview only, not live external delivery.",
+            evidence="Group Messaging exposes local/logged message status and push preview only, not live external delivery.",
             next_action="RF13 must add recipient IDs, delivery logs, and provider delivery semantics before sent/delivered claims.",
         ),
         CertificationRow(
@@ -216,16 +216,17 @@ def build_rf4_certification(root: Path = ROOT) -> Dict[str, object]:
             if _contains_all(
                 forms_signatures,
                 [
-                    "Track local digital form records",
+                    "Track local acknowledgement records",
                     "No signing link is generated",
                     "Envelope sending appears only after the signature provider is enabled",
-                    "Record sent",
-                    "Record signed",
+                    "ready locally",
+                    "acknowledged locally",
+                    "Record acknowledgement",
                 ],
             )
             else "blocked",
             classification="readiness",
-            evidence="Forms & Signatures records local request/status tracking and provider readiness without claiming live envelope sending.",
+            evidence="Forms & Signatures records local acknowledgement/request tracking and provider readiness without claiming live envelope sending.",
             next_action="RF14 must consolidate legal signature, guardian/minor, storage, and provider-envelope truth.",
         ),
         CertificationRow(

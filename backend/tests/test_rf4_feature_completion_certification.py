@@ -58,12 +58,16 @@ def test_rf4_truth_labels_manifest_delivery_signature_and_mobile_readiness():
 
     assert "push-preview metadata" in group_messaging
     assert "without sending external push notifications" in group_messaging
-    assert "Record sent" in group_messaging
+    assert "logged locally" in group_messaging
+    assert "Log locally" in group_messaging
+    assert "Local communication log" in group_messaging
     assert 'delivery_status": "preview_only"' in backlog
 
-    assert "Track local digital form records" in forms_signatures
+    assert "Track local acknowledgement records" in forms_signatures
     assert "No signing link is generated" in forms_signatures
-    assert "Record signed" in forms_signatures
+    assert "ready locally" in forms_signatures
+    assert "acknowledged locally" in forms_signatures
+    assert "Record acknowledgement" in forms_signatures
 
     assert "Credentials and native app tokens are intentionally not stored here" in integrations
     assert "Record connected" in integrations
