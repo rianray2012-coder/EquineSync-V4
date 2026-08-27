@@ -70,6 +70,7 @@ from core.tenancy import barn_filter, resolve_barn_id
 
 
 DOCUMENT_MANAGER_ROLES = {"admin", "barn_manager"}
+OWNER_DOCUMENT_ROLES = {"horse_owner", "parent", "rider"}
 DOCUMENT_READ_CAPABILITY = "communication" + ":read"
 TEMPLATE_STATUSES = {"draft", "active", "archived"}
 
@@ -116,6 +117,76 @@ def _clean_status(status: str) -> str:
 
 def _projection(doc: Dict[str, Any]) -> Dict[str, Any]:
     return project_document_record(doc, include_provider_refs=False)
+
+
+def _owner_document_projection(doc: Dict[str, Any]) -> Dict[str, Any]:
+    projected = _projection(doc)
+    return {
+        "id": projected.get("id"),
+        "kind": "document_request",
+        "display_name": projected.get("display_name") or projected.get("document_type") or "Document request",
+        "document_type": projected.get("document_type"),
+        "workflow_kind": projected.get("workflow_kind"),
+        "provider": projected.get("provider"),
+        "status": projected.get("local_status") or projected.get("status") or "draft",
+        "launch_behavior": projected.get("launch_behavior"),
+        "required_signer_count": projected.get("required_signer_count") or 0,
+        "signed_count": projected.get("signed_count") or 0,
+        "expires_at": projected.get("expires_at"),
+        "created_at": projected.get("created_at"),
+        "updated_at": projected.get("updated_at"),
+        "live_signing_enabled": False,
+    }
+
+
+def _owner_form_projection(doc: Dict[str, Any]) -> Dict[str, Any]:
+    data = doc.get("data") or {}
+    return {
+        "id": doc.get("id"),
+        "kind": "local_acknowledgement",
+        "display_name": data.get("form_name") or data.get("title") or "Local acknowledgement",
+        "document_type": data.get("document_type") or "acknowledgement",
+        "workflow_kind": "in_house_acknowledgement",
+        "provider": data.get("signature_provider") or "internal",
+        "status": data.get("status") or "sent",
+        "signature_scope": data.get("signature_scope") or "local_acknowledgement_only",
+        "legal_signature_status": data.get("legal_signature_status") or "not_legal_signature",
+        "recipient_name": data.get("recipient_name"),
+        "signed_at": data.get("signed_at"),
+        "expires_at": data.get("expires_at"),
+        "created_at": doc.get("created_at"),
+        "updated_at": doc.get("updated_at"),
+        "live_signing_enabled": False,
+    }
+
+
+def _owner_document_access_clauses(user: Dict[str, Any]) -> List[Dict[str, Any]]:
+    user_id = user.get("id")
+    if not user_id:
+        return []
+    return [
+        {"subject_user_id": user_id},
+        {"guardian_user_ids": user_id},
+        {"required_signer_user_ids": user_id},
+    ]
+
+
+def _owner_form_access_clauses(user: Dict[str, Any]) -> List[Dict[str, Any]]:
+    user_id = user.get("id")
+    if not user_id:
+        return []
+    return [
+        {"owner_user_id": user_id},
+        {"recipient_user_id": user_id},
+        {"data.owner_user_id": user_id},
+        {"data.recipient_user_id": user_id},
+        {"data.owner_user_ids": user_id},
+        {"data.recipient_user_ids": user_id},
+        {"data.guardian_user_id": user_id},
+        {"data.guardian_user_ids": user_id},
+        {"data.parent_user_id": user_id},
+        {"data.parent_user_ids": user_id},
+    ]
 
 
 async def _load_template_or_404(database, user: Dict[str, Any], template_id: str) -> Dict[str, Any]:
@@ -253,6 +324,51 @@ def build_router(*, get_current_user, db=None) -> APIRouter:
             "document_types": document_matrix(),
             "launch_behavior": "soft_warning",
             "live_signing_enabled": False,
+        }
+
+    @router.get("/owner-portal/documents")
+    async def owner_portal_documents(user=Depends(get_current_user)):
+        role = (user or {}).get("role")
+        if role not in OWNER_DOCUMENT_ROLES:
+            raise HTTPException(status_code=403, detail="Permission denied")
+
+        request_clauses = _owner_document_access_clauses(user)
+        form_clauses = _owner_form_access_clauses(user)
+        if not request_clauses and not form_clauses:
+            return {
+                "documents": [],
+                "live_signing_enabled": False,
+                "provider_live_activation": "disabled",
+            }
+
+        request_query = barn_filter(user, {"$or": request_clauses})
+        form_query = barn_filter(user, {
+            "archived_at": {"$exists": False},
+            "data.status": {"$in": ["sent", "signed", "expired"]},
+            "$or": form_clauses,
+        })
+
+        request_rows = await database[DOCUMENT_REQUESTS_COLLECTION].find(
+            request_query,
+            {"_id": 0},
+        ).sort("updated_at", -1).to_list(100)
+        form_rows = await database.digital_forms.find(
+            form_query,
+            {"_id": 0},
+        ).sort("updated_at", -1).to_list(100)
+
+        documents = [
+            *[_owner_document_projection(row) for row in request_rows],
+            *[_owner_form_projection(row) for row in form_rows],
+        ]
+        documents.sort(
+            key=lambda row: str(row.get("updated_at") or row.get("created_at") or ""),
+            reverse=True,
+        )
+        return {
+            "documents": documents[:100],
+            "live_signing_enabled": False,
+            "provider_live_activation": "disabled",
         }
 
     @router.get("/document-signatures/templates")

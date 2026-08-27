@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Plus, GraduationCap } from "lucide-react";
+import { Plus, GraduationCap, RotateCcw, XCircle } from "lucide-react";
+import { toast } from "sonner";
 import { api, fmtDate, fmtTime } from "../lib/api";
 import { Card, PageHeader, StatusPill, Empty } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
 import SoftWarning from "../components/SoftWarning";
+import { normalizeStaffDirectory, staffOptions } from "../lib/staffDirectory";
 
 const CONFLICT_WINDOW_MIN = 60;
 
@@ -21,13 +23,22 @@ export default function Lessons() {
   const [lessons, setLessons] = useState([]);
   const [riders, setRiders] = useState([]);
   const [horses, setHorses] = useState([]);
+  const [staff, setStaff] = useState([]);
   const [addOpen, setAddOpen] = useState(false);
+  const [action, setAction] = useState(null);
 
   const load = useCallback(() => api.get("/lessons").then((r) => setLessons(r.data)), []);
   useEffect(() => {
-    load();
-    api.get("/riders").then((r) => setRiders(r.data));
-    api.get("/horses").then((r) => setHorses(r.data));
+    load().catch((err) => toast.error(err?.response?.data?.detail || "Could not load lessons"));
+    api.get("/riders")
+      .then((r) => setRiders(r.data))
+      .catch(() => setRiders([]));
+    api.get("/horses")
+      .then((r) => setHorses(r.data))
+      .catch(() => setHorses([]));
+    api.get("/staff-portal/staff-directory")
+      .then((r) => setStaff(normalizeStaffDirectory(r.data)))
+      .catch(() => setStaff([]));
   }, [load]);
 
   const fields = useMemo(() => [
@@ -106,6 +117,17 @@ export default function Lessons() {
 
   const ridersEmpty = riders.length === 0;
 
+  const mutateLesson = async (lesson, type, payload) => {
+    try {
+      await api.post(`/lessons/${lesson.id}/${type}`, payload);
+      toast.success(type === "cancel" ? "Lesson cancelled" : "Lesson substitution recorded");
+      setAction(null);
+      load();
+    } catch (err) {
+      toast.error(err?.response?.data?.detail || "Could not update lesson");
+    }
+  };
+
   return (
     <div data-testid="lessons-page">
       <PageHeader
@@ -144,7 +166,9 @@ export default function Lessons() {
               )}
             </Empty>
           ) : (
-            lessons.map((l) => (
+            lessons.map((l) => {
+              const inactive = l.cancelled || l.status === "cancelled";
+              return (
               <div key={l.id} data-testid={`lesson-${l.id}`} className="py-3 hairline flex items-center gap-4">
                 <div className="font-display text-xl text-equine-champagne w-28 shrink-0">{fmtDate(l.start_time)} · {fmtTime(l.start_time)}</div>
                 <div className="flex-1 min-w-0">
@@ -152,13 +176,34 @@ export default function Lessons() {
                     {l.rider_name || "—"}{l.horse_name ? ` on ${l.horse_name}` : ""}
                   </div>
                   <div className="text-[12.5px] text-equine-platinum/60 truncate">
-                    {[l.focus, l.duration_min ? `${l.duration_min} min` : null, l.trainer_name]
+                    {[l.focus, l.duration_min ? `${l.duration_min} min` : null, l.trainer_name, l.substitution_state === "substituted" ? "substituted" : null]
                       .filter(Boolean).join(" · ")}
                   </div>
                 </div>
-                <StatusPill tone={l.completed ? "success" : "info"}>{l.completed ? "done" : "scheduled"}</StatusPill>
+                <StatusPill tone={inactive ? "critical" : l.completed ? "success" : "info"}>{inactive ? "cancelled" : l.completed ? "done" : "scheduled"}</StatusPill>
+                {!inactive && (
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setAction({ type: "substitute", lesson: l })}
+                      className="btn-secondary text-[12px] !py-2 !px-3 inline-flex items-center gap-1.5"
+                      data-testid={`lesson-substitute-${l.id}`}
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" /> Substitute
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAction({ type: "cancel", lesson: l })}
+                      className="btn-secondary text-[12px] !py-2 !px-3 inline-flex items-center gap-1.5 text-equine-clay"
+                      data-testid={`lesson-cancel-${l.id}`}
+                    >
+                      <XCircle className="w-3.5 h-3.5" /> Cancel
+                    </button>
+                  </div>
+                )}
               </div>
-            ))
+              );
+            })
           )}
         </Card>
 
@@ -202,9 +247,98 @@ export default function Lessons() {
           <Plus strokeWidth={1.8} className="w-7 h-7" />
         </button>
       )}
+      {action && (
+        <LessonActionSheet
+          action={action}
+          riders={riders}
+          horses={horses}
+          staff={staff}
+          onClose={() => setAction(null)}
+          onSubmit={(payload) => mutateLesson(action.lesson, action.type, payload)}
+        />
+      )}
     </div>
   );
 }
 
 // Keep helper for future use (default start time).
 export { defaultStart };
+
+const LessonActionSheet = ({ action, riders, horses, staff, onClose, onSubmit }) => {
+  const [reason, setReason] = useState("");
+  const [substituteTrainerId, setSubstituteTrainerId] = useState("");
+  const [substituteRiderId, setSubstituteRiderId] = useState(action.lesson.rider_id || "");
+  const [substituteHorseId, setSubstituteHorseId] = useState(action.lesson.horse_id || "");
+  const [saving, setSaving] = useState(false);
+  const isCancel = action.type === "cancel";
+  const canSubmit = reason.trim().length > 0 && !saving;
+  const trainerOptions = staffOptions((staff || []).filter((person) => person.role === "trainer"));
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!canSubmit) return;
+    setSaving(true);
+    await onSubmit(isCancel ? {
+      reason: reason.trim(),
+      cancelled_at: new Date().toISOString(),
+    } : {
+      reason: reason.trim(),
+      substitute_trainer_id: substituteTrainerId || null,
+      substitute_rider_id: substituteRiderId || null,
+      substitute_horse_id: substituteHorseId || null,
+    });
+    setSaving(false);
+  };
+
+  return (
+    <div className="fixed inset-0 z-[60] flex justify-end" data-testid={`lesson-${action.type}-sheet`}>
+      <div className="absolute inset-0 bg-equine-black/70 backdrop-blur-sm" onClick={onClose} />
+      <form onSubmit={submit} className="relative h-full w-full max-w-md bg-equine-card border-l border-equine-hairline shadow-2xl overflow-y-auto px-6 py-6 space-y-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="label-eyebrow mb-1">Lesson workflow</div>
+            <h2 className="font-display text-2xl text-equine-ivory">{isCancel ? "Cancel lesson" : "Record substitution"}</h2>
+          </div>
+          <button type="button" onClick={onClose} className="text-equine-platinum/60 hover:text-equine-ivory p-1.5 rounded-md hover:bg-white/[0.05]" aria-label="Close">×</button>
+        </div>
+
+        {!isCancel && (
+          <div className="grid grid-cols-1 gap-4">
+            <label className="block">
+              <div className="label-eyebrow mb-1.5">Substitute trainer</div>
+              <select value={substituteTrainerId} onChange={(e) => setSubstituteTrainerId(e.target.value)} data-testid="lesson-substitute-trainer-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] min-h-[44px]">
+                <option value="">No trainer change</option>
+                {trainerOptions.map((trainer) => <option key={trainer.v} value={trainer.v}>{trainer.l}</option>)}
+              </select>
+            </label>
+            <label className="block">
+              <div className="label-eyebrow mb-1.5">Substitute rider</div>
+              <select value={substituteRiderId} onChange={(e) => setSubstituteRiderId(e.target.value)} data-testid="lesson-substitute-rider-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] min-h-[44px]">
+                <option value="">No rider change</option>
+                {riders.map((r) => <option key={r.id} value={r.id}>{r.full_name}</option>)}
+              </select>
+            </label>
+            <label className="block">
+              <div className="label-eyebrow mb-1.5">Substitute horse</div>
+              <select value={substituteHorseId || ""} onChange={(e) => setSubstituteHorseId(e.target.value)} data-testid="lesson-substitute-horse-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] min-h-[44px]">
+                <option value="">No horse change</option>
+                {horses.map((h) => <option key={h.id} value={h.id}>{h.name}</option>)}
+              </select>
+            </label>
+          </div>
+        )}
+
+        <label className="block">
+          <div className="label-eyebrow mb-1.5">Reason</div>
+          <textarea rows={4} value={reason} onChange={(e) => setReason(e.target.value)} data-testid={`lesson-${action.type}-reason`} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] transition-colors resize-y" />
+        </label>
+        <div className="sticky bottom-0 -mx-6 px-6 pt-3 pb-1 mt-4 bg-equine-card/95 backdrop-blur-md border-t border-equine-hairline flex items-center justify-end gap-2">
+          <button type="button" onClick={onClose} className="btn-secondary tap-44" data-testid={`lesson-${action.type}-close`}>Close</button>
+          <button type="submit" disabled={!canSubmit} className="btn-primary tap-44" data-testid={`lesson-${action.type}-submit`}>
+            {saving ? "Saving..." : isCancel ? "Cancel lesson" : "Save substitution"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};

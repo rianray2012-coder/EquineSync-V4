@@ -72,7 +72,7 @@ const markSynced = (item) => {
 
 // ── single-item attempt; returns true if state changed ────────────────────
 const attemptItem = async (item, q) => {
-  if (item.state === "synced") return false;
+  if (item.state === "synced" || item.state === "failed") return false;
   if (item.nextAttemptAt && Date.now() < item.nextAttemptAt) return false;
 
   item.state = "syncing";
@@ -138,7 +138,16 @@ const enqueue = (item) => {
   return item.id;
 };
 
-export const enqueueComplete = (task_id, { outcome = "done", payload_actual = {}, notes } = {}) => {
+export const enqueueComplete = (
+  task_id,
+  {
+    outcome = "done",
+    payload_actual = {},
+    notes,
+    media_ids = [],
+    evidence_attachments = [],
+  } = {},
+) => {
   const client_completion_id = newClientCompletionId();
   return enqueue({
     id: client_completion_id,
@@ -152,6 +161,8 @@ export const enqueueComplete = (task_id, { outcome = "done", payload_actual = {}
       client_completion_id,
       outcome,
       payload_actual,
+      media_ids,
+      evidence_attachments,
       notes: notes || null,
       completed_at: new Date().toISOString(),
     },
