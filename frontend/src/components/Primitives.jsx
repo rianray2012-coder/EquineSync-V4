@@ -46,7 +46,7 @@ export const Stat = ({ label, value, accent = "ivory", caption, testid, icon: Ic
   );
 };
 
-export const StatusPill = ({ tone = "info", children, dot = false }) => {
+export const StatusPill = ({ tone = "info", children, dot = false, ...rest }) => {
   const map = {
     success: "bg-equine-sage/12 text-equine-sage border-equine-sage/30",
     warning: "bg-equine-amber/12 text-equine-amber border-equine-amber/30",
@@ -61,7 +61,7 @@ export const StatusPill = ({ tone = "info", children, dot = false }) => {
     info: "bg-equine-brassLight", brass: "bg-equine-brassLight", saddle: "bg-equine-saddle", neutral: "bg-equine-platinum/50",
   }[tone];
   return (
-    <span className={`pill ${map[tone]}`}>
+    <span className={`pill ${map[tone]}`} {...rest}>
       {dot && <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${dotColor}`} />}
       {children}
     </span>
