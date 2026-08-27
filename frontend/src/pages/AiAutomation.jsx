@@ -266,7 +266,13 @@ export default function AiAutomation() {
               <div className="label-eyebrow-muted mb-3">Pilot Review Lanes</div>
               <div className="flex flex-wrap gap-2">
                 {REVIEW_LANES.map((lane) => (
-                  <StatusPill key={lane} tone="neutral">{lane}</StatusPill>
+                  <StatusPill
+                    key={lane}
+                    tone="neutral"
+                    data-testid={`ai-draft-review-lane-${lane.toLowerCase().replace(/[^a-z]+/g, "-")}`}
+                  >
+                    {lane}
+                  </StatusPill>
                 ))}
               </div>
             </div>
@@ -277,8 +283,12 @@ export default function AiAutomation() {
             <ClipboardCheck className="w-5 h-5 text-equine-sage mt-0.5 flex-shrink-0" />
             <div>
               <div className="label-eyebrow-muted mb-3">Reviewer Checklist</div>
-              <ul className="space-y-1.5 text-[13px] text-equine-inkMuted leading-relaxed">
-                {REVIEW_CHECKLIST.map((item) => <li key={item}>{item}</li>)}
+              <ul className="space-y-1.5 text-[13px] text-equine-inkMuted leading-relaxed" data-testid="ai-draft-review-checklist">
+                {REVIEW_CHECKLIST.map((item) => (
+                  <li key={item} data-testid={`ai-draft-review-check-${item.toLowerCase().replace(/[^a-z]+/g, "-").replace(/-$/, "")}`}>
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
