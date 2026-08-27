@@ -385,11 +385,11 @@ def test_webhook_checkout_completed_is_idempotent():
     client.close()
 
 
-# Codex round-2 #1: Stripe.Subscription.retrieve failure must return a
+# Codex round-2 #1: Stripe subscription retrieval failure must return a
 # retryable non-2xx (502), NOT 200 handled:false. That guarantees Stripe
 # replays the event and we eventually reconcile the subscription.
 def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
-    """Mock stripe.Subscription.retrieve to raise; assert the webhook
+    """Mock client-scoped subscription retrieve to raise; assert the webhook
     endpoint surfaces 502.
 
     We can't monkeypatch the running server process, so this test reaches
@@ -401,6 +401,7 @@ def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
     import stripe as stripe_sdk
     from fastapi import HTTPException
     from routes.subscriptions import build_router
+    from routes import subscriptions_webhook_handlers as h
 
     class _StubError(stripe_sdk.error.StripeError):
         pass
@@ -408,7 +409,7 @@ def test_webhook_returns_502_when_stripe_retrieve_fails(monkeypatch):
     def _boom(*a, **k):
         raise _StubError("simulated stripe outage")
 
-    monkeypatch.setattr(stripe_sdk.Subscription, "retrieve", _boom)
+    monkeypatch.setattr(h, "_retrieve_stripe_subscription", _boom)
     monkeypatch.setenv("STRIPE_API_KEY", "stripe_test_key_placeholder")
     monkeypatch.delenv("STRIPE_WEBHOOK_SECRET", raising=False)
 
