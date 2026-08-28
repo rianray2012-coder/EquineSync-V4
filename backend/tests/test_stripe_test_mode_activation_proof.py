@@ -22,7 +22,10 @@ BACKEND = ROOT / "backend"
 if str(BACKEND) not in sys.path:
     sys.path.insert(0, str(BACKEND))
 
-from core.stripe_client import stripe_test_mode_activation_snapshot  # noqa: E402
+from core.stripe_client import (  # noqa: E402
+    stripe_live_payment_readiness_snapshot,
+    stripe_test_mode_activation_snapshot,
+)
 from routes.subscriptions import build_router as build_subscriptions_router  # noqa: E402
 
 
@@ -243,6 +246,84 @@ def test_stripe_test_mode_activation_snapshot_is_redacted_and_live_disabled():
     }
     assert "rk_test_redacted" not in json.dumps(snapshot)
     assert "whsec_redacted" not in json.dumps(snapshot)
+
+
+def test_stripe_live_payment_readiness_snapshot_is_redacted_and_disabled_by_default():
+    snapshot = stripe_live_payment_readiness_snapshot(
+        env={
+            "STRIPE_API_KEY": "rk_live_SHOULD_NOT_RENDER",
+            "STRIPE_WEBHOOK_SECRET": "whsec_SHOULD_NOT_RENDER",
+            "STRIPE_PUBLISHABLE_KEY": "pk_live_SHOULD_NOT_RENDER",
+        },
+    )
+
+    assert snapshot == {
+        "provider": "stripe",
+        "activation_target": "live_payment_readiness",
+        "api_key_mode": "restricted_live",
+        "publishable_key_mode": "publishable_live",
+        "webhook_secret_configured": True,
+        "live_key_configured": True,
+        "live_checkout_enabled": False,
+        "live_portal_enabled": False,
+        "live_money_enabled": False,
+    }
+    rendered = json.dumps(snapshot)
+    assert "SHOULD_NOT_RENDER" not in rendered
+    assert "whsec_" not in rendered
+
+
+def test_live_checkout_is_blocked_by_default_before_stripe_session_creation(monkeypatch):
+    monkeypatch.setenv("STRIPE_API_KEY", "rk_live_activation_guard")
+    monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_activation_guard")
+    monkeypatch.setenv("APP_BASE_URL", "https://app.equine-sync.test")
+    monkeypatch.setenv("ALLOWED_BILLING_ORIGINS", "https://app.equine-sync.test")
+    monkeypatch.delenv("STRIPE_LIVE_CHECKOUT_ENABLED", raising=False)
+    calls = []
+
+    def fake_stripe_client(api_key=None):
+        calls.append({"kind": "client_init", "api_key": api_key})
+        return _FakeStripeClient(calls)
+
+    monkeypatch.setattr("routes.subscriptions.stripe_client", fake_stripe_client)
+    db = _FakeDB()
+    client, _ = _client({"id": "admin-1", "barn_id": "barn-stripe-proof", "role": "admin"}, db)
+
+    checkout = client.post("/api/subscriptions/checkout", json={
+        "plan_tier_code": "starter_barn",
+        "billing_cycle": "monthly",
+        "origin_url": "https://app.equine-sync.test/dashboard",
+    })
+
+    assert checkout.status_code == 503, checkout.text
+    assert "founder readiness approval" in checkout.json()["detail"]
+    assert calls == []
+    assert db.barns.rows[0]["stripe_customer_id"] is None
+
+
+def test_live_customer_portal_is_blocked_by_default_before_stripe_session_creation(monkeypatch):
+    monkeypatch.setenv("STRIPE_API_KEY", "rk_live_activation_guard")
+    monkeypatch.setenv("APP_BASE_URL", "https://app.equine-sync.test")
+    monkeypatch.setenv("ALLOWED_BILLING_ORIGINS", "https://app.equine-sync.test")
+    monkeypatch.delenv("STRIPE_LIVE_PORTAL_ENABLED", raising=False)
+    calls = []
+
+    def fake_stripe_client(api_key=None):
+        calls.append({"kind": "client_init", "api_key": api_key})
+        return _FakeStripeClient(calls)
+
+    monkeypatch.setattr("routes.subscriptions.stripe_client", fake_stripe_client)
+    db = _FakeDB()
+    db.barns.rows[0]["stripe_customer_id"] = "cus_live_activation_guard"
+    client, _ = _client({"id": "admin-1", "barn_id": "barn-stripe-proof", "role": "admin"}, db)
+
+    portal = client.post("/api/subscriptions/customer-portal", json={
+        "origin_url": "https://app.equine-sync.test/settings",
+    })
+
+    assert portal.status_code == 503, portal.text
+    assert "founder readiness approval" in portal.json()["detail"]
+    assert calls == []
 
 
 def test_stripe_test_mode_checkout_webhook_and_owner_safe_subscription_projection(monkeypatch):

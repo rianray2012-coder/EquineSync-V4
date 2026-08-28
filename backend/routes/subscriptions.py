@@ -25,7 +25,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel
 
 from core.billing_provisioning import ADDON_PRICE_CATALOG, PLAN_CATALOG, PLAN_ORDER
-from core.stripe_client import construct_webhook_event, stripe_client
+from core.stripe_client import construct_webhook_event, stripe_client, stripe_live_session_enabled
 from core.account_context import standalone_owner_membership_from_user
 from core.entitlements import normalize_plan_code
 from core.permissions import has_capability, require
@@ -239,6 +239,16 @@ def _validate_origin_or_400(origin_url: str) -> str:
             "origin_url is not in the allow-listed frontend origins.",
         )
     return candidate
+
+
+def _require_stripe_session_guard(session_kind: str) -> None:
+    if stripe_live_session_enabled(session_kind):
+        return
+    label = "Checkout" if session_kind == "checkout" else "Customer Portal"
+    raise HTTPException(
+        503,
+        f"Stripe live {label} creation is disabled pending founder readiness approval.",
+    )
 
 
 async def _ensure_stripe_customer(db, user, barn) -> str:
@@ -537,6 +547,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
         if not price_id:
             raise HTTPException(500, f"Plan '{tier}' is missing a Stripe Price for cycle={cycle}.")
 
+        _require_stripe_session_guard("checkout")
+
         # Mutating endpoint — barn row may need to be created so we can
         # attach the Stripe customer + subscription references.
         barn = await _resolve_or_create_barn(db, user, tier=tier)
@@ -615,6 +627,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
             # Fall back to APP_BASE_URL when caller didn't supply one.
             return_origin = (os.environ.get("APP_BASE_URL") or "").rstrip("/")
         normalized_origin = _validate_origin_or_400(return_origin)
+        _require_stripe_session_guard("portal")
         client = _stripe_init()
         try:
             session = client.v1.billing_portal.sessions.create({
