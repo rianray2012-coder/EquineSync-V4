@@ -53,6 +53,10 @@ COMMON_REVIEW_FIELDS = {
     "confidence": None,
     "missing_information": [],
 }
+AI_BLOCKED_ACTIONS = [
+    "official_record_save",
+    "ai_autonomous_mutation",
+]
 
 
 def normalize_source_type(value: str) -> str:
@@ -238,9 +242,10 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
     blocked_actions = parsed.get("blocked_actions")
     if not isinstance(blocked_actions, list):
         blocked_actions = []
-    if "official_record_save" not in blocked_actions:
-        blocked_actions.append("official_record_save")
     parsed["blocked_actions"] = blocked_actions
+    for action in AI_BLOCKED_ACTIONS:
+        if action not in parsed["blocked_actions"]:
+            parsed["blocked_actions"].append(action)
 
     if source_type == "health_observation":
         for action in ["diagnosis", "treatment_decision"]:
@@ -621,7 +626,7 @@ class OpenAIDraftExtractor:
                 "This PDF could not be read automatically. Please upload a clearer copy or enter the key details manually.",
             ],
             "blocked_actions": [
-                "official_record_save",
+                *AI_BLOCKED_ACTIONS,
                 "automatic_extraction",
             ],
         })
