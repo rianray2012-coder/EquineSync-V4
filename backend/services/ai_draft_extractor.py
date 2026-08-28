@@ -57,6 +57,19 @@ AI_BLOCKED_ACTIONS = [
     "official_record_save",
     "ai_autonomous_mutation",
 ]
+INVENTORY_REVIEW_STATUSES = {"needs_review", "candidate_only"}
+INVENTORY_CANDIDATE_TEMPLATE = {
+    "item_name": None,
+    "category": None,
+    "quantity": None,
+    "unit": None,
+    "storage_location": None,
+    "horse_or_barn_assignment": None,
+    "source_confidence": None,
+    "review_status": "needs_review",
+    "reorder_candidate": None,
+    "notes": [],
+}
 
 
 def normalize_source_type(value: str) -> str:
@@ -103,12 +116,14 @@ def output_schema_hint(source_type: str) -> str:
             **COMMON_REVIEW_FIELDS,
             "vendor_or_provider": None,
             "document_type": None,
+            "order_date": None,
+            "merchant_order_reference": None,
             "line_items": [],
-            "draft_inventory_candidates": [],
+            "draft_inventory_candidates": [INVENTORY_CANDIDATE_TEMPLATE],
             "draft_service_history_candidates": [],
             "draft_invoice_candidates": [],
             "review_questions": [],
-            "blocked_actions": ["official_record_save"],
+            "blocked_actions": [*AI_BLOCKED_ACTIONS, "inventory_record_create", "payment_status_change"],
         })
     if source_type == "photo_inventory":
         return json.dumps({
@@ -117,10 +132,10 @@ def output_schema_hint(source_type: str) -> str:
             "source_category": "photo_inventory",
             **COMMON_REVIEW_FIELDS,
             "visible_inventory_categories": [],
-            "draft_inventory_candidates": [],
+            "draft_inventory_candidates": [INVENTORY_CANDIDATE_TEMPLATE],
             "organization_or_reorder_suggestions": [],
             "review_questions": [],
-            "blocked_actions": ["official_record_save"],
+            "blocked_actions": [*AI_BLOCKED_ACTIONS, "inventory_record_create"],
         })
     if source_type == "ride_data":
         return json.dumps({
@@ -297,8 +312,30 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
         for action in ["participant_notification", "payment_status_change"]:
             if action not in parsed["blocked_actions"]:
                 parsed["blocked_actions"].append(action)
+    if source_type in {"invoice", "service_invoice", "photo_inventory", "voice_transcript"}:
+        _normalize_inventory_candidates(parsed)
+        if "inventory_record_create" not in parsed["blocked_actions"]:
+            parsed["blocked_actions"].append("inventory_record_create")
 
     return parsed
+
+
+def _normalize_inventory_candidates(parsed: Dict[str, Any]) -> None:
+    candidates = parsed.get("draft_inventory_candidates")
+    if not isinstance(candidates, list):
+        candidates = []
+    normalized = []
+    for candidate in candidates:
+        if not isinstance(candidate, dict):
+            continue
+        item = dict(INVENTORY_CANDIDATE_TEMPLATE)
+        item.update(candidate)
+        if not isinstance(item.get("notes"), list):
+            item["notes"] = [] if item.get("notes") in (None, "") else [str(item["notes"])]
+        if item.get("review_status") not in INVENTORY_REVIEW_STATUSES:
+            item["review_status"] = "needs_review"
+        normalized.append(item)
+    parsed["draft_inventory_candidates"] = normalized
 
 
 @dataclass
@@ -666,7 +703,7 @@ class OpenAIDraftExtractor:
                 "This PDF could not be read automatically. Please upload a clearer copy or enter the key details manually.",
             ],
             "blocked_actions": [
-                "official_record_save",
+                *AI_BLOCKED_ACTIONS,
                 "automatic_extraction",
             ],
         })
