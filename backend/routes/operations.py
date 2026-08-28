@@ -43,6 +43,7 @@ from core.minor_safety import (
 from core.permissions import require
 from core.tenancy import barn_filter, stamp_barn
 from core import audit
+from routes.backlog import _classify_arena_conflicts
 
 
 def _now_utc() -> datetime:
@@ -102,6 +103,8 @@ class LessonIn(BaseModel):
     focus: Optional[str] = None
     notes: Optional[str] = None
     completed: bool = False
+    safety_stop: Optional[bool] = False
+    suitability_status: Optional[str] = None
 
 
 class TrainingSessionIn(BaseModel):
@@ -116,6 +119,31 @@ class TrainingSessionIn(BaseModel):
     notes: Optional[str] = None
     rating: Optional[int] = None
     homework: Optional[str] = None
+    safety_stop: Optional[bool] = False
+    suitability_status: Optional[str] = None
+
+
+class LessonCancelIn(BaseModel):
+    reason: str
+    cancelled_at: Optional[str] = None
+
+
+class LessonSubstitutionIn(BaseModel):
+    substitute_trainer_id: Optional[str] = None
+    substitute_horse_id: Optional[str] = None
+    substitute_rider_id: Optional[str] = None
+    reason: str
+
+
+class TrainingCancelIn(BaseModel):
+    reason: str
+    cancelled_at: Optional[str] = None
+
+
+class TrainingSubstitutionIn(BaseModel):
+    substitute_trainer_id: Optional[str] = None
+    substitute_horse_id: Optional[str] = None
+    reason: str
 
 
 class MessageIn(BaseModel):
@@ -299,6 +327,80 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         )
         raise HTTPException(status_code=status_code, detail=guardian_minor_public_error_detail(gate))
 
+    async def _enforce_safety_stop(
+        *,
+        user: Dict[str, Any],
+        horse: Optional[Dict[str, Any]] = None,
+        rider: Optional[Dict[str, Any]] = None,
+        requested_safety_stop: Optional[bool] = False,
+        requested_suitability_status: Optional[str] = None,
+    ) -> None:
+        suitability = (requested_suitability_status or "").strip().lower()
+        if requested_safety_stop or suitability in {"blocked", "not_suitable", "safety_stop"}:
+            raise HTTPException(409, "Safety Stop blocks lesson/training participation")
+
+        subject_ids = [
+            value for value in [
+                horse.get("id") if horse else None,
+                rider.get("id") if rider else None,
+            ] if value
+        ]
+        safety_stops = getattr(db, "safety_stops", None)
+        if subject_ids and safety_stops is not None:
+            active_stop = await safety_stops.find_one(
+                barn_filter(user, {
+                    "subject_id": {"$in": subject_ids},
+                    "status": {"$in": ["active", "hard_stop"]},
+                }),
+                {"_id": 0, "id": 1, "subject_id": 1, "reason": 1},
+            )
+            if active_stop:
+                raise HTTPException(409, "Safety Stop blocks lesson/training participation")
+
+        for source in (horse or {}, rider or {}):
+            if source.get("safety_stop_active") is True:
+                raise HTTPException(409, "Safety Stop blocks lesson/training participation")
+            source_suitability = (source.get("suitability_status") or "").strip().lower()
+            if source_suitability in {"blocked", "not_suitable", "safety_stop"}:
+                raise HTTPException(409, "Safety Stop blocks lesson/training participation")
+
+    async def _record_lesson_training_event(
+        collection_name: str,
+        record_id: str,
+        event_type: str,
+        user: Dict[str, Any],
+        metadata: Dict[str, Any],
+    ) -> None:
+        await db.lesson_training_events.insert_one({
+            "id": new_id(),
+            "barn_id": user.get("barn_id") or "primary",
+            "collection": collection_name,
+            "record_id": record_id,
+            "event_type": event_type,
+            "metadata": metadata,
+            "created_at": _iso(_now_utc()),
+            "created_by_user_id": user["id"],
+        })
+
+    async def _require_same_barn_horse(user: Dict[str, Any], horse_id: Optional[str]) -> Optional[Dict[str, Any]]:
+        if not horse_id:
+            return None
+        horse = await db.horses.find_one(
+            barn_filter(user, {"id": horse_id}),
+            {"_id": 0, "id": 1, "name": 1, "safety_stop_active": 1, "suitability_status": 1},
+        )
+        if not horse:
+            raise HTTPException(404, "Horse not found")
+        return horse
+
+    async def _require_same_barn_rider(user: Dict[str, Any], rider_id: Optional[str]) -> Optional[Dict[str, Any]]:
+        if not rider_id:
+            return None
+        rider = await db.riders.find_one(barn_filter(user, {"id": rider_id}), {"_id": 0})
+        if not rider:
+            raise HTTPException(404, "Rider not found")
+        return rider
+
     # ---------------- Lessons ----------------
 
     @router.get("/lessons")
@@ -320,10 +422,22 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             raise HTTPException(404, "Rider not found")
         doc["rider_name"] = rider["full_name"] if rider else None
         if body.horse_id:
-            horse = await db.horses.find_one(barn_filter(user, {"id": body.horse_id}), {"_id": 0, "name": 1})
+            horse = await db.horses.find_one(
+                barn_filter(user, {"id": body.horse_id}),
+                {"_id": 0, "id": 1, "name": 1, "safety_stop_active": 1, "suitability_status": 1},
+            )
             if not horse:
                 raise HTTPException(404, "Horse not found")
             doc["horse_name"] = horse["name"] if horse else None
+        else:
+            horse = None
+        await _enforce_safety_stop(
+            user=user,
+            horse=horse,
+            rider=rider,
+            requested_safety_stop=body.safety_stop,
+            requested_suitability_status=body.suitability_status,
+        )
         await _stamp_trainer_identity(db, user, doc)
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
         stamp_barn(user, doc)
@@ -354,6 +468,81 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         await db.lessons.insert_one(doc)
         return clean(doc)
 
+    @router.post("/lessons/{lesson_id}/cancel")
+    async def cancel_lesson(lesson_id: str, body: LessonCancelIn, user=Depends(get_current_user)):
+        scope = barn_filter(user, {"id": lesson_id})
+        existing = await db.lessons.find_one(scope, {"_id": 0})
+        if not existing:
+            raise HTTPException(404, "Lesson not found")
+        if existing.get("cancelled") or existing.get("status") == "cancelled":
+            raise HTTPException(409, "Lesson is already cancelled")
+        now = _iso(_now_utc())
+        cancelled_at = body.cancelled_at or now
+        updates = {
+            "status": "cancelled",
+            "cancelled": True,
+            "cancelled_at": cancelled_at,
+            "cancelled_by_user_id": user["id"],
+            "cancel_reason": body.reason[:500],
+            "updated_at": now,
+        }
+        await db.lessons.update_one(scope, {"$set": updates})
+        await _record_lesson_training_event(
+            "lessons",
+            lesson_id,
+            "lesson.cancelled",
+            user,
+            {"reason": body.reason[:500], "cancelled_at": cancelled_at},
+        )
+        return clean(await db.lessons.find_one(scope, {"_id": 0}))
+
+    @router.post("/lessons/{lesson_id}/substitute")
+    async def substitute_lesson(lesson_id: str, body: LessonSubstitutionIn, user=Depends(get_current_user)):
+        scope = barn_filter(user, {"id": lesson_id})
+        existing = await db.lessons.find_one(scope, {"_id": 0})
+        if not existing:
+            raise HTTPException(404, "Lesson not found")
+        if existing.get("cancelled") or existing.get("status") == "cancelled":
+            raise HTTPException(409, "Cancelled lessons cannot be substituted")
+        substitute_horse = await _require_same_barn_horse(user, body.substitute_horse_id)
+        substitute_rider = await _require_same_barn_rider(user, body.substitute_rider_id)
+        substitute_trainer = (
+            await _require_same_barn_trainer(db, user, body.substitute_trainer_id)
+            if body.substitute_trainer_id else None
+        )
+        await _enforce_safety_stop(user=user, horse=substitute_horse, rider=substitute_rider)
+        now = _iso(_now_utc())
+        updates = {
+            "substitution_state": "substituted",
+            "substitution_reason": body.reason[:500],
+            "substituted_at": now,
+            "substituted_by_user_id": user["id"],
+            "updated_at": now,
+        }
+        if substitute_trainer:
+            updates["substitute_trainer_id"] = substitute_trainer["id"]
+            updates["substitute_trainer_name"] = substitute_trainer.get("full_name") or substitute_trainer.get("email")
+        if substitute_horse:
+            updates["substitute_horse_id"] = substitute_horse["id"]
+            updates["substitute_horse_name"] = substitute_horse.get("name")
+        if substitute_rider:
+            updates["substitute_rider_id"] = substitute_rider["id"]
+            updates["substitute_rider_name"] = substitute_rider.get("full_name")
+        await db.lessons.update_one(scope, {"$set": updates})
+        await _record_lesson_training_event(
+            "lessons",
+            lesson_id,
+            "lesson.substituted",
+            user,
+            {
+                "reason": body.reason[:500],
+                "substitute_trainer_id": body.substitute_trainer_id,
+                "substitute_horse_id": body.substitute_horse_id,
+                "substitute_rider_id": body.substitute_rider_id,
+            },
+        )
+        return clean(await db.lessons.find_one(scope, {"_id": 0}))
+
     # ---------------- Training ----------------
 
     @router.get("/training")
@@ -370,6 +559,12 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         if not horse:
             raise HTTPException(404, "Horse not found")
         doc["horse_name"] = horse["name"] if horse else None
+        await _enforce_safety_stop(
+            user=user,
+            horse=horse,
+            requested_safety_stop=body.safety_stop,
+            requested_suitability_status=body.suitability_status,
+        )
         await _stamp_trainer_identity(db, user, doc)
         doc.update({"id": new_id(), "created_at": _iso(_now_utc())})
         stamp_barn(user, doc)
@@ -399,6 +594,76 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         doc["guardian_guard_state_token"] = gate.get("state_token")
         await db.training.insert_one(doc)
         return clean(doc)
+
+    @router.post("/training/{training_id}/cancel")
+    async def cancel_training(training_id: str, body: TrainingCancelIn, user=Depends(get_current_user)):
+        scope = barn_filter(user, {"id": training_id})
+        existing = await db.training.find_one(scope, {"_id": 0})
+        if not existing:
+            raise HTTPException(404, "Training session not found")
+        if existing.get("cancelled") or existing.get("status") == "cancelled":
+            raise HTTPException(409, "Training session is already cancelled")
+        now = _iso(_now_utc())
+        cancelled_at = body.cancelled_at or now
+        updates = {
+            "status": "cancelled",
+            "cancelled": True,
+            "cancelled_at": cancelled_at,
+            "cancelled_by_user_id": user["id"],
+            "cancel_reason": body.reason[:500],
+            "updated_at": now,
+        }
+        await db.training.update_one(scope, {"$set": updates})
+        await _record_lesson_training_event(
+            "training",
+            training_id,
+            "training.cancelled",
+            user,
+            {"reason": body.reason[:500], "cancelled_at": cancelled_at},
+        )
+        return clean(await db.training.find_one(scope, {"_id": 0}))
+
+    @router.post("/training/{training_id}/substitute")
+    async def substitute_training(training_id: str, body: TrainingSubstitutionIn, user=Depends(get_current_user)):
+        scope = barn_filter(user, {"id": training_id})
+        existing = await db.training.find_one(scope, {"_id": 0})
+        if not existing:
+            raise HTTPException(404, "Training session not found")
+        if existing.get("cancelled") or existing.get("status") == "cancelled":
+            raise HTTPException(409, "Cancelled training sessions cannot be substituted")
+        substitute_horse = await _require_same_barn_horse(user, body.substitute_horse_id)
+        substitute_trainer = (
+            await _require_same_barn_trainer(db, user, body.substitute_trainer_id)
+            if body.substitute_trainer_id else None
+        )
+        await _enforce_safety_stop(user=user, horse=substitute_horse)
+        now = _iso(_now_utc())
+        updates = {
+            "substitution_state": "substituted",
+            "substitution_reason": body.reason[:500],
+            "substituted_at": now,
+            "substituted_by_user_id": user["id"],
+            "updated_at": now,
+        }
+        if substitute_trainer:
+            updates["substitute_trainer_id"] = substitute_trainer["id"]
+            updates["substitute_trainer_name"] = substitute_trainer.get("full_name") or substitute_trainer.get("email")
+        if substitute_horse:
+            updates["substitute_horse_id"] = substitute_horse["id"]
+            updates["substitute_horse_name"] = substitute_horse.get("name")
+        await db.training.update_one(scope, {"$set": updates})
+        await _record_lesson_training_event(
+            "training",
+            training_id,
+            "training.substituted",
+            user,
+            {
+                "reason": body.reason[:500],
+                "substitute_trainer_id": body.substitute_trainer_id,
+                "substitute_horse_id": body.substitute_horse_id,
+            },
+        )
+        return clean(await db.training.find_one(scope, {"_id": 0}))
 
     # ---------------- Messages ----------------
 
@@ -530,6 +795,32 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
             raise HTTPException(404, "Service request not found")
         if existing.get("status") != "pending":
             raise HTTPException(409, f"Request is already {existing.get('status')}")
+        now = _iso(_now_utc())
+        arena_data = None
+        if existing.get("type") == "arena_use":
+            arena_data = {
+                "arena_name": existing.get("arena_name") or "Arena",
+                "title": f"Arena rental · {existing.get('requester_name') or 'Owner'}",
+                "date": existing.get("requested_date") or "",
+                "start_time": existing.get("requested_time") or "",
+                "end_time": _arena_end_time(existing.get("requested_time"), existing.get("rental_duration")),
+                "rental_duration": existing.get("rental_duration") or "",
+                "status": "reserved",
+                "visibility": "shared_with_owners",
+                "horse_name": existing.get("horse_name") or "",
+                "owner_name": existing.get("requester_name") or "",
+                "notes": existing.get("details") or "",
+                "source_request_id": sr_id,
+            }
+            barn_id = existing.get("barn_id") or user.get("barn_id") or "primary"
+            existing_blocks = await db.arena_schedule_blocks.find(
+                {"barn_id": barn_id, "archived_at": {"$exists": False}},
+                {"_id": 0},
+            ).to_list(500)
+            conflict = _classify_arena_conflicts(arena_data, existing_blocks)
+            if conflict["requires_review"]:
+                raise HTTPException(409, {"code": "calendar_conflict_review_required", **conflict})
+            arena_data = {**arena_data, "conflict_state": conflict["state"], "conflict_details": conflict}
         if (existing.get("type") or "").strip().lower() in {"event_signup", "community_program_signup"}:
             horse = None
             if existing.get("horse_id"):
@@ -554,28 +845,13 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
                 scope,
                 {"$set": {"guardian_guard_state_token": gate.get("state_token")}},
             )
-        now = _iso(_now_utc())
         await db.service_requests.update_one(
             scope,
             {"$set": {"status": "approved",
                       "approved_at": now,
                       "approved_by_user_id": user["id"]}},
         )
-        if existing.get("type") == "arena_use":
-            arena_data = {
-                "arena_name": existing.get("arena_name") or "Arena",
-                "title": f"Arena rental · {existing.get('requester_name') or 'Owner'}",
-                "date": existing.get("requested_date") or "",
-                "start_time": existing.get("requested_time") or "",
-                "end_time": _arena_end_time(existing.get("requested_time"), existing.get("rental_duration")),
-                "rental_duration": existing.get("rental_duration") or "",
-                "status": "reserved",
-                "visibility": "shared_with_owners",
-                "horse_name": existing.get("horse_name") or "",
-                "owner_name": existing.get("requester_name") or "",
-                "notes": existing.get("details") or "",
-                "source_request_id": sr_id,
-            }
+        if arena_data:
             await db.arena_schedule_blocks.insert_one({
                 "id": new_id(),
                 "barn_id": existing.get("barn_id") or user.get("barn_id") or "primary",

@@ -23,6 +23,8 @@ from typing import Any, Optional
 
 import stripe
 
+from core.stripe_client import stripe_client
+
 logger = logging.getLogger(__name__)
 
 
@@ -593,11 +595,11 @@ def _stripe_api_key() -> Optional[str]:
     return os.environ.get("STRIPE_API_KEY")
 
 
-async def _find_managed_product(tier_code: str):
+async def _find_managed_product(client, tier_code: str):
     """Find a Stripe Product previously created by EquineSync via metadata."""
     # Stripe doesn't search Products by metadata directly — list + filter is fine
     # for the 2 products we manage. Idempotent restart-safe lookup.
-    products = stripe.Product.list(limit=100, active=True)
+    products = client.v1.products.list({"limit": 100, "active": True})
     for p in products.auto_paging_iter():
         meta = p.get("metadata") or {}
         if meta.get("equinesync_managed") == "true" and meta.get("tier_code") == tier_code:
@@ -605,9 +607,9 @@ async def _find_managed_product(tier_code: str):
     return None
 
 
-async def _find_managed_price(product_id: str, tier_code: str, interval: str):
+async def _find_managed_price(client, product_id: str, tier_code: str, interval: str):
     """Find a managed Price for (tier_code, interval) under a product."""
-    prices = stripe.Price.list(limit=100, active=True, product=product_id)
+    prices = client.v1.prices.list({"limit": 100, "active": True, "product": product_id})
     for pr in prices.auto_paging_iter():
         meta = pr.get("metadata") or {}
         if (
@@ -620,7 +622,7 @@ async def _find_managed_price(product_id: str, tier_code: str, interval: str):
     return None
 
 
-async def _provision_dev_catalog(db) -> None:
+async def _provision_dev_catalog(db, client) -> None:
     """Dev/test only — upsert local `plans` rows from the live Price map.
 
     Older Phase 15 dev behavior auto-created Stripe Products/Prices. Now that
@@ -648,48 +650,48 @@ async def _provision_dev_catalog(db) -> None:
         monthly_id = None
         annual_id = None
         try:
-            product = await _find_managed_product(tier["tier_code"])
+            product = await _find_managed_product(client, tier["tier_code"])
             if not product:
-                product = stripe.Product.create(
-                    name=f"Equine Sync — {tier['name']}",
-                    description=tier["description"],
-                    metadata={
+                product = client.v1.products.create({
+                    "name": f"Equine Sync — {tier['name']}",
+                    "description": tier["description"],
+                    "metadata": {
                         "equinesync_managed": "true",
                         "tier_code": tier["tier_code"],
                     },
-                )
+                })
                 logger.info("stripe.Product created tier=%s id=%s",
                             tier["tier_code"], product["id"])
             product_id = product["id"]
-            monthly = await _find_managed_price(product_id, tier["tier_code"], "month")
+            monthly = await _find_managed_price(client, product_id, tier["tier_code"], "month")
             if not monthly:
-                monthly = stripe.Price.create(
-                    product=product_id,
-                    unit_amount=tier["monthly_price_cents"],
-                    currency="usd",
-                    recurring={"interval": "month"},
-                    metadata={
+                monthly = client.v1.prices.create({
+                    "product": product_id,
+                    "unit_amount": tier["monthly_price_cents"],
+                    "currency": "usd",
+                    "recurring": {"interval": "month"},
+                    "metadata": {
                         "equinesync_managed": "true",
                         "tier_code": tier["tier_code"],
                         "interval": "month",
                     },
-                )
+                })
                 logger.info("stripe.Price created tier=%s interval=month id=%s",
                             tier["tier_code"], monthly["id"])
             monthly_id = monthly["id"]
-            annual = await _find_managed_price(product_id, tier["tier_code"], "year")
+            annual = await _find_managed_price(client, product_id, tier["tier_code"], "year")
             if not annual:
-                annual = stripe.Price.create(
-                    product=product_id,
-                    unit_amount=tier["annual_price_cents"],
-                    currency="usd",
-                    recurring={"interval": "year"},
-                    metadata={
+                annual = client.v1.prices.create({
+                    "product": product_id,
+                    "unit_amount": tier["annual_price_cents"],
+                    "currency": "usd",
+                    "recurring": {"interval": "year"},
+                    "metadata": {
                         "equinesync_managed": "true",
                         "tier_code": tier["tier_code"],
                         "interval": "year",
                     },
-                )
+                })
                 logger.info("stripe.Price created tier=%s interval=year id=%s",
                             tier["tier_code"], annual["id"])
             annual_id = annual["id"]
@@ -703,7 +705,7 @@ async def _provision_dev_catalog(db) -> None:
         await _upsert_plan(db, tier, product_id, monthly_id, annual_id)
 
 
-async def _validate_prod_catalog(db) -> None:
+async def _validate_prod_catalog(db, client) -> None:
     """Production only — Price IDs must exist and be valid in Stripe.
 
     Env vars override the founder-approved static map. Startup aborts with a
@@ -735,7 +737,7 @@ async def _validate_prod_catalog(db) -> None:
         monthly_id, annual_id = configured[tier["tier_code"]]
         for label, price_id in (("monthly", monthly_id), ("annual", annual_id)):
             try:
-                stripe.Price.retrieve(price_id)
+                client.v1.prices.retrieve(price_id)
             except stripe.error.StripeError as ex:
                 raise RuntimeError(
                     f"Production startup: {tier['tier_code']} {label} Price {price_id} "
@@ -743,7 +745,7 @@ async def _validate_prod_catalog(db) -> None:
                 ) from ex
         # Resolve product_id from one of the prices for consistency.
         try:
-            pr = stripe.Price.retrieve(monthly_id)
+            pr = client.v1.prices.retrieve(monthly_id)
             product_id = pr.get("product") or _configured_product_id(tier["tier_code"])
         except Exception:
             product_id = _configured_product_id(tier["tier_code"])
@@ -832,7 +834,8 @@ async def ensure_stripe_catalog(db) -> None:
     """Entry point — called from lifespan.on_startup.
 
     Production: STRIPE_API_KEY is required AND env-provided Price IDs are
-    validated via stripe.Price.retrieve. Startup aborts on any miss.
+    validated via a client-scoped Stripe Price retrieve. Startup aborts on any
+    miss.
     Dev: fail-open. Local `plans` rows are ALWAYS upserted (all 4 tiers,
     including Starter/Professional with null Stripe IDs when Stripe is
     unreachable) so /billing/plans is consistent across environments.
@@ -856,13 +859,13 @@ async def ensure_stripe_catalog(db) -> None:
         await _upsert_addon_catalog(db)
         return
 
-    stripe.api_key = api_key
+    client = stripe_client(api_key)
     try:
         if _is_production():
-            await _validate_prod_catalog(db)
+            await _validate_prod_catalog(db, client)
             logger.info("Stripe catalog validated against env Price IDs (production).")
         else:
-            await _provision_dev_catalog(db)
+            await _provision_dev_catalog(db, client)
             logger.info("Stripe catalog provisioned (dev/test mode).")
         await _upsert_addon_catalog(db)
     except Exception as ex:

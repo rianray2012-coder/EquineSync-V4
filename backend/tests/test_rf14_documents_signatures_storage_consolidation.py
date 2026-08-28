@@ -252,6 +252,79 @@ def test_owner_form_acknowledgement_is_scoped_and_not_legal_signature():
     assert data["signed_claim"] == "local_acknowledgement_not_legal_signature"
 
 
+def test_owner_document_library_is_scoped_and_private_field_safe():
+    client, db = _client({"id": "owner-1", "barn_id": "barn-1", "role": "horse_owner", "full_name": "Owner One"})
+    db.document_requests.rows.extend([
+        {
+            "id": "doc-owner",
+            "barn_id": "barn-1",
+            "template_id": "tmpl-minor",
+            "document_type": "general_liability_waiver",
+            "display_name": "General liability waiver",
+            "workflow_kind": "provider_signature",
+            "provider": "docusign",
+            "subject_user_id": "owner-1",
+            "guardian_user_ids": [],
+            "required_signer_user_ids": ["owner-1"],
+            "provider_envelope_id": "env-private",
+            "provider_signature_id": "sig-private",
+            "provider_certificate_ref": "cert-private",
+            "signed_document_url": "https://example.invalid/private.pdf",
+            "staff_notes": "Internal handling note",
+            "status": "sent",
+            "local_status": "sent",
+            "launch_behavior": "soft_warning",
+            "required_signer_count": 1,
+            "signed_count": 0,
+            "created_at": "2026-07-07T09:00:00Z",
+            "updated_at": "2026-07-07T09:01:00Z",
+            "expires_at": "2027-07-07",
+        },
+        {
+            "id": "doc-other",
+            "barn_id": "barn-1",
+            "template_id": "tmpl-minor",
+            "document_type": "general_liability_waiver",
+            "display_name": "Other owner waiver",
+            "workflow_kind": "provider_signature",
+            "provider": "docusign",
+            "subject_user_id": "owner-2",
+            "required_signer_user_ids": ["owner-2"],
+            "provider_envelope_id": "env-other",
+            "status": "sent",
+            "local_status": "sent",
+            "created_at": "2026-07-07T09:02:00Z",
+            "updated_at": "2026-07-07T09:03:00Z",
+        },
+    ])
+
+    response = client.get("/api/owner-portal/documents")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["live_signing_enabled"] is False
+    assert body["provider_live_activation"] == "disabled"
+    documents = body["documents"]
+    ids = {row["id"] for row in documents}
+    assert "doc-owner" in ids
+    assert "form-owner" in ids
+    assert "doc-other" not in ids
+    assert "form-other-owner" not in ids
+
+    owner_doc = [row for row in documents if row["id"] == "doc-owner"][0]
+    assert owner_doc["kind"] == "document_request"
+    assert owner_doc["status"] == "sent"
+    assert owner_doc["live_signing_enabled"] is False
+    forbidden_keys = {
+        "provider_envelope_id",
+        "provider_signature_id",
+        "provider_certificate_ref",
+        "signed_document_url",
+        "staff_notes",
+        "required_signer_user_ids",
+    }
+    assert forbidden_keys.isdisjoint(owner_doc)
+
+
 def test_document_scan_prepare_upload_is_upload_intent_only():
     client, _db = _client({"id": "admin-1", "barn_id": "barn-1", "role": "admin"})
 

@@ -25,6 +25,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel
 
 from core.billing_provisioning import ADDON_PRICE_CATALOG, PLAN_CATALOG, PLAN_ORDER
+from core.stripe_client import construct_webhook_event, stripe_client
 from core.account_context import standalone_owner_membership_from_user
 from core.entitlements import normalize_plan_code
 from core.permissions import has_capability, require
@@ -84,7 +85,7 @@ def _stripe_init():
     api_key = os.environ.get("STRIPE_API_KEY")
     if not api_key:
         raise HTTPException(500, "Stripe is not configured on this server.")
-    stripe.api_key = api_key
+    return stripe_client(api_key)
 
 
 class CheckoutBody(BaseModel):
@@ -245,18 +246,18 @@ async def _ensure_stripe_customer(db, user, barn) -> str:
     existing = barn.get("stripe_customer_id")
     if existing:
         return existing
-    _stripe_init()
-    customer = stripe.Customer.create(
-        email=user.get("email"),
-        name=user.get("full_name") or user.get("email"),
-        metadata={
+    client = _stripe_init()
+    customer = client.v1.customers.create({
+        "email": user.get("email"),
+        "name": user.get("full_name") or user.get("email"),
+        "metadata": {
             "barn_id": barn["id"],
             "billing_scope": barn.get("billing_scope") or "facility",
             "account_type": barn.get("account_type") or "facility",
             "owner_user_id": user["id"],
             "equinesync_managed": "true",
         },
-    )
+    })
     await db.barns.update_one(
         {"id": barn["id"]},
         {"$set": {
@@ -550,20 +551,20 @@ def build_router(*, db, get_current_user) -> APIRouter:
         success_url = f"{normalized_origin}/billing/success?session_id={{CHECKOUT_SESSION_ID}}"
         cancel_url = f"{normalized_origin}/billing/subscription?cancelled=1"
 
-        _stripe_init()
+        client = _stripe_init()
         sub_data = {}
         if trial_days:
             sub_data["trial_period_days"] = trial_days
         try:
-            session = stripe.checkout.Session.create(
-                mode="subscription",
-                customer=customer_id,
-                line_items=[{"price": price_id, "quantity": 1}],
-                success_url=success_url,
-                cancel_url=cancel_url,
-                subscription_data=sub_data or None,
-                allow_promotion_codes=True,
-                metadata={
+            session = client.v1.checkout.sessions.create({
+                "mode": "subscription",
+                "customer": customer_id,
+                "line_items": [{"price": price_id, "quantity": 1}],
+                "success_url": success_url,
+                "cancel_url": cancel_url,
+                "subscription_data": sub_data or None,
+                "allow_promotion_codes": True,
+                "metadata": {
                     "barn_id": barn["id"],
                     "billing_scope": barn.get("billing_scope") or "facility",
                     "account_type": barn.get("account_type") or "facility",
@@ -572,7 +573,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
                     "billing_cycle": cycle,
                     "equinesync_managed": "true",
                 },
-            )
+            })
         except stripe.error.StripeError as ex:
             logger.exception("subscriptions.checkout create failed")
             raise HTTPException(502, f"Could not start checkout: {ex}")
@@ -614,12 +615,12 @@ def build_router(*, db, get_current_user) -> APIRouter:
             # Fall back to APP_BASE_URL when caller didn't supply one.
             return_origin = (os.environ.get("APP_BASE_URL") or "").rstrip("/")
         normalized_origin = _validate_origin_or_400(return_origin)
-        _stripe_init()
+        client = _stripe_init()
         try:
-            session = stripe.billing_portal.Session.create(
-                customer=customer_id,
-                return_url=f"{normalized_origin}/billing/subscription",
-            )
+            session = client.v1.billing_portal.sessions.create({
+                "customer": customer_id,
+                "return_url": f"{normalized_origin}/billing/subscription",
+            })
         except stripe.error.StripeError as ex:
             logger.exception("customer portal create failed")
             raise HTTPException(502, f"Could not open billing portal: {ex}")
@@ -646,6 +647,8 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "stripe_price_id",
         }
         safe = {k: v for k, v in sub.items() if k not in STRIPE_FIELDS}
+        if safe.get("id") == sub.get("stripe_subscription_id"):
+            safe.pop("id", None)
         return {"barn_id": barn["id"], "subscription": safe}
 
     # ------------------------------------------------------------------
@@ -657,16 +660,19 @@ def build_router(*, db, get_current_user) -> APIRouter:
         sig = request.headers.get("Stripe-Signature")
         secret = os.environ.get("STRIPE_WEBHOOK_SECRET")
         api_key = os.environ.get("STRIPE_API_KEY")
-        if api_key:
-            stripe.api_key = api_key
-        elif _is_production():
+        if not api_key and _is_production():
             raise HTTPException(500, "STRIPE_API_KEY is required in production.")
 
         if secret:
             try:
                 # construct_event returns a StripeObject; convert to dict-like
                 # so we can use .get() uniformly with the dev path.
-                ev_obj = stripe.Webhook.construct_event(payload, sig, secret)
+                ev_obj = construct_webhook_event(
+                    payload=payload,
+                    sig_header=sig,
+                    secret=secret,
+                    api_key=api_key,
+                )
                 event = ev_obj.to_dict_recursive() if hasattr(ev_obj, "to_dict_recursive") else dict(ev_obj)
             except Exception as ex:
                 logger.warning("stripe-subscriptions webhook signature invalid: %s", ex)

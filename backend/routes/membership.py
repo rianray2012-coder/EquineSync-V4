@@ -23,6 +23,8 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 import stripe
 
+from core.stripe_client import construct_webhook_event
+
 logger = logging.getLogger(__name__)
 
 
@@ -97,7 +99,6 @@ async def _parse_legacy_checkout_event(request: Request) -> _LegacyCheckoutEvent
     api_key = os.environ.get("STRIPE_API_KEY")
     if not api_key:
         raise HTTPException(500, "Stripe is not configured on this server.")
-    stripe.api_key = api_key
     body = await request.body()
     secret = (os.environ.get("STRIPE_WEBHOOK_SECRET") or "").strip()
     if not secret:
@@ -114,10 +115,11 @@ async def _parse_legacy_checkout_event(request: Request) -> _LegacyCheckoutEvent
         )
         raise HTTPException(400, "Invalid webhook signature.")
     try:
-        event = stripe.Webhook.construct_event(
+        event = construct_webhook_event(
             payload=body,
             sig_header=sig_header,
             secret=secret,
+            api_key=api_key,
         )
     except Exception as ex:
         logger.warning(

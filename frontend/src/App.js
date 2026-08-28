@@ -25,6 +25,7 @@ import Feed from "./pages/Feed";
 import Billing from "./pages/Billing";
 import Messaging from "./pages/Messaging";
 import OwnerPortal from "./pages/OwnerPortal";
+import OwnerDocuments from "./pages/OwnerDocuments";
 import Incidents from "./pages/Incidents";
 import Inventory from "./pages/Inventory";
 import Settings from "./pages/Settings";
@@ -351,6 +352,7 @@ function App() {
               <Route path="/audit-log" element={permit(<AuditLog />, ROLE_GROUPS.admin)} />
               <Route path="/reports" element={permit(<Reports />, ROLE_GROUPS.admin)} />
               <Route path="/owner-portal" element={permit(<OwnerPortal />, ROLE_GROUPS.ownerPortal)} />
+              <Route path="/owner-documents" element={permit(<OwnerDocuments />, ["horse_owner", "parent", "rider"])} />
               <Route path="/settings" element={permit(<Settings />, BN17D_DIRECT_ROUTE_ROLES.accountSettings)} />
               <Route path="/support" element={<Support />} />
             </Route>
