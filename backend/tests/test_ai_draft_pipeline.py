@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 from typing import Any, Dict
 
 import pytest
@@ -11,6 +12,7 @@ from routes.ai_assistant import build_router
 from services.ai_draft_extractor import (
     OpenAIDraftExtractor,
     AI_SOURCE_TYPES,
+    INVENTORY_CANDIDATE_TEMPLATE,
     normalize_source_type,
     output_schema_hint,
     private_ai_storage_key,
@@ -397,6 +399,18 @@ def test_output_schema_hint_includes_common_structured_review_fields(source_type
     assert '"blocked_actions": [' in schema
 
 
+@pytest.mark.parametrize("source_type", ["invoice", "service_invoice", "photo_inventory"])
+def test_inventory_source_schema_includes_reviewable_candidate_shape(source_type):
+    schema = json.loads(output_schema_hint(source_type))
+    candidate = schema["draft_inventory_candidates"][0]
+
+    for field in INVENTORY_CANDIDATE_TEMPLATE:
+        assert field in candidate
+    assert candidate["review_status"] == "needs_review"
+    assert "inventory_record_create" in schema["blocked_actions"]
+    assert "ai_autonomous_mutation" in schema["blocked_actions"]
+
+
 def test_parse_output_normalizes_ai_response_to_no_save_review_required_payload():
     extractor = OpenAIDraftExtractor(api_key="test-key")
     parsed = extractor._parse_output(
@@ -420,6 +434,42 @@ def test_parse_output_normalizes_ai_response_to_no_save_review_required_payload(
     assert "ai_autonomous_mutation" in parsed["blocked_actions"]
     assert "diagnosis" in parsed["blocked_actions"]
     assert "treatment_decision" in parsed["blocked_actions"]
+
+
+def test_parse_output_normalizes_inventory_candidates_to_reviewable_shape():
+    extractor = OpenAIDraftExtractor(api_key="test-key")
+    parsed = extractor._parse_output(
+        {
+            "output_text": json.dumps({
+                "draft_only": False,
+                "review_required": False,
+                "source_category": "invoice",
+                "draft_inventory_candidates": [
+                    {
+                        "item_name": "Senior feed",
+                        "category": "feed",
+                        "quantity": 4,
+                        "notes": "Check storage bin before reorder.",
+                        "review_status": "ready_to_save",
+                    }
+                ],
+                "blocked_actions": [],
+            })
+        },
+        source_type="invoice",
+    )
+
+    candidate = parsed["draft_inventory_candidates"][0]
+    assert candidate["item_name"] == "Senior feed"
+    assert candidate["category"] == "feed"
+    assert candidate["quantity"] == 4
+    assert candidate["unit"] is None
+    assert candidate["storage_location"] is None
+    assert candidate["review_status"] == "needs_review"
+    assert candidate["notes"] == ["Check storage bin before reorder."]
+    assert "official_record_save" in parsed["blocked_actions"]
+    assert "ai_autonomous_mutation" in parsed["blocked_actions"]
+    assert "inventory_record_create" in parsed["blocked_actions"]
 
 
 def test_pdf_manual_review_payload_when_all_pdf_fallbacks_fail():
