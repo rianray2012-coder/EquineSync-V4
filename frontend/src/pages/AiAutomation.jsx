@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { AlertTriangle, CheckCircle2, FileUp, RefreshCw, Sparkles, XCircle } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ClipboardCheck, FileSearch, FileUp, RefreshCw, ShieldCheck, Sparkles, XCircle } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "../lib/api";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
@@ -16,6 +16,12 @@ const SOURCE_TYPES = [
 ];
 
 const REVIEW_ACTION_LABEL = {
+  approved_no_save: "Accept draft, no save",
+  rejected: "Rejected",
+};
+
+const REVIEW_STATUS_LABEL = {
+  pending_review: "Pending review",
   approved_no_save: "Reviewed, not saved",
   rejected: "Rejected",
 };
@@ -27,6 +33,33 @@ const STATUS_TONE = {
   pending_review: "warning",
   approved_no_save: "success",
   rejected: "neutral",
+};
+
+const REVIEW_LANES = [
+  "Invoices",
+  "Service notes",
+  "Ride data",
+  "Scheduling notes",
+  "Voice transcripts",
+  "Photo inventory",
+];
+
+const REVIEW_CHECKLIST = [
+  "Confirm the source belongs to the current barn or user context.",
+  "Edit or reject uncertain line items, names, quantities, dates, and prices.",
+  "Treat health scores and service suggestions as decision support only.",
+  "Save final records only from the correct destination workflow.",
+];
+
+const DESTINATION_BY_SOURCE_TYPE = {
+  invoice: "Inventory, expenses, billing, or horse records",
+  service_invoice: "Service history, expenses, billing, or horse records",
+  photo_inventory: "Inventory or equipment records",
+  ride_data: "Ride log, training note, or performance review",
+  lesson_schedule: "Lesson calendar or training schedule",
+  training_note: "Training plan or horse progress note",
+  voice_transcript: "Tasks, notes, invoices, inventory, or schedule drafts",
+  health_observation: "Health log or care follow-up",
 };
 
 const defaultPromptFor = (sourceType) => {
@@ -51,6 +84,29 @@ const defaultPromptFor = (sourceType) => {
 const labelFor = (value) => {
   const pair = SOURCE_TYPES.find(([key]) => key === value);
   return pair ? pair[1] : String(value || "").replace(/_/g, " ");
+};
+
+const reviewLabelFor = (value) => REVIEW_STATUS_LABEL[value] || labelFor(value);
+
+const formatConfidence = (value) => {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return null;
+  return numeric <= 1 ? `${Math.round(numeric * 100)}%` : `${Math.round(numeric)}%`;
+};
+
+const arrayValue = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
+
+const draftResultFor = (job) => job.draft_result || {};
+
+const metadataRowsFor = (job) => {
+  const result = draftResultFor(job);
+  return [
+    ["Destination", DESTINATION_BY_SOURCE_TYPE[job.source_type] || "Destination workflow review"],
+    result.extraction_status ? ["Extraction", labelFor(result.extraction_status)] : null,
+    result.fallback_used ? ["Fallback", labelFor(result.fallback_used)] : null,
+    arrayValue(result.attempted_methods).length ? ["Methods", arrayValue(result.attempted_methods).map(labelFor).join(", ")] : null,
+    formatConfidence(result.confidence) ? ["Confidence", formatConfidence(result.confidence)] : null,
+  ].filter(Boolean);
 };
 
 const inferMimeType = (file) => {
@@ -181,7 +237,7 @@ export default function AiAutomation() {
     <div data-testid="ai-draft-review-page">
       <PageHeader
         eyebrow="AI & Automation"
-        title="Draft Extraction Review"
+        title="AI Draft Review"
         subtitle="Upload invoices, feed-room and tack-room photos, ride data, schedules, training notes, or voice transcripts. Each extraction is a review-first automation item that must be reviewed before anything is approved and before any official record is saved."
         action={
           <button onClick={loadJobs} className="btn-secondary inline-flex items-center gap-2" data-testid="ai-draft-refresh">
@@ -192,7 +248,7 @@ export default function AiAutomation() {
 
       <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5">
         <div className="flex items-start gap-3">
-          <Sparkles className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
+          <ShieldCheck className="w-5 h-5 text-equine-champagne mt-0.5 flex-shrink-0" />
           <div>
             <div className="text-equine-ivory font-display text-2xl mb-1">Draft-only guardrail</div>
             <div className="text-[13px] text-equine-inkMuted leading-relaxed">
@@ -201,6 +257,43 @@ export default function AiAutomation() {
           </div>
         </div>
       </Card>
+
+      <div className="grid grid-cols-1 xl:grid-cols-[1.1fr_0.9fr] gap-5 mb-6">
+        <Card hover={false}>
+          <div className="flex items-start gap-3">
+            <FileSearch className="w-5 h-5 text-equine-brassLight mt-0.5 flex-shrink-0" />
+            <div className="min-w-0">
+              <div className="label-eyebrow-muted mb-3">Pilot Review Lanes</div>
+              <div className="flex flex-wrap gap-2">
+                {REVIEW_LANES.map((lane) => (
+                  <StatusPill
+                    key={lane}
+                    tone="neutral"
+                    data-testid={`ai-draft-review-lane-${lane.toLowerCase().replace(/[^a-z]+/g, "-")}`}
+                  >
+                    {lane}
+                  </StatusPill>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Card>
+        <Card hover={false}>
+          <div className="flex items-start gap-3">
+            <ClipboardCheck className="w-5 h-5 text-equine-sage mt-0.5 flex-shrink-0" />
+            <div>
+              <div className="label-eyebrow-muted mb-3">Reviewer Checklist</div>
+              <ul className="space-y-1.5 text-[13px] text-equine-inkMuted leading-relaxed" data-testid="ai-draft-review-checklist">
+                {REVIEW_CHECKLIST.map((item) => (
+                  <li key={item} data-testid={`ai-draft-review-check-${item.toLowerCase().replace(/[^a-z]+/g, "-").replace(/-$/, "")}`}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Card>
+      </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div className="rounded-lg border border-equine-cloud bg-white/70 p-4" data-testid="ai-draft-stat-pending">
@@ -226,7 +319,7 @@ export default function AiAutomation() {
           <div>
             <div className="font-display text-2xl text-equine-ink mb-2">Create Review Draft</div>
             <p className="text-[13.5px] text-equine-inkMuted leading-relaxed mb-4">
-              Use private upload for PDFs and photos, or paste text from ride data, scheduling notes, or voice transcripts.
+              Generate drafts from private PDFs and photos, or paste text from ride data, scheduling notes, or voice transcripts.
             </p>
             <label className="block text-[12px] uppercase tracking-[0.18em] text-equine-inkMuted mb-2">Source type</label>
             <select
@@ -298,7 +391,7 @@ export default function AiAutomation() {
         <Empty>
           <Sparkles strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No AI draft extractions yet</div>
-          <div className="text-[13px] text-equine-platinum/60">Create the first draft from a file or source text.</div>
+          <div className="text-[13px] text-equine-platinum/60">Create the first draft from a file or source text. Drafts stay review-required and do not save official records.</div>
         </Empty>
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
@@ -311,13 +404,29 @@ export default function AiAutomation() {
                 </div>
                 <div className="flex items-center gap-2 flex-wrap justify-end">
                   <StatusPill tone={STATUS_TONE[job.status] || "neutral"}>{labelFor(job.status)}</StatusPill>
-                  <StatusPill tone={STATUS_TONE[job.review_status] || "neutral"}>{labelFor(job.review_status)}</StatusPill>
+                  <StatusPill tone={STATUS_TONE[job.review_status] || "neutral"}>{reviewLabelFor(job.review_status)}</StatusPill>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3 mb-4 text-[12.5px] text-equine-inkMuted">
                 <div>Draft only: <span className="text-equine-ink font-semibold">{String(job.draft_only)}</span></div>
                 <div>Review required: <span className="text-equine-ink font-semibold">{String(job.review_required)}</span></div>
               </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                {metadataRowsFor(job).map(([label, value]) => (
+                  <div key={label} className="rounded-lg border border-equine-cloud bg-equine-cloud/30 px-3 py-2">
+                    <div className="label-eyebrow-muted mb-1">{label}</div>
+                    <div className="text-[12.5px] text-equine-ink truncate">{value}</div>
+                  </div>
+                ))}
+              </div>
+              {arrayValue(draftResultFor(job).review_questions).length > 0 && (
+                <div className="mb-4 rounded-lg border border-equine-brass/25 bg-equine-brass/5 p-3">
+                  <div className="label-eyebrow-muted mb-2">Questions Before Saving Elsewhere</div>
+                  <ul className="space-y-1.5 text-[13px] text-equine-inkMuted leading-relaxed">
+                    {arrayValue(draftResultFor(job).review_questions).map((question) => <li key={question}>{question}</li>)}
+                  </ul>
+                </div>
+              )}
               <pre className="max-h-[320px] overflow-auto rounded-lg bg-equine-navy text-equine-platinum/85 p-4 text-[12px] leading-relaxed whitespace-pre-wrap" data-testid={`ai-draft-result-${job.id}`}>
                 {jsonPreview(job.draft_result || { error_code: job.error_code || "pending" })}
               </pre>
@@ -327,7 +436,7 @@ export default function AiAutomation() {
                     className="w-full min-h-[76px] rounded-lg border border-equine-cloud bg-white px-3 py-2.5 text-[13px] text-equine-ink"
                     data-testid={`ai-draft-review-note-${job.id}`}
                     onChange={(event) => setReviewNotes((current) => ({ ...current, [job.id]: event.target.value }))}
-                    placeholder="Optional review note. This does not save official records."
+                    placeholder="Optional review note. This marks the draft only; save final records from the correct workflow."
                     value={reviewNotes[job.id] || ""}
                   />
                   <div className="flex flex-wrap gap-2">

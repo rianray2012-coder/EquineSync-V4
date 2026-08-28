@@ -11,6 +11,7 @@ from routes.ai_assistant import build_router
 from services.ai_draft_extractor import (
     OpenAIDraftExtractor,
     normalize_source_type,
+    output_schema_hint,
     private_ai_storage_key,
     validate_ai_source,
 )
@@ -358,6 +359,49 @@ def test_pdf_text_fallback_used_when_direct_pdf_extraction_fails():
     assert result["fallback_used"] == "pdf_text"
     assert result["attempted_methods"] == ["openai_file", "pdf_text"]
     assert extractor.text_seen
+
+
+@pytest.mark.parametrize(
+    ("source_type", "expected_key", "expected_blocked_action"),
+    [
+        ("ride_data", "draft_ride_summary", "health_diagnosis"),
+        ("lesson_schedule", "draft_schedule_candidates", "participant_notification"),
+        ("training_note", "draft_training_note", "medical_or_safety_decision"),
+        ("voice_transcript", "draft_tasks", "payment_status_change"),
+        ("health_observation", "draft_health_observation", "diagnosis"),
+        ("photo_inventory", "draft_inventory_candidates", "official_record_save"),
+        ("service_invoice", "draft_invoice_candidates", "official_record_save"),
+    ],
+)
+def test_output_schema_hint_expands_domain_specific_draft_shapes(source_type, expected_key, expected_blocked_action):
+    schema = output_schema_hint(source_type)
+
+    assert f'"source_category": "{source_type}"' in schema
+    assert f'"{expected_key}"' in schema
+    assert '"draft_only": true' in schema
+    assert '"review_required": true' in schema
+    assert f'"{expected_blocked_action}"' in schema
+
+
+def test_parse_output_normalizes_ai_response_to_no_save_review_required_payload():
+    extractor = OpenAIDraftExtractor(api_key="test-key")
+    parsed = extractor._parse_output(
+        {
+            "output_text": (
+                '{"draft_only": false, "review_required": false, '
+                '"source_category": "invoice", "draft_records": []}'
+            )
+        },
+        source_type="health_observation",
+    )
+
+    assert parsed["draft_only"] is True
+    assert parsed["review_required"] is True
+    assert parsed["source_category"] == "health_observation"
+    assert parsed["review_questions"] == []
+    assert "official_record_save" in parsed["blocked_actions"]
+    assert "diagnosis" in parsed["blocked_actions"]
+    assert "treatment_decision" in parsed["blocked_actions"]
 
 
 def test_pdf_manual_review_payload_when_all_pdf_fallbacks_fail():

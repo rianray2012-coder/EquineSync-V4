@@ -67,10 +67,11 @@ def test_ai_output_parse_forces_draft_flags_and_blocked_actions():
             "draft_records": [{"title": "Candidate"}],
             "blocked_actions": ["billing_status_change"],
         })
-    })
+    }, source_type="voice_transcript")
 
     assert parsed["draft_only"] is True
     assert parsed["review_required"] is True
+    assert parsed["source_category"] == "voice_transcript"
     assert "official_record_save" in parsed["blocked_actions"]
     assert "ai_autonomous_mutation" in parsed["blocked_actions"]
     assert "billing_status_change" in parsed["blocked_actions"]
@@ -96,4 +97,3 @@ def test_ai_live_proof_script_is_blocked_without_explicit_enablement():
     assert body["snapshot"]["official_record_save_enabled"] is False
     assert body["snapshot"]["autonomous_mutation_enabled"] is False
     assert "OPENAI_API_KEY" in body["reason"]
-
