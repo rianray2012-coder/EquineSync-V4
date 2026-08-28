@@ -26,6 +26,7 @@ import stripe
 from fastapi import HTTPException
 
 from core.entitlements import normalize_plan_code, plan_by_code
+from core.stripe_client import stripe_client
 from core.subscription_records import sync_account_subscription_by_id, sync_account_subscription_records
 
 logger = logging.getLogger(__name__)
@@ -363,6 +364,13 @@ def _safe_stripe_retrieve(retriever_fn):
     except stripe.error.StripeError as ex:
         logger.warning("stripe transient failure: %s", ex)
         raise _TransientStripeError(str(ex))
+    except ValueError as ex:
+        logger.warning("stripe configuration failure: %s", ex)
+        raise _TransientStripeError(str(ex))
+
+
+def _retrieve_stripe_subscription(stripe_subscription_id: str):
+    return stripe_client().v1.subscriptions.retrieve(stripe_subscription_id)
 
 
 # ----------------------------------------------------------------------
@@ -401,7 +409,7 @@ async def _h_checkout_session_completed(db, event):
         return barn_id, ("checkout_replay", stripe_subscription_id)
 
     stripe_sub = _safe_stripe_retrieve(
-        lambda: stripe.Subscription.retrieve(stripe_subscription_id)
+        lambda: _retrieve_stripe_subscription(stripe_subscription_id)
     )
     plan = await _resolve_plan_for_snapshot(db, plan_tier_code)
     snapshot = (plan or {}).get("feature_limits") or {}

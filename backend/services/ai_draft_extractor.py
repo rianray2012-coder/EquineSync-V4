@@ -11,7 +11,7 @@ import json
 import mimetypes
 import os
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Mapping, Optional
 
 import httpx
 
@@ -48,6 +48,10 @@ AI_TEXT_MIME = {"application/json", "text/plain", "text/csv", "text/markdown"}
 AI_MAX_BYTES = 20 * 1024 * 1024
 PDF_TEXT_MIN_CHARS = 40
 PDF_IMAGE_FALLBACK_MAX_PAGES = 3
+AI_BLOCKED_ACTIONS = [
+    "official_record_save",
+    "ai_autonomous_mutation",
+]
 
 
 def normalize_source_type(value: str) -> str:
@@ -96,8 +100,9 @@ def output_schema_hint(source_type: str) -> str:
             "line_items": [],
             "draft_inventory_candidates": [],
             "draft_service_history_candidates": [],
+            "draft_invoice_candidates": [],
             "review_questions": [],
-            "blocked_actions": [],
+            "blocked_actions": ["official_record_save"],
         })
     if source_type == "photo_inventory":
         return json.dumps({
@@ -108,7 +113,94 @@ def output_schema_hint(source_type: str) -> str:
             "draft_inventory_candidates": [],
             "organization_or_reorder_suggestions": [],
             "review_questions": [],
-            "blocked_actions": [],
+            "blocked_actions": ["official_record_save"],
+        })
+    if source_type == "ride_data":
+        return json.dumps({
+            "draft_only": True,
+            "review_required": True,
+            "source_category": "ride_data",
+            "draft_ride_summary": {
+                "horse": None,
+                "rider": None,
+                "date": None,
+                "duration": None,
+                "distance": None,
+                "speed": None,
+                "heart_rate": None,
+                "gps_or_route_notes": None,
+                "training_focus": [],
+                "observations": [],
+            },
+            "draft_training_candidates": [],
+            "review_questions": [],
+            "blocked_actions": ["official_record_save", "health_diagnosis"],
+        })
+    if source_type == "lesson_schedule":
+        return json.dumps({
+            "draft_only": True,
+            "review_required": True,
+            "source_category": "lesson_schedule",
+            "draft_schedule_candidates": [{
+                "date": None,
+                "start_time": None,
+                "duration": None,
+                "rider": None,
+                "horse": None,
+                "trainer": None,
+                "location": None,
+                "conflicts_or_capacity_notes": [],
+            }],
+            "review_questions": [],
+            "blocked_actions": ["official_record_save", "participant_notification"],
+        })
+    if source_type == "training_note":
+        return json.dumps({
+            "draft_only": True,
+            "review_required": True,
+            "source_category": "training_note",
+            "draft_training_note": {
+                "horse": None,
+                "rider_or_handler": None,
+                "trainer": None,
+                "date": None,
+                "work_summary": None,
+                "progress_notes": [],
+                "next_steps": [],
+                "follow_up_tasks": [],
+            },
+            "review_questions": [],
+            "blocked_actions": ["official_record_save", "medical_or_safety_decision"],
+        })
+    if source_type == "voice_transcript":
+        return json.dumps({
+            "draft_only": True,
+            "review_required": True,
+            "source_category": "voice_transcript",
+            "draft_tasks": [],
+            "draft_inventory_notes": [],
+            "draft_invoice_notes": [],
+            "draft_schedule_notes": [],
+            "draft_training_notes": [],
+            "review_questions": [],
+            "blocked_actions": ["official_record_save", "participant_notification", "payment_status_change"],
+        })
+    if source_type == "health_observation":
+        return json.dumps({
+            "draft_only": True,
+            "review_required": True,
+            "source_category": "health_observation",
+            "draft_health_observation": {
+                "horse": None,
+                "observer": None,
+                "observed_at": None,
+                "symptoms_or_signs": [],
+                "severity_or_score": None,
+                "trend_notes": [],
+                "recommended_review_role": None,
+            },
+            "review_questions": [],
+            "blocked_actions": ["official_record_save", "diagnosis", "treatment_decision", "emergency_triage"],
         })
     return json.dumps({
         "draft_only": True,
@@ -116,8 +208,78 @@ def output_schema_hint(source_type: str) -> str:
         "source_category": source_type,
         "draft_records": [],
         "review_questions": [],
-        "blocked_actions": [],
+        "blocked_actions": ["official_record_save"],
     })
+
+
+def _truthy(value: Optional[str]) -> bool:
+    return (value or "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def openai_api_key_mode(value: Optional[str]) -> str:
+    key = (value or "").strip()
+    if not key:
+        return "missing"
+    if key.startswith("sk-proj-"):
+        return "project_secret_configured"
+    if key.startswith("sk-"):
+        return "secret_configured"
+    return "configured_unknown"
+
+
+def ai_live_extraction_verification_snapshot(
+    *,
+    env: Optional[Mapping[str, str]] = None,
+) -> dict:
+    """Return a redacted readiness view for the opt-in live extraction proof."""
+    source = os.environ if env is None else env
+    model = (source.get("OPENAI_EXTRACTION_MODEL") or DEFAULT_MODEL or "").strip()
+    api_key_mode = openai_api_key_mode(source.get("OPENAI_API_KEY"))
+    proof_enabled = _truthy(source.get("RUN_AI_LIVE_EXTRACTION_PROOF"))
+    api_key_configured = api_key_mode != "missing"
+    return {
+        "provider": "openai",
+        "activation_target": "live_extraction_verification",
+        "api_key_mode": api_key_mode,
+        "model": model or "missing",
+        "proof_enabled": proof_enabled,
+        "api_key_configured": api_key_configured,
+        "ready_to_run_live_proof": proof_enabled and api_key_configured and bool(model),
+        "draft_only": True,
+        "review_required": True,
+        "official_record_save_enabled": False,
+        "autonomous_mutation_enabled": False,
+    }
+
+
+def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict[str, Any]:
+    parsed["draft_only"] = True
+    parsed["review_required"] = True
+    parsed["source_category"] = source_type
+
+    if not isinstance(parsed.get("review_questions"), list):
+        parsed["review_questions"] = []
+
+    blocked_actions = parsed.get("blocked_actions")
+    if not isinstance(blocked_actions, list):
+        blocked_actions = []
+    for action in AI_BLOCKED_ACTIONS:
+        if action not in blocked_actions:
+            blocked_actions.append(action)
+    parsed["blocked_actions"] = blocked_actions
+
+    if source_type == "health_observation":
+        for action in ["diagnosis", "treatment_decision"]:
+            if action not in parsed["blocked_actions"]:
+                parsed["blocked_actions"].append(action)
+    if source_type == "lesson_schedule" and "participant_notification" not in parsed["blocked_actions"]:
+        parsed["blocked_actions"].append("participant_notification")
+    if source_type == "voice_transcript":
+        for action in ["participant_notification", "payment_status_change"]:
+            if action not in parsed["blocked_actions"]:
+                parsed["blocked_actions"].append(action)
+
+    return parsed
 
 
 @dataclass
@@ -224,7 +386,7 @@ class OpenAIDraftExtractor:
             response.raise_for_status()
             return response.json()
 
-    def _parse_output(self, response: Dict[str, Any]) -> Dict[str, Any]:
+    def _parse_output(self, response: Dict[str, Any], *, source_type: str) -> Dict[str, Any]:
         text = response.get("output_text") or ""
         if not text:
             for item in response.get("output") or []:
@@ -239,9 +401,7 @@ class OpenAIDraftExtractor:
             if start < 0 or end <= start:
                 raise RuntimeError("AI output was not valid JSON")
             parsed = json.loads(text[start:end + 1])
-        parsed["draft_only"] = True
-        parsed["review_required"] = True
-        return parsed
+        return normalize_draft_payload(parsed, source_type=source_type)
 
     async def _extract_text(self, *, source_type: str, prompt: str, text: str) -> Dict[str, Any]:
         response = await self._responses({
@@ -260,7 +420,7 @@ class OpenAIDraftExtractor:
             "temperature": 0.1,
             "max_output_tokens": 1800,
         })
-        return self._parse_output(response)
+        return self._parse_output(response, source_type=source_type)
 
     async def _extract_image(
         self,
@@ -289,7 +449,7 @@ class OpenAIDraftExtractor:
             "temperature": 0.1,
             "max_output_tokens": 1800,
         })
-        return self._parse_output(response)
+        return self._parse_output(response, source_type=source_type)
 
     async def _extract_pdf(
         self,
@@ -394,7 +554,7 @@ class OpenAIDraftExtractor:
                     },
                 )
                 response.raise_for_status()
-                parsed = self._parse_output(response.json())
+                parsed = self._parse_output(response.json(), source_type=source_type)
                 return parsed
             finally:
                 await self._delete_openai_file(client, file_id)
@@ -458,7 +618,7 @@ class OpenAIDraftExtractor:
             "temperature": 0.1,
             "max_output_tokens": 1800,
         })
-        return self._parse_output(response)
+        return self._parse_output(response, source_type=source_type)
 
     def _with_fallback_metadata(
         self,

@@ -173,8 +173,9 @@ def test_stripe_webhook_handlers_normalize_founder_alias_metadata_before_lookup(
 def test_dev_webhook_route_does_not_require_stripe_api_key_before_dispatch():
     src = (ROOT / "backend" / "routes" / "subscriptions.py").read_text()
     assert "_stripe_init()\n\n        if secret:" not in src
-    assert 'elif _is_production():\n            raise HTTPException(500, "STRIPE_API_KEY is required in production.")' in src
-    assert "if api_key:\n            stripe.api_key = api_key" in src
+    assert 'if not api_key and _is_production():\n            raise HTTPException(500, "STRIPE_API_KEY is required in production.")' in src
+    assert "construct_webhook_event(" in src
+    assert "stripe.api_key" not in src
 
 
 def test_no_secret_keys_were_committed_for_15r_h():

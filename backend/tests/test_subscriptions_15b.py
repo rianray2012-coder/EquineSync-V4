@@ -147,7 +147,7 @@ def test_billing_events_first_delivery_failure_yields_502_and_retry_502_status(m
     def _boom(*a, **k):
         raise _BoomError("simulated stripe outage")
 
-    monkeypatch.setattr(stripe_sdk.Subscription, "retrieve", _boom)
+    monkeypatch.setattr(h, "_retrieve_stripe_subscription", _boom)
 
     barn_id = f"barn_boom_{uuid.uuid4().hex[:8]}"
     sub_id = f"sub_boom_{uuid.uuid4().hex[:8]}"
@@ -361,14 +361,12 @@ def test_checkout_completed_unknown_plan_does_not_lock_empty_entitlements(monkey
     """
     from routes import subscriptions_webhook_handlers as h
 
-    class _FakeStripeSubscription:
-        @staticmethod
-        def retrieve(_subscription_id):
-            return {
-                "id": _subscription_id,
-                "status": "active",
-                "items": {"data": [{"price": {"id": "price_checkout_unknown"}}]},
-            }
+    def _fake_retrieve_subscription(_subscription_id):
+        return {
+            "id": _subscription_id,
+            "status": "active",
+            "items": {"data": [{"price": {"id": "price_checkout_unknown"}}]},
+        }
 
     sub_id = f"sub_checkout_unknown_{uuid.uuid4().hex[:8]}"
     e = _evt("checkout.session.completed", {
@@ -383,7 +381,7 @@ def test_checkout_completed_unknown_plan_does_not_lock_empty_entitlements(monkey
         },
     })
 
-    monkeypatch.setattr(h.stripe, "Subscription", _FakeStripeSubscription)
+    monkeypatch.setattr(h, "_retrieve_stripe_subscription", _fake_retrieve_subscription)
 
     class _NoPlanCollection:
         async def find_one(self, *args, **kwargs):
