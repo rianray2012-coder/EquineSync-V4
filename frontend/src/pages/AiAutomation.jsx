@@ -98,6 +98,11 @@ const arrayValue = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
 
 const draftResultFor = (job) => job.draft_result || {};
 
+const structuredSummaryFor = (job) => {
+  const result = draftResultFor(job);
+  return result.review_summary || "Review required before saving to any workflow.";
+};
+
 const metadataRowsFor = (job) => {
   const result = draftResultFor(job);
   return [
@@ -427,6 +432,46 @@ export default function AiAutomation() {
                   </ul>
                 </div>
               )}
+              <div
+                className="mb-4 rounded-lg border border-equine-cloud bg-white/70 p-3"
+                data-testid={`ai-draft-structured-review-${job.id}`}
+              >
+                <div className="label-eyebrow-muted mb-2">Draft Review Summary</div>
+                <div
+                  className="text-[13px] text-equine-inkMuted leading-relaxed mb-3"
+                  data-testid={`ai-draft-review-summary-${job.id}`}
+                >
+                  {structuredSummaryFor(job)}
+                </div>
+                {formatConfidence(draftResultFor(job).confidence) && (
+                  <div className="mb-3 rounded-lg border border-equine-cloud bg-equine-cloud/25 px-3 py-2">
+                    <div className="label-eyebrow-muted mb-1">Confidence</div>
+                    <div className="text-[12.5px] text-equine-ink">{formatConfidence(draftResultFor(job).confidence)}</div>
+                  </div>
+                )}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                  <div data-testid={`ai-draft-missing-info-${job.id}`}>
+                    <div className="label-eyebrow-muted mb-1.5">Missing Information</div>
+                    {arrayValue(draftResultFor(job).missing_information).length > 0 ? (
+                      <ul className="space-y-1 text-[12.5px] text-equine-inkMuted leading-relaxed">
+                        {arrayValue(draftResultFor(job).missing_information).map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                    ) : (
+                      <div className="text-[12.5px] text-equine-inkMuted">None listed by draft extractor.</div>
+                    )}
+                  </div>
+                  <div data-testid={`ai-draft-blocked-actions-${job.id}`}>
+                    <div className="label-eyebrow-muted mb-1.5">Blocked Actions</div>
+                    {arrayValue(draftResultFor(job).blocked_actions).length > 0 ? (
+                      <ul className="space-y-1 text-[12.5px] text-equine-inkMuted leading-relaxed">
+                        {arrayValue(draftResultFor(job).blocked_actions).map((item) => <li key={item}>{labelFor(item)}</li>)}
+                      </ul>
+                    ) : (
+                      <div className="text-[12.5px] text-equine-inkMuted">Official saves remain blocked by reviewer workflow.</div>
+                    )}
+                  </div>
+                </div>
+              </div>
               <pre className="max-h-[320px] overflow-auto rounded-lg bg-equine-navy text-equine-platinum/85 p-4 text-[12px] leading-relaxed whitespace-pre-wrap" data-testid={`ai-draft-result-${job.id}`}>
                 {jsonPreview(job.draft_result || { error_code: job.error_code || "pending" })}
               </pre>

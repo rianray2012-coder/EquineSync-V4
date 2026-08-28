@@ -43,3 +43,15 @@ def test_status_pill_forwards_test_hook_props():
 
     assert 'dot = false, ...rest' in source
     assert '<span className={`pill ${map[tone]}`} {...rest}>' in source
+
+
+def test_ai_reviewer_structured_review_sections_have_stable_test_ids():
+    source = _source()
+
+    assert 'data-testid={`ai-draft-structured-review-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-review-summary-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-missing-info-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-blocked-actions-${job.id}`}' in source
+    assert "Draft Review Summary" in source
+    assert "Missing Information" in source
+    assert "Blocked Actions" in source
