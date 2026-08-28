@@ -10,6 +10,7 @@ from fastapi.testclient import TestClient
 from routes.ai_assistant import build_router
 from services.ai_draft_extractor import (
     OpenAIDraftExtractor,
+    AI_SOURCE_TYPES,
     normalize_source_type,
     output_schema_hint,
     private_ai_storage_key,
@@ -380,7 +381,20 @@ def test_output_schema_hint_expands_domain_specific_draft_shapes(source_type, ex
     assert f'"{expected_key}"' in schema
     assert '"draft_only": true' in schema
     assert '"review_required": true' in schema
+    assert '"review_summary": null' in schema
+    assert '"confidence": null' in schema
+    assert '"missing_information": []' in schema
     assert f'"{expected_blocked_action}"' in schema
+
+
+@pytest.mark.parametrize("source_type", sorted(AI_SOURCE_TYPES))
+def test_output_schema_hint_includes_common_structured_review_fields(source_type):
+    schema = output_schema_hint(source_type)
+
+    assert '"review_summary": null' in schema
+    assert '"confidence": null' in schema
+    assert '"missing_information": []' in schema
+    assert '"blocked_actions": [' in schema
 
 
 def test_parse_output_normalizes_ai_response_to_no_save_review_required_payload():
@@ -399,6 +413,9 @@ def test_parse_output_normalizes_ai_response_to_no_save_review_required_payload(
     assert parsed["review_required"] is True
     assert parsed["source_category"] == "health_observation"
     assert parsed["review_questions"] == []
+    assert parsed["missing_information"] == []
+    assert parsed["review_summary"] is None
+    assert parsed["confidence"] is None
     assert "official_record_save" in parsed["blocked_actions"]
     assert "diagnosis" in parsed["blocked_actions"]
     assert "treatment_decision" in parsed["blocked_actions"]

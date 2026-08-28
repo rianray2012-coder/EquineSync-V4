@@ -48,6 +48,11 @@ AI_TEXT_MIME = {"application/json", "text/plain", "text/csv", "text/markdown"}
 AI_MAX_BYTES = 20 * 1024 * 1024
 PDF_TEXT_MIN_CHARS = 40
 PDF_IMAGE_FALLBACK_MAX_PAGES = 3
+COMMON_REVIEW_FIELDS = {
+    "review_summary": None,
+    "confidence": None,
+    "missing_information": [],
+}
 
 
 def normalize_source_type(value: str) -> str:
@@ -91,6 +96,7 @@ def output_schema_hint(source_type: str) -> str:
             "draft_only": True,
             "review_required": True,
             "source_category": source_type,
+            **COMMON_REVIEW_FIELDS,
             "vendor_or_provider": None,
             "document_type": None,
             "line_items": [],
@@ -105,6 +111,7 @@ def output_schema_hint(source_type: str) -> str:
             "draft_only": True,
             "review_required": True,
             "source_category": "photo_inventory",
+            **COMMON_REVIEW_FIELDS,
             "visible_inventory_categories": [],
             "draft_inventory_candidates": [],
             "organization_or_reorder_suggestions": [],
@@ -116,6 +123,7 @@ def output_schema_hint(source_type: str) -> str:
             "draft_only": True,
             "review_required": True,
             "source_category": "ride_data",
+            **COMMON_REVIEW_FIELDS,
             "draft_ride_summary": {
                 "horse": None,
                 "rider": None,
@@ -137,6 +145,7 @@ def output_schema_hint(source_type: str) -> str:
             "draft_only": True,
             "review_required": True,
             "source_category": "lesson_schedule",
+            **COMMON_REVIEW_FIELDS,
             "draft_schedule_candidates": [{
                 "date": None,
                 "start_time": None,
@@ -155,6 +164,7 @@ def output_schema_hint(source_type: str) -> str:
             "draft_only": True,
             "review_required": True,
             "source_category": "training_note",
+            **COMMON_REVIEW_FIELDS,
             "draft_training_note": {
                 "horse": None,
                 "rider_or_handler": None,
@@ -173,6 +183,7 @@ def output_schema_hint(source_type: str) -> str:
             "draft_only": True,
             "review_required": True,
             "source_category": "voice_transcript",
+            **COMMON_REVIEW_FIELDS,
             "draft_tasks": [],
             "draft_inventory_notes": [],
             "draft_invoice_notes": [],
@@ -186,6 +197,7 @@ def output_schema_hint(source_type: str) -> str:
             "draft_only": True,
             "review_required": True,
             "source_category": "health_observation",
+            **COMMON_REVIEW_FIELDS,
             "draft_health_observation": {
                 "horse": None,
                 "observer": None,
@@ -202,6 +214,7 @@ def output_schema_hint(source_type: str) -> str:
         "draft_only": True,
         "review_required": True,
         "source_category": source_type,
+        **COMMON_REVIEW_FIELDS,
         "draft_records": [],
         "review_questions": [],
         "blocked_actions": ["official_record_save"],
@@ -215,6 +228,12 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
 
     if not isinstance(parsed.get("review_questions"), list):
         parsed["review_questions"] = []
+    if not isinstance(parsed.get("missing_information"), list):
+        parsed["missing_information"] = []
+    if "review_summary" not in parsed:
+        parsed["review_summary"] = None
+    if "confidence" not in parsed:
+        parsed["confidence"] = None
 
     blocked_actions = parsed.get("blocked_actions")
     if not isinstance(blocked_actions, list):
