@@ -81,6 +81,7 @@ class InvoiceIn(BaseModel):
 
 
 _VALID_STATUS = {"open", "paid", "overdue"}
+_FINANCIAL_ROLES = {"admin", "barn_manager"}
 
 
 def _money(x) -> float:
@@ -350,6 +351,8 @@ def build_router(*, db, get_current_user, list_collection, clean, new_id) -> API
         existing = await db.invoices.find_one(scope, {"_id": 0})
         if not existing:
             raise HTTPException(404, "Invoice not found")
+        if user.get("role") not in _FINANCIAL_ROLES:
+            raise HTTPException(403, "Financial role required")
         await _enforce_payment_guard(user=user, request=request, invoice_doc=existing, action="invoice.pay")
         await db.invoices.update_one(
             scope,

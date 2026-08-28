@@ -11,7 +11,7 @@ import json
 import mimetypes
 import os
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Mapping, Optional
 
 import httpx
 
@@ -53,6 +53,10 @@ COMMON_REVIEW_FIELDS = {
     "confidence": None,
     "missing_information": [],
 }
+AI_BLOCKED_ACTIONS = [
+    "official_record_save",
+    "ai_autonomous_mutation",
+]
 
 
 def normalize_source_type(value: str) -> str:
@@ -221,6 +225,46 @@ def output_schema_hint(source_type: str) -> str:
     })
 
 
+def _truthy(value: Optional[str]) -> bool:
+    return (value or "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def openai_api_key_mode(value: Optional[str]) -> str:
+    key = (value or "").strip()
+    if not key:
+        return "missing"
+    if key.startswith("sk-proj-"):
+        return "project_secret_configured"
+    if key.startswith("sk-"):
+        return "secret_configured"
+    return "configured_unknown"
+
+
+def ai_live_extraction_verification_snapshot(
+    *,
+    env: Optional[Mapping[str, str]] = None,
+) -> dict:
+    """Return a redacted readiness view for the opt-in live extraction proof."""
+    source = os.environ if env is None else env
+    model = (source.get("OPENAI_EXTRACTION_MODEL") or DEFAULT_MODEL or "").strip()
+    api_key_mode = openai_api_key_mode(source.get("OPENAI_API_KEY"))
+    proof_enabled = _truthy(source.get("RUN_AI_LIVE_EXTRACTION_PROOF"))
+    api_key_configured = api_key_mode != "missing"
+    return {
+        "provider": "openai",
+        "activation_target": "live_extraction_verification",
+        "api_key_mode": api_key_mode,
+        "model": model or "missing",
+        "proof_enabled": proof_enabled,
+        "api_key_configured": api_key_configured,
+        "ready_to_run_live_proof": proof_enabled and api_key_configured and bool(model),
+        "draft_only": True,
+        "review_required": True,
+        "official_record_save_enabled": False,
+        "autonomous_mutation_enabled": False,
+    }
+
+
 def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict[str, Any]:
     parsed["draft_only"] = True
     parsed["review_required"] = True
@@ -238,8 +282,9 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
     blocked_actions = parsed.get("blocked_actions")
     if not isinstance(blocked_actions, list):
         blocked_actions = []
-    if "official_record_save" not in blocked_actions:
-        blocked_actions.append("official_record_save")
+    for action in AI_BLOCKED_ACTIONS:
+        if action not in blocked_actions:
+            blocked_actions.append(action)
     parsed["blocked_actions"] = blocked_actions
 
     if source_type == "health_observation":

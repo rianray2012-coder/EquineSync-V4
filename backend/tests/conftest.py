@@ -241,8 +241,23 @@ def app(test_environment):
     return fastapi_app
 
 
+@pytest.fixture(scope="session")
+def app_client(app):
+    """A shared TestClient so app shutdown runs once per pytest session.
+
+    The application owns a module-level Motor client. Closing the TestClient
+    after every test runs app shutdown and closes that shared async client, then
+    later tests reuse a closed handle. Per-test data isolation still comes from
+    the function-scoped ``isolated_app_database`` fixture below.
+    """
+    from fastapi.testclient import TestClient
+
+    with TestClient(app) as test_client:
+        yield test_client
+
+
 @pytest.fixture
-def client(app, isolated_app_database):
+def client(app_client, isolated_app_database):
     """A ``TestClient`` bound to the real application.
 
     In-process, so it needs no running server — this is the fixture behavioral
@@ -252,7 +267,4 @@ def client(app, isolated_app_database):
     fixture therefore cleans that exact database before and after the client is
     yielded; ``mongo_db`` alone does not isolate application behavior.
     """
-    from fastapi.testclient import TestClient
-
-    with TestClient(app) as test_client:
-        yield test_client
+    yield app_client

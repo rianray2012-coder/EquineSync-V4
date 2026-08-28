@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -12,6 +13,14 @@ from pymongo import MongoClient
 
 
 ROOT = Path(__file__).resolve().parents[2]
+BACKEND_ROOT = ROOT / "backend"
+sys.path.insert(0, str(BACKEND_ROOT))
+
+from core.account_context import standalone_owner_membership_from_user  # noqa: E402
+from core.account_memberships import (  # noqa: E402
+    MEMBERSHIP_COLLECTION,
+    compatibility_membership_from_user,
+)
 
 DEMO_PASSWORD = "demo1234"
 DEMO_USERS = [
@@ -113,17 +122,17 @@ def main() -> int:
             {"$set": doc, "$setOnInsert": {"created_at": now}},
             upsert=True,
         )
-        db.account_memberships.update_one(
-            {"user_id": user_id, "barn_id": barn_id},
+        if role == "horse_owner" and not barn_id:
+            membership = standalone_owner_membership_from_user(doc)
+            membership["updated_at"] = now
+        else:
+            membership = compatibility_membership_from_user(doc, generated_at=now)
+        membership["local_demo_seed"] = True
+        db[MEMBERSHIP_COLLECTION].update_one(
+            {"id": membership["id"]},
             {
-                "$set": {
-                    "user_id": user_id,
-                    "barn_id": barn_id,
-                    "role": role,
-                    "status": "active",
-                    "updated_at": now,
-                },
-                "$setOnInsert": {"id": f"membership_{uuid.uuid4().hex[:12]}", "created_at": now},
+                "$set": membership,
+                "$setOnInsert": {"created_at": now},
             },
             upsert=True,
         )

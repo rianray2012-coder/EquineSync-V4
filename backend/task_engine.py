@@ -153,6 +153,8 @@ class CompleteBody(BaseModel):
     completed_at: Optional[str] = None  # client-reported; defaults to now
     outcome: Literal["done", "partial", "skipped", "refused", "issue"] = "done"
     payload_actual: Dict[str, Any] = Field(default_factory=dict)
+    media_ids: List[str] = Field(default_factory=list)
+    evidence_attachments: List[Dict[str, Any]] = Field(default_factory=list)
     notes: Optional[str] = None
 
     @field_validator("client_completion_id")
@@ -169,6 +171,8 @@ class BulkCompleteItem(BaseModel):
     completed_at: Optional[str] = None
     outcome: Literal["done", "partial", "skipped", "refused", "issue"] = "done"
     payload_actual: Dict[str, Any] = Field(default_factory=dict)
+    media_ids: List[str] = Field(default_factory=list)
+    evidence_attachments: List[Dict[str, Any]] = Field(default_factory=list)
     notes: Optional[str] = None
 
 
@@ -378,6 +382,8 @@ class TaskEngine:
     def _build_completion_doc(task_id: str, body: CompleteBody, user: dict,
                               tenant_id: str, barn_id: str) -> dict:
         completed_at = body.completed_at or iso(now_utc())
+        payload_media = body.payload_actual.get("media_ids") if isinstance(body.payload_actual, dict) else []
+        media_ids = list(dict.fromkeys([*(body.media_ids or []), *((payload_media or []) if isinstance(payload_media, list) else [])]))
         return {
             "id": new_id(),
             "tenant_id": tenant_id,
@@ -389,12 +395,60 @@ class TaskEngine:
             "outcome": body.outcome,
             "payload_actual": body.payload_actual,
             "notes": body.notes,
-            "media_ids": [],
+            "media_ids": media_ids,
+            "evidence_attachments": body.evidence_attachments,
             "client_completion_id": body.client_completion_id,
             "voided": False,
             "voided_by_user_id": None,
             "voided_reason": None,
         }
+
+    async def _record_task_evidence(self, task: dict, completion: dict, body: CompleteBody,
+                                    user: dict, tenant_id: str, barn_id: str) -> List[dict]:
+        rows: List[dict] = []
+        linked_horse_ids = list(task.get("linked_horse_ids") or [])
+        now = iso(now_utc())
+
+        for media_id in completion.get("media_ids") or []:
+            if not media_id:
+                continue
+            rows.append({
+                "id": new_id(),
+                "tenant_id": tenant_id,
+                "barn_id": barn_id,
+                "task_id": task["id"],
+                "completion_id": completion["id"],
+                "evidence_type": "media",
+                "media_id": media_id,
+                "source": "task_completion",
+                "created_at": now,
+                "created_by_user_id": user["id"],
+                "linked_horse_ids": linked_horse_ids,
+            })
+
+        for item in body.evidence_attachments or []:
+            if not isinstance(item, dict):
+                continue
+            rows.append({
+                "id": new_id(),
+                "tenant_id": tenant_id,
+                "barn_id": barn_id,
+                "task_id": task["id"],
+                "completion_id": completion["id"],
+                "evidence_type": item.get("type") or "attachment",
+                "media_id": item.get("media_id"),
+                "document_url": item.get("document_url") or item.get("url"),
+                "label": item.get("label"),
+                "metadata": item.get("metadata") or {},
+                "source": "task_completion",
+                "created_at": now,
+                "created_by_user_id": user["id"],
+                "linked_horse_ids": linked_horse_ids,
+            })
+
+        for row in rows:
+            await self.db.task_evidence.insert_one(row)
+        return rows
 
     @staticmethod
     def _outcome_to_status(outcome: str) -> str:
@@ -590,6 +644,7 @@ class TaskEngine:
 
         await self.db.task_completions.insert_one(completion)
         completion.pop("_id", None)
+        await self._record_task_evidence(task, completion, body, user, tenant_id, barn_id)
 
         new_status = self._outcome_to_status(body.outcome)
         await self.db.tasks.update_one(
@@ -614,6 +669,8 @@ class TaskEngine:
             actor_user_id=user["id"],
             extra={"outcome": body.outcome, "completion_id": completion["id"],
                    "notes": body.notes,
+                   "media_ids": completion.get("media_ids", []),
+                   "evidence_attachment_count": len(completion.get("evidence_attachments") or []),
                    **side_effects},
         )
         try:
@@ -938,6 +995,8 @@ def build_router(db, get_current_user, analytics_track=None, require_active_faci
                     completed_at=item.completed_at,
                     outcome=item.outcome,
                     payload_actual=item.payload_actual,
+                    media_ids=item.media_ids,
+                    evidence_attachments=item.evidence_attachments,
                     notes=item.notes or body.shared_note,
                 )
                 res = await engine.complete_task(item.task_id, comp, user)

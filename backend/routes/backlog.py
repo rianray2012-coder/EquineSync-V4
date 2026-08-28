@@ -466,6 +466,9 @@ MODULES: Dict[str, Dict[str, Any]] = {
             {"key": "area", "label": "Area", "type": TEXT},
             {"key": "summary", "label": "Summary", "type": TEXTAREA, "required": True},
             {"key": "open_items", "label": "Open items", "type": TEXTAREA},
+            {"key": "linked_task_ids", "label": "Linked task IDs", "type": TEXTAREA},
+            {"key": "evidence_completion_ids", "label": "Evidence completion IDs", "type": TEXTAREA},
+            {"key": "signoff_user_ids", "label": "Signoff user IDs", "type": TEXTAREA},
             {"key": "priority", "label": "Priority", "type": SELECT, "options": ["low", "normal", "high"]},
             {"key": "status", "label": "Status", "type": SELECT, "options": ["draft", "submitted", "reviewed"]},
         ],
@@ -578,6 +581,141 @@ def _validate_record(mod: Dict[str, Any], data: Dict[str, Any]):
     missing = [key for key in _required_fields(mod) if data.get(key) in (None, "")]
     if missing:
         raise HTTPException(422, f"Missing required field(s): {', '.join(missing)}")
+
+
+def _split_id_list(value: Any) -> List[str]:
+    if isinstance(value, list):
+        raw_values = value
+    else:
+        raw_values = str(value or "").replace("\n", ",").split(",")
+    return _dedupe([str(item).strip() for item in raw_values if str(item).strip()])
+
+
+def _normalize_handoff_report_data(data: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = dict(data)
+    normalized["linked_task_ids"] = _split_id_list(
+        normalized.get("linked_task_ids") or normalized.get("task_ids")
+    )
+    normalized["evidence_completion_ids"] = _split_id_list(
+        normalized.get("evidence_completion_ids") or normalized.get("completion_ids")
+    )
+    normalized["signoff_user_ids"] = _split_id_list(normalized.get("signoff_user_ids"))
+    normalized["handoff_state"] = normalized.get("status") or "draft"
+    return normalized
+
+
+async def _sync_handoff_links(db, *, new_id, user: dict, record: Dict[str, Any]) -> None:
+    data = record.get("data") or {}
+    barn_id = record.get("barn_id") or user.get("barn_id") or DEFAULT_BARN_ID
+    await db.shift_handoff_links.delete_many({
+        "barn_id": barn_id,
+        "handoff_report_id": record["id"],
+    })
+    now = _now_iso()
+    rows: List[Dict[str, Any]] = []
+    for task_id in data.get("linked_task_ids") or []:
+        rows.append({
+            "id": new_id(),
+            "barn_id": barn_id,
+            "handoff_report_id": record["id"],
+            "link_type": "task",
+            "task_id": task_id,
+            "created_at": now,
+            "created_by_user_id": user["id"],
+        })
+    for completion_id in data.get("evidence_completion_ids") or []:
+        rows.append({
+            "id": new_id(),
+            "barn_id": barn_id,
+            "handoff_report_id": record["id"],
+            "link_type": "completion",
+            "completion_id": completion_id,
+            "created_at": now,
+            "created_by_user_id": user["id"],
+        })
+    for signoff_user_id in data.get("signoff_user_ids") or []:
+        rows.append({
+            "id": new_id(),
+            "barn_id": barn_id,
+            "handoff_report_id": record["id"],
+            "link_type": "signoff",
+            "user_id": signoff_user_id,
+            "created_at": now,
+            "created_by_user_id": user["id"],
+        })
+    for row in rows:
+        await db.shift_handoff_links.insert_one(row)
+
+
+def _minutes(value: Any) -> Optional[int]:
+    try:
+        parsed = datetime.strptime(str(value or "").strip(), "%H:%M")
+    except ValueError:
+        return None
+    return parsed.hour * 60 + parsed.minute
+
+
+def _overlaps(a_start: Optional[int], a_end: Optional[int], b_start: Optional[int], b_end: Optional[int]) -> bool:
+    if None in (a_start, a_end, b_start, b_end):
+        return False
+    return int(a_start) < int(b_end) and int(b_start) < int(a_end)
+
+
+def _allowed_overlap_mode(value: Any) -> bool:
+    return str(value or "").strip().lower() in {
+        "group_lesson",
+        "trainer_authorized_overlap",
+        "buffer_window",
+        "tack_up",
+        "warm_up",
+        "cool_down",
+        "shared_arena",
+    }
+
+
+def _capacity_breached(data: Dict[str, Any]) -> bool:
+    try:
+        count = int(data.get("capacity_count") or data.get("participant_count") or 0)
+        limit = int(data.get("capacity_limit") or data.get("arena_capacity") or 0)
+    except (TypeError, ValueError):
+        return False
+    return bool(limit and count > limit)
+
+
+def _classify_arena_conflicts(data: Dict[str, Any], existing_records: List[Dict[str, Any]]) -> Dict[str, Any]:
+    start = _minutes(data.get("start_time"))
+    end = _minutes(data.get("end_time"))
+    overlaps = []
+    for row in existing_records:
+        row_data = row.get("data") or {}
+        if row_data.get("date") != data.get("date"):
+            continue
+        if str(row_data.get("arena_name") or "").strip().lower() != str(data.get("arena_name") or "").strip().lower():
+            continue
+        if _overlaps(start, end, _minutes(row_data.get("start_time")), _minutes(row_data.get("end_time"))):
+            overlaps.append({"id": row.get("id"), "title": row_data.get("title"), "status": row_data.get("status")})
+
+    allowed_overlap = _allowed_overlap_mode(data.get("booking_mode") or data.get("overlap_policy"))
+    capacity_breached = _capacity_breached(data)
+    override_reason = str(data.get("conflict_override_reason") or "").strip()
+
+    if not overlaps and not capacity_breached:
+        return {"state": "clear", "overlaps": [], "requires_review": False}
+    if override_reason:
+        return {
+            "state": "override_accepted",
+            "overlaps": overlaps,
+            "requires_review": False,
+            "override_reason": override_reason[:500],
+        }
+    if allowed_overlap and not capacity_breached:
+        return {"state": "allowed_overlap", "overlaps": overlaps, "requires_review": False}
+    return {
+        "state": "review_required",
+        "overlaps": overlaps,
+        "requires_review": True,
+        "reason": "exclusive_or_capacity_conflict",
+    }
 
 
 def _base_doc(*, user: dict, new_id, data: Dict[str, Any], barn_id: str = DEFAULT_BARN_ID) -> Dict[str, Any]:
@@ -1360,14 +1498,29 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
     async def create_record(module_key: str, body: FeatureRecordIn, user=Depends(get_current_user)):
         mod = _module_for(module_key)
         require_permission(user, mod["write_permission"])
+        barn_id = user.get("barn_id") or DEFAULT_BARN_ID
         data = await _normalize_staff_identity_data(db, user, module_key, body.data, creating=True)
         data = await _normalize_training_plan_identity_data(db, user, module_key, data, creating=True)
         data = _normalize_group_message_data(module_key, data)
         data = _normalize_digital_form_data(module_key, data)
+        if module_key == "handoff-reports":
+            data = _normalize_handoff_report_data(data)
         _validate_record(mod, data)
+        conflict = None
+        if module_key == "arena-schedule":
+            existing_records = await db[mod["collection"]].find(
+                {"barn_id": barn_id, "archived_at": {"$exists": False}},
+                {"_id": 0},
+            ).to_list(500)
+            conflict = _classify_arena_conflicts(data, existing_records)
+            if conflict["requires_review"]:
+                raise HTTPException(409, {"code": "calendar_conflict_review_required", **conflict})
+            data = {**data, "conflict_state": conflict["state"], "conflict_details": conflict}
         doc = _base_doc(user=user, new_id=new_id, data=data)
         await db[mod["collection"]].insert_one(doc)
         clean = _clean_doc(doc)
+        if module_key == "handoff-reports":
+            await _sync_handoff_links(db, new_id=new_id, user=user, record=clean)
         await write_audit(
             action="record_created",
             user=user,
@@ -1375,6 +1528,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             module_key=module_key,
             record_id=doc["id"],
             after=clean,
+            metadata={"conflict_state": conflict["state"]} if conflict else None,
         )
         return clean
 
@@ -1392,12 +1546,30 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         data = await _normalize_training_plan_identity_data(db, user, module_key, data)
         data = _normalize_group_message_data(module_key, data)
         data = _normalize_digital_form_data(module_key, data)
+        if module_key == "handoff-reports":
+            data = _normalize_handoff_report_data(data)
         _validate_record(mod, data)
+        conflict = None
+        if module_key == "arena-schedule":
+            existing_records = await db[mod["collection"]].find(
+                {
+                    "barn_id": user.get("barn_id") or DEFAULT_BARN_ID,
+                    "id": {"$ne": record_id},
+                    "archived_at": {"$exists": False},
+                },
+                {"_id": 0},
+            ).to_list(500)
+            conflict = _classify_arena_conflicts(data, existing_records)
+            if conflict["requires_review"]:
+                raise HTTPException(409, {"code": "calendar_conflict_review_required", **conflict})
+            data = {**data, "conflict_state": conflict["state"], "conflict_details": conflict}
         await db[mod["collection"]].update_one(
             {"id": record_id},
             {"$set": {"data": data, "updated_at": _now_iso(), "updated_by": user["id"]}},
         )
         updated = await db[mod["collection"]].find_one({"id": record_id}, {"_id": 0})
+        if module_key == "handoff-reports":
+            await _sync_handoff_links(db, new_id=new_id, user=user, record=updated)
         await write_audit(
             action="record_updated",
             user=user,
@@ -1406,7 +1578,10 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             record_id=record_id,
             before=existing,
             after=updated,
-            metadata={"updated_fields": sorted(body.data.keys())},
+            metadata={
+                "updated_fields": sorted(body.data.keys()),
+                **({"conflict_state": conflict["state"]} if conflict else {}),
+            },
         )
         return updated
 

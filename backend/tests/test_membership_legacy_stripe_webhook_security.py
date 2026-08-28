@@ -284,7 +284,7 @@ def test_legacy_webhook_internal_sdk_exception_details_do_not_leak(monkeypatch, 
     def raise_internal_error(*args, **kwargs):
         raise RuntimeError("raw sdk failure secret customer@example.com")
 
-    monkeypatch.setattr("routes.membership.stripe.Webhook.construct_event", raise_internal_error)
+    monkeypatch.setattr("routes.membership.construct_webhook_event", raise_internal_error)
 
     response = _post_legacy(client, payload, "t=1234567890,v1=placeholder")
 
@@ -302,16 +302,17 @@ def test_subscription_webhook_valid_signed_event_remains_unaffected(monkeypatch)
     monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", WEBHOOK_SECRET)
     calls: list[dict[str, Any]] = []
 
-    def fake_construct_event(payload, sig_header, secret):
+    def fake_construct_event(payload, sig_header, secret, api_key=None):
         assert sig_header
         assert secret == WEBHOOK_SECRET
+        assert api_key == "sk_test_subscription_route"
         return json.loads(payload)
 
     async def fake_process_event(db, event):
         calls.append(event)
         return 202, {"received": True, "handled": "subscription-route"}
 
-    monkeypatch.setattr("routes.subscriptions.stripe.Webhook.construct_event", fake_construct_event)
+    monkeypatch.setattr("routes.subscriptions.construct_webhook_event", fake_construct_event)
     monkeypatch.setattr("routes.subscriptions_webhook_handlers.process_event", fake_process_event)
     app = FastAPI()
     app.include_router(

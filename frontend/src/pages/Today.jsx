@@ -115,9 +115,9 @@ export default function Today() {
     setOptimistic((s) => ({ ...s, [taskId]: status }));
   };
 
-  const onComplete = (task) => {
+  const onComplete = (task, options = {}) => {
     applyOptimistic(task.id, "completed");
-    enqueueComplete(task.id, { outcome: "done" });
+    enqueueComplete(task.id, { outcome: "done", ...options });
     toast.success(`${task.title} marked done`, { duration: 1500 });
   };
 

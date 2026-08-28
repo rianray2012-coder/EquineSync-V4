@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Check, X, AlertTriangle, Clock, CheckCircle2 } from "lucide-react";
+import { Check, X, AlertTriangle, Clock, CheckCircle2, Paperclip } from "lucide-react";
 import { fmtTime } from "../../lib/api";
 import { CATEGORY_META } from "../../lib/todayMeta";
 import { SyncDot } from "./SyncBadges";
@@ -21,8 +21,27 @@ const TaskCard = ({
     : `${horseNames.slice(0, 2).join(" · ")} +${horseNames.length - 2}`;
 
   const [dx, setDx] = useState(0);
+  const [evidence, setEvidence] = useState([]);
   const startRef = useRef({ x: 0, t: 0, active: false });
   const completed = task.status === "completed" || task.status === "skipped";
+
+  const evidenceAttachments = evidence.map((file) => ({
+    type: file.type?.startsWith("image/") || file.type?.startsWith("video/") ? "media" : "attachment",
+    label: file.name,
+    metadata: {
+      filename: file.name,
+      byte_size: file.size,
+      mime_type: file.type || "application/octet-stream",
+      source: "today_task_card",
+    },
+  }));
+
+  const completeWithEvidence = () => {
+    onComplete(task, {
+      evidence_attachments: evidenceAttachments,
+      notes: evidence.length ? `Attached ${evidence.length} evidence file(s).` : undefined,
+    });
+  };
 
   const onTouchStart = (e) => {
     if (completed || bulkMode) return;
@@ -123,6 +142,21 @@ const TaskCard = ({
               <CheckCircle2 className="w-5 h-5 text-equine-sage" />
             ) : !bulkMode ? (
               <>
+                <label
+                  data-testid={`task-evidence-label-${task.id}`}
+                  className="hidden sm:inline-flex items-center justify-center w-9 h-9 rounded-xl text-equine-brassLight hover:bg-equine-brass/10 transition-colors cursor-pointer"
+                  aria-label="Attach task evidence"
+                  title="Attach task evidence"
+                >
+                  <Paperclip className="w-4 h-4" strokeWidth={2} />
+                  <input
+                    type="file"
+                    multiple
+                    data-testid={`task-evidence-input-${task.id}`}
+                    className="sr-only"
+                    onChange={(e) => setEvidence(Array.from(e.target.files || []))}
+                  />
+                </label>
                 <button
                   onClick={() => onSkip(task)}
                   data-testid={`skip-btn-${task.id}`}
@@ -132,7 +166,7 @@ const TaskCard = ({
                   <X className="w-4 h-4" strokeWidth={2} />
                 </button>
                 <button
-                  onClick={() => onComplete(task)}
+                  onClick={completeWithEvidence}
                   data-testid={`complete-btn-${task.id}`}
                   className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-equine-navy text-white shadow-sm hover:bg-equine-navyLift active:scale-95 transition-all"
                   aria-label="Complete task"
@@ -143,6 +177,14 @@ const TaskCard = ({
             ) : null}
           </div>
         </div>
+        {!completed && !bulkMode && evidence.length > 0 && (
+          <div
+            data-testid={`task-evidence-summary-${task.id}`}
+            className="mt-3 ml-[54px] rounded-lg border border-equine-brass/25 bg-equine-brass/8 px-3 py-2 text-[12px] text-equine-brassLight"
+          >
+            {evidence.length} evidence file{evidence.length === 1 ? "" : "s"} ready to bind on completion
+          </div>
+        )}
       </div>
     </div>
   );
