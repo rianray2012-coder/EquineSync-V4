@@ -1,7 +1,8 @@
-"""Read-only Stripe live-payment configuration readiness helpers.
+"""Read-only Stripe live-payment readiness helpers.
 
-Wave B verifies configuration shape without calling Stripe, creating Checkout
-Sessions, opening Customer Portal sessions, replaying webhooks, or writing data.
+Wave B/C verifies configuration, catalog, and origin shape without calling
+Stripe, creating Checkout Sessions, opening Customer Portal sessions, replaying
+webhooks, or writing data.
 """
 from __future__ import annotations
 
@@ -10,6 +11,7 @@ from datetime import datetime, timezone
 from typing import Any, Mapping
 from urllib.parse import urlparse
 
+from core.billing_provisioning import ADDON_PRICE_CATALOG, LIVE_STRIPE_PRICE_IDS, LIVE_STRIPE_PRODUCT_IDS
 from core.stripe_client import stripe_live_payment_readiness_snapshot
 
 
@@ -68,6 +70,38 @@ def _allowed_origins(env: Mapping[str, str]) -> list[str]:
     return list(dict.fromkeys(origins))
 
 
+def _origin_modes(origins: list[str]) -> dict[str, int]:
+    counts = Counter()
+    for origin in origins:
+        parsed = urlparse(origin)
+        counts[parsed.scheme or "invalid"] += 1
+    return dict(sorted(counts.items()))
+
+
+def _catalog_override_issues(env: Mapping[str, str]) -> list[dict[str, str]]:
+    issues: list[dict[str, str]] = []
+    for plan_code, expected_product_id in LIVE_STRIPE_PRODUCT_IDS.items():
+        key = f"STRIPE_PRODUCT_{plan_code.upper()}"
+        actual = _clean(env.get(key))
+        if actual and actual != expected_product_id:
+            issues.append(_issue(
+                "blocker",
+                "stripe_product_env_override_mismatch",
+                f"{key} is configured but does not match the approved live catalog Product ID.",
+            ))
+    for plan_code, expected_prices in LIVE_STRIPE_PRICE_IDS.items():
+        for interval, expected_price_id in expected_prices.items():
+            key = f"STRIPE_PRICE_{plan_code.upper()}_{interval.upper()}"
+            actual = _clean(env.get(key))
+            if actual and actual != expected_price_id:
+                issues.append(_issue(
+                    "blocker",
+                    "stripe_price_env_override_mismatch",
+                    f"{key} is configured but does not match the approved live catalog Price ID.",
+                ))
+    return issues
+
+
 def _issue_counts(issues: list[dict[str, str]]) -> dict[str, int]:
     return dict(sorted(Counter(issue["severity"] for issue in issues).items()))
 
@@ -83,6 +117,7 @@ def build_stripe_live_config_readiness_report(
     endpoint_mode = _url_mode(endpoint_url)
     allowed_origins = _allowed_origins(env)
     issues: list[dict[str, str]] = []
+    catalog_issues = _catalog_override_issues(env)
 
     if snapshot["api_key_mode"] != "restricted_live":
         issues.append(_issue(
@@ -120,6 +155,12 @@ def build_stripe_live_config_readiness_report(
             "stripe_allowed_origins_missing",
             "At least one approved app/billing origin must be configured before live payment readiness.",
         ))
+    if production_like and any(urlparse(origin).scheme != "https" for origin in allowed_origins):
+        issues.append(_issue(
+            "blocker",
+            "stripe_allowed_origin_not_https",
+            "All production-like billing origins must use HTTPS.",
+        ))
     if snapshot["live_checkout_enabled"]:
         issues.append(_issue(
             "blocker",
@@ -138,6 +179,7 @@ def build_stripe_live_config_readiness_report(
             "stripe_tax_flag_present",
             "Stripe Tax requires separate tax/legal readiness before automatic tax is enabled.",
         ))
+    issues.extend(catalog_issues)
 
     overall = "pass"
     if any(issue["severity"] == "blocker" for issue in issues):
@@ -148,7 +190,7 @@ def build_stripe_live_config_readiness_report(
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "phase": "Stripe live-payment readiness Wave B",
-        "scope": "read_only_live_config_proof",
+        "scope": "read_only_live_config_catalog_origin_proof",
         "app_env": app_env,
         "production_like": production_like,
         "overall_status": overall,
@@ -163,6 +205,20 @@ def build_stripe_live_config_readiness_report(
         "allowed_origins": {
             "configured": bool(allowed_origins),
             "count": len(allowed_origins),
+            "scheme_counts": _origin_modes(allowed_origins),
+            "all_https": bool(allowed_origins) and all(urlparse(origin).scheme == "https" for origin in allowed_origins),
+        },
+        "catalog": {
+            "approved_product_count": len(LIVE_STRIPE_PRODUCT_IDS),
+            "approved_self_service_plan_count": len(LIVE_STRIPE_PRICE_IDS),
+            "approved_price_count": sum(len(prices) for prices in LIVE_STRIPE_PRICE_IDS.values()),
+            "approved_addon_count": len(ADDON_PRICE_CATALOG),
+            "env_override_mismatch_count": len(catalog_issues),
+        },
+        "return_path_contract": {
+            "checkout_success_path": "/billing/success?session_id={CHECKOUT_SESSION_ID}",
+            "checkout_cancel_path": "/billing/subscription?cancelled=1",
+            "customer_portal_return_path": "/billing/subscription",
         },
         "proof_guards": {
             "provider_api_calls_performed": False,
@@ -180,19 +236,20 @@ def build_stripe_live_config_readiness_report(
             "No refund, dispute, payout, transfer, or connected-account money movement.",
             "No Stripe Tax activation.",
             "No customer-facing live payment UI activation.",
+            "No live Stripe Dashboard catalog mutation.",
         ],
     }
 
 
 def render_stripe_live_config_readiness_markdown(report: Mapping[str, Any]) -> str:
     lines = [
-        "# Stripe Live-Payment Readiness Wave B",
+        "# Stripe Live-Payment Readiness Wave B/C",
         "",
         f"Generated at: `{report.get('generated_at')}`",
         "",
         "## Scope",
         "",
-        "Read-only Stripe live configuration proof. No provider API calls, Checkout Sessions, Customer Portal Sessions, webhook replays, database writes, or live payment collection are performed.",
+        "Read-only Stripe live configuration, catalog, and origin proof. No provider API calls, Checkout Sessions, Customer Portal Sessions, webhook replays, database writes, catalog mutations, or live payment collection are performed.",
         "",
         "## Overall",
         "",
@@ -232,6 +289,28 @@ def render_stripe_live_config_readiness_markdown(report: Mapping[str, Any]) -> s
         f"| Webhook endpoint URL mode | {endpoint.get('url_mode')} |",
         f"| Allowed origins configured | {origins.get('configured')} |",
         f"| Allowed origin count | {origins.get('count')} |",
+        f"| Allowed origin schemes | {origins.get('scheme_counts') or {}} |",
+        f"| Allowed origins all HTTPS | {origins.get('all_https')} |",
+        "",
+        "## Catalog And Return Path Proof",
+        "",
+        "| Item | Value |",
+        "| --- | --- |",
+    ])
+    catalog = report.get("catalog") or {}
+    for key in (
+        "approved_product_count",
+        "approved_self_service_plan_count",
+        "approved_price_count",
+        "approved_addon_count",
+        "env_override_mismatch_count",
+    ):
+        lines.append(f"| {key} | {catalog.get(key)} |")
+    paths = report.get("return_path_contract") or {}
+    for key in ("checkout_success_path", "checkout_cancel_path", "customer_portal_return_path"):
+        lines.append(f"| {key} | {paths.get(key)} |")
+
+    lines.extend([
         "",
         "## Issue Summary",
         "",
