@@ -55,3 +55,19 @@ def test_ai_reviewer_structured_review_sections_have_stable_test_ids():
     assert "Draft Review Summary" in source
     assert "Missing Information" in source
     assert "Blocked Actions" in source
+
+
+def test_ai_inventory_candidate_reviewer_has_no_save_hooks_and_local_actions():
+    source = _source()
+
+    assert 'data-testid={`ai-draft-inventory-candidates-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-inventory-no-save-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-inventory-candidate-${job.id}-${index}`}' in source
+    assert 'data-testid={`ai-draft-inventory-candidate-name-${job.id}-${index}`}' in source
+    assert 'data-testid={`ai-draft-inventory-candidate-confidence-${job.id}-${index}`}' in source
+    assert 'data-testid={`ai-draft-inventory-candidate-disposition-${job.id}-${index}`}' in source
+    assert 'data-testid={`ai-draft-inventory-mark-reviewed-${job.id}-${index}`}' in source
+    assert 'data-testid={`ai-draft-inventory-mark-duplicate-${job.id}-${index}`}' in source
+    assert 'data-testid={`ai-draft-inventory-mark-rejected-${job.id}-${index}`}' in source
+    assert "save official records later from Inventory after the save workflow is approved" in source
+    assert "api.post(`/inventory" not in source
