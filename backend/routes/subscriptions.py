@@ -17,6 +17,8 @@ from __future__ import annotations
 
 import logging
 import os
+import secrets
+import string
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -25,7 +27,13 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel
 
 from core.billing_provisioning import ADDON_PRICE_CATALOG, PLAN_CATALOG, PLAN_ORDER
-from core.stripe_client import construct_webhook_event, stripe_client, stripe_live_session_enabled
+from core.stripe_client import (
+    construct_webhook_event,
+    stripe_client,
+    stripe_env_flag_enabled,
+    stripe_key_mode,
+    stripe_live_session_enabled,
+)
 from core.account_context import standalone_owner_membership_from_user
 from core.entitlements import normalize_plan_code
 from core.permissions import has_capability, require
@@ -71,6 +79,7 @@ OWNER_BILLING_TIERS = {"individual_owner", "private_owner_plus"}
 TRIAL_DAYS = 14
 BILLABLE_STAFF_ROLES = ["trainer", "groom", "working_student", "veterinarian", "farrier"]
 BILLABLE_OWNER_MANAGER_ROLES = ["admin", "barn_manager", "barn_owner"]
+LIVE_CHECKOUT_PROOF_PLATFORM_ROLES = {"super_admin", "platform_admin", "billing_admin"}
 
 
 def _now_iso() -> str:
@@ -249,6 +258,28 @@ def _require_stripe_session_guard(session_kind: str) -> None:
         503,
         f"Stripe live {label} creation is disabled pending founder readiness approval.",
     )
+
+
+def _is_live_stripe_runtime() -> bool:
+    return stripe_key_mode(os.environ.get("STRIPE_API_KEY")) in {"restricted_live", "secret_live"}
+
+
+def _require_live_checkout_proof_authority(user: dict) -> None:
+    if not _is_live_stripe_runtime():
+        return
+    if not stripe_env_flag_enabled("STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED"):
+        raise HTTPException(
+            503,
+            "Stripe live founder Checkout proof is disabled pending first-payment authorization.",
+        )
+    platform_role = ((user or {}).get("platform_role") or "").strip().lower()
+    if platform_role not in LIVE_CHECKOUT_PROOF_PLATFORM_ROLES:
+        raise HTTPException(403, "Platform billing authority required for live founder Checkout proof.")
+
+
+def _checkout_integration_identifier() -> str:
+    suffix = "".join(secrets.choice(string.ascii_lowercase) for _ in range(8))
+    return f"equinesync_checkout_{suffix}"
 
 
 async def _ensure_stripe_customer(db, user, barn) -> str:
@@ -548,6 +579,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
             raise HTTPException(500, f"Plan '{tier}' is missing a Stripe Price for cycle={cycle}.")
 
         _require_stripe_session_guard("checkout")
+        _require_live_checkout_proof_authority(user)
 
         # Mutating endpoint — barn row may need to be created so we can
         # attach the Stripe customer + subscription references.
@@ -576,6 +608,7 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 "cancel_url": cancel_url,
                 "subscription_data": sub_data or None,
                 "allow_promotion_codes": True,
+                "integration_identifier": _checkout_integration_identifier(),
                 "metadata": {
                     "barn_id": barn["id"],
                     "billing_scope": barn.get("billing_scope") or "facility",

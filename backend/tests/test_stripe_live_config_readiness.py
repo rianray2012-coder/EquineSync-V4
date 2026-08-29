@@ -28,6 +28,7 @@ def _ready_env() -> dict[str, str]:
         "ALLOWED_BILLING_ORIGINS": "https://app.equine-sync.com",
         "STRIPE_LIVE_CHECKOUT_ENABLED": "false",
         "STRIPE_LIVE_PORTAL_ENABLED": "false",
+        "STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED": "false",
     }
 
 
@@ -41,6 +42,7 @@ def test_ready_live_config_passes_without_enabling_live_money():
     assert report["stripe"]["webhook_secret_configured"] is True
     assert report["stripe"]["live_checkout_enabled"] is False
     assert report["stripe"]["live_portal_enabled"] is False
+    assert report["stripe"]["live_founder_checkout_proof_enabled"] is False
     assert report["stripe"]["live_money_enabled"] is False
     assert report["webhook_endpoint"] == {
         "configured": True,
@@ -76,6 +78,7 @@ def test_live_config_report_blocks_incomplete_or_enabled_live_session_state():
         "STRIPE_API_KEY": "sk_live_FAKE_SECRET_KEY_SHOULD_NOT_RENDER",
         "STRIPE_LIVE_CHECKOUT_ENABLED": "true",
         "STRIPE_LIVE_PORTAL_ENABLED": "true",
+        "STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED": "true",
         "STRIPE_LIVE_WEBHOOK_ENDPOINT_URL": "http://api.equine-sync.com/api/webhook/stripe-subscriptions",
         "APP_BASE_URL": "http://app.equine-sync.com",
         "STRIPE_PRODUCT_STARTER_BARN": "prod_stale",
@@ -93,6 +96,7 @@ def test_live_config_report_blocks_incomplete_or_enabled_live_session_state():
     assert "stripe_allowed_origin_not_https" in kinds
     assert "stripe_live_checkout_flag_enabled" in kinds
     assert "stripe_live_portal_flag_enabled" in kinds
+    assert "stripe_live_founder_checkout_proof_flag_enabled" in kinds
     assert "stripe_product_env_override_mismatch" in kinds
     assert "stripe_price_env_override_mismatch" in kinds
     assert report["proof_guards"]["live_money_enabled"] is True
@@ -106,6 +110,7 @@ def test_rendered_wave_b_report_never_contains_raw_secret_inputs():
     assert "# Stripe Live-Payment Readiness Wave B/C" in markdown
     assert "restricted_live" in markdown
     assert "publishable_live" in markdown
+    assert "live_founder_checkout_proof_enabled | False" in markdown
     assert "approved_price_count | 16" in markdown
     assert "customer_portal_return_path | /billing/subscription" in markdown
     assert "checkout_sessions_created | False" in markdown

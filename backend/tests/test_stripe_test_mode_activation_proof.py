@@ -266,6 +266,7 @@ def test_stripe_live_payment_readiness_snapshot_is_redacted_and_disabled_by_defa
         "live_key_configured": True,
         "live_checkout_enabled": False,
         "live_portal_enabled": False,
+        "live_founder_checkout_proof_enabled": False,
         "live_money_enabled": False,
     }
     rendered = json.dumps(snapshot)
@@ -324,6 +325,75 @@ def test_live_customer_portal_is_blocked_by_default_before_stripe_session_creati
     assert portal.status_code == 503, portal.text
     assert "founder readiness approval" in portal.json()["detail"]
     assert calls == []
+
+
+def test_live_checkout_requires_platform_billing_authority_even_when_flags_enabled(monkeypatch):
+    monkeypatch.setenv("STRIPE_API_KEY", "rk_live_activation_guard")
+    monkeypatch.setenv("APP_BASE_URL", "https://app.equine-sync.test")
+    monkeypatch.setenv("ALLOWED_BILLING_ORIGINS", "https://app.equine-sync.test")
+    monkeypatch.setenv("STRIPE_LIVE_CHECKOUT_ENABLED", "true")
+    monkeypatch.setenv("STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED", "true")
+    calls = []
+
+    def fake_stripe_client(api_key=None):
+        calls.append({"kind": "client_init", "api_key": api_key})
+        return _FakeStripeClient(calls)
+
+    monkeypatch.setattr("routes.subscriptions.stripe_client", fake_stripe_client)
+    db = _FakeDB()
+    client, _ = _client({"id": "manager-1", "barn_id": "barn-stripe-proof", "role": "barn_manager"}, db)
+
+    checkout = client.post("/api/subscriptions/checkout", json={
+        "plan_tier_code": "starter_barn",
+        "billing_cycle": "monthly",
+        "origin_url": "https://app.equine-sync.test/dashboard",
+    })
+
+    assert checkout.status_code == 403, checkout.text
+    assert "Platform billing authority required" in checkout.json()["detail"]
+    assert calls == []
+    assert db.barns.rows[0]["stripe_customer_id"] is None
+
+
+def test_live_checkout_founder_proof_path_uses_hosted_checkout_and_integration_identifier(monkeypatch):
+    monkeypatch.setenv("STRIPE_API_KEY", "rk_live_activation_guard")
+    monkeypatch.setenv("APP_BASE_URL", "https://app.equine-sync.test")
+    monkeypatch.setenv("ALLOWED_BILLING_ORIGINS", "https://app.equine-sync.test")
+    monkeypatch.setenv("STRIPE_LIVE_CHECKOUT_ENABLED", "true")
+    monkeypatch.setenv("STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED", "true")
+    calls = []
+
+    def fake_stripe_client(api_key=None):
+        assert api_key == "rk_live_activation_guard"
+        return _FakeStripeClient(calls)
+
+    monkeypatch.setattr("routes.subscriptions.stripe_client", fake_stripe_client)
+    db = _FakeDB()
+    client, _ = _client({
+        "id": "billing-admin-1",
+        "barn_id": "barn-stripe-proof",
+        "role": "admin",
+        "platform_role": "billing_admin",
+    }, db)
+
+    checkout = client.post("/api/subscriptions/checkout", json={
+        "plan_tier_code": "starter_barn",
+        "billing_cycle": "monthly",
+        "origin_url": "https://app.equine-sync.test/dashboard",
+    })
+
+    assert checkout.status_code == 200, checkout.text
+    assert checkout.json()["url"] == "https://checkout.stripe.com/c/test_activation_proof"
+    assert [call["kind"] for call in calls] == ["customer", "checkout_session"]
+    checkout_params = calls[-1]["params"]
+    assert checkout_params["mode"] == "subscription"
+    assert checkout_params["integration_identifier"].startswith("equinesync_checkout_")
+    suffix = checkout_params["integration_identifier"].removeprefix("equinesync_checkout_")
+    assert len(suffix) == 8
+    assert suffix.isalpha()
+    assert suffix.islower()
+    assert "payment_method_types" not in checkout_params
+    assert "automatic_tax" not in checkout_params
 
 
 def test_stripe_test_mode_checkout_webhook_and_owner_safe_subscription_projection(monkeypatch):
@@ -386,6 +456,7 @@ def test_stripe_test_mode_checkout_webhook_and_owner_safe_subscription_projectio
     assert checkout_params["line_items"] == [{"price": "price_test_starter_monthly", "quantity": 1}]
     assert checkout_params["success_url"] == "https://app.equine-sync.test/billing/success?session_id={CHECKOUT_SESSION_ID}"
     assert checkout_params["cancel_url"] == "https://app.equine-sync.test/billing/subscription?cancelled=1"
+    assert checkout_params["integration_identifier"].startswith("equinesync_checkout_")
     assert "payment_method_types" not in checkout_params
     assert "automatic_tax" not in checkout_params
 

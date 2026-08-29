@@ -96,6 +96,10 @@ def stripe_live_payment_readiness_snapshot(
     webhook_secret_configured = bool((source.get("STRIPE_WEBHOOK_SECRET") or "").strip())
     live_checkout_enabled = stripe_env_flag_enabled("STRIPE_LIVE_CHECKOUT_ENABLED", env=source)
     live_portal_enabled = stripe_env_flag_enabled("STRIPE_LIVE_PORTAL_ENABLED", env=source)
+    live_founder_checkout_proof_enabled = stripe_env_flag_enabled(
+        "STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED",
+        env=source,
+    )
     return {
         "provider": "stripe",
         "activation_target": "live_payment_readiness",
@@ -105,6 +109,7 @@ def stripe_live_payment_readiness_snapshot(
         "live_key_configured": api_mode in _LIVE_KEY_MODES,
         "live_checkout_enabled": live_checkout_enabled,
         "live_portal_enabled": live_portal_enabled,
+        "live_founder_checkout_proof_enabled": live_founder_checkout_proof_enabled,
         "live_money_enabled": live_checkout_enabled or live_portal_enabled,
     }
 

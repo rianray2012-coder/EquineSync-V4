@@ -167,6 +167,12 @@ def build_stripe_live_config_readiness_report(
             "stripe_live_checkout_flag_enabled",
             "STRIPE_LIVE_CHECKOUT_ENABLED must remain false during Wave B read-only configuration proof.",
         ))
+    if snapshot["live_founder_checkout_proof_enabled"]:
+        issues.append(_issue(
+            "blocker",
+            "stripe_live_founder_checkout_proof_flag_enabled",
+            "STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED must remain false during read-only configuration proof.",
+        ))
     if snapshot["live_portal_enabled"]:
         issues.append(_issue(
             "blocker",
@@ -227,6 +233,7 @@ def build_stripe_live_config_readiness_report(
             "webhook_events_replayed": False,
             "database_writes_performed": False,
             "live_money_enabled": bool(snapshot["live_money_enabled"]),
+            "live_founder_checkout_proof_enabled": bool(snapshot["live_founder_checkout_proof_enabled"]),
         },
         "deferred": [
             "No live Checkout Session creation.",
@@ -272,6 +279,7 @@ def render_stripe_live_config_readiness_markdown(report: Mapping[str, Any]) -> s
         "live_key_configured",
         "live_checkout_enabled",
         "live_portal_enabled",
+        "live_founder_checkout_proof_enabled",
         "live_money_enabled",
     ):
         lines.append(f"| {key} | {stripe.get(key)} |")
