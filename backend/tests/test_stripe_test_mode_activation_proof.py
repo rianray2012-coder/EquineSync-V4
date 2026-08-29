@@ -117,6 +117,10 @@ class _Collection:
                 row.update((update or {}).get("$set", {}))
                 for key, value in (update or {}).get("$inc", {}).items():
                     row[key] = row.get(key, 0) + value
+                for key, value in (update or {}).get("$addToSet", {}).items():
+                    row.setdefault(key, [])
+                    if value not in row[key]:
+                        row[key].append(value)
                 return type("UpdateResult", (), {"matched_count": 1})()
         if upsert:
             doc = dict(query or {})
@@ -124,6 +128,10 @@ class _Collection:
             doc.update((update or {}).get("$set", {}))
             for key, value in (update or {}).get("$inc", {}).items():
                 doc[key] = doc.get(key, 0) + value
+            for key, value in (update or {}).get("$addToSet", {}).items():
+                doc.setdefault(key, [])
+                if value not in doc[key]:
+                    doc[key].append(value)
             self.rows.append(doc)
         return type("UpdateResult", (), {"matched_count": 0})()
 
