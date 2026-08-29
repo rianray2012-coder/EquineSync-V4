@@ -28,6 +28,7 @@ AI_JOB_COLLECTION = "ai_draft_jobs"
 AI_REVIEW_COLLECTION = "ai_draft_reviews"
 
 TERMINAL_REVIEW_STATES = {"approved_no_save", "rejected"}
+AI_DRAFT_ALLOWED_ROLES = {"admin", "barn_owner", "barn_manager", "trainer", "horse_owner"}
 
 
 def _now_iso() -> str:
@@ -36,6 +37,11 @@ def _now_iso() -> str:
 
 def _hash_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def _require_ai_draft_role(user: Dict[str, Any]) -> None:
+    if (user or {}).get("role") not in AI_DRAFT_ALLOWED_ROLES:
+        raise HTTPException(status_code=403, detail="AI draft review access required")
 
 
 def _source_projection(doc: Dict[str, Any]) -> Dict[str, Any]:
@@ -160,6 +166,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         request: Request,
         user=Depends(get_current_user),
     ):
+        _require_ai_draft_role(user)
         try:
             mime_type = validate_ai_source(
                 source_type=body.source_type,
@@ -226,6 +233,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         request: Request,
         user=Depends(get_current_user),
     ):
+        _require_ai_draft_role(user)
         if source_id != body.source_id:
             raise HTTPException(400, "source_id mismatch")
         source = await db[AI_SOURCE_COLLECTION].find_one(
@@ -263,6 +271,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         request: Request,
         user=Depends(get_current_user),
     ):
+        _require_ai_draft_role(user)
         if bool(body.source_id) == bool(body.source_text):
             raise HTTPException(400, "Provide exactly one of source_id or source_text")
         barn_id = resolve_barn_id(user)
@@ -398,6 +407,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         limit: int = Query(default=25, ge=1, le=100),
         user=Depends(get_current_user),
     ):
+        _require_ai_draft_role(user)
         query = {"barn_id": resolve_barn_id(user), "user_id": user.get("id")}
         if status:
             query["status"] = status.strip()
@@ -409,6 +419,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
 
     @router.get("/{job_id}")
     async def get_draft_job(job_id: str, user=Depends(get_current_user)):
+        _require_ai_draft_role(user)
         job = await db[AI_JOB_COLLECTION].find_one(
             {"id": job_id, "barn_id": resolve_barn_id(user), "user_id": user.get("id")},
             {"_id": 0, "prompt": 0},
@@ -424,6 +435,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         request: Request,
         user=Depends(get_current_user),
     ):
+        _require_ai_draft_role(user)
         job = await db[AI_JOB_COLLECTION].find_one(
             {"id": job_id, "barn_id": resolve_barn_id(user), "user_id": user.get("id")},
             {"_id": 0},

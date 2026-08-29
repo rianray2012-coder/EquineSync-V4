@@ -228,6 +228,49 @@ def test_inline_text_job_is_draft_only_and_review_does_not_save_records():
         assert "horse_health_records" not in db
 
 
+@pytest.mark.parametrize("role", ["rider", "parent", "groom", "working_student", "service_provider", "farrier"])
+def test_ai_draft_api_denies_roles_outside_reviewer_allowlist(role):
+    db = FakeDb()
+    user = {"id": f"u_{role}", "role": role, "barn_id": "barn_1", "email": f"{role}@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "photo_inventory",
+            "source_text": "Draft tack room inventory candidates.",
+            "requested_output": "draft_records",
+        })
+        listed = client.get("/api/ai/draft-jobs")
+        intent = client.post("/api/ai/draft-jobs/upload-intents", json={
+            "source_type": "photo_inventory",
+            "filename": "tack-room.jpg",
+            "mime_type": "image/jpeg",
+            "byte_size": 1024,
+        })
+
+    assert created.status_code == 403
+    assert listed.status_code == 403
+    assert intent.status_code == 403
+    assert "AI draft review access required" in created.text
+    assert "ai_draft_jobs" not in db
+    assert "ai_draft_sources" not in db
+
+
+def test_ai_draft_api_allows_horse_owner_reviewer_flow():
+    db = FakeDb()
+    user = {"id": "u_owner", "role": "horse_owner", "barn_id": "barn_1", "email": "owner@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "photo_inventory",
+            "source_text": "Draft a personal tack inventory candidate.",
+            "requested_output": "draft_records",
+        })
+        assert created.status_code == 201
+        job = created.json()["job"]
+        assert job["draft_only"] is True
+        assert job["review_required"] is True
+
+
 def test_list_draft_jobs_returns_only_own_draft_queue():
     db = FakeDb()
     owner = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "owner@example.test"}
