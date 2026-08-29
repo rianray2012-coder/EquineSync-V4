@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { AlertTriangle, CheckCircle2, ClipboardCheck, FileSearch, FileUp, RefreshCw, ShieldCheck, Sparkles, XCircle } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ClipboardCheck, Edit3, FileSearch, FileUp, PackageCheck, RefreshCw, ShieldCheck, Sparkles, XCircle } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "../lib/api";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
@@ -98,6 +98,18 @@ const arrayValue = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
 
 const draftResultFor = (job) => job.draft_result || {};
 
+const inventoryCandidatesFor = (job) => arrayValue(draftResultFor(job).draft_inventory_candidates);
+
+const candidateFieldValue = (candidate, field, fallback = "Needs review") => {
+  const value = candidate?.[field];
+  if (value === null || value === undefined || value === "") return fallback;
+  if (Array.isArray(value)) return value.length ? value.join(", ") : fallback;
+  if (typeof value === "boolean") return value ? "Yes" : "No";
+  return String(value);
+};
+
+const candidateKeyFor = (job, index) => `${job.id}:${index}`;
+
 const structuredSummaryFor = (job) => {
   const result = draftResultFor(job);
   return result.review_summary || "Review required before saving to any workflow.";
@@ -145,6 +157,8 @@ export default function AiAutomation() {
   const [creating, setCreating] = useState(false);
   const [reviewingId, setReviewingId] = useState(null);
   const [reviewNotes, setReviewNotes] = useState({});
+  const [candidateEdits, setCandidateEdits] = useState({});
+  const [candidateDisposition, setCandidateDisposition] = useState({});
 
   const loadJobs = useCallback(async () => {
     setLoading(true);
@@ -236,6 +250,25 @@ export default function AiAutomation() {
     } finally {
       setReviewingId(null);
     }
+  };
+
+  const updateCandidateEdit = (job, index, field, value) => {
+    const key = candidateKeyFor(job, index);
+    setCandidateEdits((current) => ({
+      ...current,
+      [key]: {
+        ...(current[key] || {}),
+        [field]: value,
+      },
+    }));
+  };
+
+  const markCandidateDisposition = (job, index, disposition) => {
+    const key = candidateKeyFor(job, index);
+    setCandidateDisposition((current) => ({
+      ...current,
+      [key]: disposition,
+    }));
   };
 
   return (
@@ -430,6 +463,113 @@ export default function AiAutomation() {
                   <ul className="space-y-1.5 text-[13px] text-equine-inkMuted leading-relaxed">
                     {arrayValue(draftResultFor(job).review_questions).map((question) => <li key={question}>{question}</li>)}
                   </ul>
+                </div>
+              )}
+              {inventoryCandidatesFor(job).length > 0 && (
+                <div
+                  className="mb-4 rounded-lg border border-equine-sage/25 bg-equine-sage/5 p-3"
+                  data-testid={`ai-draft-inventory-candidates-${job.id}`}
+                >
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div>
+                      <div className="label-eyebrow-muted mb-1">Inventory Candidates</div>
+                      <div className="text-[13px] text-equine-inkMuted leading-relaxed">
+                        Review and correct these candidate items here, then save official records later from Inventory after the save workflow is approved.
+                      </div>
+                    </div>
+                    <StatusPill tone="warning" data-testid={`ai-draft-inventory-no-save-${job.id}`}>Not Saved</StatusPill>
+                  </div>
+                  <div className="space-y-3">
+                    {inventoryCandidatesFor(job).map((candidate, index) => {
+                      const editKey = candidateKeyFor(job, index);
+                      const edits = candidateEdits[editKey] || {};
+                      const disposition = candidateDisposition[editKey] || "needs_review";
+                      const display = { ...candidate, ...edits };
+                      return (
+                        <div
+                          key={editKey}
+                          className="rounded-lg border border-equine-cloud bg-white/80 p-3"
+                          data-testid={`ai-draft-inventory-candidate-${job.id}-${index}`}
+                        >
+                          <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2 text-equine-ink font-display text-xl">
+                                <PackageCheck className="w-4 h-4 text-equine-sage flex-shrink-0" />
+                                <span className="truncate" data-testid={`ai-draft-inventory-candidate-name-${job.id}-${index}`}>
+                                  {candidateFieldValue(display, "item_name", "Unnamed candidate")}
+                                </span>
+                              </div>
+                              <div className="text-[12.5px] text-equine-inkMuted mt-1">
+                                {candidateFieldValue(display, "category")} · {candidateFieldValue(display, "quantity", "Qty needs review")} {candidateFieldValue(display, "unit", "")}
+                              </div>
+                            </div>
+                            <div className="flex flex-wrap gap-2 justify-end">
+                              <StatusPill tone={disposition === "rejected" ? "critical" : disposition === "duplicate" ? "warning" : "neutral"} data-testid={`ai-draft-inventory-candidate-disposition-${job.id}-${index}`}>
+                                {disposition === "duplicate" ? "Possible duplicate" : disposition === "rejected" ? "Rejected locally" : reviewLabelFor(display.review_status || "needs_review")}
+                              </StatusPill>
+                              <StatusPill tone="neutral" data-testid={`ai-draft-inventory-candidate-confidence-${job.id}-${index}`}>
+                                {candidateFieldValue(display, "source_confidence", "Confidence needed")}
+                              </StatusPill>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 mb-3">
+                            {[
+                              ["item_name", "Item"],
+                              ["category", "Category"],
+                              ["quantity", "Quantity"],
+                              ["storage_location", "Storage"],
+                            ].map(([field, label]) => (
+                              <label key={field} className="block">
+                                <span className="block text-[11px] uppercase tracking-[0.16em] text-equine-inkMuted mb-1">{label}</span>
+                                <input
+                                  className="w-full rounded-lg border border-equine-cloud bg-white px-3 py-2 text-[13px] text-equine-ink"
+                                  data-testid={`ai-draft-inventory-edit-${field}-${job.id}-${index}`}
+                                  onChange={(event) => updateCandidateEdit(job, index, field, event.target.value)}
+                                  value={candidateFieldValue(display, field, "")}
+                                />
+                              </label>
+                            ))}
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-3 text-[12.5px] text-equine-inkMuted">
+                            <div><span className="font-semibold text-equine-ink">Assign:</span> {candidateFieldValue(display, "horse_or_barn_assignment")}</div>
+                            <div><span className="font-semibold text-equine-ink">Reorder:</span> {candidateFieldValue(display, "reorder_candidate", "Needs review")}</div>
+                            <div><span className="font-semibold text-equine-ink">Unit:</span> {candidateFieldValue(display, "unit", "Needs review")}</div>
+                          </div>
+                          {arrayValue(display.notes).length > 0 && (
+                            <div className="mb-3 text-[12.5px] text-equine-inkMuted" data-testid={`ai-draft-inventory-candidate-notes-${job.id}-${index}`}>
+                              <span className="font-semibold text-equine-ink">Notes:</span> {arrayValue(display.notes).join(" ")}
+                            </div>
+                          )}
+                          <div className="flex flex-wrap gap-2">
+                            <button
+                              className="btn-secondary inline-flex items-center gap-1.5 !py-1.5 !px-3 text-[12.5px]"
+                              data-testid={`ai-draft-inventory-mark-reviewed-${job.id}-${index}`}
+                              onClick={() => markCandidateDisposition(job, index, "locally_reviewed")}
+                              type="button"
+                            >
+                              <CheckCircle2 className="w-3.5 h-3.5" /> Mark reviewed
+                            </button>
+                            <button
+                              className="btn-secondary inline-flex items-center gap-1.5 !py-1.5 !px-3 text-[12.5px]"
+                              data-testid={`ai-draft-inventory-mark-duplicate-${job.id}-${index}`}
+                              onClick={() => markCandidateDisposition(job, index, "duplicate")}
+                              type="button"
+                            >
+                              <Edit3 className="w-3.5 h-3.5" /> Mark duplicate
+                            </button>
+                            <button
+                              className="btn-secondary inline-flex items-center gap-1.5 !py-1.5 !px-3 text-[12.5px]"
+                              data-testid={`ai-draft-inventory-mark-rejected-${job.id}-${index}`}
+                              onClick={() => markCandidateDisposition(job, index, "rejected")}
+                              type="button"
+                            >
+                              <XCircle className="w-3.5 h-3.5" /> Reject candidate
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
               <div
