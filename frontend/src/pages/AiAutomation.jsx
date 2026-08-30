@@ -24,6 +24,7 @@ const REVIEW_STATUS_LABEL = {
   pending_review: "Pending review",
   approved_no_save: "Reviewed, not saved",
   rejected: "Rejected",
+  official_saved: "Official saved",
 };
 
 const STATUS_TONE = {
@@ -33,6 +34,7 @@ const STATUS_TONE = {
   pending_review: "warning",
   approved_no_save: "success",
   rejected: "neutral",
+  official_saved: "success",
 };
 
 const REVIEW_LANES = [
@@ -48,8 +50,21 @@ const REVIEW_CHECKLIST = [
   "Confirm the source belongs to the current barn or user context.",
   "Edit or reject uncertain line items, names, quantities, dates, and prices.",
   "Treat health scores and service suggestions as decision support only.",
-  "Save final records only from the correct destination workflow.",
+  "Use official save only for Founder-approved inventory and work-ticket lanes.",
 ];
+
+const OFFICIAL_SAVE_LANES = {
+  inventory_supply: {
+    label: "Save Official Inventory",
+    collectionLabel: "Inventory",
+    description: "Creates reviewed inventory, feed, tack, supply, or equipment records.",
+  },
+  work_task_repair: {
+    label: "Save Official Work Ticket",
+    collectionLabel: "Work tickets",
+    description: "Creates reviewed work, task, repair, or barn-operations tickets.",
+  },
+};
 
 const DESTINATION_BY_SOURCE_TYPE = {
   invoice: "Inventory, expenses, billing, or horse records",
@@ -100,6 +115,64 @@ const draftResultFor = (job) => job.draft_result || {};
 
 const inventoryCandidatesFor = (job) => arrayValue(draftResultFor(job).draft_inventory_candidates);
 
+const textFromValue = (value) => {
+  if (value === null || value === undefined || value === "") return "";
+  if (Array.isArray(value)) return value.filter(Boolean).map(textFromValue).filter(Boolean).join("; ");
+  if (typeof value === "object") {
+    return [
+      value.title,
+      value.name,
+      value.task,
+      value.summary,
+      value.description,
+      value.details,
+      value.work_summary,
+      value.note,
+    ].filter(Boolean).map(textFromValue).join(" - ");
+  }
+  return String(value);
+};
+
+const workCandidatesFor = (job) => {
+  const result = draftResultFor(job);
+  const candidates = [
+    ...arrayValue(result.draft_tasks),
+    ...arrayValue(result.draft_training_note?.follow_up_tasks),
+    ...arrayValue(result.draft_records).filter((record) => {
+      const type = String(record?.type || record?.category || "").toLowerCase();
+      return type.includes("task") || type.includes("repair") || type.includes("work");
+    }),
+  ];
+  return candidates.map((candidate, index) => {
+    if (typeof candidate === "string") {
+      return {
+        id: `work-${index}`,
+        name: candidate,
+        title: candidate,
+        category: "task",
+        details: candidate,
+        priority: "standard",
+        source_confidence: "medium",
+        review_status: "needs_review",
+      };
+    }
+    return {
+      id: candidate?.id || `work-${index}`,
+      name: candidate?.name || candidate?.title || candidate?.task || candidate?.summary || `Work item ${index + 1}`,
+      title: candidate?.title || candidate?.name || candidate?.task || candidate?.summary || `Work item ${index + 1}`,
+      category: candidate?.category || candidate?.type || "task",
+      details: candidate?.details || candidate?.description || candidate?.summary || textFromValue(candidate),
+      priority: candidate?.priority || "standard",
+      due_date: candidate?.due_date || candidate?.date || null,
+      assigned_user_id: candidate?.assigned_user_id || null,
+      assigned_role: candidate?.assigned_role || null,
+      source_confidence: candidate?.source_confidence || candidate?.confidence || "medium",
+      review_status: candidate?.review_status || "needs_review",
+      notes: candidate?.notes || [],
+    };
+  });
+};
+
 const candidateFieldValue = (candidate, field, fallback = "Needs review") => {
   const value = candidate?.[field];
   if (value === null || value === undefined || value === "") return fallback;
@@ -109,6 +182,8 @@ const candidateFieldValue = (candidate, field, fallback = "Needs review") => {
 };
 
 const candidateKeyFor = (job, index) => `${job.id}:${index}`;
+
+const saveCandidateKeyFor = (job, lane, index) => `${job.id}:${lane}:${index}`;
 
 const structuredSummaryFor = (job) => {
   const result = draftResultFor(job);
@@ -159,6 +234,9 @@ export default function AiAutomation() {
   const [reviewNotes, setReviewNotes] = useState({});
   const [candidateEdits, setCandidateEdits] = useState({});
   const [candidateDisposition, setCandidateDisposition] = useState({});
+  const [officialSaveConfirm, setOfficialSaveConfirm] = useState(null);
+  const [officialSaveChecked, setOfficialSaveChecked] = useState(false);
+  const [savingOfficialId, setSavingOfficialId] = useState(null);
 
   const loadJobs = useCallback(async () => {
     setLoading(true);
@@ -249,6 +327,78 @@ export default function AiAutomation() {
       toast.error(err?.response?.data?.detail || "Could not update draft review.");
     } finally {
       setReviewingId(null);
+    }
+  };
+
+  const buildOfficialSaveItems = (job, lane) => {
+    if (lane === "inventory_supply") {
+      return inventoryCandidatesFor(job).map((candidate, index) => {
+        const disposition = candidateDisposition[candidateKeyFor(job, index)];
+        const edits = candidateEdits[candidateKeyFor(job, index)] || {};
+        const display = { ...candidate, ...edits };
+        if (disposition === "rejected" || disposition === "duplicate") return null;
+        return {
+          name: candidateFieldValue(display, "item_name", "Unnamed inventory item"),
+          category: candidateFieldValue(display, "category", "uncategorized"),
+          quantity: Number.isFinite(Number(display.quantity)) ? Number(display.quantity) : null,
+          unit: display.unit || null,
+          storage_location: display.storage_location || null,
+          horse_or_barn_assignment: display.horse_or_barn_assignment || null,
+          source_confidence: display.source_confidence || display.confidence || "medium",
+          review_status: disposition === "locally_reviewed" ? "reviewed" : (display.review_status === "corrected" ? "corrected" : "reviewed"),
+          notes: arrayValue(display.notes),
+        };
+      }).filter(Boolean);
+    }
+    return workCandidatesFor(job).map((candidate, index) => {
+      const disposition = candidateDisposition[saveCandidateKeyFor(job, lane, index)];
+      if (disposition === "rejected" || disposition === "duplicate") return null;
+      return {
+        name: candidate.name || candidate.title || `Work item ${index + 1}`,
+        title: candidate.title || candidate.name || `Work item ${index + 1}`,
+        category: candidate.category || "task",
+        details: candidate.details || candidate.name || candidate.title || `Work item ${index + 1}`,
+        priority: ["critical", "standard", "informational"].includes(candidate.priority) ? candidate.priority : "standard",
+        due_date: candidate.due_date || null,
+        assigned_user_id: candidate.assigned_user_id || null,
+        assigned_role: candidate.assigned_role || null,
+        source_confidence: candidate.source_confidence || "medium",
+        review_status: disposition === "locally_reviewed" ? "reviewed" : (candidate.review_status === "corrected" ? "corrected" : "reviewed"),
+        notes: arrayValue(candidate.notes),
+      };
+    }).filter(Boolean);
+  };
+
+  const openOfficialSaveConfirm = (job, lane) => {
+    setOfficialSaveConfirm({ jobId: job.id, lane });
+    setOfficialSaveChecked(false);
+  };
+
+  const cancelOfficialSaveConfirm = () => {
+    setOfficialSaveConfirm(null);
+    setOfficialSaveChecked(false);
+  };
+
+  const officialSaveDraft = async (job, lane) => {
+    const items = buildOfficialSaveItems(job, lane);
+    if (!items.length) {
+      toast.error("No reviewed items are available for official save.");
+      return;
+    }
+    setSavingOfficialId(`${job.id}:${lane}`);
+    try {
+      await api.post(`/ai/draft-jobs/${job.id}/official-save`, {
+        lane,
+        items,
+        reviewer_note: reviewNotes[job.id] || `Human-confirmed ${OFFICIAL_SAVE_LANES[lane].collectionLabel} save from AI draft review.`,
+      });
+      toast.success(`${OFFICIAL_SAVE_LANES[lane].collectionLabel} saved after human confirmation`);
+      cancelOfficialSaveConfirm();
+      await loadJobs();
+    } catch (err) {
+      toast.error(err?.response?.data?.detail || "Could not save official records.");
+    } finally {
+      setSavingOfficialId(null);
     }
   };
 
@@ -465,6 +615,89 @@ export default function AiAutomation() {
                   </ul>
                 </div>
               )}
+              {(inventoryCandidatesFor(job).length > 0 || workCandidatesFor(job).length > 0) && job.review_status === "pending_review" && job.status === "draft_ready" ? (
+                <div
+                  className="mb-4 rounded-lg border border-equine-brass/35 bg-equine-brass/5 p-3"
+                  data-testid={`ai-draft-official-save-panel-${job.id}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <ShieldCheck className="w-5 h-5 text-equine-champagne mt-0.5 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="label-eyebrow-muted mb-1">Official Save Requires Human Confirmation</div>
+                      <div className="text-[13px] text-equine-inkMuted leading-relaxed mb-3">
+                        Only Lane 1 inventory/supply and Lane 2 work-ticket records can be saved here. Health, billing, legal, notifications, and calendar changes remain blocked from this action.
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {inventoryCandidatesFor(job).length > 0 && (
+                          <button
+                            className="btn-secondary inline-flex items-center gap-1.5 disabled:opacity-50"
+                            data-testid={`ai-draft-official-save-open-inventory-${job.id}`}
+                            disabled={savingOfficialId === `${job.id}:inventory_supply`}
+                            onClick={() => openOfficialSaveConfirm(job, "inventory_supply")}
+                            type="button"
+                          >
+                            <PackageCheck className="w-3.5 h-3.5" /> {OFFICIAL_SAVE_LANES.inventory_supply.label}
+                          </button>
+                        )}
+                        {workCandidatesFor(job).length > 0 && (
+                          <button
+                            className="btn-secondary inline-flex items-center gap-1.5 disabled:opacity-50"
+                            data-testid={`ai-draft-official-save-open-work-${job.id}`}
+                            disabled={savingOfficialId === `${job.id}:work_task_repair`}
+                            onClick={() => openOfficialSaveConfirm(job, "work_task_repair")}
+                            type="button"
+                          >
+                            <ClipboardCheck className="w-3.5 h-3.5" /> {OFFICIAL_SAVE_LANES.work_task_repair.label}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  {officialSaveConfirm?.jobId === job.id ? (
+                    <div
+                      className="mt-4 rounded-lg border border-equine-cloud bg-white/85 p-3"
+                      data-testid={`ai-draft-official-save-confirm-${job.id}`}
+                    >
+                      <div className="font-semibold text-equine-ink mb-1">
+                        Confirm {OFFICIAL_SAVE_LANES[officialSaveConfirm.lane].collectionLabel} Save
+                      </div>
+                      <div className="text-[12.5px] text-equine-inkMuted leading-relaxed mb-3">
+                        {OFFICIAL_SAVE_LANES[officialSaveConfirm.lane].description} This will write official records for this barn context and create audit evidence.
+                      </div>
+                      <label className="flex items-start gap-2 text-[13px] text-equine-ink" data-testid={`ai-draft-official-save-checkbox-label-${job.id}`}>
+                        <input
+                          checked={officialSaveChecked}
+                          className="mt-1"
+                          data-testid={`ai-draft-official-save-checkbox-${job.id}`}
+                          onChange={(event) => setOfficialSaveChecked(event.target.checked)}
+                          type="checkbox"
+                        />
+                        <span>I reviewed this AI draft, confirmed the barn context, and approve official save for this lane only.</span>
+                      </label>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <button
+                          className="btn-primary inline-flex items-center gap-1.5 disabled:opacity-50"
+                          data-testid={`ai-draft-official-save-confirm-submit-${job.id}`}
+                          disabled={!officialSaveChecked || savingOfficialId === `${job.id}:${officialSaveConfirm.lane}`}
+                          onClick={() => officialSaveDraft(job, officialSaveConfirm.lane)}
+                          type="button"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          {savingOfficialId === `${job.id}:${officialSaveConfirm.lane}` ? "Saving..." : "Confirm Official Save"}
+                        </button>
+                        <button
+                          className="btn-secondary"
+                          data-testid={`ai-draft-official-save-cancel-${job.id}`}
+                          onClick={cancelOfficialSaveConfirm}
+                          type="button"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
               {inventoryCandidatesFor(job).length > 0 && (
                 <div
                   className="mb-4 rounded-lg border border-equine-sage/25 bg-equine-sage/5 p-3"
@@ -474,7 +707,7 @@ export default function AiAutomation() {
                     <div>
                       <div className="label-eyebrow-muted mb-1">Inventory Candidates</div>
                       <div className="text-[13px] text-equine-inkMuted leading-relaxed">
-                        Review and correct these candidate items here, then save official records later from Inventory after the save workflow is approved.
+                        Review and correct these candidate items here, then use the explicit official-save confirmation when this lane is appropriate.
                       </div>
                     </div>
                     <StatusPill tone="warning" data-testid={`ai-draft-inventory-no-save-${job.id}`}>Not Saved</StatusPill>

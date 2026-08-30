@@ -33,7 +33,7 @@ def test_ai_reviewer_checklist_has_stable_test_ids():
         "Confirm the source belongs to the current barn or user context.",
         "Edit or reject uncertain line items, names, quantities, dates, and prices.",
         "Treat health scores and service suggestions as decision support only.",
-        "Save final records only from the correct destination workflow.",
+        "Use official save only for Founder-approved inventory and work-ticket lanes.",
     ]:
         assert f'"{checklist_item}"' in source
 
@@ -57,7 +57,7 @@ def test_ai_reviewer_structured_review_sections_have_stable_test_ids():
     assert "Blocked Actions" in source
 
 
-def test_ai_inventory_candidate_reviewer_has_no_save_hooks_and_local_actions():
+def test_ai_inventory_candidate_reviewer_has_human_confirmed_lane_save_hooks_and_local_actions():
     source = _source()
 
     assert 'data-testid={`ai-draft-inventory-candidates-${job.id}`}' in source
@@ -69,5 +69,23 @@ def test_ai_inventory_candidate_reviewer_has_no_save_hooks_and_local_actions():
     assert 'data-testid={`ai-draft-inventory-mark-reviewed-${job.id}-${index}`}' in source
     assert 'data-testid={`ai-draft-inventory-mark-duplicate-${job.id}-${index}`}' in source
     assert 'data-testid={`ai-draft-inventory-mark-rejected-${job.id}-${index}`}' in source
-    assert "save official records later from Inventory after the save workflow is approved" in source
+    assert "use the explicit official-save confirmation when this lane is appropriate" in source
     assert "api.post(`/inventory" not in source
+
+
+def test_ai_official_save_ui_has_explicit_human_confirmation_boundary():
+    source = _source()
+
+    assert "OFFICIAL_SAVE_LANES" in source
+    assert "inventory_supply" in source
+    assert "work_task_repair" in source
+    assert "api.post(`/ai/draft-jobs/${job.id}/official-save`" in source
+    assert 'data-testid={`ai-draft-official-save-panel-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-official-save-open-inventory-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-official-save-open-work-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-official-save-confirm-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-official-save-checkbox-${job.id}`}' in source
+    assert 'data-testid={`ai-draft-official-save-confirm-submit-${job.id}`}' in source
+    assert "I reviewed this AI draft, confirmed the barn context" in source
+    assert "Health, billing, legal, notifications, and calendar changes remain blocked" in source
+    assert "disabled={!officialSaveChecked" in source
