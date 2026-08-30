@@ -56,7 +56,7 @@ export default function ServiceProviderDashboard() {
       <PageHeader
         eyebrow={`Provider, ${providerName}`}
         title="Service Provider Center"
-        subtitle="Grant-scoped horses, care records, and visit-note context for this provider account."
+        subtitle="Grant-scoped horses, care records, and visit-note context for this provider account, limited to facility-approved access."
         action={
           <div className="flex items-center gap-2 flex-wrap justify-end">
             <LastSyncedBadge at={lastSyncedAt} onRefresh={load} refreshing={refreshing} verb="Updated" tone="secondary" />
@@ -82,7 +82,7 @@ export default function ServiceProviderDashboard() {
             <Panel
               title="Shared Horses"
               icon={HeartPulse}
-              empty="No horses are shared with this provider account."
+              empty="Facility-approved horse access will appear here with only the context needed for care."
               rows={data.shared_horses || []}
               render={(horse) => (
                 <div>
@@ -97,7 +97,7 @@ export default function ServiceProviderDashboard() {
             <Panel
               title="Vet Records"
               icon={Stethoscope}
-              empty="No grant-scoped vet records yet."
+              empty="Relevant vet records will appear here after the facility shares care context."
               rows={data.recent_vet_records || []}
               render={(row) => (
                 <div>
@@ -110,7 +110,7 @@ export default function ServiceProviderDashboard() {
             <Panel
               title="Farrier Records"
               icon={CalendarDays}
-              empty="No grant-scoped farrier records yet."
+              empty="Relevant farrier history will appear here after the facility shares care context."
               rows={data.recent_farrier_records || []}
               render={(row) => (
                 <div>
@@ -126,7 +126,7 @@ export default function ServiceProviderDashboard() {
           <Panel
             title="Recent Visit Notes"
             icon={FileText}
-            empty="No provider-authored visit notes yet."
+            empty="Visit notes you author will appear here for facility review and follow-up."
             rows={data.visit_notes || []}
             wide
             render={(row) => (
@@ -158,7 +158,10 @@ const Panel = ({ title, icon: Icon, rows, empty, render, wide = false }) => (
       <h2 className="font-display text-2xl text-equine-ink">{title}</h2>
     </div>
     {rows.length === 0 ? (
-      <div className="rounded-lg border border-dashed border-equine-cloud bg-white/45 py-8 px-4 text-center text-[13px] text-equine-inkMuted">{empty}</div>
+      <div className="rounded-lg border border-dashed border-equine-cloud bg-equine-soft/45 py-8 px-5 text-center">
+        <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-equine-ice" />
+        <div className="text-[13px] leading-relaxed text-equine-inkMuted">{empty}</div>
+      </div>
     ) : (
       <div className={wide ? "grid grid-cols-1 lg:grid-cols-2 gap-3" : "space-y-3"}>
         {rows.map((row) => (

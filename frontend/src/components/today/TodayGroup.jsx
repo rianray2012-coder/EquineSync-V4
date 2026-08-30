@@ -74,8 +74,8 @@ const TodayGroup = ({
       </div>
       {open && (
         items.length === 0 ? (
-          <div className="text-[12.5px] text-equine-inkSoft px-1 py-2 italic">
-            Nothing here. A quiet stretch.
+          <div className="rounded-lg border border-dashed border-equine-hairline bg-equine-soft/35 px-4 py-3 text-[12.5px] text-equine-inkMuted">
+            No tasks in this group right now.
           </div>
         ) : (
           <div className="space-y-2.5">

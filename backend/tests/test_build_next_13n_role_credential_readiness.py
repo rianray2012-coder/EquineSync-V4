@@ -58,6 +58,11 @@ def test_bn13n_script_compiles_and_has_expected_roster():
         assert by_row[row]["platform_role"] == platform_role
     assert by_row["UAT-R9"]["membership_tier"] == "service_provider_free"
     assert by_row["UAT-R9"]["subscription_status"] == "free"
+    assert by_row["UAT-R1"]["full_name"] == "Platform Admin"
+    assert by_row["UAT-R2a"]["full_name"] == "Facility Admin"
+    assert by_row["BN13M-T1"]["full_name"] == "Trainer"
+    assert by_row["UAT-R8"]["full_name"] == "Individual Owner"
+    assert by_row["UAT-R9"]["full_name"] == "Service Provider"
 
 
 def test_bn13n_script_uses_safe_production_and_dry_run_guards():
