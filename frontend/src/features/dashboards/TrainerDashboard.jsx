@@ -71,7 +71,7 @@ export default function TrainerDashboard() {
       ) : (
         <>
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
-            <Stat label="Assigned Horses" value={counts.assigned_horses || 0} caption="Linked by stable trainer ID" icon={CircleDot} testid="trainer-stat-horses" />
+            <Stat label="Assigned Horses" value={counts.assigned_horses || 0} caption="Ready for lesson and plan context" icon={CircleDot} testid="trainer-stat-horses" />
             <Stat label="Riders" value={counts.riders || 0} caption="From trainer-owned lessons" accent="ice" icon={Users} testid="trainer-stat-riders" />
             <Stat label="Lessons" value={counts.upcoming_lessons || 0} caption="Scheduled and not complete" accent="lilac" icon={GraduationCap} testid="trainer-stat-lessons" />
             <Stat label="Training Logs" value={counts.recent_training || 0} caption="Recent trainer-linked work" accent="sage" icon={Dumbbell} testid="trainer-stat-training" />
@@ -83,7 +83,7 @@ export default function TrainerDashboard() {
             <WorkCard
               title="Upcoming Lessons"
               icon={CalendarDays}
-              empty="No trainer-linked lessons scheduled."
+              empty="Lessons assigned to you will appear here with rider, horse, time, and focus notes."
               rows={data.upcoming_lessons || []}
               render={(row) => (
                 <div>
@@ -100,7 +100,7 @@ export default function TrainerDashboard() {
             <WorkCard
               title="Recent Training"
               icon={Dumbbell}
-              empty="No trainer-linked training logs yet."
+              empty="Training sessions you record or inherit will appear here for quick follow-up."
               rows={data.recent_training || []}
               render={(row) => (
                 <div>
@@ -116,7 +116,7 @@ export default function TrainerDashboard() {
             <WorkCard
               title="Active Plans"
               icon={ClipboardList}
-              empty="No active trainer-linked plans yet."
+              empty="Active horse goals and progression plans will appear here once assigned."
               rows={data.active_plans || []}
               render={(row) => {
                 const plan = row.data || {};
@@ -135,7 +135,7 @@ export default function TrainerDashboard() {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <ContextCard
               title="Assigned Horses"
-              empty="No horses are linked to this trainer yet."
+              empty="Assigned horses will appear here with status, discipline, and current training goals."
               rows={data.assigned_horses || []}
               render={(horse) => (
                 <div>
@@ -149,7 +149,7 @@ export default function TrainerDashboard() {
             />
             <ContextCard
               title="Riders"
-              empty="No riders are linked through trainer-owned lessons yet."
+              empty="Riders connected through your lessons will appear here with skill level and goals."
               rows={data.riders || []}
               render={(rider) => (
                 <div>
@@ -214,7 +214,8 @@ const ContextCard = ({ title, rows, empty, render }) => (
 );
 
 const SoftEmpty = ({ text }) => (
-  <div className="rounded-lg border border-dashed border-equine-cloud bg-white/45 py-8 px-4 text-center text-[13px] text-equine-inkMuted">
-    {text}
+  <div className="rounded-lg border border-dashed border-equine-cloud bg-equine-soft/45 py-8 px-5 text-center">
+    <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-equine-lavender" />
+    <div className="text-[13px] leading-relaxed text-equine-inkMuted">{text}</div>
   </div>
 );

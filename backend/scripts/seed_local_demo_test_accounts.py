@@ -184,8 +184,8 @@ def _seed_facility_readiness(db, now: str, seeded_users) -> None:
                 "id": "local_demo_feed_template",
                 "barn_id": "primary",
                 "meal": "AM",
-                "name": "Demo AM Feed",
-                "description": "Local demo feed template for setup-readiness preflight.",
+                "name": "Morning Performance Feed",
+                "description": "Local pilot feed template for setup-readiness preflight.",
                 "updated_at": now,
                 "local_demo_seed": True,
             },
@@ -230,7 +230,7 @@ def _seed_service_provider_demo_context(db, now: str) -> None:
             "$set": {
                 "id": horse_id,
                 "barn_id": "primary",
-                "name": "Demo Provider Horse",
+                "name": "Valencia",
                 "breed": "Warmblood",
                 "discipline": "Hunter",
                 "status": "active",
@@ -244,9 +244,9 @@ def _seed_service_provider_demo_context(db, now: str) -> None:
     )
 
     provider_specs = [
-        ("service-provider@equinesync.com", "body_worker", "Demo Service Provider"),
-        ("vet@equinesync.com", "vet", "Demo Veterinarian"),
-        ("farrier@equinesync.com", "farrier", "Demo Farrier"),
+        ("service-provider@equinesync.com", "body_worker", "Care Partner"),
+        ("vet@equinesync.com", "vet", "Veterinarian"),
+        ("farrier@equinesync.com", "farrier", "Farrier"),
     ]
     for email, category, name in provider_specs:
         user = db.users.find_one({"email": email}, {"_id": 0, "id": 1, "role": 1})
@@ -302,9 +302,9 @@ def _seed_service_provider_demo_context(db, now: str) -> None:
                 "barn_id": "primary",
                 "horse_id": horse_id,
                 "type": "wellness",
-                "title": "Demo wellness check",
+                "title": "Wellness check",
                 "date": "2026-07-01",
-                "vet_name": "Demo Veterinarian",
+                "vet_name": "Veterinarian",
                 "follow_up_due": "2026-08-01",
                 "updated_at": now,
                 "local_demo_seed": True,
@@ -321,7 +321,7 @@ def _seed_service_provider_demo_context(db, now: str) -> None:
                 "barn_id": "primary",
                 "horse_id": horse_id,
                 "date": "2026-07-01",
-                "farrier_name": "Demo Farrier",
+                "farrier_name": "Farrier",
                 "next_visit_due": "2026-08-12",
                 "shoes_on": ["front"],
                 "updated_at": now,
@@ -338,9 +338,9 @@ def _seed_service_provider_demo_context(db, now: str) -> None:
                 "id": "local_demo_provider_note",
                 "barn_id": "primary",
                 "horse_id": horse_id,
-                "provider_name": "Demo Service Provider",
+                "provider_name": "Care Partner",
                 "category": "body_worker",
-                "title": "Demo bodywork visit",
+                "title": "Bodywork visit",
                 "visit_date": "2026-07-01",
                 "follow_up_due": "2026-08-01",
                 "updated_at": now,

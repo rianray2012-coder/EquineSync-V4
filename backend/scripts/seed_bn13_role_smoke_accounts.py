@@ -37,13 +37,13 @@ from core.mongo import mongo_client_kwargs  # noqa: E402
 SEED_KEY = "bn13_role_smoke_accounts"
 SEED_PHASE = "build_next_13n"
 UAT_BARN_ID = "bn12_uat_facility"
-UAT_BARN_NAME = "BN12 UAT Facility"
+UAT_BARN_NAME = "EquineSync Pilot Stable"
 
 BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R1",
         "email": "uat.platform@equine-sync.com",
-        "full_name": "UAT Platform Admin",
+        "full_name": "Platform Admin",
         "role": "admin",
         "platform_role": "platform_admin",
         "barn_id": UAT_BARN_ID,
@@ -52,7 +52,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R2a",
         "email": "uat.facility-admin@equine-sync.com",
-        "full_name": "UAT Facility Admin",
+        "full_name": "Facility Admin",
         "role": "admin",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -61,7 +61,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R2b",
         "email": "uat.barn-owner@equine-sync.com",
-        "full_name": "UAT Barn Owner",
+        "full_name": "Barn Owner",
         "role": "barn_owner",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -70,7 +70,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "BN13M-T1",
         "email": "uat.trainer@equine-sync.com",
-        "full_name": "UAT Trainer",
+        "full_name": "Trainer",
         "role": "trainer",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -79,7 +79,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R3",
         "email": "uat.manager@equine-sync.com",
-        "full_name": "UAT Barn Manager",
+        "full_name": "Barn Manager",
         "role": "barn_manager",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -88,7 +88,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R4a",
         "email": "uat.staff@equine-sync.com",
-        "full_name": "UAT Groom",
+        "full_name": "Groom",
         "role": "groom",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -97,7 +97,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "BN13M-W1",
         "email": "uat.working-student@equine-sync.com",
-        "full_name": "UAT Working Student",
+        "full_name": "Working Student",
         "role": "working_student",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -106,7 +106,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R5",
         "email": "uat.owner@equine-sync.com",
-        "full_name": "UAT Horse Owner",
+        "full_name": "Horse Owner",
         "role": "horse_owner",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -115,7 +115,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R6",
         "email": "uat.guardian@equine-sync.com",
-        "full_name": "UAT Guardian Parent",
+        "full_name": "Guardian Parent",
         "role": "parent",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -124,7 +124,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R7",
         "email": "uat.participant@equine-sync.com",
-        "full_name": "UAT Rider",
+        "full_name": "Rider",
         "role": "rider",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,
@@ -133,7 +133,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R8",
         "email": "uat.individual-owner@equine-sync.com",
-        "full_name": "UAT Individual Owner",
+        "full_name": "Individual Owner",
         "role": "horse_owner",
         "platform_role": None,
         "barn_id": None,
@@ -142,7 +142,7 @@ BN13_ROLE_SMOKE_ROSTER: List[Dict[str, Optional[str]]] = [
     {
         "row": "UAT-R9",
         "email": "uat.service-provider@equine-sync.com",
-        "full_name": "UAT Service Provider",
+        "full_name": "Service Provider",
         "role": "service_provider",
         "platform_role": None,
         "barn_id": UAT_BARN_ID,

@@ -109,8 +109,12 @@ def test_bn12a_seed_creates_8_accounts_memberships_and_passwords_once():
         by_email = {u["email"]: u for u in users}
         assert set(by_email) == set(ROSTER_EMAILS)
         assert by_email["uat.platform@equine-sync.com"]["platform_role"] == "platform_admin"
+        assert by_email["uat.platform@equine-sync.com"]["full_name"] == "Platform Admin"
+        assert by_email["uat.facility-admin@equine-sync.com"]["full_name"] == "Facility Admin"
+        assert by_email["uat.owner@equine-sync.com"]["full_name"] == "Horse Owner"
         assert by_email["uat.individual-owner@equine-sync.com"].get("barn_id") is None
         assert by_email["uat.individual-owner@equine-sync.com"]["role"] == "horse_owner"
+        assert by_email["uat.individual-owner@equine-sync.com"]["full_name"] == "Individual Owner"
         assert all(u["email_verified"] is True for u in users)
         assert all(u["account_status"] == "active" for u in users)
 
