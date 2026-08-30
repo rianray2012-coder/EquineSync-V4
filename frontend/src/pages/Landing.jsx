@@ -12,7 +12,7 @@ const ROLE_CARDS = [
     label: "Individual Horse Owner",
     blurb: "Manage care records, appointments, documents, reminders, and shared updates for your own horse.",
     image:
-      "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
+      "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
     span: "md:col-span-3",
   },
   {
@@ -276,13 +276,13 @@ export default function Landing() {
       {/* Top nav */}
       <header className="px-6 md:px-12 py-6 flex items-center justify-between gap-4 max-w-7xl mx-auto">
         <div className="sm:hidden shrink-0">
-          <Logo onNavy size={48} showTagline={false} />
+          <Logo onNavy size={60} showTagline={false} />
         </div>
         <div className="hidden sm:block lg:hidden shrink-0">
-          <Logo onNavy size={52} showTagline={false} />
+          <Logo onNavy size={68} showTagline={false} />
         </div>
         <div className="hidden lg:block">
-          <Logo onNavy size={64} />
+          <Logo onNavy size={82} />
         </div>
         <nav className="flex items-center gap-3 lg:gap-6">
           <a
@@ -312,7 +312,7 @@ export default function Landing() {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[75vh] flex flex-col justify-center">
         <img
-          src="https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
+          src="https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
           alt="Horse and rider in a training setting"
           className="absolute inset-0 w-full h-full object-cover opacity-45"
         />
