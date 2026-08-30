@@ -8,6 +8,7 @@ messages, schedules, notifications, or access-control records.
 from __future__ import annotations
 
 import hashlib
+import os
 import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Literal, Optional
@@ -28,6 +29,7 @@ from services.ai_draft_extractor import (
 AI_SOURCE_COLLECTION = "ai_draft_sources"
 AI_JOB_COLLECTION = "ai_draft_jobs"
 AI_REVIEW_COLLECTION = "ai_draft_reviews"
+AI_USAGE_COLLECTION = "ai_usage_daily"
 AI_OFFICIAL_SAVE_COLLECTIONS = {
     "inventory_supply": "inventory",
     "work_task_repair": "ai_work_repair_tickets",
@@ -49,10 +51,51 @@ AI_OFFICIAL_SAVE_LANE_ROLES = {
     "work_task_repair": AI_OFFICIAL_SAVE_ALLOWED_ROLES,
 }
 AI_OFFICIAL_SAVE_MIN_CONFIDENCE = 0.60
+AI_DEFAULT_DAILY_JOB_LIMIT = 50
+AI_DEFAULT_DAILY_ESTIMATED_TOKEN_LIMIT = 200_000
+AI_DEFAULT_DAILY_SOURCE_BYTE_LIMIT = 50 * 1024 * 1024
+AI_OUTPUT_TOKEN_BUDGET = 1800
 
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _today_key() -> str:
+    return datetime.now(timezone.utc).date().isoformat()
+
+
+def _env_int(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None or str(raw).strip() == "":
+        return default
+    try:
+        return int(str(raw).strip())
+    except ValueError:
+        return default
+
+
+def _env_bool(name: str, default: bool = True) -> bool:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    return str(raw).strip().lower() not in {"0", "false", "no", "off"}
+
+
+def _ai_budget_config() -> Dict[str, Any]:
+    return {
+        "enforcement_enabled": _env_bool("AI_BUDGET_ENFORCEMENT_ENABLED", True),
+        "daily_job_limit": max(0, _env_int("AI_DAILY_JOB_LIMIT", AI_DEFAULT_DAILY_JOB_LIMIT)),
+        "daily_estimated_token_limit": max(
+            0,
+            _env_int("AI_DAILY_ESTIMATED_TOKEN_LIMIT", AI_DEFAULT_DAILY_ESTIMATED_TOKEN_LIMIT),
+        ),
+        "daily_source_byte_limit": max(
+            0,
+            _env_int("AI_DAILY_SOURCE_BYTE_LIMIT", AI_DEFAULT_DAILY_SOURCE_BYTE_LIMIT),
+        ),
+        "per_request_output_token_budget": AI_OUTPUT_TOKEN_BUDGET,
+    }
 
 
 def _hash_text(value: str) -> str:
@@ -133,6 +176,149 @@ def _require_save_ready_item(item: Dict[str, Any], *, index: int) -> None:
 def _source_hash(job: Dict[str, Any]) -> Optional[str]:
     draft = job.get("draft_result") or {}
     return job.get("source_sha256") or draft.get("source_sha256") or draft.get("sha256")
+
+
+def _estimate_ai_usage(*, source_text: Optional[str], source_doc: Dict[str, Any]) -> Dict[str, int]:
+    if source_text is not None:
+        source_bytes = len((source_text or "").encode("utf-8"))
+    else:
+        source_bytes = int(source_doc.get("confirmed_byte_size") or source_doc.get("byte_size") or 0)
+    estimated_input_tokens = max(1, (source_bytes + 3) // 4)
+    return {
+        "source_bytes": source_bytes,
+        "estimated_input_tokens": estimated_input_tokens,
+        "estimated_output_tokens": AI_OUTPUT_TOKEN_BUDGET,
+        "estimated_total_tokens": estimated_input_tokens + AI_OUTPUT_TOKEN_BUDGET,
+    }
+
+
+def _empty_usage_doc(*, barn_id: str, date_key: str) -> Dict[str, Any]:
+    now = _now_iso()
+    return {
+        "id": f"ai_usage_{barn_id}_{date_key}",
+        "barn_id": barn_id,
+        "date": date_key,
+        "draft_jobs_created": 0,
+        "estimated_tokens_used": 0,
+        "source_bytes_processed": 0,
+        "by_source_type": {},
+        "created_at": now,
+        "updated_at": now,
+    }
+
+
+async def _load_ai_usage(db, *, barn_id: str, date_key: str) -> Dict[str, Any]:
+    row = await db[AI_USAGE_COLLECTION].find_one(
+        {"barn_id": barn_id, "date": date_key},
+        {"_id": 0},
+    )
+    return row or _empty_usage_doc(barn_id=barn_id, date_key=date_key)
+
+
+def _budget_exceeded_message(limit_name: str) -> str:
+    labels = {
+        "daily_job_limit": "Daily AI draft job limit reached",
+        "daily_estimated_token_limit": "Daily AI estimated token budget reached",
+        "daily_source_byte_limit": "Daily AI source processing budget reached",
+    }
+    return labels.get(limit_name, "Daily AI budget reached")
+
+
+def _check_ai_budget_capacity(
+    *,
+    usage: Dict[str, Any],
+    estimate: Dict[str, int],
+    config: Dict[str, Any],
+) -> None:
+    if not config["enforcement_enabled"]:
+        return
+    checks = [
+        ("daily_job_limit", int(usage.get("draft_jobs_created") or 0) + 1),
+        (
+            "daily_estimated_token_limit",
+            int(usage.get("estimated_tokens_used") or 0) + estimate["estimated_total_tokens"],
+        ),
+        (
+            "daily_source_byte_limit",
+            int(usage.get("source_bytes_processed") or 0) + estimate["source_bytes"],
+        ),
+    ]
+    for key, projected_value in checks:
+        limit = int(config.get(key) or 0)
+        if limit > 0 and projected_value > limit:
+            raise HTTPException(status_code=429, detail=_budget_exceeded_message(key))
+
+
+async def _record_ai_usage(
+    db,
+    *,
+    barn_id: str,
+    user_id: Optional[str],
+    source_type: str,
+    estimate: Dict[str, int],
+) -> Dict[str, Any]:
+    date_key = _today_key()
+    usage = await _load_ai_usage(db, barn_id=barn_id, date_key=date_key)
+    by_source_type = dict(usage.get("by_source_type") or {})
+    source_bucket = dict(by_source_type.get(source_type) or {})
+    source_bucket["draft_jobs_created"] = int(source_bucket.get("draft_jobs_created") or 0) + 1
+    source_bucket["estimated_tokens_used"] = (
+        int(source_bucket.get("estimated_tokens_used") or 0) + estimate["estimated_total_tokens"]
+    )
+    by_source_type[source_type] = source_bucket
+    update = {
+        "draft_jobs_created": int(usage.get("draft_jobs_created") or 0) + 1,
+        "estimated_tokens_used": int(usage.get("estimated_tokens_used") or 0) + estimate["estimated_total_tokens"],
+        "source_bytes_processed": int(usage.get("source_bytes_processed") or 0) + estimate["source_bytes"],
+        "last_user_id": user_id,
+        "by_source_type": by_source_type,
+        "updated_at": _now_iso(),
+    }
+    if await db[AI_USAGE_COLLECTION].find_one({"barn_id": barn_id, "date": date_key}, {"_id": 0}):
+        await db[AI_USAGE_COLLECTION].update_one(
+            {"barn_id": barn_id, "date": date_key},
+            {"$set": update},
+        )
+        usage.update(update)
+    else:
+        usage.update(update)
+        await db[AI_USAGE_COLLECTION].insert_one(usage)
+    return usage
+
+
+def _usage_projection(usage: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any]:
+    tokens_used = int(usage.get("estimated_tokens_used") or 0)
+    jobs_used = int(usage.get("draft_jobs_created") or 0)
+    bytes_used = int(usage.get("source_bytes_processed") or 0)
+    return {
+        "date": usage.get("date"),
+        "enforcement_enabled": bool(config["enforcement_enabled"]),
+        "draft_jobs_created": jobs_used,
+        "estimated_tokens_used": tokens_used,
+        "source_bytes_processed": bytes_used,
+        "daily_job_limit": config["daily_job_limit"],
+        "daily_estimated_token_limit": config["daily_estimated_token_limit"],
+        "daily_source_byte_limit": config["daily_source_byte_limit"],
+        "remaining_jobs": max(0, config["daily_job_limit"] - jobs_used) if config["daily_job_limit"] else None,
+        "remaining_estimated_tokens": (
+            max(0, config["daily_estimated_token_limit"] - tokens_used)
+            if config["daily_estimated_token_limit"]
+            else None
+        ),
+        "remaining_source_bytes": (
+            max(0, config["daily_source_byte_limit"] - bytes_used)
+            if config["daily_source_byte_limit"]
+            else None
+        ),
+        "by_source_type": usage.get("by_source_type") or {},
+        "policy": {
+            "draft_only_default": True,
+            "human_review_required": True,
+            "autonomous_mutation_enabled": False,
+            "higher_risk_lanes_separately_gated": True,
+            "official_save_lanes_enabled": sorted(AI_OFFICIAL_SAVE_COLLECTIONS),
+        },
+    }
 
 
 def _source_projection(doc: Dict[str, Any]) -> Dict[str, Any]:
@@ -448,6 +634,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         file_bytes = None
         mime_type = "text/plain"
         filename = "source.txt"
+        inline_source_doc = None
         if body.source_id:
             source_doc = await db[AI_SOURCE_COLLECTION].find_one(
                 {"id": body.source_id, "barn_id": barn_id, "user_id": user.get("id")},
@@ -459,16 +646,11 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 raise HTTPException(409, "AI source upload is not confirmed")
             if source_doc.get("source_type") != body.source_type:
                 raise HTTPException(400, "source_type mismatch")
-            stored = storage_client.read_bytes(
-                key=source_doc["storage_key"],
-                mime_type=source_doc["mime_type"],
-            )
-            file_bytes = stored.bytes_value
-            mime_type = stored.mime_type
+            mime_type = source_doc["mime_type"]
             filename = source_doc.get("filename") or _generic_source_filename(None, mime_type=mime_type)
         else:
             source_hash = _hash_text(source_text or "")
-            source_doc = {
+            inline_source_doc = {
                 "id": f"ai_src_{uuid.uuid4()}",
                 "barn_id": barn_id,
                 "user_id": user.get("id"),
@@ -485,7 +667,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 "updated_at": now,
                 "uploaded_at": now,
             }
-            await db[AI_SOURCE_COLLECTION].insert_one(source_doc)
+            source_doc = inline_source_doc
         job = {
             "id": job_id,
             "barn_id": barn_id,
@@ -504,8 +686,32 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             "updated_at": now,
             "completed_at": None,
         }
+        usage_estimate = _estimate_ai_usage(source_text=source_text, source_doc=source_doc)
+        budget_config = _ai_budget_config()
+        usage = await _load_ai_usage(db, barn_id=barn_id, date_key=_today_key())
+        _check_ai_budget_capacity(
+            usage=usage,
+            estimate=usage_estimate,
+            config=budget_config,
+        )
+        if inline_source_doc is not None:
+            await db[AI_SOURCE_COLLECTION].insert_one(inline_source_doc)
         await db[AI_JOB_COLLECTION].insert_one(job)
         try:
+            if body.source_id:
+                stored = storage_client.read_bytes(
+                    key=source_doc["storage_key"],
+                    mime_type=source_doc["mime_type"],
+                )
+                file_bytes = stored.bytes_value
+                mime_type = stored.mime_type
+            usage_after = await _record_ai_usage(
+                db,
+                barn_id=barn_id,
+                user_id=user.get("id"),
+                source_type=body.source_type,
+                estimate=usage_estimate,
+            )
             draft = await extractor.extract(
                 source_type=body.source_type,
                 prompt=body.prompt or body.requested_output,
@@ -542,6 +748,9 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                     "source_id": source_doc["id"],
                     "draft_ready": job_status == "draft_ready",
                     "manual_review_required": job_status == "draft_needs_manual_review",
+                    "ai_usage_date": usage_after.get("date"),
+                    "estimated_total_tokens": usage_estimate["estimated_total_tokens"],
+                    "daily_estimated_tokens_used": usage_after.get("estimated_tokens_used"),
                     "official_records_written": False,
                 },
             )
@@ -567,10 +776,19 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 metadata={
                     "source_type": body.source_type,
                     "error_type": exc.__class__.__name__,
+                    "estimated_total_tokens": usage_estimate["estimated_total_tokens"],
                     "official_records_written": False,
                 },
             )
             raise HTTPException(502, "AI draft extraction failed") from exc
+
+    @router.get("/usage-policy")
+    async def get_ai_usage_policy(user=Depends(get_current_user)):
+        _require_ai_draft_role(user)
+        barn_id = resolve_barn_id(user)
+        config = _ai_budget_config()
+        usage = await _load_ai_usage(db, barn_id=barn_id, date_key=_today_key())
+        return {"usage": _usage_projection(usage, config)}
 
     @router.get("")
     async def list_draft_jobs(
