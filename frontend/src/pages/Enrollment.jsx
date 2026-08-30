@@ -17,8 +17,13 @@ export default function Enrollment() {
 
   return (
     <div className="min-h-screen w-full bg-equine-navyDeep text-white font-sans" data-testid="enrollment-page">
-      <header className="px-6 md:px-12 py-6 max-w-6xl mx-auto flex items-center justify-between">
-        <Logo onNavy />
+      <header className="px-6 md:px-12 py-6 max-w-6xl mx-auto flex items-center justify-between gap-4">
+        <div className="sm:hidden shrink-0">
+          <Logo onNavy size={48} showTagline={false} />
+        </div>
+        <div className="hidden sm:block">
+          <Logo onNavy size={64} />
+        </div>
         <Link to="/login" className="text-[12px] tracking-wide text-white/60 hover:text-white" data-testid="enrollment-signin">
           Sign in
         </Link>
@@ -67,7 +72,7 @@ export default function Enrollment() {
                 <p className="mt-5 text-[13.5px] text-white/65 leading-relaxed">{path.summary}</p>
                 <div className="mt-5">
                   <div className="text-[10.5px] tracking-[0.24em] uppercase text-brand-lilac/85 mb-2">
-                    Critical signup data
+                    Information needed
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {path.criticalData.map((item) => (
@@ -82,7 +87,7 @@ export default function Enrollment() {
                 </div>
                 <div className="mt-6 flex items-center justify-between gap-3">
                   <span className="text-[12px] leading-relaxed text-white/45 max-w-md">
-                    {path.availabilityNote} Depth continues in {path.deferredPhase}.
+                    {path.availabilityNote}
                   </span>
                   <span className="inline-flex items-center gap-2 text-[13px] text-brand-lilac">
                     Continue <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

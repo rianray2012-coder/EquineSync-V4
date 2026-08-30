@@ -181,7 +181,7 @@ def build_rf5_readiness(root: Path = ROOT) -> Dict[str, object]:
         ProofRow(
             key="required_enrollment_paths_inventory",
             status="ready" if not missing_paths and order_ok else "blocked",
-            evidence=f"{len(REQUIRED_ENROLLMENT_PATHS)} required enrollment paths are declared with role mapping, critical data, and deferred phase ownership.",
+            evidence=f"{len(REQUIRED_ENROLLMENT_PATHS)} required enrollment paths are declared with role mapping, needed signup information, and internal deferred phase ownership.",
             next_action="RF7/RF9/RF10 should deepen the owner, trainer, and provider workflows without changing RF5 claims.",
         ),
         ProofRow(
@@ -248,12 +248,12 @@ def build_rf5_readiness(root: Path = ROOT) -> Dict[str, object]:
         ProofRow(
             key="later_phase_boundaries_preserved",
             status="ready"
-            if _contains_all(
-                enrollment + enrollment_paths,
-                ["Depth continues in", "RF7", "RF9", "RF10"]
-            )
+            if _contains_all(enrollment_paths, ["deferredPhase", "RF7", "RF9", "RF10"])
+            and "Depth continues in" not in enrollment
+            and "deferredPhase" not in enrollment
+            and all(phase not in enrollment for phase in ["RF7", "RF9", "RF10"])
             else "blocked",
-            evidence="Enrollment UI names later phase ownership rather than claiming completed owner/trainer/provider depth.",
+            evidence="Enrollment path data preserves internal later-phase ownership while the public enrollment UI omits RF labels and roadmap phrasing.",
             next_action="Keep RF7/RF9/RF10/RF18 open until those workflows are implemented and tested.",
         ),
     ]

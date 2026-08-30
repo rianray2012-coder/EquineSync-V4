@@ -1305,7 +1305,7 @@ function TrainerHome({ user }) {
             ["Documents", "Credentials, waivers, and signature envelopes stay in approved document workflows.", FileText],
             [
               "Workspace Status",
-              operatingErr || "This read-only summary uses the RF9 trainer operating-center projection.",
+              operatingErr || "This read-only summary uses the trainer operating-center projection.",
               MessageSquare,
             ],
           ].map(([title, body, Icon]) => (
