@@ -538,14 +538,12 @@ def build_router(*, db, get_current_user) -> APIRouter:
             # id is barn-scoped + deterministic so re-runs are idempotent.
             free_sub_id = f"{tier}_{barn['id']}"
             await db.subscriptions.update_one(
-                {"barn_id": barn["id"], "stripe_subscription_id": None,
-                 "plan_tier_code": tier},
+                {"id": free_sub_id},
                 {"$set": {"id": free_sub_id, "status": "active",
                           "billing_cycle": None,
                           "entitlements_snapshot": snapshot,
                           "updated_at": now, "last_event_at": now},
                  "$setOnInsert": {"barn_id": barn["id"],
-                                  "stripe_subscription_id": None,
                                   "plan_tier_code": tier,
                                   "owner_user_id": user.get("id"),
                                   "amount_cents": 0,
