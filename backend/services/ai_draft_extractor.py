@@ -92,8 +92,13 @@ def validate_ai_source(*, source_type: str, mime_type: str, byte_size: int) -> s
 
 
 def private_ai_storage_key(*, barn_id: str, source_id: str, filename: str) -> str:
-    safe_name = "".join(c for c in filename if c.isalnum() or c in ".-_")[-80:] or "source"
-    return f"{barn_id}/ai-draft-sources/{source_id}/{safe_name}"
+    extension = ""
+    if "." in (filename or ""):
+        raw_extension = filename.rsplit(".", 1)[-1].lower()
+        safe_extension = "".join(c for c in raw_extension if c.isalnum())[:12]
+        if safe_extension:
+            extension = f".{safe_extension}"
+    return f"{barn_id}/ai-draft-sources/{source_id}/source{extension}"
 
 
 def draft_system_instruction() -> str:

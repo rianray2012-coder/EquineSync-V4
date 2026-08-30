@@ -59,6 +59,34 @@ def _hash_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
+def _private_text_metadata(field: str, value: Optional[str]) -> Dict[str, Any]:
+    clean = (value or "").strip()
+    return {
+        f"{field}_present": bool(clean),
+        f"{field}_sha256": _hash_text(clean) if clean else None,
+        f"{field}_length": len(clean),
+    }
+
+
+def _filename_extension(value: Optional[str], *, mime_type: Optional[str] = None) -> Optional[str]:
+    filename = (value or "").strip()
+    if "." in filename:
+        raw_extension = filename.rsplit(".", 1)[-1].lower()
+        safe_extension = "".join(c for c in raw_extension if c.isalnum())[:12]
+        if safe_extension:
+            return safe_extension
+    subtype = (mime_type or "").split("/")[-1].strip().lower()
+    if subtype:
+        safe_subtype = "".join(c for c in subtype if c.isalnum())[:12]
+        return safe_subtype or None
+    return None
+
+
+def _generic_source_filename(original: Optional[str], *, mime_type: Optional[str] = None) -> str:
+    extension = _filename_extension(original, mime_type=mime_type)
+    return f"source.{extension}" if extension else "source"
+
+
 def _require_ai_draft_role(user: Dict[str, Any]) -> None:
     if (user or {}).get("role") not in AI_DRAFT_ALLOWED_ROLES:
         raise HTTPException(status_code=403, detail="AI draft review access required")
@@ -112,7 +140,11 @@ def _source_projection(doc: Dict[str, Any]) -> Dict[str, Any]:
         "id": doc["id"],
         "source_type": doc["source_type"],
         "status": doc["status"],
-        "filename": doc.get("filename"),
+        "filename_present": bool(doc.get("filename_present", doc.get("filename"))),
+        "filename_extension": doc.get("filename_extension") or _filename_extension(
+            doc.get("filename"),
+            mime_type=doc.get("mime_type"),
+        ),
         "mime_type": doc.get("mime_type"),
         "byte_size": doc.get("byte_size"),
         "sha256": doc.get("sha256"),
@@ -312,18 +344,22 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             source_id=source_id,
             filename=body.filename,
         )
+        generic_filename = _generic_source_filename(body.filename, mime_type=mime_type)
         upload_url = storage_client.presigned_put(key=storage_key, mime_type=mime_type)
         doc = {
             "id": source_id,
             "barn_id": barn_id,
             "user_id": user.get("id"),
             "source_type": body.source_type,
-            "filename": body.filename,
+            "filename": generic_filename,
+            "filename_present": True,
+            "filename_sha256": _hash_text(body.filename),
+            "filename_extension": _filename_extension(body.filename, mime_type=mime_type),
             "mime_type": mime_type,
             "byte_size": body.byte_size,
             "storage_key": storage_key,
             "status": "upload_pending",
-            "prompt_hint": body.prompt_hint,
+            **_private_text_metadata("prompt_hint", body.prompt_hint),
             "created_at": now,
             "updated_at": now,
             "uploaded_at": None,
@@ -341,6 +377,9 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 "mime_type": mime_type,
                 "byte_size": body.byte_size,
                 "storage_key_present": True,
+                "filename_present": True,
+                "filename_extension": _filename_extension(body.filename, mime_type=mime_type),
+                **_private_text_metadata("prompt_hint", body.prompt_hint),
             },
         )
         return {
@@ -426,7 +465,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             )
             file_bytes = stored.bytes_value
             mime_type = stored.mime_type
-            filename = source_doc.get("filename") or filename
+            filename = source_doc.get("filename") or _generic_source_filename(None, mime_type=mime_type)
         else:
             source_hash = _hash_text(source_text or "")
             source_doc = {
@@ -435,6 +474,8 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 "user_id": user.get("id"),
                 "source_type": body.source_type,
                 "filename": "inline-source.txt",
+                "filename_present": False,
+                "filename_extension": "txt",
                 "mime_type": "text/plain",
                 "byte_size": len((source_text or "").encode("utf-8")),
                 "sha256": source_hash,
@@ -452,7 +493,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             "source_id": source_doc["id"],
             "source_type": body.source_type,
             "requested_output": body.requested_output,
-            "prompt": body.prompt,
+            **_private_text_metadata("prompt", body.prompt),
             "status": "running",
             "draft_only": True,
             "review_required": True,
@@ -523,7 +564,11 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 resource_id=job_id,
                 outcome="failure",
                 status_code=502,
-                metadata={"source_type": body.source_type, "error": str(exc), "official_records_written": False},
+                metadata={
+                    "source_type": body.source_type,
+                    "error_type": exc.__class__.__name__,
+                    "official_records_written": False,
+                },
             )
             raise HTTPException(502, "AI draft extraction failed") from exc
 
@@ -578,7 +623,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             "barn_id": resolve_barn_id(user),
             "user_id": user.get("id"),
             "action": body.action,
-            "note": body.note,
+            **_private_text_metadata("note", body.note),
             "official_records_written": False,
             "created_at": now,
         }
@@ -597,6 +642,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             status_code=200,
             metadata={
                 "review_action": body.action,
+                **_private_text_metadata("note", body.note),
                 "official_records_written": False,
                 "save_workflow": "not_implemented_in_this_slice",
             },
@@ -676,7 +722,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 "source_hash": source_hash,
                 "reviewer_user_id": user.get("id"),
                 "reviewer_role": user.get("role"),
-                "reviewer_note": body.reviewer_note,
+                **_private_text_metadata("reviewer_note", body.reviewer_note),
                 "created_at": now,
                 "updated_at": now,
                 "deleted_at": None,
