@@ -89,3 +89,16 @@ def test_ai_official_save_ui_has_explicit_human_confirmation_boundary():
     assert "I reviewed this AI draft, confirmed the barn context" in source
     assert "Health, billing, legal, notifications, and calendar changes remain blocked" in source
     assert "disabled={!officialSaveChecked" in source
+
+
+def test_ai_reviewer_surfaces_budget_guardrail_without_private_source_details():
+    source = _source()
+
+    assert 'api.get("/ai/draft-jobs/usage-policy")' in source
+    assert 'data-testid="ai-draft-budget-guardrail"' in source
+    assert 'data-testid="ai-draft-budget-policy"' in source
+    assert 'data-testid="ai-draft-budget-enforcement"' in source
+    assert 'data-testid="ai-draft-budget-jobs"' in source
+    assert 'data-testid="ai-draft-budget-tokens"' in source
+    assert 'data-testid="ai-draft-budget-source-bytes"' in source
+    assert "Draft extraction remains review-required, human-confirmed, and budget-gated for pilot use." in source

@@ -219,6 +219,16 @@ const sha256File = async (file) => {
   return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
 };
 
+const formatCount = (value) => Number.isFinite(Number(value)) ? Number(value).toLocaleString() : "Unmetered";
+
+const formatBytes = (value) => {
+  const size = Number(value);
+  if (!Number.isFinite(size)) return "Unmetered";
+  if (size >= 1024 * 1024) return `${Math.round(size / 1024 / 1024)} MB`;
+  if (size >= 1024) return `${Math.round(size / 1024)} KB`;
+  return `${size} B`;
+};
+
 const jsonPreview = (value) => JSON.stringify(value || {}, null, 2);
 
 export default function AiAutomation() {
@@ -237,13 +247,18 @@ export default function AiAutomation() {
   const [officialSaveConfirm, setOfficialSaveConfirm] = useState(null);
   const [officialSaveChecked, setOfficialSaveChecked] = useState(false);
   const [savingOfficialId, setSavingOfficialId] = useState(null);
+  const [usagePolicy, setUsagePolicy] = useState(null);
 
   const loadJobs = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.get("/ai/draft-jobs?limit=25");
-      setJobs(response.data.jobs || []);
+      const [jobsResponse, usageResponse] = await Promise.all([
+        api.get("/ai/draft-jobs?limit=25"),
+        api.get("/ai/draft-jobs/usage-policy").catch(() => null),
+      ]);
+      setJobs(jobsResponse.data.jobs || []);
+      setUsagePolicy(usageResponse?.data?.usage || null);
     } catch (err) {
       setError(err?.response?.data?.detail || "Could not load AI draft queue.");
     } finally {
@@ -445,6 +460,44 @@ export default function AiAutomation() {
           </div>
         </div>
       </Card>
+
+      {usagePolicy && (
+        <Card hover={false} className="mb-6 border-equine-cloud bg-white/75" data-testid="ai-draft-budget-guardrail">
+          <div className="flex items-start gap-3">
+            <ShieldCheck className="w-5 h-5 text-equine-sage mt-0.5 flex-shrink-0" />
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+                <div>
+                  <div className="label-eyebrow-muted mb-1">AI Budget Guardrail</div>
+                  <div className="text-[13px] text-equine-inkMuted leading-relaxed" data-testid="ai-draft-budget-policy">
+                    Draft extraction remains review-required, human-confirmed, and budget-gated for pilot use.
+                  </div>
+                </div>
+                <StatusPill tone={usagePolicy.enforcement_enabled ? "success" : "warning"} data-testid="ai-draft-budget-enforcement">
+                  {usagePolicy.enforcement_enabled ? "Enforced" : "Monitor only"}
+                </StatusPill>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="rounded-lg border border-equine-cloud bg-equine-cloud/25 p-3" data-testid="ai-draft-budget-jobs">
+                  <div className="label-eyebrow-muted mb-1">Jobs Today</div>
+                  <div className="text-equine-ink font-semibold">{formatCount(usagePolicy.draft_jobs_created)} / {formatCount(usagePolicy.daily_job_limit)}</div>
+                  <div className="text-[12px] text-equine-inkMuted">Remaining {formatCount(usagePolicy.remaining_jobs)}</div>
+                </div>
+                <div className="rounded-lg border border-equine-cloud bg-equine-cloud/25 p-3" data-testid="ai-draft-budget-tokens">
+                  <div className="label-eyebrow-muted mb-1">Estimated Tokens</div>
+                  <div className="text-equine-ink font-semibold">{formatCount(usagePolicy.estimated_tokens_used)} / {formatCount(usagePolicy.daily_estimated_token_limit)}</div>
+                  <div className="text-[12px] text-equine-inkMuted">Remaining {formatCount(usagePolicy.remaining_estimated_tokens)}</div>
+                </div>
+                <div className="rounded-lg border border-equine-cloud bg-equine-cloud/25 p-3" data-testid="ai-draft-budget-source-bytes">
+                  <div className="label-eyebrow-muted mb-1">Source Volume</div>
+                  <div className="text-equine-ink font-semibold">{formatBytes(usagePolicy.source_bytes_processed)} / {formatBytes(usagePolicy.daily_source_byte_limit)}</div>
+                  <div className="text-[12px] text-equine-inkMuted">Remaining {formatBytes(usagePolicy.remaining_source_bytes)}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 xl:grid-cols-[1.1fr_0.9fr] gap-5 mb-6">
         <Card hover={false}>

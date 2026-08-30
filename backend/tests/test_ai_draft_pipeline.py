@@ -92,6 +92,7 @@ class FakeDb(dict):
 class FakeStorage:
     def __init__(self):
         self.objects: Dict[str, bytes] = {}
+        self.read_count = 0
 
     def configured(self):
         return True
@@ -101,6 +102,8 @@ class FakeStorage:
         return f"https://storage.invalid/{key}?signature=redacted"
 
     def read_bytes(self, *, key, mime_type):
+        self.read_count += 1
+
         class Stored:
             bytes_value = b"stored private source"
 
@@ -237,6 +240,116 @@ def test_inline_text_job_is_draft_only_and_review_does_not_save_records():
         assert "inventory_items" not in db
         assert "invoices" not in db
         assert "horse_health_records" not in db
+
+
+def test_ai_usage_policy_records_safe_daily_budget_metadata():
+    db = FakeDb()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user)
+
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "voice_transcript",
+            "source_text": "Draft inventory notes for four bags of senior feed.",
+            "requested_output": "draft_records",
+        })
+        assert created.status_code == 201
+
+        policy = client.get("/api/ai/draft-jobs/usage-policy")
+
+    assert policy.status_code == 200
+    usage = policy.json()["usage"]
+    assert usage["draft_jobs_created"] == 1
+    assert usage["estimated_tokens_used"] >= 1801
+    assert usage["remaining_jobs"] == usage["daily_job_limit"] - 1
+    assert usage["policy"]["draft_only_default"] is True
+    assert usage["policy"]["human_review_required"] is True
+    assert usage["policy"]["autonomous_mutation_enabled"] is False
+    assert usage["policy"]["higher_risk_lanes_separately_gated"] is True
+    assert "voice_transcript" in usage["by_source_type"]
+    assert "senior feed" not in str(usage)
+    assert "founder@example.test" not in str(usage)
+
+
+def test_ai_daily_budget_blocks_second_job_before_extraction(monkeypatch):
+    monkeypatch.setenv("AI_DAILY_JOB_LIMIT", "1")
+    db = FakeDb()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user)
+
+    with TestClient(app) as client:
+        first = client.post("/api/ai/draft-jobs", json={
+            "source_type": "voice_transcript",
+            "source_text": "Draft first note.",
+            "requested_output": "draft_records",
+        })
+        assert first.status_code == 201
+
+        second = client.post("/api/ai/draft-jobs", json={
+            "source_type": "voice_transcript",
+            "source_text": "Draft second note.",
+            "requested_output": "draft_records",
+        })
+
+    assert second.status_code == 429
+    assert "Daily AI draft job limit reached" in second.text
+    assert len(db["ai_draft_jobs"].rows) == 1
+    assert db["ai_usage_daily"].rows[0]["draft_jobs_created"] == 1
+
+
+def test_ai_daily_token_budget_blocks_large_source_before_job_insert(monkeypatch):
+    monkeypatch.setenv("AI_DAILY_ESTIMATED_TOKEN_LIMIT", "100")
+    db = FakeDb()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user)
+
+    with TestClient(app) as client:
+        blocked = client.post("/api/ai/draft-jobs", json={
+            "source_type": "voice_transcript",
+            "source_text": "x" * 1000,
+            "requested_output": "draft_records",
+        })
+
+    assert blocked.status_code == 429
+    assert "Daily AI estimated token budget reached" in blocked.text
+    assert "ai_draft_jobs" not in db
+    assert db["ai_usage_daily"].rows == []
+    assert "ai_draft_sources" not in db
+
+
+def test_ai_source_file_budget_blocks_before_private_storage_read(monkeypatch):
+    monkeypatch.setenv("AI_DAILY_SOURCE_BYTE_LIMIT", "100")
+    db = FakeDb()
+    storage = FakeStorage()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user, storage=storage)
+
+    with TestClient(app) as client:
+        intent = client.post("/api/ai/draft-jobs/upload-intents", json={
+            "source_type": "photo_inventory",
+            "filename": "private-tack-room.jpg",
+            "mime_type": "image/jpeg",
+            "byte_size": 1024,
+        })
+        source = intent.json()["source"]
+        confirm = client.post(f"/api/ai/draft-jobs/upload-intents/{source['id']}/confirm", json={
+            "source_id": source["id"],
+            "sha256": "c" * 64,
+            "byte_size": 1024,
+        })
+        assert confirm.status_code == 200
+
+        blocked = client.post("/api/ai/draft-jobs", json={
+            "source_type": "photo_inventory",
+            "source_id": source["id"],
+            "requested_output": "photo_to_inventory",
+        })
+
+    assert blocked.status_code == 429
+    assert "Daily AI source processing budget reached" in blocked.text
+    assert storage.read_count == 0
+    assert "ai_draft_jobs" not in db
+    assert db["ai_usage_daily"].rows == []
 
 
 def test_ai_upload_source_projection_and_storage_metadata_do_not_expose_raw_filename_or_prompt_hint():
