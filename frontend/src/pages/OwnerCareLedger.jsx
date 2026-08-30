@@ -10,7 +10,7 @@
  */
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { api } from "../lib/api";
+import { api, fmtDate, fmtTime } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
 import { buildHorseOpsDraftKey, clearHorseOpsDraft, loadHorseOpsDraft, saveHorseOpsDraft } from "../lib/horseOpsDrafts";
 
@@ -43,6 +43,50 @@ const Pill = ({ status }) => (
     {STATUS_LABELS[status] || status}
   </span>
 );
+
+const TrainingSummarySection = ({ summary }) => {
+  const lessons = summary?.upcoming_lessons || [];
+  const training = summary?.recent_training || [];
+  const plans = summary?.active_plans || [];
+  if (!lessons.length && !training.length && !plans.length) return null;
+
+  return (
+    <section
+      data-testid="owner-training-summary"
+      className="rounded-lg border border-equine-silver/10 bg-equine-black/40 p-4"
+    >
+      <div className="label-eyebrow mb-3">Training & lessons</div>
+      <div className="grid gap-3">
+        {lessons.map((lesson) => (
+          <div key={lesson.id} data-testid={`owner-training-lesson-${lesson.id}`} className="rounded border border-equine-silver/10 bg-equine-silver/5 p-3">
+            <div className="text-[13px] text-equine-silver/85">Lesson scheduled</div>
+            <div className="text-[12px] text-equine-platinum/65 mt-1">
+              {[lesson.start_time ? `${fmtDate(lesson.start_time)} ${fmtTime(lesson.start_time)}` : null, lesson.trainer_name, lesson.focus].filter(Boolean).join(" · ")}
+            </div>
+          </div>
+        ))}
+        {training.map((row) => (
+          <div key={row.id} data-testid={`owner-training-log-${row.id}`} className="rounded border border-equine-silver/10 bg-equine-silver/5 p-3">
+            <div className="text-[13px] text-equine-silver/85">
+              {[row.discipline || "Training update", row.date].filter(Boolean).join(" · ")}
+            </div>
+            <div className="text-[12px] text-equine-platinum/65 mt-1">
+              {[row.exercises, row.homework, row.rating ? `Rating ${row.rating}/10` : null].filter(Boolean).join(" · ")}
+            </div>
+          </div>
+        ))}
+        {plans.map((plan) => (
+          <div key={plan.id} data-testid={`owner-training-plan-${plan.id}`} className="rounded border border-equine-silver/10 bg-equine-silver/5 p-3">
+            <div className="text-[13px] text-equine-silver/85">{plan.goal || "Training plan"}</div>
+            <div className="text-[12px] text-equine-platinum/65 mt-1">
+              {[plan.status, plan.trainer_name].filter(Boolean).join(" · ")}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default function OwnerCareLedger() {
   const { horseId } = useParams();
@@ -95,6 +139,8 @@ export default function OwnerCareLedger() {
           </div>
         ))}
       </section>
+
+      <TrainingSummarySection summary={data.training_summary} />
 
       <button
         type="button"

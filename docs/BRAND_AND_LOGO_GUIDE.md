@@ -2,6 +2,8 @@
 # EquineSync Brand & Logo Usage Guide
 
 > **This is the authoritative source of truth for EquineSync's visual identity** (palette, typography, logo). Where any other document conflicts, this guide wins. `DESIGN_TOKENS.md` is reconciled to match.
+>
+> Product naming lock: the product brand is **EquineSync**. Use **Equine-Sync** only when referring to the web address/domain styling or legacy asset titles that already contain the hyphenated form.
 
 ## Brand Identity Overview
 **Positioning:** EquineSync is a refined operational platform for modern equestrian care. The brand should communicate operational clarity, calm authority, precision, sophistication, trust, and elevated equestrian culture.
@@ -39,7 +41,7 @@ Visual language combines: elite stable aesthetics, refined modern SaaS design, u
 | Name | Hex | Usage |
 |---|---|---|
 | Success | `#7FA98B` | Muted sage — completed tasks, confirmations, wellness |
-| Warning | `#D7B67A` | Soft brass — attention-needed, upcoming care, moderate alerts |
+| Warning | `#D7B67A` | Warm warning state — attention-needed, upcoming care, moderate alerts |
 | Critical | `#B46A6A` | Muted oxblood — urgent alerts, health warnings, critical care |
 
 ### Gradient System
@@ -53,7 +55,7 @@ Visual language combines: elite stable aesthetics, refined modern SaaS design, u
 - **Hierarchy:** Hero headlines = elegant serif SemiBold; Section headers = sans-serif uppercase with tracking; Body = sans-serif Regular; Navigation = sans-serif Medium.
 
 ## Logo Usage System
-- **Primary Logo:** Horse icon + "EQUINE-SYNC" wordmark + tagline "Every Horse. Every Task. In Sync." — website hero, splash, investor/print/pitch/marketing.
+- **Primary Logo:** Horse icon + "EquineSync" wordmark + tagline "Every Horse. Every Task. In Sync." — website hero, splash, investor/print/pitch/marketing.
 - **Secondary Logo (Horizontal Compact Lockup):** dashboard nav, mobile headers, footer, small-width interfaces.
 - **Icon Mark (horse symbol only):** app icon, favicon, notifications, watermarks, social, mobile launch screen. → `assets/brand/equinesync-icon.png`
 
@@ -88,6 +90,11 @@ box-shadow: 0 2px 12px rgba(35,39,52,0.04);
 ## Photography & Imagery Direction
 Preferred: cinematic equestrian photography, modern stable architecture, soft luxury, natural movement, emotional connection.
 Visual-style prompt keywords: *quiet luxury equestrian, editorial SaaS, modern horse care, calm operational design, premium stable management, soft atmospheric gradients, refined dashboards, high-end equestrian branding.*
+
+## Legacy Language Guardrails
+- Avoid visible brand language or design-token naming that implies brass, saddle leather, jet black, rustic western styling, or traditional brown/gold equestrian luxury.
+- Keep `#D7B67A` only as a semantic warning color. It should be named `status-warning` or equivalent in product code, not brass.
+- Existing legacy class aliases may remain temporarily for compatibility, but new implementation should use semantic EquineSync tokens.
 
 ## Canonical CSS Variables
 ```css

@@ -2110,6 +2110,56 @@ def build_router(*, db, get_current_user) -> APIRouter:
         cleaned = {k: v for k, v in (row or {}).items() if k != "staff_note"}
         return cleaned
 
+    def _owner_visible_work_filter(horse: Dict[str, Any], extra: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "barn_id": horse["barn_id"],
+            **extra,
+            "$or": [
+                {"owner_visible": True},
+                {"visibility": {"$in": ["owner_visible", "shared_with_owner"]}},
+            ],
+        }
+
+    def _safe_lesson_summary(row: Dict[str, Any], horse: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "id": row.get("id"),
+            "horse_id": row.get("horse_id"),
+            "horse_name": row.get("horse_name") or horse.get("name"),
+            "trainer_id": row.get("trainer_id") or row.get("trainer_user_id"),
+            "trainer_name": row.get("trainer_name"),
+            "start_time": row.get("start_time"),
+            "duration_min": row.get("duration_min"),
+            "focus": row.get("focus"),
+            "completed": bool(row.get("completed")),
+        }
+
+    def _safe_training_summary(row: Dict[str, Any], horse: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "id": row.get("id"),
+            "horse_id": row.get("horse_id"),
+            "horse_name": row.get("horse_name") or horse.get("name"),
+            "trainer_id": row.get("trainer_id") or row.get("trainer_user_id"),
+            "trainer_name": row.get("trainer_name"),
+            "date": row.get("date"),
+            "discipline": row.get("discipline"),
+            "exercises": row.get("exercises"),
+            "rating": row.get("rating"),
+            "homework": row.get("homework"),
+        }
+
+    def _safe_plan_summary(row: Dict[str, Any], horse: Dict[str, Any]) -> Dict[str, Any]:
+        data = row.get("data") or {}
+        return {
+            "id": row.get("id"),
+            "horse_id": data.get("horse_id"),
+            "horse_name": data.get("horse_name") or horse.get("name"),
+            "trainer_id": data.get("trainer_user_id") or data.get("trainer_id"),
+            "trainer_name": data.get("trainer_name"),
+            "goal": data.get("goal"),
+            "status": data.get("status") or "planned",
+            "updated_at": row.get("updated_at"),
+        }
+
     @router.get("/horse-ledger/{horse_id}/owner-summary")
     async def owner_summary(horse_id: str, user=Depends(get_current_user)):
         horse = await _load_horse_for_owner_or_404(horse_id, user)
@@ -2191,6 +2241,18 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 {"_id": 0},
             ).sort("created_at", -1).to_list(10)
             recent_requests = [_strip_staff_note(r) for r in rows]
+        owner_lessons = await db.lessons.find(
+            _owner_visible_work_filter(horse, {"horse_id": horse_id}),
+            {"_id": 0},
+        ).sort("start_time", 1).to_list(6)
+        owner_training = await db.training.find(
+            _owner_visible_work_filter(horse, {"horse_id": horse_id}),
+            {"_id": 0},
+        ).sort("date", -1).to_list(6)
+        owner_plans = await db.training_plans.find(
+            _owner_visible_work_filter(horse, {"data.horse_id": horse_id}),
+            {"_id": 0},
+        ).sort("updated_at", -1).to_list(6)
         payload = {
             "horse_id":             horse_id,
             "generated_at":         datetime.now(timezone.utc).isoformat(),
@@ -2198,6 +2260,11 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "summary_cards":        cards,
             "visible_sections":     visible_sections,
             "recent_owner_updates": [],  # reserved for a future phase
+            "training_summary": {
+                "upcoming_lessons": [_safe_lesson_summary(r, horse) for r in owner_lessons if not r.get("completed")],
+                "recent_training":  [_safe_training_summary(r, horse) for r in owner_training],
+                "active_plans":     [_safe_plan_summary(r, horse) for r in owner_plans],
+            },
             "recent_owner_requests":recent_requests,
             "request_options": {
                 "request_type":      sorted(_OWNER_REQUEST_TYPES),
