@@ -583,6 +583,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             "created_at": now,
         }
         await db[AI_REVIEW_COLLECTION].insert_one(review)
+        review.pop("_id", None)
         await db[AI_JOB_COLLECTION].update_one(
             {"id": job_id},
             {"$set": {"review_status": body.action, "updated_at": now}},
@@ -733,6 +734,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             "created_at": now,
         }
         await db[AI_REVIEW_COLLECTION].insert_one(review)
+        review.pop("_id", None)
         await db[AI_JOB_COLLECTION].update_one(
             {"id": job_id},
             {"$set": {
