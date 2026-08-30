@@ -34,6 +34,10 @@ AI_OFFICIAL_SAVE_COLLECTIONS = {
     "inventory_supply": "inventory",
     "work_task_repair": "ai_work_repair_tickets",
 }
+AI_OFFICIAL_SAVE_SOURCE_TYPES = {
+    "inventory_supply": {"invoice", "service_invoice", "photo_inventory", "voice_transcript"},
+    "work_task_repair": {"training_note", "voice_transcript"},
+}
 
 TERMINAL_REVIEW_STATES = {"approved_no_save", "rejected"}
 AI_DRAFT_ALLOWED_ROLES = {
@@ -896,6 +900,8 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
             raise HTTPException(409, "AI draft job must be draft_ready before official save")
         if job.get("review_status") in TERMINAL_REVIEW_STATES:
             raise HTTPException(409, "AI draft job has already been terminally reviewed")
+        if job.get("source_type") not in AI_OFFICIAL_SAVE_SOURCE_TYPES[body.lane]:
+            raise HTTPException(422, "AI draft source type is not approved for this official-save lane")
 
         now = _now_iso()
         source_hash = _source_hash(job)

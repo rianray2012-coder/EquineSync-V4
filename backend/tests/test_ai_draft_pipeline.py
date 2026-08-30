@@ -921,6 +921,37 @@ def test_health_observation_cannot_request_official_health_score_save_lane():
     assert "horse_health_records" not in db
 
 
+def test_health_observation_cannot_use_other_official_save_lanes_directly():
+    db = FakeDb()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "health_observation",
+            "source_text": "Horse appears slightly stiff after turnout and needs human review.",
+            "requested_output": "draft_health_score",
+        })
+        assert created.status_code == 201
+        job = created.json()["job"]
+
+        saved = client.post(f"/api/ai/draft-jobs/{job['id']}/official-save", json={
+            "lane": "inventory_supply",
+            "items": [{
+                "name": "Do not save from health source",
+                "category": "health",
+                "details": "Direct API attempt must stay blocked.",
+                "source_confidence": "high",
+                "review_status": "reviewed",
+            }],
+        })
+
+    assert saved.status_code == 422
+    assert "not approved for this official-save lane" in saved.text
+    assert "inventory" not in db
+    assert "ai_work_repair_tickets" not in db
+    assert "horse_health_records" not in db
+
+
 def test_parse_output_normalizes_inventory_candidates_to_reviewable_shape():
     extractor = OpenAIDraftExtractor(api_key="test-key")
     parsed = extractor._parse_output(
