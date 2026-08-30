@@ -19,10 +19,10 @@ export default function Enrollment() {
     <div className="min-h-screen w-full bg-equine-navyDeep text-white font-sans" data-testid="enrollment-page">
       <header className="px-6 md:px-12 py-6 max-w-6xl mx-auto flex items-center justify-between gap-4">
         <div className="sm:hidden shrink-0">
-          <Logo onNavy size={48} showTagline={false} />
+          <Logo onNavy size={60} showTagline={false} />
         </div>
         <div className="hidden sm:block">
-          <Logo onNavy size={64} />
+          <Logo onNavy size={78} />
         </div>
         <Link to="/login" className="text-[12px] tracking-wide text-white/60 hover:text-white" data-testid="enrollment-signin">
           Sign in
@@ -38,8 +38,8 @@ export default function Enrollment() {
             Choose the enrollment path that matches how you care for horses.
           </h1>
           <p className="mt-5 text-white/65 text-[15px] leading-relaxed max-w-2xl">
-            Start with the path that fits your role. EquineSync will guide the right account setup,
-            review steps, and workspace access from there.
+            Start with the path that fits your role. EquineSync will collect the right setup details,
+            route any profile review, and open the correct workspace context from there.
           </p>
         </section>
 
@@ -72,7 +72,7 @@ export default function Enrollment() {
                 <p className="mt-5 text-[13.5px] text-white/65 leading-relaxed">{path.summary}</p>
                 <div className="mt-5">
                   <div className="text-[10.5px] tracking-[0.24em] uppercase text-brand-lilac/85 mb-2">
-                    Information needed
+                    Setup details
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {path.criticalData.map((item) => (

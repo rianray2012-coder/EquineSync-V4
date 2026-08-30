@@ -66,7 +66,7 @@ def test_rf5_declares_required_enrollment_paths_with_phase_boundaries():
 
     assert "private land" in enrollment_paths
     assert "family and informal care" in enrollment_paths
-    assert "Information needed" in enrollment_page
+    assert "Setup details" in enrollment_page
     assert "Depth continues in" not in enrollment_page
     assert "deferredPhase" not in enrollment_page
     assert "RF7" not in enrollment_page
