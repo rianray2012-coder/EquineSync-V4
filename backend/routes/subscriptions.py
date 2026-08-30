@@ -282,6 +282,15 @@ def _checkout_integration_identifier() -> str:
     return f"equinesync_checkout_{suffix}"
 
 
+def _live_checkout_automatic_tax_enabled() -> bool:
+    return (
+        _is_live_stripe_runtime()
+        and stripe_live_session_enabled("checkout")
+        and stripe_env_flag_enabled("STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED")
+        and stripe_env_flag_enabled("STRIPE_LIVE_AUTOMATIC_TAX_ENABLED")
+    )
+
+
 async def _ensure_stripe_customer(db, user, barn) -> str:
     """Lazy Stripe Customer creation. Stamps barn.stripe_customer_id once."""
     existing = barn.get("stripe_customer_id")
@@ -599,26 +608,31 @@ def build_router(*, db, get_current_user) -> APIRouter:
         sub_data = {}
         if trial_days:
             sub_data["trial_period_days"] = trial_days
+        checkout_params = {
+            "mode": "subscription",
+            "customer": customer_id,
+            "line_items": [{"price": price_id, "quantity": 1}],
+            "success_url": success_url,
+            "cancel_url": cancel_url,
+            "subscription_data": sub_data or None,
+            "allow_promotion_codes": True,
+            "integration_identifier": _checkout_integration_identifier(),
+            "metadata": {
+                "barn_id": barn["id"],
+                "billing_scope": barn.get("billing_scope") or "facility",
+                "account_type": barn.get("account_type") or "facility",
+                "owner_user_id": user["id"],
+                "plan_tier_code": tier,
+                "billing_cycle": cycle,
+                "equinesync_managed": "true",
+            },
+        }
+        if _live_checkout_automatic_tax_enabled():
+            checkout_params["automatic_tax"] = {"enabled": True}
+            checkout_params["customer_update"] = {"address": "auto"}
+            checkout_params["billing_address_collection"] = "required"
         try:
-            session = client.v1.checkout.sessions.create({
-                "mode": "subscription",
-                "customer": customer_id,
-                "line_items": [{"price": price_id, "quantity": 1}],
-                "success_url": success_url,
-                "cancel_url": cancel_url,
-                "subscription_data": sub_data or None,
-                "allow_promotion_codes": True,
-                "integration_identifier": _checkout_integration_identifier(),
-                "metadata": {
-                    "barn_id": barn["id"],
-                    "billing_scope": barn.get("billing_scope") or "facility",
-                    "account_type": barn.get("account_type") or "facility",
-                    "owner_user_id": user["id"],
-                    "plan_tier_code": tier,
-                    "billing_cycle": cycle,
-                    "equinesync_managed": "true",
-                },
-            })
+            session = client.v1.checkout.sessions.create(checkout_params)
         except stripe.error.StripeError as ex:
             logger.exception("subscriptions.checkout create failed")
             raise HTTPException(502, f"Could not start checkout: {ex}")
