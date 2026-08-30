@@ -4,7 +4,6 @@ export const ENROLLMENT_PATHS = [
     label: "Individual Horse Owner",
     audience: "Owners not joining through an EquineSync barn",
     role: "horse_owner",
-    deferredPhase: "RF7",
     signupPath: "/signup?enrollment=individual_horse_owner&role=horse_owner",
     summary:
       "For owners whose barn is not using EquineSync, horses kept on private land, or family and informal care situations.",
@@ -16,7 +15,6 @@ export const ENROLLMENT_PATHS = [
     label: "Barn Owner / Manager",
     audience: "Barn owners, managers, facility operators, and program leads",
     role: "barn_owner",
-    deferredPhase: "RF5/RF12",
     signupPath: "/signup?enrollment=barn_facility_owner&role=barn_owner",
     summary:
       "For barns, barn managers, boarding facilities, training facilities, rehab barns, and private operations starting a workspace.",
@@ -28,7 +26,6 @@ export const ENROLLMENT_PATHS = [
     label: "Service Provider",
     audience: "Vets, farriers, body workers, haulers, and care partners",
     role: "service_provider",
-    deferredPhase: "RF10",
     signupPath: "/signup?enrollment=service_provider&role=service_provider",
     summary:
       "For providers who need basic horse info, calendar visibility, appointment scheduling, and optional premium provider tools.",
@@ -40,7 +37,6 @@ export const ENROLLMENT_PATHS = [
     label: "Trainer",
     audience: "Independent trainers and training businesses",
     role: "trainer",
-    deferredPhase: "RF9",
     signupPath: "/signup?enrollment=trainer&role=trainer",
     summary:
       "For trainers who need a reviewed profile, assigned-work visibility, and a governed path toward client, horse, lesson, and program workflows.",
