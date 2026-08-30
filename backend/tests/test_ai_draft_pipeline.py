@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import uuid
 from typing import Any, Dict
 
 import pytest
@@ -30,6 +31,7 @@ class FakeCollection:
         self.rows = []
 
     async def insert_one(self, doc):
+        doc.setdefault("_id", f"fake_object_id_{uuid.uuid4().hex}")
         self.rows.append(dict(doc))
         return InsertResult(len(self.rows))
 
