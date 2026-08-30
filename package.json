@@ -1,0 +1,13 @@
+{
+  "name": "equinesync-v4-deploy",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix frontend ci --legacy-peer-deps && npm --prefix frontend run build",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:cloudflare": "npm run deploy",
+    "deploy:cloudflare:dry-run": "npm run build && wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "^4.125.0"
+  }
+}
