@@ -173,17 +173,28 @@ def test_free_checkout_no_barn_manage_required():
     assert r.status_code == 200
 
 
-def test_manual_free_tiers_do_not_collide_on_stripe_subscription_index(db):
+def test_manual_free_tiers_do_not_collide_on_stripe_subscription_index(client, isolated_app_database):
     """Manual/free rows must not write ``stripe_subscription_id: null``.
 
     Mongo's unique sparse index still treats an explicit null value as an
     indexed value, so multiple local free tiers must be keyed by their
     deterministic manual id instead of a Stripe-only field.
     """
-    owner = _signup_user("horse_owner")
+    owner_resp = client.post(
+        "/api/auth/signup",
+        json={
+            "email": f"g15g_owner_{uuid.uuid4().hex[:10]}@example.com",
+            "password": "securepass1",
+            "full_name": "G15G Owner",
+            "role": "horse_owner",
+        },
+    )
+    assert owner_resp.status_code == 200, owner_resp.text
+    owner = owner_resp.json()
+
     provider_email = f"g15g_provider_{uuid.uuid4().hex[:10]}@example.com"
-    provider_resp = requests.post(
-        f"{API}/auth/signup",
+    provider_resp = client.post(
+        "/api/auth/signup",
         json={
             "email": provider_email,
             "password": "securepass1",
@@ -191,27 +202,25 @@ def test_manual_free_tiers_do_not_collide_on_stripe_subscription_index(db):
             "role": "service_provider",
             "tier": "service_provider_free",
         },
-        timeout=15,
     )
-    provider_resp.raise_for_status()
+    assert provider_resp.status_code == 200, provider_resp.text
     provider = provider_resp.json()
 
     for session, tier in ((owner, "free"), (provider, "service_provider_free")):
-        r = requests.post(
-            f"{API}/subscriptions/checkout",
+        r = client.post(
+            "/api/subscriptions/checkout",
             headers={"Authorization": f"Bearer {session['token']}"},
             json={
                 "plan_tier_code": tier,
                 "billing_cycle": "monthly",
                 "origin_url": "http://localhost:3000",
             },
-            timeout=15,
         )
         assert r.status_code == 200, r.text
         assert r.json()["url"] is None
 
     barn_id = owner["user"]["barn_id"]
-    rows = list(db.subscriptions.find(
+    rows = list(isolated_app_database.subscriptions.find(
         {"barn_id": barn_id, "plan_tier_code": {"$in": ["free", "service_provider_free"]}},
         {"_id": 0, "id": 1, "plan_tier_code": 1, "stripe_subscription_id": 1, "status": 1},
     ))
