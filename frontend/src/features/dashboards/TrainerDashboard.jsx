@@ -72,8 +72,8 @@ export default function TrainerDashboard() {
         <>
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
             <Stat label="Assigned Horses" value={counts.assigned_horses || 0} caption="Linked by stable trainer ID" icon={CircleDot} testid="trainer-stat-horses" />
-            <Stat label="Riders" value={counts.riders || 0} caption="From trainer-owned lessons" accent="steel" icon={Users} testid="trainer-stat-riders" />
-            <Stat label="Lessons" value={counts.upcoming_lessons || 0} caption="Scheduled and not complete" accent="brass" icon={GraduationCap} testid="trainer-stat-lessons" />
+            <Stat label="Riders" value={counts.riders || 0} caption="From trainer-owned lessons" accent="ice" icon={Users} testid="trainer-stat-riders" />
+            <Stat label="Lessons" value={counts.upcoming_lessons || 0} caption="Scheduled and not complete" accent="lilac" icon={GraduationCap} testid="trainer-stat-lessons" />
             <Stat label="Training Logs" value={counts.recent_training || 0} caption="Recent trainer-linked work" accent="sage" icon={Dumbbell} testid="trainer-stat-training" />
             <Stat label="Active Plans" value={counts.active_plans || 0} caption="Planned or active goals" accent="amber" icon={ClipboardList} testid="trainer-stat-plans" />
           </div>
@@ -174,16 +174,16 @@ const RefreshButton = ({ onClick, refreshing }) => (
 
 const ActionLinks = () => (
   <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em]">
-    <Link to="/lessons" className="text-equine-brass/80 hover:text-equine-brassLight">Lessons</Link>
-    <Link to="/training" className="text-equine-brass/80 hover:text-equine-brassLight">Training</Link>
-    <Link to="/training-plans" className="text-equine-brass/80 hover:text-equine-brassLight">Plans</Link>
+    <Link to="/lessons" className="text-equine-lilac/80 hover:text-equine-lavender">Lessons</Link>
+    <Link to="/training" className="text-equine-lilac/80 hover:text-equine-lavender">Training</Link>
+    <Link to="/training-plans" className="text-equine-lilac/80 hover:text-equine-lavender">Plans</Link>
   </div>
 );
 
 const WorkCard = ({ title, icon: Icon, rows, empty, render }) => (
   <Card hover={false} data-testid={`trainer-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
     <div className="flex items-center gap-2 mb-4">
-      <Icon className="w-4 h-4 text-equine-brass" />
+      <Icon className="w-4 h-4 text-equine-lilac" />
       <h2 className="font-display text-2xl text-equine-ink">{title}</h2>
     </div>
     {rows.length === 0 ? (

@@ -78,10 +78,10 @@ export default function SubscriptionSuccess() {
         subtitle="Stripe accepted your payment. Your EquineSync membership is unlocking right now."
       />
 
-      <Card hover={false} className="border-equine-saddle/40" data-testid="success-summary-card">
+      <Card hover={false} className="border-equine-lilac/40" data-testid="success-summary-card">
         <div className="flex items-start gap-4 flex-wrap">
-          <div className="rounded-full bg-equine-saddle/15 p-3 border border-equine-saddle/40">
-            <CheckCircle2 className="w-5 h-5 text-equine-saddleDeep" />
+          <div className="rounded-full bg-equine-lilac/15 p-3 border border-equine-lilac/40">
+            <CheckCircle2 className="w-5 h-5 text-equine-lilacDeep" />
           </div>
           <div className="flex-1 min-w-[220px]">
             <div className="font-display text-2xl text-equine-ink mb-1">
@@ -117,7 +117,7 @@ export default function SubscriptionSuccess() {
           <Link
             to="/dashboard"
             data-testid="success-go-dashboard"
-            className="inline-flex items-center gap-1.5 text-[12.5px] tracking-wide px-4 py-2 rounded-full border border-equine-graphite/40 text-equine-ink hover:border-equine-saddleDeep/40 hover:text-equine-saddleDeep transition-colors"
+            className="inline-flex items-center gap-1.5 text-[12.5px] tracking-wide px-4 py-2 rounded-full border border-equine-graphite/40 text-equine-ink hover:border-equine-lilacDeep/40 hover:text-equine-lilacDeep transition-colors"
           >
             Back to dashboard
           </Link>

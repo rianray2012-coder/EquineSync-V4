@@ -113,7 +113,7 @@ export default function Support() {
                   value={form.category}
                   onChange={(event) => update("category", event.target.value)}
                   data-testid="support-category"
-                  className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-brass"
+                  className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-lilac"
                 >
                   {CATEGORIES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                 </select>
@@ -124,7 +124,7 @@ export default function Support() {
                   value={form.severity}
                   onChange={(event) => update("severity", event.target.value)}
                   data-testid="support-severity"
-                  className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-brass"
+                  className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-lilac"
                 >
                   {SEVERITIES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                 </select>
@@ -139,7 +139,7 @@ export default function Support() {
                 onChange={(event) => update("subject", event.target.value)}
                 maxLength={140}
                 data-testid="support-subject"
-                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory placeholder:text-equine-platinum/35 outline-none focus:border-equine-brass"
+                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory placeholder:text-equine-platinum/35 outline-none focus:border-equine-lilac"
                 placeholder="Short summary"
               />
             </label>
@@ -152,7 +152,7 @@ export default function Support() {
                 rows={8}
                 maxLength={4000}
                 data-testid="support-message"
-                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory placeholder:text-equine-platinum/35 outline-none focus:border-equine-brass resize-y"
+                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory placeholder:text-equine-platinum/35 outline-none focus:border-equine-lilac resize-y"
                 placeholder="What happened, what you expected, and what role or horse/facility context you were using."
               />
             </label>
@@ -163,7 +163,7 @@ export default function Support() {
                 value={form.preferred_contact}
                 onChange={(event) => update("preferred_contact", event.target.value)}
                 data-testid="support-preferred-contact"
-                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-brass"
+                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-lilac"
               >
                 <option value="app">In-app / account email</option>
                 <option value="email">Email</option>
@@ -211,7 +211,7 @@ export default function Support() {
               Pilot owner
             </div>
             <div className="mt-3 flex items-start gap-3">
-              <Sparkles className="w-4 h-4 text-equine-brass mt-0.5 flex-shrink-0" />
+              <Sparkles className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
               <div className="text-[13px] text-equine-platinum/65">
                 Founder Rian Ray owns support review and triage before outside tester launch.
               </div>

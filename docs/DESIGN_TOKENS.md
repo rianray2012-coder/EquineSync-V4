@@ -1,7 +1,7 @@
 # DESIGN_TOKENS.md
 # EquineSync Design Tokens
 
-> **RECONCILED (Phase 1):** This file has been reconciled to match the authoritative `BRAND_AND_LOGO_GUIDE.md` (Brand Guide 22). The earlier "Warm Ivory / Saddle Brown / Muted Gold" palette is **DEPRECATED** and must not be used going forward unless explicitly reintroduced later as a secondary seasonal/accent palette. See `DECISION_LOG.md` entry 2026-05-30.
+> **RECONCILED (Phase 1):** This file has been reconciled to match the authoritative `BRAND_AND_LOGO_GUIDE.md` (Brand Guide 22). The earlier earth-toned palette is **DEPRECATED** and must not be used going forward unless explicitly reintroduced later as a secondary seasonal/accent palette. See `DECISION_LOG.md` entry 2026-05-30.
 
 ## Colors
 
@@ -32,7 +32,7 @@
 | Token | Hex | Usage |
 |---|---|---|
 | `--es-success` | `#7FA98B` | muted sage — completed, confirmations |
-| `--es-warning` | `#D7B67A` | soft brass — attention, upcoming care |
+| `--es-warning` | `#D7B67A` | warm warning — attention, upcoming care |
 | `--es-critical` | `#B46A6A` | muted oxblood — urgent/health alerts |
 
 ### Gradients
@@ -89,4 +89,4 @@ Subtle only. Avoid aggressive shadows. Brand card shadow: `0 2px 12px rgba(35,39
 }
 ```
 
-> **Implementation status:** These tokens are the **target**. The live frontend (`frontend/src/index.css`, `tailwind.config.js`) currently uses a sibling "lavender pearl / charcoal navy" palette (e.g. navy `#2E3448`, bg `#F7F5FA`, lavender `#C7B6D9`, accent `#A7B7E7`) that approximates but does not exactly match these tokens. Reconciling the live CSS to these tokens is a **UI-phase task (Phase 8)** and is intentionally **not** part of the Phase 1 documentation pass (no runtime changes).
+> **Implementation status:** Runtime CSS and Tailwind tokens now expose the approved Valencia brand names directly. New UI should use the lavender, lilac, ice, silver-blue, ivory/frost, slate, and graphite naming system.

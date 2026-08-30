@@ -130,7 +130,7 @@ export default function HandoffReports() {
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 mb-6">
         <Card hover={false} className="xl:col-span-3">
           <div className="flex items-center gap-2 mb-4">
-            <ClipboardList className="w-4 h-4 text-equine-brass" />
+            <ClipboardList className="w-4 h-4 text-equine-lilac" />
             <h2 className="font-display text-2xl text-equine-ink">Open task context</h2>
           </div>
           <div className="space-y-3">
@@ -156,7 +156,7 @@ export default function HandoffReports() {
 
         <Card hover={false} className="xl:col-span-2">
           <div className="flex items-center gap-2 mb-4">
-            <FileText className="w-4 h-4 text-equine-brass" />
+            <FileText className="w-4 h-4 text-equine-lilac" />
             <h2 className="font-display text-2xl text-equine-ink">Recent shift notes</h2>
           </div>
           <div className="space-y-3">
@@ -188,7 +188,7 @@ export default function HandoffReports() {
         </Card>
       ) : reports.length === 0 ? (
         <Empty>
-          <FileText strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <FileText strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No handoff reports</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add the first end-of-shift handoff report.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="handoff-reports-empty-add">

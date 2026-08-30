@@ -103,7 +103,7 @@ const RecordsWithCsvStep = ({ kind, endpoint, displayKey, fields, intro, noCsv, 
       {csvOpen && (
         <Card hover={false} className="!bg-equine-soft mb-5 border-equine-steel/40">
           <div className="flex items-center gap-3 mb-3">
-            <Upload strokeWidth={1.4} className="text-equine-champagne" />
+            <Upload strokeWidth={1.4} className="text-equine-lilac" />
             <div className="font-display text-xl">Bulk import via CSV</div>
           </div>
           <div className="text-[12.5px] text-equine-platinum/70 mb-3">
@@ -123,7 +123,7 @@ const RecordsWithCsvStep = ({ kind, endpoint, displayKey, fields, intro, noCsv, 
                 placeholder="…or paste CSV text here"
                 rows={6}
                 data-testid={`${kind}-csv-text`}
-                className="mt-3 w-full bg-equine-card border border-equine-graphite/60 rounded-lg px-3 py-2 text-[12.5px] font-mono text-equine-silver focus:border-equine-champagne outline-none"
+                className="mt-3 w-full bg-equine-card border border-equine-graphite/60 rounded-lg px-3 py-2 text-[12.5px] font-mono text-equine-silver focus:border-equine-lilac outline-none"
               />
             </div>
             <div>

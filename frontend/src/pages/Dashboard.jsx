@@ -110,7 +110,7 @@ export default function Dashboard() {
             <button
               data-testid="walkthrough-launch"
               onClick={() => setWalkthroughOpen(true)}
-              className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.2em] text-equine-brass/80 hover:text-equine-brassLight transition-colors px-3 py-1.5 rounded-full border border-equine-graphite/40 hover:border-equine-brass/50"
+              className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.2em] text-equine-lilac/80 hover:text-equine-lavender transition-colors px-3 py-1.5 rounded-full border border-equine-graphite/40 hover:border-equine-lilac/50"
             >
               <Compass className="w-3.5 h-3.5" /> Founder tour
             </button>
@@ -134,7 +134,7 @@ export default function Dashboard() {
         action={
           <Link
             to="/today"
-            className="text-[11px] uppercase tracking-[0.22em] text-equine-brass/80 hover:text-equine-brassLight inline-flex items-center gap-1.5"
+            className="text-[11px] uppercase tracking-[0.22em] text-equine-lilac/80 hover:text-equine-lavender inline-flex items-center gap-1.5"
           >
             Open Today <ArrowRight className="w-3 h-3" />
           </Link>
@@ -149,7 +149,7 @@ export default function Dashboard() {
           label="Feed pending"
           value={summary?.feed_pending ?? "—"}
           caption={`of ${summary?.feed_today_total ?? 0} meals today`}
-          tone="brass"
+          tone="lilac"
           to="/feed"
           testid="tile-feed"
         />
@@ -200,7 +200,7 @@ export default function Dashboard() {
         <Stat testid="stat-wellness" label="Avg Wellness"     value={summary?.avg_wellness ?? "—"}    accent="sage"   caption="0–100 score" icon={Heart} />
         <Stat testid="stat-meds-due" label="Meds Due"         value={summary?.meds_due ?? 0}          accent="amber"  caption={`${summary?.meds_missed ?? 0} missed today`} icon={Pill} />
         <Stat testid="stat-injuries" label="Active Injuries"  value={summary?.active_injuries ?? 0}   accent="clay"   caption={`${summary?.stall_rest ?? 0} on stall rest`} icon={Stethoscope} />
-        <Stat testid="stat-revenue"  label="Outstanding"      value={money(summary?.overdue_amount ?? 0)} accent="brass" caption={`${summary?.overdue_invoices ?? 0} invoice(s)`} icon={Receipt} />
+        <Stat testid="stat-revenue"  label="Outstanding"      value={money(summary?.overdue_amount ?? 0)} accent="lilac" caption={`${summary?.overdue_invoices ?? 0} invoice(s)`} icon={Receipt} />
       </div>
 
       {/* Mobile FAB → Today */}
@@ -286,7 +286,7 @@ function SubscriptionUsageSnapshot() {
         <div className="label-eyebrow">Plan usage</div>
         <Link
           to="/billing/subscription"
-          className="text-[11.5px] tracking-wide text-equine-saddleDeep hover:text-equine-ink inline-flex items-center gap-1"
+          className="text-[11.5px] tracking-wide text-equine-lilacDeep hover:text-equine-ink inline-flex items-center gap-1"
           data-testid="dashboard-usage-snapshot-link"
         >
           Manage plan <ArrowRight className="w-3 h-3" />
@@ -299,5 +299,4 @@ function SubscriptionUsageSnapshot() {
     </div>
   );
 }
-
 

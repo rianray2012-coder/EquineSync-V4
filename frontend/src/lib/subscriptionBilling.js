@@ -75,8 +75,7 @@ export const STATUS_LABEL = {
   paused: "Paused",
 };
 
-// `StatusPill` tone for each status — uses the existing approved palette
-// tokens (sage/amber/clay/brass/neutral) only.
+// `StatusPill` tone for each status using approved brand/status tokens only.
 export const STATUS_TONE = {
   trialing: "info",
   active: "success",

@@ -64,7 +64,7 @@ export default function Reports() {
         <>
           {/* KPI strip */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mb-8">
-            <Kpi label="Setups in progress" value={health.in_progress_setups} icon={Sparkles} accent="champagne" />
+              <Kpi label="Setups in progress" value={health.in_progress_setups} icon={Sparkles} accent="lilac" />
             <Kpi label="Completed setups" value={health.completed_setups} icon={CheckCircle2} accent="sage" />
             <Kpi label="Completion rate" value={`${health.completion_rate}%`} icon={TrendingUp} accent="ivory" />
             <Kpi label="Median time to launch" value={health.median_days_to_launch ? `${health.median_days_to_launch}d` : "—"} icon={Clock} accent="ivory" caption={health.median_days_to_launch ? `${health.median_hours_to_launch}h precise` : "No completed setups yet"} />
@@ -83,7 +83,7 @@ export default function Reports() {
               <Funnel funnel={health.funnel} totalSetups={Math.max(1, health.total_setups)} />
               <div className="hairline mt-5 pt-4 text-[11.5px] text-equine-platinum/60 flex gap-4 flex-wrap">
                 <LegendDot tone="sage" label="Complete" />
-                <LegendDot tone="champagne" label="In progress" />
+                <LegendDot tone="silverBlue" label="In progress" />
                 <LegendDot tone="slate" label="Skipped" />
                 <LegendDot tone="graphite" label="Pending" />
               </div>
@@ -105,7 +105,7 @@ export default function Reports() {
                   type="number" min="1" max="30" value={days}
                   onChange={(e) => setDays(Math.max(1, Math.min(30, Number(e.target.value) || 1)))}
                   data-testid="nudge-days"
-                  className="w-16 bg-equine-soft border border-equine-graphite/60 rounded-lg px-2 py-1.5 text-equine-ivory text-[13px] focus:border-equine-champagne outline-none"
+                  className="w-16 bg-equine-soft border border-equine-graphite/60 rounded-lg px-2 py-1.5 text-equine-ivory text-[13px] focus:border-equine-lilac outline-none"
                 />
                 <span className="text-[12.5px] text-equine-platinum/70">days</span>
                 <div className="flex-1" />
@@ -165,7 +165,7 @@ export default function Reports() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <InviteStat label="Total sent" value={health.invites.total} />
               <InviteStat label="Accepted" value={health.invites.accepted} tone="sage" />
-              <InviteStat label="Pending" value={health.invites.pending} tone="champagne" />
+              <InviteStat label="Pending" value={health.invites.pending} tone="lilac" />
               <InviteStat label="Revoked" value={health.invites.revoked} tone="neutral" />
               <InviteStat label="Expired" value={health.invites.expired} tone="clay" />
             </div>
@@ -177,7 +177,7 @@ export default function Reports() {
 }
 
 const Kpi = ({ label, value, icon: Icon, accent, caption }) => {
-  const c = { sage: "text-equine-sage", champagne: "text-equine-champagne", ivory: "text-equine-ivory" }[accent] || "text-equine-ivory";
+  const c = { sage: "text-equine-sage", lilac: "text-equine-lilac", ivory: "text-equine-ivory" }[accent] || "text-equine-ivory";
   return (
     <Card>
       <div className="flex items-start justify-between">
@@ -221,7 +221,7 @@ const Funnel = ({ funnel, totalSetups }) => {
 };
 
 const LegendDot = ({ tone, label }) => {
-  const c = { sage: "#6E8B74", champagne: "#BFC5CC", slate: "#708090", graphite: "#3A3A3A" }[tone];
+  const c = { sage: "#6E8B74", silverBlue: "#BCC9D6", slate: "#667085", graphite: "#232734" }[tone];
   return (
     <span className="inline-flex items-center gap-1.5">
       <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: c }} /> {label}
@@ -230,7 +230,7 @@ const LegendDot = ({ tone, label }) => {
 };
 
 const InviteStat = ({ label, value, tone }) => {
-  const c = { sage: "text-equine-sage", champagne: "text-equine-champagne", clay: "text-equine-clay", neutral: "text-equine-platinum/70" }[tone] || "text-equine-ivory";
+  const c = { sage: "text-equine-sage", lilac: "text-equine-lilac", clay: "text-equine-clay", neutral: "text-equine-platinum/70" }[tone] || "text-equine-ivory";
   return (
     <div className="p-4 rounded-xl bg-equine-soft border border-equine-graphite/40">
       <div className="label-eyebrow">{label}</div>

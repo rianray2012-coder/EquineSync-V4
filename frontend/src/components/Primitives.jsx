@@ -31,14 +31,14 @@ export const Stat = ({ label, value, accent = "ivory", caption, testid, icon: Ic
     sage: "text-equine-sage",
     amber: "text-equine-amber",
     clay: "text-equine-clay",
-    brass: "text-equine-brassLight",
-    steel: "text-equine-champagne",
+    lilac: "text-equine-lavender",
+    ice: "text-equine-lilac",
   };
   return (
     <Card data-testid={testid}>
       <div className="flex items-start justify-between mb-3">
         <div className="label-eyebrow">{label}</div>
-        {Icon && <Icon strokeWidth={1.4} className="text-equine-brass/60 w-4 h-4" />}
+        {Icon && <Icon strokeWidth={1.4} className="text-equine-lilac/60 w-4 h-4" />}
       </div>
       <div className={`font-display text-[44px] leading-none ${colors[accent]}`}>{value}</div>
       {caption && <div className="mt-2.5 text-[11.5px] text-equine-platinum/55 tracking-wide">{caption}</div>}
@@ -51,14 +51,14 @@ export const StatusPill = ({ tone = "info", children, dot = false, ...rest }) =>
     success: "bg-equine-sage/12 text-equine-sage border-equine-sage/30",
     warning: "bg-equine-amber/12 text-equine-amber border-equine-amber/30",
     critical: "bg-equine-clay/12 text-equine-clay border-equine-clay/30",
-    info: "bg-equine-brass/12 text-equine-brassLight border-equine-brass/30",
-    brass: "bg-equine-brass/12 text-equine-brassLight border-equine-brass/35",
-    saddle: "bg-equine-saddle/12 text-equine-champagne border-equine-saddle/35",
+    info: "bg-equine-lilac/12 text-equine-lavender border-equine-lilac/30",
+    lilac: "bg-equine-lilac/12 text-equine-lavender border-equine-lilac/35",
+    lavender: "bg-equine-lavender/16 text-equine-lilac border-equine-lilac/25",
     neutral: "bg-equine-soft text-equine-platinum/85 border-equine-graphite/40",
   };
   const dotColor = {
     success: "bg-equine-sage", warning: "bg-equine-amber", critical: "bg-equine-clay",
-    info: "bg-equine-brassLight", brass: "bg-equine-brassLight", saddle: "bg-equine-saddle", neutral: "bg-equine-platinum/50",
+    info: "bg-equine-lavender", lilac: "bg-equine-lavender", lavender: "bg-equine-lilac", neutral: "bg-equine-platinum/50",
   }[tone];
   return (
     <span className={`pill ${map[tone]}`} {...rest}>

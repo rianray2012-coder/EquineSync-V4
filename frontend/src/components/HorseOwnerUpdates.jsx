@@ -108,7 +108,7 @@ export default function HorseOwnerUpdates({ horseId }) {
       <Card className="mb-6" data-testid="updates-composer">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-9 h-9 rounded-lg bg-equine-soft flex items-center justify-center">
-            <Megaphone strokeWidth={1.5} className="w-4 h-4 text-equine-champagne" />
+            <Megaphone strokeWidth={1.5} className="w-4 h-4 text-equine-lilac" />
           </div>
           <div>
             <h3 className="font-display text-xl text-equine-ivory">New owner update</h3>
@@ -128,7 +128,7 @@ export default function HorseOwnerUpdates({ horseId }) {
             onChange={(e) => setForm({ ...form, body: e.target.value })}
             rows={4}
             placeholder="Write a calm, clear update the owner will appreciate…"
-            className="w-full bg-equine-soft border border-equine-steel/40 rounded-lg px-3 py-2 text-[13.5px] text-equine-ivory placeholder:text-equine-platinum/40 focus:outline-none focus:border-equine-champagne"
+            className="w-full bg-equine-soft border border-equine-steel/40 rounded-lg px-3 py-2 text-[13.5px] text-equine-ivory placeholder:text-equine-platinum/40 focus:outline-none focus:border-equine-lilac"
           />
           <label className="flex items-center gap-2 text-[13px] text-equine-platinum/80 cursor-pointer">
             <input
@@ -136,12 +136,12 @@ export default function HorseOwnerUpdates({ horseId }) {
               data-testid="composer-sensitive"
               checked={form.sensitive}
               onChange={(e) => setForm({ ...form, sensitive: e.target.checked })}
-              className="accent-equine-champagne"
+              className="accent-equine-lilac"
             />
             Mark as sensitive
           </label>
           {form.sensitive && (
-            <div className="text-[12px] text-equine-champagne/80" data-testid="composer-sensitive-hint">
+            <div className="text-[12px] text-equine-lilac/80" data-testid="composer-sensitive-hint">
               Sensitive updates go to a manager for review before owners see them.
             </div>
           )}
@@ -175,7 +175,7 @@ export default function HorseOwnerUpdates({ horseId }) {
                   </StatusPill>
                   <span className="text-[10px] uppercase tracking-[0.18em] px-2 py-0.5 rounded-full bg-equine-soft border border-equine-steel/30 text-equine-platinum/70 capitalize">{u.kind}</span>
                   <span className="text-[10px] uppercase tracking-[0.18em] px-2 py-0.5 rounded-full bg-equine-soft border border-equine-steel/30 text-equine-platinum/70">{u.visibility.replace("_", " ")}</span>
-                  {u.sensitive && <span className="text-[10px] uppercase tracking-[0.18em] text-equine-champagne/80">sensitive</span>}
+                  {u.sensitive && <span className="text-[10px] uppercase tracking-[0.18em] text-equine-lilac/80">sensitive</span>}
                   <span className="ml-auto text-[11px] text-equine-platinum/40">{fmtDate(u.created_at)}</span>
                 </div>
 
@@ -185,7 +185,7 @@ export default function HorseOwnerUpdates({ horseId }) {
                       <Select value={editForm.kind} onChange={(v) => setEditForm({ ...editForm, kind: v })} options={KINDS} testid={`edit-kind-${u.id}`} />
                       <Select value={editForm.visibility} onChange={(v) => setEditForm({ ...editForm, visibility: v })} options={VISIBILITIES} testid={`edit-visibility-${u.id}`} />
                       <label className="flex items-center gap-2 text-[12px] text-equine-platinum/80">
-                        <input type="checkbox" checked={editForm.sensitive} onChange={(e) => setEditForm({ ...editForm, sensitive: e.target.checked })} className="accent-equine-champagne" data-testid={`edit-sensitive-${u.id}`} />
+                        <input type="checkbox" checked={editForm.sensitive} onChange={(e) => setEditForm({ ...editForm, sensitive: e.target.checked })} className="accent-equine-lilac" data-testid={`edit-sensitive-${u.id}`} />
                         sensitive
                       </label>
                     </div>
@@ -236,7 +236,7 @@ const RowBtn = ({ testid, onClick, icon: Icon, label, busy, primary }) => (
     className={`inline-flex items-center gap-1.5 !py-1.5 !px-3 text-[12.5px] rounded-lg transition-colors disabled:opacity-50 ${
       primary
         ? "btn-primary"
-        : "border border-equine-steel/40 text-equine-platinum/80 hover:text-equine-ivory hover:border-equine-champagne"
+        : "border border-equine-steel/40 text-equine-platinum/80 hover:text-equine-ivory hover:border-equine-lilac"
     }`}
   >
     {busy ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Icon className="w-3.5 h-3.5" />} {label}

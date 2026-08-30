@@ -13,7 +13,7 @@ const DoseRow = ({ task, horses, onComplete, onSkip, syncState }) => {
 
   return (
     <div data-testid={`med-dose-row-${task.id}`} className="flex items-center gap-3 py-3 hairline">
-      <div className="font-display text-xl text-equine-saddle w-20 flex-shrink-0">
+      <div className="font-display text-xl text-equine-lilac w-20 flex-shrink-0">
         <span className="inline-flex items-center gap-1.5">
           <Clock className="w-3 h-3 text-equine-inkSoft" /> {fmtTime(task.scheduled_at)}
         </span>
@@ -29,7 +29,7 @@ const DoseRow = ({ task, horses, onComplete, onSkip, syncState }) => {
       </div>
       {syncState && (
         <span className={`w-1.5 h-1.5 rounded-full ${
-          syncState === "failed" ? "bg-equine-clay" : "bg-equine-brassLight animate-pulse"
+          syncState === "failed" ? "bg-equine-clay" : "bg-equine-lavender animate-pulse"
         }`} />
       )}
       {done ? (

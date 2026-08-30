@@ -83,9 +83,9 @@ export default function RideGps() {
         }
       />
 
-      <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5">
+      <Card hover={false} className="mb-6 border-equine-lilac/30 bg-equine-lilac/5">
         <div className="flex items-start gap-3">
-          <MapPin className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
+          <MapPin className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
           <div className="text-[13px] text-equine-inkMuted leading-relaxed">
             Native GPS capture and wearable integrations are deferred to mobile app wiring. This page stores ride track structure and external track references.
             {placeholders[0] && <span className="block mt-1 text-equine-inkSoft">{placeholders[0].ready_for.join(" · ")}</span>}
@@ -111,7 +111,7 @@ export default function RideGps() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <Route strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Route strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No GPS rides tracked</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a ride distance, duration, and track link.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="ride-gps-empty-add">
@@ -137,7 +137,7 @@ export default function RideGps() {
                 </div>
                 <div className="hairline mt-4 pt-3 flex items-center justify-between gap-3">
                   {data.track_url ? (
-                    <a href={data.track_url} target="_blank" rel="noreferrer" className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+                    <a href={data.track_url} target="_blank" rel="noreferrer" className="text-[12px] text-equine-navy hover:text-equine-lilac inline-flex items-center gap-1">
                       Open track <ExternalLink className="w-3 h-3" />
                     </a>
                   ) : <span className="text-[12px] text-equine-inkSoft">No track URL</span>}

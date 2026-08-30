@@ -152,7 +152,7 @@ export default function Lessons() {
           <h2 className="font-display text-2xl mb-4">Upcoming Lessons</h2>
           {lessons.length === 0 ? (
             <Empty>
-              <GraduationCap strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+              <GraduationCap strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
               <div className="font-display text-2xl text-equine-ivory mb-1">No lessons scheduled</div>
               <div className="text-[13px] text-equine-platinum/60 mb-4">
                 {ridersEmpty
@@ -170,7 +170,7 @@ export default function Lessons() {
               const inactive = l.cancelled || l.status === "cancelled";
               return (
               <div key={l.id} data-testid={`lesson-${l.id}`} className="py-3 hairline flex items-center gap-4">
-                <div className="font-display text-xl text-equine-champagne w-28 shrink-0">{fmtDate(l.start_time)} · {fmtTime(l.start_time)}</div>
+                <div className="font-display text-xl text-equine-lilac w-28 shrink-0">{fmtDate(l.start_time)} · {fmtTime(l.start_time)}</div>
                 <div className="flex-1 min-w-0">
                   <div className="text-equine-ivory truncate">
                     {l.rider_name || "—"}{l.horse_name ? ` on ${l.horse_name}` : ""}
@@ -306,21 +306,21 @@ const LessonActionSheet = ({ action, riders, horses, staff, onClose, onSubmit })
           <div className="grid grid-cols-1 gap-4">
             <label className="block">
               <div className="label-eyebrow mb-1.5">Substitute trainer</div>
-              <select value={substituteTrainerId} onChange={(e) => setSubstituteTrainerId(e.target.value)} data-testid="lesson-substitute-trainer-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] min-h-[44px]">
+              <select value={substituteTrainerId} onChange={(e) => setSubstituteTrainerId(e.target.value)} data-testid="lesson-substitute-trainer-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] min-h-[44px]">
                 <option value="">No trainer change</option>
                 {trainerOptions.map((trainer) => <option key={trainer.v} value={trainer.v}>{trainer.l}</option>)}
               </select>
             </label>
             <label className="block">
               <div className="label-eyebrow mb-1.5">Substitute rider</div>
-              <select value={substituteRiderId} onChange={(e) => setSubstituteRiderId(e.target.value)} data-testid="lesson-substitute-rider-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] min-h-[44px]">
+              <select value={substituteRiderId} onChange={(e) => setSubstituteRiderId(e.target.value)} data-testid="lesson-substitute-rider-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] min-h-[44px]">
                 <option value="">No rider change</option>
                 {riders.map((r) => <option key={r.id} value={r.id}>{r.full_name}</option>)}
               </select>
             </label>
             <label className="block">
               <div className="label-eyebrow mb-1.5">Substitute horse</div>
-              <select value={substituteHorseId || ""} onChange={(e) => setSubstituteHorseId(e.target.value)} data-testid="lesson-substitute-horse-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] min-h-[44px]">
+              <select value={substituteHorseId || ""} onChange={(e) => setSubstituteHorseId(e.target.value)} data-testid="lesson-substitute-horse-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] min-h-[44px]">
                 <option value="">No horse change</option>
                 {horses.map((h) => <option key={h.id} value={h.id}>{h.name}</option>)}
               </select>
@@ -330,7 +330,7 @@ const LessonActionSheet = ({ action, riders, horses, staff, onClose, onSubmit })
 
         <label className="block">
           <div className="label-eyebrow mb-1.5">Reason</div>
-          <textarea rows={4} value={reason} onChange={(e) => setReason(e.target.value)} data-testid={`lesson-${action.type}-reason`} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] transition-colors resize-y" />
+          <textarea rows={4} value={reason} onChange={(e) => setReason(e.target.value)} data-testid={`lesson-${action.type}-reason`} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] transition-colors resize-y" />
         </label>
         <div className="sticky bottom-0 -mx-6 px-6 pt-3 pb-1 mt-4 bg-equine-card/95 backdrop-blur-md border-t border-equine-hairline flex items-center justify-end gap-2">
           <button type="button" onClick={onClose} className="btn-secondary tap-44" data-testid={`lesson-${action.type}-close`}>Close</button>

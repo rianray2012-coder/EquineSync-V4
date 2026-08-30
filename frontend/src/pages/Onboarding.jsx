@@ -159,7 +159,7 @@ export default function Onboarding({ setupReadiness = null }) {
         action={
           <div className="text-right">
             <div className="label-eyebrow">Setup progress</div>
-            <div className="font-display text-3xl text-equine-champagne mt-1">{percent}%</div>
+            <div className="font-display text-3xl text-equine-lilac mt-1">{percent}%</div>
           </div>
         }
       />
@@ -209,7 +209,7 @@ export default function Onboarding({ setupReadiness = null }) {
         <Card hover={false} className="lg:col-span-1 !p-3 self-start sticky top-24">
           <div className="px-3 py-2">
             <div className="h-1.5 rounded-full bg-equine-soft overflow-hidden">
-              <div className="h-full bg-equine-champagne transition-all duration-500" style={{ width: `${percent}%` }} />
+              <div className="h-full bg-equine-lilac transition-all duration-500" style={{ width: `${percent}%` }} />
             </div>
           </div>
           <ul className="mt-2">
@@ -233,7 +233,7 @@ export default function Onboarding({ setupReadiness = null }) {
                     <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] border ${
                       isDone     ? "bg-equine-sage/20 border-equine-sage text-equine-sage"
                       : isSkipped ? "bg-equine-soft border-equine-graphite text-equine-platinum/60"
-                      : isCurrent ? "bg-equine-champagne text-equine-black border-equine-champagne"
+                      : isCurrent ? "bg-equine-lilac text-equine-black border-equine-lilac"
                                   : "bg-equine-soft border-equine-graphite/60 text-equine-platinum/60"
                     }`}>
                       {isDone ? <Check className="w-3.5 h-3.5" /> : <Ic className="w-3.5 h-3.5" />}
@@ -263,7 +263,7 @@ export default function Onboarding({ setupReadiness = null }) {
           <Card hover={false}>
             <div className="flex items-start gap-4 mb-6">
               <div className="w-12 h-12 rounded-2xl bg-equine-steel/25 border border-equine-steel/40 flex items-center justify-center">
-                <Icon strokeWidth={1.4} className="text-equine-champagne" />
+                <Icon strokeWidth={1.4} className="text-equine-lilac" />
               </div>
               <div className="flex-1">
                 <div className="label-eyebrow">Step {stepIndex + 1} of {steps.length}</div>

@@ -284,9 +284,9 @@ export default function AiAutomation() {
         }
       />
 
-      <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5">
+      <Card hover={false} className="mb-6 border-equine-lilac/30 bg-equine-lilac/5">
         <div className="flex items-start gap-3">
-          <ShieldCheck className="w-5 h-5 text-equine-champagne mt-0.5 flex-shrink-0" />
+          <ShieldCheck className="w-5 h-5 text-equine-lilac mt-0.5 flex-shrink-0" />
           <div>
             <div className="text-equine-ivory font-display text-2xl mb-1">Draft-only guardrail</div>
             <div className="text-[13px] text-equine-inkMuted leading-relaxed">
@@ -299,7 +299,7 @@ export default function AiAutomation() {
       <div className="grid grid-cols-1 xl:grid-cols-[1.1fr_0.9fr] gap-5 mb-6">
         <Card hover={false}>
           <div className="flex items-start gap-3">
-            <FileSearch className="w-5 h-5 text-equine-brassLight mt-0.5 flex-shrink-0" />
+            <FileSearch className="w-5 h-5 text-equine-lavender mt-0.5 flex-shrink-0" />
             <div className="min-w-0">
               <div className="label-eyebrow-muted mb-3">Pilot Review Lanes</div>
               <div className="flex flex-wrap gap-2">
@@ -427,7 +427,7 @@ export default function AiAutomation() {
         </Card>
       ) : jobs.length === 0 ? (
         <Empty>
-          <Sparkles strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Sparkles strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No AI draft extractions yet</div>
           <div className="text-[13px] text-equine-platinum/60">Create the first draft from a file or source text. Drafts stay review-required and do not save official records.</div>
         </Empty>
@@ -458,7 +458,7 @@ export default function AiAutomation() {
                 ))}
               </div>
               {arrayValue(draftResultFor(job).review_questions).length > 0 && (
-                <div className="mb-4 rounded-lg border border-equine-brass/25 bg-equine-brass/5 p-3">
+                <div className="mb-4 rounded-lg border border-equine-lilac/25 bg-equine-lilac/5 p-3">
                   <div className="label-eyebrow-muted mb-2">Questions Before Saving Elsewhere</div>
                   <ul className="space-y-1.5 text-[13px] text-equine-inkMuted leading-relaxed">
                     {arrayValue(draftResultFor(job).review_questions).map((question) => <li key={question}>{question}</li>)}

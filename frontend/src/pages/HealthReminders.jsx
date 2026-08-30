@@ -112,7 +112,7 @@ export default function HealthReminders() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <CalendarClock strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <CalendarClock strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No reminders yet</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a vaccine or Coggins due date to start tracking.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="health-reminders-empty-add">
@@ -146,11 +146,11 @@ export default function HealthReminders() {
                       {data.notes && <div className="mt-2 text-[12.5px] text-equine-ink leading-relaxed">{data.notes}</div>}
                       <div className="hairline mt-3 pt-3 flex items-center justify-between gap-2">
                         {status !== "complete" ? (
-                          <button type="button" onClick={() => setStatus(record, "complete")} className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1" data-testid={`health-reminder-complete-${record.id}`}>
+                          <button type="button" onClick={() => setStatus(record, "complete")} className="text-[12px] text-equine-navy hover:text-equine-lilac inline-flex items-center gap-1" data-testid={`health-reminder-complete-${record.id}`}>
                             <CheckCircle2 className="w-3.5 h-3.5" /> Mark complete
                           </button>
                         ) : (
-                          <button type="button" onClick={() => setStatus(record, "scheduled")} className="text-[12px] text-equine-navy hover:text-equine-saddle">
+                          <button type="button" onClick={() => setStatus(record, "scheduled")} className="text-[12px] text-equine-navy hover:text-equine-lilac">
                             Reopen
                           </button>
                         )}

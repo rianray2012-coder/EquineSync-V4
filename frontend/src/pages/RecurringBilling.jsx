@@ -106,9 +106,9 @@ export default function RecurringBilling() {
         <Kpi label="Est. monthly" value={money(stats.monthly)} tone="info" />
       </div>
 
-      <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5">
+      <Card hover={false} className="mb-6 border-equine-lilac/30 bg-equine-lilac/5">
         <div className="flex items-start gap-3">
-          <CalendarClock className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
+          <CalendarClock className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
           <div className="text-[13px] text-equine-inkMuted leading-relaxed">
             These rules are automation-ready data. They do not create invoices automatically until a reviewed invoice generation service is enabled.
           </div>
@@ -127,7 +127,7 @@ export default function RecurringBilling() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <CalendarClock strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <CalendarClock strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No recurring rules</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a board, training, lesson, or custom recurring charge.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="recurring-empty-add">

@@ -124,7 +124,7 @@ export default function TrainingPlans() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <ClipboardList strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <ClipboardList strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No training plans</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Create a plan and attach it to a horse, trainer, and target date.</div>
           {canWriteTrainingPlan && (
@@ -155,17 +155,17 @@ export default function TrainingPlans() {
                       {canWriteTrainingPlan && (
                         <div className="hairline mt-3 pt-3 flex flex-wrap items-center gap-2">
                           {status !== "achieved" && (
-                            <button type="button" onClick={() => setStatus(record, "achieved")} className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+                            <button type="button" onClick={() => setStatus(record, "achieved")} className="text-[12px] text-equine-navy hover:text-equine-lilac inline-flex items-center gap-1">
                               <CheckCircle2 className="w-3.5 h-3.5" /> Achieved
                             </button>
                           )}
                           {status !== "paused" && (
-                            <button type="button" onClick={() => setStatus(record, "paused")} className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+                            <button type="button" onClick={() => setStatus(record, "paused")} className="text-[12px] text-equine-navy hover:text-equine-lilac inline-flex items-center gap-1">
                               <PauseCircle className="w-3.5 h-3.5" /> Pause
                             </button>
                           )}
                           {status !== "active" && (
-                            <button type="button" onClick={() => setStatus(record, "active")} className="text-[12px] text-equine-navy hover:text-equine-saddle">
+                            <button type="button" onClick={() => setStatus(record, "active")} className="text-[12px] text-equine-navy hover:text-equine-lilac">
                               Activate
                             </button>
                           )}

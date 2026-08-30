@@ -36,7 +36,7 @@ const RehabRow = ({ task, horses, onComplete, onSkip, syncState }) => {
         </div>
         {syncState && (
           <span className={`w-1.5 h-1.5 rounded-full ${
-            syncState === "failed" ? "bg-equine-clay" : "bg-equine-brassLight animate-pulse"
+            syncState === "failed" ? "bg-equine-clay" : "bg-equine-lavender animate-pulse"
           }`} />
         )}
         {done ? (

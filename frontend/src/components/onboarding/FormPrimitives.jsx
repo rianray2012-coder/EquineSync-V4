@@ -14,7 +14,7 @@ export const Field = ({ label, value, onChange, placeholder, type = "text", test
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       data-testid={testid}
-      className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] transition-colors"
+      className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] transition-colors"
     />
   </label>
 );
@@ -26,7 +26,7 @@ export const Select = ({ label, value, onChange, options, testid }) => (
     <ShadSelect value={value || ""} onValueChange={(v) => onChange(v)}>
       <SelectTrigger
         data-testid={testid}
-        className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory hover:border-equine-graphite focus:border-equine-champagne text-[14px] h-auto"
+        className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory hover:border-equine-graphite focus:border-equine-lilac text-[14px] h-auto"
       >
         <SelectValue placeholder="Choose…" />
       </SelectTrigger>

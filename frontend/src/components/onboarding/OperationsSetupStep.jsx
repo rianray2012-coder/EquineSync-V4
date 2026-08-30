@@ -183,7 +183,7 @@ export default function OperationsSetupStep({ onAnyChange }) {
               type="button"
               onClick={() => saveShare(false)}
               data-testid="location-share-disable"
-              className={`btn-secondary ${share?.enabled === false ? "!border-equine-champagne/70" : ""}`}
+              className={`btn-secondary ${share?.enabled === false ? "!border-equine-lilac/70" : ""}`}
             >
               Private
             </button>
@@ -210,7 +210,7 @@ export default function OperationsSetupStep({ onAnyChange }) {
             <Card key={mod.key} hover={false} className="!bg-equine-card/80">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-9 h-9 rounded-xl bg-equine-steel/25 border border-equine-steel/40 flex items-center justify-center">
-                  <Icon className="w-4 h-4 text-equine-champagne" />
+                  <Icon className="w-4 h-4 text-equine-lilac" />
                 </div>
                 <div>
                   <div className="font-display text-xl text-equine-ivory">{mod.title}</div>

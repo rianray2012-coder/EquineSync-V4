@@ -93,7 +93,7 @@ export default function Training() {
 
       {sessions.length === 0 ? (
         <Empty>
-          <Dumbbell strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Dumbbell strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No training sessions logged</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Log the work — exercises, ratings, homework — to build each horse's development arc.</div>
           {!horsesEmpty && (
@@ -122,7 +122,7 @@ export default function Training() {
               </div>
               {t.exercises && <div className="text-equine-silver/80 text-[14px]">{t.exercises}</div>}
               {t.notes && <div className="text-[13px] text-equine-platinum/80 mt-1.5">Notes: {t.notes}</div>}
-              {t.homework && <div className="text-[12.5px] text-equine-champagne mt-1.5">Homework: {t.homework}</div>}
+              {t.homework && <div className="text-[12.5px] text-equine-lilac mt-1.5">Homework: {t.homework}</div>}
               {!inactive && (
                 <div className="mt-3 flex items-center gap-2">
                   <button
@@ -229,14 +229,14 @@ const TrainingActionSheet = ({ action, horses, staff, onClose, onSubmit }) => {
           <div className="grid grid-cols-1 gap-4">
             <label className="block">
               <div className="label-eyebrow mb-1.5">Substitute trainer</div>
-              <select value={substituteTrainerId} onChange={(e) => setSubstituteTrainerId(e.target.value)} data-testid="training-substitute-trainer-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] min-h-[44px]">
+              <select value={substituteTrainerId} onChange={(e) => setSubstituteTrainerId(e.target.value)} data-testid="training-substitute-trainer-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] min-h-[44px]">
                 <option value="">No trainer change</option>
                 {trainerOptions.map((trainer) => <option key={trainer.v} value={trainer.v}>{trainer.l}</option>)}
               </select>
             </label>
             <label className="block">
               <div className="label-eyebrow mb-1.5">Substitute horse</div>
-              <select value={substituteHorseId || ""} onChange={(e) => setSubstituteHorseId(e.target.value)} data-testid="training-substitute-horse-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] min-h-[44px]">
+              <select value={substituteHorseId || ""} onChange={(e) => setSubstituteHorseId(e.target.value)} data-testid="training-substitute-horse-id" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] min-h-[44px]">
                 <option value="">No horse change</option>
                 {horses.map((h) => <option key={h.id} value={h.id}>{h.name}</option>)}
               </select>
@@ -246,7 +246,7 @@ const TrainingActionSheet = ({ action, horses, staff, onClose, onSubmit }) => {
 
         <label className="block">
           <div className="label-eyebrow mb-1.5">Reason</div>
-          <textarea rows={4} value={reason} onChange={(e) => setReason(e.target.value)} data-testid={`training-${action.type}-reason`} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] transition-colors resize-y" />
+          <textarea rows={4} value={reason} onChange={(e) => setReason(e.target.value)} data-testid={`training-${action.type}-reason`} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] transition-colors resize-y" />
         </label>
         <div className="sticky bottom-0 -mx-6 px-6 pt-3 pb-1 mt-4 bg-equine-card/95 backdrop-blur-md border-t border-equine-hairline flex items-center justify-end gap-2">
           <button type="button" onClick={onClose} className="btn-secondary tap-44" data-testid={`training-${action.type}-close`}>Close</button>

@@ -71,9 +71,9 @@ export default function ServiceProviderDashboard() {
         <>
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
             <Stat label="Active Grants" value={counts.active_grants || 0} caption="Explicit horse access" icon={Stethoscope} testid="provider-stat-grants" />
-            <Stat label="Shared Horses" value={counts.shared_horses || 0} caption="Grant-scoped only" accent="steel" icon={HeartPulse} testid="provider-stat-horses" />
+            <Stat label="Shared Horses" value={counts.shared_horses || 0} caption="Grant-scoped only" accent="ice" icon={HeartPulse} testid="provider-stat-horses" />
             <Stat label="Vet Records" value={counts.recent_vet_records || 0} caption="Provider-safe context" accent="sage" icon={Stethoscope} testid="provider-stat-vet" />
-            <Stat label="Farrier Records" value={counts.recent_farrier_records || 0} caption="Provider-safe context" accent="brass" icon={CalendarDays} testid="provider-stat-farrier" />
+            <Stat label="Farrier Records" value={counts.recent_farrier_records || 0} caption="Provider-safe context" accent="lilac" icon={CalendarDays} testid="provider-stat-farrier" />
             <Stat label="Visit Notes" value={counts.visit_notes || 0} caption="Provider-authored" accent="amber" icon={FileText} testid="provider-stat-notes" />
           </div>
 
@@ -90,7 +90,7 @@ export default function ServiceProviderDashboard() {
                   <div className="text-[12.5px] text-equine-inkMuted mt-1">
                     {[horse.status, horse.discipline, horse.breed].filter(Boolean).map(labelFor).join(" - ") || "Horse context"}
                   </div>
-                  {horse.allergies?.length > 0 && <div className="text-[12.5px] text-equine-saddle mt-2">Allergies: {horse.allergies.join(", ")}</div>}
+                  {horse.allergies?.length > 0 && <div className="text-[12.5px] text-equine-lilac mt-2">Allergies: {horse.allergies.join(", ")}</div>}
                 </div>
               )}
             />
@@ -154,7 +154,7 @@ const RefreshButton = ({ onClick, refreshing }) => (
 const Panel = ({ title, icon: Icon, rows, empty, render, wide = false }) => (
   <Card hover={false} data-testid={`provider-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`} className={wide ? "mb-10" : ""}>
     <div className="flex items-center gap-2 mb-4">
-      <Icon className="w-4 h-4 text-equine-brass" />
+      <Icon className="w-4 h-4 text-equine-lilac" />
       <h2 className="font-display text-2xl text-equine-ink">{title}</h2>
     </div>
     {rows.length === 0 ? (

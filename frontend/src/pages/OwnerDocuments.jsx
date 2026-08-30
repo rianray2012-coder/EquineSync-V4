@@ -68,9 +68,9 @@ export default function OwnerDocuments() {
         }
       />
 
-      <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5">
+      <Card hover={false} className="mb-6 border-equine-lilac/30 bg-equine-lilac/5">
         <div className="flex items-start gap-3">
-          <ShieldCheck className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
+          <ShieldCheck className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
           <div className="text-[13px] text-equine-inkMuted leading-relaxed">
             This library shows owner-safe document status only. Legal signature sending and provider links remain unavailable unless separately enabled by the barn.
           </div>
@@ -95,7 +95,7 @@ export default function OwnerDocuments() {
         </Card>
       ) : documents.length === 0 ? (
         <Empty>
-          <FileText strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <FileText strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No documents shared yet</div>
           <div className="text-[13px] text-equine-platinum/60">Document requests and local acknowledgements will appear here when the barn shares them.</div>
         </Empty>

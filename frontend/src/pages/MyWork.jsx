@@ -225,7 +225,7 @@ const WorkSection = ({ title, icon: Icon, empty, children }) => {
 };
 
 const TaskButton = ({ onClick, icon: Icon, children }) => (
-  <button type="button" onClick={onClick} className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+  <button type="button" onClick={onClick} className="text-[12px] text-equine-navy hover:text-equine-lilac inline-flex items-center gap-1">
     <Icon className="w-3.5 h-3.5" /> {children}
   </button>
 );

@@ -197,8 +197,8 @@ export default function NotificationsBell() {
                 className="border-b border-equine-hairline"
               >
                 <div className="px-4 pt-3 pb-2 flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-equine-brassLight" />
-                  <span className="text-[10.5px] uppercase tracking-[0.22em] text-equine-brassLight font-semibold">
+                  <MessageSquare className="w-3.5 h-3.5 text-equine-lavender" />
+                  <span className="text-[10.5px] uppercase tracking-[0.22em] text-equine-lavender font-semibold">
                     Pending requests
                   </span>
                   <span className="text-[11px] text-equine-inkSoft">{pending.length}</span>
@@ -213,7 +213,7 @@ export default function NotificationsBell() {
                       className="px-4 py-3 hairline"
                     >
                       <div className="text-[13px] text-equine-ink leading-snug">
-                        <span className="text-equine-brassLight">
+                        <span className="text-equine-lavender">
                           {REQUEST_TYPE_LABEL[sr.type] || sr.type.replace("_", " ")}
                         </span>
                         {sr.horse_name && ` · ${sr.horse_name}`}
@@ -259,7 +259,7 @@ export default function NotificationsBell() {
                             placeholder="Optional note for the owner (e.g. 'farrier already booked Thursday')"
                             data-testid={`pending-decline-reason-${sr.id}`}
                             rows={2}
-                            className="w-full bg-equine-soft border border-equine-graphite/50 rounded-md px-2.5 py-2 text-[12.5px] text-equine-ink focus:border-equine-champagne outline-none resize-y"
+                            className="w-full bg-equine-soft border border-equine-graphite/50 rounded-md px-2.5 py-2 text-[12.5px] text-equine-ink focus:border-equine-lilac outline-none resize-y"
                           />
                           <div className="flex items-center justify-end gap-2">
                             <button
@@ -299,12 +299,12 @@ export default function NotificationsBell() {
                   onClick={() => markOne(n.id)}
                   data-testid={`notification-${n.id}`}
                   className={`w-full text-left px-4 py-3 hairline hover:bg-equine-soft/60 transition-colors ${
-                    !n.read_at ? "bg-equine-brass/5" : ""
+                    !n.read_at ? "bg-equine-lilac/5" : ""
                   }`}
                 >
                   <div className="flex items-start gap-2">
                     {!n.read_at && (
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-equine-brassLight flex-shrink-0" />
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-equine-lavender flex-shrink-0" />
                     )}
                     <div className="flex-1 min-w-0">
                       <div className="text-[13px] text-equine-ink leading-snug">{n.summary}</div>

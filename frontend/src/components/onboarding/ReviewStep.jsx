@@ -77,7 +77,7 @@ const ReviewStep = () => {
       <div className="mt-6 p-4 rounded-xl bg-equine-steel/15 border border-equine-steel/40">
         <div className="text-equine-ivory text-[14px] font-medium mb-1">You&apos;re ready to ride.</div>
         <div className="text-[12.5px] text-equine-platinum/70">
-          Click <span className="text-equine-champagne">Launch barn</span> to mark setup complete. Daily operations, feed cards, and the barn board will reflect everything you configured above.
+          Click <span className="text-equine-lilac">Launch barn</span> to mark setup complete. Daily operations, feed cards, and the barn board will reflect everything you configured above.
         </div>
       </div>
     </div>
