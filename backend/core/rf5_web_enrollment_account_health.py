@@ -136,7 +136,6 @@ def build_rf5_readiness(root: Path = ROOT) -> Dict[str, object]:
         checks = [
             f'id: "{path_id}"',
             f'role: "{expected["role"]}"',
-            f'deferredPhase: "{expected["phase"]}"',
             f'data-testid={{`enrollment-path-${{path.id}}`}}',
         ]
         checks.extend(expected["terms"])
@@ -181,7 +180,7 @@ def build_rf5_readiness(root: Path = ROOT) -> Dict[str, object]:
         ProofRow(
             key="required_enrollment_paths_inventory",
             status="ready" if not missing_paths and order_ok else "blocked",
-            evidence=f"{len(REQUIRED_ENROLLMENT_PATHS)} required enrollment paths are declared with role mapping, needed signup information, and internal deferred phase ownership.",
+            evidence=f"{len(REQUIRED_ENROLLMENT_PATHS)} required enrollment paths are declared with role mapping and needed signup information without public RF labels.",
             next_action="RF7/RF9/RF10 should deepen the owner, trainer, and provider workflows without changing RF5 claims.",
         ),
         ProofRow(
@@ -246,14 +245,15 @@ def build_rf5_readiness(root: Path = ROOT) -> Dict[str, object]:
             next_action="A later RF5 pass can add privacy-scrubbed metrics without exposing sensitive free text.",
         ),
         ProofRow(
-            key="later_phase_boundaries_preserved",
+            key="public_enrollment_artifacts_hide_internal_phase_labels",
             status="ready"
-            if _contains_all(enrollment_paths, ["deferredPhase", "RF7", "RF9", "RF10"])
-            and "Depth continues in" not in enrollment
+            if "Depth continues in" not in enrollment
             and "deferredPhase" not in enrollment
+            and "deferredPhase" not in enrollment_paths
             and all(phase not in enrollment for phase in ["RF7", "RF9", "RF10"])
+            and all(phase not in enrollment_paths for phase in ["RF7", "RF9", "RF10"])
             else "blocked",
-            evidence="Enrollment path data preserves internal later-phase ownership while the public enrollment UI omits RF labels and roadmap phrasing.",
+            evidence="Public enrollment source data and UI omit RF labels and roadmap phrasing.",
             next_action="Keep RF7/RF9/RF10/RF18 open until those workflows are implemented and tested.",
         ),
     ]

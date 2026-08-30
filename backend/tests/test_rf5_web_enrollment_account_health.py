@@ -54,14 +54,13 @@ def test_rf5_landing_selection_routes_preserve_signup_context():
     assert "initialTierFromQuery" in signup
 
 
-def test_rf5_declares_required_enrollment_paths_with_phase_boundaries():
+def test_rf5_declares_required_enrollment_paths_without_public_phase_labels():
     enrollment_paths = _read("frontend/src/lib/enrollmentPaths.js")
     enrollment_page = _read("frontend/src/pages/Enrollment.jsx")
 
     for path_id, expected in REQUIRED_ENROLLMENT_PATHS.items():
         assert f'id: "{path_id}"' in enrollment_paths
         assert f'role: "{expected["role"]}"' in enrollment_paths
-        assert f'deferredPhase: "{expected["phase"]}"' in enrollment_paths
         assert f'ENROLLMENT_PATHS.map' in enrollment_page
 
     assert "private land" in enrollment_paths
@@ -69,9 +68,13 @@ def test_rf5_declares_required_enrollment_paths_with_phase_boundaries():
     assert "Setup details" in enrollment_page
     assert "Depth continues in" not in enrollment_page
     assert "deferredPhase" not in enrollment_page
+    assert "deferredPhase" not in enrollment_paths
     assert "RF7" not in enrollment_page
     assert "RF9" not in enrollment_page
     assert "RF10" not in enrollment_page
+    assert "RF7" not in enrollment_paths
+    assert "RF9" not in enrollment_paths
+    assert "RF10" not in enrollment_paths
     assert [enrollment_paths.find(f'id: "{path_id}"') for path_id in MAIN_ENROLLMENT_ORDER] == sorted(
         enrollment_paths.find(f'id: "{path_id}"') for path_id in MAIN_ENROLLMENT_ORDER
     )
