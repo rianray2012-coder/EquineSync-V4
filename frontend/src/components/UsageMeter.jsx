@@ -9,7 +9,7 @@
 //   • Never blocks any CTA. Soft-warn only.
 //   • Concierge-warm threshold copy at 80% / 100%.
 //   • Hidden when limit is null / unlimited / usage data is missing.
-//   • Uses only approved Equine-Sync tokens (sage / saddle / amber / clay).
+//   • Uses only approved EquineSync/status tokens.
 //   • Storage meter intentionally omitted — backend `storage_gb.used` is
 //     hardcoded to 0 today, so showing it would mislead (decision #1a).
 import React from "react";
@@ -33,7 +33,7 @@ function _resolveMeter(usage, kind) {
   } else if (pct >= 0.8) {
     tone = "amber"; ringClass = "border-equine-amber/40 bg-equine-amber/8"; barClass = "bg-equine-amber";
   } else {
-    tone = "sage"; ringClass = "border-equine-saddle/30 bg-equine-saddle/8"; barClass = "bg-equine-sage";
+    tone = "sage"; ringClass = "border-equine-lilac/30 bg-equine-lilac/8"; barClass = "bg-equine-sage";
   }
   return { used, limit, pct, tone, ringClass, barClass };
 }
@@ -64,7 +64,7 @@ export function UsageMeter({ usage, kind, variant = "inline", className = "" }) 
         ) : m.tone === "amber" ? (
           <AlertTriangle className="w-3 h-3 text-equine-amber" />
         ) : (
-          <Sparkles className="w-3 h-3 text-equine-saddleDeep" />
+          <Sparkles className="w-3 h-3 text-equine-lilacDeep" />
         )}
         <span className="text-equine-inkMuted">
           <span className="text-equine-ink font-medium" data-testid={`usage-meter-${kind}-count`}>

@@ -109,7 +109,7 @@ export default function Competitions() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <CalendarDays strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <CalendarDays strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No shows tracked</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a competition or show entry to start the calendar.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="competitions-empty-add">

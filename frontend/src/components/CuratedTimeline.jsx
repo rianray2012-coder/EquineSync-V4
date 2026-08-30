@@ -95,7 +95,7 @@ export default function CuratedTimeline({ horseId, limit = 40, ownerView = true 
   if (!items.length) {
     return (
       <div className="py-10 text-center">
-        <Sparkles className="w-6 h-6 text-equine-brassLight mx-auto mb-2" />
+        <Sparkles className="w-6 h-6 text-equine-lavender mx-auto mb-2" />
         <div className="text-[13.5px] text-equine-ink">A quiet stretch.</div>
         <div className="text-[12px] text-equine-inkMuted mt-1">
           Curated updates will appear here as your horse moves through the week.
@@ -123,7 +123,7 @@ export default function CuratedTimeline({ horseId, limit = 40, ownerView = true 
               const Icon = meta.icon;
               return (
                 <li key={ev.id} className="relative">
-                  <span className="absolute -left-[27px] top-1.5 w-3.5 h-3.5 rounded-full bg-equine-card border-2 border-equine-brassLight" />
+                  <span className="absolute -left-[27px] top-1.5 w-3.5 h-3.5 rounded-full bg-equine-card border-2 border-equine-lavender" />
                   <div className="bg-equine-card rounded-xl border border-equine-hairline px-4 py-3">
                     <div className="flex items-start gap-3">
                       <div className="w-9 h-9 rounded-lg bg-equine-soft flex items-center justify-center flex-shrink-0">

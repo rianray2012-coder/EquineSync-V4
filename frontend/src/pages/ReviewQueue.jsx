@@ -93,7 +93,7 @@ export default function ReviewQueue() {
 
       {items !== null && items.length === 0 && (
         <Card className="text-center py-12" data-testid="review-empty">
-          <ClipboardCheck className="w-7 h-7 text-equine-champagne/70 mx-auto mb-3" strokeWidth={1.5} />
+          <ClipboardCheck className="w-7 h-7 text-equine-lilac/70 mx-auto mb-3" strokeWidth={1.5} />
           <div className="text-[14px] text-equine-ivory">Nothing is waiting for review.</div>
           <div className="text-[12px] text-equine-platinum/50 mt-1">Submitted updates will appear here for approval.</div>
         </Card>
@@ -111,14 +111,14 @@ export default function ReviewQueue() {
                   <span className="text-[12.5px] text-equine-ivory font-medium">{horseName(u.horse_id)}</span>
                   <span className="text-[10px] uppercase tracking-[0.18em] px-2 py-0.5 rounded-full bg-equine-soft border border-equine-steel/30 text-equine-platinum/70 capitalize">{u.kind}</span>
                   <span className="text-[10px] uppercase tracking-[0.18em] px-2 py-0.5 rounded-full bg-equine-soft border border-equine-steel/30 text-equine-platinum/70">{u.visibility.replace("_", " ")}</span>
-                  {u.sensitive && <span className="text-[10px] uppercase tracking-[0.18em] text-equine-champagne/80">sensitive</span>}
+                  {u.sensitive && <span className="text-[10px] uppercase tracking-[0.18em] text-equine-lilac/80">sensitive</span>}
                   <span className="ml-auto text-[11px] text-equine-platinum/40">{fmtDate(u.created_at)}</span>
                 </div>
 
                 <p className="text-[13.5px] text-equine-silver/85 leading-relaxed whitespace-pre-line mb-3">{u.body}</p>
 
                 {blocked && (
-                  <div className="flex items-center gap-2 mb-3 text-[12px] text-equine-champagne/90" data-testid={`review-approve-blocked-${u.id}`}>
+                  <div className="flex items-center gap-2 mb-3 text-[12px] text-equine-lilac/90" data-testid={`review-approve-blocked-${u.id}`}>
                     <ShieldAlert className="w-3.5 h-3.5" /> You authored this — another reviewer must approve.
                   </div>
                 )}
@@ -136,7 +136,7 @@ export default function ReviewQueue() {
                     data-testid={`review-request-changes-${u.id}`}
                     onClick={() => { setNoteFor(u.id); setNote(""); }}
                     disabled={busy}
-                    className="inline-flex items-center gap-1.5 !py-1.5 !px-3 text-[12.5px] rounded-lg border border-equine-steel/40 text-equine-platinum/80 hover:text-equine-ivory hover:border-equine-champagne transition-colors disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 !py-1.5 !px-3 text-[12.5px] rounded-lg border border-equine-steel/40 text-equine-platinum/80 hover:text-equine-ivory hover:border-equine-lilac transition-colors disabled:opacity-50"
                   >
                     <RotateCcw className="w-3.5 h-3.5" /> Request changes
                   </button>
@@ -159,7 +159,7 @@ export default function ReviewQueue() {
               onChange={(e) => setNote(e.target.value)}
               rows={4}
               placeholder="Optional: what should change before this is published?"
-              className="w-full bg-equine-soft border border-equine-steel/40 rounded-lg px-3 py-2 text-[13px] text-equine-ivory placeholder:text-equine-platinum/40 focus:outline-none focus:border-equine-champagne"
+              className="w-full bg-equine-soft border border-equine-steel/40 rounded-lg px-3 py-2 text-[13px] text-equine-ivory placeholder:text-equine-platinum/40 focus:outline-none focus:border-equine-lilac"
             />
             <div className="flex gap-2 justify-end mt-4">
               <button onClick={() => { setNoteFor(null); setNote(""); }} className="text-[12.5px] text-equine-platinum/60 hover:text-equine-ivory px-3 py-2">Cancel</button>

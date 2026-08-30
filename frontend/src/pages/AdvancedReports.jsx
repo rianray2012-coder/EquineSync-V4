@@ -177,7 +177,7 @@ export default function AdvancedReports() {
         </Card>
       ) : !dashboard ? (
         <Empty>
-          <BarChart3 strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <BarChart3 strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No report data yet</div>
           <div className="text-[13px] text-equine-platinum/60">Seed or create records to populate reporting dashboards.</div>
         </Empty>
@@ -218,11 +218,11 @@ export default function AdvancedReports() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5">
                   <label className="block">
                     <div className="label-eyebrow-muted mb-1.5">Name</div>
-                    <input value={reportName} onChange={(e) => setReportName(e.target.value)} className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-equine-ink outline-none focus:border-equine-brass" data-testid="custom-report-name" />
+                    <input value={reportName} onChange={(e) => setReportName(e.target.value)} className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-equine-ink outline-none focus:border-equine-lilac" data-testid="custom-report-name" />
                   </label>
                   <label className="block">
                     <div className="label-eyebrow-muted mb-1.5">Filters JSON</div>
-                    <input value={filters} onChange={(e) => setFilters(e.target.value)} className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-equine-ink outline-none focus:border-equine-brass" data-testid="custom-report-filters" />
+                    <input value={filters} onChange={(e) => setFilters(e.target.value)} className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-equine-ink outline-none focus:border-equine-lilac" data-testid="custom-report-filters" />
                   </label>
                 </div>
 
@@ -234,7 +234,7 @@ export default function AdvancedReports() {
                         type="checkbox"
                         checked={selected.includes(module.key)}
                         onChange={() => toggleModule(module.key)}
-                        className="accent-equine-brass"
+                        className="accent-equine-lilac"
                         data-testid={`custom-report-source-${module.key}`}
                       />
                       <span className="flex-1">{module.label}</span>
@@ -290,7 +290,7 @@ const Bar = ({ label, value, invert }) => (
     </div>
     <div className="h-3 rounded-full bg-equine-cloud overflow-hidden">
       <div
-        className={`h-full rounded-full ${invert ? "bg-equine-amber" : "bg-equine-brass"}`}
+        className={`h-full rounded-full ${invert ? "bg-equine-amber" : "bg-equine-lilac"}`}
         style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
       />
     </div>

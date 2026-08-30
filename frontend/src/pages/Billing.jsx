@@ -74,7 +74,7 @@ export default function Billing() {
       <PageHeader eyebrow="Finance" title="Billing & Revenue" subtitle="Invoice status, overdue alerts and revenue per owner and horse." />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-        <Card><div className="label-eyebrow">Open</div><div className="font-display text-4xl mt-2 text-equine-champagne">{money(totals.open)}</div></Card>
+        <Card><div className="label-eyebrow">Open</div><div className="font-display text-4xl mt-2 text-equine-lilac">{money(totals.open)}</div></Card>
         <Card><div className="label-eyebrow">Overdue</div><div className="font-display text-4xl mt-2 text-equine-clay">{money(totals.overdue)}</div></Card>
         <Card><div className="label-eyebrow">Paid (lifetime)</div><div className="font-display text-4xl mt-2 text-equine-sage">{money(totals.paid)}</div></Card>
       </div>

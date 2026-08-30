@@ -103,7 +103,7 @@ export default function WeightTrends() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <Activity strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Activity strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No measurements yet</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a weight or body-condition entry to start the trend line.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="weight-trends-empty-add">

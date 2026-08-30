@@ -115,7 +115,7 @@ export default function StaffScheduling() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <CalendarClock strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <CalendarClock strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No shifts scheduled</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a staff shift with area coverage and handoff notes.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="staff-scheduling-empty-add">

@@ -255,7 +255,7 @@ export default function QuickAddSheet({
                       placeholder={f.placeholder}
                       onChange={(e) => update(f.key, e.target.value)}
                       data-testid={`${prefix}-${f.key}`}
-                      className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] transition-colors resize-y"
+                      className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] transition-colors resize-y"
                     />
                   </label>
                 );
@@ -270,7 +270,7 @@ export default function QuickAddSheet({
                       onChange={(e) => update(f.key, e.target.value)}
                       placeholder={f.placeholder}
                       data-testid={`${prefix}-${f.key}`}
-                      className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-champagne outline-none text-[14px] transition-colors min-h-[44px]"
+                      className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2.5 text-equine-ivory focus:border-equine-lilac outline-none text-[14px] transition-colors min-h-[44px]"
                     />
                   </label>
                 </div>

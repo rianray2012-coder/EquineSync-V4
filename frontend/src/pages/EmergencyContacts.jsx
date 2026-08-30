@@ -81,7 +81,7 @@ export default function EmergencyContacts() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search name, horse, relationship, phone, notes…"
-            className="w-full bg-equine-soft border border-equine-hairline rounded-xl pl-9 pr-3 py-2.5 text-equine-ink outline-none focus:border-equine-brass"
+            className="w-full bg-equine-soft border border-equine-hairline rounded-xl pl-9 pr-3 py-2.5 text-equine-ink outline-none focus:border-equine-lilac"
             data-testid="emergency-search"
           />
         </div>
@@ -99,7 +99,7 @@ export default function EmergencyContacts() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <ShieldAlert strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <ShieldAlert strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No emergency contacts</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a contact, phone number, and horse association.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="emergency-empty-add">
@@ -121,7 +121,7 @@ export default function EmergencyContacts() {
                   </div>
                   <StatusPill tone={Number(data.priority) === 1 ? "critical" : "warning"}>priority {data.priority || "—"}</StatusPill>
                 </div>
-                <a href={`tel:${data.phone || ""}`} className="inline-flex items-center gap-2 text-equine-navy hover:text-equine-saddle text-[14px] mb-3">
+                <a href={`tel:${data.phone || ""}`} className="inline-flex items-center gap-2 text-equine-navy hover:text-equine-lilac text-[14px] mb-3">
                   <PhoneCall className="w-4 h-4" /> {data.phone}
                 </a>
                 {data.notes && <div className="text-[13px] text-equine-inkMuted leading-relaxed">{data.notes}</div>}

@@ -74,9 +74,9 @@ export default function OwnerUpdates() {
         }
       />
 
-      <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5">
+      <Card hover={false} className="mb-6 border-equine-lilac/30 bg-equine-lilac/5">
         <div className="flex items-start gap-3">
-          <Upload className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
+          <Upload className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
           <div className="text-[13px] text-equine-inkMuted leading-relaxed">
             Uploads are storage-provider ready. This page tracks media URLs and owner-visibility metadata until live object storage credentials are configured.
           </div>
@@ -90,7 +90,7 @@ export default function OwnerUpdates() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search horse, owner, caption, visibility…"
-            className="w-full bg-equine-soft border border-equine-hairline rounded-xl pl-9 pr-3 py-2.5 text-equine-ink outline-none focus:border-equine-brass"
+            className="w-full bg-equine-soft border border-equine-hairline rounded-xl pl-9 pr-3 py-2.5 text-equine-ink outline-none focus:border-equine-lilac"
             data-testid="owner-updates-search"
           />
         </div>
@@ -108,7 +108,7 @@ export default function OwnerUpdates() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <Image strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Image strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No media updates</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add the first photo/video update for an owner.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="owner-updates-empty-add">

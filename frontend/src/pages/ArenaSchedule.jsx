@@ -12,7 +12,7 @@ const STATUS_TONE = {
   open: "success",
   requested: "warning",
   reserved: "info",
-  lesson: "brass",
+  lesson: "lilac",
   maintenance: "critical",
   private: "neutral",
 };
@@ -164,7 +164,7 @@ export default function ArenaSchedule() {
       />
 
       {canPublish && (
-        <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5" data-testid="arena-share-controls">
+        <Card hover={false} className="mb-6 border-equine-lilac/30 bg-equine-lilac/5" data-testid="arena-share-controls">
           <div className="flex flex-col xl:flex-row xl:items-end gap-4">
             <div className="flex-1">
               <div className="label-eyebrow-muted mb-1.5">Owner note</div>
@@ -173,7 +173,7 @@ export default function ArenaSchedule() {
                 onChange={(event) => setNote(event.target.value)}
                 rows={2}
                 placeholder="Note: Arena use is approved after barn confirmation."
-                className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-[13px] text-equine-ink outline-none focus:border-equine-brass"
+                className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-[13px] text-equine-ink outline-none focus:border-equine-lilac"
                 data-testid="arena-share-note"
               />
             </div>
@@ -217,7 +217,7 @@ export default function ArenaSchedule() {
 
           {rows.length === 0 ? (
             <Empty>
-              <CalendarDays strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+              <CalendarDays strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
               <div className="font-display text-2xl text-equine-ivory mb-1">No arena blocks shared</div>
               <div className="text-[13px] text-equine-platinum/60 mb-4">
                 {canManage ? "Add an availability, lesson, rental, or maintenance block." : "The barn has not published arena availability yet."}

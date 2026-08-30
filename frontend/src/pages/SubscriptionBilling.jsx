@@ -16,7 +16,7 @@
 //
 // Soft-enforcement only. Usage meters change accent color past 80% / 100% but
 // never disable any CTA. All copy stays within the approved Equine-Sync brand
-// palette — no matte black, no champagne aesthetics, no new tokens.
+// palette — no matte black, no warm luxury aesthetics, no off-brand tokens.
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
@@ -148,7 +148,7 @@ export default function SubscriptionBilling() {
             onClick={refresh}
             disabled={refreshing}
             data-testid="subscription-refresh-btn"
-            className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.2em] text-equine-brass/80 hover:text-equine-brassLight transition-colors px-3 py-1.5 rounded-full border border-equine-graphite/40 hover:border-equine-brass/50"
+            className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.2em] text-equine-lilac/80 hover:text-equine-lavender transition-colors px-3 py-1.5 rounded-full border border-equine-graphite/40 hover:border-equine-lilac/50"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin" : ""}`} />
             {refreshing ? "Refreshing…" : "Refresh"}
@@ -203,7 +203,7 @@ export default function SubscriptionBilling() {
                     onClick={() => launchCheckout(planTier, "annual")}
                     disabled={busyAction.startsWith("checkout:") || !resumeAnnualOk}
                     data-testid={`subscription-resume-${planTier}-annual`}
-                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15 disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium border border-equine-lilacDeep/50 text-equine-lilacDeep hover:bg-equine-lilac/15 disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5"
                     title={resumeAnnualOk ? "Resume on the annual cycle" : "Annual cycle is unavailable for this plan"}
                   >
                     Resume annual
@@ -291,16 +291,16 @@ export default function SubscriptionBilling() {
           <div className="label-eyebrow mb-3">Why this matters</div>
           <ul className="space-y-3 text-[13px] text-equine-inkMuted leading-relaxed">
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-saddleDeep flex-shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-lilacDeep flex-shrink-0" />
               <span>Limits below are <span className="text-equine-ink font-medium">soft</span> — going over never blocks horse or user creation.</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-saddleDeep flex-shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-lilacDeep flex-shrink-0" />
               <span>Cancellation, card updates, and invoice history live in Stripe&apos;s portal.</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-saddleDeep flex-shrink-0" />
-              <span>Barn invoices, physical payment tracking, and trainer charges are tracked separately on the <Link to="/billing" className="underline text-equine-saddleDeep hover:text-equine-ink">Billing</Link> page.</span>
+              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-lilacDeep flex-shrink-0" />
+              <span>Barn invoices, physical payment tracking, and trainer charges are tracked separately on the <Link to="/billing" className="underline text-equine-lilacDeep hover:text-equine-ink">Billing</Link> page.</span>
             </li>
           </ul>
         </Card>
@@ -387,11 +387,11 @@ function UsageMeter({ label, used, limit, testid }) {
       tonePill = "warning";
       toneCopy = "Approaching plan limit.";
     } else {
-      toneBar = "bg-equine-saddle";
+      toneBar = "bg-equine-lilac";
       tonePill = "info";
     }
   } else {
-    toneBar = "bg-equine-saddle";
+    toneBar = "bg-equine-lilac";
   }
 
   const limitDisplay = hasLimit ? `${used} / ${limit}` : `${used} / unlimited`;
@@ -469,7 +469,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
   return (
     <Card
       hover={!isCurrent}
-      className={isCurrent ? "border-equine-saddleDeep/50" : ""}
+      className={isCurrent ? "border-equine-lilacDeep/50" : ""}
       data-testid={`plan-card-${plan.tier_code}`}
     >
       <div className="flex items-start justify-between gap-2 mb-3">
@@ -478,7 +478,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
           <div className="font-display text-2xl text-equine-ink capitalize">{plan.tier_code}</div>
         </div>
         {isCurrent && (
-          <StatusPill tone="saddle" dot>Current</StatusPill>
+          <StatusPill tone="lavender" dot>Current</StatusPill>
         )}
       </div>
 
@@ -510,7 +510,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
           >
             Annual
             {savings != null && (
-              <span className="text-[10px] tracking-wider uppercase text-equine-saddleDeep font-medium" data-testid={`plan-savings-${plan.tier_code}`}>
+              <span className="text-[10px] tracking-wider uppercase text-equine-lilacDeep font-medium" data-testid={`plan-savings-${plan.tier_code}`}>
                 Save {savings}%
               </span>
             )}
@@ -541,19 +541,19 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
         <ul className="space-y-1.5 mb-5 text-[12.5px] text-equine-inkMuted">
           {plan.feature_limits.horses != null && (
             <li className="flex items-center gap-2">
-              <Sparkles className="w-3 h-3 text-equine-saddleDeep" />
+              <Sparkles className="w-3 h-3 text-equine-lilacDeep" />
               Up to <span className="text-equine-ink">{plan.feature_limits.horses}</span> horses
             </li>
           )}
           {plan.feature_limits.users != null && (
             <li className="flex items-center gap-2">
-              <Sparkles className="w-3 h-3 text-equine-saddleDeep" />
+              <Sparkles className="w-3 h-3 text-equine-lilacDeep" />
               Up to <span className="text-equine-ink">{plan.feature_limits.users}</span> users
             </li>
           )}
           {plan.feature_limits.storage_gb != null && (
             <li className="flex items-center gap-2">
-              <Sparkles className="w-3 h-3 text-equine-saddleDeep" />
+              <Sparkles className="w-3 h-3 text-equine-lilacDeep" />
               <span className="text-equine-ink">{plan.feature_limits.storage_gb} GB</span> storage
             </li>
           )}
@@ -568,7 +568,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
           isCurrentCycle
             ? "bg-equine-soft text-equine-inkSoft cursor-default"
             : isCurrent || contactSales
-            ? "border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15"
+            ? "border border-equine-lilacDeep/50 text-equine-lilacDeep hover:bg-equine-lilac/15"
             : "bg-equine-navy text-white hover:bg-equine-navyLift"
         } disabled:opacity-60 disabled:cursor-not-allowed`}
       >

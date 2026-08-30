@@ -8,14 +8,14 @@ import {
 } from "lucide-react";
 
 export const CATEGORY_META = {
-  feed:        { label: "Feed",       icon: UtensilsCrossed, accent: "saddle" },
+  feed:        { label: "Feed",       icon: UtensilsCrossed, accent: "lilac" },
   medication:  { label: "Medication", icon: Pill,            accent: "critical" },
   turnout_out: { label: "Turnout",    icon: Trees,           accent: "info" },
   turnout_in:  { label: "Bring-in",   icon: Trees,           accent: "info" },
   stall_clean: { label: "Stall",      icon: BedDouble,       accent: "neutral" },
-  farrier:     { label: "Farrier",    icon: Hammer,          accent: "brass" },
+  farrier:     { label: "Farrier",    icon: Hammer,          accent: "lilac" },
   vet:         { label: "Vet",        icon: Stethoscope,     accent: "warning" },
-  rehab:       { label: "Rehab",      icon: Activity,        accent: "brass" },
+  rehab:       { label: "Rehab",      icon: Activity,        accent: "lilac" },
   custom:      { label: "Task",       icon: Circle,          accent: "neutral" },
 };
 

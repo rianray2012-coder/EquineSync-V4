@@ -79,7 +79,7 @@ export default function Sidebar({ onNavigate }) {
       <nav className="flex-1 overflow-y-auto scrollbar-luxe py-4 px-3">
         {navSections.map((sec, si) => (
           <div key={sec.label} className={si > 0 ? "mt-5" : ""}>
-            <div className="px-3 pb-2 text-[9.5px] tracking-[0.28em] uppercase text-equine-brassLight/70 font-semibold">{sec.label}</div>
+            <div className="px-3 pb-2 text-[9.5px] tracking-[0.28em] uppercase text-equine-lavender/70 font-semibold">{sec.label}</div>
             {sec.items.map((item) => {
               const Icon = ICONS[item.icon] || LayoutDashboard;
               return (
@@ -92,24 +92,24 @@ export default function Sidebar({ onNavigate }) {
                   className={({ isActive }) =>
                     `relative group flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl mb-0.5 transition-all duration-200 tap-44 ${
                       isActive
-                        ? "nav-active-rail bg-gradient-to-r from-equine-brass/20 via-equine-saddle/8 to-transparent text-white border border-white/10"
+                        ? "nav-active-rail bg-gradient-to-r from-equine-lilac/20 via-equine-lilac/8 to-transparent text-white border border-white/10"
                         : "text-equine-platinum/80 hover:bg-white/[0.04] hover:text-white border border-transparent"
                     }`
                   }
                 >
                   {({ isActive }) => (
                     <>
-                      <Icon strokeWidth={1.5} className={`w-[18px] h-[18px] transition-colors ${isActive ? "text-equine-brassLight" : "group-hover:text-equine-brassLight/90"}`} />
+                      <Icon strokeWidth={1.5} className={`w-[18px] h-[18px] transition-colors ${isActive ? "text-equine-lavender" : "group-hover:text-equine-lavender/90"}`} />
                       <span className="text-[13.5px] tracking-wide flex-1">{item.label}</span>
                       {item.reviewBadge && pendingCount > 0 && (
                         <span
                           data-testid="review-queue-badge"
-                          className="min-w-[18px] h-[18px] px-1.5 rounded-full bg-equine-brassLight text-equine-navy text-[10.5px] font-semibold flex items-center justify-center"
+                          className="min-w-[18px] h-[18px] px-1.5 rounded-full bg-equine-lavender text-equine-navy text-[10.5px] font-semibold flex items-center justify-center"
                         >
                           {pendingCount > 9 ? "9+" : pendingCount}
                         </span>
                       )}
-                      {isActive && <span className="w-1 h-1 rounded-full bg-equine-brassLight shadow-[0_0_10px_rgba(194,205,236,0.9)]" />}
+                      {isActive && <span className="w-1 h-1 rounded-full bg-equine-lavender shadow-[0_0_10px_rgba(194,205,236,0.9)]" />}
                     </>
                   )}
                 </NavLink>
@@ -123,12 +123,12 @@ export default function Sidebar({ onNavigate }) {
       <div className="px-3 pb-5 pt-4 border-t border-white/[0.08]">
         {user && (
           <div className="px-3 py-2.5 rounded-xl bg-white/[0.04] mb-2 flex items-center gap-3 border border-white/[0.08]">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-equine-brassLight to-equine-saddle flex items-center justify-center font-display text-lg text-equine-navy shadow-inner">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-equine-lavender to-equine-lilac flex items-center justify-center font-display text-lg text-equine-navy shadow-inner">
               {user.full_name?.[0]}
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-[13px] text-white truncate">{user.full_name}</div>
-              <div className="text-[9.5px] uppercase tracking-[0.22em] text-equine-brassLight/80 mt-0.5">{user.role.replace(/_/g, ' ')}</div>
+              <div className="text-[9.5px] uppercase tracking-[0.22em] text-equine-lavender/80 mt-0.5">{user.role.replace(/_/g, ' ')}</div>
             </div>
           </div>
         )}

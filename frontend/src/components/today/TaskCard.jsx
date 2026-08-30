@@ -91,7 +91,7 @@ const TaskCard = ({
       <div
         className={`relative bg-equine-card border border-equine-hairline rounded-2xl px-4 py-3.5 transition-transform duration-150 ease-out
           ${completed ? "opacity-60" : ""}
-          ${selected ? "ring-2 ring-equine-brassLight" : ""}`}
+          ${selected ? "ring-2 ring-equine-lavender" : ""}`}
         style={{ transform: `translateX(${dx}px)` }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
@@ -144,7 +144,7 @@ const TaskCard = ({
               <>
                 <label
                   data-testid={`task-evidence-label-${task.id}`}
-                  className="hidden sm:inline-flex items-center justify-center w-9 h-9 rounded-xl text-equine-brassLight hover:bg-equine-brass/10 transition-colors cursor-pointer"
+                  className="hidden sm:inline-flex items-center justify-center w-9 h-9 rounded-xl text-equine-lavender hover:bg-equine-lilac/10 transition-colors cursor-pointer"
                   aria-label="Attach task evidence"
                   title="Attach task evidence"
                 >
@@ -180,7 +180,7 @@ const TaskCard = ({
         {!completed && !bulkMode && evidence.length > 0 && (
           <div
             data-testid={`task-evidence-summary-${task.id}`}
-            className="mt-3 ml-[54px] rounded-lg border border-equine-brass/25 bg-equine-brass/8 px-3 py-2 text-[12px] text-equine-brassLight"
+            className="mt-3 ml-[54px] rounded-lg border border-equine-lilac/25 bg-equine-lilac/8 px-3 py-2 text-[12px] text-equine-lavender"
           >
             {evidence.length} evidence file{evidence.length === 1 ? "" : "s"} ready to bind on completion
           </div>

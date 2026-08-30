@@ -103,7 +103,7 @@ export default function Inventory() {
         <div className="text-equine-platinum/60 text-sm">Loading inventory…</div>
       ) : items.length === 0 ? (
         <Empty>
-          <Package strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Package strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No inventory yet</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add your first item to start tracking stock + reorder alerts.</div>
           <button onClick={() => setAddOpen(true)} data-testid="inventory-empty-add" className="btn-primary inline-flex items-center gap-2">

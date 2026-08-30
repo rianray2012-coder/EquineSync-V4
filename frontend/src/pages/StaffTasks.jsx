@@ -114,7 +114,7 @@ export default function StaffTasks() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <ClipboardList strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <ClipboardList strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No staff tasks</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Create a task with an assignee, due time, and handoff note.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="staff-tasks-empty-add">
@@ -139,17 +139,17 @@ export default function StaffTasks() {
                       {data.handoff_notes && <div className="text-[12.5px] text-equine-inkMuted mt-2 leading-relaxed">{data.handoff_notes}</div>}
                       <div className="hairline mt-3 pt-3 flex flex-wrap items-center gap-2">
                         {status !== "in_progress" && (
-                          <button type="button" onClick={() => setStatus(record, "in_progress")} className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+                          <button type="button" onClick={() => setStatus(record, "in_progress")} className="text-[12px] text-equine-navy hover:text-equine-lilac inline-flex items-center gap-1">
                             <PlayCircle className="w-3.5 h-3.5" /> Start
                           </button>
                         )}
                         {status !== "complete" && (
-                          <button type="button" onClick={() => setStatus(record, "complete")} className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+                          <button type="button" onClick={() => setStatus(record, "complete")} className="text-[12px] text-equine-navy hover:text-equine-lilac inline-flex items-center gap-1">
                             <CheckCircle2 className="w-3.5 h-3.5" /> Complete
                           </button>
                         )}
                         {status !== "blocked" && (
-                          <button type="button" onClick={() => setStatus(record, "blocked")} className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+                          <button type="button" onClick={() => setStatus(record, "blocked")} className="text-[12px] text-equine-navy hover:text-equine-lilac inline-flex items-center gap-1">
                             <PauseCircle className="w-3.5 h-3.5" /> Block
                           </button>
                         )}

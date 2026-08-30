@@ -169,7 +169,7 @@ export default function StallMap() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <MapIcon strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <MapIcon strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No stalls mapped yet</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add the first stall, then arrange it on the barn grid.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="stall-map-empty-add">
@@ -186,7 +186,7 @@ export default function StallMap() {
                 onDrop={() => dropOn(cell.row, cell.column)}
                 data-testid={`stall-cell-${cell.row}-${cell.column}`}
                 className={`min-h-[148px] rounded-xl border border-equine-hairline bg-equine-soft/50 p-3 transition-colors ${
-                  dragId ? "ring-1 ring-equine-brass/50 bg-equine-brass/10" : ""
+                  dragId ? "ring-1 ring-equine-lilac/50 bg-equine-lilac/10" : ""
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">

@@ -121,7 +121,7 @@ export default function PerformanceAnalytics() {
         </Card>
       ) : sessions.length === 0 && plans.length === 0 && competitions.length === 0 && rides.length === 0 ? (
         <Empty>
-          <BarChart3 strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <BarChart3 strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No performance data yet</div>
           <div className="text-[13px] text-equine-platinum/60">Log rides, plans, shows, or GPS tracks to populate analytics.</div>
         </Empty>
@@ -138,7 +138,7 @@ export default function PerformanceAnalytics() {
           <div className="grid grid-cols-1 xl:grid-cols-5 gap-6">
             <Card hover={false} className="xl:col-span-3">
               <div className="flex items-center gap-2 mb-5">
-                <Trophy className="w-4 h-4 text-equine-brass" />
+                <Trophy className="w-4 h-4 text-equine-lilac" />
                 <h2 className="font-display text-3xl text-equine-ink">Trainer performance</h2>
               </div>
               {analytics.trainers.length === 0 ? (
@@ -165,7 +165,7 @@ export default function PerformanceAnalytics() {
 
             <Card hover={false} className="xl:col-span-2">
               <div className="flex items-center gap-2 mb-5">
-                <Target className="w-4 h-4 text-equine-brass" />
+                <Target className="w-4 h-4 text-equine-lilac" />
                 <h2 className="font-display text-3xl text-equine-ink">Horse progress</h2>
               </div>
               {analytics.horses.length === 0 ? (
@@ -213,7 +213,7 @@ const InlineStat = ({ label, value }) => (
 const Progress = ({ value }) => (
   <div>
     <div className="h-2 rounded-full bg-equine-cloud overflow-hidden">
-      <div className="h-full rounded-full bg-equine-brass" style={{ width: `${value}%` }} />
+      <div className="h-full rounded-full bg-equine-lilac" style={{ width: `${value}%` }} />
     </div>
     <div className="text-[11px] text-equine-inkSoft mt-1">Performance signal: {value}%</div>
   </div>

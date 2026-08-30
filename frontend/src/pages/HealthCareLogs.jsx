@@ -280,7 +280,7 @@ const LogColumn = ({ title, icon: Icon, records, emptyText, onAdd, render }) => 
   <Card hover={false}>
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-2">
-        <Icon className="w-4 h-4 text-equine-brass" />
+        <Icon className="w-4 h-4 text-equine-lilac" />
         <h2 className="font-display text-2xl text-equine-ink">{title}</h2>
       </div>
       <button type="button" onClick={onAdd} className="btn-secondary text-[12px] py-2 px-4">

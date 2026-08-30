@@ -10,7 +10,7 @@ const TONES = {
   warning:  "text-equine-amber",
   clay:     "text-equine-clay",
   sage:     "text-equine-sage",
-  brass:    "text-equine-brassLight",
+  lilac:    "text-equine-lavender",
   critical: "text-equine-clay",
 };
 
@@ -63,7 +63,7 @@ const AlertsCard = ({ summary }) => (
       <AlertRow
         testid="alert-billing"
         icon={Receipt}
-        tone="brass"
+        tone="lilac"
         title={`${money(summary?.overdue_amount ?? 0)} outstanding`}
         desc={`${summary?.overdue_invoices ?? 0} owner billing items past due.`}
         to="/billing"
