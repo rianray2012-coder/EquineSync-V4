@@ -67,7 +67,7 @@ export default function Enrollment() {
                 <p className="mt-5 text-[13.5px] text-white/65 leading-relaxed">{path.summary}</p>
                 <div className="mt-5">
                   <div className="text-[10.5px] tracking-[0.24em] uppercase text-brand-lilac/85 mb-2">
-                    Critical signup data
+                    Information needed
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {path.criticalData.map((item) => (
@@ -82,7 +82,7 @@ export default function Enrollment() {
                 </div>
                 <div className="mt-6 flex items-center justify-between gap-3">
                   <span className="text-[12px] leading-relaxed text-white/45 max-w-md">
-                    {path.availabilityNote} Depth continues in {path.deferredPhase}.
+                    {path.availabilityNote}
                   </span>
                   <span className="inline-flex items-center gap-2 text-[13px] text-brand-lilac">
                     Continue <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
