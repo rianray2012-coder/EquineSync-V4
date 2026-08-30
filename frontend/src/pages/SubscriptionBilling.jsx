@@ -34,6 +34,8 @@ import {
   isPlanCheckoutable,
 } from "../lib/subscriptionBilling";
 
+const LOCAL_FREE_TIERS = new Set(["free", "service_provider_free"]);
+
 const fmtDate = (iso) => {
   if (!iso) return "—";
   const d = new Date(iso);
@@ -129,6 +131,14 @@ export default function SubscriptionBilling() {
 
   const sub = me?.subscription || null;
   const status = sub?.status || (usage?.plan_tier_code === "free" ? "free" : null);
+  const manualOrFreeSubscription = Boolean(
+    sub && (
+      LOCAL_FREE_TIERS.has(planTier)
+      || ["manual", "comped"].includes(sub.billing_provider)
+      || sub.purchase_platform === "admin"
+    ),
+  );
+  const canManageStripe = Boolean(sub && !manualOrFreeSubscription);
   const isResumable = sub && RESUMABLE_STATUSES.has(sub.status);
   const isTrialing = sub?.status === "trialing";
   const trialDays = isTrialing ? daysUntil(sub?.trial_end) : null;
@@ -248,19 +258,23 @@ export default function SubscriptionBilling() {
               </div>
             </div>
             <div className="flex flex-col items-end gap-2">
-              <button
-                onClick={openPortal}
-                disabled={!sub || busyAction === "portal"}
-                data-testid="subscription-manage-stripe-btn"
-                className="inline-flex items-center gap-1.5 text-[12.5px] tracking-wide px-4 py-2 rounded-full bg-equine-navy text-white hover:bg-equine-navyLift disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                title={sub ? "Manage in Stripe" : "Available after first checkout"}
-              >
-                {busyAction === "portal" ? "Opening…" : "Manage in Stripe"}{" "}
-                <ExternalLink className="w-3.5 h-3.5" />
-              </button>
-              {!sub && (
-                <div className="text-[11px] text-equine-inkSoft text-right max-w-[180px]">
-                  Available after your first subscription checkout.
+              {canManageStripe ? (
+                <button
+                  onClick={openPortal}
+                  disabled={busyAction === "portal"}
+                  data-testid="subscription-manage-stripe-btn"
+                  className="inline-flex items-center gap-1.5 text-[12.5px] tracking-wide px-4 py-2 rounded-full bg-equine-navy text-white hover:bg-equine-navyLift disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                  title="Manage in Stripe"
+                >
+                  {busyAction === "portal" ? "Opening…" : "Manage in Stripe"}{" "}
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </button>
+              ) : (
+                <div
+                  className="text-[11px] text-equine-inkSoft text-right max-w-[220px]"
+                  data-testid="subscription-manual-access-note"
+                >
+                  {sub ? "Pilot/free access is managed by EquineSync." : "Available after your first subscription checkout."}
                 </div>
               )}
             </div>
@@ -296,7 +310,7 @@ export default function SubscriptionBilling() {
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-lilacDeep flex-shrink-0" />
-              <span>Cancellation, card updates, and invoice history live in Stripe&apos;s portal.</span>
+              <span>{manualOrFreeSubscription ? "Pilot/free access is founder-managed and does not require Stripe payment setup." : "Cancellation, card updates, and invoice history live in Stripe&apos;s portal."}</span>
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-lilacDeep flex-shrink-0" />
@@ -332,8 +346,8 @@ export default function SubscriptionBilling() {
       {/* CHANGE PLAN */}
       <SectionEyebrow>Change plan</SectionEyebrow>
       <p className="text-[13.5px] text-equine-inkMuted mb-5 max-w-2xl leading-relaxed">
-        Switching plans starts a new Stripe Checkout. Annual cycles use the
-        catalog price. Invited owner access stays separate from self-paid individual-owner memberships.
+        Paid plan changes use Stripe Checkout when enabled. Pilot and invited
+        owner access stays founder-managed and free during the pilot.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" data-testid="subscription-plan-grid">
         {plans
