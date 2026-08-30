@@ -868,6 +868,10 @@ def test_health_observation_schema_is_draft_score_only_and_blocks_clinical_actio
     assert schema["source_category"] == "health_observation"
     assert schema["not_diagnosis"] is True
     assert schema["draft_health_score_candidate"]["requires_human_confirmation"] is True
+    assert schema["draft_health_score_candidate"]["official_health_score_save_allowed"] is False
+    assert schema["reviewer_boundary"]["candidate_only"] is True
+    assert schema["reviewer_boundary"]["vet_or_manager_escalation_decided_by_human"] is True
+    assert schema["reviewer_boundary"]["do_not_notify_or_save"] is True
     for field in [
         "appetite",
         "water_intake",
@@ -891,6 +895,57 @@ def test_health_observation_schema_is_draft_score_only_and_blocks_clinical_actio
         "provider_message_send",
     ]:
         assert blocked_action in schema["blocked_actions"]
+
+
+def test_pilot_extraction_schemas_cover_busy_barn_draft_lanes_without_new_authority():
+    photo_schema = json.loads(output_schema_hint("photo_inventory"))
+    assert photo_schema["room_or_area"] is None
+    assert photo_schema["visible_storage_state"] is None
+    assert photo_schema["visible_count_estimates"] == []
+    assert photo_schema["not_counted_or_uncertain"] == []
+    assert "inventory_record_create" in photo_schema["blocked_actions"]
+
+    invoice_schema = json.loads(output_schema_hint("service_invoice"))
+    assert invoice_schema["draft_service_history_candidates"][0]["payment_status_candidate"] == "review_required"
+    assert invoice_schema["draft_invoice_candidates"][0]["payment_status_candidate"] == "review_required"
+    assert invoice_schema["draft_payment_status_candidate"]["official_payment_status_change_allowed"] is False
+    assert "payment_status_change" in invoice_schema["blocked_actions"]
+    assert "invoice_finalization" in invoice_schema["blocked_actions"]
+
+    voice_schema = json.loads(output_schema_hint("voice_transcript"))
+    assert voice_schema["voice_capture_context"]["hands_free"] is True
+    assert voice_schema["draft_work_ticket_candidates"][0]["review_status"] == "needs_review"
+    assert voice_schema["draft_inventory_candidates"][0]["review_status"] == "needs_review"
+    assert voice_schema["draft_invoice_candidates"][0]["payment_status_candidate"] == "review_required"
+    assert "participant_notification" in voice_schema["blocked_actions"]
+    assert "payment_status_change" in voice_schema["blocked_actions"]
+
+
+def test_parse_output_normalizes_invoice_payment_status_to_review_only():
+    extractor = OpenAIDraftExtractor(api_key="test-key")
+    parsed = extractor._parse_output(
+        {
+            "output_text": json.dumps({
+                "draft_only": False,
+                "review_required": False,
+                "source_category": "service_invoice",
+                "draft_payment_status_candidate": {
+                    "status": "paid",
+                    "basis": ["vendor receipt says paid"],
+                    "official_payment_status_change_allowed": True,
+                },
+                "blocked_actions": [],
+            })
+        },
+        source_type="service_invoice",
+    )
+
+    assert parsed["draft_only"] is True
+    assert parsed["review_required"] is True
+    assert parsed["draft_payment_status_candidate"]["official_payment_status_change_allowed"] is False
+    assert "payment_status_change" in parsed["blocked_actions"]
+    assert "invoice_finalization" in parsed["blocked_actions"]
+    assert "inventory_record_create" in parsed["blocked_actions"]
 
 
 def test_health_observation_cannot_request_official_health_score_save_lane():

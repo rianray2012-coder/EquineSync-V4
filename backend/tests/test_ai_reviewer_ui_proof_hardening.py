@@ -49,9 +49,43 @@ def test_health_observation_reviewer_has_draft_only_clinical_boundary_hooks():
     assert 'data-testid={`ai-health-no-diagnosis-boundary-${job.id}`}' in source
     assert 'data-testid={`ai-health-score-candidate-${job.id}`}' in source
     assert 'data-testid={`ai-health-score-save-gated-${job.id}`}' in source
+    assert 'data-testid={`ai-health-boundary-checklist-${job.id}`}' in source
+    assert 'data-testid={`ai-health-candidate-only-${job.id}`}' in source
+    assert 'data-testid={`ai-health-reviewer-decides-escalation-${job.id}`}' in source
+    assert 'data-testid={`ai-health-do-not-notify-save-${job.id}`}' in source
+    assert 'data-testid={`ai-health-no-clinical-action-${job.id}`}' in source
     assert "not a diagnosis, treatment plan, medication instruction, emergency triage decision" in source
     assert "official health-score save remains separately gated" in source
     assert '"health_score"' not in source
+
+
+def test_ai_reviewer_surfaces_expanded_pilot_extraction_lane_previews():
+    source = _source()
+
+    assert "sourceLanePreviewFor" in source
+    assert "Object.entries(value)" in source
+    assert '`${labelFor(key)}: ${textFromValue(entryValue) || String(entryValue)}`' in source
+    assert 'testId: `ai-draft-expanded-photo-inventory-${job.id}`' in source
+    assert 'testId: `ai-draft-expanded-invoice-service-${job.id}`' in source
+    assert 'testId: `ai-draft-expanded-voice-capture-${job.id}`' in source
+    assert 'testId: `ai-draft-expanded-ride-data-${job.id}`' in source
+    assert 'testId: `ai-draft-expanded-schedule-${job.id}`' in source
+    assert 'testId: `ai-draft-expanded-training-note-${job.id}`' in source
+    for visible_label in [
+        "Room or area",
+        "Storage state",
+        "Payment status",
+        "Work-ticket candidates",
+        "Schedule candidates",
+        "Training notes",
+    ]:
+        assert visible_label in source
+
+
+def test_ai_work_candidates_include_voice_work_ticket_candidates():
+    source = _source()
+
+    assert "...arrayValue(result.draft_work_ticket_candidates)," in source
 
 
 def test_status_pill_forwards_test_hook_props():

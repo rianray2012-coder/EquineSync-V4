@@ -80,6 +80,43 @@ INVENTORY_CANDIDATE_TEMPLATE = {
     "notes": [],
 }
 
+SERVICE_HISTORY_CANDIDATE_TEMPLATE = {
+    "provider": None,
+    "service_type": None,
+    "horse": None,
+    "service_date": None,
+    "amount": None,
+    "payment_status_candidate": "review_required",
+    "review_status": "needs_review",
+    "source_confidence": None,
+    "notes": [],
+}
+
+INVOICE_CANDIDATE_TEMPLATE = {
+    "vendor_or_provider": None,
+    "invoice_or_order_reference": None,
+    "invoice_date": None,
+    "subtotal": None,
+    "tax": None,
+    "total": None,
+    "payment_status_candidate": "review_required",
+    "review_status": "needs_review",
+    "source_confidence": None,
+    "notes": [],
+}
+
+WORK_TICKET_CANDIDATE_TEMPLATE = {
+    "title": None,
+    "category": None,
+    "details": None,
+    "priority": "standard",
+    "due_date": None,
+    "assigned_role": None,
+    "review_status": "needs_review",
+    "source_confidence": None,
+    "notes": [],
+}
+
 
 def normalize_source_type(value: str) -> str:
     source_type = (value or "").strip().lower()
@@ -134,10 +171,16 @@ def output_schema_hint(source_type: str) -> str:
             "merchant_order_reference": None,
             "line_items": [],
             "draft_inventory_candidates": [INVENTORY_CANDIDATE_TEMPLATE],
-            "draft_service_history_candidates": [],
-            "draft_invoice_candidates": [],
+            "draft_service_history_candidates": [SERVICE_HISTORY_CANDIDATE_TEMPLATE],
+            "draft_invoice_candidates": [INVOICE_CANDIDATE_TEMPLATE],
+            "draft_expense_candidates": [],
+            "draft_payment_status_candidate": {
+                "status": "review_required",
+                "basis": [],
+                "official_payment_status_change_allowed": False,
+            },
             "review_questions": [],
-            "blocked_actions": [*AI_BLOCKED_ACTIONS, "inventory_record_create", "payment_status_change"],
+            "blocked_actions": [*AI_BLOCKED_ACTIONS, "inventory_record_create", "payment_status_change", "invoice_finalization"],
         })
     if source_type == "photo_inventory":
         return json.dumps({
@@ -145,9 +188,13 @@ def output_schema_hint(source_type: str) -> str:
             "review_required": True,
             "source_category": "photo_inventory",
             **COMMON_REVIEW_FIELDS,
+            "room_or_area": None,
+            "visible_storage_state": None,
             "visible_inventory_categories": [],
+            "visible_count_estimates": [],
             "draft_inventory_candidates": [INVENTORY_CANDIDATE_TEMPLATE],
             "organization_or_reorder_suggestions": [],
+            "not_counted_or_uncertain": [],
             "review_questions": [],
             "blocked_actions": [*AI_BLOCKED_ACTIONS, "inventory_record_create"],
         })
@@ -217,13 +264,22 @@ def output_schema_hint(source_type: str) -> str:
             "review_required": True,
             "source_category": "voice_transcript",
             **COMMON_REVIEW_FIELDS,
+            "voice_capture_context": {
+                "hands_free": True,
+                "screen_locked_or_multitasking": None,
+                "source_quality": None,
+            },
             "draft_tasks": [],
+            "draft_work_ticket_candidates": [WORK_TICKET_CANDIDATE_TEMPLATE],
+            "draft_inventory_candidates": [INVENTORY_CANDIDATE_TEMPLATE],
             "draft_inventory_notes": [],
+            "draft_invoice_candidates": [INVOICE_CANDIDATE_TEMPLATE],
             "draft_invoice_notes": [],
+            "draft_schedule_candidates": [],
             "draft_schedule_notes": [],
             "draft_training_notes": [],
             "review_questions": [],
-            "blocked_actions": ["official_record_save", "participant_notification", "payment_status_change"],
+            "blocked_actions": ["official_record_save", "ai_autonomous_mutation", "participant_notification", "payment_status_change"],
         })
     if source_type == "health_observation":
         return json.dumps({
@@ -258,6 +314,13 @@ def output_schema_hint(source_type: str) -> str:
                 "basis": [],
                 "confidence": None,
                 "requires_human_confirmation": True,
+                "official_health_score_save_allowed": False,
+            },
+            "reviewer_boundary": {
+                "candidate_only": True,
+                "no_diagnosis": True,
+                "vet_or_manager_escalation_decided_by_human": True,
+                "do_not_notify_or_save": True,
             },
             "review_questions": [],
             "blocked_actions": [*AI_BLOCKED_ACTIONS, *HEALTH_REVIEW_BLOCKED_ACTIONS],
@@ -306,8 +369,18 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
                 "basis": [],
                 "confidence": None,
                 "requires_human_confirmation": True,
+                "official_health_score_save_allowed": False,
             }
         parsed["draft_health_score_candidate"]["requires_human_confirmation"] = True
+        parsed["draft_health_score_candidate"]["official_health_score_save_allowed"] = False
+        if not isinstance(parsed.get("reviewer_boundary"), dict):
+            parsed["reviewer_boundary"] = {}
+        parsed["reviewer_boundary"].update({
+            "candidate_only": True,
+            "no_diagnosis": True,
+            "vet_or_manager_escalation_decided_by_human": True,
+            "do_not_notify_or_save": True,
+        })
         for action in HEALTH_REVIEW_BLOCKED_ACTIONS:
             if action not in parsed["blocked_actions"]:
                 parsed["blocked_actions"].append(action)
@@ -321,6 +394,22 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
         _normalize_inventory_candidates(parsed)
         if "inventory_record_create" not in parsed["blocked_actions"]:
             parsed["blocked_actions"].append("inventory_record_create")
+    if source_type in {"invoice", "service_invoice"}:
+        if "payment_status_change" not in parsed["blocked_actions"]:
+            parsed["blocked_actions"].append("payment_status_change")
+        if "invoice_finalization" not in parsed["blocked_actions"]:
+            parsed["blocked_actions"].append("invoice_finalization")
+        if not isinstance(parsed.get("draft_payment_status_candidate"), dict):
+            parsed["draft_payment_status_candidate"] = {
+                "status": "review_required",
+                "basis": [],
+                "official_payment_status_change_allowed": False,
+            }
+        parsed["draft_payment_status_candidate"]["official_payment_status_change_allowed"] = False
+    if source_type == "voice_transcript":
+        for key in ["draft_work_ticket_candidates", "draft_schedule_candidates"]:
+            if not isinstance(parsed.get(key), list):
+                parsed[key] = []
 
     return parsed
 
