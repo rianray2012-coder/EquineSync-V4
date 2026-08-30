@@ -50,10 +50,10 @@ DEMO_KEY = "admin8_client_demo"
 DEMO_PHASE = "phase_admin_8"
 
 DEMO_EMAIL = "demo.client@equine-sync.com"
-DEMO_NAME = "Demo Client"
+DEMO_NAME = "Pilot Client"
 EXTRA_OWNER_EMAIL = "demo.owner2@equine-sync.com"
-EXTRA_OWNER_NAME = "Demo Owner 2"
-DEMO_BARN_NAME = "Equine Sync Demo Barn"
+EXTRA_OWNER_NAME = "Secondary Owner"
+DEMO_BARN_NAME = "EquineSync Pilot Stable"
 DEMO_HORSES = [
     {"name": "Aurelia",  "breed": "Andalusian", "age": 9,  "discipline": "Dressage"},
     {"name": "Beacon",   "breed": "Thoroughbred", "age": 6, "discipline": "Eventing"},
@@ -150,13 +150,21 @@ async def _ensure_extra_owner(db, *, barn_id: str, now_iso: str,
     if existing:
         user_id = existing["id"]
         user_action = "already_present"
-        user_doc = {
-            **existing,
+        existing_updates = {
+            "full_name": EXTRA_OWNER_NAME,
             "barn_id": existing.get("barn_id") or barn_id,
             "role": existing.get("role") or "horse_owner",
             "role_status": existing.get("role_status") or "active",
             "account_status": existing.get("account_status") or "active",
+            "updated_at": now_iso,
+            **_tag(),
         }
+        user_doc = {
+            **existing,
+            **existing_updates,
+        }
+        if not dry_run:
+            await db.users.update_one({"id": user_id}, {"$set": existing_updates})
         if reset_password:
             password_action = "would_reset" if dry_run else "reset"
             if not dry_run:
@@ -170,6 +178,7 @@ async def _ensure_extra_owner(db, *, barn_id: str, now_iso: str,
                         "role_status": "active",
                         "account_status": "active",
                         "email_verified": True,
+                        "full_name": EXTRA_OWNER_NAME,
                         **_tag(),
                     }},
                 )
@@ -179,6 +188,7 @@ async def _ensure_extra_owner(db, *, barn_id: str, now_iso: str,
                     "role_status": "active",
                     "account_status": "active",
                     "email_verified": True,
+                    "full_name": EXTRA_OWNER_NAME,
                     **_tag(),
                 })
         else:
@@ -272,7 +282,15 @@ async def _seed(db, *, dry_run: bool, extra_owner: bool = False,
     existing_barn = await db.barns.find_one({"demo_seed_key": DEMO_KEY})
     if existing_barn:
         barn_id = existing_barn["id"]
-        barn_action = "already_present"
+        if existing_barn.get("name") != DEMO_BARN_NAME:
+            barn_action = "would_update_name" if dry_run else "updated_name"
+            if not dry_run:
+                await db.barns.update_one(
+                    {"id": barn_id},
+                    {"$set": {"name": DEMO_BARN_NAME, "updated_at": now_iso}},
+                )
+        else:
+            barn_action = "already_present"
     else:
         barn_id = f"barn_demo_{uuid.uuid4().hex[:10]}"
         barn_doc = {
@@ -302,13 +320,21 @@ async def _seed(db, *, dry_run: bool, extra_owner: bool = False,
         user_id = existing_user["id"]
         user_action = "already_present"
         password_source = "n/a (existing user)"
-        primary_user_doc = {
-            **existing_user,
+        existing_user_updates = {
+            "full_name": DEMO_NAME,
             "barn_id": existing_user.get("barn_id") or barn_id,
             "role": existing_user.get("role") or "horse_owner",
             "role_status": existing_user.get("role_status") or "active",
             "account_status": existing_user.get("account_status") or "active",
+            "updated_at": now_iso,
+            **_tag(),
         }
+        primary_user_doc = {
+            **existing_user,
+            **existing_user_updates,
+        }
+        if not dry_run:
+            await db.users.update_one({"id": user_id}, {"$set": existing_user_updates})
     else:
         # Codex round-2 P1 fix: do NOT mint a password in dry-run.
         # The hash would never persist, so any printed value would
@@ -617,7 +643,7 @@ async def _main():
         print("=" * 72)
         print(f"  {DEMO_EMAIL}  {r['minted_password']}")
         print()
-        print("Demo logs in at /login (the normal client flow). The demo has")
+        print("Pilot account logs in at /login (the normal client flow). It has")
         print("no platform_role; /admin/portal/* returns 403 unless separately")
         print("granted.")
 

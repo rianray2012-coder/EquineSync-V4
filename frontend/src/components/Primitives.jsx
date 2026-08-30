@@ -33,6 +33,8 @@ export const Stat = ({ label, value, accent = "ivory", caption, testid, icon: Ic
     clay: "text-equine-clay",
     brass: "text-equine-brassLight",
     steel: "text-equine-champagne",
+    ice: "text-equine-brass",
+    lilac: "text-equine-lilac",
   };
   return (
     <Card data-testid={testid}>

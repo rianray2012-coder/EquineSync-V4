@@ -30,6 +30,9 @@ const INITIAL_FORM = {
   preferred_contact: "app",
 };
 
+const fieldClass =
+  "mt-2 w-full rounded-xl border border-equine-cloud bg-white px-3 py-3 text-equine-ink placeholder:text-equine-inkSoft outline-none focus:border-equine-lilac focus:ring-2 focus:ring-equine-lavender/35";
+
 const severityCopy = {
   low: "Cosmetic, confusing, or nice-to-have.",
   medium: "Blocks a small task but has a workaround.",
@@ -80,7 +83,7 @@ export default function Support() {
       <PageHeader
         eyebrow="Pilot Support"
         title="Support"
-        subtitle="Send bugs, access issues, and product feedback directly to the EquineSync pilot support queue."
+        subtitle="Send bugs, access issues, workflow questions, and product feedback directly to the EquineSync pilot support queue."
         action={
           <StatusPill tone={createdTicket ? "success" : "info"} dot>
             {createdTicket ? "Submitted" : "Founder triage"}
@@ -94,8 +97,8 @@ export default function Support() {
             <CheckCircle2 className="w-5 h-5 text-equine-sage mt-0.5 flex-shrink-0" />
             <div>
               <div className="label-eyebrow">Request received</div>
-              <h2 className="font-display text-2xl text-equine-ivory mt-1">Ticket {createdTicket.admin_ref}</h2>
-              <p className="text-equine-silver/70 text-[13.5px] mt-2">
+              <h2 className="font-display text-2xl text-equine-ink mt-1">Ticket {createdTicket.admin_ref}</h2>
+              <p className="text-equine-inkMuted text-[13.5px] mt-2">
                 Status is {createdTicket.status}. Rian will triage this in the platform Support dashboard.
               </p>
             </div>
@@ -113,7 +116,7 @@ export default function Support() {
                   value={form.category}
                   onChange={(event) => update("category", event.target.value)}
                   data-testid="support-category"
-                  className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-brass"
+                  className={fieldClass}
                 >
                   {CATEGORIES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                 </select>
@@ -124,7 +127,7 @@ export default function Support() {
                   value={form.severity}
                   onChange={(event) => update("severity", event.target.value)}
                   data-testid="support-severity"
-                  className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-brass"
+                  className={fieldClass}
                 >
                   {SEVERITIES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                 </select>
@@ -139,7 +142,7 @@ export default function Support() {
                 onChange={(event) => update("subject", event.target.value)}
                 maxLength={140}
                 data-testid="support-subject"
-                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory placeholder:text-equine-platinum/35 outline-none focus:border-equine-brass"
+                className={fieldClass}
                 placeholder="Short summary"
               />
             </label>
@@ -152,7 +155,7 @@ export default function Support() {
                 rows={8}
                 maxLength={4000}
                 data-testid="support-message"
-                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory placeholder:text-equine-platinum/35 outline-none focus:border-equine-brass resize-y"
+                className={`${fieldClass} resize-y`}
                 placeholder="What happened, what you expected, and what role or horse/facility context you were using."
               />
             </label>
@@ -163,7 +166,7 @@ export default function Support() {
                 value={form.preferred_contact}
                 onChange={(event) => update("preferred_contact", event.target.value)}
                 data-testid="support-preferred-contact"
-                className="mt-2 w-full rounded-xl border border-equine-graphite bg-equine-navy/50 px-3 py-3 text-equine-ivory outline-none focus:border-equine-brass"
+                className={fieldClass}
               >
                 <option value="app">In-app / account email</option>
                 <option value="email">Email</option>
@@ -173,7 +176,7 @@ export default function Support() {
             </label>
 
             <div className="flex items-center justify-between gap-4 flex-wrap pt-1">
-              <div className="text-[12px] text-equine-platinum/50">
+              <div className="text-[12px] text-equine-inkMuted">
                 Signed in as {user?.email || "current user"}
               </div>
               <button
@@ -197,9 +200,9 @@ export default function Support() {
             </div>
             <div className="mt-4 space-y-3">
               {SEVERITIES.map(([value, label]) => (
-                <div key={value} className="rounded-lg border border-equine-graphite/60 bg-equine-soft/60 p-3">
-                  <div className="text-equine-ivory text-[13px]">{label}</div>
-                  <div className="text-equine-platinum/55 text-[12px] mt-1">{severityCopy[value]}</div>
+                <div key={value} className="rounded-lg border border-equine-hairline bg-equine-soft/55 p-3">
+                  <div className="text-equine-ink text-[13px] font-medium">{label}</div>
+                  <div className="text-equine-inkMuted text-[12px] mt-1 leading-relaxed">{severityCopy[value]}</div>
                 </div>
               ))}
             </div>
@@ -211,8 +214,8 @@ export default function Support() {
               Pilot owner
             </div>
             <div className="mt-3 flex items-start gap-3">
-              <Sparkles className="w-4 h-4 text-equine-brass mt-0.5 flex-shrink-0" />
-              <div className="text-[13px] text-equine-platinum/65">
+              <Sparkles className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
+              <div className="text-[13px] text-equine-inkMuted leading-relaxed">
                 Founder Rian Ray owns support review and triage before outside tester launch.
               </div>
             </div>

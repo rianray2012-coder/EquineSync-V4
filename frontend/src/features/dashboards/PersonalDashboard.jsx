@@ -16,13 +16,13 @@ const DASHBOARDS = {
     subtitle:
       "A calm home for horse updates, care visibility, requests, documents, and messages once your facility connection is active.",
     testId: "dashboard-owner",
-    primary: { label: "Owner Portal Pending", to: null },
+    primary: { label: "Facility Connection Pending", to: null },
     cards: [
-      ["My Horse", "Your horse profile and facility-approved care context will appear here.", Heart],
-      ["Daily Care", "Approved owner-visible care status appears without staff notes or internal payloads.", ShieldCheck],
-      ["Requests", "Use the approved request workflow for care questions, scheduling needs, or barn follow-up.", ClipboardList],
-      ["Documents", "Policies, waivers, and signed forms appear after document workflows are connected.", FileText],
-      ["Messages", "Keep barn-approved conversations in one place.", MessageSquare],
+      ["My Horse", "Your horse profile, barn connection, and approved care visibility will appear here.", Heart],
+      ["Daily Care", "Published care status appears without internal staff notes or private operating payloads.", ShieldCheck],
+      ["Requests", "Care questions, scheduling needs, and barn follow-up will route through the approved request workflow.", ClipboardList],
+      ["Documents", "Policies, waivers, and signed forms will appear after document workflows are connected.", FileText],
+      ["Messages", "Barn-approved conversations stay attached to your account context.", MessageSquare],
     ],
   },
   guardian: {
@@ -76,13 +76,13 @@ export default function PersonalDashboard({ profile }) {
         {config.cards.map(([title, body, Icon]) => (
           <section
             key={title}
-            className="rounded-2xl border border-equine-cloud bg-white p-6 min-h-[180px]"
+            className="rounded-2xl border border-equine-cloud bg-white p-6 min-h-[180px] shadow-[0_10px_24px_-20px_rgba(35,39,52,0.28)]"
           >
-            <div className="w-11 h-11 rounded-2xl bg-equine-navy/60 text-white flex items-center justify-center mb-5">
+            <div className="w-11 h-11 rounded-2xl bg-equine-lavender text-equine-navy flex items-center justify-center mb-5">
               <Icon className="w-5 h-5" strokeWidth={1.5} />
             </div>
             <h2 className="font-display text-2xl text-equine-ink">{title}</h2>
-            <p className="mt-3 text-sm leading-relaxed text-equine-ink/55">{body}</p>
+            <p className="mt-3 text-sm leading-relaxed text-equine-inkMuted">{body}</p>
           </section>
         ))}
       </div>

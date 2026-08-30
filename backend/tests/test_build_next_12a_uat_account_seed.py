@@ -109,8 +109,12 @@ def test_bn12a_seed_creates_8_accounts_memberships_and_passwords_once():
         by_email = {u["email"]: u for u in users}
         assert set(by_email) == set(ROSTER_EMAILS)
         assert by_email["uat.platform@equine-sync.com"]["platform_role"] == "platform_admin"
+        assert by_email["uat.platform@equine-sync.com"]["full_name"] == "Platform Admin"
+        assert by_email["uat.facility-admin@equine-sync.com"]["full_name"] == "Facility Admin"
+        assert by_email["uat.owner@equine-sync.com"]["full_name"] == "Horse Owner"
         assert by_email["uat.individual-owner@equine-sync.com"].get("barn_id") is None
         assert by_email["uat.individual-owner@equine-sync.com"]["role"] == "horse_owner"
+        assert by_email["uat.individual-owner@equine-sync.com"]["full_name"] == "Individual Owner"
         assert all(u["email_verified"] is True for u in users)
         assert all(u["account_status"] == "active" for u in users)
 
@@ -155,6 +159,15 @@ def test_bn12a_seed_creates_8_accounts_memberships_and_passwords_once():
         assert second.returncode == 0, second.stderr
         assert "BN12A ONE-TIME PASSWORDS" not in second.stdout
         assert database.users.count_documents({"uat_seed_key": "bn12_uat_accounts"}) == 8
+
+        database.barns.update_one(
+            {"id": "bn12_uat_facility"},
+            {"$set": {"name": "BN12 UAT Facility"}},
+        )
+        refreshed = _run(db_name=db_name)
+        assert refreshed.returncode == 0, refreshed.stderr
+        barn = database.barns.find_one({"id": "bn12_uat_facility"})
+        assert barn["name"] == "EquineSync Pilot Stable"
     finally:
         database.client.drop_database(db_name)
 
