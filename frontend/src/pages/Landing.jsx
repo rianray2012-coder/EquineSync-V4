@@ -276,29 +276,32 @@ export default function Landing() {
       {/* Top nav */}
       <header className="px-6 md:px-12 py-6 flex items-center justify-between gap-4 max-w-7xl mx-auto">
         <div className="sm:hidden shrink-0">
-          <Logo onNavy size={40} showTagline={false} />
+          <Logo onNavy size={48} showTagline={false} />
         </div>
-        <div className="hidden sm:block">
-          <Logo onNavy size={48} />
+        <div className="hidden sm:block lg:hidden shrink-0">
+          <Logo onNavy size={52} showTagline={false} />
         </div>
-        <nav className="flex items-center gap-4 sm:gap-6">
+        <div className="hidden lg:block">
+          <Logo onNavy size={64} />
+        </div>
+        <nav className="flex items-center gap-3 lg:gap-6">
           <a
             href="#pricing"
-            className="hidden sm:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
+            className="hidden lg:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
             data-testid="nav-pricing"
           >
             Pricing
           </a>
           <Link
             to="/login"
-            className="hidden sm:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
+            className="hidden lg:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
             data-testid="nav-signin"
           >
             Sign in
           </Link>
           <button
             onClick={() => goToEnrollment()}
-            className="bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-5 py-2 text-[13px] tracking-wide font-medium rounded-full"
+            className="bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-4 sm:px-5 py-2 text-[12.5px] sm:text-[13px] tracking-wide font-medium rounded-full"
             data-testid="nav-join-cta"
           >
             Join EquineSync
