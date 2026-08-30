@@ -467,7 +467,7 @@ def test_shared_logo_links_to_home():
     assert 'import { Link } from "react-router-dom";' in logo
     assert 'linkTo = "/"' in logo
     assert 'to: linkTo' in logo
-    assert 'aria-label": "Equine Sync home"' in logo
+    assert 'aria-label": "EquineSync home"' in logo
     assert 'data-testid={linkTo ? "logo-home-link" : "logo"}' in logo
 
 
