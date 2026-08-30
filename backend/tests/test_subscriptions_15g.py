@@ -173,6 +173,57 @@ def test_free_checkout_no_barn_manage_required():
     assert r.status_code == 200
 
 
+def test_manual_free_tiers_do_not_collide_on_stripe_subscription_index(db):
+    """Manual/free rows must not write ``stripe_subscription_id: null``.
+
+    Mongo's unique sparse index still treats an explicit null value as an
+    indexed value, so multiple local free tiers must be keyed by their
+    deterministic manual id instead of a Stripe-only field.
+    """
+    owner = _signup_user("horse_owner")
+    provider_email = f"g15g_provider_{uuid.uuid4().hex[:10]}@example.com"
+    provider_resp = requests.post(
+        f"{API}/auth/signup",
+        json={
+            "email": provider_email,
+            "password": "securepass1",
+            "full_name": "G15G Provider",
+            "role": "service_provider",
+            "tier": "service_provider_free",
+        },
+        timeout=15,
+    )
+    provider_resp.raise_for_status()
+    provider = provider_resp.json()
+
+    for session, tier in ((owner, "free"), (provider, "service_provider_free")):
+        r = requests.post(
+            f"{API}/subscriptions/checkout",
+            headers={"Authorization": f"Bearer {session['token']}"},
+            json={
+                "plan_tier_code": tier,
+                "billing_cycle": "monthly",
+                "origin_url": "http://localhost:3000",
+            },
+            timeout=15,
+        )
+        assert r.status_code == 200, r.text
+        assert r.json()["url"] is None
+
+    barn_id = owner["user"]["barn_id"]
+    rows = list(db.subscriptions.find(
+        {"barn_id": barn_id, "plan_tier_code": {"$in": ["free", "service_provider_free"]}},
+        {"_id": 0, "id": 1, "plan_tier_code": 1, "stripe_subscription_id": 1, "status": 1},
+    ))
+    by_tier = {row["plan_tier_code"]: row for row in rows}
+    assert by_tier["free"]["id"] == f"free_{barn_id}"
+    assert by_tier["service_provider_free"]["id"] == f"service_provider_free_{barn_id}"
+    assert by_tier["free"].get("stripe_subscription_id") is None
+    assert by_tier["service_provider_free"].get("stripe_subscription_id") is None
+    assert by_tier["free"]["status"] == "active"
+    assert by_tier["service_provider_free"]["status"] == "active"
+
+
 # ---------------------------------------------------------------------
 # 3. Legacy /membership/checkout → 410 Gone
 # ---------------------------------------------------------------------
