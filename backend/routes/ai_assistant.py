@@ -1,14 +1,16 @@
-"""Draft-only AI intake and extraction pipeline.
+"""AI intake, extraction, and tightly-gated review workflows.
 
-The route owns staging AI jobs only. It never creates official inventory,
-horse-health, schedule, invoice, payment, message, or access-control records.
+Default extraction remains draft-only. Official-save behavior is intentionally
+limited to Founder-approved lanes and requires an explicit human review action.
+It never creates horse-health scores, invoices/payment state, signatures,
+messages, schedules, notifications, or access-control records.
 """
 from __future__ import annotations
 
 import hashlib
 import uuid
 from datetime import datetime, timezone
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, Field, field_validator
@@ -26,9 +28,27 @@ from services.ai_draft_extractor import (
 AI_SOURCE_COLLECTION = "ai_draft_sources"
 AI_JOB_COLLECTION = "ai_draft_jobs"
 AI_REVIEW_COLLECTION = "ai_draft_reviews"
+AI_OFFICIAL_SAVE_COLLECTIONS = {
+    "inventory_supply": "inventory",
+    "work_task_repair": "ai_work_repair_tickets",
+}
 
 TERMINAL_REVIEW_STATES = {"approved_no_save", "rejected"}
-AI_DRAFT_ALLOWED_ROLES = {"admin", "barn_owner", "barn_manager", "trainer", "horse_owner"}
+AI_DRAFT_ALLOWED_ROLES = {
+    "admin",
+    "barn_owner",
+    "barn_manager",
+    "trainer",
+    "horse_owner",
+    "groom",
+    "working_student",
+}
+AI_OFFICIAL_SAVE_ALLOWED_ROLES = {"admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"}
+AI_OFFICIAL_SAVE_LANE_ROLES = {
+    "inventory_supply": AI_OFFICIAL_SAVE_ALLOWED_ROLES,
+    "work_task_repair": AI_OFFICIAL_SAVE_ALLOWED_ROLES,
+}
+AI_OFFICIAL_SAVE_MIN_CONFIDENCE = 0.60
 
 
 def _now_iso() -> str:
@@ -42,6 +62,49 @@ def _hash_text(value: str) -> str:
 def _require_ai_draft_role(user: Dict[str, Any]) -> None:
     if (user or {}).get("role") not in AI_DRAFT_ALLOWED_ROLES:
         raise HTTPException(status_code=403, detail="AI draft review access required")
+
+
+def _require_ai_official_save_role(user: Dict[str, Any], lane: str) -> None:
+    if (user or {}).get("role") not in AI_OFFICIAL_SAVE_LANE_ROLES.get(lane, set()):
+        raise HTTPException(status_code=403, detail="AI official-save access required")
+
+
+def _normalized_text(value: Any) -> str:
+    return " ".join(str(value or "").strip().lower().split())
+
+
+def _confidence_value(value: Any) -> Optional[float]:
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        number = float(value)
+        return number / 100 if number > 1 else number
+    label = _normalized_text(value)
+    if label in {"high", "certain"}:
+        return 0.9
+    if label in {"medium", "moderate"}:
+        return 0.7
+    if label in {"low", "uncertain"}:
+        return 0.4
+    try:
+        number = float(label.replace("%", ""))
+        return number / 100 if number > 1 else number
+    except ValueError:
+        return None
+
+
+def _require_save_ready_item(item: Dict[str, Any], *, index: int) -> None:
+    review_status = _normalized_text(item.get("review_status"))
+    if review_status not in {"reviewed", "corrected", "approved"}:
+        raise HTTPException(422, f"Item {index + 1} must be reviewed before official save")
+    confidence = _confidence_value(item.get("source_confidence", item.get("confidence")))
+    if confidence is not None and confidence < AI_OFFICIAL_SAVE_MIN_CONFIDENCE and review_status != "corrected":
+        raise HTTPException(422, f"Item {index + 1} needs correction before official save")
+
+
+def _source_hash(job: Dict[str, Any]) -> Optional[str]:
+    draft = job.get("draft_result") or {}
+    return job.get("source_sha256") or draft.get("source_sha256") or draft.get("sha256")
 
 
 def _source_projection(doc: Dict[str, Any]) -> Dict[str, Any]:
@@ -73,6 +136,8 @@ def _job_projection(doc: Dict[str, Any]) -> Dict[str, Any]:
         "updated_at": doc.get("updated_at"),
         "completed_at": doc.get("completed_at"),
         "error_code": doc.get("error_code"),
+        "official_save_status": doc.get("official_save_status"),
+        "official_records_written": bool(doc.get("official_records_written")),
     }
 
 
@@ -145,6 +210,68 @@ class DraftReviewIn(BaseModel):
         return normalized
 
     @field_validator("note", mode="before")
+    @classmethod
+    def trim_note(cls, value):  # noqa: N805
+        if value is None:
+            return None
+        if not isinstance(value, str):
+            raise ValueError("Input should be a valid string")
+        return value.strip() or None
+
+
+class OfficialSaveItemIn(BaseModel):
+    name: str = Field(..., min_length=1, max_length=180)
+    category: Optional[str] = Field(default=None, max_length=80)
+    quantity: Optional[float] = None
+    unit: Optional[str] = Field(default=None, max_length=40)
+    storage_location: Optional[str] = Field(default=None, max_length=160)
+    horse_or_barn_assignment: Optional[str] = Field(default=None, max_length=160)
+    title: Optional[str] = Field(default=None, max_length=180)
+    details: Optional[str] = Field(default=None, max_length=1200)
+    priority: Literal["critical", "standard", "informational"] = "standard"
+    due_date: Optional[str] = Field(default=None, max_length=40)
+    assigned_user_id: Optional[str] = Field(default=None, max_length=80)
+    assigned_role: Optional[str] = Field(default=None, max_length=80)
+    source_confidence: Optional[Any] = None
+    review_status: str = Field(..., max_length=40)
+    notes: Optional[List[str] | str] = None
+
+    @field_validator(
+        "name",
+        "category",
+        "unit",
+        "storage_location",
+        "horse_or_barn_assignment",
+        "title",
+        "details",
+        "due_date",
+        "assigned_user_id",
+        "assigned_role",
+        "review_status",
+        mode="before",
+    )
+    @classmethod
+    def trim_text(cls, value):  # noqa: N805
+        if value is None:
+            return None
+        if not isinstance(value, str):
+            raise ValueError("Input should be a valid string")
+        return value.strip() or None
+
+    @field_validator("review_status")
+    @classmethod
+    def require_review_status(cls, value):  # noqa: N805
+        if not value:
+            raise ValueError("review_status is required")
+        return value
+
+
+class OfficialSaveIn(BaseModel):
+    lane: Literal["inventory_supply", "work_task_repair"]
+    items: List[OfficialSaveItemIn] = Field(..., min_length=1, max_length=25)
+    reviewer_note: Optional[str] = Field(default=None, max_length=1000)
+
+    @field_validator("reviewer_note", mode="before")
     @classmethod
     def trim_note(cls, value):  # noqa: N805
         if value is None:
@@ -482,6 +609,167 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
                 "action": body.action,
                 "official_records_written": False,
             },
+        }
+
+    @router.post("/{job_id}/official-save")
+    async def official_save_draft_job(
+        job_id: str,
+        body: OfficialSaveIn,
+        request: Request,
+        user=Depends(get_current_user),
+    ):
+        _require_ai_draft_role(user)
+        _require_ai_official_save_role(user, body.lane)
+        barn_id = resolve_barn_id(user)
+        job = await db[AI_JOB_COLLECTION].find_one(
+            {"id": job_id, "barn_id": barn_id, "user_id": user.get("id")},
+            {"_id": 0},
+        )
+        if not job:
+            raise HTTPException(404, "AI draft job not found")
+        if job.get("status") != "draft_ready":
+            raise HTTPException(409, "AI draft job must be draft_ready before official save")
+        if job.get("review_status") in TERMINAL_REVIEW_STATES:
+            raise HTTPException(409, "AI draft job has already been terminally reviewed")
+
+        now = _now_iso()
+        source_hash = _source_hash(job)
+        target_collection = AI_OFFICIAL_SAVE_COLLECTIONS[body.lane]
+        saved_records = []
+        duplicate_records = []
+
+        for index, item_model in enumerate(body.items):
+            item = item_model.model_dump()
+            _require_save_ready_item(item, index=index)
+            duplicate_key = "|".join([
+                body.lane,
+                _normalized_text(item.get("name") or item.get("title")),
+                _normalized_text(item.get("category")),
+                _normalized_text(item.get("storage_location") or item.get("due_date")),
+            ])
+            duplicate = await db[target_collection].find_one(
+                {
+                    "barn_id": barn_id,
+                    "ai_duplicate_key": duplicate_key,
+                    "deleted_at": None,
+                },
+                {"_id": 0, "id": 1, "name": 1, "title": 1},
+            )
+            if duplicate:
+                duplicate_records.append({
+                    "index": index,
+                    "existing_record_id": duplicate.get("id"),
+                    "name": duplicate.get("name") or duplicate.get("title"),
+                })
+                continue
+
+            base = {
+                "id": f"ai_save_{uuid.uuid4()}",
+                "barn_id": barn_id,
+                "ai_assisted": True,
+                "ai_official_save_lane": body.lane,
+                "ai_duplicate_key": duplicate_key,
+                "source_draft_job_id": job_id,
+                "source_id": job.get("source_id"),
+                "source_type": job.get("source_type"),
+                "source_hash": source_hash,
+                "reviewer_user_id": user.get("id"),
+                "reviewer_role": user.get("role"),
+                "reviewer_note": body.reviewer_note,
+                "created_at": now,
+                "updated_at": now,
+                "deleted_at": None,
+            }
+            if body.lane == "inventory_supply":
+                record = {
+                    **base,
+                    "name": item.get("name"),
+                    "category": item.get("category") or "uncategorized",
+                    "quantity": item.get("quantity"),
+                    "unit": item.get("unit"),
+                    "location": item.get("storage_location"),
+                    "storage_location": item.get("storage_location"),
+                    "horse_or_barn_assignment": item.get("horse_or_barn_assignment"),
+                    "notes": item.get("notes") or [],
+                    "review_status": "official_saved",
+                }
+            else:
+                record = {
+                    **base,
+                    "title": item.get("title") or item.get("name"),
+                    "name": item.get("name"),
+                    "type": item.get("category") or "repair",
+                    "details": item.get("details") or item.get("name"),
+                    "priority": item.get("priority") or "standard",
+                    "due_date": item.get("due_date"),
+                    "assigned_user_id": item.get("assigned_user_id"),
+                    "assigned_role": item.get("assigned_role"),
+                    "status": "open",
+                    "notes": item.get("notes") or [],
+                    "review_status": "official_saved",
+                }
+            if isinstance(record.get("notes"), str):
+                record["notes"] = [record["notes"]]
+            await db[target_collection].insert_one(record)
+            saved_records.append({
+                "id": record["id"],
+                "collection": target_collection,
+                "name": record.get("name") or record.get("title"),
+            })
+
+        if not saved_records:
+            raise HTTPException(409, "No new official records were saved")
+
+        review = {
+            "id": f"ai_review_{uuid.uuid4()}",
+            "job_id": job_id,
+            "barn_id": barn_id,
+            "user_id": user.get("id"),
+            "action": "official_save",
+            "lane": body.lane,
+            "official_records_written": True,
+            "saved_record_count": len(saved_records),
+            "duplicate_record_count": len(duplicate_records),
+            "created_at": now,
+        }
+        await db[AI_REVIEW_COLLECTION].insert_one(review)
+        await db[AI_JOB_COLLECTION].update_one(
+            {"id": job_id},
+            {"$set": {
+                "review_status": "official_saved",
+                "official_save_status": body.lane,
+                "official_records_written": True,
+                "updated_at": now,
+            }},
+        )
+        await audit_record(
+            action=f"ai.official_save.{body.lane}",
+            user=user,
+            request=request,
+            resource_type="ai_draft_job",
+            resource_id=job_id,
+            status_code=200,
+            metadata={
+                "lane": body.lane,
+                "target_collection": target_collection,
+                "saved_record_count": len(saved_records),
+                "duplicate_record_count": len(duplicate_records),
+                "official_records_written": True,
+                "autonomous_mutation_enabled": False,
+                "human_review_required": True,
+            },
+        )
+        job["review_status"] = "official_saved"
+        job["official_save_status"] = body.lane
+        job["official_records_written"] = True
+        job["updated_at"] = now
+        return {
+            "job": _job_projection(job),
+            "review": review,
+            "saved_records": saved_records,
+            "duplicates_detected": duplicate_records,
+            "official_records_written": True,
+            "autonomous_mutation_enabled": False,
         }
 
     return router

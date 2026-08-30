@@ -228,7 +228,141 @@ def test_inline_text_job_is_draft_only_and_review_does_not_save_records():
         assert "horse_health_records" not in db
 
 
-@pytest.mark.parametrize("role", ["rider", "parent", "groom", "working_student", "service_provider", "farrier"])
+def test_official_save_lane_1_creates_inventory_only_after_human_review():
+    db = FakeDb()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "photo_inventory",
+            "source_text": "Four bags senior feed in the feed room.",
+            "requested_output": "photo_to_inventory",
+        })
+        assert created.status_code == 201
+        job = created.json()["job"]
+
+        saved = client.post(f"/api/ai/draft-jobs/{job['id']}/official-save", json={
+            "lane": "inventory_supply",
+            "items": [{
+                "name": "Senior feed",
+                "category": "feed",
+                "quantity": 4,
+                "unit": "bag",
+                "storage_location": "Feed room",
+                "source_confidence": 0.88,
+                "review_status": "reviewed",
+            }],
+            "reviewer_note": "Founder reviewed from source photo.",
+        })
+
+    assert saved.status_code == 200
+    body = saved.json()
+    assert body["official_records_written"] is True
+    assert body["autonomous_mutation_enabled"] is False
+    assert body["saved_records"][0]["collection"] == "inventory"
+    assert db["inventory"].rows[0]["name"] == "Senior feed"
+    assert db["inventory"].rows[0]["ai_assisted"] is True
+    assert db["inventory"].rows[0]["ai_official_save_lane"] == "inventory_supply"
+    assert db["inventory"].rows[0]["reviewer_user_id"] == "u_1"
+    assert "invoices" not in db
+    assert "horse_health_records" not in db
+
+
+def test_official_save_lane_2_allows_staff_repair_ticket_creation():
+    db = FakeDb()
+    user = {"id": "u_groom", "role": "groom", "barn_id": "barn_1", "email": "groom@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "voice_transcript",
+            "source_text": "Create a repair ticket for the loose latch on stall three.",
+            "requested_output": "draft_tasks",
+        })
+        assert created.status_code == 201
+        job = created.json()["job"]
+
+        saved = client.post(f"/api/ai/draft-jobs/{job['id']}/official-save", json={
+            "lane": "work_task_repair",
+            "items": [{
+                "name": "Loose latch on stall three",
+                "title": "Repair loose latch on stall three",
+                "category": "repair",
+                "details": "Latch is loose and needs maintenance review.",
+                "priority": "standard",
+                "source_confidence": "high",
+                "review_status": "reviewed",
+            }],
+        })
+
+    assert saved.status_code == 200
+    assert saved.json()["saved_records"][0]["collection"] == "ai_work_repair_tickets"
+    ticket = db["ai_work_repair_tickets"].rows[0]
+    assert ticket["status"] == "open"
+    assert ticket["ai_assisted"] is True
+    assert ticket["reviewer_role"] == "groom"
+
+
+def test_official_save_blocks_low_confidence_uncorrected_and_duplicate_inventory():
+    db = FakeDb()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "photo_inventory",
+            "source_text": "Maybe senior feed in the feed room.",
+            "requested_output": "photo_to_inventory",
+        })
+        job_id = created.json()["job"]["id"]
+        blocked = client.post(f"/api/ai/draft-jobs/{job_id}/official-save", json={
+            "lane": "inventory_supply",
+            "items": [{
+                "name": "Senior feed",
+                "category": "feed",
+                "storage_location": "Feed room",
+                "source_confidence": "low",
+                "review_status": "reviewed",
+            }],
+        })
+        assert blocked.status_code == 422
+
+        first = client.post(f"/api/ai/draft-jobs/{job_id}/official-save", json={
+            "lane": "inventory_supply",
+            "items": [{
+                "name": "Senior feed",
+                "category": "feed",
+                "quantity": 4,
+                "unit": "bag",
+                "storage_location": "Feed room",
+                "source_confidence": "low",
+                "review_status": "corrected",
+            }],
+        })
+        assert first.status_code == 200
+
+        second_job = client.post("/api/ai/draft-jobs", json={
+            "source_type": "photo_inventory",
+            "source_text": "Senior feed in the feed room again.",
+            "requested_output": "photo_to_inventory",
+        }).json()["job"]
+        duplicate = client.post(f"/api/ai/draft-jobs/{second_job['id']}/official-save", json={
+            "lane": "inventory_supply",
+            "items": [{
+                "name": "Senior feed",
+                "category": "feed",
+                "quantity": 4,
+                "unit": "bag",
+                "storage_location": "Feed room",
+                "source_confidence": 0.9,
+                "review_status": "reviewed",
+            }],
+        })
+
+    assert duplicate.status_code == 409
+    assert "No new official records were saved" in duplicate.text
+    assert len(db["inventory"].rows) == 1
+
+
+@pytest.mark.parametrize("role", ["rider", "parent", "service_provider", "farrier"])
 def test_ai_draft_api_denies_roles_outside_reviewer_allowlist(role):
     db = FakeDb()
     user = {"id": f"u_{role}", "role": role, "barn_id": "barn_1", "email": f"{role}@example.test"}
@@ -253,6 +387,21 @@ def test_ai_draft_api_denies_roles_outside_reviewer_allowlist(role):
     assert "AI draft review access required" in created.text
     assert "ai_draft_jobs" not in db
     assert "ai_draft_sources" not in db
+
+
+@pytest.mark.parametrize("role", ["groom", "working_student"])
+def test_ai_draft_api_allows_staff_reviewer_flow(role):
+    db = FakeDb()
+    user = {"id": f"u_{role}", "role": role, "barn_id": "barn_1", "email": f"{role}@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "voice_transcript",
+            "source_text": "Draft feed room supply notes.",
+            "requested_output": "draft_records",
+        })
+        assert created.status_code == 201
+        assert created.json()["job"]["draft_only"] is True
 
 
 def test_ai_draft_api_allows_horse_owner_reviewer_flow():
