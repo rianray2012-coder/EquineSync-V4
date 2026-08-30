@@ -147,6 +147,7 @@ const workCandidatesFor = (job) => {
   const result = draftResultFor(job);
   const candidates = [
     ...arrayValue(result.draft_tasks),
+    ...arrayValue(result.draft_work_ticket_candidates),
     ...arrayValue(result.draft_training_note?.follow_up_tasks),
     ...arrayValue(result.draft_records).filter((record) => {
       const type = String(record?.type || record?.category || "").toLowerCase();
@@ -181,6 +182,83 @@ const workCandidatesFor = (job) => {
       notes: candidate?.notes || [],
     };
   });
+};
+
+const displayListValue = (value, fallback = "Needs review") => {
+  const text = textFromValue(value);
+  return text || fallback;
+};
+
+const sourceLanePreviewFor = (job) => {
+  const result = draftResultFor(job);
+  if (job.source_type === "photo_inventory") {
+    return {
+      testId: `ai-draft-expanded-photo-inventory-${job.id}`,
+      title: "Photo Inventory Draft",
+      items: [
+        ["Room or area", result.room_or_area],
+        ["Storage state", result.visible_storage_state],
+        ["Visible categories", result.visible_inventory_categories],
+        ["Count estimates", result.visible_count_estimates],
+        ["Uncertain or not counted", result.not_counted_or_uncertain],
+        ["Reorder or organization cues", result.organization_or_reorder_suggestions],
+      ],
+    };
+  }
+  if (job.source_type === "invoice" || job.source_type === "service_invoice") {
+    return {
+      testId: `ai-draft-expanded-invoice-service-${job.id}`,
+      title: "Invoice and Service Draft",
+      items: [
+        ["Vendor or provider", result.vendor_or_provider],
+        ["Document type", result.document_type],
+        ["Order or service date", result.order_date],
+        ["Inventory candidates", result.draft_inventory_candidates],
+        ["Service-history candidates", result.draft_service_history_candidates],
+        ["Invoice candidates", result.draft_invoice_candidates],
+        ["Payment status", result.draft_payment_status_candidate],
+      ],
+    };
+  }
+  if (job.source_type === "voice_transcript") {
+    return {
+      testId: `ai-draft-expanded-voice-capture-${job.id}`,
+      title: "Voice Capture Draft",
+      items: [
+        ["Capture context", result.voice_capture_context],
+        ["Work-ticket candidates", result.draft_work_ticket_candidates],
+        ["Inventory candidates", result.draft_inventory_candidates],
+        ["Invoice candidates", result.draft_invoice_candidates],
+        ["Schedule candidates", result.draft_schedule_candidates],
+        ["Training notes", result.draft_training_notes],
+      ],
+    };
+  }
+  if (job.source_type === "ride_data") {
+    return {
+      testId: `ai-draft-expanded-ride-data-${job.id}`,
+      title: "Ride Data Draft",
+      items: [
+        ["Ride summary", result.draft_ride_summary],
+        ["Training candidates", result.draft_training_candidates],
+      ],
+    };
+  }
+  if (job.source_type === "lesson_schedule") {
+    return {
+      testId: `ai-draft-expanded-schedule-${job.id}`,
+      title: "Schedule Draft",
+      items: [["Schedule candidates", result.draft_schedule_candidates]],
+    };
+  }
+  if (job.source_type === "training_note") {
+    return {
+      testId: `ai-draft-expanded-training-note-${job.id}`,
+      title: "Training Note Draft",
+      items: [["Training note", result.draft_training_note]],
+    };
+  }
+  return null;
 };
 
 const candidateFieldValue = (candidate, field, fallback = "Needs review") => {
@@ -682,6 +760,12 @@ export default function AiAutomation() {
                       <div className="text-[13px] text-equine-inkMuted leading-relaxed" data-testid={`ai-health-no-diagnosis-boundary-${job.id}`}>
                         This health score is a review-only candidate. It is not a diagnosis, treatment plan, medication instruction, emergency triage decision, provider message, notification, or official horse-health record.
                       </div>
+                      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2" data-testid={`ai-health-boundary-checklist-${job.id}`}>
+                        <StatusPill tone="warning" data-testid={`ai-health-candidate-only-${job.id}`}>Candidate Only</StatusPill>
+                        <StatusPill tone="warning" data-testid={`ai-health-reviewer-decides-escalation-${job.id}`}>Reviewer Decides Escalation</StatusPill>
+                        <StatusPill tone="critical" data-testid={`ai-health-do-not-notify-save-${job.id}`}>Do Not Notify or Save</StatusPill>
+                        <StatusPill tone="critical" data-testid={`ai-health-no-clinical-action-${job.id}`}>No Clinical Action</StatusPill>
+                      </div>
                       {healthScoreCandidateFor(job) && (
                         <div className="mt-3 rounded-lg border border-equine-cloud bg-white/75 px-3 py-2" data-testid={`ai-health-score-candidate-${job.id}`}>
                           <div className="label-eyebrow-muted mb-1">Draft Health Score Candidate</div>
@@ -695,6 +779,24 @@ export default function AiAutomation() {
                         </div>
                       )}
                     </div>
+                  </div>
+                </div>
+              )}
+              {sourceLanePreviewFor(job) && (
+                <div
+                  className="mb-4 rounded-lg border border-equine-cloud bg-white/75 p-3"
+                  data-testid={sourceLanePreviewFor(job).testId}
+                >
+                  <div className="label-eyebrow-muted mb-2">{sourceLanePreviewFor(job).title}</div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                    {sourceLanePreviewFor(job).items.map(([label, value]) => (
+                      <div key={label} className="rounded-lg border border-equine-cloud bg-equine-cloud/25 px-3 py-2">
+                        <div className="label-eyebrow-muted mb-1">{label}</div>
+                        <div className="text-[12.5px] text-equine-inkMuted leading-relaxed">
+                          {displayListValue(value)}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
