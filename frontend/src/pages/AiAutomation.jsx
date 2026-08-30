@@ -44,12 +44,14 @@ const REVIEW_LANES = [
   "Scheduling notes",
   "Voice transcripts",
   "Photo inventory",
+  "Health observations",
 ];
 
 const REVIEW_CHECKLIST = [
   "Confirm the source belongs to the current barn or user context.",
   "Edit or reject uncertain line items, names, quantities, dates, and prices.",
-  "Treat health scores and service suggestions as decision support only.",
+  "Treat health scores and service suggestions as draft decision support only.",
+  "Do not use AI health drafts as diagnosis, treatment, medication, emergency triage, or provider-message instructions.",
   "Use official save only for Founder-approved inventory and work-ticket lanes.",
 ];
 
@@ -93,6 +95,9 @@ const defaultPromptFor = (sourceType) => {
   if (sourceType === "voice_transcript") {
     return "Turn the voice note into draft tasks, inventory notes, lesson notes, invoice notes, or review questions.";
   }
+  if (sourceType === "health_observation") {
+    return "Organize draft health observations and a review-only health score candidate from user-provided details. Do not diagnose, recommend treatment, change medication, triage emergencies, notify participants, or save an official health record.";
+  }
   return "Extract draft records, review questions, and blocked actions. Keep all output review-required.";
 };
 
@@ -114,6 +119,11 @@ const arrayValue = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
 const draftResultFor = (job) => job.draft_result || {};
 
 const inventoryCandidatesFor = (job) => arrayValue(draftResultFor(job).draft_inventory_candidates);
+
+const healthScoreCandidateFor = (job) => {
+  const candidate = draftResultFor(job).draft_health_score_candidate;
+  return candidate && typeof candidate === "object" ? candidate : null;
+};
 
 const textFromValue = (value) => {
   if (value === null || value === undefined || value === "") return "";
@@ -660,6 +670,34 @@ export default function AiAutomation() {
                   </div>
                 ))}
               </div>
+              {job.source_type === "health_observation" && (
+                <div
+                  className="mb-4 rounded-lg border border-equine-clay/30 bg-equine-clay/5 p-3"
+                  data-testid={`ai-health-draft-only-boundary-${job.id}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="w-5 h-5 text-equine-clay mt-0.5 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="label-eyebrow-muted mb-1">Health Draft Review Boundary</div>
+                      <div className="text-[13px] text-equine-inkMuted leading-relaxed" data-testid={`ai-health-no-diagnosis-boundary-${job.id}`}>
+                        This health score is a review-only candidate. It is not a diagnosis, treatment plan, medication instruction, emergency triage decision, provider message, notification, or official horse-health record.
+                      </div>
+                      {healthScoreCandidateFor(job) && (
+                        <div className="mt-3 rounded-lg border border-equine-cloud bg-white/75 px-3 py-2" data-testid={`ai-health-score-candidate-${job.id}`}>
+                          <div className="label-eyebrow-muted mb-1">Draft Health Score Candidate</div>
+                          <div className="text-[12.5px] text-equine-ink">
+                            {candidateFieldValue(healthScoreCandidateFor(job), "score", "Score needs review")}
+                            {healthScoreCandidateFor(job)?.scale ? ` / ${healthScoreCandidateFor(job).scale}` : ""}
+                          </div>
+                          <div className="text-[12px] text-equine-inkMuted mt-1" data-testid={`ai-health-score-save-gated-${job.id}`}>
+                            Human review required; official health-score save remains separately gated.
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
               {arrayValue(draftResultFor(job).review_questions).length > 0 && (
                 <div className="mb-4 rounded-lg border border-equine-brass/25 bg-equine-brass/5 p-3">
                   <div className="label-eyebrow-muted mb-2">Questions Before Saving Elsewhere</div>
