@@ -63,6 +63,8 @@ def test_ai_reviewer_surfaces_expanded_pilot_extraction_lane_previews():
     source = _source()
 
     assert "sourceLanePreviewFor" in source
+    assert "Object.entries(value)" in source
+    assert '`${labelFor(key)}: ${textFromValue(entryValue) || String(entryValue)}`' in source
     assert 'testId: `ai-draft-expanded-photo-inventory-${job.id}`' in source
     assert 'testId: `ai-draft-expanded-invoice-service-${job.id}`' in source
     assert 'testId: `ai-draft-expanded-voice-capture-${job.id}`' in source

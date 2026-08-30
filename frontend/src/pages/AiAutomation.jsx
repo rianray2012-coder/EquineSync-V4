@@ -129,7 +129,7 @@ const textFromValue = (value) => {
   if (value === null || value === undefined || value === "") return "";
   if (Array.isArray(value)) return value.filter(Boolean).map(textFromValue).filter(Boolean).join("; ");
   if (typeof value === "object") {
-    return [
+    const primaryText = [
       value.title,
       value.name,
       value.task,
@@ -139,6 +139,12 @@ const textFromValue = (value) => {
       value.work_summary,
       value.note,
     ].filter(Boolean).map(textFromValue).join(" - ");
+    if (primaryText) return primaryText;
+    return Object.entries(value)
+      .filter(([, entryValue]) => entryValue !== null && entryValue !== undefined && entryValue !== "" && !(Array.isArray(entryValue) && entryValue.length === 0))
+      .map(([key, entryValue]) => `${labelFor(key)}: ${textFromValue(entryValue) || String(entryValue)}`)
+      .filter(Boolean)
+      .join("; ");
   }
   return String(value);
 };
