@@ -9,47 +9,65 @@ module.exports = {
         sans: ['Inter', 'ui-sans-serif', 'system-ui'],
       },
       colors: {
+        brand: {
+          graphite: '#232734',
+          slate: '#2E3550',
+          frost: '#F7F8FA',
+          mist: '#E3E6EB',
+          lilac: '#B8AECF',
+          lavender: '#D8D2E3',
+          ice: '#DCEAF4',
+          silverBlue: '#BCC9D6',
+          text: '#1E2128',
+          muted: '#667085',
+          disabled: '#98A2B3',
+          success: '#7FA98B',
+          warning: '#D7B67A',
+          critical: '#B46A6A',
+        },
         equine: {
-          /* ============ SURFACES (light) ============ */
-          black:       '#F7F5FA',  // primary BG — soft lavender ivory
-          soft:        '#EAE7F2',  // secondary surface — lavender mist
-          card:        '#FDFBFF',  // elevated card — pearl white
-          elevated:    '#FFFFFF',  // top elevation
-          tertiary:    '#F0EDF5',
-          hairline:    '#E0DCEC',
-          graphite:    '#B8BDC9',  // brushed silver (borders, dividers)
+          /* Temporary compatibility aliases. New UI should prefer `brand.*`. */
+          black:       '#F7F8FA',
+          soft:        '#E3E6EB',
+          card:        '#FFFFFF',
+          elevated:    '#FFFFFF',
+          tertiary:    '#ECEFF4',
+          hairline:    '#E3E6EB',
+          graphite:    '#BCC9D6',
+          cloud:       '#E3E6EB',
 
-          /* ============ TEXT (ink-style) ============ */
-          ink:         '#2A2A32',  // primary text
-          inkMuted:    '#666674',  // secondary text
-          inkSoft:     '#9A98A8',  // muted text
+          /* ============ TEXT ============ */
+          ink:         '#1E2128',
+          inkMuted:    '#667085',
+          inkSoft:     '#98A2B3',
 
           /* ============ Legacy text aliases ============ */
-          ivory:       '#2A2A32',  // legacy: text-equine-ivory now = primary ink
-          cream:       '#2E3448',
-          silver:      '#666674',
-          platinum:    '#9A98A8',
+          ivory:       '#1E2128',
+          cream:       '#2E3550',
+          silver:      '#667085',
+          platinum:    '#98A2B3',
 
-          /* ============ ACCENTS ============ */
-          navy:        '#2E3448',  // deep charcoal navy (sidebar, primary brand)
-          navyDeep:    '#22262F',
-          navyLift:    '#3D445A',
-          brass:       '#A7B7E7',  // icy blue (primary accent — was brass)
-          brassLight:  '#C2CDEC',  // light icy blue
-          saddle:      '#C7B6D9',  // dusty lavender (was saddle leather)
-          saddleDeep:  '#A593C0',
-          champagne:   '#B89B7A',  // muted champagne taupe (warm accent)
-          taupe:       '#B8BDC9',  // brushed silver
-          steel:       '#A7B7E7',  // icy blue (alias)
+          /* ============ BRAND ACCENTS ============ */
+          navy:        '#2E3550',
+          navyDeep:    '#232734',
+          navyLift:    '#37405E',
+          brass:       '#B8AECF',
+          brassLight:  '#D8D2E3',
+          saddle:      '#B8AECF',
+          saddleDeep:  '#9F93BD',
+          champagne:   '#B8AECF',
+          taupe:       '#BCC9D6',
+          steel:       '#DCEAF4',
 
           /* ============ STATUS (muted, refined) ============ */
-          sage:        '#7AA08A',  // soft sage (darker for contrast on light)
-          amber:       '#B5894A',  // muted golden sand (darkened)
-          clay:        '#8B5E6B',  // muted mauve
-          slate:       '#666674',
+          sage:        '#7FA98B',
+          amber:       '#D7B67A',
+          clay:        '#B46A6A',
+          rose:        '#B46A6A',
+          slate:       '#667085',
         },
         // ------------------------------------------------------------------
-        // Equine·Sync Admin Portal palette (Brand Guide 22 — Admin-1).
+        // EquineSync Admin Portal palette (Brand Guide 22 — Admin-1).
         // Used EXCLUSIVELY for /admin/* surfaces. Do not bleed into the
         // marketing or product pages — they already have their lavender
         // palette above. These four tokens are an exact, locked match of
@@ -57,7 +75,7 @@ module.exports = {
         // ------------------------------------------------------------------
         equinesync: {
           graphite: '#232734', // Midnight Graphite — primary surface for nav rail
-          slate:    '#2E3448', // Slate Navy — accents, hovers, brand pills
+          slate:    '#2E3550', // Slate Navy — accents, hovers, brand pills
           frost:    '#F7F8FA', // Frost White — main content bg, ink-on-graphite text
           lilac:    '#B8AECF', // Smoky Lilac — quiet accents, role pills, dividers
         },

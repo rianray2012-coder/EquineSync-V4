@@ -60,22 +60,22 @@ export default function Login() {
       <div className="relative hidden lg:block bg-equine-navy">
         <img
           src="https://static.prod-images.emergentagent.com/jobs/137f7c6b-a2e1-41c0-9c38-96d2409d644a/images/3ca3908290d52bc07be0b5f45e2f358fac3cee0e8034aa339d3b62ddac3b3403.png"
-          alt="Luxury equestrian arena"
+          alt="Modern equestrian workspace"
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-equine-navy via-equine-navy/85 to-equine-navyDeep" />
         <div className="relative z-10 h-full flex flex-col justify-between p-12 text-white">
           <Logo onNavy />
           <div className="max-w-md">
-            <div className="text-[10.5px] tracking-[0.28em] uppercase text-equine-brassLight font-semibold mb-5">An operating system for the modern barn</div>
+            <div className="text-[10.5px] tracking-[0.28em] uppercase text-brand-lavender font-semibold mb-5">Stable Operating System</div>
             <h2 className="font-display text-5xl xl:text-6xl leading-[1.05] text-white">
               Quiet precision.<br/>Operational mastery.
             </h2>
             <p className="mt-6 text-equine-silver/85 text-[15px] leading-relaxed">
-              Equine-Sync unites horse care, training, billing, and owner communication in one elegant platform — built for elite show barns, rehab facilities, and luxury private operations.
+              EquineSync unites horse care, training, billing, and owner communication in one calm operating platform for modern equestrian teams.
             </p>
           </div>
-          <div className="text-[11px] tracking-[0.22em] uppercase text-equine-brassLight/55">© Equine-Sync · Crafted for elite equestrian operations</div>
+          <div className="text-[11px] tracking-[0.22em] uppercase text-brand-lavender/55">© EquineSync · Quiet Precision. Operational Mastery.</div>
         </div>
       </div>
 
@@ -117,7 +117,7 @@ export default function Login() {
             {err && <div className="text-equine-clay text-sm" data-testid="login-error">{err}</div>}
             <button type="submit" onClick={submit} disabled={loading} data-testid="login-submit"
               className="btn-primary w-full disabled:opacity-60">
-              {loading ? "Signing in…" : "Enter the barn"}
+              {loading ? "Signing in…" : "Sign in"}
             </button>
           </form>
 
@@ -153,7 +153,7 @@ export default function Login() {
             </p>
             <Link
               to="/enroll"
-              className="mt-4 inline-flex items-center justify-center w-full bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-5 py-3 text-[13px] tracking-wide font-medium rounded-full"
+              className="mt-4 inline-flex items-center justify-center w-full bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-5 py-3 text-[13px] tracking-wide font-medium rounded-full"
               data-testid="login-join-link"
             >
               Join EquineSync

@@ -937,6 +937,8 @@ function ManagerHome({ user }) {
 function TrainerHome({ user }) {
   const [profile, setProfile] = useState(emptyTrainerProfile);
   const [completion, setCompletion] = useState(emptyCompletion);
+  const [operatingCenter, setOperatingCenter] = useState(null);
+  const [operatingErr, setOperatingErr] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState("");
@@ -944,12 +946,13 @@ function TrainerHome({ user }) {
 
   useEffect(() => {
     let alive = true;
-    api
+    const intakeRequest = api
       .get("/trainer-intake/profile")
       .then((r) => {
         if (!alive) return;
-        setProfile({ ...emptyTrainerProfile, ...r.data });
-        setCompletion(r.data?.completion || { percent: 0, missing_fields: [] });
+        const data = r.data;
+        setProfile({ ...emptyTrainerProfile, ...data });
+        setCompletion(data?.completion || { percent: 0, missing_fields: [] });
         setErr("");
       })
       .catch((e) => {
@@ -958,10 +961,28 @@ function TrainerHome({ user }) {
           setProfile({ ...emptyTrainerProfile });
           setCompletion(emptyCompletion);
           setErr("");
-          return;
+        } else {
+          setErr(e?.response?.data?.detail || "Could not load trainer intake.");
         }
-        setErr(e?.response?.data?.detail || "Could not load trainer intake.");
+      });
+
+    const operatingRequest = api
+      .get("/trainer/operating-center")
+      .then((r) => {
+        if (!alive) return;
+        setOperatingCenter(r.data || null);
+        setOperatingErr("");
       })
+      .catch((e) => {
+        if (!alive) return;
+        setOperatingCenter(null);
+        setOperatingErr(
+          e?.response?.data?.detail ||
+            "Assigned trainer work is not available yet."
+        );
+      });
+
+    Promise.allSettled([intakeRequest, operatingRequest])
       .finally(() => {
         if (alive) setLoading(false);
       });
@@ -1008,19 +1029,67 @@ function TrainerHome({ user }) {
     }
   };
 
+  const roleStatus = (user?.role_status || "").toLowerCase();
+  const isPendingReview = roleStatus === "pending_review";
+  const isRejected = roleStatus === "rejected";
+  const reviewTitle = isRejected
+    ? "Trainer review needs attention"
+    : isPendingReview
+    ? "Trainer profile under review"
+    : "Trainer profile reviewed";
+  const reviewBody = isRejected
+    ? "Your trainer account is not approved for expanded workspace access yet. Contact support before adding new assignments."
+    : isPendingReview
+    ? "Complete your intake while EquineSync reviews your trainer profile. Assigned-work context appears here when approved and connected."
+    : "Your reviewed trainer profile can show approved assigned horses, lessons, plans, and training context without opening billing or broad facility access.";
+  const counts = operatingCenter?.counts || {};
+  const assignedHorses = operatingCenter?.assigned_horses || [];
+  const upcomingLessons = operatingCenter?.upcoming_lessons || [];
+  const activePlans = operatingCenter?.active_plans || [];
+  const recentTraining = operatingCenter?.recent_training || [];
+  const riders = operatingCenter?.riders || [];
+
   return (
     <div className="max-w-6xl mx-auto pb-20 lg:pb-8" data-testid="role-home-trainer">
       <header className="mb-8">
         <div className="label-eyebrow mb-3">Trainer Home</div>
         <h1 className="font-display text-4xl md:text-5xl text-equine-ivory">
-          Trainer Setup Intent{profile.preferred_name ? ` for ${profile.preferred_name}` : ""}
+          Trainer Workspace{profile.preferred_name ? ` for ${profile.preferred_name}` : ""}
         </h1>
         <p className="mt-3 max-w-2xl text-equine-platinum/70 text-[15px] leading-relaxed">
-          Share your training focus and availability before the barn connects lessons, students, horses, or facility assignments.
+          Start with reviewed trainer intake, then work from assigned horses, lessons, plans, and training context as each connection is approved.
         </p>
       </header>
 
       <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] gap-5">
+        <section className="lg:col-span-2 rounded-2xl bg-brand-slate border border-brand-lilac/25 p-5" data-testid="trainer-review-posture">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+            <div>
+              <div className="label-eyebrow text-brand-lavender">Review posture</div>
+              <h2 className="font-display text-3xl text-white mt-1">{reviewTitle}</h2>
+              <p className="mt-2 max-w-3xl text-[13.5px] leading-relaxed text-brand-mist/80">{reviewBody}</p>
+            </div>
+            <div className="rounded-xl border border-brand-lilac/30 bg-brand-lilac/10 px-4 py-3 text-[11px] uppercase tracking-[0.22em] text-brand-lavender">
+              {roleStatus || "reviewed"}
+            </div>
+          </div>
+        </section>
+
+        <section className="lg:col-span-2 grid grid-cols-2 md:grid-cols-5 gap-3" data-testid="trainer-operating-summary">
+          {[
+            ["Assigned Horses", counts.assigned_horses || 0],
+            ["Upcoming Lessons", counts.upcoming_lessons || 0],
+            ["Active Plans", counts.active_plans || 0],
+            ["Recent Training", counts.recent_training || 0],
+            ["Riders", counts.riders || 0],
+          ].map(([label, value]) => (
+            <div key={label} className="rounded-2xl bg-equine-card border border-equine-hairline p-4">
+              <div className="text-[10.5px] tracking-[0.2em] uppercase text-equine-platinum/60">{label}</div>
+              <div className="mt-2 font-display text-3xl text-equine-ivory">{value}</div>
+            </div>
+          ))}
+        </section>
+
         <section className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid="trainer-intake-shell">
           <div className="flex items-start justify-between gap-4 mb-5">
             <div>
@@ -1127,15 +1196,15 @@ function TrainerHome({ user }) {
               </div>
 
               <label className="block">
-                <span className="label-eyebrow">Goals</span>
-                <textarea
-                  value={profile.goals || ""}
-                  onChange={(e) => setField("goals", e.target.value)}
-                  data-testid="trainer-goals"
-                  className="mt-2 input-luxe w-full min-h-[96px]"
-                  placeholder="What should Equine Sync help your program organize first?"
-                />
-              </label>
+                  <span className="label-eyebrow">Goals</span>
+                  <textarea
+                    value={profile.goals || ""}
+                    onChange={(e) => setField("goals", e.target.value)}
+                    data-testid="trainer-goals"
+                    className="mt-2 input-luxe w-full min-h-[96px]"
+                    placeholder="What should EquineSync help your program organize first?"
+                  />
+                </label>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <label className="block">
@@ -1198,16 +1267,51 @@ function TrainerHome({ user }) {
 
         <aside className="space-y-5">
           {[
-            ["Schedule", "Lesson blocks and availability remain separate from this intake.", CalendarDays],
-            ["Assigned Horses", pulsePanelText(pulse, "horse_care", "Horse assignments are not created from this page."), Heart],
-            ["Lesson Students", "Student enrollment stays in the approved program workflow.", Cat],
-            ["Training Notes", "Training records are not created until a horse or program is connected.", ClipboardList],
+            [
+              "Upcoming Lessons",
+              upcomingLessons.length
+                ? upcomingLessons.slice(0, 3).map((lesson) => lesson.horse_name || lesson.rider_name || "Scheduled lesson").join(" · ")
+                : "Approved lesson context appears here after a barn connects assigned lessons.",
+              CalendarDays,
+            ],
+            [
+              "Assigned Horses",
+              assignedHorses.length
+                ? assignedHorses.slice(0, 3).map((horse) => horse.name || "Assigned horse").join(" · ")
+                : pulsePanelText(pulse, "horse_care", "Horse assignments are not created from this page."),
+              Heart,
+            ],
+            [
+              "Active Plans",
+              activePlans.length
+                ? activePlans.slice(0, 3).map((plan) => (plan.data || {}).goal || (plan.data || {}).horse_name || "Training plan").join(" · ")
+                : "Training plans appear after a horse and trainer assignment are connected.",
+              ClipboardList,
+            ],
+            [
+              "Recent Training",
+              recentTraining.length
+                ? recentTraining.slice(0, 3).map((entry) => entry.horse_name || entry.discipline || "Training note").join(" · ")
+                : "Training records stay in their approved horse or program workflows.",
+              Sparkles,
+            ],
+            [
+              "Rider Context",
+              riders.length
+                ? riders.slice(0, 3).map((rider) => rider.full_name || "Assigned rider").join(" · ")
+                : "Rider context appears only through approved lesson connections.",
+              Cat,
+            ],
             ["Documents", "Credentials, waivers, and signature envelopes stay in approved document workflows.", FileText],
-            ["Messages", "Use Messages or support channels for setup questions.", MessageSquare],
+            [
+              "Workspace Status",
+              operatingErr || "This read-only summary uses the RF9 trainer operating-center projection.",
+              MessageSquare,
+            ],
           ].map(([title, body, Icon]) => (
             <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`trainer-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
               <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
+                <Icon className="w-5 h-5 text-brand-lilac" strokeWidth={1.5} />
               </div>
               <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
               <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
@@ -1332,7 +1436,7 @@ function BarnOwnerHome({ user }) {
                     onChange={(e) => setField("preferred_name", e.target.value)}
                     data-testid="barn-owner-preferred-name"
                     className="mt-2 input-luxe w-full"
-                    placeholder="What should Equine Sync call you?"
+                    placeholder="What should EquineSync call you?"
                   />
                 </label>
                 <label className="block">
@@ -1460,7 +1564,7 @@ function BarnOwnerHome({ user }) {
                   onChange={(e) => setField("setup_goals", e.target.value)}
                   data-testid="barn-owner-setup-goals"
                   className="mt-2 input-luxe w-full min-h-[96px]"
-                  placeholder="What do you want Equine Sync to help organize first?"
+                  placeholder="What do you want EquineSync to help organize first?"
                 />
               </label>
 
@@ -1678,7 +1782,7 @@ function OwnerHome({ user }) {
                   onChange={(e) => setField("riding_or_care_goals", e.target.value)}
                   data-testid="owner-care-goals"
                   className="mt-2 input-luxe w-full min-h-[90px]"
-                  placeholder="What would make Equine Sync useful for you and your horse?"
+                  placeholder="What would make EquineSync useful for you and your horse?"
                 />
               </label>
 
@@ -1978,7 +2082,7 @@ function RiderHome({ user }) {
                   className="mt-1"
                 />
                 <span className="text-[13px] text-equine-platinum/75 leading-relaxed">
-                  I understand Equine Sync will use this profile to help my barn or trainer prepare a safer riding experience. Formal documents and signatures are handled separately.
+                  I understand EquineSync will use this profile to help my barn or trainer prepare a safer riding experience. Formal documents and signatures are handled separately.
                 </span>
               </label>
 
