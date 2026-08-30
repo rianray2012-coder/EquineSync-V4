@@ -136,7 +136,6 @@ export default function SubscriptionBilling() {
       LOCAL_FREE_TIERS.has(planTier)
       || ["manual", "comped"].includes(sub.billing_provider)
       || sub.purchase_platform === "admin"
-      || (Number(sub.amount_cents || 0) === 0 && !sub.billing_cycle)
     ),
   );
   const canManageStripe = Boolean(sub && !manualOrFreeSubscription);

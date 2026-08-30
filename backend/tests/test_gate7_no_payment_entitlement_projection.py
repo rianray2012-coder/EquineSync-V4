@@ -47,6 +47,7 @@ def test_subscription_billing_ui_projects_manual_free_access_as_non_stripe():
     assert "LOCAL_FREE_TIERS.has(planTier)" in ui
     assert '["manual", "comped"].includes(sub.billing_provider)' in ui
     assert 'sub.purchase_platform === "admin"' in ui
+    assert "Number(sub.amount_cents" not in ui
     assert "const canManageStripe = Boolean(sub && !manualOrFreeSubscription);" in ui
     assert 'data-testid="subscription-manual-access-note"' in ui
     assert "Pilot/free access is managed by EquineSync." in ui
