@@ -275,6 +275,7 @@ def test_stripe_live_payment_readiness_snapshot_is_redacted_and_disabled_by_defa
         "live_checkout_enabled": False,
         "live_portal_enabled": False,
         "live_founder_checkout_proof_enabled": False,
+        "live_automatic_tax_enabled": False,
         "live_money_enabled": False,
     }
     rendered = json.dumps(snapshot)
@@ -369,6 +370,7 @@ def test_live_checkout_founder_proof_path_uses_hosted_checkout_and_integration_i
     monkeypatch.setenv("ALLOWED_BILLING_ORIGINS", "https://app.equine-sync.test")
     monkeypatch.setenv("STRIPE_LIVE_CHECKOUT_ENABLED", "true")
     monkeypatch.setenv("STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED", "true")
+    monkeypatch.delenv("STRIPE_LIVE_AUTOMATIC_TAX_ENABLED", raising=False)
     calls = []
 
     def fake_stripe_client(api_key=None):
@@ -404,11 +406,48 @@ def test_live_checkout_founder_proof_path_uses_hosted_checkout_and_integration_i
     assert "automatic_tax" not in checkout_params
 
 
+def test_live_checkout_founder_proof_path_enables_automatic_tax_only_with_tax_flag(monkeypatch):
+    monkeypatch.setenv("STRIPE_API_KEY", "rk_live_activation_guard")
+    monkeypatch.setenv("APP_BASE_URL", "https://app.equine-sync.test")
+    monkeypatch.setenv("ALLOWED_BILLING_ORIGINS", "https://app.equine-sync.test")
+    monkeypatch.setenv("STRIPE_LIVE_CHECKOUT_ENABLED", "true")
+    monkeypatch.setenv("STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED", "true")
+    monkeypatch.setenv("STRIPE_LIVE_AUTOMATIC_TAX_ENABLED", "true")
+    calls = []
+
+    def fake_stripe_client(api_key=None):
+        assert api_key == "rk_live_activation_guard"
+        return _FakeStripeClient(calls)
+
+    monkeypatch.setattr("routes.subscriptions.stripe_client", fake_stripe_client)
+    db = _FakeDB()
+    client, _ = _client({
+        "id": "billing-admin-1",
+        "barn_id": "barn-stripe-proof",
+        "role": "admin",
+        "platform_role": "billing_admin",
+    }, db)
+
+    checkout = client.post("/api/subscriptions/checkout", json={
+        "plan_tier_code": "starter_barn",
+        "billing_cycle": "monthly",
+        "origin_url": "https://app.equine-sync.test/dashboard",
+    })
+
+    assert checkout.status_code == 200, checkout.text
+    checkout_params = calls[-1]["params"]
+    assert checkout_params["automatic_tax"] == {"enabled": True}
+    assert checkout_params["customer_update"] == {"address": "auto"}
+    assert checkout_params["billing_address_collection"] == "required"
+    assert "payment_method_types" not in checkout_params
+
+
 def test_stripe_test_mode_checkout_webhook_and_owner_safe_subscription_projection(monkeypatch):
     monkeypatch.setenv("STRIPE_API_KEY", "rk_test_activation_proof")
     monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_activation_proof")
     monkeypatch.setenv("APP_BASE_URL", "https://app.equine-sync.test")
     monkeypatch.setenv("ALLOWED_BILLING_ORIGINS", "https://app.equine-sync.test")
+    monkeypatch.setenv("STRIPE_LIVE_AUTOMATIC_TAX_ENABLED", "true")
     calls = []
 
     def fake_stripe_client(api_key=None):
@@ -467,6 +506,8 @@ def test_stripe_test_mode_checkout_webhook_and_owner_safe_subscription_projectio
     assert checkout_params["integration_identifier"].startswith("equinesync_checkout_")
     assert "payment_method_types" not in checkout_params
     assert "automatic_tax" not in checkout_params
+    assert "customer_update" not in checkout_params
+    assert "billing_address_collection" not in checkout_params
 
     payload = {
         "id": "evt_test_activation_proof",

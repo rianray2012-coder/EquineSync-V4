@@ -100,6 +100,7 @@ def stripe_live_payment_readiness_snapshot(
         "STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED",
         env=source,
     )
+    live_automatic_tax_enabled = stripe_env_flag_enabled("STRIPE_LIVE_AUTOMATIC_TAX_ENABLED", env=source)
     return {
         "provider": "stripe",
         "activation_target": "live_payment_readiness",
@@ -110,6 +111,7 @@ def stripe_live_payment_readiness_snapshot(
         "live_checkout_enabled": live_checkout_enabled,
         "live_portal_enabled": live_portal_enabled,
         "live_founder_checkout_proof_enabled": live_founder_checkout_proof_enabled,
+        "live_automatic_tax_enabled": live_automatic_tax_enabled,
         "live_money_enabled": live_checkout_enabled or live_portal_enabled,
     }
 

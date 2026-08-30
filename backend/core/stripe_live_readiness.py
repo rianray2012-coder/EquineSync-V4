@@ -173,6 +173,12 @@ def build_stripe_live_config_readiness_report(
             "stripe_live_founder_checkout_proof_flag_enabled",
             "STRIPE_LIVE_FOUNDER_CHECKOUT_PROOF_ENABLED must remain false during read-only configuration proof.",
         ))
+    if snapshot["live_automatic_tax_enabled"]:
+        issues.append(_issue(
+            "blocker",
+            "stripe_live_automatic_tax_flag_enabled",
+            "STRIPE_LIVE_AUTOMATIC_TAX_ENABLED must remain false until final live Checkout tax activation approval.",
+        ))
     if snapshot["live_portal_enabled"]:
         issues.append(_issue(
             "blocker",
@@ -234,6 +240,7 @@ def build_stripe_live_config_readiness_report(
             "database_writes_performed": False,
             "live_money_enabled": bool(snapshot["live_money_enabled"]),
             "live_founder_checkout_proof_enabled": bool(snapshot["live_founder_checkout_proof_enabled"]),
+            "live_automatic_tax_enabled": bool(snapshot["live_automatic_tax_enabled"]),
         },
         "deferred": [
             "No live Checkout Session creation.",
@@ -280,6 +287,7 @@ def render_stripe_live_config_readiness_markdown(report: Mapping[str, Any]) -> s
         "live_checkout_enabled",
         "live_portal_enabled",
         "live_founder_checkout_proof_enabled",
+        "live_automatic_tax_enabled",
         "live_money_enabled",
     ):
         lines.append(f"| {key} | {stripe.get(key)} |")
