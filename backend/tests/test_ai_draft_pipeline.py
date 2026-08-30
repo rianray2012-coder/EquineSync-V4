@@ -142,6 +142,13 @@ class ManualReviewExtractor:
         }
 
 
+class FailingExtractor:
+    async def extract(self, **kwargs):
+        raise RuntimeError(
+            "provider failure included private source text for Zoe Spoon and invoice INV-123"
+        )
+
+
 class PdfTextFallbackExtractor(OpenAIDraftExtractor):
     def __init__(self):
         super().__init__(api_key="test-key")
@@ -182,13 +189,15 @@ class PdfManualFallbackExtractor(OpenAIDraftExtractor):
         return []
 
 
-def app_for(db, user, storage=None, extractor=None):
+def app_for(db, user, storage=None, extractor=None, audit_sink=None):
     app = FastAPI()
 
     async def get_current_user():
         return user
 
     async def audit_record(**kwargs):
+        if audit_sink is not None:
+            audit_sink.append(kwargs)
         return None
 
     app.include_router(build_router(
@@ -230,6 +239,104 @@ def test_inline_text_job_is_draft_only_and_review_does_not_save_records():
         assert "horse_health_records" not in db
 
 
+def test_ai_upload_source_projection_and_storage_metadata_do_not_expose_raw_filename_or_prompt_hint():
+    db = FakeDb()
+    storage = FakeStorage()
+    audit_events = []
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "owner@example.test"}
+    app = app_for(db, user, storage=storage, audit_sink=audit_events)
+    raw_filename = "Zoe Spoon Farrier Invoice INV-123.pdf"
+    raw_prompt_hint = "Extract Zoe Spoon farrier invoice details for Pony Secret."
+
+    with TestClient(app) as client:
+        intent = client.post("/api/ai/draft-jobs/upload-intents", json={
+            "source_type": "service_invoice",
+            "filename": raw_filename,
+            "mime_type": "application/pdf",
+            "byte_size": 2048,
+            "prompt_hint": raw_prompt_hint,
+        })
+
+    assert intent.status_code == 201
+    source = intent.json()["source"]
+    assert "filename" not in source
+    assert source["filename_present"] is True
+    assert source["filename_extension"] == "pdf"
+
+    stored_source = db["ai_draft_sources"].rows[0]
+    assert stored_source["filename"] == "source.pdf"
+    assert stored_source["storage_key"].endswith("/source.pdf")
+    assert raw_filename not in stored_source["storage_key"]
+    assert stored_source["filename_sha256"]
+    assert stored_source["prompt_hint_present"] is True
+    assert stored_source["prompt_hint_sha256"]
+    assert "prompt_hint" not in stored_source
+    assert raw_prompt_hint not in str(stored_source)
+
+    audit_metadata = audit_events[-1]["metadata"]
+    assert audit_metadata["filename_present"] is True
+    assert audit_metadata["filename_extension"] == "pdf"
+    assert audit_metadata["prompt_hint_present"] is True
+    assert audit_metadata["prompt_hint_sha256"]
+    assert raw_filename not in str(audit_metadata)
+    assert raw_prompt_hint not in str(audit_metadata)
+
+
+def test_ai_review_note_metadata_is_hashed_not_stored_raw():
+    db = FakeDb()
+    audit_events = []
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user, audit_sink=audit_events)
+    private_note = "Zoe Spoon's horse note needs a parent check before anything official."
+
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "voice_transcript",
+            "source_text": "Draft a tack inventory note.",
+            "requested_output": "draft_records",
+        })
+        assert created.status_code == 201
+        job = created.json()["job"]
+        reviewed = client.post(f"/api/ai/draft-jobs/{job['id']}/review", json={
+            "action": "approved_no_save",
+            "note": private_note,
+        })
+
+    assert reviewed.status_code == 200
+    review_row = db["ai_draft_reviews"].rows[0]
+    assert "note" not in review_row
+    assert review_row["note_present"] is True
+    assert review_row["note_sha256"]
+    assert private_note not in str(review_row)
+
+    review_audit = [event for event in audit_events if event["action"] == "ai.draft_job.review"][-1]
+    assert review_audit["metadata"]["note_present"] is True
+    assert review_audit["metadata"]["note_sha256"]
+    assert private_note not in str(review_audit["metadata"])
+
+
+def test_ai_extractor_failure_audit_uses_error_type_not_raw_exception_text():
+    db = FakeDb()
+    audit_events = []
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user, extractor=FailingExtractor(), audit_sink=audit_events)
+
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "voice_transcript",
+            "source_text": "Private source text for Zoe Spoon and invoice INV-123.",
+            "requested_output": "draft_records",
+        })
+
+    assert created.status_code == 502
+    failure_audit = audit_events[-1]
+    assert failure_audit["action"] == "ai.draft_job.extract"
+    assert failure_audit["metadata"]["error_type"] == "RuntimeError"
+    assert "error" not in failure_audit["metadata"]
+    assert "Zoe Spoon" not in str(failure_audit["metadata"])
+    assert "INV-123" not in str(failure_audit["metadata"])
+
+
 def test_official_save_lane_1_creates_inventory_only_after_human_review():
     db = FakeDb()
     user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
@@ -266,6 +373,9 @@ def test_official_save_lane_1_creates_inventory_only_after_human_review():
     assert db["inventory"].rows[0]["ai_assisted"] is True
     assert db["inventory"].rows[0]["ai_official_save_lane"] == "inventory_supply"
     assert db["inventory"].rows[0]["reviewer_user_id"] == "u_1"
+    assert "reviewer_note" not in db["inventory"].rows[0]
+    assert db["inventory"].rows[0]["reviewer_note_present"] is True
+    assert db["inventory"].rows[0]["reviewer_note_sha256"]
     assert "invoices" not in db
     assert "horse_health_records" not in db
 
@@ -688,5 +798,4 @@ def test_ai_source_validation_and_private_key_boundaries():
     with pytest.raises(ValueError):
         validate_ai_source(source_type="photo_inventory", mime_type="application/pdf", byte_size=10)
     key = private_ai_storage_key(barn_id="barn_1", source_id="ai_src_1", filename="../Bad File.PDF")
-    assert key.startswith("barn_1/ai-draft-sources/ai_src_1/")
-    assert "/" not in key.rsplit("/", 1)[-1]
+    assert key == "barn_1/ai-draft-sources/ai_src_1/source.pdf"
