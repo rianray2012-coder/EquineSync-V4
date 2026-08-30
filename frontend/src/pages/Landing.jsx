@@ -274,9 +274,14 @@ export default function Landing() {
   return (
     <div className="min-h-screen w-full bg-equine-navyDeep text-white font-sans" data-testid="landing-page">
       {/* Top nav */}
-      <header className="px-6 md:px-12 py-6 flex items-center justify-between max-w-7xl mx-auto">
-        <Logo onNavy size={48} />
-        <nav className="flex items-center gap-6">
+      <header className="px-6 md:px-12 py-6 flex items-center justify-between gap-4 max-w-7xl mx-auto">
+        <div className="sm:hidden shrink-0">
+          <Logo onNavy size={40} showTagline={false} />
+        </div>
+        <div className="hidden sm:block">
+          <Logo onNavy size={48} />
+        </div>
+        <nav className="flex items-center gap-4 sm:gap-6">
           <a
             href="#pricing"
             className="hidden sm:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
@@ -286,7 +291,7 @@ export default function Landing() {
           </a>
           <Link
             to="/login"
-            className="text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
+            className="hidden sm:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
             data-testid="nav-signin"
           >
             Sign in
