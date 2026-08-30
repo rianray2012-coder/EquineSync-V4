@@ -274,7 +274,7 @@ export default function Landing() {
   return (
     <div className="min-h-screen w-full bg-equine-navyDeep text-white font-sans" data-testid="landing-page">
       {/* Top nav */}
-      <header className="px-6 md:px-12 py-6 flex items-center justify-between gap-4 max-w-7xl mx-auto">
+      <header className="px-4 sm:px-6 md:px-12 py-6 flex items-center justify-between gap-3 sm:gap-4 max-w-7xl mx-auto">
         <div className="sm:hidden shrink-0">
           <Logo onNavy size={60} showTagline={false} />
         </div>
@@ -301,7 +301,7 @@ export default function Landing() {
           </Link>
           <button
             onClick={() => goToEnrollment()}
-            className="bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-4 sm:px-5 py-2 text-[12.5px] sm:text-[13px] tracking-wide font-medium rounded-full"
+            className="hidden sm:inline-flex bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-4 sm:px-5 py-2 text-[12.5px] sm:text-[13px] tracking-wide font-medium rounded-full"
             data-testid="nav-join-cta"
           >
             Join EquineSync

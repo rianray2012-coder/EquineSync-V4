@@ -16,7 +16,7 @@
 //
 // Soft-enforcement only. Usage meters change accent color past 80% / 100% but
 // never disable any CTA. All copy stays within the approved Equine-Sync brand
-// palette — no matte black, no warm traditional-equestrian aesthetics, no off-brand tokens.
+// palette — no deep-neutral drift, no warm traditional-equestrian aesthetics, no off-brand tokens.
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
