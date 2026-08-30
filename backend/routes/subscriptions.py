@@ -146,7 +146,9 @@ def _uses_individual_owner_billing_workspace(user: dict, tier: Optional[str] = N
     """
     if _role(user) != "horse_owner":
         return False
-    return tier in OWNER_BILLING_TIERS or tier is None
+    if tier is None:
+        return not bool(user.get("barn_id"))
+    return tier in OWNER_BILLING_TIERS
 
 
 def _billing_workspace_id(user: dict, tier: Optional[str] = None) -> str:
