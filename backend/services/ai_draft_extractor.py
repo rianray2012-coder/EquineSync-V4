@@ -57,6 +57,15 @@ AI_BLOCKED_ACTIONS = [
     "official_record_save",
     "ai_autonomous_mutation",
 ]
+HEALTH_REVIEW_BLOCKED_ACTIONS = [
+    "diagnosis",
+    "treatment_recommendation",
+    "treatment_decision",
+    "medication_change",
+    "emergency_triage",
+    "participant_notification",
+    "provider_message_send",
+]
 INVENTORY_REVIEW_STATUSES = {"needs_review", "candidate_only"}
 INVENTORY_CANDIDATE_TEMPLATE = {
     "item_name": None,
@@ -222,17 +231,36 @@ def output_schema_hint(source_type: str) -> str:
             "review_required": True,
             "source_category": "health_observation",
             **COMMON_REVIEW_FIELDS,
+            "not_diagnosis": True,
             "draft_health_observation": {
                 "horse": None,
                 "observer": None,
                 "observed_at": None,
+                "appetite": None,
+                "water_intake": None,
+                "manure_or_urine_notes": None,
+                "behavior_or_attitude": None,
+                "gait_or_movement": None,
+                "vitals_if_provided": {
+                    "temperature": None,
+                    "heart_rate": None,
+                    "respiration_rate": None,
+                },
                 "symptoms_or_signs": [],
-                "severity_or_score": None,
+                "injury_or_lameness_flags": [],
+                "pain_or_comfort_observations": [],
                 "trend_notes": [],
                 "recommended_review_role": None,
             },
+            "draft_health_score_candidate": {
+                "score": None,
+                "scale": None,
+                "basis": [],
+                "confidence": None,
+                "requires_human_confirmation": True,
+            },
             "review_questions": [],
-            "blocked_actions": ["official_record_save", "diagnosis", "treatment_decision", "emergency_triage"],
+            "blocked_actions": [*AI_BLOCKED_ACTIONS, *HEALTH_REVIEW_BLOCKED_ACTIONS],
         })
     return json.dumps({
         "draft_only": True,
@@ -268,7 +296,19 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
             parsed["blocked_actions"].append(action)
 
     if source_type == "health_observation":
-        for action in ["diagnosis", "treatment_decision"]:
+        parsed["not_diagnosis"] = True
+        if not isinstance(parsed.get("draft_health_observation"), dict):
+            parsed["draft_health_observation"] = {}
+        if not isinstance(parsed.get("draft_health_score_candidate"), dict):
+            parsed["draft_health_score_candidate"] = {
+                "score": None,
+                "scale": None,
+                "basis": [],
+                "confidence": None,
+                "requires_human_confirmation": True,
+            }
+        parsed["draft_health_score_candidate"]["requires_human_confirmation"] = True
+        for action in HEALTH_REVIEW_BLOCKED_ACTIONS:
             if action not in parsed["blocked_actions"]:
                 parsed["blocked_actions"].append(action)
     if source_type == "lesson_schedule" and "participant_notification" not in parsed["blocked_actions"]:

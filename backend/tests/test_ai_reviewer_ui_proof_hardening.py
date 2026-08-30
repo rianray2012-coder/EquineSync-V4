@@ -20,6 +20,7 @@ def test_ai_reviewer_lanes_have_stable_test_ids():
         "Scheduling notes",
         "Voice transcripts",
         "Photo inventory",
+        "Health observations",
     ]:
         assert f'"{lane}"' in source
 
@@ -32,10 +33,25 @@ def test_ai_reviewer_checklist_has_stable_test_ids():
     for checklist_item in [
         "Confirm the source belongs to the current barn or user context.",
         "Edit or reject uncertain line items, names, quantities, dates, and prices.",
-        "Treat health scores and service suggestions as decision support only.",
+        "Treat health scores and service suggestions as draft decision support only.",
+        "Do not use AI health drafts as diagnosis, treatment, medication, emergency triage, or provider-message instructions.",
         "Use official save only for Founder-approved inventory and work-ticket lanes.",
     ]:
         assert f'"{checklist_item}"' in source
+
+
+def test_health_observation_reviewer_has_draft_only_clinical_boundary_hooks():
+    source = _source()
+
+    assert '["health_observation", "Health observation"]' in source
+    assert "Organize draft health observations and a review-only health score candidate" in source
+    assert 'data-testid={`ai-health-draft-only-boundary-${job.id}`}' in source
+    assert 'data-testid={`ai-health-no-diagnosis-boundary-${job.id}`}' in source
+    assert 'data-testid={`ai-health-score-candidate-${job.id}`}' in source
+    assert 'data-testid={`ai-health-score-save-gated-${job.id}`}' in source
+    assert "not a diagnosis, treatment plan, medication instruction, emergency triage decision" in source
+    assert "official health-score save remains separately gated" in source
+    assert '"health_score"' not in source
 
 
 def test_status_pill_forwards_test_hook_props():

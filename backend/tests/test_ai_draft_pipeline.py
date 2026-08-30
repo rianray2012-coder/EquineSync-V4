@@ -788,7 +788,7 @@ def test_pdf_text_fallback_used_when_direct_pdf_extraction_fails():
         ("lesson_schedule", "draft_schedule_candidates", "participant_notification"),
         ("training_note", "draft_training_note", "medical_or_safety_decision"),
         ("voice_transcript", "draft_tasks", "payment_status_change"),
-        ("health_observation", "draft_health_observation", "diagnosis"),
+        ("health_observation", "draft_health_score_candidate", "diagnosis"),
         ("photo_inventory", "draft_inventory_candidates", "official_record_save"),
         ("service_invoice", "draft_invoice_candidates", "official_record_save"),
     ],
@@ -851,6 +851,74 @@ def test_parse_output_normalizes_ai_response_to_no_save_review_required_payload(
     assert "ai_autonomous_mutation" in parsed["blocked_actions"]
     assert "diagnosis" in parsed["blocked_actions"]
     assert "treatment_decision" in parsed["blocked_actions"]
+    assert "treatment_recommendation" in parsed["blocked_actions"]
+    assert "medication_change" in parsed["blocked_actions"]
+    assert "emergency_triage" in parsed["blocked_actions"]
+    assert "participant_notification" in parsed["blocked_actions"]
+    assert "provider_message_send" in parsed["blocked_actions"]
+    assert parsed["not_diagnosis"] is True
+    assert parsed["draft_health_score_candidate"]["requires_human_confirmation"] is True
+
+
+def test_health_observation_schema_is_draft_score_only_and_blocks_clinical_actions():
+    schema = json.loads(output_schema_hint("health_observation"))
+
+    assert schema["draft_only"] is True
+    assert schema["review_required"] is True
+    assert schema["source_category"] == "health_observation"
+    assert schema["not_diagnosis"] is True
+    assert schema["draft_health_score_candidate"]["requires_human_confirmation"] is True
+    for field in [
+        "appetite",
+        "water_intake",
+        "manure_or_urine_notes",
+        "behavior_or_attitude",
+        "gait_or_movement",
+        "vitals_if_provided",
+        "injury_or_lameness_flags",
+        "pain_or_comfort_observations",
+    ]:
+        assert field in schema["draft_health_observation"]
+    for blocked_action in [
+        "official_record_save",
+        "ai_autonomous_mutation",
+        "diagnosis",
+        "treatment_recommendation",
+        "treatment_decision",
+        "medication_change",
+        "emergency_triage",
+        "participant_notification",
+        "provider_message_send",
+    ]:
+        assert blocked_action in schema["blocked_actions"]
+
+
+def test_health_observation_cannot_request_official_health_score_save_lane():
+    db = FakeDb()
+    user = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "founder@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "health_observation",
+            "source_text": "Horse ate breakfast but was quieter than usual and took a few short steps.",
+            "requested_output": "draft_health_score",
+        })
+        assert created.status_code == 201
+        job = created.json()["job"]
+
+        saved = client.post(f"/api/ai/draft-jobs/{job['id']}/official-save", json={
+            "lane": "health_score",
+            "items": [{
+                "name": "Draft health score",
+                "category": "health",
+                "details": "Review-only health score candidate.",
+                "source_confidence": "medium",
+                "review_status": "reviewed",
+            }],
+        })
+
+    assert saved.status_code == 422
+    assert "horse_health_records" not in db
 
 
 def test_parse_output_normalizes_inventory_candidates_to_reviewable_shape():
