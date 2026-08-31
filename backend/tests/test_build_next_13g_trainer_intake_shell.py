@@ -68,11 +68,15 @@ def test_bn13g_artifacts_exist():
         README,
         ROOT / "backend" / "routes" / "trainer_intake.py",
         FRONTEND / "pages" / "RoleHome.jsx",
+        FRONTEND / "pages" / "RoleIntake.jsx",
         FRONTEND / "lib" / "roleLanding.js",
     ]
     for path in files:
         assert path.exists(), str(path)
-        assert path.stat().st_size > 500, str(path)
+        if path.name == "RoleHome.jsx":
+            assert path.stat().st_size > 50, str(path)
+        else:
+            assert path.stat().st_size > 500, str(path)
 
 
 def test_trainer_get_returns_current_user_default_profile_only():
@@ -232,22 +236,25 @@ def test_server_registers_trainer_router_without_product_facility_gate():
     server = _read(ROOT / "backend" / "server.py")
 
     assert "build_trainer_intake_router" in server
+    assert "build_trainer_operating_center_router" in server
     assert "Build-Next-13G" in server
-    section = server.split("# Build-Next-13G", 1)[1].split("# Notifications", 1)[0]
+    section = server.split("# Build-Next-13G", 1)[1].split("# RF9", 1)[0]
     assert "PRODUCT_FACILITY_DEPS" not in section
     assert "PRODUCT_FACILITY_DEPS_OPTIONAL_AUTH" not in section
+    rf9_section = server.split("# RF9", 1)[1].split("# RF10", 1)[0]
+    assert "PRODUCT_FACILITY_DEPS" in rf9_section
 
 
 def test_role_landing_routes_trainer_to_intake_home_without_breaking_manager():
     src = _read(FRONTEND / "lib" / "roleLanding.js")
 
     assert 'trainer: "/role-home/trainer"' in src
-    assert 'if (role === "trainer") return ROLE_HOME_PATHS.trainer;' in src
-    assert 'if (role === "barn_manager") return ROLE_HOME_PATHS.manager;' in src
+    assert 'if (role === "trainer") return ROLE_INTAKE_PATHS.trainer;' in src
+    assert 'if (role === "barn_manager") return ROLE_INTAKE_PATHS.manager;' in src
 
 
 def test_role_home_trainer_shell_uses_api_and_does_not_link_to_private_workflows():
-    src = _read(FRONTEND / "pages" / "RoleHome.jsx")
+    src = _read(FRONTEND / "pages" / "RoleIntake.jsx")
 
     assert "function TrainerHome" in src
     assert '"/trainer-intake/profile"' in src
@@ -270,6 +277,31 @@ def test_role_home_trainer_shell_uses_api_and_does_not_link_to_private_workflows
         '"/arena-schedule"',
     ]:
         assert forbidden not in trainer_section
+
+
+def test_tp1_tp2_trainer_review_posture_and_operating_summary_are_truthful():
+    src = _read(FRONTEND / "pages" / "RoleIntake.jsx")
+    signup = _read(FRONTEND / "pages" / "Signup.jsx")
+    shell = _read(FRONTEND / "components" / "AppShell.jsx")
+    plan = _read(ROOT / "docs" / "GATE_2_TRAINER_PROVIDER_PROMISE_PLAN.md")
+
+    assert '"/trainer/operating-center"' in src
+    assert 'data-testid="trainer-review-posture"' in src
+    assert 'data-testid="trainer-operating-summary"' in src
+    assert "Trainer Workspace" in src
+    assert "approved assigned-work visibility" in signup
+    assert "Complete your trainer intake while EquineSync reviews your profile" in shell
+    assert "TP-1 and TP-2 Execution Notes" in plan
+    assert "no production launch authority" in plan
+    for forbidden in [
+        "full directory experience",
+        "client, horse, lesson, and program tools",
+        "Verified equestrian network",
+        "Equine Sync",
+    ]:
+        assert forbidden not in src
+        assert forbidden not in signup
+        assert forbidden not in shell
 
 
 def test_trainer_navigation_keeps_admin_and_billing_out_of_trainer_menu():
