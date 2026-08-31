@@ -57,7 +57,10 @@ from task_engine import (
     build_router as build_task_engine_router,
     DEFAULT_TENANT_ID as TASK_TENANT_ID,
 )
-from notifications import build_router as build_notifications_router
+from notifications import (
+    build_router as build_notifications_router,
+    build_sms_webhook_router,
+)
 from routes.auth import build_router as build_auth_router
 from routes.dashboard import build_router as build_dashboard_router
 from routes.pulse import build_router as build_pulse_router
@@ -236,8 +239,9 @@ api_router.include_router(build_staff_intake_router(
 ))
 
 # Notifications
+api_router.include_router(build_sms_webhook_router(db))
 api_router.include_router(
-    build_notifications_router(db, get_current_user),
+    build_notifications_router(db, get_current_user, include_sms_webhooks=False),
     dependencies=PRODUCT_FACILITY_DEPS,
 )
 

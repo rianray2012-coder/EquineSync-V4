@@ -25,7 +25,7 @@ from typing import Optional
 
 import httpx
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, Response
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 logger = logging.getLogger(__name__)
 
@@ -83,11 +83,11 @@ PRIVACY_SAFE_PROOF_MESSAGE = (
 # ---------- Pydantic models ----------
 
 class NotificationPrefsIn(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
     inbox_enabled: bool = True
     email_enabled: bool = True
     push_enabled: bool = False
-    sms_enabled: bool = False
-    sms_phone_number: Optional[str] = None
     digest_enabled: bool = True  # owner-only; ignored for non-owner accounts
     # event_type -> categories list ([] = none, ["*"] = all)
     inbox_rules: Optional[dict] = None
@@ -238,6 +238,15 @@ def _expected_twilio_signature(url: str, params: dict[str, str], auth_token: str
         hashlib.sha1,
     ).digest()
     return base64.b64encode(digest).decode("utf-8")
+
+
+async def _twilio_form_params(request: Request) -> dict[str, str]:
+    form = await request.form()
+    params: dict[str, str] = {}
+    for key, value in form.multi_items():
+        if isinstance(value, str):
+            params[key] = value
+    return params
 
 
 def _validate_twilio_signature(request: Request, params: dict[str, str]) -> None:
@@ -523,15 +532,115 @@ async def ensure_indexes(db):
     await db.notifications.create_index([("user_id", 1), ("created_at", -1)])
     await db.notifications.create_index([("user_id", 1), ("read_at", 1)])
     await db.notification_preferences.create_index([("user_id", 1)], unique=True)
+    await db[PUSH_TOKEN_COLLECTION].create_index(
+        [("user_id", 1), ("token_hash", 1)],
+        unique=True,
+    )
+    await db[PUSH_TOKEN_COLLECTION].create_index([("user_id", 1), ("enabled", 1), ("updated_at", -1)])
+    await db[PUSH_SEND_COLLECTION].create_index([("user_id", 1), ("created_at", -1)])
+    await db[PUSH_SEND_COLLECTION].create_index([("token_hash", 1), ("created_at", -1)])
     await db.sms_consent_records.create_index([("user_id", 1), ("created_at", -1)])
-    await db.sms_consent_records.create_index([("phone_e164", 1), ("created_at", -1)])
+    await db.sms_consent_records.create_index([("phone_hash", 1), ("created_at", -1)])
     await db.sms_delivery_events.create_index([("message_sid", 1), ("created_at", -1)])
     await db.sms_delivery_events.create_index([("phone_hash", 1), ("created_at", -1)])
 
 
 # ---------- router ----------
 
-def build_router(db, get_current_user) -> APIRouter:
+def build_sms_webhook_router(db) -> APIRouter:
+    router = APIRouter()
+
+    @router.post("/notifications/sms/inbound")
+    async def sms_inbound(
+        request: Request,
+        From: str = Form(...),  # noqa: N803 - Twilio form key
+        Body: str = Form(""),  # noqa: N803 - Twilio form key
+        MessageSid: str = Form(""),  # noqa: N803 - Twilio form key
+    ):
+        _validate_twilio_signature(request, await _twilio_form_params(request))
+        phone_e164 = _normalize_phone(From)
+        body = (Body or "").strip().upper()
+        now = _iso(_now())
+        phone_hash = _hash_value(phone_e164)
+        event = {
+            "id": _new_id(),
+            "message_sid": MessageSid,
+            "direction": "inbound",
+            "phone_hash": phone_hash,
+            "keyword": body[:20],
+            "created_at": now,
+        }
+        await db.sms_delivery_events.insert_one(event)
+        if body in {"STOP", "STOPALL", "UNSUBSCRIBE", "CANCEL", "END", "QUIT"}:
+            await db.notification_preferences.update_many(
+                {"sms_phone_hash": phone_hash},
+                {"$set": {
+                    "sms_enabled": False,
+                    "sms_consent_status": "opted_out",
+                    "sms_consent_updated_at": now,
+                    "updated_at": now,
+                }},
+            )
+            await db.sms_consent_records.insert_one({
+                "id": _new_id(),
+                "phone_hash": phone_hash,
+                "status": "opted_out",
+                "source": "twilio_keyword",
+                "keyword": body,
+                "created_at": now,
+            })
+            return _twiml(SMS_OPTOUT_MESSAGE)
+        if body in {"START", "YES", "UNSTOP"}:
+            await db.notification_preferences.update_many(
+                {"sms_phone_hash": phone_hash},
+                {"$set": {
+                    "sms_enabled": True,
+                    "sms_consent_status": "opted_in",
+                    "sms_consent_source": "twilio_keyword",
+                    "sms_consent_language": SMS_OPTIN_MESSAGE,
+                    "sms_consent_updated_at": now,
+                    "updated_at": now,
+                }},
+            )
+            await db.sms_consent_records.insert_one({
+                "id": _new_id(),
+                "phone_hash": phone_hash,
+                "status": "opted_in",
+                "source": "twilio_keyword",
+                "keyword": body,
+                "consent_language": SMS_OPTIN_MESSAGE,
+                "created_at": now,
+            })
+            return _twiml(SMS_OPTIN_MESSAGE)
+        if body == "HELP":
+            return _twiml(SMS_HELP_MESSAGE)
+        return Response(content="", media_type="application/xml")
+
+    @router.post("/notifications/sms/status")
+    async def sms_status_callback(
+        request: Request,
+        MessageSid: str = Form(""),  # noqa: N803 - Twilio form key
+        MessageStatus: str = Form(""),  # noqa: N803 - Twilio form key
+        To: str = Form(""),  # noqa: N803 - Twilio form key
+        ErrorCode: str = Form(""),  # noqa: N803 - Twilio form key
+    ):
+        _validate_twilio_signature(request, await _twilio_form_params(request))
+        phone_e164 = _normalize_phone(To) if To else None
+        await db.sms_delivery_events.insert_one({
+            "id": _new_id(),
+            "message_sid": MessageSid,
+            "direction": "status_callback",
+            "status": MessageStatus,
+            "phone_hash": _hash_value(phone_e164),
+            "error_code": ErrorCode or None,
+            "created_at": _iso(_now()),
+        })
+        return {"ok": True}
+
+    return router
+
+
+def build_router(db, get_current_user, *, include_sms_webhooks: bool = True) -> APIRouter:
     router = APIRouter()
 
     @router.get("/notifications")
@@ -568,7 +677,14 @@ def build_router(db, get_current_user) -> APIRouter:
 
     @router.put("/notifications/preferences")
     async def put_prefs(body: NotificationPrefsIn, user=Depends(get_current_user)):
-        doc = body.model_dump(exclude_unset=True)
+        incoming = getattr(body, "model_extra", None) or {}
+        if any(str(key).startswith("sms_") for key in incoming):
+            raise HTTPException(400, "Use /notifications/sms-consent to change SMS preferences")
+        doc = {
+            key: value
+            for key, value in body.model_dump(exclude_unset=True).items()
+            if key not in incoming
+        }
         doc["user_id"] = user["id"]
         doc["updated_at"] = _iso(_now())
         # Fill any missing fields with defaults so the doc is complete.
@@ -741,103 +857,8 @@ def build_router(db, get_current_user) -> APIRouter:
             "sms_consent_language": SMS_CONSENT_LANGUAGE,
         }
 
-    @router.post("/notifications/sms/inbound")
-    async def sms_inbound(
-        request: Request,
-        From: str = Form(...),  # noqa: N803 - Twilio form key
-        Body: str = Form(""),  # noqa: N803 - Twilio form key
-        MessageSid: str = Form(""),  # noqa: N803 - Twilio form key
-    ):
-        _validate_twilio_signature(
-            request,
-            {"From": From, "Body": Body, "MessageSid": MessageSid},
-        )
-        phone_e164 = _normalize_phone(From)
-        body = (Body or "").strip().upper()
-        now = _iso(_now())
-        phone_hash = _hash_value(phone_e164)
-        event = {
-            "id": _new_id(),
-            "message_sid": MessageSid,
-            "direction": "inbound",
-            "phone_hash": phone_hash,
-            "keyword": body[:20],
-            "created_at": now,
-        }
-        await db.sms_delivery_events.insert_one(event)
-        if body in {"STOP", "STOPALL", "UNSUBSCRIBE", "CANCEL", "END", "QUIT"}:
-            await db.notification_preferences.update_many(
-                {"sms_phone_hash": phone_hash},
-                {"$set": {
-                    "sms_enabled": False,
-                    "sms_consent_status": "opted_out",
-                    "sms_consent_updated_at": now,
-                    "updated_at": now,
-                }},
-            )
-            await db.sms_consent_records.insert_one({
-                "id": _new_id(),
-                "phone_hash": phone_hash,
-                "status": "opted_out",
-                "source": "twilio_keyword",
-                "keyword": body,
-                "created_at": now,
-            })
-            return _twiml(SMS_OPTOUT_MESSAGE)
-        if body in {"START", "YES", "UNSTOP"}:
-            await db.notification_preferences.update_many(
-                {"sms_phone_hash": phone_hash},
-                {"$set": {
-                    "sms_enabled": True,
-                    "sms_consent_status": "opted_in",
-                    "sms_consent_source": "twilio_keyword",
-                    "sms_consent_language": SMS_OPTIN_MESSAGE,
-                    "sms_consent_updated_at": now,
-                    "updated_at": now,
-                }},
-            )
-            await db.sms_consent_records.insert_one({
-                "id": _new_id(),
-                "phone_hash": phone_hash,
-                "status": "opted_in",
-                "source": "twilio_keyword",
-                "keyword": body,
-                "consent_language": SMS_OPTIN_MESSAGE,
-                "created_at": now,
-            })
-            return _twiml(SMS_OPTIN_MESSAGE)
-        if body == "HELP":
-            return _twiml(SMS_HELP_MESSAGE)
-        return Response(content="", media_type="application/xml")
-
-    @router.post("/notifications/sms/status")
-    async def sms_status_callback(
-        request: Request,
-        MessageSid: str = Form(""),  # noqa: N803 - Twilio form key
-        MessageStatus: str = Form(""),  # noqa: N803 - Twilio form key
-        To: str = Form(""),  # noqa: N803 - Twilio form key
-        ErrorCode: str = Form(""),  # noqa: N803 - Twilio form key
-    ):
-        _validate_twilio_signature(
-            request,
-            {
-                "MessageSid": MessageSid,
-                "MessageStatus": MessageStatus,
-                "To": To,
-                "ErrorCode": ErrorCode,
-            },
-        )
-        phone_e164 = _normalize_phone(To) if To else None
-        await db.sms_delivery_events.insert_one({
-            "id": _new_id(),
-            "message_sid": MessageSid,
-            "direction": "status_callback",
-            "status": MessageStatus,
-            "phone_hash": _hash_value(phone_e164),
-            "error_code": ErrorCode or None,
-            "created_at": _iso(_now()),
-        })
-        return {"ok": True}
+    if include_sms_webhooks:
+        router.include_router(build_sms_webhook_router(db))
 
     @router.post("/notifications/sms/proof-send")
     async def sms_proof_send(body: SmsProofSendIn, user=Depends(get_current_user)):

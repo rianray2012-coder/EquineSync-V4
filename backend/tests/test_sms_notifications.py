@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import asyncio
+from pathlib import Path
 from typing import Any, Dict, List
 
 import pytest
@@ -7,6 +9,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from notifications import (
+    ensure_indexes,
     _expected_twilio_signature,
     _hash_value,
     _is_sms_configured,
@@ -14,6 +17,9 @@ from notifications import (
     _twilio_basic_auth,
     build_router,
 )
+
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def _matches(doc: Dict[str, Any], query: Dict[str, Any]) -> bool:
@@ -26,6 +32,7 @@ def _matches(doc: Dict[str, Any], query: Dict[str, Any]) -> bool:
 class _Collection:
     def __init__(self, rows=None):
         self.rows: List[Dict[str, Any]] = list(rows or [])
+        self.indexes: List[Dict[str, Any]] = []
 
     async def find_one(self, query, projection=None):
         for row in self.rows:
@@ -56,6 +63,7 @@ class _Collection:
         return type("UpdateResult", (), {"matched_count": count, "modified_count": count})()
 
     async def create_index(self, *args, **kwargs):
+        self.indexes.append({"args": args, "kwargs": kwargs})
         return None
 
 
@@ -63,8 +71,13 @@ class _FakeDB:
     def __init__(self):
         self.notifications = _Collection()
         self.notification_preferences = _Collection()
+        self.push_device_tokens = _Collection()
+        self.push_send_attempts = _Collection()
         self.sms_consent_records = _Collection()
         self.sms_delivery_events = _Collection()
+
+    def __getitem__(self, name):
+        return getattr(self, name)
 
 
 def _client(user=None):
@@ -99,6 +112,26 @@ def test_sms_consent_stores_active_preference_and_hashed_audit_record():
     assert db.notification_preferences.rows[0]["sms_phone_number"] == "+18166019036"
     assert db.sms_consent_records.rows[0]["phone_hash"] == _hash_value("+18166019036")
     assert "phone_e164" not in db.sms_consent_records.rows[0]
+
+
+def test_generic_preferences_cannot_enable_sms_without_consent_record():
+    client, db = _client()
+
+    response = client.put(
+        "/api/notifications/preferences",
+        json={
+            "inbox_enabled": True,
+            "email_enabled": True,
+            "sms_enabled": True,
+            "sms_phone_number": "(816) 601-9036",
+            "sms_consent_status": "opted_in",
+        },
+    )
+
+    assert response.status_code == 400
+    assert "sms-consent" in response.text
+    assert db.notification_preferences.rows == []
+    assert db.sms_consent_records.rows == []
 
 
 def test_twilio_stop_keyword_opts_out_by_phone_hash_without_raw_event_storage():
@@ -174,6 +207,34 @@ def test_twilio_inbound_accepts_valid_signature_when_validation_enabled(monkeypa
     assert "EquineSync: For help" in response.text
 
 
+def test_twilio_signature_validation_uses_all_callback_form_fields(monkeypatch):
+    monkeypatch.setenv("TWILIO_VALIDATE_WEBHOOK_SIGNATURES", "true")
+    monkeypatch.setenv("TWILIO_AUTH_TOKEN", "test-token")
+    monkeypatch.setenv("TWILIO_WEBHOOK_BASE_URL", "http://testserver")
+    client, _db = _client()
+    params = {
+        "MessageSid": "SM125",
+        "MessageStatus": "delivered",
+        "To": "+18166019036",
+        "ErrorCode": "",
+        "AccountSid": "AC123",
+        "NumMedia": "0",
+    }
+    signature = _expected_twilio_signature(
+        "http://testserver/api/notifications/sms/status",
+        params,
+        "test-token",
+    )
+
+    response = client.post(
+        "/api/notifications/sms/status",
+        data=params,
+        headers={"X-Twilio-Signature": signature},
+    )
+
+    assert response.status_code == 200
+
+
 def test_twilio_status_callback_logs_status_without_raw_phone():
     client, db = _client()
 
@@ -229,8 +290,38 @@ def test_sms_config_still_accepts_twilio_auth_token(monkeypatch):
     assert _twilio_basic_auth() == ("AC123", "token")
 
 
+def test_server_mounts_twilio_callbacks_outside_product_facility_gate():
+    server_src = (ROOT / "backend" / "server.py").read_text()
+    public_mount = "api_router.include_router(build_sms_webhook_router(db))"
+    gated_mount = "build_notifications_router(db, get_current_user, include_sms_webhooks=False)"
+
+    assert public_mount in server_src
+    assert gated_mount in server_src
+    assert server_src.index(public_mount) < server_src.index(gated_mount)
+
+
 def test_sms_safe_body_rejects_sensitive_detail_terms():
     with pytest.raises(Exception):
         _safe_sms_body(
             "EquineSync: A minor account detail is ready. Reply STOP to opt out or HELP for help."
         )
+
+
+def test_notification_indexes_keep_push_lookup_and_sms_hash_indexes():
+    db = _FakeDB()
+
+    asyncio.run(ensure_indexes(db))
+
+    assert any(
+        idx["args"][0] == [("user_id", 1), ("token_hash", 1)]
+        and idx["kwargs"].get("unique") is True
+        for idx in db.push_device_tokens.indexes
+    )
+    assert any(
+        idx["args"][0] == [("user_id", 1), ("enabled", 1), ("updated_at", -1)]
+        for idx in db.push_device_tokens.indexes
+    )
+    assert any(
+        idx["args"][0] == [("phone_hash", 1), ("created_at", -1)]
+        for idx in db.sms_consent_records.indexes
+    )

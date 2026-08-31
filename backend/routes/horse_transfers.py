@@ -12,6 +12,7 @@ from typing import Any, Dict, List, Optional, Set
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException
+from pymongo.errors import DuplicateKeyError
 from pydantic import BaseModel, Field
 
 from core import audit
@@ -144,6 +145,14 @@ class TransferStatusPatch(BaseModel):
 def build_router(*, db, get_current_user, new_id) -> APIRouter:
     router = APIRouter(prefix="/horse-transfers", tags=["horse-transfers"])
 
+    async def _ensure_transfer_indexes() -> None:
+        await db[TRANSFER_REQUEST_COLLECTION].create_index(
+            [("horse_id", 1)],
+            unique=True,
+            partialFilterExpression={"status": {"$in": sorted(ACTIVE_TRANSFER_STATUSES)}},
+            name="uniq_active_horse_transfer",
+        )
+
     async def _load_transfer(transfer_id: str) -> Dict[str, Any]:
         transfer = await db[TRANSFER_REQUEST_COLLECTION].find_one(
             {"id": transfer_id}, {"_id": 0}
@@ -225,10 +234,12 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         )
         if not new_owner:
             raise HTTPException(404, "New owner not found.")
+        source_barn_id = horse.get("barn_id") or resolve_barn_id(user)
+        destination_barn_id = body.destination_barn_id or new_owner.get("barn_id") or source_barn_id
         if body.destination_barn_id and new_owner.get("barn_id") and body.destination_barn_id != new_owner.get("barn_id"):
             raise HTTPException(422, "Destination barn must match the new owner's barn.")
-        source_barn_id = horse.get("barn_id") or resolve_barn_id(user)
-        requires_barn_approval = _requires_barn_approval(source_barn_id, body.destination_barn_id)
+        requires_barn_approval = _requires_barn_approval(source_barn_id, destination_barn_id)
+        await _ensure_transfer_indexes()
         existing = await db[TRANSFER_REQUEST_COLLECTION].find_one(
             {"horse_id": body.horse_id, "status": {"$in": sorted(ACTIVE_TRANSFER_STATUSES)}},
             {"_id": 0, "id": 1},
@@ -247,7 +258,7 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "from_owner_user_id": horse.get("primary_owner_id") or horse.get("owner_id") or user.get("id"),
             "to_owner_user_id": body.new_owner_user_id,
             "source_barn_id": source_barn_id,
-            "destination_barn_id": body.destination_barn_id,
+            "destination_barn_id": destination_barn_id,
             "requires_barn_approval": requires_barn_approval,
             "created_by_user_id": user.get("id"),
             "created_by_role": user.get("role"),
@@ -260,7 +271,10 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "accepted_at": None,
             "canceled_at": None,
         }
-        await db[TRANSFER_REQUEST_COLLECTION].insert_one(doc)
+        try:
+            await db[TRANSFER_REQUEST_COLLECTION].insert_one(doc)
+        except DuplicateKeyError:
+            raise HTTPException(409, "A pending transfer already exists for this horse.") from None
         await audit.record(
             action="horse_transfer.created",
             user=user,
@@ -339,7 +353,12 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
         if not allowed:
             raise HTTPException(404, "Transfer request not found.")
         updates = {"status": "canceled", "canceled_at": _now_iso(), "updated_at": _now_iso()}
-        await db[TRANSFER_REQUEST_COLLECTION].update_one({"id": transfer_id}, {"$set": updates})
+        result = await db[TRANSFER_REQUEST_COLLECTION].update_one(
+            {"id": transfer_id, "status": {"$in": sorted(ACTIVE_TRANSFER_STATUSES)}},
+            {"$set": updates},
+        )
+        if result.matched_count == 0:
+            raise HTTPException(409, "Only active transfers can be canceled.")
         await audit.record(
             action="horse_transfer.canceled",
             user=user,
@@ -373,7 +392,12 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             "barn_approval_reason_provided": bool(body.reason),
             "updated_at": now,
         }
-        await db[TRANSFER_REQUEST_COLLECTION].update_one({"id": transfer_id}, {"$set": updates})
+        result = await db[TRANSFER_REQUEST_COLLECTION].update_one(
+            {"id": transfer_id, "status": "owner_approved"},
+            {"$set": updates},
+        )
+        if result.matched_count == 0:
+            raise HTTPException(409, "Only owner-approved transfers can receive barn approval.")
         await audit.record(
             action="horse_transfer.barn_approved",
             user=user,
@@ -409,14 +433,11 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
 
         snapshot = await _build_export_snapshot(transfer, horse)
         now = _now_iso()
-        secondary = [
-            uid for uid in _clean_list(horse.get("secondary_owner_ids"))
-            if uid not in {transfer.get("from_owner_user_id"), transfer.get("to_owner_user_id")}
-        ]
+        archive_id = f"hta_{uuid.uuid4().hex[:24]}"
         horse_updates = {
             "owner_id": transfer.get("to_owner_user_id"),
             "primary_owner_id": transfer.get("to_owner_user_id"),
-            "secondary_owner_ids": secondary,
+            "secondary_owner_ids": [],
             "ownership_transfer_last_id": transfer_id,
             "ownership_transfer_last_at": now,
         }
@@ -424,25 +445,40 @@ def build_router(*, db, get_current_user, new_id) -> APIRouter:
             horse_updates["barn_id"] = transfer["destination_barn_id"]
 
         archive = {
-            "id": f"hta_{uuid.uuid4().hex[:24]}",
+            "id": archive_id,
             "transfer_id": transfer_id,
             "horse_id": transfer["horse_id"],
             "policy_version": TRANSFER_POLICY_VERSION,
             "created_at": now,
             "snapshot": snapshot,
         }
-        await db[TRANSFER_ARCHIVE_COLLECTION].insert_one(archive)
-        await db.horses.update_one({"id": transfer["horse_id"]}, {"$set": horse_updates})
-        await db[TRANSFER_REQUEST_COLLECTION].update_one(
-            {"id": transfer_id},
+        result = await db[TRANSFER_REQUEST_COLLECTION].update_one(
+            {
+                "id": transfer_id,
+                "to_owner_user_id": user.get("id"),
+                "status": {"$in": ["pending_acceptance", "barn_approved"]},
+            },
             {"$set": {
                 "status": "accepted",
                 "accepted_at": now,
                 "updated_at": now,
                 "acceptance_reason_provided": bool(body.reason),
-                "archive_id": archive["id"],
+                "archive_id": archive_id,
             }},
         )
+        if result.matched_count == 0:
+            raise HTTPException(409, "Transfer must be ready for new-owner acceptance.")
+        await db[TRANSFER_ARCHIVE_COLLECTION].insert_one(archive)
+        await db.horses.update_one({"id": transfer["horse_id"]}, {"$set": horse_updates})
+        if transfer.get("destination_barn_id") and transfer.get("destination_barn_id") != transfer.get("source_barn_id"):
+            await db.horse_equipment.update_many(
+                {
+                    "horse_id": transfer["horse_id"],
+                    "barn_id": transfer.get("source_barn_id"),
+                    "status": {"$ne": "retired"},
+                },
+                {"$set": {"barn_id": transfer["destination_barn_id"], "updated_at": now}},
+            )
         await audit.record(
             action="horse_transfer.accepted",
             user=user,

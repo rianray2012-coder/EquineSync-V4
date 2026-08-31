@@ -10,9 +10,9 @@
     "artifact_name": "backend-test-report"
   },
   "counts": {
-    "total_collected": 2286,
+    "total_collected": 2287,
     "selected_non_live": 1080,
-    "live_deselected": 1212,
+    "live_deselected": 1213,
     "passed": 919,
     "failed": 158,
     "errors": 3,
@@ -61,7 +61,7 @@
       "pull_request": 187,
       "type": "live_inventory_count_only",
       "selector": "backend/tests/test_horse_transfers.py::*",
-      "rationale": "PR #187 adds five Horse Passport transfer workflow tests that call a running deployed API through requests and Mongo. They remain collected as live tests and are deselected from the non-live CI run. No new failing or erroring test node is accepted by this count-only adjustment."
+      "rationale": "PR #187 adds six Horse Passport transfer workflow tests that call a running deployed API through requests and Mongo. They remain collected as live tests and are deselected from the non-live CI run. No new failing or erroring test node is accepted by this count-only adjustment."
     }
   ],
   "known_failure_or_error_nodes": [

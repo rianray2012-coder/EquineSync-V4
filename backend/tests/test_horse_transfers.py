@@ -168,6 +168,7 @@ def _cleanup(db):
         "horse_daily_check_logs",
         "horse_ledger_alerts",
         "horse_ledger_audit",
+        "horse_equipment",
         "horse_owner_visibility_policy",
         "audit_log",
     ):
@@ -295,6 +296,11 @@ def test_accept_updates_owner_and_cuts_off_prior_owner_summary_access(db):
     old_owner = _owner(db, source_bid)
     new_owner = _owner(db, destination_bid)
     hid = _make_horse(db, source_bid, old_owner["user"]["id"])
+    _seed_sensitive_ledger_rows(db, source_bid, hid)
+    db.horse_owner_visibility_policy.update_one(
+        {"horse_id": hid},
+        {"$set": {"sections.equipment.allowlist": ["category", "label"]}},
+    )
     manager = _manager(db, source_bid)
     try:
         created = _create_transfer(
@@ -339,7 +345,10 @@ def test_accept_updates_owner_and_cuts_off_prior_owner_summary_access(db):
         assert horse["owner_id"] == new_owner["user"]["id"]
         assert horse["primary_owner_id"] == new_owner["user"]["id"]
         assert old_owner["user"]["id"] not in horse.get("secondary_owner_ids", [])
+        assert horse.get("secondary_owner_ids") == []
         assert horse["barn_id"] == destination_bid
+        equipment = db.horse_equipment.find_one({"horse_id": hid})
+        assert equipment["barn_id"] == destination_bid
 
         old_read = requests.get(
             f"{API}/horse-ledger/{hid}/owner-summary",
@@ -354,9 +363,49 @@ def test_accept_updates_owner_and_cuts_off_prior_owner_summary_access(db):
             timeout=20,
         )
         assert new_read.status_code == 200, new_read.text
+        assert new_read.json()["visible_sections"]["equipment"] == [
+            {"category": "saddle", "label": "Private saddle note"}
+        ]
 
         archive = db.horse_transfer_archives.find_one({"transfer_id": tid})
         assert archive is not None
         assert archive["snapshot"]["policy_version"] == "horse-passport-transfer-v1"
+    finally:
+        _cleanup(db)
+
+
+def test_cross_barn_transfer_infers_destination_from_new_owner(db):
+    source_bid = _make_barn(db, "source_barn_htransfer")
+    destination_bid = _make_barn(db, "dest_barn_htransfer")
+    old_owner = _owner(db, source_bid)
+    new_owner = _owner(db, destination_bid)
+    hid = _make_horse(db, source_bid, old_owner["user"]["id"])
+    manager = _manager(db, source_bid)
+    try:
+        created = _create_transfer(hid, new_owner, _bearer(old_owner))
+        assert created.status_code == 200, created.text
+        body = created.json()
+        assert body["destination_barn_id"] == destination_bid
+        assert body["requires_barn_approval"] is True
+        tid = body["id"]
+
+        approved = requests.post(
+            f"{API}/horse-transfers/{tid}/barn-approve",
+            headers=_bearer(manager),
+            json={},
+            timeout=20,
+        )
+        assert approved.status_code == 200, approved.text
+
+        accepted = requests.post(
+            f"{API}/horse-transfers/{tid}/accept",
+            headers=_bearer(new_owner),
+            json={},
+            timeout=20,
+        )
+        assert accepted.status_code == 200, accepted.text
+        horse = db.horses.find_one({"id": hid})
+        assert horse["owner_id"] == new_owner["user"]["id"]
+        assert horse["barn_id"] == destination_bid
     finally:
         _cleanup(db)

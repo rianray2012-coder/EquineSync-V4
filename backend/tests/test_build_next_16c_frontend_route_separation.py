@@ -73,6 +73,19 @@ def test_app_routes_setup_facility_role_intake_and_legacy_intake_redirects_throu
         assert f'path="{path}" element={{<Navigate to="/role-intake/{profile}" replace />}}' in src
 
 
+def test_app_keeps_navigated_support_and_owner_document_routes_mounted():
+    app = _read(FRONTEND / "App.js")
+    nav = _read(FRONTEND / "lib" / "roleNavigation.js")
+
+    assert 'item("/support", "Support", "support")' in nav
+    assert 'import Support from "./pages/Support";' in app
+    assert 'path="/support" element={<Support />}' in app
+
+    assert 'item("/owner-documents", "Documents", "documents")' in nav
+    assert 'import OwnerDocuments from "./pages/OwnerDocuments";' in app
+    assert 'path="/owner-documents" element={permit(<OwnerDocuments />, ["horse_owner", "parent", "rider"])}' in app
+
+
 def test_setup_protected_reads_backend_readiness_before_rendering_setup():
     src = _read(FRONTEND / "App.js")
 
