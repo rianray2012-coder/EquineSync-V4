@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import AdminKpiCards from "./AdminKpiCards";
 import AdminSubscriptionHealth from "./AdminSubscriptionHealth";
 import AdminActivityFeed from "./AdminActivityFeed";
+import OperationalProofPanel from "../../components/OperationalProofPanel";
 
 /**
  * Admin-2 — read-only platform dashboard.
@@ -64,7 +65,7 @@ export default function AdminDashboard() {
           Welcome back{user?.full_name ? `, ${user.full_name.split(" ")[0]}` : ""}.
         </h1>
         <p className="mt-2 text-[14px] text-equinesync-graphite/65 max-w-2xl">
-          You&apos;re signed into the Equine·Sync platform control center as
+          You&apos;re signed into the EquineSync platform control center as
           <span className="text-equinesync-slate font-medium"> {getPlatformRole(user) || "—"}</span>.
           Numbers update every 30 seconds; the dashboard is intentionally read-only.
         </p>
@@ -78,6 +79,12 @@ export default function AdminDashboard() {
           {meErr}
         </div>
       )}
+
+      <OperationalProofPanel
+        proofKey="admin"
+        title="Admin Proof Snapshot"
+        testid="admin-proof-snapshot"
+      />
 
       <AdminKpiCards kpis={kpis} loading={kpiLoading} error={kpiErr} />
 

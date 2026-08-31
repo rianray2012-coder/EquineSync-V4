@@ -61,7 +61,7 @@ export default function OwnerUpdates() {
       <PageHeader
         eyebrow="Communication"
         title="Photo & Video Updates"
-        subtitle="Prepare owner-visible media updates with captions, visibility controls, and storage-ready URL references."
+        subtitle="Prepare owner-visible media update records with captions, visibility controls, and storage-provider status."
         action={
           <div className="flex items-center gap-3">
             <button onClick={load} className="btn-secondary inline-flex items-center gap-2" data-testid="owner-updates-refresh">
@@ -78,7 +78,7 @@ export default function OwnerUpdates() {
         <div className="flex items-start gap-3">
           <Upload className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
           <div className="text-[13px] text-equine-inkMuted leading-relaxed">
-            Uploads are storage-provider ready. This page tracks media URLs and owner-visibility metadata until live object storage credentials are configured.
+            Media records are provider-required. This page tracks media URLs and owner-visibility metadata until live object storage credentials are configured.
           </div>
         </div>
       </Card>

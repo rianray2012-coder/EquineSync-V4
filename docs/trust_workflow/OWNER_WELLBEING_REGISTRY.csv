@@ -1,0 +1,5 @@
+signal,label,meaning,surface,status,next_gate
+care_status,Care Status,Approved care updates should show what changed without exposing internal staff notes,frontend/src/features/dashboards/PersonalDashboard.jsx,implemented,TW-6
+request_path,Request Path,Owner questions and follow-ups should use the reviewed request workflow,frontend/src/features/dashboards/PersonalDashboard.jsx,implemented,TW-6
+visibility_boundary,Visibility Boundary,Owner guardian and rider views should explain what is hidden until facility approval,frontend/src/features/dashboards/PersonalDashboard.jsx,implemented,TW-6
+first_week,First Week,New owners need a short checklist that explains what to expect before the barn shares records,frontend/src/features/dashboards/PersonalDashboard.jsx,implemented,TW-6

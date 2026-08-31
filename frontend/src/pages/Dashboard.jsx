@@ -9,9 +9,11 @@ import {
 import { useAuth } from "../context/AuthContext";
 
 import SetupConciergeCard from "../components/dashboard/SetupConciergeCard";
+import FacilityReadinessPanel from "../components/FacilityReadinessPanel";
 import ActionTile from "../components/dashboard/ActionTile";
 import AlertsCard from "../components/dashboard/AlertsCard";
 import { OperationsCard, UpcomingCareCard } from "../components/dashboard/SmallCards";
+import OperationalProofPanel from "../components/OperationalProofPanel";
 import FounderWalkthrough, { walkthroughSeen } from "../components/FounderWalkthrough";
 import LastSyncedBadge from "../components/today/LastSyncedBadge";
 import { BrandLoader } from "../components/BrandLoader";
@@ -128,6 +130,14 @@ export default function Dashboard() {
       <SubscriptionUsageSnapshot />
 
       <SetupConciergeCard progress={progress} steps={steps} />
+
+      <OperationalProofPanel
+        proofKey="facility"
+        title="Facility Proof Snapshot"
+        testid="facility-proof-snapshot"
+      />
+
+      <FacilityReadinessPanel progress={progress} steps={steps} />
 
       {/* SECTION 1 · Right now */}
       <SectionEyebrow
@@ -299,5 +309,4 @@ function SubscriptionUsageSnapshot() {
     </div>
   );
 }
-
 

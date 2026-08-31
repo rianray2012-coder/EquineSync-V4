@@ -1,9 +1,8 @@
-// Phase 15.C — Subscription Billing Portal
+// Phase 15.C — Facility Subscription Billing Portal
 // ---------------------------------------------------------------------------
 // Lives at /billing/subscription. Distinct from /billing (Phase 9 invoices —
-// see pages/Billing.jsx; untouched). Facility subscriptions remain
-// barn-management scoped; standalone horse owners can manage only their own
-// individual-owner subscription.
+// see pages/Billing.jsx; untouched). Gated by `canManageBilling` which mirrors
+// the backend `barn:manage` capability.
 //
 // Reads:
 //   GET /api/subscriptions/me        (status, plan tier, period, trial)
@@ -28,6 +27,7 @@ import {
 import { api } from "../lib/api";
 import { Card, PageHeader, SectionEyebrow, StatusPill } from "../components/Primitives";
 import { BrandLoader } from "../components/BrandLoader";
+import BusinessReadinessPanel from "../components/BusinessReadinessPanel";
 import {
   STATUS_LABEL, STATUS_TONE, RESUMABLE_STATUSES,
   SUBSCRIBABLE_TIERS, sortPlans, formatCents, annualSavingsPct, daysUntil,
@@ -142,7 +142,7 @@ export default function SubscriptionBilling() {
       <PageHeader
         eyebrow="Membership"
         title="Subscription"
-        subtitle="Manage your EquineSync plan, billing cycle, and usage. Barn invoices and trainer payments live on the separate Billing page."
+        subtitle="Manage your facility plan, billing cycle, and usage. Invoices and recurring boarder charges live on the separate Billing page."
         action={
           <button
             onClick={refresh}
@@ -164,6 +164,8 @@ export default function SubscriptionBilling() {
           </div>
         </Card>
       )}
+
+      <BusinessReadinessPanel title="Plan Fit & Billing Proof" testid="subscription-business-readiness" />
 
       {/* RESUME CTA — primary placement when the subscription is canceled,
           past_due, unpaid, or incomplete_expired. Soft-warn, not blocking. */}
@@ -300,7 +302,7 @@ export default function SubscriptionBilling() {
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-saddleDeep flex-shrink-0" />
-              <span>Barn invoices, physical payment tracking, and trainer charges are tracked separately on the <Link to="/billing" className="underline text-equine-saddleDeep hover:text-equine-ink">Billing</Link> page.</span>
+              <span>Boarder invoices &amp; recurring charges are tracked separately on the <Link to="/billing" className="underline text-equine-saddleDeep hover:text-equine-ink">Billing</Link> page.</span>
             </li>
           </ul>
         </Card>
@@ -333,7 +335,7 @@ export default function SubscriptionBilling() {
       <SectionEyebrow>Change plan</SectionEyebrow>
       <p className="text-[13.5px] text-equine-inkMuted mb-5 max-w-2xl leading-relaxed">
         Switching plans starts a new Stripe Checkout. Annual cycles use the
-        catalog price. Invited owner access stays separate from self-paid individual-owner memberships.
+        catalog price. Invited owner portal access stays free for barn-paid accounts.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" data-testid="subscription-plan-grid">
         {plans

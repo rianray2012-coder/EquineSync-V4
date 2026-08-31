@@ -36,8 +36,7 @@ validate_config()
 
 # Shared infrastructure (imported only after .env load + config validation).
 from core.db import db
-import core.auth as _core_auth
-from core.auth import get_current_user, create_token, hash_pwd, require_setup_role
+from core.auth import get_current_user, create_token, hash_pwd, verify_pwd, require_setup_role
 from core.helpers import (
     new_id, clean, list_collection, _user_safe, _client_meta,
 )
@@ -85,6 +84,7 @@ from routes.owner_updates import build_router as build_owner_updates_router
 from routes.owner import build_router as build_owner_router
 from routes.backlog import build_router as build_backlog_router
 from routes.horse_ledger import build_router as build_horse_ledger_router
+from routes.horse_transfers import build_router as build_horse_transfers_router
 from routes.account_context import build_router as build_account_context_router
 from routes.student_guardians import build_router as build_student_guardians_router
 from routes.document_signatures import build_router as build_document_signatures_router
@@ -97,8 +97,6 @@ from routes.trainer_operating_center import build_router as build_trainer_operat
 from routes.service_provider_center import build_router as build_service_provider_center_router
 from routes.manager_intake import build_router as build_manager_intake_router
 from routes.staff_intake import build_router as build_staff_intake_router
-from routes.support import build_router as build_support_router
-from routes.ai_assistant import build_router as build_ai_assistant_router
 from seed_data import run_seed
 
 # Phase Admin-4b: tenancy enforcement for soft-disabled facilities.
@@ -267,37 +265,25 @@ _send_nudges = _reports_router._reports_helpers["send_nudges"]
 api_router.include_router(_reports_router, dependencies=PRODUCT_FACILITY_DEPS)
 
 # Invites (routes/invites.py)
-def _build_invites_router(*, verify_pwd, include_public=True, include_protected=True):
-    return build_invites_router(
-        db=db,
-        get_current_user=get_current_user,
-        require_setup_role=require_setup_role,
-        roles=ROLES,
-        role_labels=ROLE_LABELS,
-        onboarding_steps=ONBOARDING_STEPS,
-        mailer_send=send_email,
-        track=_track,
-        base_url_from_request=_base_url,
-        create_token=create_token,
-        hash_pwd=hash_pwd,
-        verify_pwd=verify_pwd,
-        user_safe=_user_safe,
-        client_meta=_client_meta,
-        issue_refresh_token=issue_refresh_token,
-        jwt_exp_hours=JWT_EXP_HOURS,
-        new_id=new_id,
-        include_public=include_public,
-        include_protected=include_protected,
-    )
-
-
-api_router.include_router(
-    _build_invites_router(verify_pwd=_core_auth.verify_pwd, include_public=False),
-    dependencies=PRODUCT_FACILITY_DEPS,
-)
-api_router.include_router(
-    _build_invites_router(verify_pwd=_core_auth.verify_pwd, include_protected=False),
-)
+api_router.include_router(build_invites_router(
+    db=db,
+    get_current_user=get_current_user,
+    require_setup_role=require_setup_role,
+    roles=ROLES,
+    role_labels=ROLE_LABELS,
+    onboarding_steps=ONBOARDING_STEPS,
+    mailer_send=send_email,
+    track=_track,
+    base_url_from_request=_base_url,
+    create_token=create_token,
+    hash_pwd=hash_pwd,
+    verify_pwd=verify_pwd,
+    user_safe=_user_safe,
+    client_meta=_client_meta,
+    issue_refresh_token=issue_refresh_token,
+    jwt_exp_hours=JWT_EXP_HOURS,
+    new_id=new_id,
+), dependencies=PRODUCT_FACILITY_DEPS)
 
 # Onboarding (routes/onboarding.py)
 api_router.include_router(build_onboarding_router(
@@ -426,20 +412,6 @@ api_router.include_router(build_admin_portal_router(
     get_current_user=get_current_user,
 ))
 
-# Support intake — authenticated pilot feedback/bug reports.
-api_router.include_router(build_support_router(
-    db=db,
-    get_current_user=get_current_user,
-))
-
-# Draft-only AI intake/extraction pipeline. This surface creates private source
-# upload intents and review-required draft jobs only; it does not save official
-# product records or perform mutation-capable AI actions.
-api_router.include_router(build_ai_assistant_router(
-    db=db,
-    get_current_user=get_current_user,
-), dependencies=PRODUCT_FACILITY_DEPS)
-
 # Analytics (routes/analytics.py)
 api_router.include_router(build_analytics_router(db, get_current_user, require_setup_role),
                           dependencies=PRODUCT_FACILITY_DEPS)
@@ -499,6 +471,18 @@ api_router.include_router(
 # `test_get_ledger_disabled_facility_gate_applies` guards against that.
 api_router.include_router(
     build_horse_ledger_router(db=db, get_current_user=get_current_user),
+    dependencies=PRODUCT_FACILITY_DEPS,
+)
+
+# Horse Passport ownership transfer workflow. This is facility-gated product
+# data and intentionally transfers only owner-safe categories from the current
+# policy slice.
+api_router.include_router(
+    build_horse_transfers_router(
+        db=db,
+        get_current_user=get_current_user,
+        new_id=new_id,
+    ),
     dependencies=PRODUCT_FACILITY_DEPS,
 )
 

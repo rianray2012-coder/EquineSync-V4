@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { api } from "../lib/api";
 import { Card, PageHeader, StatusPill } from "../components/Primitives";
 import QuickAddSheet from "../components/QuickAddSheet";
+import QualityGatePanel from "../components/QualityGatePanel";
 
 const DRAFT_QUEUE_KEY = "equinesync_offline_action_queue";
 
@@ -265,6 +266,8 @@ export default function MobileReadiness() {
         <Metric label="QR IDs" value={qrRecords.length} caption="Horse identifiers" icon={QrCode} />
         <Metric label="Readiness hooks" value={readiness.length} caption="Provider setup" icon={UploadCloud} />
       </div>
+
+      <QualityGatePanel />
 
       {loading ? (
         <Card hover={false}><div className="py-10 text-center text-equine-inkSoft text-[13px]">Loading mobile readiness...</div></Card>

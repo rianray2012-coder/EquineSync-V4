@@ -3,6 +3,7 @@ import { AlertTriangle, BarChart3, Download, FileSpreadsheet, Plus, RefreshCw } 
 import { toast } from "sonner";
 import { api } from "../lib/api";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
+import BusinessReadinessPanel from "../components/BusinessReadinessPanel";
 
 const fmtMoney = (value) => {
   const n = Number(value || 0);
@@ -164,6 +165,8 @@ export default function AdvancedReports() {
           </div>
         }
       />
+
+      <BusinessReadinessPanel title="Reporting & Portability Proof" testid="reports-business-readiness" />
 
       {loading ? (
         <Card hover={false}><div className="py-10 text-center text-equine-inkSoft text-[13px]">Loading reports...</div></Card>

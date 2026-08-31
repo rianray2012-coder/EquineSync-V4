@@ -4,6 +4,7 @@ import { Bell, CheckCheck, Inbox, Check, X, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "../context/AuthContext";
+import { DECISION_STATES, decisionStateForServiceRequest } from "../lib/trustWorkflow";
 
 const DECIDER_ROLES = ["admin", "barn_manager", "trainer"];
 
@@ -31,7 +32,7 @@ const REQUEST_TYPE_LABEL = {
  *   2. Inbox — task-event notifications (existing behaviour, untouched).
  *
  * Tone constraints (Batch C, per founder direction):
- *   - Approve / Decline label only; no aggressive "Reject" wording.
+ *   - Approve / Decline label only; no punitive denial wording.
  *   - Decline expands inline; no separate modal.
  *   - Decline reason is optional; submitting without a note still works.
  *   - Success toast: "Approved." or "Declined with a note." — never punitive.
@@ -206,6 +207,8 @@ export default function NotificationsBell() {
                 {pending.map((sr) => {
                   const isExpanded = declineFor === sr.id;
                   const isBusy = busyId === sr.id;
+                  const decisionKey = decisionStateForServiceRequest(sr);
+                  const decision = DECISION_STATES[decisionKey];
                   return (
                     <div
                       key={sr.id}
@@ -230,6 +233,17 @@ export default function NotificationsBell() {
                       )}
                       <div className="text-[10.5px] text-equine-inkSoft mt-1">
                         {sr.requester_name} · {fmtDate(sr.created_at)}
+                      </div>
+                      <div
+                        className="mt-2 rounded-md border border-equine-hairline bg-equine-soft/60 px-2.5 py-2"
+                        data-testid={`pending-decision-state-${sr.id}`}
+                      >
+                        <div className="text-[10px] uppercase tracking-[0.18em] text-equine-inkSoft font-semibold">
+                          Decision State · {decision.label}
+                        </div>
+                        <div className="text-[11.5px] text-equine-inkMuted mt-1 leading-relaxed">
+                          {decision.meaning}
+                        </div>
                       </div>
 
                       {!isExpanded ? (

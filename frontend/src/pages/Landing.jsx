@@ -2,15 +2,16 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Logo } from "../components/Logo";
-import { Check, ArrowRight, ShieldCheck, Sparkles, Users, Calendar } from "lucide-react";
+import { Check, ArrowRight, ShieldCheck, Sparkles, Users, Calendar, FileText } from "lucide-react";
 import { annualSavingsPct, formatCents, sortPlans } from "../lib/subscriptionBilling";
 import { api } from "../lib/api";
+import { PUBLIC_CAPABILITY_MATRIX } from "../lib/businessWorkflow";
 
 const ROLE_CARDS = [
   {
     id: "horse_owner",
     label: "Individual Horse Owner",
-    blurb: "Track your horse's care, billing and progress outside an EquineSync barn workspace.",
+    blurb: "Build a horse ledger and passport with care records, appointments, documents, reminders, and shared updates.",
     image:
       "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
     span: "md:col-span-3",
@@ -18,7 +19,7 @@ const ROLE_CARDS = [
   {
     id: "barn_owner",
     label: "Barn Owner / Manager",
-    blurb: "Start a barn workspace for stalls, staff, owners, billing, and facility operations.",
+    blurb: "Run a facility workspace for horses, stalls, staff tasks, owner updates, billing, and records.",
     image:
       "https://images.unsplash.com/photo-1576692192914-9abed71b3ef9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3JzZSUyMGJhcm58ZW58MHx8fHwxNzgxMzQxNTQ5fDA&ixlib=rb-4.1.0&q=85",
     span: "md:col-span-3",
@@ -26,7 +27,7 @@ const ROLE_CARDS = [
   {
     id: "service_provider",
     label: "Service Provider",
-    blurb: "Vets, farriers, body workers — connect with barns that need your expertise.",
+    blurb: "Create a reviewed profile for vet, farrier, bodywork, and care services with scoped client access.",
     image:
       "https://images.unsplash.com/photo-1649127616601-6f0a3ea26eae?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwZmFycmllcnxlbnwwfHx8fDE3ODEzNDE1NjF8MA&ixlib=rb-4.1.0&q=85",
     span: "md:col-span-2",
@@ -34,7 +35,7 @@ const ROLE_CARDS = [
   {
     id: "trainer",
     label: "Trainer",
-    blurb: "Manage clients, sessions, and progress notes — verified by the Equine Sync team.",
+    blurb: "Start with reviewed trainer intake, assigned-horse visibility, training notes, plans, and lesson workflows.",
     image:
       "https://images.unsplash.com/photo-1594768816441-1dd241ffaa67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwdHJhaW5lcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
     span: "md:col-span-2",
@@ -42,10 +43,38 @@ const ROLE_CARDS = [
 ];
 
 const TRUST = [
-  { Icon: ShieldCheck, label: "Verified equestrian network" },
-  { Icon: Calendar, label: "Skip & complete your profile later" },
-  { Icon: Users, label: "4 public paths, invite-only barn roles" },
-  { Icon: Sparkles, label: "Cancel anytime" },
+  { Icon: FileText, label: "Horse ledger and passport for lifelong care history" },
+  { Icon: ShieldCheck, label: "Care, records, and permissions in one workspace" },
+  { Icon: Calendar, label: "Scheduling, tasks, lessons, and provider visits" },
+  { Icon: Users, label: "Owner, barn, trainer, and service-provider paths" },
+];
+
+const PRODUCT_AREAS = [
+  {
+    Icon: FileText,
+    title: "Horse Ledger & Passport",
+    body: "Preserve the horse's care history so future owners are not forced to rebuild health, training, provider, and document context from a blank page.",
+  },
+  {
+    Icon: Users,
+    title: "Barn Operations",
+    body: "Coordinate horses, stalls, staff work, care routines, owner requests, billing, documents, and facility-level records.",
+  },
+  {
+    Icon: Calendar,
+    title: "Training & Scheduling",
+    body: "Support trainer intake, assigned-horse context, lesson calendars, training notes, plans, and rider or guardian communication.",
+  },
+  {
+    Icon: ShieldCheck,
+    title: "Owner Horse Management",
+    body: "Give individual owners a place for health details, appointments, care history, documents, reminders, and shared updates.",
+  },
+  {
+    Icon: Sparkles,
+    title: "Provider Coordination",
+    body: "Help vets, farriers, bodyworkers, and care partners maintain reviewed profiles and connect through scoped access.",
+  },
 ];
 
 // Phase 15.G round-2 (Codex blocker #3): Landing's pricing band is now
@@ -252,7 +281,7 @@ export default function Landing() {
     <div className="min-h-screen w-full bg-equine-navyDeep text-white font-sans" data-testid="landing-page">
       {/* Top nav */}
       <header className="px-6 md:px-12 py-6 flex items-center justify-between max-w-7xl mx-auto">
-        <Logo onNavy />
+        <Logo onNavy size={48} />
         <nav className="flex items-center gap-6">
           <a
             href="#pricing"
@@ -270,10 +299,10 @@ export default function Landing() {
           </Link>
           <button
             onClick={() => goToEnrollment()}
-            className="bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-5 py-2 text-[13px] tracking-wide font-medium rounded-full"
+            className="bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-5 py-2 text-[13px] tracking-wide font-medium rounded-full"
             data-testid="nav-join-cta"
           >
-            Join Equine Sync
+            Join EquineSync
           </button>
         </nav>
       </header>
@@ -282,30 +311,33 @@ export default function Landing() {
       <section className="relative overflow-hidden min-h-[75vh] flex flex-col justify-center">
         <img
           src="https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
-          alt="Equestrian"
-          className="absolute inset-0 w-full h-full object-cover opacity-25"
+          alt="Horse and rider in a training setting"
+          className="absolute inset-0 w-full h-full object-cover opacity-45"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-equine-navyDeep via-equine-navy/85 to-equine-navyDeep" />
+        <div className="absolute inset-0 bg-gradient-to-b from-equine-navyDeep/85 via-equine-navy/55 to-equine-navyDeep/90" />
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
           <div className="max-w-3xl">
-            <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-6">
-              The equestrian operating network
+            <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-6">
+              Stable operating software
             </div>
             <h1 className="font-display text-5xl md:text-7xl font-light leading-[1.04] text-white">
-              Every horse.<br />Every task.<br />
-              <span className="text-equine-saddle">In sync.</span>
+              The operating home and lifetime record for modern horse care.
             </h1>
             <p className="mt-8 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
-              Equine Sync connects owners, barns, trainers, and service providers in one quietly
-              powerful platform. Rider, guardian, and staff accounts remain invitation-based.
+              EquineSync is built around a horse ledger and horse passport: a care history
+              designed to stay with the horse, so the next owner is not starting from a blank
+              page. Barn operations, owner horse management, trainer programs, service-provider
+              coordination, billing, documents, care records, and scheduling come together in
+              one calm platform. Public signup supports owners, barn operators, trainers, and
+              service providers. Rider, guardian, and staff accounts remain invitation-based.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <button
                 onClick={() => goToEnrollment()}
-                className="group bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-8 py-4 text-[14px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                className="group bg-white text-brand-graphite hover:bg-brand-lilac transition-all px-8 py-4 text-[14px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                 data-testid="hero-join-cta"
               >
-                Join Equine Sync
+                Join EquineSync
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
               <Link
@@ -325,29 +357,95 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 flex flex-wrap justify-around md:justify-between gap-6">
           {TRUST.map((t, idx) => (
             <div key={idx} className="flex items-center gap-3 text-[13px] tracking-wide text-white/70">
-              <t.Icon className="w-4 h-4 text-equine-saddle" strokeWidth={1.5} />
+              <t.Icon className="w-4 h-4 text-brand-lilac" strokeWidth={1.5} />
               <span>{t.label}</span>
             </div>
           ))}
         </div>
       </section>
 
+      {/* Product suite */}
+      <section className="border-b border-white/10 bg-brand-frost text-brand-graphite">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
+          <div className="max-w-3xl mb-12">
+            <div className="text-[11px] tracking-[0.28em] uppercase text-brand-slate font-semibold mb-4">
+              What EquineSync Offers
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-brand-graphite">
+              One platform for the work around every horse.
+            </h2>
+            <p className="mt-5 text-[15px] md:text-base leading-relaxed text-brand-muted max-w-2xl">
+              The product is built around five connected needs: preserving the horse's
+              lifetime record, running the barn, managing individual horses, coordinating
+              training, and bringing trusted providers into the right parts of the workflow.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+            {PRODUCT_AREAS.map((area) => (
+              <div
+                key={area.title}
+                className="rounded-2xl border border-brand-mist bg-white p-6 shadow-[0_18px_55px_-42px_rgba(35,39,52,0.65)]"
+              >
+                <area.Icon className="w-5 h-5 text-brand-lilac mb-5" strokeWidth={1.6} />
+                <h3 className="font-display text-2xl text-brand-graphite">{area.title}</h3>
+                <p className="mt-3 text-[13.5px] leading-relaxed text-brand-muted">{area.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Public capability matrix */}
+      <section className="border-b border-white/10 bg-equine-navyDeep text-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
+          <div className="max-w-3xl mb-10">
+            <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-4">
+              Capability posture
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+              Clear about what is ready, gated, and provider-required.
+            </h2>
+            <p className="mt-5 text-[15px] md:text-base leading-relaxed text-white/65 max-w-2xl">
+              EquineSync can sell the horse ledger and operating system vision while staying honest about which workflows need provider proof, deeper lifecycle controls, or later approval.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]" data-testid="landing-capability-matrix">
+            {PUBLIC_CAPABILITY_MATRIX.map(([name, status, note]) => (
+              <div key={name} className="grid grid-cols-1 md:grid-cols-12 gap-3 border-b border-white/10 last:border-b-0 p-5">
+                <div className="md:col-span-3 font-display text-xl text-white">{name}</div>
+                <div className="md:col-span-2">
+                  <span className="inline-flex rounded-full border border-brand-lilac/30 bg-brand-lilac/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-brand-lilac">
+                    {status}
+                  </span>
+                </div>
+                <div className="md:col-span-7 text-[13.5px] leading-relaxed text-white/65">{note}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Role bento grid */}
       <section className="max-w-7xl mx-auto px-6 md:px-12 py-24">
         <div className="mb-14 max-w-2xl">
-          <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-4">
-            Join as
+          <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-4">
+            Choose your starting point
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-light text-white">
-            Four public paths. Invitation-only barn roles.
+            Four public paths into the EquineSync platform.
           </h2>
+          <p className="mt-4 text-white/65 text-[15px] leading-relaxed">
+            Owners, barns, trainers, and service providers can start directly. Rider, guardian,
+            staff, and facility-specific roles are invited into connected workspaces.
+          </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-6 gap-5 md:gap-6">
           {ROLE_CARDS.map((card) => (
             <button
               key={card.id}
               onClick={() => goToEnrollment(card.id)}
-              className={`group relative overflow-hidden text-left ${card.span} col-span-1 bg-equine-navy/60 hover:bg-equine-navy border border-white/5 hover:border-equine-saddle/40 transition-all duration-500 rounded-2xl min-h-[280px] flex flex-col justify-end p-6 md:p-7`}
+              className={`group relative overflow-hidden text-left ${card.span} col-span-1 bg-brand-slate/60 hover:bg-brand-slate border border-white/5 hover:border-brand-lilac/40 transition-all duration-500 rounded-2xl min-h-[280px] flex flex-col justify-end p-6 md:p-7`}
               data-testid={`role-card-${card.id}`}
             >
               <img
@@ -357,11 +455,11 @@ export default function Landing() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-equine-navyDeep via-equine-navyDeep/40 to-transparent" />
               <div className="relative">
-                <div className="font-display text-2xl md:text-3xl text-white group-hover:text-equine-saddle transition-colors">
+                <div className="font-display text-2xl md:text-3xl text-white group-hover:text-brand-lilac transition-colors">
                   {card.label}
                 </div>
                 <div className="mt-2 text-[13.5px] text-white/65 leading-relaxed max-w-xs">{card.blurb}</div>
-                <div className="mt-5 inline-flex items-center gap-1.5 text-[12px] tracking-wide text-white/80 group-hover:text-equine-saddle transition-colors">
+                <div className="mt-5 inline-flex items-center gap-1.5 text-[12px] tracking-wide text-white/80 group-hover:text-brand-lilac transition-colors">
                   Join as {card.label} <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </div>
@@ -375,15 +473,16 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
-              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-4">
+              <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-4">
                 Membership
               </div>
               <h2 className="font-display text-4xl md:text-5xl font-light text-white">
                 Pricing that respects your time.
               </h2>
               <p className="mt-4 text-white/65 text-[15px] leading-relaxed">
-                Start free as an invited owner or service provider. Upgrade when you need more. Paid plans include a
-                <span className="text-equine-saddle font-medium"> 14-day free trial</span>. Cancel anytime.
+                Plans map to how you use EquineSync: individual ownership, private-owner setups,
+                service-provider profiles, trainer programs, and barn workspaces. Paid plans include a
+                <span className="text-brand-lilac font-medium"> 14-day free trial</span>. Cancel anytime.
               </p>
             </div>
             {/* Monthly / Annual toggle */}
@@ -401,7 +500,7 @@ export default function Landing() {
                   data-testid={`landing-cycle-${c}`}
                   className={`px-4 py-2 text-[12px] tracking-wide uppercase rounded-full transition-colors ${
                     billingCycle === c
-                      ? "bg-equine-saddle text-equine-navyDeep"
+                      ? "bg-brand-lilac text-brand-graphite"
                       : "text-white/65 hover:text-white"
                   }`}
                 >
@@ -426,10 +525,10 @@ export default function Landing() {
           {/* Error / empty catalog state — graceful unavailable; no static prices */}
           {plansError && livePlans !== null && plansForCycle.length === 0 && (
             <div
-              className="bg-equine-navy/40 border border-equine-saddle/30 rounded-2xl p-10 text-center"
+              className="bg-brand-slate/40 border border-brand-lilac/30 rounded-2xl p-10 text-center"
               data-testid="pricing-unavailable"
             >
-              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle/80 font-medium mb-3">
+              <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac/80 font-medium mb-3">
                 Membership
               </div>
               <h3 className="font-display text-3xl text-white font-light">
@@ -441,7 +540,7 @@ export default function Landing() {
               </p>
               <a
                 href={CONTACT_SALES_MAILTO}
-                className="mt-6 inline-flex items-center gap-2 bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-6 py-3 text-[13px] tracking-wide font-medium rounded-full"
+                className="mt-6 inline-flex items-center gap-2 bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-6 py-3 text-[13px] tracking-wide font-medium rounded-full"
                 data-testid="pricing-contact-sales-cta"
               >
                 Contact sales <ArrowRight className="w-3.5 h-3.5" />
@@ -466,16 +565,16 @@ export default function Landing() {
                 <div
                   key={tier.tier_code}
                   className={`relative bg-equine-navy/60 border ${
-                    popular ? "border-equine-saddle/50 shadow-[0_0_60px_-20px_rgba(199,182,217,0.4)]" : "border-white/5"
+                    popular ? "border-brand-lilac/50 shadow-[0_0_60px_-20px_rgba(184,174,207,0.4)]" : "border-white/5"
                   } rounded-2xl p-8 flex flex-col`}
                   data-testid={`pricing-card-${tier.tier_code}`}
                 >
                   {popular && (
-                    <span className="absolute top-5 right-5 text-[10px] tracking-[0.2em] uppercase text-equine-saddle bg-equine-saddle/10 border border-equine-saddle/30 px-2.5 py-1 rounded-full">
+                    <span className="absolute top-5 right-5 text-[10px] tracking-[0.2em] uppercase text-brand-lilac bg-brand-lilac/10 border border-brand-lilac/30 px-2.5 py-1 rounded-full">
                       Most popular
                     </span>
                   )}
-                  <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle/80 font-medium mb-3">
+                  <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac/80 font-medium mb-3">
                     {tier.name}
                   </div>
 
@@ -492,7 +591,7 @@ export default function Landing() {
 
                   {billingCycle === "annual" && tier._savings != null && (
                     <div
-                      className="mt-2 text-[11px] tracking-[0.2em] uppercase text-equine-saddle"
+                      className="mt-2 text-[11px] tracking-[0.2em] uppercase text-brand-lilac"
                       data-testid={`pricing-savings-${tier.tier_code}`}
                     >
                       Save {tier._savings}% vs. monthly
@@ -504,7 +603,7 @@ export default function Landing() {
                   <ul className="mt-6 space-y-2.5 text-[13px] text-white/70 flex-1">
                     {(tier.bullets || []).map((b) => (
                       <li key={b} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 mt-0.5 text-equine-saddle flex-shrink-0" />
+                        <Check className="w-3.5 h-3.5 mt-0.5 text-brand-lilac flex-shrink-0" />
                         <span>{b}</span>
                       </li>
                     ))}
@@ -523,7 +622,7 @@ export default function Landing() {
                       onClick={() => navigate(signupPathForTier(tier.tier_code))}
                       className={`mt-8 w-full ${
                         popular
-                          ? "bg-equine-saddle text-equine-navyDeep hover:bg-white"
+                          ? "bg-brand-lilac text-brand-graphite hover:bg-white"
                           : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
                       } transition-colors py-3 text-[13px] tracking-wide font-medium rounded-full`}
                       data-testid={`pricing-cta-${tier.tier_code}`}
@@ -542,7 +641,7 @@ export default function Landing() {
       {/* Footer */}
       <footer className="border-t border-white/10 py-10 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] tracking-wide text-white/40">
-          <div>© Equine Sync · Built by horse owners and equestrians for the people and facilities who care for horses</div>
+          <div>© EquineSync · Built by horse owners and equestrians for the people and facilities who care for horses</div>
           <div className="flex gap-6">
             <Link to="/login" className="hover:text-white transition-colors" data-testid="footer-signin">Sign in</Link>
             <button onClick={() => goToEnrollment()} className="hover:text-white transition-colors" data-testid="footer-join">Join</button>

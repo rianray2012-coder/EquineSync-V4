@@ -3,6 +3,8 @@ import { AlertTriangle, CalendarDays, FileText, HeartPulse, RefreshCw, Stethosco
 import { api, fmtDate } from "../../lib/api";
 import { Card, PageHeader, SectionEyebrow, Stat, StatusPill } from "../../components/Primitives";
 import LastSyncedBadge from "../../components/today/LastSyncedBadge";
+import TrustWorkflowPanel from "../../components/TrustWorkflowPanel";
+import ProviderAccessPanel from "../../components/ProviderAccessPanel";
 
 const labelFor = (value) => String(value || "").replace(/_/g, " ");
 
@@ -69,6 +71,10 @@ export default function ServiceProviderDashboard() {
         <Card hover={false}><div className="py-10 text-center text-equine-inkSoft text-[13px]">Loading provider work...</div></Card>
       ) : (
         <>
+          <TrustWorkflowPanel roleKey="serviceProvider" testid="provider-north-star" />
+
+          <ProviderAccessPanel />
+
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
             <Stat label="Active Grants" value={counts.active_grants || 0} caption="Explicit horse access" icon={Stethoscope} testid="provider-stat-grants" />
             <Stat label="Shared Horses" value={counts.shared_horses || 0} caption="Grant-scoped only" accent="steel" icon={HeartPulse} testid="provider-stat-horses" />

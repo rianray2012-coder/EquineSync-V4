@@ -8,6 +8,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import TrustWorkflowPanel from "../../components/TrustWorkflowPanel";
+import OwnerWellbeingPanel from "../../components/OwnerWellbeingPanel";
 
 const DASHBOARDS = {
   owner: {
@@ -18,10 +20,10 @@ const DASHBOARDS = {
     testId: "dashboard-owner",
     primary: { label: "Owner Portal Pending", to: null },
     cards: [
-      ["My Horse", "Your horse profile and facility-approved care context will appear here.", Heart],
+      ["My Horse", "Horse profile and care context stay gated until your facility approves visibility.", Heart],
       ["Daily Care", "Approved owner-visible care status appears without staff notes or internal payloads.", ShieldCheck],
       ["Requests", "Use the approved request workflow for care questions, scheduling needs, or barn follow-up.", ClipboardList],
-      ["Documents", "Policies, waivers, and signed forms appear after document workflows are connected.", FileText],
+      ["Documents", "Document access is provider-required until approved document workflows and signature status are connected.", FileText],
       ["Messages", "Keep barn-approved conversations in one place.", MessageSquare],
     ],
   },
@@ -35,7 +37,7 @@ const DASHBOARDS = {
     cards: [
       ["Rider Overview", "Minor rider details appear after your barn connects the rider profile.", Heart],
       ["Schedule", "Lesson and ride times appear here when the barn publishes them.", CalendarDays],
-      ["Progress Notes", "Barn-approved progress notes and trainer summaries will appear here.", MessageSquare],
+      ["Progress Notes", "Barn-approved progress notes and trainer summaries stay hidden until your facility shares them.", MessageSquare],
       ["Documents", "Waivers, policies, and signed forms stay in the approved document workflow.", FileText],
       ["Requests", "Use requests for barn-approved follow-up and rider support.", ClipboardList],
     ],
@@ -48,7 +50,7 @@ const DASHBOARDS = {
     testId: "dashboard-rider",
     primary: { label: "View Schedule", to: null },
     cards: [
-      ["Schedule", "Your barn or trainer will publish lesson and ride times here.", CalendarDays],
+      ["Schedule", "Lesson and ride times stay pending until your barn or trainer publishes them.", CalendarDays],
       ["Lessons", "Lesson plans, prep notes, and trainer feedback appear after program setup.", ClipboardList],
       ["Goals", "Track approved goals and next steps without changing formal lesson enrollment.", Sparkles],
       ["Documents", "Waivers, policies, and signed forms stay in the approved document workflow.", FileText],
@@ -73,6 +75,10 @@ export default function PersonalDashboard({ profile }) {
       </header>
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="md:col-span-2 xl:col-span-3">
+          <TrustWorkflowPanel roleKey={profile} testid={`${config.testId}-north-star`} />
+          <OwnerWellbeingPanel profile={profile} testid={`${config.testId}-wellbeing-map`} />
+        </div>
         {config.cards.map(([title, body, Icon]) => (
           <section
             key={title}

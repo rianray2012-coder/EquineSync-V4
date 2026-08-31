@@ -402,6 +402,42 @@ def _build_equipment_summary(equipment_rows: List[Dict[str, Any]],
     return list(equipment_rows)
 
 
+async def build_owner_safe_transfer_care_summary(db, horse: Dict[str, Any]) -> Dict[str, Any]:
+    """Care-summary projection shared by owner ledger and passport transfer.
+
+    Passport transfer must not grow its own definition of owner-safe care data;
+    it should inherit the same section allowlists, schedule key filtering, and
+    Stripe-string scrubbing used by the owner Ledger projection.
+    """
+    horse_id = horse.get("id")
+    owner_view = True
+    profile = await db.horse_care_profiles.find_one(
+        {"horse_id": horse_id}, {"_id": 0},
+    )
+    policy_doc = await db.horse_owner_visibility_policy.find_one(
+        {"horse_id": horse_id}, {"_id": 0},
+    )
+    eff = lambda s: _effective_owner_keys(s, policy_doc)  # noqa: E731
+    equipment_keys = eff("equipment")
+    equipment = [
+        {k: r.get(k) for k in sorted(equipment_keys)}
+        for r in (await db.horse_equipment.find(
+            {"horse_id": horse_id, "barn_id": horse.get("barn_id"),
+             "status": {"$ne": "retired"}},
+            {"_id": 0, "category": 1, "label": 1},
+        ).to_list(20))
+    ] if equipment_keys else []
+    return _scrub_strings({
+        "feeding": _build_feeding(horse, profile, owner_view, eff("feeding")),
+        "hay_access": _build_hay_access(profile, owner_view, eff("hay_access")),
+        "turnout": _build_turnout(horse, profile, owner_view, eff("turnout")),
+        "riding_training": _build_riding_training(
+            horse, profile, owner_view, eff("riding_training"),
+        ),
+        "equipment": equipment,
+    })
+
+
 def _build_health(meds: List[Dict[str, Any]],
                   med_logs: List[Dict[str, Any]],
                   vet_records: List[Dict[str, Any]],
@@ -2110,33 +2146,63 @@ def build_router(*, db, get_current_user) -> APIRouter:
         cleaned = {k: v for k, v in (row or {}).items() if k != "staff_note"}
         return cleaned
 
+    def _owner_visible_work_filter(horse: Dict[str, Any], extra: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "barn_id": horse["barn_id"],
+            **extra,
+            "$or": [
+                {"owner_visible": True},
+                {"visibility": {"$in": ["owner_visible", "shared_with_owner"]}},
+            ],
+        }
+
+    def _safe_lesson_summary(row: Dict[str, Any], horse: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "id": row.get("id"),
+            "horse_id": row.get("horse_id"),
+            "horse_name": row.get("horse_name") or horse.get("name"),
+            "trainer_id": row.get("trainer_id") or row.get("trainer_user_id"),
+            "trainer_name": row.get("trainer_name"),
+            "start_time": row.get("start_time"),
+            "duration_min": row.get("duration_min"),
+            "focus": row.get("focus"),
+            "completed": bool(row.get("completed")),
+        }
+
+    def _safe_training_summary(row: Dict[str, Any], horse: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "id": row.get("id"),
+            "horse_id": row.get("horse_id"),
+            "horse_name": row.get("horse_name") or horse.get("name"),
+            "trainer_id": row.get("trainer_id") or row.get("trainer_user_id"),
+            "trainer_name": row.get("trainer_name"),
+            "date": row.get("date"),
+            "discipline": row.get("discipline"),
+            "exercises": row.get("exercises"),
+            "rating": row.get("rating"),
+            "homework": row.get("homework"),
+        }
+
+    def _safe_plan_summary(row: Dict[str, Any], horse: Dict[str, Any]) -> Dict[str, Any]:
+        data = row.get("data") or {}
+        return {
+            "id": row.get("id"),
+            "horse_id": data.get("horse_id"),
+            "horse_name": data.get("horse_name") or horse.get("name"),
+            "trainer_id": data.get("trainer_user_id") or data.get("trainer_id"),
+            "trainer_name": data.get("trainer_name"),
+            "goal": data.get("goal"),
+            "status": data.get("status") or "planned",
+            "updated_at": row.get("updated_at"),
+        }
+
     @router.get("/horse-ledger/{horse_id}/owner-summary")
     async def owner_summary(horse_id: str, user=Depends(get_current_user)):
         horse = await _load_horse_for_owner_or_404(horse_id, user)
-        owner_view = True  # owner-safe projection always
-        # Reuse 1-A projection for visible_sections (same as the
-        # existing owner GET ledger payload, just relabeled).
-        profile = await db.horse_care_profiles.find_one(
-            {"horse_id": horse_id}, {"_id": 0},
-        )
-        policy_doc = await db.horse_owner_visibility_policy.find_one(
-            {"horse_id": horse_id}, {"_id": 0},
-        )
-        eff = lambda s: _effective_owner_keys(s, policy_doc)  # noqa: E731
+        care_sections = await build_owner_safe_transfer_care_summary(db, horse)
         visible_sections = {
-            "identity":        _build_identity(horse, owner_view),
-            "feeding":         _build_feeding(horse, profile, owner_view, eff("feeding")),
-            "hay_access":      _build_hay_access(profile, owner_view, eff("hay_access")),
-            "turnout":         _build_turnout(horse, profile, owner_view, eff("turnout")),
-            "riding_training": _build_riding_training(horse, profile, owner_view, eff("riding_training")),
-            "equipment":       [
-                {"category": r.get("category"), "label": r.get("label")}
-                for r in (await db.horse_equipment.find(
-                    {"horse_id": horse_id, "barn_id": horse["barn_id"],
-                     "status": {"$ne": "retired"}},
-                    {"_id": 0, "category": 1, "label": 1},
-                ).to_list(20))
-            ],
+            "identity": _build_identity(horse, True),
+            **care_sections,
             # Owner-safe health placeholder. The full owner health
             # projection lives in the main GET ledger; for the summary
             # endpoint we surface a single non-leaking signal.
@@ -2191,6 +2257,18 @@ def build_router(*, db, get_current_user) -> APIRouter:
                 {"_id": 0},
             ).sort("created_at", -1).to_list(10)
             recent_requests = [_strip_staff_note(r) for r in rows]
+        owner_lessons = await db.lessons.find(
+            _owner_visible_work_filter(horse, {"horse_id": horse_id}),
+            {"_id": 0},
+        ).sort("start_time", 1).to_list(6)
+        owner_training = await db.training.find(
+            _owner_visible_work_filter(horse, {"horse_id": horse_id}),
+            {"_id": 0},
+        ).sort("date", -1).to_list(6)
+        owner_plans = await db.training_plans.find(
+            _owner_visible_work_filter(horse, {"data.horse_id": horse_id}),
+            {"_id": 0},
+        ).sort("updated_at", -1).to_list(6)
         payload = {
             "horse_id":             horse_id,
             "generated_at":         datetime.now(timezone.utc).isoformat(),
@@ -2198,6 +2276,11 @@ def build_router(*, db, get_current_user) -> APIRouter:
             "summary_cards":        cards,
             "visible_sections":     visible_sections,
             "recent_owner_updates": [],  # reserved for a future phase
+            "training_summary": {
+                "upcoming_lessons": [_safe_lesson_summary(r, horse) for r in owner_lessons if not r.get("completed")],
+                "recent_training":  [_safe_training_summary(r, horse) for r in owner_training],
+                "active_plans":     [_safe_plan_summary(r, horse) for r in owner_plans],
+            },
             "recent_owner_requests":recent_requests,
             "request_options": {
                 "request_type":      sorted(_OWNER_REQUEST_TYPES),
