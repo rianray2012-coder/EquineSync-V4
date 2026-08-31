@@ -51,7 +51,7 @@ export default function AcceptInvite() {
       <div className="relative hidden lg:block bg-equine-navy">
         <img
           src="https://static.prod-images.emergentagent.com/jobs/137f7c6b-a2e1-41c0-9c38-96d2409d644a/images/3ca3908290d52bc07be0b5f45e2f358fac3cee0e8034aa339d3b62ddac3b3403.png"
-          alt="Luxury equestrian arena"
+          alt="Equestrian arena"
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-equine-navy via-equine-navy/85 to-equine-navyDeep" />

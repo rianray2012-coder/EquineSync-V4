@@ -20,6 +20,8 @@ export const Logo = ({
   variant = "horizontal",
   tone,
   linkTo = "/",
+  wordmarkSize = 22,
+  taglineSize = 8.5,
 }) => {
   const dark = tone ? tone === "dark" : onNavy;
 
@@ -67,13 +69,13 @@ export const Logo = ({
     >
       {iconEl}
       <div className="leading-none">
-        <div className="font-display text-[22px] tracking-wide">
+        <div className="font-display tracking-wide" style={{ fontSize: wordmarkSize }}>
           <span style={{ color: equineColor }}>Equine-</span>
           <span style={{ color: syncColor }}>Sync</span>
         </div>
         <div
-          className="text-[8.5px] tracking-[0.22em] uppercase mt-1.5 font-medium"
-          style={{ color: taglineColor }}
+          className="tracking-[0.22em] uppercase mt-1.5 font-medium"
+          style={{ color: taglineColor, fontSize: taglineSize }}
         >
           Every Horse. Every Task. In Sync.
         </div>
