@@ -36,6 +36,9 @@ module.exports = {
           navyLift:    '#3D445A',
           brass:       '#A7B7E7',  // icy blue (primary accent — was brass)
           brassLight:  '#C2CDEC',  // light icy blue
+          ice:         '#DCEEFA',  // ice blue (approved accent alias)
+          lilac:       '#B8AECF',  // smoky lilac (approved accent alias)
+          lavender:    '#D8D2E3',  // frosted lavender gray (approved accent alias)
           saddle:      '#C7B6D9',  // dusty lavender (was saddle leather)
           saddleDeep:  '#A593C0',
           champagne:   '#B89B7A',  // muted champagne taupe (warm accent)

@@ -76,7 +76,7 @@ def test_personal_dashboard_copy_is_dashboard_language_not_intake_language():
 def test_owner_dashboard_does_not_open_owner_portal_without_authoritative_linkage():
     src = _read(FRONTEND / "features" / "dashboards" / "PersonalDashboard.jsx")
 
-    assert 'primary: { label: "Owner Portal Pending", to: null }' in src
+    assert 'primary: { label: "Facility Connection Pending", to: null }' in src
     assert 'to: "/owner-portal"' not in src
     assert "Open Owner Portal" not in src
 

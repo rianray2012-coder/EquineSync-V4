@@ -58,6 +58,11 @@ def test_bn13n_script_compiles_and_has_expected_roster():
         assert by_row[row]["platform_role"] == platform_role
     assert by_row["UAT-R9"]["membership_tier"] == "service_provider_free"
     assert by_row["UAT-R9"]["subscription_status"] == "free"
+    assert by_row["UAT-R1"]["full_name"] == "Platform Admin"
+    assert by_row["UAT-R2a"]["full_name"] == "Facility Admin"
+    assert by_row["BN13M-T1"]["full_name"] == "Trainer"
+    assert by_row["UAT-R8"]["full_name"] == "Individual Owner"
+    assert by_row["UAT-R9"]["full_name"] == "Service Provider"
 
 
 def test_bn13n_script_uses_safe_production_and_dry_run_guards():
@@ -89,6 +94,30 @@ def test_bn13n_target_email_filter_limits_scope_to_one_account():
         assert "uat.trainer@equine-sync.com" in str(exc)
     else:
         raise AssertionError("unknown target email must fail closed")
+
+
+def test_bn13n_existing_barn_name_is_refreshed(monkeypatch):
+    module = _load_script_module()
+    updates = []
+
+    async def _find_one(_query, _projection=None):
+        return {"id": module.UAT_BARN_ID, "name": "BN12 UAT Facility"}
+
+    async def _update_one(query, update):
+        updates.append((query, update))
+
+    class _Barns:
+        find_one = staticmethod(_find_one)
+        update_one = staticmethod(_update_one)
+
+    class _DB:
+        barns = _Barns()
+
+    action = asyncio.run(module._ensure_barn(_DB(), dry_run=False))
+
+    assert action == "updated_name"
+    assert updates[0][0] == {"id": module.UAT_BARN_ID}
+    assert updates[0][1]["$set"]["name"] == "EquineSync Pilot Stable"
 
 
 def test_bn13n_existing_user_dry_run_reset_does_not_mint_password(monkeypatch):
