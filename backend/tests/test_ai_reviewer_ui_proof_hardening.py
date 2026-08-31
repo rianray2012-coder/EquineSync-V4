@@ -80,9 +80,31 @@ def test_ai_reviewer_surfaces_expanded_pilot_extraction_lane_previews():
         "Expense candidates",
         "Work-ticket candidates",
         "Schedule candidates",
+        "Itinerary candidates",
+        "Notification preview",
+        "Calendar boundary",
         "Training notes",
     ]:
         assert visible_label in source
+
+
+def test_ai_schedule_reviewer_has_calendar_notification_no_send_hooks():
+    source = _source()
+
+    assert "isScheduleSource" in source
+    assert "scheduleReviewBoundaryFor" in source
+    assert 'data-testid={`ai-schedule-calendar-boundary-${job.id}`}' in source
+    assert 'data-testid={`ai-schedule-no-calendar-mutation-copy-${job.id}`}' in source
+    assert 'data-testid={`ai-schedule-participant-notification-gate-${job.id}`}' in source
+    assert 'data-testid={`ai-schedule-no-calendar-mutation-${job.id}`}' in source
+    assert 'data-testid={`ai-schedule-no-participant-notification-${job.id}`}' in source
+    assert 'data-testid={`ai-schedule-human-confirmation-required-${job.id}`}' in source
+    assert 'data-testid={`ai-schedule-privacy-review-required-${job.id}`}' in source
+    assert 'data-testid={`ai-schedule-review-candidate-${job.id}`}' in source
+    assert "AI cannot create, update, delete, or publish calendar events" in source
+    assert "Participant notifications require separate human approval" in source
+    assert "recipient opt-in review" in source
+    assert "privacy-safe copy review" in source
 
 
 def test_ai_invoice_payment_review_boundary_has_stable_no_mutation_hooks():

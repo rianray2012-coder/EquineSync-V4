@@ -920,6 +920,25 @@ def test_pilot_extraction_schemas_cover_busy_barn_draft_lanes_without_new_author
     assert "participant_notification" in voice_schema["blocked_actions"]
     assert "payment_status_change" in voice_schema["blocked_actions"]
 
+    schedule_schema = json.loads(output_schema_hint("lesson_schedule"))
+    assert schedule_schema["calendar_review_boundary"]["official_calendar_change_allowed"] is False
+    assert schedule_schema["calendar_review_boundary"]["participant_notification_allowed"] is False
+    assert schedule_schema["calendar_review_boundary"]["automated_send_allowed"] is False
+    assert schedule_schema["draft_notification_preview"]["send_allowed"] is False
+    assert schedule_schema["draft_notification_preview"]["privacy_safe_copy_required"] is True
+    for blocked_action in [
+        "calendar_event_create",
+        "calendar_event_update",
+        "calendar_event_delete",
+        "calendar_mutation",
+        "participant_notification",
+        "automated_notification_send",
+        "push_send",
+        "sms_send",
+        "email_send",
+    ]:
+        assert blocked_action in schedule_schema["blocked_actions"]
+
 
 def test_parse_output_normalizes_invoice_payment_status_to_review_only():
     extractor = OpenAIDraftExtractor(api_key="test-key")
@@ -1106,6 +1125,70 @@ def test_invoice_payment_review_normalization_overrides_unsafe_model_flags():
         "charge_money",
         "refund_or_credit",
         "subscription_entitlement_change",
+    ]:
+        assert blocked_action in parsed["blocked_actions"]
+
+
+def test_lesson_schedule_normalization_blocks_calendar_and_notifications():
+    extractor = OpenAIDraftExtractor(api_key="test-key")
+    parsed = extractor._parse_output(
+        {
+            "output_text": json.dumps({
+                "draft_only": False,
+                "review_required": False,
+                "source_category": "lesson_schedule",
+                "draft_schedule_candidates": "Tuesday lesson at 4",
+                "draft_itinerary_candidates": "Warm-up, flatwork, cooldown",
+                "draft_notification_preview": {
+                    "channels": "sms",
+                    "recipients": "parent",
+                    "message": "Your lesson was moved.",
+                    "privacy_safe_copy_required": False,
+                    "send_allowed": True,
+                },
+                "calendar_review_boundary": {
+                    "candidate_status": "ready",
+                    "requires_human_confirmation": False,
+                    "official_calendar_change_allowed": True,
+                    "participant_notification_allowed": True,
+                    "automated_send_allowed": True,
+                    "recipient_opt_in_review_required": False,
+                    "privacy_safe_copy_review_required": False,
+                },
+                "blocked_actions": [],
+            })
+        },
+        source_type="lesson_schedule",
+    )
+
+    assert parsed["draft_only"] is True
+    assert parsed["review_required"] is True
+    assert parsed["draft_schedule_candidates"] == []
+    assert parsed["draft_itinerary_candidates"] == []
+    notification_preview = parsed["draft_notification_preview"]
+    assert notification_preview["channels"] == []
+    assert notification_preview["recipients"] == []
+    assert notification_preview["message"] == "Your lesson was moved."
+    assert notification_preview["privacy_safe_copy_required"] is True
+    assert notification_preview["send_allowed"] is False
+    calendar_boundary = parsed["calendar_review_boundary"]
+    assert calendar_boundary["candidate_status"] == "ready"
+    assert calendar_boundary["requires_human_confirmation"] is True
+    assert calendar_boundary["official_calendar_change_allowed"] is False
+    assert calendar_boundary["participant_notification_allowed"] is False
+    assert calendar_boundary["automated_send_allowed"] is False
+    assert calendar_boundary["recipient_opt_in_review_required"] is True
+    assert calendar_boundary["privacy_safe_copy_review_required"] is True
+    for blocked_action in [
+        "calendar_event_create",
+        "calendar_event_update",
+        "calendar_event_delete",
+        "calendar_mutation",
+        "participant_notification",
+        "automated_notification_send",
+        "push_send",
+        "sms_send",
+        "email_send",
     ]:
         assert blocked_action in parsed["blocked_actions"]
 

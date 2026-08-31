@@ -129,6 +129,17 @@ const invoicePaymentReviewFor = (job) => {
     candidate_status: review.candidate_status || review.status || "review_required",
   };
 };
+const isScheduleSource = (sourceType) => sourceType === "lesson_schedule";
+const scheduleReviewBoundaryFor = (job) => {
+  const boundary = draftResultFor(job).calendar_review_boundary;
+  return {
+    ...(boundary && typeof boundary === "object" && !Array.isArray(boundary) ? boundary : {}),
+    candidate_status: boundary?.candidate_status || "review_required",
+    official_calendar_change_allowed: false,
+    participant_notification_allowed: false,
+    automated_send_allowed: false,
+  };
+};
 
 const healthScoreCandidateFor = (job) => {
   const candidate = draftResultFor(job).draft_health_score_candidate;
@@ -267,7 +278,12 @@ const sourceLanePreviewFor = (job) => {
     return {
       testId: `ai-draft-expanded-schedule-${job.id}`,
       title: "Schedule Draft",
-      items: [["Schedule candidates", result.draft_schedule_candidates]],
+      items: [
+        ["Schedule candidates", result.draft_schedule_candidates],
+        ["Itinerary candidates", result.draft_itinerary_candidates],
+        ["Notification preview", result.draft_notification_preview],
+        ["Calendar boundary", result.calendar_review_boundary],
+      ],
     };
   }
   if (job.source_type === "training_note") {
@@ -836,6 +852,40 @@ export default function AiAutomation() {
                           )}
                         </div>
                       )}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {isScheduleSource(job.source_type) && (
+                <div
+                  className="mb-4 rounded-lg border border-equine-brass/30 bg-equine-brass/5 p-3"
+                  data-testid={`ai-schedule-calendar-boundary-${job.id}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <ShieldCheck className="w-5 h-5 text-equine-champagne mt-0.5 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="label-eyebrow-muted mb-1">Schedule Review Boundary</div>
+                      <div className="text-[13px] text-equine-inkMuted leading-relaxed" data-testid={`ai-schedule-no-calendar-mutation-copy-${job.id}`}>
+                        Lesson and training schedule AI can draft schedule options, itineraries, conflict notes, and notification copy for human review. AI cannot create, update, delete, or publish calendar events.
+                      </div>
+                      <div className="text-[12.5px] text-equine-inkMuted leading-relaxed mt-2" data-testid={`ai-schedule-participant-notification-gate-${job.id}`}>
+                        Participant notifications require separate human approval, recipient opt-in review, privacy-safe copy review, and an explicit send workflow.
+                      </div>
+                      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <StatusPill tone="critical" data-testid={`ai-schedule-no-calendar-mutation-${job.id}`}>No Calendar Mutation</StatusPill>
+                        <StatusPill tone="critical" data-testid={`ai-schedule-no-participant-notification-${job.id}`}>No Participant Notification</StatusPill>
+                        <StatusPill tone="warning" data-testid={`ai-schedule-human-confirmation-required-${job.id}`}>Human Confirmation Required</StatusPill>
+                        <StatusPill tone="warning" data-testid={`ai-schedule-privacy-review-required-${job.id}`}>Privacy Review Required</StatusPill>
+                      </div>
+                      <div className="mt-3 rounded-lg border border-equine-cloud bg-white/75 px-3 py-2" data-testid={`ai-schedule-review-candidate-${job.id}`}>
+                        <div className="label-eyebrow-muted mb-1">Draft Schedule Review Candidate</div>
+                        <div className="text-[12.5px] text-equine-ink">
+                          {candidateFieldValue(scheduleReviewBoundaryFor(job), "candidate_status", "Review required")}
+                        </div>
+                        <div className="text-[12px] text-equine-inkMuted mt-1">
+                          Calendar change allowed: {candidateFieldValue(scheduleReviewBoundaryFor(job), "official_calendar_change_allowed", "No")} · Notification allowed: {candidateFieldValue(scheduleReviewBoundaryFor(job), "participant_notification_allowed", "No")}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
