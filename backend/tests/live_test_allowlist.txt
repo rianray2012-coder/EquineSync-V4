@@ -33,6 +33,7 @@ backend/tests/test_equinesync.py::*
 backend/tests/test_founder_crud_sprint.py::*
 backend/tests/test_horses_routes.py::*
 backend/tests/test_horses_scoping.py::*
+backend/tests/test_horse_transfers.py::*
 backend/tests/test_invites_and_analytics.py::*
 backend/tests/test_marketplace_signup.py::*
 backend/tests/test_onboarding.py::*
@@ -218,6 +219,18 @@ backend/tests/test_admin_portal_admin6.py::test_alerts_denied_access_pattern_sev
 backend/tests/test_admin_portal_admin6.py::test_alerts_scope_for_billing_admin
 backend/tests/test_admin_portal_admin6.py::test_admin6_reads_excluded_from_activity_feed
 backend/tests/test_admin_portal_admin6.py::test_admin6_does_not_reference_phase9[/admin/portal/audit-logs?limit=5]
+backend/tests/test_subscriptions_15g.py::test_plans_public_no_auth_required
+backend/tests/test_subscriptions_15g.py::test_plans_public_strips_secrets
+backend/tests/test_subscriptions_15g.py::test_plans_public_has_cache_header
+backend/tests/test_subscriptions_15g.py::test_free_checkout_writes_local_subscription
+backend/tests/test_subscriptions_15g.py::test_free_checkout_no_barn_manage_required
+backend/tests/test_subscriptions_15g.py::test_legacy_membership_checkout_is_410
+backend/tests/test_subscriptions_15g.py::test_legacy_membership_checkout_410_for_paid_tiers_too
+backend/tests/test_subscriptions_15g.py::test_subscription_created_persists_amount_cents
+backend/tests/test_subscriptions_15g.py::test_subscription_updated_persists_amount_cents
+backend/tests/test_subscriptions_15g.py::test_legacy_membership_checkout_status_is_410
+backend/tests/test_subscriptions_15g.py::test_free_checkout_visible_via_subscriptions_me
+backend/tests/test_subscriptions_15g.py::test_subscription_updated_amount_cents_not_overwritten_when_missing
 backend/tests/test_admin_portal_admin6.py::test_admin6_does_not_reference_phase9[/admin/portal/support?limit=5]
 backend/tests/test_admin_portal_admin6.py::test_admin6_does_not_reference_phase9[/admin/portal/alerts]
 # backend/tests/test_support_feedback_intake.py

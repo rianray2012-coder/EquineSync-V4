@@ -256,6 +256,19 @@ def app_client(app):
         yield test_client
 
 
+@pytest.fixture(scope="session", autouse=True)
+def keep_app_client_open(app_client):
+    """Prime the shared app client before direct asyncio tests bind Motor.
+
+    Several older source/proof tests call application helpers through
+    ``asyncio.run(...)``. If those run before any real app-client test, Motor can
+    cache that temporary loop and later product-route tests inherit a closed
+    loop. Keeping the session TestClient open from the beginning preserves the
+    existing shared-client strategy while making the order explicit.
+    """
+    yield
+
+
 @pytest.fixture
 def client(app_client, isolated_app_database):
     """A ``TestClient`` bound to the real application.

@@ -228,6 +228,24 @@ def test_inline_text_job_is_draft_only_and_review_does_not_save_records():
         assert "horse_health_records" not in db
 
 
+def test_rider_role_is_denied_ai_draft_review_access():
+    db = FakeDb()
+    user = {"id": "u_rider", "role": "rider", "barn_id": "barn_1", "email": "rider@example.test"}
+    app = app_for(db, user)
+    with TestClient(app) as client:
+        created = client.post("/api/ai/draft-jobs", json={
+            "source_type": "photo_inventory",
+            "requested_output": "photo_to_inventory",
+            "source_text": "One saddle and one purple helmet.",
+        })
+        assert created.status_code == 403
+        assert created.json()["detail"] == "AI draft review access required"
+
+        listed = client.get("/api/ai/draft-jobs")
+        assert listed.status_code == 403
+        assert listed.json()["detail"] == "AI draft review access required"
+
+
 def test_list_draft_jobs_returns_only_own_draft_queue():
     db = FakeDb()
     owner = {"id": "u_1", "role": "barn_manager", "barn_id": "barn_1", "email": "owner@example.test"}
