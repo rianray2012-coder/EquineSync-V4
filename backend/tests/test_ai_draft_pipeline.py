@@ -1043,6 +1043,73 @@ def test_parse_output_normalizes_inventory_candidates_to_reviewable_shape():
     assert "inventory_record_create" in parsed["blocked_actions"]
 
 
+def test_invoice_schema_exposes_payment_review_boundary_without_money_mutation():
+    schema = json.loads(output_schema_hint("service_invoice"))
+
+    assert schema["draft_payment_review"]["candidate_status"] == "review_required"
+    assert schema["draft_payment_review"]["requires_human_confirmation"] is True
+    assert schema["draft_payment_review"]["official_payment_status_change_allowed"] is False
+    assert schema["draft_payment_review"]["invoice_finalization_allowed"] is False
+    assert schema["draft_payment_review"]["subscription_entitlement_change_allowed"] is False
+    assert schema["draft_reconciliation_questions"] == []
+    for blocked_action in [
+        "payment_status_change",
+        "invoice_finalization",
+        "charge_money",
+        "refund_or_credit",
+        "subscription_entitlement_change",
+    ]:
+        assert blocked_action in schema["blocked_actions"]
+
+
+def test_invoice_payment_review_normalization_overrides_unsafe_model_flags():
+    extractor = OpenAIDraftExtractor(api_key="test-key")
+    parsed = extractor._parse_output(
+        {
+            "output_text": json.dumps({
+                "draft_only": False,
+                "review_required": False,
+                "source_category": "invoice",
+                "draft_payment_status_candidate": {
+                    "status": "paid",
+                    "basis": "invoice says paid",
+                    "official_payment_status_change_allowed": True,
+                },
+                "draft_payment_review": {
+                    "candidate_status": "paid",
+                    "basis": "invoice stamp",
+                    "official_payment_status_change_allowed": True,
+                    "invoice_finalization_allowed": True,
+                    "subscription_entitlement_change_allowed": True,
+                },
+                "draft_reconciliation_questions": "Was this already matched to Stripe?",
+                "blocked_actions": [],
+            })
+        },
+        source_type="invoice",
+    )
+
+    assert parsed["draft_only"] is True
+    assert parsed["review_required"] is True
+    assert parsed["draft_payment_status_candidate"]["official_payment_status_change_allowed"] is False
+    payment_review = parsed["draft_payment_review"]
+    assert payment_review["candidate_status"] == "paid"
+    assert payment_review["basis"] == ["invoice stamp"]
+    assert payment_review["requires_human_confirmation"] is True
+    assert payment_review["official_payment_status_change_allowed"] is False
+    assert payment_review["invoice_finalization_allowed"] is False
+    assert payment_review["subscription_entitlement_change_allowed"] is False
+    assert parsed["draft_reconciliation_questions"] == []
+    for blocked_action in [
+        "payment_status_change",
+        "invoice_finalization",
+        "charge_money",
+        "refund_or_credit",
+        "subscription_entitlement_change",
+    ]:
+        assert blocked_action in parsed["blocked_actions"]
+
+
 def test_pdf_manual_review_payload_when_all_pdf_fallbacks_fail():
     extractor = PdfManualFallbackExtractor()
     result = asyncio.run(extractor._extract_pdf(

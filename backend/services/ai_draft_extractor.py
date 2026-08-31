@@ -105,6 +105,18 @@ INVOICE_CANDIDATE_TEMPLATE = {
     "notes": [],
 }
 
+INVOICE_PAYMENT_REVIEW_TEMPLATE = {
+    "candidate_status": "review_required",
+    "confidence": None,
+    "basis": [],
+    "matched_processor_event": None,
+    "matched_manual_payment_record": None,
+    "requires_human_confirmation": True,
+    "official_payment_status_change_allowed": False,
+    "invoice_finalization_allowed": False,
+    "subscription_entitlement_change_allowed": False,
+}
+
 WORK_TICKET_CANDIDATE_TEMPLATE = {
     "title": None,
     "category": None,
@@ -179,8 +191,18 @@ def output_schema_hint(source_type: str) -> str:
                 "basis": [],
                 "official_payment_status_change_allowed": False,
             },
+            "draft_payment_review": INVOICE_PAYMENT_REVIEW_TEMPLATE,
+            "draft_reconciliation_questions": [],
             "review_questions": [],
-            "blocked_actions": [*AI_BLOCKED_ACTIONS, "inventory_record_create", "payment_status_change", "invoice_finalization"],
+            "blocked_actions": [
+                *AI_BLOCKED_ACTIONS,
+                "inventory_record_create",
+                "payment_status_change",
+                "invoice_finalization",
+                "charge_money",
+                "refund_or_credit",
+                "subscription_entitlement_change",
+            ],
         })
     if source_type == "photo_inventory":
         return json.dumps({
@@ -395,10 +417,15 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
         if "inventory_record_create" not in parsed["blocked_actions"]:
             parsed["blocked_actions"].append("inventory_record_create")
     if source_type in {"invoice", "service_invoice"}:
-        if "payment_status_change" not in parsed["blocked_actions"]:
-            parsed["blocked_actions"].append("payment_status_change")
-        if "invoice_finalization" not in parsed["blocked_actions"]:
-            parsed["blocked_actions"].append("invoice_finalization")
+        for action in [
+            "payment_status_change",
+            "invoice_finalization",
+            "charge_money",
+            "refund_or_credit",
+            "subscription_entitlement_change",
+        ]:
+            if action not in parsed["blocked_actions"]:
+                parsed["blocked_actions"].append(action)
         if not isinstance(parsed.get("draft_payment_status_candidate"), dict):
             parsed["draft_payment_status_candidate"] = {
                 "status": "review_required",
@@ -406,6 +433,19 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
                 "official_payment_status_change_allowed": False,
             }
         parsed["draft_payment_status_candidate"]["official_payment_status_change_allowed"] = False
+        if not isinstance(parsed.get("draft_payment_review"), dict):
+            parsed["draft_payment_review"] = {}
+        payment_review = dict(INVOICE_PAYMENT_REVIEW_TEMPLATE)
+        payment_review.update(parsed["draft_payment_review"])
+        if not isinstance(payment_review.get("basis"), list):
+            payment_review["basis"] = [] if payment_review.get("basis") in (None, "") else [str(payment_review["basis"])]
+        payment_review["requires_human_confirmation"] = True
+        payment_review["official_payment_status_change_allowed"] = False
+        payment_review["invoice_finalization_allowed"] = False
+        payment_review["subscription_entitlement_change_allowed"] = False
+        parsed["draft_payment_review"] = payment_review
+        if not isinstance(parsed.get("draft_reconciliation_questions"), list):
+            parsed["draft_reconciliation_questions"] = []
     if source_type == "voice_transcript":
         for key in ["draft_work_ticket_candidates", "draft_schedule_candidates"]:
             if not isinstance(parsed.get(key), list):

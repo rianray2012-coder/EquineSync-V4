@@ -75,11 +75,31 @@ def test_ai_reviewer_surfaces_expanded_pilot_extraction_lane_previews():
         "Room or area",
         "Storage state",
         "Payment status",
+        "Payment review",
+        "Reconciliation questions",
+        "Expense candidates",
         "Work-ticket candidates",
         "Schedule candidates",
         "Training notes",
     ]:
         assert visible_label in source
+
+
+def test_ai_invoice_payment_review_boundary_has_stable_no_mutation_hooks():
+    source = _source()
+
+    assert "isInvoiceSource" in source
+    assert "invoicePaymentReviewFor" in source
+    assert 'data-testid={`ai-invoice-payment-boundary-${job.id}`}' in source
+    assert 'data-testid={`ai-invoice-no-payment-mutation-${job.id}`}' in source
+    assert 'data-testid={`ai-invoice-no-finalization-${job.id}`}' in source
+    assert 'data-testid={`ai-invoice-subscription-separation-${job.id}`}' in source
+    assert 'data-testid={`ai-invoice-payment-review-candidate-${job.id}`}' in source
+    assert 'data-testid={`ai-invoice-reconciliation-questions-${job.id}`}' in source
+    assert "Payment status is draft review only" in source
+    assert "AI cannot finalize invoices, mark paid or unpaid, charge, refund, issue credits" in source
+    assert "change EquineSync subscription entitlements" in source
+    assert "Trainer and facility receivables stay separate from EquineSync subscription billing" in source
 
 
 def test_ai_work_candidates_include_voice_work_ticket_candidates():
