@@ -26,7 +26,7 @@ module.exports = {
           critical: '#B46A6A',
         },
         equine: {
-          /* Approved EquineSync brand aliases for product UI. */
+          /* Temporary compatibility aliases. New UI should prefer `brand.*`. */
           black:       '#F7F8FA',
           soft:        '#E3E6EB',
           card:        '#FFFFFF',
@@ -51,11 +51,12 @@ module.exports = {
           navy:        '#2E3550',
           navyDeep:    '#232734',
           navyLift:    '#37405E',
-          lilac:       '#B8AECF',
-          lilacDeep:   '#9F93BD',
-          lavender:    '#D8D2E3',
-          ice:         '#DCEAF4',
-          silverBlue:  '#BCC9D6',
+          brass:       '#B8AECF',
+          brassLight:  '#D8D2E3',
+          saddle:      '#B8AECF',
+          saddleDeep:  '#9F93BD',
+          champagne:   '#B8AECF',
+          taupe:       '#BCC9D6',
           steel:       '#DCEAF4',
 
           /* ============ STATUS (muted, refined) ============ */

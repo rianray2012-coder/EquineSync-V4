@@ -2,17 +2,18 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Logo } from "../components/Logo";
-import { Check, ArrowRight, ShieldCheck, Sparkles, Users, Calendar } from "lucide-react";
+import { Check, ArrowRight, ShieldCheck, Sparkles, Users, Calendar, FileText } from "lucide-react";
 import { annualSavingsPct, formatCents, sortPlans } from "../lib/subscriptionBilling";
 import { api } from "../lib/api";
+import { PUBLIC_CAPABILITY_MATRIX } from "../lib/businessWorkflow";
 
 const ROLE_CARDS = [
   {
     id: "horse_owner",
     label: "Individual Horse Owner",
-    blurb: "Manage care records, appointments, documents, reminders, and shared updates for your own horse.",
+    blurb: "Build a horse ledger and passport with care records, appointments, documents, reminders, and shared updates.",
     image:
-      "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
+      "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
     span: "md:col-span-3",
   },
   {
@@ -42,13 +43,18 @@ const ROLE_CARDS = [
 ];
 
 const TRUST = [
+  { Icon: FileText, label: "Horse ledger and passport for lifelong care history" },
   { Icon: ShieldCheck, label: "Care, records, and permissions in one workspace" },
   { Icon: Calendar, label: "Scheduling, tasks, lessons, and provider visits" },
   { Icon: Users, label: "Owner, barn, trainer, and service-provider paths" },
-  { Icon: Sparkles, label: "Billing, documents, updates, and reminders" },
 ];
 
 const PRODUCT_AREAS = [
+  {
+    Icon: FileText,
+    title: "Horse Ledger & Passport",
+    body: "Preserve the horse's care history so future owners are not forced to rebuild health, training, provider, and document context from a blank page.",
+  },
   {
     Icon: Users,
     title: "Barn Operations",
@@ -274,34 +280,26 @@ export default function Landing() {
   return (
     <div className="min-h-screen w-full bg-equine-navyDeep text-white font-sans" data-testid="landing-page">
       {/* Top nav */}
-      <header className="px-4 sm:px-6 md:px-12 py-6 flex items-center justify-between gap-3 sm:gap-4 max-w-7xl mx-auto">
-        <div className="sm:hidden shrink-0">
-          <Logo onNavy size={60} showTagline={false} />
-        </div>
-        <div className="hidden sm:block lg:hidden shrink-0">
-          <Logo onNavy size={68} showTagline={false} />
-        </div>
-        <div className="hidden lg:block">
-          <Logo onNavy size={82} />
-        </div>
-        <nav className="flex items-center gap-3 lg:gap-6">
+      <header className="px-6 md:px-12 py-6 flex items-center justify-between max-w-7xl mx-auto">
+        <Logo onNavy size={48} />
+        <nav className="flex items-center gap-6">
           <a
             href="#pricing"
-            className="hidden lg:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
+            className="hidden sm:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
             data-testid="nav-pricing"
           >
             Pricing
           </a>
           <Link
             to="/login"
-            className="hidden lg:inline text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
+            className="text-[13px] tracking-wide text-white/70 hover:text-white transition-colors"
             data-testid="nav-signin"
           >
             Sign in
           </Link>
           <button
             onClick={() => goToEnrollment()}
-            className="hidden sm:inline-flex bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-4 sm:px-5 py-2 text-[12.5px] sm:text-[13px] tracking-wide font-medium rounded-full"
+            className="bg-brand-lilac text-brand-graphite hover:bg-white transition-colors px-5 py-2 text-[13px] tracking-wide font-medium rounded-full"
             data-testid="nav-join-cta"
           >
             Join EquineSync
@@ -312,7 +310,7 @@ export default function Landing() {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[75vh] flex flex-col justify-center">
         <img
-          src="https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
+          src="https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
           alt="Horse and rider in a training setting"
           className="absolute inset-0 w-full h-full object-cover opacity-45"
         />
@@ -323,13 +321,15 @@ export default function Landing() {
               Stable operating software
             </div>
             <h1 className="font-display text-5xl md:text-7xl font-light leading-[1.04] text-white">
-              The operating home for modern horse care.
+              The operating home and lifetime record for modern horse care.
             </h1>
             <p className="mt-8 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
-              EquineSync brings barn operations, owner horse management, trainer programs,
-              service-provider coordination, billing, documents, care records, and scheduling
-              into one calm platform. Public signup supports owners, barn operators, trainers,
-              and service providers. Rider, guardian, and staff accounts remain invitation-based.
+              EquineSync is built around a horse ledger and horse passport: a care history
+              designed to stay with the horse, so the next owner is not starting from a blank
+              page. Barn operations, owner horse management, trainer programs, service-provider
+              coordination, billing, documents, care records, and scheduling come together in
+              one calm platform. Public signup supports owners, barn operators, trainers, and
+              service providers. Rider, guardian, and staff accounts remain invitation-based.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <button
@@ -375,12 +375,12 @@ export default function Landing() {
               One platform for the work around every horse.
             </h2>
             <p className="mt-5 text-[15px] md:text-base leading-relaxed text-brand-muted max-w-2xl">
-              The product is built around four connected needs: running the barn, managing
-              individual horses, coordinating training, and bringing trusted providers into
-              the right parts of the workflow.
+              The product is built around five connected needs: preserving the horse's
+              lifetime record, running the barn, managing individual horses, coordinating
+              training, and bringing trusted providers into the right parts of the workflow.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
             {PRODUCT_AREAS.map((area) => (
               <div
                 key={area.title}
@@ -389,6 +389,37 @@ export default function Landing() {
                 <area.Icon className="w-5 h-5 text-brand-lilac mb-5" strokeWidth={1.6} />
                 <h3 className="font-display text-2xl text-brand-graphite">{area.title}</h3>
                 <p className="mt-3 text-[13.5px] leading-relaxed text-brand-muted">{area.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Public capability matrix */}
+      <section className="border-b border-white/10 bg-equine-navyDeep text-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
+          <div className="max-w-3xl mb-10">
+            <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-4">
+              Capability posture
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+              Clear about what is ready, gated, and provider-required.
+            </h2>
+            <p className="mt-5 text-[15px] md:text-base leading-relaxed text-white/65 max-w-2xl">
+              EquineSync can sell the horse ledger and operating system vision while staying honest about which workflows need provider proof, deeper lifecycle controls, or later approval.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]" data-testid="landing-capability-matrix">
+            {PUBLIC_CAPABILITY_MATRIX.map(([name, status, note]) => (
+              <div key={name} className="grid grid-cols-1 md:grid-cols-12 gap-3 border-b border-white/10 last:border-b-0 p-5">
+                <div className="md:col-span-3 font-display text-xl text-white">{name}</div>
+                <div className="md:col-span-2">
+                  <span className="inline-flex rounded-full border border-brand-lilac/30 bg-brand-lilac/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-brand-lilac">
+                    {status}
+                  </span>
+                </div>
+                <div className="md:col-span-7 text-[13.5px] leading-relaxed text-white/65">{note}</div>
               </div>
             ))}
           </div>

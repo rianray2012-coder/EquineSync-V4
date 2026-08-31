@@ -13,6 +13,7 @@ from typing import Any, Dict, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, Field, field_validator
 
+from core.permissions import require
 from core.tenancy import resolve_barn_id
 from services.ai_draft_extractor import (
     AIStorageClient,
@@ -160,6 +161,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         request: Request,
         user=Depends(get_current_user),
     ):
+        require(user, "ai_draft:review")
         try:
             mime_type = validate_ai_source(
                 source_type=body.source_type,
@@ -226,6 +228,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         request: Request,
         user=Depends(get_current_user),
     ):
+        require(user, "ai_draft:review")
         if source_id != body.source_id:
             raise HTTPException(400, "source_id mismatch")
         source = await db[AI_SOURCE_COLLECTION].find_one(
@@ -263,6 +266,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         request: Request,
         user=Depends(get_current_user),
     ):
+        require(user, "ai_draft:review")
         if bool(body.source_id) == bool(body.source_text):
             raise HTTPException(400, "Provide exactly one of source_id or source_text")
         barn_id = resolve_barn_id(user)
@@ -398,6 +402,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         limit: int = Query(default=25, ge=1, le=100),
         user=Depends(get_current_user),
     ):
+        require(user, "ai_draft:review")
         query = {"barn_id": resolve_barn_id(user), "user_id": user.get("id")}
         if status:
             query["status"] = status.strip()
@@ -409,6 +414,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
 
     @router.get("/{job_id}")
     async def get_draft_job(job_id: str, user=Depends(get_current_user)):
+        require(user, "ai_draft:review")
         job = await db[AI_JOB_COLLECTION].find_one(
             {"id": job_id, "barn_id": resolve_barn_id(user), "user_id": user.get("id")},
             {"_id": 0, "prompt": 0},
@@ -424,6 +430,7 @@ def build_router(*, db, get_current_user, extractor=None, storage_client=None, a
         request: Request,
         user=Depends(get_current_user),
     ):
+        require(user, "ai_draft:review")
         job = await db[AI_JOB_COLLECTION].find_one(
             {"id": job_id, "barn_id": resolve_barn_id(user), "user_id": user.get("id")},
             {"_id": 0},

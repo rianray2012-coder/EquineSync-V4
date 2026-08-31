@@ -1,0 +1,7 @@
+signal,label,status,meaning,surface,next_gate
+plan_fit,Plan Fit,visible_now,Pricing and subscription surfaces should explain which plan fits the user's operating model,frontend/src/pages/SubscriptionBilling.jsx,TW-9
+billing_clarity,Billing Clarity,provider_required,Billing records payment profiles subscriptions and provider processing must stay visibly separate,frontend/src/pages/SubscriptionBilling.jsx,TW-9
+activation_metrics,Activation Metrics,visible_now,Setup health and invite acceptance can show adoption signals without claiming production readiness,frontend/src/pages/AdvancedReports.jsx,TW-9
+capability_matrix,Capability Matrix,visible_now,Public pages should distinguish available pilot provider-required gated and planned capabilities,frontend/src/pages/Landing.jsx,TW-9
+portability,Portability,gated,Horse ledger account data and report exports need clear portability posture before live export promises,frontend/src/pages/AdvancedReports.jsx,TW-9
+public_proof,Public Proof,planned,Screenshots demos testimonials and founder scenarios should only claim verified product behavior,frontend/src/pages/Landing.jsx,TW-9

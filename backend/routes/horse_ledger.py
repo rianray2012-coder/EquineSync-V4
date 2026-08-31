@@ -402,6 +402,42 @@ def _build_equipment_summary(equipment_rows: List[Dict[str, Any]],
     return list(equipment_rows)
 
 
+async def build_owner_safe_transfer_care_summary(db, horse: Dict[str, Any]) -> Dict[str, Any]:
+    """Care-summary projection shared by owner ledger and passport transfer.
+
+    Passport transfer must not grow its own definition of owner-safe care data;
+    it should inherit the same section allowlists, schedule key filtering, and
+    Stripe-string scrubbing used by the owner Ledger projection.
+    """
+    horse_id = horse.get("id")
+    owner_view = True
+    profile = await db.horse_care_profiles.find_one(
+        {"horse_id": horse_id}, {"_id": 0},
+    )
+    policy_doc = await db.horse_owner_visibility_policy.find_one(
+        {"horse_id": horse_id}, {"_id": 0},
+    )
+    eff = lambda s: _effective_owner_keys(s, policy_doc)  # noqa: E731
+    equipment_keys = eff("equipment")
+    equipment = [
+        {k: r.get(k) for k in sorted(equipment_keys)}
+        for r in (await db.horse_equipment.find(
+            {"horse_id": horse_id, "barn_id": horse.get("barn_id"),
+             "status": {"$ne": "retired"}},
+            {"_id": 0, "category": 1, "label": 1},
+        ).to_list(20))
+    ] if equipment_keys else []
+    return _scrub_strings({
+        "feeding": _build_feeding(horse, profile, owner_view, eff("feeding")),
+        "hay_access": _build_hay_access(profile, owner_view, eff("hay_access")),
+        "turnout": _build_turnout(horse, profile, owner_view, eff("turnout")),
+        "riding_training": _build_riding_training(
+            horse, profile, owner_view, eff("riding_training"),
+        ),
+        "equipment": equipment,
+    })
+
+
 def _build_health(meds: List[Dict[str, Any]],
                   med_logs: List[Dict[str, Any]],
                   vet_records: List[Dict[str, Any]],
@@ -2163,30 +2199,10 @@ def build_router(*, db, get_current_user) -> APIRouter:
     @router.get("/horse-ledger/{horse_id}/owner-summary")
     async def owner_summary(horse_id: str, user=Depends(get_current_user)):
         horse = await _load_horse_for_owner_or_404(horse_id, user)
-        owner_view = True  # owner-safe projection always
-        # Reuse 1-A projection for visible_sections (same as the
-        # existing owner GET ledger payload, just relabeled).
-        profile = await db.horse_care_profiles.find_one(
-            {"horse_id": horse_id}, {"_id": 0},
-        )
-        policy_doc = await db.horse_owner_visibility_policy.find_one(
-            {"horse_id": horse_id}, {"_id": 0},
-        )
-        eff = lambda s: _effective_owner_keys(s, policy_doc)  # noqa: E731
+        care_sections = await build_owner_safe_transfer_care_summary(db, horse)
         visible_sections = {
-            "identity":        _build_identity(horse, owner_view),
-            "feeding":         _build_feeding(horse, profile, owner_view, eff("feeding")),
-            "hay_access":      _build_hay_access(profile, owner_view, eff("hay_access")),
-            "turnout":         _build_turnout(horse, profile, owner_view, eff("turnout")),
-            "riding_training": _build_riding_training(horse, profile, owner_view, eff("riding_training")),
-            "equipment":       [
-                {"category": r.get("category"), "label": r.get("label")}
-                for r in (await db.horse_equipment.find(
-                    {"horse_id": horse_id, "barn_id": horse["barn_id"],
-                     "status": {"$ne": "retired"}},
-                    {"_id": 0, "category": 1, "label": 1},
-                ).to_list(20))
-            ],
+            "identity": _build_identity(horse, True),
+            **care_sections,
             # Owner-safe health placeholder. The full owner health
             # projection lives in the main GET ledger; for the summary
             # endpoint we surface a single non-leaking signal.

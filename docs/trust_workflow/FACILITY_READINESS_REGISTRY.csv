@@ -1,0 +1,9 @@
+area,label,status_rule,proof,next_gate
+horses,Horses,existing setup progress or pending,Horse records establish the operating roster,TW-5
+staff,Staff,existing setup progress or pending,Staff setup establishes who can act on daily work,TW-5
+owners,Owners,existing setup progress or pending,Owner setup controls approved visibility and request paths,TW-5
+schedules,Schedules,existing setup progress or pending,Scheduling context reduces handoff and lesson conflicts,TW-5
+billing,Billing,provider_required when no setup status exists,Billing remains provider-required until payment processing is verified,TW-5
+documents,Documents,provider_required when no setup status exists,Documents and signatures remain provider-required until workflows are verified,TW-5
+emergency_contacts,Emergency Contacts,existing setup progress or planned,Emergency contact readiness supports urgent-care confidence,TW-5
+permissions,Permissions,gated when no setup status exists,Role and capability boundaries explain who can see or change each surface,TW-5
