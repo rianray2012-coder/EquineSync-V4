@@ -101,7 +101,7 @@ export default function BarnLocations() {
       />
 
       {canPublish && (
-        <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5" data-testid="barn-locations-share-controls">
+        <Card hover={false} className="mb-6 border-equine-icy/30 bg-equine-icy/5" data-testid="barn-locations-share-controls">
           <div className="flex flex-col xl:flex-row xl:items-end gap-4">
             <div className="flex-1">
               <div className="label-eyebrow-muted mb-1.5">Owner note</div>
@@ -110,7 +110,7 @@ export default function BarnLocations() {
                 onChange={(event) => setNote(event.target.value)}
                 rows={2}
                 placeholder="Note: Please check this board before turning horses out."
-                className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-[13px] text-equine-ink outline-none focus:border-equine-brass"
+                className="w-full bg-white border border-equine-cloud rounded-lg px-3 py-2.5 text-[13px] text-equine-ink outline-none focus:border-equine-icy"
                 data-testid="barn-locations-note"
               />
             </div>
@@ -150,7 +150,7 @@ export default function BarnLocations() {
         </Card>
       ) : !board ? (
         <Empty>
-          <MapIcon strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <MapIcon strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No location board yet</div>
           <div className="text-[13px] text-equine-platinum/60">A barn owner can publish the shared location board here.</div>
         </Empty>
@@ -224,7 +224,7 @@ export default function BarnLocations() {
                 <div className="label-eyebrow mb-2">Pasture map</div>
                 <h2 className="font-display text-3xl text-equine-ink">Turnout by pasture</h2>
               </div>
-              <Trees className="w-5 h-5 text-equine-brass" />
+              <Trees className="w-5 h-5 text-equine-icy" />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
               {pastureByName.map(([pasture, rows]) => (

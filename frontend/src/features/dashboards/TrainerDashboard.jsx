@@ -174,16 +174,16 @@ const RefreshButton = ({ onClick, refreshing }) => (
 
 const ActionLinks = () => (
   <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em]">
-    <Link to="/lessons" className="text-equine-brass/80 hover:text-equine-brassLight">Lessons</Link>
-    <Link to="/training" className="text-equine-brass/80 hover:text-equine-brassLight">Training</Link>
-    <Link to="/training-plans" className="text-equine-brass/80 hover:text-equine-brassLight">Plans</Link>
+    <Link to="/lessons" className="text-equine-icy/80 hover:text-equine-icyLight">Lessons</Link>
+    <Link to="/training" className="text-equine-icy/80 hover:text-equine-icyLight">Training</Link>
+    <Link to="/training-plans" className="text-equine-icy/80 hover:text-equine-icyLight">Plans</Link>
   </div>
 );
 
 const WorkCard = ({ title, icon: Icon, rows, empty, render }) => (
   <Card hover={false} data-testid={`trainer-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
     <div className="flex items-center gap-2 mb-4">
-      <Icon className="w-4 h-4 text-equine-brass" />
+      <Icon className="w-4 h-4 text-equine-icy" />
       <h2 className="font-display text-2xl text-equine-ink">{title}</h2>
     </div>
     {rows.length === 0 ? (

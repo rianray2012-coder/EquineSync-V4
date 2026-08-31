@@ -113,7 +113,7 @@ const StaffStep = ({ onAnyChange }) => {
                 <strong className="text-equine-ivory">{lastDevLink.email}</strong>:
               </div>
               <div className="flex items-center gap-2">
-                <code className="flex-1 truncate bg-equine-card px-3 py-2 rounded-lg text-[11.5px] text-equine-champagne font-mono">
+                <code className="flex-1 truncate bg-equine-card px-3 py-2 rounded-lg text-[11.5px] text-equine-lilac font-mono">
                   {lastDevLink.url}
                 </code>
                 <button onClick={() => copy(lastDevLink.url)} className="btn-secondary !py-1.5 !px-3 text-[12px] inline-flex items-center gap-1">
@@ -147,7 +147,7 @@ const StaffStep = ({ onAnyChange }) => {
               {iv.status === "pending" && (
                 <>
                   <button onClick={() => resend(iv.id)} data-testid={`invite-resend-${iv.id}`}
-                          className="text-equine-platinum/60 hover:text-equine-champagne p-1.5" title="Resend">
+                          className="text-equine-platinum/60 hover:text-equine-lilac p-1.5" title="Resend">
                     <Send className="w-4 h-4" />
                   </button>
                   <button onClick={() => revoke(iv.id)} data-testid={`invite-revoke-${iv.id}`}

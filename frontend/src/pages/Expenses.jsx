@@ -139,10 +139,10 @@ export default function Expenses() {
           <div className="label-eyebrow">Total expenses</div>
           <div className="font-display text-4xl mt-2 text-equine-ink">{money(totals.all)}</div>
         </Card>
-        <Card hover={false} className="lg:col-span-2 border-equine-brass/30 bg-equine-brass/5">
+        <Card hover={false} className="lg:col-span-2 border-equine-icy/30 bg-equine-icy/5">
           <div className="flex flex-col lg:flex-row lg:items-center gap-4">
             <div className="flex items-start gap-3 flex-1">
-              <Receipt className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
+              <Receipt className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
               <div>
                 <div className="text-equine-ink text-[14px]">QuickBooks-ready export</div>
                 <div className="text-[12.5px] text-equine-inkMuted mt-1">
@@ -192,7 +192,7 @@ export default function Expenses() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search vendor, category, notes…"
-              className="w-full bg-equine-soft border border-equine-hairline rounded-xl pl-9 pr-3 py-2.5 text-equine-ink outline-none focus:border-equine-brass"
+              className="w-full bg-equine-soft border border-equine-hairline rounded-xl pl-9 pr-3 py-2.5 text-equine-ink outline-none focus:border-equine-icy"
               data-testid="expenses-search"
             />
           </div>
@@ -226,7 +226,7 @@ export default function Expenses() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <Receipt strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Receipt strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No expenses tracked</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add your first feed, bedding, labor, vet, farrier, maintenance, or show expense.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="expenses-empty-add">
@@ -253,7 +253,7 @@ export default function Expenses() {
                     <div className="font-display text-3xl text-equine-ink lg:w-32 lg:text-right">{money(data.amount)}</div>
                     <StatusPill tone="neutral">{data.category || "other"}</StatusPill>
                     {data.receipt_url ? (
-                      <a href={data.receipt_url} target="_blank" rel="noreferrer" className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+                      <a href={data.receipt_url} target="_blank" rel="noreferrer" className="text-[12px] text-equine-navy hover:text-equine-lavenderSoft inline-flex items-center gap-1">
                         Receipt <ExternalLink className="w-3 h-3" />
                       </a>
                     ) : <span className="text-[12px] text-equine-inkSoft">No receipt</span>}

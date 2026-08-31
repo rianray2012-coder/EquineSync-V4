@@ -82,7 +82,7 @@ export default function AdminReviewQueue() {
   return (
     <div className="max-w-5xl" data-testid="admin-review-queue">
       <div className="mb-8">
-        <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-2">Admin</div>
+        <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-2">Admin</div>
         <h1 className="font-display text-4xl text-equine-ivory mb-1">Review queue</h1>
         <p className="text-equine-platinum/70 text-[14px]">
           Approve or reject professionals (trainers, barns, service providers) who applied via the public signup.
@@ -99,7 +99,7 @@ export default function AdminReviewQueue() {
             onClick={() => setTab(t.id)}
             className={`flex items-center gap-2 px-4 py-3 text-[13px] tracking-wide transition-colors border-b-2 -mb-px ${
               tab === t.id
-                ? "border-equine-saddle text-equine-ivory"
+                ? "border-equine-lavenderSoft text-equine-ivory"
                 : "border-transparent text-equine-platinum/60 hover:text-equine-ivory"
             }`}
             data-testid={`review-tab-${t.id}`}
@@ -157,7 +157,7 @@ export default function AdminReviewQueue() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-1">
                   <div className="font-display text-lg text-equine-ivory">{u.full_name || u.email}</div>
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-equine-saddle bg-equine-saddle/10 border border-equine-saddle/30 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-equine-lavenderSoft bg-equine-lavenderSoft/10 border border-equine-lavenderSoft/30 px-2 py-0.5 rounded-full">
                     {ROLE_LABEL[u.role] || u.role}
                   </span>
                   {decided && (
@@ -197,7 +197,7 @@ export default function AdminReviewQueue() {
                   </div>
                 )}
                 {u.role === "barn_manager" && u.barn_id && (
-                  <div className="text-[11px] text-equine-saddle/80 mt-1" data-testid={`facility-granted-${u.id}`}>
+                  <div className="text-[11px] text-equine-lavenderSoft/80 mt-1" data-testid={`facility-granted-${u.id}`}>
                     Facility access granted · barn {u.barn_id}
                   </div>
                 )}
@@ -211,7 +211,7 @@ export default function AdminReviewQueue() {
                     onClick={() => setGrantingUser(u)}
                     disabled={busyId === u.id}
                     data-testid={`grant-facility-${u.id}`}
-                    className="border border-equine-saddle/40 text-equine-saddle hover:bg-equine-saddle/10 disabled:opacity-40 transition-colors px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium inline-flex items-center gap-1.5"
+                    className="border border-equine-lavenderSoft/40 text-equine-lavenderSoft hover:bg-equine-lavenderSoft/10 disabled:opacity-40 transition-colors px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium inline-flex items-center gap-1.5"
                   >
                     <KeyRound className="w-3.5 h-3.5" /> Grant facility access
                   </button>
@@ -227,7 +227,7 @@ export default function AdminReviewQueue() {
                         value={rejectReason}
                         onChange={(e) => setRejectReason(e.target.value)}
                         placeholder="Reason (optional)"
-                        className="bg-equine-navyDeep/50 border border-white/10 text-equine-ivory placeholder:text-white/30 px-3 py-2 rounded-lg text-[12px] focus:outline-none focus:border-equine-saddle/60"
+                        className="bg-equine-navyDeep/50 border border-white/10 text-equine-ivory placeholder:text-white/30 px-3 py-2 rounded-lg text-[12px] focus:outline-none focus:border-equine-lavenderSoft/60"
                         data-testid={`reject-reason-${u.id}`}
                       />
                       <button
@@ -250,7 +250,7 @@ export default function AdminReviewQueue() {
                       <button
                         onClick={() => approve(u.id)}
                         disabled={busyId === u.id}
-                        className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 transition-colors px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium inline-flex items-center gap-1.5"
+                        className="bg-equine-lavenderSoft text-equine-navyDeep hover:bg-white disabled:opacity-40 transition-colors px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium inline-flex items-center gap-1.5"
                         data-testid={`approve-${u.id}`}
                       >
                         <CheckCircle2 className="w-3.5 h-3.5" /> Approve
@@ -328,11 +328,11 @@ function GrantFacilityAccessModal({ target, onClose, onGranted }) {
         >
           <X className="w-4 h-4" />
         </button>
-        <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Grant facility access</div>
+        <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-3">Grant facility access</div>
         <div className="font-display text-2xl text-equine-ivory mb-1">{target.full_name || target.email}</div>
         <div className="text-[12.5px] text-equine-platinum/60 mb-5">
           Elevates role from <span className="text-equine-platinum">{ROLE_LABEL[target.role] || target.role}</span> to
-          <span className="text-equine-saddle"> Barn Manager</span>. Audited.
+          <span className="text-equine-lavenderSoft"> Barn Manager</span>. Audited.
         </div>
 
         <div className="inline-flex bg-white/5 border border-white/10 rounded-full p-0.5 mb-5">
@@ -340,7 +340,7 @@ function GrantFacilityAccessModal({ target, onClose, onGranted }) {
             type="button"
             onClick={() => setMode("existing")}
             data-testid="grant-mode-existing"
-            className={`px-4 py-1.5 text-[12px] rounded-full ${mode === "existing" ? "bg-equine-saddle text-equine-navyDeep" : "text-equine-platinum/65 hover:text-equine-ivory"}`}
+            className={`px-4 py-1.5 text-[12px] rounded-full ${mode === "existing" ? "bg-equine-lavenderSoft text-equine-navyDeep" : "text-equine-platinum/65 hover:text-equine-ivory"}`}
           >
             Pick existing
           </button>
@@ -348,7 +348,7 @@ function GrantFacilityAccessModal({ target, onClose, onGranted }) {
             type="button"
             onClick={() => setMode("create")}
             data-testid="grant-mode-create"
-            className={`px-4 py-1.5 text-[12px] rounded-full ${mode === "create" ? "bg-equine-saddle text-equine-navyDeep" : "text-equine-platinum/65 hover:text-equine-ivory"}`}
+            className={`px-4 py-1.5 text-[12px] rounded-full ${mode === "create" ? "bg-equine-lavenderSoft text-equine-navyDeep" : "text-equine-platinum/65 hover:text-equine-ivory"}`}
           >
             Create new
           </button>
@@ -361,7 +361,7 @@ function GrantFacilityAccessModal({ target, onClose, onGranted }) {
               value={barnQuery}
               onChange={(e) => setBarnQuery(e.target.value)}
               placeholder="Search barn by id or name"
-              className="w-full bg-equine-navyDeep/50 border border-white/10 text-equine-ivory placeholder:text-white/30 px-3 py-2 rounded-lg text-[13px] focus:outline-none focus:border-equine-saddle/60"
+              className="w-full bg-equine-navyDeep/50 border border-white/10 text-equine-ivory placeholder:text-white/30 px-3 py-2 rounded-lg text-[13px] focus:outline-none focus:border-equine-lavenderSoft/60"
               data-testid="grant-barn-search"
             />
             <div className="max-h-56 overflow-y-auto border border-white/10 rounded-lg divide-y divide-white/5" data-testid="grant-barn-list">
@@ -373,7 +373,7 @@ function GrantFacilityAccessModal({ target, onClose, onGranted }) {
               {barns.map((b) => (
                 <label
                   key={b.id}
-                  className={`flex items-center gap-3 px-3 py-2 cursor-pointer text-[12.5px] ${selectedBarnId === b.id ? "bg-equine-saddle/10" : "hover:bg-white/5"}`}
+                  className={`flex items-center gap-3 px-3 py-2 cursor-pointer text-[12.5px] ${selectedBarnId === b.id ? "bg-equine-lavenderSoft/10" : "hover:bg-white/5"}`}
                   data-testid={`grant-barn-option-${b.id}`}
                 >
                   <input
@@ -401,7 +401,7 @@ function GrantFacilityAccessModal({ target, onClose, onGranted }) {
               value={newBarnName}
               onChange={(e) => setNewBarnName(e.target.value)}
               placeholder="New barn name"
-              className="w-full bg-equine-navyDeep/50 border border-white/10 text-equine-ivory placeholder:text-white/30 px-3 py-2 rounded-lg text-[13px] focus:outline-none focus:border-equine-saddle/60"
+              className="w-full bg-equine-navyDeep/50 border border-white/10 text-equine-ivory placeholder:text-white/30 px-3 py-2 rounded-lg text-[13px] focus:outline-none focus:border-equine-lavenderSoft/60"
               data-testid="grant-new-barn-name"
             />
             <div className="text-[11.5px] text-equine-platinum/50 mt-2">
@@ -421,7 +421,7 @@ function GrantFacilityAccessModal({ target, onClose, onGranted }) {
             onClick={submit}
             disabled={!canSubmit || submitting}
             data-testid="grant-facility-submit"
-            className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors px-5 py-2 rounded-full text-[12.5px] tracking-wide font-medium inline-flex items-center gap-1.5"
+            className="bg-equine-lavenderSoft text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors px-5 py-2 rounded-full text-[12.5px] tracking-wide font-medium inline-flex items-center gap-1.5"
           >
             {submitting ? "Granting…" : "Grant access"}
           </button>

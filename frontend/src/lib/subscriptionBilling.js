@@ -76,7 +76,7 @@ export const STATUS_LABEL = {
 };
 
 // `StatusPill` tone for each status — uses the existing approved palette
-// tokens (sage/amber/clay/brass/neutral) only.
+// tokens (sage/amber/clay/icy/neutral) only.
 export const STATUS_TONE = {
   trialing: "info",
   active: "success",

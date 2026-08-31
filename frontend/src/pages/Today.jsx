@@ -229,7 +229,7 @@ export default function Today() {
               data-testid="bulk-mode-toggle"
               onClick={() => { setBulkMode((v) => !v); setSelected(new Set()); }}
               className={`shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[40px] rounded-full text-[12px] tracking-wide border transition-colors ${
-                bulkMode ? "bg-equine-brassLight text-equine-navy border-equine-brass" : "bg-equine-card text-equine-inkMuted border-equine-hairline hover:border-equine-graphite"
+                bulkMode ? "bg-equine-icyLight text-equine-navy border-equine-icy" : "bg-equine-card text-equine-inkMuted border-equine-hairline hover:border-equine-graphite"
               }`}
             >
               <Layers className="w-3.5 h-3.5" />
@@ -262,7 +262,7 @@ export default function Today() {
           ))}
           {!totalActionable && (
             <Empty>
-              <Sparkles className="w-7 h-7 text-equine-brass mx-auto mb-2.5" />
+              <Sparkles className="w-7 h-7 text-equine-icy mx-auto mb-2.5" />
               <div className="text-[14px] text-equine-ink mb-1">All caught up.</div>
               <div className="text-[12.5px] text-equine-inkMuted">Every horse, every task — handled.</div>
             </Empty>
@@ -286,7 +286,7 @@ export default function Today() {
           <Button
             data-testid="bulk-complete-confirm"
             onClick={doBulkComplete}
-            className="rounded-full bg-equine-brassLight text-equine-navy hover:bg-white"
+            className="rounded-full bg-equine-icyLight text-equine-navy hover:bg-white"
           >
             <Check className="w-4 h-4 mr-1.5" strokeWidth={2.5} /> Complete all
           </Button>

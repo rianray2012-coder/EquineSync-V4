@@ -124,7 +124,7 @@ export default function PastureSchedule() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <Trees strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Trees strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No pasture blocks planned</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a turnout block for a pasture or group.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="pasture-empty-add">

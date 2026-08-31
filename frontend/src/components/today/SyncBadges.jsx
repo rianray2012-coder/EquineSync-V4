@@ -6,8 +6,8 @@ import { CloudOff, RotateCw } from "lucide-react";
 export const SyncDot = ({ state }) => {
   const map = {
     synced:  { cls: "bg-equine-sage", label: "Synced", pulse: false },
-    queued:  { cls: "bg-equine-brassLight", label: "Queued", pulse: true },
-    syncing: { cls: "bg-equine-brassLight", label: "Syncing", pulse: true },
+    queued:  { cls: "bg-equine-icyLight", label: "Queued", pulse: true },
+    syncing: { cls: "bg-equine-icyLight", label: "Syncing", pulse: true },
     retry:   { cls: "bg-equine-amber", label: "Retrying", pulse: true },
     failed:  { cls: "bg-equine-clay", label: "Sync failed", pulse: false, ring: true },
   };
@@ -35,7 +35,7 @@ export const SyncHeaderBadge = () => {
       className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-[11.5px] tracking-wide ${
         failed > 0
           ? "bg-equine-clay/10 border-equine-clay/30 text-equine-clay"
-          : "bg-equine-brass/10 border-equine-brass/30 text-equine-navy"
+          : "bg-equine-icy/10 border-equine-icy/30 text-equine-navy"
       }`}
     >
       {failed > 0 ? <CloudOff className="w-3.5 h-3.5" /> : <RotateCw className="w-3.5 h-3.5 animate-spin" />}

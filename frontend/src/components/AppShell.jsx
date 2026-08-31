@@ -118,10 +118,10 @@ function MembershipBanners({ user }) {
       {banners.map((b) => (
         <div
           key={b.key}
-          className="bg-equine-navy border-l-4 border-equine-saddle p-4 flex items-start gap-3 text-equine-platinum text-sm font-body tracking-wide rounded-r-md"
+          className="bg-equine-navy border-l-4 border-equine-lavenderSoft p-4 flex items-start gap-3 text-equine-platinum text-sm font-body tracking-wide rounded-r-md"
           data-testid={b.testId}
         >
-          <span className="inline-block mt-0.5 w-2 h-2 rounded-full bg-equine-saddle" />
+          <span className="inline-block mt-0.5 w-2 h-2 rounded-full bg-equine-lavenderSoft" />
           <div>
             <div className="font-medium text-white mb-0.5">{b.title}</div>
             <div className="text-equine-platinum/85 text-[13px]">{b.body}</div>

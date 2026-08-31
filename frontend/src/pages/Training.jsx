@@ -73,7 +73,7 @@ export default function Training() {
 
       {sessions.length === 0 ? (
         <Empty>
-          <Dumbbell strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Dumbbell strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No training sessions logged</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Log the work — exercises, ratings, homework — to build each horse's development arc.</div>
           {!horsesEmpty && (
@@ -96,7 +96,7 @@ export default function Training() {
               </div>
               {t.exercises && <div className="text-equine-silver/80 text-[14px]">{t.exercises}</div>}
               {t.notes && <div className="text-[13px] text-equine-platinum/80 mt-1.5">Notes: {t.notes}</div>}
-              {t.homework && <div className="text-[12.5px] text-equine-champagne mt-1.5">Homework: {t.homework}</div>}
+              {t.homework && <div className="text-[12.5px] text-equine-lilac mt-1.5">Homework: {t.homework}</div>}
             </div>
           ))}
         </Card>

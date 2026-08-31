@@ -66,11 +66,17 @@ def test_approved_polish_tokens_are_defined_and_mapped():
     tailwind = _read(TAILWIND)
     primitives = _read(FRONTEND / "components" / "Primitives.jsx")
 
-    for token in ["ice:", "lilac:", "lavender:"]:
+    for token in ["icy:", "icyLight:", "ice:", "lilac:", "lavender:", "lavenderSoft:", "lavenderDeep:"]:
         assert token in tailwind
 
-    assert 'ice: "text-equine-brass"' in primitives
+    for deprecated in ["brass:", "brassLight:", "champagne:", "saddle:", "saddleDeep:"]:
+        assert deprecated not in tailwind
+
+    assert 'icy: "text-equine-icyLight"' in primitives
+    assert 'ice: "text-equine-icy"' in primitives
     assert 'lilac: "text-equine-lilac"' in primitives
+    assert 'lavender: "text-equine-lavenderSoft"' in primitives
+    assert "tone = \"info\"" in primitives
 
 
 def test_sample_state_seeders_use_premium_display_names():

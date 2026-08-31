@@ -12,7 +12,7 @@ const ROLE_CARDS = [
     label: "Individual Horse Owner",
     blurb: "Track your horse's care, billing and progress outside an EquineSync barn workspace.",
     image:
-      "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
+      "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?auto=format&fit=crop&w=1400&q=85",
     span: "md:col-span-3",
   },
   {
@@ -34,7 +34,7 @@ const ROLE_CARDS = [
   {
     id: "trainer",
     label: "Trainer",
-    blurb: "Manage clients, sessions, and progress notes — verified by the Equine Sync team.",
+    blurb: "Manage clients, sessions, and progress notes with EquineSync verification.",
     image:
       "https://images.unsplash.com/photo-1594768816441-1dd241ffaa67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwdHJhaW5lcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
     span: "md:col-span-2",
@@ -270,7 +270,7 @@ export default function Landing() {
           </Link>
           <button
             onClick={() => goToEnrollment()}
-            className="bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-5 py-2 text-[13px] tracking-wide font-medium rounded-full"
+            className="bg-equine-lavenderSoft text-equine-navyDeep hover:bg-white transition-colors px-5 py-2 text-[13px] tracking-wide font-medium rounded-full"
             data-testid="nav-join-cta"
           >
             Join EquineSync
@@ -288,12 +288,12 @@ export default function Landing() {
         <div className="absolute inset-0 bg-gradient-to-b from-equine-navyDeep/90 via-equine-navy/68 to-equine-navyDeep/92" />
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
           <div className="max-w-3xl">
-            <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-6">
+            <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-6">
               The equestrian operating network
             </div>
             <h1 className="font-display text-5xl md:text-7xl font-light leading-[1.04] text-white">
               Every horse.<br />Every task.<br />
-              <span className="text-equine-saddle">In sync.</span>
+              <span className="text-equine-lavenderSoft">In sync.</span>
             </h1>
             <p className="mt-8 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
               EquineSync connects owners, barns, trainers, and service providers in one quietly
@@ -302,7 +302,7 @@ export default function Landing() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <button
                 onClick={() => goToEnrollment()}
-                className="group bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-8 py-4 text-[14px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                className="group bg-white text-equine-navyDeep hover:bg-equine-lavenderSoft transition-all px-8 py-4 text-[14px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                 data-testid="hero-join-cta"
               >
                 Join EquineSync
@@ -325,7 +325,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 flex flex-wrap justify-around md:justify-between gap-6">
           {TRUST.map((t, idx) => (
             <div key={idx} className="flex items-center gap-3 text-[13px] tracking-wide text-white/70">
-              <t.Icon className="w-4 h-4 text-equine-saddle" strokeWidth={1.5} />
+              <t.Icon className="w-4 h-4 text-equine-lavenderSoft" strokeWidth={1.5} />
               <span>{t.label}</span>
             </div>
           ))}
@@ -335,7 +335,7 @@ export default function Landing() {
       {/* Role bento grid */}
       <section className="max-w-7xl mx-auto px-6 md:px-12 py-24">
         <div className="mb-14 max-w-2xl">
-          <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-4">
+          <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-4">
             Join as
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-light text-white">
@@ -347,7 +347,7 @@ export default function Landing() {
             <button
               key={card.id}
               onClick={() => goToEnrollment(card.id)}
-              className={`group relative overflow-hidden text-left ${card.span} col-span-1 bg-equine-navy/60 hover:bg-equine-navy border border-white/5 hover:border-equine-saddle/40 transition-all duration-500 rounded-2xl min-h-[280px] flex flex-col justify-end p-6 md:p-7`}
+              className={`group relative overflow-hidden text-left ${card.span} col-span-1 bg-equine-navy/60 hover:bg-equine-navy border border-white/5 hover:border-equine-lavenderSoft/40 transition-all duration-500 rounded-2xl min-h-[280px] flex flex-col justify-end p-6 md:p-7`}
               data-testid={`role-card-${card.id}`}
             >
               <img
@@ -357,11 +357,11 @@ export default function Landing() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-equine-navyDeep via-equine-navyDeep/40 to-transparent" />
               <div className="relative">
-                <div className="font-display text-2xl md:text-3xl text-white group-hover:text-equine-saddle transition-colors">
+                <div className="font-display text-2xl md:text-3xl text-white group-hover:text-equine-lavenderSoft transition-colors">
                   {card.label}
                 </div>
                 <div className="mt-2 text-[13.5px] text-white/65 leading-relaxed max-w-xs">{card.blurb}</div>
-                <div className="mt-5 inline-flex items-center gap-1.5 text-[12px] tracking-wide text-white/80 group-hover:text-equine-saddle transition-colors">
+                <div className="mt-5 inline-flex items-center gap-1.5 text-[12px] tracking-wide text-white/80 group-hover:text-equine-lavenderSoft transition-colors">
                   Join as {card.label} <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </div>
@@ -375,7 +375,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
-              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-4">
+              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-4">
                 Membership
               </div>
               <h2 className="font-display text-4xl md:text-5xl font-light text-white">
@@ -383,7 +383,7 @@ export default function Landing() {
               </h2>
               <p className="mt-4 text-white/65 text-[15px] leading-relaxed">
                 Start free as an invited owner or service provider. Upgrade when you need more. Paid plans include a
-                <span className="text-equine-saddle font-medium"> 14-day free trial</span>. Cancel anytime.
+                <span className="text-equine-lavenderSoft font-medium"> 14-day free trial</span>. Cancel anytime.
               </p>
             </div>
             {/* Monthly / Annual toggle */}
@@ -401,7 +401,7 @@ export default function Landing() {
                   data-testid={`landing-cycle-${c}`}
                   className={`px-4 py-2 text-[12px] tracking-wide uppercase rounded-full transition-colors ${
                     billingCycle === c
-                      ? "bg-equine-saddle text-equine-navyDeep"
+                      ? "bg-equine-lavenderSoft text-equine-navyDeep"
                       : "text-white/65 hover:text-white"
                   }`}
                 >
@@ -426,10 +426,10 @@ export default function Landing() {
           {/* Error / empty catalog state — graceful unavailable; no static prices */}
           {plansError && livePlans !== null && plansForCycle.length === 0 && (
             <div
-              className="bg-equine-navy/40 border border-equine-saddle/30 rounded-2xl p-10 text-center"
+              className="bg-equine-navy/40 border border-equine-lavenderSoft/30 rounded-2xl p-10 text-center"
               data-testid="pricing-unavailable"
             >
-              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle/80 font-medium mb-3">
+              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft/80 font-medium mb-3">
                 Membership
               </div>
               <h3 className="font-display text-3xl text-white font-light">
@@ -441,7 +441,7 @@ export default function Landing() {
               </p>
               <a
                 href={CONTACT_SALES_MAILTO}
-                className="mt-6 inline-flex items-center gap-2 bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-6 py-3 text-[13px] tracking-wide font-medium rounded-full"
+                className="mt-6 inline-flex items-center gap-2 bg-equine-lavenderSoft text-equine-navyDeep hover:bg-white transition-colors px-6 py-3 text-[13px] tracking-wide font-medium rounded-full"
                 data-testid="pricing-contact-sales-cta"
               >
                 Contact sales <ArrowRight className="w-3.5 h-3.5" />
@@ -466,16 +466,16 @@ export default function Landing() {
                 <div
                   key={tier.tier_code}
                   className={`relative bg-equine-navy/60 border ${
-                    popular ? "border-equine-saddle/50 shadow-[0_0_60px_-20px_rgba(199,182,217,0.4)]" : "border-white/5"
+                    popular ? "border-equine-lavenderSoft/50 shadow-[0_0_60px_-20px_rgba(199,182,217,0.4)]" : "border-white/5"
                   } rounded-2xl p-8 flex flex-col`}
                   data-testid={`pricing-card-${tier.tier_code}`}
                 >
                   {popular && (
-                    <span className="absolute top-5 right-5 text-[10px] tracking-[0.2em] uppercase text-equine-saddle bg-equine-saddle/10 border border-equine-saddle/30 px-2.5 py-1 rounded-full">
+                    <span className="absolute top-5 right-5 text-[10px] tracking-[0.2em] uppercase text-equine-lavenderSoft bg-equine-lavenderSoft/10 border border-equine-lavenderSoft/30 px-2.5 py-1 rounded-full">
                       Most popular
                     </span>
                   )}
-                  <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle/80 font-medium mb-3">
+                  <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft/80 font-medium mb-3">
                     {tier.name}
                   </div>
 
@@ -492,7 +492,7 @@ export default function Landing() {
 
                   {billingCycle === "annual" && tier._savings != null && (
                     <div
-                      className="mt-2 text-[11px] tracking-[0.2em] uppercase text-equine-saddle"
+                      className="mt-2 text-[11px] tracking-[0.2em] uppercase text-equine-lavenderSoft"
                       data-testid={`pricing-savings-${tier.tier_code}`}
                     >
                       Save {tier._savings}% vs. monthly
@@ -504,7 +504,7 @@ export default function Landing() {
                   <ul className="mt-6 space-y-2.5 text-[13px] text-white/70 flex-1">
                     {(tier.bullets || []).map((b) => (
                       <li key={b} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 mt-0.5 text-equine-saddle flex-shrink-0" />
+                        <Check className="w-3.5 h-3.5 mt-0.5 text-equine-lavenderSoft flex-shrink-0" />
                         <span>{b}</span>
                       </li>
                     ))}
@@ -523,7 +523,7 @@ export default function Landing() {
                       onClick={() => navigate(signupPathForTier(tier.tier_code))}
                       className={`mt-8 w-full ${
                         popular
-                          ? "bg-equine-saddle text-equine-navyDeep hover:bg-white"
+                          ? "bg-equine-lavenderSoft text-equine-navyDeep hover:bg-white"
                           : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
                       } transition-colors py-3 text-[13px] tracking-wide font-medium rounded-full`}
                       data-testid={`pricing-cta-${tier.tier_code}`}
@@ -542,7 +542,7 @@ export default function Landing() {
       {/* Footer */}
       <footer className="border-t border-white/10 py-10 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] tracking-wide text-white/40">
-          <div>© Equine Sync · Built by horse owners and equestrians for the people and facilities who care for horses</div>
+          <div>© EquineSync · Built by horse owners and equestrians for the people and facilities who care for horses</div>
           <div className="flex gap-6">
             <Link to="/login" className="hover:text-white transition-colors" data-testid="footer-signin">Sign in</Link>
             <button onClick={() => goToEnrollment()} className="hover:text-white transition-colors" data-testid="footer-join">Join</button>

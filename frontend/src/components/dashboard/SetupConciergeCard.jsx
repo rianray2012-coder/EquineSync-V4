@@ -16,7 +16,7 @@ const SetupConciergeCard = ({ progress, steps }) => {
   return (
     <Card elevated hover={false} className="mb-10 animate-fade-in" data-testid="setup-checklist-card">
       <div className="flex items-start gap-4 mb-5">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-equine-brass to-equine-saddle flex items-center justify-center flex-shrink-0 shadow-lg">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-equine-icy to-equine-lavenderSoft flex items-center justify-center flex-shrink-0 shadow-lg">
           <Sparkles strokeWidth={1.4} className="text-equine-black" />
         </div>
         <div className="flex-1 min-w-0">
@@ -36,7 +36,7 @@ const SetupConciergeCard = ({ progress, steps }) => {
           <div className="mt-3 flex items-center gap-4">
             <div className="flex-1 h-1.5 bg-equine-soft rounded-full overflow-hidden max-w-md">
               <div
-                className="h-full bg-gradient-to-r from-equine-brass to-equine-brassLight transition-all duration-500"
+                className="h-full bg-gradient-to-r from-equine-icy to-equine-icyLight transition-all duration-500"
                 style={{ width: `${progress.percent}%` }}
               />
             </div>
@@ -55,7 +55,7 @@ const SetupConciergeCard = ({ progress, steps }) => {
           const isSkipped = status === "skipped";
           const isInProgress = status === "in_progress";
           const tone = isDone ? "border-equine-sage/40 bg-equine-sage/8"
-            : isInProgress ? "border-equine-brass/40 bg-equine-brass/8"
+            : isInProgress ? "border-equine-icy/40 bg-equine-icy/8"
             : isSkipped ? "border-equine-graphite/40 bg-equine-soft"
             : "border-equine-graphite/30 bg-equine-soft/60";
           return (
@@ -63,19 +63,19 @@ const SetupConciergeCard = ({ progress, steps }) => {
               to="/setup/facility"
               key={s.id}
               data-testid={`checklist-${s.id}`}
-              className={`px-3 py-2.5 rounded-xl border transition-all duration-200 hover:border-equine-brass hover:bg-equine-elevated flex items-center gap-2.5 tap-44 ${tone}`}
+              className={`px-3 py-2.5 rounded-xl border transition-all duration-200 hover:border-equine-icy hover:bg-equine-elevated flex items-center gap-2.5 tap-44 ${tone}`}
             >
               {isDone
                 ? <Check strokeWidth={2} className="w-4 h-4 text-equine-sage flex-shrink-0" />
                 : isSkipped
                   ? <Circle strokeWidth={1.5} className="w-4 h-4 text-equine-platinum/40 flex-shrink-0" />
-                  : <Ic strokeWidth={1.5} className={`w-4 h-4 flex-shrink-0 ${isInProgress ? "text-equine-brassLight" : "text-equine-platinum/70"}`} />
+                  : <Ic strokeWidth={1.5} className={`w-4 h-4 flex-shrink-0 ${isInProgress ? "text-equine-icyLight" : "text-equine-platinum/70"}`} />
               }
               <div className="min-w-0 flex-1">
                 <div className="text-[12.5px] text-equine-ivory truncate">
                   {STEP_META[s.id]?.label || s.label}
                 </div>
-                <div className="text-[9.5px] uppercase tracking-[0.18em] text-equine-brass/65">
+                <div className="text-[9.5px] uppercase tracking-[0.18em] text-equine-icy/65">
                   {status.replace("_", " ")}
                 </div>
               </div>

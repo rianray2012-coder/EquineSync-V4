@@ -11,7 +11,7 @@ export const OperationsCard = ({ summary }) => (
         <div className="label-eyebrow">Operations</div>
         <h3 className="font-display text-2xl text-equine-ivory mt-1">Today&apos;s flow</h3>
       </div>
-      <GraduationCap strokeWidth={1.4} className="text-equine-brassLight" />
+      <GraduationCap strokeWidth={1.4} className="text-equine-icyLight" />
     </div>
     <div className="text-equine-silver/85 text-sm">
       <Row label="Lessons today" value={summary?.lessons_today ?? 0} />
@@ -56,7 +56,7 @@ export const UpcomingCareCard = ({ upcoming = [], loading = false }) => {
         <ul className="space-y-2.5">
           {items.map((t) => (
             <li key={t.id} className="flex items-start gap-3 text-[13px]">
-              <span className="uppercase tracking-[0.18em] text-[10px] text-equine-brass/75 mt-0.5 w-14 flex-shrink-0">
+              <span className="uppercase tracking-[0.18em] text-[10px] text-equine-icy/75 mt-0.5 w-14 flex-shrink-0">
                 {t.category}
               </span>
               <div className="flex-1 min-w-0">

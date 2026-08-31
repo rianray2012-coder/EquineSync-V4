@@ -111,7 +111,7 @@ export default function HorseProfile() {
       {tab === "Wellness" && <List items={wellness} render={(w) => <Row title={`Wellness check · ${fmtDate(w.created_at)}`} sub={`Appetite ${w.appetite}/5 · Energy ${w.energy}/5 · Coat ${w.coat_quality}/5`} right={<StatusPill tone={w.status === "normal" ? "success" : "warning"}>{w.status}</StatusPill>} />} />}
       {tab === "Training" && <List items={training} render={(t) => <Row title={`${fmtDate(t.date)} · ${t.discipline}`} sub={t.exercises} right={`Rating ${t.rating}/10`} />} />}
       {tab === "Feed" && <Card><p className="text-equine-silver/80">{horse.feed_plan}</p></Card>}
-      {tab === "Billing" && <Card hover={false}><p className="text-equine-platinum/60">See <Link to="/billing" className="text-equine-champagne">Billing</Link> for full invoice history.</p></Card>}
+      {tab === "Billing" && <Card hover={false}><p className="text-equine-platinum/60">See <Link to="/billing" className="text-equine-lilac">Billing</Link> for full invoice history.</p></Card>}
       {tab === "Owner" && <Card><div className="label-eyebrow mb-2">Owner ID</div><p className="text-equine-silver/80">{horse.owner_id}</p></Card>}
       {tab === "Updates" && canManage && <HorseOwnerUpdates horseId={id} />}
     </div>

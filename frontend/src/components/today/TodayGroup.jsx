@@ -44,7 +44,7 @@ const TodayGroup = ({
             onClick={() => onSelectGroup?.(groupKey, items, !allSelected)}
             className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10.5px] uppercase tracking-[0.16em] transition-colors tap-44 ${
               allSelected
-                ? "bg-equine-brassLight text-equine-navy border-equine-brass"
+                ? "bg-equine-icyLight text-equine-navy border-equine-icy"
                 : "bg-equine-card text-equine-inkMuted border-equine-hairline hover:border-equine-graphite"
             }`}
           >

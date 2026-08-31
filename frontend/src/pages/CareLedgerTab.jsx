@@ -1290,9 +1290,9 @@ const QUICK_ACTIONS = [
 ];
 
 const StatusBadge = ({ status }) => {
-  // Equine palette only — brass / silver / platinum tokens (no red/orange/amber).
+  // Equine palette only: icy / silver / platinum tokens.
   const tone = ({
-    ok:              "border-equine-brass/40 text-equine-brass",
+    ok:              "border-equine-icy/40 text-equine-icy",
     needs_attention: "border-equine-silver/40 text-equine-silver",
     missed:          "border-equine-platinum/35 text-equine-platinum/80",
     not_applicable:  "border-equine-silver/15 text-equine-platinum/55",
@@ -1681,9 +1681,9 @@ const ALERT_STATUS_LABELS = {
 };
 
 const SeverityBadge = ({ severity }) => {
-  // Approved equine palette only — brass / saddle / navy. No red/amber/orange.
+  // Approved equine palette only: icy / lavender / navy.
   const tone = ({
-    info:      "border-equine-brass/40 text-equine-brass",
+    info:      "border-equine-icy/40 text-equine-icy",
     attention: "border-equine-taupe/45 text-equine-taupe",
     urgent:    "border-equine-silver/55 text-equine-silver",
   })[severity] || "border-equine-silver/15 text-equine-platinum/55";

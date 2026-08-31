@@ -98,10 +98,10 @@ export default function Payments() {
         }
       />
 
-      <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5">
+      <Card hover={false} className="mb-6 border-equine-icy/30 bg-equine-icy/5">
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
           <div className="flex items-start gap-3 flex-1">
-            <CreditCard className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
+            <CreditCard className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
             <div>
               <div className="text-equine-ink text-[14px]">Stripe-ready configuration</div>
               <div className="text-[12.5px] text-equine-inkMuted mt-1">
@@ -140,7 +140,7 @@ export default function Payments() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <Landmark strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Landmark strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No payment profiles</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add an owner payment profile or auto-pay invite status.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="payments-empty-add">

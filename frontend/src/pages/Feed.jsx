@@ -25,7 +25,7 @@ const FeedRow = ({ task, horses, onComplete, onSkip, syncState }) => {
         </div>
         {syncState && (
           <span className={`w-1.5 h-1.5 rounded-full ${
-            syncState === "failed" ? "bg-equine-clay" : "bg-equine-brassLight animate-pulse"
+            syncState === "failed" ? "bg-equine-clay" : "bg-equine-icyLight animate-pulse"
           }`} />
         )}
         {done ? (
@@ -92,7 +92,7 @@ export default function Feed() {
             <Card key={g.key} data-testid={`feed-group-${g.key}`}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-display text-2xl capitalize text-equine-ink">{g.label}</h2>
-                <UtensilsCrossed strokeWidth={1.4} className="w-5 h-5 text-equine-saddle" />
+                <UtensilsCrossed strokeWidth={1.4} className="w-5 h-5 text-equine-lavenderSoft" />
               </div>
               {g.items.length === 0 ? (
                 <div className="text-[12.5px] text-equine-inkSoft italic py-3">No meals scheduled.</div>

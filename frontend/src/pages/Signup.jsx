@@ -325,9 +325,9 @@ export default function Signup() {
                 <div
                   className={`w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-medium border ${
                     i < stepIdx
-                      ? "bg-equine-saddle text-equine-navyDeep border-equine-saddle"
+                      ? "bg-equine-lavenderSoft text-equine-navyDeep border-equine-lavenderSoft"
                       : i === stepIdx
-                      ? "border-equine-saddle text-equine-saddle"
+                      ? "border-equine-lavenderSoft text-equine-lavenderSoft"
                       : "border-white/15 text-white/30"
                   }`}
                 >
@@ -346,15 +346,15 @@ export default function Signup() {
           {/* Step 1 — account basics */}
           {stepIdx === 0 && (
             <div data-testid="signup-step-account">
-              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Step 1 of 3</div>
+              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-3">Step 1 of 3</div>
               <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">Create your account</h2>
               <p className="text-white/60 text-[14px] mb-8">A few basics — you can finish your profile later.</p>
               {enrollmentContext && (
                 <div
-                  className="mb-6 rounded-xl border border-equine-saddle/30 bg-equine-saddle/10 p-4"
+                  className="mb-6 rounded-xl border border-equine-lavenderSoft/30 bg-equine-lavenderSoft/10 p-4"
                   data-testid="signup-enrollment-context"
                 >
-                  <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-saddle mb-1">
+                  <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-lavenderSoft mb-1">
                     Enrollment path
                   </div>
                   <div className="flex items-start justify-between gap-4">
@@ -365,7 +365,7 @@ export default function Signup() {
                       </div>
                       {enrollmentContext.limitedAccess && (
                         <div
-                          className="mt-2 text-[11px] tracking-[0.18em] uppercase text-equine-saddle"
+                          className="mt-2 text-[11px] tracking-[0.18em] uppercase text-equine-lavenderSoft"
                           data-testid="signup-limited-trial-note"
                         >
                           Limited seven-day individual-owner trial
@@ -374,7 +374,7 @@ export default function Signup() {
                     </div>
                     <Link
                       to="/enroll"
-                      className="text-[12px] text-equine-saddle hover:text-white whitespace-nowrap"
+                      className="text-[12px] text-equine-lavenderSoft hover:text-white whitespace-nowrap"
                       data-testid="signup-change-enrollment"
                     >
                       Change
@@ -434,17 +434,17 @@ export default function Signup() {
               </div>
 
               <div className="mt-8">
-                <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Selected path</div>
+                <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-3">Selected path</div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" data-testid="signup-role-grid">
                   {role && (
                     <div
-                      className="text-left p-4 rounded-xl border border-equine-saddle bg-equine-saddle/10"
+                      className="text-left p-4 rounded-xl border border-equine-lavenderSoft bg-equine-lavenderSoft/10"
                       data-testid={`signup-role-${role.id}`}
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="font-display text-lg text-white">{role.label}</div>
                         {role.pending && (
-                          <span className="text-[9px] tracking-[0.2em] uppercase text-equine-saddle bg-equine-saddle/10 border border-equine-saddle/30 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                          <span className="text-[9px] tracking-[0.2em] uppercase text-equine-lavenderSoft bg-equine-lavenderSoft/10 border border-equine-lavenderSoft/30 px-1.5 py-0.5 rounded-full whitespace-nowrap">
                             Review
                           </span>
                         )}
@@ -452,7 +452,7 @@ export default function Signup() {
                       <div className="text-[12px] text-white/55 mt-1 leading-relaxed">{role.blurb}</div>
                       <Link
                         to="/enroll"
-                        className="mt-3 inline-flex text-[12px] text-equine-saddle hover:text-white"
+                        className="mt-3 inline-flex text-[12px] text-equine-lavenderSoft hover:text-white"
                         data-testid="signup-change-role-path"
                       >
                         Change enrollment path
@@ -471,7 +471,7 @@ export default function Signup() {
                 <button
                   onClick={nextStep}
                   disabled={!canProceedStep0 || submitting}
-                  className="bg-white text-equine-navyDeep hover:bg-equine-saddle disabled:opacity-40 disabled:cursor-not-allowed transition-all px-6 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                  className="bg-white text-equine-navyDeep hover:bg-equine-lavenderSoft disabled:opacity-40 disabled:cursor-not-allowed transition-all px-6 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                   data-testid="signup-step-next"
                 >
                   {submitting ? "Creating…" : "Continue"} <ArrowRight className="w-4 h-4" />
@@ -484,10 +484,10 @@ export default function Signup() {
           {stepIdx === 1 && (
             <div data-testid="signup-step-profile">
               <div className="flex items-center justify-between mb-3">
-                <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium">Step 2 of 3</div>
+                <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium">Step 2 of 3</div>
                 <button
                   onClick={skipProfile}
-                  className="text-[12px] tracking-wide text-equine-saddle hover:text-white transition-colors px-3 py-1 rounded-full border border-equine-saddle/30 hover:bg-equine-saddle/10"
+                  className="text-[12px] tracking-wide text-equine-lavenderSoft hover:text-white transition-colors px-3 py-1 rounded-full border border-equine-lavenderSoft/30 hover:bg-equine-lavenderSoft/10"
                   data-testid="signup-skip-profile"
                 >
                   Skip & complete later
@@ -532,7 +532,7 @@ export default function Signup() {
                 <button
                   onClick={nextStep}
                   disabled={submitting}
-                  className="bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-6 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                  className="bg-white text-equine-navyDeep hover:bg-equine-lavenderSoft transition-all px-6 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                   data-testid="signup-step-next"
                 >
                   Continue <ArrowRight className="w-4 h-4" />
@@ -544,7 +544,7 @@ export default function Signup() {
           {/* Step 3 — limited trial confirmation */}
           {stepIdx === 2 && enrollmentContext?.limitedAccess && (
             <div data-testid="signup-step-limited-trial">
-              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Step 3 of 3</div>
+              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-3">Step 3 of 3</div>
               <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">
                 Start with limited individual-owner access
               </h2>
@@ -553,8 +553,8 @@ export default function Signup() {
                 workspace connection. Invite-based rider, guardian, and staff access remains separate.
               </p>
 
-              <div className="rounded-xl border border-equine-saddle/30 bg-equine-saddle/10 p-4">
-                <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-saddle mb-2">
+              <div className="rounded-xl border border-equine-lavenderSoft/30 bg-equine-lavenderSoft/10 p-4">
+                <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-lavenderSoft mb-2">
                   Limited trial posture
                 </div>
                 <div className="text-[13px] text-white/65 leading-relaxed">
@@ -572,7 +572,7 @@ export default function Signup() {
                 <button
                   onClick={finalizeFreeRefreshed}
                   disabled={submitting}
-                  className="bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                  className="bg-white text-equine-navyDeep hover:bg-equine-lavenderSoft transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                   data-testid="signup-finish-limited-trial"
                 >
                   {submitting ? "Finishing…" : "Continue with limited access"} <ArrowRight className="w-4 h-4" />
@@ -584,7 +584,7 @@ export default function Signup() {
           {/* Step 3 — membership + Stripe (Phase 15.C) */}
           {stepIdx === 2 && !enrollmentContext?.limitedAccess && (
             <div data-testid="signup-step-membership">
-              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-3">Step 3 of 3</div>
+              <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-3">Step 3 of 3</div>
               <div className="flex items-end justify-between flex-wrap gap-4 mb-3">
                 <h2 className="font-display text-3xl md:text-4xl font-light text-white">Choose your plan</h2>
                 {/* Monthly / Annual toggle — only meaningful for paid tiers */}
@@ -602,7 +602,7 @@ export default function Signup() {
                       data-testid={`signup-cycle-${c}`}
                       className={`px-4 py-1.5 text-[11.5px] tracking-wide uppercase rounded-full transition-colors ${
                         signupCycle === c
-                          ? "bg-equine-saddle text-equine-navyDeep"
+                          ? "bg-equine-lavenderSoft text-equine-navyDeep"
                           : "text-white/65 hover:text-white"
                       }`}
                     >
@@ -612,7 +612,7 @@ export default function Signup() {
                 </div>
               </div>
               <p className="text-white/60 text-[14px] mb-8">
-                Paid plans include a <span className="text-equine-saddle font-medium">14-day free trial</span>.
+                Paid plans include a <span className="text-equine-lavenderSoft font-medium">14-day free trial</span>.
                 Cancel from your account anytime — invited owner portal access stays free.
               </p>
 
@@ -639,7 +639,7 @@ export default function Signup() {
                       onClick={() => setTier(p.tier_code)}
                       className={`text-left p-5 rounded-xl border transition-all flex flex-col ${
                         selected
-                          ? "border-equine-saddle bg-equine-saddle/10"
+                          ? "border-equine-lavenderSoft bg-equine-lavenderSoft/10"
                           : "border-white/10 bg-white/5 hover:border-white/30"
                       }`}
                       data-testid={`signup-tier-${p.tier_code}`}
@@ -662,7 +662,7 @@ export default function Signup() {
                         )}
                       </div>
                       {signupCycle === "annual" && savings != null && !isContactSales && !isFree && (
-                        <div className="mt-1 text-[10.5px] tracking-[0.2em] uppercase text-equine-saddle" data-testid={`signup-savings-${p.tier_code}`}>
+                        <div className="mt-1 text-[10.5px] tracking-[0.2em] uppercase text-equine-lavenderSoft" data-testid={`signup-savings-${p.tier_code}`}>
                           Save {savings}%
                         </div>
                       )}
@@ -670,7 +670,7 @@ export default function Signup() {
                       {featureRows.length > 0 && (
                         <div className="mt-3 text-[11.5px] text-white/55 space-y-1">
                           {featureRows.map((row) => (
-                            <div key={row} className="flex items-center gap-1.5"><Check className="w-3 h-3 text-equine-saddle" /> {row}</div>
+                            <div key={row} className="flex items-center gap-1.5"><Check className="w-3 h-3 text-equine-lavenderSoft" /> {row}</div>
                           ))}
                         </div>
                       )}
@@ -689,7 +689,7 @@ export default function Signup() {
                   <button
                     onClick={launchCheckout}
                     disabled={submitting}
-                    className="bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                    className="bg-white text-equine-navyDeep hover:bg-equine-lavenderSoft transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                     data-testid="signup-finish-free"
                   >
                     {submitting ? "Finishing…" : tier === "service_provider_free" ? "Start Service Provider Free" : "Start with Free"} <ArrowRight className="w-4 h-4" />
@@ -697,7 +697,7 @@ export default function Signup() {
                 ) : selectedPlanForTier?.contact_sales ? (
                   <a
                     href="mailto:sales@equinesync.com?subject=EquineSync%20custom%20plan%20enquiry"
-                    className="bg-equine-saddle text-equine-navyDeep hover:bg-white transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                    className="bg-equine-lavenderSoft text-equine-navyDeep hover:bg-white transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                     data-testid="signup-contact-sales"
                   >
                     Contact sales <ArrowRight className="w-4 h-4" />
@@ -719,7 +719,7 @@ export default function Signup() {
                       <button
                         onClick={launchCheckout}
                         disabled={submitting || !tier || noCycles || (!cycleOk && !otherOk)}
-                        className="bg-equine-saddle text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
+                        className="bg-equine-lavenderSoft text-equine-navyDeep hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-all px-7 py-3 text-[13px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                         data-testid="signup-start-trial"
                       >
                         {submitting ? "Starting…" : noCycles ? "Billing setup pending" : "Start 14-day free trial"}
@@ -756,14 +756,14 @@ export default function Signup() {
 }
 
 const inputCls =
-  "w-full bg-equine-navyDeep/50 border border-white/10 text-white placeholder:text-white/30 px-4 py-3 rounded-lg text-[14px] focus:outline-none focus:border-equine-saddle/60 transition-colors";
+  "w-full bg-equine-navyDeep/50 border border-white/10 text-white placeholder:text-white/30 px-4 py-3 rounded-lg text-[14px] focus:outline-none focus:border-equine-lavenderSoft/60 transition-colors";
 
 function Field({ label, required, full, children }) {
   return (
     <label className={`block ${full ? "md:col-span-2" : ""}`}>
       <span className="block text-[11px] tracking-[0.2em] uppercase text-white/60 mb-2">
         {label}
-        {required && <span className="text-equine-saddle ml-1">*</span>}
+        {required && <span className="text-equine-lavenderSoft ml-1">*</span>}
       </span>
       {children}
     </label>

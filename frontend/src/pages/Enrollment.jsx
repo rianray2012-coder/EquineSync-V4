@@ -26,7 +26,7 @@ export default function Enrollment() {
 
       <main className="max-w-6xl mx-auto px-6 md:px-12 pb-20">
         <section className="pt-8 md:pt-14 pb-8">
-          <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-4">
+          <div className="text-[11px] tracking-[0.28em] uppercase text-equine-lavenderSoft font-medium mb-4">
             Join EquineSync
           </div>
           <h1 className="font-display text-4xl md:text-6xl font-light leading-[1.05] text-white max-w-3xl">
@@ -47,16 +47,16 @@ export default function Enrollment() {
                 key={path.id}
                 to={path.signupPath}
                 className={`group rounded-2xl border p-5 md:p-6 bg-equine-navy/55 hover:bg-equine-navy transition-all ${
-                  selected ? "border-equine-saddle/70" : "border-white/10 hover:border-equine-saddle/45"
+                  selected ? "border-equine-lavenderSoft/70" : "border-white/10 hover:border-equine-lavenderSoft/45"
                 }`}
                 data-testid={`enrollment-path-${path.id}`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl border border-equine-saddle/30 bg-equine-saddle/10 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-equine-saddle" strokeWidth={1.7} />
+                  <div className="w-11 h-11 rounded-xl border border-equine-lavenderSoft/30 bg-equine-lavenderSoft/10 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-5 h-5 text-equine-lavenderSoft" strokeWidth={1.7} />
                   </div>
                   <div className="min-w-0">
-                    <div className="font-display text-2xl text-white group-hover:text-equine-saddle transition-colors">
+                    <div className="font-display text-2xl text-white group-hover:text-equine-lavenderSoft transition-colors">
                       {path.label}
                     </div>
                     <div className="mt-1 text-[12px] tracking-wide text-white/45">
@@ -66,7 +66,7 @@ export default function Enrollment() {
                 </div>
                 <p className="mt-5 text-[13.5px] text-white/65 leading-relaxed">{path.summary}</p>
                 <div className="mt-5">
-                  <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-saddle/85 mb-2">
+                  <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-lavenderSoft/85 mb-2">
                     Critical signup data
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -84,7 +84,7 @@ export default function Enrollment() {
                   <span className="text-[11px] tracking-[0.2em] uppercase text-white/35">
                     Depth continues in {path.deferredPhase}
                   </span>
-                  <span className="inline-flex items-center gap-2 text-[13px] text-equine-saddle">
+                  <span className="inline-flex items-center gap-2 text-[13px] text-equine-lavenderSoft">
                     Continue <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </span>
                 </div>
@@ -98,8 +98,8 @@ export default function Enrollment() {
           data-testid="assisted-trial-guidance"
         >
           <div className="flex items-start gap-4">
-            <div className="w-11 h-11 rounded-xl border border-equine-saddle/30 bg-equine-saddle/10 flex items-center justify-center flex-shrink-0">
-              <ShieldCheck className="w-5 h-5 text-equine-saddle" strokeWidth={1.7} />
+            <div className="w-11 h-11 rounded-xl border border-equine-lavenderSoft/30 bg-equine-lavenderSoft/10 flex items-center justify-center flex-shrink-0">
+              <ShieldCheck className="w-5 h-5 text-equine-lavenderSoft" strokeWidth={1.7} />
             </div>
             <div className="min-w-0 flex-1">
               <div className="font-display text-2xl text-white">
@@ -113,7 +113,7 @@ export default function Enrollment() {
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <Link
                   to={LIMITED_INDIVIDUAL_OWNER_TRIAL.signupPath}
-                  className="inline-flex items-center gap-2 rounded-full bg-white text-equine-navyDeep hover:bg-equine-saddle transition-colors px-5 py-2.5 text-[13px] tracking-wide font-medium"
+                  className="inline-flex items-center gap-2 rounded-full bg-white text-equine-navyDeep hover:bg-equine-lavenderSoft transition-colors px-5 py-2.5 text-[13px] tracking-wide font-medium"
                   data-testid="limited-owner-trial-link"
                 >
                   Start limited trial <ArrowRight className="w-4 h-4" />
@@ -130,7 +130,7 @@ export default function Enrollment() {
           className="mt-4 rounded-2xl border border-white/10 bg-equine-navy/35 p-5 md:p-6"
           data-testid="leasee-invite-guidance"
         >
-          <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-saddle/85 mb-2">
+          <div className="text-[10.5px] tracking-[0.24em] uppercase text-equine-lavenderSoft/85 mb-2">
             Leasee access
           </div>
           <p className="text-[13.5px] text-white/65 leading-relaxed">

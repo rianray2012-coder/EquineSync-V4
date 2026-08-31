@@ -6,9 +6,9 @@ import horseFrostSquare from "../assets/brand/icon_horse_frost_square.png";
 import horseDarkSquare from "../assets/brand/icon_horse_dark_square.png";
 
 /**
- * Official Equine-Sync brand mark (Phase 8B).
+ * Official EquineSync brand mark (Phase 8B).
  * Running-horse icon (frost-on-transparent for dark surfaces, graphite+lilac for light)
- * paired with a CSS-composed "Equine-Sync" wordmark — "Sync" in Smoky Lilac.
+ * paired with a CSS-composed EquineSync wordmark.
  *
  * API preserved from the previous placeholder: `size`, `withText`, `onNavy`.
  * Added (additive, optional): `variant` ('horizontal' | 'icon'), `tone` ('dark' | 'light').
@@ -37,7 +37,7 @@ export const Logo = ({
   const iconEl = (
     <img
       src={iconSrc}
-      alt="Equine-Sync"
+      alt="EquineSync"
       style={{ height: size, width: "auto" }}
       className="object-contain shrink-0 select-none transition-opacity duration-300 group-hover/logo:opacity-80"
       draggable={false}
@@ -46,14 +46,14 @@ export const Logo = ({
 
   const Wrapper = linkTo ? Link : "span";
   const wrapperProps = linkTo
-    ? { to: linkTo, "aria-label": "Equine Sync home" }
+    ? { to: linkTo, "aria-label": "EquineSync home" }
     : {};
 
   if (variant === "icon" || !withText) {
     return (
       <Wrapper
         {...wrapperProps}
-        className="group/logo inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-equine-saddle/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        className="group/logo inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-equine-lavenderSoft/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         data-testid={linkTo ? "logo-home-link" : "logo"}
       >
         {iconEl}
@@ -64,7 +64,7 @@ export const Logo = ({
   return (
     <Wrapper
       {...wrapperProps}
-      className="group/logo flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-equine-saddle/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+      className="group/logo flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-equine-lavenderSoft/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
       data-testid={linkTo ? "logo-home-link" : "logo"}
     >
       {iconEl}

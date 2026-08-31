@@ -67,7 +67,7 @@ export default function Login() {
         <div className="relative z-10 h-full flex flex-col justify-between p-12 text-white">
           <Logo onNavy />
           <div className="max-w-md">
-            <div className="text-[10.5px] tracking-[0.28em] uppercase text-equine-brassLight font-semibold mb-5">An operating system for the modern barn</div>
+            <div className="text-[10.5px] tracking-[0.28em] uppercase text-equine-icyLight font-semibold mb-5">An operating system for the modern barn</div>
             <h2 className="font-display text-5xl xl:text-6xl leading-[1.05] text-white">
               Quiet precision.<br/>Operational mastery.
             </h2>
@@ -75,7 +75,7 @@ export default function Login() {
               EquineSync unites horse care, training, billing, and owner communication in one polished operating layer built for elite show barns, rehab facilities, and private equestrian operations.
             </p>
           </div>
-          <div className="text-[11px] tracking-[0.22em] uppercase text-equine-brassLight/55">© EquineSync · Crafted for elite equestrian operations</div>
+          <div className="text-[11px] tracking-[0.22em] uppercase text-equine-icyLight/55">© EquineSync · Crafted for elite equestrian operations</div>
         </div>
       </div>
 
@@ -153,7 +153,7 @@ export default function Login() {
             </p>
             <Link
               to="/enroll"
-              className="mt-4 inline-flex items-center justify-center w-full bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-5 py-3 text-[13px] tracking-wide font-medium rounded-full"
+              className="mt-4 inline-flex items-center justify-center w-full bg-equine-lavenderSoft text-equine-navyDeep hover:bg-white transition-colors px-5 py-3 text-[13px] tracking-wide font-medium rounded-full"
               data-testid="login-join-link"
             >
               Join EquineSync

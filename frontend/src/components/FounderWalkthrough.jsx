@@ -44,7 +44,7 @@ const STEPS = [
     renderStat: (d) => d && (
       <>
         <Stat label="Right now"  value={d.right_now} accent="amber" />
-        <Stat label="Next 4 hours" value={d.next_4h}  accent="brass" />
+        <Stat label="Next 4 hours" value={d.next_4h}  accent="icy" />
         <Stat label="Later today" value={d.later}   accent="neutral" />
       </>
     ),
@@ -66,7 +66,7 @@ const STEPS = [
     },
     renderStat: (d) => d && (
       <>
-        <Stat label="Feed today" value={d.total} accent="brass" />
+        <Stat label="Feed today" value={d.total} accent="icy" />
         <Stat label="Logged"     value={d.done}  accent="sage" />
       </>
     ),
@@ -104,7 +104,7 @@ const STEPS = [
     },
     renderStat: (d) => d && (
       <>
-        <Stat label="Horses"     value={d.total}     accent="brass" />
+        <Stat label="Horses"     value={d.total}     accent="icy" />
         <Stat label="Stall rest" value={d.stallRest} accent={d.stallRest > 0 ? "amber" : "sage"} />
       </>
     ),
@@ -143,7 +143,7 @@ const STEPS = [
 const Stat = ({ label, value, accent }) => {
   const tone = {
     sage:    "text-equine-sage",
-    brass:   "text-equine-brassLight",
+    icy:     "text-equine-icyLight",
     amber:   "text-equine-amber",
     clay:    "text-equine-clay",
     neutral: "text-equine-ivory",
@@ -207,7 +207,7 @@ export default function FounderWalkthrough({ open, onClose }) {
         <div className="flex items-start justify-between gap-4 mb-5">
           <div className="flex items-start gap-3">
             <div className="w-11 h-11 rounded-2xl bg-equine-steel/25 border border-equine-steel/40 flex items-center justify-center flex-shrink-0">
-              <Icon strokeWidth={1.4} className="text-equine-champagne w-5 h-5" />
+              <Icon strokeWidth={1.4} className="text-equine-lilac w-5 h-5" />
             </div>
             <div>
               <div className="label-eyebrow">{step.eyebrow}</div>
@@ -241,7 +241,7 @@ export default function FounderWalkthrough({ open, onClose }) {
             to={step.cta.to}
             onClick={onClose}
             data-testid={`walkthrough-cta-${step.id}`}
-            className="inline-flex items-center gap-1.5 text-[12.5px] text-equine-champagne hover:text-equine-brassLight transition-colors mb-5"
+            className="inline-flex items-center gap-1.5 text-[12.5px] text-equine-lilac hover:text-equine-icyLight transition-colors mb-5"
           >
             {step.cta.label} <ChevronRight className="w-3.5 h-3.5" />
           </Link>
@@ -254,7 +254,7 @@ export default function FounderWalkthrough({ open, onClose }) {
               key={s.id}
               data-testid={`walkthrough-dot-${i}`}
               className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === idx ? "w-6 bg-equine-champagne" : "w-1.5 bg-equine-graphite/50"
+                i === idx ? "w-6 bg-equine-lilac" : "w-1.5 bg-equine-graphite/50"
               }`}
             />
           ))}

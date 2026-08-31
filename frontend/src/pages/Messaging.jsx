@@ -24,9 +24,9 @@ export default function Messaging() {
         <Card className="lg:col-span-1">
           <h2 className="font-display text-2xl mb-4">New message</h2>
           <form onSubmit={send} className="space-y-3" data-testid="message-form">
-            <input required value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} placeholder="Subject" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2 text-equine-ivory focus:border-equine-champagne outline-none" />
-            <textarea required value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })} placeholder="Message…" rows={5} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2 text-equine-ivory focus:border-equine-champagne outline-none" />
-            <select value={form.visibility} onChange={(e) => setForm({ ...form, visibility: e.target.value })} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2 text-equine-ivory focus:border-equine-champagne outline-none">
+            <input required value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} placeholder="Subject" className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2 text-equine-ivory focus:border-equine-lilac outline-none" />
+            <textarea required value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })} placeholder="Message…" rows={5} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2 text-equine-ivory focus:border-equine-lilac outline-none" />
+            <select value={form.visibility} onChange={(e) => setForm({ ...form, visibility: e.target.value })} className="w-full bg-equine-soft border border-equine-graphite/60 rounded-lg px-3 py-2 text-equine-ivory focus:border-equine-lilac outline-none">
               <option value="staff_only">Staff Only</option>
               <option value="owner_visible">Owner Visible</option>
               <option value="parent_visible">Parent Visible</option>

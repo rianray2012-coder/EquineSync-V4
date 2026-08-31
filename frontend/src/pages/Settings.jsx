@@ -151,7 +151,7 @@ export default function Settings() {
               data-testid="visibility-policy-siloed"
               className="btn-secondary text-left p-4 h-auto flex items-start gap-3 disabled:opacity-50"
             >
-              <EyeOff className="w-4 h-4 mt-0.5 text-equine-brass flex-shrink-0" />
+              <EyeOff className="w-4 h-4 mt-0.5 text-equine-icy flex-shrink-0" />
               <div>
                 <div className="text-[13px] text-equine-ivory">Siloed</div>
                 <div className="text-[11.5px] text-equine-platinum/60 mt-0.5">

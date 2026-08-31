@@ -109,7 +109,7 @@ export default function Waitlist() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <ClipboardList strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <ClipboardList strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No prospects waiting</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add the first inquiry and keep the pipeline visible.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="waitlist-empty-add">
@@ -147,7 +147,7 @@ export default function Waitlist() {
                           <button
                             type="button"
                             onClick={() => updateStatus(record, nextStatus)}
-                            className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1"
+                            className="text-[12px] text-equine-navy hover:text-equine-lavenderSoft inline-flex items-center gap-1"
                             data-testid={`waitlist-advance-${record.id}`}
                           >
                             Move to {nextStatus} <ArrowRight className="w-3 h-3" />

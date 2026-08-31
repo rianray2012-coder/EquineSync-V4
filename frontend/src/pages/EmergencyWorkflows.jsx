@@ -127,7 +127,7 @@ export default function EmergencyWorkflows() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <ShieldAlert strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <ShieldAlert strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No emergency workflows</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Start a workflow when an urgent contact chain or vet call needs tracking.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="emergency-workflows-empty-add">
@@ -157,24 +157,24 @@ export default function EmergencyWorkflows() {
                         <MiniStatus label="Vet" value={data.vet_status || "not_called"} />
                       </div>
                       {contact.phone && (
-                        <a href={`tel:${contact.phone}`} className="mt-3 inline-flex items-center gap-1 text-[12px] text-equine-navy hover:text-equine-saddle">
+                        <a href={`tel:${contact.phone}`} className="mt-3 inline-flex items-center gap-1 text-[12px] text-equine-navy hover:text-equine-lavenderSoft">
                           <PhoneCall className="w-3.5 h-3.5" /> {contact.phone}
                         </a>
                       )}
                       {data.notes && <div className="text-[12.5px] text-equine-inkMuted mt-2 leading-relaxed">{data.notes}</div>}
                       <div className="hairline mt-3 pt-3 flex flex-wrap items-center gap-2">
                         {data.owner_status !== "authorized" && (
-                          <button type="button" onClick={() => updateRecord(record, { owner_status: "authorized" })} className="text-[12px] text-equine-navy hover:text-equine-saddle">
+                          <button type="button" onClick={() => updateRecord(record, { owner_status: "authorized" })} className="text-[12px] text-equine-navy hover:text-equine-lavenderSoft">
                             Owner authorized
                           </button>
                         )}
                         {data.vet_status !== "on_site" && data.vet_status !== "complete" && (
-                          <button type="button" onClick={() => updateRecord(record, { vet_status: "on_site" })} className="text-[12px] text-equine-navy hover:text-equine-saddle">
+                          <button type="button" onClick={() => updateRecord(record, { vet_status: "on_site" })} className="text-[12px] text-equine-navy hover:text-equine-lavenderSoft">
                             Vet on site
                           </button>
                         )}
                         {status !== "resolved" && (
-                          <button type="button" onClick={() => updateRecord(record, { workflow_status: "resolved", vet_status: "complete" })} className="text-[12px] text-equine-navy hover:text-equine-saddle inline-flex items-center gap-1">
+                          <button type="button" onClick={() => updateRecord(record, { workflow_status: "resolved", vet_status: "complete" })} className="text-[12px] text-equine-navy hover:text-equine-lavenderSoft inline-flex items-center gap-1">
                             <CheckCircle2 className="w-3.5 h-3.5" /> Resolve
                           </button>
                         )}

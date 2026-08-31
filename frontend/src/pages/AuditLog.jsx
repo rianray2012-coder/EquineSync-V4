@@ -86,7 +86,7 @@ export default function AuditLog() {
         </Card>
       ) : filtered.length === 0 ? (
         <Empty>
-          <ClipboardList strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <ClipboardList strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No audit events yet</div>
           <div className="text-[13px] text-equine-platinum/60">Backlog changes will appear here after staff create, update, archive, sign, clock, or prepare records.</div>
         </Empty>

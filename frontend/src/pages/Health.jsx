@@ -107,7 +107,7 @@ export default function Health() {
                   </div>
                   <div className="text-[12.5px] text-equine-inkMuted">
                     {fmtDate(v.date)}{v.vet_name ? ` · ${v.vet_name}` : ""}
-                    {v.source === "task_engine" && <span className="ml-2 text-equine-brass text-[10.5px] uppercase tracking-[0.18em]">via engine</span>}
+                    {v.source === "task_engine" && <span className="ml-2 text-equine-icy text-[10.5px] uppercase tracking-[0.18em]">via engine</span>}
                   </div>
                 </div>
                 <div className="text-right">
@@ -116,7 +116,7 @@ export default function Health() {
                 </div>
               </div>
               {v.follow_up_due && (
-                <div className="text-[11.5px] text-equine-saddle mt-1.5">
+                <div className="text-[11.5px] text-equine-lavenderSoft mt-1.5">
                   Follow-up scheduled · {fmtDate(v.follow_up_due)}
                 </div>
               )}
@@ -149,7 +149,7 @@ export default function Health() {
                   <div className="text-right">
                     {f.cost > 0 && <div className="text-equine-inkMuted text-[13px]">{money(f.cost)}</div>}
                     {f.next_visit_due && (
-                      <div className="text-[11px] text-equine-saddle">next {fmtDate(f.next_visit_due)}</div>
+                      <div className="text-[11px] text-equine-lavenderSoft">next {fmtDate(f.next_visit_due)}</div>
                     )}
                   </div>
                 </div>
@@ -176,7 +176,7 @@ export default function Health() {
               </div>
               <div className="text-[12.5px] text-equine-inkMuted">{i.description}</div>
               {i.rehab_plan && (
-                <div className="text-[12.5px] text-equine-saddle mt-1.5">Plan: {i.rehab_plan}</div>
+                <div className="text-[12.5px] text-equine-lavenderSoft mt-1.5">Plan: {i.rehab_plan}</div>
               )}
             </div>
           ))}

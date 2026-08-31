@@ -102,7 +102,7 @@ export default function AdminBillingDashboard() {
             onClick={refresh}
             disabled={refreshing}
             data-testid="admin-billing-refresh"
-            className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.2em] text-equine-brass/80 hover:text-equine-brassLight transition-colors px-3 py-1.5 rounded-full border border-equine-graphite/40 hover:border-equine-brass/50"
+            className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.2em] text-equine-icy/80 hover:text-equine-icyLight transition-colors px-3 py-1.5 rounded-full border border-equine-graphite/40 hover:border-equine-icy/50"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin" : ""}`} />
             {refreshing ? "Refreshing…" : "Refresh"}
@@ -186,7 +186,7 @@ export default function AdminBillingDashboard() {
               value={q}
               onChange={(e) => { setQ(e.target.value); setPage(1); }}
               placeholder="Search by owner email or barn id"
-              className="w-full pl-9 pr-3 py-2 text-[13px] bg-equine-soft/50 border border-equine-hairline rounded-full focus:outline-none focus:border-equine-saddleDeep"
+              className="w-full pl-9 pr-3 py-2 text-[13px] bg-equine-soft/50 border border-equine-hairline rounded-full focus:outline-none focus:border-equine-lavenderDeep"
               data-testid="admin-billing-search"
             />
           </div>
@@ -337,7 +337,7 @@ function StuckPanel({ title, subtitle, loadPath, count, renderRow, testid }) {
       <button
         onClick={() => setOpen((o) => !o)}
         data-testid={`${testid}-toggle`}
-        className="text-[12px] tracking-wide text-equine-saddleDeep hover:text-equine-ink mt-2"
+        className="text-[12px] tracking-wide text-equine-lavenderDeep hover:text-equine-ink mt-2"
       >
         {open ? "Hide details" : count > 0 ? "Show details" : "Show recent (none)"}
       </button>

@@ -92,7 +92,7 @@ export default function Incidents() {
                 {i.reported_by ? ` · Reported by ${i.reported_by}` : ""}
               </div>
               <div className="text-equine-silver/80 text-[14px] mt-2">{i.description}</div>
-              {i.follow_up && <div className="text-[13px] text-equine-champagne mt-2">Follow-up: {i.follow_up}</div>}
+              {i.follow_up && <div className="text-[13px] text-equine-lilac mt-2">Follow-up: {i.follow_up}</div>}
             </div>
           ))}
         </Card>

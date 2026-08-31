@@ -91,7 +91,7 @@ export default function FinancialDashboard() {
         </Card>
       ) : invoices.length === 0 && payments.length === 0 && recurring.length === 0 && expenses.length === 0 ? (
         <Empty>
-          <Landmark strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Landmark strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No financial records yet</div>
           <div className="text-[13px] text-equine-platinum/60">Create invoices, payment profiles, recurring rules, or expenses to populate this dashboard.</div>
         </Empty>
@@ -195,7 +195,7 @@ const Metric = ({ label, value, icon: Icon, tone }) => {
           <div className="label-eyebrow-muted mb-2">{label}</div>
           <div className={`font-display text-3xl text-equine-ink leading-none ${color}`}>{value}</div>
         </div>
-        <Icon className="w-4 h-4 text-equine-brass" />
+        <Icon className="w-4 h-4 text-equine-icy" />
       </div>
     </div>
   );

@@ -405,7 +405,7 @@ export default function MobileReadiness() {
                         </div>
                         <StatusPill tone={STATUS_TONE[status] || "info"}>{labelFor(status)}</StatusPill>
                       </div>
-                      <a href={data.file_url} target="_blank" rel="noreferrer" className="text-[12px] text-equine-navy hover:text-equine-saddle break-all">{data.file_url}</a>
+                      <a href={data.file_url} target="_blank" rel="noreferrer" className="text-[12px] text-equine-navy hover:text-equine-lavenderSoft break-all">{data.file_url}</a>
                       {data.notes && <div className="text-[13px] text-equine-inkMuted mt-2">{data.notes}</div>}
                       <div className="hairline mt-3 pt-3 flex flex-wrap items-center gap-2">
                         {status !== "reviewed" && <button type="button" onClick={() => updateStatus("document-scans", record, "scan_status", "reviewed")} className="btn-secondary text-[12px] py-2 px-4">Reviewed</button>}
@@ -508,7 +508,7 @@ const Metric = ({ label, value, caption, icon: Icon }) => (
         <div className="font-display text-4xl text-equine-ink leading-none">{value}</div>
         {caption && <div className="text-[12px] text-equine-inkMuted mt-2">{caption}</div>}
       </div>
-      <Icon className="w-4 h-4 text-equine-brass" />
+      <Icon className="w-4 h-4 text-equine-icy" />
     </div>
   </div>
 );
@@ -533,7 +533,7 @@ const QueueRow = ({ row, local, onSync, onArchive }) => {
 
 const SoftEmpty = ({ icon: Icon, text }) => (
   <div className="rounded-xl border border-dashed border-equine-cloud bg-white/45 py-8 text-center text-[13px] text-equine-inkMuted">
-    <Icon className="w-6 h-6 mx-auto mb-2 text-equine-champagne" />
+    <Icon className="w-6 h-6 mx-auto mb-2 text-equine-lilac" />
     {text}
   </div>
 );

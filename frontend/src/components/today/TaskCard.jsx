@@ -72,7 +72,7 @@ const TaskCard = ({
       <div
         className={`relative bg-equine-card border border-equine-hairline rounded-2xl px-4 py-3.5 transition-transform duration-150 ease-out
           ${completed ? "opacity-60" : ""}
-          ${selected ? "ring-2 ring-equine-brassLight" : ""}`}
+          ${selected ? "ring-2 ring-equine-icyLight" : ""}`}
         style={{ transform: `translateX(${dx}px)` }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}

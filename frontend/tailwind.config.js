@@ -34,14 +34,13 @@ module.exports = {
           navy:        '#2E3448',  // deep charcoal navy (sidebar, primary brand)
           navyDeep:    '#22262F',
           navyLift:    '#3D445A',
-          brass:       '#A7B7E7',  // icy blue (primary accent — was brass)
-          brassLight:  '#C2CDEC',  // light icy blue
-          ice:         '#DCEEFA',  // ice blue (approved accent alias)
-          lilac:       '#B8AECF',  // smoky lilac (approved accent alias)
-          lavender:    '#D8D2E3',  // frosted lavender gray (approved accent alias)
-          saddle:      '#C7B6D9',  // dusty lavender (was saddle leather)
-          saddleDeep:  '#A593C0',
-          champagne:   '#B89B7A',  // muted champagne taupe (warm accent)
+          icy:         '#A7B7E7',  // icy blue
+          icyLight:    '#C2CDEC',  // light icy blue
+          ice:         '#DCEEFA',  // pale ice blue
+          lilac:       '#B8AECF',  // smoky lilac
+          lavender:    '#D8D2E3',  // frosted lavender gray
+          lavenderSoft:'#C7B6D9',  // soft lavender
+          lavenderDeep:'#A593C0',
           taupe:       '#B8BDC9',  // brushed silver
           steel:       '#A7B7E7',  // icy blue (alias)
 

@@ -122,9 +122,9 @@ export default function FormsSignatures() {
         }
       />
 
-      <Card hover={false} className="mb-6 border-equine-brass/30 bg-equine-brass/5">
+      <Card hover={false} className="mb-6 border-equine-icy/30 bg-equine-icy/5">
         <div className="flex items-start gap-3">
-          <FileSignature className="w-4 h-4 text-equine-champagne mt-0.5 flex-shrink-0" />
+          <FileSignature className="w-4 h-4 text-equine-lilac mt-0.5 flex-shrink-0" />
           <div className="text-[13px] text-equine-inkMuted leading-relaxed">
             Signature providers use a hybrid model: legal signatures route to a third-party provider, while lower-risk acknowledgements stay internal.
             {providerReadiness?.legal_signature_provider && (
@@ -228,7 +228,7 @@ export default function FormsSignatures() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <PenLine strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <PenLine strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No forms tracked</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add a waiver, release, boarding document, or signature request.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="forms-empty-add">

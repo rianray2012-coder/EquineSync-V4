@@ -121,7 +121,7 @@ export default function SupplyInventory() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search item, vendor, location..."
-              className="w-full bg-white border border-equine-cloud rounded-lg pl-9 pr-3 py-2.5 text-equine-ink outline-none focus:border-equine-brass"
+              className="w-full bg-white border border-equine-cloud rounded-lg pl-9 pr-3 py-2.5 text-equine-ink outline-none focus:border-equine-icy"
               data-testid="supply-inventory-search"
             />
           </div>
@@ -153,7 +153,7 @@ export default function SupplyInventory() {
         </Card>
       ) : records.length === 0 ? (
         <Empty>
-          <Package strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Package strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No supply records</div>
           <div className="text-[13px] text-equine-platinum/60 mb-4">Add hay, feed, bedding, or supplement stock.</div>
           <button onClick={() => setAddOpen(true)} className="btn-primary inline-flex items-center gap-2" data-testid="supply-inventory-empty-add">
@@ -162,7 +162,7 @@ export default function SupplyInventory() {
         </Empty>
       ) : filtered.length === 0 ? (
         <Empty>
-          <Package strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+          <Package strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
           <div className="font-display text-2xl text-equine-ivory mb-1">No matching supplies</div>
           <div className="text-[13px] text-equine-platinum/60">Try another category or search term.</div>
         </Empty>

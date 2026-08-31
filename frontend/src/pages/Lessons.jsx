@@ -130,7 +130,7 @@ export default function Lessons() {
           <h2 className="font-display text-2xl mb-4">Upcoming Lessons</h2>
           {lessons.length === 0 ? (
             <Empty>
-              <GraduationCap strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-champagne" />
+              <GraduationCap strokeWidth={1.4} className="w-7 h-7 mx-auto mb-3 text-equine-lilac" />
               <div className="font-display text-2xl text-equine-ivory mb-1">No lessons scheduled</div>
               <div className="text-[13px] text-equine-platinum/60 mb-4">
                 {ridersEmpty
@@ -146,7 +146,7 @@ export default function Lessons() {
           ) : (
             lessons.map((l) => (
               <div key={l.id} data-testid={`lesson-${l.id}`} className="py-3 hairline flex items-center gap-4">
-                <div className="font-display text-xl text-equine-champagne w-28 shrink-0">{fmtDate(l.start_time)} · {fmtTime(l.start_time)}</div>
+                <div className="font-display text-xl text-equine-lilac w-28 shrink-0">{fmtDate(l.start_time)} · {fmtTime(l.start_time)}</div>
                 <div className="flex-1 min-w-0">
                   <div className="text-equine-ivory truncate">
                     {l.rider_name || "—"}{l.horse_name ? ` on ${l.horse_name}` : ""}
