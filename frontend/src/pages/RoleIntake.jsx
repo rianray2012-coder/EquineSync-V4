@@ -508,7 +508,7 @@ function StaffHome({ user }) {
               <h2 className="font-display text-3xl text-equine-ivory mt-1">Staff Intake</h2>
             </div>
             <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
-              <span className="font-display text-3xl text-equine-lavender">{completion.percent || 0}%</span>
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
             </div>
           </div>
 
@@ -571,8 +571,8 @@ function StaffHome({ user }) {
                         data-testid={`staff-care-area-${value}`}
                         className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
                           active
-                            ? "bg-equine-lavender text-equine-navy border-equine-lavender"
-                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-lavender/50"
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
                         }`}
                       >
                         {label}
@@ -652,7 +652,7 @@ function StaffHome({ user }) {
           ].map(([title, body, Icon]) => (
             <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`staff-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
               <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-equine-lavender" strokeWidth={1.5} />
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
               </div>
               <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
               <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
@@ -758,7 +758,7 @@ function ManagerHome({ user }) {
               <h2 className="font-display text-3xl text-equine-ivory mt-1">Manager Intake</h2>
             </div>
             <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
-              <span className="font-display text-3xl text-equine-lavender">{completion.percent || 0}%</span>
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
             </div>
           </div>
 
@@ -807,8 +807,8 @@ function ManagerHome({ user }) {
                         data-testid={`manager-focus-${value}`}
                         className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
                           active
-                            ? "bg-equine-lavender text-equine-navy border-equine-lavender"
-                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-lavender/50"
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
                         }`}
                       >
                         {label}
@@ -922,7 +922,7 @@ function ManagerHome({ user }) {
           ].map(([title, body, Icon]) => (
             <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`manager-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
               <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-equine-lavender" strokeWidth={1.5} />
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
               </div>
               <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
               <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
@@ -1097,7 +1097,7 @@ function TrainerHome({ user }) {
               <h2 className="font-display text-3xl text-equine-ivory mt-1">Trainer Intake</h2>
             </div>
             <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
-              <span className="font-display text-3xl text-equine-lavender">{completion.percent || 0}%</span>
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
             </div>
           </div>
 
@@ -1160,8 +1160,8 @@ function TrainerHome({ user }) {
                         data-testid={`trainer-discipline-${name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
                         className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
                           active
-                            ? "bg-equine-lavender text-equine-navy border-equine-lavender"
-                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-lavender/50"
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
                         }`}
                       >
                         {name}
@@ -1184,8 +1184,8 @@ function TrainerHome({ user }) {
                         data-testid={`trainer-rider-level-${value}`}
                         className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
                           active
-                            ? "bg-equine-lavender text-equine-navy border-equine-lavender"
-                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-lavender/50"
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
                         }`}
                       >
                         {label}
@@ -1305,7 +1305,7 @@ function TrainerHome({ user }) {
             ["Documents", "Credentials, waivers, and signature envelopes stay in approved document workflows.", FileText],
             [
               "Workspace Status",
-              operatingErr || "This read-only summary uses the trainer operating-center projection.",
+              operatingErr || "This read-only summary uses the RF9 trainer operating-center projection.",
               MessageSquare,
             ],
           ].map(([title, body, Icon]) => (
@@ -1418,7 +1418,7 @@ function BarnOwnerHome({ user }) {
               <h2 className="font-display text-3xl text-equine-ivory mt-1">Founder Intake</h2>
             </div>
             <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
-              <span className="font-display text-3xl text-equine-lavender">{completion.percent || 0}%</span>
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
             </div>
           </div>
 
@@ -1546,8 +1546,8 @@ function BarnOwnerHome({ user }) {
                         data-testid={`barn-owner-service-${name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
                         className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
                           active
-                            ? "bg-equine-lavender text-equine-navy border-equine-lavender"
-                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-lavender/50"
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
                         }`}
                       >
                         {name}
@@ -1603,7 +1603,7 @@ function BarnOwnerHome({ user }) {
           ].map(([title, body, Icon]) => (
             <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`barn-owner-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
               <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-equine-lavender" strokeWidth={1.5} />
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
               </div>
               <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
               <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
@@ -1700,7 +1700,7 @@ function OwnerHome({ user }) {
               <h2 className="font-display text-3xl text-equine-ivory mt-1">Owner Intake</h2>
             </div>
             <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
-              <span className="font-display text-3xl text-equine-lavender">{completion.percent || 0}%</span>
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
             </div>
           </div>
 
@@ -1837,7 +1837,7 @@ function OwnerHome({ user }) {
         <aside className="space-y-5">
           <section className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid="owner-panel-my-horse">
             <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-              <Heart className="w-5 h-5 text-equine-lavender" strokeWidth={1.5} />
+              <Heart className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
             </div>
             <h2 className="font-display text-2xl text-equine-ivory">My Horse</h2>
             <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">
@@ -1864,7 +1864,7 @@ function OwnerHome({ user }) {
           ].map(([title, body, Icon]) => (
             <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`owner-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
               <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-equine-lavender" strokeWidth={1.5} />
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
               </div>
               <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
               <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
@@ -1968,7 +1968,7 @@ function RiderHome({ user }) {
               <h2 className="font-display text-3xl text-equine-ivory mt-1">Rider Intake</h2>
             </div>
             <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
-              <span className="font-display text-3xl text-equine-lavender">{completion.percent || 0}%</span>
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
             </div>
           </div>
 
@@ -2017,8 +2017,8 @@ function RiderHome({ user }) {
                         data-testid={`rider-discipline-${name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
                         className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
                           active
-                            ? "bg-equine-lavender text-equine-navy border-equine-lavender"
-                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-lavender/50"
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
                         }`}
                       >
                         {name}
@@ -2111,7 +2111,7 @@ function RiderHome({ user }) {
           ].map(([title, body, Icon]) => (
             <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`rider-panel-${title.toLowerCase()}`}>
               <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-equine-lavender" strokeWidth={1.5} />
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
               </div>
               <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
               <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
@@ -2218,7 +2218,7 @@ function GuardianHome({ user }) {
               <h2 className="font-display text-3xl text-equine-ivory mt-1">Guardian Intake</h2>
             </div>
             <div className="w-20 h-20 rounded-2xl bg-equine-navy/60 border border-white/10 flex items-center justify-center">
-              <span className="font-display text-3xl text-equine-lavender">{completion.percent || 0}%</span>
+              <span className="font-display text-3xl text-equine-brassLight">{completion.percent || 0}%</span>
             </div>
           </div>
 
@@ -2306,8 +2306,8 @@ function GuardianHome({ user }) {
                         data-testid={`guardian-interest-${name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
                         className={`px-3 py-2 rounded-xl border text-[12.5px] transition ${
                           active
-                            ? "bg-equine-lavender text-equine-navy border-equine-lavender"
-                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-lavender/50"
+                            ? "bg-equine-brassLight text-equine-navy border-equine-brassLight"
+                            : "bg-white/[0.03] text-equine-platinum/75 border-white/10 hover:border-equine-brassLight/50"
                         }`}
                       >
                         {name}
@@ -2374,7 +2374,7 @@ function GuardianHome({ user }) {
               </label>
 
               <div className="rounded-xl bg-white/[0.03] border border-white/10 p-4 text-[13px] text-equine-platinum/75 leading-relaxed" data-testid="guardian-consent-status">
-                Consent status: <span className="text-equine-lavender">pending formal consent</span>. This intake does not replace signed waivers, legal guardian approval, or barn participation requirements.
+                Consent status: <span className="text-equine-brassLight">pending formal consent</span>. This intake does not replace signed waivers, legal guardian approval, or barn participation requirements.
               </div>
 
               <button
@@ -2403,7 +2403,7 @@ function GuardianHome({ user }) {
           ].map(([title, body, Icon]) => (
             <section key={title} className="rounded-2xl bg-equine-card border border-equine-hairline p-5" data-testid={`guardian-panel-${title.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
               <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-equine-lavender" strokeWidth={1.5} />
+                <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
               </div>
               <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
               <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">{body}</p>
@@ -2452,7 +2452,7 @@ export default function RoleIntake({ forcedProfile }) {
             className="rounded-2xl bg-equine-card border border-equine-hairline p-5"
           >
             <div className="w-10 h-10 rounded-xl bg-equine-navy/70 flex items-center justify-center mb-4">
-              <Icon className="w-5 h-5 text-equine-lavender" strokeWidth={1.5} />
+              <Icon className="w-5 h-5 text-equine-brassLight" strokeWidth={1.5} />
             </div>
             <h2 className="font-display text-2xl text-equine-ivory">{title}</h2>
             <p className="mt-2 text-[13px] leading-relaxed text-equine-platinum/65">

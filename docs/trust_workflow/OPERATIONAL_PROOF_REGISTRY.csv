@@ -1,0 +1,17 @@
+proof_key,signal,meaning,surface,status,next_gate
+facility,Last Verified,Dashboard data shows a refresh timestamp when loaded,frontend/src/pages/Dashboard.jsx,implemented,TW-4
+facility,Decision Queue,Owner requests incidents and billing exceptions stay visible before secondary analytics,frontend/src/pages/Dashboard.jsx,implemented,TW-4
+facility,Audit Path,Critical admin and billing changes remain tied to existing audit and support records,frontend/src/pages/Dashboard.jsx,implemented,TW-4
+facility,Readiness Boundary,Provider payment document and messaging activation stay gated until dependencies are verified,frontend/src/pages/Dashboard.jsx,implemented,TW-4
+handoff,Shift Status,Draft submitted and reviewed handoff reports keep shift context explicit,frontend/src/pages/HandoffReports.jsx,implemented,TW-4
+handoff,Open Items,Open tasks and shift notes are shown beside each handoff before review,frontend/src/pages/HandoffReports.jsx,implemented,TW-4
+handoff,Review Proof,Submitted and reviewed timestamps are recorded by the existing handoff update flow,frontend/src/pages/HandoffReports.jsx,implemented,TW-4
+handoff,Exception Context,Priority and blocked or open task status highlight manager attention needs,frontend/src/pages/HandoffReports.jsx,implemented,TW-4
+support,Opaque Refs,Support rows use opaque ticket references instead of exposing internal identifiers,frontend/src/pages/admin/AdminSupport.jsx,implemented,TW-5
+support,Audit Path,Status changes assignments and notes remain audit logged by existing server controls,frontend/src/pages/admin/AdminSupport.jsx,implemented,TW-5
+support,No Unsafe Impersonation,Support diagnostics do not create impersonation or hidden privilege in this gate,frontend/src/pages/admin/AdminSupport.jsx,implemented,TW-5
+support,Privacy Boundary,Internal note bodies stay in ticket records not audit metadata,frontend/src/pages/admin/AdminSupport.jsx,implemented,TW-5
+admin,Read Only,The platform dashboard remains read only for operational review,frontend/src/pages/admin/AdminDashboard.jsx,implemented,TW-5
+admin,Access Summary,Platform role and visible sections explain current admin capability,frontend/src/pages/admin/AdminDashboard.jsx,implemented,TW-5
+admin,Activity Trail,Activity feed and subscription health remain separate so one stale feed does not hide other proof,frontend/src/pages/admin/AdminDashboard.jsx,implemented,TW-5
+admin,Launch Boundary,Admin health visibility does not activate launch payments provider access or messaging delivery,frontend/src/pages/admin/AdminDashboard.jsx,implemented,TW-5

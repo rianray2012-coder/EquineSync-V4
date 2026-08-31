@@ -1,0 +1,5 @@
+signal,label,meaning,surface,status,next_gate
+today_command,Today Command,Trainer work should prioritize assigned horses lessons recent training and active plans,frontend/src/features/dashboards/TrainerDashboard.jsx,implemented,TW-7
+note_lifecycle,Note Lifecycle,Training notes need draft review owner-visible and internal-only boundaries before sharing,frontend/src/features/dashboards/TrainerDashboard.jsx,implemented,TW-7
+rider_context,Rider Context,Rider cards should summarize goals and lesson context without exposing unrelated owner data,frontend/src/features/dashboards/TrainerDashboard.jsx,implemented,TW-7
+calendar_mode,Calendar Mode,Trainer scheduling should stay focused on lessons and assigned work not facility admin,frontend/src/features/dashboards/TrainerDashboard.jsx,implemented,TW-7

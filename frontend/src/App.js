@@ -15,6 +15,7 @@ import Forbidden from "./pages/Forbidden";
 import Horses from "./pages/Horses";
 import HorseProfile from "./pages/HorseProfile";
 import OwnerCareLedger from "./pages/OwnerCareLedger";
+import HorseTransfers from "./pages/HorseTransfers";
 import Riders from "./pages/Riders";
 import Owners from "./pages/Owners";
 import Lessons from "./pages/Lessons";
@@ -25,7 +26,6 @@ import Feed from "./pages/Feed";
 import Billing from "./pages/Billing";
 import Messaging from "./pages/Messaging";
 import OwnerPortal from "./pages/OwnerPortal";
-import OwnerDocuments from "./pages/OwnerDocuments";
 import Incidents from "./pages/Incidents";
 import Inventory from "./pages/Inventory";
 import Settings from "./pages/Settings";
@@ -71,7 +71,6 @@ import MobileReadiness from "./pages/MobileReadiness";
 import AuditLog from "./pages/AuditLog";
 import SubscriptionBilling from "./pages/SubscriptionBilling";
 import SubscriptionSuccess from "./pages/SubscriptionSuccess";
-import Support from "./pages/Support";
 import RoleHome from "./pages/RoleHome";
 import RoleIntake from "./pages/RoleIntake";
 import { resolvePostLoginPath, SETUP_ROUTE } from "./lib/roleLanding";
@@ -182,7 +181,6 @@ const BN17D_DIRECT_ROUTE_ROLES = {
   trainingWorkflow: ["admin", "barn_owner", "barn_manager", "trainer"],
   careWorkflow: ["admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"],
   inventoryWorkflow: ["admin", "barn_owner", "barn_manager"],
-  aiDraftWorkflow: ["admin", "barn_owner", "barn_manager", "trainer", "horse_owner"],
   operationalMessaging: ["admin", "barn_owner", "barn_manager", "trainer", "groom", "working_student"],
   checkoutReturn: [
     "admin",
@@ -234,6 +232,14 @@ function App() {
               element={
                 <Protected>
                   {permit(<OwnerCareLedger />, ["horse_owner", "admin", "barn_manager"])}
+                </Protected>
+              }
+            />
+            <Route
+              path="/horse-transfers"
+              element={
+                <Protected>
+                  {permit(<HorseTransfers />, ["horse_owner", "admin", "barn_manager"])}
                 </Protected>
               }
             />
@@ -318,7 +324,7 @@ function App() {
               <Route path="/health-care-logs" element={permit(<HealthCareLogs />, ROLE_GROUPS.care)} />
               <Route path="/weight-trends" element={permit(<WeightTrends />, ROLE_GROUPS.care)} />
               <Route path="/billing" element={permit(<Billing />, ROLE_GROUPS.financial)} />
-              <Route path="/billing/subscription" element={permit(<SubscriptionBilling />, ROLE_GROUPS.subscriptionBilling)} />
+              <Route path="/billing/subscription" element={permit(<SubscriptionBilling />, ROLE_GROUPS.barnManage)} />
               <Route path="/billing/success" element={permit(<SubscriptionSuccess />, BN17D_DIRECT_ROUTE_ROLES.checkoutReturn)} />
               <Route path="/review-queue" element={permit(<ReviewQueue />, ROLE_GROUPS.communication)} />
               <Route path="/admin/review-queue" element={permit(<AdminReviewQueue />, ROLE_GROUPS.admin)} />
@@ -345,16 +351,14 @@ function App() {
               <Route path="/competitions" element={permit(<Competitions />, ROLE_GROUPS.training)} />
               <Route path="/ride-gps" element={permit(<RideGps />, ROLE_GROUPS.training)} />
               <Route path="/performance-analytics" element={permit(<PerformanceAnalytics />, ROLE_GROUPS.training)} />
-              <Route path="/ai-automation" element={permit(<AiAutomation />, BN17D_DIRECT_ROUTE_ROLES.aiDraftWorkflow)} />
+              <Route path="/ai-automation" element={permit(<AiAutomation />, ROLE_GROUPS.admin)} />
               <Route path="/integrations" element={permit(<Integrations />, ROLE_GROUPS.integrations)} />
               <Route path="/mobile-readiness" element={permit(<MobileReadiness />, ROLE_GROUPS.integrations)} />
               <Route path="/advanced-reports" element={<Navigate to="/reports" replace />} />
               <Route path="/audit-log" element={permit(<AuditLog />, ROLE_GROUPS.admin)} />
               <Route path="/reports" element={permit(<Reports />, ROLE_GROUPS.admin)} />
               <Route path="/owner-portal" element={permit(<OwnerPortal />, ROLE_GROUPS.ownerPortal)} />
-              <Route path="/owner-documents" element={permit(<OwnerDocuments />, ["horse_owner", "parent", "rider"])} />
               <Route path="/settings" element={permit(<Settings />, BN17D_DIRECT_ROUTE_ROLES.accountSettings)} />
-              <Route path="/support" element={<Support />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

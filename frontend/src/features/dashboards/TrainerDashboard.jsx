@@ -4,6 +4,8 @@ import { AlertTriangle, CalendarDays, CircleDot, ClipboardList, Dumbbell, Gradua
 import { api, fmtDate, fmtTime } from "../../lib/api";
 import { Card, PageHeader, SectionEyebrow, Stat, StatusPill } from "../../components/Primitives";
 import LastSyncedBadge from "../../components/today/LastSyncedBadge";
+import TrustWorkflowPanel from "../../components/TrustWorkflowPanel";
+import TrainerWorkflowPanel from "../../components/TrainerWorkflowPanel";
 
 const labelFor = (value) => String(value || "").replace(/_/g, " ");
 
@@ -70,6 +72,10 @@ export default function TrainerDashboard() {
         <Card hover={false}><div className="py-10 text-center text-equine-inkSoft text-[13px]">Loading trainer work...</div></Card>
       ) : (
         <>
+          <TrustWorkflowPanel roleKey="trainer" testid="trainer-north-star" />
+
+          <TrainerWorkflowPanel />
+
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
             <Stat label="Assigned Horses" value={counts.assigned_horses || 0} caption="Ready for lesson and plan context" icon={CircleDot} testid="trainer-stat-horses" />
             <Stat label="Riders" value={counts.riders || 0} caption="From trainer-owned lessons" accent="ice" icon={Users} testid="trainer-stat-riders" />

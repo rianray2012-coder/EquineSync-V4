@@ -1,0 +1,9 @@
+signal,label,status,meaning,surface,next_gate
+invite_scope,Invite Scope,gated,Provider access begins with an explicit facility grant for a specific horse service type and time window,frontend/src/features/dashboards/ServiceProviderDashboard.jsx,TW-8
+visit_packet,Visit Packet,planned,A visit packet should contain only approved horse context appointment details care cautions and provider-safe documents,frontend/src/features/dashboards/ServiceProviderDashboard.jsx,TW-8
+revocation,Revocation,gated,Every provider grant needs an owner or facility-visible revoke path and a clear expiration state,frontend/src/features/dashboards/ServiceProviderDashboard.jsx,TW-8
+reviewed_notes,Reviewed Notes,review_needed,Provider notes and outcomes should enter review before broader owner or staff visibility,frontend/src/features/dashboards/ServiceProviderDashboard.jsx,TW-8
+document_boundary,Document Boundary,provider_required,Provider document upload and signature workflows remain provider-required until storage and signature proof exists,frontend/src/features/dashboards/ServiceProviderDashboard.jsx,TW-8
+communication_boundary,Communication Boundary,gated,Provider communication should stay inside reviewed EquineSync surfaces until external delivery is separately approved,frontend/src/features/dashboards/ServiceProviderDashboard.jsx,TW-8
+billing_handoff,Billing Handoff,planned,Provider billing can show handoff context without activating payments or invoice collection,frontend/src/features/dashboards/ServiceProviderDashboard.jsx,TW-8
+emergency_mode,Emergency Mode,gated,Emergency provider access needs narrow scope reason capture expiration and visible audit evidence,frontend/src/features/dashboards/ServiceProviderDashboard.jsx,TW-8

@@ -12,7 +12,7 @@
   "counts": {
     "total_collected": 2286,
     "selected_non_live": 1080,
-    "live_deselected": 1207,
+    "live_deselected": 1212,
     "passed": 919,
     "failed": 158,
     "errors": 3,
@@ -55,6 +55,13 @@
       "type": "live_inventory_count_only",
       "selector": "backend/tests/test_support_feedback_intake.py::test_authenticated_support_ticket_lands_in_admin_inbox_without_body_in_audit",
       "rationale": "PR #121 adds one authenticated support feedback intake live proof that calls a deployed API and must be deselected from the non-live CI run. No new failing or erroring test node is accepted by this count-only adjustment."
+    },
+    {
+      "timestamp_utc": "2026-08-31T04:48:00Z",
+      "pull_request": 187,
+      "type": "live_inventory_count_only",
+      "selector": "backend/tests/test_horse_transfers.py::*",
+      "rationale": "PR #187 adds five Horse Passport transfer workflow tests that call a running deployed API through requests and Mongo. They remain collected as live tests and are deselected from the non-live CI run. No new failing or erroring test node is accepted by this count-only adjustment."
     }
   ],
   "known_failure_or_error_nodes": [

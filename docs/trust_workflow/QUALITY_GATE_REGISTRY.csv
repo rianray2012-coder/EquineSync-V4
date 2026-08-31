@@ -1,0 +1,7 @@
+check,label,status,meaning,surface,next_gate
+visual_system,Visual System,ready_for_review,Shared panels use existing primitives spacing typography and color tokens,frontend/src/components/QualityGatePanel.jsx,TW-10
+mobile_context,Mobile Context,ready_for_review,Mobile readiness remains the anchor for field recovery scan intake QR stall cards and native handoff posture,frontend/src/pages/MobileReadiness.jsx,TW-10
+accessibility,Accessibility,ready_for_review,Buttons links headings loading states empty states and status labels need keyboard and screen-reader review,frontend/src/components/QualityGatePanel.jsx,TW-10
+role_routes,Role Routes,guarded,Role dashboards role landing paths and role navigation stay mapped by explicit role groups,frontend/src/App.js;frontend/src/lib/roleLanding.js;frontend/src/lib/roleNavigation.js,TW-10
+data_states,Data States,guarded,Critical surfaces should expose loading empty error refresh and last-verified states where relevant,frontend/src/components/QualityGatePanel.jsx,TW-10
+claim_boundary,Claim Boundary,blocked_until_verified,Launch payments signatures provider lifecycle messaging exports AI mutation and multi-facility remain gated,frontend/src/lib/qualityGate.js,TW-10

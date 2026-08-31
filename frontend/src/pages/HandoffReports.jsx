@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { api, fmtDate } from "../lib/api";
 import { normalizeStaffDirectory, staffNameById, staffOptions } from "../lib/staffDirectory";
 import { Card, Empty, PageHeader, StatusPill } from "../components/Primitives";
+import OperationalProofPanel from "../components/OperationalProofPanel";
 import QuickAddSheet from "../components/QuickAddSheet";
 
 const STATUSES = ["draft", "submitted", "reviewed"];
@@ -55,9 +56,6 @@ export default function HandoffReports() {
     { key: "status", label: "Status", kind: "select", opts: STATUSES },
     { key: "summary", label: "Summary", kind: "textarea", rows: 4, required: true, full: true },
     { key: "open_items", label: "Open items", kind: "textarea", rows: 4, full: true },
-    { key: "linked_task_ids", label: "Linked task IDs", kind: "textarea", rows: 3, full: true, placeholder: "One task ID per line or comma-separated" },
-    { key: "evidence_completion_ids", label: "Evidence completion IDs", kind: "textarea", rows: 3, full: true, placeholder: "One completion ID per line or comma-separated" },
-    { key: "signoff_user_ids", label: "Signoff user IDs", kind: "textarea", rows: 3, full: true, placeholder: "One staff user ID per line or comma-separated" },
   ], [staff]);
 
   const stats = useMemo(() => Object.fromEntries(STATUSES.map((status) => [
@@ -119,6 +117,12 @@ export default function HandoffReports() {
             </button>
           </div>
         }
+      />
+
+      <OperationalProofPanel
+        proofKey="handoff"
+        title="Handoff Proof Snapshot"
+        testid="handoff-proof-snapshot"
       />
 
       <div className="grid grid-cols-3 gap-4 mb-6">
@@ -222,7 +226,6 @@ export default function HandoffReports() {
                     <div className="text-[13px] text-equine-inkMuted">{data.open_items}</div>
                   </div>
                 )}
-                <HandoffLinkSummary data={data} />
                 <div className="hairline mt-4 pt-3 flex flex-wrap items-center gap-2">
                   {status === "draft" && (
                     <button type="button" onClick={() => updateStatus(record, "submitted")} className="btn-secondary text-[12px] py-2 px-4 inline-flex items-center gap-1">
@@ -282,22 +285,3 @@ const SoftEmpty = ({ text }) => (
     {text}
   </div>
 );
-
-const HandoffLinkSummary = ({ data }) => {
-  const rows = [
-    ["Linked tasks", data.linked_task_ids],
-    ["Evidence completions", data.evidence_completion_ids],
-    ["Signoffs", data.signoff_user_ids],
-  ].filter(([, values]) => Array.isArray(values) && values.length > 0);
-  if (!rows.length) return null;
-  return (
-    <div data-testid="handoff-link-summary" className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
-      {rows.map(([label, values]) => (
-        <div key={label} className="rounded-lg border border-equine-cloud bg-white/60 p-3">
-          <div className="label-eyebrow-muted mb-1">{label}</div>
-          <div className="text-[12.5px] text-equine-inkMuted break-words">{values.join(", ")}</div>
-        </div>
-      ))}
-    </div>
-  );
-};

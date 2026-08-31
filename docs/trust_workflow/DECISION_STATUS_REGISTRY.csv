@@ -1,0 +1,10 @@
+state,label,tone,meaning,allowed_initial,terminal,owner_visible_allowed,next_gate
+submitted,Submitted,info,The request or note has been created and is waiting for review,true,false,false,TW-3
+seen,Seen,neutral,An authorized team member has viewed it,false,false,false,TW-3
+assigned,Assigned,info,A responsible person is attached to the work,false,false,false,TW-3
+scheduled,Scheduled,warning,The next action has a planned time or service window,false,false,false,TW-3
+needs_review,Needs Review,warning,It must be checked before broader visibility or completion,true,false,false,TW-3
+owner_visible,Owner Visible,success,The item is approved for owner-facing visibility,false,false,true,TW-3
+internal_only,Internal Only,neutral,The item stays inside staff or facility operations,true,false,false,TW-3
+completed,Completed,success,The work is closed with a recorded outcome,false,true,true,TW-3
+declined_with_note,Declined With Note,neutral,The request is not approved and includes owner-safe context when provided,false,true,true,TW-3

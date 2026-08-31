@@ -1,0 +1,76 @@
+id,viewpoint,recommendation,primary_gate,secondary_gate,status
+T1,Trainer,Trainer Today command center,TW-2,TW-7,planned
+T2,Trainer,Governed training-note workflow,TW-3,TW-7,planned
+T3,Trainer,Rider context cards,TW-7,,planned
+T4,Trainer,Offline-tolerant draft capture,TW-7,TW-10,planned
+T5,Trainer,Trainer calendar mode,TW-7,,planned
+T6,Trainer,Owner-update templates,TW-3,TW-7,planned
+T7,Trainer,Permission explanations,TW-1,TW-7,planned
+T8,Trainer,Permission-safe multi-facility switching,TW-7,,planned
+T9,Trainer,Trainer packages and billing,TW-7,TW-9,planned
+T10,Trainer,Specific review-status cards,TW-1,TW-7,planned
+O1,Individual Owner,Owner wellbeing home,TW-2,TW-6,planned
+O2,Individual Owner,Daily digest timeline,TW-6,,planned
+O3,Individual Owner,Owner request workflow,TW-3,TW-6,planned
+O4,Individual Owner,Owner request status tracking,TW-3,TW-6,planned
+O5,Individual Owner,Plain-language visibility labels,TW-1,TW-6,planned
+O6,Individual Owner,Reduce placeholder owner intake,TW-1,TW-6,planned
+O7,Individual Owner,Owner trust center,TW-6,,planned
+O8,Individual Owner,Photo/video updates with approval,TW-3,TW-6,planned
+O9,Individual Owner,Owner billing clarity,TW-6,TW-9,planned
+O10,Individual Owner,First-week owner onboarding checklist,TW-6,,planned
+M1,Marketing Director,Brand name standardization,TW-1,,planned
+M2,Marketing Director,Outcome-based public copy,TW-1,TW-9,planned
+M3,Marketing Director,Real workflow screenshots and product captures,TW-9,TW-10,planned
+M4,Marketing Director,Buyer-segment landing paths,TW-9,,planned
+M5,Marketing Director,Launch-safe capability matrix,TW-1,TW-9,planned
+M6,Marketing Director,Testimonials or founder scenarios after evidence,TW-9,,planned
+M7,Marketing Director,Premium visual system audit,TW-10,,planned
+M8,Marketing Director,Conversion paths,TW-9,,planned
+M9,Marketing Director,Pricing explanation by plan fit,TW-9,,planned
+M10,Marketing Director,Trust and safety content,TW-1,,planned
+X1,Tech Expert,Role-route contract test,TW-0,TW-10,planned
+X2,Tech Expert,Copy-drift and overclaim tests,TW-0,TW-1,planned
+X3,Tech Expert,Permission-debug support panel,TW-5,,planned
+X4,Tech Expert,Shared page-pattern consolidation,TW-10,,planned
+X5,Tech Expert,Visual regression screenshots,TW-10,,planned
+X6,Tech Expert,Typed route metadata,TW-0,TW-10,planned
+X7,Tech Expert,Data-loading standard,TW-10,,planned
+X8,Tech Expert,Production-safe analytics events,TW-9,TW-10,planned
+X9,Tech Expert,Accessibility checks,TW-10,,planned
+X10,Tech Expert,Permission and config duplication reduction,TW-0,TW-10,planned
+F1,Barn Or Facility Manager,Facility launch checklist,TW-5,,planned
+F2,Barn Or Facility Manager,Operations readiness score,TW-5,,planned
+F3,Barn Or Facility Manager,Daily manager review queue,TW-2,TW-5,planned
+F4,Barn Or Facility Manager,Staff workload and coverage views,TW-4,TW-5,planned
+F5,Barn Or Facility Manager,Owner communication controls,TW-3,TW-5,planned
+F6,Barn Or Facility Manager,Incident escalation workflow,TW-4,,planned
+F7,Barn Or Facility Manager,Barn-level template packs,TW-5,,planned
+F8,Barn Or Facility Manager,Critical-record change history,TW-4,,planned
+F9,Barn Or Facility Manager,Handoff mode,TW-4,,planned
+F10,Barn Or Facility Manager,Admin health metrics,TW-5,,planned
+P1,Veterinary Or Service Provider,Provider invite and scoped access,TW-8,,planned
+P2,Veterinary Or Service Provider,Provider visit packets,TW-8,,planned
+P3,Veterinary Or Service Provider,Provider notes with review,TW-8,,planned
+P4,Veterinary Or Service Provider,Appointment outcomes,TW-8,,planned
+P5,Veterinary Or Service Provider,Provider document upload and review,TW-8,,planned
+P6,Veterinary Or Service Provider,Provider communication boundaries,TW-8,,planned
+P7,Veterinary Or Service Provider,Provider access audit trail,TW-8,,planned
+P8,Veterinary Or Service Provider,Provider directory categories,TW-8,,planned
+P9,Veterinary Or Service Provider,Provider billing handoff,TW-8,TW-9,planned
+P10,Veterinary Or Service Provider,Emergency provider mode,TW-8,,planned
+C1,Cross Product,North Star home for each role,TW-2,,planned
+C2,Cross Product,Unified notification and decision system,TW-3,,planned
+C3,Cross Product,Setup-aware empty states,TW-1,,planned
+C4,Cross Product,Facility onboarding concierge,TW-5,,planned
+C5,Cross Product,Role-based demo data,TW-9,,planned
+C6,Cross Product,Owner and trainer activation metrics,TW-9,,planned
+C7,Cross Product,Support operations console,TW-5,,planned
+C8,Cross Product,Formal product-status registry,TW-0,TW-1,planned
+C9,Cross Product,Data export and account portability,TW-9,,planned
+C10,Cross Product,Design-system QA gate,TW-10,,planned
+C11,Cross Product,Messaging safety controls,TW-3,,planned
+C12,Cross Product,Guided setup for payment documents and integrations,TW-5,,planned
+C13,Cross Product,Mobile-first barn-context QA,TW-10,,planned
+C14,Cross Product,Last-verified labels,TW-4,,planned
+C15,Cross Product,Staff accountability layer,TW-4,,planned

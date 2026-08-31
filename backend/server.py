@@ -36,8 +36,7 @@ validate_config()
 
 # Shared infrastructure (imported only after .env load + config validation).
 from core.db import db
-import core.auth as _core_auth
-from core.auth import get_current_user, create_token, hash_pwd, require_setup_role
+from core.auth import get_current_user, create_token, hash_pwd, verify_pwd, require_setup_role
 from core.helpers import (
     new_id, clean, list_collection, _user_safe, _client_meta,
 )
@@ -85,6 +84,7 @@ from routes.owner_updates import build_router as build_owner_updates_router
 from routes.owner import build_router as build_owner_router
 from routes.backlog import build_router as build_backlog_router
 from routes.horse_ledger import build_router as build_horse_ledger_router
+from routes.horse_transfers import build_router as build_horse_transfers_router
 from routes.account_context import build_router as build_account_context_router
 from routes.student_guardians import build_router as build_student_guardians_router
 from routes.document_signatures import build_router as build_document_signatures_router
@@ -267,7 +267,7 @@ _send_nudges = _reports_router._reports_helpers["send_nudges"]
 api_router.include_router(_reports_router, dependencies=PRODUCT_FACILITY_DEPS)
 
 # Invites (routes/invites.py)
-def _build_invites_router(*, verify_pwd, include_public=True, include_protected=True):
+def _build_invites_router(*, include_public=True, include_protected=True):
     return build_invites_router(
         db=db,
         get_current_user=get_current_user,
@@ -292,11 +292,11 @@ def _build_invites_router(*, verify_pwd, include_public=True, include_protected=
 
 
 api_router.include_router(
-    _build_invites_router(verify_pwd=_core_auth.verify_pwd, include_public=False),
+    _build_invites_router(include_public=False),
     dependencies=PRODUCT_FACILITY_DEPS,
 )
 api_router.include_router(
-    _build_invites_router(verify_pwd=_core_auth.verify_pwd, include_protected=False),
+    _build_invites_router(include_protected=False),
 )
 
 # Onboarding (routes/onboarding.py)
@@ -499,6 +499,18 @@ api_router.include_router(
 # `test_get_ledger_disabled_facility_gate_applies` guards against that.
 api_router.include_router(
     build_horse_ledger_router(db=db, get_current_user=get_current_user),
+    dependencies=PRODUCT_FACILITY_DEPS,
+)
+
+# Horse Passport ownership transfer workflow. This is facility-gated product
+# data and intentionally transfers only owner-safe categories from the current
+# policy slice.
+api_router.include_router(
+    build_horse_transfers_router(
+        db=db,
+        get_current_user=get_current_user,
+        new_id=new_id,
+    ),
     dependencies=PRODUCT_FACILITY_DEPS,
 )
 

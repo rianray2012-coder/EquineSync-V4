@@ -48,8 +48,7 @@
     --lavender:        var(--es-lavender);
     --lavender-deep:   var(--es-lilac);
     --silver:          var(--es-silver-blue);
-    --lilac:           var(--es-lilac);
-    --silver-blue:     var(--es-silver-blue);
+    --champagne:       var(--es-lilac);
 
     /* Status */
     --sage:            var(--es-success);
@@ -97,8 +96,7 @@
     --icy-light:       #EEF7FC;
     --lavender:        var(--es-lavender);
     --silver:          var(--es-silver-blue);
-    --lilac:           var(--es-lilac);
-    --silver-blue:     var(--es-silver-blue);
+    --champagne:       var(--es-lilac);
 
     --background:      232 14% 12%;
     --foreground:      252 22% 95%;

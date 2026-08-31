@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../lib/api";
 import UserStatusBadge from "./UserStatusBadge";
 import AdminSupportDrawer from "./AdminSupportDrawer";
+import OperationalProofPanel from "../../components/OperationalProofPanel";
 
 const STATUS_OPTIONS = ["", "new", "in_progress", "waiting", "resolved"];
 
@@ -75,6 +76,12 @@ export default function AdminSupport() {
         </p>
       </div>
 
+      <OperationalProofPanel
+        proofKey="support"
+        title="Support Proof Snapshot"
+        testid="support-proof-snapshot"
+      />
+
       <div className="bg-white rounded-xl border border-equinesync-graphite/10 p-4 mb-4 flex flex-wrap items-end gap-3"
            data-testid="admin-support-filters">
         <div className="flex-1 min-w-[220px]">
@@ -118,11 +125,10 @@ export default function AdminSupport() {
             <thead className="bg-equinesync-frost border-b border-equinesync-graphite/10">
               <tr className="text-left text-[10.5px] tracking-[0.18em] uppercase text-equinesync-graphite/55">
                 <th className="px-4 py-3 font-medium">Subject</th>
-                <th className="px-4 py-3 font-medium hidden lg:table-cell">Type</th>
                 <th className="px-4 py-3 font-medium">Facility</th>
                 <th className="px-4 py-3 font-medium">Status</th>
                 <th className="px-4 py-3 font-medium hidden md:table-cell">Assignee</th>
-                <th className="px-4 py-3 font-medium hidden xl:table-cell">Updated</th>
+                <th className="px-4 py-3 font-medium hidden lg:table-cell">Updated</th>
               </tr>
             </thead>
             <tbody>
@@ -135,16 +141,12 @@ export default function AdminSupport() {
                     <div className="text-equinesync-graphite font-medium">{t.subject || "—"}</div>
                     <div className="text-equinesync-graphite/55 text-[11.5px] font-mono">{t.admin_ref}</div>
                   </td>
-                  <td className="px-4 py-3 text-equinesync-graphite/65 hidden lg:table-cell">
-                    <div className="capitalize">{(t.category || "support").replace(/_/g, " ")}</div>
-                    <div className="text-[11.5px] capitalize">{t.severity || "medium"}</div>
-                  </td>
                   <td className="px-4 py-3 text-equinesync-graphite/75">{t.facility_name || t.barn_id || "—"}</td>
                   <td className="px-4 py-3">
                     {t.status ? <UserStatusBadge value={t.status} /> : <span className="text-equinesync-graphite/35">—</span>}
                   </td>
                   <td className="px-4 py-3 text-equinesync-graphite/75 hidden md:table-cell">{t.assignee_email || "Unassigned"}</td>
-                  <td className="px-4 py-3 text-equinesync-graphite/65 hidden xl:table-cell">{formatTs(t.updated_at)}</td>
+                  <td className="px-4 py-3 text-equinesync-graphite/65 hidden lg:table-cell">{formatTs(t.updated_at)}</td>
                 </tr>
               ))}
             </tbody>

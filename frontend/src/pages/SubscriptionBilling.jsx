@@ -1,9 +1,8 @@
-// Phase 15.C — Subscription Billing Portal
+// Phase 15.C — Facility Subscription Billing Portal
 // ---------------------------------------------------------------------------
 // Lives at /billing/subscription. Distinct from /billing (Phase 9 invoices —
-// see pages/Billing.jsx; untouched). Facility subscriptions remain
-// barn-management scoped; standalone horse owners can manage only their own
-// individual-owner subscription.
+// see pages/Billing.jsx; untouched). Gated by `canManageBilling` which mirrors
+// the backend `barn:manage` capability.
 //
 // Reads:
 //   GET /api/subscriptions/me        (status, plan tier, period, trial)
@@ -16,7 +15,7 @@
 //
 // Soft-enforcement only. Usage meters change accent color past 80% / 100% but
 // never disable any CTA. All copy stays within the approved Equine-Sync brand
-// palette — no deep-neutral drift, no warm traditional-equestrian aesthetics, no off-brand tokens.
+// palette — no matte black, no champagne aesthetics, no new tokens.
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
@@ -28,6 +27,7 @@ import {
 import { api } from "../lib/api";
 import { Card, PageHeader, SectionEyebrow, StatusPill } from "../components/Primitives";
 import { BrandLoader } from "../components/BrandLoader";
+import BusinessReadinessPanel from "../components/BusinessReadinessPanel";
 import {
   STATUS_LABEL, STATUS_TONE, RESUMABLE_STATUSES,
   SUBSCRIBABLE_TIERS, sortPlans, formatCents, annualSavingsPct, daysUntil,
@@ -132,11 +132,12 @@ export default function SubscriptionBilling() {
   const sub = me?.subscription || null;
   const status = sub?.status || (usage?.plan_tier_code === "free" ? "free" : null);
   const manualOrFreeSubscription = Boolean(
-    sub && (
+    sub
+    && (
       LOCAL_FREE_TIERS.has(planTier)
       || ["manual", "comped"].includes(sub.billing_provider)
       || sub.purchase_platform === "admin"
-    ),
+    )
   );
   const canManageStripe = Boolean(sub && !manualOrFreeSubscription);
   const isResumable = sub && RESUMABLE_STATUSES.has(sub.status);
@@ -152,13 +153,13 @@ export default function SubscriptionBilling() {
       <PageHeader
         eyebrow="Membership"
         title="Subscription"
-        subtitle="Manage your EquineSync plan, billing cycle, and usage. Barn invoices and trainer payments live on the separate Billing page."
+        subtitle="Manage your facility plan, billing cycle, and usage. Invoices and recurring boarder charges live on the separate Billing page."
         action={
           <button
             onClick={refresh}
             disabled={refreshing}
             data-testid="subscription-refresh-btn"
-            className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.2em] text-equine-lilac/80 hover:text-equine-lavender transition-colors px-3 py-1.5 rounded-full border border-equine-graphite/40 hover:border-equine-lilac/50"
+            className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.2em] text-equine-brass/80 hover:text-equine-brassLight transition-colors px-3 py-1.5 rounded-full border border-equine-graphite/40 hover:border-equine-brass/50"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin" : ""}`} />
             {refreshing ? "Refreshing…" : "Refresh"}
@@ -174,6 +175,8 @@ export default function SubscriptionBilling() {
           </div>
         </Card>
       )}
+
+      <BusinessReadinessPanel title="Plan Fit & Billing Proof" testid="subscription-business-readiness" />
 
       {/* RESUME CTA — primary placement when the subscription is canceled,
           past_due, unpaid, or incomplete_expired. Soft-warn, not blocking. */}
@@ -213,7 +216,7 @@ export default function SubscriptionBilling() {
                     onClick={() => launchCheckout(planTier, "annual")}
                     disabled={busyAction.startsWith("checkout:") || !resumeAnnualOk}
                     data-testid={`subscription-resume-${planTier}-annual`}
-                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium border border-equine-lilacDeep/50 text-equine-lilacDeep hover:bg-equine-lilac/15 disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15 disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5"
                     title={resumeAnnualOk ? "Resume on the annual cycle" : "Annual cycle is unavailable for this plan"}
                   >
                     Resume annual
@@ -269,12 +272,16 @@ export default function SubscriptionBilling() {
                   {busyAction === "portal" ? "Opening…" : "Manage in Stripe"}{" "}
                   <ExternalLink className="w-3.5 h-3.5" />
                 </button>
-              ) : (
+              ) : manualOrFreeSubscription ? (
                 <div
-                  className="text-[11px] text-equine-inkSoft text-right max-w-[220px]"
                   data-testid="subscription-manual-access-note"
+                  className="text-[12px] text-equine-inkMuted text-right max-w-[240px] leading-relaxed"
                 >
-                  {sub ? "Pilot/free access is managed by EquineSync." : "Available after your first subscription checkout."}
+                  Pilot/free access is managed by EquineSync. Pilot/free access is founder-managed and does not require Stripe payment setup.
+                </div>
+              ) : (
+                <div className="text-[11px] text-equine-inkSoft text-right max-w-[180px]">
+                  Available after your first subscription checkout.
                 </div>
               )}
             </div>
@@ -305,16 +312,16 @@ export default function SubscriptionBilling() {
           <div className="label-eyebrow mb-3">Why this matters</div>
           <ul className="space-y-3 text-[13px] text-equine-inkMuted leading-relaxed">
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-lilacDeep flex-shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-saddleDeep flex-shrink-0" />
               <span>Limits below are <span className="text-equine-ink font-medium">soft</span> — going over never blocks horse or user creation.</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-lilacDeep flex-shrink-0" />
-              <span>{manualOrFreeSubscription ? "Pilot/free access is founder-managed and does not require Stripe payment setup." : "Cancellation, card updates, and invoice history live in Stripe&apos;s portal."}</span>
+              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-saddleDeep flex-shrink-0" />
+              <span>Cancellation, card updates, and invoice history live in Stripe&apos;s portal.</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-lilacDeep flex-shrink-0" />
-              <span>Barn invoices, physical payment tracking, and trainer charges are tracked separately on the <Link to="/billing" className="underline text-equine-lilacDeep hover:text-equine-ink">Billing</Link> page.</span>
+              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-equine-saddleDeep flex-shrink-0" />
+              <span>Boarder invoices &amp; recurring charges are tracked separately on the <Link to="/billing" className="underline text-equine-saddleDeep hover:text-equine-ink">Billing</Link> page.</span>
             </li>
           </ul>
         </Card>
@@ -346,8 +353,8 @@ export default function SubscriptionBilling() {
       {/* CHANGE PLAN */}
       <SectionEyebrow>Change plan</SectionEyebrow>
       <p className="text-[13.5px] text-equine-inkMuted mb-5 max-w-2xl leading-relaxed">
-        Paid plan changes use Stripe Checkout when enabled. Pilot and invited
-        owner access stays founder-managed and free during the pilot.
+        Paid plan changes use Stripe Checkout when enabled. Annual cycles use the
+        catalog price. Pilot and invited owner portal access stays founder-managed and free during the pilot.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" data-testid="subscription-plan-grid">
         {plans
@@ -401,11 +408,11 @@ function UsageMeter({ label, used, limit, testid }) {
       tonePill = "warning";
       toneCopy = "Approaching plan limit.";
     } else {
-      toneBar = "bg-equine-lilac";
+      toneBar = "bg-equine-saddle";
       tonePill = "info";
     }
   } else {
-    toneBar = "bg-equine-lilac";
+    toneBar = "bg-equine-saddle";
   }
 
   const limitDisplay = hasLimit ? `${used} / ${limit}` : `${used} / unlimited`;
@@ -483,7 +490,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
   return (
     <Card
       hover={!isCurrent}
-      className={isCurrent ? "border-equine-lilacDeep/50" : ""}
+      className={isCurrent ? "border-equine-saddleDeep/50" : ""}
       data-testid={`plan-card-${plan.tier_code}`}
     >
       <div className="flex items-start justify-between gap-2 mb-3">
@@ -492,7 +499,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
           <div className="font-display text-2xl text-equine-ink capitalize">{plan.tier_code}</div>
         </div>
         {isCurrent && (
-          <StatusPill tone="lavender" dot>Current</StatusPill>
+          <StatusPill tone="saddle" dot>Current</StatusPill>
         )}
       </div>
 
@@ -524,7 +531,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
           >
             Annual
             {savings != null && (
-              <span className="text-[10px] tracking-wider uppercase text-equine-lilacDeep font-medium" data-testid={`plan-savings-${plan.tier_code}`}>
+              <span className="text-[10px] tracking-wider uppercase text-equine-saddleDeep font-medium" data-testid={`plan-savings-${plan.tier_code}`}>
                 Save {savings}%
               </span>
             )}
@@ -555,19 +562,19 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
         <ul className="space-y-1.5 mb-5 text-[12.5px] text-equine-inkMuted">
           {plan.feature_limits.horses != null && (
             <li className="flex items-center gap-2">
-              <Sparkles className="w-3 h-3 text-equine-lilacDeep" />
+              <Sparkles className="w-3 h-3 text-equine-saddleDeep" />
               Up to <span className="text-equine-ink">{plan.feature_limits.horses}</span> horses
             </li>
           )}
           {plan.feature_limits.users != null && (
             <li className="flex items-center gap-2">
-              <Sparkles className="w-3 h-3 text-equine-lilacDeep" />
+              <Sparkles className="w-3 h-3 text-equine-saddleDeep" />
               Up to <span className="text-equine-ink">{plan.feature_limits.users}</span> users
             </li>
           )}
           {plan.feature_limits.storage_gb != null && (
             <li className="flex items-center gap-2">
-              <Sparkles className="w-3 h-3 text-equine-lilacDeep" />
+              <Sparkles className="w-3 h-3 text-equine-saddleDeep" />
               <span className="text-equine-ink">{plan.feature_limits.storage_gb} GB</span> storage
             </li>
           )}
@@ -582,7 +589,7 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
           isCurrentCycle
             ? "bg-equine-soft text-equine-inkSoft cursor-default"
             : isCurrent || contactSales
-            ? "border border-equine-lilacDeep/50 text-equine-lilacDeep hover:bg-equine-lilac/15"
+            ? "border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15"
             : "bg-equine-navy text-white hover:bg-equine-navyLift"
         } disabled:opacity-60 disabled:cursor-not-allowed`}
       >

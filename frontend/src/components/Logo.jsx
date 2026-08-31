@@ -16,7 +16,6 @@ import horseDarkSquare from "../assets/brand/icon_horse_dark_square.png";
 export const Logo = ({
   size = 36,
   withText = true,
-  showTagline = true,
   onNavy = false,
   variant = "horizontal",
   tone,
@@ -76,14 +75,12 @@ export const Logo = ({
           <span style={{ color: equineColor }}>Equine</span>
           <span style={{ color: syncColor }}>Sync</span>
         </div>
-        {showTagline && (
-          <div
-            className="tracking-[0.22em] uppercase mt-1.5 font-medium"
-            style={{ color: taglineColor, fontSize: taglineSize }}
-          >
-            Every Horse. Every Task. In Sync.
-          </div>
-        )}
+        <div
+          className="tracking-[0.22em] uppercase mt-1.5 font-medium"
+          style={{ color: taglineColor, fontSize: taglineSize }}
+        >
+          Every Horse. Every Task. In Sync.
+        </div>
       </div>
     </Wrapper>
   );

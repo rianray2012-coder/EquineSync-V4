@@ -61,6 +61,7 @@ CAPABILITIES: Dict[str, Set[str]] = {
     "communication:write": STAFF_ROLES,
     "training:read": STAFF_ROLES | OWNER_ROLES,
     "training:write": {"admin", "barn_manager", "trainer"},
+    "ai_draft:review": {"admin", "barn_manager", "trainer"},
     "staff:read": ADMIN_ROLES,
     "staff:write": ADMIN_ROLES,
     "automation:read": ADMIN_ROLES | {"trainer"},
@@ -144,6 +145,7 @@ _DENY_MESSAGES: Dict[str, str] = {
     "owner_update:archive": "Insufficient role to archive owner updates",
     "owner_update:review": "Insufficient role to review owner updates",
     "recurring_charge:manage": "Insufficient role to manage recurring charges",
+    "ai_draft:review": "AI draft review access required",
 }
 
 

@@ -85,7 +85,7 @@ export default function Payments() {
       <PageHeader
         eyebrow="Financial"
         title="Payments & Auto-Pay"
-        subtitle="Track owner payment provider references and auto-pay enrollment status. Stripe integration is ready for credentials, checkout, and webhooks."
+        subtitle="Track owner payment provider references and auto-pay enrollment status. Stripe processing remains provider-required until credentials, checkout, and webhooks are verified."
         action={
           <div className="flex items-center gap-3">
             <button onClick={load} className="btn-secondary inline-flex items-center gap-2" data-testid="payments-refresh">
