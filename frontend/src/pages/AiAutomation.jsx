@@ -119,6 +119,16 @@ const arrayValue = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
 const draftResultFor = (job) => job.draft_result || {};
 
 const inventoryCandidatesFor = (job) => arrayValue(draftResultFor(job).draft_inventory_candidates);
+const isInvoiceSource = (sourceType) => sourceType === "invoice" || sourceType === "service_invoice";
+const invoicePaymentReviewFor = (job) => {
+  const result = draftResultFor(job);
+  const review = result.draft_payment_review || result.draft_payment_status_candidate;
+  if (!review || typeof review !== "object" || Array.isArray(review)) return null;
+  return {
+    ...review,
+    candidate_status: review.candidate_status || review.status || "review_required",
+  };
+};
 
 const healthScoreCandidateFor = (job) => {
   const candidate = draftResultFor(job).draft_health_score_candidate;
@@ -211,7 +221,7 @@ const sourceLanePreviewFor = (job) => {
       ],
     };
   }
-  if (job.source_type === "invoice" || job.source_type === "service_invoice") {
+  if (isInvoiceSource(job.source_type)) {
     return {
       testId: `ai-draft-expanded-invoice-service-${job.id}`,
       title: "Invoice and Service Draft",
@@ -222,7 +232,10 @@ const sourceLanePreviewFor = (job) => {
         ["Inventory candidates", result.draft_inventory_candidates],
         ["Service-history candidates", result.draft_service_history_candidates],
         ["Invoice candidates", result.draft_invoice_candidates],
+        ["Expense candidates", result.draft_expense_candidates],
         ["Payment status", result.draft_payment_status_candidate],
+        ["Payment review", result.draft_payment_review],
+        ["Reconciliation questions", result.draft_reconciliation_questions],
       ],
     };
   }
@@ -782,6 +795,45 @@ export default function AiAutomation() {
                           <div className="text-[12px] text-equine-inkMuted mt-1" data-testid={`ai-health-score-save-gated-${job.id}`}>
                             Human review required; official health-score save remains separately gated.
                           </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {isInvoiceSource(job.source_type) && (
+                <div
+                  className="mb-4 rounded-lg border border-equine-brass/30 bg-equine-brass/5 p-3"
+                  data-testid={`ai-invoice-payment-boundary-${job.id}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <ShieldCheck className="w-5 h-5 text-equine-champagne mt-0.5 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="label-eyebrow-muted mb-1">Invoice Payment Review Boundary</div>
+                      <div className="text-[13px] text-equine-inkMuted leading-relaxed">
+                        Payment status is draft review only. AI cannot finalize invoices, mark paid or unpaid, charge, refund, issue credits, or change EquineSync subscription entitlements.
+                      </div>
+                      <div className="text-[12.5px] text-equine-inkMuted leading-relaxed mt-2" data-testid={`ai-invoice-subscription-separation-${job.id}`}>
+                        Trainer and facility receivables stay separate from EquineSync subscription billing and require human-confirmed workflow authority.
+                      </div>
+                      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <StatusPill tone="critical" data-testid={`ai-invoice-no-payment-mutation-${job.id}`}>No Payment Mutation</StatusPill>
+                        <StatusPill tone="critical" data-testid={`ai-invoice-no-finalization-${job.id}`}>No Invoice Finalization</StatusPill>
+                      </div>
+                      {invoicePaymentReviewFor(job) && (
+                        <div className="mt-3 rounded-lg border border-equine-cloud bg-white/75 px-3 py-2" data-testid={`ai-invoice-payment-review-candidate-${job.id}`}>
+                          <div className="label-eyebrow-muted mb-1">Draft Payment Review Candidate</div>
+                          <div className="text-[12.5px] text-equine-ink">
+                            {candidateFieldValue(invoicePaymentReviewFor(job), "candidate_status", "Review required")}
+                          </div>
+                          <div className="text-[12px] text-equine-inkMuted mt-1">
+                            {candidateFieldValue(invoicePaymentReviewFor(job), "confidence", "Confidence needs review")} · {displayListValue(invoicePaymentReviewFor(job)?.basis, "Basis needs review")}
+                          </div>
+                          {arrayValue(draftResultFor(job).draft_reconciliation_questions).length > 0 && (
+                            <div className="mt-2 text-[12px] text-equine-inkMuted" data-testid={`ai-invoice-reconciliation-questions-${job.id}`}>
+                              {arrayValue(draftResultFor(job).draft_reconciliation_questions).join(" ")}
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
