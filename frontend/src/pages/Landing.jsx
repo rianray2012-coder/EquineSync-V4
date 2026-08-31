@@ -252,7 +252,7 @@ export default function Landing() {
     <div className="min-h-screen w-full bg-equine-navyDeep text-white font-sans" data-testid="landing-page">
       {/* Top nav */}
       <header className="px-6 md:px-12 py-6 flex items-center justify-between max-w-7xl mx-auto">
-        <Logo onNavy />
+        <Logo onNavy size={60} wordmarkSize={28} taglineSize={9.5} />
         <nav className="flex items-center gap-6">
           <a
             href="#pricing"
@@ -273,7 +273,7 @@ export default function Landing() {
             className="bg-equine-saddle text-equine-navyDeep hover:bg-white transition-colors px-5 py-2 text-[13px] tracking-wide font-medium rounded-full"
             data-testid="nav-join-cta"
           >
-            Join Equine Sync
+            Join EquineSync
           </button>
         </nav>
       </header>
@@ -281,11 +281,11 @@ export default function Landing() {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[75vh] flex flex-col justify-center">
         <img
-          src="https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
+          src="https://images.unsplash.com/photo-1550785330-003a9afa3bd9?auto=format&fit=crop&w=2400&q=85"
           alt="Equestrian"
-          className="absolute inset-0 w-full h-full object-cover opacity-25"
+          className="absolute inset-0 w-full h-full object-cover opacity-45"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-equine-navyDeep via-equine-navy/85 to-equine-navyDeep" />
+        <div className="absolute inset-0 bg-gradient-to-b from-equine-navyDeep/90 via-equine-navy/68 to-equine-navyDeep/92" />
         <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
           <div className="max-w-3xl">
             <div className="text-[11px] tracking-[0.28em] uppercase text-equine-saddle font-medium mb-6">
@@ -296,7 +296,7 @@ export default function Landing() {
               <span className="text-equine-saddle">In sync.</span>
             </h1>
             <p className="mt-8 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
-              Equine Sync connects owners, barns, trainers, and service providers in one quietly
+              EquineSync connects owners, barns, trainers, and service providers in one quietly
               powerful platform. Rider, guardian, and staff accounts remain invitation-based.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -305,7 +305,7 @@ export default function Landing() {
                 className="group bg-white text-equine-navyDeep hover:bg-equine-saddle transition-all px-8 py-4 text-[14px] tracking-wide font-medium rounded-full inline-flex items-center gap-2"
                 data-testid="hero-join-cta"
               >
-                Join Equine Sync
+                Join EquineSync
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
               <Link
