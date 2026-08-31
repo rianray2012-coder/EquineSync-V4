@@ -117,6 +117,16 @@ INVOICE_PAYMENT_REVIEW_TEMPLATE = {
     "subscription_entitlement_change_allowed": False,
 }
 
+SCHEDULE_REVIEW_BOUNDARY_TEMPLATE = {
+    "candidate_status": "review_required",
+    "requires_human_confirmation": True,
+    "official_calendar_change_allowed": False,
+    "participant_notification_allowed": False,
+    "automated_send_allowed": False,
+    "recipient_opt_in_review_required": True,
+    "privacy_safe_copy_review_required": True,
+}
+
 WORK_TICKET_CANDIDATE_TEMPLATE = {
     "title": None,
     "category": None,
@@ -258,8 +268,28 @@ def output_schema_hint(source_type: str) -> str:
                 "location": None,
                 "conflicts_or_capacity_notes": [],
             }],
+            "draft_itinerary_candidates": [],
+            "draft_notification_preview": {
+                "channels": [],
+                "recipients": [],
+                "message": None,
+                "privacy_safe_copy_required": True,
+                "send_allowed": False,
+            },
+            "calendar_review_boundary": SCHEDULE_REVIEW_BOUNDARY_TEMPLATE,
             "review_questions": [],
-            "blocked_actions": ["official_record_save", "participant_notification"],
+            "blocked_actions": [
+                *AI_BLOCKED_ACTIONS,
+                "calendar_event_create",
+                "calendar_event_update",
+                "calendar_event_delete",
+                "calendar_mutation",
+                "participant_notification",
+                "automated_notification_send",
+                "push_send",
+                "sms_send",
+                "email_send",
+            ],
         })
     if source_type == "training_note":
         return json.dumps({
@@ -406,8 +436,45 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
         for action in HEALTH_REVIEW_BLOCKED_ACTIONS:
             if action not in parsed["blocked_actions"]:
                 parsed["blocked_actions"].append(action)
-    if source_type == "lesson_schedule" and "participant_notification" not in parsed["blocked_actions"]:
-        parsed["blocked_actions"].append("participant_notification")
+    if source_type == "lesson_schedule":
+        for action in [
+            "calendar_event_create",
+            "calendar_event_update",
+            "calendar_event_delete",
+            "calendar_mutation",
+            "participant_notification",
+            "automated_notification_send",
+            "push_send",
+            "sms_send",
+            "email_send",
+        ]:
+            if action not in parsed["blocked_actions"]:
+                parsed["blocked_actions"].append(action)
+        if not isinstance(parsed.get("draft_schedule_candidates"), list):
+            parsed["draft_schedule_candidates"] = []
+        if not isinstance(parsed.get("draft_itinerary_candidates"), list):
+            parsed["draft_itinerary_candidates"] = []
+        if not isinstance(parsed.get("draft_notification_preview"), dict):
+            parsed["draft_notification_preview"] = {}
+        notification_preview = dict(parsed["draft_notification_preview"])
+        if not isinstance(notification_preview.get("channels"), list):
+            notification_preview["channels"] = []
+        if not isinstance(notification_preview.get("recipients"), list):
+            notification_preview["recipients"] = []
+        notification_preview["privacy_safe_copy_required"] = True
+        notification_preview["send_allowed"] = False
+        parsed["draft_notification_preview"] = notification_preview
+        if not isinstance(parsed.get("calendar_review_boundary"), dict):
+            parsed["calendar_review_boundary"] = {}
+        calendar_boundary = dict(SCHEDULE_REVIEW_BOUNDARY_TEMPLATE)
+        calendar_boundary.update(parsed["calendar_review_boundary"])
+        calendar_boundary["requires_human_confirmation"] = True
+        calendar_boundary["official_calendar_change_allowed"] = False
+        calendar_boundary["participant_notification_allowed"] = False
+        calendar_boundary["automated_send_allowed"] = False
+        calendar_boundary["recipient_opt_in_review_required"] = True
+        calendar_boundary["privacy_safe_copy_review_required"] = True
+        parsed["calendar_review_boundary"] = calendar_boundary
     if source_type == "voice_transcript":
         for action in ["participant_notification", "payment_status_change"]:
             if action not in parsed["blocked_actions"]:
