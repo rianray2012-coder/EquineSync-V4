@@ -60,7 +60,7 @@ export default function Login() {
       <div className="relative hidden lg:block bg-equine-navy">
         <img
           src="https://static.prod-images.emergentagent.com/jobs/137f7c6b-a2e1-41c0-9c38-96d2409d644a/images/3ca3908290d52bc07be0b5f45e2f358fac3cee0e8034aa339d3b62ddac3b3403.png"
-          alt="Luxury equestrian arena"
+          alt="Equestrian arena"
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-equine-navy via-equine-navy/85 to-equine-navyDeep" />
@@ -72,10 +72,10 @@ export default function Login() {
               Quiet precision.<br/>Operational mastery.
             </h2>
             <p className="mt-6 text-equine-silver/85 text-[15px] leading-relaxed">
-              Equine-Sync unites horse care, training, billing, and owner communication in one elegant platform — built for elite show barns, rehab facilities, and luxury private operations.
+              EquineSync unites horse care, training, billing, and owner communication in one polished operating layer built for elite show barns, rehab facilities, and private equestrian operations.
             </p>
           </div>
-          <div className="text-[11px] tracking-[0.22em] uppercase text-equine-brassLight/55">© Equine-Sync · Crafted for elite equestrian operations</div>
+          <div className="text-[11px] tracking-[0.22em] uppercase text-equine-brassLight/55">© EquineSync · Crafted for elite equestrian operations</div>
         </div>
       </div>
 

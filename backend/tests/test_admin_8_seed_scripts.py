@@ -403,7 +403,7 @@ def test_demo_seed_creates_expected_records(db):
         # Barn
         barn = db.barns.find_one({"demo_seed_key": "admin8_client_demo"})
         assert barn, "demo barn missing"
-        assert barn["name"] == "Equine Sync Demo Barn"
+        assert barn["name"] == "EquineSync Pilot Stable"
         assert barn.get("subscription_id") is None, (
             "demo barn must NOT carry subscription_id"
         )
@@ -440,6 +440,21 @@ def test_demo_seed_creates_expected_records(db):
             f"demo subscription id must start with `demo_subscription_`; "
             f"got {sub['id']!r}"
         )
+
+        db.barns.update_one(
+            {"demo_seed_key": "admin8_client_demo"},
+            {"$set": {"name": "Equine Sync Demo Barn"}},
+        )
+        db.users.update_one(
+            {"email": "demo.client@equine-sync.com"},
+            {"$set": {"full_name": "Demo Client"}},
+        )
+        second = _run_demo_seed()
+        assert second.returncode == 0, second.stderr
+        refreshed = db.barns.find_one({"demo_seed_key": "admin8_client_demo"})
+        assert refreshed["name"] == "EquineSync Pilot Stable"
+        refreshed_user = db.users.find_one({"email": "demo.client@equine-sync.com"})
+        assert refreshed_user["full_name"] == "Pilot Client"
     finally:
         _run_demo_seed("--teardown")
 
@@ -494,6 +509,18 @@ def test_demo_seed_extra_owner_creates_second_owner_and_links_horse(db):
         }))
         assert audits
         assert password not in str(audits)
+
+        db.users.update_one(
+            {"email": "demo.owner2@equine-sync.com"},
+            {"$set": {"full_name": "Demo Owner 2"}},
+        )
+        rerun = _run_demo_seed(
+            "--extra-owner",
+            extra_env={"SEED_DEMO_EXTRA_OWNER_PASSWORD": password},
+        )
+        assert rerun.returncode == 0, rerun.stderr
+        refreshed_extra = db.users.find_one({"email": "demo.owner2@equine-sync.com"})
+        assert refreshed_extra["full_name"] == "Secondary Owner"
     finally:
         _run_demo_seed("--teardown")
 
@@ -542,7 +569,7 @@ def test_teardown_removes_only_demo_tagged_records(db):
     survivor_id = f"barn_survivor_{uuid.uuid4().hex[:8]}"
     db.barns.insert_one({
         "id": survivor_id,
-        "name": "Equine Sync Demo Barn (look-alike, NOT tagged)",
+        "name": "EquineSync Pilot Stable (look-alike, NOT tagged)",
         "status": "active",
         "_admin8_test": True,
     })

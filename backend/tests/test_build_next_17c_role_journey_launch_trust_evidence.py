@@ -78,7 +78,7 @@ def test_owner_guardian_rider_and_provider_dashboards_remain_safe_shells():
     personal = _read(dashboard_dir / "PersonalDashboard.jsx")
     provider = _read(dashboard_dir / "ServiceProviderDashboard.jsx")
 
-    assert 'primary: { label: "Owner Portal Pending", to: null }' in personal
+    assert 'primary: { label: "Facility Connection Pending", to: null }' in personal
     assert 'to: "/owner-portal"' not in personal
     assert "Open Owner Portal" not in personal
 
@@ -92,8 +92,10 @@ def test_owner_guardian_rider_and_provider_dashboards_remain_safe_shells():
     ]:
         assert forbidden not in personal
 
+    assert "api." not in personal
+    assert 'api.get("/service-provider/operating-center")' in provider
+
     for src in [personal, provider]:
-        assert "api." not in src
         assert "fetch(" not in src
         assert "Stripe" not in src
         assert "DocuSign" not in src
