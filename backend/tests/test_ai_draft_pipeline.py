@@ -914,11 +914,31 @@ def test_pilot_extraction_schemas_cover_busy_barn_draft_lanes_without_new_author
 
     voice_schema = json.loads(output_schema_hint("voice_transcript"))
     assert voice_schema["voice_capture_context"]["hands_free"] is True
+    assert voice_schema["voice_action_summary"]["requires_follow_up_review"] is True
+    assert voice_schema["voice_review_boundary"]["hands_free_capture_supported"] is True
+    assert voice_schema["voice_review_boundary"]["official_work_ticket_save_allowed_after_review"] is True
+    assert voice_schema["voice_review_boundary"]["official_training_note_save_allowed"] is False
+    assert voice_schema["voice_review_boundary"]["participant_notification_allowed"] is False
+    assert voice_schema["voice_review_boundary"]["official_calendar_change_allowed"] is False
+    assert voice_schema["voice_review_boundary"]["official_payment_status_change_allowed"] is False
+    assert voice_schema["voice_review_boundary"]["medical_or_safety_decision_allowed"] is False
+    assert voice_schema["voice_review_boundary"]["automated_send_allowed"] is False
     assert voice_schema["draft_work_ticket_candidates"][0]["review_status"] == "needs_review"
     assert voice_schema["draft_inventory_candidates"][0]["review_status"] == "needs_review"
     assert voice_schema["draft_invoice_candidates"][0]["payment_status_candidate"] == "review_required"
-    assert "participant_notification" in voice_schema["blocked_actions"]
-    assert "payment_status_change" in voice_schema["blocked_actions"]
+    for blocked_action in [
+        "participant_notification",
+        "automated_notification_send",
+        "push_send",
+        "sms_send",
+        "email_send",
+        "calendar_mutation",
+        "payment_status_change",
+        "invoice_finalization",
+        "medical_or_safety_decision",
+        "health_diagnosis",
+    ]:
+        assert blocked_action in voice_schema["blocked_actions"]
 
     schedule_schema = json.loads(output_schema_hint("lesson_schedule"))
     assert schedule_schema["calendar_review_boundary"]["official_calendar_change_allowed"] is False
@@ -1189,6 +1209,83 @@ def test_lesson_schedule_normalization_blocks_calendar_and_notifications():
         "push_send",
         "sms_send",
         "email_send",
+    ]:
+        assert blocked_action in parsed["blocked_actions"]
+
+
+def test_voice_transcript_normalization_keeps_hands_free_drafts_review_only():
+    extractor = OpenAIDraftExtractor(api_key="test-key")
+    parsed = extractor._parse_output(
+        {
+            "output_text": json.dumps({
+                "draft_only": False,
+                "review_required": False,
+                "source_category": "voice_transcript",
+                "voice_action_summary": {
+                    "detected_intents": "send parent, mark invoice paid, create task",
+                    "urgent_language_detected": True,
+                    "requires_follow_up_review": False,
+                },
+                "draft_tasks": "Fix south stall latch",
+                "draft_work_ticket_candidates": "Repair gate latch",
+                "draft_training_notes": "Sophie worked transitions well.",
+                "draft_schedule_candidates": "Move Tuesday lesson",
+                "draft_invoice_candidates": "Mark paid",
+                "draft_invoice_notes": "Invoice paid in cash",
+                "voice_review_boundary": {
+                    "candidate_status": "ready",
+                    "requires_human_confirmation": False,
+                    "hands_free_capture_supported": False,
+                    "official_work_ticket_save_allowed_after_review": False,
+                    "official_training_note_save_allowed": True,
+                    "participant_notification_allowed": True,
+                    "official_calendar_change_allowed": True,
+                    "official_payment_status_change_allowed": True,
+                    "medical_or_safety_decision_allowed": True,
+                    "automated_send_allowed": True,
+                },
+                "blocked_actions": [],
+            })
+        },
+        source_type="voice_transcript",
+    )
+
+    assert parsed["draft_only"] is True
+    assert parsed["review_required"] is True
+    assert parsed["voice_action_summary"]["detected_intents"] == []
+    assert parsed["voice_action_summary"]["urgent_language_detected"] is True
+    assert parsed["voice_action_summary"]["requires_follow_up_review"] is True
+    for key in [
+        "draft_tasks",
+        "draft_work_ticket_candidates",
+        "draft_training_notes",
+        "draft_schedule_candidates",
+        "draft_invoice_candidates",
+        "draft_invoice_notes",
+    ]:
+        assert parsed[key] == []
+    voice_boundary = parsed["voice_review_boundary"]
+    assert voice_boundary["candidate_status"] == "ready"
+    assert voice_boundary["requires_human_confirmation"] is True
+    assert voice_boundary["hands_free_capture_supported"] is True
+    assert voice_boundary["official_work_ticket_save_allowed_after_review"] is True
+    assert voice_boundary["official_training_note_save_allowed"] is False
+    assert voice_boundary["participant_notification_allowed"] is False
+    assert voice_boundary["official_calendar_change_allowed"] is False
+    assert voice_boundary["official_payment_status_change_allowed"] is False
+    assert voice_boundary["medical_or_safety_decision_allowed"] is False
+    assert voice_boundary["automated_send_allowed"] is False
+    for blocked_action in [
+        "participant_notification",
+        "automated_notification_send",
+        "push_send",
+        "sms_send",
+        "email_send",
+        "calendar_mutation",
+        "payment_status_change",
+        "invoice_finalization",
+        "medical_or_safety_decision",
+        "health_diagnosis",
     ]:
         assert blocked_action in parsed["blocked_actions"]
 

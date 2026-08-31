@@ -77,6 +77,7 @@ def test_ai_reviewer_surfaces_expanded_pilot_extraction_lane_previews():
         "Payment status",
         "Payment review",
         "Reconciliation questions",
+        "Action summary",
         "Expense candidates",
         "Work-ticket candidates",
         "Schedule candidates",
@@ -84,8 +85,27 @@ def test_ai_reviewer_surfaces_expanded_pilot_extraction_lane_previews():
         "Notification preview",
         "Calendar boundary",
         "Training notes",
+        "Voice boundary",
     ]:
         assert visible_label in source
+
+
+def test_ai_voice_reviewer_has_hands_free_work_task_training_boundaries():
+    source = _source()
+
+    assert "isVoiceSource" in source
+    assert "voiceReviewBoundaryFor" in source
+    assert 'data-testid={`ai-voice-review-boundary-${job.id}`}' in source
+    assert 'data-testid={`ai-voice-hands-free-copy-${job.id}`}' in source
+    assert 'data-testid={`ai-voice-no-send-mutation-copy-${job.id}`}' in source
+    assert 'data-testid={`ai-voice-work-ticket-review-save-allowed-${job.id}`}' in source
+    assert 'data-testid={`ai-voice-training-note-draft-only-${job.id}`}' in source
+    assert 'data-testid={`ai-voice-no-participant-send-${job.id}`}' in source
+    assert 'data-testid={`ai-voice-no-payment-calendar-medical-${job.id}`}' in source
+    assert 'data-testid={`ai-voice-review-candidate-${job.id}`}' in source
+    assert "hands-free barn notes into draft work tickets, task notes, inventory notes, training notes" in source
+    assert "Voice drafts cannot send participant messages, change calendars, mark payment status" in source
+    assert "make medical or safety decisions" in source
 
 
 def test_ai_schedule_reviewer_has_calendar_notification_no_send_hooks():

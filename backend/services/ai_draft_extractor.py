@@ -139,6 +139,19 @@ WORK_TICKET_CANDIDATE_TEMPLATE = {
     "notes": [],
 }
 
+VOICE_REVIEW_BOUNDARY_TEMPLATE = {
+    "candidate_status": "review_required",
+    "requires_human_confirmation": True,
+    "hands_free_capture_supported": True,
+    "official_work_ticket_save_allowed_after_review": True,
+    "official_training_note_save_allowed": False,
+    "participant_notification_allowed": False,
+    "official_calendar_change_allowed": False,
+    "official_payment_status_change_allowed": False,
+    "medical_or_safety_decision_allowed": False,
+    "automated_send_allowed": False,
+}
+
 
 def normalize_source_type(value: str) -> str:
     source_type = (value or "").strip().lower()
@@ -321,6 +334,11 @@ def output_schema_hint(source_type: str) -> str:
                 "screen_locked_or_multitasking": None,
                 "source_quality": None,
             },
+            "voice_action_summary": {
+                "detected_intents": [],
+                "urgent_language_detected": False,
+                "requires_follow_up_review": True,
+            },
             "draft_tasks": [],
             "draft_work_ticket_candidates": [WORK_TICKET_CANDIDATE_TEMPLATE],
             "draft_inventory_candidates": [INVENTORY_CANDIDATE_TEMPLATE],
@@ -330,8 +348,21 @@ def output_schema_hint(source_type: str) -> str:
             "draft_schedule_candidates": [],
             "draft_schedule_notes": [],
             "draft_training_notes": [],
+            "voice_review_boundary": VOICE_REVIEW_BOUNDARY_TEMPLATE,
             "review_questions": [],
-            "blocked_actions": ["official_record_save", "ai_autonomous_mutation", "participant_notification", "payment_status_change"],
+            "blocked_actions": [
+                *AI_BLOCKED_ACTIONS,
+                "participant_notification",
+                "automated_notification_send",
+                "push_send",
+                "sms_send",
+                "email_send",
+                "calendar_mutation",
+                "payment_status_change",
+                "invoice_finalization",
+                "medical_or_safety_decision",
+                "health_diagnosis",
+            ],
         })
     if source_type == "health_observation":
         return json.dumps({
@@ -476,7 +507,18 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
         calendar_boundary["privacy_safe_copy_review_required"] = True
         parsed["calendar_review_boundary"] = calendar_boundary
     if source_type == "voice_transcript":
-        for action in ["participant_notification", "payment_status_change"]:
+        for action in [
+            "participant_notification",
+            "automated_notification_send",
+            "push_send",
+            "sms_send",
+            "email_send",
+            "calendar_mutation",
+            "payment_status_change",
+            "invoice_finalization",
+            "medical_or_safety_decision",
+            "health_diagnosis",
+        ]:
             if action not in parsed["blocked_actions"]:
                 parsed["blocked_actions"].append(action)
     if source_type in {"invoice", "service_invoice", "photo_inventory", "voice_transcript"}:
@@ -514,9 +556,38 @@ def normalize_draft_payload(parsed: Dict[str, Any], *, source_type: str) -> Dict
         if not isinstance(parsed.get("draft_reconciliation_questions"), list):
             parsed["draft_reconciliation_questions"] = []
     if source_type == "voice_transcript":
-        for key in ["draft_work_ticket_candidates", "draft_schedule_candidates"]:
+        for key in [
+            "draft_tasks",
+            "draft_work_ticket_candidates",
+            "draft_schedule_candidates",
+            "draft_training_notes",
+            "draft_invoice_candidates",
+            "draft_invoice_notes",
+            "draft_inventory_notes",
+        ]:
             if not isinstance(parsed.get(key), list):
                 parsed[key] = []
+        if not isinstance(parsed.get("voice_action_summary"), dict):
+            parsed["voice_action_summary"] = {}
+        voice_action_summary = dict(parsed["voice_action_summary"])
+        if not isinstance(voice_action_summary.get("detected_intents"), list):
+            voice_action_summary["detected_intents"] = []
+        voice_action_summary["requires_follow_up_review"] = True
+        parsed["voice_action_summary"] = voice_action_summary
+        if not isinstance(parsed.get("voice_review_boundary"), dict):
+            parsed["voice_review_boundary"] = {}
+        voice_boundary = dict(VOICE_REVIEW_BOUNDARY_TEMPLATE)
+        voice_boundary.update(parsed["voice_review_boundary"])
+        voice_boundary["requires_human_confirmation"] = True
+        voice_boundary["hands_free_capture_supported"] = True
+        voice_boundary["official_work_ticket_save_allowed_after_review"] = True
+        voice_boundary["official_training_note_save_allowed"] = False
+        voice_boundary["participant_notification_allowed"] = False
+        voice_boundary["official_calendar_change_allowed"] = False
+        voice_boundary["official_payment_status_change_allowed"] = False
+        voice_boundary["medical_or_safety_decision_allowed"] = False
+        voice_boundary["automated_send_allowed"] = False
+        parsed["voice_review_boundary"] = voice_boundary
 
     return parsed
 

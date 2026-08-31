@@ -140,6 +140,22 @@ const scheduleReviewBoundaryFor = (job) => {
     automated_send_allowed: false,
   };
 };
+const isVoiceSource = (sourceType) => sourceType === "voice_transcript";
+const voiceReviewBoundaryFor = (job) => {
+  const boundary = draftResultFor(job).voice_review_boundary;
+  return {
+    ...(boundary && typeof boundary === "object" && !Array.isArray(boundary) ? boundary : {}),
+    candidate_status: boundary?.candidate_status || "review_required",
+    hands_free_capture_supported: true,
+    official_work_ticket_save_allowed_after_review: true,
+    official_training_note_save_allowed: false,
+    participant_notification_allowed: false,
+    official_calendar_change_allowed: false,
+    official_payment_status_change_allowed: false,
+    medical_or_safety_decision_allowed: false,
+    automated_send_allowed: false,
+  };
+};
 
 const healthScoreCandidateFor = (job) => {
   const candidate = draftResultFor(job).draft_health_score_candidate;
@@ -256,11 +272,13 @@ const sourceLanePreviewFor = (job) => {
       title: "Voice Capture Draft",
       items: [
         ["Capture context", result.voice_capture_context],
+        ["Action summary", result.voice_action_summary],
         ["Work-ticket candidates", result.draft_work_ticket_candidates],
         ["Inventory candidates", result.draft_inventory_candidates],
         ["Invoice candidates", result.draft_invoice_candidates],
         ["Schedule candidates", result.draft_schedule_candidates],
         ["Training notes", result.draft_training_notes],
+        ["Voice boundary", result.voice_review_boundary],
       ],
     };
   }
@@ -884,6 +902,40 @@ export default function AiAutomation() {
                         </div>
                         <div className="text-[12px] text-equine-inkMuted mt-1">
                           Calendar change allowed: {candidateFieldValue(scheduleReviewBoundaryFor(job), "official_calendar_change_allowed", "No")} · Notification allowed: {candidateFieldValue(scheduleReviewBoundaryFor(job), "participant_notification_allowed", "No")}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {isVoiceSource(job.source_type) && (
+                <div
+                  className="mb-4 rounded-lg border border-equine-brass/30 bg-equine-brass/5 p-3"
+                  data-testid={`ai-voice-review-boundary-${job.id}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <ShieldCheck className="w-5 h-5 text-equine-champagne mt-0.5 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <div className="label-eyebrow-muted mb-1">Voice Review Boundary</div>
+                      <div className="text-[13px] text-equine-inkMuted leading-relaxed" data-testid={`ai-voice-hands-free-copy-${job.id}`}>
+                        Voice-note AI can turn hands-free barn notes into draft work tickets, task notes, inventory notes, training notes, invoice notes, and schedule ideas for human review.
+                      </div>
+                      <div className="text-[12.5px] text-equine-inkMuted leading-relaxed mt-2" data-testid={`ai-voice-no-send-mutation-copy-${job.id}`}>
+                        Voice drafts cannot send participant messages, change calendars, mark payment status, finalize invoices, or make medical or safety decisions.
+                      </div>
+                      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <StatusPill tone="success" data-testid={`ai-voice-work-ticket-review-save-allowed-${job.id}`}>Work Ticket After Review</StatusPill>
+                        <StatusPill tone="warning" data-testid={`ai-voice-training-note-draft-only-${job.id}`}>Training Note Draft Only</StatusPill>
+                        <StatusPill tone="critical" data-testid={`ai-voice-no-participant-send-${job.id}`}>No Participant Send</StatusPill>
+                        <StatusPill tone="critical" data-testid={`ai-voice-no-payment-calendar-medical-${job.id}`}>No Payment, Calendar, Or Medical Action</StatusPill>
+                      </div>
+                      <div className="mt-3 rounded-lg border border-equine-cloud bg-white/75 px-3 py-2" data-testid={`ai-voice-review-candidate-${job.id}`}>
+                        <div className="label-eyebrow-muted mb-1">Draft Voice Review Candidate</div>
+                        <div className="text-[12.5px] text-equine-ink">
+                          {candidateFieldValue(voiceReviewBoundaryFor(job), "candidate_status", "Review required")}
+                        </div>
+                        <div className="text-[12px] text-equine-inkMuted mt-1">
+                          Work ticket save after review: {candidateFieldValue(voiceReviewBoundaryFor(job), "official_work_ticket_save_allowed_after_review", "Yes")} · Training note official save: {candidateFieldValue(voiceReviewBoundaryFor(job), "official_training_note_save_allowed", "No")}
                         </div>
                       </div>
                     </div>
