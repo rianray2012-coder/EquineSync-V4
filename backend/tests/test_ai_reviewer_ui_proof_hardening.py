@@ -90,6 +90,7 @@ def test_ai_invoice_payment_review_boundary_has_stable_no_mutation_hooks():
 
     assert "isInvoiceSource" in source
     assert "invoicePaymentReviewFor" in source
+    assert 'candidate_status: review.candidate_status || review.status || "review_required"' in source
     assert 'data-testid={`ai-invoice-payment-boundary-${job.id}`}' in source
     assert 'data-testid={`ai-invoice-no-payment-mutation-${job.id}`}' in source
     assert 'data-testid={`ai-invoice-no-finalization-${job.id}`}' in source

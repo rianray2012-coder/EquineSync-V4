@@ -123,7 +123,11 @@ const isInvoiceSource = (sourceType) => sourceType === "invoice" || sourceType =
 const invoicePaymentReviewFor = (job) => {
   const result = draftResultFor(job);
   const review = result.draft_payment_review || result.draft_payment_status_candidate;
-  return review && typeof review === "object" && !Array.isArray(review) ? review : null;
+  if (!review || typeof review !== "object" || Array.isArray(review)) return null;
+  return {
+    ...review,
+    candidate_status: review.candidate_status || review.status || "review_required",
+  };
 };
 
 const healthScoreCandidateFor = (job) => {
