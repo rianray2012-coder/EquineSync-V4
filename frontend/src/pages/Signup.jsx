@@ -5,7 +5,9 @@ import { api, tokens } from "../lib/api";
 import { Logo } from "../components/Logo";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react";
 import {
-  PLAN_ORDER, sortPlans, formatCents, annualSavingsPct, isPlanCheckoutable,
+  PLAN_ORDER, sortPlans, formatCents, isPlanCheckoutable,
+  BILLING_CYCLES, CYCLE_LABEL, CYCLE_SUFFIX, effectiveCycle, priceForCycle,
+  savingsPctForCycle, resolveCheckoutCycle, checkoutableCycles,
 } from "../lib/subscriptionBilling";
 import { ENROLLMENT_CONTEXT_BY_ID, ENROLLMENT_PATH_BY_ROLE } from "../lib/enrollmentPaths";
 
@@ -235,14 +237,13 @@ export default function Signup() {
         return;
       }
       const selectedPlan = plans.find((p) => p.tier_code === tier);
-      // Phase 15.C — pick the safest cycle: prefer the user's selection, but
-      // fall back to whichever cycle is actually checkoutable. The Step 3 UI
-      // already disables the CTA when neither cycle is checkoutable, so by
-      // the time we get here at least one is guaranteed.
-      let cycleToUse = signupCycle;
-      if (!isPlanCheckoutable(selectedPlan, cycleToUse)) {
-        cycleToUse = signupCycle === "monthly" ? "annual" : "monthly";
-      }
+      // Phase 15.C / D-14 — pick the safest cycle: prefer the user's
+      // selection (mapped to monthly when the plan doesn't offer the
+      // six-month term), then fall back to whichever cycle is actually
+      // checkoutable. The Step 3 UI already disables the CTA when no cycle is
+      // checkoutable, so by the time we get here at least one is guaranteed.
+      const wantedCycle = effectiveCycle(selectedPlan, signupCycle);
+      const cycleToUse = resolveCheckoutCycle(selectedPlan, wantedCycle) || wantedCycle;
       const { data } = await api.post("/subscriptions/checkout", {
         plan_tier_code: tier,
         billing_cycle: cycleToUse,
@@ -587,14 +588,16 @@ export default function Signup() {
               <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-3">Step 3 of 3</div>
               <div className="flex items-end justify-between flex-wrap gap-4 mb-3">
                 <h2 className="font-display text-3xl md:text-4xl font-light text-white">Choose your plan</h2>
-                {/* Monthly / Annual toggle — only meaningful for paid tiers */}
+                {/* Monthly / 6-month / Annual toggle — only meaningful for paid
+                    tiers. The 6-month term (D-14) is offered by Advanced Barn and
+                    Trainer + Lessons (50) only; other cards fall back to monthly. */}
                 <div
                   className="inline-flex bg-white/5 border border-white/10 rounded-full p-0.5"
                   data-testid="signup-cycle-toggle"
                   role="tablist"
                   aria-label="Billing cycle"
                 >
-                  {["monthly", "annual"].map((c) => (
+                  {BILLING_CYCLES.map((c) => (
                     <button
                       key={c}
                       type="button"
@@ -606,7 +609,7 @@ export default function Signup() {
                           : "text-white/65 hover:text-white"
                       }`}
                     >
-                      {c}
+                      {CYCLE_LABEL[c]}
                     </button>
                   ))}
                 </div>
@@ -627,11 +630,10 @@ export default function Signup() {
                   const isFree = LOCAL_FREE_TIERS.has(p.tier_code) || p.monthly_price_cents === 0;
                   const isContactSales = !!p.contact_sales;
                   const featureRows = buildPlanFeatureRows(p);
-                  const priceCents =
-                    signupCycle === "annual" && p.annual_price_cents != null
-                      ? p.annual_price_cents
-                      : p.monthly_price_cents;
-                  const savings = annualSavingsPct(p);
+                  // D-14: a plan without the chosen term shows its monthly price.
+                  const cardCycle = effectiveCycle(p, signupCycle);
+                  const priceCents = isFree || isContactSales ? p.monthly_price_cents : priceForCycle(p, cardCycle);
+                  const savings = savingsPctForCycle(p, cardCycle);
                   return (
                     <button
                       key={p.tier_code}
@@ -656,14 +658,19 @@ export default function Signup() {
                           <>
                             {formatCents(priceCents)}
                             <span className="text-[12px] text-white/40 font-sans">
-                              {signupCycle === "annual" ? " /yr" : " /mo"}
+                              {" "}{CYCLE_SUFFIX[cardCycle]}
                             </span>
                           </>
                         )}
                       </div>
-                      {signupCycle === "annual" && savings != null && !isContactSales && !isFree && (
+                      {cardCycle !== "monthly" && savings != null && !isContactSales && !isFree && (
                         <div className="mt-1 text-[10.5px] tracking-[0.2em] uppercase text-brand-lilac" data-testid={`signup-savings-${p.tier_code}`}>
                           Save {savings}%
+                        </div>
+                      )}
+                      {cardCycle !== signupCycle && !isContactSales && !isFree && (
+                        <div className="mt-1 text-[10.5px] tracking-[0.15em] uppercase text-white/40" data-testid={`signup-cycle-not-offered-${p.tier_code}`}>
+                          {CYCLE_LABEL[signupCycle]} term not offered
                         </div>
                       )}
                       <div className="text-[12.5px] text-white/55 mt-2 leading-relaxed flex-1">{p.description}</div>
@@ -704,16 +711,17 @@ export default function Signup() {
                   </a>
                 ) : (() => {
                   // Phase 15.C — gate the paid CTA on Stripe price-ID readiness
-                  // (has_monthly / has_annual from /api/billing/plans). When
-                  // neither cycle has a price ID, the backend would 500 on
-                  // /api/subscriptions/checkout; surface a "Billing setup
-                  // pending" message instead. When only one cycle is available
-                  // we silently force that cycle.
+                  // (has_monthly / has_six_month / has_annual from
+                  // /api/billing/plans). When no cycle has a price ID, the
+                  // backend would 500 on /api/subscriptions/checkout; surface
+                  // a "Billing setup pending" message instead. When the chosen
+                  // cycle is unavailable we fall back to the first available one.
                   const selectedPlan = plans.find((p) => p.tier_code === tier);
-                  const cycleOk = isPlanCheckoutable(selectedPlan, signupCycle);
-                  const noCycles = selectedPlan && !selectedPlan.contact_sales && !selectedPlan.has_monthly && !selectedPlan.has_annual;
-                  const otherCycle = signupCycle === "monthly" ? "annual" : "monthly";
-                  const otherOk = isPlanCheckoutable(selectedPlan, otherCycle);
+                  const wantedCycle = effectiveCycle(selectedPlan, signupCycle);
+                  const cycleOk = isPlanCheckoutable(selectedPlan, wantedCycle);
+                  const noCycles = selectedPlan && !selectedPlan.contact_sales && checkoutableCycles(selectedPlan).length === 0;
+                  const otherCycle = resolveCheckoutCycle(selectedPlan, wantedCycle);
+                  const otherOk = !!otherCycle && otherCycle !== wantedCycle;
                   return (
                     <div className="flex flex-col items-end gap-2">
                       <button
@@ -739,8 +747,8 @@ export default function Signup() {
                           data-testid="signup-cycle-fallback-hint"
                           className="text-white/60 text-[12px] text-right max-w-[280px]"
                         >
-                          {signupCycle === "monthly" ? "Monthly" : "Annual"} pricing for {selectedPlan?.name || tier} isn&apos;t available yet —
-                          we&apos;ll start you on {otherCycle} instead.
+                          {CYCLE_LABEL[wantedCycle]} pricing for {selectedPlan?.name || tier} isn&apos;t available yet —
+                          we&apos;ll start you on {CYCLE_LABEL[otherCycle]?.toLowerCase()} instead.
                         </div>
                       )}
                     </div>

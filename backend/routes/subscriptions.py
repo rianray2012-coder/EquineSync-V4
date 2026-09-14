@@ -26,7 +26,7 @@ import stripe
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel
 
-from core.billing_provisioning import ADDON_PRICE_CATALOG, PLAN_CATALOG, PLAN_ORDER
+from core.billing_provisioning import ADDON_PRICE_CATALOG, BILLING_PERIOD_CODES, PLAN_CATALOG, PLAN_ORDER
 from core.stripe_client import (
     construct_webhook_event,
     stripe_client,
@@ -99,7 +99,7 @@ def _stripe_init():
 
 class CheckoutBody(BaseModel):
     plan_tier_code: str
-    billing_cycle: str                # "monthly" | "annual"
+    billing_cycle: str                # "monthly" | "six_month" | "annual" (BILLING_PERIODS)
     origin_url: str                   # frontend origin for success/cancel URLs
 
 
@@ -114,14 +114,26 @@ def _plan_to_public(plan: dict) -> dict:
         "name": plan["name"],
         "description": plan["description"],
         "monthly_price_cents": plan.get("monthly_price_cents"),
+        # D-14: only advanced_barn / trainer_lesson_50 carry a six-month
+        # amount; null means the term is not offered for the plan.
+        "six_month_price_cents": plan.get("six_month_price_cents"),
         "annual_price_cents": plan.get("annual_price_cents"),
         "feature_limits": plan.get("feature_limits") or {},
         "overage": plan.get("overage") or {},
         "contact_sales": bool(plan.get("contact_sales")),
         "display_order": plan.get("display_order", PLAN_ORDER.get(plan["tier_code"], 999)),
         "has_monthly": bool(plan.get("stripe_price_id_monthly")),
+        "has_six_month": bool(plan.get("stripe_price_id_six_month")),
         "has_annual": bool(plan.get("stripe_price_id_annual")),
     }
+
+
+# Local `plans` row field that holds the Stripe Price ID for each cycle.
+CYCLE_PRICE_FIELDS = {
+    "monthly": "stripe_price_id_monthly",
+    "six_month": "stripe_price_id_six_month",
+    "annual": "stripe_price_id_annual",
+}
 
 
 def _require_checkout_permission(user: dict, tier: str) -> None:
@@ -349,8 +361,9 @@ def build_router(*, db, get_current_user) -> APIRouter:
         scrubbed = []
         for p in plans:
             pub = _plan_to_public(p)
-            for k in ("stripe_price_id_monthly", "stripe_price_id_annual",
-                      "stripe_product_id", "has_monthly", "has_annual"):
+            for k in ("stripe_price_id_monthly", "stripe_price_id_six_month",
+                      "stripe_price_id_annual", "stripe_product_id",
+                      "has_monthly", "has_six_month", "has_annual"):
                 pub.pop(k, None)
             scrubbed.append(pub)
         response.headers["Cache-Control"] = "public, max-age=300"
@@ -575,15 +588,17 @@ def build_router(*, db, get_current_user) -> APIRouter:
         _require_checkout_permission(user, tier)
         if tier not in SUBSCRIBABLE_TIERS:
             raise HTTPException(400, f"Tier '{tier}' is not subscribable. Choose one of {sorted(SUBSCRIBABLE_TIERS)}.")
-        if cycle not in ("monthly", "annual"):
-            raise HTTPException(400, "billing_cycle must be 'monthly' or 'annual'.")
+        if cycle not in BILLING_PERIOD_CODES:
+            raise HTTPException(400, "billing_cycle must be 'monthly', 'six_month', or 'annual'.")
         origin = (body.origin_url or "").rstrip("/")
         normalized_origin = _validate_origin_or_400(origin)
 
         plan = await db.plans.find_one({"tier_code": tier, "active": True}, {"_id": 0})
         if not plan:
             raise HTTPException(500, f"Plan '{tier}' not yet provisioned in this environment.")
-        price_id = plan.get("stripe_price_id_monthly") if cycle == "monthly" else plan.get("stripe_price_id_annual")
+        if cycle == "six_month" and plan.get("six_month_price_cents") is None:
+            raise HTTPException(400, f"Plan '{tier}' does not offer a six-month term.")
+        price_id = plan.get(CYCLE_PRICE_FIELDS[cycle])
         if not price_id:
             raise HTTPException(500, f"Plan '{tier}' is missing a Stripe Price for cycle={cycle}.")
 

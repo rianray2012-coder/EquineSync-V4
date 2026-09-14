@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Any, Optional
+from typing import Any, Mapping, Optional
 
 import stripe
 
@@ -87,6 +87,79 @@ FOUNDER_STRIPE_PLAN_CODE_ALIASES = {
     "trainer_lessons_15": "trainer_lesson_15",
     "trainer_lessons_50": "trainer_lesson_50",
 }
+
+# D-14 (14 Sep 2026) — billing periods known to the catalog, Stripe wiring,
+# checkout, and the store product-id contract. Order is display order.
+# `price_field` is the PLAN_CATALOG key holding the period's amount in cents;
+# a tier that leaves that key unset/None does not sell the period anywhere.
+# `env_suffix` completes the STRIPE_PRICE_<PLAN>_<SUFFIX> override name.
+BILLING_PERIODS: dict[str, dict[str, Any]] = {
+    "monthly": {
+        "label": "Monthly",
+        "price_field": "monthly_price_cents",
+        "env_suffix": "MONTHLY",
+        "stripe_interval": "month",
+        "stripe_interval_count": 1,
+        "months": 1,
+        "store_suffix": "monthly",
+    },
+    "six_month": {
+        "label": "6-month",
+        "price_field": "six_month_price_cents",
+        "env_suffix": "SIX_MONTH",
+        "stripe_interval": "month",
+        "stripe_interval_count": 6,
+        "months": 6,
+        "store_suffix": "six_month",
+    },
+    "annual": {
+        "label": "Annual",
+        "price_field": "annual_price_cents",
+        "env_suffix": "ANNUAL",
+        "stripe_interval": "year",
+        "stripe_interval_count": 1,
+        "months": 12,
+        "store_suffix": "annual",
+    },
+}
+BILLING_PERIOD_CODES = tuple(BILLING_PERIODS)
+
+# D-14 six-month prices (cents). Apple's default auto-renewable subscription
+# ceiling is $1,000.00, so the $1,499 / $1,799 annual prices for these tiers
+# cannot be entered in App Store Connect. The founder directed a six-month
+# term for the stores with an identical web/Stripe price so FD-2026-09-11-03
+# parity holds. Amounts follow Cowork's Rule A (5 x monthly, same per-month
+# rate as annual) rounded up to the nearest Apple price point so the store
+# never undercuts web. D-14a is the founder's call: change the numbers here
+# and nothing else needs to move. elite_barn has no six-month price on
+# purpose (5 x $299.99 exceeds the ceiling; monthly-only in-app per E1).
+SIX_MONTH_PRICE_CENTS: dict[str, int] = {
+    "advanced_barn": 74999,
+    "trainer_lesson_50": 89999,
+}
+
+
+def tier_price_cents(tier: Mapping[str, Any], period: str) -> Optional[int]:
+    """Amount in cents a catalog tier charges for `period`, or None if unsold."""
+    field = BILLING_PERIODS[period]["price_field"]
+    return tier.get(field)
+
+
+def tier_billing_periods(tier: Mapping[str, Any]) -> tuple[str, ...]:
+    """Periods a catalog tier actually sells (amount declared and non-null)."""
+    return tuple(
+        period for period in BILLING_PERIOD_CODES
+        if tier_price_cents(tier, period) is not None
+    )
+
+
+def stripe_recurring_for_period(period: str) -> dict[str, Any]:
+    """Stripe `recurring` block for a billing period (month x6 for six_month)."""
+    spec = BILLING_PERIODS[period]
+    recurring: dict[str, Any] = {"interval": spec["stripe_interval"]}
+    if spec["stripe_interval_count"] != 1:
+        recurring["interval_count"] = spec["stripe_interval_count"]
+    return recurring
 
 ADDON_PRICE_CATALOG = {
     "additional_horse_standard": {
@@ -166,7 +239,9 @@ ADDON_PRICE_CATALOG = {
 
 # ---------- Static plan catalog ----------
 # Prices mirror docs/PRICING_PLAN_ADDENDUM.md. Annual prices are explicit
-# founder-approved values, not computed discounts.
+# founder-approved values, not computed discounts. `six_month_price_cents`
+# is only set on tiers that sell a six-month term (D-14); every other tier
+# leaves it unset, which every reader treats as "not offered".
 PLAN_CATALOG = [
     {
         "tier_code": "free",
@@ -329,6 +404,7 @@ PLAN_CATALOG = [
         "name": "Advanced Barn",
         "description": "For professional boarding barns, training barns, and mid-size operations.",
         "monthly_price_cents": 14999,
+        "six_month_price_cents": SIX_MONTH_PRICE_CENTS["advanced_barn"],
         "annual_price_cents": 149900,
         "feature_limits": {
             "horses": 30,
@@ -441,6 +517,7 @@ PLAN_CATALOG = [
         "name": "Trainer + Lesson Program - 50 Participants",
         "description": "For established lesson programs, riding schools, and larger student bases.",
         "monthly_price_cents": 17999,
+        "six_month_price_cents": SIX_MONTH_PRICE_CENTS["trainer_lesson_50"],
         "annual_price_cents": 179900,
         "feature_limits": {
             "horses": 25,
@@ -530,19 +607,37 @@ def _price_env_vars(tier_code: str) -> tuple[str, str]:
     return f"{prefix}_MONTHLY", f"{prefix}_ANNUAL"
 
 
+def price_env_var(tier_code: str, period: str) -> str:
+    """STRIPE_PRICE_<PLAN>_<PERIOD> override name, e.g.
+    STRIPE_PRICE_ADVANCED_BARN_SIX_MONTH."""
+    return f"{_price_env_prefix(tier_code)}_{BILLING_PERIODS[period]['env_suffix']}"
+
+
 def normalize_stripe_plan_code(value: str | None) -> str:
     raw = (value or "").strip().lower()
     return FOUNDER_STRIPE_PLAN_CODE_ALIASES.get(raw, raw)
 
 
+def _configured_price_id(tier_code: str, period: str) -> Optional[str]:
+    """Price ID for one period: env override first, then the live catalog map."""
+    mapped = LIVE_STRIPE_PRICE_IDS.get(tier_code) or {}
+    return os.environ.get(price_env_var(tier_code, period)) or mapped.get(period)
+
+
 def _configured_price_ids(tier_code: str) -> tuple[Optional[str], Optional[str]]:
     """Return monthly/annual Price IDs from env overrides or live catalog map."""
-    monthly_env, annual_env = _price_env_vars(tier_code)
-    mapped = LIVE_STRIPE_PRICE_IDS.get(tier_code) or {}
     return (
-        os.environ.get(monthly_env) or mapped.get("monthly"),
-        os.environ.get(annual_env) or mapped.get("annual"),
+        _configured_price_id(tier_code, "monthly"),
+        _configured_price_id(tier_code, "annual"),
     )
+
+
+def configured_price_ids_by_period(tier: Mapping[str, Any]) -> dict[str, Optional[str]]:
+    """{period: price_id_or_None} for every period the tier sells."""
+    return {
+        period: _configured_price_id(tier["tier_code"], period)
+        for period in tier_billing_periods(tier)
+    }
 
 
 def _configured_product_id(tier_code: str) -> Optional[str]:
@@ -607,16 +702,22 @@ async def _find_managed_product(client, tier_code: str):
     return None
 
 
-async def _find_managed_price(client, product_id: str, tier_code: str, interval: str):
-    """Find a managed Price for (tier_code, interval) under a product."""
+async def _find_managed_price(client, product_id: str, tier_code: str, interval: str, interval_count: int = 1):
+    """Find a managed Price for (tier_code, interval, interval_count) under a product.
+
+    interval_count matters since D-14: monthly and six_month both use
+    interval="month" and differ only by interval_count (1 vs 6).
+    """
     prices = client.v1.prices.list({"limit": 100, "active": True, "product": product_id})
     for pr in prices.auto_paging_iter():
         meta = pr.get("metadata") or {}
+        recurring = pr.get("recurring") or {}
         if (
             meta.get("equinesync_managed") == "true"
             and meta.get("tier_code") == tier_code
-            and pr["recurring"]
-            and pr["recurring"]["interval"] == interval
+            and recurring
+            and recurring.get("interval") == interval
+            and int(recurring.get("interval_count") or 1) == int(interval_count)
         ):
             return pr
     return None
@@ -629,26 +730,30 @@ async def _provision_dev_catalog(db, client) -> None:
     live Price IDs exist, dev/test should not mint parallel Stripe catalog
     objects. If an operator intentionally clears the static map for a future
     test plan, the old find-or-create path below remains available for that
-    unmapped plan only.
+    unmapped plan only. Every period the tier sells (monthly / six_month /
+    annual, see BILLING_PERIODS) is handled the same way.
     """
     for tier in PLAN_CATALOG:
         if not tier["stripe_provisioned"]:
             # Free + custom-contract tiers: upsert local row only, no Stripe.
             await _upsert_plan(db, tier, _configured_product_id(tier["tier_code"]), None, None)
             continue
-        configured_monthly, configured_annual = _configured_price_ids(tier["tier_code"])
-        if configured_monthly and configured_annual:
+        configured = configured_price_ids_by_period(tier)
+        if configured.get("monthly") and configured.get("annual"):
+            # Mapped tier: never mint parallel Stripe objects in dev. A still
+            # unrecorded six-month Price simply leaves has_six_month false
+            # (UI shows the term as pending) until Cowork records the ID.
             await _upsert_plan(
                 db,
                 tier,
                 _configured_product_id(tier["tier_code"]),
-                configured_monthly,
-                configured_annual,
+                configured.get("monthly"),
+                configured.get("annual"),
+                six_month_price_id=configured.get("six_month"),
             )
             continue
         product_id = None
-        monthly_id = None
-        annual_id = None
+        price_ids: dict[str, Optional[str]] = {period: None for period in configured}
         try:
             product = await _find_managed_product(client, tier["tier_code"])
             if not product:
@@ -663,38 +768,29 @@ async def _provision_dev_catalog(db, client) -> None:
                 logger.info("stripe.Product created tier=%s id=%s",
                             tier["tier_code"], product["id"])
             product_id = product["id"]
-            monthly = await _find_managed_price(client, product_id, tier["tier_code"], "month")
-            if not monthly:
-                monthly = client.v1.prices.create({
-                    "product": product_id,
-                    "unit_amount": tier["monthly_price_cents"],
-                    "currency": "usd",
-                    "recurring": {"interval": "month"},
-                    "metadata": {
-                        "equinesync_managed": "true",
-                        "tier_code": tier["tier_code"],
-                        "interval": "month",
-                    },
-                })
-                logger.info("stripe.Price created tier=%s interval=month id=%s",
-                            tier["tier_code"], monthly["id"])
-            monthly_id = monthly["id"]
-            annual = await _find_managed_price(client, product_id, tier["tier_code"], "year")
-            if not annual:
-                annual = client.v1.prices.create({
-                    "product": product_id,
-                    "unit_amount": tier["annual_price_cents"],
-                    "currency": "usd",
-                    "recurring": {"interval": "year"},
-                    "metadata": {
-                        "equinesync_managed": "true",
-                        "tier_code": tier["tier_code"],
-                        "interval": "year",
-                    },
-                })
-                logger.info("stripe.Price created tier=%s interval=year id=%s",
-                            tier["tier_code"], annual["id"])
-            annual_id = annual["id"]
+            for period in configured:
+                spec = BILLING_PERIODS[period]
+                price = await _find_managed_price(
+                    client, product_id, tier["tier_code"],
+                    spec["stripe_interval"], spec["stripe_interval_count"],
+                )
+                if not price:
+                    price = client.v1.prices.create({
+                        "product": product_id,
+                        "unit_amount": tier_price_cents(tier, period),
+                        "currency": "usd",
+                        "recurring": stripe_recurring_for_period(period),
+                        "metadata": {
+                            "equinesync_managed": "true",
+                            "tier_code": tier["tier_code"],
+                            "interval": spec["stripe_interval"],
+                            "interval_count": str(spec["stripe_interval_count"]),
+                            "billing_period": period,
+                        },
+                    })
+                    logger.info("stripe.Price created tier=%s period=%s id=%s",
+                                tier["tier_code"], period, price["id"])
+                price_ids[period] = price["id"]
         except Exception as ex:
             logger.warning(
                 "Dev Stripe catalog: could not provision tier=%s — "
@@ -702,28 +798,38 @@ async def _provision_dev_catalog(db, client) -> None:
                 "configured. Reason: %s",
                 tier["tier_code"], ex,
             )
-        await _upsert_plan(db, tier, product_id, monthly_id, annual_id)
+        await _upsert_plan(
+            db, tier, product_id,
+            price_ids.get("monthly"), price_ids.get("annual"),
+            six_month_price_id=price_ids.get("six_month"),
+        )
 
 
 async def _validate_prod_catalog(db, client) -> None:
     """Production only — Price IDs must exist and be valid in Stripe.
 
     Env vars override the founder-approved static map. Startup aborts with a
-    clear error if a self-service tier has no monthly/annual Price ID or if
-    Stripe cannot retrieve a configured Price.
+    clear error if a self-service tier has no Price ID for any period it
+    sells (monthly/annual for every tier; six_month for the D-14 tiers that
+    declare `six_month_price_cents`) or if Stripe cannot retrieve a
+    configured Price. A six-month Stripe Price therefore has to exist and be
+    recorded (env var or LIVE_STRIPE_PRICE_IDS) before production boots on
+    a catalog that sells the period — that is the parity guard.
     """
     missing = []
-    configured: dict[str, tuple[str, str]] = {}
+    configured: dict[str, dict[str, str]] = {}
     for tier in PLAN_CATALOG:
         if not tier["stripe_provisioned"]:
             continue
-        monthly_id, annual_id = _configured_price_ids(tier["tier_code"])
-        if not monthly_id:
-            missing.append(f"{_price_env_vars(tier['tier_code'])[0]} or LIVE_STRIPE_PRICE_IDS[{tier['tier_code']}].monthly")
-        if not annual_id:
-            missing.append(f"{_price_env_vars(tier['tier_code'])[1]} or LIVE_STRIPE_PRICE_IDS[{tier['tier_code']}].annual")
-        if monthly_id and annual_id:
-            configured[tier["tier_code"]] = (monthly_id, annual_id)
+        by_period = configured_price_ids_by_period(tier)
+        for period, price_id in by_period.items():
+            if not price_id:
+                missing.append(
+                    f"{price_env_var(tier['tier_code'], period)} or "
+                    f"LIVE_STRIPE_PRICE_IDS[{tier['tier_code']}].{period}"
+                )
+        if all(by_period.values()):
+            configured[tier["tier_code"]] = {k: v for k, v in by_period.items() if v}
     if missing:
         raise RuntimeError(
             f"Production startup: required Stripe Price IDs missing: {missing}"
@@ -734,8 +840,8 @@ async def _validate_prod_catalog(db, client) -> None:
         if not tier["stripe_provisioned"]:
             await _upsert_plan(db, tier, _configured_product_id(tier["tier_code"]), None, None)
             continue
-        monthly_id, annual_id = configured[tier["tier_code"]]
-        for label, price_id in (("monthly", monthly_id), ("annual", annual_id)):
+        by_period = configured[tier["tier_code"]]
+        for label, price_id in by_period.items():
             try:
                 client.v1.prices.retrieve(price_id)
             except stripe.error.StripeError as ex:
@@ -743,34 +849,47 @@ async def _validate_prod_catalog(db, client) -> None:
                     f"Production startup: {tier['tier_code']} {label} Price {price_id} "
                     f"is not a valid Stripe Price: {ex}"
                 ) from ex
+        monthly_id = by_period["monthly"]
         # Resolve product_id from one of the prices for consistency.
         try:
             pr = client.v1.prices.retrieve(monthly_id)
             product_id = pr.get("product") or _configured_product_id(tier["tier_code"])
         except Exception:
             product_id = _configured_product_id(tier["tier_code"])
-        await _upsert_plan(db, tier, product_id, monthly_id, annual_id)
+        await _upsert_plan(
+            db, tier, product_id, monthly_id, by_period.get("annual"),
+            six_month_price_id=by_period.get("six_month"),
+        )
 
 
-async def _upsert_plan(db, tier, product_id, monthly_price_id, annual_price_id):
+async def _upsert_plan(db, tier, product_id, monthly_price_id, annual_price_id, six_month_price_id=None):
     product_id = product_id or _configured_product_id(tier["tier_code"])
+    sells_six_month = "six_month" in tier_billing_periods(tier)
     if tier["stripe_provisioned"]:
         fallback_monthly, fallback_annual = _configured_price_ids(tier["tier_code"])
         monthly_price_id = monthly_price_id or fallback_monthly
         annual_price_id = annual_price_id or fallback_annual
+        if sells_six_month:
+            six_month_price_id = six_month_price_id or _configured_price_id(tier["tier_code"], "six_month")
+    if not sells_six_month:
+        # Never carry a six-month Price on a tier that does not sell the term.
+        six_month_price_id = None
     update = {
         "tier_code": tier["tier_code"],
         "plan_code": tier["tier_code"],
         "name": tier["name"],
         "description": tier["description"],
         "monthly_price_cents": tier["monthly_price_cents"],
+        "six_month_price_cents": tier.get("six_month_price_cents"),
         "annual_price_cents": tier["annual_price_cents"],
+        "billing_periods": list(tier_billing_periods(tier)),
         "feature_limits": tier["feature_limits"],
         "overage": tier.get("overage") or {},
         "contact_sales": tier["contact_sales"],
         "display_order": PLAN_ORDER.get(tier["tier_code"], 999),
         "stripe_product_id": product_id,
         "stripe_price_id_monthly": monthly_price_id,
+        "stripe_price_id_six_month": six_month_price_id,
         "stripe_price_id_annual": annual_price_id,
         "active": True,
     }
@@ -779,10 +898,12 @@ async def _upsert_plan(db, tier, product_id, monthly_price_id, annual_price_id):
         {"$set": update, "$setOnInsert": {"id": tier["tier_code"]}},
         upsert=True,
     )
-    await _upsert_subscription_plan(db, tier, product_id, monthly_price_id, annual_price_id)
+    await _upsert_subscription_plan(
+        db, tier, product_id, monthly_price_id, annual_price_id, six_month_price_id,
+    )
 
 
-async def _upsert_subscription_plan(db, tier, product_id, monthly_price_id, annual_price_id):
+async def _upsert_subscription_plan(db, tier, product_id, monthly_price_id, annual_price_id, six_month_price_id=None):
     plan_code = tier["tier_code"]
     update = {
         "plan_code": plan_code,
@@ -791,12 +912,16 @@ async def _upsert_subscription_plan(db, tier, product_id, monthly_price_id, annu
         "description": tier["description"],
         "customer_type": _customer_type_for_tier(plan_code),
         "billing_channels": _billing_channels_for_tier(tier),
+        "billing_periods": list(tier_billing_periods(tier)),
         "stripe_product_id": product_id,
         "stripe_monthly_price_id": monthly_price_id,
+        "stripe_six_month_price_id": six_month_price_id,
         "stripe_annual_price_id": annual_price_id,
         "apple_monthly_product_id": None,
+        "apple_six_month_product_id": None,
         "apple_annual_product_id": None,
         "monthly_amount": tier["monthly_price_cents"],
+        "six_month_amount": tier.get("six_month_price_cents"),
         "annual_amount": tier["annual_price_cents"],
         **_included_limits(tier),
         "contact_sales": bool(tier.get("contact_sales")),

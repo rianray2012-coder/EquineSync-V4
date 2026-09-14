@@ -13,9 +13,11 @@ from typing import Any, Iterable, Mapping
 
 from core.billing_provisioning import (
     ADDON_PRICE_CATALOG,
+    BILLING_PERIODS,
     LIVE_STRIPE_PRICE_IDS,
     LIVE_STRIPE_PRODUCT_IDS,
     PLAN_CATALOG,
+    tier_billing_periods,
 )
 
 
@@ -37,16 +39,57 @@ ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES = tuple(
 )
 
 
-def _apple_product_id(plan_code: str, interval: str) -> str:
-    return f"com.equinesync.{plan_code}.{interval}"
+SELF_SERVICE_PLANS_BY_CODE = {
+    tier["tier_code"]: tier for tier in PLAN_CATALOG if tier.get("stripe_provisioned")
+}
+
+# Store product identifiers follow the App Store Connect / Google Play
+# products Cowork created on 13-14 Sep 2026 (group "EquineSync Plans"):
+# com.equinesync.app.<plan_code>.<monthly|six_month|annual>. The prefix is
+# the app bundle id (frontend/capacitor.config.json, mobile/app.json).
+STORE_PRODUCT_ID_PREFIX = "com.equinesync.app"
+
+
+def _apple_product_id(plan_code: str, period: str) -> str:
+    return f"{STORE_PRODUCT_ID_PREFIX}.{plan_code}.{BILLING_PERIODS[period]['store_suffix']}"
+
+
+# D-14 (14 Sep 2026): which periods each self-service tier may sell IN-APP.
+# Apple's default subscription ceiling is $1,000.00, so:
+#   - advanced_barn / trainer_lesson_50 sell monthly + six_month in-app; their
+#     annual products stay in App Store Connect unpriced and unattached (a
+#     deleted product id can never be reused) and annual remains web-only.
+#   - elite_barn sells monthly only in-app (E1); six-month at 5 x $299.99 also
+#     exceeds the ceiling. Longer terms are web-only until Apple enables
+#     higher price points (E3 request filed separately).
+# Every other tier sells monthly + annual in-app, matching the web.
+_DEFAULT_STORE_PERIODS = ("monthly", "annual")
+STORE_SELLABLE_PERIODS = {
+    "advanced_barn": ("monthly", "six_month"),
+    "trainer_lesson_50": ("monthly", "six_month"),
+    "elite_barn": ("monthly",),
+}
+
+
+def store_sellable_periods(plan_code: str) -> tuple[str, ...]:
+    return STORE_SELLABLE_PERIODS.get(plan_code, _DEFAULT_STORE_PERIODS)
+
+
+def _apple_contract_row(plan_code: str) -> dict[str, Any]:
+    tier = SELF_SERVICE_PLANS_BY_CODE[plan_code]
+    row: dict[str, Any] = {
+        "monthly": _apple_product_id(plan_code, "monthly"),
+        "annual": _apple_product_id(plan_code, "annual"),
+    }
+    if "six_month" in tier_billing_periods(tier):
+        row["six_month"] = _apple_product_id(plan_code, "six_month")
+    row["store_periods"] = list(store_sellable_periods(plan_code))
+    row["status"] = "placeholder_not_configured"
+    return row
 
 
 APPLE_PRODUCT_ID_CONTRACT = {
-    plan_code: {
-        "monthly": _apple_product_id(plan_code, "monthly"),
-        "annual": _apple_product_id(plan_code, "annual"),
-        "status": "placeholder_not_configured",
-    }
+    plan_code: _apple_contract_row(plan_code)
     for plan_code in SELF_SERVICE_PLAN_CODES
 }
 
@@ -78,6 +121,11 @@ def _stripe_ids_for_plan(plan_code: str) -> tuple[str | None, str | None, str | 
         prices.get("monthly"),
         prices.get("annual"),
     )
+
+
+def _stripe_six_month_id_for_plan(plan_code: str) -> str | None:
+    """Live six-month Price ID once Cowork records it; None until then."""
+    return (LIVE_STRIPE_PRICE_IDS.get(plan_code) or {}).get("six_month")
 
 
 def _emptyish(value: Any) -> bool:
@@ -133,6 +181,8 @@ def build_billing_launch_readiness_report(
     for tier in PLAN_CATALOG:
         code = tier["tier_code"]
         product_id, monthly_id, annual_id = _stripe_ids_for_plan(code)
+        six_month_id = _stripe_six_month_id_for_plan(code)
+        sells_six_month = "six_month" in tier_billing_periods(tier)
         row = plan_rows.get(code) or {}
         sub_row = subscription_plan_rows.get(code) or {}
 
@@ -168,6 +218,24 @@ def build_billing_launch_readiness_report(
                 issues.append(_issue("blocker", "self_service_missing_monthly_price_id", code, "Missing live monthly Price ID."))
             if code not in ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES and not annual_id:
                 issues.append(_issue("blocker", "self_service_missing_annual_price_id", code, "Missing live annual Price ID."))
+            if sells_six_month and not six_month_id:
+                # Warning, not blocker: the six-month Stripe Price is created by
+                # Cowork after D-14a confirms the amount. Production boot
+                # (_validate_prod_catalog) is the hard gate, this report is
+                # the early visibility.
+                issues.append(_issue(
+                    "warning",
+                    "self_service_missing_six_month_price_id",
+                    code,
+                    "Six-month term is in the catalog but no live six-month Price ID is recorded yet.",
+                ))
+            if not sells_six_month and six_month_id:
+                issues.append(_issue(
+                    "blocker",
+                    "six_month_price_without_catalog_amount",
+                    code,
+                    "A six-month Price ID is recorded but the catalog declares no six_month_price_cents.",
+                ))
             if code not in APPLE_PRODUCT_ID_CONTRACT:
                 issues.append(_issue("warning", "apple_contract_missing_placeholder", code, "Future Apple product-id placeholder is missing."))
 
@@ -199,6 +267,15 @@ def build_billing_launch_readiness_report(
                     actual=row.get("stripe_price_id_annual"),
                     expected=annual_id,
                 )
+                if six_month_id or not sells_six_month:
+                    _compare_row_field(
+                        issues,
+                        collection="plans",
+                        record=code,
+                        field="stripe_price_id_six_month",
+                        actual=row.get("stripe_price_id_six_month"),
+                        expected=six_month_id,
+                    )
         if subscription_plans is not None and not sub_row:
             issues.append(_issue("warning", "subscription_plans_row_missing", code, "Local subscription_plans row not found in supplied data."))
         elif subscription_plans is not None and sub_row:
@@ -227,7 +304,16 @@ def build_billing_launch_readiness_report(
                     actual=sub_row.get("stripe_annual_price_id"),
                     expected=annual_id,
                 )
-            for apple_field in ("apple_monthly_product_id", "apple_annual_product_id"):
+                if six_month_id or not sells_six_month:
+                    _compare_row_field(
+                        issues,
+                        collection="subscription_plans",
+                        record=code,
+                        field="stripe_six_month_price_id",
+                        actual=sub_row.get("stripe_six_month_price_id"),
+                        expected=six_month_id,
+                    )
+            for apple_field in ("apple_monthly_product_id", "apple_six_month_product_id", "apple_annual_product_id"):
                 _compare_row_field(
                     issues,
                     collection="subscription_plans",
@@ -249,7 +335,9 @@ def build_billing_launch_readiness_report(
             ),
             "stripe_product_configured": bool(product_id),
             "stripe_monthly_configured": bool(monthly_id),
+            "stripe_six_month_configured": bool(six_month_id),
             "stripe_annual_configured": bool(annual_id),
+            "sells_six_month": sells_six_month,
             "stripe_env_required": code in ENV_CONFIGURED_SELF_SERVICE_PLAN_CODES,
             "apple_contract_status": (
                 APPLE_PRODUCT_ID_CONTRACT.get(code, {}).get("status")
@@ -362,25 +450,33 @@ def render_billing_launch_readiness_markdown(report: Mapping[str, Any]) -> str:
         "",
         "## Plan Preview",
         "",
-        "| plan_code | type | stripe_product | stripe_monthly | stripe_annual | apple_contract |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| plan_code | type | stripe_product | stripe_monthly | stripe_six_month | stripe_annual | apple_contract |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
     ])
     for row in report.get("plan_preview") or []:
+        six_month_cell = (
+            str(row.get("stripe_six_month_configured"))
+            if row.get("sells_six_month")
+            else "n/a"
+        )
         lines.append(
             "| {plan_code} | {customer_type} | {stripe_product_configured} | "
-            "{stripe_monthly_configured} | {stripe_annual_configured} | "
-            "{apple_contract_status} |".format(**row)
+            "{stripe_monthly_configured} | {six_month} | {stripe_annual_configured} | "
+            "{apple_contract_status} |".format(six_month=six_month_cell, **row)
         )
 
     lines.extend([
         "",
         "## Apple Product-ID Contract",
         "",
-        "| plan_code | monthly_placeholder | annual_placeholder | status |",
-        "| --- | --- | --- | --- |",
+        "| plan_code | monthly_placeholder | six_month_placeholder | annual_placeholder | store_periods | status |",
+        "| --- | --- | --- | --- | --- | --- |",
     ])
     for plan_code, row in (report.get("apple_product_id_contract") or {}).items():
-        lines.append(f"| {plan_code} | {row['monthly']} | {row['annual']} | {row['status']} |")
+        lines.append(
+            f"| {plan_code} | {row['monthly']} | {row.get('six_month') or 'n/a'} | {row['annual']} | "
+            f"{','.join(row.get('store_periods') or [])} | {row['status']} |"
+        )
 
     lines.extend(["", "## Deferred", ""])
     for item in report.get("deferred") or []:

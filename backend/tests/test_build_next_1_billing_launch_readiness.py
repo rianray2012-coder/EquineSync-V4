@@ -42,7 +42,9 @@ def test_free_and_contact_sales_contracts_match_founder_locks():
         "customer_type": "free_manual",
         "stripe_product_configured": False,
         "stripe_monthly_configured": False,
+        "stripe_six_month_configured": False,
         "stripe_annual_configured": False,
+        "sells_six_month": False,
         "stripe_env_required": False,
         "apple_contract_status": "not_applicable",
     }
@@ -69,9 +71,12 @@ def test_apple_product_contract_covers_only_self_service_plans_as_placeholders()
     assert "enterprise" not in APPLE_PRODUCT_ID_CONTRACT
     assert "community_program" not in APPLE_PRODUCT_ID_CONTRACT
     for plan_code, row in APPLE_PRODUCT_ID_CONTRACT.items():
-        assert row["monthly"] == f"com.equinesync.{plan_code}.monthly"
-        assert row["annual"] == f"com.equinesync.{plan_code}.annual"
+        # Identifiers match the App Store Connect products created 13-14 Sep
+        # 2026: <bundle id>.<plan_code>.<period>.
+        assert row["monthly"] == f"com.equinesync.app.{plan_code}.monthly"
+        assert row["annual"] == f"com.equinesync.app.{plan_code}.annual"
         assert row["status"] == "placeholder_not_configured"
+        assert "monthly" in row["store_periods"]
 
 
 def test_supplied_local_rows_missing_are_warning_only_not_blockers():
@@ -180,10 +185,15 @@ def test_rendered_markdown_contains_apple_contract_and_deferred_boundaries():
     report = build_billing_launch_readiness_report()
     markdown = render_billing_launch_readiness_markdown(report)
     assert "# Build-Next-1 Billing Launch Readiness Report" in markdown
-    assert "com.equinesync.starter_barn.monthly" in markdown
+    assert "com.equinesync.app.starter_barn.monthly" in markdown
+    assert "com.equinesync.app.advanced_barn.six_month" in markdown
     assert "Apple receipt validation" in markdown
     assert "Stripe Checkout changes" in markdown
-    assert "No issues found." in markdown
+    # D-14: the six-month Stripe Prices are created by Cowork after D-14a is
+    # confirmed, so until their IDs are recorded the report carries a warning
+    # (never a blocker) for the two tiers that sell the term.
+    assert "| blocker | 0 |" in markdown or "blocker" not in (markdown.split("## Issue Summary", 1)[1].split("## Issues", 1)[0])
+    assert markdown.count("self_service_missing_six_month_price_id") == 2
 
 
 def test_build_next_1_helper_has_no_payment_or_write_behavior():

@@ -1,6 +1,6 @@
 # EquineSync Pricing Plan Addendum
 
-Updated: 2026-06-19
+Updated: 2026-09-14 (six-month term, D-14)
 
 This addendum is part of the EquineSync build direction file set. It updates the pricing model that future billing, admin portal, HorseOps, owner portal, and mobile-readiness work must honor.
 
@@ -27,6 +27,46 @@ This addendum is part of the EquineSync build direction file set. It updates the
 | 9 | Trainer + Lesson Program - 15 Participants | $99.99 | $999 | Up to 15 active lesson participants, up to 15 active horses, 1 owner/manager seat, 3 staff/trainer seats |
 | 10 | Trainer + Lesson Program - 50 Participants | $179.99 | $1,799 | Up to 50 active lesson participants, up to 25 active horses, 3 owner/manager seats, 6 staff/trainer seats |
 | 11 | Enterprise / Multi-Location | Starts at $599 | Custom | 100+ active horses, multi-location support, custom seats, API access, SSO if needed |
+
+## Six-Month Term (D-14, 14 September 2026)
+
+Apple's default ceiling for auto-renewable subscriptions is $1,000.00, so the
+annual prices for Advanced Barn ($1,499), Elite Barn ($2,999), and Trainer +
+Lesson Program - 50 Participants ($1,799) cannot be entered in App Store
+Connect. The founder directed a six-month term for the stores, with the web
+offering the identical six-month price so the parity rule in
+FD-2026-09-11-03 holds (same product, same price, both sources).
+
+| Tier | Plan | Monthly | Six-month | Annual | Sold in-app | Sold on web |
+| --- | --- | ---: | ---: | ---: | --- | --- |
+| 6 | Advanced Barn | $149.99 | $749.99 | $1,499 | monthly, six-month | monthly, six-month, annual |
+| 7 | Elite Barn | $299.99 | not offered | $2,999 | monthly only | monthly, annual |
+| 10 | Trainer + Lesson Program - 50 Participants | $179.99 | $899.99 | $1,799 | monthly, six-month | monthly, six-month, annual |
+
+Rules:
+
+- Six-month amounts follow Rule A: five times the monthly price (the same
+  per-month rate as annual, which is ten times monthly), rounded up to the
+  nearest Apple price point so the store never undercuts the web. The founder
+  may change the amounts (D-14a); they live in `SIX_MONTH_PRICE_CENTS` in
+  `backend/core/billing_provisioning.py`.
+- Elite Barn has no six-month price: five times $299.99 is $1,499.95, still
+  above the ceiling. It is monthly-only in-app for the pilot (E1) and keeps
+  monthly plus annual on the web. A request for higher Apple price points is
+  filed separately (E3).
+- Annual for Advanced Barn and Trainer + Lesson 50 stays available on the web
+  only (D-14c). The unpriced App Store Connect annual products for the three
+  tiers remain in place, unpriced and unattached, because a deleted product id
+  can never be reused.
+- Service Provider Premium annual is $180.00 on the web and $179.99 in the App
+  Store (D-13): $180.00 is not an Apple price point. The app never states web
+  pricing, so there is no user-facing inconsistency and no code compares the
+  store amount with the catalog.
+- Stripe six-month Prices use `interval=month`, `interval_count=6`. Their IDs
+  are recorded through `STRIPE_PRICE_ADVANCED_BARN_SIX_MONTH` and
+  `STRIPE_PRICE_TRAINER_LESSON_50_SIX_MONTH` (or the live catalog map) and
+  are validated at production startup like every other Price.
+- Store product identifiers: `com.equinesync.app.<plan_code>.six_month`.
 
 ## Overage Rules
 

@@ -97,8 +97,9 @@ def _monthly_equivalent_cents(
          `_h_subscription_updated` only stores `stripe_price_id`, not
          the dollar amount.
 
-    Annual cycle → divided by 12. Returns 0 only when both sources are
-    missing or the cycle is unrecognised.
+    Annual cycle → divided by 12; six-month cycle (D-14) → divided by 6.
+    Returns 0 only when both sources are missing or the cycle is
+    unrecognised.
     """
     amount = sub.get("amount_cents")
     if not isinstance(amount, (int, float)) or amount <= 0:
@@ -111,6 +112,8 @@ def _monthly_equivalent_cents(
         if plan:
             if cycle == "annual":
                 amount = plan.get("annual_price_cents")
+            elif cycle == "six_month":
+                amount = plan.get("six_month_price_cents")
             elif cycle == "monthly":
                 amount = plan.get("monthly_price_cents")
         if not isinstance(amount, (int, float)) or amount <= 0:
@@ -120,6 +123,8 @@ def _monthly_equivalent_cents(
         return 0
     if cycle == "annual":
         return int(round(amount / 12))
+    if cycle == "six_month":
+        return int(round(amount / 6))
     if cycle == "monthly":
         return int(amount)
     return 0
@@ -131,7 +136,7 @@ async def _load_plans_by_tier(db) -> Dict[str, Dict[str, Any]]:
     this in hot paths, hoist into a TTL cache."""
     plans = await db.plans.find(
         {}, {"_id": 0, "tier_code": 1,
-             "monthly_price_cents": 1, "annual_price_cents": 1},
+             "monthly_price_cents": 1, "six_month_price_cents": 1, "annual_price_cents": 1},
     ).to_list(length=100)
     return {p["tier_code"]: p for p in plans if p.get("tier_code")}
 

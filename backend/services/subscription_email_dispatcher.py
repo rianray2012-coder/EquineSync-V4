@@ -294,6 +294,12 @@ async def _resolve_recipient(db, sub: dict) -> Optional[str]:
     return email if email else None
 
 
+_BILLING_CYCLE_LABELS = {
+    "monthly": "monthly",
+    "six_month": "six-month",
+    "annual": "annual",
+}
+
 def _friendly_date(iso_or_dt: Any) -> str:
     if not iso_or_dt:
         return ""
@@ -324,7 +330,11 @@ async def _build_variables(db, sub: dict, event_key: str,
 
     plan_tier = sub.get("plan_tier_code") or "your plan"
     plan_name = plan_tier.capitalize() if isinstance(plan_tier, str) else "your plan"
-    billing_cycle = sub.get("billing_cycle") or "monthly"
+    # Human wording for the cycle: the D-14 six-month term is stored as
+    # "six_month" and would read badly raw inside the email copy.
+    billing_cycle = _BILLING_CYCLE_LABELS.get(
+        (sub.get("billing_cycle") or "monthly"), sub.get("billing_cycle") or "monthly"
+    )
 
     variables: Dict[str, Any] = {
         "full_name": full_name,

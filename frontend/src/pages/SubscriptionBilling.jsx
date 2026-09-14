@@ -30,8 +30,9 @@ import { BrandLoader } from "../components/BrandLoader";
 import BusinessReadinessPanel from "../components/BusinessReadinessPanel";
 import {
   STATUS_LABEL, STATUS_TONE, RESUMABLE_STATUSES,
-  SUBSCRIBABLE_TIERS, sortPlans, formatCents, annualSavingsPct, daysUntil,
-  isPlanCheckoutable,
+  SUBSCRIBABLE_TIERS, sortPlans, formatCents, daysUntil,
+  isPlanCheckoutable, CYCLE_LABEL, CYCLE_SUFFIX, offeredCycles, priceForCycle,
+  savingsPctForCycle, checkoutableCycles, firstAvailableCycle,
 } from "../lib/subscriptionBilling";
 
 const LOCAL_FREE_TIERS = new Set(["free", "service_provider_free"]);
@@ -144,9 +145,9 @@ export default function SubscriptionBilling() {
   const isTrialing = sub?.status === "trialing";
   const trialDays = isTrialing ? daysUntil(sub?.trial_end) : null;
 
-  const resumeMonthlyOk = isPlanCheckoutable(currentPlan, "monthly");
-  const resumeAnnualOk = isPlanCheckoutable(currentPlan, "annual");
-  const resumePending = isResumable && SUBSCRIBABLE_TIERS.has(planTier) && !resumeMonthlyOk && !resumeAnnualOk;
+  // D-14: resume on any cycle the plan offers (monthly / 6-month / annual).
+  const resumeCycles = offeredCycles(currentPlan).length ? offeredCycles(currentPlan) : ["monthly", "annual"];
+  const resumePending = isResumable && SUBSCRIBABLE_TIERS.has(planTier) && checkoutableCycles(currentPlan).length === 0;
 
   return (
     <div data-testid="subscription-billing-page" className="pb-20 lg:pb-8">
@@ -201,28 +202,26 @@ export default function SubscriptionBilling() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
-              {SUBSCRIBABLE_TIERS.has(planTier) && !resumePending && (
-                <>
+              {SUBSCRIBABLE_TIERS.has(planTier) && !resumePending && resumeCycles.map((c, idx) => {
+                const ok = isPlanCheckoutable(currentPlan, c);
+                const label = CYCLE_LABEL[c].toLowerCase();
+                return (
                   <button
-                    onClick={() => launchCheckout(planTier, "monthly")}
-                    disabled={busyAction.startsWith("checkout:") || !resumeMonthlyOk}
-                    data-testid={`subscription-resume-${planTier}-monthly`}
-                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium bg-equine-navy text-white hover:bg-equine-navyLift disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5"
-                    title={resumeMonthlyOk ? "Resume on the monthly cycle" : "Monthly cycle is unavailable for this plan"}
+                    key={c}
+                    onClick={() => launchCheckout(planTier, c)}
+                    disabled={busyAction.startsWith("checkout:") || !ok}
+                    data-testid={`subscription-resume-${planTier}-${c}`}
+                    className={`px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5 ${
+                      idx === 0
+                        ? "bg-equine-navy text-white hover:bg-equine-navyLift"
+                        : "border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15"
+                    }`}
+                    title={ok ? `Resume on the ${label} cycle` : `${CYCLE_LABEL[c]} cycle is unavailable for this plan`}
                   >
-                    Resume monthly <ArrowRight className="w-3.5 h-3.5" />
+                    Resume {label} {idx === 0 && <ArrowRight className="w-3.5 h-3.5" />}
                   </button>
-                  <button
-                    onClick={() => launchCheckout(planTier, "annual")}
-                    disabled={busyAction.startsWith("checkout:") || !resumeAnnualOk}
-                    data-testid={`subscription-resume-${planTier}-annual`}
-                    className="px-4 py-2 rounded-full text-[12.5px] tracking-wide font-medium border border-equine-saddleDeep/50 text-equine-saddleDeep hover:bg-equine-saddle/15 disabled:opacity-50 disabled:cursor-not-allowed transition-colors inline-flex items-center gap-1.5"
-                    title={resumeAnnualOk ? "Resume on the annual cycle" : "Annual cycle is unavailable for this plan"}
-                  >
-                    Resume annual
-                  </button>
-                </>
-              )}
+                );
+              })}
               {resumePending && (
                 <div
                   data-testid="subscription-resume-billing-setup-pending"
@@ -255,7 +254,7 @@ export default function SubscriptionBilling() {
                 )}
                 {sub?.billing_cycle && (
                   <span className="text-[11.5px] uppercase tracking-[0.2em] text-equine-inkSoft">
-                    {sub.billing_cycle === "annual" ? "Annual cycle" : "Monthly cycle"}
+                    {CYCLE_LABEL[sub.billing_cycle] || sub.billing_cycle} cycle
                   </span>
                 )}
               </div>
@@ -445,22 +444,18 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
   // Phase 15.C — auto-snap the toggle to whichever cycle is actually
   // checkoutable so the user never lands on a disabled CTA by default. Falls
   // back to "monthly" for contact-sales plans (where the toggle is hidden).
-  const initialCycle = plan.has_monthly
-    ? "monthly"
-    : plan.has_annual
-    ? "annual"
-    : "monthly";
+  const initialCycle = firstAvailableCycle(plan) || "monthly";
   const [cycle, setCycle] = useState(initialCycle);
-  const monthly = plan.monthly_price_cents;
-  const annual = plan.annual_price_cents;
-  const savings = annualSavingsPct(plan);
+  // D-14: cycles this plan lists a price for (six_month only on the two
+  // tiers whose annual price exceeds Apple's $1,000 ceiling).
+  const cycles = offeredCycles(plan);
   const isCurrent = plan.tier_code === currentTier;
   const isCurrentCycle = isCurrent && currentCycle === cycle;
   const contactSales = !!plan.contact_sales;
   const checkoutKey = `checkout:${plan.tier_code}:${cycle}`;
   const busy = busyAction === checkoutKey;
   const checkoutable = isPlanCheckoutable(plan, cycle);
-  const noCyclesAvailable = !contactSales && !plan.has_monthly && !plan.has_annual;
+  const noCyclesAvailable = !contactSales && checkoutableCycles(plan).length === 0;
 
   const handleClick = () => {
     if (contactSales) {
@@ -476,11 +471,11 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
     : noCyclesAvailable
     ? "Billing setup pending"
     : !checkoutable
-    ? `${cycle === "monthly" ? "Monthly" : "Annual"} unavailable`
+    ? `${CYCLE_LABEL[cycle]} unavailable`
     : isCurrentCycle
     ? "Current plan"
     : isCurrent
-    ? `Switch to ${cycle}`
+    ? `Switch to ${CYCLE_LABEL[cycle].toLowerCase()}`
     : busy
     ? "Opening…"
     : `Switch to ${plan.name || plan.tier_code}`;
@@ -503,54 +498,45 @@ function PlanPickerCard({ plan, currentTier, currentCycle, onCheckout, busyActio
         )}
       </div>
 
-      {!contactSales && (plan.has_monthly || plan.has_annual) && (
+      {!contactSales && !noCyclesAvailable && (
         <div className="inline-flex bg-equine-soft rounded-full p-0.5 mb-4" data-testid={`plan-cycle-toggle-${plan.tier_code}`}>
-          <button
-            type="button"
-            onClick={() => setCycle("monthly")}
-            disabled={!plan.has_monthly}
-            className={`px-3 py-1.5 text-[11.5px] tracking-wide rounded-full transition-colors ${
-              cycle === "monthly"
-                ? "bg-equine-elevated text-equine-ink shadow-sm"
-                : "text-equine-inkMuted hover:text-equine-ink disabled:opacity-40"
-            }`}
-            data-testid={`plan-cycle-monthly-${plan.tier_code}`}
-          >
-            Monthly
-          </button>
-          <button
-            type="button"
-            onClick={() => setCycle("annual")}
-            disabled={!plan.has_annual}
-            className={`px-3 py-1.5 text-[11.5px] tracking-wide rounded-full transition-colors inline-flex items-center gap-1.5 ${
-              cycle === "annual"
-                ? "bg-equine-elevated text-equine-ink shadow-sm"
-                : "text-equine-inkMuted hover:text-equine-ink disabled:opacity-40"
-            }`}
-            data-testid={`plan-cycle-annual-${plan.tier_code}`}
-          >
-            Annual
-            {savings != null && (
-              <span className="text-[10px] tracking-wider uppercase text-equine-saddleDeep font-medium" data-testid={`plan-savings-${plan.tier_code}`}>
-                Save {savings}%
-              </span>
-            )}
-          </button>
+          {cycles.map((c) => {
+            const cycleSavings = savingsPctForCycle(plan, c);
+            return (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setCycle(c)}
+                disabled={!isPlanCheckoutable(plan, c)}
+                className={`px-3 py-1.5 text-[11.5px] tracking-wide rounded-full transition-colors inline-flex items-center gap-1.5 ${
+                  cycle === c
+                    ? "bg-equine-elevated text-equine-ink shadow-sm"
+                    : "text-equine-inkMuted hover:text-equine-ink disabled:opacity-40"
+                }`}
+                data-testid={`plan-cycle-${c}-${plan.tier_code}`}
+              >
+                {CYCLE_LABEL[c]}
+                {cycleSavings != null && (
+                  <span
+                    className="text-[10px] tracking-wider uppercase text-equine-saddleDeep font-medium"
+                    data-testid={c === "annual" ? `plan-savings-${plan.tier_code}` : `plan-savings-${c}-${plan.tier_code}`}
+                  >
+                    Save {cycleSavings}%
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
 
       <div className="mb-4">
         {contactSales ? (
           <div className="font-display text-3xl text-equine-ink">Let&apos;s talk</div>
-        ) : cycle === "monthly" ? (
-          <div className="font-display text-3xl text-equine-ink">
-            {formatCents(monthly)}
-            <span className="text-[12px] text-equine-inkSoft font-sans ml-1">/mo</span>
-          </div>
         ) : (
           <div className="font-display text-3xl text-equine-ink">
-            {formatCents(annual)}
-            <span className="text-[12px] text-equine-inkSoft font-sans ml-1">/yr</span>
+            {formatCents(priceForCycle(plan, cycle))}
+            <span className="text-[12px] text-equine-inkSoft font-sans ml-1">{CYCLE_SUFFIX[cycle]}</span>
           </div>
         )}
         {plan.description && (

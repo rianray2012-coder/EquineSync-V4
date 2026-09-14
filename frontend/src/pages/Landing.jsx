@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Logo } from "../components/Logo";
 import { Check, ArrowRight, ShieldCheck, Sparkles, Users, Calendar, FileText } from "lucide-react";
-import { annualSavingsPct, formatCents, sortPlans } from "../lib/subscriptionBilling";
+import {
+  formatCents, sortPlans, BILLING_CYCLES, CYCLE_LABEL, effectiveCycle, priceForCycle,
+  savingsPctForCycle,
+} from "../lib/subscriptionBilling";
 import { api } from "../lib/api";
 import { PUBLIC_CAPABILITY_MATRIX } from "../lib/businessWorkflow";
 
@@ -268,7 +271,6 @@ export default function Landing() {
             : p.description,
         bullets,
         popular: !!LANDING_POPULAR_BY_TIER[p.tier_code],
-        _savings: annualSavingsPct(p),
       };
     });
   }, [livePlans]);
@@ -485,14 +487,16 @@ export default function Landing() {
                 <span className="text-brand-lilac font-medium"> 14-day free trial</span>. Cancel anytime.
               </p>
             </div>
-            {/* Monthly / Annual toggle */}
+            {/* Monthly / 6-month / Annual toggle. The 6-month term (D-14) is
+                offered by Advanced Barn and Trainer + Lessons (50); other
+                cards show their monthly price while it is selected. */}
             <div
               className="inline-flex bg-white/5 border border-white/10 rounded-full p-0.5"
               data-testid="landing-cycle-toggle"
               role="tablist"
               aria-label="Billing cycle"
             >
-              {["monthly", "annual"].map((c) => (
+              {BILLING_CYCLES.map((c) => (
                 <button
                   key={c}
                   type="button"
@@ -504,7 +508,7 @@ export default function Landing() {
                       : "text-white/65 hover:text-white"
                   }`}
                 >
-                  {c}
+                  {CYCLE_LABEL[c]}
                 </button>
               ))}
             </div>
@@ -554,12 +558,12 @@ export default function Landing() {
             {plansForCycle.map((tier) => {
               const popular = !!tier.popular;
               const contactSales = !!tier.contact_sales;
-              const priceCents =
-                billingCycle === "annual" && tier.annual_price_cents != null
-                  ? tier.annual_price_cents
-                  : tier.monthly_price_cents;
+              // D-14: cards without the chosen term fall back to monthly.
+              const cardCycle = contactSales ? "monthly" : effectiveCycle(tier, billingCycle);
+              const priceCents = contactSales ? tier.monthly_price_cents : priceForCycle(tier, cardCycle);
               const isFree = priceCents === 0;
-              const cycleLabel = billingCycle === "annual" ? "/ yr" : "/ mo";
+              const cycleLabel = cardCycle === "annual" ? "/ yr" : cardCycle === "six_month" ? "/ 6 mo" : "/ mo";
+              const savings = savingsPctForCycle(tier, cardCycle);
 
               return (
                 <div
@@ -589,12 +593,20 @@ export default function Landing() {
                     </div>
                   )}
 
-                  {billingCycle === "annual" && tier._savings != null && (
+                  {cardCycle !== "monthly" && savings != null && (
                     <div
                       className="mt-2 text-[11px] tracking-[0.2em] uppercase text-brand-lilac"
                       data-testid={`pricing-savings-${tier.tier_code}`}
                     >
-                      Save {tier._savings}% vs. monthly
+                      Save {savings}% vs. monthly
+                    </div>
+                  )}
+                  {!contactSales && !isFree && cardCycle !== billingCycle && (
+                    <div
+                      className="mt-2 text-[11px] tracking-[0.2em] uppercase text-white/40"
+                      data-testid={`pricing-cycle-not-offered-${tier.tier_code}`}
+                    >
+                      {CYCLE_LABEL[billingCycle]} term not offered
                     </div>
                   )}
 

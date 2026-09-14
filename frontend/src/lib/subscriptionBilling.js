@@ -52,16 +52,73 @@ export const formatCents = (cents) => {
   })}`;
 };
 
+// D-14 (Sep 2026) — billing cycles the catalog can sell, in display order.
+// Mirrors BILLING_PERIODS in backend/core/billing_provisioning.py. The
+// six-month term exists because Apple caps auto-renewable subscriptions at
+// $1,000.00: Advanced Barn and Trainer + Lessons (50) sell monthly + six-month
+// in-app, and the web offers the identical six-month price so parity holds.
+// A plan without `six_month_price_cents` simply does not offer the term.
+export const BILLING_CYCLES = ["monthly", "six_month", "annual"];
+
+export const CYCLE_LABEL = {
+  monthly: "Monthly",
+  six_month: "6-month",
+  annual: "Annual",
+};
+
+// Suffix shown after a price for each cycle.
+export const CYCLE_SUFFIX = {
+  monthly: "/mo",
+  six_month: "/6 mo",
+  annual: "/yr",
+};
+
+export const CYCLE_MONTHS = { monthly: 1, six_month: 6, annual: 12 };
+
+const CYCLE_PRICE_FIELD = {
+  monthly: "monthly_price_cents",
+  six_month: "six_month_price_cents",
+  annual: "annual_price_cents",
+};
+
+const CYCLE_HAS_FIELD = {
+  monthly: "has_monthly",
+  six_month: "has_six_month",
+  annual: "has_annual",
+};
+
+// Catalog amount (cents) for a cycle, or null/undefined when the plan does
+// not offer that term (e.g. six_month on most tiers).
+export const priceForCycle = (plan, cycle) => plan?.[CYCLE_PRICE_FIELD[cycle]];
+
+// True when the catalog lists an amount for the cycle (independent of Stripe
+// readiness — see isPlanCheckoutable for the price-ID gate).
+export const planOffersCycle = (plan, cycle) =>
+  !!plan && !plan.contact_sales && priceForCycle(plan, cycle) != null;
+
+// Cycles a plan lists a price for, in display order.
+export const offeredCycles = (plan) => BILLING_CYCLES.filter((c) => planOffersCycle(plan, c));
+
+// Cycle to actually display/charge when the user's chosen cycle isn't offered
+// by this plan: fall back to monthly (never silently upgrade to annual).
+export const effectiveCycle = (plan, cycle) => (planOffersCycle(plan, cycle) ? cycle : "monthly");
+
+// Savings versus paying monthly for the same number of months: rounded whole
+// percent. Returns null when a price is missing or the term isn't a discount.
+export const savingsPctForCycle = (plan, cycle) => {
+  const m = plan?.monthly_price_cents;
+  const a = priceForCycle(plan, cycle);
+  const months = CYCLE_MONTHS[cycle];
+  if (!months || months === 1) return null;
+  if (m == null || a == null || m <= 0 || a <= 0) return null;
+  const full = m * months;
+  if (a >= full) return null;
+  return Math.round(((full - a) / full) * 100);
+};
+
 // Annual-vs-monthly savings: rounded whole percent. Returns null when one of
 // the prices is missing or the annual price isn't actually a discount.
-export const annualSavingsPct = (plan) => {
-  const m = plan?.monthly_price_cents;
-  const a = plan?.annual_price_cents;
-  if (m == null || a == null || m <= 0 || a <= 0) return null;
-  const fullYear = m * 12;
-  if (a >= fullYear) return null;
-  return Math.round(((fullYear - a) / fullYear) * 100);
-};
+export const annualSavingsPct = (plan) => savingsPctForCycle(plan, "annual");
 
 // Friendly label for a subscription status returned by /api/subscriptions/me.
 export const STATUS_LABEL = {
@@ -106,23 +163,29 @@ export const daysUntil = (iso) => {
 };
 
 // Phase 15.C — Stripe price-ID readiness gate. `/api/billing/plans` returns
-// `has_monthly` / `has_annual` based on the presence of STRIPE_PRICE_*
-// environment variables on the backend. When false, `/api/subscriptions/
-// checkout` raises HTTP 500 ("missing a Stripe Price for cycle=…"). The UI
-// must disable any CTA that would otherwise hit that 500 and surface a
-// "Billing setup pending" message instead. Contact-sales plans
+// `has_monthly` / `has_six_month` / `has_annual` based on the presence of a
+// Stripe Price ID for the cycle on the backend. When false, `/api/
+// subscriptions/checkout` raises HTTP 500 ("missing a Stripe Price for
+// cycle=…"). The UI must disable any CTA that would otherwise hit that 500
+// and surface a "Billing setup pending" message instead. Contact-sales plans
 // are always considered un-checkoutable here — those use mailto.
 export const isPlanCheckoutable = (plan, cycle) => {
   if (!plan || plan.contact_sales) return false;
-  if (cycle === "annual") return !!plan.has_annual;
-  if (cycle === "monthly") return !!plan.has_monthly;
-  return !!(plan.has_monthly || plan.has_annual);
+  if (cycle) return !!plan[CYCLE_HAS_FIELD[cycle]];
+  return BILLING_CYCLES.some((c) => !!plan[CYCLE_HAS_FIELD[c]]);
 };
 
+// Cycles the plan can be checked out on right now (price ID present).
+export const checkoutableCycles = (plan) =>
+  BILLING_CYCLES.filter((c) => isPlanCheckoutable(plan, c));
+
 // Returns the first available cycle for a plan, or null if none.
-export const firstAvailableCycle = (plan) => {
-  if (!plan || plan.contact_sales) return null;
-  if (plan.has_monthly) return "monthly";
-  if (plan.has_annual) return "annual";
-  return null;
+export const firstAvailableCycle = (plan) => checkoutableCycles(plan)[0] || null;
+
+// Best cycle to charge given the user's preference: their pick when it is
+// checkoutable, otherwise the first checkoutable alternative (monthly first),
+// or null when nothing is available.
+export const resolveCheckoutCycle = (plan, preferred) => {
+  if (isPlanCheckoutable(plan, preferred)) return preferred;
+  return firstAvailableCycle(plan);
 };

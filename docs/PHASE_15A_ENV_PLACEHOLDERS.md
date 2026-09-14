@@ -29,6 +29,14 @@ STRIPE_PRICE_TRAINER_LESSON_15_ANNUAL=       # required in prod
 STRIPE_PRICE_TRAINER_LESSON_50_MONTHLY=      # required in prod
 STRIPE_PRICE_TRAINER_LESSON_50_ANNUAL=       # required in prod
 
+# D-14 (14 Sep 2026) six-month term — only the two tiers whose annual price
+# exceeds Apple's $1,000 subscription ceiling. Stripe Price: interval=month,
+# interval_count=6. Required in prod as soon as the catalog declares
+# six_month_price_cents for the tier (it does), until the live Price IDs are
+# recorded in LIVE_STRIPE_PRICE_IDS under the "six_month" key.
+STRIPE_PRICE_ADVANCED_BARN_SIX_MONTH=        # required in prod (D-14)
+STRIPE_PRICE_TRAINER_LESSON_50_SIX_MONTH=    # required in prod (D-14)
+
 # Origin allow-list for Stripe redirects (Codex finding #4)
 # Comma-separated extras; combined with APP_BASE_URL + REACT_APP_BACKEND_URL
 # + FRONTEND_URL (if set). Only scheme+host of each value is considered.
@@ -44,7 +52,7 @@ APP_BASE_URL=                            # canonical https://… of the app
 | Mode | Behavior |
 |---|---|
 | `APP_ENV=development` (or anything ≠ "production") | Idempotently auto-create Stripe Products + Prices tagged with `metadata.equinesync_managed=true` + `metadata.tier_code=<new pricing tier>`. Local `plans` rows are upserted **always** for every public/catalog tier — even when Stripe is unreachable or the API key is missing — with `stripe_*_id = null` so `/billing/plans` keeps working. Checkout returns a clear 500 when `stripe_price_id_*` is absent (no silent failure). |
-| `APP_ENV=production` | **Validate-only.** `STRIPE_API_KEY` + all required `STRIPE_PRICE_*` env vars for public paid tiers are required; each is verified via `stripe.Price.retrieve`. Startup aborts with a clear error on any miss or invalid ID. **`lifespan.on_startup` re-raises in production**, so provisioning failure WILL bring the process down (no silent swallowing). No Products/Prices are created at startup in production. |
+| `APP_ENV=production` | **Validate-only.** `STRIPE_API_KEY` + all required `STRIPE_PRICE_*` env vars (or live-map entries) for public paid tiers are required, for every billing period the tier sells (monthly/annual, plus six-month for the D-14 tiers); each is verified via `stripe.Price.retrieve`. Startup aborts with a clear error on any miss or invalid ID. **`lifespan.on_startup` re-raises in production**, so provisioning failure WILL bring the process down (no silent swallowing). No Products/Prices are created at startup in production. |
 
 ## Origin allow-list (Codex finding #4)
 

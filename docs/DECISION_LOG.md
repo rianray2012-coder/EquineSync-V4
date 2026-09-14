@@ -19,6 +19,14 @@ Status:
 
 ## Entries
 
+### 2026-09-14 — D-14: Six-month billing period for tiers above Apple's $1,000 subscription ceiling
+- **Decision:** Add a third billing period, `six_month`, to the catalog, Stripe wiring, checkout, webhook plan resolution, MRR math, web pricing UI, and the store product-id contract. Advanced Barn ($749.99) and Trainer + Lesson Program - 50 Participants ($899.99) sell it; Elite Barn does not and is monthly-only in-app (E1). Web annual for the two tiers stays web-only (D-14c). Store product ids are `com.equinesync.app.<plan_code>.<monthly|six_month|annual>`; Stripe env names are `STRIPE_PRICE_<PLAN>_SIX_MONTH`. Amounts are parametrized in `SIX_MONTH_PRICE_CENTS` pending D-14a. Also records D-13: Service Provider Premium annual is $179.99 in the App Store versus $180.00 on Stripe; no code compares store amounts to the catalog, so it is a note only.
+- **Reason:** Apple's US price list for auto-renewable subscriptions ends at $1,000.00, so the $1,499 / $2,999 / $1,799 annual prices cannot be entered in App Store Connect. FD-2026-09-11-03 requires the same product at the same price on both channels, so the web and Stripe must carry the six-month price the stores sell.
+- **Alternatives Considered:** Rule B (5.5 × monthly) or Rule C (6 × monthly, cannot fit Trainer + Lesson 50); a quarterly period only for Elite Barn (rejected — a fourth period for one tier); waiting for Apple to enable higher price points before shipping (filed in parallel, not blocking).
+- **Risks:** Production startup now requires a six-month Stripe Price ID for each tier that declares `six_month_price_cents`; the Prices must exist and be recorded (env var or live map) before the release that carries this catalog boots. Existing `annual`/`monthly` semantics are untouched. Store products must be created only after this identifier contract merges so purchases map to a plan and term.
+- **Review Date:** When Apple enables higher price points (E3) or D-14a changes the amounts.
+- **Status:** Prepared, held for founder confirmation of D-14a–d.
+
 ### 2026-05-30 — Use MongoDB for initial scaling
 - **Decision:** Use MongoDB as the primary datastore for the initial platform.
 - **Reason:** Flexible schema during rapid product development and growth.

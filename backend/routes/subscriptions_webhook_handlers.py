@@ -555,6 +555,7 @@ async def _h_subscription_updated(db, event):
                 plan_by_price = await db.plans.find_one(
                     {"$or": [
                         {"stripe_price_id_monthly": new_price_id},
+                        {"stripe_price_id_six_month": new_price_id},
                         {"stripe_price_id_annual": new_price_id},
                     ]},
                     {"_id": 0},
@@ -639,10 +640,11 @@ async def _h_subscription_updated(db, event):
     summary_parts = ["subscription_updated", stripe_subscription_id]
     # Entitlements refresh on price change.
     if local and new_price_id and new_price_id != local.get("stripe_price_id"):
-        # Resolve the new tier code from the plan whose monthly OR annual price matches.
+        # Resolve the new tier code from the plan whose monthly, six-month, OR annual price matches.
         new_plan = await db.plans.find_one(
             {"$or": [
                 {"stripe_price_id_monthly": new_price_id},
+                {"stripe_price_id_six_month": new_price_id},
                 {"stripe_price_id_annual": new_price_id},
             ]},
             {"_id": 0},

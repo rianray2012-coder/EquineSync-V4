@@ -126,6 +126,10 @@ def test_latest_founder_limits_are_in_plan_catalog():
     assert plans["starter_barn"]["feature_limits"]["horses"] == 10
     assert plans["starter_barn"]["feature_limits"]["staff_seats"] == 3
     assert plans["advanced_barn"]["feature_limits"]["horses"] == 30
+    # D-14 six-month term (Rule A: 5 x monthly, rounded up to an Apple point).
+    assert plans["advanced_barn"]["six_month_price_cents"] == 74999
+    assert plans["trainer_lesson_50"]["six_month_price_cents"] == 89999
+    assert plans["elite_barn"].get("six_month_price_cents") is None
     assert plans["advanced_barn"]["feature_limits"]["owner_manager_seats"] == 2
     assert plans["elite_barn"]["feature_limits"]["horses"] == 50
     assert plans["elite_barn"]["feature_limits"]["owner_manager_seats"] == 4
