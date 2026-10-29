@@ -15,7 +15,7 @@ const C = {
   field: "#1E2230",
   border: "#39415C",
 };
-const serif = { fontFamily: "'Cormorant Garamond', Georgia, serif" };
+const serif = { fontFamily: "'Libre Bodoni', Didot, Georgia, serif", fontWeight: 600 };
 
 export default function VerifyEmail() {
   const [params] = useSearchParams();
@@ -59,7 +59,7 @@ export default function VerifyEmail() {
   return (
     <div
       className="min-h-screen w-full flex items-center justify-center px-6 py-12"
-      style={{ background: `linear-gradient(160deg, ${C.graphite} 0%, ${C.navy} 100%)`, fontFamily: "'Inter', sans-serif" }}
+      style={{ background: `linear-gradient(160deg, ${C.graphite} 0%, ${C.navy} 100%)`, fontFamily: "'Nunito', sans-serif" }}
       data-testid="verify-email-page"
     >
       <div className="w-full max-w-md">

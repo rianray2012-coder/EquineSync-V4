@@ -320,7 +320,7 @@ export default function Landing() {
             <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-6">
               Stable operating software
             </div>
-            <h1 className="font-display text-5xl md:text-7xl font-light leading-[1.04] text-white">
+            <h1 className="font-hero text-5xl md:text-7xl font-medium leading-[1.04] text-white">
               The operating home and lifetime record for modern horse care.
             </h1>
             <p className="mt-8 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
@@ -371,7 +371,7 @@ export default function Landing() {
             <div className="text-[11px] tracking-[0.28em] uppercase text-brand-slate font-semibold mb-4">
               What EquineSync Offers
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-light text-brand-graphite">
+            <h2 className="font-hero text-4xl md:text-5xl font-medium text-brand-graphite">
               One platform for the work around every horse.
             </h2>
             <p className="mt-5 text-[15px] md:text-base leading-relaxed text-brand-muted max-w-2xl">
@@ -402,7 +402,7 @@ export default function Landing() {
             <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-4">
               Capability posture
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+            <h2 className="font-hero text-4xl md:text-5xl font-medium text-white">
               Clear about what is ready, gated, and provider-required.
             </h2>
             <p className="mt-5 text-[15px] md:text-base leading-relaxed text-white/65 max-w-2xl">
@@ -432,7 +432,7 @@ export default function Landing() {
           <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-4">
             Choose your starting point
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+          <h2 className="font-hero text-4xl md:text-5xl font-medium text-white">
             Four public paths into the EquineSync platform.
           </h2>
           <p className="mt-4 text-white/65 text-[15px] leading-relaxed">
@@ -476,7 +476,7 @@ export default function Landing() {
               <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-4">
                 Membership
               </div>
-              <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+              <h2 className="font-hero text-4xl md:text-5xl font-medium text-white">
                 Pricing that respects your time.
               </h2>
               <p className="mt-4 text-white/65 text-[15px] leading-relaxed">
@@ -583,7 +583,7 @@ export default function Landing() {
                       Let&apos;s talk
                     </div>
                   ) : (
-                    <div className="font-display text-5xl text-white font-light">
+                    <div className="font-hero text-5xl text-white font-medium">
                       {formatCents(priceCents)}
                       <span className="text-[14px] text-white/50 font-sans tracking-wide ml-2">{cycleLabel}</span>
                     </div>

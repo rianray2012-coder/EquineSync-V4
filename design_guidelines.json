@@ -15,19 +15,21 @@
         }
       },
       "fontFamily": {
-        "display": ["Cormorant Garamond", "serif"],
-        "body": ["Inter", "sans-serif"]
+        "hero": ["Bodoni Moda", "serif"],
+        "display": ["Libre Bodoni", "serif"],
+        "body": ["Nunito", "sans-serif"]
       }
     }
   },
   "typography": {
     "fonts": {
-      "display": "Cormorant Garamond, serif",
-      "body": "Inter, sans-serif"
+      "hero": "Bodoni Moda, serif",
+      "display": "Libre Bodoni, serif",
+      "body": "Nunito, sans-serif"
     },
     "hierarchy": {
-      "h1": "text-5xl md:text-6xl font-display font-light tracking-tight text-equine-platinum",
-      "h2": "text-3xl md:text-4xl font-display font-light tracking-tight text-equine-platinum",
+      "h1": "text-5xl md:text-6xl font-hero font-medium tracking-tight text-equine-platinum",
+      "h2": "text-3xl md:text-4xl font-hero font-medium tracking-tight text-equine-platinum",
       "h3": "text-xl md:text-2xl font-display font-medium text-equine-platinum",
       "body": "text-base font-body text-equine-platinum/80 leading-relaxed",
       "label": "text-xs font-body uppercase tracking-[0.2em] text-equine-lilac"
@@ -106,7 +108,7 @@
   },
   "instructions_to_main_agent": [
     "Build using React (.js files, NOT .tsx) and Tailwind CSS.",
-    "Update tailwind.config.js with the provided colors (equine-graphite, etc.) and fonts (Cormorant Garamond, Inter).",
+    "Update tailwind.config.js with the provided colors (equine-graphite, etc.) and fonts (Bodoni Moda, Libre Bodoni, Nunito).",
     "Use 'lucide-react' for icons (e.g., checkmarks in pricing).",
     "Use framer-motion for smooth entrance animations.",
     "Ensure all interactive elements and forms have `data-testid` attributes.",

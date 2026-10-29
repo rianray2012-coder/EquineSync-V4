@@ -29,7 +29,7 @@ export default function Enrollment() {
           <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-4">
             Join EquineSync
           </div>
-          <h1 className="font-display text-4xl md:text-6xl font-light leading-[1.05] text-white max-w-3xl">
+          <h1 className="font-hero text-4xl md:text-6xl font-medium leading-[1.05] text-white max-w-3xl">
             Choose the enrollment path that matches how you care for horses.
           </h1>
           <p className="mt-5 text-white/65 text-[15px] leading-relaxed max-w-2xl">

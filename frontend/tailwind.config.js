@@ -5,8 +5,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'serif'],
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        hero: ['"Bodoni Moda"', 'Didot', 'Georgia', 'serif'],
+        display: ['"Libre Bodoni"', 'Didot', 'Georgia', 'serif'],
+        sans: ['Nunito', 'ui-sans-serif', 'system-ui'],
       },
       colors: {
         brand: {
