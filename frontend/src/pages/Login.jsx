@@ -59,7 +59,7 @@ export default function Login() {
       {/* Left visual */}
       <div className="relative hidden lg:block bg-equine-navy">
         <img
-          src="https://static.prod-images.emergentagent.com/jobs/137f7c6b-a2e1-41c0-9c38-96d2409d644a/images/3ca3908290d52bc07be0b5f45e2f358fac3cee0e8034aa339d3b62ddac3b3403.png"
+          src="/brand/img/auth-panel.png"
           alt="Modern equestrian workspace"
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         />

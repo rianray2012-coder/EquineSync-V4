@@ -13,7 +13,7 @@ const ROLE_CARDS = [
     label: "Individual Horse Owner",
     blurb: "Build a horse ledger and passport with care records, appointments, documents, reminders, and shared updates.",
     image:
-      "https://images.unsplash.com/photo-1600715151005-e6d44b9ef840?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
+      "/brand/img/owner.jpg",
     span: "md:col-span-3",
   },
   {
@@ -21,7 +21,7 @@ const ROLE_CARDS = [
     label: "Barn Owner / Manager",
     blurb: "Run a facility workspace for horses, stalls, staff tasks, owner updates, billing, and records.",
     image:
-      "https://images.unsplash.com/photo-1576692192914-9abed71b3ef9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3JzZSUyMGJhcm58ZW58MHx8fHwxNzgxMzQxNTQ5fDA&ixlib=rb-4.1.0&q=85",
+      "/brand/img/barn.jpg",
     span: "md:col-span-3",
   },
   {
@@ -29,7 +29,7 @@ const ROLE_CARDS = [
     label: "Service Provider",
     blurb: "Create a reviewed profile for vet, farrier, bodywork, and care services with scoped client access.",
     image:
-      "https://images.unsplash.com/photo-1649127616601-6f0a3ea26eae?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwZmFycmllcnxlbnwwfHx8fDE3ODEzNDE1NjF8MA&ixlib=rb-4.1.0&q=85",
+      "/brand/img/provider.jpg",
     span: "md:col-span-2",
   },
   {
@@ -37,7 +37,7 @@ const ROLE_CARDS = [
     label: "Trainer",
     blurb: "Start with reviewed trainer intake, assigned-horse visibility, training notes, plans, and lesson workflows.",
     image:
-      "https://images.unsplash.com/photo-1594768816441-1dd241ffaa67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxlcXVlc3RyaWFuJTIwdHJhaW5lcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85",
+      "/brand/img/trainer.jpg",
     span: "md:col-span-2",
   },
 ];
@@ -310,7 +310,7 @@ export default function Landing() {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[75vh] flex flex-col justify-center">
         <img
-          src="https://images.unsplash.com/photo-1550785330-003a9afa3bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjBlcXVlc3RyaWFuJTIwaG9yc2UlMjByaWRlcnxlbnwwfHx8fDE3ODEzNDE1NDl8MA&ixlib=rb-4.1.0&q=85"
+          src="/brand/img/hero.jpg"
           alt="Horse and rider in a training setting"
           className="absolute inset-0 w-full h-full object-cover opacity-45"
         />
