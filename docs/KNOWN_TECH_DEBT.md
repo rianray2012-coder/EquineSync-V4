@@ -59,7 +59,7 @@
 
 ## 11. Design-Token Drift (frontend) — **Severity: Low/Medium**
 - **Observed:** Live `frontend/src/index.css` + `tailwind.config.js` use a sibling "lavender pearl / charcoal navy" palette (navy `#2E3448`, bg `#F7F5FA`, lavender `#C7B6D9`, accent `#A7B7E7`) that approximates but does not exactly match the authoritative Brand Guide (`#232734 / #2E3550 / #F7F8FA / #B8AECF`).
-- **Typography resolved 2026-10-31:** Bodoni Moda + Libre Bodoni + Nunito are wired in `tailwind.config.js`, `index.css` and `public/index.html`. Cormorant Garamond is retired and must not be reintroduced.
+- **Typography resolved 2026-10-31:** Bodoni Moda + Libre Bodoni + Source Sans 3 are the approved families, implemented in **V5** as FD-2026-10-31-01 with self-hosted woff2 assets. Cormorant Garamond is retired and must not be reintroduced. The wiring in this repository's `tailwind.config.js`, `index.css` and `public/index.html` belongs to a retired runtime and is not the live implementation.
 - **Residual typography debt:** 38 headings across 27 files still combine `font-display` with `font-light`; Libre Bodoni's range is 400–700, so these resolve to 400 instead of the intended 600.
 - **Risks:** Visual inconsistency vs brand; future rework.
 - **Recommended Action:** Reconcile live CSS variables + Tailwind theme to `DESIGN_TOKENS.md`. Sweep the residual `font-display font-light` pairs to `font-medium`. **(Phase 8)**

@@ -35,7 +35,7 @@ Avoid: tech-bro aesthetics, overly playful design, cluttered dashboards, appeari
 ## Typography
 - **Hero:** Bodoni Moda (Medium 500) — oversized marketing headlines. `font-hero`. Not below 28px.
 - **Display:** Libre Bodoni (SemiBold 600) — all other headings, app page and card titles. `font-display`.
-- **UI:** Nunito — dashboard, forms, navigation, analytics, tables. `font-sans`.
+- **UI:** Source Sans 3 — dashboard, forms, navigation, analytics, tables. `font-sans`. Keep quantities, dates, times, doses and balances here, with tabular numerals where columns align.
 - **Headline accent:** one phrase per headline, italic + Smoky Lilac `#B8AECF`. Dark backgrounds only; on light surfaces use Slate `#2E3550`.
 - Typography colors: Rich Charcoal `#1E2128` (primary), Muted Slate `#667085` (secondary), Soft Disabled `#98A2B3`.
 - Prioritize clean spacing, hierarchy, legibility on mobile.

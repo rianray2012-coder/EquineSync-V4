@@ -52,10 +52,10 @@ Visual language combines: elite stable aesthetics, refined modern SaaS design, u
 ## Typography System
 Founder-approved 2026-10-31. Replaces Cormorant Garamond + Inter.
 
-- **Hero Display Typeface:** Bodoni Moda (Medium 500) — oversized marketing headlines, hero, landing pages, premium statements. Tailwind `font-hero`. Do not use below 28px; it goes hairline-thin.
-- **Display Typeface:** Libre Bodoni (SemiBold 600) — all other headings, app page and card titles. Tailwind `font-display`. A sturdier Bodoni cut that holds up at 17–32px, so the serif carries into the product.
-- **Interface Typeface:** Nunito — body, UI, forms, navigation, analytics, data tables. Tailwind `font-sans`. A rounded sans: soft circular stroke ends warm the product against Bodoni's sharp headlines.
-- **Hierarchy:** Hero headlines = Bodoni Moda Medium; Section headers = Nunito uppercase with tracking; Body = Nunito Regular; Navigation = Nunito Medium.
+- **Hero Display Typeface:** Bodoni Moda (Medium 500) — oversized marketing headlines, hero, landing pages, premium statements. Tailwind `font-hero`. Do not use below 28px; it goes hairline-thin. This floor admits no exceptions, including the wordmark, which takes Libre Bodoni.
+- **Display Typeface:** Libre Bodoni (SemiBold 600) — the EquineSync wordmark, all other headings, app page and card titles. Tailwind `font-display`. A sturdier Bodoni cut that holds up at 17–32px, so the serif carries into the product.
+- **Interface Typeface:** Source Sans 3 — body, UI, forms, navigation, analytics, data tables. Tailwind `font-sans`. A workhorse drawn for dense operational reading; keep quantities, dates, times, doses and balances in it, with tabular numerals where columns align.
+- **Hierarchy:** Hero headlines = Bodoni Moda Medium; Section headers = Source Sans 3 uppercase with tracking; Body = Source Sans 3 Regular; Navigation = Source Sans 3 Medium.
 - **Email:** Georgia first, Libre Bodoni as the hint — web fonts do not load in most email clients. Never use Bodoni Moda in email.
 
 ### Headline Accent

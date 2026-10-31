@@ -3,14 +3,14 @@
 ## Original Problem Statement
 Premium all-in-one operating system for elite show barns, training facilities, lesson programs, rehab facilities, and luxury private equestrian operations. Combines horse care, stable operations, health tracking, rider progress, billing, communication, scheduling, staff management, and BI in a single mobile/tablet/desktop platform.
 
-Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne accents. Bodoni Moda (hero display) + Libre Bodoni (display) + Nunito (body), founder-approved 2026-10-31.
+Brand: "Quiet luxury" — matte black, graphite, platinum, soft ivory, champagne accents. Bodoni Moda (hero display) + Libre Bodoni (display) + Source Sans 3 (body), founder-approved 2026-10-31 and implemented in V5 as FD-2026-10-31-01.
 
 ## User Choices (Feb 17 2026)
 - Scope v1: Polished MVP first (core modules + rich demo data)
 - Auth: JWT-based custom auth with role selection
 - AI: Claude Sonnet 4.5 via Emergent LLM key
 - Media: Object storage (deferred — using curated Unsplash photo URLs in v1)
-- Design: Luxury matte black + champagne palette, Bodoni Moda / Libre Bodoni / Nunito fonts (2026-10-31; previously Cormorant Garamond / Inter)
+- Design: Luxury matte black + champagne palette, Bodoni Moda / Libre Bodoni / Source Sans 3 fonts (2026-10-31; superseding Lora + Source Sans 3, which had superseded Cormorant Garamond / Inter)
 
 ## Architecture
 - **Backend**: FastAPI on 0.0.0.0:8001, supervisor-managed, MongoDB via MONGO_URL/DB_NAME from env

@@ -17,7 +17,7 @@
       "fontFamily": {
         "hero": ["Bodoni Moda", "serif"],
         "display": ["Libre Bodoni", "serif"],
-        "body": ["Nunito", "sans-serif"]
+        "body": ["Source Sans 3", "sans-serif"]
       }
     }
   },
@@ -25,7 +25,7 @@
     "fonts": {
       "hero": "Bodoni Moda, serif",
       "display": "Libre Bodoni, serif",
-      "body": "Nunito, sans-serif"
+      "body": "Source Sans 3, sans-serif"
     },
     "hierarchy": {
       "h1": "text-5xl md:text-6xl font-hero font-medium tracking-tight text-equine-platinum",
@@ -109,7 +109,7 @@
   },
   "instructions_to_main_agent": [
     "Build using React (.js files, NOT .tsx) and Tailwind CSS.",
-    "Update tailwind.config.js with the provided colors (equine-graphite, etc.) and fonts (Bodoni Moda, Libre Bodoni, Nunito).",
+    "Update tailwind.config.js with the provided colors (equine-graphite, etc.) and fonts (Bodoni Moda, Libre Bodoni, Source Sans 3).",
     "Use 'lucide-react' for icons (e.g., checkmarks in pricing).",
     "Use framer-motion for smooth entrance animations.",
     "Ensure all interactive elements and forms have `data-testid` attributes.",
