@@ -91,7 +91,7 @@ export default function AdminSubscriptions() {
         <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55 font-medium">
           Admin Portal · Subscriptions
         </div>
-        <h1 className="font-display text-3xl font-light text-equinesync-graphite mt-2">Subscription roster</h1>
+        <h1 className="font-display text-3xl font-medium text-equinesync-graphite mt-2">Subscription roster</h1>
         <p className="mt-2 text-[13.5px] text-equinesync-graphite/65 max-w-2xl">
           Read-only Phase 15 subscriptions. Stripe IDs are omitted by design.
           Mutations (cancel / refund / comp) are deferred to a separately-gated phase.

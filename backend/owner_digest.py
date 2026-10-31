@@ -308,11 +308,11 @@ DIGEST_CSS = """
   /* ---- Phase 8D brand presence (additive; warm calm bg preserved) ---- */
   .brandhead { margin-bottom:14px; }
   .brand-mark { display:block; width:48px; height:48px; border:0; margin-bottom:10px; }
-  .brand { font-family:'Cormorant Garamond','Georgia',serif; font-size:25px; line-height:1; letter-spacing:.005em; }
+  .brand { font-family:Georgia,'Libre Bodoni',serif; font-size:25px; line-height:1; letter-spacing:.005em; }
   .brand .eq { color:#232734; }
   .brand .sync { color:#6E5A99; }
   .tagline { font-family:ui-sans-serif,system-ui,sans-serif; letter-spacing:.18em; text-transform:uppercase; font-size:9px; color:#667085; margin-top:7px; }
-  .signoff { font-family:'Cormorant Garamond','Georgia',serif; font-size:16px; color:#232734; margin-bottom:5px; }
+  .signoff { font-family:Georgia,'Libre Bodoni',serif; font-size:16px; color:#232734; margin-bottom:5px; }
   .signoff .sync { color:#6E5A99; }
 """
 

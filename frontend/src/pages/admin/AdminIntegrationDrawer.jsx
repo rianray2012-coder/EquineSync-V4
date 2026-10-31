@@ -51,7 +51,7 @@ export default function AdminIntegrationDrawer({ slug, onClose }) {
             <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55">
               Integration · {slug}
             </div>
-            <h2 className="font-display text-xl text-equinesync-graphite font-light mt-1">
+            <h2 className="font-display text-xl text-equinesync-graphite font-medium mt-1">
               {detail?.label || slug}
             </h2>
           </div>

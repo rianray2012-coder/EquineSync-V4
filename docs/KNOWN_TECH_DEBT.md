@@ -58,9 +58,11 @@
 - **Recommended Action:** Centralized structured logging with request IDs, tenant IDs, user IDs. **(Phase 10)**
 
 ## 11. Design-Token Drift (frontend) — **Severity: Low/Medium**
-- **Observed:** Live `frontend/src/index.css` + `tailwind.config.js` use a sibling "lavender pearl / charcoal navy" palette (navy `#2E3448`, bg `#F7F5FA`, lavender `#C7B6D9`, accent `#A7B7E7`) that approximates but does not exactly match the authoritative Brand Guide (`#232734 / #2E3550 / #F7F8FA / #B8AECF`). Cormorant Garamond display face not yet wired.
+- **Observed:** Live `frontend/src/index.css` + `tailwind.config.js` use a sibling "lavender pearl / charcoal navy" palette (navy `#2E3448`, bg `#F7F5FA`, lavender `#C7B6D9`, accent `#A7B7E7`) that approximates but does not exactly match the authoritative Brand Guide (`#232734 / #2E3550 / #F7F8FA / #B8AECF`).
+- **Typography resolved 2026-10-31:** Bodoni Moda + Libre Bodoni + Nunito are wired in `tailwind.config.js`, `index.css` and `public/index.html`. Cormorant Garamond is retired and must not be reintroduced.
+- **Residual typography debt:** 38 headings across 27 files still combine `font-display` with `font-light`; Libre Bodoni's range is 400–700, so these resolve to 400 instead of the intended 600.
 - **Risks:** Visual inconsistency vs brand; future rework.
-- **Recommended Action:** Reconcile live CSS variables + Tailwind theme to `DESIGN_TOKENS.md`; load Cormorant Garamond. **(Phase 8)**
+- **Recommended Action:** Reconcile live CSS variables + Tailwind theme to `DESIGN_TOKENS.md`. Sweep the residual `font-display font-light` pairs to `font-medium`. **(Phase 8)**
 
 ## 12. Duplicate UI Components — **Severity: Medium**
 - **Observed:** No `components/features/` separation; feature components live flat in `frontend/src/components/`. Potential overlap to audit (e.g. card/badge primitives).

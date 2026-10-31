@@ -30,7 +30,8 @@ export default function Enrollment() {
             Join EquineSync
           </div>
           <h1 className="font-hero text-4xl md:text-6xl font-medium leading-[1.05] text-white max-w-3xl">
-            Choose the enrollment path that matches how you care for horses.
+            Choose the enrollment path that matches{" "}
+            <em className="italic text-brand-lilac">how you care for horses</em>.
           </h1>
           <p className="mt-5 text-white/65 text-[15px] leading-relaxed max-w-2xl">
             Start with the path that fits your role. EquineSync will guide the right account setup,

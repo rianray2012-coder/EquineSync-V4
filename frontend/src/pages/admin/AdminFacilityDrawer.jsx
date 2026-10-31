@@ -48,7 +48,7 @@ const Tile = ({ label, value, testid }) => (
     className="rounded-lg border border-equinesync-graphite/10 bg-equinesync-frost px-3 py-2.5"
   >
     <div className="text-[9.5px] tracking-[0.22em] uppercase text-equinesync-graphite/55">{label}</div>
-    <div className="mt-1 font-display text-lg text-equinesync-graphite font-light leading-tight">
+    <div className="mt-1 font-display text-lg text-equinesync-graphite font-medium leading-tight">
       {value ?? "—"}
     </div>
   </div>
@@ -199,7 +199,7 @@ function ConfirmDisable({ barnId, onCancel, onDone }) {
          data-testid="facility-disable-dialog">
       <div className="bg-white rounded-xl border border-equinesync-graphite/10 w-full max-w-md p-5">
         <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">Confirm soft-disable</div>
-        <h3 className="font-display text-xl text-equinesync-graphite font-light mt-1.5">
+        <h3 className="font-display text-xl text-equinesync-graphite font-medium mt-1.5">
           Disable this facility?
         </h3>
         <p className="mt-2 text-[12.5px] text-equinesync-graphite/70">
@@ -285,7 +285,7 @@ function ConfirmReenable({ barnId, onCancel, onDone }) {
          data-testid="facility-reenable-dialog">
       <div className="bg-white rounded-xl border border-equinesync-graphite/10 w-full max-w-md p-5">
         <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">Confirm re-enable</div>
-        <h3 className="font-display text-xl text-equinesync-graphite font-light mt-1.5">
+        <h3 className="font-display text-xl text-equinesync-graphite font-medium mt-1.5">
           Re-enable this facility?
         </h3>
         <p className="mt-2 text-[12.5px] text-equinesync-graphite/70">
@@ -375,7 +375,7 @@ export default function AdminFacilityDrawer({ barnId, open, onClose, onMutated }
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">
               Facility detail
             </div>
-            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-light truncate flex items-center gap-2">
+            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-medium truncate flex items-center gap-2">
               {b?.name || b?.id || "—"}
               {isDisabled && <DisabledBadge />}
             </div>

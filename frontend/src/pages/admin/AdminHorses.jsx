@@ -24,7 +24,7 @@ const SummaryTile = ({ label, value, testid }) => (
     className="rounded-lg border border-equinesync-graphite/10 bg-equinesync-frost px-3 py-2.5"
   >
     <div className="text-[9.5px] tracking-[0.22em] uppercase text-equinesync-graphite/55">{label}</div>
-    <div className="mt-1 font-display text-xl text-equinesync-graphite font-light leading-tight">
+    <div className="mt-1 font-display text-xl text-equinesync-graphite font-medium leading-tight">
       {value ?? "-"}
     </div>
   </div>
@@ -66,7 +66,7 @@ function AdminHorseDrawer({ horseId, open, onClose }) {
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">
               Horse ledger summary - read-only
             </div>
-            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-light truncate">
+            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-medium truncate">
               {horse?.name || horseId}
             </div>
           </div>
@@ -191,7 +191,7 @@ export default function AdminHorses() {
         <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55 font-medium">
           Admin Portal - Horses
         </div>
-        <h1 className="font-display text-3xl font-light text-equinesync-graphite mt-2">Horse directory</h1>
+        <h1 className="font-display text-3xl font-medium text-equinesync-graphite mt-2">Horse directory</h1>
         <p className="mt-2 text-[13.5px] text-equinesync-graphite/65 max-w-2xl">
           Cross-facility Care Ledger inspection for platform operators. Rows open a
           summary-only drawer; staff notes, raw check payloads, alert triggers, and

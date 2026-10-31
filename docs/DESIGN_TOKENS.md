@@ -43,8 +43,10 @@
 ## Typography
 | Token | Value |
 |---|---|
-| Display | **Cormorant Garamond** (SemiBold for headlines) |
-| UI / Body | **Inter** (Regular body, Medium navigation) |
+| Hero (`font-hero`) | **Bodoni Moda** (Medium 500, marketing headlines ≥28px only) |
+| Display (`font-display`) | **Libre Bodoni** (SemiBold 600, all other headings) |
+| UI / Body (`font-sans`) | **Nunito** (Regular body, Medium navigation) |
+| Headline accent | Italic + Smoky Lilac `#B8AECF` — **dark backgrounds only**; use Slate `#2E3550` on light |
 
 > Identity line: **"Every Horse. Every Task. In Sync."**
 

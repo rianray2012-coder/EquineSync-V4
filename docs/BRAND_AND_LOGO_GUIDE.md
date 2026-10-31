@@ -50,9 +50,18 @@ Visual language combines: elite stable aesthetics, refined modern SaaS design, u
 - **Lilac Atmosphere:** `#D8D2E3 → #E8E3EF` — premium highlights, onboarding, empty states
 
 ## Typography System
-- **Primary Display Typeface:** Cormorant Garamond (or Benjamin) — marketing headlines, hero, landing pages, premium statements.
-- **Secondary Interface Typeface:** Inter (or Manrope) — dashboard UI, forms, navigation, analytics, data tables.
-- **Hierarchy:** Hero headlines = elegant serif SemiBold; Section headers = sans-serif uppercase with tracking; Body = sans-serif Regular; Navigation = sans-serif Medium.
+Founder-approved 2026-10-31. Replaces Cormorant Garamond + Inter.
+
+- **Hero Display Typeface:** Bodoni Moda (Medium 500) — oversized marketing headlines, hero, landing pages, premium statements. Tailwind `font-hero`. Do not use below 28px; it goes hairline-thin.
+- **Display Typeface:** Libre Bodoni (SemiBold 600) — all other headings, app page and card titles. Tailwind `font-display`. A sturdier Bodoni cut that holds up at 17–32px, so the serif carries into the product.
+- **Interface Typeface:** Nunito — body, UI, forms, navigation, analytics, data tables. Tailwind `font-sans`. A rounded sans: soft circular stroke ends warm the product against Bodoni's sharp headlines.
+- **Hierarchy:** Hero headlines = Bodoni Moda Medium; Section headers = Nunito uppercase with tracking; Body = Nunito Regular; Navigation = Nunito Medium.
+- **Email:** Georgia first, Libre Bodoni as the hint — web fonts do not load in most email clients. Never use Bodoni Moda in email.
+
+### Headline Accent
+One accent phrase per headline, maximum. The phrase goes **italic and Smoky Lilac `#B8AECF`** together, so it reads as deliberate emphasis. Choose the phrase carrying the product promise ("lifetime record", "follows the horse"), never a filler phrase or a whole clause.
+
+**Lilac text is for dark backgrounds only.** On graphite `#232734` it measures 7.08:1 and on navy `#2E3550` 5.74:1, both clearing WCAG AA. On frost `#F7F8FA` it is 1.98:1 and fails badly — on light surfaces use Slate `#2E3550` italic (11.35:1) or no accent. Lilac remains fine on light surfaces as a background fill or border at low opacity.
 
 ## Logo Usage System
 - **Primary Logo:** Horse icon + "EquineSync" wordmark + tagline "Every Horse. Every Task. In Sync." — website hero, splash, investor/print/pitch/marketing.

@@ -32,7 +32,8 @@
       "h2": "text-3xl md:text-4xl font-hero font-medium tracking-tight text-equine-platinum",
       "h3": "text-xl md:text-2xl font-display font-medium text-equine-platinum",
       "body": "text-base font-body text-equine-platinum/80 leading-relaxed",
-      "label": "text-xs font-body uppercase tracking-[0.2em] text-equine-lilac"
+      "label": "text-xs font-body uppercase tracking-[0.2em] text-equine-lilac",
+      "headline_accent": "One phrase per headline, maximum: <em className=\"italic text-brand-lilac\">phrase</em>. Italic and Smoky Lilac #B8AECF change together. DARK BACKGROUNDS ONLY \u2014 lilac text measures 1.98:1 on frost #F7F8FA and fails WCAG AA. On light surfaces use Slate #2E3550 italic, or no accent."
     }
   },
   "layouts_and_spacing": {

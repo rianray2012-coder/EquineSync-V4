@@ -156,7 +156,7 @@ export default function AdminReports() {
           <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55 font-medium">
             Admin Portal · Reports
           </div>
-          <h1 className="font-display text-3xl font-light text-equinesync-graphite mt-2">
+          <h1 className="font-display text-3xl font-medium text-equinesync-graphite mt-2">
             Reports
           </h1>
           <p className="mt-2 text-[13.5px] text-equinesync-graphite/65 max-w-2xl">

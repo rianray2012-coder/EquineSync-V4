@@ -41,7 +41,7 @@ export default function AdminAuditLogDrawer({ auditRef, open, onClose }) {
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">
               Audit row · read-only
             </div>
-            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-light truncate">
+            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-medium truncate">
               {row?.action || auditRef}
             </div>
           </div>

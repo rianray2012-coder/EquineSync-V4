@@ -347,7 +347,7 @@ export default function Signup() {
           {stepIdx === 0 && (
             <div data-testid="signup-step-account">
               <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-3">Step 1 of 3</div>
-              <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">Create your account</h2>
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white mb-2">Create your account</h2>
               <p className="text-white/60 text-[14px] mb-8">A few basics — you can finish your profile later.</p>
               {enrollmentContext && (
                 <div
@@ -493,7 +493,7 @@ export default function Signup() {
                   Skip & complete later
                 </button>
               </div>
-              <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white mb-2">
                 Tell us about your {role?.label?.toLowerCase()}
               </h2>
               <p className="text-white/60 text-[14px] mb-8">
@@ -545,7 +545,7 @@ export default function Signup() {
           {stepIdx === 2 && enrollmentContext?.limitedAccess && (
             <div data-testid="signup-step-limited-trial">
               <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-3">Step 3 of 3</div>
-              <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-2">
+              <h2 className="font-display text-3xl md:text-4xl font-medium text-white mb-2">
                 Start with limited individual-owner access
               </h2>
               <p className="text-white/60 text-[14px] mb-8 leading-relaxed">
@@ -586,7 +586,7 @@ export default function Signup() {
             <div data-testid="signup-step-membership">
               <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac font-medium mb-3">Step 3 of 3</div>
               <div className="flex items-end justify-between flex-wrap gap-4 mb-3">
-                <h2 className="font-display text-3xl md:text-4xl font-light text-white">Choose your plan</h2>
+                <h2 className="font-display text-3xl md:text-4xl font-medium text-white">Choose your plan</h2>
                 {/* Monthly / Annual toggle — only meaningful for paid tiers */}
                 <div
                   className="inline-flex bg-white/5 border border-white/10 rounded-full p-0.5"

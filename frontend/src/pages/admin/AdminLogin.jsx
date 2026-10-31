@@ -82,7 +82,7 @@ export default function AdminLogin() {
           <div className="mt-5 text-[10px] tracking-[0.36em] uppercase text-equinesync-lilac">
             Equine·Sync
           </div>
-          <h1 className="mt-2 font-display text-3xl tracking-tight font-light">
+          <h1 className="mt-2 font-display text-3xl tracking-tight font-medium">
             Admin Portal
           </h1>
           <p className="mt-3 text-[13px] text-equinesync-frost/60 max-w-sm mx-auto">

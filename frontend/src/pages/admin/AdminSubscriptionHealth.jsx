@@ -31,7 +31,7 @@ const StatusPill = ({ label, value, tone }) => {
       <div className="text-[9.5px] tracking-[0.22em] uppercase opacity-80">
         {label}
       </div>
-      <div className="mt-1 font-display text-xl font-light leading-tight">
+      <div className="mt-1 font-display text-xl font-medium leading-tight">
         {value ?? "—"}
       </div>
     </div>

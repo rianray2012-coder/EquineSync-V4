@@ -33,7 +33,7 @@ const Tile = ({ label, value, testid }) => (
     className="rounded-lg border border-equinesync-graphite/10 bg-equinesync-frost px-3 py-2.5"
   >
     <div className="text-[9.5px] tracking-[0.22em] uppercase text-equinesync-graphite/55">{label}</div>
-    <div className="mt-1 font-display text-lg text-equinesync-graphite font-light leading-tight">
+    <div className="mt-1 font-display text-lg text-equinesync-graphite font-medium leading-tight">
       {value ?? "—"}
     </div>
   </div>
@@ -73,7 +73,7 @@ export default function AdminSubscriptionDrawer({ adminRef, open, onClose }) {
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">
               Subscription detail · read-only
             </div>
-            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-light truncate">
+            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-medium truncate">
               {facility?.name || sub?.barn_id || adminRef}
             </div>
           </div>

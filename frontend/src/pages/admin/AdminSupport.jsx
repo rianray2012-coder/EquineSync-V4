@@ -69,7 +69,7 @@ export default function AdminSupport() {
         <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55 font-medium">
           Admin Portal · Support
         </div>
-        <h1 className="font-display text-3xl font-light text-equinesync-graphite mt-2">Support inbox</h1>
+        <h1 className="font-display text-3xl font-medium text-equinesync-graphite mt-2">Support inbox</h1>
         <p className="mt-2 text-[13.5px] text-equinesync-graphite/65 max-w-2xl">
           Tickets submitted by users. Status changes, assignments, and internal notes
           are audit-logged. Note bodies stay in the ticket record only.

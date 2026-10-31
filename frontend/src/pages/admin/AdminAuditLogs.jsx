@@ -70,7 +70,7 @@ export default function AdminAuditLogs() {
         <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55 font-medium">
           Admin Portal · Audit Logs
         </div>
-        <h1 className="font-display text-3xl font-light text-equinesync-graphite mt-2">Audit log</h1>
+        <h1 className="font-display text-3xl font-medium text-equinesync-graphite mt-2">Audit log</h1>
         <p className="mt-2 text-[13.5px] text-equinesync-graphite/65 max-w-2xl">
           Read-only operator audit trail. Metadata is scrubbed before serialization.
           Stripe-shaped IDs are redacted; only opaque refs are surfaced.

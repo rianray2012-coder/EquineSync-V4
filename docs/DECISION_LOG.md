@@ -27,6 +27,14 @@ Status:
 - **Review Date:** 2027-Q1
 - **Status:** Active
 
+### 2026-10-31 — Typography: Bodoni Moda + Libre Bodoni + Nunito
+- **Decision:** Retire Cormorant Garamond + Inter. Adopt **Bodoni Moda** Medium 500 (`font-hero`) for oversized marketing headlines, **Libre Bodoni** SemiBold 600 (`font-display`) for all other headings, and **Nunito** (`font-sans`) for body and UI. One accent phrase per headline may be set italic + Smoky Lilac `#B8AECF` on dark backgrounds only. All three are free Google Fonts. `BRAND_AND_LOGO_GUIDE.md`, `DESIGN_TOKENS.md` and `UI_SYSTEM.md` updated to match.
+- **Reason:** Cormorant at weight 300 went hairline-thin on the dark navy hero and at app heading sizes, and Inter gave the brand no voice. Bodoni Moda keeps the high-contrast luxury feel at hero sizes; Libre Bodoni is a sturdier Bodoni cut that survives 17–32px, so the serif carries into the product rather than dropping out; Nunito's rounded stroke ends warm the app screens and contrast the sharp headlines. Chosen by the founder after four rounds of side-by-side review on the landing hero, Today's Pulse and the mobile horse passport.
+- **Alternatives Considered:** Fraunces + Plus Jakarta Sans; Instrument Serif + Instrument Sans; Playfair Display + Albert Sans; Cinzel and other engraved Roman capitals (rejected — all-caps headlines read too slowly); single-family Manrope.
+- **Risks:** Bodoni Moda is fragile below 28px and must stay out of app UI and email. Smoky Lilac text fails contrast on light backgrounds (1.98:1 on frost) and is restricted to dark surfaces. Fonts load from Google's CDN with no service-worker precache, so first paint falls back to Georgia and system sans on a weak barn connection; self-hosting is a later option. Email clients do not load web fonts, so email keeps Georgia first with Libre Bodoni as a hint.
+- **Review Date:** 2027-Q2
+- **Status:** Active
+
 ### 2026-05-30 — Brand Guide is the authoritative visual source of truth
 - **Decision:** `BRAND_AND_LOGO_GUIDE.md` (Brand Guide 22) is the single source of truth for palette and typography. `DESIGN_TOKENS.md` reconciled to match: Midnight Graphite `#232734`, Slate Navy `#2E3550`, Frost White `#F7F8FA`, Smoky Lilac `#B8AECF`; Cormorant Garamond (display) + Inter (UI); identity line "Every Horse. Every Task. In Sync."
 - **Reason:** The earlier `DESIGN_TOKENS.md` (Warm Ivory / Saddle Brown / Muted Gold) conflicted with the Brand Guide and UI System. One authoritative palette is required before any UI work.

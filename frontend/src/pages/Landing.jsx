@@ -321,7 +321,9 @@ export default function Landing() {
               Stable operating software
             </div>
             <h1 className="font-hero text-5xl md:text-7xl font-medium leading-[1.04] text-white">
-              The operating home and lifetime record for modern horse care.
+              The operating home and{" "}
+              <em className="italic text-brand-lilac">lifetime record</em>{" "}
+              for modern horse care.
             </h1>
             <p className="mt-8 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
               EquineSync is built around a horse ledger and horse passport: a care history
@@ -531,7 +533,7 @@ export default function Landing() {
               <div className="text-[11px] tracking-[0.28em] uppercase text-brand-lilac/80 font-medium mb-3">
                 Membership
               </div>
-              <h3 className="font-display text-3xl text-white font-light">
+              <h3 className="font-display text-3xl text-white font-medium">
                 Pricing is temporarily unavailable.
               </h3>
               <p className="mt-3 text-white/65 text-[14px] max-w-md mx-auto">
@@ -579,7 +581,7 @@ export default function Landing() {
                   </div>
 
                   {contactSales ? (
-                    <div className="font-display text-4xl text-white font-light">
+                    <div className="font-display text-4xl text-white font-medium">
                       Let&apos;s talk
                     </div>
                   ) : (

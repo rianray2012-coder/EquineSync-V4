@@ -60,7 +60,8 @@ export default function AcceptInvite() {
           <div className="max-w-md">
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-brand-lavender font-semibold mb-5">You've been invited</div>
             <h2 className="font-hero text-5xl xl:text-6xl leading-[1.05] text-white">
-              Your EquineSync workspace is ready.
+              Your EquineSync workspace is{" "}
+              <em className="italic text-brand-lilac">ready</em>.
             </h2>
             <p className="mt-6 text-equine-silver/85 text-[15px] leading-relaxed">
               Set your password to join the right workspace and start with the tools your role needs.

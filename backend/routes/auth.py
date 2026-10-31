@@ -437,8 +437,8 @@ def build_router(db) -> APIRouter:
                     "No card on file — we'll remind you before it ends."
                 )
             html = f"""
-            <div style='font-family: Inter, sans-serif; color: #232734; max-width: 560px; margin: 0 auto;'>
-              <div style='font-family: Cormorant Garamond, serif; font-size: 32px; margin-bottom: 8px;'>Welcome to Equine Sync.</div>
+            <div style='font-family: 'Nunito', Helvetica, Arial, sans-serif; color: #232734; max-width: 560px; margin: 0 auto;'>
+              <div style='font-family: Georgia, 'Libre Bodoni', serif; font-size: 32px; margin-bottom: 8px;'>Welcome to Equine Sync.</div>
               <p style='line-height: 1.6;'>Hi {user['full_name']},</p>
               <p style='line-height: 1.6;'>You're in as a <strong>{role_label}</strong>. {extra}</p>
               <p style='line-height: 1.6;'>Pop back into your dashboard whenever you're ready — your profile, network, and tools are waiting.</p>

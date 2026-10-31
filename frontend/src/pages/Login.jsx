@@ -69,7 +69,7 @@ export default function Login() {
           <div className="max-w-md">
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-brand-lavender font-semibold mb-5">Stable Operating System</div>
             <h2 className="font-hero text-5xl xl:text-6xl leading-[1.05] text-white">
-              Quiet precision.<br/>Operational mastery.
+              Quiet precision.<br/><em className="italic text-brand-lilac">Operational mastery.</em>
             </h2>
             <p className="mt-6 text-equine-silver/85 text-[15px] leading-relaxed">
               EquineSync unites horse care, training, billing, and owner communication in one calm operating platform for modern equestrian teams.

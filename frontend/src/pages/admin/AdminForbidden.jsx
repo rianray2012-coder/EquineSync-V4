@@ -28,7 +28,7 @@ export default function AdminForbidden({ user }) {
           >
             <Lock className="w-6 h-6 text-equinesync-lilac" strokeWidth={1.6} />
           </div>
-          <h1 className="font-display text-3xl md:text-4xl font-light text-equinesync-frost">
+          <h1 className="font-display text-3xl md:text-4xl font-medium text-equinesync-frost">
             Platform admin access required.
           </h1>
           <p className="mt-4 text-[14px] text-equinesync-frost/70 leading-relaxed">

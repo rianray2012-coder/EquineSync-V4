@@ -17,7 +17,7 @@ export default function AdminPlaceholder({ section, description }) {
         >
           <Construction className="w-6 h-6 text-equinesync-slate" strokeWidth={1.4} />
         </div>
-        <h1 className="mt-5 font-display text-2xl text-equinesync-graphite font-light">
+        <h1 className="mt-5 font-display text-2xl text-equinesync-graphite font-medium">
           {section} access is read-only here.
         </h1>
         {description && (

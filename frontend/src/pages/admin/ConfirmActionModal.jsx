@@ -45,7 +45,7 @@ export default function ConfirmActionModal({
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">
               Admin action
             </div>
-            <h2 className="mt-1 font-display text-xl text-equinesync-graphite font-light">
+            <h2 className="mt-1 font-display text-xl text-equinesync-graphite font-medium">
               {title}
             </h2>
           </div>

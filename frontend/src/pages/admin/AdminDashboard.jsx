@@ -61,7 +61,7 @@ export default function AdminDashboard() {
         <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55 font-medium">
           Admin Portal · Dashboard
         </div>
-        <h1 className="font-display text-3xl md:text-4xl font-light text-equinesync-graphite mt-2">
+        <h1 className="font-display text-3xl md:text-4xl font-medium text-equinesync-graphite mt-2">
           Welcome back{user?.full_name ? `, ${user.full_name.split(" ")[0]}` : ""}.
         </h1>
         <p className="mt-2 text-[14px] text-equinesync-graphite/65 max-w-2xl">

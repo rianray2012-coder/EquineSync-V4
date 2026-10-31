@@ -73,7 +73,7 @@ const Card = ({ row, onOpen }) => (
         <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55 font-medium">
           {row.slug}
         </div>
-        <h2 className="mt-2 font-display text-xl text-equinesync-graphite font-light">
+        <h2 className="mt-2 font-display text-xl text-equinesync-graphite font-medium">
           {row.label}
         </h2>
       </div>
@@ -152,7 +152,7 @@ export default function AdminIntegrations() {
           <div className="text-[11px] tracking-[0.28em] uppercase text-equinesync-graphite/55 font-medium">
             Admin Portal · Integrations
           </div>
-          <h1 className="font-display text-3xl font-light text-equinesync-graphite mt-2">
+          <h1 className="font-display text-3xl font-medium text-equinesync-graphite mt-2">
             Integrations
           </h1>
           <p className="mt-2 text-[13.5px] text-equinesync-graphite/65 max-w-2xl">

@@ -86,7 +86,7 @@ export default function UserDetailDrawer({
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">
               User detail
             </div>
-            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-light truncate">
+            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-medium truncate">
               {u?.full_name || u?.email || "—"}
             </div>
           </div>

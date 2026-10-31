@@ -42,7 +42,7 @@ const Card = ({ icon: Icon, label, value, trend, accent = false, testid }) => (
       />
     </div>
     <div
-      className={`mt-3 font-display text-3xl font-light ${accent ? "text-equinesync-frost" : "text-equinesync-graphite"}`}
+      className={`mt-3 font-display text-3xl font-medium ${accent ? "text-equinesync-frost" : "text-equinesync-graphite"}`}
     >
       {value}
     </div>

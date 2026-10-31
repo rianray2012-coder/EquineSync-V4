@@ -9,7 +9,7 @@
 
 - **Product name:** Equine-Sync
 - **Tagline:** *Every Horse. Every Task. In Sync.*
-- **Typography:** Cormorant Garamond (or Benjamin) for display/marketing moments · Inter (or Manrope) for operational UI. Hierarchy: serif SemiBold hero headlines · uppercase-tracked sans section headers · regular sans body · medium sans nav.
+- **Typography:** Bodoni Moda (Medium) for oversized marketing headlines · Libre Bodoni (SemiBold) for all other headings · Nunito for operational UI. Hierarchy: Bodoni Moda hero headlines · uppercase-tracked Nunito section headers · regular Nunito body · medium Nunito nav. One headline accent phrase may be set italic + Smoky Lilac `#B8AECF`, on dark backgrounds only.
 - **Feel:** premium, calm, trustworthy, organized, equestrian but not rustic, modern but not cold. Avoid cluttered layouts, loud colors, heavy shadows, gradient overuse.
 
 ### Palette (full, per Guide 22)

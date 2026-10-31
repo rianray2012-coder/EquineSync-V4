@@ -100,7 +100,7 @@ export default function AdminSupportDrawer({ ticketRef, open, onClose, onMutated
             <div className="text-[10.5px] tracking-[0.28em] uppercase text-equinesync-graphite/55">
               Support ticket
             </div>
-            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-light truncate">
+            <div className="mt-0.5 font-display text-lg text-equinesync-graphite font-medium truncate">
               {ticket?.subject || ticketRef}
             </div>
           </div>
